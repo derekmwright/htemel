@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
 
@@ -39,7 +41,22 @@ func main() {
 			log.Fatal(err)
 		}
 
-		if err = spec.GenerateHTMLSpec(cfg.htmlSpecSite, f); err != nil {
+		req, err := http.Get(cfg.htmlSpecSite)
+		if err != nil {
+			panic(err)
+		}
+
+		var out *spec.Spec
+		if out, err = spec.GenerateHTMLSpec(req.Body); err != nil {
+			log.Fatal(err)
+		}
+
+		jsonOut, err := json.MarshalIndent(out, "", "  ")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if _, err = f.Write(jsonOut); err != nil {
 			log.Fatal(err)
 		}
 	}

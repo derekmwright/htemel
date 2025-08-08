@@ -7,15 +7,25 @@ import (
 	"golang.org/x/net/html"
 )
 
+type NameType string
+
+const (
+	HTML NameType = "HTML"
+)
+
 type Parser struct {
 	active      bool
 	currElement *Element
 	descParsed  bool
-	Elements    []*Element
+	Spec        *Spec
 }
 
-func NewSpecParser() *Parser {
-	return &Parser{}
+func NewSpecParser(name NameType) *Parser {
+	return &Parser{
+		Spec: &Spec{
+			Name: string(name),
+		},
+	}
 }
 
 func (p *Parser) Activate(element string) {
@@ -26,7 +36,7 @@ func (p *Parser) Activate(element string) {
 }
 
 func (p *Parser) Reset() {
-	p.Elements = append(p.Elements, p.currElement)
+	p.Spec.Elements = append(p.Spec.Elements, p.currElement)
 	p.active = false
 	p.currElement = nil
 	p.descParsed = false

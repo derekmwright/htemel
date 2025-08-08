@@ -1,32 +1,30 @@
 package spec
 
 import (
-	"encoding/json"
 	"errors"
 	"io"
-	"net/http"
 
 	"golang.org/x/net/html"
 )
 
-func GenerateHTMLSpec(url string, w io.Writer) error {
-	p := NewSpecParser()
+func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
+	p := NewSpecParser(HTML)
 
-	req, err := http.Get(url)
-	if err != nil {
-		panic(err)
-	}
+	defer func(closer io.ReadCloser) {
+		err := closer.Close()
+		if err != nil {
+			panic(err)
+		}
+	}(closer)
 
-	defer req.Body.Close()
-
-	doc, err := html.Parse(req.Body)
+	doc, err := html.Parse(closer)
 	if err != nil {
 		panic(err)
 	}
 
 	body := findTag(doc, "body")
 	if body == nil {
-		return errors.New("could not find body")
+		return nil, errors.New("could not find body")
 	}
 
 	start := false
@@ -65,12 +63,5 @@ func GenerateHTMLSpec(url string, w io.Writer) error {
 		}
 	}
 
-	spec, err := json.MarshalIndent(p.Elements, "", "  ")
-	if err != nil {
-		return err
-	}
-
-	_, err = w.Write(spec)
-
-	return err
+	return p.Spec, nil
 }
