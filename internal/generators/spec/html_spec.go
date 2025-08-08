@@ -32,14 +32,14 @@ func GenerateHTMLSpec(url string, w io.Writer) error {
 	start := false
 	end := false
 	for child := range body.ChildNodes() {
-		if len(child.Attr) > 0 {
-			// TODO: fix this to only check on H2
-			if _, ok := getIDIndex(child.Attr, "id", "semantics"); ok {
-				start = true
+		if child.Data == "h2" {
+			if start {
+				end = true
+				start = false
 			}
 
-			if _, ok := getIDIndex(child.Attr, "id", "links"); ok {
-				end = true
+			if _, ok := getIDIndex(child.Attr, "id", "semantics"); ok {
+				start = true
 			}
 		}
 
