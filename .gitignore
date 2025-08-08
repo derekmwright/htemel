@@ -1,0 +1,5 @@
+genspec
+!genspec/
+
+.idea
+.vscode
