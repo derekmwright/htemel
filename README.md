@@ -29,16 +29,16 @@ import (
 )
 
 func main() {
-	var loggedIn bool
+	loggedIn := true
 	htemel.Group(
 		htemel.GenericVoid("!DOCTYPE", map[string]any{"html": nil}),
 		Html(
 			BodyIf(
-				loggedIn,
+				!loggedIn,
 				Div(),
 			),
 			BodyIf(
-				!loggedIn,
+				loggedIn,
 				Nav(),
 			),
 		),
