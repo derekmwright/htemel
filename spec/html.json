@@ -246,24 +246,12 @@
       "description": "The wbr element represents a line break opportunity."
     },
     {
-      "tag": "a",
-      "description": "The href attribute on a and area elements must have a value that is a valid URL potentially surrounded by spaces."
-    },
-    {
-      "tag": "a",
-      "description": "An element implementing the HTMLHyperlinkElementUtils mixin has an associated url (null or a URL). It is initially null.\n "
-    },
-    {
       "tag": "ins",
       "description": "The ins element represents an addition to the document."
     },
     {
       "tag": "del",
       "description": "The del element represents a removal from the document."
-    },
-    {
-      "tag": "a",
-      "description": "The cite attribute may be used to specify the URL of a document that explains the change. When that document is long, for instance the minutes of a meeting, authors are encouraged to include a fragment pointing to the specific part of that document that discusses the change."
     },
     {
       "tag": "picture",
@@ -348,10 +336,6 @@
     {
       "tag": "th",
       "description": "The th element represents a header cell in a table."
-    },
-    {
-      "tag": "a",
-      "description": "The td and th elements may have a colspan content attribute specified, whose value must be a valid non-negative integer greater than zero and less than or equal to 1000."
     },
     {
       "tag": "form",
@@ -444,10 +428,6 @@
     {
       "tag": "canvas",
       "description": "The canvas element provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly."
-    },
-    {
-      "tag": "a",
-      "description": "Each similar-origin window agent has an associated active custom element constructor map, which is a map of constructors to CustomElementRegistry objects."
     }
   ]
 }

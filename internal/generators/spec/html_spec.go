@@ -2,7 +2,9 @@ package spec
 
 import (
 	"errors"
+	"fmt"
 	"io"
+	"strings"
 
 	"golang.org/x/net/html"
 )
@@ -22,8 +24,9 @@ func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
 		panic(err)
 	}
 
-	body := findTag(doc, "body")
-	if body == nil {
+	var body *html.Node
+	var ok bool
+	if body, ok = findTag(doc, "body"); !ok {
 		return nil, errors.New("could not find body")
 	}
 
@@ -46,10 +49,18 @@ func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
 		}
 
 		if start {
+			// Look for H4 elements and then check to see if their ID contains the term "element".
+			// If so, then check the `code` tag for the text value.
 			if child.Data == "h4" {
-				tagNode := findTag(child, "code")
-				if tagNode != nil {
-					p.Activate(tagNode.FirstChild.Data)
+				var id string
+				if id, ok = getAttribute(child.Attr, "id"); ok {
+					if strings.Contains(id, "the-") && strings.Contains(id, "-element") {
+						fmt.Println(id)
+						var tagNode *html.Node
+						if tagNode, ok = findTag(child, "code"); ok {
+							p.Activate(tagNode.FirstChild.Data)
+						}
+					}
 				}
 			}
 

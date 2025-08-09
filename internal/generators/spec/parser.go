@@ -42,22 +42,22 @@ func (p *Parser) Reset() {
 	p.descParsed = false
 }
 
-func findTag(doc *html.Node, tag string) *html.Node {
+func findTag(doc *html.Node, tag string) (*html.Node, bool) {
 	if doc == nil {
-		return nil
+		return nil, false
 	}
 
 	if doc.Type == html.ElementNode && doc.Data == tag {
-		return doc
+		return doc, true
 	}
 
 	for child := range doc.ChildNodes() {
-		if result := findTag(child, tag); result != nil {
-			return result
+		if result, ok := findTag(child, tag); ok {
+			return result, ok
 		}
 	}
 
-	return nil
+	return nil, false
 }
 
 func getIDIndex(attrs []html.Attribute, key, value string) (int, bool) {
@@ -72,6 +72,16 @@ func getIDIndex(attrs []html.Attribute, key, value string) (int, bool) {
 	}
 
 	return -1, false
+}
+
+func getAttribute(attrs []html.Attribute, key string) (string, bool) {
+	for _, attr := range attrs {
+		if attr.Key == key {
+			return attr.Val, true
+		}
+	}
+
+	return "", false
 }
 
 func gatherText(node *html.Node, builder *strings.Builder) string {
