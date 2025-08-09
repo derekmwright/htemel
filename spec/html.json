@@ -449,6 +449,5 @@
       "tag": "a",
       "description": "Each similar-origin window agent has an associated active custom element constructor map, which is a map of constructors to CustomElementRegistry objects."
     }
-  ],
-  "globalAttributes": null
+  ]
 }
