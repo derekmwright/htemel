@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type IElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// I creates a tag <i> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func I(children ...htemel.Node) *IElement {
+	node := &IElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func IIf(condition bool, children ...htemel.Node) *IElement {
 	if condition {
-		return Html(children...)
+		return I(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *IElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<i")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</i>")); err != nil {
 		return err
 	}
 

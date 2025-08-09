@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type SelectElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Select creates a tag <select> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Select(children ...htemel.Node) *SelectElement {
+	node := &SelectElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func SelectIf(condition bool, children ...htemel.Node) *SelectElement {
 	if condition {
-		return Html(children...)
+		return Select(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *SelectElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<select")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</select>")); err != nil {
 		return err
 	}
 

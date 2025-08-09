@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type AsideElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Aside creates a tag <aside> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Aside(children ...htemel.Node) *AsideElement {
+	node := &AsideElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func AsideIf(condition bool, children ...htemel.Node) *AsideElement {
 	if condition {
-		return Html(children...)
+		return Aside(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *AsideElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<aside")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</aside>")); err != nil {
 		return err
 	}
 

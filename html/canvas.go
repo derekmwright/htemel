@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type CanvasElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Canvas creates a tag <canvas> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Canvas(children ...htemel.Node) *CanvasElement {
+	node := &CanvasElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 	if condition {
-		return Html(children...)
+		return Canvas(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *CanvasElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<canvas")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</canvas>")); err != nil {
 		return err
 	}
 

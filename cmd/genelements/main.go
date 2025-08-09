@@ -2,32 +2,22 @@ package main
 
 import (
 	"bytes"
-	"fmt"
+	"encoding/json"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/derekmwright/htemel/internal/generators/elements"
 	"github.com/derekmwright/htemel/internal/generators/spec"
 )
 
-func main() {
-	e := &spec.Element{
-		Tag:         "html",
-		Description: "Blah blah",
-	}
-
-	path, err := filepath.Abs("html/html.go")
+func generate(pkg string, e *spec.Element) error {
+	path, err := filepath.Abs(filepath.Join(pkg, e.Tag+".go"))
 	if err != nil {
-		panic(err)
+		return err
 	}
-
-	fmt.Println(path)
 
 	buf := &bytes.Buffer{}
-	f, err := os.Create(path)
-	if err != nil {
-		panic(err)
-	}
 
 	if err = elements.SourceHeader(
 		buf,
@@ -38,13 +28,38 @@ func main() {
 		elements.BaseCondFunc,
 		elements.RenderFunc,
 	); err != nil {
-		panic(err)
+		return err
 	}
 
+	f, err := os.Create(path)
+	if err != nil {
+		return err
+	}
 	defer f.Close()
 
 	_, err = f.Write(buf.Bytes())
 	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func main() {
+	sp := spec.Spec{}
+
+	specFile, err := os.ReadFile("spec/html.json")
+	if err != nil {
 		panic(err)
+	}
+
+	if err = json.Unmarshal(specFile, &sp); err != nil {
+		panic(err)
+	}
+
+	for _, e := range sp.Elements {
+		if err = generate(strings.ToLower(sp.Name), e); err != nil {
+			panic(err)
+		}
 	}
 }

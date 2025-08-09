@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type CiteElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Cite creates a tag <cite> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Cite(children ...htemel.Node) *CiteElement {
+	node := &CiteElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func CiteIf(condition bool, children ...htemel.Node) *CiteElement {
 	if condition {
-		return Html(children...)
+		return Cite(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *CiteElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<cite")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</cite>")); err != nil {
 		return err
 	}
 

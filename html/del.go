@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type DelElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Del creates a tag <del> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Del(children ...htemel.Node) *DelElement {
+	node := &DelElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func DelIf(condition bool, children ...htemel.Node) *DelElement {
 	if condition {
-		return Html(children...)
+		return Del(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *DelElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<del")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</del>")); err != nil {
 		return err
 	}
 

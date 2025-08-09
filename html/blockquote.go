@@ -1,0 +1,52 @@
+package html
+
+import (
+  "github.com/derekmwright/htemel"
+  "io"
+)
+
+type BlockquoteElement struct {
+	children []htemel.Node
+}
+
+// Blockquote creates a tag <blockquote> instance and returns it for further modification.
+// Any children passed will be nested within the tag.
+func Blockquote(children ...htemel.Node) *BlockquoteElement {
+	node := &BlockquoteElement{
+		children: children,
+	}
+
+	return node
+}
+
+func BlockquoteIf(condition bool, children ...htemel.Node) *BlockquoteElement {
+	if condition {
+		return Blockquote(children...)
+	}
+
+	return nil
+}
+
+func (e *BlockquoteElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<blockquote")); err != nil {
+		return err
+	}
+
+	// TODO: Attribute stuff here
+
+	if _, err := w.Write([]byte(">")); err != nil {
+		return err
+	}
+
+	for _, child := range e.children {
+		if err := child.Render(w); err != nil {
+			return err
+		}
+	}
+
+	if _, err := w.Write([]byte("</blockquote>")); err != nil {
+		return err
+	}
+
+	return nil
+}

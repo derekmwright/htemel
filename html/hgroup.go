@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type HgroupElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Hgroup creates a tag <hgroup> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Hgroup(children ...htemel.Node) *HgroupElement {
+	node := &HgroupElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func HgroupIf(condition bool, children ...htemel.Node) *HgroupElement {
 	if condition {
-		return Html(children...)
+		return Hgroup(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *HgroupElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<hgroup")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</hgroup>")); err != nil {
 		return err
 	}
 

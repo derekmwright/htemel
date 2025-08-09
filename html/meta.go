@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type MetaElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Meta creates a tag <meta> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Meta(children ...htemel.Node) *MetaElement {
+	node := &MetaElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 	if condition {
-		return Html(children...)
+		return Meta(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *MetaElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<meta")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</meta>")); err != nil {
 		return err
 	}
 

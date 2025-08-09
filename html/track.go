@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type TrackElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Track creates a tag <track> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Track(children ...htemel.Node) *TrackElement {
+	node := &TrackElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 	if condition {
-		return Html(children...)
+		return Track(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *TrackElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<track")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</track>")); err != nil {
 		return err
 	}
 

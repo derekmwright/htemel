@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type LegendElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Legend creates a tag <legend> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Legend(children ...htemel.Node) *LegendElement {
+	node := &LegendElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func LegendIf(condition bool, children ...htemel.Node) *LegendElement {
 	if condition {
-		return Html(children...)
+		return Legend(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *LegendElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<legend")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</legend>")); err != nil {
 		return err
 	}
 

@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type AddressElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Address creates a tag <address> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Address(children ...htemel.Node) *AddressElement {
+	node := &AddressElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func AddressIf(condition bool, children ...htemel.Node) *AddressElement {
 	if condition {
-		return Html(children...)
+		return Address(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *AddressElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<address")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</address>")); err != nil {
 		return err
 	}
 

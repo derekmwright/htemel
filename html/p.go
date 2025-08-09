@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type PElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// P creates a tag <p> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func P(children ...htemel.Node) *PElement {
+	node := &PElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func PIf(condition bool, children ...htemel.Node) *PElement {
 	if condition {
-		return Html(children...)
+		return P(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *PElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<p")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</p>")); err != nil {
 		return err
 	}
 

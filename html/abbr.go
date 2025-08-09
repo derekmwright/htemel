@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type AbbrElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Abbr creates a tag <abbr> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Abbr(children ...htemel.Node) *AbbrElement {
+	node := &AbbrElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func AbbrIf(condition bool, children ...htemel.Node) *AbbrElement {
 	if condition {
-		return Html(children...)
+		return Abbr(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *AbbrElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<abbr")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</abbr>")); err != nil {
 		return err
 	}
 

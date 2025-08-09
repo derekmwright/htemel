@@ -1,0 +1,52 @@
+package html
+
+import (
+  "github.com/derekmwright/htemel"
+  "io"
+)
+
+type TextareaElement struct {
+	children []htemel.Node
+}
+
+// Textarea creates a tag <textarea> instance and returns it for further modification.
+// Any children passed will be nested within the tag.
+func Textarea(children ...htemel.Node) *TextareaElement {
+	node := &TextareaElement{
+		children: children,
+	}
+
+	return node
+}
+
+func TextareaIf(condition bool, children ...htemel.Node) *TextareaElement {
+	if condition {
+		return Textarea(children...)
+	}
+
+	return nil
+}
+
+func (e *TextareaElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<textarea")); err != nil {
+		return err
+	}
+
+	// TODO: Attribute stuff here
+
+	if _, err := w.Write([]byte(">")); err != nil {
+		return err
+	}
+
+	for _, child := range e.children {
+		if err := child.Render(w); err != nil {
+			return err
+		}
+	}
+
+	if _, err := w.Write([]byte("</textarea>")); err != nil {
+		return err
+	}
+
+	return nil
+}

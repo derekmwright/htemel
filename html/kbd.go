@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type KbdElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Kbd creates a tag <kbd> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Kbd(children ...htemel.Node) *KbdElement {
+	node := &KbdElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func KbdIf(condition bool, children ...htemel.Node) *KbdElement {
 	if condition {
-		return Html(children...)
+		return Kbd(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *KbdElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<kbd")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</kbd>")); err != nil {
 		return err
 	}
 

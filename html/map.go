@@ -5,30 +5,30 @@ import (
   "io"
 )
 
-type HtmlElement struct {
+type MapElement struct {
 	children []htemel.Node
 }
 
-// Html creates a tag <html> instance and returns it for further modification.
+// Map creates a tag <map> instance and returns it for further modification.
 // Any children passed will be nested within the tag.
-func Html(children ...htemel.Node) *HtmlElement {
-	node := &HtmlElement{
+func Map(children ...htemel.Node) *MapElement {
+	node := &MapElement{
 		children: children,
 	}
 
 	return node
 }
 
-func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
+func MapIf(condition bool, children ...htemel.Node) *MapElement {
 	if condition {
-		return Html(children...)
+		return Map(children...)
 	}
 
 	return nil
 }
 
-func (e *HtmlElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<html")); err != nil {
+func (e *MapElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<map")); err != nil {
 		return err
 	}
 
@@ -44,7 +44,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte("</map>")); err != nil {
 		return err
 	}
 
