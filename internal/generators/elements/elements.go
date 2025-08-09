@@ -20,7 +20,14 @@ func BaseStruct(e *spec.Element) *ast.GenDecl {
 				Name: ast.NewIdent(titleCase.String(e.Tag) + `Element`),
 				Type: &ast.StructType{
 					Fields: &ast.FieldList{
-						List: []*ast.Field{},
+						List: []*ast.Field{
+							&ast.Field{
+								Names: []*ast.Ident{
+									ast.NewIdent("children"),
+								},
+								Type: ast.NewIdent("[]htemel.Node"),
+							},
+						},
 					},
 				},
 			},
@@ -41,7 +48,7 @@ func BaseFunc(e *spec.Element) *ast.FuncDecl {
 							ast.NewIdent("children"),
 						},
 						Type: &ast.Ellipsis{
-							Elt: ast.NewIdent("Node"),
+							Elt: ast.NewIdent("htemel.Node"),
 						},
 					},
 				},
@@ -70,9 +77,83 @@ func BaseFunc(e *spec.Element) *ast.FuncDecl {
 						},
 					},
 				},
+				&ast.ReturnStmt{
+					Results: []ast.Expr{
+						ast.NewIdent("nil"),
+					},
+				},
 			},
 		},
 	}
 
 	return fn
+}
+
+func RenderFunc(e *spec.Element) (*ast.FuncDecl, []ast.Spec) {
+	var imports []ast.Spec
+
+	imports = append(imports, &ast.ImportSpec{
+		Path: &ast.BasicLit{
+			Kind:  token.STRING,
+			Value: `"io"`,
+		},
+	})
+
+	fn := &ast.FuncDecl{
+		Name: ast.NewIdent("Render"),
+		Recv: &ast.FieldList{
+			List: []*ast.Field{
+				{
+					Names: []*ast.Ident{
+						ast.NewIdent("e"),
+					},
+					Type: ast.NewIdent(`*` + titleCase.String(e.Tag) + `Element`),
+				},
+			},
+		},
+		Type: &ast.FuncType{
+			Params: &ast.FieldList{
+				List: []*ast.Field{
+					{
+						Names: []*ast.Ident{
+							ast.NewIdent("writer"),
+						},
+						Type: ast.NewIdent("io.Writer"),
+					},
+				},
+			},
+			Results: &ast.FieldList{
+				List: []*ast.Field{
+					{
+						Type: ast.NewIdent("error"),
+					},
+				},
+			},
+		},
+		Body: &ast.BlockStmt{
+			List: []ast.Stmt{
+				&ast.ExprStmt{
+					X: &ast.CallExpr{
+						Fun: &ast.SelectorExpr{
+							X:   ast.NewIdent("fmt"),     // Package fmt
+							Sel: ast.NewIdent("Println"), // Function Println
+						},
+						Args: []ast.Expr{
+							&ast.BasicLit{
+								Kind:  token.STRING,
+								Value: `"Hello, World!"`,
+							},
+						},
+					},
+				},
+				&ast.ReturnStmt{
+					Results: []ast.Expr{
+						ast.NewIdent("nil"),
+					},
+				},
+			},
+		},
+	}
+
+	return fn, imports
 }
