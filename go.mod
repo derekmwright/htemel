@@ -1,9 +1,8 @@
-module github.com/derekmwright/dwhtml
+module github.com/derekmwright/htemel
 
 go 1.24.5
 
 require (
-	github.com/davecgh/go-spew v1.1.1
 	golang.org/x/net v0.43.0
 )
 

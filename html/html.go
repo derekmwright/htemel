@@ -7,7 +7,7 @@ import (
 )
 
 type HtmlElement struct {
-	children []htemel.Node
+	children []htemel
 }
 
 func Html(children ...htemel.Node) *HtmlElement {
