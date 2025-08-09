@@ -7,7 +7,7 @@ import (
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 
-	"github.com/derekmwright/dwhtml/internal/generators/spec"
+	"github.com/derekmwright/htemel/internal/generators/spec"
 )
 
 var titleCase = cases.Title(language.English)
