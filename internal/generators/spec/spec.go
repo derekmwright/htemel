@@ -10,6 +10,9 @@ type Element struct {
 	Tag         string       `json:"tag"`
 	Description string       `json:"description,omitempty"`
 	Attributes  []*Attribute `json:"attributes,omitempty"`
+	
+	// A Void element has no children
+	Void bool `json:"void,omitempty"`
 }
 
 type AttributeType string

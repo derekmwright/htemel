@@ -1,8 +1,8 @@
 package elements
 
 import (
-	"go/ast"
-	"go/token"
+	"io"
+	"text/template"
 
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
@@ -10,150 +10,153 @@ import (
 	"github.com/derekmwright/htemel/internal/generators/spec"
 )
 
-var titleCase = cases.Title(language.English)
+type ImportSet map[string]struct{}
 
-func BaseStruct(e *spec.Element) *ast.GenDecl {
-	st := &ast.GenDecl{
-		Tok: token.TYPE,
-		Specs: []ast.Spec{
-			&ast.TypeSpec{
-				Name: ast.NewIdent(titleCase.String(e.Tag) + `Element`),
-				Type: &ast.StructType{
-					Fields: &ast.FieldList{
-						List: []*ast.Field{
-							&ast.Field{
-								Names: []*ast.Ident{
-									ast.NewIdent("children"),
-								},
-								Type: ast.NewIdent("[]htemel.Node"),
-							},
-						},
-					},
-				},
-			},
-		},
+func (is ImportSet) Add(i string) {
+	if _, ok := is[i]; !ok {
+		is[i] = struct{}{}
 	}
-
-	return st
 }
 
-func BaseFunc(e *spec.Element) *ast.FuncDecl {
-	fn := &ast.FuncDecl{
-		Name: ast.NewIdent(titleCase.String(e.Tag)),
-		Type: &ast.FuncType{
-			Params: &ast.FieldList{
-				List: []*ast.Field{
-					{
-						Names: []*ast.Ident{
-							ast.NewIdent("children"),
-						},
-						Type: &ast.Ellipsis{
-							Elt: ast.NewIdent("htemel.Node"),
-						},
-					},
-				},
-			},
-			Results: &ast.FieldList{
-				List: []*ast.Field{
-					{
-						Type: ast.NewIdent(`*` + titleCase.String(e.Tag) + `Element`),
-					},
-				},
-			},
-		},
-		Body: &ast.BlockStmt{
-			List: []ast.Stmt{
-				&ast.ExprStmt{
-					X: &ast.CallExpr{
-						Fun: &ast.SelectorExpr{
-							X:   ast.NewIdent("fmt"),     // Package fmt
-							Sel: ast.NewIdent("Println"), // Function Println
-						},
-						Args: []ast.Expr{
-							&ast.BasicLit{
-								Kind:  token.STRING,
-								Value: `"Hello, World!"`,
-							},
-						},
-					},
-				},
-				&ast.ReturnStmt{
-					Results: []ast.Expr{
-						ast.NewIdent("nil"),
-					},
-				},
-			},
-		},
+func (is ImportSet) Merge(other ImportSet) {
+	for k := range other {
+		is.Add(k)
 	}
-
-	return fn
 }
 
-func RenderFunc(e *spec.Element) (*ast.FuncDecl, []ast.Spec) {
-	var imports []ast.Spec
+type TemplateFunc func() (*template.Template, ImportSet)
 
-	imports = append(imports, &ast.ImportSpec{
-		Path: &ast.BasicLit{
-			Kind:  token.STRING,
-			Value: `"io"`,
-		},
-	})
+var titleCase = func(s string) string {
+	return cases.Title(language.English).String(s)
+}
 
-	fn := &ast.FuncDecl{
-		Name: ast.NewIdent("Render"),
-		Recv: &ast.FieldList{
-			List: []*ast.Field{
-				{
-					Names: []*ast.Ident{
-						ast.NewIdent("e"),
-					},
-					Type: ast.NewIdent(`*` + titleCase.String(e.Tag) + `Element`),
-				},
-			},
-		},
-		Type: &ast.FuncType{
-			Params: &ast.FieldList{
-				List: []*ast.Field{
-					{
-						Names: []*ast.Ident{
-							ast.NewIdent("writer"),
-						},
-						Type: ast.NewIdent("io.Writer"),
-					},
-				},
-			},
-			Results: &ast.FieldList{
-				List: []*ast.Field{
-					{
-						Type: ast.NewIdent("error"),
-					},
-				},
-			},
-		},
-		Body: &ast.BlockStmt{
-			List: []ast.Stmt{
-				&ast.ExprStmt{
-					X: &ast.CallExpr{
-						Fun: &ast.SelectorExpr{
-							X:   ast.NewIdent("fmt"),     // Package fmt
-							Sel: ast.NewIdent("Println"), // Function Println
-						},
-						Args: []ast.Expr{
-							&ast.BasicLit{
-								Kind:  token.STRING,
-								Value: `"Hello, World!"`,
-							},
-						},
-					},
-				},
-				&ast.ReturnStmt{
-					Results: []ast.Expr{
-						ast.NewIdent("nil"),
-					},
-				},
-			},
-		},
+func SourceHeader(w io.Writer, pkg string, e *spec.Element, children ...TemplateFunc) error {
+	var (
+		colTmpls   []*template.Template
+		colImports = make(ImportSet)
+	)
+
+	colImports.Add("github.com/derekmwright/htemel")
+
+	for _, child := range children {
+		t, imps := child()
+		colTmpls = append(colTmpls, t)
+		colImports.Merge(imps)
 	}
 
-	return fn, imports
+	tmpl := template.Must(template.New("Header").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).
+		Parse(`package {{ .PackageName }}
+
+import (
+{{ range $key, $value := .Imports }}  "{{ $key }}"
+{{ end -}}
+)
+`))
+
+	if err := tmpl.Execute(w, struct {
+		PackageName string
+		Imports     ImportSet
+		Element     *spec.Element
+	}{
+		PackageName: pkg,
+		Imports:     colImports,
+		Element:     e,
+	}); err != nil {
+		return err
+	}
+
+	for _, t := range colTmpls {
+		if err := t.Execute(w, e); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func BaseStruct() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("Struct").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).
+		Parse(`
+type {{ .Tag | titleCase }}Element struct {
+	{{ if not .Void }}children []htemel.Node{{ end }}
+}
+`))
+
+	return tmpl, nil
+}
+
+func BaseFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("BaseFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+// {{ .Tag | titleCase }} creates a tag <{{ .Tag }}> instance and returns it for further modification.
+// Any children passed will be nested within the tag.
+func {{ .Tag | titleCase }}({{ if not .Void }}children ...htemel.Node{{ end }}) *{{ .Tag | titleCase }}Element {
+	node := &{{ .Tag | titleCase }}Element{
+		children: children,
+	}
+
+	return node
+}
+`))
+
+	return tmpl, nil
+}
+
+func BaseCondFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("BaseCondFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+func {{ .Tag | titleCase }}If(condition bool{{ if not .Void }}, children ...htemel.Node{{ end }}) *{{ .Tag | titleCase }}Element {
+	if condition {
+		return {{ .Tag | titleCase }}(children...)
+	}
+
+	return nil
+}
+`))
+
+	return tmpl, nil
+}
+
+func RenderFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("RenderFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).
+		Parse(`
+func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
+	if _, err := w.Write([]byte("<{{ .Tag }}")); err != nil {
+		return err
+	}
+
+	// TODO: Attribute stuff here
+
+	if _, err := w.Write([]byte(">")); err != nil {
+		return err
+	}
+
+	for _, child := range e.children {
+		if err := child.Render(w); err != nil {
+			return err
+		}
+	}
+
+	if _, err := w.Write([]byte("</{{ .Tag }}>")); err != nil {
+		return err
+	}
+
+	return nil
+}
+`))
+
+	return tmpl, ImportSet{"io": {}}
 }

@@ -3,9 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"go/ast"
-	"go/format"
-	"go/token"
 	"os"
 	"path/filepath"
 
@@ -14,37 +11,10 @@ import (
 )
 
 func main() {
-	file := ast.File{
-		Name:  ast.NewIdent("html"),
-		Decls: []ast.Decl{},
+	e := &spec.Element{
+		Tag:         "html",
+		Description: "Blah blah",
 	}
-
-	importDecls := &ast.GenDecl{
-		Tok: token.IMPORT,
-		Specs: []ast.Spec{
-			&ast.ImportSpec{
-				Path: &ast.BasicLit{
-					Kind:  token.STRING,
-					Value: `"fmt"`,
-				},
-			},
-			&ast.ImportSpec{
-				Path: &ast.BasicLit{
-					Kind:  token.STRING,
-					Value: `"github.com/derekmwright/htemel"`,
-				},
-			},
-		},
-	}
-
-	e := &spec.Element{Tag: "html"}
-	structs := elements.BaseStruct(e)
-	baseFunc := elements.BaseFunc(e)
-	renderFunc, renderImports := elements.RenderFunc(e)
-	importDecls.Specs = append(importDecls.Specs, renderImports...)
-	file.Decls = append(file.Decls, importDecls, structs, baseFunc, renderFunc)
-
-	fset := token.NewFileSet()
 
 	path, err := filepath.Abs("html/html.go")
 	if err != nil {
@@ -55,7 +25,19 @@ func main() {
 
 	buf := &bytes.Buffer{}
 	f, err := os.Create(path)
-	if err = format.Node(buf, fset, &file); err != nil {
+	if err != nil {
+		panic(err)
+	}
+
+	if err = elements.SourceHeader(
+		buf,
+		"html",
+		e,
+		elements.BaseStruct,
+		elements.BaseFunc,
+		elements.BaseCondFunc,
+		elements.RenderFunc,
+	); err != nil {
 		panic(err)
 	}
 
