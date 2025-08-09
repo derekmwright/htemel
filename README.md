@@ -2,8 +2,8 @@
 
 # htemel
 
-Pronounced HTML, htemel is a library focused on generating documents for the web using HTML.
-The library is being written in a way that makes it easy to extend and add additionally functionality, or provide support for any custom web components you may have.
+Pronounced HTML, htemel is a library focused on generating documents for the web using pure Go functions and not a templating language.
+The library is being written in a way that makes it easy to extend and add additional functionality, or provide support for any custom web components you may have.
 
 ## Installation
 

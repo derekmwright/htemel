@@ -9,6 +9,28 @@ import (
 	"golang.org/x/net/html"
 )
 
+// GlobalAttributes are getting hardcoded right now as parsing them is a bit annoying.
+func GlobalAttributes() []Attribute {
+	return []Attribute{
+		&AttributeTypeChar{
+			Name:        "accesskey",
+			Description: "The accesskey attribute's value is used by the user agent as a guide for creating a keyboard shortcut that activates or focuses the element.",
+		},
+		&AttributeTypeEnum{
+			Name:        "autocapitalize",
+			Description: "The autocapitalize attribute is an enumerated attribute whose states are the possible autocapitalization hints. The autocapitalization hint specified by the attribute's state combines with other considerations to form the used autocapitalization hint, which informs the behavior of the user agent.",
+			Allowed: map[string]struct{}{
+				"off":        {},
+				"none":       {},
+				"on":         {},
+				"sentences":  {},
+				"words":      {},
+				"characters": {},
+			},
+		},
+	}
+}
+
 func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
 	p := NewSpecParser(HTML)
 
