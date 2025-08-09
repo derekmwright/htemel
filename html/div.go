@@ -8,6 +8,7 @@ import (
 
 type DivElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Div creates a tag <div> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func DivIf(condition bool, children ...htemel.Node) *DivElement {
 		return Div(children...)
 	}
 
-	return nil
+	return &DivElement{
+		skipRender: true,
+	}
 }
 
 func (e *DivElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<div")); err != nil {
 		return err
 	}

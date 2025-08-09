@@ -8,6 +8,7 @@ import (
 
 type ObjectElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Object creates a tag <object> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func ObjectIf(condition bool, children ...htemel.Node) *ObjectElement {
 		return Object(children...)
 	}
 
-	return nil
+	return &ObjectElement{
+		skipRender: true,
+	}
 }
 
 func (e *ObjectElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<object")); err != nil {
 		return err
 	}

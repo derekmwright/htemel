@@ -8,6 +8,7 @@ import (
 
 type DetailsElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Details creates a tag <details> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func DetailsIf(condition bool, children ...htemel.Node) *DetailsElement {
 		return Details(children...)
 	}
 
-	return nil
+	return &DetailsElement{
+		skipRender: true,
+	}
 }
 
 func (e *DetailsElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<details")); err != nil {
 		return err
 	}

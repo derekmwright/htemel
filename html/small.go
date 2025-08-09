@@ -8,6 +8,7 @@ import (
 
 type SmallElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Small creates a tag <small> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SmallIf(condition bool, children ...htemel.Node) *SmallElement {
 		return Small(children...)
 	}
 
-	return nil
+	return &SmallElement{
+		skipRender: true,
+	}
 }
 
 func (e *SmallElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<small")); err != nil {
 		return err
 	}

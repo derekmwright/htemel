@@ -8,6 +8,7 @@ import (
 
 type EmbedElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Embed creates a tag <embed> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
 		return Embed(children...)
 	}
 
-	return nil
+	return &EmbedElement{
+		skipRender: true,
+	}
 }
 
 func (e *EmbedElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<embed")); err != nil {
 		return err
 	}

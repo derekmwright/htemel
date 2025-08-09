@@ -8,6 +8,7 @@ import (
 
 type ArticleElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Article creates a tag <article> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func ArticleIf(condition bool, children ...htemel.Node) *ArticleElement {
 		return Article(children...)
 	}
 
-	return nil
+	return &ArticleElement{
+		skipRender: true,
+	}
 }
 
 func (e *ArticleElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<article")); err != nil {
 		return err
 	}

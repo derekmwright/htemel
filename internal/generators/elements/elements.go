@@ -86,6 +86,7 @@ func BaseStruct() (*template.Template, ImportSet) {
 		Parse(`
 type {{ .Tag | titleCase }}Element struct {
 	{{ if not .Void }}children []htemel.Node{{ end }}
+	skipRender bool
 }
 `))
 
@@ -123,7 +124,9 @@ func {{ .Tag | titleCase }}If(condition bool{{ if not .Void }}, children ...htem
 		return {{ .Tag | titleCase }}(children...)
 	}
 
-	return nil
+	return &{{ .Tag | titleCase }}Element{
+		skipRender: true,
+	}
 }
 `))
 
@@ -137,6 +140,10 @@ func RenderFunc() (*template.Template, ImportSet) {
 		}).
 		Parse(`
 func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<{{ .Tag }}")); err != nil {
 		return err
 	}

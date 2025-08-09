@@ -8,6 +8,7 @@ import (
 
 type SearchElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Search creates a tag <search> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SearchIf(condition bool, children ...htemel.Node) *SearchElement {
 		return Search(children...)
 	}
 
-	return nil
+	return &SearchElement{
+		skipRender: true,
+	}
 }
 
 func (e *SearchElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<search")); err != nil {
 		return err
 	}

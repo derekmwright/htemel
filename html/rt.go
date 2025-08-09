@@ -8,6 +8,7 @@ import (
 
 type RtElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Rt creates a tag <rt> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func RtIf(condition bool, children ...htemel.Node) *RtElement {
 		return Rt(children...)
 	}
 
-	return nil
+	return &RtElement{
+		skipRender: true,
+	}
 }
 
 func (e *RtElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<rt")); err != nil {
 		return err
 	}

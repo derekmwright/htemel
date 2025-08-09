@@ -8,6 +8,7 @@ import (
 
 type SampElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Samp creates a tag <samp> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SampIf(condition bool, children ...htemel.Node) *SampElement {
 		return Samp(children...)
 	}
 
-	return nil
+	return &SampElement{
+		skipRender: true,
+	}
 }
 
 func (e *SampElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<samp")); err != nil {
 		return err
 	}

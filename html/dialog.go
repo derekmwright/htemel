@@ -8,6 +8,7 @@ import (
 
 type DialogElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Dialog creates a tag <dialog> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func DialogIf(condition bool, children ...htemel.Node) *DialogElement {
 		return Dialog(children...)
 	}
 
-	return nil
+	return &DialogElement{
+		skipRender: true,
+	}
 }
 
 func (e *DialogElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<dialog")); err != nil {
 		return err
 	}

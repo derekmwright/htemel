@@ -8,6 +8,7 @@ import (
 
 type TimeElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Time creates a tag <time> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func TimeIf(condition bool, children ...htemel.Node) *TimeElement {
 		return Time(children...)
 	}
 
-	return nil
+	return &TimeElement{
+		skipRender: true,
+	}
 }
 
 func (e *TimeElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<time")); err != nil {
 		return err
 	}

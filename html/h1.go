@@ -8,6 +8,7 @@ import (
 
 type H1Element struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // H1 creates a tag <h1> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func H1If(condition bool, children ...htemel.Node) *H1Element {
 		return H1(children...)
 	}
 
-	return nil
+	return &H1Element{
+		skipRender: true,
+	}
 }
 
 func (e *H1Element) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<h1")); err != nil {
 		return err
 	}

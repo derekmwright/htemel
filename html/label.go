@@ -8,6 +8,7 @@ import (
 
 type LabelElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Label creates a tag <label> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func LabelIf(condition bool, children ...htemel.Node) *LabelElement {
 		return Label(children...)
 	}
 
-	return nil
+	return &LabelElement{
+		skipRender: true,
+	}
 }
 
 func (e *LabelElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<label")); err != nil {
 		return err
 	}

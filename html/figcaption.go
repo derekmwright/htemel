@@ -8,6 +8,7 @@ import (
 
 type FigcaptionElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Figcaption creates a tag <figcaption> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func FigcaptionIf(condition bool, children ...htemel.Node) *FigcaptionElement {
 		return Figcaption(children...)
 	}
 
-	return nil
+	return &FigcaptionElement{
+		skipRender: true,
+	}
 }
 
 func (e *FigcaptionElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<figcaption")); err != nil {
 		return err
 	}

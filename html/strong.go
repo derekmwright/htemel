@@ -8,6 +8,7 @@ import (
 
 type StrongElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Strong creates a tag <strong> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func StrongIf(condition bool, children ...htemel.Node) *StrongElement {
 		return Strong(children...)
 	}
 
-	return nil
+	return &StrongElement{
+		skipRender: true,
+	}
 }
 
 func (e *StrongElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<strong")); err != nil {
 		return err
 	}

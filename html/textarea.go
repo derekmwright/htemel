@@ -8,6 +8,7 @@ import (
 
 type TextareaElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Textarea creates a tag <textarea> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func TextareaIf(condition bool, children ...htemel.Node) *TextareaElement {
 		return Textarea(children...)
 	}
 
-	return nil
+	return &TextareaElement{
+		skipRender: true,
+	}
 }
 
 func (e *TextareaElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<textarea")); err != nil {
 		return err
 	}

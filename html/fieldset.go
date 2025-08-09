@@ -8,6 +8,7 @@ import (
 
 type FieldsetElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Fieldset creates a tag <fieldset> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func FieldsetIf(condition bool, children ...htemel.Node) *FieldsetElement {
 		return Fieldset(children...)
 	}
 
-	return nil
+	return &FieldsetElement{
+		skipRender: true,
+	}
 }
 
 func (e *FieldsetElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<fieldset")); err != nil {
 		return err
 	}

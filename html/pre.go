@@ -8,6 +8,7 @@ import (
 
 type PreElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Pre creates a tag <pre> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func PreIf(condition bool, children ...htemel.Node) *PreElement {
 		return Pre(children...)
 	}
 
-	return nil
+	return &PreElement{
+		skipRender: true,
+	}
 }
 
 func (e *PreElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<pre")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type NavElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Nav creates a tag <nav> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func NavIf(condition bool, children ...htemel.Node) *NavElement {
 		return Nav(children...)
 	}
 
-	return nil
+	return &NavElement{
+		skipRender: true,
+	}
 }
 
 func (e *NavElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<nav")); err != nil {
 		return err
 	}

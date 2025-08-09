@@ -8,6 +8,7 @@ import (
 
 type LiElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Li creates a tag <li> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func LiIf(condition bool, children ...htemel.Node) *LiElement {
 		return Li(children...)
 	}
 
-	return nil
+	return &LiElement{
+		skipRender: true,
+	}
 }
 
 func (e *LiElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<li")); err != nil {
 		return err
 	}

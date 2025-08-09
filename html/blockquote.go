@@ -8,6 +8,7 @@ import (
 
 type BlockquoteElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Blockquote creates a tag <blockquote> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func BlockquoteIf(condition bool, children ...htemel.Node) *BlockquoteElement {
 		return Blockquote(children...)
 	}
 
-	return nil
+	return &BlockquoteElement{
+		skipRender: true,
+	}
 }
 
 func (e *BlockquoteElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<blockquote")); err != nil {
 		return err
 	}

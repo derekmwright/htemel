@@ -8,6 +8,7 @@ import (
 
 type RubyElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Ruby creates a tag <ruby> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func RubyIf(condition bool, children ...htemel.Node) *RubyElement {
 		return Ruby(children...)
 	}
 
-	return nil
+	return &RubyElement{
+		skipRender: true,
+	}
 }
 
 func (e *RubyElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<ruby")); err != nil {
 		return err
 	}

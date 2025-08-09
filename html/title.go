@@ -8,6 +8,7 @@ import (
 
 type TitleElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Title creates a tag <title> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func TitleIf(condition bool, children ...htemel.Node) *TitleElement {
 		return Title(children...)
 	}
 
-	return nil
+	return &TitleElement{
+		skipRender: true,
+	}
 }
 
 func (e *TitleElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<title")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type CaptionElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Caption creates a tag <caption> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func CaptionIf(condition bool, children ...htemel.Node) *CaptionElement {
 		return Caption(children...)
 	}
 
-	return nil
+	return &CaptionElement{
+		skipRender: true,
+	}
 }
 
 func (e *CaptionElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<caption")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type MarkElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Mark creates a tag <mark> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func MarkIf(condition bool, children ...htemel.Node) *MarkElement {
 		return Mark(children...)
 	}
 
-	return nil
+	return &MarkElement{
+		skipRender: true,
+	}
 }
 
 func (e *MarkElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<mark")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type VarElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Var creates a tag <var> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func VarIf(condition bool, children ...htemel.Node) *VarElement {
 		return Var(children...)
 	}
 
-	return nil
+	return &VarElement{
+		skipRender: true,
+	}
 }
 
 func (e *VarElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<var")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type EmElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Em creates a tag <em> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func EmIf(condition bool, children ...htemel.Node) *EmElement {
 		return Em(children...)
 	}
 
-	return nil
+	return &EmElement{
+		skipRender: true,
+	}
 }
 
 func (e *EmElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<em")); err != nil {
 		return err
 	}

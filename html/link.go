@@ -8,6 +8,7 @@ import (
 
 type LinkElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Link creates a tag <link> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
 		return Link(children...)
 	}
 
-	return nil
+	return &LinkElement{
+		skipRender: true,
+	}
 }
 
 func (e *LinkElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<link")); err != nil {
 		return err
 	}

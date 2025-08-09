@@ -8,6 +8,7 @@ import (
 
 type TemplateElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Template creates a tag <template> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func TemplateIf(condition bool, children ...htemel.Node) *TemplateElement {
 		return Template(children...)
 	}
 
-	return nil
+	return &TemplateElement{
+		skipRender: true,
+	}
 }
 
 func (e *TemplateElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<template")); err != nil {
 		return err
 	}

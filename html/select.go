@@ -8,6 +8,7 @@ import (
 
 type SelectElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Select creates a tag <select> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SelectIf(condition bool, children ...htemel.Node) *SelectElement {
 		return Select(children...)
 	}
 
-	return nil
+	return &SelectElement{
+		skipRender: true,
+	}
 }
 
 func (e *SelectElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<select")); err != nil {
 		return err
 	}

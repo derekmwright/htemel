@@ -8,6 +8,7 @@ import (
 
 type DtElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Dt creates a tag <dt> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func DtIf(condition bool, children ...htemel.Node) *DtElement {
 		return Dt(children...)
 	}
 
-	return nil
+	return &DtElement{
+		skipRender: true,
+	}
 }
 
 func (e *DtElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<dt")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type HtmlElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Html creates a tag <html> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
 		return Html(children...)
 	}
 
-	return nil
+	return &HtmlElement{
+		skipRender: true,
+	}
 }
 
 func (e *HtmlElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<html")); err != nil {
 		return err
 	}

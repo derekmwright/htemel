@@ -8,6 +8,7 @@ import (
 
 type WbrElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Wbr creates a tag <wbr> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func WbrIf(condition bool, children ...htemel.Node) *WbrElement {
 		return Wbr(children...)
 	}
 
-	return nil
+	return &WbrElement{
+		skipRender: true,
+	}
 }
 
 func (e *WbrElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<wbr")); err != nil {
 		return err
 	}

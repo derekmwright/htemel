@@ -8,6 +8,7 @@ import (
 
 type SElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // S creates a tag <s> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SIf(condition bool, children ...htemel.Node) *SElement {
 		return S(children...)
 	}
 
-	return nil
+	return &SElement{
+		skipRender: true,
+	}
 }
 
 func (e *SElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<s")); err != nil {
 		return err
 	}

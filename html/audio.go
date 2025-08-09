@@ -8,6 +8,7 @@ import (
 
 type AudioElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Audio creates a tag <audio> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func AudioIf(condition bool, children ...htemel.Node) *AudioElement {
 		return Audio(children...)
 	}
 
-	return nil
+	return &AudioElement{
+		skipRender: true,
+	}
 }
 
 func (e *AudioElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<audio")); err != nil {
 		return err
 	}

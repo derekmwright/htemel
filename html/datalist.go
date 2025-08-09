@@ -8,6 +8,7 @@ import (
 
 type DatalistElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Datalist creates a tag <datalist> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func DatalistIf(condition bool, children ...htemel.Node) *DatalistElement {
 		return Datalist(children...)
 	}
 
-	return nil
+	return &DatalistElement{
+		skipRender: true,
+	}
 }
 
 func (e *DatalistElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<datalist")); err != nil {
 		return err
 	}

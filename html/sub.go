@@ -8,6 +8,7 @@ import (
 
 type SubElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Sub creates a tag <sub> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SubIf(condition bool, children ...htemel.Node) *SubElement {
 		return Sub(children...)
 	}
 
-	return nil
+	return &SubElement{
+		skipRender: true,
+	}
 }
 
 func (e *SubElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<sub")); err != nil {
 		return err
 	}

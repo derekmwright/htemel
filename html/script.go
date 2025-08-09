@@ -8,6 +8,7 @@ import (
 
 type ScriptElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Script creates a tag <script> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func ScriptIf(condition bool, children ...htemel.Node) *ScriptElement {
 		return Script(children...)
 	}
 
-	return nil
+	return &ScriptElement{
+		skipRender: true,
+	}
 }
 
 func (e *ScriptElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<script")); err != nil {
 		return err
 	}

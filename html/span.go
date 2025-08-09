@@ -8,6 +8,7 @@ import (
 
 type SpanElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Span creates a tag <span> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SpanIf(condition bool, children ...htemel.Node) *SpanElement {
 		return Span(children...)
 	}
 
-	return nil
+	return &SpanElement{
+		skipRender: true,
+	}
 }
 
 func (e *SpanElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<span")); err != nil {
 		return err
 	}

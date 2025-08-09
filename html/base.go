@@ -8,6 +8,7 @@ import (
 
 type BaseElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Base creates a tag <base> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func BaseIf(condition bool, children ...htemel.Node) *BaseElement {
 		return Base(children...)
 	}
 
-	return nil
+	return &BaseElement{
+		skipRender: true,
+	}
 }
 
 func (e *BaseElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<base")); err != nil {
 		return err
 	}

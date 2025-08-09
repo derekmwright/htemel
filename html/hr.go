@@ -8,6 +8,7 @@ import (
 
 type HrElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Hr creates a tag <hr> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func HrIf(condition bool, children ...htemel.Node) *HrElement {
 		return Hr(children...)
 	}
 
-	return nil
+	return &HrElement{
+		skipRender: true,
+	}
 }
 
 func (e *HrElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<hr")); err != nil {
 		return err
 	}

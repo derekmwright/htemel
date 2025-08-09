@@ -8,6 +8,7 @@ import (
 
 type PictureElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Picture creates a tag <picture> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func PictureIf(condition bool, children ...htemel.Node) *PictureElement {
 		return Picture(children...)
 	}
 
-	return nil
+	return &PictureElement{
+		skipRender: true,
+	}
 }
 
 func (e *PictureElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<picture")); err != nil {
 		return err
 	}

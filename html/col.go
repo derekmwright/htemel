@@ -8,6 +8,7 @@ import (
 
 type ColElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Col creates a tag <col> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func ColIf(condition bool, children ...htemel.Node) *ColElement {
 		return Col(children...)
 	}
 
-	return nil
+	return &ColElement{
+		skipRender: true,
+	}
 }
 
 func (e *ColElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<col")); err != nil {
 		return err
 	}

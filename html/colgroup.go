@@ -8,6 +8,7 @@ import (
 
 type ColgroupElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Colgroup creates a tag <colgroup> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func ColgroupIf(condition bool, children ...htemel.Node) *ColgroupElement {
 		return Colgroup(children...)
 	}
 
-	return nil
+	return &ColgroupElement{
+		skipRender: true,
+	}
 }
 
 func (e *ColgroupElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<colgroup")); err != nil {
 		return err
 	}

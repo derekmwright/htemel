@@ -8,6 +8,7 @@ import (
 
 type FormElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Form creates a tag <form> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func FormIf(condition bool, children ...htemel.Node) *FormElement {
 		return Form(children...)
 	}
 
-	return nil
+	return &FormElement{
+		skipRender: true,
+	}
 }
 
 func (e *FormElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<form")); err != nil {
 		return err
 	}

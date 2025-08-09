@@ -8,6 +8,7 @@ import (
 
 type AddressElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Address creates a tag <address> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func AddressIf(condition bool, children ...htemel.Node) *AddressElement {
 		return Address(children...)
 	}
 
-	return nil
+	return &AddressElement{
+		skipRender: true,
+	}
 }
 
 func (e *AddressElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<address")); err != nil {
 		return err
 	}

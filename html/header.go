@@ -8,6 +8,7 @@ import (
 
 type HeaderElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Header creates a tag <header> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func HeaderIf(condition bool, children ...htemel.Node) *HeaderElement {
 		return Header(children...)
 	}
 
-	return nil
+	return &HeaderElement{
+		skipRender: true,
+	}
 }
 
 func (e *HeaderElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<header")); err != nil {
 		return err
 	}

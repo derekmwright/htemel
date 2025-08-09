@@ -8,6 +8,7 @@ import (
 
 type SectionElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Section creates a tag <section> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SectionIf(condition bool, children ...htemel.Node) *SectionElement {
 		return Section(children...)
 	}
 
-	return nil
+	return &SectionElement{
+		skipRender: true,
+	}
 }
 
 func (e *SectionElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<section")); err != nil {
 		return err
 	}

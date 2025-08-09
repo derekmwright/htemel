@@ -8,6 +8,7 @@ import (
 
 type BdoElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Bdo creates a tag <bdo> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func BdoIf(condition bool, children ...htemel.Node) *BdoElement {
 		return Bdo(children...)
 	}
 
-	return nil
+	return &BdoElement{
+		skipRender: true,
+	}
 }
 
 func (e *BdoElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<bdo")); err != nil {
 		return err
 	}

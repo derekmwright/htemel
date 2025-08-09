@@ -8,6 +8,7 @@ import (
 
 type FigureElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Figure creates a tag <figure> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func FigureIf(condition bool, children ...htemel.Node) *FigureElement {
 		return Figure(children...)
 	}
 
-	return nil
+	return &FigureElement{
+		skipRender: true,
+	}
 }
 
 func (e *FigureElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<figure")); err != nil {
 		return err
 	}

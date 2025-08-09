@@ -8,6 +8,7 @@ import (
 
 type TfootElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Tfoot creates a tag <tfoot> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func TfootIf(condition bool, children ...htemel.Node) *TfootElement {
 		return Tfoot(children...)
 	}
 
-	return nil
+	return &TfootElement{
+		skipRender: true,
+	}
 }
 
 func (e *TfootElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<tfoot")); err != nil {
 		return err
 	}

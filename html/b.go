@@ -8,6 +8,7 @@ import (
 
 type BElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // B creates a tag <b> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func BIf(condition bool, children ...htemel.Node) *BElement {
 		return B(children...)
 	}
 
-	return nil
+	return &BElement{
+		skipRender: true,
+	}
 }
 
 func (e *BElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<b")); err != nil {
 		return err
 	}

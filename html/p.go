@@ -8,6 +8,7 @@ import (
 
 type PElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // P creates a tag <p> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func PIf(condition bool, children ...htemel.Node) *PElement {
 		return P(children...)
 	}
 
-	return nil
+	return &PElement{
+		skipRender: true,
+	}
 }
 
 func (e *PElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<p")); err != nil {
 		return err
 	}

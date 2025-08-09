@@ -8,6 +8,7 @@ import (
 
 type CanvasElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Canvas creates a tag <canvas> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 		return Canvas(children...)
 	}
 
-	return nil
+	return &CanvasElement{
+		skipRender: true,
+	}
 }
 
 func (e *CanvasElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<canvas")); err != nil {
 		return err
 	}

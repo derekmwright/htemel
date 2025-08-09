@@ -8,6 +8,7 @@ import (
 
 type StyleElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Style creates a tag <style> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func StyleIf(condition bool, children ...htemel.Node) *StyleElement {
 		return Style(children...)
 	}
 
-	return nil
+	return &StyleElement{
+		skipRender: true,
+	}
 }
 
 func (e *StyleElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<style")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type SlotElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Slot creates a tag <slot> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SlotIf(condition bool, children ...htemel.Node) *SlotElement {
 		return Slot(children...)
 	}
 
-	return nil
+	return &SlotElement{
+		skipRender: true,
+	}
 }
 
 func (e *SlotElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<slot")); err != nil {
 		return err
 	}

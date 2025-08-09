@@ -8,6 +8,7 @@ import (
 
 type AreaElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Area creates a tag <area> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func AreaIf(condition bool, children ...htemel.Node) *AreaElement {
 		return Area(children...)
 	}
 
-	return nil
+	return &AreaElement{
+		skipRender: true,
+	}
 }
 
 func (e *AreaElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<area")); err != nil {
 		return err
 	}

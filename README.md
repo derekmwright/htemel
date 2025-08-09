@@ -29,9 +29,19 @@ import (
 )
 
 func main() {
+	var loggedIn bool
 	htemel.Group(
 		htemel.GenericVoid("!DOCTYPE", map[string]any{"html": nil}),
-		Html(),
+		Html(
+			BodyIf(
+				loggedIn,
+				Div(),
+			),
+			BodyIf(
+				!loggedIn,
+				Nav(),
+			),
+		),
 	).
 		Render(os.Stdout)
 }
@@ -39,7 +49,7 @@ func main() {
 
 Outputs:
 ```text
-<!DOCTYPE html><html></html>
+<!DOCTYPE html><html><body><nav></nav></body></html>
 ```
 
 I have no plans on supporting indentation levels for nested elements, plus it's a waste of electrons for all that whitespace :P

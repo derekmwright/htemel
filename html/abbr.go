@@ -8,6 +8,7 @@ import (
 
 type AbbrElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Abbr creates a tag <abbr> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func AbbrIf(condition bool, children ...htemel.Node) *AbbrElement {
 		return Abbr(children...)
 	}
 
-	return nil
+	return &AbbrElement{
+		skipRender: true,
+	}
 }
 
 func (e *AbbrElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<abbr")); err != nil {
 		return err
 	}

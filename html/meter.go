@@ -8,6 +8,7 @@ import (
 
 type MeterElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Meter creates a tag <meter> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func MeterIf(condition bool, children ...htemel.Node) *MeterElement {
 		return Meter(children...)
 	}
 
-	return nil
+	return &MeterElement{
+		skipRender: true,
+	}
 }
 
 func (e *MeterElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<meter")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type MetaElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Meta creates a tag <meta> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 		return Meta(children...)
 	}
 
-	return nil
+	return &MetaElement{
+		skipRender: true,
+	}
 }
 
 func (e *MetaElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<meta")); err != nil {
 		return err
 	}

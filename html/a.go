@@ -8,6 +8,7 @@ import (
 
 type AElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // A creates a tag <a> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func AIf(condition bool, children ...htemel.Node) *AElement {
 		return A(children...)
 	}
 
-	return nil
+	return &AElement{
+		skipRender: true,
+	}
 }
 
 func (e *AElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<a")); err != nil {
 		return err
 	}

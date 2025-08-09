@@ -8,6 +8,7 @@ import (
 
 type FooterElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Footer creates a tag <footer> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func FooterIf(condition bool, children ...htemel.Node) *FooterElement {
 		return Footer(children...)
 	}
 
-	return nil
+	return &FooterElement{
+		skipRender: true,
+	}
 }
 
 func (e *FooterElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<footer")); err != nil {
 		return err
 	}

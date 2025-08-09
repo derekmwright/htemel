@@ -8,6 +8,7 @@ import (
 
 type MapElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Map creates a tag <map> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func MapIf(condition bool, children ...htemel.Node) *MapElement {
 		return Map(children...)
 	}
 
-	return nil
+	return &MapElement{
+		skipRender: true,
+	}
 }
 
 func (e *MapElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<map")); err != nil {
 		return err
 	}

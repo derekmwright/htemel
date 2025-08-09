@@ -8,6 +8,7 @@ import (
 
 type IElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // I creates a tag <i> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func IIf(condition bool, children ...htemel.Node) *IElement {
 		return I(children...)
 	}
 
-	return nil
+	return &IElement{
+		skipRender: true,
+	}
 }
 
 func (e *IElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<i")); err != nil {
 		return err
 	}

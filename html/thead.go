@@ -8,6 +8,7 @@ import (
 
 type TheadElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Thead creates a tag <thead> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func TheadIf(condition bool, children ...htemel.Node) *TheadElement {
 		return Thead(children...)
 	}
 
-	return nil
+	return &TheadElement{
+		skipRender: true,
+	}
 }
 
 func (e *TheadElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<thead")); err != nil {
 		return err
 	}

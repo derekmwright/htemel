@@ -8,6 +8,7 @@ import (
 
 type SourceElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Source creates a tag <source> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SourceIf(condition bool, children ...htemel.Node) *SourceElement {
 		return Source(children...)
 	}
 
-	return nil
+	return &SourceElement{
+		skipRender: true,
+	}
 }
 
 func (e *SourceElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<source")); err != nil {
 		return err
 	}

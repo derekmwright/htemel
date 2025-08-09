@@ -8,6 +8,7 @@ import (
 
 type BrElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Br creates a tag <br> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func BrIf(condition bool, children ...htemel.Node) *BrElement {
 		return Br(children...)
 	}
 
-	return nil
+	return &BrElement{
+		skipRender: true,
+	}
 }
 
 func (e *BrElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<br")); err != nil {
 		return err
 	}

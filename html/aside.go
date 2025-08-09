@@ -8,6 +8,7 @@ import (
 
 type AsideElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Aside creates a tag <aside> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func AsideIf(condition bool, children ...htemel.Node) *AsideElement {
 		return Aside(children...)
 	}
 
-	return nil
+	return &AsideElement{
+		skipRender: true,
+	}
 }
 
 func (e *AsideElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<aside")); err != nil {
 		return err
 	}

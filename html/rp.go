@@ -8,6 +8,7 @@ import (
 
 type RpElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Rp creates a tag <rp> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func RpIf(condition bool, children ...htemel.Node) *RpElement {
 		return Rp(children...)
 	}
 
-	return nil
+	return &RpElement{
+		skipRender: true,
+	}
 }
 
 func (e *RpElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<rp")); err != nil {
 		return err
 	}

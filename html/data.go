@@ -8,6 +8,7 @@ import (
 
 type DataElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Data creates a tag <data> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func DataIf(condition bool, children ...htemel.Node) *DataElement {
 		return Data(children...)
 	}
 
-	return nil
+	return &DataElement{
+		skipRender: true,
+	}
 }
 
 func (e *DataElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<data")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type ProgressElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Progress creates a tag <progress> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func ProgressIf(condition bool, children ...htemel.Node) *ProgressElement {
 		return Progress(children...)
 	}
 
-	return nil
+	return &ProgressElement{
+		skipRender: true,
+	}
 }
 
 func (e *ProgressElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<progress")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type HgroupElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Hgroup creates a tag <hgroup> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func HgroupIf(condition bool, children ...htemel.Node) *HgroupElement {
 		return Hgroup(children...)
 	}
 
-	return nil
+	return &HgroupElement{
+		skipRender: true,
+	}
 }
 
 func (e *HgroupElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<hgroup")); err != nil {
 		return err
 	}

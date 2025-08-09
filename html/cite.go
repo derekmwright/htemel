@@ -8,6 +8,7 @@ import (
 
 type CiteElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Cite creates a tag <cite> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func CiteIf(condition bool, children ...htemel.Node) *CiteElement {
 		return Cite(children...)
 	}
 
-	return nil
+	return &CiteElement{
+		skipRender: true,
+	}
 }
 
 func (e *CiteElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<cite")); err != nil {
 		return err
 	}

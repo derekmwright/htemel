@@ -8,6 +8,7 @@ import (
 
 type TbodyElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Tbody creates a tag <tbody> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func TbodyIf(condition bool, children ...htemel.Node) *TbodyElement {
 		return Tbody(children...)
 	}
 
-	return nil
+	return &TbodyElement{
+		skipRender: true,
+	}
 }
 
 func (e *TbodyElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<tbody")); err != nil {
 		return err
 	}

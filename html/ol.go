@@ -8,6 +8,7 @@ import (
 
 type OlElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Ol creates a tag <ol> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func OlIf(condition bool, children ...htemel.Node) *OlElement {
 		return Ol(children...)
 	}
 
-	return nil
+	return &OlElement{
+		skipRender: true,
+	}
 }
 
 func (e *OlElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<ol")); err != nil {
 		return err
 	}

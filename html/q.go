@@ -8,6 +8,7 @@ import (
 
 type QElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Q creates a tag <q> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 		return Q(children...)
 	}
 
-	return nil
+	return &QElement{
+		skipRender: true,
+	}
 }
 
 func (e *QElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<q")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type ButtonElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Button creates a tag <button> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func ButtonIf(condition bool, children ...htemel.Node) *ButtonElement {
 		return Button(children...)
 	}
 
-	return nil
+	return &ButtonElement{
+		skipRender: true,
+	}
 }
 
 func (e *ButtonElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<button")); err != nil {
 		return err
 	}

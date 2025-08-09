@@ -8,6 +8,7 @@ import (
 
 type InputElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Input creates a tag <input> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func InputIf(condition bool, children ...htemel.Node) *InputElement {
 		return Input(children...)
 	}
 
-	return nil
+	return &InputElement{
+		skipRender: true,
+	}
 }
 
 func (e *InputElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<input")); err != nil {
 		return err
 	}

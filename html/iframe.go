@@ -8,6 +8,7 @@ import (
 
 type IframeElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Iframe creates a tag <iframe> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func IframeIf(condition bool, children ...htemel.Node) *IframeElement {
 		return Iframe(children...)
 	}
 
-	return nil
+	return &IframeElement{
+		skipRender: true,
+	}
 }
 
 func (e *IframeElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<iframe")); err != nil {
 		return err
 	}

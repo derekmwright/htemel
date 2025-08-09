@@ -8,6 +8,7 @@ import (
 
 type MainElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Main creates a tag <main> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func MainIf(condition bool, children ...htemel.Node) *MainElement {
 		return Main(children...)
 	}
 
-	return nil
+	return &MainElement{
+		skipRender: true,
+	}
 }
 
 func (e *MainElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<main")); err != nil {
 		return err
 	}

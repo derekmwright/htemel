@@ -8,6 +8,7 @@ import (
 
 type VideoElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Video creates a tag <video> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func VideoIf(condition bool, children ...htemel.Node) *VideoElement {
 		return Video(children...)
 	}
 
-	return nil
+	return &VideoElement{
+		skipRender: true,
+	}
 }
 
 func (e *VideoElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<video")); err != nil {
 		return err
 	}

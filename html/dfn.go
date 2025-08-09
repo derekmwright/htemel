@@ -8,6 +8,7 @@ import (
 
 type DfnElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Dfn creates a tag <dfn> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func DfnIf(condition bool, children ...htemel.Node) *DfnElement {
 		return Dfn(children...)
 	}
 
-	return nil
+	return &DfnElement{
+		skipRender: true,
+	}
 }
 
 func (e *DfnElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<dfn")); err != nil {
 		return err
 	}

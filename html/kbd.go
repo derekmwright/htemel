@@ -8,6 +8,7 @@ import (
 
 type KbdElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Kbd creates a tag <kbd> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func KbdIf(condition bool, children ...htemel.Node) *KbdElement {
 		return Kbd(children...)
 	}
 
-	return nil
+	return &KbdElement{
+		skipRender: true,
+	}
 }
 
 func (e *KbdElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<kbd")); err != nil {
 		return err
 	}

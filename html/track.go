@@ -8,6 +8,7 @@ import (
 
 type TrackElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Track creates a tag <track> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 		return Track(children...)
 	}
 
-	return nil
+	return &TrackElement{
+		skipRender: true,
+	}
 }
 
 func (e *TrackElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<track")); err != nil {
 		return err
 	}

@@ -8,6 +8,7 @@ import (
 
 type OptgroupElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Optgroup creates a tag <optgroup> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func OptgroupIf(condition bool, children ...htemel.Node) *OptgroupElement {
 		return Optgroup(children...)
 	}
 
-	return nil
+	return &OptgroupElement{
+		skipRender: true,
+	}
 }
 
 func (e *OptgroupElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<optgroup")); err != nil {
 		return err
 	}

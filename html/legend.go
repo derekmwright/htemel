@@ -8,6 +8,7 @@ import (
 
 type LegendElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Legend creates a tag <legend> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func LegendIf(condition bool, children ...htemel.Node) *LegendElement {
 		return Legend(children...)
 	}
 
-	return nil
+	return &LegendElement{
+		skipRender: true,
+	}
 }
 
 func (e *LegendElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<legend")); err != nil {
 		return err
 	}

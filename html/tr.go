@@ -8,6 +8,7 @@ import (
 
 type TrElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Tr creates a tag <tr> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func TrIf(condition bool, children ...htemel.Node) *TrElement {
 		return Tr(children...)
 	}
 
-	return nil
+	return &TrElement{
+		skipRender: true,
+	}
 }
 
 func (e *TrElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<tr")); err != nil {
 		return err
 	}

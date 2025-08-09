@@ -8,6 +8,7 @@ import (
 
 type TableElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Table creates a tag <table> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func TableIf(condition bool, children ...htemel.Node) *TableElement {
 		return Table(children...)
 	}
 
-	return nil
+	return &TableElement{
+		skipRender: true,
+	}
 }
 
 func (e *TableElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<table")); err != nil {
 		return err
 	}

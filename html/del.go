@@ -8,6 +8,7 @@ import (
 
 type DelElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Del creates a tag <del> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 		return Del(children...)
 	}
 
-	return nil
+	return &DelElement{
+		skipRender: true,
+	}
 }
 
 func (e *DelElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<del")); err != nil {
 		return err
 	}

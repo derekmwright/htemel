@@ -8,6 +8,7 @@ import (
 
 type OptionElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Option creates a tag <option> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func OptionIf(condition bool, children ...htemel.Node) *OptionElement {
 		return Option(children...)
 	}
 
-	return nil
+	return &OptionElement{
+		skipRender: true,
+	}
 }
 
 func (e *OptionElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<option")); err != nil {
 		return err
 	}

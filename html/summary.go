@@ -8,6 +8,7 @@ import (
 
 type SummaryElement struct {
 	children []htemel.Node
+	skipRender bool
 }
 
 // Summary creates a tag <summary> instance and returns it for further modification.
@@ -27,10 +28,16 @@ func SummaryIf(condition bool, children ...htemel.Node) *SummaryElement {
 		return Summary(children...)
 	}
 
-	return nil
+	return &SummaryElement{
+		skipRender: true,
+	}
 }
 
 func (e *SummaryElement) Render(w io.Writer) error {
+	if e.skipRender {
+		return nil
+	}
+
 	if _, err := w.Write([]byte("<summary")); err != nil {
 		return err
 	}
