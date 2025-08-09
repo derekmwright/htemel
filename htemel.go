@@ -3,6 +3,8 @@ package htemel
 import (
 	"fmt"
 	"io"
+
+	"golang.org/x/net/html"
 )
 
 type Node interface {
@@ -85,6 +87,39 @@ func (e *GenericElement) Render(w io.Writer) error {
 
 	if _, err := w.Write([]byte("</" + e.tag + ">")); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+type TextElement struct {
+	text     string
+	children []Node
+}
+
+func UnsafeText(text string, children ...Node) *TextElement {
+	return &TextElement{
+		text:     text,
+		children: children,
+	}
+}
+
+func Text(text string, children ...Node) *TextElement {
+	return &TextElement{
+		text:     html.UnescapeString(text),
+		children: children,
+	}
+}
+
+func (e *TextElement) Render(w io.Writer) error {
+	if _, err := w.Write([]byte(e.text)); err != nil {
+		return err
+	}
+
+	for _, child := range e.children {
+		if err := child.Render(w); err != nil {
+			return err
+		}
 	}
 
 	return nil
