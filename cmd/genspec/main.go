@@ -8,7 +8,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/derekmwright/dwhtml/internal/generators/spec"
+	"github.com/derekmwright/htemel/internal/generators/spec"
 )
 
 type Config struct {

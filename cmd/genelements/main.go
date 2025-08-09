@@ -9,8 +9,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/derekmwright/dwhtml/internal/generators/elements"
-	"github.com/derekmwright/dwhtml/internal/generators/spec"
+	"github.com/derekmwright/htemel/internal/generators/elements"
+	"github.com/derekmwright/htemel/internal/generators/spec"
 )
 
 func main() {
