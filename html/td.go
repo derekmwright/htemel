@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TdElement struct {
 	attributes tdAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TdElement struct {
 // Spec Description: The td element represents a data cell in a table.
 func Td(children ...htemel.Node) *TdElement {
 	node := &TdElement{
-		children: children,
+		children:   children,
 		attributes: make(tdAttrs),
 	}
 
@@ -41,64 +42,70 @@ func TdIf(condition bool, children ...htemel.Node) *TdElement {
 type TdAutocapitalizeAttrEnum string
 
 const (
-	TdAutocapitalizeAttrEnumOff TdAutocapitalizeAttrEnum = "off"
-	TdAutocapitalizeAttrEnumOn TdAutocapitalizeAttrEnum = "on"
-	TdAutocapitalizeAttrEnumSentences TdAutocapitalizeAttrEnum = "sentences"
-	TdAutocapitalizeAttrEnumWords TdAutocapitalizeAttrEnum = "words"
+	TdAutocapitalizeAttrEnumNone       TdAutocapitalizeAttrEnum = "none"
+	TdAutocapitalizeAttrEnumOff        TdAutocapitalizeAttrEnum = "off"
+	TdAutocapitalizeAttrEnumOn         TdAutocapitalizeAttrEnum = "on"
+	TdAutocapitalizeAttrEnumSentences  TdAutocapitalizeAttrEnum = "sentences"
+	TdAutocapitalizeAttrEnumWords      TdAutocapitalizeAttrEnum = "words"
 	TdAutocapitalizeAttrEnumCharacters TdAutocapitalizeAttrEnum = "characters"
-	TdAutocapitalizeAttrEnumNone TdAutocapitalizeAttrEnum = "none"
 )
 
 type TdAutocorrectAttrEnum string
 
 const (
 	TdAutocorrectAttrEnumOff TdAutocorrectAttrEnum = "off"
-	TdAutocorrectAttrEnumOn TdAutocorrectAttrEnum = "on"
+	TdAutocorrectAttrEnumOn  TdAutocorrectAttrEnum = "on"
 )
 
 type TdContenteditableAttrEnum string
 
 const (
-	TdContenteditableAttrEnumFalse TdContenteditableAttrEnum = "false"
+	TdContenteditableAttrEnumFalse         TdContenteditableAttrEnum = "false"
 	TdContenteditableAttrEnumPlaintextOnly TdContenteditableAttrEnum = "plaintext-only"
-	TdContenteditableAttrEnumTrue TdContenteditableAttrEnum = "true"
+	TdContenteditableAttrEnumTrue          TdContenteditableAttrEnum = "true"
 )
 
 type tdAttrs map[string]any
 
 func (e *TdElement) Autocapitalize(a TdAutocapitalizeAttrEnum) *TdElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TdElement) Autocorrect(a TdAutocorrectAttrEnum) *TdElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TdElement) Autofocus(b bool) *TdElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TdElement) Class(s ...string) *TdElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TdElement) Contenteditable(a TdContenteditableAttrEnum) *TdElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TdElement) Id(s string) *TdElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TdElement) Slot(s string) *TdElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

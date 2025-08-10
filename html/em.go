@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type EmElement struct {
 	attributes emAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type EmElement struct {
 // Spec Description: The em element represents stress emphasis of its contents.
 func Em(children ...htemel.Node) *EmElement {
 	node := &EmElement{
-		children: children,
+		children:   children,
 		attributes: make(emAttrs),
 	}
 
@@ -41,64 +42,70 @@ func EmIf(condition bool, children ...htemel.Node) *EmElement {
 type EmAutocapitalizeAttrEnum string
 
 const (
-	EmAutocapitalizeAttrEnumWords EmAutocapitalizeAttrEnum = "words"
+	EmAutocapitalizeAttrEnumWords      EmAutocapitalizeAttrEnum = "words"
 	EmAutocapitalizeAttrEnumCharacters EmAutocapitalizeAttrEnum = "characters"
-	EmAutocapitalizeAttrEnumNone EmAutocapitalizeAttrEnum = "none"
-	EmAutocapitalizeAttrEnumOff EmAutocapitalizeAttrEnum = "off"
-	EmAutocapitalizeAttrEnumOn EmAutocapitalizeAttrEnum = "on"
-	EmAutocapitalizeAttrEnumSentences EmAutocapitalizeAttrEnum = "sentences"
+	EmAutocapitalizeAttrEnumNone       EmAutocapitalizeAttrEnum = "none"
+	EmAutocapitalizeAttrEnumOff        EmAutocapitalizeAttrEnum = "off"
+	EmAutocapitalizeAttrEnumOn         EmAutocapitalizeAttrEnum = "on"
+	EmAutocapitalizeAttrEnumSentences  EmAutocapitalizeAttrEnum = "sentences"
 )
 
 type EmAutocorrectAttrEnum string
 
 const (
+	EmAutocorrectAttrEnumOn  EmAutocorrectAttrEnum = "on"
 	EmAutocorrectAttrEnumOff EmAutocorrectAttrEnum = "off"
-	EmAutocorrectAttrEnumOn EmAutocorrectAttrEnum = "on"
 )
 
 type EmContenteditableAttrEnum string
 
 const (
-	EmContenteditableAttrEnumTrue EmContenteditableAttrEnum = "true"
-	EmContenteditableAttrEnumFalse EmContenteditableAttrEnum = "false"
 	EmContenteditableAttrEnumPlaintextOnly EmContenteditableAttrEnum = "plaintext-only"
+	EmContenteditableAttrEnumTrue          EmContenteditableAttrEnum = "true"
+	EmContenteditableAttrEnumFalse         EmContenteditableAttrEnum = "false"
 )
 
 type emAttrs map[string]any
 
 func (e *EmElement) Autocapitalize(a EmAutocapitalizeAttrEnum) *EmElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *EmElement) Autocorrect(a EmAutocorrectAttrEnum) *EmElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *EmElement) Autofocus(b bool) *EmElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *EmElement) Class(s ...string) *EmElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *EmElement) Contenteditable(a EmContenteditableAttrEnum) *EmElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *EmElement) Id(s string) *EmElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *EmElement) Slot(s string) *EmElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

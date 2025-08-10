@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SElement struct {
 	attributes sAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SElement struct {
 // Spec Description: The s element represents contents that are no longer accurate or no longer relevant.
 func S(children ...htemel.Node) *SElement {
 	node := &SElement{
-		children: children,
+		children:   children,
 		attributes: make(sAttrs),
 	}
 
@@ -41,64 +42,70 @@ func SIf(condition bool, children ...htemel.Node) *SElement {
 type SAutocapitalizeAttrEnum string
 
 const (
-	SAutocapitalizeAttrEnumSentences SAutocapitalizeAttrEnum = "sentences"
-	SAutocapitalizeAttrEnumWords SAutocapitalizeAttrEnum = "words"
 	SAutocapitalizeAttrEnumCharacters SAutocapitalizeAttrEnum = "characters"
-	SAutocapitalizeAttrEnumNone SAutocapitalizeAttrEnum = "none"
-	SAutocapitalizeAttrEnumOff SAutocapitalizeAttrEnum = "off"
-	SAutocapitalizeAttrEnumOn SAutocapitalizeAttrEnum = "on"
+	SAutocapitalizeAttrEnumNone       SAutocapitalizeAttrEnum = "none"
+	SAutocapitalizeAttrEnumOff        SAutocapitalizeAttrEnum = "off"
+	SAutocapitalizeAttrEnumOn         SAutocapitalizeAttrEnum = "on"
+	SAutocapitalizeAttrEnumSentences  SAutocapitalizeAttrEnum = "sentences"
+	SAutocapitalizeAttrEnumWords      SAutocapitalizeAttrEnum = "words"
 )
 
 type SAutocorrectAttrEnum string
 
 const (
 	SAutocorrectAttrEnumOff SAutocorrectAttrEnum = "off"
-	SAutocorrectAttrEnumOn SAutocorrectAttrEnum = "on"
+	SAutocorrectAttrEnumOn  SAutocorrectAttrEnum = "on"
 )
 
 type SContenteditableAttrEnum string
 
 const (
-	SContenteditableAttrEnumFalse SContenteditableAttrEnum = "false"
+	SContenteditableAttrEnumFalse         SContenteditableAttrEnum = "false"
 	SContenteditableAttrEnumPlaintextOnly SContenteditableAttrEnum = "plaintext-only"
-	SContenteditableAttrEnumTrue SContenteditableAttrEnum = "true"
+	SContenteditableAttrEnumTrue          SContenteditableAttrEnum = "true"
 )
 
 type sAttrs map[string]any
 
 func (e *SElement) Autocapitalize(a SAutocapitalizeAttrEnum) *SElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SElement) Autocorrect(a SAutocorrectAttrEnum) *SElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SElement) Autofocus(b bool) *SElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SElement) Class(s ...string) *SElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SElement) Contenteditable(a SContenteditableAttrEnum) *SElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SElement) Id(s string) *SElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SElement) Slot(s string) *SElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

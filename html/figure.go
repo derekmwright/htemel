@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type FigureElement struct {
 	attributes figureAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type FigureElement struct {
 // Spec Description: The figure element represents some flow content, optionally with a caption, that is self-contained (like a complete sentence) and is typically referenced as a single unit from the main flow of the document.
 func Figure(children ...htemel.Node) *FigureElement {
 	node := &FigureElement{
-		children: children,
+		children:   children,
 		attributes: make(figureAttrs),
 	}
 
@@ -42,63 +43,69 @@ type FigureAutocapitalizeAttrEnum string
 
 const (
 	FigureAutocapitalizeAttrEnumCharacters FigureAutocapitalizeAttrEnum = "characters"
-	FigureAutocapitalizeAttrEnumNone FigureAutocapitalizeAttrEnum = "none"
-	FigureAutocapitalizeAttrEnumOff FigureAutocapitalizeAttrEnum = "off"
-	FigureAutocapitalizeAttrEnumOn FigureAutocapitalizeAttrEnum = "on"
-	FigureAutocapitalizeAttrEnumSentences FigureAutocapitalizeAttrEnum = "sentences"
-	FigureAutocapitalizeAttrEnumWords FigureAutocapitalizeAttrEnum = "words"
+	FigureAutocapitalizeAttrEnumNone       FigureAutocapitalizeAttrEnum = "none"
+	FigureAutocapitalizeAttrEnumOff        FigureAutocapitalizeAttrEnum = "off"
+	FigureAutocapitalizeAttrEnumOn         FigureAutocapitalizeAttrEnum = "on"
+	FigureAutocapitalizeAttrEnumSentences  FigureAutocapitalizeAttrEnum = "sentences"
+	FigureAutocapitalizeAttrEnumWords      FigureAutocapitalizeAttrEnum = "words"
 )
 
 type FigureAutocorrectAttrEnum string
 
 const (
-	FigureAutocorrectAttrEnumOn FigureAutocorrectAttrEnum = "on"
+	FigureAutocorrectAttrEnumOn  FigureAutocorrectAttrEnum = "on"
 	FigureAutocorrectAttrEnumOff FigureAutocorrectAttrEnum = "off"
 )
 
 type FigureContenteditableAttrEnum string
 
 const (
+	FigureContenteditableAttrEnumTrue          FigureContenteditableAttrEnum = "true"
+	FigureContenteditableAttrEnumFalse         FigureContenteditableAttrEnum = "false"
 	FigureContenteditableAttrEnumPlaintextOnly FigureContenteditableAttrEnum = "plaintext-only"
-	FigureContenteditableAttrEnumTrue FigureContenteditableAttrEnum = "true"
-	FigureContenteditableAttrEnumFalse FigureContenteditableAttrEnum = "false"
 )
 
 type figureAttrs map[string]any
 
 func (e *FigureElement) Autocapitalize(a FigureAutocapitalizeAttrEnum) *FigureElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *FigureElement) Autocorrect(a FigureAutocorrectAttrEnum) *FigureElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *FigureElement) Autofocus(b bool) *FigureElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *FigureElement) Class(s ...string) *FigureElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *FigureElement) Contenteditable(a FigureContenteditableAttrEnum) *FigureElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *FigureElement) Id(s string) *FigureElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *FigureElement) Slot(s string) *FigureElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

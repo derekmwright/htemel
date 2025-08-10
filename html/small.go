@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SmallElement struct {
 	attributes smallAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SmallElement struct {
 // Spec Description: The small element represents side comments such as small print.
 func Small(children ...htemel.Node) *SmallElement {
 	node := &SmallElement{
-		children: children,
+		children:   children,
 		attributes: make(smallAttrs),
 	}
 
@@ -41,64 +42,70 @@ func SmallIf(condition bool, children ...htemel.Node) *SmallElement {
 type SmallAutocapitalizeAttrEnum string
 
 const (
-	SmallAutocapitalizeAttrEnumSentences SmallAutocapitalizeAttrEnum = "sentences"
-	SmallAutocapitalizeAttrEnumWords SmallAutocapitalizeAttrEnum = "words"
 	SmallAutocapitalizeAttrEnumCharacters SmallAutocapitalizeAttrEnum = "characters"
-	SmallAutocapitalizeAttrEnumNone SmallAutocapitalizeAttrEnum = "none"
-	SmallAutocapitalizeAttrEnumOff SmallAutocapitalizeAttrEnum = "off"
-	SmallAutocapitalizeAttrEnumOn SmallAutocapitalizeAttrEnum = "on"
+	SmallAutocapitalizeAttrEnumNone       SmallAutocapitalizeAttrEnum = "none"
+	SmallAutocapitalizeAttrEnumOff        SmallAutocapitalizeAttrEnum = "off"
+	SmallAutocapitalizeAttrEnumOn         SmallAutocapitalizeAttrEnum = "on"
+	SmallAutocapitalizeAttrEnumSentences  SmallAutocapitalizeAttrEnum = "sentences"
+	SmallAutocapitalizeAttrEnumWords      SmallAutocapitalizeAttrEnum = "words"
 )
 
 type SmallAutocorrectAttrEnum string
 
 const (
 	SmallAutocorrectAttrEnumOff SmallAutocorrectAttrEnum = "off"
-	SmallAutocorrectAttrEnumOn SmallAutocorrectAttrEnum = "on"
+	SmallAutocorrectAttrEnumOn  SmallAutocorrectAttrEnum = "on"
 )
 
 type SmallContenteditableAttrEnum string
 
 const (
-	SmallContenteditableAttrEnumTrue SmallContenteditableAttrEnum = "true"
-	SmallContenteditableAttrEnumFalse SmallContenteditableAttrEnum = "false"
+	SmallContenteditableAttrEnumFalse         SmallContenteditableAttrEnum = "false"
 	SmallContenteditableAttrEnumPlaintextOnly SmallContenteditableAttrEnum = "plaintext-only"
+	SmallContenteditableAttrEnumTrue          SmallContenteditableAttrEnum = "true"
 )
 
 type smallAttrs map[string]any
 
 func (e *SmallElement) Autocapitalize(a SmallAutocapitalizeAttrEnum) *SmallElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SmallElement) Autocorrect(a SmallAutocorrectAttrEnum) *SmallElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SmallElement) Autofocus(b bool) *SmallElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SmallElement) Class(s ...string) *SmallElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SmallElement) Contenteditable(a SmallContenteditableAttrEnum) *SmallElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SmallElement) Id(s string) *SmallElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SmallElement) Slot(s string) *SmallElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

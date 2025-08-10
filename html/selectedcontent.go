@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SelectedcontentElement struct {
 	attributes selectedcontentAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SelectedcontentElement struct {
 // Spec Description: The selectedcontent element reflects the contents of a select element's currently selected option element. selectedcontent elements can be used to declaratively show the selected option element's contents within the select element's first child button element.
 func Selectedcontent(children ...htemel.Node) *SelectedcontentElement {
 	node := &SelectedcontentElement{
-		children: children,
+		children:   children,
 		attributes: make(selectedcontentAttrs),
 	}
 
@@ -41,64 +42,70 @@ func SelectedcontentIf(condition bool, children ...htemel.Node) *Selectedcontent
 type SelectedcontentAutocapitalizeAttrEnum string
 
 const (
-	SelectedcontentAutocapitalizeAttrEnumWords SelectedcontentAutocapitalizeAttrEnum = "words"
+	SelectedcontentAutocapitalizeAttrEnumOff        SelectedcontentAutocapitalizeAttrEnum = "off"
+	SelectedcontentAutocapitalizeAttrEnumOn         SelectedcontentAutocapitalizeAttrEnum = "on"
+	SelectedcontentAutocapitalizeAttrEnumSentences  SelectedcontentAutocapitalizeAttrEnum = "sentences"
+	SelectedcontentAutocapitalizeAttrEnumWords      SelectedcontentAutocapitalizeAttrEnum = "words"
 	SelectedcontentAutocapitalizeAttrEnumCharacters SelectedcontentAutocapitalizeAttrEnum = "characters"
-	SelectedcontentAutocapitalizeAttrEnumNone SelectedcontentAutocapitalizeAttrEnum = "none"
-	SelectedcontentAutocapitalizeAttrEnumOff SelectedcontentAutocapitalizeAttrEnum = "off"
-	SelectedcontentAutocapitalizeAttrEnumOn SelectedcontentAutocapitalizeAttrEnum = "on"
-	SelectedcontentAutocapitalizeAttrEnumSentences SelectedcontentAutocapitalizeAttrEnum = "sentences"
+	SelectedcontentAutocapitalizeAttrEnumNone       SelectedcontentAutocapitalizeAttrEnum = "none"
 )
 
 type SelectedcontentAutocorrectAttrEnum string
 
 const (
 	SelectedcontentAutocorrectAttrEnumOff SelectedcontentAutocorrectAttrEnum = "off"
-	SelectedcontentAutocorrectAttrEnumOn SelectedcontentAutocorrectAttrEnum = "on"
+	SelectedcontentAutocorrectAttrEnumOn  SelectedcontentAutocorrectAttrEnum = "on"
 )
 
 type SelectedcontentContenteditableAttrEnum string
 
 const (
 	SelectedcontentContenteditableAttrEnumPlaintextOnly SelectedcontentContenteditableAttrEnum = "plaintext-only"
-	SelectedcontentContenteditableAttrEnumTrue SelectedcontentContenteditableAttrEnum = "true"
-	SelectedcontentContenteditableAttrEnumFalse SelectedcontentContenteditableAttrEnum = "false"
+	SelectedcontentContenteditableAttrEnumTrue          SelectedcontentContenteditableAttrEnum = "true"
+	SelectedcontentContenteditableAttrEnumFalse         SelectedcontentContenteditableAttrEnum = "false"
 )
 
 type selectedcontentAttrs map[string]any
 
 func (e *SelectedcontentElement) Autocapitalize(a SelectedcontentAutocapitalizeAttrEnum) *SelectedcontentElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Autocorrect(a SelectedcontentAutocorrectAttrEnum) *SelectedcontentElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SelectedcontentElement) Autofocus(b bool) *SelectedcontentElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SelectedcontentElement) Class(s ...string) *SelectedcontentElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Contenteditable(a SelectedcontentContenteditableAttrEnum) *SelectedcontentElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Id(s string) *SelectedcontentElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Slot(s string) *SelectedcontentElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

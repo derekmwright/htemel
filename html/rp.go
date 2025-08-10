@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type RpElement struct {
 	attributes rpAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type RpElement struct {
 // Spec Description: The rp element can be used to provide parentheses or other content around a ruby text component of a ruby annotation, to be shown by user agents that don't support ruby annotations.
 func Rp(children ...htemel.Node) *RpElement {
 	node := &RpElement{
-		children: children,
+		children:   children,
 		attributes: make(rpAttrs),
 	}
 
@@ -41,64 +42,70 @@ func RpIf(condition bool, children ...htemel.Node) *RpElement {
 type RpAutocapitalizeAttrEnum string
 
 const (
-	RpAutocapitalizeAttrEnumOn RpAutocapitalizeAttrEnum = "on"
-	RpAutocapitalizeAttrEnumSentences RpAutocapitalizeAttrEnum = "sentences"
-	RpAutocapitalizeAttrEnumWords RpAutocapitalizeAttrEnum = "words"
+	RpAutocapitalizeAttrEnumOff        RpAutocapitalizeAttrEnum = "off"
+	RpAutocapitalizeAttrEnumOn         RpAutocapitalizeAttrEnum = "on"
+	RpAutocapitalizeAttrEnumSentences  RpAutocapitalizeAttrEnum = "sentences"
+	RpAutocapitalizeAttrEnumWords      RpAutocapitalizeAttrEnum = "words"
 	RpAutocapitalizeAttrEnumCharacters RpAutocapitalizeAttrEnum = "characters"
-	RpAutocapitalizeAttrEnumNone RpAutocapitalizeAttrEnum = "none"
-	RpAutocapitalizeAttrEnumOff RpAutocapitalizeAttrEnum = "off"
+	RpAutocapitalizeAttrEnumNone       RpAutocapitalizeAttrEnum = "none"
 )
 
 type RpAutocorrectAttrEnum string
 
 const (
 	RpAutocorrectAttrEnumOff RpAutocorrectAttrEnum = "off"
-	RpAutocorrectAttrEnumOn RpAutocorrectAttrEnum = "on"
+	RpAutocorrectAttrEnumOn  RpAutocorrectAttrEnum = "on"
 )
 
 type RpContenteditableAttrEnum string
 
 const (
-	RpContenteditableAttrEnumFalse RpContenteditableAttrEnum = "false"
+	RpContenteditableAttrEnumFalse         RpContenteditableAttrEnum = "false"
 	RpContenteditableAttrEnumPlaintextOnly RpContenteditableAttrEnum = "plaintext-only"
-	RpContenteditableAttrEnumTrue RpContenteditableAttrEnum = "true"
+	RpContenteditableAttrEnumTrue          RpContenteditableAttrEnum = "true"
 )
 
 type rpAttrs map[string]any
 
 func (e *RpElement) Autocapitalize(a RpAutocapitalizeAttrEnum) *RpElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *RpElement) Autocorrect(a RpAutocorrectAttrEnum) *RpElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *RpElement) Autofocus(b bool) *RpElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *RpElement) Class(s ...string) *RpElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *RpElement) Contenteditable(a RpContenteditableAttrEnum) *RpElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *RpElement) Id(s string) *RpElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *RpElement) Slot(s string) *RpElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

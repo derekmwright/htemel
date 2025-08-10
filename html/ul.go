@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type UlElement struct {
 	attributes ulAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type UlElement struct {
 // Spec Description: The ul element represents a list of items, where the order of the items is not important — that is, where changing the order would not materially change the meaning of the document.
 func Ul(children ...htemel.Node) *UlElement {
 	node := &UlElement{
-		children: children,
+		children:   children,
 		attributes: make(ulAttrs),
 	}
 
@@ -41,64 +42,70 @@ func UlIf(condition bool, children ...htemel.Node) *UlElement {
 type UlAutocapitalizeAttrEnum string
 
 const (
-	UlAutocapitalizeAttrEnumSentences UlAutocapitalizeAttrEnum = "sentences"
-	UlAutocapitalizeAttrEnumWords UlAutocapitalizeAttrEnum = "words"
+	UlAutocapitalizeAttrEnumNone       UlAutocapitalizeAttrEnum = "none"
+	UlAutocapitalizeAttrEnumOff        UlAutocapitalizeAttrEnum = "off"
+	UlAutocapitalizeAttrEnumOn         UlAutocapitalizeAttrEnum = "on"
+	UlAutocapitalizeAttrEnumSentences  UlAutocapitalizeAttrEnum = "sentences"
+	UlAutocapitalizeAttrEnumWords      UlAutocapitalizeAttrEnum = "words"
 	UlAutocapitalizeAttrEnumCharacters UlAutocapitalizeAttrEnum = "characters"
-	UlAutocapitalizeAttrEnumNone UlAutocapitalizeAttrEnum = "none"
-	UlAutocapitalizeAttrEnumOff UlAutocapitalizeAttrEnum = "off"
-	UlAutocapitalizeAttrEnumOn UlAutocapitalizeAttrEnum = "on"
 )
 
 type UlAutocorrectAttrEnum string
 
 const (
 	UlAutocorrectAttrEnumOff UlAutocorrectAttrEnum = "off"
-	UlAutocorrectAttrEnumOn UlAutocorrectAttrEnum = "on"
+	UlAutocorrectAttrEnumOn  UlAutocorrectAttrEnum = "on"
 )
 
 type UlContenteditableAttrEnum string
 
 const (
-	UlContenteditableAttrEnumFalse UlContenteditableAttrEnum = "false"
+	UlContenteditableAttrEnumFalse         UlContenteditableAttrEnum = "false"
 	UlContenteditableAttrEnumPlaintextOnly UlContenteditableAttrEnum = "plaintext-only"
-	UlContenteditableAttrEnumTrue UlContenteditableAttrEnum = "true"
+	UlContenteditableAttrEnumTrue          UlContenteditableAttrEnum = "true"
 )
 
 type ulAttrs map[string]any
 
 func (e *UlElement) Autocapitalize(a UlAutocapitalizeAttrEnum) *UlElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *UlElement) Autocorrect(a UlAutocorrectAttrEnum) *UlElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *UlElement) Autofocus(b bool) *UlElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *UlElement) Class(s ...string) *UlElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *UlElement) Contenteditable(a UlContenteditableAttrEnum) *UlElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *UlElement) Id(s string) *UlElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *UlElement) Slot(s string) *UlElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

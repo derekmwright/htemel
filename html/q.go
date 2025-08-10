@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type QElement struct {
 	attributes qAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type QElement struct {
 // Spec Description: The q element represents some phrasing content quoted from another source.
 func Q(children ...htemel.Node) *QElement {
 	node := &QElement{
-		children: children,
+		children:   children,
 		attributes: make(qAttrs),
 	}
 
@@ -41,64 +42,70 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 type QAutocapitalizeAttrEnum string
 
 const (
-	QAutocapitalizeAttrEnumWords QAutocapitalizeAttrEnum = "words"
+	QAutocapitalizeAttrEnumOn         QAutocapitalizeAttrEnum = "on"
+	QAutocapitalizeAttrEnumSentences  QAutocapitalizeAttrEnum = "sentences"
+	QAutocapitalizeAttrEnumWords      QAutocapitalizeAttrEnum = "words"
 	QAutocapitalizeAttrEnumCharacters QAutocapitalizeAttrEnum = "characters"
-	QAutocapitalizeAttrEnumNone QAutocapitalizeAttrEnum = "none"
-	QAutocapitalizeAttrEnumOff QAutocapitalizeAttrEnum = "off"
-	QAutocapitalizeAttrEnumOn QAutocapitalizeAttrEnum = "on"
-	QAutocapitalizeAttrEnumSentences QAutocapitalizeAttrEnum = "sentences"
+	QAutocapitalizeAttrEnumNone       QAutocapitalizeAttrEnum = "none"
+	QAutocapitalizeAttrEnumOff        QAutocapitalizeAttrEnum = "off"
 )
 
 type QAutocorrectAttrEnum string
 
 const (
-	QAutocorrectAttrEnumOn QAutocorrectAttrEnum = "on"
 	QAutocorrectAttrEnumOff QAutocorrectAttrEnum = "off"
+	QAutocorrectAttrEnumOn  QAutocorrectAttrEnum = "on"
 )
 
 type QContenteditableAttrEnum string
 
 const (
-	QContenteditableAttrEnumFalse QContenteditableAttrEnum = "false"
+	QContenteditableAttrEnumFalse         QContenteditableAttrEnum = "false"
 	QContenteditableAttrEnumPlaintextOnly QContenteditableAttrEnum = "plaintext-only"
-	QContenteditableAttrEnumTrue QContenteditableAttrEnum = "true"
+	QContenteditableAttrEnumTrue          QContenteditableAttrEnum = "true"
 )
 
 type qAttrs map[string]any
 
 func (e *QElement) Autocapitalize(a QAutocapitalizeAttrEnum) *QElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *QElement) Autocorrect(a QAutocorrectAttrEnum) *QElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *QElement) Autofocus(b bool) *QElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *QElement) Class(s ...string) *QElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *QElement) Contenteditable(a QContenteditableAttrEnum) *QElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *QElement) Id(s string) *QElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *QElement) Slot(s string) *QElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

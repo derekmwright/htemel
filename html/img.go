@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ImgElement struct {
 	attributes imgAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type ImgElement struct {
 // Spec Description: An img element represents an image.
 func Img(children ...htemel.Node) *ImgElement {
 	node := &ImgElement{
-		children: children,
+		children:   children,
 		attributes: make(imgAttrs),
 	}
 
@@ -41,64 +42,70 @@ func ImgIf(condition bool, children ...htemel.Node) *ImgElement {
 type ImgAutocapitalizeAttrEnum string
 
 const (
-	ImgAutocapitalizeAttrEnumOn ImgAutocapitalizeAttrEnum = "on"
-	ImgAutocapitalizeAttrEnumSentences ImgAutocapitalizeAttrEnum = "sentences"
-	ImgAutocapitalizeAttrEnumWords ImgAutocapitalizeAttrEnum = "words"
+	ImgAutocapitalizeAttrEnumWords      ImgAutocapitalizeAttrEnum = "words"
 	ImgAutocapitalizeAttrEnumCharacters ImgAutocapitalizeAttrEnum = "characters"
-	ImgAutocapitalizeAttrEnumNone ImgAutocapitalizeAttrEnum = "none"
-	ImgAutocapitalizeAttrEnumOff ImgAutocapitalizeAttrEnum = "off"
+	ImgAutocapitalizeAttrEnumNone       ImgAutocapitalizeAttrEnum = "none"
+	ImgAutocapitalizeAttrEnumOff        ImgAutocapitalizeAttrEnum = "off"
+	ImgAutocapitalizeAttrEnumOn         ImgAutocapitalizeAttrEnum = "on"
+	ImgAutocapitalizeAttrEnumSentences  ImgAutocapitalizeAttrEnum = "sentences"
 )
 
 type ImgAutocorrectAttrEnum string
 
 const (
 	ImgAutocorrectAttrEnumOff ImgAutocorrectAttrEnum = "off"
-	ImgAutocorrectAttrEnumOn ImgAutocorrectAttrEnum = "on"
+	ImgAutocorrectAttrEnumOn  ImgAutocorrectAttrEnum = "on"
 )
 
 type ImgContenteditableAttrEnum string
 
 const (
-	ImgContenteditableAttrEnumTrue ImgContenteditableAttrEnum = "true"
-	ImgContenteditableAttrEnumFalse ImgContenteditableAttrEnum = "false"
+	ImgContenteditableAttrEnumFalse         ImgContenteditableAttrEnum = "false"
 	ImgContenteditableAttrEnumPlaintextOnly ImgContenteditableAttrEnum = "plaintext-only"
+	ImgContenteditableAttrEnumTrue          ImgContenteditableAttrEnum = "true"
 )
 
 type imgAttrs map[string]any
 
 func (e *ImgElement) Autocapitalize(a ImgAutocapitalizeAttrEnum) *ImgElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *ImgElement) Autocorrect(a ImgAutocorrectAttrEnum) *ImgElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *ImgElement) Autofocus(b bool) *ImgElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *ImgElement) Class(s ...string) *ImgElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *ImgElement) Contenteditable(a ImgContenteditableAttrEnum) *ImgElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *ImgElement) Id(s string) *ImgElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *ImgElement) Slot(s string) *ImgElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

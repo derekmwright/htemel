@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TableElement struct {
 	attributes tableAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TableElement struct {
 // Spec Description: The table element represents data with more than one dimension, in the form of a table.
 func Table(children ...htemel.Node) *TableElement {
 	node := &TableElement{
-		children: children,
+		children:   children,
 		attributes: make(tableAttrs),
 	}
 
@@ -42,63 +43,69 @@ type TableAutocapitalizeAttrEnum string
 
 const (
 	TableAutocapitalizeAttrEnumCharacters TableAutocapitalizeAttrEnum = "characters"
-	TableAutocapitalizeAttrEnumNone TableAutocapitalizeAttrEnum = "none"
-	TableAutocapitalizeAttrEnumOff TableAutocapitalizeAttrEnum = "off"
-	TableAutocapitalizeAttrEnumOn TableAutocapitalizeAttrEnum = "on"
-	TableAutocapitalizeAttrEnumSentences TableAutocapitalizeAttrEnum = "sentences"
-	TableAutocapitalizeAttrEnumWords TableAutocapitalizeAttrEnum = "words"
+	TableAutocapitalizeAttrEnumNone       TableAutocapitalizeAttrEnum = "none"
+	TableAutocapitalizeAttrEnumOff        TableAutocapitalizeAttrEnum = "off"
+	TableAutocapitalizeAttrEnumOn         TableAutocapitalizeAttrEnum = "on"
+	TableAutocapitalizeAttrEnumSentences  TableAutocapitalizeAttrEnum = "sentences"
+	TableAutocapitalizeAttrEnumWords      TableAutocapitalizeAttrEnum = "words"
 )
 
 type TableAutocorrectAttrEnum string
 
 const (
 	TableAutocorrectAttrEnumOff TableAutocorrectAttrEnum = "off"
-	TableAutocorrectAttrEnumOn TableAutocorrectAttrEnum = "on"
+	TableAutocorrectAttrEnumOn  TableAutocorrectAttrEnum = "on"
 )
 
 type TableContenteditableAttrEnum string
 
 const (
-	TableContenteditableAttrEnumTrue TableContenteditableAttrEnum = "true"
-	TableContenteditableAttrEnumFalse TableContenteditableAttrEnum = "false"
+	TableContenteditableAttrEnumFalse         TableContenteditableAttrEnum = "false"
 	TableContenteditableAttrEnumPlaintextOnly TableContenteditableAttrEnum = "plaintext-only"
+	TableContenteditableAttrEnumTrue          TableContenteditableAttrEnum = "true"
 )
 
 type tableAttrs map[string]any
 
 func (e *TableElement) Autocapitalize(a TableAutocapitalizeAttrEnum) *TableElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TableElement) Autocorrect(a TableAutocorrectAttrEnum) *TableElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TableElement) Autofocus(b bool) *TableElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TableElement) Class(s ...string) *TableElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TableElement) Contenteditable(a TableContenteditableAttrEnum) *TableElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TableElement) Id(s string) *TableElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TableElement) Slot(s string) *TableElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

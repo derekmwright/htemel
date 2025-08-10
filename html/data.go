@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DataElement struct {
 	attributes dataAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DataElement struct {
 // Spec Description: The data element represents its contents, along with a machine-readable form of those contents in the value attribute.
 func Data(children ...htemel.Node) *DataElement {
 	node := &DataElement{
-		children: children,
+		children:   children,
 		attributes: make(dataAttrs),
 	}
 
@@ -41,64 +42,70 @@ func DataIf(condition bool, children ...htemel.Node) *DataElement {
 type DataAutocapitalizeAttrEnum string
 
 const (
-	DataAutocapitalizeAttrEnumNone DataAutocapitalizeAttrEnum = "none"
-	DataAutocapitalizeAttrEnumOff DataAutocapitalizeAttrEnum = "off"
-	DataAutocapitalizeAttrEnumOn DataAutocapitalizeAttrEnum = "on"
-	DataAutocapitalizeAttrEnumSentences DataAutocapitalizeAttrEnum = "sentences"
-	DataAutocapitalizeAttrEnumWords DataAutocapitalizeAttrEnum = "words"
 	DataAutocapitalizeAttrEnumCharacters DataAutocapitalizeAttrEnum = "characters"
+	DataAutocapitalizeAttrEnumNone       DataAutocapitalizeAttrEnum = "none"
+	DataAutocapitalizeAttrEnumOff        DataAutocapitalizeAttrEnum = "off"
+	DataAutocapitalizeAttrEnumOn         DataAutocapitalizeAttrEnum = "on"
+	DataAutocapitalizeAttrEnumSentences  DataAutocapitalizeAttrEnum = "sentences"
+	DataAutocapitalizeAttrEnumWords      DataAutocapitalizeAttrEnum = "words"
 )
 
 type DataAutocorrectAttrEnum string
 
 const (
-	DataAutocorrectAttrEnumOn DataAutocorrectAttrEnum = "on"
 	DataAutocorrectAttrEnumOff DataAutocorrectAttrEnum = "off"
+	DataAutocorrectAttrEnumOn  DataAutocorrectAttrEnum = "on"
 )
 
 type DataContenteditableAttrEnum string
 
 const (
 	DataContenteditableAttrEnumPlaintextOnly DataContenteditableAttrEnum = "plaintext-only"
-	DataContenteditableAttrEnumTrue DataContenteditableAttrEnum = "true"
-	DataContenteditableAttrEnumFalse DataContenteditableAttrEnum = "false"
+	DataContenteditableAttrEnumTrue          DataContenteditableAttrEnum = "true"
+	DataContenteditableAttrEnumFalse         DataContenteditableAttrEnum = "false"
 )
 
 type dataAttrs map[string]any
 
 func (e *DataElement) Autocapitalize(a DataAutocapitalizeAttrEnum) *DataElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DataElement) Autocorrect(a DataAutocorrectAttrEnum) *DataElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *DataElement) Autofocus(b bool) *DataElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *DataElement) Class(s ...string) *DataElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DataElement) Contenteditable(a DataContenteditableAttrEnum) *DataElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DataElement) Id(s string) *DataElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *DataElement) Slot(s string) *DataElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

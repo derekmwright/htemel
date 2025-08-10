@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type MetaElement struct {
 	attributes metaAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type MetaElement struct {
 // Spec Description: The meta element represents various kinds of metadata that cannot be expressed using the title, base, link, style, and script elements.
 func Meta(children ...htemel.Node) *MetaElement {
 	node := &MetaElement{
-		children: children,
+		children:   children,
 		attributes: make(metaAttrs),
 	}
 
@@ -41,64 +42,70 @@ func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 type MetaAutocapitalizeAttrEnum string
 
 const (
+	MetaAutocapitalizeAttrEnumOff        MetaAutocapitalizeAttrEnum = "off"
+	MetaAutocapitalizeAttrEnumOn         MetaAutocapitalizeAttrEnum = "on"
+	MetaAutocapitalizeAttrEnumSentences  MetaAutocapitalizeAttrEnum = "sentences"
+	MetaAutocapitalizeAttrEnumWords      MetaAutocapitalizeAttrEnum = "words"
 	MetaAutocapitalizeAttrEnumCharacters MetaAutocapitalizeAttrEnum = "characters"
-	MetaAutocapitalizeAttrEnumNone MetaAutocapitalizeAttrEnum = "none"
-	MetaAutocapitalizeAttrEnumOff MetaAutocapitalizeAttrEnum = "off"
-	MetaAutocapitalizeAttrEnumOn MetaAutocapitalizeAttrEnum = "on"
-	MetaAutocapitalizeAttrEnumSentences MetaAutocapitalizeAttrEnum = "sentences"
-	MetaAutocapitalizeAttrEnumWords MetaAutocapitalizeAttrEnum = "words"
+	MetaAutocapitalizeAttrEnumNone       MetaAutocapitalizeAttrEnum = "none"
 )
 
 type MetaAutocorrectAttrEnum string
 
 const (
 	MetaAutocorrectAttrEnumOff MetaAutocorrectAttrEnum = "off"
-	MetaAutocorrectAttrEnumOn MetaAutocorrectAttrEnum = "on"
+	MetaAutocorrectAttrEnumOn  MetaAutocorrectAttrEnum = "on"
 )
 
 type MetaContenteditableAttrEnum string
 
 const (
-	MetaContenteditableAttrEnumFalse MetaContenteditableAttrEnum = "false"
+	MetaContenteditableAttrEnumFalse         MetaContenteditableAttrEnum = "false"
 	MetaContenteditableAttrEnumPlaintextOnly MetaContenteditableAttrEnum = "plaintext-only"
-	MetaContenteditableAttrEnumTrue MetaContenteditableAttrEnum = "true"
+	MetaContenteditableAttrEnumTrue          MetaContenteditableAttrEnum = "true"
 )
 
 type metaAttrs map[string]any
 
 func (e *MetaElement) Autocapitalize(a MetaAutocapitalizeAttrEnum) *MetaElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *MetaElement) Autocorrect(a MetaAutocorrectAttrEnum) *MetaElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *MetaElement) Autofocus(b bool) *MetaElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *MetaElement) Class(s ...string) *MetaElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *MetaElement) Contenteditable(a MetaContenteditableAttrEnum) *MetaElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *MetaElement) Id(s string) *MetaElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *MetaElement) Slot(s string) *MetaElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

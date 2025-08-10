@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TheadElement struct {
 	attributes theadAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TheadElement struct {
 // Spec Description: The thead element represents the block of rows that consist of the column labels (headers) and any ancillary non-header cells for the parent table element, if the thead element has a parent and it is a table.
 func Thead(children ...htemel.Node) *TheadElement {
 	node := &TheadElement{
-		children: children,
+		children:   children,
 		attributes: make(theadAttrs),
 	}
 
@@ -41,64 +42,70 @@ func TheadIf(condition bool, children ...htemel.Node) *TheadElement {
 type TheadAutocapitalizeAttrEnum string
 
 const (
-	TheadAutocapitalizeAttrEnumSentences TheadAutocapitalizeAttrEnum = "sentences"
-	TheadAutocapitalizeAttrEnumWords TheadAutocapitalizeAttrEnum = "words"
+	TheadAutocapitalizeAttrEnumOn         TheadAutocapitalizeAttrEnum = "on"
+	TheadAutocapitalizeAttrEnumSentences  TheadAutocapitalizeAttrEnum = "sentences"
+	TheadAutocapitalizeAttrEnumWords      TheadAutocapitalizeAttrEnum = "words"
 	TheadAutocapitalizeAttrEnumCharacters TheadAutocapitalizeAttrEnum = "characters"
-	TheadAutocapitalizeAttrEnumNone TheadAutocapitalizeAttrEnum = "none"
-	TheadAutocapitalizeAttrEnumOff TheadAutocapitalizeAttrEnum = "off"
-	TheadAutocapitalizeAttrEnumOn TheadAutocapitalizeAttrEnum = "on"
+	TheadAutocapitalizeAttrEnumNone       TheadAutocapitalizeAttrEnum = "none"
+	TheadAutocapitalizeAttrEnumOff        TheadAutocapitalizeAttrEnum = "off"
 )
 
 type TheadAutocorrectAttrEnum string
 
 const (
 	TheadAutocorrectAttrEnumOff TheadAutocorrectAttrEnum = "off"
-	TheadAutocorrectAttrEnumOn TheadAutocorrectAttrEnum = "on"
+	TheadAutocorrectAttrEnumOn  TheadAutocorrectAttrEnum = "on"
 )
 
 type TheadContenteditableAttrEnum string
 
 const (
-	TheadContenteditableAttrEnumFalse TheadContenteditableAttrEnum = "false"
+	TheadContenteditableAttrEnumFalse         TheadContenteditableAttrEnum = "false"
 	TheadContenteditableAttrEnumPlaintextOnly TheadContenteditableAttrEnum = "plaintext-only"
-	TheadContenteditableAttrEnumTrue TheadContenteditableAttrEnum = "true"
+	TheadContenteditableAttrEnumTrue          TheadContenteditableAttrEnum = "true"
 )
 
 type theadAttrs map[string]any
 
 func (e *TheadElement) Autocapitalize(a TheadAutocapitalizeAttrEnum) *TheadElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TheadElement) Autocorrect(a TheadAutocorrectAttrEnum) *TheadElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TheadElement) Autofocus(b bool) *TheadElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TheadElement) Class(s ...string) *TheadElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TheadElement) Contenteditable(a TheadContenteditableAttrEnum) *TheadElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TheadElement) Id(s string) *TheadElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TheadElement) Slot(s string) *TheadElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

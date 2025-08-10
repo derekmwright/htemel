@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ColElement struct {
 	attributes colAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type ColElement struct {
 // Spec Description: If a col element has a parent and that is a colgroup element that itself has a parent that is a table element, then the col element represents one or more columns in the column group represented by that colgroup.
 func Col(children ...htemel.Node) *ColElement {
 	node := &ColElement{
-		children: children,
+		children:   children,
 		attributes: make(colAttrs),
 	}
 
@@ -41,64 +42,70 @@ func ColIf(condition bool, children ...htemel.Node) *ColElement {
 type ColAutocapitalizeAttrEnum string
 
 const (
+	ColAutocapitalizeAttrEnumOn         ColAutocapitalizeAttrEnum = "on"
+	ColAutocapitalizeAttrEnumSentences  ColAutocapitalizeAttrEnum = "sentences"
+	ColAutocapitalizeAttrEnumWords      ColAutocapitalizeAttrEnum = "words"
 	ColAutocapitalizeAttrEnumCharacters ColAutocapitalizeAttrEnum = "characters"
-	ColAutocapitalizeAttrEnumNone ColAutocapitalizeAttrEnum = "none"
-	ColAutocapitalizeAttrEnumOff ColAutocapitalizeAttrEnum = "off"
-	ColAutocapitalizeAttrEnumOn ColAutocapitalizeAttrEnum = "on"
-	ColAutocapitalizeAttrEnumSentences ColAutocapitalizeAttrEnum = "sentences"
-	ColAutocapitalizeAttrEnumWords ColAutocapitalizeAttrEnum = "words"
+	ColAutocapitalizeAttrEnumNone       ColAutocapitalizeAttrEnum = "none"
+	ColAutocapitalizeAttrEnumOff        ColAutocapitalizeAttrEnum = "off"
 )
 
 type ColAutocorrectAttrEnum string
 
 const (
 	ColAutocorrectAttrEnumOff ColAutocorrectAttrEnum = "off"
-	ColAutocorrectAttrEnumOn ColAutocorrectAttrEnum = "on"
+	ColAutocorrectAttrEnumOn  ColAutocorrectAttrEnum = "on"
 )
 
 type ColContenteditableAttrEnum string
 
 const (
-	ColContenteditableAttrEnumTrue ColContenteditableAttrEnum = "true"
-	ColContenteditableAttrEnumFalse ColContenteditableAttrEnum = "false"
+	ColContenteditableAttrEnumFalse         ColContenteditableAttrEnum = "false"
 	ColContenteditableAttrEnumPlaintextOnly ColContenteditableAttrEnum = "plaintext-only"
+	ColContenteditableAttrEnumTrue          ColContenteditableAttrEnum = "true"
 )
 
 type colAttrs map[string]any
 
 func (e *ColElement) Autocapitalize(a ColAutocapitalizeAttrEnum) *ColElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *ColElement) Autocorrect(a ColAutocorrectAttrEnum) *ColElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *ColElement) Autofocus(b bool) *ColElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *ColElement) Class(s ...string) *ColElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *ColElement) Contenteditable(a ColContenteditableAttrEnum) *ColElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *ColElement) Id(s string) *ColElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *ColElement) Slot(s string) *ColElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

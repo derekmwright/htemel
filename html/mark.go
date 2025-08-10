@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type MarkElement struct {
 	attributes markAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type MarkElement struct {
 // Spec Description: The mark element represents a run of text in one document marked or highlighted for reference purposes, due to its relevance in another context. When used in a quotation or other block of text referred to from the prose, it indicates a highlight that was not originally present but which has been added to bring the reader's attention to a part of the text that might not have been considered important by the original author when the block was originally written, but which is now under previously unexpected scrutiny. When used in the main prose of a document, it indicates a part of the document that has been highlighted due to its likely relevance to the user's current activity.
 func Mark(children ...htemel.Node) *MarkElement {
 	node := &MarkElement{
-		children: children,
+		children:   children,
 		attributes: make(markAttrs),
 	}
 
@@ -41,64 +42,70 @@ func MarkIf(condition bool, children ...htemel.Node) *MarkElement {
 type MarkAutocapitalizeAttrEnum string
 
 const (
-	MarkAutocapitalizeAttrEnumWords MarkAutocapitalizeAttrEnum = "words"
+	MarkAutocapitalizeAttrEnumWords      MarkAutocapitalizeAttrEnum = "words"
 	MarkAutocapitalizeAttrEnumCharacters MarkAutocapitalizeAttrEnum = "characters"
-	MarkAutocapitalizeAttrEnumNone MarkAutocapitalizeAttrEnum = "none"
-	MarkAutocapitalizeAttrEnumOff MarkAutocapitalizeAttrEnum = "off"
-	MarkAutocapitalizeAttrEnumOn MarkAutocapitalizeAttrEnum = "on"
-	MarkAutocapitalizeAttrEnumSentences MarkAutocapitalizeAttrEnum = "sentences"
+	MarkAutocapitalizeAttrEnumNone       MarkAutocapitalizeAttrEnum = "none"
+	MarkAutocapitalizeAttrEnumOff        MarkAutocapitalizeAttrEnum = "off"
+	MarkAutocapitalizeAttrEnumOn         MarkAutocapitalizeAttrEnum = "on"
+	MarkAutocapitalizeAttrEnumSentences  MarkAutocapitalizeAttrEnum = "sentences"
 )
 
 type MarkAutocorrectAttrEnum string
 
 const (
 	MarkAutocorrectAttrEnumOff MarkAutocorrectAttrEnum = "off"
-	MarkAutocorrectAttrEnumOn MarkAutocorrectAttrEnum = "on"
+	MarkAutocorrectAttrEnumOn  MarkAutocorrectAttrEnum = "on"
 )
 
 type MarkContenteditableAttrEnum string
 
 const (
-	MarkContenteditableAttrEnumFalse MarkContenteditableAttrEnum = "false"
+	MarkContenteditableAttrEnumFalse         MarkContenteditableAttrEnum = "false"
 	MarkContenteditableAttrEnumPlaintextOnly MarkContenteditableAttrEnum = "plaintext-only"
-	MarkContenteditableAttrEnumTrue MarkContenteditableAttrEnum = "true"
+	MarkContenteditableAttrEnumTrue          MarkContenteditableAttrEnum = "true"
 )
 
 type markAttrs map[string]any
 
 func (e *MarkElement) Autocapitalize(a MarkAutocapitalizeAttrEnum) *MarkElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *MarkElement) Autocorrect(a MarkAutocorrectAttrEnum) *MarkElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *MarkElement) Autofocus(b bool) *MarkElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *MarkElement) Class(s ...string) *MarkElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *MarkElement) Contenteditable(a MarkContenteditableAttrEnum) *MarkElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *MarkElement) Id(s string) *MarkElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *MarkElement) Slot(s string) *MarkElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

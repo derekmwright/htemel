@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type LegendElement struct {
 	attributes legendAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type LegendElement struct {
 // Spec Description: The legend element represents a caption for the rest of the contents of the legend element's parent fieldset element, if any. Otherwise, if the legend has a parent optgroup element, then the legend represents the optgroup's label.
 func Legend(children ...htemel.Node) *LegendElement {
 	node := &LegendElement{
-		children: children,
+		children:   children,
 		attributes: make(legendAttrs),
 	}
 
@@ -41,64 +42,70 @@ func LegendIf(condition bool, children ...htemel.Node) *LegendElement {
 type LegendAutocapitalizeAttrEnum string
 
 const (
-	LegendAutocapitalizeAttrEnumOn LegendAutocapitalizeAttrEnum = "on"
-	LegendAutocapitalizeAttrEnumSentences LegendAutocapitalizeAttrEnum = "sentences"
-	LegendAutocapitalizeAttrEnumWords LegendAutocapitalizeAttrEnum = "words"
+	LegendAutocapitalizeAttrEnumWords      LegendAutocapitalizeAttrEnum = "words"
 	LegendAutocapitalizeAttrEnumCharacters LegendAutocapitalizeAttrEnum = "characters"
-	LegendAutocapitalizeAttrEnumNone LegendAutocapitalizeAttrEnum = "none"
-	LegendAutocapitalizeAttrEnumOff LegendAutocapitalizeAttrEnum = "off"
+	LegendAutocapitalizeAttrEnumNone       LegendAutocapitalizeAttrEnum = "none"
+	LegendAutocapitalizeAttrEnumOff        LegendAutocapitalizeAttrEnum = "off"
+	LegendAutocapitalizeAttrEnumOn         LegendAutocapitalizeAttrEnum = "on"
+	LegendAutocapitalizeAttrEnumSentences  LegendAutocapitalizeAttrEnum = "sentences"
 )
 
 type LegendAutocorrectAttrEnum string
 
 const (
 	LegendAutocorrectAttrEnumOff LegendAutocorrectAttrEnum = "off"
-	LegendAutocorrectAttrEnumOn LegendAutocorrectAttrEnum = "on"
+	LegendAutocorrectAttrEnumOn  LegendAutocorrectAttrEnum = "on"
 )
 
 type LegendContenteditableAttrEnum string
 
 const (
-	LegendContenteditableAttrEnumTrue LegendContenteditableAttrEnum = "true"
-	LegendContenteditableAttrEnumFalse LegendContenteditableAttrEnum = "false"
+	LegendContenteditableAttrEnumFalse         LegendContenteditableAttrEnum = "false"
 	LegendContenteditableAttrEnumPlaintextOnly LegendContenteditableAttrEnum = "plaintext-only"
+	LegendContenteditableAttrEnumTrue          LegendContenteditableAttrEnum = "true"
 )
 
 type legendAttrs map[string]any
 
 func (e *LegendElement) Autocapitalize(a LegendAutocapitalizeAttrEnum) *LegendElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *LegendElement) Autocorrect(a LegendAutocorrectAttrEnum) *LegendElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *LegendElement) Autofocus(b bool) *LegendElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *LegendElement) Class(s ...string) *LegendElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *LegendElement) Contenteditable(a LegendContenteditableAttrEnum) *LegendElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *LegendElement) Id(s string) *LegendElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *LegendElement) Slot(s string) *LegendElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

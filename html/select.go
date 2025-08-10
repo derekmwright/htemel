@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SelectElement struct {
 	attributes selectAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SelectElement struct {
 // Spec Description: The select element represents a control for selecting amongst a set of options.
 func Select(children ...htemel.Node) *SelectElement {
 	node := &SelectElement{
-		children: children,
+		children:   children,
 		attributes: make(selectAttrs),
 	}
 
@@ -41,26 +42,26 @@ func SelectIf(condition bool, children ...htemel.Node) *SelectElement {
 type SelectAutocapitalizeAttrEnum string
 
 const (
-	SelectAutocapitalizeAttrEnumOn SelectAutocapitalizeAttrEnum = "on"
-	SelectAutocapitalizeAttrEnumSentences SelectAutocapitalizeAttrEnum = "sentences"
-	SelectAutocapitalizeAttrEnumWords SelectAutocapitalizeAttrEnum = "words"
+	SelectAutocapitalizeAttrEnumOn         SelectAutocapitalizeAttrEnum = "on"
+	SelectAutocapitalizeAttrEnumSentences  SelectAutocapitalizeAttrEnum = "sentences"
+	SelectAutocapitalizeAttrEnumWords      SelectAutocapitalizeAttrEnum = "words"
 	SelectAutocapitalizeAttrEnumCharacters SelectAutocapitalizeAttrEnum = "characters"
-	SelectAutocapitalizeAttrEnumNone SelectAutocapitalizeAttrEnum = "none"
-	SelectAutocapitalizeAttrEnumOff SelectAutocapitalizeAttrEnum = "off"
+	SelectAutocapitalizeAttrEnumNone       SelectAutocapitalizeAttrEnum = "none"
+	SelectAutocapitalizeAttrEnumOff        SelectAutocapitalizeAttrEnum = "off"
 )
 
 type SelectAutocorrectAttrEnum string
 
 const (
-	SelectAutocorrectAttrEnumOn SelectAutocorrectAttrEnum = "on"
 	SelectAutocorrectAttrEnumOff SelectAutocorrectAttrEnum = "off"
+	SelectAutocorrectAttrEnumOn  SelectAutocorrectAttrEnum = "on"
 )
 
 type SelectContenteditableAttrEnum string
 
 const (
-	SelectContenteditableAttrEnumTrue SelectContenteditableAttrEnum = "true"
-	SelectContenteditableAttrEnumFalse SelectContenteditableAttrEnum = "false"
+	SelectContenteditableAttrEnumTrue          SelectContenteditableAttrEnum = "true"
+	SelectContenteditableAttrEnumFalse         SelectContenteditableAttrEnum = "false"
 	SelectContenteditableAttrEnumPlaintextOnly SelectContenteditableAttrEnum = "plaintext-only"
 )
 
@@ -68,37 +69,43 @@ type selectAttrs map[string]any
 
 func (e *SelectElement) Autocapitalize(a SelectAutocapitalizeAttrEnum) *SelectElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SelectElement) Autocorrect(a SelectAutocorrectAttrEnum) *SelectElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SelectElement) Autofocus(b bool) *SelectElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SelectElement) Class(s ...string) *SelectElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SelectElement) Contenteditable(a SelectContenteditableAttrEnum) *SelectElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SelectElement) Id(s string) *SelectElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SelectElement) Slot(s string) *SelectElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

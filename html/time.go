@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TimeElement struct {
 	attributes timeAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TimeElement struct {
 // Spec Description: The time element represents its contents, along with a machine-readable form of those contents in the datetime attribute. The kind of content is limited to various kinds of dates, times, time-zone offsets, and durations, as described below.
 func Time(children ...htemel.Node) *TimeElement {
 	node := &TimeElement{
-		children: children,
+		children:   children,
 		attributes: make(timeAttrs),
 	}
 
@@ -41,64 +42,70 @@ func TimeIf(condition bool, children ...htemel.Node) *TimeElement {
 type TimeAutocapitalizeAttrEnum string
 
 const (
-	TimeAutocapitalizeAttrEnumSentences TimeAutocapitalizeAttrEnum = "sentences"
-	TimeAutocapitalizeAttrEnumWords TimeAutocapitalizeAttrEnum = "words"
+	TimeAutocapitalizeAttrEnumWords      TimeAutocapitalizeAttrEnum = "words"
 	TimeAutocapitalizeAttrEnumCharacters TimeAutocapitalizeAttrEnum = "characters"
-	TimeAutocapitalizeAttrEnumNone TimeAutocapitalizeAttrEnum = "none"
-	TimeAutocapitalizeAttrEnumOff TimeAutocapitalizeAttrEnum = "off"
-	TimeAutocapitalizeAttrEnumOn TimeAutocapitalizeAttrEnum = "on"
+	TimeAutocapitalizeAttrEnumNone       TimeAutocapitalizeAttrEnum = "none"
+	TimeAutocapitalizeAttrEnumOff        TimeAutocapitalizeAttrEnum = "off"
+	TimeAutocapitalizeAttrEnumOn         TimeAutocapitalizeAttrEnum = "on"
+	TimeAutocapitalizeAttrEnumSentences  TimeAutocapitalizeAttrEnum = "sentences"
 )
 
 type TimeAutocorrectAttrEnum string
 
 const (
 	TimeAutocorrectAttrEnumOff TimeAutocorrectAttrEnum = "off"
-	TimeAutocorrectAttrEnumOn TimeAutocorrectAttrEnum = "on"
+	TimeAutocorrectAttrEnumOn  TimeAutocorrectAttrEnum = "on"
 )
 
 type TimeContenteditableAttrEnum string
 
 const (
-	TimeContenteditableAttrEnumFalse TimeContenteditableAttrEnum = "false"
+	TimeContenteditableAttrEnumFalse         TimeContenteditableAttrEnum = "false"
 	TimeContenteditableAttrEnumPlaintextOnly TimeContenteditableAttrEnum = "plaintext-only"
-	TimeContenteditableAttrEnumTrue TimeContenteditableAttrEnum = "true"
+	TimeContenteditableAttrEnumTrue          TimeContenteditableAttrEnum = "true"
 )
 
 type timeAttrs map[string]any
 
 func (e *TimeElement) Autocapitalize(a TimeAutocapitalizeAttrEnum) *TimeElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TimeElement) Autocorrect(a TimeAutocorrectAttrEnum) *TimeElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TimeElement) Autofocus(b bool) *TimeElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TimeElement) Class(s ...string) *TimeElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TimeElement) Contenteditable(a TimeContenteditableAttrEnum) *TimeElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TimeElement) Id(s string) *TimeElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TimeElement) Slot(s string) *TimeElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type CiteElement struct {
 	attributes citeAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type CiteElement struct {
 // Spec Description: The cite element represents the title of a work (e.g. a book, a paper, an essay, a poem, a score, a song, a script, a film, a TV show, a game, a sculpture, a painting, a theatre production, a play, an opera, a musical, an exhibition, a legal case report, a computer program,  etc.). This can be a work that is being quoted or referenced in detail (i.e., a citation), or it can just be a work that is mentioned in passing.
 func Cite(children ...htemel.Node) *CiteElement {
 	node := &CiteElement{
-		children: children,
+		children:   children,
 		attributes: make(citeAttrs),
 	}
 
@@ -41,64 +42,70 @@ func CiteIf(condition bool, children ...htemel.Node) *CiteElement {
 type CiteAutocapitalizeAttrEnum string
 
 const (
-	CiteAutocapitalizeAttrEnumSentences CiteAutocapitalizeAttrEnum = "sentences"
-	CiteAutocapitalizeAttrEnumWords CiteAutocapitalizeAttrEnum = "words"
+	CiteAutocapitalizeAttrEnumWords      CiteAutocapitalizeAttrEnum = "words"
 	CiteAutocapitalizeAttrEnumCharacters CiteAutocapitalizeAttrEnum = "characters"
-	CiteAutocapitalizeAttrEnumNone CiteAutocapitalizeAttrEnum = "none"
-	CiteAutocapitalizeAttrEnumOff CiteAutocapitalizeAttrEnum = "off"
-	CiteAutocapitalizeAttrEnumOn CiteAutocapitalizeAttrEnum = "on"
+	CiteAutocapitalizeAttrEnumNone       CiteAutocapitalizeAttrEnum = "none"
+	CiteAutocapitalizeAttrEnumOff        CiteAutocapitalizeAttrEnum = "off"
+	CiteAutocapitalizeAttrEnumOn         CiteAutocapitalizeAttrEnum = "on"
+	CiteAutocapitalizeAttrEnumSentences  CiteAutocapitalizeAttrEnum = "sentences"
 )
 
 type CiteAutocorrectAttrEnum string
 
 const (
 	CiteAutocorrectAttrEnumOff CiteAutocorrectAttrEnum = "off"
-	CiteAutocorrectAttrEnumOn CiteAutocorrectAttrEnum = "on"
+	CiteAutocorrectAttrEnumOn  CiteAutocorrectAttrEnum = "on"
 )
 
 type CiteContenteditableAttrEnum string
 
 const (
-	CiteContenteditableAttrEnumFalse CiteContenteditableAttrEnum = "false"
+	CiteContenteditableAttrEnumFalse         CiteContenteditableAttrEnum = "false"
 	CiteContenteditableAttrEnumPlaintextOnly CiteContenteditableAttrEnum = "plaintext-only"
-	CiteContenteditableAttrEnumTrue CiteContenteditableAttrEnum = "true"
+	CiteContenteditableAttrEnumTrue          CiteContenteditableAttrEnum = "true"
 )
 
 type citeAttrs map[string]any
 
 func (e *CiteElement) Autocapitalize(a CiteAutocapitalizeAttrEnum) *CiteElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *CiteElement) Autocorrect(a CiteAutocorrectAttrEnum) *CiteElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *CiteElement) Autofocus(b bool) *CiteElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *CiteElement) Class(s ...string) *CiteElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *CiteElement) Contenteditable(a CiteContenteditableAttrEnum) *CiteElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *CiteElement) Id(s string) *CiteElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *CiteElement) Slot(s string) *CiteElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

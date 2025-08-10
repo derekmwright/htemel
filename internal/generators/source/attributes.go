@@ -30,11 +30,29 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(s string) *`
 }
 `)
 			case *spec.AttributeTypeChar:
-
+				buf.WriteString(`
+func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(r rune) *` + titleCase(e.Tag) + `Element {
+	e.attributes["` + a.Name + `"] = r
+	
+	return e
+}
+`)
 			case *spec.AttributeTypeNumber:
-
+				buf.WriteString(`
+func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(i int) *` + titleCase(e.Tag) + `Element {
+	e.attributes["` + a.Name + `"] = i
+	
+	return e
+}
+`)
 			case *spec.AttributeTypeBool:
-
+				buf.WriteString(`
+func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(b bool) *` + titleCase(e.Tag) + `Element {
+	e.attributes["` + a.Name + `"] = b
+	
+	return e
+}
+`)
 			case *spec.AttributeTypeEnum:
 				typeName := titleCase(e.Tag) + titleCase(a.Name) + "AttrEnum"
 

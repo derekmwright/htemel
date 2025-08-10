@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type AsideElement struct {
 	attributes asideAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type AsideElement struct {
 // Spec Description: The aside element represents a section of a page that consists of content that is tangentially related to the content around the aside element, and which could be considered separate from that content. Such sections are often represented as sidebars in printed typography.
 func Aside(children ...htemel.Node) *AsideElement {
 	node := &AsideElement{
-		children: children,
+		children:   children,
 		attributes: make(asideAttrs),
 	}
 
@@ -41,64 +42,70 @@ func AsideIf(condition bool, children ...htemel.Node) *AsideElement {
 type AsideAutocapitalizeAttrEnum string
 
 const (
-	AsideAutocapitalizeAttrEnumWords AsideAutocapitalizeAttrEnum = "words"
+	AsideAutocapitalizeAttrEnumSentences  AsideAutocapitalizeAttrEnum = "sentences"
+	AsideAutocapitalizeAttrEnumWords      AsideAutocapitalizeAttrEnum = "words"
 	AsideAutocapitalizeAttrEnumCharacters AsideAutocapitalizeAttrEnum = "characters"
-	AsideAutocapitalizeAttrEnumNone AsideAutocapitalizeAttrEnum = "none"
-	AsideAutocapitalizeAttrEnumOff AsideAutocapitalizeAttrEnum = "off"
-	AsideAutocapitalizeAttrEnumOn AsideAutocapitalizeAttrEnum = "on"
-	AsideAutocapitalizeAttrEnumSentences AsideAutocapitalizeAttrEnum = "sentences"
+	AsideAutocapitalizeAttrEnumNone       AsideAutocapitalizeAttrEnum = "none"
+	AsideAutocapitalizeAttrEnumOff        AsideAutocapitalizeAttrEnum = "off"
+	AsideAutocapitalizeAttrEnumOn         AsideAutocapitalizeAttrEnum = "on"
 )
 
 type AsideAutocorrectAttrEnum string
 
 const (
+	AsideAutocorrectAttrEnumOn  AsideAutocorrectAttrEnum = "on"
 	AsideAutocorrectAttrEnumOff AsideAutocorrectAttrEnum = "off"
-	AsideAutocorrectAttrEnumOn AsideAutocorrectAttrEnum = "on"
 )
 
 type AsideContenteditableAttrEnum string
 
 const (
-	AsideContenteditableAttrEnumFalse AsideContenteditableAttrEnum = "false"
+	AsideContenteditableAttrEnumFalse         AsideContenteditableAttrEnum = "false"
 	AsideContenteditableAttrEnumPlaintextOnly AsideContenteditableAttrEnum = "plaintext-only"
-	AsideContenteditableAttrEnumTrue AsideContenteditableAttrEnum = "true"
+	AsideContenteditableAttrEnumTrue          AsideContenteditableAttrEnum = "true"
 )
 
 type asideAttrs map[string]any
 
 func (e *AsideElement) Autocapitalize(a AsideAutocapitalizeAttrEnum) *AsideElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *AsideElement) Autocorrect(a AsideAutocorrectAttrEnum) *AsideElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *AsideElement) Autofocus(b bool) *AsideElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *AsideElement) Class(s ...string) *AsideElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *AsideElement) Contenteditable(a AsideContenteditableAttrEnum) *AsideElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *AsideElement) Id(s string) *AsideElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *AsideElement) Slot(s string) *AsideElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

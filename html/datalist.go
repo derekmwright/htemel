@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DatalistElement struct {
 	attributes datalistAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DatalistElement struct {
 // Spec Description: The datalist element represents a set of option elements that represent predefined options for other controls. In the rendering, the datalist element represents nothing and it, along with its children, should be hidden.
 func Datalist(children ...htemel.Node) *DatalistElement {
 	node := &DatalistElement{
-		children: children,
+		children:   children,
 		attributes: make(datalistAttrs),
 	}
 
@@ -42,63 +43,69 @@ type DatalistAutocapitalizeAttrEnum string
 
 const (
 	DatalistAutocapitalizeAttrEnumCharacters DatalistAutocapitalizeAttrEnum = "characters"
-	DatalistAutocapitalizeAttrEnumNone DatalistAutocapitalizeAttrEnum = "none"
-	DatalistAutocapitalizeAttrEnumOff DatalistAutocapitalizeAttrEnum = "off"
-	DatalistAutocapitalizeAttrEnumOn DatalistAutocapitalizeAttrEnum = "on"
-	DatalistAutocapitalizeAttrEnumSentences DatalistAutocapitalizeAttrEnum = "sentences"
-	DatalistAutocapitalizeAttrEnumWords DatalistAutocapitalizeAttrEnum = "words"
+	DatalistAutocapitalizeAttrEnumNone       DatalistAutocapitalizeAttrEnum = "none"
+	DatalistAutocapitalizeAttrEnumOff        DatalistAutocapitalizeAttrEnum = "off"
+	DatalistAutocapitalizeAttrEnumOn         DatalistAutocapitalizeAttrEnum = "on"
+	DatalistAutocapitalizeAttrEnumSentences  DatalistAutocapitalizeAttrEnum = "sentences"
+	DatalistAutocapitalizeAttrEnumWords      DatalistAutocapitalizeAttrEnum = "words"
 )
 
 type DatalistAutocorrectAttrEnum string
 
 const (
 	DatalistAutocorrectAttrEnumOff DatalistAutocorrectAttrEnum = "off"
-	DatalistAutocorrectAttrEnumOn DatalistAutocorrectAttrEnum = "on"
+	DatalistAutocorrectAttrEnumOn  DatalistAutocorrectAttrEnum = "on"
 )
 
 type DatalistContenteditableAttrEnum string
 
 const (
-	DatalistContenteditableAttrEnumFalse DatalistContenteditableAttrEnum = "false"
+	DatalistContenteditableAttrEnumTrue          DatalistContenteditableAttrEnum = "true"
+	DatalistContenteditableAttrEnumFalse         DatalistContenteditableAttrEnum = "false"
 	DatalistContenteditableAttrEnumPlaintextOnly DatalistContenteditableAttrEnum = "plaintext-only"
-	DatalistContenteditableAttrEnumTrue DatalistContenteditableAttrEnum = "true"
 )
 
 type datalistAttrs map[string]any
 
 func (e *DatalistElement) Autocapitalize(a DatalistAutocapitalizeAttrEnum) *DatalistElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DatalistElement) Autocorrect(a DatalistAutocorrectAttrEnum) *DatalistElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *DatalistElement) Autofocus(b bool) *DatalistElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *DatalistElement) Class(s ...string) *DatalistElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DatalistElement) Contenteditable(a DatalistContenteditableAttrEnum) *DatalistElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DatalistElement) Id(s string) *DatalistElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *DatalistElement) Slot(s string) *DatalistElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

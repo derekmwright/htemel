@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type BaseElement struct {
 	attributes baseAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type BaseElement struct {
 // Spec Description: The base element allows authors to specify the document base URL for the purposes of parsing URLs, and the name of the default navigable for the purposes of following hyperlinks. The element does not represent any content beyond this information.
 func Base(children ...htemel.Node) *BaseElement {
 	node := &BaseElement{
-		children: children,
+		children:   children,
 		attributes: make(baseAttrs),
 	}
 
@@ -41,64 +42,70 @@ func BaseIf(condition bool, children ...htemel.Node) *BaseElement {
 type BaseAutocapitalizeAttrEnum string
 
 const (
+	BaseAutocapitalizeAttrEnumSentences  BaseAutocapitalizeAttrEnum = "sentences"
+	BaseAutocapitalizeAttrEnumWords      BaseAutocapitalizeAttrEnum = "words"
 	BaseAutocapitalizeAttrEnumCharacters BaseAutocapitalizeAttrEnum = "characters"
-	BaseAutocapitalizeAttrEnumNone BaseAutocapitalizeAttrEnum = "none"
-	BaseAutocapitalizeAttrEnumOff BaseAutocapitalizeAttrEnum = "off"
-	BaseAutocapitalizeAttrEnumOn BaseAutocapitalizeAttrEnum = "on"
-	BaseAutocapitalizeAttrEnumSentences BaseAutocapitalizeAttrEnum = "sentences"
-	BaseAutocapitalizeAttrEnumWords BaseAutocapitalizeAttrEnum = "words"
+	BaseAutocapitalizeAttrEnumNone       BaseAutocapitalizeAttrEnum = "none"
+	BaseAutocapitalizeAttrEnumOff        BaseAutocapitalizeAttrEnum = "off"
+	BaseAutocapitalizeAttrEnumOn         BaseAutocapitalizeAttrEnum = "on"
 )
 
 type BaseAutocorrectAttrEnum string
 
 const (
 	BaseAutocorrectAttrEnumOff BaseAutocorrectAttrEnum = "off"
-	BaseAutocorrectAttrEnumOn BaseAutocorrectAttrEnum = "on"
+	BaseAutocorrectAttrEnumOn  BaseAutocorrectAttrEnum = "on"
 )
 
 type BaseContenteditableAttrEnum string
 
 const (
-	BaseContenteditableAttrEnumFalse BaseContenteditableAttrEnum = "false"
 	BaseContenteditableAttrEnumPlaintextOnly BaseContenteditableAttrEnum = "plaintext-only"
-	BaseContenteditableAttrEnumTrue BaseContenteditableAttrEnum = "true"
+	BaseContenteditableAttrEnumTrue          BaseContenteditableAttrEnum = "true"
+	BaseContenteditableAttrEnumFalse         BaseContenteditableAttrEnum = "false"
 )
 
 type baseAttrs map[string]any
 
 func (e *BaseElement) Autocapitalize(a BaseAutocapitalizeAttrEnum) *BaseElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *BaseElement) Autocorrect(a BaseAutocorrectAttrEnum) *BaseElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *BaseElement) Autofocus(b bool) *BaseElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *BaseElement) Class(s ...string) *BaseElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *BaseElement) Contenteditable(a BaseContenteditableAttrEnum) *BaseElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *BaseElement) Id(s string) *BaseElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *BaseElement) Slot(s string) *BaseElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

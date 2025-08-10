@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type MapElement struct {
 	attributes mapAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type MapElement struct {
 // Spec Description: The map element, in conjunction with an img element and any area element descendants, defines an image map. The element represents its children.
 func Map(children ...htemel.Node) *MapElement {
 	node := &MapElement{
-		children: children,
+		children:   children,
 		attributes: make(mapAttrs),
 	}
 
@@ -42,63 +43,69 @@ type MapAutocapitalizeAttrEnum string
 
 const (
 	MapAutocapitalizeAttrEnumCharacters MapAutocapitalizeAttrEnum = "characters"
-	MapAutocapitalizeAttrEnumNone MapAutocapitalizeAttrEnum = "none"
-	MapAutocapitalizeAttrEnumOff MapAutocapitalizeAttrEnum = "off"
-	MapAutocapitalizeAttrEnumOn MapAutocapitalizeAttrEnum = "on"
-	MapAutocapitalizeAttrEnumSentences MapAutocapitalizeAttrEnum = "sentences"
-	MapAutocapitalizeAttrEnumWords MapAutocapitalizeAttrEnum = "words"
+	MapAutocapitalizeAttrEnumNone       MapAutocapitalizeAttrEnum = "none"
+	MapAutocapitalizeAttrEnumOff        MapAutocapitalizeAttrEnum = "off"
+	MapAutocapitalizeAttrEnumOn         MapAutocapitalizeAttrEnum = "on"
+	MapAutocapitalizeAttrEnumSentences  MapAutocapitalizeAttrEnum = "sentences"
+	MapAutocapitalizeAttrEnumWords      MapAutocapitalizeAttrEnum = "words"
 )
 
 type MapAutocorrectAttrEnum string
 
 const (
 	MapAutocorrectAttrEnumOff MapAutocorrectAttrEnum = "off"
-	MapAutocorrectAttrEnumOn MapAutocorrectAttrEnum = "on"
+	MapAutocorrectAttrEnumOn  MapAutocorrectAttrEnum = "on"
 )
 
 type MapContenteditableAttrEnum string
 
 const (
-	MapContenteditableAttrEnumFalse MapContenteditableAttrEnum = "false"
+	MapContenteditableAttrEnumTrue          MapContenteditableAttrEnum = "true"
+	MapContenteditableAttrEnumFalse         MapContenteditableAttrEnum = "false"
 	MapContenteditableAttrEnumPlaintextOnly MapContenteditableAttrEnum = "plaintext-only"
-	MapContenteditableAttrEnumTrue MapContenteditableAttrEnum = "true"
 )
 
 type mapAttrs map[string]any
 
 func (e *MapElement) Autocapitalize(a MapAutocapitalizeAttrEnum) *MapElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *MapElement) Autocorrect(a MapAutocorrectAttrEnum) *MapElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *MapElement) Autofocus(b bool) *MapElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *MapElement) Class(s ...string) *MapElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *MapElement) Contenteditable(a MapContenteditableAttrEnum) *MapElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *MapElement) Id(s string) *MapElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *MapElement) Slot(s string) *MapElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

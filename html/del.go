@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DelElement struct {
 	attributes delAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DelElement struct {
 // Spec Description: The del element represents a removal from the document.
 func Del(children ...htemel.Node) *DelElement {
 	node := &DelElement{
-		children: children,
+		children:   children,
 		attributes: make(delAttrs),
 	}
 
@@ -41,26 +42,26 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 type DelAutocapitalizeAttrEnum string
 
 const (
+	DelAutocapitalizeAttrEnumSentences  DelAutocapitalizeAttrEnum = "sentences"
+	DelAutocapitalizeAttrEnumWords      DelAutocapitalizeAttrEnum = "words"
 	DelAutocapitalizeAttrEnumCharacters DelAutocapitalizeAttrEnum = "characters"
-	DelAutocapitalizeAttrEnumNone DelAutocapitalizeAttrEnum = "none"
-	DelAutocapitalizeAttrEnumOff DelAutocapitalizeAttrEnum = "off"
-	DelAutocapitalizeAttrEnumOn DelAutocapitalizeAttrEnum = "on"
-	DelAutocapitalizeAttrEnumSentences DelAutocapitalizeAttrEnum = "sentences"
-	DelAutocapitalizeAttrEnumWords DelAutocapitalizeAttrEnum = "words"
+	DelAutocapitalizeAttrEnumNone       DelAutocapitalizeAttrEnum = "none"
+	DelAutocapitalizeAttrEnumOff        DelAutocapitalizeAttrEnum = "off"
+	DelAutocapitalizeAttrEnumOn         DelAutocapitalizeAttrEnum = "on"
 )
 
 type DelAutocorrectAttrEnum string
 
 const (
 	DelAutocorrectAttrEnumOff DelAutocorrectAttrEnum = "off"
-	DelAutocorrectAttrEnumOn DelAutocorrectAttrEnum = "on"
+	DelAutocorrectAttrEnumOn  DelAutocorrectAttrEnum = "on"
 )
 
 type DelContenteditableAttrEnum string
 
 const (
-	DelContenteditableAttrEnumTrue DelContenteditableAttrEnum = "true"
-	DelContenteditableAttrEnumFalse DelContenteditableAttrEnum = "false"
+	DelContenteditableAttrEnumTrue          DelContenteditableAttrEnum = "true"
+	DelContenteditableAttrEnumFalse         DelContenteditableAttrEnum = "false"
 	DelContenteditableAttrEnumPlaintextOnly DelContenteditableAttrEnum = "plaintext-only"
 )
 
@@ -68,37 +69,43 @@ type delAttrs map[string]any
 
 func (e *DelElement) Autocapitalize(a DelAutocapitalizeAttrEnum) *DelElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DelElement) Autocorrect(a DelAutocorrectAttrEnum) *DelElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *DelElement) Autofocus(b bool) *DelElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *DelElement) Class(s ...string) *DelElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DelElement) Contenteditable(a DelContenteditableAttrEnum) *DelElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DelElement) Id(s string) *DelElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *DelElement) Slot(s string) *DelElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

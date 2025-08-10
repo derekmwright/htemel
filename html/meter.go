@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type MeterElement struct {
 	attributes meterAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type MeterElement struct {
 // Spec Description: The meter element represents a scalar measurement within a known range, or a fractional value; for example disk usage, the relevance of a query result, or the fraction of a voting population to have selected a particular candidate.
 func Meter(children ...htemel.Node) *MeterElement {
 	node := &MeterElement{
-		children: children,
+		children:   children,
 		attributes: make(meterAttrs),
 	}
 
@@ -41,64 +42,70 @@ func MeterIf(condition bool, children ...htemel.Node) *MeterElement {
 type MeterAutocapitalizeAttrEnum string
 
 const (
-	MeterAutocapitalizeAttrEnumWords MeterAutocapitalizeAttrEnum = "words"
+	MeterAutocapitalizeAttrEnumSentences  MeterAutocapitalizeAttrEnum = "sentences"
+	MeterAutocapitalizeAttrEnumWords      MeterAutocapitalizeAttrEnum = "words"
 	MeterAutocapitalizeAttrEnumCharacters MeterAutocapitalizeAttrEnum = "characters"
-	MeterAutocapitalizeAttrEnumNone MeterAutocapitalizeAttrEnum = "none"
-	MeterAutocapitalizeAttrEnumOff MeterAutocapitalizeAttrEnum = "off"
-	MeterAutocapitalizeAttrEnumOn MeterAutocapitalizeAttrEnum = "on"
-	MeterAutocapitalizeAttrEnumSentences MeterAutocapitalizeAttrEnum = "sentences"
+	MeterAutocapitalizeAttrEnumNone       MeterAutocapitalizeAttrEnum = "none"
+	MeterAutocapitalizeAttrEnumOff        MeterAutocapitalizeAttrEnum = "off"
+	MeterAutocapitalizeAttrEnumOn         MeterAutocapitalizeAttrEnum = "on"
 )
 
 type MeterAutocorrectAttrEnum string
 
 const (
 	MeterAutocorrectAttrEnumOff MeterAutocorrectAttrEnum = "off"
-	MeterAutocorrectAttrEnumOn MeterAutocorrectAttrEnum = "on"
+	MeterAutocorrectAttrEnumOn  MeterAutocorrectAttrEnum = "on"
 )
 
 type MeterContenteditableAttrEnum string
 
 const (
-	MeterContenteditableAttrEnumFalse MeterContenteditableAttrEnum = "false"
+	MeterContenteditableAttrEnumFalse         MeterContenteditableAttrEnum = "false"
 	MeterContenteditableAttrEnumPlaintextOnly MeterContenteditableAttrEnum = "plaintext-only"
-	MeterContenteditableAttrEnumTrue MeterContenteditableAttrEnum = "true"
+	MeterContenteditableAttrEnumTrue          MeterContenteditableAttrEnum = "true"
 )
 
 type meterAttrs map[string]any
 
 func (e *MeterElement) Autocapitalize(a MeterAutocapitalizeAttrEnum) *MeterElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *MeterElement) Autocorrect(a MeterAutocorrectAttrEnum) *MeterElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *MeterElement) Autofocus(b bool) *MeterElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *MeterElement) Class(s ...string) *MeterElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *MeterElement) Contenteditable(a MeterContenteditableAttrEnum) *MeterElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *MeterElement) Id(s string) *MeterElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *MeterElement) Slot(s string) *MeterElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

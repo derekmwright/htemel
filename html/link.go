@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type LinkElement struct {
 	attributes linkAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type LinkElement struct {
 // Spec Description: The link element allows authors to link their document to other resources.
 func Link(children ...htemel.Node) *LinkElement {
 	node := &LinkElement{
-		children: children,
+		children:   children,
 		attributes: make(linkAttrs),
 	}
 
@@ -41,64 +42,70 @@ func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
 type LinkAutocapitalizeAttrEnum string
 
 const (
+	LinkAutocapitalizeAttrEnumOn         LinkAutocapitalizeAttrEnum = "on"
+	LinkAutocapitalizeAttrEnumSentences  LinkAutocapitalizeAttrEnum = "sentences"
+	LinkAutocapitalizeAttrEnumWords      LinkAutocapitalizeAttrEnum = "words"
 	LinkAutocapitalizeAttrEnumCharacters LinkAutocapitalizeAttrEnum = "characters"
-	LinkAutocapitalizeAttrEnumNone LinkAutocapitalizeAttrEnum = "none"
-	LinkAutocapitalizeAttrEnumOff LinkAutocapitalizeAttrEnum = "off"
-	LinkAutocapitalizeAttrEnumOn LinkAutocapitalizeAttrEnum = "on"
-	LinkAutocapitalizeAttrEnumSentences LinkAutocapitalizeAttrEnum = "sentences"
-	LinkAutocapitalizeAttrEnumWords LinkAutocapitalizeAttrEnum = "words"
+	LinkAutocapitalizeAttrEnumNone       LinkAutocapitalizeAttrEnum = "none"
+	LinkAutocapitalizeAttrEnumOff        LinkAutocapitalizeAttrEnum = "off"
 )
 
 type LinkAutocorrectAttrEnum string
 
 const (
 	LinkAutocorrectAttrEnumOff LinkAutocorrectAttrEnum = "off"
-	LinkAutocorrectAttrEnumOn LinkAutocorrectAttrEnum = "on"
+	LinkAutocorrectAttrEnumOn  LinkAutocorrectAttrEnum = "on"
 )
 
 type LinkContenteditableAttrEnum string
 
 const (
-	LinkContenteditableAttrEnumFalse LinkContenteditableAttrEnum = "false"
+	LinkContenteditableAttrEnumTrue          LinkContenteditableAttrEnum = "true"
+	LinkContenteditableAttrEnumFalse         LinkContenteditableAttrEnum = "false"
 	LinkContenteditableAttrEnumPlaintextOnly LinkContenteditableAttrEnum = "plaintext-only"
-	LinkContenteditableAttrEnumTrue LinkContenteditableAttrEnum = "true"
 )
 
 type linkAttrs map[string]any
 
 func (e *LinkElement) Autocapitalize(a LinkAutocapitalizeAttrEnum) *LinkElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *LinkElement) Autocorrect(a LinkAutocorrectAttrEnum) *LinkElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *LinkElement) Autofocus(b bool) *LinkElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *LinkElement) Class(s ...string) *LinkElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *LinkElement) Contenteditable(a LinkContenteditableAttrEnum) *LinkElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *LinkElement) Id(s string) *LinkElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *LinkElement) Slot(s string) *LinkElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

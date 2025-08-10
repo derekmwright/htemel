@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type AbbrElement struct {
 	attributes abbrAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type AbbrElement struct {
 // Spec Description: The abbr element represents an abbreviation or acronym, optionally with its expansion. The title attribute may be used to provide an expansion of the abbreviation. The attribute, if specified, must contain an expansion of the abbreviation, and nothing else.
 func Abbr(children ...htemel.Node) *AbbrElement {
 	node := &AbbrElement{
-		children: children,
+		children:   children,
 		attributes: make(abbrAttrs),
 	}
 
@@ -41,64 +42,70 @@ func AbbrIf(condition bool, children ...htemel.Node) *AbbrElement {
 type AbbrAutocapitalizeAttrEnum string
 
 const (
+	AbbrAutocapitalizeAttrEnumSentences  AbbrAutocapitalizeAttrEnum = "sentences"
+	AbbrAutocapitalizeAttrEnumWords      AbbrAutocapitalizeAttrEnum = "words"
 	AbbrAutocapitalizeAttrEnumCharacters AbbrAutocapitalizeAttrEnum = "characters"
-	AbbrAutocapitalizeAttrEnumNone AbbrAutocapitalizeAttrEnum = "none"
-	AbbrAutocapitalizeAttrEnumOff AbbrAutocapitalizeAttrEnum = "off"
-	AbbrAutocapitalizeAttrEnumOn AbbrAutocapitalizeAttrEnum = "on"
-	AbbrAutocapitalizeAttrEnumSentences AbbrAutocapitalizeAttrEnum = "sentences"
-	AbbrAutocapitalizeAttrEnumWords AbbrAutocapitalizeAttrEnum = "words"
+	AbbrAutocapitalizeAttrEnumNone       AbbrAutocapitalizeAttrEnum = "none"
+	AbbrAutocapitalizeAttrEnumOff        AbbrAutocapitalizeAttrEnum = "off"
+	AbbrAutocapitalizeAttrEnumOn         AbbrAutocapitalizeAttrEnum = "on"
 )
 
 type AbbrAutocorrectAttrEnum string
 
 const (
 	AbbrAutocorrectAttrEnumOff AbbrAutocorrectAttrEnum = "off"
-	AbbrAutocorrectAttrEnumOn AbbrAutocorrectAttrEnum = "on"
+	AbbrAutocorrectAttrEnumOn  AbbrAutocorrectAttrEnum = "on"
 )
 
 type AbbrContenteditableAttrEnum string
 
 const (
-	AbbrContenteditableAttrEnumFalse AbbrContenteditableAttrEnum = "false"
+	AbbrContenteditableAttrEnumFalse         AbbrContenteditableAttrEnum = "false"
 	AbbrContenteditableAttrEnumPlaintextOnly AbbrContenteditableAttrEnum = "plaintext-only"
-	AbbrContenteditableAttrEnumTrue AbbrContenteditableAttrEnum = "true"
+	AbbrContenteditableAttrEnumTrue          AbbrContenteditableAttrEnum = "true"
 )
 
 type abbrAttrs map[string]any
 
 func (e *AbbrElement) Autocapitalize(a AbbrAutocapitalizeAttrEnum) *AbbrElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *AbbrElement) Autocorrect(a AbbrAutocorrectAttrEnum) *AbbrElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *AbbrElement) Autofocus(b bool) *AbbrElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *AbbrElement) Class(s ...string) *AbbrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *AbbrElement) Contenteditable(a AbbrContenteditableAttrEnum) *AbbrElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *AbbrElement) Id(s string) *AbbrElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *AbbrElement) Slot(s string) *AbbrElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

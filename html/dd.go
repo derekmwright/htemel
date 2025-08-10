@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DdElement struct {
 	attributes ddAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DdElement struct {
 // Spec Description: The dd element represents the description, definition, or value, part of a term-description group in a description list (dl element).
 func Dd(children ...htemel.Node) *DdElement {
 	node := &DdElement{
-		children: children,
+		children:   children,
 		attributes: make(ddAttrs),
 	}
 
@@ -42,63 +43,69 @@ type DdAutocapitalizeAttrEnum string
 
 const (
 	DdAutocapitalizeAttrEnumCharacters DdAutocapitalizeAttrEnum = "characters"
-	DdAutocapitalizeAttrEnumNone DdAutocapitalizeAttrEnum = "none"
-	DdAutocapitalizeAttrEnumOff DdAutocapitalizeAttrEnum = "off"
-	DdAutocapitalizeAttrEnumOn DdAutocapitalizeAttrEnum = "on"
-	DdAutocapitalizeAttrEnumSentences DdAutocapitalizeAttrEnum = "sentences"
-	DdAutocapitalizeAttrEnumWords DdAutocapitalizeAttrEnum = "words"
+	DdAutocapitalizeAttrEnumNone       DdAutocapitalizeAttrEnum = "none"
+	DdAutocapitalizeAttrEnumOff        DdAutocapitalizeAttrEnum = "off"
+	DdAutocapitalizeAttrEnumOn         DdAutocapitalizeAttrEnum = "on"
+	DdAutocapitalizeAttrEnumSentences  DdAutocapitalizeAttrEnum = "sentences"
+	DdAutocapitalizeAttrEnumWords      DdAutocapitalizeAttrEnum = "words"
 )
 
 type DdAutocorrectAttrEnum string
 
 const (
 	DdAutocorrectAttrEnumOff DdAutocorrectAttrEnum = "off"
-	DdAutocorrectAttrEnumOn DdAutocorrectAttrEnum = "on"
+	DdAutocorrectAttrEnumOn  DdAutocorrectAttrEnum = "on"
 )
 
 type DdContenteditableAttrEnum string
 
 const (
-	DdContenteditableAttrEnumTrue DdContenteditableAttrEnum = "true"
-	DdContenteditableAttrEnumFalse DdContenteditableAttrEnum = "false"
+	DdContenteditableAttrEnumFalse         DdContenteditableAttrEnum = "false"
 	DdContenteditableAttrEnumPlaintextOnly DdContenteditableAttrEnum = "plaintext-only"
+	DdContenteditableAttrEnumTrue          DdContenteditableAttrEnum = "true"
 )
 
 type ddAttrs map[string]any
 
 func (e *DdElement) Autocapitalize(a DdAutocapitalizeAttrEnum) *DdElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DdElement) Autocorrect(a DdAutocorrectAttrEnum) *DdElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *DdElement) Autofocus(b bool) *DdElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *DdElement) Class(s ...string) *DdElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DdElement) Contenteditable(a DdContenteditableAttrEnum) *DdElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DdElement) Id(s string) *DdElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *DdElement) Slot(s string) *DdElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

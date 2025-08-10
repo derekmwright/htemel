@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type UElement struct {
 	attributes uAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type UElement struct {
 // Spec Description: The u element represents a span of text with an unarticulated, though explicitly rendered, non-textual annotation, such as labeling the text as being a proper name in Chinese text (a Chinese proper name mark), or labeling the text as being misspelt.
 func U(children ...htemel.Node) *UElement {
 	node := &UElement{
-		children: children,
+		children:   children,
 		attributes: make(uAttrs),
 	}
 
@@ -41,64 +42,70 @@ func UIf(condition bool, children ...htemel.Node) *UElement {
 type UAutocapitalizeAttrEnum string
 
 const (
+	UAutocapitalizeAttrEnumSentences  UAutocapitalizeAttrEnum = "sentences"
+	UAutocapitalizeAttrEnumWords      UAutocapitalizeAttrEnum = "words"
 	UAutocapitalizeAttrEnumCharacters UAutocapitalizeAttrEnum = "characters"
-	UAutocapitalizeAttrEnumNone UAutocapitalizeAttrEnum = "none"
-	UAutocapitalizeAttrEnumOff UAutocapitalizeAttrEnum = "off"
-	UAutocapitalizeAttrEnumOn UAutocapitalizeAttrEnum = "on"
-	UAutocapitalizeAttrEnumSentences UAutocapitalizeAttrEnum = "sentences"
-	UAutocapitalizeAttrEnumWords UAutocapitalizeAttrEnum = "words"
+	UAutocapitalizeAttrEnumNone       UAutocapitalizeAttrEnum = "none"
+	UAutocapitalizeAttrEnumOff        UAutocapitalizeAttrEnum = "off"
+	UAutocapitalizeAttrEnumOn         UAutocapitalizeAttrEnum = "on"
 )
 
 type UAutocorrectAttrEnum string
 
 const (
+	UAutocorrectAttrEnumOn  UAutocorrectAttrEnum = "on"
 	UAutocorrectAttrEnumOff UAutocorrectAttrEnum = "off"
-	UAutocorrectAttrEnumOn UAutocorrectAttrEnum = "on"
 )
 
 type UContenteditableAttrEnum string
 
 const (
-	UContenteditableAttrEnumFalse UContenteditableAttrEnum = "false"
+	UContenteditableAttrEnumFalse         UContenteditableAttrEnum = "false"
 	UContenteditableAttrEnumPlaintextOnly UContenteditableAttrEnum = "plaintext-only"
-	UContenteditableAttrEnumTrue UContenteditableAttrEnum = "true"
+	UContenteditableAttrEnumTrue          UContenteditableAttrEnum = "true"
 )
 
 type uAttrs map[string]any
 
 func (e *UElement) Autocapitalize(a UAutocapitalizeAttrEnum) *UElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *UElement) Autocorrect(a UAutocorrectAttrEnum) *UElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *UElement) Autofocus(b bool) *UElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *UElement) Class(s ...string) *UElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *UElement) Contenteditable(a UContenteditableAttrEnum) *UElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *UElement) Id(s string) *UElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *UElement) Slot(s string) *UElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

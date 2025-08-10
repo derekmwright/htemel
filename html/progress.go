@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ProgressElement struct {
 	attributes progressAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type ProgressElement struct {
 // Spec Description: The progress element represents the completion progress of a task. The progress is either indeterminate, indicating that progress is being made but that it is not clear how much more work remains to be done before the task is complete (e.g. because the task is waiting for a remote host to respond), or the progress is a number in the range zero to a maximum, giving the fraction of work that has so far been completed.
 func Progress(children ...htemel.Node) *ProgressElement {
 	node := &ProgressElement{
-		children: children,
+		children:   children,
 		attributes: make(progressAttrs),
 	}
 
@@ -41,64 +42,70 @@ func ProgressIf(condition bool, children ...htemel.Node) *ProgressElement {
 type ProgressAutocapitalizeAttrEnum string
 
 const (
+	ProgressAutocapitalizeAttrEnumNone       ProgressAutocapitalizeAttrEnum = "none"
+	ProgressAutocapitalizeAttrEnumOff        ProgressAutocapitalizeAttrEnum = "off"
+	ProgressAutocapitalizeAttrEnumOn         ProgressAutocapitalizeAttrEnum = "on"
+	ProgressAutocapitalizeAttrEnumSentences  ProgressAutocapitalizeAttrEnum = "sentences"
+	ProgressAutocapitalizeAttrEnumWords      ProgressAutocapitalizeAttrEnum = "words"
 	ProgressAutocapitalizeAttrEnumCharacters ProgressAutocapitalizeAttrEnum = "characters"
-	ProgressAutocapitalizeAttrEnumNone ProgressAutocapitalizeAttrEnum = "none"
-	ProgressAutocapitalizeAttrEnumOff ProgressAutocapitalizeAttrEnum = "off"
-	ProgressAutocapitalizeAttrEnumOn ProgressAutocapitalizeAttrEnum = "on"
-	ProgressAutocapitalizeAttrEnumSentences ProgressAutocapitalizeAttrEnum = "sentences"
-	ProgressAutocapitalizeAttrEnumWords ProgressAutocapitalizeAttrEnum = "words"
 )
 
 type ProgressAutocorrectAttrEnum string
 
 const (
+	ProgressAutocorrectAttrEnumOn  ProgressAutocorrectAttrEnum = "on"
 	ProgressAutocorrectAttrEnumOff ProgressAutocorrectAttrEnum = "off"
-	ProgressAutocorrectAttrEnumOn ProgressAutocorrectAttrEnum = "on"
 )
 
 type ProgressContenteditableAttrEnum string
 
 const (
-	ProgressContenteditableAttrEnumTrue ProgressContenteditableAttrEnum = "true"
-	ProgressContenteditableAttrEnumFalse ProgressContenteditableAttrEnum = "false"
 	ProgressContenteditableAttrEnumPlaintextOnly ProgressContenteditableAttrEnum = "plaintext-only"
+	ProgressContenteditableAttrEnumTrue          ProgressContenteditableAttrEnum = "true"
+	ProgressContenteditableAttrEnumFalse         ProgressContenteditableAttrEnum = "false"
 )
 
 type progressAttrs map[string]any
 
 func (e *ProgressElement) Autocapitalize(a ProgressAutocapitalizeAttrEnum) *ProgressElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *ProgressElement) Autocorrect(a ProgressAutocorrectAttrEnum) *ProgressElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *ProgressElement) Autofocus(b bool) *ProgressElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *ProgressElement) Class(s ...string) *ProgressElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *ProgressElement) Contenteditable(a ProgressContenteditableAttrEnum) *ProgressElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *ProgressElement) Id(s string) *ProgressElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *ProgressElement) Slot(s string) *ProgressElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

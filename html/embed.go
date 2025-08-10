@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type EmbedElement struct {
 	attributes embedAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type EmbedElement struct {
 // Spec Description: The embed element provides an integration point for an external application or interactive content.
 func Embed(children ...htemel.Node) *EmbedElement {
 	node := &EmbedElement{
-		children: children,
+		children:   children,
 		attributes: make(embedAttrs),
 	}
 
@@ -41,64 +42,70 @@ func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
 type EmbedAutocapitalizeAttrEnum string
 
 const (
-	EmbedAutocapitalizeAttrEnumOn EmbedAutocapitalizeAttrEnum = "on"
-	EmbedAutocapitalizeAttrEnumSentences EmbedAutocapitalizeAttrEnum = "sentences"
-	EmbedAutocapitalizeAttrEnumWords EmbedAutocapitalizeAttrEnum = "words"
+	EmbedAutocapitalizeAttrEnumOff        EmbedAutocapitalizeAttrEnum = "off"
+	EmbedAutocapitalizeAttrEnumOn         EmbedAutocapitalizeAttrEnum = "on"
+	EmbedAutocapitalizeAttrEnumSentences  EmbedAutocapitalizeAttrEnum = "sentences"
+	EmbedAutocapitalizeAttrEnumWords      EmbedAutocapitalizeAttrEnum = "words"
 	EmbedAutocapitalizeAttrEnumCharacters EmbedAutocapitalizeAttrEnum = "characters"
-	EmbedAutocapitalizeAttrEnumNone EmbedAutocapitalizeAttrEnum = "none"
-	EmbedAutocapitalizeAttrEnumOff EmbedAutocapitalizeAttrEnum = "off"
+	EmbedAutocapitalizeAttrEnumNone       EmbedAutocapitalizeAttrEnum = "none"
 )
 
 type EmbedAutocorrectAttrEnum string
 
 const (
 	EmbedAutocorrectAttrEnumOff EmbedAutocorrectAttrEnum = "off"
-	EmbedAutocorrectAttrEnumOn EmbedAutocorrectAttrEnum = "on"
+	EmbedAutocorrectAttrEnumOn  EmbedAutocorrectAttrEnum = "on"
 )
 
 type EmbedContenteditableAttrEnum string
 
 const (
-	EmbedContenteditableAttrEnumTrue EmbedContenteditableAttrEnum = "true"
-	EmbedContenteditableAttrEnumFalse EmbedContenteditableAttrEnum = "false"
+	EmbedContenteditableAttrEnumFalse         EmbedContenteditableAttrEnum = "false"
 	EmbedContenteditableAttrEnumPlaintextOnly EmbedContenteditableAttrEnum = "plaintext-only"
+	EmbedContenteditableAttrEnumTrue          EmbedContenteditableAttrEnum = "true"
 )
 
 type embedAttrs map[string]any
 
 func (e *EmbedElement) Autocapitalize(a EmbedAutocapitalizeAttrEnum) *EmbedElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *EmbedElement) Autocorrect(a EmbedAutocorrectAttrEnum) *EmbedElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *EmbedElement) Autofocus(b bool) *EmbedElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *EmbedElement) Class(s ...string) *EmbedElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *EmbedElement) Contenteditable(a EmbedContenteditableAttrEnum) *EmbedElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *EmbedElement) Id(s string) *EmbedElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *EmbedElement) Slot(s string) *EmbedElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

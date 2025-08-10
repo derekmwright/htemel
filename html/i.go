@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type IElement struct {
 	attributes iAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type IElement struct {
 // Spec Description: The i element represents a span of text in an alternate voice or mood, or otherwise offset from the normal prose in a manner indicating a different quality of text, such as a taxonomic designation, a technical term, an idiomatic phrase from another language, transliteration, a thought, or a ship name in Western texts.
 func I(children ...htemel.Node) *IElement {
 	node := &IElement{
-		children: children,
+		children:   children,
 		attributes: make(iAttrs),
 	}
 
@@ -42,63 +43,69 @@ type IAutocapitalizeAttrEnum string
 
 const (
 	IAutocapitalizeAttrEnumCharacters IAutocapitalizeAttrEnum = "characters"
-	IAutocapitalizeAttrEnumNone IAutocapitalizeAttrEnum = "none"
-	IAutocapitalizeAttrEnumOff IAutocapitalizeAttrEnum = "off"
-	IAutocapitalizeAttrEnumOn IAutocapitalizeAttrEnum = "on"
-	IAutocapitalizeAttrEnumSentences IAutocapitalizeAttrEnum = "sentences"
-	IAutocapitalizeAttrEnumWords IAutocapitalizeAttrEnum = "words"
+	IAutocapitalizeAttrEnumNone       IAutocapitalizeAttrEnum = "none"
+	IAutocapitalizeAttrEnumOff        IAutocapitalizeAttrEnum = "off"
+	IAutocapitalizeAttrEnumOn         IAutocapitalizeAttrEnum = "on"
+	IAutocapitalizeAttrEnumSentences  IAutocapitalizeAttrEnum = "sentences"
+	IAutocapitalizeAttrEnumWords      IAutocapitalizeAttrEnum = "words"
 )
 
 type IAutocorrectAttrEnum string
 
 const (
 	IAutocorrectAttrEnumOff IAutocorrectAttrEnum = "off"
-	IAutocorrectAttrEnumOn IAutocorrectAttrEnum = "on"
+	IAutocorrectAttrEnumOn  IAutocorrectAttrEnum = "on"
 )
 
 type IContenteditableAttrEnum string
 
 const (
-	IContenteditableAttrEnumFalse IContenteditableAttrEnum = "false"
+	IContenteditableAttrEnumFalse         IContenteditableAttrEnum = "false"
 	IContenteditableAttrEnumPlaintextOnly IContenteditableAttrEnum = "plaintext-only"
-	IContenteditableAttrEnumTrue IContenteditableAttrEnum = "true"
+	IContenteditableAttrEnumTrue          IContenteditableAttrEnum = "true"
 )
 
 type iAttrs map[string]any
 
 func (e *IElement) Autocapitalize(a IAutocapitalizeAttrEnum) *IElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *IElement) Autocorrect(a IAutocorrectAttrEnum) *IElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *IElement) Autofocus(b bool) *IElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *IElement) Class(s ...string) *IElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *IElement) Contenteditable(a IContenteditableAttrEnum) *IElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *IElement) Id(s string) *IElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *IElement) Slot(s string) *IElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

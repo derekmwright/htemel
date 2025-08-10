@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type BdoElement struct {
 	attributes bdoAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type BdoElement struct {
 // Spec Description: The bdo element represents explicit text directionality formatting control for its children. It allows authors to override the Unicode bidirectional algorithm by explicitly specifying a direction override. [BIDI]
 func Bdo(children ...htemel.Node) *BdoElement {
 	node := &BdoElement{
-		children: children,
+		children:   children,
 		attributes: make(bdoAttrs),
 	}
 
@@ -41,64 +42,70 @@ func BdoIf(condition bool, children ...htemel.Node) *BdoElement {
 type BdoAutocapitalizeAttrEnum string
 
 const (
-	BdoAutocapitalizeAttrEnumSentences BdoAutocapitalizeAttrEnum = "sentences"
-	BdoAutocapitalizeAttrEnumWords BdoAutocapitalizeAttrEnum = "words"
+	BdoAutocapitalizeAttrEnumOn         BdoAutocapitalizeAttrEnum = "on"
+	BdoAutocapitalizeAttrEnumSentences  BdoAutocapitalizeAttrEnum = "sentences"
+	BdoAutocapitalizeAttrEnumWords      BdoAutocapitalizeAttrEnum = "words"
 	BdoAutocapitalizeAttrEnumCharacters BdoAutocapitalizeAttrEnum = "characters"
-	BdoAutocapitalizeAttrEnumNone BdoAutocapitalizeAttrEnum = "none"
-	BdoAutocapitalizeAttrEnumOff BdoAutocapitalizeAttrEnum = "off"
-	BdoAutocapitalizeAttrEnumOn BdoAutocapitalizeAttrEnum = "on"
+	BdoAutocapitalizeAttrEnumNone       BdoAutocapitalizeAttrEnum = "none"
+	BdoAutocapitalizeAttrEnumOff        BdoAutocapitalizeAttrEnum = "off"
 )
 
 type BdoAutocorrectAttrEnum string
 
 const (
 	BdoAutocorrectAttrEnumOff BdoAutocorrectAttrEnum = "off"
-	BdoAutocorrectAttrEnumOn BdoAutocorrectAttrEnum = "on"
+	BdoAutocorrectAttrEnumOn  BdoAutocorrectAttrEnum = "on"
 )
 
 type BdoContenteditableAttrEnum string
 
 const (
-	BdoContenteditableAttrEnumFalse BdoContenteditableAttrEnum = "false"
+	BdoContenteditableAttrEnumTrue          BdoContenteditableAttrEnum = "true"
+	BdoContenteditableAttrEnumFalse         BdoContenteditableAttrEnum = "false"
 	BdoContenteditableAttrEnumPlaintextOnly BdoContenteditableAttrEnum = "plaintext-only"
-	BdoContenteditableAttrEnumTrue BdoContenteditableAttrEnum = "true"
 )
 
 type bdoAttrs map[string]any
 
 func (e *BdoElement) Autocapitalize(a BdoAutocapitalizeAttrEnum) *BdoElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *BdoElement) Autocorrect(a BdoAutocorrectAttrEnum) *BdoElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *BdoElement) Autofocus(b bool) *BdoElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *BdoElement) Class(s ...string) *BdoElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *BdoElement) Contenteditable(a BdoContenteditableAttrEnum) *BdoElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *BdoElement) Id(s string) *BdoElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *BdoElement) Slot(s string) *BdoElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

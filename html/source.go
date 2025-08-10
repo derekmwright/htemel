@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SourceElement struct {
 	attributes sourceAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SourceElement struct {
 // Spec Description: The source element allows authors to specify multiple alternative source sets for img elements or multiple alternative media resources for media elements. It does not represent anything on its own.
 func Source(children ...htemel.Node) *SourceElement {
 	node := &SourceElement{
-		children: children,
+		children:   children,
 		attributes: make(sourceAttrs),
 	}
 
@@ -42,63 +43,69 @@ type SourceAutocapitalizeAttrEnum string
 
 const (
 	SourceAutocapitalizeAttrEnumCharacters SourceAutocapitalizeAttrEnum = "characters"
-	SourceAutocapitalizeAttrEnumNone SourceAutocapitalizeAttrEnum = "none"
-	SourceAutocapitalizeAttrEnumOff SourceAutocapitalizeAttrEnum = "off"
-	SourceAutocapitalizeAttrEnumOn SourceAutocapitalizeAttrEnum = "on"
-	SourceAutocapitalizeAttrEnumSentences SourceAutocapitalizeAttrEnum = "sentences"
-	SourceAutocapitalizeAttrEnumWords SourceAutocapitalizeAttrEnum = "words"
+	SourceAutocapitalizeAttrEnumNone       SourceAutocapitalizeAttrEnum = "none"
+	SourceAutocapitalizeAttrEnumOff        SourceAutocapitalizeAttrEnum = "off"
+	SourceAutocapitalizeAttrEnumOn         SourceAutocapitalizeAttrEnum = "on"
+	SourceAutocapitalizeAttrEnumSentences  SourceAutocapitalizeAttrEnum = "sentences"
+	SourceAutocapitalizeAttrEnumWords      SourceAutocapitalizeAttrEnum = "words"
 )
 
 type SourceAutocorrectAttrEnum string
 
 const (
 	SourceAutocorrectAttrEnumOff SourceAutocorrectAttrEnum = "off"
-	SourceAutocorrectAttrEnumOn SourceAutocorrectAttrEnum = "on"
+	SourceAutocorrectAttrEnumOn  SourceAutocorrectAttrEnum = "on"
 )
 
 type SourceContenteditableAttrEnum string
 
 const (
-	SourceContenteditableAttrEnumFalse SourceContenteditableAttrEnum = "false"
+	SourceContenteditableAttrEnumFalse         SourceContenteditableAttrEnum = "false"
 	SourceContenteditableAttrEnumPlaintextOnly SourceContenteditableAttrEnum = "plaintext-only"
-	SourceContenteditableAttrEnumTrue SourceContenteditableAttrEnum = "true"
+	SourceContenteditableAttrEnumTrue          SourceContenteditableAttrEnum = "true"
 )
 
 type sourceAttrs map[string]any
 
 func (e *SourceElement) Autocapitalize(a SourceAutocapitalizeAttrEnum) *SourceElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SourceElement) Autocorrect(a SourceAutocorrectAttrEnum) *SourceElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SourceElement) Autofocus(b bool) *SourceElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SourceElement) Class(s ...string) *SourceElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SourceElement) Contenteditable(a SourceContenteditableAttrEnum) *SourceElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SourceElement) Id(s string) *SourceElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SourceElement) Slot(s string) *SourceElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TfootElement struct {
 	attributes tfootAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TfootElement struct {
 // Spec Description: The tfoot element represents the block of rows that consist of the column summaries (footers) for the parent table element, if the tfoot element has a parent and it is a table.
 func Tfoot(children ...htemel.Node) *TfootElement {
 	node := &TfootElement{
-		children: children,
+		children:   children,
 		attributes: make(tfootAttrs),
 	}
 
@@ -41,64 +42,70 @@ func TfootIf(condition bool, children ...htemel.Node) *TfootElement {
 type TfootAutocapitalizeAttrEnum string
 
 const (
-	TfootAutocapitalizeAttrEnumWords TfootAutocapitalizeAttrEnum = "words"
+	TfootAutocapitalizeAttrEnumSentences  TfootAutocapitalizeAttrEnum = "sentences"
+	TfootAutocapitalizeAttrEnumWords      TfootAutocapitalizeAttrEnum = "words"
 	TfootAutocapitalizeAttrEnumCharacters TfootAutocapitalizeAttrEnum = "characters"
-	TfootAutocapitalizeAttrEnumNone TfootAutocapitalizeAttrEnum = "none"
-	TfootAutocapitalizeAttrEnumOff TfootAutocapitalizeAttrEnum = "off"
-	TfootAutocapitalizeAttrEnumOn TfootAutocapitalizeAttrEnum = "on"
-	TfootAutocapitalizeAttrEnumSentences TfootAutocapitalizeAttrEnum = "sentences"
+	TfootAutocapitalizeAttrEnumNone       TfootAutocapitalizeAttrEnum = "none"
+	TfootAutocapitalizeAttrEnumOff        TfootAutocapitalizeAttrEnum = "off"
+	TfootAutocapitalizeAttrEnumOn         TfootAutocapitalizeAttrEnum = "on"
 )
 
 type TfootAutocorrectAttrEnum string
 
 const (
 	TfootAutocorrectAttrEnumOff TfootAutocorrectAttrEnum = "off"
-	TfootAutocorrectAttrEnumOn TfootAutocorrectAttrEnum = "on"
+	TfootAutocorrectAttrEnumOn  TfootAutocorrectAttrEnum = "on"
 )
 
 type TfootContenteditableAttrEnum string
 
 const (
+	TfootContenteditableAttrEnumFalse         TfootContenteditableAttrEnum = "false"
 	TfootContenteditableAttrEnumPlaintextOnly TfootContenteditableAttrEnum = "plaintext-only"
-	TfootContenteditableAttrEnumTrue TfootContenteditableAttrEnum = "true"
-	TfootContenteditableAttrEnumFalse TfootContenteditableAttrEnum = "false"
+	TfootContenteditableAttrEnumTrue          TfootContenteditableAttrEnum = "true"
 )
 
 type tfootAttrs map[string]any
 
 func (e *TfootElement) Autocapitalize(a TfootAutocapitalizeAttrEnum) *TfootElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TfootElement) Autocorrect(a TfootAutocorrectAttrEnum) *TfootElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TfootElement) Autofocus(b bool) *TfootElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TfootElement) Class(s ...string) *TfootElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TfootElement) Contenteditable(a TfootContenteditableAttrEnum) *TfootElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TfootElement) Id(s string) *TfootElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TfootElement) Slot(s string) *TfootElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

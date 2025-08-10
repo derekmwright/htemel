@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ArticleElement struct {
 	attributes articleAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type ArticleElement struct {
 // Spec Description: The article element represents a complete, or self-contained, composition in a document, page, application, or site and that is, in principle, independently distributable or reusable, e.g. in syndication. This could be a forum post, a magazine or newspaper article, a blog entry, a user-submitted comment, an interactive widget or gadget, or any other independent item of content.
 func Article(children ...htemel.Node) *ArticleElement {
 	node := &ArticleElement{
-		children: children,
+		children:   children,
 		attributes: make(articleAttrs),
 	}
 
@@ -42,63 +43,69 @@ type ArticleAutocapitalizeAttrEnum string
 
 const (
 	ArticleAutocapitalizeAttrEnumCharacters ArticleAutocapitalizeAttrEnum = "characters"
-	ArticleAutocapitalizeAttrEnumNone ArticleAutocapitalizeAttrEnum = "none"
-	ArticleAutocapitalizeAttrEnumOff ArticleAutocapitalizeAttrEnum = "off"
-	ArticleAutocapitalizeAttrEnumOn ArticleAutocapitalizeAttrEnum = "on"
-	ArticleAutocapitalizeAttrEnumSentences ArticleAutocapitalizeAttrEnum = "sentences"
-	ArticleAutocapitalizeAttrEnumWords ArticleAutocapitalizeAttrEnum = "words"
+	ArticleAutocapitalizeAttrEnumNone       ArticleAutocapitalizeAttrEnum = "none"
+	ArticleAutocapitalizeAttrEnumOff        ArticleAutocapitalizeAttrEnum = "off"
+	ArticleAutocapitalizeAttrEnumOn         ArticleAutocapitalizeAttrEnum = "on"
+	ArticleAutocapitalizeAttrEnumSentences  ArticleAutocapitalizeAttrEnum = "sentences"
+	ArticleAutocapitalizeAttrEnumWords      ArticleAutocapitalizeAttrEnum = "words"
 )
 
 type ArticleAutocorrectAttrEnum string
 
 const (
 	ArticleAutocorrectAttrEnumOff ArticleAutocorrectAttrEnum = "off"
-	ArticleAutocorrectAttrEnumOn ArticleAutocorrectAttrEnum = "on"
+	ArticleAutocorrectAttrEnumOn  ArticleAutocorrectAttrEnum = "on"
 )
 
 type ArticleContenteditableAttrEnum string
 
 const (
-	ArticleContenteditableAttrEnumFalse ArticleContenteditableAttrEnum = "false"
+	ArticleContenteditableAttrEnumFalse         ArticleContenteditableAttrEnum = "false"
 	ArticleContenteditableAttrEnumPlaintextOnly ArticleContenteditableAttrEnum = "plaintext-only"
-	ArticleContenteditableAttrEnumTrue ArticleContenteditableAttrEnum = "true"
+	ArticleContenteditableAttrEnumTrue          ArticleContenteditableAttrEnum = "true"
 )
 
 type articleAttrs map[string]any
 
 func (e *ArticleElement) Autocapitalize(a ArticleAutocapitalizeAttrEnum) *ArticleElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *ArticleElement) Autocorrect(a ArticleAutocorrectAttrEnum) *ArticleElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *ArticleElement) Autofocus(b bool) *ArticleElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *ArticleElement) Class(s ...string) *ArticleElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *ArticleElement) Contenteditable(a ArticleContenteditableAttrEnum) *ArticleElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *ArticleElement) Id(s string) *ArticleElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *ArticleElement) Slot(s string) *ArticleElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

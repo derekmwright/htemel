@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SampElement struct {
 	attributes sampAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SampElement struct {
 // Spec Description: The samp element represents sample or quoted output from another program or computing system.
 func Samp(children ...htemel.Node) *SampElement {
 	node := &SampElement{
-		children: children,
+		children:   children,
 		attributes: make(sampAttrs),
 	}
 
@@ -41,64 +42,70 @@ func SampIf(condition bool, children ...htemel.Node) *SampElement {
 type SampAutocapitalizeAttrEnum string
 
 const (
-	SampAutocapitalizeAttrEnumNone SampAutocapitalizeAttrEnum = "none"
-	SampAutocapitalizeAttrEnumOff SampAutocapitalizeAttrEnum = "off"
-	SampAutocapitalizeAttrEnumOn SampAutocapitalizeAttrEnum = "on"
-	SampAutocapitalizeAttrEnumSentences SampAutocapitalizeAttrEnum = "sentences"
-	SampAutocapitalizeAttrEnumWords SampAutocapitalizeAttrEnum = "words"
+	SampAutocapitalizeAttrEnumSentences  SampAutocapitalizeAttrEnum = "sentences"
+	SampAutocapitalizeAttrEnumWords      SampAutocapitalizeAttrEnum = "words"
 	SampAutocapitalizeAttrEnumCharacters SampAutocapitalizeAttrEnum = "characters"
+	SampAutocapitalizeAttrEnumNone       SampAutocapitalizeAttrEnum = "none"
+	SampAutocapitalizeAttrEnumOff        SampAutocapitalizeAttrEnum = "off"
+	SampAutocapitalizeAttrEnumOn         SampAutocapitalizeAttrEnum = "on"
 )
 
 type SampAutocorrectAttrEnum string
 
 const (
+	SampAutocorrectAttrEnumOn  SampAutocorrectAttrEnum = "on"
 	SampAutocorrectAttrEnumOff SampAutocorrectAttrEnum = "off"
-	SampAutocorrectAttrEnumOn SampAutocorrectAttrEnum = "on"
 )
 
 type SampContenteditableAttrEnum string
 
 const (
-	SampContenteditableAttrEnumFalse SampContenteditableAttrEnum = "false"
+	SampContenteditableAttrEnumTrue          SampContenteditableAttrEnum = "true"
+	SampContenteditableAttrEnumFalse         SampContenteditableAttrEnum = "false"
 	SampContenteditableAttrEnumPlaintextOnly SampContenteditableAttrEnum = "plaintext-only"
-	SampContenteditableAttrEnumTrue SampContenteditableAttrEnum = "true"
 )
 
 type sampAttrs map[string]any
 
 func (e *SampElement) Autocapitalize(a SampAutocapitalizeAttrEnum) *SampElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SampElement) Autocorrect(a SampAutocorrectAttrEnum) *SampElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SampElement) Autofocus(b bool) *SampElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SampElement) Class(s ...string) *SampElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SampElement) Contenteditable(a SampContenteditableAttrEnum) *SampElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SampElement) Id(s string) *SampElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SampElement) Slot(s string) *SampElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

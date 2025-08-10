@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TextareaElement struct {
 	attributes textareaAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TextareaElement struct {
 // Spec Description: The textarea element represents a multiline plain text edit control for the element's raw value. The contents of the control represent the control's default value.
 func Textarea(children ...htemel.Node) *TextareaElement {
 	node := &TextareaElement{
-		children: children,
+		children:   children,
 		attributes: make(textareaAttrs),
 	}
 
@@ -41,64 +42,70 @@ func TextareaIf(condition bool, children ...htemel.Node) *TextareaElement {
 type TextareaAutocapitalizeAttrEnum string
 
 const (
+	TextareaAutocapitalizeAttrEnumOn         TextareaAutocapitalizeAttrEnum = "on"
+	TextareaAutocapitalizeAttrEnumSentences  TextareaAutocapitalizeAttrEnum = "sentences"
+	TextareaAutocapitalizeAttrEnumWords      TextareaAutocapitalizeAttrEnum = "words"
 	TextareaAutocapitalizeAttrEnumCharacters TextareaAutocapitalizeAttrEnum = "characters"
-	TextareaAutocapitalizeAttrEnumNone TextareaAutocapitalizeAttrEnum = "none"
-	TextareaAutocapitalizeAttrEnumOff TextareaAutocapitalizeAttrEnum = "off"
-	TextareaAutocapitalizeAttrEnumOn TextareaAutocapitalizeAttrEnum = "on"
-	TextareaAutocapitalizeAttrEnumSentences TextareaAutocapitalizeAttrEnum = "sentences"
-	TextareaAutocapitalizeAttrEnumWords TextareaAutocapitalizeAttrEnum = "words"
+	TextareaAutocapitalizeAttrEnumNone       TextareaAutocapitalizeAttrEnum = "none"
+	TextareaAutocapitalizeAttrEnumOff        TextareaAutocapitalizeAttrEnum = "off"
 )
 
 type TextareaAutocorrectAttrEnum string
 
 const (
 	TextareaAutocorrectAttrEnumOff TextareaAutocorrectAttrEnum = "off"
-	TextareaAutocorrectAttrEnumOn TextareaAutocorrectAttrEnum = "on"
+	TextareaAutocorrectAttrEnumOn  TextareaAutocorrectAttrEnum = "on"
 )
 
 type TextareaContenteditableAttrEnum string
 
 const (
-	TextareaContenteditableAttrEnumTrue TextareaContenteditableAttrEnum = "true"
-	TextareaContenteditableAttrEnumFalse TextareaContenteditableAttrEnum = "false"
+	TextareaContenteditableAttrEnumFalse         TextareaContenteditableAttrEnum = "false"
 	TextareaContenteditableAttrEnumPlaintextOnly TextareaContenteditableAttrEnum = "plaintext-only"
+	TextareaContenteditableAttrEnumTrue          TextareaContenteditableAttrEnum = "true"
 )
 
 type textareaAttrs map[string]any
 
 func (e *TextareaElement) Autocapitalize(a TextareaAutocapitalizeAttrEnum) *TextareaElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TextareaElement) Autocorrect(a TextareaAutocorrectAttrEnum) *TextareaElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TextareaElement) Autofocus(b bool) *TextareaElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TextareaElement) Class(s ...string) *TextareaElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TextareaElement) Contenteditable(a TextareaContenteditableAttrEnum) *TextareaElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TextareaElement) Id(s string) *TextareaElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TextareaElement) Slot(s string) *TextareaElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

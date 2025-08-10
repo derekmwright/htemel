@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DetailsElement struct {
 	attributes detailsAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DetailsElement struct {
 // Spec Description: The details element represents a disclosure widget from which the user can obtain additional information or controls.
 func Details(children ...htemel.Node) *DetailsElement {
 	node := &DetailsElement{
-		children: children,
+		children:   children,
 		attributes: make(detailsAttrs),
 	}
 
@@ -41,64 +42,70 @@ func DetailsIf(condition bool, children ...htemel.Node) *DetailsElement {
 type DetailsAutocapitalizeAttrEnum string
 
 const (
-	DetailsAutocapitalizeAttrEnumSentences DetailsAutocapitalizeAttrEnum = "sentences"
-	DetailsAutocapitalizeAttrEnumWords DetailsAutocapitalizeAttrEnum = "words"
 	DetailsAutocapitalizeAttrEnumCharacters DetailsAutocapitalizeAttrEnum = "characters"
-	DetailsAutocapitalizeAttrEnumNone DetailsAutocapitalizeAttrEnum = "none"
-	DetailsAutocapitalizeAttrEnumOff DetailsAutocapitalizeAttrEnum = "off"
-	DetailsAutocapitalizeAttrEnumOn DetailsAutocapitalizeAttrEnum = "on"
+	DetailsAutocapitalizeAttrEnumNone       DetailsAutocapitalizeAttrEnum = "none"
+	DetailsAutocapitalizeAttrEnumOff        DetailsAutocapitalizeAttrEnum = "off"
+	DetailsAutocapitalizeAttrEnumOn         DetailsAutocapitalizeAttrEnum = "on"
+	DetailsAutocapitalizeAttrEnumSentences  DetailsAutocapitalizeAttrEnum = "sentences"
+	DetailsAutocapitalizeAttrEnumWords      DetailsAutocapitalizeAttrEnum = "words"
 )
 
 type DetailsAutocorrectAttrEnum string
 
 const (
 	DetailsAutocorrectAttrEnumOff DetailsAutocorrectAttrEnum = "off"
-	DetailsAutocorrectAttrEnumOn DetailsAutocorrectAttrEnum = "on"
+	DetailsAutocorrectAttrEnumOn  DetailsAutocorrectAttrEnum = "on"
 )
 
 type DetailsContenteditableAttrEnum string
 
 const (
-	DetailsContenteditableAttrEnumFalse DetailsContenteditableAttrEnum = "false"
+	DetailsContenteditableAttrEnumFalse         DetailsContenteditableAttrEnum = "false"
 	DetailsContenteditableAttrEnumPlaintextOnly DetailsContenteditableAttrEnum = "plaintext-only"
-	DetailsContenteditableAttrEnumTrue DetailsContenteditableAttrEnum = "true"
+	DetailsContenteditableAttrEnumTrue          DetailsContenteditableAttrEnum = "true"
 )
 
 type detailsAttrs map[string]any
 
 func (e *DetailsElement) Autocapitalize(a DetailsAutocapitalizeAttrEnum) *DetailsElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DetailsElement) Autocorrect(a DetailsAutocorrectAttrEnum) *DetailsElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *DetailsElement) Autofocus(b bool) *DetailsElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *DetailsElement) Class(s ...string) *DetailsElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DetailsElement) Contenteditable(a DetailsContenteditableAttrEnum) *DetailsElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DetailsElement) Id(s string) *DetailsElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *DetailsElement) Slot(s string) *DetailsElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

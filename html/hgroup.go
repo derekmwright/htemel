@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type HgroupElement struct {
 	attributes hgroupAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type HgroupElement struct {
 // Spec Description: The hgroup element represents a heading and related content. The element may be used to group an h1–h6 element with one or more p elements containing content representing a subheading, alternative title, or tagline.
 func Hgroup(children ...htemel.Node) *HgroupElement {
 	node := &HgroupElement{
-		children: children,
+		children:   children,
 		attributes: make(hgroupAttrs),
 	}
 
@@ -41,64 +42,70 @@ func HgroupIf(condition bool, children ...htemel.Node) *HgroupElement {
 type HgroupAutocapitalizeAttrEnum string
 
 const (
-	HgroupAutocapitalizeAttrEnumOff HgroupAutocapitalizeAttrEnum = "off"
-	HgroupAutocapitalizeAttrEnumOn HgroupAutocapitalizeAttrEnum = "on"
-	HgroupAutocapitalizeAttrEnumSentences HgroupAutocapitalizeAttrEnum = "sentences"
-	HgroupAutocapitalizeAttrEnumWords HgroupAutocapitalizeAttrEnum = "words"
 	HgroupAutocapitalizeAttrEnumCharacters HgroupAutocapitalizeAttrEnum = "characters"
-	HgroupAutocapitalizeAttrEnumNone HgroupAutocapitalizeAttrEnum = "none"
+	HgroupAutocapitalizeAttrEnumNone       HgroupAutocapitalizeAttrEnum = "none"
+	HgroupAutocapitalizeAttrEnumOff        HgroupAutocapitalizeAttrEnum = "off"
+	HgroupAutocapitalizeAttrEnumOn         HgroupAutocapitalizeAttrEnum = "on"
+	HgroupAutocapitalizeAttrEnumSentences  HgroupAutocapitalizeAttrEnum = "sentences"
+	HgroupAutocapitalizeAttrEnumWords      HgroupAutocapitalizeAttrEnum = "words"
 )
 
 type HgroupAutocorrectAttrEnum string
 
 const (
-	HgroupAutocorrectAttrEnumOn HgroupAutocorrectAttrEnum = "on"
 	HgroupAutocorrectAttrEnumOff HgroupAutocorrectAttrEnum = "off"
+	HgroupAutocorrectAttrEnumOn  HgroupAutocorrectAttrEnum = "on"
 )
 
 type HgroupContenteditableAttrEnum string
 
 const (
-	HgroupContenteditableAttrEnumTrue HgroupContenteditableAttrEnum = "true"
-	HgroupContenteditableAttrEnumFalse HgroupContenteditableAttrEnum = "false"
 	HgroupContenteditableAttrEnumPlaintextOnly HgroupContenteditableAttrEnum = "plaintext-only"
+	HgroupContenteditableAttrEnumTrue          HgroupContenteditableAttrEnum = "true"
+	HgroupContenteditableAttrEnumFalse         HgroupContenteditableAttrEnum = "false"
 )
 
 type hgroupAttrs map[string]any
 
 func (e *HgroupElement) Autocapitalize(a HgroupAutocapitalizeAttrEnum) *HgroupElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *HgroupElement) Autocorrect(a HgroupAutocorrectAttrEnum) *HgroupElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *HgroupElement) Autofocus(b bool) *HgroupElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *HgroupElement) Class(s ...string) *HgroupElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *HgroupElement) Contenteditable(a HgroupContenteditableAttrEnum) *HgroupElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *HgroupElement) Id(s string) *HgroupElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *HgroupElement) Slot(s string) *HgroupElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

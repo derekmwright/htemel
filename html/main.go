@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type MainElement struct {
 	attributes mainAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type MainElement struct {
 // Spec Description: The main element represents the dominant contents of the document.
 func Main(children ...htemel.Node) *MainElement {
 	node := &MainElement{
-		children: children,
+		children:   children,
 		attributes: make(mainAttrs),
 	}
 
@@ -41,64 +42,70 @@ func MainIf(condition bool, children ...htemel.Node) *MainElement {
 type MainAutocapitalizeAttrEnum string
 
 const (
+	MainAutocapitalizeAttrEnumOff        MainAutocapitalizeAttrEnum = "off"
+	MainAutocapitalizeAttrEnumOn         MainAutocapitalizeAttrEnum = "on"
+	MainAutocapitalizeAttrEnumSentences  MainAutocapitalizeAttrEnum = "sentences"
+	MainAutocapitalizeAttrEnumWords      MainAutocapitalizeAttrEnum = "words"
 	MainAutocapitalizeAttrEnumCharacters MainAutocapitalizeAttrEnum = "characters"
-	MainAutocapitalizeAttrEnumNone MainAutocapitalizeAttrEnum = "none"
-	MainAutocapitalizeAttrEnumOff MainAutocapitalizeAttrEnum = "off"
-	MainAutocapitalizeAttrEnumOn MainAutocapitalizeAttrEnum = "on"
-	MainAutocapitalizeAttrEnumSentences MainAutocapitalizeAttrEnum = "sentences"
-	MainAutocapitalizeAttrEnumWords MainAutocapitalizeAttrEnum = "words"
+	MainAutocapitalizeAttrEnumNone       MainAutocapitalizeAttrEnum = "none"
 )
 
 type MainAutocorrectAttrEnum string
 
 const (
 	MainAutocorrectAttrEnumOff MainAutocorrectAttrEnum = "off"
-	MainAutocorrectAttrEnumOn MainAutocorrectAttrEnum = "on"
+	MainAutocorrectAttrEnumOn  MainAutocorrectAttrEnum = "on"
 )
 
 type MainContenteditableAttrEnum string
 
 const (
-	MainContenteditableAttrEnumFalse MainContenteditableAttrEnum = "false"
 	MainContenteditableAttrEnumPlaintextOnly MainContenteditableAttrEnum = "plaintext-only"
-	MainContenteditableAttrEnumTrue MainContenteditableAttrEnum = "true"
+	MainContenteditableAttrEnumTrue          MainContenteditableAttrEnum = "true"
+	MainContenteditableAttrEnumFalse         MainContenteditableAttrEnum = "false"
 )
 
 type mainAttrs map[string]any
 
 func (e *MainElement) Autocapitalize(a MainAutocapitalizeAttrEnum) *MainElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *MainElement) Autocorrect(a MainAutocorrectAttrEnum) *MainElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *MainElement) Autofocus(b bool) *MainElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *MainElement) Class(s ...string) *MainElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *MainElement) Contenteditable(a MainContenteditableAttrEnum) *MainElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *MainElement) Id(s string) *MainElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *MainElement) Slot(s string) *MainElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

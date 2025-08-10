@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type AreaElement struct {
 	attributes areaAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type AreaElement struct {
 // Spec Description: The area element represents either a hyperlink with some text and a corresponding area on an image map, or a dead area on an image map.
 func Area(children ...htemel.Node) *AreaElement {
 	node := &AreaElement{
-		children: children,
+		children:   children,
 		attributes: make(areaAttrs),
 	}
 
@@ -41,64 +42,70 @@ func AreaIf(condition bool, children ...htemel.Node) *AreaElement {
 type AreaAutocapitalizeAttrEnum string
 
 const (
-	AreaAutocapitalizeAttrEnumOff AreaAutocapitalizeAttrEnum = "off"
-	AreaAutocapitalizeAttrEnumOn AreaAutocapitalizeAttrEnum = "on"
-	AreaAutocapitalizeAttrEnumSentences AreaAutocapitalizeAttrEnum = "sentences"
-	AreaAutocapitalizeAttrEnumWords AreaAutocapitalizeAttrEnum = "words"
+	AreaAutocapitalizeAttrEnumWords      AreaAutocapitalizeAttrEnum = "words"
 	AreaAutocapitalizeAttrEnumCharacters AreaAutocapitalizeAttrEnum = "characters"
-	AreaAutocapitalizeAttrEnumNone AreaAutocapitalizeAttrEnum = "none"
+	AreaAutocapitalizeAttrEnumNone       AreaAutocapitalizeAttrEnum = "none"
+	AreaAutocapitalizeAttrEnumOff        AreaAutocapitalizeAttrEnum = "off"
+	AreaAutocapitalizeAttrEnumOn         AreaAutocapitalizeAttrEnum = "on"
+	AreaAutocapitalizeAttrEnumSentences  AreaAutocapitalizeAttrEnum = "sentences"
 )
 
 type AreaAutocorrectAttrEnum string
 
 const (
+	AreaAutocorrectAttrEnumOn  AreaAutocorrectAttrEnum = "on"
 	AreaAutocorrectAttrEnumOff AreaAutocorrectAttrEnum = "off"
-	AreaAutocorrectAttrEnumOn AreaAutocorrectAttrEnum = "on"
 )
 
 type AreaContenteditableAttrEnum string
 
 const (
-	AreaContenteditableAttrEnumFalse AreaContenteditableAttrEnum = "false"
+	AreaContenteditableAttrEnumFalse         AreaContenteditableAttrEnum = "false"
 	AreaContenteditableAttrEnumPlaintextOnly AreaContenteditableAttrEnum = "plaintext-only"
-	AreaContenteditableAttrEnumTrue AreaContenteditableAttrEnum = "true"
+	AreaContenteditableAttrEnumTrue          AreaContenteditableAttrEnum = "true"
 )
 
 type areaAttrs map[string]any
 
 func (e *AreaElement) Autocapitalize(a AreaAutocapitalizeAttrEnum) *AreaElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *AreaElement) Autocorrect(a AreaAutocorrectAttrEnum) *AreaElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *AreaElement) Autofocus(b bool) *AreaElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *AreaElement) Class(s ...string) *AreaElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *AreaElement) Contenteditable(a AreaContenteditableAttrEnum) *AreaElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *AreaElement) Id(s string) *AreaElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *AreaElement) Slot(s string) *AreaElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

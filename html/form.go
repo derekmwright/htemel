@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type FormElement struct {
 	attributes formAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type FormElement struct {
 // Spec Description: The form element represents a hyperlink that can be manipulated through a collection of form-associated elements, some of which can represent editable values that can be submitted to a server for processing.
 func Form(children ...htemel.Node) *FormElement {
 	node := &FormElement{
-		children: children,
+		children:   children,
 		attributes: make(formAttrs),
 	}
 
@@ -42,63 +43,69 @@ type FormAutocapitalizeAttrEnum string
 
 const (
 	FormAutocapitalizeAttrEnumCharacters FormAutocapitalizeAttrEnum = "characters"
-	FormAutocapitalizeAttrEnumNone FormAutocapitalizeAttrEnum = "none"
-	FormAutocapitalizeAttrEnumOff FormAutocapitalizeAttrEnum = "off"
-	FormAutocapitalizeAttrEnumOn FormAutocapitalizeAttrEnum = "on"
-	FormAutocapitalizeAttrEnumSentences FormAutocapitalizeAttrEnum = "sentences"
-	FormAutocapitalizeAttrEnumWords FormAutocapitalizeAttrEnum = "words"
+	FormAutocapitalizeAttrEnumNone       FormAutocapitalizeAttrEnum = "none"
+	FormAutocapitalizeAttrEnumOff        FormAutocapitalizeAttrEnum = "off"
+	FormAutocapitalizeAttrEnumOn         FormAutocapitalizeAttrEnum = "on"
+	FormAutocapitalizeAttrEnumSentences  FormAutocapitalizeAttrEnum = "sentences"
+	FormAutocapitalizeAttrEnumWords      FormAutocapitalizeAttrEnum = "words"
 )
 
 type FormAutocorrectAttrEnum string
 
 const (
+	FormAutocorrectAttrEnumOn  FormAutocorrectAttrEnum = "on"
 	FormAutocorrectAttrEnumOff FormAutocorrectAttrEnum = "off"
-	FormAutocorrectAttrEnumOn FormAutocorrectAttrEnum = "on"
 )
 
 type FormContenteditableAttrEnum string
 
 const (
+	FormContenteditableAttrEnumFalse         FormContenteditableAttrEnum = "false"
 	FormContenteditableAttrEnumPlaintextOnly FormContenteditableAttrEnum = "plaintext-only"
-	FormContenteditableAttrEnumTrue FormContenteditableAttrEnum = "true"
-	FormContenteditableAttrEnumFalse FormContenteditableAttrEnum = "false"
+	FormContenteditableAttrEnumTrue          FormContenteditableAttrEnum = "true"
 )
 
 type formAttrs map[string]any
 
 func (e *FormElement) Autocapitalize(a FormAutocapitalizeAttrEnum) *FormElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *FormElement) Autocorrect(a FormAutocorrectAttrEnum) *FormElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *FormElement) Autofocus(b bool) *FormElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *FormElement) Class(s ...string) *FormElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *FormElement) Contenteditable(a FormContenteditableAttrEnum) *FormElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *FormElement) Id(s string) *FormElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *FormElement) Slot(s string) *FormElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

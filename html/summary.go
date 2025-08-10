@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SummaryElement struct {
 	attributes summaryAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SummaryElement struct {
 // Spec Description: The summary element represents a summary, caption, or legend for the rest of the contents of the summary element's parent details element, if any.
 func Summary(children ...htemel.Node) *SummaryElement {
 	node := &SummaryElement{
-		children: children,
+		children:   children,
 		attributes: make(summaryAttrs),
 	}
 
@@ -41,64 +42,70 @@ func SummaryIf(condition bool, children ...htemel.Node) *SummaryElement {
 type SummaryAutocapitalizeAttrEnum string
 
 const (
-	SummaryAutocapitalizeAttrEnumNone SummaryAutocapitalizeAttrEnum = "none"
-	SummaryAutocapitalizeAttrEnumOff SummaryAutocapitalizeAttrEnum = "off"
-	SummaryAutocapitalizeAttrEnumOn SummaryAutocapitalizeAttrEnum = "on"
-	SummaryAutocapitalizeAttrEnumSentences SummaryAutocapitalizeAttrEnum = "sentences"
-	SummaryAutocapitalizeAttrEnumWords SummaryAutocapitalizeAttrEnum = "words"
 	SummaryAutocapitalizeAttrEnumCharacters SummaryAutocapitalizeAttrEnum = "characters"
+	SummaryAutocapitalizeAttrEnumNone       SummaryAutocapitalizeAttrEnum = "none"
+	SummaryAutocapitalizeAttrEnumOff        SummaryAutocapitalizeAttrEnum = "off"
+	SummaryAutocapitalizeAttrEnumOn         SummaryAutocapitalizeAttrEnum = "on"
+	SummaryAutocapitalizeAttrEnumSentences  SummaryAutocapitalizeAttrEnum = "sentences"
+	SummaryAutocapitalizeAttrEnumWords      SummaryAutocapitalizeAttrEnum = "words"
 )
 
 type SummaryAutocorrectAttrEnum string
 
 const (
 	SummaryAutocorrectAttrEnumOff SummaryAutocorrectAttrEnum = "off"
-	SummaryAutocorrectAttrEnumOn SummaryAutocorrectAttrEnum = "on"
+	SummaryAutocorrectAttrEnumOn  SummaryAutocorrectAttrEnum = "on"
 )
 
 type SummaryContenteditableAttrEnum string
 
 const (
-	SummaryContenteditableAttrEnumFalse SummaryContenteditableAttrEnum = "false"
+	SummaryContenteditableAttrEnumFalse         SummaryContenteditableAttrEnum = "false"
 	SummaryContenteditableAttrEnumPlaintextOnly SummaryContenteditableAttrEnum = "plaintext-only"
-	SummaryContenteditableAttrEnumTrue SummaryContenteditableAttrEnum = "true"
+	SummaryContenteditableAttrEnumTrue          SummaryContenteditableAttrEnum = "true"
 )
 
 type summaryAttrs map[string]any
 
 func (e *SummaryElement) Autocapitalize(a SummaryAutocapitalizeAttrEnum) *SummaryElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SummaryElement) Autocorrect(a SummaryAutocorrectAttrEnum) *SummaryElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SummaryElement) Autofocus(b bool) *SummaryElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SummaryElement) Class(s ...string) *SummaryElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SummaryElement) Contenteditable(a SummaryContenteditableAttrEnum) *SummaryElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SummaryElement) Id(s string) *SummaryElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SummaryElement) Slot(s string) *SummaryElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

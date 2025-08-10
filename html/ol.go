@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type OlElement struct {
 	attributes olAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type OlElement struct {
 // Spec Description: The ol element represents a list of items, where the items have been intentionally ordered, such that changing the order would change the meaning of the document.
 func Ol(children ...htemel.Node) *OlElement {
 	node := &OlElement{
-		children: children,
+		children:   children,
 		attributes: make(olAttrs),
 	}
 
@@ -41,64 +42,70 @@ func OlIf(condition bool, children ...htemel.Node) *OlElement {
 type OlAutocapitalizeAttrEnum string
 
 const (
-	OlAutocapitalizeAttrEnumNone OlAutocapitalizeAttrEnum = "none"
-	OlAutocapitalizeAttrEnumOff OlAutocapitalizeAttrEnum = "off"
-	OlAutocapitalizeAttrEnumOn OlAutocapitalizeAttrEnum = "on"
-	OlAutocapitalizeAttrEnumSentences OlAutocapitalizeAttrEnum = "sentences"
-	OlAutocapitalizeAttrEnumWords OlAutocapitalizeAttrEnum = "words"
 	OlAutocapitalizeAttrEnumCharacters OlAutocapitalizeAttrEnum = "characters"
+	OlAutocapitalizeAttrEnumNone       OlAutocapitalizeAttrEnum = "none"
+	OlAutocapitalizeAttrEnumOff        OlAutocapitalizeAttrEnum = "off"
+	OlAutocapitalizeAttrEnumOn         OlAutocapitalizeAttrEnum = "on"
+	OlAutocapitalizeAttrEnumSentences  OlAutocapitalizeAttrEnum = "sentences"
+	OlAutocapitalizeAttrEnumWords      OlAutocapitalizeAttrEnum = "words"
 )
 
 type OlAutocorrectAttrEnum string
 
 const (
+	OlAutocorrectAttrEnumOn  OlAutocorrectAttrEnum = "on"
 	OlAutocorrectAttrEnumOff OlAutocorrectAttrEnum = "off"
-	OlAutocorrectAttrEnumOn OlAutocorrectAttrEnum = "on"
 )
 
 type OlContenteditableAttrEnum string
 
 const (
-	OlContenteditableAttrEnumFalse OlContenteditableAttrEnum = "false"
+	OlContenteditableAttrEnumFalse         OlContenteditableAttrEnum = "false"
 	OlContenteditableAttrEnumPlaintextOnly OlContenteditableAttrEnum = "plaintext-only"
-	OlContenteditableAttrEnumTrue OlContenteditableAttrEnum = "true"
+	OlContenteditableAttrEnumTrue          OlContenteditableAttrEnum = "true"
 )
 
 type olAttrs map[string]any
 
 func (e *OlElement) Autocapitalize(a OlAutocapitalizeAttrEnum) *OlElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *OlElement) Autocorrect(a OlAutocorrectAttrEnum) *OlElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *OlElement) Autofocus(b bool) *OlElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *OlElement) Class(s ...string) *OlElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *OlElement) Contenteditable(a OlContenteditableAttrEnum) *OlElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *OlElement) Id(s string) *OlElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *OlElement) Slot(s string) *OlElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

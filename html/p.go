@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type PElement struct {
 	attributes pAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type PElement struct {
 // Spec Description: The p element represents a paragraph.
 func P(children ...htemel.Node) *PElement {
 	node := &PElement{
-		children: children,
+		children:   children,
 		attributes: make(pAttrs),
 	}
 
@@ -41,64 +42,70 @@ func PIf(condition bool, children ...htemel.Node) *PElement {
 type PAutocapitalizeAttrEnum string
 
 const (
-	PAutocapitalizeAttrEnumSentences PAutocapitalizeAttrEnum = "sentences"
-	PAutocapitalizeAttrEnumWords PAutocapitalizeAttrEnum = "words"
+	PAutocapitalizeAttrEnumSentences  PAutocapitalizeAttrEnum = "sentences"
+	PAutocapitalizeAttrEnumWords      PAutocapitalizeAttrEnum = "words"
 	PAutocapitalizeAttrEnumCharacters PAutocapitalizeAttrEnum = "characters"
-	PAutocapitalizeAttrEnumNone PAutocapitalizeAttrEnum = "none"
-	PAutocapitalizeAttrEnumOff PAutocapitalizeAttrEnum = "off"
-	PAutocapitalizeAttrEnumOn PAutocapitalizeAttrEnum = "on"
+	PAutocapitalizeAttrEnumNone       PAutocapitalizeAttrEnum = "none"
+	PAutocapitalizeAttrEnumOff        PAutocapitalizeAttrEnum = "off"
+	PAutocapitalizeAttrEnumOn         PAutocapitalizeAttrEnum = "on"
 )
 
 type PAutocorrectAttrEnum string
 
 const (
 	PAutocorrectAttrEnumOff PAutocorrectAttrEnum = "off"
-	PAutocorrectAttrEnumOn PAutocorrectAttrEnum = "on"
+	PAutocorrectAttrEnumOn  PAutocorrectAttrEnum = "on"
 )
 
 type PContenteditableAttrEnum string
 
 const (
+	PContenteditableAttrEnumFalse         PContenteditableAttrEnum = "false"
 	PContenteditableAttrEnumPlaintextOnly PContenteditableAttrEnum = "plaintext-only"
-	PContenteditableAttrEnumTrue PContenteditableAttrEnum = "true"
-	PContenteditableAttrEnumFalse PContenteditableAttrEnum = "false"
+	PContenteditableAttrEnumTrue          PContenteditableAttrEnum = "true"
 )
 
 type pAttrs map[string]any
 
 func (e *PElement) Autocapitalize(a PAutocapitalizeAttrEnum) *PElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *PElement) Autocorrect(a PAutocorrectAttrEnum) *PElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *PElement) Autofocus(b bool) *PElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *PElement) Class(s ...string) *PElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *PElement) Contenteditable(a PContenteditableAttrEnum) *PElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *PElement) Id(s string) *PElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *PElement) Slot(s string) *PElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type AElement struct {
 	attributes aAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type AElement struct {
 // Spec Description: If the a element has an href attribute, then it represents a hyperlink (a hypertext anchor) labeled by its contents.
 func A(children ...htemel.Node) *AElement {
 	node := &AElement{
-		children: children,
+		children:   children,
 		attributes: make(aAttrs),
 	}
 
@@ -41,64 +42,70 @@ func AIf(condition bool, children ...htemel.Node) *AElement {
 type AAutocapitalizeAttrEnum string
 
 const (
-	AAutocapitalizeAttrEnumWords AAutocapitalizeAttrEnum = "words"
 	AAutocapitalizeAttrEnumCharacters AAutocapitalizeAttrEnum = "characters"
-	AAutocapitalizeAttrEnumNone AAutocapitalizeAttrEnum = "none"
-	AAutocapitalizeAttrEnumOff AAutocapitalizeAttrEnum = "off"
-	AAutocapitalizeAttrEnumOn AAutocapitalizeAttrEnum = "on"
-	AAutocapitalizeAttrEnumSentences AAutocapitalizeAttrEnum = "sentences"
+	AAutocapitalizeAttrEnumNone       AAutocapitalizeAttrEnum = "none"
+	AAutocapitalizeAttrEnumOff        AAutocapitalizeAttrEnum = "off"
+	AAutocapitalizeAttrEnumOn         AAutocapitalizeAttrEnum = "on"
+	AAutocapitalizeAttrEnumSentences  AAutocapitalizeAttrEnum = "sentences"
+	AAutocapitalizeAttrEnumWords      AAutocapitalizeAttrEnum = "words"
 )
 
 type AAutocorrectAttrEnum string
 
 const (
 	AAutocorrectAttrEnumOff AAutocorrectAttrEnum = "off"
-	AAutocorrectAttrEnumOn AAutocorrectAttrEnum = "on"
+	AAutocorrectAttrEnumOn  AAutocorrectAttrEnum = "on"
 )
 
 type AContenteditableAttrEnum string
 
 const (
-	AContenteditableAttrEnumTrue AContenteditableAttrEnum = "true"
-	AContenteditableAttrEnumFalse AContenteditableAttrEnum = "false"
 	AContenteditableAttrEnumPlaintextOnly AContenteditableAttrEnum = "plaintext-only"
+	AContenteditableAttrEnumTrue          AContenteditableAttrEnum = "true"
+	AContenteditableAttrEnumFalse         AContenteditableAttrEnum = "false"
 )
 
 type aAttrs map[string]any
 
 func (e *AElement) Autocapitalize(a AAutocapitalizeAttrEnum) *AElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *AElement) Autocorrect(a AAutocorrectAttrEnum) *AElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *AElement) Autofocus(b bool) *AElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *AElement) Class(s ...string) *AElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *AElement) Contenteditable(a AContenteditableAttrEnum) *AElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *AElement) Id(s string) *AElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *AElement) Slot(s string) *AElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

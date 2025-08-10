@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type BrElement struct {
 	attributes brAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type BrElement struct {
 // Spec Description: The br element represents a line break.
 func Br(children ...htemel.Node) *BrElement {
 	node := &BrElement{
-		children: children,
+		children:   children,
 		attributes: make(brAttrs),
 	}
 
@@ -41,64 +42,70 @@ func BrIf(condition bool, children ...htemel.Node) *BrElement {
 type BrAutocapitalizeAttrEnum string
 
 const (
-	BrAutocapitalizeAttrEnumOff BrAutocapitalizeAttrEnum = "off"
-	BrAutocapitalizeAttrEnumOn BrAutocapitalizeAttrEnum = "on"
-	BrAutocapitalizeAttrEnumSentences BrAutocapitalizeAttrEnum = "sentences"
-	BrAutocapitalizeAttrEnumWords BrAutocapitalizeAttrEnum = "words"
 	BrAutocapitalizeAttrEnumCharacters BrAutocapitalizeAttrEnum = "characters"
-	BrAutocapitalizeAttrEnumNone BrAutocapitalizeAttrEnum = "none"
+	BrAutocapitalizeAttrEnumNone       BrAutocapitalizeAttrEnum = "none"
+	BrAutocapitalizeAttrEnumOff        BrAutocapitalizeAttrEnum = "off"
+	BrAutocapitalizeAttrEnumOn         BrAutocapitalizeAttrEnum = "on"
+	BrAutocapitalizeAttrEnumSentences  BrAutocapitalizeAttrEnum = "sentences"
+	BrAutocapitalizeAttrEnumWords      BrAutocapitalizeAttrEnum = "words"
 )
 
 type BrAutocorrectAttrEnum string
 
 const (
 	BrAutocorrectAttrEnumOff BrAutocorrectAttrEnum = "off"
-	BrAutocorrectAttrEnumOn BrAutocorrectAttrEnum = "on"
+	BrAutocorrectAttrEnumOn  BrAutocorrectAttrEnum = "on"
 )
 
 type BrContenteditableAttrEnum string
 
 const (
-	BrContenteditableAttrEnumFalse BrContenteditableAttrEnum = "false"
+	BrContenteditableAttrEnumTrue          BrContenteditableAttrEnum = "true"
+	BrContenteditableAttrEnumFalse         BrContenteditableAttrEnum = "false"
 	BrContenteditableAttrEnumPlaintextOnly BrContenteditableAttrEnum = "plaintext-only"
-	BrContenteditableAttrEnumTrue BrContenteditableAttrEnum = "true"
 )
 
 type brAttrs map[string]any
 
 func (e *BrElement) Autocapitalize(a BrAutocapitalizeAttrEnum) *BrElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *BrElement) Autocorrect(a BrAutocorrectAttrEnum) *BrElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *BrElement) Autofocus(b bool) *BrElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *BrElement) Class(s ...string) *BrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *BrElement) Contenteditable(a BrContenteditableAttrEnum) *BrElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *BrElement) Id(s string) *BrElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *BrElement) Slot(s string) *BrElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

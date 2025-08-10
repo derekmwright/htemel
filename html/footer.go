@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type FooterElement struct {
 	attributes footerAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type FooterElement struct {
 // Spec Description: The footer element represents a footer for its nearest ancestor sectioning content element, or for the body element if there is no such ancestor. A footer typically contains information about its section such as who wrote it, links to related documents, copyright data, and the like.
 func Footer(children ...htemel.Node) *FooterElement {
 	node := &FooterElement{
-		children: children,
+		children:   children,
 		attributes: make(footerAttrs),
 	}
 
@@ -41,64 +42,70 @@ func FooterIf(condition bool, children ...htemel.Node) *FooterElement {
 type FooterAutocapitalizeAttrEnum string
 
 const (
+	FooterAutocapitalizeAttrEnumNone       FooterAutocapitalizeAttrEnum = "none"
+	FooterAutocapitalizeAttrEnumOff        FooterAutocapitalizeAttrEnum = "off"
+	FooterAutocapitalizeAttrEnumOn         FooterAutocapitalizeAttrEnum = "on"
+	FooterAutocapitalizeAttrEnumSentences  FooterAutocapitalizeAttrEnum = "sentences"
+	FooterAutocapitalizeAttrEnumWords      FooterAutocapitalizeAttrEnum = "words"
 	FooterAutocapitalizeAttrEnumCharacters FooterAutocapitalizeAttrEnum = "characters"
-	FooterAutocapitalizeAttrEnumNone FooterAutocapitalizeAttrEnum = "none"
-	FooterAutocapitalizeAttrEnumOff FooterAutocapitalizeAttrEnum = "off"
-	FooterAutocapitalizeAttrEnumOn FooterAutocapitalizeAttrEnum = "on"
-	FooterAutocapitalizeAttrEnumSentences FooterAutocapitalizeAttrEnum = "sentences"
-	FooterAutocapitalizeAttrEnumWords FooterAutocapitalizeAttrEnum = "words"
 )
 
 type FooterAutocorrectAttrEnum string
 
 const (
 	FooterAutocorrectAttrEnumOff FooterAutocorrectAttrEnum = "off"
-	FooterAutocorrectAttrEnumOn FooterAutocorrectAttrEnum = "on"
+	FooterAutocorrectAttrEnumOn  FooterAutocorrectAttrEnum = "on"
 )
 
 type FooterContenteditableAttrEnum string
 
 const (
-	FooterContenteditableAttrEnumFalse FooterContenteditableAttrEnum = "false"
 	FooterContenteditableAttrEnumPlaintextOnly FooterContenteditableAttrEnum = "plaintext-only"
-	FooterContenteditableAttrEnumTrue FooterContenteditableAttrEnum = "true"
+	FooterContenteditableAttrEnumTrue          FooterContenteditableAttrEnum = "true"
+	FooterContenteditableAttrEnumFalse         FooterContenteditableAttrEnum = "false"
 )
 
 type footerAttrs map[string]any
 
 func (e *FooterElement) Autocapitalize(a FooterAutocapitalizeAttrEnum) *FooterElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *FooterElement) Autocorrect(a FooterAutocorrectAttrEnum) *FooterElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *FooterElement) Autofocus(b bool) *FooterElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *FooterElement) Class(s ...string) *FooterElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *FooterElement) Contenteditable(a FooterContenteditableAttrEnum) *FooterElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *FooterElement) Id(s string) *FooterElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *FooterElement) Slot(s string) *FooterElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

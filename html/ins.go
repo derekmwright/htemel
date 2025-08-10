@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type InsElement struct {
 	attributes insAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type InsElement struct {
 // Spec Description: The ins element represents an addition to the document.
 func Ins(children ...htemel.Node) *InsElement {
 	node := &InsElement{
-		children: children,
+		children:   children,
 		attributes: make(insAttrs),
 	}
 
@@ -41,64 +42,70 @@ func InsIf(condition bool, children ...htemel.Node) *InsElement {
 type InsAutocapitalizeAttrEnum string
 
 const (
-	InsAutocapitalizeAttrEnumNone InsAutocapitalizeAttrEnum = "none"
-	InsAutocapitalizeAttrEnumOff InsAutocapitalizeAttrEnum = "off"
-	InsAutocapitalizeAttrEnumOn InsAutocapitalizeAttrEnum = "on"
-	InsAutocapitalizeAttrEnumSentences InsAutocapitalizeAttrEnum = "sentences"
-	InsAutocapitalizeAttrEnumWords InsAutocapitalizeAttrEnum = "words"
+	InsAutocapitalizeAttrEnumWords      InsAutocapitalizeAttrEnum = "words"
 	InsAutocapitalizeAttrEnumCharacters InsAutocapitalizeAttrEnum = "characters"
+	InsAutocapitalizeAttrEnumNone       InsAutocapitalizeAttrEnum = "none"
+	InsAutocapitalizeAttrEnumOff        InsAutocapitalizeAttrEnum = "off"
+	InsAutocapitalizeAttrEnumOn         InsAutocapitalizeAttrEnum = "on"
+	InsAutocapitalizeAttrEnumSentences  InsAutocapitalizeAttrEnum = "sentences"
 )
 
 type InsAutocorrectAttrEnum string
 
 const (
-	InsAutocorrectAttrEnumOn InsAutocorrectAttrEnum = "on"
+	InsAutocorrectAttrEnumOn  InsAutocorrectAttrEnum = "on"
 	InsAutocorrectAttrEnumOff InsAutocorrectAttrEnum = "off"
 )
 
 type InsContenteditableAttrEnum string
 
 const (
-	InsContenteditableAttrEnumTrue InsContenteditableAttrEnum = "true"
-	InsContenteditableAttrEnumFalse InsContenteditableAttrEnum = "false"
+	InsContenteditableAttrEnumFalse         InsContenteditableAttrEnum = "false"
 	InsContenteditableAttrEnumPlaintextOnly InsContenteditableAttrEnum = "plaintext-only"
+	InsContenteditableAttrEnumTrue          InsContenteditableAttrEnum = "true"
 )
 
 type insAttrs map[string]any
 
 func (e *InsElement) Autocapitalize(a InsAutocapitalizeAttrEnum) *InsElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *InsElement) Autocorrect(a InsAutocorrectAttrEnum) *InsElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *InsElement) Autofocus(b bool) *InsElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *InsElement) Class(s ...string) *InsElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *InsElement) Contenteditable(a InsContenteditableAttrEnum) *InsElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *InsElement) Id(s string) *InsElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *InsElement) Slot(s string) *InsElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

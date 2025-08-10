@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type LiElement struct {
 	attributes liAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type LiElement struct {
 // Spec Description: The li element represents a list item. If its parent element is an ol, ul, or menu element, then the element is an item of the parent element's list, as defined for those elements. Otherwise, the list item has no defined list-related relationship to any other li element.
 func Li(children ...htemel.Node) *LiElement {
 	node := &LiElement{
-		children: children,
+		children:   children,
 		attributes: make(liAttrs),
 	}
 
@@ -41,64 +42,70 @@ func LiIf(condition bool, children ...htemel.Node) *LiElement {
 type LiAutocapitalizeAttrEnum string
 
 const (
+	LiAutocapitalizeAttrEnumOn         LiAutocapitalizeAttrEnum = "on"
+	LiAutocapitalizeAttrEnumSentences  LiAutocapitalizeAttrEnum = "sentences"
+	LiAutocapitalizeAttrEnumWords      LiAutocapitalizeAttrEnum = "words"
 	LiAutocapitalizeAttrEnumCharacters LiAutocapitalizeAttrEnum = "characters"
-	LiAutocapitalizeAttrEnumNone LiAutocapitalizeAttrEnum = "none"
-	LiAutocapitalizeAttrEnumOff LiAutocapitalizeAttrEnum = "off"
-	LiAutocapitalizeAttrEnumOn LiAutocapitalizeAttrEnum = "on"
-	LiAutocapitalizeAttrEnumSentences LiAutocapitalizeAttrEnum = "sentences"
-	LiAutocapitalizeAttrEnumWords LiAutocapitalizeAttrEnum = "words"
+	LiAutocapitalizeAttrEnumNone       LiAutocapitalizeAttrEnum = "none"
+	LiAutocapitalizeAttrEnumOff        LiAutocapitalizeAttrEnum = "off"
 )
 
 type LiAutocorrectAttrEnum string
 
 const (
+	LiAutocorrectAttrEnumOn  LiAutocorrectAttrEnum = "on"
 	LiAutocorrectAttrEnumOff LiAutocorrectAttrEnum = "off"
-	LiAutocorrectAttrEnumOn LiAutocorrectAttrEnum = "on"
 )
 
 type LiContenteditableAttrEnum string
 
 const (
+	LiContenteditableAttrEnumFalse         LiContenteditableAttrEnum = "false"
 	LiContenteditableAttrEnumPlaintextOnly LiContenteditableAttrEnum = "plaintext-only"
-	LiContenteditableAttrEnumTrue LiContenteditableAttrEnum = "true"
-	LiContenteditableAttrEnumFalse LiContenteditableAttrEnum = "false"
+	LiContenteditableAttrEnumTrue          LiContenteditableAttrEnum = "true"
 )
 
 type liAttrs map[string]any
 
 func (e *LiElement) Autocapitalize(a LiAutocapitalizeAttrEnum) *LiElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *LiElement) Autocorrect(a LiAutocorrectAttrEnum) *LiElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *LiElement) Autofocus(b bool) *LiElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *LiElement) Class(s ...string) *LiElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *LiElement) Contenteditable(a LiContenteditableAttrEnum) *LiElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *LiElement) Id(s string) *LiElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *LiElement) Slot(s string) *LiElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

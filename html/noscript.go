@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type NoscriptElement struct {
 	attributes noscriptAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type NoscriptElement struct {
 // Spec Description: The noscript element represents nothing if scripting is enabled, and represents its children if scripting is disabled. It is used to present different markup to user agents that support scripting and those that don't support scripting, by affecting how the document is parsed.
 func Noscript(children ...htemel.Node) *NoscriptElement {
 	node := &NoscriptElement{
-		children: children,
+		children:   children,
 		attributes: make(noscriptAttrs),
 	}
 
@@ -41,64 +42,70 @@ func NoscriptIf(condition bool, children ...htemel.Node) *NoscriptElement {
 type NoscriptAutocapitalizeAttrEnum string
 
 const (
+	NoscriptAutocapitalizeAttrEnumSentences  NoscriptAutocapitalizeAttrEnum = "sentences"
+	NoscriptAutocapitalizeAttrEnumWords      NoscriptAutocapitalizeAttrEnum = "words"
 	NoscriptAutocapitalizeAttrEnumCharacters NoscriptAutocapitalizeAttrEnum = "characters"
-	NoscriptAutocapitalizeAttrEnumNone NoscriptAutocapitalizeAttrEnum = "none"
-	NoscriptAutocapitalizeAttrEnumOff NoscriptAutocapitalizeAttrEnum = "off"
-	NoscriptAutocapitalizeAttrEnumOn NoscriptAutocapitalizeAttrEnum = "on"
-	NoscriptAutocapitalizeAttrEnumSentences NoscriptAutocapitalizeAttrEnum = "sentences"
-	NoscriptAutocapitalizeAttrEnumWords NoscriptAutocapitalizeAttrEnum = "words"
+	NoscriptAutocapitalizeAttrEnumNone       NoscriptAutocapitalizeAttrEnum = "none"
+	NoscriptAutocapitalizeAttrEnumOff        NoscriptAutocapitalizeAttrEnum = "off"
+	NoscriptAutocapitalizeAttrEnumOn         NoscriptAutocapitalizeAttrEnum = "on"
 )
 
 type NoscriptAutocorrectAttrEnum string
 
 const (
 	NoscriptAutocorrectAttrEnumOff NoscriptAutocorrectAttrEnum = "off"
-	NoscriptAutocorrectAttrEnumOn NoscriptAutocorrectAttrEnum = "on"
+	NoscriptAutocorrectAttrEnumOn  NoscriptAutocorrectAttrEnum = "on"
 )
 
 type NoscriptContenteditableAttrEnum string
 
 const (
-	NoscriptContenteditableAttrEnumFalse NoscriptContenteditableAttrEnum = "false"
+	NoscriptContenteditableAttrEnumFalse         NoscriptContenteditableAttrEnum = "false"
 	NoscriptContenteditableAttrEnumPlaintextOnly NoscriptContenteditableAttrEnum = "plaintext-only"
-	NoscriptContenteditableAttrEnumTrue NoscriptContenteditableAttrEnum = "true"
+	NoscriptContenteditableAttrEnumTrue          NoscriptContenteditableAttrEnum = "true"
 )
 
 type noscriptAttrs map[string]any
 
 func (e *NoscriptElement) Autocapitalize(a NoscriptAutocapitalizeAttrEnum) *NoscriptElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *NoscriptElement) Autocorrect(a NoscriptAutocorrectAttrEnum) *NoscriptElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *NoscriptElement) Autofocus(b bool) *NoscriptElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *NoscriptElement) Class(s ...string) *NoscriptElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *NoscriptElement) Contenteditable(a NoscriptContenteditableAttrEnum) *NoscriptElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *NoscriptElement) Id(s string) *NoscriptElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *NoscriptElement) Slot(s string) *NoscriptElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

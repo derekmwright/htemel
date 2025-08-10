@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SlotElement struct {
 	attributes slotAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SlotElement struct {
 // Spec Description: The slot element defines a slot. It is typically used in a shadow tree. A slot element represents its assigned nodes, if any, and its contents otherwise.
 func Slot(children ...htemel.Node) *SlotElement {
 	node := &SlotElement{
-		children: children,
+		children:   children,
 		attributes: make(slotAttrs),
 	}
 
@@ -41,64 +42,70 @@ func SlotIf(condition bool, children ...htemel.Node) *SlotElement {
 type SlotAutocapitalizeAttrEnum string
 
 const (
-	SlotAutocapitalizeAttrEnumSentences SlotAutocapitalizeAttrEnum = "sentences"
-	SlotAutocapitalizeAttrEnumWords SlotAutocapitalizeAttrEnum = "words"
+	SlotAutocapitalizeAttrEnumSentences  SlotAutocapitalizeAttrEnum = "sentences"
+	SlotAutocapitalizeAttrEnumWords      SlotAutocapitalizeAttrEnum = "words"
 	SlotAutocapitalizeAttrEnumCharacters SlotAutocapitalizeAttrEnum = "characters"
-	SlotAutocapitalizeAttrEnumNone SlotAutocapitalizeAttrEnum = "none"
-	SlotAutocapitalizeAttrEnumOff SlotAutocapitalizeAttrEnum = "off"
-	SlotAutocapitalizeAttrEnumOn SlotAutocapitalizeAttrEnum = "on"
+	SlotAutocapitalizeAttrEnumNone       SlotAutocapitalizeAttrEnum = "none"
+	SlotAutocapitalizeAttrEnumOff        SlotAutocapitalizeAttrEnum = "off"
+	SlotAutocapitalizeAttrEnumOn         SlotAutocapitalizeAttrEnum = "on"
 )
 
 type SlotAutocorrectAttrEnum string
 
 const (
 	SlotAutocorrectAttrEnumOff SlotAutocorrectAttrEnum = "off"
-	SlotAutocorrectAttrEnumOn SlotAutocorrectAttrEnum = "on"
+	SlotAutocorrectAttrEnumOn  SlotAutocorrectAttrEnum = "on"
 )
 
 type SlotContenteditableAttrEnum string
 
 const (
-	SlotContenteditableAttrEnumFalse SlotContenteditableAttrEnum = "false"
+	SlotContenteditableAttrEnumFalse         SlotContenteditableAttrEnum = "false"
 	SlotContenteditableAttrEnumPlaintextOnly SlotContenteditableAttrEnum = "plaintext-only"
-	SlotContenteditableAttrEnumTrue SlotContenteditableAttrEnum = "true"
+	SlotContenteditableAttrEnumTrue          SlotContenteditableAttrEnum = "true"
 )
 
 type slotAttrs map[string]any
 
 func (e *SlotElement) Autocapitalize(a SlotAutocapitalizeAttrEnum) *SlotElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SlotElement) Autocorrect(a SlotAutocorrectAttrEnum) *SlotElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SlotElement) Autofocus(b bool) *SlotElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SlotElement) Class(s ...string) *SlotElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SlotElement) Contenteditable(a SlotContenteditableAttrEnum) *SlotElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SlotElement) Id(s string) *SlotElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SlotElement) Slot(s string) *SlotElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

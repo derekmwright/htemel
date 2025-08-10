@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TbodyElement struct {
 	attributes tbodyAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TbodyElement struct {
 // Spec Description: The tbody element represents a block of rows that consist of a body of data for the parent table element, if the tbody element has a parent and it is a table.
 func Tbody(children ...htemel.Node) *TbodyElement {
 	node := &TbodyElement{
-		children: children,
+		children:   children,
 		attributes: make(tbodyAttrs),
 	}
 
@@ -41,64 +42,70 @@ func TbodyIf(condition bool, children ...htemel.Node) *TbodyElement {
 type TbodyAutocapitalizeAttrEnum string
 
 const (
-	TbodyAutocapitalizeAttrEnumWords TbodyAutocapitalizeAttrEnum = "words"
 	TbodyAutocapitalizeAttrEnumCharacters TbodyAutocapitalizeAttrEnum = "characters"
-	TbodyAutocapitalizeAttrEnumNone TbodyAutocapitalizeAttrEnum = "none"
-	TbodyAutocapitalizeAttrEnumOff TbodyAutocapitalizeAttrEnum = "off"
-	TbodyAutocapitalizeAttrEnumOn TbodyAutocapitalizeAttrEnum = "on"
-	TbodyAutocapitalizeAttrEnumSentences TbodyAutocapitalizeAttrEnum = "sentences"
+	TbodyAutocapitalizeAttrEnumNone       TbodyAutocapitalizeAttrEnum = "none"
+	TbodyAutocapitalizeAttrEnumOff        TbodyAutocapitalizeAttrEnum = "off"
+	TbodyAutocapitalizeAttrEnumOn         TbodyAutocapitalizeAttrEnum = "on"
+	TbodyAutocapitalizeAttrEnumSentences  TbodyAutocapitalizeAttrEnum = "sentences"
+	TbodyAutocapitalizeAttrEnumWords      TbodyAutocapitalizeAttrEnum = "words"
 )
 
 type TbodyAutocorrectAttrEnum string
 
 const (
 	TbodyAutocorrectAttrEnumOff TbodyAutocorrectAttrEnum = "off"
-	TbodyAutocorrectAttrEnumOn TbodyAutocorrectAttrEnum = "on"
+	TbodyAutocorrectAttrEnumOn  TbodyAutocorrectAttrEnum = "on"
 )
 
 type TbodyContenteditableAttrEnum string
 
 const (
-	TbodyContenteditableAttrEnumFalse TbodyContenteditableAttrEnum = "false"
+	TbodyContenteditableAttrEnumFalse         TbodyContenteditableAttrEnum = "false"
 	TbodyContenteditableAttrEnumPlaintextOnly TbodyContenteditableAttrEnum = "plaintext-only"
-	TbodyContenteditableAttrEnumTrue TbodyContenteditableAttrEnum = "true"
+	TbodyContenteditableAttrEnumTrue          TbodyContenteditableAttrEnum = "true"
 )
 
 type tbodyAttrs map[string]any
 
 func (e *TbodyElement) Autocapitalize(a TbodyAutocapitalizeAttrEnum) *TbodyElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TbodyElement) Autocorrect(a TbodyAutocorrectAttrEnum) *TbodyElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TbodyElement) Autofocus(b bool) *TbodyElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TbodyElement) Class(s ...string) *TbodyElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TbodyElement) Contenteditable(a TbodyContenteditableAttrEnum) *TbodyElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TbodyElement) Id(s string) *TbodyElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TbodyElement) Slot(s string) *TbodyElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

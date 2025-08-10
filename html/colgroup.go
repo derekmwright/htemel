@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ColgroupElement struct {
 	attributes colgroupAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type ColgroupElement struct {
 // Spec Description: The colgroup element represents a group of one or more columns in the table that is its parent, if it has a parent and that is a table element.
 func Colgroup(children ...htemel.Node) *ColgroupElement {
 	node := &ColgroupElement{
-		children: children,
+		children:   children,
 		attributes: make(colgroupAttrs),
 	}
 
@@ -41,64 +42,70 @@ func ColgroupIf(condition bool, children ...htemel.Node) *ColgroupElement {
 type ColgroupAutocapitalizeAttrEnum string
 
 const (
-	ColgroupAutocapitalizeAttrEnumOff ColgroupAutocapitalizeAttrEnum = "off"
-	ColgroupAutocapitalizeAttrEnumOn ColgroupAutocapitalizeAttrEnum = "on"
-	ColgroupAutocapitalizeAttrEnumSentences ColgroupAutocapitalizeAttrEnum = "sentences"
-	ColgroupAutocapitalizeAttrEnumWords ColgroupAutocapitalizeAttrEnum = "words"
 	ColgroupAutocapitalizeAttrEnumCharacters ColgroupAutocapitalizeAttrEnum = "characters"
-	ColgroupAutocapitalizeAttrEnumNone ColgroupAutocapitalizeAttrEnum = "none"
+	ColgroupAutocapitalizeAttrEnumNone       ColgroupAutocapitalizeAttrEnum = "none"
+	ColgroupAutocapitalizeAttrEnumOff        ColgroupAutocapitalizeAttrEnum = "off"
+	ColgroupAutocapitalizeAttrEnumOn         ColgroupAutocapitalizeAttrEnum = "on"
+	ColgroupAutocapitalizeAttrEnumSentences  ColgroupAutocapitalizeAttrEnum = "sentences"
+	ColgroupAutocapitalizeAttrEnumWords      ColgroupAutocapitalizeAttrEnum = "words"
 )
 
 type ColgroupAutocorrectAttrEnum string
 
 const (
 	ColgroupAutocorrectAttrEnumOff ColgroupAutocorrectAttrEnum = "off"
-	ColgroupAutocorrectAttrEnumOn ColgroupAutocorrectAttrEnum = "on"
+	ColgroupAutocorrectAttrEnumOn  ColgroupAutocorrectAttrEnum = "on"
 )
 
 type ColgroupContenteditableAttrEnum string
 
 const (
-	ColgroupContenteditableAttrEnumFalse ColgroupContenteditableAttrEnum = "false"
+	ColgroupContenteditableAttrEnumFalse         ColgroupContenteditableAttrEnum = "false"
 	ColgroupContenteditableAttrEnumPlaintextOnly ColgroupContenteditableAttrEnum = "plaintext-only"
-	ColgroupContenteditableAttrEnumTrue ColgroupContenteditableAttrEnum = "true"
+	ColgroupContenteditableAttrEnumTrue          ColgroupContenteditableAttrEnum = "true"
 )
 
 type colgroupAttrs map[string]any
 
 func (e *ColgroupElement) Autocapitalize(a ColgroupAutocapitalizeAttrEnum) *ColgroupElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *ColgroupElement) Autocorrect(a ColgroupAutocorrectAttrEnum) *ColgroupElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *ColgroupElement) Autofocus(b bool) *ColgroupElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *ColgroupElement) Class(s ...string) *ColgroupElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *ColgroupElement) Contenteditable(a ColgroupContenteditableAttrEnum) *ColgroupElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *ColgroupElement) Id(s string) *ColgroupElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *ColgroupElement) Slot(s string) *ColgroupElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

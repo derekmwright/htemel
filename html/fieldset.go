@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type FieldsetElement struct {
 	attributes fieldsetAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type FieldsetElement struct {
 // Spec Description: The fieldset element represents a set of form controls (or other content) grouped together, optionally with a caption. The caption is given by the first legend element that is a child of the fieldset element, if any. The remainder of the descendants form the group.
 func Fieldset(children ...htemel.Node) *FieldsetElement {
 	node := &FieldsetElement{
-		children: children,
+		children:   children,
 		attributes: make(fieldsetAttrs),
 	}
 
@@ -41,64 +42,70 @@ func FieldsetIf(condition bool, children ...htemel.Node) *FieldsetElement {
 type FieldsetAutocapitalizeAttrEnum string
 
 const (
-	FieldsetAutocapitalizeAttrEnumWords FieldsetAutocapitalizeAttrEnum = "words"
+	FieldsetAutocapitalizeAttrEnumSentences  FieldsetAutocapitalizeAttrEnum = "sentences"
+	FieldsetAutocapitalizeAttrEnumWords      FieldsetAutocapitalizeAttrEnum = "words"
 	FieldsetAutocapitalizeAttrEnumCharacters FieldsetAutocapitalizeAttrEnum = "characters"
-	FieldsetAutocapitalizeAttrEnumNone FieldsetAutocapitalizeAttrEnum = "none"
-	FieldsetAutocapitalizeAttrEnumOff FieldsetAutocapitalizeAttrEnum = "off"
-	FieldsetAutocapitalizeAttrEnumOn FieldsetAutocapitalizeAttrEnum = "on"
-	FieldsetAutocapitalizeAttrEnumSentences FieldsetAutocapitalizeAttrEnum = "sentences"
+	FieldsetAutocapitalizeAttrEnumNone       FieldsetAutocapitalizeAttrEnum = "none"
+	FieldsetAutocapitalizeAttrEnumOff        FieldsetAutocapitalizeAttrEnum = "off"
+	FieldsetAutocapitalizeAttrEnumOn         FieldsetAutocapitalizeAttrEnum = "on"
 )
 
 type FieldsetAutocorrectAttrEnum string
 
 const (
 	FieldsetAutocorrectAttrEnumOff FieldsetAutocorrectAttrEnum = "off"
-	FieldsetAutocorrectAttrEnumOn FieldsetAutocorrectAttrEnum = "on"
+	FieldsetAutocorrectAttrEnumOn  FieldsetAutocorrectAttrEnum = "on"
 )
 
 type FieldsetContenteditableAttrEnum string
 
 const (
-	FieldsetContenteditableAttrEnumFalse FieldsetContenteditableAttrEnum = "false"
+	FieldsetContenteditableAttrEnumTrue          FieldsetContenteditableAttrEnum = "true"
+	FieldsetContenteditableAttrEnumFalse         FieldsetContenteditableAttrEnum = "false"
 	FieldsetContenteditableAttrEnumPlaintextOnly FieldsetContenteditableAttrEnum = "plaintext-only"
-	FieldsetContenteditableAttrEnumTrue FieldsetContenteditableAttrEnum = "true"
 )
 
 type fieldsetAttrs map[string]any
 
 func (e *FieldsetElement) Autocapitalize(a FieldsetAutocapitalizeAttrEnum) *FieldsetElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *FieldsetElement) Autocorrect(a FieldsetAutocorrectAttrEnum) *FieldsetElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *FieldsetElement) Autofocus(b bool) *FieldsetElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *FieldsetElement) Class(s ...string) *FieldsetElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *FieldsetElement) Contenteditable(a FieldsetContenteditableAttrEnum) *FieldsetElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *FieldsetElement) Id(s string) *FieldsetElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *FieldsetElement) Slot(s string) *FieldsetElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

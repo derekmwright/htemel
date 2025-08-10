@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type OptgroupElement struct {
 	attributes optgroupAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type OptgroupElement struct {
 // Spec Description: The optgroup element represents a group of option elements with a common label.
 func Optgroup(children ...htemel.Node) *OptgroupElement {
 	node := &OptgroupElement{
-		children: children,
+		children:   children,
 		attributes: make(optgroupAttrs),
 	}
 
@@ -41,64 +42,70 @@ func OptgroupIf(condition bool, children ...htemel.Node) *OptgroupElement {
 type OptgroupAutocapitalizeAttrEnum string
 
 const (
-	OptgroupAutocapitalizeAttrEnumOn OptgroupAutocapitalizeAttrEnum = "on"
-	OptgroupAutocapitalizeAttrEnumSentences OptgroupAutocapitalizeAttrEnum = "sentences"
-	OptgroupAutocapitalizeAttrEnumWords OptgroupAutocapitalizeAttrEnum = "words"
+	OptgroupAutocapitalizeAttrEnumNone       OptgroupAutocapitalizeAttrEnum = "none"
+	OptgroupAutocapitalizeAttrEnumOff        OptgroupAutocapitalizeAttrEnum = "off"
+	OptgroupAutocapitalizeAttrEnumOn         OptgroupAutocapitalizeAttrEnum = "on"
+	OptgroupAutocapitalizeAttrEnumSentences  OptgroupAutocapitalizeAttrEnum = "sentences"
+	OptgroupAutocapitalizeAttrEnumWords      OptgroupAutocapitalizeAttrEnum = "words"
 	OptgroupAutocapitalizeAttrEnumCharacters OptgroupAutocapitalizeAttrEnum = "characters"
-	OptgroupAutocapitalizeAttrEnumNone OptgroupAutocapitalizeAttrEnum = "none"
-	OptgroupAutocapitalizeAttrEnumOff OptgroupAutocapitalizeAttrEnum = "off"
 )
 
 type OptgroupAutocorrectAttrEnum string
 
 const (
 	OptgroupAutocorrectAttrEnumOff OptgroupAutocorrectAttrEnum = "off"
-	OptgroupAutocorrectAttrEnumOn OptgroupAutocorrectAttrEnum = "on"
+	OptgroupAutocorrectAttrEnumOn  OptgroupAutocorrectAttrEnum = "on"
 )
 
 type OptgroupContenteditableAttrEnum string
 
 const (
-	OptgroupContenteditableAttrEnumFalse OptgroupContenteditableAttrEnum = "false"
+	OptgroupContenteditableAttrEnumFalse         OptgroupContenteditableAttrEnum = "false"
 	OptgroupContenteditableAttrEnumPlaintextOnly OptgroupContenteditableAttrEnum = "plaintext-only"
-	OptgroupContenteditableAttrEnumTrue OptgroupContenteditableAttrEnum = "true"
+	OptgroupContenteditableAttrEnumTrue          OptgroupContenteditableAttrEnum = "true"
 )
 
 type optgroupAttrs map[string]any
 
 func (e *OptgroupElement) Autocapitalize(a OptgroupAutocapitalizeAttrEnum) *OptgroupElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *OptgroupElement) Autocorrect(a OptgroupAutocorrectAttrEnum) *OptgroupElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *OptgroupElement) Autofocus(b bool) *OptgroupElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *OptgroupElement) Class(s ...string) *OptgroupElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *OptgroupElement) Contenteditable(a OptgroupContenteditableAttrEnum) *OptgroupElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *OptgroupElement) Id(s string) *OptgroupElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *OptgroupElement) Slot(s string) *OptgroupElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

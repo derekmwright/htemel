@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type CaptionElement struct {
 	attributes captionAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type CaptionElement struct {
 // Spec Description: The caption element represents the title of the table that is its parent, if it has a parent and that is a table element.
 func Caption(children ...htemel.Node) *CaptionElement {
 	node := &CaptionElement{
-		children: children,
+		children:   children,
 		attributes: make(captionAttrs),
 	}
 
@@ -42,63 +43,69 @@ type CaptionAutocapitalizeAttrEnum string
 
 const (
 	CaptionAutocapitalizeAttrEnumCharacters CaptionAutocapitalizeAttrEnum = "characters"
-	CaptionAutocapitalizeAttrEnumNone CaptionAutocapitalizeAttrEnum = "none"
-	CaptionAutocapitalizeAttrEnumOff CaptionAutocapitalizeAttrEnum = "off"
-	CaptionAutocapitalizeAttrEnumOn CaptionAutocapitalizeAttrEnum = "on"
-	CaptionAutocapitalizeAttrEnumSentences CaptionAutocapitalizeAttrEnum = "sentences"
-	CaptionAutocapitalizeAttrEnumWords CaptionAutocapitalizeAttrEnum = "words"
+	CaptionAutocapitalizeAttrEnumNone       CaptionAutocapitalizeAttrEnum = "none"
+	CaptionAutocapitalizeAttrEnumOff        CaptionAutocapitalizeAttrEnum = "off"
+	CaptionAutocapitalizeAttrEnumOn         CaptionAutocapitalizeAttrEnum = "on"
+	CaptionAutocapitalizeAttrEnumSentences  CaptionAutocapitalizeAttrEnum = "sentences"
+	CaptionAutocapitalizeAttrEnumWords      CaptionAutocapitalizeAttrEnum = "words"
 )
 
 type CaptionAutocorrectAttrEnum string
 
 const (
 	CaptionAutocorrectAttrEnumOff CaptionAutocorrectAttrEnum = "off"
-	CaptionAutocorrectAttrEnumOn CaptionAutocorrectAttrEnum = "on"
+	CaptionAutocorrectAttrEnumOn  CaptionAutocorrectAttrEnum = "on"
 )
 
 type CaptionContenteditableAttrEnum string
 
 const (
-	CaptionContenteditableAttrEnumTrue CaptionContenteditableAttrEnum = "true"
-	CaptionContenteditableAttrEnumFalse CaptionContenteditableAttrEnum = "false"
 	CaptionContenteditableAttrEnumPlaintextOnly CaptionContenteditableAttrEnum = "plaintext-only"
+	CaptionContenteditableAttrEnumTrue          CaptionContenteditableAttrEnum = "true"
+	CaptionContenteditableAttrEnumFalse         CaptionContenteditableAttrEnum = "false"
 )
 
 type captionAttrs map[string]any
 
 func (e *CaptionElement) Autocapitalize(a CaptionAutocapitalizeAttrEnum) *CaptionElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *CaptionElement) Autocorrect(a CaptionAutocorrectAttrEnum) *CaptionElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *CaptionElement) Autofocus(b bool) *CaptionElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *CaptionElement) Class(s ...string) *CaptionElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *CaptionElement) Contenteditable(a CaptionContenteditableAttrEnum) *CaptionElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *CaptionElement) Id(s string) *CaptionElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *CaptionElement) Slot(s string) *CaptionElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

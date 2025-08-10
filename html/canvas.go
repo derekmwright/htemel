@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type CanvasElement struct {
 	attributes canvasAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type CanvasElement struct {
 // Spec Description: The canvas element provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly.
 func Canvas(children ...htemel.Node) *CanvasElement {
 	node := &CanvasElement{
-		children: children,
+		children:   children,
 		attributes: make(canvasAttrs),
 	}
 
@@ -41,64 +42,70 @@ func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 type CanvasAutocapitalizeAttrEnum string
 
 const (
-	CanvasAutocapitalizeAttrEnumSentences CanvasAutocapitalizeAttrEnum = "sentences"
-	CanvasAutocapitalizeAttrEnumWords CanvasAutocapitalizeAttrEnum = "words"
 	CanvasAutocapitalizeAttrEnumCharacters CanvasAutocapitalizeAttrEnum = "characters"
-	CanvasAutocapitalizeAttrEnumNone CanvasAutocapitalizeAttrEnum = "none"
-	CanvasAutocapitalizeAttrEnumOff CanvasAutocapitalizeAttrEnum = "off"
-	CanvasAutocapitalizeAttrEnumOn CanvasAutocapitalizeAttrEnum = "on"
+	CanvasAutocapitalizeAttrEnumNone       CanvasAutocapitalizeAttrEnum = "none"
+	CanvasAutocapitalizeAttrEnumOff        CanvasAutocapitalizeAttrEnum = "off"
+	CanvasAutocapitalizeAttrEnumOn         CanvasAutocapitalizeAttrEnum = "on"
+	CanvasAutocapitalizeAttrEnumSentences  CanvasAutocapitalizeAttrEnum = "sentences"
+	CanvasAutocapitalizeAttrEnumWords      CanvasAutocapitalizeAttrEnum = "words"
 )
 
 type CanvasAutocorrectAttrEnum string
 
 const (
 	CanvasAutocorrectAttrEnumOff CanvasAutocorrectAttrEnum = "off"
-	CanvasAutocorrectAttrEnumOn CanvasAutocorrectAttrEnum = "on"
+	CanvasAutocorrectAttrEnumOn  CanvasAutocorrectAttrEnum = "on"
 )
 
 type CanvasContenteditableAttrEnum string
 
 const (
-	CanvasContenteditableAttrEnumFalse CanvasContenteditableAttrEnum = "false"
 	CanvasContenteditableAttrEnumPlaintextOnly CanvasContenteditableAttrEnum = "plaintext-only"
-	CanvasContenteditableAttrEnumTrue CanvasContenteditableAttrEnum = "true"
+	CanvasContenteditableAttrEnumTrue          CanvasContenteditableAttrEnum = "true"
+	CanvasContenteditableAttrEnumFalse         CanvasContenteditableAttrEnum = "false"
 )
 
 type canvasAttrs map[string]any
 
 func (e *CanvasElement) Autocapitalize(a CanvasAutocapitalizeAttrEnum) *CanvasElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *CanvasElement) Autocorrect(a CanvasAutocorrectAttrEnum) *CanvasElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *CanvasElement) Autofocus(b bool) *CanvasElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *CanvasElement) Class(s ...string) *CanvasElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *CanvasElement) Contenteditable(a CanvasContenteditableAttrEnum) *CanvasElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *CanvasElement) Id(s string) *CanvasElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *CanvasElement) Slot(s string) *CanvasElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

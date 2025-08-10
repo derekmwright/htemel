@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type StrongElement struct {
 	attributes strongAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type StrongElement struct {
 // Spec Description: The strong element represents strong importance, seriousness, or urgency for its contents.
 func Strong(children ...htemel.Node) *StrongElement {
 	node := &StrongElement{
-		children: children,
+		children:   children,
 		attributes: make(strongAttrs),
 	}
 
@@ -41,64 +42,70 @@ func StrongIf(condition bool, children ...htemel.Node) *StrongElement {
 type StrongAutocapitalizeAttrEnum string
 
 const (
+	StrongAutocapitalizeAttrEnumOn         StrongAutocapitalizeAttrEnum = "on"
+	StrongAutocapitalizeAttrEnumSentences  StrongAutocapitalizeAttrEnum = "sentences"
+	StrongAutocapitalizeAttrEnumWords      StrongAutocapitalizeAttrEnum = "words"
 	StrongAutocapitalizeAttrEnumCharacters StrongAutocapitalizeAttrEnum = "characters"
-	StrongAutocapitalizeAttrEnumNone StrongAutocapitalizeAttrEnum = "none"
-	StrongAutocapitalizeAttrEnumOff StrongAutocapitalizeAttrEnum = "off"
-	StrongAutocapitalizeAttrEnumOn StrongAutocapitalizeAttrEnum = "on"
-	StrongAutocapitalizeAttrEnumSentences StrongAutocapitalizeAttrEnum = "sentences"
-	StrongAutocapitalizeAttrEnumWords StrongAutocapitalizeAttrEnum = "words"
+	StrongAutocapitalizeAttrEnumNone       StrongAutocapitalizeAttrEnum = "none"
+	StrongAutocapitalizeAttrEnumOff        StrongAutocapitalizeAttrEnum = "off"
 )
 
 type StrongAutocorrectAttrEnum string
 
 const (
 	StrongAutocorrectAttrEnumOff StrongAutocorrectAttrEnum = "off"
-	StrongAutocorrectAttrEnumOn StrongAutocorrectAttrEnum = "on"
+	StrongAutocorrectAttrEnumOn  StrongAutocorrectAttrEnum = "on"
 )
 
 type StrongContenteditableAttrEnum string
 
 const (
-	StrongContenteditableAttrEnumFalse StrongContenteditableAttrEnum = "false"
+	StrongContenteditableAttrEnumFalse         StrongContenteditableAttrEnum = "false"
 	StrongContenteditableAttrEnumPlaintextOnly StrongContenteditableAttrEnum = "plaintext-only"
-	StrongContenteditableAttrEnumTrue StrongContenteditableAttrEnum = "true"
+	StrongContenteditableAttrEnumTrue          StrongContenteditableAttrEnum = "true"
 )
 
 type strongAttrs map[string]any
 
 func (e *StrongElement) Autocapitalize(a StrongAutocapitalizeAttrEnum) *StrongElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *StrongElement) Autocorrect(a StrongAutocorrectAttrEnum) *StrongElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *StrongElement) Autofocus(b bool) *StrongElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *StrongElement) Class(s ...string) *StrongElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *StrongElement) Contenteditable(a StrongContenteditableAttrEnum) *StrongElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *StrongElement) Id(s string) *StrongElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *StrongElement) Slot(s string) *StrongElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

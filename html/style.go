@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type StyleElement struct {
 	attributes styleAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type StyleElement struct {
 // Spec Description: The style element allows authors to embed CSS style sheets in their documents. The style element is one of several inputs to the styling processing model. The element does not represent content for the user.
 func Style(children ...htemel.Node) *StyleElement {
 	node := &StyleElement{
-		children: children,
+		children:   children,
 		attributes: make(styleAttrs),
 	}
 
@@ -41,64 +42,70 @@ func StyleIf(condition bool, children ...htemel.Node) *StyleElement {
 type StyleAutocapitalizeAttrEnum string
 
 const (
-	StyleAutocapitalizeAttrEnumOff StyleAutocapitalizeAttrEnum = "off"
-	StyleAutocapitalizeAttrEnumOn StyleAutocapitalizeAttrEnum = "on"
-	StyleAutocapitalizeAttrEnumSentences StyleAutocapitalizeAttrEnum = "sentences"
-	StyleAutocapitalizeAttrEnumWords StyleAutocapitalizeAttrEnum = "words"
+	StyleAutocapitalizeAttrEnumWords      StyleAutocapitalizeAttrEnum = "words"
 	StyleAutocapitalizeAttrEnumCharacters StyleAutocapitalizeAttrEnum = "characters"
-	StyleAutocapitalizeAttrEnumNone StyleAutocapitalizeAttrEnum = "none"
+	StyleAutocapitalizeAttrEnumNone       StyleAutocapitalizeAttrEnum = "none"
+	StyleAutocapitalizeAttrEnumOff        StyleAutocapitalizeAttrEnum = "off"
+	StyleAutocapitalizeAttrEnumOn         StyleAutocapitalizeAttrEnum = "on"
+	StyleAutocapitalizeAttrEnumSentences  StyleAutocapitalizeAttrEnum = "sentences"
 )
 
 type StyleAutocorrectAttrEnum string
 
 const (
 	StyleAutocorrectAttrEnumOff StyleAutocorrectAttrEnum = "off"
-	StyleAutocorrectAttrEnumOn StyleAutocorrectAttrEnum = "on"
+	StyleAutocorrectAttrEnumOn  StyleAutocorrectAttrEnum = "on"
 )
 
 type StyleContenteditableAttrEnum string
 
 const (
-	StyleContenteditableAttrEnumFalse StyleContenteditableAttrEnum = "false"
+	StyleContenteditableAttrEnumFalse         StyleContenteditableAttrEnum = "false"
 	StyleContenteditableAttrEnumPlaintextOnly StyleContenteditableAttrEnum = "plaintext-only"
-	StyleContenteditableAttrEnumTrue StyleContenteditableAttrEnum = "true"
+	StyleContenteditableAttrEnumTrue          StyleContenteditableAttrEnum = "true"
 )
 
 type styleAttrs map[string]any
 
 func (e *StyleElement) Autocapitalize(a StyleAutocapitalizeAttrEnum) *StyleElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *StyleElement) Autocorrect(a StyleAutocorrectAttrEnum) *StyleElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *StyleElement) Autofocus(b bool) *StyleElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *StyleElement) Class(s ...string) *StyleElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *StyleElement) Contenteditable(a StyleContenteditableAttrEnum) *StyleElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *StyleElement) Id(s string) *StyleElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *StyleElement) Slot(s string) *StyleElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ButtonElement struct {
 	attributes buttonAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type ButtonElement struct {
 // Spec Description: The button element represents a button labeled by its contents.
 func Button(children ...htemel.Node) *ButtonElement {
 	node := &ButtonElement{
-		children: children,
+		children:   children,
 		attributes: make(buttonAttrs),
 	}
 
@@ -41,64 +42,70 @@ func ButtonIf(condition bool, children ...htemel.Node) *ButtonElement {
 type ButtonAutocapitalizeAttrEnum string
 
 const (
-	ButtonAutocapitalizeAttrEnumWords ButtonAutocapitalizeAttrEnum = "words"
+	ButtonAutocapitalizeAttrEnumOff        ButtonAutocapitalizeAttrEnum = "off"
+	ButtonAutocapitalizeAttrEnumOn         ButtonAutocapitalizeAttrEnum = "on"
+	ButtonAutocapitalizeAttrEnumSentences  ButtonAutocapitalizeAttrEnum = "sentences"
+	ButtonAutocapitalizeAttrEnumWords      ButtonAutocapitalizeAttrEnum = "words"
 	ButtonAutocapitalizeAttrEnumCharacters ButtonAutocapitalizeAttrEnum = "characters"
-	ButtonAutocapitalizeAttrEnumNone ButtonAutocapitalizeAttrEnum = "none"
-	ButtonAutocapitalizeAttrEnumOff ButtonAutocapitalizeAttrEnum = "off"
-	ButtonAutocapitalizeAttrEnumOn ButtonAutocapitalizeAttrEnum = "on"
-	ButtonAutocapitalizeAttrEnumSentences ButtonAutocapitalizeAttrEnum = "sentences"
+	ButtonAutocapitalizeAttrEnumNone       ButtonAutocapitalizeAttrEnum = "none"
 )
 
 type ButtonAutocorrectAttrEnum string
 
 const (
+	ButtonAutocorrectAttrEnumOn  ButtonAutocorrectAttrEnum = "on"
 	ButtonAutocorrectAttrEnumOff ButtonAutocorrectAttrEnum = "off"
-	ButtonAutocorrectAttrEnumOn ButtonAutocorrectAttrEnum = "on"
 )
 
 type ButtonContenteditableAttrEnum string
 
 const (
-	ButtonContenteditableAttrEnumFalse ButtonContenteditableAttrEnum = "false"
+	ButtonContenteditableAttrEnumFalse         ButtonContenteditableAttrEnum = "false"
 	ButtonContenteditableAttrEnumPlaintextOnly ButtonContenteditableAttrEnum = "plaintext-only"
-	ButtonContenteditableAttrEnumTrue ButtonContenteditableAttrEnum = "true"
+	ButtonContenteditableAttrEnumTrue          ButtonContenteditableAttrEnum = "true"
 )
 
 type buttonAttrs map[string]any
 
 func (e *ButtonElement) Autocapitalize(a ButtonAutocapitalizeAttrEnum) *ButtonElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *ButtonElement) Autocorrect(a ButtonAutocorrectAttrEnum) *ButtonElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *ButtonElement) Autofocus(b bool) *ButtonElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *ButtonElement) Class(s ...string) *ButtonElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *ButtonElement) Contenteditable(a ButtonContenteditableAttrEnum) *ButtonElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *ButtonElement) Id(s string) *ButtonElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *ButtonElement) Slot(s string) *ButtonElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

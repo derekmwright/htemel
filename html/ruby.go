@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type RubyElement struct {
 	attributes rubyAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type RubyElement struct {
 // Spec Description: The ruby element allows one or more spans of phrasing content to be marked with ruby annotations. Ruby annotations are short runs of text presented alongside base text, primarily used in East Asian typography as a guide for pronunciation or to include other annotations. In Japanese, this form of typography is also known as furigana.
 func Ruby(children ...htemel.Node) *RubyElement {
 	node := &RubyElement{
-		children: children,
+		children:   children,
 		attributes: make(rubyAttrs),
 	}
 
@@ -41,64 +42,70 @@ func RubyIf(condition bool, children ...htemel.Node) *RubyElement {
 type RubyAutocapitalizeAttrEnum string
 
 const (
-	RubyAutocapitalizeAttrEnumOn RubyAutocapitalizeAttrEnum = "on"
-	RubyAutocapitalizeAttrEnumSentences RubyAutocapitalizeAttrEnum = "sentences"
-	RubyAutocapitalizeAttrEnumWords RubyAutocapitalizeAttrEnum = "words"
+	RubyAutocapitalizeAttrEnumSentences  RubyAutocapitalizeAttrEnum = "sentences"
+	RubyAutocapitalizeAttrEnumWords      RubyAutocapitalizeAttrEnum = "words"
 	RubyAutocapitalizeAttrEnumCharacters RubyAutocapitalizeAttrEnum = "characters"
-	RubyAutocapitalizeAttrEnumNone RubyAutocapitalizeAttrEnum = "none"
-	RubyAutocapitalizeAttrEnumOff RubyAutocapitalizeAttrEnum = "off"
+	RubyAutocapitalizeAttrEnumNone       RubyAutocapitalizeAttrEnum = "none"
+	RubyAutocapitalizeAttrEnumOff        RubyAutocapitalizeAttrEnum = "off"
+	RubyAutocapitalizeAttrEnumOn         RubyAutocapitalizeAttrEnum = "on"
 )
 
 type RubyAutocorrectAttrEnum string
 
 const (
-	RubyAutocorrectAttrEnumOn RubyAutocorrectAttrEnum = "on"
 	RubyAutocorrectAttrEnumOff RubyAutocorrectAttrEnum = "off"
+	RubyAutocorrectAttrEnumOn  RubyAutocorrectAttrEnum = "on"
 )
 
 type RubyContenteditableAttrEnum string
 
 const (
-	RubyContenteditableAttrEnumFalse RubyContenteditableAttrEnum = "false"
 	RubyContenteditableAttrEnumPlaintextOnly RubyContenteditableAttrEnum = "plaintext-only"
-	RubyContenteditableAttrEnumTrue RubyContenteditableAttrEnum = "true"
+	RubyContenteditableAttrEnumTrue          RubyContenteditableAttrEnum = "true"
+	RubyContenteditableAttrEnumFalse         RubyContenteditableAttrEnum = "false"
 )
 
 type rubyAttrs map[string]any
 
 func (e *RubyElement) Autocapitalize(a RubyAutocapitalizeAttrEnum) *RubyElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *RubyElement) Autocorrect(a RubyAutocorrectAttrEnum) *RubyElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *RubyElement) Autofocus(b bool) *RubyElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *RubyElement) Class(s ...string) *RubyElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *RubyElement) Contenteditable(a RubyContenteditableAttrEnum) *RubyElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *RubyElement) Id(s string) *RubyElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *RubyElement) Slot(s string) *RubyElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

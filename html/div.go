@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DivElement struct {
 	attributes divAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DivElement struct {
 // Spec Description: The div element has no special meaning at all. It represents its children. It can be used with the class, lang, and title attributes to mark up semantics common to a group of consecutive elements. It can also be used in a dl element, wrapping groups of dt and dd elements.
 func Div(children ...htemel.Node) *DivElement {
 	node := &DivElement{
-		children: children,
+		children:   children,
 		attributes: make(divAttrs),
 	}
 
@@ -41,64 +42,70 @@ func DivIf(condition bool, children ...htemel.Node) *DivElement {
 type DivAutocapitalizeAttrEnum string
 
 const (
-	DivAutocapitalizeAttrEnumSentences DivAutocapitalizeAttrEnum = "sentences"
-	DivAutocapitalizeAttrEnumWords DivAutocapitalizeAttrEnum = "words"
+	DivAutocapitalizeAttrEnumNone       DivAutocapitalizeAttrEnum = "none"
+	DivAutocapitalizeAttrEnumOff        DivAutocapitalizeAttrEnum = "off"
+	DivAutocapitalizeAttrEnumOn         DivAutocapitalizeAttrEnum = "on"
+	DivAutocapitalizeAttrEnumSentences  DivAutocapitalizeAttrEnum = "sentences"
+	DivAutocapitalizeAttrEnumWords      DivAutocapitalizeAttrEnum = "words"
 	DivAutocapitalizeAttrEnumCharacters DivAutocapitalizeAttrEnum = "characters"
-	DivAutocapitalizeAttrEnumNone DivAutocapitalizeAttrEnum = "none"
-	DivAutocapitalizeAttrEnumOff DivAutocapitalizeAttrEnum = "off"
-	DivAutocapitalizeAttrEnumOn DivAutocapitalizeAttrEnum = "on"
 )
 
 type DivAutocorrectAttrEnum string
 
 const (
 	DivAutocorrectAttrEnumOff DivAutocorrectAttrEnum = "off"
-	DivAutocorrectAttrEnumOn DivAutocorrectAttrEnum = "on"
+	DivAutocorrectAttrEnumOn  DivAutocorrectAttrEnum = "on"
 )
 
 type DivContenteditableAttrEnum string
 
 const (
-	DivContenteditableAttrEnumFalse DivContenteditableAttrEnum = "false"
+	DivContenteditableAttrEnumFalse         DivContenteditableAttrEnum = "false"
 	DivContenteditableAttrEnumPlaintextOnly DivContenteditableAttrEnum = "plaintext-only"
-	DivContenteditableAttrEnumTrue DivContenteditableAttrEnum = "true"
+	DivContenteditableAttrEnumTrue          DivContenteditableAttrEnum = "true"
 )
 
 type divAttrs map[string]any
 
 func (e *DivElement) Autocapitalize(a DivAutocapitalizeAttrEnum) *DivElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DivElement) Autocorrect(a DivAutocorrectAttrEnum) *DivElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *DivElement) Autofocus(b bool) *DivElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *DivElement) Class(s ...string) *DivElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DivElement) Contenteditable(a DivContenteditableAttrEnum) *DivElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DivElement) Id(s string) *DivElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *DivElement) Slot(s string) *DivElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type KbdElement struct {
 	attributes kbdAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type KbdElement struct {
 // Spec Description: The kbd element represents user input (typically keyboard input, although it may also be used to represent other input, such as voice commands).
 func Kbd(children ...htemel.Node) *KbdElement {
 	node := &KbdElement{
-		children: children,
+		children:   children,
 		attributes: make(kbdAttrs),
 	}
 
@@ -41,64 +42,70 @@ func KbdIf(condition bool, children ...htemel.Node) *KbdElement {
 type KbdAutocapitalizeAttrEnum string
 
 const (
-	KbdAutocapitalizeAttrEnumOff KbdAutocapitalizeAttrEnum = "off"
-	KbdAutocapitalizeAttrEnumOn KbdAutocapitalizeAttrEnum = "on"
-	KbdAutocapitalizeAttrEnumSentences KbdAutocapitalizeAttrEnum = "sentences"
-	KbdAutocapitalizeAttrEnumWords KbdAutocapitalizeAttrEnum = "words"
+	KbdAutocapitalizeAttrEnumNone       KbdAutocapitalizeAttrEnum = "none"
+	KbdAutocapitalizeAttrEnumOff        KbdAutocapitalizeAttrEnum = "off"
+	KbdAutocapitalizeAttrEnumOn         KbdAutocapitalizeAttrEnum = "on"
+	KbdAutocapitalizeAttrEnumSentences  KbdAutocapitalizeAttrEnum = "sentences"
+	KbdAutocapitalizeAttrEnumWords      KbdAutocapitalizeAttrEnum = "words"
 	KbdAutocapitalizeAttrEnumCharacters KbdAutocapitalizeAttrEnum = "characters"
-	KbdAutocapitalizeAttrEnumNone KbdAutocapitalizeAttrEnum = "none"
 )
 
 type KbdAutocorrectAttrEnum string
 
 const (
+	KbdAutocorrectAttrEnumOn  KbdAutocorrectAttrEnum = "on"
 	KbdAutocorrectAttrEnumOff KbdAutocorrectAttrEnum = "off"
-	KbdAutocorrectAttrEnumOn KbdAutocorrectAttrEnum = "on"
 )
 
 type KbdContenteditableAttrEnum string
 
 const (
-	KbdContenteditableAttrEnumFalse KbdContenteditableAttrEnum = "false"
+	KbdContenteditableAttrEnumTrue          KbdContenteditableAttrEnum = "true"
+	KbdContenteditableAttrEnumFalse         KbdContenteditableAttrEnum = "false"
 	KbdContenteditableAttrEnumPlaintextOnly KbdContenteditableAttrEnum = "plaintext-only"
-	KbdContenteditableAttrEnumTrue KbdContenteditableAttrEnum = "true"
 )
 
 type kbdAttrs map[string]any
 
 func (e *KbdElement) Autocapitalize(a KbdAutocapitalizeAttrEnum) *KbdElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *KbdElement) Autocorrect(a KbdAutocorrectAttrEnum) *KbdElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *KbdElement) Autofocus(b bool) *KbdElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *KbdElement) Class(s ...string) *KbdElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *KbdElement) Contenteditable(a KbdContenteditableAttrEnum) *KbdElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *KbdElement) Id(s string) *KbdElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *KbdElement) Slot(s string) *KbdElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

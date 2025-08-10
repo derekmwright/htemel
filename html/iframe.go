@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type IframeElement struct {
 	attributes iframeAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type IframeElement struct {
 // Spec Description: The iframe element represents its content navigable.
 func Iframe(children ...htemel.Node) *IframeElement {
 	node := &IframeElement{
-		children: children,
+		children:   children,
 		attributes: make(iframeAttrs),
 	}
 
@@ -41,64 +42,70 @@ func IframeIf(condition bool, children ...htemel.Node) *IframeElement {
 type IframeAutocapitalizeAttrEnum string
 
 const (
-	IframeAutocapitalizeAttrEnumWords IframeAutocapitalizeAttrEnum = "words"
 	IframeAutocapitalizeAttrEnumCharacters IframeAutocapitalizeAttrEnum = "characters"
-	IframeAutocapitalizeAttrEnumNone IframeAutocapitalizeAttrEnum = "none"
-	IframeAutocapitalizeAttrEnumOff IframeAutocapitalizeAttrEnum = "off"
-	IframeAutocapitalizeAttrEnumOn IframeAutocapitalizeAttrEnum = "on"
-	IframeAutocapitalizeAttrEnumSentences IframeAutocapitalizeAttrEnum = "sentences"
+	IframeAutocapitalizeAttrEnumNone       IframeAutocapitalizeAttrEnum = "none"
+	IframeAutocapitalizeAttrEnumOff        IframeAutocapitalizeAttrEnum = "off"
+	IframeAutocapitalizeAttrEnumOn         IframeAutocapitalizeAttrEnum = "on"
+	IframeAutocapitalizeAttrEnumSentences  IframeAutocapitalizeAttrEnum = "sentences"
+	IframeAutocapitalizeAttrEnumWords      IframeAutocapitalizeAttrEnum = "words"
 )
 
 type IframeAutocorrectAttrEnum string
 
 const (
 	IframeAutocorrectAttrEnumOff IframeAutocorrectAttrEnum = "off"
-	IframeAutocorrectAttrEnumOn IframeAutocorrectAttrEnum = "on"
+	IframeAutocorrectAttrEnumOn  IframeAutocorrectAttrEnum = "on"
 )
 
 type IframeContenteditableAttrEnum string
 
 const (
-	IframeContenteditableAttrEnumFalse IframeContenteditableAttrEnum = "false"
+	IframeContenteditableAttrEnumFalse         IframeContenteditableAttrEnum = "false"
 	IframeContenteditableAttrEnumPlaintextOnly IframeContenteditableAttrEnum = "plaintext-only"
-	IframeContenteditableAttrEnumTrue IframeContenteditableAttrEnum = "true"
+	IframeContenteditableAttrEnumTrue          IframeContenteditableAttrEnum = "true"
 )
 
 type iframeAttrs map[string]any
 
 func (e *IframeElement) Autocapitalize(a IframeAutocapitalizeAttrEnum) *IframeElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *IframeElement) Autocorrect(a IframeAutocorrectAttrEnum) *IframeElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *IframeElement) Autofocus(b bool) *IframeElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *IframeElement) Class(s ...string) *IframeElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *IframeElement) Contenteditable(a IframeContenteditableAttrEnum) *IframeElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *IframeElement) Id(s string) *IframeElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *IframeElement) Slot(s string) *IframeElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

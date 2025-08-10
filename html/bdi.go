@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type BdiElement struct {
 	attributes bdiAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type BdiElement struct {
 // Spec Description: The bdi element represents a span of text that is to be isolated from its surroundings for the purposes of bidirectional text formatting. [BIDI]
 func Bdi(children ...htemel.Node) *BdiElement {
 	node := &BdiElement{
-		children: children,
+		children:   children,
 		attributes: make(bdiAttrs),
 	}
 
@@ -41,64 +42,70 @@ func BdiIf(condition bool, children ...htemel.Node) *BdiElement {
 type BdiAutocapitalizeAttrEnum string
 
 const (
-	BdiAutocapitalizeAttrEnumOn BdiAutocapitalizeAttrEnum = "on"
-	BdiAutocapitalizeAttrEnumSentences BdiAutocapitalizeAttrEnum = "sentences"
-	BdiAutocapitalizeAttrEnumWords BdiAutocapitalizeAttrEnum = "words"
+	BdiAutocapitalizeAttrEnumWords      BdiAutocapitalizeAttrEnum = "words"
 	BdiAutocapitalizeAttrEnumCharacters BdiAutocapitalizeAttrEnum = "characters"
-	BdiAutocapitalizeAttrEnumNone BdiAutocapitalizeAttrEnum = "none"
-	BdiAutocapitalizeAttrEnumOff BdiAutocapitalizeAttrEnum = "off"
+	BdiAutocapitalizeAttrEnumNone       BdiAutocapitalizeAttrEnum = "none"
+	BdiAutocapitalizeAttrEnumOff        BdiAutocapitalizeAttrEnum = "off"
+	BdiAutocapitalizeAttrEnumOn         BdiAutocapitalizeAttrEnum = "on"
+	BdiAutocapitalizeAttrEnumSentences  BdiAutocapitalizeAttrEnum = "sentences"
 )
 
 type BdiAutocorrectAttrEnum string
 
 const (
 	BdiAutocorrectAttrEnumOff BdiAutocorrectAttrEnum = "off"
-	BdiAutocorrectAttrEnumOn BdiAutocorrectAttrEnum = "on"
+	BdiAutocorrectAttrEnumOn  BdiAutocorrectAttrEnum = "on"
 )
 
 type BdiContenteditableAttrEnum string
 
 const (
-	BdiContenteditableAttrEnumFalse BdiContenteditableAttrEnum = "false"
+	BdiContenteditableAttrEnumFalse         BdiContenteditableAttrEnum = "false"
 	BdiContenteditableAttrEnumPlaintextOnly BdiContenteditableAttrEnum = "plaintext-only"
-	BdiContenteditableAttrEnumTrue BdiContenteditableAttrEnum = "true"
+	BdiContenteditableAttrEnumTrue          BdiContenteditableAttrEnum = "true"
 )
 
 type bdiAttrs map[string]any
 
 func (e *BdiElement) Autocapitalize(a BdiAutocapitalizeAttrEnum) *BdiElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *BdiElement) Autocorrect(a BdiAutocorrectAttrEnum) *BdiElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *BdiElement) Autofocus(b bool) *BdiElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *BdiElement) Class(s ...string) *BdiElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *BdiElement) Contenteditable(a BdiContenteditableAttrEnum) *BdiElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *BdiElement) Id(s string) *BdiElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *BdiElement) Slot(s string) *BdiElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

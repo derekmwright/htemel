@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ObjectElement struct {
 	attributes objectAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type ObjectElement struct {
 // Spec Description: The object element can represent an external resource, which, depending on the type of the resource, will either be treated as an image or as a child navigable.
 func Object(children ...htemel.Node) *ObjectElement {
 	node := &ObjectElement{
-		children: children,
+		children:   children,
 		attributes: make(objectAttrs),
 	}
 
@@ -42,63 +43,69 @@ type ObjectAutocapitalizeAttrEnum string
 
 const (
 	ObjectAutocapitalizeAttrEnumCharacters ObjectAutocapitalizeAttrEnum = "characters"
-	ObjectAutocapitalizeAttrEnumNone ObjectAutocapitalizeAttrEnum = "none"
-	ObjectAutocapitalizeAttrEnumOff ObjectAutocapitalizeAttrEnum = "off"
-	ObjectAutocapitalizeAttrEnumOn ObjectAutocapitalizeAttrEnum = "on"
-	ObjectAutocapitalizeAttrEnumSentences ObjectAutocapitalizeAttrEnum = "sentences"
-	ObjectAutocapitalizeAttrEnumWords ObjectAutocapitalizeAttrEnum = "words"
+	ObjectAutocapitalizeAttrEnumNone       ObjectAutocapitalizeAttrEnum = "none"
+	ObjectAutocapitalizeAttrEnumOff        ObjectAutocapitalizeAttrEnum = "off"
+	ObjectAutocapitalizeAttrEnumOn         ObjectAutocapitalizeAttrEnum = "on"
+	ObjectAutocapitalizeAttrEnumSentences  ObjectAutocapitalizeAttrEnum = "sentences"
+	ObjectAutocapitalizeAttrEnumWords      ObjectAutocapitalizeAttrEnum = "words"
 )
 
 type ObjectAutocorrectAttrEnum string
 
 const (
-	ObjectAutocorrectAttrEnumOn ObjectAutocorrectAttrEnum = "on"
 	ObjectAutocorrectAttrEnumOff ObjectAutocorrectAttrEnum = "off"
+	ObjectAutocorrectAttrEnumOn  ObjectAutocorrectAttrEnum = "on"
 )
 
 type ObjectContenteditableAttrEnum string
 
 const (
-	ObjectContenteditableAttrEnumTrue ObjectContenteditableAttrEnum = "true"
-	ObjectContenteditableAttrEnumFalse ObjectContenteditableAttrEnum = "false"
+	ObjectContenteditableAttrEnumFalse         ObjectContenteditableAttrEnum = "false"
 	ObjectContenteditableAttrEnumPlaintextOnly ObjectContenteditableAttrEnum = "plaintext-only"
+	ObjectContenteditableAttrEnumTrue          ObjectContenteditableAttrEnum = "true"
 )
 
 type objectAttrs map[string]any
 
 func (e *ObjectElement) Autocapitalize(a ObjectAutocapitalizeAttrEnum) *ObjectElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *ObjectElement) Autocorrect(a ObjectAutocorrectAttrEnum) *ObjectElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *ObjectElement) Autofocus(b bool) *ObjectElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *ObjectElement) Class(s ...string) *ObjectElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *ObjectElement) Contenteditable(a ObjectContenteditableAttrEnum) *ObjectElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *ObjectElement) Id(s string) *ObjectElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *ObjectElement) Slot(s string) *ObjectElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

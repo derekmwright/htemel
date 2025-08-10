@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type InputElement struct {
 	attributes inputAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type InputElement struct {
 // Spec Description: The input element represents a typed data field, usually with a form control to allow the user to edit the data.
 func Input(children ...htemel.Node) *InputElement {
 	node := &InputElement{
-		children: children,
+		children:   children,
 		attributes: make(inputAttrs),
 	}
 
@@ -41,64 +42,70 @@ func InputIf(condition bool, children ...htemel.Node) *InputElement {
 type InputAutocapitalizeAttrEnum string
 
 const (
-	InputAutocapitalizeAttrEnumWords InputAutocapitalizeAttrEnum = "words"
+	InputAutocapitalizeAttrEnumNone       InputAutocapitalizeAttrEnum = "none"
+	InputAutocapitalizeAttrEnumOff        InputAutocapitalizeAttrEnum = "off"
+	InputAutocapitalizeAttrEnumOn         InputAutocapitalizeAttrEnum = "on"
+	InputAutocapitalizeAttrEnumSentences  InputAutocapitalizeAttrEnum = "sentences"
+	InputAutocapitalizeAttrEnumWords      InputAutocapitalizeAttrEnum = "words"
 	InputAutocapitalizeAttrEnumCharacters InputAutocapitalizeAttrEnum = "characters"
-	InputAutocapitalizeAttrEnumNone InputAutocapitalizeAttrEnum = "none"
-	InputAutocapitalizeAttrEnumOff InputAutocapitalizeAttrEnum = "off"
-	InputAutocapitalizeAttrEnumOn InputAutocapitalizeAttrEnum = "on"
-	InputAutocapitalizeAttrEnumSentences InputAutocapitalizeAttrEnum = "sentences"
 )
 
 type InputAutocorrectAttrEnum string
 
 const (
 	InputAutocorrectAttrEnumOff InputAutocorrectAttrEnum = "off"
-	InputAutocorrectAttrEnumOn InputAutocorrectAttrEnum = "on"
+	InputAutocorrectAttrEnumOn  InputAutocorrectAttrEnum = "on"
 )
 
 type InputContenteditableAttrEnum string
 
 const (
-	InputContenteditableAttrEnumFalse InputContenteditableAttrEnum = "false"
+	InputContenteditableAttrEnumFalse         InputContenteditableAttrEnum = "false"
 	InputContenteditableAttrEnumPlaintextOnly InputContenteditableAttrEnum = "plaintext-only"
-	InputContenteditableAttrEnumTrue InputContenteditableAttrEnum = "true"
+	InputContenteditableAttrEnumTrue          InputContenteditableAttrEnum = "true"
 )
 
 type inputAttrs map[string]any
 
 func (e *InputElement) Autocapitalize(a InputAutocapitalizeAttrEnum) *InputElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *InputElement) Autocorrect(a InputAutocorrectAttrEnum) *InputElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *InputElement) Autofocus(b bool) *InputElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *InputElement) Class(s ...string) *InputElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *InputElement) Contenteditable(a InputContenteditableAttrEnum) *InputElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *InputElement) Id(s string) *InputElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *InputElement) Slot(s string) *InputElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type MenuElement struct {
 	attributes menuAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type MenuElement struct {
 // Spec Description: The menu element represents a toolbar consisting of its contents, in the form of an unordered list of items (represented by li elements), each of which represents a command that the user can perform or activate.
 func Menu(children ...htemel.Node) *MenuElement {
 	node := &MenuElement{
-		children: children,
+		children:   children,
 		attributes: make(menuAttrs),
 	}
 
@@ -41,64 +42,70 @@ func MenuIf(condition bool, children ...htemel.Node) *MenuElement {
 type MenuAutocapitalizeAttrEnum string
 
 const (
-	MenuAutocapitalizeAttrEnumOff MenuAutocapitalizeAttrEnum = "off"
-	MenuAutocapitalizeAttrEnumOn MenuAutocapitalizeAttrEnum = "on"
-	MenuAutocapitalizeAttrEnumSentences MenuAutocapitalizeAttrEnum = "sentences"
-	MenuAutocapitalizeAttrEnumWords MenuAutocapitalizeAttrEnum = "words"
+	MenuAutocapitalizeAttrEnumSentences  MenuAutocapitalizeAttrEnum = "sentences"
+	MenuAutocapitalizeAttrEnumWords      MenuAutocapitalizeAttrEnum = "words"
 	MenuAutocapitalizeAttrEnumCharacters MenuAutocapitalizeAttrEnum = "characters"
-	MenuAutocapitalizeAttrEnumNone MenuAutocapitalizeAttrEnum = "none"
+	MenuAutocapitalizeAttrEnumNone       MenuAutocapitalizeAttrEnum = "none"
+	MenuAutocapitalizeAttrEnumOff        MenuAutocapitalizeAttrEnum = "off"
+	MenuAutocapitalizeAttrEnumOn         MenuAutocapitalizeAttrEnum = "on"
 )
 
 type MenuAutocorrectAttrEnum string
 
 const (
 	MenuAutocorrectAttrEnumOff MenuAutocorrectAttrEnum = "off"
-	MenuAutocorrectAttrEnumOn MenuAutocorrectAttrEnum = "on"
+	MenuAutocorrectAttrEnumOn  MenuAutocorrectAttrEnum = "on"
 )
 
 type MenuContenteditableAttrEnum string
 
 const (
-	MenuContenteditableAttrEnumFalse MenuContenteditableAttrEnum = "false"
+	MenuContenteditableAttrEnumFalse         MenuContenteditableAttrEnum = "false"
 	MenuContenteditableAttrEnumPlaintextOnly MenuContenteditableAttrEnum = "plaintext-only"
-	MenuContenteditableAttrEnumTrue MenuContenteditableAttrEnum = "true"
+	MenuContenteditableAttrEnumTrue          MenuContenteditableAttrEnum = "true"
 )
 
 type menuAttrs map[string]any
 
 func (e *MenuElement) Autocapitalize(a MenuAutocapitalizeAttrEnum) *MenuElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *MenuElement) Autocorrect(a MenuAutocorrectAttrEnum) *MenuElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *MenuElement) Autofocus(b bool) *MenuElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *MenuElement) Class(s ...string) *MenuElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *MenuElement) Contenteditable(a MenuContenteditableAttrEnum) *MenuElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *MenuElement) Id(s string) *MenuElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *MenuElement) Slot(s string) *MenuElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

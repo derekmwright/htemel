@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type PictureElement struct {
 	attributes pictureAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type PictureElement struct {
 // Spec Description: The picture element is a container which provides multiple sources to its contained img element to allow authors to declaratively control or give hints to the user agent about which image resource to use, based on the screen pixel density, viewport size, image format, and other factors. It represents its children.
 func Picture(children ...htemel.Node) *PictureElement {
 	node := &PictureElement{
-		children: children,
+		children:   children,
 		attributes: make(pictureAttrs),
 	}
 
@@ -42,63 +43,69 @@ type PictureAutocapitalizeAttrEnum string
 
 const (
 	PictureAutocapitalizeAttrEnumCharacters PictureAutocapitalizeAttrEnum = "characters"
-	PictureAutocapitalizeAttrEnumNone PictureAutocapitalizeAttrEnum = "none"
-	PictureAutocapitalizeAttrEnumOff PictureAutocapitalizeAttrEnum = "off"
-	PictureAutocapitalizeAttrEnumOn PictureAutocapitalizeAttrEnum = "on"
-	PictureAutocapitalizeAttrEnumSentences PictureAutocapitalizeAttrEnum = "sentences"
-	PictureAutocapitalizeAttrEnumWords PictureAutocapitalizeAttrEnum = "words"
+	PictureAutocapitalizeAttrEnumNone       PictureAutocapitalizeAttrEnum = "none"
+	PictureAutocapitalizeAttrEnumOff        PictureAutocapitalizeAttrEnum = "off"
+	PictureAutocapitalizeAttrEnumOn         PictureAutocapitalizeAttrEnum = "on"
+	PictureAutocapitalizeAttrEnumSentences  PictureAutocapitalizeAttrEnum = "sentences"
+	PictureAutocapitalizeAttrEnumWords      PictureAutocapitalizeAttrEnum = "words"
 )
 
 type PictureAutocorrectAttrEnum string
 
 const (
 	PictureAutocorrectAttrEnumOff PictureAutocorrectAttrEnum = "off"
-	PictureAutocorrectAttrEnumOn PictureAutocorrectAttrEnum = "on"
+	PictureAutocorrectAttrEnumOn  PictureAutocorrectAttrEnum = "on"
 )
 
 type PictureContenteditableAttrEnum string
 
 const (
-	PictureContenteditableAttrEnumFalse PictureContenteditableAttrEnum = "false"
+	PictureContenteditableAttrEnumFalse         PictureContenteditableAttrEnum = "false"
 	PictureContenteditableAttrEnumPlaintextOnly PictureContenteditableAttrEnum = "plaintext-only"
-	PictureContenteditableAttrEnumTrue PictureContenteditableAttrEnum = "true"
+	PictureContenteditableAttrEnumTrue          PictureContenteditableAttrEnum = "true"
 )
 
 type pictureAttrs map[string]any
 
 func (e *PictureElement) Autocapitalize(a PictureAutocapitalizeAttrEnum) *PictureElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *PictureElement) Autocorrect(a PictureAutocorrectAttrEnum) *PictureElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *PictureElement) Autofocus(b bool) *PictureElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *PictureElement) Class(s ...string) *PictureElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *PictureElement) Contenteditable(a PictureContenteditableAttrEnum) *PictureElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *PictureElement) Id(s string) *PictureElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *PictureElement) Slot(s string) *PictureElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

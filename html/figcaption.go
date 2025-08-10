@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type FigcaptionElement struct {
 	attributes figcaptionAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type FigcaptionElement struct {
 // Spec Description: The figcaption element represents a caption or legend for the rest of the contents of the figcaption element's parent figure element, if any.
 func Figcaption(children ...htemel.Node) *FigcaptionElement {
 	node := &FigcaptionElement{
-		children: children,
+		children:   children,
 		attributes: make(figcaptionAttrs),
 	}
 
@@ -41,64 +42,70 @@ func FigcaptionIf(condition bool, children ...htemel.Node) *FigcaptionElement {
 type FigcaptionAutocapitalizeAttrEnum string
 
 const (
-	FigcaptionAutocapitalizeAttrEnumNone FigcaptionAutocapitalizeAttrEnum = "none"
-	FigcaptionAutocapitalizeAttrEnumOff FigcaptionAutocapitalizeAttrEnum = "off"
-	FigcaptionAutocapitalizeAttrEnumOn FigcaptionAutocapitalizeAttrEnum = "on"
-	FigcaptionAutocapitalizeAttrEnumSentences FigcaptionAutocapitalizeAttrEnum = "sentences"
-	FigcaptionAutocapitalizeAttrEnumWords FigcaptionAutocapitalizeAttrEnum = "words"
 	FigcaptionAutocapitalizeAttrEnumCharacters FigcaptionAutocapitalizeAttrEnum = "characters"
+	FigcaptionAutocapitalizeAttrEnumNone       FigcaptionAutocapitalizeAttrEnum = "none"
+	FigcaptionAutocapitalizeAttrEnumOff        FigcaptionAutocapitalizeAttrEnum = "off"
+	FigcaptionAutocapitalizeAttrEnumOn         FigcaptionAutocapitalizeAttrEnum = "on"
+	FigcaptionAutocapitalizeAttrEnumSentences  FigcaptionAutocapitalizeAttrEnum = "sentences"
+	FigcaptionAutocapitalizeAttrEnumWords      FigcaptionAutocapitalizeAttrEnum = "words"
 )
 
 type FigcaptionAutocorrectAttrEnum string
 
 const (
-	FigcaptionAutocorrectAttrEnumOn FigcaptionAutocorrectAttrEnum = "on"
 	FigcaptionAutocorrectAttrEnumOff FigcaptionAutocorrectAttrEnum = "off"
+	FigcaptionAutocorrectAttrEnumOn  FigcaptionAutocorrectAttrEnum = "on"
 )
 
 type FigcaptionContenteditableAttrEnum string
 
 const (
-	FigcaptionContenteditableAttrEnumFalse FigcaptionContenteditableAttrEnum = "false"
 	FigcaptionContenteditableAttrEnumPlaintextOnly FigcaptionContenteditableAttrEnum = "plaintext-only"
-	FigcaptionContenteditableAttrEnumTrue FigcaptionContenteditableAttrEnum = "true"
+	FigcaptionContenteditableAttrEnumTrue          FigcaptionContenteditableAttrEnum = "true"
+	FigcaptionContenteditableAttrEnumFalse         FigcaptionContenteditableAttrEnum = "false"
 )
 
 type figcaptionAttrs map[string]any
 
 func (e *FigcaptionElement) Autocapitalize(a FigcaptionAutocapitalizeAttrEnum) *FigcaptionElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Autocorrect(a FigcaptionAutocorrectAttrEnum) *FigcaptionElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *FigcaptionElement) Autofocus(b bool) *FigcaptionElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *FigcaptionElement) Class(s ...string) *FigcaptionElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Contenteditable(a FigcaptionContenteditableAttrEnum) *FigcaptionElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Id(s string) *FigcaptionElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Slot(s string) *FigcaptionElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

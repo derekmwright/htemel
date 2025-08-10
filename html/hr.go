@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type HrElement struct {
 	attributes hrAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type HrElement struct {
 // Spec Description: The hr element represents a paragraph-level thematic break, e.g., a scene change in a story, or a transition to another topic within a section of a reference book; alternatively, it represents a separator between a set of options of a select element.
 func Hr(children ...htemel.Node) *HrElement {
 	node := &HrElement{
-		children: children,
+		children:   children,
 		attributes: make(hrAttrs),
 	}
 
@@ -41,11 +42,11 @@ func HrIf(condition bool, children ...htemel.Node) *HrElement {
 type HrAutocapitalizeAttrEnum string
 
 const (
-	HrAutocapitalizeAttrEnumNone HrAutocapitalizeAttrEnum = "none"
-	HrAutocapitalizeAttrEnumOff HrAutocapitalizeAttrEnum = "off"
-	HrAutocapitalizeAttrEnumOn HrAutocapitalizeAttrEnum = "on"
-	HrAutocapitalizeAttrEnumSentences HrAutocapitalizeAttrEnum = "sentences"
-	HrAutocapitalizeAttrEnumWords HrAutocapitalizeAttrEnum = "words"
+	HrAutocapitalizeAttrEnumNone       HrAutocapitalizeAttrEnum = "none"
+	HrAutocapitalizeAttrEnumOff        HrAutocapitalizeAttrEnum = "off"
+	HrAutocapitalizeAttrEnumOn         HrAutocapitalizeAttrEnum = "on"
+	HrAutocapitalizeAttrEnumSentences  HrAutocapitalizeAttrEnum = "sentences"
+	HrAutocapitalizeAttrEnumWords      HrAutocapitalizeAttrEnum = "words"
 	HrAutocapitalizeAttrEnumCharacters HrAutocapitalizeAttrEnum = "characters"
 )
 
@@ -53,52 +54,58 @@ type HrAutocorrectAttrEnum string
 
 const (
 	HrAutocorrectAttrEnumOff HrAutocorrectAttrEnum = "off"
-	HrAutocorrectAttrEnumOn HrAutocorrectAttrEnum = "on"
+	HrAutocorrectAttrEnumOn  HrAutocorrectAttrEnum = "on"
 )
 
 type HrContenteditableAttrEnum string
 
 const (
-	HrContenteditableAttrEnumFalse HrContenteditableAttrEnum = "false"
+	HrContenteditableAttrEnumTrue          HrContenteditableAttrEnum = "true"
+	HrContenteditableAttrEnumFalse         HrContenteditableAttrEnum = "false"
 	HrContenteditableAttrEnumPlaintextOnly HrContenteditableAttrEnum = "plaintext-only"
-	HrContenteditableAttrEnumTrue HrContenteditableAttrEnum = "true"
 )
 
 type hrAttrs map[string]any
 
 func (e *HrElement) Autocapitalize(a HrAutocapitalizeAttrEnum) *HrElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *HrElement) Autocorrect(a HrAutocorrectAttrEnum) *HrElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *HrElement) Autofocus(b bool) *HrElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *HrElement) Class(s ...string) *HrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *HrElement) Contenteditable(a HrContenteditableAttrEnum) *HrElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *HrElement) Id(s string) *HrElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *HrElement) Slot(s string) *HrElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

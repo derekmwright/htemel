@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SectionElement struct {
 	attributes sectionAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SectionElement struct {
 // Spec Description: The section element represents a generic section of a document or application. A section, in this context, is a thematic grouping of content, typically with a heading.
 func Section(children ...htemel.Node) *SectionElement {
 	node := &SectionElement{
-		children: children,
+		children:   children,
 		attributes: make(sectionAttrs),
 	}
 
@@ -41,64 +42,70 @@ func SectionIf(condition bool, children ...htemel.Node) *SectionElement {
 type SectionAutocapitalizeAttrEnum string
 
 const (
-	SectionAutocapitalizeAttrEnumNone SectionAutocapitalizeAttrEnum = "none"
-	SectionAutocapitalizeAttrEnumOff SectionAutocapitalizeAttrEnum = "off"
-	SectionAutocapitalizeAttrEnumOn SectionAutocapitalizeAttrEnum = "on"
-	SectionAutocapitalizeAttrEnumSentences SectionAutocapitalizeAttrEnum = "sentences"
-	SectionAutocapitalizeAttrEnumWords SectionAutocapitalizeAttrEnum = "words"
+	SectionAutocapitalizeAttrEnumOn         SectionAutocapitalizeAttrEnum = "on"
+	SectionAutocapitalizeAttrEnumSentences  SectionAutocapitalizeAttrEnum = "sentences"
+	SectionAutocapitalizeAttrEnumWords      SectionAutocapitalizeAttrEnum = "words"
 	SectionAutocapitalizeAttrEnumCharacters SectionAutocapitalizeAttrEnum = "characters"
+	SectionAutocapitalizeAttrEnumNone       SectionAutocapitalizeAttrEnum = "none"
+	SectionAutocapitalizeAttrEnumOff        SectionAutocapitalizeAttrEnum = "off"
 )
 
 type SectionAutocorrectAttrEnum string
 
 const (
 	SectionAutocorrectAttrEnumOff SectionAutocorrectAttrEnum = "off"
-	SectionAutocorrectAttrEnumOn SectionAutocorrectAttrEnum = "on"
+	SectionAutocorrectAttrEnumOn  SectionAutocorrectAttrEnum = "on"
 )
 
 type SectionContenteditableAttrEnum string
 
 const (
-	SectionContenteditableAttrEnumTrue SectionContenteditableAttrEnum = "true"
-	SectionContenteditableAttrEnumFalse SectionContenteditableAttrEnum = "false"
+	SectionContenteditableAttrEnumFalse         SectionContenteditableAttrEnum = "false"
 	SectionContenteditableAttrEnumPlaintextOnly SectionContenteditableAttrEnum = "plaintext-only"
+	SectionContenteditableAttrEnumTrue          SectionContenteditableAttrEnum = "true"
 )
 
 type sectionAttrs map[string]any
 
 func (e *SectionElement) Autocapitalize(a SectionAutocapitalizeAttrEnum) *SectionElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SectionElement) Autocorrect(a SectionAutocorrectAttrEnum) *SectionElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SectionElement) Autofocus(b bool) *SectionElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SectionElement) Class(s ...string) *SectionElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SectionElement) Contenteditable(a SectionContenteditableAttrEnum) *SectionElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SectionElement) Id(s string) *SectionElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SectionElement) Slot(s string) *SectionElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

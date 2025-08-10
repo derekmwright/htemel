@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type BlockquoteElement struct {
 	attributes blockquoteAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type BlockquoteElement struct {
 // Spec Description: The blockquote element represents a section that is quoted from another source.
 func Blockquote(children ...htemel.Node) *BlockquoteElement {
 	node := &BlockquoteElement{
-		children: children,
+		children:   children,
 		attributes: make(blockquoteAttrs),
 	}
 
@@ -42,63 +43,69 @@ type BlockquoteAutocapitalizeAttrEnum string
 
 const (
 	BlockquoteAutocapitalizeAttrEnumCharacters BlockquoteAutocapitalizeAttrEnum = "characters"
-	BlockquoteAutocapitalizeAttrEnumNone BlockquoteAutocapitalizeAttrEnum = "none"
-	BlockquoteAutocapitalizeAttrEnumOff BlockquoteAutocapitalizeAttrEnum = "off"
-	BlockquoteAutocapitalizeAttrEnumOn BlockquoteAutocapitalizeAttrEnum = "on"
-	BlockquoteAutocapitalizeAttrEnumSentences BlockquoteAutocapitalizeAttrEnum = "sentences"
-	BlockquoteAutocapitalizeAttrEnumWords BlockquoteAutocapitalizeAttrEnum = "words"
+	BlockquoteAutocapitalizeAttrEnumNone       BlockquoteAutocapitalizeAttrEnum = "none"
+	BlockquoteAutocapitalizeAttrEnumOff        BlockquoteAutocapitalizeAttrEnum = "off"
+	BlockquoteAutocapitalizeAttrEnumOn         BlockquoteAutocapitalizeAttrEnum = "on"
+	BlockquoteAutocapitalizeAttrEnumSentences  BlockquoteAutocapitalizeAttrEnum = "sentences"
+	BlockquoteAutocapitalizeAttrEnumWords      BlockquoteAutocapitalizeAttrEnum = "words"
 )
 
 type BlockquoteAutocorrectAttrEnum string
 
 const (
 	BlockquoteAutocorrectAttrEnumOff BlockquoteAutocorrectAttrEnum = "off"
-	BlockquoteAutocorrectAttrEnumOn BlockquoteAutocorrectAttrEnum = "on"
+	BlockquoteAutocorrectAttrEnumOn  BlockquoteAutocorrectAttrEnum = "on"
 )
 
 type BlockquoteContenteditableAttrEnum string
 
 const (
-	BlockquoteContenteditableAttrEnumFalse BlockquoteContenteditableAttrEnum = "false"
+	BlockquoteContenteditableAttrEnumFalse         BlockquoteContenteditableAttrEnum = "false"
 	BlockquoteContenteditableAttrEnumPlaintextOnly BlockquoteContenteditableAttrEnum = "plaintext-only"
-	BlockquoteContenteditableAttrEnumTrue BlockquoteContenteditableAttrEnum = "true"
+	BlockquoteContenteditableAttrEnumTrue          BlockquoteContenteditableAttrEnum = "true"
 )
 
 type blockquoteAttrs map[string]any
 
 func (e *BlockquoteElement) Autocapitalize(a BlockquoteAutocapitalizeAttrEnum) *BlockquoteElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *BlockquoteElement) Autocorrect(a BlockquoteAutocorrectAttrEnum) *BlockquoteElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *BlockquoteElement) Autofocus(b bool) *BlockquoteElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *BlockquoteElement) Class(s ...string) *BlockquoteElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *BlockquoteElement) Contenteditable(a BlockquoteContenteditableAttrEnum) *BlockquoteElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *BlockquoteElement) Id(s string) *BlockquoteElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *BlockquoteElement) Slot(s string) *BlockquoteElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

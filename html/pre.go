@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type PreElement struct {
 	attributes preAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type PreElement struct {
 // Spec Description: The pre element represents a block of preformatted text, in which structure is represented by typographic conventions rather than by elements.
 func Pre(children ...htemel.Node) *PreElement {
 	node := &PreElement{
-		children: children,
+		children:   children,
 		attributes: make(preAttrs),
 	}
 
@@ -41,64 +42,70 @@ func PreIf(condition bool, children ...htemel.Node) *PreElement {
 type PreAutocapitalizeAttrEnum string
 
 const (
-	PreAutocapitalizeAttrEnumOn PreAutocapitalizeAttrEnum = "on"
-	PreAutocapitalizeAttrEnumSentences PreAutocapitalizeAttrEnum = "sentences"
-	PreAutocapitalizeAttrEnumWords PreAutocapitalizeAttrEnum = "words"
 	PreAutocapitalizeAttrEnumCharacters PreAutocapitalizeAttrEnum = "characters"
-	PreAutocapitalizeAttrEnumNone PreAutocapitalizeAttrEnum = "none"
-	PreAutocapitalizeAttrEnumOff PreAutocapitalizeAttrEnum = "off"
+	PreAutocapitalizeAttrEnumNone       PreAutocapitalizeAttrEnum = "none"
+	PreAutocapitalizeAttrEnumOff        PreAutocapitalizeAttrEnum = "off"
+	PreAutocapitalizeAttrEnumOn         PreAutocapitalizeAttrEnum = "on"
+	PreAutocapitalizeAttrEnumSentences  PreAutocapitalizeAttrEnum = "sentences"
+	PreAutocapitalizeAttrEnumWords      PreAutocapitalizeAttrEnum = "words"
 )
 
 type PreAutocorrectAttrEnum string
 
 const (
 	PreAutocorrectAttrEnumOff PreAutocorrectAttrEnum = "off"
-	PreAutocorrectAttrEnumOn PreAutocorrectAttrEnum = "on"
+	PreAutocorrectAttrEnumOn  PreAutocorrectAttrEnum = "on"
 )
 
 type PreContenteditableAttrEnum string
 
 const (
+	PreContenteditableAttrEnumFalse         PreContenteditableAttrEnum = "false"
 	PreContenteditableAttrEnumPlaintextOnly PreContenteditableAttrEnum = "plaintext-only"
-	PreContenteditableAttrEnumTrue PreContenteditableAttrEnum = "true"
-	PreContenteditableAttrEnumFalse PreContenteditableAttrEnum = "false"
+	PreContenteditableAttrEnumTrue          PreContenteditableAttrEnum = "true"
 )
 
 type preAttrs map[string]any
 
 func (e *PreElement) Autocapitalize(a PreAutocapitalizeAttrEnum) *PreElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *PreElement) Autocorrect(a PreAutocorrectAttrEnum) *PreElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *PreElement) Autofocus(b bool) *PreElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *PreElement) Class(s ...string) *PreElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *PreElement) Contenteditable(a PreContenteditableAttrEnum) *PreElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *PreElement) Id(s string) *PreElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *PreElement) Slot(s string) *PreElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

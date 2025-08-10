@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SubElement struct {
 	attributes subAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SubElement struct {
 // Spec Description: The sup element represents a superscript and the sub element represents a subscript.
 func Sub(children ...htemel.Node) *SubElement {
 	node := &SubElement{
-		children: children,
+		children:   children,
 		attributes: make(subAttrs),
 	}
 
@@ -41,64 +42,70 @@ func SubIf(condition bool, children ...htemel.Node) *SubElement {
 type SubAutocapitalizeAttrEnum string
 
 const (
-	SubAutocapitalizeAttrEnumWords SubAutocapitalizeAttrEnum = "words"
 	SubAutocapitalizeAttrEnumCharacters SubAutocapitalizeAttrEnum = "characters"
-	SubAutocapitalizeAttrEnumNone SubAutocapitalizeAttrEnum = "none"
-	SubAutocapitalizeAttrEnumOff SubAutocapitalizeAttrEnum = "off"
-	SubAutocapitalizeAttrEnumOn SubAutocapitalizeAttrEnum = "on"
-	SubAutocapitalizeAttrEnumSentences SubAutocapitalizeAttrEnum = "sentences"
+	SubAutocapitalizeAttrEnumNone       SubAutocapitalizeAttrEnum = "none"
+	SubAutocapitalizeAttrEnumOff        SubAutocapitalizeAttrEnum = "off"
+	SubAutocapitalizeAttrEnumOn         SubAutocapitalizeAttrEnum = "on"
+	SubAutocapitalizeAttrEnumSentences  SubAutocapitalizeAttrEnum = "sentences"
+	SubAutocapitalizeAttrEnumWords      SubAutocapitalizeAttrEnum = "words"
 )
 
 type SubAutocorrectAttrEnum string
 
 const (
 	SubAutocorrectAttrEnumOff SubAutocorrectAttrEnum = "off"
-	SubAutocorrectAttrEnumOn SubAutocorrectAttrEnum = "on"
+	SubAutocorrectAttrEnumOn  SubAutocorrectAttrEnum = "on"
 )
 
 type SubContenteditableAttrEnum string
 
 const (
-	SubContenteditableAttrEnumFalse SubContenteditableAttrEnum = "false"
+	SubContenteditableAttrEnumFalse         SubContenteditableAttrEnum = "false"
 	SubContenteditableAttrEnumPlaintextOnly SubContenteditableAttrEnum = "plaintext-only"
-	SubContenteditableAttrEnumTrue SubContenteditableAttrEnum = "true"
+	SubContenteditableAttrEnumTrue          SubContenteditableAttrEnum = "true"
 )
 
 type subAttrs map[string]any
 
 func (e *SubElement) Autocapitalize(a SubAutocapitalizeAttrEnum) *SubElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SubElement) Autocorrect(a SubAutocorrectAttrEnum) *SubElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SubElement) Autofocus(b bool) *SubElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SubElement) Class(s ...string) *SubElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SubElement) Contenteditable(a SubContenteditableAttrEnum) *SubElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SubElement) Id(s string) *SubElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SubElement) Slot(s string) *SubElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

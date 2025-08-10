@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DialogElement struct {
 	attributes dialogAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DialogElement struct {
 // Spec Description: The dialog element represents a transitory part of an application, in the form of a small window ("dialog box"), which the user interacts with to perform a task or gather information. Once the user is done, the dialog can be automatically closed by the application, or manually closed by the user.
 func Dialog(children ...htemel.Node) *DialogElement {
 	node := &DialogElement{
-		children: children,
+		children:   children,
 		attributes: make(dialogAttrs),
 	}
 
@@ -41,64 +42,70 @@ func DialogIf(condition bool, children ...htemel.Node) *DialogElement {
 type DialogAutocapitalizeAttrEnum string
 
 const (
-	DialogAutocapitalizeAttrEnumOff DialogAutocapitalizeAttrEnum = "off"
-	DialogAutocapitalizeAttrEnumOn DialogAutocapitalizeAttrEnum = "on"
-	DialogAutocapitalizeAttrEnumSentences DialogAutocapitalizeAttrEnum = "sentences"
-	DialogAutocapitalizeAttrEnumWords DialogAutocapitalizeAttrEnum = "words"
 	DialogAutocapitalizeAttrEnumCharacters DialogAutocapitalizeAttrEnum = "characters"
-	DialogAutocapitalizeAttrEnumNone DialogAutocapitalizeAttrEnum = "none"
+	DialogAutocapitalizeAttrEnumNone       DialogAutocapitalizeAttrEnum = "none"
+	DialogAutocapitalizeAttrEnumOff        DialogAutocapitalizeAttrEnum = "off"
+	DialogAutocapitalizeAttrEnumOn         DialogAutocapitalizeAttrEnum = "on"
+	DialogAutocapitalizeAttrEnumSentences  DialogAutocapitalizeAttrEnum = "sentences"
+	DialogAutocapitalizeAttrEnumWords      DialogAutocapitalizeAttrEnum = "words"
 )
 
 type DialogAutocorrectAttrEnum string
 
 const (
 	DialogAutocorrectAttrEnumOff DialogAutocorrectAttrEnum = "off"
-	DialogAutocorrectAttrEnumOn DialogAutocorrectAttrEnum = "on"
+	DialogAutocorrectAttrEnumOn  DialogAutocorrectAttrEnum = "on"
 )
 
 type DialogContenteditableAttrEnum string
 
 const (
+	DialogContenteditableAttrEnumFalse         DialogContenteditableAttrEnum = "false"
 	DialogContenteditableAttrEnumPlaintextOnly DialogContenteditableAttrEnum = "plaintext-only"
-	DialogContenteditableAttrEnumTrue DialogContenteditableAttrEnum = "true"
-	DialogContenteditableAttrEnumFalse DialogContenteditableAttrEnum = "false"
+	DialogContenteditableAttrEnumTrue          DialogContenteditableAttrEnum = "true"
 )
 
 type dialogAttrs map[string]any
 
 func (e *DialogElement) Autocapitalize(a DialogAutocapitalizeAttrEnum) *DialogElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DialogElement) Autocorrect(a DialogAutocorrectAttrEnum) *DialogElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *DialogElement) Autofocus(b bool) *DialogElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *DialogElement) Class(s ...string) *DialogElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DialogElement) Contenteditable(a DialogContenteditableAttrEnum) *DialogElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DialogElement) Id(s string) *DialogElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *DialogElement) Slot(s string) *DialogElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

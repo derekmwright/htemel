@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TemplateElement struct {
 	attributes templateAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TemplateElement struct {
 // Spec Description: The template element is used to declare fragments of HTML that can be cloned and inserted in the document by script.
 func Template(children ...htemel.Node) *TemplateElement {
 	node := &TemplateElement{
-		children: children,
+		children:   children,
 		attributes: make(templateAttrs),
 	}
 
@@ -41,64 +42,70 @@ func TemplateIf(condition bool, children ...htemel.Node) *TemplateElement {
 type TemplateAutocapitalizeAttrEnum string
 
 const (
-	TemplateAutocapitalizeAttrEnumOn TemplateAutocapitalizeAttrEnum = "on"
-	TemplateAutocapitalizeAttrEnumSentences TemplateAutocapitalizeAttrEnum = "sentences"
-	TemplateAutocapitalizeAttrEnumWords TemplateAutocapitalizeAttrEnum = "words"
 	TemplateAutocapitalizeAttrEnumCharacters TemplateAutocapitalizeAttrEnum = "characters"
-	TemplateAutocapitalizeAttrEnumNone TemplateAutocapitalizeAttrEnum = "none"
-	TemplateAutocapitalizeAttrEnumOff TemplateAutocapitalizeAttrEnum = "off"
+	TemplateAutocapitalizeAttrEnumNone       TemplateAutocapitalizeAttrEnum = "none"
+	TemplateAutocapitalizeAttrEnumOff        TemplateAutocapitalizeAttrEnum = "off"
+	TemplateAutocapitalizeAttrEnumOn         TemplateAutocapitalizeAttrEnum = "on"
+	TemplateAutocapitalizeAttrEnumSentences  TemplateAutocapitalizeAttrEnum = "sentences"
+	TemplateAutocapitalizeAttrEnumWords      TemplateAutocapitalizeAttrEnum = "words"
 )
 
 type TemplateAutocorrectAttrEnum string
 
 const (
 	TemplateAutocorrectAttrEnumOff TemplateAutocorrectAttrEnum = "off"
-	TemplateAutocorrectAttrEnumOn TemplateAutocorrectAttrEnum = "on"
+	TemplateAutocorrectAttrEnumOn  TemplateAutocorrectAttrEnum = "on"
 )
 
 type TemplateContenteditableAttrEnum string
 
 const (
-	TemplateContenteditableAttrEnumTrue TemplateContenteditableAttrEnum = "true"
-	TemplateContenteditableAttrEnumFalse TemplateContenteditableAttrEnum = "false"
+	TemplateContenteditableAttrEnumFalse         TemplateContenteditableAttrEnum = "false"
 	TemplateContenteditableAttrEnumPlaintextOnly TemplateContenteditableAttrEnum = "plaintext-only"
+	TemplateContenteditableAttrEnumTrue          TemplateContenteditableAttrEnum = "true"
 )
 
 type templateAttrs map[string]any
 
 func (e *TemplateElement) Autocapitalize(a TemplateAutocapitalizeAttrEnum) *TemplateElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TemplateElement) Autocorrect(a TemplateAutocorrectAttrEnum) *TemplateElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TemplateElement) Autofocus(b bool) *TemplateElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TemplateElement) Class(s ...string) *TemplateElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TemplateElement) Contenteditable(a TemplateContenteditableAttrEnum) *TemplateElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TemplateElement) Id(s string) *TemplateElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TemplateElement) Slot(s string) *TemplateElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

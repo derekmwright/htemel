@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DlElement struct {
 	attributes dlAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DlElement struct {
 // Spec Description: The dl element represents an association list consisting of zero or more name-value groups (a description list). A name-value group consists of one or more names (dt elements, possibly as children of a div element child) followed by one or more values (dd elements, possibly as children of a div element child), ignoring any nodes other than dt and dd element children, and dt and dd elements that are children of div element children. Within a single dl element, there should not be more than one dt element for each name.
 func Dl(children ...htemel.Node) *DlElement {
 	node := &DlElement{
-		children: children,
+		children:   children,
 		attributes: make(dlAttrs),
 	}
 
@@ -41,64 +42,70 @@ func DlIf(condition bool, children ...htemel.Node) *DlElement {
 type DlAutocapitalizeAttrEnum string
 
 const (
-	DlAutocapitalizeAttrEnumWords DlAutocapitalizeAttrEnum = "words"
 	DlAutocapitalizeAttrEnumCharacters DlAutocapitalizeAttrEnum = "characters"
-	DlAutocapitalizeAttrEnumNone DlAutocapitalizeAttrEnum = "none"
-	DlAutocapitalizeAttrEnumOff DlAutocapitalizeAttrEnum = "off"
-	DlAutocapitalizeAttrEnumOn DlAutocapitalizeAttrEnum = "on"
-	DlAutocapitalizeAttrEnumSentences DlAutocapitalizeAttrEnum = "sentences"
+	DlAutocapitalizeAttrEnumNone       DlAutocapitalizeAttrEnum = "none"
+	DlAutocapitalizeAttrEnumOff        DlAutocapitalizeAttrEnum = "off"
+	DlAutocapitalizeAttrEnumOn         DlAutocapitalizeAttrEnum = "on"
+	DlAutocapitalizeAttrEnumSentences  DlAutocapitalizeAttrEnum = "sentences"
+	DlAutocapitalizeAttrEnumWords      DlAutocapitalizeAttrEnum = "words"
 )
 
 type DlAutocorrectAttrEnum string
 
 const (
 	DlAutocorrectAttrEnumOff DlAutocorrectAttrEnum = "off"
-	DlAutocorrectAttrEnumOn DlAutocorrectAttrEnum = "on"
+	DlAutocorrectAttrEnumOn  DlAutocorrectAttrEnum = "on"
 )
 
 type DlContenteditableAttrEnum string
 
 const (
-	DlContenteditableAttrEnumFalse DlContenteditableAttrEnum = "false"
+	DlContenteditableAttrEnumFalse         DlContenteditableAttrEnum = "false"
 	DlContenteditableAttrEnumPlaintextOnly DlContenteditableAttrEnum = "plaintext-only"
-	DlContenteditableAttrEnumTrue DlContenteditableAttrEnum = "true"
+	DlContenteditableAttrEnumTrue          DlContenteditableAttrEnum = "true"
 )
 
 type dlAttrs map[string]any
 
 func (e *DlElement) Autocapitalize(a DlAutocapitalizeAttrEnum) *DlElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DlElement) Autocorrect(a DlAutocorrectAttrEnum) *DlElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *DlElement) Autofocus(b bool) *DlElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *DlElement) Class(s ...string) *DlElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DlElement) Contenteditable(a DlContenteditableAttrEnum) *DlElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DlElement) Id(s string) *DlElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *DlElement) Slot(s string) *DlElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

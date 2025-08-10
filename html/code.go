@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type CodeElement struct {
 	attributes codeAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type CodeElement struct {
 // Spec Description: The code element represents a fragment of computer code. This could be an XML element name, a filename, a computer program, or any other string that a computer would recognize.
 func Code(children ...htemel.Node) *CodeElement {
 	node := &CodeElement{
-		children: children,
+		children:   children,
 		attributes: make(codeAttrs),
 	}
 
@@ -42,63 +43,69 @@ type CodeAutocapitalizeAttrEnum string
 
 const (
 	CodeAutocapitalizeAttrEnumCharacters CodeAutocapitalizeAttrEnum = "characters"
-	CodeAutocapitalizeAttrEnumNone CodeAutocapitalizeAttrEnum = "none"
-	CodeAutocapitalizeAttrEnumOff CodeAutocapitalizeAttrEnum = "off"
-	CodeAutocapitalizeAttrEnumOn CodeAutocapitalizeAttrEnum = "on"
-	CodeAutocapitalizeAttrEnumSentences CodeAutocapitalizeAttrEnum = "sentences"
-	CodeAutocapitalizeAttrEnumWords CodeAutocapitalizeAttrEnum = "words"
+	CodeAutocapitalizeAttrEnumNone       CodeAutocapitalizeAttrEnum = "none"
+	CodeAutocapitalizeAttrEnumOff        CodeAutocapitalizeAttrEnum = "off"
+	CodeAutocapitalizeAttrEnumOn         CodeAutocapitalizeAttrEnum = "on"
+	CodeAutocapitalizeAttrEnumSentences  CodeAutocapitalizeAttrEnum = "sentences"
+	CodeAutocapitalizeAttrEnumWords      CodeAutocapitalizeAttrEnum = "words"
 )
 
 type CodeAutocorrectAttrEnum string
 
 const (
-	CodeAutocorrectAttrEnumOn CodeAutocorrectAttrEnum = "on"
 	CodeAutocorrectAttrEnumOff CodeAutocorrectAttrEnum = "off"
+	CodeAutocorrectAttrEnumOn  CodeAutocorrectAttrEnum = "on"
 )
 
 type CodeContenteditableAttrEnum string
 
 const (
-	CodeContenteditableAttrEnumFalse CodeContenteditableAttrEnum = "false"
+	CodeContenteditableAttrEnumFalse         CodeContenteditableAttrEnum = "false"
 	CodeContenteditableAttrEnumPlaintextOnly CodeContenteditableAttrEnum = "plaintext-only"
-	CodeContenteditableAttrEnumTrue CodeContenteditableAttrEnum = "true"
+	CodeContenteditableAttrEnumTrue          CodeContenteditableAttrEnum = "true"
 )
 
 type codeAttrs map[string]any
 
 func (e *CodeElement) Autocapitalize(a CodeAutocapitalizeAttrEnum) *CodeElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *CodeElement) Autocorrect(a CodeAutocorrectAttrEnum) *CodeElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *CodeElement) Autofocus(b bool) *CodeElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *CodeElement) Class(s ...string) *CodeElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *CodeElement) Contenteditable(a CodeContenteditableAttrEnum) *CodeElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *CodeElement) Id(s string) *CodeElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *CodeElement) Slot(s string) *CodeElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

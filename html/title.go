@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TitleElement struct {
 	attributes titleAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TitleElement struct {
 // Spec Description: The title element represents the document's title or name. Authors should use titles that identify their documents even when they are used out of context, for example in a user's history or bookmarks, or in search results. The document's title is often different from its first heading, since the first heading does not have to stand alone when taken out of context.
 func Title(children ...htemel.Node) *TitleElement {
 	node := &TitleElement{
-		children: children,
+		children:   children,
 		attributes: make(titleAttrs),
 	}
 
@@ -42,63 +43,69 @@ type TitleAutocapitalizeAttrEnum string
 
 const (
 	TitleAutocapitalizeAttrEnumCharacters TitleAutocapitalizeAttrEnum = "characters"
-	TitleAutocapitalizeAttrEnumNone TitleAutocapitalizeAttrEnum = "none"
-	TitleAutocapitalizeAttrEnumOff TitleAutocapitalizeAttrEnum = "off"
-	TitleAutocapitalizeAttrEnumOn TitleAutocapitalizeAttrEnum = "on"
-	TitleAutocapitalizeAttrEnumSentences TitleAutocapitalizeAttrEnum = "sentences"
-	TitleAutocapitalizeAttrEnumWords TitleAutocapitalizeAttrEnum = "words"
+	TitleAutocapitalizeAttrEnumNone       TitleAutocapitalizeAttrEnum = "none"
+	TitleAutocapitalizeAttrEnumOff        TitleAutocapitalizeAttrEnum = "off"
+	TitleAutocapitalizeAttrEnumOn         TitleAutocapitalizeAttrEnum = "on"
+	TitleAutocapitalizeAttrEnumSentences  TitleAutocapitalizeAttrEnum = "sentences"
+	TitleAutocapitalizeAttrEnumWords      TitleAutocapitalizeAttrEnum = "words"
 )
 
 type TitleAutocorrectAttrEnum string
 
 const (
 	TitleAutocorrectAttrEnumOff TitleAutocorrectAttrEnum = "off"
-	TitleAutocorrectAttrEnumOn TitleAutocorrectAttrEnum = "on"
+	TitleAutocorrectAttrEnumOn  TitleAutocorrectAttrEnum = "on"
 )
 
 type TitleContenteditableAttrEnum string
 
 const (
-	TitleContenteditableAttrEnumFalse TitleContenteditableAttrEnum = "false"
+	TitleContenteditableAttrEnumFalse         TitleContenteditableAttrEnum = "false"
 	TitleContenteditableAttrEnumPlaintextOnly TitleContenteditableAttrEnum = "plaintext-only"
-	TitleContenteditableAttrEnumTrue TitleContenteditableAttrEnum = "true"
+	TitleContenteditableAttrEnumTrue          TitleContenteditableAttrEnum = "true"
 )
 
 type titleAttrs map[string]any
 
 func (e *TitleElement) Autocapitalize(a TitleAutocapitalizeAttrEnum) *TitleElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TitleElement) Autocorrect(a TitleAutocorrectAttrEnum) *TitleElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TitleElement) Autofocus(b bool) *TitleElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TitleElement) Class(s ...string) *TitleElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TitleElement) Contenteditable(a TitleContenteditableAttrEnum) *TitleElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TitleElement) Id(s string) *TitleElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TitleElement) Slot(s string) *TitleElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DtElement struct {
 	attributes dtAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DtElement struct {
 // Spec Description: The dt element represents the term, or name, part of a term-description group in a description list (dl element).
 func Dt(children ...htemel.Node) *DtElement {
 	node := &DtElement{
-		children: children,
+		children:   children,
 		attributes: make(dtAttrs),
 	}
 
@@ -41,64 +42,70 @@ func DtIf(condition bool, children ...htemel.Node) *DtElement {
 type DtAutocapitalizeAttrEnum string
 
 const (
-	DtAutocapitalizeAttrEnumWords DtAutocapitalizeAttrEnum = "words"
+	DtAutocapitalizeAttrEnumSentences  DtAutocapitalizeAttrEnum = "sentences"
+	DtAutocapitalizeAttrEnumWords      DtAutocapitalizeAttrEnum = "words"
 	DtAutocapitalizeAttrEnumCharacters DtAutocapitalizeAttrEnum = "characters"
-	DtAutocapitalizeAttrEnumNone DtAutocapitalizeAttrEnum = "none"
-	DtAutocapitalizeAttrEnumOff DtAutocapitalizeAttrEnum = "off"
-	DtAutocapitalizeAttrEnumOn DtAutocapitalizeAttrEnum = "on"
-	DtAutocapitalizeAttrEnumSentences DtAutocapitalizeAttrEnum = "sentences"
+	DtAutocapitalizeAttrEnumNone       DtAutocapitalizeAttrEnum = "none"
+	DtAutocapitalizeAttrEnumOff        DtAutocapitalizeAttrEnum = "off"
+	DtAutocapitalizeAttrEnumOn         DtAutocapitalizeAttrEnum = "on"
 )
 
 type DtAutocorrectAttrEnum string
 
 const (
 	DtAutocorrectAttrEnumOff DtAutocorrectAttrEnum = "off"
-	DtAutocorrectAttrEnumOn DtAutocorrectAttrEnum = "on"
+	DtAutocorrectAttrEnumOn  DtAutocorrectAttrEnum = "on"
 )
 
 type DtContenteditableAttrEnum string
 
 const (
-	DtContenteditableAttrEnumTrue DtContenteditableAttrEnum = "true"
-	DtContenteditableAttrEnumFalse DtContenteditableAttrEnum = "false"
+	DtContenteditableAttrEnumFalse         DtContenteditableAttrEnum = "false"
 	DtContenteditableAttrEnumPlaintextOnly DtContenteditableAttrEnum = "plaintext-only"
+	DtContenteditableAttrEnumTrue          DtContenteditableAttrEnum = "true"
 )
 
 type dtAttrs map[string]any
 
 func (e *DtElement) Autocapitalize(a DtAutocapitalizeAttrEnum) *DtElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DtElement) Autocorrect(a DtAutocorrectAttrEnum) *DtElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *DtElement) Autofocus(b bool) *DtElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *DtElement) Class(s ...string) *DtElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DtElement) Contenteditable(a DtContenteditableAttrEnum) *DtElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DtElement) Id(s string) *DtElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *DtElement) Slot(s string) *DtElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

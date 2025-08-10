@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type VarElement struct {
 	attributes varAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type VarElement struct {
 // Spec Description: The var element represents a variable. This could be an actual variable in a mathematical expression or programming context, an identifier representing a constant, a symbol identifying a physical quantity, a function parameter, or just be a term used as a placeholder in prose.
 func Var(children ...htemel.Node) *VarElement {
 	node := &VarElement{
-		children: children,
+		children:   children,
 		attributes: make(varAttrs),
 	}
 
@@ -41,64 +42,70 @@ func VarIf(condition bool, children ...htemel.Node) *VarElement {
 type VarAutocapitalizeAttrEnum string
 
 const (
-	VarAutocapitalizeAttrEnumNone VarAutocapitalizeAttrEnum = "none"
-	VarAutocapitalizeAttrEnumOff VarAutocapitalizeAttrEnum = "off"
-	VarAutocapitalizeAttrEnumOn VarAutocapitalizeAttrEnum = "on"
-	VarAutocapitalizeAttrEnumSentences VarAutocapitalizeAttrEnum = "sentences"
-	VarAutocapitalizeAttrEnumWords VarAutocapitalizeAttrEnum = "words"
 	VarAutocapitalizeAttrEnumCharacters VarAutocapitalizeAttrEnum = "characters"
+	VarAutocapitalizeAttrEnumNone       VarAutocapitalizeAttrEnum = "none"
+	VarAutocapitalizeAttrEnumOff        VarAutocapitalizeAttrEnum = "off"
+	VarAutocapitalizeAttrEnumOn         VarAutocapitalizeAttrEnum = "on"
+	VarAutocapitalizeAttrEnumSentences  VarAutocapitalizeAttrEnum = "sentences"
+	VarAutocapitalizeAttrEnumWords      VarAutocapitalizeAttrEnum = "words"
 )
 
 type VarAutocorrectAttrEnum string
 
 const (
 	VarAutocorrectAttrEnumOff VarAutocorrectAttrEnum = "off"
-	VarAutocorrectAttrEnumOn VarAutocorrectAttrEnum = "on"
+	VarAutocorrectAttrEnumOn  VarAutocorrectAttrEnum = "on"
 )
 
 type VarContenteditableAttrEnum string
 
 const (
-	VarContenteditableAttrEnumFalse VarContenteditableAttrEnum = "false"
+	VarContenteditableAttrEnumFalse         VarContenteditableAttrEnum = "false"
 	VarContenteditableAttrEnumPlaintextOnly VarContenteditableAttrEnum = "plaintext-only"
-	VarContenteditableAttrEnumTrue VarContenteditableAttrEnum = "true"
+	VarContenteditableAttrEnumTrue          VarContenteditableAttrEnum = "true"
 )
 
 type varAttrs map[string]any
 
 func (e *VarElement) Autocapitalize(a VarAutocapitalizeAttrEnum) *VarElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *VarElement) Autocorrect(a VarAutocorrectAttrEnum) *VarElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *VarElement) Autofocus(b bool) *VarElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *VarElement) Class(s ...string) *VarElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *VarElement) Contenteditable(a VarContenteditableAttrEnum) *VarElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *VarElement) Id(s string) *VarElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *VarElement) Slot(s string) *VarElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

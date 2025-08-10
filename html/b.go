@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type BElement struct {
 	attributes bAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type BElement struct {
 // Spec Description: The b element represents a span of text to which attention is being drawn for utilitarian purposes without conveying any extra importance and with no implication of an alternate voice or mood, such as key words in a document abstract, product names in a review, actionable words in interactive text-driven software, or an article lede.
 func B(children ...htemel.Node) *BElement {
 	node := &BElement{
-		children: children,
+		children:   children,
 		attributes: make(bAttrs),
 	}
 
@@ -41,64 +42,70 @@ func BIf(condition bool, children ...htemel.Node) *BElement {
 type BAutocapitalizeAttrEnum string
 
 const (
-	BAutocapitalizeAttrEnumSentences BAutocapitalizeAttrEnum = "sentences"
-	BAutocapitalizeAttrEnumWords BAutocapitalizeAttrEnum = "words"
+	BAutocapitalizeAttrEnumSentences  BAutocapitalizeAttrEnum = "sentences"
+	BAutocapitalizeAttrEnumWords      BAutocapitalizeAttrEnum = "words"
 	BAutocapitalizeAttrEnumCharacters BAutocapitalizeAttrEnum = "characters"
-	BAutocapitalizeAttrEnumNone BAutocapitalizeAttrEnum = "none"
-	BAutocapitalizeAttrEnumOff BAutocapitalizeAttrEnum = "off"
-	BAutocapitalizeAttrEnumOn BAutocapitalizeAttrEnum = "on"
+	BAutocapitalizeAttrEnumNone       BAutocapitalizeAttrEnum = "none"
+	BAutocapitalizeAttrEnumOff        BAutocapitalizeAttrEnum = "off"
+	BAutocapitalizeAttrEnumOn         BAutocapitalizeAttrEnum = "on"
 )
 
 type BAutocorrectAttrEnum string
 
 const (
 	BAutocorrectAttrEnumOff BAutocorrectAttrEnum = "off"
-	BAutocorrectAttrEnumOn BAutocorrectAttrEnum = "on"
+	BAutocorrectAttrEnumOn  BAutocorrectAttrEnum = "on"
 )
 
 type BContenteditableAttrEnum string
 
 const (
-	BContenteditableAttrEnumFalse BContenteditableAttrEnum = "false"
+	BContenteditableAttrEnumFalse         BContenteditableAttrEnum = "false"
 	BContenteditableAttrEnumPlaintextOnly BContenteditableAttrEnum = "plaintext-only"
-	BContenteditableAttrEnumTrue BContenteditableAttrEnum = "true"
+	BContenteditableAttrEnumTrue          BContenteditableAttrEnum = "true"
 )
 
 type bAttrs map[string]any
 
 func (e *BElement) Autocapitalize(a BAutocapitalizeAttrEnum) *BElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *BElement) Autocorrect(a BAutocorrectAttrEnum) *BElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *BElement) Autofocus(b bool) *BElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *BElement) Class(s ...string) *BElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *BElement) Contenteditable(a BContenteditableAttrEnum) *BElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *BElement) Id(s string) *BElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *BElement) Slot(s string) *BElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

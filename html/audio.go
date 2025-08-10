@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type AudioElement struct {
 	attributes audioAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type AudioElement struct {
 // Spec Description: An audio element represents a sound or audio stream.
 func Audio(children ...htemel.Node) *AudioElement {
 	node := &AudioElement{
-		children: children,
+		children:   children,
 		attributes: make(audioAttrs),
 	}
 
@@ -41,64 +42,70 @@ func AudioIf(condition bool, children ...htemel.Node) *AudioElement {
 type AudioAutocapitalizeAttrEnum string
 
 const (
+	AudioAutocapitalizeAttrEnumOff        AudioAutocapitalizeAttrEnum = "off"
+	AudioAutocapitalizeAttrEnumOn         AudioAutocapitalizeAttrEnum = "on"
+	AudioAutocapitalizeAttrEnumSentences  AudioAutocapitalizeAttrEnum = "sentences"
+	AudioAutocapitalizeAttrEnumWords      AudioAutocapitalizeAttrEnum = "words"
 	AudioAutocapitalizeAttrEnumCharacters AudioAutocapitalizeAttrEnum = "characters"
-	AudioAutocapitalizeAttrEnumNone AudioAutocapitalizeAttrEnum = "none"
-	AudioAutocapitalizeAttrEnumOff AudioAutocapitalizeAttrEnum = "off"
-	AudioAutocapitalizeAttrEnumOn AudioAutocapitalizeAttrEnum = "on"
-	AudioAutocapitalizeAttrEnumSentences AudioAutocapitalizeAttrEnum = "sentences"
-	AudioAutocapitalizeAttrEnumWords AudioAutocapitalizeAttrEnum = "words"
+	AudioAutocapitalizeAttrEnumNone       AudioAutocapitalizeAttrEnum = "none"
 )
 
 type AudioAutocorrectAttrEnum string
 
 const (
 	AudioAutocorrectAttrEnumOff AudioAutocorrectAttrEnum = "off"
-	AudioAutocorrectAttrEnumOn AudioAutocorrectAttrEnum = "on"
+	AudioAutocorrectAttrEnumOn  AudioAutocorrectAttrEnum = "on"
 )
 
 type AudioContenteditableAttrEnum string
 
 const (
+	AudioContenteditableAttrEnumFalse         AudioContenteditableAttrEnum = "false"
 	AudioContenteditableAttrEnumPlaintextOnly AudioContenteditableAttrEnum = "plaintext-only"
-	AudioContenteditableAttrEnumTrue AudioContenteditableAttrEnum = "true"
-	AudioContenteditableAttrEnumFalse AudioContenteditableAttrEnum = "false"
+	AudioContenteditableAttrEnumTrue          AudioContenteditableAttrEnum = "true"
 )
 
 type audioAttrs map[string]any
 
 func (e *AudioElement) Autocapitalize(a AudioAutocapitalizeAttrEnum) *AudioElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *AudioElement) Autocorrect(a AudioAutocorrectAttrEnum) *AudioElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *AudioElement) Autofocus(b bool) *AudioElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *AudioElement) Class(s ...string) *AudioElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *AudioElement) Contenteditable(a AudioContenteditableAttrEnum) *AudioElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *AudioElement) Id(s string) *AudioElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *AudioElement) Slot(s string) *AudioElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

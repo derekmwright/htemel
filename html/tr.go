@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TrElement struct {
 	attributes trAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TrElement struct {
 // Spec Description: The tr element represents a row of cells in a table.
 func Tr(children ...htemel.Node) *TrElement {
 	node := &TrElement{
-		children: children,
+		children:   children,
 		attributes: make(trAttrs),
 	}
 
@@ -41,64 +42,70 @@ func TrIf(condition bool, children ...htemel.Node) *TrElement {
 type TrAutocapitalizeAttrEnum string
 
 const (
-	TrAutocapitalizeAttrEnumWords TrAutocapitalizeAttrEnum = "words"
 	TrAutocapitalizeAttrEnumCharacters TrAutocapitalizeAttrEnum = "characters"
-	TrAutocapitalizeAttrEnumNone TrAutocapitalizeAttrEnum = "none"
-	TrAutocapitalizeAttrEnumOff TrAutocapitalizeAttrEnum = "off"
-	TrAutocapitalizeAttrEnumOn TrAutocapitalizeAttrEnum = "on"
-	TrAutocapitalizeAttrEnumSentences TrAutocapitalizeAttrEnum = "sentences"
+	TrAutocapitalizeAttrEnumNone       TrAutocapitalizeAttrEnum = "none"
+	TrAutocapitalizeAttrEnumOff        TrAutocapitalizeAttrEnum = "off"
+	TrAutocapitalizeAttrEnumOn         TrAutocapitalizeAttrEnum = "on"
+	TrAutocapitalizeAttrEnumSentences  TrAutocapitalizeAttrEnum = "sentences"
+	TrAutocapitalizeAttrEnumWords      TrAutocapitalizeAttrEnum = "words"
 )
 
 type TrAutocorrectAttrEnum string
 
 const (
 	TrAutocorrectAttrEnumOff TrAutocorrectAttrEnum = "off"
-	TrAutocorrectAttrEnumOn TrAutocorrectAttrEnum = "on"
+	TrAutocorrectAttrEnumOn  TrAutocorrectAttrEnum = "on"
 )
 
 type TrContenteditableAttrEnum string
 
 const (
-	TrContenteditableAttrEnumFalse TrContenteditableAttrEnum = "false"
+	TrContenteditableAttrEnumFalse         TrContenteditableAttrEnum = "false"
 	TrContenteditableAttrEnumPlaintextOnly TrContenteditableAttrEnum = "plaintext-only"
-	TrContenteditableAttrEnumTrue TrContenteditableAttrEnum = "true"
+	TrContenteditableAttrEnumTrue          TrContenteditableAttrEnum = "true"
 )
 
 type trAttrs map[string]any
 
 func (e *TrElement) Autocapitalize(a TrAutocapitalizeAttrEnum) *TrElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TrElement) Autocorrect(a TrAutocorrectAttrEnum) *TrElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TrElement) Autofocus(b bool) *TrElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TrElement) Class(s ...string) *TrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TrElement) Contenteditable(a TrContenteditableAttrEnum) *TrElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TrElement) Id(s string) *TrElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TrElement) Slot(s string) *TrElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

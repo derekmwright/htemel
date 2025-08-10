@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type NavElement struct {
 	attributes navAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type NavElement struct {
 // Spec Description: The nav element represents a section of a page that links to other pages or to parts within the page: a section with navigation links.
 func Nav(children ...htemel.Node) *NavElement {
 	node := &NavElement{
-		children: children,
+		children:   children,
 		attributes: make(navAttrs),
 	}
 
@@ -41,64 +42,70 @@ func NavIf(condition bool, children ...htemel.Node) *NavElement {
 type NavAutocapitalizeAttrEnum string
 
 const (
+	NavAutocapitalizeAttrEnumSentences  NavAutocapitalizeAttrEnum = "sentences"
+	NavAutocapitalizeAttrEnumWords      NavAutocapitalizeAttrEnum = "words"
 	NavAutocapitalizeAttrEnumCharacters NavAutocapitalizeAttrEnum = "characters"
-	NavAutocapitalizeAttrEnumNone NavAutocapitalizeAttrEnum = "none"
-	NavAutocapitalizeAttrEnumOff NavAutocapitalizeAttrEnum = "off"
-	NavAutocapitalizeAttrEnumOn NavAutocapitalizeAttrEnum = "on"
-	NavAutocapitalizeAttrEnumSentences NavAutocapitalizeAttrEnum = "sentences"
-	NavAutocapitalizeAttrEnumWords NavAutocapitalizeAttrEnum = "words"
+	NavAutocapitalizeAttrEnumNone       NavAutocapitalizeAttrEnum = "none"
+	NavAutocapitalizeAttrEnumOff        NavAutocapitalizeAttrEnum = "off"
+	NavAutocapitalizeAttrEnumOn         NavAutocapitalizeAttrEnum = "on"
 )
 
 type NavAutocorrectAttrEnum string
 
 const (
 	NavAutocorrectAttrEnumOff NavAutocorrectAttrEnum = "off"
-	NavAutocorrectAttrEnumOn NavAutocorrectAttrEnum = "on"
+	NavAutocorrectAttrEnumOn  NavAutocorrectAttrEnum = "on"
 )
 
 type NavContenteditableAttrEnum string
 
 const (
-	NavContenteditableAttrEnumFalse NavContenteditableAttrEnum = "false"
 	NavContenteditableAttrEnumPlaintextOnly NavContenteditableAttrEnum = "plaintext-only"
-	NavContenteditableAttrEnumTrue NavContenteditableAttrEnum = "true"
+	NavContenteditableAttrEnumTrue          NavContenteditableAttrEnum = "true"
+	NavContenteditableAttrEnumFalse         NavContenteditableAttrEnum = "false"
 )
 
 type navAttrs map[string]any
 
 func (e *NavElement) Autocapitalize(a NavAutocapitalizeAttrEnum) *NavElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *NavElement) Autocorrect(a NavAutocorrectAttrEnum) *NavElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *NavElement) Autofocus(b bool) *NavElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *NavElement) Class(s ...string) *NavElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *NavElement) Contenteditable(a NavContenteditableAttrEnum) *NavElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *NavElement) Id(s string) *NavElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *NavElement) Slot(s string) *NavElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

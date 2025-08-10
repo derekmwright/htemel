@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SpanElement struct {
 	attributes spanAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SpanElement struct {
 // Spec Description: The span element doesn't mean anything on its own, but can be useful when used together with the global attributes, e.g. class, lang, or dir. It represents its children.
 func Span(children ...htemel.Node) *SpanElement {
 	node := &SpanElement{
-		children: children,
+		children:   children,
 		attributes: make(spanAttrs),
 	}
 
@@ -41,64 +42,70 @@ func SpanIf(condition bool, children ...htemel.Node) *SpanElement {
 type SpanAutocapitalizeAttrEnum string
 
 const (
-	SpanAutocapitalizeAttrEnumSentences SpanAutocapitalizeAttrEnum = "sentences"
-	SpanAutocapitalizeAttrEnumWords SpanAutocapitalizeAttrEnum = "words"
+	SpanAutocapitalizeAttrEnumOff        SpanAutocapitalizeAttrEnum = "off"
+	SpanAutocapitalizeAttrEnumOn         SpanAutocapitalizeAttrEnum = "on"
+	SpanAutocapitalizeAttrEnumSentences  SpanAutocapitalizeAttrEnum = "sentences"
+	SpanAutocapitalizeAttrEnumWords      SpanAutocapitalizeAttrEnum = "words"
 	SpanAutocapitalizeAttrEnumCharacters SpanAutocapitalizeAttrEnum = "characters"
-	SpanAutocapitalizeAttrEnumNone SpanAutocapitalizeAttrEnum = "none"
-	SpanAutocapitalizeAttrEnumOff SpanAutocapitalizeAttrEnum = "off"
-	SpanAutocapitalizeAttrEnumOn SpanAutocapitalizeAttrEnum = "on"
+	SpanAutocapitalizeAttrEnumNone       SpanAutocapitalizeAttrEnum = "none"
 )
 
 type SpanAutocorrectAttrEnum string
 
 const (
+	SpanAutocorrectAttrEnumOn  SpanAutocorrectAttrEnum = "on"
 	SpanAutocorrectAttrEnumOff SpanAutocorrectAttrEnum = "off"
-	SpanAutocorrectAttrEnumOn SpanAutocorrectAttrEnum = "on"
 )
 
 type SpanContenteditableAttrEnum string
 
 const (
-	SpanContenteditableAttrEnumFalse SpanContenteditableAttrEnum = "false"
+	SpanContenteditableAttrEnumFalse         SpanContenteditableAttrEnum = "false"
 	SpanContenteditableAttrEnumPlaintextOnly SpanContenteditableAttrEnum = "plaintext-only"
-	SpanContenteditableAttrEnumTrue SpanContenteditableAttrEnum = "true"
+	SpanContenteditableAttrEnumTrue          SpanContenteditableAttrEnum = "true"
 )
 
 type spanAttrs map[string]any
 
 func (e *SpanElement) Autocapitalize(a SpanAutocapitalizeAttrEnum) *SpanElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SpanElement) Autocorrect(a SpanAutocorrectAttrEnum) *SpanElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *SpanElement) Autofocus(b bool) *SpanElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *SpanElement) Class(s ...string) *SpanElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SpanElement) Contenteditable(a SpanContenteditableAttrEnum) *SpanElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SpanElement) Id(s string) *SpanElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *SpanElement) Slot(s string) *SpanElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

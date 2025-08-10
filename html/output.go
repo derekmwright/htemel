@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type OutputElement struct {
 	attributes outputAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type OutputElement struct {
 // Spec Description: The output element represents the result of a calculation performed by the application, or the result of a user action.
 func Output(children ...htemel.Node) *OutputElement {
 	node := &OutputElement{
-		children: children,
+		children:   children,
 		attributes: make(outputAttrs),
 	}
 
@@ -41,64 +42,70 @@ func OutputIf(condition bool, children ...htemel.Node) *OutputElement {
 type OutputAutocapitalizeAttrEnum string
 
 const (
-	OutputAutocapitalizeAttrEnumWords OutputAutocapitalizeAttrEnum = "words"
+	OutputAutocapitalizeAttrEnumWords      OutputAutocapitalizeAttrEnum = "words"
 	OutputAutocapitalizeAttrEnumCharacters OutputAutocapitalizeAttrEnum = "characters"
-	OutputAutocapitalizeAttrEnumNone OutputAutocapitalizeAttrEnum = "none"
-	OutputAutocapitalizeAttrEnumOff OutputAutocapitalizeAttrEnum = "off"
-	OutputAutocapitalizeAttrEnumOn OutputAutocapitalizeAttrEnum = "on"
-	OutputAutocapitalizeAttrEnumSentences OutputAutocapitalizeAttrEnum = "sentences"
+	OutputAutocapitalizeAttrEnumNone       OutputAutocapitalizeAttrEnum = "none"
+	OutputAutocapitalizeAttrEnumOff        OutputAutocapitalizeAttrEnum = "off"
+	OutputAutocapitalizeAttrEnumOn         OutputAutocapitalizeAttrEnum = "on"
+	OutputAutocapitalizeAttrEnumSentences  OutputAutocapitalizeAttrEnum = "sentences"
 )
 
 type OutputAutocorrectAttrEnum string
 
 const (
 	OutputAutocorrectAttrEnumOff OutputAutocorrectAttrEnum = "off"
-	OutputAutocorrectAttrEnumOn OutputAutocorrectAttrEnum = "on"
+	OutputAutocorrectAttrEnumOn  OutputAutocorrectAttrEnum = "on"
 )
 
 type OutputContenteditableAttrEnum string
 
 const (
-	OutputContenteditableAttrEnumFalse OutputContenteditableAttrEnum = "false"
 	OutputContenteditableAttrEnumPlaintextOnly OutputContenteditableAttrEnum = "plaintext-only"
-	OutputContenteditableAttrEnumTrue OutputContenteditableAttrEnum = "true"
+	OutputContenteditableAttrEnumTrue          OutputContenteditableAttrEnum = "true"
+	OutputContenteditableAttrEnumFalse         OutputContenteditableAttrEnum = "false"
 )
 
 type outputAttrs map[string]any
 
 func (e *OutputElement) Autocapitalize(a OutputAutocapitalizeAttrEnum) *OutputElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *OutputElement) Autocorrect(a OutputAutocorrectAttrEnum) *OutputElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *OutputElement) Autofocus(b bool) *OutputElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *OutputElement) Class(s ...string) *OutputElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *OutputElement) Contenteditable(a OutputContenteditableAttrEnum) *OutputElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *OutputElement) Id(s string) *OutputElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *OutputElement) Slot(s string) *OutputElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

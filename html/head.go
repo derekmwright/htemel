@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type HeadElement struct {
 	attributes headAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type HeadElement struct {
 // Spec Description: The head element represents a collection of metadata for the Document.
 func Head(children ...htemel.Node) *HeadElement {
 	node := &HeadElement{
-		children: children,
+		children:   children,
 		attributes: make(headAttrs),
 	}
 
@@ -42,63 +43,69 @@ type HeadAutocapitalizeAttrEnum string
 
 const (
 	HeadAutocapitalizeAttrEnumCharacters HeadAutocapitalizeAttrEnum = "characters"
-	HeadAutocapitalizeAttrEnumNone HeadAutocapitalizeAttrEnum = "none"
-	HeadAutocapitalizeAttrEnumOff HeadAutocapitalizeAttrEnum = "off"
-	HeadAutocapitalizeAttrEnumOn HeadAutocapitalizeAttrEnum = "on"
-	HeadAutocapitalizeAttrEnumSentences HeadAutocapitalizeAttrEnum = "sentences"
-	HeadAutocapitalizeAttrEnumWords HeadAutocapitalizeAttrEnum = "words"
+	HeadAutocapitalizeAttrEnumNone       HeadAutocapitalizeAttrEnum = "none"
+	HeadAutocapitalizeAttrEnumOff        HeadAutocapitalizeAttrEnum = "off"
+	HeadAutocapitalizeAttrEnumOn         HeadAutocapitalizeAttrEnum = "on"
+	HeadAutocapitalizeAttrEnumSentences  HeadAutocapitalizeAttrEnum = "sentences"
+	HeadAutocapitalizeAttrEnumWords      HeadAutocapitalizeAttrEnum = "words"
 )
 
 type HeadAutocorrectAttrEnum string
 
 const (
 	HeadAutocorrectAttrEnumOff HeadAutocorrectAttrEnum = "off"
-	HeadAutocorrectAttrEnumOn HeadAutocorrectAttrEnum = "on"
+	HeadAutocorrectAttrEnumOn  HeadAutocorrectAttrEnum = "on"
 )
 
 type HeadContenteditableAttrEnum string
 
 const (
-	HeadContenteditableAttrEnumFalse HeadContenteditableAttrEnum = "false"
+	HeadContenteditableAttrEnumFalse         HeadContenteditableAttrEnum = "false"
 	HeadContenteditableAttrEnumPlaintextOnly HeadContenteditableAttrEnum = "plaintext-only"
-	HeadContenteditableAttrEnumTrue HeadContenteditableAttrEnum = "true"
+	HeadContenteditableAttrEnumTrue          HeadContenteditableAttrEnum = "true"
 )
 
 type headAttrs map[string]any
 
 func (e *HeadElement) Autocapitalize(a HeadAutocapitalizeAttrEnum) *HeadElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *HeadElement) Autocorrect(a HeadAutocorrectAttrEnum) *HeadElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *HeadElement) Autofocus(b bool) *HeadElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *HeadElement) Class(s ...string) *HeadElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *HeadElement) Contenteditable(a HeadContenteditableAttrEnum) *HeadElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *HeadElement) Id(s string) *HeadElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *HeadElement) Slot(s string) *HeadElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type RtElement struct {
 	attributes rtAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type RtElement struct {
 // Spec Description: The rt element marks the ruby text component of a ruby annotation. When it is the child of a ruby element, it doesn't represent anything itself, but the ruby element uses it as part of determining what it represents.
 func Rt(children ...htemel.Node) *RtElement {
 	node := &RtElement{
-		children: children,
+		children:   children,
 		attributes: make(rtAttrs),
 	}
 
@@ -41,64 +42,70 @@ func RtIf(condition bool, children ...htemel.Node) *RtElement {
 type RtAutocapitalizeAttrEnum string
 
 const (
+	RtAutocapitalizeAttrEnumWords      RtAutocapitalizeAttrEnum = "words"
 	RtAutocapitalizeAttrEnumCharacters RtAutocapitalizeAttrEnum = "characters"
-	RtAutocapitalizeAttrEnumNone RtAutocapitalizeAttrEnum = "none"
-	RtAutocapitalizeAttrEnumOff RtAutocapitalizeAttrEnum = "off"
-	RtAutocapitalizeAttrEnumOn RtAutocapitalizeAttrEnum = "on"
-	RtAutocapitalizeAttrEnumSentences RtAutocapitalizeAttrEnum = "sentences"
-	RtAutocapitalizeAttrEnumWords RtAutocapitalizeAttrEnum = "words"
+	RtAutocapitalizeAttrEnumNone       RtAutocapitalizeAttrEnum = "none"
+	RtAutocapitalizeAttrEnumOff        RtAutocapitalizeAttrEnum = "off"
+	RtAutocapitalizeAttrEnumOn         RtAutocapitalizeAttrEnum = "on"
+	RtAutocapitalizeAttrEnumSentences  RtAutocapitalizeAttrEnum = "sentences"
 )
 
 type RtAutocorrectAttrEnum string
 
 const (
 	RtAutocorrectAttrEnumOff RtAutocorrectAttrEnum = "off"
-	RtAutocorrectAttrEnumOn RtAutocorrectAttrEnum = "on"
+	RtAutocorrectAttrEnumOn  RtAutocorrectAttrEnum = "on"
 )
 
 type RtContenteditableAttrEnum string
 
 const (
-	RtContenteditableAttrEnumFalse RtContenteditableAttrEnum = "false"
+	RtContenteditableAttrEnumFalse         RtContenteditableAttrEnum = "false"
 	RtContenteditableAttrEnumPlaintextOnly RtContenteditableAttrEnum = "plaintext-only"
-	RtContenteditableAttrEnumTrue RtContenteditableAttrEnum = "true"
+	RtContenteditableAttrEnumTrue          RtContenteditableAttrEnum = "true"
 )
 
 type rtAttrs map[string]any
 
 func (e *RtElement) Autocapitalize(a RtAutocapitalizeAttrEnum) *RtElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *RtElement) Autocorrect(a RtAutocorrectAttrEnum) *RtElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *RtElement) Autofocus(b bool) *RtElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *RtElement) Class(s ...string) *RtElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *RtElement) Contenteditable(a RtContenteditableAttrEnum) *RtElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *RtElement) Id(s string) *RtElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *RtElement) Slot(s string) *RtElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

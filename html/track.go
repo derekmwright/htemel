@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TrackElement struct {
 	attributes trackAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TrackElement struct {
 // Spec Description: The track element allows authors to specify explicit external timed text tracks for media elements. It does not represent anything on its own.
 func Track(children ...htemel.Node) *TrackElement {
 	node := &TrackElement{
-		children: children,
+		children:   children,
 		attributes: make(trackAttrs),
 	}
 
@@ -41,64 +42,70 @@ func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 type TrackAutocapitalizeAttrEnum string
 
 const (
-	TrackAutocapitalizeAttrEnumOff TrackAutocapitalizeAttrEnum = "off"
-	TrackAutocapitalizeAttrEnumOn TrackAutocapitalizeAttrEnum = "on"
-	TrackAutocapitalizeAttrEnumSentences TrackAutocapitalizeAttrEnum = "sentences"
-	TrackAutocapitalizeAttrEnumWords TrackAutocapitalizeAttrEnum = "words"
+	TrackAutocapitalizeAttrEnumNone       TrackAutocapitalizeAttrEnum = "none"
+	TrackAutocapitalizeAttrEnumOff        TrackAutocapitalizeAttrEnum = "off"
+	TrackAutocapitalizeAttrEnumOn         TrackAutocapitalizeAttrEnum = "on"
+	TrackAutocapitalizeAttrEnumSentences  TrackAutocapitalizeAttrEnum = "sentences"
+	TrackAutocapitalizeAttrEnumWords      TrackAutocapitalizeAttrEnum = "words"
 	TrackAutocapitalizeAttrEnumCharacters TrackAutocapitalizeAttrEnum = "characters"
-	TrackAutocapitalizeAttrEnumNone TrackAutocapitalizeAttrEnum = "none"
 )
 
 type TrackAutocorrectAttrEnum string
 
 const (
-	TrackAutocorrectAttrEnumOn TrackAutocorrectAttrEnum = "on"
 	TrackAutocorrectAttrEnumOff TrackAutocorrectAttrEnum = "off"
+	TrackAutocorrectAttrEnumOn  TrackAutocorrectAttrEnum = "on"
 )
 
 type TrackContenteditableAttrEnum string
 
 const (
-	TrackContenteditableAttrEnumFalse TrackContenteditableAttrEnum = "false"
+	TrackContenteditableAttrEnumFalse         TrackContenteditableAttrEnum = "false"
 	TrackContenteditableAttrEnumPlaintextOnly TrackContenteditableAttrEnum = "plaintext-only"
-	TrackContenteditableAttrEnumTrue TrackContenteditableAttrEnum = "true"
+	TrackContenteditableAttrEnumTrue          TrackContenteditableAttrEnum = "true"
 )
 
 type trackAttrs map[string]any
 
 func (e *TrackElement) Autocapitalize(a TrackAutocapitalizeAttrEnum) *TrackElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TrackElement) Autocorrect(a TrackAutocorrectAttrEnum) *TrackElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *TrackElement) Autofocus(b bool) *TrackElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *TrackElement) Class(s ...string) *TrackElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TrackElement) Contenteditable(a TrackContenteditableAttrEnum) *TrackElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TrackElement) Id(s string) *TrackElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *TrackElement) Slot(s string) *TrackElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

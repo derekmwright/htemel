@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DfnElement struct {
 	attributes dfnAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DfnElement struct {
 // Spec Description: The dfn element represents the defining instance of a term. The paragraph, description list group, or section that is the nearest ancestor of the dfn element must also contain the definition(s) for the term given by the dfn element.
 func Dfn(children ...htemel.Node) *DfnElement {
 	node := &DfnElement{
-		children: children,
+		children:   children,
 		attributes: make(dfnAttrs),
 	}
 
@@ -41,64 +42,70 @@ func DfnIf(condition bool, children ...htemel.Node) *DfnElement {
 type DfnAutocapitalizeAttrEnum string
 
 const (
-	DfnAutocapitalizeAttrEnumSentences DfnAutocapitalizeAttrEnum = "sentences"
-	DfnAutocapitalizeAttrEnumWords DfnAutocapitalizeAttrEnum = "words"
 	DfnAutocapitalizeAttrEnumCharacters DfnAutocapitalizeAttrEnum = "characters"
-	DfnAutocapitalizeAttrEnumNone DfnAutocapitalizeAttrEnum = "none"
-	DfnAutocapitalizeAttrEnumOff DfnAutocapitalizeAttrEnum = "off"
-	DfnAutocapitalizeAttrEnumOn DfnAutocapitalizeAttrEnum = "on"
+	DfnAutocapitalizeAttrEnumNone       DfnAutocapitalizeAttrEnum = "none"
+	DfnAutocapitalizeAttrEnumOff        DfnAutocapitalizeAttrEnum = "off"
+	DfnAutocapitalizeAttrEnumOn         DfnAutocapitalizeAttrEnum = "on"
+	DfnAutocapitalizeAttrEnumSentences  DfnAutocapitalizeAttrEnum = "sentences"
+	DfnAutocapitalizeAttrEnumWords      DfnAutocapitalizeAttrEnum = "words"
 )
 
 type DfnAutocorrectAttrEnum string
 
 const (
 	DfnAutocorrectAttrEnumOff DfnAutocorrectAttrEnum = "off"
-	DfnAutocorrectAttrEnumOn DfnAutocorrectAttrEnum = "on"
+	DfnAutocorrectAttrEnumOn  DfnAutocorrectAttrEnum = "on"
 )
 
 type DfnContenteditableAttrEnum string
 
 const (
-	DfnContenteditableAttrEnumTrue DfnContenteditableAttrEnum = "true"
-	DfnContenteditableAttrEnumFalse DfnContenteditableAttrEnum = "false"
+	DfnContenteditableAttrEnumFalse         DfnContenteditableAttrEnum = "false"
 	DfnContenteditableAttrEnumPlaintextOnly DfnContenteditableAttrEnum = "plaintext-only"
+	DfnContenteditableAttrEnumTrue          DfnContenteditableAttrEnum = "true"
 )
 
 type dfnAttrs map[string]any
 
 func (e *DfnElement) Autocapitalize(a DfnAutocapitalizeAttrEnum) *DfnElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DfnElement) Autocorrect(a DfnAutocorrectAttrEnum) *DfnElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *DfnElement) Autofocus(b bool) *DfnElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *DfnElement) Class(s ...string) *DfnElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DfnElement) Contenteditable(a DfnContenteditableAttrEnum) *DfnElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DfnElement) Id(s string) *DfnElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *DfnElement) Slot(s string) *DfnElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

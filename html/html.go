@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type HtmlElement struct {
 	attributes htmlAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type HtmlElement struct {
 // Spec Description: The html element represents the root of an HTML document.
 func Html(children ...htemel.Node) *HtmlElement {
 	node := &HtmlElement{
-		children: children,
+		children:   children,
 		attributes: make(htmlAttrs),
 	}
 
@@ -42,63 +43,69 @@ type HtmlAutocapitalizeAttrEnum string
 
 const (
 	HtmlAutocapitalizeAttrEnumCharacters HtmlAutocapitalizeAttrEnum = "characters"
-	HtmlAutocapitalizeAttrEnumNone HtmlAutocapitalizeAttrEnum = "none"
-	HtmlAutocapitalizeAttrEnumOff HtmlAutocapitalizeAttrEnum = "off"
-	HtmlAutocapitalizeAttrEnumOn HtmlAutocapitalizeAttrEnum = "on"
-	HtmlAutocapitalizeAttrEnumSentences HtmlAutocapitalizeAttrEnum = "sentences"
-	HtmlAutocapitalizeAttrEnumWords HtmlAutocapitalizeAttrEnum = "words"
+	HtmlAutocapitalizeAttrEnumNone       HtmlAutocapitalizeAttrEnum = "none"
+	HtmlAutocapitalizeAttrEnumOff        HtmlAutocapitalizeAttrEnum = "off"
+	HtmlAutocapitalizeAttrEnumOn         HtmlAutocapitalizeAttrEnum = "on"
+	HtmlAutocapitalizeAttrEnumSentences  HtmlAutocapitalizeAttrEnum = "sentences"
+	HtmlAutocapitalizeAttrEnumWords      HtmlAutocapitalizeAttrEnum = "words"
 )
 
 type HtmlAutocorrectAttrEnum string
 
 const (
 	HtmlAutocorrectAttrEnumOff HtmlAutocorrectAttrEnum = "off"
-	HtmlAutocorrectAttrEnumOn HtmlAutocorrectAttrEnum = "on"
+	HtmlAutocorrectAttrEnumOn  HtmlAutocorrectAttrEnum = "on"
 )
 
 type HtmlContenteditableAttrEnum string
 
 const (
-	HtmlContenteditableAttrEnumTrue HtmlContenteditableAttrEnum = "true"
-	HtmlContenteditableAttrEnumFalse HtmlContenteditableAttrEnum = "false"
+	HtmlContenteditableAttrEnumFalse         HtmlContenteditableAttrEnum = "false"
 	HtmlContenteditableAttrEnumPlaintextOnly HtmlContenteditableAttrEnum = "plaintext-only"
+	HtmlContenteditableAttrEnumTrue          HtmlContenteditableAttrEnum = "true"
 )
 
 type htmlAttrs map[string]any
 
 func (e *HtmlElement) Autocapitalize(a HtmlAutocapitalizeAttrEnum) *HtmlElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *HtmlElement) Autocorrect(a HtmlAutocorrectAttrEnum) *HtmlElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *HtmlElement) Autofocus(b bool) *HtmlElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *HtmlElement) Class(s ...string) *HtmlElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *HtmlElement) Contenteditable(a HtmlContenteditableAttrEnum) *HtmlElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *HtmlElement) Id(s string) *HtmlElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *HtmlElement) Slot(s string) *HtmlElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 

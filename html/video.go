@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type VideoElement struct {
 	attributes videoAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type VideoElement struct {
 // Spec Description: A video element is used for playing videos or movies, and audio files with captions.
 func Video(children ...htemel.Node) *VideoElement {
 	node := &VideoElement{
-		children: children,
+		children:   children,
 		attributes: make(videoAttrs),
 	}
 
@@ -41,64 +42,70 @@ func VideoIf(condition bool, children ...htemel.Node) *VideoElement {
 type VideoAutocapitalizeAttrEnum string
 
 const (
-	VideoAutocapitalizeAttrEnumOff VideoAutocapitalizeAttrEnum = "off"
-	VideoAutocapitalizeAttrEnumOn VideoAutocapitalizeAttrEnum = "on"
-	VideoAutocapitalizeAttrEnumSentences VideoAutocapitalizeAttrEnum = "sentences"
-	VideoAutocapitalizeAttrEnumWords VideoAutocapitalizeAttrEnum = "words"
+	VideoAutocapitalizeAttrEnumNone       VideoAutocapitalizeAttrEnum = "none"
+	VideoAutocapitalizeAttrEnumOff        VideoAutocapitalizeAttrEnum = "off"
+	VideoAutocapitalizeAttrEnumOn         VideoAutocapitalizeAttrEnum = "on"
+	VideoAutocapitalizeAttrEnumSentences  VideoAutocapitalizeAttrEnum = "sentences"
+	VideoAutocapitalizeAttrEnumWords      VideoAutocapitalizeAttrEnum = "words"
 	VideoAutocapitalizeAttrEnumCharacters VideoAutocapitalizeAttrEnum = "characters"
-	VideoAutocapitalizeAttrEnumNone VideoAutocapitalizeAttrEnum = "none"
 )
 
 type VideoAutocorrectAttrEnum string
 
 const (
 	VideoAutocorrectAttrEnumOff VideoAutocorrectAttrEnum = "off"
-	VideoAutocorrectAttrEnumOn VideoAutocorrectAttrEnum = "on"
+	VideoAutocorrectAttrEnumOn  VideoAutocorrectAttrEnum = "on"
 )
 
 type VideoContenteditableAttrEnum string
 
 const (
-	VideoContenteditableAttrEnumFalse VideoContenteditableAttrEnum = "false"
+	VideoContenteditableAttrEnumTrue          VideoContenteditableAttrEnum = "true"
+	VideoContenteditableAttrEnumFalse         VideoContenteditableAttrEnum = "false"
 	VideoContenteditableAttrEnumPlaintextOnly VideoContenteditableAttrEnum = "plaintext-only"
-	VideoContenteditableAttrEnumTrue VideoContenteditableAttrEnum = "true"
 )
 
 type videoAttrs map[string]any
 
 func (e *VideoElement) Autocapitalize(a VideoAutocapitalizeAttrEnum) *VideoElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *VideoElement) Autocorrect(a VideoAutocorrectAttrEnum) *VideoElement {
 	e.attributes["autocorrect"] = a
-	
+
+	return e
+}
+
+func (e *VideoElement) Autofocus(b bool) *VideoElement {
+	e.attributes["autofocus"] = b
+
 	return e
 }
 
 func (e *VideoElement) Class(s ...string) *VideoElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *VideoElement) Contenteditable(a VideoContenteditableAttrEnum) *VideoElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *VideoElement) Id(s string) *VideoElement {
 	e.attributes["id"] = s
-	
+
 	return e
 }
 
 func (e *VideoElement) Slot(s string) *VideoElement {
 	e.attributes["slot"] = s
-	
+
 	return e
 }
 
