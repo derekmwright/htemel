@@ -42,12 +42,12 @@ func NavIf(condition bool, children ...htemel.Node) *NavElement {
 type NavAutocapitalizeAttrEnum string
 
 const (
-	NavAutocapitalizeAttrEnumOn         NavAutocapitalizeAttrEnum = "on"
-	NavAutocapitalizeAttrEnumSentences  NavAutocapitalizeAttrEnum = "sentences"
-	NavAutocapitalizeAttrEnumWords      NavAutocapitalizeAttrEnum = "words"
 	NavAutocapitalizeAttrEnumCharacters NavAutocapitalizeAttrEnum = "characters"
 	NavAutocapitalizeAttrEnumNone       NavAutocapitalizeAttrEnum = "none"
 	NavAutocapitalizeAttrEnumOff        NavAutocapitalizeAttrEnum = "off"
+	NavAutocapitalizeAttrEnumOn         NavAutocapitalizeAttrEnum = "on"
+	NavAutocapitalizeAttrEnumSentences  NavAutocapitalizeAttrEnum = "sentences"
+	NavAutocapitalizeAttrEnumWords      NavAutocapitalizeAttrEnum = "words"
 )
 
 type NavAutocorrectAttrEnum string

@@ -42,12 +42,12 @@ func PictureIf(condition bool, children ...htemel.Node) *PictureElement {
 type PictureAutocapitalizeAttrEnum string
 
 const (
+	PictureAutocapitalizeAttrEnumWords      PictureAutocapitalizeAttrEnum = "words"
 	PictureAutocapitalizeAttrEnumCharacters PictureAutocapitalizeAttrEnum = "characters"
 	PictureAutocapitalizeAttrEnumNone       PictureAutocapitalizeAttrEnum = "none"
 	PictureAutocapitalizeAttrEnumOff        PictureAutocapitalizeAttrEnum = "off"
 	PictureAutocapitalizeAttrEnumOn         PictureAutocapitalizeAttrEnum = "on"
 	PictureAutocapitalizeAttrEnumSentences  PictureAutocapitalizeAttrEnum = "sentences"
-	PictureAutocapitalizeAttrEnumWords      PictureAutocapitalizeAttrEnum = "words"
 )
 
 type PictureAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type PictureContenteditableAttrEnum string
 
 const (
-	PictureContenteditableAttrEnumTrue          PictureContenteditableAttrEnum = "true"
 	PictureContenteditableAttrEnumFalse         PictureContenteditableAttrEnum = "false"
 	PictureContenteditableAttrEnumPlaintextOnly PictureContenteditableAttrEnum = "plaintext-only"
+	PictureContenteditableAttrEnumTrue          PictureContenteditableAttrEnum = "true"
 )
 
 type pictureAttrs map[string]any

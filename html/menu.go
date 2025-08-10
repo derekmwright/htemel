@@ -60,9 +60,9 @@ const (
 type MenuContenteditableAttrEnum string
 
 const (
-	MenuContenteditableAttrEnumFalse         MenuContenteditableAttrEnum = "false"
 	MenuContenteditableAttrEnumPlaintextOnly MenuContenteditableAttrEnum = "plaintext-only"
 	MenuContenteditableAttrEnumTrue          MenuContenteditableAttrEnum = "true"
+	MenuContenteditableAttrEnumFalse         MenuContenteditableAttrEnum = "false"
 )
 
 type menuAttrs map[string]any

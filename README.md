@@ -29,17 +29,35 @@ import (
 )
 
 func main() {
-	loggedIn := true
+	loggedIn := false
 	htemel.Group(
 		htemel.GenericVoid("!DOCTYPE", map[string]any{"html": nil}),
 		Html(
 			BodyIf(
 				!loggedIn,
-				Div(),
+				Div(
+					P(
+						htemel.Text(
+							"Please Login ",
+							A(
+								htemel.Text("Here"),
+							).
+								Contenteditable(AContenteditableAttrEnumFalse).
+								Class("font-bold"),
+						),
+					),
+				),
 			),
 			BodyIf(
 				loggedIn,
-				Nav(),
+				htemel.Group(
+					Nav(),
+					Div(
+						P(
+							htemel.Text("Welcome Back!"),
+						),
+					).Class("flex border border-amber-500 w-dvh"),
+				),
 			),
 		),
 	).
@@ -49,9 +67,8 @@ func main() {
 
 Outputs:
 ```text
-<!DOCTYPE html><html><body><nav></nav></body></html>
+<!DOCTYPE html><html><body><div><p>Please Login <a contenteditable="false" class="font-bold">Here</a></p></div></body></html>
 ```
-
 I have no plans on supporting indentation levels for nested elements, plus it's a waste of electrons for all that whitespace :P
 
 ## Why

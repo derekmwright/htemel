@@ -60,9 +60,9 @@ const (
 type AreaContenteditableAttrEnum string
 
 const (
+	AreaContenteditableAttrEnumFalse         AreaContenteditableAttrEnum = "false"
 	AreaContenteditableAttrEnumPlaintextOnly AreaContenteditableAttrEnum = "plaintext-only"
 	AreaContenteditableAttrEnumTrue          AreaContenteditableAttrEnum = "true"
-	AreaContenteditableAttrEnumFalse         AreaContenteditableAttrEnum = "false"
 )
 
 type areaAttrs map[string]any

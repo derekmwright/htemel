@@ -53,16 +53,16 @@ const (
 type VideoAutocorrectAttrEnum string
 
 const (
-	VideoAutocorrectAttrEnumOn  VideoAutocorrectAttrEnum = "on"
 	VideoAutocorrectAttrEnumOff VideoAutocorrectAttrEnum = "off"
+	VideoAutocorrectAttrEnumOn  VideoAutocorrectAttrEnum = "on"
 )
 
 type VideoContenteditableAttrEnum string
 
 const (
+	VideoContenteditableAttrEnumTrue          VideoContenteditableAttrEnum = "true"
 	VideoContenteditableAttrEnumFalse         VideoContenteditableAttrEnum = "false"
 	VideoContenteditableAttrEnumPlaintextOnly VideoContenteditableAttrEnum = "plaintext-only"
-	VideoContenteditableAttrEnumTrue          VideoContenteditableAttrEnum = "true"
 )
 
 type videoAttrs map[string]any

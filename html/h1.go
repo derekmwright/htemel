@@ -42,12 +42,12 @@ func H1If(condition bool, children ...htemel.Node) *H1Element {
 type H1AutocapitalizeAttrEnum string
 
 const (
+	H1AutocapitalizeAttrEnumSentences  H1AutocapitalizeAttrEnum = "sentences"
+	H1AutocapitalizeAttrEnumWords      H1AutocapitalizeAttrEnum = "words"
 	H1AutocapitalizeAttrEnumCharacters H1AutocapitalizeAttrEnum = "characters"
 	H1AutocapitalizeAttrEnumNone       H1AutocapitalizeAttrEnum = "none"
 	H1AutocapitalizeAttrEnumOff        H1AutocapitalizeAttrEnum = "off"
 	H1AutocapitalizeAttrEnumOn         H1AutocapitalizeAttrEnum = "on"
-	H1AutocapitalizeAttrEnumSentences  H1AutocapitalizeAttrEnum = "sentences"
-	H1AutocapitalizeAttrEnumWords      H1AutocapitalizeAttrEnum = "words"
 )
 
 type H1AutocorrectAttrEnum string

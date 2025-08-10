@@ -42,27 +42,27 @@ func OutputIf(condition bool, children ...htemel.Node) *OutputElement {
 type OutputAutocapitalizeAttrEnum string
 
 const (
+	OutputAutocapitalizeAttrEnumWords      OutputAutocapitalizeAttrEnum = "words"
 	OutputAutocapitalizeAttrEnumCharacters OutputAutocapitalizeAttrEnum = "characters"
 	OutputAutocapitalizeAttrEnumNone       OutputAutocapitalizeAttrEnum = "none"
 	OutputAutocapitalizeAttrEnumOff        OutputAutocapitalizeAttrEnum = "off"
 	OutputAutocapitalizeAttrEnumOn         OutputAutocapitalizeAttrEnum = "on"
 	OutputAutocapitalizeAttrEnumSentences  OutputAutocapitalizeAttrEnum = "sentences"
-	OutputAutocapitalizeAttrEnumWords      OutputAutocapitalizeAttrEnum = "words"
 )
 
 type OutputAutocorrectAttrEnum string
 
 const (
-	OutputAutocorrectAttrEnumOff OutputAutocorrectAttrEnum = "off"
 	OutputAutocorrectAttrEnumOn  OutputAutocorrectAttrEnum = "on"
+	OutputAutocorrectAttrEnumOff OutputAutocorrectAttrEnum = "off"
 )
 
 type OutputContenteditableAttrEnum string
 
 const (
+	OutputContenteditableAttrEnumFalse         OutputContenteditableAttrEnum = "false"
 	OutputContenteditableAttrEnumPlaintextOnly OutputContenteditableAttrEnum = "plaintext-only"
 	OutputContenteditableAttrEnumTrue          OutputContenteditableAttrEnum = "true"
-	OutputContenteditableAttrEnumFalse         OutputContenteditableAttrEnum = "false"
 )
 
 type outputAttrs map[string]any

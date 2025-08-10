@@ -42,19 +42,19 @@ func PreIf(condition bool, children ...htemel.Node) *PreElement {
 type PreAutocapitalizeAttrEnum string
 
 const (
+	PreAutocapitalizeAttrEnumWords      PreAutocapitalizeAttrEnum = "words"
 	PreAutocapitalizeAttrEnumCharacters PreAutocapitalizeAttrEnum = "characters"
 	PreAutocapitalizeAttrEnumNone       PreAutocapitalizeAttrEnum = "none"
 	PreAutocapitalizeAttrEnumOff        PreAutocapitalizeAttrEnum = "off"
 	PreAutocapitalizeAttrEnumOn         PreAutocapitalizeAttrEnum = "on"
 	PreAutocapitalizeAttrEnumSentences  PreAutocapitalizeAttrEnum = "sentences"
-	PreAutocapitalizeAttrEnumWords      PreAutocapitalizeAttrEnum = "words"
 )
 
 type PreAutocorrectAttrEnum string
 
 const (
-	PreAutocorrectAttrEnumOff PreAutocorrectAttrEnum = "off"
 	PreAutocorrectAttrEnumOn  PreAutocorrectAttrEnum = "on"
+	PreAutocorrectAttrEnumOff PreAutocorrectAttrEnum = "off"
 )
 
 type PreContenteditableAttrEnum string

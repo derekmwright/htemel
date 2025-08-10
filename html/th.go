@@ -42,19 +42,19 @@ func ThIf(condition bool, children ...htemel.Node) *ThElement {
 type ThAutocapitalizeAttrEnum string
 
 const (
+	ThAutocapitalizeAttrEnumOn         ThAutocapitalizeAttrEnum = "on"
 	ThAutocapitalizeAttrEnumSentences  ThAutocapitalizeAttrEnum = "sentences"
 	ThAutocapitalizeAttrEnumWords      ThAutocapitalizeAttrEnum = "words"
 	ThAutocapitalizeAttrEnumCharacters ThAutocapitalizeAttrEnum = "characters"
 	ThAutocapitalizeAttrEnumNone       ThAutocapitalizeAttrEnum = "none"
 	ThAutocapitalizeAttrEnumOff        ThAutocapitalizeAttrEnum = "off"
-	ThAutocapitalizeAttrEnumOn         ThAutocapitalizeAttrEnum = "on"
 )
 
 type ThAutocorrectAttrEnum string
 
 const (
-	ThAutocorrectAttrEnumOff ThAutocorrectAttrEnum = "off"
 	ThAutocorrectAttrEnumOn  ThAutocorrectAttrEnum = "on"
+	ThAutocorrectAttrEnumOff ThAutocorrectAttrEnum = "off"
 )
 
 type ThContenteditableAttrEnum string

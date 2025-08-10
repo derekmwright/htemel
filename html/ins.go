@@ -42,19 +42,19 @@ func InsIf(condition bool, children ...htemel.Node) *InsElement {
 type InsAutocapitalizeAttrEnum string
 
 const (
-	InsAutocapitalizeAttrEnumSentences  InsAutocapitalizeAttrEnum = "sentences"
-	InsAutocapitalizeAttrEnumWords      InsAutocapitalizeAttrEnum = "words"
 	InsAutocapitalizeAttrEnumCharacters InsAutocapitalizeAttrEnum = "characters"
 	InsAutocapitalizeAttrEnumNone       InsAutocapitalizeAttrEnum = "none"
 	InsAutocapitalizeAttrEnumOff        InsAutocapitalizeAttrEnum = "off"
 	InsAutocapitalizeAttrEnumOn         InsAutocapitalizeAttrEnum = "on"
+	InsAutocapitalizeAttrEnumSentences  InsAutocapitalizeAttrEnum = "sentences"
+	InsAutocapitalizeAttrEnumWords      InsAutocapitalizeAttrEnum = "words"
 )
 
 type InsAutocorrectAttrEnum string
 
 const (
-	InsAutocorrectAttrEnumOn  InsAutocorrectAttrEnum = "on"
 	InsAutocorrectAttrEnumOff InsAutocorrectAttrEnum = "off"
+	InsAutocorrectAttrEnumOn  InsAutocorrectAttrEnum = "on"
 )
 
 type InsContenteditableAttrEnum string

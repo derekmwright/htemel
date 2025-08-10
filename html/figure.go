@@ -42,12 +42,12 @@ func FigureIf(condition bool, children ...htemel.Node) *FigureElement {
 type FigureAutocapitalizeAttrEnum string
 
 const (
-	FigureAutocapitalizeAttrEnumOn         FigureAutocapitalizeAttrEnum = "on"
-	FigureAutocapitalizeAttrEnumSentences  FigureAutocapitalizeAttrEnum = "sentences"
-	FigureAutocapitalizeAttrEnumWords      FigureAutocapitalizeAttrEnum = "words"
 	FigureAutocapitalizeAttrEnumCharacters FigureAutocapitalizeAttrEnum = "characters"
 	FigureAutocapitalizeAttrEnumNone       FigureAutocapitalizeAttrEnum = "none"
 	FigureAutocapitalizeAttrEnumOff        FigureAutocapitalizeAttrEnum = "off"
+	FigureAutocapitalizeAttrEnumOn         FigureAutocapitalizeAttrEnum = "on"
+	FigureAutocapitalizeAttrEnumSentences  FigureAutocapitalizeAttrEnum = "sentences"
+	FigureAutocapitalizeAttrEnumWords      FigureAutocapitalizeAttrEnum = "words"
 )
 
 type FigureAutocorrectAttrEnum string

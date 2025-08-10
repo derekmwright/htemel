@@ -42,12 +42,12 @@ func BdiIf(condition bool, children ...htemel.Node) *BdiElement {
 type BdiAutocapitalizeAttrEnum string
 
 const (
-	BdiAutocapitalizeAttrEnumCharacters BdiAutocapitalizeAttrEnum = "characters"
-	BdiAutocapitalizeAttrEnumNone       BdiAutocapitalizeAttrEnum = "none"
-	BdiAutocapitalizeAttrEnumOff        BdiAutocapitalizeAttrEnum = "off"
 	BdiAutocapitalizeAttrEnumOn         BdiAutocapitalizeAttrEnum = "on"
 	BdiAutocapitalizeAttrEnumSentences  BdiAutocapitalizeAttrEnum = "sentences"
 	BdiAutocapitalizeAttrEnumWords      BdiAutocapitalizeAttrEnum = "words"
+	BdiAutocapitalizeAttrEnumCharacters BdiAutocapitalizeAttrEnum = "characters"
+	BdiAutocapitalizeAttrEnumNone       BdiAutocapitalizeAttrEnum = "none"
+	BdiAutocapitalizeAttrEnumOff        BdiAutocapitalizeAttrEnum = "off"
 )
 
 type BdiAutocorrectAttrEnum string

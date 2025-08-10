@@ -53,8 +53,8 @@ const (
 type TableAutocorrectAttrEnum string
 
 const (
-	TableAutocorrectAttrEnumOn  TableAutocorrectAttrEnum = "on"
 	TableAutocorrectAttrEnumOff TableAutocorrectAttrEnum = "off"
+	TableAutocorrectAttrEnumOn  TableAutocorrectAttrEnum = "on"
 )
 
 type TableContenteditableAttrEnum string

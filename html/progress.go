@@ -42,12 +42,12 @@ func ProgressIf(condition bool, children ...htemel.Node) *ProgressElement {
 type ProgressAutocapitalizeAttrEnum string
 
 const (
-	ProgressAutocapitalizeAttrEnumSentences  ProgressAutocapitalizeAttrEnum = "sentences"
-	ProgressAutocapitalizeAttrEnumWords      ProgressAutocapitalizeAttrEnum = "words"
 	ProgressAutocapitalizeAttrEnumCharacters ProgressAutocapitalizeAttrEnum = "characters"
 	ProgressAutocapitalizeAttrEnumNone       ProgressAutocapitalizeAttrEnum = "none"
 	ProgressAutocapitalizeAttrEnumOff        ProgressAutocapitalizeAttrEnum = "off"
 	ProgressAutocapitalizeAttrEnumOn         ProgressAutocapitalizeAttrEnum = "on"
+	ProgressAutocapitalizeAttrEnumSentences  ProgressAutocapitalizeAttrEnum = "sentences"
+	ProgressAutocapitalizeAttrEnumWords      ProgressAutocapitalizeAttrEnum = "words"
 )
 
 type ProgressAutocorrectAttrEnum string

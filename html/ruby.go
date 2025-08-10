@@ -42,12 +42,12 @@ func RubyIf(condition bool, children ...htemel.Node) *RubyElement {
 type RubyAutocapitalizeAttrEnum string
 
 const (
-	RubyAutocapitalizeAttrEnumOn         RubyAutocapitalizeAttrEnum = "on"
-	RubyAutocapitalizeAttrEnumSentences  RubyAutocapitalizeAttrEnum = "sentences"
-	RubyAutocapitalizeAttrEnumWords      RubyAutocapitalizeAttrEnum = "words"
 	RubyAutocapitalizeAttrEnumCharacters RubyAutocapitalizeAttrEnum = "characters"
 	RubyAutocapitalizeAttrEnumNone       RubyAutocapitalizeAttrEnum = "none"
 	RubyAutocapitalizeAttrEnumOff        RubyAutocapitalizeAttrEnum = "off"
+	RubyAutocapitalizeAttrEnumOn         RubyAutocapitalizeAttrEnum = "on"
+	RubyAutocapitalizeAttrEnumSentences  RubyAutocapitalizeAttrEnum = "sentences"
+	RubyAutocapitalizeAttrEnumWords      RubyAutocapitalizeAttrEnum = "words"
 )
 
 type RubyAutocorrectAttrEnum string

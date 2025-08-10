@@ -42,12 +42,12 @@ func HgroupIf(condition bool, children ...htemel.Node) *HgroupElement {
 type HgroupAutocapitalizeAttrEnum string
 
 const (
-	HgroupAutocapitalizeAttrEnumCharacters HgroupAutocapitalizeAttrEnum = "characters"
-	HgroupAutocapitalizeAttrEnumNone       HgroupAutocapitalizeAttrEnum = "none"
 	HgroupAutocapitalizeAttrEnumOff        HgroupAutocapitalizeAttrEnum = "off"
 	HgroupAutocapitalizeAttrEnumOn         HgroupAutocapitalizeAttrEnum = "on"
 	HgroupAutocapitalizeAttrEnumSentences  HgroupAutocapitalizeAttrEnum = "sentences"
 	HgroupAutocapitalizeAttrEnumWords      HgroupAutocapitalizeAttrEnum = "words"
+	HgroupAutocapitalizeAttrEnumCharacters HgroupAutocapitalizeAttrEnum = "characters"
+	HgroupAutocapitalizeAttrEnumNone       HgroupAutocapitalizeAttrEnum = "none"
 )
 
 type HgroupAutocorrectAttrEnum string

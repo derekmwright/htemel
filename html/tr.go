@@ -42,12 +42,12 @@ func TrIf(condition bool, children ...htemel.Node) *TrElement {
 type TrAutocapitalizeAttrEnum string
 
 const (
-	TrAutocapitalizeAttrEnumOff        TrAutocapitalizeAttrEnum = "off"
-	TrAutocapitalizeAttrEnumOn         TrAutocapitalizeAttrEnum = "on"
-	TrAutocapitalizeAttrEnumSentences  TrAutocapitalizeAttrEnum = "sentences"
 	TrAutocapitalizeAttrEnumWords      TrAutocapitalizeAttrEnum = "words"
 	TrAutocapitalizeAttrEnumCharacters TrAutocapitalizeAttrEnum = "characters"
 	TrAutocapitalizeAttrEnumNone       TrAutocapitalizeAttrEnum = "none"
+	TrAutocapitalizeAttrEnumOff        TrAutocapitalizeAttrEnum = "off"
+	TrAutocapitalizeAttrEnumOn         TrAutocapitalizeAttrEnum = "on"
+	TrAutocapitalizeAttrEnumSentences  TrAutocapitalizeAttrEnum = "sentences"
 )
 
 type TrAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type TrContenteditableAttrEnum string
 
 const (
-	TrContenteditableAttrEnumFalse         TrContenteditableAttrEnum = "false"
 	TrContenteditableAttrEnumPlaintextOnly TrContenteditableAttrEnum = "plaintext-only"
 	TrContenteditableAttrEnumTrue          TrContenteditableAttrEnum = "true"
+	TrContenteditableAttrEnumFalse         TrContenteditableAttrEnum = "false"
 )
 
 type trAttrs map[string]any

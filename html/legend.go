@@ -42,12 +42,12 @@ func LegendIf(condition bool, children ...htemel.Node) *LegendElement {
 type LegendAutocapitalizeAttrEnum string
 
 const (
+	LegendAutocapitalizeAttrEnumCharacters LegendAutocapitalizeAttrEnum = "characters"
+	LegendAutocapitalizeAttrEnumNone       LegendAutocapitalizeAttrEnum = "none"
 	LegendAutocapitalizeAttrEnumOff        LegendAutocapitalizeAttrEnum = "off"
 	LegendAutocapitalizeAttrEnumOn         LegendAutocapitalizeAttrEnum = "on"
 	LegendAutocapitalizeAttrEnumSentences  LegendAutocapitalizeAttrEnum = "sentences"
 	LegendAutocapitalizeAttrEnumWords      LegendAutocapitalizeAttrEnum = "words"
-	LegendAutocapitalizeAttrEnumCharacters LegendAutocapitalizeAttrEnum = "characters"
-	LegendAutocapitalizeAttrEnumNone       LegendAutocapitalizeAttrEnum = "none"
 )
 
 type LegendAutocorrectAttrEnum string

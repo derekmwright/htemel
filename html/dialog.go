@@ -42,19 +42,19 @@ func DialogIf(condition bool, children ...htemel.Node) *DialogElement {
 type DialogAutocapitalizeAttrEnum string
 
 const (
-	DialogAutocapitalizeAttrEnumOn         DialogAutocapitalizeAttrEnum = "on"
-	DialogAutocapitalizeAttrEnumSentences  DialogAutocapitalizeAttrEnum = "sentences"
-	DialogAutocapitalizeAttrEnumWords      DialogAutocapitalizeAttrEnum = "words"
 	DialogAutocapitalizeAttrEnumCharacters DialogAutocapitalizeAttrEnum = "characters"
 	DialogAutocapitalizeAttrEnumNone       DialogAutocapitalizeAttrEnum = "none"
 	DialogAutocapitalizeAttrEnumOff        DialogAutocapitalizeAttrEnum = "off"
+	DialogAutocapitalizeAttrEnumOn         DialogAutocapitalizeAttrEnum = "on"
+	DialogAutocapitalizeAttrEnumSentences  DialogAutocapitalizeAttrEnum = "sentences"
+	DialogAutocapitalizeAttrEnumWords      DialogAutocapitalizeAttrEnum = "words"
 )
 
 type DialogAutocorrectAttrEnum string
 
 const (
-	DialogAutocorrectAttrEnumOff DialogAutocorrectAttrEnum = "off"
 	DialogAutocorrectAttrEnumOn  DialogAutocorrectAttrEnum = "on"
+	DialogAutocorrectAttrEnumOff DialogAutocorrectAttrEnum = "off"
 )
 
 type DialogContenteditableAttrEnum string

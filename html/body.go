@@ -53,8 +53,8 @@ const (
 type BodyAutocorrectAttrEnum string
 
 const (
-	BodyAutocorrectAttrEnumOn  BodyAutocorrectAttrEnum = "on"
 	BodyAutocorrectAttrEnumOff BodyAutocorrectAttrEnum = "off"
+	BodyAutocorrectAttrEnumOn  BodyAutocorrectAttrEnum = "on"
 )
 
 type BodyContenteditableAttrEnum string

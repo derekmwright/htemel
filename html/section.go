@@ -42,19 +42,19 @@ func SectionIf(condition bool, children ...htemel.Node) *SectionElement {
 type SectionAutocapitalizeAttrEnum string
 
 const (
-	SectionAutocapitalizeAttrEnumOn         SectionAutocapitalizeAttrEnum = "on"
-	SectionAutocapitalizeAttrEnumSentences  SectionAutocapitalizeAttrEnum = "sentences"
 	SectionAutocapitalizeAttrEnumWords      SectionAutocapitalizeAttrEnum = "words"
 	SectionAutocapitalizeAttrEnumCharacters SectionAutocapitalizeAttrEnum = "characters"
 	SectionAutocapitalizeAttrEnumNone       SectionAutocapitalizeAttrEnum = "none"
 	SectionAutocapitalizeAttrEnumOff        SectionAutocapitalizeAttrEnum = "off"
+	SectionAutocapitalizeAttrEnumOn         SectionAutocapitalizeAttrEnum = "on"
+	SectionAutocapitalizeAttrEnumSentences  SectionAutocapitalizeAttrEnum = "sentences"
 )
 
 type SectionAutocorrectAttrEnum string
 
 const (
-	SectionAutocorrectAttrEnumOff SectionAutocorrectAttrEnum = "off"
 	SectionAutocorrectAttrEnumOn  SectionAutocorrectAttrEnum = "on"
+	SectionAutocorrectAttrEnumOff SectionAutocorrectAttrEnum = "off"
 )
 
 type SectionContenteditableAttrEnum string

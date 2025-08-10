@@ -42,12 +42,12 @@ func SelectedcontentIf(condition bool, children ...htemel.Node) *Selectedcontent
 type SelectedcontentAutocapitalizeAttrEnum string
 
 const (
-	SelectedcontentAutocapitalizeAttrEnumOn         SelectedcontentAutocapitalizeAttrEnum = "on"
-	SelectedcontentAutocapitalizeAttrEnumSentences  SelectedcontentAutocapitalizeAttrEnum = "sentences"
 	SelectedcontentAutocapitalizeAttrEnumWords      SelectedcontentAutocapitalizeAttrEnum = "words"
 	SelectedcontentAutocapitalizeAttrEnumCharacters SelectedcontentAutocapitalizeAttrEnum = "characters"
 	SelectedcontentAutocapitalizeAttrEnumNone       SelectedcontentAutocapitalizeAttrEnum = "none"
 	SelectedcontentAutocapitalizeAttrEnumOff        SelectedcontentAutocapitalizeAttrEnum = "off"
+	SelectedcontentAutocapitalizeAttrEnumOn         SelectedcontentAutocapitalizeAttrEnum = "on"
+	SelectedcontentAutocapitalizeAttrEnumSentences  SelectedcontentAutocapitalizeAttrEnum = "sentences"
 )
 
 type SelectedcontentAutocorrectAttrEnum string

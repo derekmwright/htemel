@@ -42,12 +42,12 @@ func NoscriptIf(condition bool, children ...htemel.Node) *NoscriptElement {
 type NoscriptAutocapitalizeAttrEnum string
 
 const (
+	NoscriptAutocapitalizeAttrEnumWords      NoscriptAutocapitalizeAttrEnum = "words"
 	NoscriptAutocapitalizeAttrEnumCharacters NoscriptAutocapitalizeAttrEnum = "characters"
 	NoscriptAutocapitalizeAttrEnumNone       NoscriptAutocapitalizeAttrEnum = "none"
 	NoscriptAutocapitalizeAttrEnumOff        NoscriptAutocapitalizeAttrEnum = "off"
 	NoscriptAutocapitalizeAttrEnumOn         NoscriptAutocapitalizeAttrEnum = "on"
 	NoscriptAutocapitalizeAttrEnumSentences  NoscriptAutocapitalizeAttrEnum = "sentences"
-	NoscriptAutocapitalizeAttrEnumWords      NoscriptAutocapitalizeAttrEnum = "words"
 )
 
 type NoscriptAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type NoscriptContenteditableAttrEnum string
 
 const (
-	NoscriptContenteditableAttrEnumTrue          NoscriptContenteditableAttrEnum = "true"
 	NoscriptContenteditableAttrEnumFalse         NoscriptContenteditableAttrEnum = "false"
 	NoscriptContenteditableAttrEnumPlaintextOnly NoscriptContenteditableAttrEnum = "plaintext-only"
+	NoscriptContenteditableAttrEnumTrue          NoscriptContenteditableAttrEnum = "true"
 )
 
 type noscriptAttrs map[string]any

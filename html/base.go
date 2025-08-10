@@ -42,12 +42,12 @@ func BaseIf(condition bool, children ...htemel.Node) *BaseElement {
 type BaseAutocapitalizeAttrEnum string
 
 const (
-	BaseAutocapitalizeAttrEnumOn         BaseAutocapitalizeAttrEnum = "on"
 	BaseAutocapitalizeAttrEnumSentences  BaseAutocapitalizeAttrEnum = "sentences"
 	BaseAutocapitalizeAttrEnumWords      BaseAutocapitalizeAttrEnum = "words"
 	BaseAutocapitalizeAttrEnumCharacters BaseAutocapitalizeAttrEnum = "characters"
 	BaseAutocapitalizeAttrEnumNone       BaseAutocapitalizeAttrEnum = "none"
 	BaseAutocapitalizeAttrEnumOff        BaseAutocapitalizeAttrEnum = "off"
+	BaseAutocapitalizeAttrEnumOn         BaseAutocapitalizeAttrEnum = "on"
 )
 
 type BaseAutocorrectAttrEnum string

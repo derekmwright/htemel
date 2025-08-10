@@ -60,9 +60,9 @@ const (
 type LinkContenteditableAttrEnum string
 
 const (
+	LinkContenteditableAttrEnumPlaintextOnly LinkContenteditableAttrEnum = "plaintext-only"
 	LinkContenteditableAttrEnumTrue          LinkContenteditableAttrEnum = "true"
 	LinkContenteditableAttrEnumFalse         LinkContenteditableAttrEnum = "false"
-	LinkContenteditableAttrEnumPlaintextOnly LinkContenteditableAttrEnum = "plaintext-only"
 )
 
 type linkAttrs map[string]any

@@ -42,12 +42,12 @@ func KbdIf(condition bool, children ...htemel.Node) *KbdElement {
 type KbdAutocapitalizeAttrEnum string
 
 const (
-	KbdAutocapitalizeAttrEnumSentences  KbdAutocapitalizeAttrEnum = "sentences"
-	KbdAutocapitalizeAttrEnumWords      KbdAutocapitalizeAttrEnum = "words"
 	KbdAutocapitalizeAttrEnumCharacters KbdAutocapitalizeAttrEnum = "characters"
 	KbdAutocapitalizeAttrEnumNone       KbdAutocapitalizeAttrEnum = "none"
 	KbdAutocapitalizeAttrEnumOff        KbdAutocapitalizeAttrEnum = "off"
 	KbdAutocapitalizeAttrEnumOn         KbdAutocapitalizeAttrEnum = "on"
+	KbdAutocapitalizeAttrEnumSentences  KbdAutocapitalizeAttrEnum = "sentences"
+	KbdAutocapitalizeAttrEnumWords      KbdAutocapitalizeAttrEnum = "words"
 )
 
 type KbdAutocorrectAttrEnum string

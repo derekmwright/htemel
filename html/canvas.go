@@ -42,12 +42,12 @@ func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 type CanvasAutocapitalizeAttrEnum string
 
 const (
-	CanvasAutocapitalizeAttrEnumOn         CanvasAutocapitalizeAttrEnum = "on"
-	CanvasAutocapitalizeAttrEnumSentences  CanvasAutocapitalizeAttrEnum = "sentences"
-	CanvasAutocapitalizeAttrEnumWords      CanvasAutocapitalizeAttrEnum = "words"
 	CanvasAutocapitalizeAttrEnumCharacters CanvasAutocapitalizeAttrEnum = "characters"
 	CanvasAutocapitalizeAttrEnumNone       CanvasAutocapitalizeAttrEnum = "none"
 	CanvasAutocapitalizeAttrEnumOff        CanvasAutocapitalizeAttrEnum = "off"
+	CanvasAutocapitalizeAttrEnumOn         CanvasAutocapitalizeAttrEnum = "on"
+	CanvasAutocapitalizeAttrEnumSentences  CanvasAutocapitalizeAttrEnum = "sentences"
+	CanvasAutocapitalizeAttrEnumWords      CanvasAutocapitalizeAttrEnum = "words"
 )
 
 type CanvasAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type CanvasContenteditableAttrEnum string
 
 const (
+	CanvasContenteditableAttrEnumTrue          CanvasContenteditableAttrEnum = "true"
 	CanvasContenteditableAttrEnumFalse         CanvasContenteditableAttrEnum = "false"
 	CanvasContenteditableAttrEnumPlaintextOnly CanvasContenteditableAttrEnum = "plaintext-only"
-	CanvasContenteditableAttrEnumTrue          CanvasContenteditableAttrEnum = "true"
 )
 
 type canvasAttrs map[string]any

@@ -42,12 +42,12 @@ func CiteIf(condition bool, children ...htemel.Node) *CiteElement {
 type CiteAutocapitalizeAttrEnum string
 
 const (
-	CiteAutocapitalizeAttrEnumSentences  CiteAutocapitalizeAttrEnum = "sentences"
-	CiteAutocapitalizeAttrEnumWords      CiteAutocapitalizeAttrEnum = "words"
 	CiteAutocapitalizeAttrEnumCharacters CiteAutocapitalizeAttrEnum = "characters"
 	CiteAutocapitalizeAttrEnumNone       CiteAutocapitalizeAttrEnum = "none"
 	CiteAutocapitalizeAttrEnumOff        CiteAutocapitalizeAttrEnum = "off"
 	CiteAutocapitalizeAttrEnumOn         CiteAutocapitalizeAttrEnum = "on"
+	CiteAutocapitalizeAttrEnumSentences  CiteAutocapitalizeAttrEnum = "sentences"
+	CiteAutocapitalizeAttrEnumWords      CiteAutocapitalizeAttrEnum = "words"
 )
 
 type CiteAutocorrectAttrEnum string

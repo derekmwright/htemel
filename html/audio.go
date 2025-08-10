@@ -42,12 +42,12 @@ func AudioIf(condition bool, children ...htemel.Node) *AudioElement {
 type AudioAutocapitalizeAttrEnum string
 
 const (
+	AudioAutocapitalizeAttrEnumCharacters AudioAutocapitalizeAttrEnum = "characters"
 	AudioAutocapitalizeAttrEnumNone       AudioAutocapitalizeAttrEnum = "none"
 	AudioAutocapitalizeAttrEnumOff        AudioAutocapitalizeAttrEnum = "off"
 	AudioAutocapitalizeAttrEnumOn         AudioAutocapitalizeAttrEnum = "on"
 	AudioAutocapitalizeAttrEnumSentences  AudioAutocapitalizeAttrEnum = "sentences"
 	AudioAutocapitalizeAttrEnumWords      AudioAutocapitalizeAttrEnum = "words"
-	AudioAutocapitalizeAttrEnumCharacters AudioAutocapitalizeAttrEnum = "characters"
 )
 
 type AudioAutocorrectAttrEnum string

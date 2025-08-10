@@ -42,27 +42,27 @@ func BlockquoteIf(condition bool, children ...htemel.Node) *BlockquoteElement {
 type BlockquoteAutocapitalizeAttrEnum string
 
 const (
+	BlockquoteAutocapitalizeAttrEnumSentences  BlockquoteAutocapitalizeAttrEnum = "sentences"
 	BlockquoteAutocapitalizeAttrEnumWords      BlockquoteAutocapitalizeAttrEnum = "words"
 	BlockquoteAutocapitalizeAttrEnumCharacters BlockquoteAutocapitalizeAttrEnum = "characters"
 	BlockquoteAutocapitalizeAttrEnumNone       BlockquoteAutocapitalizeAttrEnum = "none"
 	BlockquoteAutocapitalizeAttrEnumOff        BlockquoteAutocapitalizeAttrEnum = "off"
 	BlockquoteAutocapitalizeAttrEnumOn         BlockquoteAutocapitalizeAttrEnum = "on"
-	BlockquoteAutocapitalizeAttrEnumSentences  BlockquoteAutocapitalizeAttrEnum = "sentences"
 )
 
 type BlockquoteAutocorrectAttrEnum string
 
 const (
-	BlockquoteAutocorrectAttrEnumOn  BlockquoteAutocorrectAttrEnum = "on"
 	BlockquoteAutocorrectAttrEnumOff BlockquoteAutocorrectAttrEnum = "off"
+	BlockquoteAutocorrectAttrEnumOn  BlockquoteAutocorrectAttrEnum = "on"
 )
 
 type BlockquoteContenteditableAttrEnum string
 
 const (
-	BlockquoteContenteditableAttrEnumTrue          BlockquoteContenteditableAttrEnum = "true"
 	BlockquoteContenteditableAttrEnumFalse         BlockquoteContenteditableAttrEnum = "false"
 	BlockquoteContenteditableAttrEnumPlaintextOnly BlockquoteContenteditableAttrEnum = "plaintext-only"
+	BlockquoteContenteditableAttrEnumTrue          BlockquoteContenteditableAttrEnum = "true"
 )
 
 type blockquoteAttrs map[string]any

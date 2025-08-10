@@ -42,27 +42,27 @@ func HeadIf(condition bool, children ...htemel.Node) *HeadElement {
 type HeadAutocapitalizeAttrEnum string
 
 const (
+	HeadAutocapitalizeAttrEnumOff        HeadAutocapitalizeAttrEnum = "off"
 	HeadAutocapitalizeAttrEnumOn         HeadAutocapitalizeAttrEnum = "on"
 	HeadAutocapitalizeAttrEnumSentences  HeadAutocapitalizeAttrEnum = "sentences"
 	HeadAutocapitalizeAttrEnumWords      HeadAutocapitalizeAttrEnum = "words"
 	HeadAutocapitalizeAttrEnumCharacters HeadAutocapitalizeAttrEnum = "characters"
 	HeadAutocapitalizeAttrEnumNone       HeadAutocapitalizeAttrEnum = "none"
-	HeadAutocapitalizeAttrEnumOff        HeadAutocapitalizeAttrEnum = "off"
 )
 
 type HeadAutocorrectAttrEnum string
 
 const (
-	HeadAutocorrectAttrEnumOff HeadAutocorrectAttrEnum = "off"
 	HeadAutocorrectAttrEnumOn  HeadAutocorrectAttrEnum = "on"
+	HeadAutocorrectAttrEnumOff HeadAutocorrectAttrEnum = "off"
 )
 
 type HeadContenteditableAttrEnum string
 
 const (
-	HeadContenteditableAttrEnumPlaintextOnly HeadContenteditableAttrEnum = "plaintext-only"
 	HeadContenteditableAttrEnumTrue          HeadContenteditableAttrEnum = "true"
 	HeadContenteditableAttrEnumFalse         HeadContenteditableAttrEnum = "false"
+	HeadContenteditableAttrEnumPlaintextOnly HeadContenteditableAttrEnum = "plaintext-only"
 )
 
 type headAttrs map[string]any

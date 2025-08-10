@@ -42,19 +42,19 @@ func HrIf(condition bool, children ...htemel.Node) *HrElement {
 type HrAutocapitalizeAttrEnum string
 
 const (
+	HrAutocapitalizeAttrEnumWords      HrAutocapitalizeAttrEnum = "words"
 	HrAutocapitalizeAttrEnumCharacters HrAutocapitalizeAttrEnum = "characters"
 	HrAutocapitalizeAttrEnumNone       HrAutocapitalizeAttrEnum = "none"
 	HrAutocapitalizeAttrEnumOff        HrAutocapitalizeAttrEnum = "off"
 	HrAutocapitalizeAttrEnumOn         HrAutocapitalizeAttrEnum = "on"
 	HrAutocapitalizeAttrEnumSentences  HrAutocapitalizeAttrEnum = "sentences"
-	HrAutocapitalizeAttrEnumWords      HrAutocapitalizeAttrEnum = "words"
 )
 
 type HrAutocorrectAttrEnum string
 
 const (
-	HrAutocorrectAttrEnumOff HrAutocorrectAttrEnum = "off"
 	HrAutocorrectAttrEnumOn  HrAutocorrectAttrEnum = "on"
+	HrAutocorrectAttrEnumOff HrAutocorrectAttrEnum = "off"
 )
 
 type HrContenteditableAttrEnum string

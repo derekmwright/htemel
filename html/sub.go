@@ -42,12 +42,12 @@ func SubIf(condition bool, children ...htemel.Node) *SubElement {
 type SubAutocapitalizeAttrEnum string
 
 const (
+	SubAutocapitalizeAttrEnumOn         SubAutocapitalizeAttrEnum = "on"
 	SubAutocapitalizeAttrEnumSentences  SubAutocapitalizeAttrEnum = "sentences"
 	SubAutocapitalizeAttrEnumWords      SubAutocapitalizeAttrEnum = "words"
 	SubAutocapitalizeAttrEnumCharacters SubAutocapitalizeAttrEnum = "characters"
 	SubAutocapitalizeAttrEnumNone       SubAutocapitalizeAttrEnum = "none"
 	SubAutocapitalizeAttrEnumOff        SubAutocapitalizeAttrEnum = "off"
-	SubAutocapitalizeAttrEnumOn         SubAutocapitalizeAttrEnum = "on"
 )
 
 type SubAutocorrectAttrEnum string

@@ -42,12 +42,12 @@ func TextareaIf(condition bool, children ...htemel.Node) *TextareaElement {
 type TextareaAutocapitalizeAttrEnum string
 
 const (
-	TextareaAutocapitalizeAttrEnumOn         TextareaAutocapitalizeAttrEnum = "on"
-	TextareaAutocapitalizeAttrEnumSentences  TextareaAutocapitalizeAttrEnum = "sentences"
-	TextareaAutocapitalizeAttrEnumWords      TextareaAutocapitalizeAttrEnum = "words"
 	TextareaAutocapitalizeAttrEnumCharacters TextareaAutocapitalizeAttrEnum = "characters"
 	TextareaAutocapitalizeAttrEnumNone       TextareaAutocapitalizeAttrEnum = "none"
 	TextareaAutocapitalizeAttrEnumOff        TextareaAutocapitalizeAttrEnum = "off"
+	TextareaAutocapitalizeAttrEnumOn         TextareaAutocapitalizeAttrEnum = "on"
+	TextareaAutocapitalizeAttrEnumSentences  TextareaAutocapitalizeAttrEnum = "sentences"
+	TextareaAutocapitalizeAttrEnumWords      TextareaAutocapitalizeAttrEnum = "words"
 )
 
 type TextareaAutocorrectAttrEnum string

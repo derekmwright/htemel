@@ -42,19 +42,19 @@ func SelectIf(condition bool, children ...htemel.Node) *SelectElement {
 type SelectAutocapitalizeAttrEnum string
 
 const (
+	SelectAutocapitalizeAttrEnumWords      SelectAutocapitalizeAttrEnum = "words"
 	SelectAutocapitalizeAttrEnumCharacters SelectAutocapitalizeAttrEnum = "characters"
 	SelectAutocapitalizeAttrEnumNone       SelectAutocapitalizeAttrEnum = "none"
 	SelectAutocapitalizeAttrEnumOff        SelectAutocapitalizeAttrEnum = "off"
 	SelectAutocapitalizeAttrEnumOn         SelectAutocapitalizeAttrEnum = "on"
 	SelectAutocapitalizeAttrEnumSentences  SelectAutocapitalizeAttrEnum = "sentences"
-	SelectAutocapitalizeAttrEnumWords      SelectAutocapitalizeAttrEnum = "words"
 )
 
 type SelectAutocorrectAttrEnum string
 
 const (
-	SelectAutocorrectAttrEnumOff SelectAutocorrectAttrEnum = "off"
 	SelectAutocorrectAttrEnumOn  SelectAutocorrectAttrEnum = "on"
+	SelectAutocorrectAttrEnumOff SelectAutocorrectAttrEnum = "off"
 )
 
 type SelectContenteditableAttrEnum string

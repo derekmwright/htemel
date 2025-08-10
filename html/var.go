@@ -42,19 +42,19 @@ func VarIf(condition bool, children ...htemel.Node) *VarElement {
 type VarAutocapitalizeAttrEnum string
 
 const (
+	VarAutocapitalizeAttrEnumWords      VarAutocapitalizeAttrEnum = "words"
 	VarAutocapitalizeAttrEnumCharacters VarAutocapitalizeAttrEnum = "characters"
 	VarAutocapitalizeAttrEnumNone       VarAutocapitalizeAttrEnum = "none"
 	VarAutocapitalizeAttrEnumOff        VarAutocapitalizeAttrEnum = "off"
 	VarAutocapitalizeAttrEnumOn         VarAutocapitalizeAttrEnum = "on"
 	VarAutocapitalizeAttrEnumSentences  VarAutocapitalizeAttrEnum = "sentences"
-	VarAutocapitalizeAttrEnumWords      VarAutocapitalizeAttrEnum = "words"
 )
 
 type VarAutocorrectAttrEnum string
 
 const (
-	VarAutocorrectAttrEnumOn  VarAutocorrectAttrEnum = "on"
 	VarAutocorrectAttrEnumOff VarAutocorrectAttrEnum = "off"
+	VarAutocorrectAttrEnumOn  VarAutocorrectAttrEnum = "on"
 )
 
 type VarContenteditableAttrEnum string

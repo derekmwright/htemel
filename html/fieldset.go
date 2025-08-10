@@ -42,12 +42,12 @@ func FieldsetIf(condition bool, children ...htemel.Node) *FieldsetElement {
 type FieldsetAutocapitalizeAttrEnum string
 
 const (
-	FieldsetAutocapitalizeAttrEnumCharacters FieldsetAutocapitalizeAttrEnum = "characters"
-	FieldsetAutocapitalizeAttrEnumNone       FieldsetAutocapitalizeAttrEnum = "none"
 	FieldsetAutocapitalizeAttrEnumOff        FieldsetAutocapitalizeAttrEnum = "off"
 	FieldsetAutocapitalizeAttrEnumOn         FieldsetAutocapitalizeAttrEnum = "on"
 	FieldsetAutocapitalizeAttrEnumSentences  FieldsetAutocapitalizeAttrEnum = "sentences"
 	FieldsetAutocapitalizeAttrEnumWords      FieldsetAutocapitalizeAttrEnum = "words"
+	FieldsetAutocapitalizeAttrEnumCharacters FieldsetAutocapitalizeAttrEnum = "characters"
+	FieldsetAutocapitalizeAttrEnumNone       FieldsetAutocapitalizeAttrEnum = "none"
 )
 
 type FieldsetAutocorrectAttrEnum string

@@ -42,12 +42,12 @@ func OlIf(condition bool, children ...htemel.Node) *OlElement {
 type OlAutocapitalizeAttrEnum string
 
 const (
-	OlAutocapitalizeAttrEnumNone       OlAutocapitalizeAttrEnum = "none"
 	OlAutocapitalizeAttrEnumOff        OlAutocapitalizeAttrEnum = "off"
 	OlAutocapitalizeAttrEnumOn         OlAutocapitalizeAttrEnum = "on"
 	OlAutocapitalizeAttrEnumSentences  OlAutocapitalizeAttrEnum = "sentences"
 	OlAutocapitalizeAttrEnumWords      OlAutocapitalizeAttrEnum = "words"
 	OlAutocapitalizeAttrEnumCharacters OlAutocapitalizeAttrEnum = "characters"
+	OlAutocapitalizeAttrEnumNone       OlAutocapitalizeAttrEnum = "none"
 )
 
 type OlAutocorrectAttrEnum string

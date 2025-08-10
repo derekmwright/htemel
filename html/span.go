@@ -42,12 +42,12 @@ func SpanIf(condition bool, children ...htemel.Node) *SpanElement {
 type SpanAutocapitalizeAttrEnum string
 
 const (
-	SpanAutocapitalizeAttrEnumSentences  SpanAutocapitalizeAttrEnum = "sentences"
 	SpanAutocapitalizeAttrEnumWords      SpanAutocapitalizeAttrEnum = "words"
 	SpanAutocapitalizeAttrEnumCharacters SpanAutocapitalizeAttrEnum = "characters"
 	SpanAutocapitalizeAttrEnumNone       SpanAutocapitalizeAttrEnum = "none"
 	SpanAutocapitalizeAttrEnumOff        SpanAutocapitalizeAttrEnum = "off"
 	SpanAutocapitalizeAttrEnumOn         SpanAutocapitalizeAttrEnum = "on"
+	SpanAutocapitalizeAttrEnumSentences  SpanAutocapitalizeAttrEnum = "sentences"
 )
 
 type SpanAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type SpanContenteditableAttrEnum string
 
 const (
+	SpanContenteditableAttrEnumTrue          SpanContenteditableAttrEnum = "true"
 	SpanContenteditableAttrEnumFalse         SpanContenteditableAttrEnum = "false"
 	SpanContenteditableAttrEnumPlaintextOnly SpanContenteditableAttrEnum = "plaintext-only"
-	SpanContenteditableAttrEnumTrue          SpanContenteditableAttrEnum = "true"
 )
 
 type spanAttrs map[string]any

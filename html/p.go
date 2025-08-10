@@ -53,8 +53,8 @@ const (
 type PAutocorrectAttrEnum string
 
 const (
-	PAutocorrectAttrEnumOff PAutocorrectAttrEnum = "off"
 	PAutocorrectAttrEnumOn  PAutocorrectAttrEnum = "on"
+	PAutocorrectAttrEnumOff PAutocorrectAttrEnum = "off"
 )
 
 type PContenteditableAttrEnum string

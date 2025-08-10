@@ -42,12 +42,12 @@ func DivIf(condition bool, children ...htemel.Node) *DivElement {
 type DivAutocapitalizeAttrEnum string
 
 const (
+	DivAutocapitalizeAttrEnumOn         DivAutocapitalizeAttrEnum = "on"
 	DivAutocapitalizeAttrEnumSentences  DivAutocapitalizeAttrEnum = "sentences"
 	DivAutocapitalizeAttrEnumWords      DivAutocapitalizeAttrEnum = "words"
 	DivAutocapitalizeAttrEnumCharacters DivAutocapitalizeAttrEnum = "characters"
 	DivAutocapitalizeAttrEnumNone       DivAutocapitalizeAttrEnum = "none"
 	DivAutocapitalizeAttrEnumOff        DivAutocapitalizeAttrEnum = "off"
-	DivAutocapitalizeAttrEnumOn         DivAutocapitalizeAttrEnum = "on"
 )
 
 type DivAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type DivContenteditableAttrEnum string
 
 const (
-	DivContenteditableAttrEnumPlaintextOnly DivContenteditableAttrEnum = "plaintext-only"
 	DivContenteditableAttrEnumTrue          DivContenteditableAttrEnum = "true"
 	DivContenteditableAttrEnumFalse         DivContenteditableAttrEnum = "false"
+	DivContenteditableAttrEnumPlaintextOnly DivContenteditableAttrEnum = "plaintext-only"
 )
 
 type divAttrs map[string]any

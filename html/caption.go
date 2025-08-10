@@ -42,19 +42,19 @@ func CaptionIf(condition bool, children ...htemel.Node) *CaptionElement {
 type CaptionAutocapitalizeAttrEnum string
 
 const (
-	CaptionAutocapitalizeAttrEnumOff        CaptionAutocapitalizeAttrEnum = "off"
 	CaptionAutocapitalizeAttrEnumOn         CaptionAutocapitalizeAttrEnum = "on"
 	CaptionAutocapitalizeAttrEnumSentences  CaptionAutocapitalizeAttrEnum = "sentences"
 	CaptionAutocapitalizeAttrEnumWords      CaptionAutocapitalizeAttrEnum = "words"
 	CaptionAutocapitalizeAttrEnumCharacters CaptionAutocapitalizeAttrEnum = "characters"
 	CaptionAutocapitalizeAttrEnumNone       CaptionAutocapitalizeAttrEnum = "none"
+	CaptionAutocapitalizeAttrEnumOff        CaptionAutocapitalizeAttrEnum = "off"
 )
 
 type CaptionAutocorrectAttrEnum string
 
 const (
-	CaptionAutocorrectAttrEnumOn  CaptionAutocorrectAttrEnum = "on"
 	CaptionAutocorrectAttrEnumOff CaptionAutocorrectAttrEnum = "off"
+	CaptionAutocorrectAttrEnumOn  CaptionAutocorrectAttrEnum = "on"
 )
 
 type CaptionContenteditableAttrEnum string

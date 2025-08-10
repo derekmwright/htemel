@@ -42,12 +42,12 @@ func DlIf(condition bool, children ...htemel.Node) *DlElement {
 type DlAutocapitalizeAttrEnum string
 
 const (
-	DlAutocapitalizeAttrEnumCharacters DlAutocapitalizeAttrEnum = "characters"
-	DlAutocapitalizeAttrEnumNone       DlAutocapitalizeAttrEnum = "none"
-	DlAutocapitalizeAttrEnumOff        DlAutocapitalizeAttrEnum = "off"
 	DlAutocapitalizeAttrEnumOn         DlAutocapitalizeAttrEnum = "on"
 	DlAutocapitalizeAttrEnumSentences  DlAutocapitalizeAttrEnum = "sentences"
 	DlAutocapitalizeAttrEnumWords      DlAutocapitalizeAttrEnum = "words"
+	DlAutocapitalizeAttrEnumCharacters DlAutocapitalizeAttrEnum = "characters"
+	DlAutocapitalizeAttrEnumNone       DlAutocapitalizeAttrEnum = "none"
+	DlAutocapitalizeAttrEnumOff        DlAutocapitalizeAttrEnum = "off"
 )
 
 type DlAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type DlContenteditableAttrEnum string
 
 const (
+	DlContenteditableAttrEnumTrue          DlContenteditableAttrEnum = "true"
 	DlContenteditableAttrEnumFalse         DlContenteditableAttrEnum = "false"
 	DlContenteditableAttrEnumPlaintextOnly DlContenteditableAttrEnum = "plaintext-only"
-	DlContenteditableAttrEnumTrue          DlContenteditableAttrEnum = "true"
 )
 
 type dlAttrs map[string]any

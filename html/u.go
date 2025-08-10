@@ -42,12 +42,12 @@ func UIf(condition bool, children ...htemel.Node) *UElement {
 type UAutocapitalizeAttrEnum string
 
 const (
+	UAutocapitalizeAttrEnumWords      UAutocapitalizeAttrEnum = "words"
 	UAutocapitalizeAttrEnumCharacters UAutocapitalizeAttrEnum = "characters"
 	UAutocapitalizeAttrEnumNone       UAutocapitalizeAttrEnum = "none"
 	UAutocapitalizeAttrEnumOff        UAutocapitalizeAttrEnum = "off"
 	UAutocapitalizeAttrEnumOn         UAutocapitalizeAttrEnum = "on"
 	UAutocapitalizeAttrEnumSentences  UAutocapitalizeAttrEnum = "sentences"
-	UAutocapitalizeAttrEnumWords      UAutocapitalizeAttrEnum = "words"
 )
 
 type UAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type UContenteditableAttrEnum string
 
 const (
+	UContenteditableAttrEnumFalse         UContenteditableAttrEnum = "false"
 	UContenteditableAttrEnumPlaintextOnly UContenteditableAttrEnum = "plaintext-only"
 	UContenteditableAttrEnumTrue          UContenteditableAttrEnum = "true"
-	UContenteditableAttrEnumFalse         UContenteditableAttrEnum = "false"
 )
 
 type uAttrs map[string]any

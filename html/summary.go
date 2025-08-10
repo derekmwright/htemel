@@ -60,9 +60,9 @@ const (
 type SummaryContenteditableAttrEnum string
 
 const (
-	SummaryContenteditableAttrEnumTrue          SummaryContenteditableAttrEnum = "true"
 	SummaryContenteditableAttrEnumFalse         SummaryContenteditableAttrEnum = "false"
 	SummaryContenteditableAttrEnumPlaintextOnly SummaryContenteditableAttrEnum = "plaintext-only"
+	SummaryContenteditableAttrEnumTrue          SummaryContenteditableAttrEnum = "true"
 )
 
 type summaryAttrs map[string]any

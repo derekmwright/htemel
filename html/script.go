@@ -42,12 +42,12 @@ func ScriptIf(condition bool, children ...htemel.Node) *ScriptElement {
 type ScriptAutocapitalizeAttrEnum string
 
 const (
-	ScriptAutocapitalizeAttrEnumSentences  ScriptAutocapitalizeAttrEnum = "sentences"
-	ScriptAutocapitalizeAttrEnumWords      ScriptAutocapitalizeAttrEnum = "words"
-	ScriptAutocapitalizeAttrEnumCharacters ScriptAutocapitalizeAttrEnum = "characters"
 	ScriptAutocapitalizeAttrEnumNone       ScriptAutocapitalizeAttrEnum = "none"
 	ScriptAutocapitalizeAttrEnumOff        ScriptAutocapitalizeAttrEnum = "off"
 	ScriptAutocapitalizeAttrEnumOn         ScriptAutocapitalizeAttrEnum = "on"
+	ScriptAutocapitalizeAttrEnumSentences  ScriptAutocapitalizeAttrEnum = "sentences"
+	ScriptAutocapitalizeAttrEnumWords      ScriptAutocapitalizeAttrEnum = "words"
+	ScriptAutocapitalizeAttrEnumCharacters ScriptAutocapitalizeAttrEnum = "characters"
 )
 
 type ScriptAutocorrectAttrEnum string

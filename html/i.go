@@ -60,9 +60,9 @@ const (
 type IContenteditableAttrEnum string
 
 const (
+	IContenteditableAttrEnumFalse         IContenteditableAttrEnum = "false"
 	IContenteditableAttrEnumPlaintextOnly IContenteditableAttrEnum = "plaintext-only"
 	IContenteditableAttrEnumTrue          IContenteditableAttrEnum = "true"
-	IContenteditableAttrEnumFalse         IContenteditableAttrEnum = "false"
 )
 
 type iAttrs map[string]any

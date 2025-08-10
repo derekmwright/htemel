@@ -42,12 +42,12 @@ func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 type TrackAutocapitalizeAttrEnum string
 
 const (
-	TrackAutocapitalizeAttrEnumOn         TrackAutocapitalizeAttrEnum = "on"
-	TrackAutocapitalizeAttrEnumSentences  TrackAutocapitalizeAttrEnum = "sentences"
 	TrackAutocapitalizeAttrEnumWords      TrackAutocapitalizeAttrEnum = "words"
 	TrackAutocapitalizeAttrEnumCharacters TrackAutocapitalizeAttrEnum = "characters"
 	TrackAutocapitalizeAttrEnumNone       TrackAutocapitalizeAttrEnum = "none"
 	TrackAutocapitalizeAttrEnumOff        TrackAutocapitalizeAttrEnum = "off"
+	TrackAutocapitalizeAttrEnumOn         TrackAutocapitalizeAttrEnum = "on"
+	TrackAutocapitalizeAttrEnumSentences  TrackAutocapitalizeAttrEnum = "sentences"
 )
 
 type TrackAutocorrectAttrEnum string

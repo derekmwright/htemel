@@ -42,19 +42,19 @@ func TimeIf(condition bool, children ...htemel.Node) *TimeElement {
 type TimeAutocapitalizeAttrEnum string
 
 const (
+	TimeAutocapitalizeAttrEnumSentences  TimeAutocapitalizeAttrEnum = "sentences"
+	TimeAutocapitalizeAttrEnumWords      TimeAutocapitalizeAttrEnum = "words"
 	TimeAutocapitalizeAttrEnumCharacters TimeAutocapitalizeAttrEnum = "characters"
 	TimeAutocapitalizeAttrEnumNone       TimeAutocapitalizeAttrEnum = "none"
 	TimeAutocapitalizeAttrEnumOff        TimeAutocapitalizeAttrEnum = "off"
 	TimeAutocapitalizeAttrEnumOn         TimeAutocapitalizeAttrEnum = "on"
-	TimeAutocapitalizeAttrEnumSentences  TimeAutocapitalizeAttrEnum = "sentences"
-	TimeAutocapitalizeAttrEnumWords      TimeAutocapitalizeAttrEnum = "words"
 )
 
 type TimeAutocorrectAttrEnum string
 
 const (
-	TimeAutocorrectAttrEnumOff TimeAutocorrectAttrEnum = "off"
 	TimeAutocorrectAttrEnumOn  TimeAutocorrectAttrEnum = "on"
+	TimeAutocorrectAttrEnumOff TimeAutocorrectAttrEnum = "off"
 )
 
 type TimeContenteditableAttrEnum string

@@ -60,9 +60,9 @@ const (
 type OptgroupContenteditableAttrEnum string
 
 const (
+	OptgroupContenteditableAttrEnumTrue          OptgroupContenteditableAttrEnum = "true"
 	OptgroupContenteditableAttrEnumFalse         OptgroupContenteditableAttrEnum = "false"
 	OptgroupContenteditableAttrEnumPlaintextOnly OptgroupContenteditableAttrEnum = "plaintext-only"
-	OptgroupContenteditableAttrEnumTrue          OptgroupContenteditableAttrEnum = "true"
 )
 
 type optgroupAttrs map[string]any

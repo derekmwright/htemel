@@ -42,12 +42,12 @@ func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 type MetaAutocapitalizeAttrEnum string
 
 const (
-	MetaAutocapitalizeAttrEnumCharacters MetaAutocapitalizeAttrEnum = "characters"
 	MetaAutocapitalizeAttrEnumNone       MetaAutocapitalizeAttrEnum = "none"
 	MetaAutocapitalizeAttrEnumOff        MetaAutocapitalizeAttrEnum = "off"
 	MetaAutocapitalizeAttrEnumOn         MetaAutocapitalizeAttrEnum = "on"
 	MetaAutocapitalizeAttrEnumSentences  MetaAutocapitalizeAttrEnum = "sentences"
 	MetaAutocapitalizeAttrEnumWords      MetaAutocapitalizeAttrEnum = "words"
+	MetaAutocapitalizeAttrEnumCharacters MetaAutocapitalizeAttrEnum = "characters"
 )
 
 type MetaAutocorrectAttrEnum string

@@ -42,12 +42,12 @@ func AbbrIf(condition bool, children ...htemel.Node) *AbbrElement {
 type AbbrAutocapitalizeAttrEnum string
 
 const (
-	AbbrAutocapitalizeAttrEnumWords      AbbrAutocapitalizeAttrEnum = "words"
 	AbbrAutocapitalizeAttrEnumCharacters AbbrAutocapitalizeAttrEnum = "characters"
 	AbbrAutocapitalizeAttrEnumNone       AbbrAutocapitalizeAttrEnum = "none"
 	AbbrAutocapitalizeAttrEnumOff        AbbrAutocapitalizeAttrEnum = "off"
 	AbbrAutocapitalizeAttrEnumOn         AbbrAutocapitalizeAttrEnum = "on"
 	AbbrAutocapitalizeAttrEnumSentences  AbbrAutocapitalizeAttrEnum = "sentences"
+	AbbrAutocapitalizeAttrEnumWords      AbbrAutocapitalizeAttrEnum = "words"
 )
 
 type AbbrAutocorrectAttrEnum string

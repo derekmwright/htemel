@@ -42,12 +42,12 @@ func TitleIf(condition bool, children ...htemel.Node) *TitleElement {
 type TitleAutocapitalizeAttrEnum string
 
 const (
-	TitleAutocapitalizeAttrEnumNone       TitleAutocapitalizeAttrEnum = "none"
-	TitleAutocapitalizeAttrEnumOff        TitleAutocapitalizeAttrEnum = "off"
 	TitleAutocapitalizeAttrEnumOn         TitleAutocapitalizeAttrEnum = "on"
 	TitleAutocapitalizeAttrEnumSentences  TitleAutocapitalizeAttrEnum = "sentences"
 	TitleAutocapitalizeAttrEnumWords      TitleAutocapitalizeAttrEnum = "words"
 	TitleAutocapitalizeAttrEnumCharacters TitleAutocapitalizeAttrEnum = "characters"
+	TitleAutocapitalizeAttrEnumNone       TitleAutocapitalizeAttrEnum = "none"
+	TitleAutocapitalizeAttrEnumOff        TitleAutocapitalizeAttrEnum = "off"
 )
 
 type TitleAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type TitleContenteditableAttrEnum string
 
 const (
+	TitleContenteditableAttrEnumTrue          TitleContenteditableAttrEnum = "true"
 	TitleContenteditableAttrEnumFalse         TitleContenteditableAttrEnum = "false"
 	TitleContenteditableAttrEnumPlaintextOnly TitleContenteditableAttrEnum = "plaintext-only"
-	TitleContenteditableAttrEnumTrue          TitleContenteditableAttrEnum = "true"
 )
 
 type titleAttrs map[string]any

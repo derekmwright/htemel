@@ -42,12 +42,12 @@ func SourceIf(condition bool, children ...htemel.Node) *SourceElement {
 type SourceAutocapitalizeAttrEnum string
 
 const (
+	SourceAutocapitalizeAttrEnumSentences  SourceAutocapitalizeAttrEnum = "sentences"
+	SourceAutocapitalizeAttrEnumWords      SourceAutocapitalizeAttrEnum = "words"
 	SourceAutocapitalizeAttrEnumCharacters SourceAutocapitalizeAttrEnum = "characters"
 	SourceAutocapitalizeAttrEnumNone       SourceAutocapitalizeAttrEnum = "none"
 	SourceAutocapitalizeAttrEnumOff        SourceAutocapitalizeAttrEnum = "off"
 	SourceAutocapitalizeAttrEnumOn         SourceAutocapitalizeAttrEnum = "on"
-	SourceAutocapitalizeAttrEnumSentences  SourceAutocapitalizeAttrEnum = "sentences"
-	SourceAutocapitalizeAttrEnumWords      SourceAutocapitalizeAttrEnum = "words"
 )
 
 type SourceAutocorrectAttrEnum string

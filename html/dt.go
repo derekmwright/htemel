@@ -42,19 +42,19 @@ func DtIf(condition bool, children ...htemel.Node) *DtElement {
 type DtAutocapitalizeAttrEnum string
 
 const (
+	DtAutocapitalizeAttrEnumSentences  DtAutocapitalizeAttrEnum = "sentences"
+	DtAutocapitalizeAttrEnumWords      DtAutocapitalizeAttrEnum = "words"
 	DtAutocapitalizeAttrEnumCharacters DtAutocapitalizeAttrEnum = "characters"
 	DtAutocapitalizeAttrEnumNone       DtAutocapitalizeAttrEnum = "none"
 	DtAutocapitalizeAttrEnumOff        DtAutocapitalizeAttrEnum = "off"
 	DtAutocapitalizeAttrEnumOn         DtAutocapitalizeAttrEnum = "on"
-	DtAutocapitalizeAttrEnumSentences  DtAutocapitalizeAttrEnum = "sentences"
-	DtAutocapitalizeAttrEnumWords      DtAutocapitalizeAttrEnum = "words"
 )
 
 type DtAutocorrectAttrEnum string
 
 const (
-	DtAutocorrectAttrEnumOn  DtAutocorrectAttrEnum = "on"
 	DtAutocorrectAttrEnumOff DtAutocorrectAttrEnum = "off"
+	DtAutocorrectAttrEnumOn  DtAutocorrectAttrEnum = "on"
 )
 
 type DtContenteditableAttrEnum string

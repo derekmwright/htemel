@@ -42,19 +42,19 @@ func FooterIf(condition bool, children ...htemel.Node) *FooterElement {
 type FooterAutocapitalizeAttrEnum string
 
 const (
-	FooterAutocapitalizeAttrEnumCharacters FooterAutocapitalizeAttrEnum = "characters"
-	FooterAutocapitalizeAttrEnumNone       FooterAutocapitalizeAttrEnum = "none"
-	FooterAutocapitalizeAttrEnumOff        FooterAutocapitalizeAttrEnum = "off"
 	FooterAutocapitalizeAttrEnumOn         FooterAutocapitalizeAttrEnum = "on"
 	FooterAutocapitalizeAttrEnumSentences  FooterAutocapitalizeAttrEnum = "sentences"
 	FooterAutocapitalizeAttrEnumWords      FooterAutocapitalizeAttrEnum = "words"
+	FooterAutocapitalizeAttrEnumCharacters FooterAutocapitalizeAttrEnum = "characters"
+	FooterAutocapitalizeAttrEnumNone       FooterAutocapitalizeAttrEnum = "none"
+	FooterAutocapitalizeAttrEnumOff        FooterAutocapitalizeAttrEnum = "off"
 )
 
 type FooterAutocorrectAttrEnum string
 
 const (
-	FooterAutocorrectAttrEnumOff FooterAutocorrectAttrEnum = "off"
 	FooterAutocorrectAttrEnumOn  FooterAutocorrectAttrEnum = "on"
+	FooterAutocorrectAttrEnumOff FooterAutocorrectAttrEnum = "off"
 )
 
 type FooterContenteditableAttrEnum string

@@ -42,12 +42,12 @@ func BrIf(condition bool, children ...htemel.Node) *BrElement {
 type BrAutocapitalizeAttrEnum string
 
 const (
+	BrAutocapitalizeAttrEnumWords      BrAutocapitalizeAttrEnum = "words"
 	BrAutocapitalizeAttrEnumCharacters BrAutocapitalizeAttrEnum = "characters"
 	BrAutocapitalizeAttrEnumNone       BrAutocapitalizeAttrEnum = "none"
 	BrAutocapitalizeAttrEnumOff        BrAutocapitalizeAttrEnum = "off"
 	BrAutocapitalizeAttrEnumOn         BrAutocapitalizeAttrEnum = "on"
 	BrAutocapitalizeAttrEnumSentences  BrAutocapitalizeAttrEnum = "sentences"
-	BrAutocapitalizeAttrEnumWords      BrAutocapitalizeAttrEnum = "words"
 )
 
 type BrAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type BrContenteditableAttrEnum string
 
 const (
-	BrContenteditableAttrEnumTrue          BrContenteditableAttrEnum = "true"
 	BrContenteditableAttrEnumFalse         BrContenteditableAttrEnum = "false"
 	BrContenteditableAttrEnumPlaintextOnly BrContenteditableAttrEnum = "plaintext-only"
+	BrContenteditableAttrEnumTrue          BrContenteditableAttrEnum = "true"
 )
 
 type brAttrs map[string]any

@@ -60,9 +60,9 @@ const (
 type LiContenteditableAttrEnum string
 
 const (
-	LiContenteditableAttrEnumFalse         LiContenteditableAttrEnum = "false"
 	LiContenteditableAttrEnumPlaintextOnly LiContenteditableAttrEnum = "plaintext-only"
 	LiContenteditableAttrEnumTrue          LiContenteditableAttrEnum = "true"
+	LiContenteditableAttrEnumFalse         LiContenteditableAttrEnum = "false"
 )
 
 type liAttrs map[string]any

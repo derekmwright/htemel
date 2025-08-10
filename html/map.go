@@ -42,27 +42,27 @@ func MapIf(condition bool, children ...htemel.Node) *MapElement {
 type MapAutocapitalizeAttrEnum string
 
 const (
-	MapAutocapitalizeAttrEnumWords      MapAutocapitalizeAttrEnum = "words"
 	MapAutocapitalizeAttrEnumCharacters MapAutocapitalizeAttrEnum = "characters"
 	MapAutocapitalizeAttrEnumNone       MapAutocapitalizeAttrEnum = "none"
 	MapAutocapitalizeAttrEnumOff        MapAutocapitalizeAttrEnum = "off"
 	MapAutocapitalizeAttrEnumOn         MapAutocapitalizeAttrEnum = "on"
 	MapAutocapitalizeAttrEnumSentences  MapAutocapitalizeAttrEnum = "sentences"
+	MapAutocapitalizeAttrEnumWords      MapAutocapitalizeAttrEnum = "words"
 )
 
 type MapAutocorrectAttrEnum string
 
 const (
-	MapAutocorrectAttrEnumOff MapAutocorrectAttrEnum = "off"
 	MapAutocorrectAttrEnumOn  MapAutocorrectAttrEnum = "on"
+	MapAutocorrectAttrEnumOff MapAutocorrectAttrEnum = "off"
 )
 
 type MapContenteditableAttrEnum string
 
 const (
+	MapContenteditableAttrEnumTrue          MapContenteditableAttrEnum = "true"
 	MapContenteditableAttrEnumFalse         MapContenteditableAttrEnum = "false"
 	MapContenteditableAttrEnumPlaintextOnly MapContenteditableAttrEnum = "plaintext-only"
-	MapContenteditableAttrEnumTrue          MapContenteditableAttrEnum = "true"
 )
 
 type mapAttrs map[string]any

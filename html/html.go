@@ -42,12 +42,12 @@ func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
 type HtmlAutocapitalizeAttrEnum string
 
 const (
-	HtmlAutocapitalizeAttrEnumNone       HtmlAutocapitalizeAttrEnum = "none"
 	HtmlAutocapitalizeAttrEnumOff        HtmlAutocapitalizeAttrEnum = "off"
 	HtmlAutocapitalizeAttrEnumOn         HtmlAutocapitalizeAttrEnum = "on"
 	HtmlAutocapitalizeAttrEnumSentences  HtmlAutocapitalizeAttrEnum = "sentences"
 	HtmlAutocapitalizeAttrEnumWords      HtmlAutocapitalizeAttrEnum = "words"
 	HtmlAutocapitalizeAttrEnumCharacters HtmlAutocapitalizeAttrEnum = "characters"
+	HtmlAutocapitalizeAttrEnumNone       HtmlAutocapitalizeAttrEnum = "none"
 )
 
 type HtmlAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type HtmlContenteditableAttrEnum string
 
 const (
-	HtmlContenteditableAttrEnumPlaintextOnly HtmlContenteditableAttrEnum = "plaintext-only"
 	HtmlContenteditableAttrEnumTrue          HtmlContenteditableAttrEnum = "true"
 	HtmlContenteditableAttrEnumFalse         HtmlContenteditableAttrEnum = "false"
+	HtmlContenteditableAttrEnumPlaintextOnly HtmlContenteditableAttrEnum = "plaintext-only"
 )
 
 type htmlAttrs map[string]any

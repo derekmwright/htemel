@@ -42,12 +42,12 @@ func LabelIf(condition bool, children ...htemel.Node) *LabelElement {
 type LabelAutocapitalizeAttrEnum string
 
 const (
+	LabelAutocapitalizeAttrEnumCharacters LabelAutocapitalizeAttrEnum = "characters"
 	LabelAutocapitalizeAttrEnumNone       LabelAutocapitalizeAttrEnum = "none"
 	LabelAutocapitalizeAttrEnumOff        LabelAutocapitalizeAttrEnum = "off"
 	LabelAutocapitalizeAttrEnumOn         LabelAutocapitalizeAttrEnum = "on"
 	LabelAutocapitalizeAttrEnumSentences  LabelAutocapitalizeAttrEnum = "sentences"
 	LabelAutocapitalizeAttrEnumWords      LabelAutocapitalizeAttrEnum = "words"
-	LabelAutocapitalizeAttrEnumCharacters LabelAutocapitalizeAttrEnum = "characters"
 )
 
 type LabelAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type LabelContenteditableAttrEnum string
 
 const (
+	LabelContenteditableAttrEnumTrue          LabelContenteditableAttrEnum = "true"
 	LabelContenteditableAttrEnumFalse         LabelContenteditableAttrEnum = "false"
 	LabelContenteditableAttrEnumPlaintextOnly LabelContenteditableAttrEnum = "plaintext-only"
-	LabelContenteditableAttrEnumTrue          LabelContenteditableAttrEnum = "true"
 )
 
 type labelAttrs map[string]any

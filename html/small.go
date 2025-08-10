@@ -42,12 +42,12 @@ func SmallIf(condition bool, children ...htemel.Node) *SmallElement {
 type SmallAutocapitalizeAttrEnum string
 
 const (
-	SmallAutocapitalizeAttrEnumOn         SmallAutocapitalizeAttrEnum = "on"
-	SmallAutocapitalizeAttrEnumSentences  SmallAutocapitalizeAttrEnum = "sentences"
-	SmallAutocapitalizeAttrEnumWords      SmallAutocapitalizeAttrEnum = "words"
 	SmallAutocapitalizeAttrEnumCharacters SmallAutocapitalizeAttrEnum = "characters"
 	SmallAutocapitalizeAttrEnumNone       SmallAutocapitalizeAttrEnum = "none"
 	SmallAutocapitalizeAttrEnumOff        SmallAutocapitalizeAttrEnum = "off"
+	SmallAutocapitalizeAttrEnumOn         SmallAutocapitalizeAttrEnum = "on"
+	SmallAutocapitalizeAttrEnumSentences  SmallAutocapitalizeAttrEnum = "sentences"
+	SmallAutocapitalizeAttrEnumWords      SmallAutocapitalizeAttrEnum = "words"
 )
 
 type SmallAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type SmallContenteditableAttrEnum string
 
 const (
+	SmallContenteditableAttrEnumTrue          SmallContenteditableAttrEnum = "true"
 	SmallContenteditableAttrEnumFalse         SmallContenteditableAttrEnum = "false"
 	SmallContenteditableAttrEnumPlaintextOnly SmallContenteditableAttrEnum = "plaintext-only"
-	SmallContenteditableAttrEnumTrue          SmallContenteditableAttrEnum = "true"
 )
 
 type smallAttrs map[string]any

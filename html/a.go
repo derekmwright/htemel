@@ -42,27 +42,27 @@ func AIf(condition bool, children ...htemel.Node) *AElement {
 type AAutocapitalizeAttrEnum string
 
 const (
+	AAutocapitalizeAttrEnumSentences  AAutocapitalizeAttrEnum = "sentences"
+	AAutocapitalizeAttrEnumWords      AAutocapitalizeAttrEnum = "words"
 	AAutocapitalizeAttrEnumCharacters AAutocapitalizeAttrEnum = "characters"
 	AAutocapitalizeAttrEnumNone       AAutocapitalizeAttrEnum = "none"
 	AAutocapitalizeAttrEnumOff        AAutocapitalizeAttrEnum = "off"
 	AAutocapitalizeAttrEnumOn         AAutocapitalizeAttrEnum = "on"
-	AAutocapitalizeAttrEnumSentences  AAutocapitalizeAttrEnum = "sentences"
-	AAutocapitalizeAttrEnumWords      AAutocapitalizeAttrEnum = "words"
 )
 
 type AAutocorrectAttrEnum string
 
 const (
-	AAutocorrectAttrEnumOff AAutocorrectAttrEnum = "off"
 	AAutocorrectAttrEnumOn  AAutocorrectAttrEnum = "on"
+	AAutocorrectAttrEnumOff AAutocorrectAttrEnum = "off"
 )
 
 type AContenteditableAttrEnum string
 
 const (
+	AContenteditableAttrEnumTrue          AContenteditableAttrEnum = "true"
 	AContenteditableAttrEnumFalse         AContenteditableAttrEnum = "false"
 	AContenteditableAttrEnumPlaintextOnly AContenteditableAttrEnum = "plaintext-only"
-	AContenteditableAttrEnumTrue          AContenteditableAttrEnum = "true"
 )
 
 type aAttrs map[string]any

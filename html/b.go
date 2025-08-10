@@ -42,19 +42,19 @@ func BIf(condition bool, children ...htemel.Node) *BElement {
 type BAutocapitalizeAttrEnum string
 
 const (
-	BAutocapitalizeAttrEnumSentences  BAutocapitalizeAttrEnum = "sentences"
-	BAutocapitalizeAttrEnumWords      BAutocapitalizeAttrEnum = "words"
 	BAutocapitalizeAttrEnumCharacters BAutocapitalizeAttrEnum = "characters"
 	BAutocapitalizeAttrEnumNone       BAutocapitalizeAttrEnum = "none"
 	BAutocapitalizeAttrEnumOff        BAutocapitalizeAttrEnum = "off"
 	BAutocapitalizeAttrEnumOn         BAutocapitalizeAttrEnum = "on"
+	BAutocapitalizeAttrEnumSentences  BAutocapitalizeAttrEnum = "sentences"
+	BAutocapitalizeAttrEnumWords      BAutocapitalizeAttrEnum = "words"
 )
 
 type BAutocorrectAttrEnum string
 
 const (
-	BAutocorrectAttrEnumOff BAutocorrectAttrEnum = "off"
 	BAutocorrectAttrEnumOn  BAutocorrectAttrEnum = "on"
+	BAutocorrectAttrEnumOff BAutocorrectAttrEnum = "off"
 )
 
 type BContenteditableAttrEnum string

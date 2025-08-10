@@ -42,12 +42,12 @@ func WbrIf(condition bool, children ...htemel.Node) *WbrElement {
 type WbrAutocapitalizeAttrEnum string
 
 const (
-	WbrAutocapitalizeAttrEnumNone       WbrAutocapitalizeAttrEnum = "none"
 	WbrAutocapitalizeAttrEnumOff        WbrAutocapitalizeAttrEnum = "off"
 	WbrAutocapitalizeAttrEnumOn         WbrAutocapitalizeAttrEnum = "on"
 	WbrAutocapitalizeAttrEnumSentences  WbrAutocapitalizeAttrEnum = "sentences"
 	WbrAutocapitalizeAttrEnumWords      WbrAutocapitalizeAttrEnum = "words"
 	WbrAutocapitalizeAttrEnumCharacters WbrAutocapitalizeAttrEnum = "characters"
+	WbrAutocapitalizeAttrEnumNone       WbrAutocapitalizeAttrEnum = "none"
 )
 
 type WbrAutocorrectAttrEnum string

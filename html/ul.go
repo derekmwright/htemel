@@ -42,27 +42,27 @@ func UlIf(condition bool, children ...htemel.Node) *UlElement {
 type UlAutocapitalizeAttrEnum string
 
 const (
+	UlAutocapitalizeAttrEnumCharacters UlAutocapitalizeAttrEnum = "characters"
+	UlAutocapitalizeAttrEnumNone       UlAutocapitalizeAttrEnum = "none"
 	UlAutocapitalizeAttrEnumOff        UlAutocapitalizeAttrEnum = "off"
 	UlAutocapitalizeAttrEnumOn         UlAutocapitalizeAttrEnum = "on"
 	UlAutocapitalizeAttrEnumSentences  UlAutocapitalizeAttrEnum = "sentences"
 	UlAutocapitalizeAttrEnumWords      UlAutocapitalizeAttrEnum = "words"
-	UlAutocapitalizeAttrEnumCharacters UlAutocapitalizeAttrEnum = "characters"
-	UlAutocapitalizeAttrEnumNone       UlAutocapitalizeAttrEnum = "none"
 )
 
 type UlAutocorrectAttrEnum string
 
 const (
-	UlAutocorrectAttrEnumOn  UlAutocorrectAttrEnum = "on"
 	UlAutocorrectAttrEnumOff UlAutocorrectAttrEnum = "off"
+	UlAutocorrectAttrEnumOn  UlAutocorrectAttrEnum = "on"
 )
 
 type UlContenteditableAttrEnum string
 
 const (
+	UlContenteditableAttrEnumPlaintextOnly UlContenteditableAttrEnum = "plaintext-only"
 	UlContenteditableAttrEnumTrue          UlContenteditableAttrEnum = "true"
 	UlContenteditableAttrEnumFalse         UlContenteditableAttrEnum = "false"
-	UlContenteditableAttrEnumPlaintextOnly UlContenteditableAttrEnum = "plaintext-only"
 )
 
 type ulAttrs map[string]any

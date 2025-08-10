@@ -42,12 +42,12 @@ func AsideIf(condition bool, children ...htemel.Node) *AsideElement {
 type AsideAutocapitalizeAttrEnum string
 
 const (
-	AsideAutocapitalizeAttrEnumSentences  AsideAutocapitalizeAttrEnum = "sentences"
-	AsideAutocapitalizeAttrEnumWords      AsideAutocapitalizeAttrEnum = "words"
 	AsideAutocapitalizeAttrEnumCharacters AsideAutocapitalizeAttrEnum = "characters"
 	AsideAutocapitalizeAttrEnumNone       AsideAutocapitalizeAttrEnum = "none"
 	AsideAutocapitalizeAttrEnumOff        AsideAutocapitalizeAttrEnum = "off"
 	AsideAutocapitalizeAttrEnumOn         AsideAutocapitalizeAttrEnum = "on"
+	AsideAutocapitalizeAttrEnumSentences  AsideAutocapitalizeAttrEnum = "sentences"
+	AsideAutocapitalizeAttrEnumWords      AsideAutocapitalizeAttrEnum = "words"
 )
 
 type AsideAutocorrectAttrEnum string

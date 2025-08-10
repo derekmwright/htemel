@@ -42,12 +42,12 @@ func DataIf(condition bool, children ...htemel.Node) *DataElement {
 type DataAutocapitalizeAttrEnum string
 
 const (
-	DataAutocapitalizeAttrEnumCharacters DataAutocapitalizeAttrEnum = "characters"
-	DataAutocapitalizeAttrEnumNone       DataAutocapitalizeAttrEnum = "none"
-	DataAutocapitalizeAttrEnumOff        DataAutocapitalizeAttrEnum = "off"
 	DataAutocapitalizeAttrEnumOn         DataAutocapitalizeAttrEnum = "on"
 	DataAutocapitalizeAttrEnumSentences  DataAutocapitalizeAttrEnum = "sentences"
 	DataAutocapitalizeAttrEnumWords      DataAutocapitalizeAttrEnum = "words"
+	DataAutocapitalizeAttrEnumCharacters DataAutocapitalizeAttrEnum = "characters"
+	DataAutocapitalizeAttrEnumNone       DataAutocapitalizeAttrEnum = "none"
+	DataAutocapitalizeAttrEnumOff        DataAutocapitalizeAttrEnum = "off"
 )
 
 type DataAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type DataContenteditableAttrEnum string
 
 const (
+	DataContenteditableAttrEnumFalse         DataContenteditableAttrEnum = "false"
 	DataContenteditableAttrEnumPlaintextOnly DataContenteditableAttrEnum = "plaintext-only"
 	DataContenteditableAttrEnumTrue          DataContenteditableAttrEnum = "true"
-	DataContenteditableAttrEnumFalse         DataContenteditableAttrEnum = "false"
 )
 
 type dataAttrs map[string]any

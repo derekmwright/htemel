@@ -60,9 +60,9 @@ const (
 type ColContenteditableAttrEnum string
 
 const (
-	ColContenteditableAttrEnumTrue          ColContenteditableAttrEnum = "true"
 	ColContenteditableAttrEnumFalse         ColContenteditableAttrEnum = "false"
 	ColContenteditableAttrEnumPlaintextOnly ColContenteditableAttrEnum = "plaintext-only"
+	ColContenteditableAttrEnumTrue          ColContenteditableAttrEnum = "true"
 )
 
 type colAttrs map[string]any

@@ -42,12 +42,12 @@ func EmIf(condition bool, children ...htemel.Node) *EmElement {
 type EmAutocapitalizeAttrEnum string
 
 const (
-	EmAutocapitalizeAttrEnumCharacters EmAutocapitalizeAttrEnum = "characters"
-	EmAutocapitalizeAttrEnumNone       EmAutocapitalizeAttrEnum = "none"
 	EmAutocapitalizeAttrEnumOff        EmAutocapitalizeAttrEnum = "off"
 	EmAutocapitalizeAttrEnumOn         EmAutocapitalizeAttrEnum = "on"
 	EmAutocapitalizeAttrEnumSentences  EmAutocapitalizeAttrEnum = "sentences"
 	EmAutocapitalizeAttrEnumWords      EmAutocapitalizeAttrEnum = "words"
+	EmAutocapitalizeAttrEnumCharacters EmAutocapitalizeAttrEnum = "characters"
+	EmAutocapitalizeAttrEnumNone       EmAutocapitalizeAttrEnum = "none"
 )
 
 type EmAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type EmContenteditableAttrEnum string
 
 const (
-	EmContenteditableAttrEnumFalse         EmContenteditableAttrEnum = "false"
 	EmContenteditableAttrEnumPlaintextOnly EmContenteditableAttrEnum = "plaintext-only"
 	EmContenteditableAttrEnumTrue          EmContenteditableAttrEnum = "true"
+	EmContenteditableAttrEnumFalse         EmContenteditableAttrEnum = "false"
 )
 
 type emAttrs map[string]any

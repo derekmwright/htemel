@@ -42,12 +42,12 @@ func MeterIf(condition bool, children ...htemel.Node) *MeterElement {
 type MeterAutocapitalizeAttrEnum string
 
 const (
-	MeterAutocapitalizeAttrEnumSentences  MeterAutocapitalizeAttrEnum = "sentences"
 	MeterAutocapitalizeAttrEnumWords      MeterAutocapitalizeAttrEnum = "words"
 	MeterAutocapitalizeAttrEnumCharacters MeterAutocapitalizeAttrEnum = "characters"
 	MeterAutocapitalizeAttrEnumNone       MeterAutocapitalizeAttrEnum = "none"
 	MeterAutocapitalizeAttrEnumOff        MeterAutocapitalizeAttrEnum = "off"
 	MeterAutocapitalizeAttrEnumOn         MeterAutocapitalizeAttrEnum = "on"
+	MeterAutocapitalizeAttrEnumSentences  MeterAutocapitalizeAttrEnum = "sentences"
 )
 
 type MeterAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type MeterContenteditableAttrEnum string
 
 const (
-	MeterContenteditableAttrEnumFalse         MeterContenteditableAttrEnum = "false"
 	MeterContenteditableAttrEnumPlaintextOnly MeterContenteditableAttrEnum = "plaintext-only"
 	MeterContenteditableAttrEnumTrue          MeterContenteditableAttrEnum = "true"
+	MeterContenteditableAttrEnumFalse         MeterContenteditableAttrEnum = "false"
 )
 
 type meterAttrs map[string]any

@@ -42,12 +42,12 @@ func ArticleIf(condition bool, children ...htemel.Node) *ArticleElement {
 type ArticleAutocapitalizeAttrEnum string
 
 const (
+	ArticleAutocapitalizeAttrEnumNone       ArticleAutocapitalizeAttrEnum = "none"
 	ArticleAutocapitalizeAttrEnumOff        ArticleAutocapitalizeAttrEnum = "off"
 	ArticleAutocapitalizeAttrEnumOn         ArticleAutocapitalizeAttrEnum = "on"
 	ArticleAutocapitalizeAttrEnumSentences  ArticleAutocapitalizeAttrEnum = "sentences"
 	ArticleAutocapitalizeAttrEnumWords      ArticleAutocapitalizeAttrEnum = "words"
 	ArticleAutocapitalizeAttrEnumCharacters ArticleAutocapitalizeAttrEnum = "characters"
-	ArticleAutocapitalizeAttrEnumNone       ArticleAutocapitalizeAttrEnum = "none"
 )
 
 type ArticleAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type ArticleContenteditableAttrEnum string
 
 const (
+	ArticleContenteditableAttrEnumFalse         ArticleContenteditableAttrEnum = "false"
 	ArticleContenteditableAttrEnumPlaintextOnly ArticleContenteditableAttrEnum = "plaintext-only"
 	ArticleContenteditableAttrEnumTrue          ArticleContenteditableAttrEnum = "true"
-	ArticleContenteditableAttrEnumFalse         ArticleContenteditableAttrEnum = "false"
 )
 
 type articleAttrs map[string]any

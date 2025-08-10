@@ -42,12 +42,12 @@ func ObjectIf(condition bool, children ...htemel.Node) *ObjectElement {
 type ObjectAutocapitalizeAttrEnum string
 
 const (
-	ObjectAutocapitalizeAttrEnumSentences  ObjectAutocapitalizeAttrEnum = "sentences"
-	ObjectAutocapitalizeAttrEnumWords      ObjectAutocapitalizeAttrEnum = "words"
 	ObjectAutocapitalizeAttrEnumCharacters ObjectAutocapitalizeAttrEnum = "characters"
 	ObjectAutocapitalizeAttrEnumNone       ObjectAutocapitalizeAttrEnum = "none"
 	ObjectAutocapitalizeAttrEnumOff        ObjectAutocapitalizeAttrEnum = "off"
 	ObjectAutocapitalizeAttrEnumOn         ObjectAutocapitalizeAttrEnum = "on"
+	ObjectAutocapitalizeAttrEnumSentences  ObjectAutocapitalizeAttrEnum = "sentences"
+	ObjectAutocapitalizeAttrEnumWords      ObjectAutocapitalizeAttrEnum = "words"
 )
 
 type ObjectAutocorrectAttrEnum string

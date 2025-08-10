@@ -53,8 +53,8 @@ const (
 type HeaderAutocorrectAttrEnum string
 
 const (
-	HeaderAutocorrectAttrEnumOff HeaderAutocorrectAttrEnum = "off"
 	HeaderAutocorrectAttrEnumOn  HeaderAutocorrectAttrEnum = "on"
+	HeaderAutocorrectAttrEnumOff HeaderAutocorrectAttrEnum = "off"
 )
 
 type HeaderContenteditableAttrEnum string

@@ -42,19 +42,19 @@ func ImgIf(condition bool, children ...htemel.Node) *ImgElement {
 type ImgAutocapitalizeAttrEnum string
 
 const (
+	ImgAutocapitalizeAttrEnumCharacters ImgAutocapitalizeAttrEnum = "characters"
 	ImgAutocapitalizeAttrEnumNone       ImgAutocapitalizeAttrEnum = "none"
 	ImgAutocapitalizeAttrEnumOff        ImgAutocapitalizeAttrEnum = "off"
 	ImgAutocapitalizeAttrEnumOn         ImgAutocapitalizeAttrEnum = "on"
 	ImgAutocapitalizeAttrEnumSentences  ImgAutocapitalizeAttrEnum = "sentences"
 	ImgAutocapitalizeAttrEnumWords      ImgAutocapitalizeAttrEnum = "words"
-	ImgAutocapitalizeAttrEnumCharacters ImgAutocapitalizeAttrEnum = "characters"
 )
 
 type ImgAutocorrectAttrEnum string
 
 const (
-	ImgAutocorrectAttrEnumOn  ImgAutocorrectAttrEnum = "on"
 	ImgAutocorrectAttrEnumOff ImgAutocorrectAttrEnum = "off"
+	ImgAutocorrectAttrEnumOn  ImgAutocorrectAttrEnum = "on"
 )
 
 type ImgContenteditableAttrEnum string

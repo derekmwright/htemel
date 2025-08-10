@@ -42,12 +42,12 @@ func TfootIf(condition bool, children ...htemel.Node) *TfootElement {
 type TfootAutocapitalizeAttrEnum string
 
 const (
+	TfootAutocapitalizeAttrEnumCharacters TfootAutocapitalizeAttrEnum = "characters"
+	TfootAutocapitalizeAttrEnumNone       TfootAutocapitalizeAttrEnum = "none"
 	TfootAutocapitalizeAttrEnumOff        TfootAutocapitalizeAttrEnum = "off"
 	TfootAutocapitalizeAttrEnumOn         TfootAutocapitalizeAttrEnum = "on"
 	TfootAutocapitalizeAttrEnumSentences  TfootAutocapitalizeAttrEnum = "sentences"
 	TfootAutocapitalizeAttrEnumWords      TfootAutocapitalizeAttrEnum = "words"
-	TfootAutocapitalizeAttrEnumCharacters TfootAutocapitalizeAttrEnum = "characters"
-	TfootAutocapitalizeAttrEnumNone       TfootAutocapitalizeAttrEnum = "none"
 )
 
 type TfootAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type TfootContenteditableAttrEnum string
 
 const (
+	TfootContenteditableAttrEnumPlaintextOnly TfootContenteditableAttrEnum = "plaintext-only"
 	TfootContenteditableAttrEnumTrue          TfootContenteditableAttrEnum = "true"
 	TfootContenteditableAttrEnumFalse         TfootContenteditableAttrEnum = "false"
-	TfootContenteditableAttrEnumPlaintextOnly TfootContenteditableAttrEnum = "plaintext-only"
 )
 
 type tfootAttrs map[string]any

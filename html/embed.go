@@ -42,12 +42,12 @@ func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
 type EmbedAutocapitalizeAttrEnum string
 
 const (
+	EmbedAutocapitalizeAttrEnumOn         EmbedAutocapitalizeAttrEnum = "on"
 	EmbedAutocapitalizeAttrEnumSentences  EmbedAutocapitalizeAttrEnum = "sentences"
 	EmbedAutocapitalizeAttrEnumWords      EmbedAutocapitalizeAttrEnum = "words"
 	EmbedAutocapitalizeAttrEnumCharacters EmbedAutocapitalizeAttrEnum = "characters"
 	EmbedAutocapitalizeAttrEnumNone       EmbedAutocapitalizeAttrEnum = "none"
 	EmbedAutocapitalizeAttrEnumOff        EmbedAutocapitalizeAttrEnum = "off"
-	EmbedAutocapitalizeAttrEnumOn         EmbedAutocapitalizeAttrEnum = "on"
 )
 
 type EmbedAutocorrectAttrEnum string

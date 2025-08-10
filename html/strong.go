@@ -42,12 +42,12 @@ func StrongIf(condition bool, children ...htemel.Node) *StrongElement {
 type StrongAutocapitalizeAttrEnum string
 
 const (
-	StrongAutocapitalizeAttrEnumOn         StrongAutocapitalizeAttrEnum = "on"
 	StrongAutocapitalizeAttrEnumSentences  StrongAutocapitalizeAttrEnum = "sentences"
 	StrongAutocapitalizeAttrEnumWords      StrongAutocapitalizeAttrEnum = "words"
 	StrongAutocapitalizeAttrEnumCharacters StrongAutocapitalizeAttrEnum = "characters"
 	StrongAutocapitalizeAttrEnumNone       StrongAutocapitalizeAttrEnum = "none"
 	StrongAutocapitalizeAttrEnumOff        StrongAutocapitalizeAttrEnum = "off"
+	StrongAutocapitalizeAttrEnumOn         StrongAutocapitalizeAttrEnum = "on"
 )
 
 type StrongAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type StrongContenteditableAttrEnum string
 
 const (
-	StrongContenteditableAttrEnumFalse         StrongContenteditableAttrEnum = "false"
 	StrongContenteditableAttrEnumPlaintextOnly StrongContenteditableAttrEnum = "plaintext-only"
 	StrongContenteditableAttrEnumTrue          StrongContenteditableAttrEnum = "true"
+	StrongContenteditableAttrEnumFalse         StrongContenteditableAttrEnum = "false"
 )
 
 type strongAttrs map[string]any

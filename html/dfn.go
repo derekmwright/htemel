@@ -60,9 +60,9 @@ const (
 type DfnContenteditableAttrEnum string
 
 const (
+	DfnContenteditableAttrEnumTrue          DfnContenteditableAttrEnum = "true"
 	DfnContenteditableAttrEnumFalse         DfnContenteditableAttrEnum = "false"
 	DfnContenteditableAttrEnumPlaintextOnly DfnContenteditableAttrEnum = "plaintext-only"
-	DfnContenteditableAttrEnumTrue          DfnContenteditableAttrEnum = "true"
 )
 
 type dfnAttrs map[string]any

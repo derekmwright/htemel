@@ -42,12 +42,12 @@ func FigcaptionIf(condition bool, children ...htemel.Node) *FigcaptionElement {
 type FigcaptionAutocapitalizeAttrEnum string
 
 const (
+	FigcaptionAutocapitalizeAttrEnumWords      FigcaptionAutocapitalizeAttrEnum = "words"
 	FigcaptionAutocapitalizeAttrEnumCharacters FigcaptionAutocapitalizeAttrEnum = "characters"
 	FigcaptionAutocapitalizeAttrEnumNone       FigcaptionAutocapitalizeAttrEnum = "none"
 	FigcaptionAutocapitalizeAttrEnumOff        FigcaptionAutocapitalizeAttrEnum = "off"
 	FigcaptionAutocapitalizeAttrEnumOn         FigcaptionAutocapitalizeAttrEnum = "on"
 	FigcaptionAutocapitalizeAttrEnumSentences  FigcaptionAutocapitalizeAttrEnum = "sentences"
-	FigcaptionAutocapitalizeAttrEnumWords      FigcaptionAutocapitalizeAttrEnum = "words"
 )
 
 type FigcaptionAutocorrectAttrEnum string

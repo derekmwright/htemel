@@ -42,12 +42,12 @@ func RtIf(condition bool, children ...htemel.Node) *RtElement {
 type RtAutocapitalizeAttrEnum string
 
 const (
+	RtAutocapitalizeAttrEnumWords      RtAutocapitalizeAttrEnum = "words"
 	RtAutocapitalizeAttrEnumCharacters RtAutocapitalizeAttrEnum = "characters"
 	RtAutocapitalizeAttrEnumNone       RtAutocapitalizeAttrEnum = "none"
 	RtAutocapitalizeAttrEnumOff        RtAutocapitalizeAttrEnum = "off"
 	RtAutocapitalizeAttrEnumOn         RtAutocapitalizeAttrEnum = "on"
 	RtAutocapitalizeAttrEnumSentences  RtAutocapitalizeAttrEnum = "sentences"
-	RtAutocapitalizeAttrEnumWords      RtAutocapitalizeAttrEnum = "words"
 )
 
 type RtAutocorrectAttrEnum string

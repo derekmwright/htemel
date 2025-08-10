@@ -42,12 +42,12 @@ func SIf(condition bool, children ...htemel.Node) *SElement {
 type SAutocapitalizeAttrEnum string
 
 const (
-	SAutocapitalizeAttrEnumCharacters SAutocapitalizeAttrEnum = "characters"
-	SAutocapitalizeAttrEnumNone       SAutocapitalizeAttrEnum = "none"
-	SAutocapitalizeAttrEnumOff        SAutocapitalizeAttrEnum = "off"
 	SAutocapitalizeAttrEnumOn         SAutocapitalizeAttrEnum = "on"
 	SAutocapitalizeAttrEnumSentences  SAutocapitalizeAttrEnum = "sentences"
 	SAutocapitalizeAttrEnumWords      SAutocapitalizeAttrEnum = "words"
+	SAutocapitalizeAttrEnumCharacters SAutocapitalizeAttrEnum = "characters"
+	SAutocapitalizeAttrEnumNone       SAutocapitalizeAttrEnum = "none"
+	SAutocapitalizeAttrEnumOff        SAutocapitalizeAttrEnum = "off"
 )
 
 type SAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type SContenteditableAttrEnum string
 
 const (
+	SContenteditableAttrEnumFalse         SContenteditableAttrEnum = "false"
 	SContenteditableAttrEnumPlaintextOnly SContenteditableAttrEnum = "plaintext-only"
 	SContenteditableAttrEnumTrue          SContenteditableAttrEnum = "true"
-	SContenteditableAttrEnumFalse         SContenteditableAttrEnum = "false"
 )
 
 type sAttrs map[string]any

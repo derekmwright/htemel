@@ -42,12 +42,12 @@ func ButtonIf(condition bool, children ...htemel.Node) *ButtonElement {
 type ButtonAutocapitalizeAttrEnum string
 
 const (
+	ButtonAutocapitalizeAttrEnumSentences  ButtonAutocapitalizeAttrEnum = "sentences"
+	ButtonAutocapitalizeAttrEnumWords      ButtonAutocapitalizeAttrEnum = "words"
 	ButtonAutocapitalizeAttrEnumCharacters ButtonAutocapitalizeAttrEnum = "characters"
 	ButtonAutocapitalizeAttrEnumNone       ButtonAutocapitalizeAttrEnum = "none"
 	ButtonAutocapitalizeAttrEnumOff        ButtonAutocapitalizeAttrEnum = "off"
 	ButtonAutocapitalizeAttrEnumOn         ButtonAutocapitalizeAttrEnum = "on"
-	ButtonAutocapitalizeAttrEnumSentences  ButtonAutocapitalizeAttrEnum = "sentences"
-	ButtonAutocapitalizeAttrEnumWords      ButtonAutocapitalizeAttrEnum = "words"
 )
 
 type ButtonAutocorrectAttrEnum string

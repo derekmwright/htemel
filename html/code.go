@@ -42,12 +42,12 @@ func CodeIf(condition bool, children ...htemel.Node) *CodeElement {
 type CodeAutocapitalizeAttrEnum string
 
 const (
+	CodeAutocapitalizeAttrEnumCharacters CodeAutocapitalizeAttrEnum = "characters"
 	CodeAutocapitalizeAttrEnumNone       CodeAutocapitalizeAttrEnum = "none"
 	CodeAutocapitalizeAttrEnumOff        CodeAutocapitalizeAttrEnum = "off"
 	CodeAutocapitalizeAttrEnumOn         CodeAutocapitalizeAttrEnum = "on"
 	CodeAutocapitalizeAttrEnumSentences  CodeAutocapitalizeAttrEnum = "sentences"
 	CodeAutocapitalizeAttrEnumWords      CodeAutocapitalizeAttrEnum = "words"
-	CodeAutocapitalizeAttrEnumCharacters CodeAutocapitalizeAttrEnum = "characters"
 )
 
 type CodeAutocorrectAttrEnum string

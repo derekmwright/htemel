@@ -42,12 +42,12 @@ func DetailsIf(condition bool, children ...htemel.Node) *DetailsElement {
 type DetailsAutocapitalizeAttrEnum string
 
 const (
-	DetailsAutocapitalizeAttrEnumWords      DetailsAutocapitalizeAttrEnum = "words"
 	DetailsAutocapitalizeAttrEnumCharacters DetailsAutocapitalizeAttrEnum = "characters"
 	DetailsAutocapitalizeAttrEnumNone       DetailsAutocapitalizeAttrEnum = "none"
 	DetailsAutocapitalizeAttrEnumOff        DetailsAutocapitalizeAttrEnum = "off"
 	DetailsAutocapitalizeAttrEnumOn         DetailsAutocapitalizeAttrEnum = "on"
 	DetailsAutocapitalizeAttrEnumSentences  DetailsAutocapitalizeAttrEnum = "sentences"
+	DetailsAutocapitalizeAttrEnumWords      DetailsAutocapitalizeAttrEnum = "words"
 )
 
 type DetailsAutocorrectAttrEnum string

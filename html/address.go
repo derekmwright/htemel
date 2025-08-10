@@ -42,12 +42,12 @@ func AddressIf(condition bool, children ...htemel.Node) *AddressElement {
 type AddressAutocapitalizeAttrEnum string
 
 const (
+	AddressAutocapitalizeAttrEnumCharacters AddressAutocapitalizeAttrEnum = "characters"
+	AddressAutocapitalizeAttrEnumNone       AddressAutocapitalizeAttrEnum = "none"
 	AddressAutocapitalizeAttrEnumOff        AddressAutocapitalizeAttrEnum = "off"
 	AddressAutocapitalizeAttrEnumOn         AddressAutocapitalizeAttrEnum = "on"
 	AddressAutocapitalizeAttrEnumSentences  AddressAutocapitalizeAttrEnum = "sentences"
 	AddressAutocapitalizeAttrEnumWords      AddressAutocapitalizeAttrEnum = "words"
-	AddressAutocapitalizeAttrEnumCharacters AddressAutocapitalizeAttrEnum = "characters"
-	AddressAutocapitalizeAttrEnumNone       AddressAutocapitalizeAttrEnum = "none"
 )
 
 type AddressAutocorrectAttrEnum string

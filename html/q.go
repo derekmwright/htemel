@@ -42,12 +42,12 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 type QAutocapitalizeAttrEnum string
 
 const (
-	QAutocapitalizeAttrEnumNone       QAutocapitalizeAttrEnum = "none"
 	QAutocapitalizeAttrEnumOff        QAutocapitalizeAttrEnum = "off"
 	QAutocapitalizeAttrEnumOn         QAutocapitalizeAttrEnum = "on"
 	QAutocapitalizeAttrEnumSentences  QAutocapitalizeAttrEnum = "sentences"
 	QAutocapitalizeAttrEnumWords      QAutocapitalizeAttrEnum = "words"
 	QAutocapitalizeAttrEnumCharacters QAutocapitalizeAttrEnum = "characters"
+	QAutocapitalizeAttrEnumNone       QAutocapitalizeAttrEnum = "none"
 )
 
 type QAutocorrectAttrEnum string

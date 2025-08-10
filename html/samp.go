@@ -42,19 +42,19 @@ func SampIf(condition bool, children ...htemel.Node) *SampElement {
 type SampAutocapitalizeAttrEnum string
 
 const (
+	SampAutocapitalizeAttrEnumCharacters SampAutocapitalizeAttrEnum = "characters"
+	SampAutocapitalizeAttrEnumNone       SampAutocapitalizeAttrEnum = "none"
 	SampAutocapitalizeAttrEnumOff        SampAutocapitalizeAttrEnum = "off"
 	SampAutocapitalizeAttrEnumOn         SampAutocapitalizeAttrEnum = "on"
 	SampAutocapitalizeAttrEnumSentences  SampAutocapitalizeAttrEnum = "sentences"
 	SampAutocapitalizeAttrEnumWords      SampAutocapitalizeAttrEnum = "words"
-	SampAutocapitalizeAttrEnumCharacters SampAutocapitalizeAttrEnum = "characters"
-	SampAutocapitalizeAttrEnumNone       SampAutocapitalizeAttrEnum = "none"
 )
 
 type SampAutocorrectAttrEnum string
 
 const (
-	SampAutocorrectAttrEnumOn  SampAutocorrectAttrEnum = "on"
 	SampAutocorrectAttrEnumOff SampAutocorrectAttrEnum = "off"
+	SampAutocorrectAttrEnumOn  SampAutocorrectAttrEnum = "on"
 )
 
 type SampContenteditableAttrEnum string

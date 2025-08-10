@@ -42,12 +42,12 @@ func BdoIf(condition bool, children ...htemel.Node) *BdoElement {
 type BdoAutocapitalizeAttrEnum string
 
 const (
+	BdoAutocapitalizeAttrEnumWords      BdoAutocapitalizeAttrEnum = "words"
 	BdoAutocapitalizeAttrEnumCharacters BdoAutocapitalizeAttrEnum = "characters"
 	BdoAutocapitalizeAttrEnumNone       BdoAutocapitalizeAttrEnum = "none"
 	BdoAutocapitalizeAttrEnumOff        BdoAutocapitalizeAttrEnum = "off"
 	BdoAutocapitalizeAttrEnumOn         BdoAutocapitalizeAttrEnum = "on"
 	BdoAutocapitalizeAttrEnumSentences  BdoAutocapitalizeAttrEnum = "sentences"
-	BdoAutocapitalizeAttrEnumWords      BdoAutocapitalizeAttrEnum = "words"
 )
 
 type BdoAutocorrectAttrEnum string

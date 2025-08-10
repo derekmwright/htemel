@@ -42,12 +42,12 @@ func SearchIf(condition bool, children ...htemel.Node) *SearchElement {
 type SearchAutocapitalizeAttrEnum string
 
 const (
+	SearchAutocapitalizeAttrEnumWords      SearchAutocapitalizeAttrEnum = "words"
 	SearchAutocapitalizeAttrEnumCharacters SearchAutocapitalizeAttrEnum = "characters"
 	SearchAutocapitalizeAttrEnumNone       SearchAutocapitalizeAttrEnum = "none"
 	SearchAutocapitalizeAttrEnumOff        SearchAutocapitalizeAttrEnum = "off"
 	SearchAutocapitalizeAttrEnumOn         SearchAutocapitalizeAttrEnum = "on"
 	SearchAutocapitalizeAttrEnumSentences  SearchAutocapitalizeAttrEnum = "sentences"
-	SearchAutocapitalizeAttrEnumWords      SearchAutocapitalizeAttrEnum = "words"
 )
 
 type SearchAutocorrectAttrEnum string

@@ -42,12 +42,12 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 type DelAutocapitalizeAttrEnum string
 
 const (
-	DelAutocapitalizeAttrEnumOff        DelAutocapitalizeAttrEnum = "off"
-	DelAutocapitalizeAttrEnumOn         DelAutocapitalizeAttrEnum = "on"
-	DelAutocapitalizeAttrEnumSentences  DelAutocapitalizeAttrEnum = "sentences"
 	DelAutocapitalizeAttrEnumWords      DelAutocapitalizeAttrEnum = "words"
 	DelAutocapitalizeAttrEnumCharacters DelAutocapitalizeAttrEnum = "characters"
 	DelAutocapitalizeAttrEnumNone       DelAutocapitalizeAttrEnum = "none"
+	DelAutocapitalizeAttrEnumOff        DelAutocapitalizeAttrEnum = "off"
+	DelAutocapitalizeAttrEnumOn         DelAutocapitalizeAttrEnum = "on"
+	DelAutocapitalizeAttrEnumSentences  DelAutocapitalizeAttrEnum = "sentences"
 )
 
 type DelAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type DelContenteditableAttrEnum string
 
 const (
+	DelContenteditableAttrEnumPlaintextOnly DelContenteditableAttrEnum = "plaintext-only"
 	DelContenteditableAttrEnumTrue          DelContenteditableAttrEnum = "true"
 	DelContenteditableAttrEnumFalse         DelContenteditableAttrEnum = "false"
-	DelContenteditableAttrEnumPlaintextOnly DelContenteditableAttrEnum = "plaintext-only"
 )
 
 type delAttrs map[string]any

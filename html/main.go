@@ -42,12 +42,12 @@ func MainIf(condition bool, children ...htemel.Node) *MainElement {
 type MainAutocapitalizeAttrEnum string
 
 const (
-	MainAutocapitalizeAttrEnumSentences  MainAutocapitalizeAttrEnum = "sentences"
-	MainAutocapitalizeAttrEnumWords      MainAutocapitalizeAttrEnum = "words"
 	MainAutocapitalizeAttrEnumCharacters MainAutocapitalizeAttrEnum = "characters"
 	MainAutocapitalizeAttrEnumNone       MainAutocapitalizeAttrEnum = "none"
 	MainAutocapitalizeAttrEnumOff        MainAutocapitalizeAttrEnum = "off"
 	MainAutocapitalizeAttrEnumOn         MainAutocapitalizeAttrEnum = "on"
+	MainAutocapitalizeAttrEnumSentences  MainAutocapitalizeAttrEnum = "sentences"
+	MainAutocapitalizeAttrEnumWords      MainAutocapitalizeAttrEnum = "words"
 )
 
 type MainAutocorrectAttrEnum string

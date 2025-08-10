@@ -42,19 +42,19 @@ func TheadIf(condition bool, children ...htemel.Node) *TheadElement {
 type TheadAutocapitalizeAttrEnum string
 
 const (
-	TheadAutocapitalizeAttrEnumCharacters TheadAutocapitalizeAttrEnum = "characters"
 	TheadAutocapitalizeAttrEnumNone       TheadAutocapitalizeAttrEnum = "none"
 	TheadAutocapitalizeAttrEnumOff        TheadAutocapitalizeAttrEnum = "off"
 	TheadAutocapitalizeAttrEnumOn         TheadAutocapitalizeAttrEnum = "on"
 	TheadAutocapitalizeAttrEnumSentences  TheadAutocapitalizeAttrEnum = "sentences"
 	TheadAutocapitalizeAttrEnumWords      TheadAutocapitalizeAttrEnum = "words"
+	TheadAutocapitalizeAttrEnumCharacters TheadAutocapitalizeAttrEnum = "characters"
 )
 
 type TheadAutocorrectAttrEnum string
 
 const (
-	TheadAutocorrectAttrEnumOn  TheadAutocorrectAttrEnum = "on"
 	TheadAutocorrectAttrEnumOff TheadAutocorrectAttrEnum = "off"
+	TheadAutocorrectAttrEnumOn  TheadAutocorrectAttrEnum = "on"
 )
 
 type TheadContenteditableAttrEnum string

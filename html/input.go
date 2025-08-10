@@ -42,27 +42,27 @@ func InputIf(condition bool, children ...htemel.Node) *InputElement {
 type InputAutocapitalizeAttrEnum string
 
 const (
+	InputAutocapitalizeAttrEnumOn         InputAutocapitalizeAttrEnum = "on"
 	InputAutocapitalizeAttrEnumSentences  InputAutocapitalizeAttrEnum = "sentences"
 	InputAutocapitalizeAttrEnumWords      InputAutocapitalizeAttrEnum = "words"
 	InputAutocapitalizeAttrEnumCharacters InputAutocapitalizeAttrEnum = "characters"
 	InputAutocapitalizeAttrEnumNone       InputAutocapitalizeAttrEnum = "none"
 	InputAutocapitalizeAttrEnumOff        InputAutocapitalizeAttrEnum = "off"
-	InputAutocapitalizeAttrEnumOn         InputAutocapitalizeAttrEnum = "on"
 )
 
 type InputAutocorrectAttrEnum string
 
 const (
-	InputAutocorrectAttrEnumOn  InputAutocorrectAttrEnum = "on"
 	InputAutocorrectAttrEnumOff InputAutocorrectAttrEnum = "off"
+	InputAutocorrectAttrEnumOn  InputAutocorrectAttrEnum = "on"
 )
 
 type InputContenteditableAttrEnum string
 
 const (
+	InputContenteditableAttrEnumFalse         InputContenteditableAttrEnum = "false"
 	InputContenteditableAttrEnumPlaintextOnly InputContenteditableAttrEnum = "plaintext-only"
 	InputContenteditableAttrEnumTrue          InputContenteditableAttrEnum = "true"
-	InputContenteditableAttrEnumFalse         InputContenteditableAttrEnum = "false"
 )
 
 type inputAttrs map[string]any

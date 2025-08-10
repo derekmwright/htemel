@@ -42,19 +42,19 @@ func TemplateIf(condition bool, children ...htemel.Node) *TemplateElement {
 type TemplateAutocapitalizeAttrEnum string
 
 const (
-	TemplateAutocapitalizeAttrEnumCharacters TemplateAutocapitalizeAttrEnum = "characters"
 	TemplateAutocapitalizeAttrEnumNone       TemplateAutocapitalizeAttrEnum = "none"
 	TemplateAutocapitalizeAttrEnumOff        TemplateAutocapitalizeAttrEnum = "off"
 	TemplateAutocapitalizeAttrEnumOn         TemplateAutocapitalizeAttrEnum = "on"
 	TemplateAutocapitalizeAttrEnumSentences  TemplateAutocapitalizeAttrEnum = "sentences"
 	TemplateAutocapitalizeAttrEnumWords      TemplateAutocapitalizeAttrEnum = "words"
+	TemplateAutocapitalizeAttrEnumCharacters TemplateAutocapitalizeAttrEnum = "characters"
 )
 
 type TemplateAutocorrectAttrEnum string
 
 const (
-	TemplateAutocorrectAttrEnumOn  TemplateAutocorrectAttrEnum = "on"
 	TemplateAutocorrectAttrEnumOff TemplateAutocorrectAttrEnum = "off"
+	TemplateAutocorrectAttrEnumOn  TemplateAutocorrectAttrEnum = "on"
 )
 
 type TemplateContenteditableAttrEnum string

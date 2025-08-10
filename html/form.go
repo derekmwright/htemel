@@ -60,9 +60,9 @@ const (
 type FormContenteditableAttrEnum string
 
 const (
-	FormContenteditableAttrEnumTrue          FormContenteditableAttrEnum = "true"
 	FormContenteditableAttrEnumFalse         FormContenteditableAttrEnum = "false"
 	FormContenteditableAttrEnumPlaintextOnly FormContenteditableAttrEnum = "plaintext-only"
+	FormContenteditableAttrEnumTrue          FormContenteditableAttrEnum = "true"
 )
 
 type formAttrs map[string]any

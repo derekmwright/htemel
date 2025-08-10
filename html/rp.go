@@ -42,12 +42,12 @@ func RpIf(condition bool, children ...htemel.Node) *RpElement {
 type RpAutocapitalizeAttrEnum string
 
 const (
+	RpAutocapitalizeAttrEnumOn         RpAutocapitalizeAttrEnum = "on"
 	RpAutocapitalizeAttrEnumSentences  RpAutocapitalizeAttrEnum = "sentences"
 	RpAutocapitalizeAttrEnumWords      RpAutocapitalizeAttrEnum = "words"
 	RpAutocapitalizeAttrEnumCharacters RpAutocapitalizeAttrEnum = "characters"
 	RpAutocapitalizeAttrEnumNone       RpAutocapitalizeAttrEnum = "none"
 	RpAutocapitalizeAttrEnumOff        RpAutocapitalizeAttrEnum = "off"
-	RpAutocapitalizeAttrEnumOn         RpAutocapitalizeAttrEnum = "on"
 )
 
 type RpAutocorrectAttrEnum string
