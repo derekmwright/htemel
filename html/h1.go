@@ -33,6 +33,34 @@ func H1If(condition bool, children ...htemel.Node) *H1Element {
 	}
 }
 
+func (e *H1Element) Autocapitalize() *H1Element {
+	return e
+}
+
+func (e *H1Element) Autocorrect() *H1Element {
+	return e
+}
+
+func (e *H1Element) Autofocus() *H1Element {
+	return e
+}
+
+func (e *H1Element) Class() *H1Element {
+	return e
+}
+
+func (e *H1Element) Contenteditable() *H1Element {
+	return e
+}
+
+func (e *H1Element) Id() *H1Element {
+	return e
+}
+
+func (e *H1Element) Slot() *H1Element {
+	return e
+}
+
 func (e *H1Element) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func MapIf(condition bool, children ...htemel.Node) *MapElement {
 	}
 }
 
+func (e *MapElement) Autocapitalize() *MapElement {
+	return e
+}
+
+func (e *MapElement) Autocorrect() *MapElement {
+	return e
+}
+
+func (e *MapElement) Autofocus() *MapElement {
+	return e
+}
+
+func (e *MapElement) Class() *MapElement {
+	return e
+}
+
+func (e *MapElement) Contenteditable() *MapElement {
+	return e
+}
+
+func (e *MapElement) Id() *MapElement {
+	return e
+}
+
+func (e *MapElement) Slot() *MapElement {
+	return e
+}
+
 func (e *MapElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

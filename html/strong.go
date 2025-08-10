@@ -33,6 +33,34 @@ func StrongIf(condition bool, children ...htemel.Node) *StrongElement {
 	}
 }
 
+func (e *StrongElement) Autocapitalize() *StrongElement {
+	return e
+}
+
+func (e *StrongElement) Autocorrect() *StrongElement {
+	return e
+}
+
+func (e *StrongElement) Autofocus() *StrongElement {
+	return e
+}
+
+func (e *StrongElement) Class() *StrongElement {
+	return e
+}
+
+func (e *StrongElement) Contenteditable() *StrongElement {
+	return e
+}
+
+func (e *StrongElement) Id() *StrongElement {
+	return e
+}
+
+func (e *StrongElement) Slot() *StrongElement {
+	return e
+}
+
 func (e *StrongElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

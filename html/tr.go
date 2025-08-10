@@ -33,6 +33,34 @@ func TrIf(condition bool, children ...htemel.Node) *TrElement {
 	}
 }
 
+func (e *TrElement) Autocapitalize() *TrElement {
+	return e
+}
+
+func (e *TrElement) Autocorrect() *TrElement {
+	return e
+}
+
+func (e *TrElement) Autofocus() *TrElement {
+	return e
+}
+
+func (e *TrElement) Class() *TrElement {
+	return e
+}
+
+func (e *TrElement) Contenteditable() *TrElement {
+	return e
+}
+
+func (e *TrElement) Id() *TrElement {
+	return e
+}
+
+func (e *TrElement) Slot() *TrElement {
+	return e
+}
+
 func (e *TrElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

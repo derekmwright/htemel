@@ -33,6 +33,34 @@ func TimeIf(condition bool, children ...htemel.Node) *TimeElement {
 	}
 }
 
+func (e *TimeElement) Autocapitalize() *TimeElement {
+	return e
+}
+
+func (e *TimeElement) Autocorrect() *TimeElement {
+	return e
+}
+
+func (e *TimeElement) Autofocus() *TimeElement {
+	return e
+}
+
+func (e *TimeElement) Class() *TimeElement {
+	return e
+}
+
+func (e *TimeElement) Contenteditable() *TimeElement {
+	return e
+}
+
+func (e *TimeElement) Id() *TimeElement {
+	return e
+}
+
+func (e *TimeElement) Slot() *TimeElement {
+	return e
+}
+
 func (e *TimeElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

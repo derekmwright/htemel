@@ -33,6 +33,34 @@ func InputIf(condition bool, children ...htemel.Node) *InputElement {
 	}
 }
 
+func (e *InputElement) Autocapitalize() *InputElement {
+	return e
+}
+
+func (e *InputElement) Autocorrect() *InputElement {
+	return e
+}
+
+func (e *InputElement) Autofocus() *InputElement {
+	return e
+}
+
+func (e *InputElement) Class() *InputElement {
+	return e
+}
+
+func (e *InputElement) Contenteditable() *InputElement {
+	return e
+}
+
+func (e *InputElement) Id() *InputElement {
+	return e
+}
+
+func (e *InputElement) Slot() *InputElement {
+	return e
+}
+
 func (e *InputElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

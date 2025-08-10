@@ -33,6 +33,34 @@ func DivIf(condition bool, children ...htemel.Node) *DivElement {
 	}
 }
 
+func (e *DivElement) Autocapitalize() *DivElement {
+	return e
+}
+
+func (e *DivElement) Autocorrect() *DivElement {
+	return e
+}
+
+func (e *DivElement) Autofocus() *DivElement {
+	return e
+}
+
+func (e *DivElement) Class() *DivElement {
+	return e
+}
+
+func (e *DivElement) Contenteditable() *DivElement {
+	return e
+}
+
+func (e *DivElement) Id() *DivElement {
+	return e
+}
+
+func (e *DivElement) Slot() *DivElement {
+	return e
+}
+
 func (e *DivElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

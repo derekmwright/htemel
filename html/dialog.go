@@ -33,6 +33,34 @@ func DialogIf(condition bool, children ...htemel.Node) *DialogElement {
 	}
 }
 
+func (e *DialogElement) Autocapitalize() *DialogElement {
+	return e
+}
+
+func (e *DialogElement) Autocorrect() *DialogElement {
+	return e
+}
+
+func (e *DialogElement) Autofocus() *DialogElement {
+	return e
+}
+
+func (e *DialogElement) Class() *DialogElement {
+	return e
+}
+
+func (e *DialogElement) Contenteditable() *DialogElement {
+	return e
+}
+
+func (e *DialogElement) Id() *DialogElement {
+	return e
+}
+
+func (e *DialogElement) Slot() *DialogElement {
+	return e
+}
+
 func (e *DialogElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

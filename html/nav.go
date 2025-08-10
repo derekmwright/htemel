@@ -33,6 +33,34 @@ func NavIf(condition bool, children ...htemel.Node) *NavElement {
 	}
 }
 
+func (e *NavElement) Autocapitalize() *NavElement {
+	return e
+}
+
+func (e *NavElement) Autocorrect() *NavElement {
+	return e
+}
+
+func (e *NavElement) Autofocus() *NavElement {
+	return e
+}
+
+func (e *NavElement) Class() *NavElement {
+	return e
+}
+
+func (e *NavElement) Contenteditable() *NavElement {
+	return e
+}
+
+func (e *NavElement) Id() *NavElement {
+	return e
+}
+
+func (e *NavElement) Slot() *NavElement {
+	return e
+}
+
 func (e *NavElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

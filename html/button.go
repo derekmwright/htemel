@@ -33,6 +33,34 @@ func ButtonIf(condition bool, children ...htemel.Node) *ButtonElement {
 	}
 }
 
+func (e *ButtonElement) Autocapitalize() *ButtonElement {
+	return e
+}
+
+func (e *ButtonElement) Autocorrect() *ButtonElement {
+	return e
+}
+
+func (e *ButtonElement) Autofocus() *ButtonElement {
+	return e
+}
+
+func (e *ButtonElement) Class() *ButtonElement {
+	return e
+}
+
+func (e *ButtonElement) Contenteditable() *ButtonElement {
+	return e
+}
+
+func (e *ButtonElement) Id() *ButtonElement {
+	return e
+}
+
+func (e *ButtonElement) Slot() *ButtonElement {
+	return e
+}
+
 func (e *ButtonElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func SummaryIf(condition bool, children ...htemel.Node) *SummaryElement {
 	}
 }
 
+func (e *SummaryElement) Autocapitalize() *SummaryElement {
+	return e
+}
+
+func (e *SummaryElement) Autocorrect() *SummaryElement {
+	return e
+}
+
+func (e *SummaryElement) Autofocus() *SummaryElement {
+	return e
+}
+
+func (e *SummaryElement) Class() *SummaryElement {
+	return e
+}
+
+func (e *SummaryElement) Contenteditable() *SummaryElement {
+	return e
+}
+
+func (e *SummaryElement) Id() *SummaryElement {
+	return e
+}
+
+func (e *SummaryElement) Slot() *SummaryElement {
+	return e
+}
+
 func (e *SummaryElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func FigureIf(condition bool, children ...htemel.Node) *FigureElement {
 	}
 }
 
+func (e *FigureElement) Autocapitalize() *FigureElement {
+	return e
+}
+
+func (e *FigureElement) Autocorrect() *FigureElement {
+	return e
+}
+
+func (e *FigureElement) Autofocus() *FigureElement {
+	return e
+}
+
+func (e *FigureElement) Class() *FigureElement {
+	return e
+}
+
+func (e *FigureElement) Contenteditable() *FigureElement {
+	return e
+}
+
+func (e *FigureElement) Id() *FigureElement {
+	return e
+}
+
+func (e *FigureElement) Slot() *FigureElement {
+	return e
+}
+
 func (e *FigureElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

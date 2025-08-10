@@ -33,6 +33,34 @@ func CaptionIf(condition bool, children ...htemel.Node) *CaptionElement {
 	}
 }
 
+func (e *CaptionElement) Autocapitalize() *CaptionElement {
+	return e
+}
+
+func (e *CaptionElement) Autocorrect() *CaptionElement {
+	return e
+}
+
+func (e *CaptionElement) Autofocus() *CaptionElement {
+	return e
+}
+
+func (e *CaptionElement) Class() *CaptionElement {
+	return e
+}
+
+func (e *CaptionElement) Contenteditable() *CaptionElement {
+	return e
+}
+
+func (e *CaptionElement) Id() *CaptionElement {
+	return e
+}
+
+func (e *CaptionElement) Slot() *CaptionElement {
+	return e
+}
+
 func (e *CaptionElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func OptionIf(condition bool, children ...htemel.Node) *OptionElement {
 	}
 }
 
+func (e *OptionElement) Autocapitalize() *OptionElement {
+	return e
+}
+
+func (e *OptionElement) Autocorrect() *OptionElement {
+	return e
+}
+
+func (e *OptionElement) Autofocus() *OptionElement {
+	return e
+}
+
+func (e *OptionElement) Class() *OptionElement {
+	return e
+}
+
+func (e *OptionElement) Contenteditable() *OptionElement {
+	return e
+}
+
+func (e *OptionElement) Id() *OptionElement {
+	return e
+}
+
+func (e *OptionElement) Slot() *OptionElement {
+	return e
+}
+
 func (e *OptionElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

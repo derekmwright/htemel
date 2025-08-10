@@ -33,6 +33,34 @@ func PreIf(condition bool, children ...htemel.Node) *PreElement {
 	}
 }
 
+func (e *PreElement) Autocapitalize() *PreElement {
+	return e
+}
+
+func (e *PreElement) Autocorrect() *PreElement {
+	return e
+}
+
+func (e *PreElement) Autofocus() *PreElement {
+	return e
+}
+
+func (e *PreElement) Class() *PreElement {
+	return e
+}
+
+func (e *PreElement) Contenteditable() *PreElement {
+	return e
+}
+
+func (e *PreElement) Id() *PreElement {
+	return e
+}
+
+func (e *PreElement) Slot() *PreElement {
+	return e
+}
+
 func (e *PreElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

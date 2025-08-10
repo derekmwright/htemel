@@ -33,6 +33,34 @@ func SmallIf(condition bool, children ...htemel.Node) *SmallElement {
 	}
 }
 
+func (e *SmallElement) Autocapitalize() *SmallElement {
+	return e
+}
+
+func (e *SmallElement) Autocorrect() *SmallElement {
+	return e
+}
+
+func (e *SmallElement) Autofocus() *SmallElement {
+	return e
+}
+
+func (e *SmallElement) Class() *SmallElement {
+	return e
+}
+
+func (e *SmallElement) Contenteditable() *SmallElement {
+	return e
+}
+
+func (e *SmallElement) Id() *SmallElement {
+	return e
+}
+
+func (e *SmallElement) Slot() *SmallElement {
+	return e
+}
+
 func (e *SmallElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

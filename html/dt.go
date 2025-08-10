@@ -33,6 +33,34 @@ func DtIf(condition bool, children ...htemel.Node) *DtElement {
 	}
 }
 
+func (e *DtElement) Autocapitalize() *DtElement {
+	return e
+}
+
+func (e *DtElement) Autocorrect() *DtElement {
+	return e
+}
+
+func (e *DtElement) Autofocus() *DtElement {
+	return e
+}
+
+func (e *DtElement) Class() *DtElement {
+	return e
+}
+
+func (e *DtElement) Contenteditable() *DtElement {
+	return e
+}
+
+func (e *DtElement) Id() *DtElement {
+	return e
+}
+
+func (e *DtElement) Slot() *DtElement {
+	return e
+}
+
 func (e *DtElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

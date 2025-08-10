@@ -33,6 +33,34 @@ func CiteIf(condition bool, children ...htemel.Node) *CiteElement {
 	}
 }
 
+func (e *CiteElement) Autocapitalize() *CiteElement {
+	return e
+}
+
+func (e *CiteElement) Autocorrect() *CiteElement {
+	return e
+}
+
+func (e *CiteElement) Autofocus() *CiteElement {
+	return e
+}
+
+func (e *CiteElement) Class() *CiteElement {
+	return e
+}
+
+func (e *CiteElement) Contenteditable() *CiteElement {
+	return e
+}
+
+func (e *CiteElement) Id() *CiteElement {
+	return e
+}
+
+func (e *CiteElement) Slot() *CiteElement {
+	return e
+}
+
 func (e *CiteElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

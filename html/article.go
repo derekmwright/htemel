@@ -33,6 +33,34 @@ func ArticleIf(condition bool, children ...htemel.Node) *ArticleElement {
 	}
 }
 
+func (e *ArticleElement) Autocapitalize() *ArticleElement {
+	return e
+}
+
+func (e *ArticleElement) Autocorrect() *ArticleElement {
+	return e
+}
+
+func (e *ArticleElement) Autofocus() *ArticleElement {
+	return e
+}
+
+func (e *ArticleElement) Class() *ArticleElement {
+	return e
+}
+
+func (e *ArticleElement) Contenteditable() *ArticleElement {
+	return e
+}
+
+func (e *ArticleElement) Id() *ArticleElement {
+	return e
+}
+
+func (e *ArticleElement) Slot() *ArticleElement {
+	return e
+}
+
 func (e *ArticleElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

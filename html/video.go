@@ -33,6 +33,34 @@ func VideoIf(condition bool, children ...htemel.Node) *VideoElement {
 	}
 }
 
+func (e *VideoElement) Autocapitalize() *VideoElement {
+	return e
+}
+
+func (e *VideoElement) Autocorrect() *VideoElement {
+	return e
+}
+
+func (e *VideoElement) Autofocus() *VideoElement {
+	return e
+}
+
+func (e *VideoElement) Class() *VideoElement {
+	return e
+}
+
+func (e *VideoElement) Contenteditable() *VideoElement {
+	return e
+}
+
+func (e *VideoElement) Id() *VideoElement {
+	return e
+}
+
+func (e *VideoElement) Slot() *VideoElement {
+	return e
+}
+
 func (e *VideoElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

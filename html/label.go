@@ -33,6 +33,34 @@ func LabelIf(condition bool, children ...htemel.Node) *LabelElement {
 	}
 }
 
+func (e *LabelElement) Autocapitalize() *LabelElement {
+	return e
+}
+
+func (e *LabelElement) Autocorrect() *LabelElement {
+	return e
+}
+
+func (e *LabelElement) Autofocus() *LabelElement {
+	return e
+}
+
+func (e *LabelElement) Class() *LabelElement {
+	return e
+}
+
+func (e *LabelElement) Contenteditable() *LabelElement {
+	return e
+}
+
+func (e *LabelElement) Id() *LabelElement {
+	return e
+}
+
+func (e *LabelElement) Slot() *LabelElement {
+	return e
+}
+
 func (e *LabelElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

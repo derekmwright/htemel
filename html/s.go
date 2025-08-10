@@ -33,6 +33,34 @@ func SIf(condition bool, children ...htemel.Node) *SElement {
 	}
 }
 
+func (e *SElement) Autocapitalize() *SElement {
+	return e
+}
+
+func (e *SElement) Autocorrect() *SElement {
+	return e
+}
+
+func (e *SElement) Autofocus() *SElement {
+	return e
+}
+
+func (e *SElement) Class() *SElement {
+	return e
+}
+
+func (e *SElement) Contenteditable() *SElement {
+	return e
+}
+
+func (e *SElement) Id() *SElement {
+	return e
+}
+
+func (e *SElement) Slot() *SElement {
+	return e
+}
+
 func (e *SElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func SlotIf(condition bool, children ...htemel.Node) *SlotElement {
 	}
 }
 
+func (e *SlotElement) Autocapitalize() *SlotElement {
+	return e
+}
+
+func (e *SlotElement) Autocorrect() *SlotElement {
+	return e
+}
+
+func (e *SlotElement) Autofocus() *SlotElement {
+	return e
+}
+
+func (e *SlotElement) Class() *SlotElement {
+	return e
+}
+
+func (e *SlotElement) Contenteditable() *SlotElement {
+	return e
+}
+
+func (e *SlotElement) Id() *SlotElement {
+	return e
+}
+
+func (e *SlotElement) Slot() *SlotElement {
+	return e
+}
+
 func (e *SlotElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

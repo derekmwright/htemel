@@ -33,6 +33,34 @@ func BodyIf(condition bool, children ...htemel.Node) *BodyElement {
 	}
 }
 
+func (e *BodyElement) Autocapitalize() *BodyElement {
+	return e
+}
+
+func (e *BodyElement) Autocorrect() *BodyElement {
+	return e
+}
+
+func (e *BodyElement) Autofocus() *BodyElement {
+	return e
+}
+
+func (e *BodyElement) Class() *BodyElement {
+	return e
+}
+
+func (e *BodyElement) Contenteditable() *BodyElement {
+	return e
+}
+
+func (e *BodyElement) Id() *BodyElement {
+	return e
+}
+
+func (e *BodyElement) Slot() *BodyElement {
+	return e
+}
+
 func (e *BodyElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

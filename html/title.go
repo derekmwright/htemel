@@ -33,6 +33,34 @@ func TitleIf(condition bool, children ...htemel.Node) *TitleElement {
 	}
 }
 
+func (e *TitleElement) Autocapitalize() *TitleElement {
+	return e
+}
+
+func (e *TitleElement) Autocorrect() *TitleElement {
+	return e
+}
+
+func (e *TitleElement) Autofocus() *TitleElement {
+	return e
+}
+
+func (e *TitleElement) Class() *TitleElement {
+	return e
+}
+
+func (e *TitleElement) Contenteditable() *TitleElement {
+	return e
+}
+
+func (e *TitleElement) Id() *TitleElement {
+	return e
+}
+
+func (e *TitleElement) Slot() *TitleElement {
+	return e
+}
+
 func (e *TitleElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

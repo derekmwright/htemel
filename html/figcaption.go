@@ -33,6 +33,34 @@ func FigcaptionIf(condition bool, children ...htemel.Node) *FigcaptionElement {
 	}
 }
 
+func (e *FigcaptionElement) Autocapitalize() *FigcaptionElement {
+	return e
+}
+
+func (e *FigcaptionElement) Autocorrect() *FigcaptionElement {
+	return e
+}
+
+func (e *FigcaptionElement) Autofocus() *FigcaptionElement {
+	return e
+}
+
+func (e *FigcaptionElement) Class() *FigcaptionElement {
+	return e
+}
+
+func (e *FigcaptionElement) Contenteditable() *FigcaptionElement {
+	return e
+}
+
+func (e *FigcaptionElement) Id() *FigcaptionElement {
+	return e
+}
+
+func (e *FigcaptionElement) Slot() *FigcaptionElement {
+	return e
+}
+
 func (e *FigcaptionElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

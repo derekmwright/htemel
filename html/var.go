@@ -33,6 +33,34 @@ func VarIf(condition bool, children ...htemel.Node) *VarElement {
 	}
 }
 
+func (e *VarElement) Autocapitalize() *VarElement {
+	return e
+}
+
+func (e *VarElement) Autocorrect() *VarElement {
+	return e
+}
+
+func (e *VarElement) Autofocus() *VarElement {
+	return e
+}
+
+func (e *VarElement) Class() *VarElement {
+	return e
+}
+
+func (e *VarElement) Contenteditable() *VarElement {
+	return e
+}
+
+func (e *VarElement) Id() *VarElement {
+	return e
+}
+
+func (e *VarElement) Slot() *VarElement {
+	return e
+}
+
 func (e *VarElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

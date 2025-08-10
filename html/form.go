@@ -33,6 +33,34 @@ func FormIf(condition bool, children ...htemel.Node) *FormElement {
 	}
 }
 
+func (e *FormElement) Autocapitalize() *FormElement {
+	return e
+}
+
+func (e *FormElement) Autocorrect() *FormElement {
+	return e
+}
+
+func (e *FormElement) Autofocus() *FormElement {
+	return e
+}
+
+func (e *FormElement) Class() *FormElement {
+	return e
+}
+
+func (e *FormElement) Contenteditable() *FormElement {
+	return e
+}
+
+func (e *FormElement) Id() *FormElement {
+	return e
+}
+
+func (e *FormElement) Slot() *FormElement {
+	return e
+}
+
 func (e *FormElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func AreaIf(condition bool, children ...htemel.Node) *AreaElement {
 	}
 }
 
+func (e *AreaElement) Autocapitalize() *AreaElement {
+	return e
+}
+
+func (e *AreaElement) Autocorrect() *AreaElement {
+	return e
+}
+
+func (e *AreaElement) Autofocus() *AreaElement {
+	return e
+}
+
+func (e *AreaElement) Class() *AreaElement {
+	return e
+}
+
+func (e *AreaElement) Contenteditable() *AreaElement {
+	return e
+}
+
+func (e *AreaElement) Id() *AreaElement {
+	return e
+}
+
+func (e *AreaElement) Slot() *AreaElement {
+	return e
+}
+
 func (e *AreaElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

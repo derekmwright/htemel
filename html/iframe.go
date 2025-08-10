@@ -33,6 +33,34 @@ func IframeIf(condition bool, children ...htemel.Node) *IframeElement {
 	}
 }
 
+func (e *IframeElement) Autocapitalize() *IframeElement {
+	return e
+}
+
+func (e *IframeElement) Autocorrect() *IframeElement {
+	return e
+}
+
+func (e *IframeElement) Autofocus() *IframeElement {
+	return e
+}
+
+func (e *IframeElement) Class() *IframeElement {
+	return e
+}
+
+func (e *IframeElement) Contenteditable() *IframeElement {
+	return e
+}
+
+func (e *IframeElement) Id() *IframeElement {
+	return e
+}
+
+func (e *IframeElement) Slot() *IframeElement {
+	return e
+}
+
 func (e *IframeElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

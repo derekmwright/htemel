@@ -33,6 +33,34 @@ func RubyIf(condition bool, children ...htemel.Node) *RubyElement {
 	}
 }
 
+func (e *RubyElement) Autocapitalize() *RubyElement {
+	return e
+}
+
+func (e *RubyElement) Autocorrect() *RubyElement {
+	return e
+}
+
+func (e *RubyElement) Autofocus() *RubyElement {
+	return e
+}
+
+func (e *RubyElement) Class() *RubyElement {
+	return e
+}
+
+func (e *RubyElement) Contenteditable() *RubyElement {
+	return e
+}
+
+func (e *RubyElement) Id() *RubyElement {
+	return e
+}
+
+func (e *RubyElement) Slot() *RubyElement {
+	return e
+}
+
 func (e *RubyElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

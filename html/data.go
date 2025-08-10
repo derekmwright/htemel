@@ -33,6 +33,34 @@ func DataIf(condition bool, children ...htemel.Node) *DataElement {
 	}
 }
 
+func (e *DataElement) Autocapitalize() *DataElement {
+	return e
+}
+
+func (e *DataElement) Autocorrect() *DataElement {
+	return e
+}
+
+func (e *DataElement) Autofocus() *DataElement {
+	return e
+}
+
+func (e *DataElement) Class() *DataElement {
+	return e
+}
+
+func (e *DataElement) Contenteditable() *DataElement {
+	return e
+}
+
+func (e *DataElement) Id() *DataElement {
+	return e
+}
+
+func (e *DataElement) Slot() *DataElement {
+	return e
+}
+
 func (e *DataElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

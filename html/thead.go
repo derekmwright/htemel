@@ -33,6 +33,34 @@ func TheadIf(condition bool, children ...htemel.Node) *TheadElement {
 	}
 }
 
+func (e *TheadElement) Autocapitalize() *TheadElement {
+	return e
+}
+
+func (e *TheadElement) Autocorrect() *TheadElement {
+	return e
+}
+
+func (e *TheadElement) Autofocus() *TheadElement {
+	return e
+}
+
+func (e *TheadElement) Class() *TheadElement {
+	return e
+}
+
+func (e *TheadElement) Contenteditable() *TheadElement {
+	return e
+}
+
+func (e *TheadElement) Id() *TheadElement {
+	return e
+}
+
+func (e *TheadElement) Slot() *TheadElement {
+	return e
+}
+
 func (e *TheadElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

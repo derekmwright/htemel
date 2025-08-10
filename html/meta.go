@@ -33,6 +33,34 @@ func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 	}
 }
 
+func (e *MetaElement) Autocapitalize() *MetaElement {
+	return e
+}
+
+func (e *MetaElement) Autocorrect() *MetaElement {
+	return e
+}
+
+func (e *MetaElement) Autofocus() *MetaElement {
+	return e
+}
+
+func (e *MetaElement) Class() *MetaElement {
+	return e
+}
+
+func (e *MetaElement) Contenteditable() *MetaElement {
+	return e
+}
+
+func (e *MetaElement) Id() *MetaElement {
+	return e
+}
+
+func (e *MetaElement) Slot() *MetaElement {
+	return e
+}
+
 func (e *MetaElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

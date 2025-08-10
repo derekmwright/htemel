@@ -33,6 +33,34 @@ func HrIf(condition bool, children ...htemel.Node) *HrElement {
 	}
 }
 
+func (e *HrElement) Autocapitalize() *HrElement {
+	return e
+}
+
+func (e *HrElement) Autocorrect() *HrElement {
+	return e
+}
+
+func (e *HrElement) Autofocus() *HrElement {
+	return e
+}
+
+func (e *HrElement) Class() *HrElement {
+	return e
+}
+
+func (e *HrElement) Contenteditable() *HrElement {
+	return e
+}
+
+func (e *HrElement) Id() *HrElement {
+	return e
+}
+
+func (e *HrElement) Slot() *HrElement {
+	return e
+}
+
 func (e *HrElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

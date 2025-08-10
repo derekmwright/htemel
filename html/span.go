@@ -33,6 +33,34 @@ func SpanIf(condition bool, children ...htemel.Node) *SpanElement {
 	}
 }
 
+func (e *SpanElement) Autocapitalize() *SpanElement {
+	return e
+}
+
+func (e *SpanElement) Autocorrect() *SpanElement {
+	return e
+}
+
+func (e *SpanElement) Autofocus() *SpanElement {
+	return e
+}
+
+func (e *SpanElement) Class() *SpanElement {
+	return e
+}
+
+func (e *SpanElement) Contenteditable() *SpanElement {
+	return e
+}
+
+func (e *SpanElement) Id() *SpanElement {
+	return e
+}
+
+func (e *SpanElement) Slot() *SpanElement {
+	return e
+}
+
 func (e *SpanElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

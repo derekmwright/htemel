@@ -33,6 +33,34 @@ func KbdIf(condition bool, children ...htemel.Node) *KbdElement {
 	}
 }
 
+func (e *KbdElement) Autocapitalize() *KbdElement {
+	return e
+}
+
+func (e *KbdElement) Autocorrect() *KbdElement {
+	return e
+}
+
+func (e *KbdElement) Autofocus() *KbdElement {
+	return e
+}
+
+func (e *KbdElement) Class() *KbdElement {
+	return e
+}
+
+func (e *KbdElement) Contenteditable() *KbdElement {
+	return e
+}
+
+func (e *KbdElement) Id() *KbdElement {
+	return e
+}
+
+func (e *KbdElement) Slot() *KbdElement {
+	return e
+}
+
 func (e *KbdElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

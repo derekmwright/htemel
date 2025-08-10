@@ -33,6 +33,34 @@ func BIf(condition bool, children ...htemel.Node) *BElement {
 	}
 }
 
+func (e *BElement) Autocapitalize() *BElement {
+	return e
+}
+
+func (e *BElement) Autocorrect() *BElement {
+	return e
+}
+
+func (e *BElement) Autofocus() *BElement {
+	return e
+}
+
+func (e *BElement) Class() *BElement {
+	return e
+}
+
+func (e *BElement) Contenteditable() *BElement {
+	return e
+}
+
+func (e *BElement) Id() *BElement {
+	return e
+}
+
+func (e *BElement) Slot() *BElement {
+	return e
+}
+
 func (e *BElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

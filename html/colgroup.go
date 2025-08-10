@@ -33,6 +33,34 @@ func ColgroupIf(condition bool, children ...htemel.Node) *ColgroupElement {
 	}
 }
 
+func (e *ColgroupElement) Autocapitalize() *ColgroupElement {
+	return e
+}
+
+func (e *ColgroupElement) Autocorrect() *ColgroupElement {
+	return e
+}
+
+func (e *ColgroupElement) Autofocus() *ColgroupElement {
+	return e
+}
+
+func (e *ColgroupElement) Class() *ColgroupElement {
+	return e
+}
+
+func (e *ColgroupElement) Contenteditable() *ColgroupElement {
+	return e
+}
+
+func (e *ColgroupElement) Id() *ColgroupElement {
+	return e
+}
+
+func (e *ColgroupElement) Slot() *ColgroupElement {
+	return e
+}
+
 func (e *ColgroupElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

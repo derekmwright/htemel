@@ -33,6 +33,34 @@ func ScriptIf(condition bool, children ...htemel.Node) *ScriptElement {
 	}
 }
 
+func (e *ScriptElement) Autocapitalize() *ScriptElement {
+	return e
+}
+
+func (e *ScriptElement) Autocorrect() *ScriptElement {
+	return e
+}
+
+func (e *ScriptElement) Autofocus() *ScriptElement {
+	return e
+}
+
+func (e *ScriptElement) Class() *ScriptElement {
+	return e
+}
+
+func (e *ScriptElement) Contenteditable() *ScriptElement {
+	return e
+}
+
+func (e *ScriptElement) Id() *ScriptElement {
+	return e
+}
+
+func (e *ScriptElement) Slot() *ScriptElement {
+	return e
+}
+
 func (e *ScriptElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

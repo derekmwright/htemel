@@ -33,6 +33,34 @@ func InsIf(condition bool, children ...htemel.Node) *InsElement {
 	}
 }
 
+func (e *InsElement) Autocapitalize() *InsElement {
+	return e
+}
+
+func (e *InsElement) Autocorrect() *InsElement {
+	return e
+}
+
+func (e *InsElement) Autofocus() *InsElement {
+	return e
+}
+
+func (e *InsElement) Class() *InsElement {
+	return e
+}
+
+func (e *InsElement) Contenteditable() *InsElement {
+	return e
+}
+
+func (e *InsElement) Id() *InsElement {
+	return e
+}
+
+func (e *InsElement) Slot() *InsElement {
+	return e
+}
+
 func (e *InsElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

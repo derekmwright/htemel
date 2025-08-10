@@ -33,6 +33,34 @@ func PIf(condition bool, children ...htemel.Node) *PElement {
 	}
 }
 
+func (e *PElement) Autocapitalize() *PElement {
+	return e
+}
+
+func (e *PElement) Autocorrect() *PElement {
+	return e
+}
+
+func (e *PElement) Autofocus() *PElement {
+	return e
+}
+
+func (e *PElement) Class() *PElement {
+	return e
+}
+
+func (e *PElement) Contenteditable() *PElement {
+	return e
+}
+
+func (e *PElement) Id() *PElement {
+	return e
+}
+
+func (e *PElement) Slot() *PElement {
+	return e
+}
+
 func (e *PElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

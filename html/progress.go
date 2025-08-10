@@ -33,6 +33,34 @@ func ProgressIf(condition bool, children ...htemel.Node) *ProgressElement {
 	}
 }
 
+func (e *ProgressElement) Autocapitalize() *ProgressElement {
+	return e
+}
+
+func (e *ProgressElement) Autocorrect() *ProgressElement {
+	return e
+}
+
+func (e *ProgressElement) Autofocus() *ProgressElement {
+	return e
+}
+
+func (e *ProgressElement) Class() *ProgressElement {
+	return e
+}
+
+func (e *ProgressElement) Contenteditable() *ProgressElement {
+	return e
+}
+
+func (e *ProgressElement) Id() *ProgressElement {
+	return e
+}
+
+func (e *ProgressElement) Slot() *ProgressElement {
+	return e
+}
+
 func (e *ProgressElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

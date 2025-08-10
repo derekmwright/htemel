@@ -33,6 +33,34 @@ func SearchIf(condition bool, children ...htemel.Node) *SearchElement {
 	}
 }
 
+func (e *SearchElement) Autocapitalize() *SearchElement {
+	return e
+}
+
+func (e *SearchElement) Autocorrect() *SearchElement {
+	return e
+}
+
+func (e *SearchElement) Autofocus() *SearchElement {
+	return e
+}
+
+func (e *SearchElement) Class() *SearchElement {
+	return e
+}
+
+func (e *SearchElement) Contenteditable() *SearchElement {
+	return e
+}
+
+func (e *SearchElement) Id() *SearchElement {
+	return e
+}
+
+func (e *SearchElement) Slot() *SearchElement {
+	return e
+}
+
 func (e *SearchElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

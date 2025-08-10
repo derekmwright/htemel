@@ -33,6 +33,34 @@ func ColIf(condition bool, children ...htemel.Node) *ColElement {
 	}
 }
 
+func (e *ColElement) Autocapitalize() *ColElement {
+	return e
+}
+
+func (e *ColElement) Autocorrect() *ColElement {
+	return e
+}
+
+func (e *ColElement) Autofocus() *ColElement {
+	return e
+}
+
+func (e *ColElement) Class() *ColElement {
+	return e
+}
+
+func (e *ColElement) Contenteditable() *ColElement {
+	return e
+}
+
+func (e *ColElement) Id() *ColElement {
+	return e
+}
+
+func (e *ColElement) Slot() *ColElement {
+	return e
+}
+
 func (e *ColElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

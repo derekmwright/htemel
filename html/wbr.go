@@ -33,6 +33,34 @@ func WbrIf(condition bool, children ...htemel.Node) *WbrElement {
 	}
 }
 
+func (e *WbrElement) Autocapitalize() *WbrElement {
+	return e
+}
+
+func (e *WbrElement) Autocorrect() *WbrElement {
+	return e
+}
+
+func (e *WbrElement) Autofocus() *WbrElement {
+	return e
+}
+
+func (e *WbrElement) Class() *WbrElement {
+	return e
+}
+
+func (e *WbrElement) Contenteditable() *WbrElement {
+	return e
+}
+
+func (e *WbrElement) Id() *WbrElement {
+	return e
+}
+
+func (e *WbrElement) Slot() *WbrElement {
+	return e
+}
+
 func (e *WbrElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

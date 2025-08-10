@@ -33,6 +33,34 @@ func OutputIf(condition bool, children ...htemel.Node) *OutputElement {
 	}
 }
 
+func (e *OutputElement) Autocapitalize() *OutputElement {
+	return e
+}
+
+func (e *OutputElement) Autocorrect() *OutputElement {
+	return e
+}
+
+func (e *OutputElement) Autofocus() *OutputElement {
+	return e
+}
+
+func (e *OutputElement) Class() *OutputElement {
+	return e
+}
+
+func (e *OutputElement) Contenteditable() *OutputElement {
+	return e
+}
+
+func (e *OutputElement) Id() *OutputElement {
+	return e
+}
+
+func (e *OutputElement) Slot() *OutputElement {
+	return e
+}
+
 func (e *OutputElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func BlockquoteIf(condition bool, children ...htemel.Node) *BlockquoteElement {
 	}
 }
 
+func (e *BlockquoteElement) Autocapitalize() *BlockquoteElement {
+	return e
+}
+
+func (e *BlockquoteElement) Autocorrect() *BlockquoteElement {
+	return e
+}
+
+func (e *BlockquoteElement) Autofocus() *BlockquoteElement {
+	return e
+}
+
+func (e *BlockquoteElement) Class() *BlockquoteElement {
+	return e
+}
+
+func (e *BlockquoteElement) Contenteditable() *BlockquoteElement {
+	return e
+}
+
+func (e *BlockquoteElement) Id() *BlockquoteElement {
+	return e
+}
+
+func (e *BlockquoteElement) Slot() *BlockquoteElement {
+	return e
+}
+
 func (e *BlockquoteElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

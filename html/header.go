@@ -33,6 +33,34 @@ func HeaderIf(condition bool, children ...htemel.Node) *HeaderElement {
 	}
 }
 
+func (e *HeaderElement) Autocapitalize() *HeaderElement {
+	return e
+}
+
+func (e *HeaderElement) Autocorrect() *HeaderElement {
+	return e
+}
+
+func (e *HeaderElement) Autofocus() *HeaderElement {
+	return e
+}
+
+func (e *HeaderElement) Class() *HeaderElement {
+	return e
+}
+
+func (e *HeaderElement) Contenteditable() *HeaderElement {
+	return e
+}
+
+func (e *HeaderElement) Id() *HeaderElement {
+	return e
+}
+
+func (e *HeaderElement) Slot() *HeaderElement {
+	return e
+}
+
 func (e *HeaderElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

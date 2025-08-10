@@ -33,6 +33,34 @@ func OlIf(condition bool, children ...htemel.Node) *OlElement {
 	}
 }
 
+func (e *OlElement) Autocapitalize() *OlElement {
+	return e
+}
+
+func (e *OlElement) Autocorrect() *OlElement {
+	return e
+}
+
+func (e *OlElement) Autofocus() *OlElement {
+	return e
+}
+
+func (e *OlElement) Class() *OlElement {
+	return e
+}
+
+func (e *OlElement) Contenteditable() *OlElement {
+	return e
+}
+
+func (e *OlElement) Id() *OlElement {
+	return e
+}
+
+func (e *OlElement) Slot() *OlElement {
+	return e
+}
+
 func (e *OlElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

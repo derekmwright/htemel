@@ -429,5 +429,63 @@
       "tag": "canvas",
       "description": "The canvas element provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly."
     }
+  ],
+  "attributes": [
+    {
+      "name": "accesskey",
+      "description": "The accesskey attribute's value is used by the user agent as a guide for creating a keyboard shortcut that activates or focuses the element.",
+      "attribute_type": "AttributeTypeChar"
+    },
+    {
+      "name": "autocapitalize",
+      "description": "The autocapitalize attribute is an enumerated attribute whose states are the possible autocapitalization hints. The autocapitalization hint specified by the attribute's state combines with other considerations to form the used autocapitalization hint, which informs the behavior of the user agent.",
+      "AllowedValues": {
+        "characters": {},
+        "none": {},
+        "off": {},
+        "on": {},
+        "sentences": {},
+        "words": {}
+      },
+      "attribute_type": "AttributeTypeEnum"
+    },
+    {
+      "name": "autocorrect",
+      "description": "The autocorrect attribute can be used on an editing host to control autocorrection behavior for the hosted editable region, on an input or textarea element to control the behavior when inserting text into that element, or on a form element to control the default behavior for all autocapitalize-and-autocorrect inheriting elements associated with the form element.",
+      "AllowedValues": {
+        "off": {},
+        "on": {}
+      },
+      "attribute_type": "AttributeTypeEnum"
+    },
+    {
+      "name": "autofocus",
+      "description": "The autofocus content attribute allows the author to indicate that an element is to be focused as soon as the page is loaded, allowing the user to just start typing without having to manually focus the main element.",
+      "attribute_type": "AttributeTypeBool"
+    },
+    {
+      "name": "class",
+      "description": "When specified on HTML elements, the class attribute must have a value that is a set of space-separated tokens representing the various classes that the element belongs to.",
+      "attribute_type": "AttributeTypeSST"
+    },
+    {
+      "name": "contenteditable",
+      "AllowedValues": {
+        "false": {},
+        "plaintext-only": {},
+        "true": {}
+      },
+      "attribute_type": "AttributeTypeEnum"
+    },
+    {
+      "name": "id",
+      "description": "The id attribute specifies its element's unique identifier (ID).",
+      "attribute_type": "AttributeTypeString"
+    },
+    {
+      "name": "slot",
+      "description": "The slot attribute is used to assign a slot to an element: an element with a slot attribute is assigned to the slot created by the slot element whose name attribute's value matches that slot attribute's value — but only if that slot element finds itself in the shadow tree whose root's host has the corresponding slot attribute value.",
+      "attribute_type": "AttributeTypeString"
+    }
   ]
 }

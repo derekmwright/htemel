@@ -33,6 +33,34 @@ func AsideIf(condition bool, children ...htemel.Node) *AsideElement {
 	}
 }
 
+func (e *AsideElement) Autocapitalize() *AsideElement {
+	return e
+}
+
+func (e *AsideElement) Autocorrect() *AsideElement {
+	return e
+}
+
+func (e *AsideElement) Autofocus() *AsideElement {
+	return e
+}
+
+func (e *AsideElement) Class() *AsideElement {
+	return e
+}
+
+func (e *AsideElement) Contenteditable() *AsideElement {
+	return e
+}
+
+func (e *AsideElement) Id() *AsideElement {
+	return e
+}
+
+func (e *AsideElement) Slot() *AsideElement {
+	return e
+}
+
 func (e *AsideElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

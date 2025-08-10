@@ -33,6 +33,34 @@ func SourceIf(condition bool, children ...htemel.Node) *SourceElement {
 	}
 }
 
+func (e *SourceElement) Autocapitalize() *SourceElement {
+	return e
+}
+
+func (e *SourceElement) Autocorrect() *SourceElement {
+	return e
+}
+
+func (e *SourceElement) Autofocus() *SourceElement {
+	return e
+}
+
+func (e *SourceElement) Class() *SourceElement {
+	return e
+}
+
+func (e *SourceElement) Contenteditable() *SourceElement {
+	return e
+}
+
+func (e *SourceElement) Id() *SourceElement {
+	return e
+}
+
+func (e *SourceElement) Slot() *SourceElement {
+	return e
+}
+
 func (e *SourceElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

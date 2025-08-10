@@ -33,6 +33,34 @@ func UIf(condition bool, children ...htemel.Node) *UElement {
 	}
 }
 
+func (e *UElement) Autocapitalize() *UElement {
+	return e
+}
+
+func (e *UElement) Autocorrect() *UElement {
+	return e
+}
+
+func (e *UElement) Autofocus() *UElement {
+	return e
+}
+
+func (e *UElement) Class() *UElement {
+	return e
+}
+
+func (e *UElement) Contenteditable() *UElement {
+	return e
+}
+
+func (e *UElement) Id() *UElement {
+	return e
+}
+
+func (e *UElement) Slot() *UElement {
+	return e
+}
+
 func (e *UElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

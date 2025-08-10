@@ -33,6 +33,34 @@ func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
 	}
 }
 
+func (e *HtmlElement) Autocapitalize() *HtmlElement {
+	return e
+}
+
+func (e *HtmlElement) Autocorrect() *HtmlElement {
+	return e
+}
+
+func (e *HtmlElement) Autofocus() *HtmlElement {
+	return e
+}
+
+func (e *HtmlElement) Class() *HtmlElement {
+	return e
+}
+
+func (e *HtmlElement) Contenteditable() *HtmlElement {
+	return e
+}
+
+func (e *HtmlElement) Id() *HtmlElement {
+	return e
+}
+
+func (e *HtmlElement) Slot() *HtmlElement {
+	return e
+}
+
 func (e *HtmlElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

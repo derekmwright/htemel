@@ -33,6 +33,34 @@ func OptgroupIf(condition bool, children ...htemel.Node) *OptgroupElement {
 	}
 }
 
+func (e *OptgroupElement) Autocapitalize() *OptgroupElement {
+	return e
+}
+
+func (e *OptgroupElement) Autocorrect() *OptgroupElement {
+	return e
+}
+
+func (e *OptgroupElement) Autofocus() *OptgroupElement {
+	return e
+}
+
+func (e *OptgroupElement) Class() *OptgroupElement {
+	return e
+}
+
+func (e *OptgroupElement) Contenteditable() *OptgroupElement {
+	return e
+}
+
+func (e *OptgroupElement) Id() *OptgroupElement {
+	return e
+}
+
+func (e *OptgroupElement) Slot() *OptgroupElement {
+	return e
+}
+
 func (e *OptgroupElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

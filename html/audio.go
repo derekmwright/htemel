@@ -33,6 +33,34 @@ func AudioIf(condition bool, children ...htemel.Node) *AudioElement {
 	}
 }
 
+func (e *AudioElement) Autocapitalize() *AudioElement {
+	return e
+}
+
+func (e *AudioElement) Autocorrect() *AudioElement {
+	return e
+}
+
+func (e *AudioElement) Autofocus() *AudioElement {
+	return e
+}
+
+func (e *AudioElement) Class() *AudioElement {
+	return e
+}
+
+func (e *AudioElement) Contenteditable() *AudioElement {
+	return e
+}
+
+func (e *AudioElement) Id() *AudioElement {
+	return e
+}
+
+func (e *AudioElement) Slot() *AudioElement {
+	return e
+}
+
 func (e *AudioElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

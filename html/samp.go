@@ -33,6 +33,34 @@ func SampIf(condition bool, children ...htemel.Node) *SampElement {
 	}
 }
 
+func (e *SampElement) Autocapitalize() *SampElement {
+	return e
+}
+
+func (e *SampElement) Autocorrect() *SampElement {
+	return e
+}
+
+func (e *SampElement) Autofocus() *SampElement {
+	return e
+}
+
+func (e *SampElement) Class() *SampElement {
+	return e
+}
+
+func (e *SampElement) Contenteditable() *SampElement {
+	return e
+}
+
+func (e *SampElement) Id() *SampElement {
+	return e
+}
+
+func (e *SampElement) Slot() *SampElement {
+	return e
+}
+
 func (e *SampElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func CodeIf(condition bool, children ...htemel.Node) *CodeElement {
 	}
 }
 
+func (e *CodeElement) Autocapitalize() *CodeElement {
+	return e
+}
+
+func (e *CodeElement) Autocorrect() *CodeElement {
+	return e
+}
+
+func (e *CodeElement) Autofocus() *CodeElement {
+	return e
+}
+
+func (e *CodeElement) Class() *CodeElement {
+	return e
+}
+
+func (e *CodeElement) Contenteditable() *CodeElement {
+	return e
+}
+
+func (e *CodeElement) Id() *CodeElement {
+	return e
+}
+
+func (e *CodeElement) Slot() *CodeElement {
+	return e
+}
+
 func (e *CodeElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

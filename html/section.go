@@ -33,6 +33,34 @@ func SectionIf(condition bool, children ...htemel.Node) *SectionElement {
 	}
 }
 
+func (e *SectionElement) Autocapitalize() *SectionElement {
+	return e
+}
+
+func (e *SectionElement) Autocorrect() *SectionElement {
+	return e
+}
+
+func (e *SectionElement) Autofocus() *SectionElement {
+	return e
+}
+
+func (e *SectionElement) Class() *SectionElement {
+	return e
+}
+
+func (e *SectionElement) Contenteditable() *SectionElement {
+	return e
+}
+
+func (e *SectionElement) Id() *SectionElement {
+	return e
+}
+
+func (e *SectionElement) Slot() *SectionElement {
+	return e
+}
+
 func (e *SectionElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

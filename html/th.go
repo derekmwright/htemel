@@ -33,6 +33,34 @@ func ThIf(condition bool, children ...htemel.Node) *ThElement {
 	}
 }
 
+func (e *ThElement) Autocapitalize() *ThElement {
+	return e
+}
+
+func (e *ThElement) Autocorrect() *ThElement {
+	return e
+}
+
+func (e *ThElement) Autofocus() *ThElement {
+	return e
+}
+
+func (e *ThElement) Class() *ThElement {
+	return e
+}
+
+func (e *ThElement) Contenteditable() *ThElement {
+	return e
+}
+
+func (e *ThElement) Id() *ThElement {
+	return e
+}
+
+func (e *ThElement) Slot() *ThElement {
+	return e
+}
+
 func (e *ThElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

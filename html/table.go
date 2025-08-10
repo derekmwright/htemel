@@ -33,6 +33,34 @@ func TableIf(condition bool, children ...htemel.Node) *TableElement {
 	}
 }
 
+func (e *TableElement) Autocapitalize() *TableElement {
+	return e
+}
+
+func (e *TableElement) Autocorrect() *TableElement {
+	return e
+}
+
+func (e *TableElement) Autofocus() *TableElement {
+	return e
+}
+
+func (e *TableElement) Class() *TableElement {
+	return e
+}
+
+func (e *TableElement) Contenteditable() *TableElement {
+	return e
+}
+
+func (e *TableElement) Id() *TableElement {
+	return e
+}
+
+func (e *TableElement) Slot() *TableElement {
+	return e
+}
+
 func (e *TableElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func AbbrIf(condition bool, children ...htemel.Node) *AbbrElement {
 	}
 }
 
+func (e *AbbrElement) Autocapitalize() *AbbrElement {
+	return e
+}
+
+func (e *AbbrElement) Autocorrect() *AbbrElement {
+	return e
+}
+
+func (e *AbbrElement) Autofocus() *AbbrElement {
+	return e
+}
+
+func (e *AbbrElement) Class() *AbbrElement {
+	return e
+}
+
+func (e *AbbrElement) Contenteditable() *AbbrElement {
+	return e
+}
+
+func (e *AbbrElement) Id() *AbbrElement {
+	return e
+}
+
+func (e *AbbrElement) Slot() *AbbrElement {
+	return e
+}
+
 func (e *AbbrElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

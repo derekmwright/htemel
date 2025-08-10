@@ -33,6 +33,34 @@ func ObjectIf(condition bool, children ...htemel.Node) *ObjectElement {
 	}
 }
 
+func (e *ObjectElement) Autocapitalize() *ObjectElement {
+	return e
+}
+
+func (e *ObjectElement) Autocorrect() *ObjectElement {
+	return e
+}
+
+func (e *ObjectElement) Autofocus() *ObjectElement {
+	return e
+}
+
+func (e *ObjectElement) Class() *ObjectElement {
+	return e
+}
+
+func (e *ObjectElement) Contenteditable() *ObjectElement {
+	return e
+}
+
+func (e *ObjectElement) Id() *ObjectElement {
+	return e
+}
+
+func (e *ObjectElement) Slot() *ObjectElement {
+	return e
+}
+
 func (e *ObjectElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

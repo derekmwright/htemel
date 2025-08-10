@@ -33,6 +33,34 @@ func ImgIf(condition bool, children ...htemel.Node) *ImgElement {
 	}
 }
 
+func (e *ImgElement) Autocapitalize() *ImgElement {
+	return e
+}
+
+func (e *ImgElement) Autocorrect() *ImgElement {
+	return e
+}
+
+func (e *ImgElement) Autofocus() *ImgElement {
+	return e
+}
+
+func (e *ImgElement) Class() *ImgElement {
+	return e
+}
+
+func (e *ImgElement) Contenteditable() *ImgElement {
+	return e
+}
+
+func (e *ImgElement) Id() *ImgElement {
+	return e
+}
+
+func (e *ImgElement) Slot() *ImgElement {
+	return e
+}
+
 func (e *ImgElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

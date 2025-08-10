@@ -33,6 +33,34 @@ func DfnIf(condition bool, children ...htemel.Node) *DfnElement {
 	}
 }
 
+func (e *DfnElement) Autocapitalize() *DfnElement {
+	return e
+}
+
+func (e *DfnElement) Autocorrect() *DfnElement {
+	return e
+}
+
+func (e *DfnElement) Autofocus() *DfnElement {
+	return e
+}
+
+func (e *DfnElement) Class() *DfnElement {
+	return e
+}
+
+func (e *DfnElement) Contenteditable() *DfnElement {
+	return e
+}
+
+func (e *DfnElement) Id() *DfnElement {
+	return e
+}
+
+func (e *DfnElement) Slot() *DfnElement {
+	return e
+}
+
 func (e *DfnElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

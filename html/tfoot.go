@@ -33,6 +33,34 @@ func TfootIf(condition bool, children ...htemel.Node) *TfootElement {
 	}
 }
 
+func (e *TfootElement) Autocapitalize() *TfootElement {
+	return e
+}
+
+func (e *TfootElement) Autocorrect() *TfootElement {
+	return e
+}
+
+func (e *TfootElement) Autofocus() *TfootElement {
+	return e
+}
+
+func (e *TfootElement) Class() *TfootElement {
+	return e
+}
+
+func (e *TfootElement) Contenteditable() *TfootElement {
+	return e
+}
+
+func (e *TfootElement) Id() *TfootElement {
+	return e
+}
+
+func (e *TfootElement) Slot() *TfootElement {
+	return e
+}
+
 func (e *TfootElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

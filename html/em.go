@@ -33,6 +33,34 @@ func EmIf(condition bool, children ...htemel.Node) *EmElement {
 	}
 }
 
+func (e *EmElement) Autocapitalize() *EmElement {
+	return e
+}
+
+func (e *EmElement) Autocorrect() *EmElement {
+	return e
+}
+
+func (e *EmElement) Autofocus() *EmElement {
+	return e
+}
+
+func (e *EmElement) Class() *EmElement {
+	return e
+}
+
+func (e *EmElement) Contenteditable() *EmElement {
+	return e
+}
+
+func (e *EmElement) Id() *EmElement {
+	return e
+}
+
+func (e *EmElement) Slot() *EmElement {
+	return e
+}
+
 func (e *EmElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

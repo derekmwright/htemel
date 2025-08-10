@@ -33,6 +33,34 @@ func BrIf(condition bool, children ...htemel.Node) *BrElement {
 	}
 }
 
+func (e *BrElement) Autocapitalize() *BrElement {
+	return e
+}
+
+func (e *BrElement) Autocorrect() *BrElement {
+	return e
+}
+
+func (e *BrElement) Autofocus() *BrElement {
+	return e
+}
+
+func (e *BrElement) Class() *BrElement {
+	return e
+}
+
+func (e *BrElement) Contenteditable() *BrElement {
+	return e
+}
+
+func (e *BrElement) Id() *BrElement {
+	return e
+}
+
+func (e *BrElement) Slot() *BrElement {
+	return e
+}
+
 func (e *BrElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

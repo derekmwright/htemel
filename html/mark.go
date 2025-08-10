@@ -33,6 +33,34 @@ func MarkIf(condition bool, children ...htemel.Node) *MarkElement {
 	}
 }
 
+func (e *MarkElement) Autocapitalize() *MarkElement {
+	return e
+}
+
+func (e *MarkElement) Autocorrect() *MarkElement {
+	return e
+}
+
+func (e *MarkElement) Autofocus() *MarkElement {
+	return e
+}
+
+func (e *MarkElement) Class() *MarkElement {
+	return e
+}
+
+func (e *MarkElement) Contenteditable() *MarkElement {
+	return e
+}
+
+func (e *MarkElement) Id() *MarkElement {
+	return e
+}
+
+func (e *MarkElement) Slot() *MarkElement {
+	return e
+}
+
 func (e *MarkElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

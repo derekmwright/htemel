@@ -33,6 +33,34 @@ func BdoIf(condition bool, children ...htemel.Node) *BdoElement {
 	}
 }
 
+func (e *BdoElement) Autocapitalize() *BdoElement {
+	return e
+}
+
+func (e *BdoElement) Autocorrect() *BdoElement {
+	return e
+}
+
+func (e *BdoElement) Autofocus() *BdoElement {
+	return e
+}
+
+func (e *BdoElement) Class() *BdoElement {
+	return e
+}
+
+func (e *BdoElement) Contenteditable() *BdoElement {
+	return e
+}
+
+func (e *BdoElement) Id() *BdoElement {
+	return e
+}
+
+func (e *BdoElement) Slot() *BdoElement {
+	return e
+}
+
 func (e *BdoElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func BaseIf(condition bool, children ...htemel.Node) *BaseElement {
 	}
 }
 
+func (e *BaseElement) Autocapitalize() *BaseElement {
+	return e
+}
+
+func (e *BaseElement) Autocorrect() *BaseElement {
+	return e
+}
+
+func (e *BaseElement) Autofocus() *BaseElement {
+	return e
+}
+
+func (e *BaseElement) Class() *BaseElement {
+	return e
+}
+
+func (e *BaseElement) Contenteditable() *BaseElement {
+	return e
+}
+
+func (e *BaseElement) Id() *BaseElement {
+	return e
+}
+
+func (e *BaseElement) Slot() *BaseElement {
+	return e
+}
+
 func (e *BaseElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

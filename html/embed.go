@@ -33,6 +33,34 @@ func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
 	}
 }
 
+func (e *EmbedElement) Autocapitalize() *EmbedElement {
+	return e
+}
+
+func (e *EmbedElement) Autocorrect() *EmbedElement {
+	return e
+}
+
+func (e *EmbedElement) Autofocus() *EmbedElement {
+	return e
+}
+
+func (e *EmbedElement) Class() *EmbedElement {
+	return e
+}
+
+func (e *EmbedElement) Contenteditable() *EmbedElement {
+	return e
+}
+
+func (e *EmbedElement) Id() *EmbedElement {
+	return e
+}
+
+func (e *EmbedElement) Slot() *EmbedElement {
+	return e
+}
+
 func (e *EmbedElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func AddressIf(condition bool, children ...htemel.Node) *AddressElement {
 	}
 }
 
+func (e *AddressElement) Autocapitalize() *AddressElement {
+	return e
+}
+
+func (e *AddressElement) Autocorrect() *AddressElement {
+	return e
+}
+
+func (e *AddressElement) Autofocus() *AddressElement {
+	return e
+}
+
+func (e *AddressElement) Class() *AddressElement {
+	return e
+}
+
+func (e *AddressElement) Contenteditable() *AddressElement {
+	return e
+}
+
+func (e *AddressElement) Id() *AddressElement {
+	return e
+}
+
+func (e *AddressElement) Slot() *AddressElement {
+	return e
+}
+
 func (e *AddressElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

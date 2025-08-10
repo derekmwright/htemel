@@ -33,6 +33,34 @@ func LiIf(condition bool, children ...htemel.Node) *LiElement {
 	}
 }
 
+func (e *LiElement) Autocapitalize() *LiElement {
+	return e
+}
+
+func (e *LiElement) Autocorrect() *LiElement {
+	return e
+}
+
+func (e *LiElement) Autofocus() *LiElement {
+	return e
+}
+
+func (e *LiElement) Class() *LiElement {
+	return e
+}
+
+func (e *LiElement) Contenteditable() *LiElement {
+	return e
+}
+
+func (e *LiElement) Id() *LiElement {
+	return e
+}
+
+func (e *LiElement) Slot() *LiElement {
+	return e
+}
+
 func (e *LiElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

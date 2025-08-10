@@ -33,6 +33,34 @@ func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 	}
 }
 
+func (e *TrackElement) Autocapitalize() *TrackElement {
+	return e
+}
+
+func (e *TrackElement) Autocorrect() *TrackElement {
+	return e
+}
+
+func (e *TrackElement) Autofocus() *TrackElement {
+	return e
+}
+
+func (e *TrackElement) Class() *TrackElement {
+	return e
+}
+
+func (e *TrackElement) Contenteditable() *TrackElement {
+	return e
+}
+
+func (e *TrackElement) Id() *TrackElement {
+	return e
+}
+
+func (e *TrackElement) Slot() *TrackElement {
+	return e
+}
+
 func (e *TrackElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

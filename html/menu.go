@@ -33,6 +33,34 @@ func MenuIf(condition bool, children ...htemel.Node) *MenuElement {
 	}
 }
 
+func (e *MenuElement) Autocapitalize() *MenuElement {
+	return e
+}
+
+func (e *MenuElement) Autocorrect() *MenuElement {
+	return e
+}
+
+func (e *MenuElement) Autofocus() *MenuElement {
+	return e
+}
+
+func (e *MenuElement) Class() *MenuElement {
+	return e
+}
+
+func (e *MenuElement) Contenteditable() *MenuElement {
+	return e
+}
+
+func (e *MenuElement) Id() *MenuElement {
+	return e
+}
+
+func (e *MenuElement) Slot() *MenuElement {
+	return e
+}
+
 func (e *MenuElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

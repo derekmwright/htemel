@@ -33,6 +33,34 @@ func RtIf(condition bool, children ...htemel.Node) *RtElement {
 	}
 }
 
+func (e *RtElement) Autocapitalize() *RtElement {
+	return e
+}
+
+func (e *RtElement) Autocorrect() *RtElement {
+	return e
+}
+
+func (e *RtElement) Autofocus() *RtElement {
+	return e
+}
+
+func (e *RtElement) Class() *RtElement {
+	return e
+}
+
+func (e *RtElement) Contenteditable() *RtElement {
+	return e
+}
+
+func (e *RtElement) Id() *RtElement {
+	return e
+}
+
+func (e *RtElement) Slot() *RtElement {
+	return e
+}
+
 func (e *RtElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

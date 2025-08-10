@@ -33,6 +33,34 @@ func StyleIf(condition bool, children ...htemel.Node) *StyleElement {
 	}
 }
 
+func (e *StyleElement) Autocapitalize() *StyleElement {
+	return e
+}
+
+func (e *StyleElement) Autocorrect() *StyleElement {
+	return e
+}
+
+func (e *StyleElement) Autofocus() *StyleElement {
+	return e
+}
+
+func (e *StyleElement) Class() *StyleElement {
+	return e
+}
+
+func (e *StyleElement) Contenteditable() *StyleElement {
+	return e
+}
+
+func (e *StyleElement) Id() *StyleElement {
+	return e
+}
+
+func (e *StyleElement) Slot() *StyleElement {
+	return e
+}
+
 func (e *StyleElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

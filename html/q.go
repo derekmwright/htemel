@@ -33,6 +33,34 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 	}
 }
 
+func (e *QElement) Autocapitalize() *QElement {
+	return e
+}
+
+func (e *QElement) Autocorrect() *QElement {
+	return e
+}
+
+func (e *QElement) Autofocus() *QElement {
+	return e
+}
+
+func (e *QElement) Class() *QElement {
+	return e
+}
+
+func (e *QElement) Contenteditable() *QElement {
+	return e
+}
+
+func (e *QElement) Id() *QElement {
+	return e
+}
+
+func (e *QElement) Slot() *QElement {
+	return e
+}
+
 func (e *QElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

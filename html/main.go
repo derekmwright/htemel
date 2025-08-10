@@ -33,6 +33,34 @@ func MainIf(condition bool, children ...htemel.Node) *MainElement {
 	}
 }
 
+func (e *MainElement) Autocapitalize() *MainElement {
+	return e
+}
+
+func (e *MainElement) Autocorrect() *MainElement {
+	return e
+}
+
+func (e *MainElement) Autofocus() *MainElement {
+	return e
+}
+
+func (e *MainElement) Class() *MainElement {
+	return e
+}
+
+func (e *MainElement) Contenteditable() *MainElement {
+	return e
+}
+
+func (e *MainElement) Id() *MainElement {
+	return e
+}
+
+func (e *MainElement) Slot() *MainElement {
+	return e
+}
+
 func (e *MainElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

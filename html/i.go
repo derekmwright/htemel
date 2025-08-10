@@ -33,6 +33,34 @@ func IIf(condition bool, children ...htemel.Node) *IElement {
 	}
 }
 
+func (e *IElement) Autocapitalize() *IElement {
+	return e
+}
+
+func (e *IElement) Autocorrect() *IElement {
+	return e
+}
+
+func (e *IElement) Autofocus() *IElement {
+	return e
+}
+
+func (e *IElement) Class() *IElement {
+	return e
+}
+
+func (e *IElement) Contenteditable() *IElement {
+	return e
+}
+
+func (e *IElement) Id() *IElement {
+	return e
+}
+
+func (e *IElement) Slot() *IElement {
+	return e
+}
+
 func (e *IElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

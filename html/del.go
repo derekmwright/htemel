@@ -33,6 +33,34 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 	}
 }
 
+func (e *DelElement) Autocapitalize() *DelElement {
+	return e
+}
+
+func (e *DelElement) Autocorrect() *DelElement {
+	return e
+}
+
+func (e *DelElement) Autofocus() *DelElement {
+	return e
+}
+
+func (e *DelElement) Class() *DelElement {
+	return e
+}
+
+func (e *DelElement) Contenteditable() *DelElement {
+	return e
+}
+
+func (e *DelElement) Id() *DelElement {
+	return e
+}
+
+func (e *DelElement) Slot() *DelElement {
+	return e
+}
+
 func (e *DelElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

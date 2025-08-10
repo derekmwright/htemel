@@ -33,6 +33,34 @@ func LegendIf(condition bool, children ...htemel.Node) *LegendElement {
 	}
 }
 
+func (e *LegendElement) Autocapitalize() *LegendElement {
+	return e
+}
+
+func (e *LegendElement) Autocorrect() *LegendElement {
+	return e
+}
+
+func (e *LegendElement) Autofocus() *LegendElement {
+	return e
+}
+
+func (e *LegendElement) Class() *LegendElement {
+	return e
+}
+
+func (e *LegendElement) Contenteditable() *LegendElement {
+	return e
+}
+
+func (e *LegendElement) Id() *LegendElement {
+	return e
+}
+
+func (e *LegendElement) Slot() *LegendElement {
+	return e
+}
+
 func (e *LegendElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

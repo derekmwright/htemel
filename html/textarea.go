@@ -33,6 +33,34 @@ func TextareaIf(condition bool, children ...htemel.Node) *TextareaElement {
 	}
 }
 
+func (e *TextareaElement) Autocapitalize() *TextareaElement {
+	return e
+}
+
+func (e *TextareaElement) Autocorrect() *TextareaElement {
+	return e
+}
+
+func (e *TextareaElement) Autofocus() *TextareaElement {
+	return e
+}
+
+func (e *TextareaElement) Class() *TextareaElement {
+	return e
+}
+
+func (e *TextareaElement) Contenteditable() *TextareaElement {
+	return e
+}
+
+func (e *TextareaElement) Id() *TextareaElement {
+	return e
+}
+
+func (e *TextareaElement) Slot() *TextareaElement {
+	return e
+}
+
 func (e *TextareaElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

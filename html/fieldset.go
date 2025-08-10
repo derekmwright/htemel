@@ -33,6 +33,34 @@ func FieldsetIf(condition bool, children ...htemel.Node) *FieldsetElement {
 	}
 }
 
+func (e *FieldsetElement) Autocapitalize() *FieldsetElement {
+	return e
+}
+
+func (e *FieldsetElement) Autocorrect() *FieldsetElement {
+	return e
+}
+
+func (e *FieldsetElement) Autofocus() *FieldsetElement {
+	return e
+}
+
+func (e *FieldsetElement) Class() *FieldsetElement {
+	return e
+}
+
+func (e *FieldsetElement) Contenteditable() *FieldsetElement {
+	return e
+}
+
+func (e *FieldsetElement) Id() *FieldsetElement {
+	return e
+}
+
+func (e *FieldsetElement) Slot() *FieldsetElement {
+	return e
+}
+
 func (e *FieldsetElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

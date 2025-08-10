@@ -33,6 +33,34 @@ func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
 	}
 }
 
+func (e *LinkElement) Autocapitalize() *LinkElement {
+	return e
+}
+
+func (e *LinkElement) Autocorrect() *LinkElement {
+	return e
+}
+
+func (e *LinkElement) Autofocus() *LinkElement {
+	return e
+}
+
+func (e *LinkElement) Class() *LinkElement {
+	return e
+}
+
+func (e *LinkElement) Contenteditable() *LinkElement {
+	return e
+}
+
+func (e *LinkElement) Id() *LinkElement {
+	return e
+}
+
+func (e *LinkElement) Slot() *LinkElement {
+	return e
+}
+
 func (e *LinkElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

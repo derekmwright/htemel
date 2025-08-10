@@ -33,6 +33,34 @@ func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 	}
 }
 
+func (e *CanvasElement) Autocapitalize() *CanvasElement {
+	return e
+}
+
+func (e *CanvasElement) Autocorrect() *CanvasElement {
+	return e
+}
+
+func (e *CanvasElement) Autofocus() *CanvasElement {
+	return e
+}
+
+func (e *CanvasElement) Class() *CanvasElement {
+	return e
+}
+
+func (e *CanvasElement) Contenteditable() *CanvasElement {
+	return e
+}
+
+func (e *CanvasElement) Id() *CanvasElement {
+	return e
+}
+
+func (e *CanvasElement) Slot() *CanvasElement {
+	return e
+}
+
 func (e *CanvasElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

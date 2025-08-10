@@ -33,6 +33,34 @@ func SelectIf(condition bool, children ...htemel.Node) *SelectElement {
 	}
 }
 
+func (e *SelectElement) Autocapitalize() *SelectElement {
+	return e
+}
+
+func (e *SelectElement) Autocorrect() *SelectElement {
+	return e
+}
+
+func (e *SelectElement) Autofocus() *SelectElement {
+	return e
+}
+
+func (e *SelectElement) Class() *SelectElement {
+	return e
+}
+
+func (e *SelectElement) Contenteditable() *SelectElement {
+	return e
+}
+
+func (e *SelectElement) Id() *SelectElement {
+	return e
+}
+
+func (e *SelectElement) Slot() *SelectElement {
+	return e
+}
+
 func (e *SelectElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

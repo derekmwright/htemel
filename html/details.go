@@ -33,6 +33,34 @@ func DetailsIf(condition bool, children ...htemel.Node) *DetailsElement {
 	}
 }
 
+func (e *DetailsElement) Autocapitalize() *DetailsElement {
+	return e
+}
+
+func (e *DetailsElement) Autocorrect() *DetailsElement {
+	return e
+}
+
+func (e *DetailsElement) Autofocus() *DetailsElement {
+	return e
+}
+
+func (e *DetailsElement) Class() *DetailsElement {
+	return e
+}
+
+func (e *DetailsElement) Contenteditable() *DetailsElement {
+	return e
+}
+
+func (e *DetailsElement) Id() *DetailsElement {
+	return e
+}
+
+func (e *DetailsElement) Slot() *DetailsElement {
+	return e
+}
+
 func (e *DetailsElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

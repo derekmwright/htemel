@@ -2,7 +2,6 @@ package spec
 
 import (
 	"errors"
-	"fmt"
 	"io"
 	"strings"
 
@@ -28,11 +27,47 @@ func GlobalAttributes() []Attribute {
 				"characters": {},
 			},
 		},
+		&AttributeTypeEnum{
+			Name:        "autocorrect",
+			Description: "The autocorrect attribute can be used on an editing host to control autocorrection behavior for the hosted editable region, on an input or textarea element to control the behavior when inserting text into that element, or on a form element to control the default behavior for all autocapitalize-and-autocorrect inheriting elements associated with the form element.",
+			Allowed: map[string]struct{}{
+				"on":  {},
+				"off": {},
+			},
+		},
+		&AttributeTypeBool{
+			Name:        "autofocus",
+			Description: "The autofocus content attribute allows the author to indicate that an element is to be focused as soon as the page is loaded, allowing the user to just start typing without having to manually focus the main element.",
+		},
+		&AttributeTypeSST{
+			Name:        "class",
+			Description: "When specified on HTML elements, the class attribute must have a value that is a set of space-separated tokens representing the various classes that the element belongs to.",
+		},
+		&AttributeTypeEnum{
+			Name:        "contenteditable",
+			Description: "",
+			Allowed: map[string]struct{}{
+				"true":           {},
+				"false":          {},
+				"plaintext-only": {},
+			},
+		},
+		&AttributeTypeString{
+			Name:        "id",
+			Description: "The id attribute specifies its element's unique identifier (ID).",
+		},
+		&AttributeTypeString{
+			Name:        "slot",
+			Description: "The slot attribute is used to assign a slot to an element: an element with a slot attribute is assigned to the slot created by the slot element whose name attribute's value matches that slot attribute's value — but only if that slot element finds itself in the shadow tree whose root's host has the corresponding slot attribute value.",
+		},
 	}
 }
 
 func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
 	p := NewSpecParser(HTML)
+
+	// Add the defined global attributes
+	p.Spec.Attributes = GlobalAttributes()
 
 	defer func(closer io.ReadCloser) {
 		err := closer.Close()
@@ -77,7 +112,6 @@ func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
 				var id string
 				if id, ok = getAttribute(child.Attr, "id"); ok {
 					if strings.Contains(id, "the-") && strings.Contains(id, "-element") {
-						fmt.Println(id)
 						var tagNode *html.Node
 						if tagNode, ok = findTag(child, "code"); ok {
 							p.Activate(tagNode.FirstChild.Data)

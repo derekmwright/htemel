@@ -33,6 +33,34 @@ func NoscriptIf(condition bool, children ...htemel.Node) *NoscriptElement {
 	}
 }
 
+func (e *NoscriptElement) Autocapitalize() *NoscriptElement {
+	return e
+}
+
+func (e *NoscriptElement) Autocorrect() *NoscriptElement {
+	return e
+}
+
+func (e *NoscriptElement) Autofocus() *NoscriptElement {
+	return e
+}
+
+func (e *NoscriptElement) Class() *NoscriptElement {
+	return e
+}
+
+func (e *NoscriptElement) Contenteditable() *NoscriptElement {
+	return e
+}
+
+func (e *NoscriptElement) Id() *NoscriptElement {
+	return e
+}
+
+func (e *NoscriptElement) Slot() *NoscriptElement {
+	return e
+}
+
 func (e *NoscriptElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

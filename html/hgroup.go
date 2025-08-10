@@ -33,6 +33,34 @@ func HgroupIf(condition bool, children ...htemel.Node) *HgroupElement {
 	}
 }
 
+func (e *HgroupElement) Autocapitalize() *HgroupElement {
+	return e
+}
+
+func (e *HgroupElement) Autocorrect() *HgroupElement {
+	return e
+}
+
+func (e *HgroupElement) Autofocus() *HgroupElement {
+	return e
+}
+
+func (e *HgroupElement) Class() *HgroupElement {
+	return e
+}
+
+func (e *HgroupElement) Contenteditable() *HgroupElement {
+	return e
+}
+
+func (e *HgroupElement) Id() *HgroupElement {
+	return e
+}
+
+func (e *HgroupElement) Slot() *HgroupElement {
+	return e
+}
+
 func (e *HgroupElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

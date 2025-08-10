@@ -33,6 +33,34 @@ func MeterIf(condition bool, children ...htemel.Node) *MeterElement {
 	}
 }
 
+func (e *MeterElement) Autocapitalize() *MeterElement {
+	return e
+}
+
+func (e *MeterElement) Autocorrect() *MeterElement {
+	return e
+}
+
+func (e *MeterElement) Autofocus() *MeterElement {
+	return e
+}
+
+func (e *MeterElement) Class() *MeterElement {
+	return e
+}
+
+func (e *MeterElement) Contenteditable() *MeterElement {
+	return e
+}
+
+func (e *MeterElement) Id() *MeterElement {
+	return e
+}
+
+func (e *MeterElement) Slot() *MeterElement {
+	return e
+}
+
 func (e *MeterElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

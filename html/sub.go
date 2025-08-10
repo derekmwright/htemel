@@ -33,6 +33,34 @@ func SubIf(condition bool, children ...htemel.Node) *SubElement {
 	}
 }
 
+func (e *SubElement) Autocapitalize() *SubElement {
+	return e
+}
+
+func (e *SubElement) Autocorrect() *SubElement {
+	return e
+}
+
+func (e *SubElement) Autofocus() *SubElement {
+	return e
+}
+
+func (e *SubElement) Class() *SubElement {
+	return e
+}
+
+func (e *SubElement) Contenteditable() *SubElement {
+	return e
+}
+
+func (e *SubElement) Id() *SubElement {
+	return e
+}
+
+func (e *SubElement) Slot() *SubElement {
+	return e
+}
+
 func (e *SubElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

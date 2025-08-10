@@ -33,6 +33,34 @@ func SelectedcontentIf(condition bool, children ...htemel.Node) *Selectedcontent
 	}
 }
 
+func (e *SelectedcontentElement) Autocapitalize() *SelectedcontentElement {
+	return e
+}
+
+func (e *SelectedcontentElement) Autocorrect() *SelectedcontentElement {
+	return e
+}
+
+func (e *SelectedcontentElement) Autofocus() *SelectedcontentElement {
+	return e
+}
+
+func (e *SelectedcontentElement) Class() *SelectedcontentElement {
+	return e
+}
+
+func (e *SelectedcontentElement) Contenteditable() *SelectedcontentElement {
+	return e
+}
+
+func (e *SelectedcontentElement) Id() *SelectedcontentElement {
+	return e
+}
+
+func (e *SelectedcontentElement) Slot() *SelectedcontentElement {
+	return e
+}
+
 func (e *SelectedcontentElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

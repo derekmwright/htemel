@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/derekmwright/htemel/internal/generators/elements"
+	"github.com/derekmwright/htemel/internal/generators/source"
 	"github.com/derekmwright/htemel/internal/generators/spec"
 )
 
@@ -19,14 +19,19 @@ func generate(pkg string, e *spec.Element) error {
 
 	buf := &bytes.Buffer{}
 
-	if err = elements.SourceHeader(
+	var funcs = []source.TemplateFunc{
+		source.BaseStruct,
+		source.BaseFunc,
+		source.BaseCondFunc,
+		source.BuildAttributes(e),
+		source.RenderFunc,
+	}
+
+	if err = source.SourceHeader(
 		buf,
 		"html",
 		e,
-		elements.BaseStruct,
-		elements.BaseFunc,
-		elements.BaseCondFunc,
-		elements.RenderFunc,
+		funcs...,
 	); err != nil {
 		return err
 	}
@@ -58,6 +63,8 @@ func main() {
 	}
 
 	for _, e := range sp.Elements {
+		// Merge global attributes into element
+		e.Attributes = append(e.Attributes, sp.Attributes...)
 		if err = generate(strings.ToLower(sp.Name), e); err != nil {
 			panic(err)
 		}

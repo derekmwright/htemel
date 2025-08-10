@@ -33,6 +33,34 @@ func FooterIf(condition bool, children ...htemel.Node) *FooterElement {
 	}
 }
 
+func (e *FooterElement) Autocapitalize() *FooterElement {
+	return e
+}
+
+func (e *FooterElement) Autocorrect() *FooterElement {
+	return e
+}
+
+func (e *FooterElement) Autofocus() *FooterElement {
+	return e
+}
+
+func (e *FooterElement) Class() *FooterElement {
+	return e
+}
+
+func (e *FooterElement) Contenteditable() *FooterElement {
+	return e
+}
+
+func (e *FooterElement) Id() *FooterElement {
+	return e
+}
+
+func (e *FooterElement) Slot() *FooterElement {
+	return e
+}
+
 func (e *FooterElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

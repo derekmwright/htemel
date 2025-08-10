@@ -33,6 +33,34 @@ func BdiIf(condition bool, children ...htemel.Node) *BdiElement {
 	}
 }
 
+func (e *BdiElement) Autocapitalize() *BdiElement {
+	return e
+}
+
+func (e *BdiElement) Autocorrect() *BdiElement {
+	return e
+}
+
+func (e *BdiElement) Autofocus() *BdiElement {
+	return e
+}
+
+func (e *BdiElement) Class() *BdiElement {
+	return e
+}
+
+func (e *BdiElement) Contenteditable() *BdiElement {
+	return e
+}
+
+func (e *BdiElement) Id() *BdiElement {
+	return e
+}
+
+func (e *BdiElement) Slot() *BdiElement {
+	return e
+}
+
 func (e *BdiElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

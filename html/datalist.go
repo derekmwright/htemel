@@ -33,6 +33,34 @@ func DatalistIf(condition bool, children ...htemel.Node) *DatalistElement {
 	}
 }
 
+func (e *DatalistElement) Autocapitalize() *DatalistElement {
+	return e
+}
+
+func (e *DatalistElement) Autocorrect() *DatalistElement {
+	return e
+}
+
+func (e *DatalistElement) Autofocus() *DatalistElement {
+	return e
+}
+
+func (e *DatalistElement) Class() *DatalistElement {
+	return e
+}
+
+func (e *DatalistElement) Contenteditable() *DatalistElement {
+	return e
+}
+
+func (e *DatalistElement) Id() *DatalistElement {
+	return e
+}
+
+func (e *DatalistElement) Slot() *DatalistElement {
+	return e
+}
+
 func (e *DatalistElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil

@@ -33,6 +33,34 @@ func TemplateIf(condition bool, children ...htemel.Node) *TemplateElement {
 	}
 }
 
+func (e *TemplateElement) Autocapitalize() *TemplateElement {
+	return e
+}
+
+func (e *TemplateElement) Autocorrect() *TemplateElement {
+	return e
+}
+
+func (e *TemplateElement) Autofocus() *TemplateElement {
+	return e
+}
+
+func (e *TemplateElement) Class() *TemplateElement {
+	return e
+}
+
+func (e *TemplateElement) Contenteditable() *TemplateElement {
+	return e
+}
+
+func (e *TemplateElement) Id() *TemplateElement {
+	return e
+}
+
+func (e *TemplateElement) Slot() *TemplateElement {
+	return e
+}
+
 func (e *TemplateElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
