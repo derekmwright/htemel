@@ -42,27 +42,27 @@ func AreaIf(condition bool, children ...htemel.Node) *AreaElement {
 type AreaAutocapitalizeAttrEnum string
 
 const (
-	AreaAutocapitalizeAttrEnumWords      AreaAutocapitalizeAttrEnum = "words"
-	AreaAutocapitalizeAttrEnumCharacters AreaAutocapitalizeAttrEnum = "characters"
 	AreaAutocapitalizeAttrEnumNone       AreaAutocapitalizeAttrEnum = "none"
 	AreaAutocapitalizeAttrEnumOff        AreaAutocapitalizeAttrEnum = "off"
 	AreaAutocapitalizeAttrEnumOn         AreaAutocapitalizeAttrEnum = "on"
 	AreaAutocapitalizeAttrEnumSentences  AreaAutocapitalizeAttrEnum = "sentences"
+	AreaAutocapitalizeAttrEnumWords      AreaAutocapitalizeAttrEnum = "words"
+	AreaAutocapitalizeAttrEnumCharacters AreaAutocapitalizeAttrEnum = "characters"
 )
 
 type AreaAutocorrectAttrEnum string
 
 const (
-	AreaAutocorrectAttrEnumOn  AreaAutocorrectAttrEnum = "on"
 	AreaAutocorrectAttrEnumOff AreaAutocorrectAttrEnum = "off"
+	AreaAutocorrectAttrEnumOn  AreaAutocorrectAttrEnum = "on"
 )
 
 type AreaContenteditableAttrEnum string
 
 const (
-	AreaContenteditableAttrEnumFalse         AreaContenteditableAttrEnum = "false"
 	AreaContenteditableAttrEnumPlaintextOnly AreaContenteditableAttrEnum = "plaintext-only"
 	AreaContenteditableAttrEnumTrue          AreaContenteditableAttrEnum = "true"
+	AreaContenteditableAttrEnumFalse         AreaContenteditableAttrEnum = "false"
 )
 
 type areaAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *AreaElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

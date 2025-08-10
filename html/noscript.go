@@ -42,12 +42,12 @@ func NoscriptIf(condition bool, children ...htemel.Node) *NoscriptElement {
 type NoscriptAutocapitalizeAttrEnum string
 
 const (
-	NoscriptAutocapitalizeAttrEnumSentences  NoscriptAutocapitalizeAttrEnum = "sentences"
-	NoscriptAutocapitalizeAttrEnumWords      NoscriptAutocapitalizeAttrEnum = "words"
 	NoscriptAutocapitalizeAttrEnumCharacters NoscriptAutocapitalizeAttrEnum = "characters"
 	NoscriptAutocapitalizeAttrEnumNone       NoscriptAutocapitalizeAttrEnum = "none"
 	NoscriptAutocapitalizeAttrEnumOff        NoscriptAutocapitalizeAttrEnum = "off"
 	NoscriptAutocapitalizeAttrEnumOn         NoscriptAutocapitalizeAttrEnum = "on"
+	NoscriptAutocapitalizeAttrEnumSentences  NoscriptAutocapitalizeAttrEnum = "sentences"
+	NoscriptAutocapitalizeAttrEnumWords      NoscriptAutocapitalizeAttrEnum = "words"
 )
 
 type NoscriptAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type NoscriptContenteditableAttrEnum string
 
 const (
+	NoscriptContenteditableAttrEnumTrue          NoscriptContenteditableAttrEnum = "true"
 	NoscriptContenteditableAttrEnumFalse         NoscriptContenteditableAttrEnum = "false"
 	NoscriptContenteditableAttrEnumPlaintextOnly NoscriptContenteditableAttrEnum = "plaintext-only"
-	NoscriptContenteditableAttrEnumTrue          NoscriptContenteditableAttrEnum = "true"
 )
 
 type noscriptAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *NoscriptElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,27 +42,27 @@ func FormIf(condition bool, children ...htemel.Node) *FormElement {
 type FormAutocapitalizeAttrEnum string
 
 const (
+	FormAutocapitalizeAttrEnumSentences  FormAutocapitalizeAttrEnum = "sentences"
+	FormAutocapitalizeAttrEnumWords      FormAutocapitalizeAttrEnum = "words"
 	FormAutocapitalizeAttrEnumCharacters FormAutocapitalizeAttrEnum = "characters"
 	FormAutocapitalizeAttrEnumNone       FormAutocapitalizeAttrEnum = "none"
 	FormAutocapitalizeAttrEnumOff        FormAutocapitalizeAttrEnum = "off"
 	FormAutocapitalizeAttrEnumOn         FormAutocapitalizeAttrEnum = "on"
-	FormAutocapitalizeAttrEnumSentences  FormAutocapitalizeAttrEnum = "sentences"
-	FormAutocapitalizeAttrEnumWords      FormAutocapitalizeAttrEnum = "words"
 )
 
 type FormAutocorrectAttrEnum string
 
 const (
-	FormAutocorrectAttrEnumOn  FormAutocorrectAttrEnum = "on"
 	FormAutocorrectAttrEnumOff FormAutocorrectAttrEnum = "off"
+	FormAutocorrectAttrEnumOn  FormAutocorrectAttrEnum = "on"
 )
 
 type FormContenteditableAttrEnum string
 
 const (
+	FormContenteditableAttrEnumTrue          FormContenteditableAttrEnum = "true"
 	FormContenteditableAttrEnumFalse         FormContenteditableAttrEnum = "false"
 	FormContenteditableAttrEnumPlaintextOnly FormContenteditableAttrEnum = "plaintext-only"
-	FormContenteditableAttrEnumTrue          FormContenteditableAttrEnum = "true"
 )
 
 type formAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *FormElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,19 +42,19 @@ func OlIf(condition bool, children ...htemel.Node) *OlElement {
 type OlAutocapitalizeAttrEnum string
 
 const (
-	OlAutocapitalizeAttrEnumCharacters OlAutocapitalizeAttrEnum = "characters"
 	OlAutocapitalizeAttrEnumNone       OlAutocapitalizeAttrEnum = "none"
 	OlAutocapitalizeAttrEnumOff        OlAutocapitalizeAttrEnum = "off"
 	OlAutocapitalizeAttrEnumOn         OlAutocapitalizeAttrEnum = "on"
 	OlAutocapitalizeAttrEnumSentences  OlAutocapitalizeAttrEnum = "sentences"
 	OlAutocapitalizeAttrEnumWords      OlAutocapitalizeAttrEnum = "words"
+	OlAutocapitalizeAttrEnumCharacters OlAutocapitalizeAttrEnum = "characters"
 )
 
 type OlAutocorrectAttrEnum string
 
 const (
-	OlAutocorrectAttrEnumOn  OlAutocorrectAttrEnum = "on"
 	OlAutocorrectAttrEnumOff OlAutocorrectAttrEnum = "off"
+	OlAutocorrectAttrEnumOn  OlAutocorrectAttrEnum = "on"
 )
 
 type OlContenteditableAttrEnum string
@@ -121,11 +121,17 @@ func (e *OlElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

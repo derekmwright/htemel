@@ -42,19 +42,19 @@ func ImgIf(condition bool, children ...htemel.Node) *ImgElement {
 type ImgAutocapitalizeAttrEnum string
 
 const (
-	ImgAutocapitalizeAttrEnumWords      ImgAutocapitalizeAttrEnum = "words"
-	ImgAutocapitalizeAttrEnumCharacters ImgAutocapitalizeAttrEnum = "characters"
 	ImgAutocapitalizeAttrEnumNone       ImgAutocapitalizeAttrEnum = "none"
 	ImgAutocapitalizeAttrEnumOff        ImgAutocapitalizeAttrEnum = "off"
 	ImgAutocapitalizeAttrEnumOn         ImgAutocapitalizeAttrEnum = "on"
 	ImgAutocapitalizeAttrEnumSentences  ImgAutocapitalizeAttrEnum = "sentences"
+	ImgAutocapitalizeAttrEnumWords      ImgAutocapitalizeAttrEnum = "words"
+	ImgAutocapitalizeAttrEnumCharacters ImgAutocapitalizeAttrEnum = "characters"
 )
 
 type ImgAutocorrectAttrEnum string
 
 const (
-	ImgAutocorrectAttrEnumOff ImgAutocorrectAttrEnum = "off"
 	ImgAutocorrectAttrEnumOn  ImgAutocorrectAttrEnum = "on"
+	ImgAutocorrectAttrEnumOff ImgAutocorrectAttrEnum = "off"
 )
 
 type ImgContenteditableAttrEnum string
@@ -121,11 +121,17 @@ func (e *ImgElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

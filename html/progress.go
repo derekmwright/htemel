@@ -42,27 +42,27 @@ func ProgressIf(condition bool, children ...htemel.Node) *ProgressElement {
 type ProgressAutocapitalizeAttrEnum string
 
 const (
-	ProgressAutocapitalizeAttrEnumNone       ProgressAutocapitalizeAttrEnum = "none"
-	ProgressAutocapitalizeAttrEnumOff        ProgressAutocapitalizeAttrEnum = "off"
-	ProgressAutocapitalizeAttrEnumOn         ProgressAutocapitalizeAttrEnum = "on"
 	ProgressAutocapitalizeAttrEnumSentences  ProgressAutocapitalizeAttrEnum = "sentences"
 	ProgressAutocapitalizeAttrEnumWords      ProgressAutocapitalizeAttrEnum = "words"
 	ProgressAutocapitalizeAttrEnumCharacters ProgressAutocapitalizeAttrEnum = "characters"
+	ProgressAutocapitalizeAttrEnumNone       ProgressAutocapitalizeAttrEnum = "none"
+	ProgressAutocapitalizeAttrEnumOff        ProgressAutocapitalizeAttrEnum = "off"
+	ProgressAutocapitalizeAttrEnumOn         ProgressAutocapitalizeAttrEnum = "on"
 )
 
 type ProgressAutocorrectAttrEnum string
 
 const (
-	ProgressAutocorrectAttrEnumOn  ProgressAutocorrectAttrEnum = "on"
 	ProgressAutocorrectAttrEnumOff ProgressAutocorrectAttrEnum = "off"
+	ProgressAutocorrectAttrEnumOn  ProgressAutocorrectAttrEnum = "on"
 )
 
 type ProgressContenteditableAttrEnum string
 
 const (
+	ProgressContenteditableAttrEnumFalse         ProgressContenteditableAttrEnum = "false"
 	ProgressContenteditableAttrEnumPlaintextOnly ProgressContenteditableAttrEnum = "plaintext-only"
 	ProgressContenteditableAttrEnumTrue          ProgressContenteditableAttrEnum = "true"
-	ProgressContenteditableAttrEnumFalse         ProgressContenteditableAttrEnum = "false"
 )
 
 type progressAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *ProgressElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

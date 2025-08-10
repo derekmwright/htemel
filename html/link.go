@@ -42,12 +42,12 @@ func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
 type LinkAutocapitalizeAttrEnum string
 
 const (
-	LinkAutocapitalizeAttrEnumOn         LinkAutocapitalizeAttrEnum = "on"
-	LinkAutocapitalizeAttrEnumSentences  LinkAutocapitalizeAttrEnum = "sentences"
-	LinkAutocapitalizeAttrEnumWords      LinkAutocapitalizeAttrEnum = "words"
 	LinkAutocapitalizeAttrEnumCharacters LinkAutocapitalizeAttrEnum = "characters"
 	LinkAutocapitalizeAttrEnumNone       LinkAutocapitalizeAttrEnum = "none"
 	LinkAutocapitalizeAttrEnumOff        LinkAutocapitalizeAttrEnum = "off"
+	LinkAutocapitalizeAttrEnumOn         LinkAutocapitalizeAttrEnum = "on"
+	LinkAutocapitalizeAttrEnumSentences  LinkAutocapitalizeAttrEnum = "sentences"
+	LinkAutocapitalizeAttrEnumWords      LinkAutocapitalizeAttrEnum = "words"
 )
 
 type LinkAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *LinkElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

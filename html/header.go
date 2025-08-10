@@ -42,19 +42,19 @@ func HeaderIf(condition bool, children ...htemel.Node) *HeaderElement {
 type HeaderAutocapitalizeAttrEnum string
 
 const (
-	HeaderAutocapitalizeAttrEnumCharacters HeaderAutocapitalizeAttrEnum = "characters"
-	HeaderAutocapitalizeAttrEnumNone       HeaderAutocapitalizeAttrEnum = "none"
-	HeaderAutocapitalizeAttrEnumOff        HeaderAutocapitalizeAttrEnum = "off"
 	HeaderAutocapitalizeAttrEnumOn         HeaderAutocapitalizeAttrEnum = "on"
 	HeaderAutocapitalizeAttrEnumSentences  HeaderAutocapitalizeAttrEnum = "sentences"
 	HeaderAutocapitalizeAttrEnumWords      HeaderAutocapitalizeAttrEnum = "words"
+	HeaderAutocapitalizeAttrEnumCharacters HeaderAutocapitalizeAttrEnum = "characters"
+	HeaderAutocapitalizeAttrEnumNone       HeaderAutocapitalizeAttrEnum = "none"
+	HeaderAutocapitalizeAttrEnumOff        HeaderAutocapitalizeAttrEnum = "off"
 )
 
 type HeaderAutocorrectAttrEnum string
 
 const (
-	HeaderAutocorrectAttrEnumOn  HeaderAutocorrectAttrEnum = "on"
 	HeaderAutocorrectAttrEnumOff HeaderAutocorrectAttrEnum = "off"
+	HeaderAutocorrectAttrEnumOn  HeaderAutocorrectAttrEnum = "on"
 )
 
 type HeaderContenteditableAttrEnum string
@@ -121,11 +121,17 @@ func (e *HeaderElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

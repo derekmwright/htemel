@@ -42,12 +42,12 @@ func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
 type EmbedAutocapitalizeAttrEnum string
 
 const (
-	EmbedAutocapitalizeAttrEnumOff        EmbedAutocapitalizeAttrEnum = "off"
-	EmbedAutocapitalizeAttrEnumOn         EmbedAutocapitalizeAttrEnum = "on"
 	EmbedAutocapitalizeAttrEnumSentences  EmbedAutocapitalizeAttrEnum = "sentences"
 	EmbedAutocapitalizeAttrEnumWords      EmbedAutocapitalizeAttrEnum = "words"
 	EmbedAutocapitalizeAttrEnumCharacters EmbedAutocapitalizeAttrEnum = "characters"
 	EmbedAutocapitalizeAttrEnumNone       EmbedAutocapitalizeAttrEnum = "none"
+	EmbedAutocapitalizeAttrEnumOff        EmbedAutocapitalizeAttrEnum = "off"
+	EmbedAutocapitalizeAttrEnumOn         EmbedAutocapitalizeAttrEnum = "on"
 )
 
 type EmbedAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *EmbedElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

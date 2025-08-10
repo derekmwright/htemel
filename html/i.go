@@ -42,12 +42,12 @@ func IIf(condition bool, children ...htemel.Node) *IElement {
 type IAutocapitalizeAttrEnum string
 
 const (
-	IAutocapitalizeAttrEnumCharacters IAutocapitalizeAttrEnum = "characters"
 	IAutocapitalizeAttrEnumNone       IAutocapitalizeAttrEnum = "none"
 	IAutocapitalizeAttrEnumOff        IAutocapitalizeAttrEnum = "off"
 	IAutocapitalizeAttrEnumOn         IAutocapitalizeAttrEnum = "on"
 	IAutocapitalizeAttrEnumSentences  IAutocapitalizeAttrEnum = "sentences"
 	IAutocapitalizeAttrEnumWords      IAutocapitalizeAttrEnum = "words"
+	IAutocapitalizeAttrEnumCharacters IAutocapitalizeAttrEnum = "characters"
 )
 
 type IAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type IContenteditableAttrEnum string
 
 const (
-	IContenteditableAttrEnumFalse         IContenteditableAttrEnum = "false"
 	IContenteditableAttrEnumPlaintextOnly IContenteditableAttrEnum = "plaintext-only"
 	IContenteditableAttrEnumTrue          IContenteditableAttrEnum = "true"
+	IContenteditableAttrEnumFalse         IContenteditableAttrEnum = "false"
 )
 
 type iAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *IElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

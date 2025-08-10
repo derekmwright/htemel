@@ -42,12 +42,12 @@ func MarkIf(condition bool, children ...htemel.Node) *MarkElement {
 type MarkAutocapitalizeAttrEnum string
 
 const (
+	MarkAutocapitalizeAttrEnumSentences  MarkAutocapitalizeAttrEnum = "sentences"
 	MarkAutocapitalizeAttrEnumWords      MarkAutocapitalizeAttrEnum = "words"
 	MarkAutocapitalizeAttrEnumCharacters MarkAutocapitalizeAttrEnum = "characters"
 	MarkAutocapitalizeAttrEnumNone       MarkAutocapitalizeAttrEnum = "none"
 	MarkAutocapitalizeAttrEnumOff        MarkAutocapitalizeAttrEnum = "off"
 	MarkAutocapitalizeAttrEnumOn         MarkAutocapitalizeAttrEnum = "on"
-	MarkAutocapitalizeAttrEnumSentences  MarkAutocapitalizeAttrEnum = "sentences"
 )
 
 type MarkAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type MarkContenteditableAttrEnum string
 
 const (
-	MarkContenteditableAttrEnumFalse         MarkContenteditableAttrEnum = "false"
 	MarkContenteditableAttrEnumPlaintextOnly MarkContenteditableAttrEnum = "plaintext-only"
 	MarkContenteditableAttrEnumTrue          MarkContenteditableAttrEnum = "true"
+	MarkContenteditableAttrEnumFalse         MarkContenteditableAttrEnum = "false"
 )
 
 type markAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *MarkElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

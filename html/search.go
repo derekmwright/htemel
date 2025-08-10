@@ -42,19 +42,19 @@ func SearchIf(condition bool, children ...htemel.Node) *SearchElement {
 type SearchAutocapitalizeAttrEnum string
 
 const (
-	SearchAutocapitalizeAttrEnumWords      SearchAutocapitalizeAttrEnum = "words"
 	SearchAutocapitalizeAttrEnumCharacters SearchAutocapitalizeAttrEnum = "characters"
 	SearchAutocapitalizeAttrEnumNone       SearchAutocapitalizeAttrEnum = "none"
 	SearchAutocapitalizeAttrEnumOff        SearchAutocapitalizeAttrEnum = "off"
 	SearchAutocapitalizeAttrEnumOn         SearchAutocapitalizeAttrEnum = "on"
 	SearchAutocapitalizeAttrEnumSentences  SearchAutocapitalizeAttrEnum = "sentences"
+	SearchAutocapitalizeAttrEnumWords      SearchAutocapitalizeAttrEnum = "words"
 )
 
 type SearchAutocorrectAttrEnum string
 
 const (
-	SearchAutocorrectAttrEnumOn  SearchAutocorrectAttrEnum = "on"
 	SearchAutocorrectAttrEnumOff SearchAutocorrectAttrEnum = "off"
+	SearchAutocorrectAttrEnumOn  SearchAutocorrectAttrEnum = "on"
 )
 
 type SearchContenteditableAttrEnum string
@@ -121,11 +121,17 @@ func (e *SearchElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

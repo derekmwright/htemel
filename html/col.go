@@ -42,12 +42,12 @@ func ColIf(condition bool, children ...htemel.Node) *ColElement {
 type ColAutocapitalizeAttrEnum string
 
 const (
+	ColAutocapitalizeAttrEnumOff        ColAutocapitalizeAttrEnum = "off"
 	ColAutocapitalizeAttrEnumOn         ColAutocapitalizeAttrEnum = "on"
 	ColAutocapitalizeAttrEnumSentences  ColAutocapitalizeAttrEnum = "sentences"
 	ColAutocapitalizeAttrEnumWords      ColAutocapitalizeAttrEnum = "words"
 	ColAutocapitalizeAttrEnumCharacters ColAutocapitalizeAttrEnum = "characters"
 	ColAutocapitalizeAttrEnumNone       ColAutocapitalizeAttrEnum = "none"
-	ColAutocapitalizeAttrEnumOff        ColAutocapitalizeAttrEnum = "off"
 )
 
 type ColAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type ColContenteditableAttrEnum string
 
 const (
+	ColContenteditableAttrEnumTrue          ColContenteditableAttrEnum = "true"
 	ColContenteditableAttrEnumFalse         ColContenteditableAttrEnum = "false"
 	ColContenteditableAttrEnumPlaintextOnly ColContenteditableAttrEnum = "plaintext-only"
-	ColContenteditableAttrEnumTrue          ColContenteditableAttrEnum = "true"
 )
 
 type colAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *ColElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,12 +42,12 @@ func ThIf(condition bool, children ...htemel.Node) *ThElement {
 type ThAutocapitalizeAttrEnum string
 
 const (
+	ThAutocapitalizeAttrEnumSentences  ThAutocapitalizeAttrEnum = "sentences"
+	ThAutocapitalizeAttrEnumWords      ThAutocapitalizeAttrEnum = "words"
 	ThAutocapitalizeAttrEnumCharacters ThAutocapitalizeAttrEnum = "characters"
 	ThAutocapitalizeAttrEnumNone       ThAutocapitalizeAttrEnum = "none"
 	ThAutocapitalizeAttrEnumOff        ThAutocapitalizeAttrEnum = "off"
 	ThAutocapitalizeAttrEnumOn         ThAutocapitalizeAttrEnum = "on"
-	ThAutocapitalizeAttrEnumSentences  ThAutocapitalizeAttrEnum = "sentences"
-	ThAutocapitalizeAttrEnumWords      ThAutocapitalizeAttrEnum = "words"
 )
 
 type ThAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *ThElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

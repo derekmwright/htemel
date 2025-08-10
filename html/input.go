@@ -42,27 +42,27 @@ func InputIf(condition bool, children ...htemel.Node) *InputElement {
 type InputAutocapitalizeAttrEnum string
 
 const (
-	InputAutocapitalizeAttrEnumNone       InputAutocapitalizeAttrEnum = "none"
-	InputAutocapitalizeAttrEnumOff        InputAutocapitalizeAttrEnum = "off"
-	InputAutocapitalizeAttrEnumOn         InputAutocapitalizeAttrEnum = "on"
 	InputAutocapitalizeAttrEnumSentences  InputAutocapitalizeAttrEnum = "sentences"
 	InputAutocapitalizeAttrEnumWords      InputAutocapitalizeAttrEnum = "words"
 	InputAutocapitalizeAttrEnumCharacters InputAutocapitalizeAttrEnum = "characters"
+	InputAutocapitalizeAttrEnumNone       InputAutocapitalizeAttrEnum = "none"
+	InputAutocapitalizeAttrEnumOff        InputAutocapitalizeAttrEnum = "off"
+	InputAutocapitalizeAttrEnumOn         InputAutocapitalizeAttrEnum = "on"
 )
 
 type InputAutocorrectAttrEnum string
 
 const (
-	InputAutocorrectAttrEnumOff InputAutocorrectAttrEnum = "off"
 	InputAutocorrectAttrEnumOn  InputAutocorrectAttrEnum = "on"
+	InputAutocorrectAttrEnumOff InputAutocorrectAttrEnum = "off"
 )
 
 type InputContenteditableAttrEnum string
 
 const (
-	InputContenteditableAttrEnumFalse         InputContenteditableAttrEnum = "false"
 	InputContenteditableAttrEnumPlaintextOnly InputContenteditableAttrEnum = "plaintext-only"
 	InputContenteditableAttrEnumTrue          InputContenteditableAttrEnum = "true"
+	InputContenteditableAttrEnumFalse         InputContenteditableAttrEnum = "false"
 )
 
 type inputAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *InputElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

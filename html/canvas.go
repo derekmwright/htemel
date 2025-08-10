@@ -42,12 +42,12 @@ func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 type CanvasAutocapitalizeAttrEnum string
 
 const (
-	CanvasAutocapitalizeAttrEnumCharacters CanvasAutocapitalizeAttrEnum = "characters"
-	CanvasAutocapitalizeAttrEnumNone       CanvasAutocapitalizeAttrEnum = "none"
-	CanvasAutocapitalizeAttrEnumOff        CanvasAutocapitalizeAttrEnum = "off"
 	CanvasAutocapitalizeAttrEnumOn         CanvasAutocapitalizeAttrEnum = "on"
 	CanvasAutocapitalizeAttrEnumSentences  CanvasAutocapitalizeAttrEnum = "sentences"
 	CanvasAutocapitalizeAttrEnumWords      CanvasAutocapitalizeAttrEnum = "words"
+	CanvasAutocapitalizeAttrEnumCharacters CanvasAutocapitalizeAttrEnum = "characters"
+	CanvasAutocapitalizeAttrEnumNone       CanvasAutocapitalizeAttrEnum = "none"
+	CanvasAutocapitalizeAttrEnumOff        CanvasAutocapitalizeAttrEnum = "off"
 )
 
 type CanvasAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type CanvasContenteditableAttrEnum string
 
 const (
+	CanvasContenteditableAttrEnumFalse         CanvasContenteditableAttrEnum = "false"
 	CanvasContenteditableAttrEnumPlaintextOnly CanvasContenteditableAttrEnum = "plaintext-only"
 	CanvasContenteditableAttrEnumTrue          CanvasContenteditableAttrEnum = "true"
-	CanvasContenteditableAttrEnumFalse         CanvasContenteditableAttrEnum = "false"
 )
 
 type canvasAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *CanvasElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

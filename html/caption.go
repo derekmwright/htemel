@@ -42,27 +42,27 @@ func CaptionIf(condition bool, children ...htemel.Node) *CaptionElement {
 type CaptionAutocapitalizeAttrEnum string
 
 const (
-	CaptionAutocapitalizeAttrEnumCharacters CaptionAutocapitalizeAttrEnum = "characters"
-	CaptionAutocapitalizeAttrEnumNone       CaptionAutocapitalizeAttrEnum = "none"
 	CaptionAutocapitalizeAttrEnumOff        CaptionAutocapitalizeAttrEnum = "off"
 	CaptionAutocapitalizeAttrEnumOn         CaptionAutocapitalizeAttrEnum = "on"
 	CaptionAutocapitalizeAttrEnumSentences  CaptionAutocapitalizeAttrEnum = "sentences"
 	CaptionAutocapitalizeAttrEnumWords      CaptionAutocapitalizeAttrEnum = "words"
+	CaptionAutocapitalizeAttrEnumCharacters CaptionAutocapitalizeAttrEnum = "characters"
+	CaptionAutocapitalizeAttrEnumNone       CaptionAutocapitalizeAttrEnum = "none"
 )
 
 type CaptionAutocorrectAttrEnum string
 
 const (
-	CaptionAutocorrectAttrEnumOff CaptionAutocorrectAttrEnum = "off"
 	CaptionAutocorrectAttrEnumOn  CaptionAutocorrectAttrEnum = "on"
+	CaptionAutocorrectAttrEnumOff CaptionAutocorrectAttrEnum = "off"
 )
 
 type CaptionContenteditableAttrEnum string
 
 const (
+	CaptionContenteditableAttrEnumFalse         CaptionContenteditableAttrEnum = "false"
 	CaptionContenteditableAttrEnumPlaintextOnly CaptionContenteditableAttrEnum = "plaintext-only"
 	CaptionContenteditableAttrEnumTrue          CaptionContenteditableAttrEnum = "true"
-	CaptionContenteditableAttrEnumFalse         CaptionContenteditableAttrEnum = "false"
 )
 
 type captionAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *CaptionElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

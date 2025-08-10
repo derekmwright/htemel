@@ -42,12 +42,12 @@ func CiteIf(condition bool, children ...htemel.Node) *CiteElement {
 type CiteAutocapitalizeAttrEnum string
 
 const (
+	CiteAutocapitalizeAttrEnumSentences  CiteAutocapitalizeAttrEnum = "sentences"
 	CiteAutocapitalizeAttrEnumWords      CiteAutocapitalizeAttrEnum = "words"
 	CiteAutocapitalizeAttrEnumCharacters CiteAutocapitalizeAttrEnum = "characters"
 	CiteAutocapitalizeAttrEnumNone       CiteAutocapitalizeAttrEnum = "none"
 	CiteAutocapitalizeAttrEnumOff        CiteAutocapitalizeAttrEnum = "off"
 	CiteAutocapitalizeAttrEnumOn         CiteAutocapitalizeAttrEnum = "on"
-	CiteAutocapitalizeAttrEnumSentences  CiteAutocapitalizeAttrEnum = "sentences"
 )
 
 type CiteAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *CiteElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

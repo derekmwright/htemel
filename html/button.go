@@ -42,19 +42,19 @@ func ButtonIf(condition bool, children ...htemel.Node) *ButtonElement {
 type ButtonAutocapitalizeAttrEnum string
 
 const (
+	ButtonAutocapitalizeAttrEnumCharacters ButtonAutocapitalizeAttrEnum = "characters"
+	ButtonAutocapitalizeAttrEnumNone       ButtonAutocapitalizeAttrEnum = "none"
 	ButtonAutocapitalizeAttrEnumOff        ButtonAutocapitalizeAttrEnum = "off"
 	ButtonAutocapitalizeAttrEnumOn         ButtonAutocapitalizeAttrEnum = "on"
 	ButtonAutocapitalizeAttrEnumSentences  ButtonAutocapitalizeAttrEnum = "sentences"
 	ButtonAutocapitalizeAttrEnumWords      ButtonAutocapitalizeAttrEnum = "words"
-	ButtonAutocapitalizeAttrEnumCharacters ButtonAutocapitalizeAttrEnum = "characters"
-	ButtonAutocapitalizeAttrEnumNone       ButtonAutocapitalizeAttrEnum = "none"
 )
 
 type ButtonAutocorrectAttrEnum string
 
 const (
-	ButtonAutocorrectAttrEnumOn  ButtonAutocorrectAttrEnum = "on"
 	ButtonAutocorrectAttrEnumOff ButtonAutocorrectAttrEnum = "off"
+	ButtonAutocorrectAttrEnumOn  ButtonAutocorrectAttrEnum = "on"
 )
 
 type ButtonContenteditableAttrEnum string
@@ -121,11 +121,17 @@ func (e *ButtonElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

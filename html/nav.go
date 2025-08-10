@@ -42,12 +42,12 @@ func NavIf(condition bool, children ...htemel.Node) *NavElement {
 type NavAutocapitalizeAttrEnum string
 
 const (
+	NavAutocapitalizeAttrEnumOn         NavAutocapitalizeAttrEnum = "on"
 	NavAutocapitalizeAttrEnumSentences  NavAutocapitalizeAttrEnum = "sentences"
 	NavAutocapitalizeAttrEnumWords      NavAutocapitalizeAttrEnum = "words"
 	NavAutocapitalizeAttrEnumCharacters NavAutocapitalizeAttrEnum = "characters"
 	NavAutocapitalizeAttrEnumNone       NavAutocapitalizeAttrEnum = "none"
 	NavAutocapitalizeAttrEnumOff        NavAutocapitalizeAttrEnum = "off"
-	NavAutocapitalizeAttrEnumOn         NavAutocapitalizeAttrEnum = "on"
 )
 
 type NavAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type NavContenteditableAttrEnum string
 
 const (
+	NavContenteditableAttrEnumFalse         NavContenteditableAttrEnum = "false"
 	NavContenteditableAttrEnumPlaintextOnly NavContenteditableAttrEnum = "plaintext-only"
 	NavContenteditableAttrEnumTrue          NavContenteditableAttrEnum = "true"
-	NavContenteditableAttrEnumFalse         NavContenteditableAttrEnum = "false"
 )
 
 type navAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *NavElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

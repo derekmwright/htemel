@@ -42,12 +42,12 @@ func HrIf(condition bool, children ...htemel.Node) *HrElement {
 type HrAutocapitalizeAttrEnum string
 
 const (
+	HrAutocapitalizeAttrEnumCharacters HrAutocapitalizeAttrEnum = "characters"
 	HrAutocapitalizeAttrEnumNone       HrAutocapitalizeAttrEnum = "none"
 	HrAutocapitalizeAttrEnumOff        HrAutocapitalizeAttrEnum = "off"
 	HrAutocapitalizeAttrEnumOn         HrAutocapitalizeAttrEnum = "on"
 	HrAutocapitalizeAttrEnumSentences  HrAutocapitalizeAttrEnum = "sentences"
 	HrAutocapitalizeAttrEnumWords      HrAutocapitalizeAttrEnum = "words"
-	HrAutocapitalizeAttrEnumCharacters HrAutocapitalizeAttrEnum = "characters"
 )
 
 type HrAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type HrContenteditableAttrEnum string
 
 const (
-	HrContenteditableAttrEnumTrue          HrContenteditableAttrEnum = "true"
 	HrContenteditableAttrEnumFalse         HrContenteditableAttrEnum = "false"
 	HrContenteditableAttrEnumPlaintextOnly HrContenteditableAttrEnum = "plaintext-only"
+	HrContenteditableAttrEnumTrue          HrContenteditableAttrEnum = "true"
 )
 
 type hrAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *HrElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,12 +42,12 @@ func ArticleIf(condition bool, children ...htemel.Node) *ArticleElement {
 type ArticleAutocapitalizeAttrEnum string
 
 const (
-	ArticleAutocapitalizeAttrEnumCharacters ArticleAutocapitalizeAttrEnum = "characters"
-	ArticleAutocapitalizeAttrEnumNone       ArticleAutocapitalizeAttrEnum = "none"
 	ArticleAutocapitalizeAttrEnumOff        ArticleAutocapitalizeAttrEnum = "off"
 	ArticleAutocapitalizeAttrEnumOn         ArticleAutocapitalizeAttrEnum = "on"
 	ArticleAutocapitalizeAttrEnumSentences  ArticleAutocapitalizeAttrEnum = "sentences"
 	ArticleAutocapitalizeAttrEnumWords      ArticleAutocapitalizeAttrEnum = "words"
+	ArticleAutocapitalizeAttrEnumCharacters ArticleAutocapitalizeAttrEnum = "characters"
+	ArticleAutocapitalizeAttrEnumNone       ArticleAutocapitalizeAttrEnum = "none"
 )
 
 type ArticleAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type ArticleContenteditableAttrEnum string
 
 const (
-	ArticleContenteditableAttrEnumFalse         ArticleContenteditableAttrEnum = "false"
 	ArticleContenteditableAttrEnumPlaintextOnly ArticleContenteditableAttrEnum = "plaintext-only"
 	ArticleContenteditableAttrEnumTrue          ArticleContenteditableAttrEnum = "true"
+	ArticleContenteditableAttrEnumFalse         ArticleContenteditableAttrEnum = "false"
 )
 
 type articleAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *ArticleElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

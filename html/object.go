@@ -42,12 +42,12 @@ func ObjectIf(condition bool, children ...htemel.Node) *ObjectElement {
 type ObjectAutocapitalizeAttrEnum string
 
 const (
+	ObjectAutocapitalizeAttrEnumSentences  ObjectAutocapitalizeAttrEnum = "sentences"
+	ObjectAutocapitalizeAttrEnumWords      ObjectAutocapitalizeAttrEnum = "words"
 	ObjectAutocapitalizeAttrEnumCharacters ObjectAutocapitalizeAttrEnum = "characters"
 	ObjectAutocapitalizeAttrEnumNone       ObjectAutocapitalizeAttrEnum = "none"
 	ObjectAutocapitalizeAttrEnumOff        ObjectAutocapitalizeAttrEnum = "off"
 	ObjectAutocapitalizeAttrEnumOn         ObjectAutocapitalizeAttrEnum = "on"
-	ObjectAutocapitalizeAttrEnumSentences  ObjectAutocapitalizeAttrEnum = "sentences"
-	ObjectAutocapitalizeAttrEnumWords      ObjectAutocapitalizeAttrEnum = "words"
 )
 
 type ObjectAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *ObjectElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,27 +42,27 @@ func BlockquoteIf(condition bool, children ...htemel.Node) *BlockquoteElement {
 type BlockquoteAutocapitalizeAttrEnum string
 
 const (
+	BlockquoteAutocapitalizeAttrEnumWords      BlockquoteAutocapitalizeAttrEnum = "words"
 	BlockquoteAutocapitalizeAttrEnumCharacters BlockquoteAutocapitalizeAttrEnum = "characters"
 	BlockquoteAutocapitalizeAttrEnumNone       BlockquoteAutocapitalizeAttrEnum = "none"
 	BlockquoteAutocapitalizeAttrEnumOff        BlockquoteAutocapitalizeAttrEnum = "off"
 	BlockquoteAutocapitalizeAttrEnumOn         BlockquoteAutocapitalizeAttrEnum = "on"
 	BlockquoteAutocapitalizeAttrEnumSentences  BlockquoteAutocapitalizeAttrEnum = "sentences"
-	BlockquoteAutocapitalizeAttrEnumWords      BlockquoteAutocapitalizeAttrEnum = "words"
 )
 
 type BlockquoteAutocorrectAttrEnum string
 
 const (
-	BlockquoteAutocorrectAttrEnumOff BlockquoteAutocorrectAttrEnum = "off"
 	BlockquoteAutocorrectAttrEnumOn  BlockquoteAutocorrectAttrEnum = "on"
+	BlockquoteAutocorrectAttrEnumOff BlockquoteAutocorrectAttrEnum = "off"
 )
 
 type BlockquoteContenteditableAttrEnum string
 
 const (
+	BlockquoteContenteditableAttrEnumTrue          BlockquoteContenteditableAttrEnum = "true"
 	BlockquoteContenteditableAttrEnumFalse         BlockquoteContenteditableAttrEnum = "false"
 	BlockquoteContenteditableAttrEnumPlaintextOnly BlockquoteContenteditableAttrEnum = "plaintext-only"
-	BlockquoteContenteditableAttrEnumTrue          BlockquoteContenteditableAttrEnum = "true"
 )
 
 type blockquoteAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *BlockquoteElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

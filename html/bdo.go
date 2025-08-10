@@ -42,12 +42,12 @@ func BdoIf(condition bool, children ...htemel.Node) *BdoElement {
 type BdoAutocapitalizeAttrEnum string
 
 const (
-	BdoAutocapitalizeAttrEnumOn         BdoAutocapitalizeAttrEnum = "on"
-	BdoAutocapitalizeAttrEnumSentences  BdoAutocapitalizeAttrEnum = "sentences"
-	BdoAutocapitalizeAttrEnumWords      BdoAutocapitalizeAttrEnum = "words"
 	BdoAutocapitalizeAttrEnumCharacters BdoAutocapitalizeAttrEnum = "characters"
 	BdoAutocapitalizeAttrEnumNone       BdoAutocapitalizeAttrEnum = "none"
 	BdoAutocapitalizeAttrEnumOff        BdoAutocapitalizeAttrEnum = "off"
+	BdoAutocapitalizeAttrEnumOn         BdoAutocapitalizeAttrEnum = "on"
+	BdoAutocapitalizeAttrEnumSentences  BdoAutocapitalizeAttrEnum = "sentences"
+	BdoAutocapitalizeAttrEnumWords      BdoAutocapitalizeAttrEnum = "words"
 )
 
 type BdoAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type BdoContenteditableAttrEnum string
 
 const (
-	BdoContenteditableAttrEnumTrue          BdoContenteditableAttrEnum = "true"
 	BdoContenteditableAttrEnumFalse         BdoContenteditableAttrEnum = "false"
 	BdoContenteditableAttrEnumPlaintextOnly BdoContenteditableAttrEnum = "plaintext-only"
+	BdoContenteditableAttrEnumTrue          BdoContenteditableAttrEnum = "true"
 )
 
 type bdoAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *BdoElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

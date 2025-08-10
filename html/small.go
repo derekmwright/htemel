@@ -42,12 +42,12 @@ func SmallIf(condition bool, children ...htemel.Node) *SmallElement {
 type SmallAutocapitalizeAttrEnum string
 
 const (
-	SmallAutocapitalizeAttrEnumCharacters SmallAutocapitalizeAttrEnum = "characters"
-	SmallAutocapitalizeAttrEnumNone       SmallAutocapitalizeAttrEnum = "none"
-	SmallAutocapitalizeAttrEnumOff        SmallAutocapitalizeAttrEnum = "off"
 	SmallAutocapitalizeAttrEnumOn         SmallAutocapitalizeAttrEnum = "on"
 	SmallAutocapitalizeAttrEnumSentences  SmallAutocapitalizeAttrEnum = "sentences"
 	SmallAutocapitalizeAttrEnumWords      SmallAutocapitalizeAttrEnum = "words"
+	SmallAutocapitalizeAttrEnumCharacters SmallAutocapitalizeAttrEnum = "characters"
+	SmallAutocapitalizeAttrEnumNone       SmallAutocapitalizeAttrEnum = "none"
+	SmallAutocapitalizeAttrEnumOff        SmallAutocapitalizeAttrEnum = "off"
 )
 
 type SmallAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *SmallElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

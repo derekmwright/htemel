@@ -42,27 +42,27 @@ func UlIf(condition bool, children ...htemel.Node) *UlElement {
 type UlAutocapitalizeAttrEnum string
 
 const (
-	UlAutocapitalizeAttrEnumNone       UlAutocapitalizeAttrEnum = "none"
 	UlAutocapitalizeAttrEnumOff        UlAutocapitalizeAttrEnum = "off"
 	UlAutocapitalizeAttrEnumOn         UlAutocapitalizeAttrEnum = "on"
 	UlAutocapitalizeAttrEnumSentences  UlAutocapitalizeAttrEnum = "sentences"
 	UlAutocapitalizeAttrEnumWords      UlAutocapitalizeAttrEnum = "words"
 	UlAutocapitalizeAttrEnumCharacters UlAutocapitalizeAttrEnum = "characters"
+	UlAutocapitalizeAttrEnumNone       UlAutocapitalizeAttrEnum = "none"
 )
 
 type UlAutocorrectAttrEnum string
 
 const (
-	UlAutocorrectAttrEnumOff UlAutocorrectAttrEnum = "off"
 	UlAutocorrectAttrEnumOn  UlAutocorrectAttrEnum = "on"
+	UlAutocorrectAttrEnumOff UlAutocorrectAttrEnum = "off"
 )
 
 type UlContenteditableAttrEnum string
 
 const (
+	UlContenteditableAttrEnumTrue          UlContenteditableAttrEnum = "true"
 	UlContenteditableAttrEnumFalse         UlContenteditableAttrEnum = "false"
 	UlContenteditableAttrEnumPlaintextOnly UlContenteditableAttrEnum = "plaintext-only"
-	UlContenteditableAttrEnumTrue          UlContenteditableAttrEnum = "true"
 )
 
 type ulAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *UlElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

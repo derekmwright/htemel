@@ -42,12 +42,12 @@ func TfootIf(condition bool, children ...htemel.Node) *TfootElement {
 type TfootAutocapitalizeAttrEnum string
 
 const (
+	TfootAutocapitalizeAttrEnumOff        TfootAutocapitalizeAttrEnum = "off"
+	TfootAutocapitalizeAttrEnumOn         TfootAutocapitalizeAttrEnum = "on"
 	TfootAutocapitalizeAttrEnumSentences  TfootAutocapitalizeAttrEnum = "sentences"
 	TfootAutocapitalizeAttrEnumWords      TfootAutocapitalizeAttrEnum = "words"
 	TfootAutocapitalizeAttrEnumCharacters TfootAutocapitalizeAttrEnum = "characters"
 	TfootAutocapitalizeAttrEnumNone       TfootAutocapitalizeAttrEnum = "none"
-	TfootAutocapitalizeAttrEnumOff        TfootAutocapitalizeAttrEnum = "off"
-	TfootAutocapitalizeAttrEnumOn         TfootAutocapitalizeAttrEnum = "on"
 )
 
 type TfootAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type TfootContenteditableAttrEnum string
 
 const (
+	TfootContenteditableAttrEnumTrue          TfootContenteditableAttrEnum = "true"
 	TfootContenteditableAttrEnumFalse         TfootContenteditableAttrEnum = "false"
 	TfootContenteditableAttrEnumPlaintextOnly TfootContenteditableAttrEnum = "plaintext-only"
-	TfootContenteditableAttrEnumTrue          TfootContenteditableAttrEnum = "true"
 )
 
 type tfootAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *TfootElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

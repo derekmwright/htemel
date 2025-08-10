@@ -42,12 +42,12 @@ func FooterIf(condition bool, children ...htemel.Node) *FooterElement {
 type FooterAutocapitalizeAttrEnum string
 
 const (
+	FooterAutocapitalizeAttrEnumCharacters FooterAutocapitalizeAttrEnum = "characters"
 	FooterAutocapitalizeAttrEnumNone       FooterAutocapitalizeAttrEnum = "none"
 	FooterAutocapitalizeAttrEnumOff        FooterAutocapitalizeAttrEnum = "off"
 	FooterAutocapitalizeAttrEnumOn         FooterAutocapitalizeAttrEnum = "on"
 	FooterAutocapitalizeAttrEnumSentences  FooterAutocapitalizeAttrEnum = "sentences"
 	FooterAutocapitalizeAttrEnumWords      FooterAutocapitalizeAttrEnum = "words"
-	FooterAutocapitalizeAttrEnumCharacters FooterAutocapitalizeAttrEnum = "characters"
 )
 
 type FooterAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type FooterContenteditableAttrEnum string
 
 const (
+	FooterContenteditableAttrEnumFalse         FooterContenteditableAttrEnum = "false"
 	FooterContenteditableAttrEnumPlaintextOnly FooterContenteditableAttrEnum = "plaintext-only"
 	FooterContenteditableAttrEnumTrue          FooterContenteditableAttrEnum = "true"
-	FooterContenteditableAttrEnumFalse         FooterContenteditableAttrEnum = "false"
 )
 
 type footerAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *FooterElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,12 +42,12 @@ func TimeIf(condition bool, children ...htemel.Node) *TimeElement {
 type TimeAutocapitalizeAttrEnum string
 
 const (
-	TimeAutocapitalizeAttrEnumWords      TimeAutocapitalizeAttrEnum = "words"
 	TimeAutocapitalizeAttrEnumCharacters TimeAutocapitalizeAttrEnum = "characters"
 	TimeAutocapitalizeAttrEnumNone       TimeAutocapitalizeAttrEnum = "none"
 	TimeAutocapitalizeAttrEnumOff        TimeAutocapitalizeAttrEnum = "off"
 	TimeAutocapitalizeAttrEnumOn         TimeAutocapitalizeAttrEnum = "on"
 	TimeAutocapitalizeAttrEnumSentences  TimeAutocapitalizeAttrEnum = "sentences"
+	TimeAutocapitalizeAttrEnumWords      TimeAutocapitalizeAttrEnum = "words"
 )
 
 type TimeAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *TimeElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

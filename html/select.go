@@ -42,12 +42,12 @@ func SelectIf(condition bool, children ...htemel.Node) *SelectElement {
 type SelectAutocapitalizeAttrEnum string
 
 const (
-	SelectAutocapitalizeAttrEnumOn         SelectAutocapitalizeAttrEnum = "on"
-	SelectAutocapitalizeAttrEnumSentences  SelectAutocapitalizeAttrEnum = "sentences"
-	SelectAutocapitalizeAttrEnumWords      SelectAutocapitalizeAttrEnum = "words"
 	SelectAutocapitalizeAttrEnumCharacters SelectAutocapitalizeAttrEnum = "characters"
 	SelectAutocapitalizeAttrEnumNone       SelectAutocapitalizeAttrEnum = "none"
 	SelectAutocapitalizeAttrEnumOff        SelectAutocapitalizeAttrEnum = "off"
+	SelectAutocapitalizeAttrEnumOn         SelectAutocapitalizeAttrEnum = "on"
+	SelectAutocapitalizeAttrEnumSentences  SelectAutocapitalizeAttrEnum = "sentences"
+	SelectAutocapitalizeAttrEnumWords      SelectAutocapitalizeAttrEnum = "words"
 )
 
 type SelectAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type SelectContenteditableAttrEnum string
 
 const (
-	SelectContenteditableAttrEnumTrue          SelectContenteditableAttrEnum = "true"
 	SelectContenteditableAttrEnumFalse         SelectContenteditableAttrEnum = "false"
 	SelectContenteditableAttrEnumPlaintextOnly SelectContenteditableAttrEnum = "plaintext-only"
+	SelectContenteditableAttrEnumTrue          SelectContenteditableAttrEnum = "true"
 )
 
 type selectAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *SelectElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

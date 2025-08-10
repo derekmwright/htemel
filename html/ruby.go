@@ -42,12 +42,12 @@ func RubyIf(condition bool, children ...htemel.Node) *RubyElement {
 type RubyAutocapitalizeAttrEnum string
 
 const (
+	RubyAutocapitalizeAttrEnumOn         RubyAutocapitalizeAttrEnum = "on"
 	RubyAutocapitalizeAttrEnumSentences  RubyAutocapitalizeAttrEnum = "sentences"
 	RubyAutocapitalizeAttrEnumWords      RubyAutocapitalizeAttrEnum = "words"
 	RubyAutocapitalizeAttrEnumCharacters RubyAutocapitalizeAttrEnum = "characters"
 	RubyAutocapitalizeAttrEnumNone       RubyAutocapitalizeAttrEnum = "none"
 	RubyAutocapitalizeAttrEnumOff        RubyAutocapitalizeAttrEnum = "off"
-	RubyAutocapitalizeAttrEnumOn         RubyAutocapitalizeAttrEnum = "on"
 )
 
 type RubyAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type RubyContenteditableAttrEnum string
 
 const (
+	RubyContenteditableAttrEnumFalse         RubyContenteditableAttrEnum = "false"
 	RubyContenteditableAttrEnumPlaintextOnly RubyContenteditableAttrEnum = "plaintext-only"
 	RubyContenteditableAttrEnumTrue          RubyContenteditableAttrEnum = "true"
-	RubyContenteditableAttrEnumFalse         RubyContenteditableAttrEnum = "false"
 )
 
 type rubyAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *RubyElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,27 +42,27 @@ func KbdIf(condition bool, children ...htemel.Node) *KbdElement {
 type KbdAutocapitalizeAttrEnum string
 
 const (
-	KbdAutocapitalizeAttrEnumNone       KbdAutocapitalizeAttrEnum = "none"
-	KbdAutocapitalizeAttrEnumOff        KbdAutocapitalizeAttrEnum = "off"
-	KbdAutocapitalizeAttrEnumOn         KbdAutocapitalizeAttrEnum = "on"
 	KbdAutocapitalizeAttrEnumSentences  KbdAutocapitalizeAttrEnum = "sentences"
 	KbdAutocapitalizeAttrEnumWords      KbdAutocapitalizeAttrEnum = "words"
 	KbdAutocapitalizeAttrEnumCharacters KbdAutocapitalizeAttrEnum = "characters"
+	KbdAutocapitalizeAttrEnumNone       KbdAutocapitalizeAttrEnum = "none"
+	KbdAutocapitalizeAttrEnumOff        KbdAutocapitalizeAttrEnum = "off"
+	KbdAutocapitalizeAttrEnumOn         KbdAutocapitalizeAttrEnum = "on"
 )
 
 type KbdAutocorrectAttrEnum string
 
 const (
-	KbdAutocorrectAttrEnumOn  KbdAutocorrectAttrEnum = "on"
 	KbdAutocorrectAttrEnumOff KbdAutocorrectAttrEnum = "off"
+	KbdAutocorrectAttrEnumOn  KbdAutocorrectAttrEnum = "on"
 )
 
 type KbdContenteditableAttrEnum string
 
 const (
-	KbdContenteditableAttrEnumTrue          KbdContenteditableAttrEnum = "true"
 	KbdContenteditableAttrEnumFalse         KbdContenteditableAttrEnum = "false"
 	KbdContenteditableAttrEnumPlaintextOnly KbdContenteditableAttrEnum = "plaintext-only"
+	KbdContenteditableAttrEnumTrue          KbdContenteditableAttrEnum = "true"
 )
 
 type kbdAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *KbdElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,12 +42,12 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 type DelAutocapitalizeAttrEnum string
 
 const (
+	DelAutocapitalizeAttrEnumOff        DelAutocapitalizeAttrEnum = "off"
+	DelAutocapitalizeAttrEnumOn         DelAutocapitalizeAttrEnum = "on"
 	DelAutocapitalizeAttrEnumSentences  DelAutocapitalizeAttrEnum = "sentences"
 	DelAutocapitalizeAttrEnumWords      DelAutocapitalizeAttrEnum = "words"
 	DelAutocapitalizeAttrEnumCharacters DelAutocapitalizeAttrEnum = "characters"
 	DelAutocapitalizeAttrEnumNone       DelAutocapitalizeAttrEnum = "none"
-	DelAutocapitalizeAttrEnumOff        DelAutocapitalizeAttrEnum = "off"
-	DelAutocapitalizeAttrEnumOn         DelAutocapitalizeAttrEnum = "on"
 )
 
 type DelAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *DelElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,12 +42,12 @@ func BaseIf(condition bool, children ...htemel.Node) *BaseElement {
 type BaseAutocapitalizeAttrEnum string
 
 const (
+	BaseAutocapitalizeAttrEnumOn         BaseAutocapitalizeAttrEnum = "on"
 	BaseAutocapitalizeAttrEnumSentences  BaseAutocapitalizeAttrEnum = "sentences"
 	BaseAutocapitalizeAttrEnumWords      BaseAutocapitalizeAttrEnum = "words"
 	BaseAutocapitalizeAttrEnumCharacters BaseAutocapitalizeAttrEnum = "characters"
 	BaseAutocapitalizeAttrEnumNone       BaseAutocapitalizeAttrEnum = "none"
 	BaseAutocapitalizeAttrEnumOff        BaseAutocapitalizeAttrEnum = "off"
-	BaseAutocapitalizeAttrEnumOn         BaseAutocapitalizeAttrEnum = "on"
 )
 
 type BaseAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type BaseContenteditableAttrEnum string
 
 const (
+	BaseContenteditableAttrEnumFalse         BaseContenteditableAttrEnum = "false"
 	BaseContenteditableAttrEnumPlaintextOnly BaseContenteditableAttrEnum = "plaintext-only"
 	BaseContenteditableAttrEnumTrue          BaseContenteditableAttrEnum = "true"
-	BaseContenteditableAttrEnumFalse         BaseContenteditableAttrEnum = "false"
 )
 
 type baseAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *BaseElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,12 +42,12 @@ func RpIf(condition bool, children ...htemel.Node) *RpElement {
 type RpAutocapitalizeAttrEnum string
 
 const (
-	RpAutocapitalizeAttrEnumOff        RpAutocapitalizeAttrEnum = "off"
-	RpAutocapitalizeAttrEnumOn         RpAutocapitalizeAttrEnum = "on"
 	RpAutocapitalizeAttrEnumSentences  RpAutocapitalizeAttrEnum = "sentences"
 	RpAutocapitalizeAttrEnumWords      RpAutocapitalizeAttrEnum = "words"
 	RpAutocapitalizeAttrEnumCharacters RpAutocapitalizeAttrEnum = "characters"
 	RpAutocapitalizeAttrEnumNone       RpAutocapitalizeAttrEnum = "none"
+	RpAutocapitalizeAttrEnumOff        RpAutocapitalizeAttrEnum = "off"
+	RpAutocapitalizeAttrEnumOn         RpAutocapitalizeAttrEnum = "on"
 )
 
 type RpAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *RpElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

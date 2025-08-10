@@ -42,27 +42,27 @@ func EmIf(condition bool, children ...htemel.Node) *EmElement {
 type EmAutocapitalizeAttrEnum string
 
 const (
-	EmAutocapitalizeAttrEnumWords      EmAutocapitalizeAttrEnum = "words"
 	EmAutocapitalizeAttrEnumCharacters EmAutocapitalizeAttrEnum = "characters"
 	EmAutocapitalizeAttrEnumNone       EmAutocapitalizeAttrEnum = "none"
 	EmAutocapitalizeAttrEnumOff        EmAutocapitalizeAttrEnum = "off"
 	EmAutocapitalizeAttrEnumOn         EmAutocapitalizeAttrEnum = "on"
 	EmAutocapitalizeAttrEnumSentences  EmAutocapitalizeAttrEnum = "sentences"
+	EmAutocapitalizeAttrEnumWords      EmAutocapitalizeAttrEnum = "words"
 )
 
 type EmAutocorrectAttrEnum string
 
 const (
-	EmAutocorrectAttrEnumOn  EmAutocorrectAttrEnum = "on"
 	EmAutocorrectAttrEnumOff EmAutocorrectAttrEnum = "off"
+	EmAutocorrectAttrEnumOn  EmAutocorrectAttrEnum = "on"
 )
 
 type EmContenteditableAttrEnum string
 
 const (
+	EmContenteditableAttrEnumFalse         EmContenteditableAttrEnum = "false"
 	EmContenteditableAttrEnumPlaintextOnly EmContenteditableAttrEnum = "plaintext-only"
 	EmContenteditableAttrEnumTrue          EmContenteditableAttrEnum = "true"
-	EmContenteditableAttrEnumFalse         EmContenteditableAttrEnum = "false"
 )
 
 type emAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *EmElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

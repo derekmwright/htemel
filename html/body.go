@@ -42,19 +42,19 @@ func BodyIf(condition bool, children ...htemel.Node) *BodyElement {
 type BodyAutocapitalizeAttrEnum string
 
 const (
-	BodyAutocapitalizeAttrEnumOn         BodyAutocapitalizeAttrEnum = "on"
-	BodyAutocapitalizeAttrEnumSentences  BodyAutocapitalizeAttrEnum = "sentences"
-	BodyAutocapitalizeAttrEnumWords      BodyAutocapitalizeAttrEnum = "words"
 	BodyAutocapitalizeAttrEnumCharacters BodyAutocapitalizeAttrEnum = "characters"
 	BodyAutocapitalizeAttrEnumNone       BodyAutocapitalizeAttrEnum = "none"
 	BodyAutocapitalizeAttrEnumOff        BodyAutocapitalizeAttrEnum = "off"
+	BodyAutocapitalizeAttrEnumOn         BodyAutocapitalizeAttrEnum = "on"
+	BodyAutocapitalizeAttrEnumSentences  BodyAutocapitalizeAttrEnum = "sentences"
+	BodyAutocapitalizeAttrEnumWords      BodyAutocapitalizeAttrEnum = "words"
 )
 
 type BodyAutocorrectAttrEnum string
 
 const (
-	BodyAutocorrectAttrEnumOff BodyAutocorrectAttrEnum = "off"
 	BodyAutocorrectAttrEnumOn  BodyAutocorrectAttrEnum = "on"
+	BodyAutocorrectAttrEnumOff BodyAutocorrectAttrEnum = "off"
 )
 
 type BodyContenteditableAttrEnum string
@@ -121,11 +121,17 @@ func (e *BodyElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

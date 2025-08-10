@@ -42,12 +42,12 @@ func OptgroupIf(condition bool, children ...htemel.Node) *OptgroupElement {
 type OptgroupAutocapitalizeAttrEnum string
 
 const (
+	OptgroupAutocapitalizeAttrEnumCharacters OptgroupAutocapitalizeAttrEnum = "characters"
 	OptgroupAutocapitalizeAttrEnumNone       OptgroupAutocapitalizeAttrEnum = "none"
 	OptgroupAutocapitalizeAttrEnumOff        OptgroupAutocapitalizeAttrEnum = "off"
 	OptgroupAutocapitalizeAttrEnumOn         OptgroupAutocapitalizeAttrEnum = "on"
 	OptgroupAutocapitalizeAttrEnumSentences  OptgroupAutocapitalizeAttrEnum = "sentences"
 	OptgroupAutocapitalizeAttrEnumWords      OptgroupAutocapitalizeAttrEnum = "words"
-	OptgroupAutocapitalizeAttrEnumCharacters OptgroupAutocapitalizeAttrEnum = "characters"
 )
 
 type OptgroupAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *OptgroupElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

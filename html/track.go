@@ -42,12 +42,12 @@ func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 type TrackAutocapitalizeAttrEnum string
 
 const (
-	TrackAutocapitalizeAttrEnumNone       TrackAutocapitalizeAttrEnum = "none"
-	TrackAutocapitalizeAttrEnumOff        TrackAutocapitalizeAttrEnum = "off"
 	TrackAutocapitalizeAttrEnumOn         TrackAutocapitalizeAttrEnum = "on"
 	TrackAutocapitalizeAttrEnumSentences  TrackAutocapitalizeAttrEnum = "sentences"
 	TrackAutocapitalizeAttrEnumWords      TrackAutocapitalizeAttrEnum = "words"
 	TrackAutocapitalizeAttrEnumCharacters TrackAutocapitalizeAttrEnum = "characters"
+	TrackAutocapitalizeAttrEnumNone       TrackAutocapitalizeAttrEnum = "none"
+	TrackAutocapitalizeAttrEnumOff        TrackAutocapitalizeAttrEnum = "off"
 )
 
 type TrackAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *TrackElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

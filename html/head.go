@@ -42,12 +42,12 @@ func HeadIf(condition bool, children ...htemel.Node) *HeadElement {
 type HeadAutocapitalizeAttrEnum string
 
 const (
-	HeadAutocapitalizeAttrEnumCharacters HeadAutocapitalizeAttrEnum = "characters"
-	HeadAutocapitalizeAttrEnumNone       HeadAutocapitalizeAttrEnum = "none"
-	HeadAutocapitalizeAttrEnumOff        HeadAutocapitalizeAttrEnum = "off"
 	HeadAutocapitalizeAttrEnumOn         HeadAutocapitalizeAttrEnum = "on"
 	HeadAutocapitalizeAttrEnumSentences  HeadAutocapitalizeAttrEnum = "sentences"
 	HeadAutocapitalizeAttrEnumWords      HeadAutocapitalizeAttrEnum = "words"
+	HeadAutocapitalizeAttrEnumCharacters HeadAutocapitalizeAttrEnum = "characters"
+	HeadAutocapitalizeAttrEnumNone       HeadAutocapitalizeAttrEnum = "none"
+	HeadAutocapitalizeAttrEnumOff        HeadAutocapitalizeAttrEnum = "off"
 )
 
 type HeadAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type HeadContenteditableAttrEnum string
 
 const (
-	HeadContenteditableAttrEnumFalse         HeadContenteditableAttrEnum = "false"
 	HeadContenteditableAttrEnumPlaintextOnly HeadContenteditableAttrEnum = "plaintext-only"
 	HeadContenteditableAttrEnumTrue          HeadContenteditableAttrEnum = "true"
+	HeadContenteditableAttrEnumFalse         HeadContenteditableAttrEnum = "false"
 )
 
 type headAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *HeadElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

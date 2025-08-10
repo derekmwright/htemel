@@ -42,12 +42,12 @@ func TrIf(condition bool, children ...htemel.Node) *TrElement {
 type TrAutocapitalizeAttrEnum string
 
 const (
-	TrAutocapitalizeAttrEnumCharacters TrAutocapitalizeAttrEnum = "characters"
-	TrAutocapitalizeAttrEnumNone       TrAutocapitalizeAttrEnum = "none"
 	TrAutocapitalizeAttrEnumOff        TrAutocapitalizeAttrEnum = "off"
 	TrAutocapitalizeAttrEnumOn         TrAutocapitalizeAttrEnum = "on"
 	TrAutocapitalizeAttrEnumSentences  TrAutocapitalizeAttrEnum = "sentences"
 	TrAutocapitalizeAttrEnumWords      TrAutocapitalizeAttrEnum = "words"
+	TrAutocapitalizeAttrEnumCharacters TrAutocapitalizeAttrEnum = "characters"
+	TrAutocapitalizeAttrEnumNone       TrAutocapitalizeAttrEnum = "none"
 )
 
 type TrAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *TrElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

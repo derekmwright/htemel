@@ -42,12 +42,12 @@ func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
 type HtmlAutocapitalizeAttrEnum string
 
 const (
-	HtmlAutocapitalizeAttrEnumCharacters HtmlAutocapitalizeAttrEnum = "characters"
 	HtmlAutocapitalizeAttrEnumNone       HtmlAutocapitalizeAttrEnum = "none"
 	HtmlAutocapitalizeAttrEnumOff        HtmlAutocapitalizeAttrEnum = "off"
 	HtmlAutocapitalizeAttrEnumOn         HtmlAutocapitalizeAttrEnum = "on"
 	HtmlAutocapitalizeAttrEnumSentences  HtmlAutocapitalizeAttrEnum = "sentences"
 	HtmlAutocapitalizeAttrEnumWords      HtmlAutocapitalizeAttrEnum = "words"
+	HtmlAutocapitalizeAttrEnumCharacters HtmlAutocapitalizeAttrEnum = "characters"
 )
 
 type HtmlAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type HtmlContenteditableAttrEnum string
 
 const (
-	HtmlContenteditableAttrEnumFalse         HtmlContenteditableAttrEnum = "false"
 	HtmlContenteditableAttrEnumPlaintextOnly HtmlContenteditableAttrEnum = "plaintext-only"
 	HtmlContenteditableAttrEnumTrue          HtmlContenteditableAttrEnum = "true"
+	HtmlContenteditableAttrEnumFalse         HtmlContenteditableAttrEnum = "false"
 )
 
 type htmlAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *HtmlElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

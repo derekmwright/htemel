@@ -42,12 +42,12 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 type QAutocapitalizeAttrEnum string
 
 const (
+	QAutocapitalizeAttrEnumNone       QAutocapitalizeAttrEnum = "none"
+	QAutocapitalizeAttrEnumOff        QAutocapitalizeAttrEnum = "off"
 	QAutocapitalizeAttrEnumOn         QAutocapitalizeAttrEnum = "on"
 	QAutocapitalizeAttrEnumSentences  QAutocapitalizeAttrEnum = "sentences"
 	QAutocapitalizeAttrEnumWords      QAutocapitalizeAttrEnum = "words"
 	QAutocapitalizeAttrEnumCharacters QAutocapitalizeAttrEnum = "characters"
-	QAutocapitalizeAttrEnumNone       QAutocapitalizeAttrEnum = "none"
-	QAutocapitalizeAttrEnumOff        QAutocapitalizeAttrEnum = "off"
 )
 
 type QAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type QContenteditableAttrEnum string
 
 const (
+	QContenteditableAttrEnumTrue          QContenteditableAttrEnum = "true"
 	QContenteditableAttrEnumFalse         QContenteditableAttrEnum = "false"
 	QContenteditableAttrEnumPlaintextOnly QContenteditableAttrEnum = "plaintext-only"
-	QContenteditableAttrEnumTrue          QContenteditableAttrEnum = "true"
 )
 
 type qAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *QElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

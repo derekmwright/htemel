@@ -42,12 +42,12 @@ func SampIf(condition bool, children ...htemel.Node) *SampElement {
 type SampAutocapitalizeAttrEnum string
 
 const (
+	SampAutocapitalizeAttrEnumOff        SampAutocapitalizeAttrEnum = "off"
+	SampAutocapitalizeAttrEnumOn         SampAutocapitalizeAttrEnum = "on"
 	SampAutocapitalizeAttrEnumSentences  SampAutocapitalizeAttrEnum = "sentences"
 	SampAutocapitalizeAttrEnumWords      SampAutocapitalizeAttrEnum = "words"
 	SampAutocapitalizeAttrEnumCharacters SampAutocapitalizeAttrEnum = "characters"
 	SampAutocapitalizeAttrEnumNone       SampAutocapitalizeAttrEnum = "none"
-	SampAutocapitalizeAttrEnumOff        SampAutocapitalizeAttrEnum = "off"
-	SampAutocapitalizeAttrEnumOn         SampAutocapitalizeAttrEnum = "on"
 )
 
 type SampAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type SampContenteditableAttrEnum string
 
 const (
-	SampContenteditableAttrEnumTrue          SampContenteditableAttrEnum = "true"
 	SampContenteditableAttrEnumFalse         SampContenteditableAttrEnum = "false"
 	SampContenteditableAttrEnumPlaintextOnly SampContenteditableAttrEnum = "plaintext-only"
+	SampContenteditableAttrEnumTrue          SampContenteditableAttrEnum = "true"
 )
 
 type sampAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *SampElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,19 +42,19 @@ func LiIf(condition bool, children ...htemel.Node) *LiElement {
 type LiAutocapitalizeAttrEnum string
 
 const (
-	LiAutocapitalizeAttrEnumOn         LiAutocapitalizeAttrEnum = "on"
-	LiAutocapitalizeAttrEnumSentences  LiAutocapitalizeAttrEnum = "sentences"
-	LiAutocapitalizeAttrEnumWords      LiAutocapitalizeAttrEnum = "words"
 	LiAutocapitalizeAttrEnumCharacters LiAutocapitalizeAttrEnum = "characters"
 	LiAutocapitalizeAttrEnumNone       LiAutocapitalizeAttrEnum = "none"
 	LiAutocapitalizeAttrEnumOff        LiAutocapitalizeAttrEnum = "off"
+	LiAutocapitalizeAttrEnumOn         LiAutocapitalizeAttrEnum = "on"
+	LiAutocapitalizeAttrEnumSentences  LiAutocapitalizeAttrEnum = "sentences"
+	LiAutocapitalizeAttrEnumWords      LiAutocapitalizeAttrEnum = "words"
 )
 
 type LiAutocorrectAttrEnum string
 
 const (
-	LiAutocorrectAttrEnumOn  LiAutocorrectAttrEnum = "on"
 	LiAutocorrectAttrEnumOff LiAutocorrectAttrEnum = "off"
+	LiAutocorrectAttrEnumOn  LiAutocorrectAttrEnum = "on"
 )
 
 type LiContenteditableAttrEnum string
@@ -121,11 +121,17 @@ func (e *LiElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

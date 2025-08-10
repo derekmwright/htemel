@@ -42,12 +42,12 @@ func MenuIf(condition bool, children ...htemel.Node) *MenuElement {
 type MenuAutocapitalizeAttrEnum string
 
 const (
-	MenuAutocapitalizeAttrEnumSentences  MenuAutocapitalizeAttrEnum = "sentences"
-	MenuAutocapitalizeAttrEnumWords      MenuAutocapitalizeAttrEnum = "words"
 	MenuAutocapitalizeAttrEnumCharacters MenuAutocapitalizeAttrEnum = "characters"
 	MenuAutocapitalizeAttrEnumNone       MenuAutocapitalizeAttrEnum = "none"
 	MenuAutocapitalizeAttrEnumOff        MenuAutocapitalizeAttrEnum = "off"
 	MenuAutocapitalizeAttrEnumOn         MenuAutocapitalizeAttrEnum = "on"
+	MenuAutocapitalizeAttrEnumSentences  MenuAutocapitalizeAttrEnum = "sentences"
+	MenuAutocapitalizeAttrEnumWords      MenuAutocapitalizeAttrEnum = "words"
 )
 
 type MenuAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *MenuElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

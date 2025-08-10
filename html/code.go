@@ -42,12 +42,12 @@ func CodeIf(condition bool, children ...htemel.Node) *CodeElement {
 type CodeAutocapitalizeAttrEnum string
 
 const (
-	CodeAutocapitalizeAttrEnumCharacters CodeAutocapitalizeAttrEnum = "characters"
 	CodeAutocapitalizeAttrEnumNone       CodeAutocapitalizeAttrEnum = "none"
 	CodeAutocapitalizeAttrEnumOff        CodeAutocapitalizeAttrEnum = "off"
 	CodeAutocapitalizeAttrEnumOn         CodeAutocapitalizeAttrEnum = "on"
 	CodeAutocapitalizeAttrEnumSentences  CodeAutocapitalizeAttrEnum = "sentences"
 	CodeAutocapitalizeAttrEnumWords      CodeAutocapitalizeAttrEnum = "words"
+	CodeAutocapitalizeAttrEnumCharacters CodeAutocapitalizeAttrEnum = "characters"
 )
 
 type CodeAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *CodeElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

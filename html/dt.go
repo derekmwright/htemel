@@ -42,19 +42,19 @@ func DtIf(condition bool, children ...htemel.Node) *DtElement {
 type DtAutocapitalizeAttrEnum string
 
 const (
-	DtAutocapitalizeAttrEnumSentences  DtAutocapitalizeAttrEnum = "sentences"
-	DtAutocapitalizeAttrEnumWords      DtAutocapitalizeAttrEnum = "words"
 	DtAutocapitalizeAttrEnumCharacters DtAutocapitalizeAttrEnum = "characters"
 	DtAutocapitalizeAttrEnumNone       DtAutocapitalizeAttrEnum = "none"
 	DtAutocapitalizeAttrEnumOff        DtAutocapitalizeAttrEnum = "off"
 	DtAutocapitalizeAttrEnumOn         DtAutocapitalizeAttrEnum = "on"
+	DtAutocapitalizeAttrEnumSentences  DtAutocapitalizeAttrEnum = "sentences"
+	DtAutocapitalizeAttrEnumWords      DtAutocapitalizeAttrEnum = "words"
 )
 
 type DtAutocorrectAttrEnum string
 
 const (
-	DtAutocorrectAttrEnumOff DtAutocorrectAttrEnum = "off"
 	DtAutocorrectAttrEnumOn  DtAutocorrectAttrEnum = "on"
+	DtAutocorrectAttrEnumOff DtAutocorrectAttrEnum = "off"
 )
 
 type DtContenteditableAttrEnum string
@@ -121,11 +121,17 @@ func (e *DtElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

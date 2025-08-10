@@ -42,12 +42,12 @@ func DialogIf(condition bool, children ...htemel.Node) *DialogElement {
 type DialogAutocapitalizeAttrEnum string
 
 const (
-	DialogAutocapitalizeAttrEnumCharacters DialogAutocapitalizeAttrEnum = "characters"
-	DialogAutocapitalizeAttrEnumNone       DialogAutocapitalizeAttrEnum = "none"
-	DialogAutocapitalizeAttrEnumOff        DialogAutocapitalizeAttrEnum = "off"
 	DialogAutocapitalizeAttrEnumOn         DialogAutocapitalizeAttrEnum = "on"
 	DialogAutocapitalizeAttrEnumSentences  DialogAutocapitalizeAttrEnum = "sentences"
 	DialogAutocapitalizeAttrEnumWords      DialogAutocapitalizeAttrEnum = "words"
+	DialogAutocapitalizeAttrEnumCharacters DialogAutocapitalizeAttrEnum = "characters"
+	DialogAutocapitalizeAttrEnumNone       DialogAutocapitalizeAttrEnum = "none"
+	DialogAutocapitalizeAttrEnumOff        DialogAutocapitalizeAttrEnum = "off"
 )
 
 type DialogAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *DialogElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

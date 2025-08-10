@@ -42,12 +42,12 @@ func BdiIf(condition bool, children ...htemel.Node) *BdiElement {
 type BdiAutocapitalizeAttrEnum string
 
 const (
-	BdiAutocapitalizeAttrEnumWords      BdiAutocapitalizeAttrEnum = "words"
 	BdiAutocapitalizeAttrEnumCharacters BdiAutocapitalizeAttrEnum = "characters"
 	BdiAutocapitalizeAttrEnumNone       BdiAutocapitalizeAttrEnum = "none"
 	BdiAutocapitalizeAttrEnumOff        BdiAutocapitalizeAttrEnum = "off"
 	BdiAutocapitalizeAttrEnumOn         BdiAutocapitalizeAttrEnum = "on"
 	BdiAutocapitalizeAttrEnumSentences  BdiAutocapitalizeAttrEnum = "sentences"
+	BdiAutocapitalizeAttrEnumWords      BdiAutocapitalizeAttrEnum = "words"
 )
 
 type BdiAutocorrectAttrEnum string
@@ -121,11 +121,17 @@ func (e *BdiElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

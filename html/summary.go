@@ -42,12 +42,12 @@ func SummaryIf(condition bool, children ...htemel.Node) *SummaryElement {
 type SummaryAutocapitalizeAttrEnum string
 
 const (
-	SummaryAutocapitalizeAttrEnumCharacters SummaryAutocapitalizeAttrEnum = "characters"
-	SummaryAutocapitalizeAttrEnumNone       SummaryAutocapitalizeAttrEnum = "none"
-	SummaryAutocapitalizeAttrEnumOff        SummaryAutocapitalizeAttrEnum = "off"
 	SummaryAutocapitalizeAttrEnumOn         SummaryAutocapitalizeAttrEnum = "on"
 	SummaryAutocapitalizeAttrEnumSentences  SummaryAutocapitalizeAttrEnum = "sentences"
 	SummaryAutocapitalizeAttrEnumWords      SummaryAutocapitalizeAttrEnum = "words"
+	SummaryAutocapitalizeAttrEnumCharacters SummaryAutocapitalizeAttrEnum = "characters"
+	SummaryAutocapitalizeAttrEnumNone       SummaryAutocapitalizeAttrEnum = "none"
+	SummaryAutocapitalizeAttrEnumOff        SummaryAutocapitalizeAttrEnum = "off"
 )
 
 type SummaryAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type SummaryContenteditableAttrEnum string
 
 const (
+	SummaryContenteditableAttrEnumTrue          SummaryContenteditableAttrEnum = "true"
 	SummaryContenteditableAttrEnumFalse         SummaryContenteditableAttrEnum = "false"
 	SummaryContenteditableAttrEnumPlaintextOnly SummaryContenteditableAttrEnum = "plaintext-only"
-	SummaryContenteditableAttrEnumTrue          SummaryContenteditableAttrEnum = "true"
 )
 
 type summaryAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *SummaryElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

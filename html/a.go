@@ -60,9 +60,9 @@ const (
 type AContenteditableAttrEnum string
 
 const (
+	AContenteditableAttrEnumFalse         AContenteditableAttrEnum = "false"
 	AContenteditableAttrEnumPlaintextOnly AContenteditableAttrEnum = "plaintext-only"
 	AContenteditableAttrEnumTrue          AContenteditableAttrEnum = "true"
-	AContenteditableAttrEnumFalse         AContenteditableAttrEnum = "false"
 )
 
 type aAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *AElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,12 +42,12 @@ func MapIf(condition bool, children ...htemel.Node) *MapElement {
 type MapAutocapitalizeAttrEnum string
 
 const (
+	MapAutocapitalizeAttrEnumWords      MapAutocapitalizeAttrEnum = "words"
 	MapAutocapitalizeAttrEnumCharacters MapAutocapitalizeAttrEnum = "characters"
 	MapAutocapitalizeAttrEnumNone       MapAutocapitalizeAttrEnum = "none"
 	MapAutocapitalizeAttrEnumOff        MapAutocapitalizeAttrEnum = "off"
 	MapAutocapitalizeAttrEnumOn         MapAutocapitalizeAttrEnum = "on"
 	MapAutocapitalizeAttrEnumSentences  MapAutocapitalizeAttrEnum = "sentences"
-	MapAutocapitalizeAttrEnumWords      MapAutocapitalizeAttrEnum = "words"
 )
 
 type MapAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type MapContenteditableAttrEnum string
 
 const (
-	MapContenteditableAttrEnumTrue          MapContenteditableAttrEnum = "true"
 	MapContenteditableAttrEnumFalse         MapContenteditableAttrEnum = "false"
 	MapContenteditableAttrEnumPlaintextOnly MapContenteditableAttrEnum = "plaintext-only"
+	MapContenteditableAttrEnumTrue          MapContenteditableAttrEnum = "true"
 )
 
 type mapAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *MapElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

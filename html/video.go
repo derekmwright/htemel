@@ -42,27 +42,27 @@ func VideoIf(condition bool, children ...htemel.Node) *VideoElement {
 type VideoAutocapitalizeAttrEnum string
 
 const (
+	VideoAutocapitalizeAttrEnumWords      VideoAutocapitalizeAttrEnum = "words"
+	VideoAutocapitalizeAttrEnumCharacters VideoAutocapitalizeAttrEnum = "characters"
 	VideoAutocapitalizeAttrEnumNone       VideoAutocapitalizeAttrEnum = "none"
 	VideoAutocapitalizeAttrEnumOff        VideoAutocapitalizeAttrEnum = "off"
 	VideoAutocapitalizeAttrEnumOn         VideoAutocapitalizeAttrEnum = "on"
 	VideoAutocapitalizeAttrEnumSentences  VideoAutocapitalizeAttrEnum = "sentences"
-	VideoAutocapitalizeAttrEnumWords      VideoAutocapitalizeAttrEnum = "words"
-	VideoAutocapitalizeAttrEnumCharacters VideoAutocapitalizeAttrEnum = "characters"
 )
 
 type VideoAutocorrectAttrEnum string
 
 const (
-	VideoAutocorrectAttrEnumOff VideoAutocorrectAttrEnum = "off"
 	VideoAutocorrectAttrEnumOn  VideoAutocorrectAttrEnum = "on"
+	VideoAutocorrectAttrEnumOff VideoAutocorrectAttrEnum = "off"
 )
 
 type VideoContenteditableAttrEnum string
 
 const (
-	VideoContenteditableAttrEnumTrue          VideoContenteditableAttrEnum = "true"
 	VideoContenteditableAttrEnumFalse         VideoContenteditableAttrEnum = "false"
 	VideoContenteditableAttrEnumPlaintextOnly VideoContenteditableAttrEnum = "plaintext-only"
+	VideoContenteditableAttrEnumTrue          VideoContenteditableAttrEnum = "true"
 )
 
 type videoAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *VideoElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

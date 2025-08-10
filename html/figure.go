@@ -42,27 +42,27 @@ func FigureIf(condition bool, children ...htemel.Node) *FigureElement {
 type FigureAutocapitalizeAttrEnum string
 
 const (
-	FigureAutocapitalizeAttrEnumCharacters FigureAutocapitalizeAttrEnum = "characters"
-	FigureAutocapitalizeAttrEnumNone       FigureAutocapitalizeAttrEnum = "none"
-	FigureAutocapitalizeAttrEnumOff        FigureAutocapitalizeAttrEnum = "off"
 	FigureAutocapitalizeAttrEnumOn         FigureAutocapitalizeAttrEnum = "on"
 	FigureAutocapitalizeAttrEnumSentences  FigureAutocapitalizeAttrEnum = "sentences"
 	FigureAutocapitalizeAttrEnumWords      FigureAutocapitalizeAttrEnum = "words"
+	FigureAutocapitalizeAttrEnumCharacters FigureAutocapitalizeAttrEnum = "characters"
+	FigureAutocapitalizeAttrEnumNone       FigureAutocapitalizeAttrEnum = "none"
+	FigureAutocapitalizeAttrEnumOff        FigureAutocapitalizeAttrEnum = "off"
 )
 
 type FigureAutocorrectAttrEnum string
 
 const (
-	FigureAutocorrectAttrEnumOn  FigureAutocorrectAttrEnum = "on"
 	FigureAutocorrectAttrEnumOff FigureAutocorrectAttrEnum = "off"
+	FigureAutocorrectAttrEnumOn  FigureAutocorrectAttrEnum = "on"
 )
 
 type FigureContenteditableAttrEnum string
 
 const (
-	FigureContenteditableAttrEnumTrue          FigureContenteditableAttrEnum = "true"
 	FigureContenteditableAttrEnumFalse         FigureContenteditableAttrEnum = "false"
 	FigureContenteditableAttrEnumPlaintextOnly FigureContenteditableAttrEnum = "plaintext-only"
+	FigureContenteditableAttrEnumTrue          FigureContenteditableAttrEnum = "true"
 )
 
 type figureAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *FigureElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 

@@ -42,12 +42,12 @@ func AddressIf(condition bool, children ...htemel.Node) *AddressElement {
 type AddressAutocapitalizeAttrEnum string
 
 const (
+	AddressAutocapitalizeAttrEnumOff        AddressAutocapitalizeAttrEnum = "off"
+	AddressAutocapitalizeAttrEnumOn         AddressAutocapitalizeAttrEnum = "on"
 	AddressAutocapitalizeAttrEnumSentences  AddressAutocapitalizeAttrEnum = "sentences"
 	AddressAutocapitalizeAttrEnumWords      AddressAutocapitalizeAttrEnum = "words"
 	AddressAutocapitalizeAttrEnumCharacters AddressAutocapitalizeAttrEnum = "characters"
 	AddressAutocapitalizeAttrEnumNone       AddressAutocapitalizeAttrEnum = "none"
-	AddressAutocapitalizeAttrEnumOff        AddressAutocapitalizeAttrEnum = "off"
-	AddressAutocapitalizeAttrEnumOn         AddressAutocapitalizeAttrEnum = "on"
 )
 
 type AddressAutocorrectAttrEnum string
@@ -60,9 +60,9 @@ const (
 type AddressContenteditableAttrEnum string
 
 const (
+	AddressContenteditableAttrEnumFalse         AddressContenteditableAttrEnum = "false"
 	AddressContenteditableAttrEnumPlaintextOnly AddressContenteditableAttrEnum = "plaintext-only"
 	AddressContenteditableAttrEnumTrue          AddressContenteditableAttrEnum = "true"
-	AddressContenteditableAttrEnumFalse         AddressContenteditableAttrEnum = "false"
 )
 
 type addressAttrs map[string]any
@@ -121,11 +121,17 @@ func (e *AddressElement) Render(w io.Writer) error {
 	c := len(e.attributes)
 	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(" " + key + "="))
+		if i == 1 {
+			w.Write([]byte(" "))
+		}
+
+		w.Write([]byte(key + "="))
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+
 		if i < c {
 			w.Write([]byte(" "))
 		}
+
 		i++
 	}
 
