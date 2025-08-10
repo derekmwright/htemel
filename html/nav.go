@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type NavElement struct {
+	attributes navAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func NavIf(condition bool, children ...htemel.Node) *NavElement {
 	}
 }
 
-func (e *NavElement) Autocapitalize() *NavElement {
+type NavAutocapitalizeAttrEnum string
+
+const (
+	NavAutocapitalizeAttrEnumCharacters NavAutocapitalizeAttrEnum = "characters"
+	NavAutocapitalizeAttrEnumNone NavAutocapitalizeAttrEnum = "none"
+	NavAutocapitalizeAttrEnumOff NavAutocapitalizeAttrEnum = "off"
+	NavAutocapitalizeAttrEnumOn NavAutocapitalizeAttrEnum = "on"
+	NavAutocapitalizeAttrEnumSentences NavAutocapitalizeAttrEnum = "sentences"
+	NavAutocapitalizeAttrEnumWords NavAutocapitalizeAttrEnum = "words"
+)
+
+type NavAutocorrectAttrEnum string
+
+const (
+	NavAutocorrectAttrEnumOff NavAutocorrectAttrEnum = "off"
+	NavAutocorrectAttrEnumOn NavAutocorrectAttrEnum = "on"
+)
+
+type NavContenteditableAttrEnum string
+
+const (
+	NavContenteditableAttrEnumFalse NavContenteditableAttrEnum = "false"
+	NavContenteditableAttrEnumPlaintextOnly NavContenteditableAttrEnum = "plaintext-only"
+	NavContenteditableAttrEnumTrue NavContenteditableAttrEnum = "true"
+)
+
+type navAttrs map[string]any
+
+func (e *NavElement) Autocapitalize(a NavAutocapitalizeAttrEnum) *NavElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *NavElement) Autocorrect() *NavElement {
+func (e *NavElement) Autocorrect(a NavAutocorrectAttrEnum) *NavElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *NavElement) Autofocus() *NavElement {
+func (e *NavElement) Class(s ...string) *NavElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *NavElement) Class() *NavElement {
+func (e *NavElement) Contenteditable(a NavContenteditableAttrEnum) *NavElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *NavElement) Contenteditable() *NavElement {
+func (e *NavElement) Id(s string) *NavElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *NavElement) Id() *NavElement {
-	return e
-}
-
-func (e *NavElement) Slot() *NavElement {
+func (e *NavElement) Slot(s string) *NavElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *NavElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

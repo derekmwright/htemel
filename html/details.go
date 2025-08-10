@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type DetailsElement struct {
+	attributes detailsAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func DetailsIf(condition bool, children ...htemel.Node) *DetailsElement {
 	}
 }
 
-func (e *DetailsElement) Autocapitalize() *DetailsElement {
+type DetailsAutocapitalizeAttrEnum string
+
+const (
+	DetailsAutocapitalizeAttrEnumNone DetailsAutocapitalizeAttrEnum = "none"
+	DetailsAutocapitalizeAttrEnumOff DetailsAutocapitalizeAttrEnum = "off"
+	DetailsAutocapitalizeAttrEnumOn DetailsAutocapitalizeAttrEnum = "on"
+	DetailsAutocapitalizeAttrEnumSentences DetailsAutocapitalizeAttrEnum = "sentences"
+	DetailsAutocapitalizeAttrEnumWords DetailsAutocapitalizeAttrEnum = "words"
+	DetailsAutocapitalizeAttrEnumCharacters DetailsAutocapitalizeAttrEnum = "characters"
+)
+
+type DetailsAutocorrectAttrEnum string
+
+const (
+	DetailsAutocorrectAttrEnumOff DetailsAutocorrectAttrEnum = "off"
+	DetailsAutocorrectAttrEnumOn DetailsAutocorrectAttrEnum = "on"
+)
+
+type DetailsContenteditableAttrEnum string
+
+const (
+	DetailsContenteditableAttrEnumPlaintextOnly DetailsContenteditableAttrEnum = "plaintext-only"
+	DetailsContenteditableAttrEnumTrue DetailsContenteditableAttrEnum = "true"
+	DetailsContenteditableAttrEnumFalse DetailsContenteditableAttrEnum = "false"
+)
+
+type detailsAttrs map[string]any
+
+func (e *DetailsElement) Autocapitalize(a DetailsAutocapitalizeAttrEnum) *DetailsElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *DetailsElement) Autocorrect() *DetailsElement {
+func (e *DetailsElement) Autocorrect(a DetailsAutocorrectAttrEnum) *DetailsElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *DetailsElement) Autofocus() *DetailsElement {
+func (e *DetailsElement) Class(s ...string) *DetailsElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *DetailsElement) Class() *DetailsElement {
+func (e *DetailsElement) Contenteditable(a DetailsContenteditableAttrEnum) *DetailsElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *DetailsElement) Contenteditable() *DetailsElement {
+func (e *DetailsElement) Id(s string) *DetailsElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *DetailsElement) Id() *DetailsElement {
-	return e
-}
-
-func (e *DetailsElement) Slot() *DetailsElement {
+func (e *DetailsElement) Slot(s string) *DetailsElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *DetailsElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

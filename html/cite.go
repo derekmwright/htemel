@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type CiteElement struct {
+	attributes citeAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func CiteIf(condition bool, children ...htemel.Node) *CiteElement {
 	}
 }
 
-func (e *CiteElement) Autocapitalize() *CiteElement {
+type CiteAutocapitalizeAttrEnum string
+
+const (
+	CiteAutocapitalizeAttrEnumCharacters CiteAutocapitalizeAttrEnum = "characters"
+	CiteAutocapitalizeAttrEnumNone CiteAutocapitalizeAttrEnum = "none"
+	CiteAutocapitalizeAttrEnumOff CiteAutocapitalizeAttrEnum = "off"
+	CiteAutocapitalizeAttrEnumOn CiteAutocapitalizeAttrEnum = "on"
+	CiteAutocapitalizeAttrEnumSentences CiteAutocapitalizeAttrEnum = "sentences"
+	CiteAutocapitalizeAttrEnumWords CiteAutocapitalizeAttrEnum = "words"
+)
+
+type CiteAutocorrectAttrEnum string
+
+const (
+	CiteAutocorrectAttrEnumOff CiteAutocorrectAttrEnum = "off"
+	CiteAutocorrectAttrEnumOn CiteAutocorrectAttrEnum = "on"
+)
+
+type CiteContenteditableAttrEnum string
+
+const (
+	CiteContenteditableAttrEnumFalse CiteContenteditableAttrEnum = "false"
+	CiteContenteditableAttrEnumPlaintextOnly CiteContenteditableAttrEnum = "plaintext-only"
+	CiteContenteditableAttrEnumTrue CiteContenteditableAttrEnum = "true"
+)
+
+type citeAttrs map[string]any
+
+func (e *CiteElement) Autocapitalize(a CiteAutocapitalizeAttrEnum) *CiteElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *CiteElement) Autocorrect() *CiteElement {
+func (e *CiteElement) Autocorrect(a CiteAutocorrectAttrEnum) *CiteElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *CiteElement) Autofocus() *CiteElement {
+func (e *CiteElement) Class(s ...string) *CiteElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *CiteElement) Class() *CiteElement {
+func (e *CiteElement) Contenteditable(a CiteContenteditableAttrEnum) *CiteElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *CiteElement) Contenteditable() *CiteElement {
+func (e *CiteElement) Id(s string) *CiteElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *CiteElement) Id() *CiteElement {
-	return e
-}
-
-func (e *CiteElement) Slot() *CiteElement {
+func (e *CiteElement) Slot(s string) *CiteElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *CiteElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

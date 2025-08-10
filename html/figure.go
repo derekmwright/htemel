@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type FigureElement struct {
+	attributes figureAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func FigureIf(condition bool, children ...htemel.Node) *FigureElement {
 	}
 }
 
-func (e *FigureElement) Autocapitalize() *FigureElement {
+type FigureAutocapitalizeAttrEnum string
+
+const (
+	FigureAutocapitalizeAttrEnumCharacters FigureAutocapitalizeAttrEnum = "characters"
+	FigureAutocapitalizeAttrEnumNone FigureAutocapitalizeAttrEnum = "none"
+	FigureAutocapitalizeAttrEnumOff FigureAutocapitalizeAttrEnum = "off"
+	FigureAutocapitalizeAttrEnumOn FigureAutocapitalizeAttrEnum = "on"
+	FigureAutocapitalizeAttrEnumSentences FigureAutocapitalizeAttrEnum = "sentences"
+	FigureAutocapitalizeAttrEnumWords FigureAutocapitalizeAttrEnum = "words"
+)
+
+type FigureAutocorrectAttrEnum string
+
+const (
+	FigureAutocorrectAttrEnumOff FigureAutocorrectAttrEnum = "off"
+	FigureAutocorrectAttrEnumOn FigureAutocorrectAttrEnum = "on"
+)
+
+type FigureContenteditableAttrEnum string
+
+const (
+	FigureContenteditableAttrEnumFalse FigureContenteditableAttrEnum = "false"
+	FigureContenteditableAttrEnumPlaintextOnly FigureContenteditableAttrEnum = "plaintext-only"
+	FigureContenteditableAttrEnumTrue FigureContenteditableAttrEnum = "true"
+)
+
+type figureAttrs map[string]any
+
+func (e *FigureElement) Autocapitalize(a FigureAutocapitalizeAttrEnum) *FigureElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *FigureElement) Autocorrect() *FigureElement {
+func (e *FigureElement) Autocorrect(a FigureAutocorrectAttrEnum) *FigureElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *FigureElement) Autofocus() *FigureElement {
+func (e *FigureElement) Class(s ...string) *FigureElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *FigureElement) Class() *FigureElement {
+func (e *FigureElement) Contenteditable(a FigureContenteditableAttrEnum) *FigureElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *FigureElement) Contenteditable() *FigureElement {
+func (e *FigureElement) Id(s string) *FigureElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *FigureElement) Id() *FigureElement {
-	return e
-}
-
-func (e *FigureElement) Slot() *FigureElement {
+func (e *FigureElement) Slot(s string) *FigureElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *FigureElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

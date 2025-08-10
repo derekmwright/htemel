@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type OptgroupElement struct {
+	attributes optgroupAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func OptgroupIf(condition bool, children ...htemel.Node) *OptgroupElement {
 	}
 }
 
-func (e *OptgroupElement) Autocapitalize() *OptgroupElement {
+type OptgroupAutocapitalizeAttrEnum string
+
+const (
+	OptgroupAutocapitalizeAttrEnumCharacters OptgroupAutocapitalizeAttrEnum = "characters"
+	OptgroupAutocapitalizeAttrEnumNone OptgroupAutocapitalizeAttrEnum = "none"
+	OptgroupAutocapitalizeAttrEnumOff OptgroupAutocapitalizeAttrEnum = "off"
+	OptgroupAutocapitalizeAttrEnumOn OptgroupAutocapitalizeAttrEnum = "on"
+	OptgroupAutocapitalizeAttrEnumSentences OptgroupAutocapitalizeAttrEnum = "sentences"
+	OptgroupAutocapitalizeAttrEnumWords OptgroupAutocapitalizeAttrEnum = "words"
+)
+
+type OptgroupAutocorrectAttrEnum string
+
+const (
+	OptgroupAutocorrectAttrEnumOff OptgroupAutocorrectAttrEnum = "off"
+	OptgroupAutocorrectAttrEnumOn OptgroupAutocorrectAttrEnum = "on"
+)
+
+type OptgroupContenteditableAttrEnum string
+
+const (
+	OptgroupContenteditableAttrEnumPlaintextOnly OptgroupContenteditableAttrEnum = "plaintext-only"
+	OptgroupContenteditableAttrEnumTrue OptgroupContenteditableAttrEnum = "true"
+	OptgroupContenteditableAttrEnumFalse OptgroupContenteditableAttrEnum = "false"
+)
+
+type optgroupAttrs map[string]any
+
+func (e *OptgroupElement) Autocapitalize(a OptgroupAutocapitalizeAttrEnum) *OptgroupElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *OptgroupElement) Autocorrect() *OptgroupElement {
+func (e *OptgroupElement) Autocorrect(a OptgroupAutocorrectAttrEnum) *OptgroupElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *OptgroupElement) Autofocus() *OptgroupElement {
+func (e *OptgroupElement) Class(s ...string) *OptgroupElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *OptgroupElement) Class() *OptgroupElement {
+func (e *OptgroupElement) Contenteditable(a OptgroupContenteditableAttrEnum) *OptgroupElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *OptgroupElement) Contenteditable() *OptgroupElement {
+func (e *OptgroupElement) Id(s string) *OptgroupElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *OptgroupElement) Id() *OptgroupElement {
-	return e
-}
-
-func (e *OptgroupElement) Slot() *OptgroupElement {
+func (e *OptgroupElement) Slot(s string) *OptgroupElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *OptgroupElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type VarElement struct {
+	attributes varAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func VarIf(condition bool, children ...htemel.Node) *VarElement {
 	}
 }
 
-func (e *VarElement) Autocapitalize() *VarElement {
+type VarAutocapitalizeAttrEnum string
+
+const (
+	VarAutocapitalizeAttrEnumWords VarAutocapitalizeAttrEnum = "words"
+	VarAutocapitalizeAttrEnumCharacters VarAutocapitalizeAttrEnum = "characters"
+	VarAutocapitalizeAttrEnumNone VarAutocapitalizeAttrEnum = "none"
+	VarAutocapitalizeAttrEnumOff VarAutocapitalizeAttrEnum = "off"
+	VarAutocapitalizeAttrEnumOn VarAutocapitalizeAttrEnum = "on"
+	VarAutocapitalizeAttrEnumSentences VarAutocapitalizeAttrEnum = "sentences"
+)
+
+type VarAutocorrectAttrEnum string
+
+const (
+	VarAutocorrectAttrEnumOff VarAutocorrectAttrEnum = "off"
+	VarAutocorrectAttrEnumOn VarAutocorrectAttrEnum = "on"
+)
+
+type VarContenteditableAttrEnum string
+
+const (
+	VarContenteditableAttrEnumFalse VarContenteditableAttrEnum = "false"
+	VarContenteditableAttrEnumPlaintextOnly VarContenteditableAttrEnum = "plaintext-only"
+	VarContenteditableAttrEnumTrue VarContenteditableAttrEnum = "true"
+)
+
+type varAttrs map[string]any
+
+func (e *VarElement) Autocapitalize(a VarAutocapitalizeAttrEnum) *VarElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *VarElement) Autocorrect() *VarElement {
+func (e *VarElement) Autocorrect(a VarAutocorrectAttrEnum) *VarElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *VarElement) Autofocus() *VarElement {
+func (e *VarElement) Class(s ...string) *VarElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *VarElement) Class() *VarElement {
+func (e *VarElement) Contenteditable(a VarContenteditableAttrEnum) *VarElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *VarElement) Contenteditable() *VarElement {
+func (e *VarElement) Id(s string) *VarElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *VarElement) Id() *VarElement {
-	return e
-}
-
-func (e *VarElement) Slot() *VarElement {
+func (e *VarElement) Slot(s string) *VarElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *VarElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

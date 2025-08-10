@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type BdoElement struct {
+	attributes bdoAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func BdoIf(condition bool, children ...htemel.Node) *BdoElement {
 	}
 }
 
-func (e *BdoElement) Autocapitalize() *BdoElement {
+type BdoAutocapitalizeAttrEnum string
+
+const (
+	BdoAutocapitalizeAttrEnumOff BdoAutocapitalizeAttrEnum = "off"
+	BdoAutocapitalizeAttrEnumOn BdoAutocapitalizeAttrEnum = "on"
+	BdoAutocapitalizeAttrEnumSentences BdoAutocapitalizeAttrEnum = "sentences"
+	BdoAutocapitalizeAttrEnumWords BdoAutocapitalizeAttrEnum = "words"
+	BdoAutocapitalizeAttrEnumCharacters BdoAutocapitalizeAttrEnum = "characters"
+	BdoAutocapitalizeAttrEnumNone BdoAutocapitalizeAttrEnum = "none"
+)
+
+type BdoAutocorrectAttrEnum string
+
+const (
+	BdoAutocorrectAttrEnumOff BdoAutocorrectAttrEnum = "off"
+	BdoAutocorrectAttrEnumOn BdoAutocorrectAttrEnum = "on"
+)
+
+type BdoContenteditableAttrEnum string
+
+const (
+	BdoContenteditableAttrEnumFalse BdoContenteditableAttrEnum = "false"
+	BdoContenteditableAttrEnumPlaintextOnly BdoContenteditableAttrEnum = "plaintext-only"
+	BdoContenteditableAttrEnumTrue BdoContenteditableAttrEnum = "true"
+)
+
+type bdoAttrs map[string]any
+
+func (e *BdoElement) Autocapitalize(a BdoAutocapitalizeAttrEnum) *BdoElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *BdoElement) Autocorrect() *BdoElement {
+func (e *BdoElement) Autocorrect(a BdoAutocorrectAttrEnum) *BdoElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *BdoElement) Autofocus() *BdoElement {
+func (e *BdoElement) Class(s ...string) *BdoElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *BdoElement) Class() *BdoElement {
+func (e *BdoElement) Contenteditable(a BdoContenteditableAttrEnum) *BdoElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *BdoElement) Contenteditable() *BdoElement {
+func (e *BdoElement) Id(s string) *BdoElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *BdoElement) Id() *BdoElement {
-	return e
-}
-
-func (e *BdoElement) Slot() *BdoElement {
+func (e *BdoElement) Slot(s string) *BdoElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *BdoElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type BaseElement struct {
+	attributes baseAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func BaseIf(condition bool, children ...htemel.Node) *BaseElement {
 	}
 }
 
-func (e *BaseElement) Autocapitalize() *BaseElement {
+type BaseAutocapitalizeAttrEnum string
+
+const (
+	BaseAutocapitalizeAttrEnumOn BaseAutocapitalizeAttrEnum = "on"
+	BaseAutocapitalizeAttrEnumSentences BaseAutocapitalizeAttrEnum = "sentences"
+	BaseAutocapitalizeAttrEnumWords BaseAutocapitalizeAttrEnum = "words"
+	BaseAutocapitalizeAttrEnumCharacters BaseAutocapitalizeAttrEnum = "characters"
+	BaseAutocapitalizeAttrEnumNone BaseAutocapitalizeAttrEnum = "none"
+	BaseAutocapitalizeAttrEnumOff BaseAutocapitalizeAttrEnum = "off"
+)
+
+type BaseAutocorrectAttrEnum string
+
+const (
+	BaseAutocorrectAttrEnumOn BaseAutocorrectAttrEnum = "on"
+	BaseAutocorrectAttrEnumOff BaseAutocorrectAttrEnum = "off"
+)
+
+type BaseContenteditableAttrEnum string
+
+const (
+	BaseContenteditableAttrEnumFalse BaseContenteditableAttrEnum = "false"
+	BaseContenteditableAttrEnumPlaintextOnly BaseContenteditableAttrEnum = "plaintext-only"
+	BaseContenteditableAttrEnumTrue BaseContenteditableAttrEnum = "true"
+)
+
+type baseAttrs map[string]any
+
+func (e *BaseElement) Autocapitalize(a BaseAutocapitalizeAttrEnum) *BaseElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *BaseElement) Autocorrect() *BaseElement {
+func (e *BaseElement) Autocorrect(a BaseAutocorrectAttrEnum) *BaseElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *BaseElement) Autofocus() *BaseElement {
+func (e *BaseElement) Class(s ...string) *BaseElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *BaseElement) Class() *BaseElement {
+func (e *BaseElement) Contenteditable(a BaseContenteditableAttrEnum) *BaseElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *BaseElement) Contenteditable() *BaseElement {
+func (e *BaseElement) Id(s string) *BaseElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *BaseElement) Id() *BaseElement {
-	return e
-}
-
-func (e *BaseElement) Slot() *BaseElement {
+func (e *BaseElement) Slot(s string) *BaseElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *BaseElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

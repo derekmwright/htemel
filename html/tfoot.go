@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type TfootElement struct {
+	attributes tfootAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func TfootIf(condition bool, children ...htemel.Node) *TfootElement {
 	}
 }
 
-func (e *TfootElement) Autocapitalize() *TfootElement {
+type TfootAutocapitalizeAttrEnum string
+
+const (
+	TfootAutocapitalizeAttrEnumWords TfootAutocapitalizeAttrEnum = "words"
+	TfootAutocapitalizeAttrEnumCharacters TfootAutocapitalizeAttrEnum = "characters"
+	TfootAutocapitalizeAttrEnumNone TfootAutocapitalizeAttrEnum = "none"
+	TfootAutocapitalizeAttrEnumOff TfootAutocapitalizeAttrEnum = "off"
+	TfootAutocapitalizeAttrEnumOn TfootAutocapitalizeAttrEnum = "on"
+	TfootAutocapitalizeAttrEnumSentences TfootAutocapitalizeAttrEnum = "sentences"
+)
+
+type TfootAutocorrectAttrEnum string
+
+const (
+	TfootAutocorrectAttrEnumOff TfootAutocorrectAttrEnum = "off"
+	TfootAutocorrectAttrEnumOn TfootAutocorrectAttrEnum = "on"
+)
+
+type TfootContenteditableAttrEnum string
+
+const (
+	TfootContenteditableAttrEnumFalse TfootContenteditableAttrEnum = "false"
+	TfootContenteditableAttrEnumPlaintextOnly TfootContenteditableAttrEnum = "plaintext-only"
+	TfootContenteditableAttrEnumTrue TfootContenteditableAttrEnum = "true"
+)
+
+type tfootAttrs map[string]any
+
+func (e *TfootElement) Autocapitalize(a TfootAutocapitalizeAttrEnum) *TfootElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *TfootElement) Autocorrect() *TfootElement {
+func (e *TfootElement) Autocorrect(a TfootAutocorrectAttrEnum) *TfootElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *TfootElement) Autofocus() *TfootElement {
+func (e *TfootElement) Class(s ...string) *TfootElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *TfootElement) Class() *TfootElement {
+func (e *TfootElement) Contenteditable(a TfootContenteditableAttrEnum) *TfootElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *TfootElement) Contenteditable() *TfootElement {
+func (e *TfootElement) Id(s string) *TfootElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *TfootElement) Id() *TfootElement {
-	return e
-}
-
-func (e *TfootElement) Slot() *TfootElement {
+func (e *TfootElement) Slot(s string) *TfootElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *TfootElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type MetaElement struct {
+	attributes metaAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 	}
 }
 
-func (e *MetaElement) Autocapitalize() *MetaElement {
+type MetaAutocapitalizeAttrEnum string
+
+const (
+	MetaAutocapitalizeAttrEnumNone MetaAutocapitalizeAttrEnum = "none"
+	MetaAutocapitalizeAttrEnumOff MetaAutocapitalizeAttrEnum = "off"
+	MetaAutocapitalizeAttrEnumOn MetaAutocapitalizeAttrEnum = "on"
+	MetaAutocapitalizeAttrEnumSentences MetaAutocapitalizeAttrEnum = "sentences"
+	MetaAutocapitalizeAttrEnumWords MetaAutocapitalizeAttrEnum = "words"
+	MetaAutocapitalizeAttrEnumCharacters MetaAutocapitalizeAttrEnum = "characters"
+)
+
+type MetaAutocorrectAttrEnum string
+
+const (
+	MetaAutocorrectAttrEnumOff MetaAutocorrectAttrEnum = "off"
+	MetaAutocorrectAttrEnumOn MetaAutocorrectAttrEnum = "on"
+)
+
+type MetaContenteditableAttrEnum string
+
+const (
+	MetaContenteditableAttrEnumFalse MetaContenteditableAttrEnum = "false"
+	MetaContenteditableAttrEnumPlaintextOnly MetaContenteditableAttrEnum = "plaintext-only"
+	MetaContenteditableAttrEnumTrue MetaContenteditableAttrEnum = "true"
+)
+
+type metaAttrs map[string]any
+
+func (e *MetaElement) Autocapitalize(a MetaAutocapitalizeAttrEnum) *MetaElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *MetaElement) Autocorrect() *MetaElement {
+func (e *MetaElement) Autocorrect(a MetaAutocorrectAttrEnum) *MetaElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *MetaElement) Autofocus() *MetaElement {
+func (e *MetaElement) Class(s ...string) *MetaElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *MetaElement) Class() *MetaElement {
+func (e *MetaElement) Contenteditable(a MetaContenteditableAttrEnum) *MetaElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *MetaElement) Contenteditable() *MetaElement {
+func (e *MetaElement) Id(s string) *MetaElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *MetaElement) Id() *MetaElement {
-	return e
-}
-
-func (e *MetaElement) Slot() *MetaElement {
+func (e *MetaElement) Slot(s string) *MetaElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *MetaElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

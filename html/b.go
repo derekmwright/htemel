@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type BElement struct {
+	attributes bAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func BIf(condition bool, children ...htemel.Node) *BElement {
 	}
 }
 
-func (e *BElement) Autocapitalize() *BElement {
+type BAutocapitalizeAttrEnum string
+
+const (
+	BAutocapitalizeAttrEnumCharacters BAutocapitalizeAttrEnum = "characters"
+	BAutocapitalizeAttrEnumNone BAutocapitalizeAttrEnum = "none"
+	BAutocapitalizeAttrEnumOff BAutocapitalizeAttrEnum = "off"
+	BAutocapitalizeAttrEnumOn BAutocapitalizeAttrEnum = "on"
+	BAutocapitalizeAttrEnumSentences BAutocapitalizeAttrEnum = "sentences"
+	BAutocapitalizeAttrEnumWords BAutocapitalizeAttrEnum = "words"
+)
+
+type BAutocorrectAttrEnum string
+
+const (
+	BAutocorrectAttrEnumOff BAutocorrectAttrEnum = "off"
+	BAutocorrectAttrEnumOn BAutocorrectAttrEnum = "on"
+)
+
+type BContenteditableAttrEnum string
+
+const (
+	BContenteditableAttrEnumFalse BContenteditableAttrEnum = "false"
+	BContenteditableAttrEnumPlaintextOnly BContenteditableAttrEnum = "plaintext-only"
+	BContenteditableAttrEnumTrue BContenteditableAttrEnum = "true"
+)
+
+type bAttrs map[string]any
+
+func (e *BElement) Autocapitalize(a BAutocapitalizeAttrEnum) *BElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *BElement) Autocorrect() *BElement {
+func (e *BElement) Autocorrect(a BAutocorrectAttrEnum) *BElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *BElement) Autofocus() *BElement {
+func (e *BElement) Class(s ...string) *BElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *BElement) Class() *BElement {
+func (e *BElement) Contenteditable(a BContenteditableAttrEnum) *BElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *BElement) Contenteditable() *BElement {
+func (e *BElement) Id(s string) *BElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *BElement) Id() *BElement {
-	return e
-}
-
-func (e *BElement) Slot() *BElement {
+func (e *BElement) Slot(s string) *BElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *BElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

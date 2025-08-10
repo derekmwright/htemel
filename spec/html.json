@@ -1,5 +1,5 @@
 {
-  "Name": "HTML",
+  "name": "HTML",
   "elements": [
     {
       "tag": "html",
@@ -439,7 +439,7 @@
     {
       "name": "autocapitalize",
       "description": "The autocapitalize attribute is an enumerated attribute whose states are the possible autocapitalization hints. The autocapitalization hint specified by the attribute's state combines with other considerations to form the used autocapitalization hint, which informs the behavior of the user agent.",
-      "AllowedValues": {
+      "allowed": {
         "characters": {},
         "none": {},
         "off": {},
@@ -452,7 +452,7 @@
     {
       "name": "autocorrect",
       "description": "The autocorrect attribute can be used on an editing host to control autocorrection behavior for the hosted editable region, on an input or textarea element to control the behavior when inserting text into that element, or on a form element to control the default behavior for all autocapitalize-and-autocorrect inheriting elements associated with the form element.",
-      "AllowedValues": {
+      "allowed": {
         "off": {},
         "on": {}
       },
@@ -470,7 +470,7 @@
     },
     {
       "name": "contenteditable",
-      "AllowedValues": {
+      "allowed": {
         "false": {},
         "plaintext-only": {},
         "true": {}

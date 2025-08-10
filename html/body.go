@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type BodyElement struct {
+	attributes bodyAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func BodyIf(condition bool, children ...htemel.Node) *BodyElement {
 	}
 }
 
-func (e *BodyElement) Autocapitalize() *BodyElement {
+type BodyAutocapitalizeAttrEnum string
+
+const (
+	BodyAutocapitalizeAttrEnumNone BodyAutocapitalizeAttrEnum = "none"
+	BodyAutocapitalizeAttrEnumOff BodyAutocapitalizeAttrEnum = "off"
+	BodyAutocapitalizeAttrEnumOn BodyAutocapitalizeAttrEnum = "on"
+	BodyAutocapitalizeAttrEnumSentences BodyAutocapitalizeAttrEnum = "sentences"
+	BodyAutocapitalizeAttrEnumWords BodyAutocapitalizeAttrEnum = "words"
+	BodyAutocapitalizeAttrEnumCharacters BodyAutocapitalizeAttrEnum = "characters"
+)
+
+type BodyAutocorrectAttrEnum string
+
+const (
+	BodyAutocorrectAttrEnumOff BodyAutocorrectAttrEnum = "off"
+	BodyAutocorrectAttrEnumOn BodyAutocorrectAttrEnum = "on"
+)
+
+type BodyContenteditableAttrEnum string
+
+const (
+	BodyContenteditableAttrEnumFalse BodyContenteditableAttrEnum = "false"
+	BodyContenteditableAttrEnumPlaintextOnly BodyContenteditableAttrEnum = "plaintext-only"
+	BodyContenteditableAttrEnumTrue BodyContenteditableAttrEnum = "true"
+)
+
+type bodyAttrs map[string]any
+
+func (e *BodyElement) Autocapitalize(a BodyAutocapitalizeAttrEnum) *BodyElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *BodyElement) Autocorrect() *BodyElement {
+func (e *BodyElement) Autocorrect(a BodyAutocorrectAttrEnum) *BodyElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *BodyElement) Autofocus() *BodyElement {
+func (e *BodyElement) Class(s ...string) *BodyElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *BodyElement) Class() *BodyElement {
+func (e *BodyElement) Contenteditable(a BodyContenteditableAttrEnum) *BodyElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *BodyElement) Contenteditable() *BodyElement {
+func (e *BodyElement) Id(s string) *BodyElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *BodyElement) Id() *BodyElement {
-	return e
-}
-
-func (e *BodyElement) Slot() *BodyElement {
+func (e *BodyElement) Slot(s string) *BodyElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *BodyElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type DialogElement struct {
+	attributes dialogAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func DialogIf(condition bool, children ...htemel.Node) *DialogElement {
 	}
 }
 
-func (e *DialogElement) Autocapitalize() *DialogElement {
+type DialogAutocapitalizeAttrEnum string
+
+const (
+	DialogAutocapitalizeAttrEnumCharacters DialogAutocapitalizeAttrEnum = "characters"
+	DialogAutocapitalizeAttrEnumNone DialogAutocapitalizeAttrEnum = "none"
+	DialogAutocapitalizeAttrEnumOff DialogAutocapitalizeAttrEnum = "off"
+	DialogAutocapitalizeAttrEnumOn DialogAutocapitalizeAttrEnum = "on"
+	DialogAutocapitalizeAttrEnumSentences DialogAutocapitalizeAttrEnum = "sentences"
+	DialogAutocapitalizeAttrEnumWords DialogAutocapitalizeAttrEnum = "words"
+)
+
+type DialogAutocorrectAttrEnum string
+
+const (
+	DialogAutocorrectAttrEnumOff DialogAutocorrectAttrEnum = "off"
+	DialogAutocorrectAttrEnumOn DialogAutocorrectAttrEnum = "on"
+)
+
+type DialogContenteditableAttrEnum string
+
+const (
+	DialogContenteditableAttrEnumPlaintextOnly DialogContenteditableAttrEnum = "plaintext-only"
+	DialogContenteditableAttrEnumTrue DialogContenteditableAttrEnum = "true"
+	DialogContenteditableAttrEnumFalse DialogContenteditableAttrEnum = "false"
+)
+
+type dialogAttrs map[string]any
+
+func (e *DialogElement) Autocapitalize(a DialogAutocapitalizeAttrEnum) *DialogElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *DialogElement) Autocorrect() *DialogElement {
+func (e *DialogElement) Autocorrect(a DialogAutocorrectAttrEnum) *DialogElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *DialogElement) Autofocus() *DialogElement {
+func (e *DialogElement) Class(s ...string) *DialogElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *DialogElement) Class() *DialogElement {
+func (e *DialogElement) Contenteditable(a DialogContenteditableAttrEnum) *DialogElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *DialogElement) Contenteditable() *DialogElement {
+func (e *DialogElement) Id(s string) *DialogElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *DialogElement) Id() *DialogElement {
-	return e
-}
-
-func (e *DialogElement) Slot() *DialogElement {
+func (e *DialogElement) Slot(s string) *DialogElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *DialogElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

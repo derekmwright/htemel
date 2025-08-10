@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type FooterElement struct {
+	attributes footerAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func FooterIf(condition bool, children ...htemel.Node) *FooterElement {
 	}
 }
 
-func (e *FooterElement) Autocapitalize() *FooterElement {
+type FooterAutocapitalizeAttrEnum string
+
+const (
+	FooterAutocapitalizeAttrEnumOn FooterAutocapitalizeAttrEnum = "on"
+	FooterAutocapitalizeAttrEnumSentences FooterAutocapitalizeAttrEnum = "sentences"
+	FooterAutocapitalizeAttrEnumWords FooterAutocapitalizeAttrEnum = "words"
+	FooterAutocapitalizeAttrEnumCharacters FooterAutocapitalizeAttrEnum = "characters"
+	FooterAutocapitalizeAttrEnumNone FooterAutocapitalizeAttrEnum = "none"
+	FooterAutocapitalizeAttrEnumOff FooterAutocapitalizeAttrEnum = "off"
+)
+
+type FooterAutocorrectAttrEnum string
+
+const (
+	FooterAutocorrectAttrEnumOff FooterAutocorrectAttrEnum = "off"
+	FooterAutocorrectAttrEnumOn FooterAutocorrectAttrEnum = "on"
+)
+
+type FooterContenteditableAttrEnum string
+
+const (
+	FooterContenteditableAttrEnumFalse FooterContenteditableAttrEnum = "false"
+	FooterContenteditableAttrEnumPlaintextOnly FooterContenteditableAttrEnum = "plaintext-only"
+	FooterContenteditableAttrEnumTrue FooterContenteditableAttrEnum = "true"
+)
+
+type footerAttrs map[string]any
+
+func (e *FooterElement) Autocapitalize(a FooterAutocapitalizeAttrEnum) *FooterElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *FooterElement) Autocorrect() *FooterElement {
+func (e *FooterElement) Autocorrect(a FooterAutocorrectAttrEnum) *FooterElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *FooterElement) Autofocus() *FooterElement {
+func (e *FooterElement) Class(s ...string) *FooterElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *FooterElement) Class() *FooterElement {
+func (e *FooterElement) Contenteditable(a FooterContenteditableAttrEnum) *FooterElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *FooterElement) Contenteditable() *FooterElement {
+func (e *FooterElement) Id(s string) *FooterElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *FooterElement) Id() *FooterElement {
-	return e
-}
-
-func (e *FooterElement) Slot() *FooterElement {
+func (e *FooterElement) Slot(s string) *FooterElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *FooterElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

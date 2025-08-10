@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type AddressElement struct {
+	attributes addressAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func AddressIf(condition bool, children ...htemel.Node) *AddressElement {
 	}
 }
 
-func (e *AddressElement) Autocapitalize() *AddressElement {
+type AddressAutocapitalizeAttrEnum string
+
+const (
+	AddressAutocapitalizeAttrEnumOn AddressAutocapitalizeAttrEnum = "on"
+	AddressAutocapitalizeAttrEnumSentences AddressAutocapitalizeAttrEnum = "sentences"
+	AddressAutocapitalizeAttrEnumWords AddressAutocapitalizeAttrEnum = "words"
+	AddressAutocapitalizeAttrEnumCharacters AddressAutocapitalizeAttrEnum = "characters"
+	AddressAutocapitalizeAttrEnumNone AddressAutocapitalizeAttrEnum = "none"
+	AddressAutocapitalizeAttrEnumOff AddressAutocapitalizeAttrEnum = "off"
+)
+
+type AddressAutocorrectAttrEnum string
+
+const (
+	AddressAutocorrectAttrEnumOn AddressAutocorrectAttrEnum = "on"
+	AddressAutocorrectAttrEnumOff AddressAutocorrectAttrEnum = "off"
+)
+
+type AddressContenteditableAttrEnum string
+
+const (
+	AddressContenteditableAttrEnumPlaintextOnly AddressContenteditableAttrEnum = "plaintext-only"
+	AddressContenteditableAttrEnumTrue AddressContenteditableAttrEnum = "true"
+	AddressContenteditableAttrEnumFalse AddressContenteditableAttrEnum = "false"
+)
+
+type addressAttrs map[string]any
+
+func (e *AddressElement) Autocapitalize(a AddressAutocapitalizeAttrEnum) *AddressElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *AddressElement) Autocorrect() *AddressElement {
+func (e *AddressElement) Autocorrect(a AddressAutocorrectAttrEnum) *AddressElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *AddressElement) Autofocus() *AddressElement {
+func (e *AddressElement) Class(s ...string) *AddressElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *AddressElement) Class() *AddressElement {
+func (e *AddressElement) Contenteditable(a AddressContenteditableAttrEnum) *AddressElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *AddressElement) Contenteditable() *AddressElement {
+func (e *AddressElement) Id(s string) *AddressElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *AddressElement) Id() *AddressElement {
-	return e
-}
-
-func (e *AddressElement) Slot() *AddressElement {
+func (e *AddressElement) Slot(s string) *AddressElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *AddressElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

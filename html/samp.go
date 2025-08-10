@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type SampElement struct {
+	attributes sampAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func SampIf(condition bool, children ...htemel.Node) *SampElement {
 	}
 }
 
-func (e *SampElement) Autocapitalize() *SampElement {
+type SampAutocapitalizeAttrEnum string
+
+const (
+	SampAutocapitalizeAttrEnumSentences SampAutocapitalizeAttrEnum = "sentences"
+	SampAutocapitalizeAttrEnumWords SampAutocapitalizeAttrEnum = "words"
+	SampAutocapitalizeAttrEnumCharacters SampAutocapitalizeAttrEnum = "characters"
+	SampAutocapitalizeAttrEnumNone SampAutocapitalizeAttrEnum = "none"
+	SampAutocapitalizeAttrEnumOff SampAutocapitalizeAttrEnum = "off"
+	SampAutocapitalizeAttrEnumOn SampAutocapitalizeAttrEnum = "on"
+)
+
+type SampAutocorrectAttrEnum string
+
+const (
+	SampAutocorrectAttrEnumOff SampAutocorrectAttrEnum = "off"
+	SampAutocorrectAttrEnumOn SampAutocorrectAttrEnum = "on"
+)
+
+type SampContenteditableAttrEnum string
+
+const (
+	SampContenteditableAttrEnumFalse SampContenteditableAttrEnum = "false"
+	SampContenteditableAttrEnumPlaintextOnly SampContenteditableAttrEnum = "plaintext-only"
+	SampContenteditableAttrEnumTrue SampContenteditableAttrEnum = "true"
+)
+
+type sampAttrs map[string]any
+
+func (e *SampElement) Autocapitalize(a SampAutocapitalizeAttrEnum) *SampElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *SampElement) Autocorrect() *SampElement {
+func (e *SampElement) Autocorrect(a SampAutocorrectAttrEnum) *SampElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *SampElement) Autofocus() *SampElement {
+func (e *SampElement) Class(s ...string) *SampElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *SampElement) Class() *SampElement {
+func (e *SampElement) Contenteditable(a SampContenteditableAttrEnum) *SampElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *SampElement) Contenteditable() *SampElement {
+func (e *SampElement) Id(s string) *SampElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *SampElement) Id() *SampElement {
-	return e
-}
-
-func (e *SampElement) Slot() *SampElement {
+func (e *SampElement) Slot(s string) *SampElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *SampElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

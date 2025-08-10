@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type ScriptElement struct {
+	attributes scriptAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func ScriptIf(condition bool, children ...htemel.Node) *ScriptElement {
 	}
 }
 
-func (e *ScriptElement) Autocapitalize() *ScriptElement {
+type ScriptAutocapitalizeAttrEnum string
+
+const (
+	ScriptAutocapitalizeAttrEnumWords ScriptAutocapitalizeAttrEnum = "words"
+	ScriptAutocapitalizeAttrEnumCharacters ScriptAutocapitalizeAttrEnum = "characters"
+	ScriptAutocapitalizeAttrEnumNone ScriptAutocapitalizeAttrEnum = "none"
+	ScriptAutocapitalizeAttrEnumOff ScriptAutocapitalizeAttrEnum = "off"
+	ScriptAutocapitalizeAttrEnumOn ScriptAutocapitalizeAttrEnum = "on"
+	ScriptAutocapitalizeAttrEnumSentences ScriptAutocapitalizeAttrEnum = "sentences"
+)
+
+type ScriptAutocorrectAttrEnum string
+
+const (
+	ScriptAutocorrectAttrEnumOff ScriptAutocorrectAttrEnum = "off"
+	ScriptAutocorrectAttrEnumOn ScriptAutocorrectAttrEnum = "on"
+)
+
+type ScriptContenteditableAttrEnum string
+
+const (
+	ScriptContenteditableAttrEnumPlaintextOnly ScriptContenteditableAttrEnum = "plaintext-only"
+	ScriptContenteditableAttrEnumTrue ScriptContenteditableAttrEnum = "true"
+	ScriptContenteditableAttrEnumFalse ScriptContenteditableAttrEnum = "false"
+)
+
+type scriptAttrs map[string]any
+
+func (e *ScriptElement) Autocapitalize(a ScriptAutocapitalizeAttrEnum) *ScriptElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *ScriptElement) Autocorrect() *ScriptElement {
+func (e *ScriptElement) Autocorrect(a ScriptAutocorrectAttrEnum) *ScriptElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *ScriptElement) Autofocus() *ScriptElement {
+func (e *ScriptElement) Class(s ...string) *ScriptElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *ScriptElement) Class() *ScriptElement {
+func (e *ScriptElement) Contenteditable(a ScriptContenteditableAttrEnum) *ScriptElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *ScriptElement) Contenteditable() *ScriptElement {
+func (e *ScriptElement) Id(s string) *ScriptElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *ScriptElement) Id() *ScriptElement {
-	return e
-}
-
-func (e *ScriptElement) Slot() *ScriptElement {
+func (e *ScriptElement) Slot(s string) *ScriptElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *ScriptElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

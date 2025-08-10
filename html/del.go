@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type DelElement struct {
+	attributes delAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 	}
 }
 
-func (e *DelElement) Autocapitalize() *DelElement {
+type DelAutocapitalizeAttrEnum string
+
+const (
+	DelAutocapitalizeAttrEnumOff DelAutocapitalizeAttrEnum = "off"
+	DelAutocapitalizeAttrEnumOn DelAutocapitalizeAttrEnum = "on"
+	DelAutocapitalizeAttrEnumSentences DelAutocapitalizeAttrEnum = "sentences"
+	DelAutocapitalizeAttrEnumWords DelAutocapitalizeAttrEnum = "words"
+	DelAutocapitalizeAttrEnumCharacters DelAutocapitalizeAttrEnum = "characters"
+	DelAutocapitalizeAttrEnumNone DelAutocapitalizeAttrEnum = "none"
+)
+
+type DelAutocorrectAttrEnum string
+
+const (
+	DelAutocorrectAttrEnumOff DelAutocorrectAttrEnum = "off"
+	DelAutocorrectAttrEnumOn DelAutocorrectAttrEnum = "on"
+)
+
+type DelContenteditableAttrEnum string
+
+const (
+	DelContenteditableAttrEnumFalse DelContenteditableAttrEnum = "false"
+	DelContenteditableAttrEnumPlaintextOnly DelContenteditableAttrEnum = "plaintext-only"
+	DelContenteditableAttrEnumTrue DelContenteditableAttrEnum = "true"
+)
+
+type delAttrs map[string]any
+
+func (e *DelElement) Autocapitalize(a DelAutocapitalizeAttrEnum) *DelElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *DelElement) Autocorrect() *DelElement {
+func (e *DelElement) Autocorrect(a DelAutocorrectAttrEnum) *DelElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *DelElement) Autofocus() *DelElement {
+func (e *DelElement) Class(s ...string) *DelElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *DelElement) Class() *DelElement {
+func (e *DelElement) Contenteditable(a DelContenteditableAttrEnum) *DelElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *DelElement) Contenteditable() *DelElement {
+func (e *DelElement) Id(s string) *DelElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *DelElement) Id() *DelElement {
-	return e
-}
-
-func (e *DelElement) Slot() *DelElement {
+func (e *DelElement) Slot(s string) *DelElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *DelElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

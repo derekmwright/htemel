@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type SearchElement struct {
+	attributes searchAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func SearchIf(condition bool, children ...htemel.Node) *SearchElement {
 	}
 }
 
-func (e *SearchElement) Autocapitalize() *SearchElement {
+type SearchAutocapitalizeAttrEnum string
+
+const (
+	SearchAutocapitalizeAttrEnumSentences SearchAutocapitalizeAttrEnum = "sentences"
+	SearchAutocapitalizeAttrEnumWords SearchAutocapitalizeAttrEnum = "words"
+	SearchAutocapitalizeAttrEnumCharacters SearchAutocapitalizeAttrEnum = "characters"
+	SearchAutocapitalizeAttrEnumNone SearchAutocapitalizeAttrEnum = "none"
+	SearchAutocapitalizeAttrEnumOff SearchAutocapitalizeAttrEnum = "off"
+	SearchAutocapitalizeAttrEnumOn SearchAutocapitalizeAttrEnum = "on"
+)
+
+type SearchAutocorrectAttrEnum string
+
+const (
+	SearchAutocorrectAttrEnumOn SearchAutocorrectAttrEnum = "on"
+	SearchAutocorrectAttrEnumOff SearchAutocorrectAttrEnum = "off"
+)
+
+type SearchContenteditableAttrEnum string
+
+const (
+	SearchContenteditableAttrEnumFalse SearchContenteditableAttrEnum = "false"
+	SearchContenteditableAttrEnumPlaintextOnly SearchContenteditableAttrEnum = "plaintext-only"
+	SearchContenteditableAttrEnumTrue SearchContenteditableAttrEnum = "true"
+)
+
+type searchAttrs map[string]any
+
+func (e *SearchElement) Autocapitalize(a SearchAutocapitalizeAttrEnum) *SearchElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *SearchElement) Autocorrect() *SearchElement {
+func (e *SearchElement) Autocorrect(a SearchAutocorrectAttrEnum) *SearchElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *SearchElement) Autofocus() *SearchElement {
+func (e *SearchElement) Class(s ...string) *SearchElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *SearchElement) Class() *SearchElement {
+func (e *SearchElement) Contenteditable(a SearchContenteditableAttrEnum) *SearchElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *SearchElement) Contenteditable() *SearchElement {
+func (e *SearchElement) Id(s string) *SearchElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *SearchElement) Id() *SearchElement {
-	return e
-}
-
-func (e *SearchElement) Slot() *SearchElement {
+func (e *SearchElement) Slot(s string) *SearchElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *SearchElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

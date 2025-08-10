@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type BdiElement struct {
+	attributes bdiAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func BdiIf(condition bool, children ...htemel.Node) *BdiElement {
 	}
 }
 
-func (e *BdiElement) Autocapitalize() *BdiElement {
+type BdiAutocapitalizeAttrEnum string
+
+const (
+	BdiAutocapitalizeAttrEnumNone BdiAutocapitalizeAttrEnum = "none"
+	BdiAutocapitalizeAttrEnumOff BdiAutocapitalizeAttrEnum = "off"
+	BdiAutocapitalizeAttrEnumOn BdiAutocapitalizeAttrEnum = "on"
+	BdiAutocapitalizeAttrEnumSentences BdiAutocapitalizeAttrEnum = "sentences"
+	BdiAutocapitalizeAttrEnumWords BdiAutocapitalizeAttrEnum = "words"
+	BdiAutocapitalizeAttrEnumCharacters BdiAutocapitalizeAttrEnum = "characters"
+)
+
+type BdiAutocorrectAttrEnum string
+
+const (
+	BdiAutocorrectAttrEnumOff BdiAutocorrectAttrEnum = "off"
+	BdiAutocorrectAttrEnumOn BdiAutocorrectAttrEnum = "on"
+)
+
+type BdiContenteditableAttrEnum string
+
+const (
+	BdiContenteditableAttrEnumTrue BdiContenteditableAttrEnum = "true"
+	BdiContenteditableAttrEnumFalse BdiContenteditableAttrEnum = "false"
+	BdiContenteditableAttrEnumPlaintextOnly BdiContenteditableAttrEnum = "plaintext-only"
+)
+
+type bdiAttrs map[string]any
+
+func (e *BdiElement) Autocapitalize(a BdiAutocapitalizeAttrEnum) *BdiElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *BdiElement) Autocorrect() *BdiElement {
+func (e *BdiElement) Autocorrect(a BdiAutocorrectAttrEnum) *BdiElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *BdiElement) Autofocus() *BdiElement {
+func (e *BdiElement) Class(s ...string) *BdiElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *BdiElement) Class() *BdiElement {
+func (e *BdiElement) Contenteditable(a BdiContenteditableAttrEnum) *BdiElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *BdiElement) Contenteditable() *BdiElement {
+func (e *BdiElement) Id(s string) *BdiElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *BdiElement) Id() *BdiElement {
-	return e
-}
-
-func (e *BdiElement) Slot() *BdiElement {
+func (e *BdiElement) Slot(s string) *BdiElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *BdiElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

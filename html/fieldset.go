@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type FieldsetElement struct {
+	attributes fieldsetAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func FieldsetIf(condition bool, children ...htemel.Node) *FieldsetElement {
 	}
 }
 
-func (e *FieldsetElement) Autocapitalize() *FieldsetElement {
+type FieldsetAutocapitalizeAttrEnum string
+
+const (
+	FieldsetAutocapitalizeAttrEnumOff FieldsetAutocapitalizeAttrEnum = "off"
+	FieldsetAutocapitalizeAttrEnumOn FieldsetAutocapitalizeAttrEnum = "on"
+	FieldsetAutocapitalizeAttrEnumSentences FieldsetAutocapitalizeAttrEnum = "sentences"
+	FieldsetAutocapitalizeAttrEnumWords FieldsetAutocapitalizeAttrEnum = "words"
+	FieldsetAutocapitalizeAttrEnumCharacters FieldsetAutocapitalizeAttrEnum = "characters"
+	FieldsetAutocapitalizeAttrEnumNone FieldsetAutocapitalizeAttrEnum = "none"
+)
+
+type FieldsetAutocorrectAttrEnum string
+
+const (
+	FieldsetAutocorrectAttrEnumOff FieldsetAutocorrectAttrEnum = "off"
+	FieldsetAutocorrectAttrEnumOn FieldsetAutocorrectAttrEnum = "on"
+)
+
+type FieldsetContenteditableAttrEnum string
+
+const (
+	FieldsetContenteditableAttrEnumFalse FieldsetContenteditableAttrEnum = "false"
+	FieldsetContenteditableAttrEnumPlaintextOnly FieldsetContenteditableAttrEnum = "plaintext-only"
+	FieldsetContenteditableAttrEnumTrue FieldsetContenteditableAttrEnum = "true"
+)
+
+type fieldsetAttrs map[string]any
+
+func (e *FieldsetElement) Autocapitalize(a FieldsetAutocapitalizeAttrEnum) *FieldsetElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *FieldsetElement) Autocorrect() *FieldsetElement {
+func (e *FieldsetElement) Autocorrect(a FieldsetAutocorrectAttrEnum) *FieldsetElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *FieldsetElement) Autofocus() *FieldsetElement {
+func (e *FieldsetElement) Class(s ...string) *FieldsetElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *FieldsetElement) Class() *FieldsetElement {
+func (e *FieldsetElement) Contenteditable(a FieldsetContenteditableAttrEnum) *FieldsetElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *FieldsetElement) Contenteditable() *FieldsetElement {
+func (e *FieldsetElement) Id(s string) *FieldsetElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *FieldsetElement) Id() *FieldsetElement {
-	return e
-}
-
-func (e *FieldsetElement) Slot() *FieldsetElement {
+func (e *FieldsetElement) Slot(s string) *FieldsetElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *FieldsetElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

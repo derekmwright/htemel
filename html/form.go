@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type FormElement struct {
+	attributes formAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func FormIf(condition bool, children ...htemel.Node) *FormElement {
 	}
 }
 
-func (e *FormElement) Autocapitalize() *FormElement {
+type FormAutocapitalizeAttrEnum string
+
+const (
+	FormAutocapitalizeAttrEnumOff FormAutocapitalizeAttrEnum = "off"
+	FormAutocapitalizeAttrEnumOn FormAutocapitalizeAttrEnum = "on"
+	FormAutocapitalizeAttrEnumSentences FormAutocapitalizeAttrEnum = "sentences"
+	FormAutocapitalizeAttrEnumWords FormAutocapitalizeAttrEnum = "words"
+	FormAutocapitalizeAttrEnumCharacters FormAutocapitalizeAttrEnum = "characters"
+	FormAutocapitalizeAttrEnumNone FormAutocapitalizeAttrEnum = "none"
+)
+
+type FormAutocorrectAttrEnum string
+
+const (
+	FormAutocorrectAttrEnumOff FormAutocorrectAttrEnum = "off"
+	FormAutocorrectAttrEnumOn FormAutocorrectAttrEnum = "on"
+)
+
+type FormContenteditableAttrEnum string
+
+const (
+	FormContenteditableAttrEnumTrue FormContenteditableAttrEnum = "true"
+	FormContenteditableAttrEnumFalse FormContenteditableAttrEnum = "false"
+	FormContenteditableAttrEnumPlaintextOnly FormContenteditableAttrEnum = "plaintext-only"
+)
+
+type formAttrs map[string]any
+
+func (e *FormElement) Autocapitalize(a FormAutocapitalizeAttrEnum) *FormElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *FormElement) Autocorrect() *FormElement {
+func (e *FormElement) Autocorrect(a FormAutocorrectAttrEnum) *FormElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *FormElement) Autofocus() *FormElement {
+func (e *FormElement) Class(s ...string) *FormElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *FormElement) Class() *FormElement {
+func (e *FormElement) Contenteditable(a FormContenteditableAttrEnum) *FormElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *FormElement) Contenteditable() *FormElement {
+func (e *FormElement) Id(s string) *FormElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *FormElement) Id() *FormElement {
-	return e
-}
-
-func (e *FormElement) Slot() *FormElement {
+func (e *FormElement) Slot(s string) *FormElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *FormElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

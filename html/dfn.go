@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type DfnElement struct {
+	attributes dfnAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func DfnIf(condition bool, children ...htemel.Node) *DfnElement {
 	}
 }
 
-func (e *DfnElement) Autocapitalize() *DfnElement {
+type DfnAutocapitalizeAttrEnum string
+
+const (
+	DfnAutocapitalizeAttrEnumWords DfnAutocapitalizeAttrEnum = "words"
+	DfnAutocapitalizeAttrEnumCharacters DfnAutocapitalizeAttrEnum = "characters"
+	DfnAutocapitalizeAttrEnumNone DfnAutocapitalizeAttrEnum = "none"
+	DfnAutocapitalizeAttrEnumOff DfnAutocapitalizeAttrEnum = "off"
+	DfnAutocapitalizeAttrEnumOn DfnAutocapitalizeAttrEnum = "on"
+	DfnAutocapitalizeAttrEnumSentences DfnAutocapitalizeAttrEnum = "sentences"
+)
+
+type DfnAutocorrectAttrEnum string
+
+const (
+	DfnAutocorrectAttrEnumOff DfnAutocorrectAttrEnum = "off"
+	DfnAutocorrectAttrEnumOn DfnAutocorrectAttrEnum = "on"
+)
+
+type DfnContenteditableAttrEnum string
+
+const (
+	DfnContenteditableAttrEnumFalse DfnContenteditableAttrEnum = "false"
+	DfnContenteditableAttrEnumPlaintextOnly DfnContenteditableAttrEnum = "plaintext-only"
+	DfnContenteditableAttrEnumTrue DfnContenteditableAttrEnum = "true"
+)
+
+type dfnAttrs map[string]any
+
+func (e *DfnElement) Autocapitalize(a DfnAutocapitalizeAttrEnum) *DfnElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *DfnElement) Autocorrect() *DfnElement {
+func (e *DfnElement) Autocorrect(a DfnAutocorrectAttrEnum) *DfnElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *DfnElement) Autofocus() *DfnElement {
+func (e *DfnElement) Class(s ...string) *DfnElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *DfnElement) Class() *DfnElement {
+func (e *DfnElement) Contenteditable(a DfnContenteditableAttrEnum) *DfnElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *DfnElement) Contenteditable() *DfnElement {
+func (e *DfnElement) Id(s string) *DfnElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *DfnElement) Id() *DfnElement {
-	return e
-}
-
-func (e *DfnElement) Slot() *DfnElement {
+func (e *DfnElement) Slot(s string) *DfnElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *DfnElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

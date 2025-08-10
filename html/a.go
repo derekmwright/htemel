@@ -2,11 +2,15 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
+	"strings"
 )
 
 type AElement struct {
+	attributes aAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +37,67 @@ func AIf(condition bool, children ...htemel.Node) *AElement {
 	}
 }
 
-func (e *AElement) Autocapitalize() *AElement {
+type AAutocapitalizeAttrEnum string
+
+const (
+	AAutocapitalizeAttrEnumOff AAutocapitalizeAttrEnum = "off"
+	AAutocapitalizeAttrEnumOn AAutocapitalizeAttrEnum = "on"
+	AAutocapitalizeAttrEnumSentences AAutocapitalizeAttrEnum = "sentences"
+	AAutocapitalizeAttrEnumWords AAutocapitalizeAttrEnum = "words"
+	AAutocapitalizeAttrEnumCharacters AAutocapitalizeAttrEnum = "characters"
+	AAutocapitalizeAttrEnumNone AAutocapitalizeAttrEnum = "none"
+)
+
+type AAutocorrectAttrEnum string
+
+const (
+	AAutocorrectAttrEnumOff AAutocorrectAttrEnum = "off"
+	AAutocorrectAttrEnumOn AAutocorrectAttrEnum = "on"
+)
+
+type AContenteditableAttrEnum string
+
+const (
+	AContenteditableAttrEnumFalse AContenteditableAttrEnum = "false"
+	AContenteditableAttrEnumPlaintextOnly AContenteditableAttrEnum = "plaintext-only"
+	AContenteditableAttrEnumTrue AContenteditableAttrEnum = "true"
+)
+
+type aAttrs map[string]any
+
+func (e *AElement) Autocapitalize(a AAutocapitalizeAttrEnum) *AElement {
+	e.attributes["autocapitalize"] = a
+
 	return e
 }
 
-func (e *AElement) Autocorrect() *AElement {
+func (e *AElement) Autocorrect(a AAutocorrectAttrEnum) *AElement {
+	e.attributes["autocorrect"] = a
+
 	return e
 }
 
-func (e *AElement) Autofocus() *AElement {
+func (e *AElement) Class(s ...string) *AElement {
+	e.attributes["class"] = strings.Join(s, " ")
+
 	return e
 }
 
-func (e *AElement) Class() *AElement {
+func (e *AElement) Contenteditable(a AContenteditableAttrEnum) *AElement {
+	e.attributes["contenteditable"] = a
+
 	return e
 }
 
-func (e *AElement) Contenteditable() *AElement {
+func (e *AElement) Id(s string) *AElement {
+	e.attributes["id"] = s
+
 	return e
 }
 
-func (e *AElement) Id() *AElement {
-	return e
-}
+func (e *AElement) Slot(s string) *AElement {
+	e.attributes["slot"] = s
 
-func (e *AElement) Slot() *AElement {
 	return e
 }
 
@@ -70,7 +110,16 @@ func (e *AElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type ColElement struct {
+	attributes colAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func ColIf(condition bool, children ...htemel.Node) *ColElement {
 	}
 }
 
-func (e *ColElement) Autocapitalize() *ColElement {
+type ColAutocapitalizeAttrEnum string
+
+const (
+	ColAutocapitalizeAttrEnumNone ColAutocapitalizeAttrEnum = "none"
+	ColAutocapitalizeAttrEnumOff ColAutocapitalizeAttrEnum = "off"
+	ColAutocapitalizeAttrEnumOn ColAutocapitalizeAttrEnum = "on"
+	ColAutocapitalizeAttrEnumSentences ColAutocapitalizeAttrEnum = "sentences"
+	ColAutocapitalizeAttrEnumWords ColAutocapitalizeAttrEnum = "words"
+	ColAutocapitalizeAttrEnumCharacters ColAutocapitalizeAttrEnum = "characters"
+)
+
+type ColAutocorrectAttrEnum string
+
+const (
+	ColAutocorrectAttrEnumOff ColAutocorrectAttrEnum = "off"
+	ColAutocorrectAttrEnumOn ColAutocorrectAttrEnum = "on"
+)
+
+type ColContenteditableAttrEnum string
+
+const (
+	ColContenteditableAttrEnumFalse ColContenteditableAttrEnum = "false"
+	ColContenteditableAttrEnumPlaintextOnly ColContenteditableAttrEnum = "plaintext-only"
+	ColContenteditableAttrEnumTrue ColContenteditableAttrEnum = "true"
+)
+
+type colAttrs map[string]any
+
+func (e *ColElement) Autocapitalize(a ColAutocapitalizeAttrEnum) *ColElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *ColElement) Autocorrect() *ColElement {
+func (e *ColElement) Autocorrect(a ColAutocorrectAttrEnum) *ColElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *ColElement) Autofocus() *ColElement {
+func (e *ColElement) Class(s ...string) *ColElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *ColElement) Class() *ColElement {
+func (e *ColElement) Contenteditable(a ColContenteditableAttrEnum) *ColElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *ColElement) Contenteditable() *ColElement {
+func (e *ColElement) Id(s string) *ColElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *ColElement) Id() *ColElement {
-	return e
-}
-
-func (e *ColElement) Slot() *ColElement {
+func (e *ColElement) Slot(s string) *ColElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *ColElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

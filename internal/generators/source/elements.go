@@ -12,10 +12,11 @@ import (
 
 type ImportSet map[string]struct{}
 
-func (is ImportSet) Add(i string) {
+func (is ImportSet) Add(i string) ImportSet {
 	if _, ok := is[i]; !ok {
 		is[i] = struct{}{}
 	}
+	return is
 }
 
 func (is ImportSet) Merge(other ImportSet) {
@@ -85,6 +86,7 @@ func BaseStruct() (*template.Template, ImportSet) {
 		}).
 		Parse(`
 type {{ .Tag | titleCase }}Element struct {
+	attributes {{ .Tag }}Attrs
 	{{ if not .Void }}children []htemel.Node{{ end }}
 	skipRender bool
 }
@@ -148,7 +150,16 @@ func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
@@ -168,5 +179,7 @@ func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
 }
 `))
 
-	return tmpl, ImportSet{"io": {}}
+	is := ImportSet{}
+
+	return tmpl, is.Add("io").Add("fmt").Add("golang.org/x/net/html")
 }

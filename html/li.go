@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type LiElement struct {
+	attributes liAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func LiIf(condition bool, children ...htemel.Node) *LiElement {
 	}
 }
 
-func (e *LiElement) Autocapitalize() *LiElement {
+type LiAutocapitalizeAttrEnum string
+
+const (
+	LiAutocapitalizeAttrEnumCharacters LiAutocapitalizeAttrEnum = "characters"
+	LiAutocapitalizeAttrEnumNone LiAutocapitalizeAttrEnum = "none"
+	LiAutocapitalizeAttrEnumOff LiAutocapitalizeAttrEnum = "off"
+	LiAutocapitalizeAttrEnumOn LiAutocapitalizeAttrEnum = "on"
+	LiAutocapitalizeAttrEnumSentences LiAutocapitalizeAttrEnum = "sentences"
+	LiAutocapitalizeAttrEnumWords LiAutocapitalizeAttrEnum = "words"
+)
+
+type LiAutocorrectAttrEnum string
+
+const (
+	LiAutocorrectAttrEnumOff LiAutocorrectAttrEnum = "off"
+	LiAutocorrectAttrEnumOn LiAutocorrectAttrEnum = "on"
+)
+
+type LiContenteditableAttrEnum string
+
+const (
+	LiContenteditableAttrEnumFalse LiContenteditableAttrEnum = "false"
+	LiContenteditableAttrEnumPlaintextOnly LiContenteditableAttrEnum = "plaintext-only"
+	LiContenteditableAttrEnumTrue LiContenteditableAttrEnum = "true"
+)
+
+type liAttrs map[string]any
+
+func (e *LiElement) Autocapitalize(a LiAutocapitalizeAttrEnum) *LiElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *LiElement) Autocorrect() *LiElement {
+func (e *LiElement) Autocorrect(a LiAutocorrectAttrEnum) *LiElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *LiElement) Autofocus() *LiElement {
+func (e *LiElement) Class(s ...string) *LiElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *LiElement) Class() *LiElement {
+func (e *LiElement) Contenteditable(a LiContenteditableAttrEnum) *LiElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *LiElement) Contenteditable() *LiElement {
+func (e *LiElement) Id(s string) *LiElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *LiElement) Id() *LiElement {
-	return e
-}
-
-func (e *LiElement) Slot() *LiElement {
+func (e *LiElement) Slot(s string) *LiElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *LiElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

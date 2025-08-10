@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type PictureElement struct {
+	attributes pictureAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func PictureIf(condition bool, children ...htemel.Node) *PictureElement {
 	}
 }
 
-func (e *PictureElement) Autocapitalize() *PictureElement {
+type PictureAutocapitalizeAttrEnum string
+
+const (
+	PictureAutocapitalizeAttrEnumCharacters PictureAutocapitalizeAttrEnum = "characters"
+	PictureAutocapitalizeAttrEnumNone PictureAutocapitalizeAttrEnum = "none"
+	PictureAutocapitalizeAttrEnumOff PictureAutocapitalizeAttrEnum = "off"
+	PictureAutocapitalizeAttrEnumOn PictureAutocapitalizeAttrEnum = "on"
+	PictureAutocapitalizeAttrEnumSentences PictureAutocapitalizeAttrEnum = "sentences"
+	PictureAutocapitalizeAttrEnumWords PictureAutocapitalizeAttrEnum = "words"
+)
+
+type PictureAutocorrectAttrEnum string
+
+const (
+	PictureAutocorrectAttrEnumOff PictureAutocorrectAttrEnum = "off"
+	PictureAutocorrectAttrEnumOn PictureAutocorrectAttrEnum = "on"
+)
+
+type PictureContenteditableAttrEnum string
+
+const (
+	PictureContenteditableAttrEnumFalse PictureContenteditableAttrEnum = "false"
+	PictureContenteditableAttrEnumPlaintextOnly PictureContenteditableAttrEnum = "plaintext-only"
+	PictureContenteditableAttrEnumTrue PictureContenteditableAttrEnum = "true"
+)
+
+type pictureAttrs map[string]any
+
+func (e *PictureElement) Autocapitalize(a PictureAutocapitalizeAttrEnum) *PictureElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *PictureElement) Autocorrect() *PictureElement {
+func (e *PictureElement) Autocorrect(a PictureAutocorrectAttrEnum) *PictureElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *PictureElement) Autofocus() *PictureElement {
+func (e *PictureElement) Class(s ...string) *PictureElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *PictureElement) Class() *PictureElement {
+func (e *PictureElement) Contenteditable(a PictureContenteditableAttrEnum) *PictureElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *PictureElement) Contenteditable() *PictureElement {
+func (e *PictureElement) Id(s string) *PictureElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *PictureElement) Id() *PictureElement {
-	return e
-}
-
-func (e *PictureElement) Slot() *PictureElement {
+func (e *PictureElement) Slot(s string) *PictureElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *PictureElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

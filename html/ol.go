@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type OlElement struct {
+	attributes olAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func OlIf(condition bool, children ...htemel.Node) *OlElement {
 	}
 }
 
-func (e *OlElement) Autocapitalize() *OlElement {
+type OlAutocapitalizeAttrEnum string
+
+const (
+	OlAutocapitalizeAttrEnumCharacters OlAutocapitalizeAttrEnum = "characters"
+	OlAutocapitalizeAttrEnumNone OlAutocapitalizeAttrEnum = "none"
+	OlAutocapitalizeAttrEnumOff OlAutocapitalizeAttrEnum = "off"
+	OlAutocapitalizeAttrEnumOn OlAutocapitalizeAttrEnum = "on"
+	OlAutocapitalizeAttrEnumSentences OlAutocapitalizeAttrEnum = "sentences"
+	OlAutocapitalizeAttrEnumWords OlAutocapitalizeAttrEnum = "words"
+)
+
+type OlAutocorrectAttrEnum string
+
+const (
+	OlAutocorrectAttrEnumOff OlAutocorrectAttrEnum = "off"
+	OlAutocorrectAttrEnumOn OlAutocorrectAttrEnum = "on"
+)
+
+type OlContenteditableAttrEnum string
+
+const (
+	OlContenteditableAttrEnumPlaintextOnly OlContenteditableAttrEnum = "plaintext-only"
+	OlContenteditableAttrEnumTrue OlContenteditableAttrEnum = "true"
+	OlContenteditableAttrEnumFalse OlContenteditableAttrEnum = "false"
+)
+
+type olAttrs map[string]any
+
+func (e *OlElement) Autocapitalize(a OlAutocapitalizeAttrEnum) *OlElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *OlElement) Autocorrect() *OlElement {
+func (e *OlElement) Autocorrect(a OlAutocorrectAttrEnum) *OlElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *OlElement) Autofocus() *OlElement {
+func (e *OlElement) Class(s ...string) *OlElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *OlElement) Class() *OlElement {
+func (e *OlElement) Contenteditable(a OlContenteditableAttrEnum) *OlElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *OlElement) Contenteditable() *OlElement {
+func (e *OlElement) Id(s string) *OlElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *OlElement) Id() *OlElement {
-	return e
-}
-
-func (e *OlElement) Slot() *OlElement {
+func (e *OlElement) Slot(s string) *OlElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *OlElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -1,9 +1,11 @@
 package spec
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type Spec struct {
-	Name       string
+	Name       string      `json:"name"`
 	Elements   []*Element  `json:"elements"`
 	Attributes []Attribute `json:"attributes,omitempty"`
 }
@@ -91,8 +93,8 @@ type Attribute interface {
 }
 
 type AttributeTypeString struct {
-	Name        string
-	Description string
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
 func (a AttributeTypeString) isAttr() {}
@@ -114,8 +116,8 @@ func (a AttributeTypeString) MarshalJSON() ([]byte, error) {
 }
 
 type AttributeTypeChar struct {
-	Name        string
-	Description string
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
 func (a AttributeTypeChar) isAttr() {}
@@ -137,8 +139,8 @@ func (a AttributeTypeChar) MarshalJSON() ([]byte, error) {
 }
 
 type AttributeTypeNumber struct {
-	Name        string
-	Description string
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
 func (a AttributeTypeNumber) isAttr() {}
@@ -160,8 +162,8 @@ func (a AttributeTypeNumber) MarshalJSON() ([]byte, error) {
 }
 
 type AttributeTypeBool struct {
-	Name        string
-	Description string
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
 func (a AttributeTypeBool) isAttr() {}
@@ -183,9 +185,9 @@ func (a AttributeTypeBool) MarshalJSON() ([]byte, error) {
 }
 
 type AttributeTypeEnum struct {
-	Name        string
-	Description string
-	Allowed     map[string]struct{}
+	Name        string              `json:"name"`
+	Description string              `json:"description"`
+	Allowed     map[string]struct{} `json:"allowed"`
 }
 
 func (a AttributeTypeEnum) isAttr() {}
@@ -196,21 +198,21 @@ func (a AttributeTypeEnum) GetName() string {
 
 func (a AttributeTypeEnum) MarshalJSON() ([]byte, error) {
 	return json.Marshal(&struct {
-		Name          string `json:"name"`
-		Description   string `json:"description,omitempty"`
-		AllowedValues map[string]struct{}
-		AttributeType string `json:"attribute_type"`
+		Name          string              `json:"name"`
+		Description   string              `json:"description,omitempty"`
+		Allowed       map[string]struct{} `json:"allowed"`
+		AttributeType string              `json:"attribute_type"`
 	}{
 		Name:          a.Name,
 		Description:   a.Description,
-		AllowedValues: a.Allowed,
+		Allowed:       a.Allowed,
 		AttributeType: "AttributeTypeEnum",
 	})
 }
 
 type AttributeTypeSST struct {
-	Name        string
-	Description string
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
 func (a AttributeTypeSST) isAttr() {}

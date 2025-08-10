@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type RubyElement struct {
+	attributes rubyAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func RubyIf(condition bool, children ...htemel.Node) *RubyElement {
 	}
 }
 
-func (e *RubyElement) Autocapitalize() *RubyElement {
+type RubyAutocapitalizeAttrEnum string
+
+const (
+	RubyAutocapitalizeAttrEnumWords RubyAutocapitalizeAttrEnum = "words"
+	RubyAutocapitalizeAttrEnumCharacters RubyAutocapitalizeAttrEnum = "characters"
+	RubyAutocapitalizeAttrEnumNone RubyAutocapitalizeAttrEnum = "none"
+	RubyAutocapitalizeAttrEnumOff RubyAutocapitalizeAttrEnum = "off"
+	RubyAutocapitalizeAttrEnumOn RubyAutocapitalizeAttrEnum = "on"
+	RubyAutocapitalizeAttrEnumSentences RubyAutocapitalizeAttrEnum = "sentences"
+)
+
+type RubyAutocorrectAttrEnum string
+
+const (
+	RubyAutocorrectAttrEnumOff RubyAutocorrectAttrEnum = "off"
+	RubyAutocorrectAttrEnumOn RubyAutocorrectAttrEnum = "on"
+)
+
+type RubyContenteditableAttrEnum string
+
+const (
+	RubyContenteditableAttrEnumFalse RubyContenteditableAttrEnum = "false"
+	RubyContenteditableAttrEnumPlaintextOnly RubyContenteditableAttrEnum = "plaintext-only"
+	RubyContenteditableAttrEnumTrue RubyContenteditableAttrEnum = "true"
+)
+
+type rubyAttrs map[string]any
+
+func (e *RubyElement) Autocapitalize(a RubyAutocapitalizeAttrEnum) *RubyElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *RubyElement) Autocorrect() *RubyElement {
+func (e *RubyElement) Autocorrect(a RubyAutocorrectAttrEnum) *RubyElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *RubyElement) Autofocus() *RubyElement {
+func (e *RubyElement) Class(s ...string) *RubyElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *RubyElement) Class() *RubyElement {
+func (e *RubyElement) Contenteditable(a RubyContenteditableAttrEnum) *RubyElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *RubyElement) Contenteditable() *RubyElement {
+func (e *RubyElement) Id(s string) *RubyElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *RubyElement) Id() *RubyElement {
-	return e
-}
-
-func (e *RubyElement) Slot() *RubyElement {
+func (e *RubyElement) Slot(s string) *RubyElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *RubyElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

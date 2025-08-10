@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type TextareaElement struct {
+	attributes textareaAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func TextareaIf(condition bool, children ...htemel.Node) *TextareaElement {
 	}
 }
 
-func (e *TextareaElement) Autocapitalize() *TextareaElement {
+type TextareaAutocapitalizeAttrEnum string
+
+const (
+	TextareaAutocapitalizeAttrEnumCharacters TextareaAutocapitalizeAttrEnum = "characters"
+	TextareaAutocapitalizeAttrEnumNone TextareaAutocapitalizeAttrEnum = "none"
+	TextareaAutocapitalizeAttrEnumOff TextareaAutocapitalizeAttrEnum = "off"
+	TextareaAutocapitalizeAttrEnumOn TextareaAutocapitalizeAttrEnum = "on"
+	TextareaAutocapitalizeAttrEnumSentences TextareaAutocapitalizeAttrEnum = "sentences"
+	TextareaAutocapitalizeAttrEnumWords TextareaAutocapitalizeAttrEnum = "words"
+)
+
+type TextareaAutocorrectAttrEnum string
+
+const (
+	TextareaAutocorrectAttrEnumOff TextareaAutocorrectAttrEnum = "off"
+	TextareaAutocorrectAttrEnumOn TextareaAutocorrectAttrEnum = "on"
+)
+
+type TextareaContenteditableAttrEnum string
+
+const (
+	TextareaContenteditableAttrEnumFalse TextareaContenteditableAttrEnum = "false"
+	TextareaContenteditableAttrEnumPlaintextOnly TextareaContenteditableAttrEnum = "plaintext-only"
+	TextareaContenteditableAttrEnumTrue TextareaContenteditableAttrEnum = "true"
+)
+
+type textareaAttrs map[string]any
+
+func (e *TextareaElement) Autocapitalize(a TextareaAutocapitalizeAttrEnum) *TextareaElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *TextareaElement) Autocorrect() *TextareaElement {
+func (e *TextareaElement) Autocorrect(a TextareaAutocorrectAttrEnum) *TextareaElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *TextareaElement) Autofocus() *TextareaElement {
+func (e *TextareaElement) Class(s ...string) *TextareaElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *TextareaElement) Class() *TextareaElement {
+func (e *TextareaElement) Contenteditable(a TextareaContenteditableAttrEnum) *TextareaElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *TextareaElement) Contenteditable() *TextareaElement {
+func (e *TextareaElement) Id(s string) *TextareaElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *TextareaElement) Id() *TextareaElement {
-	return e
-}
-
-func (e *TextareaElement) Slot() *TextareaElement {
+func (e *TextareaElement) Slot(s string) *TextareaElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *TextareaElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

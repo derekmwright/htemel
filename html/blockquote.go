@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type BlockquoteElement struct {
+	attributes blockquoteAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func BlockquoteIf(condition bool, children ...htemel.Node) *BlockquoteElement {
 	}
 }
 
-func (e *BlockquoteElement) Autocapitalize() *BlockquoteElement {
+type BlockquoteAutocapitalizeAttrEnum string
+
+const (
+	BlockquoteAutocapitalizeAttrEnumCharacters BlockquoteAutocapitalizeAttrEnum = "characters"
+	BlockquoteAutocapitalizeAttrEnumNone BlockquoteAutocapitalizeAttrEnum = "none"
+	BlockquoteAutocapitalizeAttrEnumOff BlockquoteAutocapitalizeAttrEnum = "off"
+	BlockquoteAutocapitalizeAttrEnumOn BlockquoteAutocapitalizeAttrEnum = "on"
+	BlockquoteAutocapitalizeAttrEnumSentences BlockquoteAutocapitalizeAttrEnum = "sentences"
+	BlockquoteAutocapitalizeAttrEnumWords BlockquoteAutocapitalizeAttrEnum = "words"
+)
+
+type BlockquoteAutocorrectAttrEnum string
+
+const (
+	BlockquoteAutocorrectAttrEnumOff BlockquoteAutocorrectAttrEnum = "off"
+	BlockquoteAutocorrectAttrEnumOn BlockquoteAutocorrectAttrEnum = "on"
+)
+
+type BlockquoteContenteditableAttrEnum string
+
+const (
+	BlockquoteContenteditableAttrEnumFalse BlockquoteContenteditableAttrEnum = "false"
+	BlockquoteContenteditableAttrEnumPlaintextOnly BlockquoteContenteditableAttrEnum = "plaintext-only"
+	BlockquoteContenteditableAttrEnumTrue BlockquoteContenteditableAttrEnum = "true"
+)
+
+type blockquoteAttrs map[string]any
+
+func (e *BlockquoteElement) Autocapitalize(a BlockquoteAutocapitalizeAttrEnum) *BlockquoteElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *BlockquoteElement) Autocorrect() *BlockquoteElement {
+func (e *BlockquoteElement) Autocorrect(a BlockquoteAutocorrectAttrEnum) *BlockquoteElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *BlockquoteElement) Autofocus() *BlockquoteElement {
+func (e *BlockquoteElement) Class(s ...string) *BlockquoteElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *BlockquoteElement) Class() *BlockquoteElement {
+func (e *BlockquoteElement) Contenteditable(a BlockquoteContenteditableAttrEnum) *BlockquoteElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *BlockquoteElement) Contenteditable() *BlockquoteElement {
+func (e *BlockquoteElement) Id(s string) *BlockquoteElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *BlockquoteElement) Id() *BlockquoteElement {
-	return e
-}
-
-func (e *BlockquoteElement) Slot() *BlockquoteElement {
+func (e *BlockquoteElement) Slot(s string) *BlockquoteElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *BlockquoteElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

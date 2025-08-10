@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type QElement struct {
+	attributes qAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 	}
 }
 
-func (e *QElement) Autocapitalize() *QElement {
+type QAutocapitalizeAttrEnum string
+
+const (
+	QAutocapitalizeAttrEnumSentences QAutocapitalizeAttrEnum = "sentences"
+	QAutocapitalizeAttrEnumWords QAutocapitalizeAttrEnum = "words"
+	QAutocapitalizeAttrEnumCharacters QAutocapitalizeAttrEnum = "characters"
+	QAutocapitalizeAttrEnumNone QAutocapitalizeAttrEnum = "none"
+	QAutocapitalizeAttrEnumOff QAutocapitalizeAttrEnum = "off"
+	QAutocapitalizeAttrEnumOn QAutocapitalizeAttrEnum = "on"
+)
+
+type QAutocorrectAttrEnum string
+
+const (
+	QAutocorrectAttrEnumOff QAutocorrectAttrEnum = "off"
+	QAutocorrectAttrEnumOn QAutocorrectAttrEnum = "on"
+)
+
+type QContenteditableAttrEnum string
+
+const (
+	QContenteditableAttrEnumFalse QContenteditableAttrEnum = "false"
+	QContenteditableAttrEnumPlaintextOnly QContenteditableAttrEnum = "plaintext-only"
+	QContenteditableAttrEnumTrue QContenteditableAttrEnum = "true"
+)
+
+type qAttrs map[string]any
+
+func (e *QElement) Autocapitalize(a QAutocapitalizeAttrEnum) *QElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *QElement) Autocorrect() *QElement {
+func (e *QElement) Autocorrect(a QAutocorrectAttrEnum) *QElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *QElement) Autofocus() *QElement {
+func (e *QElement) Class(s ...string) *QElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *QElement) Class() *QElement {
+func (e *QElement) Contenteditable(a QContenteditableAttrEnum) *QElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *QElement) Contenteditable() *QElement {
+func (e *QElement) Id(s string) *QElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *QElement) Id() *QElement {
-	return e
-}
-
-func (e *QElement) Slot() *QElement {
+func (e *QElement) Slot(s string) *QElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *QElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

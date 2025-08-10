@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type CanvasElement struct {
+	attributes canvasAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 	}
 }
 
-func (e *CanvasElement) Autocapitalize() *CanvasElement {
+type CanvasAutocapitalizeAttrEnum string
+
+const (
+	CanvasAutocapitalizeAttrEnumCharacters CanvasAutocapitalizeAttrEnum = "characters"
+	CanvasAutocapitalizeAttrEnumNone CanvasAutocapitalizeAttrEnum = "none"
+	CanvasAutocapitalizeAttrEnumOff CanvasAutocapitalizeAttrEnum = "off"
+	CanvasAutocapitalizeAttrEnumOn CanvasAutocapitalizeAttrEnum = "on"
+	CanvasAutocapitalizeAttrEnumSentences CanvasAutocapitalizeAttrEnum = "sentences"
+	CanvasAutocapitalizeAttrEnumWords CanvasAutocapitalizeAttrEnum = "words"
+)
+
+type CanvasAutocorrectAttrEnum string
+
+const (
+	CanvasAutocorrectAttrEnumOff CanvasAutocorrectAttrEnum = "off"
+	CanvasAutocorrectAttrEnumOn CanvasAutocorrectAttrEnum = "on"
+)
+
+type CanvasContenteditableAttrEnum string
+
+const (
+	CanvasContenteditableAttrEnumFalse CanvasContenteditableAttrEnum = "false"
+	CanvasContenteditableAttrEnumPlaintextOnly CanvasContenteditableAttrEnum = "plaintext-only"
+	CanvasContenteditableAttrEnumTrue CanvasContenteditableAttrEnum = "true"
+)
+
+type canvasAttrs map[string]any
+
+func (e *CanvasElement) Autocapitalize(a CanvasAutocapitalizeAttrEnum) *CanvasElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *CanvasElement) Autocorrect() *CanvasElement {
+func (e *CanvasElement) Autocorrect(a CanvasAutocorrectAttrEnum) *CanvasElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *CanvasElement) Autofocus() *CanvasElement {
+func (e *CanvasElement) Class(s ...string) *CanvasElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *CanvasElement) Class() *CanvasElement {
+func (e *CanvasElement) Contenteditable(a CanvasContenteditableAttrEnum) *CanvasElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *CanvasElement) Contenteditable() *CanvasElement {
+func (e *CanvasElement) Id(s string) *CanvasElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *CanvasElement) Id() *CanvasElement {
-	return e
-}
-
-func (e *CanvasElement) Slot() *CanvasElement {
+func (e *CanvasElement) Slot(s string) *CanvasElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *CanvasElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

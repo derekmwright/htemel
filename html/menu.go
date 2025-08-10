@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type MenuElement struct {
+	attributes menuAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func MenuIf(condition bool, children ...htemel.Node) *MenuElement {
 	}
 }
 
-func (e *MenuElement) Autocapitalize() *MenuElement {
+type MenuAutocapitalizeAttrEnum string
+
+const (
+	MenuAutocapitalizeAttrEnumCharacters MenuAutocapitalizeAttrEnum = "characters"
+	MenuAutocapitalizeAttrEnumNone MenuAutocapitalizeAttrEnum = "none"
+	MenuAutocapitalizeAttrEnumOff MenuAutocapitalizeAttrEnum = "off"
+	MenuAutocapitalizeAttrEnumOn MenuAutocapitalizeAttrEnum = "on"
+	MenuAutocapitalizeAttrEnumSentences MenuAutocapitalizeAttrEnum = "sentences"
+	MenuAutocapitalizeAttrEnumWords MenuAutocapitalizeAttrEnum = "words"
+)
+
+type MenuAutocorrectAttrEnum string
+
+const (
+	MenuAutocorrectAttrEnumOff MenuAutocorrectAttrEnum = "off"
+	MenuAutocorrectAttrEnumOn MenuAutocorrectAttrEnum = "on"
+)
+
+type MenuContenteditableAttrEnum string
+
+const (
+	MenuContenteditableAttrEnumFalse MenuContenteditableAttrEnum = "false"
+	MenuContenteditableAttrEnumPlaintextOnly MenuContenteditableAttrEnum = "plaintext-only"
+	MenuContenteditableAttrEnumTrue MenuContenteditableAttrEnum = "true"
+)
+
+type menuAttrs map[string]any
+
+func (e *MenuElement) Autocapitalize(a MenuAutocapitalizeAttrEnum) *MenuElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *MenuElement) Autocorrect() *MenuElement {
+func (e *MenuElement) Autocorrect(a MenuAutocorrectAttrEnum) *MenuElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *MenuElement) Autofocus() *MenuElement {
+func (e *MenuElement) Class(s ...string) *MenuElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *MenuElement) Class() *MenuElement {
+func (e *MenuElement) Contenteditable(a MenuContenteditableAttrEnum) *MenuElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *MenuElement) Contenteditable() *MenuElement {
+func (e *MenuElement) Id(s string) *MenuElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *MenuElement) Id() *MenuElement {
-	return e
-}
-
-func (e *MenuElement) Slot() *MenuElement {
+func (e *MenuElement) Slot(s string) *MenuElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *MenuElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

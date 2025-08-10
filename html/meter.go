@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type MeterElement struct {
+	attributes meterAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func MeterIf(condition bool, children ...htemel.Node) *MeterElement {
 	}
 }
 
-func (e *MeterElement) Autocapitalize() *MeterElement {
+type MeterAutocapitalizeAttrEnum string
+
+const (
+	MeterAutocapitalizeAttrEnumNone MeterAutocapitalizeAttrEnum = "none"
+	MeterAutocapitalizeAttrEnumOff MeterAutocapitalizeAttrEnum = "off"
+	MeterAutocapitalizeAttrEnumOn MeterAutocapitalizeAttrEnum = "on"
+	MeterAutocapitalizeAttrEnumSentences MeterAutocapitalizeAttrEnum = "sentences"
+	MeterAutocapitalizeAttrEnumWords MeterAutocapitalizeAttrEnum = "words"
+	MeterAutocapitalizeAttrEnumCharacters MeterAutocapitalizeAttrEnum = "characters"
+)
+
+type MeterAutocorrectAttrEnum string
+
+const (
+	MeterAutocorrectAttrEnumOff MeterAutocorrectAttrEnum = "off"
+	MeterAutocorrectAttrEnumOn MeterAutocorrectAttrEnum = "on"
+)
+
+type MeterContenteditableAttrEnum string
+
+const (
+	MeterContenteditableAttrEnumFalse MeterContenteditableAttrEnum = "false"
+	MeterContenteditableAttrEnumPlaintextOnly MeterContenteditableAttrEnum = "plaintext-only"
+	MeterContenteditableAttrEnumTrue MeterContenteditableAttrEnum = "true"
+)
+
+type meterAttrs map[string]any
+
+func (e *MeterElement) Autocapitalize(a MeterAutocapitalizeAttrEnum) *MeterElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *MeterElement) Autocorrect() *MeterElement {
+func (e *MeterElement) Autocorrect(a MeterAutocorrectAttrEnum) *MeterElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *MeterElement) Autofocus() *MeterElement {
+func (e *MeterElement) Class(s ...string) *MeterElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *MeterElement) Class() *MeterElement {
+func (e *MeterElement) Contenteditable(a MeterContenteditableAttrEnum) *MeterElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *MeterElement) Contenteditable() *MeterElement {
+func (e *MeterElement) Id(s string) *MeterElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *MeterElement) Id() *MeterElement {
-	return e
-}
-
-func (e *MeterElement) Slot() *MeterElement {
+func (e *MeterElement) Slot(s string) *MeterElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *MeterElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

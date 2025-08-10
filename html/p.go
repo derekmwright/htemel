@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type PElement struct {
+	attributes pAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func PIf(condition bool, children ...htemel.Node) *PElement {
 	}
 }
 
-func (e *PElement) Autocapitalize() *PElement {
+type PAutocapitalizeAttrEnum string
+
+const (
+	PAutocapitalizeAttrEnumWords PAutocapitalizeAttrEnum = "words"
+	PAutocapitalizeAttrEnumCharacters PAutocapitalizeAttrEnum = "characters"
+	PAutocapitalizeAttrEnumNone PAutocapitalizeAttrEnum = "none"
+	PAutocapitalizeAttrEnumOff PAutocapitalizeAttrEnum = "off"
+	PAutocapitalizeAttrEnumOn PAutocapitalizeAttrEnum = "on"
+	PAutocapitalizeAttrEnumSentences PAutocapitalizeAttrEnum = "sentences"
+)
+
+type PAutocorrectAttrEnum string
+
+const (
+	PAutocorrectAttrEnumOff PAutocorrectAttrEnum = "off"
+	PAutocorrectAttrEnumOn PAutocorrectAttrEnum = "on"
+)
+
+type PContenteditableAttrEnum string
+
+const (
+	PContenteditableAttrEnumTrue PContenteditableAttrEnum = "true"
+	PContenteditableAttrEnumFalse PContenteditableAttrEnum = "false"
+	PContenteditableAttrEnumPlaintextOnly PContenteditableAttrEnum = "plaintext-only"
+)
+
+type pAttrs map[string]any
+
+func (e *PElement) Autocapitalize(a PAutocapitalizeAttrEnum) *PElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *PElement) Autocorrect() *PElement {
+func (e *PElement) Autocorrect(a PAutocorrectAttrEnum) *PElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *PElement) Autofocus() *PElement {
+func (e *PElement) Class(s ...string) *PElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *PElement) Class() *PElement {
+func (e *PElement) Contenteditable(a PContenteditableAttrEnum) *PElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *PElement) Contenteditable() *PElement {
+func (e *PElement) Id(s string) *PElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *PElement) Id() *PElement {
-	return e
-}
-
-func (e *PElement) Slot() *PElement {
+func (e *PElement) Slot(s string) *PElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *PElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

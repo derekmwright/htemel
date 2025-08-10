@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type AreaElement struct {
+	attributes areaAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func AreaIf(condition bool, children ...htemel.Node) *AreaElement {
 	}
 }
 
-func (e *AreaElement) Autocapitalize() *AreaElement {
+type AreaAutocapitalizeAttrEnum string
+
+const (
+	AreaAutocapitalizeAttrEnumOn AreaAutocapitalizeAttrEnum = "on"
+	AreaAutocapitalizeAttrEnumSentences AreaAutocapitalizeAttrEnum = "sentences"
+	AreaAutocapitalizeAttrEnumWords AreaAutocapitalizeAttrEnum = "words"
+	AreaAutocapitalizeAttrEnumCharacters AreaAutocapitalizeAttrEnum = "characters"
+	AreaAutocapitalizeAttrEnumNone AreaAutocapitalizeAttrEnum = "none"
+	AreaAutocapitalizeAttrEnumOff AreaAutocapitalizeAttrEnum = "off"
+)
+
+type AreaAutocorrectAttrEnum string
+
+const (
+	AreaAutocorrectAttrEnumOff AreaAutocorrectAttrEnum = "off"
+	AreaAutocorrectAttrEnumOn AreaAutocorrectAttrEnum = "on"
+)
+
+type AreaContenteditableAttrEnum string
+
+const (
+	AreaContenteditableAttrEnumFalse AreaContenteditableAttrEnum = "false"
+	AreaContenteditableAttrEnumPlaintextOnly AreaContenteditableAttrEnum = "plaintext-only"
+	AreaContenteditableAttrEnumTrue AreaContenteditableAttrEnum = "true"
+)
+
+type areaAttrs map[string]any
+
+func (e *AreaElement) Autocapitalize(a AreaAutocapitalizeAttrEnum) *AreaElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *AreaElement) Autocorrect() *AreaElement {
+func (e *AreaElement) Autocorrect(a AreaAutocorrectAttrEnum) *AreaElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *AreaElement) Autofocus() *AreaElement {
+func (e *AreaElement) Class(s ...string) *AreaElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *AreaElement) Class() *AreaElement {
+func (e *AreaElement) Contenteditable(a AreaContenteditableAttrEnum) *AreaElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *AreaElement) Contenteditable() *AreaElement {
+func (e *AreaElement) Id(s string) *AreaElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *AreaElement) Id() *AreaElement {
-	return e
-}
-
-func (e *AreaElement) Slot() *AreaElement {
+func (e *AreaElement) Slot(s string) *AreaElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *AreaElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type UlElement struct {
+	attributes ulAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func UlIf(condition bool, children ...htemel.Node) *UlElement {
 	}
 }
 
-func (e *UlElement) Autocapitalize() *UlElement {
+type UlAutocapitalizeAttrEnum string
+
+const (
+	UlAutocapitalizeAttrEnumWords UlAutocapitalizeAttrEnum = "words"
+	UlAutocapitalizeAttrEnumCharacters UlAutocapitalizeAttrEnum = "characters"
+	UlAutocapitalizeAttrEnumNone UlAutocapitalizeAttrEnum = "none"
+	UlAutocapitalizeAttrEnumOff UlAutocapitalizeAttrEnum = "off"
+	UlAutocapitalizeAttrEnumOn UlAutocapitalizeAttrEnum = "on"
+	UlAutocapitalizeAttrEnumSentences UlAutocapitalizeAttrEnum = "sentences"
+)
+
+type UlAutocorrectAttrEnum string
+
+const (
+	UlAutocorrectAttrEnumOff UlAutocorrectAttrEnum = "off"
+	UlAutocorrectAttrEnumOn UlAutocorrectAttrEnum = "on"
+)
+
+type UlContenteditableAttrEnum string
+
+const (
+	UlContenteditableAttrEnumFalse UlContenteditableAttrEnum = "false"
+	UlContenteditableAttrEnumPlaintextOnly UlContenteditableAttrEnum = "plaintext-only"
+	UlContenteditableAttrEnumTrue UlContenteditableAttrEnum = "true"
+)
+
+type ulAttrs map[string]any
+
+func (e *UlElement) Autocapitalize(a UlAutocapitalizeAttrEnum) *UlElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *UlElement) Autocorrect() *UlElement {
+func (e *UlElement) Autocorrect(a UlAutocorrectAttrEnum) *UlElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *UlElement) Autofocus() *UlElement {
+func (e *UlElement) Class(s ...string) *UlElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *UlElement) Class() *UlElement {
+func (e *UlElement) Contenteditable(a UlContenteditableAttrEnum) *UlElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *UlElement) Contenteditable() *UlElement {
+func (e *UlElement) Id(s string) *UlElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *UlElement) Id() *UlElement {
-	return e
-}
-
-func (e *UlElement) Slot() *UlElement {
+func (e *UlElement) Slot(s string) *UlElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *UlElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

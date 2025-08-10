@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type InsElement struct {
+	attributes insAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func InsIf(condition bool, children ...htemel.Node) *InsElement {
 	}
 }
 
-func (e *InsElement) Autocapitalize() *InsElement {
+type InsAutocapitalizeAttrEnum string
+
+const (
+	InsAutocapitalizeAttrEnumNone InsAutocapitalizeAttrEnum = "none"
+	InsAutocapitalizeAttrEnumOff InsAutocapitalizeAttrEnum = "off"
+	InsAutocapitalizeAttrEnumOn InsAutocapitalizeAttrEnum = "on"
+	InsAutocapitalizeAttrEnumSentences InsAutocapitalizeAttrEnum = "sentences"
+	InsAutocapitalizeAttrEnumWords InsAutocapitalizeAttrEnum = "words"
+	InsAutocapitalizeAttrEnumCharacters InsAutocapitalizeAttrEnum = "characters"
+)
+
+type InsAutocorrectAttrEnum string
+
+const (
+	InsAutocorrectAttrEnumOff InsAutocorrectAttrEnum = "off"
+	InsAutocorrectAttrEnumOn InsAutocorrectAttrEnum = "on"
+)
+
+type InsContenteditableAttrEnum string
+
+const (
+	InsContenteditableAttrEnumFalse InsContenteditableAttrEnum = "false"
+	InsContenteditableAttrEnumPlaintextOnly InsContenteditableAttrEnum = "plaintext-only"
+	InsContenteditableAttrEnumTrue InsContenteditableAttrEnum = "true"
+)
+
+type insAttrs map[string]any
+
+func (e *InsElement) Autocapitalize(a InsAutocapitalizeAttrEnum) *InsElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *InsElement) Autocorrect() *InsElement {
+func (e *InsElement) Autocorrect(a InsAutocorrectAttrEnum) *InsElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *InsElement) Autofocus() *InsElement {
+func (e *InsElement) Class(s ...string) *InsElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *InsElement) Class() *InsElement {
+func (e *InsElement) Contenteditable(a InsContenteditableAttrEnum) *InsElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *InsElement) Contenteditable() *InsElement {
+func (e *InsElement) Id(s string) *InsElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *InsElement) Id() *InsElement {
-	return e
-}
-
-func (e *InsElement) Slot() *InsElement {
+func (e *InsElement) Slot(s string) *InsElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *InsElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

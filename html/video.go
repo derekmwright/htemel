@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type VideoElement struct {
+	attributes videoAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func VideoIf(condition bool, children ...htemel.Node) *VideoElement {
 	}
 }
 
-func (e *VideoElement) Autocapitalize() *VideoElement {
+type VideoAutocapitalizeAttrEnum string
+
+const (
+	VideoAutocapitalizeAttrEnumOn VideoAutocapitalizeAttrEnum = "on"
+	VideoAutocapitalizeAttrEnumSentences VideoAutocapitalizeAttrEnum = "sentences"
+	VideoAutocapitalizeAttrEnumWords VideoAutocapitalizeAttrEnum = "words"
+	VideoAutocapitalizeAttrEnumCharacters VideoAutocapitalizeAttrEnum = "characters"
+	VideoAutocapitalizeAttrEnumNone VideoAutocapitalizeAttrEnum = "none"
+	VideoAutocapitalizeAttrEnumOff VideoAutocapitalizeAttrEnum = "off"
+)
+
+type VideoAutocorrectAttrEnum string
+
+const (
+	VideoAutocorrectAttrEnumOff VideoAutocorrectAttrEnum = "off"
+	VideoAutocorrectAttrEnumOn VideoAutocorrectAttrEnum = "on"
+)
+
+type VideoContenteditableAttrEnum string
+
+const (
+	VideoContenteditableAttrEnumFalse VideoContenteditableAttrEnum = "false"
+	VideoContenteditableAttrEnumPlaintextOnly VideoContenteditableAttrEnum = "plaintext-only"
+	VideoContenteditableAttrEnumTrue VideoContenteditableAttrEnum = "true"
+)
+
+type videoAttrs map[string]any
+
+func (e *VideoElement) Autocapitalize(a VideoAutocapitalizeAttrEnum) *VideoElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *VideoElement) Autocorrect() *VideoElement {
+func (e *VideoElement) Autocorrect(a VideoAutocorrectAttrEnum) *VideoElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *VideoElement) Autofocus() *VideoElement {
+func (e *VideoElement) Class(s ...string) *VideoElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *VideoElement) Class() *VideoElement {
+func (e *VideoElement) Contenteditable(a VideoContenteditableAttrEnum) *VideoElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *VideoElement) Contenteditable() *VideoElement {
+func (e *VideoElement) Id(s string) *VideoElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *VideoElement) Id() *VideoElement {
-	return e
-}
-
-func (e *VideoElement) Slot() *VideoElement {
+func (e *VideoElement) Slot(s string) *VideoElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *VideoElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -106,7 +106,7 @@ func UnsafeText(text string, children ...Node) *TextElement {
 
 func Text(text string, children ...Node) *TextElement {
 	return &TextElement{
-		text:     html.UnescapeString(text),
+		text:     html.EscapeString(text),
 		children: children,
 	}
 }

@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type IframeElement struct {
+	attributes iframeAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func IframeIf(condition bool, children ...htemel.Node) *IframeElement {
 	}
 }
 
-func (e *IframeElement) Autocapitalize() *IframeElement {
+type IframeAutocapitalizeAttrEnum string
+
+const (
+	IframeAutocapitalizeAttrEnumCharacters IframeAutocapitalizeAttrEnum = "characters"
+	IframeAutocapitalizeAttrEnumNone IframeAutocapitalizeAttrEnum = "none"
+	IframeAutocapitalizeAttrEnumOff IframeAutocapitalizeAttrEnum = "off"
+	IframeAutocapitalizeAttrEnumOn IframeAutocapitalizeAttrEnum = "on"
+	IframeAutocapitalizeAttrEnumSentences IframeAutocapitalizeAttrEnum = "sentences"
+	IframeAutocapitalizeAttrEnumWords IframeAutocapitalizeAttrEnum = "words"
+)
+
+type IframeAutocorrectAttrEnum string
+
+const (
+	IframeAutocorrectAttrEnumOff IframeAutocorrectAttrEnum = "off"
+	IframeAutocorrectAttrEnumOn IframeAutocorrectAttrEnum = "on"
+)
+
+type IframeContenteditableAttrEnum string
+
+const (
+	IframeContenteditableAttrEnumFalse IframeContenteditableAttrEnum = "false"
+	IframeContenteditableAttrEnumPlaintextOnly IframeContenteditableAttrEnum = "plaintext-only"
+	IframeContenteditableAttrEnumTrue IframeContenteditableAttrEnum = "true"
+)
+
+type iframeAttrs map[string]any
+
+func (e *IframeElement) Autocapitalize(a IframeAutocapitalizeAttrEnum) *IframeElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *IframeElement) Autocorrect() *IframeElement {
+func (e *IframeElement) Autocorrect(a IframeAutocorrectAttrEnum) *IframeElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *IframeElement) Autofocus() *IframeElement {
+func (e *IframeElement) Class(s ...string) *IframeElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *IframeElement) Class() *IframeElement {
+func (e *IframeElement) Contenteditable(a IframeContenteditableAttrEnum) *IframeElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *IframeElement) Contenteditable() *IframeElement {
+func (e *IframeElement) Id(s string) *IframeElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *IframeElement) Id() *IframeElement {
-	return e
-}
-
-func (e *IframeElement) Slot() *IframeElement {
+func (e *IframeElement) Slot(s string) *IframeElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *IframeElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

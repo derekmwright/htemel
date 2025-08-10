@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type SpanElement struct {
+	attributes spanAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func SpanIf(condition bool, children ...htemel.Node) *SpanElement {
 	}
 }
 
-func (e *SpanElement) Autocapitalize() *SpanElement {
+type SpanAutocapitalizeAttrEnum string
+
+const (
+	SpanAutocapitalizeAttrEnumNone SpanAutocapitalizeAttrEnum = "none"
+	SpanAutocapitalizeAttrEnumOff SpanAutocapitalizeAttrEnum = "off"
+	SpanAutocapitalizeAttrEnumOn SpanAutocapitalizeAttrEnum = "on"
+	SpanAutocapitalizeAttrEnumSentences SpanAutocapitalizeAttrEnum = "sentences"
+	SpanAutocapitalizeAttrEnumWords SpanAutocapitalizeAttrEnum = "words"
+	SpanAutocapitalizeAttrEnumCharacters SpanAutocapitalizeAttrEnum = "characters"
+)
+
+type SpanAutocorrectAttrEnum string
+
+const (
+	SpanAutocorrectAttrEnumOff SpanAutocorrectAttrEnum = "off"
+	SpanAutocorrectAttrEnumOn SpanAutocorrectAttrEnum = "on"
+)
+
+type SpanContenteditableAttrEnum string
+
+const (
+	SpanContenteditableAttrEnumFalse SpanContenteditableAttrEnum = "false"
+	SpanContenteditableAttrEnumPlaintextOnly SpanContenteditableAttrEnum = "plaintext-only"
+	SpanContenteditableAttrEnumTrue SpanContenteditableAttrEnum = "true"
+)
+
+type spanAttrs map[string]any
+
+func (e *SpanElement) Autocapitalize(a SpanAutocapitalizeAttrEnum) *SpanElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *SpanElement) Autocorrect() *SpanElement {
+func (e *SpanElement) Autocorrect(a SpanAutocorrectAttrEnum) *SpanElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *SpanElement) Autofocus() *SpanElement {
+func (e *SpanElement) Class(s ...string) *SpanElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *SpanElement) Class() *SpanElement {
+func (e *SpanElement) Contenteditable(a SpanContenteditableAttrEnum) *SpanElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *SpanElement) Contenteditable() *SpanElement {
+func (e *SpanElement) Id(s string) *SpanElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *SpanElement) Id() *SpanElement {
-	return e
-}
-
-func (e *SpanElement) Slot() *SpanElement {
+func (e *SpanElement) Slot(s string) *SpanElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *SpanElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

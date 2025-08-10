@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type CaptionElement struct {
+	attributes captionAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func CaptionIf(condition bool, children ...htemel.Node) *CaptionElement {
 	}
 }
 
-func (e *CaptionElement) Autocapitalize() *CaptionElement {
+type CaptionAutocapitalizeAttrEnum string
+
+const (
+	CaptionAutocapitalizeAttrEnumOn CaptionAutocapitalizeAttrEnum = "on"
+	CaptionAutocapitalizeAttrEnumSentences CaptionAutocapitalizeAttrEnum = "sentences"
+	CaptionAutocapitalizeAttrEnumWords CaptionAutocapitalizeAttrEnum = "words"
+	CaptionAutocapitalizeAttrEnumCharacters CaptionAutocapitalizeAttrEnum = "characters"
+	CaptionAutocapitalizeAttrEnumNone CaptionAutocapitalizeAttrEnum = "none"
+	CaptionAutocapitalizeAttrEnumOff CaptionAutocapitalizeAttrEnum = "off"
+)
+
+type CaptionAutocorrectAttrEnum string
+
+const (
+	CaptionAutocorrectAttrEnumOff CaptionAutocorrectAttrEnum = "off"
+	CaptionAutocorrectAttrEnumOn CaptionAutocorrectAttrEnum = "on"
+)
+
+type CaptionContenteditableAttrEnum string
+
+const (
+	CaptionContenteditableAttrEnumFalse CaptionContenteditableAttrEnum = "false"
+	CaptionContenteditableAttrEnumPlaintextOnly CaptionContenteditableAttrEnum = "plaintext-only"
+	CaptionContenteditableAttrEnumTrue CaptionContenteditableAttrEnum = "true"
+)
+
+type captionAttrs map[string]any
+
+func (e *CaptionElement) Autocapitalize(a CaptionAutocapitalizeAttrEnum) *CaptionElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *CaptionElement) Autocorrect() *CaptionElement {
+func (e *CaptionElement) Autocorrect(a CaptionAutocorrectAttrEnum) *CaptionElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *CaptionElement) Autofocus() *CaptionElement {
+func (e *CaptionElement) Class(s ...string) *CaptionElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *CaptionElement) Class() *CaptionElement {
+func (e *CaptionElement) Contenteditable(a CaptionContenteditableAttrEnum) *CaptionElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *CaptionElement) Contenteditable() *CaptionElement {
+func (e *CaptionElement) Id(s string) *CaptionElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *CaptionElement) Id() *CaptionElement {
-	return e
-}
-
-func (e *CaptionElement) Slot() *CaptionElement {
+func (e *CaptionElement) Slot(s string) *CaptionElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *CaptionElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

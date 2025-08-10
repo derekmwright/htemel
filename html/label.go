@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type LabelElement struct {
+	attributes labelAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func LabelIf(condition bool, children ...htemel.Node) *LabelElement {
 	}
 }
 
-func (e *LabelElement) Autocapitalize() *LabelElement {
+type LabelAutocapitalizeAttrEnum string
+
+const (
+	LabelAutocapitalizeAttrEnumCharacters LabelAutocapitalizeAttrEnum = "characters"
+	LabelAutocapitalizeAttrEnumNone LabelAutocapitalizeAttrEnum = "none"
+	LabelAutocapitalizeAttrEnumOff LabelAutocapitalizeAttrEnum = "off"
+	LabelAutocapitalizeAttrEnumOn LabelAutocapitalizeAttrEnum = "on"
+	LabelAutocapitalizeAttrEnumSentences LabelAutocapitalizeAttrEnum = "sentences"
+	LabelAutocapitalizeAttrEnumWords LabelAutocapitalizeAttrEnum = "words"
+)
+
+type LabelAutocorrectAttrEnum string
+
+const (
+	LabelAutocorrectAttrEnumOn LabelAutocorrectAttrEnum = "on"
+	LabelAutocorrectAttrEnumOff LabelAutocorrectAttrEnum = "off"
+)
+
+type LabelContenteditableAttrEnum string
+
+const (
+	LabelContenteditableAttrEnumFalse LabelContenteditableAttrEnum = "false"
+	LabelContenteditableAttrEnumPlaintextOnly LabelContenteditableAttrEnum = "plaintext-only"
+	LabelContenteditableAttrEnumTrue LabelContenteditableAttrEnum = "true"
+)
+
+type labelAttrs map[string]any
+
+func (e *LabelElement) Autocapitalize(a LabelAutocapitalizeAttrEnum) *LabelElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *LabelElement) Autocorrect() *LabelElement {
+func (e *LabelElement) Autocorrect(a LabelAutocorrectAttrEnum) *LabelElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *LabelElement) Autofocus() *LabelElement {
+func (e *LabelElement) Class(s ...string) *LabelElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *LabelElement) Class() *LabelElement {
+func (e *LabelElement) Contenteditable(a LabelContenteditableAttrEnum) *LabelElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *LabelElement) Contenteditable() *LabelElement {
+func (e *LabelElement) Id(s string) *LabelElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *LabelElement) Id() *LabelElement {
-	return e
-}
-
-func (e *LabelElement) Slot() *LabelElement {
+func (e *LabelElement) Slot(s string) *LabelElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *LabelElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

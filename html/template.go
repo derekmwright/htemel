@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type TemplateElement struct {
+	attributes templateAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func TemplateIf(condition bool, children ...htemel.Node) *TemplateElement {
 	}
 }
 
-func (e *TemplateElement) Autocapitalize() *TemplateElement {
+type TemplateAutocapitalizeAttrEnum string
+
+const (
+	TemplateAutocapitalizeAttrEnumCharacters TemplateAutocapitalizeAttrEnum = "characters"
+	TemplateAutocapitalizeAttrEnumNone TemplateAutocapitalizeAttrEnum = "none"
+	TemplateAutocapitalizeAttrEnumOff TemplateAutocapitalizeAttrEnum = "off"
+	TemplateAutocapitalizeAttrEnumOn TemplateAutocapitalizeAttrEnum = "on"
+	TemplateAutocapitalizeAttrEnumSentences TemplateAutocapitalizeAttrEnum = "sentences"
+	TemplateAutocapitalizeAttrEnumWords TemplateAutocapitalizeAttrEnum = "words"
+)
+
+type TemplateAutocorrectAttrEnum string
+
+const (
+	TemplateAutocorrectAttrEnumOff TemplateAutocorrectAttrEnum = "off"
+	TemplateAutocorrectAttrEnumOn TemplateAutocorrectAttrEnum = "on"
+)
+
+type TemplateContenteditableAttrEnum string
+
+const (
+	TemplateContenteditableAttrEnumFalse TemplateContenteditableAttrEnum = "false"
+	TemplateContenteditableAttrEnumPlaintextOnly TemplateContenteditableAttrEnum = "plaintext-only"
+	TemplateContenteditableAttrEnumTrue TemplateContenteditableAttrEnum = "true"
+)
+
+type templateAttrs map[string]any
+
+func (e *TemplateElement) Autocapitalize(a TemplateAutocapitalizeAttrEnum) *TemplateElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *TemplateElement) Autocorrect() *TemplateElement {
+func (e *TemplateElement) Autocorrect(a TemplateAutocorrectAttrEnum) *TemplateElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *TemplateElement) Autofocus() *TemplateElement {
+func (e *TemplateElement) Class(s ...string) *TemplateElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *TemplateElement) Class() *TemplateElement {
+func (e *TemplateElement) Contenteditable(a TemplateContenteditableAttrEnum) *TemplateElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *TemplateElement) Contenteditable() *TemplateElement {
+func (e *TemplateElement) Id(s string) *TemplateElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *TemplateElement) Id() *TemplateElement {
-	return e
-}
-
-func (e *TemplateElement) Slot() *TemplateElement {
+func (e *TemplateElement) Slot(s string) *TemplateElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *TemplateElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

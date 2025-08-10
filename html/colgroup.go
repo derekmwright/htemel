@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type ColgroupElement struct {
+	attributes colgroupAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func ColgroupIf(condition bool, children ...htemel.Node) *ColgroupElement {
 	}
 }
 
-func (e *ColgroupElement) Autocapitalize() *ColgroupElement {
+type ColgroupAutocapitalizeAttrEnum string
+
+const (
+	ColgroupAutocapitalizeAttrEnumOff ColgroupAutocapitalizeAttrEnum = "off"
+	ColgroupAutocapitalizeAttrEnumOn ColgroupAutocapitalizeAttrEnum = "on"
+	ColgroupAutocapitalizeAttrEnumSentences ColgroupAutocapitalizeAttrEnum = "sentences"
+	ColgroupAutocapitalizeAttrEnumWords ColgroupAutocapitalizeAttrEnum = "words"
+	ColgroupAutocapitalizeAttrEnumCharacters ColgroupAutocapitalizeAttrEnum = "characters"
+	ColgroupAutocapitalizeAttrEnumNone ColgroupAutocapitalizeAttrEnum = "none"
+)
+
+type ColgroupAutocorrectAttrEnum string
+
+const (
+	ColgroupAutocorrectAttrEnumOff ColgroupAutocorrectAttrEnum = "off"
+	ColgroupAutocorrectAttrEnumOn ColgroupAutocorrectAttrEnum = "on"
+)
+
+type ColgroupContenteditableAttrEnum string
+
+const (
+	ColgroupContenteditableAttrEnumPlaintextOnly ColgroupContenteditableAttrEnum = "plaintext-only"
+	ColgroupContenteditableAttrEnumTrue ColgroupContenteditableAttrEnum = "true"
+	ColgroupContenteditableAttrEnumFalse ColgroupContenteditableAttrEnum = "false"
+)
+
+type colgroupAttrs map[string]any
+
+func (e *ColgroupElement) Autocapitalize(a ColgroupAutocapitalizeAttrEnum) *ColgroupElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *ColgroupElement) Autocorrect() *ColgroupElement {
+func (e *ColgroupElement) Autocorrect(a ColgroupAutocorrectAttrEnum) *ColgroupElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *ColgroupElement) Autofocus() *ColgroupElement {
+func (e *ColgroupElement) Class(s ...string) *ColgroupElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *ColgroupElement) Class() *ColgroupElement {
+func (e *ColgroupElement) Contenteditable(a ColgroupContenteditableAttrEnum) *ColgroupElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *ColgroupElement) Contenteditable() *ColgroupElement {
+func (e *ColgroupElement) Id(s string) *ColgroupElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *ColgroupElement) Id() *ColgroupElement {
-	return e
-}
-
-func (e *ColgroupElement) Slot() *ColgroupElement {
+func (e *ColgroupElement) Slot(s string) *ColgroupElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *ColgroupElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

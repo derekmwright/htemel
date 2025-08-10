@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type BrElement struct {
+	attributes brAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func BrIf(condition bool, children ...htemel.Node) *BrElement {
 	}
 }
 
-func (e *BrElement) Autocapitalize() *BrElement {
+type BrAutocapitalizeAttrEnum string
+
+const (
+	BrAutocapitalizeAttrEnumWords BrAutocapitalizeAttrEnum = "words"
+	BrAutocapitalizeAttrEnumCharacters BrAutocapitalizeAttrEnum = "characters"
+	BrAutocapitalizeAttrEnumNone BrAutocapitalizeAttrEnum = "none"
+	BrAutocapitalizeAttrEnumOff BrAutocapitalizeAttrEnum = "off"
+	BrAutocapitalizeAttrEnumOn BrAutocapitalizeAttrEnum = "on"
+	BrAutocapitalizeAttrEnumSentences BrAutocapitalizeAttrEnum = "sentences"
+)
+
+type BrAutocorrectAttrEnum string
+
+const (
+	BrAutocorrectAttrEnumOff BrAutocorrectAttrEnum = "off"
+	BrAutocorrectAttrEnumOn BrAutocorrectAttrEnum = "on"
+)
+
+type BrContenteditableAttrEnum string
+
+const (
+	BrContenteditableAttrEnumFalse BrContenteditableAttrEnum = "false"
+	BrContenteditableAttrEnumPlaintextOnly BrContenteditableAttrEnum = "plaintext-only"
+	BrContenteditableAttrEnumTrue BrContenteditableAttrEnum = "true"
+)
+
+type brAttrs map[string]any
+
+func (e *BrElement) Autocapitalize(a BrAutocapitalizeAttrEnum) *BrElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *BrElement) Autocorrect() *BrElement {
+func (e *BrElement) Autocorrect(a BrAutocorrectAttrEnum) *BrElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *BrElement) Autofocus() *BrElement {
+func (e *BrElement) Class(s ...string) *BrElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *BrElement) Class() *BrElement {
+func (e *BrElement) Contenteditable(a BrContenteditableAttrEnum) *BrElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *BrElement) Contenteditable() *BrElement {
+func (e *BrElement) Id(s string) *BrElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *BrElement) Id() *BrElement {
-	return e
-}
-
-func (e *BrElement) Slot() *BrElement {
+func (e *BrElement) Slot(s string) *BrElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *BrElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

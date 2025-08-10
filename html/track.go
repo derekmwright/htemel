@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type TrackElement struct {
+	attributes trackAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 	}
 }
 
-func (e *TrackElement) Autocapitalize() *TrackElement {
+type TrackAutocapitalizeAttrEnum string
+
+const (
+	TrackAutocapitalizeAttrEnumOn TrackAutocapitalizeAttrEnum = "on"
+	TrackAutocapitalizeAttrEnumSentences TrackAutocapitalizeAttrEnum = "sentences"
+	TrackAutocapitalizeAttrEnumWords TrackAutocapitalizeAttrEnum = "words"
+	TrackAutocapitalizeAttrEnumCharacters TrackAutocapitalizeAttrEnum = "characters"
+	TrackAutocapitalizeAttrEnumNone TrackAutocapitalizeAttrEnum = "none"
+	TrackAutocapitalizeAttrEnumOff TrackAutocapitalizeAttrEnum = "off"
+)
+
+type TrackAutocorrectAttrEnum string
+
+const (
+	TrackAutocorrectAttrEnumOff TrackAutocorrectAttrEnum = "off"
+	TrackAutocorrectAttrEnumOn TrackAutocorrectAttrEnum = "on"
+)
+
+type TrackContenteditableAttrEnum string
+
+const (
+	TrackContenteditableAttrEnumFalse TrackContenteditableAttrEnum = "false"
+	TrackContenteditableAttrEnumPlaintextOnly TrackContenteditableAttrEnum = "plaintext-only"
+	TrackContenteditableAttrEnumTrue TrackContenteditableAttrEnum = "true"
+)
+
+type trackAttrs map[string]any
+
+func (e *TrackElement) Autocapitalize(a TrackAutocapitalizeAttrEnum) *TrackElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *TrackElement) Autocorrect() *TrackElement {
+func (e *TrackElement) Autocorrect(a TrackAutocorrectAttrEnum) *TrackElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *TrackElement) Autofocus() *TrackElement {
+func (e *TrackElement) Class(s ...string) *TrackElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *TrackElement) Class() *TrackElement {
+func (e *TrackElement) Contenteditable(a TrackContenteditableAttrEnum) *TrackElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *TrackElement) Contenteditable() *TrackElement {
+func (e *TrackElement) Id(s string) *TrackElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *TrackElement) Id() *TrackElement {
-	return e
-}
-
-func (e *TrackElement) Slot() *TrackElement {
+func (e *TrackElement) Slot(s string) *TrackElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *TrackElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

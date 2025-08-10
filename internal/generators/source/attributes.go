@@ -2,6 +2,7 @@ package source
 
 import (
 	"bytes"
+	"strings"
 	"text/template"
 
 	"github.com/derekmwright/htemel/internal/generators/spec"
@@ -9,28 +10,72 @@ import (
 
 func BuildAttributes(e *spec.Element) func() (*template.Template, ImportSet) {
 	return func() (*template.Template, ImportSet) {
-		imports := make(ImportSet)
+		imports := ImportSet{}
 
+		addTypes := &bytes.Buffer{}
 		buf := &bytes.Buffer{}
 
+		buf.WriteString(`
+type ` + e.Tag + `Attrs map[string]any
+`)
+
 		for _, attr := range e.Attributes {
-			data := struct {
-				Tag       string
-				Attribute spec.Attribute
-			}{
-				Tag:       e.Tag,
-				Attribute: attr,
-			}
+			switch a := attr.(type) {
+			case *spec.AttributeTypeString:
+				buf.WriteString(`
+func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(s string) *` + titleCase(e.Tag) + `Element {
+	e.attributes["` + a.Name + `"] = s
+	
+	return e
+}
+`)
+			case *spec.AttributeTypeChar:
 
-			tmpl, imps := AttributeBaseFunc()
-			if err := tmpl.Execute(buf, data); err != nil {
-				panic(err)
-			}
+			case *spec.AttributeTypeNumber:
 
-			imports.Merge(imps)
+			case *spec.AttributeTypeBool:
+
+			case *spec.AttributeTypeEnum:
+				typeName := titleCase(e.Tag) + titleCase(a.Name) + "AttrEnum"
+
+				addTypes.WriteString("\ntype " + typeName + " string\n")
+				addTypes.WriteString("\nconst (\n")
+				for allowed, _ := range a.Allowed {
+					fixed := strings.ReplaceAll(titleCase(allowed), "-", "")
+					addTypes.WriteString("\t" + typeName + fixed + " " + typeName + " = \"" + allowed + "\"\n")
+				}
+				addTypes.WriteString(")\n")
+
+				buf.WriteString(`
+func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(a ` + typeName + `) *` + titleCase(e.Tag) + `Element {
+	e.attributes["` + a.Name + `"] = a
+	
+	return e
+}
+`)
+			case *spec.AttributeTypeSST:
+				buf.WriteString(`
+func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(s ...string) *` + titleCase(e.Tag) + `Element {
+	e.attributes["` + a.Name + `"] = strings.Join(s, " ")
+	
+	return e
+}
+`)
+			}
 		}
 
-		tmpl := template.Must(template.New("BuildAttributes").Parse(buf.String()))
+		out := &bytes.Buffer{}
+
+		tmpl := template.Must(template.New("BuildAttributes").Parse(addTypes.String()))
+		if err := tmpl.Execute(out, e); err != nil {
+			panic(err)
+		}
+		tmpl = template.Must(tmpl.Parse(buf.String()))
+		if err := tmpl.Execute(out, e); err != nil {
+			panic(err)
+		}
+
+		tmpl = template.Must(tmpl.Parse(out.String()))
 
 		return tmpl, imports
 	}

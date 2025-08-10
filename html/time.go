@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type TimeElement struct {
+	attributes timeAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func TimeIf(condition bool, children ...htemel.Node) *TimeElement {
 	}
 }
 
-func (e *TimeElement) Autocapitalize() *TimeElement {
+type TimeAutocapitalizeAttrEnum string
+
+const (
+	TimeAutocapitalizeAttrEnumSentences TimeAutocapitalizeAttrEnum = "sentences"
+	TimeAutocapitalizeAttrEnumWords TimeAutocapitalizeAttrEnum = "words"
+	TimeAutocapitalizeAttrEnumCharacters TimeAutocapitalizeAttrEnum = "characters"
+	TimeAutocapitalizeAttrEnumNone TimeAutocapitalizeAttrEnum = "none"
+	TimeAutocapitalizeAttrEnumOff TimeAutocapitalizeAttrEnum = "off"
+	TimeAutocapitalizeAttrEnumOn TimeAutocapitalizeAttrEnum = "on"
+)
+
+type TimeAutocorrectAttrEnum string
+
+const (
+	TimeAutocorrectAttrEnumOff TimeAutocorrectAttrEnum = "off"
+	TimeAutocorrectAttrEnumOn TimeAutocorrectAttrEnum = "on"
+)
+
+type TimeContenteditableAttrEnum string
+
+const (
+	TimeContenteditableAttrEnumFalse TimeContenteditableAttrEnum = "false"
+	TimeContenteditableAttrEnumPlaintextOnly TimeContenteditableAttrEnum = "plaintext-only"
+	TimeContenteditableAttrEnumTrue TimeContenteditableAttrEnum = "true"
+)
+
+type timeAttrs map[string]any
+
+func (e *TimeElement) Autocapitalize(a TimeAutocapitalizeAttrEnum) *TimeElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *TimeElement) Autocorrect() *TimeElement {
+func (e *TimeElement) Autocorrect(a TimeAutocorrectAttrEnum) *TimeElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *TimeElement) Autofocus() *TimeElement {
+func (e *TimeElement) Class(s ...string) *TimeElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *TimeElement) Class() *TimeElement {
+func (e *TimeElement) Contenteditable(a TimeContenteditableAttrEnum) *TimeElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *TimeElement) Contenteditable() *TimeElement {
+func (e *TimeElement) Id(s string) *TimeElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *TimeElement) Id() *TimeElement {
-	return e
-}
-
-func (e *TimeElement) Slot() *TimeElement {
+func (e *TimeElement) Slot(s string) *TimeElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *TimeElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

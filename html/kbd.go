@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type KbdElement struct {
+	attributes kbdAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func KbdIf(condition bool, children ...htemel.Node) *KbdElement {
 	}
 }
 
-func (e *KbdElement) Autocapitalize() *KbdElement {
+type KbdAutocapitalizeAttrEnum string
+
+const (
+	KbdAutocapitalizeAttrEnumCharacters KbdAutocapitalizeAttrEnum = "characters"
+	KbdAutocapitalizeAttrEnumNone KbdAutocapitalizeAttrEnum = "none"
+	KbdAutocapitalizeAttrEnumOff KbdAutocapitalizeAttrEnum = "off"
+	KbdAutocapitalizeAttrEnumOn KbdAutocapitalizeAttrEnum = "on"
+	KbdAutocapitalizeAttrEnumSentences KbdAutocapitalizeAttrEnum = "sentences"
+	KbdAutocapitalizeAttrEnumWords KbdAutocapitalizeAttrEnum = "words"
+)
+
+type KbdAutocorrectAttrEnum string
+
+const (
+	KbdAutocorrectAttrEnumOff KbdAutocorrectAttrEnum = "off"
+	KbdAutocorrectAttrEnumOn KbdAutocorrectAttrEnum = "on"
+)
+
+type KbdContenteditableAttrEnum string
+
+const (
+	KbdContenteditableAttrEnumPlaintextOnly KbdContenteditableAttrEnum = "plaintext-only"
+	KbdContenteditableAttrEnumTrue KbdContenteditableAttrEnum = "true"
+	KbdContenteditableAttrEnumFalse KbdContenteditableAttrEnum = "false"
+)
+
+type kbdAttrs map[string]any
+
+func (e *KbdElement) Autocapitalize(a KbdAutocapitalizeAttrEnum) *KbdElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *KbdElement) Autocorrect() *KbdElement {
+func (e *KbdElement) Autocorrect(a KbdAutocorrectAttrEnum) *KbdElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *KbdElement) Autofocus() *KbdElement {
+func (e *KbdElement) Class(s ...string) *KbdElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *KbdElement) Class() *KbdElement {
+func (e *KbdElement) Contenteditable(a KbdContenteditableAttrEnum) *KbdElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *KbdElement) Contenteditable() *KbdElement {
+func (e *KbdElement) Id(s string) *KbdElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *KbdElement) Id() *KbdElement {
-	return e
-}
-
-func (e *KbdElement) Slot() *KbdElement {
+func (e *KbdElement) Slot(s string) *KbdElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *KbdElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type LegendElement struct {
+	attributes legendAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func LegendIf(condition bool, children ...htemel.Node) *LegendElement {
 	}
 }
 
-func (e *LegendElement) Autocapitalize() *LegendElement {
+type LegendAutocapitalizeAttrEnum string
+
+const (
+	LegendAutocapitalizeAttrEnumOff LegendAutocapitalizeAttrEnum = "off"
+	LegendAutocapitalizeAttrEnumOn LegendAutocapitalizeAttrEnum = "on"
+	LegendAutocapitalizeAttrEnumSentences LegendAutocapitalizeAttrEnum = "sentences"
+	LegendAutocapitalizeAttrEnumWords LegendAutocapitalizeAttrEnum = "words"
+	LegendAutocapitalizeAttrEnumCharacters LegendAutocapitalizeAttrEnum = "characters"
+	LegendAutocapitalizeAttrEnumNone LegendAutocapitalizeAttrEnum = "none"
+)
+
+type LegendAutocorrectAttrEnum string
+
+const (
+	LegendAutocorrectAttrEnumOff LegendAutocorrectAttrEnum = "off"
+	LegendAutocorrectAttrEnumOn LegendAutocorrectAttrEnum = "on"
+)
+
+type LegendContenteditableAttrEnum string
+
+const (
+	LegendContenteditableAttrEnumFalse LegendContenteditableAttrEnum = "false"
+	LegendContenteditableAttrEnumPlaintextOnly LegendContenteditableAttrEnum = "plaintext-only"
+	LegendContenteditableAttrEnumTrue LegendContenteditableAttrEnum = "true"
+)
+
+type legendAttrs map[string]any
+
+func (e *LegendElement) Autocapitalize(a LegendAutocapitalizeAttrEnum) *LegendElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *LegendElement) Autocorrect() *LegendElement {
+func (e *LegendElement) Autocorrect(a LegendAutocorrectAttrEnum) *LegendElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *LegendElement) Autofocus() *LegendElement {
+func (e *LegendElement) Class(s ...string) *LegendElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *LegendElement) Class() *LegendElement {
+func (e *LegendElement) Contenteditable(a LegendContenteditableAttrEnum) *LegendElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *LegendElement) Contenteditable() *LegendElement {
+func (e *LegendElement) Id(s string) *LegendElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *LegendElement) Id() *LegendElement {
-	return e
-}
-
-func (e *LegendElement) Slot() *LegendElement {
+func (e *LegendElement) Slot(s string) *LegendElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *LegendElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

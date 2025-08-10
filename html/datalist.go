@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type DatalistElement struct {
+	attributes datalistAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func DatalistIf(condition bool, children ...htemel.Node) *DatalistElement {
 	}
 }
 
-func (e *DatalistElement) Autocapitalize() *DatalistElement {
+type DatalistAutocapitalizeAttrEnum string
+
+const (
+	DatalistAutocapitalizeAttrEnumWords DatalistAutocapitalizeAttrEnum = "words"
+	DatalistAutocapitalizeAttrEnumCharacters DatalistAutocapitalizeAttrEnum = "characters"
+	DatalistAutocapitalizeAttrEnumNone DatalistAutocapitalizeAttrEnum = "none"
+	DatalistAutocapitalizeAttrEnumOff DatalistAutocapitalizeAttrEnum = "off"
+	DatalistAutocapitalizeAttrEnumOn DatalistAutocapitalizeAttrEnum = "on"
+	DatalistAutocapitalizeAttrEnumSentences DatalistAutocapitalizeAttrEnum = "sentences"
+)
+
+type DatalistAutocorrectAttrEnum string
+
+const (
+	DatalistAutocorrectAttrEnumOn DatalistAutocorrectAttrEnum = "on"
+	DatalistAutocorrectAttrEnumOff DatalistAutocorrectAttrEnum = "off"
+)
+
+type DatalistContenteditableAttrEnum string
+
+const (
+	DatalistContenteditableAttrEnumFalse DatalistContenteditableAttrEnum = "false"
+	DatalistContenteditableAttrEnumPlaintextOnly DatalistContenteditableAttrEnum = "plaintext-only"
+	DatalistContenteditableAttrEnumTrue DatalistContenteditableAttrEnum = "true"
+)
+
+type datalistAttrs map[string]any
+
+func (e *DatalistElement) Autocapitalize(a DatalistAutocapitalizeAttrEnum) *DatalistElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *DatalistElement) Autocorrect() *DatalistElement {
+func (e *DatalistElement) Autocorrect(a DatalistAutocorrectAttrEnum) *DatalistElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *DatalistElement) Autofocus() *DatalistElement {
+func (e *DatalistElement) Class(s ...string) *DatalistElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *DatalistElement) Class() *DatalistElement {
+func (e *DatalistElement) Contenteditable(a DatalistContenteditableAttrEnum) *DatalistElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *DatalistElement) Contenteditable() *DatalistElement {
+func (e *DatalistElement) Id(s string) *DatalistElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *DatalistElement) Id() *DatalistElement {
-	return e
-}
-
-func (e *DatalistElement) Slot() *DatalistElement {
+func (e *DatalistElement) Slot(s string) *DatalistElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *DatalistElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type FigcaptionElement struct {
+	attributes figcaptionAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func FigcaptionIf(condition bool, children ...htemel.Node) *FigcaptionElement {
 	}
 }
 
-func (e *FigcaptionElement) Autocapitalize() *FigcaptionElement {
+type FigcaptionAutocapitalizeAttrEnum string
+
+const (
+	FigcaptionAutocapitalizeAttrEnumOn FigcaptionAutocapitalizeAttrEnum = "on"
+	FigcaptionAutocapitalizeAttrEnumSentences FigcaptionAutocapitalizeAttrEnum = "sentences"
+	FigcaptionAutocapitalizeAttrEnumWords FigcaptionAutocapitalizeAttrEnum = "words"
+	FigcaptionAutocapitalizeAttrEnumCharacters FigcaptionAutocapitalizeAttrEnum = "characters"
+	FigcaptionAutocapitalizeAttrEnumNone FigcaptionAutocapitalizeAttrEnum = "none"
+	FigcaptionAutocapitalizeAttrEnumOff FigcaptionAutocapitalizeAttrEnum = "off"
+)
+
+type FigcaptionAutocorrectAttrEnum string
+
+const (
+	FigcaptionAutocorrectAttrEnumOff FigcaptionAutocorrectAttrEnum = "off"
+	FigcaptionAutocorrectAttrEnumOn FigcaptionAutocorrectAttrEnum = "on"
+)
+
+type FigcaptionContenteditableAttrEnum string
+
+const (
+	FigcaptionContenteditableAttrEnumFalse FigcaptionContenteditableAttrEnum = "false"
+	FigcaptionContenteditableAttrEnumPlaintextOnly FigcaptionContenteditableAttrEnum = "plaintext-only"
+	FigcaptionContenteditableAttrEnumTrue FigcaptionContenteditableAttrEnum = "true"
+)
+
+type figcaptionAttrs map[string]any
+
+func (e *FigcaptionElement) Autocapitalize(a FigcaptionAutocapitalizeAttrEnum) *FigcaptionElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *FigcaptionElement) Autocorrect() *FigcaptionElement {
+func (e *FigcaptionElement) Autocorrect(a FigcaptionAutocorrectAttrEnum) *FigcaptionElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *FigcaptionElement) Autofocus() *FigcaptionElement {
+func (e *FigcaptionElement) Class(s ...string) *FigcaptionElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *FigcaptionElement) Class() *FigcaptionElement {
+func (e *FigcaptionElement) Contenteditable(a FigcaptionContenteditableAttrEnum) *FigcaptionElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *FigcaptionElement) Contenteditable() *FigcaptionElement {
+func (e *FigcaptionElement) Id(s string) *FigcaptionElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *FigcaptionElement) Id() *FigcaptionElement {
-	return e
-}
-
-func (e *FigcaptionElement) Slot() *FigcaptionElement {
+func (e *FigcaptionElement) Slot(s string) *FigcaptionElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *FigcaptionElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

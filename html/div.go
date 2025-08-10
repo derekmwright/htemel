@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type DivElement struct {
+	attributes divAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func DivIf(condition bool, children ...htemel.Node) *DivElement {
 	}
 }
 
-func (e *DivElement) Autocapitalize() *DivElement {
+type DivAutocapitalizeAttrEnum string
+
+const (
+	DivAutocapitalizeAttrEnumSentences DivAutocapitalizeAttrEnum = "sentences"
+	DivAutocapitalizeAttrEnumWords DivAutocapitalizeAttrEnum = "words"
+	DivAutocapitalizeAttrEnumCharacters DivAutocapitalizeAttrEnum = "characters"
+	DivAutocapitalizeAttrEnumNone DivAutocapitalizeAttrEnum = "none"
+	DivAutocapitalizeAttrEnumOff DivAutocapitalizeAttrEnum = "off"
+	DivAutocapitalizeAttrEnumOn DivAutocapitalizeAttrEnum = "on"
+)
+
+type DivAutocorrectAttrEnum string
+
+const (
+	DivAutocorrectAttrEnumOff DivAutocorrectAttrEnum = "off"
+	DivAutocorrectAttrEnumOn DivAutocorrectAttrEnum = "on"
+)
+
+type DivContenteditableAttrEnum string
+
+const (
+	DivContenteditableAttrEnumFalse DivContenteditableAttrEnum = "false"
+	DivContenteditableAttrEnumPlaintextOnly DivContenteditableAttrEnum = "plaintext-only"
+	DivContenteditableAttrEnumTrue DivContenteditableAttrEnum = "true"
+)
+
+type divAttrs map[string]any
+
+func (e *DivElement) Autocapitalize(a DivAutocapitalizeAttrEnum) *DivElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *DivElement) Autocorrect() *DivElement {
+func (e *DivElement) Autocorrect(a DivAutocorrectAttrEnum) *DivElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *DivElement) Autofocus() *DivElement {
+func (e *DivElement) Class(s ...string) *DivElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *DivElement) Class() *DivElement {
+func (e *DivElement) Contenteditable(a DivContenteditableAttrEnum) *DivElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *DivElement) Contenteditable() *DivElement {
+func (e *DivElement) Id(s string) *DivElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *DivElement) Id() *DivElement {
-	return e
-}
-
-func (e *DivElement) Slot() *DivElement {
+func (e *DivElement) Slot(s string) *DivElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *DivElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type SelectedcontentElement struct {
+	attributes selectedcontentAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func SelectedcontentIf(condition bool, children ...htemel.Node) *Selectedcontent
 	}
 }
 
-func (e *SelectedcontentElement) Autocapitalize() *SelectedcontentElement {
+type SelectedcontentAutocapitalizeAttrEnum string
+
+const (
+	SelectedcontentAutocapitalizeAttrEnumOn SelectedcontentAutocapitalizeAttrEnum = "on"
+	SelectedcontentAutocapitalizeAttrEnumSentences SelectedcontentAutocapitalizeAttrEnum = "sentences"
+	SelectedcontentAutocapitalizeAttrEnumWords SelectedcontentAutocapitalizeAttrEnum = "words"
+	SelectedcontentAutocapitalizeAttrEnumCharacters SelectedcontentAutocapitalizeAttrEnum = "characters"
+	SelectedcontentAutocapitalizeAttrEnumNone SelectedcontentAutocapitalizeAttrEnum = "none"
+	SelectedcontentAutocapitalizeAttrEnumOff SelectedcontentAutocapitalizeAttrEnum = "off"
+)
+
+type SelectedcontentAutocorrectAttrEnum string
+
+const (
+	SelectedcontentAutocorrectAttrEnumOff SelectedcontentAutocorrectAttrEnum = "off"
+	SelectedcontentAutocorrectAttrEnumOn SelectedcontentAutocorrectAttrEnum = "on"
+)
+
+type SelectedcontentContenteditableAttrEnum string
+
+const (
+	SelectedcontentContenteditableAttrEnumFalse SelectedcontentContenteditableAttrEnum = "false"
+	SelectedcontentContenteditableAttrEnumPlaintextOnly SelectedcontentContenteditableAttrEnum = "plaintext-only"
+	SelectedcontentContenteditableAttrEnumTrue SelectedcontentContenteditableAttrEnum = "true"
+)
+
+type selectedcontentAttrs map[string]any
+
+func (e *SelectedcontentElement) Autocapitalize(a SelectedcontentAutocapitalizeAttrEnum) *SelectedcontentElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *SelectedcontentElement) Autocorrect() *SelectedcontentElement {
+func (e *SelectedcontentElement) Autocorrect(a SelectedcontentAutocorrectAttrEnum) *SelectedcontentElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *SelectedcontentElement) Autofocus() *SelectedcontentElement {
+func (e *SelectedcontentElement) Class(s ...string) *SelectedcontentElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *SelectedcontentElement) Class() *SelectedcontentElement {
+func (e *SelectedcontentElement) Contenteditable(a SelectedcontentContenteditableAttrEnum) *SelectedcontentElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *SelectedcontentElement) Contenteditable() *SelectedcontentElement {
+func (e *SelectedcontentElement) Id(s string) *SelectedcontentElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *SelectedcontentElement) Id() *SelectedcontentElement {
-	return e
-}
-
-func (e *SelectedcontentElement) Slot() *SelectedcontentElement {
+func (e *SelectedcontentElement) Slot(s string) *SelectedcontentElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *SelectedcontentElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

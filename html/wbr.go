@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type WbrElement struct {
+	attributes wbrAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func WbrIf(condition bool, children ...htemel.Node) *WbrElement {
 	}
 }
 
-func (e *WbrElement) Autocapitalize() *WbrElement {
+type WbrAutocapitalizeAttrEnum string
+
+const (
+	WbrAutocapitalizeAttrEnumCharacters WbrAutocapitalizeAttrEnum = "characters"
+	WbrAutocapitalizeAttrEnumNone WbrAutocapitalizeAttrEnum = "none"
+	WbrAutocapitalizeAttrEnumOff WbrAutocapitalizeAttrEnum = "off"
+	WbrAutocapitalizeAttrEnumOn WbrAutocapitalizeAttrEnum = "on"
+	WbrAutocapitalizeAttrEnumSentences WbrAutocapitalizeAttrEnum = "sentences"
+	WbrAutocapitalizeAttrEnumWords WbrAutocapitalizeAttrEnum = "words"
+)
+
+type WbrAutocorrectAttrEnum string
+
+const (
+	WbrAutocorrectAttrEnumOff WbrAutocorrectAttrEnum = "off"
+	WbrAutocorrectAttrEnumOn WbrAutocorrectAttrEnum = "on"
+)
+
+type WbrContenteditableAttrEnum string
+
+const (
+	WbrContenteditableAttrEnumTrue WbrContenteditableAttrEnum = "true"
+	WbrContenteditableAttrEnumFalse WbrContenteditableAttrEnum = "false"
+	WbrContenteditableAttrEnumPlaintextOnly WbrContenteditableAttrEnum = "plaintext-only"
+)
+
+type wbrAttrs map[string]any
+
+func (e *WbrElement) Autocapitalize(a WbrAutocapitalizeAttrEnum) *WbrElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *WbrElement) Autocorrect() *WbrElement {
+func (e *WbrElement) Autocorrect(a WbrAutocorrectAttrEnum) *WbrElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *WbrElement) Autofocus() *WbrElement {
+func (e *WbrElement) Class(s ...string) *WbrElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *WbrElement) Class() *WbrElement {
+func (e *WbrElement) Contenteditable(a WbrContenteditableAttrEnum) *WbrElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *WbrElement) Contenteditable() *WbrElement {
+func (e *WbrElement) Id(s string) *WbrElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *WbrElement) Id() *WbrElement {
-	return e
-}
-
-func (e *WbrElement) Slot() *WbrElement {
+func (e *WbrElement) Slot(s string) *WbrElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *WbrElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

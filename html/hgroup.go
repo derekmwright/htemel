@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type HgroupElement struct {
+	attributes hgroupAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func HgroupIf(condition bool, children ...htemel.Node) *HgroupElement {
 	}
 }
 
-func (e *HgroupElement) Autocapitalize() *HgroupElement {
+type HgroupAutocapitalizeAttrEnum string
+
+const (
+	HgroupAutocapitalizeAttrEnumCharacters HgroupAutocapitalizeAttrEnum = "characters"
+	HgroupAutocapitalizeAttrEnumNone HgroupAutocapitalizeAttrEnum = "none"
+	HgroupAutocapitalizeAttrEnumOff HgroupAutocapitalizeAttrEnum = "off"
+	HgroupAutocapitalizeAttrEnumOn HgroupAutocapitalizeAttrEnum = "on"
+	HgroupAutocapitalizeAttrEnumSentences HgroupAutocapitalizeAttrEnum = "sentences"
+	HgroupAutocapitalizeAttrEnumWords HgroupAutocapitalizeAttrEnum = "words"
+)
+
+type HgroupAutocorrectAttrEnum string
+
+const (
+	HgroupAutocorrectAttrEnumOff HgroupAutocorrectAttrEnum = "off"
+	HgroupAutocorrectAttrEnumOn HgroupAutocorrectAttrEnum = "on"
+)
+
+type HgroupContenteditableAttrEnum string
+
+const (
+	HgroupContenteditableAttrEnumFalse HgroupContenteditableAttrEnum = "false"
+	HgroupContenteditableAttrEnumPlaintextOnly HgroupContenteditableAttrEnum = "plaintext-only"
+	HgroupContenteditableAttrEnumTrue HgroupContenteditableAttrEnum = "true"
+)
+
+type hgroupAttrs map[string]any
+
+func (e *HgroupElement) Autocapitalize(a HgroupAutocapitalizeAttrEnum) *HgroupElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *HgroupElement) Autocorrect() *HgroupElement {
+func (e *HgroupElement) Autocorrect(a HgroupAutocorrectAttrEnum) *HgroupElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *HgroupElement) Autofocus() *HgroupElement {
+func (e *HgroupElement) Class(s ...string) *HgroupElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *HgroupElement) Class() *HgroupElement {
+func (e *HgroupElement) Contenteditable(a HgroupContenteditableAttrEnum) *HgroupElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *HgroupElement) Contenteditable() *HgroupElement {
+func (e *HgroupElement) Id(s string) *HgroupElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *HgroupElement) Id() *HgroupElement {
-	return e
-}
-
-func (e *HgroupElement) Slot() *HgroupElement {
+func (e *HgroupElement) Slot(s string) *HgroupElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *HgroupElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

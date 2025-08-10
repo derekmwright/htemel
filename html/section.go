@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type SectionElement struct {
+	attributes sectionAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func SectionIf(condition bool, children ...htemel.Node) *SectionElement {
 	}
 }
 
-func (e *SectionElement) Autocapitalize() *SectionElement {
+type SectionAutocapitalizeAttrEnum string
+
+const (
+	SectionAutocapitalizeAttrEnumSentences SectionAutocapitalizeAttrEnum = "sentences"
+	SectionAutocapitalizeAttrEnumWords SectionAutocapitalizeAttrEnum = "words"
+	SectionAutocapitalizeAttrEnumCharacters SectionAutocapitalizeAttrEnum = "characters"
+	SectionAutocapitalizeAttrEnumNone SectionAutocapitalizeAttrEnum = "none"
+	SectionAutocapitalizeAttrEnumOff SectionAutocapitalizeAttrEnum = "off"
+	SectionAutocapitalizeAttrEnumOn SectionAutocapitalizeAttrEnum = "on"
+)
+
+type SectionAutocorrectAttrEnum string
+
+const (
+	SectionAutocorrectAttrEnumOff SectionAutocorrectAttrEnum = "off"
+	SectionAutocorrectAttrEnumOn SectionAutocorrectAttrEnum = "on"
+)
+
+type SectionContenteditableAttrEnum string
+
+const (
+	SectionContenteditableAttrEnumFalse SectionContenteditableAttrEnum = "false"
+	SectionContenteditableAttrEnumPlaintextOnly SectionContenteditableAttrEnum = "plaintext-only"
+	SectionContenteditableAttrEnumTrue SectionContenteditableAttrEnum = "true"
+)
+
+type sectionAttrs map[string]any
+
+func (e *SectionElement) Autocapitalize(a SectionAutocapitalizeAttrEnum) *SectionElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *SectionElement) Autocorrect() *SectionElement {
+func (e *SectionElement) Autocorrect(a SectionAutocorrectAttrEnum) *SectionElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *SectionElement) Autofocus() *SectionElement {
+func (e *SectionElement) Class(s ...string) *SectionElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *SectionElement) Class() *SectionElement {
+func (e *SectionElement) Contenteditable(a SectionContenteditableAttrEnum) *SectionElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *SectionElement) Contenteditable() *SectionElement {
+func (e *SectionElement) Id(s string) *SectionElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *SectionElement) Id() *SectionElement {
-	return e
-}
-
-func (e *SectionElement) Slot() *SectionElement {
+func (e *SectionElement) Slot(s string) *SectionElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *SectionElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err

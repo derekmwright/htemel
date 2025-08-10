@@ -2,11 +2,14 @@
 package html
 
 import (
+  "fmt"
   "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
   "io"
 )
 
 type LinkElement struct {
+	attributes linkAttrs
 	children []htemel.Node
 	skipRender bool
 }
@@ -33,31 +36,67 @@ func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
 	}
 }
 
-func (e *LinkElement) Autocapitalize() *LinkElement {
+type LinkAutocapitalizeAttrEnum string
+
+const (
+	LinkAutocapitalizeAttrEnumWords LinkAutocapitalizeAttrEnum = "words"
+	LinkAutocapitalizeAttrEnumCharacters LinkAutocapitalizeAttrEnum = "characters"
+	LinkAutocapitalizeAttrEnumNone LinkAutocapitalizeAttrEnum = "none"
+	LinkAutocapitalizeAttrEnumOff LinkAutocapitalizeAttrEnum = "off"
+	LinkAutocapitalizeAttrEnumOn LinkAutocapitalizeAttrEnum = "on"
+	LinkAutocapitalizeAttrEnumSentences LinkAutocapitalizeAttrEnum = "sentences"
+)
+
+type LinkAutocorrectAttrEnum string
+
+const (
+	LinkAutocorrectAttrEnumOff LinkAutocorrectAttrEnum = "off"
+	LinkAutocorrectAttrEnumOn LinkAutocorrectAttrEnum = "on"
+)
+
+type LinkContenteditableAttrEnum string
+
+const (
+	LinkContenteditableAttrEnumTrue LinkContenteditableAttrEnum = "true"
+	LinkContenteditableAttrEnumFalse LinkContenteditableAttrEnum = "false"
+	LinkContenteditableAttrEnumPlaintextOnly LinkContenteditableAttrEnum = "plaintext-only"
+)
+
+type linkAttrs map[string]any
+
+func (e *LinkElement) Autocapitalize(a LinkAutocapitalizeAttrEnum) *LinkElement {
+	e.attributes["autocapitalize"] = a
+	
 	return e
 }
 
-func (e *LinkElement) Autocorrect() *LinkElement {
+func (e *LinkElement) Autocorrect(a LinkAutocorrectAttrEnum) *LinkElement {
+	e.attributes["autocorrect"] = a
+	
 	return e
 }
 
-func (e *LinkElement) Autofocus() *LinkElement {
+func (e *LinkElement) Class(s ...string) *LinkElement {
+	e.attributes["class"] = strings.Join(s, " ")
+	
 	return e
 }
 
-func (e *LinkElement) Class() *LinkElement {
+func (e *LinkElement) Contenteditable(a LinkContenteditableAttrEnum) *LinkElement {
+	e.attributes["contenteditable"] = a
+	
 	return e
 }
 
-func (e *LinkElement) Contenteditable() *LinkElement {
+func (e *LinkElement) Id(s string) *LinkElement {
+	e.attributes["id"] = s
+	
 	return e
 }
 
-func (e *LinkElement) Id() *LinkElement {
-	return e
-}
-
-func (e *LinkElement) Slot() *LinkElement {
+func (e *LinkElement) Slot(s string) *LinkElement {
+	e.attributes["slot"] = s
+	
 	return e
 }
 
@@ -70,7 +109,16 @@ func (e *LinkElement) Render(w io.Writer) error {
 		return err
 	}
 
-	// TODO: Attribute stuff here
+	c := len(e.attributes)
+	i := 0
+	for key, v := range e.attributes {
+		w.Write([]byte(key + "="))
+		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		if i < c {
+			w.Write([]byte(" "))
+		}
+		i++
+	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
