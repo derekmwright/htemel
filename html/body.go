@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type BodyElement struct {
 	attributes bodyAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type BodyElement struct {
 // Spec Description: The body element represents the contents of the document.
 func Body(children ...htemel.Node) *BodyElement {
 	node := &BodyElement{
-		children: children,
+		children:   children,
 		attributes: make(bodyAttrs),
 	}
 
@@ -41,26 +42,26 @@ func BodyIf(condition bool, children ...htemel.Node) *BodyElement {
 type BodyAutocapitalizeEnum string
 
 const (
+	BodyAutocapitalizeEnumNone       BodyAutocapitalizeEnum = "none"
+	BodyAutocapitalizeEnumOff        BodyAutocapitalizeEnum = "off"
+	BodyAutocapitalizeEnumOn         BodyAutocapitalizeEnum = "on"
+	BodyAutocapitalizeEnumSentences  BodyAutocapitalizeEnum = "sentences"
+	BodyAutocapitalizeEnumWords      BodyAutocapitalizeEnum = "words"
 	BodyAutocapitalizeEnumCharacters BodyAutocapitalizeEnum = "characters"
-	BodyAutocapitalizeEnumNone BodyAutocapitalizeEnum = "none"
-	BodyAutocapitalizeEnumOff BodyAutocapitalizeEnum = "off"
-	BodyAutocapitalizeEnumOn BodyAutocapitalizeEnum = "on"
-	BodyAutocapitalizeEnumSentences BodyAutocapitalizeEnum = "sentences"
-	BodyAutocapitalizeEnumWords BodyAutocapitalizeEnum = "words"
 )
 
 type BodyAutocorrectEnum string
 
 const (
-	BodyAutocorrectEnumOn BodyAutocorrectEnum = "on"
 	BodyAutocorrectEnumOff BodyAutocorrectEnum = "off"
+	BodyAutocorrectEnumOn  BodyAutocorrectEnum = "on"
 )
 
 type BodyContenteditableEnum string
 
 const (
-	BodyContenteditableEnumTrue BodyContenteditableEnum = "true"
-	BodyContenteditableEnumFalse BodyContenteditableEnum = "false"
+	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
+	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
 )
 
@@ -68,101 +69,231 @@ type BodyDirEnum string
 
 const (
 	BodyDirEnumAuto BodyDirEnum = "auto"
-	BodyDirEnumLtr BodyDirEnum = "ltr"
-	BodyDirEnumRtl BodyDirEnum = "rtl"
+	BodyDirEnumLtr  BodyDirEnum = "ltr"
+	BodyDirEnumRtl  BodyDirEnum = "rtl"
 )
 
 type BodyDraggableEnum string
 
 const (
 	BodyDraggableEnumFalse BodyDraggableEnum = "false"
-	BodyDraggableEnumTrue BodyDraggableEnum = "true"
+	BodyDraggableEnumTrue  BodyDraggableEnum = "true"
 )
 
 type BodyEnterkeyhintEnum string
 
 const (
-	BodyEnterkeyhintEnumGo BodyEnterkeyhintEnum = "go"
-	BodyEnterkeyhintEnumNext BodyEnterkeyhintEnum = "next"
+	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
+	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
 	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
-	BodyEnterkeyhintEnumSearch BodyEnterkeyhintEnum = "search"
-	BodyEnterkeyhintEnumSend BodyEnterkeyhintEnum = "send"
-	BodyEnterkeyhintEnumDone BodyEnterkeyhintEnum = "done"
-	BodyEnterkeyhintEnumEnter BodyEnterkeyhintEnum = "enter"
+	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
+	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
+	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
+	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
 )
 
 type BodyHiddenEnum string
 
 const (
-	BodyHiddenEnumHidden BodyHiddenEnum = "hidden"
+	BodyHiddenEnumHidden     BodyHiddenEnum = "hidden"
 	BodyHiddenEnumUntilFound BodyHiddenEnum = "until-found"
+)
+
+type BodyInputmodeEnum string
+
+const (
+	BodyInputmodeEnumUrl     BodyInputmodeEnum = "url"
+	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
+	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
+	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
+	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
+	BodyInputmodeEnumSearch  BodyInputmodeEnum = "search"
+	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
+	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
+)
+
+type BodySpellcheckEnum string
+
+const (
+	BodySpellcheckEnumFalse BodySpellcheckEnum = "false"
+	BodySpellcheckEnumTrue  BodySpellcheckEnum = "true"
+)
+
+type BodyTranslateEnum string
+
+const (
+	BodyTranslateEnumNo  BodyTranslateEnum = "no"
+	BodyTranslateEnumYes BodyTranslateEnum = "yes"
+)
+
+type BodyWritingsuggestionsEnum string
+
+const (
+	BodyWritingsuggestionsEnumFalse BodyWritingsuggestionsEnum = "false"
+	BodyWritingsuggestionsEnumTrue  BodyWritingsuggestionsEnum = "true"
 )
 
 type bodyAttrs map[string]any
 
 func (e *BodyElement) Autocapitalize(a BodyAutocapitalizeEnum) *BodyElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *BodyElement) Autocorrect(a BodyAutocorrectEnum) *BodyElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *BodyElement) Autofocus(b bool) *BodyElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *BodyElement) Class(s ...string) *BodyElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *BodyElement) Contenteditable(a BodyContenteditableEnum) *BodyElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *BodyElement) Dir(a BodyDirEnum) *BodyElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *BodyElement) Draggable(a BodyDraggableEnum) *BodyElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *BodyElement) Enterkeyhint(a BodyEnterkeyhintEnum) *BodyElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *BodyElement) Hidden(a BodyHiddenEnum) *BodyElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *BodyElement) Id(s string) *BodyElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *BodyElement) Inert(b bool) *BodyElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *BodyElement) Inputmode(a BodyInputmodeEnum) *BodyElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *BodyElement) Itemid(s string) *BodyElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *BodyElement) Itemprop(s ...string) *BodyElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *BodyElement) Itemref(s ...string) *BodyElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *BodyElement) Itemscope(b bool) *BodyElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *BodyElement) Itemtype(s ...string) *BodyElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *BodyElement) Lang(s string) *BodyElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *BodyElement) Nonce(s string) *BodyElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *BodyElement) Popover(s string) *BodyElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *BodyElement) Slot(s string) *BodyElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *BodyElement) Spellcheck(a BodySpellcheckEnum) *BodyElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *BodyElement) Style(s string) *BodyElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *BodyElement) Tabindex(i int) *BodyElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *BodyElement) Title(s string) *BodyElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *BodyElement) Translate(a BodyTranslateEnum) *BodyElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *BodyElement) Writingsuggestions(a BodyWritingsuggestionsEnum) *BodyElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

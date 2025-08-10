@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DlElement struct {
 	attributes dlAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DlElement struct {
 // Spec Description: The dl element represents an association list consisting of zero or more name-value groups (a description list). A name-value group consists of one or more names (dt elements, possibly as children of a div element child) followed by one or more values (dd elements, possibly as children of a div element child), ignoring any nodes other than dt and dd element children, and dt and dd elements that are children of div element children. Within a single dl element, there should not be more than one dt element for each name.
 func Dl(children ...htemel.Node) *DlElement {
 	node := &DlElement{
-		children: children,
+		children:   children,
 		attributes: make(dlAttrs),
 	}
 
@@ -42,127 +43,257 @@ type DlAutocapitalizeEnum string
 
 const (
 	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
-	DlAutocapitalizeEnumNone DlAutocapitalizeEnum = "none"
-	DlAutocapitalizeEnumOff DlAutocapitalizeEnum = "off"
-	DlAutocapitalizeEnumOn DlAutocapitalizeEnum = "on"
-	DlAutocapitalizeEnumSentences DlAutocapitalizeEnum = "sentences"
-	DlAutocapitalizeEnumWords DlAutocapitalizeEnum = "words"
+	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
+	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
+	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
+	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
+	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
 )
 
 type DlAutocorrectEnum string
 
 const (
-	DlAutocorrectEnumOn DlAutocorrectEnum = "on"
 	DlAutocorrectEnumOff DlAutocorrectEnum = "off"
+	DlAutocorrectEnumOn  DlAutocorrectEnum = "on"
 )
 
 type DlContenteditableEnum string
 
 const (
-	DlContenteditableEnumFalse DlContenteditableEnum = "false"
+	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
-	DlContenteditableEnumTrue DlContenteditableEnum = "true"
+	DlContenteditableEnumTrue          DlContenteditableEnum = "true"
 )
 
 type DlDirEnum string
 
 const (
 	DlDirEnumAuto DlDirEnum = "auto"
-	DlDirEnumLtr DlDirEnum = "ltr"
-	DlDirEnumRtl DlDirEnum = "rtl"
+	DlDirEnumLtr  DlDirEnum = "ltr"
+	DlDirEnumRtl  DlDirEnum = "rtl"
 )
 
 type DlDraggableEnum string
 
 const (
 	DlDraggableEnumFalse DlDraggableEnum = "false"
-	DlDraggableEnumTrue DlDraggableEnum = "true"
+	DlDraggableEnumTrue  DlDraggableEnum = "true"
 )
 
 type DlEnterkeyhintEnum string
 
 const (
-	DlEnterkeyhintEnumEnter DlEnterkeyhintEnum = "enter"
-	DlEnterkeyhintEnumGo DlEnterkeyhintEnum = "go"
-	DlEnterkeyhintEnumNext DlEnterkeyhintEnum = "next"
+	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
+	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
+	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
-	DlEnterkeyhintEnumSearch DlEnterkeyhintEnum = "search"
-	DlEnterkeyhintEnumSend DlEnterkeyhintEnum = "send"
-	DlEnterkeyhintEnumDone DlEnterkeyhintEnum = "done"
+	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
+	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
+	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
 )
 
 type DlHiddenEnum string
 
 const (
-	DlHiddenEnumHidden DlHiddenEnum = "hidden"
+	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
 	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
+)
+
+type DlInputmodeEnum string
+
+const (
+	DlInputmodeEnumDecimal DlInputmodeEnum = "decimal"
+	DlInputmodeEnumEmail   DlInputmodeEnum = "email"
+	DlInputmodeEnumNone    DlInputmodeEnum = "none"
+	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
+	DlInputmodeEnumSearch  DlInputmodeEnum = "search"
+	DlInputmodeEnumTel     DlInputmodeEnum = "tel"
+	DlInputmodeEnumText    DlInputmodeEnum = "text"
+	DlInputmodeEnumUrl     DlInputmodeEnum = "url"
+)
+
+type DlSpellcheckEnum string
+
+const (
+	DlSpellcheckEnumFalse DlSpellcheckEnum = "false"
+	DlSpellcheckEnumTrue  DlSpellcheckEnum = "true"
+)
+
+type DlTranslateEnum string
+
+const (
+	DlTranslateEnumYes DlTranslateEnum = "yes"
+	DlTranslateEnumNo  DlTranslateEnum = "no"
+)
+
+type DlWritingsuggestionsEnum string
+
+const (
+	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
+	DlWritingsuggestionsEnumFalse DlWritingsuggestionsEnum = "false"
 )
 
 type dlAttrs map[string]any
 
 func (e *DlElement) Autocapitalize(a DlAutocapitalizeEnum) *DlElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DlElement) Autocorrect(a DlAutocorrectEnum) *DlElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *DlElement) Autofocus(b bool) *DlElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *DlElement) Class(s ...string) *DlElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DlElement) Contenteditable(a DlContenteditableEnum) *DlElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DlElement) Dir(a DlDirEnum) *DlElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *DlElement) Draggable(a DlDraggableEnum) *DlElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *DlElement) Enterkeyhint(a DlEnterkeyhintEnum) *DlElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *DlElement) Hidden(a DlHiddenEnum) *DlElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *DlElement) Id(s string) *DlElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *DlElement) Inert(b bool) *DlElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *DlElement) Inputmode(a DlInputmodeEnum) *DlElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *DlElement) Itemid(s string) *DlElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *DlElement) Itemprop(s ...string) *DlElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DlElement) Itemref(s ...string) *DlElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DlElement) Itemscope(b bool) *DlElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *DlElement) Itemtype(s ...string) *DlElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DlElement) Lang(s string) *DlElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *DlElement) Nonce(s string) *DlElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *DlElement) Popover(s string) *DlElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *DlElement) Slot(s string) *DlElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *DlElement) Spellcheck(a DlSpellcheckEnum) *DlElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *DlElement) Style(s string) *DlElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *DlElement) Tabindex(i int) *DlElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *DlElement) Title(s string) *DlElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *DlElement) Translate(a DlTranslateEnum) *DlElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *DlElement) Writingsuggestions(a DlWritingsuggestionsEnum) *DlElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

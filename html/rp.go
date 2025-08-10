@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type RpElement struct {
 	attributes rpAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type RpElement struct {
 // Spec Description: The rp element can be used to provide parentheses or other content around a ruby text component of a ruby annotation, to be shown by user agents that don't support ruby annotations.
 func Rp(children ...htemel.Node) *RpElement {
 	node := &RpElement{
-		children: children,
+		children:   children,
 		attributes: make(rpAttrs),
 	}
 
@@ -42,127 +43,257 @@ type RpAutocapitalizeEnum string
 
 const (
 	RpAutocapitalizeEnumCharacters RpAutocapitalizeEnum = "characters"
-	RpAutocapitalizeEnumNone RpAutocapitalizeEnum = "none"
-	RpAutocapitalizeEnumOff RpAutocapitalizeEnum = "off"
-	RpAutocapitalizeEnumOn RpAutocapitalizeEnum = "on"
-	RpAutocapitalizeEnumSentences RpAutocapitalizeEnum = "sentences"
-	RpAutocapitalizeEnumWords RpAutocapitalizeEnum = "words"
+	RpAutocapitalizeEnumNone       RpAutocapitalizeEnum = "none"
+	RpAutocapitalizeEnumOff        RpAutocapitalizeEnum = "off"
+	RpAutocapitalizeEnumOn         RpAutocapitalizeEnum = "on"
+	RpAutocapitalizeEnumSentences  RpAutocapitalizeEnum = "sentences"
+	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
 )
 
 type RpAutocorrectEnum string
 
 const (
 	RpAutocorrectEnumOff RpAutocorrectEnum = "off"
-	RpAutocorrectEnumOn RpAutocorrectEnum = "on"
+	RpAutocorrectEnumOn  RpAutocorrectEnum = "on"
 )
 
 type RpContenteditableEnum string
 
 const (
-	RpContenteditableEnumFalse RpContenteditableEnum = "false"
+	RpContenteditableEnumFalse         RpContenteditableEnum = "false"
 	RpContenteditableEnumPlaintextOnly RpContenteditableEnum = "plaintext-only"
-	RpContenteditableEnumTrue RpContenteditableEnum = "true"
+	RpContenteditableEnumTrue          RpContenteditableEnum = "true"
 )
 
 type RpDirEnum string
 
 const (
 	RpDirEnumAuto RpDirEnum = "auto"
-	RpDirEnumLtr RpDirEnum = "ltr"
-	RpDirEnumRtl RpDirEnum = "rtl"
+	RpDirEnumLtr  RpDirEnum = "ltr"
+	RpDirEnumRtl  RpDirEnum = "rtl"
 )
 
 type RpDraggableEnum string
 
 const (
 	RpDraggableEnumFalse RpDraggableEnum = "false"
-	RpDraggableEnumTrue RpDraggableEnum = "true"
+	RpDraggableEnumTrue  RpDraggableEnum = "true"
 )
 
 type RpEnterkeyhintEnum string
 
 const (
-	RpEnterkeyhintEnumEnter RpEnterkeyhintEnum = "enter"
-	RpEnterkeyhintEnumGo RpEnterkeyhintEnum = "go"
-	RpEnterkeyhintEnumNext RpEnterkeyhintEnum = "next"
+	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
+	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
+	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
+	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
 	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
-	RpEnterkeyhintEnumSearch RpEnterkeyhintEnum = "search"
-	RpEnterkeyhintEnumSend RpEnterkeyhintEnum = "send"
-	RpEnterkeyhintEnumDone RpEnterkeyhintEnum = "done"
+	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
+	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
 )
 
 type RpHiddenEnum string
 
 const (
-	RpHiddenEnumHidden RpHiddenEnum = "hidden"
+	RpHiddenEnumHidden     RpHiddenEnum = "hidden"
 	RpHiddenEnumUntilFound RpHiddenEnum = "until-found"
+)
+
+type RpInputmodeEnum string
+
+const (
+	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
+	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
+	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
+	RpInputmodeEnumNone    RpInputmodeEnum = "none"
+	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
+	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
+	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
+	RpInputmodeEnumText    RpInputmodeEnum = "text"
+)
+
+type RpSpellcheckEnum string
+
+const (
+	RpSpellcheckEnumFalse RpSpellcheckEnum = "false"
+	RpSpellcheckEnumTrue  RpSpellcheckEnum = "true"
+)
+
+type RpTranslateEnum string
+
+const (
+	RpTranslateEnumNo  RpTranslateEnum = "no"
+	RpTranslateEnumYes RpTranslateEnum = "yes"
+)
+
+type RpWritingsuggestionsEnum string
+
+const (
+	RpWritingsuggestionsEnumTrue  RpWritingsuggestionsEnum = "true"
+	RpWritingsuggestionsEnumFalse RpWritingsuggestionsEnum = "false"
 )
 
 type rpAttrs map[string]any
 
 func (e *RpElement) Autocapitalize(a RpAutocapitalizeEnum) *RpElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *RpElement) Autocorrect(a RpAutocorrectEnum) *RpElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *RpElement) Autofocus(b bool) *RpElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *RpElement) Class(s ...string) *RpElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *RpElement) Contenteditable(a RpContenteditableEnum) *RpElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *RpElement) Dir(a RpDirEnum) *RpElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *RpElement) Draggable(a RpDraggableEnum) *RpElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *RpElement) Enterkeyhint(a RpEnterkeyhintEnum) *RpElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *RpElement) Hidden(a RpHiddenEnum) *RpElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *RpElement) Id(s string) *RpElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *RpElement) Inert(b bool) *RpElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *RpElement) Inputmode(a RpInputmodeEnum) *RpElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *RpElement) Itemid(s string) *RpElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *RpElement) Itemprop(s ...string) *RpElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *RpElement) Itemref(s ...string) *RpElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *RpElement) Itemscope(b bool) *RpElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *RpElement) Itemtype(s ...string) *RpElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *RpElement) Lang(s string) *RpElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *RpElement) Nonce(s string) *RpElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *RpElement) Popover(s string) *RpElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *RpElement) Slot(s string) *RpElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *RpElement) Spellcheck(a RpSpellcheckEnum) *RpElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *RpElement) Style(s string) *RpElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *RpElement) Tabindex(i int) *RpElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *RpElement) Title(s string) *RpElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *RpElement) Translate(a RpTranslateEnum) *RpElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *RpElement) Writingsuggestions(a RpWritingsuggestionsEnum) *RpElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

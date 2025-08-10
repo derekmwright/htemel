@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TemplateElement struct {
 	attributes templateAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TemplateElement struct {
 // Spec Description: The template element is used to declare fragments of HTML that can be cloned and inserted in the document by script.
 func Template(children ...htemel.Node) *TemplateElement {
 	node := &TemplateElement{
-		children: children,
+		children:   children,
 		attributes: make(templateAttrs),
 	}
 
@@ -41,128 +42,258 @@ func TemplateIf(condition bool, children ...htemel.Node) *TemplateElement {
 type TemplateAutocapitalizeEnum string
 
 const (
+	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
+	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
 	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
-	TemplateAutocapitalizeEnumNone TemplateAutocapitalizeEnum = "none"
-	TemplateAutocapitalizeEnumOff TemplateAutocapitalizeEnum = "off"
-	TemplateAutocapitalizeEnumOn TemplateAutocapitalizeEnum = "on"
-	TemplateAutocapitalizeEnumSentences TemplateAutocapitalizeEnum = "sentences"
-	TemplateAutocapitalizeEnumWords TemplateAutocapitalizeEnum = "words"
+	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
+	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
+	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 )
 
 type TemplateAutocorrectEnum string
 
 const (
 	TemplateAutocorrectEnumOff TemplateAutocorrectEnum = "off"
-	TemplateAutocorrectEnumOn TemplateAutocorrectEnum = "on"
+	TemplateAutocorrectEnumOn  TemplateAutocorrectEnum = "on"
 )
 
 type TemplateContenteditableEnum string
 
 const (
-	TemplateContenteditableEnumFalse TemplateContenteditableEnum = "false"
+	TemplateContenteditableEnumFalse         TemplateContenteditableEnum = "false"
 	TemplateContenteditableEnumPlaintextOnly TemplateContenteditableEnum = "plaintext-only"
-	TemplateContenteditableEnumTrue TemplateContenteditableEnum = "true"
+	TemplateContenteditableEnumTrue          TemplateContenteditableEnum = "true"
 )
 
 type TemplateDirEnum string
 
 const (
 	TemplateDirEnumAuto TemplateDirEnum = "auto"
-	TemplateDirEnumLtr TemplateDirEnum = "ltr"
-	TemplateDirEnumRtl TemplateDirEnum = "rtl"
+	TemplateDirEnumLtr  TemplateDirEnum = "ltr"
+	TemplateDirEnumRtl  TemplateDirEnum = "rtl"
 )
 
 type TemplateDraggableEnum string
 
 const (
 	TemplateDraggableEnumFalse TemplateDraggableEnum = "false"
-	TemplateDraggableEnumTrue TemplateDraggableEnum = "true"
+	TemplateDraggableEnumTrue  TemplateDraggableEnum = "true"
 )
 
 type TemplateEnterkeyhintEnum string
 
 const (
-	TemplateEnterkeyhintEnumEnter TemplateEnterkeyhintEnum = "enter"
-	TemplateEnterkeyhintEnumGo TemplateEnterkeyhintEnum = "go"
-	TemplateEnterkeyhintEnumNext TemplateEnterkeyhintEnum = "next"
+	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
 	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
-	TemplateEnterkeyhintEnumSearch TemplateEnterkeyhintEnum = "search"
-	TemplateEnterkeyhintEnumSend TemplateEnterkeyhintEnum = "send"
-	TemplateEnterkeyhintEnumDone TemplateEnterkeyhintEnum = "done"
+	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
+	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
+	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
+	TemplateEnterkeyhintEnumEnter    TemplateEnterkeyhintEnum = "enter"
+	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
 )
 
 type TemplateHiddenEnum string
 
 const (
-	TemplateHiddenEnumHidden TemplateHiddenEnum = "hidden"
+	TemplateHiddenEnumHidden     TemplateHiddenEnum = "hidden"
 	TemplateHiddenEnumUntilFound TemplateHiddenEnum = "until-found"
+)
+
+type TemplateInputmodeEnum string
+
+const (
+	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
+	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
+	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
+	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
+	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
+	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
+	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
+	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
+)
+
+type TemplateSpellcheckEnum string
+
+const (
+	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
+	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
+)
+
+type TemplateTranslateEnum string
+
+const (
+	TemplateTranslateEnumNo  TemplateTranslateEnum = "no"
+	TemplateTranslateEnumYes TemplateTranslateEnum = "yes"
+)
+
+type TemplateWritingsuggestionsEnum string
+
+const (
+	TemplateWritingsuggestionsEnumFalse TemplateWritingsuggestionsEnum = "false"
+	TemplateWritingsuggestionsEnumTrue  TemplateWritingsuggestionsEnum = "true"
 )
 
 type templateAttrs map[string]any
 
 func (e *TemplateElement) Autocapitalize(a TemplateAutocapitalizeEnum) *TemplateElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TemplateElement) Autocorrect(a TemplateAutocorrectEnum) *TemplateElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *TemplateElement) Autofocus(b bool) *TemplateElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *TemplateElement) Class(s ...string) *TemplateElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TemplateElement) Contenteditable(a TemplateContenteditableEnum) *TemplateElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TemplateElement) Dir(a TemplateDirEnum) *TemplateElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *TemplateElement) Draggable(a TemplateDraggableEnum) *TemplateElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *TemplateElement) Enterkeyhint(a TemplateEnterkeyhintEnum) *TemplateElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *TemplateElement) Hidden(a TemplateHiddenEnum) *TemplateElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *TemplateElement) Id(s string) *TemplateElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *TemplateElement) Inert(b bool) *TemplateElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *TemplateElement) Inputmode(a TemplateInputmodeEnum) *TemplateElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *TemplateElement) Itemid(s string) *TemplateElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *TemplateElement) Itemprop(s ...string) *TemplateElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *TemplateElement) Itemref(s ...string) *TemplateElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *TemplateElement) Itemscope(b bool) *TemplateElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *TemplateElement) Itemtype(s ...string) *TemplateElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *TemplateElement) Lang(s string) *TemplateElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *TemplateElement) Nonce(s string) *TemplateElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *TemplateElement) Popover(s string) *TemplateElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *TemplateElement) Slot(s string) *TemplateElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *TemplateElement) Spellcheck(a TemplateSpellcheckEnum) *TemplateElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *TemplateElement) Style(s string) *TemplateElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *TemplateElement) Tabindex(i int) *TemplateElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *TemplateElement) Title(s string) *TemplateElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *TemplateElement) Translate(a TemplateTranslateEnum) *TemplateElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *TemplateElement) Writingsuggestions(a TemplateWritingsuggestionsEnum) *TemplateElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

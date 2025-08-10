@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type QElement struct {
 	attributes qAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type QElement struct {
 // Spec Description: The q element represents some phrasing content quoted from another source.
 func Q(children ...htemel.Node) *QElement {
 	node := &QElement{
-		children: children,
+		children:   children,
 		attributes: make(qAttrs),
 	}
 
@@ -41,128 +42,258 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 type QAutocapitalizeEnum string
 
 const (
+	QAutocapitalizeEnumOff        QAutocapitalizeEnum = "off"
+	QAutocapitalizeEnumOn         QAutocapitalizeEnum = "on"
+	QAutocapitalizeEnumSentences  QAutocapitalizeEnum = "sentences"
+	QAutocapitalizeEnumWords      QAutocapitalizeEnum = "words"
 	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
-	QAutocapitalizeEnumNone QAutocapitalizeEnum = "none"
-	QAutocapitalizeEnumOff QAutocapitalizeEnum = "off"
-	QAutocapitalizeEnumOn QAutocapitalizeEnum = "on"
-	QAutocapitalizeEnumSentences QAutocapitalizeEnum = "sentences"
-	QAutocapitalizeEnumWords QAutocapitalizeEnum = "words"
+	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 )
 
 type QAutocorrectEnum string
 
 const (
+	QAutocorrectEnumOn  QAutocorrectEnum = "on"
 	QAutocorrectEnumOff QAutocorrectEnum = "off"
-	QAutocorrectEnumOn QAutocorrectEnum = "on"
 )
 
 type QContenteditableEnum string
 
 const (
-	QContenteditableEnumFalse QContenteditableEnum = "false"
+	QContenteditableEnumFalse         QContenteditableEnum = "false"
 	QContenteditableEnumPlaintextOnly QContenteditableEnum = "plaintext-only"
-	QContenteditableEnumTrue QContenteditableEnum = "true"
+	QContenteditableEnumTrue          QContenteditableEnum = "true"
 )
 
 type QDirEnum string
 
 const (
 	QDirEnumAuto QDirEnum = "auto"
-	QDirEnumLtr QDirEnum = "ltr"
-	QDirEnumRtl QDirEnum = "rtl"
+	QDirEnumLtr  QDirEnum = "ltr"
+	QDirEnumRtl  QDirEnum = "rtl"
 )
 
 type QDraggableEnum string
 
 const (
+	QDraggableEnumTrue  QDraggableEnum = "true"
 	QDraggableEnumFalse QDraggableEnum = "false"
-	QDraggableEnumTrue QDraggableEnum = "true"
 )
 
 type QEnterkeyhintEnum string
 
 const (
-	QEnterkeyhintEnumGo QEnterkeyhintEnum = "go"
-	QEnterkeyhintEnumNext QEnterkeyhintEnum = "next"
+	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
+	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
+	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
+	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
 	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
-	QEnterkeyhintEnumSearch QEnterkeyhintEnum = "search"
-	QEnterkeyhintEnumSend QEnterkeyhintEnum = "send"
-	QEnterkeyhintEnumDone QEnterkeyhintEnum = "done"
-	QEnterkeyhintEnumEnter QEnterkeyhintEnum = "enter"
+	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
+	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 )
 
 type QHiddenEnum string
 
 const (
-	QHiddenEnumHidden QHiddenEnum = "hidden"
+	QHiddenEnumHidden     QHiddenEnum = "hidden"
 	QHiddenEnumUntilFound QHiddenEnum = "until-found"
+)
+
+type QInputmodeEnum string
+
+const (
+	QInputmodeEnumUrl     QInputmodeEnum = "url"
+	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
+	QInputmodeEnumEmail   QInputmodeEnum = "email"
+	QInputmodeEnumNone    QInputmodeEnum = "none"
+	QInputmodeEnumNumeric QInputmodeEnum = "numeric"
+	QInputmodeEnumSearch  QInputmodeEnum = "search"
+	QInputmodeEnumTel     QInputmodeEnum = "tel"
+	QInputmodeEnumText    QInputmodeEnum = "text"
+)
+
+type QSpellcheckEnum string
+
+const (
+	QSpellcheckEnumTrue  QSpellcheckEnum = "true"
+	QSpellcheckEnumFalse QSpellcheckEnum = "false"
+)
+
+type QTranslateEnum string
+
+const (
+	QTranslateEnumNo  QTranslateEnum = "no"
+	QTranslateEnumYes QTranslateEnum = "yes"
+)
+
+type QWritingsuggestionsEnum string
+
+const (
+	QWritingsuggestionsEnumFalse QWritingsuggestionsEnum = "false"
+	QWritingsuggestionsEnumTrue  QWritingsuggestionsEnum = "true"
 )
 
 type qAttrs map[string]any
 
 func (e *QElement) Autocapitalize(a QAutocapitalizeEnum) *QElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *QElement) Autocorrect(a QAutocorrectEnum) *QElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *QElement) Autofocus(b bool) *QElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *QElement) Class(s ...string) *QElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *QElement) Contenteditable(a QContenteditableEnum) *QElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *QElement) Dir(a QDirEnum) *QElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *QElement) Draggable(a QDraggableEnum) *QElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *QElement) Enterkeyhint(a QEnterkeyhintEnum) *QElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *QElement) Hidden(a QHiddenEnum) *QElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *QElement) Id(s string) *QElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *QElement) Inert(b bool) *QElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *QElement) Inputmode(a QInputmodeEnum) *QElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *QElement) Itemid(s string) *QElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *QElement) Itemprop(s ...string) *QElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *QElement) Itemref(s ...string) *QElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *QElement) Itemscope(b bool) *QElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *QElement) Itemtype(s ...string) *QElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *QElement) Lang(s string) *QElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *QElement) Nonce(s string) *QElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *QElement) Popover(s string) *QElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *QElement) Slot(s string) *QElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *QElement) Spellcheck(a QSpellcheckEnum) *QElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *QElement) Style(s string) *QElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *QElement) Tabindex(i int) *QElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *QElement) Title(s string) *QElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *QElement) Translate(a QTranslateEnum) *QElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *QElement) Writingsuggestions(a QWritingsuggestionsEnum) *QElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

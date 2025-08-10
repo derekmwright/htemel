@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SearchElement struct {
 	attributes searchAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SearchElement struct {
 // Spec Description: The search element represents a part of a document or application that contains a set of form controls or other content related to performing a search or filtering operation. This could be a search of the web site or application; a way of searching or filtering search results on the current web page; or a global or Internet-wide search function.
 func Search(children ...htemel.Node) *SearchElement {
 	node := &SearchElement{
-		children: children,
+		children:   children,
 		attributes: make(searchAttrs),
 	}
 
@@ -42,127 +43,257 @@ type SearchAutocapitalizeEnum string
 
 const (
 	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
-	SearchAutocapitalizeEnumNone SearchAutocapitalizeEnum = "none"
-	SearchAutocapitalizeEnumOff SearchAutocapitalizeEnum = "off"
-	SearchAutocapitalizeEnumOn SearchAutocapitalizeEnum = "on"
-	SearchAutocapitalizeEnumSentences SearchAutocapitalizeEnum = "sentences"
-	SearchAutocapitalizeEnumWords SearchAutocapitalizeEnum = "words"
+	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
+	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
+	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
+	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
+	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
 )
 
 type SearchAutocorrectEnum string
 
 const (
 	SearchAutocorrectEnumOff SearchAutocorrectEnum = "off"
-	SearchAutocorrectEnumOn SearchAutocorrectEnum = "on"
+	SearchAutocorrectEnumOn  SearchAutocorrectEnum = "on"
 )
 
 type SearchContenteditableEnum string
 
 const (
-	SearchContenteditableEnumFalse SearchContenteditableEnum = "false"
+	SearchContenteditableEnumFalse         SearchContenteditableEnum = "false"
 	SearchContenteditableEnumPlaintextOnly SearchContenteditableEnum = "plaintext-only"
-	SearchContenteditableEnumTrue SearchContenteditableEnum = "true"
+	SearchContenteditableEnumTrue          SearchContenteditableEnum = "true"
 )
 
 type SearchDirEnum string
 
 const (
 	SearchDirEnumAuto SearchDirEnum = "auto"
-	SearchDirEnumLtr SearchDirEnum = "ltr"
-	SearchDirEnumRtl SearchDirEnum = "rtl"
+	SearchDirEnumLtr  SearchDirEnum = "ltr"
+	SearchDirEnumRtl  SearchDirEnum = "rtl"
 )
 
 type SearchDraggableEnum string
 
 const (
 	SearchDraggableEnumFalse SearchDraggableEnum = "false"
-	SearchDraggableEnumTrue SearchDraggableEnum = "true"
+	SearchDraggableEnumTrue  SearchDraggableEnum = "true"
 )
 
 type SearchEnterkeyhintEnum string
 
 const (
 	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
-	SearchEnterkeyhintEnumSearch SearchEnterkeyhintEnum = "search"
-	SearchEnterkeyhintEnumSend SearchEnterkeyhintEnum = "send"
-	SearchEnterkeyhintEnumDone SearchEnterkeyhintEnum = "done"
-	SearchEnterkeyhintEnumEnter SearchEnterkeyhintEnum = "enter"
-	SearchEnterkeyhintEnumGo SearchEnterkeyhintEnum = "go"
-	SearchEnterkeyhintEnumNext SearchEnterkeyhintEnum = "next"
+	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
+	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
+	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
+	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
+	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
+	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 )
 
 type SearchHiddenEnum string
 
 const (
-	SearchHiddenEnumHidden SearchHiddenEnum = "hidden"
+	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
 	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
+)
+
+type SearchInputmodeEnum string
+
+const (
+	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
+	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
+	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
+	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
+	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
+	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
+	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
+	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
+)
+
+type SearchSpellcheckEnum string
+
+const (
+	SearchSpellcheckEnumFalse SearchSpellcheckEnum = "false"
+	SearchSpellcheckEnumTrue  SearchSpellcheckEnum = "true"
+)
+
+type SearchTranslateEnum string
+
+const (
+	SearchTranslateEnumNo  SearchTranslateEnum = "no"
+	SearchTranslateEnumYes SearchTranslateEnum = "yes"
+)
+
+type SearchWritingsuggestionsEnum string
+
+const (
+	SearchWritingsuggestionsEnumFalse SearchWritingsuggestionsEnum = "false"
+	SearchWritingsuggestionsEnumTrue  SearchWritingsuggestionsEnum = "true"
 )
 
 type searchAttrs map[string]any
 
 func (e *SearchElement) Autocapitalize(a SearchAutocapitalizeEnum) *SearchElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SearchElement) Autocorrect(a SearchAutocorrectEnum) *SearchElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *SearchElement) Autofocus(b bool) *SearchElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *SearchElement) Class(s ...string) *SearchElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SearchElement) Contenteditable(a SearchContenteditableEnum) *SearchElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SearchElement) Dir(a SearchDirEnum) *SearchElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *SearchElement) Draggable(a SearchDraggableEnum) *SearchElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *SearchElement) Enterkeyhint(a SearchEnterkeyhintEnum) *SearchElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *SearchElement) Hidden(a SearchHiddenEnum) *SearchElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *SearchElement) Id(s string) *SearchElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *SearchElement) Inert(b bool) *SearchElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *SearchElement) Inputmode(a SearchInputmodeEnum) *SearchElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *SearchElement) Itemid(s string) *SearchElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *SearchElement) Itemprop(s ...string) *SearchElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SearchElement) Itemref(s ...string) *SearchElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SearchElement) Itemscope(b bool) *SearchElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *SearchElement) Itemtype(s ...string) *SearchElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SearchElement) Lang(s string) *SearchElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *SearchElement) Nonce(s string) *SearchElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *SearchElement) Popover(s string) *SearchElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *SearchElement) Slot(s string) *SearchElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *SearchElement) Spellcheck(a SearchSpellcheckEnum) *SearchElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *SearchElement) Style(s string) *SearchElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *SearchElement) Tabindex(i int) *SearchElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *SearchElement) Title(s string) *SearchElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *SearchElement) Translate(a SearchTranslateEnum) *SearchElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *SearchElement) Writingsuggestions(a SearchWritingsuggestionsEnum) *SearchElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

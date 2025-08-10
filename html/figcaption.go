@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type FigcaptionElement struct {
 	attributes figcaptionAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type FigcaptionElement struct {
 // Spec Description: The figcaption element represents a caption or legend for the rest of the contents of the figcaption element's parent figure element, if any.
 func Figcaption(children ...htemel.Node) *FigcaptionElement {
 	node := &FigcaptionElement{
-		children: children,
+		children:   children,
 		attributes: make(figcaptionAttrs),
 	}
 
@@ -41,128 +42,258 @@ func FigcaptionIf(condition bool, children ...htemel.Node) *FigcaptionElement {
 type FigcaptionAutocapitalizeEnum string
 
 const (
+	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
+	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
+	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
+	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
-	FigcaptionAutocapitalizeEnumNone FigcaptionAutocapitalizeEnum = "none"
-	FigcaptionAutocapitalizeEnumOff FigcaptionAutocapitalizeEnum = "off"
-	FigcaptionAutocapitalizeEnumOn FigcaptionAutocapitalizeEnum = "on"
-	FigcaptionAutocapitalizeEnumSentences FigcaptionAutocapitalizeEnum = "sentences"
-	FigcaptionAutocapitalizeEnumWords FigcaptionAutocapitalizeEnum = "words"
+	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 )
 
 type FigcaptionAutocorrectEnum string
 
 const (
 	FigcaptionAutocorrectEnumOff FigcaptionAutocorrectEnum = "off"
-	FigcaptionAutocorrectEnumOn FigcaptionAutocorrectEnum = "on"
+	FigcaptionAutocorrectEnumOn  FigcaptionAutocorrectEnum = "on"
 )
 
 type FigcaptionContenteditableEnum string
 
 const (
-	FigcaptionContenteditableEnumFalse FigcaptionContenteditableEnum = "false"
+	FigcaptionContenteditableEnumFalse         FigcaptionContenteditableEnum = "false"
 	FigcaptionContenteditableEnumPlaintextOnly FigcaptionContenteditableEnum = "plaintext-only"
-	FigcaptionContenteditableEnumTrue FigcaptionContenteditableEnum = "true"
+	FigcaptionContenteditableEnumTrue          FigcaptionContenteditableEnum = "true"
 )
 
 type FigcaptionDirEnum string
 
 const (
-	FigcaptionDirEnumLtr FigcaptionDirEnum = "ltr"
-	FigcaptionDirEnumRtl FigcaptionDirEnum = "rtl"
 	FigcaptionDirEnumAuto FigcaptionDirEnum = "auto"
+	FigcaptionDirEnumLtr  FigcaptionDirEnum = "ltr"
+	FigcaptionDirEnumRtl  FigcaptionDirEnum = "rtl"
 )
 
 type FigcaptionDraggableEnum string
 
 const (
 	FigcaptionDraggableEnumFalse FigcaptionDraggableEnum = "false"
-	FigcaptionDraggableEnumTrue FigcaptionDraggableEnum = "true"
+	FigcaptionDraggableEnumTrue  FigcaptionDraggableEnum = "true"
 )
 
 type FigcaptionEnterkeyhintEnum string
 
 const (
-	FigcaptionEnterkeyhintEnumSend FigcaptionEnterkeyhintEnum = "send"
-	FigcaptionEnterkeyhintEnumDone FigcaptionEnterkeyhintEnum = "done"
-	FigcaptionEnterkeyhintEnumEnter FigcaptionEnterkeyhintEnum = "enter"
-	FigcaptionEnterkeyhintEnumGo FigcaptionEnterkeyhintEnum = "go"
-	FigcaptionEnterkeyhintEnumNext FigcaptionEnterkeyhintEnum = "next"
+	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
+	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
+	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
+	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
 	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
-	FigcaptionEnterkeyhintEnumSearch FigcaptionEnterkeyhintEnum = "search"
+	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
+	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
 )
 
 type FigcaptionHiddenEnum string
 
 const (
-	FigcaptionHiddenEnumHidden FigcaptionHiddenEnum = "hidden"
+	FigcaptionHiddenEnumHidden     FigcaptionHiddenEnum = "hidden"
 	FigcaptionHiddenEnumUntilFound FigcaptionHiddenEnum = "until-found"
+)
+
+type FigcaptionInputmodeEnum string
+
+const (
+	FigcaptionInputmodeEnumTel     FigcaptionInputmodeEnum = "tel"
+	FigcaptionInputmodeEnumText    FigcaptionInputmodeEnum = "text"
+	FigcaptionInputmodeEnumUrl     FigcaptionInputmodeEnum = "url"
+	FigcaptionInputmodeEnumDecimal FigcaptionInputmodeEnum = "decimal"
+	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
+	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
+	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
+	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
+)
+
+type FigcaptionSpellcheckEnum string
+
+const (
+	FigcaptionSpellcheckEnumTrue  FigcaptionSpellcheckEnum = "true"
+	FigcaptionSpellcheckEnumFalse FigcaptionSpellcheckEnum = "false"
+)
+
+type FigcaptionTranslateEnum string
+
+const (
+	FigcaptionTranslateEnumYes FigcaptionTranslateEnum = "yes"
+	FigcaptionTranslateEnumNo  FigcaptionTranslateEnum = "no"
+)
+
+type FigcaptionWritingsuggestionsEnum string
+
+const (
+	FigcaptionWritingsuggestionsEnumFalse FigcaptionWritingsuggestionsEnum = "false"
+	FigcaptionWritingsuggestionsEnumTrue  FigcaptionWritingsuggestionsEnum = "true"
 )
 
 type figcaptionAttrs map[string]any
 
 func (e *FigcaptionElement) Autocapitalize(a FigcaptionAutocapitalizeEnum) *FigcaptionElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Autocorrect(a FigcaptionAutocorrectEnum) *FigcaptionElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Autofocus(b bool) *FigcaptionElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Class(s ...string) *FigcaptionElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Contenteditable(a FigcaptionContenteditableEnum) *FigcaptionElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Dir(a FigcaptionDirEnum) *FigcaptionElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Draggable(a FigcaptionDraggableEnum) *FigcaptionElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Enterkeyhint(a FigcaptionEnterkeyhintEnum) *FigcaptionElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Hidden(a FigcaptionHiddenEnum) *FigcaptionElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *FigcaptionElement) Id(s string) *FigcaptionElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *FigcaptionElement) Inert(b bool) *FigcaptionElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *FigcaptionElement) Inputmode(a FigcaptionInputmodeEnum) *FigcaptionElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *FigcaptionElement) Itemid(s string) *FigcaptionElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *FigcaptionElement) Itemprop(s ...string) *FigcaptionElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *FigcaptionElement) Itemref(s ...string) *FigcaptionElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *FigcaptionElement) Itemscope(b bool) *FigcaptionElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *FigcaptionElement) Itemtype(s ...string) *FigcaptionElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *FigcaptionElement) Lang(s string) *FigcaptionElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *FigcaptionElement) Nonce(s string) *FigcaptionElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *FigcaptionElement) Popover(s string) *FigcaptionElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *FigcaptionElement) Slot(s string) *FigcaptionElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *FigcaptionElement) Spellcheck(a FigcaptionSpellcheckEnum) *FigcaptionElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *FigcaptionElement) Style(s string) *FigcaptionElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *FigcaptionElement) Tabindex(i int) *FigcaptionElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *FigcaptionElement) Title(s string) *FigcaptionElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *FigcaptionElement) Translate(a FigcaptionTranslateEnum) *FigcaptionElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *FigcaptionElement) Writingsuggestions(a FigcaptionWritingsuggestionsEnum) *FigcaptionElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

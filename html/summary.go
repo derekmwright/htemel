@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SummaryElement struct {
 	attributes summaryAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SummaryElement struct {
 // Spec Description: The summary element represents a summary, caption, or legend for the rest of the contents of the summary element's parent details element, if any.
 func Summary(children ...htemel.Node) *SummaryElement {
 	node := &SummaryElement{
-		children: children,
+		children:   children,
 		attributes: make(summaryAttrs),
 	}
 
@@ -41,128 +42,258 @@ func SummaryIf(condition bool, children ...htemel.Node) *SummaryElement {
 type SummaryAutocapitalizeEnum string
 
 const (
+	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
+	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
+	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
-	SummaryAutocapitalizeEnumNone SummaryAutocapitalizeEnum = "none"
-	SummaryAutocapitalizeEnumOff SummaryAutocapitalizeEnum = "off"
-	SummaryAutocapitalizeEnumOn SummaryAutocapitalizeEnum = "on"
-	SummaryAutocapitalizeEnumSentences SummaryAutocapitalizeEnum = "sentences"
-	SummaryAutocapitalizeEnumWords SummaryAutocapitalizeEnum = "words"
+	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
+	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
 )
 
 type SummaryAutocorrectEnum string
 
 const (
 	SummaryAutocorrectEnumOff SummaryAutocorrectEnum = "off"
-	SummaryAutocorrectEnumOn SummaryAutocorrectEnum = "on"
+	SummaryAutocorrectEnumOn  SummaryAutocorrectEnum = "on"
 )
 
 type SummaryContenteditableEnum string
 
 const (
-	SummaryContenteditableEnumTrue SummaryContenteditableEnum = "true"
-	SummaryContenteditableEnumFalse SummaryContenteditableEnum = "false"
+	SummaryContenteditableEnumFalse         SummaryContenteditableEnum = "false"
 	SummaryContenteditableEnumPlaintextOnly SummaryContenteditableEnum = "plaintext-only"
+	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
 )
 
 type SummaryDirEnum string
 
 const (
-	SummaryDirEnumLtr SummaryDirEnum = "ltr"
-	SummaryDirEnumRtl SummaryDirEnum = "rtl"
 	SummaryDirEnumAuto SummaryDirEnum = "auto"
+	SummaryDirEnumLtr  SummaryDirEnum = "ltr"
+	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
 )
 
 type SummaryDraggableEnum string
 
 const (
 	SummaryDraggableEnumFalse SummaryDraggableEnum = "false"
-	SummaryDraggableEnumTrue SummaryDraggableEnum = "true"
+	SummaryDraggableEnumTrue  SummaryDraggableEnum = "true"
 )
 
 type SummaryEnterkeyhintEnum string
 
 const (
-	SummaryEnterkeyhintEnumNext SummaryEnterkeyhintEnum = "next"
+	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
 	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
-	SummaryEnterkeyhintEnumSearch SummaryEnterkeyhintEnum = "search"
-	SummaryEnterkeyhintEnumSend SummaryEnterkeyhintEnum = "send"
-	SummaryEnterkeyhintEnumDone SummaryEnterkeyhintEnum = "done"
-	SummaryEnterkeyhintEnumEnter SummaryEnterkeyhintEnum = "enter"
-	SummaryEnterkeyhintEnumGo SummaryEnterkeyhintEnum = "go"
+	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
+	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
+	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
+	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
+	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
 )
 
 type SummaryHiddenEnum string
 
 const (
-	SummaryHiddenEnumHidden SummaryHiddenEnum = "hidden"
+	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
 	SummaryHiddenEnumUntilFound SummaryHiddenEnum = "until-found"
+)
+
+type SummaryInputmodeEnum string
+
+const (
+	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
+	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
+	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
+	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
+	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
+	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
+	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
+	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
+)
+
+type SummarySpellcheckEnum string
+
+const (
+	SummarySpellcheckEnumFalse SummarySpellcheckEnum = "false"
+	SummarySpellcheckEnumTrue  SummarySpellcheckEnum = "true"
+)
+
+type SummaryTranslateEnum string
+
+const (
+	SummaryTranslateEnumNo  SummaryTranslateEnum = "no"
+	SummaryTranslateEnumYes SummaryTranslateEnum = "yes"
+)
+
+type SummaryWritingsuggestionsEnum string
+
+const (
+	SummaryWritingsuggestionsEnumFalse SummaryWritingsuggestionsEnum = "false"
+	SummaryWritingsuggestionsEnumTrue  SummaryWritingsuggestionsEnum = "true"
 )
 
 type summaryAttrs map[string]any
 
 func (e *SummaryElement) Autocapitalize(a SummaryAutocapitalizeEnum) *SummaryElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SummaryElement) Autocorrect(a SummaryAutocorrectEnum) *SummaryElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *SummaryElement) Autofocus(b bool) *SummaryElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *SummaryElement) Class(s ...string) *SummaryElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SummaryElement) Contenteditable(a SummaryContenteditableEnum) *SummaryElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SummaryElement) Dir(a SummaryDirEnum) *SummaryElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *SummaryElement) Draggable(a SummaryDraggableEnum) *SummaryElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *SummaryElement) Enterkeyhint(a SummaryEnterkeyhintEnum) *SummaryElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *SummaryElement) Hidden(a SummaryHiddenEnum) *SummaryElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *SummaryElement) Id(s string) *SummaryElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *SummaryElement) Inert(b bool) *SummaryElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *SummaryElement) Inputmode(a SummaryInputmodeEnum) *SummaryElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *SummaryElement) Itemid(s string) *SummaryElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *SummaryElement) Itemprop(s ...string) *SummaryElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SummaryElement) Itemref(s ...string) *SummaryElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SummaryElement) Itemscope(b bool) *SummaryElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *SummaryElement) Itemtype(s ...string) *SummaryElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SummaryElement) Lang(s string) *SummaryElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *SummaryElement) Nonce(s string) *SummaryElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *SummaryElement) Popover(s string) *SummaryElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *SummaryElement) Slot(s string) *SummaryElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *SummaryElement) Spellcheck(a SummarySpellcheckEnum) *SummaryElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *SummaryElement) Style(s string) *SummaryElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *SummaryElement) Tabindex(i int) *SummaryElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *SummaryElement) Title(s string) *SummaryElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *SummaryElement) Translate(a SummaryTranslateEnum) *SummaryElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *SummaryElement) Writingsuggestions(a SummaryWritingsuggestionsEnum) *SummaryElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

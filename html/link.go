@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type LinkElement struct {
 	attributes linkAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type LinkElement struct {
 // Spec Description: The link element allows authors to link their document to other resources.
 func Link(children ...htemel.Node) *LinkElement {
 	node := &LinkElement{
-		children: children,
+		children:   children,
 		attributes: make(linkAttrs),
 	}
 
@@ -41,128 +42,258 @@ func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
 type LinkAutocapitalizeEnum string
 
 const (
+	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
+	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
+	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
+	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
+	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
 	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
-	LinkAutocapitalizeEnumNone LinkAutocapitalizeEnum = "none"
-	LinkAutocapitalizeEnumOff LinkAutocapitalizeEnum = "off"
-	LinkAutocapitalizeEnumOn LinkAutocapitalizeEnum = "on"
-	LinkAutocapitalizeEnumSentences LinkAutocapitalizeEnum = "sentences"
-	LinkAutocapitalizeEnumWords LinkAutocapitalizeEnum = "words"
 )
 
 type LinkAutocorrectEnum string
 
 const (
-	LinkAutocorrectEnumOn LinkAutocorrectEnum = "on"
 	LinkAutocorrectEnumOff LinkAutocorrectEnum = "off"
+	LinkAutocorrectEnumOn  LinkAutocorrectEnum = "on"
 )
 
 type LinkContenteditableEnum string
 
 const (
-	LinkContenteditableEnumFalse LinkContenteditableEnum = "false"
+	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
 	LinkContenteditableEnumPlaintextOnly LinkContenteditableEnum = "plaintext-only"
-	LinkContenteditableEnumTrue LinkContenteditableEnum = "true"
+	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
 )
 
 type LinkDirEnum string
 
 const (
 	LinkDirEnumAuto LinkDirEnum = "auto"
-	LinkDirEnumLtr LinkDirEnum = "ltr"
-	LinkDirEnumRtl LinkDirEnum = "rtl"
+	LinkDirEnumLtr  LinkDirEnum = "ltr"
+	LinkDirEnumRtl  LinkDirEnum = "rtl"
 )
 
 type LinkDraggableEnum string
 
 const (
 	LinkDraggableEnumFalse LinkDraggableEnum = "false"
-	LinkDraggableEnumTrue LinkDraggableEnum = "true"
+	LinkDraggableEnumTrue  LinkDraggableEnum = "true"
 )
 
 type LinkEnterkeyhintEnum string
 
 const (
-	LinkEnterkeyhintEnumSearch LinkEnterkeyhintEnum = "search"
-	LinkEnterkeyhintEnumSend LinkEnterkeyhintEnum = "send"
-	LinkEnterkeyhintEnumDone LinkEnterkeyhintEnum = "done"
-	LinkEnterkeyhintEnumEnter LinkEnterkeyhintEnum = "enter"
-	LinkEnterkeyhintEnumGo LinkEnterkeyhintEnum = "go"
-	LinkEnterkeyhintEnumNext LinkEnterkeyhintEnum = "next"
+	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
+	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
+	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
+	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
+	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
+	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
 )
 
 type LinkHiddenEnum string
 
 const (
-	LinkHiddenEnumHidden LinkHiddenEnum = "hidden"
 	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
+	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
+)
+
+type LinkInputmodeEnum string
+
+const (
+	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
+	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
+	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
+	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
+	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
+	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
+	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
+	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
+)
+
+type LinkSpellcheckEnum string
+
+const (
+	LinkSpellcheckEnumFalse LinkSpellcheckEnum = "false"
+	LinkSpellcheckEnumTrue  LinkSpellcheckEnum = "true"
+)
+
+type LinkTranslateEnum string
+
+const (
+	LinkTranslateEnumYes LinkTranslateEnum = "yes"
+	LinkTranslateEnumNo  LinkTranslateEnum = "no"
+)
+
+type LinkWritingsuggestionsEnum string
+
+const (
+	LinkWritingsuggestionsEnumFalse LinkWritingsuggestionsEnum = "false"
+	LinkWritingsuggestionsEnumTrue  LinkWritingsuggestionsEnum = "true"
 )
 
 type linkAttrs map[string]any
 
 func (e *LinkElement) Autocapitalize(a LinkAutocapitalizeEnum) *LinkElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *LinkElement) Autocorrect(a LinkAutocorrectEnum) *LinkElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *LinkElement) Autofocus(b bool) *LinkElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *LinkElement) Class(s ...string) *LinkElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *LinkElement) Contenteditable(a LinkContenteditableEnum) *LinkElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *LinkElement) Dir(a LinkDirEnum) *LinkElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *LinkElement) Draggable(a LinkDraggableEnum) *LinkElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *LinkElement) Enterkeyhint(a LinkEnterkeyhintEnum) *LinkElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *LinkElement) Hidden(a LinkHiddenEnum) *LinkElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *LinkElement) Id(s string) *LinkElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *LinkElement) Inert(b bool) *LinkElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *LinkElement) Inputmode(a LinkInputmodeEnum) *LinkElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *LinkElement) Itemid(s string) *LinkElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *LinkElement) Itemprop(s ...string) *LinkElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *LinkElement) Itemref(s ...string) *LinkElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *LinkElement) Itemscope(b bool) *LinkElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *LinkElement) Itemtype(s ...string) *LinkElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *LinkElement) Lang(s string) *LinkElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *LinkElement) Nonce(s string) *LinkElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *LinkElement) Popover(s string) *LinkElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *LinkElement) Slot(s string) *LinkElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *LinkElement) Spellcheck(a LinkSpellcheckEnum) *LinkElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *LinkElement) Style(s string) *LinkElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *LinkElement) Tabindex(i int) *LinkElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *LinkElement) Title(s string) *LinkElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *LinkElement) Translate(a LinkTranslateEnum) *LinkElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *LinkElement) Writingsuggestions(a LinkWritingsuggestionsEnum) *LinkElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

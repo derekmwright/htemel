@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type AreaElement struct {
 	attributes areaAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type AreaElement struct {
 // Spec Description: The area element represents either a hyperlink with some text and a corresponding area on an image map, or a dead area on an image map.
 func Area(children ...htemel.Node) *AreaElement {
 	node := &AreaElement{
-		children: children,
+		children:   children,
 		attributes: make(areaAttrs),
 	}
 
@@ -41,128 +42,258 @@ func AreaIf(condition bool, children ...htemel.Node) *AreaElement {
 type AreaAutocapitalizeEnum string
 
 const (
-	AreaAutocapitalizeEnumSentences AreaAutocapitalizeEnum = "sentences"
-	AreaAutocapitalizeEnumWords AreaAutocapitalizeEnum = "words"
+	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
+	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
+	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
+	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
+	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
 	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
-	AreaAutocapitalizeEnumNone AreaAutocapitalizeEnum = "none"
-	AreaAutocapitalizeEnumOff AreaAutocapitalizeEnum = "off"
-	AreaAutocapitalizeEnumOn AreaAutocapitalizeEnum = "on"
 )
 
 type AreaAutocorrectEnum string
 
 const (
 	AreaAutocorrectEnumOff AreaAutocorrectEnum = "off"
-	AreaAutocorrectEnumOn AreaAutocorrectEnum = "on"
+	AreaAutocorrectEnumOn  AreaAutocorrectEnum = "on"
 )
 
 type AreaContenteditableEnum string
 
 const (
-	AreaContenteditableEnumFalse AreaContenteditableEnum = "false"
+	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumPlaintextOnly AreaContenteditableEnum = "plaintext-only"
-	AreaContenteditableEnumTrue AreaContenteditableEnum = "true"
+	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
 )
 
 type AreaDirEnum string
 
 const (
 	AreaDirEnumAuto AreaDirEnum = "auto"
-	AreaDirEnumLtr AreaDirEnum = "ltr"
-	AreaDirEnumRtl AreaDirEnum = "rtl"
+	AreaDirEnumLtr  AreaDirEnum = "ltr"
+	AreaDirEnumRtl  AreaDirEnum = "rtl"
 )
 
 type AreaDraggableEnum string
 
 const (
 	AreaDraggableEnumFalse AreaDraggableEnum = "false"
-	AreaDraggableEnumTrue AreaDraggableEnum = "true"
+	AreaDraggableEnumTrue  AreaDraggableEnum = "true"
 )
 
 type AreaEnterkeyhintEnum string
 
 const (
-	AreaEnterkeyhintEnumDone AreaEnterkeyhintEnum = "done"
-	AreaEnterkeyhintEnumEnter AreaEnterkeyhintEnum = "enter"
-	AreaEnterkeyhintEnumGo AreaEnterkeyhintEnum = "go"
-	AreaEnterkeyhintEnumNext AreaEnterkeyhintEnum = "next"
+	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
+	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
+	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
+	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
+	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
+	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
 	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
-	AreaEnterkeyhintEnumSearch AreaEnterkeyhintEnum = "search"
-	AreaEnterkeyhintEnumSend AreaEnterkeyhintEnum = "send"
 )
 
 type AreaHiddenEnum string
 
 const (
+	AreaHiddenEnumHidden     AreaHiddenEnum = "hidden"
 	AreaHiddenEnumUntilFound AreaHiddenEnum = "until-found"
-	AreaHiddenEnumHidden AreaHiddenEnum = "hidden"
+)
+
+type AreaInputmodeEnum string
+
+const (
+	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
+	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
+	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
+	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
+	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
+	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
+	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
+	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
+)
+
+type AreaSpellcheckEnum string
+
+const (
+	AreaSpellcheckEnumFalse AreaSpellcheckEnum = "false"
+	AreaSpellcheckEnumTrue  AreaSpellcheckEnum = "true"
+)
+
+type AreaTranslateEnum string
+
+const (
+	AreaTranslateEnumYes AreaTranslateEnum = "yes"
+	AreaTranslateEnumNo  AreaTranslateEnum = "no"
+)
+
+type AreaWritingsuggestionsEnum string
+
+const (
+	AreaWritingsuggestionsEnumTrue  AreaWritingsuggestionsEnum = "true"
+	AreaWritingsuggestionsEnumFalse AreaWritingsuggestionsEnum = "false"
 )
 
 type areaAttrs map[string]any
 
 func (e *AreaElement) Autocapitalize(a AreaAutocapitalizeEnum) *AreaElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *AreaElement) Autocorrect(a AreaAutocorrectEnum) *AreaElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *AreaElement) Autofocus(b bool) *AreaElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *AreaElement) Class(s ...string) *AreaElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *AreaElement) Contenteditable(a AreaContenteditableEnum) *AreaElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *AreaElement) Dir(a AreaDirEnum) *AreaElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *AreaElement) Draggable(a AreaDraggableEnum) *AreaElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *AreaElement) Enterkeyhint(a AreaEnterkeyhintEnum) *AreaElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *AreaElement) Hidden(a AreaHiddenEnum) *AreaElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *AreaElement) Id(s string) *AreaElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *AreaElement) Inert(b bool) *AreaElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *AreaElement) Inputmode(a AreaInputmodeEnum) *AreaElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *AreaElement) Itemid(s string) *AreaElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *AreaElement) Itemprop(s ...string) *AreaElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AreaElement) Itemref(s ...string) *AreaElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AreaElement) Itemscope(b bool) *AreaElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *AreaElement) Itemtype(s ...string) *AreaElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AreaElement) Lang(s string) *AreaElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *AreaElement) Nonce(s string) *AreaElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *AreaElement) Popover(s string) *AreaElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *AreaElement) Slot(s string) *AreaElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *AreaElement) Spellcheck(a AreaSpellcheckEnum) *AreaElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *AreaElement) Style(s string) *AreaElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *AreaElement) Tabindex(i int) *AreaElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *AreaElement) Title(s string) *AreaElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *AreaElement) Translate(a AreaTranslateEnum) *AreaElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *AreaElement) Writingsuggestions(a AreaWritingsuggestionsEnum) *AreaElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

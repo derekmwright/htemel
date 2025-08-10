@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type PElement struct {
 	attributes pAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type PElement struct {
 // Spec Description: The p element represents a paragraph.
 func P(children ...htemel.Node) *PElement {
 	node := &PElement{
-		children: children,
+		children:   children,
 		attributes: make(pAttrs),
 	}
 
@@ -41,128 +42,258 @@ func PIf(condition bool, children ...htemel.Node) *PElement {
 type PAutocapitalizeEnum string
 
 const (
-	PAutocapitalizeEnumOn PAutocapitalizeEnum = "on"
-	PAutocapitalizeEnumSentences PAutocapitalizeEnum = "sentences"
-	PAutocapitalizeEnumWords PAutocapitalizeEnum = "words"
+	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
 	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
-	PAutocapitalizeEnumNone PAutocapitalizeEnum = "none"
-	PAutocapitalizeEnumOff PAutocapitalizeEnum = "off"
+	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
+	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
+	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
+	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
 )
 
 type PAutocorrectEnum string
 
 const (
 	PAutocorrectEnumOff PAutocorrectEnum = "off"
-	PAutocorrectEnumOn PAutocorrectEnum = "on"
+	PAutocorrectEnumOn  PAutocorrectEnum = "on"
 )
 
 type PContenteditableEnum string
 
 const (
-	PContenteditableEnumFalse PContenteditableEnum = "false"
+	PContenteditableEnumFalse         PContenteditableEnum = "false"
 	PContenteditableEnumPlaintextOnly PContenteditableEnum = "plaintext-only"
-	PContenteditableEnumTrue PContenteditableEnum = "true"
+	PContenteditableEnumTrue          PContenteditableEnum = "true"
 )
 
 type PDirEnum string
 
 const (
-	PDirEnumRtl PDirEnum = "rtl"
 	PDirEnumAuto PDirEnum = "auto"
-	PDirEnumLtr PDirEnum = "ltr"
+	PDirEnumLtr  PDirEnum = "ltr"
+	PDirEnumRtl  PDirEnum = "rtl"
 )
 
 type PDraggableEnum string
 
 const (
 	PDraggableEnumFalse PDraggableEnum = "false"
-	PDraggableEnumTrue PDraggableEnum = "true"
+	PDraggableEnumTrue  PDraggableEnum = "true"
 )
 
 type PEnterkeyhintEnum string
 
 const (
 	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
-	PEnterkeyhintEnumSearch PEnterkeyhintEnum = "search"
-	PEnterkeyhintEnumSend PEnterkeyhintEnum = "send"
-	PEnterkeyhintEnumDone PEnterkeyhintEnum = "done"
-	PEnterkeyhintEnumEnter PEnterkeyhintEnum = "enter"
-	PEnterkeyhintEnumGo PEnterkeyhintEnum = "go"
-	PEnterkeyhintEnumNext PEnterkeyhintEnum = "next"
+	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
+	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
+	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
+	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
+	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
+	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
 )
 
 type PHiddenEnum string
 
 const (
+	PHiddenEnumHidden     PHiddenEnum = "hidden"
 	PHiddenEnumUntilFound PHiddenEnum = "until-found"
-	PHiddenEnumHidden PHiddenEnum = "hidden"
+)
+
+type PInputmodeEnum string
+
+const (
+	PInputmodeEnumTel     PInputmodeEnum = "tel"
+	PInputmodeEnumText    PInputmodeEnum = "text"
+	PInputmodeEnumUrl     PInputmodeEnum = "url"
+	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
+	PInputmodeEnumEmail   PInputmodeEnum = "email"
+	PInputmodeEnumNone    PInputmodeEnum = "none"
+	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
+	PInputmodeEnumSearch  PInputmodeEnum = "search"
+)
+
+type PSpellcheckEnum string
+
+const (
+	PSpellcheckEnumFalse PSpellcheckEnum = "false"
+	PSpellcheckEnumTrue  PSpellcheckEnum = "true"
+)
+
+type PTranslateEnum string
+
+const (
+	PTranslateEnumNo  PTranslateEnum = "no"
+	PTranslateEnumYes PTranslateEnum = "yes"
+)
+
+type PWritingsuggestionsEnum string
+
+const (
+	PWritingsuggestionsEnumFalse PWritingsuggestionsEnum = "false"
+	PWritingsuggestionsEnumTrue  PWritingsuggestionsEnum = "true"
 )
 
 type pAttrs map[string]any
 
 func (e *PElement) Autocapitalize(a PAutocapitalizeEnum) *PElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *PElement) Autocorrect(a PAutocorrectEnum) *PElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *PElement) Autofocus(b bool) *PElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *PElement) Class(s ...string) *PElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *PElement) Contenteditable(a PContenteditableEnum) *PElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *PElement) Dir(a PDirEnum) *PElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *PElement) Draggable(a PDraggableEnum) *PElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *PElement) Enterkeyhint(a PEnterkeyhintEnum) *PElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *PElement) Hidden(a PHiddenEnum) *PElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *PElement) Id(s string) *PElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *PElement) Inert(b bool) *PElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *PElement) Inputmode(a PInputmodeEnum) *PElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *PElement) Itemid(s string) *PElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *PElement) Itemprop(s ...string) *PElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *PElement) Itemref(s ...string) *PElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *PElement) Itemscope(b bool) *PElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *PElement) Itemtype(s ...string) *PElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *PElement) Lang(s string) *PElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *PElement) Nonce(s string) *PElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *PElement) Popover(s string) *PElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *PElement) Slot(s string) *PElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *PElement) Spellcheck(a PSpellcheckEnum) *PElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *PElement) Style(s string) *PElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *PElement) Tabindex(i int) *PElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *PElement) Title(s string) *PElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *PElement) Translate(a PTranslateEnum) *PElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *PElement) Writingsuggestions(a PWritingsuggestionsEnum) *PElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

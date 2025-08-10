@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type IElement struct {
 	attributes iAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type IElement struct {
 // Spec Description: The i element represents a span of text in an alternate voice or mood, or otherwise offset from the normal prose in a manner indicating a different quality of text, such as a taxonomic designation, a technical term, an idiomatic phrase from another language, transliteration, a thought, or a ship name in Western texts.
 func I(children ...htemel.Node) *IElement {
 	node := &IElement{
-		children: children,
+		children:   children,
 		attributes: make(iAttrs),
 	}
 
@@ -41,128 +42,258 @@ func IIf(condition bool, children ...htemel.Node) *IElement {
 type IAutocapitalizeEnum string
 
 const (
+	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
 	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
-	IAutocapitalizeEnumNone IAutocapitalizeEnum = "none"
-	IAutocapitalizeEnumOff IAutocapitalizeEnum = "off"
-	IAutocapitalizeEnumOn IAutocapitalizeEnum = "on"
-	IAutocapitalizeEnumSentences IAutocapitalizeEnum = "sentences"
-	IAutocapitalizeEnumWords IAutocapitalizeEnum = "words"
+	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
+	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
+	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
+	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
 )
 
 type IAutocorrectEnum string
 
 const (
+	IAutocorrectEnumOn  IAutocorrectEnum = "on"
 	IAutocorrectEnumOff IAutocorrectEnum = "off"
-	IAutocorrectEnumOn IAutocorrectEnum = "on"
 )
 
 type IContenteditableEnum string
 
 const (
-	IContenteditableEnumFalse IContenteditableEnum = "false"
+	IContenteditableEnumFalse         IContenteditableEnum = "false"
 	IContenteditableEnumPlaintextOnly IContenteditableEnum = "plaintext-only"
-	IContenteditableEnumTrue IContenteditableEnum = "true"
+	IContenteditableEnumTrue          IContenteditableEnum = "true"
 )
 
 type IDirEnum string
 
 const (
 	IDirEnumAuto IDirEnum = "auto"
-	IDirEnumLtr IDirEnum = "ltr"
-	IDirEnumRtl IDirEnum = "rtl"
+	IDirEnumLtr  IDirEnum = "ltr"
+	IDirEnumRtl  IDirEnum = "rtl"
 )
 
 type IDraggableEnum string
 
 const (
-	IDraggableEnumTrue IDraggableEnum = "true"
 	IDraggableEnumFalse IDraggableEnum = "false"
+	IDraggableEnumTrue  IDraggableEnum = "true"
 )
 
 type IEnterkeyhintEnum string
 
 const (
-	IEnterkeyhintEnumEnter IEnterkeyhintEnum = "enter"
-	IEnterkeyhintEnumGo IEnterkeyhintEnum = "go"
-	IEnterkeyhintEnumNext IEnterkeyhintEnum = "next"
+	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
+	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
+	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
+	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
-	IEnterkeyhintEnumSearch IEnterkeyhintEnum = "search"
-	IEnterkeyhintEnumSend IEnterkeyhintEnum = "send"
-	IEnterkeyhintEnumDone IEnterkeyhintEnum = "done"
+	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
+	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
 )
 
 type IHiddenEnum string
 
 const (
-	IHiddenEnumHidden IHiddenEnum = "hidden"
+	IHiddenEnumHidden     IHiddenEnum = "hidden"
 	IHiddenEnumUntilFound IHiddenEnum = "until-found"
+)
+
+type IInputmodeEnum string
+
+const (
+	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
+	IInputmodeEnumSearch  IInputmodeEnum = "search"
+	IInputmodeEnumTel     IInputmodeEnum = "tel"
+	IInputmodeEnumText    IInputmodeEnum = "text"
+	IInputmodeEnumUrl     IInputmodeEnum = "url"
+	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
+	IInputmodeEnumEmail   IInputmodeEnum = "email"
+	IInputmodeEnumNone    IInputmodeEnum = "none"
+)
+
+type ISpellcheckEnum string
+
+const (
+	ISpellcheckEnumFalse ISpellcheckEnum = "false"
+	ISpellcheckEnumTrue  ISpellcheckEnum = "true"
+)
+
+type ITranslateEnum string
+
+const (
+	ITranslateEnumYes ITranslateEnum = "yes"
+	ITranslateEnumNo  ITranslateEnum = "no"
+)
+
+type IWritingsuggestionsEnum string
+
+const (
+	IWritingsuggestionsEnumFalse IWritingsuggestionsEnum = "false"
+	IWritingsuggestionsEnumTrue  IWritingsuggestionsEnum = "true"
 )
 
 type iAttrs map[string]any
 
 func (e *IElement) Autocapitalize(a IAutocapitalizeEnum) *IElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *IElement) Autocorrect(a IAutocorrectEnum) *IElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *IElement) Autofocus(b bool) *IElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *IElement) Class(s ...string) *IElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *IElement) Contenteditable(a IContenteditableEnum) *IElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *IElement) Dir(a IDirEnum) *IElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *IElement) Draggable(a IDraggableEnum) *IElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *IElement) Enterkeyhint(a IEnterkeyhintEnum) *IElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *IElement) Hidden(a IHiddenEnum) *IElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *IElement) Id(s string) *IElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *IElement) Inert(b bool) *IElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *IElement) Inputmode(a IInputmodeEnum) *IElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *IElement) Itemid(s string) *IElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *IElement) Itemprop(s ...string) *IElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *IElement) Itemref(s ...string) *IElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *IElement) Itemscope(b bool) *IElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *IElement) Itemtype(s ...string) *IElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *IElement) Lang(s string) *IElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *IElement) Nonce(s string) *IElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *IElement) Popover(s string) *IElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *IElement) Slot(s string) *IElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *IElement) Spellcheck(a ISpellcheckEnum) *IElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *IElement) Style(s string) *IElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *IElement) Tabindex(i int) *IElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *IElement) Title(s string) *IElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *IElement) Translate(a ITranslateEnum) *IElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *IElement) Writingsuggestions(a IWritingsuggestionsEnum) *IElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

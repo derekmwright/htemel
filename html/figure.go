@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type FigureElement struct {
 	attributes figureAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type FigureElement struct {
 // Spec Description: The figure element represents some flow content, optionally with a caption, that is self-contained (like a complete sentence) and is typically referenced as a single unit from the main flow of the document.
 func Figure(children ...htemel.Node) *FigureElement {
 	node := &FigureElement{
-		children: children,
+		children:   children,
 		attributes: make(figureAttrs),
 	}
 
@@ -41,128 +42,258 @@ func FigureIf(condition bool, children ...htemel.Node) *FigureElement {
 type FigureAutocapitalizeEnum string
 
 const (
-	FigureAutocapitalizeEnumSentences FigureAutocapitalizeEnum = "sentences"
-	FigureAutocapitalizeEnumWords FigureAutocapitalizeEnum = "words"
 	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
-	FigureAutocapitalizeEnumNone FigureAutocapitalizeEnum = "none"
-	FigureAutocapitalizeEnumOff FigureAutocapitalizeEnum = "off"
-	FigureAutocapitalizeEnumOn FigureAutocapitalizeEnum = "on"
+	FigureAutocapitalizeEnumNone       FigureAutocapitalizeEnum = "none"
+	FigureAutocapitalizeEnumOff        FigureAutocapitalizeEnum = "off"
+	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
+	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
+	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
 )
 
 type FigureAutocorrectEnum string
 
 const (
 	FigureAutocorrectEnumOff FigureAutocorrectEnum = "off"
-	FigureAutocorrectEnumOn FigureAutocorrectEnum = "on"
+	FigureAutocorrectEnumOn  FigureAutocorrectEnum = "on"
 )
 
 type FigureContenteditableEnum string
 
 const (
-	FigureContenteditableEnumFalse FigureContenteditableEnum = "false"
+	FigureContenteditableEnumFalse         FigureContenteditableEnum = "false"
 	FigureContenteditableEnumPlaintextOnly FigureContenteditableEnum = "plaintext-only"
-	FigureContenteditableEnumTrue FigureContenteditableEnum = "true"
+	FigureContenteditableEnumTrue          FigureContenteditableEnum = "true"
 )
 
 type FigureDirEnum string
 
 const (
 	FigureDirEnumAuto FigureDirEnum = "auto"
-	FigureDirEnumLtr FigureDirEnum = "ltr"
-	FigureDirEnumRtl FigureDirEnum = "rtl"
+	FigureDirEnumLtr  FigureDirEnum = "ltr"
+	FigureDirEnumRtl  FigureDirEnum = "rtl"
 )
 
 type FigureDraggableEnum string
 
 const (
 	FigureDraggableEnumFalse FigureDraggableEnum = "false"
-	FigureDraggableEnumTrue FigureDraggableEnum = "true"
+	FigureDraggableEnumTrue  FigureDraggableEnum = "true"
 )
 
 type FigureEnterkeyhintEnum string
 
 const (
-	FigureEnterkeyhintEnumEnter FigureEnterkeyhintEnum = "enter"
-	FigureEnterkeyhintEnumGo FigureEnterkeyhintEnum = "go"
-	FigureEnterkeyhintEnumNext FigureEnterkeyhintEnum = "next"
+	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
+	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
+	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
+	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
 	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
-	FigureEnterkeyhintEnumSearch FigureEnterkeyhintEnum = "search"
-	FigureEnterkeyhintEnumSend FigureEnterkeyhintEnum = "send"
-	FigureEnterkeyhintEnumDone FigureEnterkeyhintEnum = "done"
+	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
+	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
 )
 
 type FigureHiddenEnum string
 
 const (
-	FigureHiddenEnumHidden FigureHiddenEnum = "hidden"
 	FigureHiddenEnumUntilFound FigureHiddenEnum = "until-found"
+	FigureHiddenEnumHidden     FigureHiddenEnum = "hidden"
+)
+
+type FigureInputmodeEnum string
+
+const (
+	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
+	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
+	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
+	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
+	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
+	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
+	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
+	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
+)
+
+type FigureSpellcheckEnum string
+
+const (
+	FigureSpellcheckEnumTrue  FigureSpellcheckEnum = "true"
+	FigureSpellcheckEnumFalse FigureSpellcheckEnum = "false"
+)
+
+type FigureTranslateEnum string
+
+const (
+	FigureTranslateEnumNo  FigureTranslateEnum = "no"
+	FigureTranslateEnumYes FigureTranslateEnum = "yes"
+)
+
+type FigureWritingsuggestionsEnum string
+
+const (
+	FigureWritingsuggestionsEnumFalse FigureWritingsuggestionsEnum = "false"
+	FigureWritingsuggestionsEnumTrue  FigureWritingsuggestionsEnum = "true"
 )
 
 type figureAttrs map[string]any
 
 func (e *FigureElement) Autocapitalize(a FigureAutocapitalizeEnum) *FigureElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *FigureElement) Autocorrect(a FigureAutocorrectEnum) *FigureElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *FigureElement) Autofocus(b bool) *FigureElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *FigureElement) Class(s ...string) *FigureElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *FigureElement) Contenteditable(a FigureContenteditableEnum) *FigureElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *FigureElement) Dir(a FigureDirEnum) *FigureElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *FigureElement) Draggable(a FigureDraggableEnum) *FigureElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *FigureElement) Enterkeyhint(a FigureEnterkeyhintEnum) *FigureElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *FigureElement) Hidden(a FigureHiddenEnum) *FigureElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *FigureElement) Id(s string) *FigureElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *FigureElement) Inert(b bool) *FigureElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *FigureElement) Inputmode(a FigureInputmodeEnum) *FigureElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *FigureElement) Itemid(s string) *FigureElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *FigureElement) Itemprop(s ...string) *FigureElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *FigureElement) Itemref(s ...string) *FigureElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *FigureElement) Itemscope(b bool) *FigureElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *FigureElement) Itemtype(s ...string) *FigureElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *FigureElement) Lang(s string) *FigureElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *FigureElement) Nonce(s string) *FigureElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *FigureElement) Popover(s string) *FigureElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *FigureElement) Slot(s string) *FigureElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *FigureElement) Spellcheck(a FigureSpellcheckEnum) *FigureElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *FigureElement) Style(s string) *FigureElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *FigureElement) Tabindex(i int) *FigureElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *FigureElement) Title(s string) *FigureElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *FigureElement) Translate(a FigureTranslateEnum) *FigureElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *FigureElement) Writingsuggestions(a FigureWritingsuggestionsEnum) *FigureElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ArticleElement struct {
 	attributes articleAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type ArticleElement struct {
 // Spec Description: The article element represents a complete, or self-contained, composition in a document, page, application, or site and that is, in principle, independently distributable or reusable, e.g. in syndication. This could be a forum post, a magazine or newspaper article, a blog entry, a user-submitted comment, an interactive widget or gadget, or any other independent item of content.
 func Article(children ...htemel.Node) *ArticleElement {
 	node := &ArticleElement{
-		children: children,
+		children:   children,
 		attributes: make(articleAttrs),
 	}
 
@@ -41,128 +42,258 @@ func ArticleIf(condition bool, children ...htemel.Node) *ArticleElement {
 type ArticleAutocapitalizeEnum string
 
 const (
-	ArticleAutocapitalizeEnumSentences ArticleAutocapitalizeEnum = "sentences"
-	ArticleAutocapitalizeEnumWords ArticleAutocapitalizeEnum = "words"
+	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
+	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
+	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
 	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
-	ArticleAutocapitalizeEnumNone ArticleAutocapitalizeEnum = "none"
-	ArticleAutocapitalizeEnumOff ArticleAutocapitalizeEnum = "off"
-	ArticleAutocapitalizeEnumOn ArticleAutocapitalizeEnum = "on"
+	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
+	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 )
 
 type ArticleAutocorrectEnum string
 
 const (
 	ArticleAutocorrectEnumOff ArticleAutocorrectEnum = "off"
-	ArticleAutocorrectEnumOn ArticleAutocorrectEnum = "on"
+	ArticleAutocorrectEnumOn  ArticleAutocorrectEnum = "on"
 )
 
 type ArticleContenteditableEnum string
 
 const (
-	ArticleContenteditableEnumFalse ArticleContenteditableEnum = "false"
+	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
-	ArticleContenteditableEnumTrue ArticleContenteditableEnum = "true"
+	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
 )
 
 type ArticleDirEnum string
 
 const (
 	ArticleDirEnumAuto ArticleDirEnum = "auto"
-	ArticleDirEnumLtr ArticleDirEnum = "ltr"
-	ArticleDirEnumRtl ArticleDirEnum = "rtl"
+	ArticleDirEnumLtr  ArticleDirEnum = "ltr"
+	ArticleDirEnumRtl  ArticleDirEnum = "rtl"
 )
 
 type ArticleDraggableEnum string
 
 const (
 	ArticleDraggableEnumFalse ArticleDraggableEnum = "false"
-	ArticleDraggableEnumTrue ArticleDraggableEnum = "true"
+	ArticleDraggableEnumTrue  ArticleDraggableEnum = "true"
 )
 
 type ArticleEnterkeyhintEnum string
 
 const (
-	ArticleEnterkeyhintEnumEnter ArticleEnterkeyhintEnum = "enter"
-	ArticleEnterkeyhintEnumGo ArticleEnterkeyhintEnum = "go"
-	ArticleEnterkeyhintEnumNext ArticleEnterkeyhintEnum = "next"
+	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
+	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
+	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
 	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
-	ArticleEnterkeyhintEnumSearch ArticleEnterkeyhintEnum = "search"
-	ArticleEnterkeyhintEnumSend ArticleEnterkeyhintEnum = "send"
-	ArticleEnterkeyhintEnumDone ArticleEnterkeyhintEnum = "done"
+	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
+	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
+	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
 )
 
 type ArticleHiddenEnum string
 
 const (
-	ArticleHiddenEnumHidden ArticleHiddenEnum = "hidden"
+	ArticleHiddenEnumHidden     ArticleHiddenEnum = "hidden"
 	ArticleHiddenEnumUntilFound ArticleHiddenEnum = "until-found"
+)
+
+type ArticleInputmodeEnum string
+
+const (
+	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
+	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
+	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
+	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
+	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
+	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
+	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
+	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
+)
+
+type ArticleSpellcheckEnum string
+
+const (
+	ArticleSpellcheckEnumFalse ArticleSpellcheckEnum = "false"
+	ArticleSpellcheckEnumTrue  ArticleSpellcheckEnum = "true"
+)
+
+type ArticleTranslateEnum string
+
+const (
+	ArticleTranslateEnumYes ArticleTranslateEnum = "yes"
+	ArticleTranslateEnumNo  ArticleTranslateEnum = "no"
+)
+
+type ArticleWritingsuggestionsEnum string
+
+const (
+	ArticleWritingsuggestionsEnumTrue  ArticleWritingsuggestionsEnum = "true"
+	ArticleWritingsuggestionsEnumFalse ArticleWritingsuggestionsEnum = "false"
 )
 
 type articleAttrs map[string]any
 
 func (e *ArticleElement) Autocapitalize(a ArticleAutocapitalizeEnum) *ArticleElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *ArticleElement) Autocorrect(a ArticleAutocorrectEnum) *ArticleElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *ArticleElement) Autofocus(b bool) *ArticleElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *ArticleElement) Class(s ...string) *ArticleElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *ArticleElement) Contenteditable(a ArticleContenteditableEnum) *ArticleElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *ArticleElement) Dir(a ArticleDirEnum) *ArticleElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *ArticleElement) Draggable(a ArticleDraggableEnum) *ArticleElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *ArticleElement) Enterkeyhint(a ArticleEnterkeyhintEnum) *ArticleElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *ArticleElement) Hidden(a ArticleHiddenEnum) *ArticleElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *ArticleElement) Id(s string) *ArticleElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *ArticleElement) Inert(b bool) *ArticleElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *ArticleElement) Inputmode(a ArticleInputmodeEnum) *ArticleElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *ArticleElement) Itemid(s string) *ArticleElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *ArticleElement) Itemprop(s ...string) *ArticleElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *ArticleElement) Itemref(s ...string) *ArticleElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *ArticleElement) Itemscope(b bool) *ArticleElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *ArticleElement) Itemtype(s ...string) *ArticleElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *ArticleElement) Lang(s string) *ArticleElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *ArticleElement) Nonce(s string) *ArticleElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *ArticleElement) Popover(s string) *ArticleElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *ArticleElement) Slot(s string) *ArticleElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *ArticleElement) Spellcheck(a ArticleSpellcheckEnum) *ArticleElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *ArticleElement) Style(s string) *ArticleElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *ArticleElement) Tabindex(i int) *ArticleElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *ArticleElement) Title(s string) *ArticleElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *ArticleElement) Translate(a ArticleTranslateEnum) *ArticleElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *ArticleElement) Writingsuggestions(a ArticleWritingsuggestionsEnum) *ArticleElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

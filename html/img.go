@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ImgElement struct {
 	attributes imgAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type ImgElement struct {
 // Spec Description: An img element represents an image.
 func Img(children ...htemel.Node) *ImgElement {
 	node := &ImgElement{
-		children: children,
+		children:   children,
 		attributes: make(imgAttrs),
 	}
 
@@ -42,127 +43,257 @@ type ImgAutocapitalizeEnum string
 
 const (
 	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
-	ImgAutocapitalizeEnumNone ImgAutocapitalizeEnum = "none"
-	ImgAutocapitalizeEnumOff ImgAutocapitalizeEnum = "off"
-	ImgAutocapitalizeEnumOn ImgAutocapitalizeEnum = "on"
-	ImgAutocapitalizeEnumSentences ImgAutocapitalizeEnum = "sentences"
-	ImgAutocapitalizeEnumWords ImgAutocapitalizeEnum = "words"
+	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
+	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
+	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
+	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
+	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
 )
 
 type ImgAutocorrectEnum string
 
 const (
 	ImgAutocorrectEnumOff ImgAutocorrectEnum = "off"
-	ImgAutocorrectEnumOn ImgAutocorrectEnum = "on"
+	ImgAutocorrectEnumOn  ImgAutocorrectEnum = "on"
 )
 
 type ImgContenteditableEnum string
 
 const (
-	ImgContenteditableEnumFalse ImgContenteditableEnum = "false"
+	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumPlaintextOnly ImgContenteditableEnum = "plaintext-only"
-	ImgContenteditableEnumTrue ImgContenteditableEnum = "true"
+	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 )
 
 type ImgDirEnum string
 
 const (
 	ImgDirEnumAuto ImgDirEnum = "auto"
-	ImgDirEnumLtr ImgDirEnum = "ltr"
-	ImgDirEnumRtl ImgDirEnum = "rtl"
+	ImgDirEnumLtr  ImgDirEnum = "ltr"
+	ImgDirEnumRtl  ImgDirEnum = "rtl"
 )
 
 type ImgDraggableEnum string
 
 const (
 	ImgDraggableEnumFalse ImgDraggableEnum = "false"
-	ImgDraggableEnumTrue ImgDraggableEnum = "true"
+	ImgDraggableEnumTrue  ImgDraggableEnum = "true"
 )
 
 type ImgEnterkeyhintEnum string
 
 const (
-	ImgEnterkeyhintEnumGo ImgEnterkeyhintEnum = "go"
-	ImgEnterkeyhintEnumNext ImgEnterkeyhintEnum = "next"
+	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
+	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
+	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
+	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
+	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
-	ImgEnterkeyhintEnumSearch ImgEnterkeyhintEnum = "search"
-	ImgEnterkeyhintEnumSend ImgEnterkeyhintEnum = "send"
-	ImgEnterkeyhintEnumDone ImgEnterkeyhintEnum = "done"
-	ImgEnterkeyhintEnumEnter ImgEnterkeyhintEnum = "enter"
+	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 )
 
 type ImgHiddenEnum string
 
 const (
-	ImgHiddenEnumHidden ImgHiddenEnum = "hidden"
+	ImgHiddenEnumHidden     ImgHiddenEnum = "hidden"
 	ImgHiddenEnumUntilFound ImgHiddenEnum = "until-found"
+)
+
+type ImgInputmodeEnum string
+
+const (
+	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
+	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
+	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
+	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
+	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
+	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
+	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
+	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
+)
+
+type ImgSpellcheckEnum string
+
+const (
+	ImgSpellcheckEnumFalse ImgSpellcheckEnum = "false"
+	ImgSpellcheckEnumTrue  ImgSpellcheckEnum = "true"
+)
+
+type ImgTranslateEnum string
+
+const (
+	ImgTranslateEnumNo  ImgTranslateEnum = "no"
+	ImgTranslateEnumYes ImgTranslateEnum = "yes"
+)
+
+type ImgWritingsuggestionsEnum string
+
+const (
+	ImgWritingsuggestionsEnumFalse ImgWritingsuggestionsEnum = "false"
+	ImgWritingsuggestionsEnumTrue  ImgWritingsuggestionsEnum = "true"
 )
 
 type imgAttrs map[string]any
 
 func (e *ImgElement) Autocapitalize(a ImgAutocapitalizeEnum) *ImgElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *ImgElement) Autocorrect(a ImgAutocorrectEnum) *ImgElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *ImgElement) Autofocus(b bool) *ImgElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *ImgElement) Class(s ...string) *ImgElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *ImgElement) Contenteditable(a ImgContenteditableEnum) *ImgElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *ImgElement) Dir(a ImgDirEnum) *ImgElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *ImgElement) Draggable(a ImgDraggableEnum) *ImgElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *ImgElement) Enterkeyhint(a ImgEnterkeyhintEnum) *ImgElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *ImgElement) Hidden(a ImgHiddenEnum) *ImgElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *ImgElement) Id(s string) *ImgElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *ImgElement) Inert(b bool) *ImgElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *ImgElement) Inputmode(a ImgInputmodeEnum) *ImgElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *ImgElement) Itemid(s string) *ImgElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *ImgElement) Itemprop(s ...string) *ImgElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *ImgElement) Itemref(s ...string) *ImgElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *ImgElement) Itemscope(b bool) *ImgElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *ImgElement) Itemtype(s ...string) *ImgElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *ImgElement) Lang(s string) *ImgElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *ImgElement) Nonce(s string) *ImgElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *ImgElement) Popover(s string) *ImgElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *ImgElement) Slot(s string) *ImgElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *ImgElement) Spellcheck(a ImgSpellcheckEnum) *ImgElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *ImgElement) Style(s string) *ImgElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *ImgElement) Tabindex(i int) *ImgElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *ImgElement) Title(s string) *ImgElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *ImgElement) Translate(a ImgTranslateEnum) *ImgElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *ImgElement) Writingsuggestions(a ImgWritingsuggestionsEnum) *ImgElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

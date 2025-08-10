@@ -7,6 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	"golang.org/x/tools/imports"
+
 	"github.com/derekmwright/htemel/internal/generators/source"
 	"github.com/derekmwright/htemel/internal/generators/spec"
 )
@@ -50,6 +52,38 @@ func generate(pkg string, e *spec.Element) error {
 	return nil
 }
 
+func fmtFiles(dir string) error {
+	opt := &imports.Options{
+		AllErrors:  true,
+		Comments:   true,
+		TabIndent:  true,
+		TabWidth:   8,
+		FormatOnly: false,
+	}
+
+	return filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
+		if info.IsDir() || filepath.Ext(path) != ".go" {
+			return nil
+		}
+
+		f, err := os.ReadFile(path)
+		if err != nil {
+			return err
+		}
+
+		fixed, err := imports.Process(path, f, opt)
+		if err != nil {
+			return err
+		}
+
+		return os.WriteFile(path, fixed, 0644)
+	})
+}
+
 func main() {
 	sp := spec.Spec{}
 
@@ -68,5 +102,10 @@ func main() {
 		if err = generate(strings.ToLower(sp.Name), e); err != nil {
 			panic(err)
 		}
+	}
+
+	err = fmtFiles("html")
+	if err != nil {
+		panic(err)
 	}
 }

@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type AsideElement struct {
 	attributes asideAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type AsideElement struct {
 // Spec Description: The aside element represents a section of a page that consists of content that is tangentially related to the content around the aside element, and which could be considered separate from that content. Such sections are often represented as sidebars in printed typography.
 func Aside(children ...htemel.Node) *AsideElement {
 	node := &AsideElement{
-		children: children,
+		children:   children,
 		attributes: make(asideAttrs),
 	}
 
@@ -41,128 +42,258 @@ func AsideIf(condition bool, children ...htemel.Node) *AsideElement {
 type AsideAutocapitalizeEnum string
 
 const (
-	AsideAutocapitalizeEnumNone AsideAutocapitalizeEnum = "none"
-	AsideAutocapitalizeEnumOff AsideAutocapitalizeEnum = "off"
-	AsideAutocapitalizeEnumOn AsideAutocapitalizeEnum = "on"
-	AsideAutocapitalizeEnumSentences AsideAutocapitalizeEnum = "sentences"
-	AsideAutocapitalizeEnumWords AsideAutocapitalizeEnum = "words"
+	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
 	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
+	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
+	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
+	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
+	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
 )
 
 type AsideAutocorrectEnum string
 
 const (
 	AsideAutocorrectEnumOff AsideAutocorrectEnum = "off"
-	AsideAutocorrectEnumOn AsideAutocorrectEnum = "on"
+	AsideAutocorrectEnumOn  AsideAutocorrectEnum = "on"
 )
 
 type AsideContenteditableEnum string
 
 const (
-	AsideContenteditableEnumFalse AsideContenteditableEnum = "false"
+	AsideContenteditableEnumFalse         AsideContenteditableEnum = "false"
 	AsideContenteditableEnumPlaintextOnly AsideContenteditableEnum = "plaintext-only"
-	AsideContenteditableEnumTrue AsideContenteditableEnum = "true"
+	AsideContenteditableEnumTrue          AsideContenteditableEnum = "true"
 )
 
 type AsideDirEnum string
 
 const (
+	AsideDirEnumLtr  AsideDirEnum = "ltr"
+	AsideDirEnumRtl  AsideDirEnum = "rtl"
 	AsideDirEnumAuto AsideDirEnum = "auto"
-	AsideDirEnumLtr AsideDirEnum = "ltr"
-	AsideDirEnumRtl AsideDirEnum = "rtl"
 )
 
 type AsideDraggableEnum string
 
 const (
-	AsideDraggableEnumTrue AsideDraggableEnum = "true"
 	AsideDraggableEnumFalse AsideDraggableEnum = "false"
+	AsideDraggableEnumTrue  AsideDraggableEnum = "true"
 )
 
 type AsideEnterkeyhintEnum string
 
 const (
-	AsideEnterkeyhintEnumGo AsideEnterkeyhintEnum = "go"
-	AsideEnterkeyhintEnumNext AsideEnterkeyhintEnum = "next"
+	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
+	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
+	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
 	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
-	AsideEnterkeyhintEnumSearch AsideEnterkeyhintEnum = "search"
-	AsideEnterkeyhintEnumSend AsideEnterkeyhintEnum = "send"
-	AsideEnterkeyhintEnumDone AsideEnterkeyhintEnum = "done"
-	AsideEnterkeyhintEnumEnter AsideEnterkeyhintEnum = "enter"
+	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
+	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
+	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 )
 
 type AsideHiddenEnum string
 
 const (
-	AsideHiddenEnumHidden AsideHiddenEnum = "hidden"
 	AsideHiddenEnumUntilFound AsideHiddenEnum = "until-found"
+	AsideHiddenEnumHidden     AsideHiddenEnum = "hidden"
+)
+
+type AsideInputmodeEnum string
+
+const (
+	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
+	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
+	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
+	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
+	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
+	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
+	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
+	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
+)
+
+type AsideSpellcheckEnum string
+
+const (
+	AsideSpellcheckEnumFalse AsideSpellcheckEnum = "false"
+	AsideSpellcheckEnumTrue  AsideSpellcheckEnum = "true"
+)
+
+type AsideTranslateEnum string
+
+const (
+	AsideTranslateEnumNo  AsideTranslateEnum = "no"
+	AsideTranslateEnumYes AsideTranslateEnum = "yes"
+)
+
+type AsideWritingsuggestionsEnum string
+
+const (
+	AsideWritingsuggestionsEnumFalse AsideWritingsuggestionsEnum = "false"
+	AsideWritingsuggestionsEnumTrue  AsideWritingsuggestionsEnum = "true"
 )
 
 type asideAttrs map[string]any
 
 func (e *AsideElement) Autocapitalize(a AsideAutocapitalizeEnum) *AsideElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *AsideElement) Autocorrect(a AsideAutocorrectEnum) *AsideElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *AsideElement) Autofocus(b bool) *AsideElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *AsideElement) Class(s ...string) *AsideElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *AsideElement) Contenteditable(a AsideContenteditableEnum) *AsideElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *AsideElement) Dir(a AsideDirEnum) *AsideElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *AsideElement) Draggable(a AsideDraggableEnum) *AsideElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *AsideElement) Enterkeyhint(a AsideEnterkeyhintEnum) *AsideElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *AsideElement) Hidden(a AsideHiddenEnum) *AsideElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *AsideElement) Id(s string) *AsideElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *AsideElement) Inert(b bool) *AsideElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *AsideElement) Inputmode(a AsideInputmodeEnum) *AsideElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *AsideElement) Itemid(s string) *AsideElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *AsideElement) Itemprop(s ...string) *AsideElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AsideElement) Itemref(s ...string) *AsideElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AsideElement) Itemscope(b bool) *AsideElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *AsideElement) Itemtype(s ...string) *AsideElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AsideElement) Lang(s string) *AsideElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *AsideElement) Nonce(s string) *AsideElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *AsideElement) Popover(s string) *AsideElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *AsideElement) Slot(s string) *AsideElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *AsideElement) Spellcheck(a AsideSpellcheckEnum) *AsideElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *AsideElement) Style(s string) *AsideElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *AsideElement) Tabindex(i int) *AsideElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *AsideElement) Title(s string) *AsideElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *AsideElement) Translate(a AsideTranslateEnum) *AsideElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *AsideElement) Writingsuggestions(a AsideWritingsuggestionsEnum) *AsideElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

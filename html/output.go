@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type OutputElement struct {
 	attributes outputAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type OutputElement struct {
 // Spec Description: The output element represents the result of a calculation performed by the application, or the result of a user action.
 func Output(children ...htemel.Node) *OutputElement {
 	node := &OutputElement{
-		children: children,
+		children:   children,
 		attributes: make(outputAttrs),
 	}
 
@@ -41,128 +42,258 @@ func OutputIf(condition bool, children ...htemel.Node) *OutputElement {
 type OutputAutocapitalizeEnum string
 
 const (
+	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
 	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
-	OutputAutocapitalizeEnumNone OutputAutocapitalizeEnum = "none"
-	OutputAutocapitalizeEnumOff OutputAutocapitalizeEnum = "off"
-	OutputAutocapitalizeEnumOn OutputAutocapitalizeEnum = "on"
-	OutputAutocapitalizeEnumSentences OutputAutocapitalizeEnum = "sentences"
-	OutputAutocapitalizeEnumWords OutputAutocapitalizeEnum = "words"
+	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
+	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
+	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
+	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
 )
 
 type OutputAutocorrectEnum string
 
 const (
 	OutputAutocorrectEnumOff OutputAutocorrectEnum = "off"
-	OutputAutocorrectEnumOn OutputAutocorrectEnum = "on"
+	OutputAutocorrectEnumOn  OutputAutocorrectEnum = "on"
 )
 
 type OutputContenteditableEnum string
 
 const (
+	OutputContenteditableEnumFalse         OutputContenteditableEnum = "false"
 	OutputContenteditableEnumPlaintextOnly OutputContenteditableEnum = "plaintext-only"
-	OutputContenteditableEnumTrue OutputContenteditableEnum = "true"
-	OutputContenteditableEnumFalse OutputContenteditableEnum = "false"
+	OutputContenteditableEnumTrue          OutputContenteditableEnum = "true"
 )
 
 type OutputDirEnum string
 
 const (
+	OutputDirEnumLtr  OutputDirEnum = "ltr"
+	OutputDirEnumRtl  OutputDirEnum = "rtl"
 	OutputDirEnumAuto OutputDirEnum = "auto"
-	OutputDirEnumLtr OutputDirEnum = "ltr"
-	OutputDirEnumRtl OutputDirEnum = "rtl"
 )
 
 type OutputDraggableEnum string
 
 const (
+	OutputDraggableEnumTrue  OutputDraggableEnum = "true"
 	OutputDraggableEnumFalse OutputDraggableEnum = "false"
-	OutputDraggableEnumTrue OutputDraggableEnum = "true"
 )
 
 type OutputEnterkeyhintEnum string
 
 const (
-	OutputEnterkeyhintEnumDone OutputEnterkeyhintEnum = "done"
-	OutputEnterkeyhintEnumEnter OutputEnterkeyhintEnum = "enter"
-	OutputEnterkeyhintEnumGo OutputEnterkeyhintEnum = "go"
-	OutputEnterkeyhintEnumNext OutputEnterkeyhintEnum = "next"
 	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
-	OutputEnterkeyhintEnumSearch OutputEnterkeyhintEnum = "search"
-	OutputEnterkeyhintEnumSend OutputEnterkeyhintEnum = "send"
+	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
+	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
+	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
+	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
+	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
+	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 )
 
 type OutputHiddenEnum string
 
 const (
-	OutputHiddenEnumHidden OutputHiddenEnum = "hidden"
 	OutputHiddenEnumUntilFound OutputHiddenEnum = "until-found"
+	OutputHiddenEnumHidden     OutputHiddenEnum = "hidden"
+)
+
+type OutputInputmodeEnum string
+
+const (
+	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
+	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
+	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
+	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
+	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
+	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
+	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
+	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
+)
+
+type OutputSpellcheckEnum string
+
+const (
+	OutputSpellcheckEnumFalse OutputSpellcheckEnum = "false"
+	OutputSpellcheckEnumTrue  OutputSpellcheckEnum = "true"
+)
+
+type OutputTranslateEnum string
+
+const (
+	OutputTranslateEnumNo  OutputTranslateEnum = "no"
+	OutputTranslateEnumYes OutputTranslateEnum = "yes"
+)
+
+type OutputWritingsuggestionsEnum string
+
+const (
+	OutputWritingsuggestionsEnumFalse OutputWritingsuggestionsEnum = "false"
+	OutputWritingsuggestionsEnumTrue  OutputWritingsuggestionsEnum = "true"
 )
 
 type outputAttrs map[string]any
 
 func (e *OutputElement) Autocapitalize(a OutputAutocapitalizeEnum) *OutputElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *OutputElement) Autocorrect(a OutputAutocorrectEnum) *OutputElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *OutputElement) Autofocus(b bool) *OutputElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *OutputElement) Class(s ...string) *OutputElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *OutputElement) Contenteditable(a OutputContenteditableEnum) *OutputElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *OutputElement) Dir(a OutputDirEnum) *OutputElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *OutputElement) Draggable(a OutputDraggableEnum) *OutputElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *OutputElement) Enterkeyhint(a OutputEnterkeyhintEnum) *OutputElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *OutputElement) Hidden(a OutputHiddenEnum) *OutputElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *OutputElement) Id(s string) *OutputElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *OutputElement) Inert(b bool) *OutputElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *OutputElement) Inputmode(a OutputInputmodeEnum) *OutputElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *OutputElement) Itemid(s string) *OutputElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *OutputElement) Itemprop(s ...string) *OutputElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *OutputElement) Itemref(s ...string) *OutputElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *OutputElement) Itemscope(b bool) *OutputElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *OutputElement) Itemtype(s ...string) *OutputElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *OutputElement) Lang(s string) *OutputElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *OutputElement) Nonce(s string) *OutputElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *OutputElement) Popover(s string) *OutputElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *OutputElement) Slot(s string) *OutputElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *OutputElement) Spellcheck(a OutputSpellcheckEnum) *OutputElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *OutputElement) Style(s string) *OutputElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *OutputElement) Tabindex(i int) *OutputElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *OutputElement) Title(s string) *OutputElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *OutputElement) Translate(a OutputTranslateEnum) *OutputElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *OutputElement) Writingsuggestions(a OutputWritingsuggestionsEnum) *OutputElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

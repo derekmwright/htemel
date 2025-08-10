@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DialogElement struct {
 	attributes dialogAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DialogElement struct {
 // Spec Description: The dialog element represents a transitory part of an application, in the form of a small window ("dialog box"), which the user interacts with to perform a task or gather information. Once the user is done, the dialog can be automatically closed by the application, or manually closed by the user.
 func Dialog(children ...htemel.Node) *DialogElement {
 	node := &DialogElement{
-		children: children,
+		children:   children,
 		attributes: make(dialogAttrs),
 	}
 
@@ -42,127 +43,257 @@ type DialogAutocapitalizeEnum string
 
 const (
 	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
-	DialogAutocapitalizeEnumNone DialogAutocapitalizeEnum = "none"
-	DialogAutocapitalizeEnumOff DialogAutocapitalizeEnum = "off"
-	DialogAutocapitalizeEnumOn DialogAutocapitalizeEnum = "on"
-	DialogAutocapitalizeEnumSentences DialogAutocapitalizeEnum = "sentences"
-	DialogAutocapitalizeEnumWords DialogAutocapitalizeEnum = "words"
+	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
+	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
+	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
+	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
+	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
 )
 
 type DialogAutocorrectEnum string
 
 const (
-	DialogAutocorrectEnumOn DialogAutocorrectEnum = "on"
 	DialogAutocorrectEnumOff DialogAutocorrectEnum = "off"
+	DialogAutocorrectEnumOn  DialogAutocorrectEnum = "on"
 )
 
 type DialogContenteditableEnum string
 
 const (
+	DialogContenteditableEnumFalse         DialogContenteditableEnum = "false"
 	DialogContenteditableEnumPlaintextOnly DialogContenteditableEnum = "plaintext-only"
-	DialogContenteditableEnumTrue DialogContenteditableEnum = "true"
-	DialogContenteditableEnumFalse DialogContenteditableEnum = "false"
+	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
 )
 
 type DialogDirEnum string
 
 const (
-	DialogDirEnumRtl DialogDirEnum = "rtl"
 	DialogDirEnumAuto DialogDirEnum = "auto"
-	DialogDirEnumLtr DialogDirEnum = "ltr"
+	DialogDirEnumLtr  DialogDirEnum = "ltr"
+	DialogDirEnumRtl  DialogDirEnum = "rtl"
 )
 
 type DialogDraggableEnum string
 
 const (
 	DialogDraggableEnumFalse DialogDraggableEnum = "false"
-	DialogDraggableEnumTrue DialogDraggableEnum = "true"
+	DialogDraggableEnumTrue  DialogDraggableEnum = "true"
 )
 
 type DialogEnterkeyhintEnum string
 
 const (
-	DialogEnterkeyhintEnumDone DialogEnterkeyhintEnum = "done"
-	DialogEnterkeyhintEnumEnter DialogEnterkeyhintEnum = "enter"
-	DialogEnterkeyhintEnumGo DialogEnterkeyhintEnum = "go"
-	DialogEnterkeyhintEnumNext DialogEnterkeyhintEnum = "next"
+	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
+	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
+	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
+	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
 	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
-	DialogEnterkeyhintEnumSearch DialogEnterkeyhintEnum = "search"
-	DialogEnterkeyhintEnumSend DialogEnterkeyhintEnum = "send"
+	DialogEnterkeyhintEnumSearch   DialogEnterkeyhintEnum = "search"
+	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
 )
 
 type DialogHiddenEnum string
 
 const (
-	DialogHiddenEnumHidden DialogHiddenEnum = "hidden"
+	DialogHiddenEnumHidden     DialogHiddenEnum = "hidden"
 	DialogHiddenEnumUntilFound DialogHiddenEnum = "until-found"
+)
+
+type DialogInputmodeEnum string
+
+const (
+	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
+	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
+	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
+	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
+	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
+	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
+	DialogInputmodeEnumNumeric DialogInputmodeEnum = "numeric"
+	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
+)
+
+type DialogSpellcheckEnum string
+
+const (
+	DialogSpellcheckEnumFalse DialogSpellcheckEnum = "false"
+	DialogSpellcheckEnumTrue  DialogSpellcheckEnum = "true"
+)
+
+type DialogTranslateEnum string
+
+const (
+	DialogTranslateEnumNo  DialogTranslateEnum = "no"
+	DialogTranslateEnumYes DialogTranslateEnum = "yes"
+)
+
+type DialogWritingsuggestionsEnum string
+
+const (
+	DialogWritingsuggestionsEnumFalse DialogWritingsuggestionsEnum = "false"
+	DialogWritingsuggestionsEnumTrue  DialogWritingsuggestionsEnum = "true"
 )
 
 type dialogAttrs map[string]any
 
 func (e *DialogElement) Autocapitalize(a DialogAutocapitalizeEnum) *DialogElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DialogElement) Autocorrect(a DialogAutocorrectEnum) *DialogElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *DialogElement) Autofocus(b bool) *DialogElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *DialogElement) Class(s ...string) *DialogElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DialogElement) Contenteditable(a DialogContenteditableEnum) *DialogElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DialogElement) Dir(a DialogDirEnum) *DialogElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *DialogElement) Draggable(a DialogDraggableEnum) *DialogElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *DialogElement) Enterkeyhint(a DialogEnterkeyhintEnum) *DialogElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *DialogElement) Hidden(a DialogHiddenEnum) *DialogElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *DialogElement) Id(s string) *DialogElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *DialogElement) Inert(b bool) *DialogElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *DialogElement) Inputmode(a DialogInputmodeEnum) *DialogElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *DialogElement) Itemid(s string) *DialogElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *DialogElement) Itemprop(s ...string) *DialogElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DialogElement) Itemref(s ...string) *DialogElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DialogElement) Itemscope(b bool) *DialogElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *DialogElement) Itemtype(s ...string) *DialogElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DialogElement) Lang(s string) *DialogElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *DialogElement) Nonce(s string) *DialogElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *DialogElement) Popover(s string) *DialogElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *DialogElement) Slot(s string) *DialogElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *DialogElement) Spellcheck(a DialogSpellcheckEnum) *DialogElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *DialogElement) Style(s string) *DialogElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *DialogElement) Tabindex(i int) *DialogElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *DialogElement) Title(s string) *DialogElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *DialogElement) Translate(a DialogTranslateEnum) *DialogElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *DialogElement) Writingsuggestions(a DialogWritingsuggestionsEnum) *DialogElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

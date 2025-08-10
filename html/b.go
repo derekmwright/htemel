@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type BElement struct {
 	attributes bAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type BElement struct {
 // Spec Description: The b element represents a span of text to which attention is being drawn for utilitarian purposes without conveying any extra importance and with no implication of an alternate voice or mood, such as key words in a document abstract, product names in a review, actionable words in interactive text-driven software, or an article lede.
 func B(children ...htemel.Node) *BElement {
 	node := &BElement{
-		children: children,
+		children:   children,
 		attributes: make(bAttrs),
 	}
 
@@ -41,34 +42,34 @@ func BIf(condition bool, children ...htemel.Node) *BElement {
 type BAutocapitalizeEnum string
 
 const (
-	BAutocapitalizeEnumOff BAutocapitalizeEnum = "off"
-	BAutocapitalizeEnumOn BAutocapitalizeEnum = "on"
-	BAutocapitalizeEnumSentences BAutocapitalizeEnum = "sentences"
-	BAutocapitalizeEnumWords BAutocapitalizeEnum = "words"
 	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
-	BAutocapitalizeEnumNone BAutocapitalizeEnum = "none"
+	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
+	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
+	BAutocapitalizeEnumOn         BAutocapitalizeEnum = "on"
+	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
+	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
 )
 
 type BAutocorrectEnum string
 
 const (
 	BAutocorrectEnumOff BAutocorrectEnum = "off"
-	BAutocorrectEnumOn BAutocorrectEnum = "on"
+	BAutocorrectEnumOn  BAutocorrectEnum = "on"
 )
 
 type BContenteditableEnum string
 
 const (
+	BContenteditableEnumFalse         BContenteditableEnum = "false"
 	BContenteditableEnumPlaintextOnly BContenteditableEnum = "plaintext-only"
-	BContenteditableEnumTrue BContenteditableEnum = "true"
-	BContenteditableEnumFalse BContenteditableEnum = "false"
+	BContenteditableEnumTrue          BContenteditableEnum = "true"
 )
 
 type BDirEnum string
 
 const (
-	BDirEnumLtr BDirEnum = "ltr"
-	BDirEnumRtl BDirEnum = "rtl"
+	BDirEnumLtr  BDirEnum = "ltr"
+	BDirEnumRtl  BDirEnum = "rtl"
 	BDirEnumAuto BDirEnum = "auto"
 )
 
@@ -76,93 +77,223 @@ type BDraggableEnum string
 
 const (
 	BDraggableEnumFalse BDraggableEnum = "false"
-	BDraggableEnumTrue BDraggableEnum = "true"
+	BDraggableEnumTrue  BDraggableEnum = "true"
 )
 
 type BEnterkeyhintEnum string
 
 const (
+	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
 	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
-	BEnterkeyhintEnumSearch BEnterkeyhintEnum = "search"
-	BEnterkeyhintEnumSend BEnterkeyhintEnum = "send"
-	BEnterkeyhintEnumDone BEnterkeyhintEnum = "done"
-	BEnterkeyhintEnumEnter BEnterkeyhintEnum = "enter"
-	BEnterkeyhintEnumGo BEnterkeyhintEnum = "go"
-	BEnterkeyhintEnumNext BEnterkeyhintEnum = "next"
+	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
+	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
+	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
+	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
+	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 )
 
 type BHiddenEnum string
 
 const (
-	BHiddenEnumHidden BHiddenEnum = "hidden"
+	BHiddenEnumHidden     BHiddenEnum = "hidden"
 	BHiddenEnumUntilFound BHiddenEnum = "until-found"
+)
+
+type BInputmodeEnum string
+
+const (
+	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
+	BInputmodeEnumEmail   BInputmodeEnum = "email"
+	BInputmodeEnumNone    BInputmodeEnum = "none"
+	BInputmodeEnumNumeric BInputmodeEnum = "numeric"
+	BInputmodeEnumSearch  BInputmodeEnum = "search"
+	BInputmodeEnumTel     BInputmodeEnum = "tel"
+	BInputmodeEnumText    BInputmodeEnum = "text"
+	BInputmodeEnumUrl     BInputmodeEnum = "url"
+)
+
+type BSpellcheckEnum string
+
+const (
+	BSpellcheckEnumTrue  BSpellcheckEnum = "true"
+	BSpellcheckEnumFalse BSpellcheckEnum = "false"
+)
+
+type BTranslateEnum string
+
+const (
+	BTranslateEnumYes BTranslateEnum = "yes"
+	BTranslateEnumNo  BTranslateEnum = "no"
+)
+
+type BWritingsuggestionsEnum string
+
+const (
+	BWritingsuggestionsEnumFalse BWritingsuggestionsEnum = "false"
+	BWritingsuggestionsEnumTrue  BWritingsuggestionsEnum = "true"
 )
 
 type bAttrs map[string]any
 
 func (e *BElement) Autocapitalize(a BAutocapitalizeEnum) *BElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *BElement) Autocorrect(a BAutocorrectEnum) *BElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *BElement) Autofocus(b bool) *BElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *BElement) Class(s ...string) *BElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *BElement) Contenteditable(a BContenteditableEnum) *BElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *BElement) Dir(a BDirEnum) *BElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *BElement) Draggable(a BDraggableEnum) *BElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *BElement) Enterkeyhint(a BEnterkeyhintEnum) *BElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *BElement) Hidden(a BHiddenEnum) *BElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *BElement) Id(s string) *BElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *BElement) Inert(b bool) *BElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *BElement) Inputmode(a BInputmodeEnum) *BElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *BElement) Itemid(s string) *BElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *BElement) Itemprop(s ...string) *BElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *BElement) Itemref(s ...string) *BElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *BElement) Itemscope(b bool) *BElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *BElement) Itemtype(s ...string) *BElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *BElement) Lang(s string) *BElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *BElement) Nonce(s string) *BElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *BElement) Popover(s string) *BElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *BElement) Slot(s string) *BElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *BElement) Spellcheck(a BSpellcheckEnum) *BElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *BElement) Style(s string) *BElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *BElement) Tabindex(i int) *BElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *BElement) Title(s string) *BElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *BElement) Translate(a BTranslateEnum) *BElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *BElement) Writingsuggestions(a BWritingsuggestionsEnum) *BElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

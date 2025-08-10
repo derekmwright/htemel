@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type EmbedElement struct {
 	attributes embedAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type EmbedElement struct {
 // Spec Description: The embed element provides an integration point for an external application or interactive content.
 func Embed(children ...htemel.Node) *EmbedElement {
 	node := &EmbedElement{
-		children: children,
+		children:   children,
 		attributes: make(embedAttrs),
 	}
 
@@ -41,128 +42,258 @@ func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
 type EmbedAutocapitalizeEnum string
 
 const (
-	EmbedAutocapitalizeEnumSentences EmbedAutocapitalizeEnum = "sentences"
-	EmbedAutocapitalizeEnumWords EmbedAutocapitalizeEnum = "words"
+	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
+	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
+	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
+	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
 	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
-	EmbedAutocapitalizeEnumNone EmbedAutocapitalizeEnum = "none"
-	EmbedAutocapitalizeEnumOff EmbedAutocapitalizeEnum = "off"
-	EmbedAutocapitalizeEnumOn EmbedAutocapitalizeEnum = "on"
+	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 )
 
 type EmbedAutocorrectEnum string
 
 const (
+	EmbedAutocorrectEnumOn  EmbedAutocorrectEnum = "on"
 	EmbedAutocorrectEnumOff EmbedAutocorrectEnum = "off"
-	EmbedAutocorrectEnumOn EmbedAutocorrectEnum = "on"
 )
 
 type EmbedContenteditableEnum string
 
 const (
-	EmbedContenteditableEnumFalse EmbedContenteditableEnum = "false"
+	EmbedContenteditableEnumFalse         EmbedContenteditableEnum = "false"
 	EmbedContenteditableEnumPlaintextOnly EmbedContenteditableEnum = "plaintext-only"
-	EmbedContenteditableEnumTrue EmbedContenteditableEnum = "true"
+	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
 )
 
 type EmbedDirEnum string
 
 const (
 	EmbedDirEnumAuto EmbedDirEnum = "auto"
-	EmbedDirEnumLtr EmbedDirEnum = "ltr"
-	EmbedDirEnumRtl EmbedDirEnum = "rtl"
+	EmbedDirEnumLtr  EmbedDirEnum = "ltr"
+	EmbedDirEnumRtl  EmbedDirEnum = "rtl"
 )
 
 type EmbedDraggableEnum string
 
 const (
 	EmbedDraggableEnumFalse EmbedDraggableEnum = "false"
-	EmbedDraggableEnumTrue EmbedDraggableEnum = "true"
+	EmbedDraggableEnumTrue  EmbedDraggableEnum = "true"
 )
 
 type EmbedEnterkeyhintEnum string
 
 const (
+	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
+	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
+	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
+	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
+	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
 	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
-	EmbedEnterkeyhintEnumSearch EmbedEnterkeyhintEnum = "search"
-	EmbedEnterkeyhintEnumSend EmbedEnterkeyhintEnum = "send"
-	EmbedEnterkeyhintEnumDone EmbedEnterkeyhintEnum = "done"
-	EmbedEnterkeyhintEnumEnter EmbedEnterkeyhintEnum = "enter"
-	EmbedEnterkeyhintEnumGo EmbedEnterkeyhintEnum = "go"
-	EmbedEnterkeyhintEnumNext EmbedEnterkeyhintEnum = "next"
+	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 )
 
 type EmbedHiddenEnum string
 
 const (
+	EmbedHiddenEnumHidden     EmbedHiddenEnum = "hidden"
 	EmbedHiddenEnumUntilFound EmbedHiddenEnum = "until-found"
-	EmbedHiddenEnumHidden EmbedHiddenEnum = "hidden"
+)
+
+type EmbedInputmodeEnum string
+
+const (
+	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
+	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
+	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
+	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
+	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
+	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
+	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
+	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
+)
+
+type EmbedSpellcheckEnum string
+
+const (
+	EmbedSpellcheckEnumFalse EmbedSpellcheckEnum = "false"
+	EmbedSpellcheckEnumTrue  EmbedSpellcheckEnum = "true"
+)
+
+type EmbedTranslateEnum string
+
+const (
+	EmbedTranslateEnumNo  EmbedTranslateEnum = "no"
+	EmbedTranslateEnumYes EmbedTranslateEnum = "yes"
+)
+
+type EmbedWritingsuggestionsEnum string
+
+const (
+	EmbedWritingsuggestionsEnumFalse EmbedWritingsuggestionsEnum = "false"
+	EmbedWritingsuggestionsEnumTrue  EmbedWritingsuggestionsEnum = "true"
 )
 
 type embedAttrs map[string]any
 
 func (e *EmbedElement) Autocapitalize(a EmbedAutocapitalizeEnum) *EmbedElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *EmbedElement) Autocorrect(a EmbedAutocorrectEnum) *EmbedElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *EmbedElement) Autofocus(b bool) *EmbedElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *EmbedElement) Class(s ...string) *EmbedElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *EmbedElement) Contenteditable(a EmbedContenteditableEnum) *EmbedElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *EmbedElement) Dir(a EmbedDirEnum) *EmbedElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *EmbedElement) Draggable(a EmbedDraggableEnum) *EmbedElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *EmbedElement) Enterkeyhint(a EmbedEnterkeyhintEnum) *EmbedElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *EmbedElement) Hidden(a EmbedHiddenEnum) *EmbedElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *EmbedElement) Id(s string) *EmbedElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *EmbedElement) Inert(b bool) *EmbedElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *EmbedElement) Inputmode(a EmbedInputmodeEnum) *EmbedElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *EmbedElement) Itemid(s string) *EmbedElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *EmbedElement) Itemprop(s ...string) *EmbedElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *EmbedElement) Itemref(s ...string) *EmbedElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *EmbedElement) Itemscope(b bool) *EmbedElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *EmbedElement) Itemtype(s ...string) *EmbedElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *EmbedElement) Lang(s string) *EmbedElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *EmbedElement) Nonce(s string) *EmbedElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *EmbedElement) Popover(s string) *EmbedElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *EmbedElement) Slot(s string) *EmbedElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *EmbedElement) Spellcheck(a EmbedSpellcheckEnum) *EmbedElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *EmbedElement) Style(s string) *EmbedElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *EmbedElement) Tabindex(i int) *EmbedElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *EmbedElement) Title(s string) *EmbedElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *EmbedElement) Translate(a EmbedTranslateEnum) *EmbedElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *EmbedElement) Writingsuggestions(a EmbedWritingsuggestionsEnum) *EmbedElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

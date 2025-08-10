@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TrackElement struct {
 	attributes trackAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TrackElement struct {
 // Spec Description: The track element allows authors to specify explicit external timed text tracks for media elements. It does not represent anything on its own.
 func Track(children ...htemel.Node) *TrackElement {
 	node := &TrackElement{
-		children: children,
+		children:   children,
 		attributes: make(trackAttrs),
 	}
 
@@ -41,128 +42,258 @@ func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 type TrackAutocapitalizeEnum string
 
 const (
-	TrackAutocapitalizeEnumSentences TrackAutocapitalizeEnum = "sentences"
-	TrackAutocapitalizeEnumWords TrackAutocapitalizeEnum = "words"
+	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
 	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
-	TrackAutocapitalizeEnumNone TrackAutocapitalizeEnum = "none"
-	TrackAutocapitalizeEnumOff TrackAutocapitalizeEnum = "off"
-	TrackAutocapitalizeEnumOn TrackAutocapitalizeEnum = "on"
+	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
+	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
+	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
+	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
 )
 
 type TrackAutocorrectEnum string
 
 const (
 	TrackAutocorrectEnumOff TrackAutocorrectEnum = "off"
-	TrackAutocorrectEnumOn TrackAutocorrectEnum = "on"
+	TrackAutocorrectEnumOn  TrackAutocorrectEnum = "on"
 )
 
 type TrackContenteditableEnum string
 
 const (
+	TrackContenteditableEnumFalse         TrackContenteditableEnum = "false"
 	TrackContenteditableEnumPlaintextOnly TrackContenteditableEnum = "plaintext-only"
-	TrackContenteditableEnumTrue TrackContenteditableEnum = "true"
-	TrackContenteditableEnumFalse TrackContenteditableEnum = "false"
+	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
 )
 
 type TrackDirEnum string
 
 const (
 	TrackDirEnumAuto TrackDirEnum = "auto"
-	TrackDirEnumLtr TrackDirEnum = "ltr"
-	TrackDirEnumRtl TrackDirEnum = "rtl"
+	TrackDirEnumLtr  TrackDirEnum = "ltr"
+	TrackDirEnumRtl  TrackDirEnum = "rtl"
 )
 
 type TrackDraggableEnum string
 
 const (
 	TrackDraggableEnumFalse TrackDraggableEnum = "false"
-	TrackDraggableEnumTrue TrackDraggableEnum = "true"
+	TrackDraggableEnumTrue  TrackDraggableEnum = "true"
 )
 
 type TrackEnterkeyhintEnum string
 
 const (
+	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
+	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
+	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
-	TrackEnterkeyhintEnumSearch TrackEnterkeyhintEnum = "search"
-	TrackEnterkeyhintEnumSend TrackEnterkeyhintEnum = "send"
-	TrackEnterkeyhintEnumDone TrackEnterkeyhintEnum = "done"
-	TrackEnterkeyhintEnumEnter TrackEnterkeyhintEnum = "enter"
-	TrackEnterkeyhintEnumGo TrackEnterkeyhintEnum = "go"
-	TrackEnterkeyhintEnumNext TrackEnterkeyhintEnum = "next"
+	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
+	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
+	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
 )
 
 type TrackHiddenEnum string
 
 const (
-	TrackHiddenEnumHidden TrackHiddenEnum = "hidden"
+	TrackHiddenEnumHidden     TrackHiddenEnum = "hidden"
 	TrackHiddenEnumUntilFound TrackHiddenEnum = "until-found"
+)
+
+type TrackInputmodeEnum string
+
+const (
+	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
+	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
+	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
+	TrackInputmodeEnumDecimal TrackInputmodeEnum = "decimal"
+	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
+	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
+	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
+	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
+)
+
+type TrackSpellcheckEnum string
+
+const (
+	TrackSpellcheckEnumFalse TrackSpellcheckEnum = "false"
+	TrackSpellcheckEnumTrue  TrackSpellcheckEnum = "true"
+)
+
+type TrackTranslateEnum string
+
+const (
+	TrackTranslateEnumNo  TrackTranslateEnum = "no"
+	TrackTranslateEnumYes TrackTranslateEnum = "yes"
+)
+
+type TrackWritingsuggestionsEnum string
+
+const (
+	TrackWritingsuggestionsEnumFalse TrackWritingsuggestionsEnum = "false"
+	TrackWritingsuggestionsEnumTrue  TrackWritingsuggestionsEnum = "true"
 )
 
 type trackAttrs map[string]any
 
 func (e *TrackElement) Autocapitalize(a TrackAutocapitalizeEnum) *TrackElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TrackElement) Autocorrect(a TrackAutocorrectEnum) *TrackElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *TrackElement) Autofocus(b bool) *TrackElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *TrackElement) Class(s ...string) *TrackElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TrackElement) Contenteditable(a TrackContenteditableEnum) *TrackElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TrackElement) Dir(a TrackDirEnum) *TrackElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *TrackElement) Draggable(a TrackDraggableEnum) *TrackElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *TrackElement) Enterkeyhint(a TrackEnterkeyhintEnum) *TrackElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *TrackElement) Hidden(a TrackHiddenEnum) *TrackElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *TrackElement) Id(s string) *TrackElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *TrackElement) Inert(b bool) *TrackElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *TrackElement) Inputmode(a TrackInputmodeEnum) *TrackElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *TrackElement) Itemid(s string) *TrackElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *TrackElement) Itemprop(s ...string) *TrackElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *TrackElement) Itemref(s ...string) *TrackElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *TrackElement) Itemscope(b bool) *TrackElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *TrackElement) Itemtype(s ...string) *TrackElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *TrackElement) Lang(s string) *TrackElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *TrackElement) Nonce(s string) *TrackElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *TrackElement) Popover(s string) *TrackElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *TrackElement) Slot(s string) *TrackElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *TrackElement) Spellcheck(a TrackSpellcheckEnum) *TrackElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *TrackElement) Style(s string) *TrackElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *TrackElement) Tabindex(i int) *TrackElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *TrackElement) Title(s string) *TrackElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *TrackElement) Translate(a TrackTranslateEnum) *TrackElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *TrackElement) Writingsuggestions(a TrackWritingsuggestionsEnum) *TrackElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

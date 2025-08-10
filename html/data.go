@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DataElement struct {
 	attributes dataAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DataElement struct {
 // Spec Description: The data element represents its contents, along with a machine-readable form of those contents in the value attribute.
 func Data(children ...htemel.Node) *DataElement {
 	node := &DataElement{
-		children: children,
+		children:   children,
 		attributes: make(dataAttrs),
 	}
 
@@ -41,128 +42,258 @@ func DataIf(condition bool, children ...htemel.Node) *DataElement {
 type DataAutocapitalizeEnum string
 
 const (
-	DataAutocapitalizeEnumOff DataAutocapitalizeEnum = "off"
-	DataAutocapitalizeEnumOn DataAutocapitalizeEnum = "on"
-	DataAutocapitalizeEnumSentences DataAutocapitalizeEnum = "sentences"
-	DataAutocapitalizeEnumWords DataAutocapitalizeEnum = "words"
+	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
+	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
+	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
+	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
 	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
-	DataAutocapitalizeEnumNone DataAutocapitalizeEnum = "none"
+	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
 )
 
 type DataAutocorrectEnum string
 
 const (
 	DataAutocorrectEnumOff DataAutocorrectEnum = "off"
-	DataAutocorrectEnumOn DataAutocorrectEnum = "on"
+	DataAutocorrectEnumOn  DataAutocorrectEnum = "on"
 )
 
 type DataContenteditableEnum string
 
 const (
+	DataContenteditableEnumTrue          DataContenteditableEnum = "true"
+	DataContenteditableEnumFalse         DataContenteditableEnum = "false"
 	DataContenteditableEnumPlaintextOnly DataContenteditableEnum = "plaintext-only"
-	DataContenteditableEnumTrue DataContenteditableEnum = "true"
-	DataContenteditableEnumFalse DataContenteditableEnum = "false"
 )
 
 type DataDirEnum string
 
 const (
 	DataDirEnumAuto DataDirEnum = "auto"
-	DataDirEnumLtr DataDirEnum = "ltr"
-	DataDirEnumRtl DataDirEnum = "rtl"
+	DataDirEnumLtr  DataDirEnum = "ltr"
+	DataDirEnumRtl  DataDirEnum = "rtl"
 )
 
 type DataDraggableEnum string
 
 const (
+	DataDraggableEnumTrue  DataDraggableEnum = "true"
 	DataDraggableEnumFalse DataDraggableEnum = "false"
-	DataDraggableEnumTrue DataDraggableEnum = "true"
 )
 
 type DataEnterkeyhintEnum string
 
 const (
-	DataEnterkeyhintEnumNext DataEnterkeyhintEnum = "next"
+	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
+	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
-	DataEnterkeyhintEnumSearch DataEnterkeyhintEnum = "search"
-	DataEnterkeyhintEnumSend DataEnterkeyhintEnum = "send"
-	DataEnterkeyhintEnumDone DataEnterkeyhintEnum = "done"
-	DataEnterkeyhintEnumEnter DataEnterkeyhintEnum = "enter"
-	DataEnterkeyhintEnumGo DataEnterkeyhintEnum = "go"
+	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
+	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
+	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
+	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 )
 
 type DataHiddenEnum string
 
 const (
-	DataHiddenEnumHidden DataHiddenEnum = "hidden"
+	DataHiddenEnumHidden     DataHiddenEnum = "hidden"
 	DataHiddenEnumUntilFound DataHiddenEnum = "until-found"
+)
+
+type DataInputmodeEnum string
+
+const (
+	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
+	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
+	DataInputmodeEnumNone    DataInputmodeEnum = "none"
+	DataInputmodeEnumNumeric DataInputmodeEnum = "numeric"
+	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
+	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
+	DataInputmodeEnumText    DataInputmodeEnum = "text"
+	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
+)
+
+type DataSpellcheckEnum string
+
+const (
+	DataSpellcheckEnumFalse DataSpellcheckEnum = "false"
+	DataSpellcheckEnumTrue  DataSpellcheckEnum = "true"
+)
+
+type DataTranslateEnum string
+
+const (
+	DataTranslateEnumNo  DataTranslateEnum = "no"
+	DataTranslateEnumYes DataTranslateEnum = "yes"
+)
+
+type DataWritingsuggestionsEnum string
+
+const (
+	DataWritingsuggestionsEnumFalse DataWritingsuggestionsEnum = "false"
+	DataWritingsuggestionsEnumTrue  DataWritingsuggestionsEnum = "true"
 )
 
 type dataAttrs map[string]any
 
 func (e *DataElement) Autocapitalize(a DataAutocapitalizeEnum) *DataElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DataElement) Autocorrect(a DataAutocorrectEnum) *DataElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *DataElement) Autofocus(b bool) *DataElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *DataElement) Class(s ...string) *DataElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DataElement) Contenteditable(a DataContenteditableEnum) *DataElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DataElement) Dir(a DataDirEnum) *DataElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *DataElement) Draggable(a DataDraggableEnum) *DataElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *DataElement) Enterkeyhint(a DataEnterkeyhintEnum) *DataElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *DataElement) Hidden(a DataHiddenEnum) *DataElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *DataElement) Id(s string) *DataElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *DataElement) Inert(b bool) *DataElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *DataElement) Inputmode(a DataInputmodeEnum) *DataElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *DataElement) Itemid(s string) *DataElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *DataElement) Itemprop(s ...string) *DataElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DataElement) Itemref(s ...string) *DataElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DataElement) Itemscope(b bool) *DataElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *DataElement) Itemtype(s ...string) *DataElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DataElement) Lang(s string) *DataElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *DataElement) Nonce(s string) *DataElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *DataElement) Popover(s string) *DataElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *DataElement) Slot(s string) *DataElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *DataElement) Spellcheck(a DataSpellcheckEnum) *DataElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *DataElement) Style(s string) *DataElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *DataElement) Tabindex(i int) *DataElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *DataElement) Title(s string) *DataElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *DataElement) Translate(a DataTranslateEnum) *DataElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *DataElement) Writingsuggestions(a DataWritingsuggestionsEnum) *DataElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

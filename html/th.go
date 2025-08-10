@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ThElement struct {
 	attributes thAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type ThElement struct {
 // Spec Description: The th element represents a header cell in a table.
 func Th(children ...htemel.Node) *ThElement {
 	node := &ThElement{
-		children: children,
+		children:   children,
 		attributes: make(thAttrs),
 	}
 
@@ -41,128 +42,258 @@ func ThIf(condition bool, children ...htemel.Node) *ThElement {
 type ThAutocapitalizeEnum string
 
 const (
-	ThAutocapitalizeEnumOn ThAutocapitalizeEnum = "on"
-	ThAutocapitalizeEnumSentences ThAutocapitalizeEnum = "sentences"
-	ThAutocapitalizeEnumWords ThAutocapitalizeEnum = "words"
+	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
+	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
 	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
-	ThAutocapitalizeEnumNone ThAutocapitalizeEnum = "none"
-	ThAutocapitalizeEnumOff ThAutocapitalizeEnum = "off"
+	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
+	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
+	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 )
 
 type ThAutocorrectEnum string
 
 const (
 	ThAutocorrectEnumOff ThAutocorrectEnum = "off"
-	ThAutocorrectEnumOn ThAutocorrectEnum = "on"
+	ThAutocorrectEnumOn  ThAutocorrectEnum = "on"
 )
 
 type ThContenteditableEnum string
 
 const (
-	ThContenteditableEnumFalse ThContenteditableEnum = "false"
+	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumPlaintextOnly ThContenteditableEnum = "plaintext-only"
-	ThContenteditableEnumTrue ThContenteditableEnum = "true"
+	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
 )
 
 type ThDirEnum string
 
 const (
+	ThDirEnumLtr  ThDirEnum = "ltr"
+	ThDirEnumRtl  ThDirEnum = "rtl"
 	ThDirEnumAuto ThDirEnum = "auto"
-	ThDirEnumLtr ThDirEnum = "ltr"
-	ThDirEnumRtl ThDirEnum = "rtl"
 )
 
 type ThDraggableEnum string
 
 const (
 	ThDraggableEnumFalse ThDraggableEnum = "false"
-	ThDraggableEnumTrue ThDraggableEnum = "true"
+	ThDraggableEnumTrue  ThDraggableEnum = "true"
 )
 
 type ThEnterkeyhintEnum string
 
 const (
-	ThEnterkeyhintEnumSearch ThEnterkeyhintEnum = "search"
-	ThEnterkeyhintEnumSend ThEnterkeyhintEnum = "send"
-	ThEnterkeyhintEnumDone ThEnterkeyhintEnum = "done"
-	ThEnterkeyhintEnumEnter ThEnterkeyhintEnum = "enter"
-	ThEnterkeyhintEnumGo ThEnterkeyhintEnum = "go"
-	ThEnterkeyhintEnumNext ThEnterkeyhintEnum = "next"
+	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
+	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
+	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
+	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
+	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
+	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
 	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
 )
 
 type ThHiddenEnum string
 
 const (
-	ThHiddenEnumHidden ThHiddenEnum = "hidden"
+	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
 	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
+)
+
+type ThInputmodeEnum string
+
+const (
+	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
+	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
+	ThInputmodeEnumNone    ThInputmodeEnum = "none"
+	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
+	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
+	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
+	ThInputmodeEnumText    ThInputmodeEnum = "text"
+	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
+)
+
+type ThSpellcheckEnum string
+
+const (
+	ThSpellcheckEnumFalse ThSpellcheckEnum = "false"
+	ThSpellcheckEnumTrue  ThSpellcheckEnum = "true"
+)
+
+type ThTranslateEnum string
+
+const (
+	ThTranslateEnumNo  ThTranslateEnum = "no"
+	ThTranslateEnumYes ThTranslateEnum = "yes"
+)
+
+type ThWritingsuggestionsEnum string
+
+const (
+	ThWritingsuggestionsEnumFalse ThWritingsuggestionsEnum = "false"
+	ThWritingsuggestionsEnumTrue  ThWritingsuggestionsEnum = "true"
 )
 
 type thAttrs map[string]any
 
 func (e *ThElement) Autocapitalize(a ThAutocapitalizeEnum) *ThElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *ThElement) Autocorrect(a ThAutocorrectEnum) *ThElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *ThElement) Autofocus(b bool) *ThElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *ThElement) Class(s ...string) *ThElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *ThElement) Contenteditable(a ThContenteditableEnum) *ThElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *ThElement) Dir(a ThDirEnum) *ThElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *ThElement) Draggable(a ThDraggableEnum) *ThElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *ThElement) Enterkeyhint(a ThEnterkeyhintEnum) *ThElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *ThElement) Hidden(a ThHiddenEnum) *ThElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *ThElement) Id(s string) *ThElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *ThElement) Inert(b bool) *ThElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *ThElement) Inputmode(a ThInputmodeEnum) *ThElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *ThElement) Itemid(s string) *ThElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *ThElement) Itemprop(s ...string) *ThElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *ThElement) Itemref(s ...string) *ThElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *ThElement) Itemscope(b bool) *ThElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *ThElement) Itemtype(s ...string) *ThElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *ThElement) Lang(s string) *ThElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *ThElement) Nonce(s string) *ThElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *ThElement) Popover(s string) *ThElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *ThElement) Slot(s string) *ThElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *ThElement) Spellcheck(a ThSpellcheckEnum) *ThElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *ThElement) Style(s string) *ThElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *ThElement) Tabindex(i int) *ThElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *ThElement) Title(s string) *ThElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *ThElement) Translate(a ThTranslateEnum) *ThElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *ThElement) Writingsuggestions(a ThWritingsuggestionsEnum) *ThElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

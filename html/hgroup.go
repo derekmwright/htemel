@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type HgroupElement struct {
 	attributes hgroupAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type HgroupElement struct {
 // Spec Description: The hgroup element represents a heading and related content. The element may be used to group an h1–h6 element with one or more p elements containing content representing a subheading, alternative title, or tagline.
 func Hgroup(children ...htemel.Node) *HgroupElement {
 	node := &HgroupElement{
-		children: children,
+		children:   children,
 		attributes: make(hgroupAttrs),
 	}
 
@@ -42,127 +43,257 @@ type HgroupAutocapitalizeEnum string
 
 const (
 	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
-	HgroupAutocapitalizeEnumNone HgroupAutocapitalizeEnum = "none"
-	HgroupAutocapitalizeEnumOff HgroupAutocapitalizeEnum = "off"
-	HgroupAutocapitalizeEnumOn HgroupAutocapitalizeEnum = "on"
-	HgroupAutocapitalizeEnumSentences HgroupAutocapitalizeEnum = "sentences"
-	HgroupAutocapitalizeEnumWords HgroupAutocapitalizeEnum = "words"
+	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
+	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
+	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
+	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
+	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 )
 
 type HgroupAutocorrectEnum string
 
 const (
 	HgroupAutocorrectEnumOff HgroupAutocorrectEnum = "off"
-	HgroupAutocorrectEnumOn HgroupAutocorrectEnum = "on"
+	HgroupAutocorrectEnumOn  HgroupAutocorrectEnum = "on"
 )
 
 type HgroupContenteditableEnum string
 
 const (
-	HgroupContenteditableEnumFalse HgroupContenteditableEnum = "false"
+	HgroupContenteditableEnumFalse         HgroupContenteditableEnum = "false"
 	HgroupContenteditableEnumPlaintextOnly HgroupContenteditableEnum = "plaintext-only"
-	HgroupContenteditableEnumTrue HgroupContenteditableEnum = "true"
+	HgroupContenteditableEnumTrue          HgroupContenteditableEnum = "true"
 )
 
 type HgroupDirEnum string
 
 const (
 	HgroupDirEnumAuto HgroupDirEnum = "auto"
-	HgroupDirEnumLtr HgroupDirEnum = "ltr"
-	HgroupDirEnumRtl HgroupDirEnum = "rtl"
+	HgroupDirEnumLtr  HgroupDirEnum = "ltr"
+	HgroupDirEnumRtl  HgroupDirEnum = "rtl"
 )
 
 type HgroupDraggableEnum string
 
 const (
-	HgroupDraggableEnumTrue HgroupDraggableEnum = "true"
 	HgroupDraggableEnumFalse HgroupDraggableEnum = "false"
+	HgroupDraggableEnumTrue  HgroupDraggableEnum = "true"
 )
 
 type HgroupEnterkeyhintEnum string
 
 const (
-	HgroupEnterkeyhintEnumNext HgroupEnterkeyhintEnum = "next"
 	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
-	HgroupEnterkeyhintEnumSearch HgroupEnterkeyhintEnum = "search"
-	HgroupEnterkeyhintEnumSend HgroupEnterkeyhintEnum = "send"
-	HgroupEnterkeyhintEnumDone HgroupEnterkeyhintEnum = "done"
-	HgroupEnterkeyhintEnumEnter HgroupEnterkeyhintEnum = "enter"
-	HgroupEnterkeyhintEnumGo HgroupEnterkeyhintEnum = "go"
+	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
+	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
+	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
+	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
+	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
+	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
 )
 
 type HgroupHiddenEnum string
 
 const (
-	HgroupHiddenEnumHidden HgroupHiddenEnum = "hidden"
+	HgroupHiddenEnumHidden     HgroupHiddenEnum = "hidden"
 	HgroupHiddenEnumUntilFound HgroupHiddenEnum = "until-found"
+)
+
+type HgroupInputmodeEnum string
+
+const (
+	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
+	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
+	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
+	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
+	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
+	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
+	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
+	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
+)
+
+type HgroupSpellcheckEnum string
+
+const (
+	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
+	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
+)
+
+type HgroupTranslateEnum string
+
+const (
+	HgroupTranslateEnumNo  HgroupTranslateEnum = "no"
+	HgroupTranslateEnumYes HgroupTranslateEnum = "yes"
+)
+
+type HgroupWritingsuggestionsEnum string
+
+const (
+	HgroupWritingsuggestionsEnumFalse HgroupWritingsuggestionsEnum = "false"
+	HgroupWritingsuggestionsEnumTrue  HgroupWritingsuggestionsEnum = "true"
 )
 
 type hgroupAttrs map[string]any
 
 func (e *HgroupElement) Autocapitalize(a HgroupAutocapitalizeEnum) *HgroupElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *HgroupElement) Autocorrect(a HgroupAutocorrectEnum) *HgroupElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *HgroupElement) Autofocus(b bool) *HgroupElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *HgroupElement) Class(s ...string) *HgroupElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *HgroupElement) Contenteditable(a HgroupContenteditableEnum) *HgroupElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *HgroupElement) Dir(a HgroupDirEnum) *HgroupElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *HgroupElement) Draggable(a HgroupDraggableEnum) *HgroupElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *HgroupElement) Enterkeyhint(a HgroupEnterkeyhintEnum) *HgroupElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *HgroupElement) Hidden(a HgroupHiddenEnum) *HgroupElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *HgroupElement) Id(s string) *HgroupElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *HgroupElement) Inert(b bool) *HgroupElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *HgroupElement) Inputmode(a HgroupInputmodeEnum) *HgroupElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *HgroupElement) Itemid(s string) *HgroupElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *HgroupElement) Itemprop(s ...string) *HgroupElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HgroupElement) Itemref(s ...string) *HgroupElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HgroupElement) Itemscope(b bool) *HgroupElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *HgroupElement) Itemtype(s ...string) *HgroupElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HgroupElement) Lang(s string) *HgroupElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *HgroupElement) Nonce(s string) *HgroupElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *HgroupElement) Popover(s string) *HgroupElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *HgroupElement) Slot(s string) *HgroupElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *HgroupElement) Spellcheck(a HgroupSpellcheckEnum) *HgroupElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *HgroupElement) Style(s string) *HgroupElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *HgroupElement) Tabindex(i int) *HgroupElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *HgroupElement) Title(s string) *HgroupElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *HgroupElement) Translate(a HgroupTranslateEnum) *HgroupElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *HgroupElement) Writingsuggestions(a HgroupWritingsuggestionsEnum) *HgroupElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

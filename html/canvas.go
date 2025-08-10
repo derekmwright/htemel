@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type CanvasElement struct {
 	attributes canvasAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type CanvasElement struct {
 // Spec Description: The canvas element provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly.
 func Canvas(children ...htemel.Node) *CanvasElement {
 	node := &CanvasElement{
-		children: children,
+		children:   children,
 		attributes: make(canvasAttrs),
 	}
 
@@ -41,128 +42,258 @@ func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 type CanvasAutocapitalizeEnum string
 
 const (
-	CanvasAutocapitalizeEnumNone CanvasAutocapitalizeEnum = "none"
-	CanvasAutocapitalizeEnumOff CanvasAutocapitalizeEnum = "off"
-	CanvasAutocapitalizeEnumOn CanvasAutocapitalizeEnum = "on"
-	CanvasAutocapitalizeEnumSentences CanvasAutocapitalizeEnum = "sentences"
-	CanvasAutocapitalizeEnumWords CanvasAutocapitalizeEnum = "words"
+	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
+	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
+	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
 	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
+	CanvasAutocapitalizeEnumNone       CanvasAutocapitalizeEnum = "none"
+	CanvasAutocapitalizeEnumOff        CanvasAutocapitalizeEnum = "off"
 )
 
 type CanvasAutocorrectEnum string
 
 const (
 	CanvasAutocorrectEnumOff CanvasAutocorrectEnum = "off"
-	CanvasAutocorrectEnumOn CanvasAutocorrectEnum = "on"
+	CanvasAutocorrectEnumOn  CanvasAutocorrectEnum = "on"
 )
 
 type CanvasContenteditableEnum string
 
 const (
-	CanvasContenteditableEnumFalse CanvasContenteditableEnum = "false"
+	CanvasContenteditableEnumFalse         CanvasContenteditableEnum = "false"
 	CanvasContenteditableEnumPlaintextOnly CanvasContenteditableEnum = "plaintext-only"
-	CanvasContenteditableEnumTrue CanvasContenteditableEnum = "true"
+	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
 )
 
 type CanvasDirEnum string
 
 const (
+	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
 	CanvasDirEnumAuto CanvasDirEnum = "auto"
-	CanvasDirEnumLtr CanvasDirEnum = "ltr"
-	CanvasDirEnumRtl CanvasDirEnum = "rtl"
+	CanvasDirEnumLtr  CanvasDirEnum = "ltr"
 )
 
 type CanvasDraggableEnum string
 
 const (
-	CanvasDraggableEnumTrue CanvasDraggableEnum = "true"
 	CanvasDraggableEnumFalse CanvasDraggableEnum = "false"
+	CanvasDraggableEnumTrue  CanvasDraggableEnum = "true"
 )
 
 type CanvasEnterkeyhintEnum string
 
 const (
-	CanvasEnterkeyhintEnumGo CanvasEnterkeyhintEnum = "go"
-	CanvasEnterkeyhintEnumNext CanvasEnterkeyhintEnum = "next"
+	CanvasEnterkeyhintEnumGo       CanvasEnterkeyhintEnum = "go"
+	CanvasEnterkeyhintEnumNext     CanvasEnterkeyhintEnum = "next"
 	CanvasEnterkeyhintEnumPrevious CanvasEnterkeyhintEnum = "previous"
-	CanvasEnterkeyhintEnumSearch CanvasEnterkeyhintEnum = "search"
-	CanvasEnterkeyhintEnumSend CanvasEnterkeyhintEnum = "send"
-	CanvasEnterkeyhintEnumDone CanvasEnterkeyhintEnum = "done"
-	CanvasEnterkeyhintEnumEnter CanvasEnterkeyhintEnum = "enter"
+	CanvasEnterkeyhintEnumSearch   CanvasEnterkeyhintEnum = "search"
+	CanvasEnterkeyhintEnumSend     CanvasEnterkeyhintEnum = "send"
+	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
+	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
 )
 
 type CanvasHiddenEnum string
 
 const (
-	CanvasHiddenEnumHidden CanvasHiddenEnum = "hidden"
+	CanvasHiddenEnumHidden     CanvasHiddenEnum = "hidden"
 	CanvasHiddenEnumUntilFound CanvasHiddenEnum = "until-found"
+)
+
+type CanvasInputmodeEnum string
+
+const (
+	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
+	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
+	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
+	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
+	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
+	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
+	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
+	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
+)
+
+type CanvasSpellcheckEnum string
+
+const (
+	CanvasSpellcheckEnumFalse CanvasSpellcheckEnum = "false"
+	CanvasSpellcheckEnumTrue  CanvasSpellcheckEnum = "true"
+)
+
+type CanvasTranslateEnum string
+
+const (
+	CanvasTranslateEnumNo  CanvasTranslateEnum = "no"
+	CanvasTranslateEnumYes CanvasTranslateEnum = "yes"
+)
+
+type CanvasWritingsuggestionsEnum string
+
+const (
+	CanvasWritingsuggestionsEnumTrue  CanvasWritingsuggestionsEnum = "true"
+	CanvasWritingsuggestionsEnumFalse CanvasWritingsuggestionsEnum = "false"
 )
 
 type canvasAttrs map[string]any
 
 func (e *CanvasElement) Autocapitalize(a CanvasAutocapitalizeEnum) *CanvasElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *CanvasElement) Autocorrect(a CanvasAutocorrectEnum) *CanvasElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *CanvasElement) Autofocus(b bool) *CanvasElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *CanvasElement) Class(s ...string) *CanvasElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *CanvasElement) Contenteditable(a CanvasContenteditableEnum) *CanvasElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *CanvasElement) Dir(a CanvasDirEnum) *CanvasElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *CanvasElement) Draggable(a CanvasDraggableEnum) *CanvasElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *CanvasElement) Enterkeyhint(a CanvasEnterkeyhintEnum) *CanvasElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *CanvasElement) Hidden(a CanvasHiddenEnum) *CanvasElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *CanvasElement) Id(s string) *CanvasElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *CanvasElement) Inert(b bool) *CanvasElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *CanvasElement) Inputmode(a CanvasInputmodeEnum) *CanvasElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *CanvasElement) Itemid(s string) *CanvasElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *CanvasElement) Itemprop(s ...string) *CanvasElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *CanvasElement) Itemref(s ...string) *CanvasElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *CanvasElement) Itemscope(b bool) *CanvasElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *CanvasElement) Itemtype(s ...string) *CanvasElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *CanvasElement) Lang(s string) *CanvasElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *CanvasElement) Nonce(s string) *CanvasElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *CanvasElement) Popover(s string) *CanvasElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *CanvasElement) Slot(s string) *CanvasElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *CanvasElement) Spellcheck(a CanvasSpellcheckEnum) *CanvasElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *CanvasElement) Style(s string) *CanvasElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *CanvasElement) Tabindex(i int) *CanvasElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *CanvasElement) Title(s string) *CanvasElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *CanvasElement) Translate(a CanvasTranslateEnum) *CanvasElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *CanvasElement) Writingsuggestions(a CanvasWritingsuggestionsEnum) *CanvasElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

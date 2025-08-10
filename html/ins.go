@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type InsElement struct {
 	attributes insAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type InsElement struct {
 // Spec Description: The ins element represents an addition to the document.
 func Ins(children ...htemel.Node) *InsElement {
 	node := &InsElement{
-		children: children,
+		children:   children,
 		attributes: make(insAttrs),
 	}
 
@@ -42,127 +43,257 @@ type InsAutocapitalizeEnum string
 
 const (
 	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
-	InsAutocapitalizeEnumNone InsAutocapitalizeEnum = "none"
-	InsAutocapitalizeEnumOff InsAutocapitalizeEnum = "off"
-	InsAutocapitalizeEnumOn InsAutocapitalizeEnum = "on"
-	InsAutocapitalizeEnumSentences InsAutocapitalizeEnum = "sentences"
-	InsAutocapitalizeEnumWords InsAutocapitalizeEnum = "words"
+	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
+	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
+	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
+	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
+	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 )
 
 type InsAutocorrectEnum string
 
 const (
-	InsAutocorrectEnumOn InsAutocorrectEnum = "on"
 	InsAutocorrectEnumOff InsAutocorrectEnum = "off"
+	InsAutocorrectEnumOn  InsAutocorrectEnum = "on"
 )
 
 type InsContenteditableEnum string
 
 const (
-	InsContenteditableEnumTrue InsContenteditableEnum = "true"
-	InsContenteditableEnumFalse InsContenteditableEnum = "false"
+	InsContenteditableEnumFalse         InsContenteditableEnum = "false"
 	InsContenteditableEnumPlaintextOnly InsContenteditableEnum = "plaintext-only"
+	InsContenteditableEnumTrue          InsContenteditableEnum = "true"
 )
 
 type InsDirEnum string
 
 const (
 	InsDirEnumAuto InsDirEnum = "auto"
-	InsDirEnumLtr InsDirEnum = "ltr"
-	InsDirEnumRtl InsDirEnum = "rtl"
+	InsDirEnumLtr  InsDirEnum = "ltr"
+	InsDirEnumRtl  InsDirEnum = "rtl"
 )
 
 type InsDraggableEnum string
 
 const (
 	InsDraggableEnumFalse InsDraggableEnum = "false"
-	InsDraggableEnumTrue InsDraggableEnum = "true"
+	InsDraggableEnumTrue  InsDraggableEnum = "true"
 )
 
 type InsEnterkeyhintEnum string
 
 const (
-	InsEnterkeyhintEnumNext InsEnterkeyhintEnum = "next"
+	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
+	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
+	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
+	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
+	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
+	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
 	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
-	InsEnterkeyhintEnumSearch InsEnterkeyhintEnum = "search"
-	InsEnterkeyhintEnumSend InsEnterkeyhintEnum = "send"
-	InsEnterkeyhintEnumDone InsEnterkeyhintEnum = "done"
-	InsEnterkeyhintEnumEnter InsEnterkeyhintEnum = "enter"
-	InsEnterkeyhintEnumGo InsEnterkeyhintEnum = "go"
 )
 
 type InsHiddenEnum string
 
 const (
-	InsHiddenEnumHidden InsHiddenEnum = "hidden"
+	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
 	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
+)
+
+type InsInputmodeEnum string
+
+const (
+	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
+	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
+	InsInputmodeEnumNone    InsInputmodeEnum = "none"
+	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
+	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
+	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
+	InsInputmodeEnumText    InsInputmodeEnum = "text"
+	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
+)
+
+type InsSpellcheckEnum string
+
+const (
+	InsSpellcheckEnumFalse InsSpellcheckEnum = "false"
+	InsSpellcheckEnumTrue  InsSpellcheckEnum = "true"
+)
+
+type InsTranslateEnum string
+
+const (
+	InsTranslateEnumNo  InsTranslateEnum = "no"
+	InsTranslateEnumYes InsTranslateEnum = "yes"
+)
+
+type InsWritingsuggestionsEnum string
+
+const (
+	InsWritingsuggestionsEnumFalse InsWritingsuggestionsEnum = "false"
+	InsWritingsuggestionsEnumTrue  InsWritingsuggestionsEnum = "true"
 )
 
 type insAttrs map[string]any
 
 func (e *InsElement) Autocapitalize(a InsAutocapitalizeEnum) *InsElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *InsElement) Autocorrect(a InsAutocorrectEnum) *InsElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *InsElement) Autofocus(b bool) *InsElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *InsElement) Class(s ...string) *InsElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *InsElement) Contenteditable(a InsContenteditableEnum) *InsElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *InsElement) Dir(a InsDirEnum) *InsElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *InsElement) Draggable(a InsDraggableEnum) *InsElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *InsElement) Enterkeyhint(a InsEnterkeyhintEnum) *InsElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *InsElement) Hidden(a InsHiddenEnum) *InsElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *InsElement) Id(s string) *InsElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *InsElement) Inert(b bool) *InsElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *InsElement) Inputmode(a InsInputmodeEnum) *InsElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *InsElement) Itemid(s string) *InsElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *InsElement) Itemprop(s ...string) *InsElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *InsElement) Itemref(s ...string) *InsElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *InsElement) Itemscope(b bool) *InsElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *InsElement) Itemtype(s ...string) *InsElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *InsElement) Lang(s string) *InsElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *InsElement) Nonce(s string) *InsElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *InsElement) Popover(s string) *InsElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *InsElement) Slot(s string) *InsElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *InsElement) Spellcheck(a InsSpellcheckEnum) *InsElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *InsElement) Style(s string) *InsElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *InsElement) Tabindex(i int) *InsElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *InsElement) Title(s string) *InsElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *InsElement) Translate(a InsTranslateEnum) *InsElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *InsElement) Writingsuggestions(a InsWritingsuggestionsEnum) *InsElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

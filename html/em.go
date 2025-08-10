@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type EmElement struct {
 	attributes emAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type EmElement struct {
 // Spec Description: The em element represents stress emphasis of its contents.
 func Em(children ...htemel.Node) *EmElement {
 	node := &EmElement{
-		children: children,
+		children:   children,
 		attributes: make(emAttrs),
 	}
 
@@ -41,128 +42,258 @@ func EmIf(condition bool, children ...htemel.Node) *EmElement {
 type EmAutocapitalizeEnum string
 
 const (
+	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
+	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
+	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
-	EmAutocapitalizeEnumNone EmAutocapitalizeEnum = "none"
-	EmAutocapitalizeEnumOff EmAutocapitalizeEnum = "off"
-	EmAutocapitalizeEnumOn EmAutocapitalizeEnum = "on"
-	EmAutocapitalizeEnumSentences EmAutocapitalizeEnum = "sentences"
-	EmAutocapitalizeEnumWords EmAutocapitalizeEnum = "words"
+	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
+	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 )
 
 type EmAutocorrectEnum string
 
 const (
 	EmAutocorrectEnumOff EmAutocorrectEnum = "off"
-	EmAutocorrectEnumOn EmAutocorrectEnum = "on"
+	EmAutocorrectEnumOn  EmAutocorrectEnum = "on"
 )
 
 type EmContenteditableEnum string
 
 const (
-	EmContenteditableEnumTrue EmContenteditableEnum = "true"
-	EmContenteditableEnumFalse EmContenteditableEnum = "false"
 	EmContenteditableEnumPlaintextOnly EmContenteditableEnum = "plaintext-only"
+	EmContenteditableEnumTrue          EmContenteditableEnum = "true"
+	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 )
 
 type EmDirEnum string
 
 const (
 	EmDirEnumAuto EmDirEnum = "auto"
-	EmDirEnumLtr EmDirEnum = "ltr"
-	EmDirEnumRtl EmDirEnum = "rtl"
+	EmDirEnumLtr  EmDirEnum = "ltr"
+	EmDirEnumRtl  EmDirEnum = "rtl"
 )
 
 type EmDraggableEnum string
 
 const (
-	EmDraggableEnumTrue EmDraggableEnum = "true"
+	EmDraggableEnumTrue  EmDraggableEnum = "true"
 	EmDraggableEnumFalse EmDraggableEnum = "false"
 )
 
 type EmEnterkeyhintEnum string
 
 const (
-	EmEnterkeyhintEnumDone EmEnterkeyhintEnum = "done"
-	EmEnterkeyhintEnumEnter EmEnterkeyhintEnum = "enter"
-	EmEnterkeyhintEnumGo EmEnterkeyhintEnum = "go"
-	EmEnterkeyhintEnumNext EmEnterkeyhintEnum = "next"
 	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
-	EmEnterkeyhintEnumSearch EmEnterkeyhintEnum = "search"
-	EmEnterkeyhintEnumSend EmEnterkeyhintEnum = "send"
+	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
+	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
+	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
+	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
+	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
+	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
 )
 
 type EmHiddenEnum string
 
 const (
-	EmHiddenEnumHidden EmHiddenEnum = "hidden"
+	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
 	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
+)
+
+type EmInputmodeEnum string
+
+const (
+	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
+	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
+	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
+	EmInputmodeEnumText    EmInputmodeEnum = "text"
+	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
+	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
+	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
+	EmInputmodeEnumNone    EmInputmodeEnum = "none"
+)
+
+type EmSpellcheckEnum string
+
+const (
+	EmSpellcheckEnumFalse EmSpellcheckEnum = "false"
+	EmSpellcheckEnumTrue  EmSpellcheckEnum = "true"
+)
+
+type EmTranslateEnum string
+
+const (
+	EmTranslateEnumNo  EmTranslateEnum = "no"
+	EmTranslateEnumYes EmTranslateEnum = "yes"
+)
+
+type EmWritingsuggestionsEnum string
+
+const (
+	EmWritingsuggestionsEnumFalse EmWritingsuggestionsEnum = "false"
+	EmWritingsuggestionsEnumTrue  EmWritingsuggestionsEnum = "true"
 )
 
 type emAttrs map[string]any
 
 func (e *EmElement) Autocapitalize(a EmAutocapitalizeEnum) *EmElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *EmElement) Autocorrect(a EmAutocorrectEnum) *EmElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *EmElement) Autofocus(b bool) *EmElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *EmElement) Class(s ...string) *EmElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *EmElement) Contenteditable(a EmContenteditableEnum) *EmElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *EmElement) Dir(a EmDirEnum) *EmElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *EmElement) Draggable(a EmDraggableEnum) *EmElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *EmElement) Enterkeyhint(a EmEnterkeyhintEnum) *EmElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *EmElement) Hidden(a EmHiddenEnum) *EmElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *EmElement) Id(s string) *EmElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *EmElement) Inert(b bool) *EmElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *EmElement) Inputmode(a EmInputmodeEnum) *EmElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *EmElement) Itemid(s string) *EmElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *EmElement) Itemprop(s ...string) *EmElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *EmElement) Itemref(s ...string) *EmElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *EmElement) Itemscope(b bool) *EmElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *EmElement) Itemtype(s ...string) *EmElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *EmElement) Lang(s string) *EmElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *EmElement) Nonce(s string) *EmElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *EmElement) Popover(s string) *EmElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *EmElement) Slot(s string) *EmElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *EmElement) Spellcheck(a EmSpellcheckEnum) *EmElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *EmElement) Style(s string) *EmElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *EmElement) Tabindex(i int) *EmElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *EmElement) Title(s string) *EmElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *EmElement) Translate(a EmTranslateEnum) *EmElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *EmElement) Writingsuggestions(a EmWritingsuggestionsEnum) *EmElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

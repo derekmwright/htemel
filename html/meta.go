@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type MetaElement struct {
 	attributes metaAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type MetaElement struct {
 // Spec Description: The meta element represents various kinds of metadata that cannot be expressed using the title, base, link, style, and script elements.
 func Meta(children ...htemel.Node) *MetaElement {
 	node := &MetaElement{
-		children: children,
+		children:   children,
 		attributes: make(metaAttrs),
 	}
 
@@ -41,128 +42,258 @@ func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 type MetaAutocapitalizeEnum string
 
 const (
-	MetaAutocapitalizeEnumOn MetaAutocapitalizeEnum = "on"
-	MetaAutocapitalizeEnumSentences MetaAutocapitalizeEnum = "sentences"
-	MetaAutocapitalizeEnumWords MetaAutocapitalizeEnum = "words"
 	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
-	MetaAutocapitalizeEnumNone MetaAutocapitalizeEnum = "none"
-	MetaAutocapitalizeEnumOff MetaAutocapitalizeEnum = "off"
+	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
+	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
+	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
+	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
+	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
 )
 
 type MetaAutocorrectEnum string
 
 const (
 	MetaAutocorrectEnumOff MetaAutocorrectEnum = "off"
-	MetaAutocorrectEnumOn MetaAutocorrectEnum = "on"
+	MetaAutocorrectEnumOn  MetaAutocorrectEnum = "on"
 )
 
 type MetaContenteditableEnum string
 
 const (
-	MetaContenteditableEnumFalse MetaContenteditableEnum = "false"
+	MetaContenteditableEnumFalse         MetaContenteditableEnum = "false"
 	MetaContenteditableEnumPlaintextOnly MetaContenteditableEnum = "plaintext-only"
-	MetaContenteditableEnumTrue MetaContenteditableEnum = "true"
+	MetaContenteditableEnumTrue          MetaContenteditableEnum = "true"
 )
 
 type MetaDirEnum string
 
 const (
 	MetaDirEnumAuto MetaDirEnum = "auto"
-	MetaDirEnumLtr MetaDirEnum = "ltr"
-	MetaDirEnumRtl MetaDirEnum = "rtl"
+	MetaDirEnumLtr  MetaDirEnum = "ltr"
+	MetaDirEnumRtl  MetaDirEnum = "rtl"
 )
 
 type MetaDraggableEnum string
 
 const (
 	MetaDraggableEnumFalse MetaDraggableEnum = "false"
-	MetaDraggableEnumTrue MetaDraggableEnum = "true"
+	MetaDraggableEnumTrue  MetaDraggableEnum = "true"
 )
 
 type MetaEnterkeyhintEnum string
 
 const (
-	MetaEnterkeyhintEnumEnter MetaEnterkeyhintEnum = "enter"
-	MetaEnterkeyhintEnumGo MetaEnterkeyhintEnum = "go"
-	MetaEnterkeyhintEnumNext MetaEnterkeyhintEnum = "next"
+	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
+	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
+	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
+	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
 	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
-	MetaEnterkeyhintEnumSearch MetaEnterkeyhintEnum = "search"
-	MetaEnterkeyhintEnumSend MetaEnterkeyhintEnum = "send"
-	MetaEnterkeyhintEnumDone MetaEnterkeyhintEnum = "done"
+	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
+	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
 )
 
 type MetaHiddenEnum string
 
 const (
-	MetaHiddenEnumHidden MetaHiddenEnum = "hidden"
+	MetaHiddenEnumHidden     MetaHiddenEnum = "hidden"
 	MetaHiddenEnumUntilFound MetaHiddenEnum = "until-found"
+)
+
+type MetaInputmodeEnum string
+
+const (
+	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
+	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
+	MetaInputmodeEnumEmail   MetaInputmodeEnum = "email"
+	MetaInputmodeEnumNone    MetaInputmodeEnum = "none"
+	MetaInputmodeEnumNumeric MetaInputmodeEnum = "numeric"
+	MetaInputmodeEnumSearch  MetaInputmodeEnum = "search"
+	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
+	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
+)
+
+type MetaSpellcheckEnum string
+
+const (
+	MetaSpellcheckEnumFalse MetaSpellcheckEnum = "false"
+	MetaSpellcheckEnumTrue  MetaSpellcheckEnum = "true"
+)
+
+type MetaTranslateEnum string
+
+const (
+	MetaTranslateEnumYes MetaTranslateEnum = "yes"
+	MetaTranslateEnumNo  MetaTranslateEnum = "no"
+)
+
+type MetaWritingsuggestionsEnum string
+
+const (
+	MetaWritingsuggestionsEnumFalse MetaWritingsuggestionsEnum = "false"
+	MetaWritingsuggestionsEnumTrue  MetaWritingsuggestionsEnum = "true"
 )
 
 type metaAttrs map[string]any
 
 func (e *MetaElement) Autocapitalize(a MetaAutocapitalizeEnum) *MetaElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *MetaElement) Autocorrect(a MetaAutocorrectEnum) *MetaElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *MetaElement) Autofocus(b bool) *MetaElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *MetaElement) Class(s ...string) *MetaElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *MetaElement) Contenteditable(a MetaContenteditableEnum) *MetaElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *MetaElement) Dir(a MetaDirEnum) *MetaElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *MetaElement) Draggable(a MetaDraggableEnum) *MetaElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *MetaElement) Enterkeyhint(a MetaEnterkeyhintEnum) *MetaElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *MetaElement) Hidden(a MetaHiddenEnum) *MetaElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *MetaElement) Id(s string) *MetaElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *MetaElement) Inert(b bool) *MetaElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *MetaElement) Inputmode(a MetaInputmodeEnum) *MetaElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *MetaElement) Itemid(s string) *MetaElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *MetaElement) Itemprop(s ...string) *MetaElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *MetaElement) Itemref(s ...string) *MetaElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *MetaElement) Itemscope(b bool) *MetaElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *MetaElement) Itemtype(s ...string) *MetaElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *MetaElement) Lang(s string) *MetaElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *MetaElement) Nonce(s string) *MetaElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *MetaElement) Popover(s string) *MetaElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *MetaElement) Slot(s string) *MetaElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *MetaElement) Spellcheck(a MetaSpellcheckEnum) *MetaElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *MetaElement) Style(s string) *MetaElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *MetaElement) Tabindex(i int) *MetaElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *MetaElement) Title(s string) *MetaElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *MetaElement) Translate(a MetaTranslateEnum) *MetaElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *MetaElement) Writingsuggestions(a MetaWritingsuggestionsEnum) *MetaElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

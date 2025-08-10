@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type TdElement struct {
 	attributes tdAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type TdElement struct {
 // Spec Description: The td element represents a data cell in a table.
 func Td(children ...htemel.Node) *TdElement {
 	node := &TdElement{
-		children: children,
+		children:   children,
 		attributes: make(tdAttrs),
 	}
 
@@ -41,128 +42,258 @@ func TdIf(condition bool, children ...htemel.Node) *TdElement {
 type TdAutocapitalizeEnum string
 
 const (
-	TdAutocapitalizeEnumWords TdAutocapitalizeEnum = "words"
 	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
-	TdAutocapitalizeEnumNone TdAutocapitalizeEnum = "none"
-	TdAutocapitalizeEnumOff TdAutocapitalizeEnum = "off"
-	TdAutocapitalizeEnumOn TdAutocapitalizeEnum = "on"
-	TdAutocapitalizeEnumSentences TdAutocapitalizeEnum = "sentences"
+	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
+	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
+	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
+	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
+	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
 )
 
 type TdAutocorrectEnum string
 
 const (
 	TdAutocorrectEnumOff TdAutocorrectEnum = "off"
-	TdAutocorrectEnumOn TdAutocorrectEnum = "on"
+	TdAutocorrectEnumOn  TdAutocorrectEnum = "on"
 )
 
 type TdContenteditableEnum string
 
 const (
-	TdContenteditableEnumFalse TdContenteditableEnum = "false"
+	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
 	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
-	TdContenteditableEnumTrue TdContenteditableEnum = "true"
+	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
 )
 
 type TdDirEnum string
 
 const (
-	TdDirEnumLtr TdDirEnum = "ltr"
-	TdDirEnumRtl TdDirEnum = "rtl"
 	TdDirEnumAuto TdDirEnum = "auto"
+	TdDirEnumLtr  TdDirEnum = "ltr"
+	TdDirEnumRtl  TdDirEnum = "rtl"
 )
 
 type TdDraggableEnum string
 
 const (
 	TdDraggableEnumFalse TdDraggableEnum = "false"
-	TdDraggableEnumTrue TdDraggableEnum = "true"
+	TdDraggableEnumTrue  TdDraggableEnum = "true"
 )
 
 type TdEnterkeyhintEnum string
 
 const (
+	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
+	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
 	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
-	TdEnterkeyhintEnumSearch TdEnterkeyhintEnum = "search"
-	TdEnterkeyhintEnumSend TdEnterkeyhintEnum = "send"
-	TdEnterkeyhintEnumDone TdEnterkeyhintEnum = "done"
-	TdEnterkeyhintEnumEnter TdEnterkeyhintEnum = "enter"
-	TdEnterkeyhintEnumGo TdEnterkeyhintEnum = "go"
-	TdEnterkeyhintEnumNext TdEnterkeyhintEnum = "next"
+	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
+	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
+	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
+	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
 )
 
 type TdHiddenEnum string
 
 const (
-	TdHiddenEnumHidden TdHiddenEnum = "hidden"
+	TdHiddenEnumHidden     TdHiddenEnum = "hidden"
 	TdHiddenEnumUntilFound TdHiddenEnum = "until-found"
+)
+
+type TdInputmodeEnum string
+
+const (
+	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
+	TdInputmodeEnumNone    TdInputmodeEnum = "none"
+	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
+	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
+	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
+	TdInputmodeEnumText    TdInputmodeEnum = "text"
+	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
+	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
+)
+
+type TdSpellcheckEnum string
+
+const (
+	TdSpellcheckEnumFalse TdSpellcheckEnum = "false"
+	TdSpellcheckEnumTrue  TdSpellcheckEnum = "true"
+)
+
+type TdTranslateEnum string
+
+const (
+	TdTranslateEnumNo  TdTranslateEnum = "no"
+	TdTranslateEnumYes TdTranslateEnum = "yes"
+)
+
+type TdWritingsuggestionsEnum string
+
+const (
+	TdWritingsuggestionsEnumFalse TdWritingsuggestionsEnum = "false"
+	TdWritingsuggestionsEnumTrue  TdWritingsuggestionsEnum = "true"
 )
 
 type tdAttrs map[string]any
 
 func (e *TdElement) Autocapitalize(a TdAutocapitalizeEnum) *TdElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *TdElement) Autocorrect(a TdAutocorrectEnum) *TdElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *TdElement) Autofocus(b bool) *TdElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *TdElement) Class(s ...string) *TdElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *TdElement) Contenteditable(a TdContenteditableEnum) *TdElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *TdElement) Dir(a TdDirEnum) *TdElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *TdElement) Draggable(a TdDraggableEnum) *TdElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *TdElement) Enterkeyhint(a TdEnterkeyhintEnum) *TdElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *TdElement) Hidden(a TdHiddenEnum) *TdElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *TdElement) Id(s string) *TdElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *TdElement) Inert(b bool) *TdElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *TdElement) Inputmode(a TdInputmodeEnum) *TdElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *TdElement) Itemid(s string) *TdElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *TdElement) Itemprop(s ...string) *TdElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *TdElement) Itemref(s ...string) *TdElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *TdElement) Itemscope(b bool) *TdElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *TdElement) Itemtype(s ...string) *TdElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *TdElement) Lang(s string) *TdElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *TdElement) Nonce(s string) *TdElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *TdElement) Popover(s string) *TdElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *TdElement) Slot(s string) *TdElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *TdElement) Spellcheck(a TdSpellcheckEnum) *TdElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *TdElement) Style(s string) *TdElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *TdElement) Tabindex(i int) *TdElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *TdElement) Title(s string) *TdElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *TdElement) Translate(a TdTranslateEnum) *TdElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *TdElement) Writingsuggestions(a TdWritingsuggestionsEnum) *TdElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

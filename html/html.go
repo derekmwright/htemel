@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type HtmlElement struct {
 	attributes htmlAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type HtmlElement struct {
 // Spec Description: The html element represents the root of an HTML document.
 func Html(children ...htemel.Node) *HtmlElement {
 	node := &HtmlElement{
-		children: children,
+		children:   children,
 		attributes: make(htmlAttrs),
 	}
 
@@ -41,128 +42,258 @@ func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
 type HtmlAutocapitalizeEnum string
 
 const (
-	HtmlAutocapitalizeEnumOff HtmlAutocapitalizeEnum = "off"
-	HtmlAutocapitalizeEnumOn HtmlAutocapitalizeEnum = "on"
-	HtmlAutocapitalizeEnumSentences HtmlAutocapitalizeEnum = "sentences"
-	HtmlAutocapitalizeEnumWords HtmlAutocapitalizeEnum = "words"
 	HtmlAutocapitalizeEnumCharacters HtmlAutocapitalizeEnum = "characters"
-	HtmlAutocapitalizeEnumNone HtmlAutocapitalizeEnum = "none"
+	HtmlAutocapitalizeEnumNone       HtmlAutocapitalizeEnum = "none"
+	HtmlAutocapitalizeEnumOff        HtmlAutocapitalizeEnum = "off"
+	HtmlAutocapitalizeEnumOn         HtmlAutocapitalizeEnum = "on"
+	HtmlAutocapitalizeEnumSentences  HtmlAutocapitalizeEnum = "sentences"
+	HtmlAutocapitalizeEnumWords      HtmlAutocapitalizeEnum = "words"
 )
 
 type HtmlAutocorrectEnum string
 
 const (
 	HtmlAutocorrectEnumOff HtmlAutocorrectEnum = "off"
-	HtmlAutocorrectEnumOn HtmlAutocorrectEnum = "on"
+	HtmlAutocorrectEnumOn  HtmlAutocorrectEnum = "on"
 )
 
 type HtmlContenteditableEnum string
 
 const (
-	HtmlContenteditableEnumFalse HtmlContenteditableEnum = "false"
+	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumPlaintextOnly HtmlContenteditableEnum = "plaintext-only"
-	HtmlContenteditableEnumTrue HtmlContenteditableEnum = "true"
+	HtmlContenteditableEnumTrue          HtmlContenteditableEnum = "true"
 )
 
 type HtmlDirEnum string
 
 const (
-	HtmlDirEnumRtl HtmlDirEnum = "rtl"
 	HtmlDirEnumAuto HtmlDirEnum = "auto"
-	HtmlDirEnumLtr HtmlDirEnum = "ltr"
+	HtmlDirEnumLtr  HtmlDirEnum = "ltr"
+	HtmlDirEnumRtl  HtmlDirEnum = "rtl"
 )
 
 type HtmlDraggableEnum string
 
 const (
 	HtmlDraggableEnumFalse HtmlDraggableEnum = "false"
-	HtmlDraggableEnumTrue HtmlDraggableEnum = "true"
+	HtmlDraggableEnumTrue  HtmlDraggableEnum = "true"
 )
 
 type HtmlEnterkeyhintEnum string
 
 const (
-	HtmlEnterkeyhintEnumNext HtmlEnterkeyhintEnum = "next"
+	HtmlEnterkeyhintEnumNext     HtmlEnterkeyhintEnum = "next"
 	HtmlEnterkeyhintEnumPrevious HtmlEnterkeyhintEnum = "previous"
-	HtmlEnterkeyhintEnumSearch HtmlEnterkeyhintEnum = "search"
-	HtmlEnterkeyhintEnumSend HtmlEnterkeyhintEnum = "send"
-	HtmlEnterkeyhintEnumDone HtmlEnterkeyhintEnum = "done"
-	HtmlEnterkeyhintEnumEnter HtmlEnterkeyhintEnum = "enter"
-	HtmlEnterkeyhintEnumGo HtmlEnterkeyhintEnum = "go"
+	HtmlEnterkeyhintEnumSearch   HtmlEnterkeyhintEnum = "search"
+	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
+	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
+	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
+	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
 )
 
 type HtmlHiddenEnum string
 
 const (
-	HtmlHiddenEnumHidden HtmlHiddenEnum = "hidden"
+	HtmlHiddenEnumHidden     HtmlHiddenEnum = "hidden"
 	HtmlHiddenEnumUntilFound HtmlHiddenEnum = "until-found"
+)
+
+type HtmlInputmodeEnum string
+
+const (
+	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
+	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
+	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
+	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
+	HtmlInputmodeEnumNone    HtmlInputmodeEnum = "none"
+	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
+	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
+	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
+)
+
+type HtmlSpellcheckEnum string
+
+const (
+	HtmlSpellcheckEnumFalse HtmlSpellcheckEnum = "false"
+	HtmlSpellcheckEnumTrue  HtmlSpellcheckEnum = "true"
+)
+
+type HtmlTranslateEnum string
+
+const (
+	HtmlTranslateEnumNo  HtmlTranslateEnum = "no"
+	HtmlTranslateEnumYes HtmlTranslateEnum = "yes"
+)
+
+type HtmlWritingsuggestionsEnum string
+
+const (
+	HtmlWritingsuggestionsEnumFalse HtmlWritingsuggestionsEnum = "false"
+	HtmlWritingsuggestionsEnumTrue  HtmlWritingsuggestionsEnum = "true"
 )
 
 type htmlAttrs map[string]any
 
 func (e *HtmlElement) Autocapitalize(a HtmlAutocapitalizeEnum) *HtmlElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *HtmlElement) Autocorrect(a HtmlAutocorrectEnum) *HtmlElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *HtmlElement) Autofocus(b bool) *HtmlElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *HtmlElement) Class(s ...string) *HtmlElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *HtmlElement) Contenteditable(a HtmlContenteditableEnum) *HtmlElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *HtmlElement) Dir(a HtmlDirEnum) *HtmlElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *HtmlElement) Draggable(a HtmlDraggableEnum) *HtmlElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *HtmlElement) Enterkeyhint(a HtmlEnterkeyhintEnum) *HtmlElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *HtmlElement) Hidden(a HtmlHiddenEnum) *HtmlElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *HtmlElement) Id(s string) *HtmlElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *HtmlElement) Inert(b bool) *HtmlElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *HtmlElement) Inputmode(a HtmlInputmodeEnum) *HtmlElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *HtmlElement) Itemid(s string) *HtmlElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *HtmlElement) Itemprop(s ...string) *HtmlElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HtmlElement) Itemref(s ...string) *HtmlElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HtmlElement) Itemscope(b bool) *HtmlElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *HtmlElement) Itemtype(s ...string) *HtmlElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HtmlElement) Lang(s string) *HtmlElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *HtmlElement) Nonce(s string) *HtmlElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *HtmlElement) Popover(s string) *HtmlElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *HtmlElement) Slot(s string) *HtmlElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *HtmlElement) Spellcheck(a HtmlSpellcheckEnum) *HtmlElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *HtmlElement) Style(s string) *HtmlElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *HtmlElement) Tabindex(i int) *HtmlElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *HtmlElement) Title(s string) *HtmlElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *HtmlElement) Translate(a HtmlTranslateEnum) *HtmlElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *HtmlElement) Writingsuggestions(a HtmlWritingsuggestionsEnum) *HtmlElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

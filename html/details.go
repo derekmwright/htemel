@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DetailsElement struct {
 	attributes detailsAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DetailsElement struct {
 // Spec Description: The details element represents a disclosure widget from which the user can obtain additional information or controls.
 func Details(children ...htemel.Node) *DetailsElement {
 	node := &DetailsElement{
-		children: children,
+		children:   children,
 		attributes: make(detailsAttrs),
 	}
 
@@ -41,128 +42,258 @@ func DetailsIf(condition bool, children ...htemel.Node) *DetailsElement {
 type DetailsAutocapitalizeEnum string
 
 const (
+	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
-	DetailsAutocapitalizeEnumNone DetailsAutocapitalizeEnum = "none"
-	DetailsAutocapitalizeEnumOff DetailsAutocapitalizeEnum = "off"
-	DetailsAutocapitalizeEnumOn DetailsAutocapitalizeEnum = "on"
-	DetailsAutocapitalizeEnumSentences DetailsAutocapitalizeEnum = "sentences"
-	DetailsAutocapitalizeEnumWords DetailsAutocapitalizeEnum = "words"
+	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
+	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
+	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
+	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
 )
 
 type DetailsAutocorrectEnum string
 
 const (
 	DetailsAutocorrectEnumOff DetailsAutocorrectEnum = "off"
-	DetailsAutocorrectEnumOn DetailsAutocorrectEnum = "on"
+	DetailsAutocorrectEnumOn  DetailsAutocorrectEnum = "on"
 )
 
 type DetailsContenteditableEnum string
 
 const (
-	DetailsContenteditableEnumFalse DetailsContenteditableEnum = "false"
+	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 	DetailsContenteditableEnumPlaintextOnly DetailsContenteditableEnum = "plaintext-only"
-	DetailsContenteditableEnumTrue DetailsContenteditableEnum = "true"
+	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
 )
 
 type DetailsDirEnum string
 
 const (
 	DetailsDirEnumAuto DetailsDirEnum = "auto"
-	DetailsDirEnumLtr DetailsDirEnum = "ltr"
-	DetailsDirEnumRtl DetailsDirEnum = "rtl"
+	DetailsDirEnumLtr  DetailsDirEnum = "ltr"
+	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
 )
 
 type DetailsDraggableEnum string
 
 const (
-	DetailsDraggableEnumTrue DetailsDraggableEnum = "true"
 	DetailsDraggableEnumFalse DetailsDraggableEnum = "false"
+	DetailsDraggableEnumTrue  DetailsDraggableEnum = "true"
 )
 
 type DetailsEnterkeyhintEnum string
 
 const (
-	DetailsEnterkeyhintEnumGo DetailsEnterkeyhintEnum = "go"
-	DetailsEnterkeyhintEnumNext DetailsEnterkeyhintEnum = "next"
+	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
+	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
+	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
+	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
 	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
-	DetailsEnterkeyhintEnumSearch DetailsEnterkeyhintEnum = "search"
-	DetailsEnterkeyhintEnumSend DetailsEnterkeyhintEnum = "send"
-	DetailsEnterkeyhintEnumDone DetailsEnterkeyhintEnum = "done"
-	DetailsEnterkeyhintEnumEnter DetailsEnterkeyhintEnum = "enter"
+	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
+	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 )
 
 type DetailsHiddenEnum string
 
 const (
-	DetailsHiddenEnumHidden DetailsHiddenEnum = "hidden"
+	DetailsHiddenEnumHidden     DetailsHiddenEnum = "hidden"
 	DetailsHiddenEnumUntilFound DetailsHiddenEnum = "until-found"
+)
+
+type DetailsInputmodeEnum string
+
+const (
+	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
+	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
+	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
+	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
+	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
+	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
+	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
+	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
+)
+
+type DetailsSpellcheckEnum string
+
+const (
+	DetailsSpellcheckEnumFalse DetailsSpellcheckEnum = "false"
+	DetailsSpellcheckEnumTrue  DetailsSpellcheckEnum = "true"
+)
+
+type DetailsTranslateEnum string
+
+const (
+	DetailsTranslateEnumNo  DetailsTranslateEnum = "no"
+	DetailsTranslateEnumYes DetailsTranslateEnum = "yes"
+)
+
+type DetailsWritingsuggestionsEnum string
+
+const (
+	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
+	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
 )
 
 type detailsAttrs map[string]any
 
 func (e *DetailsElement) Autocapitalize(a DetailsAutocapitalizeEnum) *DetailsElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DetailsElement) Autocorrect(a DetailsAutocorrectEnum) *DetailsElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *DetailsElement) Autofocus(b bool) *DetailsElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *DetailsElement) Class(s ...string) *DetailsElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DetailsElement) Contenteditable(a DetailsContenteditableEnum) *DetailsElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DetailsElement) Dir(a DetailsDirEnum) *DetailsElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *DetailsElement) Draggable(a DetailsDraggableEnum) *DetailsElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *DetailsElement) Enterkeyhint(a DetailsEnterkeyhintEnum) *DetailsElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *DetailsElement) Hidden(a DetailsHiddenEnum) *DetailsElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *DetailsElement) Id(s string) *DetailsElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *DetailsElement) Inert(b bool) *DetailsElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *DetailsElement) Inputmode(a DetailsInputmodeEnum) *DetailsElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *DetailsElement) Itemid(s string) *DetailsElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *DetailsElement) Itemprop(s ...string) *DetailsElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DetailsElement) Itemref(s ...string) *DetailsElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DetailsElement) Itemscope(b bool) *DetailsElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *DetailsElement) Itemtype(s ...string) *DetailsElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DetailsElement) Lang(s string) *DetailsElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *DetailsElement) Nonce(s string) *DetailsElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *DetailsElement) Popover(s string) *DetailsElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *DetailsElement) Slot(s string) *DetailsElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *DetailsElement) Spellcheck(a DetailsSpellcheckEnum) *DetailsElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *DetailsElement) Style(s string) *DetailsElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *DetailsElement) Tabindex(i int) *DetailsElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *DetailsElement) Title(s string) *DetailsElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *DetailsElement) Translate(a DetailsTranslateEnum) *DetailsElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *DetailsElement) Writingsuggestions(a DetailsWritingsuggestionsEnum) *DetailsElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

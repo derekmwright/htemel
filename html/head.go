@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type HeadElement struct {
 	attributes headAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type HeadElement struct {
 // Spec Description: The head element represents a collection of metadata for the Document.
 func Head(children ...htemel.Node) *HeadElement {
 	node := &HeadElement{
-		children: children,
+		children:   children,
 		attributes: make(headAttrs),
 	}
 
@@ -42,127 +43,257 @@ type HeadAutocapitalizeEnum string
 
 const (
 	HeadAutocapitalizeEnumCharacters HeadAutocapitalizeEnum = "characters"
-	HeadAutocapitalizeEnumNone HeadAutocapitalizeEnum = "none"
-	HeadAutocapitalizeEnumOff HeadAutocapitalizeEnum = "off"
-	HeadAutocapitalizeEnumOn HeadAutocapitalizeEnum = "on"
-	HeadAutocapitalizeEnumSentences HeadAutocapitalizeEnum = "sentences"
-	HeadAutocapitalizeEnumWords HeadAutocapitalizeEnum = "words"
+	HeadAutocapitalizeEnumNone       HeadAutocapitalizeEnum = "none"
+	HeadAutocapitalizeEnumOff        HeadAutocapitalizeEnum = "off"
+	HeadAutocapitalizeEnumOn         HeadAutocapitalizeEnum = "on"
+	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
+	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 )
 
 type HeadAutocorrectEnum string
 
 const (
 	HeadAutocorrectEnumOff HeadAutocorrectEnum = "off"
-	HeadAutocorrectEnumOn HeadAutocorrectEnum = "on"
+	HeadAutocorrectEnumOn  HeadAutocorrectEnum = "on"
 )
 
 type HeadContenteditableEnum string
 
 const (
-	HeadContenteditableEnumFalse HeadContenteditableEnum = "false"
+	HeadContenteditableEnumFalse         HeadContenteditableEnum = "false"
 	HeadContenteditableEnumPlaintextOnly HeadContenteditableEnum = "plaintext-only"
-	HeadContenteditableEnumTrue HeadContenteditableEnum = "true"
+	HeadContenteditableEnumTrue          HeadContenteditableEnum = "true"
 )
 
 type HeadDirEnum string
 
 const (
-	HeadDirEnumLtr HeadDirEnum = "ltr"
-	HeadDirEnumRtl HeadDirEnum = "rtl"
 	HeadDirEnumAuto HeadDirEnum = "auto"
+	HeadDirEnumLtr  HeadDirEnum = "ltr"
+	HeadDirEnumRtl  HeadDirEnum = "rtl"
 )
 
 type HeadDraggableEnum string
 
 const (
 	HeadDraggableEnumFalse HeadDraggableEnum = "false"
-	HeadDraggableEnumTrue HeadDraggableEnum = "true"
+	HeadDraggableEnumTrue  HeadDraggableEnum = "true"
 )
 
 type HeadEnterkeyhintEnum string
 
 const (
-	HeadEnterkeyhintEnumDone HeadEnterkeyhintEnum = "done"
-	HeadEnterkeyhintEnumEnter HeadEnterkeyhintEnum = "enter"
-	HeadEnterkeyhintEnumGo HeadEnterkeyhintEnum = "go"
-	HeadEnterkeyhintEnumNext HeadEnterkeyhintEnum = "next"
+	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
+	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
+	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
+	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
-	HeadEnterkeyhintEnumSearch HeadEnterkeyhintEnum = "search"
-	HeadEnterkeyhintEnumSend HeadEnterkeyhintEnum = "send"
+	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
+	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
 )
 
 type HeadHiddenEnum string
 
 const (
-	HeadHiddenEnumHidden HeadHiddenEnum = "hidden"
+	HeadHiddenEnumHidden     HeadHiddenEnum = "hidden"
 	HeadHiddenEnumUntilFound HeadHiddenEnum = "until-found"
+)
+
+type HeadInputmodeEnum string
+
+const (
+	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
+	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
+	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
+	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
+	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
+	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
+	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
+	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
+)
+
+type HeadSpellcheckEnum string
+
+const (
+	HeadSpellcheckEnumFalse HeadSpellcheckEnum = "false"
+	HeadSpellcheckEnumTrue  HeadSpellcheckEnum = "true"
+)
+
+type HeadTranslateEnum string
+
+const (
+	HeadTranslateEnumNo  HeadTranslateEnum = "no"
+	HeadTranslateEnumYes HeadTranslateEnum = "yes"
+)
+
+type HeadWritingsuggestionsEnum string
+
+const (
+	HeadWritingsuggestionsEnumTrue  HeadWritingsuggestionsEnum = "true"
+	HeadWritingsuggestionsEnumFalse HeadWritingsuggestionsEnum = "false"
 )
 
 type headAttrs map[string]any
 
 func (e *HeadElement) Autocapitalize(a HeadAutocapitalizeEnum) *HeadElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *HeadElement) Autocorrect(a HeadAutocorrectEnum) *HeadElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *HeadElement) Autofocus(b bool) *HeadElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *HeadElement) Class(s ...string) *HeadElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *HeadElement) Contenteditable(a HeadContenteditableEnum) *HeadElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *HeadElement) Dir(a HeadDirEnum) *HeadElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *HeadElement) Draggable(a HeadDraggableEnum) *HeadElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *HeadElement) Enterkeyhint(a HeadEnterkeyhintEnum) *HeadElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *HeadElement) Hidden(a HeadHiddenEnum) *HeadElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *HeadElement) Id(s string) *HeadElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *HeadElement) Inert(b bool) *HeadElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *HeadElement) Inputmode(a HeadInputmodeEnum) *HeadElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *HeadElement) Itemid(s string) *HeadElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *HeadElement) Itemprop(s ...string) *HeadElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HeadElement) Itemref(s ...string) *HeadElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HeadElement) Itemscope(b bool) *HeadElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *HeadElement) Itemtype(s ...string) *HeadElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HeadElement) Lang(s string) *HeadElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *HeadElement) Nonce(s string) *HeadElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *HeadElement) Popover(s string) *HeadElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *HeadElement) Slot(s string) *HeadElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *HeadElement) Spellcheck(a HeadSpellcheckEnum) *HeadElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *HeadElement) Style(s string) *HeadElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *HeadElement) Tabindex(i int) *HeadElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *HeadElement) Title(s string) *HeadElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *HeadElement) Translate(a HeadTranslateEnum) *HeadElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *HeadElement) Writingsuggestions(a HeadWritingsuggestionsEnum) *HeadElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

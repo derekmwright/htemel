@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type VideoElement struct {
 	attributes videoAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type VideoElement struct {
 // Spec Description: A video element is used for playing videos or movies, and audio files with captions.
 func Video(children ...htemel.Node) *VideoElement {
 	node := &VideoElement{
-		children: children,
+		children:   children,
 		attributes: make(videoAttrs),
 	}
 
@@ -41,128 +42,258 @@ func VideoIf(condition bool, children ...htemel.Node) *VideoElement {
 type VideoAutocapitalizeEnum string
 
 const (
-	VideoAutocapitalizeEnumSentences VideoAutocapitalizeEnum = "sentences"
-	VideoAutocapitalizeEnumWords VideoAutocapitalizeEnum = "words"
 	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
-	VideoAutocapitalizeEnumNone VideoAutocapitalizeEnum = "none"
-	VideoAutocapitalizeEnumOff VideoAutocapitalizeEnum = "off"
-	VideoAutocapitalizeEnumOn VideoAutocapitalizeEnum = "on"
+	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
+	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
+	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
+	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
+	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
 )
 
 type VideoAutocorrectEnum string
 
 const (
+	VideoAutocorrectEnumOn  VideoAutocorrectEnum = "on"
 	VideoAutocorrectEnumOff VideoAutocorrectEnum = "off"
-	VideoAutocorrectEnumOn VideoAutocorrectEnum = "on"
 )
 
 type VideoContenteditableEnum string
 
 const (
-	VideoContenteditableEnumFalse VideoContenteditableEnum = "false"
+	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
 	VideoContenteditableEnumPlaintextOnly VideoContenteditableEnum = "plaintext-only"
-	VideoContenteditableEnumTrue VideoContenteditableEnum = "true"
+	VideoContenteditableEnumTrue          VideoContenteditableEnum = "true"
 )
 
 type VideoDirEnum string
 
 const (
+	VideoDirEnumRtl  VideoDirEnum = "rtl"
 	VideoDirEnumAuto VideoDirEnum = "auto"
-	VideoDirEnumLtr VideoDirEnum = "ltr"
-	VideoDirEnumRtl VideoDirEnum = "rtl"
+	VideoDirEnumLtr  VideoDirEnum = "ltr"
 )
 
 type VideoDraggableEnum string
 
 const (
 	VideoDraggableEnumFalse VideoDraggableEnum = "false"
-	VideoDraggableEnumTrue VideoDraggableEnum = "true"
+	VideoDraggableEnumTrue  VideoDraggableEnum = "true"
 )
 
 type VideoEnterkeyhintEnum string
 
 const (
-	VideoEnterkeyhintEnumDone VideoEnterkeyhintEnum = "done"
-	VideoEnterkeyhintEnumEnter VideoEnterkeyhintEnum = "enter"
-	VideoEnterkeyhintEnumGo VideoEnterkeyhintEnum = "go"
-	VideoEnterkeyhintEnumNext VideoEnterkeyhintEnum = "next"
+	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
+	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
 	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
-	VideoEnterkeyhintEnumSearch VideoEnterkeyhintEnum = "search"
-	VideoEnterkeyhintEnumSend VideoEnterkeyhintEnum = "send"
+	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
+	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
+	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
+	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
 )
 
 type VideoHiddenEnum string
 
 const (
-	VideoHiddenEnumHidden VideoHiddenEnum = "hidden"
+	VideoHiddenEnumHidden     VideoHiddenEnum = "hidden"
 	VideoHiddenEnumUntilFound VideoHiddenEnum = "until-found"
+)
+
+type VideoInputmodeEnum string
+
+const (
+	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
+	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
+	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
+	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
+	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
+	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
+	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
+	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
+)
+
+type VideoSpellcheckEnum string
+
+const (
+	VideoSpellcheckEnumFalse VideoSpellcheckEnum = "false"
+	VideoSpellcheckEnumTrue  VideoSpellcheckEnum = "true"
+)
+
+type VideoTranslateEnum string
+
+const (
+	VideoTranslateEnumNo  VideoTranslateEnum = "no"
+	VideoTranslateEnumYes VideoTranslateEnum = "yes"
+)
+
+type VideoWritingsuggestionsEnum string
+
+const (
+	VideoWritingsuggestionsEnumFalse VideoWritingsuggestionsEnum = "false"
+	VideoWritingsuggestionsEnumTrue  VideoWritingsuggestionsEnum = "true"
 )
 
 type videoAttrs map[string]any
 
 func (e *VideoElement) Autocapitalize(a VideoAutocapitalizeEnum) *VideoElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *VideoElement) Autocorrect(a VideoAutocorrectEnum) *VideoElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *VideoElement) Autofocus(b bool) *VideoElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *VideoElement) Class(s ...string) *VideoElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *VideoElement) Contenteditable(a VideoContenteditableEnum) *VideoElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *VideoElement) Dir(a VideoDirEnum) *VideoElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *VideoElement) Draggable(a VideoDraggableEnum) *VideoElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *VideoElement) Enterkeyhint(a VideoEnterkeyhintEnum) *VideoElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *VideoElement) Hidden(a VideoHiddenEnum) *VideoElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *VideoElement) Id(s string) *VideoElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *VideoElement) Inert(b bool) *VideoElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *VideoElement) Inputmode(a VideoInputmodeEnum) *VideoElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *VideoElement) Itemid(s string) *VideoElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *VideoElement) Itemprop(s ...string) *VideoElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *VideoElement) Itemref(s ...string) *VideoElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *VideoElement) Itemscope(b bool) *VideoElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *VideoElement) Itemtype(s ...string) *VideoElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *VideoElement) Lang(s string) *VideoElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *VideoElement) Nonce(s string) *VideoElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *VideoElement) Popover(s string) *VideoElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *VideoElement) Slot(s string) *VideoElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *VideoElement) Spellcheck(a VideoSpellcheckEnum) *VideoElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *VideoElement) Style(s string) *VideoElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *VideoElement) Tabindex(i int) *VideoElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *VideoElement) Title(s string) *VideoElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *VideoElement) Translate(a VideoTranslateEnum) *VideoElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *VideoElement) Writingsuggestions(a VideoWritingsuggestionsEnum) *VideoElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

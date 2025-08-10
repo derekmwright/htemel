@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DelElement struct {
 	attributes delAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DelElement struct {
 // Spec Description: The del element represents a removal from the document.
 func Del(children ...htemel.Node) *DelElement {
 	node := &DelElement{
-		children: children,
+		children:   children,
 		attributes: make(delAttrs),
 	}
 
@@ -41,128 +42,258 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 type DelAutocapitalizeEnum string
 
 const (
-	DelAutocapitalizeEnumOff DelAutocapitalizeEnum = "off"
-	DelAutocapitalizeEnumOn DelAutocapitalizeEnum = "on"
-	DelAutocapitalizeEnumSentences DelAutocapitalizeEnum = "sentences"
-	DelAutocapitalizeEnumWords DelAutocapitalizeEnum = "words"
+	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
+	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
+	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
 	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
-	DelAutocapitalizeEnumNone DelAutocapitalizeEnum = "none"
+	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
+	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
 )
 
 type DelAutocorrectEnum string
 
 const (
 	DelAutocorrectEnumOff DelAutocorrectEnum = "off"
-	DelAutocorrectEnumOn DelAutocorrectEnum = "on"
+	DelAutocorrectEnumOn  DelAutocorrectEnum = "on"
 )
 
 type DelContenteditableEnum string
 
 const (
-	DelContenteditableEnumFalse DelContenteditableEnum = "false"
 	DelContenteditableEnumPlaintextOnly DelContenteditableEnum = "plaintext-only"
-	DelContenteditableEnumTrue DelContenteditableEnum = "true"
+	DelContenteditableEnumTrue          DelContenteditableEnum = "true"
+	DelContenteditableEnumFalse         DelContenteditableEnum = "false"
 )
 
 type DelDirEnum string
 
 const (
+	DelDirEnumLtr  DelDirEnum = "ltr"
+	DelDirEnumRtl  DelDirEnum = "rtl"
 	DelDirEnumAuto DelDirEnum = "auto"
-	DelDirEnumLtr DelDirEnum = "ltr"
-	DelDirEnumRtl DelDirEnum = "rtl"
 )
 
 type DelDraggableEnum string
 
 const (
-	DelDraggableEnumTrue DelDraggableEnum = "true"
 	DelDraggableEnumFalse DelDraggableEnum = "false"
+	DelDraggableEnumTrue  DelDraggableEnum = "true"
 )
 
 type DelEnterkeyhintEnum string
 
 const (
-	DelEnterkeyhintEnumDone DelEnterkeyhintEnum = "done"
-	DelEnterkeyhintEnumEnter DelEnterkeyhintEnum = "enter"
-	DelEnterkeyhintEnumGo DelEnterkeyhintEnum = "go"
-	DelEnterkeyhintEnumNext DelEnterkeyhintEnum = "next"
+	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
+	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
+	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
+	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
 	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
-	DelEnterkeyhintEnumSearch DelEnterkeyhintEnum = "search"
-	DelEnterkeyhintEnumSend DelEnterkeyhintEnum = "send"
+	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
+	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
 )
 
 type DelHiddenEnum string
 
 const (
-	DelHiddenEnumHidden DelHiddenEnum = "hidden"
+	DelHiddenEnumHidden     DelHiddenEnum = "hidden"
 	DelHiddenEnumUntilFound DelHiddenEnum = "until-found"
+)
+
+type DelInputmodeEnum string
+
+const (
+	DelInputmodeEnumNone    DelInputmodeEnum = "none"
+	DelInputmodeEnumNumeric DelInputmodeEnum = "numeric"
+	DelInputmodeEnumSearch  DelInputmodeEnum = "search"
+	DelInputmodeEnumTel     DelInputmodeEnum = "tel"
+	DelInputmodeEnumText    DelInputmodeEnum = "text"
+	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
+	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
+	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
+)
+
+type DelSpellcheckEnum string
+
+const (
+	DelSpellcheckEnumFalse DelSpellcheckEnum = "false"
+	DelSpellcheckEnumTrue  DelSpellcheckEnum = "true"
+)
+
+type DelTranslateEnum string
+
+const (
+	DelTranslateEnumYes DelTranslateEnum = "yes"
+	DelTranslateEnumNo  DelTranslateEnum = "no"
+)
+
+type DelWritingsuggestionsEnum string
+
+const (
+	DelWritingsuggestionsEnumFalse DelWritingsuggestionsEnum = "false"
+	DelWritingsuggestionsEnumTrue  DelWritingsuggestionsEnum = "true"
 )
 
 type delAttrs map[string]any
 
 func (e *DelElement) Autocapitalize(a DelAutocapitalizeEnum) *DelElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DelElement) Autocorrect(a DelAutocorrectEnum) *DelElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *DelElement) Autofocus(b bool) *DelElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *DelElement) Class(s ...string) *DelElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DelElement) Contenteditable(a DelContenteditableEnum) *DelElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DelElement) Dir(a DelDirEnum) *DelElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *DelElement) Draggable(a DelDraggableEnum) *DelElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *DelElement) Enterkeyhint(a DelEnterkeyhintEnum) *DelElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *DelElement) Hidden(a DelHiddenEnum) *DelElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *DelElement) Id(s string) *DelElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *DelElement) Inert(b bool) *DelElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *DelElement) Inputmode(a DelInputmodeEnum) *DelElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *DelElement) Itemid(s string) *DelElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *DelElement) Itemprop(s ...string) *DelElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DelElement) Itemref(s ...string) *DelElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DelElement) Itemscope(b bool) *DelElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *DelElement) Itemtype(s ...string) *DelElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DelElement) Lang(s string) *DelElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *DelElement) Nonce(s string) *DelElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *DelElement) Popover(s string) *DelElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *DelElement) Slot(s string) *DelElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *DelElement) Spellcheck(a DelSpellcheckEnum) *DelElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *DelElement) Style(s string) *DelElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *DelElement) Tabindex(i int) *DelElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *DelElement) Title(s string) *DelElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *DelElement) Translate(a DelTranslateEnum) *DelElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *DelElement) Writingsuggestions(a DelWritingsuggestionsEnum) *DelElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

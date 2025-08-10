@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type OptionElement struct {
 	attributes optionAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type OptionElement struct {
 // Spec Description: The option element represents an option in a select element or as part of a list of suggestions in a datalist element.
 func Option(children ...htemel.Node) *OptionElement {
 	node := &OptionElement{
-		children: children,
+		children:   children,
 		attributes: make(optionAttrs),
 	}
 
@@ -41,128 +42,258 @@ func OptionIf(condition bool, children ...htemel.Node) *OptionElement {
 type OptionAutocapitalizeEnum string
 
 const (
-	OptionAutocapitalizeEnumNone OptionAutocapitalizeEnum = "none"
-	OptionAutocapitalizeEnumOff OptionAutocapitalizeEnum = "off"
-	OptionAutocapitalizeEnumOn OptionAutocapitalizeEnum = "on"
-	OptionAutocapitalizeEnumSentences OptionAutocapitalizeEnum = "sentences"
-	OptionAutocapitalizeEnumWords OptionAutocapitalizeEnum = "words"
 	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
+	OptionAutocapitalizeEnumNone       OptionAutocapitalizeEnum = "none"
+	OptionAutocapitalizeEnumOff        OptionAutocapitalizeEnum = "off"
+	OptionAutocapitalizeEnumOn         OptionAutocapitalizeEnum = "on"
+	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
+	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 )
 
 type OptionAutocorrectEnum string
 
 const (
-	OptionAutocorrectEnumOn OptionAutocorrectEnum = "on"
 	OptionAutocorrectEnumOff OptionAutocorrectEnum = "off"
+	OptionAutocorrectEnumOn  OptionAutocorrectEnum = "on"
 )
 
 type OptionContenteditableEnum string
 
 const (
+	OptionContenteditableEnumFalse         OptionContenteditableEnum = "false"
 	OptionContenteditableEnumPlaintextOnly OptionContenteditableEnum = "plaintext-only"
-	OptionContenteditableEnumTrue OptionContenteditableEnum = "true"
-	OptionContenteditableEnumFalse OptionContenteditableEnum = "false"
+	OptionContenteditableEnumTrue          OptionContenteditableEnum = "true"
 )
 
 type OptionDirEnum string
 
 const (
 	OptionDirEnumAuto OptionDirEnum = "auto"
-	OptionDirEnumLtr OptionDirEnum = "ltr"
-	OptionDirEnumRtl OptionDirEnum = "rtl"
+	OptionDirEnumLtr  OptionDirEnum = "ltr"
+	OptionDirEnumRtl  OptionDirEnum = "rtl"
 )
 
 type OptionDraggableEnum string
 
 const (
 	OptionDraggableEnumFalse OptionDraggableEnum = "false"
-	OptionDraggableEnumTrue OptionDraggableEnum = "true"
+	OptionDraggableEnumTrue  OptionDraggableEnum = "true"
 )
 
 type OptionEnterkeyhintEnum string
 
 const (
-	OptionEnterkeyhintEnumSearch OptionEnterkeyhintEnum = "search"
-	OptionEnterkeyhintEnumSend OptionEnterkeyhintEnum = "send"
-	OptionEnterkeyhintEnumDone OptionEnterkeyhintEnum = "done"
-	OptionEnterkeyhintEnumEnter OptionEnterkeyhintEnum = "enter"
-	OptionEnterkeyhintEnumGo OptionEnterkeyhintEnum = "go"
-	OptionEnterkeyhintEnumNext OptionEnterkeyhintEnum = "next"
 	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
+	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
+	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
+	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
+	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
+	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
+	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 )
 
 type OptionHiddenEnum string
 
 const (
-	OptionHiddenEnumHidden OptionHiddenEnum = "hidden"
+	OptionHiddenEnumHidden     OptionHiddenEnum = "hidden"
 	OptionHiddenEnumUntilFound OptionHiddenEnum = "until-found"
+)
+
+type OptionInputmodeEnum string
+
+const (
+	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
+	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
+	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
+	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
+	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
+	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
+	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
+	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
+)
+
+type OptionSpellcheckEnum string
+
+const (
+	OptionSpellcheckEnumFalse OptionSpellcheckEnum = "false"
+	OptionSpellcheckEnumTrue  OptionSpellcheckEnum = "true"
+)
+
+type OptionTranslateEnum string
+
+const (
+	OptionTranslateEnumNo  OptionTranslateEnum = "no"
+	OptionTranslateEnumYes OptionTranslateEnum = "yes"
+)
+
+type OptionWritingsuggestionsEnum string
+
+const (
+	OptionWritingsuggestionsEnumFalse OptionWritingsuggestionsEnum = "false"
+	OptionWritingsuggestionsEnumTrue  OptionWritingsuggestionsEnum = "true"
 )
 
 type optionAttrs map[string]any
 
 func (e *OptionElement) Autocapitalize(a OptionAutocapitalizeEnum) *OptionElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *OptionElement) Autocorrect(a OptionAutocorrectEnum) *OptionElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *OptionElement) Autofocus(b bool) *OptionElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *OptionElement) Class(s ...string) *OptionElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *OptionElement) Contenteditable(a OptionContenteditableEnum) *OptionElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *OptionElement) Dir(a OptionDirEnum) *OptionElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *OptionElement) Draggable(a OptionDraggableEnum) *OptionElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *OptionElement) Enterkeyhint(a OptionEnterkeyhintEnum) *OptionElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *OptionElement) Hidden(a OptionHiddenEnum) *OptionElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *OptionElement) Id(s string) *OptionElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *OptionElement) Inert(b bool) *OptionElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *OptionElement) Inputmode(a OptionInputmodeEnum) *OptionElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *OptionElement) Itemid(s string) *OptionElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *OptionElement) Itemprop(s ...string) *OptionElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *OptionElement) Itemref(s ...string) *OptionElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *OptionElement) Itemscope(b bool) *OptionElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *OptionElement) Itemtype(s ...string) *OptionElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *OptionElement) Lang(s string) *OptionElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *OptionElement) Nonce(s string) *OptionElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *OptionElement) Popover(s string) *OptionElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *OptionElement) Slot(s string) *OptionElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *OptionElement) Spellcheck(a OptionSpellcheckEnum) *OptionElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *OptionElement) Style(s string) *OptionElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *OptionElement) Tabindex(i int) *OptionElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *OptionElement) Title(s string) *OptionElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *OptionElement) Translate(a OptionTranslateEnum) *OptionElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *OptionElement) Writingsuggestions(a OptionWritingsuggestionsEnum) *OptionElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

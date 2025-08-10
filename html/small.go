@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SmallElement struct {
 	attributes smallAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SmallElement struct {
 // Spec Description: The small element represents side comments such as small print.
 func Small(children ...htemel.Node) *SmallElement {
 	node := &SmallElement{
-		children: children,
+		children:   children,
 		attributes: make(smallAttrs),
 	}
 
@@ -41,128 +42,258 @@ func SmallIf(condition bool, children ...htemel.Node) *SmallElement {
 type SmallAutocapitalizeEnum string
 
 const (
-	SmallAutocapitalizeEnumWords SmallAutocapitalizeEnum = "words"
 	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
-	SmallAutocapitalizeEnumNone SmallAutocapitalizeEnum = "none"
-	SmallAutocapitalizeEnumOff SmallAutocapitalizeEnum = "off"
-	SmallAutocapitalizeEnumOn SmallAutocapitalizeEnum = "on"
-	SmallAutocapitalizeEnumSentences SmallAutocapitalizeEnum = "sentences"
+	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
+	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
+	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
+	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
+	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
 )
 
 type SmallAutocorrectEnum string
 
 const (
-	SmallAutocorrectEnumOn SmallAutocorrectEnum = "on"
 	SmallAutocorrectEnumOff SmallAutocorrectEnum = "off"
+	SmallAutocorrectEnumOn  SmallAutocorrectEnum = "on"
 )
 
 type SmallContenteditableEnum string
 
 const (
-	SmallContenteditableEnumFalse SmallContenteditableEnum = "false"
+	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
 	SmallContenteditableEnumPlaintextOnly SmallContenteditableEnum = "plaintext-only"
-	SmallContenteditableEnumTrue SmallContenteditableEnum = "true"
+	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
 )
 
 type SmallDirEnum string
 
 const (
-	SmallDirEnumRtl SmallDirEnum = "rtl"
+	SmallDirEnumLtr  SmallDirEnum = "ltr"
+	SmallDirEnumRtl  SmallDirEnum = "rtl"
 	SmallDirEnumAuto SmallDirEnum = "auto"
-	SmallDirEnumLtr SmallDirEnum = "ltr"
 )
 
 type SmallDraggableEnum string
 
 const (
 	SmallDraggableEnumFalse SmallDraggableEnum = "false"
-	SmallDraggableEnumTrue SmallDraggableEnum = "true"
+	SmallDraggableEnumTrue  SmallDraggableEnum = "true"
 )
 
 type SmallEnterkeyhintEnum string
 
 const (
-	SmallEnterkeyhintEnumDone SmallEnterkeyhintEnum = "done"
-	SmallEnterkeyhintEnumEnter SmallEnterkeyhintEnum = "enter"
-	SmallEnterkeyhintEnumGo SmallEnterkeyhintEnum = "go"
-	SmallEnterkeyhintEnumNext SmallEnterkeyhintEnum = "next"
+	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
+	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
+	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
 	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
-	SmallEnterkeyhintEnumSearch SmallEnterkeyhintEnum = "search"
-	SmallEnterkeyhintEnumSend SmallEnterkeyhintEnum = "send"
+	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
+	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
+	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
 )
 
 type SmallHiddenEnum string
 
 const (
-	SmallHiddenEnumHidden SmallHiddenEnum = "hidden"
+	SmallHiddenEnumHidden     SmallHiddenEnum = "hidden"
 	SmallHiddenEnumUntilFound SmallHiddenEnum = "until-found"
+)
+
+type SmallInputmodeEnum string
+
+const (
+	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
+	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
+	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
+	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
+	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
+	SmallInputmodeEnumSearch  SmallInputmodeEnum = "search"
+	SmallInputmodeEnumTel     SmallInputmodeEnum = "tel"
+	SmallInputmodeEnumText    SmallInputmodeEnum = "text"
+)
+
+type SmallSpellcheckEnum string
+
+const (
+	SmallSpellcheckEnumFalse SmallSpellcheckEnum = "false"
+	SmallSpellcheckEnumTrue  SmallSpellcheckEnum = "true"
+)
+
+type SmallTranslateEnum string
+
+const (
+	SmallTranslateEnumNo  SmallTranslateEnum = "no"
+	SmallTranslateEnumYes SmallTranslateEnum = "yes"
+)
+
+type SmallWritingsuggestionsEnum string
+
+const (
+	SmallWritingsuggestionsEnumFalse SmallWritingsuggestionsEnum = "false"
+	SmallWritingsuggestionsEnumTrue  SmallWritingsuggestionsEnum = "true"
 )
 
 type smallAttrs map[string]any
 
 func (e *SmallElement) Autocapitalize(a SmallAutocapitalizeEnum) *SmallElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SmallElement) Autocorrect(a SmallAutocorrectEnum) *SmallElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *SmallElement) Autofocus(b bool) *SmallElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *SmallElement) Class(s ...string) *SmallElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SmallElement) Contenteditable(a SmallContenteditableEnum) *SmallElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SmallElement) Dir(a SmallDirEnum) *SmallElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *SmallElement) Draggable(a SmallDraggableEnum) *SmallElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *SmallElement) Enterkeyhint(a SmallEnterkeyhintEnum) *SmallElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *SmallElement) Hidden(a SmallHiddenEnum) *SmallElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *SmallElement) Id(s string) *SmallElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *SmallElement) Inert(b bool) *SmallElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *SmallElement) Inputmode(a SmallInputmodeEnum) *SmallElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *SmallElement) Itemid(s string) *SmallElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *SmallElement) Itemprop(s ...string) *SmallElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SmallElement) Itemref(s ...string) *SmallElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SmallElement) Itemscope(b bool) *SmallElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *SmallElement) Itemtype(s ...string) *SmallElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SmallElement) Lang(s string) *SmallElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *SmallElement) Nonce(s string) *SmallElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *SmallElement) Popover(s string) *SmallElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *SmallElement) Slot(s string) *SmallElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *SmallElement) Spellcheck(a SmallSpellcheckEnum) *SmallElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *SmallElement) Style(s string) *SmallElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *SmallElement) Tabindex(i int) *SmallElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *SmallElement) Title(s string) *SmallElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *SmallElement) Translate(a SmallTranslateEnum) *SmallElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *SmallElement) Writingsuggestions(a SmallWritingsuggestionsEnum) *SmallElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

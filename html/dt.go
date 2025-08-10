@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type DtElement struct {
 	attributes dtAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type DtElement struct {
 // Spec Description: The dt element represents the term, or name, part of a term-description group in a description list (dl element).
 func Dt(children ...htemel.Node) *DtElement {
 	node := &DtElement{
-		children: children,
+		children:   children,
 		attributes: make(dtAttrs),
 	}
 
@@ -41,128 +42,258 @@ func DtIf(condition bool, children ...htemel.Node) *DtElement {
 type DtAutocapitalizeEnum string
 
 const (
-	DtAutocapitalizeEnumWords DtAutocapitalizeEnum = "words"
 	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
-	DtAutocapitalizeEnumNone DtAutocapitalizeEnum = "none"
-	DtAutocapitalizeEnumOff DtAutocapitalizeEnum = "off"
-	DtAutocapitalizeEnumOn DtAutocapitalizeEnum = "on"
-	DtAutocapitalizeEnumSentences DtAutocapitalizeEnum = "sentences"
+	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
+	DtAutocapitalizeEnumOff        DtAutocapitalizeEnum = "off"
+	DtAutocapitalizeEnumOn         DtAutocapitalizeEnum = "on"
+	DtAutocapitalizeEnumSentences  DtAutocapitalizeEnum = "sentences"
+	DtAutocapitalizeEnumWords      DtAutocapitalizeEnum = "words"
 )
 
 type DtAutocorrectEnum string
 
 const (
 	DtAutocorrectEnumOff DtAutocorrectEnum = "off"
-	DtAutocorrectEnumOn DtAutocorrectEnum = "on"
+	DtAutocorrectEnumOn  DtAutocorrectEnum = "on"
 )
 
 type DtContenteditableEnum string
 
 const (
-	DtContenteditableEnumTrue DtContenteditableEnum = "true"
-	DtContenteditableEnumFalse DtContenteditableEnum = "false"
+	DtContenteditableEnumFalse         DtContenteditableEnum = "false"
 	DtContenteditableEnumPlaintextOnly DtContenteditableEnum = "plaintext-only"
+	DtContenteditableEnumTrue          DtContenteditableEnum = "true"
 )
 
 type DtDirEnum string
 
 const (
 	DtDirEnumAuto DtDirEnum = "auto"
-	DtDirEnumLtr DtDirEnum = "ltr"
-	DtDirEnumRtl DtDirEnum = "rtl"
+	DtDirEnumLtr  DtDirEnum = "ltr"
+	DtDirEnumRtl  DtDirEnum = "rtl"
 )
 
 type DtDraggableEnum string
 
 const (
 	DtDraggableEnumFalse DtDraggableEnum = "false"
-	DtDraggableEnumTrue DtDraggableEnum = "true"
+	DtDraggableEnumTrue  DtDraggableEnum = "true"
 )
 
 type DtEnterkeyhintEnum string
 
 const (
-	DtEnterkeyhintEnumEnter DtEnterkeyhintEnum = "enter"
-	DtEnterkeyhintEnumGo DtEnterkeyhintEnum = "go"
-	DtEnterkeyhintEnumNext DtEnterkeyhintEnum = "next"
+	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
+	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
+	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
-	DtEnterkeyhintEnumSearch DtEnterkeyhintEnum = "search"
-	DtEnterkeyhintEnumSend DtEnterkeyhintEnum = "send"
-	DtEnterkeyhintEnumDone DtEnterkeyhintEnum = "done"
+	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
+	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
+	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
 )
 
 type DtHiddenEnum string
 
 const (
+	DtHiddenEnumHidden     DtHiddenEnum = "hidden"
 	DtHiddenEnumUntilFound DtHiddenEnum = "until-found"
-	DtHiddenEnumHidden DtHiddenEnum = "hidden"
+)
+
+type DtInputmodeEnum string
+
+const (
+	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
+	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
+	DtInputmodeEnumText    DtInputmodeEnum = "text"
+	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
+	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
+	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
+	DtInputmodeEnumNone    DtInputmodeEnum = "none"
+	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
+)
+
+type DtSpellcheckEnum string
+
+const (
+	DtSpellcheckEnumTrue  DtSpellcheckEnum = "true"
+	DtSpellcheckEnumFalse DtSpellcheckEnum = "false"
+)
+
+type DtTranslateEnum string
+
+const (
+	DtTranslateEnumYes DtTranslateEnum = "yes"
+	DtTranslateEnumNo  DtTranslateEnum = "no"
+)
+
+type DtWritingsuggestionsEnum string
+
+const (
+	DtWritingsuggestionsEnumFalse DtWritingsuggestionsEnum = "false"
+	DtWritingsuggestionsEnumTrue  DtWritingsuggestionsEnum = "true"
 )
 
 type dtAttrs map[string]any
 
 func (e *DtElement) Autocapitalize(a DtAutocapitalizeEnum) *DtElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *DtElement) Autocorrect(a DtAutocorrectEnum) *DtElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *DtElement) Autofocus(b bool) *DtElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *DtElement) Class(s ...string) *DtElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *DtElement) Contenteditable(a DtContenteditableEnum) *DtElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *DtElement) Dir(a DtDirEnum) *DtElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *DtElement) Draggable(a DtDraggableEnum) *DtElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *DtElement) Enterkeyhint(a DtEnterkeyhintEnum) *DtElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *DtElement) Hidden(a DtHiddenEnum) *DtElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *DtElement) Id(s string) *DtElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *DtElement) Inert(b bool) *DtElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *DtElement) Inputmode(a DtInputmodeEnum) *DtElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *DtElement) Itemid(s string) *DtElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *DtElement) Itemprop(s ...string) *DtElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DtElement) Itemref(s ...string) *DtElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DtElement) Itemscope(b bool) *DtElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *DtElement) Itemtype(s ...string) *DtElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *DtElement) Lang(s string) *DtElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *DtElement) Nonce(s string) *DtElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *DtElement) Popover(s string) *DtElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *DtElement) Slot(s string) *DtElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *DtElement) Spellcheck(a DtSpellcheckEnum) *DtElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *DtElement) Style(s string) *DtElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *DtElement) Tabindex(i int) *DtElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *DtElement) Title(s string) *DtElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *DtElement) Translate(a DtTranslateEnum) *DtElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *DtElement) Writingsuggestions(a DtWritingsuggestionsEnum) *DtElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

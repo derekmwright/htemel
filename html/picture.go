@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type PictureElement struct {
 	attributes pictureAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type PictureElement struct {
 // Spec Description: The picture element is a container which provides multiple sources to its contained img element to allow authors to declaratively control or give hints to the user agent about which image resource to use, based on the screen pixel density, viewport size, image format, and other factors. It represents its children.
 func Picture(children ...htemel.Node) *PictureElement {
 	node := &PictureElement{
-		children: children,
+		children:   children,
 		attributes: make(pictureAttrs),
 	}
 
@@ -41,128 +42,258 @@ func PictureIf(condition bool, children ...htemel.Node) *PictureElement {
 type PictureAutocapitalizeEnum string
 
 const (
-	PictureAutocapitalizeEnumOn PictureAutocapitalizeEnum = "on"
-	PictureAutocapitalizeEnumSentences PictureAutocapitalizeEnum = "sentences"
-	PictureAutocapitalizeEnumWords PictureAutocapitalizeEnum = "words"
+	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
+	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
+	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
+	PictureAutocapitalizeEnumSentences  PictureAutocapitalizeEnum = "sentences"
+	PictureAutocapitalizeEnumWords      PictureAutocapitalizeEnum = "words"
 	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
-	PictureAutocapitalizeEnumNone PictureAutocapitalizeEnum = "none"
-	PictureAutocapitalizeEnumOff PictureAutocapitalizeEnum = "off"
 )
 
 type PictureAutocorrectEnum string
 
 const (
 	PictureAutocorrectEnumOff PictureAutocorrectEnum = "off"
-	PictureAutocorrectEnumOn PictureAutocorrectEnum = "on"
+	PictureAutocorrectEnumOn  PictureAutocorrectEnum = "on"
 )
 
 type PictureContenteditableEnum string
 
 const (
-	PictureContenteditableEnumFalse PictureContenteditableEnum = "false"
+	PictureContenteditableEnumFalse         PictureContenteditableEnum = "false"
 	PictureContenteditableEnumPlaintextOnly PictureContenteditableEnum = "plaintext-only"
-	PictureContenteditableEnumTrue PictureContenteditableEnum = "true"
+	PictureContenteditableEnumTrue          PictureContenteditableEnum = "true"
 )
 
 type PictureDirEnum string
 
 const (
+	PictureDirEnumRtl  PictureDirEnum = "rtl"
 	PictureDirEnumAuto PictureDirEnum = "auto"
-	PictureDirEnumLtr PictureDirEnum = "ltr"
-	PictureDirEnumRtl PictureDirEnum = "rtl"
+	PictureDirEnumLtr  PictureDirEnum = "ltr"
 )
 
 type PictureDraggableEnum string
 
 const (
 	PictureDraggableEnumFalse PictureDraggableEnum = "false"
-	PictureDraggableEnumTrue PictureDraggableEnum = "true"
+	PictureDraggableEnumTrue  PictureDraggableEnum = "true"
 )
 
 type PictureEnterkeyhintEnum string
 
 const (
-	PictureEnterkeyhintEnumEnter PictureEnterkeyhintEnum = "enter"
-	PictureEnterkeyhintEnumGo PictureEnterkeyhintEnum = "go"
-	PictureEnterkeyhintEnumNext PictureEnterkeyhintEnum = "next"
+	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
 	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
-	PictureEnterkeyhintEnumSearch PictureEnterkeyhintEnum = "search"
-	PictureEnterkeyhintEnumSend PictureEnterkeyhintEnum = "send"
-	PictureEnterkeyhintEnumDone PictureEnterkeyhintEnum = "done"
+	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
+	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
+	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
+	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
+	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 )
 
 type PictureHiddenEnum string
 
 const (
-	PictureHiddenEnumHidden PictureHiddenEnum = "hidden"
+	PictureHiddenEnumHidden     PictureHiddenEnum = "hidden"
 	PictureHiddenEnumUntilFound PictureHiddenEnum = "until-found"
+)
+
+type PictureInputmodeEnum string
+
+const (
+	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
+	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
+	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
+	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
+	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
+	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
+	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
+	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
+)
+
+type PictureSpellcheckEnum string
+
+const (
+	PictureSpellcheckEnumFalse PictureSpellcheckEnum = "false"
+	PictureSpellcheckEnumTrue  PictureSpellcheckEnum = "true"
+)
+
+type PictureTranslateEnum string
+
+const (
+	PictureTranslateEnumNo  PictureTranslateEnum = "no"
+	PictureTranslateEnumYes PictureTranslateEnum = "yes"
+)
+
+type PictureWritingsuggestionsEnum string
+
+const (
+	PictureWritingsuggestionsEnumFalse PictureWritingsuggestionsEnum = "false"
+	PictureWritingsuggestionsEnumTrue  PictureWritingsuggestionsEnum = "true"
 )
 
 type pictureAttrs map[string]any
 
 func (e *PictureElement) Autocapitalize(a PictureAutocapitalizeEnum) *PictureElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *PictureElement) Autocorrect(a PictureAutocorrectEnum) *PictureElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *PictureElement) Autofocus(b bool) *PictureElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *PictureElement) Class(s ...string) *PictureElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *PictureElement) Contenteditable(a PictureContenteditableEnum) *PictureElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *PictureElement) Dir(a PictureDirEnum) *PictureElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *PictureElement) Draggable(a PictureDraggableEnum) *PictureElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *PictureElement) Enterkeyhint(a PictureEnterkeyhintEnum) *PictureElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *PictureElement) Hidden(a PictureHiddenEnum) *PictureElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *PictureElement) Id(s string) *PictureElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *PictureElement) Inert(b bool) *PictureElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *PictureElement) Inputmode(a PictureInputmodeEnum) *PictureElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *PictureElement) Itemid(s string) *PictureElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *PictureElement) Itemprop(s ...string) *PictureElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *PictureElement) Itemref(s ...string) *PictureElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *PictureElement) Itemscope(b bool) *PictureElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *PictureElement) Itemtype(s ...string) *PictureElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *PictureElement) Lang(s string) *PictureElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *PictureElement) Nonce(s string) *PictureElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *PictureElement) Popover(s string) *PictureElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *PictureElement) Slot(s string) *PictureElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *PictureElement) Spellcheck(a PictureSpellcheckEnum) *PictureElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *PictureElement) Style(s string) *PictureElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *PictureElement) Tabindex(i int) *PictureElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *PictureElement) Title(s string) *PictureElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *PictureElement) Translate(a PictureTranslateEnum) *PictureElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *PictureElement) Writingsuggestions(a PictureWritingsuggestionsEnum) *PictureElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

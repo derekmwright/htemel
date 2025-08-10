@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SourceElement struct {
 	attributes sourceAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SourceElement struct {
 // Spec Description: The source element allows authors to specify multiple alternative source sets for img elements or multiple alternative media resources for media elements. It does not represent anything on its own.
 func Source(children ...htemel.Node) *SourceElement {
 	node := &SourceElement{
-		children: children,
+		children:   children,
 		attributes: make(sourceAttrs),
 	}
 
@@ -41,128 +42,258 @@ func SourceIf(condition bool, children ...htemel.Node) *SourceElement {
 type SourceAutocapitalizeEnum string
 
 const (
-	SourceAutocapitalizeEnumNone SourceAutocapitalizeEnum = "none"
-	SourceAutocapitalizeEnumOff SourceAutocapitalizeEnum = "off"
-	SourceAutocapitalizeEnumOn SourceAutocapitalizeEnum = "on"
-	SourceAutocapitalizeEnumSentences SourceAutocapitalizeEnum = "sentences"
-	SourceAutocapitalizeEnumWords SourceAutocapitalizeEnum = "words"
+	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
+	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
+	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
 	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
+	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
+	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
 )
 
 type SourceAutocorrectEnum string
 
 const (
 	SourceAutocorrectEnumOff SourceAutocorrectEnum = "off"
-	SourceAutocorrectEnumOn SourceAutocorrectEnum = "on"
+	SourceAutocorrectEnumOn  SourceAutocorrectEnum = "on"
 )
 
 type SourceContenteditableEnum string
 
 const (
-	SourceContenteditableEnumFalse SourceContenteditableEnum = "false"
+	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
 	SourceContenteditableEnumPlaintextOnly SourceContenteditableEnum = "plaintext-only"
-	SourceContenteditableEnumTrue SourceContenteditableEnum = "true"
+	SourceContenteditableEnumTrue          SourceContenteditableEnum = "true"
 )
 
 type SourceDirEnum string
 
 const (
 	SourceDirEnumAuto SourceDirEnum = "auto"
-	SourceDirEnumLtr SourceDirEnum = "ltr"
-	SourceDirEnumRtl SourceDirEnum = "rtl"
+	SourceDirEnumLtr  SourceDirEnum = "ltr"
+	SourceDirEnumRtl  SourceDirEnum = "rtl"
 )
 
 type SourceDraggableEnum string
 
 const (
 	SourceDraggableEnumFalse SourceDraggableEnum = "false"
-	SourceDraggableEnumTrue SourceDraggableEnum = "true"
+	SourceDraggableEnumTrue  SourceDraggableEnum = "true"
 )
 
 type SourceEnterkeyhintEnum string
 
 const (
-	SourceEnterkeyhintEnumEnter SourceEnterkeyhintEnum = "enter"
-	SourceEnterkeyhintEnumGo SourceEnterkeyhintEnum = "go"
-	SourceEnterkeyhintEnumNext SourceEnterkeyhintEnum = "next"
+	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
+	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
+	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
+	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
 	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
-	SourceEnterkeyhintEnumSearch SourceEnterkeyhintEnum = "search"
-	SourceEnterkeyhintEnumSend SourceEnterkeyhintEnum = "send"
-	SourceEnterkeyhintEnumDone SourceEnterkeyhintEnum = "done"
+	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
+	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
 )
 
 type SourceHiddenEnum string
 
 const (
-	SourceHiddenEnumHidden SourceHiddenEnum = "hidden"
+	SourceHiddenEnumHidden     SourceHiddenEnum = "hidden"
 	SourceHiddenEnumUntilFound SourceHiddenEnum = "until-found"
+)
+
+type SourceInputmodeEnum string
+
+const (
+	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
+	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
+	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
+	SourceInputmodeEnumText    SourceInputmodeEnum = "text"
+	SourceInputmodeEnumUrl     SourceInputmodeEnum = "url"
+	SourceInputmodeEnumDecimal SourceInputmodeEnum = "decimal"
+	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
+	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
+)
+
+type SourceSpellcheckEnum string
+
+const (
+	SourceSpellcheckEnumFalse SourceSpellcheckEnum = "false"
+	SourceSpellcheckEnumTrue  SourceSpellcheckEnum = "true"
+)
+
+type SourceTranslateEnum string
+
+const (
+	SourceTranslateEnumNo  SourceTranslateEnum = "no"
+	SourceTranslateEnumYes SourceTranslateEnum = "yes"
+)
+
+type SourceWritingsuggestionsEnum string
+
+const (
+	SourceWritingsuggestionsEnumFalse SourceWritingsuggestionsEnum = "false"
+	SourceWritingsuggestionsEnumTrue  SourceWritingsuggestionsEnum = "true"
 )
 
 type sourceAttrs map[string]any
 
 func (e *SourceElement) Autocapitalize(a SourceAutocapitalizeEnum) *SourceElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SourceElement) Autocorrect(a SourceAutocorrectEnum) *SourceElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *SourceElement) Autofocus(b bool) *SourceElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *SourceElement) Class(s ...string) *SourceElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SourceElement) Contenteditable(a SourceContenteditableEnum) *SourceElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SourceElement) Dir(a SourceDirEnum) *SourceElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *SourceElement) Draggable(a SourceDraggableEnum) *SourceElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *SourceElement) Enterkeyhint(a SourceEnterkeyhintEnum) *SourceElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *SourceElement) Hidden(a SourceHiddenEnum) *SourceElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *SourceElement) Id(s string) *SourceElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *SourceElement) Inert(b bool) *SourceElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *SourceElement) Inputmode(a SourceInputmodeEnum) *SourceElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *SourceElement) Itemid(s string) *SourceElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *SourceElement) Itemprop(s ...string) *SourceElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SourceElement) Itemref(s ...string) *SourceElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SourceElement) Itemscope(b bool) *SourceElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *SourceElement) Itemtype(s ...string) *SourceElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SourceElement) Lang(s string) *SourceElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *SourceElement) Nonce(s string) *SourceElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *SourceElement) Popover(s string) *SourceElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *SourceElement) Slot(s string) *SourceElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *SourceElement) Spellcheck(a SourceSpellcheckEnum) *SourceElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *SourceElement) Style(s string) *SourceElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *SourceElement) Tabindex(i int) *SourceElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *SourceElement) Title(s string) *SourceElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *SourceElement) Translate(a SourceTranslateEnum) *SourceElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *SourceElement) Writingsuggestions(a SourceWritingsuggestionsEnum) *SourceElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

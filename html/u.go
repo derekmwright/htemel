@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type UElement struct {
 	attributes uAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type UElement struct {
 // Spec Description: The u element represents a span of text with an unarticulated, though explicitly rendered, non-textual annotation, such as labeling the text as being a proper name in Chinese text (a Chinese proper name mark), or labeling the text as being misspelt.
 func U(children ...htemel.Node) *UElement {
 	node := &UElement{
-		children: children,
+		children:   children,
 		attributes: make(uAttrs),
 	}
 
@@ -41,128 +42,258 @@ func UIf(condition bool, children ...htemel.Node) *UElement {
 type UAutocapitalizeEnum string
 
 const (
-	UAutocapitalizeEnumWords UAutocapitalizeEnum = "words"
+	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
+	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
+	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
+	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
+	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
-	UAutocapitalizeEnumNone UAutocapitalizeEnum = "none"
-	UAutocapitalizeEnumOff UAutocapitalizeEnum = "off"
-	UAutocapitalizeEnumOn UAutocapitalizeEnum = "on"
-	UAutocapitalizeEnumSentences UAutocapitalizeEnum = "sentences"
 )
 
 type UAutocorrectEnum string
 
 const (
 	UAutocorrectEnumOff UAutocorrectEnum = "off"
-	UAutocorrectEnumOn UAutocorrectEnum = "on"
+	UAutocorrectEnumOn  UAutocorrectEnum = "on"
 )
 
 type UContenteditableEnum string
 
 const (
+	UContenteditableEnumFalse         UContenteditableEnum = "false"
 	UContenteditableEnumPlaintextOnly UContenteditableEnum = "plaintext-only"
-	UContenteditableEnumTrue UContenteditableEnum = "true"
-	UContenteditableEnumFalse UContenteditableEnum = "false"
+	UContenteditableEnumTrue          UContenteditableEnum = "true"
 )
 
 type UDirEnum string
 
 const (
 	UDirEnumAuto UDirEnum = "auto"
-	UDirEnumLtr UDirEnum = "ltr"
-	UDirEnumRtl UDirEnum = "rtl"
+	UDirEnumLtr  UDirEnum = "ltr"
+	UDirEnumRtl  UDirEnum = "rtl"
 )
 
 type UDraggableEnum string
 
 const (
 	UDraggableEnumFalse UDraggableEnum = "false"
-	UDraggableEnumTrue UDraggableEnum = "true"
+	UDraggableEnumTrue  UDraggableEnum = "true"
 )
 
 type UEnterkeyhintEnum string
 
 const (
-	UEnterkeyhintEnumDone UEnterkeyhintEnum = "done"
-	UEnterkeyhintEnumEnter UEnterkeyhintEnum = "enter"
-	UEnterkeyhintEnumGo UEnterkeyhintEnum = "go"
-	UEnterkeyhintEnumNext UEnterkeyhintEnum = "next"
+	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
+	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
+	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
+	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
+	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
-	UEnterkeyhintEnumSearch UEnterkeyhintEnum = "search"
-	UEnterkeyhintEnumSend UEnterkeyhintEnum = "send"
+	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
 )
 
 type UHiddenEnum string
 
 const (
-	UHiddenEnumHidden UHiddenEnum = "hidden"
+	UHiddenEnumHidden     UHiddenEnum = "hidden"
 	UHiddenEnumUntilFound UHiddenEnum = "until-found"
+)
+
+type UInputmodeEnum string
+
+const (
+	UInputmodeEnumSearch  UInputmodeEnum = "search"
+	UInputmodeEnumTel     UInputmodeEnum = "tel"
+	UInputmodeEnumText    UInputmodeEnum = "text"
+	UInputmodeEnumUrl     UInputmodeEnum = "url"
+	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
+	UInputmodeEnumEmail   UInputmodeEnum = "email"
+	UInputmodeEnumNone    UInputmodeEnum = "none"
+	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
+)
+
+type USpellcheckEnum string
+
+const (
+	USpellcheckEnumFalse USpellcheckEnum = "false"
+	USpellcheckEnumTrue  USpellcheckEnum = "true"
+)
+
+type UTranslateEnum string
+
+const (
+	UTranslateEnumNo  UTranslateEnum = "no"
+	UTranslateEnumYes UTranslateEnum = "yes"
+)
+
+type UWritingsuggestionsEnum string
+
+const (
+	UWritingsuggestionsEnumTrue  UWritingsuggestionsEnum = "true"
+	UWritingsuggestionsEnumFalse UWritingsuggestionsEnum = "false"
 )
 
 type uAttrs map[string]any
 
 func (e *UElement) Autocapitalize(a UAutocapitalizeEnum) *UElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *UElement) Autocorrect(a UAutocorrectEnum) *UElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *UElement) Autofocus(b bool) *UElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *UElement) Class(s ...string) *UElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *UElement) Contenteditable(a UContenteditableEnum) *UElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *UElement) Dir(a UDirEnum) *UElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *UElement) Draggable(a UDraggableEnum) *UElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *UElement) Enterkeyhint(a UEnterkeyhintEnum) *UElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *UElement) Hidden(a UHiddenEnum) *UElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *UElement) Id(s string) *UElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *UElement) Inert(b bool) *UElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *UElement) Inputmode(a UInputmodeEnum) *UElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *UElement) Itemid(s string) *UElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *UElement) Itemprop(s ...string) *UElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *UElement) Itemref(s ...string) *UElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *UElement) Itemscope(b bool) *UElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *UElement) Itemtype(s ...string) *UElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *UElement) Lang(s string) *UElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *UElement) Nonce(s string) *UElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *UElement) Popover(s string) *UElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *UElement) Slot(s string) *UElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *UElement) Spellcheck(a USpellcheckEnum) *UElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *UElement) Style(s string) *UElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *UElement) Tabindex(i int) *UElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *UElement) Title(s string) *UElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *UElement) Translate(a UTranslateEnum) *UElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *UElement) Writingsuggestions(a UWritingsuggestionsEnum) *UElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

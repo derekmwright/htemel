@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SelectedcontentElement struct {
 	attributes selectedcontentAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SelectedcontentElement struct {
 // Spec Description: The selectedcontent element reflects the contents of a select element's currently selected option element. selectedcontent elements can be used to declaratively show the selected option element's contents within the select element's first child button element.
 func Selectedcontent(children ...htemel.Node) *SelectedcontentElement {
 	node := &SelectedcontentElement{
-		children: children,
+		children:   children,
 		attributes: make(selectedcontentAttrs),
 	}
 
@@ -41,128 +42,258 @@ func SelectedcontentIf(condition bool, children ...htemel.Node) *Selectedcontent
 type SelectedcontentAutocapitalizeEnum string
 
 const (
+	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
+	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
+	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
 	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
-	SelectedcontentAutocapitalizeEnumNone SelectedcontentAutocapitalizeEnum = "none"
-	SelectedcontentAutocapitalizeEnumOff SelectedcontentAutocapitalizeEnum = "off"
-	SelectedcontentAutocapitalizeEnumOn SelectedcontentAutocapitalizeEnum = "on"
-	SelectedcontentAutocapitalizeEnumSentences SelectedcontentAutocapitalizeEnum = "sentences"
-	SelectedcontentAutocapitalizeEnumWords SelectedcontentAutocapitalizeEnum = "words"
+	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
+	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 )
 
 type SelectedcontentAutocorrectEnum string
 
 const (
 	SelectedcontentAutocorrectEnumOff SelectedcontentAutocorrectEnum = "off"
-	SelectedcontentAutocorrectEnumOn SelectedcontentAutocorrectEnum = "on"
+	SelectedcontentAutocorrectEnumOn  SelectedcontentAutocorrectEnum = "on"
 )
 
 type SelectedcontentContenteditableEnum string
 
 const (
-	SelectedcontentContenteditableEnumFalse SelectedcontentContenteditableEnum = "false"
+	SelectedcontentContenteditableEnumFalse         SelectedcontentContenteditableEnum = "false"
 	SelectedcontentContenteditableEnumPlaintextOnly SelectedcontentContenteditableEnum = "plaintext-only"
-	SelectedcontentContenteditableEnumTrue SelectedcontentContenteditableEnum = "true"
+	SelectedcontentContenteditableEnumTrue          SelectedcontentContenteditableEnum = "true"
 )
 
 type SelectedcontentDirEnum string
 
 const (
+	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 	SelectedcontentDirEnumAuto SelectedcontentDirEnum = "auto"
-	SelectedcontentDirEnumLtr SelectedcontentDirEnum = "ltr"
-	SelectedcontentDirEnumRtl SelectedcontentDirEnum = "rtl"
+	SelectedcontentDirEnumLtr  SelectedcontentDirEnum = "ltr"
 )
 
 type SelectedcontentDraggableEnum string
 
 const (
 	SelectedcontentDraggableEnumFalse SelectedcontentDraggableEnum = "false"
-	SelectedcontentDraggableEnumTrue SelectedcontentDraggableEnum = "true"
+	SelectedcontentDraggableEnumTrue  SelectedcontentDraggableEnum = "true"
 )
 
 type SelectedcontentEnterkeyhintEnum string
 
 const (
-	SelectedcontentEnterkeyhintEnumSearch SelectedcontentEnterkeyhintEnum = "search"
-	SelectedcontentEnterkeyhintEnumSend SelectedcontentEnterkeyhintEnum = "send"
-	SelectedcontentEnterkeyhintEnumDone SelectedcontentEnterkeyhintEnum = "done"
-	SelectedcontentEnterkeyhintEnumEnter SelectedcontentEnterkeyhintEnum = "enter"
-	SelectedcontentEnterkeyhintEnumGo SelectedcontentEnterkeyhintEnum = "go"
-	SelectedcontentEnterkeyhintEnumNext SelectedcontentEnterkeyhintEnum = "next"
+	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
+	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
+	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
+	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
+	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
+	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
 )
 
 type SelectedcontentHiddenEnum string
 
 const (
-	SelectedcontentHiddenEnumHidden SelectedcontentHiddenEnum = "hidden"
+	SelectedcontentHiddenEnumHidden     SelectedcontentHiddenEnum = "hidden"
 	SelectedcontentHiddenEnumUntilFound SelectedcontentHiddenEnum = "until-found"
+)
+
+type SelectedcontentInputmodeEnum string
+
+const (
+	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
+	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
+	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
+	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
+	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
+	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
+	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
+	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
+)
+
+type SelectedcontentSpellcheckEnum string
+
+const (
+	SelectedcontentSpellcheckEnumFalse SelectedcontentSpellcheckEnum = "false"
+	SelectedcontentSpellcheckEnumTrue  SelectedcontentSpellcheckEnum = "true"
+)
+
+type SelectedcontentTranslateEnum string
+
+const (
+	SelectedcontentTranslateEnumNo  SelectedcontentTranslateEnum = "no"
+	SelectedcontentTranslateEnumYes SelectedcontentTranslateEnum = "yes"
+)
+
+type SelectedcontentWritingsuggestionsEnum string
+
+const (
+	SelectedcontentWritingsuggestionsEnumFalse SelectedcontentWritingsuggestionsEnum = "false"
+	SelectedcontentWritingsuggestionsEnumTrue  SelectedcontentWritingsuggestionsEnum = "true"
 )
 
 type selectedcontentAttrs map[string]any
 
 func (e *SelectedcontentElement) Autocapitalize(a SelectedcontentAutocapitalizeEnum) *SelectedcontentElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Autocorrect(a SelectedcontentAutocorrectEnum) *SelectedcontentElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Autofocus(b bool) *SelectedcontentElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Class(s ...string) *SelectedcontentElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Contenteditable(a SelectedcontentContenteditableEnum) *SelectedcontentElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Dir(a SelectedcontentDirEnum) *SelectedcontentElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Draggable(a SelectedcontentDraggableEnum) *SelectedcontentElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Enterkeyhint(a SelectedcontentEnterkeyhintEnum) *SelectedcontentElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Hidden(a SelectedcontentHiddenEnum) *SelectedcontentElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *SelectedcontentElement) Id(s string) *SelectedcontentElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *SelectedcontentElement) Inert(b bool) *SelectedcontentElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *SelectedcontentElement) Inputmode(a SelectedcontentInputmodeEnum) *SelectedcontentElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *SelectedcontentElement) Itemid(s string) *SelectedcontentElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *SelectedcontentElement) Itemprop(s ...string) *SelectedcontentElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SelectedcontentElement) Itemref(s ...string) *SelectedcontentElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SelectedcontentElement) Itemscope(b bool) *SelectedcontentElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *SelectedcontentElement) Itemtype(s ...string) *SelectedcontentElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SelectedcontentElement) Lang(s string) *SelectedcontentElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *SelectedcontentElement) Nonce(s string) *SelectedcontentElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *SelectedcontentElement) Popover(s string) *SelectedcontentElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *SelectedcontentElement) Slot(s string) *SelectedcontentElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *SelectedcontentElement) Spellcheck(a SelectedcontentSpellcheckEnum) *SelectedcontentElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *SelectedcontentElement) Style(s string) *SelectedcontentElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *SelectedcontentElement) Tabindex(i int) *SelectedcontentElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *SelectedcontentElement) Title(s string) *SelectedcontentElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *SelectedcontentElement) Translate(a SelectedcontentTranslateEnum) *SelectedcontentElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *SelectedcontentElement) Writingsuggestions(a SelectedcontentWritingsuggestionsEnum) *SelectedcontentElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

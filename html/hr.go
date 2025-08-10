@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type HrElement struct {
 	attributes hrAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type HrElement struct {
 // Spec Description: The hr element represents a paragraph-level thematic break, e.g., a scene change in a story, or a transition to another topic within a section of a reference book; alternatively, it represents a separator between a set of options of a select element.
 func Hr(children ...htemel.Node) *HrElement {
 	node := &HrElement{
-		children: children,
+		children:   children,
 		attributes: make(hrAttrs),
 	}
 
@@ -41,34 +42,34 @@ func HrIf(condition bool, children ...htemel.Node) *HrElement {
 type HrAutocapitalizeEnum string
 
 const (
-	HrAutocapitalizeEnumSentences HrAutocapitalizeEnum = "sentences"
-	HrAutocapitalizeEnumWords HrAutocapitalizeEnum = "words"
+	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
-	HrAutocapitalizeEnumNone HrAutocapitalizeEnum = "none"
-	HrAutocapitalizeEnumOff HrAutocapitalizeEnum = "off"
-	HrAutocapitalizeEnumOn HrAutocapitalizeEnum = "on"
+	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
+	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
+	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
+	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
 )
 
 type HrAutocorrectEnum string
 
 const (
 	HrAutocorrectEnumOff HrAutocorrectEnum = "off"
-	HrAutocorrectEnumOn HrAutocorrectEnum = "on"
+	HrAutocorrectEnumOn  HrAutocorrectEnum = "on"
 )
 
 type HrContenteditableEnum string
 
 const (
-	HrContenteditableEnumFalse HrContenteditableEnum = "false"
+	HrContenteditableEnumFalse         HrContenteditableEnum = "false"
 	HrContenteditableEnumPlaintextOnly HrContenteditableEnum = "plaintext-only"
-	HrContenteditableEnumTrue HrContenteditableEnum = "true"
+	HrContenteditableEnumTrue          HrContenteditableEnum = "true"
 )
 
 type HrDirEnum string
 
 const (
-	HrDirEnumLtr HrDirEnum = "ltr"
-	HrDirEnumRtl HrDirEnum = "rtl"
+	HrDirEnumLtr  HrDirEnum = "ltr"
+	HrDirEnumRtl  HrDirEnum = "rtl"
 	HrDirEnumAuto HrDirEnum = "auto"
 )
 
@@ -76,93 +77,223 @@ type HrDraggableEnum string
 
 const (
 	HrDraggableEnumFalse HrDraggableEnum = "false"
-	HrDraggableEnumTrue HrDraggableEnum = "true"
+	HrDraggableEnumTrue  HrDraggableEnum = "true"
 )
 
 type HrEnterkeyhintEnum string
 
 const (
+	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
-	HrEnterkeyhintEnumSearch HrEnterkeyhintEnum = "search"
-	HrEnterkeyhintEnumSend HrEnterkeyhintEnum = "send"
-	HrEnterkeyhintEnumDone HrEnterkeyhintEnum = "done"
-	HrEnterkeyhintEnumEnter HrEnterkeyhintEnum = "enter"
-	HrEnterkeyhintEnumGo HrEnterkeyhintEnum = "go"
-	HrEnterkeyhintEnumNext HrEnterkeyhintEnum = "next"
+	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
+	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
+	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
+	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
+	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
 )
 
 type HrHiddenEnum string
 
 const (
-	HrHiddenEnumHidden HrHiddenEnum = "hidden"
+	HrHiddenEnumHidden     HrHiddenEnum = "hidden"
 	HrHiddenEnumUntilFound HrHiddenEnum = "until-found"
+)
+
+type HrInputmodeEnum string
+
+const (
+	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
+	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
+	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
+	HrInputmodeEnumText    HrInputmodeEnum = "text"
+	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
+	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
+	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
+	HrInputmodeEnumNone    HrInputmodeEnum = "none"
+)
+
+type HrSpellcheckEnum string
+
+const (
+	HrSpellcheckEnumFalse HrSpellcheckEnum = "false"
+	HrSpellcheckEnumTrue  HrSpellcheckEnum = "true"
+)
+
+type HrTranslateEnum string
+
+const (
+	HrTranslateEnumNo  HrTranslateEnum = "no"
+	HrTranslateEnumYes HrTranslateEnum = "yes"
+)
+
+type HrWritingsuggestionsEnum string
+
+const (
+	HrWritingsuggestionsEnumFalse HrWritingsuggestionsEnum = "false"
+	HrWritingsuggestionsEnumTrue  HrWritingsuggestionsEnum = "true"
 )
 
 type hrAttrs map[string]any
 
 func (e *HrElement) Autocapitalize(a HrAutocapitalizeEnum) *HrElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *HrElement) Autocorrect(a HrAutocorrectEnum) *HrElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *HrElement) Autofocus(b bool) *HrElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *HrElement) Class(s ...string) *HrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *HrElement) Contenteditable(a HrContenteditableEnum) *HrElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *HrElement) Dir(a HrDirEnum) *HrElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *HrElement) Draggable(a HrDraggableEnum) *HrElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *HrElement) Enterkeyhint(a HrEnterkeyhintEnum) *HrElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *HrElement) Hidden(a HrHiddenEnum) *HrElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *HrElement) Id(s string) *HrElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *HrElement) Inert(b bool) *HrElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *HrElement) Inputmode(a HrInputmodeEnum) *HrElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *HrElement) Itemid(s string) *HrElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *HrElement) Itemprop(s ...string) *HrElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HrElement) Itemref(s ...string) *HrElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HrElement) Itemscope(b bool) *HrElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *HrElement) Itemtype(s ...string) *HrElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *HrElement) Lang(s string) *HrElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *HrElement) Nonce(s string) *HrElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *HrElement) Popover(s string) *HrElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *HrElement) Slot(s string) *HrElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *HrElement) Spellcheck(a HrSpellcheckEnum) *HrElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *HrElement) Style(s string) *HrElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *HrElement) Tabindex(i int) *HrElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *HrElement) Title(s string) *HrElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *HrElement) Translate(a HrTranslateEnum) *HrElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *HrElement) Writingsuggestions(a HrWritingsuggestionsEnum) *HrElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

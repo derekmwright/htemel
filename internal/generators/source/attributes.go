@@ -58,7 +58,7 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(b bool) *` +
 
 				addTypes.WriteString("\ntype " + typeName + " string\n")
 				addTypes.WriteString("\nconst (\n")
-				for allowed, _ := range a.Allowed {
+				for allowed := range a.Allowed {
 					fixed := strings.ReplaceAll(titleCase(allowed), "-", "")
 					addTypes.WriteString("\t" + typeName + fixed + " " + typeName + " = \"" + allowed + "\"\n")
 				}

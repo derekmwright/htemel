@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type StyleElement struct {
 	attributes styleAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type StyleElement struct {
 // Spec Description: The style element allows authors to embed CSS style sheets in their documents. The style element is one of several inputs to the styling processing model. The element does not represent content for the user.
 func Style(children ...htemel.Node) *StyleElement {
 	node := &StyleElement{
-		children: children,
+		children:   children,
 		attributes: make(styleAttrs),
 	}
 
@@ -41,128 +42,258 @@ func StyleIf(condition bool, children ...htemel.Node) *StyleElement {
 type StyleAutocapitalizeEnum string
 
 const (
-	StyleAutocapitalizeEnumOn StyleAutocapitalizeEnum = "on"
-	StyleAutocapitalizeEnumSentences StyleAutocapitalizeEnum = "sentences"
-	StyleAutocapitalizeEnumWords StyleAutocapitalizeEnum = "words"
 	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
-	StyleAutocapitalizeEnumNone StyleAutocapitalizeEnum = "none"
-	StyleAutocapitalizeEnumOff StyleAutocapitalizeEnum = "off"
+	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
+	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
+	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
+	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
+	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
 )
 
 type StyleAutocorrectEnum string
 
 const (
 	StyleAutocorrectEnumOff StyleAutocorrectEnum = "off"
-	StyleAutocorrectEnumOn StyleAutocorrectEnum = "on"
+	StyleAutocorrectEnumOn  StyleAutocorrectEnum = "on"
 )
 
 type StyleContenteditableEnum string
 
 const (
-	StyleContenteditableEnumFalse StyleContenteditableEnum = "false"
+	StyleContenteditableEnumFalse         StyleContenteditableEnum = "false"
 	StyleContenteditableEnumPlaintextOnly StyleContenteditableEnum = "plaintext-only"
-	StyleContenteditableEnumTrue StyleContenteditableEnum = "true"
+	StyleContenteditableEnumTrue          StyleContenteditableEnum = "true"
 )
 
 type StyleDirEnum string
 
 const (
+	StyleDirEnumLtr  StyleDirEnum = "ltr"
+	StyleDirEnumRtl  StyleDirEnum = "rtl"
 	StyleDirEnumAuto StyleDirEnum = "auto"
-	StyleDirEnumLtr StyleDirEnum = "ltr"
-	StyleDirEnumRtl StyleDirEnum = "rtl"
 )
 
 type StyleDraggableEnum string
 
 const (
 	StyleDraggableEnumFalse StyleDraggableEnum = "false"
-	StyleDraggableEnumTrue StyleDraggableEnum = "true"
+	StyleDraggableEnumTrue  StyleDraggableEnum = "true"
 )
 
 type StyleEnterkeyhintEnum string
 
 const (
-	StyleEnterkeyhintEnumSend StyleEnterkeyhintEnum = "send"
-	StyleEnterkeyhintEnumDone StyleEnterkeyhintEnum = "done"
-	StyleEnterkeyhintEnumEnter StyleEnterkeyhintEnum = "enter"
-	StyleEnterkeyhintEnumGo StyleEnterkeyhintEnum = "go"
-	StyleEnterkeyhintEnumNext StyleEnterkeyhintEnum = "next"
 	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
-	StyleEnterkeyhintEnumSearch StyleEnterkeyhintEnum = "search"
+	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
+	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
+	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
+	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
+	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
+	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
 )
 
 type StyleHiddenEnum string
 
 const (
-	StyleHiddenEnumHidden StyleHiddenEnum = "hidden"
 	StyleHiddenEnumUntilFound StyleHiddenEnum = "until-found"
+	StyleHiddenEnumHidden     StyleHiddenEnum = "hidden"
+)
+
+type StyleInputmodeEnum string
+
+const (
+	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
+	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
+	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
+	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
+	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
+	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
+	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
+	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
+)
+
+type StyleSpellcheckEnum string
+
+const (
+	StyleSpellcheckEnumTrue  StyleSpellcheckEnum = "true"
+	StyleSpellcheckEnumFalse StyleSpellcheckEnum = "false"
+)
+
+type StyleTranslateEnum string
+
+const (
+	StyleTranslateEnumNo  StyleTranslateEnum = "no"
+	StyleTranslateEnumYes StyleTranslateEnum = "yes"
+)
+
+type StyleWritingsuggestionsEnum string
+
+const (
+	StyleWritingsuggestionsEnumFalse StyleWritingsuggestionsEnum = "false"
+	StyleWritingsuggestionsEnumTrue  StyleWritingsuggestionsEnum = "true"
 )
 
 type styleAttrs map[string]any
 
 func (e *StyleElement) Autocapitalize(a StyleAutocapitalizeEnum) *StyleElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *StyleElement) Autocorrect(a StyleAutocorrectEnum) *StyleElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *StyleElement) Autofocus(b bool) *StyleElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *StyleElement) Class(s ...string) *StyleElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *StyleElement) Contenteditable(a StyleContenteditableEnum) *StyleElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *StyleElement) Dir(a StyleDirEnum) *StyleElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *StyleElement) Draggable(a StyleDraggableEnum) *StyleElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *StyleElement) Enterkeyhint(a StyleEnterkeyhintEnum) *StyleElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *StyleElement) Hidden(a StyleHiddenEnum) *StyleElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *StyleElement) Id(s string) *StyleElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *StyleElement) Inert(b bool) *StyleElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *StyleElement) Inputmode(a StyleInputmodeEnum) *StyleElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *StyleElement) Itemid(s string) *StyleElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *StyleElement) Itemprop(s ...string) *StyleElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *StyleElement) Itemref(s ...string) *StyleElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *StyleElement) Itemscope(b bool) *StyleElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *StyleElement) Itemtype(s ...string) *StyleElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *StyleElement) Lang(s string) *StyleElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *StyleElement) Nonce(s string) *StyleElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *StyleElement) Popover(s string) *StyleElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *StyleElement) Slot(s string) *StyleElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *StyleElement) Spellcheck(a StyleSpellcheckEnum) *StyleElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *StyleElement) Style(s string) *StyleElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *StyleElement) Tabindex(i int) *StyleElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *StyleElement) Title(s string) *StyleElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *StyleElement) Translate(a StyleTranslateEnum) *StyleElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *StyleElement) Writingsuggestions(a StyleWritingsuggestionsEnum) *StyleElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

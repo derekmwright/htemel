@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type AbbrElement struct {
 	attributes abbrAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type AbbrElement struct {
 // Spec Description: The abbr element represents an abbreviation or acronym, optionally with its expansion. The title attribute may be used to provide an expansion of the abbreviation. The attribute, if specified, must contain an expansion of the abbreviation, and nothing else.
 func Abbr(children ...htemel.Node) *AbbrElement {
 	node := &AbbrElement{
-		children: children,
+		children:   children,
 		attributes: make(abbrAttrs),
 	}
 
@@ -41,128 +42,258 @@ func AbbrIf(condition bool, children ...htemel.Node) *AbbrElement {
 type AbbrAutocapitalizeEnum string
 
 const (
+	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
+	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
+	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
+	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
 	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
-	AbbrAutocapitalizeEnumNone AbbrAutocapitalizeEnum = "none"
-	AbbrAutocapitalizeEnumOff AbbrAutocapitalizeEnum = "off"
-	AbbrAutocapitalizeEnumOn AbbrAutocapitalizeEnum = "on"
-	AbbrAutocapitalizeEnumSentences AbbrAutocapitalizeEnum = "sentences"
-	AbbrAutocapitalizeEnumWords AbbrAutocapitalizeEnum = "words"
+	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
 )
 
 type AbbrAutocorrectEnum string
 
 const (
 	AbbrAutocorrectEnumOff AbbrAutocorrectEnum = "off"
-	AbbrAutocorrectEnumOn AbbrAutocorrectEnum = "on"
+	AbbrAutocorrectEnumOn  AbbrAutocorrectEnum = "on"
 )
 
 type AbbrContenteditableEnum string
 
 const (
-	AbbrContenteditableEnumFalse AbbrContenteditableEnum = "false"
+	AbbrContenteditableEnumFalse         AbbrContenteditableEnum = "false"
 	AbbrContenteditableEnumPlaintextOnly AbbrContenteditableEnum = "plaintext-only"
-	AbbrContenteditableEnumTrue AbbrContenteditableEnum = "true"
+	AbbrContenteditableEnumTrue          AbbrContenteditableEnum = "true"
 )
 
 type AbbrDirEnum string
 
 const (
-	AbbrDirEnumRtl AbbrDirEnum = "rtl"
 	AbbrDirEnumAuto AbbrDirEnum = "auto"
-	AbbrDirEnumLtr AbbrDirEnum = "ltr"
+	AbbrDirEnumLtr  AbbrDirEnum = "ltr"
+	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
 )
 
 type AbbrDraggableEnum string
 
 const (
 	AbbrDraggableEnumFalse AbbrDraggableEnum = "false"
-	AbbrDraggableEnumTrue AbbrDraggableEnum = "true"
+	AbbrDraggableEnumTrue  AbbrDraggableEnum = "true"
 )
 
 type AbbrEnterkeyhintEnum string
 
 const (
-	AbbrEnterkeyhintEnumSearch AbbrEnterkeyhintEnum = "search"
-	AbbrEnterkeyhintEnumSend AbbrEnterkeyhintEnum = "send"
-	AbbrEnterkeyhintEnumDone AbbrEnterkeyhintEnum = "done"
-	AbbrEnterkeyhintEnumEnter AbbrEnterkeyhintEnum = "enter"
-	AbbrEnterkeyhintEnumGo AbbrEnterkeyhintEnum = "go"
-	AbbrEnterkeyhintEnumNext AbbrEnterkeyhintEnum = "next"
+	AbbrEnterkeyhintEnumEnter    AbbrEnterkeyhintEnum = "enter"
+	AbbrEnterkeyhintEnumGo       AbbrEnterkeyhintEnum = "go"
+	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
 	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
+	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
+	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
+	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 )
 
 type AbbrHiddenEnum string
 
 const (
-	AbbrHiddenEnumHidden AbbrHiddenEnum = "hidden"
+	AbbrHiddenEnumHidden     AbbrHiddenEnum = "hidden"
 	AbbrHiddenEnumUntilFound AbbrHiddenEnum = "until-found"
+)
+
+type AbbrInputmodeEnum string
+
+const (
+	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
+	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
+	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
+	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
+	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
+	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
+	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
+	AbbrInputmodeEnumText    AbbrInputmodeEnum = "text"
+)
+
+type AbbrSpellcheckEnum string
+
+const (
+	AbbrSpellcheckEnumFalse AbbrSpellcheckEnum = "false"
+	AbbrSpellcheckEnumTrue  AbbrSpellcheckEnum = "true"
+)
+
+type AbbrTranslateEnum string
+
+const (
+	AbbrTranslateEnumNo  AbbrTranslateEnum = "no"
+	AbbrTranslateEnumYes AbbrTranslateEnum = "yes"
+)
+
+type AbbrWritingsuggestionsEnum string
+
+const (
+	AbbrWritingsuggestionsEnumFalse AbbrWritingsuggestionsEnum = "false"
+	AbbrWritingsuggestionsEnumTrue  AbbrWritingsuggestionsEnum = "true"
 )
 
 type abbrAttrs map[string]any
 
 func (e *AbbrElement) Autocapitalize(a AbbrAutocapitalizeEnum) *AbbrElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *AbbrElement) Autocorrect(a AbbrAutocorrectEnum) *AbbrElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *AbbrElement) Autofocus(b bool) *AbbrElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *AbbrElement) Class(s ...string) *AbbrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *AbbrElement) Contenteditable(a AbbrContenteditableEnum) *AbbrElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *AbbrElement) Dir(a AbbrDirEnum) *AbbrElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *AbbrElement) Draggable(a AbbrDraggableEnum) *AbbrElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *AbbrElement) Enterkeyhint(a AbbrEnterkeyhintEnum) *AbbrElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *AbbrElement) Hidden(a AbbrHiddenEnum) *AbbrElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *AbbrElement) Id(s string) *AbbrElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *AbbrElement) Inert(b bool) *AbbrElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *AbbrElement) Inputmode(a AbbrInputmodeEnum) *AbbrElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *AbbrElement) Itemid(s string) *AbbrElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *AbbrElement) Itemprop(s ...string) *AbbrElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AbbrElement) Itemref(s ...string) *AbbrElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AbbrElement) Itemscope(b bool) *AbbrElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *AbbrElement) Itemtype(s ...string) *AbbrElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AbbrElement) Lang(s string) *AbbrElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *AbbrElement) Nonce(s string) *AbbrElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *AbbrElement) Popover(s string) *AbbrElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *AbbrElement) Slot(s string) *AbbrElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *AbbrElement) Spellcheck(a AbbrSpellcheckEnum) *AbbrElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *AbbrElement) Style(s string) *AbbrElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *AbbrElement) Tabindex(i int) *AbbrElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *AbbrElement) Title(s string) *AbbrElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *AbbrElement) Translate(a AbbrTranslateEnum) *AbbrElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *AbbrElement) Writingsuggestions(a AbbrWritingsuggestionsEnum) *AbbrElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 

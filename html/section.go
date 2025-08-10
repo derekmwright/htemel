@@ -2,16 +2,17 @@
 package html
 
 import (
-  "fmt"
-  "github.com/derekmwright/htemel"
-  "golang.org/x/net/html"
-  "io"
-  "strings"
+	"fmt"
+	"io"
+	"strings"
+
+	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type SectionElement struct {
 	attributes sectionAttrs
-	children []htemel.Node
+	children   []htemel.Node
 	skipRender bool
 }
 
@@ -21,7 +22,7 @@ type SectionElement struct {
 // Spec Description: The section element represents a generic section of a document or application. A section, in this context, is a thematic grouping of content, typically with a heading.
 func Section(children ...htemel.Node) *SectionElement {
 	node := &SectionElement{
-		children: children,
+		children:   children,
 		attributes: make(sectionAttrs),
 	}
 
@@ -42,127 +43,257 @@ type SectionAutocapitalizeEnum string
 
 const (
 	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
-	SectionAutocapitalizeEnumNone SectionAutocapitalizeEnum = "none"
-	SectionAutocapitalizeEnumOff SectionAutocapitalizeEnum = "off"
-	SectionAutocapitalizeEnumOn SectionAutocapitalizeEnum = "on"
-	SectionAutocapitalizeEnumSentences SectionAutocapitalizeEnum = "sentences"
-	SectionAutocapitalizeEnumWords SectionAutocapitalizeEnum = "words"
+	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
+	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
+	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
+	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
+	SectionAutocapitalizeEnumWords      SectionAutocapitalizeEnum = "words"
 )
 
 type SectionAutocorrectEnum string
 
 const (
 	SectionAutocorrectEnumOff SectionAutocorrectEnum = "off"
-	SectionAutocorrectEnumOn SectionAutocorrectEnum = "on"
+	SectionAutocorrectEnumOn  SectionAutocorrectEnum = "on"
 )
 
 type SectionContenteditableEnum string
 
 const (
-	SectionContenteditableEnumFalse SectionContenteditableEnum = "false"
+	SectionContenteditableEnumFalse         SectionContenteditableEnum = "false"
 	SectionContenteditableEnumPlaintextOnly SectionContenteditableEnum = "plaintext-only"
-	SectionContenteditableEnumTrue SectionContenteditableEnum = "true"
+	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
 )
 
 type SectionDirEnum string
 
 const (
+	SectionDirEnumLtr  SectionDirEnum = "ltr"
+	SectionDirEnumRtl  SectionDirEnum = "rtl"
 	SectionDirEnumAuto SectionDirEnum = "auto"
-	SectionDirEnumLtr SectionDirEnum = "ltr"
-	SectionDirEnumRtl SectionDirEnum = "rtl"
 )
 
 type SectionDraggableEnum string
 
 const (
-	SectionDraggableEnumTrue SectionDraggableEnum = "true"
+	SectionDraggableEnumTrue  SectionDraggableEnum = "true"
 	SectionDraggableEnumFalse SectionDraggableEnum = "false"
 )
 
 type SectionEnterkeyhintEnum string
 
 const (
+	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
 	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
-	SectionEnterkeyhintEnumSearch SectionEnterkeyhintEnum = "search"
-	SectionEnterkeyhintEnumSend SectionEnterkeyhintEnum = "send"
-	SectionEnterkeyhintEnumDone SectionEnterkeyhintEnum = "done"
-	SectionEnterkeyhintEnumEnter SectionEnterkeyhintEnum = "enter"
-	SectionEnterkeyhintEnumGo SectionEnterkeyhintEnum = "go"
-	SectionEnterkeyhintEnumNext SectionEnterkeyhintEnum = "next"
+	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
+	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
+	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
+	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
+	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
 )
 
 type SectionHiddenEnum string
 
 const (
-	SectionHiddenEnumHidden SectionHiddenEnum = "hidden"
+	SectionHiddenEnumHidden     SectionHiddenEnum = "hidden"
 	SectionHiddenEnumUntilFound SectionHiddenEnum = "until-found"
+)
+
+type SectionInputmodeEnum string
+
+const (
+	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
+	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
+	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
+	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
+	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
+	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
+	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
+	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
+)
+
+type SectionSpellcheckEnum string
+
+const (
+	SectionSpellcheckEnumFalse SectionSpellcheckEnum = "false"
+	SectionSpellcheckEnumTrue  SectionSpellcheckEnum = "true"
+)
+
+type SectionTranslateEnum string
+
+const (
+	SectionTranslateEnumNo  SectionTranslateEnum = "no"
+	SectionTranslateEnumYes SectionTranslateEnum = "yes"
+)
+
+type SectionWritingsuggestionsEnum string
+
+const (
+	SectionWritingsuggestionsEnumFalse SectionWritingsuggestionsEnum = "false"
+	SectionWritingsuggestionsEnumTrue  SectionWritingsuggestionsEnum = "true"
 )
 
 type sectionAttrs map[string]any
 
 func (e *SectionElement) Autocapitalize(a SectionAutocapitalizeEnum) *SectionElement {
 	e.attributes["autocapitalize"] = a
-	
+
 	return e
 }
 
 func (e *SectionElement) Autocorrect(a SectionAutocorrectEnum) *SectionElement {
 	e.attributes["autocorrect"] = a
-	
+
 	return e
 }
 
 func (e *SectionElement) Autofocus(b bool) *SectionElement {
 	e.attributes["autofocus"] = b
-	
+
 	return e
 }
 
 func (e *SectionElement) Class(s ...string) *SectionElement {
 	e.attributes["class"] = strings.Join(s, " ")
-	
+
 	return e
 }
 
 func (e *SectionElement) Contenteditable(a SectionContenteditableEnum) *SectionElement {
 	e.attributes["contenteditable"] = a
-	
+
 	return e
 }
 
 func (e *SectionElement) Dir(a SectionDirEnum) *SectionElement {
 	e.attributes["dir"] = a
-	
+
 	return e
 }
 
 func (e *SectionElement) Draggable(a SectionDraggableEnum) *SectionElement {
 	e.attributes["draggable"] = a
-	
+
 	return e
 }
 
 func (e *SectionElement) Enterkeyhint(a SectionEnterkeyhintEnum) *SectionElement {
 	e.attributes["enterkeyhint"] = a
-	
+
 	return e
 }
 
 func (e *SectionElement) Hidden(a SectionHiddenEnum) *SectionElement {
 	e.attributes["hidden"] = a
-	
+
 	return e
 }
 
 func (e *SectionElement) Id(s string) *SectionElement {
 	e.attributes["id"] = s
-	
+
+	return e
+}
+
+func (e *SectionElement) Inert(b bool) *SectionElement {
+	e.attributes["inert"] = b
+
+	return e
+}
+
+func (e *SectionElement) Inputmode(a SectionInputmodeEnum) *SectionElement {
+	e.attributes["inputmode"] = a
+
+	return e
+}
+
+func (e *SectionElement) Itemid(s string) *SectionElement {
+	e.attributes["itemid"] = s
+
+	return e
+}
+
+func (e *SectionElement) Itemprop(s ...string) *SectionElement {
+	e.attributes["itemprop"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SectionElement) Itemref(s ...string) *SectionElement {
+	e.attributes["itemref"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SectionElement) Itemscope(b bool) *SectionElement {
+	e.attributes["itemscope"] = b
+
+	return e
+}
+
+func (e *SectionElement) Itemtype(s ...string) *SectionElement {
+	e.attributes["itemtype"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *SectionElement) Lang(s string) *SectionElement {
+	e.attributes["lang"] = s
+
+	return e
+}
+
+func (e *SectionElement) Nonce(s string) *SectionElement {
+	e.attributes["nonce"] = s
+
+	return e
+}
+
+func (e *SectionElement) Popover(s string) *SectionElement {
+	e.attributes["popover"] = s
+
 	return e
 }
 
 func (e *SectionElement) Slot(s string) *SectionElement {
 	e.attributes["slot"] = s
-	
+
+	return e
+}
+
+func (e *SectionElement) Spellcheck(a SectionSpellcheckEnum) *SectionElement {
+	e.attributes["spellcheck"] = a
+
+	return e
+}
+
+func (e *SectionElement) Style(s string) *SectionElement {
+	e.attributes["style"] = s
+
+	return e
+}
+
+func (e *SectionElement) Tabindex(i int) *SectionElement {
+	e.attributes["tabindex"] = i
+
+	return e
+}
+
+func (e *SectionElement) Title(s string) *SectionElement {
+	e.attributes["title"] = s
+
+	return e
+}
+
+func (e *SectionElement) Translate(a SectionTranslateEnum) *SectionElement {
+	e.attributes["translate"] = a
+
+	return e
+}
+
+func (e *SectionElement) Writingsuggestions(a SectionWritingsuggestionsEnum) *SectionElement {
+	e.attributes["writingsuggestions"] = a
+
 	return e
 }
 
