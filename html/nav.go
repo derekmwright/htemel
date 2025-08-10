@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type NavElement struct {
 	attributes navAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type NavElement struct {
 // Spec Description: The nav element represents a section of a page that links to other pages or to parts within the page: a section with navigation links.
 func Nav(children ...htemel.Node) *NavElement {
 	node := &NavElement{
-		children:   children,
+		children: children,
 		attributes: make(navAttrs),
 	}
 
@@ -39,73 +38,131 @@ func NavIf(condition bool, children ...htemel.Node) *NavElement {
 	}
 }
 
-type NavAutocapitalizeAttrEnum string
+type NavAutocapitalizeEnum string
 
 const (
-	NavAutocapitalizeAttrEnumCharacters NavAutocapitalizeAttrEnum = "characters"
-	NavAutocapitalizeAttrEnumNone       NavAutocapitalizeAttrEnum = "none"
-	NavAutocapitalizeAttrEnumOff        NavAutocapitalizeAttrEnum = "off"
-	NavAutocapitalizeAttrEnumOn         NavAutocapitalizeAttrEnum = "on"
-	NavAutocapitalizeAttrEnumSentences  NavAutocapitalizeAttrEnum = "sentences"
-	NavAutocapitalizeAttrEnumWords      NavAutocapitalizeAttrEnum = "words"
+	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
+	NavAutocapitalizeEnumNone NavAutocapitalizeEnum = "none"
+	NavAutocapitalizeEnumOff NavAutocapitalizeEnum = "off"
+	NavAutocapitalizeEnumOn NavAutocapitalizeEnum = "on"
+	NavAutocapitalizeEnumSentences NavAutocapitalizeEnum = "sentences"
+	NavAutocapitalizeEnumWords NavAutocapitalizeEnum = "words"
 )
 
-type NavAutocorrectAttrEnum string
+type NavAutocorrectEnum string
 
 const (
-	NavAutocorrectAttrEnumOff NavAutocorrectAttrEnum = "off"
-	NavAutocorrectAttrEnumOn  NavAutocorrectAttrEnum = "on"
+	NavAutocorrectEnumOff NavAutocorrectEnum = "off"
+	NavAutocorrectEnumOn NavAutocorrectEnum = "on"
 )
 
-type NavContenteditableAttrEnum string
+type NavContenteditableEnum string
 
 const (
-	NavContenteditableAttrEnumFalse         NavContenteditableAttrEnum = "false"
-	NavContenteditableAttrEnumPlaintextOnly NavContenteditableAttrEnum = "plaintext-only"
-	NavContenteditableAttrEnumTrue          NavContenteditableAttrEnum = "true"
+	NavContenteditableEnumFalse NavContenteditableEnum = "false"
+	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
+	NavContenteditableEnumTrue NavContenteditableEnum = "true"
+)
+
+type NavDirEnum string
+
+const (
+	NavDirEnumRtl NavDirEnum = "rtl"
+	NavDirEnumAuto NavDirEnum = "auto"
+	NavDirEnumLtr NavDirEnum = "ltr"
+)
+
+type NavDraggableEnum string
+
+const (
+	NavDraggableEnumFalse NavDraggableEnum = "false"
+	NavDraggableEnumTrue NavDraggableEnum = "true"
+)
+
+type NavEnterkeyhintEnum string
+
+const (
+	NavEnterkeyhintEnumSend NavEnterkeyhintEnum = "send"
+	NavEnterkeyhintEnumDone NavEnterkeyhintEnum = "done"
+	NavEnterkeyhintEnumEnter NavEnterkeyhintEnum = "enter"
+	NavEnterkeyhintEnumGo NavEnterkeyhintEnum = "go"
+	NavEnterkeyhintEnumNext NavEnterkeyhintEnum = "next"
+	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
+	NavEnterkeyhintEnumSearch NavEnterkeyhintEnum = "search"
+)
+
+type NavHiddenEnum string
+
+const (
+	NavHiddenEnumHidden NavHiddenEnum = "hidden"
+	NavHiddenEnumUntilFound NavHiddenEnum = "until-found"
 )
 
 type navAttrs map[string]any
 
-func (e *NavElement) Autocapitalize(a NavAutocapitalizeAttrEnum) *NavElement {
+func (e *NavElement) Autocapitalize(a NavAutocapitalizeEnum) *NavElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *NavElement) Autocorrect(a NavAutocorrectAttrEnum) *NavElement {
+func (e *NavElement) Autocorrect(a NavAutocorrectEnum) *NavElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *NavElement) Autofocus(b bool) *NavElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *NavElement) Class(s ...string) *NavElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *NavElement) Contenteditable(a NavContenteditableAttrEnum) *NavElement {
+func (e *NavElement) Contenteditable(a NavContenteditableEnum) *NavElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *NavElement) Dir(a NavDirEnum) *NavElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *NavElement) Draggable(a NavDraggableEnum) *NavElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *NavElement) Enterkeyhint(a NavEnterkeyhintEnum) *NavElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *NavElement) Hidden(a NavHiddenEnum) *NavElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *NavElement) Id(s string) *NavElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *NavElement) Slot(s string) *NavElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

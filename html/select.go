@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type SelectElement struct {
 	attributes selectAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type SelectElement struct {
 // Spec Description: The select element represents a control for selecting amongst a set of options.
 func Select(children ...htemel.Node) *SelectElement {
 	node := &SelectElement{
-		children:   children,
+		children: children,
 		attributes: make(selectAttrs),
 	}
 
@@ -39,73 +38,131 @@ func SelectIf(condition bool, children ...htemel.Node) *SelectElement {
 	}
 }
 
-type SelectAutocapitalizeAttrEnum string
+type SelectAutocapitalizeEnum string
 
 const (
-	SelectAutocapitalizeAttrEnumWords      SelectAutocapitalizeAttrEnum = "words"
-	SelectAutocapitalizeAttrEnumCharacters SelectAutocapitalizeAttrEnum = "characters"
-	SelectAutocapitalizeAttrEnumNone       SelectAutocapitalizeAttrEnum = "none"
-	SelectAutocapitalizeAttrEnumOff        SelectAutocapitalizeAttrEnum = "off"
-	SelectAutocapitalizeAttrEnumOn         SelectAutocapitalizeAttrEnum = "on"
-	SelectAutocapitalizeAttrEnumSentences  SelectAutocapitalizeAttrEnum = "sentences"
+	SelectAutocapitalizeEnumOn SelectAutocapitalizeEnum = "on"
+	SelectAutocapitalizeEnumSentences SelectAutocapitalizeEnum = "sentences"
+	SelectAutocapitalizeEnumWords SelectAutocapitalizeEnum = "words"
+	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
+	SelectAutocapitalizeEnumNone SelectAutocapitalizeEnum = "none"
+	SelectAutocapitalizeEnumOff SelectAutocapitalizeEnum = "off"
 )
 
-type SelectAutocorrectAttrEnum string
+type SelectAutocorrectEnum string
 
 const (
-	SelectAutocorrectAttrEnumOn  SelectAutocorrectAttrEnum = "on"
-	SelectAutocorrectAttrEnumOff SelectAutocorrectAttrEnum = "off"
+	SelectAutocorrectEnumOff SelectAutocorrectEnum = "off"
+	SelectAutocorrectEnumOn SelectAutocorrectEnum = "on"
 )
 
-type SelectContenteditableAttrEnum string
+type SelectContenteditableEnum string
 
 const (
-	SelectContenteditableAttrEnumFalse         SelectContenteditableAttrEnum = "false"
-	SelectContenteditableAttrEnumPlaintextOnly SelectContenteditableAttrEnum = "plaintext-only"
-	SelectContenteditableAttrEnumTrue          SelectContenteditableAttrEnum = "true"
+	SelectContenteditableEnumFalse SelectContenteditableEnum = "false"
+	SelectContenteditableEnumPlaintextOnly SelectContenteditableEnum = "plaintext-only"
+	SelectContenteditableEnumTrue SelectContenteditableEnum = "true"
+)
+
+type SelectDirEnum string
+
+const (
+	SelectDirEnumRtl SelectDirEnum = "rtl"
+	SelectDirEnumAuto SelectDirEnum = "auto"
+	SelectDirEnumLtr SelectDirEnum = "ltr"
+)
+
+type SelectDraggableEnum string
+
+const (
+	SelectDraggableEnumFalse SelectDraggableEnum = "false"
+	SelectDraggableEnumTrue SelectDraggableEnum = "true"
+)
+
+type SelectEnterkeyhintEnum string
+
+const (
+	SelectEnterkeyhintEnumDone SelectEnterkeyhintEnum = "done"
+	SelectEnterkeyhintEnumEnter SelectEnterkeyhintEnum = "enter"
+	SelectEnterkeyhintEnumGo SelectEnterkeyhintEnum = "go"
+	SelectEnterkeyhintEnumNext SelectEnterkeyhintEnum = "next"
+	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
+	SelectEnterkeyhintEnumSearch SelectEnterkeyhintEnum = "search"
+	SelectEnterkeyhintEnumSend SelectEnterkeyhintEnum = "send"
+)
+
+type SelectHiddenEnum string
+
+const (
+	SelectHiddenEnumHidden SelectHiddenEnum = "hidden"
+	SelectHiddenEnumUntilFound SelectHiddenEnum = "until-found"
 )
 
 type selectAttrs map[string]any
 
-func (e *SelectElement) Autocapitalize(a SelectAutocapitalizeAttrEnum) *SelectElement {
+func (e *SelectElement) Autocapitalize(a SelectAutocapitalizeEnum) *SelectElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *SelectElement) Autocorrect(a SelectAutocorrectAttrEnum) *SelectElement {
+func (e *SelectElement) Autocorrect(a SelectAutocorrectEnum) *SelectElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *SelectElement) Autofocus(b bool) *SelectElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *SelectElement) Class(s ...string) *SelectElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *SelectElement) Contenteditable(a SelectContenteditableAttrEnum) *SelectElement {
+func (e *SelectElement) Contenteditable(a SelectContenteditableEnum) *SelectElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *SelectElement) Dir(a SelectDirEnum) *SelectElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *SelectElement) Draggable(a SelectDraggableEnum) *SelectElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *SelectElement) Enterkeyhint(a SelectEnterkeyhintEnum) *SelectElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *SelectElement) Hidden(a SelectHiddenEnum) *SelectElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *SelectElement) Id(s string) *SelectElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *SelectElement) Slot(s string) *SelectElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

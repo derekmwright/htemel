@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type AudioElement struct {
 	attributes audioAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type AudioElement struct {
 // Spec Description: An audio element represents a sound or audio stream.
 func Audio(children ...htemel.Node) *AudioElement {
 	node := &AudioElement{
-		children:   children,
+		children: children,
 		attributes: make(audioAttrs),
 	}
 
@@ -39,73 +38,131 @@ func AudioIf(condition bool, children ...htemel.Node) *AudioElement {
 	}
 }
 
-type AudioAutocapitalizeAttrEnum string
+type AudioAutocapitalizeEnum string
 
 const (
-	AudioAutocapitalizeAttrEnumCharacters AudioAutocapitalizeAttrEnum = "characters"
-	AudioAutocapitalizeAttrEnumNone       AudioAutocapitalizeAttrEnum = "none"
-	AudioAutocapitalizeAttrEnumOff        AudioAutocapitalizeAttrEnum = "off"
-	AudioAutocapitalizeAttrEnumOn         AudioAutocapitalizeAttrEnum = "on"
-	AudioAutocapitalizeAttrEnumSentences  AudioAutocapitalizeAttrEnum = "sentences"
-	AudioAutocapitalizeAttrEnumWords      AudioAutocapitalizeAttrEnum = "words"
+	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
+	AudioAutocapitalizeEnumNone AudioAutocapitalizeEnum = "none"
+	AudioAutocapitalizeEnumOff AudioAutocapitalizeEnum = "off"
+	AudioAutocapitalizeEnumOn AudioAutocapitalizeEnum = "on"
+	AudioAutocapitalizeEnumSentences AudioAutocapitalizeEnum = "sentences"
+	AudioAutocapitalizeEnumWords AudioAutocapitalizeEnum = "words"
 )
 
-type AudioAutocorrectAttrEnum string
+type AudioAutocorrectEnum string
 
 const (
-	AudioAutocorrectAttrEnumOff AudioAutocorrectAttrEnum = "off"
-	AudioAutocorrectAttrEnumOn  AudioAutocorrectAttrEnum = "on"
+	AudioAutocorrectEnumOff AudioAutocorrectEnum = "off"
+	AudioAutocorrectEnumOn AudioAutocorrectEnum = "on"
 )
 
-type AudioContenteditableAttrEnum string
+type AudioContenteditableEnum string
 
 const (
-	AudioContenteditableAttrEnumFalse         AudioContenteditableAttrEnum = "false"
-	AudioContenteditableAttrEnumPlaintextOnly AudioContenteditableAttrEnum = "plaintext-only"
-	AudioContenteditableAttrEnumTrue          AudioContenteditableAttrEnum = "true"
+	AudioContenteditableEnumFalse AudioContenteditableEnum = "false"
+	AudioContenteditableEnumPlaintextOnly AudioContenteditableEnum = "plaintext-only"
+	AudioContenteditableEnumTrue AudioContenteditableEnum = "true"
+)
+
+type AudioDirEnum string
+
+const (
+	AudioDirEnumAuto AudioDirEnum = "auto"
+	AudioDirEnumLtr AudioDirEnum = "ltr"
+	AudioDirEnumRtl AudioDirEnum = "rtl"
+)
+
+type AudioDraggableEnum string
+
+const (
+	AudioDraggableEnumFalse AudioDraggableEnum = "false"
+	AudioDraggableEnumTrue AudioDraggableEnum = "true"
+)
+
+type AudioEnterkeyhintEnum string
+
+const (
+	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
+	AudioEnterkeyhintEnumSearch AudioEnterkeyhintEnum = "search"
+	AudioEnterkeyhintEnumSend AudioEnterkeyhintEnum = "send"
+	AudioEnterkeyhintEnumDone AudioEnterkeyhintEnum = "done"
+	AudioEnterkeyhintEnumEnter AudioEnterkeyhintEnum = "enter"
+	AudioEnterkeyhintEnumGo AudioEnterkeyhintEnum = "go"
+	AudioEnterkeyhintEnumNext AudioEnterkeyhintEnum = "next"
+)
+
+type AudioHiddenEnum string
+
+const (
+	AudioHiddenEnumHidden AudioHiddenEnum = "hidden"
+	AudioHiddenEnumUntilFound AudioHiddenEnum = "until-found"
 )
 
 type audioAttrs map[string]any
 
-func (e *AudioElement) Autocapitalize(a AudioAutocapitalizeAttrEnum) *AudioElement {
+func (e *AudioElement) Autocapitalize(a AudioAutocapitalizeEnum) *AudioElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *AudioElement) Autocorrect(a AudioAutocorrectAttrEnum) *AudioElement {
+func (e *AudioElement) Autocorrect(a AudioAutocorrectEnum) *AudioElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *AudioElement) Autofocus(b bool) *AudioElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *AudioElement) Class(s ...string) *AudioElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *AudioElement) Contenteditable(a AudioContenteditableAttrEnum) *AudioElement {
+func (e *AudioElement) Contenteditable(a AudioContenteditableEnum) *AudioElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *AudioElement) Dir(a AudioDirEnum) *AudioElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *AudioElement) Draggable(a AudioDraggableEnum) *AudioElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *AudioElement) Enterkeyhint(a AudioEnterkeyhintEnum) *AudioElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *AudioElement) Hidden(a AudioHiddenEnum) *AudioElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *AudioElement) Id(s string) *AudioElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *AudioElement) Slot(s string) *AudioElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

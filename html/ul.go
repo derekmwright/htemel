@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type UlElement struct {
 	attributes ulAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type UlElement struct {
 // Spec Description: The ul element represents a list of items, where the order of the items is not important — that is, where changing the order would not materially change the meaning of the document.
 func Ul(children ...htemel.Node) *UlElement {
 	node := &UlElement{
-		children:   children,
+		children: children,
 		attributes: make(ulAttrs),
 	}
 
@@ -39,73 +38,131 @@ func UlIf(condition bool, children ...htemel.Node) *UlElement {
 	}
 }
 
-type UlAutocapitalizeAttrEnum string
+type UlAutocapitalizeEnum string
 
 const (
-	UlAutocapitalizeAttrEnumCharacters UlAutocapitalizeAttrEnum = "characters"
-	UlAutocapitalizeAttrEnumNone       UlAutocapitalizeAttrEnum = "none"
-	UlAutocapitalizeAttrEnumOff        UlAutocapitalizeAttrEnum = "off"
-	UlAutocapitalizeAttrEnumOn         UlAutocapitalizeAttrEnum = "on"
-	UlAutocapitalizeAttrEnumSentences  UlAutocapitalizeAttrEnum = "sentences"
-	UlAutocapitalizeAttrEnumWords      UlAutocapitalizeAttrEnum = "words"
+	UlAutocapitalizeEnumWords UlAutocapitalizeEnum = "words"
+	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
+	UlAutocapitalizeEnumNone UlAutocapitalizeEnum = "none"
+	UlAutocapitalizeEnumOff UlAutocapitalizeEnum = "off"
+	UlAutocapitalizeEnumOn UlAutocapitalizeEnum = "on"
+	UlAutocapitalizeEnumSentences UlAutocapitalizeEnum = "sentences"
 )
 
-type UlAutocorrectAttrEnum string
+type UlAutocorrectEnum string
 
 const (
-	UlAutocorrectAttrEnumOff UlAutocorrectAttrEnum = "off"
-	UlAutocorrectAttrEnumOn  UlAutocorrectAttrEnum = "on"
+	UlAutocorrectEnumOff UlAutocorrectEnum = "off"
+	UlAutocorrectEnumOn UlAutocorrectEnum = "on"
 )
 
-type UlContenteditableAttrEnum string
+type UlContenteditableEnum string
 
 const (
-	UlContenteditableAttrEnumPlaintextOnly UlContenteditableAttrEnum = "plaintext-only"
-	UlContenteditableAttrEnumTrue          UlContenteditableAttrEnum = "true"
-	UlContenteditableAttrEnumFalse         UlContenteditableAttrEnum = "false"
+	UlContenteditableEnumFalse UlContenteditableEnum = "false"
+	UlContenteditableEnumPlaintextOnly UlContenteditableEnum = "plaintext-only"
+	UlContenteditableEnumTrue UlContenteditableEnum = "true"
+)
+
+type UlDirEnum string
+
+const (
+	UlDirEnumRtl UlDirEnum = "rtl"
+	UlDirEnumAuto UlDirEnum = "auto"
+	UlDirEnumLtr UlDirEnum = "ltr"
+)
+
+type UlDraggableEnum string
+
+const (
+	UlDraggableEnumFalse UlDraggableEnum = "false"
+	UlDraggableEnumTrue UlDraggableEnum = "true"
+)
+
+type UlEnterkeyhintEnum string
+
+const (
+	UlEnterkeyhintEnumDone UlEnterkeyhintEnum = "done"
+	UlEnterkeyhintEnumEnter UlEnterkeyhintEnum = "enter"
+	UlEnterkeyhintEnumGo UlEnterkeyhintEnum = "go"
+	UlEnterkeyhintEnumNext UlEnterkeyhintEnum = "next"
+	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
+	UlEnterkeyhintEnumSearch UlEnterkeyhintEnum = "search"
+	UlEnterkeyhintEnumSend UlEnterkeyhintEnum = "send"
+)
+
+type UlHiddenEnum string
+
+const (
+	UlHiddenEnumHidden UlHiddenEnum = "hidden"
+	UlHiddenEnumUntilFound UlHiddenEnum = "until-found"
 )
 
 type ulAttrs map[string]any
 
-func (e *UlElement) Autocapitalize(a UlAutocapitalizeAttrEnum) *UlElement {
+func (e *UlElement) Autocapitalize(a UlAutocapitalizeEnum) *UlElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *UlElement) Autocorrect(a UlAutocorrectAttrEnum) *UlElement {
+func (e *UlElement) Autocorrect(a UlAutocorrectEnum) *UlElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *UlElement) Autofocus(b bool) *UlElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *UlElement) Class(s ...string) *UlElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *UlElement) Contenteditable(a UlContenteditableAttrEnum) *UlElement {
+func (e *UlElement) Contenteditable(a UlContenteditableEnum) *UlElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *UlElement) Dir(a UlDirEnum) *UlElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *UlElement) Draggable(a UlDraggableEnum) *UlElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *UlElement) Enterkeyhint(a UlEnterkeyhintEnum) *UlElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *UlElement) Hidden(a UlHiddenEnum) *UlElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *UlElement) Id(s string) *UlElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *UlElement) Slot(s string) *UlElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

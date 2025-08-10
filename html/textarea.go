@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type TextareaElement struct {
 	attributes textareaAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type TextareaElement struct {
 // Spec Description: The textarea element represents a multiline plain text edit control for the element's raw value. The contents of the control represent the control's default value.
 func Textarea(children ...htemel.Node) *TextareaElement {
 	node := &TextareaElement{
-		children:   children,
+		children: children,
 		attributes: make(textareaAttrs),
 	}
 
@@ -39,73 +38,131 @@ func TextareaIf(condition bool, children ...htemel.Node) *TextareaElement {
 	}
 }
 
-type TextareaAutocapitalizeAttrEnum string
+type TextareaAutocapitalizeEnum string
 
 const (
-	TextareaAutocapitalizeAttrEnumCharacters TextareaAutocapitalizeAttrEnum = "characters"
-	TextareaAutocapitalizeAttrEnumNone       TextareaAutocapitalizeAttrEnum = "none"
-	TextareaAutocapitalizeAttrEnumOff        TextareaAutocapitalizeAttrEnum = "off"
-	TextareaAutocapitalizeAttrEnumOn         TextareaAutocapitalizeAttrEnum = "on"
-	TextareaAutocapitalizeAttrEnumSentences  TextareaAutocapitalizeAttrEnum = "sentences"
-	TextareaAutocapitalizeAttrEnumWords      TextareaAutocapitalizeAttrEnum = "words"
+	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
+	TextareaAutocapitalizeEnumNone TextareaAutocapitalizeEnum = "none"
+	TextareaAutocapitalizeEnumOff TextareaAutocapitalizeEnum = "off"
+	TextareaAutocapitalizeEnumOn TextareaAutocapitalizeEnum = "on"
+	TextareaAutocapitalizeEnumSentences TextareaAutocapitalizeEnum = "sentences"
+	TextareaAutocapitalizeEnumWords TextareaAutocapitalizeEnum = "words"
 )
 
-type TextareaAutocorrectAttrEnum string
+type TextareaAutocorrectEnum string
 
 const (
-	TextareaAutocorrectAttrEnumOff TextareaAutocorrectAttrEnum = "off"
-	TextareaAutocorrectAttrEnumOn  TextareaAutocorrectAttrEnum = "on"
+	TextareaAutocorrectEnumOff TextareaAutocorrectEnum = "off"
+	TextareaAutocorrectEnumOn TextareaAutocorrectEnum = "on"
 )
 
-type TextareaContenteditableAttrEnum string
+type TextareaContenteditableEnum string
 
 const (
-	TextareaContenteditableAttrEnumFalse         TextareaContenteditableAttrEnum = "false"
-	TextareaContenteditableAttrEnumPlaintextOnly TextareaContenteditableAttrEnum = "plaintext-only"
-	TextareaContenteditableAttrEnumTrue          TextareaContenteditableAttrEnum = "true"
+	TextareaContenteditableEnumFalse TextareaContenteditableEnum = "false"
+	TextareaContenteditableEnumPlaintextOnly TextareaContenteditableEnum = "plaintext-only"
+	TextareaContenteditableEnumTrue TextareaContenteditableEnum = "true"
+)
+
+type TextareaDirEnum string
+
+const (
+	TextareaDirEnumRtl TextareaDirEnum = "rtl"
+	TextareaDirEnumAuto TextareaDirEnum = "auto"
+	TextareaDirEnumLtr TextareaDirEnum = "ltr"
+)
+
+type TextareaDraggableEnum string
+
+const (
+	TextareaDraggableEnumFalse TextareaDraggableEnum = "false"
+	TextareaDraggableEnumTrue TextareaDraggableEnum = "true"
+)
+
+type TextareaEnterkeyhintEnum string
+
+const (
+	TextareaEnterkeyhintEnumSend TextareaEnterkeyhintEnum = "send"
+	TextareaEnterkeyhintEnumDone TextareaEnterkeyhintEnum = "done"
+	TextareaEnterkeyhintEnumEnter TextareaEnterkeyhintEnum = "enter"
+	TextareaEnterkeyhintEnumGo TextareaEnterkeyhintEnum = "go"
+	TextareaEnterkeyhintEnumNext TextareaEnterkeyhintEnum = "next"
+	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
+	TextareaEnterkeyhintEnumSearch TextareaEnterkeyhintEnum = "search"
+)
+
+type TextareaHiddenEnum string
+
+const (
+	TextareaHiddenEnumHidden TextareaHiddenEnum = "hidden"
+	TextareaHiddenEnumUntilFound TextareaHiddenEnum = "until-found"
 )
 
 type textareaAttrs map[string]any
 
-func (e *TextareaElement) Autocapitalize(a TextareaAutocapitalizeAttrEnum) *TextareaElement {
+func (e *TextareaElement) Autocapitalize(a TextareaAutocapitalizeEnum) *TextareaElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *TextareaElement) Autocorrect(a TextareaAutocorrectAttrEnum) *TextareaElement {
+func (e *TextareaElement) Autocorrect(a TextareaAutocorrectEnum) *TextareaElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *TextareaElement) Autofocus(b bool) *TextareaElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *TextareaElement) Class(s ...string) *TextareaElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *TextareaElement) Contenteditable(a TextareaContenteditableAttrEnum) *TextareaElement {
+func (e *TextareaElement) Contenteditable(a TextareaContenteditableEnum) *TextareaElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *TextareaElement) Dir(a TextareaDirEnum) *TextareaElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *TextareaElement) Draggable(a TextareaDraggableEnum) *TextareaElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *TextareaElement) Enterkeyhint(a TextareaEnterkeyhintEnum) *TextareaElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *TextareaElement) Hidden(a TextareaHiddenEnum) *TextareaElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *TextareaElement) Id(s string) *TextareaElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *TextareaElement) Slot(s string) *TextareaElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

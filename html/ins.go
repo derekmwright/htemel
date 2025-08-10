@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type InsElement struct {
 	attributes insAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type InsElement struct {
 // Spec Description: The ins element represents an addition to the document.
 func Ins(children ...htemel.Node) *InsElement {
 	node := &InsElement{
-		children:   children,
+		children: children,
 		attributes: make(insAttrs),
 	}
 
@@ -39,73 +38,131 @@ func InsIf(condition bool, children ...htemel.Node) *InsElement {
 	}
 }
 
-type InsAutocapitalizeAttrEnum string
+type InsAutocapitalizeEnum string
 
 const (
-	InsAutocapitalizeAttrEnumCharacters InsAutocapitalizeAttrEnum = "characters"
-	InsAutocapitalizeAttrEnumNone       InsAutocapitalizeAttrEnum = "none"
-	InsAutocapitalizeAttrEnumOff        InsAutocapitalizeAttrEnum = "off"
-	InsAutocapitalizeAttrEnumOn         InsAutocapitalizeAttrEnum = "on"
-	InsAutocapitalizeAttrEnumSentences  InsAutocapitalizeAttrEnum = "sentences"
-	InsAutocapitalizeAttrEnumWords      InsAutocapitalizeAttrEnum = "words"
+	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
+	InsAutocapitalizeEnumNone InsAutocapitalizeEnum = "none"
+	InsAutocapitalizeEnumOff InsAutocapitalizeEnum = "off"
+	InsAutocapitalizeEnumOn InsAutocapitalizeEnum = "on"
+	InsAutocapitalizeEnumSentences InsAutocapitalizeEnum = "sentences"
+	InsAutocapitalizeEnumWords InsAutocapitalizeEnum = "words"
 )
 
-type InsAutocorrectAttrEnum string
+type InsAutocorrectEnum string
 
 const (
-	InsAutocorrectAttrEnumOff InsAutocorrectAttrEnum = "off"
-	InsAutocorrectAttrEnumOn  InsAutocorrectAttrEnum = "on"
+	InsAutocorrectEnumOn InsAutocorrectEnum = "on"
+	InsAutocorrectEnumOff InsAutocorrectEnum = "off"
 )
 
-type InsContenteditableAttrEnum string
+type InsContenteditableEnum string
 
 const (
-	InsContenteditableAttrEnumFalse         InsContenteditableAttrEnum = "false"
-	InsContenteditableAttrEnumPlaintextOnly InsContenteditableAttrEnum = "plaintext-only"
-	InsContenteditableAttrEnumTrue          InsContenteditableAttrEnum = "true"
+	InsContenteditableEnumTrue InsContenteditableEnum = "true"
+	InsContenteditableEnumFalse InsContenteditableEnum = "false"
+	InsContenteditableEnumPlaintextOnly InsContenteditableEnum = "plaintext-only"
+)
+
+type InsDirEnum string
+
+const (
+	InsDirEnumAuto InsDirEnum = "auto"
+	InsDirEnumLtr InsDirEnum = "ltr"
+	InsDirEnumRtl InsDirEnum = "rtl"
+)
+
+type InsDraggableEnum string
+
+const (
+	InsDraggableEnumFalse InsDraggableEnum = "false"
+	InsDraggableEnumTrue InsDraggableEnum = "true"
+)
+
+type InsEnterkeyhintEnum string
+
+const (
+	InsEnterkeyhintEnumNext InsEnterkeyhintEnum = "next"
+	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
+	InsEnterkeyhintEnumSearch InsEnterkeyhintEnum = "search"
+	InsEnterkeyhintEnumSend InsEnterkeyhintEnum = "send"
+	InsEnterkeyhintEnumDone InsEnterkeyhintEnum = "done"
+	InsEnterkeyhintEnumEnter InsEnterkeyhintEnum = "enter"
+	InsEnterkeyhintEnumGo InsEnterkeyhintEnum = "go"
+)
+
+type InsHiddenEnum string
+
+const (
+	InsHiddenEnumHidden InsHiddenEnum = "hidden"
+	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
 )
 
 type insAttrs map[string]any
 
-func (e *InsElement) Autocapitalize(a InsAutocapitalizeAttrEnum) *InsElement {
+func (e *InsElement) Autocapitalize(a InsAutocapitalizeEnum) *InsElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *InsElement) Autocorrect(a InsAutocorrectAttrEnum) *InsElement {
+func (e *InsElement) Autocorrect(a InsAutocorrectEnum) *InsElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *InsElement) Autofocus(b bool) *InsElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *InsElement) Class(s ...string) *InsElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *InsElement) Contenteditable(a InsContenteditableAttrEnum) *InsElement {
+func (e *InsElement) Contenteditable(a InsContenteditableEnum) *InsElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *InsElement) Dir(a InsDirEnum) *InsElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *InsElement) Draggable(a InsDraggableEnum) *InsElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *InsElement) Enterkeyhint(a InsEnterkeyhintEnum) *InsElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *InsElement) Hidden(a InsHiddenEnum) *InsElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *InsElement) Id(s string) *InsElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *InsElement) Slot(s string) *InsElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

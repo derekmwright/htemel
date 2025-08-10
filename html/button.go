@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type ButtonElement struct {
 	attributes buttonAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type ButtonElement struct {
 // Spec Description: The button element represents a button labeled by its contents.
 func Button(children ...htemel.Node) *ButtonElement {
 	node := &ButtonElement{
-		children:   children,
+		children: children,
 		attributes: make(buttonAttrs),
 	}
 
@@ -39,73 +38,131 @@ func ButtonIf(condition bool, children ...htemel.Node) *ButtonElement {
 	}
 }
 
-type ButtonAutocapitalizeAttrEnum string
+type ButtonAutocapitalizeEnum string
 
 const (
-	ButtonAutocapitalizeAttrEnumSentences  ButtonAutocapitalizeAttrEnum = "sentences"
-	ButtonAutocapitalizeAttrEnumWords      ButtonAutocapitalizeAttrEnum = "words"
-	ButtonAutocapitalizeAttrEnumCharacters ButtonAutocapitalizeAttrEnum = "characters"
-	ButtonAutocapitalizeAttrEnumNone       ButtonAutocapitalizeAttrEnum = "none"
-	ButtonAutocapitalizeAttrEnumOff        ButtonAutocapitalizeAttrEnum = "off"
-	ButtonAutocapitalizeAttrEnumOn         ButtonAutocapitalizeAttrEnum = "on"
+	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
+	ButtonAutocapitalizeEnumNone ButtonAutocapitalizeEnum = "none"
+	ButtonAutocapitalizeEnumOff ButtonAutocapitalizeEnum = "off"
+	ButtonAutocapitalizeEnumOn ButtonAutocapitalizeEnum = "on"
+	ButtonAutocapitalizeEnumSentences ButtonAutocapitalizeEnum = "sentences"
+	ButtonAutocapitalizeEnumWords ButtonAutocapitalizeEnum = "words"
 )
 
-type ButtonAutocorrectAttrEnum string
+type ButtonAutocorrectEnum string
 
 const (
-	ButtonAutocorrectAttrEnumOff ButtonAutocorrectAttrEnum = "off"
-	ButtonAutocorrectAttrEnumOn  ButtonAutocorrectAttrEnum = "on"
+	ButtonAutocorrectEnumOn ButtonAutocorrectEnum = "on"
+	ButtonAutocorrectEnumOff ButtonAutocorrectEnum = "off"
 )
 
-type ButtonContenteditableAttrEnum string
+type ButtonContenteditableEnum string
 
 const (
-	ButtonContenteditableAttrEnumFalse         ButtonContenteditableAttrEnum = "false"
-	ButtonContenteditableAttrEnumPlaintextOnly ButtonContenteditableAttrEnum = "plaintext-only"
-	ButtonContenteditableAttrEnumTrue          ButtonContenteditableAttrEnum = "true"
+	ButtonContenteditableEnumFalse ButtonContenteditableEnum = "false"
+	ButtonContenteditableEnumPlaintextOnly ButtonContenteditableEnum = "plaintext-only"
+	ButtonContenteditableEnumTrue ButtonContenteditableEnum = "true"
+)
+
+type ButtonDirEnum string
+
+const (
+	ButtonDirEnumAuto ButtonDirEnum = "auto"
+	ButtonDirEnumLtr ButtonDirEnum = "ltr"
+	ButtonDirEnumRtl ButtonDirEnum = "rtl"
+)
+
+type ButtonDraggableEnum string
+
+const (
+	ButtonDraggableEnumFalse ButtonDraggableEnum = "false"
+	ButtonDraggableEnumTrue ButtonDraggableEnum = "true"
+)
+
+type ButtonEnterkeyhintEnum string
+
+const (
+	ButtonEnterkeyhintEnumDone ButtonEnterkeyhintEnum = "done"
+	ButtonEnterkeyhintEnumEnter ButtonEnterkeyhintEnum = "enter"
+	ButtonEnterkeyhintEnumGo ButtonEnterkeyhintEnum = "go"
+	ButtonEnterkeyhintEnumNext ButtonEnterkeyhintEnum = "next"
+	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
+	ButtonEnterkeyhintEnumSearch ButtonEnterkeyhintEnum = "search"
+	ButtonEnterkeyhintEnumSend ButtonEnterkeyhintEnum = "send"
+)
+
+type ButtonHiddenEnum string
+
+const (
+	ButtonHiddenEnumHidden ButtonHiddenEnum = "hidden"
+	ButtonHiddenEnumUntilFound ButtonHiddenEnum = "until-found"
 )
 
 type buttonAttrs map[string]any
 
-func (e *ButtonElement) Autocapitalize(a ButtonAutocapitalizeAttrEnum) *ButtonElement {
+func (e *ButtonElement) Autocapitalize(a ButtonAutocapitalizeEnum) *ButtonElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *ButtonElement) Autocorrect(a ButtonAutocorrectAttrEnum) *ButtonElement {
+func (e *ButtonElement) Autocorrect(a ButtonAutocorrectEnum) *ButtonElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *ButtonElement) Autofocus(b bool) *ButtonElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *ButtonElement) Class(s ...string) *ButtonElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *ButtonElement) Contenteditable(a ButtonContenteditableAttrEnum) *ButtonElement {
+func (e *ButtonElement) Contenteditable(a ButtonContenteditableEnum) *ButtonElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *ButtonElement) Dir(a ButtonDirEnum) *ButtonElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *ButtonElement) Draggable(a ButtonDraggableEnum) *ButtonElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *ButtonElement) Enterkeyhint(a ButtonEnterkeyhintEnum) *ButtonElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *ButtonElement) Hidden(a ButtonHiddenEnum) *ButtonElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *ButtonElement) Id(s string) *ButtonElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *ButtonElement) Slot(s string) *ButtonElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

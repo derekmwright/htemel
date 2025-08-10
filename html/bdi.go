@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type BdiElement struct {
 	attributes bdiAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type BdiElement struct {
 // Spec Description: The bdi element represents a span of text that is to be isolated from its surroundings for the purposes of bidirectional text formatting. [BIDI]
 func Bdi(children ...htemel.Node) *BdiElement {
 	node := &BdiElement{
-		children:   children,
+		children: children,
 		attributes: make(bdiAttrs),
 	}
 
@@ -39,73 +38,131 @@ func BdiIf(condition bool, children ...htemel.Node) *BdiElement {
 	}
 }
 
-type BdiAutocapitalizeAttrEnum string
+type BdiAutocapitalizeEnum string
 
 const (
-	BdiAutocapitalizeAttrEnumOn         BdiAutocapitalizeAttrEnum = "on"
-	BdiAutocapitalizeAttrEnumSentences  BdiAutocapitalizeAttrEnum = "sentences"
-	BdiAutocapitalizeAttrEnumWords      BdiAutocapitalizeAttrEnum = "words"
-	BdiAutocapitalizeAttrEnumCharacters BdiAutocapitalizeAttrEnum = "characters"
-	BdiAutocapitalizeAttrEnumNone       BdiAutocapitalizeAttrEnum = "none"
-	BdiAutocapitalizeAttrEnumOff        BdiAutocapitalizeAttrEnum = "off"
+	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
+	BdiAutocapitalizeEnumNone BdiAutocapitalizeEnum = "none"
+	BdiAutocapitalizeEnumOff BdiAutocapitalizeEnum = "off"
+	BdiAutocapitalizeEnumOn BdiAutocapitalizeEnum = "on"
+	BdiAutocapitalizeEnumSentences BdiAutocapitalizeEnum = "sentences"
+	BdiAutocapitalizeEnumWords BdiAutocapitalizeEnum = "words"
 )
 
-type BdiAutocorrectAttrEnum string
+type BdiAutocorrectEnum string
 
 const (
-	BdiAutocorrectAttrEnumOff BdiAutocorrectAttrEnum = "off"
-	BdiAutocorrectAttrEnumOn  BdiAutocorrectAttrEnum = "on"
+	BdiAutocorrectEnumOff BdiAutocorrectEnum = "off"
+	BdiAutocorrectEnumOn BdiAutocorrectEnum = "on"
 )
 
-type BdiContenteditableAttrEnum string
+type BdiContenteditableEnum string
 
 const (
-	BdiContenteditableAttrEnumFalse         BdiContenteditableAttrEnum = "false"
-	BdiContenteditableAttrEnumPlaintextOnly BdiContenteditableAttrEnum = "plaintext-only"
-	BdiContenteditableAttrEnumTrue          BdiContenteditableAttrEnum = "true"
+	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
+	BdiContenteditableEnumTrue BdiContenteditableEnum = "true"
+	BdiContenteditableEnumFalse BdiContenteditableEnum = "false"
+)
+
+type BdiDirEnum string
+
+const (
+	BdiDirEnumAuto BdiDirEnum = "auto"
+	BdiDirEnumLtr BdiDirEnum = "ltr"
+	BdiDirEnumRtl BdiDirEnum = "rtl"
+)
+
+type BdiDraggableEnum string
+
+const (
+	BdiDraggableEnumFalse BdiDraggableEnum = "false"
+	BdiDraggableEnumTrue BdiDraggableEnum = "true"
+)
+
+type BdiEnterkeyhintEnum string
+
+const (
+	BdiEnterkeyhintEnumGo BdiEnterkeyhintEnum = "go"
+	BdiEnterkeyhintEnumNext BdiEnterkeyhintEnum = "next"
+	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
+	BdiEnterkeyhintEnumSearch BdiEnterkeyhintEnum = "search"
+	BdiEnterkeyhintEnumSend BdiEnterkeyhintEnum = "send"
+	BdiEnterkeyhintEnumDone BdiEnterkeyhintEnum = "done"
+	BdiEnterkeyhintEnumEnter BdiEnterkeyhintEnum = "enter"
+)
+
+type BdiHiddenEnum string
+
+const (
+	BdiHiddenEnumHidden BdiHiddenEnum = "hidden"
+	BdiHiddenEnumUntilFound BdiHiddenEnum = "until-found"
 )
 
 type bdiAttrs map[string]any
 
-func (e *BdiElement) Autocapitalize(a BdiAutocapitalizeAttrEnum) *BdiElement {
+func (e *BdiElement) Autocapitalize(a BdiAutocapitalizeEnum) *BdiElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *BdiElement) Autocorrect(a BdiAutocorrectAttrEnum) *BdiElement {
+func (e *BdiElement) Autocorrect(a BdiAutocorrectEnum) *BdiElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *BdiElement) Autofocus(b bool) *BdiElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *BdiElement) Class(s ...string) *BdiElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *BdiElement) Contenteditable(a BdiContenteditableAttrEnum) *BdiElement {
+func (e *BdiElement) Contenteditable(a BdiContenteditableEnum) *BdiElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *BdiElement) Dir(a BdiDirEnum) *BdiElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *BdiElement) Draggable(a BdiDraggableEnum) *BdiElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *BdiElement) Enterkeyhint(a BdiEnterkeyhintEnum) *BdiElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *BdiElement) Hidden(a BdiHiddenEnum) *BdiElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *BdiElement) Id(s string) *BdiElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *BdiElement) Slot(s string) *BdiElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

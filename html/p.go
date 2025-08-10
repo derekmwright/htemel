@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type PElement struct {
 	attributes pAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type PElement struct {
 // Spec Description: The p element represents a paragraph.
 func P(children ...htemel.Node) *PElement {
 	node := &PElement{
-		children:   children,
+		children: children,
 		attributes: make(pAttrs),
 	}
 
@@ -39,73 +38,131 @@ func PIf(condition bool, children ...htemel.Node) *PElement {
 	}
 }
 
-type PAutocapitalizeAttrEnum string
+type PAutocapitalizeEnum string
 
 const (
-	PAutocapitalizeAttrEnumCharacters PAutocapitalizeAttrEnum = "characters"
-	PAutocapitalizeAttrEnumNone       PAutocapitalizeAttrEnum = "none"
-	PAutocapitalizeAttrEnumOff        PAutocapitalizeAttrEnum = "off"
-	PAutocapitalizeAttrEnumOn         PAutocapitalizeAttrEnum = "on"
-	PAutocapitalizeAttrEnumSentences  PAutocapitalizeAttrEnum = "sentences"
-	PAutocapitalizeAttrEnumWords      PAutocapitalizeAttrEnum = "words"
+	PAutocapitalizeEnumOn PAutocapitalizeEnum = "on"
+	PAutocapitalizeEnumSentences PAutocapitalizeEnum = "sentences"
+	PAutocapitalizeEnumWords PAutocapitalizeEnum = "words"
+	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
+	PAutocapitalizeEnumNone PAutocapitalizeEnum = "none"
+	PAutocapitalizeEnumOff PAutocapitalizeEnum = "off"
 )
 
-type PAutocorrectAttrEnum string
+type PAutocorrectEnum string
 
 const (
-	PAutocorrectAttrEnumOn  PAutocorrectAttrEnum = "on"
-	PAutocorrectAttrEnumOff PAutocorrectAttrEnum = "off"
+	PAutocorrectEnumOff PAutocorrectEnum = "off"
+	PAutocorrectEnumOn PAutocorrectEnum = "on"
 )
 
-type PContenteditableAttrEnum string
+type PContenteditableEnum string
 
 const (
-	PContenteditableAttrEnumFalse         PContenteditableAttrEnum = "false"
-	PContenteditableAttrEnumPlaintextOnly PContenteditableAttrEnum = "plaintext-only"
-	PContenteditableAttrEnumTrue          PContenteditableAttrEnum = "true"
+	PContenteditableEnumFalse PContenteditableEnum = "false"
+	PContenteditableEnumPlaintextOnly PContenteditableEnum = "plaintext-only"
+	PContenteditableEnumTrue PContenteditableEnum = "true"
+)
+
+type PDirEnum string
+
+const (
+	PDirEnumRtl PDirEnum = "rtl"
+	PDirEnumAuto PDirEnum = "auto"
+	PDirEnumLtr PDirEnum = "ltr"
+)
+
+type PDraggableEnum string
+
+const (
+	PDraggableEnumFalse PDraggableEnum = "false"
+	PDraggableEnumTrue PDraggableEnum = "true"
+)
+
+type PEnterkeyhintEnum string
+
+const (
+	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
+	PEnterkeyhintEnumSearch PEnterkeyhintEnum = "search"
+	PEnterkeyhintEnumSend PEnterkeyhintEnum = "send"
+	PEnterkeyhintEnumDone PEnterkeyhintEnum = "done"
+	PEnterkeyhintEnumEnter PEnterkeyhintEnum = "enter"
+	PEnterkeyhintEnumGo PEnterkeyhintEnum = "go"
+	PEnterkeyhintEnumNext PEnterkeyhintEnum = "next"
+)
+
+type PHiddenEnum string
+
+const (
+	PHiddenEnumUntilFound PHiddenEnum = "until-found"
+	PHiddenEnumHidden PHiddenEnum = "hidden"
 )
 
 type pAttrs map[string]any
 
-func (e *PElement) Autocapitalize(a PAutocapitalizeAttrEnum) *PElement {
+func (e *PElement) Autocapitalize(a PAutocapitalizeEnum) *PElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *PElement) Autocorrect(a PAutocorrectAttrEnum) *PElement {
+func (e *PElement) Autocorrect(a PAutocorrectEnum) *PElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *PElement) Autofocus(b bool) *PElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *PElement) Class(s ...string) *PElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *PElement) Contenteditable(a PContenteditableAttrEnum) *PElement {
+func (e *PElement) Contenteditable(a PContenteditableEnum) *PElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *PElement) Dir(a PDirEnum) *PElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *PElement) Draggable(a PDraggableEnum) *PElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *PElement) Enterkeyhint(a PEnterkeyhintEnum) *PElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *PElement) Hidden(a PHiddenEnum) *PElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *PElement) Id(s string) *PElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *PElement) Slot(s string) *PElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

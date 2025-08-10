@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type BdoElement struct {
 	attributes bdoAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type BdoElement struct {
 // Spec Description: The bdo element represents explicit text directionality formatting control for its children. It allows authors to override the Unicode bidirectional algorithm by explicitly specifying a direction override. [BIDI]
 func Bdo(children ...htemel.Node) *BdoElement {
 	node := &BdoElement{
-		children:   children,
+		children: children,
 		attributes: make(bdoAttrs),
 	}
 
@@ -39,73 +38,131 @@ func BdoIf(condition bool, children ...htemel.Node) *BdoElement {
 	}
 }
 
-type BdoAutocapitalizeAttrEnum string
+type BdoAutocapitalizeEnum string
 
 const (
-	BdoAutocapitalizeAttrEnumWords      BdoAutocapitalizeAttrEnum = "words"
-	BdoAutocapitalizeAttrEnumCharacters BdoAutocapitalizeAttrEnum = "characters"
-	BdoAutocapitalizeAttrEnumNone       BdoAutocapitalizeAttrEnum = "none"
-	BdoAutocapitalizeAttrEnumOff        BdoAutocapitalizeAttrEnum = "off"
-	BdoAutocapitalizeAttrEnumOn         BdoAutocapitalizeAttrEnum = "on"
-	BdoAutocapitalizeAttrEnumSentences  BdoAutocapitalizeAttrEnum = "sentences"
+	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
+	BdoAutocapitalizeEnumNone BdoAutocapitalizeEnum = "none"
+	BdoAutocapitalizeEnumOff BdoAutocapitalizeEnum = "off"
+	BdoAutocapitalizeEnumOn BdoAutocapitalizeEnum = "on"
+	BdoAutocapitalizeEnumSentences BdoAutocapitalizeEnum = "sentences"
+	BdoAutocapitalizeEnumWords BdoAutocapitalizeEnum = "words"
 )
 
-type BdoAutocorrectAttrEnum string
+type BdoAutocorrectEnum string
 
 const (
-	BdoAutocorrectAttrEnumOff BdoAutocorrectAttrEnum = "off"
-	BdoAutocorrectAttrEnumOn  BdoAutocorrectAttrEnum = "on"
+	BdoAutocorrectEnumOff BdoAutocorrectEnum = "off"
+	BdoAutocorrectEnumOn BdoAutocorrectEnum = "on"
 )
 
-type BdoContenteditableAttrEnum string
+type BdoContenteditableEnum string
 
 const (
-	BdoContenteditableAttrEnumFalse         BdoContenteditableAttrEnum = "false"
-	BdoContenteditableAttrEnumPlaintextOnly BdoContenteditableAttrEnum = "plaintext-only"
-	BdoContenteditableAttrEnumTrue          BdoContenteditableAttrEnum = "true"
+	BdoContenteditableEnumFalse BdoContenteditableEnum = "false"
+	BdoContenteditableEnumPlaintextOnly BdoContenteditableEnum = "plaintext-only"
+	BdoContenteditableEnumTrue BdoContenteditableEnum = "true"
+)
+
+type BdoDirEnum string
+
+const (
+	BdoDirEnumAuto BdoDirEnum = "auto"
+	BdoDirEnumLtr BdoDirEnum = "ltr"
+	BdoDirEnumRtl BdoDirEnum = "rtl"
+)
+
+type BdoDraggableEnum string
+
+const (
+	BdoDraggableEnumFalse BdoDraggableEnum = "false"
+	BdoDraggableEnumTrue BdoDraggableEnum = "true"
+)
+
+type BdoEnterkeyhintEnum string
+
+const (
+	BdoEnterkeyhintEnumEnter BdoEnterkeyhintEnum = "enter"
+	BdoEnterkeyhintEnumGo BdoEnterkeyhintEnum = "go"
+	BdoEnterkeyhintEnumNext BdoEnterkeyhintEnum = "next"
+	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
+	BdoEnterkeyhintEnumSearch BdoEnterkeyhintEnum = "search"
+	BdoEnterkeyhintEnumSend BdoEnterkeyhintEnum = "send"
+	BdoEnterkeyhintEnumDone BdoEnterkeyhintEnum = "done"
+)
+
+type BdoHiddenEnum string
+
+const (
+	BdoHiddenEnumHidden BdoHiddenEnum = "hidden"
+	BdoHiddenEnumUntilFound BdoHiddenEnum = "until-found"
 )
 
 type bdoAttrs map[string]any
 
-func (e *BdoElement) Autocapitalize(a BdoAutocapitalizeAttrEnum) *BdoElement {
+func (e *BdoElement) Autocapitalize(a BdoAutocapitalizeEnum) *BdoElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *BdoElement) Autocorrect(a BdoAutocorrectAttrEnum) *BdoElement {
+func (e *BdoElement) Autocorrect(a BdoAutocorrectEnum) *BdoElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *BdoElement) Autofocus(b bool) *BdoElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *BdoElement) Class(s ...string) *BdoElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *BdoElement) Contenteditable(a BdoContenteditableAttrEnum) *BdoElement {
+func (e *BdoElement) Contenteditable(a BdoContenteditableEnum) *BdoElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *BdoElement) Dir(a BdoDirEnum) *BdoElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *BdoElement) Draggable(a BdoDraggableEnum) *BdoElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *BdoElement) Enterkeyhint(a BdoEnterkeyhintEnum) *BdoElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *BdoElement) Hidden(a BdoHiddenEnum) *BdoElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *BdoElement) Id(s string) *BdoElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *BdoElement) Slot(s string) *BdoElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

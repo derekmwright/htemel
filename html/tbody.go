@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type TbodyElement struct {
 	attributes tbodyAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type TbodyElement struct {
 // Spec Description: The tbody element represents a block of rows that consist of a body of data for the parent table element, if the tbody element has a parent and it is a table.
 func Tbody(children ...htemel.Node) *TbodyElement {
 	node := &TbodyElement{
-		children:   children,
+		children: children,
 		attributes: make(tbodyAttrs),
 	}
 
@@ -39,73 +38,131 @@ func TbodyIf(condition bool, children ...htemel.Node) *TbodyElement {
 	}
 }
 
-type TbodyAutocapitalizeAttrEnum string
+type TbodyAutocapitalizeEnum string
 
 const (
-	TbodyAutocapitalizeAttrEnumCharacters TbodyAutocapitalizeAttrEnum = "characters"
-	TbodyAutocapitalizeAttrEnumNone       TbodyAutocapitalizeAttrEnum = "none"
-	TbodyAutocapitalizeAttrEnumOff        TbodyAutocapitalizeAttrEnum = "off"
-	TbodyAutocapitalizeAttrEnumOn         TbodyAutocapitalizeAttrEnum = "on"
-	TbodyAutocapitalizeAttrEnumSentences  TbodyAutocapitalizeAttrEnum = "sentences"
-	TbodyAutocapitalizeAttrEnumWords      TbodyAutocapitalizeAttrEnum = "words"
+	TbodyAutocapitalizeEnumWords TbodyAutocapitalizeEnum = "words"
+	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
+	TbodyAutocapitalizeEnumNone TbodyAutocapitalizeEnum = "none"
+	TbodyAutocapitalizeEnumOff TbodyAutocapitalizeEnum = "off"
+	TbodyAutocapitalizeEnumOn TbodyAutocapitalizeEnum = "on"
+	TbodyAutocapitalizeEnumSentences TbodyAutocapitalizeEnum = "sentences"
 )
 
-type TbodyAutocorrectAttrEnum string
+type TbodyAutocorrectEnum string
 
 const (
-	TbodyAutocorrectAttrEnumOff TbodyAutocorrectAttrEnum = "off"
-	TbodyAutocorrectAttrEnumOn  TbodyAutocorrectAttrEnum = "on"
+	TbodyAutocorrectEnumOn TbodyAutocorrectEnum = "on"
+	TbodyAutocorrectEnumOff TbodyAutocorrectEnum = "off"
 )
 
-type TbodyContenteditableAttrEnum string
+type TbodyContenteditableEnum string
 
 const (
-	TbodyContenteditableAttrEnumFalse         TbodyContenteditableAttrEnum = "false"
-	TbodyContenteditableAttrEnumPlaintextOnly TbodyContenteditableAttrEnum = "plaintext-only"
-	TbodyContenteditableAttrEnumTrue          TbodyContenteditableAttrEnum = "true"
+	TbodyContenteditableEnumFalse TbodyContenteditableEnum = "false"
+	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
+	TbodyContenteditableEnumTrue TbodyContenteditableEnum = "true"
+)
+
+type TbodyDirEnum string
+
+const (
+	TbodyDirEnumAuto TbodyDirEnum = "auto"
+	TbodyDirEnumLtr TbodyDirEnum = "ltr"
+	TbodyDirEnumRtl TbodyDirEnum = "rtl"
+)
+
+type TbodyDraggableEnum string
+
+const (
+	TbodyDraggableEnumFalse TbodyDraggableEnum = "false"
+	TbodyDraggableEnumTrue TbodyDraggableEnum = "true"
+)
+
+type TbodyEnterkeyhintEnum string
+
+const (
+	TbodyEnterkeyhintEnumEnter TbodyEnterkeyhintEnum = "enter"
+	TbodyEnterkeyhintEnumGo TbodyEnterkeyhintEnum = "go"
+	TbodyEnterkeyhintEnumNext TbodyEnterkeyhintEnum = "next"
+	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
+	TbodyEnterkeyhintEnumSearch TbodyEnterkeyhintEnum = "search"
+	TbodyEnterkeyhintEnumSend TbodyEnterkeyhintEnum = "send"
+	TbodyEnterkeyhintEnumDone TbodyEnterkeyhintEnum = "done"
+)
+
+type TbodyHiddenEnum string
+
+const (
+	TbodyHiddenEnumHidden TbodyHiddenEnum = "hidden"
+	TbodyHiddenEnumUntilFound TbodyHiddenEnum = "until-found"
 )
 
 type tbodyAttrs map[string]any
 
-func (e *TbodyElement) Autocapitalize(a TbodyAutocapitalizeAttrEnum) *TbodyElement {
+func (e *TbodyElement) Autocapitalize(a TbodyAutocapitalizeEnum) *TbodyElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *TbodyElement) Autocorrect(a TbodyAutocorrectAttrEnum) *TbodyElement {
+func (e *TbodyElement) Autocorrect(a TbodyAutocorrectEnum) *TbodyElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *TbodyElement) Autofocus(b bool) *TbodyElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *TbodyElement) Class(s ...string) *TbodyElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *TbodyElement) Contenteditable(a TbodyContenteditableAttrEnum) *TbodyElement {
+func (e *TbodyElement) Contenteditable(a TbodyContenteditableEnum) *TbodyElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *TbodyElement) Dir(a TbodyDirEnum) *TbodyElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *TbodyElement) Draggable(a TbodyDraggableEnum) *TbodyElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *TbodyElement) Enterkeyhint(a TbodyEnterkeyhintEnum) *TbodyElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *TbodyElement) Hidden(a TbodyHiddenEnum) *TbodyElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *TbodyElement) Id(s string) *TbodyElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *TbodyElement) Slot(s string) *TbodyElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

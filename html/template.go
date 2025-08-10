@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type TemplateElement struct {
 	attributes templateAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type TemplateElement struct {
 // Spec Description: The template element is used to declare fragments of HTML that can be cloned and inserted in the document by script.
 func Template(children ...htemel.Node) *TemplateElement {
 	node := &TemplateElement{
-		children:   children,
+		children: children,
 		attributes: make(templateAttrs),
 	}
 
@@ -39,73 +38,131 @@ func TemplateIf(condition bool, children ...htemel.Node) *TemplateElement {
 	}
 }
 
-type TemplateAutocapitalizeAttrEnum string
+type TemplateAutocapitalizeEnum string
 
 const (
-	TemplateAutocapitalizeAttrEnumNone       TemplateAutocapitalizeAttrEnum = "none"
-	TemplateAutocapitalizeAttrEnumOff        TemplateAutocapitalizeAttrEnum = "off"
-	TemplateAutocapitalizeAttrEnumOn         TemplateAutocapitalizeAttrEnum = "on"
-	TemplateAutocapitalizeAttrEnumSentences  TemplateAutocapitalizeAttrEnum = "sentences"
-	TemplateAutocapitalizeAttrEnumWords      TemplateAutocapitalizeAttrEnum = "words"
-	TemplateAutocapitalizeAttrEnumCharacters TemplateAutocapitalizeAttrEnum = "characters"
+	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
+	TemplateAutocapitalizeEnumNone TemplateAutocapitalizeEnum = "none"
+	TemplateAutocapitalizeEnumOff TemplateAutocapitalizeEnum = "off"
+	TemplateAutocapitalizeEnumOn TemplateAutocapitalizeEnum = "on"
+	TemplateAutocapitalizeEnumSentences TemplateAutocapitalizeEnum = "sentences"
+	TemplateAutocapitalizeEnumWords TemplateAutocapitalizeEnum = "words"
 )
 
-type TemplateAutocorrectAttrEnum string
+type TemplateAutocorrectEnum string
 
 const (
-	TemplateAutocorrectAttrEnumOff TemplateAutocorrectAttrEnum = "off"
-	TemplateAutocorrectAttrEnumOn  TemplateAutocorrectAttrEnum = "on"
+	TemplateAutocorrectEnumOff TemplateAutocorrectEnum = "off"
+	TemplateAutocorrectEnumOn TemplateAutocorrectEnum = "on"
 )
 
-type TemplateContenteditableAttrEnum string
+type TemplateContenteditableEnum string
 
 const (
-	TemplateContenteditableAttrEnumFalse         TemplateContenteditableAttrEnum = "false"
-	TemplateContenteditableAttrEnumPlaintextOnly TemplateContenteditableAttrEnum = "plaintext-only"
-	TemplateContenteditableAttrEnumTrue          TemplateContenteditableAttrEnum = "true"
+	TemplateContenteditableEnumFalse TemplateContenteditableEnum = "false"
+	TemplateContenteditableEnumPlaintextOnly TemplateContenteditableEnum = "plaintext-only"
+	TemplateContenteditableEnumTrue TemplateContenteditableEnum = "true"
+)
+
+type TemplateDirEnum string
+
+const (
+	TemplateDirEnumAuto TemplateDirEnum = "auto"
+	TemplateDirEnumLtr TemplateDirEnum = "ltr"
+	TemplateDirEnumRtl TemplateDirEnum = "rtl"
+)
+
+type TemplateDraggableEnum string
+
+const (
+	TemplateDraggableEnumFalse TemplateDraggableEnum = "false"
+	TemplateDraggableEnumTrue TemplateDraggableEnum = "true"
+)
+
+type TemplateEnterkeyhintEnum string
+
+const (
+	TemplateEnterkeyhintEnumEnter TemplateEnterkeyhintEnum = "enter"
+	TemplateEnterkeyhintEnumGo TemplateEnterkeyhintEnum = "go"
+	TemplateEnterkeyhintEnumNext TemplateEnterkeyhintEnum = "next"
+	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
+	TemplateEnterkeyhintEnumSearch TemplateEnterkeyhintEnum = "search"
+	TemplateEnterkeyhintEnumSend TemplateEnterkeyhintEnum = "send"
+	TemplateEnterkeyhintEnumDone TemplateEnterkeyhintEnum = "done"
+)
+
+type TemplateHiddenEnum string
+
+const (
+	TemplateHiddenEnumHidden TemplateHiddenEnum = "hidden"
+	TemplateHiddenEnumUntilFound TemplateHiddenEnum = "until-found"
 )
 
 type templateAttrs map[string]any
 
-func (e *TemplateElement) Autocapitalize(a TemplateAutocapitalizeAttrEnum) *TemplateElement {
+func (e *TemplateElement) Autocapitalize(a TemplateAutocapitalizeEnum) *TemplateElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *TemplateElement) Autocorrect(a TemplateAutocorrectAttrEnum) *TemplateElement {
+func (e *TemplateElement) Autocorrect(a TemplateAutocorrectEnum) *TemplateElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *TemplateElement) Autofocus(b bool) *TemplateElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *TemplateElement) Class(s ...string) *TemplateElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *TemplateElement) Contenteditable(a TemplateContenteditableAttrEnum) *TemplateElement {
+func (e *TemplateElement) Contenteditable(a TemplateContenteditableEnum) *TemplateElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *TemplateElement) Dir(a TemplateDirEnum) *TemplateElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *TemplateElement) Draggable(a TemplateDraggableEnum) *TemplateElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *TemplateElement) Enterkeyhint(a TemplateEnterkeyhintEnum) *TemplateElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *TemplateElement) Hidden(a TemplateHiddenEnum) *TemplateElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *TemplateElement) Id(s string) *TemplateElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *TemplateElement) Slot(s string) *TemplateElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

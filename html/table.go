@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type TableElement struct {
 	attributes tableAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type TableElement struct {
 // Spec Description: The table element represents data with more than one dimension, in the form of a table.
 func Table(children ...htemel.Node) *TableElement {
 	node := &TableElement{
-		children:   children,
+		children: children,
 		attributes: make(tableAttrs),
 	}
 
@@ -39,73 +38,131 @@ func TableIf(condition bool, children ...htemel.Node) *TableElement {
 	}
 }
 
-type TableAutocapitalizeAttrEnum string
+type TableAutocapitalizeEnum string
 
 const (
-	TableAutocapitalizeAttrEnumCharacters TableAutocapitalizeAttrEnum = "characters"
-	TableAutocapitalizeAttrEnumNone       TableAutocapitalizeAttrEnum = "none"
-	TableAutocapitalizeAttrEnumOff        TableAutocapitalizeAttrEnum = "off"
-	TableAutocapitalizeAttrEnumOn         TableAutocapitalizeAttrEnum = "on"
-	TableAutocapitalizeAttrEnumSentences  TableAutocapitalizeAttrEnum = "sentences"
-	TableAutocapitalizeAttrEnumWords      TableAutocapitalizeAttrEnum = "words"
+	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
+	TableAutocapitalizeEnumNone TableAutocapitalizeEnum = "none"
+	TableAutocapitalizeEnumOff TableAutocapitalizeEnum = "off"
+	TableAutocapitalizeEnumOn TableAutocapitalizeEnum = "on"
+	TableAutocapitalizeEnumSentences TableAutocapitalizeEnum = "sentences"
+	TableAutocapitalizeEnumWords TableAutocapitalizeEnum = "words"
 )
 
-type TableAutocorrectAttrEnum string
+type TableAutocorrectEnum string
 
 const (
-	TableAutocorrectAttrEnumOff TableAutocorrectAttrEnum = "off"
-	TableAutocorrectAttrEnumOn  TableAutocorrectAttrEnum = "on"
+	TableAutocorrectEnumOff TableAutocorrectEnum = "off"
+	TableAutocorrectEnumOn TableAutocorrectEnum = "on"
 )
 
-type TableContenteditableAttrEnum string
+type TableContenteditableEnum string
 
 const (
-	TableContenteditableAttrEnumFalse         TableContenteditableAttrEnum = "false"
-	TableContenteditableAttrEnumPlaintextOnly TableContenteditableAttrEnum = "plaintext-only"
-	TableContenteditableAttrEnumTrue          TableContenteditableAttrEnum = "true"
+	TableContenteditableEnumTrue TableContenteditableEnum = "true"
+	TableContenteditableEnumFalse TableContenteditableEnum = "false"
+	TableContenteditableEnumPlaintextOnly TableContenteditableEnum = "plaintext-only"
+)
+
+type TableDirEnum string
+
+const (
+	TableDirEnumRtl TableDirEnum = "rtl"
+	TableDirEnumAuto TableDirEnum = "auto"
+	TableDirEnumLtr TableDirEnum = "ltr"
+)
+
+type TableDraggableEnum string
+
+const (
+	TableDraggableEnumFalse TableDraggableEnum = "false"
+	TableDraggableEnumTrue TableDraggableEnum = "true"
+)
+
+type TableEnterkeyhintEnum string
+
+const (
+	TableEnterkeyhintEnumGo TableEnterkeyhintEnum = "go"
+	TableEnterkeyhintEnumNext TableEnterkeyhintEnum = "next"
+	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
+	TableEnterkeyhintEnumSearch TableEnterkeyhintEnum = "search"
+	TableEnterkeyhintEnumSend TableEnterkeyhintEnum = "send"
+	TableEnterkeyhintEnumDone TableEnterkeyhintEnum = "done"
+	TableEnterkeyhintEnumEnter TableEnterkeyhintEnum = "enter"
+)
+
+type TableHiddenEnum string
+
+const (
+	TableHiddenEnumHidden TableHiddenEnum = "hidden"
+	TableHiddenEnumUntilFound TableHiddenEnum = "until-found"
 )
 
 type tableAttrs map[string]any
 
-func (e *TableElement) Autocapitalize(a TableAutocapitalizeAttrEnum) *TableElement {
+func (e *TableElement) Autocapitalize(a TableAutocapitalizeEnum) *TableElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *TableElement) Autocorrect(a TableAutocorrectAttrEnum) *TableElement {
+func (e *TableElement) Autocorrect(a TableAutocorrectEnum) *TableElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *TableElement) Autofocus(b bool) *TableElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *TableElement) Class(s ...string) *TableElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *TableElement) Contenteditable(a TableContenteditableAttrEnum) *TableElement {
+func (e *TableElement) Contenteditable(a TableContenteditableEnum) *TableElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *TableElement) Dir(a TableDirEnum) *TableElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *TableElement) Draggable(a TableDraggableEnum) *TableElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *TableElement) Enterkeyhint(a TableEnterkeyhintEnum) *TableElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *TableElement) Hidden(a TableHiddenEnum) *TableElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *TableElement) Id(s string) *TableElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *TableElement) Slot(s string) *TableElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

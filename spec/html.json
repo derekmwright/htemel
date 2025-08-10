@@ -478,6 +478,47 @@
       "attribute_type": "AttributeTypeEnum"
     },
     {
+      "name": "dir",
+      "allowed": {
+        "auto": {},
+        "ltr": {},
+        "rtl": {}
+      },
+      "attribute_type": "AttributeTypeEnum"
+    },
+    {
+      "name": "draggable",
+      "description": "All HTML elements may have the draggable content attribute set.",
+      "allowed": {
+        "false": {},
+        "true": {}
+      },
+      "attribute_type": "AttributeTypeEnum"
+    },
+    {
+      "name": "enterkeyhint",
+      "description": "The enterkeyhint content attribute is an enumerated attribute that specifies what action label (or icon) to present for the enter key on virtual keyboards. This allows authors to customize the presentation of the enter key in order to make it more helpful for users.",
+      "allowed": {
+        "done": {},
+        "enter": {},
+        "go": {},
+        "next": {},
+        "previous": {},
+        "search": {},
+        "send": {}
+      },
+      "attribute_type": "AttributeTypeEnum"
+    },
+    {
+      "name": "hidden",
+      "description": "All HTML elements may have the hidden content attribute set.",
+      "allowed": {
+        "hidden": {},
+        "until-found": {}
+      },
+      "attribute_type": "AttributeTypeEnum"
+    },
+    {
       "name": "id",
       "description": "The id attribute specifies its element's unique identifier (ID).",
       "attribute_type": "AttributeTypeString"

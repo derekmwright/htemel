@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type DfnElement struct {
 	attributes dfnAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type DfnElement struct {
 // Spec Description: The dfn element represents the defining instance of a term. The paragraph, description list group, or section that is the nearest ancestor of the dfn element must also contain the definition(s) for the term given by the dfn element.
 func Dfn(children ...htemel.Node) *DfnElement {
 	node := &DfnElement{
-		children:   children,
+		children: children,
 		attributes: make(dfnAttrs),
 	}
 
@@ -39,73 +38,131 @@ func DfnIf(condition bool, children ...htemel.Node) *DfnElement {
 	}
 }
 
-type DfnAutocapitalizeAttrEnum string
+type DfnAutocapitalizeEnum string
 
 const (
-	DfnAutocapitalizeAttrEnumCharacters DfnAutocapitalizeAttrEnum = "characters"
-	DfnAutocapitalizeAttrEnumNone       DfnAutocapitalizeAttrEnum = "none"
-	DfnAutocapitalizeAttrEnumOff        DfnAutocapitalizeAttrEnum = "off"
-	DfnAutocapitalizeAttrEnumOn         DfnAutocapitalizeAttrEnum = "on"
-	DfnAutocapitalizeAttrEnumSentences  DfnAutocapitalizeAttrEnum = "sentences"
-	DfnAutocapitalizeAttrEnumWords      DfnAutocapitalizeAttrEnum = "words"
+	DfnAutocapitalizeEnumNone DfnAutocapitalizeEnum = "none"
+	DfnAutocapitalizeEnumOff DfnAutocapitalizeEnum = "off"
+	DfnAutocapitalizeEnumOn DfnAutocapitalizeEnum = "on"
+	DfnAutocapitalizeEnumSentences DfnAutocapitalizeEnum = "sentences"
+	DfnAutocapitalizeEnumWords DfnAutocapitalizeEnum = "words"
+	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 )
 
-type DfnAutocorrectAttrEnum string
+type DfnAutocorrectEnum string
 
 const (
-	DfnAutocorrectAttrEnumOff DfnAutocorrectAttrEnum = "off"
-	DfnAutocorrectAttrEnumOn  DfnAutocorrectAttrEnum = "on"
+	DfnAutocorrectEnumOff DfnAutocorrectEnum = "off"
+	DfnAutocorrectEnumOn DfnAutocorrectEnum = "on"
 )
 
-type DfnContenteditableAttrEnum string
+type DfnContenteditableEnum string
 
 const (
-	DfnContenteditableAttrEnumTrue          DfnContenteditableAttrEnum = "true"
-	DfnContenteditableAttrEnumFalse         DfnContenteditableAttrEnum = "false"
-	DfnContenteditableAttrEnumPlaintextOnly DfnContenteditableAttrEnum = "plaintext-only"
+	DfnContenteditableEnumFalse DfnContenteditableEnum = "false"
+	DfnContenteditableEnumPlaintextOnly DfnContenteditableEnum = "plaintext-only"
+	DfnContenteditableEnumTrue DfnContenteditableEnum = "true"
+)
+
+type DfnDirEnum string
+
+const (
+	DfnDirEnumAuto DfnDirEnum = "auto"
+	DfnDirEnumLtr DfnDirEnum = "ltr"
+	DfnDirEnumRtl DfnDirEnum = "rtl"
+)
+
+type DfnDraggableEnum string
+
+const (
+	DfnDraggableEnumFalse DfnDraggableEnum = "false"
+	DfnDraggableEnumTrue DfnDraggableEnum = "true"
+)
+
+type DfnEnterkeyhintEnum string
+
+const (
+	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
+	DfnEnterkeyhintEnumSearch DfnEnterkeyhintEnum = "search"
+	DfnEnterkeyhintEnumSend DfnEnterkeyhintEnum = "send"
+	DfnEnterkeyhintEnumDone DfnEnterkeyhintEnum = "done"
+	DfnEnterkeyhintEnumEnter DfnEnterkeyhintEnum = "enter"
+	DfnEnterkeyhintEnumGo DfnEnterkeyhintEnum = "go"
+	DfnEnterkeyhintEnumNext DfnEnterkeyhintEnum = "next"
+)
+
+type DfnHiddenEnum string
+
+const (
+	DfnHiddenEnumHidden DfnHiddenEnum = "hidden"
+	DfnHiddenEnumUntilFound DfnHiddenEnum = "until-found"
 )
 
 type dfnAttrs map[string]any
 
-func (e *DfnElement) Autocapitalize(a DfnAutocapitalizeAttrEnum) *DfnElement {
+func (e *DfnElement) Autocapitalize(a DfnAutocapitalizeEnum) *DfnElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *DfnElement) Autocorrect(a DfnAutocorrectAttrEnum) *DfnElement {
+func (e *DfnElement) Autocorrect(a DfnAutocorrectEnum) *DfnElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *DfnElement) Autofocus(b bool) *DfnElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *DfnElement) Class(s ...string) *DfnElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *DfnElement) Contenteditable(a DfnContenteditableAttrEnum) *DfnElement {
+func (e *DfnElement) Contenteditable(a DfnContenteditableEnum) *DfnElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *DfnElement) Dir(a DfnDirEnum) *DfnElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *DfnElement) Draggable(a DfnDraggableEnum) *DfnElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *DfnElement) Enterkeyhint(a DfnEnterkeyhintEnum) *DfnElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *DfnElement) Hidden(a DfnHiddenEnum) *DfnElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *DfnElement) Id(s string) *DfnElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *DfnElement) Slot(s string) *DfnElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

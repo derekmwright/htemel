@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type RtElement struct {
 	attributes rtAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type RtElement struct {
 // Spec Description: The rt element marks the ruby text component of a ruby annotation. When it is the child of a ruby element, it doesn't represent anything itself, but the ruby element uses it as part of determining what it represents.
 func Rt(children ...htemel.Node) *RtElement {
 	node := &RtElement{
-		children:   children,
+		children: children,
 		attributes: make(rtAttrs),
 	}
 
@@ -39,73 +38,131 @@ func RtIf(condition bool, children ...htemel.Node) *RtElement {
 	}
 }
 
-type RtAutocapitalizeAttrEnum string
+type RtAutocapitalizeEnum string
 
 const (
-	RtAutocapitalizeAttrEnumWords      RtAutocapitalizeAttrEnum = "words"
-	RtAutocapitalizeAttrEnumCharacters RtAutocapitalizeAttrEnum = "characters"
-	RtAutocapitalizeAttrEnumNone       RtAutocapitalizeAttrEnum = "none"
-	RtAutocapitalizeAttrEnumOff        RtAutocapitalizeAttrEnum = "off"
-	RtAutocapitalizeAttrEnumOn         RtAutocapitalizeAttrEnum = "on"
-	RtAutocapitalizeAttrEnumSentences  RtAutocapitalizeAttrEnum = "sentences"
+	RtAutocapitalizeEnumSentences RtAutocapitalizeEnum = "sentences"
+	RtAutocapitalizeEnumWords RtAutocapitalizeEnum = "words"
+	RtAutocapitalizeEnumCharacters RtAutocapitalizeEnum = "characters"
+	RtAutocapitalizeEnumNone RtAutocapitalizeEnum = "none"
+	RtAutocapitalizeEnumOff RtAutocapitalizeEnum = "off"
+	RtAutocapitalizeEnumOn RtAutocapitalizeEnum = "on"
 )
 
-type RtAutocorrectAttrEnum string
+type RtAutocorrectEnum string
 
 const (
-	RtAutocorrectAttrEnumOff RtAutocorrectAttrEnum = "off"
-	RtAutocorrectAttrEnumOn  RtAutocorrectAttrEnum = "on"
+	RtAutocorrectEnumOff RtAutocorrectEnum = "off"
+	RtAutocorrectEnumOn RtAutocorrectEnum = "on"
 )
 
-type RtContenteditableAttrEnum string
+type RtContenteditableEnum string
 
 const (
-	RtContenteditableAttrEnumFalse         RtContenteditableAttrEnum = "false"
-	RtContenteditableAttrEnumPlaintextOnly RtContenteditableAttrEnum = "plaintext-only"
-	RtContenteditableAttrEnumTrue          RtContenteditableAttrEnum = "true"
+	RtContenteditableEnumFalse RtContenteditableEnum = "false"
+	RtContenteditableEnumPlaintextOnly RtContenteditableEnum = "plaintext-only"
+	RtContenteditableEnumTrue RtContenteditableEnum = "true"
+)
+
+type RtDirEnum string
+
+const (
+	RtDirEnumAuto RtDirEnum = "auto"
+	RtDirEnumLtr RtDirEnum = "ltr"
+	RtDirEnumRtl RtDirEnum = "rtl"
+)
+
+type RtDraggableEnum string
+
+const (
+	RtDraggableEnumFalse RtDraggableEnum = "false"
+	RtDraggableEnumTrue RtDraggableEnum = "true"
+)
+
+type RtEnterkeyhintEnum string
+
+const (
+	RtEnterkeyhintEnumDone RtEnterkeyhintEnum = "done"
+	RtEnterkeyhintEnumEnter RtEnterkeyhintEnum = "enter"
+	RtEnterkeyhintEnumGo RtEnterkeyhintEnum = "go"
+	RtEnterkeyhintEnumNext RtEnterkeyhintEnum = "next"
+	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
+	RtEnterkeyhintEnumSearch RtEnterkeyhintEnum = "search"
+	RtEnterkeyhintEnumSend RtEnterkeyhintEnum = "send"
+)
+
+type RtHiddenEnum string
+
+const (
+	RtHiddenEnumHidden RtHiddenEnum = "hidden"
+	RtHiddenEnumUntilFound RtHiddenEnum = "until-found"
 )
 
 type rtAttrs map[string]any
 
-func (e *RtElement) Autocapitalize(a RtAutocapitalizeAttrEnum) *RtElement {
+func (e *RtElement) Autocapitalize(a RtAutocapitalizeEnum) *RtElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *RtElement) Autocorrect(a RtAutocorrectAttrEnum) *RtElement {
+func (e *RtElement) Autocorrect(a RtAutocorrectEnum) *RtElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *RtElement) Autofocus(b bool) *RtElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *RtElement) Class(s ...string) *RtElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *RtElement) Contenteditable(a RtContenteditableAttrEnum) *RtElement {
+func (e *RtElement) Contenteditable(a RtContenteditableEnum) *RtElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *RtElement) Dir(a RtDirEnum) *RtElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *RtElement) Draggable(a RtDraggableEnum) *RtElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *RtElement) Enterkeyhint(a RtEnterkeyhintEnum) *RtElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *RtElement) Hidden(a RtHiddenEnum) *RtElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *RtElement) Id(s string) *RtElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *RtElement) Slot(s string) *RtElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

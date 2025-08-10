@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type IElement struct {
 	attributes iAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type IElement struct {
 // Spec Description: The i element represents a span of text in an alternate voice or mood, or otherwise offset from the normal prose in a manner indicating a different quality of text, such as a taxonomic designation, a technical term, an idiomatic phrase from another language, transliteration, a thought, or a ship name in Western texts.
 func I(children ...htemel.Node) *IElement {
 	node := &IElement{
-		children:   children,
+		children: children,
 		attributes: make(iAttrs),
 	}
 
@@ -39,73 +38,131 @@ func IIf(condition bool, children ...htemel.Node) *IElement {
 	}
 }
 
-type IAutocapitalizeAttrEnum string
+type IAutocapitalizeEnum string
 
 const (
-	IAutocapitalizeAttrEnumNone       IAutocapitalizeAttrEnum = "none"
-	IAutocapitalizeAttrEnumOff        IAutocapitalizeAttrEnum = "off"
-	IAutocapitalizeAttrEnumOn         IAutocapitalizeAttrEnum = "on"
-	IAutocapitalizeAttrEnumSentences  IAutocapitalizeAttrEnum = "sentences"
-	IAutocapitalizeAttrEnumWords      IAutocapitalizeAttrEnum = "words"
-	IAutocapitalizeAttrEnumCharacters IAutocapitalizeAttrEnum = "characters"
+	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
+	IAutocapitalizeEnumNone IAutocapitalizeEnum = "none"
+	IAutocapitalizeEnumOff IAutocapitalizeEnum = "off"
+	IAutocapitalizeEnumOn IAutocapitalizeEnum = "on"
+	IAutocapitalizeEnumSentences IAutocapitalizeEnum = "sentences"
+	IAutocapitalizeEnumWords IAutocapitalizeEnum = "words"
 )
 
-type IAutocorrectAttrEnum string
+type IAutocorrectEnum string
 
 const (
-	IAutocorrectAttrEnumOff IAutocorrectAttrEnum = "off"
-	IAutocorrectAttrEnumOn  IAutocorrectAttrEnum = "on"
+	IAutocorrectEnumOff IAutocorrectEnum = "off"
+	IAutocorrectEnumOn IAutocorrectEnum = "on"
 )
 
-type IContenteditableAttrEnum string
+type IContenteditableEnum string
 
 const (
-	IContenteditableAttrEnumFalse         IContenteditableAttrEnum = "false"
-	IContenteditableAttrEnumPlaintextOnly IContenteditableAttrEnum = "plaintext-only"
-	IContenteditableAttrEnumTrue          IContenteditableAttrEnum = "true"
+	IContenteditableEnumFalse IContenteditableEnum = "false"
+	IContenteditableEnumPlaintextOnly IContenteditableEnum = "plaintext-only"
+	IContenteditableEnumTrue IContenteditableEnum = "true"
+)
+
+type IDirEnum string
+
+const (
+	IDirEnumAuto IDirEnum = "auto"
+	IDirEnumLtr IDirEnum = "ltr"
+	IDirEnumRtl IDirEnum = "rtl"
+)
+
+type IDraggableEnum string
+
+const (
+	IDraggableEnumTrue IDraggableEnum = "true"
+	IDraggableEnumFalse IDraggableEnum = "false"
+)
+
+type IEnterkeyhintEnum string
+
+const (
+	IEnterkeyhintEnumEnter IEnterkeyhintEnum = "enter"
+	IEnterkeyhintEnumGo IEnterkeyhintEnum = "go"
+	IEnterkeyhintEnumNext IEnterkeyhintEnum = "next"
+	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
+	IEnterkeyhintEnumSearch IEnterkeyhintEnum = "search"
+	IEnterkeyhintEnumSend IEnterkeyhintEnum = "send"
+	IEnterkeyhintEnumDone IEnterkeyhintEnum = "done"
+)
+
+type IHiddenEnum string
+
+const (
+	IHiddenEnumHidden IHiddenEnum = "hidden"
+	IHiddenEnumUntilFound IHiddenEnum = "until-found"
 )
 
 type iAttrs map[string]any
 
-func (e *IElement) Autocapitalize(a IAutocapitalizeAttrEnum) *IElement {
+func (e *IElement) Autocapitalize(a IAutocapitalizeEnum) *IElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *IElement) Autocorrect(a IAutocorrectAttrEnum) *IElement {
+func (e *IElement) Autocorrect(a IAutocorrectEnum) *IElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *IElement) Autofocus(b bool) *IElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *IElement) Class(s ...string) *IElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *IElement) Contenteditable(a IContenteditableAttrEnum) *IElement {
+func (e *IElement) Contenteditable(a IContenteditableEnum) *IElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *IElement) Dir(a IDirEnum) *IElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *IElement) Draggable(a IDraggableEnum) *IElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *IElement) Enterkeyhint(a IEnterkeyhintEnum) *IElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *IElement) Hidden(a IHiddenEnum) *IElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *IElement) Id(s string) *IElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *IElement) Slot(s string) *IElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

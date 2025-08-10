@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type SubElement struct {
 	attributes subAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type SubElement struct {
 // Spec Description: The sup element represents a superscript and the sub element represents a subscript.
 func Sub(children ...htemel.Node) *SubElement {
 	node := &SubElement{
-		children:   children,
+		children: children,
 		attributes: make(subAttrs),
 	}
 
@@ -39,73 +38,131 @@ func SubIf(condition bool, children ...htemel.Node) *SubElement {
 	}
 }
 
-type SubAutocapitalizeAttrEnum string
+type SubAutocapitalizeEnum string
 
 const (
-	SubAutocapitalizeAttrEnumOn         SubAutocapitalizeAttrEnum = "on"
-	SubAutocapitalizeAttrEnumSentences  SubAutocapitalizeAttrEnum = "sentences"
-	SubAutocapitalizeAttrEnumWords      SubAutocapitalizeAttrEnum = "words"
-	SubAutocapitalizeAttrEnumCharacters SubAutocapitalizeAttrEnum = "characters"
-	SubAutocapitalizeAttrEnumNone       SubAutocapitalizeAttrEnum = "none"
-	SubAutocapitalizeAttrEnumOff        SubAutocapitalizeAttrEnum = "off"
+	SubAutocapitalizeEnumOn SubAutocapitalizeEnum = "on"
+	SubAutocapitalizeEnumSentences SubAutocapitalizeEnum = "sentences"
+	SubAutocapitalizeEnumWords SubAutocapitalizeEnum = "words"
+	SubAutocapitalizeEnumCharacters SubAutocapitalizeEnum = "characters"
+	SubAutocapitalizeEnumNone SubAutocapitalizeEnum = "none"
+	SubAutocapitalizeEnumOff SubAutocapitalizeEnum = "off"
 )
 
-type SubAutocorrectAttrEnum string
+type SubAutocorrectEnum string
 
 const (
-	SubAutocorrectAttrEnumOff SubAutocorrectAttrEnum = "off"
-	SubAutocorrectAttrEnumOn  SubAutocorrectAttrEnum = "on"
+	SubAutocorrectEnumOff SubAutocorrectEnum = "off"
+	SubAutocorrectEnumOn SubAutocorrectEnum = "on"
 )
 
-type SubContenteditableAttrEnum string
+type SubContenteditableEnum string
 
 const (
-	SubContenteditableAttrEnumPlaintextOnly SubContenteditableAttrEnum = "plaintext-only"
-	SubContenteditableAttrEnumTrue          SubContenteditableAttrEnum = "true"
-	SubContenteditableAttrEnumFalse         SubContenteditableAttrEnum = "false"
+	SubContenteditableEnumFalse SubContenteditableEnum = "false"
+	SubContenteditableEnumPlaintextOnly SubContenteditableEnum = "plaintext-only"
+	SubContenteditableEnumTrue SubContenteditableEnum = "true"
+)
+
+type SubDirEnum string
+
+const (
+	SubDirEnumAuto SubDirEnum = "auto"
+	SubDirEnumLtr SubDirEnum = "ltr"
+	SubDirEnumRtl SubDirEnum = "rtl"
+)
+
+type SubDraggableEnum string
+
+const (
+	SubDraggableEnumFalse SubDraggableEnum = "false"
+	SubDraggableEnumTrue SubDraggableEnum = "true"
+)
+
+type SubEnterkeyhintEnum string
+
+const (
+	SubEnterkeyhintEnumSend SubEnterkeyhintEnum = "send"
+	SubEnterkeyhintEnumDone SubEnterkeyhintEnum = "done"
+	SubEnterkeyhintEnumEnter SubEnterkeyhintEnum = "enter"
+	SubEnterkeyhintEnumGo SubEnterkeyhintEnum = "go"
+	SubEnterkeyhintEnumNext SubEnterkeyhintEnum = "next"
+	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
+	SubEnterkeyhintEnumSearch SubEnterkeyhintEnum = "search"
+)
+
+type SubHiddenEnum string
+
+const (
+	SubHiddenEnumHidden SubHiddenEnum = "hidden"
+	SubHiddenEnumUntilFound SubHiddenEnum = "until-found"
 )
 
 type subAttrs map[string]any
 
-func (e *SubElement) Autocapitalize(a SubAutocapitalizeAttrEnum) *SubElement {
+func (e *SubElement) Autocapitalize(a SubAutocapitalizeEnum) *SubElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *SubElement) Autocorrect(a SubAutocorrectAttrEnum) *SubElement {
+func (e *SubElement) Autocorrect(a SubAutocorrectEnum) *SubElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *SubElement) Autofocus(b bool) *SubElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *SubElement) Class(s ...string) *SubElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *SubElement) Contenteditable(a SubContenteditableAttrEnum) *SubElement {
+func (e *SubElement) Contenteditable(a SubContenteditableEnum) *SubElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *SubElement) Dir(a SubDirEnum) *SubElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *SubElement) Draggable(a SubDraggableEnum) *SubElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *SubElement) Enterkeyhint(a SubEnterkeyhintEnum) *SubElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *SubElement) Hidden(a SubHiddenEnum) *SubElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *SubElement) Id(s string) *SubElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *SubElement) Slot(s string) *SubElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

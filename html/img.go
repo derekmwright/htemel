@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type ImgElement struct {
 	attributes imgAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type ImgElement struct {
 // Spec Description: An img element represents an image.
 func Img(children ...htemel.Node) *ImgElement {
 	node := &ImgElement{
-		children:   children,
+		children: children,
 		attributes: make(imgAttrs),
 	}
 
@@ -39,73 +38,131 @@ func ImgIf(condition bool, children ...htemel.Node) *ImgElement {
 	}
 }
 
-type ImgAutocapitalizeAttrEnum string
+type ImgAutocapitalizeEnum string
 
 const (
-	ImgAutocapitalizeAttrEnumCharacters ImgAutocapitalizeAttrEnum = "characters"
-	ImgAutocapitalizeAttrEnumNone       ImgAutocapitalizeAttrEnum = "none"
-	ImgAutocapitalizeAttrEnumOff        ImgAutocapitalizeAttrEnum = "off"
-	ImgAutocapitalizeAttrEnumOn         ImgAutocapitalizeAttrEnum = "on"
-	ImgAutocapitalizeAttrEnumSentences  ImgAutocapitalizeAttrEnum = "sentences"
-	ImgAutocapitalizeAttrEnumWords      ImgAutocapitalizeAttrEnum = "words"
+	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
+	ImgAutocapitalizeEnumNone ImgAutocapitalizeEnum = "none"
+	ImgAutocapitalizeEnumOff ImgAutocapitalizeEnum = "off"
+	ImgAutocapitalizeEnumOn ImgAutocapitalizeEnum = "on"
+	ImgAutocapitalizeEnumSentences ImgAutocapitalizeEnum = "sentences"
+	ImgAutocapitalizeEnumWords ImgAutocapitalizeEnum = "words"
 )
 
-type ImgAutocorrectAttrEnum string
+type ImgAutocorrectEnum string
 
 const (
-	ImgAutocorrectAttrEnumOff ImgAutocorrectAttrEnum = "off"
-	ImgAutocorrectAttrEnumOn  ImgAutocorrectAttrEnum = "on"
+	ImgAutocorrectEnumOff ImgAutocorrectEnum = "off"
+	ImgAutocorrectEnumOn ImgAutocorrectEnum = "on"
 )
 
-type ImgContenteditableAttrEnum string
+type ImgContenteditableEnum string
 
 const (
-	ImgContenteditableAttrEnumFalse         ImgContenteditableAttrEnum = "false"
-	ImgContenteditableAttrEnumPlaintextOnly ImgContenteditableAttrEnum = "plaintext-only"
-	ImgContenteditableAttrEnumTrue          ImgContenteditableAttrEnum = "true"
+	ImgContenteditableEnumFalse ImgContenteditableEnum = "false"
+	ImgContenteditableEnumPlaintextOnly ImgContenteditableEnum = "plaintext-only"
+	ImgContenteditableEnumTrue ImgContenteditableEnum = "true"
+)
+
+type ImgDirEnum string
+
+const (
+	ImgDirEnumAuto ImgDirEnum = "auto"
+	ImgDirEnumLtr ImgDirEnum = "ltr"
+	ImgDirEnumRtl ImgDirEnum = "rtl"
+)
+
+type ImgDraggableEnum string
+
+const (
+	ImgDraggableEnumFalse ImgDraggableEnum = "false"
+	ImgDraggableEnumTrue ImgDraggableEnum = "true"
+)
+
+type ImgEnterkeyhintEnum string
+
+const (
+	ImgEnterkeyhintEnumGo ImgEnterkeyhintEnum = "go"
+	ImgEnterkeyhintEnumNext ImgEnterkeyhintEnum = "next"
+	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
+	ImgEnterkeyhintEnumSearch ImgEnterkeyhintEnum = "search"
+	ImgEnterkeyhintEnumSend ImgEnterkeyhintEnum = "send"
+	ImgEnterkeyhintEnumDone ImgEnterkeyhintEnum = "done"
+	ImgEnterkeyhintEnumEnter ImgEnterkeyhintEnum = "enter"
+)
+
+type ImgHiddenEnum string
+
+const (
+	ImgHiddenEnumHidden ImgHiddenEnum = "hidden"
+	ImgHiddenEnumUntilFound ImgHiddenEnum = "until-found"
 )
 
 type imgAttrs map[string]any
 
-func (e *ImgElement) Autocapitalize(a ImgAutocapitalizeAttrEnum) *ImgElement {
+func (e *ImgElement) Autocapitalize(a ImgAutocapitalizeEnum) *ImgElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *ImgElement) Autocorrect(a ImgAutocorrectAttrEnum) *ImgElement {
+func (e *ImgElement) Autocorrect(a ImgAutocorrectEnum) *ImgElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *ImgElement) Autofocus(b bool) *ImgElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *ImgElement) Class(s ...string) *ImgElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *ImgElement) Contenteditable(a ImgContenteditableAttrEnum) *ImgElement {
+func (e *ImgElement) Contenteditable(a ImgContenteditableEnum) *ImgElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *ImgElement) Dir(a ImgDirEnum) *ImgElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *ImgElement) Draggable(a ImgDraggableEnum) *ImgElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *ImgElement) Enterkeyhint(a ImgEnterkeyhintEnum) *ImgElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *ImgElement) Hidden(a ImgHiddenEnum) *ImgElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *ImgElement) Id(s string) *ImgElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *ImgElement) Slot(s string) *ImgElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type ColgroupElement struct {
 	attributes colgroupAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type ColgroupElement struct {
 // Spec Description: The colgroup element represents a group of one or more columns in the table that is its parent, if it has a parent and that is a table element.
 func Colgroup(children ...htemel.Node) *ColgroupElement {
 	node := &ColgroupElement{
-		children:   children,
+		children: children,
 		attributes: make(colgroupAttrs),
 	}
 
@@ -39,73 +38,131 @@ func ColgroupIf(condition bool, children ...htemel.Node) *ColgroupElement {
 	}
 }
 
-type ColgroupAutocapitalizeAttrEnum string
+type ColgroupAutocapitalizeEnum string
 
 const (
-	ColgroupAutocapitalizeAttrEnumCharacters ColgroupAutocapitalizeAttrEnum = "characters"
-	ColgroupAutocapitalizeAttrEnumNone       ColgroupAutocapitalizeAttrEnum = "none"
-	ColgroupAutocapitalizeAttrEnumOff        ColgroupAutocapitalizeAttrEnum = "off"
-	ColgroupAutocapitalizeAttrEnumOn         ColgroupAutocapitalizeAttrEnum = "on"
-	ColgroupAutocapitalizeAttrEnumSentences  ColgroupAutocapitalizeAttrEnum = "sentences"
-	ColgroupAutocapitalizeAttrEnumWords      ColgroupAutocapitalizeAttrEnum = "words"
+	ColgroupAutocapitalizeEnumWords ColgroupAutocapitalizeEnum = "words"
+	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
+	ColgroupAutocapitalizeEnumNone ColgroupAutocapitalizeEnum = "none"
+	ColgroupAutocapitalizeEnumOff ColgroupAutocapitalizeEnum = "off"
+	ColgroupAutocapitalizeEnumOn ColgroupAutocapitalizeEnum = "on"
+	ColgroupAutocapitalizeEnumSentences ColgroupAutocapitalizeEnum = "sentences"
 )
 
-type ColgroupAutocorrectAttrEnum string
+type ColgroupAutocorrectEnum string
 
 const (
-	ColgroupAutocorrectAttrEnumOff ColgroupAutocorrectAttrEnum = "off"
-	ColgroupAutocorrectAttrEnumOn  ColgroupAutocorrectAttrEnum = "on"
+	ColgroupAutocorrectEnumOff ColgroupAutocorrectEnum = "off"
+	ColgroupAutocorrectEnumOn ColgroupAutocorrectEnum = "on"
 )
 
-type ColgroupContenteditableAttrEnum string
+type ColgroupContenteditableEnum string
 
 const (
-	ColgroupContenteditableAttrEnumFalse         ColgroupContenteditableAttrEnum = "false"
-	ColgroupContenteditableAttrEnumPlaintextOnly ColgroupContenteditableAttrEnum = "plaintext-only"
-	ColgroupContenteditableAttrEnumTrue          ColgroupContenteditableAttrEnum = "true"
+	ColgroupContenteditableEnumFalse ColgroupContenteditableEnum = "false"
+	ColgroupContenteditableEnumPlaintextOnly ColgroupContenteditableEnum = "plaintext-only"
+	ColgroupContenteditableEnumTrue ColgroupContenteditableEnum = "true"
+)
+
+type ColgroupDirEnum string
+
+const (
+	ColgroupDirEnumAuto ColgroupDirEnum = "auto"
+	ColgroupDirEnumLtr ColgroupDirEnum = "ltr"
+	ColgroupDirEnumRtl ColgroupDirEnum = "rtl"
+)
+
+type ColgroupDraggableEnum string
+
+const (
+	ColgroupDraggableEnumFalse ColgroupDraggableEnum = "false"
+	ColgroupDraggableEnumTrue ColgroupDraggableEnum = "true"
+)
+
+type ColgroupEnterkeyhintEnum string
+
+const (
+	ColgroupEnterkeyhintEnumSend ColgroupEnterkeyhintEnum = "send"
+	ColgroupEnterkeyhintEnumDone ColgroupEnterkeyhintEnum = "done"
+	ColgroupEnterkeyhintEnumEnter ColgroupEnterkeyhintEnum = "enter"
+	ColgroupEnterkeyhintEnumGo ColgroupEnterkeyhintEnum = "go"
+	ColgroupEnterkeyhintEnumNext ColgroupEnterkeyhintEnum = "next"
+	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
+	ColgroupEnterkeyhintEnumSearch ColgroupEnterkeyhintEnum = "search"
+)
+
+type ColgroupHiddenEnum string
+
+const (
+	ColgroupHiddenEnumHidden ColgroupHiddenEnum = "hidden"
+	ColgroupHiddenEnumUntilFound ColgroupHiddenEnum = "until-found"
 )
 
 type colgroupAttrs map[string]any
 
-func (e *ColgroupElement) Autocapitalize(a ColgroupAutocapitalizeAttrEnum) *ColgroupElement {
+func (e *ColgroupElement) Autocapitalize(a ColgroupAutocapitalizeEnum) *ColgroupElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *ColgroupElement) Autocorrect(a ColgroupAutocorrectAttrEnum) *ColgroupElement {
+func (e *ColgroupElement) Autocorrect(a ColgroupAutocorrectEnum) *ColgroupElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *ColgroupElement) Autofocus(b bool) *ColgroupElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *ColgroupElement) Class(s ...string) *ColgroupElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *ColgroupElement) Contenteditable(a ColgroupContenteditableAttrEnum) *ColgroupElement {
+func (e *ColgroupElement) Contenteditable(a ColgroupContenteditableEnum) *ColgroupElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *ColgroupElement) Dir(a ColgroupDirEnum) *ColgroupElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *ColgroupElement) Draggable(a ColgroupDraggableEnum) *ColgroupElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *ColgroupElement) Enterkeyhint(a ColgroupEnterkeyhintEnum) *ColgroupElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *ColgroupElement) Hidden(a ColgroupHiddenEnum) *ColgroupElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *ColgroupElement) Id(s string) *ColgroupElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *ColgroupElement) Slot(s string) *ColgroupElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

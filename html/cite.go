@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type CiteElement struct {
 	attributes citeAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type CiteElement struct {
 // Spec Description: The cite element represents the title of a work (e.g. a book, a paper, an essay, a poem, a score, a song, a script, a film, a TV show, a game, a sculpture, a painting, a theatre production, a play, an opera, a musical, an exhibition, a legal case report, a computer program,  etc.). This can be a work that is being quoted or referenced in detail (i.e., a citation), or it can just be a work that is mentioned in passing.
 func Cite(children ...htemel.Node) *CiteElement {
 	node := &CiteElement{
-		children:   children,
+		children: children,
 		attributes: make(citeAttrs),
 	}
 
@@ -39,73 +38,131 @@ func CiteIf(condition bool, children ...htemel.Node) *CiteElement {
 	}
 }
 
-type CiteAutocapitalizeAttrEnum string
+type CiteAutocapitalizeEnum string
 
 const (
-	CiteAutocapitalizeAttrEnumCharacters CiteAutocapitalizeAttrEnum = "characters"
-	CiteAutocapitalizeAttrEnumNone       CiteAutocapitalizeAttrEnum = "none"
-	CiteAutocapitalizeAttrEnumOff        CiteAutocapitalizeAttrEnum = "off"
-	CiteAutocapitalizeAttrEnumOn         CiteAutocapitalizeAttrEnum = "on"
-	CiteAutocapitalizeAttrEnumSentences  CiteAutocapitalizeAttrEnum = "sentences"
-	CiteAutocapitalizeAttrEnumWords      CiteAutocapitalizeAttrEnum = "words"
+	CiteAutocapitalizeEnumOff CiteAutocapitalizeEnum = "off"
+	CiteAutocapitalizeEnumOn CiteAutocapitalizeEnum = "on"
+	CiteAutocapitalizeEnumSentences CiteAutocapitalizeEnum = "sentences"
+	CiteAutocapitalizeEnumWords CiteAutocapitalizeEnum = "words"
+	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
+	CiteAutocapitalizeEnumNone CiteAutocapitalizeEnum = "none"
 )
 
-type CiteAutocorrectAttrEnum string
+type CiteAutocorrectEnum string
 
 const (
-	CiteAutocorrectAttrEnumOff CiteAutocorrectAttrEnum = "off"
-	CiteAutocorrectAttrEnumOn  CiteAutocorrectAttrEnum = "on"
+	CiteAutocorrectEnumOff CiteAutocorrectEnum = "off"
+	CiteAutocorrectEnumOn CiteAutocorrectEnum = "on"
 )
 
-type CiteContenteditableAttrEnum string
+type CiteContenteditableEnum string
 
 const (
-	CiteContenteditableAttrEnumFalse         CiteContenteditableAttrEnum = "false"
-	CiteContenteditableAttrEnumPlaintextOnly CiteContenteditableAttrEnum = "plaintext-only"
-	CiteContenteditableAttrEnumTrue          CiteContenteditableAttrEnum = "true"
+	CiteContenteditableEnumTrue CiteContenteditableEnum = "true"
+	CiteContenteditableEnumFalse CiteContenteditableEnum = "false"
+	CiteContenteditableEnumPlaintextOnly CiteContenteditableEnum = "plaintext-only"
+)
+
+type CiteDirEnum string
+
+const (
+	CiteDirEnumRtl CiteDirEnum = "rtl"
+	CiteDirEnumAuto CiteDirEnum = "auto"
+	CiteDirEnumLtr CiteDirEnum = "ltr"
+)
+
+type CiteDraggableEnum string
+
+const (
+	CiteDraggableEnumFalse CiteDraggableEnum = "false"
+	CiteDraggableEnumTrue CiteDraggableEnum = "true"
+)
+
+type CiteEnterkeyhintEnum string
+
+const (
+	CiteEnterkeyhintEnumDone CiteEnterkeyhintEnum = "done"
+	CiteEnterkeyhintEnumEnter CiteEnterkeyhintEnum = "enter"
+	CiteEnterkeyhintEnumGo CiteEnterkeyhintEnum = "go"
+	CiteEnterkeyhintEnumNext CiteEnterkeyhintEnum = "next"
+	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
+	CiteEnterkeyhintEnumSearch CiteEnterkeyhintEnum = "search"
+	CiteEnterkeyhintEnumSend CiteEnterkeyhintEnum = "send"
+)
+
+type CiteHiddenEnum string
+
+const (
+	CiteHiddenEnumHidden CiteHiddenEnum = "hidden"
+	CiteHiddenEnumUntilFound CiteHiddenEnum = "until-found"
 )
 
 type citeAttrs map[string]any
 
-func (e *CiteElement) Autocapitalize(a CiteAutocapitalizeAttrEnum) *CiteElement {
+func (e *CiteElement) Autocapitalize(a CiteAutocapitalizeEnum) *CiteElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *CiteElement) Autocorrect(a CiteAutocorrectAttrEnum) *CiteElement {
+func (e *CiteElement) Autocorrect(a CiteAutocorrectEnum) *CiteElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *CiteElement) Autofocus(b bool) *CiteElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *CiteElement) Class(s ...string) *CiteElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *CiteElement) Contenteditable(a CiteContenteditableAttrEnum) *CiteElement {
+func (e *CiteElement) Contenteditable(a CiteContenteditableEnum) *CiteElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *CiteElement) Dir(a CiteDirEnum) *CiteElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *CiteElement) Draggable(a CiteDraggableEnum) *CiteElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *CiteElement) Enterkeyhint(a CiteEnterkeyhintEnum) *CiteElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *CiteElement) Hidden(a CiteHiddenEnum) *CiteElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *CiteElement) Id(s string) *CiteElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *CiteElement) Slot(s string) *CiteElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

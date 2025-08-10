@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type AddressElement struct {
 	attributes addressAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type AddressElement struct {
 // Spec Description: The address element represents the contact information for its nearest article or body element ancestor. If that is the body element, then the contact information applies to the document as a whole.
 func Address(children ...htemel.Node) *AddressElement {
 	node := &AddressElement{
-		children:   children,
+		children: children,
 		attributes: make(addressAttrs),
 	}
 
@@ -39,73 +38,131 @@ func AddressIf(condition bool, children ...htemel.Node) *AddressElement {
 	}
 }
 
-type AddressAutocapitalizeAttrEnum string
+type AddressAutocapitalizeEnum string
 
 const (
-	AddressAutocapitalizeAttrEnumCharacters AddressAutocapitalizeAttrEnum = "characters"
-	AddressAutocapitalizeAttrEnumNone       AddressAutocapitalizeAttrEnum = "none"
-	AddressAutocapitalizeAttrEnumOff        AddressAutocapitalizeAttrEnum = "off"
-	AddressAutocapitalizeAttrEnumOn         AddressAutocapitalizeAttrEnum = "on"
-	AddressAutocapitalizeAttrEnumSentences  AddressAutocapitalizeAttrEnum = "sentences"
-	AddressAutocapitalizeAttrEnumWords      AddressAutocapitalizeAttrEnum = "words"
+	AddressAutocapitalizeEnumOff AddressAutocapitalizeEnum = "off"
+	AddressAutocapitalizeEnumOn AddressAutocapitalizeEnum = "on"
+	AddressAutocapitalizeEnumSentences AddressAutocapitalizeEnum = "sentences"
+	AddressAutocapitalizeEnumWords AddressAutocapitalizeEnum = "words"
+	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
+	AddressAutocapitalizeEnumNone AddressAutocapitalizeEnum = "none"
 )
 
-type AddressAutocorrectAttrEnum string
+type AddressAutocorrectEnum string
 
 const (
-	AddressAutocorrectAttrEnumOff AddressAutocorrectAttrEnum = "off"
-	AddressAutocorrectAttrEnumOn  AddressAutocorrectAttrEnum = "on"
+	AddressAutocorrectEnumOff AddressAutocorrectEnum = "off"
+	AddressAutocorrectEnumOn AddressAutocorrectEnum = "on"
 )
 
-type AddressContenteditableAttrEnum string
+type AddressContenteditableEnum string
 
 const (
-	AddressContenteditableAttrEnumFalse         AddressContenteditableAttrEnum = "false"
-	AddressContenteditableAttrEnumPlaintextOnly AddressContenteditableAttrEnum = "plaintext-only"
-	AddressContenteditableAttrEnumTrue          AddressContenteditableAttrEnum = "true"
+	AddressContenteditableEnumFalse AddressContenteditableEnum = "false"
+	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
+	AddressContenteditableEnumTrue AddressContenteditableEnum = "true"
+)
+
+type AddressDirEnum string
+
+const (
+	AddressDirEnumLtr AddressDirEnum = "ltr"
+	AddressDirEnumRtl AddressDirEnum = "rtl"
+	AddressDirEnumAuto AddressDirEnum = "auto"
+)
+
+type AddressDraggableEnum string
+
+const (
+	AddressDraggableEnumFalse AddressDraggableEnum = "false"
+	AddressDraggableEnumTrue AddressDraggableEnum = "true"
+)
+
+type AddressEnterkeyhintEnum string
+
+const (
+	AddressEnterkeyhintEnumGo AddressEnterkeyhintEnum = "go"
+	AddressEnterkeyhintEnumNext AddressEnterkeyhintEnum = "next"
+	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
+	AddressEnterkeyhintEnumSearch AddressEnterkeyhintEnum = "search"
+	AddressEnterkeyhintEnumSend AddressEnterkeyhintEnum = "send"
+	AddressEnterkeyhintEnumDone AddressEnterkeyhintEnum = "done"
+	AddressEnterkeyhintEnumEnter AddressEnterkeyhintEnum = "enter"
+)
+
+type AddressHiddenEnum string
+
+const (
+	AddressHiddenEnumHidden AddressHiddenEnum = "hidden"
+	AddressHiddenEnumUntilFound AddressHiddenEnum = "until-found"
 )
 
 type addressAttrs map[string]any
 
-func (e *AddressElement) Autocapitalize(a AddressAutocapitalizeAttrEnum) *AddressElement {
+func (e *AddressElement) Autocapitalize(a AddressAutocapitalizeEnum) *AddressElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *AddressElement) Autocorrect(a AddressAutocorrectAttrEnum) *AddressElement {
+func (e *AddressElement) Autocorrect(a AddressAutocorrectEnum) *AddressElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *AddressElement) Autofocus(b bool) *AddressElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *AddressElement) Class(s ...string) *AddressElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *AddressElement) Contenteditable(a AddressContenteditableAttrEnum) *AddressElement {
+func (e *AddressElement) Contenteditable(a AddressContenteditableEnum) *AddressElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *AddressElement) Dir(a AddressDirEnum) *AddressElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *AddressElement) Draggable(a AddressDraggableEnum) *AddressElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *AddressElement) Enterkeyhint(a AddressEnterkeyhintEnum) *AddressElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *AddressElement) Hidden(a AddressHiddenEnum) *AddressElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *AddressElement) Id(s string) *AddressElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *AddressElement) Slot(s string) *AddressElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

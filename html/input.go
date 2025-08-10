@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type InputElement struct {
 	attributes inputAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type InputElement struct {
 // Spec Description: The input element represents a typed data field, usually with a form control to allow the user to edit the data.
 func Input(children ...htemel.Node) *InputElement {
 	node := &InputElement{
-		children:   children,
+		children: children,
 		attributes: make(inputAttrs),
 	}
 
@@ -39,73 +38,131 @@ func InputIf(condition bool, children ...htemel.Node) *InputElement {
 	}
 }
 
-type InputAutocapitalizeAttrEnum string
+type InputAutocapitalizeEnum string
 
 const (
-	InputAutocapitalizeAttrEnumOn         InputAutocapitalizeAttrEnum = "on"
-	InputAutocapitalizeAttrEnumSentences  InputAutocapitalizeAttrEnum = "sentences"
-	InputAutocapitalizeAttrEnumWords      InputAutocapitalizeAttrEnum = "words"
-	InputAutocapitalizeAttrEnumCharacters InputAutocapitalizeAttrEnum = "characters"
-	InputAutocapitalizeAttrEnumNone       InputAutocapitalizeAttrEnum = "none"
-	InputAutocapitalizeAttrEnumOff        InputAutocapitalizeAttrEnum = "off"
+	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
+	InputAutocapitalizeEnumNone InputAutocapitalizeEnum = "none"
+	InputAutocapitalizeEnumOff InputAutocapitalizeEnum = "off"
+	InputAutocapitalizeEnumOn InputAutocapitalizeEnum = "on"
+	InputAutocapitalizeEnumSentences InputAutocapitalizeEnum = "sentences"
+	InputAutocapitalizeEnumWords InputAutocapitalizeEnum = "words"
 )
 
-type InputAutocorrectAttrEnum string
+type InputAutocorrectEnum string
 
 const (
-	InputAutocorrectAttrEnumOff InputAutocorrectAttrEnum = "off"
-	InputAutocorrectAttrEnumOn  InputAutocorrectAttrEnum = "on"
+	InputAutocorrectEnumOff InputAutocorrectEnum = "off"
+	InputAutocorrectEnumOn InputAutocorrectEnum = "on"
 )
 
-type InputContenteditableAttrEnum string
+type InputContenteditableEnum string
 
 const (
-	InputContenteditableAttrEnumFalse         InputContenteditableAttrEnum = "false"
-	InputContenteditableAttrEnumPlaintextOnly InputContenteditableAttrEnum = "plaintext-only"
-	InputContenteditableAttrEnumTrue          InputContenteditableAttrEnum = "true"
+	InputContenteditableEnumTrue InputContenteditableEnum = "true"
+	InputContenteditableEnumFalse InputContenteditableEnum = "false"
+	InputContenteditableEnumPlaintextOnly InputContenteditableEnum = "plaintext-only"
+)
+
+type InputDirEnum string
+
+const (
+	InputDirEnumAuto InputDirEnum = "auto"
+	InputDirEnumLtr InputDirEnum = "ltr"
+	InputDirEnumRtl InputDirEnum = "rtl"
+)
+
+type InputDraggableEnum string
+
+const (
+	InputDraggableEnumFalse InputDraggableEnum = "false"
+	InputDraggableEnumTrue InputDraggableEnum = "true"
+)
+
+type InputEnterkeyhintEnum string
+
+const (
+	InputEnterkeyhintEnumGo InputEnterkeyhintEnum = "go"
+	InputEnterkeyhintEnumNext InputEnterkeyhintEnum = "next"
+	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
+	InputEnterkeyhintEnumSearch InputEnterkeyhintEnum = "search"
+	InputEnterkeyhintEnumSend InputEnterkeyhintEnum = "send"
+	InputEnterkeyhintEnumDone InputEnterkeyhintEnum = "done"
+	InputEnterkeyhintEnumEnter InputEnterkeyhintEnum = "enter"
+)
+
+type InputHiddenEnum string
+
+const (
+	InputHiddenEnumHidden InputHiddenEnum = "hidden"
+	InputHiddenEnumUntilFound InputHiddenEnum = "until-found"
 )
 
 type inputAttrs map[string]any
 
-func (e *InputElement) Autocapitalize(a InputAutocapitalizeAttrEnum) *InputElement {
+func (e *InputElement) Autocapitalize(a InputAutocapitalizeEnum) *InputElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *InputElement) Autocorrect(a InputAutocorrectAttrEnum) *InputElement {
+func (e *InputElement) Autocorrect(a InputAutocorrectEnum) *InputElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *InputElement) Autofocus(b bool) *InputElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *InputElement) Class(s ...string) *InputElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *InputElement) Contenteditable(a InputContenteditableAttrEnum) *InputElement {
+func (e *InputElement) Contenteditable(a InputContenteditableEnum) *InputElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *InputElement) Dir(a InputDirEnum) *InputElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *InputElement) Draggable(a InputDraggableEnum) *InputElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *InputElement) Enterkeyhint(a InputEnterkeyhintEnum) *InputElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *InputElement) Hidden(a InputHiddenEnum) *InputElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *InputElement) Id(s string) *InputElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *InputElement) Slot(s string) *InputElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type RpElement struct {
 	attributes rpAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type RpElement struct {
 // Spec Description: The rp element can be used to provide parentheses or other content around a ruby text component of a ruby annotation, to be shown by user agents that don't support ruby annotations.
 func Rp(children ...htemel.Node) *RpElement {
 	node := &RpElement{
-		children:   children,
+		children: children,
 		attributes: make(rpAttrs),
 	}
 
@@ -39,73 +38,131 @@ func RpIf(condition bool, children ...htemel.Node) *RpElement {
 	}
 }
 
-type RpAutocapitalizeAttrEnum string
+type RpAutocapitalizeEnum string
 
 const (
-	RpAutocapitalizeAttrEnumOn         RpAutocapitalizeAttrEnum = "on"
-	RpAutocapitalizeAttrEnumSentences  RpAutocapitalizeAttrEnum = "sentences"
-	RpAutocapitalizeAttrEnumWords      RpAutocapitalizeAttrEnum = "words"
-	RpAutocapitalizeAttrEnumCharacters RpAutocapitalizeAttrEnum = "characters"
-	RpAutocapitalizeAttrEnumNone       RpAutocapitalizeAttrEnum = "none"
-	RpAutocapitalizeAttrEnumOff        RpAutocapitalizeAttrEnum = "off"
+	RpAutocapitalizeEnumCharacters RpAutocapitalizeEnum = "characters"
+	RpAutocapitalizeEnumNone RpAutocapitalizeEnum = "none"
+	RpAutocapitalizeEnumOff RpAutocapitalizeEnum = "off"
+	RpAutocapitalizeEnumOn RpAutocapitalizeEnum = "on"
+	RpAutocapitalizeEnumSentences RpAutocapitalizeEnum = "sentences"
+	RpAutocapitalizeEnumWords RpAutocapitalizeEnum = "words"
 )
 
-type RpAutocorrectAttrEnum string
+type RpAutocorrectEnum string
 
 const (
-	RpAutocorrectAttrEnumOff RpAutocorrectAttrEnum = "off"
-	RpAutocorrectAttrEnumOn  RpAutocorrectAttrEnum = "on"
+	RpAutocorrectEnumOff RpAutocorrectEnum = "off"
+	RpAutocorrectEnumOn RpAutocorrectEnum = "on"
 )
 
-type RpContenteditableAttrEnum string
+type RpContenteditableEnum string
 
 const (
-	RpContenteditableAttrEnumFalse         RpContenteditableAttrEnum = "false"
-	RpContenteditableAttrEnumPlaintextOnly RpContenteditableAttrEnum = "plaintext-only"
-	RpContenteditableAttrEnumTrue          RpContenteditableAttrEnum = "true"
+	RpContenteditableEnumFalse RpContenteditableEnum = "false"
+	RpContenteditableEnumPlaintextOnly RpContenteditableEnum = "plaintext-only"
+	RpContenteditableEnumTrue RpContenteditableEnum = "true"
+)
+
+type RpDirEnum string
+
+const (
+	RpDirEnumAuto RpDirEnum = "auto"
+	RpDirEnumLtr RpDirEnum = "ltr"
+	RpDirEnumRtl RpDirEnum = "rtl"
+)
+
+type RpDraggableEnum string
+
+const (
+	RpDraggableEnumFalse RpDraggableEnum = "false"
+	RpDraggableEnumTrue RpDraggableEnum = "true"
+)
+
+type RpEnterkeyhintEnum string
+
+const (
+	RpEnterkeyhintEnumEnter RpEnterkeyhintEnum = "enter"
+	RpEnterkeyhintEnumGo RpEnterkeyhintEnum = "go"
+	RpEnterkeyhintEnumNext RpEnterkeyhintEnum = "next"
+	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
+	RpEnterkeyhintEnumSearch RpEnterkeyhintEnum = "search"
+	RpEnterkeyhintEnumSend RpEnterkeyhintEnum = "send"
+	RpEnterkeyhintEnumDone RpEnterkeyhintEnum = "done"
+)
+
+type RpHiddenEnum string
+
+const (
+	RpHiddenEnumHidden RpHiddenEnum = "hidden"
+	RpHiddenEnumUntilFound RpHiddenEnum = "until-found"
 )
 
 type rpAttrs map[string]any
 
-func (e *RpElement) Autocapitalize(a RpAutocapitalizeAttrEnum) *RpElement {
+func (e *RpElement) Autocapitalize(a RpAutocapitalizeEnum) *RpElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *RpElement) Autocorrect(a RpAutocorrectAttrEnum) *RpElement {
+func (e *RpElement) Autocorrect(a RpAutocorrectEnum) *RpElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *RpElement) Autofocus(b bool) *RpElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *RpElement) Class(s ...string) *RpElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *RpElement) Contenteditable(a RpContenteditableAttrEnum) *RpElement {
+func (e *RpElement) Contenteditable(a RpContenteditableEnum) *RpElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *RpElement) Dir(a RpDirEnum) *RpElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *RpElement) Draggable(a RpDraggableEnum) *RpElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *RpElement) Enterkeyhint(a RpEnterkeyhintEnum) *RpElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *RpElement) Hidden(a RpHiddenEnum) *RpElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *RpElement) Id(s string) *RpElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *RpElement) Slot(s string) *RpElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

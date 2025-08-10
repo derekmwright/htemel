@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type UElement struct {
 	attributes uAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type UElement struct {
 // Spec Description: The u element represents a span of text with an unarticulated, though explicitly rendered, non-textual annotation, such as labeling the text as being a proper name in Chinese text (a Chinese proper name mark), or labeling the text as being misspelt.
 func U(children ...htemel.Node) *UElement {
 	node := &UElement{
-		children:   children,
+		children: children,
 		attributes: make(uAttrs),
 	}
 
@@ -39,73 +38,131 @@ func UIf(condition bool, children ...htemel.Node) *UElement {
 	}
 }
 
-type UAutocapitalizeAttrEnum string
+type UAutocapitalizeEnum string
 
 const (
-	UAutocapitalizeAttrEnumWords      UAutocapitalizeAttrEnum = "words"
-	UAutocapitalizeAttrEnumCharacters UAutocapitalizeAttrEnum = "characters"
-	UAutocapitalizeAttrEnumNone       UAutocapitalizeAttrEnum = "none"
-	UAutocapitalizeAttrEnumOff        UAutocapitalizeAttrEnum = "off"
-	UAutocapitalizeAttrEnumOn         UAutocapitalizeAttrEnum = "on"
-	UAutocapitalizeAttrEnumSentences  UAutocapitalizeAttrEnum = "sentences"
+	UAutocapitalizeEnumWords UAutocapitalizeEnum = "words"
+	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
+	UAutocapitalizeEnumNone UAutocapitalizeEnum = "none"
+	UAutocapitalizeEnumOff UAutocapitalizeEnum = "off"
+	UAutocapitalizeEnumOn UAutocapitalizeEnum = "on"
+	UAutocapitalizeEnumSentences UAutocapitalizeEnum = "sentences"
 )
 
-type UAutocorrectAttrEnum string
+type UAutocorrectEnum string
 
 const (
-	UAutocorrectAttrEnumOff UAutocorrectAttrEnum = "off"
-	UAutocorrectAttrEnumOn  UAutocorrectAttrEnum = "on"
+	UAutocorrectEnumOff UAutocorrectEnum = "off"
+	UAutocorrectEnumOn UAutocorrectEnum = "on"
 )
 
-type UContenteditableAttrEnum string
+type UContenteditableEnum string
 
 const (
-	UContenteditableAttrEnumFalse         UContenteditableAttrEnum = "false"
-	UContenteditableAttrEnumPlaintextOnly UContenteditableAttrEnum = "plaintext-only"
-	UContenteditableAttrEnumTrue          UContenteditableAttrEnum = "true"
+	UContenteditableEnumPlaintextOnly UContenteditableEnum = "plaintext-only"
+	UContenteditableEnumTrue UContenteditableEnum = "true"
+	UContenteditableEnumFalse UContenteditableEnum = "false"
+)
+
+type UDirEnum string
+
+const (
+	UDirEnumAuto UDirEnum = "auto"
+	UDirEnumLtr UDirEnum = "ltr"
+	UDirEnumRtl UDirEnum = "rtl"
+)
+
+type UDraggableEnum string
+
+const (
+	UDraggableEnumFalse UDraggableEnum = "false"
+	UDraggableEnumTrue UDraggableEnum = "true"
+)
+
+type UEnterkeyhintEnum string
+
+const (
+	UEnterkeyhintEnumDone UEnterkeyhintEnum = "done"
+	UEnterkeyhintEnumEnter UEnterkeyhintEnum = "enter"
+	UEnterkeyhintEnumGo UEnterkeyhintEnum = "go"
+	UEnterkeyhintEnumNext UEnterkeyhintEnum = "next"
+	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
+	UEnterkeyhintEnumSearch UEnterkeyhintEnum = "search"
+	UEnterkeyhintEnumSend UEnterkeyhintEnum = "send"
+)
+
+type UHiddenEnum string
+
+const (
+	UHiddenEnumHidden UHiddenEnum = "hidden"
+	UHiddenEnumUntilFound UHiddenEnum = "until-found"
 )
 
 type uAttrs map[string]any
 
-func (e *UElement) Autocapitalize(a UAutocapitalizeAttrEnum) *UElement {
+func (e *UElement) Autocapitalize(a UAutocapitalizeEnum) *UElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *UElement) Autocorrect(a UAutocorrectAttrEnum) *UElement {
+func (e *UElement) Autocorrect(a UAutocorrectEnum) *UElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *UElement) Autofocus(b bool) *UElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *UElement) Class(s ...string) *UElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *UElement) Contenteditable(a UContenteditableAttrEnum) *UElement {
+func (e *UElement) Contenteditable(a UContenteditableEnum) *UElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *UElement) Dir(a UDirEnum) *UElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *UElement) Draggable(a UDraggableEnum) *UElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *UElement) Enterkeyhint(a UEnterkeyhintEnum) *UElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *UElement) Hidden(a UHiddenEnum) *UElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *UElement) Id(s string) *UElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *UElement) Slot(s string) *UElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

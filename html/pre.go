@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type PreElement struct {
 	attributes preAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type PreElement struct {
 // Spec Description: The pre element represents a block of preformatted text, in which structure is represented by typographic conventions rather than by elements.
 func Pre(children ...htemel.Node) *PreElement {
 	node := &PreElement{
-		children:   children,
+		children: children,
 		attributes: make(preAttrs),
 	}
 
@@ -39,73 +38,131 @@ func PreIf(condition bool, children ...htemel.Node) *PreElement {
 	}
 }
 
-type PreAutocapitalizeAttrEnum string
+type PreAutocapitalizeEnum string
 
 const (
-	PreAutocapitalizeAttrEnumWords      PreAutocapitalizeAttrEnum = "words"
-	PreAutocapitalizeAttrEnumCharacters PreAutocapitalizeAttrEnum = "characters"
-	PreAutocapitalizeAttrEnumNone       PreAutocapitalizeAttrEnum = "none"
-	PreAutocapitalizeAttrEnumOff        PreAutocapitalizeAttrEnum = "off"
-	PreAutocapitalizeAttrEnumOn         PreAutocapitalizeAttrEnum = "on"
-	PreAutocapitalizeAttrEnumSentences  PreAutocapitalizeAttrEnum = "sentences"
+	PreAutocapitalizeEnumCharacters PreAutocapitalizeEnum = "characters"
+	PreAutocapitalizeEnumNone PreAutocapitalizeEnum = "none"
+	PreAutocapitalizeEnumOff PreAutocapitalizeEnum = "off"
+	PreAutocapitalizeEnumOn PreAutocapitalizeEnum = "on"
+	PreAutocapitalizeEnumSentences PreAutocapitalizeEnum = "sentences"
+	PreAutocapitalizeEnumWords PreAutocapitalizeEnum = "words"
 )
 
-type PreAutocorrectAttrEnum string
+type PreAutocorrectEnum string
 
 const (
-	PreAutocorrectAttrEnumOn  PreAutocorrectAttrEnum = "on"
-	PreAutocorrectAttrEnumOff PreAutocorrectAttrEnum = "off"
+	PreAutocorrectEnumOff PreAutocorrectEnum = "off"
+	PreAutocorrectEnumOn PreAutocorrectEnum = "on"
 )
 
-type PreContenteditableAttrEnum string
+type PreContenteditableEnum string
 
 const (
-	PreContenteditableAttrEnumFalse         PreContenteditableAttrEnum = "false"
-	PreContenteditableAttrEnumPlaintextOnly PreContenteditableAttrEnum = "plaintext-only"
-	PreContenteditableAttrEnumTrue          PreContenteditableAttrEnum = "true"
+	PreContenteditableEnumFalse PreContenteditableEnum = "false"
+	PreContenteditableEnumPlaintextOnly PreContenteditableEnum = "plaintext-only"
+	PreContenteditableEnumTrue PreContenteditableEnum = "true"
+)
+
+type PreDirEnum string
+
+const (
+	PreDirEnumAuto PreDirEnum = "auto"
+	PreDirEnumLtr PreDirEnum = "ltr"
+	PreDirEnumRtl PreDirEnum = "rtl"
+)
+
+type PreDraggableEnum string
+
+const (
+	PreDraggableEnumFalse PreDraggableEnum = "false"
+	PreDraggableEnumTrue PreDraggableEnum = "true"
+)
+
+type PreEnterkeyhintEnum string
+
+const (
+	PreEnterkeyhintEnumEnter PreEnterkeyhintEnum = "enter"
+	PreEnterkeyhintEnumGo PreEnterkeyhintEnum = "go"
+	PreEnterkeyhintEnumNext PreEnterkeyhintEnum = "next"
+	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
+	PreEnterkeyhintEnumSearch PreEnterkeyhintEnum = "search"
+	PreEnterkeyhintEnumSend PreEnterkeyhintEnum = "send"
+	PreEnterkeyhintEnumDone PreEnterkeyhintEnum = "done"
+)
+
+type PreHiddenEnum string
+
+const (
+	PreHiddenEnumHidden PreHiddenEnum = "hidden"
+	PreHiddenEnumUntilFound PreHiddenEnum = "until-found"
 )
 
 type preAttrs map[string]any
 
-func (e *PreElement) Autocapitalize(a PreAutocapitalizeAttrEnum) *PreElement {
+func (e *PreElement) Autocapitalize(a PreAutocapitalizeEnum) *PreElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *PreElement) Autocorrect(a PreAutocorrectAttrEnum) *PreElement {
+func (e *PreElement) Autocorrect(a PreAutocorrectEnum) *PreElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *PreElement) Autofocus(b bool) *PreElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *PreElement) Class(s ...string) *PreElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *PreElement) Contenteditable(a PreContenteditableAttrEnum) *PreElement {
+func (e *PreElement) Contenteditable(a PreContenteditableEnum) *PreElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *PreElement) Dir(a PreDirEnum) *PreElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *PreElement) Draggable(a PreDraggableEnum) *PreElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *PreElement) Enterkeyhint(a PreEnterkeyhintEnum) *PreElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *PreElement) Hidden(a PreHiddenEnum) *PreElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *PreElement) Id(s string) *PreElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *PreElement) Slot(s string) *PreElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

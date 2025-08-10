@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type DelElement struct {
 	attributes delAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type DelElement struct {
 // Spec Description: The del element represents a removal from the document.
 func Del(children ...htemel.Node) *DelElement {
 	node := &DelElement{
-		children:   children,
+		children: children,
 		attributes: make(delAttrs),
 	}
 
@@ -39,73 +38,131 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 	}
 }
 
-type DelAutocapitalizeAttrEnum string
+type DelAutocapitalizeEnum string
 
 const (
-	DelAutocapitalizeAttrEnumWords      DelAutocapitalizeAttrEnum = "words"
-	DelAutocapitalizeAttrEnumCharacters DelAutocapitalizeAttrEnum = "characters"
-	DelAutocapitalizeAttrEnumNone       DelAutocapitalizeAttrEnum = "none"
-	DelAutocapitalizeAttrEnumOff        DelAutocapitalizeAttrEnum = "off"
-	DelAutocapitalizeAttrEnumOn         DelAutocapitalizeAttrEnum = "on"
-	DelAutocapitalizeAttrEnumSentences  DelAutocapitalizeAttrEnum = "sentences"
+	DelAutocapitalizeEnumOff DelAutocapitalizeEnum = "off"
+	DelAutocapitalizeEnumOn DelAutocapitalizeEnum = "on"
+	DelAutocapitalizeEnumSentences DelAutocapitalizeEnum = "sentences"
+	DelAutocapitalizeEnumWords DelAutocapitalizeEnum = "words"
+	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
+	DelAutocapitalizeEnumNone DelAutocapitalizeEnum = "none"
 )
 
-type DelAutocorrectAttrEnum string
+type DelAutocorrectEnum string
 
 const (
-	DelAutocorrectAttrEnumOff DelAutocorrectAttrEnum = "off"
-	DelAutocorrectAttrEnumOn  DelAutocorrectAttrEnum = "on"
+	DelAutocorrectEnumOff DelAutocorrectEnum = "off"
+	DelAutocorrectEnumOn DelAutocorrectEnum = "on"
 )
 
-type DelContenteditableAttrEnum string
+type DelContenteditableEnum string
 
 const (
-	DelContenteditableAttrEnumPlaintextOnly DelContenteditableAttrEnum = "plaintext-only"
-	DelContenteditableAttrEnumTrue          DelContenteditableAttrEnum = "true"
-	DelContenteditableAttrEnumFalse         DelContenteditableAttrEnum = "false"
+	DelContenteditableEnumFalse DelContenteditableEnum = "false"
+	DelContenteditableEnumPlaintextOnly DelContenteditableEnum = "plaintext-only"
+	DelContenteditableEnumTrue DelContenteditableEnum = "true"
+)
+
+type DelDirEnum string
+
+const (
+	DelDirEnumAuto DelDirEnum = "auto"
+	DelDirEnumLtr DelDirEnum = "ltr"
+	DelDirEnumRtl DelDirEnum = "rtl"
+)
+
+type DelDraggableEnum string
+
+const (
+	DelDraggableEnumTrue DelDraggableEnum = "true"
+	DelDraggableEnumFalse DelDraggableEnum = "false"
+)
+
+type DelEnterkeyhintEnum string
+
+const (
+	DelEnterkeyhintEnumDone DelEnterkeyhintEnum = "done"
+	DelEnterkeyhintEnumEnter DelEnterkeyhintEnum = "enter"
+	DelEnterkeyhintEnumGo DelEnterkeyhintEnum = "go"
+	DelEnterkeyhintEnumNext DelEnterkeyhintEnum = "next"
+	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
+	DelEnterkeyhintEnumSearch DelEnterkeyhintEnum = "search"
+	DelEnterkeyhintEnumSend DelEnterkeyhintEnum = "send"
+)
+
+type DelHiddenEnum string
+
+const (
+	DelHiddenEnumHidden DelHiddenEnum = "hidden"
+	DelHiddenEnumUntilFound DelHiddenEnum = "until-found"
 )
 
 type delAttrs map[string]any
 
-func (e *DelElement) Autocapitalize(a DelAutocapitalizeAttrEnum) *DelElement {
+func (e *DelElement) Autocapitalize(a DelAutocapitalizeEnum) *DelElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *DelElement) Autocorrect(a DelAutocorrectAttrEnum) *DelElement {
+func (e *DelElement) Autocorrect(a DelAutocorrectEnum) *DelElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *DelElement) Autofocus(b bool) *DelElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *DelElement) Class(s ...string) *DelElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *DelElement) Contenteditable(a DelContenteditableAttrEnum) *DelElement {
+func (e *DelElement) Contenteditable(a DelContenteditableEnum) *DelElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *DelElement) Dir(a DelDirEnum) *DelElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *DelElement) Draggable(a DelDraggableEnum) *DelElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *DelElement) Enterkeyhint(a DelEnterkeyhintEnum) *DelElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *DelElement) Hidden(a DelHiddenEnum) *DelElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *DelElement) Id(s string) *DelElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *DelElement) Slot(s string) *DelElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

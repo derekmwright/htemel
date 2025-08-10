@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type BElement struct {
 	attributes bAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type BElement struct {
 // Spec Description: The b element represents a span of text to which attention is being drawn for utilitarian purposes without conveying any extra importance and with no implication of an alternate voice or mood, such as key words in a document abstract, product names in a review, actionable words in interactive text-driven software, or an article lede.
 func B(children ...htemel.Node) *BElement {
 	node := &BElement{
-		children:   children,
+		children: children,
 		attributes: make(bAttrs),
 	}
 
@@ -39,73 +38,131 @@ func BIf(condition bool, children ...htemel.Node) *BElement {
 	}
 }
 
-type BAutocapitalizeAttrEnum string
+type BAutocapitalizeEnum string
 
 const (
-	BAutocapitalizeAttrEnumCharacters BAutocapitalizeAttrEnum = "characters"
-	BAutocapitalizeAttrEnumNone       BAutocapitalizeAttrEnum = "none"
-	BAutocapitalizeAttrEnumOff        BAutocapitalizeAttrEnum = "off"
-	BAutocapitalizeAttrEnumOn         BAutocapitalizeAttrEnum = "on"
-	BAutocapitalizeAttrEnumSentences  BAutocapitalizeAttrEnum = "sentences"
-	BAutocapitalizeAttrEnumWords      BAutocapitalizeAttrEnum = "words"
+	BAutocapitalizeEnumOff BAutocapitalizeEnum = "off"
+	BAutocapitalizeEnumOn BAutocapitalizeEnum = "on"
+	BAutocapitalizeEnumSentences BAutocapitalizeEnum = "sentences"
+	BAutocapitalizeEnumWords BAutocapitalizeEnum = "words"
+	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
+	BAutocapitalizeEnumNone BAutocapitalizeEnum = "none"
 )
 
-type BAutocorrectAttrEnum string
+type BAutocorrectEnum string
 
 const (
-	BAutocorrectAttrEnumOn  BAutocorrectAttrEnum = "on"
-	BAutocorrectAttrEnumOff BAutocorrectAttrEnum = "off"
+	BAutocorrectEnumOff BAutocorrectEnum = "off"
+	BAutocorrectEnumOn BAutocorrectEnum = "on"
 )
 
-type BContenteditableAttrEnum string
+type BContenteditableEnum string
 
 const (
-	BContenteditableAttrEnumFalse         BContenteditableAttrEnum = "false"
-	BContenteditableAttrEnumPlaintextOnly BContenteditableAttrEnum = "plaintext-only"
-	BContenteditableAttrEnumTrue          BContenteditableAttrEnum = "true"
+	BContenteditableEnumPlaintextOnly BContenteditableEnum = "plaintext-only"
+	BContenteditableEnumTrue BContenteditableEnum = "true"
+	BContenteditableEnumFalse BContenteditableEnum = "false"
+)
+
+type BDirEnum string
+
+const (
+	BDirEnumLtr BDirEnum = "ltr"
+	BDirEnumRtl BDirEnum = "rtl"
+	BDirEnumAuto BDirEnum = "auto"
+)
+
+type BDraggableEnum string
+
+const (
+	BDraggableEnumFalse BDraggableEnum = "false"
+	BDraggableEnumTrue BDraggableEnum = "true"
+)
+
+type BEnterkeyhintEnum string
+
+const (
+	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
+	BEnterkeyhintEnumSearch BEnterkeyhintEnum = "search"
+	BEnterkeyhintEnumSend BEnterkeyhintEnum = "send"
+	BEnterkeyhintEnumDone BEnterkeyhintEnum = "done"
+	BEnterkeyhintEnumEnter BEnterkeyhintEnum = "enter"
+	BEnterkeyhintEnumGo BEnterkeyhintEnum = "go"
+	BEnterkeyhintEnumNext BEnterkeyhintEnum = "next"
+)
+
+type BHiddenEnum string
+
+const (
+	BHiddenEnumHidden BHiddenEnum = "hidden"
+	BHiddenEnumUntilFound BHiddenEnum = "until-found"
 )
 
 type bAttrs map[string]any
 
-func (e *BElement) Autocapitalize(a BAutocapitalizeAttrEnum) *BElement {
+func (e *BElement) Autocapitalize(a BAutocapitalizeEnum) *BElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *BElement) Autocorrect(a BAutocorrectAttrEnum) *BElement {
+func (e *BElement) Autocorrect(a BAutocorrectEnum) *BElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *BElement) Autofocus(b bool) *BElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *BElement) Class(s ...string) *BElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *BElement) Contenteditable(a BContenteditableAttrEnum) *BElement {
+func (e *BElement) Contenteditable(a BContenteditableEnum) *BElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *BElement) Dir(a BDirEnum) *BElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *BElement) Draggable(a BDraggableEnum) *BElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *BElement) Enterkeyhint(a BEnterkeyhintEnum) *BElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *BElement) Hidden(a BHiddenEnum) *BElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *BElement) Id(s string) *BElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *BElement) Slot(s string) *BElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type EmElement struct {
 	attributes emAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type EmElement struct {
 // Spec Description: The em element represents stress emphasis of its contents.
 func Em(children ...htemel.Node) *EmElement {
 	node := &EmElement{
-		children:   children,
+		children: children,
 		attributes: make(emAttrs),
 	}
 
@@ -39,73 +38,131 @@ func EmIf(condition bool, children ...htemel.Node) *EmElement {
 	}
 }
 
-type EmAutocapitalizeAttrEnum string
+type EmAutocapitalizeEnum string
 
 const (
-	EmAutocapitalizeAttrEnumOff        EmAutocapitalizeAttrEnum = "off"
-	EmAutocapitalizeAttrEnumOn         EmAutocapitalizeAttrEnum = "on"
-	EmAutocapitalizeAttrEnumSentences  EmAutocapitalizeAttrEnum = "sentences"
-	EmAutocapitalizeAttrEnumWords      EmAutocapitalizeAttrEnum = "words"
-	EmAutocapitalizeAttrEnumCharacters EmAutocapitalizeAttrEnum = "characters"
-	EmAutocapitalizeAttrEnumNone       EmAutocapitalizeAttrEnum = "none"
+	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
+	EmAutocapitalizeEnumNone EmAutocapitalizeEnum = "none"
+	EmAutocapitalizeEnumOff EmAutocapitalizeEnum = "off"
+	EmAutocapitalizeEnumOn EmAutocapitalizeEnum = "on"
+	EmAutocapitalizeEnumSentences EmAutocapitalizeEnum = "sentences"
+	EmAutocapitalizeEnumWords EmAutocapitalizeEnum = "words"
 )
 
-type EmAutocorrectAttrEnum string
+type EmAutocorrectEnum string
 
 const (
-	EmAutocorrectAttrEnumOff EmAutocorrectAttrEnum = "off"
-	EmAutocorrectAttrEnumOn  EmAutocorrectAttrEnum = "on"
+	EmAutocorrectEnumOff EmAutocorrectEnum = "off"
+	EmAutocorrectEnumOn EmAutocorrectEnum = "on"
 )
 
-type EmContenteditableAttrEnum string
+type EmContenteditableEnum string
 
 const (
-	EmContenteditableAttrEnumPlaintextOnly EmContenteditableAttrEnum = "plaintext-only"
-	EmContenteditableAttrEnumTrue          EmContenteditableAttrEnum = "true"
-	EmContenteditableAttrEnumFalse         EmContenteditableAttrEnum = "false"
+	EmContenteditableEnumTrue EmContenteditableEnum = "true"
+	EmContenteditableEnumFalse EmContenteditableEnum = "false"
+	EmContenteditableEnumPlaintextOnly EmContenteditableEnum = "plaintext-only"
+)
+
+type EmDirEnum string
+
+const (
+	EmDirEnumAuto EmDirEnum = "auto"
+	EmDirEnumLtr EmDirEnum = "ltr"
+	EmDirEnumRtl EmDirEnum = "rtl"
+)
+
+type EmDraggableEnum string
+
+const (
+	EmDraggableEnumTrue EmDraggableEnum = "true"
+	EmDraggableEnumFalse EmDraggableEnum = "false"
+)
+
+type EmEnterkeyhintEnum string
+
+const (
+	EmEnterkeyhintEnumDone EmEnterkeyhintEnum = "done"
+	EmEnterkeyhintEnumEnter EmEnterkeyhintEnum = "enter"
+	EmEnterkeyhintEnumGo EmEnterkeyhintEnum = "go"
+	EmEnterkeyhintEnumNext EmEnterkeyhintEnum = "next"
+	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
+	EmEnterkeyhintEnumSearch EmEnterkeyhintEnum = "search"
+	EmEnterkeyhintEnumSend EmEnterkeyhintEnum = "send"
+)
+
+type EmHiddenEnum string
+
+const (
+	EmHiddenEnumHidden EmHiddenEnum = "hidden"
+	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
 )
 
 type emAttrs map[string]any
 
-func (e *EmElement) Autocapitalize(a EmAutocapitalizeAttrEnum) *EmElement {
+func (e *EmElement) Autocapitalize(a EmAutocapitalizeEnum) *EmElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *EmElement) Autocorrect(a EmAutocorrectAttrEnum) *EmElement {
+func (e *EmElement) Autocorrect(a EmAutocorrectEnum) *EmElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *EmElement) Autofocus(b bool) *EmElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *EmElement) Class(s ...string) *EmElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *EmElement) Contenteditable(a EmContenteditableAttrEnum) *EmElement {
+func (e *EmElement) Contenteditable(a EmContenteditableEnum) *EmElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *EmElement) Dir(a EmDirEnum) *EmElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *EmElement) Draggable(a EmDraggableEnum) *EmElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *EmElement) Enterkeyhint(a EmEnterkeyhintEnum) *EmElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *EmElement) Hidden(a EmHiddenEnum) *EmElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *EmElement) Id(s string) *EmElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *EmElement) Slot(s string) *EmElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

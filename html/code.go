@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type CodeElement struct {
 	attributes codeAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type CodeElement struct {
 // Spec Description: The code element represents a fragment of computer code. This could be an XML element name, a filename, a computer program, or any other string that a computer would recognize.
 func Code(children ...htemel.Node) *CodeElement {
 	node := &CodeElement{
-		children:   children,
+		children: children,
 		attributes: make(codeAttrs),
 	}
 
@@ -39,73 +38,131 @@ func CodeIf(condition bool, children ...htemel.Node) *CodeElement {
 	}
 }
 
-type CodeAutocapitalizeAttrEnum string
+type CodeAutocapitalizeEnum string
 
 const (
-	CodeAutocapitalizeAttrEnumCharacters CodeAutocapitalizeAttrEnum = "characters"
-	CodeAutocapitalizeAttrEnumNone       CodeAutocapitalizeAttrEnum = "none"
-	CodeAutocapitalizeAttrEnumOff        CodeAutocapitalizeAttrEnum = "off"
-	CodeAutocapitalizeAttrEnumOn         CodeAutocapitalizeAttrEnum = "on"
-	CodeAutocapitalizeAttrEnumSentences  CodeAutocapitalizeAttrEnum = "sentences"
-	CodeAutocapitalizeAttrEnumWords      CodeAutocapitalizeAttrEnum = "words"
+	CodeAutocapitalizeEnumNone CodeAutocapitalizeEnum = "none"
+	CodeAutocapitalizeEnumOff CodeAutocapitalizeEnum = "off"
+	CodeAutocapitalizeEnumOn CodeAutocapitalizeEnum = "on"
+	CodeAutocapitalizeEnumSentences CodeAutocapitalizeEnum = "sentences"
+	CodeAutocapitalizeEnumWords CodeAutocapitalizeEnum = "words"
+	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
 )
 
-type CodeAutocorrectAttrEnum string
+type CodeAutocorrectEnum string
 
 const (
-	CodeAutocorrectAttrEnumOff CodeAutocorrectAttrEnum = "off"
-	CodeAutocorrectAttrEnumOn  CodeAutocorrectAttrEnum = "on"
+	CodeAutocorrectEnumOff CodeAutocorrectEnum = "off"
+	CodeAutocorrectEnumOn CodeAutocorrectEnum = "on"
 )
 
-type CodeContenteditableAttrEnum string
+type CodeContenteditableEnum string
 
 const (
-	CodeContenteditableAttrEnumFalse         CodeContenteditableAttrEnum = "false"
-	CodeContenteditableAttrEnumPlaintextOnly CodeContenteditableAttrEnum = "plaintext-only"
-	CodeContenteditableAttrEnumTrue          CodeContenteditableAttrEnum = "true"
+	CodeContenteditableEnumFalse CodeContenteditableEnum = "false"
+	CodeContenteditableEnumPlaintextOnly CodeContenteditableEnum = "plaintext-only"
+	CodeContenteditableEnumTrue CodeContenteditableEnum = "true"
+)
+
+type CodeDirEnum string
+
+const (
+	CodeDirEnumAuto CodeDirEnum = "auto"
+	CodeDirEnumLtr CodeDirEnum = "ltr"
+	CodeDirEnumRtl CodeDirEnum = "rtl"
+)
+
+type CodeDraggableEnum string
+
+const (
+	CodeDraggableEnumFalse CodeDraggableEnum = "false"
+	CodeDraggableEnumTrue CodeDraggableEnum = "true"
+)
+
+type CodeEnterkeyhintEnum string
+
+const (
+	CodeEnterkeyhintEnumGo CodeEnterkeyhintEnum = "go"
+	CodeEnterkeyhintEnumNext CodeEnterkeyhintEnum = "next"
+	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
+	CodeEnterkeyhintEnumSearch CodeEnterkeyhintEnum = "search"
+	CodeEnterkeyhintEnumSend CodeEnterkeyhintEnum = "send"
+	CodeEnterkeyhintEnumDone CodeEnterkeyhintEnum = "done"
+	CodeEnterkeyhintEnumEnter CodeEnterkeyhintEnum = "enter"
+)
+
+type CodeHiddenEnum string
+
+const (
+	CodeHiddenEnumHidden CodeHiddenEnum = "hidden"
+	CodeHiddenEnumUntilFound CodeHiddenEnum = "until-found"
 )
 
 type codeAttrs map[string]any
 
-func (e *CodeElement) Autocapitalize(a CodeAutocapitalizeAttrEnum) *CodeElement {
+func (e *CodeElement) Autocapitalize(a CodeAutocapitalizeEnum) *CodeElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *CodeElement) Autocorrect(a CodeAutocorrectAttrEnum) *CodeElement {
+func (e *CodeElement) Autocorrect(a CodeAutocorrectEnum) *CodeElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *CodeElement) Autofocus(b bool) *CodeElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *CodeElement) Class(s ...string) *CodeElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *CodeElement) Contenteditable(a CodeContenteditableAttrEnum) *CodeElement {
+func (e *CodeElement) Contenteditable(a CodeContenteditableEnum) *CodeElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *CodeElement) Dir(a CodeDirEnum) *CodeElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *CodeElement) Draggable(a CodeDraggableEnum) *CodeElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *CodeElement) Enterkeyhint(a CodeEnterkeyhintEnum) *CodeElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *CodeElement) Hidden(a CodeHiddenEnum) *CodeElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *CodeElement) Id(s string) *CodeElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *CodeElement) Slot(s string) *CodeElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

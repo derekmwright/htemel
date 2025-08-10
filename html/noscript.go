@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type NoscriptElement struct {
 	attributes noscriptAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type NoscriptElement struct {
 // Spec Description: The noscript element represents nothing if scripting is enabled, and represents its children if scripting is disabled. It is used to present different markup to user agents that support scripting and those that don't support scripting, by affecting how the document is parsed.
 func Noscript(children ...htemel.Node) *NoscriptElement {
 	node := &NoscriptElement{
-		children:   children,
+		children: children,
 		attributes: make(noscriptAttrs),
 	}
 
@@ -39,73 +38,131 @@ func NoscriptIf(condition bool, children ...htemel.Node) *NoscriptElement {
 	}
 }
 
-type NoscriptAutocapitalizeAttrEnum string
+type NoscriptAutocapitalizeEnum string
 
 const (
-	NoscriptAutocapitalizeAttrEnumWords      NoscriptAutocapitalizeAttrEnum = "words"
-	NoscriptAutocapitalizeAttrEnumCharacters NoscriptAutocapitalizeAttrEnum = "characters"
-	NoscriptAutocapitalizeAttrEnumNone       NoscriptAutocapitalizeAttrEnum = "none"
-	NoscriptAutocapitalizeAttrEnumOff        NoscriptAutocapitalizeAttrEnum = "off"
-	NoscriptAutocapitalizeAttrEnumOn         NoscriptAutocapitalizeAttrEnum = "on"
-	NoscriptAutocapitalizeAttrEnumSentences  NoscriptAutocapitalizeAttrEnum = "sentences"
+	NoscriptAutocapitalizeEnumOn NoscriptAutocapitalizeEnum = "on"
+	NoscriptAutocapitalizeEnumSentences NoscriptAutocapitalizeEnum = "sentences"
+	NoscriptAutocapitalizeEnumWords NoscriptAutocapitalizeEnum = "words"
+	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
+	NoscriptAutocapitalizeEnumNone NoscriptAutocapitalizeEnum = "none"
+	NoscriptAutocapitalizeEnumOff NoscriptAutocapitalizeEnum = "off"
 )
 
-type NoscriptAutocorrectAttrEnum string
+type NoscriptAutocorrectEnum string
 
 const (
-	NoscriptAutocorrectAttrEnumOff NoscriptAutocorrectAttrEnum = "off"
-	NoscriptAutocorrectAttrEnumOn  NoscriptAutocorrectAttrEnum = "on"
+	NoscriptAutocorrectEnumOff NoscriptAutocorrectEnum = "off"
+	NoscriptAutocorrectEnumOn NoscriptAutocorrectEnum = "on"
 )
 
-type NoscriptContenteditableAttrEnum string
+type NoscriptContenteditableEnum string
 
 const (
-	NoscriptContenteditableAttrEnumFalse         NoscriptContenteditableAttrEnum = "false"
-	NoscriptContenteditableAttrEnumPlaintextOnly NoscriptContenteditableAttrEnum = "plaintext-only"
-	NoscriptContenteditableAttrEnumTrue          NoscriptContenteditableAttrEnum = "true"
+	NoscriptContenteditableEnumFalse NoscriptContenteditableEnum = "false"
+	NoscriptContenteditableEnumPlaintextOnly NoscriptContenteditableEnum = "plaintext-only"
+	NoscriptContenteditableEnumTrue NoscriptContenteditableEnum = "true"
+)
+
+type NoscriptDirEnum string
+
+const (
+	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
+	NoscriptDirEnumLtr NoscriptDirEnum = "ltr"
+	NoscriptDirEnumRtl NoscriptDirEnum = "rtl"
+)
+
+type NoscriptDraggableEnum string
+
+const (
+	NoscriptDraggableEnumFalse NoscriptDraggableEnum = "false"
+	NoscriptDraggableEnumTrue NoscriptDraggableEnum = "true"
+)
+
+type NoscriptEnterkeyhintEnum string
+
+const (
+	NoscriptEnterkeyhintEnumDone NoscriptEnterkeyhintEnum = "done"
+	NoscriptEnterkeyhintEnumEnter NoscriptEnterkeyhintEnum = "enter"
+	NoscriptEnterkeyhintEnumGo NoscriptEnterkeyhintEnum = "go"
+	NoscriptEnterkeyhintEnumNext NoscriptEnterkeyhintEnum = "next"
+	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
+	NoscriptEnterkeyhintEnumSearch NoscriptEnterkeyhintEnum = "search"
+	NoscriptEnterkeyhintEnumSend NoscriptEnterkeyhintEnum = "send"
+)
+
+type NoscriptHiddenEnum string
+
+const (
+	NoscriptHiddenEnumHidden NoscriptHiddenEnum = "hidden"
+	NoscriptHiddenEnumUntilFound NoscriptHiddenEnum = "until-found"
 )
 
 type noscriptAttrs map[string]any
 
-func (e *NoscriptElement) Autocapitalize(a NoscriptAutocapitalizeAttrEnum) *NoscriptElement {
+func (e *NoscriptElement) Autocapitalize(a NoscriptAutocapitalizeEnum) *NoscriptElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *NoscriptElement) Autocorrect(a NoscriptAutocorrectAttrEnum) *NoscriptElement {
+func (e *NoscriptElement) Autocorrect(a NoscriptAutocorrectEnum) *NoscriptElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *NoscriptElement) Autofocus(b bool) *NoscriptElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *NoscriptElement) Class(s ...string) *NoscriptElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *NoscriptElement) Contenteditable(a NoscriptContenteditableAttrEnum) *NoscriptElement {
+func (e *NoscriptElement) Contenteditable(a NoscriptContenteditableEnum) *NoscriptElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *NoscriptElement) Dir(a NoscriptDirEnum) *NoscriptElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *NoscriptElement) Draggable(a NoscriptDraggableEnum) *NoscriptElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *NoscriptElement) Enterkeyhint(a NoscriptEnterkeyhintEnum) *NoscriptElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *NoscriptElement) Hidden(a NoscriptHiddenEnum) *NoscriptElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *NoscriptElement) Id(s string) *NoscriptElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *NoscriptElement) Slot(s string) *NoscriptElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

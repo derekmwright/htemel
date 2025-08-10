@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type AbbrElement struct {
 	attributes abbrAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type AbbrElement struct {
 // Spec Description: The abbr element represents an abbreviation or acronym, optionally with its expansion. The title attribute may be used to provide an expansion of the abbreviation. The attribute, if specified, must contain an expansion of the abbreviation, and nothing else.
 func Abbr(children ...htemel.Node) *AbbrElement {
 	node := &AbbrElement{
-		children:   children,
+		children: children,
 		attributes: make(abbrAttrs),
 	}
 
@@ -39,73 +38,131 @@ func AbbrIf(condition bool, children ...htemel.Node) *AbbrElement {
 	}
 }
 
-type AbbrAutocapitalizeAttrEnum string
+type AbbrAutocapitalizeEnum string
 
 const (
-	AbbrAutocapitalizeAttrEnumCharacters AbbrAutocapitalizeAttrEnum = "characters"
-	AbbrAutocapitalizeAttrEnumNone       AbbrAutocapitalizeAttrEnum = "none"
-	AbbrAutocapitalizeAttrEnumOff        AbbrAutocapitalizeAttrEnum = "off"
-	AbbrAutocapitalizeAttrEnumOn         AbbrAutocapitalizeAttrEnum = "on"
-	AbbrAutocapitalizeAttrEnumSentences  AbbrAutocapitalizeAttrEnum = "sentences"
-	AbbrAutocapitalizeAttrEnumWords      AbbrAutocapitalizeAttrEnum = "words"
+	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
+	AbbrAutocapitalizeEnumNone AbbrAutocapitalizeEnum = "none"
+	AbbrAutocapitalizeEnumOff AbbrAutocapitalizeEnum = "off"
+	AbbrAutocapitalizeEnumOn AbbrAutocapitalizeEnum = "on"
+	AbbrAutocapitalizeEnumSentences AbbrAutocapitalizeEnum = "sentences"
+	AbbrAutocapitalizeEnumWords AbbrAutocapitalizeEnum = "words"
 )
 
-type AbbrAutocorrectAttrEnum string
+type AbbrAutocorrectEnum string
 
 const (
-	AbbrAutocorrectAttrEnumOff AbbrAutocorrectAttrEnum = "off"
-	AbbrAutocorrectAttrEnumOn  AbbrAutocorrectAttrEnum = "on"
+	AbbrAutocorrectEnumOff AbbrAutocorrectEnum = "off"
+	AbbrAutocorrectEnumOn AbbrAutocorrectEnum = "on"
 )
 
-type AbbrContenteditableAttrEnum string
+type AbbrContenteditableEnum string
 
 const (
-	AbbrContenteditableAttrEnumFalse         AbbrContenteditableAttrEnum = "false"
-	AbbrContenteditableAttrEnumPlaintextOnly AbbrContenteditableAttrEnum = "plaintext-only"
-	AbbrContenteditableAttrEnumTrue          AbbrContenteditableAttrEnum = "true"
+	AbbrContenteditableEnumFalse AbbrContenteditableEnum = "false"
+	AbbrContenteditableEnumPlaintextOnly AbbrContenteditableEnum = "plaintext-only"
+	AbbrContenteditableEnumTrue AbbrContenteditableEnum = "true"
+)
+
+type AbbrDirEnum string
+
+const (
+	AbbrDirEnumRtl AbbrDirEnum = "rtl"
+	AbbrDirEnumAuto AbbrDirEnum = "auto"
+	AbbrDirEnumLtr AbbrDirEnum = "ltr"
+)
+
+type AbbrDraggableEnum string
+
+const (
+	AbbrDraggableEnumFalse AbbrDraggableEnum = "false"
+	AbbrDraggableEnumTrue AbbrDraggableEnum = "true"
+)
+
+type AbbrEnterkeyhintEnum string
+
+const (
+	AbbrEnterkeyhintEnumSearch AbbrEnterkeyhintEnum = "search"
+	AbbrEnterkeyhintEnumSend AbbrEnterkeyhintEnum = "send"
+	AbbrEnterkeyhintEnumDone AbbrEnterkeyhintEnum = "done"
+	AbbrEnterkeyhintEnumEnter AbbrEnterkeyhintEnum = "enter"
+	AbbrEnterkeyhintEnumGo AbbrEnterkeyhintEnum = "go"
+	AbbrEnterkeyhintEnumNext AbbrEnterkeyhintEnum = "next"
+	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
+)
+
+type AbbrHiddenEnum string
+
+const (
+	AbbrHiddenEnumHidden AbbrHiddenEnum = "hidden"
+	AbbrHiddenEnumUntilFound AbbrHiddenEnum = "until-found"
 )
 
 type abbrAttrs map[string]any
 
-func (e *AbbrElement) Autocapitalize(a AbbrAutocapitalizeAttrEnum) *AbbrElement {
+func (e *AbbrElement) Autocapitalize(a AbbrAutocapitalizeEnum) *AbbrElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *AbbrElement) Autocorrect(a AbbrAutocorrectAttrEnum) *AbbrElement {
+func (e *AbbrElement) Autocorrect(a AbbrAutocorrectEnum) *AbbrElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *AbbrElement) Autofocus(b bool) *AbbrElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *AbbrElement) Class(s ...string) *AbbrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *AbbrElement) Contenteditable(a AbbrContenteditableAttrEnum) *AbbrElement {
+func (e *AbbrElement) Contenteditable(a AbbrContenteditableEnum) *AbbrElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *AbbrElement) Dir(a AbbrDirEnum) *AbbrElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *AbbrElement) Draggable(a AbbrDraggableEnum) *AbbrElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *AbbrElement) Enterkeyhint(a AbbrEnterkeyhintEnum) *AbbrElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *AbbrElement) Hidden(a AbbrHiddenEnum) *AbbrElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *AbbrElement) Id(s string) *AbbrElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *AbbrElement) Slot(s string) *AbbrElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

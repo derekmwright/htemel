@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type AElement struct {
 	attributes aAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type AElement struct {
 // Spec Description: If the a element has an href attribute, then it represents a hyperlink (a hypertext anchor) labeled by its contents.
 func A(children ...htemel.Node) *AElement {
 	node := &AElement{
-		children:   children,
+		children: children,
 		attributes: make(aAttrs),
 	}
 
@@ -39,73 +38,131 @@ func AIf(condition bool, children ...htemel.Node) *AElement {
 	}
 }
 
-type AAutocapitalizeAttrEnum string
+type AAutocapitalizeEnum string
 
 const (
-	AAutocapitalizeAttrEnumSentences  AAutocapitalizeAttrEnum = "sentences"
-	AAutocapitalizeAttrEnumWords      AAutocapitalizeAttrEnum = "words"
-	AAutocapitalizeAttrEnumCharacters AAutocapitalizeAttrEnum = "characters"
-	AAutocapitalizeAttrEnumNone       AAutocapitalizeAttrEnum = "none"
-	AAutocapitalizeAttrEnumOff        AAutocapitalizeAttrEnum = "off"
-	AAutocapitalizeAttrEnumOn         AAutocapitalizeAttrEnum = "on"
+	AAutocapitalizeEnumSentences AAutocapitalizeEnum = "sentences"
+	AAutocapitalizeEnumWords AAutocapitalizeEnum = "words"
+	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
+	AAutocapitalizeEnumNone AAutocapitalizeEnum = "none"
+	AAutocapitalizeEnumOff AAutocapitalizeEnum = "off"
+	AAutocapitalizeEnumOn AAutocapitalizeEnum = "on"
 )
 
-type AAutocorrectAttrEnum string
+type AAutocorrectEnum string
 
 const (
-	AAutocorrectAttrEnumOn  AAutocorrectAttrEnum = "on"
-	AAutocorrectAttrEnumOff AAutocorrectAttrEnum = "off"
+	AAutocorrectEnumOff AAutocorrectEnum = "off"
+	AAutocorrectEnumOn AAutocorrectEnum = "on"
 )
 
-type AContenteditableAttrEnum string
+type AContenteditableEnum string
 
 const (
-	AContenteditableAttrEnumTrue          AContenteditableAttrEnum = "true"
-	AContenteditableAttrEnumFalse         AContenteditableAttrEnum = "false"
-	AContenteditableAttrEnumPlaintextOnly AContenteditableAttrEnum = "plaintext-only"
+	AContenteditableEnumFalse AContenteditableEnum = "false"
+	AContenteditableEnumPlaintextOnly AContenteditableEnum = "plaintext-only"
+	AContenteditableEnumTrue AContenteditableEnum = "true"
+)
+
+type ADirEnum string
+
+const (
+	ADirEnumRtl ADirEnum = "rtl"
+	ADirEnumAuto ADirEnum = "auto"
+	ADirEnumLtr ADirEnum = "ltr"
+)
+
+type ADraggableEnum string
+
+const (
+	ADraggableEnumTrue ADraggableEnum = "true"
+	ADraggableEnumFalse ADraggableEnum = "false"
+)
+
+type AEnterkeyhintEnum string
+
+const (
+	AEnterkeyhintEnumSearch AEnterkeyhintEnum = "search"
+	AEnterkeyhintEnumSend AEnterkeyhintEnum = "send"
+	AEnterkeyhintEnumDone AEnterkeyhintEnum = "done"
+	AEnterkeyhintEnumEnter AEnterkeyhintEnum = "enter"
+	AEnterkeyhintEnumGo AEnterkeyhintEnum = "go"
+	AEnterkeyhintEnumNext AEnterkeyhintEnum = "next"
+	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
+)
+
+type AHiddenEnum string
+
+const (
+	AHiddenEnumHidden AHiddenEnum = "hidden"
+	AHiddenEnumUntilFound AHiddenEnum = "until-found"
 )
 
 type aAttrs map[string]any
 
-func (e *AElement) Autocapitalize(a AAutocapitalizeAttrEnum) *AElement {
+func (e *AElement) Autocapitalize(a AAutocapitalizeEnum) *AElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *AElement) Autocorrect(a AAutocorrectAttrEnum) *AElement {
+func (e *AElement) Autocorrect(a AAutocorrectEnum) *AElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *AElement) Autofocus(b bool) *AElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *AElement) Class(s ...string) *AElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *AElement) Contenteditable(a AContenteditableAttrEnum) *AElement {
+func (e *AElement) Contenteditable(a AContenteditableEnum) *AElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *AElement) Dir(a ADirEnum) *AElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *AElement) Draggable(a ADraggableEnum) *AElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *AElement) Enterkeyhint(a AEnterkeyhintEnum) *AElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *AElement) Hidden(a AHiddenEnum) *AElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *AElement) Id(s string) *AElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *AElement) Slot(s string) *AElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

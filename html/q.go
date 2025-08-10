@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type QElement struct {
 	attributes qAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type QElement struct {
 // Spec Description: The q element represents some phrasing content quoted from another source.
 func Q(children ...htemel.Node) *QElement {
 	node := &QElement{
-		children:   children,
+		children: children,
 		attributes: make(qAttrs),
 	}
 
@@ -39,73 +38,131 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 	}
 }
 
-type QAutocapitalizeAttrEnum string
+type QAutocapitalizeEnum string
 
 const (
-	QAutocapitalizeAttrEnumOff        QAutocapitalizeAttrEnum = "off"
-	QAutocapitalizeAttrEnumOn         QAutocapitalizeAttrEnum = "on"
-	QAutocapitalizeAttrEnumSentences  QAutocapitalizeAttrEnum = "sentences"
-	QAutocapitalizeAttrEnumWords      QAutocapitalizeAttrEnum = "words"
-	QAutocapitalizeAttrEnumCharacters QAutocapitalizeAttrEnum = "characters"
-	QAutocapitalizeAttrEnumNone       QAutocapitalizeAttrEnum = "none"
+	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
+	QAutocapitalizeEnumNone QAutocapitalizeEnum = "none"
+	QAutocapitalizeEnumOff QAutocapitalizeEnum = "off"
+	QAutocapitalizeEnumOn QAutocapitalizeEnum = "on"
+	QAutocapitalizeEnumSentences QAutocapitalizeEnum = "sentences"
+	QAutocapitalizeEnumWords QAutocapitalizeEnum = "words"
 )
 
-type QAutocorrectAttrEnum string
+type QAutocorrectEnum string
 
 const (
-	QAutocorrectAttrEnumOff QAutocorrectAttrEnum = "off"
-	QAutocorrectAttrEnumOn  QAutocorrectAttrEnum = "on"
+	QAutocorrectEnumOff QAutocorrectEnum = "off"
+	QAutocorrectEnumOn QAutocorrectEnum = "on"
 )
 
-type QContenteditableAttrEnum string
+type QContenteditableEnum string
 
 const (
-	QContenteditableAttrEnumTrue          QContenteditableAttrEnum = "true"
-	QContenteditableAttrEnumFalse         QContenteditableAttrEnum = "false"
-	QContenteditableAttrEnumPlaintextOnly QContenteditableAttrEnum = "plaintext-only"
+	QContenteditableEnumFalse QContenteditableEnum = "false"
+	QContenteditableEnumPlaintextOnly QContenteditableEnum = "plaintext-only"
+	QContenteditableEnumTrue QContenteditableEnum = "true"
+)
+
+type QDirEnum string
+
+const (
+	QDirEnumAuto QDirEnum = "auto"
+	QDirEnumLtr QDirEnum = "ltr"
+	QDirEnumRtl QDirEnum = "rtl"
+)
+
+type QDraggableEnum string
+
+const (
+	QDraggableEnumFalse QDraggableEnum = "false"
+	QDraggableEnumTrue QDraggableEnum = "true"
+)
+
+type QEnterkeyhintEnum string
+
+const (
+	QEnterkeyhintEnumGo QEnterkeyhintEnum = "go"
+	QEnterkeyhintEnumNext QEnterkeyhintEnum = "next"
+	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
+	QEnterkeyhintEnumSearch QEnterkeyhintEnum = "search"
+	QEnterkeyhintEnumSend QEnterkeyhintEnum = "send"
+	QEnterkeyhintEnumDone QEnterkeyhintEnum = "done"
+	QEnterkeyhintEnumEnter QEnterkeyhintEnum = "enter"
+)
+
+type QHiddenEnum string
+
+const (
+	QHiddenEnumHidden QHiddenEnum = "hidden"
+	QHiddenEnumUntilFound QHiddenEnum = "until-found"
 )
 
 type qAttrs map[string]any
 
-func (e *QElement) Autocapitalize(a QAutocapitalizeAttrEnum) *QElement {
+func (e *QElement) Autocapitalize(a QAutocapitalizeEnum) *QElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *QElement) Autocorrect(a QAutocorrectAttrEnum) *QElement {
+func (e *QElement) Autocorrect(a QAutocorrectEnum) *QElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *QElement) Autofocus(b bool) *QElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *QElement) Class(s ...string) *QElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *QElement) Contenteditable(a QContenteditableAttrEnum) *QElement {
+func (e *QElement) Contenteditable(a QContenteditableEnum) *QElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *QElement) Dir(a QDirEnum) *QElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *QElement) Draggable(a QDraggableEnum) *QElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *QElement) Enterkeyhint(a QEnterkeyhintEnum) *QElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *QElement) Hidden(a QHiddenEnum) *QElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *QElement) Id(s string) *QElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *QElement) Slot(s string) *QElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

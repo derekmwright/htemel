@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type ArticleElement struct {
 	attributes articleAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type ArticleElement struct {
 // Spec Description: The article element represents a complete, or self-contained, composition in a document, page, application, or site and that is, in principle, independently distributable or reusable, e.g. in syndication. This could be a forum post, a magazine or newspaper article, a blog entry, a user-submitted comment, an interactive widget or gadget, or any other independent item of content.
 func Article(children ...htemel.Node) *ArticleElement {
 	node := &ArticleElement{
-		children:   children,
+		children: children,
 		attributes: make(articleAttrs),
 	}
 
@@ -39,73 +38,131 @@ func ArticleIf(condition bool, children ...htemel.Node) *ArticleElement {
 	}
 }
 
-type ArticleAutocapitalizeAttrEnum string
+type ArticleAutocapitalizeEnum string
 
 const (
-	ArticleAutocapitalizeAttrEnumNone       ArticleAutocapitalizeAttrEnum = "none"
-	ArticleAutocapitalizeAttrEnumOff        ArticleAutocapitalizeAttrEnum = "off"
-	ArticleAutocapitalizeAttrEnumOn         ArticleAutocapitalizeAttrEnum = "on"
-	ArticleAutocapitalizeAttrEnumSentences  ArticleAutocapitalizeAttrEnum = "sentences"
-	ArticleAutocapitalizeAttrEnumWords      ArticleAutocapitalizeAttrEnum = "words"
-	ArticleAutocapitalizeAttrEnumCharacters ArticleAutocapitalizeAttrEnum = "characters"
+	ArticleAutocapitalizeEnumSentences ArticleAutocapitalizeEnum = "sentences"
+	ArticleAutocapitalizeEnumWords ArticleAutocapitalizeEnum = "words"
+	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
+	ArticleAutocapitalizeEnumNone ArticleAutocapitalizeEnum = "none"
+	ArticleAutocapitalizeEnumOff ArticleAutocapitalizeEnum = "off"
+	ArticleAutocapitalizeEnumOn ArticleAutocapitalizeEnum = "on"
 )
 
-type ArticleAutocorrectAttrEnum string
+type ArticleAutocorrectEnum string
 
 const (
-	ArticleAutocorrectAttrEnumOff ArticleAutocorrectAttrEnum = "off"
-	ArticleAutocorrectAttrEnumOn  ArticleAutocorrectAttrEnum = "on"
+	ArticleAutocorrectEnumOff ArticleAutocorrectEnum = "off"
+	ArticleAutocorrectEnumOn ArticleAutocorrectEnum = "on"
 )
 
-type ArticleContenteditableAttrEnum string
+type ArticleContenteditableEnum string
 
 const (
-	ArticleContenteditableAttrEnumFalse         ArticleContenteditableAttrEnum = "false"
-	ArticleContenteditableAttrEnumPlaintextOnly ArticleContenteditableAttrEnum = "plaintext-only"
-	ArticleContenteditableAttrEnumTrue          ArticleContenteditableAttrEnum = "true"
+	ArticleContenteditableEnumFalse ArticleContenteditableEnum = "false"
+	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
+	ArticleContenteditableEnumTrue ArticleContenteditableEnum = "true"
+)
+
+type ArticleDirEnum string
+
+const (
+	ArticleDirEnumAuto ArticleDirEnum = "auto"
+	ArticleDirEnumLtr ArticleDirEnum = "ltr"
+	ArticleDirEnumRtl ArticleDirEnum = "rtl"
+)
+
+type ArticleDraggableEnum string
+
+const (
+	ArticleDraggableEnumFalse ArticleDraggableEnum = "false"
+	ArticleDraggableEnumTrue ArticleDraggableEnum = "true"
+)
+
+type ArticleEnterkeyhintEnum string
+
+const (
+	ArticleEnterkeyhintEnumEnter ArticleEnterkeyhintEnum = "enter"
+	ArticleEnterkeyhintEnumGo ArticleEnterkeyhintEnum = "go"
+	ArticleEnterkeyhintEnumNext ArticleEnterkeyhintEnum = "next"
+	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
+	ArticleEnterkeyhintEnumSearch ArticleEnterkeyhintEnum = "search"
+	ArticleEnterkeyhintEnumSend ArticleEnterkeyhintEnum = "send"
+	ArticleEnterkeyhintEnumDone ArticleEnterkeyhintEnum = "done"
+)
+
+type ArticleHiddenEnum string
+
+const (
+	ArticleHiddenEnumHidden ArticleHiddenEnum = "hidden"
+	ArticleHiddenEnumUntilFound ArticleHiddenEnum = "until-found"
 )
 
 type articleAttrs map[string]any
 
-func (e *ArticleElement) Autocapitalize(a ArticleAutocapitalizeAttrEnum) *ArticleElement {
+func (e *ArticleElement) Autocapitalize(a ArticleAutocapitalizeEnum) *ArticleElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *ArticleElement) Autocorrect(a ArticleAutocorrectAttrEnum) *ArticleElement {
+func (e *ArticleElement) Autocorrect(a ArticleAutocorrectEnum) *ArticleElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *ArticleElement) Autofocus(b bool) *ArticleElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *ArticleElement) Class(s ...string) *ArticleElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *ArticleElement) Contenteditable(a ArticleContenteditableAttrEnum) *ArticleElement {
+func (e *ArticleElement) Contenteditable(a ArticleContenteditableEnum) *ArticleElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *ArticleElement) Dir(a ArticleDirEnum) *ArticleElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *ArticleElement) Draggable(a ArticleDraggableEnum) *ArticleElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *ArticleElement) Enterkeyhint(a ArticleEnterkeyhintEnum) *ArticleElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *ArticleElement) Hidden(a ArticleHiddenEnum) *ArticleElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *ArticleElement) Id(s string) *ArticleElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *ArticleElement) Slot(s string) *ArticleElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

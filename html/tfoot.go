@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type TfootElement struct {
 	attributes tfootAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type TfootElement struct {
 // Spec Description: The tfoot element represents the block of rows that consist of the column summaries (footers) for the parent table element, if the tfoot element has a parent and it is a table.
 func Tfoot(children ...htemel.Node) *TfootElement {
 	node := &TfootElement{
-		children:   children,
+		children: children,
 		attributes: make(tfootAttrs),
 	}
 
@@ -39,73 +38,131 @@ func TfootIf(condition bool, children ...htemel.Node) *TfootElement {
 	}
 }
 
-type TfootAutocapitalizeAttrEnum string
+type TfootAutocapitalizeEnum string
 
 const (
-	TfootAutocapitalizeAttrEnumCharacters TfootAutocapitalizeAttrEnum = "characters"
-	TfootAutocapitalizeAttrEnumNone       TfootAutocapitalizeAttrEnum = "none"
-	TfootAutocapitalizeAttrEnumOff        TfootAutocapitalizeAttrEnum = "off"
-	TfootAutocapitalizeAttrEnumOn         TfootAutocapitalizeAttrEnum = "on"
-	TfootAutocapitalizeAttrEnumSentences  TfootAutocapitalizeAttrEnum = "sentences"
-	TfootAutocapitalizeAttrEnumWords      TfootAutocapitalizeAttrEnum = "words"
+	TfootAutocapitalizeEnumOn TfootAutocapitalizeEnum = "on"
+	TfootAutocapitalizeEnumSentences TfootAutocapitalizeEnum = "sentences"
+	TfootAutocapitalizeEnumWords TfootAutocapitalizeEnum = "words"
+	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
+	TfootAutocapitalizeEnumNone TfootAutocapitalizeEnum = "none"
+	TfootAutocapitalizeEnumOff TfootAutocapitalizeEnum = "off"
 )
 
-type TfootAutocorrectAttrEnum string
+type TfootAutocorrectEnum string
 
 const (
-	TfootAutocorrectAttrEnumOff TfootAutocorrectAttrEnum = "off"
-	TfootAutocorrectAttrEnumOn  TfootAutocorrectAttrEnum = "on"
+	TfootAutocorrectEnumOff TfootAutocorrectEnum = "off"
+	TfootAutocorrectEnumOn TfootAutocorrectEnum = "on"
 )
 
-type TfootContenteditableAttrEnum string
+type TfootContenteditableEnum string
 
 const (
-	TfootContenteditableAttrEnumPlaintextOnly TfootContenteditableAttrEnum = "plaintext-only"
-	TfootContenteditableAttrEnumTrue          TfootContenteditableAttrEnum = "true"
-	TfootContenteditableAttrEnumFalse         TfootContenteditableAttrEnum = "false"
+	TfootContenteditableEnumFalse TfootContenteditableEnum = "false"
+	TfootContenteditableEnumPlaintextOnly TfootContenteditableEnum = "plaintext-only"
+	TfootContenteditableEnumTrue TfootContenteditableEnum = "true"
+)
+
+type TfootDirEnum string
+
+const (
+	TfootDirEnumAuto TfootDirEnum = "auto"
+	TfootDirEnumLtr TfootDirEnum = "ltr"
+	TfootDirEnumRtl TfootDirEnum = "rtl"
+)
+
+type TfootDraggableEnum string
+
+const (
+	TfootDraggableEnumFalse TfootDraggableEnum = "false"
+	TfootDraggableEnumTrue TfootDraggableEnum = "true"
+)
+
+type TfootEnterkeyhintEnum string
+
+const (
+	TfootEnterkeyhintEnumNext TfootEnterkeyhintEnum = "next"
+	TfootEnterkeyhintEnumPrevious TfootEnterkeyhintEnum = "previous"
+	TfootEnterkeyhintEnumSearch TfootEnterkeyhintEnum = "search"
+	TfootEnterkeyhintEnumSend TfootEnterkeyhintEnum = "send"
+	TfootEnterkeyhintEnumDone TfootEnterkeyhintEnum = "done"
+	TfootEnterkeyhintEnumEnter TfootEnterkeyhintEnum = "enter"
+	TfootEnterkeyhintEnumGo TfootEnterkeyhintEnum = "go"
+)
+
+type TfootHiddenEnum string
+
+const (
+	TfootHiddenEnumHidden TfootHiddenEnum = "hidden"
+	TfootHiddenEnumUntilFound TfootHiddenEnum = "until-found"
 )
 
 type tfootAttrs map[string]any
 
-func (e *TfootElement) Autocapitalize(a TfootAutocapitalizeAttrEnum) *TfootElement {
+func (e *TfootElement) Autocapitalize(a TfootAutocapitalizeEnum) *TfootElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *TfootElement) Autocorrect(a TfootAutocorrectAttrEnum) *TfootElement {
+func (e *TfootElement) Autocorrect(a TfootAutocorrectEnum) *TfootElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *TfootElement) Autofocus(b bool) *TfootElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *TfootElement) Class(s ...string) *TfootElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *TfootElement) Contenteditable(a TfootContenteditableAttrEnum) *TfootElement {
+func (e *TfootElement) Contenteditable(a TfootContenteditableEnum) *TfootElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *TfootElement) Dir(a TfootDirEnum) *TfootElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *TfootElement) Draggable(a TfootDraggableEnum) *TfootElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *TfootElement) Enterkeyhint(a TfootEnterkeyhintEnum) *TfootElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *TfootElement) Hidden(a TfootHiddenEnum) *TfootElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *TfootElement) Id(s string) *TfootElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *TfootElement) Slot(s string) *TfootElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type FooterElement struct {
 	attributes footerAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type FooterElement struct {
 // Spec Description: The footer element represents a footer for its nearest ancestor sectioning content element, or for the body element if there is no such ancestor. A footer typically contains information about its section such as who wrote it, links to related documents, copyright data, and the like.
 func Footer(children ...htemel.Node) *FooterElement {
 	node := &FooterElement{
-		children:   children,
+		children: children,
 		attributes: make(footerAttrs),
 	}
 
@@ -39,73 +38,131 @@ func FooterIf(condition bool, children ...htemel.Node) *FooterElement {
 	}
 }
 
-type FooterAutocapitalizeAttrEnum string
+type FooterAutocapitalizeEnum string
 
 const (
-	FooterAutocapitalizeAttrEnumOn         FooterAutocapitalizeAttrEnum = "on"
-	FooterAutocapitalizeAttrEnumSentences  FooterAutocapitalizeAttrEnum = "sentences"
-	FooterAutocapitalizeAttrEnumWords      FooterAutocapitalizeAttrEnum = "words"
-	FooterAutocapitalizeAttrEnumCharacters FooterAutocapitalizeAttrEnum = "characters"
-	FooterAutocapitalizeAttrEnumNone       FooterAutocapitalizeAttrEnum = "none"
-	FooterAutocapitalizeAttrEnumOff        FooterAutocapitalizeAttrEnum = "off"
+	FooterAutocapitalizeEnumOn FooterAutocapitalizeEnum = "on"
+	FooterAutocapitalizeEnumSentences FooterAutocapitalizeEnum = "sentences"
+	FooterAutocapitalizeEnumWords FooterAutocapitalizeEnum = "words"
+	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
+	FooterAutocapitalizeEnumNone FooterAutocapitalizeEnum = "none"
+	FooterAutocapitalizeEnumOff FooterAutocapitalizeEnum = "off"
 )
 
-type FooterAutocorrectAttrEnum string
+type FooterAutocorrectEnum string
 
 const (
-	FooterAutocorrectAttrEnumOn  FooterAutocorrectAttrEnum = "on"
-	FooterAutocorrectAttrEnumOff FooterAutocorrectAttrEnum = "off"
+	FooterAutocorrectEnumOff FooterAutocorrectEnum = "off"
+	FooterAutocorrectEnumOn FooterAutocorrectEnum = "on"
 )
 
-type FooterContenteditableAttrEnum string
+type FooterContenteditableEnum string
 
 const (
-	FooterContenteditableAttrEnumFalse         FooterContenteditableAttrEnum = "false"
-	FooterContenteditableAttrEnumPlaintextOnly FooterContenteditableAttrEnum = "plaintext-only"
-	FooterContenteditableAttrEnumTrue          FooterContenteditableAttrEnum = "true"
+	FooterContenteditableEnumFalse FooterContenteditableEnum = "false"
+	FooterContenteditableEnumPlaintextOnly FooterContenteditableEnum = "plaintext-only"
+	FooterContenteditableEnumTrue FooterContenteditableEnum = "true"
+)
+
+type FooterDirEnum string
+
+const (
+	FooterDirEnumAuto FooterDirEnum = "auto"
+	FooterDirEnumLtr FooterDirEnum = "ltr"
+	FooterDirEnumRtl FooterDirEnum = "rtl"
+)
+
+type FooterDraggableEnum string
+
+const (
+	FooterDraggableEnumFalse FooterDraggableEnum = "false"
+	FooterDraggableEnumTrue FooterDraggableEnum = "true"
+)
+
+type FooterEnterkeyhintEnum string
+
+const (
+	FooterEnterkeyhintEnumDone FooterEnterkeyhintEnum = "done"
+	FooterEnterkeyhintEnumEnter FooterEnterkeyhintEnum = "enter"
+	FooterEnterkeyhintEnumGo FooterEnterkeyhintEnum = "go"
+	FooterEnterkeyhintEnumNext FooterEnterkeyhintEnum = "next"
+	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
+	FooterEnterkeyhintEnumSearch FooterEnterkeyhintEnum = "search"
+	FooterEnterkeyhintEnumSend FooterEnterkeyhintEnum = "send"
+)
+
+type FooterHiddenEnum string
+
+const (
+	FooterHiddenEnumHidden FooterHiddenEnum = "hidden"
+	FooterHiddenEnumUntilFound FooterHiddenEnum = "until-found"
 )
 
 type footerAttrs map[string]any
 
-func (e *FooterElement) Autocapitalize(a FooterAutocapitalizeAttrEnum) *FooterElement {
+func (e *FooterElement) Autocapitalize(a FooterAutocapitalizeEnum) *FooterElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *FooterElement) Autocorrect(a FooterAutocorrectAttrEnum) *FooterElement {
+func (e *FooterElement) Autocorrect(a FooterAutocorrectEnum) *FooterElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *FooterElement) Autofocus(b bool) *FooterElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *FooterElement) Class(s ...string) *FooterElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *FooterElement) Contenteditable(a FooterContenteditableAttrEnum) *FooterElement {
+func (e *FooterElement) Contenteditable(a FooterContenteditableEnum) *FooterElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *FooterElement) Dir(a FooterDirEnum) *FooterElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *FooterElement) Draggable(a FooterDraggableEnum) *FooterElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *FooterElement) Enterkeyhint(a FooterEnterkeyhintEnum) *FooterElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *FooterElement) Hidden(a FooterHiddenEnum) *FooterElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *FooterElement) Id(s string) *FooterElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *FooterElement) Slot(s string) *FooterElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

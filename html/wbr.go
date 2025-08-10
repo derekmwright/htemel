@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type WbrElement struct {
 	attributes wbrAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type WbrElement struct {
 // Spec Description: The wbr element represents a line break opportunity.
 func Wbr(children ...htemel.Node) *WbrElement {
 	node := &WbrElement{
-		children:   children,
+		children: children,
 		attributes: make(wbrAttrs),
 	}
 
@@ -39,73 +38,131 @@ func WbrIf(condition bool, children ...htemel.Node) *WbrElement {
 	}
 }
 
-type WbrAutocapitalizeAttrEnum string
+type WbrAutocapitalizeEnum string
 
 const (
-	WbrAutocapitalizeAttrEnumOff        WbrAutocapitalizeAttrEnum = "off"
-	WbrAutocapitalizeAttrEnumOn         WbrAutocapitalizeAttrEnum = "on"
-	WbrAutocapitalizeAttrEnumSentences  WbrAutocapitalizeAttrEnum = "sentences"
-	WbrAutocapitalizeAttrEnumWords      WbrAutocapitalizeAttrEnum = "words"
-	WbrAutocapitalizeAttrEnumCharacters WbrAutocapitalizeAttrEnum = "characters"
-	WbrAutocapitalizeAttrEnumNone       WbrAutocapitalizeAttrEnum = "none"
+	WbrAutocapitalizeEnumCharacters WbrAutocapitalizeEnum = "characters"
+	WbrAutocapitalizeEnumNone WbrAutocapitalizeEnum = "none"
+	WbrAutocapitalizeEnumOff WbrAutocapitalizeEnum = "off"
+	WbrAutocapitalizeEnumOn WbrAutocapitalizeEnum = "on"
+	WbrAutocapitalizeEnumSentences WbrAutocapitalizeEnum = "sentences"
+	WbrAutocapitalizeEnumWords WbrAutocapitalizeEnum = "words"
 )
 
-type WbrAutocorrectAttrEnum string
+type WbrAutocorrectEnum string
 
 const (
-	WbrAutocorrectAttrEnumOff WbrAutocorrectAttrEnum = "off"
-	WbrAutocorrectAttrEnumOn  WbrAutocorrectAttrEnum = "on"
+	WbrAutocorrectEnumOff WbrAutocorrectEnum = "off"
+	WbrAutocorrectEnumOn WbrAutocorrectEnum = "on"
 )
 
-type WbrContenteditableAttrEnum string
+type WbrContenteditableEnum string
 
 const (
-	WbrContenteditableAttrEnumFalse         WbrContenteditableAttrEnum = "false"
-	WbrContenteditableAttrEnumPlaintextOnly WbrContenteditableAttrEnum = "plaintext-only"
-	WbrContenteditableAttrEnumTrue          WbrContenteditableAttrEnum = "true"
+	WbrContenteditableEnumFalse WbrContenteditableEnum = "false"
+	WbrContenteditableEnumPlaintextOnly WbrContenteditableEnum = "plaintext-only"
+	WbrContenteditableEnumTrue WbrContenteditableEnum = "true"
+)
+
+type WbrDirEnum string
+
+const (
+	WbrDirEnumAuto WbrDirEnum = "auto"
+	WbrDirEnumLtr WbrDirEnum = "ltr"
+	WbrDirEnumRtl WbrDirEnum = "rtl"
+)
+
+type WbrDraggableEnum string
+
+const (
+	WbrDraggableEnumFalse WbrDraggableEnum = "false"
+	WbrDraggableEnumTrue WbrDraggableEnum = "true"
+)
+
+type WbrEnterkeyhintEnum string
+
+const (
+	WbrEnterkeyhintEnumEnter WbrEnterkeyhintEnum = "enter"
+	WbrEnterkeyhintEnumGo WbrEnterkeyhintEnum = "go"
+	WbrEnterkeyhintEnumNext WbrEnterkeyhintEnum = "next"
+	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
+	WbrEnterkeyhintEnumSearch WbrEnterkeyhintEnum = "search"
+	WbrEnterkeyhintEnumSend WbrEnterkeyhintEnum = "send"
+	WbrEnterkeyhintEnumDone WbrEnterkeyhintEnum = "done"
+)
+
+type WbrHiddenEnum string
+
+const (
+	WbrHiddenEnumHidden WbrHiddenEnum = "hidden"
+	WbrHiddenEnumUntilFound WbrHiddenEnum = "until-found"
 )
 
 type wbrAttrs map[string]any
 
-func (e *WbrElement) Autocapitalize(a WbrAutocapitalizeAttrEnum) *WbrElement {
+func (e *WbrElement) Autocapitalize(a WbrAutocapitalizeEnum) *WbrElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *WbrElement) Autocorrect(a WbrAutocorrectAttrEnum) *WbrElement {
+func (e *WbrElement) Autocorrect(a WbrAutocorrectEnum) *WbrElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *WbrElement) Autofocus(b bool) *WbrElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *WbrElement) Class(s ...string) *WbrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *WbrElement) Contenteditable(a WbrContenteditableAttrEnum) *WbrElement {
+func (e *WbrElement) Contenteditable(a WbrContenteditableEnum) *WbrElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *WbrElement) Dir(a WbrDirEnum) *WbrElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *WbrElement) Draggable(a WbrDraggableEnum) *WbrElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *WbrElement) Enterkeyhint(a WbrEnterkeyhintEnum) *WbrElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *WbrElement) Hidden(a WbrHiddenEnum) *WbrElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *WbrElement) Id(s string) *WbrElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *WbrElement) Slot(s string) *WbrElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

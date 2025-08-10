@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type FigureElement struct {
 	attributes figureAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type FigureElement struct {
 // Spec Description: The figure element represents some flow content, optionally with a caption, that is self-contained (like a complete sentence) and is typically referenced as a single unit from the main flow of the document.
 func Figure(children ...htemel.Node) *FigureElement {
 	node := &FigureElement{
-		children:   children,
+		children: children,
 		attributes: make(figureAttrs),
 	}
 
@@ -39,73 +38,131 @@ func FigureIf(condition bool, children ...htemel.Node) *FigureElement {
 	}
 }
 
-type FigureAutocapitalizeAttrEnum string
+type FigureAutocapitalizeEnum string
 
 const (
-	FigureAutocapitalizeAttrEnumCharacters FigureAutocapitalizeAttrEnum = "characters"
-	FigureAutocapitalizeAttrEnumNone       FigureAutocapitalizeAttrEnum = "none"
-	FigureAutocapitalizeAttrEnumOff        FigureAutocapitalizeAttrEnum = "off"
-	FigureAutocapitalizeAttrEnumOn         FigureAutocapitalizeAttrEnum = "on"
-	FigureAutocapitalizeAttrEnumSentences  FigureAutocapitalizeAttrEnum = "sentences"
-	FigureAutocapitalizeAttrEnumWords      FigureAutocapitalizeAttrEnum = "words"
+	FigureAutocapitalizeEnumSentences FigureAutocapitalizeEnum = "sentences"
+	FigureAutocapitalizeEnumWords FigureAutocapitalizeEnum = "words"
+	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
+	FigureAutocapitalizeEnumNone FigureAutocapitalizeEnum = "none"
+	FigureAutocapitalizeEnumOff FigureAutocapitalizeEnum = "off"
+	FigureAutocapitalizeEnumOn FigureAutocapitalizeEnum = "on"
 )
 
-type FigureAutocorrectAttrEnum string
+type FigureAutocorrectEnum string
 
 const (
-	FigureAutocorrectAttrEnumOff FigureAutocorrectAttrEnum = "off"
-	FigureAutocorrectAttrEnumOn  FigureAutocorrectAttrEnum = "on"
+	FigureAutocorrectEnumOff FigureAutocorrectEnum = "off"
+	FigureAutocorrectEnumOn FigureAutocorrectEnum = "on"
 )
 
-type FigureContenteditableAttrEnum string
+type FigureContenteditableEnum string
 
 const (
-	FigureContenteditableAttrEnumFalse         FigureContenteditableAttrEnum = "false"
-	FigureContenteditableAttrEnumPlaintextOnly FigureContenteditableAttrEnum = "plaintext-only"
-	FigureContenteditableAttrEnumTrue          FigureContenteditableAttrEnum = "true"
+	FigureContenteditableEnumFalse FigureContenteditableEnum = "false"
+	FigureContenteditableEnumPlaintextOnly FigureContenteditableEnum = "plaintext-only"
+	FigureContenteditableEnumTrue FigureContenteditableEnum = "true"
+)
+
+type FigureDirEnum string
+
+const (
+	FigureDirEnumAuto FigureDirEnum = "auto"
+	FigureDirEnumLtr FigureDirEnum = "ltr"
+	FigureDirEnumRtl FigureDirEnum = "rtl"
+)
+
+type FigureDraggableEnum string
+
+const (
+	FigureDraggableEnumFalse FigureDraggableEnum = "false"
+	FigureDraggableEnumTrue FigureDraggableEnum = "true"
+)
+
+type FigureEnterkeyhintEnum string
+
+const (
+	FigureEnterkeyhintEnumEnter FigureEnterkeyhintEnum = "enter"
+	FigureEnterkeyhintEnumGo FigureEnterkeyhintEnum = "go"
+	FigureEnterkeyhintEnumNext FigureEnterkeyhintEnum = "next"
+	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
+	FigureEnterkeyhintEnumSearch FigureEnterkeyhintEnum = "search"
+	FigureEnterkeyhintEnumSend FigureEnterkeyhintEnum = "send"
+	FigureEnterkeyhintEnumDone FigureEnterkeyhintEnum = "done"
+)
+
+type FigureHiddenEnum string
+
+const (
+	FigureHiddenEnumHidden FigureHiddenEnum = "hidden"
+	FigureHiddenEnumUntilFound FigureHiddenEnum = "until-found"
 )
 
 type figureAttrs map[string]any
 
-func (e *FigureElement) Autocapitalize(a FigureAutocapitalizeAttrEnum) *FigureElement {
+func (e *FigureElement) Autocapitalize(a FigureAutocapitalizeEnum) *FigureElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *FigureElement) Autocorrect(a FigureAutocorrectAttrEnum) *FigureElement {
+func (e *FigureElement) Autocorrect(a FigureAutocorrectEnum) *FigureElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *FigureElement) Autofocus(b bool) *FigureElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *FigureElement) Class(s ...string) *FigureElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *FigureElement) Contenteditable(a FigureContenteditableAttrEnum) *FigureElement {
+func (e *FigureElement) Contenteditable(a FigureContenteditableEnum) *FigureElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *FigureElement) Dir(a FigureDirEnum) *FigureElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *FigureElement) Draggable(a FigureDraggableEnum) *FigureElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *FigureElement) Enterkeyhint(a FigureEnterkeyhintEnum) *FigureElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *FigureElement) Hidden(a FigureHiddenEnum) *FigureElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *FigureElement) Id(s string) *FigureElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *FigureElement) Slot(s string) *FigureElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

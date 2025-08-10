@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type TrElement struct {
 	attributes trAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type TrElement struct {
 // Spec Description: The tr element represents a row of cells in a table.
 func Tr(children ...htemel.Node) *TrElement {
 	node := &TrElement{
-		children:   children,
+		children: children,
 		attributes: make(trAttrs),
 	}
 
@@ -39,73 +38,131 @@ func TrIf(condition bool, children ...htemel.Node) *TrElement {
 	}
 }
 
-type TrAutocapitalizeAttrEnum string
+type TrAutocapitalizeEnum string
 
 const (
-	TrAutocapitalizeAttrEnumWords      TrAutocapitalizeAttrEnum = "words"
-	TrAutocapitalizeAttrEnumCharacters TrAutocapitalizeAttrEnum = "characters"
-	TrAutocapitalizeAttrEnumNone       TrAutocapitalizeAttrEnum = "none"
-	TrAutocapitalizeAttrEnumOff        TrAutocapitalizeAttrEnum = "off"
-	TrAutocapitalizeAttrEnumOn         TrAutocapitalizeAttrEnum = "on"
-	TrAutocapitalizeAttrEnumSentences  TrAutocapitalizeAttrEnum = "sentences"
+	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
+	TrAutocapitalizeEnumNone TrAutocapitalizeEnum = "none"
+	TrAutocapitalizeEnumOff TrAutocapitalizeEnum = "off"
+	TrAutocapitalizeEnumOn TrAutocapitalizeEnum = "on"
+	TrAutocapitalizeEnumSentences TrAutocapitalizeEnum = "sentences"
+	TrAutocapitalizeEnumWords TrAutocapitalizeEnum = "words"
 )
 
-type TrAutocorrectAttrEnum string
+type TrAutocorrectEnum string
 
 const (
-	TrAutocorrectAttrEnumOff TrAutocorrectAttrEnum = "off"
-	TrAutocorrectAttrEnumOn  TrAutocorrectAttrEnum = "on"
+	TrAutocorrectEnumOff TrAutocorrectEnum = "off"
+	TrAutocorrectEnumOn TrAutocorrectEnum = "on"
 )
 
-type TrContenteditableAttrEnum string
+type TrContenteditableEnum string
 
 const (
-	TrContenteditableAttrEnumPlaintextOnly TrContenteditableAttrEnum = "plaintext-only"
-	TrContenteditableAttrEnumTrue          TrContenteditableAttrEnum = "true"
-	TrContenteditableAttrEnumFalse         TrContenteditableAttrEnum = "false"
+	TrContenteditableEnumPlaintextOnly TrContenteditableEnum = "plaintext-only"
+	TrContenteditableEnumTrue TrContenteditableEnum = "true"
+	TrContenteditableEnumFalse TrContenteditableEnum = "false"
+)
+
+type TrDirEnum string
+
+const (
+	TrDirEnumAuto TrDirEnum = "auto"
+	TrDirEnumLtr TrDirEnum = "ltr"
+	TrDirEnumRtl TrDirEnum = "rtl"
+)
+
+type TrDraggableEnum string
+
+const (
+	TrDraggableEnumFalse TrDraggableEnum = "false"
+	TrDraggableEnumTrue TrDraggableEnum = "true"
+)
+
+type TrEnterkeyhintEnum string
+
+const (
+	TrEnterkeyhintEnumEnter TrEnterkeyhintEnum = "enter"
+	TrEnterkeyhintEnumGo TrEnterkeyhintEnum = "go"
+	TrEnterkeyhintEnumNext TrEnterkeyhintEnum = "next"
+	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
+	TrEnterkeyhintEnumSearch TrEnterkeyhintEnum = "search"
+	TrEnterkeyhintEnumSend TrEnterkeyhintEnum = "send"
+	TrEnterkeyhintEnumDone TrEnterkeyhintEnum = "done"
+)
+
+type TrHiddenEnum string
+
+const (
+	TrHiddenEnumUntilFound TrHiddenEnum = "until-found"
+	TrHiddenEnumHidden TrHiddenEnum = "hidden"
 )
 
 type trAttrs map[string]any
 
-func (e *TrElement) Autocapitalize(a TrAutocapitalizeAttrEnum) *TrElement {
+func (e *TrElement) Autocapitalize(a TrAutocapitalizeEnum) *TrElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *TrElement) Autocorrect(a TrAutocorrectAttrEnum) *TrElement {
+func (e *TrElement) Autocorrect(a TrAutocorrectEnum) *TrElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *TrElement) Autofocus(b bool) *TrElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *TrElement) Class(s ...string) *TrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *TrElement) Contenteditable(a TrContenteditableAttrEnum) *TrElement {
+func (e *TrElement) Contenteditable(a TrContenteditableEnum) *TrElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *TrElement) Dir(a TrDirEnum) *TrElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *TrElement) Draggable(a TrDraggableEnum) *TrElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *TrElement) Enterkeyhint(a TrEnterkeyhintEnum) *TrElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *TrElement) Hidden(a TrHiddenEnum) *TrElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *TrElement) Id(s string) *TrElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *TrElement) Slot(s string) *TrElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

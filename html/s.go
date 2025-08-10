@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type SElement struct {
 	attributes sAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type SElement struct {
 // Spec Description: The s element represents contents that are no longer accurate or no longer relevant.
 func S(children ...htemel.Node) *SElement {
 	node := &SElement{
-		children:   children,
+		children: children,
 		attributes: make(sAttrs),
 	}
 
@@ -39,73 +38,131 @@ func SIf(condition bool, children ...htemel.Node) *SElement {
 	}
 }
 
-type SAutocapitalizeAttrEnum string
+type SAutocapitalizeEnum string
 
 const (
-	SAutocapitalizeAttrEnumOn         SAutocapitalizeAttrEnum = "on"
-	SAutocapitalizeAttrEnumSentences  SAutocapitalizeAttrEnum = "sentences"
-	SAutocapitalizeAttrEnumWords      SAutocapitalizeAttrEnum = "words"
-	SAutocapitalizeAttrEnumCharacters SAutocapitalizeAttrEnum = "characters"
-	SAutocapitalizeAttrEnumNone       SAutocapitalizeAttrEnum = "none"
-	SAutocapitalizeAttrEnumOff        SAutocapitalizeAttrEnum = "off"
+	SAutocapitalizeEnumNone SAutocapitalizeEnum = "none"
+	SAutocapitalizeEnumOff SAutocapitalizeEnum = "off"
+	SAutocapitalizeEnumOn SAutocapitalizeEnum = "on"
+	SAutocapitalizeEnumSentences SAutocapitalizeEnum = "sentences"
+	SAutocapitalizeEnumWords SAutocapitalizeEnum = "words"
+	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
 )
 
-type SAutocorrectAttrEnum string
+type SAutocorrectEnum string
 
 const (
-	SAutocorrectAttrEnumOff SAutocorrectAttrEnum = "off"
-	SAutocorrectAttrEnumOn  SAutocorrectAttrEnum = "on"
+	SAutocorrectEnumOff SAutocorrectEnum = "off"
+	SAutocorrectEnumOn SAutocorrectEnum = "on"
 )
 
-type SContenteditableAttrEnum string
+type SContenteditableEnum string
 
 const (
-	SContenteditableAttrEnumFalse         SContenteditableAttrEnum = "false"
-	SContenteditableAttrEnumPlaintextOnly SContenteditableAttrEnum = "plaintext-only"
-	SContenteditableAttrEnumTrue          SContenteditableAttrEnum = "true"
+	SContenteditableEnumFalse SContenteditableEnum = "false"
+	SContenteditableEnumPlaintextOnly SContenteditableEnum = "plaintext-only"
+	SContenteditableEnumTrue SContenteditableEnum = "true"
+)
+
+type SDirEnum string
+
+const (
+	SDirEnumLtr SDirEnum = "ltr"
+	SDirEnumRtl SDirEnum = "rtl"
+	SDirEnumAuto SDirEnum = "auto"
+)
+
+type SDraggableEnum string
+
+const (
+	SDraggableEnumFalse SDraggableEnum = "false"
+	SDraggableEnumTrue SDraggableEnum = "true"
+)
+
+type SEnterkeyhintEnum string
+
+const (
+	SEnterkeyhintEnumPrevious SEnterkeyhintEnum = "previous"
+	SEnterkeyhintEnumSearch SEnterkeyhintEnum = "search"
+	SEnterkeyhintEnumSend SEnterkeyhintEnum = "send"
+	SEnterkeyhintEnumDone SEnterkeyhintEnum = "done"
+	SEnterkeyhintEnumEnter SEnterkeyhintEnum = "enter"
+	SEnterkeyhintEnumGo SEnterkeyhintEnum = "go"
+	SEnterkeyhintEnumNext SEnterkeyhintEnum = "next"
+)
+
+type SHiddenEnum string
+
+const (
+	SHiddenEnumHidden SHiddenEnum = "hidden"
+	SHiddenEnumUntilFound SHiddenEnum = "until-found"
 )
 
 type sAttrs map[string]any
 
-func (e *SElement) Autocapitalize(a SAutocapitalizeAttrEnum) *SElement {
+func (e *SElement) Autocapitalize(a SAutocapitalizeEnum) *SElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *SElement) Autocorrect(a SAutocorrectAttrEnum) *SElement {
+func (e *SElement) Autocorrect(a SAutocorrectEnum) *SElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *SElement) Autofocus(b bool) *SElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *SElement) Class(s ...string) *SElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *SElement) Contenteditable(a SContenteditableAttrEnum) *SElement {
+func (e *SElement) Contenteditable(a SContenteditableEnum) *SElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *SElement) Dir(a SDirEnum) *SElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *SElement) Draggable(a SDraggableEnum) *SElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *SElement) Enterkeyhint(a SEnterkeyhintEnum) *SElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *SElement) Hidden(a SHiddenEnum) *SElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *SElement) Id(s string) *SElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *SElement) Slot(s string) *SElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

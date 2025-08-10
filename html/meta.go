@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type MetaElement struct {
 	attributes metaAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type MetaElement struct {
 // Spec Description: The meta element represents various kinds of metadata that cannot be expressed using the title, base, link, style, and script elements.
 func Meta(children ...htemel.Node) *MetaElement {
 	node := &MetaElement{
-		children:   children,
+		children: children,
 		attributes: make(metaAttrs),
 	}
 
@@ -39,73 +38,131 @@ func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 	}
 }
 
-type MetaAutocapitalizeAttrEnum string
+type MetaAutocapitalizeEnum string
 
 const (
-	MetaAutocapitalizeAttrEnumNone       MetaAutocapitalizeAttrEnum = "none"
-	MetaAutocapitalizeAttrEnumOff        MetaAutocapitalizeAttrEnum = "off"
-	MetaAutocapitalizeAttrEnumOn         MetaAutocapitalizeAttrEnum = "on"
-	MetaAutocapitalizeAttrEnumSentences  MetaAutocapitalizeAttrEnum = "sentences"
-	MetaAutocapitalizeAttrEnumWords      MetaAutocapitalizeAttrEnum = "words"
-	MetaAutocapitalizeAttrEnumCharacters MetaAutocapitalizeAttrEnum = "characters"
+	MetaAutocapitalizeEnumOn MetaAutocapitalizeEnum = "on"
+	MetaAutocapitalizeEnumSentences MetaAutocapitalizeEnum = "sentences"
+	MetaAutocapitalizeEnumWords MetaAutocapitalizeEnum = "words"
+	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
+	MetaAutocapitalizeEnumNone MetaAutocapitalizeEnum = "none"
+	MetaAutocapitalizeEnumOff MetaAutocapitalizeEnum = "off"
 )
 
-type MetaAutocorrectAttrEnum string
+type MetaAutocorrectEnum string
 
 const (
-	MetaAutocorrectAttrEnumOff MetaAutocorrectAttrEnum = "off"
-	MetaAutocorrectAttrEnumOn  MetaAutocorrectAttrEnum = "on"
+	MetaAutocorrectEnumOff MetaAutocorrectEnum = "off"
+	MetaAutocorrectEnumOn MetaAutocorrectEnum = "on"
 )
 
-type MetaContenteditableAttrEnum string
+type MetaContenteditableEnum string
 
 const (
-	MetaContenteditableAttrEnumFalse         MetaContenteditableAttrEnum = "false"
-	MetaContenteditableAttrEnumPlaintextOnly MetaContenteditableAttrEnum = "plaintext-only"
-	MetaContenteditableAttrEnumTrue          MetaContenteditableAttrEnum = "true"
+	MetaContenteditableEnumFalse MetaContenteditableEnum = "false"
+	MetaContenteditableEnumPlaintextOnly MetaContenteditableEnum = "plaintext-only"
+	MetaContenteditableEnumTrue MetaContenteditableEnum = "true"
+)
+
+type MetaDirEnum string
+
+const (
+	MetaDirEnumAuto MetaDirEnum = "auto"
+	MetaDirEnumLtr MetaDirEnum = "ltr"
+	MetaDirEnumRtl MetaDirEnum = "rtl"
+)
+
+type MetaDraggableEnum string
+
+const (
+	MetaDraggableEnumFalse MetaDraggableEnum = "false"
+	MetaDraggableEnumTrue MetaDraggableEnum = "true"
+)
+
+type MetaEnterkeyhintEnum string
+
+const (
+	MetaEnterkeyhintEnumEnter MetaEnterkeyhintEnum = "enter"
+	MetaEnterkeyhintEnumGo MetaEnterkeyhintEnum = "go"
+	MetaEnterkeyhintEnumNext MetaEnterkeyhintEnum = "next"
+	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
+	MetaEnterkeyhintEnumSearch MetaEnterkeyhintEnum = "search"
+	MetaEnterkeyhintEnumSend MetaEnterkeyhintEnum = "send"
+	MetaEnterkeyhintEnumDone MetaEnterkeyhintEnum = "done"
+)
+
+type MetaHiddenEnum string
+
+const (
+	MetaHiddenEnumHidden MetaHiddenEnum = "hidden"
+	MetaHiddenEnumUntilFound MetaHiddenEnum = "until-found"
 )
 
 type metaAttrs map[string]any
 
-func (e *MetaElement) Autocapitalize(a MetaAutocapitalizeAttrEnum) *MetaElement {
+func (e *MetaElement) Autocapitalize(a MetaAutocapitalizeEnum) *MetaElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *MetaElement) Autocorrect(a MetaAutocorrectAttrEnum) *MetaElement {
+func (e *MetaElement) Autocorrect(a MetaAutocorrectEnum) *MetaElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *MetaElement) Autofocus(b bool) *MetaElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *MetaElement) Class(s ...string) *MetaElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *MetaElement) Contenteditable(a MetaContenteditableAttrEnum) *MetaElement {
+func (e *MetaElement) Contenteditable(a MetaContenteditableEnum) *MetaElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *MetaElement) Dir(a MetaDirEnum) *MetaElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *MetaElement) Draggable(a MetaDraggableEnum) *MetaElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *MetaElement) Enterkeyhint(a MetaEnterkeyhintEnum) *MetaElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *MetaElement) Hidden(a MetaHiddenEnum) *MetaElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *MetaElement) Id(s string) *MetaElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *MetaElement) Slot(s string) *MetaElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

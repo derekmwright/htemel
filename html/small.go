@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type SmallElement struct {
 	attributes smallAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type SmallElement struct {
 // Spec Description: The small element represents side comments such as small print.
 func Small(children ...htemel.Node) *SmallElement {
 	node := &SmallElement{
-		children:   children,
+		children: children,
 		attributes: make(smallAttrs),
 	}
 
@@ -39,73 +38,131 @@ func SmallIf(condition bool, children ...htemel.Node) *SmallElement {
 	}
 }
 
-type SmallAutocapitalizeAttrEnum string
+type SmallAutocapitalizeEnum string
 
 const (
-	SmallAutocapitalizeAttrEnumCharacters SmallAutocapitalizeAttrEnum = "characters"
-	SmallAutocapitalizeAttrEnumNone       SmallAutocapitalizeAttrEnum = "none"
-	SmallAutocapitalizeAttrEnumOff        SmallAutocapitalizeAttrEnum = "off"
-	SmallAutocapitalizeAttrEnumOn         SmallAutocapitalizeAttrEnum = "on"
-	SmallAutocapitalizeAttrEnumSentences  SmallAutocapitalizeAttrEnum = "sentences"
-	SmallAutocapitalizeAttrEnumWords      SmallAutocapitalizeAttrEnum = "words"
+	SmallAutocapitalizeEnumWords SmallAutocapitalizeEnum = "words"
+	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
+	SmallAutocapitalizeEnumNone SmallAutocapitalizeEnum = "none"
+	SmallAutocapitalizeEnumOff SmallAutocapitalizeEnum = "off"
+	SmallAutocapitalizeEnumOn SmallAutocapitalizeEnum = "on"
+	SmallAutocapitalizeEnumSentences SmallAutocapitalizeEnum = "sentences"
 )
 
-type SmallAutocorrectAttrEnum string
+type SmallAutocorrectEnum string
 
 const (
-	SmallAutocorrectAttrEnumOff SmallAutocorrectAttrEnum = "off"
-	SmallAutocorrectAttrEnumOn  SmallAutocorrectAttrEnum = "on"
+	SmallAutocorrectEnumOn SmallAutocorrectEnum = "on"
+	SmallAutocorrectEnumOff SmallAutocorrectEnum = "off"
 )
 
-type SmallContenteditableAttrEnum string
+type SmallContenteditableEnum string
 
 const (
-	SmallContenteditableAttrEnumTrue          SmallContenteditableAttrEnum = "true"
-	SmallContenteditableAttrEnumFalse         SmallContenteditableAttrEnum = "false"
-	SmallContenteditableAttrEnumPlaintextOnly SmallContenteditableAttrEnum = "plaintext-only"
+	SmallContenteditableEnumFalse SmallContenteditableEnum = "false"
+	SmallContenteditableEnumPlaintextOnly SmallContenteditableEnum = "plaintext-only"
+	SmallContenteditableEnumTrue SmallContenteditableEnum = "true"
+)
+
+type SmallDirEnum string
+
+const (
+	SmallDirEnumRtl SmallDirEnum = "rtl"
+	SmallDirEnumAuto SmallDirEnum = "auto"
+	SmallDirEnumLtr SmallDirEnum = "ltr"
+)
+
+type SmallDraggableEnum string
+
+const (
+	SmallDraggableEnumFalse SmallDraggableEnum = "false"
+	SmallDraggableEnumTrue SmallDraggableEnum = "true"
+)
+
+type SmallEnterkeyhintEnum string
+
+const (
+	SmallEnterkeyhintEnumDone SmallEnterkeyhintEnum = "done"
+	SmallEnterkeyhintEnumEnter SmallEnterkeyhintEnum = "enter"
+	SmallEnterkeyhintEnumGo SmallEnterkeyhintEnum = "go"
+	SmallEnterkeyhintEnumNext SmallEnterkeyhintEnum = "next"
+	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
+	SmallEnterkeyhintEnumSearch SmallEnterkeyhintEnum = "search"
+	SmallEnterkeyhintEnumSend SmallEnterkeyhintEnum = "send"
+)
+
+type SmallHiddenEnum string
+
+const (
+	SmallHiddenEnumHidden SmallHiddenEnum = "hidden"
+	SmallHiddenEnumUntilFound SmallHiddenEnum = "until-found"
 )
 
 type smallAttrs map[string]any
 
-func (e *SmallElement) Autocapitalize(a SmallAutocapitalizeAttrEnum) *SmallElement {
+func (e *SmallElement) Autocapitalize(a SmallAutocapitalizeEnum) *SmallElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *SmallElement) Autocorrect(a SmallAutocorrectAttrEnum) *SmallElement {
+func (e *SmallElement) Autocorrect(a SmallAutocorrectEnum) *SmallElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *SmallElement) Autofocus(b bool) *SmallElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *SmallElement) Class(s ...string) *SmallElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *SmallElement) Contenteditable(a SmallContenteditableAttrEnum) *SmallElement {
+func (e *SmallElement) Contenteditable(a SmallContenteditableEnum) *SmallElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *SmallElement) Dir(a SmallDirEnum) *SmallElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *SmallElement) Draggable(a SmallDraggableEnum) *SmallElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *SmallElement) Enterkeyhint(a SmallEnterkeyhintEnum) *SmallElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *SmallElement) Hidden(a SmallHiddenEnum) *SmallElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *SmallElement) Id(s string) *SmallElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *SmallElement) Slot(s string) *SmallElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

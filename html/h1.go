@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type H1Element struct {
 	attributes h1Attrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type H1Element struct {
 // Spec Description: These elements represent headings for their sections.
 func H1(children ...htemel.Node) *H1Element {
 	node := &H1Element{
-		children:   children,
+		children: children,
 		attributes: make(h1Attrs),
 	}
 
@@ -39,73 +38,131 @@ func H1If(condition bool, children ...htemel.Node) *H1Element {
 	}
 }
 
-type H1AutocapitalizeAttrEnum string
+type H1AutocapitalizeEnum string
 
 const (
-	H1AutocapitalizeAttrEnumSentences  H1AutocapitalizeAttrEnum = "sentences"
-	H1AutocapitalizeAttrEnumWords      H1AutocapitalizeAttrEnum = "words"
-	H1AutocapitalizeAttrEnumCharacters H1AutocapitalizeAttrEnum = "characters"
-	H1AutocapitalizeAttrEnumNone       H1AutocapitalizeAttrEnum = "none"
-	H1AutocapitalizeAttrEnumOff        H1AutocapitalizeAttrEnum = "off"
-	H1AutocapitalizeAttrEnumOn         H1AutocapitalizeAttrEnum = "on"
+	H1AutocapitalizeEnumOn H1AutocapitalizeEnum = "on"
+	H1AutocapitalizeEnumSentences H1AutocapitalizeEnum = "sentences"
+	H1AutocapitalizeEnumWords H1AutocapitalizeEnum = "words"
+	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
+	H1AutocapitalizeEnumNone H1AutocapitalizeEnum = "none"
+	H1AutocapitalizeEnumOff H1AutocapitalizeEnum = "off"
 )
 
-type H1AutocorrectAttrEnum string
+type H1AutocorrectEnum string
 
 const (
-	H1AutocorrectAttrEnumOff H1AutocorrectAttrEnum = "off"
-	H1AutocorrectAttrEnumOn  H1AutocorrectAttrEnum = "on"
+	H1AutocorrectEnumOff H1AutocorrectEnum = "off"
+	H1AutocorrectEnumOn H1AutocorrectEnum = "on"
 )
 
-type H1ContenteditableAttrEnum string
+type H1ContenteditableEnum string
 
 const (
-	H1ContenteditableAttrEnumFalse         H1ContenteditableAttrEnum = "false"
-	H1ContenteditableAttrEnumPlaintextOnly H1ContenteditableAttrEnum = "plaintext-only"
-	H1ContenteditableAttrEnumTrue          H1ContenteditableAttrEnum = "true"
+	H1ContenteditableEnumFalse H1ContenteditableEnum = "false"
+	H1ContenteditableEnumPlaintextOnly H1ContenteditableEnum = "plaintext-only"
+	H1ContenteditableEnumTrue H1ContenteditableEnum = "true"
+)
+
+type H1DirEnum string
+
+const (
+	H1DirEnumAuto H1DirEnum = "auto"
+	H1DirEnumLtr H1DirEnum = "ltr"
+	H1DirEnumRtl H1DirEnum = "rtl"
+)
+
+type H1DraggableEnum string
+
+const (
+	H1DraggableEnumTrue H1DraggableEnum = "true"
+	H1DraggableEnumFalse H1DraggableEnum = "false"
+)
+
+type H1EnterkeyhintEnum string
+
+const (
+	H1EnterkeyhintEnumDone H1EnterkeyhintEnum = "done"
+	H1EnterkeyhintEnumEnter H1EnterkeyhintEnum = "enter"
+	H1EnterkeyhintEnumGo H1EnterkeyhintEnum = "go"
+	H1EnterkeyhintEnumNext H1EnterkeyhintEnum = "next"
+	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
+	H1EnterkeyhintEnumSearch H1EnterkeyhintEnum = "search"
+	H1EnterkeyhintEnumSend H1EnterkeyhintEnum = "send"
+)
+
+type H1HiddenEnum string
+
+const (
+	H1HiddenEnumUntilFound H1HiddenEnum = "until-found"
+	H1HiddenEnumHidden H1HiddenEnum = "hidden"
 )
 
 type h1Attrs map[string]any
 
-func (e *H1Element) Autocapitalize(a H1AutocapitalizeAttrEnum) *H1Element {
+func (e *H1Element) Autocapitalize(a H1AutocapitalizeEnum) *H1Element {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *H1Element) Autocorrect(a H1AutocorrectAttrEnum) *H1Element {
+func (e *H1Element) Autocorrect(a H1AutocorrectEnum) *H1Element {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *H1Element) Autofocus(b bool) *H1Element {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *H1Element) Class(s ...string) *H1Element {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *H1Element) Contenteditable(a H1ContenteditableAttrEnum) *H1Element {
+func (e *H1Element) Contenteditable(a H1ContenteditableEnum) *H1Element {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *H1Element) Dir(a H1DirEnum) *H1Element {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *H1Element) Draggable(a H1DraggableEnum) *H1Element {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *H1Element) Enterkeyhint(a H1EnterkeyhintEnum) *H1Element {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *H1Element) Hidden(a H1HiddenEnum) *H1Element {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *H1Element) Id(s string) *H1Element {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *H1Element) Slot(s string) *H1Element {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

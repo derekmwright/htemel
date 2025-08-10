@@ -52,6 +52,44 @@ func GlobalAttributes() []Attribute {
 				"plaintext-only": {},
 			},
 		},
+		&AttributeTypeEnum{
+			Name:        "dir",
+			Description: "",
+			Allowed: map[string]struct{}{
+				"ltr":  {},
+				"rtl":  {},
+				"auto": {},
+			},
+		},
+		&AttributeTypeEnum{
+			Name:        "draggable",
+			Description: "All HTML elements may have the draggable content attribute set.",
+			Allowed: map[string]struct{}{
+				"true":  {},
+				"false": {},
+			},
+		},
+		&AttributeTypeEnum{
+			Name:        "enterkeyhint",
+			Description: "The enterkeyhint content attribute is an enumerated attribute that specifies what action label (or icon) to present for the enter key on virtual keyboards. This allows authors to customize the presentation of the enter key in order to make it more helpful for users.",
+			Allowed: map[string]struct{}{
+				"enter":    {},
+				"done":     {},
+				"go":       {},
+				"next":     {},
+				"previous": {},
+				"search":   {},
+				"send":     {},
+			},
+		},
+		&AttributeTypeEnum{
+			Name:        "hidden",
+			Description: "All HTML elements may have the hidden content attribute set.",
+			Allowed: map[string]struct{}{
+				"hidden":      {},
+				"until-found": {},
+			},
+		},
 		&AttributeTypeString{
 			Name:        "id",
 			Description: "The id attribute specifies its element's unique identifier (ID).",

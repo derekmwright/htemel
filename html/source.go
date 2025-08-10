@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type SourceElement struct {
 	attributes sourceAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type SourceElement struct {
 // Spec Description: The source element allows authors to specify multiple alternative source sets for img elements or multiple alternative media resources for media elements. It does not represent anything on its own.
 func Source(children ...htemel.Node) *SourceElement {
 	node := &SourceElement{
-		children:   children,
+		children: children,
 		attributes: make(sourceAttrs),
 	}
 
@@ -39,73 +38,131 @@ func SourceIf(condition bool, children ...htemel.Node) *SourceElement {
 	}
 }
 
-type SourceAutocapitalizeAttrEnum string
+type SourceAutocapitalizeEnum string
 
 const (
-	SourceAutocapitalizeAttrEnumSentences  SourceAutocapitalizeAttrEnum = "sentences"
-	SourceAutocapitalizeAttrEnumWords      SourceAutocapitalizeAttrEnum = "words"
-	SourceAutocapitalizeAttrEnumCharacters SourceAutocapitalizeAttrEnum = "characters"
-	SourceAutocapitalizeAttrEnumNone       SourceAutocapitalizeAttrEnum = "none"
-	SourceAutocapitalizeAttrEnumOff        SourceAutocapitalizeAttrEnum = "off"
-	SourceAutocapitalizeAttrEnumOn         SourceAutocapitalizeAttrEnum = "on"
+	SourceAutocapitalizeEnumNone SourceAutocapitalizeEnum = "none"
+	SourceAutocapitalizeEnumOff SourceAutocapitalizeEnum = "off"
+	SourceAutocapitalizeEnumOn SourceAutocapitalizeEnum = "on"
+	SourceAutocapitalizeEnumSentences SourceAutocapitalizeEnum = "sentences"
+	SourceAutocapitalizeEnumWords SourceAutocapitalizeEnum = "words"
+	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
 )
 
-type SourceAutocorrectAttrEnum string
+type SourceAutocorrectEnum string
 
 const (
-	SourceAutocorrectAttrEnumOff SourceAutocorrectAttrEnum = "off"
-	SourceAutocorrectAttrEnumOn  SourceAutocorrectAttrEnum = "on"
+	SourceAutocorrectEnumOff SourceAutocorrectEnum = "off"
+	SourceAutocorrectEnumOn SourceAutocorrectEnum = "on"
 )
 
-type SourceContenteditableAttrEnum string
+type SourceContenteditableEnum string
 
 const (
-	SourceContenteditableAttrEnumFalse         SourceContenteditableAttrEnum = "false"
-	SourceContenteditableAttrEnumPlaintextOnly SourceContenteditableAttrEnum = "plaintext-only"
-	SourceContenteditableAttrEnumTrue          SourceContenteditableAttrEnum = "true"
+	SourceContenteditableEnumFalse SourceContenteditableEnum = "false"
+	SourceContenteditableEnumPlaintextOnly SourceContenteditableEnum = "plaintext-only"
+	SourceContenteditableEnumTrue SourceContenteditableEnum = "true"
+)
+
+type SourceDirEnum string
+
+const (
+	SourceDirEnumAuto SourceDirEnum = "auto"
+	SourceDirEnumLtr SourceDirEnum = "ltr"
+	SourceDirEnumRtl SourceDirEnum = "rtl"
+)
+
+type SourceDraggableEnum string
+
+const (
+	SourceDraggableEnumFalse SourceDraggableEnum = "false"
+	SourceDraggableEnumTrue SourceDraggableEnum = "true"
+)
+
+type SourceEnterkeyhintEnum string
+
+const (
+	SourceEnterkeyhintEnumEnter SourceEnterkeyhintEnum = "enter"
+	SourceEnterkeyhintEnumGo SourceEnterkeyhintEnum = "go"
+	SourceEnterkeyhintEnumNext SourceEnterkeyhintEnum = "next"
+	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
+	SourceEnterkeyhintEnumSearch SourceEnterkeyhintEnum = "search"
+	SourceEnterkeyhintEnumSend SourceEnterkeyhintEnum = "send"
+	SourceEnterkeyhintEnumDone SourceEnterkeyhintEnum = "done"
+)
+
+type SourceHiddenEnum string
+
+const (
+	SourceHiddenEnumHidden SourceHiddenEnum = "hidden"
+	SourceHiddenEnumUntilFound SourceHiddenEnum = "until-found"
 )
 
 type sourceAttrs map[string]any
 
-func (e *SourceElement) Autocapitalize(a SourceAutocapitalizeAttrEnum) *SourceElement {
+func (e *SourceElement) Autocapitalize(a SourceAutocapitalizeEnum) *SourceElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *SourceElement) Autocorrect(a SourceAutocorrectAttrEnum) *SourceElement {
+func (e *SourceElement) Autocorrect(a SourceAutocorrectEnum) *SourceElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *SourceElement) Autofocus(b bool) *SourceElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *SourceElement) Class(s ...string) *SourceElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *SourceElement) Contenteditable(a SourceContenteditableAttrEnum) *SourceElement {
+func (e *SourceElement) Contenteditable(a SourceContenteditableEnum) *SourceElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *SourceElement) Dir(a SourceDirEnum) *SourceElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *SourceElement) Draggable(a SourceDraggableEnum) *SourceElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *SourceElement) Enterkeyhint(a SourceEnterkeyhintEnum) *SourceElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *SourceElement) Hidden(a SourceHiddenEnum) *SourceElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *SourceElement) Id(s string) *SourceElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *SourceElement) Slot(s string) *SourceElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

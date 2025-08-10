@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type CanvasElement struct {
 	attributes canvasAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type CanvasElement struct {
 // Spec Description: The canvas element provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly.
 func Canvas(children ...htemel.Node) *CanvasElement {
 	node := &CanvasElement{
-		children:   children,
+		children: children,
 		attributes: make(canvasAttrs),
 	}
 
@@ -39,73 +38,131 @@ func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 	}
 }
 
-type CanvasAutocapitalizeAttrEnum string
+type CanvasAutocapitalizeEnum string
 
 const (
-	CanvasAutocapitalizeAttrEnumCharacters CanvasAutocapitalizeAttrEnum = "characters"
-	CanvasAutocapitalizeAttrEnumNone       CanvasAutocapitalizeAttrEnum = "none"
-	CanvasAutocapitalizeAttrEnumOff        CanvasAutocapitalizeAttrEnum = "off"
-	CanvasAutocapitalizeAttrEnumOn         CanvasAutocapitalizeAttrEnum = "on"
-	CanvasAutocapitalizeAttrEnumSentences  CanvasAutocapitalizeAttrEnum = "sentences"
-	CanvasAutocapitalizeAttrEnumWords      CanvasAutocapitalizeAttrEnum = "words"
+	CanvasAutocapitalizeEnumNone CanvasAutocapitalizeEnum = "none"
+	CanvasAutocapitalizeEnumOff CanvasAutocapitalizeEnum = "off"
+	CanvasAutocapitalizeEnumOn CanvasAutocapitalizeEnum = "on"
+	CanvasAutocapitalizeEnumSentences CanvasAutocapitalizeEnum = "sentences"
+	CanvasAutocapitalizeEnumWords CanvasAutocapitalizeEnum = "words"
+	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
 )
 
-type CanvasAutocorrectAttrEnum string
+type CanvasAutocorrectEnum string
 
 const (
-	CanvasAutocorrectAttrEnumOff CanvasAutocorrectAttrEnum = "off"
-	CanvasAutocorrectAttrEnumOn  CanvasAutocorrectAttrEnum = "on"
+	CanvasAutocorrectEnumOff CanvasAutocorrectEnum = "off"
+	CanvasAutocorrectEnumOn CanvasAutocorrectEnum = "on"
 )
 
-type CanvasContenteditableAttrEnum string
+type CanvasContenteditableEnum string
 
 const (
-	CanvasContenteditableAttrEnumTrue          CanvasContenteditableAttrEnum = "true"
-	CanvasContenteditableAttrEnumFalse         CanvasContenteditableAttrEnum = "false"
-	CanvasContenteditableAttrEnumPlaintextOnly CanvasContenteditableAttrEnum = "plaintext-only"
+	CanvasContenteditableEnumFalse CanvasContenteditableEnum = "false"
+	CanvasContenteditableEnumPlaintextOnly CanvasContenteditableEnum = "plaintext-only"
+	CanvasContenteditableEnumTrue CanvasContenteditableEnum = "true"
+)
+
+type CanvasDirEnum string
+
+const (
+	CanvasDirEnumAuto CanvasDirEnum = "auto"
+	CanvasDirEnumLtr CanvasDirEnum = "ltr"
+	CanvasDirEnumRtl CanvasDirEnum = "rtl"
+)
+
+type CanvasDraggableEnum string
+
+const (
+	CanvasDraggableEnumTrue CanvasDraggableEnum = "true"
+	CanvasDraggableEnumFalse CanvasDraggableEnum = "false"
+)
+
+type CanvasEnterkeyhintEnum string
+
+const (
+	CanvasEnterkeyhintEnumGo CanvasEnterkeyhintEnum = "go"
+	CanvasEnterkeyhintEnumNext CanvasEnterkeyhintEnum = "next"
+	CanvasEnterkeyhintEnumPrevious CanvasEnterkeyhintEnum = "previous"
+	CanvasEnterkeyhintEnumSearch CanvasEnterkeyhintEnum = "search"
+	CanvasEnterkeyhintEnumSend CanvasEnterkeyhintEnum = "send"
+	CanvasEnterkeyhintEnumDone CanvasEnterkeyhintEnum = "done"
+	CanvasEnterkeyhintEnumEnter CanvasEnterkeyhintEnum = "enter"
+)
+
+type CanvasHiddenEnum string
+
+const (
+	CanvasHiddenEnumHidden CanvasHiddenEnum = "hidden"
+	CanvasHiddenEnumUntilFound CanvasHiddenEnum = "until-found"
 )
 
 type canvasAttrs map[string]any
 
-func (e *CanvasElement) Autocapitalize(a CanvasAutocapitalizeAttrEnum) *CanvasElement {
+func (e *CanvasElement) Autocapitalize(a CanvasAutocapitalizeEnum) *CanvasElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *CanvasElement) Autocorrect(a CanvasAutocorrectAttrEnum) *CanvasElement {
+func (e *CanvasElement) Autocorrect(a CanvasAutocorrectEnum) *CanvasElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *CanvasElement) Autofocus(b bool) *CanvasElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *CanvasElement) Class(s ...string) *CanvasElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *CanvasElement) Contenteditable(a CanvasContenteditableAttrEnum) *CanvasElement {
+func (e *CanvasElement) Contenteditable(a CanvasContenteditableEnum) *CanvasElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *CanvasElement) Dir(a CanvasDirEnum) *CanvasElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *CanvasElement) Draggable(a CanvasDraggableEnum) *CanvasElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *CanvasElement) Enterkeyhint(a CanvasEnterkeyhintEnum) *CanvasElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *CanvasElement) Hidden(a CanvasHiddenEnum) *CanvasElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *CanvasElement) Id(s string) *CanvasElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *CanvasElement) Slot(s string) *CanvasElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

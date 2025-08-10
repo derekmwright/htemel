@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type OptionElement struct {
 	attributes optionAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type OptionElement struct {
 // Spec Description: The option element represents an option in a select element or as part of a list of suggestions in a datalist element.
 func Option(children ...htemel.Node) *OptionElement {
 	node := &OptionElement{
-		children:   children,
+		children: children,
 		attributes: make(optionAttrs),
 	}
 
@@ -39,73 +38,131 @@ func OptionIf(condition bool, children ...htemel.Node) *OptionElement {
 	}
 }
 
-type OptionAutocapitalizeAttrEnum string
+type OptionAutocapitalizeEnum string
 
 const (
-	OptionAutocapitalizeAttrEnumCharacters OptionAutocapitalizeAttrEnum = "characters"
-	OptionAutocapitalizeAttrEnumNone       OptionAutocapitalizeAttrEnum = "none"
-	OptionAutocapitalizeAttrEnumOff        OptionAutocapitalizeAttrEnum = "off"
-	OptionAutocapitalizeAttrEnumOn         OptionAutocapitalizeAttrEnum = "on"
-	OptionAutocapitalizeAttrEnumSentences  OptionAutocapitalizeAttrEnum = "sentences"
-	OptionAutocapitalizeAttrEnumWords      OptionAutocapitalizeAttrEnum = "words"
+	OptionAutocapitalizeEnumNone OptionAutocapitalizeEnum = "none"
+	OptionAutocapitalizeEnumOff OptionAutocapitalizeEnum = "off"
+	OptionAutocapitalizeEnumOn OptionAutocapitalizeEnum = "on"
+	OptionAutocapitalizeEnumSentences OptionAutocapitalizeEnum = "sentences"
+	OptionAutocapitalizeEnumWords OptionAutocapitalizeEnum = "words"
+	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
 )
 
-type OptionAutocorrectAttrEnum string
+type OptionAutocorrectEnum string
 
 const (
-	OptionAutocorrectAttrEnumOff OptionAutocorrectAttrEnum = "off"
-	OptionAutocorrectAttrEnumOn  OptionAutocorrectAttrEnum = "on"
+	OptionAutocorrectEnumOn OptionAutocorrectEnum = "on"
+	OptionAutocorrectEnumOff OptionAutocorrectEnum = "off"
 )
 
-type OptionContenteditableAttrEnum string
+type OptionContenteditableEnum string
 
 const (
-	OptionContenteditableAttrEnumFalse         OptionContenteditableAttrEnum = "false"
-	OptionContenteditableAttrEnumPlaintextOnly OptionContenteditableAttrEnum = "plaintext-only"
-	OptionContenteditableAttrEnumTrue          OptionContenteditableAttrEnum = "true"
+	OptionContenteditableEnumPlaintextOnly OptionContenteditableEnum = "plaintext-only"
+	OptionContenteditableEnumTrue OptionContenteditableEnum = "true"
+	OptionContenteditableEnumFalse OptionContenteditableEnum = "false"
+)
+
+type OptionDirEnum string
+
+const (
+	OptionDirEnumAuto OptionDirEnum = "auto"
+	OptionDirEnumLtr OptionDirEnum = "ltr"
+	OptionDirEnumRtl OptionDirEnum = "rtl"
+)
+
+type OptionDraggableEnum string
+
+const (
+	OptionDraggableEnumFalse OptionDraggableEnum = "false"
+	OptionDraggableEnumTrue OptionDraggableEnum = "true"
+)
+
+type OptionEnterkeyhintEnum string
+
+const (
+	OptionEnterkeyhintEnumSearch OptionEnterkeyhintEnum = "search"
+	OptionEnterkeyhintEnumSend OptionEnterkeyhintEnum = "send"
+	OptionEnterkeyhintEnumDone OptionEnterkeyhintEnum = "done"
+	OptionEnterkeyhintEnumEnter OptionEnterkeyhintEnum = "enter"
+	OptionEnterkeyhintEnumGo OptionEnterkeyhintEnum = "go"
+	OptionEnterkeyhintEnumNext OptionEnterkeyhintEnum = "next"
+	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
+)
+
+type OptionHiddenEnum string
+
+const (
+	OptionHiddenEnumHidden OptionHiddenEnum = "hidden"
+	OptionHiddenEnumUntilFound OptionHiddenEnum = "until-found"
 )
 
 type optionAttrs map[string]any
 
-func (e *OptionElement) Autocapitalize(a OptionAutocapitalizeAttrEnum) *OptionElement {
+func (e *OptionElement) Autocapitalize(a OptionAutocapitalizeEnum) *OptionElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *OptionElement) Autocorrect(a OptionAutocorrectAttrEnum) *OptionElement {
+func (e *OptionElement) Autocorrect(a OptionAutocorrectEnum) *OptionElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *OptionElement) Autofocus(b bool) *OptionElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *OptionElement) Class(s ...string) *OptionElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *OptionElement) Contenteditable(a OptionContenteditableAttrEnum) *OptionElement {
+func (e *OptionElement) Contenteditable(a OptionContenteditableEnum) *OptionElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *OptionElement) Dir(a OptionDirEnum) *OptionElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *OptionElement) Draggable(a OptionDraggableEnum) *OptionElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *OptionElement) Enterkeyhint(a OptionEnterkeyhintEnum) *OptionElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *OptionElement) Hidden(a OptionHiddenEnum) *OptionElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *OptionElement) Id(s string) *OptionElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *OptionElement) Slot(s string) *OptionElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

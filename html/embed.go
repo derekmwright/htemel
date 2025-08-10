@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type EmbedElement struct {
 	attributes embedAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type EmbedElement struct {
 // Spec Description: The embed element provides an integration point for an external application or interactive content.
 func Embed(children ...htemel.Node) *EmbedElement {
 	node := &EmbedElement{
-		children:   children,
+		children: children,
 		attributes: make(embedAttrs),
 	}
 
@@ -39,73 +38,131 @@ func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
 	}
 }
 
-type EmbedAutocapitalizeAttrEnum string
+type EmbedAutocapitalizeEnum string
 
 const (
-	EmbedAutocapitalizeAttrEnumOn         EmbedAutocapitalizeAttrEnum = "on"
-	EmbedAutocapitalizeAttrEnumSentences  EmbedAutocapitalizeAttrEnum = "sentences"
-	EmbedAutocapitalizeAttrEnumWords      EmbedAutocapitalizeAttrEnum = "words"
-	EmbedAutocapitalizeAttrEnumCharacters EmbedAutocapitalizeAttrEnum = "characters"
-	EmbedAutocapitalizeAttrEnumNone       EmbedAutocapitalizeAttrEnum = "none"
-	EmbedAutocapitalizeAttrEnumOff        EmbedAutocapitalizeAttrEnum = "off"
+	EmbedAutocapitalizeEnumSentences EmbedAutocapitalizeEnum = "sentences"
+	EmbedAutocapitalizeEnumWords EmbedAutocapitalizeEnum = "words"
+	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
+	EmbedAutocapitalizeEnumNone EmbedAutocapitalizeEnum = "none"
+	EmbedAutocapitalizeEnumOff EmbedAutocapitalizeEnum = "off"
+	EmbedAutocapitalizeEnumOn EmbedAutocapitalizeEnum = "on"
 )
 
-type EmbedAutocorrectAttrEnum string
+type EmbedAutocorrectEnum string
 
 const (
-	EmbedAutocorrectAttrEnumOff EmbedAutocorrectAttrEnum = "off"
-	EmbedAutocorrectAttrEnumOn  EmbedAutocorrectAttrEnum = "on"
+	EmbedAutocorrectEnumOff EmbedAutocorrectEnum = "off"
+	EmbedAutocorrectEnumOn EmbedAutocorrectEnum = "on"
 )
 
-type EmbedContenteditableAttrEnum string
+type EmbedContenteditableEnum string
 
 const (
-	EmbedContenteditableAttrEnumFalse         EmbedContenteditableAttrEnum = "false"
-	EmbedContenteditableAttrEnumPlaintextOnly EmbedContenteditableAttrEnum = "plaintext-only"
-	EmbedContenteditableAttrEnumTrue          EmbedContenteditableAttrEnum = "true"
+	EmbedContenteditableEnumFalse EmbedContenteditableEnum = "false"
+	EmbedContenteditableEnumPlaintextOnly EmbedContenteditableEnum = "plaintext-only"
+	EmbedContenteditableEnumTrue EmbedContenteditableEnum = "true"
+)
+
+type EmbedDirEnum string
+
+const (
+	EmbedDirEnumAuto EmbedDirEnum = "auto"
+	EmbedDirEnumLtr EmbedDirEnum = "ltr"
+	EmbedDirEnumRtl EmbedDirEnum = "rtl"
+)
+
+type EmbedDraggableEnum string
+
+const (
+	EmbedDraggableEnumFalse EmbedDraggableEnum = "false"
+	EmbedDraggableEnumTrue EmbedDraggableEnum = "true"
+)
+
+type EmbedEnterkeyhintEnum string
+
+const (
+	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
+	EmbedEnterkeyhintEnumSearch EmbedEnterkeyhintEnum = "search"
+	EmbedEnterkeyhintEnumSend EmbedEnterkeyhintEnum = "send"
+	EmbedEnterkeyhintEnumDone EmbedEnterkeyhintEnum = "done"
+	EmbedEnterkeyhintEnumEnter EmbedEnterkeyhintEnum = "enter"
+	EmbedEnterkeyhintEnumGo EmbedEnterkeyhintEnum = "go"
+	EmbedEnterkeyhintEnumNext EmbedEnterkeyhintEnum = "next"
+)
+
+type EmbedHiddenEnum string
+
+const (
+	EmbedHiddenEnumUntilFound EmbedHiddenEnum = "until-found"
+	EmbedHiddenEnumHidden EmbedHiddenEnum = "hidden"
 )
 
 type embedAttrs map[string]any
 
-func (e *EmbedElement) Autocapitalize(a EmbedAutocapitalizeAttrEnum) *EmbedElement {
+func (e *EmbedElement) Autocapitalize(a EmbedAutocapitalizeEnum) *EmbedElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *EmbedElement) Autocorrect(a EmbedAutocorrectAttrEnum) *EmbedElement {
+func (e *EmbedElement) Autocorrect(a EmbedAutocorrectEnum) *EmbedElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *EmbedElement) Autofocus(b bool) *EmbedElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *EmbedElement) Class(s ...string) *EmbedElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *EmbedElement) Contenteditable(a EmbedContenteditableAttrEnum) *EmbedElement {
+func (e *EmbedElement) Contenteditable(a EmbedContenteditableEnum) *EmbedElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *EmbedElement) Dir(a EmbedDirEnum) *EmbedElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *EmbedElement) Draggable(a EmbedDraggableEnum) *EmbedElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *EmbedElement) Enterkeyhint(a EmbedEnterkeyhintEnum) *EmbedElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *EmbedElement) Hidden(a EmbedHiddenEnum) *EmbedElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *EmbedElement) Id(s string) *EmbedElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *EmbedElement) Slot(s string) *EmbedElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

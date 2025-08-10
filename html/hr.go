@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type HrElement struct {
 	attributes hrAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type HrElement struct {
 // Spec Description: The hr element represents a paragraph-level thematic break, e.g., a scene change in a story, or a transition to another topic within a section of a reference book; alternatively, it represents a separator between a set of options of a select element.
 func Hr(children ...htemel.Node) *HrElement {
 	node := &HrElement{
-		children:   children,
+		children: children,
 		attributes: make(hrAttrs),
 	}
 
@@ -39,73 +38,131 @@ func HrIf(condition bool, children ...htemel.Node) *HrElement {
 	}
 }
 
-type HrAutocapitalizeAttrEnum string
+type HrAutocapitalizeEnum string
 
 const (
-	HrAutocapitalizeAttrEnumWords      HrAutocapitalizeAttrEnum = "words"
-	HrAutocapitalizeAttrEnumCharacters HrAutocapitalizeAttrEnum = "characters"
-	HrAutocapitalizeAttrEnumNone       HrAutocapitalizeAttrEnum = "none"
-	HrAutocapitalizeAttrEnumOff        HrAutocapitalizeAttrEnum = "off"
-	HrAutocapitalizeAttrEnumOn         HrAutocapitalizeAttrEnum = "on"
-	HrAutocapitalizeAttrEnumSentences  HrAutocapitalizeAttrEnum = "sentences"
+	HrAutocapitalizeEnumSentences HrAutocapitalizeEnum = "sentences"
+	HrAutocapitalizeEnumWords HrAutocapitalizeEnum = "words"
+	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
+	HrAutocapitalizeEnumNone HrAutocapitalizeEnum = "none"
+	HrAutocapitalizeEnumOff HrAutocapitalizeEnum = "off"
+	HrAutocapitalizeEnumOn HrAutocapitalizeEnum = "on"
 )
 
-type HrAutocorrectAttrEnum string
+type HrAutocorrectEnum string
 
 const (
-	HrAutocorrectAttrEnumOn  HrAutocorrectAttrEnum = "on"
-	HrAutocorrectAttrEnumOff HrAutocorrectAttrEnum = "off"
+	HrAutocorrectEnumOff HrAutocorrectEnum = "off"
+	HrAutocorrectEnumOn HrAutocorrectEnum = "on"
 )
 
-type HrContenteditableAttrEnum string
+type HrContenteditableEnum string
 
 const (
-	HrContenteditableAttrEnumFalse         HrContenteditableAttrEnum = "false"
-	HrContenteditableAttrEnumPlaintextOnly HrContenteditableAttrEnum = "plaintext-only"
-	HrContenteditableAttrEnumTrue          HrContenteditableAttrEnum = "true"
+	HrContenteditableEnumFalse HrContenteditableEnum = "false"
+	HrContenteditableEnumPlaintextOnly HrContenteditableEnum = "plaintext-only"
+	HrContenteditableEnumTrue HrContenteditableEnum = "true"
+)
+
+type HrDirEnum string
+
+const (
+	HrDirEnumLtr HrDirEnum = "ltr"
+	HrDirEnumRtl HrDirEnum = "rtl"
+	HrDirEnumAuto HrDirEnum = "auto"
+)
+
+type HrDraggableEnum string
+
+const (
+	HrDraggableEnumFalse HrDraggableEnum = "false"
+	HrDraggableEnumTrue HrDraggableEnum = "true"
+)
+
+type HrEnterkeyhintEnum string
+
+const (
+	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
+	HrEnterkeyhintEnumSearch HrEnterkeyhintEnum = "search"
+	HrEnterkeyhintEnumSend HrEnterkeyhintEnum = "send"
+	HrEnterkeyhintEnumDone HrEnterkeyhintEnum = "done"
+	HrEnterkeyhintEnumEnter HrEnterkeyhintEnum = "enter"
+	HrEnterkeyhintEnumGo HrEnterkeyhintEnum = "go"
+	HrEnterkeyhintEnumNext HrEnterkeyhintEnum = "next"
+)
+
+type HrHiddenEnum string
+
+const (
+	HrHiddenEnumHidden HrHiddenEnum = "hidden"
+	HrHiddenEnumUntilFound HrHiddenEnum = "until-found"
 )
 
 type hrAttrs map[string]any
 
-func (e *HrElement) Autocapitalize(a HrAutocapitalizeAttrEnum) *HrElement {
+func (e *HrElement) Autocapitalize(a HrAutocapitalizeEnum) *HrElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *HrElement) Autocorrect(a HrAutocorrectAttrEnum) *HrElement {
+func (e *HrElement) Autocorrect(a HrAutocorrectEnum) *HrElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *HrElement) Autofocus(b bool) *HrElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *HrElement) Class(s ...string) *HrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *HrElement) Contenteditable(a HrContenteditableAttrEnum) *HrElement {
+func (e *HrElement) Contenteditable(a HrContenteditableEnum) *HrElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *HrElement) Dir(a HrDirEnum) *HrElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *HrElement) Draggable(a HrDraggableEnum) *HrElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *HrElement) Enterkeyhint(a HrEnterkeyhintEnum) *HrElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *HrElement) Hidden(a HrHiddenEnum) *HrElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *HrElement) Id(s string) *HrElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *HrElement) Slot(s string) *HrElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

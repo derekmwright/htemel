@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type VarElement struct {
 	attributes varAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type VarElement struct {
 // Spec Description: The var element represents a variable. This could be an actual variable in a mathematical expression or programming context, an identifier representing a constant, a symbol identifying a physical quantity, a function parameter, or just be a term used as a placeholder in prose.
 func Var(children ...htemel.Node) *VarElement {
 	node := &VarElement{
-		children:   children,
+		children: children,
 		attributes: make(varAttrs),
 	}
 
@@ -39,73 +38,131 @@ func VarIf(condition bool, children ...htemel.Node) *VarElement {
 	}
 }
 
-type VarAutocapitalizeAttrEnum string
+type VarAutocapitalizeEnum string
 
 const (
-	VarAutocapitalizeAttrEnumWords      VarAutocapitalizeAttrEnum = "words"
-	VarAutocapitalizeAttrEnumCharacters VarAutocapitalizeAttrEnum = "characters"
-	VarAutocapitalizeAttrEnumNone       VarAutocapitalizeAttrEnum = "none"
-	VarAutocapitalizeAttrEnumOff        VarAutocapitalizeAttrEnum = "off"
-	VarAutocapitalizeAttrEnumOn         VarAutocapitalizeAttrEnum = "on"
-	VarAutocapitalizeAttrEnumSentences  VarAutocapitalizeAttrEnum = "sentences"
+	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
+	VarAutocapitalizeEnumNone VarAutocapitalizeEnum = "none"
+	VarAutocapitalizeEnumOff VarAutocapitalizeEnum = "off"
+	VarAutocapitalizeEnumOn VarAutocapitalizeEnum = "on"
+	VarAutocapitalizeEnumSentences VarAutocapitalizeEnum = "sentences"
+	VarAutocapitalizeEnumWords VarAutocapitalizeEnum = "words"
 )
 
-type VarAutocorrectAttrEnum string
+type VarAutocorrectEnum string
 
 const (
-	VarAutocorrectAttrEnumOff VarAutocorrectAttrEnum = "off"
-	VarAutocorrectAttrEnumOn  VarAutocorrectAttrEnum = "on"
+	VarAutocorrectEnumOff VarAutocorrectEnum = "off"
+	VarAutocorrectEnumOn VarAutocorrectEnum = "on"
 )
 
-type VarContenteditableAttrEnum string
+type VarContenteditableEnum string
 
 const (
-	VarContenteditableAttrEnumFalse         VarContenteditableAttrEnum = "false"
-	VarContenteditableAttrEnumPlaintextOnly VarContenteditableAttrEnum = "plaintext-only"
-	VarContenteditableAttrEnumTrue          VarContenteditableAttrEnum = "true"
+	VarContenteditableEnumFalse VarContenteditableEnum = "false"
+	VarContenteditableEnumPlaintextOnly VarContenteditableEnum = "plaintext-only"
+	VarContenteditableEnumTrue VarContenteditableEnum = "true"
+)
+
+type VarDirEnum string
+
+const (
+	VarDirEnumAuto VarDirEnum = "auto"
+	VarDirEnumLtr VarDirEnum = "ltr"
+	VarDirEnumRtl VarDirEnum = "rtl"
+)
+
+type VarDraggableEnum string
+
+const (
+	VarDraggableEnumFalse VarDraggableEnum = "false"
+	VarDraggableEnumTrue VarDraggableEnum = "true"
+)
+
+type VarEnterkeyhintEnum string
+
+const (
+	VarEnterkeyhintEnumDone VarEnterkeyhintEnum = "done"
+	VarEnterkeyhintEnumEnter VarEnterkeyhintEnum = "enter"
+	VarEnterkeyhintEnumGo VarEnterkeyhintEnum = "go"
+	VarEnterkeyhintEnumNext VarEnterkeyhintEnum = "next"
+	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
+	VarEnterkeyhintEnumSearch VarEnterkeyhintEnum = "search"
+	VarEnterkeyhintEnumSend VarEnterkeyhintEnum = "send"
+)
+
+type VarHiddenEnum string
+
+const (
+	VarHiddenEnumHidden VarHiddenEnum = "hidden"
+	VarHiddenEnumUntilFound VarHiddenEnum = "until-found"
 )
 
 type varAttrs map[string]any
 
-func (e *VarElement) Autocapitalize(a VarAutocapitalizeAttrEnum) *VarElement {
+func (e *VarElement) Autocapitalize(a VarAutocapitalizeEnum) *VarElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *VarElement) Autocorrect(a VarAutocorrectAttrEnum) *VarElement {
+func (e *VarElement) Autocorrect(a VarAutocorrectEnum) *VarElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *VarElement) Autofocus(b bool) *VarElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *VarElement) Class(s ...string) *VarElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *VarElement) Contenteditable(a VarContenteditableAttrEnum) *VarElement {
+func (e *VarElement) Contenteditable(a VarContenteditableEnum) *VarElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *VarElement) Dir(a VarDirEnum) *VarElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *VarElement) Draggable(a VarDraggableEnum) *VarElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *VarElement) Enterkeyhint(a VarEnterkeyhintEnum) *VarElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *VarElement) Hidden(a VarHiddenEnum) *VarElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *VarElement) Id(s string) *VarElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *VarElement) Slot(s string) *VarElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

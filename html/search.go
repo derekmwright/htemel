@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type SearchElement struct {
 	attributes searchAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type SearchElement struct {
 // Spec Description: The search element represents a part of a document or application that contains a set of form controls or other content related to performing a search or filtering operation. This could be a search of the web site or application; a way of searching or filtering search results on the current web page; or a global or Internet-wide search function.
 func Search(children ...htemel.Node) *SearchElement {
 	node := &SearchElement{
-		children:   children,
+		children: children,
 		attributes: make(searchAttrs),
 	}
 
@@ -39,73 +38,131 @@ func SearchIf(condition bool, children ...htemel.Node) *SearchElement {
 	}
 }
 
-type SearchAutocapitalizeAttrEnum string
+type SearchAutocapitalizeEnum string
 
 const (
-	SearchAutocapitalizeAttrEnumWords      SearchAutocapitalizeAttrEnum = "words"
-	SearchAutocapitalizeAttrEnumCharacters SearchAutocapitalizeAttrEnum = "characters"
-	SearchAutocapitalizeAttrEnumNone       SearchAutocapitalizeAttrEnum = "none"
-	SearchAutocapitalizeAttrEnumOff        SearchAutocapitalizeAttrEnum = "off"
-	SearchAutocapitalizeAttrEnumOn         SearchAutocapitalizeAttrEnum = "on"
-	SearchAutocapitalizeAttrEnumSentences  SearchAutocapitalizeAttrEnum = "sentences"
+	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
+	SearchAutocapitalizeEnumNone SearchAutocapitalizeEnum = "none"
+	SearchAutocapitalizeEnumOff SearchAutocapitalizeEnum = "off"
+	SearchAutocapitalizeEnumOn SearchAutocapitalizeEnum = "on"
+	SearchAutocapitalizeEnumSentences SearchAutocapitalizeEnum = "sentences"
+	SearchAutocapitalizeEnumWords SearchAutocapitalizeEnum = "words"
 )
 
-type SearchAutocorrectAttrEnum string
+type SearchAutocorrectEnum string
 
 const (
-	SearchAutocorrectAttrEnumOff SearchAutocorrectAttrEnum = "off"
-	SearchAutocorrectAttrEnumOn  SearchAutocorrectAttrEnum = "on"
+	SearchAutocorrectEnumOff SearchAutocorrectEnum = "off"
+	SearchAutocorrectEnumOn SearchAutocorrectEnum = "on"
 )
 
-type SearchContenteditableAttrEnum string
+type SearchContenteditableEnum string
 
 const (
-	SearchContenteditableAttrEnumFalse         SearchContenteditableAttrEnum = "false"
-	SearchContenteditableAttrEnumPlaintextOnly SearchContenteditableAttrEnum = "plaintext-only"
-	SearchContenteditableAttrEnumTrue          SearchContenteditableAttrEnum = "true"
+	SearchContenteditableEnumFalse SearchContenteditableEnum = "false"
+	SearchContenteditableEnumPlaintextOnly SearchContenteditableEnum = "plaintext-only"
+	SearchContenteditableEnumTrue SearchContenteditableEnum = "true"
+)
+
+type SearchDirEnum string
+
+const (
+	SearchDirEnumAuto SearchDirEnum = "auto"
+	SearchDirEnumLtr SearchDirEnum = "ltr"
+	SearchDirEnumRtl SearchDirEnum = "rtl"
+)
+
+type SearchDraggableEnum string
+
+const (
+	SearchDraggableEnumFalse SearchDraggableEnum = "false"
+	SearchDraggableEnumTrue SearchDraggableEnum = "true"
+)
+
+type SearchEnterkeyhintEnum string
+
+const (
+	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
+	SearchEnterkeyhintEnumSearch SearchEnterkeyhintEnum = "search"
+	SearchEnterkeyhintEnumSend SearchEnterkeyhintEnum = "send"
+	SearchEnterkeyhintEnumDone SearchEnterkeyhintEnum = "done"
+	SearchEnterkeyhintEnumEnter SearchEnterkeyhintEnum = "enter"
+	SearchEnterkeyhintEnumGo SearchEnterkeyhintEnum = "go"
+	SearchEnterkeyhintEnumNext SearchEnterkeyhintEnum = "next"
+)
+
+type SearchHiddenEnum string
+
+const (
+	SearchHiddenEnumHidden SearchHiddenEnum = "hidden"
+	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
 )
 
 type searchAttrs map[string]any
 
-func (e *SearchElement) Autocapitalize(a SearchAutocapitalizeAttrEnum) *SearchElement {
+func (e *SearchElement) Autocapitalize(a SearchAutocapitalizeEnum) *SearchElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *SearchElement) Autocorrect(a SearchAutocorrectAttrEnum) *SearchElement {
+func (e *SearchElement) Autocorrect(a SearchAutocorrectEnum) *SearchElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *SearchElement) Autofocus(b bool) *SearchElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *SearchElement) Class(s ...string) *SearchElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *SearchElement) Contenteditable(a SearchContenteditableAttrEnum) *SearchElement {
+func (e *SearchElement) Contenteditable(a SearchContenteditableEnum) *SearchElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *SearchElement) Dir(a SearchDirEnum) *SearchElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *SearchElement) Draggable(a SearchDraggableEnum) *SearchElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *SearchElement) Enterkeyhint(a SearchEnterkeyhintEnum) *SearchElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *SearchElement) Hidden(a SearchHiddenEnum) *SearchElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *SearchElement) Id(s string) *SearchElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *SearchElement) Slot(s string) *SearchElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

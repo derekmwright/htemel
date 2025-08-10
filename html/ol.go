@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type OlElement struct {
 	attributes olAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type OlElement struct {
 // Spec Description: The ol element represents a list of items, where the items have been intentionally ordered, such that changing the order would change the meaning of the document.
 func Ol(children ...htemel.Node) *OlElement {
 	node := &OlElement{
-		children:   children,
+		children: children,
 		attributes: make(olAttrs),
 	}
 
@@ -39,73 +38,131 @@ func OlIf(condition bool, children ...htemel.Node) *OlElement {
 	}
 }
 
-type OlAutocapitalizeAttrEnum string
+type OlAutocapitalizeEnum string
 
 const (
-	OlAutocapitalizeAttrEnumOff        OlAutocapitalizeAttrEnum = "off"
-	OlAutocapitalizeAttrEnumOn         OlAutocapitalizeAttrEnum = "on"
-	OlAutocapitalizeAttrEnumSentences  OlAutocapitalizeAttrEnum = "sentences"
-	OlAutocapitalizeAttrEnumWords      OlAutocapitalizeAttrEnum = "words"
-	OlAutocapitalizeAttrEnumCharacters OlAutocapitalizeAttrEnum = "characters"
-	OlAutocapitalizeAttrEnumNone       OlAutocapitalizeAttrEnum = "none"
+	OlAutocapitalizeEnumSentences OlAutocapitalizeEnum = "sentences"
+	OlAutocapitalizeEnumWords OlAutocapitalizeEnum = "words"
+	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
+	OlAutocapitalizeEnumNone OlAutocapitalizeEnum = "none"
+	OlAutocapitalizeEnumOff OlAutocapitalizeEnum = "off"
+	OlAutocapitalizeEnumOn OlAutocapitalizeEnum = "on"
 )
 
-type OlAutocorrectAttrEnum string
+type OlAutocorrectEnum string
 
 const (
-	OlAutocorrectAttrEnumOff OlAutocorrectAttrEnum = "off"
-	OlAutocorrectAttrEnumOn  OlAutocorrectAttrEnum = "on"
+	OlAutocorrectEnumOff OlAutocorrectEnum = "off"
+	OlAutocorrectEnumOn OlAutocorrectEnum = "on"
 )
 
-type OlContenteditableAttrEnum string
+type OlContenteditableEnum string
 
 const (
-	OlContenteditableAttrEnumFalse         OlContenteditableAttrEnum = "false"
-	OlContenteditableAttrEnumPlaintextOnly OlContenteditableAttrEnum = "plaintext-only"
-	OlContenteditableAttrEnumTrue          OlContenteditableAttrEnum = "true"
+	OlContenteditableEnumFalse OlContenteditableEnum = "false"
+	OlContenteditableEnumPlaintextOnly OlContenteditableEnum = "plaintext-only"
+	OlContenteditableEnumTrue OlContenteditableEnum = "true"
+)
+
+type OlDirEnum string
+
+const (
+	OlDirEnumAuto OlDirEnum = "auto"
+	OlDirEnumLtr OlDirEnum = "ltr"
+	OlDirEnumRtl OlDirEnum = "rtl"
+)
+
+type OlDraggableEnum string
+
+const (
+	OlDraggableEnumTrue OlDraggableEnum = "true"
+	OlDraggableEnumFalse OlDraggableEnum = "false"
+)
+
+type OlEnterkeyhintEnum string
+
+const (
+	OlEnterkeyhintEnumDone OlEnterkeyhintEnum = "done"
+	OlEnterkeyhintEnumEnter OlEnterkeyhintEnum = "enter"
+	OlEnterkeyhintEnumGo OlEnterkeyhintEnum = "go"
+	OlEnterkeyhintEnumNext OlEnterkeyhintEnum = "next"
+	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
+	OlEnterkeyhintEnumSearch OlEnterkeyhintEnum = "search"
+	OlEnterkeyhintEnumSend OlEnterkeyhintEnum = "send"
+)
+
+type OlHiddenEnum string
+
+const (
+	OlHiddenEnumHidden OlHiddenEnum = "hidden"
+	OlHiddenEnumUntilFound OlHiddenEnum = "until-found"
 )
 
 type olAttrs map[string]any
 
-func (e *OlElement) Autocapitalize(a OlAutocapitalizeAttrEnum) *OlElement {
+func (e *OlElement) Autocapitalize(a OlAutocapitalizeEnum) *OlElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *OlElement) Autocorrect(a OlAutocorrectAttrEnum) *OlElement {
+func (e *OlElement) Autocorrect(a OlAutocorrectEnum) *OlElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *OlElement) Autofocus(b bool) *OlElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *OlElement) Class(s ...string) *OlElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *OlElement) Contenteditable(a OlContenteditableAttrEnum) *OlElement {
+func (e *OlElement) Contenteditable(a OlContenteditableEnum) *OlElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *OlElement) Dir(a OlDirEnum) *OlElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *OlElement) Draggable(a OlDraggableEnum) *OlElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *OlElement) Enterkeyhint(a OlEnterkeyhintEnum) *OlElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *OlElement) Hidden(a OlHiddenEnum) *OlElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *OlElement) Id(s string) *OlElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *OlElement) Slot(s string) *OlElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

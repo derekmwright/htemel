@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type DlElement struct {
 	attributes dlAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type DlElement struct {
 // Spec Description: The dl element represents an association list consisting of zero or more name-value groups (a description list). A name-value group consists of one or more names (dt elements, possibly as children of a div element child) followed by one or more values (dd elements, possibly as children of a div element child), ignoring any nodes other than dt and dd element children, and dt and dd elements that are children of div element children. Within a single dl element, there should not be more than one dt element for each name.
 func Dl(children ...htemel.Node) *DlElement {
 	node := &DlElement{
-		children:   children,
+		children: children,
 		attributes: make(dlAttrs),
 	}
 
@@ -39,73 +38,131 @@ func DlIf(condition bool, children ...htemel.Node) *DlElement {
 	}
 }
 
-type DlAutocapitalizeAttrEnum string
+type DlAutocapitalizeEnum string
 
 const (
-	DlAutocapitalizeAttrEnumOn         DlAutocapitalizeAttrEnum = "on"
-	DlAutocapitalizeAttrEnumSentences  DlAutocapitalizeAttrEnum = "sentences"
-	DlAutocapitalizeAttrEnumWords      DlAutocapitalizeAttrEnum = "words"
-	DlAutocapitalizeAttrEnumCharacters DlAutocapitalizeAttrEnum = "characters"
-	DlAutocapitalizeAttrEnumNone       DlAutocapitalizeAttrEnum = "none"
-	DlAutocapitalizeAttrEnumOff        DlAutocapitalizeAttrEnum = "off"
+	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
+	DlAutocapitalizeEnumNone DlAutocapitalizeEnum = "none"
+	DlAutocapitalizeEnumOff DlAutocapitalizeEnum = "off"
+	DlAutocapitalizeEnumOn DlAutocapitalizeEnum = "on"
+	DlAutocapitalizeEnumSentences DlAutocapitalizeEnum = "sentences"
+	DlAutocapitalizeEnumWords DlAutocapitalizeEnum = "words"
 )
 
-type DlAutocorrectAttrEnum string
+type DlAutocorrectEnum string
 
 const (
-	DlAutocorrectAttrEnumOff DlAutocorrectAttrEnum = "off"
-	DlAutocorrectAttrEnumOn  DlAutocorrectAttrEnum = "on"
+	DlAutocorrectEnumOn DlAutocorrectEnum = "on"
+	DlAutocorrectEnumOff DlAutocorrectEnum = "off"
 )
 
-type DlContenteditableAttrEnum string
+type DlContenteditableEnum string
 
 const (
-	DlContenteditableAttrEnumTrue          DlContenteditableAttrEnum = "true"
-	DlContenteditableAttrEnumFalse         DlContenteditableAttrEnum = "false"
-	DlContenteditableAttrEnumPlaintextOnly DlContenteditableAttrEnum = "plaintext-only"
+	DlContenteditableEnumFalse DlContenteditableEnum = "false"
+	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
+	DlContenteditableEnumTrue DlContenteditableEnum = "true"
+)
+
+type DlDirEnum string
+
+const (
+	DlDirEnumAuto DlDirEnum = "auto"
+	DlDirEnumLtr DlDirEnum = "ltr"
+	DlDirEnumRtl DlDirEnum = "rtl"
+)
+
+type DlDraggableEnum string
+
+const (
+	DlDraggableEnumFalse DlDraggableEnum = "false"
+	DlDraggableEnumTrue DlDraggableEnum = "true"
+)
+
+type DlEnterkeyhintEnum string
+
+const (
+	DlEnterkeyhintEnumEnter DlEnterkeyhintEnum = "enter"
+	DlEnterkeyhintEnumGo DlEnterkeyhintEnum = "go"
+	DlEnterkeyhintEnumNext DlEnterkeyhintEnum = "next"
+	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
+	DlEnterkeyhintEnumSearch DlEnterkeyhintEnum = "search"
+	DlEnterkeyhintEnumSend DlEnterkeyhintEnum = "send"
+	DlEnterkeyhintEnumDone DlEnterkeyhintEnum = "done"
+)
+
+type DlHiddenEnum string
+
+const (
+	DlHiddenEnumHidden DlHiddenEnum = "hidden"
+	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
 )
 
 type dlAttrs map[string]any
 
-func (e *DlElement) Autocapitalize(a DlAutocapitalizeAttrEnum) *DlElement {
+func (e *DlElement) Autocapitalize(a DlAutocapitalizeEnum) *DlElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *DlElement) Autocorrect(a DlAutocorrectAttrEnum) *DlElement {
+func (e *DlElement) Autocorrect(a DlAutocorrectEnum) *DlElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *DlElement) Autofocus(b bool) *DlElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *DlElement) Class(s ...string) *DlElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *DlElement) Contenteditable(a DlContenteditableAttrEnum) *DlElement {
+func (e *DlElement) Contenteditable(a DlContenteditableEnum) *DlElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *DlElement) Dir(a DlDirEnum) *DlElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *DlElement) Draggable(a DlDraggableEnum) *DlElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *DlElement) Enterkeyhint(a DlEnterkeyhintEnum) *DlElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *DlElement) Hidden(a DlHiddenEnum) *DlElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *DlElement) Id(s string) *DlElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *DlElement) Slot(s string) *DlElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

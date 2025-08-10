@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type ProgressElement struct {
 	attributes progressAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type ProgressElement struct {
 // Spec Description: The progress element represents the completion progress of a task. The progress is either indeterminate, indicating that progress is being made but that it is not clear how much more work remains to be done before the task is complete (e.g. because the task is waiting for a remote host to respond), or the progress is a number in the range zero to a maximum, giving the fraction of work that has so far been completed.
 func Progress(children ...htemel.Node) *ProgressElement {
 	node := &ProgressElement{
-		children:   children,
+		children: children,
 		attributes: make(progressAttrs),
 	}
 
@@ -39,73 +38,131 @@ func ProgressIf(condition bool, children ...htemel.Node) *ProgressElement {
 	}
 }
 
-type ProgressAutocapitalizeAttrEnum string
+type ProgressAutocapitalizeEnum string
 
 const (
-	ProgressAutocapitalizeAttrEnumCharacters ProgressAutocapitalizeAttrEnum = "characters"
-	ProgressAutocapitalizeAttrEnumNone       ProgressAutocapitalizeAttrEnum = "none"
-	ProgressAutocapitalizeAttrEnumOff        ProgressAutocapitalizeAttrEnum = "off"
-	ProgressAutocapitalizeAttrEnumOn         ProgressAutocapitalizeAttrEnum = "on"
-	ProgressAutocapitalizeAttrEnumSentences  ProgressAutocapitalizeAttrEnum = "sentences"
-	ProgressAutocapitalizeAttrEnumWords      ProgressAutocapitalizeAttrEnum = "words"
+	ProgressAutocapitalizeEnumNone ProgressAutocapitalizeEnum = "none"
+	ProgressAutocapitalizeEnumOff ProgressAutocapitalizeEnum = "off"
+	ProgressAutocapitalizeEnumOn ProgressAutocapitalizeEnum = "on"
+	ProgressAutocapitalizeEnumSentences ProgressAutocapitalizeEnum = "sentences"
+	ProgressAutocapitalizeEnumWords ProgressAutocapitalizeEnum = "words"
+	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
 )
 
-type ProgressAutocorrectAttrEnum string
+type ProgressAutocorrectEnum string
 
 const (
-	ProgressAutocorrectAttrEnumOff ProgressAutocorrectAttrEnum = "off"
-	ProgressAutocorrectAttrEnumOn  ProgressAutocorrectAttrEnum = "on"
+	ProgressAutocorrectEnumOff ProgressAutocorrectEnum = "off"
+	ProgressAutocorrectEnumOn ProgressAutocorrectEnum = "on"
 )
 
-type ProgressContenteditableAttrEnum string
+type ProgressContenteditableEnum string
 
 const (
-	ProgressContenteditableAttrEnumFalse         ProgressContenteditableAttrEnum = "false"
-	ProgressContenteditableAttrEnumPlaintextOnly ProgressContenteditableAttrEnum = "plaintext-only"
-	ProgressContenteditableAttrEnumTrue          ProgressContenteditableAttrEnum = "true"
+	ProgressContenteditableEnumFalse ProgressContenteditableEnum = "false"
+	ProgressContenteditableEnumPlaintextOnly ProgressContenteditableEnum = "plaintext-only"
+	ProgressContenteditableEnumTrue ProgressContenteditableEnum = "true"
+)
+
+type ProgressDirEnum string
+
+const (
+	ProgressDirEnumAuto ProgressDirEnum = "auto"
+	ProgressDirEnumLtr ProgressDirEnum = "ltr"
+	ProgressDirEnumRtl ProgressDirEnum = "rtl"
+)
+
+type ProgressDraggableEnum string
+
+const (
+	ProgressDraggableEnumFalse ProgressDraggableEnum = "false"
+	ProgressDraggableEnumTrue ProgressDraggableEnum = "true"
+)
+
+type ProgressEnterkeyhintEnum string
+
+const (
+	ProgressEnterkeyhintEnumDone ProgressEnterkeyhintEnum = "done"
+	ProgressEnterkeyhintEnumEnter ProgressEnterkeyhintEnum = "enter"
+	ProgressEnterkeyhintEnumGo ProgressEnterkeyhintEnum = "go"
+	ProgressEnterkeyhintEnumNext ProgressEnterkeyhintEnum = "next"
+	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
+	ProgressEnterkeyhintEnumSearch ProgressEnterkeyhintEnum = "search"
+	ProgressEnterkeyhintEnumSend ProgressEnterkeyhintEnum = "send"
+)
+
+type ProgressHiddenEnum string
+
+const (
+	ProgressHiddenEnumHidden ProgressHiddenEnum = "hidden"
+	ProgressHiddenEnumUntilFound ProgressHiddenEnum = "until-found"
 )
 
 type progressAttrs map[string]any
 
-func (e *ProgressElement) Autocapitalize(a ProgressAutocapitalizeAttrEnum) *ProgressElement {
+func (e *ProgressElement) Autocapitalize(a ProgressAutocapitalizeEnum) *ProgressElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *ProgressElement) Autocorrect(a ProgressAutocorrectAttrEnum) *ProgressElement {
+func (e *ProgressElement) Autocorrect(a ProgressAutocorrectEnum) *ProgressElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *ProgressElement) Autofocus(b bool) *ProgressElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *ProgressElement) Class(s ...string) *ProgressElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *ProgressElement) Contenteditable(a ProgressContenteditableAttrEnum) *ProgressElement {
+func (e *ProgressElement) Contenteditable(a ProgressContenteditableEnum) *ProgressElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *ProgressElement) Dir(a ProgressDirEnum) *ProgressElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *ProgressElement) Draggable(a ProgressDraggableEnum) *ProgressElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *ProgressElement) Enterkeyhint(a ProgressEnterkeyhintEnum) *ProgressElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *ProgressElement) Hidden(a ProgressHiddenEnum) *ProgressElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *ProgressElement) Id(s string) *ProgressElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *ProgressElement) Slot(s string) *ProgressElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type DivElement struct {
 	attributes divAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type DivElement struct {
 // Spec Description: The div element has no special meaning at all. It represents its children. It can be used with the class, lang, and title attributes to mark up semantics common to a group of consecutive elements. It can also be used in a dl element, wrapping groups of dt and dd elements.
 func Div(children ...htemel.Node) *DivElement {
 	node := &DivElement{
-		children:   children,
+		children: children,
 		attributes: make(divAttrs),
 	}
 
@@ -39,73 +38,131 @@ func DivIf(condition bool, children ...htemel.Node) *DivElement {
 	}
 }
 
-type DivAutocapitalizeAttrEnum string
+type DivAutocapitalizeEnum string
 
 const (
-	DivAutocapitalizeAttrEnumOn         DivAutocapitalizeAttrEnum = "on"
-	DivAutocapitalizeAttrEnumSentences  DivAutocapitalizeAttrEnum = "sentences"
-	DivAutocapitalizeAttrEnumWords      DivAutocapitalizeAttrEnum = "words"
-	DivAutocapitalizeAttrEnumCharacters DivAutocapitalizeAttrEnum = "characters"
-	DivAutocapitalizeAttrEnumNone       DivAutocapitalizeAttrEnum = "none"
-	DivAutocapitalizeAttrEnumOff        DivAutocapitalizeAttrEnum = "off"
+	DivAutocapitalizeEnumWords DivAutocapitalizeEnum = "words"
+	DivAutocapitalizeEnumCharacters DivAutocapitalizeEnum = "characters"
+	DivAutocapitalizeEnumNone DivAutocapitalizeEnum = "none"
+	DivAutocapitalizeEnumOff DivAutocapitalizeEnum = "off"
+	DivAutocapitalizeEnumOn DivAutocapitalizeEnum = "on"
+	DivAutocapitalizeEnumSentences DivAutocapitalizeEnum = "sentences"
 )
 
-type DivAutocorrectAttrEnum string
+type DivAutocorrectEnum string
 
 const (
-	DivAutocorrectAttrEnumOff DivAutocorrectAttrEnum = "off"
-	DivAutocorrectAttrEnumOn  DivAutocorrectAttrEnum = "on"
+	DivAutocorrectEnumOn DivAutocorrectEnum = "on"
+	DivAutocorrectEnumOff DivAutocorrectEnum = "off"
 )
 
-type DivContenteditableAttrEnum string
+type DivContenteditableEnum string
 
 const (
-	DivContenteditableAttrEnumTrue          DivContenteditableAttrEnum = "true"
-	DivContenteditableAttrEnumFalse         DivContenteditableAttrEnum = "false"
-	DivContenteditableAttrEnumPlaintextOnly DivContenteditableAttrEnum = "plaintext-only"
+	DivContenteditableEnumFalse DivContenteditableEnum = "false"
+	DivContenteditableEnumPlaintextOnly DivContenteditableEnum = "plaintext-only"
+	DivContenteditableEnumTrue DivContenteditableEnum = "true"
+)
+
+type DivDirEnum string
+
+const (
+	DivDirEnumLtr DivDirEnum = "ltr"
+	DivDirEnumRtl DivDirEnum = "rtl"
+	DivDirEnumAuto DivDirEnum = "auto"
+)
+
+type DivDraggableEnum string
+
+const (
+	DivDraggableEnumFalse DivDraggableEnum = "false"
+	DivDraggableEnumTrue DivDraggableEnum = "true"
+)
+
+type DivEnterkeyhintEnum string
+
+const (
+	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
+	DivEnterkeyhintEnumSearch DivEnterkeyhintEnum = "search"
+	DivEnterkeyhintEnumSend DivEnterkeyhintEnum = "send"
+	DivEnterkeyhintEnumDone DivEnterkeyhintEnum = "done"
+	DivEnterkeyhintEnumEnter DivEnterkeyhintEnum = "enter"
+	DivEnterkeyhintEnumGo DivEnterkeyhintEnum = "go"
+	DivEnterkeyhintEnumNext DivEnterkeyhintEnum = "next"
+)
+
+type DivHiddenEnum string
+
+const (
+	DivHiddenEnumHidden DivHiddenEnum = "hidden"
+	DivHiddenEnumUntilFound DivHiddenEnum = "until-found"
 )
 
 type divAttrs map[string]any
 
-func (e *DivElement) Autocapitalize(a DivAutocapitalizeAttrEnum) *DivElement {
+func (e *DivElement) Autocapitalize(a DivAutocapitalizeEnum) *DivElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *DivElement) Autocorrect(a DivAutocorrectAttrEnum) *DivElement {
+func (e *DivElement) Autocorrect(a DivAutocorrectEnum) *DivElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *DivElement) Autofocus(b bool) *DivElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *DivElement) Class(s ...string) *DivElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *DivElement) Contenteditable(a DivContenteditableAttrEnum) *DivElement {
+func (e *DivElement) Contenteditable(a DivContenteditableEnum) *DivElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *DivElement) Dir(a DivDirEnum) *DivElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *DivElement) Draggable(a DivDraggableEnum) *DivElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *DivElement) Enterkeyhint(a DivEnterkeyhintEnum) *DivElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *DivElement) Hidden(a DivHiddenEnum) *DivElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *DivElement) Id(s string) *DivElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *DivElement) Slot(s string) *DivElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

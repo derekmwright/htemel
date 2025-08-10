@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type VideoElement struct {
 	attributes videoAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type VideoElement struct {
 // Spec Description: A video element is used for playing videos or movies, and audio files with captions.
 func Video(children ...htemel.Node) *VideoElement {
 	node := &VideoElement{
-		children:   children,
+		children: children,
 		attributes: make(videoAttrs),
 	}
 
@@ -39,73 +38,131 @@ func VideoIf(condition bool, children ...htemel.Node) *VideoElement {
 	}
 }
 
-type VideoAutocapitalizeAttrEnum string
+type VideoAutocapitalizeEnum string
 
 const (
-	VideoAutocapitalizeAttrEnumWords      VideoAutocapitalizeAttrEnum = "words"
-	VideoAutocapitalizeAttrEnumCharacters VideoAutocapitalizeAttrEnum = "characters"
-	VideoAutocapitalizeAttrEnumNone       VideoAutocapitalizeAttrEnum = "none"
-	VideoAutocapitalizeAttrEnumOff        VideoAutocapitalizeAttrEnum = "off"
-	VideoAutocapitalizeAttrEnumOn         VideoAutocapitalizeAttrEnum = "on"
-	VideoAutocapitalizeAttrEnumSentences  VideoAutocapitalizeAttrEnum = "sentences"
+	VideoAutocapitalizeEnumSentences VideoAutocapitalizeEnum = "sentences"
+	VideoAutocapitalizeEnumWords VideoAutocapitalizeEnum = "words"
+	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
+	VideoAutocapitalizeEnumNone VideoAutocapitalizeEnum = "none"
+	VideoAutocapitalizeEnumOff VideoAutocapitalizeEnum = "off"
+	VideoAutocapitalizeEnumOn VideoAutocapitalizeEnum = "on"
 )
 
-type VideoAutocorrectAttrEnum string
+type VideoAutocorrectEnum string
 
 const (
-	VideoAutocorrectAttrEnumOff VideoAutocorrectAttrEnum = "off"
-	VideoAutocorrectAttrEnumOn  VideoAutocorrectAttrEnum = "on"
+	VideoAutocorrectEnumOff VideoAutocorrectEnum = "off"
+	VideoAutocorrectEnumOn VideoAutocorrectEnum = "on"
 )
 
-type VideoContenteditableAttrEnum string
+type VideoContenteditableEnum string
 
 const (
-	VideoContenteditableAttrEnumTrue          VideoContenteditableAttrEnum = "true"
-	VideoContenteditableAttrEnumFalse         VideoContenteditableAttrEnum = "false"
-	VideoContenteditableAttrEnumPlaintextOnly VideoContenteditableAttrEnum = "plaintext-only"
+	VideoContenteditableEnumFalse VideoContenteditableEnum = "false"
+	VideoContenteditableEnumPlaintextOnly VideoContenteditableEnum = "plaintext-only"
+	VideoContenteditableEnumTrue VideoContenteditableEnum = "true"
+)
+
+type VideoDirEnum string
+
+const (
+	VideoDirEnumAuto VideoDirEnum = "auto"
+	VideoDirEnumLtr VideoDirEnum = "ltr"
+	VideoDirEnumRtl VideoDirEnum = "rtl"
+)
+
+type VideoDraggableEnum string
+
+const (
+	VideoDraggableEnumFalse VideoDraggableEnum = "false"
+	VideoDraggableEnumTrue VideoDraggableEnum = "true"
+)
+
+type VideoEnterkeyhintEnum string
+
+const (
+	VideoEnterkeyhintEnumDone VideoEnterkeyhintEnum = "done"
+	VideoEnterkeyhintEnumEnter VideoEnterkeyhintEnum = "enter"
+	VideoEnterkeyhintEnumGo VideoEnterkeyhintEnum = "go"
+	VideoEnterkeyhintEnumNext VideoEnterkeyhintEnum = "next"
+	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
+	VideoEnterkeyhintEnumSearch VideoEnterkeyhintEnum = "search"
+	VideoEnterkeyhintEnumSend VideoEnterkeyhintEnum = "send"
+)
+
+type VideoHiddenEnum string
+
+const (
+	VideoHiddenEnumHidden VideoHiddenEnum = "hidden"
+	VideoHiddenEnumUntilFound VideoHiddenEnum = "until-found"
 )
 
 type videoAttrs map[string]any
 
-func (e *VideoElement) Autocapitalize(a VideoAutocapitalizeAttrEnum) *VideoElement {
+func (e *VideoElement) Autocapitalize(a VideoAutocapitalizeEnum) *VideoElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *VideoElement) Autocorrect(a VideoAutocorrectAttrEnum) *VideoElement {
+func (e *VideoElement) Autocorrect(a VideoAutocorrectEnum) *VideoElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *VideoElement) Autofocus(b bool) *VideoElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *VideoElement) Class(s ...string) *VideoElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *VideoElement) Contenteditable(a VideoContenteditableAttrEnum) *VideoElement {
+func (e *VideoElement) Contenteditable(a VideoContenteditableEnum) *VideoElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *VideoElement) Dir(a VideoDirEnum) *VideoElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *VideoElement) Draggable(a VideoDraggableEnum) *VideoElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *VideoElement) Enterkeyhint(a VideoEnterkeyhintEnum) *VideoElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *VideoElement) Hidden(a VideoHiddenEnum) *VideoElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *VideoElement) Id(s string) *VideoElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *VideoElement) Slot(s string) *VideoElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

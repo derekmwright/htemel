@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type LiElement struct {
 	attributes liAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type LiElement struct {
 // Spec Description: The li element represents a list item. If its parent element is an ol, ul, or menu element, then the element is an item of the parent element's list, as defined for those elements. Otherwise, the list item has no defined list-related relationship to any other li element.
 func Li(children ...htemel.Node) *LiElement {
 	node := &LiElement{
-		children:   children,
+		children: children,
 		attributes: make(liAttrs),
 	}
 
@@ -39,73 +38,131 @@ func LiIf(condition bool, children ...htemel.Node) *LiElement {
 	}
 }
 
-type LiAutocapitalizeAttrEnum string
+type LiAutocapitalizeEnum string
 
 const (
-	LiAutocapitalizeAttrEnumCharacters LiAutocapitalizeAttrEnum = "characters"
-	LiAutocapitalizeAttrEnumNone       LiAutocapitalizeAttrEnum = "none"
-	LiAutocapitalizeAttrEnumOff        LiAutocapitalizeAttrEnum = "off"
-	LiAutocapitalizeAttrEnumOn         LiAutocapitalizeAttrEnum = "on"
-	LiAutocapitalizeAttrEnumSentences  LiAutocapitalizeAttrEnum = "sentences"
-	LiAutocapitalizeAttrEnumWords      LiAutocapitalizeAttrEnum = "words"
+	LiAutocapitalizeEnumOff LiAutocapitalizeEnum = "off"
+	LiAutocapitalizeEnumOn LiAutocapitalizeEnum = "on"
+	LiAutocapitalizeEnumSentences LiAutocapitalizeEnum = "sentences"
+	LiAutocapitalizeEnumWords LiAutocapitalizeEnum = "words"
+	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
+	LiAutocapitalizeEnumNone LiAutocapitalizeEnum = "none"
 )
 
-type LiAutocorrectAttrEnum string
+type LiAutocorrectEnum string
 
 const (
-	LiAutocorrectAttrEnumOff LiAutocorrectAttrEnum = "off"
-	LiAutocorrectAttrEnumOn  LiAutocorrectAttrEnum = "on"
+	LiAutocorrectEnumOff LiAutocorrectEnum = "off"
+	LiAutocorrectEnumOn LiAutocorrectEnum = "on"
 )
 
-type LiContenteditableAttrEnum string
+type LiContenteditableEnum string
 
 const (
-	LiContenteditableAttrEnumPlaintextOnly LiContenteditableAttrEnum = "plaintext-only"
-	LiContenteditableAttrEnumTrue          LiContenteditableAttrEnum = "true"
-	LiContenteditableAttrEnumFalse         LiContenteditableAttrEnum = "false"
+	LiContenteditableEnumFalse LiContenteditableEnum = "false"
+	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
+	LiContenteditableEnumTrue LiContenteditableEnum = "true"
+)
+
+type LiDirEnum string
+
+const (
+	LiDirEnumAuto LiDirEnum = "auto"
+	LiDirEnumLtr LiDirEnum = "ltr"
+	LiDirEnumRtl LiDirEnum = "rtl"
+)
+
+type LiDraggableEnum string
+
+const (
+	LiDraggableEnumFalse LiDraggableEnum = "false"
+	LiDraggableEnumTrue LiDraggableEnum = "true"
+)
+
+type LiEnterkeyhintEnum string
+
+const (
+	LiEnterkeyhintEnumNext LiEnterkeyhintEnum = "next"
+	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
+	LiEnterkeyhintEnumSearch LiEnterkeyhintEnum = "search"
+	LiEnterkeyhintEnumSend LiEnterkeyhintEnum = "send"
+	LiEnterkeyhintEnumDone LiEnterkeyhintEnum = "done"
+	LiEnterkeyhintEnumEnter LiEnterkeyhintEnum = "enter"
+	LiEnterkeyhintEnumGo LiEnterkeyhintEnum = "go"
+)
+
+type LiHiddenEnum string
+
+const (
+	LiHiddenEnumHidden LiHiddenEnum = "hidden"
+	LiHiddenEnumUntilFound LiHiddenEnum = "until-found"
 )
 
 type liAttrs map[string]any
 
-func (e *LiElement) Autocapitalize(a LiAutocapitalizeAttrEnum) *LiElement {
+func (e *LiElement) Autocapitalize(a LiAutocapitalizeEnum) *LiElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *LiElement) Autocorrect(a LiAutocorrectAttrEnum) *LiElement {
+func (e *LiElement) Autocorrect(a LiAutocorrectEnum) *LiElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *LiElement) Autofocus(b bool) *LiElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *LiElement) Class(s ...string) *LiElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *LiElement) Contenteditable(a LiContenteditableAttrEnum) *LiElement {
+func (e *LiElement) Contenteditable(a LiContenteditableEnum) *LiElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *LiElement) Dir(a LiDirEnum) *LiElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *LiElement) Draggable(a LiDraggableEnum) *LiElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *LiElement) Enterkeyhint(a LiEnterkeyhintEnum) *LiElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *LiElement) Hidden(a LiHiddenEnum) *LiElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *LiElement) Id(s string) *LiElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *LiElement) Slot(s string) *LiElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

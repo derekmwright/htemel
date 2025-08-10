@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type TimeElement struct {
 	attributes timeAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type TimeElement struct {
 // Spec Description: The time element represents its contents, along with a machine-readable form of those contents in the datetime attribute. The kind of content is limited to various kinds of dates, times, time-zone offsets, and durations, as described below.
 func Time(children ...htemel.Node) *TimeElement {
 	node := &TimeElement{
-		children:   children,
+		children: children,
 		attributes: make(timeAttrs),
 	}
 
@@ -39,73 +38,131 @@ func TimeIf(condition bool, children ...htemel.Node) *TimeElement {
 	}
 }
 
-type TimeAutocapitalizeAttrEnum string
+type TimeAutocapitalizeEnum string
 
 const (
-	TimeAutocapitalizeAttrEnumSentences  TimeAutocapitalizeAttrEnum = "sentences"
-	TimeAutocapitalizeAttrEnumWords      TimeAutocapitalizeAttrEnum = "words"
-	TimeAutocapitalizeAttrEnumCharacters TimeAutocapitalizeAttrEnum = "characters"
-	TimeAutocapitalizeAttrEnumNone       TimeAutocapitalizeAttrEnum = "none"
-	TimeAutocapitalizeAttrEnumOff        TimeAutocapitalizeAttrEnum = "off"
-	TimeAutocapitalizeAttrEnumOn         TimeAutocapitalizeAttrEnum = "on"
+	TimeAutocapitalizeEnumNone TimeAutocapitalizeEnum = "none"
+	TimeAutocapitalizeEnumOff TimeAutocapitalizeEnum = "off"
+	TimeAutocapitalizeEnumOn TimeAutocapitalizeEnum = "on"
+	TimeAutocapitalizeEnumSentences TimeAutocapitalizeEnum = "sentences"
+	TimeAutocapitalizeEnumWords TimeAutocapitalizeEnum = "words"
+	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 )
 
-type TimeAutocorrectAttrEnum string
+type TimeAutocorrectEnum string
 
 const (
-	TimeAutocorrectAttrEnumOn  TimeAutocorrectAttrEnum = "on"
-	TimeAutocorrectAttrEnumOff TimeAutocorrectAttrEnum = "off"
+	TimeAutocorrectEnumOff TimeAutocorrectEnum = "off"
+	TimeAutocorrectEnumOn TimeAutocorrectEnum = "on"
 )
 
-type TimeContenteditableAttrEnum string
+type TimeContenteditableEnum string
 
 const (
-	TimeContenteditableAttrEnumFalse         TimeContenteditableAttrEnum = "false"
-	TimeContenteditableAttrEnumPlaintextOnly TimeContenteditableAttrEnum = "plaintext-only"
-	TimeContenteditableAttrEnumTrue          TimeContenteditableAttrEnum = "true"
+	TimeContenteditableEnumFalse TimeContenteditableEnum = "false"
+	TimeContenteditableEnumPlaintextOnly TimeContenteditableEnum = "plaintext-only"
+	TimeContenteditableEnumTrue TimeContenteditableEnum = "true"
+)
+
+type TimeDirEnum string
+
+const (
+	TimeDirEnumRtl TimeDirEnum = "rtl"
+	TimeDirEnumAuto TimeDirEnum = "auto"
+	TimeDirEnumLtr TimeDirEnum = "ltr"
+)
+
+type TimeDraggableEnum string
+
+const (
+	TimeDraggableEnumFalse TimeDraggableEnum = "false"
+	TimeDraggableEnumTrue TimeDraggableEnum = "true"
+)
+
+type TimeEnterkeyhintEnum string
+
+const (
+	TimeEnterkeyhintEnumSend TimeEnterkeyhintEnum = "send"
+	TimeEnterkeyhintEnumDone TimeEnterkeyhintEnum = "done"
+	TimeEnterkeyhintEnumEnter TimeEnterkeyhintEnum = "enter"
+	TimeEnterkeyhintEnumGo TimeEnterkeyhintEnum = "go"
+	TimeEnterkeyhintEnumNext TimeEnterkeyhintEnum = "next"
+	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
+	TimeEnterkeyhintEnumSearch TimeEnterkeyhintEnum = "search"
+)
+
+type TimeHiddenEnum string
+
+const (
+	TimeHiddenEnumUntilFound TimeHiddenEnum = "until-found"
+	TimeHiddenEnumHidden TimeHiddenEnum = "hidden"
 )
 
 type timeAttrs map[string]any
 
-func (e *TimeElement) Autocapitalize(a TimeAutocapitalizeAttrEnum) *TimeElement {
+func (e *TimeElement) Autocapitalize(a TimeAutocapitalizeEnum) *TimeElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *TimeElement) Autocorrect(a TimeAutocorrectAttrEnum) *TimeElement {
+func (e *TimeElement) Autocorrect(a TimeAutocorrectEnum) *TimeElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *TimeElement) Autofocus(b bool) *TimeElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *TimeElement) Class(s ...string) *TimeElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *TimeElement) Contenteditable(a TimeContenteditableAttrEnum) *TimeElement {
+func (e *TimeElement) Contenteditable(a TimeContenteditableEnum) *TimeElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *TimeElement) Dir(a TimeDirEnum) *TimeElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *TimeElement) Draggable(a TimeDraggableEnum) *TimeElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *TimeElement) Enterkeyhint(a TimeEnterkeyhintEnum) *TimeElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *TimeElement) Hidden(a TimeHiddenEnum) *TimeElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *TimeElement) Id(s string) *TimeElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *TimeElement) Slot(s string) *TimeElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

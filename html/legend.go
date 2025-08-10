@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type LegendElement struct {
 	attributes legendAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type LegendElement struct {
 // Spec Description: The legend element represents a caption for the rest of the contents of the legend element's parent fieldset element, if any. Otherwise, if the legend has a parent optgroup element, then the legend represents the optgroup's label.
 func Legend(children ...htemel.Node) *LegendElement {
 	node := &LegendElement{
-		children:   children,
+		children: children,
 		attributes: make(legendAttrs),
 	}
 
@@ -39,73 +38,131 @@ func LegendIf(condition bool, children ...htemel.Node) *LegendElement {
 	}
 }
 
-type LegendAutocapitalizeAttrEnum string
+type LegendAutocapitalizeEnum string
 
 const (
-	LegendAutocapitalizeAttrEnumCharacters LegendAutocapitalizeAttrEnum = "characters"
-	LegendAutocapitalizeAttrEnumNone       LegendAutocapitalizeAttrEnum = "none"
-	LegendAutocapitalizeAttrEnumOff        LegendAutocapitalizeAttrEnum = "off"
-	LegendAutocapitalizeAttrEnumOn         LegendAutocapitalizeAttrEnum = "on"
-	LegendAutocapitalizeAttrEnumSentences  LegendAutocapitalizeAttrEnum = "sentences"
-	LegendAutocapitalizeAttrEnumWords      LegendAutocapitalizeAttrEnum = "words"
+	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
+	LegendAutocapitalizeEnumNone LegendAutocapitalizeEnum = "none"
+	LegendAutocapitalizeEnumOff LegendAutocapitalizeEnum = "off"
+	LegendAutocapitalizeEnumOn LegendAutocapitalizeEnum = "on"
+	LegendAutocapitalizeEnumSentences LegendAutocapitalizeEnum = "sentences"
+	LegendAutocapitalizeEnumWords LegendAutocapitalizeEnum = "words"
 )
 
-type LegendAutocorrectAttrEnum string
+type LegendAutocorrectEnum string
 
 const (
-	LegendAutocorrectAttrEnumOff LegendAutocorrectAttrEnum = "off"
-	LegendAutocorrectAttrEnumOn  LegendAutocorrectAttrEnum = "on"
+	LegendAutocorrectEnumOff LegendAutocorrectEnum = "off"
+	LegendAutocorrectEnumOn LegendAutocorrectEnum = "on"
 )
 
-type LegendContenteditableAttrEnum string
+type LegendContenteditableEnum string
 
 const (
-	LegendContenteditableAttrEnumFalse         LegendContenteditableAttrEnum = "false"
-	LegendContenteditableAttrEnumPlaintextOnly LegendContenteditableAttrEnum = "plaintext-only"
-	LegendContenteditableAttrEnumTrue          LegendContenteditableAttrEnum = "true"
+	LegendContenteditableEnumFalse LegendContenteditableEnum = "false"
+	LegendContenteditableEnumPlaintextOnly LegendContenteditableEnum = "plaintext-only"
+	LegendContenteditableEnumTrue LegendContenteditableEnum = "true"
+)
+
+type LegendDirEnum string
+
+const (
+	LegendDirEnumAuto LegendDirEnum = "auto"
+	LegendDirEnumLtr LegendDirEnum = "ltr"
+	LegendDirEnumRtl LegendDirEnum = "rtl"
+)
+
+type LegendDraggableEnum string
+
+const (
+	LegendDraggableEnumTrue LegendDraggableEnum = "true"
+	LegendDraggableEnumFalse LegendDraggableEnum = "false"
+)
+
+type LegendEnterkeyhintEnum string
+
+const (
+	LegendEnterkeyhintEnumDone LegendEnterkeyhintEnum = "done"
+	LegendEnterkeyhintEnumEnter LegendEnterkeyhintEnum = "enter"
+	LegendEnterkeyhintEnumGo LegendEnterkeyhintEnum = "go"
+	LegendEnterkeyhintEnumNext LegendEnterkeyhintEnum = "next"
+	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
+	LegendEnterkeyhintEnumSearch LegendEnterkeyhintEnum = "search"
+	LegendEnterkeyhintEnumSend LegendEnterkeyhintEnum = "send"
+)
+
+type LegendHiddenEnum string
+
+const (
+	LegendHiddenEnumHidden LegendHiddenEnum = "hidden"
+	LegendHiddenEnumUntilFound LegendHiddenEnum = "until-found"
 )
 
 type legendAttrs map[string]any
 
-func (e *LegendElement) Autocapitalize(a LegendAutocapitalizeAttrEnum) *LegendElement {
+func (e *LegendElement) Autocapitalize(a LegendAutocapitalizeEnum) *LegendElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *LegendElement) Autocorrect(a LegendAutocorrectAttrEnum) *LegendElement {
+func (e *LegendElement) Autocorrect(a LegendAutocorrectEnum) *LegendElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *LegendElement) Autofocus(b bool) *LegendElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *LegendElement) Class(s ...string) *LegendElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *LegendElement) Contenteditable(a LegendContenteditableAttrEnum) *LegendElement {
+func (e *LegendElement) Contenteditable(a LegendContenteditableEnum) *LegendElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *LegendElement) Dir(a LegendDirEnum) *LegendElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *LegendElement) Draggable(a LegendDraggableEnum) *LegendElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *LegendElement) Enterkeyhint(a LegendEnterkeyhintEnum) *LegendElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *LegendElement) Hidden(a LegendHiddenEnum) *LegendElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *LegendElement) Id(s string) *LegendElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *LegendElement) Slot(s string) *LegendElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

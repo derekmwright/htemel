@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type DialogElement struct {
 	attributes dialogAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type DialogElement struct {
 // Spec Description: The dialog element represents a transitory part of an application, in the form of a small window ("dialog box"), which the user interacts with to perform a task or gather information. Once the user is done, the dialog can be automatically closed by the application, or manually closed by the user.
 func Dialog(children ...htemel.Node) *DialogElement {
 	node := &DialogElement{
-		children:   children,
+		children: children,
 		attributes: make(dialogAttrs),
 	}
 
@@ -39,73 +38,131 @@ func DialogIf(condition bool, children ...htemel.Node) *DialogElement {
 	}
 }
 
-type DialogAutocapitalizeAttrEnum string
+type DialogAutocapitalizeEnum string
 
 const (
-	DialogAutocapitalizeAttrEnumCharacters DialogAutocapitalizeAttrEnum = "characters"
-	DialogAutocapitalizeAttrEnumNone       DialogAutocapitalizeAttrEnum = "none"
-	DialogAutocapitalizeAttrEnumOff        DialogAutocapitalizeAttrEnum = "off"
-	DialogAutocapitalizeAttrEnumOn         DialogAutocapitalizeAttrEnum = "on"
-	DialogAutocapitalizeAttrEnumSentences  DialogAutocapitalizeAttrEnum = "sentences"
-	DialogAutocapitalizeAttrEnumWords      DialogAutocapitalizeAttrEnum = "words"
+	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
+	DialogAutocapitalizeEnumNone DialogAutocapitalizeEnum = "none"
+	DialogAutocapitalizeEnumOff DialogAutocapitalizeEnum = "off"
+	DialogAutocapitalizeEnumOn DialogAutocapitalizeEnum = "on"
+	DialogAutocapitalizeEnumSentences DialogAutocapitalizeEnum = "sentences"
+	DialogAutocapitalizeEnumWords DialogAutocapitalizeEnum = "words"
 )
 
-type DialogAutocorrectAttrEnum string
+type DialogAutocorrectEnum string
 
 const (
-	DialogAutocorrectAttrEnumOn  DialogAutocorrectAttrEnum = "on"
-	DialogAutocorrectAttrEnumOff DialogAutocorrectAttrEnum = "off"
+	DialogAutocorrectEnumOn DialogAutocorrectEnum = "on"
+	DialogAutocorrectEnumOff DialogAutocorrectEnum = "off"
 )
 
-type DialogContenteditableAttrEnum string
+type DialogContenteditableEnum string
 
 const (
-	DialogContenteditableAttrEnumFalse         DialogContenteditableAttrEnum = "false"
-	DialogContenteditableAttrEnumPlaintextOnly DialogContenteditableAttrEnum = "plaintext-only"
-	DialogContenteditableAttrEnumTrue          DialogContenteditableAttrEnum = "true"
+	DialogContenteditableEnumPlaintextOnly DialogContenteditableEnum = "plaintext-only"
+	DialogContenteditableEnumTrue DialogContenteditableEnum = "true"
+	DialogContenteditableEnumFalse DialogContenteditableEnum = "false"
+)
+
+type DialogDirEnum string
+
+const (
+	DialogDirEnumRtl DialogDirEnum = "rtl"
+	DialogDirEnumAuto DialogDirEnum = "auto"
+	DialogDirEnumLtr DialogDirEnum = "ltr"
+)
+
+type DialogDraggableEnum string
+
+const (
+	DialogDraggableEnumFalse DialogDraggableEnum = "false"
+	DialogDraggableEnumTrue DialogDraggableEnum = "true"
+)
+
+type DialogEnterkeyhintEnum string
+
+const (
+	DialogEnterkeyhintEnumDone DialogEnterkeyhintEnum = "done"
+	DialogEnterkeyhintEnumEnter DialogEnterkeyhintEnum = "enter"
+	DialogEnterkeyhintEnumGo DialogEnterkeyhintEnum = "go"
+	DialogEnterkeyhintEnumNext DialogEnterkeyhintEnum = "next"
+	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
+	DialogEnterkeyhintEnumSearch DialogEnterkeyhintEnum = "search"
+	DialogEnterkeyhintEnumSend DialogEnterkeyhintEnum = "send"
+)
+
+type DialogHiddenEnum string
+
+const (
+	DialogHiddenEnumHidden DialogHiddenEnum = "hidden"
+	DialogHiddenEnumUntilFound DialogHiddenEnum = "until-found"
 )
 
 type dialogAttrs map[string]any
 
-func (e *DialogElement) Autocapitalize(a DialogAutocapitalizeAttrEnum) *DialogElement {
+func (e *DialogElement) Autocapitalize(a DialogAutocapitalizeEnum) *DialogElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *DialogElement) Autocorrect(a DialogAutocorrectAttrEnum) *DialogElement {
+func (e *DialogElement) Autocorrect(a DialogAutocorrectEnum) *DialogElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *DialogElement) Autofocus(b bool) *DialogElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *DialogElement) Class(s ...string) *DialogElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *DialogElement) Contenteditable(a DialogContenteditableAttrEnum) *DialogElement {
+func (e *DialogElement) Contenteditable(a DialogContenteditableEnum) *DialogElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *DialogElement) Dir(a DialogDirEnum) *DialogElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *DialogElement) Draggable(a DialogDraggableEnum) *DialogElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *DialogElement) Enterkeyhint(a DialogEnterkeyhintEnum) *DialogElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *DialogElement) Hidden(a DialogHiddenEnum) *DialogElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *DialogElement) Id(s string) *DialogElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *DialogElement) Slot(s string) *DialogElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

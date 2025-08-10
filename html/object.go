@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type ObjectElement struct {
 	attributes objectAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type ObjectElement struct {
 // Spec Description: The object element can represent an external resource, which, depending on the type of the resource, will either be treated as an image or as a child navigable.
 func Object(children ...htemel.Node) *ObjectElement {
 	node := &ObjectElement{
-		children:   children,
+		children: children,
 		attributes: make(objectAttrs),
 	}
 
@@ -39,73 +38,131 @@ func ObjectIf(condition bool, children ...htemel.Node) *ObjectElement {
 	}
 }
 
-type ObjectAutocapitalizeAttrEnum string
+type ObjectAutocapitalizeEnum string
 
 const (
-	ObjectAutocapitalizeAttrEnumCharacters ObjectAutocapitalizeAttrEnum = "characters"
-	ObjectAutocapitalizeAttrEnumNone       ObjectAutocapitalizeAttrEnum = "none"
-	ObjectAutocapitalizeAttrEnumOff        ObjectAutocapitalizeAttrEnum = "off"
-	ObjectAutocapitalizeAttrEnumOn         ObjectAutocapitalizeAttrEnum = "on"
-	ObjectAutocapitalizeAttrEnumSentences  ObjectAutocapitalizeAttrEnum = "sentences"
-	ObjectAutocapitalizeAttrEnumWords      ObjectAutocapitalizeAttrEnum = "words"
+	ObjectAutocapitalizeEnumOn ObjectAutocapitalizeEnum = "on"
+	ObjectAutocapitalizeEnumSentences ObjectAutocapitalizeEnum = "sentences"
+	ObjectAutocapitalizeEnumWords ObjectAutocapitalizeEnum = "words"
+	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
+	ObjectAutocapitalizeEnumNone ObjectAutocapitalizeEnum = "none"
+	ObjectAutocapitalizeEnumOff ObjectAutocapitalizeEnum = "off"
 )
 
-type ObjectAutocorrectAttrEnum string
+type ObjectAutocorrectEnum string
 
 const (
-	ObjectAutocorrectAttrEnumOff ObjectAutocorrectAttrEnum = "off"
-	ObjectAutocorrectAttrEnumOn  ObjectAutocorrectAttrEnum = "on"
+	ObjectAutocorrectEnumOff ObjectAutocorrectEnum = "off"
+	ObjectAutocorrectEnumOn ObjectAutocorrectEnum = "on"
 )
 
-type ObjectContenteditableAttrEnum string
+type ObjectContenteditableEnum string
 
 const (
-	ObjectContenteditableAttrEnumFalse         ObjectContenteditableAttrEnum = "false"
-	ObjectContenteditableAttrEnumPlaintextOnly ObjectContenteditableAttrEnum = "plaintext-only"
-	ObjectContenteditableAttrEnumTrue          ObjectContenteditableAttrEnum = "true"
+	ObjectContenteditableEnumFalse ObjectContenteditableEnum = "false"
+	ObjectContenteditableEnumPlaintextOnly ObjectContenteditableEnum = "plaintext-only"
+	ObjectContenteditableEnumTrue ObjectContenteditableEnum = "true"
+)
+
+type ObjectDirEnum string
+
+const (
+	ObjectDirEnumAuto ObjectDirEnum = "auto"
+	ObjectDirEnumLtr ObjectDirEnum = "ltr"
+	ObjectDirEnumRtl ObjectDirEnum = "rtl"
+)
+
+type ObjectDraggableEnum string
+
+const (
+	ObjectDraggableEnumFalse ObjectDraggableEnum = "false"
+	ObjectDraggableEnumTrue ObjectDraggableEnum = "true"
+)
+
+type ObjectEnterkeyhintEnum string
+
+const (
+	ObjectEnterkeyhintEnumSend ObjectEnterkeyhintEnum = "send"
+	ObjectEnterkeyhintEnumDone ObjectEnterkeyhintEnum = "done"
+	ObjectEnterkeyhintEnumEnter ObjectEnterkeyhintEnum = "enter"
+	ObjectEnterkeyhintEnumGo ObjectEnterkeyhintEnum = "go"
+	ObjectEnterkeyhintEnumNext ObjectEnterkeyhintEnum = "next"
+	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
+	ObjectEnterkeyhintEnumSearch ObjectEnterkeyhintEnum = "search"
+)
+
+type ObjectHiddenEnum string
+
+const (
+	ObjectHiddenEnumHidden ObjectHiddenEnum = "hidden"
+	ObjectHiddenEnumUntilFound ObjectHiddenEnum = "until-found"
 )
 
 type objectAttrs map[string]any
 
-func (e *ObjectElement) Autocapitalize(a ObjectAutocapitalizeAttrEnum) *ObjectElement {
+func (e *ObjectElement) Autocapitalize(a ObjectAutocapitalizeEnum) *ObjectElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *ObjectElement) Autocorrect(a ObjectAutocorrectAttrEnum) *ObjectElement {
+func (e *ObjectElement) Autocorrect(a ObjectAutocorrectEnum) *ObjectElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *ObjectElement) Autofocus(b bool) *ObjectElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *ObjectElement) Class(s ...string) *ObjectElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *ObjectElement) Contenteditable(a ObjectContenteditableAttrEnum) *ObjectElement {
+func (e *ObjectElement) Contenteditable(a ObjectContenteditableEnum) *ObjectElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *ObjectElement) Dir(a ObjectDirEnum) *ObjectElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *ObjectElement) Draggable(a ObjectDraggableEnum) *ObjectElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *ObjectElement) Enterkeyhint(a ObjectEnterkeyhintEnum) *ObjectElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *ObjectElement) Hidden(a ObjectHiddenEnum) *ObjectElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *ObjectElement) Id(s string) *ObjectElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *ObjectElement) Slot(s string) *ObjectElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

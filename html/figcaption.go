@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type FigcaptionElement struct {
 	attributes figcaptionAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type FigcaptionElement struct {
 // Spec Description: The figcaption element represents a caption or legend for the rest of the contents of the figcaption element's parent figure element, if any.
 func Figcaption(children ...htemel.Node) *FigcaptionElement {
 	node := &FigcaptionElement{
-		children:   children,
+		children: children,
 		attributes: make(figcaptionAttrs),
 	}
 
@@ -39,73 +38,131 @@ func FigcaptionIf(condition bool, children ...htemel.Node) *FigcaptionElement {
 	}
 }
 
-type FigcaptionAutocapitalizeAttrEnum string
+type FigcaptionAutocapitalizeEnum string
 
 const (
-	FigcaptionAutocapitalizeAttrEnumWords      FigcaptionAutocapitalizeAttrEnum = "words"
-	FigcaptionAutocapitalizeAttrEnumCharacters FigcaptionAutocapitalizeAttrEnum = "characters"
-	FigcaptionAutocapitalizeAttrEnumNone       FigcaptionAutocapitalizeAttrEnum = "none"
-	FigcaptionAutocapitalizeAttrEnumOff        FigcaptionAutocapitalizeAttrEnum = "off"
-	FigcaptionAutocapitalizeAttrEnumOn         FigcaptionAutocapitalizeAttrEnum = "on"
-	FigcaptionAutocapitalizeAttrEnumSentences  FigcaptionAutocapitalizeAttrEnum = "sentences"
+	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
+	FigcaptionAutocapitalizeEnumNone FigcaptionAutocapitalizeEnum = "none"
+	FigcaptionAutocapitalizeEnumOff FigcaptionAutocapitalizeEnum = "off"
+	FigcaptionAutocapitalizeEnumOn FigcaptionAutocapitalizeEnum = "on"
+	FigcaptionAutocapitalizeEnumSentences FigcaptionAutocapitalizeEnum = "sentences"
+	FigcaptionAutocapitalizeEnumWords FigcaptionAutocapitalizeEnum = "words"
 )
 
-type FigcaptionAutocorrectAttrEnum string
+type FigcaptionAutocorrectEnum string
 
 const (
-	FigcaptionAutocorrectAttrEnumOff FigcaptionAutocorrectAttrEnum = "off"
-	FigcaptionAutocorrectAttrEnumOn  FigcaptionAutocorrectAttrEnum = "on"
+	FigcaptionAutocorrectEnumOff FigcaptionAutocorrectEnum = "off"
+	FigcaptionAutocorrectEnumOn FigcaptionAutocorrectEnum = "on"
 )
 
-type FigcaptionContenteditableAttrEnum string
+type FigcaptionContenteditableEnum string
 
 const (
-	FigcaptionContenteditableAttrEnumFalse         FigcaptionContenteditableAttrEnum = "false"
-	FigcaptionContenteditableAttrEnumPlaintextOnly FigcaptionContenteditableAttrEnum = "plaintext-only"
-	FigcaptionContenteditableAttrEnumTrue          FigcaptionContenteditableAttrEnum = "true"
+	FigcaptionContenteditableEnumFalse FigcaptionContenteditableEnum = "false"
+	FigcaptionContenteditableEnumPlaintextOnly FigcaptionContenteditableEnum = "plaintext-only"
+	FigcaptionContenteditableEnumTrue FigcaptionContenteditableEnum = "true"
+)
+
+type FigcaptionDirEnum string
+
+const (
+	FigcaptionDirEnumLtr FigcaptionDirEnum = "ltr"
+	FigcaptionDirEnumRtl FigcaptionDirEnum = "rtl"
+	FigcaptionDirEnumAuto FigcaptionDirEnum = "auto"
+)
+
+type FigcaptionDraggableEnum string
+
+const (
+	FigcaptionDraggableEnumFalse FigcaptionDraggableEnum = "false"
+	FigcaptionDraggableEnumTrue FigcaptionDraggableEnum = "true"
+)
+
+type FigcaptionEnterkeyhintEnum string
+
+const (
+	FigcaptionEnterkeyhintEnumSend FigcaptionEnterkeyhintEnum = "send"
+	FigcaptionEnterkeyhintEnumDone FigcaptionEnterkeyhintEnum = "done"
+	FigcaptionEnterkeyhintEnumEnter FigcaptionEnterkeyhintEnum = "enter"
+	FigcaptionEnterkeyhintEnumGo FigcaptionEnterkeyhintEnum = "go"
+	FigcaptionEnterkeyhintEnumNext FigcaptionEnterkeyhintEnum = "next"
+	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
+	FigcaptionEnterkeyhintEnumSearch FigcaptionEnterkeyhintEnum = "search"
+)
+
+type FigcaptionHiddenEnum string
+
+const (
+	FigcaptionHiddenEnumHidden FigcaptionHiddenEnum = "hidden"
+	FigcaptionHiddenEnumUntilFound FigcaptionHiddenEnum = "until-found"
 )
 
 type figcaptionAttrs map[string]any
 
-func (e *FigcaptionElement) Autocapitalize(a FigcaptionAutocapitalizeAttrEnum) *FigcaptionElement {
+func (e *FigcaptionElement) Autocapitalize(a FigcaptionAutocapitalizeEnum) *FigcaptionElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *FigcaptionElement) Autocorrect(a FigcaptionAutocorrectAttrEnum) *FigcaptionElement {
+func (e *FigcaptionElement) Autocorrect(a FigcaptionAutocorrectEnum) *FigcaptionElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *FigcaptionElement) Autofocus(b bool) *FigcaptionElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *FigcaptionElement) Class(s ...string) *FigcaptionElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *FigcaptionElement) Contenteditable(a FigcaptionContenteditableAttrEnum) *FigcaptionElement {
+func (e *FigcaptionElement) Contenteditable(a FigcaptionContenteditableEnum) *FigcaptionElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *FigcaptionElement) Dir(a FigcaptionDirEnum) *FigcaptionElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *FigcaptionElement) Draggable(a FigcaptionDraggableEnum) *FigcaptionElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *FigcaptionElement) Enterkeyhint(a FigcaptionEnterkeyhintEnum) *FigcaptionElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *FigcaptionElement) Hidden(a FigcaptionHiddenEnum) *FigcaptionElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *FigcaptionElement) Id(s string) *FigcaptionElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *FigcaptionElement) Slot(s string) *FigcaptionElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

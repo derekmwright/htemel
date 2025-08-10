@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type BrElement struct {
 	attributes brAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type BrElement struct {
 // Spec Description: The br element represents a line break.
 func Br(children ...htemel.Node) *BrElement {
 	node := &BrElement{
-		children:   children,
+		children: children,
 		attributes: make(brAttrs),
 	}
 
@@ -39,73 +38,131 @@ func BrIf(condition bool, children ...htemel.Node) *BrElement {
 	}
 }
 
-type BrAutocapitalizeAttrEnum string
+type BrAutocapitalizeEnum string
 
 const (
-	BrAutocapitalizeAttrEnumWords      BrAutocapitalizeAttrEnum = "words"
-	BrAutocapitalizeAttrEnumCharacters BrAutocapitalizeAttrEnum = "characters"
-	BrAutocapitalizeAttrEnumNone       BrAutocapitalizeAttrEnum = "none"
-	BrAutocapitalizeAttrEnumOff        BrAutocapitalizeAttrEnum = "off"
-	BrAutocapitalizeAttrEnumOn         BrAutocapitalizeAttrEnum = "on"
-	BrAutocapitalizeAttrEnumSentences  BrAutocapitalizeAttrEnum = "sentences"
+	BrAutocapitalizeEnumWords BrAutocapitalizeEnum = "words"
+	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
+	BrAutocapitalizeEnumNone BrAutocapitalizeEnum = "none"
+	BrAutocapitalizeEnumOff BrAutocapitalizeEnum = "off"
+	BrAutocapitalizeEnumOn BrAutocapitalizeEnum = "on"
+	BrAutocapitalizeEnumSentences BrAutocapitalizeEnum = "sentences"
 )
 
-type BrAutocorrectAttrEnum string
+type BrAutocorrectEnum string
 
 const (
-	BrAutocorrectAttrEnumOff BrAutocorrectAttrEnum = "off"
-	BrAutocorrectAttrEnumOn  BrAutocorrectAttrEnum = "on"
+	BrAutocorrectEnumOff BrAutocorrectEnum = "off"
+	BrAutocorrectEnumOn BrAutocorrectEnum = "on"
 )
 
-type BrContenteditableAttrEnum string
+type BrContenteditableEnum string
 
 const (
-	BrContenteditableAttrEnumFalse         BrContenteditableAttrEnum = "false"
-	BrContenteditableAttrEnumPlaintextOnly BrContenteditableAttrEnum = "plaintext-only"
-	BrContenteditableAttrEnumTrue          BrContenteditableAttrEnum = "true"
+	BrContenteditableEnumPlaintextOnly BrContenteditableEnum = "plaintext-only"
+	BrContenteditableEnumTrue BrContenteditableEnum = "true"
+	BrContenteditableEnumFalse BrContenteditableEnum = "false"
+)
+
+type BrDirEnum string
+
+const (
+	BrDirEnumAuto BrDirEnum = "auto"
+	BrDirEnumLtr BrDirEnum = "ltr"
+	BrDirEnumRtl BrDirEnum = "rtl"
+)
+
+type BrDraggableEnum string
+
+const (
+	BrDraggableEnumFalse BrDraggableEnum = "false"
+	BrDraggableEnumTrue BrDraggableEnum = "true"
+)
+
+type BrEnterkeyhintEnum string
+
+const (
+	BrEnterkeyhintEnumDone BrEnterkeyhintEnum = "done"
+	BrEnterkeyhintEnumEnter BrEnterkeyhintEnum = "enter"
+	BrEnterkeyhintEnumGo BrEnterkeyhintEnum = "go"
+	BrEnterkeyhintEnumNext BrEnterkeyhintEnum = "next"
+	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
+	BrEnterkeyhintEnumSearch BrEnterkeyhintEnum = "search"
+	BrEnterkeyhintEnumSend BrEnterkeyhintEnum = "send"
+)
+
+type BrHiddenEnum string
+
+const (
+	BrHiddenEnumHidden BrHiddenEnum = "hidden"
+	BrHiddenEnumUntilFound BrHiddenEnum = "until-found"
 )
 
 type brAttrs map[string]any
 
-func (e *BrElement) Autocapitalize(a BrAutocapitalizeAttrEnum) *BrElement {
+func (e *BrElement) Autocapitalize(a BrAutocapitalizeEnum) *BrElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *BrElement) Autocorrect(a BrAutocorrectAttrEnum) *BrElement {
+func (e *BrElement) Autocorrect(a BrAutocorrectEnum) *BrElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *BrElement) Autofocus(b bool) *BrElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *BrElement) Class(s ...string) *BrElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *BrElement) Contenteditable(a BrContenteditableAttrEnum) *BrElement {
+func (e *BrElement) Contenteditable(a BrContenteditableEnum) *BrElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *BrElement) Dir(a BrDirEnum) *BrElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *BrElement) Draggable(a BrDraggableEnum) *BrElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *BrElement) Enterkeyhint(a BrEnterkeyhintEnum) *BrElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *BrElement) Hidden(a BrHiddenEnum) *BrElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *BrElement) Id(s string) *BrElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *BrElement) Slot(s string) *BrElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

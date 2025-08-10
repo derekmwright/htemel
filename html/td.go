@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type TdElement struct {
 	attributes tdAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type TdElement struct {
 // Spec Description: The td element represents a data cell in a table.
 func Td(children ...htemel.Node) *TdElement {
 	node := &TdElement{
-		children:   children,
+		children: children,
 		attributes: make(tdAttrs),
 	}
 
@@ -39,73 +38,131 @@ func TdIf(condition bool, children ...htemel.Node) *TdElement {
 	}
 }
 
-type TdAutocapitalizeAttrEnum string
+type TdAutocapitalizeEnum string
 
 const (
-	TdAutocapitalizeAttrEnumCharacters TdAutocapitalizeAttrEnum = "characters"
-	TdAutocapitalizeAttrEnumNone       TdAutocapitalizeAttrEnum = "none"
-	TdAutocapitalizeAttrEnumOff        TdAutocapitalizeAttrEnum = "off"
-	TdAutocapitalizeAttrEnumOn         TdAutocapitalizeAttrEnum = "on"
-	TdAutocapitalizeAttrEnumSentences  TdAutocapitalizeAttrEnum = "sentences"
-	TdAutocapitalizeAttrEnumWords      TdAutocapitalizeAttrEnum = "words"
+	TdAutocapitalizeEnumWords TdAutocapitalizeEnum = "words"
+	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
+	TdAutocapitalizeEnumNone TdAutocapitalizeEnum = "none"
+	TdAutocapitalizeEnumOff TdAutocapitalizeEnum = "off"
+	TdAutocapitalizeEnumOn TdAutocapitalizeEnum = "on"
+	TdAutocapitalizeEnumSentences TdAutocapitalizeEnum = "sentences"
 )
 
-type TdAutocorrectAttrEnum string
+type TdAutocorrectEnum string
 
 const (
-	TdAutocorrectAttrEnumOff TdAutocorrectAttrEnum = "off"
-	TdAutocorrectAttrEnumOn  TdAutocorrectAttrEnum = "on"
+	TdAutocorrectEnumOff TdAutocorrectEnum = "off"
+	TdAutocorrectEnumOn TdAutocorrectEnum = "on"
 )
 
-type TdContenteditableAttrEnum string
+type TdContenteditableEnum string
 
 const (
-	TdContenteditableAttrEnumFalse         TdContenteditableAttrEnum = "false"
-	TdContenteditableAttrEnumPlaintextOnly TdContenteditableAttrEnum = "plaintext-only"
-	TdContenteditableAttrEnumTrue          TdContenteditableAttrEnum = "true"
+	TdContenteditableEnumFalse TdContenteditableEnum = "false"
+	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
+	TdContenteditableEnumTrue TdContenteditableEnum = "true"
+)
+
+type TdDirEnum string
+
+const (
+	TdDirEnumLtr TdDirEnum = "ltr"
+	TdDirEnumRtl TdDirEnum = "rtl"
+	TdDirEnumAuto TdDirEnum = "auto"
+)
+
+type TdDraggableEnum string
+
+const (
+	TdDraggableEnumFalse TdDraggableEnum = "false"
+	TdDraggableEnumTrue TdDraggableEnum = "true"
+)
+
+type TdEnterkeyhintEnum string
+
+const (
+	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
+	TdEnterkeyhintEnumSearch TdEnterkeyhintEnum = "search"
+	TdEnterkeyhintEnumSend TdEnterkeyhintEnum = "send"
+	TdEnterkeyhintEnumDone TdEnterkeyhintEnum = "done"
+	TdEnterkeyhintEnumEnter TdEnterkeyhintEnum = "enter"
+	TdEnterkeyhintEnumGo TdEnterkeyhintEnum = "go"
+	TdEnterkeyhintEnumNext TdEnterkeyhintEnum = "next"
+)
+
+type TdHiddenEnum string
+
+const (
+	TdHiddenEnumHidden TdHiddenEnum = "hidden"
+	TdHiddenEnumUntilFound TdHiddenEnum = "until-found"
 )
 
 type tdAttrs map[string]any
 
-func (e *TdElement) Autocapitalize(a TdAutocapitalizeAttrEnum) *TdElement {
+func (e *TdElement) Autocapitalize(a TdAutocapitalizeEnum) *TdElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *TdElement) Autocorrect(a TdAutocorrectAttrEnum) *TdElement {
+func (e *TdElement) Autocorrect(a TdAutocorrectEnum) *TdElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *TdElement) Autofocus(b bool) *TdElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *TdElement) Class(s ...string) *TdElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *TdElement) Contenteditable(a TdContenteditableAttrEnum) *TdElement {
+func (e *TdElement) Contenteditable(a TdContenteditableEnum) *TdElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *TdElement) Dir(a TdDirEnum) *TdElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *TdElement) Draggable(a TdDraggableEnum) *TdElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *TdElement) Enterkeyhint(a TdEnterkeyhintEnum) *TdElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *TdElement) Hidden(a TdHiddenEnum) *TdElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *TdElement) Id(s string) *TdElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *TdElement) Slot(s string) *TdElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

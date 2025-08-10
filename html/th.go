@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type ThElement struct {
 	attributes thAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type ThElement struct {
 // Spec Description: The th element represents a header cell in a table.
 func Th(children ...htemel.Node) *ThElement {
 	node := &ThElement{
-		children:   children,
+		children: children,
 		attributes: make(thAttrs),
 	}
 
@@ -39,73 +38,131 @@ func ThIf(condition bool, children ...htemel.Node) *ThElement {
 	}
 }
 
-type ThAutocapitalizeAttrEnum string
+type ThAutocapitalizeEnum string
 
 const (
-	ThAutocapitalizeAttrEnumOn         ThAutocapitalizeAttrEnum = "on"
-	ThAutocapitalizeAttrEnumSentences  ThAutocapitalizeAttrEnum = "sentences"
-	ThAutocapitalizeAttrEnumWords      ThAutocapitalizeAttrEnum = "words"
-	ThAutocapitalizeAttrEnumCharacters ThAutocapitalizeAttrEnum = "characters"
-	ThAutocapitalizeAttrEnumNone       ThAutocapitalizeAttrEnum = "none"
-	ThAutocapitalizeAttrEnumOff        ThAutocapitalizeAttrEnum = "off"
+	ThAutocapitalizeEnumOn ThAutocapitalizeEnum = "on"
+	ThAutocapitalizeEnumSentences ThAutocapitalizeEnum = "sentences"
+	ThAutocapitalizeEnumWords ThAutocapitalizeEnum = "words"
+	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
+	ThAutocapitalizeEnumNone ThAutocapitalizeEnum = "none"
+	ThAutocapitalizeEnumOff ThAutocapitalizeEnum = "off"
 )
 
-type ThAutocorrectAttrEnum string
+type ThAutocorrectEnum string
 
 const (
-	ThAutocorrectAttrEnumOn  ThAutocorrectAttrEnum = "on"
-	ThAutocorrectAttrEnumOff ThAutocorrectAttrEnum = "off"
+	ThAutocorrectEnumOff ThAutocorrectEnum = "off"
+	ThAutocorrectEnumOn ThAutocorrectEnum = "on"
 )
 
-type ThContenteditableAttrEnum string
+type ThContenteditableEnum string
 
 const (
-	ThContenteditableAttrEnumFalse         ThContenteditableAttrEnum = "false"
-	ThContenteditableAttrEnumPlaintextOnly ThContenteditableAttrEnum = "plaintext-only"
-	ThContenteditableAttrEnumTrue          ThContenteditableAttrEnum = "true"
+	ThContenteditableEnumFalse ThContenteditableEnum = "false"
+	ThContenteditableEnumPlaintextOnly ThContenteditableEnum = "plaintext-only"
+	ThContenteditableEnumTrue ThContenteditableEnum = "true"
+)
+
+type ThDirEnum string
+
+const (
+	ThDirEnumAuto ThDirEnum = "auto"
+	ThDirEnumLtr ThDirEnum = "ltr"
+	ThDirEnumRtl ThDirEnum = "rtl"
+)
+
+type ThDraggableEnum string
+
+const (
+	ThDraggableEnumFalse ThDraggableEnum = "false"
+	ThDraggableEnumTrue ThDraggableEnum = "true"
+)
+
+type ThEnterkeyhintEnum string
+
+const (
+	ThEnterkeyhintEnumSearch ThEnterkeyhintEnum = "search"
+	ThEnterkeyhintEnumSend ThEnterkeyhintEnum = "send"
+	ThEnterkeyhintEnumDone ThEnterkeyhintEnum = "done"
+	ThEnterkeyhintEnumEnter ThEnterkeyhintEnum = "enter"
+	ThEnterkeyhintEnumGo ThEnterkeyhintEnum = "go"
+	ThEnterkeyhintEnumNext ThEnterkeyhintEnum = "next"
+	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
+)
+
+type ThHiddenEnum string
+
+const (
+	ThHiddenEnumHidden ThHiddenEnum = "hidden"
+	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
 )
 
 type thAttrs map[string]any
 
-func (e *ThElement) Autocapitalize(a ThAutocapitalizeAttrEnum) *ThElement {
+func (e *ThElement) Autocapitalize(a ThAutocapitalizeEnum) *ThElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *ThElement) Autocorrect(a ThAutocorrectAttrEnum) *ThElement {
+func (e *ThElement) Autocorrect(a ThAutocorrectEnum) *ThElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *ThElement) Autofocus(b bool) *ThElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *ThElement) Class(s ...string) *ThElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *ThElement) Contenteditable(a ThContenteditableAttrEnum) *ThElement {
+func (e *ThElement) Contenteditable(a ThContenteditableEnum) *ThElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *ThElement) Dir(a ThDirEnum) *ThElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *ThElement) Draggable(a ThDraggableEnum) *ThElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *ThElement) Enterkeyhint(a ThEnterkeyhintEnum) *ThElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *ThElement) Hidden(a ThHiddenEnum) *ThElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *ThElement) Id(s string) *ThElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *ThElement) Slot(s string) *ThElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

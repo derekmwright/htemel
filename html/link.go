@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type LinkElement struct {
 	attributes linkAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type LinkElement struct {
 // Spec Description: The link element allows authors to link their document to other resources.
 func Link(children ...htemel.Node) *LinkElement {
 	node := &LinkElement{
-		children:   children,
+		children: children,
 		attributes: make(linkAttrs),
 	}
 
@@ -39,73 +38,131 @@ func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
 	}
 }
 
-type LinkAutocapitalizeAttrEnum string
+type LinkAutocapitalizeEnum string
 
 const (
-	LinkAutocapitalizeAttrEnumCharacters LinkAutocapitalizeAttrEnum = "characters"
-	LinkAutocapitalizeAttrEnumNone       LinkAutocapitalizeAttrEnum = "none"
-	LinkAutocapitalizeAttrEnumOff        LinkAutocapitalizeAttrEnum = "off"
-	LinkAutocapitalizeAttrEnumOn         LinkAutocapitalizeAttrEnum = "on"
-	LinkAutocapitalizeAttrEnumSentences  LinkAutocapitalizeAttrEnum = "sentences"
-	LinkAutocapitalizeAttrEnumWords      LinkAutocapitalizeAttrEnum = "words"
+	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
+	LinkAutocapitalizeEnumNone LinkAutocapitalizeEnum = "none"
+	LinkAutocapitalizeEnumOff LinkAutocapitalizeEnum = "off"
+	LinkAutocapitalizeEnumOn LinkAutocapitalizeEnum = "on"
+	LinkAutocapitalizeEnumSentences LinkAutocapitalizeEnum = "sentences"
+	LinkAutocapitalizeEnumWords LinkAutocapitalizeEnum = "words"
 )
 
-type LinkAutocorrectAttrEnum string
+type LinkAutocorrectEnum string
 
 const (
-	LinkAutocorrectAttrEnumOff LinkAutocorrectAttrEnum = "off"
-	LinkAutocorrectAttrEnumOn  LinkAutocorrectAttrEnum = "on"
+	LinkAutocorrectEnumOn LinkAutocorrectEnum = "on"
+	LinkAutocorrectEnumOff LinkAutocorrectEnum = "off"
 )
 
-type LinkContenteditableAttrEnum string
+type LinkContenteditableEnum string
 
 const (
-	LinkContenteditableAttrEnumPlaintextOnly LinkContenteditableAttrEnum = "plaintext-only"
-	LinkContenteditableAttrEnumTrue          LinkContenteditableAttrEnum = "true"
-	LinkContenteditableAttrEnumFalse         LinkContenteditableAttrEnum = "false"
+	LinkContenteditableEnumFalse LinkContenteditableEnum = "false"
+	LinkContenteditableEnumPlaintextOnly LinkContenteditableEnum = "plaintext-only"
+	LinkContenteditableEnumTrue LinkContenteditableEnum = "true"
+)
+
+type LinkDirEnum string
+
+const (
+	LinkDirEnumAuto LinkDirEnum = "auto"
+	LinkDirEnumLtr LinkDirEnum = "ltr"
+	LinkDirEnumRtl LinkDirEnum = "rtl"
+)
+
+type LinkDraggableEnum string
+
+const (
+	LinkDraggableEnumFalse LinkDraggableEnum = "false"
+	LinkDraggableEnumTrue LinkDraggableEnum = "true"
+)
+
+type LinkEnterkeyhintEnum string
+
+const (
+	LinkEnterkeyhintEnumSearch LinkEnterkeyhintEnum = "search"
+	LinkEnterkeyhintEnumSend LinkEnterkeyhintEnum = "send"
+	LinkEnterkeyhintEnumDone LinkEnterkeyhintEnum = "done"
+	LinkEnterkeyhintEnumEnter LinkEnterkeyhintEnum = "enter"
+	LinkEnterkeyhintEnumGo LinkEnterkeyhintEnum = "go"
+	LinkEnterkeyhintEnumNext LinkEnterkeyhintEnum = "next"
+	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
+)
+
+type LinkHiddenEnum string
+
+const (
+	LinkHiddenEnumHidden LinkHiddenEnum = "hidden"
+	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
 )
 
 type linkAttrs map[string]any
 
-func (e *LinkElement) Autocapitalize(a LinkAutocapitalizeAttrEnum) *LinkElement {
+func (e *LinkElement) Autocapitalize(a LinkAutocapitalizeEnum) *LinkElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *LinkElement) Autocorrect(a LinkAutocorrectAttrEnum) *LinkElement {
+func (e *LinkElement) Autocorrect(a LinkAutocorrectEnum) *LinkElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *LinkElement) Autofocus(b bool) *LinkElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *LinkElement) Class(s ...string) *LinkElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *LinkElement) Contenteditable(a LinkContenteditableAttrEnum) *LinkElement {
+func (e *LinkElement) Contenteditable(a LinkContenteditableEnum) *LinkElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *LinkElement) Dir(a LinkDirEnum) *LinkElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *LinkElement) Draggable(a LinkDraggableEnum) *LinkElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *LinkElement) Enterkeyhint(a LinkEnterkeyhintEnum) *LinkElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *LinkElement) Hidden(a LinkHiddenEnum) *LinkElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *LinkElement) Id(s string) *LinkElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *LinkElement) Slot(s string) *LinkElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

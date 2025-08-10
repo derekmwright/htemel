@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type RubyElement struct {
 	attributes rubyAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type RubyElement struct {
 // Spec Description: The ruby element allows one or more spans of phrasing content to be marked with ruby annotations. Ruby annotations are short runs of text presented alongside base text, primarily used in East Asian typography as a guide for pronunciation or to include other annotations. In Japanese, this form of typography is also known as furigana.
 func Ruby(children ...htemel.Node) *RubyElement {
 	node := &RubyElement{
-		children:   children,
+		children: children,
 		attributes: make(rubyAttrs),
 	}
 
@@ -39,73 +38,131 @@ func RubyIf(condition bool, children ...htemel.Node) *RubyElement {
 	}
 }
 
-type RubyAutocapitalizeAttrEnum string
+type RubyAutocapitalizeEnum string
 
 const (
-	RubyAutocapitalizeAttrEnumCharacters RubyAutocapitalizeAttrEnum = "characters"
-	RubyAutocapitalizeAttrEnumNone       RubyAutocapitalizeAttrEnum = "none"
-	RubyAutocapitalizeAttrEnumOff        RubyAutocapitalizeAttrEnum = "off"
-	RubyAutocapitalizeAttrEnumOn         RubyAutocapitalizeAttrEnum = "on"
-	RubyAutocapitalizeAttrEnumSentences  RubyAutocapitalizeAttrEnum = "sentences"
-	RubyAutocapitalizeAttrEnumWords      RubyAutocapitalizeAttrEnum = "words"
+	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
+	RubyAutocapitalizeEnumNone RubyAutocapitalizeEnum = "none"
+	RubyAutocapitalizeEnumOff RubyAutocapitalizeEnum = "off"
+	RubyAutocapitalizeEnumOn RubyAutocapitalizeEnum = "on"
+	RubyAutocapitalizeEnumSentences RubyAutocapitalizeEnum = "sentences"
+	RubyAutocapitalizeEnumWords RubyAutocapitalizeEnum = "words"
 )
 
-type RubyAutocorrectAttrEnum string
+type RubyAutocorrectEnum string
 
 const (
-	RubyAutocorrectAttrEnumOff RubyAutocorrectAttrEnum = "off"
-	RubyAutocorrectAttrEnumOn  RubyAutocorrectAttrEnum = "on"
+	RubyAutocorrectEnumOff RubyAutocorrectEnum = "off"
+	RubyAutocorrectEnumOn RubyAutocorrectEnum = "on"
 )
 
-type RubyContenteditableAttrEnum string
+type RubyContenteditableEnum string
 
 const (
-	RubyContenteditableAttrEnumFalse         RubyContenteditableAttrEnum = "false"
-	RubyContenteditableAttrEnumPlaintextOnly RubyContenteditableAttrEnum = "plaintext-only"
-	RubyContenteditableAttrEnumTrue          RubyContenteditableAttrEnum = "true"
+	RubyContenteditableEnumFalse RubyContenteditableEnum = "false"
+	RubyContenteditableEnumPlaintextOnly RubyContenteditableEnum = "plaintext-only"
+	RubyContenteditableEnumTrue RubyContenteditableEnum = "true"
+)
+
+type RubyDirEnum string
+
+const (
+	RubyDirEnumAuto RubyDirEnum = "auto"
+	RubyDirEnumLtr RubyDirEnum = "ltr"
+	RubyDirEnumRtl RubyDirEnum = "rtl"
+)
+
+type RubyDraggableEnum string
+
+const (
+	RubyDraggableEnumFalse RubyDraggableEnum = "false"
+	RubyDraggableEnumTrue RubyDraggableEnum = "true"
+)
+
+type RubyEnterkeyhintEnum string
+
+const (
+	RubyEnterkeyhintEnumDone RubyEnterkeyhintEnum = "done"
+	RubyEnterkeyhintEnumEnter RubyEnterkeyhintEnum = "enter"
+	RubyEnterkeyhintEnumGo RubyEnterkeyhintEnum = "go"
+	RubyEnterkeyhintEnumNext RubyEnterkeyhintEnum = "next"
+	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
+	RubyEnterkeyhintEnumSearch RubyEnterkeyhintEnum = "search"
+	RubyEnterkeyhintEnumSend RubyEnterkeyhintEnum = "send"
+)
+
+type RubyHiddenEnum string
+
+const (
+	RubyHiddenEnumHidden RubyHiddenEnum = "hidden"
+	RubyHiddenEnumUntilFound RubyHiddenEnum = "until-found"
 )
 
 type rubyAttrs map[string]any
 
-func (e *RubyElement) Autocapitalize(a RubyAutocapitalizeAttrEnum) *RubyElement {
+func (e *RubyElement) Autocapitalize(a RubyAutocapitalizeEnum) *RubyElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *RubyElement) Autocorrect(a RubyAutocorrectAttrEnum) *RubyElement {
+func (e *RubyElement) Autocorrect(a RubyAutocorrectEnum) *RubyElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *RubyElement) Autofocus(b bool) *RubyElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *RubyElement) Class(s ...string) *RubyElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *RubyElement) Contenteditable(a RubyContenteditableAttrEnum) *RubyElement {
+func (e *RubyElement) Contenteditable(a RubyContenteditableEnum) *RubyElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *RubyElement) Dir(a RubyDirEnum) *RubyElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *RubyElement) Draggable(a RubyDraggableEnum) *RubyElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *RubyElement) Enterkeyhint(a RubyEnterkeyhintEnum) *RubyElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *RubyElement) Hidden(a RubyHiddenEnum) *RubyElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *RubyElement) Id(s string) *RubyElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *RubyElement) Slot(s string) *RubyElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

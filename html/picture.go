@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type PictureElement struct {
 	attributes pictureAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type PictureElement struct {
 // Spec Description: The picture element is a container which provides multiple sources to its contained img element to allow authors to declaratively control or give hints to the user agent about which image resource to use, based on the screen pixel density, viewport size, image format, and other factors. It represents its children.
 func Picture(children ...htemel.Node) *PictureElement {
 	node := &PictureElement{
-		children:   children,
+		children: children,
 		attributes: make(pictureAttrs),
 	}
 
@@ -39,73 +38,131 @@ func PictureIf(condition bool, children ...htemel.Node) *PictureElement {
 	}
 }
 
-type PictureAutocapitalizeAttrEnum string
+type PictureAutocapitalizeEnum string
 
 const (
-	PictureAutocapitalizeAttrEnumWords      PictureAutocapitalizeAttrEnum = "words"
-	PictureAutocapitalizeAttrEnumCharacters PictureAutocapitalizeAttrEnum = "characters"
-	PictureAutocapitalizeAttrEnumNone       PictureAutocapitalizeAttrEnum = "none"
-	PictureAutocapitalizeAttrEnumOff        PictureAutocapitalizeAttrEnum = "off"
-	PictureAutocapitalizeAttrEnumOn         PictureAutocapitalizeAttrEnum = "on"
-	PictureAutocapitalizeAttrEnumSentences  PictureAutocapitalizeAttrEnum = "sentences"
+	PictureAutocapitalizeEnumOn PictureAutocapitalizeEnum = "on"
+	PictureAutocapitalizeEnumSentences PictureAutocapitalizeEnum = "sentences"
+	PictureAutocapitalizeEnumWords PictureAutocapitalizeEnum = "words"
+	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
+	PictureAutocapitalizeEnumNone PictureAutocapitalizeEnum = "none"
+	PictureAutocapitalizeEnumOff PictureAutocapitalizeEnum = "off"
 )
 
-type PictureAutocorrectAttrEnum string
+type PictureAutocorrectEnum string
 
 const (
-	PictureAutocorrectAttrEnumOff PictureAutocorrectAttrEnum = "off"
-	PictureAutocorrectAttrEnumOn  PictureAutocorrectAttrEnum = "on"
+	PictureAutocorrectEnumOff PictureAutocorrectEnum = "off"
+	PictureAutocorrectEnumOn PictureAutocorrectEnum = "on"
 )
 
-type PictureContenteditableAttrEnum string
+type PictureContenteditableEnum string
 
 const (
-	PictureContenteditableAttrEnumFalse         PictureContenteditableAttrEnum = "false"
-	PictureContenteditableAttrEnumPlaintextOnly PictureContenteditableAttrEnum = "plaintext-only"
-	PictureContenteditableAttrEnumTrue          PictureContenteditableAttrEnum = "true"
+	PictureContenteditableEnumFalse PictureContenteditableEnum = "false"
+	PictureContenteditableEnumPlaintextOnly PictureContenteditableEnum = "plaintext-only"
+	PictureContenteditableEnumTrue PictureContenteditableEnum = "true"
+)
+
+type PictureDirEnum string
+
+const (
+	PictureDirEnumAuto PictureDirEnum = "auto"
+	PictureDirEnumLtr PictureDirEnum = "ltr"
+	PictureDirEnumRtl PictureDirEnum = "rtl"
+)
+
+type PictureDraggableEnum string
+
+const (
+	PictureDraggableEnumFalse PictureDraggableEnum = "false"
+	PictureDraggableEnumTrue PictureDraggableEnum = "true"
+)
+
+type PictureEnterkeyhintEnum string
+
+const (
+	PictureEnterkeyhintEnumEnter PictureEnterkeyhintEnum = "enter"
+	PictureEnterkeyhintEnumGo PictureEnterkeyhintEnum = "go"
+	PictureEnterkeyhintEnumNext PictureEnterkeyhintEnum = "next"
+	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
+	PictureEnterkeyhintEnumSearch PictureEnterkeyhintEnum = "search"
+	PictureEnterkeyhintEnumSend PictureEnterkeyhintEnum = "send"
+	PictureEnterkeyhintEnumDone PictureEnterkeyhintEnum = "done"
+)
+
+type PictureHiddenEnum string
+
+const (
+	PictureHiddenEnumHidden PictureHiddenEnum = "hidden"
+	PictureHiddenEnumUntilFound PictureHiddenEnum = "until-found"
 )
 
 type pictureAttrs map[string]any
 
-func (e *PictureElement) Autocapitalize(a PictureAutocapitalizeAttrEnum) *PictureElement {
+func (e *PictureElement) Autocapitalize(a PictureAutocapitalizeEnum) *PictureElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *PictureElement) Autocorrect(a PictureAutocorrectAttrEnum) *PictureElement {
+func (e *PictureElement) Autocorrect(a PictureAutocorrectEnum) *PictureElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *PictureElement) Autofocus(b bool) *PictureElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *PictureElement) Class(s ...string) *PictureElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *PictureElement) Contenteditable(a PictureContenteditableAttrEnum) *PictureElement {
+func (e *PictureElement) Contenteditable(a PictureContenteditableEnum) *PictureElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *PictureElement) Dir(a PictureDirEnum) *PictureElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *PictureElement) Draggable(a PictureDraggableEnum) *PictureElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *PictureElement) Enterkeyhint(a PictureEnterkeyhintEnum) *PictureElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *PictureElement) Hidden(a PictureHiddenEnum) *PictureElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *PictureElement) Id(s string) *PictureElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *PictureElement) Slot(s string) *PictureElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

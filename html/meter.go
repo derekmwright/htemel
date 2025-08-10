@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type MeterElement struct {
 	attributes meterAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type MeterElement struct {
 // Spec Description: The meter element represents a scalar measurement within a known range, or a fractional value; for example disk usage, the relevance of a query result, or the fraction of a voting population to have selected a particular candidate.
 func Meter(children ...htemel.Node) *MeterElement {
 	node := &MeterElement{
-		children:   children,
+		children: children,
 		attributes: make(meterAttrs),
 	}
 
@@ -39,73 +38,131 @@ func MeterIf(condition bool, children ...htemel.Node) *MeterElement {
 	}
 }
 
-type MeterAutocapitalizeAttrEnum string
+type MeterAutocapitalizeEnum string
 
 const (
-	MeterAutocapitalizeAttrEnumWords      MeterAutocapitalizeAttrEnum = "words"
-	MeterAutocapitalizeAttrEnumCharacters MeterAutocapitalizeAttrEnum = "characters"
-	MeterAutocapitalizeAttrEnumNone       MeterAutocapitalizeAttrEnum = "none"
-	MeterAutocapitalizeAttrEnumOff        MeterAutocapitalizeAttrEnum = "off"
-	MeterAutocapitalizeAttrEnumOn         MeterAutocapitalizeAttrEnum = "on"
-	MeterAutocapitalizeAttrEnumSentences  MeterAutocapitalizeAttrEnum = "sentences"
+	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
+	MeterAutocapitalizeEnumNone MeterAutocapitalizeEnum = "none"
+	MeterAutocapitalizeEnumOff MeterAutocapitalizeEnum = "off"
+	MeterAutocapitalizeEnumOn MeterAutocapitalizeEnum = "on"
+	MeterAutocapitalizeEnumSentences MeterAutocapitalizeEnum = "sentences"
+	MeterAutocapitalizeEnumWords MeterAutocapitalizeEnum = "words"
 )
 
-type MeterAutocorrectAttrEnum string
+type MeterAutocorrectEnum string
 
 const (
-	MeterAutocorrectAttrEnumOff MeterAutocorrectAttrEnum = "off"
-	MeterAutocorrectAttrEnumOn  MeterAutocorrectAttrEnum = "on"
+	MeterAutocorrectEnumOff MeterAutocorrectEnum = "off"
+	MeterAutocorrectEnumOn MeterAutocorrectEnum = "on"
 )
 
-type MeterContenteditableAttrEnum string
+type MeterContenteditableEnum string
 
 const (
-	MeterContenteditableAttrEnumPlaintextOnly MeterContenteditableAttrEnum = "plaintext-only"
-	MeterContenteditableAttrEnumTrue          MeterContenteditableAttrEnum = "true"
-	MeterContenteditableAttrEnumFalse         MeterContenteditableAttrEnum = "false"
+	MeterContenteditableEnumFalse MeterContenteditableEnum = "false"
+	MeterContenteditableEnumPlaintextOnly MeterContenteditableEnum = "plaintext-only"
+	MeterContenteditableEnumTrue MeterContenteditableEnum = "true"
+)
+
+type MeterDirEnum string
+
+const (
+	MeterDirEnumAuto MeterDirEnum = "auto"
+	MeterDirEnumLtr MeterDirEnum = "ltr"
+	MeterDirEnumRtl MeterDirEnum = "rtl"
+)
+
+type MeterDraggableEnum string
+
+const (
+	MeterDraggableEnumFalse MeterDraggableEnum = "false"
+	MeterDraggableEnumTrue MeterDraggableEnum = "true"
+)
+
+type MeterEnterkeyhintEnum string
+
+const (
+	MeterEnterkeyhintEnumDone MeterEnterkeyhintEnum = "done"
+	MeterEnterkeyhintEnumEnter MeterEnterkeyhintEnum = "enter"
+	MeterEnterkeyhintEnumGo MeterEnterkeyhintEnum = "go"
+	MeterEnterkeyhintEnumNext MeterEnterkeyhintEnum = "next"
+	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
+	MeterEnterkeyhintEnumSearch MeterEnterkeyhintEnum = "search"
+	MeterEnterkeyhintEnumSend MeterEnterkeyhintEnum = "send"
+)
+
+type MeterHiddenEnum string
+
+const (
+	MeterHiddenEnumHidden MeterHiddenEnum = "hidden"
+	MeterHiddenEnumUntilFound MeterHiddenEnum = "until-found"
 )
 
 type meterAttrs map[string]any
 
-func (e *MeterElement) Autocapitalize(a MeterAutocapitalizeAttrEnum) *MeterElement {
+func (e *MeterElement) Autocapitalize(a MeterAutocapitalizeEnum) *MeterElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *MeterElement) Autocorrect(a MeterAutocorrectAttrEnum) *MeterElement {
+func (e *MeterElement) Autocorrect(a MeterAutocorrectEnum) *MeterElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *MeterElement) Autofocus(b bool) *MeterElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *MeterElement) Class(s ...string) *MeterElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *MeterElement) Contenteditable(a MeterContenteditableAttrEnum) *MeterElement {
+func (e *MeterElement) Contenteditable(a MeterContenteditableEnum) *MeterElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *MeterElement) Dir(a MeterDirEnum) *MeterElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *MeterElement) Draggable(a MeterDraggableEnum) *MeterElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *MeterElement) Enterkeyhint(a MeterEnterkeyhintEnum) *MeterElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *MeterElement) Hidden(a MeterHiddenEnum) *MeterElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *MeterElement) Id(s string) *MeterElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *MeterElement) Slot(s string) *MeterElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

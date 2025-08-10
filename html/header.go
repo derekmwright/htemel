@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type HeaderElement struct {
 	attributes headerAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type HeaderElement struct {
 // Spec Description: The header element represents a group of introductory or navigational aids.
 func Header(children ...htemel.Node) *HeaderElement {
 	node := &HeaderElement{
-		children:   children,
+		children: children,
 		attributes: make(headerAttrs),
 	}
 
@@ -39,73 +38,131 @@ func HeaderIf(condition bool, children ...htemel.Node) *HeaderElement {
 	}
 }
 
-type HeaderAutocapitalizeAttrEnum string
+type HeaderAutocapitalizeEnum string
 
 const (
-	HeaderAutocapitalizeAttrEnumOn         HeaderAutocapitalizeAttrEnum = "on"
-	HeaderAutocapitalizeAttrEnumSentences  HeaderAutocapitalizeAttrEnum = "sentences"
-	HeaderAutocapitalizeAttrEnumWords      HeaderAutocapitalizeAttrEnum = "words"
-	HeaderAutocapitalizeAttrEnumCharacters HeaderAutocapitalizeAttrEnum = "characters"
-	HeaderAutocapitalizeAttrEnumNone       HeaderAutocapitalizeAttrEnum = "none"
-	HeaderAutocapitalizeAttrEnumOff        HeaderAutocapitalizeAttrEnum = "off"
+	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
+	HeaderAutocapitalizeEnumNone HeaderAutocapitalizeEnum = "none"
+	HeaderAutocapitalizeEnumOff HeaderAutocapitalizeEnum = "off"
+	HeaderAutocapitalizeEnumOn HeaderAutocapitalizeEnum = "on"
+	HeaderAutocapitalizeEnumSentences HeaderAutocapitalizeEnum = "sentences"
+	HeaderAutocapitalizeEnumWords HeaderAutocapitalizeEnum = "words"
 )
 
-type HeaderAutocorrectAttrEnum string
+type HeaderAutocorrectEnum string
 
 const (
-	HeaderAutocorrectAttrEnumOn  HeaderAutocorrectAttrEnum = "on"
-	HeaderAutocorrectAttrEnumOff HeaderAutocorrectAttrEnum = "off"
+	HeaderAutocorrectEnumOff HeaderAutocorrectEnum = "off"
+	HeaderAutocorrectEnumOn HeaderAutocorrectEnum = "on"
 )
 
-type HeaderContenteditableAttrEnum string
+type HeaderContenteditableEnum string
 
 const (
-	HeaderContenteditableAttrEnumFalse         HeaderContenteditableAttrEnum = "false"
-	HeaderContenteditableAttrEnumPlaintextOnly HeaderContenteditableAttrEnum = "plaintext-only"
-	HeaderContenteditableAttrEnumTrue          HeaderContenteditableAttrEnum = "true"
+	HeaderContenteditableEnumTrue HeaderContenteditableEnum = "true"
+	HeaderContenteditableEnumFalse HeaderContenteditableEnum = "false"
+	HeaderContenteditableEnumPlaintextOnly HeaderContenteditableEnum = "plaintext-only"
+)
+
+type HeaderDirEnum string
+
+const (
+	HeaderDirEnumAuto HeaderDirEnum = "auto"
+	HeaderDirEnumLtr HeaderDirEnum = "ltr"
+	HeaderDirEnumRtl HeaderDirEnum = "rtl"
+)
+
+type HeaderDraggableEnum string
+
+const (
+	HeaderDraggableEnumFalse HeaderDraggableEnum = "false"
+	HeaderDraggableEnumTrue HeaderDraggableEnum = "true"
+)
+
+type HeaderEnterkeyhintEnum string
+
+const (
+	HeaderEnterkeyhintEnumGo HeaderEnterkeyhintEnum = "go"
+	HeaderEnterkeyhintEnumNext HeaderEnterkeyhintEnum = "next"
+	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
+	HeaderEnterkeyhintEnumSearch HeaderEnterkeyhintEnum = "search"
+	HeaderEnterkeyhintEnumSend HeaderEnterkeyhintEnum = "send"
+	HeaderEnterkeyhintEnumDone HeaderEnterkeyhintEnum = "done"
+	HeaderEnterkeyhintEnumEnter HeaderEnterkeyhintEnum = "enter"
+)
+
+type HeaderHiddenEnum string
+
+const (
+	HeaderHiddenEnumHidden HeaderHiddenEnum = "hidden"
+	HeaderHiddenEnumUntilFound HeaderHiddenEnum = "until-found"
 )
 
 type headerAttrs map[string]any
 
-func (e *HeaderElement) Autocapitalize(a HeaderAutocapitalizeAttrEnum) *HeaderElement {
+func (e *HeaderElement) Autocapitalize(a HeaderAutocapitalizeEnum) *HeaderElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *HeaderElement) Autocorrect(a HeaderAutocorrectAttrEnum) *HeaderElement {
+func (e *HeaderElement) Autocorrect(a HeaderAutocorrectEnum) *HeaderElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *HeaderElement) Autofocus(b bool) *HeaderElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *HeaderElement) Class(s ...string) *HeaderElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *HeaderElement) Contenteditable(a HeaderContenteditableAttrEnum) *HeaderElement {
+func (e *HeaderElement) Contenteditable(a HeaderContenteditableEnum) *HeaderElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *HeaderElement) Dir(a HeaderDirEnum) *HeaderElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *HeaderElement) Draggable(a HeaderDraggableEnum) *HeaderElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *HeaderElement) Enterkeyhint(a HeaderEnterkeyhintEnum) *HeaderElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *HeaderElement) Hidden(a HeaderHiddenEnum) *HeaderElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *HeaderElement) Id(s string) *HeaderElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *HeaderElement) Slot(s string) *HeaderElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

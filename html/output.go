@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type OutputElement struct {
 	attributes outputAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type OutputElement struct {
 // Spec Description: The output element represents the result of a calculation performed by the application, or the result of a user action.
 func Output(children ...htemel.Node) *OutputElement {
 	node := &OutputElement{
-		children:   children,
+		children: children,
 		attributes: make(outputAttrs),
 	}
 
@@ -39,73 +38,131 @@ func OutputIf(condition bool, children ...htemel.Node) *OutputElement {
 	}
 }
 
-type OutputAutocapitalizeAttrEnum string
+type OutputAutocapitalizeEnum string
 
 const (
-	OutputAutocapitalizeAttrEnumWords      OutputAutocapitalizeAttrEnum = "words"
-	OutputAutocapitalizeAttrEnumCharacters OutputAutocapitalizeAttrEnum = "characters"
-	OutputAutocapitalizeAttrEnumNone       OutputAutocapitalizeAttrEnum = "none"
-	OutputAutocapitalizeAttrEnumOff        OutputAutocapitalizeAttrEnum = "off"
-	OutputAutocapitalizeAttrEnumOn         OutputAutocapitalizeAttrEnum = "on"
-	OutputAutocapitalizeAttrEnumSentences  OutputAutocapitalizeAttrEnum = "sentences"
+	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
+	OutputAutocapitalizeEnumNone OutputAutocapitalizeEnum = "none"
+	OutputAutocapitalizeEnumOff OutputAutocapitalizeEnum = "off"
+	OutputAutocapitalizeEnumOn OutputAutocapitalizeEnum = "on"
+	OutputAutocapitalizeEnumSentences OutputAutocapitalizeEnum = "sentences"
+	OutputAutocapitalizeEnumWords OutputAutocapitalizeEnum = "words"
 )
 
-type OutputAutocorrectAttrEnum string
+type OutputAutocorrectEnum string
 
 const (
-	OutputAutocorrectAttrEnumOn  OutputAutocorrectAttrEnum = "on"
-	OutputAutocorrectAttrEnumOff OutputAutocorrectAttrEnum = "off"
+	OutputAutocorrectEnumOff OutputAutocorrectEnum = "off"
+	OutputAutocorrectEnumOn OutputAutocorrectEnum = "on"
 )
 
-type OutputContenteditableAttrEnum string
+type OutputContenteditableEnum string
 
 const (
-	OutputContenteditableAttrEnumFalse         OutputContenteditableAttrEnum = "false"
-	OutputContenteditableAttrEnumPlaintextOnly OutputContenteditableAttrEnum = "plaintext-only"
-	OutputContenteditableAttrEnumTrue          OutputContenteditableAttrEnum = "true"
+	OutputContenteditableEnumPlaintextOnly OutputContenteditableEnum = "plaintext-only"
+	OutputContenteditableEnumTrue OutputContenteditableEnum = "true"
+	OutputContenteditableEnumFalse OutputContenteditableEnum = "false"
+)
+
+type OutputDirEnum string
+
+const (
+	OutputDirEnumAuto OutputDirEnum = "auto"
+	OutputDirEnumLtr OutputDirEnum = "ltr"
+	OutputDirEnumRtl OutputDirEnum = "rtl"
+)
+
+type OutputDraggableEnum string
+
+const (
+	OutputDraggableEnumFalse OutputDraggableEnum = "false"
+	OutputDraggableEnumTrue OutputDraggableEnum = "true"
+)
+
+type OutputEnterkeyhintEnum string
+
+const (
+	OutputEnterkeyhintEnumDone OutputEnterkeyhintEnum = "done"
+	OutputEnterkeyhintEnumEnter OutputEnterkeyhintEnum = "enter"
+	OutputEnterkeyhintEnumGo OutputEnterkeyhintEnum = "go"
+	OutputEnterkeyhintEnumNext OutputEnterkeyhintEnum = "next"
+	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
+	OutputEnterkeyhintEnumSearch OutputEnterkeyhintEnum = "search"
+	OutputEnterkeyhintEnumSend OutputEnterkeyhintEnum = "send"
+)
+
+type OutputHiddenEnum string
+
+const (
+	OutputHiddenEnumHidden OutputHiddenEnum = "hidden"
+	OutputHiddenEnumUntilFound OutputHiddenEnum = "until-found"
 )
 
 type outputAttrs map[string]any
 
-func (e *OutputElement) Autocapitalize(a OutputAutocapitalizeAttrEnum) *OutputElement {
+func (e *OutputElement) Autocapitalize(a OutputAutocapitalizeEnum) *OutputElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *OutputElement) Autocorrect(a OutputAutocorrectAttrEnum) *OutputElement {
+func (e *OutputElement) Autocorrect(a OutputAutocorrectEnum) *OutputElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *OutputElement) Autofocus(b bool) *OutputElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *OutputElement) Class(s ...string) *OutputElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *OutputElement) Contenteditable(a OutputContenteditableAttrEnum) *OutputElement {
+func (e *OutputElement) Contenteditable(a OutputContenteditableEnum) *OutputElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *OutputElement) Dir(a OutputDirEnum) *OutputElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *OutputElement) Draggable(a OutputDraggableEnum) *OutputElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *OutputElement) Enterkeyhint(a OutputEnterkeyhintEnum) *OutputElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *OutputElement) Hidden(a OutputHiddenEnum) *OutputElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *OutputElement) Id(s string) *OutputElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *OutputElement) Slot(s string) *OutputElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

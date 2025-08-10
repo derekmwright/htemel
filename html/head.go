@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type HeadElement struct {
 	attributes headAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type HeadElement struct {
 // Spec Description: The head element represents a collection of metadata for the Document.
 func Head(children ...htemel.Node) *HeadElement {
 	node := &HeadElement{
-		children:   children,
+		children: children,
 		attributes: make(headAttrs),
 	}
 
@@ -39,73 +38,131 @@ func HeadIf(condition bool, children ...htemel.Node) *HeadElement {
 	}
 }
 
-type HeadAutocapitalizeAttrEnum string
+type HeadAutocapitalizeEnum string
 
 const (
-	HeadAutocapitalizeAttrEnumOff        HeadAutocapitalizeAttrEnum = "off"
-	HeadAutocapitalizeAttrEnumOn         HeadAutocapitalizeAttrEnum = "on"
-	HeadAutocapitalizeAttrEnumSentences  HeadAutocapitalizeAttrEnum = "sentences"
-	HeadAutocapitalizeAttrEnumWords      HeadAutocapitalizeAttrEnum = "words"
-	HeadAutocapitalizeAttrEnumCharacters HeadAutocapitalizeAttrEnum = "characters"
-	HeadAutocapitalizeAttrEnumNone       HeadAutocapitalizeAttrEnum = "none"
+	HeadAutocapitalizeEnumCharacters HeadAutocapitalizeEnum = "characters"
+	HeadAutocapitalizeEnumNone HeadAutocapitalizeEnum = "none"
+	HeadAutocapitalizeEnumOff HeadAutocapitalizeEnum = "off"
+	HeadAutocapitalizeEnumOn HeadAutocapitalizeEnum = "on"
+	HeadAutocapitalizeEnumSentences HeadAutocapitalizeEnum = "sentences"
+	HeadAutocapitalizeEnumWords HeadAutocapitalizeEnum = "words"
 )
 
-type HeadAutocorrectAttrEnum string
+type HeadAutocorrectEnum string
 
 const (
-	HeadAutocorrectAttrEnumOn  HeadAutocorrectAttrEnum = "on"
-	HeadAutocorrectAttrEnumOff HeadAutocorrectAttrEnum = "off"
+	HeadAutocorrectEnumOff HeadAutocorrectEnum = "off"
+	HeadAutocorrectEnumOn HeadAutocorrectEnum = "on"
 )
 
-type HeadContenteditableAttrEnum string
+type HeadContenteditableEnum string
 
 const (
-	HeadContenteditableAttrEnumTrue          HeadContenteditableAttrEnum = "true"
-	HeadContenteditableAttrEnumFalse         HeadContenteditableAttrEnum = "false"
-	HeadContenteditableAttrEnumPlaintextOnly HeadContenteditableAttrEnum = "plaintext-only"
+	HeadContenteditableEnumFalse HeadContenteditableEnum = "false"
+	HeadContenteditableEnumPlaintextOnly HeadContenteditableEnum = "plaintext-only"
+	HeadContenteditableEnumTrue HeadContenteditableEnum = "true"
+)
+
+type HeadDirEnum string
+
+const (
+	HeadDirEnumLtr HeadDirEnum = "ltr"
+	HeadDirEnumRtl HeadDirEnum = "rtl"
+	HeadDirEnumAuto HeadDirEnum = "auto"
+)
+
+type HeadDraggableEnum string
+
+const (
+	HeadDraggableEnumFalse HeadDraggableEnum = "false"
+	HeadDraggableEnumTrue HeadDraggableEnum = "true"
+)
+
+type HeadEnterkeyhintEnum string
+
+const (
+	HeadEnterkeyhintEnumDone HeadEnterkeyhintEnum = "done"
+	HeadEnterkeyhintEnumEnter HeadEnterkeyhintEnum = "enter"
+	HeadEnterkeyhintEnumGo HeadEnterkeyhintEnum = "go"
+	HeadEnterkeyhintEnumNext HeadEnterkeyhintEnum = "next"
+	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
+	HeadEnterkeyhintEnumSearch HeadEnterkeyhintEnum = "search"
+	HeadEnterkeyhintEnumSend HeadEnterkeyhintEnum = "send"
+)
+
+type HeadHiddenEnum string
+
+const (
+	HeadHiddenEnumHidden HeadHiddenEnum = "hidden"
+	HeadHiddenEnumUntilFound HeadHiddenEnum = "until-found"
 )
 
 type headAttrs map[string]any
 
-func (e *HeadElement) Autocapitalize(a HeadAutocapitalizeAttrEnum) *HeadElement {
+func (e *HeadElement) Autocapitalize(a HeadAutocapitalizeEnum) *HeadElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *HeadElement) Autocorrect(a HeadAutocorrectAttrEnum) *HeadElement {
+func (e *HeadElement) Autocorrect(a HeadAutocorrectEnum) *HeadElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *HeadElement) Autofocus(b bool) *HeadElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *HeadElement) Class(s ...string) *HeadElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *HeadElement) Contenteditable(a HeadContenteditableAttrEnum) *HeadElement {
+func (e *HeadElement) Contenteditable(a HeadContenteditableEnum) *HeadElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *HeadElement) Dir(a HeadDirEnum) *HeadElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *HeadElement) Draggable(a HeadDraggableEnum) *HeadElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *HeadElement) Enterkeyhint(a HeadEnterkeyhintEnum) *HeadElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *HeadElement) Hidden(a HeadHiddenEnum) *HeadElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *HeadElement) Id(s string) *HeadElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *HeadElement) Slot(s string) *HeadElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

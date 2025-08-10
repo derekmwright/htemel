@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type OptgroupElement struct {
 	attributes optgroupAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type OptgroupElement struct {
 // Spec Description: The optgroup element represents a group of option elements with a common label.
 func Optgroup(children ...htemel.Node) *OptgroupElement {
 	node := &OptgroupElement{
-		children:   children,
+		children: children,
 		attributes: make(optgroupAttrs),
 	}
 
@@ -39,73 +38,131 @@ func OptgroupIf(condition bool, children ...htemel.Node) *OptgroupElement {
 	}
 }
 
-type OptgroupAutocapitalizeAttrEnum string
+type OptgroupAutocapitalizeEnum string
 
 const (
-	OptgroupAutocapitalizeAttrEnumCharacters OptgroupAutocapitalizeAttrEnum = "characters"
-	OptgroupAutocapitalizeAttrEnumNone       OptgroupAutocapitalizeAttrEnum = "none"
-	OptgroupAutocapitalizeAttrEnumOff        OptgroupAutocapitalizeAttrEnum = "off"
-	OptgroupAutocapitalizeAttrEnumOn         OptgroupAutocapitalizeAttrEnum = "on"
-	OptgroupAutocapitalizeAttrEnumSentences  OptgroupAutocapitalizeAttrEnum = "sentences"
-	OptgroupAutocapitalizeAttrEnumWords      OptgroupAutocapitalizeAttrEnum = "words"
+	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
+	OptgroupAutocapitalizeEnumNone OptgroupAutocapitalizeEnum = "none"
+	OptgroupAutocapitalizeEnumOff OptgroupAutocapitalizeEnum = "off"
+	OptgroupAutocapitalizeEnumOn OptgroupAutocapitalizeEnum = "on"
+	OptgroupAutocapitalizeEnumSentences OptgroupAutocapitalizeEnum = "sentences"
+	OptgroupAutocapitalizeEnumWords OptgroupAutocapitalizeEnum = "words"
 )
 
-type OptgroupAutocorrectAttrEnum string
+type OptgroupAutocorrectEnum string
 
 const (
-	OptgroupAutocorrectAttrEnumOff OptgroupAutocorrectAttrEnum = "off"
-	OptgroupAutocorrectAttrEnumOn  OptgroupAutocorrectAttrEnum = "on"
+	OptgroupAutocorrectEnumOff OptgroupAutocorrectEnum = "off"
+	OptgroupAutocorrectEnumOn OptgroupAutocorrectEnum = "on"
 )
 
-type OptgroupContenteditableAttrEnum string
+type OptgroupContenteditableEnum string
 
 const (
-	OptgroupContenteditableAttrEnumTrue          OptgroupContenteditableAttrEnum = "true"
-	OptgroupContenteditableAttrEnumFalse         OptgroupContenteditableAttrEnum = "false"
-	OptgroupContenteditableAttrEnumPlaintextOnly OptgroupContenteditableAttrEnum = "plaintext-only"
+	OptgroupContenteditableEnumTrue OptgroupContenteditableEnum = "true"
+	OptgroupContenteditableEnumFalse OptgroupContenteditableEnum = "false"
+	OptgroupContenteditableEnumPlaintextOnly OptgroupContenteditableEnum = "plaintext-only"
+)
+
+type OptgroupDirEnum string
+
+const (
+	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
+	OptgroupDirEnumLtr OptgroupDirEnum = "ltr"
+	OptgroupDirEnumRtl OptgroupDirEnum = "rtl"
+)
+
+type OptgroupDraggableEnum string
+
+const (
+	OptgroupDraggableEnumTrue OptgroupDraggableEnum = "true"
+	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
+)
+
+type OptgroupEnterkeyhintEnum string
+
+const (
+	OptgroupEnterkeyhintEnumDone OptgroupEnterkeyhintEnum = "done"
+	OptgroupEnterkeyhintEnumEnter OptgroupEnterkeyhintEnum = "enter"
+	OptgroupEnterkeyhintEnumGo OptgroupEnterkeyhintEnum = "go"
+	OptgroupEnterkeyhintEnumNext OptgroupEnterkeyhintEnum = "next"
+	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
+	OptgroupEnterkeyhintEnumSearch OptgroupEnterkeyhintEnum = "search"
+	OptgroupEnterkeyhintEnumSend OptgroupEnterkeyhintEnum = "send"
+)
+
+type OptgroupHiddenEnum string
+
+const (
+	OptgroupHiddenEnumHidden OptgroupHiddenEnum = "hidden"
+	OptgroupHiddenEnumUntilFound OptgroupHiddenEnum = "until-found"
 )
 
 type optgroupAttrs map[string]any
 
-func (e *OptgroupElement) Autocapitalize(a OptgroupAutocapitalizeAttrEnum) *OptgroupElement {
+func (e *OptgroupElement) Autocapitalize(a OptgroupAutocapitalizeEnum) *OptgroupElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *OptgroupElement) Autocorrect(a OptgroupAutocorrectAttrEnum) *OptgroupElement {
+func (e *OptgroupElement) Autocorrect(a OptgroupAutocorrectEnum) *OptgroupElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *OptgroupElement) Autofocus(b bool) *OptgroupElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *OptgroupElement) Class(s ...string) *OptgroupElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *OptgroupElement) Contenteditable(a OptgroupContenteditableAttrEnum) *OptgroupElement {
+func (e *OptgroupElement) Contenteditable(a OptgroupContenteditableEnum) *OptgroupElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *OptgroupElement) Dir(a OptgroupDirEnum) *OptgroupElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *OptgroupElement) Draggable(a OptgroupDraggableEnum) *OptgroupElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *OptgroupElement) Enterkeyhint(a OptgroupEnterkeyhintEnum) *OptgroupElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *OptgroupElement) Hidden(a OptgroupHiddenEnum) *OptgroupElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *OptgroupElement) Id(s string) *OptgroupElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *OptgroupElement) Slot(s string) *OptgroupElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

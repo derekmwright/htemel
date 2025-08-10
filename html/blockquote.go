@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type BlockquoteElement struct {
 	attributes blockquoteAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type BlockquoteElement struct {
 // Spec Description: The blockquote element represents a section that is quoted from another source.
 func Blockquote(children ...htemel.Node) *BlockquoteElement {
 	node := &BlockquoteElement{
-		children:   children,
+		children: children,
 		attributes: make(blockquoteAttrs),
 	}
 
@@ -39,73 +38,131 @@ func BlockquoteIf(condition bool, children ...htemel.Node) *BlockquoteElement {
 	}
 }
 
-type BlockquoteAutocapitalizeAttrEnum string
+type BlockquoteAutocapitalizeEnum string
 
 const (
-	BlockquoteAutocapitalizeAttrEnumSentences  BlockquoteAutocapitalizeAttrEnum = "sentences"
-	BlockquoteAutocapitalizeAttrEnumWords      BlockquoteAutocapitalizeAttrEnum = "words"
-	BlockquoteAutocapitalizeAttrEnumCharacters BlockquoteAutocapitalizeAttrEnum = "characters"
-	BlockquoteAutocapitalizeAttrEnumNone       BlockquoteAutocapitalizeAttrEnum = "none"
-	BlockquoteAutocapitalizeAttrEnumOff        BlockquoteAutocapitalizeAttrEnum = "off"
-	BlockquoteAutocapitalizeAttrEnumOn         BlockquoteAutocapitalizeAttrEnum = "on"
+	BlockquoteAutocapitalizeEnumSentences BlockquoteAutocapitalizeEnum = "sentences"
+	BlockquoteAutocapitalizeEnumWords BlockquoteAutocapitalizeEnum = "words"
+	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
+	BlockquoteAutocapitalizeEnumNone BlockquoteAutocapitalizeEnum = "none"
+	BlockquoteAutocapitalizeEnumOff BlockquoteAutocapitalizeEnum = "off"
+	BlockquoteAutocapitalizeEnumOn BlockquoteAutocapitalizeEnum = "on"
 )
 
-type BlockquoteAutocorrectAttrEnum string
+type BlockquoteAutocorrectEnum string
 
 const (
-	BlockquoteAutocorrectAttrEnumOff BlockquoteAutocorrectAttrEnum = "off"
-	BlockquoteAutocorrectAttrEnumOn  BlockquoteAutocorrectAttrEnum = "on"
+	BlockquoteAutocorrectEnumOff BlockquoteAutocorrectEnum = "off"
+	BlockquoteAutocorrectEnumOn BlockquoteAutocorrectEnum = "on"
 )
 
-type BlockquoteContenteditableAttrEnum string
+type BlockquoteContenteditableEnum string
 
 const (
-	BlockquoteContenteditableAttrEnumFalse         BlockquoteContenteditableAttrEnum = "false"
-	BlockquoteContenteditableAttrEnumPlaintextOnly BlockquoteContenteditableAttrEnum = "plaintext-only"
-	BlockquoteContenteditableAttrEnumTrue          BlockquoteContenteditableAttrEnum = "true"
+	BlockquoteContenteditableEnumFalse BlockquoteContenteditableEnum = "false"
+	BlockquoteContenteditableEnumPlaintextOnly BlockquoteContenteditableEnum = "plaintext-only"
+	BlockquoteContenteditableEnumTrue BlockquoteContenteditableEnum = "true"
+)
+
+type BlockquoteDirEnum string
+
+const (
+	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
+	BlockquoteDirEnumLtr BlockquoteDirEnum = "ltr"
+	BlockquoteDirEnumRtl BlockquoteDirEnum = "rtl"
+)
+
+type BlockquoteDraggableEnum string
+
+const (
+	BlockquoteDraggableEnumFalse BlockquoteDraggableEnum = "false"
+	BlockquoteDraggableEnumTrue BlockquoteDraggableEnum = "true"
+)
+
+type BlockquoteEnterkeyhintEnum string
+
+const (
+	BlockquoteEnterkeyhintEnumDone BlockquoteEnterkeyhintEnum = "done"
+	BlockquoteEnterkeyhintEnumEnter BlockquoteEnterkeyhintEnum = "enter"
+	BlockquoteEnterkeyhintEnumGo BlockquoteEnterkeyhintEnum = "go"
+	BlockquoteEnterkeyhintEnumNext BlockquoteEnterkeyhintEnum = "next"
+	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
+	BlockquoteEnterkeyhintEnumSearch BlockquoteEnterkeyhintEnum = "search"
+	BlockquoteEnterkeyhintEnumSend BlockquoteEnterkeyhintEnum = "send"
+)
+
+type BlockquoteHiddenEnum string
+
+const (
+	BlockquoteHiddenEnumHidden BlockquoteHiddenEnum = "hidden"
+	BlockquoteHiddenEnumUntilFound BlockquoteHiddenEnum = "until-found"
 )
 
 type blockquoteAttrs map[string]any
 
-func (e *BlockquoteElement) Autocapitalize(a BlockquoteAutocapitalizeAttrEnum) *BlockquoteElement {
+func (e *BlockquoteElement) Autocapitalize(a BlockquoteAutocapitalizeEnum) *BlockquoteElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *BlockquoteElement) Autocorrect(a BlockquoteAutocorrectAttrEnum) *BlockquoteElement {
+func (e *BlockquoteElement) Autocorrect(a BlockquoteAutocorrectEnum) *BlockquoteElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *BlockquoteElement) Autofocus(b bool) *BlockquoteElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *BlockquoteElement) Class(s ...string) *BlockquoteElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *BlockquoteElement) Contenteditable(a BlockquoteContenteditableAttrEnum) *BlockquoteElement {
+func (e *BlockquoteElement) Contenteditable(a BlockquoteContenteditableEnum) *BlockquoteElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *BlockquoteElement) Dir(a BlockquoteDirEnum) *BlockquoteElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *BlockquoteElement) Draggable(a BlockquoteDraggableEnum) *BlockquoteElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *BlockquoteElement) Enterkeyhint(a BlockquoteEnterkeyhintEnum) *BlockquoteElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *BlockquoteElement) Hidden(a BlockquoteHiddenEnum) *BlockquoteElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *BlockquoteElement) Id(s string) *BlockquoteElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *BlockquoteElement) Slot(s string) *BlockquoteElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

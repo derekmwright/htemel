@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type ScriptElement struct {
 	attributes scriptAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type ScriptElement struct {
 // Spec Description: The script element allows authors to include dynamic script, instructions to the user agent, and data blocks in their documents. The element does not represent content for the user.
 func Script(children ...htemel.Node) *ScriptElement {
 	node := &ScriptElement{
-		children:   children,
+		children: children,
 		attributes: make(scriptAttrs),
 	}
 
@@ -39,73 +38,131 @@ func ScriptIf(condition bool, children ...htemel.Node) *ScriptElement {
 	}
 }
 
-type ScriptAutocapitalizeAttrEnum string
+type ScriptAutocapitalizeEnum string
 
 const (
-	ScriptAutocapitalizeAttrEnumNone       ScriptAutocapitalizeAttrEnum = "none"
-	ScriptAutocapitalizeAttrEnumOff        ScriptAutocapitalizeAttrEnum = "off"
-	ScriptAutocapitalizeAttrEnumOn         ScriptAutocapitalizeAttrEnum = "on"
-	ScriptAutocapitalizeAttrEnumSentences  ScriptAutocapitalizeAttrEnum = "sentences"
-	ScriptAutocapitalizeAttrEnumWords      ScriptAutocapitalizeAttrEnum = "words"
-	ScriptAutocapitalizeAttrEnumCharacters ScriptAutocapitalizeAttrEnum = "characters"
+	ScriptAutocapitalizeEnumSentences ScriptAutocapitalizeEnum = "sentences"
+	ScriptAutocapitalizeEnumWords ScriptAutocapitalizeEnum = "words"
+	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
+	ScriptAutocapitalizeEnumNone ScriptAutocapitalizeEnum = "none"
+	ScriptAutocapitalizeEnumOff ScriptAutocapitalizeEnum = "off"
+	ScriptAutocapitalizeEnumOn ScriptAutocapitalizeEnum = "on"
 )
 
-type ScriptAutocorrectAttrEnum string
+type ScriptAutocorrectEnum string
 
 const (
-	ScriptAutocorrectAttrEnumOff ScriptAutocorrectAttrEnum = "off"
-	ScriptAutocorrectAttrEnumOn  ScriptAutocorrectAttrEnum = "on"
+	ScriptAutocorrectEnumOff ScriptAutocorrectEnum = "off"
+	ScriptAutocorrectEnumOn ScriptAutocorrectEnum = "on"
 )
 
-type ScriptContenteditableAttrEnum string
+type ScriptContenteditableEnum string
 
 const (
-	ScriptContenteditableAttrEnumFalse         ScriptContenteditableAttrEnum = "false"
-	ScriptContenteditableAttrEnumPlaintextOnly ScriptContenteditableAttrEnum = "plaintext-only"
-	ScriptContenteditableAttrEnumTrue          ScriptContenteditableAttrEnum = "true"
+	ScriptContenteditableEnumPlaintextOnly ScriptContenteditableEnum = "plaintext-only"
+	ScriptContenteditableEnumTrue ScriptContenteditableEnum = "true"
+	ScriptContenteditableEnumFalse ScriptContenteditableEnum = "false"
+)
+
+type ScriptDirEnum string
+
+const (
+	ScriptDirEnumAuto ScriptDirEnum = "auto"
+	ScriptDirEnumLtr ScriptDirEnum = "ltr"
+	ScriptDirEnumRtl ScriptDirEnum = "rtl"
+)
+
+type ScriptDraggableEnum string
+
+const (
+	ScriptDraggableEnumFalse ScriptDraggableEnum = "false"
+	ScriptDraggableEnumTrue ScriptDraggableEnum = "true"
+)
+
+type ScriptEnterkeyhintEnum string
+
+const (
+	ScriptEnterkeyhintEnumDone ScriptEnterkeyhintEnum = "done"
+	ScriptEnterkeyhintEnumEnter ScriptEnterkeyhintEnum = "enter"
+	ScriptEnterkeyhintEnumGo ScriptEnterkeyhintEnum = "go"
+	ScriptEnterkeyhintEnumNext ScriptEnterkeyhintEnum = "next"
+	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
+	ScriptEnterkeyhintEnumSearch ScriptEnterkeyhintEnum = "search"
+	ScriptEnterkeyhintEnumSend ScriptEnterkeyhintEnum = "send"
+)
+
+type ScriptHiddenEnum string
+
+const (
+	ScriptHiddenEnumHidden ScriptHiddenEnum = "hidden"
+	ScriptHiddenEnumUntilFound ScriptHiddenEnum = "until-found"
 )
 
 type scriptAttrs map[string]any
 
-func (e *ScriptElement) Autocapitalize(a ScriptAutocapitalizeAttrEnum) *ScriptElement {
+func (e *ScriptElement) Autocapitalize(a ScriptAutocapitalizeEnum) *ScriptElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *ScriptElement) Autocorrect(a ScriptAutocorrectAttrEnum) *ScriptElement {
+func (e *ScriptElement) Autocorrect(a ScriptAutocorrectEnum) *ScriptElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *ScriptElement) Autofocus(b bool) *ScriptElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *ScriptElement) Class(s ...string) *ScriptElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *ScriptElement) Contenteditable(a ScriptContenteditableAttrEnum) *ScriptElement {
+func (e *ScriptElement) Contenteditable(a ScriptContenteditableEnum) *ScriptElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *ScriptElement) Dir(a ScriptDirEnum) *ScriptElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *ScriptElement) Draggable(a ScriptDraggableEnum) *ScriptElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *ScriptElement) Enterkeyhint(a ScriptEnterkeyhintEnum) *ScriptElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *ScriptElement) Hidden(a ScriptHiddenEnum) *ScriptElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *ScriptElement) Id(s string) *ScriptElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *ScriptElement) Slot(s string) *ScriptElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

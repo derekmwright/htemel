@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type StrongElement struct {
 	attributes strongAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type StrongElement struct {
 // Spec Description: The strong element represents strong importance, seriousness, or urgency for its contents.
 func Strong(children ...htemel.Node) *StrongElement {
 	node := &StrongElement{
-		children:   children,
+		children: children,
 		attributes: make(strongAttrs),
 	}
 
@@ -39,73 +38,131 @@ func StrongIf(condition bool, children ...htemel.Node) *StrongElement {
 	}
 }
 
-type StrongAutocapitalizeAttrEnum string
+type StrongAutocapitalizeEnum string
 
 const (
-	StrongAutocapitalizeAttrEnumSentences  StrongAutocapitalizeAttrEnum = "sentences"
-	StrongAutocapitalizeAttrEnumWords      StrongAutocapitalizeAttrEnum = "words"
-	StrongAutocapitalizeAttrEnumCharacters StrongAutocapitalizeAttrEnum = "characters"
-	StrongAutocapitalizeAttrEnumNone       StrongAutocapitalizeAttrEnum = "none"
-	StrongAutocapitalizeAttrEnumOff        StrongAutocapitalizeAttrEnum = "off"
-	StrongAutocapitalizeAttrEnumOn         StrongAutocapitalizeAttrEnum = "on"
+	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
+	StrongAutocapitalizeEnumNone StrongAutocapitalizeEnum = "none"
+	StrongAutocapitalizeEnumOff StrongAutocapitalizeEnum = "off"
+	StrongAutocapitalizeEnumOn StrongAutocapitalizeEnum = "on"
+	StrongAutocapitalizeEnumSentences StrongAutocapitalizeEnum = "sentences"
+	StrongAutocapitalizeEnumWords StrongAutocapitalizeEnum = "words"
 )
 
-type StrongAutocorrectAttrEnum string
+type StrongAutocorrectEnum string
 
 const (
-	StrongAutocorrectAttrEnumOff StrongAutocorrectAttrEnum = "off"
-	StrongAutocorrectAttrEnumOn  StrongAutocorrectAttrEnum = "on"
+	StrongAutocorrectEnumOff StrongAutocorrectEnum = "off"
+	StrongAutocorrectEnumOn StrongAutocorrectEnum = "on"
 )
 
-type StrongContenteditableAttrEnum string
+type StrongContenteditableEnum string
 
 const (
-	StrongContenteditableAttrEnumPlaintextOnly StrongContenteditableAttrEnum = "plaintext-only"
-	StrongContenteditableAttrEnumTrue          StrongContenteditableAttrEnum = "true"
-	StrongContenteditableAttrEnumFalse         StrongContenteditableAttrEnum = "false"
+	StrongContenteditableEnumTrue StrongContenteditableEnum = "true"
+	StrongContenteditableEnumFalse StrongContenteditableEnum = "false"
+	StrongContenteditableEnumPlaintextOnly StrongContenteditableEnum = "plaintext-only"
+)
+
+type StrongDirEnum string
+
+const (
+	StrongDirEnumLtr StrongDirEnum = "ltr"
+	StrongDirEnumRtl StrongDirEnum = "rtl"
+	StrongDirEnumAuto StrongDirEnum = "auto"
+)
+
+type StrongDraggableEnum string
+
+const (
+	StrongDraggableEnumFalse StrongDraggableEnum = "false"
+	StrongDraggableEnumTrue StrongDraggableEnum = "true"
+)
+
+type StrongEnterkeyhintEnum string
+
+const (
+	StrongEnterkeyhintEnumDone StrongEnterkeyhintEnum = "done"
+	StrongEnterkeyhintEnumEnter StrongEnterkeyhintEnum = "enter"
+	StrongEnterkeyhintEnumGo StrongEnterkeyhintEnum = "go"
+	StrongEnterkeyhintEnumNext StrongEnterkeyhintEnum = "next"
+	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
+	StrongEnterkeyhintEnumSearch StrongEnterkeyhintEnum = "search"
+	StrongEnterkeyhintEnumSend StrongEnterkeyhintEnum = "send"
+)
+
+type StrongHiddenEnum string
+
+const (
+	StrongHiddenEnumHidden StrongHiddenEnum = "hidden"
+	StrongHiddenEnumUntilFound StrongHiddenEnum = "until-found"
 )
 
 type strongAttrs map[string]any
 
-func (e *StrongElement) Autocapitalize(a StrongAutocapitalizeAttrEnum) *StrongElement {
+func (e *StrongElement) Autocapitalize(a StrongAutocapitalizeEnum) *StrongElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *StrongElement) Autocorrect(a StrongAutocorrectAttrEnum) *StrongElement {
+func (e *StrongElement) Autocorrect(a StrongAutocorrectEnum) *StrongElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *StrongElement) Autofocus(b bool) *StrongElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *StrongElement) Class(s ...string) *StrongElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *StrongElement) Contenteditable(a StrongContenteditableAttrEnum) *StrongElement {
+func (e *StrongElement) Contenteditable(a StrongContenteditableEnum) *StrongElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *StrongElement) Dir(a StrongDirEnum) *StrongElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *StrongElement) Draggable(a StrongDraggableEnum) *StrongElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *StrongElement) Enterkeyhint(a StrongEnterkeyhintEnum) *StrongElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *StrongElement) Hidden(a StrongHiddenEnum) *StrongElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *StrongElement) Id(s string) *StrongElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *StrongElement) Slot(s string) *StrongElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

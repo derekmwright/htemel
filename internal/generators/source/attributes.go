@@ -54,7 +54,7 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(b bool) *` +
 }
 `)
 			case *spec.AttributeTypeEnum:
-				typeName := titleCase(e.Tag) + titleCase(a.Name) + "AttrEnum"
+				typeName := titleCase(e.Tag) + titleCase(a.Name) + "Enum"
 
 				addTypes.WriteString("\ntype " + typeName + " string\n")
 				addTypes.WriteString("\nconst (\n")

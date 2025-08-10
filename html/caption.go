@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type CaptionElement struct {
 	attributes captionAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type CaptionElement struct {
 // Spec Description: The caption element represents the title of the table that is its parent, if it has a parent and that is a table element.
 func Caption(children ...htemel.Node) *CaptionElement {
 	node := &CaptionElement{
-		children:   children,
+		children: children,
 		attributes: make(captionAttrs),
 	}
 
@@ -39,73 +38,131 @@ func CaptionIf(condition bool, children ...htemel.Node) *CaptionElement {
 	}
 }
 
-type CaptionAutocapitalizeAttrEnum string
+type CaptionAutocapitalizeEnum string
 
 const (
-	CaptionAutocapitalizeAttrEnumOn         CaptionAutocapitalizeAttrEnum = "on"
-	CaptionAutocapitalizeAttrEnumSentences  CaptionAutocapitalizeAttrEnum = "sentences"
-	CaptionAutocapitalizeAttrEnumWords      CaptionAutocapitalizeAttrEnum = "words"
-	CaptionAutocapitalizeAttrEnumCharacters CaptionAutocapitalizeAttrEnum = "characters"
-	CaptionAutocapitalizeAttrEnumNone       CaptionAutocapitalizeAttrEnum = "none"
-	CaptionAutocapitalizeAttrEnumOff        CaptionAutocapitalizeAttrEnum = "off"
+	CaptionAutocapitalizeEnumOff CaptionAutocapitalizeEnum = "off"
+	CaptionAutocapitalizeEnumOn CaptionAutocapitalizeEnum = "on"
+	CaptionAutocapitalizeEnumSentences CaptionAutocapitalizeEnum = "sentences"
+	CaptionAutocapitalizeEnumWords CaptionAutocapitalizeEnum = "words"
+	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
+	CaptionAutocapitalizeEnumNone CaptionAutocapitalizeEnum = "none"
 )
 
-type CaptionAutocorrectAttrEnum string
+type CaptionAutocorrectEnum string
 
 const (
-	CaptionAutocorrectAttrEnumOff CaptionAutocorrectAttrEnum = "off"
-	CaptionAutocorrectAttrEnumOn  CaptionAutocorrectAttrEnum = "on"
+	CaptionAutocorrectEnumOff CaptionAutocorrectEnum = "off"
+	CaptionAutocorrectEnumOn CaptionAutocorrectEnum = "on"
 )
 
-type CaptionContenteditableAttrEnum string
+type CaptionContenteditableEnum string
 
 const (
-	CaptionContenteditableAttrEnumFalse         CaptionContenteditableAttrEnum = "false"
-	CaptionContenteditableAttrEnumPlaintextOnly CaptionContenteditableAttrEnum = "plaintext-only"
-	CaptionContenteditableAttrEnumTrue          CaptionContenteditableAttrEnum = "true"
+	CaptionContenteditableEnumFalse CaptionContenteditableEnum = "false"
+	CaptionContenteditableEnumPlaintextOnly CaptionContenteditableEnum = "plaintext-only"
+	CaptionContenteditableEnumTrue CaptionContenteditableEnum = "true"
+)
+
+type CaptionDirEnum string
+
+const (
+	CaptionDirEnumRtl CaptionDirEnum = "rtl"
+	CaptionDirEnumAuto CaptionDirEnum = "auto"
+	CaptionDirEnumLtr CaptionDirEnum = "ltr"
+)
+
+type CaptionDraggableEnum string
+
+const (
+	CaptionDraggableEnumFalse CaptionDraggableEnum = "false"
+	CaptionDraggableEnumTrue CaptionDraggableEnum = "true"
+)
+
+type CaptionEnterkeyhintEnum string
+
+const (
+	CaptionEnterkeyhintEnumSearch CaptionEnterkeyhintEnum = "search"
+	CaptionEnterkeyhintEnumSend CaptionEnterkeyhintEnum = "send"
+	CaptionEnterkeyhintEnumDone CaptionEnterkeyhintEnum = "done"
+	CaptionEnterkeyhintEnumEnter CaptionEnterkeyhintEnum = "enter"
+	CaptionEnterkeyhintEnumGo CaptionEnterkeyhintEnum = "go"
+	CaptionEnterkeyhintEnumNext CaptionEnterkeyhintEnum = "next"
+	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
+)
+
+type CaptionHiddenEnum string
+
+const (
+	CaptionHiddenEnumUntilFound CaptionHiddenEnum = "until-found"
+	CaptionHiddenEnumHidden CaptionHiddenEnum = "hidden"
 )
 
 type captionAttrs map[string]any
 
-func (e *CaptionElement) Autocapitalize(a CaptionAutocapitalizeAttrEnum) *CaptionElement {
+func (e *CaptionElement) Autocapitalize(a CaptionAutocapitalizeEnum) *CaptionElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *CaptionElement) Autocorrect(a CaptionAutocorrectAttrEnum) *CaptionElement {
+func (e *CaptionElement) Autocorrect(a CaptionAutocorrectEnum) *CaptionElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *CaptionElement) Autofocus(b bool) *CaptionElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *CaptionElement) Class(s ...string) *CaptionElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *CaptionElement) Contenteditable(a CaptionContenteditableAttrEnum) *CaptionElement {
+func (e *CaptionElement) Contenteditable(a CaptionContenteditableEnum) *CaptionElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *CaptionElement) Dir(a CaptionDirEnum) *CaptionElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *CaptionElement) Draggable(a CaptionDraggableEnum) *CaptionElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *CaptionElement) Enterkeyhint(a CaptionEnterkeyhintEnum) *CaptionElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *CaptionElement) Hidden(a CaptionHiddenEnum) *CaptionElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *CaptionElement) Id(s string) *CaptionElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *CaptionElement) Slot(s string) *CaptionElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

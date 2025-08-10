@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type DatalistElement struct {
 	attributes datalistAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type DatalistElement struct {
 // Spec Description: The datalist element represents a set of option elements that represent predefined options for other controls. In the rendering, the datalist element represents nothing and it, along with its children, should be hidden.
 func Datalist(children ...htemel.Node) *DatalistElement {
 	node := &DatalistElement{
-		children:   children,
+		children: children,
 		attributes: make(datalistAttrs),
 	}
 
@@ -39,73 +38,131 @@ func DatalistIf(condition bool, children ...htemel.Node) *DatalistElement {
 	}
 }
 
-type DatalistAutocapitalizeAttrEnum string
+type DatalistAutocapitalizeEnum string
 
 const (
-	DatalistAutocapitalizeAttrEnumOn         DatalistAutocapitalizeAttrEnum = "on"
-	DatalistAutocapitalizeAttrEnumSentences  DatalistAutocapitalizeAttrEnum = "sentences"
-	DatalistAutocapitalizeAttrEnumWords      DatalistAutocapitalizeAttrEnum = "words"
-	DatalistAutocapitalizeAttrEnumCharacters DatalistAutocapitalizeAttrEnum = "characters"
-	DatalistAutocapitalizeAttrEnumNone       DatalistAutocapitalizeAttrEnum = "none"
-	DatalistAutocapitalizeAttrEnumOff        DatalistAutocapitalizeAttrEnum = "off"
+	DatalistAutocapitalizeEnumNone DatalistAutocapitalizeEnum = "none"
+	DatalistAutocapitalizeEnumOff DatalistAutocapitalizeEnum = "off"
+	DatalistAutocapitalizeEnumOn DatalistAutocapitalizeEnum = "on"
+	DatalistAutocapitalizeEnumSentences DatalistAutocapitalizeEnum = "sentences"
+	DatalistAutocapitalizeEnumWords DatalistAutocapitalizeEnum = "words"
+	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
 )
 
-type DatalistAutocorrectAttrEnum string
+type DatalistAutocorrectEnum string
 
 const (
-	DatalistAutocorrectAttrEnumOff DatalistAutocorrectAttrEnum = "off"
-	DatalistAutocorrectAttrEnumOn  DatalistAutocorrectAttrEnum = "on"
+	DatalistAutocorrectEnumOn DatalistAutocorrectEnum = "on"
+	DatalistAutocorrectEnumOff DatalistAutocorrectEnum = "off"
 )
 
-type DatalistContenteditableAttrEnum string
+type DatalistContenteditableEnum string
 
 const (
-	DatalistContenteditableAttrEnumFalse         DatalistContenteditableAttrEnum = "false"
-	DatalistContenteditableAttrEnumPlaintextOnly DatalistContenteditableAttrEnum = "plaintext-only"
-	DatalistContenteditableAttrEnumTrue          DatalistContenteditableAttrEnum = "true"
+	DatalistContenteditableEnumFalse DatalistContenteditableEnum = "false"
+	DatalistContenteditableEnumPlaintextOnly DatalistContenteditableEnum = "plaintext-only"
+	DatalistContenteditableEnumTrue DatalistContenteditableEnum = "true"
+)
+
+type DatalistDirEnum string
+
+const (
+	DatalistDirEnumAuto DatalistDirEnum = "auto"
+	DatalistDirEnumLtr DatalistDirEnum = "ltr"
+	DatalistDirEnumRtl DatalistDirEnum = "rtl"
+)
+
+type DatalistDraggableEnum string
+
+const (
+	DatalistDraggableEnumFalse DatalistDraggableEnum = "false"
+	DatalistDraggableEnumTrue DatalistDraggableEnum = "true"
+)
+
+type DatalistEnterkeyhintEnum string
+
+const (
+	DatalistEnterkeyhintEnumDone DatalistEnterkeyhintEnum = "done"
+	DatalistEnterkeyhintEnumEnter DatalistEnterkeyhintEnum = "enter"
+	DatalistEnterkeyhintEnumGo DatalistEnterkeyhintEnum = "go"
+	DatalistEnterkeyhintEnumNext DatalistEnterkeyhintEnum = "next"
+	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
+	DatalistEnterkeyhintEnumSearch DatalistEnterkeyhintEnum = "search"
+	DatalistEnterkeyhintEnumSend DatalistEnterkeyhintEnum = "send"
+)
+
+type DatalistHiddenEnum string
+
+const (
+	DatalistHiddenEnumHidden DatalistHiddenEnum = "hidden"
+	DatalistHiddenEnumUntilFound DatalistHiddenEnum = "until-found"
 )
 
 type datalistAttrs map[string]any
 
-func (e *DatalistElement) Autocapitalize(a DatalistAutocapitalizeAttrEnum) *DatalistElement {
+func (e *DatalistElement) Autocapitalize(a DatalistAutocapitalizeEnum) *DatalistElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *DatalistElement) Autocorrect(a DatalistAutocorrectAttrEnum) *DatalistElement {
+func (e *DatalistElement) Autocorrect(a DatalistAutocorrectEnum) *DatalistElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *DatalistElement) Autofocus(b bool) *DatalistElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *DatalistElement) Class(s ...string) *DatalistElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *DatalistElement) Contenteditable(a DatalistContenteditableAttrEnum) *DatalistElement {
+func (e *DatalistElement) Contenteditable(a DatalistContenteditableEnum) *DatalistElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *DatalistElement) Dir(a DatalistDirEnum) *DatalistElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *DatalistElement) Draggable(a DatalistDraggableEnum) *DatalistElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *DatalistElement) Enterkeyhint(a DatalistEnterkeyhintEnum) *DatalistElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *DatalistElement) Hidden(a DatalistHiddenEnum) *DatalistElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *DatalistElement) Id(s string) *DatalistElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *DatalistElement) Slot(s string) *DatalistElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

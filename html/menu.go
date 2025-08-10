@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type MenuElement struct {
 	attributes menuAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type MenuElement struct {
 // Spec Description: The menu element represents a toolbar consisting of its contents, in the form of an unordered list of items (represented by li elements), each of which represents a command that the user can perform or activate.
 func Menu(children ...htemel.Node) *MenuElement {
 	node := &MenuElement{
-		children:   children,
+		children: children,
 		attributes: make(menuAttrs),
 	}
 
@@ -39,73 +38,131 @@ func MenuIf(condition bool, children ...htemel.Node) *MenuElement {
 	}
 }
 
-type MenuAutocapitalizeAttrEnum string
+type MenuAutocapitalizeEnum string
 
 const (
-	MenuAutocapitalizeAttrEnumCharacters MenuAutocapitalizeAttrEnum = "characters"
-	MenuAutocapitalizeAttrEnumNone       MenuAutocapitalizeAttrEnum = "none"
-	MenuAutocapitalizeAttrEnumOff        MenuAutocapitalizeAttrEnum = "off"
-	MenuAutocapitalizeAttrEnumOn         MenuAutocapitalizeAttrEnum = "on"
-	MenuAutocapitalizeAttrEnumSentences  MenuAutocapitalizeAttrEnum = "sentences"
-	MenuAutocapitalizeAttrEnumWords      MenuAutocapitalizeAttrEnum = "words"
+	MenuAutocapitalizeEnumOff MenuAutocapitalizeEnum = "off"
+	MenuAutocapitalizeEnumOn MenuAutocapitalizeEnum = "on"
+	MenuAutocapitalizeEnumSentences MenuAutocapitalizeEnum = "sentences"
+	MenuAutocapitalizeEnumWords MenuAutocapitalizeEnum = "words"
+	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
+	MenuAutocapitalizeEnumNone MenuAutocapitalizeEnum = "none"
 )
 
-type MenuAutocorrectAttrEnum string
+type MenuAutocorrectEnum string
 
 const (
-	MenuAutocorrectAttrEnumOff MenuAutocorrectAttrEnum = "off"
-	MenuAutocorrectAttrEnumOn  MenuAutocorrectAttrEnum = "on"
+	MenuAutocorrectEnumOff MenuAutocorrectEnum = "off"
+	MenuAutocorrectEnumOn MenuAutocorrectEnum = "on"
 )
 
-type MenuContenteditableAttrEnum string
+type MenuContenteditableEnum string
 
 const (
-	MenuContenteditableAttrEnumPlaintextOnly MenuContenteditableAttrEnum = "plaintext-only"
-	MenuContenteditableAttrEnumTrue          MenuContenteditableAttrEnum = "true"
-	MenuContenteditableAttrEnumFalse         MenuContenteditableAttrEnum = "false"
+	MenuContenteditableEnumFalse MenuContenteditableEnum = "false"
+	MenuContenteditableEnumPlaintextOnly MenuContenteditableEnum = "plaintext-only"
+	MenuContenteditableEnumTrue MenuContenteditableEnum = "true"
+)
+
+type MenuDirEnum string
+
+const (
+	MenuDirEnumRtl MenuDirEnum = "rtl"
+	MenuDirEnumAuto MenuDirEnum = "auto"
+	MenuDirEnumLtr MenuDirEnum = "ltr"
+)
+
+type MenuDraggableEnum string
+
+const (
+	MenuDraggableEnumFalse MenuDraggableEnum = "false"
+	MenuDraggableEnumTrue MenuDraggableEnum = "true"
+)
+
+type MenuEnterkeyhintEnum string
+
+const (
+	MenuEnterkeyhintEnumDone MenuEnterkeyhintEnum = "done"
+	MenuEnterkeyhintEnumEnter MenuEnterkeyhintEnum = "enter"
+	MenuEnterkeyhintEnumGo MenuEnterkeyhintEnum = "go"
+	MenuEnterkeyhintEnumNext MenuEnterkeyhintEnum = "next"
+	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
+	MenuEnterkeyhintEnumSearch MenuEnterkeyhintEnum = "search"
+	MenuEnterkeyhintEnumSend MenuEnterkeyhintEnum = "send"
+)
+
+type MenuHiddenEnum string
+
+const (
+	MenuHiddenEnumHidden MenuHiddenEnum = "hidden"
+	MenuHiddenEnumUntilFound MenuHiddenEnum = "until-found"
 )
 
 type menuAttrs map[string]any
 
-func (e *MenuElement) Autocapitalize(a MenuAutocapitalizeAttrEnum) *MenuElement {
+func (e *MenuElement) Autocapitalize(a MenuAutocapitalizeEnum) *MenuElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *MenuElement) Autocorrect(a MenuAutocorrectAttrEnum) *MenuElement {
+func (e *MenuElement) Autocorrect(a MenuAutocorrectEnum) *MenuElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *MenuElement) Autofocus(b bool) *MenuElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *MenuElement) Class(s ...string) *MenuElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *MenuElement) Contenteditable(a MenuContenteditableAttrEnum) *MenuElement {
+func (e *MenuElement) Contenteditable(a MenuContenteditableEnum) *MenuElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *MenuElement) Dir(a MenuDirEnum) *MenuElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *MenuElement) Draggable(a MenuDraggableEnum) *MenuElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *MenuElement) Enterkeyhint(a MenuEnterkeyhintEnum) *MenuElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *MenuElement) Hidden(a MenuHiddenEnum) *MenuElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *MenuElement) Id(s string) *MenuElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *MenuElement) Slot(s string) *MenuElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 

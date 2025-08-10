@@ -2,17 +2,16 @@
 package html
 
 import (
-	"fmt"
-	"io"
-	"strings"
-
-	"github.com/derekmwright/htemel"
-	"golang.org/x/net/html"
+  "fmt"
+  "github.com/derekmwright/htemel"
+  "golang.org/x/net/html"
+  "io"
+  "strings"
 )
 
 type FieldsetElement struct {
 	attributes fieldsetAttrs
-	children   []htemel.Node
+	children []htemel.Node
 	skipRender bool
 }
 
@@ -22,7 +21,7 @@ type FieldsetElement struct {
 // Spec Description: The fieldset element represents a set of form controls (or other content) grouped together, optionally with a caption. The caption is given by the first legend element that is a child of the fieldset element, if any. The remainder of the descendants form the group.
 func Fieldset(children ...htemel.Node) *FieldsetElement {
 	node := &FieldsetElement{
-		children:   children,
+		children: children,
 		attributes: make(fieldsetAttrs),
 	}
 
@@ -39,73 +38,131 @@ func FieldsetIf(condition bool, children ...htemel.Node) *FieldsetElement {
 	}
 }
 
-type FieldsetAutocapitalizeAttrEnum string
+type FieldsetAutocapitalizeEnum string
 
 const (
-	FieldsetAutocapitalizeAttrEnumOff        FieldsetAutocapitalizeAttrEnum = "off"
-	FieldsetAutocapitalizeAttrEnumOn         FieldsetAutocapitalizeAttrEnum = "on"
-	FieldsetAutocapitalizeAttrEnumSentences  FieldsetAutocapitalizeAttrEnum = "sentences"
-	FieldsetAutocapitalizeAttrEnumWords      FieldsetAutocapitalizeAttrEnum = "words"
-	FieldsetAutocapitalizeAttrEnumCharacters FieldsetAutocapitalizeAttrEnum = "characters"
-	FieldsetAutocapitalizeAttrEnumNone       FieldsetAutocapitalizeAttrEnum = "none"
+	FieldsetAutocapitalizeEnumSentences FieldsetAutocapitalizeEnum = "sentences"
+	FieldsetAutocapitalizeEnumWords FieldsetAutocapitalizeEnum = "words"
+	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
+	FieldsetAutocapitalizeEnumNone FieldsetAutocapitalizeEnum = "none"
+	FieldsetAutocapitalizeEnumOff FieldsetAutocapitalizeEnum = "off"
+	FieldsetAutocapitalizeEnumOn FieldsetAutocapitalizeEnum = "on"
 )
 
-type FieldsetAutocorrectAttrEnum string
+type FieldsetAutocorrectEnum string
 
 const (
-	FieldsetAutocorrectAttrEnumOff FieldsetAutocorrectAttrEnum = "off"
-	FieldsetAutocorrectAttrEnumOn  FieldsetAutocorrectAttrEnum = "on"
+	FieldsetAutocorrectEnumOff FieldsetAutocorrectEnum = "off"
+	FieldsetAutocorrectEnumOn FieldsetAutocorrectEnum = "on"
 )
 
-type FieldsetContenteditableAttrEnum string
+type FieldsetContenteditableEnum string
 
 const (
-	FieldsetContenteditableAttrEnumFalse         FieldsetContenteditableAttrEnum = "false"
-	FieldsetContenteditableAttrEnumPlaintextOnly FieldsetContenteditableAttrEnum = "plaintext-only"
-	FieldsetContenteditableAttrEnumTrue          FieldsetContenteditableAttrEnum = "true"
+	FieldsetContenteditableEnumPlaintextOnly FieldsetContenteditableEnum = "plaintext-only"
+	FieldsetContenteditableEnumTrue FieldsetContenteditableEnum = "true"
+	FieldsetContenteditableEnumFalse FieldsetContenteditableEnum = "false"
+)
+
+type FieldsetDirEnum string
+
+const (
+	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
+	FieldsetDirEnumLtr FieldsetDirEnum = "ltr"
+	FieldsetDirEnumRtl FieldsetDirEnum = "rtl"
+)
+
+type FieldsetDraggableEnum string
+
+const (
+	FieldsetDraggableEnumFalse FieldsetDraggableEnum = "false"
+	FieldsetDraggableEnumTrue FieldsetDraggableEnum = "true"
+)
+
+type FieldsetEnterkeyhintEnum string
+
+const (
+	FieldsetEnterkeyhintEnumDone FieldsetEnterkeyhintEnum = "done"
+	FieldsetEnterkeyhintEnumEnter FieldsetEnterkeyhintEnum = "enter"
+	FieldsetEnterkeyhintEnumGo FieldsetEnterkeyhintEnum = "go"
+	FieldsetEnterkeyhintEnumNext FieldsetEnterkeyhintEnum = "next"
+	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
+	FieldsetEnterkeyhintEnumSearch FieldsetEnterkeyhintEnum = "search"
+	FieldsetEnterkeyhintEnumSend FieldsetEnterkeyhintEnum = "send"
+)
+
+type FieldsetHiddenEnum string
+
+const (
+	FieldsetHiddenEnumHidden FieldsetHiddenEnum = "hidden"
+	FieldsetHiddenEnumUntilFound FieldsetHiddenEnum = "until-found"
 )
 
 type fieldsetAttrs map[string]any
 
-func (e *FieldsetElement) Autocapitalize(a FieldsetAutocapitalizeAttrEnum) *FieldsetElement {
+func (e *FieldsetElement) Autocapitalize(a FieldsetAutocapitalizeEnum) *FieldsetElement {
 	e.attributes["autocapitalize"] = a
-
+	
 	return e
 }
 
-func (e *FieldsetElement) Autocorrect(a FieldsetAutocorrectAttrEnum) *FieldsetElement {
+func (e *FieldsetElement) Autocorrect(a FieldsetAutocorrectEnum) *FieldsetElement {
 	e.attributes["autocorrect"] = a
-
+	
 	return e
 }
 
 func (e *FieldsetElement) Autofocus(b bool) *FieldsetElement {
 	e.attributes["autofocus"] = b
-
+	
 	return e
 }
 
 func (e *FieldsetElement) Class(s ...string) *FieldsetElement {
 	e.attributes["class"] = strings.Join(s, " ")
-
+	
 	return e
 }
 
-func (e *FieldsetElement) Contenteditable(a FieldsetContenteditableAttrEnum) *FieldsetElement {
+func (e *FieldsetElement) Contenteditable(a FieldsetContenteditableEnum) *FieldsetElement {
 	e.attributes["contenteditable"] = a
+	
+	return e
+}
 
+func (e *FieldsetElement) Dir(a FieldsetDirEnum) *FieldsetElement {
+	e.attributes["dir"] = a
+	
+	return e
+}
+
+func (e *FieldsetElement) Draggable(a FieldsetDraggableEnum) *FieldsetElement {
+	e.attributes["draggable"] = a
+	
+	return e
+}
+
+func (e *FieldsetElement) Enterkeyhint(a FieldsetEnterkeyhintEnum) *FieldsetElement {
+	e.attributes["enterkeyhint"] = a
+	
+	return e
+}
+
+func (e *FieldsetElement) Hidden(a FieldsetHiddenEnum) *FieldsetElement {
+	e.attributes["hidden"] = a
+	
 	return e
 }
 
 func (e *FieldsetElement) Id(s string) *FieldsetElement {
 	e.attributes["id"] = s
-
+	
 	return e
 }
 
 func (e *FieldsetElement) Slot(s string) *FieldsetElement {
 	e.attributes["slot"] = s
-
+	
 	return e
 }
 
