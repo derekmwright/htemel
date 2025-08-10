@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type FooterElement struct {
@@ -21,6 +22,7 @@ type FooterElement struct {
 func Footer(children ...htemel.Node) *FooterElement {
 	node := &FooterElement{
 		children: children,
+		attributes: make(footerAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func FooterIf(condition bool, children ...htemel.Node) *FooterElement {
 type FooterAutocapitalizeAttrEnum string
 
 const (
-	FooterAutocapitalizeAttrEnumOn FooterAutocapitalizeAttrEnum = "on"
-	FooterAutocapitalizeAttrEnumSentences FooterAutocapitalizeAttrEnum = "sentences"
-	FooterAutocapitalizeAttrEnumWords FooterAutocapitalizeAttrEnum = "words"
 	FooterAutocapitalizeAttrEnumCharacters FooterAutocapitalizeAttrEnum = "characters"
 	FooterAutocapitalizeAttrEnumNone FooterAutocapitalizeAttrEnum = "none"
 	FooterAutocapitalizeAttrEnumOff FooterAutocapitalizeAttrEnum = "off"
+	FooterAutocapitalizeAttrEnumOn FooterAutocapitalizeAttrEnum = "on"
+	FooterAutocapitalizeAttrEnumSentences FooterAutocapitalizeAttrEnum = "sentences"
+	FooterAutocapitalizeAttrEnumWords FooterAutocapitalizeAttrEnum = "words"
 )
 
 type FooterAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *FooterElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

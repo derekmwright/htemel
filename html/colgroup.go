@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type ColgroupElement struct {
@@ -21,6 +22,7 @@ type ColgroupElement struct {
 func Colgroup(children ...htemel.Node) *ColgroupElement {
 	node := &ColgroupElement{
 		children: children,
+		attributes: make(colgroupAttrs),
 	}
 
 	return node
@@ -57,9 +59,9 @@ const (
 type ColgroupContenteditableAttrEnum string
 
 const (
+	ColgroupContenteditableAttrEnumFalse ColgroupContenteditableAttrEnum = "false"
 	ColgroupContenteditableAttrEnumPlaintextOnly ColgroupContenteditableAttrEnum = "plaintext-only"
 	ColgroupContenteditableAttrEnumTrue ColgroupContenteditableAttrEnum = "true"
-	ColgroupContenteditableAttrEnumFalse ColgroupContenteditableAttrEnum = "false"
 )
 
 type colgroupAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *ColgroupElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

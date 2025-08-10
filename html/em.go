@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type EmElement struct {
@@ -21,6 +22,7 @@ type EmElement struct {
 func Em(children ...htemel.Node) *EmElement {
 	node := &EmElement{
 		children: children,
+		attributes: make(emAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func EmIf(condition bool, children ...htemel.Node) *EmElement {
 type EmAutocapitalizeAttrEnum string
 
 const (
+	EmAutocapitalizeAttrEnumWords EmAutocapitalizeAttrEnum = "words"
 	EmAutocapitalizeAttrEnumCharacters EmAutocapitalizeAttrEnum = "characters"
 	EmAutocapitalizeAttrEnumNone EmAutocapitalizeAttrEnum = "none"
 	EmAutocapitalizeAttrEnumOff EmAutocapitalizeAttrEnum = "off"
 	EmAutocapitalizeAttrEnumOn EmAutocapitalizeAttrEnum = "on"
 	EmAutocapitalizeAttrEnumSentences EmAutocapitalizeAttrEnum = "sentences"
-	EmAutocapitalizeAttrEnumWords EmAutocapitalizeAttrEnum = "words"
 )
 
 type EmAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type EmContenteditableAttrEnum string
 
 const (
+	EmContenteditableAttrEnumTrue EmContenteditableAttrEnum = "true"
 	EmContenteditableAttrEnumFalse EmContenteditableAttrEnum = "false"
 	EmContenteditableAttrEnumPlaintextOnly EmContenteditableAttrEnum = "plaintext-only"
-	EmContenteditableAttrEnumTrue EmContenteditableAttrEnum = "true"
 )
 
 type emAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *EmElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

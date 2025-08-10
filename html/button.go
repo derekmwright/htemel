@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type ButtonElement struct {
@@ -21,6 +22,7 @@ type ButtonElement struct {
 func Button(children ...htemel.Node) *ButtonElement {
 	node := &ButtonElement{
 		children: children,
+		attributes: make(buttonAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func ButtonIf(condition bool, children ...htemel.Node) *ButtonElement {
 type ButtonAutocapitalizeAttrEnum string
 
 const (
+	ButtonAutocapitalizeAttrEnumWords ButtonAutocapitalizeAttrEnum = "words"
 	ButtonAutocapitalizeAttrEnumCharacters ButtonAutocapitalizeAttrEnum = "characters"
 	ButtonAutocapitalizeAttrEnumNone ButtonAutocapitalizeAttrEnum = "none"
 	ButtonAutocapitalizeAttrEnumOff ButtonAutocapitalizeAttrEnum = "off"
 	ButtonAutocapitalizeAttrEnumOn ButtonAutocapitalizeAttrEnum = "on"
 	ButtonAutocapitalizeAttrEnumSentences ButtonAutocapitalizeAttrEnum = "sentences"
-	ButtonAutocapitalizeAttrEnumWords ButtonAutocapitalizeAttrEnum = "words"
 )
 
 type ButtonAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type ButtonContenteditableAttrEnum string
 
 const (
+	ButtonContenteditableAttrEnumFalse ButtonContenteditableAttrEnum = "false"
 	ButtonContenteditableAttrEnumPlaintextOnly ButtonContenteditableAttrEnum = "plaintext-only"
 	ButtonContenteditableAttrEnumTrue ButtonContenteditableAttrEnum = "true"
-	ButtonContenteditableAttrEnumFalse ButtonContenteditableAttrEnum = "false"
 )
 
 type buttonAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *ButtonElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

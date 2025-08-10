@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type TfootElement struct {
@@ -21,6 +22,7 @@ type TfootElement struct {
 func Tfoot(children ...htemel.Node) *TfootElement {
 	node := &TfootElement{
 		children: children,
+		attributes: make(tfootAttrs),
 	}
 
 	return node
@@ -57,9 +59,9 @@ const (
 type TfootContenteditableAttrEnum string
 
 const (
-	TfootContenteditableAttrEnumFalse TfootContenteditableAttrEnum = "false"
 	TfootContenteditableAttrEnumPlaintextOnly TfootContenteditableAttrEnum = "plaintext-only"
 	TfootContenteditableAttrEnumTrue TfootContenteditableAttrEnum = "true"
+	TfootContenteditableAttrEnumFalse TfootContenteditableAttrEnum = "false"
 )
 
 type tfootAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *TfootElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

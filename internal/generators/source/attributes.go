@@ -77,7 +77,7 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(s ...string)
 
 		tmpl = template.Must(tmpl.Parse(out.String()))
 
-		return tmpl, imports
+		return tmpl, imports.Add("strings")
 	}
 }
 

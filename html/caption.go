@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type CaptionElement struct {
@@ -21,6 +22,7 @@ type CaptionElement struct {
 func Caption(children ...htemel.Node) *CaptionElement {
 	node := &CaptionElement{
 		children: children,
+		attributes: make(captionAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func CaptionIf(condition bool, children ...htemel.Node) *CaptionElement {
 type CaptionAutocapitalizeAttrEnum string
 
 const (
-	CaptionAutocapitalizeAttrEnumOn CaptionAutocapitalizeAttrEnum = "on"
-	CaptionAutocapitalizeAttrEnumSentences CaptionAutocapitalizeAttrEnum = "sentences"
-	CaptionAutocapitalizeAttrEnumWords CaptionAutocapitalizeAttrEnum = "words"
 	CaptionAutocapitalizeAttrEnumCharacters CaptionAutocapitalizeAttrEnum = "characters"
 	CaptionAutocapitalizeAttrEnumNone CaptionAutocapitalizeAttrEnum = "none"
 	CaptionAutocapitalizeAttrEnumOff CaptionAutocapitalizeAttrEnum = "off"
+	CaptionAutocapitalizeAttrEnumOn CaptionAutocapitalizeAttrEnum = "on"
+	CaptionAutocapitalizeAttrEnumSentences CaptionAutocapitalizeAttrEnum = "sentences"
+	CaptionAutocapitalizeAttrEnumWords CaptionAutocapitalizeAttrEnum = "words"
 )
 
 type CaptionAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type CaptionContenteditableAttrEnum string
 
 const (
+	CaptionContenteditableAttrEnumTrue CaptionContenteditableAttrEnum = "true"
 	CaptionContenteditableAttrEnumFalse CaptionContenteditableAttrEnum = "false"
 	CaptionContenteditableAttrEnumPlaintextOnly CaptionContenteditableAttrEnum = "plaintext-only"
-	CaptionContenteditableAttrEnumTrue CaptionContenteditableAttrEnum = "true"
 )
 
 type captionAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *CaptionElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

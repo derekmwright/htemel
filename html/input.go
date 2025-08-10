@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type InputElement struct {
@@ -21,6 +22,7 @@ type InputElement struct {
 func Input(children ...htemel.Node) *InputElement {
 	node := &InputElement{
 		children: children,
+		attributes: make(inputAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func InputIf(condition bool, children ...htemel.Node) *InputElement {
 type InputAutocapitalizeAttrEnum string
 
 const (
+	InputAutocapitalizeAttrEnumWords InputAutocapitalizeAttrEnum = "words"
+	InputAutocapitalizeAttrEnumCharacters InputAutocapitalizeAttrEnum = "characters"
 	InputAutocapitalizeAttrEnumNone InputAutocapitalizeAttrEnum = "none"
 	InputAutocapitalizeAttrEnumOff InputAutocapitalizeAttrEnum = "off"
 	InputAutocapitalizeAttrEnumOn InputAutocapitalizeAttrEnum = "on"
 	InputAutocapitalizeAttrEnumSentences InputAutocapitalizeAttrEnum = "sentences"
-	InputAutocapitalizeAttrEnumWords InputAutocapitalizeAttrEnum = "words"
-	InputAutocapitalizeAttrEnumCharacters InputAutocapitalizeAttrEnum = "characters"
 )
 
 type InputAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type InputContenteditableAttrEnum string
 
 const (
+	InputContenteditableAttrEnumFalse InputContenteditableAttrEnum = "false"
 	InputContenteditableAttrEnumPlaintextOnly InputContenteditableAttrEnum = "plaintext-only"
 	InputContenteditableAttrEnumTrue InputContenteditableAttrEnum = "true"
-	InputContenteditableAttrEnumFalse InputContenteditableAttrEnum = "false"
 )
 
 type inputAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *InputElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

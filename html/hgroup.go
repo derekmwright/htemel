@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type HgroupElement struct {
@@ -21,6 +22,7 @@ type HgroupElement struct {
 func Hgroup(children ...htemel.Node) *HgroupElement {
 	node := &HgroupElement{
 		children: children,
+		attributes: make(hgroupAttrs),
 	}
 
 	return node
@@ -39,27 +41,27 @@ func HgroupIf(condition bool, children ...htemel.Node) *HgroupElement {
 type HgroupAutocapitalizeAttrEnum string
 
 const (
-	HgroupAutocapitalizeAttrEnumCharacters HgroupAutocapitalizeAttrEnum = "characters"
-	HgroupAutocapitalizeAttrEnumNone HgroupAutocapitalizeAttrEnum = "none"
 	HgroupAutocapitalizeAttrEnumOff HgroupAutocapitalizeAttrEnum = "off"
 	HgroupAutocapitalizeAttrEnumOn HgroupAutocapitalizeAttrEnum = "on"
 	HgroupAutocapitalizeAttrEnumSentences HgroupAutocapitalizeAttrEnum = "sentences"
 	HgroupAutocapitalizeAttrEnumWords HgroupAutocapitalizeAttrEnum = "words"
+	HgroupAutocapitalizeAttrEnumCharacters HgroupAutocapitalizeAttrEnum = "characters"
+	HgroupAutocapitalizeAttrEnumNone HgroupAutocapitalizeAttrEnum = "none"
 )
 
 type HgroupAutocorrectAttrEnum string
 
 const (
-	HgroupAutocorrectAttrEnumOff HgroupAutocorrectAttrEnum = "off"
 	HgroupAutocorrectAttrEnumOn HgroupAutocorrectAttrEnum = "on"
+	HgroupAutocorrectAttrEnumOff HgroupAutocorrectAttrEnum = "off"
 )
 
 type HgroupContenteditableAttrEnum string
 
 const (
+	HgroupContenteditableAttrEnumTrue HgroupContenteditableAttrEnum = "true"
 	HgroupContenteditableAttrEnumFalse HgroupContenteditableAttrEnum = "false"
 	HgroupContenteditableAttrEnumPlaintextOnly HgroupContenteditableAttrEnum = "plaintext-only"
-	HgroupContenteditableAttrEnumTrue HgroupContenteditableAttrEnum = "true"
 )
 
 type hgroupAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *HgroupElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

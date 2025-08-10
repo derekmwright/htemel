@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type RpElement struct {
@@ -21,6 +22,7 @@ type RpElement struct {
 func Rp(children ...htemel.Node) *RpElement {
 	node := &RpElement{
 		children: children,
+		attributes: make(rpAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func RpIf(condition bool, children ...htemel.Node) *RpElement {
 type RpAutocapitalizeAttrEnum string
 
 const (
-	RpAutocapitalizeAttrEnumNone RpAutocapitalizeAttrEnum = "none"
-	RpAutocapitalizeAttrEnumOff RpAutocapitalizeAttrEnum = "off"
 	RpAutocapitalizeAttrEnumOn RpAutocapitalizeAttrEnum = "on"
 	RpAutocapitalizeAttrEnumSentences RpAutocapitalizeAttrEnum = "sentences"
 	RpAutocapitalizeAttrEnumWords RpAutocapitalizeAttrEnum = "words"
 	RpAutocapitalizeAttrEnumCharacters RpAutocapitalizeAttrEnum = "characters"
+	RpAutocapitalizeAttrEnumNone RpAutocapitalizeAttrEnum = "none"
+	RpAutocapitalizeAttrEnumOff RpAutocapitalizeAttrEnum = "off"
 )
 
 type RpAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *RpElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

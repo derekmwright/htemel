@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type DlElement struct {
@@ -21,6 +22,7 @@ type DlElement struct {
 func Dl(children ...htemel.Node) *DlElement {
 	node := &DlElement{
 		children: children,
+		attributes: make(dlAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func DlIf(condition bool, children ...htemel.Node) *DlElement {
 type DlAutocapitalizeAttrEnum string
 
 const (
+	DlAutocapitalizeAttrEnumWords DlAutocapitalizeAttrEnum = "words"
 	DlAutocapitalizeAttrEnumCharacters DlAutocapitalizeAttrEnum = "characters"
 	DlAutocapitalizeAttrEnumNone DlAutocapitalizeAttrEnum = "none"
 	DlAutocapitalizeAttrEnumOff DlAutocapitalizeAttrEnum = "off"
 	DlAutocapitalizeAttrEnumOn DlAutocapitalizeAttrEnum = "on"
 	DlAutocapitalizeAttrEnumSentences DlAutocapitalizeAttrEnum = "sentences"
-	DlAutocapitalizeAttrEnumWords DlAutocapitalizeAttrEnum = "words"
 )
 
 type DlAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *DlElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

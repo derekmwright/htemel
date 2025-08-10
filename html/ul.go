@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type UlElement struct {
@@ -21,6 +22,7 @@ type UlElement struct {
 func Ul(children ...htemel.Node) *UlElement {
 	node := &UlElement{
 		children: children,
+		attributes: make(ulAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func UlIf(condition bool, children ...htemel.Node) *UlElement {
 type UlAutocapitalizeAttrEnum string
 
 const (
+	UlAutocapitalizeAttrEnumSentences UlAutocapitalizeAttrEnum = "sentences"
 	UlAutocapitalizeAttrEnumWords UlAutocapitalizeAttrEnum = "words"
 	UlAutocapitalizeAttrEnumCharacters UlAutocapitalizeAttrEnum = "characters"
 	UlAutocapitalizeAttrEnumNone UlAutocapitalizeAttrEnum = "none"
 	UlAutocapitalizeAttrEnumOff UlAutocapitalizeAttrEnum = "off"
 	UlAutocapitalizeAttrEnumOn UlAutocapitalizeAttrEnum = "on"
-	UlAutocapitalizeAttrEnumSentences UlAutocapitalizeAttrEnum = "sentences"
 )
 
 type UlAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *UlElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

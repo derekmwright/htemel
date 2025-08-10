@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type MetaElement struct {
@@ -21,6 +22,7 @@ type MetaElement struct {
 func Meta(children ...htemel.Node) *MetaElement {
 	node := &MetaElement{
 		children: children,
+		attributes: make(metaAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 type MetaAutocapitalizeAttrEnum string
 
 const (
+	MetaAutocapitalizeAttrEnumCharacters MetaAutocapitalizeAttrEnum = "characters"
 	MetaAutocapitalizeAttrEnumNone MetaAutocapitalizeAttrEnum = "none"
 	MetaAutocapitalizeAttrEnumOff MetaAutocapitalizeAttrEnum = "off"
 	MetaAutocapitalizeAttrEnumOn MetaAutocapitalizeAttrEnum = "on"
 	MetaAutocapitalizeAttrEnumSentences MetaAutocapitalizeAttrEnum = "sentences"
 	MetaAutocapitalizeAttrEnumWords MetaAutocapitalizeAttrEnum = "words"
-	MetaAutocapitalizeAttrEnumCharacters MetaAutocapitalizeAttrEnum = "characters"
 )
 
 type MetaAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *MetaElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

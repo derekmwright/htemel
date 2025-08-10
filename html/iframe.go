@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type IframeElement struct {
@@ -21,6 +22,7 @@ type IframeElement struct {
 func Iframe(children ...htemel.Node) *IframeElement {
 	node := &IframeElement{
 		children: children,
+		attributes: make(iframeAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func IframeIf(condition bool, children ...htemel.Node) *IframeElement {
 type IframeAutocapitalizeAttrEnum string
 
 const (
+	IframeAutocapitalizeAttrEnumWords IframeAutocapitalizeAttrEnum = "words"
 	IframeAutocapitalizeAttrEnumCharacters IframeAutocapitalizeAttrEnum = "characters"
 	IframeAutocapitalizeAttrEnumNone IframeAutocapitalizeAttrEnum = "none"
 	IframeAutocapitalizeAttrEnumOff IframeAutocapitalizeAttrEnum = "off"
 	IframeAutocapitalizeAttrEnumOn IframeAutocapitalizeAttrEnum = "on"
 	IframeAutocapitalizeAttrEnumSentences IframeAutocapitalizeAttrEnum = "sentences"
-	IframeAutocapitalizeAttrEnumWords IframeAutocapitalizeAttrEnum = "words"
 )
 
 type IframeAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *IframeElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

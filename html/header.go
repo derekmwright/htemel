@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type HeaderElement struct {
@@ -21,6 +22,7 @@ type HeaderElement struct {
 func Header(children ...htemel.Node) *HeaderElement {
 	node := &HeaderElement{
 		children: children,
+		attributes: make(headerAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func HeaderIf(condition bool, children ...htemel.Node) *HeaderElement {
 type HeaderAutocapitalizeAttrEnum string
 
 const (
-	HeaderAutocapitalizeAttrEnumOff HeaderAutocapitalizeAttrEnum = "off"
-	HeaderAutocapitalizeAttrEnumOn HeaderAutocapitalizeAttrEnum = "on"
-	HeaderAutocapitalizeAttrEnumSentences HeaderAutocapitalizeAttrEnum = "sentences"
 	HeaderAutocapitalizeAttrEnumWords HeaderAutocapitalizeAttrEnum = "words"
 	HeaderAutocapitalizeAttrEnumCharacters HeaderAutocapitalizeAttrEnum = "characters"
 	HeaderAutocapitalizeAttrEnumNone HeaderAutocapitalizeAttrEnum = "none"
+	HeaderAutocapitalizeAttrEnumOff HeaderAutocapitalizeAttrEnum = "off"
+	HeaderAutocapitalizeAttrEnumOn HeaderAutocapitalizeAttrEnum = "on"
+	HeaderAutocapitalizeAttrEnumSentences HeaderAutocapitalizeAttrEnum = "sentences"
 )
 
 type HeaderAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type HeaderContenteditableAttrEnum string
 
 const (
-	HeaderContenteditableAttrEnumTrue HeaderContenteditableAttrEnum = "true"
 	HeaderContenteditableAttrEnumFalse HeaderContenteditableAttrEnum = "false"
 	HeaderContenteditableAttrEnumPlaintextOnly HeaderContenteditableAttrEnum = "plaintext-only"
+	HeaderContenteditableAttrEnumTrue HeaderContenteditableAttrEnum = "true"
 )
 
 type headerAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *HeaderElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

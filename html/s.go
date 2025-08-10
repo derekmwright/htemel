@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type SElement struct {
@@ -21,6 +22,7 @@ type SElement struct {
 func S(children ...htemel.Node) *SElement {
 	node := &SElement{
 		children: children,
+		attributes: make(sAttrs),
 	}
 
 	return node
@@ -39,19 +41,19 @@ func SIf(condition bool, children ...htemel.Node) *SElement {
 type SAutocapitalizeAttrEnum string
 
 const (
+	SAutocapitalizeAttrEnumSentences SAutocapitalizeAttrEnum = "sentences"
+	SAutocapitalizeAttrEnumWords SAutocapitalizeAttrEnum = "words"
 	SAutocapitalizeAttrEnumCharacters SAutocapitalizeAttrEnum = "characters"
 	SAutocapitalizeAttrEnumNone SAutocapitalizeAttrEnum = "none"
 	SAutocapitalizeAttrEnumOff SAutocapitalizeAttrEnum = "off"
 	SAutocapitalizeAttrEnumOn SAutocapitalizeAttrEnum = "on"
-	SAutocapitalizeAttrEnumSentences SAutocapitalizeAttrEnum = "sentences"
-	SAutocapitalizeAttrEnumWords SAutocapitalizeAttrEnum = "words"
 )
 
 type SAutocorrectAttrEnum string
 
 const (
-	SAutocorrectAttrEnumOn SAutocorrectAttrEnum = "on"
 	SAutocorrectAttrEnumOff SAutocorrectAttrEnum = "off"
+	SAutocorrectAttrEnumOn SAutocorrectAttrEnum = "on"
 )
 
 type SContenteditableAttrEnum string
@@ -110,10 +112,10 @@ func (e *SElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

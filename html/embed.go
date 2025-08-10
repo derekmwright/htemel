@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type EmbedElement struct {
@@ -21,6 +22,7 @@ type EmbedElement struct {
 func Embed(children ...htemel.Node) *EmbedElement {
 	node := &EmbedElement{
 		children: children,
+		attributes: make(embedAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
 type EmbedAutocapitalizeAttrEnum string
 
 const (
-	EmbedAutocapitalizeAttrEnumNone EmbedAutocapitalizeAttrEnum = "none"
-	EmbedAutocapitalizeAttrEnumOff EmbedAutocapitalizeAttrEnum = "off"
 	EmbedAutocapitalizeAttrEnumOn EmbedAutocapitalizeAttrEnum = "on"
 	EmbedAutocapitalizeAttrEnumSentences EmbedAutocapitalizeAttrEnum = "sentences"
 	EmbedAutocapitalizeAttrEnumWords EmbedAutocapitalizeAttrEnum = "words"
 	EmbedAutocapitalizeAttrEnumCharacters EmbedAutocapitalizeAttrEnum = "characters"
+	EmbedAutocapitalizeAttrEnumNone EmbedAutocapitalizeAttrEnum = "none"
+	EmbedAutocapitalizeAttrEnumOff EmbedAutocapitalizeAttrEnum = "off"
 )
 
 type EmbedAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type EmbedContenteditableAttrEnum string
 
 const (
+	EmbedContenteditableAttrEnumTrue EmbedContenteditableAttrEnum = "true"
 	EmbedContenteditableAttrEnumFalse EmbedContenteditableAttrEnum = "false"
 	EmbedContenteditableAttrEnumPlaintextOnly EmbedContenteditableAttrEnum = "plaintext-only"
-	EmbedContenteditableAttrEnumTrue EmbedContenteditableAttrEnum = "true"
 )
 
 type embedAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *EmbedElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

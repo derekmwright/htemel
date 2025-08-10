@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type DatalistElement struct {
@@ -21,6 +22,7 @@ type DatalistElement struct {
 func Datalist(children ...htemel.Node) *DatalistElement {
 	node := &DatalistElement{
 		children: children,
+		attributes: make(datalistAttrs),
 	}
 
 	return node
@@ -39,19 +41,19 @@ func DatalistIf(condition bool, children ...htemel.Node) *DatalistElement {
 type DatalistAutocapitalizeAttrEnum string
 
 const (
-	DatalistAutocapitalizeAttrEnumWords DatalistAutocapitalizeAttrEnum = "words"
 	DatalistAutocapitalizeAttrEnumCharacters DatalistAutocapitalizeAttrEnum = "characters"
 	DatalistAutocapitalizeAttrEnumNone DatalistAutocapitalizeAttrEnum = "none"
 	DatalistAutocapitalizeAttrEnumOff DatalistAutocapitalizeAttrEnum = "off"
 	DatalistAutocapitalizeAttrEnumOn DatalistAutocapitalizeAttrEnum = "on"
 	DatalistAutocapitalizeAttrEnumSentences DatalistAutocapitalizeAttrEnum = "sentences"
+	DatalistAutocapitalizeAttrEnumWords DatalistAutocapitalizeAttrEnum = "words"
 )
 
 type DatalistAutocorrectAttrEnum string
 
 const (
-	DatalistAutocorrectAttrEnumOn DatalistAutocorrectAttrEnum = "on"
 	DatalistAutocorrectAttrEnumOff DatalistAutocorrectAttrEnum = "off"
+	DatalistAutocorrectAttrEnumOn DatalistAutocorrectAttrEnum = "on"
 )
 
 type DatalistContenteditableAttrEnum string
@@ -110,10 +112,10 @@ func (e *DatalistElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

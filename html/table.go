@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type TableElement struct {
@@ -21,6 +22,7 @@ type TableElement struct {
 func Table(children ...htemel.Node) *TableElement {
 	node := &TableElement{
 		children: children,
+		attributes: make(tableAttrs),
 	}
 
 	return node
@@ -57,9 +59,9 @@ const (
 type TableContenteditableAttrEnum string
 
 const (
+	TableContenteditableAttrEnumTrue TableContenteditableAttrEnum = "true"
 	TableContenteditableAttrEnumFalse TableContenteditableAttrEnum = "false"
 	TableContenteditableAttrEnumPlaintextOnly TableContenteditableAttrEnum = "plaintext-only"
-	TableContenteditableAttrEnumTrue TableContenteditableAttrEnum = "true"
 )
 
 type tableAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *TableElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

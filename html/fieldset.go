@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type FieldsetElement struct {
@@ -21,6 +22,7 @@ type FieldsetElement struct {
 func Fieldset(children ...htemel.Node) *FieldsetElement {
 	node := &FieldsetElement{
 		children: children,
+		attributes: make(fieldsetAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func FieldsetIf(condition bool, children ...htemel.Node) *FieldsetElement {
 type FieldsetAutocapitalizeAttrEnum string
 
 const (
-	FieldsetAutocapitalizeAttrEnumOff FieldsetAutocapitalizeAttrEnum = "off"
-	FieldsetAutocapitalizeAttrEnumOn FieldsetAutocapitalizeAttrEnum = "on"
-	FieldsetAutocapitalizeAttrEnumSentences FieldsetAutocapitalizeAttrEnum = "sentences"
 	FieldsetAutocapitalizeAttrEnumWords FieldsetAutocapitalizeAttrEnum = "words"
 	FieldsetAutocapitalizeAttrEnumCharacters FieldsetAutocapitalizeAttrEnum = "characters"
 	FieldsetAutocapitalizeAttrEnumNone FieldsetAutocapitalizeAttrEnum = "none"
+	FieldsetAutocapitalizeAttrEnumOff FieldsetAutocapitalizeAttrEnum = "off"
+	FieldsetAutocapitalizeAttrEnumOn FieldsetAutocapitalizeAttrEnum = "on"
+	FieldsetAutocapitalizeAttrEnumSentences FieldsetAutocapitalizeAttrEnum = "sentences"
 )
 
 type FieldsetAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *FieldsetElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

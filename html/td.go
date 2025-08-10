@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type TdElement struct {
@@ -21,6 +22,7 @@ type TdElement struct {
 func Td(children ...htemel.Node) *TdElement {
 	node := &TdElement{
 		children: children,
+		attributes: make(tdAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func TdIf(condition bool, children ...htemel.Node) *TdElement {
 type TdAutocapitalizeAttrEnum string
 
 const (
-	TdAutocapitalizeAttrEnumWords TdAutocapitalizeAttrEnum = "words"
-	TdAutocapitalizeAttrEnumCharacters TdAutocapitalizeAttrEnum = "characters"
-	TdAutocapitalizeAttrEnumNone TdAutocapitalizeAttrEnum = "none"
 	TdAutocapitalizeAttrEnumOff TdAutocapitalizeAttrEnum = "off"
 	TdAutocapitalizeAttrEnumOn TdAutocapitalizeAttrEnum = "on"
 	TdAutocapitalizeAttrEnumSentences TdAutocapitalizeAttrEnum = "sentences"
+	TdAutocapitalizeAttrEnumWords TdAutocapitalizeAttrEnum = "words"
+	TdAutocapitalizeAttrEnumCharacters TdAutocapitalizeAttrEnum = "characters"
+	TdAutocapitalizeAttrEnumNone TdAutocapitalizeAttrEnum = "none"
 )
 
 type TdAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type TdContenteditableAttrEnum string
 
 const (
+	TdContenteditableAttrEnumFalse TdContenteditableAttrEnum = "false"
 	TdContenteditableAttrEnumPlaintextOnly TdContenteditableAttrEnum = "plaintext-only"
 	TdContenteditableAttrEnumTrue TdContenteditableAttrEnum = "true"
-	TdContenteditableAttrEnumFalse TdContenteditableAttrEnum = "false"
 )
 
 type tdAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *TdElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

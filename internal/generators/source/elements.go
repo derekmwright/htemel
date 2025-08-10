@@ -107,6 +107,7 @@ func BaseFunc() (*template.Template, ImportSet) {
 func {{ .Tag | titleCase }}({{ if not .Void }}children ...htemel.Node{{ end }}) *{{ .Tag | titleCase }}Element {
 	node := &{{ .Tag | titleCase }}Element{
 		children: children,
+		attributes: make({{ .Tag }}Attrs),
 	}
 
 	return node
@@ -151,10 +152,10 @@ func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

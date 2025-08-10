@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type WbrElement struct {
@@ -21,6 +22,7 @@ type WbrElement struct {
 func Wbr(children ...htemel.Node) *WbrElement {
 	node := &WbrElement{
 		children: children,
+		attributes: make(wbrAttrs),
 	}
 
 	return node
@@ -39,27 +41,27 @@ func WbrIf(condition bool, children ...htemel.Node) *WbrElement {
 type WbrAutocapitalizeAttrEnum string
 
 const (
+	WbrAutocapitalizeAttrEnumWords WbrAutocapitalizeAttrEnum = "words"
 	WbrAutocapitalizeAttrEnumCharacters WbrAutocapitalizeAttrEnum = "characters"
 	WbrAutocapitalizeAttrEnumNone WbrAutocapitalizeAttrEnum = "none"
 	WbrAutocapitalizeAttrEnumOff WbrAutocapitalizeAttrEnum = "off"
 	WbrAutocapitalizeAttrEnumOn WbrAutocapitalizeAttrEnum = "on"
 	WbrAutocapitalizeAttrEnumSentences WbrAutocapitalizeAttrEnum = "sentences"
-	WbrAutocapitalizeAttrEnumWords WbrAutocapitalizeAttrEnum = "words"
 )
 
 type WbrAutocorrectAttrEnum string
 
 const (
-	WbrAutocorrectAttrEnumOff WbrAutocorrectAttrEnum = "off"
 	WbrAutocorrectAttrEnumOn WbrAutocorrectAttrEnum = "on"
+	WbrAutocorrectAttrEnumOff WbrAutocorrectAttrEnum = "off"
 )
 
 type WbrContenteditableAttrEnum string
 
 const (
-	WbrContenteditableAttrEnumTrue WbrContenteditableAttrEnum = "true"
 	WbrContenteditableAttrEnumFalse WbrContenteditableAttrEnum = "false"
 	WbrContenteditableAttrEnumPlaintextOnly WbrContenteditableAttrEnum = "plaintext-only"
+	WbrContenteditableAttrEnumTrue WbrContenteditableAttrEnum = "true"
 )
 
 type wbrAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *WbrElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

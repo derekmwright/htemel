@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type ScriptElement struct {
@@ -21,6 +22,7 @@ type ScriptElement struct {
 func Script(children ...htemel.Node) *ScriptElement {
 	node := &ScriptElement{
 		children: children,
+		attributes: make(scriptAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func ScriptIf(condition bool, children ...htemel.Node) *ScriptElement {
 type ScriptAutocapitalizeAttrEnum string
 
 const (
-	ScriptAutocapitalizeAttrEnumWords ScriptAutocapitalizeAttrEnum = "words"
 	ScriptAutocapitalizeAttrEnumCharacters ScriptAutocapitalizeAttrEnum = "characters"
 	ScriptAutocapitalizeAttrEnumNone ScriptAutocapitalizeAttrEnum = "none"
 	ScriptAutocapitalizeAttrEnumOff ScriptAutocapitalizeAttrEnum = "off"
 	ScriptAutocapitalizeAttrEnumOn ScriptAutocapitalizeAttrEnum = "on"
 	ScriptAutocapitalizeAttrEnumSentences ScriptAutocapitalizeAttrEnum = "sentences"
+	ScriptAutocapitalizeAttrEnumWords ScriptAutocapitalizeAttrEnum = "words"
 )
 
 type ScriptAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type ScriptContenteditableAttrEnum string
 
 const (
+	ScriptContenteditableAttrEnumFalse ScriptContenteditableAttrEnum = "false"
 	ScriptContenteditableAttrEnumPlaintextOnly ScriptContenteditableAttrEnum = "plaintext-only"
 	ScriptContenteditableAttrEnumTrue ScriptContenteditableAttrEnum = "true"
-	ScriptContenteditableAttrEnumFalse ScriptContenteditableAttrEnum = "false"
 )
 
 type scriptAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *ScriptElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type IElement struct {
@@ -21,6 +22,7 @@ type IElement struct {
 func I(children ...htemel.Node) *IElement {
 	node := &IElement{
 		children: children,
+		attributes: make(iAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func IIf(condition bool, children ...htemel.Node) *IElement {
 type IAutocapitalizeAttrEnum string
 
 const (
+	IAutocapitalizeAttrEnumCharacters IAutocapitalizeAttrEnum = "characters"
 	IAutocapitalizeAttrEnumNone IAutocapitalizeAttrEnum = "none"
 	IAutocapitalizeAttrEnumOff IAutocapitalizeAttrEnum = "off"
 	IAutocapitalizeAttrEnumOn IAutocapitalizeAttrEnum = "on"
 	IAutocapitalizeAttrEnumSentences IAutocapitalizeAttrEnum = "sentences"
 	IAutocapitalizeAttrEnumWords IAutocapitalizeAttrEnum = "words"
-	IAutocapitalizeAttrEnumCharacters IAutocapitalizeAttrEnum = "characters"
 )
 
 type IAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *IElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

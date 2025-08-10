@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type DetailsElement struct {
@@ -21,6 +22,7 @@ type DetailsElement struct {
 func Details(children ...htemel.Node) *DetailsElement {
 	node := &DetailsElement{
 		children: children,
+		attributes: make(detailsAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func DetailsIf(condition bool, children ...htemel.Node) *DetailsElement {
 type DetailsAutocapitalizeAttrEnum string
 
 const (
-	DetailsAutocapitalizeAttrEnumNone DetailsAutocapitalizeAttrEnum = "none"
-	DetailsAutocapitalizeAttrEnumOff DetailsAutocapitalizeAttrEnum = "off"
-	DetailsAutocapitalizeAttrEnumOn DetailsAutocapitalizeAttrEnum = "on"
 	DetailsAutocapitalizeAttrEnumSentences DetailsAutocapitalizeAttrEnum = "sentences"
 	DetailsAutocapitalizeAttrEnumWords DetailsAutocapitalizeAttrEnum = "words"
 	DetailsAutocapitalizeAttrEnumCharacters DetailsAutocapitalizeAttrEnum = "characters"
+	DetailsAutocapitalizeAttrEnumNone DetailsAutocapitalizeAttrEnum = "none"
+	DetailsAutocapitalizeAttrEnumOff DetailsAutocapitalizeAttrEnum = "off"
+	DetailsAutocapitalizeAttrEnumOn DetailsAutocapitalizeAttrEnum = "on"
 )
 
 type DetailsAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type DetailsContenteditableAttrEnum string
 
 const (
+	DetailsContenteditableAttrEnumFalse DetailsContenteditableAttrEnum = "false"
 	DetailsContenteditableAttrEnumPlaintextOnly DetailsContenteditableAttrEnum = "plaintext-only"
 	DetailsContenteditableAttrEnumTrue DetailsContenteditableAttrEnum = "true"
-	DetailsContenteditableAttrEnumFalse DetailsContenteditableAttrEnum = "false"
 )
 
 type detailsAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *DetailsElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

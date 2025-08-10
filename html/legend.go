@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type LegendElement struct {
@@ -21,6 +22,7 @@ type LegendElement struct {
 func Legend(children ...htemel.Node) *LegendElement {
 	node := &LegendElement{
 		children: children,
+		attributes: make(legendAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func LegendIf(condition bool, children ...htemel.Node) *LegendElement {
 type LegendAutocapitalizeAttrEnum string
 
 const (
-	LegendAutocapitalizeAttrEnumOff LegendAutocapitalizeAttrEnum = "off"
 	LegendAutocapitalizeAttrEnumOn LegendAutocapitalizeAttrEnum = "on"
 	LegendAutocapitalizeAttrEnumSentences LegendAutocapitalizeAttrEnum = "sentences"
 	LegendAutocapitalizeAttrEnumWords LegendAutocapitalizeAttrEnum = "words"
 	LegendAutocapitalizeAttrEnumCharacters LegendAutocapitalizeAttrEnum = "characters"
 	LegendAutocapitalizeAttrEnumNone LegendAutocapitalizeAttrEnum = "none"
+	LegendAutocapitalizeAttrEnumOff LegendAutocapitalizeAttrEnum = "off"
 )
 
 type LegendAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type LegendContenteditableAttrEnum string
 
 const (
+	LegendContenteditableAttrEnumTrue LegendContenteditableAttrEnum = "true"
 	LegendContenteditableAttrEnumFalse LegendContenteditableAttrEnum = "false"
 	LegendContenteditableAttrEnumPlaintextOnly LegendContenteditableAttrEnum = "plaintext-only"
-	LegendContenteditableAttrEnumTrue LegendContenteditableAttrEnum = "true"
 )
 
 type legendAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *LegendElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

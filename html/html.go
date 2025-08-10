@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type HtmlElement struct {
@@ -21,6 +22,7 @@ type HtmlElement struct {
 func Html(children ...htemel.Node) *HtmlElement {
 	node := &HtmlElement{
 		children: children,
+		attributes: make(htmlAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
 type HtmlAutocapitalizeAttrEnum string
 
 const (
+	HtmlAutocapitalizeAttrEnumCharacters HtmlAutocapitalizeAttrEnum = "characters"
+	HtmlAutocapitalizeAttrEnumNone HtmlAutocapitalizeAttrEnum = "none"
 	HtmlAutocapitalizeAttrEnumOff HtmlAutocapitalizeAttrEnum = "off"
 	HtmlAutocapitalizeAttrEnumOn HtmlAutocapitalizeAttrEnum = "on"
 	HtmlAutocapitalizeAttrEnumSentences HtmlAutocapitalizeAttrEnum = "sentences"
 	HtmlAutocapitalizeAttrEnumWords HtmlAutocapitalizeAttrEnum = "words"
-	HtmlAutocapitalizeAttrEnumCharacters HtmlAutocapitalizeAttrEnum = "characters"
-	HtmlAutocapitalizeAttrEnumNone HtmlAutocapitalizeAttrEnum = "none"
 )
 
 type HtmlAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type HtmlContenteditableAttrEnum string
 
 const (
+	HtmlContenteditableAttrEnumTrue HtmlContenteditableAttrEnum = "true"
 	HtmlContenteditableAttrEnumFalse HtmlContenteditableAttrEnum = "false"
 	HtmlContenteditableAttrEnumPlaintextOnly HtmlContenteditableAttrEnum = "plaintext-only"
-	HtmlContenteditableAttrEnumTrue HtmlContenteditableAttrEnum = "true"
 )
 
 type htmlAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *HtmlElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

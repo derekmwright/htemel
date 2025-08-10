@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type VideoElement struct {
@@ -21,6 +22,7 @@ type VideoElement struct {
 func Video(children ...htemel.Node) *VideoElement {
 	node := &VideoElement{
 		children: children,
+		attributes: make(videoAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func VideoIf(condition bool, children ...htemel.Node) *VideoElement {
 type VideoAutocapitalizeAttrEnum string
 
 const (
+	VideoAutocapitalizeAttrEnumOff VideoAutocapitalizeAttrEnum = "off"
 	VideoAutocapitalizeAttrEnumOn VideoAutocapitalizeAttrEnum = "on"
 	VideoAutocapitalizeAttrEnumSentences VideoAutocapitalizeAttrEnum = "sentences"
 	VideoAutocapitalizeAttrEnumWords VideoAutocapitalizeAttrEnum = "words"
 	VideoAutocapitalizeAttrEnumCharacters VideoAutocapitalizeAttrEnum = "characters"
 	VideoAutocapitalizeAttrEnumNone VideoAutocapitalizeAttrEnum = "none"
-	VideoAutocapitalizeAttrEnumOff VideoAutocapitalizeAttrEnum = "off"
 )
 
 type VideoAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *VideoElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

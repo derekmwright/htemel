@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type MapElement struct {
@@ -21,6 +22,7 @@ type MapElement struct {
 func Map(children ...htemel.Node) *MapElement {
 	node := &MapElement{
 		children: children,
+		attributes: make(mapAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func MapIf(condition bool, children ...htemel.Node) *MapElement {
 type MapAutocapitalizeAttrEnum string
 
 const (
-	MapAutocapitalizeAttrEnumSentences MapAutocapitalizeAttrEnum = "sentences"
-	MapAutocapitalizeAttrEnumWords MapAutocapitalizeAttrEnum = "words"
 	MapAutocapitalizeAttrEnumCharacters MapAutocapitalizeAttrEnum = "characters"
 	MapAutocapitalizeAttrEnumNone MapAutocapitalizeAttrEnum = "none"
 	MapAutocapitalizeAttrEnumOff MapAutocapitalizeAttrEnum = "off"
 	MapAutocapitalizeAttrEnumOn MapAutocapitalizeAttrEnum = "on"
+	MapAutocapitalizeAttrEnumSentences MapAutocapitalizeAttrEnum = "sentences"
+	MapAutocapitalizeAttrEnumWords MapAutocapitalizeAttrEnum = "words"
 )
 
 type MapAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type MapContenteditableAttrEnum string
 
 const (
-	MapContenteditableAttrEnumTrue MapContenteditableAttrEnum = "true"
 	MapContenteditableAttrEnumFalse MapContenteditableAttrEnum = "false"
 	MapContenteditableAttrEnumPlaintextOnly MapContenteditableAttrEnum = "plaintext-only"
+	MapContenteditableAttrEnumTrue MapContenteditableAttrEnum = "true"
 )
 
 type mapAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *MapElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

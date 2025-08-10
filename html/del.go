@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type DelElement struct {
@@ -21,6 +22,7 @@ type DelElement struct {
 func Del(children ...htemel.Node) *DelElement {
 	node := &DelElement{
 		children: children,
+		attributes: make(delAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 type DelAutocapitalizeAttrEnum string
 
 const (
+	DelAutocapitalizeAttrEnumCharacters DelAutocapitalizeAttrEnum = "characters"
+	DelAutocapitalizeAttrEnumNone DelAutocapitalizeAttrEnum = "none"
 	DelAutocapitalizeAttrEnumOff DelAutocapitalizeAttrEnum = "off"
 	DelAutocapitalizeAttrEnumOn DelAutocapitalizeAttrEnum = "on"
 	DelAutocapitalizeAttrEnumSentences DelAutocapitalizeAttrEnum = "sentences"
 	DelAutocapitalizeAttrEnumWords DelAutocapitalizeAttrEnum = "words"
-	DelAutocapitalizeAttrEnumCharacters DelAutocapitalizeAttrEnum = "characters"
-	DelAutocapitalizeAttrEnumNone DelAutocapitalizeAttrEnum = "none"
 )
 
 type DelAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type DelContenteditableAttrEnum string
 
 const (
+	DelContenteditableAttrEnumTrue DelContenteditableAttrEnum = "true"
 	DelContenteditableAttrEnumFalse DelContenteditableAttrEnum = "false"
 	DelContenteditableAttrEnumPlaintextOnly DelContenteditableAttrEnum = "plaintext-only"
-	DelContenteditableAttrEnumTrue DelContenteditableAttrEnum = "true"
 )
 
 type delAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *DelElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

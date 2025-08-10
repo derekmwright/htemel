@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type SelectedcontentElement struct {
@@ -21,6 +22,7 @@ type SelectedcontentElement struct {
 func Selectedcontent(children ...htemel.Node) *SelectedcontentElement {
 	node := &SelectedcontentElement{
 		children: children,
+		attributes: make(selectedcontentAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func SelectedcontentIf(condition bool, children ...htemel.Node) *Selectedcontent
 type SelectedcontentAutocapitalizeAttrEnum string
 
 const (
-	SelectedcontentAutocapitalizeAttrEnumOn SelectedcontentAutocapitalizeAttrEnum = "on"
-	SelectedcontentAutocapitalizeAttrEnumSentences SelectedcontentAutocapitalizeAttrEnum = "sentences"
 	SelectedcontentAutocapitalizeAttrEnumWords SelectedcontentAutocapitalizeAttrEnum = "words"
 	SelectedcontentAutocapitalizeAttrEnumCharacters SelectedcontentAutocapitalizeAttrEnum = "characters"
 	SelectedcontentAutocapitalizeAttrEnumNone SelectedcontentAutocapitalizeAttrEnum = "none"
 	SelectedcontentAutocapitalizeAttrEnumOff SelectedcontentAutocapitalizeAttrEnum = "off"
+	SelectedcontentAutocapitalizeAttrEnumOn SelectedcontentAutocapitalizeAttrEnum = "on"
+	SelectedcontentAutocapitalizeAttrEnumSentences SelectedcontentAutocapitalizeAttrEnum = "sentences"
 )
 
 type SelectedcontentAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type SelectedcontentContenteditableAttrEnum string
 
 const (
-	SelectedcontentContenteditableAttrEnumFalse SelectedcontentContenteditableAttrEnum = "false"
 	SelectedcontentContenteditableAttrEnumPlaintextOnly SelectedcontentContenteditableAttrEnum = "plaintext-only"
 	SelectedcontentContenteditableAttrEnumTrue SelectedcontentContenteditableAttrEnum = "true"
+	SelectedcontentContenteditableAttrEnumFalse SelectedcontentContenteditableAttrEnum = "false"
 )
 
 type selectedcontentAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *SelectedcontentElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

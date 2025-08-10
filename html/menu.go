@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type MenuElement struct {
@@ -21,6 +22,7 @@ type MenuElement struct {
 func Menu(children ...htemel.Node) *MenuElement {
 	node := &MenuElement{
 		children: children,
+		attributes: make(menuAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func MenuIf(condition bool, children ...htemel.Node) *MenuElement {
 type MenuAutocapitalizeAttrEnum string
 
 const (
-	MenuAutocapitalizeAttrEnumCharacters MenuAutocapitalizeAttrEnum = "characters"
-	MenuAutocapitalizeAttrEnumNone MenuAutocapitalizeAttrEnum = "none"
 	MenuAutocapitalizeAttrEnumOff MenuAutocapitalizeAttrEnum = "off"
 	MenuAutocapitalizeAttrEnumOn MenuAutocapitalizeAttrEnum = "on"
 	MenuAutocapitalizeAttrEnumSentences MenuAutocapitalizeAttrEnum = "sentences"
 	MenuAutocapitalizeAttrEnumWords MenuAutocapitalizeAttrEnum = "words"
+	MenuAutocapitalizeAttrEnumCharacters MenuAutocapitalizeAttrEnum = "characters"
+	MenuAutocapitalizeAttrEnumNone MenuAutocapitalizeAttrEnum = "none"
 )
 
 type MenuAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *MenuElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

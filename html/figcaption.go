@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type FigcaptionElement struct {
@@ -21,6 +22,7 @@ type FigcaptionElement struct {
 func Figcaption(children ...htemel.Node) *FigcaptionElement {
 	node := &FigcaptionElement{
 		children: children,
+		attributes: make(figcaptionAttrs),
 	}
 
 	return node
@@ -39,19 +41,19 @@ func FigcaptionIf(condition bool, children ...htemel.Node) *FigcaptionElement {
 type FigcaptionAutocapitalizeAttrEnum string
 
 const (
+	FigcaptionAutocapitalizeAttrEnumNone FigcaptionAutocapitalizeAttrEnum = "none"
+	FigcaptionAutocapitalizeAttrEnumOff FigcaptionAutocapitalizeAttrEnum = "off"
 	FigcaptionAutocapitalizeAttrEnumOn FigcaptionAutocapitalizeAttrEnum = "on"
 	FigcaptionAutocapitalizeAttrEnumSentences FigcaptionAutocapitalizeAttrEnum = "sentences"
 	FigcaptionAutocapitalizeAttrEnumWords FigcaptionAutocapitalizeAttrEnum = "words"
 	FigcaptionAutocapitalizeAttrEnumCharacters FigcaptionAutocapitalizeAttrEnum = "characters"
-	FigcaptionAutocapitalizeAttrEnumNone FigcaptionAutocapitalizeAttrEnum = "none"
-	FigcaptionAutocapitalizeAttrEnumOff FigcaptionAutocapitalizeAttrEnum = "off"
 )
 
 type FigcaptionAutocorrectAttrEnum string
 
 const (
-	FigcaptionAutocorrectAttrEnumOff FigcaptionAutocorrectAttrEnum = "off"
 	FigcaptionAutocorrectAttrEnumOn FigcaptionAutocorrectAttrEnum = "on"
+	FigcaptionAutocorrectAttrEnumOff FigcaptionAutocorrectAttrEnum = "off"
 )
 
 type FigcaptionContenteditableAttrEnum string
@@ -110,10 +112,10 @@ func (e *FigcaptionElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type TheadElement struct {
@@ -21,6 +22,7 @@ type TheadElement struct {
 func Thead(children ...htemel.Node) *TheadElement {
 	node := &TheadElement{
 		children: children,
+		attributes: make(theadAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func TheadIf(condition bool, children ...htemel.Node) *TheadElement {
 type TheadAutocapitalizeAttrEnum string
 
 const (
+	TheadAutocapitalizeAttrEnumSentences TheadAutocapitalizeAttrEnum = "sentences"
+	TheadAutocapitalizeAttrEnumWords TheadAutocapitalizeAttrEnum = "words"
 	TheadAutocapitalizeAttrEnumCharacters TheadAutocapitalizeAttrEnum = "characters"
 	TheadAutocapitalizeAttrEnumNone TheadAutocapitalizeAttrEnum = "none"
 	TheadAutocapitalizeAttrEnumOff TheadAutocapitalizeAttrEnum = "off"
 	TheadAutocapitalizeAttrEnumOn TheadAutocapitalizeAttrEnum = "on"
-	TheadAutocapitalizeAttrEnumSentences TheadAutocapitalizeAttrEnum = "sentences"
-	TheadAutocapitalizeAttrEnumWords TheadAutocapitalizeAttrEnum = "words"
 )
 
 type TheadAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *TheadElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

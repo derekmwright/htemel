@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type QElement struct {
@@ -21,6 +22,7 @@ type QElement struct {
 func Q(children ...htemel.Node) *QElement {
 	node := &QElement{
 		children: children,
+		attributes: make(qAttrs),
 	}
 
 	return node
@@ -39,19 +41,19 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 type QAutocapitalizeAttrEnum string
 
 const (
-	QAutocapitalizeAttrEnumSentences QAutocapitalizeAttrEnum = "sentences"
 	QAutocapitalizeAttrEnumWords QAutocapitalizeAttrEnum = "words"
 	QAutocapitalizeAttrEnumCharacters QAutocapitalizeAttrEnum = "characters"
 	QAutocapitalizeAttrEnumNone QAutocapitalizeAttrEnum = "none"
 	QAutocapitalizeAttrEnumOff QAutocapitalizeAttrEnum = "off"
 	QAutocapitalizeAttrEnumOn QAutocapitalizeAttrEnum = "on"
+	QAutocapitalizeAttrEnumSentences QAutocapitalizeAttrEnum = "sentences"
 )
 
 type QAutocorrectAttrEnum string
 
 const (
-	QAutocorrectAttrEnumOff QAutocorrectAttrEnum = "off"
 	QAutocorrectAttrEnumOn QAutocorrectAttrEnum = "on"
+	QAutocorrectAttrEnumOff QAutocorrectAttrEnum = "off"
 )
 
 type QContenteditableAttrEnum string
@@ -110,10 +112,10 @@ func (e *QElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

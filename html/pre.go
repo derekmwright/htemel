@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type PreElement struct {
@@ -21,6 +22,7 @@ type PreElement struct {
 func Pre(children ...htemel.Node) *PreElement {
 	node := &PreElement{
 		children: children,
+		attributes: make(preAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func PreIf(condition bool, children ...htemel.Node) *PreElement {
 type PreAutocapitalizeAttrEnum string
 
 const (
-	PreAutocapitalizeAttrEnumCharacters PreAutocapitalizeAttrEnum = "characters"
-	PreAutocapitalizeAttrEnumNone PreAutocapitalizeAttrEnum = "none"
-	PreAutocapitalizeAttrEnumOff PreAutocapitalizeAttrEnum = "off"
 	PreAutocapitalizeAttrEnumOn PreAutocapitalizeAttrEnum = "on"
 	PreAutocapitalizeAttrEnumSentences PreAutocapitalizeAttrEnum = "sentences"
 	PreAutocapitalizeAttrEnumWords PreAutocapitalizeAttrEnum = "words"
+	PreAutocapitalizeAttrEnumCharacters PreAutocapitalizeAttrEnum = "characters"
+	PreAutocapitalizeAttrEnumNone PreAutocapitalizeAttrEnum = "none"
+	PreAutocapitalizeAttrEnumOff PreAutocapitalizeAttrEnum = "off"
 )
 
 type PreAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type PreContenteditableAttrEnum string
 
 const (
-	PreContenteditableAttrEnumFalse PreContenteditableAttrEnum = "false"
 	PreContenteditableAttrEnumPlaintextOnly PreContenteditableAttrEnum = "plaintext-only"
 	PreContenteditableAttrEnumTrue PreContenteditableAttrEnum = "true"
+	PreContenteditableAttrEnumFalse PreContenteditableAttrEnum = "false"
 )
 
 type preAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *PreElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

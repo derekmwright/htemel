@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type TextareaElement struct {
@@ -21,6 +22,7 @@ type TextareaElement struct {
 func Textarea(children ...htemel.Node) *TextareaElement {
 	node := &TextareaElement{
 		children: children,
+		attributes: make(textareaAttrs),
 	}
 
 	return node
@@ -57,9 +59,9 @@ const (
 type TextareaContenteditableAttrEnum string
 
 const (
+	TextareaContenteditableAttrEnumTrue TextareaContenteditableAttrEnum = "true"
 	TextareaContenteditableAttrEnumFalse TextareaContenteditableAttrEnum = "false"
 	TextareaContenteditableAttrEnumPlaintextOnly TextareaContenteditableAttrEnum = "plaintext-only"
-	TextareaContenteditableAttrEnumTrue TextareaContenteditableAttrEnum = "true"
 )
 
 type textareaAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *TextareaElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

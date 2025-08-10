@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type SummaryElement struct {
@@ -21,6 +22,7 @@ type SummaryElement struct {
 func Summary(children ...htemel.Node) *SummaryElement {
 	node := &SummaryElement{
 		children: children,
+		attributes: make(summaryAttrs),
 	}
 
 	return node
@@ -39,27 +41,27 @@ func SummaryIf(condition bool, children ...htemel.Node) *SummaryElement {
 type SummaryAutocapitalizeAttrEnum string
 
 const (
+	SummaryAutocapitalizeAttrEnumNone SummaryAutocapitalizeAttrEnum = "none"
 	SummaryAutocapitalizeAttrEnumOff SummaryAutocapitalizeAttrEnum = "off"
 	SummaryAutocapitalizeAttrEnumOn SummaryAutocapitalizeAttrEnum = "on"
 	SummaryAutocapitalizeAttrEnumSentences SummaryAutocapitalizeAttrEnum = "sentences"
 	SummaryAutocapitalizeAttrEnumWords SummaryAutocapitalizeAttrEnum = "words"
 	SummaryAutocapitalizeAttrEnumCharacters SummaryAutocapitalizeAttrEnum = "characters"
-	SummaryAutocapitalizeAttrEnumNone SummaryAutocapitalizeAttrEnum = "none"
 )
 
 type SummaryAutocorrectAttrEnum string
 
 const (
-	SummaryAutocorrectAttrEnumOn SummaryAutocorrectAttrEnum = "on"
 	SummaryAutocorrectAttrEnumOff SummaryAutocorrectAttrEnum = "off"
+	SummaryAutocorrectAttrEnumOn SummaryAutocorrectAttrEnum = "on"
 )
 
 type SummaryContenteditableAttrEnum string
 
 const (
-	SummaryContenteditableAttrEnumTrue SummaryContenteditableAttrEnum = "true"
 	SummaryContenteditableAttrEnumFalse SummaryContenteditableAttrEnum = "false"
 	SummaryContenteditableAttrEnumPlaintextOnly SummaryContenteditableAttrEnum = "plaintext-only"
+	SummaryContenteditableAttrEnumTrue SummaryContenteditableAttrEnum = "true"
 )
 
 type summaryAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *SummaryElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

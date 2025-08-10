@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type MainElement struct {
@@ -21,6 +22,7 @@ type MainElement struct {
 func Main(children ...htemel.Node) *MainElement {
 	node := &MainElement{
 		children: children,
+		attributes: make(mainAttrs),
 	}
 
 	return node
@@ -57,9 +59,9 @@ const (
 type MainContenteditableAttrEnum string
 
 const (
+	MainContenteditableAttrEnumFalse MainContenteditableAttrEnum = "false"
 	MainContenteditableAttrEnumPlaintextOnly MainContenteditableAttrEnum = "plaintext-only"
 	MainContenteditableAttrEnumTrue MainContenteditableAttrEnum = "true"
-	MainContenteditableAttrEnumFalse MainContenteditableAttrEnum = "false"
 )
 
 type mainAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *MainElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

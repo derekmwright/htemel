@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type DialogElement struct {
@@ -21,6 +22,7 @@ type DialogElement struct {
 func Dialog(children ...htemel.Node) *DialogElement {
 	node := &DialogElement{
 		children: children,
+		attributes: make(dialogAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func DialogIf(condition bool, children ...htemel.Node) *DialogElement {
 type DialogAutocapitalizeAttrEnum string
 
 const (
-	DialogAutocapitalizeAttrEnumCharacters DialogAutocapitalizeAttrEnum = "characters"
-	DialogAutocapitalizeAttrEnumNone DialogAutocapitalizeAttrEnum = "none"
 	DialogAutocapitalizeAttrEnumOff DialogAutocapitalizeAttrEnum = "off"
 	DialogAutocapitalizeAttrEnumOn DialogAutocapitalizeAttrEnum = "on"
 	DialogAutocapitalizeAttrEnumSentences DialogAutocapitalizeAttrEnum = "sentences"
 	DialogAutocapitalizeAttrEnumWords DialogAutocapitalizeAttrEnum = "words"
+	DialogAutocapitalizeAttrEnumCharacters DialogAutocapitalizeAttrEnum = "characters"
+	DialogAutocapitalizeAttrEnumNone DialogAutocapitalizeAttrEnum = "none"
 )
 
 type DialogAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *DialogElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

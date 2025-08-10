@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type CodeElement struct {
@@ -21,6 +22,7 @@ type CodeElement struct {
 func Code(children ...htemel.Node) *CodeElement {
 	node := &CodeElement{
 		children: children,
+		attributes: make(codeAttrs),
 	}
 
 	return node
@@ -39,19 +41,19 @@ func CodeIf(condition bool, children ...htemel.Node) *CodeElement {
 type CodeAutocapitalizeAttrEnum string
 
 const (
+	CodeAutocapitalizeAttrEnumCharacters CodeAutocapitalizeAttrEnum = "characters"
+	CodeAutocapitalizeAttrEnumNone CodeAutocapitalizeAttrEnum = "none"
 	CodeAutocapitalizeAttrEnumOff CodeAutocapitalizeAttrEnum = "off"
 	CodeAutocapitalizeAttrEnumOn CodeAutocapitalizeAttrEnum = "on"
 	CodeAutocapitalizeAttrEnumSentences CodeAutocapitalizeAttrEnum = "sentences"
 	CodeAutocapitalizeAttrEnumWords CodeAutocapitalizeAttrEnum = "words"
-	CodeAutocapitalizeAttrEnumCharacters CodeAutocapitalizeAttrEnum = "characters"
-	CodeAutocapitalizeAttrEnumNone CodeAutocapitalizeAttrEnum = "none"
 )
 
 type CodeAutocorrectAttrEnum string
 
 const (
-	CodeAutocorrectAttrEnumOff CodeAutocorrectAttrEnum = "off"
 	CodeAutocorrectAttrEnumOn CodeAutocorrectAttrEnum = "on"
+	CodeAutocorrectAttrEnumOff CodeAutocorrectAttrEnum = "off"
 )
 
 type CodeContenteditableAttrEnum string
@@ -110,10 +112,10 @@ func (e *CodeElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

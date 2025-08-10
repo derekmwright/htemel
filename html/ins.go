@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type InsElement struct {
@@ -21,6 +22,7 @@ type InsElement struct {
 func Ins(children ...htemel.Node) *InsElement {
 	node := &InsElement{
 		children: children,
+		attributes: make(insAttrs),
 	}
 
 	return node
@@ -50,16 +52,16 @@ const (
 type InsAutocorrectAttrEnum string
 
 const (
-	InsAutocorrectAttrEnumOff InsAutocorrectAttrEnum = "off"
 	InsAutocorrectAttrEnumOn InsAutocorrectAttrEnum = "on"
+	InsAutocorrectAttrEnumOff InsAutocorrectAttrEnum = "off"
 )
 
 type InsContenteditableAttrEnum string
 
 const (
+	InsContenteditableAttrEnumTrue InsContenteditableAttrEnum = "true"
 	InsContenteditableAttrEnumFalse InsContenteditableAttrEnum = "false"
 	InsContenteditableAttrEnumPlaintextOnly InsContenteditableAttrEnum = "plaintext-only"
-	InsContenteditableAttrEnumTrue InsContenteditableAttrEnum = "true"
 )
 
 type insAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *InsElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

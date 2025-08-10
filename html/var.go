@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type VarElement struct {
@@ -21,6 +22,7 @@ type VarElement struct {
 func Var(children ...htemel.Node) *VarElement {
 	node := &VarElement{
 		children: children,
+		attributes: make(varAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func VarIf(condition bool, children ...htemel.Node) *VarElement {
 type VarAutocapitalizeAttrEnum string
 
 const (
-	VarAutocapitalizeAttrEnumWords VarAutocapitalizeAttrEnum = "words"
-	VarAutocapitalizeAttrEnumCharacters VarAutocapitalizeAttrEnum = "characters"
 	VarAutocapitalizeAttrEnumNone VarAutocapitalizeAttrEnum = "none"
 	VarAutocapitalizeAttrEnumOff VarAutocapitalizeAttrEnum = "off"
 	VarAutocapitalizeAttrEnumOn VarAutocapitalizeAttrEnum = "on"
 	VarAutocapitalizeAttrEnumSentences VarAutocapitalizeAttrEnum = "sentences"
+	VarAutocapitalizeAttrEnumWords VarAutocapitalizeAttrEnum = "words"
+	VarAutocapitalizeAttrEnumCharacters VarAutocapitalizeAttrEnum = "characters"
 )
 
 type VarAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *VarElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

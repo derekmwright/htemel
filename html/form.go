@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type FormElement struct {
@@ -21,6 +22,7 @@ type FormElement struct {
 func Form(children ...htemel.Node) *FormElement {
 	node := &FormElement{
 		children: children,
+		attributes: make(formAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func FormIf(condition bool, children ...htemel.Node) *FormElement {
 type FormAutocapitalizeAttrEnum string
 
 const (
+	FormAutocapitalizeAttrEnumCharacters FormAutocapitalizeAttrEnum = "characters"
+	FormAutocapitalizeAttrEnumNone FormAutocapitalizeAttrEnum = "none"
 	FormAutocapitalizeAttrEnumOff FormAutocapitalizeAttrEnum = "off"
 	FormAutocapitalizeAttrEnumOn FormAutocapitalizeAttrEnum = "on"
 	FormAutocapitalizeAttrEnumSentences FormAutocapitalizeAttrEnum = "sentences"
 	FormAutocapitalizeAttrEnumWords FormAutocapitalizeAttrEnum = "words"
-	FormAutocapitalizeAttrEnumCharacters FormAutocapitalizeAttrEnum = "characters"
-	FormAutocapitalizeAttrEnumNone FormAutocapitalizeAttrEnum = "none"
 )
 
 type FormAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type FormContenteditableAttrEnum string
 
 const (
+	FormContenteditableAttrEnumPlaintextOnly FormContenteditableAttrEnum = "plaintext-only"
 	FormContenteditableAttrEnumTrue FormContenteditableAttrEnum = "true"
 	FormContenteditableAttrEnumFalse FormContenteditableAttrEnum = "false"
-	FormContenteditableAttrEnumPlaintextOnly FormContenteditableAttrEnum = "plaintext-only"
 )
 
 type formAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *FormElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

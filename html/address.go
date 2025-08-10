@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type AddressElement struct {
@@ -21,6 +22,7 @@ type AddressElement struct {
 func Address(children ...htemel.Node) *AddressElement {
 	node := &AddressElement{
 		children: children,
+		attributes: make(addressAttrs),
 	}
 
 	return node
@@ -39,27 +41,27 @@ func AddressIf(condition bool, children ...htemel.Node) *AddressElement {
 type AddressAutocapitalizeAttrEnum string
 
 const (
+	AddressAutocapitalizeAttrEnumNone AddressAutocapitalizeAttrEnum = "none"
+	AddressAutocapitalizeAttrEnumOff AddressAutocapitalizeAttrEnum = "off"
 	AddressAutocapitalizeAttrEnumOn AddressAutocapitalizeAttrEnum = "on"
 	AddressAutocapitalizeAttrEnumSentences AddressAutocapitalizeAttrEnum = "sentences"
 	AddressAutocapitalizeAttrEnumWords AddressAutocapitalizeAttrEnum = "words"
 	AddressAutocapitalizeAttrEnumCharacters AddressAutocapitalizeAttrEnum = "characters"
-	AddressAutocapitalizeAttrEnumNone AddressAutocapitalizeAttrEnum = "none"
-	AddressAutocapitalizeAttrEnumOff AddressAutocapitalizeAttrEnum = "off"
 )
 
 type AddressAutocorrectAttrEnum string
 
 const (
-	AddressAutocorrectAttrEnumOn AddressAutocorrectAttrEnum = "on"
 	AddressAutocorrectAttrEnumOff AddressAutocorrectAttrEnum = "off"
+	AddressAutocorrectAttrEnumOn AddressAutocorrectAttrEnum = "on"
 )
 
 type AddressContenteditableAttrEnum string
 
 const (
+	AddressContenteditableAttrEnumFalse AddressContenteditableAttrEnum = "false"
 	AddressContenteditableAttrEnumPlaintextOnly AddressContenteditableAttrEnum = "plaintext-only"
 	AddressContenteditableAttrEnumTrue AddressContenteditableAttrEnum = "true"
-	AddressContenteditableAttrEnumFalse AddressContenteditableAttrEnum = "false"
 )
 
 type addressAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *AddressElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

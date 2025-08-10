@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type BrElement struct {
@@ -21,6 +22,7 @@ type BrElement struct {
 func Br(children ...htemel.Node) *BrElement {
 	node := &BrElement{
 		children: children,
+		attributes: make(brAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func BrIf(condition bool, children ...htemel.Node) *BrElement {
 type BrAutocapitalizeAttrEnum string
 
 const (
-	BrAutocapitalizeAttrEnumWords BrAutocapitalizeAttrEnum = "words"
-	BrAutocapitalizeAttrEnumCharacters BrAutocapitalizeAttrEnum = "characters"
-	BrAutocapitalizeAttrEnumNone BrAutocapitalizeAttrEnum = "none"
 	BrAutocapitalizeAttrEnumOff BrAutocapitalizeAttrEnum = "off"
 	BrAutocapitalizeAttrEnumOn BrAutocapitalizeAttrEnum = "on"
 	BrAutocapitalizeAttrEnumSentences BrAutocapitalizeAttrEnum = "sentences"
+	BrAutocapitalizeAttrEnumWords BrAutocapitalizeAttrEnum = "words"
+	BrAutocapitalizeAttrEnumCharacters BrAutocapitalizeAttrEnum = "characters"
+	BrAutocapitalizeAttrEnumNone BrAutocapitalizeAttrEnum = "none"
 )
 
 type BrAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *BrElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

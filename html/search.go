@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type SearchElement struct {
@@ -21,6 +22,7 @@ type SearchElement struct {
 func Search(children ...htemel.Node) *SearchElement {
 	node := &SearchElement{
 		children: children,
+		attributes: make(searchAttrs),
 	}
 
 	return node
@@ -50,16 +52,16 @@ const (
 type SearchAutocorrectAttrEnum string
 
 const (
-	SearchAutocorrectAttrEnumOn SearchAutocorrectAttrEnum = "on"
 	SearchAutocorrectAttrEnumOff SearchAutocorrectAttrEnum = "off"
+	SearchAutocorrectAttrEnumOn SearchAutocorrectAttrEnum = "on"
 )
 
 type SearchContenteditableAttrEnum string
 
 const (
+	SearchContenteditableAttrEnumTrue SearchContenteditableAttrEnum = "true"
 	SearchContenteditableAttrEnumFalse SearchContenteditableAttrEnum = "false"
 	SearchContenteditableAttrEnumPlaintextOnly SearchContenteditableAttrEnum = "plaintext-only"
-	SearchContenteditableAttrEnumTrue SearchContenteditableAttrEnum = "true"
 )
 
 type searchAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *SearchElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

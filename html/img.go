@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type ImgElement struct {
@@ -21,6 +22,7 @@ type ImgElement struct {
 func Img(children ...htemel.Node) *ImgElement {
 	node := &ImgElement{
 		children: children,
+		attributes: make(imgAttrs),
 	}
 
 	return node
@@ -39,27 +41,27 @@ func ImgIf(condition bool, children ...htemel.Node) *ImgElement {
 type ImgAutocapitalizeAttrEnum string
 
 const (
+	ImgAutocapitalizeAttrEnumOn ImgAutocapitalizeAttrEnum = "on"
+	ImgAutocapitalizeAttrEnumSentences ImgAutocapitalizeAttrEnum = "sentences"
 	ImgAutocapitalizeAttrEnumWords ImgAutocapitalizeAttrEnum = "words"
 	ImgAutocapitalizeAttrEnumCharacters ImgAutocapitalizeAttrEnum = "characters"
 	ImgAutocapitalizeAttrEnumNone ImgAutocapitalizeAttrEnum = "none"
 	ImgAutocapitalizeAttrEnumOff ImgAutocapitalizeAttrEnum = "off"
-	ImgAutocapitalizeAttrEnumOn ImgAutocapitalizeAttrEnum = "on"
-	ImgAutocapitalizeAttrEnumSentences ImgAutocapitalizeAttrEnum = "sentences"
 )
 
 type ImgAutocorrectAttrEnum string
 
 const (
-	ImgAutocorrectAttrEnumOn ImgAutocorrectAttrEnum = "on"
 	ImgAutocorrectAttrEnumOff ImgAutocorrectAttrEnum = "off"
+	ImgAutocorrectAttrEnumOn ImgAutocorrectAttrEnum = "on"
 )
 
 type ImgContenteditableAttrEnum string
 
 const (
+	ImgContenteditableAttrEnumTrue ImgContenteditableAttrEnum = "true"
 	ImgContenteditableAttrEnumFalse ImgContenteditableAttrEnum = "false"
 	ImgContenteditableAttrEnumPlaintextOnly ImgContenteditableAttrEnum = "plaintext-only"
-	ImgContenteditableAttrEnumTrue ImgContenteditableAttrEnum = "true"
 )
 
 type imgAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *ImgElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type LinkElement struct {
@@ -21,6 +22,7 @@ type LinkElement struct {
 func Link(children ...htemel.Node) *LinkElement {
 	node := &LinkElement{
 		children: children,
+		attributes: make(linkAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
 type LinkAutocapitalizeAttrEnum string
 
 const (
-	LinkAutocapitalizeAttrEnumWords LinkAutocapitalizeAttrEnum = "words"
 	LinkAutocapitalizeAttrEnumCharacters LinkAutocapitalizeAttrEnum = "characters"
 	LinkAutocapitalizeAttrEnumNone LinkAutocapitalizeAttrEnum = "none"
 	LinkAutocapitalizeAttrEnumOff LinkAutocapitalizeAttrEnum = "off"
 	LinkAutocapitalizeAttrEnumOn LinkAutocapitalizeAttrEnum = "on"
 	LinkAutocapitalizeAttrEnumSentences LinkAutocapitalizeAttrEnum = "sentences"
+	LinkAutocapitalizeAttrEnumWords LinkAutocapitalizeAttrEnum = "words"
 )
 
 type LinkAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type LinkContenteditableAttrEnum string
 
 const (
-	LinkContenteditableAttrEnumTrue LinkContenteditableAttrEnum = "true"
 	LinkContenteditableAttrEnumFalse LinkContenteditableAttrEnum = "false"
 	LinkContenteditableAttrEnumPlaintextOnly LinkContenteditableAttrEnum = "plaintext-only"
+	LinkContenteditableAttrEnumTrue LinkContenteditableAttrEnum = "true"
 )
 
 type linkAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *LinkElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

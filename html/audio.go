@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type AudioElement struct {
@@ -21,6 +22,7 @@ type AudioElement struct {
 func Audio(children ...htemel.Node) *AudioElement {
 	node := &AudioElement{
 		children: children,
+		attributes: make(audioAttrs),
 	}
 
 	return node
@@ -50,16 +52,16 @@ const (
 type AudioAutocorrectAttrEnum string
 
 const (
-	AudioAutocorrectAttrEnumOn AudioAutocorrectAttrEnum = "on"
 	AudioAutocorrectAttrEnumOff AudioAutocorrectAttrEnum = "off"
+	AudioAutocorrectAttrEnumOn AudioAutocorrectAttrEnum = "on"
 )
 
 type AudioContenteditableAttrEnum string
 
 const (
-	AudioContenteditableAttrEnumFalse AudioContenteditableAttrEnum = "false"
 	AudioContenteditableAttrEnumPlaintextOnly AudioContenteditableAttrEnum = "plaintext-only"
 	AudioContenteditableAttrEnumTrue AudioContenteditableAttrEnum = "true"
+	AudioContenteditableAttrEnumFalse AudioContenteditableAttrEnum = "false"
 )
 
 type audioAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *AudioElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

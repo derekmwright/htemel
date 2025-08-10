@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type ProgressElement struct {
@@ -21,6 +22,7 @@ type ProgressElement struct {
 func Progress(children ...htemel.Node) *ProgressElement {
 	node := &ProgressElement{
 		children: children,
+		attributes: make(progressAttrs),
 	}
 
 	return node
@@ -57,9 +59,9 @@ const (
 type ProgressContenteditableAttrEnum string
 
 const (
+	ProgressContenteditableAttrEnumTrue ProgressContenteditableAttrEnum = "true"
 	ProgressContenteditableAttrEnumFalse ProgressContenteditableAttrEnum = "false"
 	ProgressContenteditableAttrEnumPlaintextOnly ProgressContenteditableAttrEnum = "plaintext-only"
-	ProgressContenteditableAttrEnumTrue ProgressContenteditableAttrEnum = "true"
 )
 
 type progressAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *ProgressElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type AsideElement struct {
@@ -21,6 +22,7 @@ type AsideElement struct {
 func Aside(children ...htemel.Node) *AsideElement {
 	node := &AsideElement{
 		children: children,
+		attributes: make(asideAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func AsideIf(condition bool, children ...htemel.Node) *AsideElement {
 type AsideAutocapitalizeAttrEnum string
 
 const (
+	AsideAutocapitalizeAttrEnumWords AsideAutocapitalizeAttrEnum = "words"
 	AsideAutocapitalizeAttrEnumCharacters AsideAutocapitalizeAttrEnum = "characters"
 	AsideAutocapitalizeAttrEnumNone AsideAutocapitalizeAttrEnum = "none"
 	AsideAutocapitalizeAttrEnumOff AsideAutocapitalizeAttrEnum = "off"
 	AsideAutocapitalizeAttrEnumOn AsideAutocapitalizeAttrEnum = "on"
 	AsideAutocapitalizeAttrEnumSentences AsideAutocapitalizeAttrEnum = "sentences"
-	AsideAutocapitalizeAttrEnumWords AsideAutocapitalizeAttrEnum = "words"
 )
 
 type AsideAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *AsideElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

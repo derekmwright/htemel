@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type MeterElement struct {
@@ -21,6 +22,7 @@ type MeterElement struct {
 func Meter(children ...htemel.Node) *MeterElement {
 	node := &MeterElement{
 		children: children,
+		attributes: make(meterAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func MeterIf(condition bool, children ...htemel.Node) *MeterElement {
 type MeterAutocapitalizeAttrEnum string
 
 const (
+	MeterAutocapitalizeAttrEnumWords MeterAutocapitalizeAttrEnum = "words"
+	MeterAutocapitalizeAttrEnumCharacters MeterAutocapitalizeAttrEnum = "characters"
 	MeterAutocapitalizeAttrEnumNone MeterAutocapitalizeAttrEnum = "none"
 	MeterAutocapitalizeAttrEnumOff MeterAutocapitalizeAttrEnum = "off"
 	MeterAutocapitalizeAttrEnumOn MeterAutocapitalizeAttrEnum = "on"
 	MeterAutocapitalizeAttrEnumSentences MeterAutocapitalizeAttrEnum = "sentences"
-	MeterAutocapitalizeAttrEnumWords MeterAutocapitalizeAttrEnum = "words"
-	MeterAutocapitalizeAttrEnumCharacters MeterAutocapitalizeAttrEnum = "characters"
 )
 
 type MeterAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *MeterElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

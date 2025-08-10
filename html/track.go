@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type TrackElement struct {
@@ -21,6 +22,7 @@ type TrackElement struct {
 func Track(children ...htemel.Node) *TrackElement {
 	node := &TrackElement{
 		children: children,
+		attributes: make(trackAttrs),
 	}
 
 	return node
@@ -39,19 +41,19 @@ func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 type TrackAutocapitalizeAttrEnum string
 
 const (
+	TrackAutocapitalizeAttrEnumOff TrackAutocapitalizeAttrEnum = "off"
 	TrackAutocapitalizeAttrEnumOn TrackAutocapitalizeAttrEnum = "on"
 	TrackAutocapitalizeAttrEnumSentences TrackAutocapitalizeAttrEnum = "sentences"
 	TrackAutocapitalizeAttrEnumWords TrackAutocapitalizeAttrEnum = "words"
 	TrackAutocapitalizeAttrEnumCharacters TrackAutocapitalizeAttrEnum = "characters"
 	TrackAutocapitalizeAttrEnumNone TrackAutocapitalizeAttrEnum = "none"
-	TrackAutocapitalizeAttrEnumOff TrackAutocapitalizeAttrEnum = "off"
 )
 
 type TrackAutocorrectAttrEnum string
 
 const (
-	TrackAutocorrectAttrEnumOff TrackAutocorrectAttrEnum = "off"
 	TrackAutocorrectAttrEnumOn TrackAutocorrectAttrEnum = "on"
+	TrackAutocorrectAttrEnumOff TrackAutocorrectAttrEnum = "off"
 )
 
 type TrackContenteditableAttrEnum string
@@ -110,10 +112,10 @@ func (e *TrackElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type AreaElement struct {
@@ -21,6 +22,7 @@ type AreaElement struct {
 func Area(children ...htemel.Node) *AreaElement {
 	node := &AreaElement{
 		children: children,
+		attributes: make(areaAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func AreaIf(condition bool, children ...htemel.Node) *AreaElement {
 type AreaAutocapitalizeAttrEnum string
 
 const (
+	AreaAutocapitalizeAttrEnumOff AreaAutocapitalizeAttrEnum = "off"
 	AreaAutocapitalizeAttrEnumOn AreaAutocapitalizeAttrEnum = "on"
 	AreaAutocapitalizeAttrEnumSentences AreaAutocapitalizeAttrEnum = "sentences"
 	AreaAutocapitalizeAttrEnumWords AreaAutocapitalizeAttrEnum = "words"
 	AreaAutocapitalizeAttrEnumCharacters AreaAutocapitalizeAttrEnum = "characters"
 	AreaAutocapitalizeAttrEnumNone AreaAutocapitalizeAttrEnum = "none"
-	AreaAutocapitalizeAttrEnumOff AreaAutocapitalizeAttrEnum = "off"
 )
 
 type AreaAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *AreaElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

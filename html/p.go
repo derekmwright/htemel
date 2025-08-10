@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type PElement struct {
@@ -21,6 +22,7 @@ type PElement struct {
 func P(children ...htemel.Node) *PElement {
 	node := &PElement{
 		children: children,
+		attributes: make(pAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func PIf(condition bool, children ...htemel.Node) *PElement {
 type PAutocapitalizeAttrEnum string
 
 const (
+	PAutocapitalizeAttrEnumSentences PAutocapitalizeAttrEnum = "sentences"
 	PAutocapitalizeAttrEnumWords PAutocapitalizeAttrEnum = "words"
 	PAutocapitalizeAttrEnumCharacters PAutocapitalizeAttrEnum = "characters"
 	PAutocapitalizeAttrEnumNone PAutocapitalizeAttrEnum = "none"
 	PAutocapitalizeAttrEnumOff PAutocapitalizeAttrEnum = "off"
 	PAutocapitalizeAttrEnumOn PAutocapitalizeAttrEnum = "on"
-	PAutocapitalizeAttrEnumSentences PAutocapitalizeAttrEnum = "sentences"
 )
 
 type PAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type PContenteditableAttrEnum string
 
 const (
+	PContenteditableAttrEnumPlaintextOnly PContenteditableAttrEnum = "plaintext-only"
 	PContenteditableAttrEnumTrue PContenteditableAttrEnum = "true"
 	PContenteditableAttrEnumFalse PContenteditableAttrEnum = "false"
-	PContenteditableAttrEnumPlaintextOnly PContenteditableAttrEnum = "plaintext-only"
 )
 
 type pAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *PElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

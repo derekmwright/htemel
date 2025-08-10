@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type KbdElement struct {
@@ -21,6 +22,7 @@ type KbdElement struct {
 func Kbd(children ...htemel.Node) *KbdElement {
 	node := &KbdElement{
 		children: children,
+		attributes: make(kbdAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func KbdIf(condition bool, children ...htemel.Node) *KbdElement {
 type KbdAutocapitalizeAttrEnum string
 
 const (
-	KbdAutocapitalizeAttrEnumCharacters KbdAutocapitalizeAttrEnum = "characters"
-	KbdAutocapitalizeAttrEnumNone KbdAutocapitalizeAttrEnum = "none"
 	KbdAutocapitalizeAttrEnumOff KbdAutocapitalizeAttrEnum = "off"
 	KbdAutocapitalizeAttrEnumOn KbdAutocapitalizeAttrEnum = "on"
 	KbdAutocapitalizeAttrEnumSentences KbdAutocapitalizeAttrEnum = "sentences"
 	KbdAutocapitalizeAttrEnumWords KbdAutocapitalizeAttrEnum = "words"
+	KbdAutocapitalizeAttrEnumCharacters KbdAutocapitalizeAttrEnum = "characters"
+	KbdAutocapitalizeAttrEnumNone KbdAutocapitalizeAttrEnum = "none"
 )
 
 type KbdAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type KbdContenteditableAttrEnum string
 
 const (
+	KbdContenteditableAttrEnumFalse KbdContenteditableAttrEnum = "false"
 	KbdContenteditableAttrEnumPlaintextOnly KbdContenteditableAttrEnum = "plaintext-only"
 	KbdContenteditableAttrEnumTrue KbdContenteditableAttrEnum = "true"
-	KbdContenteditableAttrEnumFalse KbdContenteditableAttrEnum = "false"
 )
 
 type kbdAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *KbdElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

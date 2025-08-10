@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type BdoElement struct {
@@ -21,6 +22,7 @@ type BdoElement struct {
 func Bdo(children ...htemel.Node) *BdoElement {
 	node := &BdoElement{
 		children: children,
+		attributes: make(bdoAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func BdoIf(condition bool, children ...htemel.Node) *BdoElement {
 type BdoAutocapitalizeAttrEnum string
 
 const (
-	BdoAutocapitalizeAttrEnumOff BdoAutocapitalizeAttrEnum = "off"
-	BdoAutocapitalizeAttrEnumOn BdoAutocapitalizeAttrEnum = "on"
 	BdoAutocapitalizeAttrEnumSentences BdoAutocapitalizeAttrEnum = "sentences"
 	BdoAutocapitalizeAttrEnumWords BdoAutocapitalizeAttrEnum = "words"
 	BdoAutocapitalizeAttrEnumCharacters BdoAutocapitalizeAttrEnum = "characters"
 	BdoAutocapitalizeAttrEnumNone BdoAutocapitalizeAttrEnum = "none"
+	BdoAutocapitalizeAttrEnumOff BdoAutocapitalizeAttrEnum = "off"
+	BdoAutocapitalizeAttrEnumOn BdoAutocapitalizeAttrEnum = "on"
 )
 
 type BdoAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *BdoElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type BodyElement struct {
@@ -21,6 +22,7 @@ type BodyElement struct {
 func Body(children ...htemel.Node) *BodyElement {
 	node := &BodyElement{
 		children: children,
+		attributes: make(bodyAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func BodyIf(condition bool, children ...htemel.Node) *BodyElement {
 type BodyAutocapitalizeAttrEnum string
 
 const (
+	BodyAutocapitalizeAttrEnumCharacters BodyAutocapitalizeAttrEnum = "characters"
 	BodyAutocapitalizeAttrEnumNone BodyAutocapitalizeAttrEnum = "none"
 	BodyAutocapitalizeAttrEnumOff BodyAutocapitalizeAttrEnum = "off"
 	BodyAutocapitalizeAttrEnumOn BodyAutocapitalizeAttrEnum = "on"
 	BodyAutocapitalizeAttrEnumSentences BodyAutocapitalizeAttrEnum = "sentences"
 	BodyAutocapitalizeAttrEnumWords BodyAutocapitalizeAttrEnum = "words"
-	BodyAutocapitalizeAttrEnumCharacters BodyAutocapitalizeAttrEnum = "characters"
 )
 
 type BodyAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *BodyElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

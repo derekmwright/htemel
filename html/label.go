@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type LabelElement struct {
@@ -21,6 +22,7 @@ type LabelElement struct {
 func Label(children ...htemel.Node) *LabelElement {
 	node := &LabelElement{
 		children: children,
+		attributes: make(labelAttrs),
 	}
 
 	return node
@@ -110,10 +112,10 @@ func (e *LabelElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

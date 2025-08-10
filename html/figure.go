@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type FigureElement struct {
@@ -21,6 +22,7 @@ type FigureElement struct {
 func Figure(children ...htemel.Node) *FigureElement {
 	node := &FigureElement{
 		children: children,
+		attributes: make(figureAttrs),
 	}
 
 	return node
@@ -50,16 +52,16 @@ const (
 type FigureAutocorrectAttrEnum string
 
 const (
-	FigureAutocorrectAttrEnumOff FigureAutocorrectAttrEnum = "off"
 	FigureAutocorrectAttrEnumOn FigureAutocorrectAttrEnum = "on"
+	FigureAutocorrectAttrEnumOff FigureAutocorrectAttrEnum = "off"
 )
 
 type FigureContenteditableAttrEnum string
 
 const (
-	FigureContenteditableAttrEnumFalse FigureContenteditableAttrEnum = "false"
 	FigureContenteditableAttrEnumPlaintextOnly FigureContenteditableAttrEnum = "plaintext-only"
 	FigureContenteditableAttrEnumTrue FigureContenteditableAttrEnum = "true"
+	FigureContenteditableAttrEnumFalse FigureContenteditableAttrEnum = "false"
 )
 
 type figureAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *FigureElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

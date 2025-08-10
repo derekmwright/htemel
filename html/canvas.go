@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type CanvasElement struct {
@@ -21,6 +22,7 @@ type CanvasElement struct {
 func Canvas(children ...htemel.Node) *CanvasElement {
 	node := &CanvasElement{
 		children: children,
+		attributes: make(canvasAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 type CanvasAutocapitalizeAttrEnum string
 
 const (
+	CanvasAutocapitalizeAttrEnumSentences CanvasAutocapitalizeAttrEnum = "sentences"
+	CanvasAutocapitalizeAttrEnumWords CanvasAutocapitalizeAttrEnum = "words"
 	CanvasAutocapitalizeAttrEnumCharacters CanvasAutocapitalizeAttrEnum = "characters"
 	CanvasAutocapitalizeAttrEnumNone CanvasAutocapitalizeAttrEnum = "none"
 	CanvasAutocapitalizeAttrEnumOff CanvasAutocapitalizeAttrEnum = "off"
 	CanvasAutocapitalizeAttrEnumOn CanvasAutocapitalizeAttrEnum = "on"
-	CanvasAutocapitalizeAttrEnumSentences CanvasAutocapitalizeAttrEnum = "sentences"
-	CanvasAutocapitalizeAttrEnumWords CanvasAutocapitalizeAttrEnum = "words"
 )
 
 type CanvasAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *CanvasElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

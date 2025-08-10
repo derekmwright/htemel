@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type UElement struct {
@@ -21,6 +22,7 @@ type UElement struct {
 func U(children ...htemel.Node) *UElement {
 	node := &UElement{
 		children: children,
+		attributes: make(uAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func UIf(condition bool, children ...htemel.Node) *UElement {
 type UAutocapitalizeAttrEnum string
 
 const (
-	UAutocapitalizeAttrEnumOn UAutocapitalizeAttrEnum = "on"
-	UAutocapitalizeAttrEnumSentences UAutocapitalizeAttrEnum = "sentences"
-	UAutocapitalizeAttrEnumWords UAutocapitalizeAttrEnum = "words"
 	UAutocapitalizeAttrEnumCharacters UAutocapitalizeAttrEnum = "characters"
 	UAutocapitalizeAttrEnumNone UAutocapitalizeAttrEnum = "none"
 	UAutocapitalizeAttrEnumOff UAutocapitalizeAttrEnum = "off"
+	UAutocapitalizeAttrEnumOn UAutocapitalizeAttrEnum = "on"
+	UAutocapitalizeAttrEnumSentences UAutocapitalizeAttrEnum = "sentences"
+	UAutocapitalizeAttrEnumWords UAutocapitalizeAttrEnum = "words"
 )
 
 type UAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type UContenteditableAttrEnum string
 
 const (
+	UContenteditableAttrEnumFalse UContenteditableAttrEnum = "false"
 	UContenteditableAttrEnumPlaintextOnly UContenteditableAttrEnum = "plaintext-only"
 	UContenteditableAttrEnumTrue UContenteditableAttrEnum = "true"
-	UContenteditableAttrEnumFalse UContenteditableAttrEnum = "false"
 )
 
 type uAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *UElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

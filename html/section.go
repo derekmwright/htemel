@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type SectionElement struct {
@@ -21,6 +22,7 @@ type SectionElement struct {
 func Section(children ...htemel.Node) *SectionElement {
 	node := &SectionElement{
 		children: children,
+		attributes: make(sectionAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func SectionIf(condition bool, children ...htemel.Node) *SectionElement {
 type SectionAutocapitalizeAttrEnum string
 
 const (
-	SectionAutocapitalizeAttrEnumSentences SectionAutocapitalizeAttrEnum = "sentences"
-	SectionAutocapitalizeAttrEnumWords SectionAutocapitalizeAttrEnum = "words"
-	SectionAutocapitalizeAttrEnumCharacters SectionAutocapitalizeAttrEnum = "characters"
 	SectionAutocapitalizeAttrEnumNone SectionAutocapitalizeAttrEnum = "none"
 	SectionAutocapitalizeAttrEnumOff SectionAutocapitalizeAttrEnum = "off"
 	SectionAutocapitalizeAttrEnumOn SectionAutocapitalizeAttrEnum = "on"
+	SectionAutocapitalizeAttrEnumSentences SectionAutocapitalizeAttrEnum = "sentences"
+	SectionAutocapitalizeAttrEnumWords SectionAutocapitalizeAttrEnum = "words"
+	SectionAutocapitalizeAttrEnumCharacters SectionAutocapitalizeAttrEnum = "characters"
 )
 
 type SectionAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type SectionContenteditableAttrEnum string
 
 const (
+	SectionContenteditableAttrEnumTrue SectionContenteditableAttrEnum = "true"
 	SectionContenteditableAttrEnumFalse SectionContenteditableAttrEnum = "false"
 	SectionContenteditableAttrEnumPlaintextOnly SectionContenteditableAttrEnum = "plaintext-only"
-	SectionContenteditableAttrEnumTrue SectionContenteditableAttrEnum = "true"
 )
 
 type sectionAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *SectionElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

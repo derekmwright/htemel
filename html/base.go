@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type BaseElement struct {
@@ -21,6 +22,7 @@ type BaseElement struct {
 func Base(children ...htemel.Node) *BaseElement {
 	node := &BaseElement{
 		children: children,
+		attributes: make(baseAttrs),
 	}
 
 	return node
@@ -39,19 +41,19 @@ func BaseIf(condition bool, children ...htemel.Node) *BaseElement {
 type BaseAutocapitalizeAttrEnum string
 
 const (
-	BaseAutocapitalizeAttrEnumOn BaseAutocapitalizeAttrEnum = "on"
-	BaseAutocapitalizeAttrEnumSentences BaseAutocapitalizeAttrEnum = "sentences"
-	BaseAutocapitalizeAttrEnumWords BaseAutocapitalizeAttrEnum = "words"
 	BaseAutocapitalizeAttrEnumCharacters BaseAutocapitalizeAttrEnum = "characters"
 	BaseAutocapitalizeAttrEnumNone BaseAutocapitalizeAttrEnum = "none"
 	BaseAutocapitalizeAttrEnumOff BaseAutocapitalizeAttrEnum = "off"
+	BaseAutocapitalizeAttrEnumOn BaseAutocapitalizeAttrEnum = "on"
+	BaseAutocapitalizeAttrEnumSentences BaseAutocapitalizeAttrEnum = "sentences"
+	BaseAutocapitalizeAttrEnumWords BaseAutocapitalizeAttrEnum = "words"
 )
 
 type BaseAutocorrectAttrEnum string
 
 const (
-	BaseAutocorrectAttrEnumOn BaseAutocorrectAttrEnum = "on"
 	BaseAutocorrectAttrEnumOff BaseAutocorrectAttrEnum = "off"
+	BaseAutocorrectAttrEnumOn BaseAutocorrectAttrEnum = "on"
 )
 
 type BaseContenteditableAttrEnum string
@@ -110,10 +112,10 @@ func (e *BaseElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type RubyElement struct {
@@ -21,6 +22,7 @@ type RubyElement struct {
 func Ruby(children ...htemel.Node) *RubyElement {
 	node := &RubyElement{
 		children: children,
+		attributes: make(rubyAttrs),
 	}
 
 	return node
@@ -39,19 +41,19 @@ func RubyIf(condition bool, children ...htemel.Node) *RubyElement {
 type RubyAutocapitalizeAttrEnum string
 
 const (
+	RubyAutocapitalizeAttrEnumOn RubyAutocapitalizeAttrEnum = "on"
+	RubyAutocapitalizeAttrEnumSentences RubyAutocapitalizeAttrEnum = "sentences"
 	RubyAutocapitalizeAttrEnumWords RubyAutocapitalizeAttrEnum = "words"
 	RubyAutocapitalizeAttrEnumCharacters RubyAutocapitalizeAttrEnum = "characters"
 	RubyAutocapitalizeAttrEnumNone RubyAutocapitalizeAttrEnum = "none"
 	RubyAutocapitalizeAttrEnumOff RubyAutocapitalizeAttrEnum = "off"
-	RubyAutocapitalizeAttrEnumOn RubyAutocapitalizeAttrEnum = "on"
-	RubyAutocapitalizeAttrEnumSentences RubyAutocapitalizeAttrEnum = "sentences"
 )
 
 type RubyAutocorrectAttrEnum string
 
 const (
-	RubyAutocorrectAttrEnumOff RubyAutocorrectAttrEnum = "off"
 	RubyAutocorrectAttrEnumOn RubyAutocorrectAttrEnum = "on"
+	RubyAutocorrectAttrEnumOff RubyAutocorrectAttrEnum = "off"
 )
 
 type RubyContenteditableAttrEnum string
@@ -110,10 +112,10 @@ func (e *RubyElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

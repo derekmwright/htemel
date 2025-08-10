@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type AbbrElement struct {
@@ -21,6 +22,7 @@ type AbbrElement struct {
 func Abbr(children ...htemel.Node) *AbbrElement {
 	node := &AbbrElement{
 		children: children,
+		attributes: make(abbrAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func AbbrIf(condition bool, children ...htemel.Node) *AbbrElement {
 type AbbrAutocapitalizeAttrEnum string
 
 const (
-	AbbrAutocapitalizeAttrEnumOn AbbrAutocapitalizeAttrEnum = "on"
-	AbbrAutocapitalizeAttrEnumSentences AbbrAutocapitalizeAttrEnum = "sentences"
-	AbbrAutocapitalizeAttrEnumWords AbbrAutocapitalizeAttrEnum = "words"
 	AbbrAutocapitalizeAttrEnumCharacters AbbrAutocapitalizeAttrEnum = "characters"
 	AbbrAutocapitalizeAttrEnumNone AbbrAutocapitalizeAttrEnum = "none"
 	AbbrAutocapitalizeAttrEnumOff AbbrAutocapitalizeAttrEnum = "off"
+	AbbrAutocapitalizeAttrEnumOn AbbrAutocapitalizeAttrEnum = "on"
+	AbbrAutocapitalizeAttrEnumSentences AbbrAutocapitalizeAttrEnum = "sentences"
+	AbbrAutocapitalizeAttrEnumWords AbbrAutocapitalizeAttrEnum = "words"
 )
 
 type AbbrAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *AbbrElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

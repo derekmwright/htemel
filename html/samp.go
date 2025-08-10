@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type SampElement struct {
@@ -21,6 +22,7 @@ type SampElement struct {
 func Samp(children ...htemel.Node) *SampElement {
 	node := &SampElement{
 		children: children,
+		attributes: make(sampAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func SampIf(condition bool, children ...htemel.Node) *SampElement {
 type SampAutocapitalizeAttrEnum string
 
 const (
-	SampAutocapitalizeAttrEnumSentences SampAutocapitalizeAttrEnum = "sentences"
-	SampAutocapitalizeAttrEnumWords SampAutocapitalizeAttrEnum = "words"
-	SampAutocapitalizeAttrEnumCharacters SampAutocapitalizeAttrEnum = "characters"
 	SampAutocapitalizeAttrEnumNone SampAutocapitalizeAttrEnum = "none"
 	SampAutocapitalizeAttrEnumOff SampAutocapitalizeAttrEnum = "off"
 	SampAutocapitalizeAttrEnumOn SampAutocapitalizeAttrEnum = "on"
+	SampAutocapitalizeAttrEnumSentences SampAutocapitalizeAttrEnum = "sentences"
+	SampAutocapitalizeAttrEnumWords SampAutocapitalizeAttrEnum = "words"
+	SampAutocapitalizeAttrEnumCharacters SampAutocapitalizeAttrEnum = "characters"
 )
 
 type SampAutocorrectAttrEnum string
@@ -110,10 +112,10 @@ func (e *SampElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}

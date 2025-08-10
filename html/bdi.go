@@ -6,6 +6,7 @@ import (
   "github.com/derekmwright/htemel"
   "golang.org/x/net/html"
   "io"
+  "strings"
 )
 
 type BdiElement struct {
@@ -21,6 +22,7 @@ type BdiElement struct {
 func Bdi(children ...htemel.Node) *BdiElement {
 	node := &BdiElement{
 		children: children,
+		attributes: make(bdiAttrs),
 	}
 
 	return node
@@ -39,12 +41,12 @@ func BdiIf(condition bool, children ...htemel.Node) *BdiElement {
 type BdiAutocapitalizeAttrEnum string
 
 const (
-	BdiAutocapitalizeAttrEnumNone BdiAutocapitalizeAttrEnum = "none"
-	BdiAutocapitalizeAttrEnumOff BdiAutocapitalizeAttrEnum = "off"
 	BdiAutocapitalizeAttrEnumOn BdiAutocapitalizeAttrEnum = "on"
 	BdiAutocapitalizeAttrEnumSentences BdiAutocapitalizeAttrEnum = "sentences"
 	BdiAutocapitalizeAttrEnumWords BdiAutocapitalizeAttrEnum = "words"
 	BdiAutocapitalizeAttrEnumCharacters BdiAutocapitalizeAttrEnum = "characters"
+	BdiAutocapitalizeAttrEnumNone BdiAutocapitalizeAttrEnum = "none"
+	BdiAutocapitalizeAttrEnumOff BdiAutocapitalizeAttrEnum = "off"
 )
 
 type BdiAutocorrectAttrEnum string
@@ -57,9 +59,9 @@ const (
 type BdiContenteditableAttrEnum string
 
 const (
-	BdiContenteditableAttrEnumTrue BdiContenteditableAttrEnum = "true"
 	BdiContenteditableAttrEnumFalse BdiContenteditableAttrEnum = "false"
 	BdiContenteditableAttrEnumPlaintextOnly BdiContenteditableAttrEnum = "plaintext-only"
+	BdiContenteditableAttrEnumTrue BdiContenteditableAttrEnum = "true"
 )
 
 type bdiAttrs map[string]any
@@ -110,10 +112,10 @@ func (e *BdiElement) Render(w io.Writer) error {
 	}
 
 	c := len(e.attributes)
-	i := 0
+	i := 1
 	for key, v := range e.attributes {
-		w.Write([]byte(key + "="))
-		w.Write([]byte(html.EscapeString(fmt.Sprintf("'%v'", v))))
+		w.Write([]byte(" " + key + "="))
+		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 		if i < c {
 			w.Write([]byte(" "))
 		}
