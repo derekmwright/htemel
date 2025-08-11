@@ -12,7 +12,6 @@ To install htemel, run the following commands:
 
 ```shell
 go get github.com/derekmwright/htemel
-go get github.com/derekmwright/htemel/html
 ```
 
 ## Example
