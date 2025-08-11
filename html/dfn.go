@@ -50,12 +50,12 @@ func DfnTernary(condition bool, true htemel.Node, false htemel.Node) *DfnElement
 type DfnAutocapitalizeEnum string
 
 const (
+	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
+	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
 	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
 	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
 	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
-	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
-	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 )
 
 type DfnAutocorrectEnum string
@@ -68,9 +68,9 @@ const (
 type DfnContenteditableEnum string
 
 const (
+	DfnContenteditableEnumTrue          DfnContenteditableEnum = "true"
 	DfnContenteditableEnumFalse         DfnContenteditableEnum = "false"
 	DfnContenteditableEnumPlaintextOnly DfnContenteditableEnum = "plaintext-only"
-	DfnContenteditableEnumTrue          DfnContenteditableEnum = "true"
 )
 
 type DfnDirEnum string
@@ -84,20 +84,20 @@ const (
 type DfnDraggableEnum string
 
 const (
-	DfnDraggableEnumTrue  DfnDraggableEnum = "true"
 	DfnDraggableEnumFalse DfnDraggableEnum = "false"
+	DfnDraggableEnumTrue  DfnDraggableEnum = "true"
 )
 
 type DfnEnterkeyhintEnum string
 
 const (
+	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
 	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
 	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
 	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
-	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 )
 
 type DfnHiddenEnum string
@@ -111,6 +111,7 @@ const (
 type DfnInputmodeEnum string
 
 const (
+	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
 	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
 	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
@@ -118,7 +119,6 @@ const (
 	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
 	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
 	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
-	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 )
 
 type DfnSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *DfnElement) Contenteditable(a DfnContenteditableEnum) *DfnElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *DfnElement) DataUnsafe(name string, s string) *DfnElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DfnElement) Data(name string, s string) *DfnElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *DfnElement) Dir(a DfnDirEnum) *DfnElement {
@@ -337,7 +349,7 @@ func (e *DfnElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

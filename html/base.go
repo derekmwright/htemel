@@ -50,19 +50,19 @@ func BaseTernary(condition bool, true htemel.Node, false htemel.Node) *BaseEleme
 type BaseAutocapitalizeEnum string
 
 const (
-	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
 	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
 	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
 	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
 	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
+	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
 )
 
 type BaseAutocorrectEnum string
 
 const (
-	BaseAutocorrectEnumOn  BaseAutocorrectEnum = "on"
 	BaseAutocorrectEnumOff BaseAutocorrectEnum = "off"
+	BaseAutocorrectEnumOn  BaseAutocorrectEnum = "on"
 )
 
 type BaseContenteditableEnum string
@@ -76,9 +76,9 @@ const (
 type BaseDirEnum string
 
 const (
+	BaseDirEnumAuto BaseDirEnum = "auto"
 	BaseDirEnumLtr  BaseDirEnum = "ltr"
 	BaseDirEnumRtl  BaseDirEnum = "rtl"
-	BaseDirEnumAuto BaseDirEnum = "auto"
 )
 
 type BaseDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
+	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
+	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
 	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
-	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
-	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 )
 
 type BaseHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type BaseInputmodeEnum string
 
 const (
+	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
+	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
 	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
 	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
 	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
 	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
 	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
-	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
-	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
 )
 
 type BaseSpellcheckEnum string
@@ -138,8 +138,8 @@ const (
 type BaseWritingsuggestionsEnum string
 
 const (
-	BaseWritingsuggestionsEnumTrue  BaseWritingsuggestionsEnum = "true"
 	BaseWritingsuggestionsEnumFalse BaseWritingsuggestionsEnum = "false"
+	BaseWritingsuggestionsEnumTrue  BaseWritingsuggestionsEnum = "true"
 )
 
 type baseAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *BaseElement) Contenteditable(a BaseContenteditableEnum) *BaseElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *BaseElement) DataUnsafe(name string, s string) *BaseElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BaseElement) Data(name string, s string) *BaseElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *BaseElement) Dir(a BaseDirEnum) *BaseElement {
@@ -337,7 +349,7 @@ func (e *BaseElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

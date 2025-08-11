@@ -91,13 +91,13 @@ const (
 type AreaEnterkeyhintEnum string
 
 const (
+	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
+	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
 	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
 	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
 	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
 	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
 	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
-	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
-	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
 )
 
 type AreaHiddenEnum string
@@ -111,6 +111,7 @@ const (
 type AreaInputmodeEnum string
 
 const (
+	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
 	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
 	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
 	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
@@ -118,14 +119,13 @@ const (
 	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
 	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
-	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
 )
 
 type AreaSpellcheckEnum string
 
 const (
-	AreaSpellcheckEnumFalse AreaSpellcheckEnum = "false"
 	AreaSpellcheckEnumTrue  AreaSpellcheckEnum = "true"
+	AreaSpellcheckEnumFalse AreaSpellcheckEnum = "false"
 )
 
 type AreaTranslateEnum string
@@ -172,6 +172,18 @@ func (e *AreaElement) Contenteditable(a AreaContenteditableEnum) *AreaElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *AreaElement) DataUnsafe(name string, s string) *AreaElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *AreaElement) Data(name string, s string) *AreaElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *AreaElement) Dir(a AreaDirEnum) *AreaElement {
@@ -337,7 +349,7 @@ func (e *AreaElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,27 +50,27 @@ func ButtonTernary(condition bool, true htemel.Node, false htemel.Node) *ButtonE
 type ButtonAutocapitalizeEnum string
 
 const (
-	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
-	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
-	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
 	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
 	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
+	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
+	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
+	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
 )
 
 type ButtonAutocorrectEnum string
 
 const (
-	ButtonAutocorrectEnumOff ButtonAutocorrectEnum = "off"
 	ButtonAutocorrectEnumOn  ButtonAutocorrectEnum = "on"
+	ButtonAutocorrectEnumOff ButtonAutocorrectEnum = "off"
 )
 
 type ButtonContenteditableEnum string
 
 const (
+	ButtonContenteditableEnumTrue          ButtonContenteditableEnum = "true"
 	ButtonContenteditableEnumFalse         ButtonContenteditableEnum = "false"
 	ButtonContenteditableEnumPlaintextOnly ButtonContenteditableEnum = "plaintext-only"
-	ButtonContenteditableEnumTrue          ButtonContenteditableEnum = "true"
 )
 
 type ButtonDirEnum string
@@ -91,13 +91,13 @@ const (
 type ButtonEnterkeyhintEnum string
 
 const (
+	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
 	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
 	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
 	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
 	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
-	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
 )
 
 type ButtonHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type ButtonInputmodeEnum string
 
 const (
+	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
+	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
 	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
 	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
 	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
 	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
 	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
 	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
-	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
-	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
 )
 
 type ButtonSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *ButtonElement) Contenteditable(a ButtonContenteditableEnum) *ButtonElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *ButtonElement) DataUnsafe(name string, s string) *ButtonElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ButtonElement) Data(name string, s string) *ButtonElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *ButtonElement) Dir(a ButtonDirEnum) *ButtonElement {
@@ -337,7 +349,7 @@ func (e *ButtonElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,12 +50,12 @@ func MetaTernary(condition bool, true htemel.Node, false htemel.Node) *MetaEleme
 type MetaAutocapitalizeEnum string
 
 const (
-	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
-	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
 	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
 	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
 	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
 	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
+	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
+	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
 )
 
 type MetaAutocorrectEnum string
@@ -91,13 +91,13 @@ const (
 type MetaEnterkeyhintEnum string
 
 const (
+	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
 	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
 	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
 	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
 	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
-	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 )
 
 type MetaHiddenEnum string
@@ -138,8 +138,8 @@ const (
 type MetaWritingsuggestionsEnum string
 
 const (
-	MetaWritingsuggestionsEnumFalse MetaWritingsuggestionsEnum = "false"
 	MetaWritingsuggestionsEnumTrue  MetaWritingsuggestionsEnum = "true"
+	MetaWritingsuggestionsEnumFalse MetaWritingsuggestionsEnum = "false"
 )
 
 type metaAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *MetaElement) Contenteditable(a MetaContenteditableEnum) *MetaElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *MetaElement) DataUnsafe(name string, s string) *MetaElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *MetaElement) Data(name string, s string) *MetaElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *MetaElement) Dir(a MetaDirEnum) *MetaElement {
@@ -337,7 +349,7 @@ func (e *MetaElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

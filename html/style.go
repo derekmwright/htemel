@@ -50,12 +50,12 @@ func StyleTernary(condition bool, true htemel.Node, false htemel.Node) *StyleEle
 type StyleAutocapitalizeEnum string
 
 const (
+	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
 	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
 	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
 	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
 	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
 	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
-	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
 )
 
 type StyleAutocorrectEnum string
@@ -68,17 +68,17 @@ const (
 type StyleContenteditableEnum string
 
 const (
+	StyleContenteditableEnumFalse         StyleContenteditableEnum = "false"
 	StyleContenteditableEnumPlaintextOnly StyleContenteditableEnum = "plaintext-only"
 	StyleContenteditableEnumTrue          StyleContenteditableEnum = "true"
-	StyleContenteditableEnumFalse         StyleContenteditableEnum = "false"
 )
 
 type StyleDirEnum string
 
 const (
-	StyleDirEnumLtr  StyleDirEnum = "ltr"
 	StyleDirEnumRtl  StyleDirEnum = "rtl"
 	StyleDirEnumAuto StyleDirEnum = "auto"
+	StyleDirEnumLtr  StyleDirEnum = "ltr"
 )
 
 type StyleDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type StyleEnterkeyhintEnum string
 
 const (
+	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
+	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
+	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
 	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
 	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
 	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
-	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
-	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
-	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 )
 
 type StyleHiddenEnum string
@@ -111,6 +111,7 @@ const (
 type StyleInputmodeEnum string
 
 const (
+	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
 	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
 	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
@@ -118,21 +119,20 @@ const (
 	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
 	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
-	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
 )
 
 type StyleSpellcheckEnum string
 
 const (
-	StyleSpellcheckEnumTrue  StyleSpellcheckEnum = "true"
 	StyleSpellcheckEnumFalse StyleSpellcheckEnum = "false"
+	StyleSpellcheckEnumTrue  StyleSpellcheckEnum = "true"
 )
 
 type StyleTranslateEnum string
 
 const (
-	StyleTranslateEnumYes StyleTranslateEnum = "yes"
 	StyleTranslateEnumNo  StyleTranslateEnum = "no"
+	StyleTranslateEnumYes StyleTranslateEnum = "yes"
 )
 
 type StyleWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *StyleElement) Contenteditable(a StyleContenteditableEnum) *StyleElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *StyleElement) DataUnsafe(name string, s string) *StyleElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *StyleElement) Data(name string, s string) *StyleElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *StyleElement) Dir(a StyleDirEnum) *StyleElement {
@@ -337,7 +349,7 @@ func (e *StyleElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

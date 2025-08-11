@@ -50,12 +50,12 @@ func OlTernary(condition bool, true htemel.Node, false htemel.Node) *OlElement {
 type OlAutocapitalizeEnum string
 
 const (
+	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 	OlAutocapitalizeEnumNone       OlAutocapitalizeEnum = "none"
 	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
 	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
 	OlAutocapitalizeEnumSentences  OlAutocapitalizeEnum = "sentences"
 	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
-	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 )
 
 type OlAutocorrectEnum string
@@ -76,28 +76,28 @@ const (
 type OlDirEnum string
 
 const (
-	OlDirEnumAuto OlDirEnum = "auto"
 	OlDirEnumLtr  OlDirEnum = "ltr"
 	OlDirEnumRtl  OlDirEnum = "rtl"
+	OlDirEnumAuto OlDirEnum = "auto"
 )
 
 type OlDraggableEnum string
 
 const (
-	OlDraggableEnumTrue  OlDraggableEnum = "true"
 	OlDraggableEnumFalse OlDraggableEnum = "false"
+	OlDraggableEnumTrue  OlDraggableEnum = "true"
 )
 
 type OlEnterkeyhintEnum string
 
 const (
+	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
 	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
 	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
 	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
 	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
-	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
 )
 
 type OlHiddenEnum string
@@ -172,6 +172,18 @@ func (e *OlElement) Contenteditable(a OlContenteditableEnum) *OlElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *OlElement) DataUnsafe(name string, s string) *OlElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *OlElement) Data(name string, s string) *OlElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *OlElement) Dir(a OlDirEnum) *OlElement {
@@ -337,7 +349,7 @@ func (e *OlElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

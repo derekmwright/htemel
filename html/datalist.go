@@ -50,12 +50,12 @@ func DatalistTernary(condition bool, true htemel.Node, false htemel.Node) *Datal
 type DatalistAutocapitalizeEnum string
 
 const (
+	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
 	DatalistAutocapitalizeEnumOn         DatalistAutocapitalizeEnum = "on"
 	DatalistAutocapitalizeEnumSentences  DatalistAutocapitalizeEnum = "sentences"
 	DatalistAutocapitalizeEnumWords      DatalistAutocapitalizeEnum = "words"
 	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
 	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
-	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
 )
 
 type DatalistAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type DatalistDirEnum string
 
 const (
+	DatalistDirEnumRtl  DatalistDirEnum = "rtl"
 	DatalistDirEnumAuto DatalistDirEnum = "auto"
 	DatalistDirEnumLtr  DatalistDirEnum = "ltr"
-	DatalistDirEnumRtl  DatalistDirEnum = "rtl"
 )
 
 type DatalistDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type DatalistEnterkeyhintEnum string
 
 const (
-	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
-	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 	DatalistEnterkeyhintEnumEnter    DatalistEnterkeyhintEnum = "enter"
 	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
 	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
 	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
 	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
+	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
+	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 )
 
 type DatalistHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type DatalistInputmodeEnum string
 
 const (
-	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
-	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
-	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
-	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
 	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
 	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
 	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
 	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
+	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
+	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
+	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
+	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
 )
 
 type DatalistSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *DatalistElement) Contenteditable(a DatalistContenteditableEnum) *Datali
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *DatalistElement) DataUnsafe(name string, s string) *DatalistElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DatalistElement) Data(name string, s string) *DatalistElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *DatalistElement) Dir(a DatalistDirEnum) *DatalistElement {
@@ -337,7 +349,7 @@ func (e *DatalistElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,12 +50,12 @@ func LabelTernary(condition bool, true htemel.Node, false htemel.Node) *LabelEle
 type LabelAutocapitalizeEnum string
 
 const (
+	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 	LabelAutocapitalizeEnumCharacters LabelAutocapitalizeEnum = "characters"
 	LabelAutocapitalizeEnumNone       LabelAutocapitalizeEnum = "none"
 	LabelAutocapitalizeEnumOff        LabelAutocapitalizeEnum = "off"
 	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
 	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
-	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 )
 
 type LabelAutocorrectEnum string
@@ -68,36 +68,36 @@ const (
 type LabelContenteditableEnum string
 
 const (
+	LabelContenteditableEnumPlaintextOnly LabelContenteditableEnum = "plaintext-only"
 	LabelContenteditableEnumTrue          LabelContenteditableEnum = "true"
 	LabelContenteditableEnumFalse         LabelContenteditableEnum = "false"
-	LabelContenteditableEnumPlaintextOnly LabelContenteditableEnum = "plaintext-only"
 )
 
 type LabelDirEnum string
 
 const (
-	LabelDirEnumAuto LabelDirEnum = "auto"
 	LabelDirEnumLtr  LabelDirEnum = "ltr"
 	LabelDirEnumRtl  LabelDirEnum = "rtl"
+	LabelDirEnumAuto LabelDirEnum = "auto"
 )
 
 type LabelDraggableEnum string
 
 const (
-	LabelDraggableEnumTrue  LabelDraggableEnum = "true"
 	LabelDraggableEnumFalse LabelDraggableEnum = "false"
+	LabelDraggableEnumTrue  LabelDraggableEnum = "true"
 )
 
 type LabelEnterkeyhintEnum string
 
 const (
-	LabelEnterkeyhintEnumNext     LabelEnterkeyhintEnum = "next"
-	LabelEnterkeyhintEnumPrevious LabelEnterkeyhintEnum = "previous"
-	LabelEnterkeyhintEnumSearch   LabelEnterkeyhintEnum = "search"
 	LabelEnterkeyhintEnumSend     LabelEnterkeyhintEnum = "send"
 	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
 	LabelEnterkeyhintEnumEnter    LabelEnterkeyhintEnum = "enter"
 	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
+	LabelEnterkeyhintEnumNext     LabelEnterkeyhintEnum = "next"
+	LabelEnterkeyhintEnumPrevious LabelEnterkeyhintEnum = "previous"
+	LabelEnterkeyhintEnumSearch   LabelEnterkeyhintEnum = "search"
 )
 
 type LabelHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type LabelInputmodeEnum string
 
 const (
+	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
+	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
+	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
 	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
 	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
 	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
-	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
-	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
-	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 )
 
 type LabelSpellcheckEnum string
@@ -131,15 +131,15 @@ const (
 type LabelTranslateEnum string
 
 const (
-	LabelTranslateEnumNo  LabelTranslateEnum = "no"
 	LabelTranslateEnumYes LabelTranslateEnum = "yes"
+	LabelTranslateEnumNo  LabelTranslateEnum = "no"
 )
 
 type LabelWritingsuggestionsEnum string
 
 const (
-	LabelWritingsuggestionsEnumTrue  LabelWritingsuggestionsEnum = "true"
 	LabelWritingsuggestionsEnumFalse LabelWritingsuggestionsEnum = "false"
+	LabelWritingsuggestionsEnumTrue  LabelWritingsuggestionsEnum = "true"
 )
 
 type labelAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *LabelElement) Contenteditable(a LabelContenteditableEnum) *LabelElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *LabelElement) DataUnsafe(name string, s string) *LabelElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *LabelElement) Data(name string, s string) *LabelElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *LabelElement) Dir(a LabelDirEnum) *LabelElement {
@@ -337,7 +349,7 @@ func (e *LabelElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

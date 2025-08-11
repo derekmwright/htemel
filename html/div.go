@@ -50,12 +50,12 @@ func DivTernary(condition bool, true htemel.Node, false htemel.Node) *DivElement
 type DivAutocapitalizeEnum string
 
 const (
-	DivAutocapitalizeEnumNone       DivAutocapitalizeEnum = "none"
-	DivAutocapitalizeEnumOff        DivAutocapitalizeEnum = "off"
-	DivAutocapitalizeEnumOn         DivAutocapitalizeEnum = "on"
 	DivAutocapitalizeEnumSentences  DivAutocapitalizeEnum = "sentences"
 	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
 	DivAutocapitalizeEnumCharacters DivAutocapitalizeEnum = "characters"
+	DivAutocapitalizeEnumNone       DivAutocapitalizeEnum = "none"
+	DivAutocapitalizeEnumOff        DivAutocapitalizeEnum = "off"
+	DivAutocapitalizeEnumOn         DivAutocapitalizeEnum = "on"
 )
 
 type DivAutocorrectEnum string
@@ -68,17 +68,17 @@ const (
 type DivContenteditableEnum string
 
 const (
+	DivContenteditableEnumFalse         DivContenteditableEnum = "false"
 	DivContenteditableEnumPlaintextOnly DivContenteditableEnum = "plaintext-only"
 	DivContenteditableEnumTrue          DivContenteditableEnum = "true"
-	DivContenteditableEnumFalse         DivContenteditableEnum = "false"
 )
 
 type DivDirEnum string
 
 const (
-	DivDirEnumAuto DivDirEnum = "auto"
 	DivDirEnumLtr  DivDirEnum = "ltr"
 	DivDirEnumRtl  DivDirEnum = "rtl"
+	DivDirEnumAuto DivDirEnum = "auto"
 )
 
 type DivDraggableEnum string
@@ -91,27 +91,26 @@ const (
 type DivEnterkeyhintEnum string
 
 const (
+	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
+	DivEnterkeyhintEnumGo       DivEnterkeyhintEnum = "go"
 	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
 	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
 	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
 	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
 	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
-	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
-	DivEnterkeyhintEnumGo       DivEnterkeyhintEnum = "go"
 )
 
 type DivHiddenEnum string
 
 const (
-	DivHiddenEnumHidden     DivHiddenEnum = "hidden"
 	DivHiddenEnumUntilFound DivHiddenEnum = "until-found"
+	DivHiddenEnumHidden     DivHiddenEnum = "hidden"
 	DivHiddenEnumEmpty      DivHiddenEnum = ""
 )
 
 type DivInputmodeEnum string
 
 const (
-	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
 	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
 	DivInputmodeEnumText    DivInputmodeEnum = "text"
 	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
@@ -119,6 +118,7 @@ const (
 	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
 	DivInputmodeEnumNone    DivInputmodeEnum = "none"
 	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
+	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
 )
 
 type DivSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *DivElement) Contenteditable(a DivContenteditableEnum) *DivElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *DivElement) DataUnsafe(name string, s string) *DivElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DivElement) Data(name string, s string) *DivElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *DivElement) Dir(a DivDirEnum) *DivElement {
@@ -337,7 +349,7 @@ func (e *DivElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -91,13 +91,13 @@ const (
 type RpEnterkeyhintEnum string
 
 const (
+	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
 	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
 	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
 	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
 	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
 	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
-	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 )
 
 type RpHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type RpInputmodeEnum string
 
 const (
+	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
+	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
 	RpInputmodeEnumNone    RpInputmodeEnum = "none"
 	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
 	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
 	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
 	RpInputmodeEnumText    RpInputmodeEnum = "text"
 	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
-	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
-	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
 )
 
 type RpSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *RpElement) Contenteditable(a RpContenteditableEnum) *RpElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *RpElement) DataUnsafe(name string, s string) *RpElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *RpElement) Data(name string, s string) *RpElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *RpElement) Dir(a RpDirEnum) *RpElement {
@@ -337,7 +349,7 @@ func (e *RpElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

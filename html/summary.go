@@ -50,19 +50,19 @@ func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *Summar
 type SummaryAutocapitalizeEnum string
 
 const (
-	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
-	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
 	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
+	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
+	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 )
 
 type SummaryAutocorrectEnum string
 
 const (
-	SummaryAutocorrectEnumOff SummaryAutocorrectEnum = "off"
 	SummaryAutocorrectEnumOn  SummaryAutocorrectEnum = "on"
+	SummaryAutocorrectEnumOff SummaryAutocorrectEnum = "off"
 )
 
 type SummaryContenteditableEnum string
@@ -91,13 +91,13 @@ const (
 type SummaryEnterkeyhintEnum string
 
 const (
-	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
 	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
 	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
 	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
 	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
 	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
+	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
 )
 
 type SummaryHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type SummaryInputmodeEnum string
 
 const (
+	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
+	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
 	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
 	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
 	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
 	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
 	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
-	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
-	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 )
 
 type SummarySpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type SummaryTranslateEnum string
 
 const (
-	SummaryTranslateEnumYes SummaryTranslateEnum = "yes"
 	SummaryTranslateEnumNo  SummaryTranslateEnum = "no"
+	SummaryTranslateEnumYes SummaryTranslateEnum = "yes"
 )
 
 type SummaryWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *SummaryElement) Contenteditable(a SummaryContenteditableEnum) *SummaryE
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SummaryElement) DataUnsafe(name string, s string) *SummaryElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SummaryElement) Data(name string, s string) *SummaryElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SummaryElement) Dir(a SummaryDirEnum) *SummaryElement {
@@ -337,7 +349,7 @@ func (e *SummaryElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,12 +50,12 @@ func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectE
 type SelectAutocapitalizeEnum string
 
 const (
+	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
 	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
 	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
 	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
-	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
 )
 
 type SelectAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type SelectDirEnum string
 
 const (
+	SelectDirEnumLtr  SelectDirEnum = "ltr"
 	SelectDirEnumRtl  SelectDirEnum = "rtl"
 	SelectDirEnumAuto SelectDirEnum = "auto"
-	SelectDirEnumLtr  SelectDirEnum = "ltr"
 )
 
 type SelectDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type SelectEnterkeyhintEnum string
 
 const (
-	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
-	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
 	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
 	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
+	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
+	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 )
 
 type SelectHiddenEnum string
@@ -172,6 +172,18 @@ func (e *SelectElement) Contenteditable(a SelectContenteditableEnum) *SelectElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SelectElement) DataUnsafe(name string, s string) *SelectElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SelectElement) Data(name string, s string) *SelectElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SelectElement) Dir(a SelectDirEnum) *SelectElement {
@@ -337,7 +349,7 @@ func (e *SelectElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,12 +50,12 @@ func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrEleme
 type AbbrAutocapitalizeEnum string
 
 const (
-	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
-	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
 	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
 	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
 	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
 	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
+	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
+	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
 )
 
 type AbbrAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type AbbrDirEnum string
 
 const (
+	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
 	AbbrDirEnumAuto AbbrDirEnum = "auto"
 	AbbrDirEnumLtr  AbbrDirEnum = "ltr"
-	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
 )
 
 type AbbrDraggableEnum string
@@ -111,21 +111,21 @@ const (
 type AbbrInputmodeEnum string
 
 const (
-	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
-	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
 	AbbrInputmodeEnumText    AbbrInputmodeEnum = "text"
 	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
 	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
 	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
 	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
+	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
+	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 )
 
 type AbbrSpellcheckEnum string
 
 const (
-	AbbrSpellcheckEnumFalse AbbrSpellcheckEnum = "false"
 	AbbrSpellcheckEnumTrue  AbbrSpellcheckEnum = "true"
+	AbbrSpellcheckEnumFalse AbbrSpellcheckEnum = "false"
 )
 
 type AbbrTranslateEnum string
@@ -138,8 +138,8 @@ const (
 type AbbrWritingsuggestionsEnum string
 
 const (
-	AbbrWritingsuggestionsEnumFalse AbbrWritingsuggestionsEnum = "false"
 	AbbrWritingsuggestionsEnumTrue  AbbrWritingsuggestionsEnum = "true"
+	AbbrWritingsuggestionsEnumFalse AbbrWritingsuggestionsEnum = "false"
 )
 
 type abbrAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *AbbrElement) Contenteditable(a AbbrContenteditableEnum) *AbbrElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *AbbrElement) DataUnsafe(name string, s string) *AbbrElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *AbbrElement) Data(name string, s string) *AbbrElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *AbbrElement) Dir(a AbbrDirEnum) *AbbrElement {
@@ -337,7 +349,7 @@ func (e *AbbrElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -61,8 +61,8 @@ const (
 type WbrAutocorrectEnum string
 
 const (
-	WbrAutocorrectEnumOff WbrAutocorrectEnum = "off"
 	WbrAutocorrectEnumOn  WbrAutocorrectEnum = "on"
+	WbrAutocorrectEnumOff WbrAutocorrectEnum = "off"
 )
 
 type WbrContenteditableEnum string
@@ -91,13 +91,13 @@ const (
 type WbrEnterkeyhintEnum string
 
 const (
-	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
 	WbrEnterkeyhintEnumSearch   WbrEnterkeyhintEnum = "search"
 	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
 	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
 	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
+	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 )
 
 type WbrHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type WbrInputmodeEnum string
 
 const (
+	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
+	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
 	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
 	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
 	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
 	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
-	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
-	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
 )
 
 type WbrSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *WbrElement) Contenteditable(a WbrContenteditableEnum) *WbrElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *WbrElement) DataUnsafe(name string, s string) *WbrElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *WbrElement) Data(name string, s string) *WbrElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *WbrElement) Dir(a WbrDirEnum) *WbrElement {
@@ -337,7 +349,7 @@ func (e *WbrElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

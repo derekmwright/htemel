@@ -50,12 +50,12 @@ func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongE
 type StrongAutocapitalizeEnum string
 
 const (
-	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
-	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
-	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
 	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
 	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
 	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
+	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
+	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
+	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
 )
 
 type StrongAutocorrectEnum string
@@ -91,13 +91,13 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
+	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
 	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
 	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
 	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
-	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
 )
 
 type StrongHiddenEnum string
@@ -111,21 +111,21 @@ const (
 type StrongInputmodeEnum string
 
 const (
-	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
-	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
-	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
 	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
 	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
 	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
 	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
+	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
+	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
+	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 )
 
 type StrongSpellcheckEnum string
 
 const (
-	StrongSpellcheckEnumFalse StrongSpellcheckEnum = "false"
 	StrongSpellcheckEnumTrue  StrongSpellcheckEnum = "true"
+	StrongSpellcheckEnumFalse StrongSpellcheckEnum = "false"
 )
 
 type StrongTranslateEnum string
@@ -172,6 +172,18 @@ func (e *StrongElement) Contenteditable(a StrongContenteditableEnum) *StrongElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *StrongElement) DataUnsafe(name string, s string) *StrongElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *StrongElement) Data(name string, s string) *StrongElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *StrongElement) Dir(a StrongDirEnum) *StrongElement {
@@ -337,7 +349,7 @@ func (e *StrongElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,12 +50,12 @@ func FooterTernary(condition bool, true htemel.Node, false htemel.Node) *FooterE
 type FooterAutocapitalizeEnum string
 
 const (
+	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 	FooterAutocapitalizeEnumOn         FooterAutocapitalizeEnum = "on"
 	FooterAutocapitalizeEnumSentences  FooterAutocapitalizeEnum = "sentences"
 	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
 	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
 	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
-	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 )
 
 type FooterAutocorrectEnum string
@@ -91,13 +91,13 @@ const (
 type FooterEnterkeyhintEnum string
 
 const (
-	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
-	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
-	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
 	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
 	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
 	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
 	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
+	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
+	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
+	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
 )
 
 type FooterHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type FooterInputmodeEnum string
 
 const (
+	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
+	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
+	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
 	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
 	FooterInputmodeEnumUrl     FooterInputmodeEnum = "url"
 	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
 	FooterInputmodeEnumEmail   FooterInputmodeEnum = "email"
 	FooterInputmodeEnumNone    FooterInputmodeEnum = "none"
-	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
-	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
-	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
 )
 
 type FooterSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *FooterElement) Contenteditable(a FooterContenteditableEnum) *FooterElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *FooterElement) DataUnsafe(name string, s string) *FooterElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *FooterElement) Data(name string, s string) *FooterElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *FooterElement) Dir(a FooterDirEnum) *FooterElement {
@@ -337,7 +349,7 @@ func (e *FooterElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

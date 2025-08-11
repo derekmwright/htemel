@@ -50,27 +50,27 @@ func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *Articl
 type ArticleAutocapitalizeEnum string
 
 const (
-	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
 	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
 	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
 	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
+	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 )
 
 type ArticleAutocorrectEnum string
 
 const (
-	ArticleAutocorrectEnumOff ArticleAutocorrectEnum = "off"
 	ArticleAutocorrectEnumOn  ArticleAutocorrectEnum = "on"
+	ArticleAutocorrectEnumOff ArticleAutocorrectEnum = "off"
 )
 
 type ArticleContenteditableEnum string
 
 const (
+	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
 	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
 	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
-	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
 )
 
 type ArticleDirEnum string
@@ -91,13 +91,13 @@ const (
 type ArticleEnterkeyhintEnum string
 
 const (
+	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
 	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
 	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
 	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
 	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
 	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
-	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 )
 
 type ArticleHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type ArticleInputmodeEnum string
 
 const (
+	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
+	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
 	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
 	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
 	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
 	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
 	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
 	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
-	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
-	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
 )
 
 type ArticleSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *ArticleElement) Contenteditable(a ArticleContenteditableEnum) *ArticleE
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *ArticleElement) DataUnsafe(name string, s string) *ArticleElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ArticleElement) Data(name string, s string) *ArticleElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *ArticleElement) Dir(a ArticleDirEnum) *ArticleElement {
@@ -337,7 +349,7 @@ func (e *ArticleElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,12 +50,12 @@ func OutputTernary(condition bool, true htemel.Node, false htemel.Node) *OutputE
 type OutputAutocapitalizeEnum string
 
 const (
-	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
-	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
 	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
 	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
 	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
+	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
+	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 )
 
 type OutputAutocorrectEnum string
@@ -68,9 +68,9 @@ const (
 type OutputContenteditableEnum string
 
 const (
-	OutputContenteditableEnumFalse         OutputContenteditableEnum = "false"
 	OutputContenteditableEnumPlaintextOnly OutputContenteditableEnum = "plaintext-only"
 	OutputContenteditableEnumTrue          OutputContenteditableEnum = "true"
+	OutputContenteditableEnumFalse         OutputContenteditableEnum = "false"
 )
 
 type OutputDirEnum string
@@ -91,13 +91,13 @@ const (
 type OutputEnterkeyhintEnum string
 
 const (
-	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
-	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
 	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
 	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
 	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
 	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
+	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
+	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
 )
 
 type OutputHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type OutputInputmodeEnum string
 
 const (
+	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
+	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
+	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
 	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
 	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
 	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
 	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
-	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
-	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
-	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
 )
 
 type OutputSpellcheckEnum string
@@ -138,8 +138,8 @@ const (
 type OutputWritingsuggestionsEnum string
 
 const (
-	OutputWritingsuggestionsEnumTrue  OutputWritingsuggestionsEnum = "true"
 	OutputWritingsuggestionsEnumFalse OutputWritingsuggestionsEnum = "false"
+	OutputWritingsuggestionsEnumTrue  OutputWritingsuggestionsEnum = "true"
 )
 
 type outputAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *OutputElement) Contenteditable(a OutputContenteditableEnum) *OutputElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *OutputElement) DataUnsafe(name string, s string) *OutputElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *OutputElement) Data(name string, s string) *OutputElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *OutputElement) Dir(a OutputDirEnum) *OutputElement {
@@ -337,7 +349,7 @@ func (e *OutputElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

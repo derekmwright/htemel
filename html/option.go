@@ -50,12 +50,12 @@ func OptionTernary(condition bool, true htemel.Node, false htemel.Node) *OptionE
 type OptionAutocapitalizeEnum string
 
 const (
-	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
-	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
 	OptionAutocapitalizeEnumNone       OptionAutocapitalizeEnum = "none"
 	OptionAutocapitalizeEnumOff        OptionAutocapitalizeEnum = "off"
 	OptionAutocapitalizeEnumOn         OptionAutocapitalizeEnum = "on"
 	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
+	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
+	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
 )
 
 type OptionAutocorrectEnum string
@@ -91,13 +91,13 @@ const (
 type OptionEnterkeyhintEnum string
 
 const (
+	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
+	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
+	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
 	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
 	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
-	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
-	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
-	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
 )
 
 type OptionHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type OptionInputmodeEnum string
 
 const (
-	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
-	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
-	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
-	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
 	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
 	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
+	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
+	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
+	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
+	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
 )
 
 type OptionSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type OptionTranslateEnum string
 
 const (
-	OptionTranslateEnumNo  OptionTranslateEnum = "no"
 	OptionTranslateEnumYes OptionTranslateEnum = "yes"
+	OptionTranslateEnumNo  OptionTranslateEnum = "no"
 )
 
 type OptionWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *OptionElement) Contenteditable(a OptionContenteditableEnum) *OptionElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *OptionElement) DataUnsafe(name string, s string) *OptionElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *OptionElement) Data(name string, s string) *OptionElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *OptionElement) Dir(a OptionDirEnum) *OptionElement {
@@ -337,7 +349,7 @@ func (e *OptionElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

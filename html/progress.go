@@ -50,12 +50,12 @@ func ProgressTernary(condition bool, true htemel.Node, false htemel.Node) *Progr
 type ProgressAutocapitalizeEnum string
 
 const (
-	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
-	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
-	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
 	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
 	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
+	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
+	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
+	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 )
 
 type ProgressAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type ProgressDirEnum string
 
 const (
+	ProgressDirEnumAuto ProgressDirEnum = "auto"
 	ProgressDirEnumLtr  ProgressDirEnum = "ltr"
 	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
-	ProgressDirEnumAuto ProgressDirEnum = "auto"
 )
 
 type ProgressDraggableEnum string
@@ -111,14 +111,14 @@ const (
 type ProgressInputmodeEnum string
 
 const (
+	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
+	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
 	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
 	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
 	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
 	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
 	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
 	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
-	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
-	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
 )
 
 type ProgressSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *ProgressElement) Contenteditable(a ProgressContenteditableEnum) *Progre
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *ProgressElement) DataUnsafe(name string, s string) *ProgressElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ProgressElement) Data(name string, s string) *ProgressElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *ProgressElement) Dir(a ProgressDirEnum) *ProgressElement {
@@ -337,7 +349,7 @@ func (e *ProgressElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

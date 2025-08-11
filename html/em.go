@@ -61,8 +61,8 @@ const (
 type EmAutocorrectEnum string
 
 const (
-	EmAutocorrectEnumOff EmAutocorrectEnum = "off"
 	EmAutocorrectEnumOn  EmAutocorrectEnum = "on"
+	EmAutocorrectEnumOff EmAutocorrectEnum = "off"
 )
 
 type EmContenteditableEnum string
@@ -91,34 +91,34 @@ const (
 type EmEnterkeyhintEnum string
 
 const (
-	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
 	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
 	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
 	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
 	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
 	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
+	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
 )
 
 type EmHiddenEnum string
 
 const (
-	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
 	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
+	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
 	EmHiddenEnumEmpty      EmHiddenEnum = ""
 )
 
 type EmInputmodeEnum string
 
 const (
-	EmInputmodeEnumNone    EmInputmodeEnum = "none"
-	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
-	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
-	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
 	EmInputmodeEnumText    EmInputmodeEnum = "text"
 	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
 	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
 	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
+	EmInputmodeEnumNone    EmInputmodeEnum = "none"
+	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
+	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
+	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
 )
 
 type EmSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type EmTranslateEnum string
 
 const (
-	EmTranslateEnumNo  EmTranslateEnum = "no"
 	EmTranslateEnumYes EmTranslateEnum = "yes"
+	EmTranslateEnumNo  EmTranslateEnum = "no"
 )
 
 type EmWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *EmElement) Contenteditable(a EmContenteditableEnum) *EmElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *EmElement) DataUnsafe(name string, s string) *EmElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *EmElement) Data(name string, s string) *EmElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *EmElement) Dir(a EmDirEnum) *EmElement {
@@ -337,7 +349,7 @@ func (e *EmElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

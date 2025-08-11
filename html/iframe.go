@@ -61,24 +61,24 @@ const (
 type IframeAutocorrectEnum string
 
 const (
-	IframeAutocorrectEnumOff IframeAutocorrectEnum = "off"
 	IframeAutocorrectEnumOn  IframeAutocorrectEnum = "on"
+	IframeAutocorrectEnumOff IframeAutocorrectEnum = "off"
 )
 
 type IframeContenteditableEnum string
 
 const (
-	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
 	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
 	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
+	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
 )
 
 type IframeDirEnum string
 
 const (
-	IframeDirEnumAuto IframeDirEnum = "auto"
 	IframeDirEnumLtr  IframeDirEnum = "ltr"
 	IframeDirEnumRtl  IframeDirEnum = "rtl"
+	IframeDirEnumAuto IframeDirEnum = "auto"
 )
 
 type IframeDraggableEnum string
@@ -91,34 +91,34 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
+	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
+	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
+	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
-	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
-	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
-	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 )
 
 type IframeHiddenEnum string
 
 const (
-	IframeHiddenEnumHidden     IframeHiddenEnum = "hidden"
 	IframeHiddenEnumUntilFound IframeHiddenEnum = "until-found"
+	IframeHiddenEnumHidden     IframeHiddenEnum = "hidden"
 	IframeHiddenEnumEmpty      IframeHiddenEnum = ""
 )
 
 type IframeInputmodeEnum string
 
 const (
-	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
-	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
-	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
-	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
 	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
 	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
 	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
+	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
+	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
+	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
+	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
 )
 
 type IframeSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type IframeTranslateEnum string
 
 const (
-	IframeTranslateEnumYes IframeTranslateEnum = "yes"
 	IframeTranslateEnumNo  IframeTranslateEnum = "no"
+	IframeTranslateEnumYes IframeTranslateEnum = "yes"
 )
 
 type IframeWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *IframeElement) Contenteditable(a IframeContenteditableEnum) *IframeElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *IframeElement) DataUnsafe(name string, s string) *IframeElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *IframeElement) Data(name string, s string) *IframeElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *IframeElement) Dir(a IframeDirEnum) *IframeElement {
@@ -337,7 +349,7 @@ func (e *IframeElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

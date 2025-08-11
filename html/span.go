@@ -50,12 +50,12 @@ func SpanTernary(condition bool, true htemel.Node, false htemel.Node) *SpanEleme
 type SpanAutocapitalizeEnum string
 
 const (
-	SpanAutocapitalizeEnumCharacters SpanAutocapitalizeEnum = "characters"
 	SpanAutocapitalizeEnumNone       SpanAutocapitalizeEnum = "none"
 	SpanAutocapitalizeEnumOff        SpanAutocapitalizeEnum = "off"
 	SpanAutocapitalizeEnumOn         SpanAutocapitalizeEnum = "on"
 	SpanAutocapitalizeEnumSentences  SpanAutocapitalizeEnum = "sentences"
 	SpanAutocapitalizeEnumWords      SpanAutocapitalizeEnum = "words"
+	SpanAutocapitalizeEnumCharacters SpanAutocapitalizeEnum = "characters"
 )
 
 type SpanAutocorrectEnum string
@@ -68,17 +68,17 @@ const (
 type SpanContenteditableEnum string
 
 const (
+	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
 	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
 	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
-	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
 )
 
 type SpanDirEnum string
 
 const (
+	SpanDirEnumAuto SpanDirEnum = "auto"
 	SpanDirEnumLtr  SpanDirEnum = "ltr"
 	SpanDirEnumRtl  SpanDirEnum = "rtl"
-	SpanDirEnumAuto SpanDirEnum = "auto"
 )
 
 type SpanDraggableEnum string
@@ -91,27 +91,26 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
+	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
+	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
+	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
 	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
 	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
 	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
-	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
-	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
-	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 )
 
 type SpanHiddenEnum string
 
 const (
-	SpanHiddenEnumUntilFound SpanHiddenEnum = "until-found"
 	SpanHiddenEnumHidden     SpanHiddenEnum = "hidden"
+	SpanHiddenEnumUntilFound SpanHiddenEnum = "until-found"
 	SpanHiddenEnumEmpty      SpanHiddenEnum = ""
 )
 
 type SpanInputmodeEnum string
 
 const (
-	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
 	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
 	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
@@ -119,6 +118,7 @@ const (
 	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
 	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
 	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
+	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 )
 
 type SpanSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *SpanElement) Contenteditable(a SpanContenteditableEnum) *SpanElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SpanElement) DataUnsafe(name string, s string) *SpanElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SpanElement) Data(name string, s string) *SpanElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SpanElement) Dir(a SpanDirEnum) *SpanElement {
@@ -337,7 +349,7 @@ func (e *SpanElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

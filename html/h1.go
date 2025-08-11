@@ -91,13 +91,13 @@ const (
 type H1EnterkeyhintEnum string
 
 const (
-	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
-	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
 	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
 	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
 	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
 	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
 	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
+	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
+	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
 )
 
 type H1HiddenEnum string
@@ -111,14 +111,14 @@ const (
 type H1InputmodeEnum string
 
 const (
+	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
+	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
+	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 	H1InputmodeEnumText    H1InputmodeEnum = "text"
 	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
 	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
 	H1InputmodeEnumEmail   H1InputmodeEnum = "email"
 	H1InputmodeEnumNone    H1InputmodeEnum = "none"
-	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
-	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
-	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 )
 
 type H1SpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *H1Element) Contenteditable(a H1ContenteditableEnum) *H1Element {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *H1Element) DataUnsafe(name string, s string) *H1Element {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *H1Element) Data(name string, s string) *H1Element {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *H1Element) Dir(a H1DirEnum) *H1Element {
@@ -337,7 +349,7 @@ func (e *H1Element) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

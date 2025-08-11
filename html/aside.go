@@ -84,20 +84,20 @@ const (
 type AsideDraggableEnum string
 
 const (
-	AsideDraggableEnumFalse AsideDraggableEnum = "false"
 	AsideDraggableEnumTrue  AsideDraggableEnum = "true"
+	AsideDraggableEnumFalse AsideDraggableEnum = "false"
 )
 
 type AsideEnterkeyhintEnum string
 
 const (
-	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
-	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
-	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
 	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
 	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
 	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
+	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
+	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
+	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
 )
 
 type AsideHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type AsideInputmodeEnum string
 
 const (
-	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
-	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
 	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
 	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
 	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
 	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
 	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
+	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
+	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
 )
 
 type AsideSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *AsideElement) Contenteditable(a AsideContenteditableEnum) *AsideElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *AsideElement) DataUnsafe(name string, s string) *AsideElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *AsideElement) Data(name string, s string) *AsideElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *AsideElement) Dir(a AsideDirEnum) *AsideElement {
@@ -337,7 +349,7 @@ func (e *AsideElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

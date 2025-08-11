@@ -50,19 +50,19 @@ func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
 type AAutocapitalizeEnum string
 
 const (
-	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
-	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
 	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
 	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
 	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
 	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
+	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
+	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
 )
 
 type AAutocorrectEnum string
 
 const (
-	AAutocorrectEnumOn  AAutocorrectEnum = "on"
 	AAutocorrectEnumOff AAutocorrectEnum = "off"
+	AAutocorrectEnumOn  AAutocorrectEnum = "on"
 )
 
 type AContenteditableEnum string
@@ -91,13 +91,13 @@ const (
 type AEnterkeyhintEnum string
 
 const (
-	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
-	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
 	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
 	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
 	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
+	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
+	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
 )
 
 type AHiddenEnum string
@@ -111,6 +111,7 @@ const (
 type AInputmodeEnum string
 
 const (
+	AInputmodeEnumText    AInputmodeEnum = "text"
 	AInputmodeEnumUrl     AInputmodeEnum = "url"
 	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
 	AInputmodeEnumEmail   AInputmodeEnum = "email"
@@ -118,14 +119,13 @@ const (
 	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
 	AInputmodeEnumSearch  AInputmodeEnum = "search"
 	AInputmodeEnumTel     AInputmodeEnum = "tel"
-	AInputmodeEnumText    AInputmodeEnum = "text"
 )
 
 type ASpellcheckEnum string
 
 const (
-	ASpellcheckEnumTrue  ASpellcheckEnum = "true"
 	ASpellcheckEnumFalse ASpellcheckEnum = "false"
+	ASpellcheckEnumTrue  ASpellcheckEnum = "true"
 )
 
 type ATranslateEnum string
@@ -172,6 +172,18 @@ func (e *AElement) Contenteditable(a AContenteditableEnum) *AElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *AElement) DataUnsafe(name string, s string) *AElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *AElement) Data(name string, s string) *AElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *AElement) Dir(a ADirEnum) *AElement {
@@ -337,7 +349,7 @@ func (e *AElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

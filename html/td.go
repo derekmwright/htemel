@@ -50,12 +50,12 @@ func TdTernary(condition bool, true htemel.Node, false htemel.Node) *TdElement {
 type TdAutocapitalizeEnum string
 
 const (
-	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
-	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
-	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
 	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
 	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
 	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
+	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
+	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
+	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
 )
 
 type TdAutocorrectEnum string
@@ -68,9 +68,9 @@ const (
 type TdContenteditableEnum string
 
 const (
-	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
 	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
 	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
+	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
 )
 
 type TdDirEnum string
@@ -111,14 +111,14 @@ const (
 type TdInputmodeEnum string
 
 const (
-	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
-	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
-	TdInputmodeEnumText    TdInputmodeEnum = "text"
-	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
 	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
 	TdInputmodeEnumNone    TdInputmodeEnum = "none"
 	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
+	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
+	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
+	TdInputmodeEnumText    TdInputmodeEnum = "text"
+	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 )
 
 type TdSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *TdElement) Contenteditable(a TdContenteditableEnum) *TdElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *TdElement) DataUnsafe(name string, s string) *TdElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TdElement) Data(name string, s string) *TdElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *TdElement) Dir(a TdDirEnum) *TdElement {
@@ -337,7 +349,7 @@ func (e *TdElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

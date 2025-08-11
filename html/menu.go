@@ -61,8 +61,8 @@ const (
 type MenuAutocorrectEnum string
 
 const (
-	MenuAutocorrectEnumOff MenuAutocorrectEnum = "off"
 	MenuAutocorrectEnumOn  MenuAutocorrectEnum = "on"
+	MenuAutocorrectEnumOff MenuAutocorrectEnum = "off"
 )
 
 type MenuContenteditableEnum string
@@ -91,13 +91,13 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
-	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
-	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
 	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
 	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
+	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
+	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 )
 
 type MenuHiddenEnum string
@@ -111,6 +111,7 @@ const (
 type MenuInputmodeEnum string
 
 const (
+	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
 	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
@@ -118,14 +119,13 @@ const (
 	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
 	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
-	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
 )
 
 type MenuSpellcheckEnum string
 
 const (
-	MenuSpellcheckEnumTrue  MenuSpellcheckEnum = "true"
 	MenuSpellcheckEnumFalse MenuSpellcheckEnum = "false"
+	MenuSpellcheckEnumTrue  MenuSpellcheckEnum = "true"
 )
 
 type MenuTranslateEnum string
@@ -172,6 +172,18 @@ func (e *MenuElement) Contenteditable(a MenuContenteditableEnum) *MenuElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *MenuElement) DataUnsafe(name string, s string) *MenuElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *MenuElement) Data(name string, s string) *MenuElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *MenuElement) Dir(a MenuDirEnum) *MenuElement {
@@ -337,7 +349,7 @@ func (e *MenuElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

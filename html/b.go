@@ -50,27 +50,27 @@ func BTernary(condition bool, true htemel.Node, false htemel.Node) *BElement {
 type BAutocapitalizeEnum string
 
 const (
-	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
 	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
 	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
 	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
 	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
 	BAutocapitalizeEnumOn         BAutocapitalizeEnum = "on"
+	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
 )
 
 type BAutocorrectEnum string
 
 const (
-	BAutocorrectEnumOff BAutocorrectEnum = "off"
 	BAutocorrectEnumOn  BAutocorrectEnum = "on"
+	BAutocorrectEnumOff BAutocorrectEnum = "off"
 )
 
 type BContenteditableEnum string
 
 const (
-	BContenteditableEnumFalse         BContenteditableEnum = "false"
 	BContenteditableEnumPlaintextOnly BContenteditableEnum = "plaintext-only"
 	BContenteditableEnumTrue          BContenteditableEnum = "true"
+	BContenteditableEnumFalse         BContenteditableEnum = "false"
 )
 
 type BDirEnum string
@@ -111,6 +111,7 @@ const (
 type BInputmodeEnum string
 
 const (
+	BInputmodeEnumUrl     BInputmodeEnum = "url"
 	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
 	BInputmodeEnumEmail   BInputmodeEnum = "email"
 	BInputmodeEnumNone    BInputmodeEnum = "none"
@@ -118,7 +119,6 @@ const (
 	BInputmodeEnumSearch  BInputmodeEnum = "search"
 	BInputmodeEnumTel     BInputmodeEnum = "tel"
 	BInputmodeEnumText    BInputmodeEnum = "text"
-	BInputmodeEnumUrl     BInputmodeEnum = "url"
 )
 
 type BSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *BElement) Contenteditable(a BContenteditableEnum) *BElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *BElement) DataUnsafe(name string, s string) *BElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BElement) Data(name string, s string) *BElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *BElement) Dir(a BDirEnum) *BElement {
@@ -337,7 +349,7 @@ func (e *BElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

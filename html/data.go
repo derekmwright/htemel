@@ -50,12 +50,12 @@ func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataEleme
 type DataAutocapitalizeEnum string
 
 const (
+	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
+	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
 	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
 	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
-	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
-	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 )
 
 type DataAutocorrectEnum string
@@ -68,9 +68,9 @@ const (
 type DataContenteditableEnum string
 
 const (
+	DataContenteditableEnumFalse         DataContenteditableEnum = "false"
 	DataContenteditableEnumPlaintextOnly DataContenteditableEnum = "plaintext-only"
 	DataContenteditableEnumTrue          DataContenteditableEnum = "true"
-	DataContenteditableEnumFalse         DataContenteditableEnum = "false"
 )
 
 type DataDirEnum string
@@ -91,34 +91,34 @@ const (
 type DataEnterkeyhintEnum string
 
 const (
-	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
 	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
 	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
 	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
 	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
+	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
 )
 
 type DataHiddenEnum string
 
 const (
-	DataHiddenEnumUntilFound DataHiddenEnum = "until-found"
 	DataHiddenEnumHidden     DataHiddenEnum = "hidden"
+	DataHiddenEnumUntilFound DataHiddenEnum = "until-found"
 	DataHiddenEnumEmpty      DataHiddenEnum = ""
 )
 
 type DataInputmodeEnum string
 
 const (
+	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
+	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
 	DataInputmodeEnumNone    DataInputmodeEnum = "none"
 	DataInputmodeEnumNumeric DataInputmodeEnum = "numeric"
 	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
 	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
 	DataInputmodeEnumText    DataInputmodeEnum = "text"
 	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
-	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
-	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
 )
 
 type DataSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *DataElement) Contenteditable(a DataContenteditableEnum) *DataElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *DataElement) DataUnsafe(name string, s string) *DataElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DataElement) Data(name string, s string) *DataElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *DataElement) Dir(a DataDirEnum) *DataElement {
@@ -337,7 +349,7 @@ func (e *DataElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -61,8 +61,8 @@ const (
 type TextareaAutocorrectEnum string
 
 const (
-	TextareaAutocorrectEnumOff TextareaAutocorrectEnum = "off"
 	TextareaAutocorrectEnumOn  TextareaAutocorrectEnum = "on"
+	TextareaAutocorrectEnumOff TextareaAutocorrectEnum = "off"
 )
 
 type TextareaContenteditableEnum string
@@ -91,13 +91,13 @@ const (
 type TextareaEnterkeyhintEnum string
 
 const (
+	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
+	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
+	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
 	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
 	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
 	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
 	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
-	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
-	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
-	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
 )
 
 type TextareaHiddenEnum string
@@ -111,6 +111,7 @@ const (
 type TextareaInputmodeEnum string
 
 const (
+	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
 	TextareaInputmodeEnumSearch  TextareaInputmodeEnum = "search"
 	TextareaInputmodeEnumTel     TextareaInputmodeEnum = "tel"
 	TextareaInputmodeEnumText    TextareaInputmodeEnum = "text"
@@ -118,14 +119,13 @@ const (
 	TextareaInputmodeEnumDecimal TextareaInputmodeEnum = "decimal"
 	TextareaInputmodeEnumEmail   TextareaInputmodeEnum = "email"
 	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
-	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
 )
 
 type TextareaSpellcheckEnum string
 
 const (
-	TextareaSpellcheckEnumFalse TextareaSpellcheckEnum = "false"
 	TextareaSpellcheckEnumTrue  TextareaSpellcheckEnum = "true"
+	TextareaSpellcheckEnumFalse TextareaSpellcheckEnum = "false"
 )
 
 type TextareaTranslateEnum string
@@ -172,6 +172,18 @@ func (e *TextareaElement) Contenteditable(a TextareaContenteditableEnum) *Textar
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *TextareaElement) DataUnsafe(name string, s string) *TextareaElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TextareaElement) Data(name string, s string) *TextareaElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *TextareaElement) Dir(a TextareaDirEnum) *TextareaElement {
@@ -337,7 +349,7 @@ func (e *TextareaElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

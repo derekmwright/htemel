@@ -61,8 +61,8 @@ const (
 type QAutocorrectEnum string
 
 const (
-	QAutocorrectEnumOn  QAutocorrectEnum = "on"
 	QAutocorrectEnumOff QAutocorrectEnum = "off"
+	QAutocorrectEnumOn  QAutocorrectEnum = "on"
 )
 
 type QContenteditableEnum string
@@ -76,9 +76,9 @@ const (
 type QDirEnum string
 
 const (
+	QDirEnumRtl  QDirEnum = "rtl"
 	QDirEnumAuto QDirEnum = "auto"
 	QDirEnumLtr  QDirEnum = "ltr"
-	QDirEnumRtl  QDirEnum = "rtl"
 )
 
 type QDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type QEnterkeyhintEnum string
 
 const (
-	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
 	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
 	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
 	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
 	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
+	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 )
 
 type QHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type QInputmodeEnum string
 
 const (
-	QInputmodeEnumTel     QInputmodeEnum = "tel"
-	QInputmodeEnumText    QInputmodeEnum = "text"
-	QInputmodeEnumUrl     QInputmodeEnum = "url"
 	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
 	QInputmodeEnumEmail   QInputmodeEnum = "email"
 	QInputmodeEnumNone    QInputmodeEnum = "none"
 	QInputmodeEnumNumeric QInputmodeEnum = "numeric"
 	QInputmodeEnumSearch  QInputmodeEnum = "search"
+	QInputmodeEnumTel     QInputmodeEnum = "tel"
+	QInputmodeEnumText    QInputmodeEnum = "text"
+	QInputmodeEnumUrl     QInputmodeEnum = "url"
 )
 
 type QSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *QElement) Contenteditable(a QContenteditableEnum) *QElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *QElement) DataUnsafe(name string, s string) *QElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *QElement) Data(name string, s string) *QElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *QElement) Dir(a QDirEnum) *QElement {
@@ -337,7 +349,7 @@ func (e *QElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

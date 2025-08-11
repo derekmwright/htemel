@@ -50,12 +50,12 @@ func LegendTernary(condition bool, true htemel.Node, false htemel.Node) *LegendE
 type LegendAutocapitalizeEnum string
 
 const (
-	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
 	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
 	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
 	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
 	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
+	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 )
 
 type LegendAutocorrectEnum string
@@ -76,56 +76,56 @@ const (
 type LegendDirEnum string
 
 const (
-	LegendDirEnumAuto LegendDirEnum = "auto"
 	LegendDirEnumLtr  LegendDirEnum = "ltr"
 	LegendDirEnumRtl  LegendDirEnum = "rtl"
+	LegendDirEnumAuto LegendDirEnum = "auto"
 )
 
 type LegendDraggableEnum string
 
 const (
-	LegendDraggableEnumFalse LegendDraggableEnum = "false"
 	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
+	LegendDraggableEnumFalse LegendDraggableEnum = "false"
 )
 
 type LegendEnterkeyhintEnum string
 
 const (
+	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
+	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
 	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
 	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
 	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
 	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
 	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
-	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
-	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
 )
 
 type LegendHiddenEnum string
 
 const (
-	LegendHiddenEnumUntilFound LegendHiddenEnum = "until-found"
 	LegendHiddenEnumHidden     LegendHiddenEnum = "hidden"
+	LegendHiddenEnumUntilFound LegendHiddenEnum = "until-found"
 	LegendHiddenEnumEmpty      LegendHiddenEnum = ""
 )
 
 type LegendInputmodeEnum string
 
 const (
+	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
+	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
+	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
 	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
 	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
 	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
 	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
-	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
-	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
-	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
 )
 
 type LegendSpellcheckEnum string
 
 const (
-	LegendSpellcheckEnumFalse LegendSpellcheckEnum = "false"
 	LegendSpellcheckEnumTrue  LegendSpellcheckEnum = "true"
+	LegendSpellcheckEnumFalse LegendSpellcheckEnum = "false"
 )
 
 type LegendTranslateEnum string
@@ -172,6 +172,18 @@ func (e *LegendElement) Contenteditable(a LegendContenteditableEnum) *LegendElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *LegendElement) DataUnsafe(name string, s string) *LegendElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *LegendElement) Data(name string, s string) *LegendElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *LegendElement) Dir(a LegendDirEnum) *LegendElement {
@@ -337,7 +349,7 @@ func (e *LegendElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

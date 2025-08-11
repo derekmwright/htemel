@@ -50,19 +50,19 @@ func FigcaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Fig
 type FigcaptionAutocapitalizeEnum string
 
 const (
+	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
+	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
 	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
 	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
-	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
-	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
 )
 
 type FigcaptionAutocorrectEnum string
 
 const (
-	FigcaptionAutocorrectEnumOff FigcaptionAutocorrectEnum = "off"
 	FigcaptionAutocorrectEnumOn  FigcaptionAutocorrectEnum = "on"
+	FigcaptionAutocorrectEnumOff FigcaptionAutocorrectEnum = "off"
 )
 
 type FigcaptionContenteditableEnum string
@@ -76,9 +76,9 @@ const (
 type FigcaptionDirEnum string
 
 const (
-	FigcaptionDirEnumLtr  FigcaptionDirEnum = "ltr"
 	FigcaptionDirEnumRtl  FigcaptionDirEnum = "rtl"
 	FigcaptionDirEnumAuto FigcaptionDirEnum = "auto"
+	FigcaptionDirEnumLtr  FigcaptionDirEnum = "ltr"
 )
 
 type FigcaptionDraggableEnum string
@@ -91,34 +91,34 @@ const (
 type FigcaptionEnterkeyhintEnum string
 
 const (
-	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
-	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
-	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
 	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
 	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
+	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
+	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
+	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 )
 
 type FigcaptionHiddenEnum string
 
 const (
-	FigcaptionHiddenEnumUntilFound FigcaptionHiddenEnum = "until-found"
 	FigcaptionHiddenEnumHidden     FigcaptionHiddenEnum = "hidden"
+	FigcaptionHiddenEnumUntilFound FigcaptionHiddenEnum = "until-found"
 	FigcaptionHiddenEnumEmpty      FigcaptionHiddenEnum = ""
 )
 
 type FigcaptionInputmodeEnum string
 
 const (
-	FigcaptionInputmodeEnumDecimal FigcaptionInputmodeEnum = "decimal"
-	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
-	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
-	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
 	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
 	FigcaptionInputmodeEnumTel     FigcaptionInputmodeEnum = "tel"
 	FigcaptionInputmodeEnumText    FigcaptionInputmodeEnum = "text"
 	FigcaptionInputmodeEnumUrl     FigcaptionInputmodeEnum = "url"
+	FigcaptionInputmodeEnumDecimal FigcaptionInputmodeEnum = "decimal"
+	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
+	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
+	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
 )
 
 type FigcaptionSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *FigcaptionElement) Contenteditable(a FigcaptionContenteditableEnum) *Fi
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *FigcaptionElement) DataUnsafe(name string, s string) *FigcaptionElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *FigcaptionElement) Data(name string, s string) *FigcaptionElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *FigcaptionElement) Dir(a FigcaptionDirEnum) *FigcaptionElement {
@@ -337,7 +349,7 @@ func (e *FigcaptionElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

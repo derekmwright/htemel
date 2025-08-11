@@ -50,12 +50,12 @@ func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
 type IAutocapitalizeEnum string
 
 const (
+	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
+	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
 	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
 	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
 	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
-	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
-	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
 )
 
 type IAutocorrectEnum string
@@ -91,13 +91,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
-	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
 	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
 	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
 	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
 	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
 	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
+	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 )
 
 type IHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type IInputmodeEnum string
 
 const (
-	IInputmodeEnumNone    IInputmodeEnum = "none"
-	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
-	IInputmodeEnumSearch  IInputmodeEnum = "search"
-	IInputmodeEnumTel     IInputmodeEnum = "tel"
 	IInputmodeEnumText    IInputmodeEnum = "text"
 	IInputmodeEnumUrl     IInputmodeEnum = "url"
 	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
 	IInputmodeEnumEmail   IInputmodeEnum = "email"
+	IInputmodeEnumNone    IInputmodeEnum = "none"
+	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
+	IInputmodeEnumSearch  IInputmodeEnum = "search"
+	IInputmodeEnumTel     IInputmodeEnum = "tel"
 )
 
 type ISpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *IElement) Contenteditable(a IContenteditableEnum) *IElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *IElement) DataUnsafe(name string, s string) *IElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *IElement) Data(name string, s string) *IElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *IElement) Dir(a IDirEnum) *IElement {
@@ -337,7 +349,7 @@ func (e *IElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

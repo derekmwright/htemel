@@ -68,9 +68,9 @@ const (
 type AddressContenteditableEnum string
 
 const (
+	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
 	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
-	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 )
 
 type AddressDirEnum string
@@ -91,13 +91,13 @@ const (
 type AddressEnterkeyhintEnum string
 
 const (
-	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
-	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
 	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
 	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
 	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
 	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
+	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
+	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
 )
 
 type AddressHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type AddressInputmodeEnum string
 
 const (
+	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
+	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 	AddressInputmodeEnumText    AddressInputmodeEnum = "text"
 	AddressInputmodeEnumUrl     AddressInputmodeEnum = "url"
 	AddressInputmodeEnumDecimal AddressInputmodeEnum = "decimal"
 	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
 	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
-	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
-	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 )
 
 type AddressSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type AddressTranslateEnum string
 
 const (
-	AddressTranslateEnumYes AddressTranslateEnum = "yes"
 	AddressTranslateEnumNo  AddressTranslateEnum = "no"
+	AddressTranslateEnumYes AddressTranslateEnum = "yes"
 )
 
 type AddressWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *AddressElement) Contenteditable(a AddressContenteditableEnum) *AddressE
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *AddressElement) DataUnsafe(name string, s string) *AddressElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *AddressElement) Data(name string, s string) *AddressElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *AddressElement) Dir(a AddressDirEnum) *AddressElement {
@@ -337,7 +349,7 @@ func (e *AddressElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

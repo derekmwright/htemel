@@ -68,9 +68,9 @@ const (
 type HtmlContenteditableEnum string
 
 const (
-	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumPlaintextOnly HtmlContenteditableEnum = "plaintext-only"
 	HtmlContenteditableEnumTrue          HtmlContenteditableEnum = "true"
+	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 )
 
 type HtmlDirEnum string
@@ -91,13 +91,13 @@ const (
 type HtmlEnterkeyhintEnum string
 
 const (
+	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
+	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
+	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
 	HtmlEnterkeyhintEnumNext     HtmlEnterkeyhintEnum = "next"
 	HtmlEnterkeyhintEnumPrevious HtmlEnterkeyhintEnum = "previous"
 	HtmlEnterkeyhintEnumSearch   HtmlEnterkeyhintEnum = "search"
 	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
-	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
-	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
-	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
 )
 
 type HtmlHiddenEnum string
@@ -111,21 +111,21 @@ const (
 type HtmlInputmodeEnum string
 
 const (
-	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
-	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
-	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
 	HtmlInputmodeEnumNone    HtmlInputmodeEnum = "none"
 	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
 	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
 	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
 	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
+	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
+	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
+	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
 )
 
 type HtmlSpellcheckEnum string
 
 const (
-	HtmlSpellcheckEnumFalse HtmlSpellcheckEnum = "false"
 	HtmlSpellcheckEnumTrue  HtmlSpellcheckEnum = "true"
+	HtmlSpellcheckEnumFalse HtmlSpellcheckEnum = "false"
 )
 
 type HtmlTranslateEnum string
@@ -172,6 +172,18 @@ func (e *HtmlElement) Contenteditable(a HtmlContenteditableEnum) *HtmlElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *HtmlElement) DataUnsafe(name string, s string) *HtmlElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *HtmlElement) Data(name string, s string) *HtmlElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *HtmlElement) Dir(a HtmlDirEnum) *HtmlElement {
@@ -337,7 +349,7 @@ func (e *HtmlElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

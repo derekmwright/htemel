@@ -50,12 +50,12 @@ func InputTernary(condition bool, true htemel.Node, false htemel.Node) *InputEle
 type InputAutocapitalizeEnum string
 
 const (
-	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
 	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
 	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
 	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
 	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
+	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
 )
 
 type InputAutocorrectEnum string
@@ -68,17 +68,17 @@ const (
 type InputContenteditableEnum string
 
 const (
-	InputContenteditableEnumTrue          InputContenteditableEnum = "true"
 	InputContenteditableEnumFalse         InputContenteditableEnum = "false"
 	InputContenteditableEnumPlaintextOnly InputContenteditableEnum = "plaintext-only"
+	InputContenteditableEnumTrue          InputContenteditableEnum = "true"
 )
 
 type InputDirEnum string
 
 const (
+	InputDirEnumLtr  InputDirEnum = "ltr"
 	InputDirEnumRtl  InputDirEnum = "rtl"
 	InputDirEnumAuto InputDirEnum = "auto"
-	InputDirEnumLtr  InputDirEnum = "ltr"
 )
 
 type InputDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type InputEnterkeyhintEnum string
 
 const (
-	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
-	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
 	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
 	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
 	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
 	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
+	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
+	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
 )
 
 type InputHiddenEnum string
@@ -111,21 +111,21 @@ const (
 type InputInputmodeEnum string
 
 const (
+	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
+	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
 	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
 	InputInputmodeEnumText    InputInputmodeEnum = "text"
 	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
 	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
 	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 	InputInputmodeEnumNone    InputInputmodeEnum = "none"
-	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
-	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
 )
 
 type InputSpellcheckEnum string
 
 const (
-	InputSpellcheckEnumTrue  InputSpellcheckEnum = "true"
 	InputSpellcheckEnumFalse InputSpellcheckEnum = "false"
+	InputSpellcheckEnumTrue  InputSpellcheckEnum = "true"
 )
 
 type InputTranslateEnum string
@@ -172,6 +172,18 @@ func (e *InputElement) Contenteditable(a InputContenteditableEnum) *InputElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *InputElement) DataUnsafe(name string, s string) *InputElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *InputElement) Data(name string, s string) *InputElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *InputElement) Dir(a InputDirEnum) *InputElement {
@@ -337,7 +349,7 @@ func (e *InputElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

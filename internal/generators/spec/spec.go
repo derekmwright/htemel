@@ -72,6 +72,12 @@ func (sp *Spec) UnmarshalJSON(b []byte) error {
 				return err
 			}
 			sp.Attributes = append(sp.Attributes, a)
+		case "AttributeTypePrefixedCustom":
+			a := &AttributeTypePrefixedCustom{}
+			if err := json.Unmarshal(attr, &a); err != nil {
+				return err
+			}
+			sp.Attributes = append(sp.Attributes, a)
 		}
 	}
 
@@ -233,5 +239,29 @@ func (a AttributeTypeSST) MarshalJSON() ([]byte, error) {
 		Name:          a.Name,
 		Description:   a.Description,
 		AttributeType: "AttributeTypeSST",
+	})
+}
+
+// AttributeTypePrefixedCustom provides support for attributes like `data-<user defined>`
+type AttributeTypePrefixedCustom struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+
+func (a AttributeTypePrefixedCustom) isAttr() {}
+
+func (a AttributeTypePrefixedCustom) GetName() string {
+	return a.Name
+}
+
+func (a AttributeTypePrefixedCustom) MarshalJSON() ([]byte, error) {
+	return json.Marshal(&struct {
+		Name          string `json:"name"`
+		Description   string `json:"description,omitempty"`
+		AttributeType string `json:"attribute_type"`
+	}{
+		Name:          a.Name,
+		Description:   a.Description,
+		AttributeType: "AttributeTypePrefixedCustom",
 	})
 }

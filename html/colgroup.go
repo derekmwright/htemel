@@ -50,19 +50,19 @@ func ColgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Colgr
 type ColgroupAutocapitalizeEnum string
 
 const (
+	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
+	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
 	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 	ColgroupAutocapitalizeEnumOff        ColgroupAutocapitalizeEnum = "off"
 	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
-	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
-	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 )
 
 type ColgroupAutocorrectEnum string
 
 const (
-	ColgroupAutocorrectEnumOn  ColgroupAutocorrectEnum = "on"
 	ColgroupAutocorrectEnumOff ColgroupAutocorrectEnum = "off"
+	ColgroupAutocorrectEnumOn  ColgroupAutocorrectEnum = "on"
 )
 
 type ColgroupContenteditableEnum string
@@ -91,13 +91,13 @@ const (
 type ColgroupEnterkeyhintEnum string
 
 const (
+	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
+	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
+	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
 	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
 	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
 	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
 	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
-	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
-	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
-	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
 )
 
 type ColgroupHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type ColgroupInputmodeEnum string
 
 const (
-	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
-	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
 	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
 	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
 	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
 	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
 	ColgroupInputmodeEnumSearch  ColgroupInputmodeEnum = "search"
 	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
+	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
+	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
 )
 
 type ColgroupSpellcheckEnum string
@@ -138,8 +138,8 @@ const (
 type ColgroupWritingsuggestionsEnum string
 
 const (
-	ColgroupWritingsuggestionsEnumFalse ColgroupWritingsuggestionsEnum = "false"
 	ColgroupWritingsuggestionsEnumTrue  ColgroupWritingsuggestionsEnum = "true"
+	ColgroupWritingsuggestionsEnumFalse ColgroupWritingsuggestionsEnum = "false"
 )
 
 type colgroupAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *ColgroupElement) Contenteditable(a ColgroupContenteditableEnum) *Colgro
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *ColgroupElement) DataUnsafe(name string, s string) *ColgroupElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ColgroupElement) Data(name string, s string) *ColgroupElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *ColgroupElement) Dir(a ColgroupDirEnum) *ColgroupElement {
@@ -337,7 +349,7 @@ func (e *ColgroupElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

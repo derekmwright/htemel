@@ -61,8 +61,8 @@ const (
 type DdAutocorrectEnum string
 
 const (
-	DdAutocorrectEnumOff DdAutocorrectEnum = "off"
 	DdAutocorrectEnumOn  DdAutocorrectEnum = "on"
+	DdAutocorrectEnumOff DdAutocorrectEnum = "off"
 )
 
 type DdContenteditableEnum string
@@ -76,28 +76,28 @@ const (
 type DdDirEnum string
 
 const (
+	DdDirEnumLtr  DdDirEnum = "ltr"
 	DdDirEnumRtl  DdDirEnum = "rtl"
 	DdDirEnumAuto DdDirEnum = "auto"
-	DdDirEnumLtr  DdDirEnum = "ltr"
 )
 
 type DdDraggableEnum string
 
 const (
-	DdDraggableEnumTrue  DdDraggableEnum = "true"
 	DdDraggableEnumFalse DdDraggableEnum = "false"
+	DdDraggableEnumTrue  DdDraggableEnum = "true"
 )
 
 type DdEnterkeyhintEnum string
 
 const (
+	DdEnterkeyhintEnumGo       DdEnterkeyhintEnum = "go"
 	DdEnterkeyhintEnumNext     DdEnterkeyhintEnum = "next"
 	DdEnterkeyhintEnumPrevious DdEnterkeyhintEnum = "previous"
 	DdEnterkeyhintEnumSearch   DdEnterkeyhintEnum = "search"
 	DdEnterkeyhintEnumSend     DdEnterkeyhintEnum = "send"
 	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
 	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
-	DdEnterkeyhintEnumGo       DdEnterkeyhintEnum = "go"
 )
 
 type DdHiddenEnum string
@@ -111,7 +111,6 @@ const (
 type DdInputmodeEnum string
 
 const (
-	DdInputmodeEnumText    DdInputmodeEnum = "text"
 	DdInputmodeEnumUrl     DdInputmodeEnum = "url"
 	DdInputmodeEnumDecimal DdInputmodeEnum = "decimal"
 	DdInputmodeEnumEmail   DdInputmodeEnum = "email"
@@ -119,6 +118,7 @@ const (
 	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
 	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
 	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
+	DdInputmodeEnumText    DdInputmodeEnum = "text"
 )
 
 type DdSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *DdElement) Contenteditable(a DdContenteditableEnum) *DdElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *DdElement) DataUnsafe(name string, s string) *DdElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DdElement) Data(name string, s string) *DdElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *DdElement) Dir(a DdDirEnum) *DdElement {
@@ -337,7 +349,7 @@ func (e *DdElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

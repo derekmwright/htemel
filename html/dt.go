@@ -50,12 +50,12 @@ func DtTernary(condition bool, true htemel.Node, false htemel.Node) *DtElement {
 type DtAutocapitalizeEnum string
 
 const (
+	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
+	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
 	DtAutocapitalizeEnumOff        DtAutocapitalizeEnum = "off"
 	DtAutocapitalizeEnumOn         DtAutocapitalizeEnum = "on"
 	DtAutocapitalizeEnumSentences  DtAutocapitalizeEnum = "sentences"
 	DtAutocapitalizeEnumWords      DtAutocapitalizeEnum = "words"
-	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
-	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
 )
 
 type DtAutocorrectEnum string
@@ -91,34 +91,34 @@ const (
 type DtEnterkeyhintEnum string
 
 const (
-	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
-	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
 	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
 	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
 	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
+	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
+	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
 )
 
 type DtHiddenEnum string
 
 const (
-	DtHiddenEnumHidden     DtHiddenEnum = "hidden"
 	DtHiddenEnumUntilFound DtHiddenEnum = "until-found"
+	DtHiddenEnumHidden     DtHiddenEnum = "hidden"
 	DtHiddenEnumEmpty      DtHiddenEnum = ""
 )
 
 type DtInputmodeEnum string
 
 const (
+	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
+	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 	DtInputmodeEnumText    DtInputmodeEnum = "text"
 	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
 	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
 	DtInputmodeEnumNone    DtInputmodeEnum = "none"
 	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
-	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
-	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 )
 
 type DtSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *DtElement) Contenteditable(a DtContenteditableEnum) *DtElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *DtElement) DataUnsafe(name string, s string) *DtElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DtElement) Data(name string, s string) *DtElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *DtElement) Dir(a DtDirEnum) *DtElement {
@@ -337,7 +349,7 @@ func (e *DtElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

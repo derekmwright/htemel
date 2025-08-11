@@ -91,13 +91,13 @@ const (
 type BodyEnterkeyhintEnum string
 
 const (
-	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
-	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
-	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
 	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
 	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
 	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
 	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
+	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
+	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
+	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
 )
 
 type BodyHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type BodyInputmodeEnum string
 
 const (
+	BodyInputmodeEnumSearch  BodyInputmodeEnum = "search"
+	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
+	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
 	BodyInputmodeEnumUrl     BodyInputmodeEnum = "url"
 	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
 	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
 	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
 	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
-	BodyInputmodeEnumSearch  BodyInputmodeEnum = "search"
-	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
-	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
 )
 
 type BodySpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type BodyTranslateEnum string
 
 const (
-	BodyTranslateEnumYes BodyTranslateEnum = "yes"
 	BodyTranslateEnumNo  BodyTranslateEnum = "no"
+	BodyTranslateEnumYes BodyTranslateEnum = "yes"
 )
 
 type BodyWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *BodyElement) Contenteditable(a BodyContenteditableEnum) *BodyElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *BodyElement) DataUnsafe(name string, s string) *BodyElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BodyElement) Data(name string, s string) *BodyElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *BodyElement) Dir(a BodyDirEnum) *BodyElement {
@@ -337,7 +349,7 @@ func (e *BodyElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

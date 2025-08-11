@@ -50,12 +50,12 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 type ThAutocapitalizeEnum string
 
 const (
+	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
+	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
 	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
 	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
 	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
-	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
-	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 )
 
 type ThAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type ThDirEnum string
 
 const (
-	ThDirEnumRtl  ThDirEnum = "rtl"
 	ThDirEnumAuto ThDirEnum = "auto"
 	ThDirEnumLtr  ThDirEnum = "ltr"
+	ThDirEnumRtl  ThDirEnum = "rtl"
 )
 
 type ThDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type ThEnterkeyhintEnum string
 
 const (
+	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
+	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
+	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
 	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
 	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
 	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
-	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
-	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
-	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 )
 
 type ThHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type ThInputmodeEnum string
 
 const (
+	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
+	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
 	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
 	ThInputmodeEnumText    ThInputmodeEnum = "text"
 	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
 	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
-	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
-	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 )
 
 type ThSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *ThElement) Contenteditable(a ThContenteditableEnum) *ThElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *ThElement) DataUnsafe(name string, s string) *ThElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ThElement) Data(name string, s string) *ThElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *ThElement) Dir(a ThDirEnum) *ThElement {
@@ -337,7 +349,7 @@ func (e *ThElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

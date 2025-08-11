@@ -50,12 +50,12 @@ func FormTernary(condition bool, true htemel.Node, false htemel.Node) *FormEleme
 type FormAutocapitalizeEnum string
 
 const (
-	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
-	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
 	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
 	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
+	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
+	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 )
 
 type FormAutocorrectEnum string
@@ -84,8 +84,8 @@ const (
 type FormDraggableEnum string
 
 const (
-	FormDraggableEnumTrue  FormDraggableEnum = "true"
 	FormDraggableEnumFalse FormDraggableEnum = "false"
+	FormDraggableEnumTrue  FormDraggableEnum = "true"
 )
 
 type FormEnterkeyhintEnum string
@@ -111,14 +111,14 @@ const (
 type FormInputmodeEnum string
 
 const (
+	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
+	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
 	FormInputmodeEnumText    FormInputmodeEnum = "text"
 	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
 	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
 	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
 	FormInputmodeEnumNone    FormInputmodeEnum = "none"
 	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
-	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
-	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
 )
 
 type FormSpellcheckEnum string
@@ -138,8 +138,8 @@ const (
 type FormWritingsuggestionsEnum string
 
 const (
-	FormWritingsuggestionsEnumTrue  FormWritingsuggestionsEnum = "true"
 	FormWritingsuggestionsEnumFalse FormWritingsuggestionsEnum = "false"
+	FormWritingsuggestionsEnumTrue  FormWritingsuggestionsEnum = "true"
 )
 
 type formAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *FormElement) Contenteditable(a FormContenteditableEnum) *FormElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *FormElement) DataUnsafe(name string, s string) *FormElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *FormElement) Data(name string, s string) *FormElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *FormElement) Dir(a FormDirEnum) *FormElement {
@@ -337,7 +349,7 @@ func (e *FormElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

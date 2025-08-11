@@ -50,12 +50,12 @@ func LinkTernary(condition bool, true htemel.Node, false htemel.Node) *LinkEleme
 type LinkAutocapitalizeEnum string
 
 const (
+	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
 	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
 	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
 	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
 	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
-	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
 )
 
 type LinkAutocorrectEnum string
@@ -91,20 +91,20 @@ const (
 type LinkEnterkeyhintEnum string
 
 const (
+	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
+	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
 	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
 	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
-	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
-	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 )
 
 type LinkHiddenEnum string
 
 const (
-	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
 	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
+	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
 	LinkHiddenEnumEmpty      LinkHiddenEnum = ""
 )
 
@@ -172,6 +172,18 @@ func (e *LinkElement) Contenteditable(a LinkContenteditableEnum) *LinkElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *LinkElement) DataUnsafe(name string, s string) *LinkElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *LinkElement) Data(name string, s string) *LinkElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *LinkElement) Dir(a LinkDirEnum) *LinkElement {
@@ -337,7 +349,7 @@ func (e *LinkElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

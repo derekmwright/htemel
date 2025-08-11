@@ -50,12 +50,12 @@ func DialogTernary(condition bool, true htemel.Node, false htemel.Node) *DialogE
 type DialogAutocapitalizeEnum string
 
 const (
+	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
+	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
 	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
 	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
 	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
-	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
-	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
 )
 
 type DialogAutocorrectEnum string
@@ -68,36 +68,36 @@ const (
 type DialogContenteditableEnum string
 
 const (
-	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
 	DialogContenteditableEnumFalse         DialogContenteditableEnum = "false"
 	DialogContenteditableEnumPlaintextOnly DialogContenteditableEnum = "plaintext-only"
+	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
 )
 
 type DialogDirEnum string
 
 const (
+	DialogDirEnumRtl  DialogDirEnum = "rtl"
 	DialogDirEnumAuto DialogDirEnum = "auto"
 	DialogDirEnumLtr  DialogDirEnum = "ltr"
-	DialogDirEnumRtl  DialogDirEnum = "rtl"
 )
 
 type DialogDraggableEnum string
 
 const (
-	DialogDraggableEnumTrue  DialogDraggableEnum = "true"
 	DialogDraggableEnumFalse DialogDraggableEnum = "false"
+	DialogDraggableEnumTrue  DialogDraggableEnum = "true"
 )
 
 type DialogEnterkeyhintEnum string
 
 const (
-	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
-	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
 	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
 	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
 	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 	DialogEnterkeyhintEnumSearch   DialogEnterkeyhintEnum = "search"
 	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
+	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
+	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
 )
 
 type DialogHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type DialogInputmodeEnum string
 
 const (
-	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
-	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
 	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
 	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
 	DialogInputmodeEnumNumeric DialogInputmodeEnum = "numeric"
 	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
 	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
+	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
+	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 )
 
 type DialogSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type DialogTranslateEnum string
 
 const (
-	DialogTranslateEnumNo  DialogTranslateEnum = "no"
 	DialogTranslateEnumYes DialogTranslateEnum = "yes"
+	DialogTranslateEnumNo  DialogTranslateEnum = "no"
 )
 
 type DialogWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *DialogElement) Contenteditable(a DialogContenteditableEnum) *DialogElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *DialogElement) DataUnsafe(name string, s string) *DialogElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DialogElement) Data(name string, s string) *DialogElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *DialogElement) Dir(a DialogDirEnum) *DialogElement {
@@ -337,7 +349,7 @@ func (e *DialogElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

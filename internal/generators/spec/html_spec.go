@@ -30,6 +30,7 @@ func GlobalAttributes() []Attribute {
 		&AttributeTypeEnum{
 			Name:        "autocorrect",
 			Description: "The autocorrect attribute can be used on an editing host to control autocorrection behavior for the hosted editable region, on an input or textarea element to control the behavior when inserting text into that element, or on a form element to control the default behavior for all autocapitalize-and-autocorrect inheriting elements associated with the form element.",
+			AllowEmpty:  true,
 			Allowed: map[string]struct{}{
 				"on":  {},
 				"off": {},
@@ -46,11 +47,16 @@ func GlobalAttributes() []Attribute {
 		&AttributeTypeEnum{
 			Name:        "contenteditable",
 			Description: "",
+			AllowEmpty:  true,
 			Allowed: map[string]struct{}{
 				"true":           {},
 				"false":          {},
 				"plaintext-only": {},
 			},
+		},
+		&AttributeTypePrefixedCustom{
+			Name:        "data",
+			Description: "A custom data attribute is an attribute in no namespace whose name starts with the string \"data-\", has at least one character after the hyphen, is a valid attribute local name, and contains no ASCII upper alphas.",
 		},
 		&AttributeTypeEnum{
 			Name:        "dir",
@@ -85,11 +91,11 @@ func GlobalAttributes() []Attribute {
 		&AttributeTypeEnum{
 			Name:        "hidden",
 			Description: "All HTML elements may have the hidden content attribute set.",
+			AllowEmpty:  true,
 			Allowed: map[string]struct{}{
 				"hidden":      {},
 				"until-found": {},
 			},
-			AllowEmpty: true,
 		},
 		&AttributeTypeString{
 			Name:        "id",
@@ -152,6 +158,7 @@ func GlobalAttributes() []Attribute {
 		&AttributeTypeEnum{
 			Name:        "spellcheck",
 			Description: "User agents can support the checking of spelling and grammar of editable text, either in form controls (such as the value of textarea elements), or in elements in an editing host (e.g. using contenteditable).",
+			AllowEmpty:  true,
 			Allowed: map[string]struct{}{
 				"true":  {},
 				"false": {},
@@ -172,6 +179,7 @@ func GlobalAttributes() []Attribute {
 		&AttributeTypeEnum{
 			Name:        "translate",
 			Description: "The translate attribute is used to specify whether an element's attribute values and the values of its Text node children are to be translated when the page is localized, or whether to leave them unchanged.",
+			AllowEmpty:  true,
 			Allowed: map[string]struct{}{
 				"yes": {},
 				"no":  {},
@@ -180,6 +188,7 @@ func GlobalAttributes() []Attribute {
 		&AttributeTypeEnum{
 			Name:        "writingsuggestions",
 			Description: "User agents offer writing suggestions as users type into editable regions, either in form controls (e.g., the textarea element) or in elements in an editing host.",
+			AllowEmpty:  true,
 			Allowed: map[string]struct{}{
 				"true":  {},
 				"false": {},
@@ -221,7 +230,7 @@ func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
 				start = false
 			}
 
-			if _, ok := getIDIndex(child.Attr, "id", "semantics"); ok {
+			if _, ok = getIDIndex(child.Attr, "id", "semantics"); ok {
 				start = true
 			}
 		}

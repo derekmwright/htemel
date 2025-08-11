@@ -50,12 +50,12 @@ func ColTernary(condition bool, true htemel.Node, false htemel.Node) *ColElement
 type ColAutocapitalizeEnum string
 
 const (
-	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
-	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
-	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
 	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
 	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
+	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
+	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
+	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 )
 
 type ColAutocorrectEnum string
@@ -68,9 +68,9 @@ const (
 type ColContenteditableEnum string
 
 const (
+	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
 	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
 	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
-	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
 )
 
 type ColDirEnum string
@@ -124,8 +124,8 @@ const (
 type ColSpellcheckEnum string
 
 const (
-	ColSpellcheckEnumTrue  ColSpellcheckEnum = "true"
 	ColSpellcheckEnumFalse ColSpellcheckEnum = "false"
+	ColSpellcheckEnumTrue  ColSpellcheckEnum = "true"
 )
 
 type ColTranslateEnum string
@@ -172,6 +172,18 @@ func (e *ColElement) Contenteditable(a ColContenteditableEnum) *ColElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *ColElement) DataUnsafe(name string, s string) *ColElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ColElement) Data(name string, s string) *ColElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *ColElement) Dir(a ColDirEnum) *ColElement {
@@ -337,7 +349,7 @@ func (e *ColElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

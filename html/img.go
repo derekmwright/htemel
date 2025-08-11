@@ -50,12 +50,12 @@ func ImgTernary(condition bool, true htemel.Node, false htemel.Node) *ImgElement
 type ImgAutocapitalizeEnum string
 
 const (
-	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
-	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
-	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
 	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
+	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
+	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
+	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 )
 
 type ImgAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type ImgDirEnum string
 
 const (
-	ImgDirEnumAuto ImgDirEnum = "auto"
 	ImgDirEnumLtr  ImgDirEnum = "ltr"
 	ImgDirEnumRtl  ImgDirEnum = "rtl"
+	ImgDirEnumAuto ImgDirEnum = "auto"
 )
 
 type ImgDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type ImgEnterkeyhintEnum string
 
 const (
-	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
 	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
 	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
 	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
+	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
 )
 
 type ImgHiddenEnum string
@@ -111,6 +111,7 @@ const (
 type ImgInputmodeEnum string
 
 const (
+	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
 	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
 	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
 	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
@@ -118,7 +119,6 @@ const (
 	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
 	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
-	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
 )
 
 type ImgSpellcheckEnum string
@@ -138,8 +138,8 @@ const (
 type ImgWritingsuggestionsEnum string
 
 const (
-	ImgWritingsuggestionsEnumTrue  ImgWritingsuggestionsEnum = "true"
 	ImgWritingsuggestionsEnumFalse ImgWritingsuggestionsEnum = "false"
+	ImgWritingsuggestionsEnumTrue  ImgWritingsuggestionsEnum = "true"
 )
 
 type imgAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *ImgElement) Contenteditable(a ImgContenteditableEnum) *ImgElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *ImgElement) DataUnsafe(name string, s string) *ImgElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ImgElement) Data(name string, s string) *ImgElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *ImgElement) Dir(a ImgDirEnum) *ImgElement {
@@ -337,7 +349,7 @@ func (e *ImgElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

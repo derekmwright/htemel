@@ -50,12 +50,12 @@ func MeterTernary(condition bool, true htemel.Node, false htemel.Node) *MeterEle
 type MeterAutocapitalizeEnum string
 
 const (
-	MeterAutocapitalizeEnumOn         MeterAutocapitalizeEnum = "on"
-	MeterAutocapitalizeEnumSentences  MeterAutocapitalizeEnum = "sentences"
 	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
 	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
 	MeterAutocapitalizeEnumNone       MeterAutocapitalizeEnum = "none"
 	MeterAutocapitalizeEnumOff        MeterAutocapitalizeEnum = "off"
+	MeterAutocapitalizeEnumOn         MeterAutocapitalizeEnum = "on"
+	MeterAutocapitalizeEnumSentences  MeterAutocapitalizeEnum = "sentences"
 )
 
 type MeterAutocorrectEnum string
@@ -68,17 +68,17 @@ const (
 type MeterContenteditableEnum string
 
 const (
+	MeterContenteditableEnumTrue          MeterContenteditableEnum = "true"
 	MeterContenteditableEnumFalse         MeterContenteditableEnum = "false"
 	MeterContenteditableEnumPlaintextOnly MeterContenteditableEnum = "plaintext-only"
-	MeterContenteditableEnumTrue          MeterContenteditableEnum = "true"
 )
 
 type MeterDirEnum string
 
 const (
+	MeterDirEnumRtl  MeterDirEnum = "rtl"
 	MeterDirEnumAuto MeterDirEnum = "auto"
 	MeterDirEnumLtr  MeterDirEnum = "ltr"
-	MeterDirEnumRtl  MeterDirEnum = "rtl"
 )
 
 type MeterDraggableEnum string
@@ -91,26 +91,27 @@ const (
 type MeterEnterkeyhintEnum string
 
 const (
-	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
-	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 	MeterEnterkeyhintEnumDone     MeterEnterkeyhintEnum = "done"
 	MeterEnterkeyhintEnumEnter    MeterEnterkeyhintEnum = "enter"
 	MeterEnterkeyhintEnumGo       MeterEnterkeyhintEnum = "go"
 	MeterEnterkeyhintEnumNext     MeterEnterkeyhintEnum = "next"
 	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
+	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
+	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 )
 
 type MeterHiddenEnum string
 
 const (
-	MeterHiddenEnumHidden     MeterHiddenEnum = "hidden"
 	MeterHiddenEnumUntilFound MeterHiddenEnum = "until-found"
+	MeterHiddenEnumHidden     MeterHiddenEnum = "hidden"
 	MeterHiddenEnumEmpty      MeterHiddenEnum = ""
 )
 
 type MeterInputmodeEnum string
 
 const (
+	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 	MeterInputmodeEnumDecimal MeterInputmodeEnum = "decimal"
 	MeterInputmodeEnumEmail   MeterInputmodeEnum = "email"
 	MeterInputmodeEnumNone    MeterInputmodeEnum = "none"
@@ -118,7 +119,6 @@ const (
 	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
 	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
 	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
-	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 )
 
 type MeterSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *MeterElement) Contenteditable(a MeterContenteditableEnum) *MeterElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *MeterElement) DataUnsafe(name string, s string) *MeterElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *MeterElement) Data(name string, s string) *MeterElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *MeterElement) Dir(a MeterDirEnum) *MeterElement {
@@ -337,7 +349,7 @@ func (e *MeterElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,12 +50,12 @@ func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *Detail
 type DetailsAutocapitalizeEnum string
 
 const (
+	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
 	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
 	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
 	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
 	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
-	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 )
 
 type DetailsAutocorrectEnum string
@@ -68,36 +68,36 @@ const (
 type DetailsContenteditableEnum string
 
 const (
+	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 	DetailsContenteditableEnumPlaintextOnly DetailsContenteditableEnum = "plaintext-only"
 	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
-	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 )
 
 type DetailsDirEnum string
 
 const (
-	DetailsDirEnumLtr  DetailsDirEnum = "ltr"
 	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
 	DetailsDirEnumAuto DetailsDirEnum = "auto"
+	DetailsDirEnumLtr  DetailsDirEnum = "ltr"
 )
 
 type DetailsDraggableEnum string
 
 const (
-	DetailsDraggableEnumFalse DetailsDraggableEnum = "false"
 	DetailsDraggableEnumTrue  DetailsDraggableEnum = "true"
+	DetailsDraggableEnumFalse DetailsDraggableEnum = "false"
 )
 
 type DetailsEnterkeyhintEnum string
 
 const (
-	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
-	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
-	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
 	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
 	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
 	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
 	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
+	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
+	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
+	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
 )
 
 type DetailsHiddenEnum string
@@ -138,8 +138,8 @@ const (
 type DetailsWritingsuggestionsEnum string
 
 const (
-	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
 	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
+	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
 )
 
 type detailsAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *DetailsElement) Contenteditable(a DetailsContenteditableEnum) *DetailsE
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *DetailsElement) DataUnsafe(name string, s string) *DetailsElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DetailsElement) Data(name string, s string) *DetailsElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *DetailsElement) Dir(a DetailsDirEnum) *DetailsElement {
@@ -337,7 +349,7 @@ func (e *DetailsElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

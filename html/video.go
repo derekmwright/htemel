@@ -50,12 +50,12 @@ func VideoTernary(condition bool, true htemel.Node, false htemel.Node) *VideoEle
 type VideoAutocapitalizeEnum string
 
 const (
+	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
 	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
 	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
 	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
 	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
-	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 )
 
 type VideoAutocorrectEnum string
@@ -68,9 +68,9 @@ const (
 type VideoContenteditableEnum string
 
 const (
-	VideoContenteditableEnumTrue          VideoContenteditableEnum = "true"
 	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
 	VideoContenteditableEnumPlaintextOnly VideoContenteditableEnum = "plaintext-only"
+	VideoContenteditableEnumTrue          VideoContenteditableEnum = "true"
 )
 
 type VideoDirEnum string
@@ -84,20 +84,20 @@ const (
 type VideoDraggableEnum string
 
 const (
-	VideoDraggableEnumTrue  VideoDraggableEnum = "true"
 	VideoDraggableEnumFalse VideoDraggableEnum = "false"
+	VideoDraggableEnumTrue  VideoDraggableEnum = "true"
 )
 
 type VideoEnterkeyhintEnum string
 
 const (
-	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
-	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
-	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
 	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
 	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
 	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
 	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
+	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
+	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
+	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
 )
 
 type VideoHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type VideoInputmodeEnum string
 
 const (
+	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
+	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
+	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
 	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
 	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
 	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
 	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
 	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
-	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
-	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
-	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
 )
 
 type VideoSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type VideoTranslateEnum string
 
 const (
-	VideoTranslateEnumYes VideoTranslateEnum = "yes"
 	VideoTranslateEnumNo  VideoTranslateEnum = "no"
+	VideoTranslateEnumYes VideoTranslateEnum = "yes"
 )
 
 type VideoWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *VideoElement) Contenteditable(a VideoContenteditableEnum) *VideoElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *VideoElement) DataUnsafe(name string, s string) *VideoElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *VideoElement) Data(name string, s string) *VideoElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *VideoElement) Dir(a VideoDirEnum) *VideoElement {
@@ -337,7 +349,7 @@ func (e *VideoElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

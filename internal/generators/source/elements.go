@@ -192,7 +192,7 @@ func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
 
  		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

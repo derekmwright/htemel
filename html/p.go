@@ -68,9 +68,9 @@ const (
 type PContenteditableEnum string
 
 const (
+	PContenteditableEnumTrue          PContenteditableEnum = "true"
 	PContenteditableEnumFalse         PContenteditableEnum = "false"
 	PContenteditableEnumPlaintextOnly PContenteditableEnum = "plaintext-only"
-	PContenteditableEnumTrue          PContenteditableEnum = "true"
 )
 
 type PDirEnum string
@@ -84,20 +84,20 @@ const (
 type PDraggableEnum string
 
 const (
-	PDraggableEnumFalse PDraggableEnum = "false"
 	PDraggableEnumTrue  PDraggableEnum = "true"
+	PDraggableEnumFalse PDraggableEnum = "false"
 )
 
 type PEnterkeyhintEnum string
 
 const (
-	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
-	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
-	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
 	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
 	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
 	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
+	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
+	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
+	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 )
 
 type PHiddenEnum string
@@ -111,28 +111,28 @@ const (
 type PInputmodeEnum string
 
 const (
-	PInputmodeEnumTel     PInputmodeEnum = "tel"
-	PInputmodeEnumText    PInputmodeEnum = "text"
 	PInputmodeEnumUrl     PInputmodeEnum = "url"
 	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
 	PInputmodeEnumEmail   PInputmodeEnum = "email"
 	PInputmodeEnumNone    PInputmodeEnum = "none"
 	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
 	PInputmodeEnumSearch  PInputmodeEnum = "search"
+	PInputmodeEnumTel     PInputmodeEnum = "tel"
+	PInputmodeEnumText    PInputmodeEnum = "text"
 )
 
 type PSpellcheckEnum string
 
 const (
-	PSpellcheckEnumTrue  PSpellcheckEnum = "true"
 	PSpellcheckEnumFalse PSpellcheckEnum = "false"
+	PSpellcheckEnumTrue  PSpellcheckEnum = "true"
 )
 
 type PTranslateEnum string
 
 const (
-	PTranslateEnumYes PTranslateEnum = "yes"
 	PTranslateEnumNo  PTranslateEnum = "no"
+	PTranslateEnumYes PTranslateEnum = "yes"
 )
 
 type PWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *PElement) Contenteditable(a PContenteditableEnum) *PElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *PElement) DataUnsafe(name string, s string) *PElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *PElement) Data(name string, s string) *PElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *PElement) Dir(a PDirEnum) *PElement {
@@ -337,7 +349,7 @@ func (e *PElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

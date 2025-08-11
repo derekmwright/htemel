@@ -50,19 +50,19 @@ func ObjectTernary(condition bool, true htemel.Node, false htemel.Node) *ObjectE
 type ObjectAutocapitalizeEnum string
 
 const (
+	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
 	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
 	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
 	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
 	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
-	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
 )
 
 type ObjectAutocorrectEnum string
 
 const (
-	ObjectAutocorrectEnumOff ObjectAutocorrectEnum = "off"
 	ObjectAutocorrectEnumOn  ObjectAutocorrectEnum = "on"
+	ObjectAutocorrectEnumOff ObjectAutocorrectEnum = "off"
 )
 
 type ObjectContenteditableEnum string
@@ -91,13 +91,13 @@ const (
 type ObjectEnterkeyhintEnum string
 
 const (
-	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
 	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
 	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
 	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
 	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 	ObjectEnterkeyhintEnumNext     ObjectEnterkeyhintEnum = "next"
 	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
+	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
 )
 
 type ObjectHiddenEnum string
@@ -172,6 +172,18 @@ func (e *ObjectElement) Contenteditable(a ObjectContenteditableEnum) *ObjectElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *ObjectElement) DataUnsafe(name string, s string) *ObjectElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ObjectElement) Data(name string, s string) *ObjectElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *ObjectElement) Dir(a ObjectDirEnum) *ObjectElement {
@@ -337,7 +349,7 @@ func (e *ObjectElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

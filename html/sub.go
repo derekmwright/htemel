@@ -84,20 +84,20 @@ const (
 type SubDraggableEnum string
 
 const (
-	SubDraggableEnumTrue  SubDraggableEnum = "true"
 	SubDraggableEnumFalse SubDraggableEnum = "false"
+	SubDraggableEnumTrue  SubDraggableEnum = "true"
 )
 
 type SubEnterkeyhintEnum string
 
 const (
-	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
 	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
 	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
 	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
 	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
+	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 )
 
 type SubHiddenEnum string
@@ -111,7 +111,6 @@ const (
 type SubInputmodeEnum string
 
 const (
-	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
 	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
 	SubInputmodeEnumNone    SubInputmodeEnum = "none"
 	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
@@ -119,6 +118,7 @@ const (
 	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
 	SubInputmodeEnumText    SubInputmodeEnum = "text"
 	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
+	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
 )
 
 type SubSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *SubElement) Contenteditable(a SubContenteditableEnum) *SubElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SubElement) DataUnsafe(name string, s string) *SubElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SubElement) Data(name string, s string) *SubElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SubElement) Dir(a SubDirEnum) *SubElement {
@@ -337,7 +349,7 @@ func (e *SubElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

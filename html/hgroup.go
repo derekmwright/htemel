@@ -50,12 +50,12 @@ func HgroupTernary(condition bool, true htemel.Node, false htemel.Node) *HgroupE
 type HgroupAutocapitalizeEnum string
 
 const (
-	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
-	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
 	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
 	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
 	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
+	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
+	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
 )
 
 type HgroupAutocorrectEnum string
@@ -91,13 +91,13 @@ const (
 type HgroupEnterkeyhintEnum string
 
 const (
-	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
-	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
 	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
 	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
 	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
 	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
+	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
+	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
 )
 
 type HgroupHiddenEnum string
@@ -172,6 +172,18 @@ func (e *HgroupElement) Contenteditable(a HgroupContenteditableEnum) *HgroupElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *HgroupElement) DataUnsafe(name string, s string) *HgroupElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *HgroupElement) Data(name string, s string) *HgroupElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *HgroupElement) Dir(a HgroupDirEnum) *HgroupElement {
@@ -337,7 +349,7 @@ func (e *HgroupElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

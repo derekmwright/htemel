@@ -84,41 +84,41 @@ const (
 type SearchDraggableEnum string
 
 const (
-	SearchDraggableEnumFalse SearchDraggableEnum = "false"
 	SearchDraggableEnumTrue  SearchDraggableEnum = "true"
+	SearchDraggableEnumFalse SearchDraggableEnum = "false"
 )
 
 type SearchEnterkeyhintEnum string
 
 const (
-	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
 	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
 	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
 	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
 	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
+	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 )
 
 type SearchHiddenEnum string
 
 const (
-	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
 	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
+	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
 	SearchHiddenEnumEmpty      SearchHiddenEnum = ""
 )
 
 type SearchInputmodeEnum string
 
 const (
-	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
-	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
-	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
-	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
 	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
 	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
 	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
+	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
+	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
+	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
+	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
 )
 
 type SearchSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *SearchElement) Contenteditable(a SearchContenteditableEnum) *SearchElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SearchElement) DataUnsafe(name string, s string) *SearchElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SearchElement) Data(name string, s string) *SearchElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SearchElement) Dir(a SearchDirEnum) *SearchElement {
@@ -337,7 +349,7 @@ func (e *SearchElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,12 +50,12 @@ func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement
 type BdiAutocapitalizeEnum string
 
 const (
-	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
 	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
 	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 	BdiAutocapitalizeEnumNone       BdiAutocapitalizeEnum = "none"
 	BdiAutocapitalizeEnumOff        BdiAutocapitalizeEnum = "off"
 	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
+	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
 )
 
 type BdiAutocorrectEnum string
@@ -68,9 +68,9 @@ const (
 type BdiContenteditableEnum string
 
 const (
-	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
 	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
 	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
+	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
 )
 
 type BdiDirEnum string
@@ -91,13 +91,13 @@ const (
 type BdiEnterkeyhintEnum string
 
 const (
+	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
+	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
 	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
 	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
 	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 	BdiEnterkeyhintEnumNext     BdiEnterkeyhintEnum = "next"
 	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
-	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
-	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
 )
 
 type BdiHiddenEnum string
@@ -124,8 +124,8 @@ const (
 type BdiSpellcheckEnum string
 
 const (
-	BdiSpellcheckEnumTrue  BdiSpellcheckEnum = "true"
 	BdiSpellcheckEnumFalse BdiSpellcheckEnum = "false"
+	BdiSpellcheckEnumTrue  BdiSpellcheckEnum = "true"
 )
 
 type BdiTranslateEnum string
@@ -138,8 +138,8 @@ const (
 type BdiWritingsuggestionsEnum string
 
 const (
-	BdiWritingsuggestionsEnumTrue  BdiWritingsuggestionsEnum = "true"
 	BdiWritingsuggestionsEnumFalse BdiWritingsuggestionsEnum = "false"
+	BdiWritingsuggestionsEnumTrue  BdiWritingsuggestionsEnum = "true"
 )
 
 type bdiAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *BdiElement) Contenteditable(a BdiContenteditableEnum) *BdiElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *BdiElement) DataUnsafe(name string, s string) *BdiElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BdiElement) Data(name string, s string) *BdiElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *BdiElement) Dir(a BdiDirEnum) *BdiElement {
@@ -337,7 +349,7 @@ func (e *BdiElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

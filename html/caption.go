@@ -50,12 +50,12 @@ func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Captio
 type CaptionAutocapitalizeEnum string
 
 const (
+	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
+	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
 	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
 	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
 	CaptionAutocapitalizeEnumOff        CaptionAutocapitalizeEnum = "off"
 	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
-	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
-	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
 )
 
 type CaptionAutocorrectEnum string
@@ -68,17 +68,17 @@ const (
 type CaptionContenteditableEnum string
 
 const (
-	CaptionContenteditableEnumTrue          CaptionContenteditableEnum = "true"
 	CaptionContenteditableEnumFalse         CaptionContenteditableEnum = "false"
 	CaptionContenteditableEnumPlaintextOnly CaptionContenteditableEnum = "plaintext-only"
+	CaptionContenteditableEnumTrue          CaptionContenteditableEnum = "true"
 )
 
 type CaptionDirEnum string
 
 const (
-	CaptionDirEnumAuto CaptionDirEnum = "auto"
 	CaptionDirEnumLtr  CaptionDirEnum = "ltr"
 	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
+	CaptionDirEnumAuto CaptionDirEnum = "auto"
 )
 
 type CaptionDraggableEnum string
@@ -111,14 +111,14 @@ const (
 type CaptionInputmodeEnum string
 
 const (
-	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
-	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
 	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
 	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
 	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
 	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
 	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
 	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
+	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
+	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
 )
 
 type CaptionSpellcheckEnum string
@@ -138,8 +138,8 @@ const (
 type CaptionWritingsuggestionsEnum string
 
 const (
-	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
 	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
+	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
 )
 
 type captionAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *CaptionElement) Contenteditable(a CaptionContenteditableEnum) *CaptionE
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *CaptionElement) DataUnsafe(name string, s string) *CaptionElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *CaptionElement) Data(name string, s string) *CaptionElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *CaptionElement) Dir(a CaptionDirEnum) *CaptionElement {
@@ -337,7 +349,7 @@ func (e *CaptionElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

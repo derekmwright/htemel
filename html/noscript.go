@@ -50,12 +50,12 @@ func NoscriptTernary(condition bool, true htemel.Node, false htemel.Node) *Noscr
 type NoscriptAutocapitalizeEnum string
 
 const (
-	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
-	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
-	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
 	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
 	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
 	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
+	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
+	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
+	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
 )
 
 type NoscriptAutocorrectEnum string
@@ -91,13 +91,13 @@ const (
 type NoscriptEnterkeyhintEnum string
 
 const (
+	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
+	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
+	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
 	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
 	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
 	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
 	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
-	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
-	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
-	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
 )
 
 type NoscriptHiddenEnum string
@@ -111,7 +111,6 @@ const (
 type NoscriptInputmodeEnum string
 
 const (
-	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
 	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
 	NoscriptInputmodeEnumNone    NoscriptInputmodeEnum = "none"
 	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
@@ -119,6 +118,7 @@ const (
 	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
 	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
 	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
+	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
 )
 
 type NoscriptSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *NoscriptElement) Contenteditable(a NoscriptContenteditableEnum) *Noscri
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *NoscriptElement) DataUnsafe(name string, s string) *NoscriptElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *NoscriptElement) Data(name string, s string) *NoscriptElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *NoscriptElement) Dir(a NoscriptDirEnum) *NoscriptElement {
@@ -337,7 +349,7 @@ func (e *NoscriptElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

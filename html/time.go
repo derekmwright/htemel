@@ -50,12 +50,12 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 type TimeAutocapitalizeEnum string
 
 const (
-	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
-	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
 	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
 	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
+	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
+	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 )
 
 type TimeAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type TimeDirEnum string
 
 const (
+	TimeDirEnumRtl  TimeDirEnum = "rtl"
 	TimeDirEnumAuto TimeDirEnum = "auto"
 	TimeDirEnumLtr  TimeDirEnum = "ltr"
-	TimeDirEnumRtl  TimeDirEnum = "rtl"
 )
 
 type TimeDraggableEnum string
@@ -111,7 +111,6 @@ const (
 type TimeInputmodeEnum string
 
 const (
-	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
 	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
 	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
 	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
@@ -119,6 +118,7 @@ const (
 	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
 	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
 	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
+	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
 )
 
 type TimeSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *TimeElement) Contenteditable(a TimeContenteditableEnum) *TimeElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *TimeElement) DataUnsafe(name string, s string) *TimeElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TimeElement) Data(name string, s string) *TimeElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *TimeElement) Dir(a TimeDirEnum) *TimeElement {
@@ -337,7 +349,7 @@ func (e *TimeElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

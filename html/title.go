@@ -50,19 +50,19 @@ func TitleTernary(condition bool, true htemel.Node, false htemel.Node) *TitleEle
 type TitleAutocapitalizeEnum string
 
 const (
-	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
-	TitleAutocapitalizeEnumNone       TitleAutocapitalizeEnum = "none"
-	TitleAutocapitalizeEnumOff        TitleAutocapitalizeEnum = "off"
 	TitleAutocapitalizeEnumOn         TitleAutocapitalizeEnum = "on"
 	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
 	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
+	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
+	TitleAutocapitalizeEnumNone       TitleAutocapitalizeEnum = "none"
+	TitleAutocapitalizeEnumOff        TitleAutocapitalizeEnum = "off"
 )
 
 type TitleAutocorrectEnum string
 
 const (
-	TitleAutocorrectEnumOff TitleAutocorrectEnum = "off"
 	TitleAutocorrectEnumOn  TitleAutocorrectEnum = "on"
+	TitleAutocorrectEnumOff TitleAutocorrectEnum = "off"
 )
 
 type TitleContenteditableEnum string
@@ -91,13 +91,13 @@ const (
 type TitleEnterkeyhintEnum string
 
 const (
-	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
-	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
 	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
 	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
 	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
 	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
+	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
+	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 )
 
 type TitleHiddenEnum string
@@ -124,8 +124,8 @@ const (
 type TitleSpellcheckEnum string
 
 const (
-	TitleSpellcheckEnumTrue  TitleSpellcheckEnum = "true"
 	TitleSpellcheckEnumFalse TitleSpellcheckEnum = "false"
+	TitleSpellcheckEnumTrue  TitleSpellcheckEnum = "true"
 )
 
 type TitleTranslateEnum string
@@ -172,6 +172,18 @@ func (e *TitleElement) Contenteditable(a TitleContenteditableEnum) *TitleElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *TitleElement) DataUnsafe(name string, s string) *TitleElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TitleElement) Data(name string, s string) *TitleElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *TitleElement) Dir(a TitleDirEnum) *TitleElement {
@@ -337,7 +349,7 @@ func (e *TitleElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

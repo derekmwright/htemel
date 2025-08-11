@@ -50,12 +50,12 @@ func VarTernary(condition bool, true htemel.Node, false htemel.Node) *VarElement
 type VarAutocapitalizeEnum string
 
 const (
-	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
-	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
-	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
 	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
 	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
 	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
+	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
+	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
+	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
 )
 
 type VarAutocorrectEnum string
@@ -91,27 +91,26 @@ const (
 type VarEnterkeyhintEnum string
 
 const (
+	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
 	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
 	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
 	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
 	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
-	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
 )
 
 type VarHiddenEnum string
 
 const (
-	VarHiddenEnumUntilFound VarHiddenEnum = "until-found"
 	VarHiddenEnumHidden     VarHiddenEnum = "hidden"
+	VarHiddenEnumUntilFound VarHiddenEnum = "until-found"
 	VarHiddenEnumEmpty      VarHiddenEnum = ""
 )
 
 type VarInputmodeEnum string
 
 const (
-	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
 	VarInputmodeEnumText    VarInputmodeEnum = "text"
 	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
@@ -119,6 +118,7 @@ const (
 	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
 	VarInputmodeEnumNone    VarInputmodeEnum = "none"
 	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
+	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 )
 
 type VarSpellcheckEnum string
@@ -131,15 +131,15 @@ const (
 type VarTranslateEnum string
 
 const (
-	VarTranslateEnumYes VarTranslateEnum = "yes"
 	VarTranslateEnumNo  VarTranslateEnum = "no"
+	VarTranslateEnumYes VarTranslateEnum = "yes"
 )
 
 type VarWritingsuggestionsEnum string
 
 const (
-	VarWritingsuggestionsEnumFalse VarWritingsuggestionsEnum = "false"
 	VarWritingsuggestionsEnumTrue  VarWritingsuggestionsEnum = "true"
+	VarWritingsuggestionsEnumFalse VarWritingsuggestionsEnum = "false"
 )
 
 type varAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *VarElement) Contenteditable(a VarContenteditableEnum) *VarElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *VarElement) DataUnsafe(name string, s string) *VarElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *VarElement) Data(name string, s string) *VarElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *VarElement) Dir(a VarDirEnum) *VarElement {
@@ -337,7 +349,7 @@ func (e *VarElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

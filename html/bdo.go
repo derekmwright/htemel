@@ -50,12 +50,12 @@ func BdoTernary(condition bool, true htemel.Node, false htemel.Node) *BdoElement
 type BdoAutocapitalizeEnum string
 
 const (
-	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
-	BdoAutocapitalizeEnumOn         BdoAutocapitalizeEnum = "on"
-	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
 	BdoAutocapitalizeEnumWords      BdoAutocapitalizeEnum = "words"
 	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
 	BdoAutocapitalizeEnumNone       BdoAutocapitalizeEnum = "none"
+	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
+	BdoAutocapitalizeEnumOn         BdoAutocapitalizeEnum = "on"
+	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
 )
 
 type BdoAutocorrectEnum string
@@ -68,17 +68,17 @@ const (
 type BdoContenteditableEnum string
 
 const (
-	BdoContenteditableEnumFalse         BdoContenteditableEnum = "false"
 	BdoContenteditableEnumPlaintextOnly BdoContenteditableEnum = "plaintext-only"
 	BdoContenteditableEnumTrue          BdoContenteditableEnum = "true"
+	BdoContenteditableEnumFalse         BdoContenteditableEnum = "false"
 )
 
 type BdoDirEnum string
 
 const (
+	BdoDirEnumAuto BdoDirEnum = "auto"
 	BdoDirEnumLtr  BdoDirEnum = "ltr"
 	BdoDirEnumRtl  BdoDirEnum = "rtl"
-	BdoDirEnumAuto BdoDirEnum = "auto"
 )
 
 type BdoDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type BdoEnterkeyhintEnum string
 
 const (
-	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
-	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
 	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
 	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
 	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
 	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
+	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
+	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 )
 
 type BdoHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type BdoInputmodeEnum string
 
 const (
-	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
-	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
-	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
-	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
 	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
 	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
 	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
 	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
+	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
+	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
+	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
+	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
 )
 
 type BdoSpellcheckEnum string
@@ -138,8 +138,8 @@ const (
 type BdoWritingsuggestionsEnum string
 
 const (
-	BdoWritingsuggestionsEnumTrue  BdoWritingsuggestionsEnum = "true"
 	BdoWritingsuggestionsEnumFalse BdoWritingsuggestionsEnum = "false"
+	BdoWritingsuggestionsEnumTrue  BdoWritingsuggestionsEnum = "true"
 )
 
 type bdoAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *BdoElement) Contenteditable(a BdoContenteditableEnum) *BdoElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *BdoElement) DataUnsafe(name string, s string) *BdoElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BdoElement) Data(name string, s string) *BdoElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *BdoElement) Dir(a BdoDirEnum) *BdoElement {
@@ -337,7 +349,7 @@ func (e *BdoElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

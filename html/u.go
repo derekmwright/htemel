@@ -68,9 +68,9 @@ const (
 type UContenteditableEnum string
 
 const (
-	UContenteditableEnumFalse         UContenteditableEnum = "false"
 	UContenteditableEnumPlaintextOnly UContenteditableEnum = "plaintext-only"
 	UContenteditableEnumTrue          UContenteditableEnum = "true"
+	UContenteditableEnumFalse         UContenteditableEnum = "false"
 )
 
 type UDirEnum string
@@ -84,20 +84,20 @@ const (
 type UDraggableEnum string
 
 const (
-	UDraggableEnumFalse UDraggableEnum = "false"
 	UDraggableEnumTrue  UDraggableEnum = "true"
+	UDraggableEnumFalse UDraggableEnum = "false"
 )
 
 type UEnterkeyhintEnum string
 
 const (
-	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
-	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
-	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
 	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
 	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
+	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
+	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
+	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 )
 
 type UHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type UInputmodeEnum string
 
 const (
+	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
+	UInputmodeEnumEmail   UInputmodeEnum = "email"
+	UInputmodeEnumNone    UInputmodeEnum = "none"
 	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
 	UInputmodeEnumSearch  UInputmodeEnum = "search"
 	UInputmodeEnumTel     UInputmodeEnum = "tel"
 	UInputmodeEnumText    UInputmodeEnum = "text"
 	UInputmodeEnumUrl     UInputmodeEnum = "url"
-	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
-	UInputmodeEnumEmail   UInputmodeEnum = "email"
-	UInputmodeEnumNone    UInputmodeEnum = "none"
 )
 
 type USpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *UElement) Contenteditable(a UContenteditableEnum) *UElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *UElement) DataUnsafe(name string, s string) *UElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *UElement) Data(name string, s string) *UElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *UElement) Dir(a UDirEnum) *UElement {
@@ -337,7 +349,7 @@ func (e *UElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

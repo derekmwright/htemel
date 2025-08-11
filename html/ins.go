@@ -50,12 +50,12 @@ func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement
 type InsAutocapitalizeEnum string
 
 const (
-	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
-	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
-	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
 	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
 	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
+	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
+	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
+	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 )
 
 type InsAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type InsDirEnum string
 
 const (
+	InsDirEnumRtl  InsDirEnum = "rtl"
 	InsDirEnumAuto InsDirEnum = "auto"
 	InsDirEnumLtr  InsDirEnum = "ltr"
-	InsDirEnumRtl  InsDirEnum = "rtl"
 )
 
 type InsDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type InsEnterkeyhintEnum string
 
 const (
-	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
-	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
-	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
 	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
 	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
 	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
+	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
+	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
+	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 )
 
 type InsHiddenEnum string
@@ -172,6 +172,18 @@ func (e *InsElement) Contenteditable(a InsContenteditableEnum) *InsElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *InsElement) DataUnsafe(name string, s string) *InsElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *InsElement) Data(name string, s string) *InsElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *InsElement) Dir(a InsDirEnum) *InsElement {
@@ -337,7 +349,7 @@ func (e *InsElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

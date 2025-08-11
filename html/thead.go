@@ -50,12 +50,12 @@ func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadEle
 type TheadAutocapitalizeEnum string
 
 const (
-	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
-	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
 	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
 	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
 	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
+	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
+	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
 )
 
 type TheadAutocorrectEnum string
@@ -84,20 +84,20 @@ const (
 type TheadDraggableEnum string
 
 const (
-	TheadDraggableEnumFalse TheadDraggableEnum = "false"
 	TheadDraggableEnumTrue  TheadDraggableEnum = "true"
+	TheadDraggableEnumFalse TheadDraggableEnum = "false"
 )
 
 type TheadEnterkeyhintEnum string
 
 const (
+	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
 	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
 	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
 	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
 	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
 	TheadEnterkeyhintEnumGo       TheadEnterkeyhintEnum = "go"
-	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
 )
 
 type TheadHiddenEnum string
@@ -111,6 +111,7 @@ const (
 type TheadInputmodeEnum string
 
 const (
+	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
 	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
 	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
 	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
@@ -118,7 +119,6 @@ const (
 	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
 	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
 	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
-	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
 )
 
 type TheadSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *TheadElement) Contenteditable(a TheadContenteditableEnum) *TheadElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *TheadElement) DataUnsafe(name string, s string) *TheadElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TheadElement) Data(name string, s string) *TheadElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *TheadElement) Dir(a TheadDirEnum) *TheadElement {
@@ -337,7 +349,7 @@ func (e *TheadElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

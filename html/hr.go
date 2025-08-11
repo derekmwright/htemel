@@ -50,27 +50,27 @@ func HrTernary(condition bool, true htemel.Node, false htemel.Node) *HrElement {
 type HrAutocapitalizeEnum string
 
 const (
-	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
-	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
 	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
 	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
 	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
+	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
+	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 )
 
 type HrAutocorrectEnum string
 
 const (
-	HrAutocorrectEnumOff HrAutocorrectEnum = "off"
 	HrAutocorrectEnumOn  HrAutocorrectEnum = "on"
+	HrAutocorrectEnumOff HrAutocorrectEnum = "off"
 )
 
 type HrContenteditableEnum string
 
 const (
-	HrContenteditableEnumFalse         HrContenteditableEnum = "false"
 	HrContenteditableEnumPlaintextOnly HrContenteditableEnum = "plaintext-only"
 	HrContenteditableEnumTrue          HrContenteditableEnum = "true"
+	HrContenteditableEnumFalse         HrContenteditableEnum = "false"
 )
 
 type HrDirEnum string
@@ -91,13 +91,13 @@ const (
 type HrEnterkeyhintEnum string
 
 const (
+	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
 	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
 	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
 	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
 	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
 	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
-	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 )
 
 type HrHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type HrInputmodeEnum string
 
 const (
-	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
-	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
-	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
 	HrInputmodeEnumNone    HrInputmodeEnum = "none"
 	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
 	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
 	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
 	HrInputmodeEnumText    HrInputmodeEnum = "text"
+	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
+	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
+	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
 )
 
 type HrSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *HrElement) Contenteditable(a HrContenteditableEnum) *HrElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *HrElement) DataUnsafe(name string, s string) *HrElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *HrElement) Data(name string, s string) *HrElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *HrElement) Dir(a HrDirEnum) *HrElement {
@@ -337,7 +349,7 @@ func (e *HrElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

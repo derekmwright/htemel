@@ -50,12 +50,12 @@ func RubyTernary(condition bool, true htemel.Node, false htemel.Node) *RubyEleme
 type RubyAutocapitalizeEnum string
 
 const (
+	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
+	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 	RubyAutocapitalizeEnumOff        RubyAutocapitalizeEnum = "off"
 	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
 	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
 	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
-	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
-	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 )
 
 type RubyAutocorrectEnum string
@@ -91,13 +91,13 @@ const (
 type RubyEnterkeyhintEnum string
 
 const (
-	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
 	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
 	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
+	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 )
 
 type RubyHiddenEnum string
@@ -124,8 +124,8 @@ const (
 type RubySpellcheckEnum string
 
 const (
-	RubySpellcheckEnumTrue  RubySpellcheckEnum = "true"
 	RubySpellcheckEnumFalse RubySpellcheckEnum = "false"
+	RubySpellcheckEnumTrue  RubySpellcheckEnum = "true"
 )
 
 type RubyTranslateEnum string
@@ -138,8 +138,8 @@ const (
 type RubyWritingsuggestionsEnum string
 
 const (
-	RubyWritingsuggestionsEnumFalse RubyWritingsuggestionsEnum = "false"
 	RubyWritingsuggestionsEnumTrue  RubyWritingsuggestionsEnum = "true"
+	RubyWritingsuggestionsEnumFalse RubyWritingsuggestionsEnum = "false"
 )
 
 type rubyAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *RubyElement) Contenteditable(a RubyContenteditableEnum) *RubyElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *RubyElement) DataUnsafe(name string, s string) *RubyElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *RubyElement) Data(name string, s string) *RubyElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *RubyElement) Dir(a RubyDirEnum) *RubyElement {
@@ -337,7 +349,7 @@ func (e *RubyElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

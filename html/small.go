@@ -50,12 +50,12 @@ func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallEle
 type SmallAutocapitalizeEnum string
 
 const (
+	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
 	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
 	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
 	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
-	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 )
 
 type SmallAutocorrectEnum string
@@ -68,57 +68,57 @@ const (
 type SmallContenteditableEnum string
 
 const (
+	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
 	SmallContenteditableEnumPlaintextOnly SmallContenteditableEnum = "plaintext-only"
 	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
-	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
 )
 
 type SmallDirEnum string
 
 const (
-	SmallDirEnumAuto SmallDirEnum = "auto"
 	SmallDirEnumLtr  SmallDirEnum = "ltr"
 	SmallDirEnumRtl  SmallDirEnum = "rtl"
+	SmallDirEnumAuto SmallDirEnum = "auto"
 )
 
 type SmallDraggableEnum string
 
 const (
-	SmallDraggableEnumFalse SmallDraggableEnum = "false"
 	SmallDraggableEnumTrue  SmallDraggableEnum = "true"
+	SmallDraggableEnumFalse SmallDraggableEnum = "false"
 )
 
 type SmallEnterkeyhintEnum string
 
 const (
-	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
 	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
 	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
 	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
 	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
+	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
 )
 
 type SmallHiddenEnum string
 
 const (
-	SmallHiddenEnumUntilFound SmallHiddenEnum = "until-found"
 	SmallHiddenEnumHidden     SmallHiddenEnum = "hidden"
+	SmallHiddenEnumUntilFound SmallHiddenEnum = "until-found"
 	SmallHiddenEnumEmpty      SmallHiddenEnum = ""
 )
 
 type SmallInputmodeEnum string
 
 const (
+	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
+	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
 	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
 	SmallInputmodeEnumSearch  SmallInputmodeEnum = "search"
 	SmallInputmodeEnumTel     SmallInputmodeEnum = "tel"
 	SmallInputmodeEnumText    SmallInputmodeEnum = "text"
 	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
 	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
-	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
-	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
 )
 
 type SmallSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type SmallTranslateEnum string
 
 const (
-	SmallTranslateEnumYes SmallTranslateEnum = "yes"
 	SmallTranslateEnumNo  SmallTranslateEnum = "no"
+	SmallTranslateEnumYes SmallTranslateEnum = "yes"
 )
 
 type SmallWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *SmallElement) Contenteditable(a SmallContenteditableEnum) *SmallElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SmallElement) DataUnsafe(name string, s string) *SmallElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SmallElement) Data(name string, s string) *SmallElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SmallElement) Dir(a SmallDirEnum) *SmallElement {
@@ -337,7 +349,7 @@ func (e *SmallElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -61,8 +61,8 @@ const (
 type ScriptAutocorrectEnum string
 
 const (
-	ScriptAutocorrectEnumOff ScriptAutocorrectEnum = "off"
 	ScriptAutocorrectEnumOn  ScriptAutocorrectEnum = "on"
+	ScriptAutocorrectEnumOff ScriptAutocorrectEnum = "off"
 )
 
 type ScriptContenteditableEnum string
@@ -76,9 +76,9 @@ const (
 type ScriptDirEnum string
 
 const (
+	ScriptDirEnumRtl  ScriptDirEnum = "rtl"
 	ScriptDirEnumAuto ScriptDirEnum = "auto"
 	ScriptDirEnumLtr  ScriptDirEnum = "ltr"
-	ScriptDirEnumRtl  ScriptDirEnum = "rtl"
 )
 
 type ScriptDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type ScriptEnterkeyhintEnum string
 
 const (
-	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
-	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 	ScriptEnterkeyhintEnumNext     ScriptEnterkeyhintEnum = "next"
 	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
 	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
 	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
+	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
+	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 )
 
 type ScriptHiddenEnum string
@@ -111,21 +111,21 @@ const (
 type ScriptInputmodeEnum string
 
 const (
+	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
+	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
 	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
 	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
 	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
-	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
-	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 )
 
 type ScriptSpellcheckEnum string
 
 const (
-	ScriptSpellcheckEnumFalse ScriptSpellcheckEnum = "false"
 	ScriptSpellcheckEnumTrue  ScriptSpellcheckEnum = "true"
+	ScriptSpellcheckEnumFalse ScriptSpellcheckEnum = "false"
 )
 
 type ScriptTranslateEnum string
@@ -172,6 +172,18 @@ func (e *ScriptElement) Contenteditable(a ScriptContenteditableEnum) *ScriptElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *ScriptElement) DataUnsafe(name string, s string) *ScriptElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ScriptElement) Data(name string, s string) *ScriptElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *ScriptElement) Dir(a ScriptDirEnum) *ScriptElement {
@@ -337,7 +349,7 @@ func (e *ScriptElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

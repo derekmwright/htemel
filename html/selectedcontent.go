@@ -91,13 +91,13 @@ const (
 type SelectedcontentEnterkeyhintEnum string
 
 const (
-	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
-	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
-	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
 	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
 	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
+	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
+	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
+	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
 )
 
 type SelectedcontentHiddenEnum string
@@ -111,7 +111,6 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
-	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
 	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
 	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
 	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
@@ -119,6 +118,7 @@ const (
 	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
 	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
+	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
 )
 
 type SelectedcontentSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *SelectedcontentElement) Contenteditable(a SelectedcontentContenteditabl
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SelectedcontentElement) DataUnsafe(name string, s string) *SelectedcontentElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SelectedcontentElement) Data(name string, s string) *SelectedcontentElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SelectedcontentElement) Dir(a SelectedcontentDirEnum) *SelectedcontentElement {
@@ -337,7 +349,7 @@ func (e *SelectedcontentElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,27 +50,27 @@ func DlTernary(condition bool, true htemel.Node, false htemel.Node) *DlElement {
 type DlAutocapitalizeEnum string
 
 const (
-	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
-	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
-	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
 	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
 	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
 	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
+	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
+	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
+	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
 )
 
 type DlAutocorrectEnum string
 
 const (
-	DlAutocorrectEnumOff DlAutocorrectEnum = "off"
 	DlAutocorrectEnumOn  DlAutocorrectEnum = "on"
+	DlAutocorrectEnumOff DlAutocorrectEnum = "off"
 )
 
 type DlContenteditableEnum string
 
 const (
-	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
 	DlContenteditableEnumTrue          DlContenteditableEnum = "true"
+	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 )
 
 type DlDirEnum string
@@ -91,13 +91,13 @@ const (
 type DlEnterkeyhintEnum string
 
 const (
-	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
-	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
-	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
 	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
 	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
 	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
 	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
+	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
+	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
+	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
 )
 
 type DlHiddenEnum string
@@ -124,15 +124,15 @@ const (
 type DlSpellcheckEnum string
 
 const (
-	DlSpellcheckEnumTrue  DlSpellcheckEnum = "true"
 	DlSpellcheckEnumFalse DlSpellcheckEnum = "false"
+	DlSpellcheckEnumTrue  DlSpellcheckEnum = "true"
 )
 
 type DlTranslateEnum string
 
 const (
-	DlTranslateEnumYes DlTranslateEnum = "yes"
 	DlTranslateEnumNo  DlTranslateEnum = "no"
+	DlTranslateEnumYes DlTranslateEnum = "yes"
 )
 
 type DlWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *DlElement) Contenteditable(a DlContenteditableEnum) *DlElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *DlElement) DataUnsafe(name string, s string) *DlElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DlElement) Data(name string, s string) *DlElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *DlElement) Dir(a DlDirEnum) *DlElement {
@@ -337,7 +349,7 @@ func (e *DlElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

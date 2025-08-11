@@ -50,54 +50,54 @@ func SlotTernary(condition bool, true htemel.Node, false htemel.Node) *SlotEleme
 type SlotAutocapitalizeEnum string
 
 const (
-	SlotAutocapitalizeEnumCharacters SlotAutocapitalizeEnum = "characters"
-	SlotAutocapitalizeEnumNone       SlotAutocapitalizeEnum = "none"
 	SlotAutocapitalizeEnumOff        SlotAutocapitalizeEnum = "off"
 	SlotAutocapitalizeEnumOn         SlotAutocapitalizeEnum = "on"
 	SlotAutocapitalizeEnumSentences  SlotAutocapitalizeEnum = "sentences"
 	SlotAutocapitalizeEnumWords      SlotAutocapitalizeEnum = "words"
+	SlotAutocapitalizeEnumCharacters SlotAutocapitalizeEnum = "characters"
+	SlotAutocapitalizeEnumNone       SlotAutocapitalizeEnum = "none"
 )
 
 type SlotAutocorrectEnum string
 
 const (
-	SlotAutocorrectEnumOn  SlotAutocorrectEnum = "on"
 	SlotAutocorrectEnumOff SlotAutocorrectEnum = "off"
+	SlotAutocorrectEnumOn  SlotAutocorrectEnum = "on"
 )
 
 type SlotContenteditableEnum string
 
 const (
-	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
 	SlotContenteditableEnumFalse         SlotContenteditableEnum = "false"
 	SlotContenteditableEnumPlaintextOnly SlotContenteditableEnum = "plaintext-only"
+	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
 )
 
 type SlotDirEnum string
 
 const (
+	SlotDirEnumAuto SlotDirEnum = "auto"
 	SlotDirEnumLtr  SlotDirEnum = "ltr"
 	SlotDirEnumRtl  SlotDirEnum = "rtl"
-	SlotDirEnumAuto SlotDirEnum = "auto"
 )
 
 type SlotDraggableEnum string
 
 const (
-	SlotDraggableEnumFalse SlotDraggableEnum = "false"
 	SlotDraggableEnumTrue  SlotDraggableEnum = "true"
+	SlotDraggableEnumFalse SlotDraggableEnum = "false"
 )
 
 type SlotEnterkeyhintEnum string
 
 const (
-	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
-	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 	SlotEnterkeyhintEnumDone     SlotEnterkeyhintEnum = "done"
 	SlotEnterkeyhintEnumEnter    SlotEnterkeyhintEnum = "enter"
 	SlotEnterkeyhintEnumGo       SlotEnterkeyhintEnum = "go"
 	SlotEnterkeyhintEnumNext     SlotEnterkeyhintEnum = "next"
 	SlotEnterkeyhintEnumPrevious SlotEnterkeyhintEnum = "previous"
+	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
+	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 )
 
 type SlotHiddenEnum string
@@ -111,7 +111,6 @@ const (
 type SlotInputmodeEnum string
 
 const (
-	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
 	SlotInputmodeEnumEmail   SlotInputmodeEnum = "email"
 	SlotInputmodeEnumNone    SlotInputmodeEnum = "none"
@@ -119,6 +118,7 @@ const (
 	SlotInputmodeEnumSearch  SlotInputmodeEnum = "search"
 	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
 	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
+	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 )
 
 type SlotSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *SlotElement) Contenteditable(a SlotContenteditableEnum) *SlotElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SlotElement) DataUnsafe(name string, s string) *SlotElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SlotElement) Data(name string, s string) *SlotElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SlotElement) Dir(a SlotDirEnum) *SlotElement {
@@ -337,7 +349,7 @@ func (e *SlotElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

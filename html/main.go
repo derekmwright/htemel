@@ -50,12 +50,12 @@ func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainEleme
 type MainAutocapitalizeEnum string
 
 const (
-	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
-	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
 	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
 	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
+	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
+	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
 )
 
 type MainAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type MainDirEnum string
 
 const (
+	MainDirEnumAuto MainDirEnum = "auto"
 	MainDirEnumLtr  MainDirEnum = "ltr"
 	MainDirEnumRtl  MainDirEnum = "rtl"
-	MainDirEnumAuto MainDirEnum = "auto"
 )
 
 type MainDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type MainEnterkeyhintEnum string
 
 const (
+	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
+	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
 	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
 	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
 	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
 	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
 	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
-	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
-	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
 )
 
 type MainHiddenEnum string
@@ -111,21 +111,21 @@ const (
 type MainInputmodeEnum string
 
 const (
-	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
-	MainInputmodeEnumNone    MainInputmodeEnum = "none"
 	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
 	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
 	MainInputmodeEnumText    MainInputmodeEnum = "text"
 	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
+	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
+	MainInputmodeEnumNone    MainInputmodeEnum = "none"
 )
 
 type MainSpellcheckEnum string
 
 const (
-	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
 	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
+	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
 )
 
 type MainTranslateEnum string
@@ -172,6 +172,18 @@ func (e *MainElement) Contenteditable(a MainContenteditableEnum) *MainElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *MainElement) DataUnsafe(name string, s string) *MainElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *MainElement) Data(name string, s string) *MainElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *MainElement) Dir(a MainDirEnum) *MainElement {
@@ -337,7 +349,7 @@ func (e *MainElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

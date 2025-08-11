@@ -76,9 +76,9 @@ const (
 type LiDirEnum string
 
 const (
-	LiDirEnumRtl  LiDirEnum = "rtl"
 	LiDirEnumAuto LiDirEnum = "auto"
 	LiDirEnumLtr  LiDirEnum = "ltr"
+	LiDirEnumRtl  LiDirEnum = "rtl"
 )
 
 type LiDraggableEnum string
@@ -91,34 +91,34 @@ const (
 type LiEnterkeyhintEnum string
 
 const (
+	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
+	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
+	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
 	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
 	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
 	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
-	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
-	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
-	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 )
 
 type LiHiddenEnum string
 
 const (
-	LiHiddenEnumHidden     LiHiddenEnum = "hidden"
 	LiHiddenEnumUntilFound LiHiddenEnum = "until-found"
+	LiHiddenEnumHidden     LiHiddenEnum = "hidden"
 	LiHiddenEnumEmpty      LiHiddenEnum = ""
 )
 
 type LiInputmodeEnum string
 
 const (
+	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
+	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 	LiInputmodeEnumNone    LiInputmodeEnum = "none"
 	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
 	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
 	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
 	LiInputmodeEnumText    LiInputmodeEnum = "text"
-	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
-	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 )
 
 type LiSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *LiElement) Contenteditable(a LiContenteditableEnum) *LiElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *LiElement) DataUnsafe(name string, s string) *LiElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *LiElement) Data(name string, s string) *LiElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *LiElement) Dir(a LiDirEnum) *LiElement {
@@ -337,7 +349,7 @@ func (e *LiElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

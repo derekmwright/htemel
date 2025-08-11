@@ -50,27 +50,27 @@ func EmbedTernary(condition bool, true htemel.Node, false htemel.Node) *EmbedEle
 type EmbedAutocapitalizeEnum string
 
 const (
+	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
+	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
 	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
-	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
-	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
 )
 
 type EmbedAutocorrectEnum string
 
 const (
-	EmbedAutocorrectEnumOff EmbedAutocorrectEnum = "off"
 	EmbedAutocorrectEnumOn  EmbedAutocorrectEnum = "on"
+	EmbedAutocorrectEnumOff EmbedAutocorrectEnum = "off"
 )
 
 type EmbedContenteditableEnum string
 
 const (
-	EmbedContenteditableEnumFalse         EmbedContenteditableEnum = "false"
 	EmbedContenteditableEnumPlaintextOnly EmbedContenteditableEnum = "plaintext-only"
 	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
+	EmbedContenteditableEnumFalse         EmbedContenteditableEnum = "false"
 )
 
 type EmbedDirEnum string
@@ -91,13 +91,13 @@ const (
 type EmbedEnterkeyhintEnum string
 
 const (
-	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
-	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
 	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
 	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
 	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
 	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
+	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
+	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
 )
 
 type EmbedHiddenEnum string
@@ -111,7 +111,6 @@ const (
 type EmbedInputmodeEnum string
 
 const (
-	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
 	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
@@ -119,6 +118,7 @@ const (
 	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
 	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
 	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
+	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 )
 
 type EmbedSpellcheckEnum string
@@ -131,15 +131,15 @@ const (
 type EmbedTranslateEnum string
 
 const (
-	EmbedTranslateEnumNo  EmbedTranslateEnum = "no"
 	EmbedTranslateEnumYes EmbedTranslateEnum = "yes"
+	EmbedTranslateEnumNo  EmbedTranslateEnum = "no"
 )
 
 type EmbedWritingsuggestionsEnum string
 
 const (
-	EmbedWritingsuggestionsEnumFalse EmbedWritingsuggestionsEnum = "false"
 	EmbedWritingsuggestionsEnumTrue  EmbedWritingsuggestionsEnum = "true"
+	EmbedWritingsuggestionsEnumFalse EmbedWritingsuggestionsEnum = "false"
 )
 
 type embedAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *EmbedElement) Contenteditable(a EmbedContenteditableEnum) *EmbedElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *EmbedElement) DataUnsafe(name string, s string) *EmbedElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *EmbedElement) Data(name string, s string) *EmbedElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *EmbedElement) Dir(a EmbedDirEnum) *EmbedElement {
@@ -337,7 +349,7 @@ func (e *EmbedElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

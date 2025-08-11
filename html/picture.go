@@ -50,12 +50,12 @@ func PictureTernary(condition bool, true htemel.Node, false htemel.Node) *Pictur
 type PictureAutocapitalizeEnum string
 
 const (
-	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
-	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
-	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
 	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 	PictureAutocapitalizeEnumSentences  PictureAutocapitalizeEnum = "sentences"
 	PictureAutocapitalizeEnumWords      PictureAutocapitalizeEnum = "words"
+	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
+	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
+	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
 )
 
 type PictureAutocorrectEnum string
@@ -91,13 +91,13 @@ const (
 type PictureEnterkeyhintEnum string
 
 const (
+	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
 	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
 	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
 	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
 	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
 	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
-	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
 )
 
 type PictureHiddenEnum string
@@ -111,7 +111,6 @@ const (
 type PictureInputmodeEnum string
 
 const (
-	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
 	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
 	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
@@ -119,13 +118,14 @@ const (
 	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
 	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
+	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
 )
 
 type PictureSpellcheckEnum string
 
 const (
-	PictureSpellcheckEnumFalse PictureSpellcheckEnum = "false"
 	PictureSpellcheckEnumTrue  PictureSpellcheckEnum = "true"
+	PictureSpellcheckEnumFalse PictureSpellcheckEnum = "false"
 )
 
 type PictureTranslateEnum string
@@ -172,6 +172,18 @@ func (e *PictureElement) Contenteditable(a PictureContenteditableEnum) *PictureE
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *PictureElement) DataUnsafe(name string, s string) *PictureElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *PictureElement) Data(name string, s string) *PictureElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *PictureElement) Dir(a PictureDirEnum) *PictureElement {
@@ -337,7 +349,7 @@ func (e *PictureElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

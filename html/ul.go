@@ -91,13 +91,13 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
+	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
+	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
 	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
 	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
 	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
-	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
-	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 )
 
 type UlHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type UlInputmodeEnum string
 
 const (
+	UlInputmodeEnumNone    UlInputmodeEnum = "none"
+	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
 	UlInputmodeEnumSearch  UlInputmodeEnum = "search"
 	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
 	UlInputmodeEnumText    UlInputmodeEnum = "text"
 	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
 	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
 	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
-	UlInputmodeEnumNone    UlInputmodeEnum = "none"
-	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
 )
 
 type UlSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *UlElement) Contenteditable(a UlContenteditableEnum) *UlElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *UlElement) DataUnsafe(name string, s string) *UlElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *UlElement) Data(name string, s string) *UlElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *UlElement) Dir(a UlDirEnum) *UlElement {
@@ -337,7 +349,7 @@ func (e *UlElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

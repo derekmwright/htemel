@@ -50,12 +50,12 @@ func CiteTernary(condition bool, true htemel.Node, false htemel.Node) *CiteEleme
 type CiteAutocapitalizeEnum string
 
 const (
+	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
 	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
 	CiteAutocapitalizeEnumNone       CiteAutocapitalizeEnum = "none"
 	CiteAutocapitalizeEnumOff        CiteAutocapitalizeEnum = "off"
 	CiteAutocapitalizeEnumOn         CiteAutocapitalizeEnum = "on"
 	CiteAutocapitalizeEnumSentences  CiteAutocapitalizeEnum = "sentences"
-	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
 )
 
 type CiteAutocorrectEnum string
@@ -68,9 +68,9 @@ const (
 type CiteContenteditableEnum string
 
 const (
+	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
 	CiteContenteditableEnumFalse         CiteContenteditableEnum = "false"
 	CiteContenteditableEnumPlaintextOnly CiteContenteditableEnum = "plaintext-only"
-	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
 )
 
 type CiteDirEnum string
@@ -91,13 +91,13 @@ const (
 type CiteEnterkeyhintEnum string
 
 const (
-	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
-	CiteEnterkeyhintEnumDone     CiteEnterkeyhintEnum = "done"
 	CiteEnterkeyhintEnumEnter    CiteEnterkeyhintEnum = "enter"
 	CiteEnterkeyhintEnumGo       CiteEnterkeyhintEnum = "go"
 	CiteEnterkeyhintEnumNext     CiteEnterkeyhintEnum = "next"
 	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
 	CiteEnterkeyhintEnumSearch   CiteEnterkeyhintEnum = "search"
+	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
+	CiteEnterkeyhintEnumDone     CiteEnterkeyhintEnum = "done"
 )
 
 type CiteHiddenEnum string
@@ -111,7 +111,6 @@ const (
 type CiteInputmodeEnum string
 
 const (
-	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
 	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
 	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
@@ -119,6 +118,7 @@ const (
 	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
 	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
 	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
+	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 )
 
 type CiteSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type CiteTranslateEnum string
 
 const (
-	CiteTranslateEnumNo  CiteTranslateEnum = "no"
 	CiteTranslateEnumYes CiteTranslateEnum = "yes"
+	CiteTranslateEnumNo  CiteTranslateEnum = "no"
 )
 
 type CiteWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *CiteElement) Contenteditable(a CiteContenteditableEnum) *CiteElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *CiteElement) DataUnsafe(name string, s string) *CiteElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *CiteElement) Data(name string, s string) *CiteElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *CiteElement) Dir(a CiteDirEnum) *CiteElement {
@@ -337,7 +349,7 @@ func (e *CiteElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

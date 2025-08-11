@@ -50,12 +50,12 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 type NavAutocapitalizeEnum string
 
 const (
-	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
-	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
 	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
 	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
 	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
+	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
+	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 )
 
 type NavAutocorrectEnum string
@@ -68,9 +68,9 @@ const (
 type NavContenteditableEnum string
 
 const (
+	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
-	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 )
 
 type NavDirEnum string
@@ -91,34 +91,34 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
-	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
-	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
-	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
 	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
 	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
+	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
+	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
+	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 )
 
 type NavHiddenEnum string
 
 const (
-	NavHiddenEnumUntilFound NavHiddenEnum = "until-found"
 	NavHiddenEnumHidden     NavHiddenEnum = "hidden"
+	NavHiddenEnumUntilFound NavHiddenEnum = "until-found"
 	NavHiddenEnumEmpty      NavHiddenEnum = ""
 )
 
 type NavInputmodeEnum string
 
 const (
+	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
+	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
 	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
 	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 	NavInputmodeEnumText    NavInputmodeEnum = "text"
 	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
-	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
-	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 )
 
 type NavSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type NavTranslateEnum string
 
 const (
-	NavTranslateEnumNo  NavTranslateEnum = "no"
 	NavTranslateEnumYes NavTranslateEnum = "yes"
+	NavTranslateEnumNo  NavTranslateEnum = "no"
 )
 
 type NavWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *NavElement) Contenteditable(a NavContenteditableEnum) *NavElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *NavElement) DataUnsafe(name string, s string) *NavElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *NavElement) Data(name string, s string) *NavElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *NavElement) Dir(a NavDirEnum) *NavElement {
@@ -337,7 +349,7 @@ func (e *NavElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

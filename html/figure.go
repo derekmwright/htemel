@@ -50,19 +50,19 @@ func FigureTernary(condition bool, true htemel.Node, false htemel.Node) *FigureE
 type FigureAutocapitalizeEnum string
 
 const (
-	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
-	FigureAutocapitalizeEnumNone       FigureAutocapitalizeEnum = "none"
 	FigureAutocapitalizeEnumOff        FigureAutocapitalizeEnum = "off"
 	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
 	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
 	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
+	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
+	FigureAutocapitalizeEnumNone       FigureAutocapitalizeEnum = "none"
 )
 
 type FigureAutocorrectEnum string
 
 const (
-	FigureAutocorrectEnumOff FigureAutocorrectEnum = "off"
 	FigureAutocorrectEnumOn  FigureAutocorrectEnum = "on"
+	FigureAutocorrectEnumOff FigureAutocorrectEnum = "off"
 )
 
 type FigureContenteditableEnum string
@@ -91,13 +91,13 @@ const (
 type FigureEnterkeyhintEnum string
 
 const (
+	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
+	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
+	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
 	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
 	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
 	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
 	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
-	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
-	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
-	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
 )
 
 type FigureHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type FigureInputmodeEnum string
 
 const (
-	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
-	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
 	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
 	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
 	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
 	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
 	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
 	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
+	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
+	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
 )
 
 type FigureSpellcheckEnum string
@@ -138,8 +138,8 @@ const (
 type FigureWritingsuggestionsEnum string
 
 const (
-	FigureWritingsuggestionsEnumFalse FigureWritingsuggestionsEnum = "false"
 	FigureWritingsuggestionsEnumTrue  FigureWritingsuggestionsEnum = "true"
+	FigureWritingsuggestionsEnumFalse FigureWritingsuggestionsEnum = "false"
 )
 
 type figureAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *FigureElement) Contenteditable(a FigureContenteditableEnum) *FigureElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *FigureElement) DataUnsafe(name string, s string) *FigureElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *FigureElement) Data(name string, s string) *FigureElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *FigureElement) Dir(a FigureDirEnum) *FigureElement {
@@ -337,7 +349,7 @@ func (e *FigureElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

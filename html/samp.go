@@ -50,12 +50,12 @@ func SampTernary(condition bool, true htemel.Node, false htemel.Node) *SampEleme
 type SampAutocapitalizeEnum string
 
 const (
-	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
 	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
 	SampAutocapitalizeEnumOff        SampAutocapitalizeEnum = "off"
 	SampAutocapitalizeEnumOn         SampAutocapitalizeEnum = "on"
 	SampAutocapitalizeEnumSentences  SampAutocapitalizeEnum = "sentences"
 	SampAutocapitalizeEnumWords      SampAutocapitalizeEnum = "words"
+	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
 )
 
 type SampAutocorrectEnum string
@@ -91,48 +91,48 @@ const (
 type SampEnterkeyhintEnum string
 
 const (
+	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
 	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
 	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
 	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
 	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
 	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
-	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
 )
 
 type SampHiddenEnum string
 
 const (
-	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
 	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
+	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
 	SampHiddenEnumEmpty      SampHiddenEnum = ""
 )
 
 type SampInputmodeEnum string
 
 const (
-	SampInputmodeEnumNone    SampInputmodeEnum = "none"
-	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
-	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
-	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
 	SampInputmodeEnumText    SampInputmodeEnum = "text"
 	SampInputmodeEnumUrl     SampInputmodeEnum = "url"
 	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
 	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
+	SampInputmodeEnumNone    SampInputmodeEnum = "none"
+	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
+	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
+	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
 )
 
 type SampSpellcheckEnum string
 
 const (
-	SampSpellcheckEnumTrue  SampSpellcheckEnum = "true"
 	SampSpellcheckEnumFalse SampSpellcheckEnum = "false"
+	SampSpellcheckEnumTrue  SampSpellcheckEnum = "true"
 )
 
 type SampTranslateEnum string
 
 const (
-	SampTranslateEnumYes SampTranslateEnum = "yes"
 	SampTranslateEnumNo  SampTranslateEnum = "no"
+	SampTranslateEnumYes SampTranslateEnum = "yes"
 )
 
 type SampWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *SampElement) Contenteditable(a SampContenteditableEnum) *SampElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SampElement) DataUnsafe(name string, s string) *SampElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SampElement) Data(name string, s string) *SampElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SampElement) Dir(a SampDirEnum) *SampElement {
@@ -337,7 +349,7 @@ func (e *SampElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

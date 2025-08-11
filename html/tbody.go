@@ -68,9 +68,9 @@ const (
 type TbodyContenteditableEnum string
 
 const (
-	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
 	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
+	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
 )
 
 type TbodyDirEnum string
@@ -91,13 +91,13 @@ const (
 type TbodyEnterkeyhintEnum string
 
 const (
-	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
-	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
-	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 	TbodyEnterkeyhintEnumDone     TbodyEnterkeyhintEnum = "done"
 	TbodyEnterkeyhintEnumEnter    TbodyEnterkeyhintEnum = "enter"
 	TbodyEnterkeyhintEnumGo       TbodyEnterkeyhintEnum = "go"
 	TbodyEnterkeyhintEnumNext     TbodyEnterkeyhintEnum = "next"
+	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
+	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
+	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 )
 
 type TbodyHiddenEnum string
@@ -138,8 +138,8 @@ const (
 type TbodyWritingsuggestionsEnum string
 
 const (
-	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
 	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
+	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
 )
 
 type tbodyAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *TbodyElement) Contenteditable(a TbodyContenteditableEnum) *TbodyElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *TbodyElement) DataUnsafe(name string, s string) *TbodyElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TbodyElement) Data(name string, s string) *TbodyElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *TbodyElement) Dir(a TbodyDirEnum) *TbodyElement {
@@ -337,7 +349,7 @@ func (e *TbodyElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

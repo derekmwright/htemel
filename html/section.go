@@ -76,9 +76,9 @@ const (
 type SectionDirEnum string
 
 const (
+	SectionDirEnumAuto SectionDirEnum = "auto"
 	SectionDirEnumLtr  SectionDirEnum = "ltr"
 	SectionDirEnumRtl  SectionDirEnum = "rtl"
-	SectionDirEnumAuto SectionDirEnum = "auto"
 )
 
 type SectionDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type SectionEnterkeyhintEnum string
 
 const (
-	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
-	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
 	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
 	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
 	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
 	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
 	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
+	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
+	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
 )
 
 type SectionHiddenEnum string
@@ -111,35 +111,35 @@ const (
 type SectionInputmodeEnum string
 
 const (
+	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
+	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
+	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
 	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
 	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
 	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
 	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
 	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
-	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
-	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
-	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
 )
 
 type SectionSpellcheckEnum string
 
 const (
-	SectionSpellcheckEnumTrue  SectionSpellcheckEnum = "true"
 	SectionSpellcheckEnumFalse SectionSpellcheckEnum = "false"
+	SectionSpellcheckEnumTrue  SectionSpellcheckEnum = "true"
 )
 
 type SectionTranslateEnum string
 
 const (
-	SectionTranslateEnumNo  SectionTranslateEnum = "no"
 	SectionTranslateEnumYes SectionTranslateEnum = "yes"
+	SectionTranslateEnumNo  SectionTranslateEnum = "no"
 )
 
 type SectionWritingsuggestionsEnum string
 
 const (
-	SectionWritingsuggestionsEnumFalse SectionWritingsuggestionsEnum = "false"
 	SectionWritingsuggestionsEnumTrue  SectionWritingsuggestionsEnum = "true"
+	SectionWritingsuggestionsEnumFalse SectionWritingsuggestionsEnum = "false"
 )
 
 type sectionAttrs map[string]any
@@ -172,6 +172,18 @@ func (e *SectionElement) Contenteditable(a SectionContenteditableEnum) *SectionE
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SectionElement) DataUnsafe(name string, s string) *SectionElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SectionElement) Data(name string, s string) *SectionElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SectionElement) Dir(a SectionDirEnum) *SectionElement {
@@ -337,7 +349,7 @@ func (e *SectionElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

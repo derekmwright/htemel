@@ -50,12 +50,12 @@ func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderE
 type HeaderAutocapitalizeEnum string
 
 const (
-	HeaderAutocapitalizeEnumOn         HeaderAutocapitalizeEnum = "on"
-	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
 	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
 	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
 	HeaderAutocapitalizeEnumNone       HeaderAutocapitalizeEnum = "none"
 	HeaderAutocapitalizeEnumOff        HeaderAutocapitalizeEnum = "off"
+	HeaderAutocapitalizeEnumOn         HeaderAutocapitalizeEnum = "on"
+	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
 )
 
 type HeaderAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type HeaderDirEnum string
 
 const (
-	HeaderDirEnumAuto HeaderDirEnum = "auto"
 	HeaderDirEnumLtr  HeaderDirEnum = "ltr"
 	HeaderDirEnumRtl  HeaderDirEnum = "rtl"
+	HeaderDirEnumAuto HeaderDirEnum = "auto"
 )
 
 type HeaderDraggableEnum string
@@ -91,41 +91,41 @@ const (
 type HeaderEnterkeyhintEnum string
 
 const (
-	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
-	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
-	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
 	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
 	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
 	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
+	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
+	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
+	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 )
 
 type HeaderHiddenEnum string
 
 const (
-	HeaderHiddenEnumUntilFound HeaderHiddenEnum = "until-found"
 	HeaderHiddenEnumHidden     HeaderHiddenEnum = "hidden"
+	HeaderHiddenEnumUntilFound HeaderHiddenEnum = "until-found"
 	HeaderHiddenEnumEmpty      HeaderHiddenEnum = ""
 )
 
 type HeaderInputmodeEnum string
 
 const (
-	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
-	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
-	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
-	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 	HeaderInputmodeEnumUrl     HeaderInputmodeEnum = "url"
 	HeaderInputmodeEnumDecimal HeaderInputmodeEnum = "decimal"
 	HeaderInputmodeEnumEmail   HeaderInputmodeEnum = "email"
 	HeaderInputmodeEnumNone    HeaderInputmodeEnum = "none"
+	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
+	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
+	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
+	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 )
 
 type HeaderSpellcheckEnum string
 
 const (
-	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
 	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
+	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
 )
 
 type HeaderTranslateEnum string
@@ -172,6 +172,18 @@ func (e *HeaderElement) Contenteditable(a HeaderContenteditableEnum) *HeaderElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *HeaderElement) DataUnsafe(name string, s string) *HeaderElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *HeaderElement) Data(name string, s string) *HeaderElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *HeaderElement) Dir(a HeaderDirEnum) *HeaderElement {
@@ -337,7 +349,7 @@ func (e *HeaderElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

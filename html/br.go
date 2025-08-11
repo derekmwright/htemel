@@ -50,12 +50,12 @@ func BrTernary(condition bool, true htemel.Node, false htemel.Node) *BrElement {
 type BrAutocapitalizeEnum string
 
 const (
+	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
+	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 	BrAutocapitalizeEnumOff        BrAutocapitalizeEnum = "off"
 	BrAutocapitalizeEnumOn         BrAutocapitalizeEnum = "on"
 	BrAutocapitalizeEnumSentences  BrAutocapitalizeEnum = "sentences"
 	BrAutocapitalizeEnumWords      BrAutocapitalizeEnum = "words"
-	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
-	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 )
 
 type BrAutocorrectEnum string
@@ -76,16 +76,16 @@ const (
 type BrDirEnum string
 
 const (
-	BrDirEnumRtl  BrDirEnum = "rtl"
 	BrDirEnumAuto BrDirEnum = "auto"
 	BrDirEnumLtr  BrDirEnum = "ltr"
+	BrDirEnumRtl  BrDirEnum = "rtl"
 )
 
 type BrDraggableEnum string
 
 const (
-	BrDraggableEnumTrue  BrDraggableEnum = "true"
 	BrDraggableEnumFalse BrDraggableEnum = "false"
+	BrDraggableEnumTrue  BrDraggableEnum = "true"
 )
 
 type BrEnterkeyhintEnum string
@@ -111,14 +111,14 @@ const (
 type BrInputmodeEnum string
 
 const (
-	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
-	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
-	BrInputmodeEnumText    BrInputmodeEnum = "text"
 	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
 	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
 	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
 	BrInputmodeEnumNone    BrInputmodeEnum = "none"
 	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
+	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
+	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
+	BrInputmodeEnumText    BrInputmodeEnum = "text"
 )
 
 type BrSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *BrElement) Contenteditable(a BrContenteditableEnum) *BrElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *BrElement) DataUnsafe(name string, s string) *BrElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BrElement) Data(name string, s string) *BrElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *BrElement) Dir(a BrDirEnum) *BrElement {
@@ -337,7 +349,7 @@ func (e *BrElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

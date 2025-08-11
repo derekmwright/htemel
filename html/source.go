@@ -91,13 +91,13 @@ const (
 type SourceEnterkeyhintEnum string
 
 const (
-	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
-	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
-	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
 	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
 	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
 	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
+	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
+	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
+	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 )
 
 type SourceHiddenEnum string
@@ -172,6 +172,18 @@ func (e *SourceElement) Contenteditable(a SourceContenteditableEnum) *SourceElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *SourceElement) DataUnsafe(name string, s string) *SourceElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SourceElement) Data(name string, s string) *SourceElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *SourceElement) Dir(a SourceDirEnum) *SourceElement {
@@ -337,7 +349,7 @@ func (e *SourceElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

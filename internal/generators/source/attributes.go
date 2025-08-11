@@ -82,6 +82,20 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(s ...string)
 	return e
 }
 `)
+			case *spec.AttributeTypePrefixedCustom:
+				buf.WriteString(`
+func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `Unsafe(name string, s string) *` + titleCase(e.Tag) + `Element {
+	tag := strings.ToLower("` + a.Name + `-" + name)
+	
+	e.attributes[tag] = s
+	
+	return e
+}
+
+func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(name string, s string) *` + titleCase(e.Tag) + `Element {
+	return e.` + titleCase(a.Name) + `Unsafe(name, html.EscapeString(s))
+}
+`)
 			}
 		}
 

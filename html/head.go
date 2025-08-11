@@ -50,12 +50,12 @@ func HeadTernary(condition bool, true htemel.Node, false htemel.Node) *HeadEleme
 type HeadAutocapitalizeEnum string
 
 const (
-	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 	HeadAutocapitalizeEnumCharacters HeadAutocapitalizeEnum = "characters"
 	HeadAutocapitalizeEnumNone       HeadAutocapitalizeEnum = "none"
 	HeadAutocapitalizeEnumOff        HeadAutocapitalizeEnum = "off"
 	HeadAutocapitalizeEnumOn         HeadAutocapitalizeEnum = "on"
 	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
+	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 )
 
 type HeadAutocorrectEnum string
@@ -91,34 +91,34 @@ const (
 type HeadEnterkeyhintEnum string
 
 const (
-	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
 	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
 	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
 	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
 	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
+	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 )
 
 type HeadHiddenEnum string
 
 const (
-	HeadHiddenEnumHidden     HeadHiddenEnum = "hidden"
 	HeadHiddenEnumUntilFound HeadHiddenEnum = "until-found"
+	HeadHiddenEnumHidden     HeadHiddenEnum = "hidden"
 	HeadHiddenEnumEmpty      HeadHiddenEnum = ""
 )
 
 type HeadInputmodeEnum string
 
 const (
-	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
-	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
 	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
 	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
 	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
 	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
 	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
+	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
+	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 )
 
 type HeadSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type HeadTranslateEnum string
 
 const (
-	HeadTranslateEnumYes HeadTranslateEnum = "yes"
 	HeadTranslateEnumNo  HeadTranslateEnum = "no"
+	HeadTranslateEnumYes HeadTranslateEnum = "yes"
 )
 
 type HeadWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *HeadElement) Contenteditable(a HeadContenteditableEnum) *HeadElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *HeadElement) DataUnsafe(name string, s string) *HeadElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *HeadElement) Data(name string, s string) *HeadElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *HeadElement) Dir(a HeadDirEnum) *HeadElement {
@@ -337,7 +349,7 @@ func (e *HeadElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,12 +50,12 @@ func CanvasTernary(condition bool, true htemel.Node, false htemel.Node) *CanvasE
 type CanvasAutocapitalizeEnum string
 
 const (
-	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
-	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
 	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
 	CanvasAutocapitalizeEnumNone       CanvasAutocapitalizeEnum = "none"
 	CanvasAutocapitalizeEnumOff        CanvasAutocapitalizeEnum = "off"
 	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
+	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
+	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
 )
 
 type CanvasAutocorrectEnum string
@@ -68,17 +68,17 @@ const (
 type CanvasContenteditableEnum string
 
 const (
+	CanvasContenteditableEnumPlaintextOnly CanvasContenteditableEnum = "plaintext-only"
 	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
 	CanvasContenteditableEnumFalse         CanvasContenteditableEnum = "false"
-	CanvasContenteditableEnumPlaintextOnly CanvasContenteditableEnum = "plaintext-only"
 )
 
 type CanvasDirEnum string
 
 const (
-	CanvasDirEnumAuto CanvasDirEnum = "auto"
 	CanvasDirEnumLtr  CanvasDirEnum = "ltr"
 	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
+	CanvasDirEnumAuto CanvasDirEnum = "auto"
 )
 
 type CanvasDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type CanvasEnterkeyhintEnum string
 
 const (
-	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
 	CanvasEnterkeyhintEnumGo       CanvasEnterkeyhintEnum = "go"
 	CanvasEnterkeyhintEnumNext     CanvasEnterkeyhintEnum = "next"
 	CanvasEnterkeyhintEnumPrevious CanvasEnterkeyhintEnum = "previous"
 	CanvasEnterkeyhintEnumSearch   CanvasEnterkeyhintEnum = "search"
 	CanvasEnterkeyhintEnumSend     CanvasEnterkeyhintEnum = "send"
 	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
+	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
 )
 
 type CanvasHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type CanvasInputmodeEnum string
 
 const (
-	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
-	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
-	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
 	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
 	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
 	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
 	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
 	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
+	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
+	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
+	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
 )
 
 type CanvasSpellcheckEnum string
@@ -131,8 +131,8 @@ const (
 type CanvasTranslateEnum string
 
 const (
-	CanvasTranslateEnumNo  CanvasTranslateEnum = "no"
 	CanvasTranslateEnumYes CanvasTranslateEnum = "yes"
+	CanvasTranslateEnumNo  CanvasTranslateEnum = "no"
 )
 
 type CanvasWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *CanvasElement) Contenteditable(a CanvasContenteditableEnum) *CanvasElem
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *CanvasElement) DataUnsafe(name string, s string) *CanvasElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *CanvasElement) Data(name string, s string) *CanvasElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *CanvasElement) Dir(a CanvasDirEnum) *CanvasElement {
@@ -337,7 +349,7 @@ func (e *CanvasElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

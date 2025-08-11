@@ -50,12 +50,12 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 type KbdAutocapitalizeEnum string
 
 const (
-	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
-	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
-	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
 	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
+	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
+	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
+	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 )
 
 type KbdAutocorrectEnum string
@@ -68,17 +68,17 @@ const (
 type KbdContenteditableEnum string
 
 const (
+	KbdContenteditableEnumTrue          KbdContenteditableEnum = "true"
 	KbdContenteditableEnumFalse         KbdContenteditableEnum = "false"
 	KbdContenteditableEnumPlaintextOnly KbdContenteditableEnum = "plaintext-only"
-	KbdContenteditableEnumTrue          KbdContenteditableEnum = "true"
 )
 
 type KbdDirEnum string
 
 const (
-	KbdDirEnumAuto KbdDirEnum = "auto"
 	KbdDirEnumLtr  KbdDirEnum = "ltr"
 	KbdDirEnumRtl  KbdDirEnum = "rtl"
+	KbdDirEnumAuto KbdDirEnum = "auto"
 )
 
 type KbdDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type KbdEnterkeyhintEnum string
 
 const (
+	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
+	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
+	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
 	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
 	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
 	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
 	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
-	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
-	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
-	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
 )
 
 type KbdHiddenEnum string
@@ -131,8 +131,8 @@ const (
 type KbdTranslateEnum string
 
 const (
-	KbdTranslateEnumYes KbdTranslateEnum = "yes"
 	KbdTranslateEnumNo  KbdTranslateEnum = "no"
+	KbdTranslateEnumYes KbdTranslateEnum = "yes"
 )
 
 type KbdWritingsuggestionsEnum string
@@ -172,6 +172,18 @@ func (e *KbdElement) Contenteditable(a KbdContenteditableEnum) *KbdElement {
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *KbdElement) DataUnsafe(name string, s string) *KbdElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *KbdElement) Data(name string, s string) *KbdElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *KbdElement) Dir(a KbdDirEnum) *KbdElement {
@@ -337,7 +349,7 @@ func (e *KbdElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

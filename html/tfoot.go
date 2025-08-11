@@ -50,12 +50,12 @@ func TfootTernary(condition bool, true htemel.Node, false htemel.Node) *TfootEle
 type TfootAutocapitalizeEnum string
 
 const (
-	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
-	TfootAutocapitalizeEnumNone       TfootAutocapitalizeEnum = "none"
-	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
 	TfootAutocapitalizeEnumOn         TfootAutocapitalizeEnum = "on"
 	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
 	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
+	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
+	TfootAutocapitalizeEnumNone       TfootAutocapitalizeEnum = "none"
+	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
 )
 
 type TfootAutocorrectEnum string
@@ -76,41 +76,42 @@ const (
 type TfootDirEnum string
 
 const (
+	TfootDirEnumRtl  TfootDirEnum = "rtl"
 	TfootDirEnumAuto TfootDirEnum = "auto"
 	TfootDirEnumLtr  TfootDirEnum = "ltr"
-	TfootDirEnumRtl  TfootDirEnum = "rtl"
 )
 
 type TfootDraggableEnum string
 
 const (
-	TfootDraggableEnumTrue  TfootDraggableEnum = "true"
 	TfootDraggableEnumFalse TfootDraggableEnum = "false"
+	TfootDraggableEnumTrue  TfootDraggableEnum = "true"
 )
 
 type TfootEnterkeyhintEnum string
 
 const (
-	TfootEnterkeyhintEnumDone     TfootEnterkeyhintEnum = "done"
-	TfootEnterkeyhintEnumEnter    TfootEnterkeyhintEnum = "enter"
-	TfootEnterkeyhintEnumGo       TfootEnterkeyhintEnum = "go"
 	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
 	TfootEnterkeyhintEnumPrevious TfootEnterkeyhintEnum = "previous"
 	TfootEnterkeyhintEnumSearch   TfootEnterkeyhintEnum = "search"
 	TfootEnterkeyhintEnumSend     TfootEnterkeyhintEnum = "send"
+	TfootEnterkeyhintEnumDone     TfootEnterkeyhintEnum = "done"
+	TfootEnterkeyhintEnumEnter    TfootEnterkeyhintEnum = "enter"
+	TfootEnterkeyhintEnumGo       TfootEnterkeyhintEnum = "go"
 )
 
 type TfootHiddenEnum string
 
 const (
-	TfootHiddenEnumHidden     TfootHiddenEnum = "hidden"
 	TfootHiddenEnumUntilFound TfootHiddenEnum = "until-found"
+	TfootHiddenEnumHidden     TfootHiddenEnum = "hidden"
 	TfootHiddenEnumEmpty      TfootHiddenEnum = ""
 )
 
 type TfootInputmodeEnum string
 
 const (
+	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
 	TfootInputmodeEnumDecimal TfootInputmodeEnum = "decimal"
 	TfootInputmodeEnumEmail   TfootInputmodeEnum = "email"
 	TfootInputmodeEnumNone    TfootInputmodeEnum = "none"
@@ -118,7 +119,6 @@ const (
 	TfootInputmodeEnumSearch  TfootInputmodeEnum = "search"
 	TfootInputmodeEnumTel     TfootInputmodeEnum = "tel"
 	TfootInputmodeEnumText    TfootInputmodeEnum = "text"
-	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
 )
 
 type TfootSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *TfootElement) Contenteditable(a TfootContenteditableEnum) *TfootElement
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *TfootElement) DataUnsafe(name string, s string) *TfootElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TfootElement) Data(name string, s string) *TfootElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *TfootElement) Dir(a TfootDirEnum) *TfootElement {
@@ -337,7 +349,7 @@ func (e *TfootElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

@@ -50,19 +50,19 @@ func TemplateTernary(condition bool, true htemel.Node, false htemel.Node) *Templ
 type TemplateAutocapitalizeEnum string
 
 const (
-	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
-	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
-	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
 	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
+	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
+	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
+	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
 )
 
 type TemplateAutocorrectEnum string
 
 const (
-	TemplateAutocorrectEnumOn  TemplateAutocorrectEnum = "on"
 	TemplateAutocorrectEnumOff TemplateAutocorrectEnum = "off"
+	TemplateAutocorrectEnumOn  TemplateAutocorrectEnum = "on"
 )
 
 type TemplateContenteditableEnum string
@@ -76,9 +76,9 @@ const (
 type TemplateDirEnum string
 
 const (
+	TemplateDirEnumRtl  TemplateDirEnum = "rtl"
 	TemplateDirEnumAuto TemplateDirEnum = "auto"
 	TemplateDirEnumLtr  TemplateDirEnum = "ltr"
-	TemplateDirEnumRtl  TemplateDirEnum = "rtl"
 )
 
 type TemplateDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type TemplateEnterkeyhintEnum string
 
 const (
+	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
 	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
 	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 	TemplateEnterkeyhintEnumEnter    TemplateEnterkeyhintEnum = "enter"
 	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
 	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
 	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
-	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
 )
 
 type TemplateHiddenEnum string
@@ -111,21 +111,21 @@ const (
 type TemplateInputmodeEnum string
 
 const (
+	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
+	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
 	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
 	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
 	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
 	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
 	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
 	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
-	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
-	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
 )
 
 type TemplateSpellcheckEnum string
 
 const (
-	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
 	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
+	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
 )
 
 type TemplateTranslateEnum string
@@ -172,6 +172,18 @@ func (e *TemplateElement) Contenteditable(a TemplateContenteditableEnum) *Templa
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *TemplateElement) DataUnsafe(name string, s string) *TemplateElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TemplateElement) Data(name string, s string) *TemplateElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *TemplateElement) Dir(a TemplateDirEnum) *TemplateElement {
@@ -337,7 +349,7 @@ func (e *TemplateElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

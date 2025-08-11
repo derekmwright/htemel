@@ -50,12 +50,12 @@ func FieldsetTernary(condition bool, true htemel.Node, false htemel.Node) *Field
 type FieldsetAutocapitalizeEnum string
 
 const (
-	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
-	FieldsetAutocapitalizeEnumOn         FieldsetAutocapitalizeEnum = "on"
 	FieldsetAutocapitalizeEnumSentences  FieldsetAutocapitalizeEnum = "sentences"
 	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
 	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
 	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
+	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
+	FieldsetAutocapitalizeEnumOn         FieldsetAutocapitalizeEnum = "on"
 )
 
 type FieldsetAutocorrectEnum string
@@ -76,9 +76,9 @@ const (
 type FieldsetDirEnum string
 
 const (
+	FieldsetDirEnumRtl  FieldsetDirEnum = "rtl"
 	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 	FieldsetDirEnumLtr  FieldsetDirEnum = "ltr"
-	FieldsetDirEnumRtl  FieldsetDirEnum = "rtl"
 )
 
 type FieldsetDraggableEnum string
@@ -91,13 +91,13 @@ const (
 type FieldsetEnterkeyhintEnum string
 
 const (
+	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
+	FieldsetEnterkeyhintEnumSearch   FieldsetEnterkeyhintEnum = "search"
 	FieldsetEnterkeyhintEnumSend     FieldsetEnterkeyhintEnum = "send"
 	FieldsetEnterkeyhintEnumDone     FieldsetEnterkeyhintEnum = "done"
 	FieldsetEnterkeyhintEnumEnter    FieldsetEnterkeyhintEnum = "enter"
 	FieldsetEnterkeyhintEnumGo       FieldsetEnterkeyhintEnum = "go"
 	FieldsetEnterkeyhintEnumNext     FieldsetEnterkeyhintEnum = "next"
-	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
-	FieldsetEnterkeyhintEnumSearch   FieldsetEnterkeyhintEnum = "search"
 )
 
 type FieldsetHiddenEnum string
@@ -111,14 +111,14 @@ const (
 type FieldsetInputmodeEnum string
 
 const (
-	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
-	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
-	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
-	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
 	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
 	FieldsetInputmodeEnumNumeric FieldsetInputmodeEnum = "numeric"
 	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
+	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
+	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
+	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
+	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
 )
 
 type FieldsetSpellcheckEnum string
@@ -172,6 +172,18 @@ func (e *FieldsetElement) Contenteditable(a FieldsetContenteditableEnum) *Fields
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *FieldsetElement) DataUnsafe(name string, s string) *FieldsetElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *FieldsetElement) Data(name string, s string) *FieldsetElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *FieldsetElement) Dir(a FieldsetDirEnum) *FieldsetElement {
@@ -337,7 +349,7 @@ func (e *FieldsetElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

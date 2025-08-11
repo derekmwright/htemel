@@ -481,6 +481,11 @@
       "attribute_type": "AttributeTypeEnum"
     },
     {
+      "name": "data",
+      "description": "A custom data attribute is an attribute in no namespace whose name starts with the string \"data-\", has at least one character after the hyphen, is a valid attribute local name, and contains no ASCII upper alphas.",
+      "attribute_type": "AttributeTypePrefixedCustom"
+    },
+    {
       "name": "dir",
       "allowed": {
         "auto": {},

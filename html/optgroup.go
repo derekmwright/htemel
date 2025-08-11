@@ -68,9 +68,9 @@ const (
 type OptgroupContenteditableEnum string
 
 const (
-	OptgroupContenteditableEnumTrue          OptgroupContenteditableEnum = "true"
 	OptgroupContenteditableEnumFalse         OptgroupContenteditableEnum = "false"
 	OptgroupContenteditableEnumPlaintextOnly OptgroupContenteditableEnum = "plaintext-only"
+	OptgroupContenteditableEnumTrue          OptgroupContenteditableEnum = "true"
 )
 
 type OptgroupDirEnum string
@@ -84,20 +84,20 @@ const (
 type OptgroupDraggableEnum string
 
 const (
-	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
 	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
+	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
 )
 
 type OptgroupEnterkeyhintEnum string
 
 const (
-	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
-	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
 	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
 	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
 	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
 	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
+	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
+	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
 )
 
 type OptgroupHiddenEnum string
@@ -111,21 +111,21 @@ const (
 type OptgroupInputmodeEnum string
 
 const (
-	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
-	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
 	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
 	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
 	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
 	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
 	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
 	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
+	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
+	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
 )
 
 type OptgroupSpellcheckEnum string
 
 const (
-	OptgroupSpellcheckEnumTrue  OptgroupSpellcheckEnum = "true"
 	OptgroupSpellcheckEnumFalse OptgroupSpellcheckEnum = "false"
+	OptgroupSpellcheckEnumTrue  OptgroupSpellcheckEnum = "true"
 )
 
 type OptgroupTranslateEnum string
@@ -172,6 +172,18 @@ func (e *OptgroupElement) Contenteditable(a OptgroupContenteditableEnum) *Optgro
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *OptgroupElement) DataUnsafe(name string, s string) *OptgroupElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *OptgroupElement) Data(name string, s string) *OptgroupElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *OptgroupElement) Dir(a OptgroupDirEnum) *OptgroupElement {
@@ -337,7 +349,7 @@ func (e *OptgroupElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))

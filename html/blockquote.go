@@ -91,13 +91,13 @@ const (
 type BlockquoteEnterkeyhintEnum string
 
 const (
-	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 	BlockquoteEnterkeyhintEnumNext     BlockquoteEnterkeyhintEnum = "next"
 	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
 	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
 	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
 	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
+	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 )
 
 type BlockquoteHiddenEnum string
@@ -172,6 +172,18 @@ func (e *BlockquoteElement) Contenteditable(a BlockquoteContenteditableEnum) *Bl
 	e.attributes["contenteditable"] = a
 
 	return e
+}
+
+func (e *BlockquoteElement) DataUnsafe(name string, s string) *BlockquoteElement {
+	tag := strings.ToLower("data-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BlockquoteElement) Data(name string, s string) *BlockquoteElement {
+	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
 func (e *BlockquoteElement) Dir(a BlockquoteDirEnum) *BlockquoteElement {
@@ -337,7 +349,7 @@ func (e *BlockquoteElement) Render(w io.Writer) error {
 
 		w.Write([]byte("="))
 
-		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
+		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
 
 		if i < c {
 			w.Write([]byte(" "))
