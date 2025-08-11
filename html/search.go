@@ -39,15 +39,23 @@ func SearchIf(condition bool, children ...htemel.Node) *SearchElement {
 	}
 }
 
+func SearchTernary(condition bool, true htemel.Node, false htemel.Node) *SearchElement {
+	if condition {
+		return Search(true)
+	}
+
+	return Search(false)
+}
+
 type SearchAutocapitalizeEnum string
 
 const (
-	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
-	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
-	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
 	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
 	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
 	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
+	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
+	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
+	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
 )
 
 type SearchAutocorrectEnum string
@@ -83,33 +91,34 @@ const (
 type SearchEnterkeyhintEnum string
 
 const (
-	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
-	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
 	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
 	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
 	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
 	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
+	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
+	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
 )
 
 type SearchHiddenEnum string
 
 const (
-	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
 	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
+	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
+	SearchHiddenEnumEmpty      SearchHiddenEnum = ""
 )
 
 type SearchInputmodeEnum string
 
 const (
-	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
-	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
-	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
-	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
 	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
 	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
 	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
 	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
+	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
+	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
+	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
+	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
 )
 
 type SearchSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *SearchElement) Writingsuggestions(a SearchWritingsuggestionsEnum) *Sear
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SearchElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SearchElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

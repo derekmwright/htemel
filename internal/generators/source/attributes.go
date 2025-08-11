@@ -62,6 +62,9 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(b bool) *` +
 					fixed := strings.ReplaceAll(titleCase(allowed), "-", "")
 					addTypes.WriteString("\t" + typeName + fixed + " " + typeName + " = \"" + allowed + "\"\n")
 				}
+				if a.AllowEmpty {
+					addTypes.WriteString("\t" + typeName + "Empty " + typeName + " = \"\"\n")
+				}
 				addTypes.WriteString(")\n")
 
 				buf.WriteString(`

@@ -39,15 +39,23 @@ func ScriptIf(condition bool, children ...htemel.Node) *ScriptElement {
 	}
 }
 
+func ScriptTernary(condition bool, true htemel.Node, false htemel.Node) *ScriptElement {
+	if condition {
+		return Script(true)
+	}
+
+	return Script(false)
+}
+
 type ScriptAutocapitalizeEnum string
 
 const (
+	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
+	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
 	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
 	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
 	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
-	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
-	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
 )
 
 type ScriptAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type ScriptEnterkeyhintEnum string
 
 const (
+	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
+	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 	ScriptEnterkeyhintEnumNext     ScriptEnterkeyhintEnum = "next"
 	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
 	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
 	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
-	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
-	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 )
 
 type ScriptHiddenEnum string
@@ -97,19 +105,20 @@ type ScriptHiddenEnum string
 const (
 	ScriptHiddenEnumHidden     ScriptHiddenEnum = "hidden"
 	ScriptHiddenEnumUntilFound ScriptHiddenEnum = "until-found"
+	ScriptHiddenEnumEmpty      ScriptHiddenEnum = ""
 )
 
 type ScriptInputmodeEnum string
 
 const (
-	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
-	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
 	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
 	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
 	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
+	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
+	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 )
 
 type ScriptSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *ScriptElement) Writingsuggestions(a ScriptWritingsuggestionsEnum) *Scri
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *ScriptElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *ScriptElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

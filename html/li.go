@@ -39,15 +39,23 @@ func LiIf(condition bool, children ...htemel.Node) *LiElement {
 	}
 }
 
+func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
+	if condition {
+		return Li(true)
+	}
+
+	return Li(false)
+}
+
 type LiAutocapitalizeEnum string
 
 const (
-	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
-	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
 	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
+	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
+	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 )
 
 type LiAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type LiContenteditableEnum string
 
 const (
-	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
 	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
+	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
 )
 
 type LiDirEnum string
 
 const (
+	LiDirEnumRtl  LiDirEnum = "rtl"
 	LiDirEnumAuto LiDirEnum = "auto"
 	LiDirEnumLtr  LiDirEnum = "ltr"
-	LiDirEnumRtl  LiDirEnum = "rtl"
 )
 
 type LiDraggableEnum string
@@ -97,19 +105,20 @@ type LiHiddenEnum string
 const (
 	LiHiddenEnumHidden     LiHiddenEnum = "hidden"
 	LiHiddenEnumUntilFound LiHiddenEnum = "until-found"
+	LiHiddenEnumEmpty      LiHiddenEnum = ""
 )
 
 type LiInputmodeEnum string
 
 const (
-	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
-	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 	LiInputmodeEnumNone    LiInputmodeEnum = "none"
 	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
 	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
 	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
 	LiInputmodeEnumText    LiInputmodeEnum = "text"
+	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
+	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 )
 
 type LiSpellcheckEnum string
@@ -129,8 +138,8 @@ const (
 type LiWritingsuggestionsEnum string
 
 const (
-	LiWritingsuggestionsEnumTrue  LiWritingsuggestionsEnum = "true"
 	LiWritingsuggestionsEnumFalse LiWritingsuggestionsEnum = "false"
+	LiWritingsuggestionsEnumTrue  LiWritingsuggestionsEnum = "true"
 )
 
 type liAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *LiElement) Writingsuggestions(a LiWritingsuggestionsEnum) *LiElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *LiElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *LiElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

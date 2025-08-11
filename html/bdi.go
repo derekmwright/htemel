@@ -39,15 +39,23 @@ func BdiIf(condition bool, children ...htemel.Node) *BdiElement {
 	}
 }
 
+func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement {
+	if condition {
+		return Bdi(true)
+	}
+
+	return Bdi(false)
+}
+
 type BdiAutocapitalizeEnum string
 
 const (
-	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
 	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
 	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
 	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 	BdiAutocapitalizeEnumNone       BdiAutocapitalizeEnum = "none"
 	BdiAutocapitalizeEnumOff        BdiAutocapitalizeEnum = "off"
+	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
 )
 
 type BdiAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type BdiContenteditableEnum string
 
 const (
-	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
 	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
 	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
+	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
 )
 
 type BdiDirEnum string
@@ -97,11 +105,13 @@ type BdiHiddenEnum string
 const (
 	BdiHiddenEnumHidden     BdiHiddenEnum = "hidden"
 	BdiHiddenEnumUntilFound BdiHiddenEnum = "until-found"
+	BdiHiddenEnumEmpty      BdiHiddenEnum = ""
 )
 
 type BdiInputmodeEnum string
 
 const (
+	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
 	BdiInputmodeEnumNone    BdiInputmodeEnum = "none"
 	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
 	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
@@ -109,14 +119,13 @@ const (
 	BdiInputmodeEnumText    BdiInputmodeEnum = "text"
 	BdiInputmodeEnumUrl     BdiInputmodeEnum = "url"
 	BdiInputmodeEnumDecimal BdiInputmodeEnum = "decimal"
-	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
 )
 
 type BdiSpellcheckEnum string
 
 const (
-	BdiSpellcheckEnumFalse BdiSpellcheckEnum = "false"
 	BdiSpellcheckEnumTrue  BdiSpellcheckEnum = "true"
+	BdiSpellcheckEnumFalse BdiSpellcheckEnum = "false"
 )
 
 type BdiTranslateEnum string
@@ -129,8 +138,8 @@ const (
 type BdiWritingsuggestionsEnum string
 
 const (
-	BdiWritingsuggestionsEnumFalse BdiWritingsuggestionsEnum = "false"
 	BdiWritingsuggestionsEnumTrue  BdiWritingsuggestionsEnum = "true"
+	BdiWritingsuggestionsEnumFalse BdiWritingsuggestionsEnum = "false"
 )
 
 type bdiAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *BdiElement) Writingsuggestions(a BdiWritingsuggestionsEnum) *BdiElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *BdiElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *BdiElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

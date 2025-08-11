@@ -39,22 +39,30 @@ func FooterIf(condition bool, children ...htemel.Node) *FooterElement {
 	}
 }
 
+func FooterTernary(condition bool, true htemel.Node, false htemel.Node) *FooterElement {
+	if condition {
+		return Footer(true)
+	}
+
+	return Footer(false)
+}
+
 type FooterAutocapitalizeEnum string
 
 const (
-	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
-	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
-	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 	FooterAutocapitalizeEnumOn         FooterAutocapitalizeEnum = "on"
 	FooterAutocapitalizeEnumSentences  FooterAutocapitalizeEnum = "sentences"
 	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
+	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
+	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
+	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 )
 
 type FooterAutocorrectEnum string
 
 const (
-	FooterAutocorrectEnumOn  FooterAutocorrectEnum = "on"
 	FooterAutocorrectEnumOff FooterAutocorrectEnum = "off"
+	FooterAutocorrectEnumOn  FooterAutocorrectEnum = "on"
 )
 
 type FooterContenteditableEnum string
@@ -83,13 +91,13 @@ const (
 type FooterEnterkeyhintEnum string
 
 const (
-	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
-	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
 	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
 	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
 	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
 	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
 	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
+	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
+	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
 )
 
 type FooterHiddenEnum string
@@ -97,19 +105,20 @@ type FooterHiddenEnum string
 const (
 	FooterHiddenEnumHidden     FooterHiddenEnum = "hidden"
 	FooterHiddenEnumUntilFound FooterHiddenEnum = "until-found"
+	FooterHiddenEnumEmpty      FooterHiddenEnum = ""
 )
 
 type FooterInputmodeEnum string
 
 const (
-	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
-	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
 	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
 	FooterInputmodeEnumUrl     FooterInputmodeEnum = "url"
 	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
 	FooterInputmodeEnumEmail   FooterInputmodeEnum = "email"
 	FooterInputmodeEnumNone    FooterInputmodeEnum = "none"
 	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
+	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
+	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
 )
 
 type FooterSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *FooterElement) Writingsuggestions(a FooterWritingsuggestionsEnum) *Foot
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *FooterElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *FooterElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

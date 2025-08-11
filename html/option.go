@@ -39,15 +39,23 @@ func OptionIf(condition bool, children ...htemel.Node) *OptionElement {
 	}
 }
 
+func OptionTernary(condition bool, true htemel.Node, false htemel.Node) *OptionElement {
+	if condition {
+		return Option(true)
+	}
+
+	return Option(false)
+}
+
 type OptionAutocapitalizeEnum string
 
 const (
+	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
 	OptionAutocapitalizeEnumNone       OptionAutocapitalizeEnum = "none"
 	OptionAutocapitalizeEnumOff        OptionAutocapitalizeEnum = "off"
 	OptionAutocapitalizeEnumOn         OptionAutocapitalizeEnum = "on"
 	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
-	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 )
 
 type OptionAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type OptionEnterkeyhintEnum string
 
 const (
+	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
 	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
 	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
 	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
-	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 )
 
 type OptionHiddenEnum string
@@ -97,19 +105,20 @@ type OptionHiddenEnum string
 const (
 	OptionHiddenEnumHidden     OptionHiddenEnum = "hidden"
 	OptionHiddenEnumUntilFound OptionHiddenEnum = "until-found"
+	OptionHiddenEnumEmpty      OptionHiddenEnum = ""
 )
 
 type OptionInputmodeEnum string
 
 const (
+	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
+	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
+	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
 	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
 	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
 	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
-	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
-	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
-	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
 )
 
 type OptionSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *OptionElement) Writingsuggestions(a OptionWritingsuggestionsEnum) *Opti
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *OptionElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *OptionElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

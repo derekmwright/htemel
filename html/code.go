@@ -39,15 +39,23 @@ func CodeIf(condition bool, children ...htemel.Node) *CodeElement {
 	}
 }
 
+func CodeTernary(condition bool, true htemel.Node, false htemel.Node) *CodeElement {
+	if condition {
+		return Code(true)
+	}
+
+	return Code(false)
+}
+
 type CodeAutocapitalizeEnum string
 
 const (
-	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
 	CodeAutocapitalizeEnumOff        CodeAutocapitalizeEnum = "off"
 	CodeAutocapitalizeEnumOn         CodeAutocapitalizeEnum = "on"
 	CodeAutocapitalizeEnumSentences  CodeAutocapitalizeEnum = "sentences"
 	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
 	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
+	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
 )
 
 type CodeAutocorrectEnum string
@@ -95,21 +103,22 @@ const (
 type CodeHiddenEnum string
 
 const (
-	CodeHiddenEnumHidden     CodeHiddenEnum = "hidden"
 	CodeHiddenEnumUntilFound CodeHiddenEnum = "until-found"
+	CodeHiddenEnumHidden     CodeHiddenEnum = "hidden"
+	CodeHiddenEnumEmpty      CodeHiddenEnum = ""
 )
 
 type CodeInputmodeEnum string
 
 const (
-	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
-	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
-	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
 	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
 	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
 	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
+	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
+	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
+	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
 )
 
 type CodeSpellcheckEnum string
@@ -122,8 +131,8 @@ const (
 type CodeTranslateEnum string
 
 const (
-	CodeTranslateEnumYes CodeTranslateEnum = "yes"
 	CodeTranslateEnumNo  CodeTranslateEnum = "no"
+	CodeTranslateEnumYes CodeTranslateEnum = "yes"
 )
 
 type CodeWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *CodeElement) Writingsuggestions(a CodeWritingsuggestionsEnum) *CodeElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *CodeElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *CodeElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

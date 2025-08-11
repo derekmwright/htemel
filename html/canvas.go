@@ -39,15 +39,23 @@ func CanvasIf(condition bool, children ...htemel.Node) *CanvasElement {
 	}
 }
 
+func CanvasTernary(condition bool, true htemel.Node, false htemel.Node) *CanvasElement {
+	if condition {
+		return Canvas(true)
+	}
+
+	return Canvas(false)
+}
+
 type CanvasAutocapitalizeEnum string
 
 const (
-	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
 	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
 	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
 	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
 	CanvasAutocapitalizeEnumNone       CanvasAutocapitalizeEnum = "none"
 	CanvasAutocapitalizeEnumOff        CanvasAutocapitalizeEnum = "off"
+	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
 )
 
 type CanvasAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type CanvasContenteditableEnum string
 
 const (
+	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
 	CanvasContenteditableEnumFalse         CanvasContenteditableEnum = "false"
 	CanvasContenteditableEnumPlaintextOnly CanvasContenteditableEnum = "plaintext-only"
-	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
 )
 
 type CanvasDirEnum string
 
 const (
-	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
 	CanvasDirEnumAuto CanvasDirEnum = "auto"
 	CanvasDirEnumLtr  CanvasDirEnum = "ltr"
+	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
 )
 
 type CanvasDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type CanvasEnterkeyhintEnum string
 
 const (
+	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
 	CanvasEnterkeyhintEnumGo       CanvasEnterkeyhintEnum = "go"
 	CanvasEnterkeyhintEnumNext     CanvasEnterkeyhintEnum = "next"
 	CanvasEnterkeyhintEnumPrevious CanvasEnterkeyhintEnum = "previous"
 	CanvasEnterkeyhintEnumSearch   CanvasEnterkeyhintEnum = "search"
 	CanvasEnterkeyhintEnumSend     CanvasEnterkeyhintEnum = "send"
 	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
-	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
 )
 
 type CanvasHiddenEnum string
@@ -97,19 +105,20 @@ type CanvasHiddenEnum string
 const (
 	CanvasHiddenEnumHidden     CanvasHiddenEnum = "hidden"
 	CanvasHiddenEnumUntilFound CanvasHiddenEnum = "until-found"
+	CanvasHiddenEnumEmpty      CanvasHiddenEnum = ""
 )
 
 type CanvasInputmodeEnum string
 
 const (
-	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
-	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
 	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
 	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
 	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
 	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
 	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
 	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
+	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
+	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
 )
 
 type CanvasSpellcheckEnum string
@@ -129,8 +138,8 @@ const (
 type CanvasWritingsuggestionsEnum string
 
 const (
-	CanvasWritingsuggestionsEnumTrue  CanvasWritingsuggestionsEnum = "true"
 	CanvasWritingsuggestionsEnumFalse CanvasWritingsuggestionsEnum = "false"
+	CanvasWritingsuggestionsEnumTrue  CanvasWritingsuggestionsEnum = "true"
 )
 
 type canvasAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *CanvasElement) Writingsuggestions(a CanvasWritingsuggestionsEnum) *Canv
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *CanvasElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *CanvasElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

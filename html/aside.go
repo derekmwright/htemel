@@ -39,15 +39,23 @@ func AsideIf(condition bool, children ...htemel.Node) *AsideElement {
 	}
 }
 
+func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideElement {
+	if condition {
+		return Aside(true)
+	}
+
+	return Aside(false)
+}
+
 type AsideAutocapitalizeEnum string
 
 const (
-	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
-	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
 	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
 	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
 	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
+	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
+	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
 )
 
 type AsideAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type AsideDirEnum string
 
 const (
+	AsideDirEnumAuto AsideDirEnum = "auto"
 	AsideDirEnumLtr  AsideDirEnum = "ltr"
 	AsideDirEnumRtl  AsideDirEnum = "rtl"
-	AsideDirEnumAuto AsideDirEnum = "auto"
 )
 
 type AsideDraggableEnum string
@@ -83,33 +91,34 @@ const (
 type AsideEnterkeyhintEnum string
 
 const (
-	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
-	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
 	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
 	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
 	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
 	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
 	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
+	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
+	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
 )
 
 type AsideHiddenEnum string
 
 const (
-	AsideHiddenEnumUntilFound AsideHiddenEnum = "until-found"
 	AsideHiddenEnumHidden     AsideHiddenEnum = "hidden"
+	AsideHiddenEnumUntilFound AsideHiddenEnum = "until-found"
+	AsideHiddenEnumEmpty      AsideHiddenEnum = ""
 )
 
 type AsideInputmodeEnum string
 
 const (
+	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
+	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
+	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
 	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
 	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
 	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
 	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
-	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
-	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
-	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 )
 
 type AsideSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *AsideElement) Writingsuggestions(a AsideWritingsuggestionsEnum) *AsideE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *AsideElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *AsideElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

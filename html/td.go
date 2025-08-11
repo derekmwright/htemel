@@ -39,6 +39,14 @@ func TdIf(condition bool, children ...htemel.Node) *TdElement {
 	}
 }
 
+func TdTernary(condition bool, true htemel.Node, false htemel.Node) *TdElement {
+	if condition {
+		return Td(true)
+	}
+
+	return Td(false)
+}
+
 type TdAutocapitalizeEnum string
 
 const (
@@ -60,9 +68,9 @@ const (
 type TdContenteditableEnum string
 
 const (
+	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
 	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
 	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
-	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
 )
 
 type TdDirEnum string
@@ -83,13 +91,13 @@ const (
 type TdEnterkeyhintEnum string
 
 const (
+	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
+	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
 	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
 	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
 	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
 	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
 	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
-	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
-	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
 )
 
 type TdHiddenEnum string
@@ -97,19 +105,20 @@ type TdHiddenEnum string
 const (
 	TdHiddenEnumHidden     TdHiddenEnum = "hidden"
 	TdHiddenEnumUntilFound TdHiddenEnum = "until-found"
+	TdHiddenEnumEmpty      TdHiddenEnum = ""
 )
 
 type TdInputmodeEnum string
 
 const (
-	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
-	TdInputmodeEnumNone    TdInputmodeEnum = "none"
-	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
 	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
 	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
 	TdInputmodeEnumText    TdInputmodeEnum = "text"
 	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
+	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
+	TdInputmodeEnumNone    TdInputmodeEnum = "none"
+	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
 )
 
 type TdSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *TdElement) Writingsuggestions(a TdWritingsuggestionsEnum) *TdElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *TdElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *TdElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

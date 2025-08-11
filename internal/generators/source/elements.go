@@ -136,12 +136,36 @@ func {{ .Tag | titleCase }}If(condition bool{{ if not .Void }}, children ...htem
 	return tmpl, nil
 }
 
+func BaseTernaryFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("BaseTernaryFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+{{ if not .Void }}
+func {{ .Tag | titleCase }}Ternary(condition bool, true htemel.Node, false htemel.Node) *{{ .Tag | titleCase }}Element {
+	if condition {
+		return {{ .Tag | titleCase }}(true)
+	}
+
+	return {{ .Tag | titleCase }}(false)
+}
+{{ end }}
+`))
+
+	return tmpl, nil
+}
+
 func RenderFunc() (*template.Template, ImportSet) {
 	tmpl := template.Must(template.New("RenderFunc").
 		Funcs(template.FuncMap{
 			"titleCase": titleCase,
 		}).
 		Parse(`
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -158,7 +182,16 @@ func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+ 		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

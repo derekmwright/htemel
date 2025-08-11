@@ -39,15 +39,23 @@ func IframeIf(condition bool, children ...htemel.Node) *IframeElement {
 	}
 }
 
+func IframeTernary(condition bool, true htemel.Node, false htemel.Node) *IframeElement {
+	if condition {
+		return Iframe(true)
+	}
+
+	return Iframe(false)
+}
+
 type IframeAutocapitalizeEnum string
 
 const (
-	IframeAutocapitalizeEnumWords      IframeAutocapitalizeEnum = "words"
 	IframeAutocapitalizeEnumCharacters IframeAutocapitalizeEnum = "characters"
 	IframeAutocapitalizeEnumNone       IframeAutocapitalizeEnum = "none"
 	IframeAutocapitalizeEnumOff        IframeAutocapitalizeEnum = "off"
 	IframeAutocapitalizeEnumOn         IframeAutocapitalizeEnum = "on"
 	IframeAutocapitalizeEnumSentences  IframeAutocapitalizeEnum = "sentences"
+	IframeAutocapitalizeEnumWords      IframeAutocapitalizeEnum = "words"
 )
 
 type IframeAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type IframeDirEnum string
 
 const (
+	IframeDirEnumAuto IframeDirEnum = "auto"
 	IframeDirEnumLtr  IframeDirEnum = "ltr"
 	IframeDirEnumRtl  IframeDirEnum = "rtl"
-	IframeDirEnumAuto IframeDirEnum = "auto"
 )
 
 type IframeDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
-	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
 	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
 	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
+	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 )
 
 type IframeHiddenEnum string
@@ -97,19 +105,20 @@ type IframeHiddenEnum string
 const (
 	IframeHiddenEnumHidden     IframeHiddenEnum = "hidden"
 	IframeHiddenEnumUntilFound IframeHiddenEnum = "until-found"
+	IframeHiddenEnumEmpty      IframeHiddenEnum = ""
 )
 
 type IframeInputmodeEnum string
 
 const (
-	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
-	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
-	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
-	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
 	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
 	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
 	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
 	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
+	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
+	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
+	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
+	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
 )
 
 type IframeSpellcheckEnum string
@@ -122,8 +131,8 @@ const (
 type IframeTranslateEnum string
 
 const (
-	IframeTranslateEnumNo  IframeTranslateEnum = "no"
 	IframeTranslateEnumYes IframeTranslateEnum = "yes"
+	IframeTranslateEnumNo  IframeTranslateEnum = "no"
 )
 
 type IframeWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *IframeElement) Writingsuggestions(a IframeWritingsuggestionsEnum) *Ifra
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *IframeElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *IframeElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

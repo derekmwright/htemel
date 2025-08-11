@@ -39,15 +39,23 @@ func SIf(condition bool, children ...htemel.Node) *SElement {
 	}
 }
 
+func STernary(condition bool, true htemel.Node, false htemel.Node) *SElement {
+	if condition {
+		return S(true)
+	}
+
+	return S(false)
+}
+
 type SAutocapitalizeEnum string
 
 const (
-	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
-	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
-	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
 	SAutocapitalizeEnumSentences  SAutocapitalizeEnum = "sentences"
 	SAutocapitalizeEnumWords      SAutocapitalizeEnum = "words"
 	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
+	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
+	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
+	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
 )
 
 type SAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type SEnterkeyhintEnum string
 
 const (
-	SEnterkeyhintEnumSend     SEnterkeyhintEnum = "send"
 	SEnterkeyhintEnumDone     SEnterkeyhintEnum = "done"
 	SEnterkeyhintEnumEnter    SEnterkeyhintEnum = "enter"
 	SEnterkeyhintEnumGo       SEnterkeyhintEnum = "go"
 	SEnterkeyhintEnumNext     SEnterkeyhintEnum = "next"
 	SEnterkeyhintEnumPrevious SEnterkeyhintEnum = "previous"
 	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
+	SEnterkeyhintEnumSend     SEnterkeyhintEnum = "send"
 )
 
 type SHiddenEnum string
@@ -97,33 +105,34 @@ type SHiddenEnum string
 const (
 	SHiddenEnumHidden     SHiddenEnum = "hidden"
 	SHiddenEnumUntilFound SHiddenEnum = "until-found"
+	SHiddenEnumEmpty      SHiddenEnum = ""
 )
 
 type SInputmodeEnum string
 
 const (
-	SInputmodeEnumTel     SInputmodeEnum = "tel"
-	SInputmodeEnumText    SInputmodeEnum = "text"
-	SInputmodeEnumUrl     SInputmodeEnum = "url"
-	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
 	SInputmodeEnumEmail   SInputmodeEnum = "email"
 	SInputmodeEnumNone    SInputmodeEnum = "none"
 	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
 	SInputmodeEnumSearch  SInputmodeEnum = "search"
+	SInputmodeEnumTel     SInputmodeEnum = "tel"
+	SInputmodeEnumText    SInputmodeEnum = "text"
+	SInputmodeEnumUrl     SInputmodeEnum = "url"
+	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
 )
 
 type SSpellcheckEnum string
 
 const (
-	SSpellcheckEnumTrue  SSpellcheckEnum = "true"
 	SSpellcheckEnumFalse SSpellcheckEnum = "false"
+	SSpellcheckEnumTrue  SSpellcheckEnum = "true"
 )
 
 type STranslateEnum string
 
 const (
-	STranslateEnumYes STranslateEnum = "yes"
 	STranslateEnumNo  STranslateEnum = "no"
+	STranslateEnumYes STranslateEnum = "yes"
 )
 
 type SWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *SElement) Writingsuggestions(a SWritingsuggestionsEnum) *SElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

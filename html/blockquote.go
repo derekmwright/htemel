@@ -39,15 +39,23 @@ func BlockquoteIf(condition bool, children ...htemel.Node) *BlockquoteElement {
 	}
 }
 
+func BlockquoteTernary(condition bool, true htemel.Node, false htemel.Node) *BlockquoteElement {
+	if condition {
+		return Blockquote(true)
+	}
+
+	return Blockquote(false)
+}
+
 type BlockquoteAutocapitalizeEnum string
 
 const (
-	BlockquoteAutocapitalizeEnumSentences  BlockquoteAutocapitalizeEnum = "sentences"
-	BlockquoteAutocapitalizeEnumWords      BlockquoteAutocapitalizeEnum = "words"
 	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
 	BlockquoteAutocapitalizeEnumNone       BlockquoteAutocapitalizeEnum = "none"
 	BlockquoteAutocapitalizeEnumOff        BlockquoteAutocapitalizeEnum = "off"
 	BlockquoteAutocapitalizeEnumOn         BlockquoteAutocapitalizeEnum = "on"
+	BlockquoteAutocapitalizeEnumSentences  BlockquoteAutocapitalizeEnum = "sentences"
+	BlockquoteAutocapitalizeEnumWords      BlockquoteAutocapitalizeEnum = "words"
 )
 
 type BlockquoteAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type BlockquoteDirEnum string
 
 const (
+	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 	BlockquoteDirEnumLtr  BlockquoteDirEnum = "ltr"
 	BlockquoteDirEnumRtl  BlockquoteDirEnum = "rtl"
-	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 )
 
 type BlockquoteDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type BlockquoteEnterkeyhintEnum string
 
 const (
+	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 	BlockquoteEnterkeyhintEnumNext     BlockquoteEnterkeyhintEnum = "next"
 	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
 	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
 	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
 	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
-	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 )
 
 type BlockquoteHiddenEnum string
@@ -97,11 +105,13 @@ type BlockquoteHiddenEnum string
 const (
 	BlockquoteHiddenEnumHidden     BlockquoteHiddenEnum = "hidden"
 	BlockquoteHiddenEnumUntilFound BlockquoteHiddenEnum = "until-found"
+	BlockquoteHiddenEnumEmpty      BlockquoteHiddenEnum = ""
 )
 
 type BlockquoteInputmodeEnum string
 
 const (
+	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
 	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
 	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
 	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
@@ -109,7 +119,6 @@ const (
 	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
 	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
-	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
 )
 
 type BlockquoteSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *BlockquoteElement) Writingsuggestions(a BlockquoteWritingsuggestionsEnu
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *BlockquoteElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *BlockquoteElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

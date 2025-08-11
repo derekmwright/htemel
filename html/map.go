@@ -39,22 +39,30 @@ func MapIf(condition bool, children ...htemel.Node) *MapElement {
 	}
 }
 
+func MapTernary(condition bool, true htemel.Node, false htemel.Node) *MapElement {
+	if condition {
+		return Map(true)
+	}
+
+	return Map(false)
+}
+
 type MapAutocapitalizeEnum string
 
 const (
+	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 	MapAutocapitalizeEnumCharacters MapAutocapitalizeEnum = "characters"
 	MapAutocapitalizeEnumNone       MapAutocapitalizeEnum = "none"
 	MapAutocapitalizeEnumOff        MapAutocapitalizeEnum = "off"
 	MapAutocapitalizeEnumOn         MapAutocapitalizeEnum = "on"
 	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
-	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 )
 
 type MapAutocorrectEnum string
 
 const (
-	MapAutocorrectEnumOn  MapAutocorrectEnum = "on"
 	MapAutocorrectEnumOff MapAutocorrectEnum = "off"
+	MapAutocorrectEnumOn  MapAutocorrectEnum = "on"
 )
 
 type MapContenteditableEnum string
@@ -68,9 +76,9 @@ const (
 type MapDirEnum string
 
 const (
+	MapDirEnumAuto MapDirEnum = "auto"
 	MapDirEnumLtr  MapDirEnum = "ltr"
 	MapDirEnumRtl  MapDirEnum = "rtl"
-	MapDirEnumAuto MapDirEnum = "auto"
 )
 
 type MapDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type MapEnterkeyhintEnum string
 
 const (
+	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
 	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
 	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
 	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
 	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 	MapEnterkeyhintEnumSend     MapEnterkeyhintEnum = "send"
 	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
-	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
 )
 
 type MapHiddenEnum string
@@ -97,19 +105,20 @@ type MapHiddenEnum string
 const (
 	MapHiddenEnumHidden     MapHiddenEnum = "hidden"
 	MapHiddenEnumUntilFound MapHiddenEnum = "until-found"
+	MapHiddenEnumEmpty      MapHiddenEnum = ""
 )
 
 type MapInputmodeEnum string
 
 const (
+	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
+	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
 	MapInputmodeEnumText    MapInputmodeEnum = "text"
 	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
 	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
 	MapInputmodeEnumEmail   MapInputmodeEnum = "email"
 	MapInputmodeEnumNone    MapInputmodeEnum = "none"
 	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
-	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
-	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
 )
 
 type MapSpellcheckEnum string
@@ -129,8 +138,8 @@ const (
 type MapWritingsuggestionsEnum string
 
 const (
-	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
 	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
+	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
 )
 
 type mapAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *MapElement) Writingsuggestions(a MapWritingsuggestionsEnum) *MapElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *MapElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *MapElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,15 +39,23 @@ func DlIf(condition bool, children ...htemel.Node) *DlElement {
 	}
 }
 
+func DlTernary(condition bool, true htemel.Node, false htemel.Node) *DlElement {
+	if condition {
+		return Dl(true)
+	}
+
+	return Dl(false)
+}
+
 type DlAutocapitalizeEnum string
 
 const (
+	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
+	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
 	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
 	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
 	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
 	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
-	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
-	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
 )
 
 type DlAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type DlEnterkeyhintEnum string
 
 const (
-	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
-	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
-	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
 	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
 	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
 	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
+	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
+	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
+	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 )
 
 type DlHiddenEnum string
@@ -97,6 +105,7 @@ type DlHiddenEnum string
 const (
 	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
 	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
+	DlHiddenEnumEmpty      DlHiddenEnum = ""
 )
 
 type DlInputmodeEnum string
@@ -115,8 +124,8 @@ const (
 type DlSpellcheckEnum string
 
 const (
-	DlSpellcheckEnumFalse DlSpellcheckEnum = "false"
 	DlSpellcheckEnumTrue  DlSpellcheckEnum = "true"
+	DlSpellcheckEnumFalse DlSpellcheckEnum = "false"
 )
 
 type DlTranslateEnum string
@@ -129,8 +138,8 @@ const (
 type DlWritingsuggestionsEnum string
 
 const (
-	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
 	DlWritingsuggestionsEnumFalse DlWritingsuggestionsEnum = "false"
+	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
 )
 
 type dlAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *DlElement) Writingsuggestions(a DlWritingsuggestionsEnum) *DlElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *DlElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *DlElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

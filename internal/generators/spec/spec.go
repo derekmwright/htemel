@@ -188,6 +188,7 @@ type AttributeTypeEnum struct {
 	Name        string              `json:"name"`
 	Description string              `json:"description"`
 	Allowed     map[string]struct{} `json:"allowed"`
+	AllowEmpty  bool                `json:"allow_empty"`
 }
 
 func (a AttributeTypeEnum) isAttr() {}
@@ -201,11 +202,13 @@ func (a AttributeTypeEnum) MarshalJSON() ([]byte, error) {
 		Name          string              `json:"name"`
 		Description   string              `json:"description,omitempty"`
 		Allowed       map[string]struct{} `json:"allowed"`
+		AllowEmpty    bool                `json:"allow_empty"`
 		AttributeType string              `json:"attribute_type"`
 	}{
 		Name:          a.Name,
 		Description:   a.Description,
 		Allowed:       a.Allowed,
+		AllowEmpty:    a.AllowEmpty,
 		AttributeType: "AttributeTypeEnum",
 	})
 }

@@ -39,6 +39,14 @@ func SlotIf(condition bool, children ...htemel.Node) *SlotElement {
 	}
 }
 
+func SlotTernary(condition bool, true htemel.Node, false htemel.Node) *SlotElement {
+	if condition {
+		return Slot(true)
+	}
+
+	return Slot(false)
+}
+
 type SlotAutocapitalizeEnum string
 
 const (
@@ -53,24 +61,24 @@ const (
 type SlotAutocorrectEnum string
 
 const (
-	SlotAutocorrectEnumOff SlotAutocorrectEnum = "off"
 	SlotAutocorrectEnumOn  SlotAutocorrectEnum = "on"
+	SlotAutocorrectEnumOff SlotAutocorrectEnum = "off"
 )
 
 type SlotContenteditableEnum string
 
 const (
+	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
 	SlotContenteditableEnumFalse         SlotContenteditableEnum = "false"
 	SlotContenteditableEnumPlaintextOnly SlotContenteditableEnum = "plaintext-only"
-	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
 )
 
 type SlotDirEnum string
 
 const (
-	SlotDirEnumAuto SlotDirEnum = "auto"
 	SlotDirEnumLtr  SlotDirEnum = "ltr"
 	SlotDirEnumRtl  SlotDirEnum = "rtl"
+	SlotDirEnumAuto SlotDirEnum = "auto"
 )
 
 type SlotDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type SlotEnterkeyhintEnum string
 
 const (
+	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
 	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 	SlotEnterkeyhintEnumDone     SlotEnterkeyhintEnum = "done"
 	SlotEnterkeyhintEnumEnter    SlotEnterkeyhintEnum = "enter"
 	SlotEnterkeyhintEnumGo       SlotEnterkeyhintEnum = "go"
 	SlotEnterkeyhintEnumNext     SlotEnterkeyhintEnum = "next"
 	SlotEnterkeyhintEnumPrevious SlotEnterkeyhintEnum = "previous"
-	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
 )
 
 type SlotHiddenEnum string
@@ -97,11 +105,13 @@ type SlotHiddenEnum string
 const (
 	SlotHiddenEnumHidden     SlotHiddenEnum = "hidden"
 	SlotHiddenEnumUntilFound SlotHiddenEnum = "until-found"
+	SlotHiddenEnumEmpty      SlotHiddenEnum = ""
 )
 
 type SlotInputmodeEnum string
 
 const (
+	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
 	SlotInputmodeEnumEmail   SlotInputmodeEnum = "email"
 	SlotInputmodeEnumNone    SlotInputmodeEnum = "none"
@@ -109,7 +119,6 @@ const (
 	SlotInputmodeEnumSearch  SlotInputmodeEnum = "search"
 	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
 	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
-	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 )
 
 type SlotSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *SlotElement) Writingsuggestions(a SlotWritingsuggestionsEnum) *SlotElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SlotElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SlotElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

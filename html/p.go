@@ -39,15 +39,23 @@ func PIf(condition bool, children ...htemel.Node) *PElement {
 	}
 }
 
+func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
+	if condition {
+		return P(true)
+	}
+
+	return P(false)
+}
+
 type PAutocapitalizeEnum string
 
 const (
+	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
+	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
 	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
 	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
 	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
 	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
-	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
-	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
 )
 
 type PAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type PEnterkeyhintEnum string
 
 const (
-	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
-	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
-	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
 	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
+	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
+	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
+	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 )
 
 type PHiddenEnum string
@@ -97,6 +105,7 @@ type PHiddenEnum string
 const (
 	PHiddenEnumHidden     PHiddenEnum = "hidden"
 	PHiddenEnumUntilFound PHiddenEnum = "until-found"
+	PHiddenEnumEmpty      PHiddenEnum = ""
 )
 
 type PInputmodeEnum string
@@ -115,15 +124,15 @@ const (
 type PSpellcheckEnum string
 
 const (
-	PSpellcheckEnumFalse PSpellcheckEnum = "false"
 	PSpellcheckEnumTrue  PSpellcheckEnum = "true"
+	PSpellcheckEnumFalse PSpellcheckEnum = "false"
 )
 
 type PTranslateEnum string
 
 const (
-	PTranslateEnumNo  PTranslateEnum = "no"
 	PTranslateEnumYes PTranslateEnum = "yes"
+	PTranslateEnumNo  PTranslateEnum = "no"
 )
 
 type PWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *PElement) Writingsuggestions(a PWritingsuggestionsEnum) *PElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *PElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *PElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,6 +39,14 @@ func HtmlIf(condition bool, children ...htemel.Node) *HtmlElement {
 	}
 }
 
+func HtmlTernary(condition bool, true htemel.Node, false htemel.Node) *HtmlElement {
+	if condition {
+		return Html(true)
+	}
+
+	return Html(false)
+}
+
 type HtmlAutocapitalizeEnum string
 
 const (
@@ -97,12 +105,12 @@ type HtmlHiddenEnum string
 const (
 	HtmlHiddenEnumHidden     HtmlHiddenEnum = "hidden"
 	HtmlHiddenEnumUntilFound HtmlHiddenEnum = "until-found"
+	HtmlHiddenEnumEmpty      HtmlHiddenEnum = ""
 )
 
 type HtmlInputmodeEnum string
 
 const (
-	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
 	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
 	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
@@ -110,6 +118,7 @@ const (
 	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
 	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
 	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
+	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 )
 
 type HtmlSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *HtmlElement) Writingsuggestions(a HtmlWritingsuggestionsEnum) *HtmlElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *HtmlElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *HtmlElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

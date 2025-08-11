@@ -39,15 +39,23 @@ func ButtonIf(condition bool, children ...htemel.Node) *ButtonElement {
 	}
 }
 
+func ButtonTernary(condition bool, true htemel.Node, false htemel.Node) *ButtonElement {
+	if condition {
+		return Button(true)
+	}
+
+	return Button(false)
+}
+
 type ButtonAutocapitalizeEnum string
 
 const (
-	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
 	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
 	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
 	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
+	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
 )
 
 type ButtonAutocorrectEnum string
@@ -68,28 +76,28 @@ const (
 type ButtonDirEnum string
 
 const (
+	ButtonDirEnumAuto ButtonDirEnum = "auto"
 	ButtonDirEnumLtr  ButtonDirEnum = "ltr"
 	ButtonDirEnumRtl  ButtonDirEnum = "rtl"
-	ButtonDirEnumAuto ButtonDirEnum = "auto"
 )
 
 type ButtonDraggableEnum string
 
 const (
-	ButtonDraggableEnumTrue  ButtonDraggableEnum = "true"
 	ButtonDraggableEnumFalse ButtonDraggableEnum = "false"
+	ButtonDraggableEnumTrue  ButtonDraggableEnum = "true"
 )
 
 type ButtonEnterkeyhintEnum string
 
 const (
+	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
 	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
 	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
 	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
 	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
-	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 )
 
 type ButtonHiddenEnum string
@@ -97,26 +105,27 @@ type ButtonHiddenEnum string
 const (
 	ButtonHiddenEnumUntilFound ButtonHiddenEnum = "until-found"
 	ButtonHiddenEnumHidden     ButtonHiddenEnum = "hidden"
+	ButtonHiddenEnumEmpty      ButtonHiddenEnum = ""
 )
 
 type ButtonInputmodeEnum string
 
 const (
-	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
-	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
 	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
 	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
 	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
 	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
 	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
 	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
+	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
+	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
 )
 
 type ButtonSpellcheckEnum string
 
 const (
-	ButtonSpellcheckEnumFalse ButtonSpellcheckEnum = "false"
 	ButtonSpellcheckEnumTrue  ButtonSpellcheckEnum = "true"
+	ButtonSpellcheckEnumFalse ButtonSpellcheckEnum = "false"
 )
 
 type ButtonTranslateEnum string
@@ -297,6 +306,11 @@ func (e *ButtonElement) Writingsuggestions(a ButtonWritingsuggestionsEnum) *Butt
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *ButtonElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *ButtonElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

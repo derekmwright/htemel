@@ -39,6 +39,14 @@ func UlIf(condition bool, children ...htemel.Node) *UlElement {
 	}
 }
 
+func UlTernary(condition bool, true htemel.Node, false htemel.Node) *UlElement {
+	if condition {
+		return Ul(true)
+	}
+
+	return Ul(false)
+}
+
 type UlAutocapitalizeEnum string
 
 const (
@@ -83,13 +91,13 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
-	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
-	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
 	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
 	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
 	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
+	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
+	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 )
 
 type UlHiddenEnum string
@@ -97,26 +105,27 @@ type UlHiddenEnum string
 const (
 	UlHiddenEnumHidden     UlHiddenEnum = "hidden"
 	UlHiddenEnumUntilFound UlHiddenEnum = "until-found"
+	UlHiddenEnumEmpty      UlHiddenEnum = ""
 )
 
 type UlInputmodeEnum string
 
 const (
-	UlInputmodeEnumNone    UlInputmodeEnum = "none"
-	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
 	UlInputmodeEnumSearch  UlInputmodeEnum = "search"
 	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
 	UlInputmodeEnumText    UlInputmodeEnum = "text"
 	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
 	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
 	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
+	UlInputmodeEnumNone    UlInputmodeEnum = "none"
+	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
 )
 
 type UlSpellcheckEnum string
 
 const (
-	UlSpellcheckEnumTrue  UlSpellcheckEnum = "true"
 	UlSpellcheckEnumFalse UlSpellcheckEnum = "false"
+	UlSpellcheckEnumTrue  UlSpellcheckEnum = "true"
 )
 
 type UlTranslateEnum string
@@ -297,6 +306,11 @@ func (e *UlElement) Writingsuggestions(a UlWritingsuggestionsEnum) *UlElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *UlElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *UlElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

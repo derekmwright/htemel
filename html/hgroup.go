@@ -39,15 +39,23 @@ func HgroupIf(condition bool, children ...htemel.Node) *HgroupElement {
 	}
 }
 
+func HgroupTernary(condition bool, true htemel.Node, false htemel.Node) *HgroupElement {
+	if condition {
+		return Hgroup(true)
+	}
+
+	return Hgroup(false)
+}
+
 type HgroupAutocapitalizeEnum string
 
 const (
-	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
-	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
-	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
 	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
 	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
 	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
+	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
+	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
+	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
 )
 
 type HgroupAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type HgroupEnterkeyhintEnum string
 
 const (
+	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
+	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
 	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
 	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
 	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
 	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
-	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
-	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
 )
 
 type HgroupHiddenEnum string
@@ -97,26 +105,27 @@ type HgroupHiddenEnum string
 const (
 	HgroupHiddenEnumHidden     HgroupHiddenEnum = "hidden"
 	HgroupHiddenEnumUntilFound HgroupHiddenEnum = "until-found"
+	HgroupHiddenEnumEmpty      HgroupHiddenEnum = ""
 )
 
 type HgroupInputmodeEnum string
 
 const (
+	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
+	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
+	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
 	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
 	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
 	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
 	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
 	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
-	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
-	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
-	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
 )
 
 type HgroupSpellcheckEnum string
 
 const (
-	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
 	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
+	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
 )
 
 type HgroupTranslateEnum string
@@ -297,6 +306,11 @@ func (e *HgroupElement) Writingsuggestions(a HgroupWritingsuggestionsEnum) *Hgro
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *HgroupElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *HgroupElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

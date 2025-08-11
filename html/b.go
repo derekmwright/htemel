@@ -39,15 +39,23 @@ func BIf(condition bool, children ...htemel.Node) *BElement {
 	}
 }
 
+func BTernary(condition bool, true htemel.Node, false htemel.Node) *BElement {
+	if condition {
+		return B(true)
+	}
+
+	return B(false)
+}
+
 type BAutocapitalizeEnum string
 
 const (
+	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
+	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
 	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
 	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
 	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
 	BAutocapitalizeEnumOn         BAutocapitalizeEnum = "on"
-	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
-	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
 )
 
 type BAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type BDirEnum string
 
 const (
+	BDirEnumAuto BDirEnum = "auto"
 	BDirEnumLtr  BDirEnum = "ltr"
 	BDirEnumRtl  BDirEnum = "rtl"
-	BDirEnumAuto BDirEnum = "auto"
 )
 
 type BDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type BEnterkeyhintEnum string
 
 const (
-	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
 	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
 	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
 	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
 	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
+	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
 )
 
 type BHiddenEnum string
@@ -97,6 +105,7 @@ type BHiddenEnum string
 const (
 	BHiddenEnumHidden     BHiddenEnum = "hidden"
 	BHiddenEnumUntilFound BHiddenEnum = "until-found"
+	BHiddenEnumEmpty      BHiddenEnum = ""
 )
 
 type BInputmodeEnum string
@@ -115,15 +124,15 @@ const (
 type BSpellcheckEnum string
 
 const (
-	BSpellcheckEnumTrue  BSpellcheckEnum = "true"
 	BSpellcheckEnumFalse BSpellcheckEnum = "false"
+	BSpellcheckEnumTrue  BSpellcheckEnum = "true"
 )
 
 type BTranslateEnum string
 
 const (
-	BTranslateEnumYes BTranslateEnum = "yes"
 	BTranslateEnumNo  BTranslateEnum = "no"
+	BTranslateEnumYes BTranslateEnum = "yes"
 )
 
 type BWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *BElement) Writingsuggestions(a BWritingsuggestionsEnum) *BElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *BElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *BElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

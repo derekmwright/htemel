@@ -39,15 +39,23 @@ func SummaryIf(condition bool, children ...htemel.Node) *SummaryElement {
 	}
 }
 
+func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *SummaryElement {
+	if condition {
+		return Summary(true)
+	}
+
+	return Summary(false)
+}
+
 type SummaryAutocapitalizeEnum string
 
 const (
-	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
 	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
 	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
+	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
 )
 
 type SummaryAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type SummaryEnterkeyhintEnum string
 
 const (
-	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
 	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
 	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
 	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
 	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
 	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
+	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
 )
 
 type SummaryHiddenEnum string
@@ -97,6 +105,7 @@ type SummaryHiddenEnum string
 const (
 	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
 	SummaryHiddenEnumUntilFound SummaryHiddenEnum = "until-found"
+	SummaryHiddenEnumEmpty      SummaryHiddenEnum = ""
 )
 
 type SummaryInputmodeEnum string
@@ -122,8 +131,8 @@ const (
 type SummaryTranslateEnum string
 
 const (
-	SummaryTranslateEnumNo  SummaryTranslateEnum = "no"
 	SummaryTranslateEnumYes SummaryTranslateEnum = "yes"
+	SummaryTranslateEnumNo  SummaryTranslateEnum = "no"
 )
 
 type SummaryWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *SummaryElement) Writingsuggestions(a SummaryWritingsuggestionsEnum) *Su
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SummaryElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SummaryElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

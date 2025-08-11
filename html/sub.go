@@ -39,15 +39,23 @@ func SubIf(condition bool, children ...htemel.Node) *SubElement {
 	}
 }
 
+func SubTernary(condition bool, true htemel.Node, false htemel.Node) *SubElement {
+	if condition {
+		return Sub(true)
+	}
+
+	return Sub(false)
+}
+
 type SubAutocapitalizeEnum string
 
 const (
-	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
 	SubAutocapitalizeEnumCharacters SubAutocapitalizeEnum = "characters"
 	SubAutocapitalizeEnumNone       SubAutocapitalizeEnum = "none"
 	SubAutocapitalizeEnumOff        SubAutocapitalizeEnum = "off"
 	SubAutocapitalizeEnumOn         SubAutocapitalizeEnum = "on"
 	SubAutocapitalizeEnumSentences  SubAutocapitalizeEnum = "sentences"
+	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
 )
 
 type SubAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type SubContenteditableEnum string
 
 const (
-	SubContenteditableEnumTrue          SubContenteditableEnum = "true"
 	SubContenteditableEnumFalse         SubContenteditableEnum = "false"
 	SubContenteditableEnumPlaintextOnly SubContenteditableEnum = "plaintext-only"
+	SubContenteditableEnumTrue          SubContenteditableEnum = "true"
 )
 
 type SubDirEnum string
@@ -76,20 +84,20 @@ const (
 type SubDraggableEnum string
 
 const (
-	SubDraggableEnumFalse SubDraggableEnum = "false"
 	SubDraggableEnumTrue  SubDraggableEnum = "true"
+	SubDraggableEnumFalse SubDraggableEnum = "false"
 )
 
 type SubEnterkeyhintEnum string
 
 const (
+	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
+	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
 	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
 	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
 	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
 	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
-	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
-	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
 )
 
 type SubHiddenEnum string
@@ -97,19 +105,20 @@ type SubHiddenEnum string
 const (
 	SubHiddenEnumHidden     SubHiddenEnum = "hidden"
 	SubHiddenEnumUntilFound SubHiddenEnum = "until-found"
+	SubHiddenEnumEmpty      SubHiddenEnum = ""
 )
 
 type SubInputmodeEnum string
 
 const (
-	SubInputmodeEnumText    SubInputmodeEnum = "text"
-	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
 	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
 	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
 	SubInputmodeEnumNone    SubInputmodeEnum = "none"
 	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
 	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
 	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
+	SubInputmodeEnumText    SubInputmodeEnum = "text"
+	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
 )
 
 type SubSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *SubElement) Writingsuggestions(a SubWritingsuggestionsEnum) *SubElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SubElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SubElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

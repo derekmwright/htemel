@@ -7,18 +7,22 @@ import (
 	"golang.org/x/net/html"
 )
 
+// Node defines the interface that must be implemented in order to render elements.
 type Node interface {
 	Render(w io.Writer) error
 }
 
+// GroupElement is a struct that backs the Group function.
 type GroupElement struct {
 	children []Node
 }
 
+// Group is a generic wrapper that can be used to wrap one or more elements that may not have a suitable parent type.
 func Group(children ...Node) *GroupElement {
 	return &GroupElement{children}
 }
 
+// Render implements the Node interface by calling Render on all child nodes.
 func (e *GroupElement) Render(w io.Writer) error {
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
@@ -29,6 +33,7 @@ func (e *GroupElement) Render(w io.Writer) error {
 	return nil
 }
 
+// GenericElement struct backs the Generic element functions.
 type GenericElement struct {
 	tag      string
 	attrs    map[string]any
@@ -36,6 +41,9 @@ type GenericElement struct {
 	children []Node
 }
 
+// Generic element is provided as an escape-hatch for when the provided generated elements are not sufficient.
+// Attributes can be passed as a map of strings with "any" type.
+// The underlying type should implement the fmt.Stringer interface for predictable rendering.
 func Generic(tag string, attrs map[string]any, children ...Node) *GenericElement {
 	return &GenericElement{
 		tag:      tag,
@@ -45,6 +53,11 @@ func Generic(tag string, attrs map[string]any, children ...Node) *GenericElement
 	}
 }
 
+// GenericVoid element is provided as an escape-hatch for when the provided generated elements are not sufficient.
+// Attributes can be passed as a map of strings with "any" type.
+// The underlying type should implement the fmt.Stringer interface for predictable rendering.
+//
+// Void elements are self-closing and therefore do not permit children.
 func GenericVoid(tag string, attrs map[string]any) *GenericElement {
 	return &GenericElement{
 		tag:      tag,

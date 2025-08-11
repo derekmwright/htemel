@@ -39,15 +39,23 @@ func StrongIf(condition bool, children ...htemel.Node) *StrongElement {
 	}
 }
 
+func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongElement {
+	if condition {
+		return Strong(true)
+	}
+
+	return Strong(false)
+}
+
 type StrongAutocapitalizeEnum string
 
 const (
+	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
 	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
 	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
 	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
 	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
 	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
-	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
 )
 
 type StrongAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
-	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
-	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
-	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
 	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
 	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
+	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
+	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
+	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
 )
 
 type StrongHiddenEnum string
@@ -97,19 +105,20 @@ type StrongHiddenEnum string
 const (
 	StrongHiddenEnumHidden     StrongHiddenEnum = "hidden"
 	StrongHiddenEnumUntilFound StrongHiddenEnum = "until-found"
+	StrongHiddenEnumEmpty      StrongHiddenEnum = ""
 )
 
 type StrongInputmodeEnum string
 
 const (
-	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
-	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
-	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
 	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
 	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
 	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
+	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
+	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
+	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 )
 
 type StrongSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *StrongElement) Writingsuggestions(a StrongWritingsuggestionsEnum) *Stro
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *StrongElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *StrongElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

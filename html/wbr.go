@@ -39,15 +39,23 @@ func WbrIf(condition bool, children ...htemel.Node) *WbrElement {
 	}
 }
 
+func WbrTernary(condition bool, true htemel.Node, false htemel.Node) *WbrElement {
+	if condition {
+		return Wbr(true)
+	}
+
+	return Wbr(false)
+}
+
 type WbrAutocapitalizeEnum string
 
 const (
-	WbrAutocapitalizeEnumOn         WbrAutocapitalizeEnum = "on"
-	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
-	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
 	WbrAutocapitalizeEnumCharacters WbrAutocapitalizeEnum = "characters"
 	WbrAutocapitalizeEnumNone       WbrAutocapitalizeEnum = "none"
 	WbrAutocapitalizeEnumOff        WbrAutocapitalizeEnum = "off"
+	WbrAutocapitalizeEnumOn         WbrAutocapitalizeEnum = "on"
+	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
+	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
 )
 
 type WbrAutocorrectEnum string
@@ -76,20 +84,20 @@ const (
 type WbrDraggableEnum string
 
 const (
-	WbrDraggableEnumFalse WbrDraggableEnum = "false"
 	WbrDraggableEnumTrue  WbrDraggableEnum = "true"
+	WbrDraggableEnumFalse WbrDraggableEnum = "false"
 )
 
 type WbrEnterkeyhintEnum string
 
 const (
-	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
-	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
 	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
 	WbrEnterkeyhintEnumSearch   WbrEnterkeyhintEnum = "search"
 	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
 	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
+	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
+	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
 )
 
 type WbrHiddenEnum string
@@ -97,11 +105,13 @@ type WbrHiddenEnum string
 const (
 	WbrHiddenEnumHidden     WbrHiddenEnum = "hidden"
 	WbrHiddenEnumUntilFound WbrHiddenEnum = "until-found"
+	WbrHiddenEnumEmpty      WbrHiddenEnum = ""
 )
 
 type WbrInputmodeEnum string
 
 const (
+	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
 	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
@@ -109,7 +119,6 @@ const (
 	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
 	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
 	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
-	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
 )
 
 type WbrSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *WbrElement) Writingsuggestions(a WbrWritingsuggestionsEnum) *WbrElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *WbrElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *WbrElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

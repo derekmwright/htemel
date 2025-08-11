@@ -39,15 +39,23 @@ func TimeIf(condition bool, children ...htemel.Node) *TimeElement {
 	}
 }
 
+func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeElement {
+	if condition {
+		return Time(true)
+	}
+
+	return Time(false)
+}
+
 type TimeAutocapitalizeEnum string
 
 const (
+	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
+	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
 	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
 	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
-	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
-	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 )
 
 type TimeAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type TimeContenteditableEnum string
 
 const (
-	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
 	TimeContenteditableEnumFalse         TimeContenteditableEnum = "false"
 	TimeContenteditableEnumPlaintextOnly TimeContenteditableEnum = "plaintext-only"
+	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
 )
 
 type TimeDirEnum string
 
 const (
+	TimeDirEnumAuto TimeDirEnum = "auto"
 	TimeDirEnumLtr  TimeDirEnum = "ltr"
 	TimeDirEnumRtl  TimeDirEnum = "rtl"
-	TimeDirEnumAuto TimeDirEnum = "auto"
 )
 
 type TimeDraggableEnum string
@@ -97,19 +105,20 @@ type TimeHiddenEnum string
 const (
 	TimeHiddenEnumHidden     TimeHiddenEnum = "hidden"
 	TimeHiddenEnumUntilFound TimeHiddenEnum = "until-found"
+	TimeHiddenEnumEmpty      TimeHiddenEnum = ""
 )
 
 type TimeInputmodeEnum string
 
 const (
-	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
-	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
-	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
-	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
 	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
 	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
 	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
 	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
+	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
+	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
+	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
+	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
 )
 
 type TimeSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *TimeElement) Writingsuggestions(a TimeWritingsuggestionsEnum) *TimeElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *TimeElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *TimeElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

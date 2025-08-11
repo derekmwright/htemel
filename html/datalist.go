@@ -39,15 +39,23 @@ func DatalistIf(condition bool, children ...htemel.Node) *DatalistElement {
 	}
 }
 
+func DatalistTernary(condition bool, true htemel.Node, false htemel.Node) *DatalistElement {
+	if condition {
+		return Datalist(true)
+	}
+
+	return Datalist(false)
+}
+
 type DatalistAutocapitalizeEnum string
 
 const (
-	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
-	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
-	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
 	DatalistAutocapitalizeEnumOn         DatalistAutocapitalizeEnum = "on"
 	DatalistAutocapitalizeEnumSentences  DatalistAutocapitalizeEnum = "sentences"
 	DatalistAutocapitalizeEnumWords      DatalistAutocapitalizeEnum = "words"
+	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
+	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
+	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
 )
 
 type DatalistAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type DatalistContenteditableEnum string
 
 const (
-	DatalistContenteditableEnumTrue          DatalistContenteditableEnum = "true"
 	DatalistContenteditableEnumFalse         DatalistContenteditableEnum = "false"
 	DatalistContenteditableEnumPlaintextOnly DatalistContenteditableEnum = "plaintext-only"
+	DatalistContenteditableEnumTrue          DatalistContenteditableEnum = "true"
 )
 
 type DatalistDirEnum string
@@ -83,13 +91,13 @@ const (
 type DatalistEnterkeyhintEnum string
 
 const (
+	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 	DatalistEnterkeyhintEnumEnter    DatalistEnterkeyhintEnum = "enter"
 	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
 	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
 	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
 	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
-	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 )
 
 type DatalistHiddenEnum string
@@ -97,26 +105,27 @@ type DatalistHiddenEnum string
 const (
 	DatalistHiddenEnumHidden     DatalistHiddenEnum = "hidden"
 	DatalistHiddenEnumUntilFound DatalistHiddenEnum = "until-found"
+	DatalistHiddenEnumEmpty      DatalistHiddenEnum = ""
 )
 
 type DatalistInputmodeEnum string
 
 const (
-	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
-	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
-	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
-	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
 	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
 	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
 	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
 	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
+	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
+	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
+	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
+	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
 )
 
 type DatalistSpellcheckEnum string
 
 const (
-	DatalistSpellcheckEnumTrue  DatalistSpellcheckEnum = "true"
 	DatalistSpellcheckEnumFalse DatalistSpellcheckEnum = "false"
+	DatalistSpellcheckEnumTrue  DatalistSpellcheckEnum = "true"
 )
 
 type DatalistTranslateEnum string
@@ -297,6 +306,11 @@ func (e *DatalistElement) Writingsuggestions(a DatalistWritingsuggestionsEnum) *
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *DatalistElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *DatalistElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

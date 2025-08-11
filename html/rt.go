@@ -39,15 +39,23 @@ func RtIf(condition bool, children ...htemel.Node) *RtElement {
 	}
 }
 
+func RtTernary(condition bool, true htemel.Node, false htemel.Node) *RtElement {
+	if condition {
+		return Rt(true)
+	}
+
+	return Rt(false)
+}
+
 type RtAutocapitalizeEnum string
 
 const (
-	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
-	RtAutocapitalizeEnumCharacters RtAutocapitalizeEnum = "characters"
-	RtAutocapitalizeEnumNone       RtAutocapitalizeEnum = "none"
 	RtAutocapitalizeEnumOff        RtAutocapitalizeEnum = "off"
 	RtAutocapitalizeEnumOn         RtAutocapitalizeEnum = "on"
 	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
+	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
+	RtAutocapitalizeEnumCharacters RtAutocapitalizeEnum = "characters"
+	RtAutocapitalizeEnumNone       RtAutocapitalizeEnum = "none"
 )
 
 type RtAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type RtEnterkeyhintEnum string
 
 const (
-	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
-	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
 	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
 	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
 	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
 	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
 	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
+	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
+	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
 )
 
 type RtHiddenEnum string
@@ -97,19 +105,20 @@ type RtHiddenEnum string
 const (
 	RtHiddenEnumHidden     RtHiddenEnum = "hidden"
 	RtHiddenEnumUntilFound RtHiddenEnum = "until-found"
+	RtHiddenEnumEmpty      RtHiddenEnum = ""
 )
 
 type RtInputmodeEnum string
 
 const (
-	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
-	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
-	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
 	RtInputmodeEnumNone    RtInputmodeEnum = "none"
 	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
 	RtInputmodeEnumSearch  RtInputmodeEnum = "search"
 	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
 	RtInputmodeEnumText    RtInputmodeEnum = "text"
+	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
+	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
+	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
 )
 
 type RtSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *RtElement) Writingsuggestions(a RtWritingsuggestionsEnum) *RtElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *RtElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *RtElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

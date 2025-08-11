@@ -39,15 +39,23 @@ func DataIf(condition bool, children ...htemel.Node) *DataElement {
 	}
 }
 
+func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataElement {
+	if condition {
+		return Data(true)
+	}
+
+	return Data(false)
+}
+
 type DataAutocapitalizeEnum string
 
 const (
-	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
 	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
 	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
+	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 )
 
 type DataAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type DataContenteditableEnum string
 
 const (
+	DataContenteditableEnumPlaintextOnly DataContenteditableEnum = "plaintext-only"
 	DataContenteditableEnumTrue          DataContenteditableEnum = "true"
 	DataContenteditableEnumFalse         DataContenteditableEnum = "false"
-	DataContenteditableEnumPlaintextOnly DataContenteditableEnum = "plaintext-only"
 )
 
 type DataDirEnum string
@@ -76,40 +84,41 @@ const (
 type DataDraggableEnum string
 
 const (
-	DataDraggableEnumTrue  DataDraggableEnum = "true"
 	DataDraggableEnumFalse DataDraggableEnum = "false"
+	DataDraggableEnumTrue  DataDraggableEnum = "true"
 )
 
 type DataEnterkeyhintEnum string
 
 const (
+	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
+	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
 	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
 	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
 	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
-	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
-	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 )
 
 type DataHiddenEnum string
 
 const (
-	DataHiddenEnumHidden     DataHiddenEnum = "hidden"
 	DataHiddenEnumUntilFound DataHiddenEnum = "until-found"
+	DataHiddenEnumHidden     DataHiddenEnum = "hidden"
+	DataHiddenEnumEmpty      DataHiddenEnum = ""
 )
 
 type DataInputmodeEnum string
 
 const (
-	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
-	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
 	DataInputmodeEnumNone    DataInputmodeEnum = "none"
 	DataInputmodeEnumNumeric DataInputmodeEnum = "numeric"
 	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
 	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
 	DataInputmodeEnumText    DataInputmodeEnum = "text"
 	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
+	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
+	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
 )
 
 type DataSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *DataElement) Writingsuggestions(a DataWritingsuggestionsEnum) *DataElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *DataElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *DataElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

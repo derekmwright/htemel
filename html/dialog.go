@@ -39,15 +39,23 @@ func DialogIf(condition bool, children ...htemel.Node) *DialogElement {
 	}
 }
 
+func DialogTernary(condition bool, true htemel.Node, false htemel.Node) *DialogElement {
+	if condition {
+		return Dialog(true)
+	}
+
+	return Dialog(false)
+}
+
 type DialogAutocapitalizeEnum string
 
 const (
+	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
 	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
 	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
 	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
 	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
-	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
 )
 
 type DialogAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type DialogContenteditableEnum string
 
 const (
+	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
 	DialogContenteditableEnumFalse         DialogContenteditableEnum = "false"
 	DialogContenteditableEnumPlaintextOnly DialogContenteditableEnum = "plaintext-only"
-	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
 )
 
 type DialogDirEnum string
@@ -76,8 +84,8 @@ const (
 type DialogDraggableEnum string
 
 const (
-	DialogDraggableEnumFalse DialogDraggableEnum = "false"
 	DialogDraggableEnumTrue  DialogDraggableEnum = "true"
+	DialogDraggableEnumFalse DialogDraggableEnum = "false"
 )
 
 type DialogEnterkeyhintEnum string
@@ -97,12 +105,12 @@ type DialogHiddenEnum string
 const (
 	DialogHiddenEnumHidden     DialogHiddenEnum = "hidden"
 	DialogHiddenEnumUntilFound DialogHiddenEnum = "until-found"
+	DialogHiddenEnumEmpty      DialogHiddenEnum = ""
 )
 
 type DialogInputmodeEnum string
 
 const (
-	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
 	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
 	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
@@ -110,6 +118,7 @@ const (
 	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
 	DialogInputmodeEnumNumeric DialogInputmodeEnum = "numeric"
 	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
+	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
 )
 
 type DialogSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *DialogElement) Writingsuggestions(a DialogWritingsuggestionsEnum) *Dial
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *DialogElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *DialogElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,6 +39,14 @@ func AbbrIf(condition bool, children ...htemel.Node) *AbbrElement {
 	}
 }
 
+func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrElement {
+	if condition {
+		return Abbr(true)
+	}
+
+	return Abbr(false)
+}
+
 type AbbrAutocapitalizeEnum string
 
 const (
@@ -83,13 +91,13 @@ const (
 type AbbrEnterkeyhintEnum string
 
 const (
+	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 	AbbrEnterkeyhintEnumEnter    AbbrEnterkeyhintEnum = "enter"
 	AbbrEnterkeyhintEnumGo       AbbrEnterkeyhintEnum = "go"
 	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
 	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
 	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
 	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
-	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 )
 
 type AbbrHiddenEnum string
@@ -97,19 +105,20 @@ type AbbrHiddenEnum string
 const (
 	AbbrHiddenEnumHidden     AbbrHiddenEnum = "hidden"
 	AbbrHiddenEnumUntilFound AbbrHiddenEnum = "until-found"
+	AbbrHiddenEnumEmpty      AbbrHiddenEnum = ""
 )
 
 type AbbrInputmodeEnum string
 
 const (
-	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
-	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
-	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
-	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
 	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
 	AbbrInputmodeEnumText    AbbrInputmodeEnum = "text"
+	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
+	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
+	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
+	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 )
 
 type AbbrSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *AbbrElement) Writingsuggestions(a AbbrWritingsuggestionsEnum) *AbbrElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *AbbrElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *AbbrElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

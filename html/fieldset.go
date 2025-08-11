@@ -39,22 +39,30 @@ func FieldsetIf(condition bool, children ...htemel.Node) *FieldsetElement {
 	}
 }
 
+func FieldsetTernary(condition bool, true htemel.Node, false htemel.Node) *FieldsetElement {
+	if condition {
+		return Fieldset(true)
+	}
+
+	return Fieldset(false)
+}
+
 type FieldsetAutocapitalizeEnum string
 
 const (
-	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
-	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
 	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
 	FieldsetAutocapitalizeEnumOn         FieldsetAutocapitalizeEnum = "on"
 	FieldsetAutocapitalizeEnumSentences  FieldsetAutocapitalizeEnum = "sentences"
 	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
+	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
+	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
 )
 
 type FieldsetAutocorrectEnum string
 
 const (
-	FieldsetAutocorrectEnumOn  FieldsetAutocorrectEnum = "on"
 	FieldsetAutocorrectEnumOff FieldsetAutocorrectEnum = "off"
+	FieldsetAutocorrectEnumOn  FieldsetAutocorrectEnum = "on"
 )
 
 type FieldsetContenteditableEnum string
@@ -97,12 +105,12 @@ type FieldsetHiddenEnum string
 const (
 	FieldsetHiddenEnumHidden     FieldsetHiddenEnum = "hidden"
 	FieldsetHiddenEnumUntilFound FieldsetHiddenEnum = "until-found"
+	FieldsetHiddenEnumEmpty      FieldsetHiddenEnum = ""
 )
 
 type FieldsetInputmodeEnum string
 
 const (
-	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
 	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
 	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
 	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
@@ -110,6 +118,7 @@ const (
 	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
 	FieldsetInputmodeEnumNumeric FieldsetInputmodeEnum = "numeric"
+	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
 )
 
 type FieldsetSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *FieldsetElement) Writingsuggestions(a FieldsetWritingsuggestionsEnum) *
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *FieldsetElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *FieldsetElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

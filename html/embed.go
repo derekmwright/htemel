@@ -39,22 +39,30 @@ func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
 	}
 }
 
+func EmbedTernary(condition bool, true htemel.Node, false htemel.Node) *EmbedElement {
+	if condition {
+		return Embed(true)
+	}
+
+	return Embed(false)
+}
+
 type EmbedAutocapitalizeEnum string
 
 const (
+	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
 	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
 	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
-	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 )
 
 type EmbedAutocorrectEnum string
 
 const (
-	EmbedAutocorrectEnumOn  EmbedAutocorrectEnum = "on"
 	EmbedAutocorrectEnumOff EmbedAutocorrectEnum = "off"
+	EmbedAutocorrectEnumOn  EmbedAutocorrectEnum = "on"
 )
 
 type EmbedContenteditableEnum string
@@ -83,13 +91,13 @@ const (
 type EmbedEnterkeyhintEnum string
 
 const (
+	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
 	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
 	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
 	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
 	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
-	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 )
 
 type EmbedHiddenEnum string
@@ -97,19 +105,20 @@ type EmbedHiddenEnum string
 const (
 	EmbedHiddenEnumHidden     EmbedHiddenEnum = "hidden"
 	EmbedHiddenEnumUntilFound EmbedHiddenEnum = "until-found"
+	EmbedHiddenEnumEmpty      EmbedHiddenEnum = ""
 )
 
 type EmbedInputmodeEnum string
 
 const (
-	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
-	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
 	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
 	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
 	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
+	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
+	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
 )
 
 type EmbedSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *EmbedElement) Writingsuggestions(a EmbedWritingsuggestionsEnum) *EmbedE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *EmbedElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *EmbedElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,15 +39,23 @@ func DetailsIf(condition bool, children ...htemel.Node) *DetailsElement {
 	}
 }
 
+func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *DetailsElement {
+	if condition {
+		return Details(true)
+	}
+
+	return Details(false)
+}
+
 type DetailsAutocapitalizeEnum string
 
 const (
-	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
 	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
 	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
 	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
 	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
+	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 )
 
 type DetailsAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type DetailsContenteditableEnum string
 
 const (
-	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 	DetailsContenteditableEnumPlaintextOnly DetailsContenteditableEnum = "plaintext-only"
 	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
+	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 )
 
 type DetailsDirEnum string
 
 const (
-	DetailsDirEnumAuto DetailsDirEnum = "auto"
 	DetailsDirEnumLtr  DetailsDirEnum = "ltr"
 	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
+	DetailsDirEnumAuto DetailsDirEnum = "auto"
 )
 
 type DetailsDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type DetailsEnterkeyhintEnum string
 
 const (
+	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
 	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
 	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
 	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
 	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
 	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
-	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 )
 
 type DetailsHiddenEnum string
@@ -97,19 +105,20 @@ type DetailsHiddenEnum string
 const (
 	DetailsHiddenEnumHidden     DetailsHiddenEnum = "hidden"
 	DetailsHiddenEnumUntilFound DetailsHiddenEnum = "until-found"
+	DetailsHiddenEnumEmpty      DetailsHiddenEnum = ""
 )
 
 type DetailsInputmodeEnum string
 
 const (
+	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
+	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
+	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
 	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
 	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
 	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
 	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
-	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
-	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
-	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 )
 
 type DetailsSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *DetailsElement) Writingsuggestions(a DetailsWritingsuggestionsEnum) *De
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *DetailsElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *DetailsElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

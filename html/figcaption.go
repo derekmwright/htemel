@@ -39,15 +39,23 @@ func FigcaptionIf(condition bool, children ...htemel.Node) *FigcaptionElement {
 	}
 }
 
+func FigcaptionTernary(condition bool, true htemel.Node, false htemel.Node) *FigcaptionElement {
+	if condition {
+		return Figcaption(true)
+	}
+
+	return Figcaption(false)
+}
+
 type FigcaptionAutocapitalizeEnum string
 
 const (
-	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
-	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
-	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
 	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
 	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
+	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
+	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
+	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
 )
 
 type FigcaptionAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type FigcaptionDirEnum string
 
 const (
-	FigcaptionDirEnumAuto FigcaptionDirEnum = "auto"
 	FigcaptionDirEnumLtr  FigcaptionDirEnum = "ltr"
 	FigcaptionDirEnumRtl  FigcaptionDirEnum = "rtl"
+	FigcaptionDirEnumAuto FigcaptionDirEnum = "auto"
 )
 
 type FigcaptionDraggableEnum string
@@ -83,47 +91,48 @@ const (
 type FigcaptionEnterkeyhintEnum string
 
 const (
+	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
 	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
 	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
 	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
 	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
-	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
 )
 
 type FigcaptionHiddenEnum string
 
 const (
-	FigcaptionHiddenEnumHidden     FigcaptionHiddenEnum = "hidden"
 	FigcaptionHiddenEnumUntilFound FigcaptionHiddenEnum = "until-found"
+	FigcaptionHiddenEnumHidden     FigcaptionHiddenEnum = "hidden"
+	FigcaptionHiddenEnumEmpty      FigcaptionHiddenEnum = ""
 )
 
 type FigcaptionInputmodeEnum string
 
 const (
-	FigcaptionInputmodeEnumTel     FigcaptionInputmodeEnum = "tel"
-	FigcaptionInputmodeEnumText    FigcaptionInputmodeEnum = "text"
-	FigcaptionInputmodeEnumUrl     FigcaptionInputmodeEnum = "url"
 	FigcaptionInputmodeEnumDecimal FigcaptionInputmodeEnum = "decimal"
 	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
 	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
 	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
 	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
+	FigcaptionInputmodeEnumTel     FigcaptionInputmodeEnum = "tel"
+	FigcaptionInputmodeEnumText    FigcaptionInputmodeEnum = "text"
+	FigcaptionInputmodeEnumUrl     FigcaptionInputmodeEnum = "url"
 )
 
 type FigcaptionSpellcheckEnum string
 
 const (
-	FigcaptionSpellcheckEnumTrue  FigcaptionSpellcheckEnum = "true"
 	FigcaptionSpellcheckEnumFalse FigcaptionSpellcheckEnum = "false"
+	FigcaptionSpellcheckEnumTrue  FigcaptionSpellcheckEnum = "true"
 )
 
 type FigcaptionTranslateEnum string
 
 const (
-	FigcaptionTranslateEnumYes FigcaptionTranslateEnum = "yes"
 	FigcaptionTranslateEnumNo  FigcaptionTranslateEnum = "no"
+	FigcaptionTranslateEnumYes FigcaptionTranslateEnum = "yes"
 )
 
 type FigcaptionWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *FigcaptionElement) Writingsuggestions(a FigcaptionWritingsuggestionsEnu
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *FigcaptionElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *FigcaptionElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

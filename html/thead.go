@@ -39,15 +39,23 @@ func TheadIf(condition bool, children ...htemel.Node) *TheadElement {
 	}
 }
 
+func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadElement {
+	if condition {
+		return Thead(true)
+	}
+
+	return Thead(false)
+}
+
 type TheadAutocapitalizeEnum string
 
 const (
-	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
-	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
-	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
 	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
 	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
+	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
+	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
+	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 )
 
 type TheadAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type TheadEnterkeyhintEnum string
 
 const (
-	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
 	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
 	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
 	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
 	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
 	TheadEnterkeyhintEnumGo       TheadEnterkeyhintEnum = "go"
+	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
 )
 
 type TheadHiddenEnum string
@@ -97,19 +105,20 @@ type TheadHiddenEnum string
 const (
 	TheadHiddenEnumHidden     TheadHiddenEnum = "hidden"
 	TheadHiddenEnumUntilFound TheadHiddenEnum = "until-found"
+	TheadHiddenEnumEmpty      TheadHiddenEnum = ""
 )
 
 type TheadInputmodeEnum string
 
 const (
-	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
-	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
 	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
 	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
 	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
 	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
 	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
 	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
+	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
+	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
 )
 
 type TheadSpellcheckEnum string
@@ -122,8 +131,8 @@ const (
 type TheadTranslateEnum string
 
 const (
-	TheadTranslateEnumYes TheadTranslateEnum = "yes"
 	TheadTranslateEnumNo  TheadTranslateEnum = "no"
+	TheadTranslateEnumYes TheadTranslateEnum = "yes"
 )
 
 type TheadWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *TheadElement) Writingsuggestions(a TheadWritingsuggestionsEnum) *TheadE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *TheadElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *TheadElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

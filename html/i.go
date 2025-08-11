@@ -39,6 +39,14 @@ func IIf(condition bool, children ...htemel.Node) *IElement {
 	}
 }
 
+func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
+	if condition {
+		return I(true)
+	}
+
+	return I(false)
+}
+
 type IAutocapitalizeEnum string
 
 const (
@@ -53,8 +61,8 @@ const (
 type IAutocorrectEnum string
 
 const (
-	IAutocorrectEnumOn  IAutocorrectEnum = "on"
 	IAutocorrectEnumOff IAutocorrectEnum = "off"
+	IAutocorrectEnumOn  IAutocorrectEnum = "on"
 )
 
 type IContenteditableEnum string
@@ -83,13 +91,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
-	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
-	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
-	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
 	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
 	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
+	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
+	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
+	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 )
 
 type IHiddenEnum string
@@ -97,11 +105,13 @@ type IHiddenEnum string
 const (
 	IHiddenEnumHidden     IHiddenEnum = "hidden"
 	IHiddenEnumUntilFound IHiddenEnum = "until-found"
+	IHiddenEnumEmpty      IHiddenEnum = ""
 )
 
 type IInputmodeEnum string
 
 const (
+	IInputmodeEnumNone    IInputmodeEnum = "none"
 	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
 	IInputmodeEnumSearch  IInputmodeEnum = "search"
 	IInputmodeEnumTel     IInputmodeEnum = "tel"
@@ -109,7 +119,6 @@ const (
 	IInputmodeEnumUrl     IInputmodeEnum = "url"
 	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
 	IInputmodeEnumEmail   IInputmodeEnum = "email"
-	IInputmodeEnumNone    IInputmodeEnum = "none"
 )
 
 type ISpellcheckEnum string
@@ -122,8 +131,8 @@ const (
 type ITranslateEnum string
 
 const (
-	ITranslateEnumYes ITranslateEnum = "yes"
 	ITranslateEnumNo  ITranslateEnum = "no"
+	ITranslateEnumYes ITranslateEnum = "yes"
 )
 
 type IWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *IElement) Writingsuggestions(a IWritingsuggestionsEnum) *IElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *IElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *IElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,15 +39,23 @@ func InputIf(condition bool, children ...htemel.Node) *InputElement {
 	}
 }
 
+func InputTernary(condition bool, true htemel.Node, false htemel.Node) *InputElement {
+	if condition {
+		return Input(true)
+	}
+
+	return Input(false)
+}
+
 type InputAutocapitalizeEnum string
 
 const (
-	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
-	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
 	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
 	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
 	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
 	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
+	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
+	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
 )
 
 type InputAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type InputContenteditableEnum string
 
 const (
+	InputContenteditableEnumTrue          InputContenteditableEnum = "true"
 	InputContenteditableEnumFalse         InputContenteditableEnum = "false"
 	InputContenteditableEnumPlaintextOnly InputContenteditableEnum = "plaintext-only"
-	InputContenteditableEnumTrue          InputContenteditableEnum = "true"
 )
 
 type InputDirEnum string
 
 const (
+	InputDirEnumRtl  InputDirEnum = "rtl"
 	InputDirEnumAuto InputDirEnum = "auto"
 	InputDirEnumLtr  InputDirEnum = "ltr"
-	InputDirEnumRtl  InputDirEnum = "rtl"
 )
 
 type InputDraggableEnum string
@@ -97,26 +105,27 @@ type InputHiddenEnum string
 const (
 	InputHiddenEnumHidden     InputHiddenEnum = "hidden"
 	InputHiddenEnumUntilFound InputHiddenEnum = "until-found"
+	InputHiddenEnumEmpty      InputHiddenEnum = ""
 )
 
 type InputInputmodeEnum string
 
 const (
+	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
+	InputInputmodeEnumText    InputInputmodeEnum = "text"
 	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
 	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
 	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 	InputInputmodeEnumNone    InputInputmodeEnum = "none"
 	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
 	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
-	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
-	InputInputmodeEnumText    InputInputmodeEnum = "text"
 )
 
 type InputSpellcheckEnum string
 
 const (
-	InputSpellcheckEnumFalse InputSpellcheckEnum = "false"
 	InputSpellcheckEnumTrue  InputSpellcheckEnum = "true"
+	InputSpellcheckEnumFalse InputSpellcheckEnum = "false"
 )
 
 type InputTranslateEnum string
@@ -129,8 +138,8 @@ const (
 type InputWritingsuggestionsEnum string
 
 const (
-	InputWritingsuggestionsEnumTrue  InputWritingsuggestionsEnum = "true"
 	InputWritingsuggestionsEnumFalse InputWritingsuggestionsEnum = "false"
+	InputWritingsuggestionsEnumTrue  InputWritingsuggestionsEnum = "true"
 )
 
 type inputAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *InputElement) Writingsuggestions(a InputWritingsuggestionsEnum) *InputE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *InputElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *InputElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

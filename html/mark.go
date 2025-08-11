@@ -39,22 +39,30 @@ func MarkIf(condition bool, children ...htemel.Node) *MarkElement {
 	}
 }
 
+func MarkTernary(condition bool, true htemel.Node, false htemel.Node) *MarkElement {
+	if condition {
+		return Mark(true)
+	}
+
+	return Mark(false)
+}
+
 type MarkAutocapitalizeEnum string
 
 const (
-	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
 	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
 	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
 	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
 	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
 	MarkAutocapitalizeEnumNone       MarkAutocapitalizeEnum = "none"
+	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
 )
 
 type MarkAutocorrectEnum string
 
 const (
-	MarkAutocorrectEnumOff MarkAutocorrectEnum = "off"
 	MarkAutocorrectEnumOn  MarkAutocorrectEnum = "on"
+	MarkAutocorrectEnumOff MarkAutocorrectEnum = "off"
 )
 
 type MarkContenteditableEnum string
@@ -68,9 +76,9 @@ const (
 type MarkDirEnum string
 
 const (
+	MarkDirEnumLtr  MarkDirEnum = "ltr"
 	MarkDirEnumRtl  MarkDirEnum = "rtl"
 	MarkDirEnumAuto MarkDirEnum = "auto"
-	MarkDirEnumLtr  MarkDirEnum = "ltr"
 )
 
 type MarkDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type MarkEnterkeyhintEnum string
 
 const (
+	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
+	MarkEnterkeyhintEnumGo       MarkEnterkeyhintEnum = "go"
 	MarkEnterkeyhintEnumNext     MarkEnterkeyhintEnum = "next"
 	MarkEnterkeyhintEnumPrevious MarkEnterkeyhintEnum = "previous"
 	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
 	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
 	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
-	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
-	MarkEnterkeyhintEnumGo       MarkEnterkeyhintEnum = "go"
 )
 
 type MarkHiddenEnum string
@@ -97,19 +105,20 @@ type MarkHiddenEnum string
 const (
 	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
 	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
+	MarkHiddenEnumEmpty      MarkHiddenEnum = ""
 )
 
 type MarkInputmodeEnum string
 
 const (
+	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
+	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
 	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
 	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
 	MarkInputmodeEnumDecimal MarkInputmodeEnum = "decimal"
 	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
 	MarkInputmodeEnumNone    MarkInputmodeEnum = "none"
 	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
-	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
-	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
 )
 
 type MarkSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *MarkElement) Writingsuggestions(a MarkWritingsuggestionsEnum) *MarkElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *MarkElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *MarkElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

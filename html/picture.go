@@ -39,15 +39,23 @@ func PictureIf(condition bool, children ...htemel.Node) *PictureElement {
 	}
 }
 
+func PictureTernary(condition bool, true htemel.Node, false htemel.Node) *PictureElement {
+	if condition {
+		return Picture(true)
+	}
+
+	return Picture(false)
+}
+
 type PictureAutocapitalizeEnum string
 
 const (
+	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
 	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
 	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
 	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 	PictureAutocapitalizeEnumSentences  PictureAutocapitalizeEnum = "sentences"
 	PictureAutocapitalizeEnumWords      PictureAutocapitalizeEnum = "words"
-	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
 )
 
 type PictureAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type PictureDirEnum string
 
 const (
-	PictureDirEnumRtl  PictureDirEnum = "rtl"
 	PictureDirEnumAuto PictureDirEnum = "auto"
 	PictureDirEnumLtr  PictureDirEnum = "ltr"
+	PictureDirEnumRtl  PictureDirEnum = "rtl"
 )
 
 type PictureDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type PictureEnterkeyhintEnum string
 
 const (
-	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
-	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
 	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
 	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
 	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
 	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
 	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
+	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
+	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
 )
 
 type PictureHiddenEnum string
@@ -97,19 +105,20 @@ type PictureHiddenEnum string
 const (
 	PictureHiddenEnumHidden     PictureHiddenEnum = "hidden"
 	PictureHiddenEnumUntilFound PictureHiddenEnum = "until-found"
+	PictureHiddenEnumEmpty      PictureHiddenEnum = ""
 )
 
 type PictureInputmodeEnum string
 
 const (
+	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
+	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
+	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
 	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
 	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
 	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
-	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
-	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
-	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 )
 
 type PictureSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *PictureElement) Writingsuggestions(a PictureWritingsuggestionsEnum) *Pi
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *PictureElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *PictureElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

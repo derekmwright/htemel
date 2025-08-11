@@ -39,6 +39,14 @@ func TitleIf(condition bool, children ...htemel.Node) *TitleElement {
 	}
 }
 
+func TitleTernary(condition bool, true htemel.Node, false htemel.Node) *TitleElement {
+	if condition {
+		return Title(true)
+	}
+
+	return Title(false)
+}
+
 type TitleAutocapitalizeEnum string
 
 const (
@@ -68,9 +76,9 @@ const (
 type TitleDirEnum string
 
 const (
+	TitleDirEnumAuto TitleDirEnum = "auto"
 	TitleDirEnumLtr  TitleDirEnum = "ltr"
 	TitleDirEnumRtl  TitleDirEnum = "rtl"
-	TitleDirEnumAuto TitleDirEnum = "auto"
 )
 
 type TitleDraggableEnum string
@@ -83,20 +91,21 @@ const (
 type TitleEnterkeyhintEnum string
 
 const (
+	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
+	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
 	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
 	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
 	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
 	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
-	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
-	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 )
 
 type TitleHiddenEnum string
 
 const (
-	TitleHiddenEnumUntilFound TitleHiddenEnum = "until-found"
 	TitleHiddenEnumHidden     TitleHiddenEnum = "hidden"
+	TitleHiddenEnumUntilFound TitleHiddenEnum = "until-found"
+	TitleHiddenEnumEmpty      TitleHiddenEnum = ""
 )
 
 type TitleInputmodeEnum string
@@ -115,8 +124,8 @@ const (
 type TitleSpellcheckEnum string
 
 const (
-	TitleSpellcheckEnumFalse TitleSpellcheckEnum = "false"
 	TitleSpellcheckEnumTrue  TitleSpellcheckEnum = "true"
+	TitleSpellcheckEnumFalse TitleSpellcheckEnum = "false"
 )
 
 type TitleTranslateEnum string
@@ -297,6 +306,11 @@ func (e *TitleElement) Writingsuggestions(a TitleWritingsuggestionsEnum) *TitleE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *TitleElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *TitleElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

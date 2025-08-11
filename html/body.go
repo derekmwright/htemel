@@ -39,15 +39,23 @@ func BodyIf(condition bool, children ...htemel.Node) *BodyElement {
 	}
 }
 
+func BodyTernary(condition bool, true htemel.Node, false htemel.Node) *BodyElement {
+	if condition {
+		return Body(true)
+	}
+
+	return Body(false)
+}
+
 type BodyAutocapitalizeEnum string
 
 const (
+	BodyAutocapitalizeEnumCharacters BodyAutocapitalizeEnum = "characters"
 	BodyAutocapitalizeEnumNone       BodyAutocapitalizeEnum = "none"
 	BodyAutocapitalizeEnumOff        BodyAutocapitalizeEnum = "off"
 	BodyAutocapitalizeEnumOn         BodyAutocapitalizeEnum = "on"
 	BodyAutocapitalizeEnumSentences  BodyAutocapitalizeEnum = "sentences"
 	BodyAutocapitalizeEnumWords      BodyAutocapitalizeEnum = "words"
-	BodyAutocapitalizeEnumCharacters BodyAutocapitalizeEnum = "characters"
 )
 
 type BodyAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type BodyContenteditableEnum string
 
 const (
-	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
 	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
+	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
 )
 
 type BodyDirEnum string
@@ -83,13 +91,13 @@ const (
 type BodyEnterkeyhintEnum string
 
 const (
+	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
+	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
 	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
 	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
 	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
 	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
 	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
-	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
-	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
 )
 
 type BodyHiddenEnum string
@@ -97,6 +105,7 @@ type BodyHiddenEnum string
 const (
 	BodyHiddenEnumHidden     BodyHiddenEnum = "hidden"
 	BodyHiddenEnumUntilFound BodyHiddenEnum = "until-found"
+	BodyHiddenEnumEmpty      BodyHiddenEnum = ""
 )
 
 type BodyInputmodeEnum string
@@ -122,8 +131,8 @@ const (
 type BodyTranslateEnum string
 
 const (
-	BodyTranslateEnumNo  BodyTranslateEnum = "no"
 	BodyTranslateEnumYes BodyTranslateEnum = "yes"
+	BodyTranslateEnumNo  BodyTranslateEnum = "no"
 )
 
 type BodyWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *BodyElement) Writingsuggestions(a BodyWritingsuggestionsEnum) *BodyElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *BodyElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *BodyElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

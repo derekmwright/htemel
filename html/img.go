@@ -39,6 +39,14 @@ func ImgIf(condition bool, children ...htemel.Node) *ImgElement {
 	}
 }
 
+func ImgTernary(condition bool, true htemel.Node, false htemel.Node) *ImgElement {
+	if condition {
+		return Img(true)
+	}
+
+	return Img(false)
+}
+
 type ImgAutocapitalizeEnum string
 
 const (
@@ -83,13 +91,13 @@ const (
 type ImgEnterkeyhintEnum string
 
 const (
+	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
+	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
 	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
 	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
-	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
-	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 )
 
 type ImgHiddenEnum string
@@ -97,11 +105,13 @@ type ImgHiddenEnum string
 const (
 	ImgHiddenEnumHidden     ImgHiddenEnum = "hidden"
 	ImgHiddenEnumUntilFound ImgHiddenEnum = "until-found"
+	ImgHiddenEnumEmpty      ImgHiddenEnum = ""
 )
 
 type ImgInputmodeEnum string
 
 const (
+	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
 	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
 	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
 	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
@@ -109,7 +119,6 @@ const (
 	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
 	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
-	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
 )
 
 type ImgSpellcheckEnum string
@@ -129,8 +138,8 @@ const (
 type ImgWritingsuggestionsEnum string
 
 const (
-	ImgWritingsuggestionsEnumFalse ImgWritingsuggestionsEnum = "false"
 	ImgWritingsuggestionsEnumTrue  ImgWritingsuggestionsEnum = "true"
+	ImgWritingsuggestionsEnumFalse ImgWritingsuggestionsEnum = "false"
 )
 
 type imgAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *ImgElement) Writingsuggestions(a ImgWritingsuggestionsEnum) *ImgElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *ImgElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *ImgElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

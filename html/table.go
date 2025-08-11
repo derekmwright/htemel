@@ -39,15 +39,23 @@ func TableIf(condition bool, children ...htemel.Node) *TableElement {
 	}
 }
 
+func TableTernary(condition bool, true htemel.Node, false htemel.Node) *TableElement {
+	if condition {
+		return Table(true)
+	}
+
+	return Table(false)
+}
+
 type TableAutocapitalizeEnum string
 
 const (
+	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
 	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
 	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
 	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
-	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 )
 
 type TableAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type TableContenteditableEnum string
 
 const (
+	TableContenteditableEnumFalse         TableContenteditableEnum = "false"
 	TableContenteditableEnumPlaintextOnly TableContenteditableEnum = "plaintext-only"
 	TableContenteditableEnumTrue          TableContenteditableEnum = "true"
-	TableContenteditableEnumFalse         TableContenteditableEnum = "false"
 )
 
 type TableDirEnum string
@@ -76,20 +84,20 @@ const (
 type TableDraggableEnum string
 
 const (
-	TableDraggableEnumTrue  TableDraggableEnum = "true"
 	TableDraggableEnumFalse TableDraggableEnum = "false"
+	TableDraggableEnumTrue  TableDraggableEnum = "true"
 )
 
 type TableEnterkeyhintEnum string
 
 const (
-	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
-	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
-	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
 	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
 	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
 	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
 	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
+	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
+	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
+	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
 )
 
 type TableHiddenEnum string
@@ -97,19 +105,20 @@ type TableHiddenEnum string
 const (
 	TableHiddenEnumHidden     TableHiddenEnum = "hidden"
 	TableHiddenEnumUntilFound TableHiddenEnum = "until-found"
+	TableHiddenEnumEmpty      TableHiddenEnum = ""
 )
 
 type TableInputmodeEnum string
 
 const (
+	TableInputmodeEnumNone    TableInputmodeEnum = "none"
+	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
 	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 	TableInputmodeEnumText    TableInputmodeEnum = "text"
 	TableInputmodeEnumUrl     TableInputmodeEnum = "url"
 	TableInputmodeEnumDecimal TableInputmodeEnum = "decimal"
 	TableInputmodeEnumEmail   TableInputmodeEnum = "email"
-	TableInputmodeEnumNone    TableInputmodeEnum = "none"
-	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
 )
 
 type TableSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *TableElement) Writingsuggestions(a TableWritingsuggestionsEnum) *TableE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *TableElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *TableElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

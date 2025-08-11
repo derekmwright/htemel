@@ -39,6 +39,14 @@ func StyleIf(condition bool, children ...htemel.Node) *StyleElement {
 	}
 }
 
+func StyleTernary(condition bool, true htemel.Node, false htemel.Node) *StyleElement {
+	if condition {
+		return Style(true)
+	}
+
+	return Style(false)
+}
+
 type StyleAutocapitalizeEnum string
 
 const (
@@ -60,9 +68,9 @@ const (
 type StyleContenteditableEnum string
 
 const (
-	StyleContenteditableEnumFalse         StyleContenteditableEnum = "false"
 	StyleContenteditableEnumPlaintextOnly StyleContenteditableEnum = "plaintext-only"
 	StyleContenteditableEnumTrue          StyleContenteditableEnum = "true"
+	StyleContenteditableEnumFalse         StyleContenteditableEnum = "false"
 )
 
 type StyleDirEnum string
@@ -83,26 +91,26 @@ const (
 type StyleEnterkeyhintEnum string
 
 const (
-	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
-	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
-	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
 	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
 	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
 	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
+	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
+	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
+	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 )
 
 type StyleHiddenEnum string
 
 const (
-	StyleHiddenEnumUntilFound StyleHiddenEnum = "until-found"
 	StyleHiddenEnumHidden     StyleHiddenEnum = "hidden"
+	StyleHiddenEnumUntilFound StyleHiddenEnum = "until-found"
+	StyleHiddenEnumEmpty      StyleHiddenEnum = ""
 )
 
 type StyleInputmodeEnum string
 
 const (
-	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
 	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
 	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
@@ -110,6 +118,7 @@ const (
 	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
 	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
+	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
 )
 
 type StyleSpellcheckEnum string
@@ -122,8 +131,8 @@ const (
 type StyleTranslateEnum string
 
 const (
-	StyleTranslateEnumNo  StyleTranslateEnum = "no"
 	StyleTranslateEnumYes StyleTranslateEnum = "yes"
+	StyleTranslateEnumNo  StyleTranslateEnum = "no"
 )
 
 type StyleWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *StyleElement) Writingsuggestions(a StyleWritingsuggestionsEnum) *StyleE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *StyleElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *StyleElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

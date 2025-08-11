@@ -39,15 +39,23 @@ func DtIf(condition bool, children ...htemel.Node) *DtElement {
 	}
 }
 
+func DtTernary(condition bool, true htemel.Node, false htemel.Node) *DtElement {
+	if condition {
+		return Dt(true)
+	}
+
+	return Dt(false)
+}
+
 type DtAutocapitalizeEnum string
 
 const (
-	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
-	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
 	DtAutocapitalizeEnumOff        DtAutocapitalizeEnum = "off"
 	DtAutocapitalizeEnumOn         DtAutocapitalizeEnum = "on"
 	DtAutocapitalizeEnumSentences  DtAutocapitalizeEnum = "sentences"
 	DtAutocapitalizeEnumWords      DtAutocapitalizeEnum = "words"
+	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
+	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
 )
 
 type DtAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type DtEnterkeyhintEnum string
 
 const (
+	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
+	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
+	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
 	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
 	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
-	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
-	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
-	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
 )
 
 type DtHiddenEnum string
@@ -97,33 +105,34 @@ type DtHiddenEnum string
 const (
 	DtHiddenEnumHidden     DtHiddenEnum = "hidden"
 	DtHiddenEnumUntilFound DtHiddenEnum = "until-found"
+	DtHiddenEnumEmpty      DtHiddenEnum = ""
 )
 
 type DtInputmodeEnum string
 
 const (
-	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
-	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 	DtInputmodeEnumText    DtInputmodeEnum = "text"
 	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
 	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
 	DtInputmodeEnumNone    DtInputmodeEnum = "none"
 	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
+	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
+	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 )
 
 type DtSpellcheckEnum string
 
 const (
-	DtSpellcheckEnumTrue  DtSpellcheckEnum = "true"
 	DtSpellcheckEnumFalse DtSpellcheckEnum = "false"
+	DtSpellcheckEnumTrue  DtSpellcheckEnum = "true"
 )
 
 type DtTranslateEnum string
 
 const (
-	DtTranslateEnumYes DtTranslateEnum = "yes"
 	DtTranslateEnumNo  DtTranslateEnum = "no"
+	DtTranslateEnumYes DtTranslateEnum = "yes"
 )
 
 type DtWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *DtElement) Writingsuggestions(a DtWritingsuggestionsEnum) *DtElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *DtElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *DtElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

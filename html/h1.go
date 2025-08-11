@@ -39,6 +39,14 @@ func H1If(condition bool, children ...htemel.Node) *H1Element {
 	}
 }
 
+func H1Ternary(condition bool, true htemel.Node, false htemel.Node) *H1Element {
+	if condition {
+		return H1(true)
+	}
+
+	return H1(false)
+}
+
 type H1AutocapitalizeEnum string
 
 const (
@@ -60,17 +68,17 @@ const (
 type H1ContenteditableEnum string
 
 const (
-	H1ContenteditableEnumTrue          H1ContenteditableEnum = "true"
 	H1ContenteditableEnumFalse         H1ContenteditableEnum = "false"
 	H1ContenteditableEnumPlaintextOnly H1ContenteditableEnum = "plaintext-only"
+	H1ContenteditableEnumTrue          H1ContenteditableEnum = "true"
 )
 
 type H1DirEnum string
 
 const (
+	H1DirEnumAuto H1DirEnum = "auto"
 	H1DirEnumLtr  H1DirEnum = "ltr"
 	H1DirEnumRtl  H1DirEnum = "rtl"
-	H1DirEnumAuto H1DirEnum = "auto"
 )
 
 type H1DraggableEnum string
@@ -83,13 +91,13 @@ const (
 type H1EnterkeyhintEnum string
 
 const (
+	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
+	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
 	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
 	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
 	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
 	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
 	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
-	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
-	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
 )
 
 type H1HiddenEnum string
@@ -97,12 +105,12 @@ type H1HiddenEnum string
 const (
 	H1HiddenEnumHidden     H1HiddenEnum = "hidden"
 	H1HiddenEnumUntilFound H1HiddenEnum = "until-found"
+	H1HiddenEnumEmpty      H1HiddenEnum = ""
 )
 
 type H1InputmodeEnum string
 
 const (
-	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 	H1InputmodeEnumText    H1InputmodeEnum = "text"
 	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
 	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
@@ -110,6 +118,7 @@ const (
 	H1InputmodeEnumNone    H1InputmodeEnum = "none"
 	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
 	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
+	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 )
 
 type H1SpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *H1Element) Writingsuggestions(a H1WritingsuggestionsEnum) *H1Element {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *H1Element) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *H1Element) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

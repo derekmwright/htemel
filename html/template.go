@@ -39,22 +39,30 @@ func TemplateIf(condition bool, children ...htemel.Node) *TemplateElement {
 	}
 }
 
+func TemplateTernary(condition bool, true htemel.Node, false htemel.Node) *TemplateElement {
+	if condition {
+		return Template(true)
+	}
+
+	return Template(false)
+}
+
 type TemplateAutocapitalizeEnum string
 
 const (
+	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
 	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
 	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
-	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 )
 
 type TemplateAutocorrectEnum string
 
 const (
-	TemplateAutocorrectEnumOff TemplateAutocorrectEnum = "off"
 	TemplateAutocorrectEnumOn  TemplateAutocorrectEnum = "on"
+	TemplateAutocorrectEnumOff TemplateAutocorrectEnum = "off"
 )
 
 type TemplateContenteditableEnum string
@@ -83,13 +91,13 @@ const (
 type TemplateEnterkeyhintEnum string
 
 const (
-	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
-	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
-	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
 	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
 	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 	TemplateEnterkeyhintEnumEnter    TemplateEnterkeyhintEnum = "enter"
 	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
+	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
+	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
+	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
 )
 
 type TemplateHiddenEnum string
@@ -97,6 +105,7 @@ type TemplateHiddenEnum string
 const (
 	TemplateHiddenEnumHidden     TemplateHiddenEnum = "hidden"
 	TemplateHiddenEnumUntilFound TemplateHiddenEnum = "until-found"
+	TemplateHiddenEnumEmpty      TemplateHiddenEnum = ""
 )
 
 type TemplateInputmodeEnum string
@@ -115,8 +124,8 @@ const (
 type TemplateSpellcheckEnum string
 
 const (
-	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
 	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
+	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
 )
 
 type TemplateTranslateEnum string
@@ -297,6 +306,11 @@ func (e *TemplateElement) Writingsuggestions(a TemplateWritingsuggestionsEnum) *
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *TemplateElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *TemplateElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

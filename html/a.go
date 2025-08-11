@@ -39,22 +39,30 @@ func AIf(condition bool, children ...htemel.Node) *AElement {
 	}
 }
 
+func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
+	if condition {
+		return A(true)
+	}
+
+	return A(false)
+}
+
 type AAutocapitalizeEnum string
 
 const (
+	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
+	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
 	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
 	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
 	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
 	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
-	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
-	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
 )
 
 type AAutocorrectEnum string
 
 const (
-	AAutocorrectEnumOff AAutocorrectEnum = "off"
 	AAutocorrectEnumOn  AAutocorrectEnum = "on"
+	AAutocorrectEnumOff AAutocorrectEnum = "off"
 )
 
 type AContenteditableEnum string
@@ -68,9 +76,9 @@ const (
 type ADirEnum string
 
 const (
+	ADirEnumAuto ADirEnum = "auto"
 	ADirEnumLtr  ADirEnum = "ltr"
 	ADirEnumRtl  ADirEnum = "rtl"
-	ADirEnumAuto ADirEnum = "auto"
 )
 
 type ADraggableEnum string
@@ -83,13 +91,13 @@ const (
 type AEnterkeyhintEnum string
 
 const (
+	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
+	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
+	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
 	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
 	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
-	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
-	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
-	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 )
 
 type AHiddenEnum string
@@ -97,26 +105,27 @@ type AHiddenEnum string
 const (
 	AHiddenEnumHidden     AHiddenEnum = "hidden"
 	AHiddenEnumUntilFound AHiddenEnum = "until-found"
+	AHiddenEnumEmpty      AHiddenEnum = ""
 )
 
 type AInputmodeEnum string
 
 const (
+	AInputmodeEnumUrl     AInputmodeEnum = "url"
+	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
+	AInputmodeEnumEmail   AInputmodeEnum = "email"
 	AInputmodeEnumNone    AInputmodeEnum = "none"
 	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
 	AInputmodeEnumSearch  AInputmodeEnum = "search"
 	AInputmodeEnumTel     AInputmodeEnum = "tel"
 	AInputmodeEnumText    AInputmodeEnum = "text"
-	AInputmodeEnumUrl     AInputmodeEnum = "url"
-	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
-	AInputmodeEnumEmail   AInputmodeEnum = "email"
 )
 
 type ASpellcheckEnum string
 
 const (
-	ASpellcheckEnumFalse ASpellcheckEnum = "false"
 	ASpellcheckEnumTrue  ASpellcheckEnum = "true"
+	ASpellcheckEnumFalse ASpellcheckEnum = "false"
 )
 
 type ATranslateEnum string
@@ -297,6 +306,11 @@ func (e *AElement) Writingsuggestions(a AWritingsuggestionsEnum) *AElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *AElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *AElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

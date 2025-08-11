@@ -39,15 +39,23 @@ func EmIf(condition bool, children ...htemel.Node) *EmElement {
 	}
 }
 
+func EmTernary(condition bool, true htemel.Node, false htemel.Node) *EmElement {
+	if condition {
+		return Em(true)
+	}
+
+	return Em(false)
+}
+
 type EmAutocapitalizeEnum string
 
 const (
-	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
 	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
 	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
 	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
 	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
+	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
 )
 
 type EmAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type EmContenteditableEnum string
 
 const (
+	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 	EmContenteditableEnumPlaintextOnly EmContenteditableEnum = "plaintext-only"
 	EmContenteditableEnumTrue          EmContenteditableEnum = "true"
-	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 )
 
 type EmDirEnum string
@@ -76,32 +84,34 @@ const (
 type EmDraggableEnum string
 
 const (
-	EmDraggableEnumTrue  EmDraggableEnum = "true"
 	EmDraggableEnumFalse EmDraggableEnum = "false"
+	EmDraggableEnumTrue  EmDraggableEnum = "true"
 )
 
 type EmEnterkeyhintEnum string
 
 const (
-	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
 	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
 	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
 	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
 	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
+	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 )
 
 type EmHiddenEnum string
 
 const (
-	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
 	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
+	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
+	EmHiddenEnumEmpty      EmHiddenEnum = ""
 )
 
 type EmInputmodeEnum string
 
 const (
+	EmInputmodeEnumNone    EmInputmodeEnum = "none"
 	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
 	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
 	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
@@ -109,7 +119,6 @@ const (
 	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
 	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
 	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
-	EmInputmodeEnumNone    EmInputmodeEnum = "none"
 )
 
 type EmSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *EmElement) Writingsuggestions(a EmWritingsuggestionsEnum) *EmElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *EmElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *EmElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

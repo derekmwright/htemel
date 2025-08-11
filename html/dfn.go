@@ -39,15 +39,23 @@ func DfnIf(condition bool, children ...htemel.Node) *DfnElement {
 	}
 }
 
+func DfnTernary(condition bool, true htemel.Node, false htemel.Node) *DfnElement {
+	if condition {
+		return Dfn(true)
+	}
+
+	return Dfn(false)
+}
+
 type DfnAutocapitalizeEnum string
 
 const (
-	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
 	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
 	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
 	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
 	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
+	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 )
 
 type DfnAutocorrectEnum string
@@ -76,20 +84,20 @@ const (
 type DfnDraggableEnum string
 
 const (
-	DfnDraggableEnumFalse DfnDraggableEnum = "false"
 	DfnDraggableEnumTrue  DfnDraggableEnum = "true"
+	DfnDraggableEnumFalse DfnDraggableEnum = "false"
 )
 
 type DfnEnterkeyhintEnum string
 
 const (
-	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
-	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
-	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
 	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
 	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
+	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
+	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
+	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 )
 
 type DfnHiddenEnum string
@@ -97,26 +105,27 @@ type DfnHiddenEnum string
 const (
 	DfnHiddenEnumHidden     DfnHiddenEnum = "hidden"
 	DfnHiddenEnumUntilFound DfnHiddenEnum = "until-found"
+	DfnHiddenEnumEmpty      DfnHiddenEnum = ""
 )
 
 type DfnInputmodeEnum string
 
 const (
-	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
-	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
-	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
-	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
 	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
 	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
 	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
+	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
+	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
+	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
+	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 )
 
 type DfnSpellcheckEnum string
 
 const (
-	DfnSpellcheckEnumTrue  DfnSpellcheckEnum = "true"
 	DfnSpellcheckEnumFalse DfnSpellcheckEnum = "false"
+	DfnSpellcheckEnumTrue  DfnSpellcheckEnum = "true"
 )
 
 type DfnTranslateEnum string
@@ -297,6 +306,11 @@ func (e *DfnElement) Writingsuggestions(a DfnWritingsuggestionsEnum) *DfnElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *DfnElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *DfnElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,6 +39,14 @@ func MeterIf(condition bool, children ...htemel.Node) *MeterElement {
 	}
 }
 
+func MeterTernary(condition bool, true htemel.Node, false htemel.Node) *MeterElement {
+	if condition {
+		return Meter(true)
+	}
+
+	return Meter(false)
+}
+
 type MeterAutocapitalizeEnum string
 
 const (
@@ -60,17 +68,17 @@ const (
 type MeterContenteditableEnum string
 
 const (
-	MeterContenteditableEnumTrue          MeterContenteditableEnum = "true"
 	MeterContenteditableEnumFalse         MeterContenteditableEnum = "false"
 	MeterContenteditableEnumPlaintextOnly MeterContenteditableEnum = "plaintext-only"
+	MeterContenteditableEnumTrue          MeterContenteditableEnum = "true"
 )
 
 type MeterDirEnum string
 
 const (
+	MeterDirEnumAuto MeterDirEnum = "auto"
 	MeterDirEnumLtr  MeterDirEnum = "ltr"
 	MeterDirEnumRtl  MeterDirEnum = "rtl"
-	MeterDirEnumAuto MeterDirEnum = "auto"
 )
 
 type MeterDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type MeterEnterkeyhintEnum string
 
 const (
-	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
 	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
 	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 	MeterEnterkeyhintEnumDone     MeterEnterkeyhintEnum = "done"
 	MeterEnterkeyhintEnumEnter    MeterEnterkeyhintEnum = "enter"
 	MeterEnterkeyhintEnumGo       MeterEnterkeyhintEnum = "go"
 	MeterEnterkeyhintEnumNext     MeterEnterkeyhintEnum = "next"
+	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
 )
 
 type MeterHiddenEnum string
@@ -97,19 +105,20 @@ type MeterHiddenEnum string
 const (
 	MeterHiddenEnumHidden     MeterHiddenEnum = "hidden"
 	MeterHiddenEnumUntilFound MeterHiddenEnum = "until-found"
+	MeterHiddenEnumEmpty      MeterHiddenEnum = ""
 )
 
 type MeterInputmodeEnum string
 
 const (
-	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
-	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
-	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
-	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 	MeterInputmodeEnumDecimal MeterInputmodeEnum = "decimal"
 	MeterInputmodeEnumEmail   MeterInputmodeEnum = "email"
 	MeterInputmodeEnumNone    MeterInputmodeEnum = "none"
 	MeterInputmodeEnumNumeric MeterInputmodeEnum = "numeric"
+	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
+	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
+	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
+	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 )
 
 type MeterSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *MeterElement) Writingsuggestions(a MeterWritingsuggestionsEnum) *MeterE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *MeterElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *MeterElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

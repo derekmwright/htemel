@@ -39,15 +39,23 @@ func AudioIf(condition bool, children ...htemel.Node) *AudioElement {
 	}
 }
 
+func AudioTernary(condition bool, true htemel.Node, false htemel.Node) *AudioElement {
+	if condition {
+		return Audio(true)
+	}
+
+	return Audio(false)
+}
+
 type AudioAutocapitalizeEnum string
 
 const (
+	AudioAutocapitalizeEnumOn         AudioAutocapitalizeEnum = "on"
+	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
 	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
 	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
 	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 	AudioAutocapitalizeEnumOff        AudioAutocapitalizeEnum = "off"
-	AudioAutocapitalizeEnumOn         AudioAutocapitalizeEnum = "on"
-	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
 )
 
 type AudioAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type AudioContenteditableEnum string
 
 const (
+	AudioContenteditableEnumTrue          AudioContenteditableEnum = "true"
 	AudioContenteditableEnumFalse         AudioContenteditableEnum = "false"
 	AudioContenteditableEnumPlaintextOnly AudioContenteditableEnum = "plaintext-only"
-	AudioContenteditableEnumTrue          AudioContenteditableEnum = "true"
 )
 
 type AudioDirEnum string
 
 const (
+	AudioDirEnumAuto AudioDirEnum = "auto"
 	AudioDirEnumLtr  AudioDirEnum = "ltr"
 	AudioDirEnumRtl  AudioDirEnum = "rtl"
-	AudioDirEnumAuto AudioDirEnum = "auto"
 )
 
 type AudioDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type AudioEnterkeyhintEnum string
 
 const (
+	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
 	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
 	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
 	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
 	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
-	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 )
 
 type AudioHiddenEnum string
@@ -97,19 +105,20 @@ type AudioHiddenEnum string
 const (
 	AudioHiddenEnumHidden     AudioHiddenEnum = "hidden"
 	AudioHiddenEnumUntilFound AudioHiddenEnum = "until-found"
+	AudioHiddenEnumEmpty      AudioHiddenEnum = ""
 )
 
 type AudioInputmodeEnum string
 
 const (
-	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
-	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
-	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
 	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
 	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
 	AudioInputmodeEnumTel     AudioInputmodeEnum = "tel"
 	AudioInputmodeEnumText    AudioInputmodeEnum = "text"
 	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
+	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
+	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
+	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
 )
 
 type AudioSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *AudioElement) Writingsuggestions(a AudioWritingsuggestionsEnum) *AudioE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *AudioElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *AudioElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

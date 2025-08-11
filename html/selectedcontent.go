@@ -39,15 +39,23 @@ func SelectedcontentIf(condition bool, children ...htemel.Node) *Selectedcontent
 	}
 }
 
+func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node) *SelectedcontentElement {
+	if condition {
+		return Selectedcontent(true)
+	}
+
+	return Selectedcontent(false)
+}
+
 type SelectedcontentAutocapitalizeEnum string
 
 const (
-	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
-	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
-	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
 	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
 	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
 	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
+	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
+	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
+	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
 )
 
 type SelectedcontentAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type SelectedcontentDirEnum string
 
 const (
-	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 	SelectedcontentDirEnumAuto SelectedcontentDirEnum = "auto"
 	SelectedcontentDirEnumLtr  SelectedcontentDirEnum = "ltr"
+	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 )
 
 type SelectedcontentDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type SelectedcontentEnterkeyhintEnum string
 
 const (
+	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
+	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
 	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
 	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
 	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
-	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
-	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
 )
 
 type SelectedcontentHiddenEnum string
@@ -97,19 +105,20 @@ type SelectedcontentHiddenEnum string
 const (
 	SelectedcontentHiddenEnumHidden     SelectedcontentHiddenEnum = "hidden"
 	SelectedcontentHiddenEnumUntilFound SelectedcontentHiddenEnum = "until-found"
+	SelectedcontentHiddenEnumEmpty      SelectedcontentHiddenEnum = ""
 )
 
 type SelectedcontentInputmodeEnum string
 
 const (
-	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
-	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
-	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
 	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
 	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
 	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
 	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
 	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
+	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
+	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
+	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
 )
 
 type SelectedcontentSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *SelectedcontentElement) Writingsuggestions(a SelectedcontentWritingsugg
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SelectedcontentElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SelectedcontentElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

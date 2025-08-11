@@ -39,15 +39,23 @@ func HeadIf(condition bool, children ...htemel.Node) *HeadElement {
 	}
 }
 
+func HeadTernary(condition bool, true htemel.Node, false htemel.Node) *HeadElement {
+	if condition {
+		return Head(true)
+	}
+
+	return Head(false)
+}
+
 type HeadAutocapitalizeEnum string
 
 const (
+	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 	HeadAutocapitalizeEnumCharacters HeadAutocapitalizeEnum = "characters"
 	HeadAutocapitalizeEnumNone       HeadAutocapitalizeEnum = "none"
 	HeadAutocapitalizeEnumOff        HeadAutocapitalizeEnum = "off"
 	HeadAutocapitalizeEnumOn         HeadAutocapitalizeEnum = "on"
 	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
-	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 )
 
 type HeadAutocorrectEnum string
@@ -97,12 +105,12 @@ type HeadHiddenEnum string
 const (
 	HeadHiddenEnumHidden     HeadHiddenEnum = "hidden"
 	HeadHiddenEnumUntilFound HeadHiddenEnum = "until-found"
+	HeadHiddenEnumEmpty      HeadHiddenEnum = ""
 )
 
 type HeadInputmodeEnum string
 
 const (
-	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
 	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
 	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
@@ -110,6 +118,7 @@ const (
 	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
 	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
 	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
+	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
 )
 
 type HeadSpellcheckEnum string
@@ -122,15 +131,15 @@ const (
 type HeadTranslateEnum string
 
 const (
-	HeadTranslateEnumNo  HeadTranslateEnum = "no"
 	HeadTranslateEnumYes HeadTranslateEnum = "yes"
+	HeadTranslateEnumNo  HeadTranslateEnum = "no"
 )
 
 type HeadWritingsuggestionsEnum string
 
 const (
-	HeadWritingsuggestionsEnumTrue  HeadWritingsuggestionsEnum = "true"
 	HeadWritingsuggestionsEnumFalse HeadWritingsuggestionsEnum = "false"
+	HeadWritingsuggestionsEnumTrue  HeadWritingsuggestionsEnum = "true"
 )
 
 type headAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *HeadElement) Writingsuggestions(a HeadWritingsuggestionsEnum) *HeadElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *HeadElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *HeadElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

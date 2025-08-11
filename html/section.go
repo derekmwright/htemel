@@ -39,6 +39,14 @@ func SectionIf(condition bool, children ...htemel.Node) *SectionElement {
 	}
 }
 
+func SectionTernary(condition bool, true htemel.Node, false htemel.Node) *SectionElement {
+	if condition {
+		return Section(true)
+	}
+
+	return Section(false)
+}
+
 type SectionAutocapitalizeEnum string
 
 const (
@@ -76,20 +84,20 @@ const (
 type SectionDraggableEnum string
 
 const (
-	SectionDraggableEnumTrue  SectionDraggableEnum = "true"
 	SectionDraggableEnumFalse SectionDraggableEnum = "false"
+	SectionDraggableEnumTrue  SectionDraggableEnum = "true"
 )
 
 type SectionEnterkeyhintEnum string
 
 const (
+	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
 	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
 	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
 	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
 	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
 	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
 	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
-	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
 )
 
 type SectionHiddenEnum string
@@ -97,26 +105,27 @@ type SectionHiddenEnum string
 const (
 	SectionHiddenEnumHidden     SectionHiddenEnum = "hidden"
 	SectionHiddenEnumUntilFound SectionHiddenEnum = "until-found"
+	SectionHiddenEnumEmpty      SectionHiddenEnum = ""
 )
 
 type SectionInputmodeEnum string
 
 const (
+	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
+	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
+	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
 	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
 	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
 	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
 	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
 	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
-	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
-	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
-	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
 )
 
 type SectionSpellcheckEnum string
 
 const (
-	SectionSpellcheckEnumFalse SectionSpellcheckEnum = "false"
 	SectionSpellcheckEnumTrue  SectionSpellcheckEnum = "true"
+	SectionSpellcheckEnumFalse SectionSpellcheckEnum = "false"
 )
 
 type SectionTranslateEnum string
@@ -297,6 +306,11 @@ func (e *SectionElement) Writingsuggestions(a SectionWritingsuggestionsEnum) *Se
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SectionElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SectionElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

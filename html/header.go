@@ -39,6 +39,14 @@ func HeaderIf(condition bool, children ...htemel.Node) *HeaderElement {
 	}
 }
 
+func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderElement {
+	if condition {
+		return Header(true)
+	}
+
+	return Header(false)
+}
+
 type HeaderAutocapitalizeEnum string
 
 const (
@@ -95,8 +103,9 @@ const (
 type HeaderHiddenEnum string
 
 const (
-	HeaderHiddenEnumHidden     HeaderHiddenEnum = "hidden"
 	HeaderHiddenEnumUntilFound HeaderHiddenEnum = "until-found"
+	HeaderHiddenEnumHidden     HeaderHiddenEnum = "hidden"
+	HeaderHiddenEnumEmpty      HeaderHiddenEnum = ""
 )
 
 type HeaderInputmodeEnum string
@@ -115,8 +124,8 @@ const (
 type HeaderSpellcheckEnum string
 
 const (
-	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
 	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
+	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
 )
 
 type HeaderTranslateEnum string
@@ -297,6 +306,11 @@ func (e *HeaderElement) Writingsuggestions(a HeaderWritingsuggestionsEnum) *Head
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *HeaderElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *HeaderElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,15 +39,23 @@ func NavIf(condition bool, children ...htemel.Node) *NavElement {
 	}
 }
 
+func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement {
+	if condition {
+		return Nav(true)
+	}
+
+	return Nav(false)
+}
+
 type NavAutocapitalizeEnum string
 
 const (
-	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
-	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
 	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
 	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
 	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
+	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
+	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
 )
 
 type NavAutocorrectEnum string
@@ -83,33 +91,34 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
-	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
 	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
 	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
 	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
+	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 )
 
 type NavHiddenEnum string
 
 const (
-	NavHiddenEnumHidden     NavHiddenEnum = "hidden"
 	NavHiddenEnumUntilFound NavHiddenEnum = "until-found"
+	NavHiddenEnumHidden     NavHiddenEnum = "hidden"
+	NavHiddenEnumEmpty      NavHiddenEnum = ""
 )
 
 type NavInputmodeEnum string
 
 const (
-	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
-	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
-	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
-	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
 	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
 	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 	NavInputmodeEnumText    NavInputmodeEnum = "text"
+	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
+	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
+	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
+	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 )
 
 type NavSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *NavElement) Writingsuggestions(a NavWritingsuggestionsEnum) *NavElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *NavElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *NavElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

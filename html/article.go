@@ -39,15 +39,23 @@ func ArticleIf(condition bool, children ...htemel.Node) *ArticleElement {
 	}
 }
 
+func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *ArticleElement {
+	if condition {
+		return Article(true)
+	}
+
+	return Article(false)
+}
+
 type ArticleAutocapitalizeEnum string
 
 const (
+	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
+	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
 	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
 	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
 	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
-	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
-	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 )
 
 type ArticleAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type ArticleContenteditableEnum string
 
 const (
+	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
 	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
-	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
 )
 
 type ArticleDirEnum string
@@ -83,13 +91,13 @@ const (
 type ArticleEnterkeyhintEnum string
 
 const (
+	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
 	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
 	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
 	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
 	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
 	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
 	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
-	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
 )
 
 type ArticleHiddenEnum string
@@ -97,19 +105,20 @@ type ArticleHiddenEnum string
 const (
 	ArticleHiddenEnumHidden     ArticleHiddenEnum = "hidden"
 	ArticleHiddenEnumUntilFound ArticleHiddenEnum = "until-found"
+	ArticleHiddenEnumEmpty      ArticleHiddenEnum = ""
 )
 
 type ArticleInputmodeEnum string
 
 const (
+	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
+	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
 	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
 	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
 	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
 	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
 	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
 	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
-	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
-	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
 )
 
 type ArticleSpellcheckEnum string
@@ -122,15 +131,15 @@ const (
 type ArticleTranslateEnum string
 
 const (
-	ArticleTranslateEnumYes ArticleTranslateEnum = "yes"
 	ArticleTranslateEnumNo  ArticleTranslateEnum = "no"
+	ArticleTranslateEnumYes ArticleTranslateEnum = "yes"
 )
 
 type ArticleWritingsuggestionsEnum string
 
 const (
-	ArticleWritingsuggestionsEnumTrue  ArticleWritingsuggestionsEnum = "true"
 	ArticleWritingsuggestionsEnumFalse ArticleWritingsuggestionsEnum = "false"
+	ArticleWritingsuggestionsEnumTrue  ArticleWritingsuggestionsEnum = "true"
 )
 
 type articleAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *ArticleElement) Writingsuggestions(a ArticleWritingsuggestionsEnum) *Ar
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *ArticleElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *ArticleElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

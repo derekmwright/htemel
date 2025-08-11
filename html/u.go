@@ -39,15 +39,23 @@ func UIf(condition bool, children ...htemel.Node) *UElement {
 	}
 }
 
+func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
+	if condition {
+		return U(true)
+	}
+
+	return U(false)
+}
+
 type UAutocapitalizeEnum string
 
 const (
-	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
-	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
 	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
 	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
 	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
+	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
+	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
 )
 
 type UAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type UEnterkeyhintEnum string
 
 const (
-	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
-	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
-	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
 	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
 	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
+	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
+	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
+	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
 )
 
 type UHiddenEnum string
@@ -97,11 +105,13 @@ type UHiddenEnum string
 const (
 	UHiddenEnumHidden     UHiddenEnum = "hidden"
 	UHiddenEnumUntilFound UHiddenEnum = "until-found"
+	UHiddenEnumEmpty      UHiddenEnum = ""
 )
 
 type UInputmodeEnum string
 
 const (
+	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
 	UInputmodeEnumSearch  UInputmodeEnum = "search"
 	UInputmodeEnumTel     UInputmodeEnum = "tel"
 	UInputmodeEnumText    UInputmodeEnum = "text"
@@ -109,7 +119,6 @@ const (
 	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
 	UInputmodeEnumEmail   UInputmodeEnum = "email"
 	UInputmodeEnumNone    UInputmodeEnum = "none"
-	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
 )
 
 type USpellcheckEnum string
@@ -129,8 +138,8 @@ const (
 type UWritingsuggestionsEnum string
 
 const (
-	UWritingsuggestionsEnumTrue  UWritingsuggestionsEnum = "true"
 	UWritingsuggestionsEnumFalse UWritingsuggestionsEnum = "false"
+	UWritingsuggestionsEnumTrue  UWritingsuggestionsEnum = "true"
 )
 
 type uAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *UElement) Writingsuggestions(a UWritingsuggestionsEnum) *UElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *UElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *UElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

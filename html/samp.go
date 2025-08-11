@@ -39,6 +39,14 @@ func SampIf(condition bool, children ...htemel.Node) *SampElement {
 	}
 }
 
+func SampTernary(condition bool, true htemel.Node, false htemel.Node) *SampElement {
+	if condition {
+		return Samp(true)
+	}
+
+	return Samp(false)
+}
+
 type SampAutocapitalizeEnum string
 
 const (
@@ -83,13 +91,13 @@ const (
 type SampEnterkeyhintEnum string
 
 const (
+	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
+	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
 	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
 	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
 	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
 	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
-	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
-	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 )
 
 type SampHiddenEnum string
@@ -97,12 +105,12 @@ type SampHiddenEnum string
 const (
 	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
 	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
+	SampHiddenEnumEmpty      SampHiddenEnum = ""
 )
 
 type SampInputmodeEnum string
 
 const (
-	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
 	SampInputmodeEnumNone    SampInputmodeEnum = "none"
 	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
 	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
@@ -110,20 +118,21 @@ const (
 	SampInputmodeEnumText    SampInputmodeEnum = "text"
 	SampInputmodeEnumUrl     SampInputmodeEnum = "url"
 	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
+	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
 )
 
 type SampSpellcheckEnum string
 
 const (
-	SampSpellcheckEnumFalse SampSpellcheckEnum = "false"
 	SampSpellcheckEnumTrue  SampSpellcheckEnum = "true"
+	SampSpellcheckEnumFalse SampSpellcheckEnum = "false"
 )
 
 type SampTranslateEnum string
 
 const (
-	SampTranslateEnumNo  SampTranslateEnum = "no"
 	SampTranslateEnumYes SampTranslateEnum = "yes"
+	SampTranslateEnumNo  SampTranslateEnum = "no"
 )
 
 type SampWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *SampElement) Writingsuggestions(a SampWritingsuggestionsEnum) *SampElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SampElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SampElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

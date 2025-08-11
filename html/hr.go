@@ -39,15 +39,23 @@ func HrIf(condition bool, children ...htemel.Node) *HrElement {
 	}
 }
 
+func HrTernary(condition bool, true htemel.Node, false htemel.Node) *HrElement {
+	if condition {
+		return Hr(true)
+	}
+
+	return Hr(false)
+}
+
 type HrAutocapitalizeEnum string
 
 const (
+	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
 	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
 	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
 	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
 	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
-	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
 )
 
 type HrAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type HrDirEnum string
 
 const (
+	HrDirEnumAuto HrDirEnum = "auto"
 	HrDirEnumLtr  HrDirEnum = "ltr"
 	HrDirEnumRtl  HrDirEnum = "rtl"
-	HrDirEnumAuto HrDirEnum = "auto"
 )
 
 type HrDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type HrEnterkeyhintEnum string
 
 const (
-	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
 	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
 	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
 	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
 	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
 	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
+	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 )
 
 type HrHiddenEnum string
@@ -97,19 +105,20 @@ type HrHiddenEnum string
 const (
 	HrHiddenEnumHidden     HrHiddenEnum = "hidden"
 	HrHiddenEnumUntilFound HrHiddenEnum = "until-found"
+	HrHiddenEnumEmpty      HrHiddenEnum = ""
 )
 
 type HrInputmodeEnum string
 
 const (
-	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
-	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
-	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
-	HrInputmodeEnumText    HrInputmodeEnum = "text"
 	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
 	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
 	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
 	HrInputmodeEnumNone    HrInputmodeEnum = "none"
+	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
+	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
+	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
+	HrInputmodeEnumText    HrInputmodeEnum = "text"
 )
 
 type HrSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *HrElement) Writingsuggestions(a HrWritingsuggestionsEnum) *HrElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *HrElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *HrElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

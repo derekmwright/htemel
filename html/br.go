@@ -39,6 +39,14 @@ func BrIf(condition bool, children ...htemel.Node) *BrElement {
 	}
 }
 
+func BrTernary(condition bool, true htemel.Node, false htemel.Node) *BrElement {
+	if condition {
+		return Br(true)
+	}
+
+	return Br(false)
+}
+
 type BrAutocapitalizeEnum string
 
 const (
@@ -68,28 +76,28 @@ const (
 type BrDirEnum string
 
 const (
+	BrDirEnumRtl  BrDirEnum = "rtl"
 	BrDirEnumAuto BrDirEnum = "auto"
 	BrDirEnumLtr  BrDirEnum = "ltr"
-	BrDirEnumRtl  BrDirEnum = "rtl"
 )
 
 type BrDraggableEnum string
 
 const (
-	BrDraggableEnumFalse BrDraggableEnum = "false"
 	BrDraggableEnumTrue  BrDraggableEnum = "true"
+	BrDraggableEnumFalse BrDraggableEnum = "false"
 )
 
 type BrEnterkeyhintEnum string
 
 const (
-	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
-	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
 	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
 	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
 	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
+	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
+	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 )
 
 type BrHiddenEnum string
@@ -97,6 +105,7 @@ type BrHiddenEnum string
 const (
 	BrHiddenEnumHidden     BrHiddenEnum = "hidden"
 	BrHiddenEnumUntilFound BrHiddenEnum = "until-found"
+	BrHiddenEnumEmpty      BrHiddenEnum = ""
 )
 
 type BrInputmodeEnum string
@@ -297,6 +306,11 @@ func (e *BrElement) Writingsuggestions(a BrWritingsuggestionsEnum) *BrElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *BrElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *BrElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

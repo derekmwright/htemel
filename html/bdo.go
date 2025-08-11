@@ -39,6 +39,14 @@ func BdoIf(condition bool, children ...htemel.Node) *BdoElement {
 	}
 }
 
+func BdoTernary(condition bool, true htemel.Node, false htemel.Node) *BdoElement {
+	if condition {
+		return Bdo(true)
+	}
+
+	return Bdo(false)
+}
+
 type BdoAutocapitalizeEnum string
 
 const (
@@ -68,9 +76,9 @@ const (
 type BdoDirEnum string
 
 const (
-	BdoDirEnumAuto BdoDirEnum = "auto"
 	BdoDirEnumLtr  BdoDirEnum = "ltr"
 	BdoDirEnumRtl  BdoDirEnum = "rtl"
+	BdoDirEnumAuto BdoDirEnum = "auto"
 )
 
 type BdoDraggableEnum string
@@ -97,6 +105,7 @@ type BdoHiddenEnum string
 const (
 	BdoHiddenEnumHidden     BdoHiddenEnum = "hidden"
 	BdoHiddenEnumUntilFound BdoHiddenEnum = "until-found"
+	BdoHiddenEnumEmpty      BdoHiddenEnum = ""
 )
 
 type BdoInputmodeEnum string
@@ -122,15 +131,15 @@ const (
 type BdoTranslateEnum string
 
 const (
-	BdoTranslateEnumYes BdoTranslateEnum = "yes"
 	BdoTranslateEnumNo  BdoTranslateEnum = "no"
+	BdoTranslateEnumYes BdoTranslateEnum = "yes"
 )
 
 type BdoWritingsuggestionsEnum string
 
 const (
-	BdoWritingsuggestionsEnumFalse BdoWritingsuggestionsEnum = "false"
 	BdoWritingsuggestionsEnumTrue  BdoWritingsuggestionsEnum = "true"
+	BdoWritingsuggestionsEnumFalse BdoWritingsuggestionsEnum = "false"
 )
 
 type bdoAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *BdoElement) Writingsuggestions(a BdoWritingsuggestionsEnum) *BdoElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *BdoElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *BdoElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

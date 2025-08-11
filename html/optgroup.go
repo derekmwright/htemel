@@ -39,15 +39,23 @@ func OptgroupIf(condition bool, children ...htemel.Node) *OptgroupElement {
 	}
 }
 
+func OptgroupTernary(condition bool, true htemel.Node, false htemel.Node) *OptgroupElement {
+	if condition {
+		return Optgroup(true)
+	}
+
+	return Optgroup(false)
+}
+
 type OptgroupAutocapitalizeEnum string
 
 const (
+	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
+	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 	OptgroupAutocapitalizeEnumOff        OptgroupAutocapitalizeEnum = "off"
 	OptgroupAutocapitalizeEnumOn         OptgroupAutocapitalizeEnum = "on"
 	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
 	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
-	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
-	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 )
 
 type OptgroupAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type OptgroupContenteditableEnum string
 
 const (
+	OptgroupContenteditableEnumTrue          OptgroupContenteditableEnum = "true"
 	OptgroupContenteditableEnumFalse         OptgroupContenteditableEnum = "false"
 	OptgroupContenteditableEnumPlaintextOnly OptgroupContenteditableEnum = "plaintext-only"
-	OptgroupContenteditableEnumTrue          OptgroupContenteditableEnum = "true"
 )
 
 type OptgroupDirEnum string
@@ -76,8 +84,8 @@ const (
 type OptgroupDraggableEnum string
 
 const (
-	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
 	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
+	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
 )
 
 type OptgroupEnterkeyhintEnum string
@@ -97,19 +105,20 @@ type OptgroupHiddenEnum string
 const (
 	OptgroupHiddenEnumHidden     OptgroupHiddenEnum = "hidden"
 	OptgroupHiddenEnumUntilFound OptgroupHiddenEnum = "until-found"
+	OptgroupHiddenEnumEmpty      OptgroupHiddenEnum = ""
 )
 
 type OptgroupInputmodeEnum string
 
 const (
+	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
+	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
+	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
 	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
 	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
 	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
 	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
 	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
-	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
-	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
-	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
 )
 
 type OptgroupSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *OptgroupElement) Writingsuggestions(a OptgroupWritingsuggestionsEnum) *
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *OptgroupElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *OptgroupElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

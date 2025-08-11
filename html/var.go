@@ -39,15 +39,23 @@ func VarIf(condition bool, children ...htemel.Node) *VarElement {
 	}
 }
 
+func VarTernary(condition bool, true htemel.Node, false htemel.Node) *VarElement {
+	if condition {
+		return Var(true)
+	}
+
+	return Var(false)
+}
+
 type VarAutocapitalizeEnum string
 
 const (
+	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
+	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
 	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
 	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
 	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
 	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
-	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
-	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
 )
 
 type VarAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type VarContenteditableEnum string
 
 const (
-	VarContenteditableEnumTrue          VarContenteditableEnum = "true"
 	VarContenteditableEnumFalse         VarContenteditableEnum = "false"
 	VarContenteditableEnumPlaintextOnly VarContenteditableEnum = "plaintext-only"
+	VarContenteditableEnumTrue          VarContenteditableEnum = "true"
 )
 
 type VarDirEnum string
 
 const (
+	VarDirEnumAuto VarDirEnum = "auto"
 	VarDirEnumLtr  VarDirEnum = "ltr"
 	VarDirEnumRtl  VarDirEnum = "rtl"
-	VarDirEnumAuto VarDirEnum = "auto"
 )
 
 type VarDraggableEnum string
@@ -83,33 +91,34 @@ const (
 type VarEnterkeyhintEnum string
 
 const (
-	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
-	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
 	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
 	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
 	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
+	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
+	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
 )
 
 type VarHiddenEnum string
 
 const (
-	VarHiddenEnumHidden     VarHiddenEnum = "hidden"
 	VarHiddenEnumUntilFound VarHiddenEnum = "until-found"
+	VarHiddenEnumHidden     VarHiddenEnum = "hidden"
+	VarHiddenEnumEmpty      VarHiddenEnum = ""
 )
 
 type VarInputmodeEnum string
 
 const (
-	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
-	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
-	VarInputmodeEnumNone    VarInputmodeEnum = "none"
-	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
 	VarInputmodeEnumText    VarInputmodeEnum = "text"
 	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
+	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
+	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
+	VarInputmodeEnumNone    VarInputmodeEnum = "none"
+	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 )
 
 type VarSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *VarElement) Writingsuggestions(a VarWritingsuggestionsEnum) *VarElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *VarElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *VarElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

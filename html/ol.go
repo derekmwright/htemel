@@ -39,15 +39,23 @@ func OlIf(condition bool, children ...htemel.Node) *OlElement {
 	}
 }
 
+func OlTernary(condition bool, true htemel.Node, false htemel.Node) *OlElement {
+	if condition {
+		return Ol(true)
+	}
+
+	return Ol(false)
+}
+
 type OlAutocapitalizeEnum string
 
 const (
-	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
-	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 	OlAutocapitalizeEnumNone       OlAutocapitalizeEnum = "none"
 	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
 	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
 	OlAutocapitalizeEnumSentences  OlAutocapitalizeEnum = "sentences"
+	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
+	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 )
 
 type OlAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type OlContenteditableEnum string
 
 const (
-	OlContenteditableEnumTrue          OlContenteditableEnum = "true"
 	OlContenteditableEnumFalse         OlContenteditableEnum = "false"
 	OlContenteditableEnumPlaintextOnly OlContenteditableEnum = "plaintext-only"
+	OlContenteditableEnumTrue          OlContenteditableEnum = "true"
 )
 
 type OlDirEnum string
@@ -76,20 +84,20 @@ const (
 type OlDraggableEnum string
 
 const (
-	OlDraggableEnumFalse OlDraggableEnum = "false"
 	OlDraggableEnumTrue  OlDraggableEnum = "true"
+	OlDraggableEnumFalse OlDraggableEnum = "false"
 )
 
 type OlEnterkeyhintEnum string
 
 const (
-	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
-	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
-	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
 	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
 	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
+	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
+	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
+	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
 )
 
 type OlHiddenEnum string
@@ -97,33 +105,34 @@ type OlHiddenEnum string
 const (
 	OlHiddenEnumHidden     OlHiddenEnum = "hidden"
 	OlHiddenEnumUntilFound OlHiddenEnum = "until-found"
+	OlHiddenEnumEmpty      OlHiddenEnum = ""
 )
 
 type OlInputmodeEnum string
 
 const (
-	OlInputmodeEnumText    OlInputmodeEnum = "text"
-	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
-	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
-	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
 	OlInputmodeEnumNone    OlInputmodeEnum = "none"
 	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
 	OlInputmodeEnumSearch  OlInputmodeEnum = "search"
 	OlInputmodeEnumTel     OlInputmodeEnum = "tel"
+	OlInputmodeEnumText    OlInputmodeEnum = "text"
+	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
+	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
+	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
 )
 
 type OlSpellcheckEnum string
 
 const (
-	OlSpellcheckEnumTrue  OlSpellcheckEnum = "true"
 	OlSpellcheckEnumFalse OlSpellcheckEnum = "false"
+	OlSpellcheckEnumTrue  OlSpellcheckEnum = "true"
 )
 
 type OlTranslateEnum string
 
 const (
-	OlTranslateEnumYes OlTranslateEnum = "yes"
 	OlTranslateEnumNo  OlTranslateEnum = "no"
+	OlTranslateEnumYes OlTranslateEnum = "yes"
 )
 
 type OlWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *OlElement) Writingsuggestions(a OlWritingsuggestionsEnum) *OlElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *OlElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *OlElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

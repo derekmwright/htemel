@@ -39,6 +39,14 @@ func CaptionIf(condition bool, children ...htemel.Node) *CaptionElement {
 	}
 }
 
+func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *CaptionElement {
+	if condition {
+		return Caption(true)
+	}
+
+	return Caption(false)
+}
+
 type CaptionAutocapitalizeEnum string
 
 const (
@@ -60,17 +68,17 @@ const (
 type CaptionContenteditableEnum string
 
 const (
+	CaptionContenteditableEnumTrue          CaptionContenteditableEnum = "true"
 	CaptionContenteditableEnumFalse         CaptionContenteditableEnum = "false"
 	CaptionContenteditableEnumPlaintextOnly CaptionContenteditableEnum = "plaintext-only"
-	CaptionContenteditableEnumTrue          CaptionContenteditableEnum = "true"
 )
 
 type CaptionDirEnum string
 
 const (
-	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
 	CaptionDirEnumAuto CaptionDirEnum = "auto"
 	CaptionDirEnumLtr  CaptionDirEnum = "ltr"
+	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
 )
 
 type CaptionDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type CaptionEnterkeyhintEnum string
 
 const (
+	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
 	CaptionEnterkeyhintEnumSearch   CaptionEnterkeyhintEnum = "search"
 	CaptionEnterkeyhintEnumSend     CaptionEnterkeyhintEnum = "send"
 	CaptionEnterkeyhintEnumDone     CaptionEnterkeyhintEnum = "done"
 	CaptionEnterkeyhintEnumEnter    CaptionEnterkeyhintEnum = "enter"
 	CaptionEnterkeyhintEnumGo       CaptionEnterkeyhintEnum = "go"
 	CaptionEnterkeyhintEnumNext     CaptionEnterkeyhintEnum = "next"
-	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
 )
 
 type CaptionHiddenEnum string
@@ -97,19 +105,20 @@ type CaptionHiddenEnum string
 const (
 	CaptionHiddenEnumHidden     CaptionHiddenEnum = "hidden"
 	CaptionHiddenEnumUntilFound CaptionHiddenEnum = "until-found"
+	CaptionHiddenEnumEmpty      CaptionHiddenEnum = ""
 )
 
 type CaptionInputmodeEnum string
 
 const (
-	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
-	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
-	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
 	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
 	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
 	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
 	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
 	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
+	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
+	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
+	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
 )
 
 type CaptionSpellcheckEnum string
@@ -129,8 +138,8 @@ const (
 type CaptionWritingsuggestionsEnum string
 
 const (
-	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
 	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
+	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
 )
 
 type captionAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *CaptionElement) Writingsuggestions(a CaptionWritingsuggestionsEnum) *Ca
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *CaptionElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *CaptionElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

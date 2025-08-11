@@ -39,6 +39,14 @@ func ThIf(condition bool, children ...htemel.Node) *ThElement {
 	}
 }
 
+func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
+	if condition {
+		return Th(true)
+	}
+
+	return Th(false)
+}
+
 type ThAutocapitalizeEnum string
 
 const (
@@ -68,9 +76,9 @@ const (
 type ThDirEnum string
 
 const (
-	ThDirEnumLtr  ThDirEnum = "ltr"
 	ThDirEnumRtl  ThDirEnum = "rtl"
 	ThDirEnumAuto ThDirEnum = "auto"
+	ThDirEnumLtr  ThDirEnum = "ltr"
 )
 
 type ThDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type ThEnterkeyhintEnum string
 
 const (
+	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
+	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
 	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
 	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
 	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
 	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
-	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
-	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
 )
 
 type ThHiddenEnum string
@@ -97,19 +105,20 @@ type ThHiddenEnum string
 const (
 	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
 	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
+	ThHiddenEnumEmpty      ThHiddenEnum = ""
 )
 
 type ThInputmodeEnum string
 
 const (
-	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
-	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
-	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
 	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
 	ThInputmodeEnumText    ThInputmodeEnum = "text"
 	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
+	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
+	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
+	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 )
 
 type ThSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *ThElement) Writingsuggestions(a ThWritingsuggestionsEnum) *ThElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *ThElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *ThElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

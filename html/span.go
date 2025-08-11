@@ -39,6 +39,14 @@ func SpanIf(condition bool, children ...htemel.Node) *SpanElement {
 	}
 }
 
+func SpanTernary(condition bool, true htemel.Node, false htemel.Node) *SpanElement {
+	if condition {
+		return Span(true)
+	}
+
+	return Span(false)
+}
+
 type SpanAutocapitalizeEnum string
 
 const (
@@ -60,17 +68,17 @@ const (
 type SpanContenteditableEnum string
 
 const (
-	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
 	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
 	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
+	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
 )
 
 type SpanDirEnum string
 
 const (
-	SpanDirEnumAuto SpanDirEnum = "auto"
 	SpanDirEnumLtr  SpanDirEnum = "ltr"
 	SpanDirEnumRtl  SpanDirEnum = "rtl"
+	SpanDirEnumAuto SpanDirEnum = "auto"
 )
 
 type SpanDraggableEnum string
@@ -83,33 +91,34 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
+	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
+	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
+	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
 	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
 	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
 	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
 	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
-	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
-	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
-	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
 )
 
 type SpanHiddenEnum string
 
 const (
-	SpanHiddenEnumHidden     SpanHiddenEnum = "hidden"
 	SpanHiddenEnumUntilFound SpanHiddenEnum = "until-found"
+	SpanHiddenEnumHidden     SpanHiddenEnum = "hidden"
+	SpanHiddenEnumEmpty      SpanHiddenEnum = ""
 )
 
 type SpanInputmodeEnum string
 
 const (
-	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
-	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
-	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
 	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
 	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
 	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
 	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
+	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
+	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
+	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
 )
 
 type SpanSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *SpanElement) Writingsuggestions(a SpanWritingsuggestionsEnum) *SpanElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SpanElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SpanElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

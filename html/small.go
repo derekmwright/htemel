@@ -39,15 +39,23 @@ func SmallIf(condition bool, children ...htemel.Node) *SmallElement {
 	}
 }
 
+func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallElement {
+	if condition {
+		return Small(true)
+	}
+
+	return Small(false)
+}
+
 type SmallAutocapitalizeEnum string
 
 const (
-	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
 	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
 	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
 	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
+	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 )
 
 type SmallAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type SmallContenteditableEnum string
 
 const (
-	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
 	SmallContenteditableEnumPlaintextOnly SmallContenteditableEnum = "plaintext-only"
 	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
+	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
 )
 
 type SmallDirEnum string
 
 const (
+	SmallDirEnumAuto SmallDirEnum = "auto"
 	SmallDirEnumLtr  SmallDirEnum = "ltr"
 	SmallDirEnumRtl  SmallDirEnum = "rtl"
-	SmallDirEnumAuto SmallDirEnum = "auto"
 )
 
 type SmallDraggableEnum string
@@ -95,21 +103,22 @@ const (
 type SmallHiddenEnum string
 
 const (
-	SmallHiddenEnumHidden     SmallHiddenEnum = "hidden"
 	SmallHiddenEnumUntilFound SmallHiddenEnum = "until-found"
+	SmallHiddenEnumHidden     SmallHiddenEnum = "hidden"
+	SmallHiddenEnumEmpty      SmallHiddenEnum = ""
 )
 
 type SmallInputmodeEnum string
 
 const (
-	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
-	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
-	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
-	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
 	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
 	SmallInputmodeEnumSearch  SmallInputmodeEnum = "search"
 	SmallInputmodeEnumTel     SmallInputmodeEnum = "tel"
 	SmallInputmodeEnumText    SmallInputmodeEnum = "text"
+	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
+	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
+	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
+	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
 )
 
 type SmallSpellcheckEnum string
@@ -122,8 +131,8 @@ const (
 type SmallTranslateEnum string
 
 const (
-	SmallTranslateEnumNo  SmallTranslateEnum = "no"
 	SmallTranslateEnumYes SmallTranslateEnum = "yes"
+	SmallTranslateEnumNo  SmallTranslateEnum = "no"
 )
 
 type SmallWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *SmallElement) Writingsuggestions(a SmallWritingsuggestionsEnum) *SmallE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SmallElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SmallElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

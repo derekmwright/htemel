@@ -39,15 +39,23 @@ func MenuIf(condition bool, children ...htemel.Node) *MenuElement {
 	}
 }
 
+func MenuTernary(condition bool, true htemel.Node, false htemel.Node) *MenuElement {
+	if condition {
+		return Menu(true)
+	}
+
+	return Menu(false)
+}
+
 type MenuAutocapitalizeEnum string
 
 const (
-	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
-	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
-	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
 	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
 	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
+	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
+	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
+	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 )
 
 type MenuAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type MenuContenteditableEnum string
 
 const (
-	MenuContenteditableEnumTrue          MenuContenteditableEnum = "true"
 	MenuContenteditableEnumFalse         MenuContenteditableEnum = "false"
 	MenuContenteditableEnumPlaintextOnly MenuContenteditableEnum = "plaintext-only"
+	MenuContenteditableEnumTrue          MenuContenteditableEnum = "true"
 )
 
 type MenuDirEnum string
 
 const (
-	MenuDirEnumRtl  MenuDirEnum = "rtl"
 	MenuDirEnumAuto MenuDirEnum = "auto"
 	MenuDirEnumLtr  MenuDirEnum = "ltr"
+	MenuDirEnumRtl  MenuDirEnum = "rtl"
 )
 
 type MenuDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
+	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
+	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
 	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
 	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
-	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
-	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 )
 
 type MenuHiddenEnum string
@@ -97,12 +105,12 @@ type MenuHiddenEnum string
 const (
 	MenuHiddenEnumHidden     MenuHiddenEnum = "hidden"
 	MenuHiddenEnumUntilFound MenuHiddenEnum = "until-found"
+	MenuHiddenEnumEmpty      MenuHiddenEnum = ""
 )
 
 type MenuInputmodeEnum string
 
 const (
-	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
 	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
@@ -110,13 +118,14 @@ const (
 	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
 	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
+	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
 )
 
 type MenuSpellcheckEnum string
 
 const (
-	MenuSpellcheckEnumFalse MenuSpellcheckEnum = "false"
 	MenuSpellcheckEnumTrue  MenuSpellcheckEnum = "true"
+	MenuSpellcheckEnumFalse MenuSpellcheckEnum = "false"
 )
 
 type MenuTranslateEnum string
@@ -297,6 +306,11 @@ func (e *MenuElement) Writingsuggestions(a MenuWritingsuggestionsEnum) *MenuElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *MenuElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *MenuElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,6 +39,14 @@ func MainIf(condition bool, children ...htemel.Node) *MainElement {
 	}
 }
 
+func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainElement {
+	if condition {
+		return Main(true)
+	}
+
+	return Main(false)
+}
+
 type MainAutocapitalizeEnum string
 
 const (
@@ -60,17 +68,17 @@ const (
 type MainContenteditableEnum string
 
 const (
-	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
 	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
+	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 )
 
 type MainDirEnum string
 
 const (
-	MainDirEnumAuto MainDirEnum = "auto"
 	MainDirEnumLtr  MainDirEnum = "ltr"
 	MainDirEnumRtl  MainDirEnum = "rtl"
+	MainDirEnumAuto MainDirEnum = "auto"
 )
 
 type MainDraggableEnum string
@@ -97,11 +105,13 @@ type MainHiddenEnum string
 const (
 	MainHiddenEnumHidden     MainHiddenEnum = "hidden"
 	MainHiddenEnumUntilFound MainHiddenEnum = "until-found"
+	MainHiddenEnumEmpty      MainHiddenEnum = ""
 )
 
 type MainInputmodeEnum string
 
 const (
+	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
 	MainInputmodeEnumNone    MainInputmodeEnum = "none"
 	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
@@ -109,14 +119,13 @@ const (
 	MainInputmodeEnumText    MainInputmodeEnum = "text"
 	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
-	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
 )
 
 type MainSpellcheckEnum string
 
 const (
-	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
 	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
+	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
 )
 
 type MainTranslateEnum string
@@ -297,6 +306,11 @@ func (e *MainElement) Writingsuggestions(a MainWritingsuggestionsEnum) *MainElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *MainElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *MainElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,15 +39,23 @@ func PreIf(condition bool, children ...htemel.Node) *PreElement {
 	}
 }
 
+func PreTernary(condition bool, true htemel.Node, false htemel.Node) *PreElement {
+	if condition {
+		return Pre(true)
+	}
+
+	return Pre(false)
+}
+
 type PreAutocapitalizeEnum string
 
 const (
-	PreAutocapitalizeEnumCharacters PreAutocapitalizeEnum = "characters"
 	PreAutocapitalizeEnumNone       PreAutocapitalizeEnum = "none"
 	PreAutocapitalizeEnumOff        PreAutocapitalizeEnum = "off"
 	PreAutocapitalizeEnumOn         PreAutocapitalizeEnum = "on"
 	PreAutocapitalizeEnumSentences  PreAutocapitalizeEnum = "sentences"
 	PreAutocapitalizeEnumWords      PreAutocapitalizeEnum = "words"
+	PreAutocapitalizeEnumCharacters PreAutocapitalizeEnum = "characters"
 )
 
 type PreAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type PreDirEnum string
 
 const (
-	PreDirEnumAuto PreDirEnum = "auto"
 	PreDirEnumLtr  PreDirEnum = "ltr"
 	PreDirEnumRtl  PreDirEnum = "rtl"
+	PreDirEnumAuto PreDirEnum = "auto"
 )
 
 type PreDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type PreEnterkeyhintEnum string
 
 const (
+	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
 	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
 	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
 	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
 	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
 	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
-	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
 )
 
 type PreHiddenEnum string
@@ -97,19 +105,20 @@ type PreHiddenEnum string
 const (
 	PreHiddenEnumHidden     PreHiddenEnum = "hidden"
 	PreHiddenEnumUntilFound PreHiddenEnum = "until-found"
+	PreHiddenEnumEmpty      PreHiddenEnum = ""
 )
 
 type PreInputmodeEnum string
 
 const (
+	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
+	PreInputmodeEnumEmail   PreInputmodeEnum = "email"
+	PreInputmodeEnumNone    PreInputmodeEnum = "none"
 	PreInputmodeEnumNumeric PreInputmodeEnum = "numeric"
 	PreInputmodeEnumSearch  PreInputmodeEnum = "search"
 	PreInputmodeEnumTel     PreInputmodeEnum = "tel"
 	PreInputmodeEnumText    PreInputmodeEnum = "text"
 	PreInputmodeEnumUrl     PreInputmodeEnum = "url"
-	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
-	PreInputmodeEnumEmail   PreInputmodeEnum = "email"
-	PreInputmodeEnumNone    PreInputmodeEnum = "none"
 )
 
 type PreSpellcheckEnum string
@@ -129,8 +138,8 @@ const (
 type PreWritingsuggestionsEnum string
 
 const (
-	PreWritingsuggestionsEnumFalse PreWritingsuggestionsEnum = "false"
 	PreWritingsuggestionsEnumTrue  PreWritingsuggestionsEnum = "true"
+	PreWritingsuggestionsEnumFalse PreWritingsuggestionsEnum = "false"
 )
 
 type preAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *PreElement) Writingsuggestions(a PreWritingsuggestionsEnum) *PreElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *PreElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *PreElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

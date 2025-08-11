@@ -39,15 +39,23 @@ func LabelIf(condition bool, children ...htemel.Node) *LabelElement {
 	}
 }
 
+func LabelTernary(condition bool, true htemel.Node, false htemel.Node) *LabelElement {
+	if condition {
+		return Label(true)
+	}
+
+	return Label(false)
+}
+
 type LabelAutocapitalizeEnum string
 
 const (
-	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
-	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 	LabelAutocapitalizeEnumCharacters LabelAutocapitalizeEnum = "characters"
 	LabelAutocapitalizeEnumNone       LabelAutocapitalizeEnum = "none"
 	LabelAutocapitalizeEnumOff        LabelAutocapitalizeEnum = "off"
 	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
+	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
+	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 )
 
 type LabelAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type LabelContenteditableEnum string
 
 const (
+	LabelContenteditableEnumTrue          LabelContenteditableEnum = "true"
 	LabelContenteditableEnumFalse         LabelContenteditableEnum = "false"
 	LabelContenteditableEnumPlaintextOnly LabelContenteditableEnum = "plaintext-only"
-	LabelContenteditableEnumTrue          LabelContenteditableEnum = "true"
 )
 
 type LabelDirEnum string
@@ -76,40 +84,41 @@ const (
 type LabelDraggableEnum string
 
 const (
-	LabelDraggableEnumFalse LabelDraggableEnum = "false"
 	LabelDraggableEnumTrue  LabelDraggableEnum = "true"
+	LabelDraggableEnumFalse LabelDraggableEnum = "false"
 )
 
 type LabelEnterkeyhintEnum string
 
 const (
-	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
 	LabelEnterkeyhintEnumNext     LabelEnterkeyhintEnum = "next"
 	LabelEnterkeyhintEnumPrevious LabelEnterkeyhintEnum = "previous"
 	LabelEnterkeyhintEnumSearch   LabelEnterkeyhintEnum = "search"
 	LabelEnterkeyhintEnumSend     LabelEnterkeyhintEnum = "send"
 	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
 	LabelEnterkeyhintEnumEnter    LabelEnterkeyhintEnum = "enter"
+	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
 )
 
 type LabelHiddenEnum string
 
 const (
-	LabelHiddenEnumUntilFound LabelHiddenEnum = "until-found"
 	LabelHiddenEnumHidden     LabelHiddenEnum = "hidden"
+	LabelHiddenEnumUntilFound LabelHiddenEnum = "until-found"
+	LabelHiddenEnumEmpty      LabelHiddenEnum = ""
 )
 
 type LabelInputmodeEnum string
 
 const (
+	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
+	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
 	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
 	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
 	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
 	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
 	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
-	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
-	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
 )
 
 type LabelSpellcheckEnum string
@@ -129,8 +138,8 @@ const (
 type LabelWritingsuggestionsEnum string
 
 const (
-	LabelWritingsuggestionsEnumFalse LabelWritingsuggestionsEnum = "false"
 	LabelWritingsuggestionsEnumTrue  LabelWritingsuggestionsEnum = "true"
+	LabelWritingsuggestionsEnumFalse LabelWritingsuggestionsEnum = "false"
 )
 
 type labelAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *LabelElement) Writingsuggestions(a LabelWritingsuggestionsEnum) *LabelE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *LabelElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *LabelElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

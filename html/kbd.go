@@ -39,15 +39,23 @@ func KbdIf(condition bool, children ...htemel.Node) *KbdElement {
 	}
 }
 
+func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement {
+	if condition {
+		return Kbd(true)
+	}
+
+	return Kbd(false)
+}
+
 type KbdAutocapitalizeEnum string
 
 const (
-	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
 	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
 	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
 	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
+	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
 )
 
 type KbdAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type KbdEnterkeyhintEnum string
 
 const (
+	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
+	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
+	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
 	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
 	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
 	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
-	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
-	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
-	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
 )
 
 type KbdHiddenEnum string
@@ -97,11 +105,13 @@ type KbdHiddenEnum string
 const (
 	KbdHiddenEnumHidden     KbdHiddenEnum = "hidden"
 	KbdHiddenEnumUntilFound KbdHiddenEnum = "until-found"
+	KbdHiddenEnumEmpty      KbdHiddenEnum = ""
 )
 
 type KbdInputmodeEnum string
 
 const (
+	KbdInputmodeEnumEmail   KbdInputmodeEnum = "email"
 	KbdInputmodeEnumNone    KbdInputmodeEnum = "none"
 	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
 	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
@@ -109,7 +119,6 @@ const (
 	KbdInputmodeEnumText    KbdInputmodeEnum = "text"
 	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
 	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
-	KbdInputmodeEnumEmail   KbdInputmodeEnum = "email"
 )
 
 type KbdSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *KbdElement) Writingsuggestions(a KbdWritingsuggestionsEnum) *KbdElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *KbdElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *KbdElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

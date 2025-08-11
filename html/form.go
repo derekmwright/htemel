@@ -39,22 +39,30 @@ func FormIf(condition bool, children ...htemel.Node) *FormElement {
 	}
 }
 
+func FormTernary(condition bool, true htemel.Node, false htemel.Node) *FormElement {
+	if condition {
+		return Form(true)
+	}
+
+	return Form(false)
+}
+
 type FormAutocapitalizeEnum string
 
 const (
-	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
-	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
-	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
 	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
+	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
+	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
+	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 )
 
 type FormAutocorrectEnum string
 
 const (
-	FormAutocorrectEnumOn  FormAutocorrectEnum = "on"
 	FormAutocorrectEnumOff FormAutocorrectEnum = "off"
+	FormAutocorrectEnumOn  FormAutocorrectEnum = "on"
 )
 
 type FormContenteditableEnum string
@@ -68,9 +76,9 @@ const (
 type FormDirEnum string
 
 const (
-	FormDirEnumRtl  FormDirEnum = "rtl"
 	FormDirEnumAuto FormDirEnum = "auto"
 	FormDirEnumLtr  FormDirEnum = "ltr"
+	FormDirEnumRtl  FormDirEnum = "rtl"
 )
 
 type FormDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type FormEnterkeyhintEnum string
 
 const (
+	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
+	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
 	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
 	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
 	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
-	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
-	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 )
 
 type FormHiddenEnum string
@@ -97,19 +105,20 @@ type FormHiddenEnum string
 const (
 	FormHiddenEnumHidden     FormHiddenEnum = "hidden"
 	FormHiddenEnumUntilFound FormHiddenEnum = "until-found"
+	FormHiddenEnumEmpty      FormHiddenEnum = ""
 )
 
 type FormInputmodeEnum string
 
 const (
-	FormInputmodeEnumNone    FormInputmodeEnum = "none"
-	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
-	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
-	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
 	FormInputmodeEnumText    FormInputmodeEnum = "text"
 	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
 	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
 	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
+	FormInputmodeEnumNone    FormInputmodeEnum = "none"
+	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
+	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
+	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
 )
 
 type FormSpellcheckEnum string
@@ -129,8 +138,8 @@ const (
 type FormWritingsuggestionsEnum string
 
 const (
-	FormWritingsuggestionsEnumFalse FormWritingsuggestionsEnum = "false"
 	FormWritingsuggestionsEnumTrue  FormWritingsuggestionsEnum = "true"
+	FormWritingsuggestionsEnumFalse FormWritingsuggestionsEnum = "false"
 )
 
 type formAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *FormElement) Writingsuggestions(a FormWritingsuggestionsEnum) *FormElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *FormElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *FormElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

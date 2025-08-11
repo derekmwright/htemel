@@ -39,15 +39,23 @@ func RubyIf(condition bool, children ...htemel.Node) *RubyElement {
 	}
 }
 
+func RubyTernary(condition bool, true htemel.Node, false htemel.Node) *RubyElement {
+	if condition {
+		return Ruby(true)
+	}
+
+	return Ruby(false)
+}
+
 type RubyAutocapitalizeEnum string
 
 const (
-	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 	RubyAutocapitalizeEnumOff        RubyAutocapitalizeEnum = "off"
 	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
 	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
 	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
 	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
+	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 )
 
 type RubyAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type RubyContenteditableEnum string
 
 const (
-	RubyContenteditableEnumTrue          RubyContenteditableEnum = "true"
 	RubyContenteditableEnumFalse         RubyContenteditableEnum = "false"
 	RubyContenteditableEnumPlaintextOnly RubyContenteditableEnum = "plaintext-only"
+	RubyContenteditableEnumTrue          RubyContenteditableEnum = "true"
 )
 
 type RubyDirEnum string
@@ -97,33 +105,34 @@ type RubyHiddenEnum string
 const (
 	RubyHiddenEnumHidden     RubyHiddenEnum = "hidden"
 	RubyHiddenEnumUntilFound RubyHiddenEnum = "until-found"
+	RubyHiddenEnumEmpty      RubyHiddenEnum = ""
 )
 
 type RubyInputmodeEnum string
 
 const (
-	RubyInputmodeEnumTel     RubyInputmodeEnum = "tel"
-	RubyInputmodeEnumText    RubyInputmodeEnum = "text"
-	RubyInputmodeEnumUrl     RubyInputmodeEnum = "url"
 	RubyInputmodeEnumDecimal RubyInputmodeEnum = "decimal"
 	RubyInputmodeEnumEmail   RubyInputmodeEnum = "email"
 	RubyInputmodeEnumNone    RubyInputmodeEnum = "none"
 	RubyInputmodeEnumNumeric RubyInputmodeEnum = "numeric"
 	RubyInputmodeEnumSearch  RubyInputmodeEnum = "search"
+	RubyInputmodeEnumTel     RubyInputmodeEnum = "tel"
+	RubyInputmodeEnumText    RubyInputmodeEnum = "text"
+	RubyInputmodeEnumUrl     RubyInputmodeEnum = "url"
 )
 
 type RubySpellcheckEnum string
 
 const (
-	RubySpellcheckEnumFalse RubySpellcheckEnum = "false"
 	RubySpellcheckEnumTrue  RubySpellcheckEnum = "true"
+	RubySpellcheckEnumFalse RubySpellcheckEnum = "false"
 )
 
 type RubyTranslateEnum string
 
 const (
-	RubyTranslateEnumYes RubyTranslateEnum = "yes"
 	RubyTranslateEnumNo  RubyTranslateEnum = "no"
+	RubyTranslateEnumYes RubyTranslateEnum = "yes"
 )
 
 type RubyWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *RubyElement) Writingsuggestions(a RubyWritingsuggestionsEnum) *RubyElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *RubyElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *RubyElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

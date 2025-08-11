@@ -39,15 +39,23 @@ func NoscriptIf(condition bool, children ...htemel.Node) *NoscriptElement {
 	}
 }
 
+func NoscriptTernary(condition bool, true htemel.Node, false htemel.Node) *NoscriptElement {
+	if condition {
+		return Noscript(true)
+	}
+
+	return Noscript(false)
+}
+
 type NoscriptAutocapitalizeEnum string
 
 const (
-	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
-	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
-	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
 	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
 	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
 	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
+	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
+	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
+	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
 )
 
 type NoscriptAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type NoscriptDirEnum string
 
 const (
-	NoscriptDirEnumRtl  NoscriptDirEnum = "rtl"
 	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
 	NoscriptDirEnumLtr  NoscriptDirEnum = "ltr"
+	NoscriptDirEnumRtl  NoscriptDirEnum = "rtl"
 )
 
 type NoscriptDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type NoscriptEnterkeyhintEnum string
 
 const (
+	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
+	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
 	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
 	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
 	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
 	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
 	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
-	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
-	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
 )
 
 type NoscriptHiddenEnum string
@@ -97,26 +105,27 @@ type NoscriptHiddenEnum string
 const (
 	NoscriptHiddenEnumHidden     NoscriptHiddenEnum = "hidden"
 	NoscriptHiddenEnumUntilFound NoscriptHiddenEnum = "until-found"
+	NoscriptHiddenEnumEmpty      NoscriptHiddenEnum = ""
 )
 
 type NoscriptInputmodeEnum string
 
 const (
-	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
-	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
-	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
 	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
 	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
 	NoscriptInputmodeEnumNone    NoscriptInputmodeEnum = "none"
 	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
 	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
+	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
+	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
+	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
 )
 
 type NoscriptSpellcheckEnum string
 
 const (
-	NoscriptSpellcheckEnumTrue  NoscriptSpellcheckEnum = "true"
 	NoscriptSpellcheckEnumFalse NoscriptSpellcheckEnum = "false"
+	NoscriptSpellcheckEnumTrue  NoscriptSpellcheckEnum = "true"
 )
 
 type NoscriptTranslateEnum string
@@ -297,6 +306,11 @@ func (e *NoscriptElement) Writingsuggestions(a NoscriptWritingsuggestionsEnum) *
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *NoscriptElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *NoscriptElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

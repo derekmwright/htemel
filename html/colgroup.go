@@ -39,22 +39,30 @@ func ColgroupIf(condition bool, children ...htemel.Node) *ColgroupElement {
 	}
 }
 
+func ColgroupTernary(condition bool, true htemel.Node, false htemel.Node) *ColgroupElement {
+	if condition {
+		return Colgroup(true)
+	}
+
+	return Colgroup(false)
+}
+
 type ColgroupAutocapitalizeEnum string
 
 const (
-	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
 	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 	ColgroupAutocapitalizeEnumOff        ColgroupAutocapitalizeEnum = "off"
 	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
 	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
+	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 )
 
 type ColgroupAutocorrectEnum string
 
 const (
-	ColgroupAutocorrectEnumOff ColgroupAutocorrectEnum = "off"
 	ColgroupAutocorrectEnumOn  ColgroupAutocorrectEnum = "on"
+	ColgroupAutocorrectEnumOff ColgroupAutocorrectEnum = "off"
 )
 
 type ColgroupContenteditableEnum string
@@ -97,6 +105,7 @@ type ColgroupHiddenEnum string
 const (
 	ColgroupHiddenEnumHidden     ColgroupHiddenEnum = "hidden"
 	ColgroupHiddenEnumUntilFound ColgroupHiddenEnum = "until-found"
+	ColgroupHiddenEnumEmpty      ColgroupHiddenEnum = ""
 )
 
 type ColgroupInputmodeEnum string
@@ -122,8 +131,8 @@ const (
 type ColgroupTranslateEnum string
 
 const (
-	ColgroupTranslateEnumYes ColgroupTranslateEnum = "yes"
 	ColgroupTranslateEnumNo  ColgroupTranslateEnum = "no"
+	ColgroupTranslateEnumYes ColgroupTranslateEnum = "yes"
 )
 
 type ColgroupWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *ColgroupElement) Writingsuggestions(a ColgroupWritingsuggestionsEnum) *
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *ColgroupElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *ColgroupElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

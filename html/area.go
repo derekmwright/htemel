@@ -39,15 +39,23 @@ func AreaIf(condition bool, children ...htemel.Node) *AreaElement {
 	}
 }
 
+func AreaTernary(condition bool, true htemel.Node, false htemel.Node) *AreaElement {
+	if condition {
+		return Area(true)
+	}
+
+	return Area(false)
+}
+
 type AreaAutocapitalizeEnum string
 
 const (
+	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
 	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
 	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
 	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
 	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
-	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
 )
 
 type AreaAutocorrectEnum string
@@ -95,21 +103,22 @@ const (
 type AreaHiddenEnum string
 
 const (
-	AreaHiddenEnumHidden     AreaHiddenEnum = "hidden"
 	AreaHiddenEnumUntilFound AreaHiddenEnum = "until-found"
+	AreaHiddenEnumHidden     AreaHiddenEnum = "hidden"
+	AreaHiddenEnumEmpty      AreaHiddenEnum = ""
 )
 
 type AreaInputmodeEnum string
 
 const (
+	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
+	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
+	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
 	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
 	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
 	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
-	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
-	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
-	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 )
 
 type AreaSpellcheckEnum string
@@ -122,15 +131,15 @@ const (
 type AreaTranslateEnum string
 
 const (
-	AreaTranslateEnumYes AreaTranslateEnum = "yes"
 	AreaTranslateEnumNo  AreaTranslateEnum = "no"
+	AreaTranslateEnumYes AreaTranslateEnum = "yes"
 )
 
 type AreaWritingsuggestionsEnum string
 
 const (
-	AreaWritingsuggestionsEnumTrue  AreaWritingsuggestionsEnum = "true"
 	AreaWritingsuggestionsEnumFalse AreaWritingsuggestionsEnum = "false"
+	AreaWritingsuggestionsEnumTrue  AreaWritingsuggestionsEnum = "true"
 )
 
 type areaAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *AreaElement) Writingsuggestions(a AreaWritingsuggestionsEnum) *AreaElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *AreaElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *AreaElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

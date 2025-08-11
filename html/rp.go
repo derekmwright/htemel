@@ -39,6 +39,14 @@ func RpIf(condition bool, children ...htemel.Node) *RpElement {
 	}
 }
 
+func RpTernary(condition bool, true htemel.Node, false htemel.Node) *RpElement {
+	if condition {
+		return Rp(true)
+	}
+
+	return Rp(false)
+}
+
 type RpAutocapitalizeEnum string
 
 const (
@@ -83,13 +91,13 @@ const (
 type RpEnterkeyhintEnum string
 
 const (
-	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
-	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
-	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
 	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
 	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
 	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
+	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
+	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
+	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 )
 
 type RpHiddenEnum string
@@ -97,19 +105,20 @@ type RpHiddenEnum string
 const (
 	RpHiddenEnumHidden     RpHiddenEnum = "hidden"
 	RpHiddenEnumUntilFound RpHiddenEnum = "until-found"
+	RpHiddenEnumEmpty      RpHiddenEnum = ""
 )
 
 type RpInputmodeEnum string
 
 const (
-	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
-	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
-	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
 	RpInputmodeEnumNone    RpInputmodeEnum = "none"
 	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
 	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
 	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
 	RpInputmodeEnumText    RpInputmodeEnum = "text"
+	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
+	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
+	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
 )
 
 type RpSpellcheckEnum string
@@ -129,8 +138,8 @@ const (
 type RpWritingsuggestionsEnum string
 
 const (
-	RpWritingsuggestionsEnumTrue  RpWritingsuggestionsEnum = "true"
 	RpWritingsuggestionsEnumFalse RpWritingsuggestionsEnum = "false"
+	RpWritingsuggestionsEnumTrue  RpWritingsuggestionsEnum = "true"
 )
 
 type rpAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *RpElement) Writingsuggestions(a RpWritingsuggestionsEnum) *RpElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *RpElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *RpElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

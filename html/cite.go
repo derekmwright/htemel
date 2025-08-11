@@ -39,6 +39,14 @@ func CiteIf(condition bool, children ...htemel.Node) *CiteElement {
 	}
 }
 
+func CiteTernary(condition bool, true htemel.Node, false htemel.Node) *CiteElement {
+	if condition {
+		return Cite(true)
+	}
+
+	return Cite(false)
+}
+
 type CiteAutocapitalizeEnum string
 
 const (
@@ -60,24 +68,24 @@ const (
 type CiteContenteditableEnum string
 
 const (
-	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
 	CiteContenteditableEnumFalse         CiteContenteditableEnum = "false"
 	CiteContenteditableEnumPlaintextOnly CiteContenteditableEnum = "plaintext-only"
+	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
 )
 
 type CiteDirEnum string
 
 const (
+	CiteDirEnumAuto CiteDirEnum = "auto"
 	CiteDirEnumLtr  CiteDirEnum = "ltr"
 	CiteDirEnumRtl  CiteDirEnum = "rtl"
-	CiteDirEnumAuto CiteDirEnum = "auto"
 )
 
 type CiteDraggableEnum string
 
 const (
-	CiteDraggableEnumFalse CiteDraggableEnum = "false"
 	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
+	CiteDraggableEnumFalse CiteDraggableEnum = "false"
 )
 
 type CiteEnterkeyhintEnum string
@@ -97,19 +105,20 @@ type CiteHiddenEnum string
 const (
 	CiteHiddenEnumHidden     CiteHiddenEnum = "hidden"
 	CiteHiddenEnumUntilFound CiteHiddenEnum = "until-found"
+	CiteHiddenEnumEmpty      CiteHiddenEnum = ""
 )
 
 type CiteInputmodeEnum string
 
 const (
-	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
-	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
-	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
-	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
 	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
 	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
 	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
+	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
+	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
+	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
+	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
 )
 
 type CiteSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *CiteElement) Writingsuggestions(a CiteWritingsuggestionsEnum) *CiteElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *CiteElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *CiteElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

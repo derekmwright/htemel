@@ -39,15 +39,23 @@ func AddressIf(condition bool, children ...htemel.Node) *AddressElement {
 	}
 }
 
+func AddressTernary(condition bool, true htemel.Node, false htemel.Node) *AddressElement {
+	if condition {
+		return Address(true)
+	}
+
+	return Address(false)
+}
+
 type AddressAutocapitalizeEnum string
 
 const (
-	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
-	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
 	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
 	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
+	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
+	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
 )
 
 type AddressAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type AddressContenteditableEnum string
 
 const (
-	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
 	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
+	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 )
 
 type AddressDirEnum string
@@ -83,13 +91,13 @@ const (
 type AddressEnterkeyhintEnum string
 
 const (
-	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
 	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
 	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
 	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
 	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
 	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
+	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
 )
 
 type AddressHiddenEnum string
@@ -97,19 +105,20 @@ type AddressHiddenEnum string
 const (
 	AddressHiddenEnumHidden     AddressHiddenEnum = "hidden"
 	AddressHiddenEnumUntilFound AddressHiddenEnum = "until-found"
+	AddressHiddenEnumEmpty      AddressHiddenEnum = ""
 )
 
 type AddressInputmodeEnum string
 
 const (
-	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
-	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 	AddressInputmodeEnumText    AddressInputmodeEnum = "text"
 	AddressInputmodeEnumUrl     AddressInputmodeEnum = "url"
 	AddressInputmodeEnumDecimal AddressInputmodeEnum = "decimal"
 	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
 	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
+	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
+	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 )
 
 type AddressSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *AddressElement) Writingsuggestions(a AddressWritingsuggestionsEnum) *Ad
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *AddressElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *AddressElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

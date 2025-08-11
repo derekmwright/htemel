@@ -89,6 +89,7 @@ func GlobalAttributes() []Attribute {
 				"hidden":      {},
 				"until-found": {},
 			},
+			AllowEmpty: true,
 		},
 		&AttributeTypeString{
 			Name:        "id",

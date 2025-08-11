@@ -39,15 +39,23 @@ func TrIf(condition bool, children ...htemel.Node) *TrElement {
 	}
 }
 
+func TrTernary(condition bool, true htemel.Node, false htemel.Node) *TrElement {
+	if condition {
+		return Tr(true)
+	}
+
+	return Tr(false)
+}
+
 type TrAutocapitalizeEnum string
 
 const (
-	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
 	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
 	TrAutocapitalizeEnumOff        TrAutocapitalizeEnum = "off"
 	TrAutocapitalizeEnumOn         TrAutocapitalizeEnum = "on"
 	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
 	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
+	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
 )
 
 type TrAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type TrContenteditableEnum string
 
 const (
+	TrContenteditableEnumPlaintextOnly TrContenteditableEnum = "plaintext-only"
 	TrContenteditableEnumTrue          TrContenteditableEnum = "true"
 	TrContenteditableEnumFalse         TrContenteditableEnum = "false"
-	TrContenteditableEnumPlaintextOnly TrContenteditableEnum = "plaintext-only"
 )
 
 type TrDirEnum string
@@ -76,20 +84,20 @@ const (
 type TrDraggableEnum string
 
 const (
-	TrDraggableEnumFalse TrDraggableEnum = "false"
 	TrDraggableEnumTrue  TrDraggableEnum = "true"
+	TrDraggableEnumFalse TrDraggableEnum = "false"
 )
 
 type TrEnterkeyhintEnum string
 
 const (
-	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
 	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
 	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
 	TrEnterkeyhintEnumGo       TrEnterkeyhintEnum = "go"
 	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
 	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
 	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
+	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
 )
 
 type TrHiddenEnum string
@@ -97,26 +105,27 @@ type TrHiddenEnum string
 const (
 	TrHiddenEnumHidden     TrHiddenEnum = "hidden"
 	TrHiddenEnumUntilFound TrHiddenEnum = "until-found"
+	TrHiddenEnumEmpty      TrHiddenEnum = ""
 )
 
 type TrInputmodeEnum string
 
 const (
+	TrInputmodeEnumText    TrInputmodeEnum = "text"
+	TrInputmodeEnumUrl     TrInputmodeEnum = "url"
+	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
 	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
 	TrInputmodeEnumNone    TrInputmodeEnum = "none"
 	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
 	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
 	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
-	TrInputmodeEnumText    TrInputmodeEnum = "text"
-	TrInputmodeEnumUrl     TrInputmodeEnum = "url"
-	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
 )
 
 type TrSpellcheckEnum string
 
 const (
-	TrSpellcheckEnumFalse TrSpellcheckEnum = "false"
 	TrSpellcheckEnumTrue  TrSpellcheckEnum = "true"
+	TrSpellcheckEnumFalse TrSpellcheckEnum = "false"
 )
 
 type TrTranslateEnum string
@@ -129,8 +138,8 @@ const (
 type TrWritingsuggestionsEnum string
 
 const (
-	TrWritingsuggestionsEnumTrue  TrWritingsuggestionsEnum = "true"
 	TrWritingsuggestionsEnumFalse TrWritingsuggestionsEnum = "false"
+	TrWritingsuggestionsEnumTrue  TrWritingsuggestionsEnum = "true"
 )
 
 type trAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *TrElement) Writingsuggestions(a TrWritingsuggestionsEnum) *TrElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *TrElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *TrElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

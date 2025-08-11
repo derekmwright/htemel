@@ -39,15 +39,23 @@ func SourceIf(condition bool, children ...htemel.Node) *SourceElement {
 	}
 }
 
+func SourceTernary(condition bool, true htemel.Node, false htemel.Node) *SourceElement {
+	if condition {
+		return Source(true)
+	}
+
+	return Source(false)
+}
+
 type SourceAutocapitalizeEnum string
 
 const (
+	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
+	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
 	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
 	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
 	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
 	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
-	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
-	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
 )
 
 type SourceAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type SourceEnterkeyhintEnum string
 
 const (
-	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
-	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
-	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
 	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
 	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
+	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
+	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
+	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 )
 
 type SourceHiddenEnum string
@@ -97,6 +105,7 @@ type SourceHiddenEnum string
 const (
 	SourceHiddenEnumHidden     SourceHiddenEnum = "hidden"
 	SourceHiddenEnumUntilFound SourceHiddenEnum = "until-found"
+	SourceHiddenEnumEmpty      SourceHiddenEnum = ""
 )
 
 type SourceInputmodeEnum string
@@ -297,6 +306,11 @@ func (e *SourceElement) Writingsuggestions(a SourceWritingsuggestionsEnum) *Sour
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SourceElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SourceElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

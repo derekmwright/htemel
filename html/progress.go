@@ -39,15 +39,23 @@ func ProgressIf(condition bool, children ...htemel.Node) *ProgressElement {
 	}
 }
 
+func ProgressTernary(condition bool, true htemel.Node, false htemel.Node) *ProgressElement {
+	if condition {
+		return Progress(true)
+	}
+
+	return Progress(false)
+}
+
 type ProgressAutocapitalizeEnum string
 
 const (
-	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
-	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
 	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
 	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
 	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
+	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
+	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
 )
 
 type ProgressAutocorrectEnum string
@@ -68,28 +76,28 @@ const (
 type ProgressDirEnum string
 
 const (
-	ProgressDirEnumAuto ProgressDirEnum = "auto"
 	ProgressDirEnumLtr  ProgressDirEnum = "ltr"
 	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
+	ProgressDirEnumAuto ProgressDirEnum = "auto"
 )
 
 type ProgressDraggableEnum string
 
 const (
-	ProgressDraggableEnumTrue  ProgressDraggableEnum = "true"
 	ProgressDraggableEnumFalse ProgressDraggableEnum = "false"
+	ProgressDraggableEnumTrue  ProgressDraggableEnum = "true"
 )
 
 type ProgressEnterkeyhintEnum string
 
 const (
-	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
-	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
 	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
 	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
 	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
 	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
 	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
+	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
+	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
 )
 
 type ProgressHiddenEnum string
@@ -97,11 +105,13 @@ type ProgressHiddenEnum string
 const (
 	ProgressHiddenEnumHidden     ProgressHiddenEnum = "hidden"
 	ProgressHiddenEnumUntilFound ProgressHiddenEnum = "until-found"
+	ProgressHiddenEnumEmpty      ProgressHiddenEnum = ""
 )
 
 type ProgressInputmodeEnum string
 
 const (
+	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
 	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
 	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
 	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
@@ -109,7 +119,6 @@ const (
 	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
 	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
 	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
-	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
 )
 
 type ProgressSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *ProgressElement) Writingsuggestions(a ProgressWritingsuggestionsEnum) *
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *ProgressElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *ProgressElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

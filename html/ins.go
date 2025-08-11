@@ -39,15 +39,23 @@ func InsIf(condition bool, children ...htemel.Node) *InsElement {
 	}
 }
 
+func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement {
+	if condition {
+		return Ins(true)
+	}
+
+	return Ins(false)
+}
+
 type InsAutocapitalizeEnum string
 
 const (
-	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
-	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
-	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
 	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
 	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
 	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
+	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
+	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
+	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
 )
 
 type InsAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type InsEnterkeyhintEnum string
 
 const (
-	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
-	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
 	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
 	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
+	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
+	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 )
 
 type InsHiddenEnum string
@@ -97,19 +105,20 @@ type InsHiddenEnum string
 const (
 	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
 	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
+	InsHiddenEnumEmpty      InsHiddenEnum = ""
 )
 
 type InsInputmodeEnum string
 
 const (
+	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
+	InsInputmodeEnumText    InsInputmodeEnum = "text"
+	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
 	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
 	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
 	InsInputmodeEnumNone    InsInputmodeEnum = "none"
 	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
-	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
-	InsInputmodeEnumText    InsInputmodeEnum = "text"
-	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
 )
 
 type InsSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *InsElement) Writingsuggestions(a InsWritingsuggestionsEnum) *InsElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *InsElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *InsElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,6 +39,14 @@ func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
 	}
 }
 
+func LinkTernary(condition bool, true htemel.Node, false htemel.Node) *LinkElement {
+	if condition {
+		return Link(true)
+	}
+
+	return Link(false)
+}
+
 type LinkAutocapitalizeEnum string
 
 const (
@@ -83,33 +91,34 @@ const (
 type LinkEnterkeyhintEnum string
 
 const (
-	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
-	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
-	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
 	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
+	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
+	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
+	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 )
 
 type LinkHiddenEnum string
 
 const (
-	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
 	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
+	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
+	LinkHiddenEnumEmpty      LinkHiddenEnum = ""
 )
 
 type LinkInputmodeEnum string
 
 const (
-	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
-	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
-	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
-	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
 	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
 	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
 	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
 	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
+	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
+	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
+	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
+	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
 )
 
 type LinkSpellcheckEnum string
@@ -122,8 +131,8 @@ const (
 type LinkTranslateEnum string
 
 const (
-	LinkTranslateEnumYes LinkTranslateEnum = "yes"
 	LinkTranslateEnumNo  LinkTranslateEnum = "no"
+	LinkTranslateEnumYes LinkTranslateEnum = "yes"
 )
 
 type LinkWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *LinkElement) Writingsuggestions(a LinkWritingsuggestionsEnum) *LinkElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *LinkElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *LinkElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

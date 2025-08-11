@@ -39,38 +39,46 @@ func BaseIf(condition bool, children ...htemel.Node) *BaseElement {
 	}
 }
 
+func BaseTernary(condition bool, true htemel.Node, false htemel.Node) *BaseElement {
+	if condition {
+		return Base(true)
+	}
+
+	return Base(false)
+}
+
 type BaseAutocapitalizeEnum string
 
 const (
+	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
 	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
 	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
 	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
 	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
-	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
 )
 
 type BaseAutocorrectEnum string
 
 const (
-	BaseAutocorrectEnumOff BaseAutocorrectEnum = "off"
 	BaseAutocorrectEnumOn  BaseAutocorrectEnum = "on"
+	BaseAutocorrectEnumOff BaseAutocorrectEnum = "off"
 )
 
 type BaseContenteditableEnum string
 
 const (
+	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
 	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
 	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
-	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
 )
 
 type BaseDirEnum string
 
 const (
-	BaseDirEnumAuto BaseDirEnum = "auto"
 	BaseDirEnumLtr  BaseDirEnum = "ltr"
 	BaseDirEnumRtl  BaseDirEnum = "rtl"
+	BaseDirEnumAuto BaseDirEnum = "auto"
 )
 
 type BaseDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
+	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
 	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
 	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
-	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 )
 
 type BaseHiddenEnum string
@@ -97,19 +105,20 @@ type BaseHiddenEnum string
 const (
 	BaseHiddenEnumHidden     BaseHiddenEnum = "hidden"
 	BaseHiddenEnumUntilFound BaseHiddenEnum = "until-found"
+	BaseHiddenEnumEmpty      BaseHiddenEnum = ""
 )
 
 type BaseInputmodeEnum string
 
 const (
+	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
+	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
 	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
 	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
 	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
 	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
 	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
-	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
-	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 )
 
 type BaseSpellcheckEnum string
@@ -122,15 +131,15 @@ const (
 type BaseTranslateEnum string
 
 const (
-	BaseTranslateEnumYes BaseTranslateEnum = "yes"
 	BaseTranslateEnumNo  BaseTranslateEnum = "no"
+	BaseTranslateEnumYes BaseTranslateEnum = "yes"
 )
 
 type BaseWritingsuggestionsEnum string
 
 const (
-	BaseWritingsuggestionsEnumFalse BaseWritingsuggestionsEnum = "false"
 	BaseWritingsuggestionsEnumTrue  BaseWritingsuggestionsEnum = "true"
+	BaseWritingsuggestionsEnumFalse BaseWritingsuggestionsEnum = "false"
 )
 
 type baseAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *BaseElement) Writingsuggestions(a BaseWritingsuggestionsEnum) *BaseElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *BaseElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *BaseElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

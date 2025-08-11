@@ -39,15 +39,23 @@ func ObjectIf(condition bool, children ...htemel.Node) *ObjectElement {
 	}
 }
 
+func ObjectTernary(condition bool, true htemel.Node, false htemel.Node) *ObjectElement {
+	if condition {
+		return Object(true)
+	}
+
+	return Object(false)
+}
+
 type ObjectAutocapitalizeEnum string
 
 const (
-	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
 	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
 	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
 	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
 	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
+	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
 )
 
 type ObjectAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type ObjectDirEnum string
 
 const (
+	ObjectDirEnumAuto ObjectDirEnum = "auto"
 	ObjectDirEnumLtr  ObjectDirEnum = "ltr"
 	ObjectDirEnumRtl  ObjectDirEnum = "rtl"
-	ObjectDirEnumAuto ObjectDirEnum = "auto"
 )
 
 type ObjectDraggableEnum string
@@ -97,11 +105,13 @@ type ObjectHiddenEnum string
 const (
 	ObjectHiddenEnumHidden     ObjectHiddenEnum = "hidden"
 	ObjectHiddenEnumUntilFound ObjectHiddenEnum = "until-found"
+	ObjectHiddenEnumEmpty      ObjectHiddenEnum = ""
 )
 
 type ObjectInputmodeEnum string
 
 const (
+	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
 	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
 	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
@@ -109,14 +119,13 @@ const (
 	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
 	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
 	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
-	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 )
 
 type ObjectSpellcheckEnum string
 
 const (
-	ObjectSpellcheckEnumTrue  ObjectSpellcheckEnum = "true"
 	ObjectSpellcheckEnumFalse ObjectSpellcheckEnum = "false"
+	ObjectSpellcheckEnumTrue  ObjectSpellcheckEnum = "true"
 )
 
 type ObjectTranslateEnum string
@@ -129,8 +138,8 @@ const (
 type ObjectWritingsuggestionsEnum string
 
 const (
-	ObjectWritingsuggestionsEnumTrue  ObjectWritingsuggestionsEnum = "true"
 	ObjectWritingsuggestionsEnumFalse ObjectWritingsuggestionsEnum = "false"
+	ObjectWritingsuggestionsEnumTrue  ObjectWritingsuggestionsEnum = "true"
 )
 
 type objectAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *ObjectElement) Writingsuggestions(a ObjectWritingsuggestionsEnum) *Obje
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *ObjectElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *ObjectElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

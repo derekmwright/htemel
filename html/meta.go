@@ -39,15 +39,23 @@ func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 	}
 }
 
+func MetaTernary(condition bool, true htemel.Node, false htemel.Node) *MetaElement {
+	if condition {
+		return Meta(true)
+	}
+
+	return Meta(false)
+}
+
 type MetaAutocapitalizeEnum string
 
 const (
-	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
 	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
 	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
 	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
 	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
 	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
+	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
 )
 
 type MetaAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type MetaContenteditableEnum string
 
 const (
+	MetaContenteditableEnumTrue          MetaContenteditableEnum = "true"
 	MetaContenteditableEnumFalse         MetaContenteditableEnum = "false"
 	MetaContenteditableEnumPlaintextOnly MetaContenteditableEnum = "plaintext-only"
-	MetaContenteditableEnumTrue          MetaContenteditableEnum = "true"
 )
 
 type MetaDirEnum string
@@ -83,13 +91,13 @@ const (
 type MetaEnterkeyhintEnum string
 
 const (
-	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
-	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
-	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
 	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
 	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
+	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
+	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
+	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 )
 
 type MetaHiddenEnum string
@@ -97,19 +105,20 @@ type MetaHiddenEnum string
 const (
 	MetaHiddenEnumHidden     MetaHiddenEnum = "hidden"
 	MetaHiddenEnumUntilFound MetaHiddenEnum = "until-found"
+	MetaHiddenEnumEmpty      MetaHiddenEnum = ""
 )
 
 type MetaInputmodeEnum string
 
 const (
+	MetaInputmodeEnumSearch  MetaInputmodeEnum = "search"
+	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
+	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
 	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
 	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
 	MetaInputmodeEnumEmail   MetaInputmodeEnum = "email"
 	MetaInputmodeEnumNone    MetaInputmodeEnum = "none"
 	MetaInputmodeEnumNumeric MetaInputmodeEnum = "numeric"
-	MetaInputmodeEnumSearch  MetaInputmodeEnum = "search"
-	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
-	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
 )
 
 type MetaSpellcheckEnum string
@@ -122,8 +131,8 @@ const (
 type MetaTranslateEnum string
 
 const (
-	MetaTranslateEnumYes MetaTranslateEnum = "yes"
 	MetaTranslateEnumNo  MetaTranslateEnum = "no"
+	MetaTranslateEnumYes MetaTranslateEnum = "yes"
 )
 
 type MetaWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *MetaElement) Writingsuggestions(a MetaWritingsuggestionsEnum) *MetaElem
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *MetaElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *MetaElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

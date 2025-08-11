@@ -39,15 +39,23 @@ func ColIf(condition bool, children ...htemel.Node) *ColElement {
 	}
 }
 
+func ColTernary(condition bool, true htemel.Node, false htemel.Node) *ColElement {
+	if condition {
+		return Col(true)
+	}
+
+	return Col(false)
+}
+
 type ColAutocapitalizeEnum string
 
 const (
-	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
 	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
 	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
 	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
 	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
+	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
 )
 
 type ColAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type ColContenteditableEnum string
 
 const (
-	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
 	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
 	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
+	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
 )
 
 type ColDirEnum string
@@ -97,12 +105,12 @@ type ColHiddenEnum string
 const (
 	ColHiddenEnumHidden     ColHiddenEnum = "hidden"
 	ColHiddenEnumUntilFound ColHiddenEnum = "until-found"
+	ColHiddenEnumEmpty      ColHiddenEnum = ""
 )
 
 type ColInputmodeEnum string
 
 const (
-	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
 	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 	ColInputmodeEnumText    ColInputmodeEnum = "text"
 	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
@@ -110,13 +118,14 @@ const (
 	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
 	ColInputmodeEnumNone    ColInputmodeEnum = "none"
 	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
+	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
 )
 
 type ColSpellcheckEnum string
 
 const (
-	ColSpellcheckEnumFalse ColSpellcheckEnum = "false"
 	ColSpellcheckEnumTrue  ColSpellcheckEnum = "true"
+	ColSpellcheckEnumFalse ColSpellcheckEnum = "false"
 )
 
 type ColTranslateEnum string
@@ -297,6 +306,11 @@ func (e *ColElement) Writingsuggestions(a ColWritingsuggestionsEnum) *ColElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *ColElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *ColElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

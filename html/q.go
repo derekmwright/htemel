@@ -39,15 +39,23 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 	}
 }
 
+func QTernary(condition bool, true htemel.Node, false htemel.Node) *QElement {
+	if condition {
+		return Q(true)
+	}
+
+	return Q(false)
+}
+
 type QAutocapitalizeEnum string
 
 const (
+	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
+	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 	QAutocapitalizeEnumOff        QAutocapitalizeEnum = "off"
 	QAutocapitalizeEnumOn         QAutocapitalizeEnum = "on"
 	QAutocapitalizeEnumSentences  QAutocapitalizeEnum = "sentences"
 	QAutocapitalizeEnumWords      QAutocapitalizeEnum = "words"
-	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
-	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 )
 
 type QAutocorrectEnum string
@@ -76,20 +84,20 @@ const (
 type QDraggableEnum string
 
 const (
-	QDraggableEnumTrue  QDraggableEnum = "true"
 	QDraggableEnumFalse QDraggableEnum = "false"
+	QDraggableEnumTrue  QDraggableEnum = "true"
 )
 
 type QEnterkeyhintEnum string
 
 const (
+	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
 	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
 	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
 	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
 	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
-	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 )
 
 type QHiddenEnum string
@@ -97,26 +105,27 @@ type QHiddenEnum string
 const (
 	QHiddenEnumHidden     QHiddenEnum = "hidden"
 	QHiddenEnumUntilFound QHiddenEnum = "until-found"
+	QHiddenEnumEmpty      QHiddenEnum = ""
 )
 
 type QInputmodeEnum string
 
 const (
+	QInputmodeEnumTel     QInputmodeEnum = "tel"
+	QInputmodeEnumText    QInputmodeEnum = "text"
 	QInputmodeEnumUrl     QInputmodeEnum = "url"
 	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
 	QInputmodeEnumEmail   QInputmodeEnum = "email"
 	QInputmodeEnumNone    QInputmodeEnum = "none"
 	QInputmodeEnumNumeric QInputmodeEnum = "numeric"
 	QInputmodeEnumSearch  QInputmodeEnum = "search"
-	QInputmodeEnumTel     QInputmodeEnum = "tel"
-	QInputmodeEnumText    QInputmodeEnum = "text"
 )
 
 type QSpellcheckEnum string
 
 const (
-	QSpellcheckEnumTrue  QSpellcheckEnum = "true"
 	QSpellcheckEnumFalse QSpellcheckEnum = "false"
+	QSpellcheckEnumTrue  QSpellcheckEnum = "true"
 )
 
 type QTranslateEnum string
@@ -297,6 +306,11 @@ func (e *QElement) Writingsuggestions(a QWritingsuggestionsEnum) *QElement {
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *QElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *QElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,15 +39,23 @@ func SelectIf(condition bool, children ...htemel.Node) *SelectElement {
 	}
 }
 
+func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectElement {
+	if condition {
+		return Select(true)
+	}
+
+	return Select(false)
+}
+
 type SelectAutocapitalizeEnum string
 
 const (
+	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
+	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
 	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
 	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
 	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
-	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
-	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 )
 
 type SelectAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type SelectContenteditableEnum string
 
 const (
+	SelectContenteditableEnumFalse         SelectContenteditableEnum = "false"
 	SelectContenteditableEnumPlaintextOnly SelectContenteditableEnum = "plaintext-only"
 	SelectContenteditableEnumTrue          SelectContenteditableEnum = "true"
-	SelectContenteditableEnumFalse         SelectContenteditableEnum = "false"
 )
 
 type SelectDirEnum string
 
 const (
-	SelectDirEnumLtr  SelectDirEnum = "ltr"
 	SelectDirEnumRtl  SelectDirEnum = "rtl"
 	SelectDirEnumAuto SelectDirEnum = "auto"
+	SelectDirEnumLtr  SelectDirEnum = "ltr"
 )
 
 type SelectDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type SelectEnterkeyhintEnum string
 
 const (
+	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
+	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
 	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
 	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
-	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
-	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 )
 
 type SelectHiddenEnum string
@@ -97,19 +105,20 @@ type SelectHiddenEnum string
 const (
 	SelectHiddenEnumHidden     SelectHiddenEnum = "hidden"
 	SelectHiddenEnumUntilFound SelectHiddenEnum = "until-found"
+	SelectHiddenEnumEmpty      SelectHiddenEnum = ""
 )
 
 type SelectInputmodeEnum string
 
 const (
-	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
-	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
 	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
 	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
 	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
 	SelectInputmodeEnumUrl     SelectInputmodeEnum = "url"
 	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
 	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
+	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
+	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
 )
 
 type SelectSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *SelectElement) Writingsuggestions(a SelectWritingsuggestionsEnum) *Sele
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *SelectElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *SelectElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

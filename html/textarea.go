@@ -39,15 +39,23 @@ func TextareaIf(condition bool, children ...htemel.Node) *TextareaElement {
 	}
 }
 
+func TextareaTernary(condition bool, true htemel.Node, false htemel.Node) *TextareaElement {
+	if condition {
+		return Textarea(true)
+	}
+
+	return Textarea(false)
+}
+
 type TextareaAutocapitalizeEnum string
 
 const (
-	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
 	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
 	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
 	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
 	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
 	TextareaAutocapitalizeEnumWords      TextareaAutocapitalizeEnum = "words"
+	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
 )
 
 type TextareaAutocorrectEnum string
@@ -83,13 +91,13 @@ const (
 type TextareaEnterkeyhintEnum string
 
 const (
+	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
 	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
 	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
 	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
 	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
 	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
 	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
-	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
 )
 
 type TextareaHiddenEnum string
@@ -97,19 +105,20 @@ type TextareaHiddenEnum string
 const (
 	TextareaHiddenEnumHidden     TextareaHiddenEnum = "hidden"
 	TextareaHiddenEnumUntilFound TextareaHiddenEnum = "until-found"
+	TextareaHiddenEnumEmpty      TextareaHiddenEnum = ""
 )
 
 type TextareaInputmodeEnum string
 
 const (
-	TextareaInputmodeEnumDecimal TextareaInputmodeEnum = "decimal"
-	TextareaInputmodeEnumEmail   TextareaInputmodeEnum = "email"
-	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
-	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
 	TextareaInputmodeEnumSearch  TextareaInputmodeEnum = "search"
 	TextareaInputmodeEnumTel     TextareaInputmodeEnum = "tel"
 	TextareaInputmodeEnumText    TextareaInputmodeEnum = "text"
 	TextareaInputmodeEnumUrl     TextareaInputmodeEnum = "url"
+	TextareaInputmodeEnumDecimal TextareaInputmodeEnum = "decimal"
+	TextareaInputmodeEnumEmail   TextareaInputmodeEnum = "email"
+	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
+	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
 )
 
 type TextareaSpellcheckEnum string
@@ -297,6 +306,11 @@ func (e *TextareaElement) Writingsuggestions(a TextareaWritingsuggestionsEnum) *
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *TextareaElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *TextareaElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

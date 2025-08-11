@@ -39,57 +39,65 @@ func VideoIf(condition bool, children ...htemel.Node) *VideoElement {
 	}
 }
 
+func VideoTernary(condition bool, true htemel.Node, false htemel.Node) *VideoElement {
+	if condition {
+		return Video(true)
+	}
+
+	return Video(false)
+}
+
 type VideoAutocapitalizeEnum string
 
 const (
-	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
-	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
-	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
 	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
 	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
+	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
+	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
+	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 )
 
 type VideoAutocorrectEnum string
 
 const (
-	VideoAutocorrectEnumOn  VideoAutocorrectEnum = "on"
 	VideoAutocorrectEnumOff VideoAutocorrectEnum = "off"
+	VideoAutocorrectEnumOn  VideoAutocorrectEnum = "on"
 )
 
 type VideoContenteditableEnum string
 
 const (
+	VideoContenteditableEnumTrue          VideoContenteditableEnum = "true"
 	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
 	VideoContenteditableEnumPlaintextOnly VideoContenteditableEnum = "plaintext-only"
-	VideoContenteditableEnumTrue          VideoContenteditableEnum = "true"
 )
 
 type VideoDirEnum string
 
 const (
-	VideoDirEnumRtl  VideoDirEnum = "rtl"
 	VideoDirEnumAuto VideoDirEnum = "auto"
 	VideoDirEnumLtr  VideoDirEnum = "ltr"
+	VideoDirEnumRtl  VideoDirEnum = "rtl"
 )
 
 type VideoDraggableEnum string
 
 const (
-	VideoDraggableEnumFalse VideoDraggableEnum = "false"
 	VideoDraggableEnumTrue  VideoDraggableEnum = "true"
+	VideoDraggableEnumFalse VideoDraggableEnum = "false"
 )
 
 type VideoEnterkeyhintEnum string
 
 const (
-	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
-	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
 	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
 	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
 	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
 	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
 	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
+	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
+	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
 )
 
 type VideoHiddenEnum string
@@ -97,19 +105,20 @@ type VideoHiddenEnum string
 const (
 	VideoHiddenEnumHidden     VideoHiddenEnum = "hidden"
 	VideoHiddenEnumUntilFound VideoHiddenEnum = "until-found"
+	VideoHiddenEnumEmpty      VideoHiddenEnum = ""
 )
 
 type VideoInputmodeEnum string
 
 const (
-	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
-	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
-	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
 	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
 	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
 	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
 	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
 	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
+	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
+	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
+	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
 )
 
 type VideoSpellcheckEnum string
@@ -122,8 +131,8 @@ const (
 type VideoTranslateEnum string
 
 const (
-	VideoTranslateEnumNo  VideoTranslateEnum = "no"
 	VideoTranslateEnumYes VideoTranslateEnum = "yes"
+	VideoTranslateEnumNo  VideoTranslateEnum = "no"
 )
 
 type VideoWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *VideoElement) Writingsuggestions(a VideoWritingsuggestionsEnum) *VideoE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *VideoElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *VideoElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

@@ -39,6 +39,14 @@ func FigureIf(condition bool, children ...htemel.Node) *FigureElement {
 	}
 }
 
+func FigureTernary(condition bool, true htemel.Node, false htemel.Node) *FigureElement {
+	if condition {
+		return Figure(true)
+	}
+
+	return Figure(false)
+}
+
 type FigureAutocapitalizeEnum string
 
 const (
@@ -95,8 +103,9 @@ const (
 type FigureHiddenEnum string
 
 const (
-	FigureHiddenEnumUntilFound FigureHiddenEnum = "until-found"
 	FigureHiddenEnumHidden     FigureHiddenEnum = "hidden"
+	FigureHiddenEnumUntilFound FigureHiddenEnum = "until-found"
+	FigureHiddenEnumEmpty      FigureHiddenEnum = ""
 )
 
 type FigureInputmodeEnum string
@@ -115,8 +124,8 @@ const (
 type FigureSpellcheckEnum string
 
 const (
-	FigureSpellcheckEnumTrue  FigureSpellcheckEnum = "true"
 	FigureSpellcheckEnumFalse FigureSpellcheckEnum = "false"
+	FigureSpellcheckEnumTrue  FigureSpellcheckEnum = "true"
 )
 
 type FigureTranslateEnum string
@@ -297,6 +306,11 @@ func (e *FigureElement) Writingsuggestions(a FigureWritingsuggestionsEnum) *Figu
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *FigureElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *FigureElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

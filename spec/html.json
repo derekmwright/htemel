@@ -447,6 +447,7 @@
         "sentences": {},
         "words": {}
       },
+      "allow_empty": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -456,6 +457,7 @@
         "off": {},
         "on": {}
       },
+      "allow_empty": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -475,6 +477,7 @@
         "plaintext-only": {},
         "true": {}
       },
+      "allow_empty": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -484,6 +487,7 @@
         "ltr": {},
         "rtl": {}
       },
+      "allow_empty": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -493,6 +497,7 @@
         "false": {},
         "true": {}
       },
+      "allow_empty": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -507,6 +512,7 @@
         "search": {},
         "send": {}
       },
+      "allow_empty": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -516,6 +522,7 @@
         "hidden": {},
         "until-found": {}
       },
+      "allow_empty": true,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -541,6 +548,7 @@
         "text": {},
         "url": {}
       },
+      "allow_empty": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -595,6 +603,7 @@
         "false": {},
         "true": {}
       },
+      "allow_empty": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -619,6 +628,7 @@
         "no": {},
         "yes": {}
       },
+      "allow_empty": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -628,6 +638,7 @@
         "false": {},
         "true": {}
       },
+      "allow_empty": false,
       "attribute_type": "AttributeTypeEnum"
     }
   ]

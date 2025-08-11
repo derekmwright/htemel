@@ -39,15 +39,23 @@ func TbodyIf(condition bool, children ...htemel.Node) *TbodyElement {
 	}
 }
 
+func TbodyTernary(condition bool, true htemel.Node, false htemel.Node) *TbodyElement {
+	if condition {
+		return Tbody(true)
+	}
+
+	return Tbody(false)
+}
+
 type TbodyAutocapitalizeEnum string
 
 const (
+	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
+	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 	TbodyAutocapitalizeEnumWords      TbodyAutocapitalizeEnum = "words"
 	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
 	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
 	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
-	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
-	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 )
 
 type TbodyAutocorrectEnum string
@@ -60,17 +68,17 @@ const (
 type TbodyContenteditableEnum string
 
 const (
+	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
 	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
-	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
 )
 
 type TbodyDirEnum string
 
 const (
+	TbodyDirEnumRtl  TbodyDirEnum = "rtl"
 	TbodyDirEnumAuto TbodyDirEnum = "auto"
 	TbodyDirEnumLtr  TbodyDirEnum = "ltr"
-	TbodyDirEnumRtl  TbodyDirEnum = "rtl"
 )
 
 type TbodyDraggableEnum string
@@ -97,12 +105,12 @@ type TbodyHiddenEnum string
 const (
 	TbodyHiddenEnumHidden     TbodyHiddenEnum = "hidden"
 	TbodyHiddenEnumUntilFound TbodyHiddenEnum = "until-found"
+	TbodyHiddenEnumEmpty      TbodyHiddenEnum = ""
 )
 
 type TbodyInputmodeEnum string
 
 const (
-	TbodyInputmodeEnumDecimal TbodyInputmodeEnum = "decimal"
 	TbodyInputmodeEnumEmail   TbodyInputmodeEnum = "email"
 	TbodyInputmodeEnumNone    TbodyInputmodeEnum = "none"
 	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
@@ -110,13 +118,14 @@ const (
 	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
 	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
 	TbodyInputmodeEnumUrl     TbodyInputmodeEnum = "url"
+	TbodyInputmodeEnumDecimal TbodyInputmodeEnum = "decimal"
 )
 
 type TbodySpellcheckEnum string
 
 const (
-	TbodySpellcheckEnumTrue  TbodySpellcheckEnum = "true"
 	TbodySpellcheckEnumFalse TbodySpellcheckEnum = "false"
+	TbodySpellcheckEnumTrue  TbodySpellcheckEnum = "true"
 )
 
 type TbodyTranslateEnum string
@@ -129,8 +138,8 @@ const (
 type TbodyWritingsuggestionsEnum string
 
 const (
-	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
 	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
+	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
 )
 
 type tbodyAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *TbodyElement) Writingsuggestions(a TbodyWritingsuggestionsEnum) *TbodyE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *TbodyElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *TbodyElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

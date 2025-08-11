@@ -39,15 +39,23 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 	}
 }
 
+func DelTernary(condition bool, true htemel.Node, false htemel.Node) *DelElement {
+	if condition {
+		return Del(true)
+	}
+
+	return Del(false)
+}
+
 type DelAutocapitalizeEnum string
 
 const (
+	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
+	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
 	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
 	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
 	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
 	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
-	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
-	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
 )
 
 type DelAutocorrectEnum string
@@ -68,9 +76,9 @@ const (
 type DelDirEnum string
 
 const (
+	DelDirEnumAuto DelDirEnum = "auto"
 	DelDirEnumLtr  DelDirEnum = "ltr"
 	DelDirEnumRtl  DelDirEnum = "rtl"
-	DelDirEnumAuto DelDirEnum = "auto"
 )
 
 type DelDraggableEnum string
@@ -83,13 +91,13 @@ const (
 type DelEnterkeyhintEnum string
 
 const (
+	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
+	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
+	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
 	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
 	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
 	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
 	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
-	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
-	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
-	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
 )
 
 type DelHiddenEnum string
@@ -97,11 +105,13 @@ type DelHiddenEnum string
 const (
 	DelHiddenEnumHidden     DelHiddenEnum = "hidden"
 	DelHiddenEnumUntilFound DelHiddenEnum = "until-found"
+	DelHiddenEnumEmpty      DelHiddenEnum = ""
 )
 
 type DelInputmodeEnum string
 
 const (
+	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 	DelInputmodeEnumNone    DelInputmodeEnum = "none"
 	DelInputmodeEnumNumeric DelInputmodeEnum = "numeric"
 	DelInputmodeEnumSearch  DelInputmodeEnum = "search"
@@ -109,7 +119,6 @@ const (
 	DelInputmodeEnumText    DelInputmodeEnum = "text"
 	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
 	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
-	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 )
 
 type DelSpellcheckEnum string
@@ -122,8 +131,8 @@ const (
 type DelTranslateEnum string
 
 const (
-	DelTranslateEnumYes DelTranslateEnum = "yes"
 	DelTranslateEnumNo  DelTranslateEnum = "no"
+	DelTranslateEnumYes DelTranslateEnum = "yes"
 )
 
 type DelWritingsuggestionsEnum string
@@ -297,6 +306,11 @@ func (e *DelElement) Writingsuggestions(a DelWritingsuggestionsEnum) *DelElement
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *DelElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *DelElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {

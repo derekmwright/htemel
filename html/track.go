@@ -39,15 +39,23 @@ func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 	}
 }
 
+func TrackTernary(condition bool, true htemel.Node, false htemel.Node) *TrackElement {
+	if condition {
+		return Track(true)
+	}
+
+	return Track(false)
+}
+
 type TrackAutocapitalizeEnum string
 
 const (
-	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
 	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
 	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
 	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
 	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
 	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
+	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
 )
 
 type TrackAutocorrectEnum string
@@ -60,9 +68,9 @@ const (
 type TrackContenteditableEnum string
 
 const (
+	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
 	TrackContenteditableEnumFalse         TrackContenteditableEnum = "false"
 	TrackContenteditableEnumPlaintextOnly TrackContenteditableEnum = "plaintext-only"
-	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
 )
 
 type TrackDirEnum string
@@ -76,27 +84,28 @@ const (
 type TrackDraggableEnum string
 
 const (
-	TrackDraggableEnumFalse TrackDraggableEnum = "false"
 	TrackDraggableEnumTrue  TrackDraggableEnum = "true"
+	TrackDraggableEnumFalse TrackDraggableEnum = "false"
 )
 
 type TrackEnterkeyhintEnum string
 
 const (
+	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
+	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
 	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
 	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
 	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
-	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
-	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
 )
 
 type TrackHiddenEnum string
 
 const (
-	TrackHiddenEnumHidden     TrackHiddenEnum = "hidden"
 	TrackHiddenEnumUntilFound TrackHiddenEnum = "until-found"
+	TrackHiddenEnumHidden     TrackHiddenEnum = "hidden"
+	TrackHiddenEnumEmpty      TrackHiddenEnum = ""
 )
 
 type TrackInputmodeEnum string
@@ -129,8 +138,8 @@ const (
 type TrackWritingsuggestionsEnum string
 
 const (
-	TrackWritingsuggestionsEnumFalse TrackWritingsuggestionsEnum = "false"
 	TrackWritingsuggestionsEnumTrue  TrackWritingsuggestionsEnum = "true"
+	TrackWritingsuggestionsEnumFalse TrackWritingsuggestionsEnum = "false"
 )
 
 type trackAttrs map[string]any
@@ -297,6 +306,11 @@ func (e *TrackElement) Writingsuggestions(a TrackWritingsuggestionsEnum) *TrackE
 	return e
 }
 
+// Render processes the current element, and writes the initial tag.
+// Then all children are processed and included within the tag.
+// Finally, the tag is closed.
+//
+// *Except for void elements as they are self closing and do not contain children.
 func (e *TrackElement) Render(w io.Writer) error {
 	if e.skipRender {
 		return nil
@@ -313,7 +327,16 @@ func (e *TrackElement) Render(w io.Writer) error {
 			w.Write([]byte(" "))
 		}
 
-		w.Write([]byte(key + "="))
+		w.Write([]byte(key))
+
+		// Enum types support empty attributes and can be omitted.
+		if fmt.Sprintf("%s", v) == "" {
+			w.Write([]byte(" "))
+			continue
+		}
+
+		w.Write([]byte("="))
+
 		w.Write([]byte("\"" + html.EscapeString(fmt.Sprintf("%v", v)) + "\""))
 
 		if i < c {
