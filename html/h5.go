@@ -60,12 +60,12 @@ func (e *H5Element) AddIndent(i int) {
 type H5AutocapitalizeEnum string
 
 const (
+	H5AutocapitalizeEnumWords      H5AutocapitalizeEnum = "words"
 	H5AutocapitalizeEnumCharacters H5AutocapitalizeEnum = "characters"
 	H5AutocapitalizeEnumNone       H5AutocapitalizeEnum = "none"
 	H5AutocapitalizeEnumOff        H5AutocapitalizeEnum = "off"
 	H5AutocapitalizeEnumOn         H5AutocapitalizeEnum = "on"
 	H5AutocapitalizeEnumSentences  H5AutocapitalizeEnum = "sentences"
-	H5AutocapitalizeEnumWords      H5AutocapitalizeEnum = "words"
 )
 
 type H5AutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type H5ContenteditableEnum string
 
 const (
-	H5ContenteditableEnumFalse         H5ContenteditableEnum = "false"
 	H5ContenteditableEnumPlaintextOnly H5ContenteditableEnum = "plaintext-only"
 	H5ContenteditableEnumTrue          H5ContenteditableEnum = "true"
+	H5ContenteditableEnumFalse         H5ContenteditableEnum = "false"
 	H5ContenteditableEnumEmpty         H5ContenteditableEnum = ""
 )
 
 type H5DirEnum string
 
 const (
+	H5DirEnumAuto H5DirEnum = "auto"
 	H5DirEnumLtr  H5DirEnum = "ltr"
 	H5DirEnumRtl  H5DirEnum = "rtl"
-	H5DirEnumAuto H5DirEnum = "auto"
 )
 
 type H5DraggableEnum string
@@ -115,22 +115,22 @@ const (
 type H5HiddenEnum string
 
 const (
-	H5HiddenEnumHidden     H5HiddenEnum = "hidden"
 	H5HiddenEnumUntilFound H5HiddenEnum = "until-found"
+	H5HiddenEnumHidden     H5HiddenEnum = "hidden"
 	H5HiddenEnumEmpty      H5HiddenEnum = ""
 )
 
 type H5InputmodeEnum string
 
 const (
-	H5InputmodeEnumTel     H5InputmodeEnum = "tel"
-	H5InputmodeEnumText    H5InputmodeEnum = "text"
 	H5InputmodeEnumUrl     H5InputmodeEnum = "url"
 	H5InputmodeEnumDecimal H5InputmodeEnum = "decimal"
 	H5InputmodeEnumEmail   H5InputmodeEnum = "email"
 	H5InputmodeEnumNone    H5InputmodeEnum = "none"
 	H5InputmodeEnumNumeric H5InputmodeEnum = "numeric"
 	H5InputmodeEnumSearch  H5InputmodeEnum = "search"
+	H5InputmodeEnumTel     H5InputmodeEnum = "tel"
+	H5InputmodeEnumText    H5InputmodeEnum = "text"
 )
 
 type H5SpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type H5TranslateEnum string
 
 const (
-	H5TranslateEnumYes   H5TranslateEnum = "yes"
 	H5TranslateEnumNo    H5TranslateEnum = "no"
+	H5TranslateEnumYes   H5TranslateEnum = "yes"
 	H5TranslateEnumEmpty H5TranslateEnum = ""
 )
 

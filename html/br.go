@@ -71,9 +71,9 @@ const (
 type BrContenteditableEnum string
 
 const (
-	BrContenteditableEnumTrue          BrContenteditableEnum = "true"
 	BrContenteditableEnumFalse         BrContenteditableEnum = "false"
 	BrContenteditableEnumPlaintextOnly BrContenteditableEnum = "plaintext-only"
+	BrContenteditableEnumTrue          BrContenteditableEnum = "true"
 	BrContenteditableEnumEmpty         BrContenteditableEnum = ""
 )
 
@@ -88,33 +88,34 @@ const (
 type BrDraggableEnum string
 
 const (
-	BrDraggableEnumTrue  BrDraggableEnum = "true"
 	BrDraggableEnumFalse BrDraggableEnum = "false"
+	BrDraggableEnumTrue  BrDraggableEnum = "true"
 )
 
 type BrEnterkeyhintEnum string
 
 const (
-	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
-	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
-	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
 	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
 	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
+	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
+	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
+	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 )
 
 type BrHiddenEnum string
 
 const (
-	BrHiddenEnumUntilFound BrHiddenEnum = "until-found"
 	BrHiddenEnumHidden     BrHiddenEnum = "hidden"
+	BrHiddenEnumUntilFound BrHiddenEnum = "until-found"
 	BrHiddenEnumEmpty      BrHiddenEnum = ""
 )
 
 type BrInputmodeEnum string
 
 const (
+	BrInputmodeEnumText    BrInputmodeEnum = "text"
 	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
 	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
 	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
@@ -122,7 +123,6 @@ const (
 	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
 	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
 	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
-	BrInputmodeEnumText    BrInputmodeEnum = "text"
 )
 
 type BrSpellcheckEnum string

@@ -52,28 +52,28 @@ func (e *ColElement) AddIndent(i int) {
 type ColAutocapitalizeEnum string
 
 const (
+	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
 	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
 	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
 	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
 	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
-	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 )
 
 type ColAutocorrectEnum string
 
 const (
-	ColAutocorrectEnumOff   ColAutocorrectEnum = "off"
 	ColAutocorrectEnumOn    ColAutocorrectEnum = "on"
+	ColAutocorrectEnumOff   ColAutocorrectEnum = "off"
 	ColAutocorrectEnumEmpty ColAutocorrectEnum = ""
 )
 
 type ColContenteditableEnum string
 
 const (
-	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
 	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
 	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
+	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
 	ColContenteditableEnumEmpty         ColContenteditableEnum = ""
 )
 
@@ -88,20 +88,20 @@ const (
 type ColDraggableEnum string
 
 const (
-	ColDraggableEnumTrue  ColDraggableEnum = "true"
 	ColDraggableEnumFalse ColDraggableEnum = "false"
+	ColDraggableEnumTrue  ColDraggableEnum = "true"
 )
 
 type ColEnterkeyhintEnum string
 
 const (
+	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
+	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
+	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
 	ColEnterkeyhintEnumPrevious ColEnterkeyhintEnum = "previous"
 	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
 	ColEnterkeyhintEnumSend     ColEnterkeyhintEnum = "send"
 	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
-	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
-	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
-	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
 )
 
 type ColHiddenEnum string
@@ -115,14 +115,14 @@ const (
 type ColInputmodeEnum string
 
 const (
-	ColInputmodeEnumNone    ColInputmodeEnum = "none"
-	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
-	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
-	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 	ColInputmodeEnumText    ColInputmodeEnum = "text"
 	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
 	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
 	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
+	ColInputmodeEnumNone    ColInputmodeEnum = "none"
+	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
+	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
+	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 )
 
 type ColSpellcheckEnum string
@@ -150,6 +150,12 @@ const (
 )
 
 type colAttrs map[string]any
+
+func (e *ColElement) Span(i int) *ColElement {
+	e.attributes["span"] = i
+
+	return e
+}
 
 func (e *ColElement) Autocapitalize(a ColAutocapitalizeEnum) *ColElement {
 	e.attributes["autocapitalize"] = a

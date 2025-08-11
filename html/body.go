@@ -103,13 +103,13 @@ const (
 type BodyEnterkeyhintEnum string
 
 const (
-	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
-	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
-	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
 	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
 	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
 	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
 	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
+	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
+	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
+	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
 )
 
 type BodyHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type BodyInputmodeEnum string
 
 const (
+	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
 	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
 	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
 	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
@@ -130,14 +131,13 @@ const (
 	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
 	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
 	BodyInputmodeEnumUrl     BodyInputmodeEnum = "url"
-	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
 )
 
 type BodySpellcheckEnum string
 
 const (
-	BodySpellcheckEnumFalse BodySpellcheckEnum = "false"
 	BodySpellcheckEnumTrue  BodySpellcheckEnum = "true"
+	BodySpellcheckEnumFalse BodySpellcheckEnum = "false"
 	BodySpellcheckEnumEmpty BodySpellcheckEnum = ""
 )
 

@@ -60,12 +60,12 @@ func (e *OptionElement) AddIndent(i int) {
 type OptionAutocapitalizeEnum string
 
 const (
-	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
-	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
 	OptionAutocapitalizeEnumNone       OptionAutocapitalizeEnum = "none"
 	OptionAutocapitalizeEnumOff        OptionAutocapitalizeEnum = "off"
 	OptionAutocapitalizeEnumOn         OptionAutocapitalizeEnum = "on"
+	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
+	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 )
 
 type OptionAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type OptionEnterkeyhintEnum string
 
 const (
-	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
 	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
 	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
 	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
+	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 )
 
 type OptionHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type OptionInputmodeEnum string
 
 const (
-	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
-	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
 	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
 	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
 	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
 	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
+	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
+	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
 )
 
 type OptionSpellcheckEnum string

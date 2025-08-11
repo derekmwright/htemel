@@ -60,12 +60,12 @@ func (e *DlElement) AddIndent(i int) {
 type DlAutocapitalizeEnum string
 
 const (
-	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
 	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
 	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
 	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
 	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
 	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
+	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
 )
 
 type DlAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type DlContenteditableEnum string
 
 const (
+	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
 	DlContenteditableEnumTrue          DlContenteditableEnum = "true"
-	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumEmpty         DlContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type DlDraggableEnum string
 
 const (
-	DlDraggableEnumTrue  DlDraggableEnum = "true"
 	DlDraggableEnumFalse DlDraggableEnum = "false"
+	DlDraggableEnumTrue  DlDraggableEnum = "true"
 )
 
 type DlEnterkeyhintEnum string
 
 const (
+	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
+	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
+	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
 	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
 	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
 	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
-	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
-	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
-	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 )
 
 type DlHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type DlInputmodeEnum string
 
 const (
-	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
 	DlInputmodeEnumSearch  DlInputmodeEnum = "search"
 	DlInputmodeEnumTel     DlInputmodeEnum = "tel"
 	DlInputmodeEnumText    DlInputmodeEnum = "text"
@@ -131,6 +130,7 @@ const (
 	DlInputmodeEnumDecimal DlInputmodeEnum = "decimal"
 	DlInputmodeEnumEmail   DlInputmodeEnum = "email"
 	DlInputmodeEnumNone    DlInputmodeEnum = "none"
+	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
 )
 
 type DlSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type DlTranslateEnum string
 
 const (
-	DlTranslateEnumNo    DlTranslateEnum = "no"
 	DlTranslateEnumYes   DlTranslateEnum = "yes"
+	DlTranslateEnumNo    DlTranslateEnum = "no"
 	DlTranslateEnumEmpty DlTranslateEnum = ""
 )
 

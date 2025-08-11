@@ -60,19 +60,19 @@ func (e *DataElement) AddIndent(i int) {
 type DataAutocapitalizeEnum string
 
 const (
+	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
 	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
 	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
 	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
-	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
 )
 
 type DataAutocorrectEnum string
 
 const (
-	DataAutocorrectEnumOn    DataAutocorrectEnum = "on"
 	DataAutocorrectEnumOff   DataAutocorrectEnum = "off"
+	DataAutocorrectEnumOn    DataAutocorrectEnum = "on"
 	DataAutocorrectEnumEmpty DataAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type DataDirEnum string
 
 const (
-	DataDirEnumAuto DataDirEnum = "auto"
 	DataDirEnumLtr  DataDirEnum = "ltr"
 	DataDirEnumRtl  DataDirEnum = "rtl"
+	DataDirEnumAuto DataDirEnum = "auto"
 )
 
 type DataDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type DataEnterkeyhintEnum string
 
 const (
+	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
+	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
+	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
 	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
 	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
-	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
-	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
-	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
 )
 
 type DataHiddenEnum string
@@ -123,29 +123,29 @@ const (
 type DataInputmodeEnum string
 
 const (
-	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
-	DataInputmodeEnumNone    DataInputmodeEnum = "none"
-	DataInputmodeEnumNumeric DataInputmodeEnum = "numeric"
 	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
 	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
 	DataInputmodeEnumText    DataInputmodeEnum = "text"
 	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
 	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
+	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
+	DataInputmodeEnumNone    DataInputmodeEnum = "none"
+	DataInputmodeEnumNumeric DataInputmodeEnum = "numeric"
 )
 
 type DataSpellcheckEnum string
 
 const (
-	DataSpellcheckEnumFalse DataSpellcheckEnum = "false"
 	DataSpellcheckEnumTrue  DataSpellcheckEnum = "true"
+	DataSpellcheckEnumFalse DataSpellcheckEnum = "false"
 	DataSpellcheckEnumEmpty DataSpellcheckEnum = ""
 )
 
 type DataTranslateEnum string
 
 const (
-	DataTranslateEnumNo    DataTranslateEnum = "no"
 	DataTranslateEnumYes   DataTranslateEnum = "yes"
+	DataTranslateEnumNo    DataTranslateEnum = "no"
 	DataTranslateEnumEmpty DataTranslateEnum = ""
 )
 

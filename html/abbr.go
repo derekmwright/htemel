@@ -60,12 +60,12 @@ func (e *AbbrElement) AddIndent(i int) {
 type AbbrAutocapitalizeEnum string
 
 const (
+	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
 	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
 	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
 	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
 	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
 	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
-	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
 )
 
 type AbbrAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type AbbrEnterkeyhintEnum string
 
 const (
-	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
-	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
 	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
 	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
 	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 	AbbrEnterkeyhintEnumEnter    AbbrEnterkeyhintEnum = "enter"
 	AbbrEnterkeyhintEnumGo       AbbrEnterkeyhintEnum = "go"
+	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
+	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
 )
 
 type AbbrHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type AbbrInputmodeEnum string
 
 const (
-	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
-	AbbrInputmodeEnumText    AbbrInputmodeEnum = "text"
-	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
-	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
 	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
 	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
 	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
+	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
+	AbbrInputmodeEnumText    AbbrInputmodeEnum = "text"
+	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
+	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
 )
 
 type AbbrSpellcheckEnum string
 
 const (
-	AbbrSpellcheckEnumTrue  AbbrSpellcheckEnum = "true"
 	AbbrSpellcheckEnumFalse AbbrSpellcheckEnum = "false"
+	AbbrSpellcheckEnumTrue  AbbrSpellcheckEnum = "true"
 	AbbrSpellcheckEnumEmpty AbbrSpellcheckEnum = ""
 )
 

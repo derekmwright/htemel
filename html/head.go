@@ -60,19 +60,19 @@ func (e *HeadElement) AddIndent(i int) {
 type HeadAutocapitalizeEnum string
 
 const (
-	HeadAutocapitalizeEnumCharacters HeadAutocapitalizeEnum = "characters"
 	HeadAutocapitalizeEnumNone       HeadAutocapitalizeEnum = "none"
 	HeadAutocapitalizeEnumOff        HeadAutocapitalizeEnum = "off"
 	HeadAutocapitalizeEnumOn         HeadAutocapitalizeEnum = "on"
 	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
 	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
+	HeadAutocapitalizeEnumCharacters HeadAutocapitalizeEnum = "characters"
 )
 
 type HeadAutocorrectEnum string
 
 const (
-	HeadAutocorrectEnumOff   HeadAutocorrectEnum = "off"
 	HeadAutocorrectEnumOn    HeadAutocorrectEnum = "on"
+	HeadAutocorrectEnumOff   HeadAutocorrectEnum = "off"
 	HeadAutocorrectEnumEmpty HeadAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type HeadEnterkeyhintEnum string
 
 const (
-	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
 	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
 	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
 	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
 	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
+	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 )
 
 type HeadHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type HeadInputmodeEnum string
 
 const (
-	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
 	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
 	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
 	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
@@ -131,6 +130,7 @@ const (
 	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
 	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
+	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
 )
 
 type HeadSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type HeadTranslateEnum string
 
 const (
-	HeadTranslateEnumNo    HeadTranslateEnum = "no"
 	HeadTranslateEnumYes   HeadTranslateEnum = "yes"
+	HeadTranslateEnumNo    HeadTranslateEnum = "no"
 	HeadTranslateEnumEmpty HeadTranslateEnum = ""
 )
 

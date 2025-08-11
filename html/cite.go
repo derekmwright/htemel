@@ -60,12 +60,12 @@ func (e *CiteElement) AddIndent(i int) {
 type CiteAutocapitalizeEnum string
 
 const (
-	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
-	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
-	CiteAutocapitalizeEnumNone       CiteAutocapitalizeEnum = "none"
 	CiteAutocapitalizeEnumOff        CiteAutocapitalizeEnum = "off"
 	CiteAutocapitalizeEnumOn         CiteAutocapitalizeEnum = "on"
 	CiteAutocapitalizeEnumSentences  CiteAutocapitalizeEnum = "sentences"
+	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
+	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
+	CiteAutocapitalizeEnumNone       CiteAutocapitalizeEnum = "none"
 )
 
 type CiteAutocorrectEnum string
@@ -96,34 +96,33 @@ const (
 type CiteDraggableEnum string
 
 const (
-	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
 	CiteDraggableEnumFalse CiteDraggableEnum = "false"
+	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
 )
 
 type CiteEnterkeyhintEnum string
 
 const (
+	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
+	CiteEnterkeyhintEnumSearch   CiteEnterkeyhintEnum = "search"
+	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
 	CiteEnterkeyhintEnumDone     CiteEnterkeyhintEnum = "done"
 	CiteEnterkeyhintEnumEnter    CiteEnterkeyhintEnum = "enter"
 	CiteEnterkeyhintEnumGo       CiteEnterkeyhintEnum = "go"
 	CiteEnterkeyhintEnumNext     CiteEnterkeyhintEnum = "next"
-	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
-	CiteEnterkeyhintEnumSearch   CiteEnterkeyhintEnum = "search"
-	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
 )
 
 type CiteHiddenEnum string
 
 const (
-	CiteHiddenEnumUntilFound CiteHiddenEnum = "until-found"
 	CiteHiddenEnumHidden     CiteHiddenEnum = "hidden"
+	CiteHiddenEnumUntilFound CiteHiddenEnum = "until-found"
 	CiteHiddenEnumEmpty      CiteHiddenEnum = ""
 )
 
 type CiteInputmodeEnum string
 
 const (
-	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
 	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
 	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
@@ -131,6 +130,7 @@ const (
 	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
 	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
 	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
+	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
 )
 
 type CiteSpellcheckEnum string

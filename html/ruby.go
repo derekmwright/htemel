@@ -60,19 +60,19 @@ func (e *RubyElement) AddIndent(i int) {
 type RubyAutocapitalizeEnum string
 
 const (
-	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
-	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
-	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
 	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
 	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 	RubyAutocapitalizeEnumOff        RubyAutocapitalizeEnum = "off"
+	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
+	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
+	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
 )
 
 type RubyAutocorrectEnum string
 
 const (
-	RubyAutocorrectEnumOn    RubyAutocorrectEnum = "on"
 	RubyAutocorrectEnumOff   RubyAutocorrectEnum = "off"
+	RubyAutocorrectEnumOn    RubyAutocorrectEnum = "on"
 	RubyAutocorrectEnumEmpty RubyAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type RubyEnterkeyhintEnum string
 
 const (
+	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
 	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
 	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
-	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 )
 
 type RubyHiddenEnum string
@@ -136,16 +136,16 @@ const (
 type RubySpellcheckEnum string
 
 const (
-	RubySpellcheckEnumTrue  RubySpellcheckEnum = "true"
 	RubySpellcheckEnumFalse RubySpellcheckEnum = "false"
+	RubySpellcheckEnumTrue  RubySpellcheckEnum = "true"
 	RubySpellcheckEnumEmpty RubySpellcheckEnum = ""
 )
 
 type RubyTranslateEnum string
 
 const (
-	RubyTranslateEnumYes   RubyTranslateEnum = "yes"
 	RubyTranslateEnumNo    RubyTranslateEnum = "no"
+	RubyTranslateEnumYes   RubyTranslateEnum = "yes"
 	RubyTranslateEnumEmpty RubyTranslateEnum = ""
 )
 

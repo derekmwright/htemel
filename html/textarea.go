@@ -60,12 +60,12 @@ func (e *TextareaElement) AddIndent(i int) {
 type TextareaAutocapitalizeEnum string
 
 const (
-	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
-	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
-	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
 	TextareaAutocapitalizeEnumWords      TextareaAutocapitalizeEnum = "words"
 	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
 	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
+	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
+	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
+	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
 )
 
 type TextareaAutocorrectEnum string
@@ -88,28 +88,28 @@ const (
 type TextareaDirEnum string
 
 const (
+	TextareaDirEnumAuto TextareaDirEnum = "auto"
 	TextareaDirEnumLtr  TextareaDirEnum = "ltr"
 	TextareaDirEnumRtl  TextareaDirEnum = "rtl"
-	TextareaDirEnumAuto TextareaDirEnum = "auto"
 )
 
 type TextareaDraggableEnum string
 
 const (
-	TextareaDraggableEnumTrue  TextareaDraggableEnum = "true"
 	TextareaDraggableEnumFalse TextareaDraggableEnum = "false"
+	TextareaDraggableEnumTrue  TextareaDraggableEnum = "true"
 )
 
 type TextareaEnterkeyhintEnum string
 
 const (
+	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
+	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
 	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
 	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
 	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
 	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
 	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
-	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
-	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
 )
 
 type TextareaHiddenEnum string

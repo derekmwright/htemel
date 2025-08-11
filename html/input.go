@@ -52,12 +52,12 @@ func (e *InputElement) AddIndent(i int) {
 type InputAutocapitalizeEnum string
 
 const (
+	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
+	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
 	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
 	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
 	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
 	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
-	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
-	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
 )
 
 type InputAutocorrectEnum string
@@ -88,20 +88,20 @@ const (
 type InputDraggableEnum string
 
 const (
-	InputDraggableEnumTrue  InputDraggableEnum = "true"
 	InputDraggableEnumFalse InputDraggableEnum = "false"
+	InputDraggableEnumTrue  InputDraggableEnum = "true"
 )
 
 type InputEnterkeyhintEnum string
 
 const (
-	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
 	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
 	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
 	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
 	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
 	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
+	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
 )
 
 type InputHiddenEnum string

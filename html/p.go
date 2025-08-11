@@ -60,12 +60,12 @@ func (e *PElement) AddIndent(i int) {
 type PAutocapitalizeEnum string
 
 const (
-	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
 	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
 	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
 	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
 	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
 	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
+	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
 )
 
 type PAutocorrectEnum string
@@ -103,34 +103,34 @@ const (
 type PEnterkeyhintEnum string
 
 const (
+	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
 	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
 	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
 	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
-	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 )
 
 type PHiddenEnum string
 
 const (
-	PHiddenEnumHidden     PHiddenEnum = "hidden"
 	PHiddenEnumUntilFound PHiddenEnum = "until-found"
+	PHiddenEnumHidden     PHiddenEnum = "hidden"
 	PHiddenEnumEmpty      PHiddenEnum = ""
 )
 
 type PInputmodeEnum string
 
 const (
-	PInputmodeEnumUrl     PInputmodeEnum = "url"
-	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
-	PInputmodeEnumEmail   PInputmodeEnum = "email"
-	PInputmodeEnumNone    PInputmodeEnum = "none"
 	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
 	PInputmodeEnumSearch  PInputmodeEnum = "search"
 	PInputmodeEnumTel     PInputmodeEnum = "tel"
 	PInputmodeEnumText    PInputmodeEnum = "text"
+	PInputmodeEnumUrl     PInputmodeEnum = "url"
+	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
+	PInputmodeEnumEmail   PInputmodeEnum = "email"
+	PInputmodeEnumNone    PInputmodeEnum = "none"
 )
 
 type PSpellcheckEnum string

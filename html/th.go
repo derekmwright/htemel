@@ -60,19 +60,19 @@ func (e *ThElement) AddIndent(i int) {
 type ThAutocapitalizeEnum string
 
 const (
+	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
 	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
 	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
 	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
 	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
-	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
 )
 
 type ThAutocorrectEnum string
 
 const (
-	ThAutocorrectEnumOn    ThAutocorrectEnum = "on"
 	ThAutocorrectEnumOff   ThAutocorrectEnum = "off"
+	ThAutocorrectEnumOn    ThAutocorrectEnum = "on"
 	ThAutocorrectEnumEmpty ThAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type ThDirEnum string
 
 const (
+	ThDirEnumAuto ThDirEnum = "auto"
 	ThDirEnumLtr  ThDirEnum = "ltr"
 	ThDirEnumRtl  ThDirEnum = "rtl"
-	ThDirEnumAuto ThDirEnum = "auto"
 )
 
 type ThDraggableEnum string
@@ -103,41 +103,41 @@ const (
 type ThEnterkeyhintEnum string
 
 const (
-	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
-	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
-	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
 	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
 	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
+	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
+	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
+	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 )
 
 type ThHiddenEnum string
 
 const (
-	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
 	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
+	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
 	ThHiddenEnumEmpty      ThHiddenEnum = ""
 )
 
 type ThInputmodeEnum string
 
 const (
-	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
-	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
 	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
 	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
 	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
 	ThInputmodeEnumText    ThInputmodeEnum = "text"
+	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
+	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
 )
 
 type ThSpellcheckEnum string
 
 const (
-	ThSpellcheckEnumTrue  ThSpellcheckEnum = "true"
 	ThSpellcheckEnumFalse ThSpellcheckEnum = "false"
+	ThSpellcheckEnumTrue  ThSpellcheckEnum = "true"
 	ThSpellcheckEnumEmpty ThSpellcheckEnum = ""
 )
 
@@ -158,6 +158,36 @@ const (
 )
 
 type thAttrs map[string]any
+
+func (e *ThElement) Span(i int) *ThElement {
+	e.attributes["span"] = i
+
+	return e
+}
+
+func (e *ThElement) Rowspan(i int) *ThElement {
+	e.attributes["rowspan"] = i
+
+	return e
+}
+
+func (e *ThElement) Headers(s ...string) *ThElement {
+	e.attributes["headers"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *ThElement) Scope(s string) *ThElement {
+	e.attributes["scope"] = s
+
+	return e
+}
+
+func (e *ThElement) Abbr(s string) *ThElement {
+	e.attributes["abbr"] = s
+
+	return e
+}
 
 func (e *ThElement) Autocapitalize(a ThAutocapitalizeEnum) *ThElement {
 	e.attributes["autocapitalize"] = a

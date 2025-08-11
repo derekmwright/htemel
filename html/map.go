@@ -79,18 +79,18 @@ const (
 type MapContenteditableEnum string
 
 const (
-	MapContenteditableEnumTrue          MapContenteditableEnum = "true"
 	MapContenteditableEnumFalse         MapContenteditableEnum = "false"
 	MapContenteditableEnumPlaintextOnly MapContenteditableEnum = "plaintext-only"
+	MapContenteditableEnumTrue          MapContenteditableEnum = "true"
 	MapContenteditableEnumEmpty         MapContenteditableEnum = ""
 )
 
 type MapDirEnum string
 
 const (
+	MapDirEnumRtl  MapDirEnum = "rtl"
 	MapDirEnumAuto MapDirEnum = "auto"
 	MapDirEnumLtr  MapDirEnum = "ltr"
-	MapDirEnumRtl  MapDirEnum = "rtl"
 )
 
 type MapDraggableEnum string
@@ -103,20 +103,20 @@ const (
 type MapEnterkeyhintEnum string
 
 const (
+	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
+	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
 	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
 	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
 	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
 	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 	MapEnterkeyhintEnumSend     MapEnterkeyhintEnum = "send"
-	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
-	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
 )
 
 type MapHiddenEnum string
 
 const (
-	MapHiddenEnumUntilFound MapHiddenEnum = "until-found"
 	MapHiddenEnumHidden     MapHiddenEnum = "hidden"
+	MapHiddenEnumUntilFound MapHiddenEnum = "until-found"
 	MapHiddenEnumEmpty      MapHiddenEnum = ""
 )
 
@@ -152,12 +152,18 @@ const (
 type MapWritingsuggestionsEnum string
 
 const (
-	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
 	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
+	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
 	MapWritingsuggestionsEnumEmpty MapWritingsuggestionsEnum = ""
 )
 
 type mapAttrs map[string]any
+
+func (e *MapElement) Name(s string) *MapElement {
+	e.attributes["name"] = s
+
+	return e
+}
 
 func (e *MapElement) Autocapitalize(a MapAutocapitalizeEnum) *MapElement {
 	e.attributes["autocapitalize"] = a

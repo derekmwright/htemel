@@ -60,19 +60,19 @@ func (e *ProgressElement) AddIndent(i int) {
 type ProgressAutocapitalizeEnum string
 
 const (
-	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
-	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
-	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
 	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
 	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
+	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
+	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
+	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 )
 
 type ProgressAutocorrectEnum string
 
 const (
-	ProgressAutocorrectEnumOn    ProgressAutocorrectEnum = "on"
 	ProgressAutocorrectEnumOff   ProgressAutocorrectEnum = "off"
+	ProgressAutocorrectEnumOn    ProgressAutocorrectEnum = "on"
 	ProgressAutocorrectEnumEmpty ProgressAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type ProgressDirEnum string
 
 const (
+	ProgressDirEnumLtr  ProgressDirEnum = "ltr"
 	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
 	ProgressDirEnumAuto ProgressDirEnum = "auto"
-	ProgressDirEnumLtr  ProgressDirEnum = "ltr"
 )
 
 type ProgressDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type ProgressEnterkeyhintEnum string
 
 const (
-	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
-	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
-	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
 	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
 	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
 	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
 	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
+	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
+	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
+	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
 )
 
 type ProgressHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type ProgressInputmodeEnum string
 
 const (
-	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
-	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
-	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
-	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
 	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
 	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
 	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
 	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
+	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
+	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
+	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
+	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
 )
 
 type ProgressSpellcheckEnum string

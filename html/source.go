@@ -95,13 +95,13 @@ const (
 type SourceEnterkeyhintEnum string
 
 const (
+	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
+	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
 	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
 	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
 	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
-	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
-	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 )
 
 type SourceHiddenEnum string
@@ -115,14 +115,14 @@ const (
 type SourceInputmodeEnum string
 
 const (
+	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
+	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
 	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
 	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
 	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
 	SourceInputmodeEnumText    SourceInputmodeEnum = "text"
 	SourceInputmodeEnumUrl     SourceInputmodeEnum = "url"
 	SourceInputmodeEnumDecimal SourceInputmodeEnum = "decimal"
-	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
-	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
 )
 
 type SourceSpellcheckEnum string

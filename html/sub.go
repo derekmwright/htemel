@@ -79,9 +79,9 @@ const (
 type SubContenteditableEnum string
 
 const (
-	SubContenteditableEnumFalse         SubContenteditableEnum = "false"
 	SubContenteditableEnumPlaintextOnly SubContenteditableEnum = "plaintext-only"
 	SubContenteditableEnumTrue          SubContenteditableEnum = "true"
+	SubContenteditableEnumFalse         SubContenteditableEnum = "false"
 	SubContenteditableEnumEmpty         SubContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type SubEnterkeyhintEnum string
 
 const (
+	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
+	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
+	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
 	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
 	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
 	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
-	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
-	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
-	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
 )
 
 type SubHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SubInputmodeEnum string
 
 const (
-	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
-	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
-	SubInputmodeEnumText    SubInputmodeEnum = "text"
-	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
 	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
 	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
 	SubInputmodeEnumNone    SubInputmodeEnum = "none"
 	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
+	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
+	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
+	SubInputmodeEnumText    SubInputmodeEnum = "text"
+	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
 )
 
 type SubSpellcheckEnum string

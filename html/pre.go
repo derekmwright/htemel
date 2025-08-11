@@ -60,12 +60,12 @@ func (e *PreElement) AddIndent(i int) {
 type PreAutocapitalizeEnum string
 
 const (
-	PreAutocapitalizeEnumOn         PreAutocapitalizeEnum = "on"
-	PreAutocapitalizeEnumSentences  PreAutocapitalizeEnum = "sentences"
-	PreAutocapitalizeEnumWords      PreAutocapitalizeEnum = "words"
 	PreAutocapitalizeEnumCharacters PreAutocapitalizeEnum = "characters"
 	PreAutocapitalizeEnumNone       PreAutocapitalizeEnum = "none"
 	PreAutocapitalizeEnumOff        PreAutocapitalizeEnum = "off"
+	PreAutocapitalizeEnumOn         PreAutocapitalizeEnum = "on"
+	PreAutocapitalizeEnumSentences  PreAutocapitalizeEnum = "sentences"
+	PreAutocapitalizeEnumWords      PreAutocapitalizeEnum = "words"
 )
 
 type PreAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type PreContenteditableEnum string
 
 const (
-	PreContenteditableEnumFalse         PreContenteditableEnum = "false"
 	PreContenteditableEnumPlaintextOnly PreContenteditableEnum = "plaintext-only"
 	PreContenteditableEnumTrue          PreContenteditableEnum = "true"
+	PreContenteditableEnumFalse         PreContenteditableEnum = "false"
 	PreContenteditableEnumEmpty         PreContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type PreEnterkeyhintEnum string
 
 const (
-	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
-	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
 	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
 	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
 	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
 	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
+	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
+	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 )
 
 type PreHiddenEnum string
@@ -144,16 +144,16 @@ const (
 type PreTranslateEnum string
 
 const (
-	PreTranslateEnumYes   PreTranslateEnum = "yes"
 	PreTranslateEnumNo    PreTranslateEnum = "no"
+	PreTranslateEnumYes   PreTranslateEnum = "yes"
 	PreTranslateEnumEmpty PreTranslateEnum = ""
 )
 
 type PreWritingsuggestionsEnum string
 
 const (
-	PreWritingsuggestionsEnumFalse PreWritingsuggestionsEnum = "false"
 	PreWritingsuggestionsEnumTrue  PreWritingsuggestionsEnum = "true"
+	PreWritingsuggestionsEnumFalse PreWritingsuggestionsEnum = "false"
 	PreWritingsuggestionsEnumEmpty PreWritingsuggestionsEnum = ""
 )
 

@@ -60,12 +60,12 @@ func (e *RpElement) AddIndent(i int) {
 type RpAutocapitalizeEnum string
 
 const (
-	RpAutocapitalizeEnumOn         RpAutocapitalizeEnum = "on"
 	RpAutocapitalizeEnumSentences  RpAutocapitalizeEnum = "sentences"
 	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
 	RpAutocapitalizeEnumCharacters RpAutocapitalizeEnum = "characters"
 	RpAutocapitalizeEnumNone       RpAutocapitalizeEnum = "none"
 	RpAutocapitalizeEnumOff        RpAutocapitalizeEnum = "off"
+	RpAutocapitalizeEnumOn         RpAutocapitalizeEnum = "on"
 )
 
 type RpAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type RpDirEnum string
 
 const (
-	RpDirEnumAuto RpDirEnum = "auto"
 	RpDirEnumLtr  RpDirEnum = "ltr"
 	RpDirEnumRtl  RpDirEnum = "rtl"
+	RpDirEnumAuto RpDirEnum = "auto"
 )
 
 type RpDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type RpEnterkeyhintEnum string
 
 const (
+	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
+	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
 	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
 	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
 	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
 	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
-	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
-	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 )
 
 type RpHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type RpInputmodeEnum string
 
 const (
+	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
+	RpInputmodeEnumNone    RpInputmodeEnum = "none"
+	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
 	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
 	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
 	RpInputmodeEnumText    RpInputmodeEnum = "text"
 	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
 	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
-	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
-	RpInputmodeEnumNone    RpInputmodeEnum = "none"
-	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
 )
 
 type RpSpellcheckEnum string

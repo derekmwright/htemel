@@ -49,6 +49,14 @@ func (e *ImgElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type ImgCrossoriginEnum string
+
+const (
+	ImgCrossoriginEnumAnonymous      ImgCrossoriginEnum = "anonymous"
+	ImgCrossoriginEnumUseCredentials ImgCrossoriginEnum = "use-credentials"
+	ImgCrossoriginEnumEmpty          ImgCrossoriginEnum = ""
+)
+
 type ImgDecodingEnum string
 
 const (
@@ -75,12 +83,12 @@ const (
 type ImgAutocapitalizeEnum string
 
 const (
+	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
 	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
 	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
-	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
 )
 
 type ImgAutocorrectEnum string
@@ -94,9 +102,9 @@ const (
 type ImgContenteditableEnum string
 
 const (
-	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumPlaintextOnly ImgContenteditableEnum = "plaintext-only"
+	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumEmpty         ImgContenteditableEnum = ""
 )
 
@@ -118,13 +126,13 @@ const (
 type ImgEnterkeyhintEnum string
 
 const (
+	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
 	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
 	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
-	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 )
 
 type ImgHiddenEnum string
@@ -138,7 +146,6 @@ const (
 type ImgInputmodeEnum string
 
 const (
-	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
 	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
 	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
 	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
@@ -146,6 +153,7 @@ const (
 	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
 	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
+	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
 )
 
 type ImgSpellcheckEnum string
@@ -198,8 +206,8 @@ func (e *ImgElement) Sizes(s string) *ImgElement {
 	return e
 }
 
-func (e *ImgElement) Crossorigin(s string) *ImgElement {
-	e.attributes["crossorigin"] = s
+func (e *ImgElement) Crossorigin(a ImgCrossoriginEnum) *ImgElement {
+	e.attributes["crossorigin"] = a
 
 	return e
 }

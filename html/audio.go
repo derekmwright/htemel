@@ -57,15 +57,32 @@ func (e *AudioElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type AudioCrossoriginEnum string
+
+const (
+	AudioCrossoriginEnumAnonymous      AudioCrossoriginEnum = "anonymous"
+	AudioCrossoriginEnumUseCredentials AudioCrossoriginEnum = "use-credentials"
+	AudioCrossoriginEnumEmpty          AudioCrossoriginEnum = ""
+)
+
+type AudioPreloadEnum string
+
+const (
+	AudioPreloadEnumMetadata AudioPreloadEnum = "metadata"
+	AudioPreloadEnumNone     AudioPreloadEnum = "none"
+	AudioPreloadEnumAuto     AudioPreloadEnum = "auto"
+	AudioPreloadEnumEmpty    AudioPreloadEnum = ""
+)
+
 type AudioAutocapitalizeEnum string
 
 const (
+	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
 	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
 	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 	AudioAutocapitalizeEnumOff        AudioAutocapitalizeEnum = "off"
 	AudioAutocapitalizeEnumOn         AudioAutocapitalizeEnum = "on"
 	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
-	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
 )
 
 type AudioAutocorrectEnum string
@@ -88,9 +105,9 @@ const (
 type AudioDirEnum string
 
 const (
-	AudioDirEnumAuto AudioDirEnum = "auto"
 	AudioDirEnumLtr  AudioDirEnum = "ltr"
 	AudioDirEnumRtl  AudioDirEnum = "rtl"
+	AudioDirEnumAuto AudioDirEnum = "auto"
 )
 
 type AudioDraggableEnum string
@@ -103,13 +120,13 @@ const (
 type AudioEnterkeyhintEnum string
 
 const (
-	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
-	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
 	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
 	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
 	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
+	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
+	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 )
 
 type AudioHiddenEnum string
@@ -123,14 +140,14 @@ const (
 type AudioInputmodeEnum string
 
 const (
-	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
-	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
-	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
 	AudioInputmodeEnumTel     AudioInputmodeEnum = "tel"
 	AudioInputmodeEnumText    AudioInputmodeEnum = "text"
 	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
 	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
 	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
+	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
+	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
+	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
 )
 
 type AudioSpellcheckEnum string
@@ -158,6 +175,54 @@ const (
 )
 
 type audioAttrs map[string]any
+
+func (e *AudioElement) Src(s string) *AudioElement {
+	e.attributes["src"] = s
+
+	return e
+}
+
+func (e *AudioElement) Crossorigin(a AudioCrossoriginEnum) *AudioElement {
+	e.attributes["crossorigin"] = a
+
+	return e
+}
+
+func (e *AudioElement) Preload(a AudioPreloadEnum) *AudioElement {
+	e.attributes["preload"] = a
+
+	return e
+}
+
+func (e *AudioElement) Autoplay(b bool) *AudioElement {
+	e.attributes["autoplay"] = b
+
+	return e
+}
+
+func (e *AudioElement) Playsinline(b bool) *AudioElement {
+	e.attributes["playsinline"] = b
+
+	return e
+}
+
+func (e *AudioElement) Loop(b bool) *AudioElement {
+	e.attributes["loop"] = b
+
+	return e
+}
+
+func (e *AudioElement) Muted(b bool) *AudioElement {
+	e.attributes["muted"] = b
+
+	return e
+}
+
+func (e *AudioElement) Controls(b bool) *AudioElement {
+	e.attributes["controls"] = b
+
+	return e
+}
 
 func (e *AudioElement) Autocapitalize(a AudioAutocapitalizeEnum) *AudioElement {
 	e.attributes["autocapitalize"] = a

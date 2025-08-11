@@ -60,12 +60,12 @@ func (e *NavElement) AddIndent(i int) {
 type NavAutocapitalizeEnum string
 
 const (
-	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
 	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
 	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
 	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
 	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
+	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
 )
 
 type NavAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type NavContenteditableEnum string
 
 const (
+	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
 	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
-	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumEmpty         NavContenteditableEnum = ""
 )
 
 type NavDirEnum string
 
 const (
-	NavDirEnumRtl  NavDirEnum = "rtl"
 	NavDirEnumAuto NavDirEnum = "auto"
 	NavDirEnumLtr  NavDirEnum = "ltr"
+	NavDirEnumRtl  NavDirEnum = "rtl"
 )
 
 type NavDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
+	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
 	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
 	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
 	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
 	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
-	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
 )
 
 type NavHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type NavInputmodeEnum string
 
 const (
+	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 	NavInputmodeEnumText    NavInputmodeEnum = "text"
 	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
@@ -130,7 +131,6 @@ const (
 	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
 	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
-	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 )
 
 type NavSpellcheckEnum string

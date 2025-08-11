@@ -60,12 +60,12 @@ func (e *StyleElement) AddIndent(i int) {
 type StyleAutocapitalizeEnum string
 
 const (
+	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
+	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
 	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
 	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
 	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
 	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
-	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
-	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
 )
 
 type StyleAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type StyleDirEnum string
 
 const (
-	StyleDirEnumRtl  StyleDirEnum = "rtl"
 	StyleDirEnumAuto StyleDirEnum = "auto"
 	StyleDirEnumLtr  StyleDirEnum = "ltr"
+	StyleDirEnumRtl  StyleDirEnum = "rtl"
 )
 
 type StyleDraggableEnum string
@@ -123,14 +123,14 @@ const (
 type StyleInputmodeEnum string
 
 const (
-	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
-	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
-	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
-	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
 	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
 	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
 	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
+	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
+	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
+	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
+	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
 )
 
 type StyleSpellcheckEnum string

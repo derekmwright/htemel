@@ -682,7 +682,12 @@
         {
           "name": "crossorigin",
           "description": "How the element handles crossorigin requests",
-          "attribute_type": "AttributeTypeString"
+          "allowed": {
+            "anonymous": {},
+            "use-credentials": {}
+          },
+          "allow_empty": true,
+          "attribute_type": "AttributeTypeEnum"
         },
         {
           "name": "usemap",
@@ -746,37 +751,365 @@
     },
     {
       "tag": "iframe",
-      "description": "The iframe element represents its content navigable."
+      "description": "The iframe element represents its content navigable.",
+      "attributes": [
+        {
+          "name": "src",
+          "description": "Address of the resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "srcdoc",
+          "description": "A document to render in the iframe",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "name",
+          "description": "Name of content navigable",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "sandbox",
+          "description": "Security rules for nested content",
+          "attribute_type": "AttributeTypeSST"
+        },
+        {
+          "name": "allow",
+          "description": "Permissions policy to be applied to the iframe's contents",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "allowfullscreen",
+          "description": "Whether to allow the iframe's contents to use requestFullscreen()",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "width",
+          "description": "Horizontal dimension",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "height",
+          "description": "Vertical dimension",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "referrerpolicy",
+          "description": "Referrer policy for fetches initiated by the element",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "loading",
+          "description": "Used when determining loading deferral",
+          "allowed": {
+            "eager": {},
+            "lazy": {}
+          },
+          "allow_empty": false,
+          "attribute_type": "AttributeTypeEnum"
+        }
+      ]
     },
     {
       "tag": "embed",
       "description": "The embed element provides an integration point for an external application or interactive content.",
+      "attributes": [
+        {
+          "name": "src",
+          "description": "Address of the resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "type",
+          "description": "Type of embedded resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "width",
+          "description": "Horizontal dimension",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "height",
+          "description": "Vertical dimension",
+          "attribute_type": "AttributeTypeNumber"
+        }
+      ],
       "void": true
     },
     {
       "tag": "object",
-      "description": "The object element can represent an external resource, which, depending on the type of the resource, will either be treated as an image or as a child navigable."
+      "description": "The object element can represent an external resource, which, depending on the type of the resource, will either be treated as an image or as a child navigable.",
+      "attributes": [
+        {
+          "name": "data",
+          "description": "Address of the resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "type",
+          "description": "Type of embedded resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "name",
+          "description": "Name of content navigable",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "form",
+          "description": "Associates the element with a form element",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "width",
+          "description": "Horizontal dimension",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "height",
+          "description": "Vertical dimension",
+          "attribute_type": "AttributeTypeNumber"
+        }
+      ]
     },
     {
       "tag": "video",
-      "description": "A video element is used for playing videos or movies, and audio files with captions."
+      "description": "A video element is used for playing videos or movies, and audio files with captions.",
+      "attributes": [
+        {
+          "name": "src",
+          "description": "Address of the resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "crossorigin",
+          "description": "How the element handles crossorigin requests",
+          "allowed": {
+            "anonymous": {},
+            "use-credentials": {}
+          },
+          "allow_empty": true,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "poster",
+          "description": "Poster frame to show prior to video playback",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "preload",
+          "description": "Hints how much buffering the media resource will likely need",
+          "allowed": {
+            "auto": {},
+            "metadata": {},
+            "none": {}
+          },
+          "allow_empty": true,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "autoplay",
+          "description": "Hint that the media resource can be started automatically when the page is loaded",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "playsinline",
+          "description": "Encourage the user agent to display video content within the element's playback area",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "loop",
+          "description": "Whether to loop the media resource",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "muted",
+          "description": "Whether to mute the media resource by default",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "controls",
+          "description": "Show user agent controls",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "width",
+          "description": "Horizontal dimension",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "height",
+          "description": "Vertical dimension",
+          "attribute_type": "AttributeTypeNumber"
+        }
+      ]
     },
     {
       "tag": "audio",
-      "description": "An audio element represents a sound or audio stream."
+      "description": "An audio element represents a sound or audio stream.",
+      "attributes": [
+        {
+          "name": "src",
+          "description": "Address of the resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "crossorigin",
+          "description": "How the element handles crossorigin requests",
+          "allowed": {
+            "anonymous": {},
+            "use-credentials": {}
+          },
+          "allow_empty": true,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "preload",
+          "description": "Hints how much buffering the media resource will likely need",
+          "allowed": {
+            "auto": {},
+            "metadata": {},
+            "none": {}
+          },
+          "allow_empty": true,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "autoplay",
+          "description": "Hint that the media resource can be started automatically when the page is loaded",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "playsinline",
+          "description": "Encourage the user agent to display video content within the element's playback area",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "loop",
+          "description": "Whether to loop the media resource",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "muted",
+          "description": "Whether to mute the media resource by default",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "controls",
+          "description": "Show user agent controls",
+          "attribute_type": "AttributeTypeBool"
+        }
+      ]
     },
     {
       "tag": "track",
       "description": "The track element allows authors to specify explicit external timed text tracks for media elements. It does not represent anything on its own.",
+      "attributes": [
+        {
+          "name": "kind",
+          "description": "The type of text track",
+          "allowed": {
+            "captions": {},
+            "chapters": {},
+            "descriptions": {},
+            "metadata": {},
+            "subtitles": {}
+          },
+          "allow_empty": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "src",
+          "description": "Address of the resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "srclang",
+          "description": "Language of the text track",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "label",
+          "description": "User-visible label",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "default",
+          "description": "Enable the track if no other text track is more suitable",
+          "attribute_type": "AttributeTypeBool"
+        }
+      ],
       "void": true
     },
     {
       "tag": "map",
-      "description": "The map element, in conjunction with an img element and any area element descendants, defines an image map. The element represents its children."
+      "description": "The map element, in conjunction with an img element and any area element descendants, defines an image map. The element represents its children.",
+      "attributes": [
+        {
+          "name": "name",
+          "description": "Name of image map to reference from the usemap attribute",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "area",
       "description": "The area element represents either a hyperlink with some text and a corresponding area on an image map, or a dead area on an image map.",
+      "attributes": [
+        {
+          "name": "alt",
+          "description": "Replacement text for use when images are not available",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "coords",
+          "description": "Coordinates for the shape to be created in an image map",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "shape",
+          "description": "The kind of shape to be created in an image map",
+          "allowed": {
+            "circle": {},
+            "default": {},
+            "poly": {},
+            "rect": {}
+          },
+          "allow_empty": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "href",
+          "description": "Address of the hyperlink",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "target",
+          "description": "Navigable for hyperlink navigation",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "download",
+          "description": "Whether to download the resource instead of navigating to it, and its filename if so",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "ping",
+          "description": "URLs to ping",
+          "attribute_type": "AttributeTypeSST"
+        },
+        {
+          "name": "rel",
+          "description": "Relationship between the location in the document containing the hyperlink and the destination resource",
+          "attribute_type": "AttributeTypeSST"
+        },
+        {
+          "name": "referrerpolicy",
+          "description": "Referrer policy for fetches initiated by the element",
+          "attribute_type": "AttributeTypeString"
+        }
+      ],
       "void": true
     },
     {
@@ -789,11 +1122,25 @@
     },
     {
       "tag": "colgroup",
-      "description": "The colgroup element represents a group of one or more columns in the table that is its parent, if it has a parent and that is a table element."
+      "description": "The colgroup element represents a group of one or more columns in the table that is its parent, if it has a parent and that is a table element.",
+      "attributes": [
+        {
+          "name": "span",
+          "description": "Number of columns spanned by the element where the number is \u003e 0 \u0026\u0026 \u003c= 1000",
+          "attribute_type": "AttributeTypeNumber"
+        }
+      ]
     },
     {
       "tag": "col",
       "description": "If a col element has a parent and that is a colgroup element that itself has a parent that is a table element, then the col element represents one or more columns in the column group represented by that colgroup.",
+      "attributes": [
+        {
+          "name": "span",
+          "description": "Number of columns spanned by the element where the number is \u003e 0 \u0026\u0026 \u003c= 1000",
+          "attribute_type": "AttributeTypeNumber"
+        }
+      ],
       "void": true
     },
     {
@@ -814,11 +1161,55 @@
     },
     {
       "tag": "td",
-      "description": "The td element represents a data cell in a table."
+      "description": "The td element represents a data cell in a table.",
+      "attributes": [
+        {
+          "name": "span",
+          "description": "Number of columns spanned by the element where the number is \u003e 0 \u0026\u0026 \u003c= 1000",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "rowspan",
+          "description": "Number of rows that the cell is to span where the number is \u003e 0 \u0026\u0026 \u003c= 65534",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "headers",
+          "description": "The header cells for this cell",
+          "attribute_type": "AttributeTypeSST"
+        }
+      ]
     },
     {
       "tag": "th",
-      "description": "The th element represents a header cell in a table."
+      "description": "The th element represents a header cell in a table.",
+      "attributes": [
+        {
+          "name": "span",
+          "description": "Number of columns spanned by the element where the number is \u003e 0 \u0026\u0026 \u003c= 1000",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "rowspan",
+          "description": "Number of rows that the cell is to span where the number is \u003e 0 \u0026\u0026 \u003c= 65534",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "headers",
+          "description": "The header cells for this cell",
+          "attribute_type": "AttributeTypeSST"
+        },
+        {
+          "name": "scope",
+          "description": "Specifies which cells the header cell applies to",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "abbr",
+          "description": "Alternative label to use for the header cell when referencing the cell in other contexts",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "form",

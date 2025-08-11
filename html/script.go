@@ -60,12 +60,12 @@ func (e *ScriptElement) AddIndent(i int) {
 type ScriptAutocapitalizeEnum string
 
 const (
-	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
-	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
 	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
 	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
 	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
+	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
+	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
 )
 
 type ScriptAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type ScriptEnterkeyhintEnum string
 
 const (
-	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
-	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
 	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
 	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 	ScriptEnterkeyhintEnumNext     ScriptEnterkeyhintEnum = "next"
 	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
+	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
+	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 )
 
 type ScriptHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type ScriptInputmodeEnum string
 
 const (
+	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
 	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
@@ -130,7 +131,6 @@ const (
 	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
 	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
-	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 )
 
 type ScriptSpellcheckEnum string

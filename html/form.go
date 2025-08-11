@@ -60,12 +60,12 @@ func (e *FormElement) AddIndent(i int) {
 type FormAutocapitalizeEnum string
 
 const (
+	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
+	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
 	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
-	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
-	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 )
 
 type FormAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type FormDraggableEnum string
 
 const (
-	FormDraggableEnumFalse FormDraggableEnum = "false"
 	FormDraggableEnumTrue  FormDraggableEnum = "true"
+	FormDraggableEnumFalse FormDraggableEnum = "false"
 )
 
 type FormEnterkeyhintEnum string
 
 const (
+	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
+	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
+	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
 	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
 	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
 	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
-	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
-	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
-	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 )
 
 type FormHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type FormInputmodeEnum string
 
 const (
-	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
-	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
-	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
-	FormInputmodeEnumNone    FormInputmodeEnum = "none"
 	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
 	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
 	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
 	FormInputmodeEnumText    FormInputmodeEnum = "text"
+	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
+	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
+	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
+	FormInputmodeEnumNone    FormInputmodeEnum = "none"
 )
 
 type FormSpellcheckEnum string

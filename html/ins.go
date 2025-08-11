@@ -60,12 +60,12 @@ func (e *InsElement) AddIndent(i int) {
 type InsAutocapitalizeEnum string
 
 const (
-	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
-	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
-	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
 	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
 	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
+	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
+	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
+	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 )
 
 type InsAutocorrectEnum string
@@ -96,27 +96,27 @@ const (
 type InsDraggableEnum string
 
 const (
-	InsDraggableEnumTrue  InsDraggableEnum = "true"
 	InsDraggableEnumFalse InsDraggableEnum = "false"
+	InsDraggableEnumTrue  InsDraggableEnum = "true"
 )
 
 type InsEnterkeyhintEnum string
 
 const (
+	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
 	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
 	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
 	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
-	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
 )
 
 type InsHiddenEnum string
 
 const (
-	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
 	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
+	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
 	InsHiddenEnumEmpty      InsHiddenEnum = ""
 )
 
@@ -144,8 +144,8 @@ const (
 type InsTranslateEnum string
 
 const (
-	InsTranslateEnumNo    InsTranslateEnum = "no"
 	InsTranslateEnumYes   InsTranslateEnum = "yes"
+	InsTranslateEnumNo    InsTranslateEnum = "no"
 	InsTranslateEnumEmpty InsTranslateEnum = ""
 )
 

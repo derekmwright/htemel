@@ -60,12 +60,12 @@ func (e *FooterElement) AddIndent(i int) {
 type FooterAutocapitalizeEnum string
 
 const (
+	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
 	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
 	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 	FooterAutocapitalizeEnumOn         FooterAutocapitalizeEnum = "on"
 	FooterAutocapitalizeEnumSentences  FooterAutocapitalizeEnum = "sentences"
 	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
-	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
 )
 
 type FooterAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type FooterContenteditableEnum string
 
 const (
-	FooterContenteditableEnumFalse         FooterContenteditableEnum = "false"
 	FooterContenteditableEnumPlaintextOnly FooterContenteditableEnum = "plaintext-only"
 	FooterContenteditableEnumTrue          FooterContenteditableEnum = "true"
+	FooterContenteditableEnumFalse         FooterContenteditableEnum = "false"
 	FooterContenteditableEnumEmpty         FooterContenteditableEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type FooterEnterkeyhintEnum string
 
 const (
+	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
+	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
 	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
 	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
 	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
 	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
 	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
-	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
-	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
 )
 
 type FooterHiddenEnum string
 
 const (
-	FooterHiddenEnumUntilFound FooterHiddenEnum = "until-found"
 	FooterHiddenEnumHidden     FooterHiddenEnum = "hidden"
+	FooterHiddenEnumUntilFound FooterHiddenEnum = "until-found"
 	FooterHiddenEnumEmpty      FooterHiddenEnum = ""
 )
 
 type FooterInputmodeEnum string
 
 const (
-	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
-	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
-	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
-	FooterInputmodeEnumUrl     FooterInputmodeEnum = "url"
 	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
 	FooterInputmodeEnumEmail   FooterInputmodeEnum = "email"
 	FooterInputmodeEnumNone    FooterInputmodeEnum = "none"
 	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
+	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
+	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
+	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
+	FooterInputmodeEnumUrl     FooterInputmodeEnum = "url"
 )
 
 type FooterSpellcheckEnum string

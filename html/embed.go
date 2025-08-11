@@ -71,9 +71,9 @@ const (
 type EmbedContenteditableEnum string
 
 const (
-	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
 	EmbedContenteditableEnumFalse         EmbedContenteditableEnum = "false"
 	EmbedContenteditableEnumPlaintextOnly EmbedContenteditableEnum = "plaintext-only"
+	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
 	EmbedContenteditableEnumEmpty         EmbedContenteditableEnum = ""
 )
 
@@ -88,20 +88,20 @@ const (
 type EmbedDraggableEnum string
 
 const (
-	EmbedDraggableEnumTrue  EmbedDraggableEnum = "true"
 	EmbedDraggableEnumFalse EmbedDraggableEnum = "false"
+	EmbedDraggableEnumTrue  EmbedDraggableEnum = "true"
 )
 
 type EmbedEnterkeyhintEnum string
 
 const (
-	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
-	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
 	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
 	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
 	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
+	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
+	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 )
 
 type EmbedHiddenEnum string
@@ -115,29 +115,29 @@ const (
 type EmbedInputmodeEnum string
 
 const (
-	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
-	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
-	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
-	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
 	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
 	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
 	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
+	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
+	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
+	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
+	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
 )
 
 type EmbedSpellcheckEnum string
 
 const (
-	EmbedSpellcheckEnumFalse EmbedSpellcheckEnum = "false"
 	EmbedSpellcheckEnumTrue  EmbedSpellcheckEnum = "true"
+	EmbedSpellcheckEnumFalse EmbedSpellcheckEnum = "false"
 	EmbedSpellcheckEnumEmpty EmbedSpellcheckEnum = ""
 )
 
 type EmbedTranslateEnum string
 
 const (
-	EmbedTranslateEnumNo    EmbedTranslateEnum = "no"
 	EmbedTranslateEnumYes   EmbedTranslateEnum = "yes"
+	EmbedTranslateEnumNo    EmbedTranslateEnum = "no"
 	EmbedTranslateEnumEmpty EmbedTranslateEnum = ""
 )
 
@@ -150,6 +150,30 @@ const (
 )
 
 type embedAttrs map[string]any
+
+func (e *EmbedElement) Src(s string) *EmbedElement {
+	e.attributes["src"] = s
+
+	return e
+}
+
+func (e *EmbedElement) Type(s string) *EmbedElement {
+	e.attributes["type"] = s
+
+	return e
+}
+
+func (e *EmbedElement) Width(i int) *EmbedElement {
+	e.attributes["width"] = i
+
+	return e
+}
+
+func (e *EmbedElement) Height(i int) *EmbedElement {
+	e.attributes["height"] = i
+
+	return e
+}
 
 func (e *EmbedElement) Autocapitalize(a EmbedAutocapitalizeEnum) *EmbedElement {
 	e.attributes["autocapitalize"] = a

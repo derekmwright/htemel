@@ -60,12 +60,12 @@ func (e *TableElement) AddIndent(i int) {
 type TableAutocapitalizeEnum string
 
 const (
-	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
 	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
 	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
 	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
 	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
+	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
 )
 
 type TableAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type TableContenteditableEnum string
 
 const (
-	TableContenteditableEnumTrue          TableContenteditableEnum = "true"
 	TableContenteditableEnumFalse         TableContenteditableEnum = "false"
 	TableContenteditableEnumPlaintextOnly TableContenteditableEnum = "plaintext-only"
+	TableContenteditableEnumTrue          TableContenteditableEnum = "true"
 	TableContenteditableEnumEmpty         TableContenteditableEnum = ""
 )
 
@@ -103,20 +103,20 @@ const (
 type TableEnterkeyhintEnum string
 
 const (
+	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
 	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
 	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
 	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
 	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
 	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
 	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
-	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
 )
 
 type TableHiddenEnum string
 
 const (
-	TableHiddenEnumHidden     TableHiddenEnum = "hidden"
 	TableHiddenEnumUntilFound TableHiddenEnum = "until-found"
+	TableHiddenEnumHidden     TableHiddenEnum = "hidden"
 	TableHiddenEnumEmpty      TableHiddenEnum = ""
 )
 
@@ -136,8 +136,8 @@ const (
 type TableSpellcheckEnum string
 
 const (
-	TableSpellcheckEnumTrue  TableSpellcheckEnum = "true"
 	TableSpellcheckEnumFalse TableSpellcheckEnum = "false"
+	TableSpellcheckEnumTrue  TableSpellcheckEnum = "true"
 	TableSpellcheckEnumEmpty TableSpellcheckEnum = ""
 )
 

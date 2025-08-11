@@ -88,9 +88,9 @@ const (
 type StrongDirEnum string
 
 const (
-	StrongDirEnumAuto StrongDirEnum = "auto"
 	StrongDirEnumLtr  StrongDirEnum = "ltr"
 	StrongDirEnumRtl  StrongDirEnum = "rtl"
+	StrongDirEnumAuto StrongDirEnum = "auto"
 )
 
 type StrongDraggableEnum string
@@ -103,34 +103,34 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
-	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
-	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
 	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
 	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
+	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
+	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
 )
 
 type StrongHiddenEnum string
 
 const (
-	StrongHiddenEnumHidden     StrongHiddenEnum = "hidden"
 	StrongHiddenEnumUntilFound StrongHiddenEnum = "until-found"
+	StrongHiddenEnumHidden     StrongHiddenEnum = "hidden"
 	StrongHiddenEnumEmpty      StrongHiddenEnum = ""
 )
 
 type StrongInputmodeEnum string
 
 const (
-	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
-	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
-	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
-	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
 	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
 	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
 	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
+	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
+	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
+	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
+	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
 )
 
 type StrongSpellcheckEnum string

@@ -60,12 +60,12 @@ func (e *DelElement) AddIndent(i int) {
 type DelAutocapitalizeEnum string
 
 const (
-	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
 	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
 	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
 	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
 	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
 	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
+	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
 )
 
 type DelAutocorrectEnum string
@@ -123,6 +123,7 @@ const (
 type DelInputmodeEnum string
 
 const (
+	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
 	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
 	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 	DelInputmodeEnumNone    DelInputmodeEnum = "none"
@@ -130,7 +131,6 @@ const (
 	DelInputmodeEnumSearch  DelInputmodeEnum = "search"
 	DelInputmodeEnumTel     DelInputmodeEnum = "tel"
 	DelInputmodeEnumText    DelInputmodeEnum = "text"
-	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
 )
 
 type DelSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type DelTranslateEnum string
 
 const (
-	DelTranslateEnumYes   DelTranslateEnum = "yes"
 	DelTranslateEnumNo    DelTranslateEnum = "no"
+	DelTranslateEnumYes   DelTranslateEnum = "yes"
 	DelTranslateEnumEmpty DelTranslateEnum = ""
 )
 

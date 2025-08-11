@@ -60,12 +60,12 @@ func (e *ArticleElement) AddIndent(i int) {
 type ArticleAutocapitalizeEnum string
 
 const (
-	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
-	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
 	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
 	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
+	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
+	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 )
 
 type ArticleAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type ArticleEnterkeyhintEnum string
 
 const (
+	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
+	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
+	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
 	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
 	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
 	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
-	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
-	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
-	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
 )
 
 type ArticleHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type ArticleInputmodeEnum string
 
 const (
-	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
-	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
 	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
 	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
 	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
 	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
 	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
 	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
+	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
+	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
 )
 
 type ArticleSpellcheckEnum string
 
 const (
-	ArticleSpellcheckEnumTrue  ArticleSpellcheckEnum = "true"
 	ArticleSpellcheckEnumFalse ArticleSpellcheckEnum = "false"
+	ArticleSpellcheckEnumTrue  ArticleSpellcheckEnum = "true"
 	ArticleSpellcheckEnumEmpty ArticleSpellcheckEnum = ""
 )
 

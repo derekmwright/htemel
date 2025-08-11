@@ -60,12 +60,12 @@ func (e *BlockquoteElement) AddIndent(i int) {
 type BlockquoteAutocapitalizeEnum string
 
 const (
+	BlockquoteAutocapitalizeEnumSentences  BlockquoteAutocapitalizeEnum = "sentences"
+	BlockquoteAutocapitalizeEnumWords      BlockquoteAutocapitalizeEnum = "words"
 	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
 	BlockquoteAutocapitalizeEnumNone       BlockquoteAutocapitalizeEnum = "none"
 	BlockquoteAutocapitalizeEnumOff        BlockquoteAutocapitalizeEnum = "off"
 	BlockquoteAutocapitalizeEnumOn         BlockquoteAutocapitalizeEnum = "on"
-	BlockquoteAutocapitalizeEnumSentences  BlockquoteAutocapitalizeEnum = "sentences"
-	BlockquoteAutocapitalizeEnumWords      BlockquoteAutocapitalizeEnum = "words"
 )
 
 type BlockquoteAutocorrectEnum string
@@ -88,16 +88,16 @@ const (
 type BlockquoteDirEnum string
 
 const (
-	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 	BlockquoteDirEnumLtr  BlockquoteDirEnum = "ltr"
 	BlockquoteDirEnumRtl  BlockquoteDirEnum = "rtl"
+	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 )
 
 type BlockquoteDraggableEnum string
 
 const (
-	BlockquoteDraggableEnumTrue  BlockquoteDraggableEnum = "true"
 	BlockquoteDraggableEnumFalse BlockquoteDraggableEnum = "false"
+	BlockquoteDraggableEnumTrue  BlockquoteDraggableEnum = "true"
 )
 
 type BlockquoteEnterkeyhintEnum string
@@ -115,15 +115,14 @@ const (
 type BlockquoteHiddenEnum string
 
 const (
-	BlockquoteHiddenEnumUntilFound BlockquoteHiddenEnum = "until-found"
 	BlockquoteHiddenEnumHidden     BlockquoteHiddenEnum = "hidden"
+	BlockquoteHiddenEnumUntilFound BlockquoteHiddenEnum = "until-found"
 	BlockquoteHiddenEnumEmpty      BlockquoteHiddenEnum = ""
 )
 
 type BlockquoteInputmodeEnum string
 
 const (
-	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
 	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
 	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
@@ -131,6 +130,7 @@ const (
 	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
 	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
 	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
+	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
 )
 
 type BlockquoteSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type BlockquoteWritingsuggestionsEnum string
 
 const (
-	BlockquoteWritingsuggestionsEnumTrue  BlockquoteWritingsuggestionsEnum = "true"
 	BlockquoteWritingsuggestionsEnumFalse BlockquoteWritingsuggestionsEnum = "false"
+	BlockquoteWritingsuggestionsEnumTrue  BlockquoteWritingsuggestionsEnum = "true"
 	BlockquoteWritingsuggestionsEnumEmpty BlockquoteWritingsuggestionsEnum = ""
 )
 

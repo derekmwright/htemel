@@ -60,12 +60,12 @@ func (e *TimeElement) AddIndent(i int) {
 type TimeAutocapitalizeEnum string
 
 const (
-	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
-	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
 	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
 	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
+	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
+	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
 )
 
 type TimeAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type TimeContenteditableEnum string
 
 const (
-	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
 	TimeContenteditableEnumFalse         TimeContenteditableEnum = "false"
 	TimeContenteditableEnumPlaintextOnly TimeContenteditableEnum = "plaintext-only"
+	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
 	TimeContenteditableEnumEmpty         TimeContenteditableEnum = ""
 )
 
@@ -96,27 +96,27 @@ const (
 type TimeDraggableEnum string
 
 const (
-	TimeDraggableEnumFalse TimeDraggableEnum = "false"
 	TimeDraggableEnumTrue  TimeDraggableEnum = "true"
+	TimeDraggableEnumFalse TimeDraggableEnum = "false"
 )
 
 type TimeEnterkeyhintEnum string
 
 const (
-	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
 	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
 	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 	TimeEnterkeyhintEnumEnter    TimeEnterkeyhintEnum = "enter"
 	TimeEnterkeyhintEnumGo       TimeEnterkeyhintEnum = "go"
 	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
+	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 )
 
 type TimeHiddenEnum string
 
 const (
-	TimeHiddenEnumHidden     TimeHiddenEnum = "hidden"
 	TimeHiddenEnumUntilFound TimeHiddenEnum = "until-found"
+	TimeHiddenEnumHidden     TimeHiddenEnum = "hidden"
 	TimeHiddenEnumEmpty      TimeHiddenEnum = ""
 )
 

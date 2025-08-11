@@ -60,37 +60,37 @@ func (e *UlElement) AddIndent(i int) {
 type UlAutocapitalizeEnum string
 
 const (
+	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
 	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 	UlAutocapitalizeEnumNone       UlAutocapitalizeEnum = "none"
 	UlAutocapitalizeEnumOff        UlAutocapitalizeEnum = "off"
 	UlAutocapitalizeEnumOn         UlAutocapitalizeEnum = "on"
 	UlAutocapitalizeEnumSentences  UlAutocapitalizeEnum = "sentences"
-	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
 )
 
 type UlAutocorrectEnum string
 
 const (
-	UlAutocorrectEnumOff   UlAutocorrectEnum = "off"
 	UlAutocorrectEnumOn    UlAutocorrectEnum = "on"
+	UlAutocorrectEnumOff   UlAutocorrectEnum = "off"
 	UlAutocorrectEnumEmpty UlAutocorrectEnum = ""
 )
 
 type UlContenteditableEnum string
 
 const (
+	UlContenteditableEnumFalse         UlContenteditableEnum = "false"
 	UlContenteditableEnumPlaintextOnly UlContenteditableEnum = "plaintext-only"
 	UlContenteditableEnumTrue          UlContenteditableEnum = "true"
-	UlContenteditableEnumFalse         UlContenteditableEnum = "false"
 	UlContenteditableEnumEmpty         UlContenteditableEnum = ""
 )
 
 type UlDirEnum string
 
 const (
+	UlDirEnumRtl  UlDirEnum = "rtl"
 	UlDirEnumAuto UlDirEnum = "auto"
 	UlDirEnumLtr  UlDirEnum = "ltr"
-	UlDirEnumRtl  UlDirEnum = "rtl"
 )
 
 type UlDraggableEnum string
@@ -103,27 +103,26 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
+	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
+	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
+	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
 	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
 	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
 	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
 	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
-	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
-	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
-	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
 )
 
 type UlHiddenEnum string
 
 const (
-	UlHiddenEnumUntilFound UlHiddenEnum = "until-found"
 	UlHiddenEnumHidden     UlHiddenEnum = "hidden"
+	UlHiddenEnumUntilFound UlHiddenEnum = "until-found"
 	UlHiddenEnumEmpty      UlHiddenEnum = ""
 )
 
 type UlInputmodeEnum string
 
 const (
-	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
 	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
 	UlInputmodeEnumNone    UlInputmodeEnum = "none"
 	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
@@ -131,6 +130,7 @@ const (
 	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
 	UlInputmodeEnumText    UlInputmodeEnum = "text"
 	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
+	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
 )
 
 type UlSpellcheckEnum string

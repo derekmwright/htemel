@@ -60,12 +60,12 @@ func (e *SampElement) AddIndent(i int) {
 type SampAutocapitalizeEnum string
 
 const (
-	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
-	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
-	SampAutocapitalizeEnumOff        SampAutocapitalizeEnum = "off"
 	SampAutocapitalizeEnumOn         SampAutocapitalizeEnum = "on"
 	SampAutocapitalizeEnumSentences  SampAutocapitalizeEnum = "sentences"
 	SampAutocapitalizeEnumWords      SampAutocapitalizeEnum = "words"
+	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
+	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
+	SampAutocapitalizeEnumOff        SampAutocapitalizeEnum = "off"
 )
 
 type SampAutocorrectEnum string
@@ -96,27 +96,27 @@ const (
 type SampDraggableEnum string
 
 const (
-	SampDraggableEnumFalse SampDraggableEnum = "false"
 	SampDraggableEnumTrue  SampDraggableEnum = "true"
+	SampDraggableEnumFalse SampDraggableEnum = "false"
 )
 
 type SampEnterkeyhintEnum string
 
 const (
+	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
 	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
 	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
 	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
 	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
 	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
-	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 )
 
 type SampHiddenEnum string
 
 const (
-	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
 	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
+	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
 	SampHiddenEnumEmpty      SampHiddenEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type SampWritingsuggestionsEnum string
 
 const (
-	SampWritingsuggestionsEnumFalse SampWritingsuggestionsEnum = "false"
 	SampWritingsuggestionsEnumTrue  SampWritingsuggestionsEnum = "true"
+	SampWritingsuggestionsEnumFalse SampWritingsuggestionsEnum = "false"
 	SampWritingsuggestionsEnumEmpty SampWritingsuggestionsEnum = ""
 )
 

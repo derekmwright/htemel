@@ -60,12 +60,12 @@ func (e *TdElement) AddIndent(i int) {
 type TdAutocapitalizeEnum string
 
 const (
+	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
+	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
 	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
 	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
 	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
 	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
-	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
-	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
 )
 
 type TdAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type TdContenteditableEnum string
 
 const (
-	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
 	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
 	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
+	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
 	TdContenteditableEnumEmpty         TdContenteditableEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type TdEnterkeyhintEnum string
 
 const (
+	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
 	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
 	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
 	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
 	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
 	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
 	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
-	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
 )
 
 type TdHiddenEnum string
 
 const (
-	TdHiddenEnumUntilFound TdHiddenEnum = "until-found"
 	TdHiddenEnumHidden     TdHiddenEnum = "hidden"
+	TdHiddenEnumUntilFound TdHiddenEnum = "until-found"
 	TdHiddenEnumEmpty      TdHiddenEnum = ""
 )
 
 type TdInputmodeEnum string
 
 const (
-	TdInputmodeEnumNone    TdInputmodeEnum = "none"
-	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
 	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
 	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
 	TdInputmodeEnumText    TdInputmodeEnum = "text"
 	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
 	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
+	TdInputmodeEnumNone    TdInputmodeEnum = "none"
+	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
 )
 
 type TdSpellcheckEnum string
@@ -152,12 +152,30 @@ const (
 type TdWritingsuggestionsEnum string
 
 const (
-	TdWritingsuggestionsEnumFalse TdWritingsuggestionsEnum = "false"
 	TdWritingsuggestionsEnumTrue  TdWritingsuggestionsEnum = "true"
+	TdWritingsuggestionsEnumFalse TdWritingsuggestionsEnum = "false"
 	TdWritingsuggestionsEnumEmpty TdWritingsuggestionsEnum = ""
 )
 
 type tdAttrs map[string]any
+
+func (e *TdElement) Span(i int) *TdElement {
+	e.attributes["span"] = i
+
+	return e
+}
+
+func (e *TdElement) Rowspan(i int) *TdElement {
+	e.attributes["rowspan"] = i
+
+	return e
+}
+
+func (e *TdElement) Headers(s ...string) *TdElement {
+	e.attributes["headers"] = strings.Join(s, " ")
+
+	return e
+}
 
 func (e *TdElement) Autocapitalize(a TdAutocapitalizeEnum) *TdElement {
 	e.attributes["autocapitalize"] = a

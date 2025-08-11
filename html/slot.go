@@ -79,9 +79,9 @@ const (
 type SlotContenteditableEnum string
 
 const (
-	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
 	SlotContenteditableEnumFalse         SlotContenteditableEnum = "false"
 	SlotContenteditableEnumPlaintextOnly SlotContenteditableEnum = "plaintext-only"
+	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
 	SlotContenteditableEnumEmpty         SlotContenteditableEnum = ""
 )
 
@@ -123,21 +123,21 @@ const (
 type SlotInputmodeEnum string
 
 const (
-	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
-	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
 	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
 	SlotInputmodeEnumEmail   SlotInputmodeEnum = "email"
 	SlotInputmodeEnumNone    SlotInputmodeEnum = "none"
 	SlotInputmodeEnumNumeric SlotInputmodeEnum = "numeric"
 	SlotInputmodeEnumSearch  SlotInputmodeEnum = "search"
+	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
+	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
 )
 
 type SlotSpellcheckEnum string
 
 const (
-	SlotSpellcheckEnumFalse SlotSpellcheckEnum = "false"
 	SlotSpellcheckEnumTrue  SlotSpellcheckEnum = "true"
+	SlotSpellcheckEnumFalse SlotSpellcheckEnum = "false"
 	SlotSpellcheckEnumEmpty SlotSpellcheckEnum = ""
 )
 

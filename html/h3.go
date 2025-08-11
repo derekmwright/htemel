@@ -60,28 +60,28 @@ func (e *H3Element) AddIndent(i int) {
 type H3AutocapitalizeEnum string
 
 const (
+	H3AutocapitalizeEnumSentences  H3AutocapitalizeEnum = "sentences"
+	H3AutocapitalizeEnumWords      H3AutocapitalizeEnum = "words"
 	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
 	H3AutocapitalizeEnumNone       H3AutocapitalizeEnum = "none"
 	H3AutocapitalizeEnumOff        H3AutocapitalizeEnum = "off"
 	H3AutocapitalizeEnumOn         H3AutocapitalizeEnum = "on"
-	H3AutocapitalizeEnumSentences  H3AutocapitalizeEnum = "sentences"
-	H3AutocapitalizeEnumWords      H3AutocapitalizeEnum = "words"
 )
 
 type H3AutocorrectEnum string
 
 const (
-	H3AutocorrectEnumOff   H3AutocorrectEnum = "off"
 	H3AutocorrectEnumOn    H3AutocorrectEnum = "on"
+	H3AutocorrectEnumOff   H3AutocorrectEnum = "off"
 	H3AutocorrectEnumEmpty H3AutocorrectEnum = ""
 )
 
 type H3ContenteditableEnum string
 
 const (
+	H3ContenteditableEnumTrue          H3ContenteditableEnum = "true"
 	H3ContenteditableEnumFalse         H3ContenteditableEnum = "false"
 	H3ContenteditableEnumPlaintextOnly H3ContenteditableEnum = "plaintext-only"
-	H3ContenteditableEnumTrue          H3ContenteditableEnum = "true"
 	H3ContenteditableEnumEmpty         H3ContenteditableEnum = ""
 )
 
@@ -103,20 +103,20 @@ const (
 type H3EnterkeyhintEnum string
 
 const (
+	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
+	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
 	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
 	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
 	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
 	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
 	H3EnterkeyhintEnumSend     H3EnterkeyhintEnum = "send"
-	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
-	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
 )
 
 type H3HiddenEnum string
 
 const (
-	H3HiddenEnumHidden     H3HiddenEnum = "hidden"
 	H3HiddenEnumUntilFound H3HiddenEnum = "until-found"
+	H3HiddenEnumHidden     H3HiddenEnum = "hidden"
 	H3HiddenEnumEmpty      H3HiddenEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type H3WritingsuggestionsEnum string
 
 const (
-	H3WritingsuggestionsEnumTrue  H3WritingsuggestionsEnum = "true"
 	H3WritingsuggestionsEnumFalse H3WritingsuggestionsEnum = "false"
+	H3WritingsuggestionsEnumTrue  H3WritingsuggestionsEnum = "true"
 	H3WritingsuggestionsEnumEmpty H3WritingsuggestionsEnum = ""
 )
 

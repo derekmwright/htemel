@@ -60,12 +60,12 @@ func (e *LegendElement) AddIndent(i int) {
 type LegendAutocapitalizeEnum string
 
 const (
-	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
 	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
 	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
 	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
 	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
 	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
+	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
 )
 
 type LegendAutocorrectEnum string
@@ -88,16 +88,16 @@ const (
 type LegendDirEnum string
 
 const (
+	LegendDirEnumLtr  LegendDirEnum = "ltr"
 	LegendDirEnumRtl  LegendDirEnum = "rtl"
 	LegendDirEnumAuto LegendDirEnum = "auto"
-	LegendDirEnumLtr  LegendDirEnum = "ltr"
 )
 
 type LegendDraggableEnum string
 
 const (
-	LegendDraggableEnumFalse LegendDraggableEnum = "false"
 	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
+	LegendDraggableEnumFalse LegendDraggableEnum = "false"
 )
 
 type LegendEnterkeyhintEnum string
@@ -123,14 +123,14 @@ const (
 type LegendInputmodeEnum string
 
 const (
-	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
-	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
-	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
-	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
 	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
 	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
 	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
+	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
+	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
+	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
+	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
 )
 
 type LegendSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type LegendTranslateEnum string
 
 const (
-	LegendTranslateEnumNo    LegendTranslateEnum = "no"
 	LegendTranslateEnumYes   LegendTranslateEnum = "yes"
+	LegendTranslateEnumNo    LegendTranslateEnum = "no"
 	LegendTranslateEnumEmpty LegendTranslateEnum = ""
 )
 

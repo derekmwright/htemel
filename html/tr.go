@@ -71,8 +71,8 @@ const (
 type TrAutocorrectEnum string
 
 const (
-	TrAutocorrectEnumOn    TrAutocorrectEnum = "on"
 	TrAutocorrectEnumOff   TrAutocorrectEnum = "off"
+	TrAutocorrectEnumOn    TrAutocorrectEnum = "on"
 	TrAutocorrectEnumEmpty TrAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type TrEnterkeyhintEnum string
 
 const (
-	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
-	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
 	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
 	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
 	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
 	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
 	TrEnterkeyhintEnumGo       TrEnterkeyhintEnum = "go"
+	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
+	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
 )
 
 type TrHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type TrInputmodeEnum string
 
 const (
+	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
+	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
+	TrInputmodeEnumText    TrInputmodeEnum = "text"
 	TrInputmodeEnumUrl     TrInputmodeEnum = "url"
 	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
 	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
 	TrInputmodeEnumNone    TrInputmodeEnum = "none"
 	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
-	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
-	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
-	TrInputmodeEnumText    TrInputmodeEnum = "text"
 )
 
 type TrSpellcheckEnum string

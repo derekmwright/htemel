@@ -60,19 +60,19 @@ func (e *SelectElement) AddIndent(i int) {
 type SelectAutocapitalizeEnum string
 
 const (
-	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
-	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
 	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
 	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
+	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
+	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 )
 
 type SelectAutocorrectEnum string
 
 const (
-	SelectAutocorrectEnumOff   SelectAutocorrectEnum = "off"
 	SelectAutocorrectEnumOn    SelectAutocorrectEnum = "on"
+	SelectAutocorrectEnumOff   SelectAutocorrectEnum = "off"
 	SelectAutocorrectEnumEmpty SelectAutocorrectEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type SelectDraggableEnum string
 
 const (
-	SelectDraggableEnumFalse SelectDraggableEnum = "false"
 	SelectDraggableEnumTrue  SelectDraggableEnum = "true"
+	SelectDraggableEnumFalse SelectDraggableEnum = "false"
 )
 
 type SelectEnterkeyhintEnum string
 
 const (
-	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
-	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
-	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
 	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
+	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
+	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
+	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 )
 
 type SelectHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type SelectInputmodeEnum string
 
 const (
+	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
 	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
 	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
 	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
@@ -130,7 +131,6 @@ const (
 	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
 	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
 	SelectInputmodeEnumUrl     SelectInputmodeEnum = "url"
-	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
 )
 
 type SelectSpellcheckEnum string

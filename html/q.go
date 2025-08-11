@@ -88,9 +88,9 @@ const (
 type QDirEnum string
 
 const (
-	QDirEnumAuto QDirEnum = "auto"
 	QDirEnumLtr  QDirEnum = "ltr"
 	QDirEnumRtl  QDirEnum = "rtl"
+	QDirEnumAuto QDirEnum = "auto"
 )
 
 type QDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type QEnterkeyhintEnum string
 
 const (
-	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
-	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
-	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
 	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
 	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
 	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
+	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
+	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
+	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 )
 
 type QHiddenEnum string

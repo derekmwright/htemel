@@ -57,6 +57,13 @@ func (e *IframeElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type IframeLoadingEnum string
+
+const (
+	IframeLoadingEnumEager IframeLoadingEnum = "eager"
+	IframeLoadingEnumLazy  IframeLoadingEnum = "lazy"
+)
+
 type IframeAutocapitalizeEnum string
 
 const (
@@ -79,9 +86,9 @@ const (
 type IframeContenteditableEnum string
 
 const (
+	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
 	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
 	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
-	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
 	IframeContenteditableEnumEmpty         IframeContenteditableEnum = ""
 )
 
@@ -103,13 +110,13 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
+	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
+	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
+	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
-	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
-	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
-	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 )
 
 type IframeHiddenEnum string
@@ -123,14 +130,14 @@ const (
 type IframeInputmodeEnum string
 
 const (
-	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
-	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
-	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
-	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
 	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
 	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
 	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
+	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
+	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
+	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
+	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
 )
 
 type IframeSpellcheckEnum string
@@ -158,6 +165,66 @@ const (
 )
 
 type iframeAttrs map[string]any
+
+func (e *IframeElement) Src(s string) *IframeElement {
+	e.attributes["src"] = s
+
+	return e
+}
+
+func (e *IframeElement) Srcdoc(s string) *IframeElement {
+	e.attributes["srcdoc"] = s
+
+	return e
+}
+
+func (e *IframeElement) Name(s string) *IframeElement {
+	e.attributes["name"] = s
+
+	return e
+}
+
+func (e *IframeElement) Sandbox(s ...string) *IframeElement {
+	e.attributes["sandbox"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *IframeElement) Allow(s string) *IframeElement {
+	e.attributes["allow"] = s
+
+	return e
+}
+
+func (e *IframeElement) Allowfullscreen(b bool) *IframeElement {
+	e.attributes["allowfullscreen"] = b
+
+	return e
+}
+
+func (e *IframeElement) Width(i int) *IframeElement {
+	e.attributes["width"] = i
+
+	return e
+}
+
+func (e *IframeElement) Height(i int) *IframeElement {
+	e.attributes["height"] = i
+
+	return e
+}
+
+func (e *IframeElement) Referrerpolicy(s string) *IframeElement {
+	e.attributes["referrerpolicy"] = s
+
+	return e
+}
+
+func (e *IframeElement) Loading(a IframeLoadingEnum) *IframeElement {
+	e.attributes["loading"] = a
+
+	return e
+}
 
 func (e *IframeElement) Autocapitalize(a IframeAutocapitalizeEnum) *IframeElement {
 	e.attributes["autocapitalize"] = a

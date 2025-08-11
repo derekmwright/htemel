@@ -60,12 +60,12 @@ func (e *TemplateElement) AddIndent(i int) {
 type TemplateAutocapitalizeEnum string
 
 const (
+	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
 	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
 	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
 	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
-	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 )
 
 type TemplateAutocorrectEnum string
@@ -79,37 +79,37 @@ const (
 type TemplateContenteditableEnum string
 
 const (
-	TemplateContenteditableEnumFalse         TemplateContenteditableEnum = "false"
 	TemplateContenteditableEnumPlaintextOnly TemplateContenteditableEnum = "plaintext-only"
 	TemplateContenteditableEnumTrue          TemplateContenteditableEnum = "true"
+	TemplateContenteditableEnumFalse         TemplateContenteditableEnum = "false"
 	TemplateContenteditableEnumEmpty         TemplateContenteditableEnum = ""
 )
 
 type TemplateDirEnum string
 
 const (
-	TemplateDirEnumAuto TemplateDirEnum = "auto"
 	TemplateDirEnumLtr  TemplateDirEnum = "ltr"
 	TemplateDirEnumRtl  TemplateDirEnum = "rtl"
+	TemplateDirEnumAuto TemplateDirEnum = "auto"
 )
 
 type TemplateDraggableEnum string
 
 const (
-	TemplateDraggableEnumTrue  TemplateDraggableEnum = "true"
 	TemplateDraggableEnumFalse TemplateDraggableEnum = "false"
+	TemplateDraggableEnumTrue  TemplateDraggableEnum = "true"
 )
 
 type TemplateEnterkeyhintEnum string
 
 const (
-	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 	TemplateEnterkeyhintEnumEnter    TemplateEnterkeyhintEnum = "enter"
 	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
 	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
 	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
 	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
 	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
+	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 )
 
 type TemplateHiddenEnum string
@@ -123,29 +123,29 @@ const (
 type TemplateInputmodeEnum string
 
 const (
-	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
-	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
 	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
 	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
 	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
 	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
 	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
 	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
+	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
+	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
 )
 
 type TemplateSpellcheckEnum string
 
 const (
-	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
 	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
+	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
 	TemplateSpellcheckEnumEmpty TemplateSpellcheckEnum = ""
 )
 
 type TemplateTranslateEnum string
 
 const (
-	TemplateTranslateEnumYes   TemplateTranslateEnum = "yes"
 	TemplateTranslateEnumNo    TemplateTranslateEnum = "no"
+	TemplateTranslateEnumYes   TemplateTranslateEnum = "yes"
 	TemplateTranslateEnumEmpty TemplateTranslateEnum = ""
 )
 

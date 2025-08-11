@@ -60,12 +60,12 @@ func (e *MarkElement) AddIndent(i int) {
 type MarkAutocapitalizeEnum string
 
 const (
-	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
-	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
-	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
 	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
 	MarkAutocapitalizeEnumNone       MarkAutocapitalizeEnum = "none"
 	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
+	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
+	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
+	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
 )
 
 type MarkAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type MarkContenteditableEnum string
 
 const (
-	MarkContenteditableEnumFalse         MarkContenteditableEnum = "false"
 	MarkContenteditableEnumPlaintextOnly MarkContenteditableEnum = "plaintext-only"
 	MarkContenteditableEnumTrue          MarkContenteditableEnum = "true"
+	MarkContenteditableEnumFalse         MarkContenteditableEnum = "false"
 	MarkContenteditableEnumEmpty         MarkContenteditableEnum = ""
 )
 
 type MarkDirEnum string
 
 const (
-	MarkDirEnumRtl  MarkDirEnum = "rtl"
 	MarkDirEnumAuto MarkDirEnum = "auto"
 	MarkDirEnumLtr  MarkDirEnum = "ltr"
+	MarkDirEnumRtl  MarkDirEnum = "rtl"
 )
 
 type MarkDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type MarkEnterkeyhintEnum string
 
 const (
+	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
+	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
+	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
 	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
 	MarkEnterkeyhintEnumGo       MarkEnterkeyhintEnum = "go"
 	MarkEnterkeyhintEnumNext     MarkEnterkeyhintEnum = "next"
 	MarkEnterkeyhintEnumPrevious MarkEnterkeyhintEnum = "previous"
-	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
-	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
-	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
 )
 
 type MarkHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type MarkInputmodeEnum string
 
 const (
+	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
+	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
+	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
 	MarkInputmodeEnumDecimal MarkInputmodeEnum = "decimal"
 	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
 	MarkInputmodeEnumNone    MarkInputmodeEnum = "none"
 	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
 	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
-	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
-	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
-	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
 )
 
 type MarkSpellcheckEnum string
 
 const (
-	MarkSpellcheckEnumFalse MarkSpellcheckEnum = "false"
 	MarkSpellcheckEnumTrue  MarkSpellcheckEnum = "true"
+	MarkSpellcheckEnumFalse MarkSpellcheckEnum = "false"
 	MarkSpellcheckEnumEmpty MarkSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type MarkWritingsuggestionsEnum string
 
 const (
-	MarkWritingsuggestionsEnumTrue  MarkWritingsuggestionsEnum = "true"
 	MarkWritingsuggestionsEnumFalse MarkWritingsuggestionsEnum = "false"
+	MarkWritingsuggestionsEnumTrue  MarkWritingsuggestionsEnum = "true"
 	MarkWritingsuggestionsEnumEmpty MarkWritingsuggestionsEnum = ""
 )
 

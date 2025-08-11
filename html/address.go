@@ -60,19 +60,19 @@ func (e *AddressElement) AddIndent(i int) {
 type AddressAutocapitalizeEnum string
 
 const (
-	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
-	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
-	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
 	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
 	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
+	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
+	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
+	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 )
 
 type AddressAutocorrectEnum string
 
 const (
-	AddressAutocorrectEnumOff   AddressAutocorrectEnum = "off"
 	AddressAutocorrectEnumOn    AddressAutocorrectEnum = "on"
+	AddressAutocorrectEnumOff   AddressAutocorrectEnum = "off"
 	AddressAutocorrectEnumEmpty AddressAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type AddressDirEnum string
 
 const (
+	AddressDirEnumRtl  AddressDirEnum = "rtl"
 	AddressDirEnumAuto AddressDirEnum = "auto"
 	AddressDirEnumLtr  AddressDirEnum = "ltr"
-	AddressDirEnumRtl  AddressDirEnum = "rtl"
 )
 
 type AddressDraggableEnum string
@@ -103,20 +103,20 @@ const (
 type AddressEnterkeyhintEnum string
 
 const (
-	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
-	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
 	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
 	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
 	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
 	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
+	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
+	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 )
 
 type AddressHiddenEnum string
 
 const (
-	AddressHiddenEnumUntilFound AddressHiddenEnum = "until-found"
 	AddressHiddenEnumHidden     AddressHiddenEnum = "hidden"
+	AddressHiddenEnumUntilFound AddressHiddenEnum = "until-found"
 	AddressHiddenEnumEmpty      AddressHiddenEnum = ""
 )
 

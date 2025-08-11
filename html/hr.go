@@ -52,28 +52,28 @@ func (e *HrElement) AddIndent(i int) {
 type HrAutocapitalizeEnum string
 
 const (
-	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
-	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
 	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
 	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
 	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
+	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
+	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 )
 
 type HrAutocorrectEnum string
 
 const (
-	HrAutocorrectEnumOff   HrAutocorrectEnum = "off"
 	HrAutocorrectEnumOn    HrAutocorrectEnum = "on"
+	HrAutocorrectEnumOff   HrAutocorrectEnum = "off"
 	HrAutocorrectEnumEmpty HrAutocorrectEnum = ""
 )
 
 type HrContenteditableEnum string
 
 const (
+	HrContenteditableEnumTrue          HrContenteditableEnum = "true"
 	HrContenteditableEnumFalse         HrContenteditableEnum = "false"
 	HrContenteditableEnumPlaintextOnly HrContenteditableEnum = "plaintext-only"
-	HrContenteditableEnumTrue          HrContenteditableEnum = "true"
 	HrContenteditableEnumEmpty         HrContenteditableEnum = ""
 )
 
@@ -95,41 +95,41 @@ const (
 type HrEnterkeyhintEnum string
 
 const (
+	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
+	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
 	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
 	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
 	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
 	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
-	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
-	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
 )
 
 type HrHiddenEnum string
 
 const (
-	HrHiddenEnumUntilFound HrHiddenEnum = "until-found"
 	HrHiddenEnumHidden     HrHiddenEnum = "hidden"
+	HrHiddenEnumUntilFound HrHiddenEnum = "until-found"
 	HrHiddenEnumEmpty      HrHiddenEnum = ""
 )
 
 type HrInputmodeEnum string
 
 const (
+	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
+	HrInputmodeEnumText    HrInputmodeEnum = "text"
 	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
 	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
 	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
 	HrInputmodeEnumNone    HrInputmodeEnum = "none"
 	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
 	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
-	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
-	HrInputmodeEnumText    HrInputmodeEnum = "text"
 )
 
 type HrSpellcheckEnum string
 
 const (
-	HrSpellcheckEnumTrue  HrSpellcheckEnum = "true"
 	HrSpellcheckEnumFalse HrSpellcheckEnum = "false"
+	HrSpellcheckEnumTrue  HrSpellcheckEnum = "true"
 	HrSpellcheckEnumEmpty HrSpellcheckEnum = ""
 )
 

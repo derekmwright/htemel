@@ -57,22 +57,39 @@ func (e *VideoElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type VideoCrossoriginEnum string
+
+const (
+	VideoCrossoriginEnumAnonymous      VideoCrossoriginEnum = "anonymous"
+	VideoCrossoriginEnumUseCredentials VideoCrossoriginEnum = "use-credentials"
+	VideoCrossoriginEnumEmpty          VideoCrossoriginEnum = ""
+)
+
+type VideoPreloadEnum string
+
+const (
+	VideoPreloadEnumAuto     VideoPreloadEnum = "auto"
+	VideoPreloadEnumMetadata VideoPreloadEnum = "metadata"
+	VideoPreloadEnumNone     VideoPreloadEnum = "none"
+	VideoPreloadEnumEmpty    VideoPreloadEnum = ""
+)
+
 type VideoAutocapitalizeEnum string
 
 const (
+	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
 	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
 	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
 	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
 	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
-	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
 )
 
 type VideoAutocorrectEnum string
 
 const (
-	VideoAutocorrectEnumOn    VideoAutocorrectEnum = "on"
 	VideoAutocorrectEnumOff   VideoAutocorrectEnum = "off"
+	VideoAutocorrectEnumOn    VideoAutocorrectEnum = "on"
 	VideoAutocorrectEnumEmpty VideoAutocorrectEnum = ""
 )
 
@@ -88,16 +105,16 @@ const (
 type VideoDirEnum string
 
 const (
+	VideoDirEnumRtl  VideoDirEnum = "rtl"
 	VideoDirEnumAuto VideoDirEnum = "auto"
 	VideoDirEnumLtr  VideoDirEnum = "ltr"
-	VideoDirEnumRtl  VideoDirEnum = "rtl"
 )
 
 type VideoDraggableEnum string
 
 const (
-	VideoDraggableEnumFalse VideoDraggableEnum = "false"
 	VideoDraggableEnumTrue  VideoDraggableEnum = "true"
+	VideoDraggableEnumFalse VideoDraggableEnum = "false"
 )
 
 type VideoEnterkeyhintEnum string
@@ -158,6 +175,72 @@ const (
 )
 
 type videoAttrs map[string]any
+
+func (e *VideoElement) Src(s string) *VideoElement {
+	e.attributes["src"] = s
+
+	return e
+}
+
+func (e *VideoElement) Crossorigin(a VideoCrossoriginEnum) *VideoElement {
+	e.attributes["crossorigin"] = a
+
+	return e
+}
+
+func (e *VideoElement) Poster(s string) *VideoElement {
+	e.attributes["poster"] = s
+
+	return e
+}
+
+func (e *VideoElement) Preload(a VideoPreloadEnum) *VideoElement {
+	e.attributes["preload"] = a
+
+	return e
+}
+
+func (e *VideoElement) Autoplay(b bool) *VideoElement {
+	e.attributes["autoplay"] = b
+
+	return e
+}
+
+func (e *VideoElement) Playsinline(b bool) *VideoElement {
+	e.attributes["playsinline"] = b
+
+	return e
+}
+
+func (e *VideoElement) Loop(b bool) *VideoElement {
+	e.attributes["loop"] = b
+
+	return e
+}
+
+func (e *VideoElement) Muted(b bool) *VideoElement {
+	e.attributes["muted"] = b
+
+	return e
+}
+
+func (e *VideoElement) Controls(b bool) *VideoElement {
+	e.attributes["controls"] = b
+
+	return e
+}
+
+func (e *VideoElement) Width(i int) *VideoElement {
+	e.attributes["width"] = i
+
+	return e
+}
+
+func (e *VideoElement) Height(i int) *VideoElement {
+	e.attributes["height"] = i
+
+	return e
+}
 
 func (e *VideoElement) Autocapitalize(a VideoAutocapitalizeEnum) *VideoElement {
 	e.attributes["autocapitalize"] = a

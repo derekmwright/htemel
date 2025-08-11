@@ -79,18 +79,18 @@ const (
 type H2ContenteditableEnum string
 
 const (
-	H2ContenteditableEnumFalse         H2ContenteditableEnum = "false"
 	H2ContenteditableEnumPlaintextOnly H2ContenteditableEnum = "plaintext-only"
 	H2ContenteditableEnumTrue          H2ContenteditableEnum = "true"
+	H2ContenteditableEnumFalse         H2ContenteditableEnum = "false"
 	H2ContenteditableEnumEmpty         H2ContenteditableEnum = ""
 )
 
 type H2DirEnum string
 
 const (
+	H2DirEnumRtl  H2DirEnum = "rtl"
 	H2DirEnumAuto H2DirEnum = "auto"
 	H2DirEnumLtr  H2DirEnum = "ltr"
-	H2DirEnumRtl  H2DirEnum = "rtl"
 )
 
 type H2DraggableEnum string
@@ -103,13 +103,13 @@ const (
 type H2EnterkeyhintEnum string
 
 const (
+	H2EnterkeyhintEnumGo       H2EnterkeyhintEnum = "go"
+	H2EnterkeyhintEnumNext     H2EnterkeyhintEnum = "next"
 	H2EnterkeyhintEnumPrevious H2EnterkeyhintEnum = "previous"
 	H2EnterkeyhintEnumSearch   H2EnterkeyhintEnum = "search"
 	H2EnterkeyhintEnumSend     H2EnterkeyhintEnum = "send"
 	H2EnterkeyhintEnumDone     H2EnterkeyhintEnum = "done"
 	H2EnterkeyhintEnumEnter    H2EnterkeyhintEnum = "enter"
-	H2EnterkeyhintEnumGo       H2EnterkeyhintEnum = "go"
-	H2EnterkeyhintEnumNext     H2EnterkeyhintEnum = "next"
 )
 
 type H2HiddenEnum string
@@ -123,14 +123,14 @@ const (
 type H2InputmodeEnum string
 
 const (
+	H2InputmodeEnumTel     H2InputmodeEnum = "tel"
+	H2InputmodeEnumText    H2InputmodeEnum = "text"
 	H2InputmodeEnumUrl     H2InputmodeEnum = "url"
 	H2InputmodeEnumDecimal H2InputmodeEnum = "decimal"
 	H2InputmodeEnumEmail   H2InputmodeEnum = "email"
 	H2InputmodeEnumNone    H2InputmodeEnum = "none"
 	H2InputmodeEnumNumeric H2InputmodeEnum = "numeric"
 	H2InputmodeEnumSearch  H2InputmodeEnum = "search"
-	H2InputmodeEnumTel     H2InputmodeEnum = "tel"
-	H2InputmodeEnumText    H2InputmodeEnum = "text"
 )
 
 type H2SpellcheckEnum string

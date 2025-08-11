@@ -79,9 +79,9 @@ const (
 type HeaderContenteditableEnum string
 
 const (
-	HeaderContenteditableEnumFalse         HeaderContenteditableEnum = "false"
 	HeaderContenteditableEnumPlaintextOnly HeaderContenteditableEnum = "plaintext-only"
 	HeaderContenteditableEnumTrue          HeaderContenteditableEnum = "true"
+	HeaderContenteditableEnumFalse         HeaderContenteditableEnum = "false"
 	HeaderContenteditableEnumEmpty         HeaderContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type HeaderEnterkeyhintEnum string
 
 const (
+	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
+	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
+	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
 	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
 	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
 	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
-	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
-	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
-	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
 )
 
 type HeaderHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type HeaderInputmodeEnum string
 
 const (
-	HeaderInputmodeEnumNone    HeaderInputmodeEnum = "none"
-	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
-	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
 	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
 	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 	HeaderInputmodeEnumUrl     HeaderInputmodeEnum = "url"
 	HeaderInputmodeEnumDecimal HeaderInputmodeEnum = "decimal"
 	HeaderInputmodeEnumEmail   HeaderInputmodeEnum = "email"
+	HeaderInputmodeEnumNone    HeaderInputmodeEnum = "none"
+	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
+	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
 )
 
 type HeaderSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type HeaderWritingsuggestionsEnum string
 
 const (
-	HeaderWritingsuggestionsEnumFalse HeaderWritingsuggestionsEnum = "false"
 	HeaderWritingsuggestionsEnumTrue  HeaderWritingsuggestionsEnum = "true"
+	HeaderWritingsuggestionsEnumFalse HeaderWritingsuggestionsEnum = "false"
 	HeaderWritingsuggestionsEnumEmpty HeaderWritingsuggestionsEnum = ""
 )
 

@@ -60,12 +60,12 @@ func (e *MenuElement) AddIndent(i int) {
 type MenuAutocapitalizeEnum string
 
 const (
-	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
-	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
-	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
 	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
 	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
+	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
+	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
+	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 )
 
 type MenuAutocorrectEnum string
@@ -96,41 +96,41 @@ const (
 type MenuDraggableEnum string
 
 const (
-	MenuDraggableEnumFalse MenuDraggableEnum = "false"
 	MenuDraggableEnumTrue  MenuDraggableEnum = "true"
+	MenuDraggableEnumFalse MenuDraggableEnum = "false"
 )
 
 type MenuEnterkeyhintEnum string
 
 const (
-	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
-	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
-	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
 	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
+	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
+	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
+	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 )
 
 type MenuHiddenEnum string
 
 const (
-	MenuHiddenEnumUntilFound MenuHiddenEnum = "until-found"
 	MenuHiddenEnumHidden     MenuHiddenEnum = "hidden"
+	MenuHiddenEnumUntilFound MenuHiddenEnum = "until-found"
 	MenuHiddenEnumEmpty      MenuHiddenEnum = ""
 )
 
 type MenuInputmodeEnum string
 
 const (
-	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
-	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
 	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
 	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
 	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
+	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
+	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 )
 
 type MenuSpellcheckEnum string

@@ -60,12 +60,12 @@ func (e *UElement) AddIndent(i int) {
 type UAutocapitalizeEnum string
 
 const (
-	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
-	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
-	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
 	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
 	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
 	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
+	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
+	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
+	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
 )
 
 type UAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type UDirEnum string
 
 const (
+	UDirEnumLtr  UDirEnum = "ltr"
 	UDirEnumRtl  UDirEnum = "rtl"
 	UDirEnumAuto UDirEnum = "auto"
-	UDirEnumLtr  UDirEnum = "ltr"
 )
 
 type UDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type UEnterkeyhintEnum string
 
 const (
+	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
+	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
+	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
 	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
 	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
-	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
-	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
-	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 )
 
 type UHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type UInputmodeEnum string
 
 const (
+	UInputmodeEnumUrl     UInputmodeEnum = "url"
+	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
+	UInputmodeEnumEmail   UInputmodeEnum = "email"
 	UInputmodeEnumNone    UInputmodeEnum = "none"
 	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
 	UInputmodeEnumSearch  UInputmodeEnum = "search"
 	UInputmodeEnumTel     UInputmodeEnum = "tel"
 	UInputmodeEnumText    UInputmodeEnum = "text"
-	UInputmodeEnumUrl     UInputmodeEnum = "url"
-	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
-	UInputmodeEnumEmail   UInputmodeEnum = "email"
 )
 
 type USpellcheckEnum string

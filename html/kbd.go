@@ -79,9 +79,9 @@ const (
 type KbdContenteditableEnum string
 
 const (
+	KbdContenteditableEnumTrue          KbdContenteditableEnum = "true"
 	KbdContenteditableEnumFalse         KbdContenteditableEnum = "false"
 	KbdContenteditableEnumPlaintextOnly KbdContenteditableEnum = "plaintext-only"
-	KbdContenteditableEnumTrue          KbdContenteditableEnum = "true"
 	KbdContenteditableEnumEmpty         KbdContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type KbdEnterkeyhintEnum string
 
 const (
+	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
 	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
 	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
 	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
 	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
 	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
-	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
 )
 
 type KbdHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type KbdInputmodeEnum string
 
 const (
+	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
+	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
 	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
 	KbdInputmodeEnumText    KbdInputmodeEnum = "text"
 	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
 	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
 	KbdInputmodeEnumEmail   KbdInputmodeEnum = "email"
 	KbdInputmodeEnumNone    KbdInputmodeEnum = "none"
-	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
-	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
 )
 
 type KbdSpellcheckEnum string

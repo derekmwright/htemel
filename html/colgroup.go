@@ -60,12 +60,12 @@ func (e *ColgroupElement) AddIndent(i int) {
 type ColgroupAutocapitalizeEnum string
 
 const (
-	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
-	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 	ColgroupAutocapitalizeEnumOff        ColgroupAutocapitalizeEnum = "off"
 	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
 	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
 	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
+	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
+	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 )
 
 type ColgroupAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type ColgroupContenteditableEnum string
 
 const (
+	ColgroupContenteditableEnumFalse         ColgroupContenteditableEnum = "false"
 	ColgroupContenteditableEnumPlaintextOnly ColgroupContenteditableEnum = "plaintext-only"
 	ColgroupContenteditableEnumTrue          ColgroupContenteditableEnum = "true"
-	ColgroupContenteditableEnumFalse         ColgroupContenteditableEnum = "false"
 	ColgroupContenteditableEnumEmpty         ColgroupContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type ColgroupEnterkeyhintEnum string
 
 const (
+	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
+	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
+	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
 	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
 	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
 	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
 	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
-	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
-	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
-	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
 )
 
 type ColgroupHiddenEnum string
@@ -158,6 +158,12 @@ const (
 )
 
 type colgroupAttrs map[string]any
+
+func (e *ColgroupElement) Span(i int) *ColgroupElement {
+	e.attributes["span"] = i
+
+	return e
+}
 
 func (e *ColgroupElement) Autocapitalize(a ColgroupAutocapitalizeEnum) *ColgroupElement {
 	e.attributes["autocapitalize"] = a

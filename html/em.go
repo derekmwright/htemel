@@ -60,12 +60,12 @@ func (e *EmElement) AddIndent(i int) {
 type EmAutocapitalizeEnum string
 
 const (
-	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
 	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
 	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
 	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
+	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
 )
 
 type EmAutocorrectEnum string
@@ -79,37 +79,37 @@ const (
 type EmContenteditableEnum string
 
 const (
-	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 	EmContenteditableEnumPlaintextOnly EmContenteditableEnum = "plaintext-only"
 	EmContenteditableEnumTrue          EmContenteditableEnum = "true"
+	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 	EmContenteditableEnumEmpty         EmContenteditableEnum = ""
 )
 
 type EmDirEnum string
 
 const (
-	EmDirEnumLtr  EmDirEnum = "ltr"
 	EmDirEnumRtl  EmDirEnum = "rtl"
 	EmDirEnumAuto EmDirEnum = "auto"
+	EmDirEnumLtr  EmDirEnum = "ltr"
 )
 
 type EmDraggableEnum string
 
 const (
-	EmDraggableEnumTrue  EmDraggableEnum = "true"
 	EmDraggableEnumFalse EmDraggableEnum = "false"
+	EmDraggableEnumTrue  EmDraggableEnum = "true"
 )
 
 type EmEnterkeyhintEnum string
 
 const (
+	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
 	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
 	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
 	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
 	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
-	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
 )
 
 type EmHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type EmInputmodeEnum string
 
 const (
-	EmInputmodeEnumText    EmInputmodeEnum = "text"
-	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
 	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
 	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
 	EmInputmodeEnumNone    EmInputmodeEnum = "none"
 	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
 	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
 	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
+	EmInputmodeEnumText    EmInputmodeEnum = "text"
+	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
 )
 
 type EmSpellcheckEnum string

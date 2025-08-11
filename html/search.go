@@ -60,12 +60,12 @@ func (e *SearchElement) AddIndent(i int) {
 type SearchAutocapitalizeEnum string
 
 const (
-	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
-	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
 	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
 	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
 	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
 	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
+	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
+	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
 )
 
 type SearchAutocorrectEnum string
@@ -103,34 +103,34 @@ const (
 type SearchEnterkeyhintEnum string
 
 const (
+	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
+	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
 	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
 	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
 	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
-	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
-	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 )
 
 type SearchHiddenEnum string
 
 const (
-	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
 	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
+	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
 	SearchHiddenEnumEmpty      SearchHiddenEnum = ""
 )
 
 type SearchInputmodeEnum string
 
 const (
-	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
-	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
 	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
 	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
 	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
 	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
 	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
+	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
+	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
 )
 
 type SearchSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type SearchTranslateEnum string
 
 const (
-	SearchTranslateEnumYes   SearchTranslateEnum = "yes"
 	SearchTranslateEnumNo    SearchTranslateEnum = "no"
+	SearchTranslateEnumYes   SearchTranslateEnum = "yes"
 	SearchTranslateEnumEmpty SearchTranslateEnum = ""
 )
 

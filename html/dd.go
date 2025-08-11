@@ -60,12 +60,12 @@ func (e *DdElement) AddIndent(i int) {
 type DdAutocapitalizeEnum string
 
 const (
+	DdAutocapitalizeEnumCharacters DdAutocapitalizeEnum = "characters"
 	DdAutocapitalizeEnumNone       DdAutocapitalizeEnum = "none"
 	DdAutocapitalizeEnumOff        DdAutocapitalizeEnum = "off"
 	DdAutocapitalizeEnumOn         DdAutocapitalizeEnum = "on"
 	DdAutocapitalizeEnumSentences  DdAutocapitalizeEnum = "sentences"
 	DdAutocapitalizeEnumWords      DdAutocapitalizeEnum = "words"
-	DdAutocapitalizeEnumCharacters DdAutocapitalizeEnum = "characters"
 )
 
 type DdAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type DdContenteditableEnum string
 
 const (
-	DdContenteditableEnumFalse         DdContenteditableEnum = "false"
 	DdContenteditableEnumPlaintextOnly DdContenteditableEnum = "plaintext-only"
 	DdContenteditableEnumTrue          DdContenteditableEnum = "true"
+	DdContenteditableEnumFalse         DdContenteditableEnum = "false"
 	DdContenteditableEnumEmpty         DdContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type DdDraggableEnum string
 
 const (
-	DdDraggableEnumTrue  DdDraggableEnum = "true"
 	DdDraggableEnumFalse DdDraggableEnum = "false"
+	DdDraggableEnumTrue  DdDraggableEnum = "true"
 )
 
 type DdEnterkeyhintEnum string
 
 const (
+	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
+	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
 	DdEnterkeyhintEnumGo       DdEnterkeyhintEnum = "go"
 	DdEnterkeyhintEnumNext     DdEnterkeyhintEnum = "next"
 	DdEnterkeyhintEnumPrevious DdEnterkeyhintEnum = "previous"
 	DdEnterkeyhintEnumSearch   DdEnterkeyhintEnum = "search"
 	DdEnterkeyhintEnumSend     DdEnterkeyhintEnum = "send"
-	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
-	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
 )
 
 type DdHiddenEnum string
@@ -152,8 +152,8 @@ const (
 type DdWritingsuggestionsEnum string
 
 const (
-	DdWritingsuggestionsEnumTrue  DdWritingsuggestionsEnum = "true"
 	DdWritingsuggestionsEnumFalse DdWritingsuggestionsEnum = "false"
+	DdWritingsuggestionsEnumTrue  DdWritingsuggestionsEnum = "true"
 	DdWritingsuggestionsEnumEmpty DdWritingsuggestionsEnum = ""
 )
 

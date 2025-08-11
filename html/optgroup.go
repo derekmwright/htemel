@@ -88,9 +88,9 @@ const (
 type OptgroupDirEnum string
 
 const (
-	OptgroupDirEnumRtl  OptgroupDirEnum = "rtl"
 	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
 	OptgroupDirEnumLtr  OptgroupDirEnum = "ltr"
+	OptgroupDirEnumRtl  OptgroupDirEnum = "rtl"
 )
 
 type OptgroupDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type OptgroupEnterkeyhintEnum string
 
 const (
+	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
 	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
 	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
 	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
 	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
 	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
-	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
 )
 
 type OptgroupHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type OptgroupInputmodeEnum string
 
 const (
+	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
+	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
 	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
 	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
 	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
 	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
 	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
-	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
-	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
 )
 
 type OptgroupSpellcheckEnum string

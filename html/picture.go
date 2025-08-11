@@ -60,12 +60,12 @@ func (e *PictureElement) AddIndent(i int) {
 type PictureAutocapitalizeEnum string
 
 const (
+	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
+	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 	PictureAutocapitalizeEnumSentences  PictureAutocapitalizeEnum = "sentences"
 	PictureAutocapitalizeEnumWords      PictureAutocapitalizeEnum = "words"
 	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
 	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
-	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
-	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 )
 
 type PictureAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type PictureDraggableEnum string
 
 const (
-	PictureDraggableEnumTrue  PictureDraggableEnum = "true"
 	PictureDraggableEnumFalse PictureDraggableEnum = "false"
+	PictureDraggableEnumTrue  PictureDraggableEnum = "true"
 )
 
 type PictureEnterkeyhintEnum string
 
 const (
+	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
+	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
+	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
 	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
 	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
 	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
-	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
-	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
-	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 )
 
 type PictureHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type PictureInputmodeEnum string
 
 const (
+	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
+	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
+	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
 	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
 	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
 	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
-	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
-	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
-	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 )
 
 type PictureSpellcheckEnum string

@@ -52,12 +52,12 @@ func (e *WbrElement) AddIndent(i int) {
 type WbrAutocapitalizeEnum string
 
 const (
-	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
-	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
 	WbrAutocapitalizeEnumCharacters WbrAutocapitalizeEnum = "characters"
 	WbrAutocapitalizeEnumNone       WbrAutocapitalizeEnum = "none"
 	WbrAutocapitalizeEnumOff        WbrAutocapitalizeEnum = "off"
 	WbrAutocapitalizeEnumOn         WbrAutocapitalizeEnum = "on"
+	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
+	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
 )
 
 type WbrAutocorrectEnum string
@@ -95,13 +95,13 @@ const (
 type WbrEnterkeyhintEnum string
 
 const (
+	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
+	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
 	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
 	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
 	WbrEnterkeyhintEnumSearch   WbrEnterkeyhintEnum = "search"
-	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
-	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 )
 
 type WbrHiddenEnum string
@@ -115,14 +115,14 @@ const (
 type WbrInputmodeEnum string
 
 const (
+	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
+	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
+	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
 	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
 	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
 	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
-	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
-	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
-	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 )
 
 type WbrSpellcheckEnum string

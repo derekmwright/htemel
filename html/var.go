@@ -60,12 +60,12 @@ func (e *VarElement) AddIndent(i int) {
 type VarAutocapitalizeEnum string
 
 const (
-	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
-	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
-	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
 	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
 	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
 	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
+	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
+	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
+	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
 )
 
 type VarAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type VarContenteditableEnum string
 
 const (
-	VarContenteditableEnumTrue          VarContenteditableEnum = "true"
 	VarContenteditableEnumFalse         VarContenteditableEnum = "false"
 	VarContenteditableEnumPlaintextOnly VarContenteditableEnum = "plaintext-only"
+	VarContenteditableEnumTrue          VarContenteditableEnum = "true"
 	VarContenteditableEnumEmpty         VarContenteditableEnum = ""
 )
 
 type VarDirEnum string
 
 const (
-	VarDirEnumAuto VarDirEnum = "auto"
 	VarDirEnumLtr  VarDirEnum = "ltr"
 	VarDirEnumRtl  VarDirEnum = "rtl"
+	VarDirEnumAuto VarDirEnum = "auto"
 )
 
 type VarDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type VarEnterkeyhintEnum string
 
 const (
+	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
 	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
 	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
 	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
 	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
-	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
 )
 
 type VarHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type VarInputmodeEnum string
 
 const (
+	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
+	VarInputmodeEnumNone    VarInputmodeEnum = "none"
+	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
 	VarInputmodeEnumText    VarInputmodeEnum = "text"
 	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
 	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
-	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
-	VarInputmodeEnumNone    VarInputmodeEnum = "none"
-	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 )
 
 type VarSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type VarWritingsuggestionsEnum string
 
 const (
-	VarWritingsuggestionsEnumTrue  VarWritingsuggestionsEnum = "true"
 	VarWritingsuggestionsEnumFalse VarWritingsuggestionsEnum = "false"
+	VarWritingsuggestionsEnumTrue  VarWritingsuggestionsEnum = "true"
 	VarWritingsuggestionsEnumEmpty VarWritingsuggestionsEnum = ""
 )
 

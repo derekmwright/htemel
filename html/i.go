@@ -79,9 +79,9 @@ const (
 type IContenteditableEnum string
 
 const (
+	IContenteditableEnumFalse         IContenteditableEnum = "false"
 	IContenteditableEnumPlaintextOnly IContenteditableEnum = "plaintext-only"
 	IContenteditableEnumTrue          IContenteditableEnum = "true"
-	IContenteditableEnumFalse         IContenteditableEnum = "false"
 	IContenteditableEnumEmpty         IContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
+	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
+	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
+	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
 	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
 	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
-	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
-	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
-	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
 )
 
 type IHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type IInputmodeEnum string
 
 const (
+	IInputmodeEnumText    IInputmodeEnum = "text"
 	IInputmodeEnumUrl     IInputmodeEnum = "url"
 	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
 	IInputmodeEnumEmail   IInputmodeEnum = "email"
@@ -130,7 +131,6 @@ const (
 	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
 	IInputmodeEnumSearch  IInputmodeEnum = "search"
 	IInputmodeEnumTel     IInputmodeEnum = "tel"
-	IInputmodeEnumText    IInputmodeEnum = "text"
 )
 
 type ISpellcheckEnum string

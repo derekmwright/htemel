@@ -103,13 +103,13 @@ const (
 type RtEnterkeyhintEnum string
 
 const (
-	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
 	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
 	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
 	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
 	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
 	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
 	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
+	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
 )
 
 type RtHiddenEnum string
@@ -136,16 +136,16 @@ const (
 type RtSpellcheckEnum string
 
 const (
-	RtSpellcheckEnumTrue  RtSpellcheckEnum = "true"
 	RtSpellcheckEnumFalse RtSpellcheckEnum = "false"
+	RtSpellcheckEnumTrue  RtSpellcheckEnum = "true"
 	RtSpellcheckEnumEmpty RtSpellcheckEnum = ""
 )
 
 type RtTranslateEnum string
 
 const (
-	RtTranslateEnumNo    RtTranslateEnum = "no"
 	RtTranslateEnumYes   RtTranslateEnum = "yes"
+	RtTranslateEnumNo    RtTranslateEnum = "no"
 	RtTranslateEnumEmpty RtTranslateEnum = ""
 )
 

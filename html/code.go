@@ -60,12 +60,12 @@ func (e *CodeElement) AddIndent(i int) {
 type CodeAutocapitalizeEnum string
 
 const (
-	CodeAutocapitalizeEnumSentences  CodeAutocapitalizeEnum = "sentences"
-	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
-	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
 	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
 	CodeAutocapitalizeEnumOff        CodeAutocapitalizeEnum = "off"
 	CodeAutocapitalizeEnumOn         CodeAutocapitalizeEnum = "on"
+	CodeAutocapitalizeEnumSentences  CodeAutocapitalizeEnum = "sentences"
+	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
+	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
 )
 
 type CodeAutocorrectEnum string
@@ -79,25 +79,25 @@ const (
 type CodeContenteditableEnum string
 
 const (
+	CodeContenteditableEnumTrue          CodeContenteditableEnum = "true"
 	CodeContenteditableEnumFalse         CodeContenteditableEnum = "false"
 	CodeContenteditableEnumPlaintextOnly CodeContenteditableEnum = "plaintext-only"
-	CodeContenteditableEnumTrue          CodeContenteditableEnum = "true"
 	CodeContenteditableEnumEmpty         CodeContenteditableEnum = ""
 )
 
 type CodeDirEnum string
 
 const (
+	CodeDirEnumRtl  CodeDirEnum = "rtl"
 	CodeDirEnumAuto CodeDirEnum = "auto"
 	CodeDirEnumLtr  CodeDirEnum = "ltr"
-	CodeDirEnumRtl  CodeDirEnum = "rtl"
 )
 
 type CodeDraggableEnum string
 
 const (
-	CodeDraggableEnumTrue  CodeDraggableEnum = "true"
 	CodeDraggableEnumFalse CodeDraggableEnum = "false"
+	CodeDraggableEnumTrue  CodeDraggableEnum = "true"
 )
 
 type CodeEnterkeyhintEnum string
@@ -123,7 +123,6 @@ const (
 type CodeInputmodeEnum string
 
 const (
-	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
 	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
 	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
 	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
@@ -131,6 +130,7 @@ const (
 	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
+	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
 )
 
 type CodeSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type CodeWritingsuggestionsEnum string
 
 const (
-	CodeWritingsuggestionsEnumTrue  CodeWritingsuggestionsEnum = "true"
 	CodeWritingsuggestionsEnumFalse CodeWritingsuggestionsEnum = "false"
+	CodeWritingsuggestionsEnumTrue  CodeWritingsuggestionsEnum = "true"
 	CodeWritingsuggestionsEnumEmpty CodeWritingsuggestionsEnum = ""
 )
 

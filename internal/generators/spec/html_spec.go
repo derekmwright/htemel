@@ -231,6 +231,39 @@ var loading = &AttributeTypeEnum{
 		"eager": {},
 	},
 }
+var src = &AttributeTypeString{
+	Name:        "src",
+	Description: "Address of the resource",
+}
+var typ = &AttributeTypeString{
+	Name:        "type",
+	Description: "Type of embedded resource",
+}
+var crossorigin = &AttributeTypeEnum{
+	Name:        "crossorigin",
+	Description: "How the element handles crossorigin requests",
+	AllowEmpty:  true,
+	Allowed: map[string]struct{}{
+		"anonymous":       {},
+		"use-credentials": {},
+	},
+}
+var href = &AttributeTypeString{
+	Name:        "href",
+	Description: "Address of the hyperlink",
+}
+var colspan = &AttributeTypeNumber{
+	Name:        "span",
+	Description: "Number of columns spanned by the element where the number is > 0 && <= 1000",
+}
+var rowspan = &AttributeTypeNumber{
+	Name:        "rowspan",
+	Description: "Number of rows that the cell is to span where the number is > 0 && <= 65534",
+}
+var headers = &AttributeTypeSST{
+	Name:        "headers",
+	Description: "The header cells for this cell",
+}
 
 func htmlAttr() []Attribute {
 	return make([]Attribute, 0)
@@ -259,19 +292,8 @@ func baseAttr() []Attribute {
 
 func linkAttr() []Attribute {
 	return []Attribute{
-		&AttributeTypeString{
-			Name:        "href",
-			Description: "Address of the hyperlink",
-		},
-		&AttributeTypeEnum{
-			Name:        "crossorigin",
-			Description: "How the element handles crossorigin requests",
-			AllowEmpty:  true,
-			Allowed: map[string]struct{}{
-				"anonymous":       {},
-				"use-credentials": {},
-			},
-		},
+		href,
+		crossorigin,
 		&AttributeTypeSST{
 			Name:        "rel",
 			Description: "Relationship between the document containing the hyperlink and the destination resource",
@@ -444,10 +466,7 @@ func liAttr() []Attribute {
 
 func aAttr() []Attribute {
 	return []Attribute{
-		&AttributeTypeString{
-			Name:        "href",
-			Description: "Address of the hyperlink",
-		},
+		href,
 		&AttributeTypeString{
 			Name:        "target",
 			Description: "Navigable for hyperlink navigation",
@@ -518,18 +537,12 @@ func insDelAttr() []Attribute {
 
 func sourceAttr() []Attribute {
 	return []Attribute{
-		&AttributeTypeString{
-			Name:        "type",
-			Description: "Type of embedded resource",
-		},
+		typ,
 		&AttributeTypeString{
 			Name:        "media",
 			Description: "Applicable media",
 		},
-		&AttributeTypeString{
-			Name:        "src",
-			Description: "Address of the resource",
-		},
+		src,
 		&AttributeTypeString{
 			Name:        "srcset",
 			Description: "Images to use in different situations, e.g., high-resolution displays, small monitors, etc.",
@@ -549,10 +562,7 @@ func imgAttr() []Attribute {
 			Name:        "alt",
 			Description: "Replacement text for use when images are not available",
 		},
-		&AttributeTypeString{
-			Name:        "src",
-			Description: "Address of the resource",
-		},
+		src,
 		&AttributeTypeString{
 			Name:        "srcset",
 			Description: "Images to use in different situations, e.g., high-resolution displays, small monitors, etc.",
@@ -561,10 +571,7 @@ func imgAttr() []Attribute {
 			Name:        "sizes",
 			Description: "Image sizes for different page layouts",
 		},
-		&AttributeTypeString{
-			Name:        "crossorigin",
-			Description: "How the element handles crossorigin requests",
-		},
+		crossorigin,
 		&AttributeTypeString{
 			Name:        "usemap",
 			Description: "Name of image map to use",
@@ -590,6 +597,260 @@ func imgAttr() []Attribute {
 	}
 }
 
+func iframeAttr() []Attribute {
+	return []Attribute{
+		src,
+		&AttributeTypeString{
+			Name:        "srcdoc",
+			Description: "A document to render in the iframe",
+		},
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of content navigable",
+		},
+		&AttributeTypeSST{
+			Name:        "sandbox",
+			Description: "Security rules for nested content",
+		},
+		&AttributeTypeString{
+			Name:        "allow",
+			Description: "Permissions policy to be applied to the iframe's contents",
+		},
+		&AttributeTypeBool{
+			Name:        "allowfullscreen",
+			Description: "Whether to allow the iframe's contents to use requestFullscreen()",
+		},
+		width,
+		height,
+		referrerPolicy,
+		loading,
+	}
+}
+
+func embedAttr() []Attribute {
+	return []Attribute{
+		src,
+		typ,
+		width,
+		height,
+	}
+}
+
+func objectAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "data",
+			Description: "Address of the resource",
+		},
+		typ,
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of content navigable",
+		},
+		&AttributeTypeString{
+			Name:        "form",
+			Description: "Associates the element with a form element",
+		},
+		width,
+		height,
+	}
+}
+
+func videoAttr() []Attribute {
+	return []Attribute{
+		src,
+		crossorigin,
+		&AttributeTypeString{
+			Name:        "poster",
+			Description: "Poster frame to show prior to video playback",
+		},
+		&AttributeTypeEnum{
+			Name:        "preload",
+			Description: "Hints how much buffering the media resource will likely need",
+			AllowEmpty:  true,
+			Allowed: map[string]struct{}{
+				"auto":     {},
+				"none":     {},
+				"metadata": {},
+			},
+		},
+		&AttributeTypeBool{
+			Name:        "autoplay",
+			Description: "Hint that the media resource can be started automatically when the page is loaded",
+		},
+		&AttributeTypeBool{
+			Name:        "playsinline",
+			Description: "Encourage the user agent to display video content within the element's playback area",
+		},
+		&AttributeTypeBool{
+			Name:        "loop",
+			Description: "Whether to loop the media resource",
+		},
+		&AttributeTypeBool{
+			Name:        "muted",
+			Description: "Whether to mute the media resource by default",
+		},
+		&AttributeTypeBool{
+			Name:        "controls",
+			Description: "Show user agent controls",
+		},
+		width,
+		height,
+	}
+}
+
+func audioAttr() []Attribute {
+	return []Attribute{
+		src,
+		crossorigin,
+		&AttributeTypeEnum{
+			Name:        "preload",
+			Description: "Hints how much buffering the media resource will likely need",
+			AllowEmpty:  true,
+			Allowed: map[string]struct{}{
+				"auto":     {},
+				"none":     {},
+				"metadata": {},
+			},
+		},
+		&AttributeTypeBool{
+			Name:        "autoplay",
+			Description: "Hint that the media resource can be started automatically when the page is loaded",
+		},
+		&AttributeTypeBool{
+			Name:        "playsinline",
+			Description: "Encourage the user agent to display video content within the element's playback area",
+		},
+		&AttributeTypeBool{
+			Name:        "loop",
+			Description: "Whether to loop the media resource",
+		},
+		&AttributeTypeBool{
+			Name:        "muted",
+			Description: "Whether to mute the media resource by default",
+		},
+		&AttributeTypeBool{
+			Name:        "controls",
+			Description: "Show user agent controls",
+		},
+	}
+}
+
+func trackAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeEnum{
+			Name:        "kind",
+			Description: "The type of text track",
+			Allowed: map[string]struct{}{
+				"subtitles":    {},
+				"captions":     {},
+				"descriptions": {},
+				"chapters":     {},
+				"metadata":     {},
+			},
+		},
+		src,
+		&AttributeTypeString{
+			Name:        "srclang",
+			Description: "Language of the text track",
+		},
+		&AttributeTypeString{
+			Name:        "label",
+			Description: "User-visible label",
+		},
+		&AttributeTypeBool{
+			Name:        "default",
+			Description: "Enable the track if no other text track is more suitable",
+		},
+	}
+}
+
+func mapAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of image map to reference from the usemap attribute",
+		},
+	}
+}
+
+func areaAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "alt",
+			Description: "Replacement text for use when images are not available",
+		},
+		&AttributeTypeString{
+			Name:        "coords",
+			Description: "Coordinates for the shape to be created in an image map",
+		},
+		&AttributeTypeEnum{
+			Name:        "shape",
+			Description: "The kind of shape to be created in an image map",
+			Allowed: map[string]struct{}{
+				"circle":  {},
+				"default": {},
+				"poly":    {},
+				"rect":    {},
+			},
+		},
+		href,
+		&AttributeTypeString{
+			Name:        "target",
+			Description: "Navigable for hyperlink navigation",
+		},
+		&AttributeTypeBool{
+			Name:        "download",
+			Description: "Whether to download the resource instead of navigating to it, and its filename if so",
+		},
+		&AttributeTypeSST{
+			Name:        "ping",
+			Description: "URLs to ping",
+		},
+		&AttributeTypeSST{
+			Name:        "rel",
+			Description: "Relationship between the location in the document containing the hyperlink and the destination resource",
+		},
+		referrerPolicy,
+	}
+}
+
+func colgroupAttr() []Attribute {
+	return []Attribute{
+		colspan,
+	}
+}
+
+func colAttr() []Attribute {
+	return []Attribute{
+		colspan,
+	}
+}
+
+func tdAttr() []Attribute {
+	return []Attribute{
+		colspan,
+		rowspan,
+		headers,
+	}
+}
+
+func thAttr() []Attribute {
+	return []Attribute{
+		colspan,
+		rowspan,
+		headers,
+		&AttributeTypeString{
+			Name:        "scope",
+			Description: "Specifies which cells the header cell applies to",
+		},
+		&AttributeTypeString{
+			Name:        "abbr",
+			Description: "Alternative label to use for the header cell when referencing the cell in other contexts",
+		},
+	}
+}
+
 var attrFuncs = map[string]func() []Attribute{
 	"html":       htmlAttr,
 	"head":       headAttr,
@@ -610,6 +871,18 @@ var attrFuncs = map[string]func() []Attribute{
 	"del":        insDelAttr,
 	"source":     sourceAttr,
 	"img":        imgAttr,
+	"iframe":     iframeAttr,
+	"embed":      embedAttr,
+	"object":     objectAttr,
+	"video":      videoAttr,
+	"audio":      audioAttr,
+	"track":      trackAttr,
+	"map":        mapAttr,
+	"area":       areaAttr,
+	"colgroup":   colgroupAttr,
+	"col":        colAttr,
+	"td":         tdAttr,
+	"th":         thAttr,
 }
 
 func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {

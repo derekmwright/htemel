@@ -52,12 +52,12 @@ func (e *BaseElement) AddIndent(i int) {
 type BaseAutocapitalizeEnum string
 
 const (
-	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
-	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
-	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
 	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
 	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
+	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
+	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
+	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 )
 
 type BaseAutocorrectEnum string
@@ -71,18 +71,18 @@ const (
 type BaseContenteditableEnum string
 
 const (
-	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
 	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
 	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
+	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
 	BaseContenteditableEnumEmpty         BaseContenteditableEnum = ""
 )
 
 type BaseDirEnum string
 
 const (
-	BaseDirEnumRtl  BaseDirEnum = "rtl"
 	BaseDirEnumAuto BaseDirEnum = "auto"
 	BaseDirEnumLtr  BaseDirEnum = "ltr"
+	BaseDirEnumRtl  BaseDirEnum = "rtl"
 )
 
 type BaseDraggableEnum string
@@ -95,20 +95,20 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
-	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
 	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
 	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
+	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 )
 
 type BaseHiddenEnum string
 
 const (
-	BaseHiddenEnumHidden     BaseHiddenEnum = "hidden"
 	BaseHiddenEnumUntilFound BaseHiddenEnum = "until-found"
+	BaseHiddenEnumHidden     BaseHiddenEnum = "hidden"
 	BaseHiddenEnumEmpty      BaseHiddenEnum = ""
 )
 
@@ -144,8 +144,8 @@ const (
 type BaseWritingsuggestionsEnum string
 
 const (
-	BaseWritingsuggestionsEnumFalse BaseWritingsuggestionsEnum = "false"
 	BaseWritingsuggestionsEnumTrue  BaseWritingsuggestionsEnum = "true"
+	BaseWritingsuggestionsEnumFalse BaseWritingsuggestionsEnum = "false"
 	BaseWritingsuggestionsEnumEmpty BaseWritingsuggestionsEnum = ""
 )
 

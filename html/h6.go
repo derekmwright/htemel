@@ -60,12 +60,12 @@ func (e *H6Element) AddIndent(i int) {
 type H6AutocapitalizeEnum string
 
 const (
-	H6AutocapitalizeEnumSentences  H6AutocapitalizeEnum = "sentences"
-	H6AutocapitalizeEnumWords      H6AutocapitalizeEnum = "words"
 	H6AutocapitalizeEnumCharacters H6AutocapitalizeEnum = "characters"
 	H6AutocapitalizeEnumNone       H6AutocapitalizeEnum = "none"
 	H6AutocapitalizeEnumOff        H6AutocapitalizeEnum = "off"
 	H6AutocapitalizeEnumOn         H6AutocapitalizeEnum = "on"
+	H6AutocapitalizeEnumSentences  H6AutocapitalizeEnum = "sentences"
+	H6AutocapitalizeEnumWords      H6AutocapitalizeEnum = "words"
 )
 
 type H6AutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type H6ContenteditableEnum string
 
 const (
+	H6ContenteditableEnumFalse         H6ContenteditableEnum = "false"
 	H6ContenteditableEnumPlaintextOnly H6ContenteditableEnum = "plaintext-only"
 	H6ContenteditableEnumTrue          H6ContenteditableEnum = "true"
-	H6ContenteditableEnumFalse         H6ContenteditableEnum = "false"
 	H6ContenteditableEnumEmpty         H6ContenteditableEnum = ""
 )
 
 type H6DirEnum string
 
 const (
+	H6DirEnumAuto H6DirEnum = "auto"
 	H6DirEnumLtr  H6DirEnum = "ltr"
 	H6DirEnumRtl  H6DirEnum = "rtl"
-	H6DirEnumAuto H6DirEnum = "auto"
 )
 
 type H6DraggableEnum string
@@ -103,13 +103,13 @@ const (
 type H6EnterkeyhintEnum string
 
 const (
-	H6EnterkeyhintEnumEnter    H6EnterkeyhintEnum = "enter"
-	H6EnterkeyhintEnumGo       H6EnterkeyhintEnum = "go"
 	H6EnterkeyhintEnumNext     H6EnterkeyhintEnum = "next"
 	H6EnterkeyhintEnumPrevious H6EnterkeyhintEnum = "previous"
 	H6EnterkeyhintEnumSearch   H6EnterkeyhintEnum = "search"
 	H6EnterkeyhintEnumSend     H6EnterkeyhintEnum = "send"
 	H6EnterkeyhintEnumDone     H6EnterkeyhintEnum = "done"
+	H6EnterkeyhintEnumEnter    H6EnterkeyhintEnum = "enter"
+	H6EnterkeyhintEnumGo       H6EnterkeyhintEnum = "go"
 )
 
 type H6HiddenEnum string
@@ -144,8 +144,8 @@ const (
 type H6TranslateEnum string
 
 const (
-	H6TranslateEnumNo    H6TranslateEnum = "no"
 	H6TranslateEnumYes   H6TranslateEnum = "yes"
+	H6TranslateEnumNo    H6TranslateEnum = "no"
 	H6TranslateEnumEmpty H6TranslateEnum = ""
 )
 

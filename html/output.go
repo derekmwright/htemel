@@ -103,13 +103,13 @@ const (
 type OutputEnterkeyhintEnum string
 
 const (
-	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
-	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
 	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
 	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
 	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
 	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
+	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
+	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
 )
 
 type OutputHiddenEnum string
@@ -136,8 +136,8 @@ const (
 type OutputSpellcheckEnum string
 
 const (
-	OutputSpellcheckEnumTrue  OutputSpellcheckEnum = "true"
 	OutputSpellcheckEnumFalse OutputSpellcheckEnum = "false"
+	OutputSpellcheckEnumTrue  OutputSpellcheckEnum = "true"
 	OutputSpellcheckEnumEmpty OutputSpellcheckEnum = ""
 )
 

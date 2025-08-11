@@ -60,28 +60,28 @@ func (e *SpanElement) AddIndent(i int) {
 type SpanAutocapitalizeEnum string
 
 const (
-	SpanAutocapitalizeEnumOn         SpanAutocapitalizeEnum = "on"
-	SpanAutocapitalizeEnumSentences  SpanAutocapitalizeEnum = "sentences"
-	SpanAutocapitalizeEnumWords      SpanAutocapitalizeEnum = "words"
 	SpanAutocapitalizeEnumCharacters SpanAutocapitalizeEnum = "characters"
 	SpanAutocapitalizeEnumNone       SpanAutocapitalizeEnum = "none"
 	SpanAutocapitalizeEnumOff        SpanAutocapitalizeEnum = "off"
+	SpanAutocapitalizeEnumOn         SpanAutocapitalizeEnum = "on"
+	SpanAutocapitalizeEnumSentences  SpanAutocapitalizeEnum = "sentences"
+	SpanAutocapitalizeEnumWords      SpanAutocapitalizeEnum = "words"
 )
 
 type SpanAutocorrectEnum string
 
 const (
-	SpanAutocorrectEnumOn    SpanAutocorrectEnum = "on"
 	SpanAutocorrectEnumOff   SpanAutocorrectEnum = "off"
+	SpanAutocorrectEnumOn    SpanAutocorrectEnum = "on"
 	SpanAutocorrectEnumEmpty SpanAutocorrectEnum = ""
 )
 
 type SpanContenteditableEnum string
 
 const (
-	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
 	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
+	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumEmpty         SpanContenteditableEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
-	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
 	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
 	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
 	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
 	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
 	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
+	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
 )
 
 type SpanHiddenEnum string
 
 const (
-	SpanHiddenEnumHidden     SpanHiddenEnum = "hidden"
 	SpanHiddenEnumUntilFound SpanHiddenEnum = "until-found"
+	SpanHiddenEnumHidden     SpanHiddenEnum = "hidden"
 	SpanHiddenEnumEmpty      SpanHiddenEnum = ""
 )
 
 type SpanInputmodeEnum string
 
 const (
-	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
-	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
-	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
-	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
 	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
 	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
 	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
+	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
+	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
+	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
+	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 )
 
 type SpanSpellcheckEnum string

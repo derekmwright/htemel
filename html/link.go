@@ -74,12 +74,12 @@ const (
 type LinkAutocapitalizeEnum string
 
 const (
+	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
+	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
 	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
 	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
 	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
-	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
-	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
 )
 
 type LinkAutocorrectEnum string
@@ -93,9 +93,9 @@ const (
 type LinkContenteditableEnum string
 
 const (
+	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
 	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
 	LinkContenteditableEnumPlaintextOnly LinkContenteditableEnum = "plaintext-only"
-	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
 	LinkContenteditableEnumEmpty         LinkContenteditableEnum = ""
 )
 
@@ -110,8 +110,8 @@ const (
 type LinkDraggableEnum string
 
 const (
-	LinkDraggableEnumFalse LinkDraggableEnum = "false"
 	LinkDraggableEnumTrue  LinkDraggableEnum = "true"
+	LinkDraggableEnumFalse LinkDraggableEnum = "false"
 )
 
 type LinkEnterkeyhintEnum string
@@ -137,29 +137,29 @@ const (
 type LinkInputmodeEnum string
 
 const (
+	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
+	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
 	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
 	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
 	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
 	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
 	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
-	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
-	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
 )
 
 type LinkSpellcheckEnum string
 
 const (
-	LinkSpellcheckEnumTrue  LinkSpellcheckEnum = "true"
 	LinkSpellcheckEnumFalse LinkSpellcheckEnum = "false"
+	LinkSpellcheckEnumTrue  LinkSpellcheckEnum = "true"
 	LinkSpellcheckEnumEmpty LinkSpellcheckEnum = ""
 )
 
 type LinkTranslateEnum string
 
 const (
-	LinkTranslateEnumNo    LinkTranslateEnum = "no"
 	LinkTranslateEnumYes   LinkTranslateEnum = "yes"
+	LinkTranslateEnumNo    LinkTranslateEnum = "no"
 	LinkTranslateEnumEmpty LinkTranslateEnum = ""
 )
 

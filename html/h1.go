@@ -60,12 +60,12 @@ func (e *H1Element) AddIndent(i int) {
 type H1AutocapitalizeEnum string
 
 const (
-	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
-	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
-	H1AutocapitalizeEnumOff        H1AutocapitalizeEnum = "off"
 	H1AutocapitalizeEnumOn         H1AutocapitalizeEnum = "on"
 	H1AutocapitalizeEnumSentences  H1AutocapitalizeEnum = "sentences"
 	H1AutocapitalizeEnumWords      H1AutocapitalizeEnum = "words"
+	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
+	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
+	H1AutocapitalizeEnumOff        H1AutocapitalizeEnum = "off"
 )
 
 type H1AutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type H1ContenteditableEnum string
 
 const (
-	H1ContenteditableEnumFalse         H1ContenteditableEnum = "false"
 	H1ContenteditableEnumPlaintextOnly H1ContenteditableEnum = "plaintext-only"
 	H1ContenteditableEnumTrue          H1ContenteditableEnum = "true"
+	H1ContenteditableEnumFalse         H1ContenteditableEnum = "false"
 	H1ContenteditableEnumEmpty         H1ContenteditableEnum = ""
 )
 
@@ -96,41 +96,41 @@ const (
 type H1DraggableEnum string
 
 const (
-	H1DraggableEnumTrue  H1DraggableEnum = "true"
 	H1DraggableEnumFalse H1DraggableEnum = "false"
+	H1DraggableEnumTrue  H1DraggableEnum = "true"
 )
 
 type H1EnterkeyhintEnum string
 
 const (
+	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
 	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
 	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
 	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
 	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
 	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
 	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
-	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
 )
 
 type H1HiddenEnum string
 
 const (
-	H1HiddenEnumUntilFound H1HiddenEnum = "until-found"
 	H1HiddenEnumHidden     H1HiddenEnum = "hidden"
+	H1HiddenEnumUntilFound H1HiddenEnum = "until-found"
 	H1HiddenEnumEmpty      H1HiddenEnum = ""
 )
 
 type H1InputmodeEnum string
 
 const (
-	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
-	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
 	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 	H1InputmodeEnumText    H1InputmodeEnum = "text"
 	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
 	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
 	H1InputmodeEnumEmail   H1InputmodeEnum = "email"
 	H1InputmodeEnumNone    H1InputmodeEnum = "none"
+	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
+	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
 )
 
 type H1SpellcheckEnum string

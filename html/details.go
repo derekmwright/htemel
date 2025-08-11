@@ -79,9 +79,9 @@ const (
 type DetailsContenteditableEnum string
 
 const (
-	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 	DetailsContenteditableEnumPlaintextOnly DetailsContenteditableEnum = "plaintext-only"
 	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
+	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 	DetailsContenteditableEnumEmpty         DetailsContenteditableEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type DetailsEnterkeyhintEnum string
 
 const (
-	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
-	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
 	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
 	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
 	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
 	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
+	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
+	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 )
 
 type DetailsHiddenEnum string
 
 const (
-	DetailsHiddenEnumHidden     DetailsHiddenEnum = "hidden"
 	DetailsHiddenEnumUntilFound DetailsHiddenEnum = "until-found"
+	DetailsHiddenEnumHidden     DetailsHiddenEnum = "hidden"
 	DetailsHiddenEnumEmpty      DetailsHiddenEnum = ""
 )
 
 type DetailsInputmodeEnum string
 
 const (
-	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
-	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
-	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
-	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
 	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
 	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
 	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
 	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
+	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
+	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
+	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
+	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
 )
 
 type DetailsSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DetailsWritingsuggestionsEnum string
 
 const (
-	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
 	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
+	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
 	DetailsWritingsuggestionsEnumEmpty DetailsWritingsuggestionsEnum = ""
 )
 

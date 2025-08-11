@@ -60,12 +60,12 @@ func (e *TbodyElement) AddIndent(i int) {
 type TbodyAutocapitalizeEnum string
 
 const (
+	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
 	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
 	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
 	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 	TbodyAutocapitalizeEnumWords      TbodyAutocapitalizeEnum = "words"
 	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
-	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
 )
 
 type TbodyAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type TbodyEnterkeyhintEnum string
 
 const (
-	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
-	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
-	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 	TbodyEnterkeyhintEnumDone     TbodyEnterkeyhintEnum = "done"
 	TbodyEnterkeyhintEnumEnter    TbodyEnterkeyhintEnum = "enter"
 	TbodyEnterkeyhintEnumGo       TbodyEnterkeyhintEnum = "go"
 	TbodyEnterkeyhintEnumNext     TbodyEnterkeyhintEnum = "next"
+	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
+	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
+	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 )
 
 type TbodyHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type TbodyInputmodeEnum string
 
 const (
-	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
-	TbodyInputmodeEnumUrl     TbodyInputmodeEnum = "url"
-	TbodyInputmodeEnumDecimal TbodyInputmodeEnum = "decimal"
 	TbodyInputmodeEnumEmail   TbodyInputmodeEnum = "email"
 	TbodyInputmodeEnumNone    TbodyInputmodeEnum = "none"
 	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
 	TbodyInputmodeEnumSearch  TbodyInputmodeEnum = "search"
 	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
+	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
+	TbodyInputmodeEnumUrl     TbodyInputmodeEnum = "url"
+	TbodyInputmodeEnumDecimal TbodyInputmodeEnum = "decimal"
 )
 
 type TbodySpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type TbodyWritingsuggestionsEnum string
 
 const (
-	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
 	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
+	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
 	TbodyWritingsuggestionsEnumEmpty TbodyWritingsuggestionsEnum = ""
 )
 

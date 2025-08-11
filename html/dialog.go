@@ -60,12 +60,12 @@ func (e *DialogElement) AddIndent(i int) {
 type DialogAutocapitalizeEnum string
 
 const (
-	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
 	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
 	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
 	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
 	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
+	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
 )
 
 type DialogAutocorrectEnum string
@@ -79,25 +79,25 @@ const (
 type DialogContenteditableEnum string
 
 const (
+	DialogContenteditableEnumPlaintextOnly DialogContenteditableEnum = "plaintext-only"
 	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
 	DialogContenteditableEnumFalse         DialogContenteditableEnum = "false"
-	DialogContenteditableEnumPlaintextOnly DialogContenteditableEnum = "plaintext-only"
 	DialogContenteditableEnumEmpty         DialogContenteditableEnum = ""
 )
 
 type DialogDirEnum string
 
 const (
+	DialogDirEnumRtl  DialogDirEnum = "rtl"
 	DialogDirEnumAuto DialogDirEnum = "auto"
 	DialogDirEnumLtr  DialogDirEnum = "ltr"
-	DialogDirEnumRtl  DialogDirEnum = "rtl"
 )
 
 type DialogDraggableEnum string
 
 const (
-	DialogDraggableEnumTrue  DialogDraggableEnum = "true"
 	DialogDraggableEnumFalse DialogDraggableEnum = "false"
+	DialogDraggableEnumTrue  DialogDraggableEnum = "true"
 )
 
 type DialogEnterkeyhintEnum string
@@ -123,7 +123,6 @@ const (
 type DialogInputmodeEnum string
 
 const (
-	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
 	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
 	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
@@ -131,6 +130,7 @@ const (
 	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
 	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
 	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
+	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 )
 
 type DialogSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DialogWritingsuggestionsEnum string
 
 const (
-	DialogWritingsuggestionsEnumTrue  DialogWritingsuggestionsEnum = "true"
 	DialogWritingsuggestionsEnumFalse DialogWritingsuggestionsEnum = "false"
+	DialogWritingsuggestionsEnumTrue  DialogWritingsuggestionsEnum = "true"
 	DialogWritingsuggestionsEnumEmpty DialogWritingsuggestionsEnum = ""
 )
 

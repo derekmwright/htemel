@@ -60,19 +60,19 @@ func (e *FigcaptionElement) AddIndent(i int) {
 type FigcaptionAutocapitalizeEnum string
 
 const (
-	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
-	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
-	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
 	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
 	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
 	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
+	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
+	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
+	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
 )
 
 type FigcaptionAutocorrectEnum string
 
 const (
-	FigcaptionAutocorrectEnumOff   FigcaptionAutocorrectEnum = "off"
 	FigcaptionAutocorrectEnumOn    FigcaptionAutocorrectEnum = "on"
+	FigcaptionAutocorrectEnumOff   FigcaptionAutocorrectEnum = "off"
 	FigcaptionAutocorrectEnumEmpty FigcaptionAutocorrectEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type FigcaptionDraggableEnum string
 
 const (
-	FigcaptionDraggableEnumTrue  FigcaptionDraggableEnum = "true"
 	FigcaptionDraggableEnumFalse FigcaptionDraggableEnum = "false"
+	FigcaptionDraggableEnumTrue  FigcaptionDraggableEnum = "true"
 )
 
 type FigcaptionEnterkeyhintEnum string
 
 const (
-	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
-	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
 	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
 	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
 	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
+	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
+	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
 )
 
 type FigcaptionHiddenEnum string

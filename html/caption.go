@@ -60,12 +60,12 @@ func (e *CaptionElement) AddIndent(i int) {
 type CaptionAutocapitalizeEnum string
 
 const (
-	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
-	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
 	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
 	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
 	CaptionAutocapitalizeEnumOff        CaptionAutocapitalizeEnum = "off"
 	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
+	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
+	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
 )
 
 type CaptionAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type CaptionDraggableEnum string
 
 const (
-	CaptionDraggableEnumFalse CaptionDraggableEnum = "false"
 	CaptionDraggableEnumTrue  CaptionDraggableEnum = "true"
+	CaptionDraggableEnumFalse CaptionDraggableEnum = "false"
 )
 
 type CaptionEnterkeyhintEnum string
 
 const (
-	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
 	CaptionEnterkeyhintEnumSearch   CaptionEnterkeyhintEnum = "search"
 	CaptionEnterkeyhintEnumSend     CaptionEnterkeyhintEnum = "send"
 	CaptionEnterkeyhintEnumDone     CaptionEnterkeyhintEnum = "done"
 	CaptionEnterkeyhintEnumEnter    CaptionEnterkeyhintEnum = "enter"
 	CaptionEnterkeyhintEnumGo       CaptionEnterkeyhintEnum = "go"
 	CaptionEnterkeyhintEnumNext     CaptionEnterkeyhintEnum = "next"
+	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
 )
 
 type CaptionHiddenEnum string

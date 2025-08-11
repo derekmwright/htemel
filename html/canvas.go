@@ -60,12 +60,12 @@ func (e *CanvasElement) AddIndent(i int) {
 type CanvasAutocapitalizeEnum string
 
 const (
+	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
+	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
 	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
 	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
 	CanvasAutocapitalizeEnumNone       CanvasAutocapitalizeEnum = "none"
 	CanvasAutocapitalizeEnumOff        CanvasAutocapitalizeEnum = "off"
-	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
-	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
 )
 
 type CanvasAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type CanvasDirEnum string
 
 const (
+	CanvasDirEnumAuto CanvasDirEnum = "auto"
 	CanvasDirEnumLtr  CanvasDirEnum = "ltr"
 	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
-	CanvasDirEnumAuto CanvasDirEnum = "auto"
 )
 
 type CanvasDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type CanvasEnterkeyhintEnum string
 
 const (
-	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
 	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
 	CanvasEnterkeyhintEnumGo       CanvasEnterkeyhintEnum = "go"
 	CanvasEnterkeyhintEnumNext     CanvasEnterkeyhintEnum = "next"
 	CanvasEnterkeyhintEnumPrevious CanvasEnterkeyhintEnum = "previous"
 	CanvasEnterkeyhintEnumSearch   CanvasEnterkeyhintEnum = "search"
 	CanvasEnterkeyhintEnumSend     CanvasEnterkeyhintEnum = "send"
+	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
 )
 
 type CanvasHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type CanvasInputmodeEnum string
 
 const (
-	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
 	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
 	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
 	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
@@ -131,6 +130,7 @@ const (
 	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
 	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
 	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
+	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
 )
 
 type CanvasSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type CanvasWritingsuggestionsEnum string
 
 const (
-	CanvasWritingsuggestionsEnumTrue  CanvasWritingsuggestionsEnum = "true"
 	CanvasWritingsuggestionsEnumFalse CanvasWritingsuggestionsEnum = "false"
+	CanvasWritingsuggestionsEnumTrue  CanvasWritingsuggestionsEnum = "true"
 	CanvasWritingsuggestionsEnumEmpty CanvasWritingsuggestionsEnum = ""
 )
 

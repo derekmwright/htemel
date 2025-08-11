@@ -60,12 +60,12 @@ func (e *DatalistElement) AddIndent(i int) {
 type DatalistAutocapitalizeEnum string
 
 const (
+	DatalistAutocapitalizeEnumWords      DatalistAutocapitalizeEnum = "words"
 	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
 	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
 	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
 	DatalistAutocapitalizeEnumOn         DatalistAutocapitalizeEnum = "on"
 	DatalistAutocapitalizeEnumSentences  DatalistAutocapitalizeEnum = "sentences"
-	DatalistAutocapitalizeEnumWords      DatalistAutocapitalizeEnum = "words"
 )
 
 type DatalistAutocorrectEnum string
@@ -123,14 +123,14 @@ const (
 type DatalistInputmodeEnum string
 
 const (
+	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
+	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
+	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
 	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
 	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
 	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
 	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
 	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
-	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
-	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
-	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
 )
 
 type DatalistSpellcheckEnum string

@@ -79,9 +79,9 @@ const (
 type BdiContenteditableEnum string
 
 const (
+	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
 	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
 	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
-	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
 	BdiContenteditableEnumEmpty         BdiContenteditableEnum = ""
 )
 
@@ -103,41 +103,41 @@ const (
 type BdiEnterkeyhintEnum string
 
 const (
+	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
+	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
 	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
 	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 	BdiEnterkeyhintEnumNext     BdiEnterkeyhintEnum = "next"
 	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
 	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
-	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
-	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
 )
 
 type BdiHiddenEnum string
 
 const (
-	BdiHiddenEnumHidden     BdiHiddenEnum = "hidden"
 	BdiHiddenEnumUntilFound BdiHiddenEnum = "until-found"
+	BdiHiddenEnumHidden     BdiHiddenEnum = "hidden"
 	BdiHiddenEnumEmpty      BdiHiddenEnum = ""
 )
 
 type BdiInputmodeEnum string
 
 const (
-	BdiInputmodeEnumTel     BdiInputmodeEnum = "tel"
-	BdiInputmodeEnumText    BdiInputmodeEnum = "text"
 	BdiInputmodeEnumUrl     BdiInputmodeEnum = "url"
 	BdiInputmodeEnumDecimal BdiInputmodeEnum = "decimal"
 	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
 	BdiInputmodeEnumNone    BdiInputmodeEnum = "none"
 	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
 	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
+	BdiInputmodeEnumTel     BdiInputmodeEnum = "tel"
+	BdiInputmodeEnumText    BdiInputmodeEnum = "text"
 )
 
 type BdiSpellcheckEnum string
 
 const (
-	BdiSpellcheckEnumTrue  BdiSpellcheckEnum = "true"
 	BdiSpellcheckEnumFalse BdiSpellcheckEnum = "false"
+	BdiSpellcheckEnumTrue  BdiSpellcheckEnum = "true"
 	BdiSpellcheckEnumEmpty BdiSpellcheckEnum = ""
 )
 

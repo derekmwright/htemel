@@ -60,19 +60,19 @@ func (e *DfnElement) AddIndent(i int) {
 type DfnAutocapitalizeEnum string
 
 const (
-	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
-	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
 	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
 	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
 	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
+	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
+	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
 )
 
 type DfnAutocorrectEnum string
 
 const (
-	DfnAutocorrectEnumOn    DfnAutocorrectEnum = "on"
 	DfnAutocorrectEnumOff   DfnAutocorrectEnum = "off"
+	DfnAutocorrectEnumOn    DfnAutocorrectEnum = "on"
 	DfnAutocorrectEnumEmpty DfnAutocorrectEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type DfnDraggableEnum string
 
 const (
-	DfnDraggableEnumFalse DfnDraggableEnum = "false"
 	DfnDraggableEnumTrue  DfnDraggableEnum = "true"
+	DfnDraggableEnumFalse DfnDraggableEnum = "false"
 )
 
 type DfnEnterkeyhintEnum string
 
 const (
+	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
 	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
 	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
 	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
-	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 )
 
 type DfnHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type DfnInputmodeEnum string
 
 const (
-	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
-	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
-	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
-	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
 	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
 	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
 	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
+	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
+	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
+	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
+	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 )
 
 type DfnSpellcheckEnum string

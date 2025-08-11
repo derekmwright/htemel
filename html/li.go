@@ -60,12 +60,12 @@ func (e *LiElement) AddIndent(i int) {
 type LiAutocapitalizeEnum string
 
 const (
+	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
+	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
 	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
-	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
-	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 )
 
 type LiAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type LiContenteditableEnum string
 
 const (
-	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
 	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
+	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumEmpty         LiContenteditableEnum = ""
 )
 
 type LiDirEnum string
 
 const (
+	LiDirEnumLtr  LiDirEnum = "ltr"
 	LiDirEnumRtl  LiDirEnum = "rtl"
 	LiDirEnumAuto LiDirEnum = "auto"
-	LiDirEnumLtr  LiDirEnum = "ltr"
 )
 
 type LiDraggableEnum string
@@ -103,20 +103,20 @@ const (
 type LiEnterkeyhintEnum string
 
 const (
+	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
+	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
+	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
 	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
 	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
 	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
 	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
-	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
-	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
-	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
 )
 
 type LiHiddenEnum string
 
 const (
-	LiHiddenEnumHidden     LiHiddenEnum = "hidden"
 	LiHiddenEnumUntilFound LiHiddenEnum = "until-found"
+	LiHiddenEnumHidden     LiHiddenEnum = "hidden"
 	LiHiddenEnumEmpty      LiHiddenEnum = ""
 )
 
@@ -136,8 +136,8 @@ const (
 type LiSpellcheckEnum string
 
 const (
-	LiSpellcheckEnumTrue  LiSpellcheckEnum = "true"
 	LiSpellcheckEnumFalse LiSpellcheckEnum = "false"
+	LiSpellcheckEnumTrue  LiSpellcheckEnum = "true"
 	LiSpellcheckEnumEmpty LiSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type LiWritingsuggestionsEnum string
 
 const (
-	LiWritingsuggestionsEnumTrue  LiWritingsuggestionsEnum = "true"
 	LiWritingsuggestionsEnumFalse LiWritingsuggestionsEnum = "false"
+	LiWritingsuggestionsEnumTrue  LiWritingsuggestionsEnum = "true"
 	LiWritingsuggestionsEnumEmpty LiWritingsuggestionsEnum = ""
 )
 

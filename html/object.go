@@ -60,12 +60,12 @@ func (e *ObjectElement) AddIndent(i int) {
 type ObjectAutocapitalizeEnum string
 
 const (
-	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
 	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
 	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
 	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
 	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
+	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 )
 
 type ObjectAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type ObjectEnterkeyhintEnum string
 
 const (
+	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
+	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
 	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
 	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
 	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 	ObjectEnterkeyhintEnumNext     ObjectEnterkeyhintEnum = "next"
 	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
-	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
-	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
 )
 
 type ObjectHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type ObjectInputmodeEnum string
 
 const (
+	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
 	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
 	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
@@ -130,34 +131,69 @@ const (
 	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
 	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
 	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
-	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
 )
 
 type ObjectSpellcheckEnum string
 
 const (
-	ObjectSpellcheckEnumFalse ObjectSpellcheckEnum = "false"
 	ObjectSpellcheckEnumTrue  ObjectSpellcheckEnum = "true"
+	ObjectSpellcheckEnumFalse ObjectSpellcheckEnum = "false"
 	ObjectSpellcheckEnumEmpty ObjectSpellcheckEnum = ""
 )
 
 type ObjectTranslateEnum string
 
 const (
-	ObjectTranslateEnumYes   ObjectTranslateEnum = "yes"
 	ObjectTranslateEnumNo    ObjectTranslateEnum = "no"
+	ObjectTranslateEnumYes   ObjectTranslateEnum = "yes"
 	ObjectTranslateEnumEmpty ObjectTranslateEnum = ""
 )
 
 type ObjectWritingsuggestionsEnum string
 
 const (
-	ObjectWritingsuggestionsEnumTrue  ObjectWritingsuggestionsEnum = "true"
 	ObjectWritingsuggestionsEnumFalse ObjectWritingsuggestionsEnum = "false"
+	ObjectWritingsuggestionsEnumTrue  ObjectWritingsuggestionsEnum = "true"
 	ObjectWritingsuggestionsEnumEmpty ObjectWritingsuggestionsEnum = ""
 )
 
 type objectAttrs map[string]any
+
+func (e *ObjectElement) Data(s string) *ObjectElement {
+	e.attributes["data"] = s
+
+	return e
+}
+
+func (e *ObjectElement) Type(s string) *ObjectElement {
+	e.attributes["type"] = s
+
+	return e
+}
+
+func (e *ObjectElement) Name(s string) *ObjectElement {
+	e.attributes["name"] = s
+
+	return e
+}
+
+func (e *ObjectElement) Form(s string) *ObjectElement {
+	e.attributes["form"] = s
+
+	return e
+}
+
+func (e *ObjectElement) Width(i int) *ObjectElement {
+	e.attributes["width"] = i
+
+	return e
+}
+
+func (e *ObjectElement) Height(i int) *ObjectElement {
+	e.attributes["height"] = i
+
+	return e
+}
 
 func (e *ObjectElement) Autocapitalize(a ObjectAutocapitalizeEnum) *ObjectElement {
 	e.attributes["autocapitalize"] = a

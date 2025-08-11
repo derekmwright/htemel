@@ -60,12 +60,12 @@ func (e *BElement) AddIndent(i int) {
 type BAutocapitalizeEnum string
 
 const (
+	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
 	BAutocapitalizeEnumOn         BAutocapitalizeEnum = "on"
 	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
 	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
 	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
 	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
-	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
 )
 
 type BAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type BContenteditableEnum string
 
 const (
+	BContenteditableEnumFalse         BContenteditableEnum = "false"
 	BContenteditableEnumPlaintextOnly BContenteditableEnum = "plaintext-only"
 	BContenteditableEnumTrue          BContenteditableEnum = "true"
-	BContenteditableEnumFalse         BContenteditableEnum = "false"
 	BContenteditableEnumEmpty         BContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type BEnterkeyhintEnum string
 
 const (
+	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
 	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
 	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
 	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
-	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 )
 
 type BHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type BInputmodeEnum string
 
 const (
+	BInputmodeEnumTel     BInputmodeEnum = "tel"
+	BInputmodeEnumText    BInputmodeEnum = "text"
 	BInputmodeEnumUrl     BInputmodeEnum = "url"
 	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
 	BInputmodeEnumEmail   BInputmodeEnum = "email"
 	BInputmodeEnumNone    BInputmodeEnum = "none"
 	BInputmodeEnumNumeric BInputmodeEnum = "numeric"
 	BInputmodeEnumSearch  BInputmodeEnum = "search"
-	BInputmodeEnumTel     BInputmodeEnum = "tel"
-	BInputmodeEnumText    BInputmodeEnum = "text"
 )
 
 type BSpellcheckEnum string
 
 const (
-	BSpellcheckEnumTrue  BSpellcheckEnum = "true"
 	BSpellcheckEnumFalse BSpellcheckEnum = "false"
+	BSpellcheckEnumTrue  BSpellcheckEnum = "true"
 	BSpellcheckEnumEmpty BSpellcheckEnum = ""
 )
 

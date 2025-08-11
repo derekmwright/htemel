@@ -79,18 +79,18 @@ const (
 type MeterContenteditableEnum string
 
 const (
-	MeterContenteditableEnumTrue          MeterContenteditableEnum = "true"
 	MeterContenteditableEnumFalse         MeterContenteditableEnum = "false"
 	MeterContenteditableEnumPlaintextOnly MeterContenteditableEnum = "plaintext-only"
+	MeterContenteditableEnumTrue          MeterContenteditableEnum = "true"
 	MeterContenteditableEnumEmpty         MeterContenteditableEnum = ""
 )
 
 type MeterDirEnum string
 
 const (
-	MeterDirEnumAuto MeterDirEnum = "auto"
 	MeterDirEnumLtr  MeterDirEnum = "ltr"
 	MeterDirEnumRtl  MeterDirEnum = "rtl"
+	MeterDirEnumAuto MeterDirEnum = "auto"
 )
 
 type MeterDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type MeterEnterkeyhintEnum string
 
 const (
+	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
+	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
+	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 	MeterEnterkeyhintEnumDone     MeterEnterkeyhintEnum = "done"
 	MeterEnterkeyhintEnumEnter    MeterEnterkeyhintEnum = "enter"
 	MeterEnterkeyhintEnumGo       MeterEnterkeyhintEnum = "go"
 	MeterEnterkeyhintEnumNext     MeterEnterkeyhintEnum = "next"
-	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
-	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
-	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 )
 
 type MeterHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type MeterInputmodeEnum string
 
 const (
-	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
-	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
 	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
 	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 	MeterInputmodeEnumDecimal MeterInputmodeEnum = "decimal"
 	MeterInputmodeEnumEmail   MeterInputmodeEnum = "email"
 	MeterInputmodeEnumNone    MeterInputmodeEnum = "none"
 	MeterInputmodeEnumNumeric MeterInputmodeEnum = "numeric"
+	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
+	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
 )
 
 type MeterSpellcheckEnum string
@@ -144,16 +144,16 @@ const (
 type MeterTranslateEnum string
 
 const (
-	MeterTranslateEnumYes   MeterTranslateEnum = "yes"
 	MeterTranslateEnumNo    MeterTranslateEnum = "no"
+	MeterTranslateEnumYes   MeterTranslateEnum = "yes"
 	MeterTranslateEnumEmpty MeterTranslateEnum = ""
 )
 
 type MeterWritingsuggestionsEnum string
 
 const (
-	MeterWritingsuggestionsEnumTrue  MeterWritingsuggestionsEnum = "true"
 	MeterWritingsuggestionsEnumFalse MeterWritingsuggestionsEnum = "false"
+	MeterWritingsuggestionsEnumTrue  MeterWritingsuggestionsEnum = "true"
 	MeterWritingsuggestionsEnumEmpty MeterWritingsuggestionsEnum = ""
 )
 

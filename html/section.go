@@ -60,12 +60,12 @@ func (e *SectionElement) AddIndent(i int) {
 type SectionAutocapitalizeEnum string
 
 const (
-	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
-	SectionAutocapitalizeEnumWords      SectionAutocapitalizeEnum = "words"
 	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
 	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
 	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
 	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
+	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
+	SectionAutocapitalizeEnumWords      SectionAutocapitalizeEnum = "words"
 )
 
 type SectionAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type SectionDirEnum string
 
 const (
+	SectionDirEnumAuto SectionDirEnum = "auto"
 	SectionDirEnumLtr  SectionDirEnum = "ltr"
 	SectionDirEnumRtl  SectionDirEnum = "rtl"
-	SectionDirEnumAuto SectionDirEnum = "auto"
 )
 
 type SectionDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type SectionEnterkeyhintEnum string
 
 const (
-	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
 	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
 	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
 	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
 	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
 	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
 	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
+	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
 )
 
 type SectionHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SectionInputmodeEnum string
 
 const (
-	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
-	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
 	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
 	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
 	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
 	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
 	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
 	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
+	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
+	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
 )
 
 type SectionSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type SectionWritingsuggestionsEnum string
 
 const (
-	SectionWritingsuggestionsEnumTrue  SectionWritingsuggestionsEnum = "true"
 	SectionWritingsuggestionsEnumFalse SectionWritingsuggestionsEnum = "false"
+	SectionWritingsuggestionsEnumTrue  SectionWritingsuggestionsEnum = "true"
 	SectionWritingsuggestionsEnumEmpty SectionWritingsuggestionsEnum = ""
 )
 

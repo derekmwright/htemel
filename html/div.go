@@ -60,12 +60,12 @@ func (e *DivElement) AddIndent(i int) {
 type DivAutocapitalizeEnum string
 
 const (
+	DivAutocapitalizeEnumCharacters DivAutocapitalizeEnum = "characters"
 	DivAutocapitalizeEnumNone       DivAutocapitalizeEnum = "none"
 	DivAutocapitalizeEnumOff        DivAutocapitalizeEnum = "off"
 	DivAutocapitalizeEnumOn         DivAutocapitalizeEnum = "on"
 	DivAutocapitalizeEnumSentences  DivAutocapitalizeEnum = "sentences"
 	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
-	DivAutocapitalizeEnumCharacters DivAutocapitalizeEnum = "characters"
 )
 
 type DivAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type DivEnterkeyhintEnum string
 
 const (
-	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
-	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
 	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
 	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
 	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 	DivEnterkeyhintEnumGo       DivEnterkeyhintEnum = "go"
 	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
+	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
+	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
 )
 
 type DivHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type DivInputmodeEnum string
 
 const (
+	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
+	DivInputmodeEnumText    DivInputmodeEnum = "text"
+	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
 	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
 	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
 	DivInputmodeEnumNone    DivInputmodeEnum = "none"
 	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
 	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
-	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
-	DivInputmodeEnumText    DivInputmodeEnum = "text"
-	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
 )
 
 type DivSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DivWritingsuggestionsEnum string
 
 const (
-	DivWritingsuggestionsEnumTrue  DivWritingsuggestionsEnum = "true"
 	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
+	DivWritingsuggestionsEnumTrue  DivWritingsuggestionsEnum = "true"
 	DivWritingsuggestionsEnumEmpty DivWritingsuggestionsEnum = ""
 )
 

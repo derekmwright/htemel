@@ -60,12 +60,12 @@ func (e *ButtonElement) AddIndent(i int) {
 type ButtonAutocapitalizeEnum string
 
 const (
-	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
-	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
 	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
 	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
 	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
+	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
+	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
 )
 
 type ButtonAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type ButtonEnterkeyhintEnum string
 
 const (
+	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
 	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
 	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
 	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
 	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
-	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
 )
 
 type ButtonHiddenEnum string

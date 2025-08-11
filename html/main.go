@@ -60,12 +60,12 @@ func (e *MainElement) AddIndent(i int) {
 type MainAutocapitalizeEnum string
 
 const (
-	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
-	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
 	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
 	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
+	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
+	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 )
 
 type MainAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type MainContenteditableEnum string
 
 const (
+	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
 	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
 	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
-	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
 	MainContenteditableEnumEmpty         MainContenteditableEnum = ""
 )
 
 type MainDirEnum string
 
 const (
-	MainDirEnumRtl  MainDirEnum = "rtl"
 	MainDirEnumAuto MainDirEnum = "auto"
 	MainDirEnumLtr  MainDirEnum = "ltr"
+	MainDirEnumRtl  MainDirEnum = "rtl"
 )
 
 type MainDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type MainEnterkeyhintEnum string
 
 const (
-	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
-	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
 	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
 	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
 	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
 	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
+	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
+	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
 )
 
 type MainHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type MainInputmodeEnum string
 
 const (
+	MainInputmodeEnumText    MainInputmodeEnum = "text"
 	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
 	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
@@ -130,7 +131,6 @@ const (
 	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
 	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
-	MainInputmodeEnumText    MainInputmodeEnum = "text"
 )
 
 type MainSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type MainTranslateEnum string
 
 const (
-	MainTranslateEnumNo    MainTranslateEnum = "no"
 	MainTranslateEnumYes   MainTranslateEnum = "yes"
+	MainTranslateEnumNo    MainTranslateEnum = "no"
 	MainTranslateEnumEmpty MainTranslateEnum = ""
 )
 

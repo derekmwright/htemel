@@ -49,15 +49,25 @@ func (e *TrackElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type TrackKindEnum string
+
+const (
+	TrackKindEnumCaptions     TrackKindEnum = "captions"
+	TrackKindEnumChapters     TrackKindEnum = "chapters"
+	TrackKindEnumDescriptions TrackKindEnum = "descriptions"
+	TrackKindEnumMetadata     TrackKindEnum = "metadata"
+	TrackKindEnumSubtitles    TrackKindEnum = "subtitles"
+)
+
 type TrackAutocapitalizeEnum string
 
 const (
-	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
-	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
-	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
 	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
 	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
 	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
+	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
+	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
+	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
 )
 
 type TrackAutocorrectEnum string
@@ -71,9 +81,9 @@ const (
 type TrackContenteditableEnum string
 
 const (
-	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
 	TrackContenteditableEnumFalse         TrackContenteditableEnum = "false"
 	TrackContenteditableEnumPlaintextOnly TrackContenteditableEnum = "plaintext-only"
+	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
 	TrackContenteditableEnumEmpty         TrackContenteditableEnum = ""
 )
 
@@ -95,41 +105,41 @@ const (
 type TrackEnterkeyhintEnum string
 
 const (
-	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
 	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
 	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
 	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
 	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
+	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
 )
 
 type TrackHiddenEnum string
 
 const (
-	TrackHiddenEnumUntilFound TrackHiddenEnum = "until-found"
 	TrackHiddenEnumHidden     TrackHiddenEnum = "hidden"
+	TrackHiddenEnumUntilFound TrackHiddenEnum = "until-found"
 	TrackHiddenEnumEmpty      TrackHiddenEnum = ""
 )
 
 type TrackInputmodeEnum string
 
 const (
-	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
-	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
-	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
-	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
 	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
 	TrackInputmodeEnumDecimal TrackInputmodeEnum = "decimal"
 	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
 	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
+	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
+	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
+	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
+	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
 )
 
 type TrackSpellcheckEnum string
 
 const (
-	TrackSpellcheckEnumFalse TrackSpellcheckEnum = "false"
 	TrackSpellcheckEnumTrue  TrackSpellcheckEnum = "true"
+	TrackSpellcheckEnumFalse TrackSpellcheckEnum = "false"
 	TrackSpellcheckEnumEmpty TrackSpellcheckEnum = ""
 )
 
@@ -150,6 +160,36 @@ const (
 )
 
 type trackAttrs map[string]any
+
+func (e *TrackElement) Kind(a TrackKindEnum) *TrackElement {
+	e.attributes["kind"] = a
+
+	return e
+}
+
+func (e *TrackElement) Src(s string) *TrackElement {
+	e.attributes["src"] = s
+
+	return e
+}
+
+func (e *TrackElement) Srclang(s string) *TrackElement {
+	e.attributes["srclang"] = s
+
+	return e
+}
+
+func (e *TrackElement) Label(s string) *TrackElement {
+	e.attributes["label"] = s
+
+	return e
+}
+
+func (e *TrackElement) Default(b bool) *TrackElement {
+	e.attributes["default"] = b
+
+	return e
+}
 
 func (e *TrackElement) Autocapitalize(a TrackAutocapitalizeEnum) *TrackElement {
 	e.attributes["autocapitalize"] = a

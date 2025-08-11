@@ -49,31 +49,40 @@ func (e *AreaElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type AreaShapeEnum string
+
+const (
+	AreaShapeEnumCircle  AreaShapeEnum = "circle"
+	AreaShapeEnumDefault AreaShapeEnum = "default"
+	AreaShapeEnumPoly    AreaShapeEnum = "poly"
+	AreaShapeEnumRect    AreaShapeEnum = "rect"
+)
+
 type AreaAutocapitalizeEnum string
 
 const (
-	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
-	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
 	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
 	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
 	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
+	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
+	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 )
 
 type AreaAutocorrectEnum string
 
 const (
-	AreaAutocorrectEnumOff   AreaAutocorrectEnum = "off"
 	AreaAutocorrectEnumOn    AreaAutocorrectEnum = "on"
+	AreaAutocorrectEnumOff   AreaAutocorrectEnum = "off"
 	AreaAutocorrectEnumEmpty AreaAutocorrectEnum = ""
 )
 
 type AreaContenteditableEnum string
 
 const (
+	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
 	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumPlaintextOnly AreaContenteditableEnum = "plaintext-only"
-	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
 	AreaContenteditableEnumEmpty         AreaContenteditableEnum = ""
 )
 
@@ -95,27 +104,26 @@ const (
 type AreaEnterkeyhintEnum string
 
 const (
-	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
-	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
-	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
 	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
 	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
 	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
 	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
+	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
+	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
+	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
 )
 
 type AreaHiddenEnum string
 
 const (
-	AreaHiddenEnumHidden     AreaHiddenEnum = "hidden"
 	AreaHiddenEnumUntilFound AreaHiddenEnum = "until-found"
+	AreaHiddenEnumHidden     AreaHiddenEnum = "hidden"
 	AreaHiddenEnumEmpty      AreaHiddenEnum = ""
 )
 
 type AreaInputmodeEnum string
 
 const (
-	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
 	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
 	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
 	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
@@ -123,6 +131,7 @@ const (
 	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
 	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
+	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
 )
 
 type AreaSpellcheckEnum string
@@ -150,6 +159,60 @@ const (
 )
 
 type areaAttrs map[string]any
+
+func (e *AreaElement) Alt(s string) *AreaElement {
+	e.attributes["alt"] = s
+
+	return e
+}
+
+func (e *AreaElement) Coords(s string) *AreaElement {
+	e.attributes["coords"] = s
+
+	return e
+}
+
+func (e *AreaElement) Shape(a AreaShapeEnum) *AreaElement {
+	e.attributes["shape"] = a
+
+	return e
+}
+
+func (e *AreaElement) Href(s string) *AreaElement {
+	e.attributes["href"] = s
+
+	return e
+}
+
+func (e *AreaElement) Target(s string) *AreaElement {
+	e.attributes["target"] = s
+
+	return e
+}
+
+func (e *AreaElement) Download(b bool) *AreaElement {
+	e.attributes["download"] = b
+
+	return e
+}
+
+func (e *AreaElement) Ping(s ...string) *AreaElement {
+	e.attributes["ping"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AreaElement) Rel(s ...string) *AreaElement {
+	e.attributes["rel"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AreaElement) Referrerpolicy(s string) *AreaElement {
+	e.attributes["referrerpolicy"] = s
+
+	return e
+}
 
 func (e *AreaElement) Autocapitalize(a AreaAutocapitalizeEnum) *AreaElement {
 	e.attributes["autocapitalize"] = a

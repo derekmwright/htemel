@@ -60,12 +60,12 @@ func (e *HgroupElement) AddIndent(i int) {
 type HgroupAutocapitalizeEnum string
 
 const (
+	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
+	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
 	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
 	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
 	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
-	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
-	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
 )
 
 type HgroupAutocorrectEnum string
@@ -115,8 +115,8 @@ const (
 type HgroupHiddenEnum string
 
 const (
-	HgroupHiddenEnumUntilFound HgroupHiddenEnum = "until-found"
 	HgroupHiddenEnumHidden     HgroupHiddenEnum = "hidden"
+	HgroupHiddenEnumUntilFound HgroupHiddenEnum = "until-found"
 	HgroupHiddenEnumEmpty      HgroupHiddenEnum = ""
 )
 
@@ -136,8 +136,8 @@ const (
 type HgroupSpellcheckEnum string
 
 const (
-	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
 	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
+	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
 	HgroupSpellcheckEnumEmpty HgroupSpellcheckEnum = ""
 )
 

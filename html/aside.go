@@ -60,12 +60,12 @@ func (e *AsideElement) AddIndent(i int) {
 type AsideAutocapitalizeEnum string
 
 const (
+	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
 	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
 	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
 	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
 	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
-	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 )
 
 type AsideAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type AsideContenteditableEnum string
 
 const (
-	AsideContenteditableEnumTrue          AsideContenteditableEnum = "true"
 	AsideContenteditableEnumFalse         AsideContenteditableEnum = "false"
 	AsideContenteditableEnumPlaintextOnly AsideContenteditableEnum = "plaintext-only"
+	AsideContenteditableEnumTrue          AsideContenteditableEnum = "true"
 	AsideContenteditableEnumEmpty         AsideContenteditableEnum = ""
 )
 
 type AsideDirEnum string
 
 const (
-	AsideDirEnumRtl  AsideDirEnum = "rtl"
 	AsideDirEnumAuto AsideDirEnum = "auto"
 	AsideDirEnumLtr  AsideDirEnum = "ltr"
+	AsideDirEnumRtl  AsideDirEnum = "rtl"
 )
 
 type AsideDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type AsideEnterkeyhintEnum string
 
 const (
-	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
-	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
-	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
 	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
 	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
 	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
+	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
+	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
+	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
 )
 
 type AsideHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type AsideInputmodeEnum string
 
 const (
+	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
+	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
 	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
 	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
 	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
 	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
 	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
-	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
-	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
 )
 
 type AsideSpellcheckEnum string

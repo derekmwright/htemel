@@ -60,19 +60,19 @@ func (e *AElement) AddIndent(i int) {
 type AAutocapitalizeEnum string
 
 const (
-	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
-	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
-	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
 	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
 	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
 	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
+	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
+	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
+	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
 )
 
 type AAutocorrectEnum string
 
 const (
-	AAutocorrectEnumOn    AAutocorrectEnum = "on"
 	AAutocorrectEnumOff   AAutocorrectEnum = "off"
+	AAutocorrectEnumOn    AAutocorrectEnum = "on"
 	AAutocorrectEnumEmpty AAutocorrectEnum = ""
 )
 
@@ -88,28 +88,28 @@ const (
 type ADirEnum string
 
 const (
+	ADirEnumRtl  ADirEnum = "rtl"
 	ADirEnumAuto ADirEnum = "auto"
 	ADirEnumLtr  ADirEnum = "ltr"
-	ADirEnumRtl  ADirEnum = "rtl"
 )
 
 type ADraggableEnum string
 
 const (
-	ADraggableEnumFalse ADraggableEnum = "false"
 	ADraggableEnumTrue  ADraggableEnum = "true"
+	ADraggableEnumFalse ADraggableEnum = "false"
 )
 
 type AEnterkeyhintEnum string
 
 const (
-	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
-	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
 	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
 	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
 	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
+	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
+	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 )
 
 type AHiddenEnum string

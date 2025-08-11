@@ -60,19 +60,19 @@ func (e *BdoElement) AddIndent(i int) {
 type BdoAutocapitalizeEnum string
 
 const (
+	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
+	BdoAutocapitalizeEnumNone       BdoAutocapitalizeEnum = "none"
 	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
 	BdoAutocapitalizeEnumOn         BdoAutocapitalizeEnum = "on"
 	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
 	BdoAutocapitalizeEnumWords      BdoAutocapitalizeEnum = "words"
-	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
-	BdoAutocapitalizeEnumNone       BdoAutocapitalizeEnum = "none"
 )
 
 type BdoAutocorrectEnum string
 
 const (
-	BdoAutocorrectEnumOff   BdoAutocorrectEnum = "off"
 	BdoAutocorrectEnumOn    BdoAutocorrectEnum = "on"
+	BdoAutocorrectEnumOff   BdoAutocorrectEnum = "off"
 	BdoAutocorrectEnumEmpty BdoAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type BdoEnterkeyhintEnum string
 
 const (
+	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
+	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
+	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
 	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
 	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
 	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
-	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
-	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
-	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
 )
 
 type BdoHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type BdoInputmodeEnum string
 
 const (
+	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
+	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
 	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
 	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
 	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
 	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
 	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
 	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
-	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
-	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
 )
 
 type BdoSpellcheckEnum string

@@ -60,12 +60,12 @@ func (e *SelectedcontentElement) AddIndent(i int) {
 type SelectedcontentAutocapitalizeEnum string
 
 const (
+	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
+	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
 	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
 	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
 	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
-	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
-	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 )
 
 type SelectedcontentAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type SelectedcontentContenteditableEnum string
 
 const (
+	SelectedcontentContenteditableEnumTrue          SelectedcontentContenteditableEnum = "true"
 	SelectedcontentContenteditableEnumFalse         SelectedcontentContenteditableEnum = "false"
 	SelectedcontentContenteditableEnumPlaintextOnly SelectedcontentContenteditableEnum = "plaintext-only"
-	SelectedcontentContenteditableEnumTrue          SelectedcontentContenteditableEnum = "true"
 	SelectedcontentContenteditableEnumEmpty         SelectedcontentContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type SelectedcontentEnterkeyhintEnum string
 
 const (
+	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
+	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
 	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
 	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
 	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
-	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
-	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
 )
 
 type SelectedcontentHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
-	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
-	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
-	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
-	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
 	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
 	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
+	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
+	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
+	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
+	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 )
 
 type SelectedcontentSpellcheckEnum string

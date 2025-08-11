@@ -60,12 +60,12 @@ func (e *SummaryElement) AddIndent(i int) {
 type SummaryAutocapitalizeEnum string
 
 const (
-	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
-	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
 	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
 	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
+	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
+	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 )
 
 type SummaryAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type SummaryDraggableEnum string
 
 const (
-	SummaryDraggableEnumFalse SummaryDraggableEnum = "false"
 	SummaryDraggableEnumTrue  SummaryDraggableEnum = "true"
+	SummaryDraggableEnumFalse SummaryDraggableEnum = "false"
 )
 
 type SummaryEnterkeyhintEnum string
 
 const (
+	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
+	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
 	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
 	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
 	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
 	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
-	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
-	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
 )
 
 type SummaryHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SummaryInputmodeEnum string
 
 const (
-	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
-	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
-	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
-	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
 	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
 	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
 	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
+	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
+	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
+	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
+	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
 )
 
 type SummarySpellcheckEnum string

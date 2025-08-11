@@ -71,8 +71,8 @@ const (
 type HtmlAutocorrectEnum string
 
 const (
-	HtmlAutocorrectEnumOff   HtmlAutocorrectEnum = "off"
 	HtmlAutocorrectEnumOn    HtmlAutocorrectEnum = "on"
+	HtmlAutocorrectEnumOff   HtmlAutocorrectEnum = "off"
 	HtmlAutocorrectEnumEmpty HtmlAutocorrectEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type HtmlDraggableEnum string
 
 const (
-	HtmlDraggableEnumFalse HtmlDraggableEnum = "false"
 	HtmlDraggableEnumTrue  HtmlDraggableEnum = "true"
+	HtmlDraggableEnumFalse HtmlDraggableEnum = "false"
 )
 
 type HtmlEnterkeyhintEnum string
 
 const (
+	HtmlEnterkeyhintEnumPrevious HtmlEnterkeyhintEnum = "previous"
+	HtmlEnterkeyhintEnumSearch   HtmlEnterkeyhintEnum = "search"
+	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
 	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
 	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
 	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
 	HtmlEnterkeyhintEnumNext     HtmlEnterkeyhintEnum = "next"
-	HtmlEnterkeyhintEnumPrevious HtmlEnterkeyhintEnum = "previous"
-	HtmlEnterkeyhintEnumSearch   HtmlEnterkeyhintEnum = "search"
-	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
 )
 
 type HtmlHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type HtmlInputmodeEnum string
 
 const (
+	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
+	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
+	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
 	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
 	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
 	HtmlInputmodeEnumNone    HtmlInputmodeEnum = "none"
 	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
-	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
-	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
-	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 )
 
 type HtmlSpellcheckEnum string

@@ -71,8 +71,8 @@ const (
 type FigureAutocorrectEnum string
 
 const (
-	FigureAutocorrectEnumOff   FigureAutocorrectEnum = "off"
 	FigureAutocorrectEnumOn    FigureAutocorrectEnum = "on"
+	FigureAutocorrectEnumOff   FigureAutocorrectEnum = "off"
 	FigureAutocorrectEnumEmpty FigureAutocorrectEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type FigureEnterkeyhintEnum string
 
 const (
+	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
+	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
+	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
 	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
 	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
 	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
 	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
-	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
-	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
-	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
 )
 
 type FigureHiddenEnum string
 
 const (
-	FigureHiddenEnumUntilFound FigureHiddenEnum = "until-found"
 	FigureHiddenEnumHidden     FigureHiddenEnum = "hidden"
+	FigureHiddenEnumUntilFound FigureHiddenEnum = "until-found"
 	FigureHiddenEnumEmpty      FigureHiddenEnum = ""
 )
 
 type FigureInputmodeEnum string
 
 const (
-	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
-	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
 	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
 	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
 	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
 	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
 	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
 	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
+	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
+	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
 )
 
 type FigureSpellcheckEnum string

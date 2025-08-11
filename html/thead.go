@@ -60,12 +60,12 @@ func (e *TheadElement) AddIndent(i int) {
 type TheadAutocapitalizeEnum string
 
 const (
-	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
-	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
 	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
 	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
 	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
+	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
+	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 )
 
 type TheadAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type TheadEnterkeyhintEnum string
 
 const (
-	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
 	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
 	TheadEnterkeyhintEnumGo       TheadEnterkeyhintEnum = "go"
 	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
 	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
 	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
+	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 )
 
 type TheadHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type TheadInputmodeEnum string
 
 const (
-	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
-	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
-	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
-	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
 	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
 	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
 	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
 	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
+	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
+	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
+	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
+	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
 )
 
 type TheadSpellcheckEnum string
