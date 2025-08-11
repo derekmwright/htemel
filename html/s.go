@@ -14,6 +14,7 @@ type SElement struct {
 	attributes sAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // S creates a tag <s> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func STernary(condition bool, true htemel.Node, false htemel.Node) *SElement {
 	return S(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *SElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *SElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type SAutocapitalizeEnum string
 
 const (
+	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
+	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
 	SAutocapitalizeEnumSentences  SAutocapitalizeEnum = "sentences"
 	SAutocapitalizeEnumWords      SAutocapitalizeEnum = "words"
 	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
 	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
-	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
-	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
 )
 
 type SAutocorrectEnum string
 
 const (
-	SAutocorrectEnumOn    SAutocorrectEnum = "on"
 	SAutocorrectEnumOff   SAutocorrectEnum = "off"
+	SAutocorrectEnumOn    SAutocorrectEnum = "on"
 	SAutocorrectEnumEmpty SAutocorrectEnum = ""
 )
 
@@ -91,13 +103,13 @@ const (
 type SEnterkeyhintEnum string
 
 const (
+	SEnterkeyhintEnumPrevious SEnterkeyhintEnum = "previous"
+	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
+	SEnterkeyhintEnumSend     SEnterkeyhintEnum = "send"
 	SEnterkeyhintEnumDone     SEnterkeyhintEnum = "done"
 	SEnterkeyhintEnumEnter    SEnterkeyhintEnum = "enter"
 	SEnterkeyhintEnumGo       SEnterkeyhintEnum = "go"
 	SEnterkeyhintEnumNext     SEnterkeyhintEnum = "next"
-	SEnterkeyhintEnumPrevious SEnterkeyhintEnum = "previous"
-	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
-	SEnterkeyhintEnumSend     SEnterkeyhintEnum = "send"
 )
 
 type SHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type SInputmodeEnum string
 
 const (
+	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
+	SInputmodeEnumEmail   SInputmodeEnum = "email"
+	SInputmodeEnumNone    SInputmodeEnum = "none"
 	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
 	SInputmodeEnumSearch  SInputmodeEnum = "search"
 	SInputmodeEnumTel     SInputmodeEnum = "tel"
 	SInputmodeEnumText    SInputmodeEnum = "text"
 	SInputmodeEnumUrl     SInputmodeEnum = "url"
-	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
-	SInputmodeEnumEmail   SInputmodeEnum = "email"
-	SInputmodeEnumNone    SInputmodeEnum = "none"
 )
 
 type SSpellcheckEnum string
@@ -140,8 +152,8 @@ const (
 type SWritingsuggestionsEnum string
 
 const (
-	SWritingsuggestionsEnumTrue  SWritingsuggestionsEnum = "true"
 	SWritingsuggestionsEnumFalse SWritingsuggestionsEnum = "false"
+	SWritingsuggestionsEnumTrue  SWritingsuggestionsEnum = "true"
 	SWritingsuggestionsEnumEmpty SWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *SElement) Writingsuggestions(a SWritingsuggestionsEnum) *SElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<s")); err != nil {
+	if _, err := w.Write([]byte(indent + "<s")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *SElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</s>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</s>\n")); err != nil {
 		return err
 	}
 

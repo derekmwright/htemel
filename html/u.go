@@ -14,6 +14,7 @@ type UElement struct {
 	attributes uAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // U creates a tag <u> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
 	return U(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *UElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *UElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type UAutocapitalizeEnum string
 
 const (
+	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
 	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
 	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
 	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
 	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
-	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 )
 
 type UAutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type UContenteditableEnum string
 
 const (
-	UContenteditableEnumPlaintextOnly UContenteditableEnum = "plaintext-only"
 	UContenteditableEnumTrue          UContenteditableEnum = "true"
 	UContenteditableEnumFalse         UContenteditableEnum = "false"
+	UContenteditableEnumPlaintextOnly UContenteditableEnum = "plaintext-only"
 	UContenteditableEnumEmpty         UContenteditableEnum = ""
 )
 
@@ -91,26 +103,27 @@ const (
 type UEnterkeyhintEnum string
 
 const (
+	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
 	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
 	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
 	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
-	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
 )
 
 type UHiddenEnum string
 
 const (
-	UHiddenEnumUntilFound UHiddenEnum = "until-found"
 	UHiddenEnumHidden     UHiddenEnum = "hidden"
+	UHiddenEnumUntilFound UHiddenEnum = "until-found"
 	UHiddenEnumEmpty      UHiddenEnum = ""
 )
 
 type UInputmodeEnum string
 
 const (
+	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
 	UInputmodeEnumSearch  UInputmodeEnum = "search"
 	UInputmodeEnumTel     UInputmodeEnum = "tel"
 	UInputmodeEnumText    UInputmodeEnum = "text"
@@ -118,7 +131,6 @@ const (
 	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
 	UInputmodeEnumEmail   UInputmodeEnum = "email"
 	UInputmodeEnumNone    UInputmodeEnum = "none"
-	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
 )
 
 type USpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *UElement) Writingsuggestions(a UWritingsuggestionsEnum) *UElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *UElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<u")); err != nil {
+	if _, err := w.Write([]byte(indent + "<u")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *UElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</u>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</u>\n")); err != nil {
 		return err
 	}
 

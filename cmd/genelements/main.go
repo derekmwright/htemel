@@ -26,6 +26,8 @@ func generate(pkg string, e *spec.Element) error {
 		source.BaseFunc,
 		source.BaseCondFunc,
 		source.BaseTernaryFunc,
+		source.IndentFunc,
+		source.AddIndentFunc,
 		source.BuildAttributes(e),
 		source.RenderFunc,
 	}

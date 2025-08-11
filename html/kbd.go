@@ -14,6 +14,7 @@ type KbdElement struct {
 	attributes kbdAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Kbd creates a tag <kbd> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 	return Kbd(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *KbdElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *KbdElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type KbdAutocapitalizeEnum string
 
 const (
+	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
+	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
 	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
 	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
-	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
-	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 )
 
 type KbdAutocorrectEnum string
@@ -76,9 +88,9 @@ const (
 type KbdDirEnum string
 
 const (
+	KbdDirEnumRtl  KbdDirEnum = "rtl"
 	KbdDirEnumAuto KbdDirEnum = "auto"
 	KbdDirEnumLtr  KbdDirEnum = "ltr"
-	KbdDirEnumRtl  KbdDirEnum = "rtl"
 )
 
 type KbdDraggableEnum string
@@ -91,34 +103,34 @@ const (
 type KbdEnterkeyhintEnum string
 
 const (
+	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
+	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
 	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
 	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
 	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
 	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
 	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
-	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
-	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
 )
 
 type KbdHiddenEnum string
 
 const (
-	KbdHiddenEnumHidden     KbdHiddenEnum = "hidden"
 	KbdHiddenEnumUntilFound KbdHiddenEnum = "until-found"
+	KbdHiddenEnumHidden     KbdHiddenEnum = "hidden"
 	KbdHiddenEnumEmpty      KbdHiddenEnum = ""
 )
 
 type KbdInputmodeEnum string
 
 const (
-	KbdInputmodeEnumText    KbdInputmodeEnum = "text"
-	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
-	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
 	KbdInputmodeEnumEmail   KbdInputmodeEnum = "email"
 	KbdInputmodeEnumNone    KbdInputmodeEnum = "none"
 	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
 	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
 	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
+	KbdInputmodeEnumText    KbdInputmodeEnum = "text"
+	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
+	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
 )
 
 type KbdSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *KbdElement) Writingsuggestions(a KbdWritingsuggestionsEnum) *KbdElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *KbdElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<kbd")); err != nil {
+	if _, err := w.Write([]byte(indent + "<kbd")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *KbdElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</kbd>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</kbd>\n")); err != nil {
 		return err
 	}
 

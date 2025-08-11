@@ -14,6 +14,7 @@ type AElement struct {
 	attributes aAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // A creates a tag <a> instance and returns it for further modification.
@@ -43,6 +44,17 @@ func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
 	}
 
 	return A(false)
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *AElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *AElement) AddIndent(i int) {
+	e.indent = i + 1
 }
 
 type AAutocapitalizeEnum string
@@ -76,16 +88,16 @@ const (
 type ADirEnum string
 
 const (
+	ADirEnumAuto ADirEnum = "auto"
 	ADirEnumLtr  ADirEnum = "ltr"
 	ADirEnumRtl  ADirEnum = "rtl"
-	ADirEnumAuto ADirEnum = "auto"
 )
 
 type ADraggableEnum string
 
 const (
-	ADraggableEnumFalse ADraggableEnum = "false"
 	ADraggableEnumTrue  ADraggableEnum = "true"
+	ADraggableEnumFalse ADraggableEnum = "false"
 )
 
 type AEnterkeyhintEnum string
@@ -103,22 +115,22 @@ const (
 type AHiddenEnum string
 
 const (
-	AHiddenEnumUntilFound AHiddenEnum = "until-found"
 	AHiddenEnumHidden     AHiddenEnum = "hidden"
+	AHiddenEnumUntilFound AHiddenEnum = "until-found"
 	AHiddenEnumEmpty      AHiddenEnum = ""
 )
 
 type AInputmodeEnum string
 
 const (
-	AInputmodeEnumTel     AInputmodeEnum = "tel"
-	AInputmodeEnumText    AInputmodeEnum = "text"
-	AInputmodeEnumUrl     AInputmodeEnum = "url"
-	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
 	AInputmodeEnumEmail   AInputmodeEnum = "email"
 	AInputmodeEnumNone    AInputmodeEnum = "none"
 	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
 	AInputmodeEnumSearch  AInputmodeEnum = "search"
+	AInputmodeEnumTel     AInputmodeEnum = "tel"
+	AInputmodeEnumText    AInputmodeEnum = "text"
+	AInputmodeEnumUrl     AInputmodeEnum = "url"
+	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
 )
 
 type ASpellcheckEnum string
@@ -375,11 +387,13 @@ func (e *AElement) Writingsuggestions(a AWritingsuggestionsEnum) *AElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<a")); err != nil {
+	if _, err := w.Write([]byte(indent + "<a")); err != nil {
 		return err
 	}
 
@@ -409,16 +423,17 @@ func (e *AElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</a>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</a>\n")); err != nil {
 		return err
 	}
 

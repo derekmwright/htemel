@@ -14,6 +14,7 @@ type StyleElement struct {
 	attributes styleAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Style creates a tag <style> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func StyleTernary(condition bool, true htemel.Node, false htemel.Node) *StyleEle
 	return Style(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *StyleElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *StyleElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type StyleAutocapitalizeEnum string
 
 const (
-	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
-	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
-	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
 	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
 	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
 	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
+	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
+	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
+	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
 )
 
 type StyleAutocorrectEnum string
@@ -76,9 +88,9 @@ const (
 type StyleDirEnum string
 
 const (
-	StyleDirEnumRtl  StyleDirEnum = "rtl"
 	StyleDirEnumAuto StyleDirEnum = "auto"
 	StyleDirEnumLtr  StyleDirEnum = "ltr"
+	StyleDirEnumRtl  StyleDirEnum = "rtl"
 )
 
 type StyleDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type StyleEnterkeyhintEnum string
 
 const (
-	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
-	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
-	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
 	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
 	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
 	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
+	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
+	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
+	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 )
 
 type StyleHiddenEnum string
@@ -111,6 +123,7 @@ const (
 type StyleInputmodeEnum string
 
 const (
+	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
 	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
 	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
@@ -118,14 +131,13 @@ const (
 	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
 	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
-	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
 )
 
 type StyleSpellcheckEnum string
 
 const (
-	StyleSpellcheckEnumTrue  StyleSpellcheckEnum = "true"
 	StyleSpellcheckEnumFalse StyleSpellcheckEnum = "false"
+	StyleSpellcheckEnumTrue  StyleSpellcheckEnum = "true"
 	StyleSpellcheckEnumEmpty StyleSpellcheckEnum = ""
 )
 
@@ -140,8 +152,8 @@ const (
 type StyleWritingsuggestionsEnum string
 
 const (
-	StyleWritingsuggestionsEnumTrue  StyleWritingsuggestionsEnum = "true"
 	StyleWritingsuggestionsEnumFalse StyleWritingsuggestionsEnum = "false"
+	StyleWritingsuggestionsEnumTrue  StyleWritingsuggestionsEnum = "true"
 	StyleWritingsuggestionsEnumEmpty StyleWritingsuggestionsEnum = ""
 )
 
@@ -339,11 +351,13 @@ func (e *StyleElement) Writingsuggestions(a StyleWritingsuggestionsEnum) *StyleE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *StyleElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<style")); err != nil {
+	if _, err := w.Write([]byte(indent + "<style")); err != nil {
 		return err
 	}
 
@@ -373,16 +387,17 @@ func (e *StyleElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</style>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</style>\n")); err != nil {
 		return err
 	}
 

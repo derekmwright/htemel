@@ -14,6 +14,7 @@ type LabelElement struct {
 	attributes labelAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Label creates a tag <label> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func LabelTernary(condition bool, true htemel.Node, false htemel.Node) *LabelEle
 	return Label(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *LabelElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *LabelElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type LabelAutocapitalizeEnum string
 
 const (
+	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
+	LabelAutocapitalizeEnumCharacters LabelAutocapitalizeEnum = "characters"
 	LabelAutocapitalizeEnumNone       LabelAutocapitalizeEnum = "none"
 	LabelAutocapitalizeEnumOff        LabelAutocapitalizeEnum = "off"
 	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
 	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
-	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
-	LabelAutocapitalizeEnumCharacters LabelAutocapitalizeEnum = "characters"
 )
 
 type LabelAutocorrectEnum string
@@ -91,13 +103,13 @@ const (
 type LabelEnterkeyhintEnum string
 
 const (
+	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
 	LabelEnterkeyhintEnumEnter    LabelEnterkeyhintEnum = "enter"
 	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
 	LabelEnterkeyhintEnumNext     LabelEnterkeyhintEnum = "next"
 	LabelEnterkeyhintEnumPrevious LabelEnterkeyhintEnum = "previous"
 	LabelEnterkeyhintEnumSearch   LabelEnterkeyhintEnum = "search"
 	LabelEnterkeyhintEnumSend     LabelEnterkeyhintEnum = "send"
-	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
 )
 
 type LabelHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type LabelInputmodeEnum string
 
 const (
-	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
-	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
-	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
 	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
 	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
 	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
+	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
+	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
+	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 )
 
 type LabelSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *LabelElement) Writingsuggestions(a LabelWritingsuggestionsEnum) *LabelE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LabelElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<label")); err != nil {
+	if _, err := w.Write([]byte(indent + "<label")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *LabelElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</label>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</label>\n")); err != nil {
 		return err
 	}
 

@@ -14,6 +14,7 @@ type NoscriptElement struct {
 	attributes noscriptAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Noscript creates a tag <noscript> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func NoscriptTernary(condition bool, true htemel.Node, false htemel.Node) *Noscr
 	return Noscript(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *NoscriptElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *NoscriptElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type NoscriptAutocapitalizeEnum string
 
 const (
-	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
-	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
 	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
 	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
 	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
 	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
+	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
+	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
 )
 
 type NoscriptAutocorrectEnum string
@@ -67,18 +79,18 @@ const (
 type NoscriptContenteditableEnum string
 
 const (
-	NoscriptContenteditableEnumFalse         NoscriptContenteditableEnum = "false"
 	NoscriptContenteditableEnumPlaintextOnly NoscriptContenteditableEnum = "plaintext-only"
 	NoscriptContenteditableEnumTrue          NoscriptContenteditableEnum = "true"
+	NoscriptContenteditableEnumFalse         NoscriptContenteditableEnum = "false"
 	NoscriptContenteditableEnumEmpty         NoscriptContenteditableEnum = ""
 )
 
 type NoscriptDirEnum string
 
 const (
+	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
 	NoscriptDirEnumLtr  NoscriptDirEnum = "ltr"
 	NoscriptDirEnumRtl  NoscriptDirEnum = "rtl"
-	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
 )
 
 type NoscriptDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type NoscriptEnterkeyhintEnum string
 
 const (
-	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
-	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
 	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
 	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
 	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
 	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
 	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
+	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
+	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
 )
 
 type NoscriptHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type NoscriptInputmodeEnum string
 
 const (
-	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
-	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
-	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
 	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
 	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
 	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
 	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
 	NoscriptInputmodeEnumNone    NoscriptInputmodeEnum = "none"
+	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
+	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
+	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
 )
 
 type NoscriptSpellcheckEnum string
@@ -140,8 +152,8 @@ const (
 type NoscriptWritingsuggestionsEnum string
 
 const (
-	NoscriptWritingsuggestionsEnumFalse NoscriptWritingsuggestionsEnum = "false"
 	NoscriptWritingsuggestionsEnumTrue  NoscriptWritingsuggestionsEnum = "true"
+	NoscriptWritingsuggestionsEnumFalse NoscriptWritingsuggestionsEnum = "false"
 	NoscriptWritingsuggestionsEnumEmpty NoscriptWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *NoscriptElement) Writingsuggestions(a NoscriptWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *NoscriptElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<noscript")); err != nil {
+	if _, err := w.Write([]byte(indent + "<noscript")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *NoscriptElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</noscript>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</noscript>\n")); err != nil {
 		return err
 	}
 

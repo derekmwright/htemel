@@ -14,6 +14,7 @@ type AsideElement struct {
 	attributes asideAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Aside creates a tag <aside> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideEle
 	return Aside(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *AsideElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *AsideElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type AsideAutocapitalizeEnum string
 
 const (
+	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
+	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
 	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
 	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
 	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
-	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
-	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
 )
 
 type AsideAutocorrectEnum string
 
 const (
-	AsideAutocorrectEnumOn    AsideAutocorrectEnum = "on"
 	AsideAutocorrectEnumOff   AsideAutocorrectEnum = "off"
+	AsideAutocorrectEnumOn    AsideAutocorrectEnum = "on"
 	AsideAutocorrectEnumEmpty AsideAutocorrectEnum = ""
 )
 
@@ -91,13 +103,13 @@ const (
 type AsideEnterkeyhintEnum string
 
 const (
+	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
+	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
 	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
 	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
 	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
 	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
-	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
-	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
 )
 
 type AsideHiddenEnum string
@@ -111,6 +123,7 @@ const (
 type AsideInputmodeEnum string
 
 const (
+	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
 	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
 	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
@@ -118,14 +131,13 @@ const (
 	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
 	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
 	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
-	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 )
 
 type AsideSpellcheckEnum string
 
 const (
-	AsideSpellcheckEnumFalse AsideSpellcheckEnum = "false"
 	AsideSpellcheckEnumTrue  AsideSpellcheckEnum = "true"
+	AsideSpellcheckEnumFalse AsideSpellcheckEnum = "false"
 	AsideSpellcheckEnumEmpty AsideSpellcheckEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *AsideElement) Writingsuggestions(a AsideWritingsuggestionsEnum) *AsideE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AsideElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<aside")); err != nil {
+	if _, err := w.Write([]byte(indent + "<aside")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *AsideElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</aside>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</aside>\n")); err != nil {
 		return err
 	}
 

@@ -14,6 +14,7 @@ type TitleElement struct {
 	attributes titleAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Title creates a tag <title> instance and returns it for further modification.
@@ -45,40 +46,51 @@ func TitleTernary(condition bool, true htemel.Node, false htemel.Node) *TitleEle
 	return Title(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *TitleElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *TitleElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type TitleAutocapitalizeEnum string
 
 const (
-	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
 	TitleAutocapitalizeEnumNone       TitleAutocapitalizeEnum = "none"
 	TitleAutocapitalizeEnumOff        TitleAutocapitalizeEnum = "off"
 	TitleAutocapitalizeEnumOn         TitleAutocapitalizeEnum = "on"
 	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
+	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 )
 
 type TitleAutocorrectEnum string
 
 const (
-	TitleAutocorrectEnumOff   TitleAutocorrectEnum = "off"
 	TitleAutocorrectEnumOn    TitleAutocorrectEnum = "on"
+	TitleAutocorrectEnumOff   TitleAutocorrectEnum = "off"
 	TitleAutocorrectEnumEmpty TitleAutocorrectEnum = ""
 )
 
 type TitleContenteditableEnum string
 
 const (
-	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
 	TitleContenteditableEnumFalse         TitleContenteditableEnum = "false"
 	TitleContenteditableEnumPlaintextOnly TitleContenteditableEnum = "plaintext-only"
+	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
 	TitleContenteditableEnumEmpty         TitleContenteditableEnum = ""
 )
 
 type TitleDirEnum string
 
 const (
+	TitleDirEnumRtl  TitleDirEnum = "rtl"
 	TitleDirEnumAuto TitleDirEnum = "auto"
 	TitleDirEnumLtr  TitleDirEnum = "ltr"
-	TitleDirEnumRtl  TitleDirEnum = "rtl"
 )
 
 type TitleDraggableEnum string
@@ -91,41 +103,41 @@ const (
 type TitleEnterkeyhintEnum string
 
 const (
-	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
-	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
 	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
 	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
 	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
 	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
+	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
+	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
 )
 
 type TitleHiddenEnum string
 
 const (
-	TitleHiddenEnumHidden     TitleHiddenEnum = "hidden"
 	TitleHiddenEnumUntilFound TitleHiddenEnum = "until-found"
+	TitleHiddenEnumHidden     TitleHiddenEnum = "hidden"
 	TitleHiddenEnumEmpty      TitleHiddenEnum = ""
 )
 
 type TitleInputmodeEnum string
 
 const (
+	TitleInputmodeEnumEmail   TitleInputmodeEnum = "email"
+	TitleInputmodeEnumNone    TitleInputmodeEnum = "none"
 	TitleInputmodeEnumNumeric TitleInputmodeEnum = "numeric"
 	TitleInputmodeEnumSearch  TitleInputmodeEnum = "search"
 	TitleInputmodeEnumTel     TitleInputmodeEnum = "tel"
 	TitleInputmodeEnumText    TitleInputmodeEnum = "text"
 	TitleInputmodeEnumUrl     TitleInputmodeEnum = "url"
 	TitleInputmodeEnumDecimal TitleInputmodeEnum = "decimal"
-	TitleInputmodeEnumEmail   TitleInputmodeEnum = "email"
-	TitleInputmodeEnumNone    TitleInputmodeEnum = "none"
 )
 
 type TitleSpellcheckEnum string
 
 const (
-	TitleSpellcheckEnumFalse TitleSpellcheckEnum = "false"
 	TitleSpellcheckEnumTrue  TitleSpellcheckEnum = "true"
+	TitleSpellcheckEnumFalse TitleSpellcheckEnum = "false"
 	TitleSpellcheckEnumEmpty TitleSpellcheckEnum = ""
 )
 
@@ -140,8 +152,8 @@ const (
 type TitleWritingsuggestionsEnum string
 
 const (
-	TitleWritingsuggestionsEnumTrue  TitleWritingsuggestionsEnum = "true"
 	TitleWritingsuggestionsEnumFalse TitleWritingsuggestionsEnum = "false"
+	TitleWritingsuggestionsEnumTrue  TitleWritingsuggestionsEnum = "true"
 	TitleWritingsuggestionsEnumEmpty TitleWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *TitleElement) Writingsuggestions(a TitleWritingsuggestionsEnum) *TitleE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TitleElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<title")); err != nil {
+	if _, err := w.Write([]byte(indent + "<title")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *TitleElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</title>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</title>\n")); err != nil {
 		return err
 	}
 

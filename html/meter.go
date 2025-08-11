@@ -14,6 +14,7 @@ type MeterElement struct {
 	attributes meterAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Meter creates a tag <meter> instance and returns it for further modification.
@@ -45,6 +46,17 @@ func MeterTernary(condition bool, true htemel.Node, false htemel.Node) *MeterEle
 	return Meter(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *MeterElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *MeterElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type MeterAutocapitalizeEnum string
 
 const (
@@ -67,18 +79,18 @@ const (
 type MeterContenteditableEnum string
 
 const (
+	MeterContenteditableEnumFalse         MeterContenteditableEnum = "false"
 	MeterContenteditableEnumPlaintextOnly MeterContenteditableEnum = "plaintext-only"
 	MeterContenteditableEnumTrue          MeterContenteditableEnum = "true"
-	MeterContenteditableEnumFalse         MeterContenteditableEnum = "false"
 	MeterContenteditableEnumEmpty         MeterContenteditableEnum = ""
 )
 
 type MeterDirEnum string
 
 const (
+	MeterDirEnumRtl  MeterDirEnum = "rtl"
 	MeterDirEnumAuto MeterDirEnum = "auto"
 	MeterDirEnumLtr  MeterDirEnum = "ltr"
-	MeterDirEnumRtl  MeterDirEnum = "rtl"
 )
 
 type MeterDraggableEnum string
@@ -91,34 +103,34 @@ const (
 type MeterEnterkeyhintEnum string
 
 const (
-	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
-	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
-	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 	MeterEnterkeyhintEnumDone     MeterEnterkeyhintEnum = "done"
 	MeterEnterkeyhintEnumEnter    MeterEnterkeyhintEnum = "enter"
 	MeterEnterkeyhintEnumGo       MeterEnterkeyhintEnum = "go"
 	MeterEnterkeyhintEnumNext     MeterEnterkeyhintEnum = "next"
+	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
+	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
+	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 )
 
 type MeterHiddenEnum string
 
 const (
-	MeterHiddenEnumUntilFound MeterHiddenEnum = "until-found"
 	MeterHiddenEnumHidden     MeterHiddenEnum = "hidden"
+	MeterHiddenEnumUntilFound MeterHiddenEnum = "until-found"
 	MeterHiddenEnumEmpty      MeterHiddenEnum = ""
 )
 
 type MeterInputmodeEnum string
 
 const (
-	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
-	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
 	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 	MeterInputmodeEnumDecimal MeterInputmodeEnum = "decimal"
 	MeterInputmodeEnumEmail   MeterInputmodeEnum = "email"
 	MeterInputmodeEnumNone    MeterInputmodeEnum = "none"
 	MeterInputmodeEnumNumeric MeterInputmodeEnum = "numeric"
 	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
+	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
+	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
 )
 
 type MeterSpellcheckEnum string
@@ -132,8 +144,8 @@ const (
 type MeterTranslateEnum string
 
 const (
-	MeterTranslateEnumYes   MeterTranslateEnum = "yes"
 	MeterTranslateEnumNo    MeterTranslateEnum = "no"
+	MeterTranslateEnumYes   MeterTranslateEnum = "yes"
 	MeterTranslateEnumEmpty MeterTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *MeterElement) Writingsuggestions(a MeterWritingsuggestionsEnum) *MeterE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MeterElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<meter")); err != nil {
+	if _, err := w.Write([]byte(indent + "<meter")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *MeterElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</meter>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</meter>\n")); err != nil {
 		return err
 	}
 

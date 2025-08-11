@@ -14,6 +14,7 @@ type DatalistElement struct {
 	attributes datalistAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Datalist creates a tag <datalist> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func DatalistTernary(condition bool, true htemel.Node, false htemel.Node) *Datal
 	return Datalist(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *DatalistElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *DatalistElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type DatalistAutocapitalizeEnum string
 
 const (
-	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
-	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
 	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
 	DatalistAutocapitalizeEnumOn         DatalistAutocapitalizeEnum = "on"
 	DatalistAutocapitalizeEnumSentences  DatalistAutocapitalizeEnum = "sentences"
 	DatalistAutocapitalizeEnumWords      DatalistAutocapitalizeEnum = "words"
+	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
+	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
 )
 
 type DatalistAutocorrectEnum string
@@ -67,18 +79,18 @@ const (
 type DatalistContenteditableEnum string
 
 const (
+	DatalistContenteditableEnumTrue          DatalistContenteditableEnum = "true"
 	DatalistContenteditableEnumFalse         DatalistContenteditableEnum = "false"
 	DatalistContenteditableEnumPlaintextOnly DatalistContenteditableEnum = "plaintext-only"
-	DatalistContenteditableEnumTrue          DatalistContenteditableEnum = "true"
 	DatalistContenteditableEnumEmpty         DatalistContenteditableEnum = ""
 )
 
 type DatalistDirEnum string
 
 const (
+	DatalistDirEnumLtr  DatalistDirEnum = "ltr"
 	DatalistDirEnumRtl  DatalistDirEnum = "rtl"
 	DatalistDirEnumAuto DatalistDirEnum = "auto"
-	DatalistDirEnumLtr  DatalistDirEnum = "ltr"
 )
 
 type DatalistDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type DatalistEnterkeyhintEnum string
 
 const (
+	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
+	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 	DatalistEnterkeyhintEnumEnter    DatalistEnterkeyhintEnum = "enter"
 	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
 	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
 	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
-	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
-	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 )
 
 type DatalistHiddenEnum string
@@ -327,11 +339,13 @@ func (e *DatalistElement) Writingsuggestions(a DatalistWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DatalistElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<datalist")); err != nil {
+	if _, err := w.Write([]byte(indent + "<datalist")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *DatalistElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</datalist>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</datalist>\n")); err != nil {
 		return err
 	}
 

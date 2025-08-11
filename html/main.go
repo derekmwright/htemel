@@ -14,6 +14,7 @@ type MainElement struct {
 	attributes mainAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Main creates a tag <main> instance and returns it for further modification.
@@ -45,6 +46,17 @@ func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainEleme
 	return Main(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *MainElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *MainElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type MainAutocapitalizeEnum string
 
 const (
@@ -59,8 +71,8 @@ const (
 type MainAutocorrectEnum string
 
 const (
-	MainAutocorrectEnumOn    MainAutocorrectEnum = "on"
 	MainAutocorrectEnumOff   MainAutocorrectEnum = "off"
+	MainAutocorrectEnumOn    MainAutocorrectEnum = "on"
 	MainAutocorrectEnumEmpty MainAutocorrectEnum = ""
 )
 
@@ -76,9 +88,9 @@ const (
 type MainDirEnum string
 
 const (
+	MainDirEnumRtl  MainDirEnum = "rtl"
 	MainDirEnumAuto MainDirEnum = "auto"
 	MainDirEnumLtr  MainDirEnum = "ltr"
-	MainDirEnumRtl  MainDirEnum = "rtl"
 )
 
 type MainDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type MainEnterkeyhintEnum string
 
 const (
+	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
+	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
+	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
 	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
 	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
 	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
-	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
-	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
-	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
 )
 
 type MainHiddenEnum string
@@ -111,21 +123,21 @@ const (
 type MainInputmodeEnum string
 
 const (
+	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
+	MainInputmodeEnumText    MainInputmodeEnum = "text"
+	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
 	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
 	MainInputmodeEnumNone    MainInputmodeEnum = "none"
 	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
-	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
-	MainInputmodeEnumText    MainInputmodeEnum = "text"
-	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 )
 
 type MainSpellcheckEnum string
 
 const (
-	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
 	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
+	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
 	MainSpellcheckEnumEmpty MainSpellcheckEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *MainElement) Writingsuggestions(a MainWritingsuggestionsEnum) *MainElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MainElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<main")); err != nil {
+	if _, err := w.Write([]byte(indent + "<main")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *MainElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</main>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</main>\n")); err != nil {
 		return err
 	}
 

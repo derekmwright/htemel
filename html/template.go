@@ -14,6 +14,7 @@ type TemplateElement struct {
 	attributes templateAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Template creates a tag <template> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func TemplateTernary(condition bool, true htemel.Node, false htemel.Node) *Templ
 	return Template(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *TemplateElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *TemplateElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type TemplateAutocapitalizeEnum string
 
 const (
+	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
 	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
 	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
-	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
 )
 
 type TemplateAutocorrectEnum string
@@ -111,14 +123,14 @@ const (
 type TemplateInputmodeEnum string
 
 const (
+	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
+	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
 	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
 	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
 	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
 	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
 	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
 	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
-	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
-	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
 )
 
 type TemplateSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *TemplateElement) Writingsuggestions(a TemplateWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TemplateElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<template")); err != nil {
+	if _, err := w.Write([]byte(indent + "<template")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *TemplateElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</template>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</template>\n")); err != nil {
 		return err
 	}
 

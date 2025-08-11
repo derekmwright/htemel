@@ -14,6 +14,7 @@ type VideoElement struct {
 	attributes videoAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Video creates a tag <video> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func VideoTernary(condition bool, true htemel.Node, false htemel.Node) *VideoEle
 	return Video(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *VideoElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *VideoElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type VideoAutocapitalizeEnum string
 
 const (
-	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
-	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
 	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
 	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
 	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
+	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
+	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 )
 
 type VideoAutocorrectEnum string
@@ -91,13 +103,13 @@ const (
 type VideoEnterkeyhintEnum string
 
 const (
+	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
+	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
+	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
 	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
 	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
 	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
 	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
-	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
-	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
-	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
 )
 
 type VideoHiddenEnum string
@@ -111,6 +123,7 @@ const (
 type VideoInputmodeEnum string
 
 const (
+	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
 	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
 	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
 	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
@@ -118,7 +131,6 @@ const (
 	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
 	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
 	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
-	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
 )
 
 type VideoSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *VideoElement) Writingsuggestions(a VideoWritingsuggestionsEnum) *VideoE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *VideoElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<video")); err != nil {
+	if _, err := w.Write([]byte(indent + "<video")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *VideoElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</video>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</video>\n")); err != nil {
 		return err
 	}
 

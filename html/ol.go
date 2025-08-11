@@ -14,6 +14,7 @@ type OlElement struct {
 	attributes olAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Ol creates a tag <ol> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func OlTernary(condition bool, true htemel.Node, false htemel.Node) *OlElement {
 	return Ol(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *OlElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *OlElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type OlAutocapitalizeEnum string
 
 const (
-	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 	OlAutocapitalizeEnumNone       OlAutocapitalizeEnum = "none"
 	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
 	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
 	OlAutocapitalizeEnumSentences  OlAutocapitalizeEnum = "sentences"
 	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
+	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 )
 
 type OlAutocorrectEnum string
 
 const (
-	OlAutocorrectEnumOn    OlAutocorrectEnum = "on"
 	OlAutocorrectEnumOff   OlAutocorrectEnum = "off"
+	OlAutocorrectEnumOn    OlAutocorrectEnum = "on"
 	OlAutocorrectEnumEmpty OlAutocorrectEnum = ""
 )
 
@@ -91,13 +103,13 @@ const (
 type OlEnterkeyhintEnum string
 
 const (
-	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
-	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
 	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
 	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
 	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
 	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
+	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
+	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
 )
 
 type OlHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type OlInputmodeEnum string
 
 const (
-	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
-	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
 	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
 	OlInputmodeEnumNone    OlInputmodeEnum = "none"
 	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
 	OlInputmodeEnumSearch  OlInputmodeEnum = "search"
 	OlInputmodeEnumTel     OlInputmodeEnum = "tel"
 	OlInputmodeEnumText    OlInputmodeEnum = "text"
+	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
+	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
 )
 
 type OlSpellcheckEnum string
@@ -339,11 +351,13 @@ func (e *OlElement) Writingsuggestions(a OlWritingsuggestionsEnum) *OlElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *OlElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<ol")); err != nil {
+	if _, err := w.Write([]byte(indent + "<ol")); err != nil {
 		return err
 	}
 
@@ -373,16 +387,17 @@ func (e *OlElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</ol>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</ol>\n")); err != nil {
 		return err
 	}
 

@@ -14,6 +14,7 @@ type SummaryElement struct {
 	attributes summaryAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Summary creates a tag <summary> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *Summar
 	return Summary(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *SummaryElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *SummaryElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type SummaryAutocapitalizeEnum string
 
 const (
-	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
 	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
 	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
+	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
 )
 
 type SummaryAutocorrectEnum string
@@ -67,18 +79,18 @@ const (
 type SummaryContenteditableEnum string
 
 const (
+	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
 	SummaryContenteditableEnumFalse         SummaryContenteditableEnum = "false"
 	SummaryContenteditableEnumPlaintextOnly SummaryContenteditableEnum = "plaintext-only"
-	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
 	SummaryContenteditableEnumEmpty         SummaryContenteditableEnum = ""
 )
 
 type SummaryDirEnum string
 
 const (
-	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
 	SummaryDirEnumAuto SummaryDirEnum = "auto"
 	SummaryDirEnumLtr  SummaryDirEnum = "ltr"
+	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
 )
 
 type SummaryDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type SummaryEnterkeyhintEnum string
 
 const (
+	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
+	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
 	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
 	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
 	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
 	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
-	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
-	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
 )
 
 type SummaryHiddenEnum string
@@ -111,6 +123,7 @@ const (
 type SummaryInputmodeEnum string
 
 const (
+	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
 	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
 	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
 	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
@@ -118,22 +131,21 @@ const (
 	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
 	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
-	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
 )
 
 type SummarySpellcheckEnum string
 
 const (
-	SummarySpellcheckEnumFalse SummarySpellcheckEnum = "false"
 	SummarySpellcheckEnumTrue  SummarySpellcheckEnum = "true"
+	SummarySpellcheckEnumFalse SummarySpellcheckEnum = "false"
 	SummarySpellcheckEnumEmpty SummarySpellcheckEnum = ""
 )
 
 type SummaryTranslateEnum string
 
 const (
-	SummaryTranslateEnumYes   SummaryTranslateEnum = "yes"
 	SummaryTranslateEnumNo    SummaryTranslateEnum = "no"
+	SummaryTranslateEnumYes   SummaryTranslateEnum = "yes"
 	SummaryTranslateEnumEmpty SummaryTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *SummaryElement) Writingsuggestions(a SummaryWritingsuggestionsEnum) *Su
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SummaryElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<summary")); err != nil {
+	if _, err := w.Write([]byte(indent + "<summary")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *SummaryElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</summary>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</summary>\n")); err != nil {
 		return err
 	}
 

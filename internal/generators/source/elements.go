@@ -32,7 +32,7 @@ var titleCase = func(s string) string {
 	return cases.Title(language.English).String(s)
 }
 
-var PascalCase = func(s string) string {
+var pascalCase = func(s string) string {
 	if strings.Index(strings.ToLower(s), "-") < 1 {
 		return titleCase(s)
 	}
@@ -100,6 +100,7 @@ type {{ .Tag | titleCase }}Element struct {
 	attributes {{ .Tag }}Attrs
 	{{ if not .Void }}children []htemel.Node{{ end }}
 	skipRender bool
+	indent int
 }
 `))
 
@@ -166,6 +167,35 @@ func {{ .Tag | titleCase }}Ternary(condition bool, true htemel.Node, false hteme
 	return tmpl, nil
 }
 
+func AddIndentFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("SetIndent").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *{{ .Tag | titleCase }}Element) AddIndent(i int) {
+	e.indent = i + 1
+}
+`))
+
+	return tmpl, nil
+}
+
+func IndentFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("SetIndent").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *{{ .Tag | titleCase }}Element) Indent() int {
+	return e.indent
+}
+`))
+
+	return tmpl, nil
+}
+
 func RenderFunc() (*template.Template, ImportSet) {
 	tmpl := template.Must(template.New("RenderFunc").
 		Funcs(template.FuncMap{
@@ -178,11 +208,13 @@ func RenderFunc() (*template.Template, ImportSet) {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<{{ .Tag }}")); err != nil {
+	if _, err := w.Write([]byte(indent + "<{{ .Tag }}")); err != nil {
 		return err
 	}
 
@@ -212,18 +244,19 @@ func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 
 {{- if not .Void }}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</{{ .Tag }}>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</{{ .Tag }}>\n")); err != nil {
 		return err
 	}
 {{- end }}

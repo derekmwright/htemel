@@ -13,6 +13,7 @@ type LinkElement struct {
 	attributes linkAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Link creates a tag <link> instance and returns it for further modification.
@@ -36,6 +37,17 @@ func LinkIf(condition bool) *LinkElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *LinkElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *LinkElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type LinkCrossoriginEnum string
 
 const (
@@ -53,20 +65,20 @@ const (
 type LinkFetchpriorityEnum string
 
 const (
+	LinkFetchpriorityEnumAuto LinkFetchpriorityEnum = "auto"
 	LinkFetchpriorityEnumHigh LinkFetchpriorityEnum = "high"
 	LinkFetchpriorityEnumLow  LinkFetchpriorityEnum = "low"
-	LinkFetchpriorityEnumAuto LinkFetchpriorityEnum = "auto"
 )
 
 type LinkAutocapitalizeEnum string
 
 const (
+	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
 	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
 	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
 	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
 	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
-	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
 )
 
 type LinkAutocorrectEnum string
@@ -80,9 +92,9 @@ const (
 type LinkContenteditableEnum string
 
 const (
+	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
 	LinkContenteditableEnumPlaintextOnly LinkContenteditableEnum = "plaintext-only"
 	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
-	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
 	LinkContenteditableEnumEmpty         LinkContenteditableEnum = ""
 )
 
@@ -116,8 +128,8 @@ const (
 type LinkHiddenEnum string
 
 const (
-	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
 	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
+	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
 	LinkHiddenEnumEmpty      LinkHiddenEnum = ""
 )
 
@@ -145,16 +157,16 @@ const (
 type LinkTranslateEnum string
 
 const (
-	LinkTranslateEnumNo    LinkTranslateEnum = "no"
 	LinkTranslateEnumYes   LinkTranslateEnum = "yes"
+	LinkTranslateEnumNo    LinkTranslateEnum = "no"
 	LinkTranslateEnumEmpty LinkTranslateEnum = ""
 )
 
 type LinkWritingsuggestionsEnum string
 
 const (
-	LinkWritingsuggestionsEnumFalse LinkWritingsuggestionsEnum = "false"
 	LinkWritingsuggestionsEnumTrue  LinkWritingsuggestionsEnum = "true"
+	LinkWritingsuggestionsEnumFalse LinkWritingsuggestionsEnum = "false"
 	LinkWritingsuggestionsEnumEmpty LinkWritingsuggestionsEnum = ""
 )
 
@@ -436,11 +448,13 @@ func (e *LinkElement) Writingsuggestions(a LinkWritingsuggestionsEnum) *LinkElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LinkElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<link")); err != nil {
+	if _, err := w.Write([]byte(indent + "<link")); err != nil {
 		return err
 	}
 
@@ -470,7 +484,7 @@ func (e *LinkElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

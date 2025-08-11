@@ -14,6 +14,7 @@ type DtElement struct {
 	attributes dtAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Dt creates a tag <dt> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func DtTernary(condition bool, true htemel.Node, false htemel.Node) *DtElement {
 	return Dt(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *DtElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *DtElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type DtAutocapitalizeEnum string
 
 const (
+	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
+	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
 	DtAutocapitalizeEnumOff        DtAutocapitalizeEnum = "off"
 	DtAutocapitalizeEnumOn         DtAutocapitalizeEnum = "on"
 	DtAutocapitalizeEnumSentences  DtAutocapitalizeEnum = "sentences"
 	DtAutocapitalizeEnumWords      DtAutocapitalizeEnum = "words"
-	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
-	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
 )
 
 type DtAutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type DtContenteditableEnum string
 
 const (
+	DtContenteditableEnumFalse         DtContenteditableEnum = "false"
 	DtContenteditableEnumPlaintextOnly DtContenteditableEnum = "plaintext-only"
 	DtContenteditableEnumTrue          DtContenteditableEnum = "true"
-	DtContenteditableEnumFalse         DtContenteditableEnum = "false"
 	DtContenteditableEnumEmpty         DtContenteditableEnum = ""
 )
 
@@ -84,20 +96,20 @@ const (
 type DtDraggableEnum string
 
 const (
-	DtDraggableEnumTrue  DtDraggableEnum = "true"
 	DtDraggableEnumFalse DtDraggableEnum = "false"
+	DtDraggableEnumTrue  DtDraggableEnum = "true"
 )
 
 type DtEnterkeyhintEnum string
 
 const (
-	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
 	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
 	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
 	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
 	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
 	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
+	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 )
 
 type DtHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type DtInputmodeEnum string
 
 const (
-	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
-	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
-	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
-	DtInputmodeEnumNone    DtInputmodeEnum = "none"
 	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
 	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
 	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 	DtInputmodeEnumText    DtInputmodeEnum = "text"
+	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
+	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
+	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
+	DtInputmodeEnumNone    DtInputmodeEnum = "none"
 )
 
 type DtSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *DtElement) Writingsuggestions(a DtWritingsuggestionsEnum) *DtElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DtElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<dt")); err != nil {
+	if _, err := w.Write([]byte(indent + "<dt")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *DtElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</dt>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</dt>\n")); err != nil {
 		return err
 	}
 

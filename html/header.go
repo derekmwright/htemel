@@ -14,6 +14,7 @@ type HeaderElement struct {
 	attributes headerAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Header creates a tag <header> instance and returns it for further modification.
@@ -43,6 +44,17 @@ func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderE
 	}
 
 	return Header(false)
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *HeaderElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *HeaderElement) AddIndent(i int) {
+	e.indent = i + 1
 }
 
 type HeaderAutocapitalizeEnum string
@@ -91,13 +103,13 @@ const (
 type HeaderEnterkeyhintEnum string
 
 const (
-	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
 	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
 	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
 	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
 	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
 	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
+	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
 )
 
 type HeaderHiddenEnum string
@@ -111,21 +123,21 @@ const (
 type HeaderInputmodeEnum string
 
 const (
+	HeaderInputmodeEnumNone    HeaderInputmodeEnum = "none"
+	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
 	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
 	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
 	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 	HeaderInputmodeEnumUrl     HeaderInputmodeEnum = "url"
 	HeaderInputmodeEnumDecimal HeaderInputmodeEnum = "decimal"
 	HeaderInputmodeEnumEmail   HeaderInputmodeEnum = "email"
-	HeaderInputmodeEnumNone    HeaderInputmodeEnum = "none"
-	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
 )
 
 type HeaderSpellcheckEnum string
 
 const (
-	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
 	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
+	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
 	HeaderSpellcheckEnumEmpty HeaderSpellcheckEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *HeaderElement) Writingsuggestions(a HeaderWritingsuggestionsEnum) *Head
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HeaderElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<header")); err != nil {
+	if _, err := w.Write([]byte(indent + "<header")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *HeaderElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</header>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</header>\n")); err != nil {
 		return err
 	}
 

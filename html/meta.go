@@ -13,6 +13,7 @@ type MetaElement struct {
 	attributes metaAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Meta creates a tag <meta> instance and returns it for further modification.
@@ -36,34 +37,45 @@ func MetaIf(condition bool) *MetaElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *MetaElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *MetaElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type MetaHttpEquivEnum string
 
 const (
+	MetaHttpEquivEnumContentType           MetaHttpEquivEnum = "content-type"
+	MetaHttpEquivEnumDefaultStyle          MetaHttpEquivEnum = "default-style"
 	MetaHttpEquivEnumRefresh               MetaHttpEquivEnum = "refresh"
 	MetaHttpEquivEnumSetCookie             MetaHttpEquivEnum = "set-cookie"
 	MetaHttpEquivEnumXUaCompatible         MetaHttpEquivEnum = "x-ua-compatible"
 	MetaHttpEquivEnumContentLanguage       MetaHttpEquivEnum = "content-language"
 	MetaHttpEquivEnumContentSecurityPolicy MetaHttpEquivEnum = "content-security-policy"
-	MetaHttpEquivEnumContentType           MetaHttpEquivEnum = "content-type"
-	MetaHttpEquivEnumDefaultStyle          MetaHttpEquivEnum = "default-style"
 )
 
 type MetaAutocapitalizeEnum string
 
 const (
+	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
 	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
 	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
 	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
 	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
 	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
-	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
 )
 
 type MetaAutocorrectEnum string
 
 const (
-	MetaAutocorrectEnumOff   MetaAutocorrectEnum = "off"
 	MetaAutocorrectEnumOn    MetaAutocorrectEnum = "on"
+	MetaAutocorrectEnumOff   MetaAutocorrectEnum = "off"
 	MetaAutocorrectEnumEmpty MetaAutocorrectEnum = ""
 )
 
@@ -79,9 +91,9 @@ const (
 type MetaDirEnum string
 
 const (
+	MetaDirEnumAuto MetaDirEnum = "auto"
 	MetaDirEnumLtr  MetaDirEnum = "ltr"
 	MetaDirEnumRtl  MetaDirEnum = "rtl"
-	MetaDirEnumAuto MetaDirEnum = "auto"
 )
 
 type MetaDraggableEnum string
@@ -94,27 +106,26 @@ const (
 type MetaEnterkeyhintEnum string
 
 const (
-	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
-	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
 	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
 	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
 	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
+	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
+	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 )
 
 type MetaHiddenEnum string
 
 const (
-	MetaHiddenEnumUntilFound MetaHiddenEnum = "until-found"
 	MetaHiddenEnumHidden     MetaHiddenEnum = "hidden"
+	MetaHiddenEnumUntilFound MetaHiddenEnum = "until-found"
 	MetaHiddenEnumEmpty      MetaHiddenEnum = ""
 )
 
 type MetaInputmodeEnum string
 
 const (
-	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
 	MetaInputmodeEnumEmail   MetaInputmodeEnum = "email"
 	MetaInputmodeEnumNone    MetaInputmodeEnum = "none"
 	MetaInputmodeEnumNumeric MetaInputmodeEnum = "numeric"
@@ -122,6 +133,7 @@ const (
 	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
 	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
 	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
+	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
 )
 
 type MetaSpellcheckEnum string
@@ -360,11 +372,13 @@ func (e *MetaElement) Writingsuggestions(a MetaWritingsuggestionsEnum) *MetaElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MetaElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<meta")); err != nil {
+	if _, err := w.Write([]byte(indent + "<meta")); err != nil {
 		return err
 	}
 
@@ -394,7 +408,7 @@ func (e *MetaElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

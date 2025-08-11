@@ -14,6 +14,7 @@ type LegendElement struct {
 	attributes legendAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Legend creates a tag <legend> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func LegendTernary(condition bool, true htemel.Node, false htemel.Node) *LegendE
 	return Legend(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *LegendElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *LegendElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type LegendAutocapitalizeEnum string
 
 const (
+	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
+	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
 	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
 	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
 	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
-	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
-	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 )
 
 type LegendAutocorrectEnum string
@@ -67,18 +79,18 @@ const (
 type LegendContenteditableEnum string
 
 const (
+	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
 	LegendContenteditableEnumFalse         LegendContenteditableEnum = "false"
 	LegendContenteditableEnumPlaintextOnly LegendContenteditableEnum = "plaintext-only"
-	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
 	LegendContenteditableEnumEmpty         LegendContenteditableEnum = ""
 )
 
 type LegendDirEnum string
 
 const (
-	LegendDirEnumAuto LegendDirEnum = "auto"
 	LegendDirEnumLtr  LegendDirEnum = "ltr"
 	LegendDirEnumRtl  LegendDirEnum = "rtl"
+	LegendDirEnumAuto LegendDirEnum = "auto"
 )
 
 type LegendDraggableEnum string
@@ -111,21 +123,21 @@ const (
 type LegendInputmodeEnum string
 
 const (
-	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
-	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
-	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
-	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
 	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
 	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
 	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
 	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
+	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
+	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
+	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
+	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
 )
 
 type LegendSpellcheckEnum string
 
 const (
-	LegendSpellcheckEnumFalse LegendSpellcheckEnum = "false"
 	LegendSpellcheckEnumTrue  LegendSpellcheckEnum = "true"
+	LegendSpellcheckEnumFalse LegendSpellcheckEnum = "false"
 	LegendSpellcheckEnumEmpty LegendSpellcheckEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *LegendElement) Writingsuggestions(a LegendWritingsuggestionsEnum) *Lege
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LegendElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<legend")); err != nil {
+	if _, err := w.Write([]byte(indent + "<legend")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *LegendElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</legend>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</legend>\n")); err != nil {
 		return err
 	}
 

@@ -14,6 +14,7 @@ type DlElement struct {
 	attributes dlAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Dl creates a tag <dl> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func DlTernary(condition bool, true htemel.Node, false htemel.Node) *DlElement {
 	return Dl(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *DlElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *DlElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type DlAutocapitalizeEnum string
 
 const (
+	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
+	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
 	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
 	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
 	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
 	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
-	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
-	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
 )
 
 type DlAutocorrectEnum string
@@ -76,9 +88,9 @@ const (
 type DlDirEnum string
 
 const (
+	DlDirEnumAuto DlDirEnum = "auto"
 	DlDirEnumLtr  DlDirEnum = "ltr"
 	DlDirEnumRtl  DlDirEnum = "rtl"
-	DlDirEnumAuto DlDirEnum = "auto"
 )
 
 type DlDraggableEnum string
@@ -103,15 +115,14 @@ const (
 type DlHiddenEnum string
 
 const (
-	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
 	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
+	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
 	DlHiddenEnumEmpty      DlHiddenEnum = ""
 )
 
 type DlInputmodeEnum string
 
 const (
-	DlInputmodeEnumSearch  DlInputmodeEnum = "search"
 	DlInputmodeEnumTel     DlInputmodeEnum = "tel"
 	DlInputmodeEnumText    DlInputmodeEnum = "text"
 	DlInputmodeEnumUrl     DlInputmodeEnum = "url"
@@ -119,6 +130,7 @@ const (
 	DlInputmodeEnumEmail   DlInputmodeEnum = "email"
 	DlInputmodeEnumNone    DlInputmodeEnum = "none"
 	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
+	DlInputmodeEnumSearch  DlInputmodeEnum = "search"
 )
 
 type DlSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *DlElement) Writingsuggestions(a DlWritingsuggestionsEnum) *DlElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DlElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<dl")); err != nil {
+	if _, err := w.Write([]byte(indent + "<dl")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *DlElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</dl>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</dl>\n")); err != nil {
 		return err
 	}
 

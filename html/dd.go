@@ -14,6 +14,7 @@ type DdElement struct {
 	attributes ddAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Dd creates a tag <dd> instance and returns it for further modification.
@@ -45,6 +46,17 @@ func DdTernary(condition bool, true htemel.Node, false htemel.Node) *DdElement {
 	return Dd(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *DdElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *DdElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type DdAutocapitalizeEnum string
 
 const (
@@ -59,17 +71,17 @@ const (
 type DdAutocorrectEnum string
 
 const (
-	DdAutocorrectEnumOn    DdAutocorrectEnum = "on"
 	DdAutocorrectEnumOff   DdAutocorrectEnum = "off"
+	DdAutocorrectEnumOn    DdAutocorrectEnum = "on"
 	DdAutocorrectEnumEmpty DdAutocorrectEnum = ""
 )
 
 type DdContenteditableEnum string
 
 const (
+	DdContenteditableEnumFalse         DdContenteditableEnum = "false"
 	DdContenteditableEnumPlaintextOnly DdContenteditableEnum = "plaintext-only"
 	DdContenteditableEnumTrue          DdContenteditableEnum = "true"
-	DdContenteditableEnumFalse         DdContenteditableEnum = "false"
 	DdContenteditableEnumEmpty         DdContenteditableEnum = ""
 )
 
@@ -91,13 +103,13 @@ const (
 type DdEnterkeyhintEnum string
 
 const (
-	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
 	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
 	DdEnterkeyhintEnumGo       DdEnterkeyhintEnum = "go"
 	DdEnterkeyhintEnumNext     DdEnterkeyhintEnum = "next"
 	DdEnterkeyhintEnumPrevious DdEnterkeyhintEnum = "previous"
 	DdEnterkeyhintEnumSearch   DdEnterkeyhintEnum = "search"
 	DdEnterkeyhintEnumSend     DdEnterkeyhintEnum = "send"
+	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
 )
 
 type DdHiddenEnum string
@@ -111,7 +123,6 @@ const (
 type DdInputmodeEnum string
 
 const (
-	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
 	DdInputmodeEnumText    DdInputmodeEnum = "text"
 	DdInputmodeEnumUrl     DdInputmodeEnum = "url"
 	DdInputmodeEnumDecimal DdInputmodeEnum = "decimal"
@@ -119,6 +130,7 @@ const (
 	DdInputmodeEnumNone    DdInputmodeEnum = "none"
 	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
 	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
+	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
 )
 
 type DdSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *DdElement) Writingsuggestions(a DdWritingsuggestionsEnum) *DdElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DdElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<dd")); err != nil {
+	if _, err := w.Write([]byte(indent + "<dd")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *DdElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</dd>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</dd>\n")); err != nil {
 		return err
 	}
 

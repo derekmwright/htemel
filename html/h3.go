@@ -14,6 +14,7 @@ type H3Element struct {
 	attributes h3Attrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // H3 creates a tag <h3> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func H3Ternary(condition bool, true htemel.Node, false htemel.Node) *H3Element {
 	return H3(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *H3Element) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *H3Element) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type H3AutocapitalizeEnum string
 
 const (
-	H3AutocapitalizeEnumWords      H3AutocapitalizeEnum = "words"
-	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
-	H3AutocapitalizeEnumNone       H3AutocapitalizeEnum = "none"
 	H3AutocapitalizeEnumOff        H3AutocapitalizeEnum = "off"
 	H3AutocapitalizeEnumOn         H3AutocapitalizeEnum = "on"
 	H3AutocapitalizeEnumSentences  H3AutocapitalizeEnum = "sentences"
+	H3AutocapitalizeEnumWords      H3AutocapitalizeEnum = "words"
+	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
+	H3AutocapitalizeEnumNone       H3AutocapitalizeEnum = "none"
 )
 
 type H3AutocorrectEnum string
@@ -67,37 +79,37 @@ const (
 type H3ContenteditableEnum string
 
 const (
-	H3ContenteditableEnumTrue          H3ContenteditableEnum = "true"
 	H3ContenteditableEnumFalse         H3ContenteditableEnum = "false"
 	H3ContenteditableEnumPlaintextOnly H3ContenteditableEnum = "plaintext-only"
+	H3ContenteditableEnumTrue          H3ContenteditableEnum = "true"
 	H3ContenteditableEnumEmpty         H3ContenteditableEnum = ""
 )
 
 type H3DirEnum string
 
 const (
-	H3DirEnumRtl  H3DirEnum = "rtl"
 	H3DirEnumAuto H3DirEnum = "auto"
 	H3DirEnumLtr  H3DirEnum = "ltr"
+	H3DirEnumRtl  H3DirEnum = "rtl"
 )
 
 type H3DraggableEnum string
 
 const (
-	H3DraggableEnumTrue  H3DraggableEnum = "true"
 	H3DraggableEnumFalse H3DraggableEnum = "false"
+	H3DraggableEnumTrue  H3DraggableEnum = "true"
 )
 
 type H3EnterkeyhintEnum string
 
 const (
+	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
 	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
 	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
 	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
 	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
 	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
 	H3EnterkeyhintEnumSend     H3EnterkeyhintEnum = "send"
-	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
 )
 
 type H3HiddenEnum string
@@ -111,14 +123,14 @@ const (
 type H3InputmodeEnum string
 
 const (
-	H3InputmodeEnumTel     H3InputmodeEnum = "tel"
-	H3InputmodeEnumText    H3InputmodeEnum = "text"
-	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
 	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
 	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
 	H3InputmodeEnumNone    H3InputmodeEnum = "none"
 	H3InputmodeEnumNumeric H3InputmodeEnum = "numeric"
 	H3InputmodeEnumSearch  H3InputmodeEnum = "search"
+	H3InputmodeEnumTel     H3InputmodeEnum = "tel"
+	H3InputmodeEnumText    H3InputmodeEnum = "text"
+	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
 )
 
 type H3SpellcheckEnum string
@@ -140,8 +152,8 @@ const (
 type H3WritingsuggestionsEnum string
 
 const (
-	H3WritingsuggestionsEnumFalse H3WritingsuggestionsEnum = "false"
 	H3WritingsuggestionsEnumTrue  H3WritingsuggestionsEnum = "true"
+	H3WritingsuggestionsEnumFalse H3WritingsuggestionsEnum = "false"
 	H3WritingsuggestionsEnumEmpty H3WritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *H3Element) Writingsuggestions(a H3WritingsuggestionsEnum) *H3Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H3Element) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<h3")); err != nil {
+	if _, err := w.Write([]byte(indent + "<h3")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *H3Element) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</h3>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</h3>\n")); err != nil {
 		return err
 	}
 

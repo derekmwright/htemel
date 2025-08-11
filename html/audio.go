@@ -14,6 +14,7 @@ type AudioElement struct {
 	attributes audioAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Audio creates a tag <audio> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func AudioTernary(condition bool, true htemel.Node, false htemel.Node) *AudioEle
 	return Audio(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *AudioElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *AudioElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type AudioAutocapitalizeEnum string
 
 const (
+	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
+	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 	AudioAutocapitalizeEnumOff        AudioAutocapitalizeEnum = "off"
 	AudioAutocapitalizeEnumOn         AudioAutocapitalizeEnum = "on"
 	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
 	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
-	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
-	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 )
 
 type AudioAutocorrectEnum string
@@ -76,9 +88,9 @@ const (
 type AudioDirEnum string
 
 const (
+	AudioDirEnumAuto AudioDirEnum = "auto"
 	AudioDirEnumLtr  AudioDirEnum = "ltr"
 	AudioDirEnumRtl  AudioDirEnum = "rtl"
-	AudioDirEnumAuto AudioDirEnum = "auto"
 )
 
 type AudioDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type AudioEnterkeyhintEnum string
 
 const (
+	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
+	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
+	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
 	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
 	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
 	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
-	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
-	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
-	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 )
 
 type AudioHiddenEnum string
@@ -140,8 +152,8 @@ const (
 type AudioWritingsuggestionsEnum string
 
 const (
-	AudioWritingsuggestionsEnumTrue  AudioWritingsuggestionsEnum = "true"
 	AudioWritingsuggestionsEnumFalse AudioWritingsuggestionsEnum = "false"
+	AudioWritingsuggestionsEnumTrue  AudioWritingsuggestionsEnum = "true"
 	AudioWritingsuggestionsEnumEmpty AudioWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *AudioElement) Writingsuggestions(a AudioWritingsuggestionsEnum) *AudioE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AudioElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<audio")); err != nil {
+	if _, err := w.Write([]byte(indent + "<audio")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *AudioElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</audio>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</audio>\n")); err != nil {
 		return err
 	}
 

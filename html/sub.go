@@ -14,6 +14,7 @@ type SubElement struct {
 	attributes subAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Sub creates a tag <sub> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func SubTernary(condition bool, true htemel.Node, false htemel.Node) *SubElement
 	return Sub(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *SubElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *SubElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type SubAutocapitalizeEnum string
 
 const (
+	SubAutocapitalizeEnumCharacters SubAutocapitalizeEnum = "characters"
+	SubAutocapitalizeEnumNone       SubAutocapitalizeEnum = "none"
 	SubAutocapitalizeEnumOff        SubAutocapitalizeEnum = "off"
 	SubAutocapitalizeEnumOn         SubAutocapitalizeEnum = "on"
 	SubAutocapitalizeEnumSentences  SubAutocapitalizeEnum = "sentences"
 	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
-	SubAutocapitalizeEnumCharacters SubAutocapitalizeEnum = "characters"
-	SubAutocapitalizeEnumNone       SubAutocapitalizeEnum = "none"
 )
 
 type SubAutocorrectEnum string
@@ -76,9 +88,9 @@ const (
 type SubDirEnum string
 
 const (
+	SubDirEnumAuto SubDirEnum = "auto"
 	SubDirEnumLtr  SubDirEnum = "ltr"
 	SubDirEnumRtl  SubDirEnum = "rtl"
-	SubDirEnumAuto SubDirEnum = "auto"
 )
 
 type SubDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type SubEnterkeyhintEnum string
 
 const (
+	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
 	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
 	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
 	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
 	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
 	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
-	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
 )
 
 type SubHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type SubInputmodeEnum string
 
 const (
+	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
+	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
+	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
 	SubInputmodeEnumNone    SubInputmodeEnum = "none"
 	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
 	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
 	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
 	SubInputmodeEnumText    SubInputmodeEnum = "text"
-	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
-	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
-	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
 )
 
 type SubSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *SubElement) Writingsuggestions(a SubWritingsuggestionsEnum) *SubElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SubElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<sub")); err != nil {
+	if _, err := w.Write([]byte(indent + "<sub")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *SubElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</sub>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</sub>\n")); err != nil {
 		return err
 	}
 

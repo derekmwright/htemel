@@ -14,6 +14,7 @@ type H6Element struct {
 	attributes h6Attrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // H6 creates a tag <h6> instance and returns it for further modification.
@@ -45,6 +46,17 @@ func H6Ternary(condition bool, true htemel.Node, false htemel.Node) *H6Element {
 	return H6(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *H6Element) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *H6Element) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type H6AutocapitalizeEnum string
 
 const (
@@ -59,17 +71,17 @@ const (
 type H6AutocorrectEnum string
 
 const (
-	H6AutocorrectEnumOff   H6AutocorrectEnum = "off"
 	H6AutocorrectEnumOn    H6AutocorrectEnum = "on"
+	H6AutocorrectEnumOff   H6AutocorrectEnum = "off"
 	H6AutocorrectEnumEmpty H6AutocorrectEnum = ""
 )
 
 type H6ContenteditableEnum string
 
 const (
-	H6ContenteditableEnumTrue          H6ContenteditableEnum = "true"
 	H6ContenteditableEnumFalse         H6ContenteditableEnum = "false"
 	H6ContenteditableEnumPlaintextOnly H6ContenteditableEnum = "plaintext-only"
+	H6ContenteditableEnumTrue          H6ContenteditableEnum = "true"
 	H6ContenteditableEnumEmpty         H6ContenteditableEnum = ""
 )
 
@@ -84,8 +96,8 @@ const (
 type H6DraggableEnum string
 
 const (
-	H6DraggableEnumTrue  H6DraggableEnum = "true"
 	H6DraggableEnumFalse H6DraggableEnum = "false"
+	H6DraggableEnumTrue  H6DraggableEnum = "true"
 )
 
 type H6EnterkeyhintEnum string
@@ -111,7 +123,6 @@ const (
 type H6InputmodeEnum string
 
 const (
-	H6InputmodeEnumDecimal H6InputmodeEnum = "decimal"
 	H6InputmodeEnumEmail   H6InputmodeEnum = "email"
 	H6InputmodeEnumNone    H6InputmodeEnum = "none"
 	H6InputmodeEnumNumeric H6InputmodeEnum = "numeric"
@@ -119,21 +130,22 @@ const (
 	H6InputmodeEnumTel     H6InputmodeEnum = "tel"
 	H6InputmodeEnumText    H6InputmodeEnum = "text"
 	H6InputmodeEnumUrl     H6InputmodeEnum = "url"
+	H6InputmodeEnumDecimal H6InputmodeEnum = "decimal"
 )
 
 type H6SpellcheckEnum string
 
 const (
-	H6SpellcheckEnumTrue  H6SpellcheckEnum = "true"
 	H6SpellcheckEnumFalse H6SpellcheckEnum = "false"
+	H6SpellcheckEnumTrue  H6SpellcheckEnum = "true"
 	H6SpellcheckEnumEmpty H6SpellcheckEnum = ""
 )
 
 type H6TranslateEnum string
 
 const (
-	H6TranslateEnumYes   H6TranslateEnum = "yes"
 	H6TranslateEnumNo    H6TranslateEnum = "no"
+	H6TranslateEnumYes   H6TranslateEnum = "yes"
 	H6TranslateEnumEmpty H6TranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *H6Element) Writingsuggestions(a H6WritingsuggestionsEnum) *H6Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H6Element) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<h6")); err != nil {
+	if _, err := w.Write([]byte(indent + "<h6")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *H6Element) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</h6>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</h6>\n")); err != nil {
 		return err
 	}
 

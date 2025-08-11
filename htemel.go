@@ -3,6 +3,7 @@ package htemel
 import (
 	"fmt"
 	"io"
+	"strings"
 
 	"golang.org/x/net/html"
 )
@@ -10,21 +11,36 @@ import (
 // Node defines the interface that must be implemented in order to render elements.
 type Node interface {
 	Render(w io.Writer) error
+	AddIndent(i int)
+	Indent() int
 }
 
 // GroupElement is a struct that backs the Group function.
 type GroupElement struct {
 	children []Node
+	indent   int
 }
 
 // Group is a generic wrapper that can be used to wrap one or more elements that may not have a suitable parent type.
 func Group(children ...Node) *GroupElement {
-	return &GroupElement{children}
+	return &GroupElement{
+		children: children,
+	}
+}
+
+// AddIndent should not increase indent on a pseudo-element.
+func (e *GroupElement) AddIndent(i int) {
+	e.indent = i
+}
+
+func (e *GroupElement) Indent() int {
+	return e.indent
 }
 
 // Render implements the Node interface by calling Render on all child nodes.
 func (e *GroupElement) Render(w io.Writer) error {
 	for _, child := range e.children {
+		child.AddIndent(e.indent)
 		if err := child.Render(w); err != nil {
 			return err
 		}
@@ -39,6 +55,7 @@ type GenericElement struct {
 	attrs    map[string]any
 	void     bool
 	children []Node
+	indent   int
 }
 
 // Generic element is provided as an escape-hatch for when the provided generated elements are not sufficient.
@@ -48,7 +65,6 @@ func Generic(tag string, attrs map[string]any, children ...Node) *GenericElement
 	return &GenericElement{
 		tag:      tag,
 		attrs:    attrs,
-		void:     false,
 		children: children,
 	}
 }
@@ -67,8 +83,18 @@ func GenericVoid(tag string, attrs map[string]any) *GenericElement {
 	}
 }
 
+func (e *GenericElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
+func (e *GenericElement) Indent() int {
+	return e.indent
+}
+
 func (e *GenericElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte("<" + e.tag)); err != nil {
+	indent := strings.Repeat("  ", e.indent)
+
+	if _, err := w.Write([]byte(indent + "<" + e.tag)); err != nil {
 		return err
 	}
 
@@ -84,7 +110,7 @@ func (e *GenericElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 
@@ -93,12 +119,13 @@ func (e *GenericElement) Render(w io.Writer) error {
 	}
 
 	for _, child := range e.children {
+		child.AddIndent(e.indent)
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</" + e.tag + ">")); err != nil {
+	if _, err := w.Write([]byte(indent + "</" + e.tag + ">\n")); err != nil {
 		return err
 	}
 
@@ -108,6 +135,7 @@ func (e *GenericElement) Render(w io.Writer) error {
 type TextElement struct {
 	text     string
 	children []Node
+	indent   int
 }
 
 func TextUnsafe(text string, children ...Node) *TextElement {
@@ -124,15 +152,29 @@ func Text(text string, children ...Node) *TextElement {
 	}
 }
 
+func (e *TextElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
+func (e *TextElement) Indent() int {
+	return e.indent
+}
+
 func (e *TextElement) Render(w io.Writer) error {
-	if _, err := w.Write([]byte(e.text)); err != nil {
+	indent := strings.Repeat("  ", e.indent)
+	if _, err := w.Write([]byte(indent + e.text)); err != nil {
 		return err
 	}
 
 	for _, child := range e.children {
+		child.AddIndent(e.indent)
 		if err := child.Render(w); err != nil {
 			return err
 		}
+	}
+
+	if _, err := w.Write([]byte("\n")); err != nil {
+		return err
 	}
 
 	return nil

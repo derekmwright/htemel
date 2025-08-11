@@ -14,6 +14,7 @@ type SampElement struct {
 	attributes sampAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Samp creates a tag <samp> instance and returns it for further modification.
@@ -45,6 +46,17 @@ func SampTernary(condition bool, true htemel.Node, false htemel.Node) *SampEleme
 	return Samp(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *SampElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *SampElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type SampAutocapitalizeEnum string
 
 const (
@@ -67,9 +79,9 @@ const (
 type SampContenteditableEnum string
 
 const (
+	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
 	SampContenteditableEnumPlaintextOnly SampContenteditableEnum = "plaintext-only"
 	SampContenteditableEnumTrue          SampContenteditableEnum = "true"
-	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
 	SampContenteditableEnumEmpty         SampContenteditableEnum = ""
 )
 
@@ -91,41 +103,41 @@ const (
 type SampEnterkeyhintEnum string
 
 const (
+	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
 	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
 	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
 	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
 	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
 	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
-	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 )
 
 type SampHiddenEnum string
 
 const (
-	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
 	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
+	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
 	SampHiddenEnumEmpty      SampHiddenEnum = ""
 )
 
 type SampInputmodeEnum string
 
 const (
-	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
-	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
-	SampInputmodeEnumNone    SampInputmodeEnum = "none"
 	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
 	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
 	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
 	SampInputmodeEnumText    SampInputmodeEnum = "text"
 	SampInputmodeEnumUrl     SampInputmodeEnum = "url"
+	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
+	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
+	SampInputmodeEnumNone    SampInputmodeEnum = "none"
 )
 
 type SampSpellcheckEnum string
 
 const (
-	SampSpellcheckEnumTrue  SampSpellcheckEnum = "true"
 	SampSpellcheckEnumFalse SampSpellcheckEnum = "false"
+	SampSpellcheckEnumTrue  SampSpellcheckEnum = "true"
 	SampSpellcheckEnumEmpty SampSpellcheckEnum = ""
 )
 
@@ -140,8 +152,8 @@ const (
 type SampWritingsuggestionsEnum string
 
 const (
-	SampWritingsuggestionsEnumTrue  SampWritingsuggestionsEnum = "true"
 	SampWritingsuggestionsEnumFalse SampWritingsuggestionsEnum = "false"
+	SampWritingsuggestionsEnumTrue  SampWritingsuggestionsEnum = "true"
 	SampWritingsuggestionsEnumEmpty SampWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *SampElement) Writingsuggestions(a SampWritingsuggestionsEnum) *SampElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SampElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<samp")); err != nil {
+	if _, err := w.Write([]byte(indent + "<samp")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *SampElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</samp>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</samp>\n")); err != nil {
 		return err
 	}
 

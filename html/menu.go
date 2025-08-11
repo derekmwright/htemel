@@ -14,6 +14,7 @@ type MenuElement struct {
 	attributes menuAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Menu creates a tag <menu> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func MenuTernary(condition bool, true htemel.Node, false htemel.Node) *MenuEleme
 	return Menu(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *MenuElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *MenuElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type MenuAutocapitalizeEnum string
 
 const (
-	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
-	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
 	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
 	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
+	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
+	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 )
 
 type MenuAutocorrectEnum string
@@ -67,18 +79,18 @@ const (
 type MenuContenteditableEnum string
 
 const (
-	MenuContenteditableEnumTrue          MenuContenteditableEnum = "true"
 	MenuContenteditableEnumFalse         MenuContenteditableEnum = "false"
 	MenuContenteditableEnumPlaintextOnly MenuContenteditableEnum = "plaintext-only"
+	MenuContenteditableEnumTrue          MenuContenteditableEnum = "true"
 	MenuContenteditableEnumEmpty         MenuContenteditableEnum = ""
 )
 
 type MenuDirEnum string
 
 const (
+	MenuDirEnumRtl  MenuDirEnum = "rtl"
 	MenuDirEnumAuto MenuDirEnum = "auto"
 	MenuDirEnumLtr  MenuDirEnum = "ltr"
-	MenuDirEnumRtl  MenuDirEnum = "rtl"
 )
 
 type MenuDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
+	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
+	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
 	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
 	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
 	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
-	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
-	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 )
 
 type MenuHiddenEnum string
@@ -111,6 +123,7 @@ const (
 type MenuInputmodeEnum string
 
 const (
+	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
 	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
 	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
@@ -118,7 +131,6 @@ const (
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
 	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
 	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
-	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 )
 
 type MenuSpellcheckEnum string
@@ -132,8 +144,8 @@ const (
 type MenuTranslateEnum string
 
 const (
-	MenuTranslateEnumNo    MenuTranslateEnum = "no"
 	MenuTranslateEnumYes   MenuTranslateEnum = "yes"
+	MenuTranslateEnumNo    MenuTranslateEnum = "no"
 	MenuTranslateEnumEmpty MenuTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *MenuElement) Writingsuggestions(a MenuWritingsuggestionsEnum) *MenuElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MenuElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<menu")); err != nil {
+	if _, err := w.Write([]byte(indent + "<menu")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *MenuElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</menu>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</menu>\n")); err != nil {
 		return err
 	}
 

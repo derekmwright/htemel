@@ -13,6 +13,7 @@ type HrElement struct {
 	attributes hrAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Hr creates a tag <hr> instance and returns it for further modification.
@@ -36,15 +37,26 @@ func HrIf(condition bool) *HrElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *HrElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *HrElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type HrAutocapitalizeEnum string
 
 const (
+	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
+	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
 	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
 	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
-	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
-	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
 )
 
 type HrAutocorrectEnum string
@@ -82,13 +94,13 @@ const (
 type HrEnterkeyhintEnum string
 
 const (
+	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
 	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
 	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
 	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
 	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
 	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
-	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 )
 
 type HrHiddenEnum string
@@ -318,11 +330,13 @@ func (e *HrElement) Writingsuggestions(a HrWritingsuggestionsEnum) *HrElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HrElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<hr")); err != nil {
+	if _, err := w.Write([]byte(indent + "<hr")); err != nil {
 		return err
 	}
 
@@ -352,7 +366,7 @@ func (e *HrElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

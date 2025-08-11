@@ -13,6 +13,7 @@ type BaseElement struct {
 	attributes baseAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Base creates a tag <base> instance and returns it for further modification.
@@ -36,31 +37,42 @@ func BaseIf(condition bool) *BaseElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *BaseElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *BaseElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type BaseAutocapitalizeEnum string
 
 const (
+	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
 	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
 	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
 	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
 	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
-	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
 )
 
 type BaseAutocorrectEnum string
 
 const (
-	BaseAutocorrectEnumOff   BaseAutocorrectEnum = "off"
 	BaseAutocorrectEnumOn    BaseAutocorrectEnum = "on"
+	BaseAutocorrectEnumOff   BaseAutocorrectEnum = "off"
 	BaseAutocorrectEnumEmpty BaseAutocorrectEnum = ""
 )
 
 type BaseContenteditableEnum string
 
 const (
-	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
 	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
 	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
+	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
 	BaseContenteditableEnumEmpty         BaseContenteditableEnum = ""
 )
 
@@ -82,20 +94,20 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
+	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
 	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
 	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
-	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 )
 
 type BaseHiddenEnum string
 
 const (
-	BaseHiddenEnumHidden     BaseHiddenEnum = "hidden"
 	BaseHiddenEnumUntilFound BaseHiddenEnum = "until-found"
+	BaseHiddenEnumHidden     BaseHiddenEnum = "hidden"
 	BaseHiddenEnumEmpty      BaseHiddenEnum = ""
 )
 
@@ -330,11 +342,13 @@ func (e *BaseElement) Writingsuggestions(a BaseWritingsuggestionsEnum) *BaseElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BaseElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<base")); err != nil {
+	if _, err := w.Write([]byte(indent + "<base")); err != nil {
 		return err
 	}
 
@@ -364,7 +378,7 @@ func (e *BaseElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

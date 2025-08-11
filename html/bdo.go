@@ -14,6 +14,7 @@ type BdoElement struct {
 	attributes bdoAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Bdo creates a tag <bdo> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func BdoTernary(condition bool, true htemel.Node, false htemel.Node) *BdoElement
 	return Bdo(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *BdoElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *BdoElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type BdoAutocapitalizeEnum string
 
 const (
-	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
-	BdoAutocapitalizeEnumNone       BdoAutocapitalizeEnum = "none"
-	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
 	BdoAutocapitalizeEnumOn         BdoAutocapitalizeEnum = "on"
 	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
 	BdoAutocapitalizeEnumWords      BdoAutocapitalizeEnum = "words"
+	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
+	BdoAutocapitalizeEnumNone       BdoAutocapitalizeEnum = "none"
+	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
 )
 
 type BdoAutocorrectEnum string
@@ -91,34 +103,34 @@ const (
 type BdoEnterkeyhintEnum string
 
 const (
+	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
 	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
 	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
 	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
 	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
 	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
-	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 )
 
 type BdoHiddenEnum string
 
 const (
-	BdoHiddenEnumHidden     BdoHiddenEnum = "hidden"
 	BdoHiddenEnumUntilFound BdoHiddenEnum = "until-found"
+	BdoHiddenEnumHidden     BdoHiddenEnum = "hidden"
 	BdoHiddenEnumEmpty      BdoHiddenEnum = ""
 )
 
 type BdoInputmodeEnum string
 
 const (
+	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
+	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
+	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
 	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
 	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
 	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
 	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
 	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
-	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
-	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
-	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
 )
 
 type BdoSpellcheckEnum string
@@ -140,8 +152,8 @@ const (
 type BdoWritingsuggestionsEnum string
 
 const (
-	BdoWritingsuggestionsEnumTrue  BdoWritingsuggestionsEnum = "true"
 	BdoWritingsuggestionsEnumFalse BdoWritingsuggestionsEnum = "false"
+	BdoWritingsuggestionsEnumTrue  BdoWritingsuggestionsEnum = "true"
 	BdoWritingsuggestionsEnumEmpty BdoWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *BdoElement) Writingsuggestions(a BdoWritingsuggestionsEnum) *BdoElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BdoElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<bdo")); err != nil {
+	if _, err := w.Write([]byte(indent + "<bdo")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *BdoElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</bdo>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</bdo>\n")); err != nil {
 		return err
 	}
 

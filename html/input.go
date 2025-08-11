@@ -13,6 +13,7 @@ type InputElement struct {
 	attributes inputAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Input creates a tag <input> instance and returns it for further modification.
@@ -36,6 +37,17 @@ func InputIf(condition bool) *InputElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *InputElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *InputElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type InputAutocapitalizeEnum string
 
 const (
@@ -50,26 +62,26 @@ const (
 type InputAutocorrectEnum string
 
 const (
-	InputAutocorrectEnumOff   InputAutocorrectEnum = "off"
 	InputAutocorrectEnumOn    InputAutocorrectEnum = "on"
+	InputAutocorrectEnumOff   InputAutocorrectEnum = "off"
 	InputAutocorrectEnumEmpty InputAutocorrectEnum = ""
 )
 
 type InputContenteditableEnum string
 
 const (
-	InputContenteditableEnumFalse         InputContenteditableEnum = "false"
 	InputContenteditableEnumPlaintextOnly InputContenteditableEnum = "plaintext-only"
 	InputContenteditableEnumTrue          InputContenteditableEnum = "true"
+	InputContenteditableEnumFalse         InputContenteditableEnum = "false"
 	InputContenteditableEnumEmpty         InputContenteditableEnum = ""
 )
 
 type InputDirEnum string
 
 const (
+	InputDirEnumRtl  InputDirEnum = "rtl"
 	InputDirEnumAuto InputDirEnum = "auto"
 	InputDirEnumLtr  InputDirEnum = "ltr"
-	InputDirEnumRtl  InputDirEnum = "rtl"
 )
 
 type InputDraggableEnum string
@@ -82,13 +94,13 @@ const (
 type InputEnterkeyhintEnum string
 
 const (
-	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
-	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
 	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
 	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
 	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
 	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
+	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
+	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
 )
 
 type InputHiddenEnum string
@@ -102,6 +114,7 @@ const (
 type InputInputmodeEnum string
 
 const (
+	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 	InputInputmodeEnumNone    InputInputmodeEnum = "none"
 	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
 	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
@@ -109,22 +122,21 @@ const (
 	InputInputmodeEnumText    InputInputmodeEnum = "text"
 	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
 	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
-	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 )
 
 type InputSpellcheckEnum string
 
 const (
-	InputSpellcheckEnumFalse InputSpellcheckEnum = "false"
 	InputSpellcheckEnumTrue  InputSpellcheckEnum = "true"
+	InputSpellcheckEnumFalse InputSpellcheckEnum = "false"
 	InputSpellcheckEnumEmpty InputSpellcheckEnum = ""
 )
 
 type InputTranslateEnum string
 
 const (
-	InputTranslateEnumYes   InputTranslateEnum = "yes"
 	InputTranslateEnumNo    InputTranslateEnum = "no"
+	InputTranslateEnumYes   InputTranslateEnum = "yes"
 	InputTranslateEnumEmpty InputTranslateEnum = ""
 )
 
@@ -318,11 +330,13 @@ func (e *InputElement) Writingsuggestions(a InputWritingsuggestionsEnum) *InputE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *InputElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<input")); err != nil {
+	if _, err := w.Write([]byte(indent + "<input")); err != nil {
 		return err
 	}
 
@@ -352,7 +366,7 @@ func (e *InputElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

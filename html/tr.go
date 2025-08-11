@@ -14,6 +14,7 @@ type TrElement struct {
 	attributes trAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Tr creates a tag <tr> instance and returns it for further modification.
@@ -45,31 +46,42 @@ func TrTernary(condition bool, true htemel.Node, false htemel.Node) *TrElement {
 	return Tr(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *TrElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *TrElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type TrAutocapitalizeEnum string
 
 const (
+	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
 	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
 	TrAutocapitalizeEnumOff        TrAutocapitalizeEnum = "off"
 	TrAutocapitalizeEnumOn         TrAutocapitalizeEnum = "on"
 	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
 	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
-	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
 )
 
 type TrAutocorrectEnum string
 
 const (
-	TrAutocorrectEnumOn    TrAutocorrectEnum = "on"
 	TrAutocorrectEnumOff   TrAutocorrectEnum = "off"
+	TrAutocorrectEnumOn    TrAutocorrectEnum = "on"
 	TrAutocorrectEnumEmpty TrAutocorrectEnum = ""
 )
 
 type TrContenteditableEnum string
 
 const (
+	TrContenteditableEnumFalse         TrContenteditableEnum = "false"
 	TrContenteditableEnumPlaintextOnly TrContenteditableEnum = "plaintext-only"
 	TrContenteditableEnumTrue          TrContenteditableEnum = "true"
-	TrContenteditableEnumFalse         TrContenteditableEnum = "false"
 	TrContenteditableEnumEmpty         TrContenteditableEnum = ""
 )
 
@@ -84,20 +96,20 @@ const (
 type TrDraggableEnum string
 
 const (
-	TrDraggableEnumTrue  TrDraggableEnum = "true"
 	TrDraggableEnumFalse TrDraggableEnum = "false"
+	TrDraggableEnumTrue  TrDraggableEnum = "true"
 )
 
 type TrEnterkeyhintEnum string
 
 const (
-	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
-	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
-	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
 	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
 	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
 	TrEnterkeyhintEnumGo       TrEnterkeyhintEnum = "go"
 	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
+	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
+	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
+	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
 )
 
 type TrHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type TrInputmodeEnum string
 
 const (
+	TrInputmodeEnumUrl     TrInputmodeEnum = "url"
+	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
+	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
 	TrInputmodeEnumNone    TrInputmodeEnum = "none"
 	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
 	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
 	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
 	TrInputmodeEnumText    TrInputmodeEnum = "text"
-	TrInputmodeEnumUrl     TrInputmodeEnum = "url"
-	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
-	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
 )
 
 type TrSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *TrElement) Writingsuggestions(a TrWritingsuggestionsEnum) *TrElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TrElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<tr")); err != nil {
+	if _, err := w.Write([]byte(indent + "<tr")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *TrElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</tr>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</tr>\n")); err != nil {
 		return err
 	}
 

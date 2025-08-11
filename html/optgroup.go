@@ -14,6 +14,7 @@ type OptgroupElement struct {
 	attributes optgroupAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Optgroup creates a tag <optgroup> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func OptgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Optgr
 	return Optgroup(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *OptgroupElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *OptgroupElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type OptgroupAutocapitalizeEnum string
 
 const (
+	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
+	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 	OptgroupAutocapitalizeEnumOff        OptgroupAutocapitalizeEnum = "off"
 	OptgroupAutocapitalizeEnumOn         OptgroupAutocapitalizeEnum = "on"
 	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
 	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
-	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
-	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 )
 
 type OptgroupAutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type OptgroupContenteditableEnum string
 
 const (
+	OptgroupContenteditableEnumFalse         OptgroupContenteditableEnum = "false"
 	OptgroupContenteditableEnumPlaintextOnly OptgroupContenteditableEnum = "plaintext-only"
 	OptgroupContenteditableEnumTrue          OptgroupContenteditableEnum = "true"
-	OptgroupContenteditableEnumFalse         OptgroupContenteditableEnum = "false"
 	OptgroupContenteditableEnumEmpty         OptgroupContenteditableEnum = ""
 )
 
@@ -91,34 +103,34 @@ const (
 type OptgroupEnterkeyhintEnum string
 
 const (
+	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
 	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
 	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
 	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
 	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
 	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
-	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
 )
 
 type OptgroupHiddenEnum string
 
 const (
-	OptgroupHiddenEnumUntilFound OptgroupHiddenEnum = "until-found"
 	OptgroupHiddenEnumHidden     OptgroupHiddenEnum = "hidden"
+	OptgroupHiddenEnumUntilFound OptgroupHiddenEnum = "until-found"
 	OptgroupHiddenEnumEmpty      OptgroupHiddenEnum = ""
 )
 
 type OptgroupInputmodeEnum string
 
 const (
-	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
-	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
-	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
-	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
 	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
 	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
 	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
+	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
+	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
+	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
+	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 )
 
 type OptgroupSpellcheckEnum string
@@ -140,8 +152,8 @@ const (
 type OptgroupWritingsuggestionsEnum string
 
 const (
-	OptgroupWritingsuggestionsEnumFalse OptgroupWritingsuggestionsEnum = "false"
 	OptgroupWritingsuggestionsEnumTrue  OptgroupWritingsuggestionsEnum = "true"
+	OptgroupWritingsuggestionsEnumFalse OptgroupWritingsuggestionsEnum = "false"
 	OptgroupWritingsuggestionsEnumEmpty OptgroupWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *OptgroupElement) Writingsuggestions(a OptgroupWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *OptgroupElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<optgroup")); err != nil {
+	if _, err := w.Write([]byte(indent + "<optgroup")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *OptgroupElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</optgroup>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</optgroup>\n")); err != nil {
 		return err
 	}
 

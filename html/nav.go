@@ -14,6 +14,7 @@ type NavElement struct {
 	attributes navAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Nav creates a tag <nav> instance and returns it for further modification.
@@ -45,6 +46,17 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 	return Nav(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *NavElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *NavElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type NavAutocapitalizeEnum string
 
 const (
@@ -67,18 +79,18 @@ const (
 type NavContenteditableEnum string
 
 const (
-	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
+	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumEmpty         NavContenteditableEnum = ""
 )
 
 type NavDirEnum string
 
 const (
-	NavDirEnumAuto NavDirEnum = "auto"
 	NavDirEnumLtr  NavDirEnum = "ltr"
 	NavDirEnumRtl  NavDirEnum = "rtl"
+	NavDirEnumAuto NavDirEnum = "auto"
 )
 
 type NavDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
-	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
-	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
 	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
 	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
 	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
+	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
+	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 )
 
 type NavHiddenEnum string
@@ -111,21 +123,21 @@ const (
 type NavInputmodeEnum string
 
 const (
-	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
-	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
-	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 	NavInputmodeEnumText    NavInputmodeEnum = "text"
 	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
 	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
 	NavInputmodeEnumNone    NavInputmodeEnum = "none"
+	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
+	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
+	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 )
 
 type NavSpellcheckEnum string
 
 const (
-	NavSpellcheckEnumFalse NavSpellcheckEnum = "false"
 	NavSpellcheckEnumTrue  NavSpellcheckEnum = "true"
+	NavSpellcheckEnumFalse NavSpellcheckEnum = "false"
 	NavSpellcheckEnumEmpty NavSpellcheckEnum = ""
 )
 
@@ -140,8 +152,8 @@ const (
 type NavWritingsuggestionsEnum string
 
 const (
-	NavWritingsuggestionsEnumFalse NavWritingsuggestionsEnum = "false"
 	NavWritingsuggestionsEnumTrue  NavWritingsuggestionsEnum = "true"
+	NavWritingsuggestionsEnumFalse NavWritingsuggestionsEnum = "false"
 	NavWritingsuggestionsEnumEmpty NavWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *NavElement) Writingsuggestions(a NavWritingsuggestionsEnum) *NavElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *NavElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<nav")); err != nil {
+	if _, err := w.Write([]byte(indent + "<nav")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *NavElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</nav>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</nav>\n")); err != nil {
 		return err
 	}
 

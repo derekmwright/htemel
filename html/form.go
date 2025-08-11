@@ -14,6 +14,7 @@ type FormElement struct {
 	attributes formAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Form creates a tag <form> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func FormTernary(condition bool, true htemel.Node, false htemel.Node) *FormEleme
 	return Form(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *FormElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *FormElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type FormAutocapitalizeEnum string
 
 const (
+	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
 	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
 	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
-	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 )
 
 type FormAutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type FormContenteditableEnum string
 
 const (
-	FormContenteditableEnumTrue          FormContenteditableEnum = "true"
 	FormContenteditableEnumFalse         FormContenteditableEnum = "false"
 	FormContenteditableEnumPlaintextOnly FormContenteditableEnum = "plaintext-only"
+	FormContenteditableEnumTrue          FormContenteditableEnum = "true"
 	FormContenteditableEnumEmpty         FormContenteditableEnum = ""
 )
 
@@ -103,8 +115,8 @@ const (
 type FormHiddenEnum string
 
 const (
-	FormHiddenEnumUntilFound FormHiddenEnum = "until-found"
 	FormHiddenEnumHidden     FormHiddenEnum = "hidden"
+	FormHiddenEnumUntilFound FormHiddenEnum = "until-found"
 	FormHiddenEnumEmpty      FormHiddenEnum = ""
 )
 
@@ -132,8 +144,8 @@ const (
 type FormTranslateEnum string
 
 const (
-	FormTranslateEnumYes   FormTranslateEnum = "yes"
 	FormTranslateEnumNo    FormTranslateEnum = "no"
+	FormTranslateEnumYes   FormTranslateEnum = "yes"
 	FormTranslateEnumEmpty FormTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *FormElement) Writingsuggestions(a FormWritingsuggestionsEnum) *FormElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *FormElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<form")); err != nil {
+	if _, err := w.Write([]byte(indent + "<form")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *FormElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</form>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</form>\n")); err != nil {
 		return err
 	}
 

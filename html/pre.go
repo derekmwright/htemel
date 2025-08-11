@@ -14,6 +14,7 @@ type PreElement struct {
 	attributes preAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Pre creates a tag <pre> instance and returns it for further modification.
@@ -43,6 +44,17 @@ func PreTernary(condition bool, true htemel.Node, false htemel.Node) *PreElement
 	}
 
 	return Pre(false)
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *PreElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *PreElement) AddIndent(i int) {
+	e.indent = i + 1
 }
 
 type PreAutocapitalizeEnum string
@@ -76,9 +88,9 @@ const (
 type PreDirEnum string
 
 const (
+	PreDirEnumRtl  PreDirEnum = "rtl"
 	PreDirEnumAuto PreDirEnum = "auto"
 	PreDirEnumLtr  PreDirEnum = "ltr"
-	PreDirEnumRtl  PreDirEnum = "rtl"
 )
 
 type PreDraggableEnum string
@@ -91,41 +103,41 @@ const (
 type PreEnterkeyhintEnum string
 
 const (
-	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
 	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
 	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
 	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
 	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
 	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
+	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 )
 
 type PreHiddenEnum string
 
 const (
-	PreHiddenEnumUntilFound PreHiddenEnum = "until-found"
 	PreHiddenEnumHidden     PreHiddenEnum = "hidden"
+	PreHiddenEnumUntilFound PreHiddenEnum = "until-found"
 	PreHiddenEnumEmpty      PreHiddenEnum = ""
 )
 
 type PreInputmodeEnum string
 
 const (
-	PreInputmodeEnumText    PreInputmodeEnum = "text"
-	PreInputmodeEnumUrl     PreInputmodeEnum = "url"
 	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
 	PreInputmodeEnumEmail   PreInputmodeEnum = "email"
 	PreInputmodeEnumNone    PreInputmodeEnum = "none"
 	PreInputmodeEnumNumeric PreInputmodeEnum = "numeric"
 	PreInputmodeEnumSearch  PreInputmodeEnum = "search"
 	PreInputmodeEnumTel     PreInputmodeEnum = "tel"
+	PreInputmodeEnumText    PreInputmodeEnum = "text"
+	PreInputmodeEnumUrl     PreInputmodeEnum = "url"
 )
 
 type PreSpellcheckEnum string
 
 const (
-	PreSpellcheckEnumFalse PreSpellcheckEnum = "false"
 	PreSpellcheckEnumTrue  PreSpellcheckEnum = "true"
+	PreSpellcheckEnumFalse PreSpellcheckEnum = "false"
 	PreSpellcheckEnumEmpty PreSpellcheckEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *PreElement) Writingsuggestions(a PreWritingsuggestionsEnum) *PreElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *PreElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<pre")); err != nil {
+	if _, err := w.Write([]byte(indent + "<pre")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *PreElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</pre>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</pre>\n")); err != nil {
 		return err
 	}
 

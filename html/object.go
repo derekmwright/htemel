@@ -14,6 +14,7 @@ type ObjectElement struct {
 	attributes objectAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Object creates a tag <object> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func ObjectTernary(condition bool, true htemel.Node, false htemel.Node) *ObjectE
 	return Object(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *ObjectElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *ObjectElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type ObjectAutocapitalizeEnum string
 
 const (
+	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
 	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
 	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
 	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
 	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
-	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
 )
 
 type ObjectAutocorrectEnum string
@@ -91,13 +103,13 @@ const (
 type ObjectEnterkeyhintEnum string
 
 const (
-	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
-	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
-	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 	ObjectEnterkeyhintEnumNext     ObjectEnterkeyhintEnum = "next"
 	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
 	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
 	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
+	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
+	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
+	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 )
 
 type ObjectHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type ObjectInputmodeEnum string
 
 const (
-	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
-	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
 	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
 	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
 	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
 	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
 	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
+	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
+	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 )
 
 type ObjectSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *ObjectElement) Writingsuggestions(a ObjectWritingsuggestionsEnum) *Obje
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ObjectElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<object")); err != nil {
+	if _, err := w.Write([]byte(indent + "<object")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *ObjectElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</object>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</object>\n")); err != nil {
 		return err
 	}
 

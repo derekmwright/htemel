@@ -14,6 +14,7 @@ type TdElement struct {
 	attributes tdAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Td creates a tag <td> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func TdTernary(condition bool, true htemel.Node, false htemel.Node) *TdElement {
 	return Td(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *TdElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *TdElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type TdAutocapitalizeEnum string
 
 const (
+	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
+	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
 	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
 	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
 	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
 	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
-	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
-	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
 )
 
 type TdAutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type TdContenteditableEnum string
 
 const (
-	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
 	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
 	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
+	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
 	TdContenteditableEnumEmpty         TdContenteditableEnum = ""
 )
 
@@ -103,22 +115,22 @@ const (
 type TdHiddenEnum string
 
 const (
-	TdHiddenEnumHidden     TdHiddenEnum = "hidden"
 	TdHiddenEnumUntilFound TdHiddenEnum = "until-found"
+	TdHiddenEnumHidden     TdHiddenEnum = "hidden"
 	TdHiddenEnumEmpty      TdHiddenEnum = ""
 )
 
 type TdInputmodeEnum string
 
 const (
+	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
+	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
+	TdInputmodeEnumText    TdInputmodeEnum = "text"
 	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
 	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
 	TdInputmodeEnumNone    TdInputmodeEnum = "none"
 	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
-	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
-	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
-	TdInputmodeEnumText    TdInputmodeEnum = "text"
 )
 
 type TdSpellcheckEnum string
@@ -140,8 +152,8 @@ const (
 type TdWritingsuggestionsEnum string
 
 const (
-	TdWritingsuggestionsEnumTrue  TdWritingsuggestionsEnum = "true"
 	TdWritingsuggestionsEnumFalse TdWritingsuggestionsEnum = "false"
+	TdWritingsuggestionsEnumTrue  TdWritingsuggestionsEnum = "true"
 	TdWritingsuggestionsEnumEmpty TdWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *TdElement) Writingsuggestions(a TdWritingsuggestionsEnum) *TdElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TdElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<td")); err != nil {
+	if _, err := w.Write([]byte(indent + "<td")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *TdElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</td>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</td>\n")); err != nil {
 		return err
 	}
 

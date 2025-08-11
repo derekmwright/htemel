@@ -13,6 +13,7 @@ type BrElement struct {
 	attributes brAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Br creates a tag <br> instance and returns it for further modification.
@@ -36,15 +37,26 @@ func BrIf(condition bool) *BrElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *BrElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *BrElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type BrAutocapitalizeEnum string
 
 const (
-	BrAutocapitalizeEnumOn         BrAutocapitalizeEnum = "on"
-	BrAutocapitalizeEnumSentences  BrAutocapitalizeEnum = "sentences"
-	BrAutocapitalizeEnumWords      BrAutocapitalizeEnum = "words"
 	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
 	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 	BrAutocapitalizeEnumOff        BrAutocapitalizeEnum = "off"
+	BrAutocapitalizeEnumOn         BrAutocapitalizeEnum = "on"
+	BrAutocapitalizeEnumSentences  BrAutocapitalizeEnum = "sentences"
+	BrAutocapitalizeEnumWords      BrAutocapitalizeEnum = "words"
 )
 
 type BrAutocorrectEnum string
@@ -82,13 +94,13 @@ const (
 type BrEnterkeyhintEnum string
 
 const (
-	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
 	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
 	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
 	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
 	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
+	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 )
 
 type BrHiddenEnum string
@@ -102,6 +114,7 @@ const (
 type BrInputmodeEnum string
 
 const (
+	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
 	BrInputmodeEnumNone    BrInputmodeEnum = "none"
 	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
 	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
@@ -109,7 +122,6 @@ const (
 	BrInputmodeEnumText    BrInputmodeEnum = "text"
 	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
 	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
-	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
 )
 
 type BrSpellcheckEnum string
@@ -123,8 +135,8 @@ const (
 type BrTranslateEnum string
 
 const (
-	BrTranslateEnumYes   BrTranslateEnum = "yes"
 	BrTranslateEnumNo    BrTranslateEnum = "no"
+	BrTranslateEnumYes   BrTranslateEnum = "yes"
 	BrTranslateEnumEmpty BrTranslateEnum = ""
 )
 
@@ -318,11 +330,13 @@ func (e *BrElement) Writingsuggestions(a BrWritingsuggestionsEnum) *BrElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BrElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<br")); err != nil {
+	if _, err := w.Write([]byte(indent + "<br")); err != nil {
 		return err
 	}
 
@@ -352,7 +366,7 @@ func (e *BrElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

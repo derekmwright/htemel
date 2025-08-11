@@ -14,6 +14,7 @@ type UlElement struct {
 	attributes ulAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Ul creates a tag <ul> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func UlTernary(condition bool, true htemel.Node, false htemel.Node) *UlElement {
 	return Ul(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *UlElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *UlElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type UlAutocapitalizeEnum string
 
 const (
-	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
-	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 	UlAutocapitalizeEnumNone       UlAutocapitalizeEnum = "none"
 	UlAutocapitalizeEnumOff        UlAutocapitalizeEnum = "off"
 	UlAutocapitalizeEnumOn         UlAutocapitalizeEnum = "on"
 	UlAutocapitalizeEnumSentences  UlAutocapitalizeEnum = "sentences"
+	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
+	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 )
 
 type UlAutocorrectEnum string
@@ -91,13 +103,13 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
-	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
-	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
-	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
 	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
 	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
 	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
+	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
+	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
+	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
 )
 
 type UlHiddenEnum string
@@ -132,8 +144,8 @@ const (
 type UlTranslateEnum string
 
 const (
-	UlTranslateEnumYes   UlTranslateEnum = "yes"
 	UlTranslateEnumNo    UlTranslateEnum = "no"
+	UlTranslateEnumYes   UlTranslateEnum = "yes"
 	UlTranslateEnumEmpty UlTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *UlElement) Writingsuggestions(a UlWritingsuggestionsEnum) *UlElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *UlElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<ul")); err != nil {
+	if _, err := w.Write([]byte(indent + "<ul")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *UlElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</ul>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</ul>\n")); err != nil {
 		return err
 	}
 

@@ -14,6 +14,7 @@ type AbbrElement struct {
 	attributes abbrAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Abbr creates a tag <abbr> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrEleme
 	return Abbr(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *AbbrElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *AbbrElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type AbbrAutocapitalizeEnum string
 
 const (
-	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
-	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
-	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
 	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
 	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
 	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
+	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
+	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
+	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
 )
 
 type AbbrAutocorrectEnum string
@@ -76,9 +88,9 @@ const (
 type AbbrDirEnum string
 
 const (
-	AbbrDirEnumAuto AbbrDirEnum = "auto"
 	AbbrDirEnumLtr  AbbrDirEnum = "ltr"
 	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
+	AbbrDirEnumAuto AbbrDirEnum = "auto"
 )
 
 type AbbrDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type AbbrEnterkeyhintEnum string
 
 const (
-	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
-	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
 	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
 	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
 	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 	AbbrEnterkeyhintEnumEnter    AbbrEnterkeyhintEnum = "enter"
 	AbbrEnterkeyhintEnumGo       AbbrEnterkeyhintEnum = "go"
+	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
+	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
 )
 
 type AbbrHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type AbbrInputmodeEnum string
 
 const (
+	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
+	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
 	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
 	AbbrInputmodeEnumText    AbbrInputmodeEnum = "text"
 	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
 	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
-	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
-	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 )
 
 type AbbrSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *AbbrElement) Writingsuggestions(a AbbrWritingsuggestionsEnum) *AbbrElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AbbrElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<abbr")); err != nil {
+	if _, err := w.Write([]byte(indent + "<abbr")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *AbbrElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</abbr>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</abbr>\n")); err != nil {
 		return err
 	}
 

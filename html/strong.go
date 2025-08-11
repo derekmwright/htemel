@@ -14,6 +14,7 @@ type StrongElement struct {
 	attributes strongAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Strong creates a tag <strong> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongE
 	return Strong(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *StrongElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *StrongElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type StrongAutocapitalizeEnum string
 
 const (
-	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
-	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
-	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
 	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
 	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
 	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
+	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
+	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
+	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
 )
 
 type StrongAutocorrectEnum string
@@ -67,18 +79,18 @@ const (
 type StrongContenteditableEnum string
 
 const (
-	StrongContenteditableEnumFalse         StrongContenteditableEnum = "false"
 	StrongContenteditableEnumPlaintextOnly StrongContenteditableEnum = "plaintext-only"
 	StrongContenteditableEnumTrue          StrongContenteditableEnum = "true"
+	StrongContenteditableEnumFalse         StrongContenteditableEnum = "false"
 	StrongContenteditableEnumEmpty         StrongContenteditableEnum = ""
 )
 
 type StrongDirEnum string
 
 const (
-	StrongDirEnumAuto StrongDirEnum = "auto"
 	StrongDirEnumLtr  StrongDirEnum = "ltr"
 	StrongDirEnumRtl  StrongDirEnum = "rtl"
+	StrongDirEnumAuto StrongDirEnum = "auto"
 )
 
 type StrongDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
+	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
 	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
 	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
-	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 )
 
 type StrongHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type StrongInputmodeEnum string
 
 const (
-	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
-	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
 	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
 	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
 	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
 	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
+	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
+	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 )
 
 type StrongSpellcheckEnum string
@@ -140,8 +152,8 @@ const (
 type StrongWritingsuggestionsEnum string
 
 const (
-	StrongWritingsuggestionsEnumFalse StrongWritingsuggestionsEnum = "false"
 	StrongWritingsuggestionsEnumTrue  StrongWritingsuggestionsEnum = "true"
+	StrongWritingsuggestionsEnumFalse StrongWritingsuggestionsEnum = "false"
 	StrongWritingsuggestionsEnumEmpty StrongWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *StrongElement) Writingsuggestions(a StrongWritingsuggestionsEnum) *Stro
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *StrongElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<strong")); err != nil {
+	if _, err := w.Write([]byte(indent + "<strong")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *StrongElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</strong>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</strong>\n")); err != nil {
 		return err
 	}
 

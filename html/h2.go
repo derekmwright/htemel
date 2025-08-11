@@ -14,6 +14,7 @@ type H2Element struct {
 	attributes h2Attrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // H2 creates a tag <h2> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func H2Ternary(condition bool, true htemel.Node, false htemel.Node) *H2Element {
 	return H2(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *H2Element) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *H2Element) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type H2AutocapitalizeEnum string
 
 const (
-	H2AutocapitalizeEnumSentences  H2AutocapitalizeEnum = "sentences"
-	H2AutocapitalizeEnumWords      H2AutocapitalizeEnum = "words"
-	H2AutocapitalizeEnumCharacters H2AutocapitalizeEnum = "characters"
 	H2AutocapitalizeEnumNone       H2AutocapitalizeEnum = "none"
 	H2AutocapitalizeEnumOff        H2AutocapitalizeEnum = "off"
 	H2AutocapitalizeEnumOn         H2AutocapitalizeEnum = "on"
+	H2AutocapitalizeEnumSentences  H2AutocapitalizeEnum = "sentences"
+	H2AutocapitalizeEnumWords      H2AutocapitalizeEnum = "words"
+	H2AutocapitalizeEnumCharacters H2AutocapitalizeEnum = "characters"
 )
 
 type H2AutocorrectEnum string
@@ -67,37 +79,37 @@ const (
 type H2ContenteditableEnum string
 
 const (
-	H2ContenteditableEnumFalse         H2ContenteditableEnum = "false"
 	H2ContenteditableEnumPlaintextOnly H2ContenteditableEnum = "plaintext-only"
 	H2ContenteditableEnumTrue          H2ContenteditableEnum = "true"
+	H2ContenteditableEnumFalse         H2ContenteditableEnum = "false"
 	H2ContenteditableEnumEmpty         H2ContenteditableEnum = ""
 )
 
 type H2DirEnum string
 
 const (
+	H2DirEnumRtl  H2DirEnum = "rtl"
 	H2DirEnumAuto H2DirEnum = "auto"
 	H2DirEnumLtr  H2DirEnum = "ltr"
-	H2DirEnumRtl  H2DirEnum = "rtl"
 )
 
 type H2DraggableEnum string
 
 const (
-	H2DraggableEnumFalse H2DraggableEnum = "false"
 	H2DraggableEnumTrue  H2DraggableEnum = "true"
+	H2DraggableEnumFalse H2DraggableEnum = "false"
 )
 
 type H2EnterkeyhintEnum string
 
 const (
-	H2EnterkeyhintEnumNext     H2EnterkeyhintEnum = "next"
 	H2EnterkeyhintEnumPrevious H2EnterkeyhintEnum = "previous"
 	H2EnterkeyhintEnumSearch   H2EnterkeyhintEnum = "search"
 	H2EnterkeyhintEnumSend     H2EnterkeyhintEnum = "send"
 	H2EnterkeyhintEnumDone     H2EnterkeyhintEnum = "done"
 	H2EnterkeyhintEnumEnter    H2EnterkeyhintEnum = "enter"
 	H2EnterkeyhintEnumGo       H2EnterkeyhintEnum = "go"
+	H2EnterkeyhintEnumNext     H2EnterkeyhintEnum = "next"
 )
 
 type H2HiddenEnum string
@@ -111,21 +123,21 @@ const (
 type H2InputmodeEnum string
 
 const (
-	H2InputmodeEnumUrl     H2InputmodeEnum = "url"
-	H2InputmodeEnumDecimal H2InputmodeEnum = "decimal"
-	H2InputmodeEnumEmail   H2InputmodeEnum = "email"
 	H2InputmodeEnumNone    H2InputmodeEnum = "none"
 	H2InputmodeEnumNumeric H2InputmodeEnum = "numeric"
 	H2InputmodeEnumSearch  H2InputmodeEnum = "search"
 	H2InputmodeEnumTel     H2InputmodeEnum = "tel"
 	H2InputmodeEnumText    H2InputmodeEnum = "text"
+	H2InputmodeEnumUrl     H2InputmodeEnum = "url"
+	H2InputmodeEnumDecimal H2InputmodeEnum = "decimal"
+	H2InputmodeEnumEmail   H2InputmodeEnum = "email"
 )
 
 type H2SpellcheckEnum string
 
 const (
-	H2SpellcheckEnumTrue  H2SpellcheckEnum = "true"
 	H2SpellcheckEnumFalse H2SpellcheckEnum = "false"
+	H2SpellcheckEnumTrue  H2SpellcheckEnum = "true"
 	H2SpellcheckEnumEmpty H2SpellcheckEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *H2Element) Writingsuggestions(a H2WritingsuggestionsEnum) *H2Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H2Element) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<h2")); err != nil {
+	if _, err := w.Write([]byte(indent + "<h2")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *H2Element) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</h2>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</h2>\n")); err != nil {
 		return err
 	}
 

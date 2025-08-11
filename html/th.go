@@ -14,6 +14,7 @@ type ThElement struct {
 	attributes thAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Th creates a tag <th> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 	return Th(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *ThElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *ThElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type ThAutocapitalizeEnum string
 
 const (
-	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
-	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
-	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
 	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
 	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
+	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
+	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
+	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
 )
 
 type ThAutocorrectEnum string
@@ -103,8 +115,8 @@ const (
 type ThHiddenEnum string
 
 const (
-	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
 	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
+	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
 	ThHiddenEnumEmpty      ThHiddenEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *ThElement) Writingsuggestions(a ThWritingsuggestionsEnum) *ThElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ThElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<th")); err != nil {
+	if _, err := w.Write([]byte(indent + "<th")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *ThElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</th>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</th>\n")); err != nil {
 		return err
 	}
 

@@ -14,6 +14,7 @@ type VarElement struct {
 	attributes varAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Var creates a tag <var> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func VarTernary(condition bool, true htemel.Node, false htemel.Node) *VarElement
 	return Var(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *VarElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *VarElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type VarAutocapitalizeEnum string
 
 const (
+	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
 	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
 	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
 	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
 	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
 	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
-	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
 )
 
 type VarAutocorrectEnum string
@@ -84,20 +96,20 @@ const (
 type VarDraggableEnum string
 
 const (
-	VarDraggableEnumTrue  VarDraggableEnum = "true"
 	VarDraggableEnumFalse VarDraggableEnum = "false"
+	VarDraggableEnumTrue  VarDraggableEnum = "true"
 )
 
 type VarEnterkeyhintEnum string
 
 const (
+	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
 	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
 	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
 	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
 	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
-	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
 )
 
 type VarHiddenEnum string
@@ -111,21 +123,21 @@ const (
 type VarInputmodeEnum string
 
 const (
+	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
+	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
 	VarInputmodeEnumText    VarInputmodeEnum = "text"
 	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
 	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
 	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
 	VarInputmodeEnumNone    VarInputmodeEnum = "none"
-	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
-	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 )
 
 type VarSpellcheckEnum string
 
 const (
-	VarSpellcheckEnumFalse VarSpellcheckEnum = "false"
 	VarSpellcheckEnumTrue  VarSpellcheckEnum = "true"
+	VarSpellcheckEnumFalse VarSpellcheckEnum = "false"
 	VarSpellcheckEnumEmpty VarSpellcheckEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *VarElement) Writingsuggestions(a VarWritingsuggestionsEnum) *VarElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *VarElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<var")); err != nil {
+	if _, err := w.Write([]byte(indent + "<var")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *VarElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</var>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</var>\n")); err != nil {
 		return err
 	}
 

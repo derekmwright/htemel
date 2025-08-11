@@ -14,6 +14,7 @@ type TableElement struct {
 	attributes tableAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Table creates a tag <table> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func TableTernary(condition bool, true htemel.Node, false htemel.Node) *TableEle
 	return Table(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *TableElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *TableElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type TableAutocapitalizeEnum string
 
 const (
+	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
+	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
 	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
 	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
-	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
-	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 )
 
 type TableAutocorrectEnum string
 
 const (
-	TableAutocorrectEnumOn    TableAutocorrectEnum = "on"
 	TableAutocorrectEnumOff   TableAutocorrectEnum = "off"
+	TableAutocorrectEnumOn    TableAutocorrectEnum = "on"
 	TableAutocorrectEnumEmpty TableAutocorrectEnum = ""
 )
 
@@ -76,28 +88,28 @@ const (
 type TableDirEnum string
 
 const (
+	TableDirEnumAuto TableDirEnum = "auto"
 	TableDirEnumLtr  TableDirEnum = "ltr"
 	TableDirEnumRtl  TableDirEnum = "rtl"
-	TableDirEnumAuto TableDirEnum = "auto"
 )
 
 type TableDraggableEnum string
 
 const (
-	TableDraggableEnumFalse TableDraggableEnum = "false"
 	TableDraggableEnumTrue  TableDraggableEnum = "true"
+	TableDraggableEnumFalse TableDraggableEnum = "false"
 )
 
 type TableEnterkeyhintEnum string
 
 const (
+	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
 	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
 	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
 	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
 	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
 	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
 	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
-	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
 )
 
 type TableHiddenEnum string
@@ -111,6 +123,7 @@ const (
 type TableInputmodeEnum string
 
 const (
+	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 	TableInputmodeEnumText    TableInputmodeEnum = "text"
 	TableInputmodeEnumUrl     TableInputmodeEnum = "url"
 	TableInputmodeEnumDecimal TableInputmodeEnum = "decimal"
@@ -118,7 +131,6 @@ const (
 	TableInputmodeEnumNone    TableInputmodeEnum = "none"
 	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
 	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
-	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 )
 
 type TableSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *TableElement) Writingsuggestions(a TableWritingsuggestionsEnum) *TableE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TableElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<table")); err != nil {
+	if _, err := w.Write([]byte(indent + "<table")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *TableElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</table>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</table>\n")); err != nil {
 		return err
 	}
 

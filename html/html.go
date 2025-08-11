@@ -14,6 +14,7 @@ type HtmlElement struct {
 	attributes htmlAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Html creates a tag <html> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func HtmlTernary(condition bool, true htemel.Node, false htemel.Node) *HtmlEleme
 	return Html(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *HtmlElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *HtmlElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type HtmlAutocapitalizeEnum string
 
 const (
-	HtmlAutocapitalizeEnumCharacters HtmlAutocapitalizeEnum = "characters"
 	HtmlAutocapitalizeEnumNone       HtmlAutocapitalizeEnum = "none"
 	HtmlAutocapitalizeEnumOff        HtmlAutocapitalizeEnum = "off"
 	HtmlAutocapitalizeEnumOn         HtmlAutocapitalizeEnum = "on"
 	HtmlAutocapitalizeEnumSentences  HtmlAutocapitalizeEnum = "sentences"
 	HtmlAutocapitalizeEnumWords      HtmlAutocapitalizeEnum = "words"
+	HtmlAutocapitalizeEnumCharacters HtmlAutocapitalizeEnum = "characters"
 )
 
 type HtmlAutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type HtmlContenteditableEnum string
 
 const (
+	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumPlaintextOnly HtmlContenteditableEnum = "plaintext-only"
 	HtmlContenteditableEnumTrue          HtmlContenteditableEnum = "true"
-	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumEmpty         HtmlContenteditableEnum = ""
 )
 
@@ -91,41 +103,41 @@ const (
 type HtmlEnterkeyhintEnum string
 
 const (
+	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
+	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
 	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
 	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
 	HtmlEnterkeyhintEnumNext     HtmlEnterkeyhintEnum = "next"
 	HtmlEnterkeyhintEnumPrevious HtmlEnterkeyhintEnum = "previous"
 	HtmlEnterkeyhintEnumSearch   HtmlEnterkeyhintEnum = "search"
-	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
-	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
 )
 
 type HtmlHiddenEnum string
 
 const (
-	HtmlHiddenEnumHidden     HtmlHiddenEnum = "hidden"
 	HtmlHiddenEnumUntilFound HtmlHiddenEnum = "until-found"
+	HtmlHiddenEnumHidden     HtmlHiddenEnum = "hidden"
 	HtmlHiddenEnumEmpty      HtmlHiddenEnum = ""
 )
 
 type HtmlInputmodeEnum string
 
 const (
+	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
+	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
 	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
 	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
 	HtmlInputmodeEnumNone    HtmlInputmodeEnum = "none"
 	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
 	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
-	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
-	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 )
 
 type HtmlSpellcheckEnum string
 
 const (
-	HtmlSpellcheckEnumFalse HtmlSpellcheckEnum = "false"
 	HtmlSpellcheckEnumTrue  HtmlSpellcheckEnum = "true"
+	HtmlSpellcheckEnumFalse HtmlSpellcheckEnum = "false"
 	HtmlSpellcheckEnumEmpty HtmlSpellcheckEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *HtmlElement) Writingsuggestions(a HtmlWritingsuggestionsEnum) *HtmlElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HtmlElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<html")); err != nil {
+	if _, err := w.Write([]byte(indent + "<html")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</html>\n")); err != nil {
 		return err
 	}
 

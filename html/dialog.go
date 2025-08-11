@@ -14,6 +14,7 @@ type DialogElement struct {
 	attributes dialogAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Dialog creates a tag <dialog> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func DialogTernary(condition bool, true htemel.Node, false htemel.Node) *DialogE
 	return Dialog(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *DialogElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *DialogElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type DialogAutocapitalizeEnum string
 
 const (
-	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
 	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
 	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
 	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
 	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
+	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
 )
 
 type DialogAutocorrectEnum string
@@ -91,13 +103,13 @@ const (
 type DialogEnterkeyhintEnum string
 
 const (
-	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 	DialogEnterkeyhintEnumSearch   DialogEnterkeyhintEnum = "search"
 	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
 	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
 	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
 	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
 	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
+	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 )
 
 type DialogHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type DialogInputmodeEnum string
 
 const (
+	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
+	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
 	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
 	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
 	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
 	DialogInputmodeEnumNumeric DialogInputmodeEnum = "numeric"
 	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
-	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
-	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
 )
 
 type DialogSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *DialogElement) Writingsuggestions(a DialogWritingsuggestionsEnum) *Dial
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DialogElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<dialog")); err != nil {
+	if _, err := w.Write([]byte(indent + "<dialog")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *DialogElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</dialog>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</dialog>\n")); err != nil {
 		return err
 	}
 

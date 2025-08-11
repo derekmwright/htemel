@@ -14,6 +14,7 @@ type PElement struct {
 	attributes pAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // P creates a tag <p> instance and returns it for further modification.
@@ -45,31 +46,42 @@ func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
 	return P(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *PElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *PElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type PAutocapitalizeEnum string
 
 const (
-	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
-	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
-	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
 	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
 	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
 	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
+	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
+	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
+	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
 )
 
 type PAutocorrectEnum string
 
 const (
-	PAutocorrectEnumOn    PAutocorrectEnum = "on"
 	PAutocorrectEnumOff   PAutocorrectEnum = "off"
+	PAutocorrectEnumOn    PAutocorrectEnum = "on"
 	PAutocorrectEnumEmpty PAutocorrectEnum = ""
 )
 
 type PContenteditableEnum string
 
 const (
+	PContenteditableEnumTrue          PContenteditableEnum = "true"
 	PContenteditableEnumFalse         PContenteditableEnum = "false"
 	PContenteditableEnumPlaintextOnly PContenteditableEnum = "plaintext-only"
-	PContenteditableEnumTrue          PContenteditableEnum = "true"
 	PContenteditableEnumEmpty         PContenteditableEnum = ""
 )
 
@@ -91,13 +103,13 @@ const (
 type PEnterkeyhintEnum string
 
 const (
+	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
+	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
 	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
 	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
-	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
-	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 )
 
 type PHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type PInputmodeEnum string
 
 const (
-	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
-	PInputmodeEnumEmail   PInputmodeEnum = "email"
-	PInputmodeEnumNone    PInputmodeEnum = "none"
-	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
 	PInputmodeEnumSearch  PInputmodeEnum = "search"
 	PInputmodeEnumTel     PInputmodeEnum = "tel"
 	PInputmodeEnumText    PInputmodeEnum = "text"
 	PInputmodeEnumUrl     PInputmodeEnum = "url"
+	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
+	PInputmodeEnumEmail   PInputmodeEnum = "email"
+	PInputmodeEnumNone    PInputmodeEnum = "none"
+	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
 )
 
 type PSpellcheckEnum string
@@ -140,8 +152,8 @@ const (
 type PWritingsuggestionsEnum string
 
 const (
-	PWritingsuggestionsEnumFalse PWritingsuggestionsEnum = "false"
 	PWritingsuggestionsEnumTrue  PWritingsuggestionsEnum = "true"
+	PWritingsuggestionsEnumFalse PWritingsuggestionsEnum = "false"
 	PWritingsuggestionsEnumEmpty PWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *PElement) Writingsuggestions(a PWritingsuggestionsEnum) *PElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *PElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<p")); err != nil {
+	if _, err := w.Write([]byte(indent + "<p")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *PElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</p>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</p>\n")); err != nil {
 		return err
 	}
 

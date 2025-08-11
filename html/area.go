@@ -13,6 +13,7 @@ type AreaElement struct {
 	attributes areaAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Area creates a tag <area> instance and returns it for further modification.
@@ -36,15 +37,26 @@ func AreaIf(condition bool) *AreaElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *AreaElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *AreaElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type AreaAutocapitalizeEnum string
 
 const (
-	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
-	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
 	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
 	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
 	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
+	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
+	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 )
 
 type AreaAutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type AreaDirEnum string
 
 const (
+	AreaDirEnumAuto AreaDirEnum = "auto"
 	AreaDirEnumLtr  AreaDirEnum = "ltr"
 	AreaDirEnumRtl  AreaDirEnum = "rtl"
-	AreaDirEnumAuto AreaDirEnum = "auto"
 )
 
 type AreaDraggableEnum string
@@ -82,13 +94,13 @@ const (
 type AreaEnterkeyhintEnum string
 
 const (
+	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
+	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
 	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
 	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
 	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
 	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
 	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
-	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
-	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
 )
 
 type AreaHiddenEnum string
@@ -131,8 +143,8 @@ const (
 type AreaWritingsuggestionsEnum string
 
 const (
-	AreaWritingsuggestionsEnumTrue  AreaWritingsuggestionsEnum = "true"
 	AreaWritingsuggestionsEnumFalse AreaWritingsuggestionsEnum = "false"
+	AreaWritingsuggestionsEnumTrue  AreaWritingsuggestionsEnum = "true"
 	AreaWritingsuggestionsEnumEmpty AreaWritingsuggestionsEnum = ""
 )
 
@@ -318,11 +330,13 @@ func (e *AreaElement) Writingsuggestions(a AreaWritingsuggestionsEnum) *AreaElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AreaElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<area")); err != nil {
+	if _, err := w.Write([]byte(indent + "<area")); err != nil {
 		return err
 	}
 
@@ -352,7 +366,7 @@ func (e *AreaElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

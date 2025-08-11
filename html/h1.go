@@ -14,6 +14,7 @@ type H1Element struct {
 	attributes h1Attrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // H1 creates a tag <h1> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func H1Ternary(condition bool, true htemel.Node, false htemel.Node) *H1Element {
 	return H1(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *H1Element) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *H1Element) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type H1AutocapitalizeEnum string
 
 const (
-	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
-	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
 	H1AutocapitalizeEnumOff        H1AutocapitalizeEnum = "off"
 	H1AutocapitalizeEnumOn         H1AutocapitalizeEnum = "on"
 	H1AutocapitalizeEnumSentences  H1AutocapitalizeEnum = "sentences"
 	H1AutocapitalizeEnumWords      H1AutocapitalizeEnum = "words"
+	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
+	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
 )
 
 type H1AutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type H1ContenteditableEnum string
 
 const (
+	H1ContenteditableEnumFalse         H1ContenteditableEnum = "false"
 	H1ContenteditableEnumPlaintextOnly H1ContenteditableEnum = "plaintext-only"
 	H1ContenteditableEnumTrue          H1ContenteditableEnum = "true"
-	H1ContenteditableEnumFalse         H1ContenteditableEnum = "false"
 	H1ContenteditableEnumEmpty         H1ContenteditableEnum = ""
 )
 
@@ -91,13 +103,13 @@ const (
 type H1EnterkeyhintEnum string
 
 const (
-	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
-	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
-	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
 	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
 	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
 	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
 	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
+	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
+	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
+	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
 )
 
 type H1HiddenEnum string
@@ -111,29 +123,29 @@ const (
 type H1InputmodeEnum string
 
 const (
+	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
+	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 	H1InputmodeEnumText    H1InputmodeEnum = "text"
 	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
 	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
 	H1InputmodeEnumEmail   H1InputmodeEnum = "email"
 	H1InputmodeEnumNone    H1InputmodeEnum = "none"
 	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
-	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
-	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 )
 
 type H1SpellcheckEnum string
 
 const (
-	H1SpellcheckEnumTrue  H1SpellcheckEnum = "true"
 	H1SpellcheckEnumFalse H1SpellcheckEnum = "false"
+	H1SpellcheckEnumTrue  H1SpellcheckEnum = "true"
 	H1SpellcheckEnumEmpty H1SpellcheckEnum = ""
 )
 
 type H1TranslateEnum string
 
 const (
-	H1TranslateEnumNo    H1TranslateEnum = "no"
 	H1TranslateEnumYes   H1TranslateEnum = "yes"
+	H1TranslateEnumNo    H1TranslateEnum = "no"
 	H1TranslateEnumEmpty H1TranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *H1Element) Writingsuggestions(a H1WritingsuggestionsEnum) *H1Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H1Element) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<h1")); err != nil {
+	if _, err := w.Write([]byte(indent + "<h1")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *H1Element) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</h1>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</h1>\n")); err != nil {
 		return err
 	}
 

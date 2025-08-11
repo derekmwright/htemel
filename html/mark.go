@@ -14,6 +14,7 @@ type MarkElement struct {
 	attributes markAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Mark creates a tag <mark> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func MarkTernary(condition bool, true htemel.Node, false htemel.Node) *MarkEleme
 	return Mark(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *MarkElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *MarkElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type MarkAutocapitalizeEnum string
 
 const (
-	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
-	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
-	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
 	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
 	MarkAutocapitalizeEnumNone       MarkAutocapitalizeEnum = "none"
 	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
+	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
+	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
+	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
 )
 
 type MarkAutocorrectEnum string
 
 const (
-	MarkAutocorrectEnumOn    MarkAutocorrectEnum = "on"
 	MarkAutocorrectEnumOff   MarkAutocorrectEnum = "off"
+	MarkAutocorrectEnumOn    MarkAutocorrectEnum = "on"
 	MarkAutocorrectEnumEmpty MarkAutocorrectEnum = ""
 )
 
@@ -103,22 +115,22 @@ const (
 type MarkHiddenEnum string
 
 const (
-	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
 	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
+	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
 	MarkHiddenEnumEmpty      MarkHiddenEnum = ""
 )
 
 type MarkInputmodeEnum string
 
 const (
-	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
-	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
 	MarkInputmodeEnumDecimal MarkInputmodeEnum = "decimal"
 	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
 	MarkInputmodeEnumNone    MarkInputmodeEnum = "none"
 	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
 	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
 	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
+	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
+	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
 )
 
 type MarkSpellcheckEnum string
@@ -140,8 +152,8 @@ const (
 type MarkWritingsuggestionsEnum string
 
 const (
-	MarkWritingsuggestionsEnumTrue  MarkWritingsuggestionsEnum = "true"
 	MarkWritingsuggestionsEnumFalse MarkWritingsuggestionsEnum = "false"
+	MarkWritingsuggestionsEnumTrue  MarkWritingsuggestionsEnum = "true"
 	MarkWritingsuggestionsEnumEmpty MarkWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *MarkElement) Writingsuggestions(a MarkWritingsuggestionsEnum) *MarkElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MarkElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<mark")); err != nil {
+	if _, err := w.Write([]byte(indent + "<mark")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *MarkElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</mark>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</mark>\n")); err != nil {
 		return err
 	}
 

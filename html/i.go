@@ -14,6 +14,7 @@ type IElement struct {
 	attributes iAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // I creates a tag <i> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
 	return I(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *IElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *IElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type IAutocapitalizeEnum string
 
 const (
-	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
 	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
 	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
 	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
 	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
+	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 )
 
 type IAutocorrectEnum string
@@ -67,18 +79,18 @@ const (
 type IContenteditableEnum string
 
 const (
+	IContenteditableEnumTrue          IContenteditableEnum = "true"
 	IContenteditableEnumFalse         IContenteditableEnum = "false"
 	IContenteditableEnumPlaintextOnly IContenteditableEnum = "plaintext-only"
-	IContenteditableEnumTrue          IContenteditableEnum = "true"
 	IContenteditableEnumEmpty         IContenteditableEnum = ""
 )
 
 type IDirEnum string
 
 const (
-	IDirEnumAuto IDirEnum = "auto"
 	IDirEnumLtr  IDirEnum = "ltr"
 	IDirEnumRtl  IDirEnum = "rtl"
+	IDirEnumAuto IDirEnum = "auto"
 )
 
 type IDraggableEnum string
@@ -111,14 +123,14 @@ const (
 type IInputmodeEnum string
 
 const (
-	IInputmodeEnumEmail   IInputmodeEnum = "email"
-	IInputmodeEnumNone    IInputmodeEnum = "none"
 	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
 	IInputmodeEnumSearch  IInputmodeEnum = "search"
 	IInputmodeEnumTel     IInputmodeEnum = "tel"
 	IInputmodeEnumText    IInputmodeEnum = "text"
 	IInputmodeEnumUrl     IInputmodeEnum = "url"
 	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
+	IInputmodeEnumEmail   IInputmodeEnum = "email"
+	IInputmodeEnumNone    IInputmodeEnum = "none"
 )
 
 type ISpellcheckEnum string
@@ -132,8 +144,8 @@ const (
 type ITranslateEnum string
 
 const (
-	ITranslateEnumYes   ITranslateEnum = "yes"
 	ITranslateEnumNo    ITranslateEnum = "no"
+	ITranslateEnumYes   ITranslateEnum = "yes"
 	ITranslateEnumEmpty ITranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *IElement) Writingsuggestions(a IWritingsuggestionsEnum) *IElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *IElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<i")); err != nil {
+	if _, err := w.Write([]byte(indent + "<i")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *IElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</i>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</i>\n")); err != nil {
 		return err
 	}
 

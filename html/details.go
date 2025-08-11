@@ -14,6 +14,7 @@ type DetailsElement struct {
 	attributes detailsAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Details creates a tag <details> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *Detail
 	return Details(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *DetailsElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *DetailsElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type DetailsAutocapitalizeEnum string
 
 const (
-	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
-	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
 	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
 	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
 	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
+	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
+	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 )
 
 type DetailsAutocorrectEnum string
@@ -67,18 +79,18 @@ const (
 type DetailsContenteditableEnum string
 
 const (
+	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
 	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 	DetailsContenteditableEnumPlaintextOnly DetailsContenteditableEnum = "plaintext-only"
-	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
 	DetailsContenteditableEnumEmpty         DetailsContenteditableEnum = ""
 )
 
 type DetailsDirEnum string
 
 const (
+	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
 	DetailsDirEnumAuto DetailsDirEnum = "auto"
 	DetailsDirEnumLtr  DetailsDirEnum = "ltr"
-	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
 )
 
 type DetailsDraggableEnum string
@@ -111,14 +123,14 @@ const (
 type DetailsInputmodeEnum string
 
 const (
-	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
-	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
-	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
 	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
 	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
 	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
 	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
+	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
+	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
+	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 )
 
 type DetailsSpellcheckEnum string
@@ -132,8 +144,8 @@ const (
 type DetailsTranslateEnum string
 
 const (
-	DetailsTranslateEnumNo    DetailsTranslateEnum = "no"
 	DetailsTranslateEnumYes   DetailsTranslateEnum = "yes"
+	DetailsTranslateEnumNo    DetailsTranslateEnum = "no"
 	DetailsTranslateEnumEmpty DetailsTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *DetailsElement) Writingsuggestions(a DetailsWritingsuggestionsEnum) *De
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DetailsElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<details")); err != nil {
+	if _, err := w.Write([]byte(indent + "<details")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *DetailsElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</details>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</details>\n")); err != nil {
 		return err
 	}
 

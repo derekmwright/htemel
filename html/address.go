@@ -14,6 +14,7 @@ type AddressElement struct {
 	attributes addressAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Address creates a tag <address> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func AddressTernary(condition bool, true htemel.Node, false htemel.Node) *Addres
 	return Address(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *AddressElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *AddressElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type AddressAutocapitalizeEnum string
 
 const (
-	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
-	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
-	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
 	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
+	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
+	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
+	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 )
 
 type AddressAutocorrectEnum string
@@ -67,18 +79,18 @@ const (
 type AddressContenteditableEnum string
 
 const (
+	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
 	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
-	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
 	AddressContenteditableEnumEmpty         AddressContenteditableEnum = ""
 )
 
 type AddressDirEnum string
 
 const (
+	AddressDirEnumRtl  AddressDirEnum = "rtl"
 	AddressDirEnumAuto AddressDirEnum = "auto"
 	AddressDirEnumLtr  AddressDirEnum = "ltr"
-	AddressDirEnumRtl  AddressDirEnum = "rtl"
 )
 
 type AddressDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type AddressEnterkeyhintEnum string
 
 const (
-	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
-	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
-	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
 	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
 	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
 	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
 	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
+	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
+	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
+	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
 )
 
 type AddressHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type AddressInputmodeEnum string
 
 const (
-	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
-	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 	AddressInputmodeEnumText    AddressInputmodeEnum = "text"
 	AddressInputmodeEnumUrl     AddressInputmodeEnum = "url"
 	AddressInputmodeEnumDecimal AddressInputmodeEnum = "decimal"
 	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
 	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
+	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
+	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 )
 
 type AddressSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *AddressElement) Writingsuggestions(a AddressWritingsuggestionsEnum) *Ad
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AddressElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<address")); err != nil {
+	if _, err := w.Write([]byte(indent + "<address")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *AddressElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</address>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</address>\n")); err != nil {
 		return err
 	}
 

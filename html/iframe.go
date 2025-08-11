@@ -14,6 +14,7 @@ type IframeElement struct {
 	attributes iframeAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Iframe creates a tag <iframe> instance and returns it for further modification.
@@ -45,6 +46,17 @@ func IframeTernary(condition bool, true htemel.Node, false htemel.Node) *IframeE
 	return Iframe(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *IframeElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *IframeElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type IframeAutocapitalizeEnum string
 
 const (
@@ -59,8 +71,8 @@ const (
 type IframeAutocorrectEnum string
 
 const (
-	IframeAutocorrectEnumOff   IframeAutocorrectEnum = "off"
 	IframeAutocorrectEnumOn    IframeAutocorrectEnum = "on"
+	IframeAutocorrectEnumOff   IframeAutocorrectEnum = "off"
 	IframeAutocorrectEnumEmpty IframeAutocorrectEnum = ""
 )
 
@@ -91,26 +103,27 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
-	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
 	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
 	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
 	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
+	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 )
 
 type IframeHiddenEnum string
 
 const (
-	IframeHiddenEnumUntilFound IframeHiddenEnum = "until-found"
 	IframeHiddenEnumHidden     IframeHiddenEnum = "hidden"
+	IframeHiddenEnumUntilFound IframeHiddenEnum = "until-found"
 	IframeHiddenEnumEmpty      IframeHiddenEnum = ""
 )
 
 type IframeInputmodeEnum string
 
 const (
+	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
 	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
 	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
 	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
@@ -118,7 +131,6 @@ const (
 	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
 	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
-	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
 )
 
 type IframeSpellcheckEnum string
@@ -132,16 +144,16 @@ const (
 type IframeTranslateEnum string
 
 const (
-	IframeTranslateEnumNo    IframeTranslateEnum = "no"
 	IframeTranslateEnumYes   IframeTranslateEnum = "yes"
+	IframeTranslateEnumNo    IframeTranslateEnum = "no"
 	IframeTranslateEnumEmpty IframeTranslateEnum = ""
 )
 
 type IframeWritingsuggestionsEnum string
 
 const (
-	IframeWritingsuggestionsEnumFalse IframeWritingsuggestionsEnum = "false"
 	IframeWritingsuggestionsEnumTrue  IframeWritingsuggestionsEnum = "true"
+	IframeWritingsuggestionsEnumFalse IframeWritingsuggestionsEnum = "false"
 	IframeWritingsuggestionsEnumEmpty IframeWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *IframeElement) Writingsuggestions(a IframeWritingsuggestionsEnum) *Ifra
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *IframeElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<iframe")); err != nil {
+	if _, err := w.Write([]byte(indent + "<iframe")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *IframeElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</iframe>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</iframe>\n")); err != nil {
 		return err
 	}
 

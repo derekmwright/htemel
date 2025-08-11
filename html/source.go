@@ -13,6 +13,7 @@ type SourceElement struct {
 	attributes sourceAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Source creates a tag <source> instance and returns it for further modification.
@@ -36,15 +37,26 @@ func SourceIf(condition bool) *SourceElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *SourceElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *SourceElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type SourceAutocapitalizeEnum string
 
 const (
-	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
-	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
-	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
 	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
 	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
 	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
+	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
+	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
+	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
 )
 
 type SourceAutocorrectEnum string
@@ -58,18 +70,18 @@ const (
 type SourceContenteditableEnum string
 
 const (
+	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
 	SourceContenteditableEnumPlaintextOnly SourceContenteditableEnum = "plaintext-only"
 	SourceContenteditableEnumTrue          SourceContenteditableEnum = "true"
-	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
 	SourceContenteditableEnumEmpty         SourceContenteditableEnum = ""
 )
 
 type SourceDirEnum string
 
 const (
-	SourceDirEnumLtr  SourceDirEnum = "ltr"
 	SourceDirEnumRtl  SourceDirEnum = "rtl"
 	SourceDirEnumAuto SourceDirEnum = "auto"
+	SourceDirEnumLtr  SourceDirEnum = "ltr"
 )
 
 type SourceDraggableEnum string
@@ -82,26 +94,27 @@ const (
 type SourceEnterkeyhintEnum string
 
 const (
+	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
 	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
 	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
 	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
 	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
-	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 )
 
 type SourceHiddenEnum string
 
 const (
-	SourceHiddenEnumUntilFound SourceHiddenEnum = "until-found"
 	SourceHiddenEnumHidden     SourceHiddenEnum = "hidden"
+	SourceHiddenEnumUntilFound SourceHiddenEnum = "until-found"
 	SourceHiddenEnumEmpty      SourceHiddenEnum = ""
 )
 
 type SourceInputmodeEnum string
 
 const (
+	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
 	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
 	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
 	SourceInputmodeEnumText    SourceInputmodeEnum = "text"
@@ -109,22 +122,21 @@ const (
 	SourceInputmodeEnumDecimal SourceInputmodeEnum = "decimal"
 	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
 	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
-	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
 )
 
 type SourceSpellcheckEnum string
 
 const (
-	SourceSpellcheckEnumFalse SourceSpellcheckEnum = "false"
 	SourceSpellcheckEnumTrue  SourceSpellcheckEnum = "true"
+	SourceSpellcheckEnumFalse SourceSpellcheckEnum = "false"
 	SourceSpellcheckEnumEmpty SourceSpellcheckEnum = ""
 )
 
 type SourceTranslateEnum string
 
 const (
-	SourceTranslateEnumYes   SourceTranslateEnum = "yes"
 	SourceTranslateEnumNo    SourceTranslateEnum = "no"
+	SourceTranslateEnumYes   SourceTranslateEnum = "yes"
 	SourceTranslateEnumEmpty SourceTranslateEnum = ""
 )
 
@@ -360,11 +372,13 @@ func (e *SourceElement) Writingsuggestions(a SourceWritingsuggestionsEnum) *Sour
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SourceElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<source")); err != nil {
+	if _, err := w.Write([]byte(indent + "<source")); err != nil {
 		return err
 	}
 
@@ -394,7 +408,7 @@ func (e *SourceElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

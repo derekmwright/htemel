@@ -14,6 +14,7 @@ type DelElement struct {
 	attributes delAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Del creates a tag <del> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func DelTernary(condition bool, true htemel.Node, false htemel.Node) *DelElement
 	return Del(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *DelElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *DelElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type DelAutocapitalizeEnum string
 
 const (
-	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
-	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
 	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
 	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
 	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
 	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
+	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
+	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
 )
 
 type DelAutocorrectEnum string
@@ -91,13 +103,13 @@ const (
 type DelEnterkeyhintEnum string
 
 const (
-	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
-	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
-	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
 	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
 	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
 	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
 	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
+	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
+	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
+	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
 )
 
 type DelHiddenEnum string
@@ -111,6 +123,7 @@ const (
 type DelInputmodeEnum string
 
 const (
+	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
 	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 	DelInputmodeEnumNone    DelInputmodeEnum = "none"
 	DelInputmodeEnumNumeric DelInputmodeEnum = "numeric"
@@ -118,7 +131,6 @@ const (
 	DelInputmodeEnumTel     DelInputmodeEnum = "tel"
 	DelInputmodeEnumText    DelInputmodeEnum = "text"
 	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
-	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
 )
 
 type DelSpellcheckEnum string
@@ -339,11 +351,13 @@ func (e *DelElement) Writingsuggestions(a DelWritingsuggestionsEnum) *DelElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DelElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<del")); err != nil {
+	if _, err := w.Write([]byte(indent + "<del")); err != nil {
 		return err
 	}
 
@@ -373,16 +387,17 @@ func (e *DelElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</del>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</del>\n")); err != nil {
 		return err
 	}
 

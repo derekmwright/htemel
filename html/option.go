@@ -14,6 +14,7 @@ type OptionElement struct {
 	attributes optionAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Option creates a tag <option> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func OptionTernary(condition bool, true htemel.Node, false htemel.Node) *OptionE
 	return Option(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *OptionElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *OptionElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type OptionAutocapitalizeEnum string
 
 const (
-	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
 	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
 	OptionAutocapitalizeEnumNone       OptionAutocapitalizeEnum = "none"
 	OptionAutocapitalizeEnumOff        OptionAutocapitalizeEnum = "off"
 	OptionAutocapitalizeEnumOn         OptionAutocapitalizeEnum = "on"
+	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
 )
 
 type OptionAutocorrectEnum string
@@ -91,34 +103,34 @@ const (
 type OptionEnterkeyhintEnum string
 
 const (
+	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
+	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
 	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
 	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
-	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
-	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 )
 
 type OptionHiddenEnum string
 
 const (
-	OptionHiddenEnumUntilFound OptionHiddenEnum = "until-found"
 	OptionHiddenEnumHidden     OptionHiddenEnum = "hidden"
+	OptionHiddenEnumUntilFound OptionHiddenEnum = "until-found"
 	OptionHiddenEnumEmpty      OptionHiddenEnum = ""
 )
 
 type OptionInputmodeEnum string
 
 const (
-	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
-	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
-	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
 	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
 	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
 	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
 	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
+	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
+	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
+	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 )
 
 type OptionSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *OptionElement) Writingsuggestions(a OptionWritingsuggestionsEnum) *Opti
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *OptionElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<option")); err != nil {
+	if _, err := w.Write([]byte(indent + "<option")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *OptionElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</option>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</option>\n")); err != nil {
 		return err
 	}
 

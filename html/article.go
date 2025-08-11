@@ -14,6 +14,7 @@ type ArticleElement struct {
 	attributes articleAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Article creates a tag <article> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *Articl
 	return Article(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *ArticleElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *ArticleElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type ArticleAutocapitalizeEnum string
 
 const (
+	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
+	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
 	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
 	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
-	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
-	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 )
 
 type ArticleAutocorrectEnum string
@@ -67,18 +79,18 @@ const (
 type ArticleContenteditableEnum string
 
 const (
-	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
 	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
+	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumEmpty         ArticleContenteditableEnum = ""
 )
 
 type ArticleDirEnum string
 
 const (
+	ArticleDirEnumRtl  ArticleDirEnum = "rtl"
 	ArticleDirEnumAuto ArticleDirEnum = "auto"
 	ArticleDirEnumLtr  ArticleDirEnum = "ltr"
-	ArticleDirEnumRtl  ArticleDirEnum = "rtl"
 )
 
 type ArticleDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type ArticleEnterkeyhintEnum string
 
 const (
-	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
-	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
-	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
 	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
 	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
 	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
+	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
+	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
+	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
 )
 
 type ArticleHiddenEnum string
@@ -327,11 +339,13 @@ func (e *ArticleElement) Writingsuggestions(a ArticleWritingsuggestionsEnum) *Ar
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ArticleElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<article")); err != nil {
+	if _, err := w.Write([]byte(indent + "<article")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *ArticleElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</article>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</article>\n")); err != nil {
 		return err
 	}
 

@@ -14,6 +14,7 @@ type ScriptElement struct {
 	attributes scriptAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Script creates a tag <script> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func ScriptTernary(condition bool, true htemel.Node, false htemel.Node) *ScriptE
 	return Script(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *ScriptElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *ScriptElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type ScriptAutocapitalizeEnum string
 
 const (
-	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
-	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
-	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
 	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
 	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
+	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
+	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
+	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 )
 
 type ScriptAutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type ScriptContenteditableEnum string
 
 const (
+	ScriptContenteditableEnumTrue          ScriptContenteditableEnum = "true"
 	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
 	ScriptContenteditableEnumPlaintextOnly ScriptContenteditableEnum = "plaintext-only"
-	ScriptContenteditableEnumTrue          ScriptContenteditableEnum = "true"
 	ScriptContenteditableEnumEmpty         ScriptContenteditableEnum = ""
 )
 
@@ -111,14 +123,14 @@ const (
 type ScriptInputmodeEnum string
 
 const (
-	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
-	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
-	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
 	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
 	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
 	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
+	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
+	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
+	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 )
 
 type ScriptSpellcheckEnum string
@@ -132,8 +144,8 @@ const (
 type ScriptTranslateEnum string
 
 const (
-	ScriptTranslateEnumNo    ScriptTranslateEnum = "no"
 	ScriptTranslateEnumYes   ScriptTranslateEnum = "yes"
+	ScriptTranslateEnumNo    ScriptTranslateEnum = "no"
 	ScriptTranslateEnumEmpty ScriptTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *ScriptElement) Writingsuggestions(a ScriptWritingsuggestionsEnum) *Scri
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ScriptElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<script")); err != nil {
+	if _, err := w.Write([]byte(indent + "<script")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *ScriptElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</script>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</script>\n")); err != nil {
 		return err
 	}
 

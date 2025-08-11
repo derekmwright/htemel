@@ -14,6 +14,7 @@ type EmElement struct {
 	attributes emAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Em creates a tag <em> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func EmTernary(condition bool, true htemel.Node, false htemel.Node) *EmElement {
 	return Em(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *EmElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *EmElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type EmAutocapitalizeEnum string
 
 const (
+	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
 	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
 	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
 	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
-	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 )
 
 type EmAutocorrectEnum string
 
 const (
-	EmAutocorrectEnumOn    EmAutocorrectEnum = "on"
 	EmAutocorrectEnumOff   EmAutocorrectEnum = "off"
+	EmAutocorrectEnumOn    EmAutocorrectEnum = "on"
 	EmAutocorrectEnumEmpty EmAutocorrectEnum = ""
 )
 
@@ -76,9 +88,9 @@ const (
 type EmDirEnum string
 
 const (
+	EmDirEnumAuto EmDirEnum = "auto"
 	EmDirEnumLtr  EmDirEnum = "ltr"
 	EmDirEnumRtl  EmDirEnum = "rtl"
-	EmDirEnumAuto EmDirEnum = "auto"
 )
 
 type EmDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type EmEnterkeyhintEnum string
 
 const (
-	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
-	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
-	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
 	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
 	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
+	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
+	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
+	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 )
 
 type EmHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type EmInputmodeEnum string
 
 const (
-	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
-	EmInputmodeEnumNone    EmInputmodeEnum = "none"
-	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
-	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
 	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
 	EmInputmodeEnumText    EmInputmodeEnum = "text"
 	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
 	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
+	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
+	EmInputmodeEnumNone    EmInputmodeEnum = "none"
+	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
+	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
 )
 
 type EmSpellcheckEnum string
@@ -132,8 +144,8 @@ const (
 type EmTranslateEnum string
 
 const (
-	EmTranslateEnumNo    EmTranslateEnum = "no"
 	EmTranslateEnumYes   EmTranslateEnum = "yes"
+	EmTranslateEnumNo    EmTranslateEnum = "no"
 	EmTranslateEnumEmpty EmTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *EmElement) Writingsuggestions(a EmWritingsuggestionsEnum) *EmElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *EmElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<em")); err != nil {
+	if _, err := w.Write([]byte(indent + "<em")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *EmElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</em>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</em>\n")); err != nil {
 		return err
 	}
 

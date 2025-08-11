@@ -14,6 +14,7 @@ type HeadElement struct {
 	attributes headAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Head creates a tag <head> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func HeadTernary(condition bool, true htemel.Node, false htemel.Node) *HeadEleme
 	return Head(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *HeadElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *HeadElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type HeadAutocapitalizeEnum string
 
 const (
-	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
-	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 	HeadAutocapitalizeEnumCharacters HeadAutocapitalizeEnum = "characters"
 	HeadAutocapitalizeEnumNone       HeadAutocapitalizeEnum = "none"
 	HeadAutocapitalizeEnumOff        HeadAutocapitalizeEnum = "off"
 	HeadAutocapitalizeEnumOn         HeadAutocapitalizeEnum = "on"
+	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
+	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 )
 
 type HeadAutocorrectEnum string
 
 const (
-	HeadAutocorrectEnumOn    HeadAutocorrectEnum = "on"
 	HeadAutocorrectEnumOff   HeadAutocorrectEnum = "off"
+	HeadAutocorrectEnumOn    HeadAutocorrectEnum = "on"
 	HeadAutocorrectEnumEmpty HeadAutocorrectEnum = ""
 )
 
@@ -76,9 +88,9 @@ const (
 type HeadDirEnum string
 
 const (
-	HeadDirEnumAuto HeadDirEnum = "auto"
 	HeadDirEnumLtr  HeadDirEnum = "ltr"
 	HeadDirEnumRtl  HeadDirEnum = "rtl"
+	HeadDirEnumAuto HeadDirEnum = "auto"
 )
 
 type HeadDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type HeadEnterkeyhintEnum string
 
 const (
+	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
 	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
 	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
 	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
 	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
 	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
-	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
 )
 
 type HeadHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type HeadInputmodeEnum string
 
 const (
+	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
+	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
+	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
 	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
 	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
 	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
 	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
-	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
-	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
-	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
 )
 
 type HeadSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *HeadElement) Writingsuggestions(a HeadWritingsuggestionsEnum) *HeadElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HeadElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<head")); err != nil {
+	if _, err := w.Write([]byte(indent + "<head")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *HeadElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</head>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</head>\n")); err != nil {
 		return err
 	}
 

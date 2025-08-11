@@ -14,6 +14,7 @@ type OutputElement struct {
 	attributes outputAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Output creates a tag <output> instance and returns it for further modification.
@@ -45,40 +46,51 @@ func OutputTernary(condition bool, true htemel.Node, false htemel.Node) *OutputE
 	return Output(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *OutputElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *OutputElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type OutputAutocapitalizeEnum string
 
 const (
-	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
 	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
 	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
 	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
 	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
+	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
 )
 
 type OutputAutocorrectEnum string
 
 const (
-	OutputAutocorrectEnumOff   OutputAutocorrectEnum = "off"
 	OutputAutocorrectEnumOn    OutputAutocorrectEnum = "on"
+	OutputAutocorrectEnumOff   OutputAutocorrectEnum = "off"
 	OutputAutocorrectEnumEmpty OutputAutocorrectEnum = ""
 )
 
 type OutputContenteditableEnum string
 
 const (
-	OutputContenteditableEnumFalse         OutputContenteditableEnum = "false"
 	OutputContenteditableEnumPlaintextOnly OutputContenteditableEnum = "plaintext-only"
 	OutputContenteditableEnumTrue          OutputContenteditableEnum = "true"
+	OutputContenteditableEnumFalse         OutputContenteditableEnum = "false"
 	OutputContenteditableEnumEmpty         OutputContenteditableEnum = ""
 )
 
 type OutputDirEnum string
 
 const (
-	OutputDirEnumAuto OutputDirEnum = "auto"
 	OutputDirEnumLtr  OutputDirEnum = "ltr"
 	OutputDirEnumRtl  OutputDirEnum = "rtl"
+	OutputDirEnumAuto OutputDirEnum = "auto"
 )
 
 type OutputDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type OutputEnterkeyhintEnum string
 
 const (
+	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
+	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
 	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
 	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
 	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
 	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
-	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
-	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
 )
 
 type OutputHiddenEnum string
@@ -111,7 +123,6 @@ const (
 type OutputInputmodeEnum string
 
 const (
-	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
 	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
 	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
@@ -119,6 +130,7 @@ const (
 	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
 	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
 	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
+	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 )
 
 type OutputSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *OutputElement) Writingsuggestions(a OutputWritingsuggestionsEnum) *Outp
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *OutputElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<output")); err != nil {
+	if _, err := w.Write([]byte(indent + "<output")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *OutputElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</output>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</output>\n")); err != nil {
 		return err
 	}
 

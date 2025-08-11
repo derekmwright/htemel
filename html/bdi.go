@@ -14,6 +14,7 @@ type BdiElement struct {
 	attributes bdiAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Bdi creates a tag <bdi> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement
 	return Bdi(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *BdiElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *BdiElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type BdiAutocapitalizeEnum string
 
 const (
-	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 	BdiAutocapitalizeEnumNone       BdiAutocapitalizeEnum = "none"
 	BdiAutocapitalizeEnumOff        BdiAutocapitalizeEnum = "off"
 	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
 	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
 	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
+	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 )
 
 type BdiAutocorrectEnum string
 
 const (
-	BdiAutocorrectEnumOff   BdiAutocorrectEnum = "off"
 	BdiAutocorrectEnumOn    BdiAutocorrectEnum = "on"
+	BdiAutocorrectEnumOff   BdiAutocorrectEnum = "off"
 	BdiAutocorrectEnumEmpty BdiAutocorrectEnum = ""
 )
 
@@ -91,13 +103,13 @@ const (
 type BdiEnterkeyhintEnum string
 
 const (
-	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
-	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
-	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 	BdiEnterkeyhintEnumNext     BdiEnterkeyhintEnum = "next"
 	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
 	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
 	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
+	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
+	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
+	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 )
 
 type BdiHiddenEnum string
@@ -111,7 +123,6 @@ const (
 type BdiInputmodeEnum string
 
 const (
-	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
 	BdiInputmodeEnumTel     BdiInputmodeEnum = "tel"
 	BdiInputmodeEnumText    BdiInputmodeEnum = "text"
 	BdiInputmodeEnumUrl     BdiInputmodeEnum = "url"
@@ -119,6 +130,7 @@ const (
 	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
 	BdiInputmodeEnumNone    BdiInputmodeEnum = "none"
 	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
+	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
 )
 
 type BdiSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *BdiElement) Writingsuggestions(a BdiWritingsuggestionsEnum) *BdiElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BdiElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<bdi")); err != nil {
+	if _, err := w.Write([]byte(indent + "<bdi")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *BdiElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</bdi>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</bdi>\n")); err != nil {
 		return err
 	}
 

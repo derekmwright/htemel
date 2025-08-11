@@ -14,6 +14,7 @@ type DfnElement struct {
 	attributes dfnAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Dfn creates a tag <dfn> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func DfnTernary(condition bool, true htemel.Node, false htemel.Node) *DfnElement
 	return Dfn(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *DfnElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *DfnElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type DfnAutocapitalizeEnum string
 
 const (
+	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
 	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
 	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
 	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
 	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
-	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 )
 
 type DfnAutocorrectEnum string
 
 const (
-	DfnAutocorrectEnumOn    DfnAutocorrectEnum = "on"
 	DfnAutocorrectEnumOff   DfnAutocorrectEnum = "off"
+	DfnAutocorrectEnumOn    DfnAutocorrectEnum = "on"
 	DfnAutocorrectEnumEmpty DfnAutocorrectEnum = ""
 )
 
@@ -76,9 +88,9 @@ const (
 type DfnDirEnum string
 
 const (
+	DfnDirEnumRtl  DfnDirEnum = "rtl"
 	DfnDirEnumAuto DfnDirEnum = "auto"
 	DfnDirEnumLtr  DfnDirEnum = "ltr"
-	DfnDirEnumRtl  DfnDirEnum = "rtl"
 )
 
 type DfnDraggableEnum string
@@ -91,34 +103,34 @@ const (
 type DfnEnterkeyhintEnum string
 
 const (
-	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
-	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
 	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
 	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
 	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
+	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
+	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
 )
 
 type DfnHiddenEnum string
 
 const (
-	DfnHiddenEnumHidden     DfnHiddenEnum = "hidden"
 	DfnHiddenEnumUntilFound DfnHiddenEnum = "until-found"
+	DfnHiddenEnumHidden     DfnHiddenEnum = "hidden"
 	DfnHiddenEnumEmpty      DfnHiddenEnum = ""
 )
 
 type DfnInputmodeEnum string
 
 const (
+	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
+	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
+	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
 	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
 	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
 	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
 	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
-	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
-	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
-	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 )
 
 type DfnSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *DfnElement) Writingsuggestions(a DfnWritingsuggestionsEnum) *DfnElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DfnElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<dfn")); err != nil {
+	if _, err := w.Write([]byte(indent + "<dfn")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *DfnElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</dfn>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</dfn>\n")); err != nil {
 		return err
 	}
 

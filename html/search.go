@@ -14,6 +14,7 @@ type SearchElement struct {
 	attributes searchAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Search creates a tag <search> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func SearchTernary(condition bool, true htemel.Node, false htemel.Node) *SearchE
 	return Search(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *SearchElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *SearchElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type SearchAutocapitalizeEnum string
 
 const (
-	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
-	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
 	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
 	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
 	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
 	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
+	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
+	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
 )
 
 type SearchAutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type SearchContenteditableEnum string
 
 const (
+	SearchContenteditableEnumTrue          SearchContenteditableEnum = "true"
 	SearchContenteditableEnumFalse         SearchContenteditableEnum = "false"
 	SearchContenteditableEnumPlaintextOnly SearchContenteditableEnum = "plaintext-only"
-	SearchContenteditableEnumTrue          SearchContenteditableEnum = "true"
 	SearchContenteditableEnumEmpty         SearchContenteditableEnum = ""
 )
 
@@ -84,34 +96,33 @@ const (
 type SearchDraggableEnum string
 
 const (
-	SearchDraggableEnumFalse SearchDraggableEnum = "false"
 	SearchDraggableEnumTrue  SearchDraggableEnum = "true"
+	SearchDraggableEnumFalse SearchDraggableEnum = "false"
 )
 
 type SearchEnterkeyhintEnum string
 
 const (
+	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
+	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
 	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
 	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
 	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
-	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
-	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 )
 
 type SearchHiddenEnum string
 
 const (
-	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
 	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
+	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
 	SearchHiddenEnumEmpty      SearchHiddenEnum = ""
 )
 
 type SearchInputmodeEnum string
 
 const (
-	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
 	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
 	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
 	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
@@ -119,6 +130,7 @@ const (
 	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
 	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
 	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
+	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
 )
 
 type SearchSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *SearchElement) Writingsuggestions(a SearchWritingsuggestionsEnum) *Sear
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SearchElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<search")); err != nil {
+	if _, err := w.Write([]byte(indent + "<search")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *SearchElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</search>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</search>\n")); err != nil {
 		return err
 	}
 

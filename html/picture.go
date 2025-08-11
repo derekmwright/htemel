@@ -14,6 +14,7 @@ type PictureElement struct {
 	attributes pictureAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Picture creates a tag <picture> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func PictureTernary(condition bool, true htemel.Node, false htemel.Node) *Pictur
 	return Picture(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *PictureElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *PictureElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type PictureAutocapitalizeEnum string
 
 const (
-	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
 	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
 	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
 	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 	PictureAutocapitalizeEnumSentences  PictureAutocapitalizeEnum = "sentences"
 	PictureAutocapitalizeEnumWords      PictureAutocapitalizeEnum = "words"
+	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
 )
 
 type PictureAutocorrectEnum string
@@ -76,9 +88,9 @@ const (
 type PictureDirEnum string
 
 const (
-	PictureDirEnumAuto PictureDirEnum = "auto"
 	PictureDirEnumLtr  PictureDirEnum = "ltr"
 	PictureDirEnumRtl  PictureDirEnum = "rtl"
+	PictureDirEnumAuto PictureDirEnum = "auto"
 )
 
 type PictureDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type PictureEnterkeyhintEnum string
 
 const (
-	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
-	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
-	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
 	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
 	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
 	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
+	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
+	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
+	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
 )
 
 type PictureHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type PictureInputmodeEnum string
 
 const (
+	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
+	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
+	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
 	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
 	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
 	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
 	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
-	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
-	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
-	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
 )
 
 type PictureSpellcheckEnum string
@@ -132,8 +144,8 @@ const (
 type PictureTranslateEnum string
 
 const (
-	PictureTranslateEnumNo    PictureTranslateEnum = "no"
 	PictureTranslateEnumYes   PictureTranslateEnum = "yes"
+	PictureTranslateEnumNo    PictureTranslateEnum = "no"
 	PictureTranslateEnumEmpty PictureTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *PictureElement) Writingsuggestions(a PictureWritingsuggestionsEnum) *Pi
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *PictureElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<picture")); err != nil {
+	if _, err := w.Write([]byte(indent + "<picture")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *PictureElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</picture>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</picture>\n")); err != nil {
 		return err
 	}
 

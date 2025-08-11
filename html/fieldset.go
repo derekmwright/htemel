@@ -14,6 +14,7 @@ type FieldsetElement struct {
 	attributes fieldsetAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Fieldset creates a tag <fieldset> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func FieldsetTernary(condition bool, true htemel.Node, false htemel.Node) *Field
 	return Fieldset(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *FieldsetElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *FieldsetElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type FieldsetAutocapitalizeEnum string
 
 const (
+	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
+	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
 	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
 	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
 	FieldsetAutocapitalizeEnumOn         FieldsetAutocapitalizeEnum = "on"
 	FieldsetAutocapitalizeEnumSentences  FieldsetAutocapitalizeEnum = "sentences"
-	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
-	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
 )
 
 type FieldsetAutocorrectEnum string
@@ -76,9 +88,9 @@ const (
 type FieldsetDirEnum string
 
 const (
-	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 	FieldsetDirEnumLtr  FieldsetDirEnum = "ltr"
 	FieldsetDirEnumRtl  FieldsetDirEnum = "rtl"
+	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 )
 
 type FieldsetDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type FieldsetEnterkeyhintEnum string
 
 const (
-	FieldsetEnterkeyhintEnumNext     FieldsetEnterkeyhintEnum = "next"
 	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
 	FieldsetEnterkeyhintEnumSearch   FieldsetEnterkeyhintEnum = "search"
 	FieldsetEnterkeyhintEnumSend     FieldsetEnterkeyhintEnum = "send"
 	FieldsetEnterkeyhintEnumDone     FieldsetEnterkeyhintEnum = "done"
 	FieldsetEnterkeyhintEnumEnter    FieldsetEnterkeyhintEnum = "enter"
 	FieldsetEnterkeyhintEnumGo       FieldsetEnterkeyhintEnum = "go"
+	FieldsetEnterkeyhintEnumNext     FieldsetEnterkeyhintEnum = "next"
 )
 
 type FieldsetHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type FieldsetInputmodeEnum string
 
 const (
+	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
+	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
+	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
 	FieldsetInputmodeEnumNumeric FieldsetInputmodeEnum = "numeric"
 	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
 	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
 	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
-	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
-	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
-	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 )
 
 type FieldsetSpellcheckEnum string
@@ -140,8 +152,8 @@ const (
 type FieldsetWritingsuggestionsEnum string
 
 const (
-	FieldsetWritingsuggestionsEnumTrue  FieldsetWritingsuggestionsEnum = "true"
 	FieldsetWritingsuggestionsEnumFalse FieldsetWritingsuggestionsEnum = "false"
+	FieldsetWritingsuggestionsEnumTrue  FieldsetWritingsuggestionsEnum = "true"
 	FieldsetWritingsuggestionsEnumEmpty FieldsetWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *FieldsetElement) Writingsuggestions(a FieldsetWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *FieldsetElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<fieldset")); err != nil {
+	if _, err := w.Write([]byte(indent + "<fieldset")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *FieldsetElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</fieldset>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</fieldset>\n")); err != nil {
 		return err
 	}
 

@@ -13,6 +13,7 @@ type TrackElement struct {
 	attributes trackAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Track creates a tag <track> instance and returns it for further modification.
@@ -36,15 +37,26 @@ func TrackIf(condition bool) *TrackElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *TrackElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *TrackElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type TrackAutocapitalizeEnum string
 
 const (
-	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
-	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
 	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
 	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
 	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
 	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
+	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
+	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
 )
 
 type TrackAutocorrectEnum string
@@ -67,9 +79,9 @@ const (
 type TrackDirEnum string
 
 const (
+	TrackDirEnumAuto TrackDirEnum = "auto"
 	TrackDirEnumLtr  TrackDirEnum = "ltr"
 	TrackDirEnumRtl  TrackDirEnum = "rtl"
-	TrackDirEnumAuto TrackDirEnum = "auto"
 )
 
 type TrackDraggableEnum string
@@ -82,13 +94,13 @@ const (
 type TrackEnterkeyhintEnum string
 
 const (
-	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
 	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
 	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
 	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
 	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
+	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
 )
 
 type TrackHiddenEnum string
@@ -102,6 +114,7 @@ const (
 type TrackInputmodeEnum string
 
 const (
+	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
 	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
 	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
 	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
@@ -109,7 +122,6 @@ const (
 	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
 	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
 	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
-	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
 )
 
 type TrackSpellcheckEnum string
@@ -123,16 +135,16 @@ const (
 type TrackTranslateEnum string
 
 const (
-	TrackTranslateEnumYes   TrackTranslateEnum = "yes"
 	TrackTranslateEnumNo    TrackTranslateEnum = "no"
+	TrackTranslateEnumYes   TrackTranslateEnum = "yes"
 	TrackTranslateEnumEmpty TrackTranslateEnum = ""
 )
 
 type TrackWritingsuggestionsEnum string
 
 const (
-	TrackWritingsuggestionsEnumTrue  TrackWritingsuggestionsEnum = "true"
 	TrackWritingsuggestionsEnumFalse TrackWritingsuggestionsEnum = "false"
+	TrackWritingsuggestionsEnumTrue  TrackWritingsuggestionsEnum = "true"
 	TrackWritingsuggestionsEnumEmpty TrackWritingsuggestionsEnum = ""
 )
 
@@ -318,11 +330,13 @@ func (e *TrackElement) Writingsuggestions(a TrackWritingsuggestionsEnum) *TrackE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TrackElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<track")); err != nil {
+	if _, err := w.Write([]byte(indent + "<track")); err != nil {
 		return err
 	}
 
@@ -352,7 +366,7 @@ func (e *TrackElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

@@ -14,6 +14,7 @@ type TheadElement struct {
 	attributes theadAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Thead creates a tag <thead> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadEle
 	return Thead(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *TheadElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *TheadElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type TheadAutocapitalizeEnum string
 
 const (
+	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
 	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
 	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
 	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
-	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 )
 
 type TheadAutocorrectEnum string
@@ -103,29 +115,29 @@ const (
 type TheadHiddenEnum string
 
 const (
-	TheadHiddenEnumHidden     TheadHiddenEnum = "hidden"
 	TheadHiddenEnumUntilFound TheadHiddenEnum = "until-found"
+	TheadHiddenEnumHidden     TheadHiddenEnum = "hidden"
 	TheadHiddenEnumEmpty      TheadHiddenEnum = ""
 )
 
 type TheadInputmodeEnum string
 
 const (
-	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
-	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
-	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
-	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
 	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
 	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
 	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
 	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
+	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
+	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
+	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
+	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
 )
 
 type TheadSpellcheckEnum string
 
 const (
-	TheadSpellcheckEnumFalse TheadSpellcheckEnum = "false"
 	TheadSpellcheckEnumTrue  TheadSpellcheckEnum = "true"
+	TheadSpellcheckEnumFalse TheadSpellcheckEnum = "false"
 	TheadSpellcheckEnumEmpty TheadSpellcheckEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *TheadElement) Writingsuggestions(a TheadWritingsuggestionsEnum) *TheadE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TheadElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<thead")); err != nil {
+	if _, err := w.Write([]byte(indent + "<thead")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *TheadElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</thead>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</thead>\n")); err != nil {
 		return err
 	}
 

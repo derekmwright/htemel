@@ -13,6 +13,7 @@ type ColElement struct {
 	attributes colAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Col creates a tag <col> instance and returns it for further modification.
@@ -34,6 +35,17 @@ func ColIf(condition bool) *ColElement {
 	return &ColElement{
 		skipRender: true,
 	}
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *ColElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *ColElement) AddIndent(i int) {
+	e.indent = i + 1
 }
 
 type ColAutocapitalizeEnum string
@@ -75,20 +87,20 @@ const (
 type ColDraggableEnum string
 
 const (
-	ColDraggableEnumTrue  ColDraggableEnum = "true"
 	ColDraggableEnumFalse ColDraggableEnum = "false"
+	ColDraggableEnumTrue  ColDraggableEnum = "true"
 )
 
 type ColEnterkeyhintEnum string
 
 const (
-	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
 	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
 	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
 	ColEnterkeyhintEnumPrevious ColEnterkeyhintEnum = "previous"
 	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
 	ColEnterkeyhintEnumSend     ColEnterkeyhintEnum = "send"
 	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
+	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
 )
 
 type ColHiddenEnum string
@@ -131,8 +143,8 @@ const (
 type ColWritingsuggestionsEnum string
 
 const (
-	ColWritingsuggestionsEnumTrue  ColWritingsuggestionsEnum = "true"
 	ColWritingsuggestionsEnumFalse ColWritingsuggestionsEnum = "false"
+	ColWritingsuggestionsEnumTrue  ColWritingsuggestionsEnum = "true"
 	ColWritingsuggestionsEnumEmpty ColWritingsuggestionsEnum = ""
 )
 
@@ -318,11 +330,13 @@ func (e *ColElement) Writingsuggestions(a ColWritingsuggestionsEnum) *ColElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ColElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<col")); err != nil {
+	if _, err := w.Write([]byte(indent + "<col")); err != nil {
 		return err
 	}
 
@@ -352,7 +366,7 @@ func (e *ColElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

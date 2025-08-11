@@ -13,6 +13,7 @@ type EmbedElement struct {
 	attributes embedAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Embed creates a tag <embed> instance and returns it for further modification.
@@ -36,15 +37,26 @@ func EmbedIf(condition bool) *EmbedElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *EmbedElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *EmbedElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type EmbedAutocapitalizeEnum string
 
 const (
+	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
 	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
 	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
-	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 )
 
 type EmbedAutocorrectEnum string
@@ -82,13 +94,13 @@ const (
 type EmbedEnterkeyhintEnum string
 
 const (
+	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
+	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
+	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
 	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
 	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
-	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
-	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
-	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 )
 
 type EmbedHiddenEnum string
@@ -102,29 +114,29 @@ const (
 type EmbedInputmodeEnum string
 
 const (
+	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
+	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
+	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
 	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
 	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
 	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
-	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
-	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
-	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 )
 
 type EmbedSpellcheckEnum string
 
 const (
-	EmbedSpellcheckEnumTrue  EmbedSpellcheckEnum = "true"
 	EmbedSpellcheckEnumFalse EmbedSpellcheckEnum = "false"
+	EmbedSpellcheckEnumTrue  EmbedSpellcheckEnum = "true"
 	EmbedSpellcheckEnumEmpty EmbedSpellcheckEnum = ""
 )
 
 type EmbedTranslateEnum string
 
 const (
-	EmbedTranslateEnumNo    EmbedTranslateEnum = "no"
 	EmbedTranslateEnumYes   EmbedTranslateEnum = "yes"
+	EmbedTranslateEnumNo    EmbedTranslateEnum = "no"
 	EmbedTranslateEnumEmpty EmbedTranslateEnum = ""
 )
 
@@ -318,11 +330,13 @@ func (e *EmbedElement) Writingsuggestions(a EmbedWritingsuggestionsEnum) *EmbedE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *EmbedElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<embed")); err != nil {
+	if _, err := w.Write([]byte(indent + "<embed")); err != nil {
 		return err
 	}
 
@@ -352,7 +366,7 @@ func (e *EmbedElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

@@ -14,6 +14,7 @@ type BElement struct {
 	attributes bAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // B creates a tag <b> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func BTernary(condition bool, true htemel.Node, false htemel.Node) *BElement {
 	return B(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *BElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *BElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type BAutocapitalizeEnum string
 
 const (
-	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
 	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
 	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
 	BAutocapitalizeEnumOn         BAutocapitalizeEnum = "on"
 	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
 	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
+	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
 )
 
 type BAutocorrectEnum string
 
 const (
-	BAutocorrectEnumOn    BAutocorrectEnum = "on"
 	BAutocorrectEnumOff   BAutocorrectEnum = "off"
+	BAutocorrectEnumOn    BAutocorrectEnum = "on"
 	BAutocorrectEnumEmpty BAutocorrectEnum = ""
 )
 
@@ -91,13 +103,13 @@ const (
 type BEnterkeyhintEnum string
 
 const (
+	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
 	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
 	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
 	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
-	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 )
 
 type BHiddenEnum string
@@ -111,14 +123,14 @@ const (
 type BInputmodeEnum string
 
 const (
+	BInputmodeEnumUrl     BInputmodeEnum = "url"
+	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
+	BInputmodeEnumEmail   BInputmodeEnum = "email"
 	BInputmodeEnumNone    BInputmodeEnum = "none"
 	BInputmodeEnumNumeric BInputmodeEnum = "numeric"
 	BInputmodeEnumSearch  BInputmodeEnum = "search"
 	BInputmodeEnumTel     BInputmodeEnum = "tel"
 	BInputmodeEnumText    BInputmodeEnum = "text"
-	BInputmodeEnumUrl     BInputmodeEnum = "url"
-	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
-	BInputmodeEnumEmail   BInputmodeEnum = "email"
 )
 
 type BSpellcheckEnum string
@@ -132,8 +144,8 @@ const (
 type BTranslateEnum string
 
 const (
-	BTranslateEnumYes   BTranslateEnum = "yes"
 	BTranslateEnumNo    BTranslateEnum = "no"
+	BTranslateEnumYes   BTranslateEnum = "yes"
 	BTranslateEnumEmpty BTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *BElement) Writingsuggestions(a BWritingsuggestionsEnum) *BElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<b")); err != nil {
+	if _, err := w.Write([]byte(indent + "<b")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *BElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</b>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</b>\n")); err != nil {
 		return err
 	}
 

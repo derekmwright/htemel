@@ -14,6 +14,7 @@ type SelectElement struct {
 	attributes selectAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Select creates a tag <select> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectE
 	return Select(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *SelectElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *SelectElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type SelectAutocapitalizeEnum string
 
 const (
+	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
+	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
 	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
 	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
-	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
-	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
 )
 
 type SelectAutocorrectEnum string
@@ -76,9 +88,9 @@ const (
 type SelectDirEnum string
 
 const (
-	SelectDirEnumAuto SelectDirEnum = "auto"
 	SelectDirEnumLtr  SelectDirEnum = "ltr"
 	SelectDirEnumRtl  SelectDirEnum = "rtl"
+	SelectDirEnumAuto SelectDirEnum = "auto"
 )
 
 type SelectDraggableEnum string
@@ -91,34 +103,34 @@ const (
 type SelectEnterkeyhintEnum string
 
 const (
-	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
-	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
 	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
 	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
 	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
+	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
+	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
 )
 
 type SelectHiddenEnum string
 
 const (
-	SelectHiddenEnumHidden     SelectHiddenEnum = "hidden"
 	SelectHiddenEnumUntilFound SelectHiddenEnum = "until-found"
+	SelectHiddenEnumHidden     SelectHiddenEnum = "hidden"
 	SelectHiddenEnumEmpty      SelectHiddenEnum = ""
 )
 
 type SelectInputmodeEnum string
 
 const (
+	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
+	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
 	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
 	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
 	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
 	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
 	SelectInputmodeEnumUrl     SelectInputmodeEnum = "url"
 	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
-	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
-	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
 )
 
 type SelectSpellcheckEnum string
@@ -327,11 +339,13 @@ func (e *SelectElement) Writingsuggestions(a SelectWritingsuggestionsEnum) *Sele
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SelectElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<select")); err != nil {
+	if _, err := w.Write([]byte(indent + "<select")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *SelectElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</select>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</select>\n")); err != nil {
 		return err
 	}
 

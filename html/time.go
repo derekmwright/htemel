@@ -14,6 +14,7 @@ type TimeElement struct {
 	attributes timeAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Time creates a tag <time> instance and returns it for further modification.
@@ -45,15 +46,26 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 	return Time(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *TimeElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *TimeElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type TimeAutocapitalizeEnum string
 
 const (
-	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
 	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
 	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
+	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 )
 
 type TimeAutocorrectEnum string
@@ -76,9 +88,9 @@ const (
 type TimeDirEnum string
 
 const (
-	TimeDirEnumRtl  TimeDirEnum = "rtl"
 	TimeDirEnumAuto TimeDirEnum = "auto"
 	TimeDirEnumLtr  TimeDirEnum = "ltr"
+	TimeDirEnumRtl  TimeDirEnum = "rtl"
 )
 
 type TimeDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type TimeEnterkeyhintEnum string
 
 const (
+	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
+	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
 	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
 	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 	TimeEnterkeyhintEnumEnter    TimeEnterkeyhintEnum = "enter"
 	TimeEnterkeyhintEnumGo       TimeEnterkeyhintEnum = "go"
-	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
-	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 )
 
 type TimeHiddenEnum string
@@ -333,11 +345,13 @@ func (e *TimeElement) Writingsuggestions(a TimeWritingsuggestionsEnum) *TimeElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TimeElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<time")); err != nil {
+	if _, err := w.Write([]byte(indent + "<time")); err != nil {
 		return err
 	}
 
@@ -367,16 +381,17 @@ func (e *TimeElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</time>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</time>\n")); err != nil {
 		return err
 	}
 

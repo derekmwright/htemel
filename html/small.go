@@ -14,6 +14,7 @@ type SmallElement struct {
 	attributes smallAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Small creates a tag <small> instance and returns it for further modification.
@@ -45,31 +46,42 @@ func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallEle
 	return Small(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *SmallElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *SmallElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type SmallAutocapitalizeEnum string
 
 const (
-	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
 	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
 	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
 	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
+	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
 )
 
 type SmallAutocorrectEnum string
 
 const (
-	SmallAutocorrectEnumOn    SmallAutocorrectEnum = "on"
 	SmallAutocorrectEnumOff   SmallAutocorrectEnum = "off"
+	SmallAutocorrectEnumOn    SmallAutocorrectEnum = "on"
 	SmallAutocorrectEnumEmpty SmallAutocorrectEnum = ""
 )
 
 type SmallContenteditableEnum string
 
 const (
-	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
 	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
 	SmallContenteditableEnumPlaintextOnly SmallContenteditableEnum = "plaintext-only"
+	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
 	SmallContenteditableEnumEmpty         SmallContenteditableEnum = ""
 )
 
@@ -84,20 +96,20 @@ const (
 type SmallDraggableEnum string
 
 const (
-	SmallDraggableEnumTrue  SmallDraggableEnum = "true"
 	SmallDraggableEnumFalse SmallDraggableEnum = "false"
+	SmallDraggableEnumTrue  SmallDraggableEnum = "true"
 )
 
 type SmallEnterkeyhintEnum string
 
 const (
-	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
-	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
 	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
 	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
 	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
+	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
+	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 )
 
 type SmallHiddenEnum string
@@ -124,16 +136,16 @@ const (
 type SmallSpellcheckEnum string
 
 const (
-	SmallSpellcheckEnumTrue  SmallSpellcheckEnum = "true"
 	SmallSpellcheckEnumFalse SmallSpellcheckEnum = "false"
+	SmallSpellcheckEnumTrue  SmallSpellcheckEnum = "true"
 	SmallSpellcheckEnumEmpty SmallSpellcheckEnum = ""
 )
 
 type SmallTranslateEnum string
 
 const (
-	SmallTranslateEnumNo    SmallTranslateEnum = "no"
 	SmallTranslateEnumYes   SmallTranslateEnum = "yes"
+	SmallTranslateEnumNo    SmallTranslateEnum = "no"
 	SmallTranslateEnumEmpty SmallTranslateEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *SmallElement) Writingsuggestions(a SmallWritingsuggestionsEnum) *SmallE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SmallElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<small")); err != nil {
+	if _, err := w.Write([]byte(indent + "<small")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *SmallElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</small>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</small>\n")); err != nil {
 		return err
 	}
 

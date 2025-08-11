@@ -13,6 +13,7 @@ type WbrElement struct {
 	attributes wbrAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Wbr creates a tag <wbr> instance and returns it for further modification.
@@ -36,15 +37,26 @@ func WbrIf(condition bool) *WbrElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *WbrElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *WbrElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type WbrAutocapitalizeEnum string
 
 const (
+	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
+	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
 	WbrAutocapitalizeEnumCharacters WbrAutocapitalizeEnum = "characters"
 	WbrAutocapitalizeEnumNone       WbrAutocapitalizeEnum = "none"
 	WbrAutocapitalizeEnumOff        WbrAutocapitalizeEnum = "off"
 	WbrAutocapitalizeEnumOn         WbrAutocapitalizeEnum = "on"
-	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
-	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
 )
 
 type WbrAutocorrectEnum string
@@ -75,20 +87,20 @@ const (
 type WbrDraggableEnum string
 
 const (
-	WbrDraggableEnumTrue  WbrDraggableEnum = "true"
 	WbrDraggableEnumFalse WbrDraggableEnum = "false"
+	WbrDraggableEnumTrue  WbrDraggableEnum = "true"
 )
 
 type WbrEnterkeyhintEnum string
 
 const (
+	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
 	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
 	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
 	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
 	WbrEnterkeyhintEnumSearch   WbrEnterkeyhintEnum = "search"
-	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
 )
 
 type WbrHiddenEnum string
@@ -102,14 +114,14 @@ const (
 type WbrInputmodeEnum string
 
 const (
+	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
+	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
+	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
 	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
 	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
 	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
-	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
-	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
-	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 )
 
 type WbrSpellcheckEnum string
@@ -131,8 +143,8 @@ const (
 type WbrWritingsuggestionsEnum string
 
 const (
-	WbrWritingsuggestionsEnumFalse WbrWritingsuggestionsEnum = "false"
 	WbrWritingsuggestionsEnumTrue  WbrWritingsuggestionsEnum = "true"
+	WbrWritingsuggestionsEnumFalse WbrWritingsuggestionsEnum = "false"
 	WbrWritingsuggestionsEnumEmpty WbrWritingsuggestionsEnum = ""
 )
 
@@ -318,11 +330,13 @@ func (e *WbrElement) Writingsuggestions(a WbrWritingsuggestionsEnum) *WbrElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *WbrElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<wbr")); err != nil {
+	if _, err := w.Write([]byte(indent + "<wbr")); err != nil {
 		return err
 	}
 
@@ -352,7 +366,7 @@ func (e *WbrElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

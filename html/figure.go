@@ -14,6 +14,7 @@ type FigureElement struct {
 	attributes figureAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Figure creates a tag <figure> instance and returns it for further modification.
@@ -45,22 +46,33 @@ func FigureTernary(condition bool, true htemel.Node, false htemel.Node) *FigureE
 	return Figure(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *FigureElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *FigureElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type FigureAutocapitalizeEnum string
 
 const (
+	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
+	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
 	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
 	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
 	FigureAutocapitalizeEnumNone       FigureAutocapitalizeEnum = "none"
 	FigureAutocapitalizeEnumOff        FigureAutocapitalizeEnum = "off"
-	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
-	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
 )
 
 type FigureAutocorrectEnum string
 
 const (
-	FigureAutocorrectEnumOff   FigureAutocorrectEnum = "off"
 	FigureAutocorrectEnumOn    FigureAutocorrectEnum = "on"
+	FigureAutocorrectEnumOff   FigureAutocorrectEnum = "off"
 	FigureAutocorrectEnumEmpty FigureAutocorrectEnum = ""
 )
 
@@ -76,9 +88,9 @@ const (
 type FigureDirEnum string
 
 const (
-	FigureDirEnumAuto FigureDirEnum = "auto"
 	FigureDirEnumLtr  FigureDirEnum = "ltr"
 	FigureDirEnumRtl  FigureDirEnum = "rtl"
+	FigureDirEnumAuto FigureDirEnum = "auto"
 )
 
 type FigureDraggableEnum string
@@ -91,13 +103,13 @@ const (
 type FigureEnterkeyhintEnum string
 
 const (
+	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
+	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
 	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
 	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
 	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
 	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
 	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
-	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
-	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
 )
 
 type FigureHiddenEnum string
@@ -111,7 +123,6 @@ const (
 type FigureInputmodeEnum string
 
 const (
-	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
 	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
 	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
 	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
@@ -119,6 +130,7 @@ const (
 	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
 	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
 	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
+	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
 )
 
 type FigureSpellcheckEnum string
@@ -132,16 +144,16 @@ const (
 type FigureTranslateEnum string
 
 const (
-	FigureTranslateEnumNo    FigureTranslateEnum = "no"
 	FigureTranslateEnumYes   FigureTranslateEnum = "yes"
+	FigureTranslateEnumNo    FigureTranslateEnum = "no"
 	FigureTranslateEnumEmpty FigureTranslateEnum = ""
 )
 
 type FigureWritingsuggestionsEnum string
 
 const (
-	FigureWritingsuggestionsEnumFalse FigureWritingsuggestionsEnum = "false"
 	FigureWritingsuggestionsEnumTrue  FigureWritingsuggestionsEnum = "true"
+	FigureWritingsuggestionsEnumFalse FigureWritingsuggestionsEnum = "false"
 	FigureWritingsuggestionsEnumEmpty FigureWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *FigureElement) Writingsuggestions(a FigureWritingsuggestionsEnum) *Figu
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *FigureElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<figure")); err != nil {
+	if _, err := w.Write([]byte(indent + "<figure")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *FigureElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</figure>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</figure>\n")); err != nil {
 		return err
 	}
 

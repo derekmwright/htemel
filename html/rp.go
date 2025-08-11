@@ -14,6 +14,7 @@ type RpElement struct {
 	attributes rpAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Rp creates a tag <rp> instance and returns it for further modification.
@@ -45,6 +46,17 @@ func RpTernary(condition bool, true htemel.Node, false htemel.Node) *RpElement {
 	return Rp(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *RpElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *RpElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type RpAutocapitalizeEnum string
 
 const (
@@ -67,9 +79,9 @@ const (
 type RpContenteditableEnum string
 
 const (
-	RpContenteditableEnumTrue          RpContenteditableEnum = "true"
 	RpContenteditableEnumFalse         RpContenteditableEnum = "false"
 	RpContenteditableEnumPlaintextOnly RpContenteditableEnum = "plaintext-only"
+	RpContenteditableEnumTrue          RpContenteditableEnum = "true"
 	RpContenteditableEnumEmpty         RpContenteditableEnum = ""
 )
 
@@ -91,13 +103,13 @@ const (
 type RpEnterkeyhintEnum string
 
 const (
+	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
+	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
+	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
 	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
 	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
 	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
 	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
-	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
-	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
-	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
 )
 
 type RpHiddenEnum string
@@ -111,21 +123,21 @@ const (
 type RpInputmodeEnum string
 
 const (
+	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
+	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
 	RpInputmodeEnumText    RpInputmodeEnum = "text"
 	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
 	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
 	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
 	RpInputmodeEnumNone    RpInputmodeEnum = "none"
 	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
-	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
-	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
 )
 
 type RpSpellcheckEnum string
 
 const (
-	RpSpellcheckEnumTrue  RpSpellcheckEnum = "true"
 	RpSpellcheckEnumFalse RpSpellcheckEnum = "false"
+	RpSpellcheckEnumTrue  RpSpellcheckEnum = "true"
 	RpSpellcheckEnumEmpty RpSpellcheckEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *RpElement) Writingsuggestions(a RpWritingsuggestionsEnum) *RpElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *RpElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<rp")); err != nil {
+	if _, err := w.Write([]byte(indent + "<rp")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *RpElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</rp>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</rp>\n")); err != nil {
 		return err
 	}
 

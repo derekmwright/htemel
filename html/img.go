@@ -13,6 +13,7 @@ type ImgElement struct {
 	attributes imgAttrs
 
 	skipRender bool
+	indent     int
 }
 
 // Img creates a tag <img> instance and returns it for further modification.
@@ -36,12 +37,23 @@ func ImgIf(condition bool) *ImgElement {
 	}
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *ImgElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *ImgElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type ImgDecodingEnum string
 
 const (
+	ImgDecodingEnumAsync ImgDecodingEnum = "async"
 	ImgDecodingEnumAuto  ImgDecodingEnum = "auto"
 	ImgDecodingEnumSync  ImgDecodingEnum = "sync"
-	ImgDecodingEnumAsync ImgDecodingEnum = "async"
 )
 
 type ImgLoadingEnum string
@@ -62,12 +74,12 @@ const (
 type ImgAutocapitalizeEnum string
 
 const (
+	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
+	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
 	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
-	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
-	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 )
 
 type ImgAutocorrectEnum string
@@ -90,9 +102,9 @@ const (
 type ImgDirEnum string
 
 const (
-	ImgDirEnumRtl  ImgDirEnum = "rtl"
 	ImgDirEnumAuto ImgDirEnum = "auto"
 	ImgDirEnumLtr  ImgDirEnum = "ltr"
+	ImgDirEnumRtl  ImgDirEnum = "rtl"
 )
 
 type ImgDraggableEnum string
@@ -105,13 +117,13 @@ const (
 type ImgEnterkeyhintEnum string
 
 const (
-	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
 	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
 	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
+	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 )
 
 type ImgHiddenEnum string
@@ -125,14 +137,14 @@ const (
 type ImgInputmodeEnum string
 
 const (
+	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
+	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
 	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
 	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
 	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
 	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
 	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
-	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
-	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 )
 
 type ImgSpellcheckEnum string
@@ -419,11 +431,13 @@ func (e *ImgElement) Writingsuggestions(a ImgWritingsuggestionsEnum) *ImgElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ImgElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<img")); err != nil {
+	if _, err := w.Write([]byte(indent + "<img")); err != nil {
 		return err
 	}
 
@@ -453,7 +467,7 @@ func (e *ImgElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 

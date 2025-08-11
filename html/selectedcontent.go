@@ -14,6 +14,7 @@ type SelectedcontentElement struct {
 	attributes selectedcontentAttrs
 	children   []htemel.Node
 	skipRender bool
+	indent     int
 }
 
 // Selectedcontent creates a tag <selectedcontent> instance and returns it for further modification.
@@ -45,31 +46,42 @@ func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node)
 	return Selectedcontent(false)
 }
 
+// AddIndent is called by the Render function on children elements to set their indentation.
+func (e *SelectedcontentElement) Indent() int {
+	return e.indent
+}
+
+// AddIndent is called by the Render function on children elements to set their indentation.
+// The parent should pass its own indentation value and this function will increment it for itself.
+func (e *SelectedcontentElement) AddIndent(i int) {
+	e.indent = i + 1
+}
+
 type SelectedcontentAutocapitalizeEnum string
 
 const (
-	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
-	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
-	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
 	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
 	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
+	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
+	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
+	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 )
 
 type SelectedcontentAutocorrectEnum string
 
 const (
-	SelectedcontentAutocorrectEnumOff   SelectedcontentAutocorrectEnum = "off"
 	SelectedcontentAutocorrectEnumOn    SelectedcontentAutocorrectEnum = "on"
+	SelectedcontentAutocorrectEnumOff   SelectedcontentAutocorrectEnum = "off"
 	SelectedcontentAutocorrectEnumEmpty SelectedcontentAutocorrectEnum = ""
 )
 
 type SelectedcontentContenteditableEnum string
 
 const (
-	SelectedcontentContenteditableEnumTrue          SelectedcontentContenteditableEnum = "true"
 	SelectedcontentContenteditableEnumFalse         SelectedcontentContenteditableEnum = "false"
 	SelectedcontentContenteditableEnumPlaintextOnly SelectedcontentContenteditableEnum = "plaintext-only"
+	SelectedcontentContenteditableEnumTrue          SelectedcontentContenteditableEnum = "true"
 	SelectedcontentContenteditableEnumEmpty         SelectedcontentContenteditableEnum = ""
 )
 
@@ -91,13 +103,13 @@ const (
 type SelectedcontentEnterkeyhintEnum string
 
 const (
-	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
-	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
-	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
 	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
 	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
+	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
+	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
+	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 )
 
 type SelectedcontentHiddenEnum string
@@ -111,7 +123,6 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
-	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
 	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
 	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
@@ -119,6 +130,7 @@ const (
 	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
 	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
 	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
+	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 )
 
 type SelectedcontentSpellcheckEnum string
@@ -132,16 +144,16 @@ const (
 type SelectedcontentTranslateEnum string
 
 const (
-	SelectedcontentTranslateEnumNo    SelectedcontentTranslateEnum = "no"
 	SelectedcontentTranslateEnumYes   SelectedcontentTranslateEnum = "yes"
+	SelectedcontentTranslateEnumNo    SelectedcontentTranslateEnum = "no"
 	SelectedcontentTranslateEnumEmpty SelectedcontentTranslateEnum = ""
 )
 
 type SelectedcontentWritingsuggestionsEnum string
 
 const (
-	SelectedcontentWritingsuggestionsEnumFalse SelectedcontentWritingsuggestionsEnum = "false"
 	SelectedcontentWritingsuggestionsEnumTrue  SelectedcontentWritingsuggestionsEnum = "true"
+	SelectedcontentWritingsuggestionsEnumFalse SelectedcontentWritingsuggestionsEnum = "false"
 	SelectedcontentWritingsuggestionsEnumEmpty SelectedcontentWritingsuggestionsEnum = ""
 )
 
@@ -327,11 +339,13 @@ func (e *SelectedcontentElement) Writingsuggestions(a SelectedcontentWritingsugg
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SelectedcontentElement) Render(w io.Writer) error {
+	indent := strings.Repeat("  ", e.indent)
+
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<selectedcontent")); err != nil {
+	if _, err := w.Write([]byte(indent + "<selectedcontent")); err != nil {
 		return err
 	}
 
@@ -361,16 +375,17 @@ func (e *SelectedcontentElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
+	if _, err := w.Write([]byte(">\n")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
+		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</selectedcontent>")); err != nil {
+	if _, err := w.Write([]byte(indent + "</selectedcontent>\n")); err != nil {
 		return err
 	}
 
