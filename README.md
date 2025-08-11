@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/derekmwright/htemel)](https://goreportcard.com/report/github.com/derekmwright/htemel)
+
 ⚠️ This project is a **work in progress**. Check back often and give it a ⭐ if you're interested!
 
 # htemel
