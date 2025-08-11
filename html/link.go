@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -73,19 +74,19 @@ const (
 type LinkAutocapitalizeEnum string
 
 const (
-	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
 	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
 	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
 	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
 	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
+	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
 )
 
 type LinkAutocorrectEnum string
 
 const (
-	LinkAutocorrectEnumOff   LinkAutocorrectEnum = "off"
 	LinkAutocorrectEnumOn    LinkAutocorrectEnum = "on"
+	LinkAutocorrectEnumOff   LinkAutocorrectEnum = "off"
 	LinkAutocorrectEnumEmpty LinkAutocorrectEnum = ""
 )
 
@@ -116,13 +117,13 @@ const (
 type LinkEnterkeyhintEnum string
 
 const (
+	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
+	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
 	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
 	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
-	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
-	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
 )
 
 type LinkHiddenEnum string
@@ -136,37 +137,37 @@ const (
 type LinkInputmodeEnum string
 
 const (
-	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
-	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
 	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
 	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
 	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
 	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
 	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
+	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
+	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
 )
 
 type LinkSpellcheckEnum string
 
 const (
-	LinkSpellcheckEnumFalse LinkSpellcheckEnum = "false"
 	LinkSpellcheckEnumTrue  LinkSpellcheckEnum = "true"
+	LinkSpellcheckEnumFalse LinkSpellcheckEnum = "false"
 	LinkSpellcheckEnumEmpty LinkSpellcheckEnum = ""
 )
 
 type LinkTranslateEnum string
 
 const (
-	LinkTranslateEnumYes   LinkTranslateEnum = "yes"
 	LinkTranslateEnumNo    LinkTranslateEnum = "no"
+	LinkTranslateEnumYes   LinkTranslateEnum = "yes"
 	LinkTranslateEnumEmpty LinkTranslateEnum = ""
 )
 
 type LinkWritingsuggestionsEnum string
 
 const (
-	LinkWritingsuggestionsEnumTrue  LinkWritingsuggestionsEnum = "true"
 	LinkWritingsuggestionsEnumFalse LinkWritingsuggestionsEnum = "false"
+	LinkWritingsuggestionsEnumTrue  LinkWritingsuggestionsEnum = "true"
 	LinkWritingsuggestionsEnumEmpty LinkWritingsuggestionsEnum = ""
 )
 
@@ -448,7 +449,7 @@ func (e *LinkElement) Writingsuggestions(a LinkWritingsuggestionsEnum) *LinkElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LinkElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

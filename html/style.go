@@ -60,12 +60,12 @@ func (e *StyleElement) AddIndent(i int) {
 type StyleAutocapitalizeEnum string
 
 const (
-	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
-	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
-	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
 	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
 	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
 	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
+	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
+	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
+	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
 )
 
 type StyleAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type StyleDirEnum string
 
 const (
+	StyleDirEnumRtl  StyleDirEnum = "rtl"
 	StyleDirEnumAuto StyleDirEnum = "auto"
 	StyleDirEnumLtr  StyleDirEnum = "ltr"
-	StyleDirEnumRtl  StyleDirEnum = "rtl"
 )
 
 type StyleDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type StyleEnterkeyhintEnum string
 
 const (
+	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
+	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
 	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
 	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
 	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
 	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
-	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
-	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 )
 
 type StyleHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type StyleInputmodeEnum string
 
 const (
-	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
-	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
-	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
-	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
 	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
 	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
 	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
+	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
+	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
+	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
+	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
 )
 
 type StyleSpellcheckEnum string
@@ -351,7 +351,7 @@ func (e *StyleElement) Writingsuggestions(a StyleWritingsuggestionsEnum) *StyleE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *StyleElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

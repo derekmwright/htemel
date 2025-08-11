@@ -60,12 +60,12 @@ func (e *SampElement) AddIndent(i int) {
 type SampAutocapitalizeEnum string
 
 const (
+	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
 	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
 	SampAutocapitalizeEnumOff        SampAutocapitalizeEnum = "off"
 	SampAutocapitalizeEnumOn         SampAutocapitalizeEnum = "on"
 	SampAutocapitalizeEnumSentences  SampAutocapitalizeEnum = "sentences"
 	SampAutocapitalizeEnumWords      SampAutocapitalizeEnum = "words"
-	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
 )
 
 type SampAutocorrectEnum string
@@ -103,27 +103,26 @@ const (
 type SampEnterkeyhintEnum string
 
 const (
-	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
 	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
 	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
 	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
 	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
 	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
+	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 )
 
 type SampHiddenEnum string
 
 const (
-	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
 	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
+	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
 	SampHiddenEnumEmpty      SampHiddenEnum = ""
 )
 
 type SampInputmodeEnum string
 
 const (
-	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
 	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
 	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
 	SampInputmodeEnumText    SampInputmodeEnum = "text"
@@ -131,6 +130,7 @@ const (
 	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
 	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
 	SampInputmodeEnumNone    SampInputmodeEnum = "none"
+	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
 )
 
 type SampSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *SampElement) Writingsuggestions(a SampWritingsuggestionsEnum) *SampElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SampElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

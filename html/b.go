@@ -60,12 +60,12 @@ func (e *BElement) AddIndent(i int) {
 type BAutocapitalizeEnum string
 
 const (
-	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
-	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
 	BAutocapitalizeEnumOn         BAutocapitalizeEnum = "on"
 	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
 	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
 	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
+	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
+	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
 )
 
 type BAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type BContenteditableEnum string
 
 const (
-	BContenteditableEnumFalse         BContenteditableEnum = "false"
 	BContenteditableEnumPlaintextOnly BContenteditableEnum = "plaintext-only"
 	BContenteditableEnumTrue          BContenteditableEnum = "true"
+	BContenteditableEnumFalse         BContenteditableEnum = "false"
 	BContenteditableEnumEmpty         BContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type BEnterkeyhintEnum string
 
 const (
-	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
-	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
-	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
 	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
 	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
+	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
+	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
+	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 )
 
 type BHiddenEnum string
@@ -136,8 +136,8 @@ const (
 type BSpellcheckEnum string
 
 const (
-	BSpellcheckEnumFalse BSpellcheckEnum = "false"
 	BSpellcheckEnumTrue  BSpellcheckEnum = "true"
+	BSpellcheckEnumFalse BSpellcheckEnum = "false"
 	BSpellcheckEnumEmpty BSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *BElement) Writingsuggestions(a BWritingsuggestionsEnum) *BElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

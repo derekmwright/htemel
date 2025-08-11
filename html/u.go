@@ -79,18 +79,18 @@ const (
 type UContenteditableEnum string
 
 const (
-	UContenteditableEnumTrue          UContenteditableEnum = "true"
 	UContenteditableEnumFalse         UContenteditableEnum = "false"
 	UContenteditableEnumPlaintextOnly UContenteditableEnum = "plaintext-only"
+	UContenteditableEnumTrue          UContenteditableEnum = "true"
 	UContenteditableEnumEmpty         UContenteditableEnum = ""
 )
 
 type UDirEnum string
 
 const (
+	UDirEnumRtl  UDirEnum = "rtl"
 	UDirEnumAuto UDirEnum = "auto"
 	UDirEnumLtr  UDirEnum = "ltr"
-	UDirEnumRtl  UDirEnum = "rtl"
 )
 
 type UDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type UEnterkeyhintEnum string
 
 const (
+	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
 	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
 	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
 	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
 	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
-	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
 )
 
 type UHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type UInputmodeEnum string
 
 const (
+	UInputmodeEnumNone    UInputmodeEnum = "none"
 	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
 	UInputmodeEnumSearch  UInputmodeEnum = "search"
 	UInputmodeEnumTel     UInputmodeEnum = "tel"
@@ -130,7 +131,6 @@ const (
 	UInputmodeEnumUrl     UInputmodeEnum = "url"
 	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
 	UInputmodeEnumEmail   UInputmodeEnum = "email"
-	UInputmodeEnumNone    UInputmodeEnum = "none"
 )
 
 type USpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *UElement) Writingsuggestions(a UWritingsuggestionsEnum) *UElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *UElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,12 +60,12 @@ func (e *SectionElement) AddIndent(i int) {
 type SectionAutocapitalizeEnum string
 
 const (
-	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
-	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
 	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
 	SectionAutocapitalizeEnumWords      SectionAutocapitalizeEnum = "words"
 	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
 	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
+	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
+	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
 )
 
 type SectionAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type SectionContenteditableEnum string
 
 const (
+	SectionContenteditableEnumFalse         SectionContenteditableEnum = "false"
 	SectionContenteditableEnumPlaintextOnly SectionContenteditableEnum = "plaintext-only"
 	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
-	SectionContenteditableEnumFalse         SectionContenteditableEnum = "false"
 	SectionContenteditableEnumEmpty         SectionContenteditableEnum = ""
 )
 
 type SectionDirEnum string
 
 const (
-	SectionDirEnumAuto SectionDirEnum = "auto"
 	SectionDirEnumLtr  SectionDirEnum = "ltr"
 	SectionDirEnumRtl  SectionDirEnum = "rtl"
+	SectionDirEnumAuto SectionDirEnum = "auto"
 )
 
 type SectionDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type SectionEnterkeyhintEnum string
 
 const (
-	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
 	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
 	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
 	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
 	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
 	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
 	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
+	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
 )
 
 type SectionHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SectionInputmodeEnum string
 
 const (
-	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
-	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
-	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
-	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
 	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
 	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
 	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
 	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
+	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
+	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
+	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
+	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
 )
 
 type SectionSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *SectionElement) Writingsuggestions(a SectionWritingsuggestionsEnum) *Se
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SectionElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

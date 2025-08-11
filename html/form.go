@@ -60,12 +60,12 @@ func (e *FormElement) AddIndent(i int) {
 type FormAutocapitalizeEnum string
 
 const (
-	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
 	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
 	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
+	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 )
 
 type FormAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type FormEnterkeyhintEnum string
 
 const (
-	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
-	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
-	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
 	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
 	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
 	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
+	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
+	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
+	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 )
 
 type FormHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type FormInputmodeEnum string
 
 const (
+	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
 	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
 	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
 	FormInputmodeEnumNone    FormInputmodeEnum = "none"
@@ -130,7 +131,6 @@ const (
 	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
 	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
 	FormInputmodeEnumText    FormInputmodeEnum = "text"
-	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
 )
 
 type FormSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *FormElement) Writingsuggestions(a FormWritingsuggestionsEnum) *FormElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *FormElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

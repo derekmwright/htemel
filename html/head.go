@@ -88,9 +88,9 @@ const (
 type HeadDirEnum string
 
 const (
+	HeadDirEnumAuto HeadDirEnum = "auto"
 	HeadDirEnumLtr  HeadDirEnum = "ltr"
 	HeadDirEnumRtl  HeadDirEnum = "rtl"
-	HeadDirEnumAuto HeadDirEnum = "auto"
 )
 
 type HeadDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type HeadEnterkeyhintEnum string
 
 const (
+	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
 	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
 	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
 	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
 	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
-	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 )
 
 type HeadHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type HeadInputmodeEnum string
 
 const (
+	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
 	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
 	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
 	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
@@ -130,7 +131,6 @@ const (
 	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
 	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
-	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
 )
 
 type HeadSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *HeadElement) Writingsuggestions(a HeadWritingsuggestionsEnum) *HeadElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HeadElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

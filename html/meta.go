@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -51,24 +52,24 @@ func (e *MetaElement) AddIndent(i int) {
 type MetaHttpEquivEnum string
 
 const (
-	MetaHttpEquivEnumContentType           MetaHttpEquivEnum = "content-type"
 	MetaHttpEquivEnumDefaultStyle          MetaHttpEquivEnum = "default-style"
 	MetaHttpEquivEnumRefresh               MetaHttpEquivEnum = "refresh"
 	MetaHttpEquivEnumSetCookie             MetaHttpEquivEnum = "set-cookie"
 	MetaHttpEquivEnumXUaCompatible         MetaHttpEquivEnum = "x-ua-compatible"
 	MetaHttpEquivEnumContentLanguage       MetaHttpEquivEnum = "content-language"
 	MetaHttpEquivEnumContentSecurityPolicy MetaHttpEquivEnum = "content-security-policy"
+	MetaHttpEquivEnumContentType           MetaHttpEquivEnum = "content-type"
 )
 
 type MetaAutocapitalizeEnum string
 
 const (
-	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
-	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
-	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
 	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
 	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
 	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
+	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
+	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
+	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
 )
 
 type MetaAutocorrectEnum string
@@ -82,9 +83,9 @@ const (
 type MetaContenteditableEnum string
 
 const (
+	MetaContenteditableEnumTrue          MetaContenteditableEnum = "true"
 	MetaContenteditableEnumFalse         MetaContenteditableEnum = "false"
 	MetaContenteditableEnumPlaintextOnly MetaContenteditableEnum = "plaintext-only"
-	MetaContenteditableEnumTrue          MetaContenteditableEnum = "true"
 	MetaContenteditableEnumEmpty         MetaContenteditableEnum = ""
 )
 
@@ -106,13 +107,13 @@ const (
 type MetaEnterkeyhintEnum string
 
 const (
+	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
 	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
 	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
 	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
 	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
-	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 )
 
 type MetaHiddenEnum string
@@ -126,6 +127,7 @@ const (
 type MetaInputmodeEnum string
 
 const (
+	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
 	MetaInputmodeEnumEmail   MetaInputmodeEnum = "email"
 	MetaInputmodeEnumNone    MetaInputmodeEnum = "none"
 	MetaInputmodeEnumNumeric MetaInputmodeEnum = "numeric"
@@ -133,7 +135,6 @@ const (
 	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
 	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
 	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
-	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
 )
 
 type MetaSpellcheckEnum string
@@ -372,7 +373,7 @@ func (e *MetaElement) Writingsuggestions(a MetaWritingsuggestionsEnum) *MetaElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MetaElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

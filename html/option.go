@@ -60,19 +60,19 @@ func (e *OptionElement) AddIndent(i int) {
 type OptionAutocapitalizeEnum string
 
 const (
+	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
 	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
 	OptionAutocapitalizeEnumNone       OptionAutocapitalizeEnum = "none"
 	OptionAutocapitalizeEnumOff        OptionAutocapitalizeEnum = "off"
 	OptionAutocapitalizeEnumOn         OptionAutocapitalizeEnum = "on"
-	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
 )
 
 type OptionAutocorrectEnum string
 
 const (
-	OptionAutocorrectEnumOn    OptionAutocorrectEnum = "on"
 	OptionAutocorrectEnumOff   OptionAutocorrectEnum = "off"
+	OptionAutocorrectEnumOn    OptionAutocorrectEnum = "on"
 	OptionAutocorrectEnumEmpty OptionAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type OptionEnterkeyhintEnum string
 
 const (
+	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
+	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
 	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
 	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
 	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
-	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
-	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
 )
 
 type OptionHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type OptionInputmodeEnum string
 
 const (
-	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
 	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
 	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
 	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
@@ -131,6 +130,7 @@ const (
 	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
 	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
+	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
 )
 
 type OptionSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *OptionElement) Writingsuggestions(a OptionWritingsuggestionsEnum) *Opti
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *OptionElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,37 +60,37 @@ func (e *ProgressElement) AddIndent(i int) {
 type ProgressAutocapitalizeEnum string
 
 const (
+	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
 	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
 	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
 	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
 	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
-	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
 )
 
 type ProgressAutocorrectEnum string
 
 const (
-	ProgressAutocorrectEnumOff   ProgressAutocorrectEnum = "off"
 	ProgressAutocorrectEnumOn    ProgressAutocorrectEnum = "on"
+	ProgressAutocorrectEnumOff   ProgressAutocorrectEnum = "off"
 	ProgressAutocorrectEnumEmpty ProgressAutocorrectEnum = ""
 )
 
 type ProgressContenteditableEnum string
 
 const (
-	ProgressContenteditableEnumFalse         ProgressContenteditableEnum = "false"
 	ProgressContenteditableEnumPlaintextOnly ProgressContenteditableEnum = "plaintext-only"
 	ProgressContenteditableEnumTrue          ProgressContenteditableEnum = "true"
+	ProgressContenteditableEnumFalse         ProgressContenteditableEnum = "false"
 	ProgressContenteditableEnumEmpty         ProgressContenteditableEnum = ""
 )
 
 type ProgressDirEnum string
 
 const (
+	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
 	ProgressDirEnumAuto ProgressDirEnum = "auto"
 	ProgressDirEnumLtr  ProgressDirEnum = "ltr"
-	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
 )
 
 type ProgressDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type ProgressEnterkeyhintEnum string
 
 const (
-	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
-	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
-	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
 	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
 	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
 	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
 	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
+	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
+	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
+	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
 )
 
 type ProgressHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type ProgressInputmodeEnum string
 
 const (
-	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
-	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
-	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
-	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
 	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
 	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
 	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
 	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
+	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
+	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
+	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
+	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
 )
 
 type ProgressSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *ProgressElement) Writingsuggestions(a ProgressWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ProgressElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

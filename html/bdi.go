@@ -60,28 +60,28 @@ func (e *BdiElement) AddIndent(i int) {
 type BdiAutocapitalizeEnum string
 
 const (
+	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 	BdiAutocapitalizeEnumNone       BdiAutocapitalizeEnum = "none"
 	BdiAutocapitalizeEnumOff        BdiAutocapitalizeEnum = "off"
 	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
 	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
 	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
-	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 )
 
 type BdiAutocorrectEnum string
 
 const (
-	BdiAutocorrectEnumOn    BdiAutocorrectEnum = "on"
 	BdiAutocorrectEnumOff   BdiAutocorrectEnum = "off"
+	BdiAutocorrectEnumOn    BdiAutocorrectEnum = "on"
 	BdiAutocorrectEnumEmpty BdiAutocorrectEnum = ""
 )
 
 type BdiContenteditableEnum string
 
 const (
+	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
 	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
 	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
-	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
 	BdiContenteditableEnumEmpty         BdiContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type BdiEnterkeyhintEnum string
 
 const (
+	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
+	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 	BdiEnterkeyhintEnumNext     BdiEnterkeyhintEnum = "next"
 	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
 	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
 	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
 	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
-	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
-	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 )
 
 type BdiHiddenEnum string
@@ -136,16 +136,16 @@ const (
 type BdiSpellcheckEnum string
 
 const (
-	BdiSpellcheckEnumFalse BdiSpellcheckEnum = "false"
 	BdiSpellcheckEnumTrue  BdiSpellcheckEnum = "true"
+	BdiSpellcheckEnumFalse BdiSpellcheckEnum = "false"
 	BdiSpellcheckEnumEmpty BdiSpellcheckEnum = ""
 )
 
 type BdiTranslateEnum string
 
 const (
-	BdiTranslateEnumYes   BdiTranslateEnum = "yes"
 	BdiTranslateEnumNo    BdiTranslateEnum = "no"
+	BdiTranslateEnumYes   BdiTranslateEnum = "yes"
 	BdiTranslateEnumEmpty BdiTranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *BdiElement) Writingsuggestions(a BdiWritingsuggestionsEnum) *BdiElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BdiElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

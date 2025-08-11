@@ -15,6 +15,13 @@ type Node interface {
 	Indent() int
 }
 
+func SetIndent(i int) string {
+	if i > 0 {
+		return strings.Repeat("  ", i)
+	}
+	return ""
+}
+
 // GroupElement is a struct that backs the Group function.
 type GroupElement struct {
 	children []Node
@@ -40,7 +47,10 @@ func (e *GroupElement) Indent() int {
 // Render implements the Node interface by calling Render on all child nodes.
 func (e *GroupElement) Render(w io.Writer) error {
 	for _, child := range e.children {
-		child.AddIndent(e.indent)
+		if e.indent > 0 {
+			child.AddIndent(e.indent)
+		}
+
 		if err := child.Render(w); err != nil {
 			return err
 		}
@@ -92,7 +102,7 @@ func (e *GenericElement) Indent() int {
 }
 
 func (e *GenericElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := SetIndent(e.indent)
 
 	if _, err := w.Write([]byte(indent + "<" + e.tag)); err != nil {
 		return err
@@ -161,7 +171,8 @@ func (e *TextElement) Indent() int {
 }
 
 func (e *TextElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := SetIndent(e.indent)
+
 	if _, err := w.Write([]byte(indent + e.text)); err != nil {
 		return err
 	}

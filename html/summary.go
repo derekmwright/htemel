@@ -60,12 +60,12 @@ func (e *SummaryElement) AddIndent(i int) {
 type SummaryAutocapitalizeEnum string
 
 const (
-	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
 	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
 	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
+	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
 )
 
 type SummaryAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type SummaryContenteditableEnum string
 
 const (
-	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
 	SummaryContenteditableEnumFalse         SummaryContenteditableEnum = "false"
 	SummaryContenteditableEnumPlaintextOnly SummaryContenteditableEnum = "plaintext-only"
+	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
 	SummaryContenteditableEnumEmpty         SummaryContenteditableEnum = ""
 )
 
@@ -123,6 +123,7 @@ const (
 type SummaryInputmodeEnum string
 
 const (
+	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
 	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
 	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
 	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
@@ -130,14 +131,13 @@ const (
 	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
 	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
-	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
 )
 
 type SummarySpellcheckEnum string
 
 const (
-	SummarySpellcheckEnumTrue  SummarySpellcheckEnum = "true"
 	SummarySpellcheckEnumFalse SummarySpellcheckEnum = "false"
+	SummarySpellcheckEnumTrue  SummarySpellcheckEnum = "true"
 	SummarySpellcheckEnumEmpty SummarySpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *SummaryElement) Writingsuggestions(a SummaryWritingsuggestionsEnum) *Su
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SummaryElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

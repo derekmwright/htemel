@@ -60,12 +60,12 @@ func (e *DlElement) AddIndent(i int) {
 type DlAutocapitalizeEnum string
 
 const (
-	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
 	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
 	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
 	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
 	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
 	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
+	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
 )
 
 type DlAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type DlContenteditableEnum string
 
 const (
-	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
 	DlContenteditableEnumTrue          DlContenteditableEnum = "true"
+	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumEmpty         DlContenteditableEnum = ""
 )
 
@@ -96,41 +96,41 @@ const (
 type DlDraggableEnum string
 
 const (
-	DlDraggableEnumFalse DlDraggableEnum = "false"
 	DlDraggableEnumTrue  DlDraggableEnum = "true"
+	DlDraggableEnumFalse DlDraggableEnum = "false"
 )
 
 type DlEnterkeyhintEnum string
 
 const (
-	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
-	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
-	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
 	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
 	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
 	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
+	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
+	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
+	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 )
 
 type DlHiddenEnum string
 
 const (
-	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
 	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
+	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
 	DlHiddenEnumEmpty      DlHiddenEnum = ""
 )
 
 type DlInputmodeEnum string
 
 const (
+	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
+	DlInputmodeEnumSearch  DlInputmodeEnum = "search"
 	DlInputmodeEnumTel     DlInputmodeEnum = "tel"
 	DlInputmodeEnumText    DlInputmodeEnum = "text"
 	DlInputmodeEnumUrl     DlInputmodeEnum = "url"
 	DlInputmodeEnumDecimal DlInputmodeEnum = "decimal"
 	DlInputmodeEnumEmail   DlInputmodeEnum = "email"
 	DlInputmodeEnumNone    DlInputmodeEnum = "none"
-	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
-	DlInputmodeEnumSearch  DlInputmodeEnum = "search"
 )
 
 type DlSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *DlElement) Writingsuggestions(a DlWritingsuggestionsEnum) *DlElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DlElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

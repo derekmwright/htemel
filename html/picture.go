@@ -60,12 +60,12 @@ func (e *PictureElement) AddIndent(i int) {
 type PictureAutocapitalizeEnum string
 
 const (
-	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
-	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
-	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 	PictureAutocapitalizeEnumSentences  PictureAutocapitalizeEnum = "sentences"
 	PictureAutocapitalizeEnumWords      PictureAutocapitalizeEnum = "words"
 	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
+	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
+	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
+	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 )
 
 type PictureAutocorrectEnum string
@@ -88,28 +88,28 @@ const (
 type PictureDirEnum string
 
 const (
+	PictureDirEnumAuto PictureDirEnum = "auto"
 	PictureDirEnumLtr  PictureDirEnum = "ltr"
 	PictureDirEnumRtl  PictureDirEnum = "rtl"
-	PictureDirEnumAuto PictureDirEnum = "auto"
 )
 
 type PictureDraggableEnum string
 
 const (
-	PictureDraggableEnumFalse PictureDraggableEnum = "false"
 	PictureDraggableEnumTrue  PictureDraggableEnum = "true"
+	PictureDraggableEnumFalse PictureDraggableEnum = "false"
 )
 
 type PictureEnterkeyhintEnum string
 
 const (
-	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
-	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
-	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
 	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
 	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
 	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
+	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
+	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
+	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 )
 
 type PictureHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type PictureInputmodeEnum string
 
 const (
-	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
 	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
 	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
@@ -131,6 +130,7 @@ const (
 	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
 	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
 	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
+	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 )
 
 type PictureSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type PictureTranslateEnum string
 
 const (
-	PictureTranslateEnumYes   PictureTranslateEnum = "yes"
 	PictureTranslateEnumNo    PictureTranslateEnum = "no"
+	PictureTranslateEnumYes   PictureTranslateEnum = "yes"
 	PictureTranslateEnumEmpty PictureTranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *PictureElement) Writingsuggestions(a PictureWritingsuggestionsEnum) *Pi
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *PictureElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

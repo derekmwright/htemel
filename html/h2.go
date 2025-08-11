@@ -60,12 +60,12 @@ func (e *H2Element) AddIndent(i int) {
 type H2AutocapitalizeEnum string
 
 const (
-	H2AutocapitalizeEnumNone       H2AutocapitalizeEnum = "none"
-	H2AutocapitalizeEnumOff        H2AutocapitalizeEnum = "off"
 	H2AutocapitalizeEnumOn         H2AutocapitalizeEnum = "on"
 	H2AutocapitalizeEnumSentences  H2AutocapitalizeEnum = "sentences"
 	H2AutocapitalizeEnumWords      H2AutocapitalizeEnum = "words"
 	H2AutocapitalizeEnumCharacters H2AutocapitalizeEnum = "characters"
+	H2AutocapitalizeEnumNone       H2AutocapitalizeEnum = "none"
+	H2AutocapitalizeEnumOff        H2AutocapitalizeEnum = "off"
 )
 
 type H2AutocorrectEnum string
@@ -79,25 +79,25 @@ const (
 type H2ContenteditableEnum string
 
 const (
+	H2ContenteditableEnumFalse         H2ContenteditableEnum = "false"
 	H2ContenteditableEnumPlaintextOnly H2ContenteditableEnum = "plaintext-only"
 	H2ContenteditableEnumTrue          H2ContenteditableEnum = "true"
-	H2ContenteditableEnumFalse         H2ContenteditableEnum = "false"
 	H2ContenteditableEnumEmpty         H2ContenteditableEnum = ""
 )
 
 type H2DirEnum string
 
 const (
-	H2DirEnumRtl  H2DirEnum = "rtl"
 	H2DirEnumAuto H2DirEnum = "auto"
 	H2DirEnumLtr  H2DirEnum = "ltr"
+	H2DirEnumRtl  H2DirEnum = "rtl"
 )
 
 type H2DraggableEnum string
 
 const (
-	H2DraggableEnumTrue  H2DraggableEnum = "true"
 	H2DraggableEnumFalse H2DraggableEnum = "false"
+	H2DraggableEnumTrue  H2DraggableEnum = "true"
 )
 
 type H2EnterkeyhintEnum string
@@ -123,14 +123,14 @@ const (
 type H2InputmodeEnum string
 
 const (
+	H2InputmodeEnumUrl     H2InputmodeEnum = "url"
+	H2InputmodeEnumDecimal H2InputmodeEnum = "decimal"
+	H2InputmodeEnumEmail   H2InputmodeEnum = "email"
 	H2InputmodeEnumNone    H2InputmodeEnum = "none"
 	H2InputmodeEnumNumeric H2InputmodeEnum = "numeric"
 	H2InputmodeEnumSearch  H2InputmodeEnum = "search"
 	H2InputmodeEnumTel     H2InputmodeEnum = "tel"
 	H2InputmodeEnumText    H2InputmodeEnum = "text"
-	H2InputmodeEnumUrl     H2InputmodeEnum = "url"
-	H2InputmodeEnumDecimal H2InputmodeEnum = "decimal"
-	H2InputmodeEnumEmail   H2InputmodeEnum = "email"
 )
 
 type H2SpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *H2Element) Writingsuggestions(a H2WritingsuggestionsEnum) *H2Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H2Element) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

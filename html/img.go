@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -93,9 +94,9 @@ const (
 type ImgContenteditableEnum string
 
 const (
+	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumPlaintextOnly ImgContenteditableEnum = "plaintext-only"
-	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumEmpty         ImgContenteditableEnum = ""
 )
 
@@ -117,13 +118,13 @@ const (
 type ImgEnterkeyhintEnum string
 
 const (
+	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
+	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
 	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
 	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
-	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
-	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 )
 
 type ImgHiddenEnum string
@@ -137,14 +138,14 @@ const (
 type ImgInputmodeEnum string
 
 const (
-	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
-	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
-	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
 	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
 	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
 	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
 	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
 	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
+	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
+	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
+	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
 )
 
 type ImgSpellcheckEnum string
@@ -431,7 +432,7 @@ func (e *ImgElement) Writingsuggestions(a ImgWritingsuggestionsEnum) *ImgElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ImgElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

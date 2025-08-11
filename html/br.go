@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -51,12 +52,12 @@ func (e *BrElement) AddIndent(i int) {
 type BrAutocapitalizeEnum string
 
 const (
-	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
-	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 	BrAutocapitalizeEnumOff        BrAutocapitalizeEnum = "off"
 	BrAutocapitalizeEnumOn         BrAutocapitalizeEnum = "on"
 	BrAutocapitalizeEnumSentences  BrAutocapitalizeEnum = "sentences"
 	BrAutocapitalizeEnumWords      BrAutocapitalizeEnum = "words"
+	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
+	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 )
 
 type BrAutocorrectEnum string
@@ -70,9 +71,9 @@ const (
 type BrContenteditableEnum string
 
 const (
+	BrContenteditableEnumTrue          BrContenteditableEnum = "true"
 	BrContenteditableEnumFalse         BrContenteditableEnum = "false"
 	BrContenteditableEnumPlaintextOnly BrContenteditableEnum = "plaintext-only"
-	BrContenteditableEnumTrue          BrContenteditableEnum = "true"
 	BrContenteditableEnumEmpty         BrContenteditableEnum = ""
 )
 
@@ -87,41 +88,41 @@ const (
 type BrDraggableEnum string
 
 const (
-	BrDraggableEnumFalse BrDraggableEnum = "false"
 	BrDraggableEnumTrue  BrDraggableEnum = "true"
+	BrDraggableEnumFalse BrDraggableEnum = "false"
 )
 
 type BrEnterkeyhintEnum string
 
 const (
+	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
+	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
+	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
 	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
 	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
-	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
-	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
-	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 )
 
 type BrHiddenEnum string
 
 const (
-	BrHiddenEnumHidden     BrHiddenEnum = "hidden"
 	BrHiddenEnumUntilFound BrHiddenEnum = "until-found"
+	BrHiddenEnumHidden     BrHiddenEnum = "hidden"
 	BrHiddenEnumEmpty      BrHiddenEnum = ""
 )
 
 type BrInputmodeEnum string
 
 const (
+	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
+	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
 	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
 	BrInputmodeEnumNone    BrInputmodeEnum = "none"
 	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
 	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
 	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
 	BrInputmodeEnumText    BrInputmodeEnum = "text"
-	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
-	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
 )
 
 type BrSpellcheckEnum string
@@ -143,8 +144,8 @@ const (
 type BrWritingsuggestionsEnum string
 
 const (
-	BrWritingsuggestionsEnumTrue  BrWritingsuggestionsEnum = "true"
 	BrWritingsuggestionsEnumFalse BrWritingsuggestionsEnum = "false"
+	BrWritingsuggestionsEnumTrue  BrWritingsuggestionsEnum = "true"
 	BrWritingsuggestionsEnumEmpty BrWritingsuggestionsEnum = ""
 )
 
@@ -330,7 +331,7 @@ func (e *BrElement) Writingsuggestions(a BrWritingsuggestionsEnum) *BrElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BrElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

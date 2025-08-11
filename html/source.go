@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -51,12 +52,12 @@ func (e *SourceElement) AddIndent(i int) {
 type SourceAutocapitalizeEnum string
 
 const (
-	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
-	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
 	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
 	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
 	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
 	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
+	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
+	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
 )
 
 type SourceAutocorrectEnum string
@@ -79,9 +80,9 @@ const (
 type SourceDirEnum string
 
 const (
-	SourceDirEnumRtl  SourceDirEnum = "rtl"
 	SourceDirEnumAuto SourceDirEnum = "auto"
 	SourceDirEnumLtr  SourceDirEnum = "ltr"
+	SourceDirEnumRtl  SourceDirEnum = "rtl"
 )
 
 type SourceDraggableEnum string
@@ -94,13 +95,13 @@ const (
 type SourceEnterkeyhintEnum string
 
 const (
+	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
+	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
+	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
 	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
 	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
 	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
-	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
-	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
-	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
 )
 
 type SourceHiddenEnum string
@@ -127,8 +128,8 @@ const (
 type SourceSpellcheckEnum string
 
 const (
-	SourceSpellcheckEnumTrue  SourceSpellcheckEnum = "true"
 	SourceSpellcheckEnumFalse SourceSpellcheckEnum = "false"
+	SourceSpellcheckEnumTrue  SourceSpellcheckEnum = "true"
 	SourceSpellcheckEnumEmpty SourceSpellcheckEnum = ""
 )
 
@@ -372,7 +373,7 @@ func (e *SourceElement) Writingsuggestions(a SourceWritingsuggestionsEnum) *Sour
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SourceElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

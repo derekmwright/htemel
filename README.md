@@ -75,26 +75,34 @@ func main() {
 }
 ```
 
-**Output** (formatted for readability):
+**Output**:
 
 ```html
 <!DOCTYPE html>
 <html class="h-dvh bg-gray-200" lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example htemel Page</title>
+    <meta content="width=device-width, initial-scale=1.0">
+    <title>
+        Example htemel Page
+    </title>
     <link href="site.css" rel="stylesheet">
 </head>
 <body id="app-content">
+<div>
+    <nav id="main-navigation">
+        <ul class="flex list-none">
+        </ul>
+    </nav>
     <div>
-        <nav id="main-navigation">
-            <ul class="flex list-none"></ul>
-        </nav>
-        <div>
-            <p>Welcome back!</p>
-        </div>
+        <h4 class="text-xl font-semibold">
+            Logged In
+        </h4>
+        <p>
+            Welcome back!
+        </p>
     </div>
+</div>
 </body>
 </html>
 ```

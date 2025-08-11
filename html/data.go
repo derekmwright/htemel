@@ -60,19 +60,19 @@ func (e *DataElement) AddIndent(i int) {
 type DataAutocapitalizeEnum string
 
 const (
+	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
+	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
 	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
 	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
-	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
-	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 )
 
 type DataAutocorrectEnum string
 
 const (
-	DataAutocorrectEnumOff   DataAutocorrectEnum = "off"
 	DataAutocorrectEnumOn    DataAutocorrectEnum = "on"
+	DataAutocorrectEnumOff   DataAutocorrectEnum = "off"
 	DataAutocorrectEnumEmpty DataAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type DataEnterkeyhintEnum string
 
 const (
+	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
+	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
+	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
 	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
 	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
 	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
-	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
-	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
-	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 )
 
 type DataHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type DataInputmodeEnum string
 
 const (
-	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
-	DataInputmodeEnumText    DataInputmodeEnum = "text"
-	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
-	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
 	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
 	DataInputmodeEnumNone    DataInputmodeEnum = "none"
 	DataInputmodeEnumNumeric DataInputmodeEnum = "numeric"
 	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
+	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
+	DataInputmodeEnumText    DataInputmodeEnum = "text"
+	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
+	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
 )
 
 type DataSpellcheckEnum string
@@ -345,7 +345,7 @@ func (e *DataElement) Writingsuggestions(a DataWritingsuggestionsEnum) *DataElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DataElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

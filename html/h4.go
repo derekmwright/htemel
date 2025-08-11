@@ -71,8 +71,8 @@ const (
 type H4AutocorrectEnum string
 
 const (
-	H4AutocorrectEnumOff   H4AutocorrectEnum = "off"
 	H4AutocorrectEnumOn    H4AutocorrectEnum = "on"
+	H4AutocorrectEnumOff   H4AutocorrectEnum = "off"
 	H4AutocorrectEnumEmpty H4AutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type H4DirEnum string
 
 const (
-	H4DirEnumLtr  H4DirEnum = "ltr"
 	H4DirEnumRtl  H4DirEnum = "rtl"
 	H4DirEnumAuto H4DirEnum = "auto"
+	H4DirEnumLtr  H4DirEnum = "ltr"
 )
 
 type H4DraggableEnum string
@@ -103,13 +103,13 @@ const (
 type H4EnterkeyhintEnum string
 
 const (
+	H4EnterkeyhintEnumSearch   H4EnterkeyhintEnum = "search"
+	H4EnterkeyhintEnumSend     H4EnterkeyhintEnum = "send"
+	H4EnterkeyhintEnumDone     H4EnterkeyhintEnum = "done"
 	H4EnterkeyhintEnumEnter    H4EnterkeyhintEnum = "enter"
 	H4EnterkeyhintEnumGo       H4EnterkeyhintEnum = "go"
 	H4EnterkeyhintEnumNext     H4EnterkeyhintEnum = "next"
 	H4EnterkeyhintEnumPrevious H4EnterkeyhintEnum = "previous"
-	H4EnterkeyhintEnumSearch   H4EnterkeyhintEnum = "search"
-	H4EnterkeyhintEnumSend     H4EnterkeyhintEnum = "send"
-	H4EnterkeyhintEnumDone     H4EnterkeyhintEnum = "done"
 )
 
 type H4HiddenEnum string
@@ -123,6 +123,7 @@ const (
 type H4InputmodeEnum string
 
 const (
+	H4InputmodeEnumNone    H4InputmodeEnum = "none"
 	H4InputmodeEnumNumeric H4InputmodeEnum = "numeric"
 	H4InputmodeEnumSearch  H4InputmodeEnum = "search"
 	H4InputmodeEnumTel     H4InputmodeEnum = "tel"
@@ -130,7 +131,6 @@ const (
 	H4InputmodeEnumUrl     H4InputmodeEnum = "url"
 	H4InputmodeEnumDecimal H4InputmodeEnum = "decimal"
 	H4InputmodeEnumEmail   H4InputmodeEnum = "email"
-	H4InputmodeEnumNone    H4InputmodeEnum = "none"
 )
 
 type H4SpellcheckEnum string
@@ -144,16 +144,16 @@ const (
 type H4TranslateEnum string
 
 const (
-	H4TranslateEnumNo    H4TranslateEnum = "no"
 	H4TranslateEnumYes   H4TranslateEnum = "yes"
+	H4TranslateEnumNo    H4TranslateEnum = "no"
 	H4TranslateEnumEmpty H4TranslateEnum = ""
 )
 
 type H4WritingsuggestionsEnum string
 
 const (
-	H4WritingsuggestionsEnumFalse H4WritingsuggestionsEnum = "false"
 	H4WritingsuggestionsEnumTrue  H4WritingsuggestionsEnum = "true"
+	H4WritingsuggestionsEnumFalse H4WritingsuggestionsEnum = "false"
 	H4WritingsuggestionsEnumEmpty H4WritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *H4Element) Writingsuggestions(a H4WritingsuggestionsEnum) *H4Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H4Element) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

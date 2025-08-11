@@ -88,9 +88,9 @@ const (
 type SelectedcontentDirEnum string
 
 const (
-	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 	SelectedcontentDirEnumAuto SelectedcontentDirEnum = "auto"
 	SelectedcontentDirEnumLtr  SelectedcontentDirEnum = "ltr"
+	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 )
 
 type SelectedcontentDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type SelectedcontentEnterkeyhintEnum string
 
 const (
+	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
+	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
+	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
 	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
 	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
-	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
-	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
-	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 )
 
 type SelectedcontentHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
-	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
-	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
-	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
 	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
 	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
 	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
 	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
+	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
+	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
+	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
 )
 
 type SelectedcontentSpellcheckEnum string
@@ -144,16 +144,16 @@ const (
 type SelectedcontentTranslateEnum string
 
 const (
-	SelectedcontentTranslateEnumYes   SelectedcontentTranslateEnum = "yes"
 	SelectedcontentTranslateEnumNo    SelectedcontentTranslateEnum = "no"
+	SelectedcontentTranslateEnumYes   SelectedcontentTranslateEnum = "yes"
 	SelectedcontentTranslateEnumEmpty SelectedcontentTranslateEnum = ""
 )
 
 type SelectedcontentWritingsuggestionsEnum string
 
 const (
-	SelectedcontentWritingsuggestionsEnumTrue  SelectedcontentWritingsuggestionsEnum = "true"
 	SelectedcontentWritingsuggestionsEnumFalse SelectedcontentWritingsuggestionsEnum = "false"
+	SelectedcontentWritingsuggestionsEnumTrue  SelectedcontentWritingsuggestionsEnum = "true"
 	SelectedcontentWritingsuggestionsEnumEmpty SelectedcontentWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *SelectedcontentElement) Writingsuggestions(a SelectedcontentWritingsugg
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SelectedcontentElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

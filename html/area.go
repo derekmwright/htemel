@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -51,12 +52,12 @@ func (e *AreaElement) AddIndent(i int) {
 type AreaAutocapitalizeEnum string
 
 const (
+	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
+	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
 	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
 	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
 	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
-	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
-	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 )
 
 type AreaAutocorrectEnum string
@@ -94,34 +95,34 @@ const (
 type AreaEnterkeyhintEnum string
 
 const (
-	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
 	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
 	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
 	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
 	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
 	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
 	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
+	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
 )
 
 type AreaHiddenEnum string
 
 const (
-	AreaHiddenEnumUntilFound AreaHiddenEnum = "until-found"
 	AreaHiddenEnumHidden     AreaHiddenEnum = "hidden"
+	AreaHiddenEnumUntilFound AreaHiddenEnum = "until-found"
 	AreaHiddenEnumEmpty      AreaHiddenEnum = ""
 )
 
 type AreaInputmodeEnum string
 
 const (
+	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
+	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
+	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
 	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
 	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
 	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
-	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
-	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
-	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
 )
 
 type AreaSpellcheckEnum string
@@ -330,7 +331,7 @@ func (e *AreaElement) Writingsuggestions(a AreaWritingsuggestionsEnum) *AreaElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AreaElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

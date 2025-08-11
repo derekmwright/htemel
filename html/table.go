@@ -60,12 +60,12 @@ func (e *TableElement) AddIndent(i int) {
 type TableAutocapitalizeEnum string
 
 const (
+	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
+	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
 	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
 	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
 	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
-	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
-	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
 )
 
 type TableAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type TableContenteditableEnum string
 
 const (
+	TableContenteditableEnumTrue          TableContenteditableEnum = "true"
 	TableContenteditableEnumFalse         TableContenteditableEnum = "false"
 	TableContenteditableEnumPlaintextOnly TableContenteditableEnum = "plaintext-only"
-	TableContenteditableEnumTrue          TableContenteditableEnum = "true"
 	TableContenteditableEnumEmpty         TableContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type TableDraggableEnum string
 
 const (
-	TableDraggableEnumTrue  TableDraggableEnum = "true"
 	TableDraggableEnumFalse TableDraggableEnum = "false"
+	TableDraggableEnumTrue  TableDraggableEnum = "true"
 )
 
 type TableEnterkeyhintEnum string
 
 const (
+	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
+	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
 	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
 	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
 	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
 	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
 	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
-	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
-	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
 )
 
 type TableHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type TableInputmodeEnum string
 
 const (
+	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 	TableInputmodeEnumText    TableInputmodeEnum = "text"
 	TableInputmodeEnumUrl     TableInputmodeEnum = "url"
@@ -130,14 +131,13 @@ const (
 	TableInputmodeEnumEmail   TableInputmodeEnum = "email"
 	TableInputmodeEnumNone    TableInputmodeEnum = "none"
 	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
-	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 )
 
 type TableSpellcheckEnum string
 
 const (
-	TableSpellcheckEnumFalse TableSpellcheckEnum = "false"
 	TableSpellcheckEnumTrue  TableSpellcheckEnum = "true"
+	TableSpellcheckEnumFalse TableSpellcheckEnum = "false"
 	TableSpellcheckEnumEmpty TableSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *TableElement) Writingsuggestions(a TableWritingsuggestionsEnum) *TableE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TableElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

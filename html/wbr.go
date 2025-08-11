@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -94,13 +95,13 @@ const (
 type WbrEnterkeyhintEnum string
 
 const (
-	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
-	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
 	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
 	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
 	WbrEnterkeyhintEnumSearch   WbrEnterkeyhintEnum = "search"
+	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
+	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 )
 
 type WbrHiddenEnum string
@@ -114,14 +115,14 @@ const (
 type WbrInputmodeEnum string
 
 const (
-	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
-	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
-	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
 	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
 	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
 	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
+	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
+	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
+	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 )
 
 type WbrSpellcheckEnum string
@@ -143,8 +144,8 @@ const (
 type WbrWritingsuggestionsEnum string
 
 const (
-	WbrWritingsuggestionsEnumTrue  WbrWritingsuggestionsEnum = "true"
 	WbrWritingsuggestionsEnumFalse WbrWritingsuggestionsEnum = "false"
+	WbrWritingsuggestionsEnumTrue  WbrWritingsuggestionsEnum = "true"
 	WbrWritingsuggestionsEnumEmpty WbrWritingsuggestionsEnum = ""
 )
 
@@ -330,7 +331,7 @@ func (e *WbrElement) Writingsuggestions(a WbrWritingsuggestionsEnum) *WbrElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *WbrElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

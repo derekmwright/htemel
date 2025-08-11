@@ -60,12 +60,12 @@ func (e *IElement) AddIndent(i int) {
 type IAutocapitalizeEnum string
 
 const (
+	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
 	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
 	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
 	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
 	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
-	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 )
 
 type IAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type IContenteditableEnum string
 
 const (
+	IContenteditableEnumPlaintextOnly IContenteditableEnum = "plaintext-only"
 	IContenteditableEnumTrue          IContenteditableEnum = "true"
 	IContenteditableEnumFalse         IContenteditableEnum = "false"
-	IContenteditableEnumPlaintextOnly IContenteditableEnum = "plaintext-only"
 	IContenteditableEnumEmpty         IContenteditableEnum = ""
 )
 
 type IDirEnum string
 
 const (
+	IDirEnumAuto IDirEnum = "auto"
 	IDirEnumLtr  IDirEnum = "ltr"
 	IDirEnumRtl  IDirEnum = "rtl"
-	IDirEnumAuto IDirEnum = "auto"
 )
 
 type IDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
-	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
 	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
 	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
 	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
 	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
+	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
 )
 
 type IHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type IInputmodeEnum string
 
 const (
-	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
-	IInputmodeEnumSearch  IInputmodeEnum = "search"
-	IInputmodeEnumTel     IInputmodeEnum = "tel"
-	IInputmodeEnumText    IInputmodeEnum = "text"
 	IInputmodeEnumUrl     IInputmodeEnum = "url"
 	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
 	IInputmodeEnumEmail   IInputmodeEnum = "email"
 	IInputmodeEnumNone    IInputmodeEnum = "none"
+	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
+	IInputmodeEnumSearch  IInputmodeEnum = "search"
+	IInputmodeEnumTel     IInputmodeEnum = "tel"
+	IInputmodeEnumText    IInputmodeEnum = "text"
 )
 
 type ISpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *IElement) Writingsuggestions(a IWritingsuggestionsEnum) *IElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *IElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

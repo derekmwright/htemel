@@ -60,12 +60,12 @@ func (e *TimeElement) AddIndent(i int) {
 type TimeAutocapitalizeEnum string
 
 const (
-	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
-	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
-	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
 	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
 	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
+	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
+	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
+	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 )
 
 type TimeAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type TimeContenteditableEnum string
 
 const (
+	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
 	TimeContenteditableEnumFalse         TimeContenteditableEnum = "false"
 	TimeContenteditableEnumPlaintextOnly TimeContenteditableEnum = "plaintext-only"
-	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
 	TimeContenteditableEnumEmpty         TimeContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type TimeEnterkeyhintEnum string
 
 const (
-	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
 	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
 	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
 	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 	TimeEnterkeyhintEnumEnter    TimeEnterkeyhintEnum = "enter"
 	TimeEnterkeyhintEnumGo       TimeEnterkeyhintEnum = "go"
+	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
 )
 
 type TimeHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type TimeInputmodeEnum string
 
 const (
+	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
+	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
+	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
 	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
 	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
 	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
 	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
 	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
-	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
-	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
-	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
 )
 
 type TimeSpellcheckEnum string
@@ -345,7 +345,7 @@ func (e *TimeElement) Writingsuggestions(a TimeWritingsuggestionsEnum) *TimeElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TimeElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

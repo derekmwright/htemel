@@ -79,9 +79,9 @@ const (
 type PContenteditableEnum string
 
 const (
-	PContenteditableEnumTrue          PContenteditableEnum = "true"
 	PContenteditableEnumFalse         PContenteditableEnum = "false"
 	PContenteditableEnumPlaintextOnly PContenteditableEnum = "plaintext-only"
+	PContenteditableEnumTrue          PContenteditableEnum = "true"
 	PContenteditableEnumEmpty         PContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type PEnterkeyhintEnum string
 
 const (
-	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
-	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
 	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
 	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
+	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
+	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 )
 
 type PHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type PInputmodeEnum string
 
 const (
-	PInputmodeEnumSearch  PInputmodeEnum = "search"
-	PInputmodeEnumTel     PInputmodeEnum = "tel"
-	PInputmodeEnumText    PInputmodeEnum = "text"
 	PInputmodeEnumUrl     PInputmodeEnum = "url"
 	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
 	PInputmodeEnumEmail   PInputmodeEnum = "email"
 	PInputmodeEnumNone    PInputmodeEnum = "none"
 	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
+	PInputmodeEnumSearch  PInputmodeEnum = "search"
+	PInputmodeEnumTel     PInputmodeEnum = "tel"
+	PInputmodeEnumText    PInputmodeEnum = "text"
 )
 
 type PSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type PWritingsuggestionsEnum string
 
 const (
-	PWritingsuggestionsEnumTrue  PWritingsuggestionsEnum = "true"
 	PWritingsuggestionsEnumFalse PWritingsuggestionsEnum = "false"
+	PWritingsuggestionsEnumTrue  PWritingsuggestionsEnum = "true"
 	PWritingsuggestionsEnumEmpty PWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *PElement) Writingsuggestions(a PWritingsuggestionsEnum) *PElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *PElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

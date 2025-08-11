@@ -60,12 +60,12 @@ func (e *SearchElement) AddIndent(i int) {
 type SearchAutocapitalizeEnum string
 
 const (
-	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
-	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
 	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
 	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
 	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
 	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
+	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
+	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
 )
 
 type SearchAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type SearchContenteditableEnum string
 
 const (
-	SearchContenteditableEnumTrue          SearchContenteditableEnum = "true"
 	SearchContenteditableEnumFalse         SearchContenteditableEnum = "false"
 	SearchContenteditableEnumPlaintextOnly SearchContenteditableEnum = "plaintext-only"
+	SearchContenteditableEnumTrue          SearchContenteditableEnum = "true"
 	SearchContenteditableEnumEmpty         SearchContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type SearchDraggableEnum string
 
 const (
-	SearchDraggableEnumTrue  SearchDraggableEnum = "true"
 	SearchDraggableEnumFalse SearchDraggableEnum = "false"
+	SearchDraggableEnumTrue  SearchDraggableEnum = "true"
 )
 
 type SearchEnterkeyhintEnum string
 
 const (
+	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
 	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
 	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
 	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
 	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
 	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
-	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
 )
 
 type SearchHiddenEnum string
@@ -144,8 +144,8 @@ const (
 type SearchTranslateEnum string
 
 const (
-	SearchTranslateEnumNo    SearchTranslateEnum = "no"
 	SearchTranslateEnumYes   SearchTranslateEnum = "yes"
+	SearchTranslateEnumNo    SearchTranslateEnum = "no"
 	SearchTranslateEnumEmpty SearchTranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *SearchElement) Writingsuggestions(a SearchWritingsuggestionsEnum) *Sear
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SearchElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

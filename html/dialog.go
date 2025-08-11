@@ -79,9 +79,9 @@ const (
 type DialogContenteditableEnum string
 
 const (
+	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
 	DialogContenteditableEnumFalse         DialogContenteditableEnum = "false"
 	DialogContenteditableEnumPlaintextOnly DialogContenteditableEnum = "plaintext-only"
-	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
 	DialogContenteditableEnumEmpty         DialogContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type DialogDraggableEnum string
 
 const (
-	DialogDraggableEnumFalse DialogDraggableEnum = "false"
 	DialogDraggableEnumTrue  DialogDraggableEnum = "true"
+	DialogDraggableEnumFalse DialogDraggableEnum = "false"
 )
 
 type DialogEnterkeyhintEnum string
 
 const (
+	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
+	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 	DialogEnterkeyhintEnumSearch   DialogEnterkeyhintEnum = "search"
 	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
 	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
 	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
 	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
-	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
-	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 )
 
 type DialogHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type DialogInputmodeEnum string
 
 const (
-	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
-	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
 	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
 	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
 	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
 	DialogInputmodeEnumNumeric DialogInputmodeEnum = "numeric"
 	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
+	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
+	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
 )
 
 type DialogSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DialogWritingsuggestionsEnum string
 
 const (
-	DialogWritingsuggestionsEnumFalse DialogWritingsuggestionsEnum = "false"
 	DialogWritingsuggestionsEnumTrue  DialogWritingsuggestionsEnum = "true"
+	DialogWritingsuggestionsEnumFalse DialogWritingsuggestionsEnum = "false"
 	DialogWritingsuggestionsEnumEmpty DialogWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *DialogElement) Writingsuggestions(a DialogWritingsuggestionsEnum) *Dial
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DialogElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

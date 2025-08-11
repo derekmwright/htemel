@@ -71,8 +71,8 @@ const (
 type IframeAutocorrectEnum string
 
 const (
-	IframeAutocorrectEnumOn    IframeAutocorrectEnum = "on"
 	IframeAutocorrectEnumOff   IframeAutocorrectEnum = "off"
+	IframeAutocorrectEnumOn    IframeAutocorrectEnum = "on"
 	IframeAutocorrectEnumEmpty IframeAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
+	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
 	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
 	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
 	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
-	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 )
 
 type IframeHiddenEnum string
@@ -144,16 +144,16 @@ const (
 type IframeTranslateEnum string
 
 const (
-	IframeTranslateEnumYes   IframeTranslateEnum = "yes"
 	IframeTranslateEnumNo    IframeTranslateEnum = "no"
+	IframeTranslateEnumYes   IframeTranslateEnum = "yes"
 	IframeTranslateEnumEmpty IframeTranslateEnum = ""
 )
 
 type IframeWritingsuggestionsEnum string
 
 const (
-	IframeWritingsuggestionsEnumTrue  IframeWritingsuggestionsEnum = "true"
 	IframeWritingsuggestionsEnumFalse IframeWritingsuggestionsEnum = "false"
+	IframeWritingsuggestionsEnumTrue  IframeWritingsuggestionsEnum = "true"
 	IframeWritingsuggestionsEnumEmpty IframeWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *IframeElement) Writingsuggestions(a IframeWritingsuggestionsEnum) *Ifra
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *IframeElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

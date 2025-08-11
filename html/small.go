@@ -60,12 +60,12 @@ func (e *SmallElement) AddIndent(i int) {
 type SmallAutocapitalizeEnum string
 
 const (
-	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
-	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
 	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
 	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
 	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
+	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
+	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
 )
 
 type SmallAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type SmallEnterkeyhintEnum string
 
 const (
+	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
+	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
+	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
 	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
 	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
-	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
-	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
-	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 )
 
 type SmallHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SmallInputmodeEnum string
 
 const (
-	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
-	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
 	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
 	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
 	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
 	SmallInputmodeEnumSearch  SmallInputmodeEnum = "search"
 	SmallInputmodeEnumTel     SmallInputmodeEnum = "tel"
 	SmallInputmodeEnumText    SmallInputmodeEnum = "text"
+	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
+	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
 )
 
 type SmallSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type SmallTranslateEnum string
 
 const (
-	SmallTranslateEnumYes   SmallTranslateEnum = "yes"
 	SmallTranslateEnumNo    SmallTranslateEnum = "no"
+	SmallTranslateEnumYes   SmallTranslateEnum = "yes"
 	SmallTranslateEnumEmpty SmallTranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *SmallElement) Writingsuggestions(a SmallWritingsuggestionsEnum) *SmallE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SmallElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

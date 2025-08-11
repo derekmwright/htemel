@@ -60,12 +60,12 @@ func (e *DatalistElement) AddIndent(i int) {
 type DatalistAutocapitalizeEnum string
 
 const (
+	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
+	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
 	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
 	DatalistAutocapitalizeEnumOn         DatalistAutocapitalizeEnum = "on"
 	DatalistAutocapitalizeEnumSentences  DatalistAutocapitalizeEnum = "sentences"
 	DatalistAutocapitalizeEnumWords      DatalistAutocapitalizeEnum = "words"
-	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
-	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
 )
 
 type DatalistAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type DatalistContenteditableEnum string
 
 const (
-	DatalistContenteditableEnumTrue          DatalistContenteditableEnum = "true"
 	DatalistContenteditableEnumFalse         DatalistContenteditableEnum = "false"
 	DatalistContenteditableEnumPlaintextOnly DatalistContenteditableEnum = "plaintext-only"
+	DatalistContenteditableEnumTrue          DatalistContenteditableEnum = "true"
 	DatalistContenteditableEnumEmpty         DatalistContenteditableEnum = ""
 )
 
 type DatalistDirEnum string
 
 const (
+	DatalistDirEnumAuto DatalistDirEnum = "auto"
 	DatalistDirEnumLtr  DatalistDirEnum = "ltr"
 	DatalistDirEnumRtl  DatalistDirEnum = "rtl"
-	DatalistDirEnumAuto DatalistDirEnum = "auto"
 )
 
 type DatalistDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type DatalistEnterkeyhintEnum string
 
 const (
+	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
+	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
+	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
 	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
 	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 	DatalistEnterkeyhintEnumEnter    DatalistEnterkeyhintEnum = "enter"
-	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
-	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
-	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
 )
 
 type DatalistHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type DatalistInputmodeEnum string
 
 const (
-	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
 	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
 	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
 	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
@@ -131,6 +130,7 @@ const (
 	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
 	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
 	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
+	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
 )
 
 type DatalistSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DatalistWritingsuggestionsEnum string
 
 const (
-	DatalistWritingsuggestionsEnumFalse DatalistWritingsuggestionsEnum = "false"
 	DatalistWritingsuggestionsEnumTrue  DatalistWritingsuggestionsEnum = "true"
+	DatalistWritingsuggestionsEnumFalse DatalistWritingsuggestionsEnum = "false"
 	DatalistWritingsuggestionsEnumEmpty DatalistWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *DatalistElement) Writingsuggestions(a DatalistWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DatalistElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

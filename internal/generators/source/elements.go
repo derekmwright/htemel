@@ -208,7 +208,7 @@ func RenderFunc() (*template.Template, ImportSet) {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

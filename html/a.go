@@ -71,8 +71,8 @@ const (
 type AAutocorrectEnum string
 
 const (
-	AAutocorrectEnumOff   AAutocorrectEnum = "off"
 	AAutocorrectEnumOn    AAutocorrectEnum = "on"
+	AAutocorrectEnumOff   AAutocorrectEnum = "off"
 	AAutocorrectEnumEmpty AAutocorrectEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type ADraggableEnum string
 
 const (
-	ADraggableEnumTrue  ADraggableEnum = "true"
 	ADraggableEnumFalse ADraggableEnum = "false"
+	ADraggableEnumTrue  ADraggableEnum = "true"
 )
 
 type AEnterkeyhintEnum string
 
 const (
-	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
-	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
 	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
 	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
 	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
 	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
+	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
+	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
 )
 
 type AHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type AInputmodeEnum string
 
 const (
+	AInputmodeEnumText    AInputmodeEnum = "text"
+	AInputmodeEnumUrl     AInputmodeEnum = "url"
+	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
 	AInputmodeEnumEmail   AInputmodeEnum = "email"
 	AInputmodeEnumNone    AInputmodeEnum = "none"
 	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
 	AInputmodeEnumSearch  AInputmodeEnum = "search"
 	AInputmodeEnumTel     AInputmodeEnum = "tel"
-	AInputmodeEnumText    AInputmodeEnum = "text"
-	AInputmodeEnumUrl     AInputmodeEnum = "url"
-	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
 )
 
 type ASpellcheckEnum string
@@ -387,7 +387,7 @@ func (e *AElement) Writingsuggestions(a AWritingsuggestionsEnum) *AElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,12 +60,12 @@ func (e *LabelElement) AddIndent(i int) {
 type LabelAutocapitalizeEnum string
 
 const (
-	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 	LabelAutocapitalizeEnumCharacters LabelAutocapitalizeEnum = "characters"
 	LabelAutocapitalizeEnumNone       LabelAutocapitalizeEnum = "none"
 	LabelAutocapitalizeEnumOff        LabelAutocapitalizeEnum = "off"
 	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
 	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
+	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 )
 
 type LabelAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type LabelContenteditableEnum string
 
 const (
-	LabelContenteditableEnumFalse         LabelContenteditableEnum = "false"
 	LabelContenteditableEnumPlaintextOnly LabelContenteditableEnum = "plaintext-only"
 	LabelContenteditableEnumTrue          LabelContenteditableEnum = "true"
+	LabelContenteditableEnumFalse         LabelContenteditableEnum = "false"
 	LabelContenteditableEnumEmpty         LabelContenteditableEnum = ""
 )
 
 type LabelDirEnum string
 
 const (
-	LabelDirEnumAuto LabelDirEnum = "auto"
 	LabelDirEnumLtr  LabelDirEnum = "ltr"
 	LabelDirEnumRtl  LabelDirEnum = "rtl"
+	LabelDirEnumAuto LabelDirEnum = "auto"
 )
 
 type LabelDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type LabelEnterkeyhintEnum string
 
 const (
-	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
-	LabelEnterkeyhintEnumEnter    LabelEnterkeyhintEnum = "enter"
-	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
 	LabelEnterkeyhintEnumNext     LabelEnterkeyhintEnum = "next"
 	LabelEnterkeyhintEnumPrevious LabelEnterkeyhintEnum = "previous"
 	LabelEnterkeyhintEnumSearch   LabelEnterkeyhintEnum = "search"
 	LabelEnterkeyhintEnumSend     LabelEnterkeyhintEnum = "send"
+	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
+	LabelEnterkeyhintEnumEnter    LabelEnterkeyhintEnum = "enter"
+	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
 )
 
 type LabelHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type LabelInputmodeEnum string
 
 const (
-	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
-	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
-	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
 	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
 	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
 	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
 	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
+	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
+	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
+	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 )
 
 type LabelSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *LabelElement) Writingsuggestions(a LabelWritingsuggestionsEnum) *LabelE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LabelElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,12 +60,12 @@ func (e *TheadElement) AddIndent(i int) {
 type TheadAutocapitalizeEnum string
 
 const (
-	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
 	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
 	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
 	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
+	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 )
 
 type TheadAutocorrectEnum string
@@ -103,41 +103,41 @@ const (
 type TheadEnterkeyhintEnum string
 
 const (
+	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
 	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
 	TheadEnterkeyhintEnumGo       TheadEnterkeyhintEnum = "go"
 	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
 	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
 	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
-	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 )
 
 type TheadHiddenEnum string
 
 const (
-	TheadHiddenEnumUntilFound TheadHiddenEnum = "until-found"
 	TheadHiddenEnumHidden     TheadHiddenEnum = "hidden"
+	TheadHiddenEnumUntilFound TheadHiddenEnum = "until-found"
 	TheadHiddenEnumEmpty      TheadHiddenEnum = ""
 )
 
 type TheadInputmodeEnum string
 
 const (
-	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
-	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
-	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
-	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
 	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
 	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
 	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
 	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
+	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
+	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
+	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
+	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
 )
 
 type TheadSpellcheckEnum string
 
 const (
-	TheadSpellcheckEnumTrue  TheadSpellcheckEnum = "true"
 	TheadSpellcheckEnumFalse TheadSpellcheckEnum = "false"
+	TheadSpellcheckEnumTrue  TheadSpellcheckEnum = "true"
 	TheadSpellcheckEnumEmpty TheadSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *TheadElement) Writingsuggestions(a TheadWritingsuggestionsEnum) *TheadE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TheadElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,12 +60,12 @@ func (e *StrongElement) AddIndent(i int) {
 type StrongAutocapitalizeEnum string
 
 const (
-	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
-	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
-	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
 	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
 	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
 	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
+	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
+	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
+	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
 )
 
 type StrongAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type StrongContenteditableEnum string
 
 const (
+	StrongContenteditableEnumFalse         StrongContenteditableEnum = "false"
 	StrongContenteditableEnumPlaintextOnly StrongContenteditableEnum = "plaintext-only"
 	StrongContenteditableEnumTrue          StrongContenteditableEnum = "true"
-	StrongContenteditableEnumFalse         StrongContenteditableEnum = "false"
 	StrongContenteditableEnumEmpty         StrongContenteditableEnum = ""
 )
 
 type StrongDirEnum string
 
 const (
+	StrongDirEnumAuto StrongDirEnum = "auto"
 	StrongDirEnumLtr  StrongDirEnum = "ltr"
 	StrongDirEnumRtl  StrongDirEnum = "rtl"
-	StrongDirEnumAuto StrongDirEnum = "auto"
 )
 
 type StrongDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
-	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
-	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
 	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
 	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
+	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
+	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
 )
 
 type StrongHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type StrongInputmodeEnum string
 
 const (
-	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
-	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
 	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
 	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
 	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
 	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
 	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
+	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
+	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
 )
 
 type StrongSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type StrongWritingsuggestionsEnum string
 
 const (
-	StrongWritingsuggestionsEnumTrue  StrongWritingsuggestionsEnum = "true"
 	StrongWritingsuggestionsEnumFalse StrongWritingsuggestionsEnum = "false"
+	StrongWritingsuggestionsEnumTrue  StrongWritingsuggestionsEnum = "true"
 	StrongWritingsuggestionsEnumEmpty StrongWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *StrongElement) Writingsuggestions(a StrongWritingsuggestionsEnum) *Stro
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *StrongElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

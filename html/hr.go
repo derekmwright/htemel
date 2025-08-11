@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -51,12 +52,12 @@ func (e *HrElement) AddIndent(i int) {
 type HrAutocapitalizeEnum string
 
 const (
-	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
-	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
-	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
 	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
+	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
+	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
+	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 )
 
 type HrAutocorrectEnum string
@@ -106,29 +107,29 @@ const (
 type HrHiddenEnum string
 
 const (
-	HrHiddenEnumHidden     HrHiddenEnum = "hidden"
 	HrHiddenEnumUntilFound HrHiddenEnum = "until-found"
+	HrHiddenEnumHidden     HrHiddenEnum = "hidden"
 	HrHiddenEnumEmpty      HrHiddenEnum = ""
 )
 
 type HrInputmodeEnum string
 
 const (
-	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
-	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
-	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
-	HrInputmodeEnumText    HrInputmodeEnum = "text"
 	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
 	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
 	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
 	HrInputmodeEnumNone    HrInputmodeEnum = "none"
+	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
+	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
+	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
+	HrInputmodeEnumText    HrInputmodeEnum = "text"
 )
 
 type HrSpellcheckEnum string
 
 const (
-	HrSpellcheckEnumFalse HrSpellcheckEnum = "false"
 	HrSpellcheckEnumTrue  HrSpellcheckEnum = "true"
+	HrSpellcheckEnumFalse HrSpellcheckEnum = "false"
 	HrSpellcheckEnumEmpty HrSpellcheckEnum = ""
 )
 
@@ -330,7 +331,7 @@ func (e *HrElement) Writingsuggestions(a HrWritingsuggestionsEnum) *HrElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HrElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

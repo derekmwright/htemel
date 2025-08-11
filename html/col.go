@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -70,9 +71,9 @@ const (
 type ColContenteditableEnum string
 
 const (
-	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
 	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
 	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
+	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
 	ColContenteditableEnumEmpty         ColContenteditableEnum = ""
 )
 
@@ -87,20 +88,20 @@ const (
 type ColDraggableEnum string
 
 const (
-	ColDraggableEnumFalse ColDraggableEnum = "false"
 	ColDraggableEnumTrue  ColDraggableEnum = "true"
+	ColDraggableEnumFalse ColDraggableEnum = "false"
 )
 
 type ColEnterkeyhintEnum string
 
 const (
-	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
-	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
 	ColEnterkeyhintEnumPrevious ColEnterkeyhintEnum = "previous"
 	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
 	ColEnterkeyhintEnumSend     ColEnterkeyhintEnum = "send"
 	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
 	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
+	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
+	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
 )
 
 type ColHiddenEnum string
@@ -114,14 +115,14 @@ const (
 type ColInputmodeEnum string
 
 const (
-	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
-	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
-	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
 	ColInputmodeEnumNone    ColInputmodeEnum = "none"
 	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
 	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
 	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 	ColInputmodeEnumText    ColInputmodeEnum = "text"
+	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
+	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
+	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
 )
 
 type ColSpellcheckEnum string
@@ -330,7 +331,7 @@ func (e *ColElement) Writingsuggestions(a ColWritingsuggestionsEnum) *ColElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ColElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

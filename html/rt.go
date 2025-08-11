@@ -60,12 +60,12 @@ func (e *RtElement) AddIndent(i int) {
 type RtAutocapitalizeEnum string
 
 const (
-	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
-	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
 	RtAutocapitalizeEnumCharacters RtAutocapitalizeEnum = "characters"
 	RtAutocapitalizeEnumNone       RtAutocapitalizeEnum = "none"
 	RtAutocapitalizeEnumOff        RtAutocapitalizeEnum = "off"
 	RtAutocapitalizeEnumOn         RtAutocapitalizeEnum = "on"
+	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
+	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
 )
 
 type RtAutocorrectEnum string
@@ -123,21 +123,21 @@ const (
 type RtInputmodeEnum string
 
 const (
-	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
-	RtInputmodeEnumText    RtInputmodeEnum = "text"
 	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
 	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
 	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
 	RtInputmodeEnumNone    RtInputmodeEnum = "none"
 	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
 	RtInputmodeEnumSearch  RtInputmodeEnum = "search"
+	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
+	RtInputmodeEnumText    RtInputmodeEnum = "text"
 )
 
 type RtSpellcheckEnum string
 
 const (
-	RtSpellcheckEnumFalse RtSpellcheckEnum = "false"
 	RtSpellcheckEnumTrue  RtSpellcheckEnum = "true"
+	RtSpellcheckEnumFalse RtSpellcheckEnum = "false"
 	RtSpellcheckEnumEmpty RtSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type RtWritingsuggestionsEnum string
 
 const (
-	RtWritingsuggestionsEnumTrue  RtWritingsuggestionsEnum = "true"
 	RtWritingsuggestionsEnumFalse RtWritingsuggestionsEnum = "false"
+	RtWritingsuggestionsEnumTrue  RtWritingsuggestionsEnum = "true"
 	RtWritingsuggestionsEnumEmpty RtWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *RtElement) Writingsuggestions(a RtWritingsuggestionsEnum) *RtElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *RtElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

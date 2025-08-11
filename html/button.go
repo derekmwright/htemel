@@ -60,12 +60,12 @@ func (e *ButtonElement) AddIndent(i int) {
 type ButtonAutocapitalizeEnum string
 
 const (
+	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
 	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
 	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
 	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
 	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
-	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
 )
 
 type ButtonAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type ButtonContenteditableEnum string
 
 const (
+	ButtonContenteditableEnumFalse         ButtonContenteditableEnum = "false"
 	ButtonContenteditableEnumPlaintextOnly ButtonContenteditableEnum = "plaintext-only"
 	ButtonContenteditableEnumTrue          ButtonContenteditableEnum = "true"
-	ButtonContenteditableEnumFalse         ButtonContenteditableEnum = "false"
 	ButtonContenteditableEnumEmpty         ButtonContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type ButtonEnterkeyhintEnum string
 
 const (
+	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
 	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
 	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
 	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
 	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
-	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 )
 
 type ButtonHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type ButtonInputmodeEnum string
 
 const (
-	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
-	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
-	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
-	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
 	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
 	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
 	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
 	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
+	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
+	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
+	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
+	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
 )
 
 type ButtonSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *ButtonElement) Writingsuggestions(a ButtonWritingsuggestionsEnum) *Butt
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ButtonElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

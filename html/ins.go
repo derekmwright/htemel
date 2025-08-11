@@ -60,12 +60,12 @@ func (e *InsElement) AddIndent(i int) {
 type InsAutocapitalizeEnum string
 
 const (
-	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
-	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
-	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
 	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
 	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
 	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
+	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
+	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
+	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
 )
 
 type InsAutocorrectEnum string
@@ -96,41 +96,41 @@ const (
 type InsDraggableEnum string
 
 const (
-	InsDraggableEnumFalse InsDraggableEnum = "false"
 	InsDraggableEnumTrue  InsDraggableEnum = "true"
+	InsDraggableEnumFalse InsDraggableEnum = "false"
 )
 
 type InsEnterkeyhintEnum string
 
 const (
+	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
+	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
 	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
 	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
-	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
-	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 )
 
 type InsHiddenEnum string
 
 const (
-	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
 	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
+	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
 	InsHiddenEnumEmpty      InsHiddenEnum = ""
 )
 
 type InsInputmodeEnum string
 
 const (
-	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
-	InsInputmodeEnumNone    InsInputmodeEnum = "none"
-	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
 	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
 	InsInputmodeEnumText    InsInputmodeEnum = "text"
 	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
 	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
+	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
+	InsInputmodeEnumNone    InsInputmodeEnum = "none"
+	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 )
 
 type InsSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type InsWritingsuggestionsEnum string
 
 const (
-	InsWritingsuggestionsEnumTrue  InsWritingsuggestionsEnum = "true"
 	InsWritingsuggestionsEnumFalse InsWritingsuggestionsEnum = "false"
+	InsWritingsuggestionsEnumTrue  InsWritingsuggestionsEnum = "true"
 	InsWritingsuggestionsEnumEmpty InsWritingsuggestionsEnum = ""
 )
 
@@ -351,7 +351,7 @@ func (e *InsElement) Writingsuggestions(a InsWritingsuggestionsEnum) *InsElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *InsElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

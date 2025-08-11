@@ -60,12 +60,12 @@ func (e *CanvasElement) AddIndent(i int) {
 type CanvasAutocapitalizeEnum string
 
 const (
+	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
 	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
 	CanvasAutocapitalizeEnumNone       CanvasAutocapitalizeEnum = "none"
 	CanvasAutocapitalizeEnumOff        CanvasAutocapitalizeEnum = "off"
 	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
 	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
-	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
 )
 
 type CanvasAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type CanvasContenteditableEnum string
 
 const (
-	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
 	CanvasContenteditableEnumFalse         CanvasContenteditableEnum = "false"
 	CanvasContenteditableEnumPlaintextOnly CanvasContenteditableEnum = "plaintext-only"
+	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
 	CanvasContenteditableEnumEmpty         CanvasContenteditableEnum = ""
 )
 
@@ -123,14 +123,14 @@ const (
 type CanvasInputmodeEnum string
 
 const (
+	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
+	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
+	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
 	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
 	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
 	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
 	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
 	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
-	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
-	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
-	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
 )
 
 type CanvasSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type CanvasWritingsuggestionsEnum string
 
 const (
-	CanvasWritingsuggestionsEnumFalse CanvasWritingsuggestionsEnum = "false"
 	CanvasWritingsuggestionsEnumTrue  CanvasWritingsuggestionsEnum = "true"
+	CanvasWritingsuggestionsEnumFalse CanvasWritingsuggestionsEnum = "false"
 	CanvasWritingsuggestionsEnumEmpty CanvasWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *CanvasElement) Writingsuggestions(a CanvasWritingsuggestionsEnum) *Canv
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *CanvasElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

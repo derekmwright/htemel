@@ -71,26 +71,26 @@ const (
 type SpanAutocorrectEnum string
 
 const (
-	SpanAutocorrectEnumOff   SpanAutocorrectEnum = "off"
 	SpanAutocorrectEnumOn    SpanAutocorrectEnum = "on"
+	SpanAutocorrectEnumOff   SpanAutocorrectEnum = "off"
 	SpanAutocorrectEnumEmpty SpanAutocorrectEnum = ""
 )
 
 type SpanContenteditableEnum string
 
 const (
+	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
 	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
-	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumEmpty         SpanContenteditableEnum = ""
 )
 
 type SpanDirEnum string
 
 const (
+	SpanDirEnumAuto SpanDirEnum = "auto"
 	SpanDirEnumLtr  SpanDirEnum = "ltr"
 	SpanDirEnumRtl  SpanDirEnum = "rtl"
-	SpanDirEnumAuto SpanDirEnum = "auto"
 )
 
 type SpanDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
+	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
+	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
 	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
 	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
 	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
 	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
-	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
-	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 )
 
 type SpanHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SpanInputmodeEnum string
 
 const (
-	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
-	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
-	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
-	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
 	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
 	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
 	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
 	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
+	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
+	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
+	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
+	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
 )
 
 type SpanSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type SpanWritingsuggestionsEnum string
 
 const (
-	SpanWritingsuggestionsEnumTrue  SpanWritingsuggestionsEnum = "true"
 	SpanWritingsuggestionsEnumFalse SpanWritingsuggestionsEnum = "false"
+	SpanWritingsuggestionsEnumTrue  SpanWritingsuggestionsEnum = "true"
 	SpanWritingsuggestionsEnumEmpty SpanWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *SpanElement) Writingsuggestions(a SpanWritingsuggestionsEnum) *SpanElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SpanElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

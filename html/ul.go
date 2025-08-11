@@ -60,12 +60,12 @@ func (e *UlElement) AddIndent(i int) {
 type UlAutocapitalizeEnum string
 
 const (
+	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 	UlAutocapitalizeEnumNone       UlAutocapitalizeEnum = "none"
 	UlAutocapitalizeEnumOff        UlAutocapitalizeEnum = "off"
 	UlAutocapitalizeEnumOn         UlAutocapitalizeEnum = "on"
 	UlAutocapitalizeEnumSentences  UlAutocapitalizeEnum = "sentences"
 	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
-	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 )
 
 type UlAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type UlContenteditableEnum string
 
 const (
-	UlContenteditableEnumFalse         UlContenteditableEnum = "false"
 	UlContenteditableEnumPlaintextOnly UlContenteditableEnum = "plaintext-only"
 	UlContenteditableEnumTrue          UlContenteditableEnum = "true"
+	UlContenteditableEnumFalse         UlContenteditableEnum = "false"
 	UlContenteditableEnumEmpty         UlContenteditableEnum = ""
 )
 
@@ -103,20 +103,20 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
+	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
+	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
 	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
 	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
 	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
-	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
-	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
 )
 
 type UlHiddenEnum string
 
 const (
-	UlHiddenEnumHidden     UlHiddenEnum = "hidden"
 	UlHiddenEnumUntilFound UlHiddenEnum = "until-found"
+	UlHiddenEnumHidden     UlHiddenEnum = "hidden"
 	UlHiddenEnumEmpty      UlHiddenEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *UlElement) Writingsuggestions(a UlWritingsuggestionsEnum) *UlElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *UlElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

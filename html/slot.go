@@ -60,12 +60,12 @@ func (e *SlotElement) AddIndent(i int) {
 type SlotAutocapitalizeEnum string
 
 const (
+	SlotAutocapitalizeEnumWords      SlotAutocapitalizeEnum = "words"
+	SlotAutocapitalizeEnumCharacters SlotAutocapitalizeEnum = "characters"
 	SlotAutocapitalizeEnumNone       SlotAutocapitalizeEnum = "none"
 	SlotAutocapitalizeEnumOff        SlotAutocapitalizeEnum = "off"
 	SlotAutocapitalizeEnumOn         SlotAutocapitalizeEnum = "on"
 	SlotAutocapitalizeEnumSentences  SlotAutocapitalizeEnum = "sentences"
-	SlotAutocapitalizeEnumWords      SlotAutocapitalizeEnum = "words"
-	SlotAutocapitalizeEnumCharacters SlotAutocapitalizeEnum = "characters"
 )
 
 type SlotAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type SlotContenteditableEnum string
 
 const (
+	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
 	SlotContenteditableEnumFalse         SlotContenteditableEnum = "false"
 	SlotContenteditableEnumPlaintextOnly SlotContenteditableEnum = "plaintext-only"
-	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
 	SlotContenteditableEnumEmpty         SlotContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type SlotEnterkeyhintEnum string
 
 const (
-	SlotEnterkeyhintEnumPrevious SlotEnterkeyhintEnum = "previous"
-	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
-	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 	SlotEnterkeyhintEnumDone     SlotEnterkeyhintEnum = "done"
 	SlotEnterkeyhintEnumEnter    SlotEnterkeyhintEnum = "enter"
 	SlotEnterkeyhintEnumGo       SlotEnterkeyhintEnum = "go"
 	SlotEnterkeyhintEnumNext     SlotEnterkeyhintEnum = "next"
+	SlotEnterkeyhintEnumPrevious SlotEnterkeyhintEnum = "previous"
+	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
+	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 )
 
 type SlotHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SlotInputmodeEnum string
 
 const (
+	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
+	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
 	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
 	SlotInputmodeEnumEmail   SlotInputmodeEnum = "email"
 	SlotInputmodeEnumNone    SlotInputmodeEnum = "none"
 	SlotInputmodeEnumNumeric SlotInputmodeEnum = "numeric"
 	SlotInputmodeEnumSearch  SlotInputmodeEnum = "search"
-	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
-	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
 )
 
 type SlotSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *SlotElement) Writingsuggestions(a SlotWritingsuggestionsEnum) *SlotElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SlotElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,12 +60,12 @@ func (e *ObjectElement) AddIndent(i int) {
 type ObjectAutocapitalizeEnum string
 
 const (
-	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
-	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
-	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
 	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
 	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
+	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
+	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
+	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
 )
 
 type ObjectAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type ObjectDirEnum string
 
 const (
-	ObjectDirEnumAuto ObjectDirEnum = "auto"
 	ObjectDirEnumLtr  ObjectDirEnum = "ltr"
 	ObjectDirEnumRtl  ObjectDirEnum = "rtl"
+	ObjectDirEnumAuto ObjectDirEnum = "auto"
 )
 
 type ObjectDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type ObjectEnterkeyhintEnum string
 
 const (
+	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
+	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
+	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 	ObjectEnterkeyhintEnumNext     ObjectEnterkeyhintEnum = "next"
 	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
 	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
 	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
-	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
-	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
-	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 )
 
 type ObjectHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type ObjectInputmodeEnum string
 
 const (
+	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
+	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
 	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
 	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
 	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
 	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
 	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
-	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
-	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 )
 
 type ObjectSpellcheckEnum string
@@ -144,16 +144,16 @@ const (
 type ObjectTranslateEnum string
 
 const (
-	ObjectTranslateEnumNo    ObjectTranslateEnum = "no"
 	ObjectTranslateEnumYes   ObjectTranslateEnum = "yes"
+	ObjectTranslateEnumNo    ObjectTranslateEnum = "no"
 	ObjectTranslateEnumEmpty ObjectTranslateEnum = ""
 )
 
 type ObjectWritingsuggestionsEnum string
 
 const (
-	ObjectWritingsuggestionsEnumFalse ObjectWritingsuggestionsEnum = "false"
 	ObjectWritingsuggestionsEnumTrue  ObjectWritingsuggestionsEnum = "true"
+	ObjectWritingsuggestionsEnumFalse ObjectWritingsuggestionsEnum = "false"
 	ObjectWritingsuggestionsEnumEmpty ObjectWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *ObjectElement) Writingsuggestions(a ObjectWritingsuggestionsEnum) *Obje
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ObjectElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

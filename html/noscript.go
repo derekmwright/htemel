@@ -60,12 +60,12 @@ func (e *NoscriptElement) AddIndent(i int) {
 type NoscriptAutocapitalizeEnum string
 
 const (
-	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
 	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
 	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
 	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
 	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
 	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
+	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
 )
 
 type NoscriptAutocorrectEnum string
@@ -79,37 +79,37 @@ const (
 type NoscriptContenteditableEnum string
 
 const (
+	NoscriptContenteditableEnumFalse         NoscriptContenteditableEnum = "false"
 	NoscriptContenteditableEnumPlaintextOnly NoscriptContenteditableEnum = "plaintext-only"
 	NoscriptContenteditableEnumTrue          NoscriptContenteditableEnum = "true"
-	NoscriptContenteditableEnumFalse         NoscriptContenteditableEnum = "false"
 	NoscriptContenteditableEnumEmpty         NoscriptContenteditableEnum = ""
 )
 
 type NoscriptDirEnum string
 
 const (
+	NoscriptDirEnumRtl  NoscriptDirEnum = "rtl"
 	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
 	NoscriptDirEnumLtr  NoscriptDirEnum = "ltr"
-	NoscriptDirEnumRtl  NoscriptDirEnum = "rtl"
 )
 
 type NoscriptDraggableEnum string
 
 const (
-	NoscriptDraggableEnumFalse NoscriptDraggableEnum = "false"
 	NoscriptDraggableEnumTrue  NoscriptDraggableEnum = "true"
+	NoscriptDraggableEnumFalse NoscriptDraggableEnum = "false"
 )
 
 type NoscriptEnterkeyhintEnum string
 
 const (
-	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
-	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
-	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
 	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
 	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
 	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
 	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
+	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
+	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
+	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
 )
 
 type NoscriptHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type NoscriptInputmodeEnum string
 
 const (
-	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
 	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
 	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
 	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
@@ -131,6 +130,7 @@ const (
 	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
 	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
 	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
+	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
 )
 
 type NoscriptSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type NoscriptWritingsuggestionsEnum string
 
 const (
-	NoscriptWritingsuggestionsEnumTrue  NoscriptWritingsuggestionsEnum = "true"
 	NoscriptWritingsuggestionsEnumFalse NoscriptWritingsuggestionsEnum = "false"
+	NoscriptWritingsuggestionsEnumTrue  NoscriptWritingsuggestionsEnum = "true"
 	NoscriptWritingsuggestionsEnumEmpty NoscriptWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *NoscriptElement) Writingsuggestions(a NoscriptWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *NoscriptElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -96,20 +96,20 @@ const (
 type DdDraggableEnum string
 
 const (
-	DdDraggableEnumFalse DdDraggableEnum = "false"
 	DdDraggableEnumTrue  DdDraggableEnum = "true"
+	DdDraggableEnumFalse DdDraggableEnum = "false"
 )
 
 type DdEnterkeyhintEnum string
 
 const (
-	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
 	DdEnterkeyhintEnumGo       DdEnterkeyhintEnum = "go"
 	DdEnterkeyhintEnumNext     DdEnterkeyhintEnum = "next"
 	DdEnterkeyhintEnumPrevious DdEnterkeyhintEnum = "previous"
 	DdEnterkeyhintEnumSearch   DdEnterkeyhintEnum = "search"
 	DdEnterkeyhintEnumSend     DdEnterkeyhintEnum = "send"
 	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
+	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
 )
 
 type DdHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type DdInputmodeEnum string
 
 const (
+	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
+	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
+	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
 	DdInputmodeEnumText    DdInputmodeEnum = "text"
 	DdInputmodeEnumUrl     DdInputmodeEnum = "url"
 	DdInputmodeEnumDecimal DdInputmodeEnum = "decimal"
 	DdInputmodeEnumEmail   DdInputmodeEnum = "email"
 	DdInputmodeEnumNone    DdInputmodeEnum = "none"
-	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
-	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
-	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
 )
 
 type DdSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DdWritingsuggestionsEnum string
 
 const (
-	DdWritingsuggestionsEnumFalse DdWritingsuggestionsEnum = "false"
 	DdWritingsuggestionsEnumTrue  DdWritingsuggestionsEnum = "true"
+	DdWritingsuggestionsEnumFalse DdWritingsuggestionsEnum = "false"
 	DdWritingsuggestionsEnumEmpty DdWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *DdElement) Writingsuggestions(a DdWritingsuggestionsEnum) *DdElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DdElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

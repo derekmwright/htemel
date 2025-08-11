@@ -60,12 +60,12 @@ func (e *EmElement) AddIndent(i int) {
 type EmAutocapitalizeEnum string
 
 const (
-	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
-	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
 	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
 	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
 	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
+	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
+	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
 )
 
 type EmAutocorrectEnum string
@@ -88,42 +88,41 @@ const (
 type EmDirEnum string
 
 const (
-	EmDirEnumAuto EmDirEnum = "auto"
 	EmDirEnumLtr  EmDirEnum = "ltr"
 	EmDirEnumRtl  EmDirEnum = "rtl"
+	EmDirEnumAuto EmDirEnum = "auto"
 )
 
 type EmDraggableEnum string
 
 const (
-	EmDraggableEnumFalse EmDraggableEnum = "false"
 	EmDraggableEnumTrue  EmDraggableEnum = "true"
+	EmDraggableEnumFalse EmDraggableEnum = "false"
 )
 
 type EmEnterkeyhintEnum string
 
 const (
+	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
+	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
 	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
 	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
 	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
-	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
-	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 )
 
 type EmHiddenEnum string
 
 const (
-	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
 	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
+	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
 	EmHiddenEnumEmpty      EmHiddenEnum = ""
 )
 
 type EmInputmodeEnum string
 
 const (
-	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
 	EmInputmodeEnumText    EmInputmodeEnum = "text"
 	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
 	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
@@ -131,6 +130,7 @@ const (
 	EmInputmodeEnumNone    EmInputmodeEnum = "none"
 	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
 	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
+	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
 )
 
 type EmSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type EmTranslateEnum string
 
 const (
-	EmTranslateEnumYes   EmTranslateEnum = "yes"
 	EmTranslateEnumNo    EmTranslateEnum = "no"
+	EmTranslateEnumYes   EmTranslateEnum = "yes"
 	EmTranslateEnumEmpty EmTranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *EmElement) Writingsuggestions(a EmWritingsuggestionsEnum) *EmElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *EmElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

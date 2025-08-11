@@ -60,12 +60,12 @@ func (e *MainElement) AddIndent(i int) {
 type MainAutocapitalizeEnum string
 
 const (
+	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
+	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
 	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
 	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
-	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
-	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 )
 
 type MainAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type MainContenteditableEnum string
 
 const (
+	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
 	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
-	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
 	MainContenteditableEnumEmpty         MainContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type MainEnterkeyhintEnum string
 
 const (
-	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
-	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
-	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
 	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
 	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
 	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
+	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
+	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
+	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
 )
 
 type MainHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type MainInputmodeEnum string
 
 const (
-	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
-	MainInputmodeEnumText    MainInputmodeEnum = "text"
 	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
 	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
 	MainInputmodeEnumNone    MainInputmodeEnum = "none"
 	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
+	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
+	MainInputmodeEnumText    MainInputmodeEnum = "text"
 )
 
 type MainSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *MainElement) Writingsuggestions(a MainWritingsuggestionsEnum) *MainElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MainElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

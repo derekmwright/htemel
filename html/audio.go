@@ -103,20 +103,20 @@ const (
 type AudioEnterkeyhintEnum string
 
 const (
-	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
 	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
 	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
 	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
 	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
 	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
+	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
 )
 
 type AudioHiddenEnum string
 
 const (
-	AudioHiddenEnumHidden     AudioHiddenEnum = "hidden"
 	AudioHiddenEnumUntilFound AudioHiddenEnum = "until-found"
+	AudioHiddenEnumHidden     AudioHiddenEnum = "hidden"
 	AudioHiddenEnumEmpty      AudioHiddenEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *AudioElement) Writingsuggestions(a AudioWritingsuggestionsEnum) *AudioE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AudioElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

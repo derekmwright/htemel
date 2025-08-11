@@ -60,12 +60,12 @@ func (e *DetailsElement) AddIndent(i int) {
 type DetailsAutocapitalizeEnum string
 
 const (
+	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
 	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
 	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
 	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
 	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
-	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 )
 
 type DetailsAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type DetailsContenteditableEnum string
 
 const (
-	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
 	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 	DetailsContenteditableEnumPlaintextOnly DetailsContenteditableEnum = "plaintext-only"
+	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
 	DetailsContenteditableEnumEmpty         DetailsContenteditableEnum = ""
 )
 
 type DetailsDirEnum string
 
 const (
-	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
 	DetailsDirEnumAuto DetailsDirEnum = "auto"
 	DetailsDirEnumLtr  DetailsDirEnum = "ltr"
+	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
 )
 
 type DetailsDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type DetailsEnterkeyhintEnum string
 
 const (
+	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
+	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
+	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
 	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
 	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
 	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
 	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
-	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
-	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
-	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
 )
 
 type DetailsHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type DetailsInputmodeEnum string
 
 const (
+	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
+	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
 	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
 	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
 	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
 	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
 	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
-	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
-	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 )
 
 type DetailsSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type DetailsTranslateEnum string
 
 const (
-	DetailsTranslateEnumYes   DetailsTranslateEnum = "yes"
 	DetailsTranslateEnumNo    DetailsTranslateEnum = "no"
+	DetailsTranslateEnumYes   DetailsTranslateEnum = "yes"
 	DetailsTranslateEnumEmpty DetailsTranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *DetailsElement) Writingsuggestions(a DetailsWritingsuggestionsEnum) *De
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DetailsElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

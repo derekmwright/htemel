@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -51,12 +52,12 @@ func (e *TrackElement) AddIndent(i int) {
 type TrackAutocapitalizeEnum string
 
 const (
+	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
 	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
 	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
 	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
 	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
 	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
-	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
 )
 
 type TrackAutocorrectEnum string
@@ -70,50 +71,51 @@ const (
 type TrackContenteditableEnum string
 
 const (
+	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
 	TrackContenteditableEnumFalse         TrackContenteditableEnum = "false"
 	TrackContenteditableEnumPlaintextOnly TrackContenteditableEnum = "plaintext-only"
-	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
 	TrackContenteditableEnumEmpty         TrackContenteditableEnum = ""
 )
 
 type TrackDirEnum string
 
 const (
+	TrackDirEnumRtl  TrackDirEnum = "rtl"
 	TrackDirEnumAuto TrackDirEnum = "auto"
 	TrackDirEnumLtr  TrackDirEnum = "ltr"
-	TrackDirEnumRtl  TrackDirEnum = "rtl"
 )
 
 type TrackDraggableEnum string
 
 const (
-	TrackDraggableEnumTrue  TrackDraggableEnum = "true"
 	TrackDraggableEnumFalse TrackDraggableEnum = "false"
+	TrackDraggableEnumTrue  TrackDraggableEnum = "true"
 )
 
 type TrackEnterkeyhintEnum string
 
 const (
-	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
 	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
 	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
 	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
 	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
+	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
 )
 
 type TrackHiddenEnum string
 
 const (
-	TrackHiddenEnumHidden     TrackHiddenEnum = "hidden"
 	TrackHiddenEnumUntilFound TrackHiddenEnum = "until-found"
+	TrackHiddenEnumHidden     TrackHiddenEnum = "hidden"
 	TrackHiddenEnumEmpty      TrackHiddenEnum = ""
 )
 
 type TrackInputmodeEnum string
 
 const (
+	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
 	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
 	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
 	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
@@ -121,7 +123,6 @@ const (
 	TrackInputmodeEnumDecimal TrackInputmodeEnum = "decimal"
 	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
 	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
-	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
 )
 
 type TrackSpellcheckEnum string
@@ -330,7 +331,7 @@ func (e *TrackElement) Writingsuggestions(a TrackWritingsuggestionsEnum) *TrackE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TrackElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

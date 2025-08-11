@@ -60,12 +60,12 @@ func (e *CiteElement) AddIndent(i int) {
 type CiteAutocapitalizeEnum string
 
 const (
+	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
 	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
 	CiteAutocapitalizeEnumNone       CiteAutocapitalizeEnum = "none"
 	CiteAutocapitalizeEnumOff        CiteAutocapitalizeEnum = "off"
 	CiteAutocapitalizeEnumOn         CiteAutocapitalizeEnum = "on"
 	CiteAutocapitalizeEnumSentences  CiteAutocapitalizeEnum = "sentences"
-	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
 )
 
 type CiteAutocorrectEnum string
@@ -88,35 +88,35 @@ const (
 type CiteDirEnum string
 
 const (
-	CiteDirEnumRtl  CiteDirEnum = "rtl"
 	CiteDirEnumAuto CiteDirEnum = "auto"
 	CiteDirEnumLtr  CiteDirEnum = "ltr"
+	CiteDirEnumRtl  CiteDirEnum = "rtl"
 )
 
 type CiteDraggableEnum string
 
 const (
-	CiteDraggableEnumFalse CiteDraggableEnum = "false"
 	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
+	CiteDraggableEnumFalse CiteDraggableEnum = "false"
 )
 
 type CiteEnterkeyhintEnum string
 
 const (
-	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
-	CiteEnterkeyhintEnumSearch   CiteEnterkeyhintEnum = "search"
-	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
 	CiteEnterkeyhintEnumDone     CiteEnterkeyhintEnum = "done"
 	CiteEnterkeyhintEnumEnter    CiteEnterkeyhintEnum = "enter"
 	CiteEnterkeyhintEnumGo       CiteEnterkeyhintEnum = "go"
 	CiteEnterkeyhintEnumNext     CiteEnterkeyhintEnum = "next"
+	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
+	CiteEnterkeyhintEnumSearch   CiteEnterkeyhintEnum = "search"
+	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
 )
 
 type CiteHiddenEnum string
 
 const (
-	CiteHiddenEnumHidden     CiteHiddenEnum = "hidden"
 	CiteHiddenEnumUntilFound CiteHiddenEnum = "until-found"
+	CiteHiddenEnumHidden     CiteHiddenEnum = "hidden"
 	CiteHiddenEnumEmpty      CiteHiddenEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *CiteElement) Writingsuggestions(a CiteWritingsuggestionsEnum) *CiteElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *CiteElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,28 +60,28 @@ func (e *TitleElement) AddIndent(i int) {
 type TitleAutocapitalizeEnum string
 
 const (
+	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
+	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
 	TitleAutocapitalizeEnumNone       TitleAutocapitalizeEnum = "none"
 	TitleAutocapitalizeEnumOff        TitleAutocapitalizeEnum = "off"
 	TitleAutocapitalizeEnumOn         TitleAutocapitalizeEnum = "on"
-	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
-	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 )
 
 type TitleAutocorrectEnum string
 
 const (
-	TitleAutocorrectEnumOn    TitleAutocorrectEnum = "on"
 	TitleAutocorrectEnumOff   TitleAutocorrectEnum = "off"
+	TitleAutocorrectEnumOn    TitleAutocorrectEnum = "on"
 	TitleAutocorrectEnumEmpty TitleAutocorrectEnum = ""
 )
 
 type TitleContenteditableEnum string
 
 const (
+	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
 	TitleContenteditableEnumFalse         TitleContenteditableEnum = "false"
 	TitleContenteditableEnumPlaintextOnly TitleContenteditableEnum = "plaintext-only"
-	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
 	TitleContenteditableEnumEmpty         TitleContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type TitleEnterkeyhintEnum string
 
 const (
+	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
+	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
 	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
 	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
 	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
 	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
-	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
-	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
 )
 
 type TitleHiddenEnum string
@@ -136,8 +136,8 @@ const (
 type TitleSpellcheckEnum string
 
 const (
-	TitleSpellcheckEnumTrue  TitleSpellcheckEnum = "true"
 	TitleSpellcheckEnumFalse TitleSpellcheckEnum = "false"
+	TitleSpellcheckEnumTrue  TitleSpellcheckEnum = "true"
 	TitleSpellcheckEnumEmpty TitleSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *TitleElement) Writingsuggestions(a TitleWritingsuggestionsEnum) *TitleE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TitleElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

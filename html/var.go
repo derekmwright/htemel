@@ -60,12 +60,12 @@ func (e *VarElement) AddIndent(i int) {
 type VarAutocapitalizeEnum string
 
 const (
-	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
-	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
-	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
 	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
 	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
 	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
+	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
+	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
+	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
 )
 
 type VarAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type VarContenteditableEnum string
 
 const (
+	VarContenteditableEnumTrue          VarContenteditableEnum = "true"
 	VarContenteditableEnumFalse         VarContenteditableEnum = "false"
 	VarContenteditableEnumPlaintextOnly VarContenteditableEnum = "plaintext-only"
-	VarContenteditableEnumTrue          VarContenteditableEnum = "true"
 	VarContenteditableEnumEmpty         VarContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type VarEnterkeyhintEnum string
 
 const (
-	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
-	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
-	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
 	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
 	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
+	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
+	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
+	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
 )
 
 type VarHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type VarInputmodeEnum string
 
 const (
-	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
 	VarInputmodeEnumText    VarInputmodeEnum = "text"
@@ -131,6 +130,7 @@ const (
 	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
 	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
 	VarInputmodeEnumNone    VarInputmodeEnum = "none"
+	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 )
 
 type VarSpellcheckEnum string
@@ -144,16 +144,16 @@ const (
 type VarTranslateEnum string
 
 const (
-	VarTranslateEnumYes   VarTranslateEnum = "yes"
 	VarTranslateEnumNo    VarTranslateEnum = "no"
+	VarTranslateEnumYes   VarTranslateEnum = "yes"
 	VarTranslateEnumEmpty VarTranslateEnum = ""
 )
 
 type VarWritingsuggestionsEnum string
 
 const (
-	VarWritingsuggestionsEnumFalse VarWritingsuggestionsEnum = "false"
 	VarWritingsuggestionsEnumTrue  VarWritingsuggestionsEnum = "true"
+	VarWritingsuggestionsEnumFalse VarWritingsuggestionsEnum = "false"
 	VarWritingsuggestionsEnumEmpty VarWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *VarElement) Writingsuggestions(a VarWritingsuggestionsEnum) *VarElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *VarElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

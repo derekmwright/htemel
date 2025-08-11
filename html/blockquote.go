@@ -79,9 +79,9 @@ const (
 type BlockquoteContenteditableEnum string
 
 const (
+	BlockquoteContenteditableEnumFalse         BlockquoteContenteditableEnum = "false"
 	BlockquoteContenteditableEnumPlaintextOnly BlockquoteContenteditableEnum = "plaintext-only"
 	BlockquoteContenteditableEnumTrue          BlockquoteContenteditableEnum = "true"
-	BlockquoteContenteditableEnumFalse         BlockquoteContenteditableEnum = "false"
 	BlockquoteContenteditableEnumEmpty         BlockquoteContenteditableEnum = ""
 )
 
@@ -96,48 +96,48 @@ const (
 type BlockquoteDraggableEnum string
 
 const (
-	BlockquoteDraggableEnumFalse BlockquoteDraggableEnum = "false"
 	BlockquoteDraggableEnumTrue  BlockquoteDraggableEnum = "true"
+	BlockquoteDraggableEnumFalse BlockquoteDraggableEnum = "false"
 )
 
 type BlockquoteEnterkeyhintEnum string
 
 const (
+	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
+	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
+	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 	BlockquoteEnterkeyhintEnumNext     BlockquoteEnterkeyhintEnum = "next"
 	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
 	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
 	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
-	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
-	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
-	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 )
 
 type BlockquoteHiddenEnum string
 
 const (
-	BlockquoteHiddenEnumHidden     BlockquoteHiddenEnum = "hidden"
 	BlockquoteHiddenEnumUntilFound BlockquoteHiddenEnum = "until-found"
+	BlockquoteHiddenEnumHidden     BlockquoteHiddenEnum = "hidden"
 	BlockquoteHiddenEnumEmpty      BlockquoteHiddenEnum = ""
 )
 
 type BlockquoteInputmodeEnum string
 
 const (
-	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
-	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
-	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
 	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
 	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
 	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
 	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
+	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
+	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
+	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
 )
 
 type BlockquoteSpellcheckEnum string
 
 const (
-	BlockquoteSpellcheckEnumTrue  BlockquoteSpellcheckEnum = "true"
 	BlockquoteSpellcheckEnumFalse BlockquoteSpellcheckEnum = "false"
+	BlockquoteSpellcheckEnumTrue  BlockquoteSpellcheckEnum = "true"
 	BlockquoteSpellcheckEnumEmpty BlockquoteSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type BlockquoteWritingsuggestionsEnum string
 
 const (
-	BlockquoteWritingsuggestionsEnumFalse BlockquoteWritingsuggestionsEnum = "false"
 	BlockquoteWritingsuggestionsEnumTrue  BlockquoteWritingsuggestionsEnum = "true"
+	BlockquoteWritingsuggestionsEnumFalse BlockquoteWritingsuggestionsEnum = "false"
 	BlockquoteWritingsuggestionsEnumEmpty BlockquoteWritingsuggestionsEnum = ""
 )
 
@@ -345,7 +345,7 @@ func (e *BlockquoteElement) Writingsuggestions(a BlockquoteWritingsuggestionsEnu
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BlockquoteElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

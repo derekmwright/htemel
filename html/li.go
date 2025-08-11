@@ -60,12 +60,12 @@ func (e *LiElement) AddIndent(i int) {
 type LiAutocapitalizeEnum string
 
 const (
-	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
 	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
 	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
+	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 )
 
 type LiAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type LiContenteditableEnum string
 
 const (
-	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
 	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
+	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
 	LiContenteditableEnumEmpty         LiContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type LiEnterkeyhintEnum string
 
 const (
+	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
+	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
 	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
 	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
 	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
 	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
-	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
-	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
 )
 
 type LiHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type LiInputmodeEnum string
 
 const (
+	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
+	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
+	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
 	LiInputmodeEnumText    LiInputmodeEnum = "text"
 	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
 	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 	LiInputmodeEnumNone    LiInputmodeEnum = "none"
-	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
-	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
-	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
 )
 
 type LiSpellcheckEnum string
 
 const (
-	LiSpellcheckEnumFalse LiSpellcheckEnum = "false"
 	LiSpellcheckEnumTrue  LiSpellcheckEnum = "true"
+	LiSpellcheckEnumFalse LiSpellcheckEnum = "false"
 	LiSpellcheckEnumEmpty LiSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type LiWritingsuggestionsEnum string
 
 const (
-	LiWritingsuggestionsEnumFalse LiWritingsuggestionsEnum = "false"
 	LiWritingsuggestionsEnumTrue  LiWritingsuggestionsEnum = "true"
+	LiWritingsuggestionsEnumFalse LiWritingsuggestionsEnum = "false"
 	LiWritingsuggestionsEnumEmpty LiWritingsuggestionsEnum = ""
 )
 
@@ -345,7 +345,7 @@ func (e *LiElement) Writingsuggestions(a LiWritingsuggestionsEnum) *LiElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LiElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

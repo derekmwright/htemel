@@ -60,12 +60,12 @@ func (e *MenuElement) AddIndent(i int) {
 type MenuAutocapitalizeEnum string
 
 const (
+	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
+	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
 	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
 	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
-	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
-	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 )
 
 type MenuAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type MenuDirEnum string
 
 const (
-	MenuDirEnumRtl  MenuDirEnum = "rtl"
 	MenuDirEnumAuto MenuDirEnum = "auto"
 	MenuDirEnumLtr  MenuDirEnum = "ltr"
+	MenuDirEnumRtl  MenuDirEnum = "rtl"
 )
 
 type MenuDraggableEnum string
@@ -103,34 +103,34 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
+	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
+	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
+	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
 	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
-	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
-	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
-	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 )
 
 type MenuHiddenEnum string
 
 const (
-	MenuHiddenEnumHidden     MenuHiddenEnum = "hidden"
 	MenuHiddenEnumUntilFound MenuHiddenEnum = "until-found"
+	MenuHiddenEnumHidden     MenuHiddenEnum = "hidden"
 	MenuHiddenEnumEmpty      MenuHiddenEnum = ""
 )
 
 type MenuInputmodeEnum string
 
 const (
-	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
-	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
 	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
 	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
 	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
 	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
+	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
+	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
 )
 
 type MenuSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type MenuTranslateEnum string
 
 const (
-	MenuTranslateEnumYes   MenuTranslateEnum = "yes"
 	MenuTranslateEnumNo    MenuTranslateEnum = "no"
+	MenuTranslateEnumYes   MenuTranslateEnum = "yes"
 	MenuTranslateEnumEmpty MenuTranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *MenuElement) Writingsuggestions(a MenuWritingsuggestionsEnum) *MenuElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MenuElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

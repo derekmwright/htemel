@@ -60,12 +60,12 @@ func (e *CaptionElement) AddIndent(i int) {
 type CaptionAutocapitalizeEnum string
 
 const (
+	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
 	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
 	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
 	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
 	CaptionAutocapitalizeEnumOff        CaptionAutocapitalizeEnum = "off"
 	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
-	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
 )
 
 type CaptionAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type CaptionDraggableEnum string
 
 const (
-	CaptionDraggableEnumTrue  CaptionDraggableEnum = "true"
 	CaptionDraggableEnumFalse CaptionDraggableEnum = "false"
+	CaptionDraggableEnumTrue  CaptionDraggableEnum = "true"
 )
 
 type CaptionEnterkeyhintEnum string
 
 const (
-	CaptionEnterkeyhintEnumEnter    CaptionEnterkeyhintEnum = "enter"
-	CaptionEnterkeyhintEnumGo       CaptionEnterkeyhintEnum = "go"
-	CaptionEnterkeyhintEnumNext     CaptionEnterkeyhintEnum = "next"
 	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
 	CaptionEnterkeyhintEnumSearch   CaptionEnterkeyhintEnum = "search"
 	CaptionEnterkeyhintEnumSend     CaptionEnterkeyhintEnum = "send"
 	CaptionEnterkeyhintEnumDone     CaptionEnterkeyhintEnum = "done"
+	CaptionEnterkeyhintEnumEnter    CaptionEnterkeyhintEnum = "enter"
+	CaptionEnterkeyhintEnumGo       CaptionEnterkeyhintEnum = "go"
+	CaptionEnterkeyhintEnumNext     CaptionEnterkeyhintEnum = "next"
 )
 
 type CaptionHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type CaptionInputmodeEnum string
 
 const (
+	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
+	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
+	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
 	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
 	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
 	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
 	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
 	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
-	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
-	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
-	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
 )
 
 type CaptionSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *CaptionElement) Writingsuggestions(a CaptionWritingsuggestionsEnum) *Ca
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *CaptionElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

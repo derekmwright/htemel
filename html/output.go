@@ -60,37 +60,37 @@ func (e *OutputElement) AddIndent(i int) {
 type OutputAutocapitalizeEnum string
 
 const (
-	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
 	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
 	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
 	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
 	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
+	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
 )
 
 type OutputAutocorrectEnum string
 
 const (
-	OutputAutocorrectEnumOn    OutputAutocorrectEnum = "on"
 	OutputAutocorrectEnumOff   OutputAutocorrectEnum = "off"
+	OutputAutocorrectEnumOn    OutputAutocorrectEnum = "on"
 	OutputAutocorrectEnumEmpty OutputAutocorrectEnum = ""
 )
 
 type OutputContenteditableEnum string
 
 const (
+	OutputContenteditableEnumFalse         OutputContenteditableEnum = "false"
 	OutputContenteditableEnumPlaintextOnly OutputContenteditableEnum = "plaintext-only"
 	OutputContenteditableEnumTrue          OutputContenteditableEnum = "true"
-	OutputContenteditableEnumFalse         OutputContenteditableEnum = "false"
 	OutputContenteditableEnumEmpty         OutputContenteditableEnum = ""
 )
 
 type OutputDirEnum string
 
 const (
+	OutputDirEnumAuto OutputDirEnum = "auto"
 	OutputDirEnumLtr  OutputDirEnum = "ltr"
 	OutputDirEnumRtl  OutputDirEnum = "rtl"
-	OutputDirEnumAuto OutputDirEnum = "auto"
 )
 
 type OutputDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type OutputEnterkeyhintEnum string
 
 const (
-	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
-	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
 	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
 	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
 	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
 	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
+	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
+	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
 )
 
 type OutputHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type OutputInputmodeEnum string
 
 const (
+	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
+	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
+	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
 	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
 	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
 	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
 	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
-	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
-	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
-	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 )
 
 type OutputSpellcheckEnum string
 
 const (
-	OutputSpellcheckEnumFalse OutputSpellcheckEnum = "false"
 	OutputSpellcheckEnumTrue  OutputSpellcheckEnum = "true"
+	OutputSpellcheckEnumFalse OutputSpellcheckEnum = "false"
 	OutputSpellcheckEnumEmpty OutputSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *OutputElement) Writingsuggestions(a OutputWritingsuggestionsEnum) *Outp
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *OutputElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

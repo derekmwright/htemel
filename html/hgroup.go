@@ -60,12 +60,12 @@ func (e *HgroupElement) AddIndent(i int) {
 type HgroupAutocapitalizeEnum string
 
 const (
+	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
 	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
 	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
 	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
 	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
-	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 )
 
 type HgroupAutocorrectEnum string
@@ -103,41 +103,41 @@ const (
 type HgroupEnterkeyhintEnum string
 
 const (
+	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
+	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
+	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
 	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
 	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
 	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
-	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
-	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
-	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 )
 
 type HgroupHiddenEnum string
 
 const (
-	HgroupHiddenEnumHidden     HgroupHiddenEnum = "hidden"
 	HgroupHiddenEnumUntilFound HgroupHiddenEnum = "until-found"
+	HgroupHiddenEnumHidden     HgroupHiddenEnum = "hidden"
 	HgroupHiddenEnumEmpty      HgroupHiddenEnum = ""
 )
 
 type HgroupInputmodeEnum string
 
 const (
-	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
-	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
-	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
 	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
 	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
 	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
 	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
 	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
+	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
+	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
+	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
 )
 
 type HgroupSpellcheckEnum string
 
 const (
-	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
 	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
+	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
 	HgroupSpellcheckEnumEmpty HgroupSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *HgroupElement) Writingsuggestions(a HgroupWritingsuggestionsEnum) *Hgro
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HgroupElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

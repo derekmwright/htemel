@@ -103,13 +103,13 @@ const (
 type SubEnterkeyhintEnum string
 
 const (
+	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
+	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
+	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
 	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
 	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
-	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
-	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
-	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 )
 
 type SubHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SubInputmodeEnum string
 
 const (
+	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
+	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
+	SubInputmodeEnumText    SubInputmodeEnum = "text"
 	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
 	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
 	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
 	SubInputmodeEnumNone    SubInputmodeEnum = "none"
 	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
-	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
-	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
-	SubInputmodeEnumText    SubInputmodeEnum = "text"
 )
 
 type SubSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *SubElement) Writingsuggestions(a SubWritingsuggestionsEnum) *SubElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SubElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

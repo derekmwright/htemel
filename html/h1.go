@@ -60,12 +60,12 @@ func (e *H1Element) AddIndent(i int) {
 type H1AutocapitalizeEnum string
 
 const (
+	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
+	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
 	H1AutocapitalizeEnumOff        H1AutocapitalizeEnum = "off"
 	H1AutocapitalizeEnumOn         H1AutocapitalizeEnum = "on"
 	H1AutocapitalizeEnumSentences  H1AutocapitalizeEnum = "sentences"
 	H1AutocapitalizeEnumWords      H1AutocapitalizeEnum = "words"
-	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
-	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
 )
 
 type H1AutocorrectEnum string
@@ -96,33 +96,34 @@ const (
 type H1DraggableEnum string
 
 const (
-	H1DraggableEnumFalse H1DraggableEnum = "false"
 	H1DraggableEnumTrue  H1DraggableEnum = "true"
+	H1DraggableEnumFalse H1DraggableEnum = "false"
 )
 
 type H1EnterkeyhintEnum string
 
 const (
+	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
+	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
+	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
 	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
 	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
 	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
 	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
-	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
-	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
-	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
 )
 
 type H1HiddenEnum string
 
 const (
-	H1HiddenEnumHidden     H1HiddenEnum = "hidden"
 	H1HiddenEnumUntilFound H1HiddenEnum = "until-found"
+	H1HiddenEnumHidden     H1HiddenEnum = "hidden"
 	H1HiddenEnumEmpty      H1HiddenEnum = ""
 )
 
 type H1InputmodeEnum string
 
 const (
+	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
 	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
 	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 	H1InputmodeEnumText    H1InputmodeEnum = "text"
@@ -130,7 +131,6 @@ const (
 	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
 	H1InputmodeEnumEmail   H1InputmodeEnum = "email"
 	H1InputmodeEnumNone    H1InputmodeEnum = "none"
-	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
 )
 
 type H1SpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type H1TranslateEnum string
 
 const (
-	H1TranslateEnumYes   H1TranslateEnum = "yes"
 	H1TranslateEnumNo    H1TranslateEnum = "no"
+	H1TranslateEnumYes   H1TranslateEnum = "yes"
 	H1TranslateEnumEmpty H1TranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *H1Element) Writingsuggestions(a H1WritingsuggestionsEnum) *H1Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H1Element) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

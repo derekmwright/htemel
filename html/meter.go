@@ -60,12 +60,12 @@ func (e *MeterElement) AddIndent(i int) {
 type MeterAutocapitalizeEnum string
 
 const (
-	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
 	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
 	MeterAutocapitalizeEnumNone       MeterAutocapitalizeEnum = "none"
 	MeterAutocapitalizeEnumOff        MeterAutocapitalizeEnum = "off"
 	MeterAutocapitalizeEnumOn         MeterAutocapitalizeEnum = "on"
 	MeterAutocapitalizeEnumSentences  MeterAutocapitalizeEnum = "sentences"
+	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
 )
 
 type MeterAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type MeterContenteditableEnum string
 
 const (
+	MeterContenteditableEnumTrue          MeterContenteditableEnum = "true"
 	MeterContenteditableEnumFalse         MeterContenteditableEnum = "false"
 	MeterContenteditableEnumPlaintextOnly MeterContenteditableEnum = "plaintext-only"
-	MeterContenteditableEnumTrue          MeterContenteditableEnum = "true"
 	MeterContenteditableEnumEmpty         MeterContenteditableEnum = ""
 )
 
 type MeterDirEnum string
 
 const (
-	MeterDirEnumRtl  MeterDirEnum = "rtl"
 	MeterDirEnumAuto MeterDirEnum = "auto"
 	MeterDirEnumLtr  MeterDirEnum = "ltr"
+	MeterDirEnumRtl  MeterDirEnum = "rtl"
 )
 
 type MeterDraggableEnum string
@@ -123,14 +123,14 @@ const (
 type MeterInputmodeEnum string
 
 const (
+	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
+	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
+	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
 	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 	MeterInputmodeEnumDecimal MeterInputmodeEnum = "decimal"
 	MeterInputmodeEnumEmail   MeterInputmodeEnum = "email"
 	MeterInputmodeEnumNone    MeterInputmodeEnum = "none"
 	MeterInputmodeEnumNumeric MeterInputmodeEnum = "numeric"
-	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
-	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
-	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
 )
 
 type MeterSpellcheckEnum string
@@ -144,16 +144,16 @@ const (
 type MeterTranslateEnum string
 
 const (
-	MeterTranslateEnumNo    MeterTranslateEnum = "no"
 	MeterTranslateEnumYes   MeterTranslateEnum = "yes"
+	MeterTranslateEnumNo    MeterTranslateEnum = "no"
 	MeterTranslateEnumEmpty MeterTranslateEnum = ""
 )
 
 type MeterWritingsuggestionsEnum string
 
 const (
-	MeterWritingsuggestionsEnumFalse MeterWritingsuggestionsEnum = "false"
 	MeterWritingsuggestionsEnumTrue  MeterWritingsuggestionsEnum = "true"
+	MeterWritingsuggestionsEnumFalse MeterWritingsuggestionsEnum = "false"
 	MeterWritingsuggestionsEnumEmpty MeterWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *MeterElement) Writingsuggestions(a MeterWritingsuggestionsEnum) *MeterE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MeterElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

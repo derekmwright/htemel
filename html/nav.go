@@ -60,12 +60,12 @@ func (e *NavElement) AddIndent(i int) {
 type NavAutocapitalizeEnum string
 
 const (
+	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
 	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
 	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
 	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
 	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
-	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
 )
 
 type NavAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type NavContenteditableEnum string
 
 const (
-	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
 	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
+	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumEmpty         NavContenteditableEnum = ""
 )
 
 type NavDirEnum string
 
 const (
-	NavDirEnumLtr  NavDirEnum = "ltr"
 	NavDirEnumRtl  NavDirEnum = "rtl"
 	NavDirEnumAuto NavDirEnum = "auto"
+	NavDirEnumLtr  NavDirEnum = "ltr"
 )
 
 type NavDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
+	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
 	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
 	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
 	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
-	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 )
 
 type NavHiddenEnum string
@@ -136,8 +136,8 @@ const (
 type NavSpellcheckEnum string
 
 const (
-	NavSpellcheckEnumTrue  NavSpellcheckEnum = "true"
 	NavSpellcheckEnumFalse NavSpellcheckEnum = "false"
+	NavSpellcheckEnumTrue  NavSpellcheckEnum = "true"
 	NavSpellcheckEnumEmpty NavSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type NavWritingsuggestionsEnum string
 
 const (
-	NavWritingsuggestionsEnumTrue  NavWritingsuggestionsEnum = "true"
 	NavWritingsuggestionsEnumFalse NavWritingsuggestionsEnum = "false"
+	NavWritingsuggestionsEnumTrue  NavWritingsuggestionsEnum = "true"
 	NavWritingsuggestionsEnumEmpty NavWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *NavElement) Writingsuggestions(a NavWritingsuggestionsEnum) *NavElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *NavElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

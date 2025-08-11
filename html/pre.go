@@ -60,12 +60,12 @@ func (e *PreElement) AddIndent(i int) {
 type PreAutocapitalizeEnum string
 
 const (
-	PreAutocapitalizeEnumCharacters PreAutocapitalizeEnum = "characters"
-	PreAutocapitalizeEnumNone       PreAutocapitalizeEnum = "none"
-	PreAutocapitalizeEnumOff        PreAutocapitalizeEnum = "off"
 	PreAutocapitalizeEnumOn         PreAutocapitalizeEnum = "on"
 	PreAutocapitalizeEnumSentences  PreAutocapitalizeEnum = "sentences"
 	PreAutocapitalizeEnumWords      PreAutocapitalizeEnum = "words"
+	PreAutocapitalizeEnumCharacters PreAutocapitalizeEnum = "characters"
+	PreAutocapitalizeEnumNone       PreAutocapitalizeEnum = "none"
+	PreAutocapitalizeEnumOff        PreAutocapitalizeEnum = "off"
 )
 
 type PreAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type PreDirEnum string
 
 const (
-	PreDirEnumRtl  PreDirEnum = "rtl"
 	PreDirEnumAuto PreDirEnum = "auto"
 	PreDirEnumLtr  PreDirEnum = "ltr"
+	PreDirEnumRtl  PreDirEnum = "rtl"
 )
 
 type PreDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type PreEnterkeyhintEnum string
 
 const (
+	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
+	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
 	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
 	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
 	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
 	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
-	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
-	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 )
 
 type PreHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type PreInputmodeEnum string
 
 const (
-	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
-	PreInputmodeEnumEmail   PreInputmodeEnum = "email"
 	PreInputmodeEnumNone    PreInputmodeEnum = "none"
 	PreInputmodeEnumNumeric PreInputmodeEnum = "numeric"
 	PreInputmodeEnumSearch  PreInputmodeEnum = "search"
 	PreInputmodeEnumTel     PreInputmodeEnum = "tel"
 	PreInputmodeEnumText    PreInputmodeEnum = "text"
 	PreInputmodeEnumUrl     PreInputmodeEnum = "url"
+	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
+	PreInputmodeEnumEmail   PreInputmodeEnum = "email"
 )
 
 type PreSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type PreTranslateEnum string
 
 const (
-	PreTranslateEnumNo    PreTranslateEnum = "no"
 	PreTranslateEnumYes   PreTranslateEnum = "yes"
+	PreTranslateEnumNo    PreTranslateEnum = "no"
 	PreTranslateEnumEmpty PreTranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *PreElement) Writingsuggestions(a PreWritingsuggestionsEnum) *PreElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *PreElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -71,8 +71,8 @@ const (
 type RubyAutocorrectEnum string
 
 const (
-	RubyAutocorrectEnumOff   RubyAutocorrectEnum = "off"
 	RubyAutocorrectEnumOn    RubyAutocorrectEnum = "on"
+	RubyAutocorrectEnumOff   RubyAutocorrectEnum = "off"
 	RubyAutocorrectEnumEmpty RubyAutocorrectEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type RubyDraggableEnum string
 
 const (
-	RubyDraggableEnumTrue  RubyDraggableEnum = "true"
 	RubyDraggableEnumFalse RubyDraggableEnum = "false"
+	RubyDraggableEnumTrue  RubyDraggableEnum = "true"
 )
 
 type RubyEnterkeyhintEnum string
 
 const (
-	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
 	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
 	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
+	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 )
 
 type RubyHiddenEnum string
@@ -136,8 +136,8 @@ const (
 type RubySpellcheckEnum string
 
 const (
-	RubySpellcheckEnumFalse RubySpellcheckEnum = "false"
 	RubySpellcheckEnumTrue  RubySpellcheckEnum = "true"
+	RubySpellcheckEnumFalse RubySpellcheckEnum = "false"
 	RubySpellcheckEnumEmpty RubySpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *RubyElement) Writingsuggestions(a RubyWritingsuggestionsEnum) *RubyElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *RubyElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

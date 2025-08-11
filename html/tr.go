@@ -60,19 +60,19 @@ func (e *TrElement) AddIndent(i int) {
 type TrAutocapitalizeEnum string
 
 const (
+	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
+	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
 	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
 	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
 	TrAutocapitalizeEnumOff        TrAutocapitalizeEnum = "off"
 	TrAutocapitalizeEnumOn         TrAutocapitalizeEnum = "on"
-	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
-	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
 )
 
 type TrAutocorrectEnum string
 
 const (
-	TrAutocorrectEnumOff   TrAutocorrectEnum = "off"
 	TrAutocorrectEnumOn    TrAutocorrectEnum = "on"
+	TrAutocorrectEnumOff   TrAutocorrectEnum = "off"
 	TrAutocorrectEnumEmpty TrAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type TrEnterkeyhintEnum string
 
 const (
-	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
-	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
-	TrEnterkeyhintEnumGo       TrEnterkeyhintEnum = "go"
 	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
 	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
 	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
 	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
+	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
+	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
+	TrEnterkeyhintEnumGo       TrEnterkeyhintEnum = "go"
 )
 
 type TrHiddenEnum string
@@ -339,7 +339,7 @@ func (e *TrElement) Writingsuggestions(a TrWritingsuggestionsEnum) *TrElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TrElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

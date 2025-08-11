@@ -60,12 +60,12 @@ func (e *H3Element) AddIndent(i int) {
 type H3AutocapitalizeEnum string
 
 const (
+	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
+	H3AutocapitalizeEnumNone       H3AutocapitalizeEnum = "none"
 	H3AutocapitalizeEnumOff        H3AutocapitalizeEnum = "off"
 	H3AutocapitalizeEnumOn         H3AutocapitalizeEnum = "on"
 	H3AutocapitalizeEnumSentences  H3AutocapitalizeEnum = "sentences"
 	H3AutocapitalizeEnumWords      H3AutocapitalizeEnum = "words"
-	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
-	H3AutocapitalizeEnumNone       H3AutocapitalizeEnum = "none"
 )
 
 type H3AutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type H3EnterkeyhintEnum string
 
 const (
-	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
-	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
 	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
 	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
 	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
 	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
 	H3EnterkeyhintEnumSend     H3EnterkeyhintEnum = "send"
+	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
+	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
 )
 
 type H3HiddenEnum string
@@ -123,14 +123,14 @@ const (
 type H3InputmodeEnum string
 
 const (
-	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
-	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
 	H3InputmodeEnumNone    H3InputmodeEnum = "none"
 	H3InputmodeEnumNumeric H3InputmodeEnum = "numeric"
 	H3InputmodeEnumSearch  H3InputmodeEnum = "search"
 	H3InputmodeEnumTel     H3InputmodeEnum = "tel"
 	H3InputmodeEnumText    H3InputmodeEnum = "text"
 	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
+	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
+	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
 )
 
 type H3SpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *H3Element) Writingsuggestions(a H3WritingsuggestionsEnum) *H3Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H3Element) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

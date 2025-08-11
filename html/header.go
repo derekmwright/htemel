@@ -60,12 +60,12 @@ func (e *HeaderElement) AddIndent(i int) {
 type HeaderAutocapitalizeEnum string
 
 const (
-	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
-	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
 	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
 	HeaderAutocapitalizeEnumNone       HeaderAutocapitalizeEnum = "none"
 	HeaderAutocapitalizeEnumOff        HeaderAutocapitalizeEnum = "off"
 	HeaderAutocapitalizeEnumOn         HeaderAutocapitalizeEnum = "on"
+	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
+	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
 )
 
 type HeaderAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type HeaderEnterkeyhintEnum string
 
 const (
+	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
+	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
 	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
 	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
 	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
 	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
-	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
-	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
 )
 
 type HeaderHiddenEnum string
@@ -136,8 +136,8 @@ const (
 type HeaderSpellcheckEnum string
 
 const (
-	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
 	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
+	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
 	HeaderSpellcheckEnumEmpty HeaderSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *HeaderElement) Writingsuggestions(a HeaderWritingsuggestionsEnum) *Head
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HeaderElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,12 +60,12 @@ func (e *MapElement) AddIndent(i int) {
 type MapAutocapitalizeEnum string
 
 const (
+	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
 	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 	MapAutocapitalizeEnumCharacters MapAutocapitalizeEnum = "characters"
 	MapAutocapitalizeEnumNone       MapAutocapitalizeEnum = "none"
 	MapAutocapitalizeEnumOff        MapAutocapitalizeEnum = "off"
 	MapAutocapitalizeEnumOn         MapAutocapitalizeEnum = "on"
-	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
 )
 
 type MapAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type MapContenteditableEnum string
 
 const (
+	MapContenteditableEnumTrue          MapContenteditableEnum = "true"
 	MapContenteditableEnumFalse         MapContenteditableEnum = "false"
 	MapContenteditableEnumPlaintextOnly MapContenteditableEnum = "plaintext-only"
-	MapContenteditableEnumTrue          MapContenteditableEnum = "true"
 	MapContenteditableEnumEmpty         MapContenteditableEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type MapEnterkeyhintEnum string
 
 const (
-	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
-	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
 	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
 	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
 	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
 	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 	MapEnterkeyhintEnumSend     MapEnterkeyhintEnum = "send"
+	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
+	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
 )
 
 type MapHiddenEnum string
 
 const (
-	MapHiddenEnumHidden     MapHiddenEnum = "hidden"
 	MapHiddenEnumUntilFound MapHiddenEnum = "until-found"
+	MapHiddenEnumHidden     MapHiddenEnum = "hidden"
 	MapHiddenEnumEmpty      MapHiddenEnum = ""
 )
 
 type MapInputmodeEnum string
 
 const (
-	MapInputmodeEnumNone    MapInputmodeEnum = "none"
-	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
 	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
 	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
 	MapInputmodeEnumText    MapInputmodeEnum = "text"
 	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
 	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
 	MapInputmodeEnumEmail   MapInputmodeEnum = "email"
+	MapInputmodeEnumNone    MapInputmodeEnum = "none"
+	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
 )
 
 type MapSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type MapWritingsuggestionsEnum string
 
 const (
-	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
 	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
+	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
 	MapWritingsuggestionsEnumEmpty MapWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *MapElement) Writingsuggestions(a MapWritingsuggestionsEnum) *MapElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MapElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

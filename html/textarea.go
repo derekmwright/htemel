@@ -60,12 +60,12 @@ func (e *TextareaElement) AddIndent(i int) {
 type TextareaAutocapitalizeEnum string
 
 const (
+	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
 	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
 	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
 	TextareaAutocapitalizeEnumWords      TextareaAutocapitalizeEnum = "words"
 	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
 	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
-	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
 )
 
 type TextareaAutocorrectEnum string
@@ -88,28 +88,28 @@ const (
 type TextareaDirEnum string
 
 const (
-	TextareaDirEnumAuto TextareaDirEnum = "auto"
 	TextareaDirEnumLtr  TextareaDirEnum = "ltr"
 	TextareaDirEnumRtl  TextareaDirEnum = "rtl"
+	TextareaDirEnumAuto TextareaDirEnum = "auto"
 )
 
 type TextareaDraggableEnum string
 
 const (
-	TextareaDraggableEnumFalse TextareaDraggableEnum = "false"
 	TextareaDraggableEnumTrue  TextareaDraggableEnum = "true"
+	TextareaDraggableEnumFalse TextareaDraggableEnum = "false"
 )
 
 type TextareaEnterkeyhintEnum string
 
 const (
-	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
-	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
-	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
 	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
 	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
 	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
 	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
+	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
+	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
+	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
 )
 
 type TextareaHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type TextareaInputmodeEnum string
 
 const (
+	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
+	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
+	TextareaInputmodeEnumSearch  TextareaInputmodeEnum = "search"
 	TextareaInputmodeEnumTel     TextareaInputmodeEnum = "tel"
 	TextareaInputmodeEnumText    TextareaInputmodeEnum = "text"
 	TextareaInputmodeEnumUrl     TextareaInputmodeEnum = "url"
 	TextareaInputmodeEnumDecimal TextareaInputmodeEnum = "decimal"
 	TextareaInputmodeEnumEmail   TextareaInputmodeEnum = "email"
-	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
-	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
-	TextareaInputmodeEnumSearch  TextareaInputmodeEnum = "search"
 )
 
 type TextareaSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *TextareaElement) Writingsuggestions(a TextareaWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TextareaElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,19 +60,19 @@ func (e *DfnElement) AddIndent(i int) {
 type DfnAutocapitalizeEnum string
 
 const (
-	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
-	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
 	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
 	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
 	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
 	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
+	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
+	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
 )
 
 type DfnAutocorrectEnum string
 
 const (
-	DfnAutocorrectEnumOff   DfnAutocorrectEnum = "off"
 	DfnAutocorrectEnumOn    DfnAutocorrectEnum = "on"
+	DfnAutocorrectEnumOff   DfnAutocorrectEnum = "off"
 	DfnAutocorrectEnumEmpty DfnAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type DfnDirEnum string
 
 const (
-	DfnDirEnumRtl  DfnDirEnum = "rtl"
 	DfnDirEnumAuto DfnDirEnum = "auto"
 	DfnDirEnumLtr  DfnDirEnum = "ltr"
+	DfnDirEnumRtl  DfnDirEnum = "rtl"
 )
 
 type DfnDraggableEnum string
@@ -103,26 +103,27 @@ const (
 type DfnEnterkeyhintEnum string
 
 const (
-	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
-	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
-	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
 	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
 	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
+	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
+	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
+	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 )
 
 type DfnHiddenEnum string
 
 const (
-	DfnHiddenEnumUntilFound DfnHiddenEnum = "until-found"
 	DfnHiddenEnumHidden     DfnHiddenEnum = "hidden"
+	DfnHiddenEnumUntilFound DfnHiddenEnum = "until-found"
 	DfnHiddenEnumEmpty      DfnHiddenEnum = ""
 )
 
 type DfnInputmodeEnum string
 
 const (
+	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
 	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
 	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
 	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
@@ -130,7 +131,6 @@ const (
 	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
 	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
 	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
-	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
 )
 
 type DfnSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type DfnTranslateEnum string
 
 const (
-	DfnTranslateEnumNo    DfnTranslateEnum = "no"
 	DfnTranslateEnumYes   DfnTranslateEnum = "yes"
+	DfnTranslateEnumNo    DfnTranslateEnum = "no"
 	DfnTranslateEnumEmpty DfnTranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *DfnElement) Writingsuggestions(a DfnWritingsuggestionsEnum) *DfnElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DfnElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,12 +60,12 @@ func (e *BdoElement) AddIndent(i int) {
 type BdoAutocapitalizeEnum string
 
 const (
+	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
 	BdoAutocapitalizeEnumOn         BdoAutocapitalizeEnum = "on"
 	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
 	BdoAutocapitalizeEnumWords      BdoAutocapitalizeEnum = "words"
 	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
 	BdoAutocapitalizeEnumNone       BdoAutocapitalizeEnum = "none"
-	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
 )
 
 type BdoAutocorrectEnum string
@@ -103,20 +103,20 @@ const (
 type BdoEnterkeyhintEnum string
 
 const (
+	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
 	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
 	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
 	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
 	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
 	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
-	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
 )
 
 type BdoHiddenEnum string
 
 const (
-	BdoHiddenEnumUntilFound BdoHiddenEnum = "until-found"
 	BdoHiddenEnumHidden     BdoHiddenEnum = "hidden"
+	BdoHiddenEnumUntilFound BdoHiddenEnum = "until-found"
 	BdoHiddenEnumEmpty      BdoHiddenEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *BdoElement) Writingsuggestions(a BdoWritingsuggestionsEnum) *BdoElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BdoElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

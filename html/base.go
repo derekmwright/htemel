@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -62,26 +63,26 @@ const (
 type BaseAutocorrectEnum string
 
 const (
-	BaseAutocorrectEnumOn    BaseAutocorrectEnum = "on"
 	BaseAutocorrectEnumOff   BaseAutocorrectEnum = "off"
+	BaseAutocorrectEnumOn    BaseAutocorrectEnum = "on"
 	BaseAutocorrectEnumEmpty BaseAutocorrectEnum = ""
 )
 
 type BaseContenteditableEnum string
 
 const (
+	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
 	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
 	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
-	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
 	BaseContenteditableEnumEmpty         BaseContenteditableEnum = ""
 )
 
 type BaseDirEnum string
 
 const (
+	BaseDirEnumRtl  BaseDirEnum = "rtl"
 	BaseDirEnumAuto BaseDirEnum = "auto"
 	BaseDirEnumLtr  BaseDirEnum = "ltr"
-	BaseDirEnumRtl  BaseDirEnum = "rtl"
 )
 
 type BaseDraggableEnum string
@@ -94,34 +95,34 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
+	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
 	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
 	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
-	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 )
 
 type BaseHiddenEnum string
 
 const (
-	BaseHiddenEnumUntilFound BaseHiddenEnum = "until-found"
 	BaseHiddenEnumHidden     BaseHiddenEnum = "hidden"
+	BaseHiddenEnumUntilFound BaseHiddenEnum = "until-found"
 	BaseHiddenEnumEmpty      BaseHiddenEnum = ""
 )
 
 type BaseInputmodeEnum string
 
 const (
+	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
+	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
 	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
 	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
 	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
 	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
 	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
-	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
-	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
 )
 
 type BaseSpellcheckEnum string
@@ -342,7 +343,7 @@ func (e *BaseElement) Writingsuggestions(a BaseWritingsuggestionsEnum) *BaseElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BaseElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

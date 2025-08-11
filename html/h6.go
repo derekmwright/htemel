@@ -60,37 +60,37 @@ func (e *H6Element) AddIndent(i int) {
 type H6AutocapitalizeEnum string
 
 const (
+	H6AutocapitalizeEnumSentences  H6AutocapitalizeEnum = "sentences"
+	H6AutocapitalizeEnumWords      H6AutocapitalizeEnum = "words"
 	H6AutocapitalizeEnumCharacters H6AutocapitalizeEnum = "characters"
 	H6AutocapitalizeEnumNone       H6AutocapitalizeEnum = "none"
 	H6AutocapitalizeEnumOff        H6AutocapitalizeEnum = "off"
 	H6AutocapitalizeEnumOn         H6AutocapitalizeEnum = "on"
-	H6AutocapitalizeEnumSentences  H6AutocapitalizeEnum = "sentences"
-	H6AutocapitalizeEnumWords      H6AutocapitalizeEnum = "words"
 )
 
 type H6AutocorrectEnum string
 
 const (
-	H6AutocorrectEnumOn    H6AutocorrectEnum = "on"
 	H6AutocorrectEnumOff   H6AutocorrectEnum = "off"
+	H6AutocorrectEnumOn    H6AutocorrectEnum = "on"
 	H6AutocorrectEnumEmpty H6AutocorrectEnum = ""
 )
 
 type H6ContenteditableEnum string
 
 const (
-	H6ContenteditableEnumFalse         H6ContenteditableEnum = "false"
 	H6ContenteditableEnumPlaintextOnly H6ContenteditableEnum = "plaintext-only"
 	H6ContenteditableEnumTrue          H6ContenteditableEnum = "true"
+	H6ContenteditableEnumFalse         H6ContenteditableEnum = "false"
 	H6ContenteditableEnumEmpty         H6ContenteditableEnum = ""
 )
 
 type H6DirEnum string
 
 const (
-	H6DirEnumAuto H6DirEnum = "auto"
 	H6DirEnumLtr  H6DirEnum = "ltr"
 	H6DirEnumRtl  H6DirEnum = "rtl"
+	H6DirEnumAuto H6DirEnum = "auto"
 )
 
 type H6DraggableEnum string
@@ -103,13 +103,13 @@ const (
 type H6EnterkeyhintEnum string
 
 const (
-	H6EnterkeyhintEnumDone     H6EnterkeyhintEnum = "done"
 	H6EnterkeyhintEnumEnter    H6EnterkeyhintEnum = "enter"
 	H6EnterkeyhintEnumGo       H6EnterkeyhintEnum = "go"
 	H6EnterkeyhintEnumNext     H6EnterkeyhintEnum = "next"
 	H6EnterkeyhintEnumPrevious H6EnterkeyhintEnum = "previous"
 	H6EnterkeyhintEnumSearch   H6EnterkeyhintEnum = "search"
 	H6EnterkeyhintEnumSend     H6EnterkeyhintEnum = "send"
+	H6EnterkeyhintEnumDone     H6EnterkeyhintEnum = "done"
 )
 
 type H6HiddenEnum string
@@ -123,14 +123,14 @@ const (
 type H6InputmodeEnum string
 
 const (
-	H6InputmodeEnumEmail   H6InputmodeEnum = "email"
-	H6InputmodeEnumNone    H6InputmodeEnum = "none"
-	H6InputmodeEnumNumeric H6InputmodeEnum = "numeric"
 	H6InputmodeEnumSearch  H6InputmodeEnum = "search"
 	H6InputmodeEnumTel     H6InputmodeEnum = "tel"
 	H6InputmodeEnumText    H6InputmodeEnum = "text"
 	H6InputmodeEnumUrl     H6InputmodeEnum = "url"
 	H6InputmodeEnumDecimal H6InputmodeEnum = "decimal"
+	H6InputmodeEnumEmail   H6InputmodeEnum = "email"
+	H6InputmodeEnumNone    H6InputmodeEnum = "none"
+	H6InputmodeEnumNumeric H6InputmodeEnum = "numeric"
 )
 
 type H6SpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type H6WritingsuggestionsEnum string
 
 const (
-	H6WritingsuggestionsEnumTrue  H6WritingsuggestionsEnum = "true"
 	H6WritingsuggestionsEnumFalse H6WritingsuggestionsEnum = "false"
+	H6WritingsuggestionsEnumTrue  H6WritingsuggestionsEnum = "true"
 	H6WritingsuggestionsEnumEmpty H6WritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *H6Element) Writingsuggestions(a H6WritingsuggestionsEnum) *H6Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H6Element) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

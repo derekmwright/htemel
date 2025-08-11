@@ -60,12 +60,12 @@ func (e *DivElement) AddIndent(i int) {
 type DivAutocapitalizeEnum string
 
 const (
-	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
-	DivAutocapitalizeEnumCharacters DivAutocapitalizeEnum = "characters"
 	DivAutocapitalizeEnumNone       DivAutocapitalizeEnum = "none"
 	DivAutocapitalizeEnumOff        DivAutocapitalizeEnum = "off"
 	DivAutocapitalizeEnumOn         DivAutocapitalizeEnum = "on"
 	DivAutocapitalizeEnumSentences  DivAutocapitalizeEnum = "sentences"
+	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
+	DivAutocapitalizeEnumCharacters DivAutocapitalizeEnum = "characters"
 )
 
 type DivAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type DivDirEnum string
 
 const (
-	DivDirEnumRtl  DivDirEnum = "rtl"
 	DivDirEnumAuto DivDirEnum = "auto"
 	DivDirEnumLtr  DivDirEnum = "ltr"
+	DivDirEnumRtl  DivDirEnum = "rtl"
 )
 
 type DivDraggableEnum string
@@ -123,14 +123,14 @@ const (
 type DivInputmodeEnum string
 
 const (
-	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
-	DivInputmodeEnumText    DivInputmodeEnum = "text"
-	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
 	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
 	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
 	DivInputmodeEnumNone    DivInputmodeEnum = "none"
 	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
 	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
+	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
+	DivInputmodeEnumText    DivInputmodeEnum = "text"
+	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
 )
 
 type DivSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DivWritingsuggestionsEnum string
 
 const (
-	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
 	DivWritingsuggestionsEnumTrue  DivWritingsuggestionsEnum = "true"
+	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
 	DivWritingsuggestionsEnumEmpty DivWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *DivElement) Writingsuggestions(a DivWritingsuggestionsEnum) *DivElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DivElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

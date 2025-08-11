@@ -60,12 +60,12 @@ func (e *H5Element) AddIndent(i int) {
 type H5AutocapitalizeEnum string
 
 const (
-	H5AutocapitalizeEnumWords      H5AutocapitalizeEnum = "words"
 	H5AutocapitalizeEnumCharacters H5AutocapitalizeEnum = "characters"
 	H5AutocapitalizeEnumNone       H5AutocapitalizeEnum = "none"
 	H5AutocapitalizeEnumOff        H5AutocapitalizeEnum = "off"
 	H5AutocapitalizeEnumOn         H5AutocapitalizeEnum = "on"
 	H5AutocapitalizeEnumSentences  H5AutocapitalizeEnum = "sentences"
+	H5AutocapitalizeEnumWords      H5AutocapitalizeEnum = "words"
 )
 
 type H5AutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type H5ContenteditableEnum string
 
 const (
-	H5ContenteditableEnumTrue          H5ContenteditableEnum = "true"
 	H5ContenteditableEnumFalse         H5ContenteditableEnum = "false"
 	H5ContenteditableEnumPlaintextOnly H5ContenteditableEnum = "plaintext-only"
+	H5ContenteditableEnumTrue          H5ContenteditableEnum = "true"
 	H5ContenteditableEnumEmpty         H5ContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type H5EnterkeyhintEnum string
 
 const (
-	H5EnterkeyhintEnumEnter    H5EnterkeyhintEnum = "enter"
-	H5EnterkeyhintEnumGo       H5EnterkeyhintEnum = "go"
-	H5EnterkeyhintEnumNext     H5EnterkeyhintEnum = "next"
 	H5EnterkeyhintEnumPrevious H5EnterkeyhintEnum = "previous"
 	H5EnterkeyhintEnumSearch   H5EnterkeyhintEnum = "search"
 	H5EnterkeyhintEnumSend     H5EnterkeyhintEnum = "send"
 	H5EnterkeyhintEnumDone     H5EnterkeyhintEnum = "done"
+	H5EnterkeyhintEnumEnter    H5EnterkeyhintEnum = "enter"
+	H5EnterkeyhintEnumGo       H5EnterkeyhintEnum = "go"
+	H5EnterkeyhintEnumNext     H5EnterkeyhintEnum = "next"
 )
 
 type H5HiddenEnum string
@@ -123,29 +123,29 @@ const (
 type H5InputmodeEnum string
 
 const (
+	H5InputmodeEnumTel     H5InputmodeEnum = "tel"
+	H5InputmodeEnumText    H5InputmodeEnum = "text"
 	H5InputmodeEnumUrl     H5InputmodeEnum = "url"
 	H5InputmodeEnumDecimal H5InputmodeEnum = "decimal"
 	H5InputmodeEnumEmail   H5InputmodeEnum = "email"
 	H5InputmodeEnumNone    H5InputmodeEnum = "none"
 	H5InputmodeEnumNumeric H5InputmodeEnum = "numeric"
 	H5InputmodeEnumSearch  H5InputmodeEnum = "search"
-	H5InputmodeEnumTel     H5InputmodeEnum = "tel"
-	H5InputmodeEnumText    H5InputmodeEnum = "text"
 )
 
 type H5SpellcheckEnum string
 
 const (
-	H5SpellcheckEnumTrue  H5SpellcheckEnum = "true"
 	H5SpellcheckEnumFalse H5SpellcheckEnum = "false"
+	H5SpellcheckEnumTrue  H5SpellcheckEnum = "true"
 	H5SpellcheckEnumEmpty H5SpellcheckEnum = ""
 )
 
 type H5TranslateEnum string
 
 const (
-	H5TranslateEnumNo    H5TranslateEnum = "no"
 	H5TranslateEnumYes   H5TranslateEnum = "yes"
+	H5TranslateEnumNo    H5TranslateEnum = "no"
 	H5TranslateEnumEmpty H5TranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *H5Element) Writingsuggestions(a H5WritingsuggestionsEnum) *H5Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H5Element) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

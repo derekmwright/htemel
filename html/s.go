@@ -60,12 +60,12 @@ func (e *SElement) AddIndent(i int) {
 type SAutocapitalizeEnum string
 
 const (
-	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
 	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
 	SAutocapitalizeEnumSentences  SAutocapitalizeEnum = "sentences"
 	SAutocapitalizeEnumWords      SAutocapitalizeEnum = "words"
 	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
 	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
+	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
 )
 
 type SAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type SDirEnum string
 
 const (
-	SDirEnumRtl  SDirEnum = "rtl"
 	SDirEnumAuto SDirEnum = "auto"
 	SDirEnumLtr  SDirEnum = "ltr"
+	SDirEnumRtl  SDirEnum = "rtl"
 )
 
 type SDraggableEnum string
@@ -123,6 +123,7 @@ const (
 type SInputmodeEnum string
 
 const (
+	SInputmodeEnumUrl     SInputmodeEnum = "url"
 	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
 	SInputmodeEnumEmail   SInputmodeEnum = "email"
 	SInputmodeEnumNone    SInputmodeEnum = "none"
@@ -130,7 +131,6 @@ const (
 	SInputmodeEnumSearch  SInputmodeEnum = "search"
 	SInputmodeEnumTel     SInputmodeEnum = "tel"
 	SInputmodeEnumText    SInputmodeEnum = "text"
-	SInputmodeEnumUrl     SInputmodeEnum = "url"
 )
 
 type SSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *SElement) Writingsuggestions(a SWritingsuggestionsEnum) *SElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

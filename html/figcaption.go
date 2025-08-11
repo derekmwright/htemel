@@ -60,12 +60,12 @@ func (e *FigcaptionElement) AddIndent(i int) {
 type FigcaptionAutocapitalizeEnum string
 
 const (
-	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
 	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
 	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
 	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
+	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 )
 
 type FigcaptionAutocorrectEnum string
@@ -96,41 +96,41 @@ const (
 type FigcaptionDraggableEnum string
 
 const (
-	FigcaptionDraggableEnumFalse FigcaptionDraggableEnum = "false"
 	FigcaptionDraggableEnumTrue  FigcaptionDraggableEnum = "true"
+	FigcaptionDraggableEnumFalse FigcaptionDraggableEnum = "false"
 )
 
 type FigcaptionEnterkeyhintEnum string
 
 const (
-	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
 	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
 	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
 	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
 	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
+	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
 )
 
 type FigcaptionHiddenEnum string
 
 const (
-	FigcaptionHiddenEnumUntilFound FigcaptionHiddenEnum = "until-found"
 	FigcaptionHiddenEnumHidden     FigcaptionHiddenEnum = "hidden"
+	FigcaptionHiddenEnumUntilFound FigcaptionHiddenEnum = "until-found"
 	FigcaptionHiddenEnumEmpty      FigcaptionHiddenEnum = ""
 )
 
 type FigcaptionInputmodeEnum string
 
 const (
-	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
-	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
-	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
 	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
 	FigcaptionInputmodeEnumTel     FigcaptionInputmodeEnum = "tel"
 	FigcaptionInputmodeEnumText    FigcaptionInputmodeEnum = "text"
 	FigcaptionInputmodeEnumUrl     FigcaptionInputmodeEnum = "url"
 	FigcaptionInputmodeEnumDecimal FigcaptionInputmodeEnum = "decimal"
+	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
+	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
+	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
 )
 
 type FigcaptionSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *FigcaptionElement) Writingsuggestions(a FigcaptionWritingsuggestionsEnu
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *FigcaptionElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

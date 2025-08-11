@@ -60,12 +60,12 @@ func (e *OlElement) AddIndent(i int) {
 type OlAutocapitalizeEnum string
 
 const (
+	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
+	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 	OlAutocapitalizeEnumNone       OlAutocapitalizeEnum = "none"
 	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
 	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
 	OlAutocapitalizeEnumSentences  OlAutocapitalizeEnum = "sentences"
-	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
-	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 )
 
 type OlAutocorrectEnum string
@@ -88,28 +88,28 @@ const (
 type OlDirEnum string
 
 const (
-	OlDirEnumAuto OlDirEnum = "auto"
 	OlDirEnumLtr  OlDirEnum = "ltr"
 	OlDirEnumRtl  OlDirEnum = "rtl"
+	OlDirEnumAuto OlDirEnum = "auto"
 )
 
 type OlDraggableEnum string
 
 const (
-	OlDraggableEnumFalse OlDraggableEnum = "false"
 	OlDraggableEnumTrue  OlDraggableEnum = "true"
+	OlDraggableEnumFalse OlDraggableEnum = "false"
 )
 
 type OlEnterkeyhintEnum string
 
 const (
-	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
 	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
 	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
 	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
 	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
+	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
 )
 
 type OlHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type OlInputmodeEnum string
 
 const (
+	OlInputmodeEnumText    OlInputmodeEnum = "text"
+	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
+	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
 	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
 	OlInputmodeEnumNone    OlInputmodeEnum = "none"
 	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
 	OlInputmodeEnumSearch  OlInputmodeEnum = "search"
 	OlInputmodeEnumTel     OlInputmodeEnum = "tel"
-	OlInputmodeEnumText    OlInputmodeEnum = "text"
-	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
-	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
 )
 
 type OlSpellcheckEnum string
@@ -351,7 +351,7 @@ func (e *OlElement) Writingsuggestions(a OlWritingsuggestionsEnum) *OlElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *OlElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

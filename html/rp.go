@@ -60,12 +60,12 @@ func (e *RpElement) AddIndent(i int) {
 type RpAutocapitalizeEnum string
 
 const (
-	RpAutocapitalizeEnumNone       RpAutocapitalizeEnum = "none"
-	RpAutocapitalizeEnumOff        RpAutocapitalizeEnum = "off"
 	RpAutocapitalizeEnumOn         RpAutocapitalizeEnum = "on"
 	RpAutocapitalizeEnumSentences  RpAutocapitalizeEnum = "sentences"
 	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
 	RpAutocapitalizeEnumCharacters RpAutocapitalizeEnum = "characters"
+	RpAutocapitalizeEnumNone       RpAutocapitalizeEnum = "none"
+	RpAutocapitalizeEnumOff        RpAutocapitalizeEnum = "off"
 )
 
 type RpAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type RpEnterkeyhintEnum string
 
 const (
-	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
 	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
 	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
 	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
 	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
 	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
+	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 )
 
 type RpHiddenEnum string
@@ -339,7 +339,7 @@ func (e *RpElement) Writingsuggestions(a RpWritingsuggestionsEnum) *RpElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *RpElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

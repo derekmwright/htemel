@@ -60,12 +60,12 @@ func (e *MarkElement) AddIndent(i int) {
 type MarkAutocapitalizeEnum string
 
 const (
-	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
-	MarkAutocapitalizeEnumNone       MarkAutocapitalizeEnum = "none"
-	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
 	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
 	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
 	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
+	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
+	MarkAutocapitalizeEnumNone       MarkAutocapitalizeEnum = "none"
+	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
 )
 
 type MarkAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type MarkDirEnum string
 
 const (
+	MarkDirEnumRtl  MarkDirEnum = "rtl"
 	MarkDirEnumAuto MarkDirEnum = "auto"
 	MarkDirEnumLtr  MarkDirEnum = "ltr"
-	MarkDirEnumRtl  MarkDirEnum = "rtl"
 )
 
 type MarkDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type MarkEnterkeyhintEnum string
 
 const (
-	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
 	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
 	MarkEnterkeyhintEnumGo       MarkEnterkeyhintEnum = "go"
 	MarkEnterkeyhintEnumNext     MarkEnterkeyhintEnum = "next"
 	MarkEnterkeyhintEnumPrevious MarkEnterkeyhintEnum = "previous"
 	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
 	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
+	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
 )
 
 type MarkHiddenEnum string
@@ -144,16 +144,16 @@ const (
 type MarkTranslateEnum string
 
 const (
-	MarkTranslateEnumYes   MarkTranslateEnum = "yes"
 	MarkTranslateEnumNo    MarkTranslateEnum = "no"
+	MarkTranslateEnumYes   MarkTranslateEnum = "yes"
 	MarkTranslateEnumEmpty MarkTranslateEnum = ""
 )
 
 type MarkWritingsuggestionsEnum string
 
 const (
-	MarkWritingsuggestionsEnumFalse MarkWritingsuggestionsEnum = "false"
 	MarkWritingsuggestionsEnumTrue  MarkWritingsuggestionsEnum = "true"
+	MarkWritingsuggestionsEnumFalse MarkWritingsuggestionsEnum = "false"
 	MarkWritingsuggestionsEnumEmpty MarkWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *MarkElement) Writingsuggestions(a MarkWritingsuggestionsEnum) *MarkElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MarkElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

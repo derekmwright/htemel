@@ -60,19 +60,19 @@ func (e *VideoElement) AddIndent(i int) {
 type VideoAutocapitalizeEnum string
 
 const (
-	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
-	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
-	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
 	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
 	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
 	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
+	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
+	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
+	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
 )
 
 type VideoAutocorrectEnum string
 
 const (
-	VideoAutocorrectEnumOff   VideoAutocorrectEnum = "off"
 	VideoAutocorrectEnumOn    VideoAutocorrectEnum = "on"
+	VideoAutocorrectEnumOff   VideoAutocorrectEnum = "off"
 	VideoAutocorrectEnumEmpty VideoAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type VideoEnterkeyhintEnum string
 
 const (
+	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
+	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
+	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
 	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
 	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
 	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
 	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
-	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
-	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
-	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
 )
 
 type VideoHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type VideoInputmodeEnum string
 
 const (
+	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
+	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
+	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
 	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
 	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
 	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
 	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
 	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
-	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
-	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
-	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
 )
 
 type VideoSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *VideoElement) Writingsuggestions(a VideoWritingsuggestionsEnum) *VideoE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *VideoElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,12 +60,12 @@ func (e *TbodyElement) AddIndent(i int) {
 type TbodyAutocapitalizeEnum string
 
 const (
+	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
+	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
 	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 	TbodyAutocapitalizeEnumWords      TbodyAutocapitalizeEnum = "words"
 	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
 	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
-	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
-	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
 )
 
 type TbodyAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type TbodyContenteditableEnum string
 
 const (
-	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
 	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
+	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
 	TbodyContenteditableEnumEmpty         TbodyContenteditableEnum = ""
 )
 
@@ -103,20 +103,20 @@ const (
 type TbodyEnterkeyhintEnum string
 
 const (
+	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
+	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
+	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 	TbodyEnterkeyhintEnumDone     TbodyEnterkeyhintEnum = "done"
 	TbodyEnterkeyhintEnumEnter    TbodyEnterkeyhintEnum = "enter"
 	TbodyEnterkeyhintEnumGo       TbodyEnterkeyhintEnum = "go"
 	TbodyEnterkeyhintEnumNext     TbodyEnterkeyhintEnum = "next"
-	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
-	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
-	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 )
 
 type TbodyHiddenEnum string
 
 const (
-	TbodyHiddenEnumHidden     TbodyHiddenEnum = "hidden"
 	TbodyHiddenEnumUntilFound TbodyHiddenEnum = "until-found"
+	TbodyHiddenEnumHidden     TbodyHiddenEnum = "hidden"
 	TbodyHiddenEnumEmpty      TbodyHiddenEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type TbodyWritingsuggestionsEnum string
 
 const (
-	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
 	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
+	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
 	TbodyWritingsuggestionsEnumEmpty TbodyWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *TbodyElement) Writingsuggestions(a TbodyWritingsuggestionsEnum) *TbodyE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TbodyElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

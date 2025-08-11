@@ -60,19 +60,19 @@ func (e *ThElement) AddIndent(i int) {
 type ThAutocapitalizeEnum string
 
 const (
-	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
 	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
 	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
 	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
 	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
+	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
 )
 
 type ThAutocorrectEnum string
 
 const (
-	ThAutocorrectEnumOff   ThAutocorrectEnum = "off"
 	ThAutocorrectEnumOn    ThAutocorrectEnum = "on"
+	ThAutocorrectEnumOff   ThAutocorrectEnum = "off"
 	ThAutocorrectEnumEmpty ThAutocorrectEnum = ""
 )
 
@@ -88,56 +88,56 @@ const (
 type ThDirEnum string
 
 const (
-	ThDirEnumAuto ThDirEnum = "auto"
 	ThDirEnumLtr  ThDirEnum = "ltr"
 	ThDirEnumRtl  ThDirEnum = "rtl"
+	ThDirEnumAuto ThDirEnum = "auto"
 )
 
 type ThDraggableEnum string
 
 const (
-	ThDraggableEnumTrue  ThDraggableEnum = "true"
 	ThDraggableEnumFalse ThDraggableEnum = "false"
+	ThDraggableEnumTrue  ThDraggableEnum = "true"
 )
 
 type ThEnterkeyhintEnum string
 
 const (
+	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
+	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
+	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
 	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
 	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
-	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
-	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
-	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 )
 
 type ThHiddenEnum string
 
 const (
-	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
 	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
+	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
 	ThHiddenEnumEmpty      ThHiddenEnum = ""
 )
 
 type ThInputmodeEnum string
 
 const (
-	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
-	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
-	ThInputmodeEnumText    ThInputmodeEnum = "text"
 	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
 	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
 	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
 	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
+	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
+	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
+	ThInputmodeEnumText    ThInputmodeEnum = "text"
 )
 
 type ThSpellcheckEnum string
 
 const (
-	ThSpellcheckEnumFalse ThSpellcheckEnum = "false"
 	ThSpellcheckEnumTrue  ThSpellcheckEnum = "true"
+	ThSpellcheckEnumFalse ThSpellcheckEnum = "false"
 	ThSpellcheckEnumEmpty ThSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *ThElement) Writingsuggestions(a ThWritingsuggestionsEnum) *ThElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ThElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

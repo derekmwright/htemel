@@ -79,9 +79,9 @@ const (
 type TdContenteditableEnum string
 
 const (
+	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
 	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
 	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
-	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
 	TdContenteditableEnumEmpty         TdContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type TdEnterkeyhintEnum string
 
 const (
-	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
 	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
 	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
 	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
 	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
 	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
 	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
+	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
 )
 
 type TdHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type TdInputmodeEnum string
 
 const (
+	TdInputmodeEnumNone    TdInputmodeEnum = "none"
+	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
 	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
 	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
 	TdInputmodeEnumText    TdInputmodeEnum = "text"
 	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
 	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
-	TdInputmodeEnumNone    TdInputmodeEnum = "none"
-	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
 )
 
 type TdSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type TdTranslateEnum string
 
 const (
-	TdTranslateEnumYes   TdTranslateEnum = "yes"
 	TdTranslateEnumNo    TdTranslateEnum = "no"
+	TdTranslateEnumYes   TdTranslateEnum = "yes"
 	TdTranslateEnumEmpty TdTranslateEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *TdElement) Writingsuggestions(a TdWritingsuggestionsEnum) *TdElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TdElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

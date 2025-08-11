@@ -60,12 +60,12 @@ func (e *AddressElement) AddIndent(i int) {
 type AddressAutocapitalizeEnum string
 
 const (
+	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
 	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
 	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
 	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
-	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 )
 
 type AddressAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type AddressContenteditableEnum string
 
 const (
-	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
 	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
+	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
 	AddressContenteditableEnumEmpty         AddressContenteditableEnum = ""
 )
 
 type AddressDirEnum string
 
 const (
-	AddressDirEnumRtl  AddressDirEnum = "rtl"
 	AddressDirEnumAuto AddressDirEnum = "auto"
 	AddressDirEnumLtr  AddressDirEnum = "ltr"
+	AddressDirEnumRtl  AddressDirEnum = "rtl"
 )
 
 type AddressDraggableEnum string
@@ -103,27 +103,26 @@ const (
 type AddressEnterkeyhintEnum string
 
 const (
-	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
-	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
-	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
 	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
 	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
 	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
+	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
+	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
+	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
 )
 
 type AddressHiddenEnum string
 
 const (
-	AddressHiddenEnumHidden     AddressHiddenEnum = "hidden"
 	AddressHiddenEnumUntilFound AddressHiddenEnum = "until-found"
+	AddressHiddenEnumHidden     AddressHiddenEnum = "hidden"
 	AddressHiddenEnumEmpty      AddressHiddenEnum = ""
 )
 
 type AddressInputmodeEnum string
 
 const (
-	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 	AddressInputmodeEnumText    AddressInputmodeEnum = "text"
 	AddressInputmodeEnumUrl     AddressInputmodeEnum = "url"
 	AddressInputmodeEnumDecimal AddressInputmodeEnum = "decimal"
@@ -131,6 +130,7 @@ const (
 	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
 	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
 	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
+	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 )
 
 type AddressSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *AddressElement) Writingsuggestions(a AddressWritingsuggestionsEnum) *Ad
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AddressElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -51,56 +52,56 @@ func (e *InputElement) AddIndent(i int) {
 type InputAutocapitalizeEnum string
 
 const (
+	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
+	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
 	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
 	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
 	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
-	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
-	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
 )
 
 type InputAutocorrectEnum string
 
 const (
-	InputAutocorrectEnumOn    InputAutocorrectEnum = "on"
 	InputAutocorrectEnumOff   InputAutocorrectEnum = "off"
+	InputAutocorrectEnumOn    InputAutocorrectEnum = "on"
 	InputAutocorrectEnumEmpty InputAutocorrectEnum = ""
 )
 
 type InputContenteditableEnum string
 
 const (
+	InputContenteditableEnumFalse         InputContenteditableEnum = "false"
 	InputContenteditableEnumPlaintextOnly InputContenteditableEnum = "plaintext-only"
 	InputContenteditableEnumTrue          InputContenteditableEnum = "true"
-	InputContenteditableEnumFalse         InputContenteditableEnum = "false"
 	InputContenteditableEnumEmpty         InputContenteditableEnum = ""
 )
 
 type InputDirEnum string
 
 const (
-	InputDirEnumRtl  InputDirEnum = "rtl"
 	InputDirEnumAuto InputDirEnum = "auto"
 	InputDirEnumLtr  InputDirEnum = "ltr"
+	InputDirEnumRtl  InputDirEnum = "rtl"
 )
 
 type InputDraggableEnum string
 
 const (
-	InputDraggableEnumFalse InputDraggableEnum = "false"
 	InputDraggableEnumTrue  InputDraggableEnum = "true"
+	InputDraggableEnumFalse InputDraggableEnum = "false"
 )
 
 type InputEnterkeyhintEnum string
 
 const (
-	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
 	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
 	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
 	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
 	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
 	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
+	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
 )
 
 type InputHiddenEnum string
@@ -114,6 +115,7 @@ const (
 type InputInputmodeEnum string
 
 const (
+	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
 	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 	InputInputmodeEnumNone    InputInputmodeEnum = "none"
 	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
@@ -121,14 +123,13 @@ const (
 	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
 	InputInputmodeEnumText    InputInputmodeEnum = "text"
 	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
-	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
 )
 
 type InputSpellcheckEnum string
 
 const (
-	InputSpellcheckEnumTrue  InputSpellcheckEnum = "true"
 	InputSpellcheckEnumFalse InputSpellcheckEnum = "false"
+	InputSpellcheckEnumTrue  InputSpellcheckEnum = "true"
 	InputSpellcheckEnumEmpty InputSpellcheckEnum = ""
 )
 
@@ -330,7 +331,7 @@ func (e *InputElement) Writingsuggestions(a InputWritingsuggestionsEnum) *InputE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *InputElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

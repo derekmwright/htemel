@@ -60,12 +60,12 @@ func (e *TfootElement) AddIndent(i int) {
 type TfootAutocapitalizeEnum string
 
 const (
-	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
 	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
 	TfootAutocapitalizeEnumNone       TfootAutocapitalizeEnum = "none"
 	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
 	TfootAutocapitalizeEnumOn         TfootAutocapitalizeEnum = "on"
 	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
+	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
 )
 
 type TfootAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type TfootDraggableEnum string
 
 const (
-	TfootDraggableEnumFalse TfootDraggableEnum = "false"
 	TfootDraggableEnumTrue  TfootDraggableEnum = "true"
+	TfootDraggableEnumFalse TfootDraggableEnum = "false"
 )
 
 type TfootEnterkeyhintEnum string
 
 const (
-	TfootEnterkeyhintEnumDone     TfootEnterkeyhintEnum = "done"
-	TfootEnterkeyhintEnumEnter    TfootEnterkeyhintEnum = "enter"
 	TfootEnterkeyhintEnumGo       TfootEnterkeyhintEnum = "go"
 	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
 	TfootEnterkeyhintEnumPrevious TfootEnterkeyhintEnum = "previous"
 	TfootEnterkeyhintEnumSearch   TfootEnterkeyhintEnum = "search"
 	TfootEnterkeyhintEnumSend     TfootEnterkeyhintEnum = "send"
+	TfootEnterkeyhintEnumDone     TfootEnterkeyhintEnum = "done"
+	TfootEnterkeyhintEnumEnter    TfootEnterkeyhintEnum = "enter"
 )
 
 type TfootHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type TfootInputmodeEnum string
 
 const (
-	TfootInputmodeEnumNone    TfootInputmodeEnum = "none"
 	TfootInputmodeEnumNumeric TfootInputmodeEnum = "numeric"
 	TfootInputmodeEnumSearch  TfootInputmodeEnum = "search"
 	TfootInputmodeEnumTel     TfootInputmodeEnum = "tel"
@@ -131,6 +130,7 @@ const (
 	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
 	TfootInputmodeEnumDecimal TfootInputmodeEnum = "decimal"
 	TfootInputmodeEnumEmail   TfootInputmodeEnum = "email"
+	TfootInputmodeEnumNone    TfootInputmodeEnum = "none"
 )
 
 type TfootSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *TfootElement) Writingsuggestions(a TfootWritingsuggestionsEnum) *TfootE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TfootElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

@@ -60,12 +60,12 @@ func (e *DelElement) AddIndent(i int) {
 type DelAutocapitalizeEnum string
 
 const (
+	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
+	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
 	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
 	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
 	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
 	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
-	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
-	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
 )
 
 type DelAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type DelEnterkeyhintEnum string
 
 const (
-	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
 	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
 	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
 	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
 	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
 	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
 	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
+	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
 )
 
 type DelHiddenEnum string
@@ -144,8 +144,8 @@ const (
 type DelTranslateEnum string
 
 const (
-	DelTranslateEnumNo    DelTranslateEnum = "no"
 	DelTranslateEnumYes   DelTranslateEnum = "yes"
+	DelTranslateEnumNo    DelTranslateEnum = "no"
 	DelTranslateEnumEmpty DelTranslateEnum = ""
 )
 
@@ -351,7 +351,7 @@ func (e *DelElement) Writingsuggestions(a DelWritingsuggestionsEnum) *DelElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DelElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

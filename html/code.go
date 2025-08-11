@@ -88,28 +88,28 @@ const (
 type CodeDirEnum string
 
 const (
-	CodeDirEnumRtl  CodeDirEnum = "rtl"
 	CodeDirEnumAuto CodeDirEnum = "auto"
 	CodeDirEnumLtr  CodeDirEnum = "ltr"
+	CodeDirEnumRtl  CodeDirEnum = "rtl"
 )
 
 type CodeDraggableEnum string
 
 const (
-	CodeDraggableEnumFalse CodeDraggableEnum = "false"
 	CodeDraggableEnumTrue  CodeDraggableEnum = "true"
+	CodeDraggableEnumFalse CodeDraggableEnum = "false"
 )
 
 type CodeEnterkeyhintEnum string
 
 const (
+	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
+	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
 	CodeEnterkeyhintEnumEnter    CodeEnterkeyhintEnum = "enter"
 	CodeEnterkeyhintEnumGo       CodeEnterkeyhintEnum = "go"
 	CodeEnterkeyhintEnumNext     CodeEnterkeyhintEnum = "next"
 	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
 	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
-	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
-	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
 )
 
 type CodeHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type CodeInputmodeEnum string
 
 const (
+	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
+	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
 	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
 	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
 	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
 	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
-	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
-	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
 )
 
 type CodeSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type CodeWritingsuggestionsEnum string
 
 const (
-	CodeWritingsuggestionsEnumFalse CodeWritingsuggestionsEnum = "false"
 	CodeWritingsuggestionsEnumTrue  CodeWritingsuggestionsEnum = "true"
+	CodeWritingsuggestionsEnumFalse CodeWritingsuggestionsEnum = "false"
 	CodeWritingsuggestionsEnumEmpty CodeWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *CodeElement) Writingsuggestions(a CodeWritingsuggestionsEnum) *CodeElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *CodeElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

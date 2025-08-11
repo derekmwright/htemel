@@ -60,12 +60,12 @@ func (e *ColgroupElement) AddIndent(i int) {
 type ColgroupAutocapitalizeEnum string
 
 const (
-	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
-	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
-	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
 	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 	ColgroupAutocapitalizeEnumOff        ColgroupAutocapitalizeEnum = "off"
+	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
+	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
+	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 )
 
 type ColgroupAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type ColgroupContenteditableEnum string
 
 const (
-	ColgroupContenteditableEnumFalse         ColgroupContenteditableEnum = "false"
 	ColgroupContenteditableEnumPlaintextOnly ColgroupContenteditableEnum = "plaintext-only"
 	ColgroupContenteditableEnumTrue          ColgroupContenteditableEnum = "true"
+	ColgroupContenteditableEnumFalse         ColgroupContenteditableEnum = "false"
 	ColgroupContenteditableEnumEmpty         ColgroupContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type ColgroupEnterkeyhintEnum string
 
 const (
-	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
-	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
 	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
 	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
 	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
 	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
 	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
+	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
+	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
 )
 
 type ColgroupHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type ColgroupInputmodeEnum string
 
 const (
+	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
+	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
 	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
 	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
 	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
 	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
 	ColgroupInputmodeEnumSearch  ColgroupInputmodeEnum = "search"
 	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
-	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
-	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
 )
 
 type ColgroupSpellcheckEnum string
@@ -339,7 +339,7 @@ func (e *ColgroupElement) Writingsuggestions(a ColgroupWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ColgroupElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

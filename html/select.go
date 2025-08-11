@@ -60,12 +60,12 @@ func (e *SelectElement) AddIndent(i int) {
 type SelectAutocapitalizeEnum string
 
 const (
-	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
-	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
 	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
 	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
+	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
+	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
 )
 
 type SelectAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type SelectDirEnum string
 
 const (
+	SelectDirEnumAuto SelectDirEnum = "auto"
 	SelectDirEnumLtr  SelectDirEnum = "ltr"
 	SelectDirEnumRtl  SelectDirEnum = "rtl"
-	SelectDirEnumAuto SelectDirEnum = "auto"
 )
 
 type SelectDraggableEnum string
@@ -103,20 +103,20 @@ const (
 type SelectEnterkeyhintEnum string
 
 const (
+	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
 	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
 	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
 	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
-	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
 )
 
 type SelectHiddenEnum string
 
 const (
-	SelectHiddenEnumUntilFound SelectHiddenEnum = "until-found"
 	SelectHiddenEnumHidden     SelectHiddenEnum = "hidden"
+	SelectHiddenEnumUntilFound SelectHiddenEnum = "until-found"
 	SelectHiddenEnumEmpty      SelectHiddenEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *SelectElement) Writingsuggestions(a SelectWritingsuggestionsEnum) *Sele
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SelectElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

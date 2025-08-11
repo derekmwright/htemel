@@ -60,12 +60,12 @@ func (e *TemplateElement) AddIndent(i int) {
 type TemplateAutocapitalizeEnum string
 
 const (
-	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
-	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
-	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
 	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
+	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
+	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
+	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 )
 
 type TemplateAutocorrectEnum string
@@ -96,8 +96,8 @@ const (
 type TemplateDraggableEnum string
 
 const (
-	TemplateDraggableEnumFalse TemplateDraggableEnum = "false"
 	TemplateDraggableEnumTrue  TemplateDraggableEnum = "true"
+	TemplateDraggableEnumFalse TemplateDraggableEnum = "false"
 )
 
 type TemplateEnterkeyhintEnum string
@@ -123,21 +123,21 @@ const (
 type TemplateInputmodeEnum string
 
 const (
-	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
-	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
 	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
 	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
 	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
 	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
 	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
 	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
+	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
+	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
 )
 
 type TemplateSpellcheckEnum string
 
 const (
-	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
 	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
+	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
 	TemplateSpellcheckEnumEmpty TemplateSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *TemplateElement) Writingsuggestions(a TemplateWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TemplateElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

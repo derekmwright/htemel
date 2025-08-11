@@ -60,12 +60,12 @@ func (e *FieldsetElement) AddIndent(i int) {
 type FieldsetAutocapitalizeEnum string
 
 const (
-	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
-	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
-	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
 	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
 	FieldsetAutocapitalizeEnumOn         FieldsetAutocapitalizeEnum = "on"
 	FieldsetAutocapitalizeEnumSentences  FieldsetAutocapitalizeEnum = "sentences"
+	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
+	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
+	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
 )
 
 type FieldsetAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type FieldsetContenteditableEnum string
 
 const (
+	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumPlaintextOnly FieldsetContenteditableEnum = "plaintext-only"
 	FieldsetContenteditableEnumTrue          FieldsetContenteditableEnum = "true"
-	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumEmpty         FieldsetContenteditableEnum = ""
 )
 
 type FieldsetDirEnum string
 
 const (
+	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 	FieldsetDirEnumLtr  FieldsetDirEnum = "ltr"
 	FieldsetDirEnumRtl  FieldsetDirEnum = "rtl"
-	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 )
 
 type FieldsetDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type FieldsetEnterkeyhintEnum string
 
 const (
-	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
-	FieldsetEnterkeyhintEnumSearch   FieldsetEnterkeyhintEnum = "search"
-	FieldsetEnterkeyhintEnumSend     FieldsetEnterkeyhintEnum = "send"
 	FieldsetEnterkeyhintEnumDone     FieldsetEnterkeyhintEnum = "done"
 	FieldsetEnterkeyhintEnumEnter    FieldsetEnterkeyhintEnum = "enter"
 	FieldsetEnterkeyhintEnumGo       FieldsetEnterkeyhintEnum = "go"
 	FieldsetEnterkeyhintEnumNext     FieldsetEnterkeyhintEnum = "next"
+	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
+	FieldsetEnterkeyhintEnumSearch   FieldsetEnterkeyhintEnum = "search"
+	FieldsetEnterkeyhintEnumSend     FieldsetEnterkeyhintEnum = "send"
 )
 
 type FieldsetHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type FieldsetInputmodeEnum string
 
 const (
+	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
+	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
+	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
 	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
 	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
 	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
 	FieldsetInputmodeEnumNumeric FieldsetInputmodeEnum = "numeric"
-	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
-	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
-	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
 )
 
 type FieldsetSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type FieldsetWritingsuggestionsEnum string
 
 const (
-	FieldsetWritingsuggestionsEnumFalse FieldsetWritingsuggestionsEnum = "false"
 	FieldsetWritingsuggestionsEnumTrue  FieldsetWritingsuggestionsEnum = "true"
+	FieldsetWritingsuggestionsEnumFalse FieldsetWritingsuggestionsEnum = "false"
 	FieldsetWritingsuggestionsEnumEmpty FieldsetWritingsuggestionsEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *FieldsetElement) Writingsuggestions(a FieldsetWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *FieldsetElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

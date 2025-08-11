@@ -60,28 +60,28 @@ func (e *BodyElement) AddIndent(i int) {
 type BodyAutocapitalizeEnum string
 
 const (
+	BodyAutocapitalizeEnumCharacters BodyAutocapitalizeEnum = "characters"
+	BodyAutocapitalizeEnumNone       BodyAutocapitalizeEnum = "none"
 	BodyAutocapitalizeEnumOff        BodyAutocapitalizeEnum = "off"
 	BodyAutocapitalizeEnumOn         BodyAutocapitalizeEnum = "on"
 	BodyAutocapitalizeEnumSentences  BodyAutocapitalizeEnum = "sentences"
 	BodyAutocapitalizeEnumWords      BodyAutocapitalizeEnum = "words"
-	BodyAutocapitalizeEnumCharacters BodyAutocapitalizeEnum = "characters"
-	BodyAutocapitalizeEnumNone       BodyAutocapitalizeEnum = "none"
 )
 
 type BodyAutocorrectEnum string
 
 const (
-	BodyAutocorrectEnumOn    BodyAutocorrectEnum = "on"
 	BodyAutocorrectEnumOff   BodyAutocorrectEnum = "off"
+	BodyAutocorrectEnumOn    BodyAutocorrectEnum = "on"
 	BodyAutocorrectEnumEmpty BodyAutocorrectEnum = ""
 )
 
 type BodyContenteditableEnum string
 
 const (
-	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
 	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
+	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
 	BodyContenteditableEnumEmpty         BodyContenteditableEnum = ""
 )
 
@@ -123,14 +123,14 @@ const (
 type BodyInputmodeEnum string
 
 const (
-	BodyInputmodeEnumUrl     BodyInputmodeEnum = "url"
-	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
 	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
 	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
 	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
 	BodyInputmodeEnumSearch  BodyInputmodeEnum = "search"
 	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
 	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
+	BodyInputmodeEnumUrl     BodyInputmodeEnum = "url"
+	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
 )
 
 type BodySpellcheckEnum string
@@ -447,7 +447,7 @@ func (e *BodyElement) Writingsuggestions(a BodyWritingsuggestionsEnum) *BodyElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BodyElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

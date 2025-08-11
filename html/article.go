@@ -79,18 +79,18 @@ const (
 type ArticleContenteditableEnum string
 
 const (
+	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
 	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
-	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumEmpty         ArticleContenteditableEnum = ""
 )
 
 type ArticleDirEnum string
 
 const (
-	ArticleDirEnumRtl  ArticleDirEnum = "rtl"
 	ArticleDirEnumAuto ArticleDirEnum = "auto"
 	ArticleDirEnumLtr  ArticleDirEnum = "ltr"
+	ArticleDirEnumRtl  ArticleDirEnum = "rtl"
 )
 
 type ArticleDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type ArticleEnterkeyhintEnum string
 
 const (
+	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
+	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
 	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
 	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
 	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
 	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
-	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
-	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
 )
 
 type ArticleHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type ArticleInputmodeEnum string
 
 const (
-	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
 	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
 	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
 	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
@@ -131,13 +130,14 @@ const (
 	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
 	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
 	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
+	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
 )
 
 type ArticleSpellcheckEnum string
 
 const (
-	ArticleSpellcheckEnumFalse ArticleSpellcheckEnum = "false"
 	ArticleSpellcheckEnumTrue  ArticleSpellcheckEnum = "true"
+	ArticleSpellcheckEnumFalse ArticleSpellcheckEnum = "false"
 	ArticleSpellcheckEnumEmpty ArticleSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *ArticleElement) Writingsuggestions(a ArticleWritingsuggestionsEnum) *Ar
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ArticleElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

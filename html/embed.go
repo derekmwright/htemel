@@ -6,6 +6,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -51,12 +52,12 @@ func (e *EmbedElement) AddIndent(i int) {
 type EmbedAutocapitalizeEnum string
 
 const (
-	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
-	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
 	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
 	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
+	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
+	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 )
 
 type EmbedAutocorrectEnum string
@@ -70,9 +71,9 @@ const (
 type EmbedContenteditableEnum string
 
 const (
+	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
 	EmbedContenteditableEnumFalse         EmbedContenteditableEnum = "false"
 	EmbedContenteditableEnumPlaintextOnly EmbedContenteditableEnum = "plaintext-only"
-	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
 	EmbedContenteditableEnumEmpty         EmbedContenteditableEnum = ""
 )
 
@@ -87,20 +88,20 @@ const (
 type EmbedDraggableEnum string
 
 const (
-	EmbedDraggableEnumFalse EmbedDraggableEnum = "false"
 	EmbedDraggableEnumTrue  EmbedDraggableEnum = "true"
+	EmbedDraggableEnumFalse EmbedDraggableEnum = "false"
 )
 
 type EmbedEnterkeyhintEnum string
 
 const (
+	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
+	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
+	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
 	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
 	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
 	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
-	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
-	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
-	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
 )
 
 type EmbedHiddenEnum string
@@ -114,14 +115,14 @@ const (
 type EmbedInputmodeEnum string
 
 const (
-	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
-	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
-	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
 	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
 	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
 	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
+	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
+	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
+	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 )
 
 type EmbedSpellcheckEnum string
@@ -135,8 +136,8 @@ const (
 type EmbedTranslateEnum string
 
 const (
-	EmbedTranslateEnumYes   EmbedTranslateEnum = "yes"
 	EmbedTranslateEnumNo    EmbedTranslateEnum = "no"
+	EmbedTranslateEnumYes   EmbedTranslateEnum = "yes"
 	EmbedTranslateEnumEmpty EmbedTranslateEnum = ""
 )
 
@@ -330,7 +331,7 @@ func (e *EmbedElement) Writingsuggestions(a EmbedWritingsuggestionsEnum) *EmbedE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *EmbedElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil

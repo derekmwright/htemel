@@ -60,12 +60,12 @@ func (e *LegendElement) AddIndent(i int) {
 type LegendAutocapitalizeEnum string
 
 const (
-	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
-	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
 	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
 	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
 	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
+	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
+	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 )
 
 type LegendAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type LegendContenteditableEnum string
 
 const (
-	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
 	LegendContenteditableEnumFalse         LegendContenteditableEnum = "false"
 	LegendContenteditableEnumPlaintextOnly LegendContenteditableEnum = "plaintext-only"
+	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
 	LegendContenteditableEnumEmpty         LegendContenteditableEnum = ""
 )
 
 type LegendDirEnum string
 
 const (
-	LegendDirEnumLtr  LegendDirEnum = "ltr"
 	LegendDirEnumRtl  LegendDirEnum = "rtl"
 	LegendDirEnumAuto LegendDirEnum = "auto"
+	LegendDirEnumLtr  LegendDirEnum = "ltr"
 )
 
 type LegendDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type LegendEnterkeyhintEnum string
 
 const (
-	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
 	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
 	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
 	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
 	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
 	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
 	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
+	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
 )
 
 type LegendHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type LegendInputmodeEnum string
 
 const (
+	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
 	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
 	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
 	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
@@ -130,14 +131,13 @@ const (
 	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
 	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
-	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
 )
 
 type LegendSpellcheckEnum string
 
 const (
-	LegendSpellcheckEnumTrue  LegendSpellcheckEnum = "true"
 	LegendSpellcheckEnumFalse LegendSpellcheckEnum = "false"
+	LegendSpellcheckEnumTrue  LegendSpellcheckEnum = "true"
 	LegendSpellcheckEnumEmpty LegendSpellcheckEnum = ""
 )
 
@@ -339,7 +339,7 @@ func (e *LegendElement) Writingsuggestions(a LegendWritingsuggestionsEnum) *Lege
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LegendElement) Render(w io.Writer) error {
-	indent := strings.Repeat("  ", e.indent)
+	indent := htemel.SetIndent(e.indent)
 
 	if e.skipRender {
 		return nil
