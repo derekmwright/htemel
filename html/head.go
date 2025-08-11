@@ -79,37 +79,37 @@ const (
 type HeadContenteditableEnum string
 
 const (
+	HeadContenteditableEnumFalse         HeadContenteditableEnum = "false"
 	HeadContenteditableEnumPlaintextOnly HeadContenteditableEnum = "plaintext-only"
 	HeadContenteditableEnumTrue          HeadContenteditableEnum = "true"
-	HeadContenteditableEnumFalse         HeadContenteditableEnum = "false"
 	HeadContenteditableEnumEmpty         HeadContenteditableEnum = ""
 )
 
 type HeadDirEnum string
 
 const (
-	HeadDirEnumAuto HeadDirEnum = "auto"
 	HeadDirEnumLtr  HeadDirEnum = "ltr"
 	HeadDirEnumRtl  HeadDirEnum = "rtl"
+	HeadDirEnumAuto HeadDirEnum = "auto"
 )
 
 type HeadDraggableEnum string
 
 const (
-	HeadDraggableEnumFalse HeadDraggableEnum = "false"
 	HeadDraggableEnumTrue  HeadDraggableEnum = "true"
+	HeadDraggableEnumFalse HeadDraggableEnum = "false"
 )
 
 type HeadEnterkeyhintEnum string
 
 const (
-	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
 	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
 	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
 	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
 	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
+	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
 )
 
 type HeadHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type HeadInputmodeEnum string
 
 const (
-	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
 	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
 	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
 	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
@@ -131,6 +130,7 @@ const (
 	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
 	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
 	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
+	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
 )
 
 type HeadSpellcheckEnum string
@@ -144,16 +144,16 @@ const (
 type HeadTranslateEnum string
 
 const (
-	HeadTranslateEnumYes   HeadTranslateEnum = "yes"
 	HeadTranslateEnumNo    HeadTranslateEnum = "no"
+	HeadTranslateEnumYes   HeadTranslateEnum = "yes"
 	HeadTranslateEnumEmpty HeadTranslateEnum = ""
 )
 
 type HeadWritingsuggestionsEnum string
 
 const (
-	HeadWritingsuggestionsEnumTrue  HeadWritingsuggestionsEnum = "true"
 	HeadWritingsuggestionsEnumFalse HeadWritingsuggestionsEnum = "false"
+	HeadWritingsuggestionsEnumTrue  HeadWritingsuggestionsEnum = "true"
 	HeadWritingsuggestionsEnumEmpty HeadWritingsuggestionsEnum = ""
 )
 

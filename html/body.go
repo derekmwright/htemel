@@ -79,9 +79,9 @@ const (
 type BodyContenteditableEnum string
 
 const (
+	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
 	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
-	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumEmpty         BodyContenteditableEnum = ""
 )
 
@@ -96,48 +96,48 @@ const (
 type BodyDraggableEnum string
 
 const (
-	BodyDraggableEnumTrue  BodyDraggableEnum = "true"
 	BodyDraggableEnumFalse BodyDraggableEnum = "false"
+	BodyDraggableEnumTrue  BodyDraggableEnum = "true"
 )
 
 type BodyEnterkeyhintEnum string
 
 const (
+	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
+	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
 	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
 	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
 	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
 	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
 	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
-	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
-	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
 )
 
 type BodyHiddenEnum string
 
 const (
-	BodyHiddenEnumHidden     BodyHiddenEnum = "hidden"
 	BodyHiddenEnumUntilFound BodyHiddenEnum = "until-found"
+	BodyHiddenEnumHidden     BodyHiddenEnum = "hidden"
 	BodyHiddenEnumEmpty      BodyHiddenEnum = ""
 )
 
 type BodyInputmodeEnum string
 
 const (
-	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
-	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
-	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
-	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
 	BodyInputmodeEnumSearch  BodyInputmodeEnum = "search"
 	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
 	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
 	BodyInputmodeEnumUrl     BodyInputmodeEnum = "url"
+	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
+	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
+	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
+	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
 )
 
 type BodySpellcheckEnum string
 
 const (
-	BodySpellcheckEnumTrue  BodySpellcheckEnum = "true"
 	BodySpellcheckEnumFalse BodySpellcheckEnum = "false"
+	BodySpellcheckEnumTrue  BodySpellcheckEnum = "true"
 	BodySpellcheckEnumEmpty BodySpellcheckEnum = ""
 )
 

@@ -71,9 +71,9 @@ const (
 type WbrContenteditableEnum string
 
 const (
-	WbrContenteditableEnumFalse         WbrContenteditableEnum = "false"
 	WbrContenteditableEnumPlaintextOnly WbrContenteditableEnum = "plaintext-only"
 	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
+	WbrContenteditableEnumFalse         WbrContenteditableEnum = "false"
 	WbrContenteditableEnumEmpty         WbrContenteditableEnum = ""
 )
 
@@ -115,14 +115,14 @@ const (
 type WbrInputmodeEnum string
 
 const (
-	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
-	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
-	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
 	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
 	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
 	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
 	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
+	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
+	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
+	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 )
 
 type WbrSpellcheckEnum string

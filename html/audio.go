@@ -68,46 +68,46 @@ const (
 type AudioPreloadEnum string
 
 const (
+	AudioPreloadEnumAuto     AudioPreloadEnum = "auto"
 	AudioPreloadEnumMetadata AudioPreloadEnum = "metadata"
 	AudioPreloadEnumNone     AudioPreloadEnum = "none"
-	AudioPreloadEnumAuto     AudioPreloadEnum = "auto"
 	AudioPreloadEnumEmpty    AudioPreloadEnum = ""
 )
 
 type AudioAutocapitalizeEnum string
 
 const (
-	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
 	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
 	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 	AudioAutocapitalizeEnumOff        AudioAutocapitalizeEnum = "off"
 	AudioAutocapitalizeEnumOn         AudioAutocapitalizeEnum = "on"
 	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
+	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
 )
 
 type AudioAutocorrectEnum string
 
 const (
-	AudioAutocorrectEnumOff   AudioAutocorrectEnum = "off"
 	AudioAutocorrectEnumOn    AudioAutocorrectEnum = "on"
+	AudioAutocorrectEnumOff   AudioAutocorrectEnum = "off"
 	AudioAutocorrectEnumEmpty AudioAutocorrectEnum = ""
 )
 
 type AudioContenteditableEnum string
 
 const (
+	AudioContenteditableEnumFalse         AudioContenteditableEnum = "false"
 	AudioContenteditableEnumPlaintextOnly AudioContenteditableEnum = "plaintext-only"
 	AudioContenteditableEnumTrue          AudioContenteditableEnum = "true"
-	AudioContenteditableEnumFalse         AudioContenteditableEnum = "false"
 	AudioContenteditableEnumEmpty         AudioContenteditableEnum = ""
 )
 
 type AudioDirEnum string
 
 const (
+	AudioDirEnumRtl  AudioDirEnum = "rtl"
 	AudioDirEnumAuto AudioDirEnum = "auto"
 	AudioDirEnumLtr  AudioDirEnum = "ltr"
-	AudioDirEnumRtl  AudioDirEnum = "rtl"
 )
 
 type AudioDraggableEnum string
@@ -120,34 +120,34 @@ const (
 type AudioEnterkeyhintEnum string
 
 const (
+	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
 	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
 	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
 	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
 	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
-	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 )
 
 type AudioHiddenEnum string
 
 const (
-	AudioHiddenEnumHidden     AudioHiddenEnum = "hidden"
 	AudioHiddenEnumUntilFound AudioHiddenEnum = "until-found"
+	AudioHiddenEnumHidden     AudioHiddenEnum = "hidden"
 	AudioHiddenEnumEmpty      AudioHiddenEnum = ""
 )
 
 type AudioInputmodeEnum string
 
 const (
-	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
-	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
 	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
 	AudioInputmodeEnumTel     AudioInputmodeEnum = "tel"
 	AudioInputmodeEnumText    AudioInputmodeEnum = "text"
 	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
 	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
 	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
+	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
+	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
 )
 
 type AudioSpellcheckEnum string

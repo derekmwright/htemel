@@ -60,12 +60,12 @@ func (e *DdElement) AddIndent(i int) {
 type DdAutocapitalizeEnum string
 
 const (
+	DdAutocapitalizeEnumCharacters DdAutocapitalizeEnum = "characters"
+	DdAutocapitalizeEnumNone       DdAutocapitalizeEnum = "none"
 	DdAutocapitalizeEnumOff        DdAutocapitalizeEnum = "off"
 	DdAutocapitalizeEnumOn         DdAutocapitalizeEnum = "on"
 	DdAutocapitalizeEnumSentences  DdAutocapitalizeEnum = "sentences"
 	DdAutocapitalizeEnumWords      DdAutocapitalizeEnum = "words"
-	DdAutocapitalizeEnumCharacters DdAutocapitalizeEnum = "characters"
-	DdAutocapitalizeEnumNone       DdAutocapitalizeEnum = "none"
 )
 
 type DdAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type DdContenteditableEnum string
 
 const (
-	DdContenteditableEnumTrue          DdContenteditableEnum = "true"
 	DdContenteditableEnumFalse         DdContenteditableEnum = "false"
 	DdContenteditableEnumPlaintextOnly DdContenteditableEnum = "plaintext-only"
+	DdContenteditableEnumTrue          DdContenteditableEnum = "true"
 	DdContenteditableEnumEmpty         DdContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type DdEnterkeyhintEnum string
 
 const (
+	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
+	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
+	DdEnterkeyhintEnumGo       DdEnterkeyhintEnum = "go"
 	DdEnterkeyhintEnumNext     DdEnterkeyhintEnum = "next"
 	DdEnterkeyhintEnumPrevious DdEnterkeyhintEnum = "previous"
 	DdEnterkeyhintEnumSearch   DdEnterkeyhintEnum = "search"
 	DdEnterkeyhintEnumSend     DdEnterkeyhintEnum = "send"
-	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
-	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
-	DdEnterkeyhintEnumGo       DdEnterkeyhintEnum = "go"
 )
 
 type DdHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type DdInputmodeEnum string
 
 const (
+	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
 	DdInputmodeEnumText    DdInputmodeEnum = "text"
 	DdInputmodeEnumUrl     DdInputmodeEnum = "url"
 	DdInputmodeEnumDecimal DdInputmodeEnum = "decimal"
@@ -130,7 +131,6 @@ const (
 	DdInputmodeEnumNone    DdInputmodeEnum = "none"
 	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
 	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
-	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
 )
 
 type DdSpellcheckEnum string

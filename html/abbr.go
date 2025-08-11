@@ -60,12 +60,12 @@ func (e *AbbrElement) AddIndent(i int) {
 type AbbrAutocapitalizeEnum string
 
 const (
-	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
-	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
 	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
 	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
 	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
 	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
+	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
+	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
 )
 
 type AbbrAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type AbbrDirEnum string
 
 const (
+	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
 	AbbrDirEnumAuto AbbrDirEnum = "auto"
 	AbbrDirEnumLtr  AbbrDirEnum = "ltr"
-	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
 )
 
 type AbbrDraggableEnum string
@@ -123,21 +123,21 @@ const (
 type AbbrInputmodeEnum string
 
 const (
-	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
-	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
 	AbbrInputmodeEnumText    AbbrInputmodeEnum = "text"
 	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
 	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
 	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
 	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
+	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
+	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 )
 
 type AbbrSpellcheckEnum string
 
 const (
-	AbbrSpellcheckEnumTrue  AbbrSpellcheckEnum = "true"
 	AbbrSpellcheckEnumFalse AbbrSpellcheckEnum = "false"
+	AbbrSpellcheckEnumTrue  AbbrSpellcheckEnum = "true"
 	AbbrSpellcheckEnumEmpty AbbrSpellcheckEnum = ""
 )
 

@@ -71,26 +71,26 @@ const (
 type SpanAutocorrectEnum string
 
 const (
-	SpanAutocorrectEnumOn    SpanAutocorrectEnum = "on"
 	SpanAutocorrectEnumOff   SpanAutocorrectEnum = "off"
+	SpanAutocorrectEnumOn    SpanAutocorrectEnum = "on"
 	SpanAutocorrectEnumEmpty SpanAutocorrectEnum = ""
 )
 
 type SpanContenteditableEnum string
 
 const (
+	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
 	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
-	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
 	SpanContenteditableEnumEmpty         SpanContenteditableEnum = ""
 )
 
 type SpanDirEnum string
 
 const (
-	SpanDirEnumAuto SpanDirEnum = "auto"
 	SpanDirEnumLtr  SpanDirEnum = "ltr"
 	SpanDirEnumRtl  SpanDirEnum = "rtl"
+	SpanDirEnumAuto SpanDirEnum = "auto"
 )
 
 type SpanDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
+	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
+	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
 	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
 	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
 	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
 	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
-	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
-	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
 )
 
 type SpanHiddenEnum string
@@ -136,16 +136,16 @@ const (
 type SpanSpellcheckEnum string
 
 const (
-	SpanSpellcheckEnumFalse SpanSpellcheckEnum = "false"
 	SpanSpellcheckEnumTrue  SpanSpellcheckEnum = "true"
+	SpanSpellcheckEnumFalse SpanSpellcheckEnum = "false"
 	SpanSpellcheckEnumEmpty SpanSpellcheckEnum = ""
 )
 
 type SpanTranslateEnum string
 
 const (
-	SpanTranslateEnumYes   SpanTranslateEnum = "yes"
 	SpanTranslateEnumNo    SpanTranslateEnum = "no"
+	SpanTranslateEnumYes   SpanTranslateEnum = "yes"
 	SpanTranslateEnumEmpty SpanTranslateEnum = ""
 )
 

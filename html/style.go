@@ -60,28 +60,28 @@ func (e *StyleElement) AddIndent(i int) {
 type StyleAutocapitalizeEnum string
 
 const (
+	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
 	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
 	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
 	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
 	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
 	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
-	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
 )
 
 type StyleAutocorrectEnum string
 
 const (
-	StyleAutocorrectEnumOff   StyleAutocorrectEnum = "off"
 	StyleAutocorrectEnumOn    StyleAutocorrectEnum = "on"
+	StyleAutocorrectEnumOff   StyleAutocorrectEnum = "off"
 	StyleAutocorrectEnumEmpty StyleAutocorrectEnum = ""
 )
 
 type StyleContenteditableEnum string
 
 const (
-	StyleContenteditableEnumFalse         StyleContenteditableEnum = "false"
 	StyleContenteditableEnumPlaintextOnly StyleContenteditableEnum = "plaintext-only"
 	StyleContenteditableEnumTrue          StyleContenteditableEnum = "true"
+	StyleContenteditableEnumFalse         StyleContenteditableEnum = "false"
 	StyleContenteditableEnumEmpty         StyleContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type StyleEnterkeyhintEnum string
 
 const (
-	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
-	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
-	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
 	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
 	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
 	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
+	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
+	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
+	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
 )
 
 type StyleHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type StyleInputmodeEnum string
 
 const (
-	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
-	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
 	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
 	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
 	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
 	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
 	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
+	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
+	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
 )
 
 type StyleSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type StyleWritingsuggestionsEnum string
 
 const (
-	StyleWritingsuggestionsEnumTrue  StyleWritingsuggestionsEnum = "true"
 	StyleWritingsuggestionsEnumFalse StyleWritingsuggestionsEnum = "false"
+	StyleWritingsuggestionsEnumTrue  StyleWritingsuggestionsEnum = "true"
 	StyleWritingsuggestionsEnumEmpty StyleWritingsuggestionsEnum = ""
 )
 

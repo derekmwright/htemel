@@ -96,8 +96,8 @@ const (
 type DataDraggableEnum string
 
 const (
-	DataDraggableEnumTrue  DataDraggableEnum = "true"
 	DataDraggableEnumFalse DataDraggableEnum = "false"
+	DataDraggableEnumTrue  DataDraggableEnum = "true"
 )
 
 type DataEnterkeyhintEnum string
@@ -144,8 +144,8 @@ const (
 type DataTranslateEnum string
 
 const (
-	DataTranslateEnumNo    DataTranslateEnum = "no"
 	DataTranslateEnumYes   DataTranslateEnum = "yes"
+	DataTranslateEnumNo    DataTranslateEnum = "no"
 	DataTranslateEnumEmpty DataTranslateEnum = ""
 )
 

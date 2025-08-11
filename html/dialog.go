@@ -60,12 +60,12 @@ func (e *DialogElement) AddIndent(i int) {
 type DialogAutocapitalizeEnum string
 
 const (
+	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
 	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
 	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
 	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
 	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
-	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
 )
 
 type DialogAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type DialogContenteditableEnum string
 
 const (
+	DialogContenteditableEnumFalse         DialogContenteditableEnum = "false"
 	DialogContenteditableEnumPlaintextOnly DialogContenteditableEnum = "plaintext-only"
 	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
-	DialogContenteditableEnumFalse         DialogContenteditableEnum = "false"
 	DialogContenteditableEnumEmpty         DialogContenteditableEnum = ""
 )
 
 type DialogDirEnum string
 
 const (
+	DialogDirEnumRtl  DialogDirEnum = "rtl"
 	DialogDirEnumAuto DialogDirEnum = "auto"
 	DialogDirEnumLtr  DialogDirEnum = "ltr"
-	DialogDirEnumRtl  DialogDirEnum = "rtl"
 )
 
 type DialogDraggableEnum string
@@ -103,26 +103,27 @@ const (
 type DialogEnterkeyhintEnum string
 
 const (
-	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
 	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
 	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
 	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 	DialogEnterkeyhintEnumSearch   DialogEnterkeyhintEnum = "search"
 	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
 	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
+	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
 )
 
 type DialogHiddenEnum string
 
 const (
-	DialogHiddenEnumHidden     DialogHiddenEnum = "hidden"
 	DialogHiddenEnumUntilFound DialogHiddenEnum = "until-found"
+	DialogHiddenEnumHidden     DialogHiddenEnum = "hidden"
 	DialogHiddenEnumEmpty      DialogHiddenEnum = ""
 )
 
 type DialogInputmodeEnum string
 
 const (
+	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
 	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
 	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
 	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
@@ -130,7 +131,6 @@ const (
 	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
 	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
 	DialogInputmodeEnumNumeric DialogInputmodeEnum = "numeric"
-	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
 )
 
 type DialogSpellcheckEnum string

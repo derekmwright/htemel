@@ -115,29 +115,29 @@ const (
 type TableHiddenEnum string
 
 const (
-	TableHiddenEnumUntilFound TableHiddenEnum = "until-found"
 	TableHiddenEnumHidden     TableHiddenEnum = "hidden"
+	TableHiddenEnumUntilFound TableHiddenEnum = "until-found"
 	TableHiddenEnumEmpty      TableHiddenEnum = ""
 )
 
 type TableInputmodeEnum string
 
 const (
-	TableInputmodeEnumNone    TableInputmodeEnum = "none"
-	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
-	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 	TableInputmodeEnumText    TableInputmodeEnum = "text"
 	TableInputmodeEnumUrl     TableInputmodeEnum = "url"
 	TableInputmodeEnumDecimal TableInputmodeEnum = "decimal"
 	TableInputmodeEnumEmail   TableInputmodeEnum = "email"
+	TableInputmodeEnumNone    TableInputmodeEnum = "none"
+	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
+	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 )
 
 type TableSpellcheckEnum string
 
 const (
-	TableSpellcheckEnumTrue  TableSpellcheckEnum = "true"
 	TableSpellcheckEnumFalse TableSpellcheckEnum = "false"
+	TableSpellcheckEnumTrue  TableSpellcheckEnum = "true"
 	TableSpellcheckEnumEmpty TableSpellcheckEnum = ""
 )
 

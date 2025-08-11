@@ -60,12 +60,12 @@ func (e *HgroupElement) AddIndent(i int) {
 type HgroupAutocapitalizeEnum string
 
 const (
-	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
 	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
 	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
 	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
 	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
 	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
+	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
 )
 
 type HgroupAutocorrectEnum string
@@ -103,26 +103,27 @@ const (
 type HgroupEnterkeyhintEnum string
 
 const (
-	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
-	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
 	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
 	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
 	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
 	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
+	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
+	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
 )
 
 type HgroupHiddenEnum string
 
 const (
-	HgroupHiddenEnumUntilFound HgroupHiddenEnum = "until-found"
 	HgroupHiddenEnumHidden     HgroupHiddenEnum = "hidden"
+	HgroupHiddenEnumUntilFound HgroupHiddenEnum = "until-found"
 	HgroupHiddenEnumEmpty      HgroupHiddenEnum = ""
 )
 
 type HgroupInputmodeEnum string
 
 const (
+	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
 	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
 	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
 	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
@@ -130,7 +131,6 @@ const (
 	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
 	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
 	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
-	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
 )
 
 type HgroupSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type HgroupTranslateEnum string
 
 const (
-	HgroupTranslateEnumYes   HgroupTranslateEnum = "yes"
 	HgroupTranslateEnumNo    HgroupTranslateEnum = "no"
+	HgroupTranslateEnumYes   HgroupTranslateEnum = "yes"
 	HgroupTranslateEnumEmpty HgroupTranslateEnum = ""
 )
 

@@ -60,12 +60,12 @@ func (e *DelElement) AddIndent(i int) {
 type DelAutocapitalizeEnum string
 
 const (
-	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
-	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
 	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
 	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
 	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
 	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
+	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
+	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
 )
 
 type DelAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type DelContenteditableEnum string
 
 const (
-	DelContenteditableEnumTrue          DelContenteditableEnum = "true"
 	DelContenteditableEnumFalse         DelContenteditableEnum = "false"
 	DelContenteditableEnumPlaintextOnly DelContenteditableEnum = "plaintext-only"
+	DelContenteditableEnumTrue          DelContenteditableEnum = "true"
 	DelContenteditableEnumEmpty         DelContenteditableEnum = ""
 )
 
 type DelDirEnum string
 
 const (
+	DelDirEnumRtl  DelDirEnum = "rtl"
 	DelDirEnumAuto DelDirEnum = "auto"
 	DelDirEnumLtr  DelDirEnum = "ltr"
-	DelDirEnumRtl  DelDirEnum = "rtl"
 )
 
 type DelDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type DelEnterkeyhintEnum string
 
 const (
-	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
 	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
 	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
 	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
 	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
 	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
 	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
+	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
 )
 
 type DelHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type DelInputmodeEnum string
 
 const (
-	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
-	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
 	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 	DelInputmodeEnumNone    DelInputmodeEnum = "none"
 	DelInputmodeEnumNumeric DelInputmodeEnum = "numeric"
 	DelInputmodeEnumSearch  DelInputmodeEnum = "search"
 	DelInputmodeEnumTel     DelInputmodeEnum = "tel"
 	DelInputmodeEnumText    DelInputmodeEnum = "text"
+	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
+	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
 )
 
 type DelSpellcheckEnum string

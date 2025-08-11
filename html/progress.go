@@ -60,12 +60,12 @@ func (e *ProgressElement) AddIndent(i int) {
 type ProgressAutocapitalizeEnum string
 
 const (
-	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
-	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
 	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
 	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
 	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
+	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
+	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
 )
 
 type ProgressAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type ProgressContenteditableEnum string
 
 const (
-	ProgressContenteditableEnumFalse         ProgressContenteditableEnum = "false"
 	ProgressContenteditableEnumPlaintextOnly ProgressContenteditableEnum = "plaintext-only"
 	ProgressContenteditableEnumTrue          ProgressContenteditableEnum = "true"
+	ProgressContenteditableEnumFalse         ProgressContenteditableEnum = "false"
 	ProgressContenteditableEnumEmpty         ProgressContenteditableEnum = ""
 )
 
 type ProgressDirEnum string
 
 const (
+	ProgressDirEnumAuto ProgressDirEnum = "auto"
 	ProgressDirEnumLtr  ProgressDirEnum = "ltr"
 	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
-	ProgressDirEnumAuto ProgressDirEnum = "auto"
 )
 
 type ProgressDraggableEnum string
@@ -103,20 +103,20 @@ const (
 type ProgressEnterkeyhintEnum string
 
 const (
-	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
-	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
-	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
 	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
 	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
 	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
 	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
+	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
+	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
+	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
 )
 
 type ProgressHiddenEnum string
 
 const (
-	ProgressHiddenEnumHidden     ProgressHiddenEnum = "hidden"
 	ProgressHiddenEnumUntilFound ProgressHiddenEnum = "until-found"
+	ProgressHiddenEnumHidden     ProgressHiddenEnum = "hidden"
 	ProgressHiddenEnumEmpty      ProgressHiddenEnum = ""
 )
 
@@ -158,6 +158,18 @@ const (
 )
 
 type progressAttrs map[string]any
+
+func (e *ProgressElement) Value(f float64) *ProgressElement {
+	e.attributes["value"] = f
+
+	return e
+}
+
+func (e *ProgressElement) Max(f float64) *ProgressElement {
+	e.attributes["max"] = f
+
+	return e
+}
 
 func (e *ProgressElement) Autocapitalize(a ProgressAutocapitalizeEnum) *ProgressElement {
 	e.attributes["autocapitalize"] = a

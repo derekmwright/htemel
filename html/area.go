@@ -52,21 +52,21 @@ func (e *AreaElement) AddIndent(i int) {
 type AreaShapeEnum string
 
 const (
-	AreaShapeEnumPoly    AreaShapeEnum = "poly"
-	AreaShapeEnumRect    AreaShapeEnum = "rect"
 	AreaShapeEnumCircle  AreaShapeEnum = "circle"
 	AreaShapeEnumDefault AreaShapeEnum = "default"
+	AreaShapeEnumPoly    AreaShapeEnum = "poly"
+	AreaShapeEnumRect    AreaShapeEnum = "rect"
 )
 
 type AreaAutocapitalizeEnum string
 
 const (
-	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
-	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
-	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
 	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
 	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
+	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
+	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
+	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
 )
 
 type AreaAutocorrectEnum string
@@ -80,9 +80,9 @@ const (
 type AreaContenteditableEnum string
 
 const (
+	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
 	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumPlaintextOnly AreaContenteditableEnum = "plaintext-only"
-	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
 	AreaContenteditableEnumEmpty         AreaContenteditableEnum = ""
 )
 
@@ -104,13 +104,13 @@ const (
 type AreaEnterkeyhintEnum string
 
 const (
+	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
+	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
+	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
 	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
 	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
 	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
 	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
-	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
-	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
-	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
 )
 
 type AreaHiddenEnum string
@@ -124,7 +124,6 @@ const (
 type AreaInputmodeEnum string
 
 const (
-	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
 	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
 	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
@@ -132,13 +131,14 @@ const (
 	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
 	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
 	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
+	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
 )
 
 type AreaSpellcheckEnum string
 
 const (
-	AreaSpellcheckEnumTrue  AreaSpellcheckEnum = "true"
 	AreaSpellcheckEnumFalse AreaSpellcheckEnum = "false"
+	AreaSpellcheckEnumTrue  AreaSpellcheckEnum = "true"
 	AreaSpellcheckEnumEmpty AreaSpellcheckEnum = ""
 )
 

@@ -60,12 +60,12 @@ func (e *TdElement) AddIndent(i int) {
 type TdAutocapitalizeEnum string
 
 const (
+	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
 	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
 	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
 	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
 	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
 	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
-	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
 )
 
 type TdAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type TdEnterkeyhintEnum string
 
 const (
-	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
-	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
-	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
 	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
 	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
 	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
 	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
+	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
+	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
+	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
 )
 
 type TdHiddenEnum string
@@ -136,8 +136,8 @@ const (
 type TdSpellcheckEnum string
 
 const (
-	TdSpellcheckEnumFalse TdSpellcheckEnum = "false"
 	TdSpellcheckEnumTrue  TdSpellcheckEnum = "true"
+	TdSpellcheckEnumFalse TdSpellcheckEnum = "false"
 	TdSpellcheckEnumEmpty TdSpellcheckEnum = ""
 )
 

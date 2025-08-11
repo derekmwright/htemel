@@ -60,12 +60,12 @@ func (e *LiElement) AddIndent(i int) {
 type LiAutocapitalizeEnum string
 
 const (
+	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
+	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
 	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
 	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
-	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
-	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
 )
 
 type LiAutocorrectEnum string
@@ -103,34 +103,34 @@ const (
 type LiEnterkeyhintEnum string
 
 const (
-	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
 	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
 	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
 	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
 	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
 	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
+	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 )
 
 type LiHiddenEnum string
 
 const (
-	LiHiddenEnumUntilFound LiHiddenEnum = "until-found"
 	LiHiddenEnumHidden     LiHiddenEnum = "hidden"
+	LiHiddenEnumUntilFound LiHiddenEnum = "until-found"
 	LiHiddenEnumEmpty      LiHiddenEnum = ""
 )
 
 type LiInputmodeEnum string
 
 const (
+	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
+	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 	LiInputmodeEnumNone    LiInputmodeEnum = "none"
 	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
 	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
 	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
 	LiInputmodeEnumText    LiInputmodeEnum = "text"
 	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
-	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
-	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 )
 
 type LiSpellcheckEnum string

@@ -60,12 +60,12 @@ func (e *MeterElement) AddIndent(i int) {
 type MeterAutocapitalizeEnum string
 
 const (
-	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
-	MeterAutocapitalizeEnumNone       MeterAutocapitalizeEnum = "none"
-	MeterAutocapitalizeEnumOff        MeterAutocapitalizeEnum = "off"
 	MeterAutocapitalizeEnumOn         MeterAutocapitalizeEnum = "on"
 	MeterAutocapitalizeEnumSentences  MeterAutocapitalizeEnum = "sentences"
 	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
+	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
+	MeterAutocapitalizeEnumNone       MeterAutocapitalizeEnum = "none"
+	MeterAutocapitalizeEnumOff        MeterAutocapitalizeEnum = "off"
 )
 
 type MeterAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type MeterDirEnum string
 
 const (
+	MeterDirEnumAuto MeterDirEnum = "auto"
 	MeterDirEnumLtr  MeterDirEnum = "ltr"
 	MeterDirEnumRtl  MeterDirEnum = "rtl"
-	MeterDirEnumAuto MeterDirEnum = "auto"
 )
 
 type MeterDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type MeterEnterkeyhintEnum string
 
 const (
+	MeterEnterkeyhintEnumGo       MeterEnterkeyhintEnum = "go"
+	MeterEnterkeyhintEnumNext     MeterEnterkeyhintEnum = "next"
 	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
 	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
 	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 	MeterEnterkeyhintEnumDone     MeterEnterkeyhintEnum = "done"
 	MeterEnterkeyhintEnumEnter    MeterEnterkeyhintEnum = "enter"
-	MeterEnterkeyhintEnumGo       MeterEnterkeyhintEnum = "go"
-	MeterEnterkeyhintEnumNext     MeterEnterkeyhintEnum = "next"
 )
 
 type MeterHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type MeterInputmodeEnum string
 
 const (
-	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
 	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
 	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 	MeterInputmodeEnumDecimal MeterInputmodeEnum = "decimal"
@@ -131,6 +130,7 @@ const (
 	MeterInputmodeEnumNone    MeterInputmodeEnum = "none"
 	MeterInputmodeEnumNumeric MeterInputmodeEnum = "numeric"
 	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
+	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
 )
 
 type MeterSpellcheckEnum string
@@ -158,6 +158,42 @@ const (
 )
 
 type meterAttrs map[string]any
+
+func (e *MeterElement) Value(f float64) *MeterElement {
+	e.attributes["value"] = f
+
+	return e
+}
+
+func (e *MeterElement) Min(f float64) *MeterElement {
+	e.attributes["min"] = f
+
+	return e
+}
+
+func (e *MeterElement) Max(f float64) *MeterElement {
+	e.attributes["max"] = f
+
+	return e
+}
+
+func (e *MeterElement) Low(f float64) *MeterElement {
+	e.attributes["low"] = f
+
+	return e
+}
+
+func (e *MeterElement) High(f float64) *MeterElement {
+	e.attributes["high"] = f
+
+	return e
+}
+
+func (e *MeterElement) Optimum(f float64) *MeterElement {
+	e.attributes["optimum"] = f
+
+	return e
+}
 
 func (e *MeterElement) Autocapitalize(a MeterAutocapitalizeEnum) *MeterElement {
 	e.attributes["autocapitalize"] = a

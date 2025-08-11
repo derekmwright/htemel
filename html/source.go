@@ -63,17 +63,17 @@ const (
 type SourceAutocorrectEnum string
 
 const (
-	SourceAutocorrectEnumOff   SourceAutocorrectEnum = "off"
 	SourceAutocorrectEnumOn    SourceAutocorrectEnum = "on"
+	SourceAutocorrectEnumOff   SourceAutocorrectEnum = "off"
 	SourceAutocorrectEnumEmpty SourceAutocorrectEnum = ""
 )
 
 type SourceContenteditableEnum string
 
 const (
-	SourceContenteditableEnumTrue          SourceContenteditableEnum = "true"
 	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
 	SourceContenteditableEnumPlaintextOnly SourceContenteditableEnum = "plaintext-only"
+	SourceContenteditableEnumTrue          SourceContenteditableEnum = "true"
 	SourceContenteditableEnumEmpty         SourceContenteditableEnum = ""
 )
 
@@ -88,20 +88,20 @@ const (
 type SourceDraggableEnum string
 
 const (
-	SourceDraggableEnumTrue  SourceDraggableEnum = "true"
 	SourceDraggableEnumFalse SourceDraggableEnum = "false"
+	SourceDraggableEnumTrue  SourceDraggableEnum = "true"
 )
 
 type SourceEnterkeyhintEnum string
 
 const (
+	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
 	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
 	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
 	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
 	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
-	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
 )
 
 type SourceHiddenEnum string
@@ -128,8 +128,8 @@ const (
 type SourceSpellcheckEnum string
 
 const (
-	SourceSpellcheckEnumTrue  SourceSpellcheckEnum = "true"
 	SourceSpellcheckEnumFalse SourceSpellcheckEnum = "false"
+	SourceSpellcheckEnumTrue  SourceSpellcheckEnum = "true"
 	SourceSpellcheckEnumEmpty SourceSpellcheckEnum = ""
 )
 

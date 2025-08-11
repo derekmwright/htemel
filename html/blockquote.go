@@ -60,12 +60,12 @@ func (e *BlockquoteElement) AddIndent(i int) {
 type BlockquoteAutocapitalizeEnum string
 
 const (
+	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
+	BlockquoteAutocapitalizeEnumNone       BlockquoteAutocapitalizeEnum = "none"
 	BlockquoteAutocapitalizeEnumOff        BlockquoteAutocapitalizeEnum = "off"
 	BlockquoteAutocapitalizeEnumOn         BlockquoteAutocapitalizeEnum = "on"
 	BlockquoteAutocapitalizeEnumSentences  BlockquoteAutocapitalizeEnum = "sentences"
 	BlockquoteAutocapitalizeEnumWords      BlockquoteAutocapitalizeEnum = "words"
-	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
-	BlockquoteAutocapitalizeEnumNone       BlockquoteAutocapitalizeEnum = "none"
 )
 
 type BlockquoteAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type BlockquoteDirEnum string
 
 const (
+	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 	BlockquoteDirEnumLtr  BlockquoteDirEnum = "ltr"
 	BlockquoteDirEnumRtl  BlockquoteDirEnum = "rtl"
-	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 )
 
 type BlockquoteDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type BlockquoteEnterkeyhintEnum string
 
 const (
+	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
 	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 	BlockquoteEnterkeyhintEnumNext     BlockquoteEnterkeyhintEnum = "next"
 	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
 	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
 	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
-	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
 )
 
 type BlockquoteHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type BlockquoteInputmodeEnum string
 
 const (
-	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
-	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
-	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
-	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
 	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
 	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
 	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
+	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
+	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
+	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
+	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 )
 
 type BlockquoteSpellcheckEnum string

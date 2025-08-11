@@ -60,19 +60,19 @@ func (e *FigureElement) AddIndent(i int) {
 type FigureAutocapitalizeEnum string
 
 const (
+	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
+	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
 	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
 	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
 	FigureAutocapitalizeEnumNone       FigureAutocapitalizeEnum = "none"
 	FigureAutocapitalizeEnumOff        FigureAutocapitalizeEnum = "off"
-	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
-	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
 )
 
 type FigureAutocorrectEnum string
 
 const (
-	FigureAutocorrectEnumOff   FigureAutocorrectEnum = "off"
 	FigureAutocorrectEnumOn    FigureAutocorrectEnum = "on"
+	FigureAutocorrectEnumOff   FigureAutocorrectEnum = "off"
 	FigureAutocorrectEnumEmpty FigureAutocorrectEnum = ""
 )
 
@@ -96,41 +96,41 @@ const (
 type FigureDraggableEnum string
 
 const (
-	FigureDraggableEnumTrue  FigureDraggableEnum = "true"
 	FigureDraggableEnumFalse FigureDraggableEnum = "false"
+	FigureDraggableEnumTrue  FigureDraggableEnum = "true"
 )
 
 type FigureEnterkeyhintEnum string
 
 const (
+	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
+	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
+	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
 	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
 	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
 	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
 	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
-	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
-	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
-	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
 )
 
 type FigureHiddenEnum string
 
 const (
-	FigureHiddenEnumHidden     FigureHiddenEnum = "hidden"
 	FigureHiddenEnumUntilFound FigureHiddenEnum = "until-found"
+	FigureHiddenEnumHidden     FigureHiddenEnum = "hidden"
 	FigureHiddenEnumEmpty      FigureHiddenEnum = ""
 )
 
 type FigureInputmodeEnum string
 
 const (
-	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
-	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
-	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
-	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
 	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
 	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
 	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
 	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
+	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
+	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
+	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
+	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
 )
 
 type FigureSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type FigureTranslateEnum string
 
 const (
-	FigureTranslateEnumNo    FigureTranslateEnum = "no"
 	FigureTranslateEnumYes   FigureTranslateEnum = "yes"
+	FigureTranslateEnumNo    FigureTranslateEnum = "no"
 	FigureTranslateEnumEmpty FigureTranslateEnum = ""
 )
 

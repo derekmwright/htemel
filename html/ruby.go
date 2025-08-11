@@ -60,37 +60,37 @@ func (e *RubyElement) AddIndent(i int) {
 type RubyAutocapitalizeEnum string
 
 const (
+	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 	RubyAutocapitalizeEnumOff        RubyAutocapitalizeEnum = "off"
 	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
 	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
 	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
 	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
-	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 )
 
 type RubyAutocorrectEnum string
 
 const (
-	RubyAutocorrectEnumOff   RubyAutocorrectEnum = "off"
 	RubyAutocorrectEnumOn    RubyAutocorrectEnum = "on"
+	RubyAutocorrectEnumOff   RubyAutocorrectEnum = "off"
 	RubyAutocorrectEnumEmpty RubyAutocorrectEnum = ""
 )
 
 type RubyContenteditableEnum string
 
 const (
+	RubyContenteditableEnumFalse         RubyContenteditableEnum = "false"
 	RubyContenteditableEnumPlaintextOnly RubyContenteditableEnum = "plaintext-only"
 	RubyContenteditableEnumTrue          RubyContenteditableEnum = "true"
-	RubyContenteditableEnumFalse         RubyContenteditableEnum = "false"
 	RubyContenteditableEnumEmpty         RubyContenteditableEnum = ""
 )
 
 type RubyDirEnum string
 
 const (
+	RubyDirEnumRtl  RubyDirEnum = "rtl"
 	RubyDirEnumAuto RubyDirEnum = "auto"
 	RubyDirEnumLtr  RubyDirEnum = "ltr"
-	RubyDirEnumRtl  RubyDirEnum = "rtl"
 )
 
 type RubyDraggableEnum string
@@ -103,20 +103,20 @@ const (
 type RubyEnterkeyhintEnum string
 
 const (
-	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
 	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
 	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
+	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 )
 
 type RubyHiddenEnum string
 
 const (
-	RubyHiddenEnumUntilFound RubyHiddenEnum = "until-found"
 	RubyHiddenEnumHidden     RubyHiddenEnum = "hidden"
+	RubyHiddenEnumUntilFound RubyHiddenEnum = "until-found"
 	RubyHiddenEnumEmpty      RubyHiddenEnum = ""
 )
 

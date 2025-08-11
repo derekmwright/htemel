@@ -60,19 +60,19 @@ func (e *AElement) AddIndent(i int) {
 type AAutocapitalizeEnum string
 
 const (
-	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
-	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
-	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
 	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
 	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
 	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
+	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
+	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
+	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
 )
 
 type AAutocorrectEnum string
 
 const (
-	AAutocorrectEnumOff   AAutocorrectEnum = "off"
 	AAutocorrectEnumOn    AAutocorrectEnum = "on"
+	AAutocorrectEnumOff   AAutocorrectEnum = "off"
 	AAutocorrectEnumEmpty AAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type AEnterkeyhintEnum string
 
 const (
-	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
 	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
 	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
 	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
 	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
+	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 )
 
 type AHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type AInputmodeEnum string
 
 const (
-	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
-	AInputmodeEnumSearch  AInputmodeEnum = "search"
-	AInputmodeEnumTel     AInputmodeEnum = "tel"
 	AInputmodeEnumText    AInputmodeEnum = "text"
 	AInputmodeEnumUrl     AInputmodeEnum = "url"
 	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
 	AInputmodeEnumEmail   AInputmodeEnum = "email"
 	AInputmodeEnumNone    AInputmodeEnum = "none"
+	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
+	AInputmodeEnumSearch  AInputmodeEnum = "search"
+	AInputmodeEnumTel     AInputmodeEnum = "tel"
 )
 
 type ASpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type AWritingsuggestionsEnum string
 
 const (
-	AWritingsuggestionsEnumFalse AWritingsuggestionsEnum = "false"
 	AWritingsuggestionsEnumTrue  AWritingsuggestionsEnum = "true"
+	AWritingsuggestionsEnumFalse AWritingsuggestionsEnum = "false"
 	AWritingsuggestionsEnumEmpty AWritingsuggestionsEnum = ""
 )
 

@@ -60,12 +60,12 @@ func (e *H6Element) AddIndent(i int) {
 type H6AutocapitalizeEnum string
 
 const (
+	H6AutocapitalizeEnumOff        H6AutocapitalizeEnum = "off"
+	H6AutocapitalizeEnumOn         H6AutocapitalizeEnum = "on"
 	H6AutocapitalizeEnumSentences  H6AutocapitalizeEnum = "sentences"
 	H6AutocapitalizeEnumWords      H6AutocapitalizeEnum = "words"
 	H6AutocapitalizeEnumCharacters H6AutocapitalizeEnum = "characters"
 	H6AutocapitalizeEnumNone       H6AutocapitalizeEnum = "none"
-	H6AutocapitalizeEnumOff        H6AutocapitalizeEnum = "off"
-	H6AutocapitalizeEnumOn         H6AutocapitalizeEnum = "on"
 )
 
 type H6AutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type H6DirEnum string
 
 const (
+	H6DirEnumRtl  H6DirEnum = "rtl"
 	H6DirEnumAuto H6DirEnum = "auto"
 	H6DirEnumLtr  H6DirEnum = "ltr"
-	H6DirEnumRtl  H6DirEnum = "rtl"
 )
 
 type H6DraggableEnum string
@@ -123,7 +123,6 @@ const (
 type H6InputmodeEnum string
 
 const (
-	H6InputmodeEnumSearch  H6InputmodeEnum = "search"
 	H6InputmodeEnumTel     H6InputmodeEnum = "tel"
 	H6InputmodeEnumText    H6InputmodeEnum = "text"
 	H6InputmodeEnumUrl     H6InputmodeEnum = "url"
@@ -131,6 +130,7 @@ const (
 	H6InputmodeEnumEmail   H6InputmodeEnum = "email"
 	H6InputmodeEnumNone    H6InputmodeEnum = "none"
 	H6InputmodeEnumNumeric H6InputmodeEnum = "numeric"
+	H6InputmodeEnumSearch  H6InputmodeEnum = "search"
 )
 
 type H6SpellcheckEnum string

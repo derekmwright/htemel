@@ -60,12 +60,12 @@ func (e *AddressElement) AddIndent(i int) {
 type AddressAutocapitalizeEnum string
 
 const (
-	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
-	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
 	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
 	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
+	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
+	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 )
 
 type AddressAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type AddressContenteditableEnum string
 
 const (
-	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
 	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
+	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
 	AddressContenteditableEnumEmpty         AddressContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type AddressEnterkeyhintEnum string
 
 const (
+	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
+	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
 	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
 	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
 	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
 	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
-	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
-	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
 )
 
 type AddressHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type AddressInputmodeEnum string
 
 const (
+	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
+	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
 	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 	AddressInputmodeEnumText    AddressInputmodeEnum = "text"
 	AddressInputmodeEnumUrl     AddressInputmodeEnum = "url"
 	AddressInputmodeEnumDecimal AddressInputmodeEnum = "decimal"
 	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
-	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
-	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
 )
 
 type AddressSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type AddressWritingsuggestionsEnum string
 
 const (
-	AddressWritingsuggestionsEnumFalse AddressWritingsuggestionsEnum = "false"
 	AddressWritingsuggestionsEnumTrue  AddressWritingsuggestionsEnum = "true"
+	AddressWritingsuggestionsEnumFalse AddressWritingsuggestionsEnum = "false"
 	AddressWritingsuggestionsEnumEmpty AddressWritingsuggestionsEnum = ""
 )
 

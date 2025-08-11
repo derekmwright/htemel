@@ -52,12 +52,12 @@ func (e *EmbedElement) AddIndent(i int) {
 type EmbedAutocapitalizeEnum string
 
 const (
-	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
-	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
 	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
 	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
 	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
+	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
+	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 )
 
 type EmbedAutocorrectEnum string
@@ -115,14 +115,14 @@ const (
 type EmbedInputmodeEnum string
 
 const (
-	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
-	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
-	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
 	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
 	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
 	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
 	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
+	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
+	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
+	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 )
 
 type EmbedSpellcheckEnum string

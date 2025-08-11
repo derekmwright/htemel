@@ -60,12 +60,12 @@ func (e *EmElement) AddIndent(i int) {
 type EmAutocapitalizeEnum string
 
 const (
-	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
-	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
-	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
 	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
 	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
+	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
+	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
+	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
 )
 
 type EmAutocorrectEnum string
@@ -103,34 +103,34 @@ const (
 type EmEnterkeyhintEnum string
 
 const (
-	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
 	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
 	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
 	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
 	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
+	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
 )
 
 type EmHiddenEnum string
 
 const (
-	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
 	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
+	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
 	EmHiddenEnumEmpty      EmHiddenEnum = ""
 )
 
 type EmInputmodeEnum string
 
 const (
-	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
-	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
 	EmInputmodeEnumText    EmInputmodeEnum = "text"
 	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
 	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
 	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
 	EmInputmodeEnumNone    EmInputmodeEnum = "none"
 	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
+	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
+	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
 )
 
 type EmSpellcheckEnum string

@@ -68,27 +68,27 @@ const (
 type ImgLoadingEnum string
 
 const (
-	ImgLoadingEnumEager ImgLoadingEnum = "eager"
 	ImgLoadingEnumLazy  ImgLoadingEnum = "lazy"
+	ImgLoadingEnumEager ImgLoadingEnum = "eager"
 )
 
 type ImgFetchpriorityEnum string
 
 const (
-	ImgFetchpriorityEnumLow  ImgFetchpriorityEnum = "low"
 	ImgFetchpriorityEnumAuto ImgFetchpriorityEnum = "auto"
 	ImgFetchpriorityEnumHigh ImgFetchpriorityEnum = "high"
+	ImgFetchpriorityEnumLow  ImgFetchpriorityEnum = "low"
 )
 
 type ImgAutocapitalizeEnum string
 
 const (
-	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
-	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
 	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
+	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
+	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 )
 
 type ImgAutocorrectEnum string
@@ -111,9 +111,9 @@ const (
 type ImgDirEnum string
 
 const (
+	ImgDirEnumLtr  ImgDirEnum = "ltr"
 	ImgDirEnumRtl  ImgDirEnum = "rtl"
 	ImgDirEnumAuto ImgDirEnum = "auto"
-	ImgDirEnumLtr  ImgDirEnum = "ltr"
 )
 
 type ImgDraggableEnum string
@@ -126,13 +126,13 @@ const (
 type ImgEnterkeyhintEnum string
 
 const (
+	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
+	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
 	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
 	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
-	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
-	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 )
 
 type ImgHiddenEnum string
@@ -146,6 +146,7 @@ const (
 type ImgInputmodeEnum string
 
 const (
+	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
 	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
 	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
@@ -153,7 +154,6 @@ const (
 	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
 	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
 	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
-	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 )
 
 type ImgSpellcheckEnum string
@@ -167,16 +167,16 @@ const (
 type ImgTranslateEnum string
 
 const (
-	ImgTranslateEnumYes   ImgTranslateEnum = "yes"
 	ImgTranslateEnumNo    ImgTranslateEnum = "no"
+	ImgTranslateEnumYes   ImgTranslateEnum = "yes"
 	ImgTranslateEnumEmpty ImgTranslateEnum = ""
 )
 
 type ImgWritingsuggestionsEnum string
 
 const (
-	ImgWritingsuggestionsEnumTrue  ImgWritingsuggestionsEnum = "true"
 	ImgWritingsuggestionsEnumFalse ImgWritingsuggestionsEnum = "false"
+	ImgWritingsuggestionsEnumTrue  ImgWritingsuggestionsEnum = "true"
 	ImgWritingsuggestionsEnumEmpty ImgWritingsuggestionsEnum = ""
 )
 

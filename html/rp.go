@@ -60,12 +60,12 @@ func (e *RpElement) AddIndent(i int) {
 type RpAutocapitalizeEnum string
 
 const (
+	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
 	RpAutocapitalizeEnumCharacters RpAutocapitalizeEnum = "characters"
 	RpAutocapitalizeEnumNone       RpAutocapitalizeEnum = "none"
 	RpAutocapitalizeEnumOff        RpAutocapitalizeEnum = "off"
 	RpAutocapitalizeEnumOn         RpAutocapitalizeEnum = "on"
 	RpAutocapitalizeEnumSentences  RpAutocapitalizeEnum = "sentences"
-	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
 )
 
 type RpAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type RpContenteditableEnum string
 
 const (
+	RpContenteditableEnumPlaintextOnly RpContenteditableEnum = "plaintext-only"
 	RpContenteditableEnumTrue          RpContenteditableEnum = "true"
 	RpContenteditableEnumFalse         RpContenteditableEnum = "false"
-	RpContenteditableEnumPlaintextOnly RpContenteditableEnum = "plaintext-only"
 	RpContenteditableEnumEmpty         RpContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type RpEnterkeyhintEnum string
 
 const (
+	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
+	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
 	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
 	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
 	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
 	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
-	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
-	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
 )
 
 type RpHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type RpInputmodeEnum string
 
 const (
-	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
-	RpInputmodeEnumText    RpInputmodeEnum = "text"
 	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
 	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
 	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
 	RpInputmodeEnumNone    RpInputmodeEnum = "none"
 	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
 	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
+	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
+	RpInputmodeEnumText    RpInputmodeEnum = "text"
 )
 
 type RpSpellcheckEnum string

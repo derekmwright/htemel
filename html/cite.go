@@ -60,12 +60,12 @@ func (e *CiteElement) AddIndent(i int) {
 type CiteAutocapitalizeEnum string
 
 const (
-	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
-	CiteAutocapitalizeEnumNone       CiteAutocapitalizeEnum = "none"
 	CiteAutocapitalizeEnumOff        CiteAutocapitalizeEnum = "off"
 	CiteAutocapitalizeEnumOn         CiteAutocapitalizeEnum = "on"
 	CiteAutocapitalizeEnumSentences  CiteAutocapitalizeEnum = "sentences"
 	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
+	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
+	CiteAutocapitalizeEnumNone       CiteAutocapitalizeEnum = "none"
 )
 
 type CiteAutocorrectEnum string
@@ -88,16 +88,16 @@ const (
 type CiteDirEnum string
 
 const (
+	CiteDirEnumAuto CiteDirEnum = "auto"
 	CiteDirEnumLtr  CiteDirEnum = "ltr"
 	CiteDirEnumRtl  CiteDirEnum = "rtl"
-	CiteDirEnumAuto CiteDirEnum = "auto"
 )
 
 type CiteDraggableEnum string
 
 const (
-	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
 	CiteDraggableEnumFalse CiteDraggableEnum = "false"
+	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
 )
 
 type CiteEnterkeyhintEnum string
@@ -123,29 +123,29 @@ const (
 type CiteInputmodeEnum string
 
 const (
-	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
-	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
-	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
-	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
 	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
 	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
 	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
 	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
+	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
+	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
+	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
+	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
 )
 
 type CiteSpellcheckEnum string
 
 const (
-	CiteSpellcheckEnumFalse CiteSpellcheckEnum = "false"
 	CiteSpellcheckEnumTrue  CiteSpellcheckEnum = "true"
+	CiteSpellcheckEnumFalse CiteSpellcheckEnum = "false"
 	CiteSpellcheckEnumEmpty CiteSpellcheckEnum = ""
 )
 
 type CiteTranslateEnum string
 
 const (
-	CiteTranslateEnumYes   CiteTranslateEnum = "yes"
 	CiteTranslateEnumNo    CiteTranslateEnum = "no"
+	CiteTranslateEnumYes   CiteTranslateEnum = "yes"
 	CiteTranslateEnumEmpty CiteTranslateEnum = ""
 )
 

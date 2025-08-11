@@ -52,12 +52,12 @@ func (e *BaseElement) AddIndent(i int) {
 type BaseAutocapitalizeEnum string
 
 const (
-	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
-	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
 	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
 	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
 	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
 	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
+	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
+	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
 )
 
 type BaseAutocorrectEnum string
@@ -71,37 +71,37 @@ const (
 type BaseContenteditableEnum string
 
 const (
+	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
 	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
 	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
-	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
 	BaseContenteditableEnumEmpty         BaseContenteditableEnum = ""
 )
 
 type BaseDirEnum string
 
 const (
-	BaseDirEnumRtl  BaseDirEnum = "rtl"
 	BaseDirEnumAuto BaseDirEnum = "auto"
 	BaseDirEnumLtr  BaseDirEnum = "ltr"
+	BaseDirEnumRtl  BaseDirEnum = "rtl"
 )
 
 type BaseDraggableEnum string
 
 const (
-	BaseDraggableEnumTrue  BaseDraggableEnum = "true"
 	BaseDraggableEnumFalse BaseDraggableEnum = "false"
+	BaseDraggableEnumTrue  BaseDraggableEnum = "true"
 )
 
 type BaseEnterkeyhintEnum string
 
 const (
-	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
-	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
-	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
 	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
 	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
+	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
+	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
+	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 )
 
 type BaseHiddenEnum string
@@ -115,6 +115,7 @@ const (
 type BaseInputmodeEnum string
 
 const (
+	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
 	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
 	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
@@ -122,14 +123,13 @@ const (
 	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
 	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
 	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
-	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
 )
 
 type BaseSpellcheckEnum string
 
 const (
-	BaseSpellcheckEnumTrue  BaseSpellcheckEnum = "true"
 	BaseSpellcheckEnumFalse BaseSpellcheckEnum = "false"
+	BaseSpellcheckEnumTrue  BaseSpellcheckEnum = "true"
 	BaseSpellcheckEnumEmpty BaseSpellcheckEnum = ""
 )
 

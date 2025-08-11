@@ -60,12 +60,12 @@ func (e *DfnElement) AddIndent(i int) {
 type DfnAutocapitalizeEnum string
 
 const (
+	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
+	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
 	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
 	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
 	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
 	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
-	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
-	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
 )
 
 type DfnAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type DfnDirEnum string
 
 const (
+	DfnDirEnumAuto DfnDirEnum = "auto"
 	DfnDirEnumLtr  DfnDirEnum = "ltr"
 	DfnDirEnumRtl  DfnDirEnum = "rtl"
-	DfnDirEnumAuto DfnDirEnum = "auto"
 )
 
 type DfnDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type DfnEnterkeyhintEnum string
 
 const (
+	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
 	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
 	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
 	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
-	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 )
 
 type DfnHiddenEnum string

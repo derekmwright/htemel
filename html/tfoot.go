@@ -60,12 +60,12 @@ func (e *TfootElement) AddIndent(i int) {
 type TfootAutocapitalizeEnum string
 
 const (
-	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
-	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
 	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
 	TfootAutocapitalizeEnumNone       TfootAutocapitalizeEnum = "none"
 	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
 	TfootAutocapitalizeEnumOn         TfootAutocapitalizeEnum = "on"
+	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
+	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
 )
 
 type TfootAutocorrectEnum string
@@ -88,35 +88,35 @@ const (
 type TfootDirEnum string
 
 const (
-	TfootDirEnumAuto TfootDirEnum = "auto"
 	TfootDirEnumLtr  TfootDirEnum = "ltr"
 	TfootDirEnumRtl  TfootDirEnum = "rtl"
+	TfootDirEnumAuto TfootDirEnum = "auto"
 )
 
 type TfootDraggableEnum string
 
 const (
-	TfootDraggableEnumTrue  TfootDraggableEnum = "true"
 	TfootDraggableEnumFalse TfootDraggableEnum = "false"
+	TfootDraggableEnumTrue  TfootDraggableEnum = "true"
 )
 
 type TfootEnterkeyhintEnum string
 
 const (
+	TfootEnterkeyhintEnumEnter    TfootEnterkeyhintEnum = "enter"
+	TfootEnterkeyhintEnumGo       TfootEnterkeyhintEnum = "go"
+	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
 	TfootEnterkeyhintEnumPrevious TfootEnterkeyhintEnum = "previous"
 	TfootEnterkeyhintEnumSearch   TfootEnterkeyhintEnum = "search"
 	TfootEnterkeyhintEnumSend     TfootEnterkeyhintEnum = "send"
 	TfootEnterkeyhintEnumDone     TfootEnterkeyhintEnum = "done"
-	TfootEnterkeyhintEnumEnter    TfootEnterkeyhintEnum = "enter"
-	TfootEnterkeyhintEnumGo       TfootEnterkeyhintEnum = "go"
-	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
 )
 
 type TfootHiddenEnum string
 
 const (
-	TfootHiddenEnumUntilFound TfootHiddenEnum = "until-found"
 	TfootHiddenEnumHidden     TfootHiddenEnum = "hidden"
+	TfootHiddenEnumUntilFound TfootHiddenEnum = "until-found"
 	TfootHiddenEnumEmpty      TfootHiddenEnum = ""
 )
 

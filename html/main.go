@@ -60,12 +60,12 @@ func (e *MainElement) AddIndent(i int) {
 type MainAutocapitalizeEnum string
 
 const (
+	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
 	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
 	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
 	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
-	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
 )
 
 type MainAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type MainContenteditableEnum string
 
 const (
-	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
 	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
+	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumEmpty         MainContenteditableEnum = ""
 )
 
@@ -96,8 +96,8 @@ const (
 type MainDraggableEnum string
 
 const (
-	MainDraggableEnumFalse MainDraggableEnum = "false"
 	MainDraggableEnumTrue  MainDraggableEnum = "true"
+	MainDraggableEnumFalse MainDraggableEnum = "false"
 )
 
 type MainEnterkeyhintEnum string
@@ -136,8 +136,8 @@ const (
 type MainSpellcheckEnum string
 
 const (
-	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
 	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
+	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
 	MainSpellcheckEnumEmpty MainSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type MainWritingsuggestionsEnum string
 
 const (
-	MainWritingsuggestionsEnumTrue  MainWritingsuggestionsEnum = "true"
 	MainWritingsuggestionsEnumFalse MainWritingsuggestionsEnum = "false"
+	MainWritingsuggestionsEnumTrue  MainWritingsuggestionsEnum = "true"
 	MainWritingsuggestionsEnumEmpty MainWritingsuggestionsEnum = ""
 )
 

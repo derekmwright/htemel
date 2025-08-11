@@ -60,12 +60,12 @@ func (e *SummaryElement) AddIndent(i int) {
 type SummaryAutocapitalizeEnum string
 
 const (
+	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
+	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
 	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
-	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
-	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 )
 
 type SummaryAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type SummaryContenteditableEnum string
 
 const (
+	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
 	SummaryContenteditableEnumFalse         SummaryContenteditableEnum = "false"
 	SummaryContenteditableEnumPlaintextOnly SummaryContenteditableEnum = "plaintext-only"
-	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
 	SummaryContenteditableEnumEmpty         SummaryContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type SummaryEnterkeyhintEnum string
 
 const (
+	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
 	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
 	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
 	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
 	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
 	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
-	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 )
 
 type SummaryHiddenEnum string

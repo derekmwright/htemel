@@ -60,12 +60,12 @@ func (e *CodeElement) AddIndent(i int) {
 type CodeAutocapitalizeEnum string
 
 const (
-	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
-	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
-	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
 	CodeAutocapitalizeEnumOff        CodeAutocapitalizeEnum = "off"
 	CodeAutocapitalizeEnumOn         CodeAutocapitalizeEnum = "on"
 	CodeAutocapitalizeEnumSentences  CodeAutocapitalizeEnum = "sentences"
+	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
+	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
+	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
 )
 
 type CodeAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type CodeEnterkeyhintEnum string
 
 const (
+	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
+	CodeEnterkeyhintEnumEnter    CodeEnterkeyhintEnum = "enter"
 	CodeEnterkeyhintEnumGo       CodeEnterkeyhintEnum = "go"
 	CodeEnterkeyhintEnumNext     CodeEnterkeyhintEnum = "next"
 	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
 	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
 	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
-	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
-	CodeEnterkeyhintEnumEnter    CodeEnterkeyhintEnum = "enter"
 )
 
 type CodeHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type CodeInputmodeEnum string
 
 const (
+	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
+	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
+	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
 	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
 	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
 	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
 	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
-	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
-	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
-	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
 )
 
 type CodeSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type CodeTranslateEnum string
 
 const (
-	CodeTranslateEnumNo    CodeTranslateEnum = "no"
 	CodeTranslateEnumYes   CodeTranslateEnum = "yes"
+	CodeTranslateEnumNo    CodeTranslateEnum = "no"
 	CodeTranslateEnumEmpty CodeTranslateEnum = ""
 )
 

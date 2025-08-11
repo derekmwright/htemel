@@ -79,18 +79,18 @@ const (
 type FieldsetContenteditableEnum string
 
 const (
+	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumPlaintextOnly FieldsetContenteditableEnum = "plaintext-only"
 	FieldsetContenteditableEnumTrue          FieldsetContenteditableEnum = "true"
-	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumEmpty         FieldsetContenteditableEnum = ""
 )
 
 type FieldsetDirEnum string
 
 const (
-	FieldsetDirEnumRtl  FieldsetDirEnum = "rtl"
 	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 	FieldsetDirEnumLtr  FieldsetDirEnum = "ltr"
+	FieldsetDirEnumRtl  FieldsetDirEnum = "rtl"
 )
 
 type FieldsetDraggableEnum string
@@ -123,21 +123,21 @@ const (
 type FieldsetInputmodeEnum string
 
 const (
-	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
-	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
-	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
 	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
 	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
 	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
 	FieldsetInputmodeEnumNumeric FieldsetInputmodeEnum = "numeric"
+	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
+	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
+	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
 )
 
 type FieldsetSpellcheckEnum string
 
 const (
-	FieldsetSpellcheckEnumTrue  FieldsetSpellcheckEnum = "true"
 	FieldsetSpellcheckEnumFalse FieldsetSpellcheckEnum = "false"
+	FieldsetSpellcheckEnumTrue  FieldsetSpellcheckEnum = "true"
 	FieldsetSpellcheckEnumEmpty FieldsetSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type FieldsetWritingsuggestionsEnum string
 
 const (
-	FieldsetWritingsuggestionsEnumTrue  FieldsetWritingsuggestionsEnum = "true"
 	FieldsetWritingsuggestionsEnumFalse FieldsetWritingsuggestionsEnum = "false"
+	FieldsetWritingsuggestionsEnumTrue  FieldsetWritingsuggestionsEnum = "true"
 	FieldsetWritingsuggestionsEnumEmpty FieldsetWritingsuggestionsEnum = ""
 )
 

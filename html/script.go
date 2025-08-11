@@ -60,37 +60,37 @@ func (e *ScriptElement) AddIndent(i int) {
 type ScriptAutocapitalizeEnum string
 
 const (
-	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
-	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
-	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
 	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
 	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
+	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
+	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
+	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 )
 
 type ScriptAutocorrectEnum string
 
 const (
-	ScriptAutocorrectEnumOff   ScriptAutocorrectEnum = "off"
 	ScriptAutocorrectEnumOn    ScriptAutocorrectEnum = "on"
+	ScriptAutocorrectEnumOff   ScriptAutocorrectEnum = "off"
 	ScriptAutocorrectEnumEmpty ScriptAutocorrectEnum = ""
 )
 
 type ScriptContenteditableEnum string
 
 const (
+	ScriptContenteditableEnumTrue          ScriptContenteditableEnum = "true"
 	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
 	ScriptContenteditableEnumPlaintextOnly ScriptContenteditableEnum = "plaintext-only"
-	ScriptContenteditableEnumTrue          ScriptContenteditableEnum = "true"
 	ScriptContenteditableEnumEmpty         ScriptContenteditableEnum = ""
 )
 
 type ScriptDirEnum string
 
 const (
+	ScriptDirEnumRtl  ScriptDirEnum = "rtl"
 	ScriptDirEnumAuto ScriptDirEnum = "auto"
 	ScriptDirEnumLtr  ScriptDirEnum = "ltr"
-	ScriptDirEnumRtl  ScriptDirEnum = "rtl"
 )
 
 type ScriptDraggableEnum string
@@ -103,34 +103,34 @@ const (
 type ScriptEnterkeyhintEnum string
 
 const (
+	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
 	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
 	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
 	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
 	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 	ScriptEnterkeyhintEnumNext     ScriptEnterkeyhintEnum = "next"
-	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
 )
 
 type ScriptHiddenEnum string
 
 const (
-	ScriptHiddenEnumHidden     ScriptHiddenEnum = "hidden"
 	ScriptHiddenEnumUntilFound ScriptHiddenEnum = "until-found"
+	ScriptHiddenEnumHidden     ScriptHiddenEnum = "hidden"
 	ScriptHiddenEnumEmpty      ScriptHiddenEnum = ""
 )
 
 type ScriptInputmodeEnum string
 
 const (
-	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
-	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
-	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
-	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
 	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
 	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
 	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
+	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
+	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
+	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
+	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
 )
 
 type ScriptSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type ScriptWritingsuggestionsEnum string
 
 const (
-	ScriptWritingsuggestionsEnumFalse ScriptWritingsuggestionsEnum = "false"
 	ScriptWritingsuggestionsEnumTrue  ScriptWritingsuggestionsEnum = "true"
+	ScriptWritingsuggestionsEnumFalse ScriptWritingsuggestionsEnum = "false"
 	ScriptWritingsuggestionsEnumEmpty ScriptWritingsuggestionsEnum = ""
 )
 

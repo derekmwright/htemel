@@ -45,6 +45,14 @@ func (e *` + titleCase(e.Tag) + `Element) ` + pascalCase(a.Name) + `(i int) *` +
 	return e
 }
 `)
+			case *spec.AttributeTypeFloat:
+				buf.WriteString(`
+func (e *` + titleCase(e.Tag) + `Element) ` + pascalCase(a.Name) + `(f float64) *` + titleCase(e.Tag) + `Element {
+	e.attributes["` + a.Name + `"] = f
+	
+	return e
+}
+`)
 			case *spec.AttributeTypeBool:
 				buf.WriteString(`
 func (e *` + titleCase(e.Tag) + `Element) ` + pascalCase(a.Name) + `(b bool) *` + titleCase(e.Tag) + `Element {

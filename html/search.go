@@ -88,9 +88,9 @@ const (
 type SearchDirEnum string
 
 const (
+	SearchDirEnumRtl  SearchDirEnum = "rtl"
 	SearchDirEnumAuto SearchDirEnum = "auto"
 	SearchDirEnumLtr  SearchDirEnum = "ltr"
-	SearchDirEnumRtl  SearchDirEnum = "rtl"
 )
 
 type SearchDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type SearchEnterkeyhintEnum string
 
 const (
-	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
 	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
 	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
 	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
 	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
 	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
+	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
 )
 
 type SearchHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type SearchInputmodeEnum string
 
 const (
+	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
+	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
+	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
 	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
 	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
 	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
 	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
-	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
-	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
-	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 )
 
 type SearchSpellcheckEnum string
 
 const (
-	SearchSpellcheckEnumTrue  SearchSpellcheckEnum = "true"
 	SearchSpellcheckEnumFalse SearchSpellcheckEnum = "false"
+	SearchSpellcheckEnumTrue  SearchSpellcheckEnum = "true"
 	SearchSpellcheckEnumEmpty SearchSpellcheckEnum = ""
 )
 

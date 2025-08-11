@@ -103,13 +103,13 @@ const (
 type PictureEnterkeyhintEnum string
 
 const (
-	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
-	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
-	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
 	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
 	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
 	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
+	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
+	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
+	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 )
 
 type PictureHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type PictureInputmodeEnum string
 
 const (
+	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
 	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
 	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
@@ -130,7 +131,6 @@ const (
 	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
 	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
-	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
 )
 
 type PictureSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type PictureWritingsuggestionsEnum string
 
 const (
-	PictureWritingsuggestionsEnumTrue  PictureWritingsuggestionsEnum = "true"
 	PictureWritingsuggestionsEnumFalse PictureWritingsuggestionsEnum = "false"
+	PictureWritingsuggestionsEnumTrue  PictureWritingsuggestionsEnum = "true"
 	PictureWritingsuggestionsEnumEmpty PictureWritingsuggestionsEnum = ""
 )
 

@@ -60,12 +60,12 @@ func (e *SelectElement) AddIndent(i int) {
 type SelectAutocapitalizeEnum string
 
 const (
-	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
 	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
 	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
 	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
 	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
+	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 )
 
 type SelectAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type SelectContenteditableEnum string
 
 const (
+	SelectContenteditableEnumFalse         SelectContenteditableEnum = "false"
 	SelectContenteditableEnumPlaintextOnly SelectContenteditableEnum = "plaintext-only"
 	SelectContenteditableEnumTrue          SelectContenteditableEnum = "true"
-	SelectContenteditableEnumFalse         SelectContenteditableEnum = "false"
 	SelectContenteditableEnumEmpty         SelectContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type SelectDraggableEnum string
 
 const (
-	SelectDraggableEnumFalse SelectDraggableEnum = "false"
 	SelectDraggableEnumTrue  SelectDraggableEnum = "true"
+	SelectDraggableEnumFalse SelectDraggableEnum = "false"
 )
 
 type SelectEnterkeyhintEnum string
 
 const (
+	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
 	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
 	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
 	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
-	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
 )
 
 type SelectHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SelectInputmodeEnum string
 
 const (
-	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
-	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
-	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
-	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
 	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
 	SelectInputmodeEnumUrl     SelectInputmodeEnum = "url"
 	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
 	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
+	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
+	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
+	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
+	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
 )
 
 type SelectSpellcheckEnum string
@@ -158,6 +158,48 @@ const (
 )
 
 type selectAttrs map[string]any
+
+func (e *SelectElement) Autocomplete(s string) *SelectElement {
+	e.attributes["autocomplete"] = s
+
+	return e
+}
+
+func (e *SelectElement) Disabled(b bool) *SelectElement {
+	e.attributes["disabled"] = b
+
+	return e
+}
+
+func (e *SelectElement) Form(s string) *SelectElement {
+	e.attributes["form"] = s
+
+	return e
+}
+
+func (e *SelectElement) Multiple(b bool) *SelectElement {
+	e.attributes["multiple"] = b
+
+	return e
+}
+
+func (e *SelectElement) Name(s string) *SelectElement {
+	e.attributes["name"] = s
+
+	return e
+}
+
+func (e *SelectElement) Required(b bool) *SelectElement {
+	e.attributes["required"] = b
+
+	return e
+}
+
+func (e *SelectElement) Size(i int) *SelectElement {
+	e.attributes["size"] = i
+
+	return e
+}
 
 func (e *SelectElement) Autocapitalize(a SelectAutocapitalizeEnum) *SelectElement {
 	e.attributes["autocapitalize"] = a

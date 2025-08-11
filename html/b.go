@@ -60,12 +60,12 @@ func (e *BElement) AddIndent(i int) {
 type BAutocapitalizeEnum string
 
 const (
+	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
 	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
 	BAutocapitalizeEnumOn         BAutocapitalizeEnum = "on"
 	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
 	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
 	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
-	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
 )
 
 type BAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type BDraggableEnum string
 
 const (
-	BDraggableEnumTrue  BDraggableEnum = "true"
 	BDraggableEnumFalse BDraggableEnum = "false"
+	BDraggableEnumTrue  BDraggableEnum = "true"
 )
 
 type BEnterkeyhintEnum string
 
 const (
-	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
-	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
-	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
 	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
 	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
+	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
+	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
+	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 )
 
 type BHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type BInputmodeEnum string
 
 const (
+	BInputmodeEnumText    BInputmodeEnum = "text"
 	BInputmodeEnumUrl     BInputmodeEnum = "url"
 	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
 	BInputmodeEnumEmail   BInputmodeEnum = "email"
@@ -130,7 +131,6 @@ const (
 	BInputmodeEnumNumeric BInputmodeEnum = "numeric"
 	BInputmodeEnumSearch  BInputmodeEnum = "search"
 	BInputmodeEnumTel     BInputmodeEnum = "tel"
-	BInputmodeEnumText    BInputmodeEnum = "text"
 )
 
 type BSpellcheckEnum string

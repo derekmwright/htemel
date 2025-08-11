@@ -79,9 +79,9 @@ const (
 type TheadContenteditableEnum string
 
 const (
-	TheadContenteditableEnumFalse         TheadContenteditableEnum = "false"
 	TheadContenteditableEnumPlaintextOnly TheadContenteditableEnum = "plaintext-only"
 	TheadContenteditableEnumTrue          TheadContenteditableEnum = "true"
+	TheadContenteditableEnumFalse         TheadContenteditableEnum = "false"
 	TheadContenteditableEnumEmpty         TheadContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type TheadDraggableEnum string
 
 const (
-	TheadDraggableEnumTrue  TheadDraggableEnum = "true"
 	TheadDraggableEnumFalse TheadDraggableEnum = "false"
+	TheadDraggableEnumTrue  TheadDraggableEnum = "true"
 )
 
 type TheadEnterkeyhintEnum string
 
 const (
-	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
-	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
 	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
 	TheadEnterkeyhintEnumGo       TheadEnterkeyhintEnum = "go"
 	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
 	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
+	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
+	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 )
 
 type TheadHiddenEnum string

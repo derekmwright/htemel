@@ -77,12 +77,12 @@ const (
 type VideoAutocapitalizeEnum string
 
 const (
+	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
+	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
 	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
 	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
 	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
-	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
-	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
 )
 
 type VideoAutocorrectEnum string
@@ -96,18 +96,18 @@ const (
 type VideoContenteditableEnum string
 
 const (
+	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
 	VideoContenteditableEnumPlaintextOnly VideoContenteditableEnum = "plaintext-only"
 	VideoContenteditableEnumTrue          VideoContenteditableEnum = "true"
-	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
 	VideoContenteditableEnumEmpty         VideoContenteditableEnum = ""
 )
 
 type VideoDirEnum string
 
 const (
+	VideoDirEnumRtl  VideoDirEnum = "rtl"
 	VideoDirEnumAuto VideoDirEnum = "auto"
 	VideoDirEnumLtr  VideoDirEnum = "ltr"
-	VideoDirEnumRtl  VideoDirEnum = "rtl"
 )
 
 type VideoDraggableEnum string
@@ -120,13 +120,13 @@ const (
 type VideoEnterkeyhintEnum string
 
 const (
+	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
+	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
+	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
 	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
 	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
 	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
 	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
-	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
-	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
-	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
 )
 
 type VideoHiddenEnum string

@@ -60,12 +60,12 @@ func (e *H4Element) AddIndent(i int) {
 type H4AutocapitalizeEnum string
 
 const (
-	H4AutocapitalizeEnumNone       H4AutocapitalizeEnum = "none"
-	H4AutocapitalizeEnumOff        H4AutocapitalizeEnum = "off"
-	H4AutocapitalizeEnumOn         H4AutocapitalizeEnum = "on"
 	H4AutocapitalizeEnumSentences  H4AutocapitalizeEnum = "sentences"
 	H4AutocapitalizeEnumWords      H4AutocapitalizeEnum = "words"
 	H4AutocapitalizeEnumCharacters H4AutocapitalizeEnum = "characters"
+	H4AutocapitalizeEnumNone       H4AutocapitalizeEnum = "none"
+	H4AutocapitalizeEnumOff        H4AutocapitalizeEnum = "off"
+	H4AutocapitalizeEnumOn         H4AutocapitalizeEnum = "on"
 )
 
 type H4AutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type H4DirEnum string
 
 const (
+	H4DirEnumRtl  H4DirEnum = "rtl"
 	H4DirEnumAuto H4DirEnum = "auto"
 	H4DirEnumLtr  H4DirEnum = "ltr"
-	H4DirEnumRtl  H4DirEnum = "rtl"
 )
 
 type H4DraggableEnum string
@@ -103,13 +103,13 @@ const (
 type H4EnterkeyhintEnum string
 
 const (
+	H4EnterkeyhintEnumSearch   H4EnterkeyhintEnum = "search"
 	H4EnterkeyhintEnumSend     H4EnterkeyhintEnum = "send"
 	H4EnterkeyhintEnumDone     H4EnterkeyhintEnum = "done"
 	H4EnterkeyhintEnumEnter    H4EnterkeyhintEnum = "enter"
 	H4EnterkeyhintEnumGo       H4EnterkeyhintEnum = "go"
 	H4EnterkeyhintEnumNext     H4EnterkeyhintEnum = "next"
 	H4EnterkeyhintEnumPrevious H4EnterkeyhintEnum = "previous"
-	H4EnterkeyhintEnumSearch   H4EnterkeyhintEnum = "search"
 )
 
 type H4HiddenEnum string
@@ -123,7 +123,6 @@ const (
 type H4InputmodeEnum string
 
 const (
-	H4InputmodeEnumTel     H4InputmodeEnum = "tel"
 	H4InputmodeEnumText    H4InputmodeEnum = "text"
 	H4InputmodeEnumUrl     H4InputmodeEnum = "url"
 	H4InputmodeEnumDecimal H4InputmodeEnum = "decimal"
@@ -131,6 +130,7 @@ const (
 	H4InputmodeEnumNone    H4InputmodeEnum = "none"
 	H4InputmodeEnumNumeric H4InputmodeEnum = "numeric"
 	H4InputmodeEnumSearch  H4InputmodeEnum = "search"
+	H4InputmodeEnumTel     H4InputmodeEnum = "tel"
 )
 
 type H4SpellcheckEnum string

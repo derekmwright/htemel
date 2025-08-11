@@ -60,12 +60,12 @@ func (e *BdiElement) AddIndent(i int) {
 type BdiAutocapitalizeEnum string
 
 const (
+	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
+	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
 	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
 	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 	BdiAutocapitalizeEnumNone       BdiAutocapitalizeEnum = "none"
 	BdiAutocapitalizeEnumOff        BdiAutocapitalizeEnum = "off"
-	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
-	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
 )
 
 type BdiAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type BdiContenteditableEnum string
 
 const (
-	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
 	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
 	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
+	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
 	BdiContenteditableEnumEmpty         BdiContenteditableEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type BdiEnterkeyhintEnum string
 
 const (
-	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
-	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 	BdiEnterkeyhintEnumNext     BdiEnterkeyhintEnum = "next"
 	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
 	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
 	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
 	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
+	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
+	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 )
 
 type BdiHiddenEnum string
 
 const (
-	BdiHiddenEnumHidden     BdiHiddenEnum = "hidden"
 	BdiHiddenEnumUntilFound BdiHiddenEnum = "until-found"
+	BdiHiddenEnumHidden     BdiHiddenEnum = "hidden"
 	BdiHiddenEnumEmpty      BdiHiddenEnum = ""
 )
 
 type BdiInputmodeEnum string
 
 const (
-	BdiInputmodeEnumNone    BdiInputmodeEnum = "none"
-	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
 	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
 	BdiInputmodeEnumTel     BdiInputmodeEnum = "tel"
 	BdiInputmodeEnumText    BdiInputmodeEnum = "text"
 	BdiInputmodeEnumUrl     BdiInputmodeEnum = "url"
 	BdiInputmodeEnumDecimal BdiInputmodeEnum = "decimal"
 	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
+	BdiInputmodeEnumNone    BdiInputmodeEnum = "none"
+	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
 )
 
 type BdiSpellcheckEnum string

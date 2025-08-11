@@ -60,12 +60,12 @@ func (e *SubElement) AddIndent(i int) {
 type SubAutocapitalizeEnum string
 
 const (
+	SubAutocapitalizeEnumSentences  SubAutocapitalizeEnum = "sentences"
+	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
 	SubAutocapitalizeEnumCharacters SubAutocapitalizeEnum = "characters"
 	SubAutocapitalizeEnumNone       SubAutocapitalizeEnum = "none"
 	SubAutocapitalizeEnumOff        SubAutocapitalizeEnum = "off"
 	SubAutocapitalizeEnumOn         SubAutocapitalizeEnum = "on"
-	SubAutocapitalizeEnumSentences  SubAutocapitalizeEnum = "sentences"
-	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
 )
 
 type SubAutocorrectEnum string
@@ -103,41 +103,41 @@ const (
 type SubEnterkeyhintEnum string
 
 const (
-	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
 	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
 	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
 	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
 	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
+	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 )
 
 type SubHiddenEnum string
 
 const (
-	SubHiddenEnumHidden     SubHiddenEnum = "hidden"
 	SubHiddenEnumUntilFound SubHiddenEnum = "until-found"
+	SubHiddenEnumHidden     SubHiddenEnum = "hidden"
 	SubHiddenEnumEmpty      SubHiddenEnum = ""
 )
 
 type SubInputmodeEnum string
 
 const (
-	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
-	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
 	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
 	SubInputmodeEnumText    SubInputmodeEnum = "text"
 	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
 	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
 	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
 	SubInputmodeEnumNone    SubInputmodeEnum = "none"
+	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
+	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
 )
 
 type SubSpellcheckEnum string
 
 const (
-	SubSpellcheckEnumTrue  SubSpellcheckEnum = "true"
 	SubSpellcheckEnumFalse SubSpellcheckEnum = "false"
+	SubSpellcheckEnumTrue  SubSpellcheckEnum = "true"
 	SubSpellcheckEnumEmpty SubSpellcheckEnum = ""
 )
 

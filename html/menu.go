@@ -60,12 +60,12 @@ func (e *MenuElement) AddIndent(i int) {
 type MenuAutocapitalizeEnum string
 
 const (
-	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
-	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
 	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
 	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
 	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
+	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
+	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 )
 
 type MenuAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type MenuDirEnum string
 
 const (
-	MenuDirEnumAuto MenuDirEnum = "auto"
 	MenuDirEnumLtr  MenuDirEnum = "ltr"
 	MenuDirEnumRtl  MenuDirEnum = "rtl"
+	MenuDirEnumAuto MenuDirEnum = "auto"
 )
 
 type MenuDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
-	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
-	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
-	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
 	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
 	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
+	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
+	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
+	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
 )
 
 type MenuHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type MenuInputmodeEnum string
 
 const (
-	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
-	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
-	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
-	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
 	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
 	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
+	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
+	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
+	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
+	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
 )
 
 type MenuSpellcheckEnum string
 
 const (
-	MenuSpellcheckEnumTrue  MenuSpellcheckEnum = "true"
 	MenuSpellcheckEnumFalse MenuSpellcheckEnum = "false"
+	MenuSpellcheckEnumTrue  MenuSpellcheckEnum = "true"
 	MenuSpellcheckEnumEmpty MenuSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type MenuWritingsuggestionsEnum string
 
 const (
-	MenuWritingsuggestionsEnumFalse MenuWritingsuggestionsEnum = "false"
 	MenuWritingsuggestionsEnumTrue  MenuWritingsuggestionsEnum = "true"
+	MenuWritingsuggestionsEnumFalse MenuWritingsuggestionsEnum = "false"
 	MenuWritingsuggestionsEnumEmpty MenuWritingsuggestionsEnum = ""
 )
 

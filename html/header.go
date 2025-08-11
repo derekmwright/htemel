@@ -60,12 +60,12 @@ func (e *HeaderElement) AddIndent(i int) {
 type HeaderAutocapitalizeEnum string
 
 const (
+	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
 	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
 	HeaderAutocapitalizeEnumNone       HeaderAutocapitalizeEnum = "none"
 	HeaderAutocapitalizeEnumOff        HeaderAutocapitalizeEnum = "off"
 	HeaderAutocapitalizeEnumOn         HeaderAutocapitalizeEnum = "on"
 	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
-	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
 )
 
 type HeaderAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type HeaderDirEnum string
 
 const (
-	HeaderDirEnumRtl  HeaderDirEnum = "rtl"
 	HeaderDirEnumAuto HeaderDirEnum = "auto"
 	HeaderDirEnumLtr  HeaderDirEnum = "ltr"
+	HeaderDirEnumRtl  HeaderDirEnum = "rtl"
 )
 
 type HeaderDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type HeaderEnterkeyhintEnum string
 
 const (
-	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
-	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
 	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
 	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
 	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
 	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
+	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
+	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
 )
 
 type HeaderHiddenEnum string
@@ -123,29 +123,29 @@ const (
 type HeaderInputmodeEnum string
 
 const (
+	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
+	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
+	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
 	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 	HeaderInputmodeEnumUrl     HeaderInputmodeEnum = "url"
 	HeaderInputmodeEnumDecimal HeaderInputmodeEnum = "decimal"
 	HeaderInputmodeEnumEmail   HeaderInputmodeEnum = "email"
 	HeaderInputmodeEnumNone    HeaderInputmodeEnum = "none"
-	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
-	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
-	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
 )
 
 type HeaderSpellcheckEnum string
 
 const (
-	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
 	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
+	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
 	HeaderSpellcheckEnumEmpty HeaderSpellcheckEnum = ""
 )
 
 type HeaderTranslateEnum string
 
 const (
-	HeaderTranslateEnumYes   HeaderTranslateEnum = "yes"
 	HeaderTranslateEnumNo    HeaderTranslateEnum = "no"
+	HeaderTranslateEnumYes   HeaderTranslateEnum = "yes"
 	HeaderTranslateEnumEmpty HeaderTranslateEnum = ""
 )
 

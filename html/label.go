@@ -60,19 +60,19 @@ func (e *LabelElement) AddIndent(i int) {
 type LabelAutocapitalizeEnum string
 
 const (
+	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
 	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 	LabelAutocapitalizeEnumCharacters LabelAutocapitalizeEnum = "characters"
 	LabelAutocapitalizeEnumNone       LabelAutocapitalizeEnum = "none"
 	LabelAutocapitalizeEnumOff        LabelAutocapitalizeEnum = "off"
 	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
-	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
 )
 
 type LabelAutocorrectEnum string
 
 const (
-	LabelAutocorrectEnumOn    LabelAutocorrectEnum = "on"
 	LabelAutocorrectEnumOff   LabelAutocorrectEnum = "off"
+	LabelAutocorrectEnumOn    LabelAutocorrectEnum = "on"
 	LabelAutocorrectEnumEmpty LabelAutocorrectEnum = ""
 )
 
@@ -123,21 +123,21 @@ const (
 type LabelInputmodeEnum string
 
 const (
-	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
-	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
 	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
 	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
 	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
 	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
+	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
+	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 )
 
 type LabelSpellcheckEnum string
 
 const (
-	LabelSpellcheckEnumTrue  LabelSpellcheckEnum = "true"
 	LabelSpellcheckEnumFalse LabelSpellcheckEnum = "false"
+	LabelSpellcheckEnumTrue  LabelSpellcheckEnum = "true"
 	LabelSpellcheckEnumEmpty LabelSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type LabelWritingsuggestionsEnum string
 
 const (
-	LabelWritingsuggestionsEnumTrue  LabelWritingsuggestionsEnum = "true"
 	LabelWritingsuggestionsEnumFalse LabelWritingsuggestionsEnum = "false"
+	LabelWritingsuggestionsEnumTrue  LabelWritingsuggestionsEnum = "true"
 	LabelWritingsuggestionsEnumEmpty LabelWritingsuggestionsEnum = ""
 )
 

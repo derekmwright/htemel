@@ -79,18 +79,18 @@ const (
 type SContenteditableEnum string
 
 const (
+	SContenteditableEnumTrue          SContenteditableEnum = "true"
 	SContenteditableEnumFalse         SContenteditableEnum = "false"
 	SContenteditableEnumPlaintextOnly SContenteditableEnum = "plaintext-only"
-	SContenteditableEnumTrue          SContenteditableEnum = "true"
 	SContenteditableEnumEmpty         SContenteditableEnum = ""
 )
 
 type SDirEnum string
 
 const (
+	SDirEnumRtl  SDirEnum = "rtl"
 	SDirEnumAuto SDirEnum = "auto"
 	SDirEnumLtr  SDirEnum = "ltr"
-	SDirEnumRtl  SDirEnum = "rtl"
 )
 
 type SDraggableEnum string
@@ -115,37 +115,37 @@ const (
 type SHiddenEnum string
 
 const (
-	SHiddenEnumHidden     SHiddenEnum = "hidden"
 	SHiddenEnumUntilFound SHiddenEnum = "until-found"
+	SHiddenEnumHidden     SHiddenEnum = "hidden"
 	SHiddenEnumEmpty      SHiddenEnum = ""
 )
 
 type SInputmodeEnum string
 
 const (
-	SInputmodeEnumText    SInputmodeEnum = "text"
-	SInputmodeEnumUrl     SInputmodeEnum = "url"
-	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
-	SInputmodeEnumEmail   SInputmodeEnum = "email"
 	SInputmodeEnumNone    SInputmodeEnum = "none"
 	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
 	SInputmodeEnumSearch  SInputmodeEnum = "search"
 	SInputmodeEnumTel     SInputmodeEnum = "tel"
+	SInputmodeEnumText    SInputmodeEnum = "text"
+	SInputmodeEnumUrl     SInputmodeEnum = "url"
+	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
+	SInputmodeEnumEmail   SInputmodeEnum = "email"
 )
 
 type SSpellcheckEnum string
 
 const (
-	SSpellcheckEnumTrue  SSpellcheckEnum = "true"
 	SSpellcheckEnumFalse SSpellcheckEnum = "false"
+	SSpellcheckEnumTrue  SSpellcheckEnum = "true"
 	SSpellcheckEnumEmpty SSpellcheckEnum = ""
 )
 
 type STranslateEnum string
 
 const (
-	STranslateEnumNo    STranslateEnum = "no"
 	STranslateEnumYes   STranslateEnum = "yes"
+	STranslateEnumNo    STranslateEnum = "no"
 	STranslateEnumEmpty STranslateEnum = ""
 )
 

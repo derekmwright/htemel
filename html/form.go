@@ -60,8 +60,8 @@ func (e *FormElement) AddIndent(i int) {
 type FormAutocompleteEnum string
 
 const (
-	FormAutocompleteEnumOff FormAutocompleteEnum = "off"
 	FormAutocompleteEnumOn  FormAutocompleteEnum = "on"
+	FormAutocompleteEnumOff FormAutocompleteEnum = "off"
 )
 
 type FormMethodEnum string
@@ -75,12 +75,12 @@ const (
 type FormAutocapitalizeEnum string
 
 const (
-	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
 	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
 	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
+	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
 )
 
 type FormAutocorrectEnum string
@@ -111,20 +111,20 @@ const (
 type FormDraggableEnum string
 
 const (
-	FormDraggableEnumTrue  FormDraggableEnum = "true"
 	FormDraggableEnumFalse FormDraggableEnum = "false"
+	FormDraggableEnumTrue  FormDraggableEnum = "true"
 )
 
 type FormEnterkeyhintEnum string
 
 const (
-	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
-	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
-	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
 	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
 	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
+	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
+	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
+	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 )
 
 type FormHiddenEnum string
@@ -138,7 +138,6 @@ const (
 type FormInputmodeEnum string
 
 const (
-	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
 	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
 	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
 	FormInputmodeEnumText    FormInputmodeEnum = "text"
@@ -146,6 +145,7 @@ const (
 	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
 	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
 	FormInputmodeEnumNone    FormInputmodeEnum = "none"
+	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
 )
 
 type FormSpellcheckEnum string
@@ -167,8 +167,8 @@ const (
 type FormWritingsuggestionsEnum string
 
 const (
-	FormWritingsuggestionsEnumFalse FormWritingsuggestionsEnum = "false"
 	FormWritingsuggestionsEnumTrue  FormWritingsuggestionsEnum = "true"
+	FormWritingsuggestionsEnumFalse FormWritingsuggestionsEnum = "false"
 	FormWritingsuggestionsEnumEmpty FormWritingsuggestionsEnum = ""
 )
 

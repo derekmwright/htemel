@@ -71,8 +71,8 @@ const (
 type StrongAutocorrectEnum string
 
 const (
-	StrongAutocorrectEnumOff   StrongAutocorrectEnum = "off"
 	StrongAutocorrectEnumOn    StrongAutocorrectEnum = "on"
+	StrongAutocorrectEnumOff   StrongAutocorrectEnum = "off"
 	StrongAutocorrectEnumEmpty StrongAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
+	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
+	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
+	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
 	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
-	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
-	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
-	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 )
 
 type StrongHiddenEnum string
@@ -123,29 +123,29 @@ const (
 type StrongInputmodeEnum string
 
 const (
+	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
+	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
 	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
 	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
 	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
 	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
 	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
-	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
-	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
 )
 
 type StrongSpellcheckEnum string
 
 const (
-	StrongSpellcheckEnumTrue  StrongSpellcheckEnum = "true"
 	StrongSpellcheckEnumFalse StrongSpellcheckEnum = "false"
+	StrongSpellcheckEnumTrue  StrongSpellcheckEnum = "true"
 	StrongSpellcheckEnumEmpty StrongSpellcheckEnum = ""
 )
 
 type StrongTranslateEnum string
 
 const (
-	StrongTranslateEnumYes   StrongTranslateEnum = "yes"
 	StrongTranslateEnumNo    StrongTranslateEnum = "no"
+	StrongTranslateEnumYes   StrongTranslateEnum = "yes"
 	StrongTranslateEnumEmpty StrongTranslateEnum = ""
 )
 

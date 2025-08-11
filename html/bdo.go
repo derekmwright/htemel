@@ -71,8 +71,8 @@ const (
 type BdoAutocorrectEnum string
 
 const (
-	BdoAutocorrectEnumOn    BdoAutocorrectEnum = "on"
 	BdoAutocorrectEnumOff   BdoAutocorrectEnum = "off"
+	BdoAutocorrectEnumOn    BdoAutocorrectEnum = "on"
 	BdoAutocorrectEnumEmpty BdoAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type BdoDirEnum string
 
 const (
+	BdoDirEnumRtl  BdoDirEnum = "rtl"
 	BdoDirEnumAuto BdoDirEnum = "auto"
 	BdoDirEnumLtr  BdoDirEnum = "ltr"
-	BdoDirEnumRtl  BdoDirEnum = "rtl"
 )
 
 type BdoDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type BdoEnterkeyhintEnum string
 
 const (
+	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
+	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
+	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
 	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
 	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
 	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
-	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
-	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
-	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
 )
 
 type BdoHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type BdoInputmodeEnum string
 
 const (
-	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
-	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
-	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
 	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
 	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
 	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
 	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
 	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
+	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
+	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
+	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
 )
 
 type BdoSpellcheckEnum string

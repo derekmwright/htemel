@@ -60,28 +60,28 @@ func (e *H3Element) AddIndent(i int) {
 type H3AutocapitalizeEnum string
 
 const (
-	H3AutocapitalizeEnumWords      H3AutocapitalizeEnum = "words"
 	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
 	H3AutocapitalizeEnumNone       H3AutocapitalizeEnum = "none"
 	H3AutocapitalizeEnumOff        H3AutocapitalizeEnum = "off"
 	H3AutocapitalizeEnumOn         H3AutocapitalizeEnum = "on"
 	H3AutocapitalizeEnumSentences  H3AutocapitalizeEnum = "sentences"
+	H3AutocapitalizeEnumWords      H3AutocapitalizeEnum = "words"
 )
 
 type H3AutocorrectEnum string
 
 const (
-	H3AutocorrectEnumOn    H3AutocorrectEnum = "on"
 	H3AutocorrectEnumOff   H3AutocorrectEnum = "off"
+	H3AutocorrectEnumOn    H3AutocorrectEnum = "on"
 	H3AutocorrectEnumEmpty H3AutocorrectEnum = ""
 )
 
 type H3ContenteditableEnum string
 
 const (
+	H3ContenteditableEnumTrue          H3ContenteditableEnum = "true"
 	H3ContenteditableEnumFalse         H3ContenteditableEnum = "false"
 	H3ContenteditableEnumPlaintextOnly H3ContenteditableEnum = "plaintext-only"
-	H3ContenteditableEnumTrue          H3ContenteditableEnum = "true"
 	H3ContenteditableEnumEmpty         H3ContenteditableEnum = ""
 )
 
@@ -96,41 +96,41 @@ const (
 type H3DraggableEnum string
 
 const (
-	H3DraggableEnumTrue  H3DraggableEnum = "true"
 	H3DraggableEnumFalse H3DraggableEnum = "false"
+	H3DraggableEnumTrue  H3DraggableEnum = "true"
 )
 
 type H3EnterkeyhintEnum string
 
 const (
+	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
+	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
 	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
 	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
 	H3EnterkeyhintEnumSend     H3EnterkeyhintEnum = "send"
 	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
 	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
-	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
-	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
 )
 
 type H3HiddenEnum string
 
 const (
-	H3HiddenEnumUntilFound H3HiddenEnum = "until-found"
 	H3HiddenEnumHidden     H3HiddenEnum = "hidden"
+	H3HiddenEnumUntilFound H3HiddenEnum = "until-found"
 	H3HiddenEnumEmpty      H3HiddenEnum = ""
 )
 
 type H3InputmodeEnum string
 
 const (
+	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
+	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
 	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
 	H3InputmodeEnumNone    H3InputmodeEnum = "none"
 	H3InputmodeEnumNumeric H3InputmodeEnum = "numeric"
 	H3InputmodeEnumSearch  H3InputmodeEnum = "search"
 	H3InputmodeEnumTel     H3InputmodeEnum = "tel"
 	H3InputmodeEnumText    H3InputmodeEnum = "text"
-	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
-	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
 )
 
 type H3SpellcheckEnum string

@@ -52,12 +52,12 @@ func (e *BrElement) AddIndent(i int) {
 type BrAutocapitalizeEnum string
 
 const (
+	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
+	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 	BrAutocapitalizeEnumOff        BrAutocapitalizeEnum = "off"
 	BrAutocapitalizeEnumOn         BrAutocapitalizeEnum = "on"
 	BrAutocapitalizeEnumSentences  BrAutocapitalizeEnum = "sentences"
 	BrAutocapitalizeEnumWords      BrAutocapitalizeEnum = "words"
-	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
-	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 )
 
 type BrAutocorrectEnum string
@@ -80,9 +80,9 @@ const (
 type BrDirEnum string
 
 const (
+	BrDirEnumAuto BrDirEnum = "auto"
 	BrDirEnumLtr  BrDirEnum = "ltr"
 	BrDirEnumRtl  BrDirEnum = "rtl"
-	BrDirEnumAuto BrDirEnum = "auto"
 )
 
 type BrDraggableEnum string
@@ -95,13 +95,13 @@ const (
 type BrEnterkeyhintEnum string
 
 const (
-	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
-	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
-	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
 	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
 	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
 	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
+	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
+	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
+	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
 )
 
 type BrHiddenEnum string
@@ -128,8 +128,8 @@ const (
 type BrSpellcheckEnum string
 
 const (
-	BrSpellcheckEnumTrue  BrSpellcheckEnum = "true"
 	BrSpellcheckEnumFalse BrSpellcheckEnum = "false"
+	BrSpellcheckEnumTrue  BrSpellcheckEnum = "true"
 	BrSpellcheckEnumEmpty BrSpellcheckEnum = ""
 )
 

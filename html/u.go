@@ -79,18 +79,18 @@ const (
 type UContenteditableEnum string
 
 const (
-	UContenteditableEnumTrue          UContenteditableEnum = "true"
 	UContenteditableEnumFalse         UContenteditableEnum = "false"
 	UContenteditableEnumPlaintextOnly UContenteditableEnum = "plaintext-only"
+	UContenteditableEnumTrue          UContenteditableEnum = "true"
 	UContenteditableEnumEmpty         UContenteditableEnum = ""
 )
 
 type UDirEnum string
 
 const (
+	UDirEnumRtl  UDirEnum = "rtl"
 	UDirEnumAuto UDirEnum = "auto"
 	UDirEnumLtr  UDirEnum = "ltr"
-	UDirEnumRtl  UDirEnum = "rtl"
 )
 
 type UDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type UEnterkeyhintEnum string
 
 const (
+	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
+	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
 	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
 	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
-	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
-	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 )
 
 type UHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type UInputmodeEnum string
 
 const (
-	UInputmodeEnumEmail   UInputmodeEnum = "email"
 	UInputmodeEnumNone    UInputmodeEnum = "none"
 	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
 	UInputmodeEnumSearch  UInputmodeEnum = "search"
@@ -131,6 +130,7 @@ const (
 	UInputmodeEnumText    UInputmodeEnum = "text"
 	UInputmodeEnumUrl     UInputmodeEnum = "url"
 	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
+	UInputmodeEnumEmail   UInputmodeEnum = "email"
 )
 
 type USpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type UWritingsuggestionsEnum string
 
 const (
-	UWritingsuggestionsEnumFalse UWritingsuggestionsEnum = "false"
 	UWritingsuggestionsEnumTrue  UWritingsuggestionsEnum = "true"
+	UWritingsuggestionsEnumFalse UWritingsuggestionsEnum = "false"
 	UWritingsuggestionsEnumEmpty UWritingsuggestionsEnum = ""
 )
 

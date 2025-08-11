@@ -52,29 +52,29 @@ func (e *TrackElement) AddIndent(i int) {
 type TrackKindEnum string
 
 const (
-	TrackKindEnumMetadata     TrackKindEnum = "metadata"
-	TrackKindEnumSubtitles    TrackKindEnum = "subtitles"
 	TrackKindEnumCaptions     TrackKindEnum = "captions"
 	TrackKindEnumChapters     TrackKindEnum = "chapters"
 	TrackKindEnumDescriptions TrackKindEnum = "descriptions"
+	TrackKindEnumMetadata     TrackKindEnum = "metadata"
+	TrackKindEnumSubtitles    TrackKindEnum = "subtitles"
 )
 
 type TrackAutocapitalizeEnum string
 
 const (
+	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
+	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
 	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
 	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
 	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
 	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
-	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
-	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
 )
 
 type TrackAutocorrectEnum string
 
 const (
-	TrackAutocorrectEnumOn    TrackAutocorrectEnum = "on"
 	TrackAutocorrectEnumOff   TrackAutocorrectEnum = "off"
+	TrackAutocorrectEnumOn    TrackAutocorrectEnum = "on"
 	TrackAutocorrectEnumEmpty TrackAutocorrectEnum = ""
 )
 
@@ -105,13 +105,13 @@ const (
 type TrackEnterkeyhintEnum string
 
 const (
-	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
-	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
 	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
 	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
 	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
+	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
+	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 )
 
 type TrackHiddenEnum string
@@ -125,14 +125,14 @@ const (
 type TrackInputmodeEnum string
 
 const (
-	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
-	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
 	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
 	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
 	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
 	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
 	TrackInputmodeEnumDecimal TrackInputmodeEnum = "decimal"
 	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
+	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
+	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
 )
 
 type TrackSpellcheckEnum string

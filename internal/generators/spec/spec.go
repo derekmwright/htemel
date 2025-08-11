@@ -43,6 +43,12 @@ func attrUnmarshal(in []json.RawMessage) ([]Attribute, error) {
 				return nil, err
 			}
 			out = append(out, a)
+		case "AttributeTypeFloat":
+			a := &AttributeTypeFloat{}
+			if err := json.Unmarshal(attr, &a); err != nil {
+				return nil, err
+			}
+			out = append(out, a)
 		case "AttributeTypeBool":
 			a := &AttributeTypeBool{}
 			if err := json.Unmarshal(attr, &a); err != nil {
@@ -199,6 +205,29 @@ func (a AttributeTypeNumber) MarshalJSON() ([]byte, error) {
 		Name:          a.Name,
 		Description:   a.Description,
 		AttributeType: "AttributeTypeNumber",
+	})
+}
+
+type AttributeTypeFloat struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+}
+
+func (a AttributeTypeFloat) isAttr() {}
+
+func (a AttributeTypeFloat) GetName() string {
+	return a.Name
+}
+
+func (a AttributeTypeFloat) MarshalJSON() ([]byte, error) {
+	return json.Marshal(&struct {
+		Name          string `json:"name"`
+		Description   string `json:"description,omitempty"`
+		AttributeType string `json:"attribute_type"`
+	}{
+		Name:          a.Name,
+		Description:   a.Description,
+		AttributeType: "AttributeTypeFloat",
 	})
 }
 

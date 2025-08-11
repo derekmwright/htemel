@@ -71,17 +71,17 @@ const (
 type UlAutocorrectEnum string
 
 const (
-	UlAutocorrectEnumOff   UlAutocorrectEnum = "off"
 	UlAutocorrectEnumOn    UlAutocorrectEnum = "on"
+	UlAutocorrectEnumOff   UlAutocorrectEnum = "off"
 	UlAutocorrectEnumEmpty UlAutocorrectEnum = ""
 )
 
 type UlContenteditableEnum string
 
 const (
+	UlContenteditableEnumTrue          UlContenteditableEnum = "true"
 	UlContenteditableEnumFalse         UlContenteditableEnum = "false"
 	UlContenteditableEnumPlaintextOnly UlContenteditableEnum = "plaintext-only"
-	UlContenteditableEnumTrue          UlContenteditableEnum = "true"
 	UlContenteditableEnumEmpty         UlContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
-	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
-	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
-	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
 	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
 	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
 	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
+	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
+	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
+	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
 )
 
 type UlHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type UlInputmodeEnum string
 
 const (
+	UlInputmodeEnumText    UlInputmodeEnum = "text"
+	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
 	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
 	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
 	UlInputmodeEnumNone    UlInputmodeEnum = "none"
 	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
 	UlInputmodeEnumSearch  UlInputmodeEnum = "search"
 	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
-	UlInputmodeEnumText    UlInputmodeEnum = "text"
-	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
 )
 
 type UlSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type UlWritingsuggestionsEnum string
 
 const (
-	UlWritingsuggestionsEnumTrue  UlWritingsuggestionsEnum = "true"
 	UlWritingsuggestionsEnumFalse UlWritingsuggestionsEnum = "false"
+	UlWritingsuggestionsEnumTrue  UlWritingsuggestionsEnum = "true"
 	UlWritingsuggestionsEnumEmpty UlWritingsuggestionsEnum = ""
 )
 

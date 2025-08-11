@@ -60,12 +60,12 @@ func (e *FigcaptionElement) AddIndent(i int) {
 type FigcaptionAutocapitalizeEnum string
 
 const (
-	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
-	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
 	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
 	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
 	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
+	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
+	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 )
 
 type FigcaptionAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type FigcaptionEnterkeyhintEnum string
 
 const (
+	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
+	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
 	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
 	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
 	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
-	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
-	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 )
 
 type FigcaptionHiddenEnum string

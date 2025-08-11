@@ -60,12 +60,12 @@ func (e *QElement) AddIndent(i int) {
 type QAutocapitalizeEnum string
 
 const (
-	QAutocapitalizeEnumSentences  QAutocapitalizeEnum = "sentences"
-	QAutocapitalizeEnumWords      QAutocapitalizeEnum = "words"
 	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
 	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 	QAutocapitalizeEnumOff        QAutocapitalizeEnum = "off"
 	QAutocapitalizeEnumOn         QAutocapitalizeEnum = "on"
+	QAutocapitalizeEnumSentences  QAutocapitalizeEnum = "sentences"
+	QAutocapitalizeEnumWords      QAutocapitalizeEnum = "words"
 )
 
 type QAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type QDirEnum string
 
 const (
+	QDirEnumRtl  QDirEnum = "rtl"
 	QDirEnumAuto QDirEnum = "auto"
 	QDirEnumLtr  QDirEnum = "ltr"
-	QDirEnumRtl  QDirEnum = "rtl"
 )
 
 type QDraggableEnum string
@@ -103,26 +103,27 @@ const (
 type QEnterkeyhintEnum string
 
 const (
+	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
+	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
 	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
 	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
 	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
-	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
-	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
 )
 
 type QHiddenEnum string
 
 const (
-	QHiddenEnumUntilFound QHiddenEnum = "until-found"
 	QHiddenEnumHidden     QHiddenEnum = "hidden"
+	QHiddenEnumUntilFound QHiddenEnum = "until-found"
 	QHiddenEnumEmpty      QHiddenEnum = ""
 )
 
 type QInputmodeEnum string
 
 const (
+	QInputmodeEnumText    QInputmodeEnum = "text"
 	QInputmodeEnumUrl     QInputmodeEnum = "url"
 	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
 	QInputmodeEnumEmail   QInputmodeEnum = "email"
@@ -130,7 +131,6 @@ const (
 	QInputmodeEnumNumeric QInputmodeEnum = "numeric"
 	QInputmodeEnumSearch  QInputmodeEnum = "search"
 	QInputmodeEnumTel     QInputmodeEnum = "tel"
-	QInputmodeEnumText    QInputmodeEnum = "text"
 )
 
 type QSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type QWritingsuggestionsEnum string
 
 const (
-	QWritingsuggestionsEnumTrue  QWritingsuggestionsEnum = "true"
 	QWritingsuggestionsEnumFalse QWritingsuggestionsEnum = "false"
+	QWritingsuggestionsEnumTrue  QWritingsuggestionsEnum = "true"
 	QWritingsuggestionsEnumEmpty QWritingsuggestionsEnum = ""
 )
 

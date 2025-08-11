@@ -60,12 +60,12 @@ func (e *SmallElement) AddIndent(i int) {
 type SmallAutocapitalizeEnum string
 
 const (
-	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
-	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
-	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
 	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
 	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
+	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
+	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
+	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 )
 
 type SmallAutocorrectEnum string
@@ -88,28 +88,28 @@ const (
 type SmallDirEnum string
 
 const (
+	SmallDirEnumAuto SmallDirEnum = "auto"
 	SmallDirEnumLtr  SmallDirEnum = "ltr"
 	SmallDirEnumRtl  SmallDirEnum = "rtl"
-	SmallDirEnumAuto SmallDirEnum = "auto"
 )
 
 type SmallDraggableEnum string
 
 const (
-	SmallDraggableEnumTrue  SmallDraggableEnum = "true"
 	SmallDraggableEnumFalse SmallDraggableEnum = "false"
+	SmallDraggableEnumTrue  SmallDraggableEnum = "true"
 )
 
 type SmallEnterkeyhintEnum string
 
 const (
+	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
 	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
 	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
 	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
 	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
-	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
 )
 
 type SmallHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SmallInputmodeEnum string
 
 const (
+	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
+	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
 	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
 	SmallInputmodeEnumSearch  SmallInputmodeEnum = "search"
 	SmallInputmodeEnumTel     SmallInputmodeEnum = "tel"
 	SmallInputmodeEnumText    SmallInputmodeEnum = "text"
 	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
 	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
-	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
-	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
 )
 
 type SmallSpellcheckEnum string

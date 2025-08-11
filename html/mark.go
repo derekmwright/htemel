@@ -60,12 +60,12 @@ func (e *MarkElement) AddIndent(i int) {
 type MarkAutocapitalizeEnum string
 
 const (
-	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
-	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
 	MarkAutocapitalizeEnumNone       MarkAutocapitalizeEnum = "none"
 	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
 	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
 	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
+	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
+	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
 )
 
 type MarkAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type MarkDirEnum string
 
 const (
+	MarkDirEnumRtl  MarkDirEnum = "rtl"
 	MarkDirEnumAuto MarkDirEnum = "auto"
 	MarkDirEnumLtr  MarkDirEnum = "ltr"
-	MarkDirEnumRtl  MarkDirEnum = "rtl"
 )
 
 type MarkDraggableEnum string
@@ -115,22 +115,22 @@ const (
 type MarkHiddenEnum string
 
 const (
-	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
 	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
+	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
 	MarkHiddenEnumEmpty      MarkHiddenEnum = ""
 )
 
 type MarkInputmodeEnum string
 
 const (
-	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
-	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
-	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
-	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
 	MarkInputmodeEnumDecimal MarkInputmodeEnum = "decimal"
 	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
 	MarkInputmodeEnumNone    MarkInputmodeEnum = "none"
 	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
+	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
+	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
+	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
+	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
 )
 
 type MarkSpellcheckEnum string

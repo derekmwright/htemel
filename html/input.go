@@ -52,16 +52,16 @@ func (e *InputElement) AddIndent(i int) {
 type InputColorspaceEnum string
 
 const (
-	InputColorspaceEnumLimitedSrgb InputColorspaceEnum = "limited-srgb"
 	InputColorspaceEnumDisplayP3   InputColorspaceEnum = "display-p3"
+	InputColorspaceEnumLimitedSrgb InputColorspaceEnum = "limited-srgb"
 )
 
 type InputFormmethodEnum string
 
 const (
+	InputFormmethodEnumDialog InputFormmethodEnum = "dialog"
 	InputFormmethodEnumGet    InputFormmethodEnum = "get"
 	InputFormmethodEnumPost   InputFormmethodEnum = "post"
-	InputFormmethodEnumDialog InputFormmethodEnum = "dialog"
 )
 
 type InputPopovertargetactionEnum string
@@ -75,46 +75,46 @@ const (
 type InputTypeEnum string
 
 const (
-	InputTypeEnumFile          InputTypeEnum = "file"
-	InputTypeEnumImage         InputTypeEnum = "image"
-	InputTypeEnumMonth         InputTypeEnum = "month"
-	InputTypeEnumUrl           InputTypeEnum = "url"
-	InputTypeEnumWeek          InputTypeEnum = "week"
+	InputTypeEnumTel           InputTypeEnum = "tel"
 	InputTypeEnumCheckbox      InputTypeEnum = "checkbox"
-	InputTypeEnumColor         InputTypeEnum = "color"
-	InputTypeEnumEmail         InputTypeEnum = "email"
+	InputTypeEnumDatetimeLocal InputTypeEnum = "datetime-local"
+	InputTypeEnumFile          InputTypeEnum = "file"
+	InputTypeEnumHidden        InputTypeEnum = "hidden"
 	InputTypeEnumNumber        InputTypeEnum = "number"
 	InputTypeEnumPassword      InputTypeEnum = "password"
-	InputTypeEnumRange         InputTypeEnum = "range"
-	InputTypeEnumTel           InputTypeEnum = "tel"
-	InputTypeEnumButton        InputTypeEnum = "button"
-	InputTypeEnumDate          InputTypeEnum = "date"
-	InputTypeEnumHidden        InputTypeEnum = "hidden"
-	InputTypeEnumReset         InputTypeEnum = "reset"
-	InputTypeEnumDatetimeLocal InputTypeEnum = "datetime-local"
 	InputTypeEnumRadio         InputTypeEnum = "radio"
-	InputTypeEnumSearch        InputTypeEnum = "search"
-	InputTypeEnumSubmit        InputTypeEnum = "submit"
+	InputTypeEnumRange         InputTypeEnum = "range"
+	InputTypeEnumEmail         InputTypeEnum = "email"
+	InputTypeEnumImage         InputTypeEnum = "image"
 	InputTypeEnumText          InputTypeEnum = "text"
 	InputTypeEnumTime          InputTypeEnum = "time"
+	InputTypeEnumWeek          InputTypeEnum = "week"
+	InputTypeEnumMonth         InputTypeEnum = "month"
+	InputTypeEnumReset         InputTypeEnum = "reset"
+	InputTypeEnumSearch        InputTypeEnum = "search"
+	InputTypeEnumUrl           InputTypeEnum = "url"
+	InputTypeEnumButton        InputTypeEnum = "button"
+	InputTypeEnumColor         InputTypeEnum = "color"
+	InputTypeEnumDate          InputTypeEnum = "date"
+	InputTypeEnumSubmit        InputTypeEnum = "submit"
 )
 
 type InputAutocapitalizeEnum string
 
 const (
-	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
 	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
 	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
 	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
 	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
+	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
 )
 
 type InputAutocorrectEnum string
 
 const (
-	InputAutocorrectEnumOn    InputAutocorrectEnum = "on"
 	InputAutocorrectEnumOff   InputAutocorrectEnum = "off"
+	InputAutocorrectEnumOn    InputAutocorrectEnum = "on"
 	InputAutocorrectEnumEmpty InputAutocorrectEnum = ""
 )
 
@@ -145,13 +145,13 @@ const (
 type InputEnterkeyhintEnum string
 
 const (
-	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
 	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
 	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
 	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
 	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
 	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
+	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 )
 
 type InputHiddenEnum string
@@ -165,29 +165,29 @@ const (
 type InputInputmodeEnum string
 
 const (
+	InputInputmodeEnumNone    InputInputmodeEnum = "none"
+	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
+	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
 	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
 	InputInputmodeEnumText    InputInputmodeEnum = "text"
 	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
 	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
 	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
-	InputInputmodeEnumNone    InputInputmodeEnum = "none"
-	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
-	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
 )
 
 type InputSpellcheckEnum string
 
 const (
-	InputSpellcheckEnumFalse InputSpellcheckEnum = "false"
 	InputSpellcheckEnumTrue  InputSpellcheckEnum = "true"
+	InputSpellcheckEnumFalse InputSpellcheckEnum = "false"
 	InputSpellcheckEnumEmpty InputSpellcheckEnum = ""
 )
 
 type InputTranslateEnum string
 
 const (
-	InputTranslateEnumNo    InputTranslateEnum = "no"
 	InputTranslateEnumYes   InputTranslateEnum = "yes"
+	InputTranslateEnumNo    InputTranslateEnum = "no"
 	InputTranslateEnumEmpty InputTranslateEnum = ""
 )
 

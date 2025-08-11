@@ -60,12 +60,12 @@ func (e *ButtonElement) AddIndent(i int) {
 type ButtonCommandEnum string
 
 const (
+	ButtonCommandEnumTogglePopover ButtonCommandEnum = "toggle-popover"
 	ButtonCommandEnumClose         ButtonCommandEnum = "close"
 	ButtonCommandEnumHidePopover   ButtonCommandEnum = "hide-popover"
 	ButtonCommandEnumRequestClose  ButtonCommandEnum = "request-close"
 	ButtonCommandEnumShowModal     ButtonCommandEnum = "show-modal"
 	ButtonCommandEnumShowPopover   ButtonCommandEnum = "show-popover"
-	ButtonCommandEnumTogglePopover ButtonCommandEnum = "toggle-popover"
 )
 
 type ButtonFormmethodEnum string
@@ -95,12 +95,12 @@ const (
 type ButtonAutocapitalizeEnum string
 
 const (
+	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
 	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
 	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
 	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
-	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 )
 
 type ButtonAutocorrectEnum string
@@ -123,9 +123,9 @@ const (
 type ButtonDirEnum string
 
 const (
-	ButtonDirEnumRtl  ButtonDirEnum = "rtl"
 	ButtonDirEnumAuto ButtonDirEnum = "auto"
 	ButtonDirEnumLtr  ButtonDirEnum = "ltr"
+	ButtonDirEnumRtl  ButtonDirEnum = "rtl"
 )
 
 type ButtonDraggableEnum string
@@ -138,13 +138,13 @@ const (
 type ButtonEnterkeyhintEnum string
 
 const (
-	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
-	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
 	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
 	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
 	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
+	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
+	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 )
 
 type ButtonHiddenEnum string
@@ -158,14 +158,14 @@ const (
 type ButtonInputmodeEnum string
 
 const (
-	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
-	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
-	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
 	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
 	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
 	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
 	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
 	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
+	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
+	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
+	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
 )
 
 type ButtonSpellcheckEnum string
@@ -179,8 +179,8 @@ const (
 type ButtonTranslateEnum string
 
 const (
-	ButtonTranslateEnumNo    ButtonTranslateEnum = "no"
 	ButtonTranslateEnumYes   ButtonTranslateEnum = "yes"
+	ButtonTranslateEnumNo    ButtonTranslateEnum = "no"
 	ButtonTranslateEnumEmpty ButtonTranslateEnum = ""
 )
 

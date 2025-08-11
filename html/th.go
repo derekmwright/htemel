@@ -79,18 +79,18 @@ const (
 type ThContenteditableEnum string
 
 const (
+	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumPlaintextOnly ThContenteditableEnum = "plaintext-only"
 	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
-	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumEmpty         ThContenteditableEnum = ""
 )
 
 type ThDirEnum string
 
 const (
-	ThDirEnumAuto ThDirEnum = "auto"
 	ThDirEnumLtr  ThDirEnum = "ltr"
 	ThDirEnumRtl  ThDirEnum = "rtl"
+	ThDirEnumAuto ThDirEnum = "auto"
 )
 
 type ThDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type ThEnterkeyhintEnum string
 
 const (
-	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
-	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
-	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
 	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
 	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
+	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
+	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
+	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 )
 
 type ThHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type ThInputmodeEnum string
 
 const (
-	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
-	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
-	ThInputmodeEnumNone    ThInputmodeEnum = "none"
-	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
 	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
 	ThInputmodeEnumText    ThInputmodeEnum = "text"
 	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
+	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
+	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
+	ThInputmodeEnumNone    ThInputmodeEnum = "none"
+	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
 )
 
 type ThSpellcheckEnum string
 
 const (
-	ThSpellcheckEnumFalse ThSpellcheckEnum = "false"
 	ThSpellcheckEnumTrue  ThSpellcheckEnum = "true"
+	ThSpellcheckEnumFalse ThSpellcheckEnum = "false"
 	ThSpellcheckEnumEmpty ThSpellcheckEnum = ""
 )
 

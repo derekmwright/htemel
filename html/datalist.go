@@ -71,8 +71,8 @@ const (
 type DatalistAutocorrectEnum string
 
 const (
-	DatalistAutocorrectEnumOff   DatalistAutocorrectEnum = "off"
 	DatalistAutocorrectEnumOn    DatalistAutocorrectEnum = "on"
+	DatalistAutocorrectEnumOff   DatalistAutocorrectEnum = "off"
 	DatalistAutocorrectEnumEmpty DatalistAutocorrectEnum = ""
 )
 
@@ -115,29 +115,29 @@ const (
 type DatalistHiddenEnum string
 
 const (
-	DatalistHiddenEnumUntilFound DatalistHiddenEnum = "until-found"
 	DatalistHiddenEnumHidden     DatalistHiddenEnum = "hidden"
+	DatalistHiddenEnumUntilFound DatalistHiddenEnum = "until-found"
 	DatalistHiddenEnumEmpty      DatalistHiddenEnum = ""
 )
 
 type DatalistInputmodeEnum string
 
 const (
-	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
-	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
 	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
 	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
 	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
 	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
 	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
 	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
+	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
+	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
 )
 
 type DatalistSpellcheckEnum string
 
 const (
-	DatalistSpellcheckEnumTrue  DatalistSpellcheckEnum = "true"
 	DatalistSpellcheckEnumFalse DatalistSpellcheckEnum = "false"
+	DatalistSpellcheckEnumTrue  DatalistSpellcheckEnum = "true"
 	DatalistSpellcheckEnumEmpty DatalistSpellcheckEnum = ""
 )
 

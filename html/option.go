@@ -71,17 +71,17 @@ const (
 type OptionAutocorrectEnum string
 
 const (
-	OptionAutocorrectEnumOn    OptionAutocorrectEnum = "on"
 	OptionAutocorrectEnumOff   OptionAutocorrectEnum = "off"
+	OptionAutocorrectEnumOn    OptionAutocorrectEnum = "on"
 	OptionAutocorrectEnumEmpty OptionAutocorrectEnum = ""
 )
 
 type OptionContenteditableEnum string
 
 const (
+	OptionContenteditableEnumFalse         OptionContenteditableEnum = "false"
 	OptionContenteditableEnumPlaintextOnly OptionContenteditableEnum = "plaintext-only"
 	OptionContenteditableEnumTrue          OptionContenteditableEnum = "true"
-	OptionContenteditableEnumFalse         OptionContenteditableEnum = "false"
 	OptionContenteditableEnumEmpty         OptionContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type OptionDraggableEnum string
 
 const (
-	OptionDraggableEnumTrue  OptionDraggableEnum = "true"
 	OptionDraggableEnumFalse OptionDraggableEnum = "false"
+	OptionDraggableEnumTrue  OptionDraggableEnum = "true"
 )
 
 type OptionEnterkeyhintEnum string
 
 const (
+	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
+	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
+	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
 	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
 	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
 	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
-	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
-	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
-	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
 )
 
 type OptionHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type OptionInputmodeEnum string
 
 const (
+	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
+	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
+	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
 	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
 	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
 	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
 	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
 	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
-	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
-	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
-	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
 )
 
 type OptionSpellcheckEnum string
@@ -152,12 +152,36 @@ const (
 type OptionWritingsuggestionsEnum string
 
 const (
-	OptionWritingsuggestionsEnumFalse OptionWritingsuggestionsEnum = "false"
 	OptionWritingsuggestionsEnumTrue  OptionWritingsuggestionsEnum = "true"
+	OptionWritingsuggestionsEnumFalse OptionWritingsuggestionsEnum = "false"
 	OptionWritingsuggestionsEnumEmpty OptionWritingsuggestionsEnum = ""
 )
 
 type optionAttrs map[string]any
+
+func (e *OptionElement) Disabled(b bool) *OptionElement {
+	e.attributes["disabled"] = b
+
+	return e
+}
+
+func (e *OptionElement) Label(s string) *OptionElement {
+	e.attributes["label"] = s
+
+	return e
+}
+
+func (e *OptionElement) Selected(b bool) *OptionElement {
+	e.attributes["selected"] = b
+
+	return e
+}
+
+func (e *OptionElement) Value(s string) *OptionElement {
+	e.attributes["value"] = s
+
+	return e
+}
 
 func (e *OptionElement) Autocapitalize(a OptionAutocapitalizeEnum) *OptionElement {
 	e.attributes["autocapitalize"] = a

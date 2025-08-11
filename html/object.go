@@ -59,19 +59,19 @@ func (e *ObjectElement) AddIndent(i int) {
 type ObjectAutocapitalizeEnum string
 
 const (
-	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
-	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
-	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
 	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
 	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
+	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
+	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
+	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 )
 
 type ObjectAutocorrectEnum string
 
 const (
-	ObjectAutocorrectEnumOn    ObjectAutocorrectEnum = "on"
 	ObjectAutocorrectEnumOff   ObjectAutocorrectEnum = "off"
+	ObjectAutocorrectEnumOn    ObjectAutocorrectEnum = "on"
 	ObjectAutocorrectEnumEmpty ObjectAutocorrectEnum = ""
 )
 
@@ -87,28 +87,28 @@ const (
 type ObjectDirEnum string
 
 const (
-	ObjectDirEnumRtl  ObjectDirEnum = "rtl"
 	ObjectDirEnumAuto ObjectDirEnum = "auto"
 	ObjectDirEnumLtr  ObjectDirEnum = "ltr"
+	ObjectDirEnumRtl  ObjectDirEnum = "rtl"
 )
 
 type ObjectDraggableEnum string
 
 const (
-	ObjectDraggableEnumFalse ObjectDraggableEnum = "false"
 	ObjectDraggableEnumTrue  ObjectDraggableEnum = "true"
+	ObjectDraggableEnumFalse ObjectDraggableEnum = "false"
 )
 
 type ObjectEnterkeyhintEnum string
 
 const (
-	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
-	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
 	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
 	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
 	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
 	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 	ObjectEnterkeyhintEnumNext     ObjectEnterkeyhintEnum = "next"
+	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
+	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
 )
 
 type ObjectHiddenEnum string
@@ -122,14 +122,14 @@ const (
 type ObjectInputmodeEnum string
 
 const (
-	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
-	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
-	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
-	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
 	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
 	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
 	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
+	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
+	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
+	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
+	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
 )
 
 type ObjectSpellcheckEnum string
@@ -143,8 +143,8 @@ const (
 type ObjectTranslateEnum string
 
 const (
-	ObjectTranslateEnumYes   ObjectTranslateEnum = "yes"
 	ObjectTranslateEnumNo    ObjectTranslateEnum = "no"
+	ObjectTranslateEnumYes   ObjectTranslateEnum = "yes"
 	ObjectTranslateEnumEmpty ObjectTranslateEnum = ""
 )
 

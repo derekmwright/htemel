@@ -66,20 +66,20 @@ const (
 type LinkFetchpriorityEnum string
 
 const (
-	LinkFetchpriorityEnumAuto LinkFetchpriorityEnum = "auto"
 	LinkFetchpriorityEnumHigh LinkFetchpriorityEnum = "high"
 	LinkFetchpriorityEnumLow  LinkFetchpriorityEnum = "low"
+	LinkFetchpriorityEnumAuto LinkFetchpriorityEnum = "auto"
 )
 
 type LinkAutocapitalizeEnum string
 
 const (
+	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
+	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
 	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
 	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
 	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
 	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
-	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
-	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
 )
 
 type LinkAutocorrectEnum string
@@ -93,9 +93,9 @@ const (
 type LinkContenteditableEnum string
 
 const (
+	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
 	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
 	LinkContenteditableEnumPlaintextOnly LinkContenteditableEnum = "plaintext-only"
-	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
 	LinkContenteditableEnumEmpty         LinkContenteditableEnum = ""
 )
 
@@ -117,13 +117,13 @@ const (
 type LinkEnterkeyhintEnum string
 
 const (
-	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
-	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
-	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
 	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
+	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
+	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
+	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 )
 
 type LinkHiddenEnum string
@@ -137,14 +137,14 @@ const (
 type LinkInputmodeEnum string
 
 const (
-	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
-	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
-	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
 	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
 	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
 	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
 	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
+	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
+	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
+	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
 )
 
 type LinkSpellcheckEnum string
@@ -158,8 +158,8 @@ const (
 type LinkTranslateEnum string
 
 const (
-	LinkTranslateEnumYes   LinkTranslateEnum = "yes"
 	LinkTranslateEnumNo    LinkTranslateEnum = "no"
+	LinkTranslateEnumYes   LinkTranslateEnum = "yes"
 	LinkTranslateEnumEmpty LinkTranslateEnum = ""
 )
 

@@ -103,13 +103,13 @@ const (
 type MapEnterkeyhintEnum string
 
 const (
-	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
-	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
-	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 	MapEnterkeyhintEnumSend     MapEnterkeyhintEnum = "send"
 	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
 	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
 	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
+	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
+	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
+	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 )
 
 type MapHiddenEnum string
@@ -136,8 +136,8 @@ const (
 type MapSpellcheckEnum string
 
 const (
-	MapSpellcheckEnumFalse MapSpellcheckEnum = "false"
 	MapSpellcheckEnumTrue  MapSpellcheckEnum = "true"
+	MapSpellcheckEnumFalse MapSpellcheckEnum = "false"
 	MapSpellcheckEnumEmpty MapSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type MapWritingsuggestionsEnum string
 
 const (
-	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
 	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
+	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
 	MapWritingsuggestionsEnumEmpty MapWritingsuggestionsEnum = ""
 )
 

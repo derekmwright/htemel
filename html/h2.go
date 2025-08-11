@@ -60,28 +60,28 @@ func (e *H2Element) AddIndent(i int) {
 type H2AutocapitalizeEnum string
 
 const (
+	H2AutocapitalizeEnumSentences  H2AutocapitalizeEnum = "sentences"
+	H2AutocapitalizeEnumWords      H2AutocapitalizeEnum = "words"
 	H2AutocapitalizeEnumCharacters H2AutocapitalizeEnum = "characters"
 	H2AutocapitalizeEnumNone       H2AutocapitalizeEnum = "none"
 	H2AutocapitalizeEnumOff        H2AutocapitalizeEnum = "off"
 	H2AutocapitalizeEnumOn         H2AutocapitalizeEnum = "on"
-	H2AutocapitalizeEnumSentences  H2AutocapitalizeEnum = "sentences"
-	H2AutocapitalizeEnumWords      H2AutocapitalizeEnum = "words"
 )
 
 type H2AutocorrectEnum string
 
 const (
-	H2AutocorrectEnumOff   H2AutocorrectEnum = "off"
 	H2AutocorrectEnumOn    H2AutocorrectEnum = "on"
+	H2AutocorrectEnumOff   H2AutocorrectEnum = "off"
 	H2AutocorrectEnumEmpty H2AutocorrectEnum = ""
 )
 
 type H2ContenteditableEnum string
 
 const (
+	H2ContenteditableEnumPlaintextOnly H2ContenteditableEnum = "plaintext-only"
 	H2ContenteditableEnumTrue          H2ContenteditableEnum = "true"
 	H2ContenteditableEnumFalse         H2ContenteditableEnum = "false"
-	H2ContenteditableEnumPlaintextOnly H2ContenteditableEnum = "plaintext-only"
 	H2ContenteditableEnumEmpty         H2ContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type H2EnterkeyhintEnum string
 
 const (
+	H2EnterkeyhintEnumPrevious H2EnterkeyhintEnum = "previous"
+	H2EnterkeyhintEnumSearch   H2EnterkeyhintEnum = "search"
 	H2EnterkeyhintEnumSend     H2EnterkeyhintEnum = "send"
 	H2EnterkeyhintEnumDone     H2EnterkeyhintEnum = "done"
 	H2EnterkeyhintEnumEnter    H2EnterkeyhintEnum = "enter"
 	H2EnterkeyhintEnumGo       H2EnterkeyhintEnum = "go"
 	H2EnterkeyhintEnumNext     H2EnterkeyhintEnum = "next"
-	H2EnterkeyhintEnumPrevious H2EnterkeyhintEnum = "previous"
-	H2EnterkeyhintEnumSearch   H2EnterkeyhintEnum = "search"
 )
 
 type H2HiddenEnum string
@@ -123,14 +123,14 @@ const (
 type H2InputmodeEnum string
 
 const (
-	H2InputmodeEnumNone    H2InputmodeEnum = "none"
-	H2InputmodeEnumNumeric H2InputmodeEnum = "numeric"
 	H2InputmodeEnumSearch  H2InputmodeEnum = "search"
 	H2InputmodeEnumTel     H2InputmodeEnum = "tel"
 	H2InputmodeEnumText    H2InputmodeEnum = "text"
 	H2InputmodeEnumUrl     H2InputmodeEnum = "url"
 	H2InputmodeEnumDecimal H2InputmodeEnum = "decimal"
 	H2InputmodeEnumEmail   H2InputmodeEnum = "email"
+	H2InputmodeEnumNone    H2InputmodeEnum = "none"
+	H2InputmodeEnumNumeric H2InputmodeEnum = "numeric"
 )
 
 type H2SpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type H2TranslateEnum string
 
 const (
-	H2TranslateEnumYes   H2TranslateEnum = "yes"
 	H2TranslateEnumNo    H2TranslateEnum = "no"
+	H2TranslateEnumYes   H2TranslateEnum = "yes"
 	H2TranslateEnumEmpty H2TranslateEnum = ""
 )
 

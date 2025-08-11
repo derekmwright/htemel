@@ -79,9 +79,9 @@ const (
 type OlContenteditableEnum string
 
 const (
+	OlContenteditableEnumFalse         OlContenteditableEnum = "false"
 	OlContenteditableEnumPlaintextOnly OlContenteditableEnum = "plaintext-only"
 	OlContenteditableEnumTrue          OlContenteditableEnum = "true"
-	OlContenteditableEnumFalse         OlContenteditableEnum = "false"
 	OlContenteditableEnumEmpty         OlContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type OlEnterkeyhintEnum string
 
 const (
+	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
+	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
 	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
 	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
 	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
-	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
-	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
 )
 
 type OlHiddenEnum string
@@ -144,8 +144,8 @@ const (
 type OlTranslateEnum string
 
 const (
-	OlTranslateEnumNo    OlTranslateEnum = "no"
 	OlTranslateEnumYes   OlTranslateEnum = "yes"
+	OlTranslateEnumNo    OlTranslateEnum = "no"
 	OlTranslateEnumEmpty OlTranslateEnum = ""
 )
 

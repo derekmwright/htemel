@@ -60,12 +60,12 @@ func (e *DivElement) AddIndent(i int) {
 type DivAutocapitalizeEnum string
 
 const (
+	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
 	DivAutocapitalizeEnumCharacters DivAutocapitalizeEnum = "characters"
 	DivAutocapitalizeEnumNone       DivAutocapitalizeEnum = "none"
 	DivAutocapitalizeEnumOff        DivAutocapitalizeEnum = "off"
 	DivAutocapitalizeEnumOn         DivAutocapitalizeEnum = "on"
 	DivAutocapitalizeEnumSentences  DivAutocapitalizeEnum = "sentences"
-	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
 )
 
 type DivAutocorrectEnum string
@@ -79,37 +79,37 @@ const (
 type DivContenteditableEnum string
 
 const (
+	DivContenteditableEnumFalse         DivContenteditableEnum = "false"
 	DivContenteditableEnumPlaintextOnly DivContenteditableEnum = "plaintext-only"
 	DivContenteditableEnumTrue          DivContenteditableEnum = "true"
-	DivContenteditableEnumFalse         DivContenteditableEnum = "false"
 	DivContenteditableEnumEmpty         DivContenteditableEnum = ""
 )
 
 type DivDirEnum string
 
 const (
-	DivDirEnumRtl  DivDirEnum = "rtl"
 	DivDirEnumAuto DivDirEnum = "auto"
 	DivDirEnumLtr  DivDirEnum = "ltr"
+	DivDirEnumRtl  DivDirEnum = "rtl"
 )
 
 type DivDraggableEnum string
 
 const (
-	DivDraggableEnumTrue  DivDraggableEnum = "true"
 	DivDraggableEnumFalse DivDraggableEnum = "false"
+	DivDraggableEnumTrue  DivDraggableEnum = "true"
 )
 
 type DivEnterkeyhintEnum string
 
 const (
+	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
+	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 	DivEnterkeyhintEnumGo       DivEnterkeyhintEnum = "go"
 	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
 	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
 	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
 	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
-	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
-	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 )
 
 type DivHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type DivInputmodeEnum string
 
 const (
+	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
+	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
+	DivInputmodeEnumNone    DivInputmodeEnum = "none"
 	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
 	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
 	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
 	DivInputmodeEnumText    DivInputmodeEnum = "text"
 	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
-	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
-	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
-	DivInputmodeEnumNone    DivInputmodeEnum = "none"
 )
 
 type DivSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DivWritingsuggestionsEnum string
 
 const (
-	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
 	DivWritingsuggestionsEnumTrue  DivWritingsuggestionsEnum = "true"
+	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
 	DivWritingsuggestionsEnumEmpty DivWritingsuggestionsEnum = ""
 )
 

@@ -60,12 +60,12 @@ func (e *TimeElement) AddIndent(i int) {
 type TimeAutocapitalizeEnum string
 
 const (
+	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
+	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
 	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
 	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
-	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
-	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
 )
 
 type TimeAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type TimeDraggableEnum string
 
 const (
-	TimeDraggableEnumFalse TimeDraggableEnum = "false"
 	TimeDraggableEnumTrue  TimeDraggableEnum = "true"
+	TimeDraggableEnumFalse TimeDraggableEnum = "false"
 )
 
 type TimeEnterkeyhintEnum string
 
 const (
+	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
 	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
 	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 	TimeEnterkeyhintEnumEnter    TimeEnterkeyhintEnum = "enter"
 	TimeEnterkeyhintEnumGo       TimeEnterkeyhintEnum = "go"
 	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
-	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 )
 
 type TimeHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type TimeInputmodeEnum string
 
 const (
+	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
+	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
 	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
 	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
 	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
 	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
 	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
 	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
-	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
-	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
 )
 
 type TimeSpellcheckEnum string

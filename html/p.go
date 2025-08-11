@@ -60,12 +60,12 @@ func (e *PElement) AddIndent(i int) {
 type PAutocapitalizeEnum string
 
 const (
-	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
 	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
 	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
 	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
 	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
 	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
+	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
 )
 
 type PAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type PDirEnum string
 
 const (
-	PDirEnumRtl  PDirEnum = "rtl"
 	PDirEnumAuto PDirEnum = "auto"
 	PDirEnumLtr  PDirEnum = "ltr"
+	PDirEnumRtl  PDirEnum = "rtl"
 )
 
 type PDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type PEnterkeyhintEnum string
 
 const (
+	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
+	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
+	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
 	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
 	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
-	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
-	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
-	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
 )
 
 type PHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type PInputmodeEnum string
 
 const (
+	PInputmodeEnumText    PInputmodeEnum = "text"
+	PInputmodeEnumUrl     PInputmodeEnum = "url"
 	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
 	PInputmodeEnumEmail   PInputmodeEnum = "email"
 	PInputmodeEnumNone    PInputmodeEnum = "none"
 	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
 	PInputmodeEnumSearch  PInputmodeEnum = "search"
 	PInputmodeEnumTel     PInputmodeEnum = "tel"
-	PInputmodeEnumText    PInputmodeEnum = "text"
-	PInputmodeEnumUrl     PInputmodeEnum = "url"
 )
 
 type PSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type PTranslateEnum string
 
 const (
-	PTranslateEnumNo    PTranslateEnum = "no"
 	PTranslateEnumYes   PTranslateEnum = "yes"
+	PTranslateEnumNo    PTranslateEnum = "no"
 	PTranslateEnumEmpty PTranslateEnum = ""
 )
 

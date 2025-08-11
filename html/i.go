@@ -60,12 +60,12 @@ func (e *IElement) AddIndent(i int) {
 type IAutocapitalizeEnum string
 
 const (
-	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
 	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
 	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
 	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
 	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
+	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 )
 
 type IAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type IContenteditableEnum string
 
 const (
-	IContenteditableEnumTrue          IContenteditableEnum = "true"
 	IContenteditableEnumFalse         IContenteditableEnum = "false"
 	IContenteditableEnumPlaintextOnly IContenteditableEnum = "plaintext-only"
+	IContenteditableEnumTrue          IContenteditableEnum = "true"
 	IContenteditableEnumEmpty         IContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
-	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
-	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
 	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
 	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
 	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
+	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
+	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
 )
 
 type IHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type IInputmodeEnum string
 
 const (
-	IInputmodeEnumTel     IInputmodeEnum = "tel"
-	IInputmodeEnumText    IInputmodeEnum = "text"
 	IInputmodeEnumUrl     IInputmodeEnum = "url"
 	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
 	IInputmodeEnumEmail   IInputmodeEnum = "email"
 	IInputmodeEnumNone    IInputmodeEnum = "none"
 	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
 	IInputmodeEnumSearch  IInputmodeEnum = "search"
+	IInputmodeEnumTel     IInputmodeEnum = "tel"
+	IInputmodeEnumText    IInputmodeEnum = "text"
 )
 
 type ISpellcheckEnum string

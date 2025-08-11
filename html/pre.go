@@ -71,8 +71,8 @@ const (
 type PreAutocorrectEnum string
 
 const (
-	PreAutocorrectEnumOff   PreAutocorrectEnum = "off"
 	PreAutocorrectEnumOn    PreAutocorrectEnum = "on"
+	PreAutocorrectEnumOff   PreAutocorrectEnum = "off"
 	PreAutocorrectEnumEmpty PreAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type PreEnterkeyhintEnum string
 
 const (
+	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
+	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
+	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
 	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
 	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
 	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
-	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
-	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
-	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
 )
 
 type PreHiddenEnum string

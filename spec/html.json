@@ -1633,7 +1633,44 @@
     },
     {
       "tag": "select",
-      "description": "The select element represents a control for selecting amongst a set of options."
+      "description": "The select element represents a control for selecting amongst a set of options.",
+      "attributes": [
+        {
+          "name": "autocomplete",
+          "description": "Hint for form autofill feature",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "disabled",
+          "description": "Whether the form control is disabled",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "form",
+          "description": "Associates the element with a form element",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "multiple",
+          "description": "Whether to allow multiple values",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "name",
+          "description": "Name of the element to use for form submission and in the form.elements API",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "required",
+          "description": "Whether the control is required for form submission",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "size",
+          "description": "Size of the control",
+          "attribute_type": "AttributeTypeNumber"
+        }
+      ]
     },
     {
       "tag": "datalist",
@@ -1641,27 +1678,195 @@
     },
     {
       "tag": "optgroup",
-      "description": "The optgroup element represents a group of option elements with a common label."
+      "description": "The optgroup element represents a group of option elements with a common label.",
+      "attributes": [
+        {
+          "name": "disabled",
+          "description": "Whether the form control is disabled",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "label",
+          "description": "User-visible label",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "option",
-      "description": "The option element represents an option in a select element or as part of a list of suggestions in a datalist element."
+      "description": "The option element represents an option in a select element or as part of a list of suggestions in a datalist element.",
+      "attributes": [
+        {
+          "name": "disabled",
+          "description": "Whether the form control is disabled",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "label",
+          "description": "User-visible label",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "selected",
+          "description": "Whether the option is selected by default",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "value",
+          "description": "Value to be used for form submission",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "textarea",
-      "description": "The textarea element represents a multiline plain text edit control for the element's raw value. The contents of the control represent the control's default value."
+      "description": "The textarea element represents a multiline plain text edit control for the element's raw value. The contents of the control represent the control's default value.",
+      "attributes": [
+        {
+          "name": "autocomplete",
+          "description": "Hint for form autofill feature",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "cols",
+          "description": "Maximum number of characters per line",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "dirname",
+          "description": "Name of form control to use for sending the element's directionality in form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "disabled",
+          "description": "Whether the form control is disabled",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "form",
+          "description": "Associates the element with a form element",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "maxlength",
+          "description": "Maximum length of value",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "minlength",
+          "description": "Minimum length of value",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "name",
+          "description": "Name of the element to use for form submission and in the form.elements API",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "placeholder",
+          "description": "User-visible label to be placed within the form control",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "readonly",
+          "description": "Whether to allow the value to be edited by the user",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "required",
+          "description": "Whether the control is required for form submission",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "rows",
+          "description": "Number of lines to show",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "wrap",
+          "description": "How the value of the form control is to be wrapped for form submission",
+          "allowed": {
+            "hard": {},
+            "soft": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        }
+      ]
     },
     {
       "tag": "output",
-      "description": "The output element represents the result of a calculation performed by the application, or the result of a user action."
+      "description": "The output element represents the result of a calculation performed by the application, or the result of a user action.",
+      "attributes": [
+        {
+          "name": "for",
+          "description": "Specifies controls from which the output was calculated",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "form",
+          "description": "Associates the element with a form element",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "name",
+          "description": "Name of the element to use in the form.elements API.",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "progress",
-      "description": "The progress element represents the completion progress of a task. The progress is either indeterminate, indicating that progress is being made but that it is not clear how much more work remains to be done before the task is complete (e.g. because the task is waiting for a remote host to respond), or the progress is a number in the range zero to a maximum, giving the fraction of work that has so far been completed."
+      "description": "The progress element represents the completion progress of a task. The progress is either indeterminate, indicating that progress is being made but that it is not clear how much more work remains to be done before the task is complete (e.g. because the task is waiting for a remote host to respond), or the progress is a number in the range zero to a maximum, giving the fraction of work that has so far been completed.",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "Current value of the element",
+          "attribute_type": "AttributeTypeFloat"
+        },
+        {
+          "name": "max",
+          "description": "Upper bound of range",
+          "attribute_type": "AttributeTypeFloat"
+        }
+      ]
     },
     {
       "tag": "meter",
-      "description": "The meter element represents a scalar measurement within a known range, or a fractional value; for example disk usage, the relevance of a query result, or the fraction of a voting population to have selected a particular candidate."
+      "description": "The meter element represents a scalar measurement within a known range, or a fractional value; for example disk usage, the relevance of a query result, or the fraction of a voting population to have selected a particular candidate.",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "Current value of the element",
+          "attribute_type": "AttributeTypeFloat"
+        },
+        {
+          "name": "min",
+          "description": "Lower bound of range",
+          "attribute_type": "AttributeTypeFloat"
+        },
+        {
+          "name": "max",
+          "description": "Upper bound of range",
+          "attribute_type": "AttributeTypeFloat"
+        },
+        {
+          "name": "low",
+          "description": "High limit of low range",
+          "attribute_type": "AttributeTypeFloat"
+        },
+        {
+          "name": "high",
+          "description": "Low limit of high range",
+          "attribute_type": "AttributeTypeFloat"
+        },
+        {
+          "name": "optimum",
+          "description": "Optimum value in gauge",
+          "attribute_type": "AttributeTypeFloat"
+        }
+      ]
     },
     {
       "tag": "fieldset",

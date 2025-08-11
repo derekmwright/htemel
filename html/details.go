@@ -60,19 +60,19 @@ func (e *DetailsElement) AddIndent(i int) {
 type DetailsAutocapitalizeEnum string
 
 const (
-	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
 	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
 	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
 	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
 	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
+	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
 )
 
 type DetailsAutocorrectEnum string
 
 const (
-	DetailsAutocorrectEnumOff   DetailsAutocorrectEnum = "off"
 	DetailsAutocorrectEnumOn    DetailsAutocorrectEnum = "on"
+	DetailsAutocorrectEnumOff   DetailsAutocorrectEnum = "off"
 	DetailsAutocorrectEnumEmpty DetailsAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type DetailsDirEnum string
 
 const (
+	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
 	DetailsDirEnumAuto DetailsDirEnum = "auto"
 	DetailsDirEnumLtr  DetailsDirEnum = "ltr"
-	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
 )
 
 type DetailsDraggableEnum string
@@ -103,34 +103,34 @@ const (
 type DetailsEnterkeyhintEnum string
 
 const (
+	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
 	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
 	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
 	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
 	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
 	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
-	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
 )
 
 type DetailsHiddenEnum string
 
 const (
-	DetailsHiddenEnumUntilFound DetailsHiddenEnum = "until-found"
 	DetailsHiddenEnumHidden     DetailsHiddenEnum = "hidden"
+	DetailsHiddenEnumUntilFound DetailsHiddenEnum = "until-found"
 	DetailsHiddenEnumEmpty      DetailsHiddenEnum = ""
 )
 
 type DetailsInputmodeEnum string
 
 const (
-	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
-	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
-	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
-	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
 	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
 	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
 	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
 	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
+	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
+	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
+	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
+	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
 )
 
 type DetailsSpellcheckEnum string

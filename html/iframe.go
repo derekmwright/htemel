@@ -60,19 +60,19 @@ func (e *IframeElement) AddIndent(i int) {
 type IframeLoadingEnum string
 
 const (
-	IframeLoadingEnumEager IframeLoadingEnum = "eager"
 	IframeLoadingEnumLazy  IframeLoadingEnum = "lazy"
+	IframeLoadingEnumEager IframeLoadingEnum = "eager"
 )
 
 type IframeAutocapitalizeEnum string
 
 const (
-	IframeAutocapitalizeEnumCharacters IframeAutocapitalizeEnum = "characters"
 	IframeAutocapitalizeEnumNone       IframeAutocapitalizeEnum = "none"
 	IframeAutocapitalizeEnumOff        IframeAutocapitalizeEnum = "off"
 	IframeAutocapitalizeEnumOn         IframeAutocapitalizeEnum = "on"
 	IframeAutocapitalizeEnumSentences  IframeAutocapitalizeEnum = "sentences"
 	IframeAutocapitalizeEnumWords      IframeAutocapitalizeEnum = "words"
+	IframeAutocapitalizeEnumCharacters IframeAutocapitalizeEnum = "characters"
 )
 
 type IframeAutocorrectEnum string
@@ -86,18 +86,18 @@ const (
 type IframeContenteditableEnum string
 
 const (
-	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
 	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
 	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
+	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
 	IframeContenteditableEnumEmpty         IframeContenteditableEnum = ""
 )
 
 type IframeDirEnum string
 
 const (
-	IframeDirEnumAuto IframeDirEnum = "auto"
 	IframeDirEnumLtr  IframeDirEnum = "ltr"
 	IframeDirEnumRtl  IframeDirEnum = "rtl"
+	IframeDirEnumAuto IframeDirEnum = "auto"
 )
 
 type IframeDraggableEnum string
@@ -110,13 +110,13 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
+	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
+	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
+	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
 	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
-	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
-	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
-	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 )
 
 type IframeHiddenEnum string
@@ -130,6 +130,7 @@ const (
 type IframeInputmodeEnum string
 
 const (
+	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
 	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
 	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
@@ -137,7 +138,6 @@ const (
 	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
 	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
 	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
-	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 )
 
 type IframeSpellcheckEnum string
@@ -159,8 +159,8 @@ const (
 type IframeWritingsuggestionsEnum string
 
 const (
-	IframeWritingsuggestionsEnumFalse IframeWritingsuggestionsEnum = "false"
 	IframeWritingsuggestionsEnumTrue  IframeWritingsuggestionsEnum = "true"
+	IframeWritingsuggestionsEnumFalse IframeWritingsuggestionsEnum = "false"
 	IframeWritingsuggestionsEnumEmpty IframeWritingsuggestionsEnum = ""
 )
 

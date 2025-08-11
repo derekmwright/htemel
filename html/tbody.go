@@ -71,8 +71,8 @@ const (
 type TbodyAutocorrectEnum string
 
 const (
-	TbodyAutocorrectEnumOn    TbodyAutocorrectEnum = "on"
 	TbodyAutocorrectEnumOff   TbodyAutocorrectEnum = "off"
+	TbodyAutocorrectEnumOn    TbodyAutocorrectEnum = "on"
 	TbodyAutocorrectEnumEmpty TbodyAutocorrectEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type TbodyEnterkeyhintEnum string
 
 const (
+	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
+	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
 	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 	TbodyEnterkeyhintEnumDone     TbodyEnterkeyhintEnum = "done"
 	TbodyEnterkeyhintEnumEnter    TbodyEnterkeyhintEnum = "enter"
 	TbodyEnterkeyhintEnumGo       TbodyEnterkeyhintEnum = "go"
 	TbodyEnterkeyhintEnumNext     TbodyEnterkeyhintEnum = "next"
-	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
-	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
 )
 
 type TbodyHiddenEnum string
 
 const (
-	TbodyHiddenEnumUntilFound TbodyHiddenEnum = "until-found"
 	TbodyHiddenEnumHidden     TbodyHiddenEnum = "hidden"
+	TbodyHiddenEnumUntilFound TbodyHiddenEnum = "until-found"
 	TbodyHiddenEnumEmpty      TbodyHiddenEnum = ""
 )
 
 type TbodyInputmodeEnum string
 
 const (
-	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
-	TbodyInputmodeEnumSearch  TbodyInputmodeEnum = "search"
-	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
-	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
 	TbodyInputmodeEnumUrl     TbodyInputmodeEnum = "url"
 	TbodyInputmodeEnumDecimal TbodyInputmodeEnum = "decimal"
 	TbodyInputmodeEnumEmail   TbodyInputmodeEnum = "email"
 	TbodyInputmodeEnumNone    TbodyInputmodeEnum = "none"
+	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
+	TbodyInputmodeEnumSearch  TbodyInputmodeEnum = "search"
+	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
+	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
 )
 
 type TbodySpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type TbodyWritingsuggestionsEnum string
 
 const (
-	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
 	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
+	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
 	TbodyWritingsuggestionsEnumEmpty TbodyWritingsuggestionsEnum = ""
 )
 

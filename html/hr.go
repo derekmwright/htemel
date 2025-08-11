@@ -80,9 +80,9 @@ const (
 type HrDirEnum string
 
 const (
+	HrDirEnumAuto HrDirEnum = "auto"
 	HrDirEnumLtr  HrDirEnum = "ltr"
 	HrDirEnumRtl  HrDirEnum = "rtl"
-	HrDirEnumAuto HrDirEnum = "auto"
 )
 
 type HrDraggableEnum string
@@ -95,13 +95,13 @@ const (
 type HrEnterkeyhintEnum string
 
 const (
-	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
 	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
 	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
 	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
 	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
 	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
+	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
 )
 
 type HrHiddenEnum string
@@ -115,14 +115,14 @@ const (
 type HrInputmodeEnum string
 
 const (
-	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
-	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
-	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
-	HrInputmodeEnumNone    HrInputmodeEnum = "none"
 	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
 	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
 	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
 	HrInputmodeEnumText    HrInputmodeEnum = "text"
+	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
+	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
+	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
+	HrInputmodeEnumNone    HrInputmodeEnum = "none"
 )
 
 type HrSpellcheckEnum string

@@ -60,12 +60,12 @@ func (e *OutputElement) AddIndent(i int) {
 type OutputAutocapitalizeEnum string
 
 const (
-	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
 	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
 	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
 	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
 	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
+	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
 )
 
 type OutputAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type OutputEnterkeyhintEnum string
 
 const (
+	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
+	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
 	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
 	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
 	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
 	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
-	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
-	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 )
 
 type OutputHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type OutputInputmodeEnum string
 
 const (
-	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
-	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
 	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
 	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
 	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
 	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
 	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
+	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
+	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 )
 
 type OutputSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type OutputTranslateEnum string
 
 const (
-	OutputTranslateEnumNo    OutputTranslateEnum = "no"
 	OutputTranslateEnumYes   OutputTranslateEnum = "yes"
+	OutputTranslateEnumNo    OutputTranslateEnum = "no"
 	OutputTranslateEnumEmpty OutputTranslateEnum = ""
 )
 
@@ -158,6 +158,24 @@ const (
 )
 
 type outputAttrs map[string]any
+
+func (e *OutputElement) For(s string) *OutputElement {
+	e.attributes["for"] = s
+
+	return e
+}
+
+func (e *OutputElement) Form(s string) *OutputElement {
+	e.attributes["form"] = s
+
+	return e
+}
+
+func (e *OutputElement) Name(s string) *OutputElement {
+	e.attributes["name"] = s
+
+	return e
+}
 
 func (e *OutputElement) Autocapitalize(a OutputAutocapitalizeEnum) *OutputElement {
 	e.attributes["autocapitalize"] = a

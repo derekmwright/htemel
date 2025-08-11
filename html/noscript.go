@@ -60,12 +60,12 @@ func (e *NoscriptElement) AddIndent(i int) {
 type NoscriptAutocapitalizeEnum string
 
 const (
-	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
-	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
-	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
 	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
 	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
 	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
+	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
+	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
+	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
 )
 
 type NoscriptAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type NoscriptEnterkeyhintEnum string
 
 const (
+	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
+	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
 	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
 	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
 	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
 	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
 	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
-	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
-	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
 )
 
 type NoscriptHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type NoscriptInputmodeEnum string
 
 const (
+	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
+	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
 	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
 	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
 	NoscriptInputmodeEnumNone    NoscriptInputmodeEnum = "none"
 	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
 	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
 	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
-	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
-	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
 )
 
 type NoscriptSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type NoscriptWritingsuggestionsEnum string
 
 const (
-	NoscriptWritingsuggestionsEnumFalse NoscriptWritingsuggestionsEnum = "false"
 	NoscriptWritingsuggestionsEnumTrue  NoscriptWritingsuggestionsEnum = "true"
+	NoscriptWritingsuggestionsEnumFalse NoscriptWritingsuggestionsEnum = "false"
 	NoscriptWritingsuggestionsEnumEmpty NoscriptWritingsuggestionsEnum = ""
 )
 

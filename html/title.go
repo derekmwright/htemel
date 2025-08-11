@@ -60,12 +60,12 @@ func (e *TitleElement) AddIndent(i int) {
 type TitleAutocapitalizeEnum string
 
 const (
-	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
 	TitleAutocapitalizeEnumNone       TitleAutocapitalizeEnum = "none"
 	TitleAutocapitalizeEnumOff        TitleAutocapitalizeEnum = "off"
 	TitleAutocapitalizeEnumOn         TitleAutocapitalizeEnum = "on"
 	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
+	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 )
 
 type TitleAutocorrectEnum string
@@ -79,58 +79,58 @@ const (
 type TitleContenteditableEnum string
 
 const (
+	TitleContenteditableEnumFalse         TitleContenteditableEnum = "false"
 	TitleContenteditableEnumPlaintextOnly TitleContenteditableEnum = "plaintext-only"
 	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
-	TitleContenteditableEnumFalse         TitleContenteditableEnum = "false"
 	TitleContenteditableEnumEmpty         TitleContenteditableEnum = ""
 )
 
 type TitleDirEnum string
 
 const (
-	TitleDirEnumAuto TitleDirEnum = "auto"
 	TitleDirEnumLtr  TitleDirEnum = "ltr"
 	TitleDirEnumRtl  TitleDirEnum = "rtl"
+	TitleDirEnumAuto TitleDirEnum = "auto"
 )
 
 type TitleDraggableEnum string
 
 const (
-	TitleDraggableEnumTrue  TitleDraggableEnum = "true"
 	TitleDraggableEnumFalse TitleDraggableEnum = "false"
+	TitleDraggableEnumTrue  TitleDraggableEnum = "true"
 )
 
 type TitleEnterkeyhintEnum string
 
 const (
+	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
+	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
 	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
 	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
 	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
 	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
-	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
-	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
 )
 
 type TitleHiddenEnum string
 
 const (
-	TitleHiddenEnumHidden     TitleHiddenEnum = "hidden"
 	TitleHiddenEnumUntilFound TitleHiddenEnum = "until-found"
+	TitleHiddenEnumHidden     TitleHiddenEnum = "hidden"
 	TitleHiddenEnumEmpty      TitleHiddenEnum = ""
 )
 
 type TitleInputmodeEnum string
 
 const (
-	TitleInputmodeEnumUrl     TitleInputmodeEnum = "url"
-	TitleInputmodeEnumDecimal TitleInputmodeEnum = "decimal"
-	TitleInputmodeEnumEmail   TitleInputmodeEnum = "email"
-	TitleInputmodeEnumNone    TitleInputmodeEnum = "none"
 	TitleInputmodeEnumNumeric TitleInputmodeEnum = "numeric"
 	TitleInputmodeEnumSearch  TitleInputmodeEnum = "search"
 	TitleInputmodeEnumTel     TitleInputmodeEnum = "tel"
 	TitleInputmodeEnumText    TitleInputmodeEnum = "text"
+	TitleInputmodeEnumUrl     TitleInputmodeEnum = "url"
+	TitleInputmodeEnumDecimal TitleInputmodeEnum = "decimal"
+	TitleInputmodeEnumEmail   TitleInputmodeEnum = "email"
+	TitleInputmodeEnumNone    TitleInputmodeEnum = "none"
 )
 
 type TitleSpellcheckEnum string

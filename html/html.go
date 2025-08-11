@@ -79,9 +79,9 @@ const (
 type HtmlContenteditableEnum string
 
 const (
-	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumPlaintextOnly HtmlContenteditableEnum = "plaintext-only"
 	HtmlContenteditableEnumTrue          HtmlContenteditableEnum = "true"
+	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumEmpty         HtmlContenteditableEnum = ""
 )
 
@@ -115,22 +115,22 @@ const (
 type HtmlHiddenEnum string
 
 const (
-	HtmlHiddenEnumUntilFound HtmlHiddenEnum = "until-found"
 	HtmlHiddenEnumHidden     HtmlHiddenEnum = "hidden"
+	HtmlHiddenEnumUntilFound HtmlHiddenEnum = "until-found"
 	HtmlHiddenEnumEmpty      HtmlHiddenEnum = ""
 )
 
 type HtmlInputmodeEnum string
 
 const (
+	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
+	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
 	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
 	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
 	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
 	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
 	HtmlInputmodeEnumNone    HtmlInputmodeEnum = "none"
-	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
-	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
 )
 
 type HtmlSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type HtmlWritingsuggestionsEnum string
 
 const (
-	HtmlWritingsuggestionsEnumFalse HtmlWritingsuggestionsEnum = "false"
 	HtmlWritingsuggestionsEnumTrue  HtmlWritingsuggestionsEnum = "true"
+	HtmlWritingsuggestionsEnumFalse HtmlWritingsuggestionsEnum = "false"
 	HtmlWritingsuggestionsEnumEmpty HtmlWritingsuggestionsEnum = ""
 )
 

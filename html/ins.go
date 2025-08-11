@@ -60,19 +60,19 @@ func (e *InsElement) AddIndent(i int) {
 type InsAutocapitalizeEnum string
 
 const (
-	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
 	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
 	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
 	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
 	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
+	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 )
 
 type InsAutocorrectEnum string
 
 const (
-	InsAutocorrectEnumOn    InsAutocorrectEnum = "on"
 	InsAutocorrectEnumOff   InsAutocorrectEnum = "off"
+	InsAutocorrectEnumOn    InsAutocorrectEnum = "on"
 	InsAutocorrectEnumEmpty InsAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type InsDirEnum string
 
 const (
+	InsDirEnumAuto InsDirEnum = "auto"
 	InsDirEnumLtr  InsDirEnum = "ltr"
 	InsDirEnumRtl  InsDirEnum = "rtl"
-	InsDirEnumAuto InsDirEnum = "auto"
 )
 
 type InsDraggableEnum string
@@ -103,20 +103,20 @@ const (
 type InsEnterkeyhintEnum string
 
 const (
-	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
-	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
 	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
 	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
 	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
+	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
+	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 )
 
 type InsHiddenEnum string
 
 const (
-	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
 	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
+	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
 	InsHiddenEnumEmpty      InsHiddenEnum = ""
 )
 
@@ -136,8 +136,8 @@ const (
 type InsSpellcheckEnum string
 
 const (
-	InsSpellcheckEnumTrue  InsSpellcheckEnum = "true"
 	InsSpellcheckEnumFalse InsSpellcheckEnum = "false"
+	InsSpellcheckEnumTrue  InsSpellcheckEnum = "true"
 	InsSpellcheckEnumEmpty InsSpellcheckEnum = ""
 )
 

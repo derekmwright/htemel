@@ -60,12 +60,12 @@ func (e *LegendElement) AddIndent(i int) {
 type LegendAutocapitalizeEnum string
 
 const (
+	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
+	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
 	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
 	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
 	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
-	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
-	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
 )
 
 type LegendAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type LegendContenteditableEnum string
 
 const (
+	LegendContenteditableEnumFalse         LegendContenteditableEnum = "false"
 	LegendContenteditableEnumPlaintextOnly LegendContenteditableEnum = "plaintext-only"
 	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
-	LegendContenteditableEnumFalse         LegendContenteditableEnum = "false"
 	LegendContenteditableEnumEmpty         LegendContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type LegendEnterkeyhintEnum string
 
 const (
-	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
-	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
 	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
 	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
 	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
 	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
 	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
+	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
+	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
 )
 
 type LegendHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type LegendInputmodeEnum string
 
 const (
-	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
-	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
 	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
 	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
 	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
 	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
 	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
 	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
+	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
+	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
 )
 
 type LegendSpellcheckEnum string

@@ -103,13 +103,13 @@ const (
 type RtEnterkeyhintEnum string
 
 const (
+	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
+	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
+	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
 	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
 	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
 	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
 	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
-	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
-	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
-	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
 )
 
 type RtHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type RtInputmodeEnum string
 
 const (
+	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
+	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
 	RtInputmodeEnumNone    RtInputmodeEnum = "none"
 	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
 	RtInputmodeEnumSearch  RtInputmodeEnum = "search"
 	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
 	RtInputmodeEnumText    RtInputmodeEnum = "text"
 	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
-	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
-	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
 )
 
 type RtSpellcheckEnum string

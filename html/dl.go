@@ -103,13 +103,13 @@ const (
 type DlEnterkeyhintEnum string
 
 const (
-	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
-	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
-	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
 	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
 	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
 	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
+	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
+	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
+	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
 )
 
 type DlHiddenEnum string
@@ -152,8 +152,8 @@ const (
 type DlWritingsuggestionsEnum string
 
 const (
-	DlWritingsuggestionsEnumFalse DlWritingsuggestionsEnum = "false"
 	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
+	DlWritingsuggestionsEnumFalse DlWritingsuggestionsEnum = "false"
 	DlWritingsuggestionsEnumEmpty DlWritingsuggestionsEnum = ""
 )
 

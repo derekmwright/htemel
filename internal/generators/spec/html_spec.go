@@ -1166,6 +1166,193 @@ func buttonAttr() []Attribute {
 	}
 }
 
+func selectAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "autocomplete",
+			Description: "Hint for form autofill feature",
+		},
+		&AttributeTypeBool{
+			Name:        "disabled",
+			Description: "Whether the form control is disabled",
+		},
+		&AttributeTypeString{
+			Name:        "form",
+			Description: "Associates the element with a form element",
+		},
+		&AttributeTypeBool{
+			Name:        "multiple",
+			Description: "Whether to allow multiple values",
+		},
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of the element to use for form submission and in the form.elements API",
+		},
+		&AttributeTypeBool{
+			Name:        "required",
+			Description: "Whether the control is required for form submission",
+		},
+		&AttributeTypeNumber{
+			Name:        "size",
+			Description: "Size of the control",
+		},
+	}
+}
+
+func optgroupAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeBool{
+			Name:        "disabled",
+			Description: "Whether the form control is disabled",
+		},
+		&AttributeTypeString{
+			Name:        "label",
+			Description: "User-visible label",
+		},
+	}
+}
+
+func optionAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeBool{
+			Name:        "disabled",
+			Description: "Whether the form control is disabled",
+		},
+		&AttributeTypeString{
+			Name:        "label",
+			Description: "User-visible label",
+		},
+		&AttributeTypeBool{
+			Name:        "selected",
+			Description: "Whether the option is selected by default",
+		},
+		&AttributeTypeString{
+			Name:        "value",
+			Description: "Value to be used for form submission",
+		},
+	}
+}
+
+func textareaAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "autocomplete",
+			Description: "Hint for form autofill feature",
+		},
+		&AttributeTypeNumber{
+			Name:        "cols",
+			Description: "Maximum number of characters per line",
+		},
+		&AttributeTypeString{
+			Name:        "dirname",
+			Description: "Name of form control to use for sending the element's directionality in form submission",
+		},
+		&AttributeTypeBool{
+			Name:        "disabled",
+			Description: "Whether the form control is disabled",
+		},
+		&AttributeTypeString{
+			Name:        "form",
+			Description: "Associates the element with a form element",
+		},
+		&AttributeTypeNumber{
+			Name:        "maxlength",
+			Description: "Maximum length of value",
+		},
+		&AttributeTypeNumber{
+			Name:        "minlength",
+			Description: "Minimum length of value",
+		},
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of the element to use for form submission and in the form.elements API",
+		},
+		&AttributeTypeString{
+			Name:        "placeholder",
+			Description: "User-visible label to be placed within the form control",
+		},
+		&AttributeTypeBool{
+			Name:        "readonly",
+			Description: "Whether to allow the value to be edited by the user",
+		},
+		&AttributeTypeBool{
+			Name:        "required",
+			Description: "Whether the control is required for form submission",
+		},
+		&AttributeTypeString{
+			Name:        "rows",
+			Description: "Number of lines to show",
+		},
+		&AttributeTypeEnum{
+			Name:        "wrap",
+			Description: "How the value of the form control is to be wrapped for form submission",
+			Allowed: map[string]struct{}{
+				"soft": {},
+				"hard": {},
+			},
+		},
+	}
+}
+
+func outputAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "for",
+			Description: "Specifies controls from which the output was calculated",
+		},
+		&AttributeTypeString{
+			Name:        "form",
+			Description: "Associates the element with a form element",
+		},
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of the element to use in the form.elements API.",
+		},
+	}
+}
+
+func progressAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeFloat{
+			Name:        "value",
+			Description: "Current value of the element",
+		},
+		&AttributeTypeFloat{
+			Name:        "max",
+			Description: "Upper bound of range",
+		},
+	}
+}
+
+func meterAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeFloat{
+			Name:        "value",
+			Description: "Current value of the element",
+		},
+		&AttributeTypeFloat{
+			Name:        "min",
+			Description: "Lower bound of range",
+		},
+		&AttributeTypeFloat{
+			Name:        "max",
+			Description: "Upper bound of range",
+		},
+		&AttributeTypeFloat{
+			Name:        "low",
+			Description: "High limit of low range",
+		},
+		&AttributeTypeFloat{
+			Name:        "high",
+			Description: "Low limit of high range",
+		},
+		&AttributeTypeFloat{
+			Name:        "optimum",
+			Description: "Optimum value in gauge",
+		},
+	}
+}
+
 var attrFuncs = map[string]func() []Attribute{
 	"html":       htmlAttr,
 	"head":       headAttr,
@@ -1202,6 +1389,13 @@ var attrFuncs = map[string]func() []Attribute{
 	"label":      labelAttr,
 	"input":      inputAttr,
 	"button":     buttonAttr,
+	"select":     selectAttr,
+	"optgroup":   optgroupAttr,
+	"option":     optionAttr,
+	"textarea":   textareaAttr,
+	"output":     outputAttr,
+	"progress":   progressAttr,
+	"meter":      meterAttr,
 }
 
 func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {

@@ -52,24 +52,24 @@ func (e *MetaElement) AddIndent(i int) {
 type MetaHttpEquivEnum string
 
 const (
+	MetaHttpEquivEnumRefresh               MetaHttpEquivEnum = "refresh"
+	MetaHttpEquivEnumSetCookie             MetaHttpEquivEnum = "set-cookie"
+	MetaHttpEquivEnumXUaCompatible         MetaHttpEquivEnum = "x-ua-compatible"
 	MetaHttpEquivEnumContentLanguage       MetaHttpEquivEnum = "content-language"
 	MetaHttpEquivEnumContentSecurityPolicy MetaHttpEquivEnum = "content-security-policy"
 	MetaHttpEquivEnumContentType           MetaHttpEquivEnum = "content-type"
 	MetaHttpEquivEnumDefaultStyle          MetaHttpEquivEnum = "default-style"
-	MetaHttpEquivEnumRefresh               MetaHttpEquivEnum = "refresh"
-	MetaHttpEquivEnumSetCookie             MetaHttpEquivEnum = "set-cookie"
-	MetaHttpEquivEnumXUaCompatible         MetaHttpEquivEnum = "x-ua-compatible"
 )
 
 type MetaAutocapitalizeEnum string
 
 const (
-	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
-	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
 	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
 	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
 	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
 	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
+	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
+	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
 )
 
 type MetaAutocorrectEnum string
@@ -107,13 +107,13 @@ const (
 type MetaEnterkeyhintEnum string
 
 const (
-	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
 	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
 	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
 	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
 	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
+	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
 )
 
 type MetaHiddenEnum string
@@ -127,7 +127,6 @@ const (
 type MetaInputmodeEnum string
 
 const (
-	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
 	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
 	MetaInputmodeEnumEmail   MetaInputmodeEnum = "email"
 	MetaInputmodeEnumNone    MetaInputmodeEnum = "none"
@@ -135,21 +134,22 @@ const (
 	MetaInputmodeEnumSearch  MetaInputmodeEnum = "search"
 	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
 	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
+	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
 )
 
 type MetaSpellcheckEnum string
 
 const (
-	MetaSpellcheckEnumTrue  MetaSpellcheckEnum = "true"
 	MetaSpellcheckEnumFalse MetaSpellcheckEnum = "false"
+	MetaSpellcheckEnumTrue  MetaSpellcheckEnum = "true"
 	MetaSpellcheckEnumEmpty MetaSpellcheckEnum = ""
 )
 
 type MetaTranslateEnum string
 
 const (
-	MetaTranslateEnumNo    MetaTranslateEnum = "no"
 	MetaTranslateEnumYes   MetaTranslateEnum = "yes"
+	MetaTranslateEnumNo    MetaTranslateEnum = "no"
 	MetaTranslateEnumEmpty MetaTranslateEnum = ""
 )
 

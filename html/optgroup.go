@@ -60,19 +60,19 @@ func (e *OptgroupElement) AddIndent(i int) {
 type OptgroupAutocapitalizeEnum string
 
 const (
-	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
-	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
 	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
 	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 	OptgroupAutocapitalizeEnumOff        OptgroupAutocapitalizeEnum = "off"
 	OptgroupAutocapitalizeEnumOn         OptgroupAutocapitalizeEnum = "on"
+	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
+	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
 )
 
 type OptgroupAutocorrectEnum string
 
 const (
-	OptgroupAutocorrectEnumOff   OptgroupAutocorrectEnum = "off"
 	OptgroupAutocorrectEnumOn    OptgroupAutocorrectEnum = "on"
+	OptgroupAutocorrectEnumOff   OptgroupAutocorrectEnum = "off"
 	OptgroupAutocorrectEnumEmpty OptgroupAutocorrectEnum = ""
 )
 
@@ -88,42 +88,41 @@ const (
 type OptgroupDirEnum string
 
 const (
+	OptgroupDirEnumRtl  OptgroupDirEnum = "rtl"
 	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
 	OptgroupDirEnumLtr  OptgroupDirEnum = "ltr"
-	OptgroupDirEnumRtl  OptgroupDirEnum = "rtl"
 )
 
 type OptgroupDraggableEnum string
 
 const (
-	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
 	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
+	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
 )
 
 type OptgroupEnterkeyhintEnum string
 
 const (
+	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
 	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
 	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
 	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
 	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
 	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
-	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
 )
 
 type OptgroupHiddenEnum string
 
 const (
-	OptgroupHiddenEnumHidden     OptgroupHiddenEnum = "hidden"
 	OptgroupHiddenEnumUntilFound OptgroupHiddenEnum = "until-found"
+	OptgroupHiddenEnumHidden     OptgroupHiddenEnum = "hidden"
 	OptgroupHiddenEnumEmpty      OptgroupHiddenEnum = ""
 )
 
 type OptgroupInputmodeEnum string
 
 const (
-	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
 	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
 	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
@@ -131,6 +130,7 @@ const (
 	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
 	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
 	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
+	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
 )
 
 type OptgroupSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type OptgroupTranslateEnum string
 
 const (
-	OptgroupTranslateEnumYes   OptgroupTranslateEnum = "yes"
 	OptgroupTranslateEnumNo    OptgroupTranslateEnum = "no"
+	OptgroupTranslateEnumYes   OptgroupTranslateEnum = "yes"
 	OptgroupTranslateEnumEmpty OptgroupTranslateEnum = ""
 )
 
@@ -158,6 +158,18 @@ const (
 )
 
 type optgroupAttrs map[string]any
+
+func (e *OptgroupElement) Disabled(b bool) *OptgroupElement {
+	e.attributes["disabled"] = b
+
+	return e
+}
+
+func (e *OptgroupElement) Label(s string) *OptgroupElement {
+	e.attributes["label"] = s
+
+	return e
+}
 
 func (e *OptgroupElement) Autocapitalize(a OptgroupAutocapitalizeEnum) *OptgroupElement {
 	e.attributes["autocapitalize"] = a
