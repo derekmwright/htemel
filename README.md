@@ -96,7 +96,33 @@ Outputs (I formatted the result to help readability of the output):
 </body>
 </html>
 ```
-I currently have no plans on supporting indentation levels for nested elements, plus it's a waste of electrons for all that whitespace :P
+
+## The Goal
+
+The aim of this package is to provide a robust and **compile time safe** way to generate HTML.
+HTML elements are represented by functions that return a related struct that can then be chain called for further modification.
+An element has a limited set of attributes available to it and are unique to an instance of it.
+This means, when using code completion or hinting in your editor, you will only see attributes allowed for the specific element.
+If an attribute is an enumerated-type, special types are generated to conform to the HTML spec for you.
+
+Example:
+```go
+html.Link().HttpEquiv(html.MetaHttpEquivEnumContentType)
+```
+
+Additionally, due to the way function chain calling works, and HTML attributes are mutually exclusive on an element, the most recent chain call takes precedence.
+
+Example:
+```go
+// You can also pass a list of strings to space-seperated-token type attributes
+// ie: Class("active", "hover:bg-indigo-400")
+html.A().Class("active hover:bg-indigo-400").Class("this-takes-precedence")
+```
+
+Resuls:
+```text
+<a class="this-takes-precedence">
+```
 
 ## Why
 
