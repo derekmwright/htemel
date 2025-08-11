@@ -50,27 +50,29 @@ func EmbedTernary(condition bool, true htemel.Node, false htemel.Node) *EmbedEle
 type EmbedAutocapitalizeEnum string
 
 const (
-	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
-	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
 	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
+	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
+	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
 )
 
 type EmbedAutocorrectEnum string
 
 const (
-	EmbedAutocorrectEnumOn  EmbedAutocorrectEnum = "on"
-	EmbedAutocorrectEnumOff EmbedAutocorrectEnum = "off"
+	EmbedAutocorrectEnumOff   EmbedAutocorrectEnum = "off"
+	EmbedAutocorrectEnumOn    EmbedAutocorrectEnum = "on"
+	EmbedAutocorrectEnumEmpty EmbedAutocorrectEnum = ""
 )
 
 type EmbedContenteditableEnum string
 
 const (
-	EmbedContenteditableEnumPlaintextOnly EmbedContenteditableEnum = "plaintext-only"
 	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
 	EmbedContenteditableEnumFalse         EmbedContenteditableEnum = "false"
+	EmbedContenteditableEnumPlaintextOnly EmbedContenteditableEnum = "plaintext-only"
+	EmbedContenteditableEnumEmpty         EmbedContenteditableEnum = ""
 )
 
 type EmbedDirEnum string
@@ -111,14 +113,14 @@ const (
 type EmbedInputmodeEnum string
 
 const (
+	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
+	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
 	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
 	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
 	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
-	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
-	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 )
 
 type EmbedSpellcheckEnum string
@@ -126,20 +128,23 @@ type EmbedSpellcheckEnum string
 const (
 	EmbedSpellcheckEnumFalse EmbedSpellcheckEnum = "false"
 	EmbedSpellcheckEnumTrue  EmbedSpellcheckEnum = "true"
+	EmbedSpellcheckEnumEmpty EmbedSpellcheckEnum = ""
 )
 
 type EmbedTranslateEnum string
 
 const (
-	EmbedTranslateEnumYes EmbedTranslateEnum = "yes"
-	EmbedTranslateEnumNo  EmbedTranslateEnum = "no"
+	EmbedTranslateEnumNo    EmbedTranslateEnum = "no"
+	EmbedTranslateEnumYes   EmbedTranslateEnum = "yes"
+	EmbedTranslateEnumEmpty EmbedTranslateEnum = ""
 )
 
 type EmbedWritingsuggestionsEnum string
 
 const (
-	EmbedWritingsuggestionsEnumTrue  EmbedWritingsuggestionsEnum = "true"
 	EmbedWritingsuggestionsEnumFalse EmbedWritingsuggestionsEnum = "false"
+	EmbedWritingsuggestionsEnumTrue  EmbedWritingsuggestionsEnum = "true"
+	EmbedWritingsuggestionsEnumEmpty EmbedWritingsuggestionsEnum = ""
 )
 
 type embedAttrs map[string]any

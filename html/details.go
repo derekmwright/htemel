@@ -50,19 +50,20 @@ func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *Detail
 type DetailsAutocapitalizeEnum string
 
 const (
+	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
 	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
 	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
 	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
 	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
-	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
 )
 
 type DetailsAutocorrectEnum string
 
 const (
-	DetailsAutocorrectEnumOff DetailsAutocorrectEnum = "off"
-	DetailsAutocorrectEnumOn  DetailsAutocorrectEnum = "on"
+	DetailsAutocorrectEnumOff   DetailsAutocorrectEnum = "off"
+	DetailsAutocorrectEnumOn    DetailsAutocorrectEnum = "on"
+	DetailsAutocorrectEnumEmpty DetailsAutocorrectEnum = ""
 )
 
 type DetailsContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 	DetailsContenteditableEnumPlaintextOnly DetailsContenteditableEnum = "plaintext-only"
 	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
+	DetailsContenteditableEnumEmpty         DetailsContenteditableEnum = ""
 )
 
 type DetailsDirEnum string
 
 const (
-	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
 	DetailsDirEnumAuto DetailsDirEnum = "auto"
 	DetailsDirEnumLtr  DetailsDirEnum = "ltr"
+	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
 )
 
 type DetailsDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type DetailsEnterkeyhintEnum string
 
 const (
-	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
-	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
 	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
 	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
 	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
 	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
+	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
+	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
 )
 
 type DetailsHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type DetailsInputmodeEnum string
 
 const (
+	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
+	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
+	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
 	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
 	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
 	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
 	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
-	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
-	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
-	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
 )
 
 type DetailsSpellcheckEnum string
@@ -126,13 +128,15 @@ type DetailsSpellcheckEnum string
 const (
 	DetailsSpellcheckEnumFalse DetailsSpellcheckEnum = "false"
 	DetailsSpellcheckEnumTrue  DetailsSpellcheckEnum = "true"
+	DetailsSpellcheckEnumEmpty DetailsSpellcheckEnum = ""
 )
 
 type DetailsTranslateEnum string
 
 const (
-	DetailsTranslateEnumNo  DetailsTranslateEnum = "no"
-	DetailsTranslateEnumYes DetailsTranslateEnum = "yes"
+	DetailsTranslateEnumNo    DetailsTranslateEnum = "no"
+	DetailsTranslateEnumYes   DetailsTranslateEnum = "yes"
+	DetailsTranslateEnumEmpty DetailsTranslateEnum = ""
 )
 
 type DetailsWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type DetailsWritingsuggestionsEnum string
 const (
 	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
 	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
+	DetailsWritingsuggestionsEnumEmpty DetailsWritingsuggestionsEnum = ""
 )
 
 type detailsAttrs map[string]any

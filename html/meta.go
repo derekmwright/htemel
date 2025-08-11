@@ -50,35 +50,37 @@ func MetaTernary(condition bool, true htemel.Node, false htemel.Node) *MetaEleme
 type MetaAutocapitalizeEnum string
 
 const (
-	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
-	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
-	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
 	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
 	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
 	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
+	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
+	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
+	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
 )
 
 type MetaAutocorrectEnum string
 
 const (
-	MetaAutocorrectEnumOff MetaAutocorrectEnum = "off"
-	MetaAutocorrectEnumOn  MetaAutocorrectEnum = "on"
+	MetaAutocorrectEnumOff   MetaAutocorrectEnum = "off"
+	MetaAutocorrectEnumOn    MetaAutocorrectEnum = "on"
+	MetaAutocorrectEnumEmpty MetaAutocorrectEnum = ""
 )
 
 type MetaContenteditableEnum string
 
 const (
+	MetaContenteditableEnumPlaintextOnly MetaContenteditableEnum = "plaintext-only"
 	MetaContenteditableEnumTrue          MetaContenteditableEnum = "true"
 	MetaContenteditableEnumFalse         MetaContenteditableEnum = "false"
-	MetaContenteditableEnumPlaintextOnly MetaContenteditableEnum = "plaintext-only"
+	MetaContenteditableEnumEmpty         MetaContenteditableEnum = ""
 )
 
 type MetaDirEnum string
 
 const (
-	MetaDirEnumAuto MetaDirEnum = "auto"
 	MetaDirEnumLtr  MetaDirEnum = "ltr"
 	MetaDirEnumRtl  MetaDirEnum = "rtl"
+	MetaDirEnumAuto MetaDirEnum = "auto"
 )
 
 type MetaDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type MetaEnterkeyhintEnum string
 
 const (
-	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
 	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
 	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
 	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
 	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
+	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 )
 
 type MetaHiddenEnum string
@@ -111,7 +113,6 @@ const (
 type MetaInputmodeEnum string
 
 const (
-	MetaInputmodeEnumSearch  MetaInputmodeEnum = "search"
 	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
 	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
 	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
@@ -119,27 +120,31 @@ const (
 	MetaInputmodeEnumEmail   MetaInputmodeEnum = "email"
 	MetaInputmodeEnumNone    MetaInputmodeEnum = "none"
 	MetaInputmodeEnumNumeric MetaInputmodeEnum = "numeric"
+	MetaInputmodeEnumSearch  MetaInputmodeEnum = "search"
 )
 
 type MetaSpellcheckEnum string
 
 const (
-	MetaSpellcheckEnumFalse MetaSpellcheckEnum = "false"
 	MetaSpellcheckEnumTrue  MetaSpellcheckEnum = "true"
+	MetaSpellcheckEnumFalse MetaSpellcheckEnum = "false"
+	MetaSpellcheckEnumEmpty MetaSpellcheckEnum = ""
 )
 
 type MetaTranslateEnum string
 
 const (
-	MetaTranslateEnumNo  MetaTranslateEnum = "no"
-	MetaTranslateEnumYes MetaTranslateEnum = "yes"
+	MetaTranslateEnumNo    MetaTranslateEnum = "no"
+	MetaTranslateEnumYes   MetaTranslateEnum = "yes"
+	MetaTranslateEnumEmpty MetaTranslateEnum = ""
 )
 
 type MetaWritingsuggestionsEnum string
 
 const (
-	MetaWritingsuggestionsEnumTrue  MetaWritingsuggestionsEnum = "true"
 	MetaWritingsuggestionsEnumFalse MetaWritingsuggestionsEnum = "false"
+	MetaWritingsuggestionsEnumTrue  MetaWritingsuggestionsEnum = "true"
+	MetaWritingsuggestionsEnumEmpty MetaWritingsuggestionsEnum = ""
 )
 
 type metaAttrs map[string]any

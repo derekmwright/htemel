@@ -61,8 +61,9 @@ const (
 type InsAutocorrectEnum string
 
 const (
-	InsAutocorrectEnumOff InsAutocorrectEnum = "off"
-	InsAutocorrectEnumOn  InsAutocorrectEnum = "on"
+	InsAutocorrectEnumOff   InsAutocorrectEnum = "off"
+	InsAutocorrectEnumOn    InsAutocorrectEnum = "on"
+	InsAutocorrectEnumEmpty InsAutocorrectEnum = ""
 )
 
 type InsContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	InsContenteditableEnumFalse         InsContenteditableEnum = "false"
 	InsContenteditableEnumPlaintextOnly InsContenteditableEnum = "plaintext-only"
 	InsContenteditableEnumTrue          InsContenteditableEnum = "true"
+	InsContenteditableEnumEmpty         InsContenteditableEnum = ""
 )
 
 type InsDirEnum string
 
 const (
-	InsDirEnumRtl  InsDirEnum = "rtl"
 	InsDirEnumAuto InsDirEnum = "auto"
 	InsDirEnumLtr  InsDirEnum = "ltr"
+	InsDirEnumRtl  InsDirEnum = "rtl"
 )
 
 type InsDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type InsEnterkeyhintEnum string
 
 const (
+	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
+	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
 	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
 	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
 	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
-	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
-	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 )
 
 type InsHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type InsInputmodeEnum string
 
 const (
-	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
-	InsInputmodeEnumText    InsInputmodeEnum = "text"
-	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
 	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
 	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
 	InsInputmodeEnumNone    InsInputmodeEnum = "none"
 	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
+	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
+	InsInputmodeEnumText    InsInputmodeEnum = "text"
+	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
 )
 
 type InsSpellcheckEnum string
@@ -126,13 +128,15 @@ type InsSpellcheckEnum string
 const (
 	InsSpellcheckEnumFalse InsSpellcheckEnum = "false"
 	InsSpellcheckEnumTrue  InsSpellcheckEnum = "true"
+	InsSpellcheckEnumEmpty InsSpellcheckEnum = ""
 )
 
 type InsTranslateEnum string
 
 const (
-	InsTranslateEnumNo  InsTranslateEnum = "no"
-	InsTranslateEnumYes InsTranslateEnum = "yes"
+	InsTranslateEnumNo    InsTranslateEnum = "no"
+	InsTranslateEnumYes   InsTranslateEnum = "yes"
+	InsTranslateEnumEmpty InsTranslateEnum = ""
 )
 
 type InsWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type InsWritingsuggestionsEnum string
 const (
 	InsWritingsuggestionsEnumFalse InsWritingsuggestionsEnum = "false"
 	InsWritingsuggestionsEnumTrue  InsWritingsuggestionsEnum = "true"
+	InsWritingsuggestionsEnumEmpty InsWritingsuggestionsEnum = ""
 )
 
 type insAttrs map[string]any

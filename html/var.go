@@ -61,8 +61,9 @@ const (
 type VarAutocorrectEnum string
 
 const (
-	VarAutocorrectEnumOff VarAutocorrectEnum = "off"
-	VarAutocorrectEnumOn  VarAutocorrectEnum = "on"
+	VarAutocorrectEnumOff   VarAutocorrectEnum = "off"
+	VarAutocorrectEnumOn    VarAutocorrectEnum = "on"
+	VarAutocorrectEnumEmpty VarAutocorrectEnum = ""
 )
 
 type VarContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	VarContenteditableEnumFalse         VarContenteditableEnum = "false"
 	VarContenteditableEnumPlaintextOnly VarContenteditableEnum = "plaintext-only"
 	VarContenteditableEnumTrue          VarContenteditableEnum = "true"
+	VarContenteditableEnumEmpty         VarContenteditableEnum = ""
 )
 
 type VarDirEnum string
@@ -91,13 +93,13 @@ const (
 type VarEnterkeyhintEnum string
 
 const (
-	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
-	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
-	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
 	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
 	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
+	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
+	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
+	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
 )
 
 type VarHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type VarInputmodeEnum string
 
 const (
-	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
-	VarInputmodeEnumText    VarInputmodeEnum = "text"
-	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
 	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
 	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
 	VarInputmodeEnumNone    VarInputmodeEnum = "none"
 	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
+	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
+	VarInputmodeEnumText    VarInputmodeEnum = "text"
+	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
 )
 
 type VarSpellcheckEnum string
@@ -126,20 +128,23 @@ type VarSpellcheckEnum string
 const (
 	VarSpellcheckEnumFalse VarSpellcheckEnum = "false"
 	VarSpellcheckEnumTrue  VarSpellcheckEnum = "true"
+	VarSpellcheckEnumEmpty VarSpellcheckEnum = ""
 )
 
 type VarTranslateEnum string
 
 const (
-	VarTranslateEnumNo  VarTranslateEnum = "no"
-	VarTranslateEnumYes VarTranslateEnum = "yes"
+	VarTranslateEnumYes   VarTranslateEnum = "yes"
+	VarTranslateEnumNo    VarTranslateEnum = "no"
+	VarTranslateEnumEmpty VarTranslateEnum = ""
 )
 
 type VarWritingsuggestionsEnum string
 
 const (
-	VarWritingsuggestionsEnumTrue  VarWritingsuggestionsEnum = "true"
 	VarWritingsuggestionsEnumFalse VarWritingsuggestionsEnum = "false"
+	VarWritingsuggestionsEnumTrue  VarWritingsuggestionsEnum = "true"
+	VarWritingsuggestionsEnumEmpty VarWritingsuggestionsEnum = ""
 )
 
 type varAttrs map[string]any

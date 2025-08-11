@@ -61,16 +61,18 @@ const (
 type CiteAutocorrectEnum string
 
 const (
-	CiteAutocorrectEnumOff CiteAutocorrectEnum = "off"
-	CiteAutocorrectEnumOn  CiteAutocorrectEnum = "on"
+	CiteAutocorrectEnumOn    CiteAutocorrectEnum = "on"
+	CiteAutocorrectEnumOff   CiteAutocorrectEnum = "off"
+	CiteAutocorrectEnumEmpty CiteAutocorrectEnum = ""
 )
 
 type CiteContenteditableEnum string
 
 const (
-	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
 	CiteContenteditableEnumFalse         CiteContenteditableEnum = "false"
 	CiteContenteditableEnumPlaintextOnly CiteContenteditableEnum = "plaintext-only"
+	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
+	CiteContenteditableEnumEmpty         CiteContenteditableEnum = ""
 )
 
 type CiteDirEnum string
@@ -84,20 +86,20 @@ const (
 type CiteDraggableEnum string
 
 const (
-	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
 	CiteDraggableEnumFalse CiteDraggableEnum = "false"
+	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
 )
 
 type CiteEnterkeyhintEnum string
 
 const (
+	CiteEnterkeyhintEnumDone     CiteEnterkeyhintEnum = "done"
 	CiteEnterkeyhintEnumEnter    CiteEnterkeyhintEnum = "enter"
 	CiteEnterkeyhintEnumGo       CiteEnterkeyhintEnum = "go"
 	CiteEnterkeyhintEnumNext     CiteEnterkeyhintEnum = "next"
 	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
 	CiteEnterkeyhintEnumSearch   CiteEnterkeyhintEnum = "search"
 	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
-	CiteEnterkeyhintEnumDone     CiteEnterkeyhintEnum = "done"
 )
 
 type CiteHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type CiteInputmodeEnum string
 
 const (
+	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
+	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
+	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
 	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
 	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
 	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
 	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
-	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
-	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
-	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 )
 
 type CiteSpellcheckEnum string
@@ -126,13 +128,15 @@ type CiteSpellcheckEnum string
 const (
 	CiteSpellcheckEnumFalse CiteSpellcheckEnum = "false"
 	CiteSpellcheckEnumTrue  CiteSpellcheckEnum = "true"
+	CiteSpellcheckEnumEmpty CiteSpellcheckEnum = ""
 )
 
 type CiteTranslateEnum string
 
 const (
-	CiteTranslateEnumYes CiteTranslateEnum = "yes"
-	CiteTranslateEnumNo  CiteTranslateEnum = "no"
+	CiteTranslateEnumNo    CiteTranslateEnum = "no"
+	CiteTranslateEnumYes   CiteTranslateEnum = "yes"
+	CiteTranslateEnumEmpty CiteTranslateEnum = ""
 )
 
 type CiteWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type CiteWritingsuggestionsEnum string
 const (
 	CiteWritingsuggestionsEnumFalse CiteWritingsuggestionsEnum = "false"
 	CiteWritingsuggestionsEnumTrue  CiteWritingsuggestionsEnum = "true"
+	CiteWritingsuggestionsEnumEmpty CiteWritingsuggestionsEnum = ""
 )
 
 type citeAttrs map[string]any

@@ -50,19 +50,20 @@ func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderE
 type HeaderAutocapitalizeEnum string
 
 const (
+	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
 	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
 	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
 	HeaderAutocapitalizeEnumNone       HeaderAutocapitalizeEnum = "none"
 	HeaderAutocapitalizeEnumOff        HeaderAutocapitalizeEnum = "off"
 	HeaderAutocapitalizeEnumOn         HeaderAutocapitalizeEnum = "on"
-	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
 )
 
 type HeaderAutocorrectEnum string
 
 const (
-	HeaderAutocorrectEnumOff HeaderAutocorrectEnum = "off"
-	HeaderAutocorrectEnumOn  HeaderAutocorrectEnum = "on"
+	HeaderAutocorrectEnumOff   HeaderAutocorrectEnum = "off"
+	HeaderAutocorrectEnumOn    HeaderAutocorrectEnum = "on"
+	HeaderAutocorrectEnumEmpty HeaderAutocorrectEnum = ""
 )
 
 type HeaderContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	HeaderContenteditableEnumFalse         HeaderContenteditableEnum = "false"
 	HeaderContenteditableEnumPlaintextOnly HeaderContenteditableEnum = "plaintext-only"
 	HeaderContenteditableEnumTrue          HeaderContenteditableEnum = "true"
+	HeaderContenteditableEnumEmpty         HeaderContenteditableEnum = ""
 )
 
 type HeaderDirEnum string
 
 const (
+	HeaderDirEnumAuto HeaderDirEnum = "auto"
 	HeaderDirEnumLtr  HeaderDirEnum = "ltr"
 	HeaderDirEnumRtl  HeaderDirEnum = "rtl"
-	HeaderDirEnumAuto HeaderDirEnum = "auto"
 )
 
 type HeaderDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type HeaderEnterkeyhintEnum string
 
 const (
+	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
+	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
+	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
 	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
 	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
 	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
-	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
-	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
-	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 )
 
 type HeaderHiddenEnum string
@@ -111,6 +113,7 @@ const (
 type HeaderInputmodeEnum string
 
 const (
+	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 	HeaderInputmodeEnumUrl     HeaderInputmodeEnum = "url"
 	HeaderInputmodeEnumDecimal HeaderInputmodeEnum = "decimal"
 	HeaderInputmodeEnumEmail   HeaderInputmodeEnum = "email"
@@ -118,7 +121,6 @@ const (
 	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
 	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
 	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
-	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 )
 
 type HeaderSpellcheckEnum string
@@ -126,13 +128,15 @@ type HeaderSpellcheckEnum string
 const (
 	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
 	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
+	HeaderSpellcheckEnumEmpty HeaderSpellcheckEnum = ""
 )
 
 type HeaderTranslateEnum string
 
 const (
-	HeaderTranslateEnumNo  HeaderTranslateEnum = "no"
-	HeaderTranslateEnumYes HeaderTranslateEnum = "yes"
+	HeaderTranslateEnumNo    HeaderTranslateEnum = "no"
+	HeaderTranslateEnumYes   HeaderTranslateEnum = "yes"
+	HeaderTranslateEnumEmpty HeaderTranslateEnum = ""
 )
 
 type HeaderWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type HeaderWritingsuggestionsEnum string
 const (
 	HeaderWritingsuggestionsEnumFalse HeaderWritingsuggestionsEnum = "false"
 	HeaderWritingsuggestionsEnumTrue  HeaderWritingsuggestionsEnum = "true"
+	HeaderWritingsuggestionsEnumEmpty HeaderWritingsuggestionsEnum = ""
 )
 
 type headerAttrs map[string]any

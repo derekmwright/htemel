@@ -50,19 +50,20 @@ func TfootTernary(condition bool, true htemel.Node, false htemel.Node) *TfootEle
 type TfootAutocapitalizeEnum string
 
 const (
-	TfootAutocapitalizeEnumOn         TfootAutocapitalizeEnum = "on"
-	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
-	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
 	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
 	TfootAutocapitalizeEnumNone       TfootAutocapitalizeEnum = "none"
 	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
+	TfootAutocapitalizeEnumOn         TfootAutocapitalizeEnum = "on"
+	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
+	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
 )
 
 type TfootAutocorrectEnum string
 
 const (
-	TfootAutocorrectEnumOff TfootAutocorrectEnum = "off"
-	TfootAutocorrectEnumOn  TfootAutocorrectEnum = "on"
+	TfootAutocorrectEnumOff   TfootAutocorrectEnum = "off"
+	TfootAutocorrectEnumOn    TfootAutocorrectEnum = "on"
+	TfootAutocorrectEnumEmpty TfootAutocorrectEnum = ""
 )
 
 type TfootContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	TfootContenteditableEnumFalse         TfootContenteditableEnum = "false"
 	TfootContenteditableEnumPlaintextOnly TfootContenteditableEnum = "plaintext-only"
 	TfootContenteditableEnumTrue          TfootContenteditableEnum = "true"
+	TfootContenteditableEnumEmpty         TfootContenteditableEnum = ""
 )
 
 type TfootDirEnum string
 
 const (
-	TfootDirEnumRtl  TfootDirEnum = "rtl"
 	TfootDirEnumAuto TfootDirEnum = "auto"
 	TfootDirEnumLtr  TfootDirEnum = "ltr"
+	TfootDirEnumRtl  TfootDirEnum = "rtl"
 )
 
 type TfootDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type TfootEnterkeyhintEnum string
 
 const (
-	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
-	TfootEnterkeyhintEnumPrevious TfootEnterkeyhintEnum = "previous"
 	TfootEnterkeyhintEnumSearch   TfootEnterkeyhintEnum = "search"
 	TfootEnterkeyhintEnumSend     TfootEnterkeyhintEnum = "send"
 	TfootEnterkeyhintEnumDone     TfootEnterkeyhintEnum = "done"
 	TfootEnterkeyhintEnumEnter    TfootEnterkeyhintEnum = "enter"
 	TfootEnterkeyhintEnumGo       TfootEnterkeyhintEnum = "go"
+	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
+	TfootEnterkeyhintEnumPrevious TfootEnterkeyhintEnum = "previous"
 )
 
 type TfootHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type TfootInputmodeEnum string
 
 const (
-	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
-	TfootInputmodeEnumDecimal TfootInputmodeEnum = "decimal"
-	TfootInputmodeEnumEmail   TfootInputmodeEnum = "email"
-	TfootInputmodeEnumNone    TfootInputmodeEnum = "none"
 	TfootInputmodeEnumNumeric TfootInputmodeEnum = "numeric"
 	TfootInputmodeEnumSearch  TfootInputmodeEnum = "search"
 	TfootInputmodeEnumTel     TfootInputmodeEnum = "tel"
 	TfootInputmodeEnumText    TfootInputmodeEnum = "text"
+	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
+	TfootInputmodeEnumDecimal TfootInputmodeEnum = "decimal"
+	TfootInputmodeEnumEmail   TfootInputmodeEnum = "email"
+	TfootInputmodeEnumNone    TfootInputmodeEnum = "none"
 )
 
 type TfootSpellcheckEnum string
@@ -126,13 +128,15 @@ type TfootSpellcheckEnum string
 const (
 	TfootSpellcheckEnumFalse TfootSpellcheckEnum = "false"
 	TfootSpellcheckEnumTrue  TfootSpellcheckEnum = "true"
+	TfootSpellcheckEnumEmpty TfootSpellcheckEnum = ""
 )
 
 type TfootTranslateEnum string
 
 const (
-	TfootTranslateEnumNo  TfootTranslateEnum = "no"
-	TfootTranslateEnumYes TfootTranslateEnum = "yes"
+	TfootTranslateEnumYes   TfootTranslateEnum = "yes"
+	TfootTranslateEnumNo    TfootTranslateEnum = "no"
+	TfootTranslateEnumEmpty TfootTranslateEnum = ""
 )
 
 type TfootWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type TfootWritingsuggestionsEnum string
 const (
 	TfootWritingsuggestionsEnumFalse TfootWritingsuggestionsEnum = "false"
 	TfootWritingsuggestionsEnumTrue  TfootWritingsuggestionsEnum = "true"
+	TfootWritingsuggestionsEnumEmpty TfootWritingsuggestionsEnum = ""
 )
 
 type tfootAttrs map[string]any

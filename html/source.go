@@ -61,8 +61,9 @@ const (
 type SourceAutocorrectEnum string
 
 const (
-	SourceAutocorrectEnumOff SourceAutocorrectEnum = "off"
-	SourceAutocorrectEnumOn  SourceAutocorrectEnum = "on"
+	SourceAutocorrectEnumOff   SourceAutocorrectEnum = "off"
+	SourceAutocorrectEnumOn    SourceAutocorrectEnum = "on"
+	SourceAutocorrectEnumEmpty SourceAutocorrectEnum = ""
 )
 
 type SourceContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
 	SourceContenteditableEnumPlaintextOnly SourceContenteditableEnum = "plaintext-only"
 	SourceContenteditableEnumTrue          SourceContenteditableEnum = "true"
+	SourceContenteditableEnumEmpty         SourceContenteditableEnum = ""
 )
 
 type SourceDirEnum string
@@ -91,13 +93,13 @@ const (
 type SourceEnterkeyhintEnum string
 
 const (
-	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
 	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
 	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
 	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
 	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
 	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
+	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
 )
 
 type SourceHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type SourceInputmodeEnum string
 
 const (
-	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
-	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
-	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
 	SourceInputmodeEnumText    SourceInputmodeEnum = "text"
 	SourceInputmodeEnumUrl     SourceInputmodeEnum = "url"
 	SourceInputmodeEnumDecimal SourceInputmodeEnum = "decimal"
 	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
 	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
+	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
+	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
+	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
 )
 
 type SourceSpellcheckEnum string
@@ -126,13 +128,15 @@ type SourceSpellcheckEnum string
 const (
 	SourceSpellcheckEnumFalse SourceSpellcheckEnum = "false"
 	SourceSpellcheckEnumTrue  SourceSpellcheckEnum = "true"
+	SourceSpellcheckEnumEmpty SourceSpellcheckEnum = ""
 )
 
 type SourceTranslateEnum string
 
 const (
-	SourceTranslateEnumNo  SourceTranslateEnum = "no"
-	SourceTranslateEnumYes SourceTranslateEnum = "yes"
+	SourceTranslateEnumNo    SourceTranslateEnum = "no"
+	SourceTranslateEnumYes   SourceTranslateEnum = "yes"
+	SourceTranslateEnumEmpty SourceTranslateEnum = ""
 )
 
 type SourceWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type SourceWritingsuggestionsEnum string
 const (
 	SourceWritingsuggestionsEnumFalse SourceWritingsuggestionsEnum = "false"
 	SourceWritingsuggestionsEnumTrue  SourceWritingsuggestionsEnum = "true"
+	SourceWritingsuggestionsEnumEmpty SourceWritingsuggestionsEnum = ""
 )
 
 type sourceAttrs map[string]any

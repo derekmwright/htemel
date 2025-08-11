@@ -61,8 +61,9 @@ const (
 type ProgressAutocorrectEnum string
 
 const (
-	ProgressAutocorrectEnumOff ProgressAutocorrectEnum = "off"
-	ProgressAutocorrectEnumOn  ProgressAutocorrectEnum = "on"
+	ProgressAutocorrectEnumOff   ProgressAutocorrectEnum = "off"
+	ProgressAutocorrectEnumOn    ProgressAutocorrectEnum = "on"
+	ProgressAutocorrectEnumEmpty ProgressAutocorrectEnum = ""
 )
 
 type ProgressContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	ProgressContenteditableEnumFalse         ProgressContenteditableEnum = "false"
 	ProgressContenteditableEnumPlaintextOnly ProgressContenteditableEnum = "plaintext-only"
 	ProgressContenteditableEnumTrue          ProgressContenteditableEnum = "true"
+	ProgressContenteditableEnumEmpty         ProgressContenteditableEnum = ""
 )
 
 type ProgressDirEnum string
@@ -91,13 +93,13 @@ const (
 type ProgressEnterkeyhintEnum string
 
 const (
-	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
-	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
 	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
 	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
 	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
 	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
 	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
+	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
+	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
 )
 
 type ProgressHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type ProgressInputmodeEnum string
 
 const (
+	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
+	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
+	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
 	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
 	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
 	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
 	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
 	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
-	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
-	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
-	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
 )
 
 type ProgressSpellcheckEnum string
@@ -126,13 +128,15 @@ type ProgressSpellcheckEnum string
 const (
 	ProgressSpellcheckEnumFalse ProgressSpellcheckEnum = "false"
 	ProgressSpellcheckEnumTrue  ProgressSpellcheckEnum = "true"
+	ProgressSpellcheckEnumEmpty ProgressSpellcheckEnum = ""
 )
 
 type ProgressTranslateEnum string
 
 const (
-	ProgressTranslateEnumNo  ProgressTranslateEnum = "no"
-	ProgressTranslateEnumYes ProgressTranslateEnum = "yes"
+	ProgressTranslateEnumNo    ProgressTranslateEnum = "no"
+	ProgressTranslateEnumYes   ProgressTranslateEnum = "yes"
+	ProgressTranslateEnumEmpty ProgressTranslateEnum = ""
 )
 
 type ProgressWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type ProgressWritingsuggestionsEnum string
 const (
 	ProgressWritingsuggestionsEnumFalse ProgressWritingsuggestionsEnum = "false"
 	ProgressWritingsuggestionsEnumTrue  ProgressWritingsuggestionsEnum = "true"
+	ProgressWritingsuggestionsEnumEmpty ProgressWritingsuggestionsEnum = ""
 )
 
 type progressAttrs map[string]any

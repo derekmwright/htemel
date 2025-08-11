@@ -50,27 +50,29 @@ func DlTernary(condition bool, true htemel.Node, false htemel.Node) *DlElement {
 type DlAutocapitalizeEnum string
 
 const (
-	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
-	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
-	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
 	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
 	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
 	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
+	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
+	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
+	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
 )
 
 type DlAutocorrectEnum string
 
 const (
-	DlAutocorrectEnumOn  DlAutocorrectEnum = "on"
-	DlAutocorrectEnumOff DlAutocorrectEnum = "off"
+	DlAutocorrectEnumOff   DlAutocorrectEnum = "off"
+	DlAutocorrectEnumOn    DlAutocorrectEnum = "on"
+	DlAutocorrectEnumEmpty DlAutocorrectEnum = ""
 )
 
 type DlContenteditableEnum string
 
 const (
+	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
 	DlContenteditableEnumTrue          DlContenteditableEnum = "true"
-	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
+	DlContenteditableEnumEmpty         DlContenteditableEnum = ""
 )
 
 type DlDirEnum string
@@ -91,13 +93,13 @@ const (
 type DlEnterkeyhintEnum string
 
 const (
-	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
 	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
 	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
 	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
 	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
 	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
+	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
 )
 
 type DlHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type DlInputmodeEnum string
 
 const (
-	DlInputmodeEnumDecimal DlInputmodeEnum = "decimal"
-	DlInputmodeEnumEmail   DlInputmodeEnum = "email"
-	DlInputmodeEnumNone    DlInputmodeEnum = "none"
-	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
 	DlInputmodeEnumSearch  DlInputmodeEnum = "search"
 	DlInputmodeEnumTel     DlInputmodeEnum = "tel"
 	DlInputmodeEnumText    DlInputmodeEnum = "text"
 	DlInputmodeEnumUrl     DlInputmodeEnum = "url"
+	DlInputmodeEnumDecimal DlInputmodeEnum = "decimal"
+	DlInputmodeEnumEmail   DlInputmodeEnum = "email"
+	DlInputmodeEnumNone    DlInputmodeEnum = "none"
+	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
 )
 
 type DlSpellcheckEnum string
@@ -126,13 +128,15 @@ type DlSpellcheckEnum string
 const (
 	DlSpellcheckEnumFalse DlSpellcheckEnum = "false"
 	DlSpellcheckEnumTrue  DlSpellcheckEnum = "true"
+	DlSpellcheckEnumEmpty DlSpellcheckEnum = ""
 )
 
 type DlTranslateEnum string
 
 const (
-	DlTranslateEnumNo  DlTranslateEnum = "no"
-	DlTranslateEnumYes DlTranslateEnum = "yes"
+	DlTranslateEnumYes   DlTranslateEnum = "yes"
+	DlTranslateEnumNo    DlTranslateEnum = "no"
+	DlTranslateEnumEmpty DlTranslateEnum = ""
 )
 
 type DlWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type DlWritingsuggestionsEnum string
 const (
 	DlWritingsuggestionsEnumFalse DlWritingsuggestionsEnum = "false"
 	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
+	DlWritingsuggestionsEnumEmpty DlWritingsuggestionsEnum = ""
 )
 
 type dlAttrs map[string]any

@@ -50,27 +50,29 @@ func SubTernary(condition bool, true htemel.Node, false htemel.Node) *SubElement
 type SubAutocapitalizeEnum string
 
 const (
+	SubAutocapitalizeEnumSentences  SubAutocapitalizeEnum = "sentences"
+	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
 	SubAutocapitalizeEnumCharacters SubAutocapitalizeEnum = "characters"
 	SubAutocapitalizeEnumNone       SubAutocapitalizeEnum = "none"
 	SubAutocapitalizeEnumOff        SubAutocapitalizeEnum = "off"
 	SubAutocapitalizeEnumOn         SubAutocapitalizeEnum = "on"
-	SubAutocapitalizeEnumSentences  SubAutocapitalizeEnum = "sentences"
-	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
 )
 
 type SubAutocorrectEnum string
 
 const (
-	SubAutocorrectEnumOff SubAutocorrectEnum = "off"
-	SubAutocorrectEnumOn  SubAutocorrectEnum = "on"
+	SubAutocorrectEnumOff   SubAutocorrectEnum = "off"
+	SubAutocorrectEnumOn    SubAutocorrectEnum = "on"
+	SubAutocorrectEnumEmpty SubAutocorrectEnum = ""
 )
 
 type SubContenteditableEnum string
 
 const (
-	SubContenteditableEnumFalse         SubContenteditableEnum = "false"
 	SubContenteditableEnumPlaintextOnly SubContenteditableEnum = "plaintext-only"
 	SubContenteditableEnumTrue          SubContenteditableEnum = "true"
+	SubContenteditableEnumFalse         SubContenteditableEnum = "false"
+	SubContenteditableEnumEmpty         SubContenteditableEnum = ""
 )
 
 type SubDirEnum string
@@ -91,13 +93,13 @@ const (
 type SubEnterkeyhintEnum string
 
 const (
+	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
 	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
 	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
 	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
 	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
-	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 )
 
 type SubHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type SubInputmodeEnum string
 
 const (
-	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
-	SubInputmodeEnumNone    SubInputmodeEnum = "none"
-	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
-	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
 	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
 	SubInputmodeEnumText    SubInputmodeEnum = "text"
 	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
 	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
+	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
+	SubInputmodeEnumNone    SubInputmodeEnum = "none"
+	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
+	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
 )
 
 type SubSpellcheckEnum string
@@ -126,13 +128,15 @@ type SubSpellcheckEnum string
 const (
 	SubSpellcheckEnumFalse SubSpellcheckEnum = "false"
 	SubSpellcheckEnumTrue  SubSpellcheckEnum = "true"
+	SubSpellcheckEnumEmpty SubSpellcheckEnum = ""
 )
 
 type SubTranslateEnum string
 
 const (
-	SubTranslateEnumNo  SubTranslateEnum = "no"
-	SubTranslateEnumYes SubTranslateEnum = "yes"
+	SubTranslateEnumNo    SubTranslateEnum = "no"
+	SubTranslateEnumYes   SubTranslateEnum = "yes"
+	SubTranslateEnumEmpty SubTranslateEnum = ""
 )
 
 type SubWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type SubWritingsuggestionsEnum string
 const (
 	SubWritingsuggestionsEnumFalse SubWritingsuggestionsEnum = "false"
 	SubWritingsuggestionsEnumTrue  SubWritingsuggestionsEnum = "true"
+	SubWritingsuggestionsEnumEmpty SubWritingsuggestionsEnum = ""
 )
 
 type subAttrs map[string]any

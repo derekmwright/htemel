@@ -50,19 +50,20 @@ func CodeTernary(condition bool, true htemel.Node, false htemel.Node) *CodeEleme
 type CodeAutocapitalizeEnum string
 
 const (
+	CodeAutocapitalizeEnumOn         CodeAutocapitalizeEnum = "on"
 	CodeAutocapitalizeEnumSentences  CodeAutocapitalizeEnum = "sentences"
 	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
 	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
 	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
 	CodeAutocapitalizeEnumOff        CodeAutocapitalizeEnum = "off"
-	CodeAutocapitalizeEnumOn         CodeAutocapitalizeEnum = "on"
 )
 
 type CodeAutocorrectEnum string
 
 const (
-	CodeAutocorrectEnumOff CodeAutocorrectEnum = "off"
-	CodeAutocorrectEnumOn  CodeAutocorrectEnum = "on"
+	CodeAutocorrectEnumOff   CodeAutocorrectEnum = "off"
+	CodeAutocorrectEnumOn    CodeAutocorrectEnum = "on"
+	CodeAutocorrectEnumEmpty CodeAutocorrectEnum = ""
 )
 
 type CodeContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	CodeContenteditableEnumFalse         CodeContenteditableEnum = "false"
 	CodeContenteditableEnumPlaintextOnly CodeContenteditableEnum = "plaintext-only"
 	CodeContenteditableEnumTrue          CodeContenteditableEnum = "true"
+	CodeContenteditableEnumEmpty         CodeContenteditableEnum = ""
 )
 
 type CodeDirEnum string
@@ -91,13 +93,13 @@ const (
 type CodeEnterkeyhintEnum string
 
 const (
-	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
-	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
 	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
 	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
 	CodeEnterkeyhintEnumEnter    CodeEnterkeyhintEnum = "enter"
 	CodeEnterkeyhintEnumGo       CodeEnterkeyhintEnum = "go"
 	CodeEnterkeyhintEnumNext     CodeEnterkeyhintEnum = "next"
+	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
+	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
 )
 
 type CodeHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type CodeInputmodeEnum string
 
 const (
+	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
+	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
+	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
 	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
 	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
 	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
-	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
-	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
-	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
 )
 
 type CodeSpellcheckEnum string
@@ -126,20 +128,23 @@ type CodeSpellcheckEnum string
 const (
 	CodeSpellcheckEnumFalse CodeSpellcheckEnum = "false"
 	CodeSpellcheckEnumTrue  CodeSpellcheckEnum = "true"
+	CodeSpellcheckEnumEmpty CodeSpellcheckEnum = ""
 )
 
 type CodeTranslateEnum string
 
 const (
-	CodeTranslateEnumNo  CodeTranslateEnum = "no"
-	CodeTranslateEnumYes CodeTranslateEnum = "yes"
+	CodeTranslateEnumNo    CodeTranslateEnum = "no"
+	CodeTranslateEnumYes   CodeTranslateEnum = "yes"
+	CodeTranslateEnumEmpty CodeTranslateEnum = ""
 )
 
 type CodeWritingsuggestionsEnum string
 
 const (
-	CodeWritingsuggestionsEnumFalse CodeWritingsuggestionsEnum = "false"
 	CodeWritingsuggestionsEnumTrue  CodeWritingsuggestionsEnum = "true"
+	CodeWritingsuggestionsEnumFalse CodeWritingsuggestionsEnum = "false"
+	CodeWritingsuggestionsEnumEmpty CodeWritingsuggestionsEnum = ""
 )
 
 type codeAttrs map[string]any

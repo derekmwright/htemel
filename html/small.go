@@ -50,54 +50,56 @@ func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallEle
 type SmallAutocapitalizeEnum string
 
 const (
+	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
+	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
 	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
 	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
-	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
-	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
 )
 
 type SmallAutocorrectEnum string
 
 const (
-	SmallAutocorrectEnumOff SmallAutocorrectEnum = "off"
-	SmallAutocorrectEnumOn  SmallAutocorrectEnum = "on"
+	SmallAutocorrectEnumOff   SmallAutocorrectEnum = "off"
+	SmallAutocorrectEnumOn    SmallAutocorrectEnum = "on"
+	SmallAutocorrectEnumEmpty SmallAutocorrectEnum = ""
 )
 
 type SmallContenteditableEnum string
 
 const (
-	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
 	SmallContenteditableEnumPlaintextOnly SmallContenteditableEnum = "plaintext-only"
 	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
+	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
+	SmallContenteditableEnumEmpty         SmallContenteditableEnum = ""
 )
 
 type SmallDirEnum string
 
 const (
-	SmallDirEnumLtr  SmallDirEnum = "ltr"
 	SmallDirEnumRtl  SmallDirEnum = "rtl"
 	SmallDirEnumAuto SmallDirEnum = "auto"
+	SmallDirEnumLtr  SmallDirEnum = "ltr"
 )
 
 type SmallDraggableEnum string
 
 const (
-	SmallDraggableEnumTrue  SmallDraggableEnum = "true"
 	SmallDraggableEnumFalse SmallDraggableEnum = "false"
+	SmallDraggableEnumTrue  SmallDraggableEnum = "true"
 )
 
 type SmallEnterkeyhintEnum string
 
 const (
-	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
-	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
-	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
 	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
 	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
 	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
+	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
+	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
+	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 )
 
 type SmallHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type SmallInputmodeEnum string
 
 const (
-	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
-	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
-	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
 	SmallInputmodeEnumSearch  SmallInputmodeEnum = "search"
 	SmallInputmodeEnumTel     SmallInputmodeEnum = "tel"
 	SmallInputmodeEnumText    SmallInputmodeEnum = "text"
 	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
 	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
+	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
+	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
+	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
 )
 
 type SmallSpellcheckEnum string
@@ -126,13 +128,15 @@ type SmallSpellcheckEnum string
 const (
 	SmallSpellcheckEnumFalse SmallSpellcheckEnum = "false"
 	SmallSpellcheckEnumTrue  SmallSpellcheckEnum = "true"
+	SmallSpellcheckEnumEmpty SmallSpellcheckEnum = ""
 )
 
 type SmallTranslateEnum string
 
 const (
-	SmallTranslateEnumNo  SmallTranslateEnum = "no"
-	SmallTranslateEnumYes SmallTranslateEnum = "yes"
+	SmallTranslateEnumNo    SmallTranslateEnum = "no"
+	SmallTranslateEnumYes   SmallTranslateEnum = "yes"
+	SmallTranslateEnumEmpty SmallTranslateEnum = ""
 )
 
 type SmallWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type SmallWritingsuggestionsEnum string
 const (
 	SmallWritingsuggestionsEnumFalse SmallWritingsuggestionsEnum = "false"
 	SmallWritingsuggestionsEnumTrue  SmallWritingsuggestionsEnum = "true"
+	SmallWritingsuggestionsEnumEmpty SmallWritingsuggestionsEnum = ""
 )
 
 type smallAttrs map[string]any

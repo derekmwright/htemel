@@ -61,16 +61,18 @@ const (
 type TemplateAutocorrectEnum string
 
 const (
-	TemplateAutocorrectEnumOff TemplateAutocorrectEnum = "off"
-	TemplateAutocorrectEnumOn  TemplateAutocorrectEnum = "on"
+	TemplateAutocorrectEnumOff   TemplateAutocorrectEnum = "off"
+	TemplateAutocorrectEnumOn    TemplateAutocorrectEnum = "on"
+	TemplateAutocorrectEnumEmpty TemplateAutocorrectEnum = ""
 )
 
 type TemplateContenteditableEnum string
 
 const (
-	TemplateContenteditableEnumFalse         TemplateContenteditableEnum = "false"
 	TemplateContenteditableEnumPlaintextOnly TemplateContenteditableEnum = "plaintext-only"
 	TemplateContenteditableEnumTrue          TemplateContenteditableEnum = "true"
+	TemplateContenteditableEnumFalse         TemplateContenteditableEnum = "false"
+	TemplateContenteditableEnumEmpty         TemplateContenteditableEnum = ""
 )
 
 type TemplateDirEnum string
@@ -91,13 +93,13 @@ const (
 type TemplateEnterkeyhintEnum string
 
 const (
-	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
-	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
-	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 	TemplateEnterkeyhintEnumEnter    TemplateEnterkeyhintEnum = "enter"
 	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
 	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
 	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
+	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
+	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
+	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 )
 
 type TemplateHiddenEnum string
@@ -126,20 +128,23 @@ type TemplateSpellcheckEnum string
 const (
 	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
 	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
+	TemplateSpellcheckEnumEmpty TemplateSpellcheckEnum = ""
 )
 
 type TemplateTranslateEnum string
 
 const (
-	TemplateTranslateEnumNo  TemplateTranslateEnum = "no"
-	TemplateTranslateEnumYes TemplateTranslateEnum = "yes"
+	TemplateTranslateEnumNo    TemplateTranslateEnum = "no"
+	TemplateTranslateEnumYes   TemplateTranslateEnum = "yes"
+	TemplateTranslateEnumEmpty TemplateTranslateEnum = ""
 )
 
 type TemplateWritingsuggestionsEnum string
 
 const (
-	TemplateWritingsuggestionsEnumFalse TemplateWritingsuggestionsEnum = "false"
 	TemplateWritingsuggestionsEnumTrue  TemplateWritingsuggestionsEnum = "true"
+	TemplateWritingsuggestionsEnumFalse TemplateWritingsuggestionsEnum = "false"
+	TemplateWritingsuggestionsEnumEmpty TemplateWritingsuggestionsEnum = ""
 )
 
 type templateAttrs map[string]any

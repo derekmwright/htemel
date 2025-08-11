@@ -50,19 +50,20 @@ func DtTernary(condition bool, true htemel.Node, false htemel.Node) *DtElement {
 type DtAutocapitalizeEnum string
 
 const (
-	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
-	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
-	DtAutocapitalizeEnumOff        DtAutocapitalizeEnum = "off"
 	DtAutocapitalizeEnumOn         DtAutocapitalizeEnum = "on"
 	DtAutocapitalizeEnumSentences  DtAutocapitalizeEnum = "sentences"
 	DtAutocapitalizeEnumWords      DtAutocapitalizeEnum = "words"
+	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
+	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
+	DtAutocapitalizeEnumOff        DtAutocapitalizeEnum = "off"
 )
 
 type DtAutocorrectEnum string
 
 const (
-	DtAutocorrectEnumOff DtAutocorrectEnum = "off"
-	DtAutocorrectEnumOn  DtAutocorrectEnum = "on"
+	DtAutocorrectEnumOff   DtAutocorrectEnum = "off"
+	DtAutocorrectEnumOn    DtAutocorrectEnum = "on"
+	DtAutocorrectEnumEmpty DtAutocorrectEnum = ""
 )
 
 type DtContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	DtContenteditableEnumFalse         DtContenteditableEnum = "false"
 	DtContenteditableEnumPlaintextOnly DtContenteditableEnum = "plaintext-only"
 	DtContenteditableEnumTrue          DtContenteditableEnum = "true"
+	DtContenteditableEnumEmpty         DtContenteditableEnum = ""
 )
 
 type DtDirEnum string
 
 const (
+	DtDirEnumRtl  DtDirEnum = "rtl"
 	DtDirEnumAuto DtDirEnum = "auto"
 	DtDirEnumLtr  DtDirEnum = "ltr"
-	DtDirEnumRtl  DtDirEnum = "rtl"
 )
 
 type DtDraggableEnum string
@@ -91,26 +93,27 @@ const (
 type DtEnterkeyhintEnum string
 
 const (
-	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
-	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
 	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
 	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
 	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
+	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
+	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
 )
 
 type DtHiddenEnum string
 
 const (
-	DtHiddenEnumUntilFound DtHiddenEnum = "until-found"
 	DtHiddenEnumHidden     DtHiddenEnum = "hidden"
+	DtHiddenEnumUntilFound DtHiddenEnum = "until-found"
 	DtHiddenEnumEmpty      DtHiddenEnum = ""
 )
 
 type DtInputmodeEnum string
 
 const (
+	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
 	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
 	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 	DtInputmodeEnumText    DtInputmodeEnum = "text"
@@ -118,7 +121,6 @@ const (
 	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
 	DtInputmodeEnumNone    DtInputmodeEnum = "none"
-	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
 )
 
 type DtSpellcheckEnum string
@@ -126,13 +128,15 @@ type DtSpellcheckEnum string
 const (
 	DtSpellcheckEnumFalse DtSpellcheckEnum = "false"
 	DtSpellcheckEnumTrue  DtSpellcheckEnum = "true"
+	DtSpellcheckEnumEmpty DtSpellcheckEnum = ""
 )
 
 type DtTranslateEnum string
 
 const (
-	DtTranslateEnumNo  DtTranslateEnum = "no"
-	DtTranslateEnumYes DtTranslateEnum = "yes"
+	DtTranslateEnumYes   DtTranslateEnum = "yes"
+	DtTranslateEnumNo    DtTranslateEnum = "no"
+	DtTranslateEnumEmpty DtTranslateEnum = ""
 )
 
 type DtWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type DtWritingsuggestionsEnum string
 const (
 	DtWritingsuggestionsEnumFalse DtWritingsuggestionsEnum = "false"
 	DtWritingsuggestionsEnumTrue  DtWritingsuggestionsEnum = "true"
+	DtWritingsuggestionsEnumEmpty DtWritingsuggestionsEnum = ""
 )
 
 type dtAttrs map[string]any

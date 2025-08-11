@@ -61,8 +61,9 @@ const (
 type TitleAutocorrectEnum string
 
 const (
-	TitleAutocorrectEnumOn  TitleAutocorrectEnum = "on"
-	TitleAutocorrectEnumOff TitleAutocorrectEnum = "off"
+	TitleAutocorrectEnumOff   TitleAutocorrectEnum = "off"
+	TitleAutocorrectEnumOn    TitleAutocorrectEnum = "on"
+	TitleAutocorrectEnumEmpty TitleAutocorrectEnum = ""
 )
 
 type TitleContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	TitleContenteditableEnumFalse         TitleContenteditableEnum = "false"
 	TitleContenteditableEnumPlaintextOnly TitleContenteditableEnum = "plaintext-only"
 	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
+	TitleContenteditableEnumEmpty         TitleContenteditableEnum = ""
 )
 
 type TitleDirEnum string
 
 const (
-	TitleDirEnumAuto TitleDirEnum = "auto"
 	TitleDirEnumLtr  TitleDirEnum = "ltr"
 	TitleDirEnumRtl  TitleDirEnum = "rtl"
+	TitleDirEnumAuto TitleDirEnum = "auto"
 )
 
 type TitleDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type TitleEnterkeyhintEnum string
 
 const (
+	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
+	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
 	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
 	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
 	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
 	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
-	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
-	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 )
 
 type TitleHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type TitleInputmodeEnum string
 
 const (
+	TitleInputmodeEnumDecimal TitleInputmodeEnum = "decimal"
+	TitleInputmodeEnumEmail   TitleInputmodeEnum = "email"
+	TitleInputmodeEnumNone    TitleInputmodeEnum = "none"
 	TitleInputmodeEnumNumeric TitleInputmodeEnum = "numeric"
 	TitleInputmodeEnumSearch  TitleInputmodeEnum = "search"
 	TitleInputmodeEnumTel     TitleInputmodeEnum = "tel"
 	TitleInputmodeEnumText    TitleInputmodeEnum = "text"
 	TitleInputmodeEnumUrl     TitleInputmodeEnum = "url"
-	TitleInputmodeEnumDecimal TitleInputmodeEnum = "decimal"
-	TitleInputmodeEnumEmail   TitleInputmodeEnum = "email"
-	TitleInputmodeEnumNone    TitleInputmodeEnum = "none"
 )
 
 type TitleSpellcheckEnum string
@@ -126,13 +128,15 @@ type TitleSpellcheckEnum string
 const (
 	TitleSpellcheckEnumFalse TitleSpellcheckEnum = "false"
 	TitleSpellcheckEnumTrue  TitleSpellcheckEnum = "true"
+	TitleSpellcheckEnumEmpty TitleSpellcheckEnum = ""
 )
 
 type TitleTranslateEnum string
 
 const (
-	TitleTranslateEnumNo  TitleTranslateEnum = "no"
-	TitleTranslateEnumYes TitleTranslateEnum = "yes"
+	TitleTranslateEnumNo    TitleTranslateEnum = "no"
+	TitleTranslateEnumYes   TitleTranslateEnum = "yes"
+	TitleTranslateEnumEmpty TitleTranslateEnum = ""
 )
 
 type TitleWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type TitleWritingsuggestionsEnum string
 const (
 	TitleWritingsuggestionsEnumFalse TitleWritingsuggestionsEnum = "false"
 	TitleWritingsuggestionsEnumTrue  TitleWritingsuggestionsEnum = "true"
+	TitleWritingsuggestionsEnumEmpty TitleWritingsuggestionsEnum = ""
 )
 
 type titleAttrs map[string]any

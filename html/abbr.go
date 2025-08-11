@@ -50,35 +50,37 @@ func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrEleme
 type AbbrAutocapitalizeEnum string
 
 const (
-	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
-	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
-	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
 	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
 	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
 	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
+	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
+	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
+	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
 )
 
 type AbbrAutocorrectEnum string
 
 const (
-	AbbrAutocorrectEnumOff AbbrAutocorrectEnum = "off"
-	AbbrAutocorrectEnumOn  AbbrAutocorrectEnum = "on"
+	AbbrAutocorrectEnumOff   AbbrAutocorrectEnum = "off"
+	AbbrAutocorrectEnumOn    AbbrAutocorrectEnum = "on"
+	AbbrAutocorrectEnumEmpty AbbrAutocorrectEnum = ""
 )
 
 type AbbrContenteditableEnum string
 
 const (
-	AbbrContenteditableEnumFalse         AbbrContenteditableEnum = "false"
 	AbbrContenteditableEnumPlaintextOnly AbbrContenteditableEnum = "plaintext-only"
 	AbbrContenteditableEnumTrue          AbbrContenteditableEnum = "true"
+	AbbrContenteditableEnumFalse         AbbrContenteditableEnum = "false"
+	AbbrContenteditableEnumEmpty         AbbrContenteditableEnum = ""
 )
 
 type AbbrDirEnum string
 
 const (
-	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
 	AbbrDirEnumAuto AbbrDirEnum = "auto"
 	AbbrDirEnumLtr  AbbrDirEnum = "ltr"
+	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
 )
 
 type AbbrDraggableEnum string
@@ -103,43 +105,46 @@ const (
 type AbbrHiddenEnum string
 
 const (
-	AbbrHiddenEnumHidden     AbbrHiddenEnum = "hidden"
 	AbbrHiddenEnumUntilFound AbbrHiddenEnum = "until-found"
+	AbbrHiddenEnumHidden     AbbrHiddenEnum = "hidden"
 	AbbrHiddenEnumEmpty      AbbrHiddenEnum = ""
 )
 
 type AbbrInputmodeEnum string
 
 const (
+	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
+	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
 	AbbrInputmodeEnumText    AbbrInputmodeEnum = "text"
 	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
 	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
 	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
 	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
-	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
-	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 )
 
 type AbbrSpellcheckEnum string
 
 const (
-	AbbrSpellcheckEnumTrue  AbbrSpellcheckEnum = "true"
 	AbbrSpellcheckEnumFalse AbbrSpellcheckEnum = "false"
+	AbbrSpellcheckEnumTrue  AbbrSpellcheckEnum = "true"
+	AbbrSpellcheckEnumEmpty AbbrSpellcheckEnum = ""
 )
 
 type AbbrTranslateEnum string
 
 const (
-	AbbrTranslateEnumNo  AbbrTranslateEnum = "no"
-	AbbrTranslateEnumYes AbbrTranslateEnum = "yes"
+	AbbrTranslateEnumNo    AbbrTranslateEnum = "no"
+	AbbrTranslateEnumYes   AbbrTranslateEnum = "yes"
+	AbbrTranslateEnumEmpty AbbrTranslateEnum = ""
 )
 
 type AbbrWritingsuggestionsEnum string
 
 const (
-	AbbrWritingsuggestionsEnumTrue  AbbrWritingsuggestionsEnum = "true"
 	AbbrWritingsuggestionsEnumFalse AbbrWritingsuggestionsEnum = "false"
+	AbbrWritingsuggestionsEnumTrue  AbbrWritingsuggestionsEnum = "true"
+	AbbrWritingsuggestionsEnumEmpty AbbrWritingsuggestionsEnum = ""
 )
 
 type abbrAttrs map[string]any

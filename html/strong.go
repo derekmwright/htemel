@@ -50,19 +50,20 @@ func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongE
 type StrongAutocapitalizeEnum string
 
 const (
-	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
-	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
 	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
 	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
 	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
 	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
+	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
+	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
 )
 
 type StrongAutocorrectEnum string
 
 const (
-	StrongAutocorrectEnumOff StrongAutocorrectEnum = "off"
-	StrongAutocorrectEnumOn  StrongAutocorrectEnum = "on"
+	StrongAutocorrectEnumOff   StrongAutocorrectEnum = "off"
+	StrongAutocorrectEnumOn    StrongAutocorrectEnum = "on"
+	StrongAutocorrectEnumEmpty StrongAutocorrectEnum = ""
 )
 
 type StrongContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	StrongContenteditableEnumFalse         StrongContenteditableEnum = "false"
 	StrongContenteditableEnumPlaintextOnly StrongContenteditableEnum = "plaintext-only"
 	StrongContenteditableEnumTrue          StrongContenteditableEnum = "true"
+	StrongContenteditableEnumEmpty         StrongContenteditableEnum = ""
 )
 
 type StrongDirEnum string
@@ -91,13 +93,13 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
+	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
+	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
 	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
 	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
-	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
-	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 )
 
 type StrongHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type StrongInputmodeEnum string
 
 const (
+	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
+	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
 	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
 	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
 	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
 	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
-	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
-	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 )
 
 type StrongSpellcheckEnum string
@@ -126,13 +128,15 @@ type StrongSpellcheckEnum string
 const (
 	StrongSpellcheckEnumTrue  StrongSpellcheckEnum = "true"
 	StrongSpellcheckEnumFalse StrongSpellcheckEnum = "false"
+	StrongSpellcheckEnumEmpty StrongSpellcheckEnum = ""
 )
 
 type StrongTranslateEnum string
 
 const (
-	StrongTranslateEnumNo  StrongTranslateEnum = "no"
-	StrongTranslateEnumYes StrongTranslateEnum = "yes"
+	StrongTranslateEnumNo    StrongTranslateEnum = "no"
+	StrongTranslateEnumYes   StrongTranslateEnum = "yes"
+	StrongTranslateEnumEmpty StrongTranslateEnum = ""
 )
 
 type StrongWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type StrongWritingsuggestionsEnum string
 const (
 	StrongWritingsuggestionsEnumFalse StrongWritingsuggestionsEnum = "false"
 	StrongWritingsuggestionsEnumTrue  StrongWritingsuggestionsEnum = "true"
+	StrongWritingsuggestionsEnumEmpty StrongWritingsuggestionsEnum = ""
 )
 
 type strongAttrs map[string]any

@@ -50,19 +50,20 @@ func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectE
 type SelectAutocapitalizeEnum string
 
 const (
-	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
-	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
 	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
 	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
+	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
+	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 )
 
 type SelectAutocorrectEnum string
 
 const (
-	SelectAutocorrectEnumOff SelectAutocorrectEnum = "off"
-	SelectAutocorrectEnumOn  SelectAutocorrectEnum = "on"
+	SelectAutocorrectEnumOff   SelectAutocorrectEnum = "off"
+	SelectAutocorrectEnumOn    SelectAutocorrectEnum = "on"
+	SelectAutocorrectEnumEmpty SelectAutocorrectEnum = ""
 )
 
 type SelectContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	SelectContenteditableEnumFalse         SelectContenteditableEnum = "false"
 	SelectContenteditableEnumPlaintextOnly SelectContenteditableEnum = "plaintext-only"
 	SelectContenteditableEnumTrue          SelectContenteditableEnum = "true"
+	SelectContenteditableEnumEmpty         SelectContenteditableEnum = ""
 )
 
 type SelectDirEnum string
 
 const (
+	SelectDirEnumAuto SelectDirEnum = "auto"
 	SelectDirEnumLtr  SelectDirEnum = "ltr"
 	SelectDirEnumRtl  SelectDirEnum = "rtl"
-	SelectDirEnumAuto SelectDirEnum = "auto"
 )
 
 type SelectDraggableEnum string
@@ -111,6 +113,7 @@ const (
 type SelectInputmodeEnum string
 
 const (
+	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
 	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
 	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
 	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
@@ -118,7 +121,6 @@ const (
 	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
 	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
 	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
-	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
 )
 
 type SelectSpellcheckEnum string
@@ -126,13 +128,15 @@ type SelectSpellcheckEnum string
 const (
 	SelectSpellcheckEnumFalse SelectSpellcheckEnum = "false"
 	SelectSpellcheckEnumTrue  SelectSpellcheckEnum = "true"
+	SelectSpellcheckEnumEmpty SelectSpellcheckEnum = ""
 )
 
 type SelectTranslateEnum string
 
 const (
-	SelectTranslateEnumNo  SelectTranslateEnum = "no"
-	SelectTranslateEnumYes SelectTranslateEnum = "yes"
+	SelectTranslateEnumNo    SelectTranslateEnum = "no"
+	SelectTranslateEnumYes   SelectTranslateEnum = "yes"
+	SelectTranslateEnumEmpty SelectTranslateEnum = ""
 )
 
 type SelectWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type SelectWritingsuggestionsEnum string
 const (
 	SelectWritingsuggestionsEnumFalse SelectWritingsuggestionsEnum = "false"
 	SelectWritingsuggestionsEnumTrue  SelectWritingsuggestionsEnum = "true"
+	SelectWritingsuggestionsEnumEmpty SelectWritingsuggestionsEnum = ""
 )
 
 type selectAttrs map[string]any

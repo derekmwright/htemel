@@ -50,35 +50,37 @@ func OlTernary(condition bool, true htemel.Node, false htemel.Node) *OlElement {
 type OlAutocapitalizeEnum string
 
 const (
+	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
 	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 	OlAutocapitalizeEnumNone       OlAutocapitalizeEnum = "none"
 	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
 	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
 	OlAutocapitalizeEnumSentences  OlAutocapitalizeEnum = "sentences"
-	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
 )
 
 type OlAutocorrectEnum string
 
 const (
-	OlAutocorrectEnumOff OlAutocorrectEnum = "off"
-	OlAutocorrectEnumOn  OlAutocorrectEnum = "on"
+	OlAutocorrectEnumOff   OlAutocorrectEnum = "off"
+	OlAutocorrectEnumOn    OlAutocorrectEnum = "on"
+	OlAutocorrectEnumEmpty OlAutocorrectEnum = ""
 )
 
 type OlContenteditableEnum string
 
 const (
-	OlContenteditableEnumFalse         OlContenteditableEnum = "false"
 	OlContenteditableEnumPlaintextOnly OlContenteditableEnum = "plaintext-only"
 	OlContenteditableEnumTrue          OlContenteditableEnum = "true"
+	OlContenteditableEnumFalse         OlContenteditableEnum = "false"
+	OlContenteditableEnumEmpty         OlContenteditableEnum = ""
 )
 
 type OlDirEnum string
 
 const (
+	OlDirEnumAuto OlDirEnum = "auto"
 	OlDirEnumLtr  OlDirEnum = "ltr"
 	OlDirEnumRtl  OlDirEnum = "rtl"
-	OlDirEnumAuto OlDirEnum = "auto"
 )
 
 type OlDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type OlEnterkeyhintEnum string
 
 const (
-	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
-	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
 	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
 	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
 	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
+	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
+	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 )
 
 type OlHiddenEnum string
@@ -126,13 +128,15 @@ type OlSpellcheckEnum string
 const (
 	OlSpellcheckEnumFalse OlSpellcheckEnum = "false"
 	OlSpellcheckEnumTrue  OlSpellcheckEnum = "true"
+	OlSpellcheckEnumEmpty OlSpellcheckEnum = ""
 )
 
 type OlTranslateEnum string
 
 const (
-	OlTranslateEnumNo  OlTranslateEnum = "no"
-	OlTranslateEnumYes OlTranslateEnum = "yes"
+	OlTranslateEnumNo    OlTranslateEnum = "no"
+	OlTranslateEnumYes   OlTranslateEnum = "yes"
+	OlTranslateEnumEmpty OlTranslateEnum = ""
 )
 
 type OlWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type OlWritingsuggestionsEnum string
 const (
 	OlWritingsuggestionsEnumFalse OlWritingsuggestionsEnum = "false"
 	OlWritingsuggestionsEnumTrue  OlWritingsuggestionsEnum = "true"
+	OlWritingsuggestionsEnumEmpty OlWritingsuggestionsEnum = ""
 )
 
 type olAttrs map[string]any

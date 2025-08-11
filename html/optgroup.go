@@ -50,19 +50,20 @@ func OptgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Optgr
 type OptgroupAutocapitalizeEnum string
 
 const (
-	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
-	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 	OptgroupAutocapitalizeEnumOff        OptgroupAutocapitalizeEnum = "off"
 	OptgroupAutocapitalizeEnumOn         OptgroupAutocapitalizeEnum = "on"
 	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
 	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
+	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
+	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 )
 
 type OptgroupAutocorrectEnum string
 
 const (
-	OptgroupAutocorrectEnumOff OptgroupAutocorrectEnum = "off"
-	OptgroupAutocorrectEnumOn  OptgroupAutocorrectEnum = "on"
+	OptgroupAutocorrectEnumOff   OptgroupAutocorrectEnum = "off"
+	OptgroupAutocorrectEnumOn    OptgroupAutocorrectEnum = "on"
+	OptgroupAutocorrectEnumEmpty OptgroupAutocorrectEnum = ""
 )
 
 type OptgroupContenteditableEnum string
@@ -71,33 +72,34 @@ const (
 	OptgroupContenteditableEnumFalse         OptgroupContenteditableEnum = "false"
 	OptgroupContenteditableEnumPlaintextOnly OptgroupContenteditableEnum = "plaintext-only"
 	OptgroupContenteditableEnumTrue          OptgroupContenteditableEnum = "true"
+	OptgroupContenteditableEnumEmpty         OptgroupContenteditableEnum = ""
 )
 
 type OptgroupDirEnum string
 
 const (
-	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
 	OptgroupDirEnumLtr  OptgroupDirEnum = "ltr"
 	OptgroupDirEnumRtl  OptgroupDirEnum = "rtl"
+	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
 )
 
 type OptgroupDraggableEnum string
 
 const (
-	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
 	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
+	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
 )
 
 type OptgroupEnterkeyhintEnum string
 
 const (
-	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
-	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
-	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
 	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
 	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
 	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
+	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
+	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
+	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 )
 
 type OptgroupHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type OptgroupInputmodeEnum string
 
 const (
-	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
-	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
-	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
 	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
 	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
 	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
 	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
+	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
+	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
+	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
 )
 
 type OptgroupSpellcheckEnum string
@@ -126,13 +128,15 @@ type OptgroupSpellcheckEnum string
 const (
 	OptgroupSpellcheckEnumFalse OptgroupSpellcheckEnum = "false"
 	OptgroupSpellcheckEnumTrue  OptgroupSpellcheckEnum = "true"
+	OptgroupSpellcheckEnumEmpty OptgroupSpellcheckEnum = ""
 )
 
 type OptgroupTranslateEnum string
 
 const (
-	OptgroupTranslateEnumNo  OptgroupTranslateEnum = "no"
-	OptgroupTranslateEnumYes OptgroupTranslateEnum = "yes"
+	OptgroupTranslateEnumNo    OptgroupTranslateEnum = "no"
+	OptgroupTranslateEnumYes   OptgroupTranslateEnum = "yes"
+	OptgroupTranslateEnumEmpty OptgroupTranslateEnum = ""
 )
 
 type OptgroupWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type OptgroupWritingsuggestionsEnum string
 const (
 	OptgroupWritingsuggestionsEnumFalse OptgroupWritingsuggestionsEnum = "false"
 	OptgroupWritingsuggestionsEnumTrue  OptgroupWritingsuggestionsEnum = "true"
+	OptgroupWritingsuggestionsEnumEmpty OptgroupWritingsuggestionsEnum = ""
 )
 
 type optgroupAttrs map[string]any

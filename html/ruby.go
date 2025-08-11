@@ -61,8 +61,9 @@ const (
 type RubyAutocorrectEnum string
 
 const (
-	RubyAutocorrectEnumOff RubyAutocorrectEnum = "off"
-	RubyAutocorrectEnumOn  RubyAutocorrectEnum = "on"
+	RubyAutocorrectEnumOff   RubyAutocorrectEnum = "off"
+	RubyAutocorrectEnumOn    RubyAutocorrectEnum = "on"
+	RubyAutocorrectEnumEmpty RubyAutocorrectEnum = ""
 )
 
 type RubyContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	RubyContenteditableEnumFalse         RubyContenteditableEnum = "false"
 	RubyContenteditableEnumPlaintextOnly RubyContenteditableEnum = "plaintext-only"
 	RubyContenteditableEnumTrue          RubyContenteditableEnum = "true"
+	RubyContenteditableEnumEmpty         RubyContenteditableEnum = ""
 )
 
 type RubyDirEnum string
@@ -91,13 +93,13 @@ const (
 type RubyEnterkeyhintEnum string
 
 const (
+	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
 	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
 	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
-	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 )
 
 type RubyHiddenEnum string
@@ -111,7 +113,6 @@ const (
 type RubyInputmodeEnum string
 
 const (
-	RubyInputmodeEnumDecimal RubyInputmodeEnum = "decimal"
 	RubyInputmodeEnumEmail   RubyInputmodeEnum = "email"
 	RubyInputmodeEnumNone    RubyInputmodeEnum = "none"
 	RubyInputmodeEnumNumeric RubyInputmodeEnum = "numeric"
@@ -119,27 +120,31 @@ const (
 	RubyInputmodeEnumTel     RubyInputmodeEnum = "tel"
 	RubyInputmodeEnumText    RubyInputmodeEnum = "text"
 	RubyInputmodeEnumUrl     RubyInputmodeEnum = "url"
+	RubyInputmodeEnumDecimal RubyInputmodeEnum = "decimal"
 )
 
 type RubySpellcheckEnum string
 
 const (
-	RubySpellcheckEnumFalse RubySpellcheckEnum = "false"
 	RubySpellcheckEnumTrue  RubySpellcheckEnum = "true"
+	RubySpellcheckEnumFalse RubySpellcheckEnum = "false"
+	RubySpellcheckEnumEmpty RubySpellcheckEnum = ""
 )
 
 type RubyTranslateEnum string
 
 const (
-	RubyTranslateEnumNo  RubyTranslateEnum = "no"
-	RubyTranslateEnumYes RubyTranslateEnum = "yes"
+	RubyTranslateEnumNo    RubyTranslateEnum = "no"
+	RubyTranslateEnumYes   RubyTranslateEnum = "yes"
+	RubyTranslateEnumEmpty RubyTranslateEnum = ""
 )
 
 type RubyWritingsuggestionsEnum string
 
 const (
-	RubyWritingsuggestionsEnumTrue  RubyWritingsuggestionsEnum = "true"
 	RubyWritingsuggestionsEnumFalse RubyWritingsuggestionsEnum = "false"
+	RubyWritingsuggestionsEnumTrue  RubyWritingsuggestionsEnum = "true"
+	RubyWritingsuggestionsEnumEmpty RubyWritingsuggestionsEnum = ""
 )
 
 type rubyAttrs map[string]any

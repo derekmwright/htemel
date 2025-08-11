@@ -61,8 +61,9 @@ const (
 type WbrAutocorrectEnum string
 
 const (
-	WbrAutocorrectEnumOn  WbrAutocorrectEnum = "on"
-	WbrAutocorrectEnumOff WbrAutocorrectEnum = "off"
+	WbrAutocorrectEnumOff   WbrAutocorrectEnum = "off"
+	WbrAutocorrectEnumOn    WbrAutocorrectEnum = "on"
+	WbrAutocorrectEnumEmpty WbrAutocorrectEnum = ""
 )
 
 type WbrContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	WbrContenteditableEnumFalse         WbrContenteditableEnum = "false"
 	WbrContenteditableEnumPlaintextOnly WbrContenteditableEnum = "plaintext-only"
 	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
+	WbrContenteditableEnumEmpty         WbrContenteditableEnum = ""
 )
 
 type WbrDirEnum string
@@ -84,20 +86,20 @@ const (
 type WbrDraggableEnum string
 
 const (
-	WbrDraggableEnumTrue  WbrDraggableEnum = "true"
 	WbrDraggableEnumFalse WbrDraggableEnum = "false"
+	WbrDraggableEnumTrue  WbrDraggableEnum = "true"
 )
 
 type WbrEnterkeyhintEnum string
 
 const (
+	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
+	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
+	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
 	WbrEnterkeyhintEnumSearch   WbrEnterkeyhintEnum = "search"
 	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
 	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
-	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
-	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
-	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 )
 
 type WbrHiddenEnum string
@@ -126,13 +128,15 @@ type WbrSpellcheckEnum string
 const (
 	WbrSpellcheckEnumFalse WbrSpellcheckEnum = "false"
 	WbrSpellcheckEnumTrue  WbrSpellcheckEnum = "true"
+	WbrSpellcheckEnumEmpty WbrSpellcheckEnum = ""
 )
 
 type WbrTranslateEnum string
 
 const (
-	WbrTranslateEnumNo  WbrTranslateEnum = "no"
-	WbrTranslateEnumYes WbrTranslateEnum = "yes"
+	WbrTranslateEnumYes   WbrTranslateEnum = "yes"
+	WbrTranslateEnumNo    WbrTranslateEnum = "no"
+	WbrTranslateEnumEmpty WbrTranslateEnum = ""
 )
 
 type WbrWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type WbrWritingsuggestionsEnum string
 const (
 	WbrWritingsuggestionsEnumFalse WbrWritingsuggestionsEnum = "false"
 	WbrWritingsuggestionsEnumTrue  WbrWritingsuggestionsEnum = "true"
+	WbrWritingsuggestionsEnumEmpty WbrWritingsuggestionsEnum = ""
 )
 
 type wbrAttrs map[string]any

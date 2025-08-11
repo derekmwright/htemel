@@ -50,27 +50,29 @@ func AudioTernary(condition bool, true htemel.Node, false htemel.Node) *AudioEle
 type AudioAutocapitalizeEnum string
 
 const (
-	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
-	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
 	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
 	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 	AudioAutocapitalizeEnumOff        AudioAutocapitalizeEnum = "off"
 	AudioAutocapitalizeEnumOn         AudioAutocapitalizeEnum = "on"
+	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
+	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
 )
 
 type AudioAutocorrectEnum string
 
 const (
-	AudioAutocorrectEnumOff AudioAutocorrectEnum = "off"
-	AudioAutocorrectEnumOn  AudioAutocorrectEnum = "on"
+	AudioAutocorrectEnumOff   AudioAutocorrectEnum = "off"
+	AudioAutocorrectEnumOn    AudioAutocorrectEnum = "on"
+	AudioAutocorrectEnumEmpty AudioAutocorrectEnum = ""
 )
 
 type AudioContenteditableEnum string
 
 const (
+	AudioContenteditableEnumFalse         AudioContenteditableEnum = "false"
 	AudioContenteditableEnumPlaintextOnly AudioContenteditableEnum = "plaintext-only"
 	AudioContenteditableEnumTrue          AudioContenteditableEnum = "true"
-	AudioContenteditableEnumFalse         AudioContenteditableEnum = "false"
+	AudioContenteditableEnumEmpty         AudioContenteditableEnum = ""
 )
 
 type AudioDirEnum string
@@ -84,20 +86,20 @@ const (
 type AudioDraggableEnum string
 
 const (
-	AudioDraggableEnumTrue  AudioDraggableEnum = "true"
 	AudioDraggableEnumFalse AudioDraggableEnum = "false"
+	AudioDraggableEnumTrue  AudioDraggableEnum = "true"
 )
 
 type AudioEnterkeyhintEnum string
 
 const (
-	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
-	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
-	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
 	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
 	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
 	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
+	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
+	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
+	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
 )
 
 type AudioHiddenEnum string
@@ -111,6 +113,7 @@ const (
 type AudioInputmodeEnum string
 
 const (
+	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
 	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
 	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
 	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
@@ -118,7 +121,6 @@ const (
 	AudioInputmodeEnumText    AudioInputmodeEnum = "text"
 	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
 	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
-	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
 )
 
 type AudioSpellcheckEnum string
@@ -126,13 +128,15 @@ type AudioSpellcheckEnum string
 const (
 	AudioSpellcheckEnumFalse AudioSpellcheckEnum = "false"
 	AudioSpellcheckEnumTrue  AudioSpellcheckEnum = "true"
+	AudioSpellcheckEnumEmpty AudioSpellcheckEnum = ""
 )
 
 type AudioTranslateEnum string
 
 const (
-	AudioTranslateEnumNo  AudioTranslateEnum = "no"
-	AudioTranslateEnumYes AudioTranslateEnum = "yes"
+	AudioTranslateEnumNo    AudioTranslateEnum = "no"
+	AudioTranslateEnumYes   AudioTranslateEnum = "yes"
+	AudioTranslateEnumEmpty AudioTranslateEnum = ""
 )
 
 type AudioWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type AudioWritingsuggestionsEnum string
 const (
 	AudioWritingsuggestionsEnumFalse AudioWritingsuggestionsEnum = "false"
 	AudioWritingsuggestionsEnumTrue  AudioWritingsuggestionsEnum = "true"
+	AudioWritingsuggestionsEnumEmpty AudioWritingsuggestionsEnum = ""
 )
 
 type audioAttrs map[string]any

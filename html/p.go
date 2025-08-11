@@ -50,42 +50,44 @@ func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
 type PAutocapitalizeEnum string
 
 const (
+	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
+	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
 	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
 	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
 	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
 	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
-	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
-	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
 )
 
 type PAutocorrectEnum string
 
 const (
-	PAutocorrectEnumOff PAutocorrectEnum = "off"
-	PAutocorrectEnumOn  PAutocorrectEnum = "on"
+	PAutocorrectEnumOff   PAutocorrectEnum = "off"
+	PAutocorrectEnumOn    PAutocorrectEnum = "on"
+	PAutocorrectEnumEmpty PAutocorrectEnum = ""
 )
 
 type PContenteditableEnum string
 
 const (
-	PContenteditableEnumTrue          PContenteditableEnum = "true"
 	PContenteditableEnumFalse         PContenteditableEnum = "false"
 	PContenteditableEnumPlaintextOnly PContenteditableEnum = "plaintext-only"
+	PContenteditableEnumTrue          PContenteditableEnum = "true"
+	PContenteditableEnumEmpty         PContenteditableEnum = ""
 )
 
 type PDirEnum string
 
 const (
+	PDirEnumRtl  PDirEnum = "rtl"
 	PDirEnumAuto PDirEnum = "auto"
 	PDirEnumLtr  PDirEnum = "ltr"
-	PDirEnumRtl  PDirEnum = "rtl"
 )
 
 type PDraggableEnum string
 
 const (
-	PDraggableEnumTrue  PDraggableEnum = "true"
 	PDraggableEnumFalse PDraggableEnum = "false"
+	PDraggableEnumTrue  PDraggableEnum = "true"
 )
 
 type PEnterkeyhintEnum string
@@ -111,14 +113,14 @@ const (
 type PInputmodeEnum string
 
 const (
-	PInputmodeEnumUrl     PInputmodeEnum = "url"
-	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
 	PInputmodeEnumEmail   PInputmodeEnum = "email"
 	PInputmodeEnumNone    PInputmodeEnum = "none"
 	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
 	PInputmodeEnumSearch  PInputmodeEnum = "search"
 	PInputmodeEnumTel     PInputmodeEnum = "tel"
 	PInputmodeEnumText    PInputmodeEnum = "text"
+	PInputmodeEnumUrl     PInputmodeEnum = "url"
+	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
 )
 
 type PSpellcheckEnum string
@@ -126,20 +128,23 @@ type PSpellcheckEnum string
 const (
 	PSpellcheckEnumFalse PSpellcheckEnum = "false"
 	PSpellcheckEnumTrue  PSpellcheckEnum = "true"
+	PSpellcheckEnumEmpty PSpellcheckEnum = ""
 )
 
 type PTranslateEnum string
 
 const (
-	PTranslateEnumNo  PTranslateEnum = "no"
-	PTranslateEnumYes PTranslateEnum = "yes"
+	PTranslateEnumNo    PTranslateEnum = "no"
+	PTranslateEnumYes   PTranslateEnum = "yes"
+	PTranslateEnumEmpty PTranslateEnum = ""
 )
 
 type PWritingsuggestionsEnum string
 
 const (
-	PWritingsuggestionsEnumFalse PWritingsuggestionsEnum = "false"
 	PWritingsuggestionsEnumTrue  PWritingsuggestionsEnum = "true"
+	PWritingsuggestionsEnumFalse PWritingsuggestionsEnum = "false"
+	PWritingsuggestionsEnumEmpty PWritingsuggestionsEnum = ""
 )
 
 type pAttrs map[string]any

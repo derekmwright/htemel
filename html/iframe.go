@@ -61,24 +61,26 @@ const (
 type IframeAutocorrectEnum string
 
 const (
-	IframeAutocorrectEnumOn  IframeAutocorrectEnum = "on"
-	IframeAutocorrectEnumOff IframeAutocorrectEnum = "off"
+	IframeAutocorrectEnumOff   IframeAutocorrectEnum = "off"
+	IframeAutocorrectEnumOn    IframeAutocorrectEnum = "on"
+	IframeAutocorrectEnumEmpty IframeAutocorrectEnum = ""
 )
 
 type IframeContenteditableEnum string
 
 const (
+	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
 	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
 	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
-	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
+	IframeContenteditableEnumEmpty         IframeContenteditableEnum = ""
 )
 
 type IframeDirEnum string
 
 const (
+	IframeDirEnumAuto IframeDirEnum = "auto"
 	IframeDirEnumLtr  IframeDirEnum = "ltr"
 	IframeDirEnumRtl  IframeDirEnum = "rtl"
-	IframeDirEnumAuto IframeDirEnum = "auto"
 )
 
 type IframeDraggableEnum string
@@ -91,27 +93,26 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
-	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
-	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
 	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
+	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
+	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
 )
 
 type IframeHiddenEnum string
 
 const (
-	IframeHiddenEnumUntilFound IframeHiddenEnum = "until-found"
 	IframeHiddenEnumHidden     IframeHiddenEnum = "hidden"
+	IframeHiddenEnumUntilFound IframeHiddenEnum = "until-found"
 	IframeHiddenEnumEmpty      IframeHiddenEnum = ""
 )
 
 type IframeInputmodeEnum string
 
 const (
-	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
 	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
 	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
@@ -119,6 +120,7 @@ const (
 	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
 	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
 	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
+	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
 )
 
 type IframeSpellcheckEnum string
@@ -126,13 +128,15 @@ type IframeSpellcheckEnum string
 const (
 	IframeSpellcheckEnumFalse IframeSpellcheckEnum = "false"
 	IframeSpellcheckEnumTrue  IframeSpellcheckEnum = "true"
+	IframeSpellcheckEnumEmpty IframeSpellcheckEnum = ""
 )
 
 type IframeTranslateEnum string
 
 const (
-	IframeTranslateEnumNo  IframeTranslateEnum = "no"
-	IframeTranslateEnumYes IframeTranslateEnum = "yes"
+	IframeTranslateEnumNo    IframeTranslateEnum = "no"
+	IframeTranslateEnumYes   IframeTranslateEnum = "yes"
+	IframeTranslateEnumEmpty IframeTranslateEnum = ""
 )
 
 type IframeWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type IframeWritingsuggestionsEnum string
 const (
 	IframeWritingsuggestionsEnumFalse IframeWritingsuggestionsEnum = "false"
 	IframeWritingsuggestionsEnumTrue  IframeWritingsuggestionsEnum = "true"
+	IframeWritingsuggestionsEnumEmpty IframeWritingsuggestionsEnum = ""
 )
 
 type iframeAttrs map[string]any

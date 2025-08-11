@@ -50,19 +50,20 @@ func RtTernary(condition bool, true htemel.Node, false htemel.Node) *RtElement {
 type RtAutocapitalizeEnum string
 
 const (
+	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
 	RtAutocapitalizeEnumCharacters RtAutocapitalizeEnum = "characters"
 	RtAutocapitalizeEnumNone       RtAutocapitalizeEnum = "none"
 	RtAutocapitalizeEnumOff        RtAutocapitalizeEnum = "off"
 	RtAutocapitalizeEnumOn         RtAutocapitalizeEnum = "on"
 	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
-	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
 )
 
 type RtAutocorrectEnum string
 
 const (
-	RtAutocorrectEnumOn  RtAutocorrectEnum = "on"
-	RtAutocorrectEnumOff RtAutocorrectEnum = "off"
+	RtAutocorrectEnumOff   RtAutocorrectEnum = "off"
+	RtAutocorrectEnumOn    RtAutocorrectEnum = "on"
+	RtAutocorrectEnumEmpty RtAutocorrectEnum = ""
 )
 
 type RtContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	RtContenteditableEnumPlaintextOnly RtContenteditableEnum = "plaintext-only"
 	RtContenteditableEnumTrue          RtContenteditableEnum = "true"
 	RtContenteditableEnumFalse         RtContenteditableEnum = "false"
+	RtContenteditableEnumEmpty         RtContenteditableEnum = ""
 )
 
 type RtDirEnum string
@@ -91,13 +93,13 @@ const (
 type RtEnterkeyhintEnum string
 
 const (
-	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
-	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
 	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
 	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
 	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
 	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
 	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
+	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
+	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
 )
 
 type RtHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type RtInputmodeEnum string
 
 const (
+	RtInputmodeEnumNone    RtInputmodeEnum = "none"
+	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
+	RtInputmodeEnumSearch  RtInputmodeEnum = "search"
 	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
 	RtInputmodeEnumText    RtInputmodeEnum = "text"
 	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
 	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
 	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
-	RtInputmodeEnumNone    RtInputmodeEnum = "none"
-	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
-	RtInputmodeEnumSearch  RtInputmodeEnum = "search"
 )
 
 type RtSpellcheckEnum string
@@ -126,13 +128,15 @@ type RtSpellcheckEnum string
 const (
 	RtSpellcheckEnumFalse RtSpellcheckEnum = "false"
 	RtSpellcheckEnumTrue  RtSpellcheckEnum = "true"
+	RtSpellcheckEnumEmpty RtSpellcheckEnum = ""
 )
 
 type RtTranslateEnum string
 
 const (
-	RtTranslateEnumNo  RtTranslateEnum = "no"
-	RtTranslateEnumYes RtTranslateEnum = "yes"
+	RtTranslateEnumNo    RtTranslateEnum = "no"
+	RtTranslateEnumYes   RtTranslateEnum = "yes"
+	RtTranslateEnumEmpty RtTranslateEnum = ""
 )
 
 type RtWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type RtWritingsuggestionsEnum string
 const (
 	RtWritingsuggestionsEnumFalse RtWritingsuggestionsEnum = "false"
 	RtWritingsuggestionsEnumTrue  RtWritingsuggestionsEnum = "true"
+	RtWritingsuggestionsEnumEmpty RtWritingsuggestionsEnum = ""
 )
 
 type rtAttrs map[string]any

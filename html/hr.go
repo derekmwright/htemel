@@ -50,27 +50,29 @@ func HrTernary(condition bool, true htemel.Node, false htemel.Node) *HrElement {
 type HrAutocapitalizeEnum string
 
 const (
+	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
 	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
 	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
 	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
-	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 )
 
 type HrAutocorrectEnum string
 
 const (
-	HrAutocorrectEnumOn  HrAutocorrectEnum = "on"
-	HrAutocorrectEnumOff HrAutocorrectEnum = "off"
+	HrAutocorrectEnumOff   HrAutocorrectEnum = "off"
+	HrAutocorrectEnumOn    HrAutocorrectEnum = "on"
+	HrAutocorrectEnumEmpty HrAutocorrectEnum = ""
 )
 
 type HrContenteditableEnum string
 
 const (
+	HrContenteditableEnumFalse         HrContenteditableEnum = "false"
 	HrContenteditableEnumPlaintextOnly HrContenteditableEnum = "plaintext-only"
 	HrContenteditableEnumTrue          HrContenteditableEnum = "true"
-	HrContenteditableEnumFalse         HrContenteditableEnum = "false"
+	HrContenteditableEnumEmpty         HrContenteditableEnum = ""
 )
 
 type HrDirEnum string
@@ -91,13 +93,13 @@ const (
 type HrEnterkeyhintEnum string
 
 const (
-	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
-	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
 	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
 	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
 	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
 	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
 	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
+	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
+	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
 )
 
 type HrHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type HrInputmodeEnum string
 
 const (
-	HrInputmodeEnumNone    HrInputmodeEnum = "none"
-	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
 	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
 	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
 	HrInputmodeEnumText    HrInputmodeEnum = "text"
 	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
 	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
 	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
+	HrInputmodeEnumNone    HrInputmodeEnum = "none"
+	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
 )
 
 type HrSpellcheckEnum string
@@ -126,13 +128,15 @@ type HrSpellcheckEnum string
 const (
 	HrSpellcheckEnumFalse HrSpellcheckEnum = "false"
 	HrSpellcheckEnumTrue  HrSpellcheckEnum = "true"
+	HrSpellcheckEnumEmpty HrSpellcheckEnum = ""
 )
 
 type HrTranslateEnum string
 
 const (
-	HrTranslateEnumNo  HrTranslateEnum = "no"
-	HrTranslateEnumYes HrTranslateEnum = "yes"
+	HrTranslateEnumYes   HrTranslateEnum = "yes"
+	HrTranslateEnumNo    HrTranslateEnum = "no"
+	HrTranslateEnumEmpty HrTranslateEnum = ""
 )
 
 type HrWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type HrWritingsuggestionsEnum string
 const (
 	HrWritingsuggestionsEnumFalse HrWritingsuggestionsEnum = "false"
 	HrWritingsuggestionsEnumTrue  HrWritingsuggestionsEnum = "true"
+	HrWritingsuggestionsEnumEmpty HrWritingsuggestionsEnum = ""
 )
 
 type hrAttrs map[string]any

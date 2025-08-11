@@ -50,19 +50,20 @@ func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Captio
 type CaptionAutocapitalizeEnum string
 
 const (
+	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
 	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
 	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
 	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
 	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
 	CaptionAutocapitalizeEnumOff        CaptionAutocapitalizeEnum = "off"
-	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
 )
 
 type CaptionAutocorrectEnum string
 
 const (
-	CaptionAutocorrectEnumOff CaptionAutocorrectEnum = "off"
-	CaptionAutocorrectEnumOn  CaptionAutocorrectEnum = "on"
+	CaptionAutocorrectEnumOff   CaptionAutocorrectEnum = "off"
+	CaptionAutocorrectEnumOn    CaptionAutocorrectEnum = "on"
+	CaptionAutocorrectEnumEmpty CaptionAutocorrectEnum = ""
 )
 
 type CaptionContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	CaptionContenteditableEnumFalse         CaptionContenteditableEnum = "false"
 	CaptionContenteditableEnumPlaintextOnly CaptionContenteditableEnum = "plaintext-only"
 	CaptionContenteditableEnumTrue          CaptionContenteditableEnum = "true"
+	CaptionContenteditableEnumEmpty         CaptionContenteditableEnum = ""
 )
 
 type CaptionDirEnum string
 
 const (
-	CaptionDirEnumLtr  CaptionDirEnum = "ltr"
 	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
 	CaptionDirEnumAuto CaptionDirEnum = "auto"
+	CaptionDirEnumLtr  CaptionDirEnum = "ltr"
 )
 
 type CaptionDraggableEnum string
@@ -126,20 +128,23 @@ type CaptionSpellcheckEnum string
 const (
 	CaptionSpellcheckEnumFalse CaptionSpellcheckEnum = "false"
 	CaptionSpellcheckEnumTrue  CaptionSpellcheckEnum = "true"
+	CaptionSpellcheckEnumEmpty CaptionSpellcheckEnum = ""
 )
 
 type CaptionTranslateEnum string
 
 const (
-	CaptionTranslateEnumNo  CaptionTranslateEnum = "no"
-	CaptionTranslateEnumYes CaptionTranslateEnum = "yes"
+	CaptionTranslateEnumNo    CaptionTranslateEnum = "no"
+	CaptionTranslateEnumYes   CaptionTranslateEnum = "yes"
+	CaptionTranslateEnumEmpty CaptionTranslateEnum = ""
 )
 
 type CaptionWritingsuggestionsEnum string
 
 const (
-	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
 	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
+	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
+	CaptionWritingsuggestionsEnumEmpty CaptionWritingsuggestionsEnum = ""
 )
 
 type captionAttrs map[string]any

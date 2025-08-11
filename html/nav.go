@@ -50,19 +50,20 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 type NavAutocapitalizeEnum string
 
 const (
+	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
 	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
 	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
 	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
 	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
-	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 )
 
 type NavAutocorrectEnum string
 
 const (
-	NavAutocorrectEnumOff NavAutocorrectEnum = "off"
-	NavAutocorrectEnumOn  NavAutocorrectEnum = "on"
+	NavAutocorrectEnumOff   NavAutocorrectEnum = "off"
+	NavAutocorrectEnumOn    NavAutocorrectEnum = "on"
+	NavAutocorrectEnumEmpty NavAutocorrectEnum = ""
 )
 
 type NavContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
+	NavContenteditableEnumEmpty         NavContenteditableEnum = ""
 )
 
 type NavDirEnum string
@@ -91,13 +93,13 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
-	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
-	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
 	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
 	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
 	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
+	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
+	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 )
 
 type NavHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type NavInputmodeEnum string
 
 const (
-	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
-	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
 	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
 	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 	NavInputmodeEnumText    NavInputmodeEnum = "text"
 	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
+	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
+	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 )
 
 type NavSpellcheckEnum string
@@ -126,13 +128,15 @@ type NavSpellcheckEnum string
 const (
 	NavSpellcheckEnumFalse NavSpellcheckEnum = "false"
 	NavSpellcheckEnumTrue  NavSpellcheckEnum = "true"
+	NavSpellcheckEnumEmpty NavSpellcheckEnum = ""
 )
 
 type NavTranslateEnum string
 
 const (
-	NavTranslateEnumYes NavTranslateEnum = "yes"
-	NavTranslateEnumNo  NavTranslateEnum = "no"
+	NavTranslateEnumNo    NavTranslateEnum = "no"
+	NavTranslateEnumYes   NavTranslateEnum = "yes"
+	NavTranslateEnumEmpty NavTranslateEnum = ""
 )
 
 type NavWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type NavWritingsuggestionsEnum string
 const (
 	NavWritingsuggestionsEnumFalse NavWritingsuggestionsEnum = "false"
 	NavWritingsuggestionsEnumTrue  NavWritingsuggestionsEnum = "true"
+	NavWritingsuggestionsEnumEmpty NavWritingsuggestionsEnum = ""
 )
 
 type navAttrs map[string]any

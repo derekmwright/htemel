@@ -50,19 +50,20 @@ func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
 type AAutocapitalizeEnum string
 
 const (
-	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
-	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
-	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
 	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
 	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
 	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
+	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
+	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
+	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
 )
 
 type AAutocorrectEnum string
 
 const (
-	AAutocorrectEnumOff AAutocorrectEnum = "off"
-	AAutocorrectEnumOn  AAutocorrectEnum = "on"
+	AAutocorrectEnumOff   AAutocorrectEnum = "off"
+	AAutocorrectEnumOn    AAutocorrectEnum = "on"
+	AAutocorrectEnumEmpty AAutocorrectEnum = ""
 )
 
 type AContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	AContenteditableEnumFalse         AContenteditableEnum = "false"
 	AContenteditableEnumPlaintextOnly AContenteditableEnum = "plaintext-only"
 	AContenteditableEnumTrue          AContenteditableEnum = "true"
+	AContenteditableEnumEmpty         AContenteditableEnum = ""
 )
 
 type ADirEnum string
@@ -91,13 +93,13 @@ const (
 type AEnterkeyhintEnum string
 
 const (
+	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
+	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
+	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
 	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
 	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
 	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
-	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
-	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
-	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
 )
 
 type AHiddenEnum string
@@ -111,7 +113,6 @@ const (
 type AInputmodeEnum string
 
 const (
-	AInputmodeEnumText    AInputmodeEnum = "text"
 	AInputmodeEnumUrl     AInputmodeEnum = "url"
 	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
 	AInputmodeEnumEmail   AInputmodeEnum = "email"
@@ -119,6 +120,7 @@ const (
 	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
 	AInputmodeEnumSearch  AInputmodeEnum = "search"
 	AInputmodeEnumTel     AInputmodeEnum = "tel"
+	AInputmodeEnumText    AInputmodeEnum = "text"
 )
 
 type ASpellcheckEnum string
@@ -126,13 +128,15 @@ type ASpellcheckEnum string
 const (
 	ASpellcheckEnumFalse ASpellcheckEnum = "false"
 	ASpellcheckEnumTrue  ASpellcheckEnum = "true"
+	ASpellcheckEnumEmpty ASpellcheckEnum = ""
 )
 
 type ATranslateEnum string
 
 const (
-	ATranslateEnumNo  ATranslateEnum = "no"
-	ATranslateEnumYes ATranslateEnum = "yes"
+	ATranslateEnumNo    ATranslateEnum = "no"
+	ATranslateEnumYes   ATranslateEnum = "yes"
+	ATranslateEnumEmpty ATranslateEnum = ""
 )
 
 type AWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type AWritingsuggestionsEnum string
 const (
 	AWritingsuggestionsEnumFalse AWritingsuggestionsEnum = "false"
 	AWritingsuggestionsEnumTrue  AWritingsuggestionsEnum = "true"
+	AWritingsuggestionsEnumEmpty AWritingsuggestionsEnum = ""
 )
 
 type aAttrs map[string]any

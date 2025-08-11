@@ -50,19 +50,20 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 type TimeAutocapitalizeEnum string
 
 const (
-	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
-	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
-	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
 	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
+	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
+	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
+	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 )
 
 type TimeAutocorrectEnum string
 
 const (
-	TimeAutocorrectEnumOff TimeAutocorrectEnum = "off"
-	TimeAutocorrectEnumOn  TimeAutocorrectEnum = "on"
+	TimeAutocorrectEnumOff   TimeAutocorrectEnum = "off"
+	TimeAutocorrectEnumOn    TimeAutocorrectEnum = "on"
+	TimeAutocorrectEnumEmpty TimeAutocorrectEnum = ""
 )
 
 type TimeContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	TimeContenteditableEnumFalse         TimeContenteditableEnum = "false"
 	TimeContenteditableEnumPlaintextOnly TimeContenteditableEnum = "plaintext-only"
 	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
+	TimeContenteditableEnumEmpty         TimeContenteditableEnum = ""
 )
 
 type TimeDirEnum string
 
 const (
+	TimeDirEnumLtr  TimeDirEnum = "ltr"
 	TimeDirEnumRtl  TimeDirEnum = "rtl"
 	TimeDirEnumAuto TimeDirEnum = "auto"
-	TimeDirEnumLtr  TimeDirEnum = "ltr"
 )
 
 type TimeDraggableEnum string
@@ -111,14 +113,14 @@ const (
 type TimeInputmodeEnum string
 
 const (
+	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
+	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
 	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
 	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
 	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
 	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
 	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
 	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
-	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
-	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
 )
 
 type TimeSpellcheckEnum string
@@ -126,13 +128,15 @@ type TimeSpellcheckEnum string
 const (
 	TimeSpellcheckEnumFalse TimeSpellcheckEnum = "false"
 	TimeSpellcheckEnumTrue  TimeSpellcheckEnum = "true"
+	TimeSpellcheckEnumEmpty TimeSpellcheckEnum = ""
 )
 
 type TimeTranslateEnum string
 
 const (
-	TimeTranslateEnumNo  TimeTranslateEnum = "no"
-	TimeTranslateEnumYes TimeTranslateEnum = "yes"
+	TimeTranslateEnumNo    TimeTranslateEnum = "no"
+	TimeTranslateEnumYes   TimeTranslateEnum = "yes"
+	TimeTranslateEnumEmpty TimeTranslateEnum = ""
 )
 
 type TimeWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type TimeWritingsuggestionsEnum string
 const (
 	TimeWritingsuggestionsEnumFalse TimeWritingsuggestionsEnum = "false"
 	TimeWritingsuggestionsEnumTrue  TimeWritingsuggestionsEnum = "true"
+	TimeWritingsuggestionsEnumEmpty TimeWritingsuggestionsEnum = ""
 )
 
 type timeAttrs map[string]any

@@ -50,35 +50,37 @@ func BaseTernary(condition bool, true htemel.Node, false htemel.Node) *BaseEleme
 type BaseAutocapitalizeEnum string
 
 const (
-	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
-	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
-	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
 	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
 	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
+	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
+	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
+	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 )
 
 type BaseAutocorrectEnum string
 
 const (
-	BaseAutocorrectEnumOff BaseAutocorrectEnum = "off"
-	BaseAutocorrectEnumOn  BaseAutocorrectEnum = "on"
+	BaseAutocorrectEnumOff   BaseAutocorrectEnum = "off"
+	BaseAutocorrectEnumOn    BaseAutocorrectEnum = "on"
+	BaseAutocorrectEnumEmpty BaseAutocorrectEnum = ""
 )
 
 type BaseContenteditableEnum string
 
 const (
+	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
 	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
 	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
-	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
+	BaseContenteditableEnumEmpty         BaseContenteditableEnum = ""
 )
 
 type BaseDirEnum string
 
 const (
+	BaseDirEnumRtl  BaseDirEnum = "rtl"
 	BaseDirEnumAuto BaseDirEnum = "auto"
 	BaseDirEnumLtr  BaseDirEnum = "ltr"
-	BaseDirEnumRtl  BaseDirEnum = "rtl"
 )
 
 type BaseDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
-	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
-	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
 	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
+	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
+	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 )
 
 type BaseHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type BaseInputmodeEnum string
 
 const (
+	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
+	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
+	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
 	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
 	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
 	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
 	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
-	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
-	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
-	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
 )
 
 type BaseSpellcheckEnum string
@@ -126,13 +128,15 @@ type BaseSpellcheckEnum string
 const (
 	BaseSpellcheckEnumFalse BaseSpellcheckEnum = "false"
 	BaseSpellcheckEnumTrue  BaseSpellcheckEnum = "true"
+	BaseSpellcheckEnumEmpty BaseSpellcheckEnum = ""
 )
 
 type BaseTranslateEnum string
 
 const (
-	BaseTranslateEnumNo  BaseTranslateEnum = "no"
-	BaseTranslateEnumYes BaseTranslateEnum = "yes"
+	BaseTranslateEnumNo    BaseTranslateEnum = "no"
+	BaseTranslateEnumYes   BaseTranslateEnum = "yes"
+	BaseTranslateEnumEmpty BaseTranslateEnum = ""
 )
 
 type BaseWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type BaseWritingsuggestionsEnum string
 const (
 	BaseWritingsuggestionsEnumFalse BaseWritingsuggestionsEnum = "false"
 	BaseWritingsuggestionsEnumTrue  BaseWritingsuggestionsEnum = "true"
+	BaseWritingsuggestionsEnumEmpty BaseWritingsuggestionsEnum = ""
 )
 
 type baseAttrs map[string]any

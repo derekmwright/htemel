@@ -50,19 +50,20 @@ func FooterTernary(condition bool, true htemel.Node, false htemel.Node) *FooterE
 type FooterAutocapitalizeEnum string
 
 const (
-	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 	FooterAutocapitalizeEnumOn         FooterAutocapitalizeEnum = "on"
 	FooterAutocapitalizeEnumSentences  FooterAutocapitalizeEnum = "sentences"
 	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
 	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
 	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
+	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 )
 
 type FooterAutocorrectEnum string
 
 const (
-	FooterAutocorrectEnumOff FooterAutocorrectEnum = "off"
-	FooterAutocorrectEnumOn  FooterAutocorrectEnum = "on"
+	FooterAutocorrectEnumOff   FooterAutocorrectEnum = "off"
+	FooterAutocorrectEnumOn    FooterAutocorrectEnum = "on"
+	FooterAutocorrectEnumEmpty FooterAutocorrectEnum = ""
 )
 
 type FooterContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	FooterContenteditableEnumFalse         FooterContenteditableEnum = "false"
 	FooterContenteditableEnumPlaintextOnly FooterContenteditableEnum = "plaintext-only"
 	FooterContenteditableEnumTrue          FooterContenteditableEnum = "true"
+	FooterContenteditableEnumEmpty         FooterContenteditableEnum = ""
 )
 
 type FooterDirEnum string
@@ -91,20 +93,20 @@ const (
 type FooterEnterkeyhintEnum string
 
 const (
+	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
+	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
+	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
 	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
 	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
 	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
 	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
-	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
-	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
-	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
 )
 
 type FooterHiddenEnum string
 
 const (
-	FooterHiddenEnumHidden     FooterHiddenEnum = "hidden"
 	FooterHiddenEnumUntilFound FooterHiddenEnum = "until-found"
+	FooterHiddenEnumHidden     FooterHiddenEnum = "hidden"
 	FooterHiddenEnumEmpty      FooterHiddenEnum = ""
 )
 
@@ -126,13 +128,15 @@ type FooterSpellcheckEnum string
 const (
 	FooterSpellcheckEnumFalse FooterSpellcheckEnum = "false"
 	FooterSpellcheckEnumTrue  FooterSpellcheckEnum = "true"
+	FooterSpellcheckEnumEmpty FooterSpellcheckEnum = ""
 )
 
 type FooterTranslateEnum string
 
 const (
-	FooterTranslateEnumNo  FooterTranslateEnum = "no"
-	FooterTranslateEnumYes FooterTranslateEnum = "yes"
+	FooterTranslateEnumNo    FooterTranslateEnum = "no"
+	FooterTranslateEnumYes   FooterTranslateEnum = "yes"
+	FooterTranslateEnumEmpty FooterTranslateEnum = ""
 )
 
 type FooterWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type FooterWritingsuggestionsEnum string
 const (
 	FooterWritingsuggestionsEnumFalse FooterWritingsuggestionsEnum = "false"
 	FooterWritingsuggestionsEnumTrue  FooterWritingsuggestionsEnum = "true"
+	FooterWritingsuggestionsEnumEmpty FooterWritingsuggestionsEnum = ""
 )
 
 type footerAttrs map[string]any

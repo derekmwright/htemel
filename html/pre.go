@@ -50,19 +50,20 @@ func PreTernary(condition bool, true htemel.Node, false htemel.Node) *PreElement
 type PreAutocapitalizeEnum string
 
 const (
+	PreAutocapitalizeEnumWords      PreAutocapitalizeEnum = "words"
 	PreAutocapitalizeEnumCharacters PreAutocapitalizeEnum = "characters"
 	PreAutocapitalizeEnumNone       PreAutocapitalizeEnum = "none"
 	PreAutocapitalizeEnumOff        PreAutocapitalizeEnum = "off"
 	PreAutocapitalizeEnumOn         PreAutocapitalizeEnum = "on"
 	PreAutocapitalizeEnumSentences  PreAutocapitalizeEnum = "sentences"
-	PreAutocapitalizeEnumWords      PreAutocapitalizeEnum = "words"
 )
 
 type PreAutocorrectEnum string
 
 const (
-	PreAutocorrectEnumOff PreAutocorrectEnum = "off"
-	PreAutocorrectEnumOn  PreAutocorrectEnum = "on"
+	PreAutocorrectEnumOff   PreAutocorrectEnum = "off"
+	PreAutocorrectEnumOn    PreAutocorrectEnum = "on"
+	PreAutocorrectEnumEmpty PreAutocorrectEnum = ""
 )
 
 type PreContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	PreContenteditableEnumFalse         PreContenteditableEnum = "false"
 	PreContenteditableEnumPlaintextOnly PreContenteditableEnum = "plaintext-only"
 	PreContenteditableEnumTrue          PreContenteditableEnum = "true"
+	PreContenteditableEnumEmpty         PreContenteditableEnum = ""
 )
 
 type PreDirEnum string
 
 const (
-	PreDirEnumRtl  PreDirEnum = "rtl"
 	PreDirEnumAuto PreDirEnum = "auto"
 	PreDirEnumLtr  PreDirEnum = "ltr"
+	PreDirEnumRtl  PreDirEnum = "rtl"
 )
 
 type PreDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type PreEnterkeyhintEnum string
 
 const (
-	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
 	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
 	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
 	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
 	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
 	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
+	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
 )
 
 type PreHiddenEnum string
@@ -111,7 +113,6 @@ const (
 type PreInputmodeEnum string
 
 const (
-	PreInputmodeEnumTel     PreInputmodeEnum = "tel"
 	PreInputmodeEnumText    PreInputmodeEnum = "text"
 	PreInputmodeEnumUrl     PreInputmodeEnum = "url"
 	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
@@ -119,6 +120,7 @@ const (
 	PreInputmodeEnumNone    PreInputmodeEnum = "none"
 	PreInputmodeEnumNumeric PreInputmodeEnum = "numeric"
 	PreInputmodeEnumSearch  PreInputmodeEnum = "search"
+	PreInputmodeEnumTel     PreInputmodeEnum = "tel"
 )
 
 type PreSpellcheckEnum string
@@ -126,13 +128,15 @@ type PreSpellcheckEnum string
 const (
 	PreSpellcheckEnumFalse PreSpellcheckEnum = "false"
 	PreSpellcheckEnumTrue  PreSpellcheckEnum = "true"
+	PreSpellcheckEnumEmpty PreSpellcheckEnum = ""
 )
 
 type PreTranslateEnum string
 
 const (
-	PreTranslateEnumYes PreTranslateEnum = "yes"
-	PreTranslateEnumNo  PreTranslateEnum = "no"
+	PreTranslateEnumNo    PreTranslateEnum = "no"
+	PreTranslateEnumYes   PreTranslateEnum = "yes"
+	PreTranslateEnumEmpty PreTranslateEnum = ""
 )
 
 type PreWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type PreWritingsuggestionsEnum string
 const (
 	PreWritingsuggestionsEnumFalse PreWritingsuggestionsEnum = "false"
 	PreWritingsuggestionsEnumTrue  PreWritingsuggestionsEnum = "true"
+	PreWritingsuggestionsEnumEmpty PreWritingsuggestionsEnum = ""
 )
 
 type preAttrs map[string]any

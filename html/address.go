@@ -50,27 +50,29 @@ func AddressTernary(condition bool, true htemel.Node, false htemel.Node) *Addres
 type AddressAutocapitalizeEnum string
 
 const (
-	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
-	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
-	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
 	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
 	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
+	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
+	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
+	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 )
 
 type AddressAutocorrectEnum string
 
 const (
-	AddressAutocorrectEnumOff AddressAutocorrectEnum = "off"
-	AddressAutocorrectEnumOn  AddressAutocorrectEnum = "on"
+	AddressAutocorrectEnumOff   AddressAutocorrectEnum = "off"
+	AddressAutocorrectEnumOn    AddressAutocorrectEnum = "on"
+	AddressAutocorrectEnumEmpty AddressAutocorrectEnum = ""
 )
 
 type AddressContenteditableEnum string
 
 const (
+	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
 	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
-	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
+	AddressContenteditableEnumEmpty         AddressContenteditableEnum = ""
 )
 
 type AddressDirEnum string
@@ -91,13 +93,13 @@ const (
 type AddressEnterkeyhintEnum string
 
 const (
-	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
-	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
 	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
 	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
 	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
 	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
+	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
+	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 )
 
 type AddressHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type AddressInputmodeEnum string
 
 const (
-	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
-	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
-	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 	AddressInputmodeEnumText    AddressInputmodeEnum = "text"
 	AddressInputmodeEnumUrl     AddressInputmodeEnum = "url"
 	AddressInputmodeEnumDecimal AddressInputmodeEnum = "decimal"
 	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
 	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
+	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
+	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
+	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 )
 
 type AddressSpellcheckEnum string
@@ -126,13 +128,15 @@ type AddressSpellcheckEnum string
 const (
 	AddressSpellcheckEnumFalse AddressSpellcheckEnum = "false"
 	AddressSpellcheckEnumTrue  AddressSpellcheckEnum = "true"
+	AddressSpellcheckEnumEmpty AddressSpellcheckEnum = ""
 )
 
 type AddressTranslateEnum string
 
 const (
-	AddressTranslateEnumNo  AddressTranslateEnum = "no"
-	AddressTranslateEnumYes AddressTranslateEnum = "yes"
+	AddressTranslateEnumNo    AddressTranslateEnum = "no"
+	AddressTranslateEnumYes   AddressTranslateEnum = "yes"
+	AddressTranslateEnumEmpty AddressTranslateEnum = ""
 )
 
 type AddressWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type AddressWritingsuggestionsEnum string
 const (
 	AddressWritingsuggestionsEnumFalse AddressWritingsuggestionsEnum = "false"
 	AddressWritingsuggestionsEnumTrue  AddressWritingsuggestionsEnum = "true"
+	AddressWritingsuggestionsEnumEmpty AddressWritingsuggestionsEnum = ""
 )
 
 type addressAttrs map[string]any

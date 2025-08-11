@@ -61,8 +61,9 @@ const (
 type ColAutocorrectEnum string
 
 const (
-	ColAutocorrectEnumOff ColAutocorrectEnum = "off"
-	ColAutocorrectEnumOn  ColAutocorrectEnum = "on"
+	ColAutocorrectEnumOff   ColAutocorrectEnum = "off"
+	ColAutocorrectEnumOn    ColAutocorrectEnum = "on"
+	ColAutocorrectEnumEmpty ColAutocorrectEnum = ""
 )
 
 type ColContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
 	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
 	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
+	ColContenteditableEnumEmpty         ColContenteditableEnum = ""
 )
 
 type ColDirEnum string
@@ -91,13 +93,13 @@ const (
 type ColEnterkeyhintEnum string
 
 const (
-	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
-	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
 	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
 	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
 	ColEnterkeyhintEnumPrevious ColEnterkeyhintEnum = "previous"
 	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
 	ColEnterkeyhintEnumSend     ColEnterkeyhintEnum = "send"
+	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
+	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
 )
 
 type ColHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type ColInputmodeEnum string
 
 const (
-	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
-	ColInputmodeEnumText    ColInputmodeEnum = "text"
-	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
-	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
 	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
 	ColInputmodeEnumNone    ColInputmodeEnum = "none"
 	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
 	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
+	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
+	ColInputmodeEnumText    ColInputmodeEnum = "text"
+	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
+	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
 )
 
 type ColSpellcheckEnum string
@@ -126,13 +128,15 @@ type ColSpellcheckEnum string
 const (
 	ColSpellcheckEnumFalse ColSpellcheckEnum = "false"
 	ColSpellcheckEnumTrue  ColSpellcheckEnum = "true"
+	ColSpellcheckEnumEmpty ColSpellcheckEnum = ""
 )
 
 type ColTranslateEnum string
 
 const (
-	ColTranslateEnumNo  ColTranslateEnum = "no"
-	ColTranslateEnumYes ColTranslateEnum = "yes"
+	ColTranslateEnumNo    ColTranslateEnum = "no"
+	ColTranslateEnumYes   ColTranslateEnum = "yes"
+	ColTranslateEnumEmpty ColTranslateEnum = ""
 )
 
 type ColWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type ColWritingsuggestionsEnum string
 const (
 	ColWritingsuggestionsEnumFalse ColWritingsuggestionsEnum = "false"
 	ColWritingsuggestionsEnumTrue  ColWritingsuggestionsEnum = "true"
+	ColWritingsuggestionsEnumEmpty ColWritingsuggestionsEnum = ""
 )
 
 type colAttrs map[string]any

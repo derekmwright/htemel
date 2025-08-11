@@ -61,16 +61,18 @@ const (
 type MarkAutocorrectEnum string
 
 const (
-	MarkAutocorrectEnumOff MarkAutocorrectEnum = "off"
-	MarkAutocorrectEnumOn  MarkAutocorrectEnum = "on"
+	MarkAutocorrectEnumOff   MarkAutocorrectEnum = "off"
+	MarkAutocorrectEnumOn    MarkAutocorrectEnum = "on"
+	MarkAutocorrectEnumEmpty MarkAutocorrectEnum = ""
 )
 
 type MarkContenteditableEnum string
 
 const (
+	MarkContenteditableEnumTrue          MarkContenteditableEnum = "true"
 	MarkContenteditableEnumFalse         MarkContenteditableEnum = "false"
 	MarkContenteditableEnumPlaintextOnly MarkContenteditableEnum = "plaintext-only"
-	MarkContenteditableEnumTrue          MarkContenteditableEnum = "true"
+	MarkContenteditableEnumEmpty         MarkContenteditableEnum = ""
 )
 
 type MarkDirEnum string
@@ -91,26 +93,27 @@ const (
 type MarkEnterkeyhintEnum string
 
 const (
+	MarkEnterkeyhintEnumPrevious MarkEnterkeyhintEnum = "previous"
+	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
+	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
 	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
 	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
 	MarkEnterkeyhintEnumGo       MarkEnterkeyhintEnum = "go"
 	MarkEnterkeyhintEnumNext     MarkEnterkeyhintEnum = "next"
-	MarkEnterkeyhintEnumPrevious MarkEnterkeyhintEnum = "previous"
-	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
-	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
 )
 
 type MarkHiddenEnum string
 
 const (
-	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
 	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
+	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
 	MarkHiddenEnumEmpty      MarkHiddenEnum = ""
 )
 
 type MarkInputmodeEnum string
 
 const (
+	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
 	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
 	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
 	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
@@ -118,28 +121,30 @@ const (
 	MarkInputmodeEnumDecimal MarkInputmodeEnum = "decimal"
 	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
 	MarkInputmodeEnumNone    MarkInputmodeEnum = "none"
-	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
 )
 
 type MarkSpellcheckEnum string
 
 const (
-	MarkSpellcheckEnumTrue  MarkSpellcheckEnum = "true"
 	MarkSpellcheckEnumFalse MarkSpellcheckEnum = "false"
+	MarkSpellcheckEnumTrue  MarkSpellcheckEnum = "true"
+	MarkSpellcheckEnumEmpty MarkSpellcheckEnum = ""
 )
 
 type MarkTranslateEnum string
 
 const (
-	MarkTranslateEnumNo  MarkTranslateEnum = "no"
-	MarkTranslateEnumYes MarkTranslateEnum = "yes"
+	MarkTranslateEnumNo    MarkTranslateEnum = "no"
+	MarkTranslateEnumYes   MarkTranslateEnum = "yes"
+	MarkTranslateEnumEmpty MarkTranslateEnum = ""
 )
 
 type MarkWritingsuggestionsEnum string
 
 const (
-	MarkWritingsuggestionsEnumTrue  MarkWritingsuggestionsEnum = "true"
 	MarkWritingsuggestionsEnumFalse MarkWritingsuggestionsEnum = "false"
+	MarkWritingsuggestionsEnumTrue  MarkWritingsuggestionsEnum = "true"
+	MarkWritingsuggestionsEnumEmpty MarkWritingsuggestionsEnum = ""
 )
 
 type markAttrs map[string]any

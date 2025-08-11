@@ -50,27 +50,29 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 type ThAutocapitalizeEnum string
 
 const (
-	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
-	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
 	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
 	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
 	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
+	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
+	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 )
 
 type ThAutocorrectEnum string
 
 const (
-	ThAutocorrectEnumOff ThAutocorrectEnum = "off"
-	ThAutocorrectEnumOn  ThAutocorrectEnum = "on"
+	ThAutocorrectEnumOff   ThAutocorrectEnum = "off"
+	ThAutocorrectEnumOn    ThAutocorrectEnum = "on"
+	ThAutocorrectEnumEmpty ThAutocorrectEnum = ""
 )
 
 type ThContenteditableEnum string
 
 const (
-	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumPlaintextOnly ThContenteditableEnum = "plaintext-only"
 	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
+	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
+	ThContenteditableEnumEmpty         ThContenteditableEnum = ""
 )
 
 type ThDirEnum string
@@ -91,13 +93,13 @@ const (
 type ThEnterkeyhintEnum string
 
 const (
+	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
+	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
+	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
 	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
 	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
-	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
-	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
-	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 )
 
 type ThHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type ThInputmodeEnum string
 
 const (
-	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
-	ThInputmodeEnumNone    ThInputmodeEnum = "none"
-	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
-	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
 	ThInputmodeEnumText    ThInputmodeEnum = "text"
 	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
 	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
+	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
+	ThInputmodeEnumNone    ThInputmodeEnum = "none"
+	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
+	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 )
 
 type ThSpellcheckEnum string
@@ -126,13 +128,15 @@ type ThSpellcheckEnum string
 const (
 	ThSpellcheckEnumFalse ThSpellcheckEnum = "false"
 	ThSpellcheckEnumTrue  ThSpellcheckEnum = "true"
+	ThSpellcheckEnumEmpty ThSpellcheckEnum = ""
 )
 
 type ThTranslateEnum string
 
 const (
-	ThTranslateEnumNo  ThTranslateEnum = "no"
-	ThTranslateEnumYes ThTranslateEnum = "yes"
+	ThTranslateEnumNo    ThTranslateEnum = "no"
+	ThTranslateEnumYes   ThTranslateEnum = "yes"
+	ThTranslateEnumEmpty ThTranslateEnum = ""
 )
 
 type ThWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type ThWritingsuggestionsEnum string
 const (
 	ThWritingsuggestionsEnumFalse ThWritingsuggestionsEnum = "false"
 	ThWritingsuggestionsEnumTrue  ThWritingsuggestionsEnum = "true"
+	ThWritingsuggestionsEnumEmpty ThWritingsuggestionsEnum = ""
 )
 
 type thAttrs map[string]any

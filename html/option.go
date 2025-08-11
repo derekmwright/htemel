@@ -50,19 +50,20 @@ func OptionTernary(condition bool, true htemel.Node, false htemel.Node) *OptionE
 type OptionAutocapitalizeEnum string
 
 const (
-	OptionAutocapitalizeEnumNone       OptionAutocapitalizeEnum = "none"
-	OptionAutocapitalizeEnumOff        OptionAutocapitalizeEnum = "off"
 	OptionAutocapitalizeEnumOn         OptionAutocapitalizeEnum = "on"
 	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
 	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
+	OptionAutocapitalizeEnumNone       OptionAutocapitalizeEnum = "none"
+	OptionAutocapitalizeEnumOff        OptionAutocapitalizeEnum = "off"
 )
 
 type OptionAutocorrectEnum string
 
 const (
-	OptionAutocorrectEnumOff OptionAutocorrectEnum = "off"
-	OptionAutocorrectEnumOn  OptionAutocorrectEnum = "on"
+	OptionAutocorrectEnumOff   OptionAutocorrectEnum = "off"
+	OptionAutocorrectEnumOn    OptionAutocorrectEnum = "on"
+	OptionAutocorrectEnumEmpty OptionAutocorrectEnum = ""
 )
 
 type OptionContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	OptionContenteditableEnumFalse         OptionContenteditableEnum = "false"
 	OptionContenteditableEnumPlaintextOnly OptionContenteditableEnum = "plaintext-only"
 	OptionContenteditableEnumTrue          OptionContenteditableEnum = "true"
+	OptionContenteditableEnumEmpty         OptionContenteditableEnum = ""
 )
 
 type OptionDirEnum string
@@ -91,13 +93,13 @@ const (
 type OptionEnterkeyhintEnum string
 
 const (
-	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
 	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
 	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
 	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
+	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
 )
 
 type OptionHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type OptionInputmodeEnum string
 
 const (
+	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
+	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
 	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
 	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
 	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
 	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
-	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
-	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
 )
 
 type OptionSpellcheckEnum string
@@ -126,13 +128,15 @@ type OptionSpellcheckEnum string
 const (
 	OptionSpellcheckEnumFalse OptionSpellcheckEnum = "false"
 	OptionSpellcheckEnumTrue  OptionSpellcheckEnum = "true"
+	OptionSpellcheckEnumEmpty OptionSpellcheckEnum = ""
 )
 
 type OptionTranslateEnum string
 
 const (
-	OptionTranslateEnumYes OptionTranslateEnum = "yes"
-	OptionTranslateEnumNo  OptionTranslateEnum = "no"
+	OptionTranslateEnumNo    OptionTranslateEnum = "no"
+	OptionTranslateEnumYes   OptionTranslateEnum = "yes"
+	OptionTranslateEnumEmpty OptionTranslateEnum = ""
 )
 
 type OptionWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type OptionWritingsuggestionsEnum string
 const (
 	OptionWritingsuggestionsEnumFalse OptionWritingsuggestionsEnum = "false"
 	OptionWritingsuggestionsEnumTrue  OptionWritingsuggestionsEnum = "true"
+	OptionWritingsuggestionsEnumEmpty OptionWritingsuggestionsEnum = ""
 )
 
 type optionAttrs map[string]any

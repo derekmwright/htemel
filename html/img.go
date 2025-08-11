@@ -50,35 +50,37 @@ func ImgTernary(condition bool, true htemel.Node, false htemel.Node) *ImgElement
 type ImgAutocapitalizeEnum string
 
 const (
-	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
 	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
 	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
 	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
+	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 )
 
 type ImgAutocorrectEnum string
 
 const (
-	ImgAutocorrectEnumOff ImgAutocorrectEnum = "off"
-	ImgAutocorrectEnumOn  ImgAutocorrectEnum = "on"
+	ImgAutocorrectEnumOff   ImgAutocorrectEnum = "off"
+	ImgAutocorrectEnumOn    ImgAutocorrectEnum = "on"
+	ImgAutocorrectEnumEmpty ImgAutocorrectEnum = ""
 )
 
 type ImgContenteditableEnum string
 
 const (
+	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumPlaintextOnly ImgContenteditableEnum = "plaintext-only"
-	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
+	ImgContenteditableEnumEmpty         ImgContenteditableEnum = ""
 )
 
 type ImgDirEnum string
 
 const (
-	ImgDirEnumLtr  ImgDirEnum = "ltr"
 	ImgDirEnumRtl  ImgDirEnum = "rtl"
 	ImgDirEnumAuto ImgDirEnum = "auto"
+	ImgDirEnumLtr  ImgDirEnum = "ltr"
 )
 
 type ImgDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type ImgEnterkeyhintEnum string
 
 const (
-	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
-	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
 	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
 	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
+	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
+	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 )
 
 type ImgHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type ImgInputmodeEnum string
 
 const (
-	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
-	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
-	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
-	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
 	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
 	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
 	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
+	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
+	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
+	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
+	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
 )
 
 type ImgSpellcheckEnum string
@@ -126,13 +128,15 @@ type ImgSpellcheckEnum string
 const (
 	ImgSpellcheckEnumFalse ImgSpellcheckEnum = "false"
 	ImgSpellcheckEnumTrue  ImgSpellcheckEnum = "true"
+	ImgSpellcheckEnumEmpty ImgSpellcheckEnum = ""
 )
 
 type ImgTranslateEnum string
 
 const (
-	ImgTranslateEnumNo  ImgTranslateEnum = "no"
-	ImgTranslateEnumYes ImgTranslateEnum = "yes"
+	ImgTranslateEnumNo    ImgTranslateEnum = "no"
+	ImgTranslateEnumYes   ImgTranslateEnum = "yes"
+	ImgTranslateEnumEmpty ImgTranslateEnum = ""
 )
 
 type ImgWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type ImgWritingsuggestionsEnum string
 const (
 	ImgWritingsuggestionsEnumFalse ImgWritingsuggestionsEnum = "false"
 	ImgWritingsuggestionsEnumTrue  ImgWritingsuggestionsEnum = "true"
+	ImgWritingsuggestionsEnumEmpty ImgWritingsuggestionsEnum = ""
 )
 
 type imgAttrs map[string]any

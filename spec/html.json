@@ -457,7 +457,7 @@
         "off": {},
         "on": {}
       },
-      "allow_empty": false,
+      "allow_empty": true,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -477,7 +477,7 @@
         "plaintext-only": {},
         "true": {}
       },
-      "allow_empty": false,
+      "allow_empty": true,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -608,7 +608,7 @@
         "false": {},
         "true": {}
       },
-      "allow_empty": false,
+      "allow_empty": true,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -633,7 +633,7 @@
         "no": {},
         "yes": {}
       },
-      "allow_empty": false,
+      "allow_empty": true,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -643,7 +643,7 @@
         "false": {},
         "true": {}
       },
-      "allow_empty": false,
+      "allow_empty": true,
       "attribute_type": "AttributeTypeEnum"
     }
   ]

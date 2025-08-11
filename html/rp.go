@@ -50,19 +50,20 @@ func RpTernary(condition bool, true htemel.Node, false htemel.Node) *RpElement {
 type RpAutocapitalizeEnum string
 
 const (
+	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
 	RpAutocapitalizeEnumCharacters RpAutocapitalizeEnum = "characters"
 	RpAutocapitalizeEnumNone       RpAutocapitalizeEnum = "none"
 	RpAutocapitalizeEnumOff        RpAutocapitalizeEnum = "off"
 	RpAutocapitalizeEnumOn         RpAutocapitalizeEnum = "on"
 	RpAutocapitalizeEnumSentences  RpAutocapitalizeEnum = "sentences"
-	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
 )
 
 type RpAutocorrectEnum string
 
 const (
-	RpAutocorrectEnumOff RpAutocorrectEnum = "off"
-	RpAutocorrectEnumOn  RpAutocorrectEnum = "on"
+	RpAutocorrectEnumOff   RpAutocorrectEnum = "off"
+	RpAutocorrectEnumOn    RpAutocorrectEnum = "on"
+	RpAutocorrectEnumEmpty RpAutocorrectEnum = ""
 )
 
 type RpContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	RpContenteditableEnumFalse         RpContenteditableEnum = "false"
 	RpContenteditableEnumPlaintextOnly RpContenteditableEnum = "plaintext-only"
 	RpContenteditableEnumTrue          RpContenteditableEnum = "true"
+	RpContenteditableEnumEmpty         RpContenteditableEnum = ""
 )
 
 type RpDirEnum string
@@ -91,34 +93,34 @@ const (
 type RpEnterkeyhintEnum string
 
 const (
+	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
+	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
+	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
 	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
 	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
 	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
-	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
-	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
-	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
 )
 
 type RpHiddenEnum string
 
 const (
-	RpHiddenEnumHidden     RpHiddenEnum = "hidden"
 	RpHiddenEnumUntilFound RpHiddenEnum = "until-found"
+	RpHiddenEnumHidden     RpHiddenEnum = "hidden"
 	RpHiddenEnumEmpty      RpHiddenEnum = ""
 )
 
 type RpInputmodeEnum string
 
 const (
-	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
-	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
 	RpInputmodeEnumNone    RpInputmodeEnum = "none"
 	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
 	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
 	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
 	RpInputmodeEnumText    RpInputmodeEnum = "text"
 	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
+	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
+	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
 )
 
 type RpSpellcheckEnum string
@@ -126,13 +128,15 @@ type RpSpellcheckEnum string
 const (
 	RpSpellcheckEnumFalse RpSpellcheckEnum = "false"
 	RpSpellcheckEnumTrue  RpSpellcheckEnum = "true"
+	RpSpellcheckEnumEmpty RpSpellcheckEnum = ""
 )
 
 type RpTranslateEnum string
 
 const (
-	RpTranslateEnumNo  RpTranslateEnum = "no"
-	RpTranslateEnumYes RpTranslateEnum = "yes"
+	RpTranslateEnumYes   RpTranslateEnum = "yes"
+	RpTranslateEnumNo    RpTranslateEnum = "no"
+	RpTranslateEnumEmpty RpTranslateEnum = ""
 )
 
 type RpWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type RpWritingsuggestionsEnum string
 const (
 	RpWritingsuggestionsEnumFalse RpWritingsuggestionsEnum = "false"
 	RpWritingsuggestionsEnumTrue  RpWritingsuggestionsEnum = "true"
+	RpWritingsuggestionsEnumEmpty RpWritingsuggestionsEnum = ""
 )
 
 type rpAttrs map[string]any

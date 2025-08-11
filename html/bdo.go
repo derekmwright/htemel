@@ -50,27 +50,29 @@ func BdoTernary(condition bool, true htemel.Node, false htemel.Node) *BdoElement
 type BdoAutocapitalizeEnum string
 
 const (
+	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
 	BdoAutocapitalizeEnumWords      BdoAutocapitalizeEnum = "words"
 	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
 	BdoAutocapitalizeEnumNone       BdoAutocapitalizeEnum = "none"
 	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
 	BdoAutocapitalizeEnumOn         BdoAutocapitalizeEnum = "on"
-	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
 )
 
 type BdoAutocorrectEnum string
 
 const (
-	BdoAutocorrectEnumOff BdoAutocorrectEnum = "off"
-	BdoAutocorrectEnumOn  BdoAutocorrectEnum = "on"
+	BdoAutocorrectEnumOff   BdoAutocorrectEnum = "off"
+	BdoAutocorrectEnumOn    BdoAutocorrectEnum = "on"
+	BdoAutocorrectEnumEmpty BdoAutocorrectEnum = ""
 )
 
 type BdoContenteditableEnum string
 
 const (
+	BdoContenteditableEnumFalse         BdoContenteditableEnum = "false"
 	BdoContenteditableEnumPlaintextOnly BdoContenteditableEnum = "plaintext-only"
 	BdoContenteditableEnumTrue          BdoContenteditableEnum = "true"
-	BdoContenteditableEnumFalse         BdoContenteditableEnum = "false"
+	BdoContenteditableEnumEmpty         BdoContenteditableEnum = ""
 )
 
 type BdoDirEnum string
@@ -91,13 +93,13 @@ const (
 type BdoEnterkeyhintEnum string
 
 const (
-	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
-	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
-	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
 	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
 	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
 	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
 	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
+	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
+	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
+	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
 )
 
 type BdoHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type BdoInputmodeEnum string
 
 const (
+	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
+	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
+	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
 	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
 	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
 	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
 	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
 	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
-	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
-	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
-	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
 )
 
 type BdoSpellcheckEnum string
@@ -126,13 +128,15 @@ type BdoSpellcheckEnum string
 const (
 	BdoSpellcheckEnumFalse BdoSpellcheckEnum = "false"
 	BdoSpellcheckEnumTrue  BdoSpellcheckEnum = "true"
+	BdoSpellcheckEnumEmpty BdoSpellcheckEnum = ""
 )
 
 type BdoTranslateEnum string
 
 const (
-	BdoTranslateEnumNo  BdoTranslateEnum = "no"
-	BdoTranslateEnumYes BdoTranslateEnum = "yes"
+	BdoTranslateEnumNo    BdoTranslateEnum = "no"
+	BdoTranslateEnumYes   BdoTranslateEnum = "yes"
+	BdoTranslateEnumEmpty BdoTranslateEnum = ""
 )
 
 type BdoWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type BdoWritingsuggestionsEnum string
 const (
 	BdoWritingsuggestionsEnumFalse BdoWritingsuggestionsEnum = "false"
 	BdoWritingsuggestionsEnumTrue  BdoWritingsuggestionsEnum = "true"
+	BdoWritingsuggestionsEnumEmpty BdoWritingsuggestionsEnum = ""
 )
 
 type bdoAttrs map[string]any

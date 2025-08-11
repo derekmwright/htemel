@@ -50,27 +50,29 @@ func SectionTernary(condition bool, true htemel.Node, false htemel.Node) *Sectio
 type SectionAutocapitalizeEnum string
 
 const (
-	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
-	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
-	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
 	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
 	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
 	SectionAutocapitalizeEnumWords      SectionAutocapitalizeEnum = "words"
+	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
+	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
+	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
 )
 
 type SectionAutocorrectEnum string
 
 const (
-	SectionAutocorrectEnumOff SectionAutocorrectEnum = "off"
-	SectionAutocorrectEnumOn  SectionAutocorrectEnum = "on"
+	SectionAutocorrectEnumOff   SectionAutocorrectEnum = "off"
+	SectionAutocorrectEnumOn    SectionAutocorrectEnum = "on"
+	SectionAutocorrectEnumEmpty SectionAutocorrectEnum = ""
 )
 
 type SectionContenteditableEnum string
 
 const (
+	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
 	SectionContenteditableEnumFalse         SectionContenteditableEnum = "false"
 	SectionContenteditableEnumPlaintextOnly SectionContenteditableEnum = "plaintext-only"
-	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
+	SectionContenteditableEnumEmpty         SectionContenteditableEnum = ""
 )
 
 type SectionDirEnum string
@@ -91,13 +93,13 @@ const (
 type SectionEnterkeyhintEnum string
 
 const (
-	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
-	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
-	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
 	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
 	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
 	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
 	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
+	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
+	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
+	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
 )
 
 type SectionHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type SectionInputmodeEnum string
 
 const (
-	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
-	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
 	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
 	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
 	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
 	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
 	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
 	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
+	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
+	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
 )
 
 type SectionSpellcheckEnum string
@@ -126,20 +128,23 @@ type SectionSpellcheckEnum string
 const (
 	SectionSpellcheckEnumFalse SectionSpellcheckEnum = "false"
 	SectionSpellcheckEnumTrue  SectionSpellcheckEnum = "true"
+	SectionSpellcheckEnumEmpty SectionSpellcheckEnum = ""
 )
 
 type SectionTranslateEnum string
 
 const (
-	SectionTranslateEnumYes SectionTranslateEnum = "yes"
-	SectionTranslateEnumNo  SectionTranslateEnum = "no"
+	SectionTranslateEnumNo    SectionTranslateEnum = "no"
+	SectionTranslateEnumYes   SectionTranslateEnum = "yes"
+	SectionTranslateEnumEmpty SectionTranslateEnum = ""
 )
 
 type SectionWritingsuggestionsEnum string
 
 const (
-	SectionWritingsuggestionsEnumTrue  SectionWritingsuggestionsEnum = "true"
 	SectionWritingsuggestionsEnumFalse SectionWritingsuggestionsEnum = "false"
+	SectionWritingsuggestionsEnumTrue  SectionWritingsuggestionsEnum = "true"
+	SectionWritingsuggestionsEnumEmpty SectionWritingsuggestionsEnum = ""
 )
 
 type sectionAttrs map[string]any

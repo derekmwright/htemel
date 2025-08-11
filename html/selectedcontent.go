@@ -50,19 +50,20 @@ func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node)
 type SelectedcontentAutocapitalizeEnum string
 
 const (
-	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
-	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
-	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
 	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
 	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
+	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
+	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
+	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 )
 
 type SelectedcontentAutocorrectEnum string
 
 const (
-	SelectedcontentAutocorrectEnumOff SelectedcontentAutocorrectEnum = "off"
-	SelectedcontentAutocorrectEnumOn  SelectedcontentAutocorrectEnum = "on"
+	SelectedcontentAutocorrectEnumOff   SelectedcontentAutocorrectEnum = "off"
+	SelectedcontentAutocorrectEnumOn    SelectedcontentAutocorrectEnum = "on"
+	SelectedcontentAutocorrectEnumEmpty SelectedcontentAutocorrectEnum = ""
 )
 
 type SelectedcontentContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	SelectedcontentContenteditableEnumFalse         SelectedcontentContenteditableEnum = "false"
 	SelectedcontentContenteditableEnumPlaintextOnly SelectedcontentContenteditableEnum = "plaintext-only"
 	SelectedcontentContenteditableEnumTrue          SelectedcontentContenteditableEnum = "true"
+	SelectedcontentContenteditableEnumEmpty         SelectedcontentContenteditableEnum = ""
 )
 
 type SelectedcontentDirEnum string
 
 const (
+	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 	SelectedcontentDirEnumAuto SelectedcontentDirEnum = "auto"
 	SelectedcontentDirEnumLtr  SelectedcontentDirEnum = "ltr"
-	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 )
 
 type SelectedcontentDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type SelectedcontentEnterkeyhintEnum string
 
 const (
-	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
-	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
 	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
 	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
 	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
+	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
+	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 )
 
 type SelectedcontentHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
-	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
-	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
 	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
 	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
 	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
 	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
+	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
+	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
 )
 
 type SelectedcontentSpellcheckEnum string
@@ -126,13 +128,15 @@ type SelectedcontentSpellcheckEnum string
 const (
 	SelectedcontentSpellcheckEnumFalse SelectedcontentSpellcheckEnum = "false"
 	SelectedcontentSpellcheckEnumTrue  SelectedcontentSpellcheckEnum = "true"
+	SelectedcontentSpellcheckEnumEmpty SelectedcontentSpellcheckEnum = ""
 )
 
 type SelectedcontentTranslateEnum string
 
 const (
-	SelectedcontentTranslateEnumNo  SelectedcontentTranslateEnum = "no"
-	SelectedcontentTranslateEnumYes SelectedcontentTranslateEnum = "yes"
+	SelectedcontentTranslateEnumYes   SelectedcontentTranslateEnum = "yes"
+	SelectedcontentTranslateEnumNo    SelectedcontentTranslateEnum = "no"
+	SelectedcontentTranslateEnumEmpty SelectedcontentTranslateEnum = ""
 )
 
 type SelectedcontentWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type SelectedcontentWritingsuggestionsEnum string
 const (
 	SelectedcontentWritingsuggestionsEnumFalse SelectedcontentWritingsuggestionsEnum = "false"
 	SelectedcontentWritingsuggestionsEnumTrue  SelectedcontentWritingsuggestionsEnum = "true"
+	SelectedcontentWritingsuggestionsEnumEmpty SelectedcontentWritingsuggestionsEnum = ""
 )
 
 type selectedcontentAttrs map[string]any

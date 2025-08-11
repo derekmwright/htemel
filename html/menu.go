@@ -50,19 +50,20 @@ func MenuTernary(condition bool, true htemel.Node, false htemel.Node) *MenuEleme
 type MenuAutocapitalizeEnum string
 
 const (
-	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
-	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
 	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
 	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
 	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
+	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
+	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
 )
 
 type MenuAutocorrectEnum string
 
 const (
-	MenuAutocorrectEnumOn  MenuAutocorrectEnum = "on"
-	MenuAutocorrectEnumOff MenuAutocorrectEnum = "off"
+	MenuAutocorrectEnumOff   MenuAutocorrectEnum = "off"
+	MenuAutocorrectEnumOn    MenuAutocorrectEnum = "on"
+	MenuAutocorrectEnumEmpty MenuAutocorrectEnum = ""
 )
 
 type MenuContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	MenuContenteditableEnumFalse         MenuContenteditableEnum = "false"
 	MenuContenteditableEnumPlaintextOnly MenuContenteditableEnum = "plaintext-only"
 	MenuContenteditableEnumTrue          MenuContenteditableEnum = "true"
+	MenuContenteditableEnumEmpty         MenuContenteditableEnum = ""
 )
 
 type MenuDirEnum string
@@ -91,13 +93,13 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
-	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
-	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
-	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
 	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
 	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
 	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
+	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
+	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
+	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 )
 
 type MenuHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type MenuInputmodeEnum string
 
 const (
-	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
-	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
 	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
 	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
 	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
+	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
+	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 )
 
 type MenuSpellcheckEnum string
@@ -126,13 +128,15 @@ type MenuSpellcheckEnum string
 const (
 	MenuSpellcheckEnumFalse MenuSpellcheckEnum = "false"
 	MenuSpellcheckEnumTrue  MenuSpellcheckEnum = "true"
+	MenuSpellcheckEnumEmpty MenuSpellcheckEnum = ""
 )
 
 type MenuTranslateEnum string
 
 const (
-	MenuTranslateEnumNo  MenuTranslateEnum = "no"
-	MenuTranslateEnumYes MenuTranslateEnum = "yes"
+	MenuTranslateEnumYes   MenuTranslateEnum = "yes"
+	MenuTranslateEnumNo    MenuTranslateEnum = "no"
+	MenuTranslateEnumEmpty MenuTranslateEnum = ""
 )
 
 type MenuWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type MenuWritingsuggestionsEnum string
 const (
 	MenuWritingsuggestionsEnumFalse MenuWritingsuggestionsEnum = "false"
 	MenuWritingsuggestionsEnumTrue  MenuWritingsuggestionsEnum = "true"
+	MenuWritingsuggestionsEnumEmpty MenuWritingsuggestionsEnum = ""
 )
 
 type menuAttrs map[string]any

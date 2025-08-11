@@ -50,42 +50,44 @@ func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadEle
 type TheadAutocapitalizeEnum string
 
 const (
-	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
-	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
 	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
 	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
+	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
+	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 )
 
 type TheadAutocorrectEnum string
 
 const (
-	TheadAutocorrectEnumOn  TheadAutocorrectEnum = "on"
-	TheadAutocorrectEnumOff TheadAutocorrectEnum = "off"
+	TheadAutocorrectEnumOff   TheadAutocorrectEnum = "off"
+	TheadAutocorrectEnumOn    TheadAutocorrectEnum = "on"
+	TheadAutocorrectEnumEmpty TheadAutocorrectEnum = ""
 )
 
 type TheadContenteditableEnum string
 
 const (
+	TheadContenteditableEnumTrue          TheadContenteditableEnum = "true"
 	TheadContenteditableEnumFalse         TheadContenteditableEnum = "false"
 	TheadContenteditableEnumPlaintextOnly TheadContenteditableEnum = "plaintext-only"
-	TheadContenteditableEnumTrue          TheadContenteditableEnum = "true"
+	TheadContenteditableEnumEmpty         TheadContenteditableEnum = ""
 )
 
 type TheadDirEnum string
 
 const (
+	TheadDirEnumRtl  TheadDirEnum = "rtl"
 	TheadDirEnumAuto TheadDirEnum = "auto"
 	TheadDirEnumLtr  TheadDirEnum = "ltr"
-	TheadDirEnumRtl  TheadDirEnum = "rtl"
 )
 
 type TheadDraggableEnum string
 
 const (
-	TheadDraggableEnumTrue  TheadDraggableEnum = "true"
 	TheadDraggableEnumFalse TheadDraggableEnum = "false"
+	TheadDraggableEnumTrue  TheadDraggableEnum = "true"
 )
 
 type TheadEnterkeyhintEnum string
@@ -111,35 +113,38 @@ const (
 type TheadInputmodeEnum string
 
 const (
-	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
-	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
-	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
-	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
 	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
 	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
 	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
 	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
+	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
+	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
+	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
+	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
 )
 
 type TheadSpellcheckEnum string
 
 const (
-	TheadSpellcheckEnumFalse TheadSpellcheckEnum = "false"
 	TheadSpellcheckEnumTrue  TheadSpellcheckEnum = "true"
+	TheadSpellcheckEnumFalse TheadSpellcheckEnum = "false"
+	TheadSpellcheckEnumEmpty TheadSpellcheckEnum = ""
 )
 
 type TheadTranslateEnum string
 
 const (
-	TheadTranslateEnumNo  TheadTranslateEnum = "no"
-	TheadTranslateEnumYes TheadTranslateEnum = "yes"
+	TheadTranslateEnumNo    TheadTranslateEnum = "no"
+	TheadTranslateEnumYes   TheadTranslateEnum = "yes"
+	TheadTranslateEnumEmpty TheadTranslateEnum = ""
 )
 
 type TheadWritingsuggestionsEnum string
 
 const (
-	TheadWritingsuggestionsEnumFalse TheadWritingsuggestionsEnum = "false"
 	TheadWritingsuggestionsEnumTrue  TheadWritingsuggestionsEnum = "true"
+	TheadWritingsuggestionsEnumFalse TheadWritingsuggestionsEnum = "false"
+	TheadWritingsuggestionsEnumEmpty TheadWritingsuggestionsEnum = ""
 )
 
 type theadAttrs map[string]any

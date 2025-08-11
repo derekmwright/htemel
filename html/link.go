@@ -50,19 +50,20 @@ func LinkTernary(condition bool, true htemel.Node, false htemel.Node) *LinkEleme
 type LinkAutocapitalizeEnum string
 
 const (
-	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
-	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
 	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
 	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
 	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
+	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
+	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 )
 
 type LinkAutocorrectEnum string
 
 const (
-	LinkAutocorrectEnumOff LinkAutocorrectEnum = "off"
-	LinkAutocorrectEnumOn  LinkAutocorrectEnum = "on"
+	LinkAutocorrectEnumOff   LinkAutocorrectEnum = "off"
+	LinkAutocorrectEnumOn    LinkAutocorrectEnum = "on"
+	LinkAutocorrectEnumEmpty LinkAutocorrectEnum = ""
 )
 
 type LinkContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
 	LinkContenteditableEnumPlaintextOnly LinkContenteditableEnum = "plaintext-only"
 	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
+	LinkContenteditableEnumEmpty         LinkContenteditableEnum = ""
 )
 
 type LinkDirEnum string
 
 const (
+	LinkDirEnumRtl  LinkDirEnum = "rtl"
 	LinkDirEnumAuto LinkDirEnum = "auto"
 	LinkDirEnumLtr  LinkDirEnum = "ltr"
-	LinkDirEnumRtl  LinkDirEnum = "rtl"
 )
 
 type LinkDraggableEnum string
@@ -91,34 +93,34 @@ const (
 type LinkEnterkeyhintEnum string
 
 const (
+	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
 	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
 	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
 	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
-	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
 )
 
 type LinkHiddenEnum string
 
 const (
-	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
 	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
+	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
 	LinkHiddenEnumEmpty      LinkHiddenEnum = ""
 )
 
 type LinkInputmodeEnum string
 
 const (
-	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
-	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
-	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
 	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
 	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
 	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
 	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
+	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
+	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
+	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
 )
 
 type LinkSpellcheckEnum string
@@ -126,13 +128,15 @@ type LinkSpellcheckEnum string
 const (
 	LinkSpellcheckEnumFalse LinkSpellcheckEnum = "false"
 	LinkSpellcheckEnumTrue  LinkSpellcheckEnum = "true"
+	LinkSpellcheckEnumEmpty LinkSpellcheckEnum = ""
 )
 
 type LinkTranslateEnum string
 
 const (
-	LinkTranslateEnumNo  LinkTranslateEnum = "no"
-	LinkTranslateEnumYes LinkTranslateEnum = "yes"
+	LinkTranslateEnumYes   LinkTranslateEnum = "yes"
+	LinkTranslateEnumNo    LinkTranslateEnum = "no"
+	LinkTranslateEnumEmpty LinkTranslateEnum = ""
 )
 
 type LinkWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type LinkWritingsuggestionsEnum string
 const (
 	LinkWritingsuggestionsEnumFalse LinkWritingsuggestionsEnum = "false"
 	LinkWritingsuggestionsEnumTrue  LinkWritingsuggestionsEnum = "true"
+	LinkWritingsuggestionsEnumEmpty LinkWritingsuggestionsEnum = ""
 )
 
 type linkAttrs map[string]any

@@ -50,19 +50,20 @@ func TextareaTernary(condition bool, true htemel.Node, false htemel.Node) *Texta
 type TextareaAutocapitalizeEnum string
 
 const (
-	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
-	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
 	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
 	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
 	TextareaAutocapitalizeEnumWords      TextareaAutocapitalizeEnum = "words"
 	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
+	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
+	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
 )
 
 type TextareaAutocorrectEnum string
 
 const (
-	TextareaAutocorrectEnumOn  TextareaAutocorrectEnum = "on"
-	TextareaAutocorrectEnumOff TextareaAutocorrectEnum = "off"
+	TextareaAutocorrectEnumOff   TextareaAutocorrectEnum = "off"
+	TextareaAutocorrectEnumOn    TextareaAutocorrectEnum = "on"
+	TextareaAutocorrectEnumEmpty TextareaAutocorrectEnum = ""
 )
 
 type TextareaContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	TextareaContenteditableEnumFalse         TextareaContenteditableEnum = "false"
 	TextareaContenteditableEnumPlaintextOnly TextareaContenteditableEnum = "plaintext-only"
 	TextareaContenteditableEnumTrue          TextareaContenteditableEnum = "true"
+	TextareaContenteditableEnumEmpty         TextareaContenteditableEnum = ""
 )
 
 type TextareaDirEnum string
@@ -91,13 +93,13 @@ const (
 type TextareaEnterkeyhintEnum string
 
 const (
+	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
 	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
 	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
 	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
 	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
 	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
 	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
-	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
 )
 
 type TextareaHiddenEnum string
@@ -111,6 +113,7 @@ const (
 type TextareaInputmodeEnum string
 
 const (
+	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
 	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
 	TextareaInputmodeEnumSearch  TextareaInputmodeEnum = "search"
 	TextareaInputmodeEnumTel     TextareaInputmodeEnum = "tel"
@@ -118,21 +121,22 @@ const (
 	TextareaInputmodeEnumUrl     TextareaInputmodeEnum = "url"
 	TextareaInputmodeEnumDecimal TextareaInputmodeEnum = "decimal"
 	TextareaInputmodeEnumEmail   TextareaInputmodeEnum = "email"
-	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
 )
 
 type TextareaSpellcheckEnum string
 
 const (
-	TextareaSpellcheckEnumTrue  TextareaSpellcheckEnum = "true"
 	TextareaSpellcheckEnumFalse TextareaSpellcheckEnum = "false"
+	TextareaSpellcheckEnumTrue  TextareaSpellcheckEnum = "true"
+	TextareaSpellcheckEnumEmpty TextareaSpellcheckEnum = ""
 )
 
 type TextareaTranslateEnum string
 
 const (
-	TextareaTranslateEnumNo  TextareaTranslateEnum = "no"
-	TextareaTranslateEnumYes TextareaTranslateEnum = "yes"
+	TextareaTranslateEnumNo    TextareaTranslateEnum = "no"
+	TextareaTranslateEnumYes   TextareaTranslateEnum = "yes"
+	TextareaTranslateEnumEmpty TextareaTranslateEnum = ""
 )
 
 type TextareaWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type TextareaWritingsuggestionsEnum string
 const (
 	TextareaWritingsuggestionsEnumFalse TextareaWritingsuggestionsEnum = "false"
 	TextareaWritingsuggestionsEnumTrue  TextareaWritingsuggestionsEnum = "true"
+	TextareaWritingsuggestionsEnumEmpty TextareaWritingsuggestionsEnum = ""
 )
 
 type textareaAttrs map[string]any

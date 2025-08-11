@@ -50,19 +50,20 @@ func DialogTernary(condition bool, true htemel.Node, false htemel.Node) *DialogE
 type DialogAutocapitalizeEnum string
 
 const (
-	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
-	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
-	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
 	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
 	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
+	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
+	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
+	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
 )
 
 type DialogAutocorrectEnum string
 
 const (
-	DialogAutocorrectEnumOff DialogAutocorrectEnum = "off"
-	DialogAutocorrectEnumOn  DialogAutocorrectEnum = "on"
+	DialogAutocorrectEnumOff   DialogAutocorrectEnum = "off"
+	DialogAutocorrectEnumOn    DialogAutocorrectEnum = "on"
+	DialogAutocorrectEnumEmpty DialogAutocorrectEnum = ""
 )
 
 type DialogContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	DialogContenteditableEnumFalse         DialogContenteditableEnum = "false"
 	DialogContenteditableEnumPlaintextOnly DialogContenteditableEnum = "plaintext-only"
 	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
+	DialogContenteditableEnumEmpty         DialogContenteditableEnum = ""
 )
 
 type DialogDirEnum string
 
 const (
-	DialogDirEnumRtl  DialogDirEnum = "rtl"
 	DialogDirEnumAuto DialogDirEnum = "auto"
 	DialogDirEnumLtr  DialogDirEnum = "ltr"
+	DialogDirEnumRtl  DialogDirEnum = "rtl"
 )
 
 type DialogDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type DialogEnterkeyhintEnum string
 
 const (
-	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
 	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
 	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 	DialogEnterkeyhintEnumSearch   DialogEnterkeyhintEnum = "search"
 	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
 	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
 	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
+	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
 )
 
 type DialogHiddenEnum string
@@ -111,7 +113,6 @@ const (
 type DialogInputmodeEnum string
 
 const (
-	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
 	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
 	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
 	DialogInputmodeEnumNumeric DialogInputmodeEnum = "numeric"
@@ -119,6 +120,7 @@ const (
 	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
 	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
 	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
+	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
 )
 
 type DialogSpellcheckEnum string
@@ -126,13 +128,15 @@ type DialogSpellcheckEnum string
 const (
 	DialogSpellcheckEnumFalse DialogSpellcheckEnum = "false"
 	DialogSpellcheckEnumTrue  DialogSpellcheckEnum = "true"
+	DialogSpellcheckEnumEmpty DialogSpellcheckEnum = ""
 )
 
 type DialogTranslateEnum string
 
 const (
-	DialogTranslateEnumYes DialogTranslateEnum = "yes"
-	DialogTranslateEnumNo  DialogTranslateEnum = "no"
+	DialogTranslateEnumNo    DialogTranslateEnum = "no"
+	DialogTranslateEnumYes   DialogTranslateEnum = "yes"
+	DialogTranslateEnumEmpty DialogTranslateEnum = ""
 )
 
 type DialogWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type DialogWritingsuggestionsEnum string
 const (
 	DialogWritingsuggestionsEnumFalse DialogWritingsuggestionsEnum = "false"
 	DialogWritingsuggestionsEnumTrue  DialogWritingsuggestionsEnum = "true"
+	DialogWritingsuggestionsEnumEmpty DialogWritingsuggestionsEnum = ""
 )
 
 type dialogAttrs map[string]any

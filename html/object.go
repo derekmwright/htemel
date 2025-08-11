@@ -50,19 +50,20 @@ func ObjectTernary(condition bool, true htemel.Node, false htemel.Node) *ObjectE
 type ObjectAutocapitalizeEnum string
 
 const (
-	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
-	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
-	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
 	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
 	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
 	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
+	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
+	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
+	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
 )
 
 type ObjectAutocorrectEnum string
 
 const (
-	ObjectAutocorrectEnumOn  ObjectAutocorrectEnum = "on"
-	ObjectAutocorrectEnumOff ObjectAutocorrectEnum = "off"
+	ObjectAutocorrectEnumOff   ObjectAutocorrectEnum = "off"
+	ObjectAutocorrectEnumOn    ObjectAutocorrectEnum = "on"
+	ObjectAutocorrectEnumEmpty ObjectAutocorrectEnum = ""
 )
 
 type ObjectContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	ObjectContenteditableEnumFalse         ObjectContenteditableEnum = "false"
 	ObjectContenteditableEnumPlaintextOnly ObjectContenteditableEnum = "plaintext-only"
 	ObjectContenteditableEnumTrue          ObjectContenteditableEnum = "true"
+	ObjectContenteditableEnumEmpty         ObjectContenteditableEnum = ""
 )
 
 type ObjectDirEnum string
@@ -91,13 +93,13 @@ const (
 type ObjectEnterkeyhintEnum string
 
 const (
-	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
 	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
 	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
 	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 	ObjectEnterkeyhintEnumNext     ObjectEnterkeyhintEnum = "next"
 	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
 	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
+	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
 )
 
 type ObjectHiddenEnum string
@@ -111,7 +113,6 @@ const (
 type ObjectInputmodeEnum string
 
 const (
-	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
 	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
 	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
@@ -119,6 +120,7 @@ const (
 	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
 	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
 	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
+	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 )
 
 type ObjectSpellcheckEnum string
@@ -126,13 +128,15 @@ type ObjectSpellcheckEnum string
 const (
 	ObjectSpellcheckEnumFalse ObjectSpellcheckEnum = "false"
 	ObjectSpellcheckEnumTrue  ObjectSpellcheckEnum = "true"
+	ObjectSpellcheckEnumEmpty ObjectSpellcheckEnum = ""
 )
 
 type ObjectTranslateEnum string
 
 const (
-	ObjectTranslateEnumNo  ObjectTranslateEnum = "no"
-	ObjectTranslateEnumYes ObjectTranslateEnum = "yes"
+	ObjectTranslateEnumNo    ObjectTranslateEnum = "no"
+	ObjectTranslateEnumYes   ObjectTranslateEnum = "yes"
+	ObjectTranslateEnumEmpty ObjectTranslateEnum = ""
 )
 
 type ObjectWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type ObjectWritingsuggestionsEnum string
 const (
 	ObjectWritingsuggestionsEnumFalse ObjectWritingsuggestionsEnum = "false"
 	ObjectWritingsuggestionsEnumTrue  ObjectWritingsuggestionsEnum = "true"
+	ObjectWritingsuggestionsEnumEmpty ObjectWritingsuggestionsEnum = ""
 )
 
 type objectAttrs map[string]any

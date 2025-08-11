@@ -50,75 +50,77 @@ func TbodyTernary(condition bool, true htemel.Node, false htemel.Node) *TbodyEle
 type TbodyAutocapitalizeEnum string
 
 const (
-	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
 	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 	TbodyAutocapitalizeEnumWords      TbodyAutocapitalizeEnum = "words"
 	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
 	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
 	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
+	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
 )
 
 type TbodyAutocorrectEnum string
 
 const (
-	TbodyAutocorrectEnumOff TbodyAutocorrectEnum = "off"
-	TbodyAutocorrectEnumOn  TbodyAutocorrectEnum = "on"
+	TbodyAutocorrectEnumOff   TbodyAutocorrectEnum = "off"
+	TbodyAutocorrectEnumOn    TbodyAutocorrectEnum = "on"
+	TbodyAutocorrectEnumEmpty TbodyAutocorrectEnum = ""
 )
 
 type TbodyContenteditableEnum string
 
 const (
-	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
 	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
+	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
+	TbodyContenteditableEnumEmpty         TbodyContenteditableEnum = ""
 )
 
 type TbodyDirEnum string
 
 const (
-	TbodyDirEnumRtl  TbodyDirEnum = "rtl"
 	TbodyDirEnumAuto TbodyDirEnum = "auto"
 	TbodyDirEnumLtr  TbodyDirEnum = "ltr"
+	TbodyDirEnumRtl  TbodyDirEnum = "rtl"
 )
 
 type TbodyDraggableEnum string
 
 const (
-	TbodyDraggableEnumFalse TbodyDraggableEnum = "false"
 	TbodyDraggableEnumTrue  TbodyDraggableEnum = "true"
+	TbodyDraggableEnumFalse TbodyDraggableEnum = "false"
 )
 
 type TbodyEnterkeyhintEnum string
 
 const (
+	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
+	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 	TbodyEnterkeyhintEnumDone     TbodyEnterkeyhintEnum = "done"
 	TbodyEnterkeyhintEnumEnter    TbodyEnterkeyhintEnum = "enter"
 	TbodyEnterkeyhintEnumGo       TbodyEnterkeyhintEnum = "go"
 	TbodyEnterkeyhintEnumNext     TbodyEnterkeyhintEnum = "next"
 	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
-	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
-	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 )
 
 type TbodyHiddenEnum string
 
 const (
-	TbodyHiddenEnumHidden     TbodyHiddenEnum = "hidden"
 	TbodyHiddenEnumUntilFound TbodyHiddenEnum = "until-found"
+	TbodyHiddenEnumHidden     TbodyHiddenEnum = "hidden"
 	TbodyHiddenEnumEmpty      TbodyHiddenEnum = ""
 )
 
 type TbodyInputmodeEnum string
 
 const (
-	TbodyInputmodeEnumEmail   TbodyInputmodeEnum = "email"
-	TbodyInputmodeEnumNone    TbodyInputmodeEnum = "none"
-	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
 	TbodyInputmodeEnumSearch  TbodyInputmodeEnum = "search"
 	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
 	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
 	TbodyInputmodeEnumUrl     TbodyInputmodeEnum = "url"
 	TbodyInputmodeEnumDecimal TbodyInputmodeEnum = "decimal"
+	TbodyInputmodeEnumEmail   TbodyInputmodeEnum = "email"
+	TbodyInputmodeEnumNone    TbodyInputmodeEnum = "none"
+	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
 )
 
 type TbodySpellcheckEnum string
@@ -126,13 +128,15 @@ type TbodySpellcheckEnum string
 const (
 	TbodySpellcheckEnumFalse TbodySpellcheckEnum = "false"
 	TbodySpellcheckEnumTrue  TbodySpellcheckEnum = "true"
+	TbodySpellcheckEnumEmpty TbodySpellcheckEnum = ""
 )
 
 type TbodyTranslateEnum string
 
 const (
-	TbodyTranslateEnumNo  TbodyTranslateEnum = "no"
-	TbodyTranslateEnumYes TbodyTranslateEnum = "yes"
+	TbodyTranslateEnumNo    TbodyTranslateEnum = "no"
+	TbodyTranslateEnumYes   TbodyTranslateEnum = "yes"
+	TbodyTranslateEnumEmpty TbodyTranslateEnum = ""
 )
 
 type TbodyWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type TbodyWritingsuggestionsEnum string
 const (
 	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
 	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
+	TbodyWritingsuggestionsEnumEmpty TbodyWritingsuggestionsEnum = ""
 )
 
 type tbodyAttrs map[string]any

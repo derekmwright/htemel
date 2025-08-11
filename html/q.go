@@ -50,19 +50,20 @@ func QTernary(condition bool, true htemel.Node, false htemel.Node) *QElement {
 type QAutocapitalizeEnum string
 
 const (
-	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
-	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 	QAutocapitalizeEnumOff        QAutocapitalizeEnum = "off"
 	QAutocapitalizeEnumOn         QAutocapitalizeEnum = "on"
 	QAutocapitalizeEnumSentences  QAutocapitalizeEnum = "sentences"
 	QAutocapitalizeEnumWords      QAutocapitalizeEnum = "words"
+	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
+	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 )
 
 type QAutocorrectEnum string
 
 const (
-	QAutocorrectEnumOff QAutocorrectEnum = "off"
-	QAutocorrectEnumOn  QAutocorrectEnum = "on"
+	QAutocorrectEnumOn    QAutocorrectEnum = "on"
+	QAutocorrectEnumOff   QAutocorrectEnum = "off"
+	QAutocorrectEnumEmpty QAutocorrectEnum = ""
 )
 
 type QContenteditableEnum string
@@ -71,33 +72,34 @@ const (
 	QContenteditableEnumFalse         QContenteditableEnum = "false"
 	QContenteditableEnumPlaintextOnly QContenteditableEnum = "plaintext-only"
 	QContenteditableEnumTrue          QContenteditableEnum = "true"
+	QContenteditableEnumEmpty         QContenteditableEnum = ""
 )
 
 type QDirEnum string
 
 const (
-	QDirEnumRtl  QDirEnum = "rtl"
 	QDirEnumAuto QDirEnum = "auto"
 	QDirEnumLtr  QDirEnum = "ltr"
+	QDirEnumRtl  QDirEnum = "rtl"
 )
 
 type QDraggableEnum string
 
 const (
-	QDraggableEnumFalse QDraggableEnum = "false"
 	QDraggableEnumTrue  QDraggableEnum = "true"
+	QDraggableEnumFalse QDraggableEnum = "false"
 )
 
 type QEnterkeyhintEnum string
 
 const (
+	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
+	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
+	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
 	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
 	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
-	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
-	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
-	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 )
 
 type QHiddenEnum string
@@ -111,6 +113,7 @@ const (
 type QInputmodeEnum string
 
 const (
+	QInputmodeEnumUrl     QInputmodeEnum = "url"
 	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
 	QInputmodeEnumEmail   QInputmodeEnum = "email"
 	QInputmodeEnumNone    QInputmodeEnum = "none"
@@ -118,7 +121,6 @@ const (
 	QInputmodeEnumSearch  QInputmodeEnum = "search"
 	QInputmodeEnumTel     QInputmodeEnum = "tel"
 	QInputmodeEnumText    QInputmodeEnum = "text"
-	QInputmodeEnumUrl     QInputmodeEnum = "url"
 )
 
 type QSpellcheckEnum string
@@ -126,13 +128,15 @@ type QSpellcheckEnum string
 const (
 	QSpellcheckEnumFalse QSpellcheckEnum = "false"
 	QSpellcheckEnumTrue  QSpellcheckEnum = "true"
+	QSpellcheckEnumEmpty QSpellcheckEnum = ""
 )
 
 type QTranslateEnum string
 
 const (
-	QTranslateEnumNo  QTranslateEnum = "no"
-	QTranslateEnumYes QTranslateEnum = "yes"
+	QTranslateEnumNo    QTranslateEnum = "no"
+	QTranslateEnumYes   QTranslateEnum = "yes"
+	QTranslateEnumEmpty QTranslateEnum = ""
 )
 
 type QWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type QWritingsuggestionsEnum string
 const (
 	QWritingsuggestionsEnumFalse QWritingsuggestionsEnum = "false"
 	QWritingsuggestionsEnumTrue  QWritingsuggestionsEnum = "true"
+	QWritingsuggestionsEnumEmpty QWritingsuggestionsEnum = ""
 )
 
 type qAttrs map[string]any

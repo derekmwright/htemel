@@ -50,27 +50,29 @@ func TdTernary(condition bool, true htemel.Node, false htemel.Node) *TdElement {
 type TdAutocapitalizeEnum string
 
 const (
-	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
-	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
-	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
 	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
 	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
 	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
+	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
+	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
+	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
 )
 
 type TdAutocorrectEnum string
 
 const (
-	TdAutocorrectEnumOff TdAutocorrectEnum = "off"
-	TdAutocorrectEnumOn  TdAutocorrectEnum = "on"
+	TdAutocorrectEnumOff   TdAutocorrectEnum = "off"
+	TdAutocorrectEnumOn    TdAutocorrectEnum = "on"
+	TdAutocorrectEnumEmpty TdAutocorrectEnum = ""
 )
 
 type TdContenteditableEnum string
 
 const (
-	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
 	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
 	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
+	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
+	TdContenteditableEnumEmpty         TdContenteditableEnum = ""
 )
 
 type TdDirEnum string
@@ -91,13 +93,13 @@ const (
 type TdEnterkeyhintEnum string
 
 const (
+	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
+	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
+	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
 	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
 	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
 	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
 	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
-	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
-	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
-	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
 )
 
 type TdHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type TdInputmodeEnum string
 
 const (
-	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
-	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
-	TdInputmodeEnumNone    TdInputmodeEnum = "none"
-	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
 	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
 	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
 	TdInputmodeEnumText    TdInputmodeEnum = "text"
 	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
+	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
+	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
+	TdInputmodeEnumNone    TdInputmodeEnum = "none"
+	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
 )
 
 type TdSpellcheckEnum string
@@ -126,13 +128,15 @@ type TdSpellcheckEnum string
 const (
 	TdSpellcheckEnumFalse TdSpellcheckEnum = "false"
 	TdSpellcheckEnumTrue  TdSpellcheckEnum = "true"
+	TdSpellcheckEnumEmpty TdSpellcheckEnum = ""
 )
 
 type TdTranslateEnum string
 
 const (
-	TdTranslateEnumNo  TdTranslateEnum = "no"
-	TdTranslateEnumYes TdTranslateEnum = "yes"
+	TdTranslateEnumNo    TdTranslateEnum = "no"
+	TdTranslateEnumYes   TdTranslateEnum = "yes"
+	TdTranslateEnumEmpty TdTranslateEnum = ""
 )
 
 type TdWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type TdWritingsuggestionsEnum string
 const (
 	TdWritingsuggestionsEnumFalse TdWritingsuggestionsEnum = "false"
 	TdWritingsuggestionsEnumTrue  TdWritingsuggestionsEnum = "true"
+	TdWritingsuggestionsEnumEmpty TdWritingsuggestionsEnum = ""
 )
 
 type tdAttrs map[string]any

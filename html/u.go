@@ -50,54 +50,56 @@ func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
 type UAutocapitalizeEnum string
 
 const (
-	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
-	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
-	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
 	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
 	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
+	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
+	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
+	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 )
 
 type UAutocorrectEnum string
 
 const (
-	UAutocorrectEnumOff UAutocorrectEnum = "off"
-	UAutocorrectEnumOn  UAutocorrectEnum = "on"
+	UAutocorrectEnumOff   UAutocorrectEnum = "off"
+	UAutocorrectEnumOn    UAutocorrectEnum = "on"
+	UAutocorrectEnumEmpty UAutocorrectEnum = ""
 )
 
 type UContenteditableEnum string
 
 const (
+	UContenteditableEnumFalse         UContenteditableEnum = "false"
 	UContenteditableEnumPlaintextOnly UContenteditableEnum = "plaintext-only"
 	UContenteditableEnumTrue          UContenteditableEnum = "true"
-	UContenteditableEnumFalse         UContenteditableEnum = "false"
+	UContenteditableEnumEmpty         UContenteditableEnum = ""
 )
 
 type UDirEnum string
 
 const (
+	UDirEnumRtl  UDirEnum = "rtl"
 	UDirEnumAuto UDirEnum = "auto"
 	UDirEnumLtr  UDirEnum = "ltr"
-	UDirEnumRtl  UDirEnum = "rtl"
 )
 
 type UDraggableEnum string
 
 const (
-	UDraggableEnumTrue  UDraggableEnum = "true"
 	UDraggableEnumFalse UDraggableEnum = "false"
+	UDraggableEnumTrue  UDraggableEnum = "true"
 )
 
 type UEnterkeyhintEnum string
 
 const (
-	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
-	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
-	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
 	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
 	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
+	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
+	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
+	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 )
 
 type UHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type UInputmodeEnum string
 
 const (
+	UInputmodeEnumTel     UInputmodeEnum = "tel"
+	UInputmodeEnumText    UInputmodeEnum = "text"
+	UInputmodeEnumUrl     UInputmodeEnum = "url"
 	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
 	UInputmodeEnumEmail   UInputmodeEnum = "email"
 	UInputmodeEnumNone    UInputmodeEnum = "none"
 	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
 	UInputmodeEnumSearch  UInputmodeEnum = "search"
-	UInputmodeEnumTel     UInputmodeEnum = "tel"
-	UInputmodeEnumText    UInputmodeEnum = "text"
-	UInputmodeEnumUrl     UInputmodeEnum = "url"
 )
 
 type USpellcheckEnum string
@@ -126,13 +128,15 @@ type USpellcheckEnum string
 const (
 	USpellcheckEnumFalse USpellcheckEnum = "false"
 	USpellcheckEnumTrue  USpellcheckEnum = "true"
+	USpellcheckEnumEmpty USpellcheckEnum = ""
 )
 
 type UTranslateEnum string
 
 const (
-	UTranslateEnumNo  UTranslateEnum = "no"
-	UTranslateEnumYes UTranslateEnum = "yes"
+	UTranslateEnumNo    UTranslateEnum = "no"
+	UTranslateEnumYes   UTranslateEnum = "yes"
+	UTranslateEnumEmpty UTranslateEnum = ""
 )
 
 type UWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type UWritingsuggestionsEnum string
 const (
 	UWritingsuggestionsEnumFalse UWritingsuggestionsEnum = "false"
 	UWritingsuggestionsEnumTrue  UWritingsuggestionsEnum = "true"
+	UWritingsuggestionsEnumEmpty UWritingsuggestionsEnum = ""
 )
 
 type uAttrs map[string]any

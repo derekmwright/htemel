@@ -50,35 +50,37 @@ func LabelTernary(condition bool, true htemel.Node, false htemel.Node) *LabelEle
 type LabelAutocapitalizeEnum string
 
 const (
-	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 	LabelAutocapitalizeEnumCharacters LabelAutocapitalizeEnum = "characters"
 	LabelAutocapitalizeEnumNone       LabelAutocapitalizeEnum = "none"
 	LabelAutocapitalizeEnumOff        LabelAutocapitalizeEnum = "off"
 	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
 	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
+	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 )
 
 type LabelAutocorrectEnum string
 
 const (
-	LabelAutocorrectEnumOff LabelAutocorrectEnum = "off"
-	LabelAutocorrectEnumOn  LabelAutocorrectEnum = "on"
+	LabelAutocorrectEnumOn    LabelAutocorrectEnum = "on"
+	LabelAutocorrectEnumOff   LabelAutocorrectEnum = "off"
+	LabelAutocorrectEnumEmpty LabelAutocorrectEnum = ""
 )
 
 type LabelContenteditableEnum string
 
 const (
+	LabelContenteditableEnumFalse         LabelContenteditableEnum = "false"
 	LabelContenteditableEnumPlaintextOnly LabelContenteditableEnum = "plaintext-only"
 	LabelContenteditableEnumTrue          LabelContenteditableEnum = "true"
-	LabelContenteditableEnumFalse         LabelContenteditableEnum = "false"
+	LabelContenteditableEnumEmpty         LabelContenteditableEnum = ""
 )
 
 type LabelDirEnum string
 
 const (
+	LabelDirEnumAuto LabelDirEnum = "auto"
 	LabelDirEnumLtr  LabelDirEnum = "ltr"
 	LabelDirEnumRtl  LabelDirEnum = "rtl"
-	LabelDirEnumAuto LabelDirEnum = "auto"
 )
 
 type LabelDraggableEnum string
@@ -111,14 +113,14 @@ const (
 type LabelInputmodeEnum string
 
 const (
-	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
-	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
-	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
 	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
 	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
 	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
+	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
+	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
+	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 )
 
 type LabelSpellcheckEnum string
@@ -126,13 +128,15 @@ type LabelSpellcheckEnum string
 const (
 	LabelSpellcheckEnumFalse LabelSpellcheckEnum = "false"
 	LabelSpellcheckEnumTrue  LabelSpellcheckEnum = "true"
+	LabelSpellcheckEnumEmpty LabelSpellcheckEnum = ""
 )
 
 type LabelTranslateEnum string
 
 const (
-	LabelTranslateEnumYes LabelTranslateEnum = "yes"
-	LabelTranslateEnumNo  LabelTranslateEnum = "no"
+	LabelTranslateEnumNo    LabelTranslateEnum = "no"
+	LabelTranslateEnumYes   LabelTranslateEnum = "yes"
+	LabelTranslateEnumEmpty LabelTranslateEnum = ""
 )
 
 type LabelWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type LabelWritingsuggestionsEnum string
 const (
 	LabelWritingsuggestionsEnumFalse LabelWritingsuggestionsEnum = "false"
 	LabelWritingsuggestionsEnumTrue  LabelWritingsuggestionsEnum = "true"
+	LabelWritingsuggestionsEnumEmpty LabelWritingsuggestionsEnum = ""
 )
 
 type labelAttrs map[string]any

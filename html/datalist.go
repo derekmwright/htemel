@@ -50,19 +50,20 @@ func DatalistTernary(condition bool, true htemel.Node, false htemel.Node) *Datal
 type DatalistAutocapitalizeEnum string
 
 const (
+	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
 	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
 	DatalistAutocapitalizeEnumOn         DatalistAutocapitalizeEnum = "on"
 	DatalistAutocapitalizeEnumSentences  DatalistAutocapitalizeEnum = "sentences"
 	DatalistAutocapitalizeEnumWords      DatalistAutocapitalizeEnum = "words"
 	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
-	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
 )
 
 type DatalistAutocorrectEnum string
 
 const (
-	DatalistAutocorrectEnumOff DatalistAutocorrectEnum = "off"
-	DatalistAutocorrectEnumOn  DatalistAutocorrectEnum = "on"
+	DatalistAutocorrectEnumOff   DatalistAutocorrectEnum = "off"
+	DatalistAutocorrectEnumOn    DatalistAutocorrectEnum = "on"
+	DatalistAutocorrectEnumEmpty DatalistAutocorrectEnum = ""
 )
 
 type DatalistContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	DatalistContenteditableEnumFalse         DatalistContenteditableEnum = "false"
 	DatalistContenteditableEnumPlaintextOnly DatalistContenteditableEnum = "plaintext-only"
 	DatalistContenteditableEnumTrue          DatalistContenteditableEnum = "true"
+	DatalistContenteditableEnumEmpty         DatalistContenteditableEnum = ""
 )
 
 type DatalistDirEnum string
 
 const (
-	DatalistDirEnumRtl  DatalistDirEnum = "rtl"
 	DatalistDirEnumAuto DatalistDirEnum = "auto"
 	DatalistDirEnumLtr  DatalistDirEnum = "ltr"
+	DatalistDirEnumRtl  DatalistDirEnum = "rtl"
 )
 
 type DatalistDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type DatalistEnterkeyhintEnum string
 
 const (
+	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
+	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
+	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 	DatalistEnterkeyhintEnumEnter    DatalistEnterkeyhintEnum = "enter"
 	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
 	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
 	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
-	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
-	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
-	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 )
 
 type DatalistHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type DatalistInputmodeEnum string
 
 const (
+	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
+	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
+	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
 	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
 	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
 	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
 	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
 	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
-	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
-	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
-	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
 )
 
 type DatalistSpellcheckEnum string
@@ -126,20 +128,23 @@ type DatalistSpellcheckEnum string
 const (
 	DatalistSpellcheckEnumFalse DatalistSpellcheckEnum = "false"
 	DatalistSpellcheckEnumTrue  DatalistSpellcheckEnum = "true"
+	DatalistSpellcheckEnumEmpty DatalistSpellcheckEnum = ""
 )
 
 type DatalistTranslateEnum string
 
 const (
-	DatalistTranslateEnumNo  DatalistTranslateEnum = "no"
-	DatalistTranslateEnumYes DatalistTranslateEnum = "yes"
+	DatalistTranslateEnumNo    DatalistTranslateEnum = "no"
+	DatalistTranslateEnumYes   DatalistTranslateEnum = "yes"
+	DatalistTranslateEnumEmpty DatalistTranslateEnum = ""
 )
 
 type DatalistWritingsuggestionsEnum string
 
 const (
-	DatalistWritingsuggestionsEnumFalse DatalistWritingsuggestionsEnum = "false"
 	DatalistWritingsuggestionsEnumTrue  DatalistWritingsuggestionsEnum = "true"
+	DatalistWritingsuggestionsEnumFalse DatalistWritingsuggestionsEnum = "false"
+	DatalistWritingsuggestionsEnumEmpty DatalistWritingsuggestionsEnum = ""
 )
 
 type datalistAttrs map[string]any

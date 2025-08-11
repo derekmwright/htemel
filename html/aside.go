@@ -50,27 +50,29 @@ func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideEle
 type AsideAutocapitalizeEnum string
 
 const (
+	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
 	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
 	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
 	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
 	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
-	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
 )
 
 type AsideAutocorrectEnum string
 
 const (
-	AsideAutocorrectEnumOff AsideAutocorrectEnum = "off"
-	AsideAutocorrectEnumOn  AsideAutocorrectEnum = "on"
+	AsideAutocorrectEnumOff   AsideAutocorrectEnum = "off"
+	AsideAutocorrectEnumOn    AsideAutocorrectEnum = "on"
+	AsideAutocorrectEnumEmpty AsideAutocorrectEnum = ""
 )
 
 type AsideContenteditableEnum string
 
 const (
-	AsideContenteditableEnumFalse         AsideContenteditableEnum = "false"
 	AsideContenteditableEnumPlaintextOnly AsideContenteditableEnum = "plaintext-only"
 	AsideContenteditableEnumTrue          AsideContenteditableEnum = "true"
+	AsideContenteditableEnumFalse         AsideContenteditableEnum = "false"
+	AsideContenteditableEnumEmpty         AsideContenteditableEnum = ""
 )
 
 type AsideDirEnum string
@@ -91,13 +93,13 @@ const (
 type AsideEnterkeyhintEnum string
 
 const (
-	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
-	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
 	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
 	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
 	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
 	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
+	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
+	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 )
 
 type AsideHiddenEnum string
@@ -111,6 +113,7 @@ const (
 type AsideInputmodeEnum string
 
 const (
+	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
 	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
 	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
@@ -118,7 +121,6 @@ const (
 	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
 	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
 	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
-	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
 )
 
 type AsideSpellcheckEnum string
@@ -126,13 +128,15 @@ type AsideSpellcheckEnum string
 const (
 	AsideSpellcheckEnumFalse AsideSpellcheckEnum = "false"
 	AsideSpellcheckEnumTrue  AsideSpellcheckEnum = "true"
+	AsideSpellcheckEnumEmpty AsideSpellcheckEnum = ""
 )
 
 type AsideTranslateEnum string
 
 const (
-	AsideTranslateEnumNo  AsideTranslateEnum = "no"
-	AsideTranslateEnumYes AsideTranslateEnum = "yes"
+	AsideTranslateEnumNo    AsideTranslateEnum = "no"
+	AsideTranslateEnumYes   AsideTranslateEnum = "yes"
+	AsideTranslateEnumEmpty AsideTranslateEnum = ""
 )
 
 type AsideWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type AsideWritingsuggestionsEnum string
 const (
 	AsideWritingsuggestionsEnumFalse AsideWritingsuggestionsEnum = "false"
 	AsideWritingsuggestionsEnumTrue  AsideWritingsuggestionsEnum = "true"
+	AsideWritingsuggestionsEnumEmpty AsideWritingsuggestionsEnum = ""
 )
 
 type asideAttrs map[string]any

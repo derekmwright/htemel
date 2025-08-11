@@ -50,35 +50,37 @@ func SampTernary(condition bool, true htemel.Node, false htemel.Node) *SampEleme
 type SampAutocapitalizeEnum string
 
 const (
+	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
 	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
 	SampAutocapitalizeEnumOff        SampAutocapitalizeEnum = "off"
 	SampAutocapitalizeEnumOn         SampAutocapitalizeEnum = "on"
 	SampAutocapitalizeEnumSentences  SampAutocapitalizeEnum = "sentences"
 	SampAutocapitalizeEnumWords      SampAutocapitalizeEnum = "words"
-	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
 )
 
 type SampAutocorrectEnum string
 
 const (
-	SampAutocorrectEnumOff SampAutocorrectEnum = "off"
-	SampAutocorrectEnumOn  SampAutocorrectEnum = "on"
+	SampAutocorrectEnumOff   SampAutocorrectEnum = "off"
+	SampAutocorrectEnumOn    SampAutocorrectEnum = "on"
+	SampAutocorrectEnumEmpty SampAutocorrectEnum = ""
 )
 
 type SampContenteditableEnum string
 
 const (
-	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
 	SampContenteditableEnumPlaintextOnly SampContenteditableEnum = "plaintext-only"
 	SampContenteditableEnumTrue          SampContenteditableEnum = "true"
+	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
+	SampContenteditableEnumEmpty         SampContenteditableEnum = ""
 )
 
 type SampDirEnum string
 
 const (
+	SampDirEnumRtl  SampDirEnum = "rtl"
 	SampDirEnumAuto SampDirEnum = "auto"
 	SampDirEnumLtr  SampDirEnum = "ltr"
-	SampDirEnumRtl  SampDirEnum = "rtl"
 )
 
 type SampDraggableEnum string
@@ -91,34 +93,34 @@ const (
 type SampEnterkeyhintEnum string
 
 const (
+	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
+	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
+	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
 	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
 	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
 	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
-	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
-	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
-	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
 )
 
 type SampHiddenEnum string
 
 const (
-	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
 	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
+	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
 	SampHiddenEnumEmpty      SampHiddenEnum = ""
 )
 
 type SampInputmodeEnum string
 
 const (
+	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
+	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
+	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
 	SampInputmodeEnumText    SampInputmodeEnum = "text"
 	SampInputmodeEnumUrl     SampInputmodeEnum = "url"
 	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
 	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
 	SampInputmodeEnumNone    SampInputmodeEnum = "none"
-	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
-	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
-	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
 )
 
 type SampSpellcheckEnum string
@@ -126,13 +128,15 @@ type SampSpellcheckEnum string
 const (
 	SampSpellcheckEnumFalse SampSpellcheckEnum = "false"
 	SampSpellcheckEnumTrue  SampSpellcheckEnum = "true"
+	SampSpellcheckEnumEmpty SampSpellcheckEnum = ""
 )
 
 type SampTranslateEnum string
 
 const (
-	SampTranslateEnumNo  SampTranslateEnum = "no"
-	SampTranslateEnumYes SampTranslateEnum = "yes"
+	SampTranslateEnumNo    SampTranslateEnum = "no"
+	SampTranslateEnumYes   SampTranslateEnum = "yes"
+	SampTranslateEnumEmpty SampTranslateEnum = ""
 )
 
 type SampWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type SampWritingsuggestionsEnum string
 const (
 	SampWritingsuggestionsEnumFalse SampWritingsuggestionsEnum = "false"
 	SampWritingsuggestionsEnumTrue  SampWritingsuggestionsEnum = "true"
+	SampWritingsuggestionsEnumEmpty SampWritingsuggestionsEnum = ""
 )
 
 type sampAttrs map[string]any

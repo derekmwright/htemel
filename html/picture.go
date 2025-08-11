@@ -50,27 +50,29 @@ func PictureTernary(condition bool, true htemel.Node, false htemel.Node) *Pictur
 type PictureAutocapitalizeEnum string
 
 const (
+	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
 	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 	PictureAutocapitalizeEnumSentences  PictureAutocapitalizeEnum = "sentences"
 	PictureAutocapitalizeEnumWords      PictureAutocapitalizeEnum = "words"
 	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
 	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
-	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
 )
 
 type PictureAutocorrectEnum string
 
 const (
-	PictureAutocorrectEnumOff PictureAutocorrectEnum = "off"
-	PictureAutocorrectEnumOn  PictureAutocorrectEnum = "on"
+	PictureAutocorrectEnumOn    PictureAutocorrectEnum = "on"
+	PictureAutocorrectEnumOff   PictureAutocorrectEnum = "off"
+	PictureAutocorrectEnumEmpty PictureAutocorrectEnum = ""
 )
 
 type PictureContenteditableEnum string
 
 const (
+	PictureContenteditableEnumTrue          PictureContenteditableEnum = "true"
 	PictureContenteditableEnumFalse         PictureContenteditableEnum = "false"
 	PictureContenteditableEnumPlaintextOnly PictureContenteditableEnum = "plaintext-only"
-	PictureContenteditableEnumTrue          PictureContenteditableEnum = "true"
+	PictureContenteditableEnumEmpty         PictureContenteditableEnum = ""
 )
 
 type PictureDirEnum string
@@ -91,34 +93,34 @@ const (
 type PictureEnterkeyhintEnum string
 
 const (
+	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
+	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
+	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
 	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
 	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
 	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
 	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
-	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
-	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
-	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
 )
 
 type PictureHiddenEnum string
 
 const (
-	PictureHiddenEnumHidden     PictureHiddenEnum = "hidden"
 	PictureHiddenEnumUntilFound PictureHiddenEnum = "until-found"
+	PictureHiddenEnumHidden     PictureHiddenEnum = "hidden"
 	PictureHiddenEnumEmpty      PictureHiddenEnum = ""
 )
 
 type PictureInputmodeEnum string
 
 const (
-	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
-	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
-	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
 	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
 	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
 	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
 	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
+	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
+	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
+	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
 )
 
 type PictureSpellcheckEnum string
@@ -126,13 +128,15 @@ type PictureSpellcheckEnum string
 const (
 	PictureSpellcheckEnumTrue  PictureSpellcheckEnum = "true"
 	PictureSpellcheckEnumFalse PictureSpellcheckEnum = "false"
+	PictureSpellcheckEnumEmpty PictureSpellcheckEnum = ""
 )
 
 type PictureTranslateEnum string
 
 const (
-	PictureTranslateEnumNo  PictureTranslateEnum = "no"
-	PictureTranslateEnumYes PictureTranslateEnum = "yes"
+	PictureTranslateEnumNo    PictureTranslateEnum = "no"
+	PictureTranslateEnumYes   PictureTranslateEnum = "yes"
+	PictureTranslateEnumEmpty PictureTranslateEnum = ""
 )
 
 type PictureWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type PictureWritingsuggestionsEnum string
 const (
 	PictureWritingsuggestionsEnumFalse PictureWritingsuggestionsEnum = "false"
 	PictureWritingsuggestionsEnumTrue  PictureWritingsuggestionsEnum = "true"
+	PictureWritingsuggestionsEnumEmpty PictureWritingsuggestionsEnum = ""
 )
 
 type pictureAttrs map[string]any

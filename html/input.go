@@ -50,19 +50,20 @@ func InputTernary(condition bool, true htemel.Node, false htemel.Node) *InputEle
 type InputAutocapitalizeEnum string
 
 const (
-	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
 	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
 	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
 	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
 	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
+	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
 )
 
 type InputAutocorrectEnum string
 
 const (
-	InputAutocorrectEnumOff InputAutocorrectEnum = "off"
-	InputAutocorrectEnumOn  InputAutocorrectEnum = "on"
+	InputAutocorrectEnumOff   InputAutocorrectEnum = "off"
+	InputAutocorrectEnumOn    InputAutocorrectEnum = "on"
+	InputAutocorrectEnumEmpty InputAutocorrectEnum = ""
 )
 
 type InputContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	InputContenteditableEnumFalse         InputContenteditableEnum = "false"
 	InputContenteditableEnumPlaintextOnly InputContenteditableEnum = "plaintext-only"
 	InputContenteditableEnumTrue          InputContenteditableEnum = "true"
+	InputContenteditableEnumEmpty         InputContenteditableEnum = ""
 )
 
 type InputDirEnum string
 
 const (
+	InputDirEnumAuto InputDirEnum = "auto"
 	InputDirEnumLtr  InputDirEnum = "ltr"
 	InputDirEnumRtl  InputDirEnum = "rtl"
-	InputDirEnumAuto InputDirEnum = "auto"
 )
 
 type InputDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type InputEnterkeyhintEnum string
 
 const (
-	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
-	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
 	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
 	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
 	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
 	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
+	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
+	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 )
 
 type InputHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type InputInputmodeEnum string
 
 const (
-	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
-	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
-	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
 	InputInputmodeEnumText    InputInputmodeEnum = "text"
 	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
 	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
 	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 	InputInputmodeEnumNone    InputInputmodeEnum = "none"
+	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
+	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
+	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
 )
 
 type InputSpellcheckEnum string
@@ -126,13 +128,15 @@ type InputSpellcheckEnum string
 const (
 	InputSpellcheckEnumFalse InputSpellcheckEnum = "false"
 	InputSpellcheckEnumTrue  InputSpellcheckEnum = "true"
+	InputSpellcheckEnumEmpty InputSpellcheckEnum = ""
 )
 
 type InputTranslateEnum string
 
 const (
-	InputTranslateEnumNo  InputTranslateEnum = "no"
-	InputTranslateEnumYes InputTranslateEnum = "yes"
+	InputTranslateEnumYes   InputTranslateEnum = "yes"
+	InputTranslateEnumNo    InputTranslateEnum = "no"
+	InputTranslateEnumEmpty InputTranslateEnum = ""
 )
 
 type InputWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type InputWritingsuggestionsEnum string
 const (
 	InputWritingsuggestionsEnumFalse InputWritingsuggestionsEnum = "false"
 	InputWritingsuggestionsEnumTrue  InputWritingsuggestionsEnum = "true"
+	InputWritingsuggestionsEnumEmpty InputWritingsuggestionsEnum = ""
 )
 
 type inputAttrs map[string]any

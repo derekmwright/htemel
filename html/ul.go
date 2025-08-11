@@ -50,19 +50,20 @@ func UlTernary(condition bool, true htemel.Node, false htemel.Node) *UlElement {
 type UlAutocapitalizeEnum string
 
 const (
-	UlAutocapitalizeEnumSentences  UlAutocapitalizeEnum = "sentences"
 	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
 	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 	UlAutocapitalizeEnumNone       UlAutocapitalizeEnum = "none"
 	UlAutocapitalizeEnumOff        UlAutocapitalizeEnum = "off"
 	UlAutocapitalizeEnumOn         UlAutocapitalizeEnum = "on"
+	UlAutocapitalizeEnumSentences  UlAutocapitalizeEnum = "sentences"
 )
 
 type UlAutocorrectEnum string
 
 const (
-	UlAutocorrectEnumOff UlAutocorrectEnum = "off"
-	UlAutocorrectEnumOn  UlAutocorrectEnum = "on"
+	UlAutocorrectEnumOff   UlAutocorrectEnum = "off"
+	UlAutocorrectEnumOn    UlAutocorrectEnum = "on"
+	UlAutocorrectEnumEmpty UlAutocorrectEnum = ""
 )
 
 type UlContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	UlContenteditableEnumFalse         UlContenteditableEnum = "false"
 	UlContenteditableEnumPlaintextOnly UlContenteditableEnum = "plaintext-only"
 	UlContenteditableEnumTrue          UlContenteditableEnum = "true"
+	UlContenteditableEnumEmpty         UlContenteditableEnum = ""
 )
 
 type UlDirEnum string
@@ -91,13 +93,13 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
-	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
-	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
 	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
 	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
 	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
+	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
+	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 )
 
 type UlHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type UlInputmodeEnum string
 
 const (
+	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
+	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
 	UlInputmodeEnumNone    UlInputmodeEnum = "none"
 	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
 	UlInputmodeEnumSearch  UlInputmodeEnum = "search"
 	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
 	UlInputmodeEnumText    UlInputmodeEnum = "text"
 	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
-	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
-	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
 )
 
 type UlSpellcheckEnum string
@@ -126,20 +128,23 @@ type UlSpellcheckEnum string
 const (
 	UlSpellcheckEnumFalse UlSpellcheckEnum = "false"
 	UlSpellcheckEnumTrue  UlSpellcheckEnum = "true"
+	UlSpellcheckEnumEmpty UlSpellcheckEnum = ""
 )
 
 type UlTranslateEnum string
 
 const (
-	UlTranslateEnumNo  UlTranslateEnum = "no"
-	UlTranslateEnumYes UlTranslateEnum = "yes"
+	UlTranslateEnumNo    UlTranslateEnum = "no"
+	UlTranslateEnumYes   UlTranslateEnum = "yes"
+	UlTranslateEnumEmpty UlTranslateEnum = ""
 )
 
 type UlWritingsuggestionsEnum string
 
 const (
-	UlWritingsuggestionsEnumFalse UlWritingsuggestionsEnum = "false"
 	UlWritingsuggestionsEnumTrue  UlWritingsuggestionsEnum = "true"
+	UlWritingsuggestionsEnumFalse UlWritingsuggestionsEnum = "false"
+	UlWritingsuggestionsEnumEmpty UlWritingsuggestionsEnum = ""
 )
 
 type ulAttrs map[string]any

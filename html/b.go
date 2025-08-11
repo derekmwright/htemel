@@ -50,27 +50,29 @@ func BTernary(condition bool, true htemel.Node, false htemel.Node) *BElement {
 type BAutocapitalizeEnum string
 
 const (
-	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
-	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
 	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
 	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
 	BAutocapitalizeEnumOn         BAutocapitalizeEnum = "on"
 	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
+	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
+	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
 )
 
 type BAutocorrectEnum string
 
 const (
-	BAutocorrectEnumOn  BAutocorrectEnum = "on"
-	BAutocorrectEnumOff BAutocorrectEnum = "off"
+	BAutocorrectEnumOff   BAutocorrectEnum = "off"
+	BAutocorrectEnumOn    BAutocorrectEnum = "on"
+	BAutocorrectEnumEmpty BAutocorrectEnum = ""
 )
 
 type BContenteditableEnum string
 
 const (
+	BContenteditableEnumFalse         BContenteditableEnum = "false"
 	BContenteditableEnumPlaintextOnly BContenteditableEnum = "plaintext-only"
 	BContenteditableEnumTrue          BContenteditableEnum = "true"
-	BContenteditableEnumFalse         BContenteditableEnum = "false"
+	BContenteditableEnumEmpty         BContenteditableEnum = ""
 )
 
 type BDirEnum string
@@ -91,13 +93,13 @@ const (
 type BEnterkeyhintEnum string
 
 const (
-	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
-	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
-	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
 	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
 	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
+	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
+	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
+	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
 )
 
 type BHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type BInputmodeEnum string
 
 const (
+	BInputmodeEnumSearch  BInputmodeEnum = "search"
+	BInputmodeEnumTel     BInputmodeEnum = "tel"
+	BInputmodeEnumText    BInputmodeEnum = "text"
 	BInputmodeEnumUrl     BInputmodeEnum = "url"
 	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
 	BInputmodeEnumEmail   BInputmodeEnum = "email"
 	BInputmodeEnumNone    BInputmodeEnum = "none"
 	BInputmodeEnumNumeric BInputmodeEnum = "numeric"
-	BInputmodeEnumSearch  BInputmodeEnum = "search"
-	BInputmodeEnumTel     BInputmodeEnum = "tel"
-	BInputmodeEnumText    BInputmodeEnum = "text"
 )
 
 type BSpellcheckEnum string
@@ -126,13 +128,15 @@ type BSpellcheckEnum string
 const (
 	BSpellcheckEnumFalse BSpellcheckEnum = "false"
 	BSpellcheckEnumTrue  BSpellcheckEnum = "true"
+	BSpellcheckEnumEmpty BSpellcheckEnum = ""
 )
 
 type BTranslateEnum string
 
 const (
-	BTranslateEnumNo  BTranslateEnum = "no"
-	BTranslateEnumYes BTranslateEnum = "yes"
+	BTranslateEnumNo    BTranslateEnum = "no"
+	BTranslateEnumYes   BTranslateEnum = "yes"
+	BTranslateEnumEmpty BTranslateEnum = ""
 )
 
 type BWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type BWritingsuggestionsEnum string
 const (
 	BWritingsuggestionsEnumFalse BWritingsuggestionsEnum = "false"
 	BWritingsuggestionsEnumTrue  BWritingsuggestionsEnum = "true"
+	BWritingsuggestionsEnumEmpty BWritingsuggestionsEnum = ""
 )
 
 type bAttrs map[string]any

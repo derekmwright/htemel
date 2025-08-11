@@ -50,19 +50,20 @@ func FormTernary(condition bool, true htemel.Node, false htemel.Node) *FormEleme
 type FormAutocapitalizeEnum string
 
 const (
-	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
-	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
 	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
 	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
+	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
+	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
 )
 
 type FormAutocorrectEnum string
 
 const (
-	FormAutocorrectEnumOff FormAutocorrectEnum = "off"
-	FormAutocorrectEnumOn  FormAutocorrectEnum = "on"
+	FormAutocorrectEnumOff   FormAutocorrectEnum = "off"
+	FormAutocorrectEnumOn    FormAutocorrectEnum = "on"
+	FormAutocorrectEnumEmpty FormAutocorrectEnum = ""
 )
 
 type FormContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	FormContenteditableEnumFalse         FormContenteditableEnum = "false"
 	FormContenteditableEnumPlaintextOnly FormContenteditableEnum = "plaintext-only"
 	FormContenteditableEnumTrue          FormContenteditableEnum = "true"
+	FormContenteditableEnumEmpty         FormContenteditableEnum = ""
 )
 
 type FormDirEnum string
@@ -91,13 +93,13 @@ const (
 type FormEnterkeyhintEnum string
 
 const (
-	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
-	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
-	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
 	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
 	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
 	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
+	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
+	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
+	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 )
 
 type FormHiddenEnum string
@@ -126,20 +128,23 @@ type FormSpellcheckEnum string
 const (
 	FormSpellcheckEnumFalse FormSpellcheckEnum = "false"
 	FormSpellcheckEnumTrue  FormSpellcheckEnum = "true"
+	FormSpellcheckEnumEmpty FormSpellcheckEnum = ""
 )
 
 type FormTranslateEnum string
 
 const (
-	FormTranslateEnumNo  FormTranslateEnum = "no"
-	FormTranslateEnumYes FormTranslateEnum = "yes"
+	FormTranslateEnumNo    FormTranslateEnum = "no"
+	FormTranslateEnumYes   FormTranslateEnum = "yes"
+	FormTranslateEnumEmpty FormTranslateEnum = ""
 )
 
 type FormWritingsuggestionsEnum string
 
 const (
-	FormWritingsuggestionsEnumFalse FormWritingsuggestionsEnum = "false"
 	FormWritingsuggestionsEnumTrue  FormWritingsuggestionsEnum = "true"
+	FormWritingsuggestionsEnumFalse FormWritingsuggestionsEnum = "false"
+	FormWritingsuggestionsEnumEmpty FormWritingsuggestionsEnum = ""
 )
 
 type formAttrs map[string]any

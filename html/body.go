@@ -61,24 +61,26 @@ const (
 type BodyAutocorrectEnum string
 
 const (
-	BodyAutocorrectEnumOff BodyAutocorrectEnum = "off"
-	BodyAutocorrectEnumOn  BodyAutocorrectEnum = "on"
+	BodyAutocorrectEnumOff   BodyAutocorrectEnum = "off"
+	BodyAutocorrectEnumOn    BodyAutocorrectEnum = "on"
+	BodyAutocorrectEnumEmpty BodyAutocorrectEnum = ""
 )
 
 type BodyContenteditableEnum string
 
 const (
-	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
 	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
+	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
+	BodyContenteditableEnumEmpty         BodyContenteditableEnum = ""
 )
 
 type BodyDirEnum string
 
 const (
-	BodyDirEnumAuto BodyDirEnum = "auto"
 	BodyDirEnumLtr  BodyDirEnum = "ltr"
 	BodyDirEnumRtl  BodyDirEnum = "rtl"
+	BodyDirEnumAuto BodyDirEnum = "auto"
 )
 
 type BodyDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type BodyEnterkeyhintEnum string
 
 const (
+	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
+	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
+	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
 	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
 	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
 	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
 	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
-	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
-	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
-	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
 )
 
 type BodyHiddenEnum string
@@ -111,6 +113,7 @@ const (
 type BodyInputmodeEnum string
 
 const (
+	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
 	BodyInputmodeEnumSearch  BodyInputmodeEnum = "search"
 	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
 	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
@@ -118,7 +121,6 @@ const (
 	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
 	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
 	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
-	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
 )
 
 type BodySpellcheckEnum string
@@ -126,13 +128,15 @@ type BodySpellcheckEnum string
 const (
 	BodySpellcheckEnumFalse BodySpellcheckEnum = "false"
 	BodySpellcheckEnumTrue  BodySpellcheckEnum = "true"
+	BodySpellcheckEnumEmpty BodySpellcheckEnum = ""
 )
 
 type BodyTranslateEnum string
 
 const (
-	BodyTranslateEnumNo  BodyTranslateEnum = "no"
-	BodyTranslateEnumYes BodyTranslateEnum = "yes"
+	BodyTranslateEnumNo    BodyTranslateEnum = "no"
+	BodyTranslateEnumYes   BodyTranslateEnum = "yes"
+	BodyTranslateEnumEmpty BodyTranslateEnum = ""
 )
 
 type BodyWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type BodyWritingsuggestionsEnum string
 const (
 	BodyWritingsuggestionsEnumFalse BodyWritingsuggestionsEnum = "false"
 	BodyWritingsuggestionsEnumTrue  BodyWritingsuggestionsEnum = "true"
+	BodyWritingsuggestionsEnumEmpty BodyWritingsuggestionsEnum = ""
 )
 
 type bodyAttrs map[string]any

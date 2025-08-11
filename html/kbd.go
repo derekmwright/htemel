@@ -50,35 +50,37 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 type KbdAutocapitalizeEnum string
 
 const (
-	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
 	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
 	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
 	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
 	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
+	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 )
 
 type KbdAutocorrectEnum string
 
 const (
-	KbdAutocorrectEnumOff KbdAutocorrectEnum = "off"
-	KbdAutocorrectEnumOn  KbdAutocorrectEnum = "on"
+	KbdAutocorrectEnumOn    KbdAutocorrectEnum = "on"
+	KbdAutocorrectEnumOff   KbdAutocorrectEnum = "off"
+	KbdAutocorrectEnumEmpty KbdAutocorrectEnum = ""
 )
 
 type KbdContenteditableEnum string
 
 const (
-	KbdContenteditableEnumTrue          KbdContenteditableEnum = "true"
 	KbdContenteditableEnumFalse         KbdContenteditableEnum = "false"
 	KbdContenteditableEnumPlaintextOnly KbdContenteditableEnum = "plaintext-only"
+	KbdContenteditableEnumTrue          KbdContenteditableEnum = "true"
+	KbdContenteditableEnumEmpty         KbdContenteditableEnum = ""
 )
 
 type KbdDirEnum string
 
 const (
+	KbdDirEnumAuto KbdDirEnum = "auto"
 	KbdDirEnumLtr  KbdDirEnum = "ltr"
 	KbdDirEnumRtl  KbdDirEnum = "rtl"
-	KbdDirEnumAuto KbdDirEnum = "auto"
 )
 
 type KbdDraggableEnum string
@@ -111,14 +113,14 @@ const (
 type KbdInputmodeEnum string
 
 const (
+	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
+	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
 	KbdInputmodeEnumEmail   KbdInputmodeEnum = "email"
 	KbdInputmodeEnumNone    KbdInputmodeEnum = "none"
 	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
 	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
 	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
 	KbdInputmodeEnumText    KbdInputmodeEnum = "text"
-	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
-	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
 )
 
 type KbdSpellcheckEnum string
@@ -126,13 +128,15 @@ type KbdSpellcheckEnum string
 const (
 	KbdSpellcheckEnumFalse KbdSpellcheckEnum = "false"
 	KbdSpellcheckEnumTrue  KbdSpellcheckEnum = "true"
+	KbdSpellcheckEnumEmpty KbdSpellcheckEnum = ""
 )
 
 type KbdTranslateEnum string
 
 const (
-	KbdTranslateEnumNo  KbdTranslateEnum = "no"
-	KbdTranslateEnumYes KbdTranslateEnum = "yes"
+	KbdTranslateEnumYes   KbdTranslateEnum = "yes"
+	KbdTranslateEnumNo    KbdTranslateEnum = "no"
+	KbdTranslateEnumEmpty KbdTranslateEnum = ""
 )
 
 type KbdWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type KbdWritingsuggestionsEnum string
 const (
 	KbdWritingsuggestionsEnumFalse KbdWritingsuggestionsEnum = "false"
 	KbdWritingsuggestionsEnumTrue  KbdWritingsuggestionsEnum = "true"
+	KbdWritingsuggestionsEnumEmpty KbdWritingsuggestionsEnum = ""
 )
 
 type kbdAttrs map[string]any

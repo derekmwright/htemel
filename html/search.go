@@ -50,27 +50,29 @@ func SearchTernary(condition bool, true htemel.Node, false htemel.Node) *SearchE
 type SearchAutocapitalizeEnum string
 
 const (
-	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
-	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
 	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
 	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
 	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
 	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
+	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
+	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
 )
 
 type SearchAutocorrectEnum string
 
 const (
-	SearchAutocorrectEnumOff SearchAutocorrectEnum = "off"
-	SearchAutocorrectEnumOn  SearchAutocorrectEnum = "on"
+	SearchAutocorrectEnumOff   SearchAutocorrectEnum = "off"
+	SearchAutocorrectEnumOn    SearchAutocorrectEnum = "on"
+	SearchAutocorrectEnumEmpty SearchAutocorrectEnum = ""
 )
 
 type SearchContenteditableEnum string
 
 const (
+	SearchContenteditableEnumTrue          SearchContenteditableEnum = "true"
 	SearchContenteditableEnumFalse         SearchContenteditableEnum = "false"
 	SearchContenteditableEnumPlaintextOnly SearchContenteditableEnum = "plaintext-only"
-	SearchContenteditableEnumTrue          SearchContenteditableEnum = "true"
+	SearchContenteditableEnumEmpty         SearchContenteditableEnum = ""
 )
 
 type SearchDirEnum string
@@ -84,20 +86,20 @@ const (
 type SearchDraggableEnum string
 
 const (
-	SearchDraggableEnumTrue  SearchDraggableEnum = "true"
 	SearchDraggableEnumFalse SearchDraggableEnum = "false"
+	SearchDraggableEnumTrue  SearchDraggableEnum = "true"
 )
 
 type SearchEnterkeyhintEnum string
 
 const (
+	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
+	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
 	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
 	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
 	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
-	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
-	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 )
 
 type SearchHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type SearchInputmodeEnum string
 
 const (
-	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
-	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
-	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
 	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
 	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
 	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
 	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
+	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
+	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
+	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 )
 
 type SearchSpellcheckEnum string
@@ -126,13 +128,15 @@ type SearchSpellcheckEnum string
 const (
 	SearchSpellcheckEnumFalse SearchSpellcheckEnum = "false"
 	SearchSpellcheckEnumTrue  SearchSpellcheckEnum = "true"
+	SearchSpellcheckEnumEmpty SearchSpellcheckEnum = ""
 )
 
 type SearchTranslateEnum string
 
 const (
-	SearchTranslateEnumNo  SearchTranslateEnum = "no"
-	SearchTranslateEnumYes SearchTranslateEnum = "yes"
+	SearchTranslateEnumNo    SearchTranslateEnum = "no"
+	SearchTranslateEnumYes   SearchTranslateEnum = "yes"
+	SearchTranslateEnumEmpty SearchTranslateEnum = ""
 )
 
 type SearchWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type SearchWritingsuggestionsEnum string
 const (
 	SearchWritingsuggestionsEnumFalse SearchWritingsuggestionsEnum = "false"
 	SearchWritingsuggestionsEnumTrue  SearchWritingsuggestionsEnum = "true"
+	SearchWritingsuggestionsEnumEmpty SearchWritingsuggestionsEnum = ""
 )
 
 type searchAttrs map[string]any

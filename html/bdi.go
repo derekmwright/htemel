@@ -50,27 +50,29 @@ func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement
 type BdiAutocapitalizeEnum string
 
 const (
-	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
 	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 	BdiAutocapitalizeEnumNone       BdiAutocapitalizeEnum = "none"
 	BdiAutocapitalizeEnumOff        BdiAutocapitalizeEnum = "off"
 	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
 	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
+	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
 )
 
 type BdiAutocorrectEnum string
 
 const (
-	BdiAutocorrectEnumOff BdiAutocorrectEnum = "off"
-	BdiAutocorrectEnumOn  BdiAutocorrectEnum = "on"
+	BdiAutocorrectEnumOff   BdiAutocorrectEnum = "off"
+	BdiAutocorrectEnumOn    BdiAutocorrectEnum = "on"
+	BdiAutocorrectEnumEmpty BdiAutocorrectEnum = ""
 )
 
 type BdiContenteditableEnum string
 
 const (
-	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
 	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
 	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
+	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
+	BdiContenteditableEnumEmpty         BdiContenteditableEnum = ""
 )
 
 type BdiDirEnum string
@@ -91,13 +93,13 @@ const (
 type BdiEnterkeyhintEnum string
 
 const (
-	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
-	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
 	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
 	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
 	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 	BdiEnterkeyhintEnumNext     BdiEnterkeyhintEnum = "next"
 	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
+	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
+	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
 )
 
 type BdiHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type BdiInputmodeEnum string
 
 const (
+	BdiInputmodeEnumUrl     BdiInputmodeEnum = "url"
+	BdiInputmodeEnumDecimal BdiInputmodeEnum = "decimal"
 	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
 	BdiInputmodeEnumNone    BdiInputmodeEnum = "none"
 	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
 	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
 	BdiInputmodeEnumTel     BdiInputmodeEnum = "tel"
 	BdiInputmodeEnumText    BdiInputmodeEnum = "text"
-	BdiInputmodeEnumUrl     BdiInputmodeEnum = "url"
-	BdiInputmodeEnumDecimal BdiInputmodeEnum = "decimal"
 )
 
 type BdiSpellcheckEnum string
@@ -126,13 +128,15 @@ type BdiSpellcheckEnum string
 const (
 	BdiSpellcheckEnumFalse BdiSpellcheckEnum = "false"
 	BdiSpellcheckEnumTrue  BdiSpellcheckEnum = "true"
+	BdiSpellcheckEnumEmpty BdiSpellcheckEnum = ""
 )
 
 type BdiTranslateEnum string
 
 const (
-	BdiTranslateEnumNo  BdiTranslateEnum = "no"
-	BdiTranslateEnumYes BdiTranslateEnum = "yes"
+	BdiTranslateEnumYes   BdiTranslateEnum = "yes"
+	BdiTranslateEnumNo    BdiTranslateEnum = "no"
+	BdiTranslateEnumEmpty BdiTranslateEnum = ""
 )
 
 type BdiWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type BdiWritingsuggestionsEnum string
 const (
 	BdiWritingsuggestionsEnumFalse BdiWritingsuggestionsEnum = "false"
 	BdiWritingsuggestionsEnumTrue  BdiWritingsuggestionsEnum = "true"
+	BdiWritingsuggestionsEnumEmpty BdiWritingsuggestionsEnum = ""
 )
 
 type bdiAttrs map[string]any

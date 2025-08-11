@@ -50,19 +50,20 @@ func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
 type IAutocapitalizeEnum string
 
 const (
-	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
 	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
 	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
 	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
 	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
+	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
 )
 
 type IAutocorrectEnum string
 
 const (
-	IAutocorrectEnumOff IAutocorrectEnum = "off"
-	IAutocorrectEnumOn  IAutocorrectEnum = "on"
+	IAutocorrectEnumOn    IAutocorrectEnum = "on"
+	IAutocorrectEnumOff   IAutocorrectEnum = "off"
+	IAutocorrectEnumEmpty IAutocorrectEnum = ""
 )
 
 type IContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	IContenteditableEnumFalse         IContenteditableEnum = "false"
 	IContenteditableEnumPlaintextOnly IContenteditableEnum = "plaintext-only"
 	IContenteditableEnumTrue          IContenteditableEnum = "true"
+	IContenteditableEnumEmpty         IContenteditableEnum = ""
 )
 
 type IDirEnum string
@@ -91,13 +93,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
+	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
+	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
 	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
 	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
 	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
 	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
-	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
-	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 )
 
 type IHiddenEnum string
@@ -124,15 +126,17 @@ const (
 type ISpellcheckEnum string
 
 const (
-	ISpellcheckEnumFalse ISpellcheckEnum = "false"
 	ISpellcheckEnumTrue  ISpellcheckEnum = "true"
+	ISpellcheckEnumFalse ISpellcheckEnum = "false"
+	ISpellcheckEnumEmpty ISpellcheckEnum = ""
 )
 
 type ITranslateEnum string
 
 const (
-	ITranslateEnumNo  ITranslateEnum = "no"
-	ITranslateEnumYes ITranslateEnum = "yes"
+	ITranslateEnumYes   ITranslateEnum = "yes"
+	ITranslateEnumNo    ITranslateEnum = "no"
+	ITranslateEnumEmpty ITranslateEnum = ""
 )
 
 type IWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type IWritingsuggestionsEnum string
 const (
 	IWritingsuggestionsEnumFalse IWritingsuggestionsEnum = "false"
 	IWritingsuggestionsEnumTrue  IWritingsuggestionsEnum = "true"
+	IWritingsuggestionsEnumEmpty IWritingsuggestionsEnum = ""
 )
 
 type iAttrs map[string]any

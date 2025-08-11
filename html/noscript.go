@@ -61,16 +61,18 @@ const (
 type NoscriptAutocorrectEnum string
 
 const (
-	NoscriptAutocorrectEnumOff NoscriptAutocorrectEnum = "off"
-	NoscriptAutocorrectEnumOn  NoscriptAutocorrectEnum = "on"
+	NoscriptAutocorrectEnumOff   NoscriptAutocorrectEnum = "off"
+	NoscriptAutocorrectEnumOn    NoscriptAutocorrectEnum = "on"
+	NoscriptAutocorrectEnumEmpty NoscriptAutocorrectEnum = ""
 )
 
 type NoscriptContenteditableEnum string
 
 const (
-	NoscriptContenteditableEnumFalse         NoscriptContenteditableEnum = "false"
 	NoscriptContenteditableEnumPlaintextOnly NoscriptContenteditableEnum = "plaintext-only"
 	NoscriptContenteditableEnumTrue          NoscriptContenteditableEnum = "true"
+	NoscriptContenteditableEnumFalse         NoscriptContenteditableEnum = "false"
+	NoscriptContenteditableEnumEmpty         NoscriptContenteditableEnum = ""
 )
 
 type NoscriptDirEnum string
@@ -91,13 +93,13 @@ const (
 type NoscriptEnterkeyhintEnum string
 
 const (
-	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
 	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
 	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
 	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
 	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
 	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
 	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
+	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
 )
 
 type NoscriptHiddenEnum string
@@ -126,20 +128,23 @@ type NoscriptSpellcheckEnum string
 const (
 	NoscriptSpellcheckEnumFalse NoscriptSpellcheckEnum = "false"
 	NoscriptSpellcheckEnumTrue  NoscriptSpellcheckEnum = "true"
+	NoscriptSpellcheckEnumEmpty NoscriptSpellcheckEnum = ""
 )
 
 type NoscriptTranslateEnum string
 
 const (
-	NoscriptTranslateEnumNo  NoscriptTranslateEnum = "no"
-	NoscriptTranslateEnumYes NoscriptTranslateEnum = "yes"
+	NoscriptTranslateEnumNo    NoscriptTranslateEnum = "no"
+	NoscriptTranslateEnumYes   NoscriptTranslateEnum = "yes"
+	NoscriptTranslateEnumEmpty NoscriptTranslateEnum = ""
 )
 
 type NoscriptWritingsuggestionsEnum string
 
 const (
-	NoscriptWritingsuggestionsEnumFalse NoscriptWritingsuggestionsEnum = "false"
 	NoscriptWritingsuggestionsEnumTrue  NoscriptWritingsuggestionsEnum = "true"
+	NoscriptWritingsuggestionsEnumFalse NoscriptWritingsuggestionsEnum = "false"
+	NoscriptWritingsuggestionsEnumEmpty NoscriptWritingsuggestionsEnum = ""
 )
 
 type noscriptAttrs map[string]any

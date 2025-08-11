@@ -50,19 +50,20 @@ func SpanTernary(condition bool, true htemel.Node, false htemel.Node) *SpanEleme
 type SpanAutocapitalizeEnum string
 
 const (
+	SpanAutocapitalizeEnumCharacters SpanAutocapitalizeEnum = "characters"
 	SpanAutocapitalizeEnumNone       SpanAutocapitalizeEnum = "none"
 	SpanAutocapitalizeEnumOff        SpanAutocapitalizeEnum = "off"
 	SpanAutocapitalizeEnumOn         SpanAutocapitalizeEnum = "on"
 	SpanAutocapitalizeEnumSentences  SpanAutocapitalizeEnum = "sentences"
 	SpanAutocapitalizeEnumWords      SpanAutocapitalizeEnum = "words"
-	SpanAutocapitalizeEnumCharacters SpanAutocapitalizeEnum = "characters"
 )
 
 type SpanAutocorrectEnum string
 
 const (
-	SpanAutocorrectEnumOff SpanAutocorrectEnum = "off"
-	SpanAutocorrectEnumOn  SpanAutocorrectEnum = "on"
+	SpanAutocorrectEnumOff   SpanAutocorrectEnum = "off"
+	SpanAutocorrectEnumOn    SpanAutocorrectEnum = "on"
+	SpanAutocorrectEnumEmpty SpanAutocorrectEnum = ""
 )
 
 type SpanContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
 	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
 	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
+	SpanContenteditableEnumEmpty         SpanContenteditableEnum = ""
 )
 
 type SpanDirEnum string
 
 const (
-	SpanDirEnumAuto SpanDirEnum = "auto"
 	SpanDirEnumLtr  SpanDirEnum = "ltr"
 	SpanDirEnumRtl  SpanDirEnum = "rtl"
+	SpanDirEnumAuto SpanDirEnum = "auto"
 )
 
 type SpanDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
+	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
+	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
 	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
 	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
 	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
 	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
-	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
-	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
 )
 
 type SpanHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type SpanInputmodeEnum string
 
 const (
-	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
-	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
-	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
-	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
 	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
 	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
 	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
 	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
+	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
+	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
+	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
+	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
 )
 
 type SpanSpellcheckEnum string
@@ -126,13 +128,15 @@ type SpanSpellcheckEnum string
 const (
 	SpanSpellcheckEnumFalse SpanSpellcheckEnum = "false"
 	SpanSpellcheckEnumTrue  SpanSpellcheckEnum = "true"
+	SpanSpellcheckEnumEmpty SpanSpellcheckEnum = ""
 )
 
 type SpanTranslateEnum string
 
 const (
-	SpanTranslateEnumNo  SpanTranslateEnum = "no"
-	SpanTranslateEnumYes SpanTranslateEnum = "yes"
+	SpanTranslateEnumNo    SpanTranslateEnum = "no"
+	SpanTranslateEnumYes   SpanTranslateEnum = "yes"
+	SpanTranslateEnumEmpty SpanTranslateEnum = ""
 )
 
 type SpanWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type SpanWritingsuggestionsEnum string
 const (
 	SpanWritingsuggestionsEnumFalse SpanWritingsuggestionsEnum = "false"
 	SpanWritingsuggestionsEnumTrue  SpanWritingsuggestionsEnum = "true"
+	SpanWritingsuggestionsEnumEmpty SpanWritingsuggestionsEnum = ""
 )
 
 type spanAttrs map[string]any

@@ -50,27 +50,29 @@ func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataEleme
 type DataAutocapitalizeEnum string
 
 const (
+	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
 	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
 	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
-	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 )
 
 type DataAutocorrectEnum string
 
 const (
-	DataAutocorrectEnumOff DataAutocorrectEnum = "off"
-	DataAutocorrectEnumOn  DataAutocorrectEnum = "on"
+	DataAutocorrectEnumOn    DataAutocorrectEnum = "on"
+	DataAutocorrectEnumOff   DataAutocorrectEnum = "off"
+	DataAutocorrectEnumEmpty DataAutocorrectEnum = ""
 )
 
 type DataContenteditableEnum string
 
 const (
-	DataContenteditableEnumFalse         DataContenteditableEnum = "false"
 	DataContenteditableEnumPlaintextOnly DataContenteditableEnum = "plaintext-only"
 	DataContenteditableEnumTrue          DataContenteditableEnum = "true"
+	DataContenteditableEnumFalse         DataContenteditableEnum = "false"
+	DataContenteditableEnumEmpty         DataContenteditableEnum = ""
 )
 
 type DataDirEnum string
@@ -84,20 +86,20 @@ const (
 type DataDraggableEnum string
 
 const (
-	DataDraggableEnumFalse DataDraggableEnum = "false"
 	DataDraggableEnumTrue  DataDraggableEnum = "true"
+	DataDraggableEnumFalse DataDraggableEnum = "false"
 )
 
 type DataEnterkeyhintEnum string
 
 const (
+	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
+	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
+	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
 	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
 	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
-	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
-	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
-	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
 )
 
 type DataHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type DataInputmodeEnum string
 
 const (
+	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
+	DataInputmodeEnumText    DataInputmodeEnum = "text"
+	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
 	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
 	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
 	DataInputmodeEnumNone    DataInputmodeEnum = "none"
 	DataInputmodeEnumNumeric DataInputmodeEnum = "numeric"
 	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
-	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
-	DataInputmodeEnumText    DataInputmodeEnum = "text"
-	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
 )
 
 type DataSpellcheckEnum string
@@ -126,13 +128,15 @@ type DataSpellcheckEnum string
 const (
 	DataSpellcheckEnumFalse DataSpellcheckEnum = "false"
 	DataSpellcheckEnumTrue  DataSpellcheckEnum = "true"
+	DataSpellcheckEnumEmpty DataSpellcheckEnum = ""
 )
 
 type DataTranslateEnum string
 
 const (
-	DataTranslateEnumNo  DataTranslateEnum = "no"
-	DataTranslateEnumYes DataTranslateEnum = "yes"
+	DataTranslateEnumNo    DataTranslateEnum = "no"
+	DataTranslateEnumYes   DataTranslateEnum = "yes"
+	DataTranslateEnumEmpty DataTranslateEnum = ""
 )
 
 type DataWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type DataWritingsuggestionsEnum string
 const (
 	DataWritingsuggestionsEnumFalse DataWritingsuggestionsEnum = "false"
 	DataWritingsuggestionsEnumTrue  DataWritingsuggestionsEnum = "true"
+	DataWritingsuggestionsEnumEmpty DataWritingsuggestionsEnum = ""
 )
 
 type dataAttrs map[string]any

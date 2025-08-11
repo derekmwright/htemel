@@ -61,16 +61,18 @@ const (
 type SummaryAutocorrectEnum string
 
 const (
-	SummaryAutocorrectEnumOn  SummaryAutocorrectEnum = "on"
-	SummaryAutocorrectEnumOff SummaryAutocorrectEnum = "off"
+	SummaryAutocorrectEnumOff   SummaryAutocorrectEnum = "off"
+	SummaryAutocorrectEnumOn    SummaryAutocorrectEnum = "on"
+	SummaryAutocorrectEnumEmpty SummaryAutocorrectEnum = ""
 )
 
 type SummaryContenteditableEnum string
 
 const (
+	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
 	SummaryContenteditableEnumFalse         SummaryContenteditableEnum = "false"
 	SummaryContenteditableEnumPlaintextOnly SummaryContenteditableEnum = "plaintext-only"
-	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
+	SummaryContenteditableEnumEmpty         SummaryContenteditableEnum = ""
 )
 
 type SummaryDirEnum string
@@ -91,27 +93,26 @@ const (
 type SummaryEnterkeyhintEnum string
 
 const (
-	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
-	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
 	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
 	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
 	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
 	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
+	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
+	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
 )
 
 type SummaryHiddenEnum string
 
 const (
-	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
 	SummaryHiddenEnumUntilFound SummaryHiddenEnum = "until-found"
+	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
 	SummaryHiddenEnumEmpty      SummaryHiddenEnum = ""
 )
 
 type SummaryInputmodeEnum string
 
 const (
-	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
 	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
 	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
@@ -119,6 +120,7 @@ const (
 	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
 	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
 	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
+	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
 )
 
 type SummarySpellcheckEnum string
@@ -126,13 +128,15 @@ type SummarySpellcheckEnum string
 const (
 	SummarySpellcheckEnumFalse SummarySpellcheckEnum = "false"
 	SummarySpellcheckEnumTrue  SummarySpellcheckEnum = "true"
+	SummarySpellcheckEnumEmpty SummarySpellcheckEnum = ""
 )
 
 type SummaryTranslateEnum string
 
 const (
-	SummaryTranslateEnumNo  SummaryTranslateEnum = "no"
-	SummaryTranslateEnumYes SummaryTranslateEnum = "yes"
+	SummaryTranslateEnumNo    SummaryTranslateEnum = "no"
+	SummaryTranslateEnumYes   SummaryTranslateEnum = "yes"
+	SummaryTranslateEnumEmpty SummaryTranslateEnum = ""
 )
 
 type SummaryWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type SummaryWritingsuggestionsEnum string
 const (
 	SummaryWritingsuggestionsEnumFalse SummaryWritingsuggestionsEnum = "false"
 	SummaryWritingsuggestionsEnumTrue  SummaryWritingsuggestionsEnum = "true"
+	SummaryWritingsuggestionsEnumEmpty SummaryWritingsuggestionsEnum = ""
 )
 
 type summaryAttrs map[string]any

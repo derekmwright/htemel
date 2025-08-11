@@ -61,8 +61,9 @@ const (
 type HeadAutocorrectEnum string
 
 const (
-	HeadAutocorrectEnumOff HeadAutocorrectEnum = "off"
-	HeadAutocorrectEnumOn  HeadAutocorrectEnum = "on"
+	HeadAutocorrectEnumOff   HeadAutocorrectEnum = "off"
+	HeadAutocorrectEnumOn    HeadAutocorrectEnum = "on"
+	HeadAutocorrectEnumEmpty HeadAutocorrectEnum = ""
 )
 
 type HeadContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	HeadContenteditableEnumFalse         HeadContenteditableEnum = "false"
 	HeadContenteditableEnumPlaintextOnly HeadContenteditableEnum = "plaintext-only"
 	HeadContenteditableEnumTrue          HeadContenteditableEnum = "true"
+	HeadContenteditableEnumEmpty         HeadContenteditableEnum = ""
 )
 
 type HeadDirEnum string
 
 const (
+	HeadDirEnumRtl  HeadDirEnum = "rtl"
 	HeadDirEnumAuto HeadDirEnum = "auto"
 	HeadDirEnumLtr  HeadDirEnum = "ltr"
-	HeadDirEnumRtl  HeadDirEnum = "rtl"
 )
 
 type HeadDraggableEnum string
@@ -103,14 +105,15 @@ const (
 type HeadHiddenEnum string
 
 const (
-	HeadHiddenEnumUntilFound HeadHiddenEnum = "until-found"
 	HeadHiddenEnumHidden     HeadHiddenEnum = "hidden"
+	HeadHiddenEnumUntilFound HeadHiddenEnum = "until-found"
 	HeadHiddenEnumEmpty      HeadHiddenEnum = ""
 )
 
 type HeadInputmodeEnum string
 
 const (
+	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
 	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
 	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
@@ -118,21 +121,22 @@ const (
 	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
 	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
 	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
-	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 )
 
 type HeadSpellcheckEnum string
 
 const (
-	HeadSpellcheckEnumFalse HeadSpellcheckEnum = "false"
 	HeadSpellcheckEnumTrue  HeadSpellcheckEnum = "true"
+	HeadSpellcheckEnumFalse HeadSpellcheckEnum = "false"
+	HeadSpellcheckEnumEmpty HeadSpellcheckEnum = ""
 )
 
 type HeadTranslateEnum string
 
 const (
-	HeadTranslateEnumNo  HeadTranslateEnum = "no"
-	HeadTranslateEnumYes HeadTranslateEnum = "yes"
+	HeadTranslateEnumNo    HeadTranslateEnum = "no"
+	HeadTranslateEnumYes   HeadTranslateEnum = "yes"
+	HeadTranslateEnumEmpty HeadTranslateEnum = ""
 )
 
 type HeadWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type HeadWritingsuggestionsEnum string
 const (
 	HeadWritingsuggestionsEnumFalse HeadWritingsuggestionsEnum = "false"
 	HeadWritingsuggestionsEnumTrue  HeadWritingsuggestionsEnum = "true"
+	HeadWritingsuggestionsEnumEmpty HeadWritingsuggestionsEnum = ""
 )
 
 type headAttrs map[string]any

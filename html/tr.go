@@ -50,19 +50,20 @@ func TrTernary(condition bool, true htemel.Node, false htemel.Node) *TrElement {
 type TrAutocapitalizeEnum string
 
 const (
+	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
+	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
 	TrAutocapitalizeEnumOff        TrAutocapitalizeEnum = "off"
 	TrAutocapitalizeEnumOn         TrAutocapitalizeEnum = "on"
 	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
 	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
-	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
-	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
 )
 
 type TrAutocorrectEnum string
 
 const (
-	TrAutocorrectEnumOff TrAutocorrectEnum = "off"
-	TrAutocorrectEnumOn  TrAutocorrectEnum = "on"
+	TrAutocorrectEnumOff   TrAutocorrectEnum = "off"
+	TrAutocorrectEnumOn    TrAutocorrectEnum = "on"
+	TrAutocorrectEnumEmpty TrAutocorrectEnum = ""
 )
 
 type TrContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	TrContenteditableEnumFalse         TrContenteditableEnum = "false"
 	TrContenteditableEnumPlaintextOnly TrContenteditableEnum = "plaintext-only"
 	TrContenteditableEnumTrue          TrContenteditableEnum = "true"
+	TrContenteditableEnumEmpty         TrContenteditableEnum = ""
 )
 
 type TrDirEnum string
@@ -91,13 +93,13 @@ const (
 type TrEnterkeyhintEnum string
 
 const (
-	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
-	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
-	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
 	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
 	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
 	TrEnterkeyhintEnumGo       TrEnterkeyhintEnum = "go"
 	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
+	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
+	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
+	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
 )
 
 type TrHiddenEnum string
@@ -111,6 +113,7 @@ const (
 type TrInputmodeEnum string
 
 const (
+	TrInputmodeEnumText    TrInputmodeEnum = "text"
 	TrInputmodeEnumUrl     TrInputmodeEnum = "url"
 	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
 	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
@@ -118,7 +121,6 @@ const (
 	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
 	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
 	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
-	TrInputmodeEnumText    TrInputmodeEnum = "text"
 )
 
 type TrSpellcheckEnum string
@@ -126,13 +128,15 @@ type TrSpellcheckEnum string
 const (
 	TrSpellcheckEnumFalse TrSpellcheckEnum = "false"
 	TrSpellcheckEnumTrue  TrSpellcheckEnum = "true"
+	TrSpellcheckEnumEmpty TrSpellcheckEnum = ""
 )
 
 type TrTranslateEnum string
 
 const (
-	TrTranslateEnumNo  TrTranslateEnum = "no"
-	TrTranslateEnumYes TrTranslateEnum = "yes"
+	TrTranslateEnumNo    TrTranslateEnum = "no"
+	TrTranslateEnumYes   TrTranslateEnum = "yes"
+	TrTranslateEnumEmpty TrTranslateEnum = ""
 )
 
 type TrWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type TrWritingsuggestionsEnum string
 const (
 	TrWritingsuggestionsEnumFalse TrWritingsuggestionsEnum = "false"
 	TrWritingsuggestionsEnumTrue  TrWritingsuggestionsEnum = "true"
+	TrWritingsuggestionsEnumEmpty TrWritingsuggestionsEnum = ""
 )
 
 type trAttrs map[string]any

@@ -50,19 +50,20 @@ func VideoTernary(condition bool, true htemel.Node, false htemel.Node) *VideoEle
 type VideoAutocapitalizeEnum string
 
 const (
-	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
-	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
-	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
 	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
 	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
 	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
+	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
+	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
+	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
 )
 
 type VideoAutocorrectEnum string
 
 const (
-	VideoAutocorrectEnumOff VideoAutocorrectEnum = "off"
-	VideoAutocorrectEnumOn  VideoAutocorrectEnum = "on"
+	VideoAutocorrectEnumOff   VideoAutocorrectEnum = "off"
+	VideoAutocorrectEnumOn    VideoAutocorrectEnum = "on"
+	VideoAutocorrectEnumEmpty VideoAutocorrectEnum = ""
 )
 
 type VideoContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
 	VideoContenteditableEnumPlaintextOnly VideoContenteditableEnum = "plaintext-only"
 	VideoContenteditableEnumTrue          VideoContenteditableEnum = "true"
+	VideoContenteditableEnumEmpty         VideoContenteditableEnum = ""
 )
 
 type VideoDirEnum string
 
 const (
-	VideoDirEnumAuto VideoDirEnum = "auto"
 	VideoDirEnumLtr  VideoDirEnum = "ltr"
 	VideoDirEnumRtl  VideoDirEnum = "rtl"
+	VideoDirEnumAuto VideoDirEnum = "auto"
 )
 
 type VideoDraggableEnum string
@@ -111,14 +113,14 @@ const (
 type VideoInputmodeEnum string
 
 const (
+	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
+	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
+	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
 	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
 	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
 	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
 	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
 	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
-	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
-	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
-	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
 )
 
 type VideoSpellcheckEnum string
@@ -126,13 +128,15 @@ type VideoSpellcheckEnum string
 const (
 	VideoSpellcheckEnumFalse VideoSpellcheckEnum = "false"
 	VideoSpellcheckEnumTrue  VideoSpellcheckEnum = "true"
+	VideoSpellcheckEnumEmpty VideoSpellcheckEnum = ""
 )
 
 type VideoTranslateEnum string
 
 const (
-	VideoTranslateEnumNo  VideoTranslateEnum = "no"
-	VideoTranslateEnumYes VideoTranslateEnum = "yes"
+	VideoTranslateEnumNo    VideoTranslateEnum = "no"
+	VideoTranslateEnumYes   VideoTranslateEnum = "yes"
+	VideoTranslateEnumEmpty VideoTranslateEnum = ""
 )
 
 type VideoWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type VideoWritingsuggestionsEnum string
 const (
 	VideoWritingsuggestionsEnumFalse VideoWritingsuggestionsEnum = "false"
 	VideoWritingsuggestionsEnumTrue  VideoWritingsuggestionsEnum = "true"
+	VideoWritingsuggestionsEnumEmpty VideoWritingsuggestionsEnum = ""
 )
 
 type videoAttrs map[string]any

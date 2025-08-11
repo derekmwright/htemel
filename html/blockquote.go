@@ -50,19 +50,20 @@ func BlockquoteTernary(condition bool, true htemel.Node, false htemel.Node) *Blo
 type BlockquoteAutocapitalizeEnum string
 
 const (
-	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
-	BlockquoteAutocapitalizeEnumNone       BlockquoteAutocapitalizeEnum = "none"
 	BlockquoteAutocapitalizeEnumOff        BlockquoteAutocapitalizeEnum = "off"
 	BlockquoteAutocapitalizeEnumOn         BlockquoteAutocapitalizeEnum = "on"
 	BlockquoteAutocapitalizeEnumSentences  BlockquoteAutocapitalizeEnum = "sentences"
 	BlockquoteAutocapitalizeEnumWords      BlockquoteAutocapitalizeEnum = "words"
+	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
+	BlockquoteAutocapitalizeEnumNone       BlockquoteAutocapitalizeEnum = "none"
 )
 
 type BlockquoteAutocorrectEnum string
 
 const (
-	BlockquoteAutocorrectEnumOff BlockquoteAutocorrectEnum = "off"
-	BlockquoteAutocorrectEnumOn  BlockquoteAutocorrectEnum = "on"
+	BlockquoteAutocorrectEnumOff   BlockquoteAutocorrectEnum = "off"
+	BlockquoteAutocorrectEnumOn    BlockquoteAutocorrectEnum = "on"
+	BlockquoteAutocorrectEnumEmpty BlockquoteAutocorrectEnum = ""
 )
 
 type BlockquoteContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	BlockquoteContenteditableEnumFalse         BlockquoteContenteditableEnum = "false"
 	BlockquoteContenteditableEnumPlaintextOnly BlockquoteContenteditableEnum = "plaintext-only"
 	BlockquoteContenteditableEnumTrue          BlockquoteContenteditableEnum = "true"
+	BlockquoteContenteditableEnumEmpty         BlockquoteContenteditableEnum = ""
 )
 
 type BlockquoteDirEnum string
 
 const (
-	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 	BlockquoteDirEnumLtr  BlockquoteDirEnum = "ltr"
 	BlockquoteDirEnumRtl  BlockquoteDirEnum = "rtl"
+	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 )
 
 type BlockquoteDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type BlockquoteEnterkeyhintEnum string
 
 const (
+	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 	BlockquoteEnterkeyhintEnumNext     BlockquoteEnterkeyhintEnum = "next"
 	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
 	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
 	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
 	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
-	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 )
 
 type BlockquoteHiddenEnum string
@@ -111,6 +113,7 @@ const (
 type BlockquoteInputmodeEnum string
 
 const (
+	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
 	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
 	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
 	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
@@ -118,7 +121,6 @@ const (
 	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
 	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
 	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
-	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
 )
 
 type BlockquoteSpellcheckEnum string
@@ -126,13 +128,15 @@ type BlockquoteSpellcheckEnum string
 const (
 	BlockquoteSpellcheckEnumFalse BlockquoteSpellcheckEnum = "false"
 	BlockquoteSpellcheckEnumTrue  BlockquoteSpellcheckEnum = "true"
+	BlockquoteSpellcheckEnumEmpty BlockquoteSpellcheckEnum = ""
 )
 
 type BlockquoteTranslateEnum string
 
 const (
-	BlockquoteTranslateEnumNo  BlockquoteTranslateEnum = "no"
-	BlockquoteTranslateEnumYes BlockquoteTranslateEnum = "yes"
+	BlockquoteTranslateEnumNo    BlockquoteTranslateEnum = "no"
+	BlockquoteTranslateEnumYes   BlockquoteTranslateEnum = "yes"
+	BlockquoteTranslateEnumEmpty BlockquoteTranslateEnum = ""
 )
 
 type BlockquoteWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type BlockquoteWritingsuggestionsEnum string
 const (
 	BlockquoteWritingsuggestionsEnumFalse BlockquoteWritingsuggestionsEnum = "false"
 	BlockquoteWritingsuggestionsEnumTrue  BlockquoteWritingsuggestionsEnum = "true"
+	BlockquoteWritingsuggestionsEnumEmpty BlockquoteWritingsuggestionsEnum = ""
 )
 
 type blockquoteAttrs map[string]any

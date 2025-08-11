@@ -50,19 +50,20 @@ func FigcaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Fig
 type FigcaptionAutocapitalizeEnum string
 
 const (
+	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
+	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
 	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
 	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
 	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
-	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
-	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
 )
 
 type FigcaptionAutocorrectEnum string
 
 const (
-	FigcaptionAutocorrectEnumOn  FigcaptionAutocorrectEnum = "on"
-	FigcaptionAutocorrectEnumOff FigcaptionAutocorrectEnum = "off"
+	FigcaptionAutocorrectEnumOff   FigcaptionAutocorrectEnum = "off"
+	FigcaptionAutocorrectEnumOn    FigcaptionAutocorrectEnum = "on"
+	FigcaptionAutocorrectEnumEmpty FigcaptionAutocorrectEnum = ""
 )
 
 type FigcaptionContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	FigcaptionContenteditableEnumFalse         FigcaptionContenteditableEnum = "false"
 	FigcaptionContenteditableEnumPlaintextOnly FigcaptionContenteditableEnum = "plaintext-only"
 	FigcaptionContenteditableEnumTrue          FigcaptionContenteditableEnum = "true"
+	FigcaptionContenteditableEnumEmpty         FigcaptionContenteditableEnum = ""
 )
 
 type FigcaptionDirEnum string
 
 const (
-	FigcaptionDirEnumRtl  FigcaptionDirEnum = "rtl"
 	FigcaptionDirEnumAuto FigcaptionDirEnum = "auto"
 	FigcaptionDirEnumLtr  FigcaptionDirEnum = "ltr"
+	FigcaptionDirEnumRtl  FigcaptionDirEnum = "rtl"
 )
 
 type FigcaptionDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type FigcaptionEnterkeyhintEnum string
 
 const (
+	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
+	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
 	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
 	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
 	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
-	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
-	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 )
 
 type FigcaptionHiddenEnum string
@@ -111,7 +113,6 @@ const (
 type FigcaptionInputmodeEnum string
 
 const (
-	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
 	FigcaptionInputmodeEnumTel     FigcaptionInputmodeEnum = "tel"
 	FigcaptionInputmodeEnumText    FigcaptionInputmodeEnum = "text"
 	FigcaptionInputmodeEnumUrl     FigcaptionInputmodeEnum = "url"
@@ -119,20 +120,23 @@ const (
 	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
 	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
 	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
+	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
 )
 
 type FigcaptionSpellcheckEnum string
 
 const (
-	FigcaptionSpellcheckEnumFalse FigcaptionSpellcheckEnum = "false"
 	FigcaptionSpellcheckEnumTrue  FigcaptionSpellcheckEnum = "true"
+	FigcaptionSpellcheckEnumFalse FigcaptionSpellcheckEnum = "false"
+	FigcaptionSpellcheckEnumEmpty FigcaptionSpellcheckEnum = ""
 )
 
 type FigcaptionTranslateEnum string
 
 const (
-	FigcaptionTranslateEnumNo  FigcaptionTranslateEnum = "no"
-	FigcaptionTranslateEnumYes FigcaptionTranslateEnum = "yes"
+	FigcaptionTranslateEnumNo    FigcaptionTranslateEnum = "no"
+	FigcaptionTranslateEnumYes   FigcaptionTranslateEnum = "yes"
+	FigcaptionTranslateEnumEmpty FigcaptionTranslateEnum = ""
 )
 
 type FigcaptionWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type FigcaptionWritingsuggestionsEnum string
 const (
 	FigcaptionWritingsuggestionsEnumFalse FigcaptionWritingsuggestionsEnum = "false"
 	FigcaptionWritingsuggestionsEnumTrue  FigcaptionWritingsuggestionsEnum = "true"
+	FigcaptionWritingsuggestionsEnumEmpty FigcaptionWritingsuggestionsEnum = ""
 )
 
 type figcaptionAttrs map[string]any

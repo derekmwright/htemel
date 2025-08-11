@@ -61,8 +61,9 @@ const (
 type DivAutocorrectEnum string
 
 const (
-	DivAutocorrectEnumOff DivAutocorrectEnum = "off"
-	DivAutocorrectEnumOn  DivAutocorrectEnum = "on"
+	DivAutocorrectEnumOff   DivAutocorrectEnum = "off"
+	DivAutocorrectEnumOn    DivAutocorrectEnum = "on"
+	DivAutocorrectEnumEmpty DivAutocorrectEnum = ""
 )
 
 type DivContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	DivContenteditableEnumFalse         DivContenteditableEnum = "false"
 	DivContenteditableEnumPlaintextOnly DivContenteditableEnum = "plaintext-only"
 	DivContenteditableEnumTrue          DivContenteditableEnum = "true"
+	DivContenteditableEnumEmpty         DivContenteditableEnum = ""
 )
 
 type DivDirEnum string
 
 const (
+	DivDirEnumAuto DivDirEnum = "auto"
 	DivDirEnumLtr  DivDirEnum = "ltr"
 	DivDirEnumRtl  DivDirEnum = "rtl"
-	DivDirEnumAuto DivDirEnum = "auto"
 )
 
 type DivDraggableEnum string
@@ -91,48 +93,50 @@ const (
 type DivEnterkeyhintEnum string
 
 const (
-	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 	DivEnterkeyhintEnumGo       DivEnterkeyhintEnum = "go"
 	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
 	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
 	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
 	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
 	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
+	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 )
 
 type DivHiddenEnum string
 
 const (
-	DivHiddenEnumUntilFound DivHiddenEnum = "until-found"
 	DivHiddenEnumHidden     DivHiddenEnum = "hidden"
+	DivHiddenEnumUntilFound DivHiddenEnum = "until-found"
 	DivHiddenEnumEmpty      DivHiddenEnum = ""
 )
 
 type DivInputmodeEnum string
 
 const (
+	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
+	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
 	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
 	DivInputmodeEnumText    DivInputmodeEnum = "text"
 	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
 	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
 	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
 	DivInputmodeEnumNone    DivInputmodeEnum = "none"
-	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
-	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
 )
 
 type DivSpellcheckEnum string
 
 const (
-	DivSpellcheckEnumTrue  DivSpellcheckEnum = "true"
 	DivSpellcheckEnumFalse DivSpellcheckEnum = "false"
+	DivSpellcheckEnumTrue  DivSpellcheckEnum = "true"
+	DivSpellcheckEnumEmpty DivSpellcheckEnum = ""
 )
 
 type DivTranslateEnum string
 
 const (
-	DivTranslateEnumNo  DivTranslateEnum = "no"
-	DivTranslateEnumYes DivTranslateEnum = "yes"
+	DivTranslateEnumNo    DivTranslateEnum = "no"
+	DivTranslateEnumYes   DivTranslateEnum = "yes"
+	DivTranslateEnumEmpty DivTranslateEnum = ""
 )
 
 type DivWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type DivWritingsuggestionsEnum string
 const (
 	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
 	DivWritingsuggestionsEnumTrue  DivWritingsuggestionsEnum = "true"
+	DivWritingsuggestionsEnumEmpty DivWritingsuggestionsEnum = ""
 )
 
 type divAttrs map[string]any

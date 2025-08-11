@@ -50,19 +50,20 @@ func EmTernary(condition bool, true htemel.Node, false htemel.Node) *EmElement {
 type EmAutocapitalizeEnum string
 
 const (
-	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
-	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
 	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
 	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
+	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
+	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 )
 
 type EmAutocorrectEnum string
 
 const (
-	EmAutocorrectEnumOn  EmAutocorrectEnum = "on"
-	EmAutocorrectEnumOff EmAutocorrectEnum = "off"
+	EmAutocorrectEnumOn    EmAutocorrectEnum = "on"
+	EmAutocorrectEnumOff   EmAutocorrectEnum = "off"
+	EmAutocorrectEnumEmpty EmAutocorrectEnum = ""
 )
 
 type EmContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 	EmContenteditableEnumPlaintextOnly EmContenteditableEnum = "plaintext-only"
 	EmContenteditableEnumTrue          EmContenteditableEnum = "true"
+	EmContenteditableEnumEmpty         EmContenteditableEnum = ""
 )
 
 type EmDirEnum string
 
 const (
-	EmDirEnumAuto EmDirEnum = "auto"
 	EmDirEnumLtr  EmDirEnum = "ltr"
 	EmDirEnumRtl  EmDirEnum = "rtl"
+	EmDirEnumAuto EmDirEnum = "auto"
 )
 
 type EmDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type EmEnterkeyhintEnum string
 
 const (
-	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
 	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
 	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
 	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
 	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
+	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 )
 
 type EmHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type EmInputmodeEnum string
 
 const (
-	EmInputmodeEnumText    EmInputmodeEnum = "text"
-	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
-	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
-	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
 	EmInputmodeEnumNone    EmInputmodeEnum = "none"
 	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
 	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
 	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
+	EmInputmodeEnumText    EmInputmodeEnum = "text"
+	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
+	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
+	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
 )
 
 type EmSpellcheckEnum string
@@ -126,20 +128,23 @@ type EmSpellcheckEnum string
 const (
 	EmSpellcheckEnumFalse EmSpellcheckEnum = "false"
 	EmSpellcheckEnumTrue  EmSpellcheckEnum = "true"
+	EmSpellcheckEnumEmpty EmSpellcheckEnum = ""
 )
 
 type EmTranslateEnum string
 
 const (
-	EmTranslateEnumYes EmTranslateEnum = "yes"
-	EmTranslateEnumNo  EmTranslateEnum = "no"
+	EmTranslateEnumNo    EmTranslateEnum = "no"
+	EmTranslateEnumYes   EmTranslateEnum = "yes"
+	EmTranslateEnumEmpty EmTranslateEnum = ""
 )
 
 type EmWritingsuggestionsEnum string
 
 const (
-	EmWritingsuggestionsEnumFalse EmWritingsuggestionsEnum = "false"
 	EmWritingsuggestionsEnumTrue  EmWritingsuggestionsEnum = "true"
+	EmWritingsuggestionsEnumFalse EmWritingsuggestionsEnum = "false"
+	EmWritingsuggestionsEnumEmpty EmWritingsuggestionsEnum = ""
 )
 
 type emAttrs map[string]any

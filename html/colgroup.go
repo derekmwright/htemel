@@ -61,8 +61,9 @@ const (
 type ColgroupAutocorrectEnum string
 
 const (
-	ColgroupAutocorrectEnumOff ColgroupAutocorrectEnum = "off"
-	ColgroupAutocorrectEnumOn  ColgroupAutocorrectEnum = "on"
+	ColgroupAutocorrectEnumOff   ColgroupAutocorrectEnum = "off"
+	ColgroupAutocorrectEnumOn    ColgroupAutocorrectEnum = "on"
+	ColgroupAutocorrectEnumEmpty ColgroupAutocorrectEnum = ""
 )
 
 type ColgroupContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	ColgroupContenteditableEnumFalse         ColgroupContenteditableEnum = "false"
 	ColgroupContenteditableEnumPlaintextOnly ColgroupContenteditableEnum = "plaintext-only"
 	ColgroupContenteditableEnumTrue          ColgroupContenteditableEnum = "true"
+	ColgroupContenteditableEnumEmpty         ColgroupContenteditableEnum = ""
 )
 
 type ColgroupDirEnum string
@@ -84,20 +86,20 @@ const (
 type ColgroupDraggableEnum string
 
 const (
-	ColgroupDraggableEnumFalse ColgroupDraggableEnum = "false"
 	ColgroupDraggableEnumTrue  ColgroupDraggableEnum = "true"
+	ColgroupDraggableEnumFalse ColgroupDraggableEnum = "false"
 )
 
 type ColgroupEnterkeyhintEnum string
 
 const (
+	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
+	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
+	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
 	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
 	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
 	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
 	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
-	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
-	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
-	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
 )
 
 type ColgroupHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type ColgroupInputmodeEnum string
 
 const (
-	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
-	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
-	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
-	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
 	ColgroupInputmodeEnumSearch  ColgroupInputmodeEnum = "search"
 	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
 	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
 	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
+	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
+	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
+	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
+	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
 )
 
 type ColgroupSpellcheckEnum string
@@ -126,20 +128,23 @@ type ColgroupSpellcheckEnum string
 const (
 	ColgroupSpellcheckEnumFalse ColgroupSpellcheckEnum = "false"
 	ColgroupSpellcheckEnumTrue  ColgroupSpellcheckEnum = "true"
+	ColgroupSpellcheckEnumEmpty ColgroupSpellcheckEnum = ""
 )
 
 type ColgroupTranslateEnum string
 
 const (
-	ColgroupTranslateEnumNo  ColgroupTranslateEnum = "no"
-	ColgroupTranslateEnumYes ColgroupTranslateEnum = "yes"
+	ColgroupTranslateEnumYes   ColgroupTranslateEnum = "yes"
+	ColgroupTranslateEnumNo    ColgroupTranslateEnum = "no"
+	ColgroupTranslateEnumEmpty ColgroupTranslateEnum = ""
 )
 
 type ColgroupWritingsuggestionsEnum string
 
 const (
-	ColgroupWritingsuggestionsEnumTrue  ColgroupWritingsuggestionsEnum = "true"
 	ColgroupWritingsuggestionsEnumFalse ColgroupWritingsuggestionsEnum = "false"
+	ColgroupWritingsuggestionsEnumTrue  ColgroupWritingsuggestionsEnum = "true"
+	ColgroupWritingsuggestionsEnumEmpty ColgroupWritingsuggestionsEnum = ""
 )
 
 type colgroupAttrs map[string]any

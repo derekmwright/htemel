@@ -61,8 +61,9 @@ const (
 type AreaAutocorrectEnum string
 
 const (
-	AreaAutocorrectEnumOff AreaAutocorrectEnum = "off"
-	AreaAutocorrectEnumOn  AreaAutocorrectEnum = "on"
+	AreaAutocorrectEnumOff   AreaAutocorrectEnum = "off"
+	AreaAutocorrectEnumOn    AreaAutocorrectEnum = "on"
+	AreaAutocorrectEnumEmpty AreaAutocorrectEnum = ""
 )
 
 type AreaContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumPlaintextOnly AreaContenteditableEnum = "plaintext-only"
 	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
+	AreaContenteditableEnumEmpty         AreaContenteditableEnum = ""
 )
 
 type AreaDirEnum string
@@ -84,55 +86,57 @@ const (
 type AreaDraggableEnum string
 
 const (
-	AreaDraggableEnumFalse AreaDraggableEnum = "false"
 	AreaDraggableEnumTrue  AreaDraggableEnum = "true"
+	AreaDraggableEnumFalse AreaDraggableEnum = "false"
 )
 
 type AreaEnterkeyhintEnum string
 
 const (
-	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
-	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
 	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
 	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
 	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
 	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
 	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
+	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
+	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
 )
 
 type AreaHiddenEnum string
 
 const (
-	AreaHiddenEnumUntilFound AreaHiddenEnum = "until-found"
 	AreaHiddenEnumHidden     AreaHiddenEnum = "hidden"
+	AreaHiddenEnumUntilFound AreaHiddenEnum = "until-found"
 	AreaHiddenEnumEmpty      AreaHiddenEnum = ""
 )
 
 type AreaInputmodeEnum string
 
 const (
-	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
-	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
-	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
 	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
 	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
 	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
+	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
+	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
+	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
 )
 
 type AreaSpellcheckEnum string
 
 const (
-	AreaSpellcheckEnumTrue  AreaSpellcheckEnum = "true"
 	AreaSpellcheckEnumFalse AreaSpellcheckEnum = "false"
+	AreaSpellcheckEnumTrue  AreaSpellcheckEnum = "true"
+	AreaSpellcheckEnumEmpty AreaSpellcheckEnum = ""
 )
 
 type AreaTranslateEnum string
 
 const (
-	AreaTranslateEnumNo  AreaTranslateEnum = "no"
-	AreaTranslateEnumYes AreaTranslateEnum = "yes"
+	AreaTranslateEnumNo    AreaTranslateEnum = "no"
+	AreaTranslateEnumYes   AreaTranslateEnum = "yes"
+	AreaTranslateEnumEmpty AreaTranslateEnum = ""
 )
 
 type AreaWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type AreaWritingsuggestionsEnum string
 const (
 	AreaWritingsuggestionsEnumFalse AreaWritingsuggestionsEnum = "false"
 	AreaWritingsuggestionsEnumTrue  AreaWritingsuggestionsEnum = "true"
+	AreaWritingsuggestionsEnumEmpty AreaWritingsuggestionsEnum = ""
 )
 
 type areaAttrs map[string]any

@@ -50,27 +50,29 @@ func HgroupTernary(condition bool, true htemel.Node, false htemel.Node) *HgroupE
 type HgroupAutocapitalizeEnum string
 
 const (
-	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
 	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
 	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
 	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
 	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
+	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 )
 
 type HgroupAutocorrectEnum string
 
 const (
-	HgroupAutocorrectEnumOff HgroupAutocorrectEnum = "off"
-	HgroupAutocorrectEnumOn  HgroupAutocorrectEnum = "on"
+	HgroupAutocorrectEnumOff   HgroupAutocorrectEnum = "off"
+	HgroupAutocorrectEnumOn    HgroupAutocorrectEnum = "on"
+	HgroupAutocorrectEnumEmpty HgroupAutocorrectEnum = ""
 )
 
 type HgroupContenteditableEnum string
 
 const (
+	HgroupContenteditableEnumTrue          HgroupContenteditableEnum = "true"
 	HgroupContenteditableEnumFalse         HgroupContenteditableEnum = "false"
 	HgroupContenteditableEnumPlaintextOnly HgroupContenteditableEnum = "plaintext-only"
-	HgroupContenteditableEnumTrue          HgroupContenteditableEnum = "true"
+	HgroupContenteditableEnumEmpty         HgroupContenteditableEnum = ""
 )
 
 type HgroupDirEnum string
@@ -91,13 +93,13 @@ const (
 type HgroupEnterkeyhintEnum string
 
 const (
-	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
 	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
 	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
 	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
 	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
 	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
+	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
 )
 
 type HgroupHiddenEnum string
@@ -111,28 +113,30 @@ const (
 type HgroupInputmodeEnum string
 
 const (
+	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
+	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
+	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
 	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
 	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
 	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
 	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
 	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
-	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
-	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
-	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
 )
 
 type HgroupSpellcheckEnum string
 
 const (
-	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
 	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
+	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
+	HgroupSpellcheckEnumEmpty HgroupSpellcheckEnum = ""
 )
 
 type HgroupTranslateEnum string
 
 const (
-	HgroupTranslateEnumNo  HgroupTranslateEnum = "no"
-	HgroupTranslateEnumYes HgroupTranslateEnum = "yes"
+	HgroupTranslateEnumNo    HgroupTranslateEnum = "no"
+	HgroupTranslateEnumYes   HgroupTranslateEnum = "yes"
+	HgroupTranslateEnumEmpty HgroupTranslateEnum = ""
 )
 
 type HgroupWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type HgroupWritingsuggestionsEnum string
 const (
 	HgroupWritingsuggestionsEnumFalse HgroupWritingsuggestionsEnum = "false"
 	HgroupWritingsuggestionsEnumTrue  HgroupWritingsuggestionsEnum = "true"
+	HgroupWritingsuggestionsEnumEmpty HgroupWritingsuggestionsEnum = ""
 )
 
 type hgroupAttrs map[string]any

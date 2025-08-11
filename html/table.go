@@ -50,19 +50,20 @@ func TableTernary(condition bool, true htemel.Node, false htemel.Node) *TableEle
 type TableAutocapitalizeEnum string
 
 const (
+	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
 	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
 	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
 	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
-	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 )
 
 type TableAutocorrectEnum string
 
 const (
-	TableAutocorrectEnumOff TableAutocorrectEnum = "off"
-	TableAutocorrectEnumOn  TableAutocorrectEnum = "on"
+	TableAutocorrectEnumOff   TableAutocorrectEnum = "off"
+	TableAutocorrectEnumOn    TableAutocorrectEnum = "on"
+	TableAutocorrectEnumEmpty TableAutocorrectEnum = ""
 )
 
 type TableContenteditableEnum string
@@ -71,14 +72,15 @@ const (
 	TableContenteditableEnumFalse         TableContenteditableEnum = "false"
 	TableContenteditableEnumPlaintextOnly TableContenteditableEnum = "plaintext-only"
 	TableContenteditableEnumTrue          TableContenteditableEnum = "true"
+	TableContenteditableEnumEmpty         TableContenteditableEnum = ""
 )
 
 type TableDirEnum string
 
 const (
-	TableDirEnumAuto TableDirEnum = "auto"
 	TableDirEnumLtr  TableDirEnum = "ltr"
 	TableDirEnumRtl  TableDirEnum = "rtl"
+	TableDirEnumAuto TableDirEnum = "auto"
 )
 
 type TableDraggableEnum string
@@ -111,14 +113,14 @@ const (
 type TableInputmodeEnum string
 
 const (
+	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
+	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 	TableInputmodeEnumText    TableInputmodeEnum = "text"
 	TableInputmodeEnumUrl     TableInputmodeEnum = "url"
 	TableInputmodeEnumDecimal TableInputmodeEnum = "decimal"
 	TableInputmodeEnumEmail   TableInputmodeEnum = "email"
 	TableInputmodeEnumNone    TableInputmodeEnum = "none"
-	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
-	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 )
 
 type TableSpellcheckEnum string
@@ -126,13 +128,15 @@ type TableSpellcheckEnum string
 const (
 	TableSpellcheckEnumFalse TableSpellcheckEnum = "false"
 	TableSpellcheckEnumTrue  TableSpellcheckEnum = "true"
+	TableSpellcheckEnumEmpty TableSpellcheckEnum = ""
 )
 
 type TableTranslateEnum string
 
 const (
-	TableTranslateEnumNo  TableTranslateEnum = "no"
-	TableTranslateEnumYes TableTranslateEnum = "yes"
+	TableTranslateEnumNo    TableTranslateEnum = "no"
+	TableTranslateEnumYes   TableTranslateEnum = "yes"
+	TableTranslateEnumEmpty TableTranslateEnum = ""
 )
 
 type TableWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type TableWritingsuggestionsEnum string
 const (
 	TableWritingsuggestionsEnumFalse TableWritingsuggestionsEnum = "false"
 	TableWritingsuggestionsEnumTrue  TableWritingsuggestionsEnum = "true"
+	TableWritingsuggestionsEnumEmpty TableWritingsuggestionsEnum = ""
 )
 
 type tableAttrs map[string]any

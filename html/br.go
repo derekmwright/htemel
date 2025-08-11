@@ -61,8 +61,9 @@ const (
 type BrAutocorrectEnum string
 
 const (
-	BrAutocorrectEnumOff BrAutocorrectEnum = "off"
-	BrAutocorrectEnumOn  BrAutocorrectEnum = "on"
+	BrAutocorrectEnumOff   BrAutocorrectEnum = "off"
+	BrAutocorrectEnumOn    BrAutocorrectEnum = "on"
+	BrAutocorrectEnumEmpty BrAutocorrectEnum = ""
 )
 
 type BrContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	BrContenteditableEnumFalse         BrContenteditableEnum = "false"
 	BrContenteditableEnumPlaintextOnly BrContenteditableEnum = "plaintext-only"
 	BrContenteditableEnumTrue          BrContenteditableEnum = "true"
+	BrContenteditableEnumEmpty         BrContenteditableEnum = ""
 )
 
 type BrDirEnum string
@@ -84,20 +86,20 @@ const (
 type BrDraggableEnum string
 
 const (
-	BrDraggableEnumFalse BrDraggableEnum = "false"
 	BrDraggableEnumTrue  BrDraggableEnum = "true"
+	BrDraggableEnumFalse BrDraggableEnum = "false"
 )
 
 type BrEnterkeyhintEnum string
 
 const (
-	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
-	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
-	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
 	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
 	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
 	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
+	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
+	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
+	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 )
 
 type BrHiddenEnum string
@@ -111,6 +113,7 @@ const (
 type BrInputmodeEnum string
 
 const (
+	BrInputmodeEnumText    BrInputmodeEnum = "text"
 	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
 	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
 	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
@@ -118,7 +121,6 @@ const (
 	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
 	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
 	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
-	BrInputmodeEnumText    BrInputmodeEnum = "text"
 )
 
 type BrSpellcheckEnum string
@@ -126,13 +128,15 @@ type BrSpellcheckEnum string
 const (
 	BrSpellcheckEnumFalse BrSpellcheckEnum = "false"
 	BrSpellcheckEnumTrue  BrSpellcheckEnum = "true"
+	BrSpellcheckEnumEmpty BrSpellcheckEnum = ""
 )
 
 type BrTranslateEnum string
 
 const (
-	BrTranslateEnumNo  BrTranslateEnum = "no"
-	BrTranslateEnumYes BrTranslateEnum = "yes"
+	BrTranslateEnumYes   BrTranslateEnum = "yes"
+	BrTranslateEnumNo    BrTranslateEnum = "no"
+	BrTranslateEnumEmpty BrTranslateEnum = ""
 )
 
 type BrWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type BrWritingsuggestionsEnum string
 const (
 	BrWritingsuggestionsEnumFalse BrWritingsuggestionsEnum = "false"
 	BrWritingsuggestionsEnumTrue  BrWritingsuggestionsEnum = "true"
+	BrWritingsuggestionsEnumEmpty BrWritingsuggestionsEnum = ""
 )
 
 type brAttrs map[string]any

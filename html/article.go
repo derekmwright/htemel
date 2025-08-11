@@ -50,27 +50,29 @@ func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *Articl
 type ArticleAutocapitalizeEnum string
 
 const (
+	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
+	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
 	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
 	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
-	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
-	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 )
 
 type ArticleAutocorrectEnum string
 
 const (
-	ArticleAutocorrectEnumOn  ArticleAutocorrectEnum = "on"
-	ArticleAutocorrectEnumOff ArticleAutocorrectEnum = "off"
+	ArticleAutocorrectEnumOff   ArticleAutocorrectEnum = "off"
+	ArticleAutocorrectEnumOn    ArticleAutocorrectEnum = "on"
+	ArticleAutocorrectEnumEmpty ArticleAutocorrectEnum = ""
 )
 
 type ArticleContenteditableEnum string
 
 const (
+	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
 	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
-	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
+	ArticleContenteditableEnumEmpty         ArticleContenteditableEnum = ""
 )
 
 type ArticleDirEnum string
@@ -84,20 +86,20 @@ const (
 type ArticleDraggableEnum string
 
 const (
-	ArticleDraggableEnumFalse ArticleDraggableEnum = "false"
 	ArticleDraggableEnumTrue  ArticleDraggableEnum = "true"
+	ArticleDraggableEnumFalse ArticleDraggableEnum = "false"
 )
 
 type ArticleEnterkeyhintEnum string
 
 const (
-	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
 	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
 	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
 	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
 	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
 	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
+	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 )
 
 type ArticleHiddenEnum string
@@ -111,7 +113,6 @@ const (
 type ArticleInputmodeEnum string
 
 const (
-	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
 	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
 	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
 	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
@@ -119,20 +120,23 @@ const (
 	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
 	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
 	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
+	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
 )
 
 type ArticleSpellcheckEnum string
 
 const (
-	ArticleSpellcheckEnumFalse ArticleSpellcheckEnum = "false"
 	ArticleSpellcheckEnumTrue  ArticleSpellcheckEnum = "true"
+	ArticleSpellcheckEnumFalse ArticleSpellcheckEnum = "false"
+	ArticleSpellcheckEnumEmpty ArticleSpellcheckEnum = ""
 )
 
 type ArticleTranslateEnum string
 
 const (
-	ArticleTranslateEnumNo  ArticleTranslateEnum = "no"
-	ArticleTranslateEnumYes ArticleTranslateEnum = "yes"
+	ArticleTranslateEnumNo    ArticleTranslateEnum = "no"
+	ArticleTranslateEnumYes   ArticleTranslateEnum = "yes"
+	ArticleTranslateEnumEmpty ArticleTranslateEnum = ""
 )
 
 type ArticleWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type ArticleWritingsuggestionsEnum string
 const (
 	ArticleWritingsuggestionsEnumFalse ArticleWritingsuggestionsEnum = "false"
 	ArticleWritingsuggestionsEnumTrue  ArticleWritingsuggestionsEnum = "true"
+	ArticleWritingsuggestionsEnumEmpty ArticleWritingsuggestionsEnum = ""
 )
 
 type articleAttrs map[string]any

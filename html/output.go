@@ -50,19 +50,20 @@ func OutputTernary(condition bool, true htemel.Node, false htemel.Node) *OutputE
 type OutputAutocapitalizeEnum string
 
 const (
+	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
+	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
 	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
 	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
 	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
-	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
-	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 )
 
 type OutputAutocorrectEnum string
 
 const (
-	OutputAutocorrectEnumOff OutputAutocorrectEnum = "off"
-	OutputAutocorrectEnumOn  OutputAutocorrectEnum = "on"
+	OutputAutocorrectEnumOn    OutputAutocorrectEnum = "on"
+	OutputAutocorrectEnumOff   OutputAutocorrectEnum = "off"
+	OutputAutocorrectEnumEmpty OutputAutocorrectEnum = ""
 )
 
 type OutputContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	OutputContenteditableEnumPlaintextOnly OutputContenteditableEnum = "plaintext-only"
 	OutputContenteditableEnumTrue          OutputContenteditableEnum = "true"
 	OutputContenteditableEnumFalse         OutputContenteditableEnum = "false"
+	OutputContenteditableEnumEmpty         OutputContenteditableEnum = ""
 )
 
 type OutputDirEnum string
@@ -91,13 +93,13 @@ const (
 type OutputEnterkeyhintEnum string
 
 const (
+	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
 	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
 	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
 	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
 	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
 	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
-	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
 )
 
 type OutputHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type OutputInputmodeEnum string
 
 const (
+	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
+	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
+	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
 	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
 	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
 	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
 	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
-	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
-	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
-	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
 )
 
 type OutputSpellcheckEnum string
@@ -126,13 +128,15 @@ type OutputSpellcheckEnum string
 const (
 	OutputSpellcheckEnumFalse OutputSpellcheckEnum = "false"
 	OutputSpellcheckEnumTrue  OutputSpellcheckEnum = "true"
+	OutputSpellcheckEnumEmpty OutputSpellcheckEnum = ""
 )
 
 type OutputTranslateEnum string
 
 const (
-	OutputTranslateEnumNo  OutputTranslateEnum = "no"
-	OutputTranslateEnumYes OutputTranslateEnum = "yes"
+	OutputTranslateEnumYes   OutputTranslateEnum = "yes"
+	OutputTranslateEnumNo    OutputTranslateEnum = "no"
+	OutputTranslateEnumEmpty OutputTranslateEnum = ""
 )
 
 type OutputWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type OutputWritingsuggestionsEnum string
 const (
 	OutputWritingsuggestionsEnumFalse OutputWritingsuggestionsEnum = "false"
 	OutputWritingsuggestionsEnumTrue  OutputWritingsuggestionsEnum = "true"
+	OutputWritingsuggestionsEnumEmpty OutputWritingsuggestionsEnum = ""
 )
 
 type outputAttrs map[string]any

@@ -50,27 +50,29 @@ func TrackTernary(condition bool, true htemel.Node, false htemel.Node) *TrackEle
 type TrackAutocapitalizeEnum string
 
 const (
-	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
-	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
-	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
 	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
 	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
 	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
+	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
+	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
+	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
 )
 
 type TrackAutocorrectEnum string
 
 const (
-	TrackAutocorrectEnumOff TrackAutocorrectEnum = "off"
-	TrackAutocorrectEnumOn  TrackAutocorrectEnum = "on"
+	TrackAutocorrectEnumOff   TrackAutocorrectEnum = "off"
+	TrackAutocorrectEnumOn    TrackAutocorrectEnum = "on"
+	TrackAutocorrectEnumEmpty TrackAutocorrectEnum = ""
 )
 
 type TrackContenteditableEnum string
 
 const (
+	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
 	TrackContenteditableEnumFalse         TrackContenteditableEnum = "false"
 	TrackContenteditableEnumPlaintextOnly TrackContenteditableEnum = "plaintext-only"
-	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
+	TrackContenteditableEnumEmpty         TrackContenteditableEnum = ""
 )
 
 type TrackDirEnum string
@@ -91,13 +93,13 @@ const (
 type TrackEnterkeyhintEnum string
 
 const (
-	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
-	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
 	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
 	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
 	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
 	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
+	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
+	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
 )
 
 type TrackHiddenEnum string
@@ -111,7 +113,6 @@ const (
 type TrackInputmodeEnum string
 
 const (
-	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
 	TrackInputmodeEnumDecimal TrackInputmodeEnum = "decimal"
 	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
 	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
@@ -119,6 +120,7 @@ const (
 	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
 	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
 	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
+	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
 )
 
 type TrackSpellcheckEnum string
@@ -126,20 +128,23 @@ type TrackSpellcheckEnum string
 const (
 	TrackSpellcheckEnumFalse TrackSpellcheckEnum = "false"
 	TrackSpellcheckEnumTrue  TrackSpellcheckEnum = "true"
+	TrackSpellcheckEnumEmpty TrackSpellcheckEnum = ""
 )
 
 type TrackTranslateEnum string
 
 const (
-	TrackTranslateEnumNo  TrackTranslateEnum = "no"
-	TrackTranslateEnumYes TrackTranslateEnum = "yes"
+	TrackTranslateEnumNo    TrackTranslateEnum = "no"
+	TrackTranslateEnumYes   TrackTranslateEnum = "yes"
+	TrackTranslateEnumEmpty TrackTranslateEnum = ""
 )
 
 type TrackWritingsuggestionsEnum string
 
 const (
-	TrackWritingsuggestionsEnumTrue  TrackWritingsuggestionsEnum = "true"
 	TrackWritingsuggestionsEnumFalse TrackWritingsuggestionsEnum = "false"
+	TrackWritingsuggestionsEnumTrue  TrackWritingsuggestionsEnum = "true"
+	TrackWritingsuggestionsEnumEmpty TrackWritingsuggestionsEnum = ""
 )
 
 type trackAttrs map[string]any

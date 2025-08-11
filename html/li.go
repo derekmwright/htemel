@@ -50,19 +50,20 @@ func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
 type LiAutocapitalizeEnum string
 
 const (
-	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
 	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
 	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
 	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
+	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
 )
 
 type LiAutocorrectEnum string
 
 const (
-	LiAutocorrectEnumOff LiAutocorrectEnum = "off"
-	LiAutocorrectEnumOn  LiAutocorrectEnum = "on"
+	LiAutocorrectEnumOff   LiAutocorrectEnum = "off"
+	LiAutocorrectEnumOn    LiAutocorrectEnum = "on"
+	LiAutocorrectEnumEmpty LiAutocorrectEnum = ""
 )
 
 type LiContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
 	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
+	LiContenteditableEnumEmpty         LiContenteditableEnum = ""
 )
 
 type LiDirEnum string
@@ -91,26 +93,27 @@ const (
 type LiEnterkeyhintEnum string
 
 const (
-	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
 	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
 	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
 	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
 	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
 	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
+	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
 )
 
 type LiHiddenEnum string
 
 const (
-	LiHiddenEnumUntilFound LiHiddenEnum = "until-found"
 	LiHiddenEnumHidden     LiHiddenEnum = "hidden"
+	LiHiddenEnumUntilFound LiHiddenEnum = "until-found"
 	LiHiddenEnumEmpty      LiHiddenEnum = ""
 )
 
 type LiInputmodeEnum string
 
 const (
+	LiInputmodeEnumText    LiInputmodeEnum = "text"
 	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
 	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
@@ -118,7 +121,6 @@ const (
 	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
 	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
 	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
-	LiInputmodeEnumText    LiInputmodeEnum = "text"
 )
 
 type LiSpellcheckEnum string
@@ -126,13 +128,15 @@ type LiSpellcheckEnum string
 const (
 	LiSpellcheckEnumFalse LiSpellcheckEnum = "false"
 	LiSpellcheckEnumTrue  LiSpellcheckEnum = "true"
+	LiSpellcheckEnumEmpty LiSpellcheckEnum = ""
 )
 
 type LiTranslateEnum string
 
 const (
-	LiTranslateEnumNo  LiTranslateEnum = "no"
-	LiTranslateEnumYes LiTranslateEnum = "yes"
+	LiTranslateEnumNo    LiTranslateEnum = "no"
+	LiTranslateEnumYes   LiTranslateEnum = "yes"
+	LiTranslateEnumEmpty LiTranslateEnum = ""
 )
 
 type LiWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type LiWritingsuggestionsEnum string
 const (
 	LiWritingsuggestionsEnumFalse LiWritingsuggestionsEnum = "false"
 	LiWritingsuggestionsEnumTrue  LiWritingsuggestionsEnum = "true"
+	LiWritingsuggestionsEnumEmpty LiWritingsuggestionsEnum = ""
 )
 
 type liAttrs map[string]any

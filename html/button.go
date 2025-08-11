@@ -50,27 +50,29 @@ func ButtonTernary(condition bool, true htemel.Node, false htemel.Node) *ButtonE
 type ButtonAutocapitalizeEnum string
 
 const (
-	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
 	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
 	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
 	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
+	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 )
 
 type ButtonAutocorrectEnum string
 
 const (
-	ButtonAutocorrectEnumOn  ButtonAutocorrectEnum = "on"
-	ButtonAutocorrectEnumOff ButtonAutocorrectEnum = "off"
+	ButtonAutocorrectEnumOff   ButtonAutocorrectEnum = "off"
+	ButtonAutocorrectEnumOn    ButtonAutocorrectEnum = "on"
+	ButtonAutocorrectEnumEmpty ButtonAutocorrectEnum = ""
 )
 
 type ButtonContenteditableEnum string
 
 const (
-	ButtonContenteditableEnumTrue          ButtonContenteditableEnum = "true"
 	ButtonContenteditableEnumFalse         ButtonContenteditableEnum = "false"
 	ButtonContenteditableEnumPlaintextOnly ButtonContenteditableEnum = "plaintext-only"
+	ButtonContenteditableEnumTrue          ButtonContenteditableEnum = "true"
+	ButtonContenteditableEnumEmpty         ButtonContenteditableEnum = ""
 )
 
 type ButtonDirEnum string
@@ -91,55 +93,58 @@ const (
 type ButtonEnterkeyhintEnum string
 
 const (
+	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
+	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
+	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
 	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
 	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
 	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
-	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
-	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
-	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
 )
 
 type ButtonHiddenEnum string
 
 const (
-	ButtonHiddenEnumUntilFound ButtonHiddenEnum = "until-found"
 	ButtonHiddenEnumHidden     ButtonHiddenEnum = "hidden"
+	ButtonHiddenEnumUntilFound ButtonHiddenEnum = "until-found"
 	ButtonHiddenEnumEmpty      ButtonHiddenEnum = ""
 )
 
 type ButtonInputmodeEnum string
 
 const (
-	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
-	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
-	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
-	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
 	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
 	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
 	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
 	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
+	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
+	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
+	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
+	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
 )
 
 type ButtonSpellcheckEnum string
 
 const (
-	ButtonSpellcheckEnumTrue  ButtonSpellcheckEnum = "true"
 	ButtonSpellcheckEnumFalse ButtonSpellcheckEnum = "false"
+	ButtonSpellcheckEnumTrue  ButtonSpellcheckEnum = "true"
+	ButtonSpellcheckEnumEmpty ButtonSpellcheckEnum = ""
 )
 
 type ButtonTranslateEnum string
 
 const (
-	ButtonTranslateEnumNo  ButtonTranslateEnum = "no"
-	ButtonTranslateEnumYes ButtonTranslateEnum = "yes"
+	ButtonTranslateEnumNo    ButtonTranslateEnum = "no"
+	ButtonTranslateEnumYes   ButtonTranslateEnum = "yes"
+	ButtonTranslateEnumEmpty ButtonTranslateEnum = ""
 )
 
 type ButtonWritingsuggestionsEnum string
 
 const (
-	ButtonWritingsuggestionsEnumFalse ButtonWritingsuggestionsEnum = "false"
 	ButtonWritingsuggestionsEnumTrue  ButtonWritingsuggestionsEnum = "true"
+	ButtonWritingsuggestionsEnumFalse ButtonWritingsuggestionsEnum = "false"
+	ButtonWritingsuggestionsEnumEmpty ButtonWritingsuggestionsEnum = ""
 )
 
 type buttonAttrs map[string]any

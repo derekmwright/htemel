@@ -61,8 +61,9 @@ const (
 type SlotAutocorrectEnum string
 
 const (
-	SlotAutocorrectEnumOff SlotAutocorrectEnum = "off"
-	SlotAutocorrectEnumOn  SlotAutocorrectEnum = "on"
+	SlotAutocorrectEnumOff   SlotAutocorrectEnum = "off"
+	SlotAutocorrectEnumOn    SlotAutocorrectEnum = "on"
+	SlotAutocorrectEnumEmpty SlotAutocorrectEnum = ""
 )
 
 type SlotContenteditableEnum string
@@ -71,6 +72,7 @@ const (
 	SlotContenteditableEnumFalse         SlotContenteditableEnum = "false"
 	SlotContenteditableEnumPlaintextOnly SlotContenteditableEnum = "plaintext-only"
 	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
+	SlotContenteditableEnumEmpty         SlotContenteditableEnum = ""
 )
 
 type SlotDirEnum string
@@ -84,20 +86,20 @@ const (
 type SlotDraggableEnum string
 
 const (
-	SlotDraggableEnumTrue  SlotDraggableEnum = "true"
 	SlotDraggableEnumFalse SlotDraggableEnum = "false"
+	SlotDraggableEnumTrue  SlotDraggableEnum = "true"
 )
 
 type SlotEnterkeyhintEnum string
 
 const (
+	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
+	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 	SlotEnterkeyhintEnumDone     SlotEnterkeyhintEnum = "done"
 	SlotEnterkeyhintEnumEnter    SlotEnterkeyhintEnum = "enter"
 	SlotEnterkeyhintEnumGo       SlotEnterkeyhintEnum = "go"
 	SlotEnterkeyhintEnumNext     SlotEnterkeyhintEnum = "next"
 	SlotEnterkeyhintEnumPrevious SlotEnterkeyhintEnum = "previous"
-	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
-	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 )
 
 type SlotHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type SlotInputmodeEnum string
 
 const (
+	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
+	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
 	SlotInputmodeEnumEmail   SlotInputmodeEnum = "email"
 	SlotInputmodeEnumNone    SlotInputmodeEnum = "none"
 	SlotInputmodeEnumNumeric SlotInputmodeEnum = "numeric"
 	SlotInputmodeEnumSearch  SlotInputmodeEnum = "search"
 	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
-	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
-	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 )
 
 type SlotSpellcheckEnum string
@@ -126,13 +128,15 @@ type SlotSpellcheckEnum string
 const (
 	SlotSpellcheckEnumFalse SlotSpellcheckEnum = "false"
 	SlotSpellcheckEnumTrue  SlotSpellcheckEnum = "true"
+	SlotSpellcheckEnumEmpty SlotSpellcheckEnum = ""
 )
 
 type SlotTranslateEnum string
 
 const (
-	SlotTranslateEnumNo  SlotTranslateEnum = "no"
-	SlotTranslateEnumYes SlotTranslateEnum = "yes"
+	SlotTranslateEnumNo    SlotTranslateEnum = "no"
+	SlotTranslateEnumYes   SlotTranslateEnum = "yes"
+	SlotTranslateEnumEmpty SlotTranslateEnum = ""
 )
 
 type SlotWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type SlotWritingsuggestionsEnum string
 const (
 	SlotWritingsuggestionsEnumFalse SlotWritingsuggestionsEnum = "false"
 	SlotWritingsuggestionsEnumTrue  SlotWritingsuggestionsEnum = "true"
+	SlotWritingsuggestionsEnumEmpty SlotWritingsuggestionsEnum = ""
 )
 
 type slotAttrs map[string]any

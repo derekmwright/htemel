@@ -50,27 +50,29 @@ func DfnTernary(condition bool, true htemel.Node, false htemel.Node) *DfnElement
 type DfnAutocapitalizeEnum string
 
 const (
-	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
-	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
 	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
 	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
 	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
+	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
+	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 )
 
 type DfnAutocorrectEnum string
 
 const (
-	DfnAutocorrectEnumOff DfnAutocorrectEnum = "off"
-	DfnAutocorrectEnumOn  DfnAutocorrectEnum = "on"
+	DfnAutocorrectEnumOff   DfnAutocorrectEnum = "off"
+	DfnAutocorrectEnumOn    DfnAutocorrectEnum = "on"
+	DfnAutocorrectEnumEmpty DfnAutocorrectEnum = ""
 )
 
 type DfnContenteditableEnum string
 
 const (
-	DfnContenteditableEnumTrue          DfnContenteditableEnum = "true"
 	DfnContenteditableEnumFalse         DfnContenteditableEnum = "false"
 	DfnContenteditableEnumPlaintextOnly DfnContenteditableEnum = "plaintext-only"
+	DfnContenteditableEnumTrue          DfnContenteditableEnum = "true"
+	DfnContenteditableEnumEmpty         DfnContenteditableEnum = ""
 )
 
 type DfnDirEnum string
@@ -91,13 +93,13 @@ const (
 type DfnEnterkeyhintEnum string
 
 const (
-	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
-	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
-	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
 	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
 	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
+	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
+	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
+	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 )
 
 type DfnHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type DfnInputmodeEnum string
 
 const (
-	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
-	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
-	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
 	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
 	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
 	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
 	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
 	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
+	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
+	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
+	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
 )
 
 type DfnSpellcheckEnum string
@@ -126,13 +128,15 @@ type DfnSpellcheckEnum string
 const (
 	DfnSpellcheckEnumFalse DfnSpellcheckEnum = "false"
 	DfnSpellcheckEnumTrue  DfnSpellcheckEnum = "true"
+	DfnSpellcheckEnumEmpty DfnSpellcheckEnum = ""
 )
 
 type DfnTranslateEnum string
 
 const (
-	DfnTranslateEnumNo  DfnTranslateEnum = "no"
-	DfnTranslateEnumYes DfnTranslateEnum = "yes"
+	DfnTranslateEnumNo    DfnTranslateEnum = "no"
+	DfnTranslateEnumYes   DfnTranslateEnum = "yes"
+	DfnTranslateEnumEmpty DfnTranslateEnum = ""
 )
 
 type DfnWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type DfnWritingsuggestionsEnum string
 const (
 	DfnWritingsuggestionsEnumFalse DfnWritingsuggestionsEnum = "false"
 	DfnWritingsuggestionsEnumTrue  DfnWritingsuggestionsEnum = "true"
+	DfnWritingsuggestionsEnumEmpty DfnWritingsuggestionsEnum = ""
 )
 
 type dfnAttrs map[string]any

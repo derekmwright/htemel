@@ -50,35 +50,37 @@ func CanvasTernary(condition bool, true htemel.Node, false htemel.Node) *CanvasE
 type CanvasAutocapitalizeEnum string
 
 const (
-	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
 	CanvasAutocapitalizeEnumNone       CanvasAutocapitalizeEnum = "none"
 	CanvasAutocapitalizeEnumOff        CanvasAutocapitalizeEnum = "off"
 	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
 	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
 	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
+	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
 )
 
 type CanvasAutocorrectEnum string
 
 const (
-	CanvasAutocorrectEnumOff CanvasAutocorrectEnum = "off"
-	CanvasAutocorrectEnumOn  CanvasAutocorrectEnum = "on"
+	CanvasAutocorrectEnumOff   CanvasAutocorrectEnum = "off"
+	CanvasAutocorrectEnumOn    CanvasAutocorrectEnum = "on"
+	CanvasAutocorrectEnumEmpty CanvasAutocorrectEnum = ""
 )
 
 type CanvasContenteditableEnum string
 
 const (
+	CanvasContenteditableEnumFalse         CanvasContenteditableEnum = "false"
 	CanvasContenteditableEnumPlaintextOnly CanvasContenteditableEnum = "plaintext-only"
 	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
-	CanvasContenteditableEnumFalse         CanvasContenteditableEnum = "false"
+	CanvasContenteditableEnumEmpty         CanvasContenteditableEnum = ""
 )
 
 type CanvasDirEnum string
 
 const (
+	CanvasDirEnumAuto CanvasDirEnum = "auto"
 	CanvasDirEnumLtr  CanvasDirEnum = "ltr"
 	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
-	CanvasDirEnumAuto CanvasDirEnum = "auto"
 )
 
 type CanvasDraggableEnum string
@@ -91,13 +93,13 @@ const (
 type CanvasEnterkeyhintEnum string
 
 const (
+	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
+	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
 	CanvasEnterkeyhintEnumGo       CanvasEnterkeyhintEnum = "go"
 	CanvasEnterkeyhintEnumNext     CanvasEnterkeyhintEnum = "next"
 	CanvasEnterkeyhintEnumPrevious CanvasEnterkeyhintEnum = "previous"
 	CanvasEnterkeyhintEnumSearch   CanvasEnterkeyhintEnum = "search"
 	CanvasEnterkeyhintEnumSend     CanvasEnterkeyhintEnum = "send"
-	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
-	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
 )
 
 type CanvasHiddenEnum string
@@ -111,14 +113,14 @@ const (
 type CanvasInputmodeEnum string
 
 const (
-	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
-	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
-	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
 	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
 	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
 	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
 	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
 	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
+	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
+	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
+	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
 )
 
 type CanvasSpellcheckEnum string
@@ -126,13 +128,15 @@ type CanvasSpellcheckEnum string
 const (
 	CanvasSpellcheckEnumFalse CanvasSpellcheckEnum = "false"
 	CanvasSpellcheckEnumTrue  CanvasSpellcheckEnum = "true"
+	CanvasSpellcheckEnumEmpty CanvasSpellcheckEnum = ""
 )
 
 type CanvasTranslateEnum string
 
 const (
-	CanvasTranslateEnumYes CanvasTranslateEnum = "yes"
-	CanvasTranslateEnumNo  CanvasTranslateEnum = "no"
+	CanvasTranslateEnumNo    CanvasTranslateEnum = "no"
+	CanvasTranslateEnumYes   CanvasTranslateEnum = "yes"
+	CanvasTranslateEnumEmpty CanvasTranslateEnum = ""
 )
 
 type CanvasWritingsuggestionsEnum string
@@ -140,6 +144,7 @@ type CanvasWritingsuggestionsEnum string
 const (
 	CanvasWritingsuggestionsEnumFalse CanvasWritingsuggestionsEnum = "false"
 	CanvasWritingsuggestionsEnumTrue  CanvasWritingsuggestionsEnum = "true"
+	CanvasWritingsuggestionsEnumEmpty CanvasWritingsuggestionsEnum = ""
 )
 
 type canvasAttrs map[string]any
