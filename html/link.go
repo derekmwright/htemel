@@ -85,17 +85,17 @@ const (
 type LinkAutocorrectEnum string
 
 const (
-	LinkAutocorrectEnumOn    LinkAutocorrectEnum = "on"
 	LinkAutocorrectEnumOff   LinkAutocorrectEnum = "off"
+	LinkAutocorrectEnumOn    LinkAutocorrectEnum = "on"
 	LinkAutocorrectEnumEmpty LinkAutocorrectEnum = ""
 )
 
 type LinkContenteditableEnum string
 
 const (
-	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
 	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
 	LinkContenteditableEnumPlaintextOnly LinkContenteditableEnum = "plaintext-only"
+	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
 	LinkContenteditableEnumEmpty         LinkContenteditableEnum = ""
 )
 
@@ -110,8 +110,8 @@ const (
 type LinkDraggableEnum string
 
 const (
-	LinkDraggableEnumTrue  LinkDraggableEnum = "true"
 	LinkDraggableEnumFalse LinkDraggableEnum = "false"
+	LinkDraggableEnumTrue  LinkDraggableEnum = "true"
 )
 
 type LinkEnterkeyhintEnum string
@@ -137,14 +137,14 @@ const (
 type LinkInputmodeEnum string
 
 const (
+	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
+	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
+	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
 	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
 	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
 	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
 	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
-	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
-	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
-	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
 )
 
 type LinkSpellcheckEnum string
@@ -183,6 +183,10 @@ func (e *LinkElement) Crossorigin(a LinkCrossoriginEnum) *LinkElement {
 	e.attributes["crossorigin"] = a
 
 	return e
+}
+
+func LinkCrossoriginCustom(s string) LinkCrossoriginEnum {
+	return LinkCrossoriginEnum(s)
 }
 
 func (e *LinkElement) Rel(s ...string) *LinkElement {
@@ -251,6 +255,10 @@ func (e *LinkElement) Blocking(a LinkBlockingEnum) *LinkElement {
 	return e
 }
 
+func LinkBlockingCustom(s string) LinkBlockingEnum {
+	return LinkBlockingEnum(s)
+}
+
 func (e *LinkElement) Color(s string) *LinkElement {
 	e.attributes["color"] = s
 
@@ -269,16 +277,28 @@ func (e *LinkElement) Fetchpriority(a LinkFetchpriorityEnum) *LinkElement {
 	return e
 }
 
+func LinkFetchpriorityCustom(s string) LinkFetchpriorityEnum {
+	return LinkFetchpriorityEnum(s)
+}
+
 func (e *LinkElement) Autocapitalize(a LinkAutocapitalizeEnum) *LinkElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
+func LinkAutocapitalizeCustom(s string) LinkAutocapitalizeEnum {
+	return LinkAutocapitalizeEnum(s)
+}
+
 func (e *LinkElement) Autocorrect(a LinkAutocorrectEnum) *LinkElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func LinkAutocorrectCustom(s string) LinkAutocorrectEnum {
+	return LinkAutocorrectEnum(s)
 }
 
 func (e *LinkElement) Autofocus(b bool) *LinkElement {
@@ -299,6 +319,10 @@ func (e *LinkElement) Contenteditable(a LinkContenteditableEnum) *LinkElement {
 	return e
 }
 
+func LinkContenteditableCustom(s string) LinkContenteditableEnum {
+	return LinkContenteditableEnum(s)
+}
+
 func (e *LinkElement) DataUnsafe(name string, s string) *LinkElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -317,10 +341,18 @@ func (e *LinkElement) Dir(a LinkDirEnum) *LinkElement {
 	return e
 }
 
+func LinkDirCustom(s string) LinkDirEnum {
+	return LinkDirEnum(s)
+}
+
 func (e *LinkElement) Draggable(a LinkDraggableEnum) *LinkElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func LinkDraggableCustom(s string) LinkDraggableEnum {
+	return LinkDraggableEnum(s)
 }
 
 func (e *LinkElement) Enterkeyhint(a LinkEnterkeyhintEnum) *LinkElement {
@@ -329,10 +361,18 @@ func (e *LinkElement) Enterkeyhint(a LinkEnterkeyhintEnum) *LinkElement {
 	return e
 }
 
+func LinkEnterkeyhintCustom(s string) LinkEnterkeyhintEnum {
+	return LinkEnterkeyhintEnum(s)
+}
+
 func (e *LinkElement) Hidden(a LinkHiddenEnum) *LinkElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func LinkHiddenCustom(s string) LinkHiddenEnum {
+	return LinkHiddenEnum(s)
 }
 
 func (e *LinkElement) Id(s string) *LinkElement {
@@ -351,6 +391,10 @@ func (e *LinkElement) Inputmode(a LinkInputmodeEnum) *LinkElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func LinkInputmodeCustom(s string) LinkInputmodeEnum {
+	return LinkInputmodeEnum(s)
 }
 
 func (e *LinkElement) Itemid(s string) *LinkElement {
@@ -413,6 +457,10 @@ func (e *LinkElement) Spellcheck(a LinkSpellcheckEnum) *LinkElement {
 	return e
 }
 
+func LinkSpellcheckCustom(s string) LinkSpellcheckEnum {
+	return LinkSpellcheckEnum(s)
+}
+
 func (e *LinkElement) Style(s string) *LinkElement {
 	e.attributes["style"] = s
 
@@ -437,10 +485,18 @@ func (e *LinkElement) Translate(a LinkTranslateEnum) *LinkElement {
 	return e
 }
 
+func LinkTranslateCustom(s string) LinkTranslateEnum {
+	return LinkTranslateEnum(s)
+}
+
 func (e *LinkElement) Writingsuggestions(a LinkWritingsuggestionsEnum) *LinkElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func LinkWritingsuggestionsCustom(s string) LinkWritingsuggestionsEnum {
+	return LinkWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

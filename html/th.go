@@ -60,12 +60,12 @@ func (e *ThElement) AddIndent(i int) {
 type ThAutocapitalizeEnum string
 
 const (
+	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
+	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
 	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
 	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
 	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
-	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
-	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
 )
 
 type ThAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type ThContenteditableEnum string
 
 const (
-	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumPlaintextOnly ThContenteditableEnum = "plaintext-only"
 	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
+	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumEmpty         ThContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type ThEnterkeyhintEnum string
 
 const (
+	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
+	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
+	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
 	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
 	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
-	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
-	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
-	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 )
 
 type ThHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type ThInputmodeEnum string
 
 const (
+	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
 	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
 	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
@@ -130,7 +131,6 @@ const (
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
 	ThInputmodeEnumText    ThInputmodeEnum = "text"
 	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
-	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
 )
 
 type ThSpellcheckEnum string
@@ -195,10 +195,18 @@ func (e *ThElement) Autocapitalize(a ThAutocapitalizeEnum) *ThElement {
 	return e
 }
 
+func ThAutocapitalizeCustom(s string) ThAutocapitalizeEnum {
+	return ThAutocapitalizeEnum(s)
+}
+
 func (e *ThElement) Autocorrect(a ThAutocorrectEnum) *ThElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func ThAutocorrectCustom(s string) ThAutocorrectEnum {
+	return ThAutocorrectEnum(s)
 }
 
 func (e *ThElement) Autofocus(b bool) *ThElement {
@@ -219,6 +227,10 @@ func (e *ThElement) Contenteditable(a ThContenteditableEnum) *ThElement {
 	return e
 }
 
+func ThContenteditableCustom(s string) ThContenteditableEnum {
+	return ThContenteditableEnum(s)
+}
+
 func (e *ThElement) DataUnsafe(name string, s string) *ThElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -237,10 +249,18 @@ func (e *ThElement) Dir(a ThDirEnum) *ThElement {
 	return e
 }
 
+func ThDirCustom(s string) ThDirEnum {
+	return ThDirEnum(s)
+}
+
 func (e *ThElement) Draggable(a ThDraggableEnum) *ThElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func ThDraggableCustom(s string) ThDraggableEnum {
+	return ThDraggableEnum(s)
 }
 
 func (e *ThElement) Enterkeyhint(a ThEnterkeyhintEnum) *ThElement {
@@ -249,10 +269,18 @@ func (e *ThElement) Enterkeyhint(a ThEnterkeyhintEnum) *ThElement {
 	return e
 }
 
+func ThEnterkeyhintCustom(s string) ThEnterkeyhintEnum {
+	return ThEnterkeyhintEnum(s)
+}
+
 func (e *ThElement) Hidden(a ThHiddenEnum) *ThElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func ThHiddenCustom(s string) ThHiddenEnum {
+	return ThHiddenEnum(s)
 }
 
 func (e *ThElement) Id(s string) *ThElement {
@@ -271,6 +299,10 @@ func (e *ThElement) Inputmode(a ThInputmodeEnum) *ThElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func ThInputmodeCustom(s string) ThInputmodeEnum {
+	return ThInputmodeEnum(s)
 }
 
 func (e *ThElement) Itemid(s string) *ThElement {
@@ -333,6 +365,10 @@ func (e *ThElement) Spellcheck(a ThSpellcheckEnum) *ThElement {
 	return e
 }
 
+func ThSpellcheckCustom(s string) ThSpellcheckEnum {
+	return ThSpellcheckEnum(s)
+}
+
 func (e *ThElement) Style(s string) *ThElement {
 	e.attributes["style"] = s
 
@@ -357,10 +393,18 @@ func (e *ThElement) Translate(a ThTranslateEnum) *ThElement {
 	return e
 }
 
+func ThTranslateCustom(s string) ThTranslateEnum {
+	return ThTranslateEnum(s)
+}
+
 func (e *ThElement) Writingsuggestions(a ThWritingsuggestionsEnum) *ThElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func ThWritingsuggestionsCustom(s string) ThWritingsuggestionsEnum {
+	return ThWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

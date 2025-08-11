@@ -88,9 +88,9 @@ const (
 type VarDirEnum string
 
 const (
-	VarDirEnumLtr  VarDirEnum = "ltr"
 	VarDirEnumRtl  VarDirEnum = "rtl"
 	VarDirEnumAuto VarDirEnum = "auto"
+	VarDirEnumLtr  VarDirEnum = "ltr"
 )
 
 type VarDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type VarEnterkeyhintEnum string
 
 const (
-	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
-	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
-	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
 	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
 	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
+	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
+	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
+	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 )
 
 type VarHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type VarInputmodeEnum string
 
 const (
-	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
 	VarInputmodeEnumNone    VarInputmodeEnum = "none"
 	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
@@ -131,13 +130,14 @@ const (
 	VarInputmodeEnumText    VarInputmodeEnum = "text"
 	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
 	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
+	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
 )
 
 type VarSpellcheckEnum string
 
 const (
-	VarSpellcheckEnumTrue  VarSpellcheckEnum = "true"
 	VarSpellcheckEnumFalse VarSpellcheckEnum = "false"
+	VarSpellcheckEnumTrue  VarSpellcheckEnum = "true"
 	VarSpellcheckEnumEmpty VarSpellcheckEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *VarElement) Autocapitalize(a VarAutocapitalizeEnum) *VarElement {
 	return e
 }
 
+func VarAutocapitalizeCustom(s string) VarAutocapitalizeEnum {
+	return VarAutocapitalizeEnum(s)
+}
+
 func (e *VarElement) Autocorrect(a VarAutocorrectEnum) *VarElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func VarAutocorrectCustom(s string) VarAutocorrectEnum {
+	return VarAutocorrectEnum(s)
 }
 
 func (e *VarElement) Autofocus(b bool) *VarElement {
@@ -189,6 +197,10 @@ func (e *VarElement) Contenteditable(a VarContenteditableEnum) *VarElement {
 	return e
 }
 
+func VarContenteditableCustom(s string) VarContenteditableEnum {
+	return VarContenteditableEnum(s)
+}
+
 func (e *VarElement) DataUnsafe(name string, s string) *VarElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *VarElement) Dir(a VarDirEnum) *VarElement {
 	return e
 }
 
+func VarDirCustom(s string) VarDirEnum {
+	return VarDirEnum(s)
+}
+
 func (e *VarElement) Draggable(a VarDraggableEnum) *VarElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func VarDraggableCustom(s string) VarDraggableEnum {
+	return VarDraggableEnum(s)
 }
 
 func (e *VarElement) Enterkeyhint(a VarEnterkeyhintEnum) *VarElement {
@@ -219,10 +239,18 @@ func (e *VarElement) Enterkeyhint(a VarEnterkeyhintEnum) *VarElement {
 	return e
 }
 
+func VarEnterkeyhintCustom(s string) VarEnterkeyhintEnum {
+	return VarEnterkeyhintEnum(s)
+}
+
 func (e *VarElement) Hidden(a VarHiddenEnum) *VarElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func VarHiddenCustom(s string) VarHiddenEnum {
+	return VarHiddenEnum(s)
 }
 
 func (e *VarElement) Id(s string) *VarElement {
@@ -241,6 +269,10 @@ func (e *VarElement) Inputmode(a VarInputmodeEnum) *VarElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func VarInputmodeCustom(s string) VarInputmodeEnum {
+	return VarInputmodeEnum(s)
 }
 
 func (e *VarElement) Itemid(s string) *VarElement {
@@ -303,6 +335,10 @@ func (e *VarElement) Spellcheck(a VarSpellcheckEnum) *VarElement {
 	return e
 }
 
+func VarSpellcheckCustom(s string) VarSpellcheckEnum {
+	return VarSpellcheckEnum(s)
+}
+
 func (e *VarElement) Style(s string) *VarElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *VarElement) Translate(a VarTranslateEnum) *VarElement {
 	return e
 }
 
+func VarTranslateCustom(s string) VarTranslateEnum {
+	return VarTranslateEnum(s)
+}
+
 func (e *VarElement) Writingsuggestions(a VarWritingsuggestionsEnum) *VarElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func VarWritingsuggestionsCustom(s string) VarWritingsuggestionsEnum {
+	return VarWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

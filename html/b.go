@@ -96,20 +96,20 @@ const (
 type BDraggableEnum string
 
 const (
-	BDraggableEnumFalse BDraggableEnum = "false"
 	BDraggableEnumTrue  BDraggableEnum = "true"
+	BDraggableEnumFalse BDraggableEnum = "false"
 )
 
 type BEnterkeyhintEnum string
 
 const (
-	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
 	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
 	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
 	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
+	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 )
 
 type BHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type BInputmodeEnum string
 
 const (
-	BInputmodeEnumTel     BInputmodeEnum = "tel"
-	BInputmodeEnumText    BInputmodeEnum = "text"
 	BInputmodeEnumUrl     BInputmodeEnum = "url"
 	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
 	BInputmodeEnumEmail   BInputmodeEnum = "email"
 	BInputmodeEnumNone    BInputmodeEnum = "none"
 	BInputmodeEnumNumeric BInputmodeEnum = "numeric"
 	BInputmodeEnumSearch  BInputmodeEnum = "search"
+	BInputmodeEnumTel     BInputmodeEnum = "tel"
+	BInputmodeEnumText    BInputmodeEnum = "text"
 )
 
 type BSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *BElement) Autocapitalize(a BAutocapitalizeEnum) *BElement {
 	return e
 }
 
+func BAutocapitalizeCustom(s string) BAutocapitalizeEnum {
+	return BAutocapitalizeEnum(s)
+}
+
 func (e *BElement) Autocorrect(a BAutocorrectEnum) *BElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func BAutocorrectCustom(s string) BAutocorrectEnum {
+	return BAutocorrectEnum(s)
 }
 
 func (e *BElement) Autofocus(b bool) *BElement {
@@ -189,6 +197,10 @@ func (e *BElement) Contenteditable(a BContenteditableEnum) *BElement {
 	return e
 }
 
+func BContenteditableCustom(s string) BContenteditableEnum {
+	return BContenteditableEnum(s)
+}
+
 func (e *BElement) DataUnsafe(name string, s string) *BElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *BElement) Dir(a BDirEnum) *BElement {
 	return e
 }
 
+func BDirCustom(s string) BDirEnum {
+	return BDirEnum(s)
+}
+
 func (e *BElement) Draggable(a BDraggableEnum) *BElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func BDraggableCustom(s string) BDraggableEnum {
+	return BDraggableEnum(s)
 }
 
 func (e *BElement) Enterkeyhint(a BEnterkeyhintEnum) *BElement {
@@ -219,10 +239,18 @@ func (e *BElement) Enterkeyhint(a BEnterkeyhintEnum) *BElement {
 	return e
 }
 
+func BEnterkeyhintCustom(s string) BEnterkeyhintEnum {
+	return BEnterkeyhintEnum(s)
+}
+
 func (e *BElement) Hidden(a BHiddenEnum) *BElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func BHiddenCustom(s string) BHiddenEnum {
+	return BHiddenEnum(s)
 }
 
 func (e *BElement) Id(s string) *BElement {
@@ -241,6 +269,10 @@ func (e *BElement) Inputmode(a BInputmodeEnum) *BElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func BInputmodeCustom(s string) BInputmodeEnum {
+	return BInputmodeEnum(s)
 }
 
 func (e *BElement) Itemid(s string) *BElement {
@@ -303,6 +335,10 @@ func (e *BElement) Spellcheck(a BSpellcheckEnum) *BElement {
 	return e
 }
 
+func BSpellcheckCustom(s string) BSpellcheckEnum {
+	return BSpellcheckEnum(s)
+}
+
 func (e *BElement) Style(s string) *BElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *BElement) Translate(a BTranslateEnum) *BElement {
 	return e
 }
 
+func BTranslateCustom(s string) BTranslateEnum {
+	return BTranslateEnum(s)
+}
+
 func (e *BElement) Writingsuggestions(a BWritingsuggestionsEnum) *BElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func BWritingsuggestionsCustom(s string) BWritingsuggestionsEnum {
+	return BWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

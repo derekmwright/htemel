@@ -52,12 +52,12 @@ func (e *SourceElement) AddIndent(i int) {
 type SourceAutocapitalizeEnum string
 
 const (
+	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
 	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
 	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
 	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
 	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
 	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
-	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
 )
 
 type SourceAutocorrectEnum string
@@ -71,9 +71,9 @@ const (
 type SourceContenteditableEnum string
 
 const (
+	SourceContenteditableEnumTrue          SourceContenteditableEnum = "true"
 	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
 	SourceContenteditableEnumPlaintextOnly SourceContenteditableEnum = "plaintext-only"
-	SourceContenteditableEnumTrue          SourceContenteditableEnum = "true"
 	SourceContenteditableEnumEmpty         SourceContenteditableEnum = ""
 )
 
@@ -88,20 +88,20 @@ const (
 type SourceDraggableEnum string
 
 const (
-	SourceDraggableEnumFalse SourceDraggableEnum = "false"
 	SourceDraggableEnumTrue  SourceDraggableEnum = "true"
+	SourceDraggableEnumFalse SourceDraggableEnum = "false"
 )
 
 type SourceEnterkeyhintEnum string
 
 const (
+	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
+	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
+	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
 	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
 	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
 	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
-	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
-	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
-	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
 )
 
 type SourceHiddenEnum string
@@ -115,21 +115,21 @@ const (
 type SourceInputmodeEnum string
 
 const (
-	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
-	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
-	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
 	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
 	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
 	SourceInputmodeEnumText    SourceInputmodeEnum = "text"
 	SourceInputmodeEnumUrl     SourceInputmodeEnum = "url"
 	SourceInputmodeEnumDecimal SourceInputmodeEnum = "decimal"
+	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
+	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
+	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
 )
 
 type SourceSpellcheckEnum string
 
 const (
-	SourceSpellcheckEnumFalse SourceSpellcheckEnum = "false"
 	SourceSpellcheckEnumTrue  SourceSpellcheckEnum = "true"
+	SourceSpellcheckEnumFalse SourceSpellcheckEnum = "false"
 	SourceSpellcheckEnumEmpty SourceSpellcheckEnum = ""
 )
 
@@ -199,10 +199,18 @@ func (e *SourceElement) Autocapitalize(a SourceAutocapitalizeEnum) *SourceElemen
 	return e
 }
 
+func SourceAutocapitalizeCustom(s string) SourceAutocapitalizeEnum {
+	return SourceAutocapitalizeEnum(s)
+}
+
 func (e *SourceElement) Autocorrect(a SourceAutocorrectEnum) *SourceElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func SourceAutocorrectCustom(s string) SourceAutocorrectEnum {
+	return SourceAutocorrectEnum(s)
 }
 
 func (e *SourceElement) Autofocus(b bool) *SourceElement {
@@ -223,6 +231,10 @@ func (e *SourceElement) Contenteditable(a SourceContenteditableEnum) *SourceElem
 	return e
 }
 
+func SourceContenteditableCustom(s string) SourceContenteditableEnum {
+	return SourceContenteditableEnum(s)
+}
+
 func (e *SourceElement) DataUnsafe(name string, s string) *SourceElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -241,10 +253,18 @@ func (e *SourceElement) Dir(a SourceDirEnum) *SourceElement {
 	return e
 }
 
+func SourceDirCustom(s string) SourceDirEnum {
+	return SourceDirEnum(s)
+}
+
 func (e *SourceElement) Draggable(a SourceDraggableEnum) *SourceElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func SourceDraggableCustom(s string) SourceDraggableEnum {
+	return SourceDraggableEnum(s)
 }
 
 func (e *SourceElement) Enterkeyhint(a SourceEnterkeyhintEnum) *SourceElement {
@@ -253,10 +273,18 @@ func (e *SourceElement) Enterkeyhint(a SourceEnterkeyhintEnum) *SourceElement {
 	return e
 }
 
+func SourceEnterkeyhintCustom(s string) SourceEnterkeyhintEnum {
+	return SourceEnterkeyhintEnum(s)
+}
+
 func (e *SourceElement) Hidden(a SourceHiddenEnum) *SourceElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func SourceHiddenCustom(s string) SourceHiddenEnum {
+	return SourceHiddenEnum(s)
 }
 
 func (e *SourceElement) Id(s string) *SourceElement {
@@ -275,6 +303,10 @@ func (e *SourceElement) Inputmode(a SourceInputmodeEnum) *SourceElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func SourceInputmodeCustom(s string) SourceInputmodeEnum {
+	return SourceInputmodeEnum(s)
 }
 
 func (e *SourceElement) Itemid(s string) *SourceElement {
@@ -337,6 +369,10 @@ func (e *SourceElement) Spellcheck(a SourceSpellcheckEnum) *SourceElement {
 	return e
 }
 
+func SourceSpellcheckCustom(s string) SourceSpellcheckEnum {
+	return SourceSpellcheckEnum(s)
+}
+
 func (e *SourceElement) Style(s string) *SourceElement {
 	e.attributes["style"] = s
 
@@ -361,10 +397,18 @@ func (e *SourceElement) Translate(a SourceTranslateEnum) *SourceElement {
 	return e
 }
 
+func SourceTranslateCustom(s string) SourceTranslateEnum {
+	return SourceTranslateEnum(s)
+}
+
 func (e *SourceElement) Writingsuggestions(a SourceWritingsuggestionsEnum) *SourceElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func SourceWritingsuggestionsCustom(s string) SourceWritingsuggestionsEnum {
+	return SourceWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

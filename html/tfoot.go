@@ -60,12 +60,12 @@ func (e *TfootElement) AddIndent(i int) {
 type TfootAutocapitalizeEnum string
 
 const (
+	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
 	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
 	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
 	TfootAutocapitalizeEnumNone       TfootAutocapitalizeEnum = "none"
 	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
 	TfootAutocapitalizeEnumOn         TfootAutocapitalizeEnum = "on"
-	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
 )
 
 type TfootAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type TfootContenteditableEnum string
 
 const (
+	TfootContenteditableEnumFalse         TfootContenteditableEnum = "false"
 	TfootContenteditableEnumPlaintextOnly TfootContenteditableEnum = "plaintext-only"
 	TfootContenteditableEnumTrue          TfootContenteditableEnum = "true"
-	TfootContenteditableEnumFalse         TfootContenteditableEnum = "false"
 	TfootContenteditableEnumEmpty         TfootContenteditableEnum = ""
 )
 
@@ -96,41 +96,41 @@ const (
 type TfootDraggableEnum string
 
 const (
-	TfootDraggableEnumFalse TfootDraggableEnum = "false"
 	TfootDraggableEnumTrue  TfootDraggableEnum = "true"
+	TfootDraggableEnumFalse TfootDraggableEnum = "false"
 )
 
 type TfootEnterkeyhintEnum string
 
 const (
-	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
 	TfootEnterkeyhintEnumPrevious TfootEnterkeyhintEnum = "previous"
 	TfootEnterkeyhintEnumSearch   TfootEnterkeyhintEnum = "search"
 	TfootEnterkeyhintEnumSend     TfootEnterkeyhintEnum = "send"
 	TfootEnterkeyhintEnumDone     TfootEnterkeyhintEnum = "done"
 	TfootEnterkeyhintEnumEnter    TfootEnterkeyhintEnum = "enter"
 	TfootEnterkeyhintEnumGo       TfootEnterkeyhintEnum = "go"
+	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
 )
 
 type TfootHiddenEnum string
 
 const (
-	TfootHiddenEnumHidden     TfootHiddenEnum = "hidden"
 	TfootHiddenEnumUntilFound TfootHiddenEnum = "until-found"
+	TfootHiddenEnumHidden     TfootHiddenEnum = "hidden"
 	TfootHiddenEnumEmpty      TfootHiddenEnum = ""
 )
 
 type TfootInputmodeEnum string
 
 const (
-	TfootInputmodeEnumEmail   TfootInputmodeEnum = "email"
-	TfootInputmodeEnumNone    TfootInputmodeEnum = "none"
-	TfootInputmodeEnumNumeric TfootInputmodeEnum = "numeric"
-	TfootInputmodeEnumSearch  TfootInputmodeEnum = "search"
 	TfootInputmodeEnumTel     TfootInputmodeEnum = "tel"
 	TfootInputmodeEnumText    TfootInputmodeEnum = "text"
 	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
 	TfootInputmodeEnumDecimal TfootInputmodeEnum = "decimal"
+	TfootInputmodeEnumEmail   TfootInputmodeEnum = "email"
+	TfootInputmodeEnumNone    TfootInputmodeEnum = "none"
+	TfootInputmodeEnumNumeric TfootInputmodeEnum = "numeric"
+	TfootInputmodeEnumSearch  TfootInputmodeEnum = "search"
 )
 
 type TfootSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *TfootElement) Autocapitalize(a TfootAutocapitalizeEnum) *TfootElement {
 	return e
 }
 
+func TfootAutocapitalizeCustom(s string) TfootAutocapitalizeEnum {
+	return TfootAutocapitalizeEnum(s)
+}
+
 func (e *TfootElement) Autocorrect(a TfootAutocorrectEnum) *TfootElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func TfootAutocorrectCustom(s string) TfootAutocorrectEnum {
+	return TfootAutocorrectEnum(s)
 }
 
 func (e *TfootElement) Autofocus(b bool) *TfootElement {
@@ -189,6 +197,10 @@ func (e *TfootElement) Contenteditable(a TfootContenteditableEnum) *TfootElement
 	return e
 }
 
+func TfootContenteditableCustom(s string) TfootContenteditableEnum {
+	return TfootContenteditableEnum(s)
+}
+
 func (e *TfootElement) DataUnsafe(name string, s string) *TfootElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *TfootElement) Dir(a TfootDirEnum) *TfootElement {
 	return e
 }
 
+func TfootDirCustom(s string) TfootDirEnum {
+	return TfootDirEnum(s)
+}
+
 func (e *TfootElement) Draggable(a TfootDraggableEnum) *TfootElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func TfootDraggableCustom(s string) TfootDraggableEnum {
+	return TfootDraggableEnum(s)
 }
 
 func (e *TfootElement) Enterkeyhint(a TfootEnterkeyhintEnum) *TfootElement {
@@ -219,10 +239,18 @@ func (e *TfootElement) Enterkeyhint(a TfootEnterkeyhintEnum) *TfootElement {
 	return e
 }
 
+func TfootEnterkeyhintCustom(s string) TfootEnterkeyhintEnum {
+	return TfootEnterkeyhintEnum(s)
+}
+
 func (e *TfootElement) Hidden(a TfootHiddenEnum) *TfootElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func TfootHiddenCustom(s string) TfootHiddenEnum {
+	return TfootHiddenEnum(s)
 }
 
 func (e *TfootElement) Id(s string) *TfootElement {
@@ -241,6 +269,10 @@ func (e *TfootElement) Inputmode(a TfootInputmodeEnum) *TfootElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func TfootInputmodeCustom(s string) TfootInputmodeEnum {
+	return TfootInputmodeEnum(s)
 }
 
 func (e *TfootElement) Itemid(s string) *TfootElement {
@@ -303,6 +335,10 @@ func (e *TfootElement) Spellcheck(a TfootSpellcheckEnum) *TfootElement {
 	return e
 }
 
+func TfootSpellcheckCustom(s string) TfootSpellcheckEnum {
+	return TfootSpellcheckEnum(s)
+}
+
 func (e *TfootElement) Style(s string) *TfootElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *TfootElement) Translate(a TfootTranslateEnum) *TfootElement {
 	return e
 }
 
+func TfootTranslateCustom(s string) TfootTranslateEnum {
+	return TfootTranslateEnum(s)
+}
+
 func (e *TfootElement) Writingsuggestions(a TfootWritingsuggestionsEnum) *TfootElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func TfootWritingsuggestionsCustom(s string) TfootWritingsuggestionsEnum {
+	return TfootWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

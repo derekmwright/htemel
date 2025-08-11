@@ -79,9 +79,9 @@ const (
 type PreContenteditableEnum string
 
 const (
+	PreContenteditableEnumFalse         PreContenteditableEnum = "false"
 	PreContenteditableEnumPlaintextOnly PreContenteditableEnum = "plaintext-only"
 	PreContenteditableEnumTrue          PreContenteditableEnum = "true"
-	PreContenteditableEnumFalse         PreContenteditableEnum = "false"
 	PreContenteditableEnumEmpty         PreContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type PreEnterkeyhintEnum string
 
 const (
+	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
+	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
 	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
 	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
 	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
 	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
-	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
-	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 )
 
 type PreHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type PreInputmodeEnum string
 
 const (
+	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
+	PreInputmodeEnumEmail   PreInputmodeEnum = "email"
 	PreInputmodeEnumNone    PreInputmodeEnum = "none"
 	PreInputmodeEnumNumeric PreInputmodeEnum = "numeric"
 	PreInputmodeEnumSearch  PreInputmodeEnum = "search"
 	PreInputmodeEnumTel     PreInputmodeEnum = "tel"
 	PreInputmodeEnumText    PreInputmodeEnum = "text"
 	PreInputmodeEnumUrl     PreInputmodeEnum = "url"
-	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
-	PreInputmodeEnumEmail   PreInputmodeEnum = "email"
 )
 
 type PreSpellcheckEnum string
 
 const (
-	PreSpellcheckEnumTrue  PreSpellcheckEnum = "true"
 	PreSpellcheckEnumFalse PreSpellcheckEnum = "false"
+	PreSpellcheckEnumTrue  PreSpellcheckEnum = "true"
 	PreSpellcheckEnumEmpty PreSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type PreWritingsuggestionsEnum string
 
 const (
-	PreWritingsuggestionsEnumTrue  PreWritingsuggestionsEnum = "true"
 	PreWritingsuggestionsEnumFalse PreWritingsuggestionsEnum = "false"
+	PreWritingsuggestionsEnumTrue  PreWritingsuggestionsEnum = "true"
 	PreWritingsuggestionsEnumEmpty PreWritingsuggestionsEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *PreElement) Autocapitalize(a PreAutocapitalizeEnum) *PreElement {
 	return e
 }
 
+func PreAutocapitalizeCustom(s string) PreAutocapitalizeEnum {
+	return PreAutocapitalizeEnum(s)
+}
+
 func (e *PreElement) Autocorrect(a PreAutocorrectEnum) *PreElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func PreAutocorrectCustom(s string) PreAutocorrectEnum {
+	return PreAutocorrectEnum(s)
 }
 
 func (e *PreElement) Autofocus(b bool) *PreElement {
@@ -189,6 +197,10 @@ func (e *PreElement) Contenteditable(a PreContenteditableEnum) *PreElement {
 	return e
 }
 
+func PreContenteditableCustom(s string) PreContenteditableEnum {
+	return PreContenteditableEnum(s)
+}
+
 func (e *PreElement) DataUnsafe(name string, s string) *PreElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *PreElement) Dir(a PreDirEnum) *PreElement {
 	return e
 }
 
+func PreDirCustom(s string) PreDirEnum {
+	return PreDirEnum(s)
+}
+
 func (e *PreElement) Draggable(a PreDraggableEnum) *PreElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func PreDraggableCustom(s string) PreDraggableEnum {
+	return PreDraggableEnum(s)
 }
 
 func (e *PreElement) Enterkeyhint(a PreEnterkeyhintEnum) *PreElement {
@@ -219,10 +239,18 @@ func (e *PreElement) Enterkeyhint(a PreEnterkeyhintEnum) *PreElement {
 	return e
 }
 
+func PreEnterkeyhintCustom(s string) PreEnterkeyhintEnum {
+	return PreEnterkeyhintEnum(s)
+}
+
 func (e *PreElement) Hidden(a PreHiddenEnum) *PreElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func PreHiddenCustom(s string) PreHiddenEnum {
+	return PreHiddenEnum(s)
 }
 
 func (e *PreElement) Id(s string) *PreElement {
@@ -241,6 +269,10 @@ func (e *PreElement) Inputmode(a PreInputmodeEnum) *PreElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func PreInputmodeCustom(s string) PreInputmodeEnum {
+	return PreInputmodeEnum(s)
 }
 
 func (e *PreElement) Itemid(s string) *PreElement {
@@ -303,6 +335,10 @@ func (e *PreElement) Spellcheck(a PreSpellcheckEnum) *PreElement {
 	return e
 }
 
+func PreSpellcheckCustom(s string) PreSpellcheckEnum {
+	return PreSpellcheckEnum(s)
+}
+
 func (e *PreElement) Style(s string) *PreElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *PreElement) Translate(a PreTranslateEnum) *PreElement {
 	return e
 }
 
+func PreTranslateCustom(s string) PreTranslateEnum {
+	return PreTranslateEnum(s)
+}
+
 func (e *PreElement) Writingsuggestions(a PreWritingsuggestionsEnum) *PreElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func PreWritingsuggestionsCustom(s string) PreWritingsuggestionsEnum {
+	return PreWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -103,27 +103,26 @@ const (
 type SearchEnterkeyhintEnum string
 
 const (
+	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
+	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
 	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
 	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
 	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
 	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
-	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
-	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
 )
 
 type SearchHiddenEnum string
 
 const (
-	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
 	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
+	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
 	SearchHiddenEnumEmpty      SearchHiddenEnum = ""
 )
 
 type SearchInputmodeEnum string
 
 const (
-	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
 	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
 	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
@@ -131,13 +130,14 @@ const (
 	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
 	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
 	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
+	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 )
 
 type SearchSpellcheckEnum string
 
 const (
-	SearchSpellcheckEnumFalse SearchSpellcheckEnum = "false"
 	SearchSpellcheckEnumTrue  SearchSpellcheckEnum = "true"
+	SearchSpellcheckEnumFalse SearchSpellcheckEnum = "false"
 	SearchSpellcheckEnumEmpty SearchSpellcheckEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *SearchElement) Autocapitalize(a SearchAutocapitalizeEnum) *SearchElemen
 	return e
 }
 
+func SearchAutocapitalizeCustom(s string) SearchAutocapitalizeEnum {
+	return SearchAutocapitalizeEnum(s)
+}
+
 func (e *SearchElement) Autocorrect(a SearchAutocorrectEnum) *SearchElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func SearchAutocorrectCustom(s string) SearchAutocorrectEnum {
+	return SearchAutocorrectEnum(s)
 }
 
 func (e *SearchElement) Autofocus(b bool) *SearchElement {
@@ -189,6 +197,10 @@ func (e *SearchElement) Contenteditable(a SearchContenteditableEnum) *SearchElem
 	return e
 }
 
+func SearchContenteditableCustom(s string) SearchContenteditableEnum {
+	return SearchContenteditableEnum(s)
+}
+
 func (e *SearchElement) DataUnsafe(name string, s string) *SearchElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *SearchElement) Dir(a SearchDirEnum) *SearchElement {
 	return e
 }
 
+func SearchDirCustom(s string) SearchDirEnum {
+	return SearchDirEnum(s)
+}
+
 func (e *SearchElement) Draggable(a SearchDraggableEnum) *SearchElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func SearchDraggableCustom(s string) SearchDraggableEnum {
+	return SearchDraggableEnum(s)
 }
 
 func (e *SearchElement) Enterkeyhint(a SearchEnterkeyhintEnum) *SearchElement {
@@ -219,10 +239,18 @@ func (e *SearchElement) Enterkeyhint(a SearchEnterkeyhintEnum) *SearchElement {
 	return e
 }
 
+func SearchEnterkeyhintCustom(s string) SearchEnterkeyhintEnum {
+	return SearchEnterkeyhintEnum(s)
+}
+
 func (e *SearchElement) Hidden(a SearchHiddenEnum) *SearchElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func SearchHiddenCustom(s string) SearchHiddenEnum {
+	return SearchHiddenEnum(s)
 }
 
 func (e *SearchElement) Id(s string) *SearchElement {
@@ -241,6 +269,10 @@ func (e *SearchElement) Inputmode(a SearchInputmodeEnum) *SearchElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func SearchInputmodeCustom(s string) SearchInputmodeEnum {
+	return SearchInputmodeEnum(s)
 }
 
 func (e *SearchElement) Itemid(s string) *SearchElement {
@@ -303,6 +335,10 @@ func (e *SearchElement) Spellcheck(a SearchSpellcheckEnum) *SearchElement {
 	return e
 }
 
+func SearchSpellcheckCustom(s string) SearchSpellcheckEnum {
+	return SearchSpellcheckEnum(s)
+}
+
 func (e *SearchElement) Style(s string) *SearchElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *SearchElement) Translate(a SearchTranslateEnum) *SearchElement {
 	return e
 }
 
+func SearchTranslateCustom(s string) SearchTranslateEnum {
+	return SearchTranslateEnum(s)
+}
+
 func (e *SearchElement) Writingsuggestions(a SearchWritingsuggestionsEnum) *SearchElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func SearchWritingsuggestionsCustom(s string) SearchWritingsuggestionsEnum {
+	return SearchWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

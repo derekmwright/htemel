@@ -60,12 +60,12 @@ func (e *MarkElement) AddIndent(i int) {
 type MarkAutocapitalizeEnum string
 
 const (
+	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
 	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
 	MarkAutocapitalizeEnumNone       MarkAutocapitalizeEnum = "none"
 	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
 	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
 	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
-	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
 )
 
 type MarkAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type MarkContenteditableEnum string
 
 const (
+	MarkContenteditableEnumFalse         MarkContenteditableEnum = "false"
 	MarkContenteditableEnumPlaintextOnly MarkContenteditableEnum = "plaintext-only"
 	MarkContenteditableEnumTrue          MarkContenteditableEnum = "true"
-	MarkContenteditableEnumFalse         MarkContenteditableEnum = "false"
 	MarkContenteditableEnumEmpty         MarkContenteditableEnum = ""
 )
 
@@ -103,26 +103,27 @@ const (
 type MarkEnterkeyhintEnum string
 
 const (
-	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
-	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
 	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
 	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
 	MarkEnterkeyhintEnumGo       MarkEnterkeyhintEnum = "go"
 	MarkEnterkeyhintEnumNext     MarkEnterkeyhintEnum = "next"
 	MarkEnterkeyhintEnumPrevious MarkEnterkeyhintEnum = "previous"
+	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
+	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
 )
 
 type MarkHiddenEnum string
 
 const (
-	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
 	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
+	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
 	MarkHiddenEnumEmpty      MarkHiddenEnum = ""
 )
 
 type MarkInputmodeEnum string
 
 const (
+	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
 	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
 	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
 	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
@@ -130,14 +131,13 @@ const (
 	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
 	MarkInputmodeEnumNone    MarkInputmodeEnum = "none"
 	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
-	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
 )
 
 type MarkSpellcheckEnum string
 
 const (
-	MarkSpellcheckEnumTrue  MarkSpellcheckEnum = "true"
 	MarkSpellcheckEnumFalse MarkSpellcheckEnum = "false"
+	MarkSpellcheckEnumTrue  MarkSpellcheckEnum = "true"
 	MarkSpellcheckEnumEmpty MarkSpellcheckEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *MarkElement) Autocapitalize(a MarkAutocapitalizeEnum) *MarkElement {
 	return e
 }
 
+func MarkAutocapitalizeCustom(s string) MarkAutocapitalizeEnum {
+	return MarkAutocapitalizeEnum(s)
+}
+
 func (e *MarkElement) Autocorrect(a MarkAutocorrectEnum) *MarkElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func MarkAutocorrectCustom(s string) MarkAutocorrectEnum {
+	return MarkAutocorrectEnum(s)
 }
 
 func (e *MarkElement) Autofocus(b bool) *MarkElement {
@@ -189,6 +197,10 @@ func (e *MarkElement) Contenteditable(a MarkContenteditableEnum) *MarkElement {
 	return e
 }
 
+func MarkContenteditableCustom(s string) MarkContenteditableEnum {
+	return MarkContenteditableEnum(s)
+}
+
 func (e *MarkElement) DataUnsafe(name string, s string) *MarkElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *MarkElement) Dir(a MarkDirEnum) *MarkElement {
 	return e
 }
 
+func MarkDirCustom(s string) MarkDirEnum {
+	return MarkDirEnum(s)
+}
+
 func (e *MarkElement) Draggable(a MarkDraggableEnum) *MarkElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func MarkDraggableCustom(s string) MarkDraggableEnum {
+	return MarkDraggableEnum(s)
 }
 
 func (e *MarkElement) Enterkeyhint(a MarkEnterkeyhintEnum) *MarkElement {
@@ -219,10 +239,18 @@ func (e *MarkElement) Enterkeyhint(a MarkEnterkeyhintEnum) *MarkElement {
 	return e
 }
 
+func MarkEnterkeyhintCustom(s string) MarkEnterkeyhintEnum {
+	return MarkEnterkeyhintEnum(s)
+}
+
 func (e *MarkElement) Hidden(a MarkHiddenEnum) *MarkElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func MarkHiddenCustom(s string) MarkHiddenEnum {
+	return MarkHiddenEnum(s)
 }
 
 func (e *MarkElement) Id(s string) *MarkElement {
@@ -241,6 +269,10 @@ func (e *MarkElement) Inputmode(a MarkInputmodeEnum) *MarkElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func MarkInputmodeCustom(s string) MarkInputmodeEnum {
+	return MarkInputmodeEnum(s)
 }
 
 func (e *MarkElement) Itemid(s string) *MarkElement {
@@ -303,6 +335,10 @@ func (e *MarkElement) Spellcheck(a MarkSpellcheckEnum) *MarkElement {
 	return e
 }
 
+func MarkSpellcheckCustom(s string) MarkSpellcheckEnum {
+	return MarkSpellcheckEnum(s)
+}
+
 func (e *MarkElement) Style(s string) *MarkElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *MarkElement) Translate(a MarkTranslateEnum) *MarkElement {
 	return e
 }
 
+func MarkTranslateCustom(s string) MarkTranslateEnum {
+	return MarkTranslateEnum(s)
+}
+
 func (e *MarkElement) Writingsuggestions(a MarkWritingsuggestionsEnum) *MarkElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func MarkWritingsuggestionsCustom(s string) MarkWritingsuggestionsEnum {
+	return MarkWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -60,12 +60,12 @@ func (e *SummaryElement) AddIndent(i int) {
 type SummaryAutocapitalizeEnum string
 
 const (
+	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
 	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
 	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
 	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
-	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 )
 
 type SummaryAutocorrectEnum string
@@ -96,34 +96,33 @@ const (
 type SummaryDraggableEnum string
 
 const (
-	SummaryDraggableEnumTrue  SummaryDraggableEnum = "true"
 	SummaryDraggableEnumFalse SummaryDraggableEnum = "false"
+	SummaryDraggableEnumTrue  SummaryDraggableEnum = "true"
 )
 
 type SummaryEnterkeyhintEnum string
 
 const (
+	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
+	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
 	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
 	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
 	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
 	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
 	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
-	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
-	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
 )
 
 type SummaryHiddenEnum string
 
 const (
-	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
 	SummaryHiddenEnumUntilFound SummaryHiddenEnum = "until-found"
+	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
 	SummaryHiddenEnumEmpty      SummaryHiddenEnum = ""
 )
 
 type SummaryInputmodeEnum string
 
 const (
-	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
 	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
 	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
@@ -131,6 +130,7 @@ const (
 	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
 	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
 	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
+	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
 )
 
 type SummarySpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *SummaryElement) Autocapitalize(a SummaryAutocapitalizeEnum) *SummaryEle
 	return e
 }
 
+func SummaryAutocapitalizeCustom(s string) SummaryAutocapitalizeEnum {
+	return SummaryAutocapitalizeEnum(s)
+}
+
 func (e *SummaryElement) Autocorrect(a SummaryAutocorrectEnum) *SummaryElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func SummaryAutocorrectCustom(s string) SummaryAutocorrectEnum {
+	return SummaryAutocorrectEnum(s)
 }
 
 func (e *SummaryElement) Autofocus(b bool) *SummaryElement {
@@ -189,6 +197,10 @@ func (e *SummaryElement) Contenteditable(a SummaryContenteditableEnum) *SummaryE
 	return e
 }
 
+func SummaryContenteditableCustom(s string) SummaryContenteditableEnum {
+	return SummaryContenteditableEnum(s)
+}
+
 func (e *SummaryElement) DataUnsafe(name string, s string) *SummaryElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *SummaryElement) Dir(a SummaryDirEnum) *SummaryElement {
 	return e
 }
 
+func SummaryDirCustom(s string) SummaryDirEnum {
+	return SummaryDirEnum(s)
+}
+
 func (e *SummaryElement) Draggable(a SummaryDraggableEnum) *SummaryElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func SummaryDraggableCustom(s string) SummaryDraggableEnum {
+	return SummaryDraggableEnum(s)
 }
 
 func (e *SummaryElement) Enterkeyhint(a SummaryEnterkeyhintEnum) *SummaryElement {
@@ -219,10 +239,18 @@ func (e *SummaryElement) Enterkeyhint(a SummaryEnterkeyhintEnum) *SummaryElement
 	return e
 }
 
+func SummaryEnterkeyhintCustom(s string) SummaryEnterkeyhintEnum {
+	return SummaryEnterkeyhintEnum(s)
+}
+
 func (e *SummaryElement) Hidden(a SummaryHiddenEnum) *SummaryElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func SummaryHiddenCustom(s string) SummaryHiddenEnum {
+	return SummaryHiddenEnum(s)
 }
 
 func (e *SummaryElement) Id(s string) *SummaryElement {
@@ -241,6 +269,10 @@ func (e *SummaryElement) Inputmode(a SummaryInputmodeEnum) *SummaryElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func SummaryInputmodeCustom(s string) SummaryInputmodeEnum {
+	return SummaryInputmodeEnum(s)
 }
 
 func (e *SummaryElement) Itemid(s string) *SummaryElement {
@@ -303,6 +335,10 @@ func (e *SummaryElement) Spellcheck(a SummarySpellcheckEnum) *SummaryElement {
 	return e
 }
 
+func SummarySpellcheckCustom(s string) SummarySpellcheckEnum {
+	return SummarySpellcheckEnum(s)
+}
+
 func (e *SummaryElement) Style(s string) *SummaryElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *SummaryElement) Translate(a SummaryTranslateEnum) *SummaryElement {
 	return e
 }
 
+func SummaryTranslateCustom(s string) SummaryTranslateEnum {
+	return SummaryTranslateEnum(s)
+}
+
 func (e *SummaryElement) Writingsuggestions(a SummaryWritingsuggestionsEnum) *SummaryElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func SummaryWritingsuggestionsCustom(s string) SummaryWritingsuggestionsEnum {
+	return SummaryWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

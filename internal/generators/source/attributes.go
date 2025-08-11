@@ -57,11 +57,14 @@ func (e *` + titleCase(e.Tag) + `Element) ` + pascalCase(a.Name) + `(b bool) *` 
 				typeName := titleCase(e.Tag) + pascalCase(a.Name) + "Enum"
 
 				addTypes.WriteString("\ntype " + typeName + " string\n")
+
 				addTypes.WriteString("\nconst (\n")
 				for allowed := range a.Allowed {
 					fixed := strings.ReplaceAll(titleCase(allowed), "-", "")
 					addTypes.WriteString("\t" + typeName + fixed + " " + typeName + " = \"" + allowed + "\"\n")
 				}
+
+				// Generate function to allow empty attribute value
 				if a.AllowEmpty {
 					addTypes.WriteString("\t" + typeName + "Empty " + typeName + " = \"\"\n")
 				}
@@ -74,6 +77,13 @@ func (e *` + titleCase(e.Tag) + `Element) ` + pascalCase(a.Name) + `(a ` + typeN
 	return e
 }
 `)
+				// Generate func to return a custom attribute value
+				buf.WriteString(`
+func  ` + titleCase(e.Tag) + pascalCase(a.Name) + `Custom(s string) ` + typeName + ` {
+	return ` + typeName + `(s)
+}
+`)
+
 			case *spec.AttributeTypeSST:
 				buf.WriteString(`
 func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(s ...string) *` + titleCase(e.Tag) + `Element {

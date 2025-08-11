@@ -47,6 +47,7 @@
             "use-credentials": {}
           },
           "allow_empty": true,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -106,6 +107,7 @@
             "render": {}
           },
           "allow_empty": false,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -127,6 +129,7 @@
             "low": {}
           },
           "allow_empty": false,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         }
       ],
@@ -154,6 +157,7 @@
             "x-ua-compatible": {}
           },
           "allow_empty": false,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -687,6 +691,7 @@
             "use-credentials": {}
           },
           "allow_empty": true,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -723,6 +728,7 @@
             "sync": {}
           },
           "allow_empty": false,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -733,6 +739,7 @@
             "lazy": {}
           },
           "allow_empty": false,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -744,6 +751,7 @@
             "low": {}
           },
           "allow_empty": false,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         }
       ],
@@ -806,6 +814,7 @@
             "lazy": {}
           },
           "allow_empty": false,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         }
       ]
@@ -890,6 +899,7 @@
             "use-credentials": {}
           },
           "allow_empty": true,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -906,6 +916,7 @@
             "none": {}
           },
           "allow_empty": true,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -962,6 +973,7 @@
             "use-credentials": {}
           },
           "allow_empty": true,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -973,6 +985,7 @@
             "none": {}
           },
           "allow_empty": true,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -1017,6 +1030,7 @@
             "subtitles": {}
           },
           "allow_empty": false,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -1077,6 +1091,7 @@
             "rect": {}
           },
           "allow_empty": false,
+          "allow_custom": false,
           "attribute_type": "AttributeTypeEnum"
         },
         {
@@ -1213,20 +1228,408 @@
     },
     {
       "tag": "form",
-      "description": "The form element represents a hyperlink that can be manipulated through a collection of form-associated elements, some of which can represent editable values that can be submitted to a server for processing."
+      "description": "The form element represents a hyperlink that can be manipulated through a collection of form-associated elements, some of which can represent editable values that can be submitted to a server for processing.",
+      "attributes": [
+        {
+          "name": "accept-charset",
+          "description": "Character encodings to use for form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "action",
+          "description": "URL to use for form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "autocomplete",
+          "description": "Default setting for autofill feature for controls in the form",
+          "allowed": {
+            "off": {},
+            "on": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "enctype",
+          "description": "Entry list encoding type to use for form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "method",
+          "description": "Variant to use for form submission",
+          "allowed": {
+            "dialog": {},
+            "get": {},
+            "post": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "name",
+          "description": "Name of form to use in the document.forms API",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "novalidate",
+          "description": "Bypass form control validation for form submission",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "target",
+          "description": "Navigable for form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "rel",
+          "description": "The rel attribute on form elements controls what kinds of links the elements create.",
+          "attribute_type": "AttributeTypeSST"
+        }
+      ]
     },
     {
       "tag": "label",
-      "description": "The label element represents a caption in a user interface. The caption can be associated with a specific form control, known as the label element's labeled control, either using the for attribute, or by putting the form control inside the label element itself."
+      "description": "The label element represents a caption in a user interface. The caption can be associated with a specific form control, known as the label element's labeled control, either using the for attribute, or by putting the form control inside the label element itself.",
+      "attributes": [
+        {
+          "name": "for",
+          "description": "Associate the label with form control",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "input",
       "description": "The input element represents a typed data field, usually with a form control to allow the user to edit the data.",
+      "attributes": [
+        {
+          "name": "accept",
+          "description": "Hint for expected file type in file upload controls",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "alpha",
+          "description": "Allow the color's alpha component to be set",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "alt",
+          "description": "Replacement text for use when images are not available",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "autocomplete",
+          "description": "Hint for form autofill feature",
+          "attribute_type": "AttributeTypeSST"
+        },
+        {
+          "name": "checked",
+          "description": "Hint for form autofill feature",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "colorspace",
+          "description": "The color space of the serialized color",
+          "allowed": {
+            "display-p3": {},
+            "limited-srgb": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "dirname",
+          "description": "Name of form control to use for sending the element's directionality in form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "disabled",
+          "description": "Whether the form control is disabled",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "form",
+          "description": "Associates the element with a form element",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "formaction",
+          "description": "URL to use for form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "formenctype",
+          "description": "Entry list encoding type to use for form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "formmethod",
+          "description": "Variant to use for form submission",
+          "allowed": {
+            "dialog": {},
+            "get": {},
+            "post": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "formnovalidate",
+          "description": "Bypass form control validation for form submission",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "formtarget",
+          "description": "Navigable for form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "height",
+          "description": "Vertical dimension",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "list",
+          "description": "List of autocomplete options",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "max",
+          "description": "Maximum value",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "maxlength",
+          "description": "Maximum length of value",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "min",
+          "description": "Minimum value",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "minlength",
+          "description": "Minimum length of value",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "multiple",
+          "description": "Whether to allow multiple values",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "name",
+          "description": "Name of the element to use for form submission and in the form.elements API",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "pattern",
+          "description": "Pattern to be matched by the form control's value",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "placeholder",
+          "description": "User-visible label to be placed within the form control",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "popovertarget",
+          "description": "Targets a popover element to toggle, show, or hide",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "popovertargetaction",
+          "description": "Indicates whether a targeted popover element is to be toggled, shown, or hidden",
+          "allowed": {
+            "hide": {},
+            "show": {},
+            "toggle": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "readonly",
+          "description": "Whether to allow the value to be edited by the user",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "required",
+          "description": "Whether the control is required for form submission",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "size",
+          "description": "Size of the control",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "src",
+          "description": "Address of the resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "step",
+          "description": "Granularity to be matched by the form control's value",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "type",
+          "description": "Type of form control",
+          "allowed": {
+            "button": {},
+            "checkbox": {},
+            "color": {},
+            "date": {},
+            "datetime-local": {},
+            "email": {},
+            "file": {},
+            "hidden": {},
+            "image": {},
+            "month": {},
+            "number": {},
+            "password": {},
+            "radio": {},
+            "range": {},
+            "reset": {},
+            "search": {},
+            "submit": {},
+            "tel": {},
+            "text": {},
+            "time": {},
+            "url": {},
+            "week": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "value",
+          "description": "Value of the form control",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "width",
+          "description": "Horizontal dimension",
+          "attribute_type": "AttributeTypeNumber"
+        }
+      ],
       "void": true
     },
     {
       "tag": "button",
-      "description": "The button element represents a button labeled by its contents."
+      "description": "The button element represents a button labeled by its contents.",
+      "attributes": [
+        {
+          "name": "command",
+          "description": "Indicates to the targeted element which action to take.",
+          "allowed": {
+            "close": {},
+            "hide-popover": {},
+            "request-close": {},
+            "show-modal": {},
+            "show-popover": {},
+            "toggle-popover": {}
+          },
+          "allow_empty": false,
+          "allow_custom": true,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "commandfor",
+          "description": "Targets another element to be invoked.",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "disabled",
+          "description": "Whether the form control is disabled",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "form",
+          "description": "Associates the element with a form element",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "formaction",
+          "description": "URL to use for form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "formenctype",
+          "description": "Entry list encoding type to use for form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "formmethod",
+          "description": "Variant to use for form submission",
+          "allowed": {
+            "dialog": {},
+            "get": {},
+            "post": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "formnovalidate",
+          "description": "Bypass form control validation for form submission",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "formtarget",
+          "description": "Navigable for form submission",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "name",
+          "description": "Name of the element to use for form submission and in the form.elements API",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "popovertarget",
+          "description": "Targets a popover element to toggle, show, or hide",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "popovertargetaction",
+          "description": "Indicates whether a targeted popover element is to be toggled, shown, or hidden",
+          "allowed": {
+            "hide": {},
+            "show": {},
+            "toggle": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "type",
+          "description": "Type of button",
+          "allowed": {
+            "button": {},
+            "reset": {},
+            "submit": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "value",
+          "description": "Value to be used for form submission",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "select",
@@ -1343,6 +1746,7 @@
         "words": {}
       },
       "allow_empty": false,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -1353,6 +1757,7 @@
         "on": {}
       },
       "allow_empty": true,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -1373,6 +1778,7 @@
         "true": {}
       },
       "allow_empty": true,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -1388,6 +1794,7 @@
         "rtl": {}
       },
       "allow_empty": false,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -1398,6 +1805,7 @@
         "true": {}
       },
       "allow_empty": false,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -1413,6 +1821,7 @@
         "send": {}
       },
       "allow_empty": false,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -1423,6 +1832,7 @@
         "until-found": {}
       },
       "allow_empty": true,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -1449,6 +1859,7 @@
         "url": {}
       },
       "allow_empty": false,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -1504,6 +1915,7 @@
         "true": {}
       },
       "allow_empty": true,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -1529,6 +1941,7 @@
         "yes": {}
       },
       "allow_empty": true,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     },
     {
@@ -1539,6 +1952,7 @@
         "true": {}
       },
       "allow_empty": true,
+      "allow_custom": false,
       "attribute_type": "AttributeTypeEnum"
     }
   ]

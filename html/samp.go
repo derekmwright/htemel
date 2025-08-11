@@ -60,12 +60,12 @@ func (e *SampElement) AddIndent(i int) {
 type SampAutocapitalizeEnum string
 
 const (
-	SampAutocapitalizeEnumOn         SampAutocapitalizeEnum = "on"
-	SampAutocapitalizeEnumSentences  SampAutocapitalizeEnum = "sentences"
-	SampAutocapitalizeEnumWords      SampAutocapitalizeEnum = "words"
 	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
 	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
 	SampAutocapitalizeEnumOff        SampAutocapitalizeEnum = "off"
+	SampAutocapitalizeEnumOn         SampAutocapitalizeEnum = "on"
+	SampAutocapitalizeEnumSentences  SampAutocapitalizeEnum = "sentences"
+	SampAutocapitalizeEnumWords      SampAutocapitalizeEnum = "words"
 )
 
 type SampAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type SampDraggableEnum string
 
 const (
-	SampDraggableEnumTrue  SampDraggableEnum = "true"
 	SampDraggableEnumFalse SampDraggableEnum = "false"
+	SampDraggableEnumTrue  SampDraggableEnum = "true"
 )
 
 type SampEnterkeyhintEnum string
 
 const (
-	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
 	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
 	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
 	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
 	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
 	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
+	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 )
 
 type SampHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SampInputmodeEnum string
 
 const (
-	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
-	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
-	SampInputmodeEnumText    SampInputmodeEnum = "text"
-	SampInputmodeEnumUrl     SampInputmodeEnum = "url"
 	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
 	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
 	SampInputmodeEnumNone    SampInputmodeEnum = "none"
 	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
+	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
+	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
+	SampInputmodeEnumText    SampInputmodeEnum = "text"
+	SampInputmodeEnumUrl     SampInputmodeEnum = "url"
 )
 
 type SampSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type SampWritingsuggestionsEnum string
 
 const (
-	SampWritingsuggestionsEnumTrue  SampWritingsuggestionsEnum = "true"
 	SampWritingsuggestionsEnumFalse SampWritingsuggestionsEnum = "false"
+	SampWritingsuggestionsEnumTrue  SampWritingsuggestionsEnum = "true"
 	SampWritingsuggestionsEnumEmpty SampWritingsuggestionsEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *SampElement) Autocapitalize(a SampAutocapitalizeEnum) *SampElement {
 	return e
 }
 
+func SampAutocapitalizeCustom(s string) SampAutocapitalizeEnum {
+	return SampAutocapitalizeEnum(s)
+}
+
 func (e *SampElement) Autocorrect(a SampAutocorrectEnum) *SampElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func SampAutocorrectCustom(s string) SampAutocorrectEnum {
+	return SampAutocorrectEnum(s)
 }
 
 func (e *SampElement) Autofocus(b bool) *SampElement {
@@ -189,6 +197,10 @@ func (e *SampElement) Contenteditable(a SampContenteditableEnum) *SampElement {
 	return e
 }
 
+func SampContenteditableCustom(s string) SampContenteditableEnum {
+	return SampContenteditableEnum(s)
+}
+
 func (e *SampElement) DataUnsafe(name string, s string) *SampElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *SampElement) Dir(a SampDirEnum) *SampElement {
 	return e
 }
 
+func SampDirCustom(s string) SampDirEnum {
+	return SampDirEnum(s)
+}
+
 func (e *SampElement) Draggable(a SampDraggableEnum) *SampElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func SampDraggableCustom(s string) SampDraggableEnum {
+	return SampDraggableEnum(s)
 }
 
 func (e *SampElement) Enterkeyhint(a SampEnterkeyhintEnum) *SampElement {
@@ -219,10 +239,18 @@ func (e *SampElement) Enterkeyhint(a SampEnterkeyhintEnum) *SampElement {
 	return e
 }
 
+func SampEnterkeyhintCustom(s string) SampEnterkeyhintEnum {
+	return SampEnterkeyhintEnum(s)
+}
+
 func (e *SampElement) Hidden(a SampHiddenEnum) *SampElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func SampHiddenCustom(s string) SampHiddenEnum {
+	return SampHiddenEnum(s)
 }
 
 func (e *SampElement) Id(s string) *SampElement {
@@ -241,6 +269,10 @@ func (e *SampElement) Inputmode(a SampInputmodeEnum) *SampElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func SampInputmodeCustom(s string) SampInputmodeEnum {
+	return SampInputmodeEnum(s)
 }
 
 func (e *SampElement) Itemid(s string) *SampElement {
@@ -303,6 +335,10 @@ func (e *SampElement) Spellcheck(a SampSpellcheckEnum) *SampElement {
 	return e
 }
 
+func SampSpellcheckCustom(s string) SampSpellcheckEnum {
+	return SampSpellcheckEnum(s)
+}
+
 func (e *SampElement) Style(s string) *SampElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *SampElement) Translate(a SampTranslateEnum) *SampElement {
 	return e
 }
 
+func SampTranslateCustom(s string) SampTranslateEnum {
+	return SampTranslateEnum(s)
+}
+
 func (e *SampElement) Writingsuggestions(a SampWritingsuggestionsEnum) *SampElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func SampWritingsuggestionsCustom(s string) SampWritingsuggestionsEnum {
+	return SampWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

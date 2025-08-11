@@ -79,18 +79,18 @@ const (
 type SmallContenteditableEnum string
 
 const (
-	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
 	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
 	SmallContenteditableEnumPlaintextOnly SmallContenteditableEnum = "plaintext-only"
+	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
 	SmallContenteditableEnumEmpty         SmallContenteditableEnum = ""
 )
 
 type SmallDirEnum string
 
 const (
-	SmallDirEnumAuto SmallDirEnum = "auto"
 	SmallDirEnumLtr  SmallDirEnum = "ltr"
 	SmallDirEnumRtl  SmallDirEnum = "rtl"
+	SmallDirEnumAuto SmallDirEnum = "auto"
 )
 
 type SmallDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type SmallEnterkeyhintEnum string
 
 const (
+	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
 	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
 	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
 	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
 	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
-	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
 )
 
 type SmallHiddenEnum string
@@ -165,10 +165,18 @@ func (e *SmallElement) Autocapitalize(a SmallAutocapitalizeEnum) *SmallElement {
 	return e
 }
 
+func SmallAutocapitalizeCustom(s string) SmallAutocapitalizeEnum {
+	return SmallAutocapitalizeEnum(s)
+}
+
 func (e *SmallElement) Autocorrect(a SmallAutocorrectEnum) *SmallElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func SmallAutocorrectCustom(s string) SmallAutocorrectEnum {
+	return SmallAutocorrectEnum(s)
 }
 
 func (e *SmallElement) Autofocus(b bool) *SmallElement {
@@ -189,6 +197,10 @@ func (e *SmallElement) Contenteditable(a SmallContenteditableEnum) *SmallElement
 	return e
 }
 
+func SmallContenteditableCustom(s string) SmallContenteditableEnum {
+	return SmallContenteditableEnum(s)
+}
+
 func (e *SmallElement) DataUnsafe(name string, s string) *SmallElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *SmallElement) Dir(a SmallDirEnum) *SmallElement {
 	return e
 }
 
+func SmallDirCustom(s string) SmallDirEnum {
+	return SmallDirEnum(s)
+}
+
 func (e *SmallElement) Draggable(a SmallDraggableEnum) *SmallElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func SmallDraggableCustom(s string) SmallDraggableEnum {
+	return SmallDraggableEnum(s)
 }
 
 func (e *SmallElement) Enterkeyhint(a SmallEnterkeyhintEnum) *SmallElement {
@@ -219,10 +239,18 @@ func (e *SmallElement) Enterkeyhint(a SmallEnterkeyhintEnum) *SmallElement {
 	return e
 }
 
+func SmallEnterkeyhintCustom(s string) SmallEnterkeyhintEnum {
+	return SmallEnterkeyhintEnum(s)
+}
+
 func (e *SmallElement) Hidden(a SmallHiddenEnum) *SmallElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func SmallHiddenCustom(s string) SmallHiddenEnum {
+	return SmallHiddenEnum(s)
 }
 
 func (e *SmallElement) Id(s string) *SmallElement {
@@ -241,6 +269,10 @@ func (e *SmallElement) Inputmode(a SmallInputmodeEnum) *SmallElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func SmallInputmodeCustom(s string) SmallInputmodeEnum {
+	return SmallInputmodeEnum(s)
 }
 
 func (e *SmallElement) Itemid(s string) *SmallElement {
@@ -303,6 +335,10 @@ func (e *SmallElement) Spellcheck(a SmallSpellcheckEnum) *SmallElement {
 	return e
 }
 
+func SmallSpellcheckCustom(s string) SmallSpellcheckEnum {
+	return SmallSpellcheckEnum(s)
+}
+
 func (e *SmallElement) Style(s string) *SmallElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *SmallElement) Translate(a SmallTranslateEnum) *SmallElement {
 	return e
 }
 
+func SmallTranslateCustom(s string) SmallTranslateEnum {
+	return SmallTranslateEnum(s)
+}
+
 func (e *SmallElement) Writingsuggestions(a SmallWritingsuggestionsEnum) *SmallElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func SmallWritingsuggestionsCustom(s string) SmallWritingsuggestionsEnum {
+	return SmallWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

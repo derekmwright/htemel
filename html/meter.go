@@ -123,6 +123,7 @@ const (
 type MeterInputmodeEnum string
 
 const (
+	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
 	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
 	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 	MeterInputmodeEnumDecimal MeterInputmodeEnum = "decimal"
@@ -130,7 +131,6 @@ const (
 	MeterInputmodeEnumNone    MeterInputmodeEnum = "none"
 	MeterInputmodeEnumNumeric MeterInputmodeEnum = "numeric"
 	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
-	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
 )
 
 type MeterSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *MeterElement) Autocapitalize(a MeterAutocapitalizeEnum) *MeterElement {
 	return e
 }
 
+func MeterAutocapitalizeCustom(s string) MeterAutocapitalizeEnum {
+	return MeterAutocapitalizeEnum(s)
+}
+
 func (e *MeterElement) Autocorrect(a MeterAutocorrectEnum) *MeterElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func MeterAutocorrectCustom(s string) MeterAutocorrectEnum {
+	return MeterAutocorrectEnum(s)
 }
 
 func (e *MeterElement) Autofocus(b bool) *MeterElement {
@@ -189,6 +197,10 @@ func (e *MeterElement) Contenteditable(a MeterContenteditableEnum) *MeterElement
 	return e
 }
 
+func MeterContenteditableCustom(s string) MeterContenteditableEnum {
+	return MeterContenteditableEnum(s)
+}
+
 func (e *MeterElement) DataUnsafe(name string, s string) *MeterElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *MeterElement) Dir(a MeterDirEnum) *MeterElement {
 	return e
 }
 
+func MeterDirCustom(s string) MeterDirEnum {
+	return MeterDirEnum(s)
+}
+
 func (e *MeterElement) Draggable(a MeterDraggableEnum) *MeterElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func MeterDraggableCustom(s string) MeterDraggableEnum {
+	return MeterDraggableEnum(s)
 }
 
 func (e *MeterElement) Enterkeyhint(a MeterEnterkeyhintEnum) *MeterElement {
@@ -219,10 +239,18 @@ func (e *MeterElement) Enterkeyhint(a MeterEnterkeyhintEnum) *MeterElement {
 	return e
 }
 
+func MeterEnterkeyhintCustom(s string) MeterEnterkeyhintEnum {
+	return MeterEnterkeyhintEnum(s)
+}
+
 func (e *MeterElement) Hidden(a MeterHiddenEnum) *MeterElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func MeterHiddenCustom(s string) MeterHiddenEnum {
+	return MeterHiddenEnum(s)
 }
 
 func (e *MeterElement) Id(s string) *MeterElement {
@@ -241,6 +269,10 @@ func (e *MeterElement) Inputmode(a MeterInputmodeEnum) *MeterElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func MeterInputmodeCustom(s string) MeterInputmodeEnum {
+	return MeterInputmodeEnum(s)
 }
 
 func (e *MeterElement) Itemid(s string) *MeterElement {
@@ -303,6 +335,10 @@ func (e *MeterElement) Spellcheck(a MeterSpellcheckEnum) *MeterElement {
 	return e
 }
 
+func MeterSpellcheckCustom(s string) MeterSpellcheckEnum {
+	return MeterSpellcheckEnum(s)
+}
+
 func (e *MeterElement) Style(s string) *MeterElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *MeterElement) Translate(a MeterTranslateEnum) *MeterElement {
 	return e
 }
 
+func MeterTranslateCustom(s string) MeterTranslateEnum {
+	return MeterTranslateEnum(s)
+}
+
 func (e *MeterElement) Writingsuggestions(a MeterWritingsuggestionsEnum) *MeterElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func MeterWritingsuggestionsCustom(s string) MeterWritingsuggestionsEnum {
+	return MeterWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -60,12 +60,12 @@ func (e *LegendElement) AddIndent(i int) {
 type LegendAutocapitalizeEnum string
 
 const (
-	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
-	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
-	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
 	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
 	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
+	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
+	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
+	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
 )
 
 type LegendAutocorrectEnum string
@@ -79,37 +79,37 @@ const (
 type LegendContenteditableEnum string
 
 const (
-	LegendContenteditableEnumFalse         LegendContenteditableEnum = "false"
 	LegendContenteditableEnumPlaintextOnly LegendContenteditableEnum = "plaintext-only"
 	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
+	LegendContenteditableEnumFalse         LegendContenteditableEnum = "false"
 	LegendContenteditableEnumEmpty         LegendContenteditableEnum = ""
 )
 
 type LegendDirEnum string
 
 const (
+	LegendDirEnumAuto LegendDirEnum = "auto"
 	LegendDirEnumLtr  LegendDirEnum = "ltr"
 	LegendDirEnumRtl  LegendDirEnum = "rtl"
-	LegendDirEnumAuto LegendDirEnum = "auto"
 )
 
 type LegendDraggableEnum string
 
 const (
-	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
 	LegendDraggableEnumFalse LegendDraggableEnum = "false"
+	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
 )
 
 type LegendEnterkeyhintEnum string
 
 const (
+	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
+	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
+	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
 	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
 	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
 	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
 	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
-	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
-	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
-	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
 )
 
 type LegendHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type LegendInputmodeEnum string
 
 const (
-	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
-	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
 	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
 	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
 	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
 	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
 	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
+	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
+	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 )
 
 type LegendSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type LegendTranslateEnum string
 
 const (
-	LegendTranslateEnumYes   LegendTranslateEnum = "yes"
 	LegendTranslateEnumNo    LegendTranslateEnum = "no"
+	LegendTranslateEnumYes   LegendTranslateEnum = "yes"
 	LegendTranslateEnumEmpty LegendTranslateEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *LegendElement) Autocapitalize(a LegendAutocapitalizeEnum) *LegendElemen
 	return e
 }
 
+func LegendAutocapitalizeCustom(s string) LegendAutocapitalizeEnum {
+	return LegendAutocapitalizeEnum(s)
+}
+
 func (e *LegendElement) Autocorrect(a LegendAutocorrectEnum) *LegendElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func LegendAutocorrectCustom(s string) LegendAutocorrectEnum {
+	return LegendAutocorrectEnum(s)
 }
 
 func (e *LegendElement) Autofocus(b bool) *LegendElement {
@@ -189,6 +197,10 @@ func (e *LegendElement) Contenteditable(a LegendContenteditableEnum) *LegendElem
 	return e
 }
 
+func LegendContenteditableCustom(s string) LegendContenteditableEnum {
+	return LegendContenteditableEnum(s)
+}
+
 func (e *LegendElement) DataUnsafe(name string, s string) *LegendElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *LegendElement) Dir(a LegendDirEnum) *LegendElement {
 	return e
 }
 
+func LegendDirCustom(s string) LegendDirEnum {
+	return LegendDirEnum(s)
+}
+
 func (e *LegendElement) Draggable(a LegendDraggableEnum) *LegendElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func LegendDraggableCustom(s string) LegendDraggableEnum {
+	return LegendDraggableEnum(s)
 }
 
 func (e *LegendElement) Enterkeyhint(a LegendEnterkeyhintEnum) *LegendElement {
@@ -219,10 +239,18 @@ func (e *LegendElement) Enterkeyhint(a LegendEnterkeyhintEnum) *LegendElement {
 	return e
 }
 
+func LegendEnterkeyhintCustom(s string) LegendEnterkeyhintEnum {
+	return LegendEnterkeyhintEnum(s)
+}
+
 func (e *LegendElement) Hidden(a LegendHiddenEnum) *LegendElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func LegendHiddenCustom(s string) LegendHiddenEnum {
+	return LegendHiddenEnum(s)
 }
 
 func (e *LegendElement) Id(s string) *LegendElement {
@@ -241,6 +269,10 @@ func (e *LegendElement) Inputmode(a LegendInputmodeEnum) *LegendElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func LegendInputmodeCustom(s string) LegendInputmodeEnum {
+	return LegendInputmodeEnum(s)
 }
 
 func (e *LegendElement) Itemid(s string) *LegendElement {
@@ -303,6 +335,10 @@ func (e *LegendElement) Spellcheck(a LegendSpellcheckEnum) *LegendElement {
 	return e
 }
 
+func LegendSpellcheckCustom(s string) LegendSpellcheckEnum {
+	return LegendSpellcheckEnum(s)
+}
+
 func (e *LegendElement) Style(s string) *LegendElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *LegendElement) Translate(a LegendTranslateEnum) *LegendElement {
 	return e
 }
 
+func LegendTranslateCustom(s string) LegendTranslateEnum {
+	return LegendTranslateEnum(s)
+}
+
 func (e *LegendElement) Writingsuggestions(a LegendWritingsuggestionsEnum) *LegendElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func LegendWritingsuggestionsCustom(s string) LegendWritingsuggestionsEnum {
+	return LegendWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

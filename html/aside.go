@@ -60,12 +60,12 @@ func (e *AsideElement) AddIndent(i int) {
 type AsideAutocapitalizeEnum string
 
 const (
-	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
 	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
 	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
 	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
 	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
+	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 )
 
 type AsideAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type AsideEnterkeyhintEnum string
 
 const (
-	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
-	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
 	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
 	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
 	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
 	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
+	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
+	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 )
 
 type AsideHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type AsideInputmodeEnum string
 
 const (
+	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
 	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
 	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
 	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
@@ -130,7 +131,6 @@ const (
 	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
 	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
 	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
-	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
 )
 
 type AsideSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *AsideElement) Autocapitalize(a AsideAutocapitalizeEnum) *AsideElement {
 	return e
 }
 
+func AsideAutocapitalizeCustom(s string) AsideAutocapitalizeEnum {
+	return AsideAutocapitalizeEnum(s)
+}
+
 func (e *AsideElement) Autocorrect(a AsideAutocorrectEnum) *AsideElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func AsideAutocorrectCustom(s string) AsideAutocorrectEnum {
+	return AsideAutocorrectEnum(s)
 }
 
 func (e *AsideElement) Autofocus(b bool) *AsideElement {
@@ -189,6 +197,10 @@ func (e *AsideElement) Contenteditable(a AsideContenteditableEnum) *AsideElement
 	return e
 }
 
+func AsideContenteditableCustom(s string) AsideContenteditableEnum {
+	return AsideContenteditableEnum(s)
+}
+
 func (e *AsideElement) DataUnsafe(name string, s string) *AsideElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *AsideElement) Dir(a AsideDirEnum) *AsideElement {
 	return e
 }
 
+func AsideDirCustom(s string) AsideDirEnum {
+	return AsideDirEnum(s)
+}
+
 func (e *AsideElement) Draggable(a AsideDraggableEnum) *AsideElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func AsideDraggableCustom(s string) AsideDraggableEnum {
+	return AsideDraggableEnum(s)
 }
 
 func (e *AsideElement) Enterkeyhint(a AsideEnterkeyhintEnum) *AsideElement {
@@ -219,10 +239,18 @@ func (e *AsideElement) Enterkeyhint(a AsideEnterkeyhintEnum) *AsideElement {
 	return e
 }
 
+func AsideEnterkeyhintCustom(s string) AsideEnterkeyhintEnum {
+	return AsideEnterkeyhintEnum(s)
+}
+
 func (e *AsideElement) Hidden(a AsideHiddenEnum) *AsideElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func AsideHiddenCustom(s string) AsideHiddenEnum {
+	return AsideHiddenEnum(s)
 }
 
 func (e *AsideElement) Id(s string) *AsideElement {
@@ -241,6 +269,10 @@ func (e *AsideElement) Inputmode(a AsideInputmodeEnum) *AsideElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func AsideInputmodeCustom(s string) AsideInputmodeEnum {
+	return AsideInputmodeEnum(s)
 }
 
 func (e *AsideElement) Itemid(s string) *AsideElement {
@@ -303,6 +335,10 @@ func (e *AsideElement) Spellcheck(a AsideSpellcheckEnum) *AsideElement {
 	return e
 }
 
+func AsideSpellcheckCustom(s string) AsideSpellcheckEnum {
+	return AsideSpellcheckEnum(s)
+}
+
 func (e *AsideElement) Style(s string) *AsideElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *AsideElement) Translate(a AsideTranslateEnum) *AsideElement {
 	return e
 }
 
+func AsideTranslateCustom(s string) AsideTranslateEnum {
+	return AsideTranslateEnum(s)
+}
+
 func (e *AsideElement) Writingsuggestions(a AsideWritingsuggestionsEnum) *AsideElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func AsideWritingsuggestionsCustom(s string) AsideWritingsuggestionsEnum {
+	return AsideWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

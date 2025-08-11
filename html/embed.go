@@ -52,12 +52,12 @@ func (e *EmbedElement) AddIndent(i int) {
 type EmbedAutocapitalizeEnum string
 
 const (
+	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
 	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
 	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
 	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
-	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 )
 
 type EmbedAutocorrectEnum string
@@ -95,13 +95,13 @@ const (
 type EmbedEnterkeyhintEnum string
 
 const (
-	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
-	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
-	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
 	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
 	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
 	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
+	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
+	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
+	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
 )
 
 type EmbedHiddenEnum string
@@ -115,29 +115,29 @@ const (
 type EmbedInputmodeEnum string
 
 const (
-	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
-	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
-	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
 	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
 	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
+	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
+	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
+	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 )
 
 type EmbedSpellcheckEnum string
 
 const (
-	EmbedSpellcheckEnumTrue  EmbedSpellcheckEnum = "true"
 	EmbedSpellcheckEnumFalse EmbedSpellcheckEnum = "false"
+	EmbedSpellcheckEnumTrue  EmbedSpellcheckEnum = "true"
 	EmbedSpellcheckEnumEmpty EmbedSpellcheckEnum = ""
 )
 
 type EmbedTranslateEnum string
 
 const (
-	EmbedTranslateEnumYes   EmbedTranslateEnum = "yes"
 	EmbedTranslateEnumNo    EmbedTranslateEnum = "no"
+	EmbedTranslateEnumYes   EmbedTranslateEnum = "yes"
 	EmbedTranslateEnumEmpty EmbedTranslateEnum = ""
 )
 
@@ -181,10 +181,18 @@ func (e *EmbedElement) Autocapitalize(a EmbedAutocapitalizeEnum) *EmbedElement {
 	return e
 }
 
+func EmbedAutocapitalizeCustom(s string) EmbedAutocapitalizeEnum {
+	return EmbedAutocapitalizeEnum(s)
+}
+
 func (e *EmbedElement) Autocorrect(a EmbedAutocorrectEnum) *EmbedElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func EmbedAutocorrectCustom(s string) EmbedAutocorrectEnum {
+	return EmbedAutocorrectEnum(s)
 }
 
 func (e *EmbedElement) Autofocus(b bool) *EmbedElement {
@@ -205,6 +213,10 @@ func (e *EmbedElement) Contenteditable(a EmbedContenteditableEnum) *EmbedElement
 	return e
 }
 
+func EmbedContenteditableCustom(s string) EmbedContenteditableEnum {
+	return EmbedContenteditableEnum(s)
+}
+
 func (e *EmbedElement) DataUnsafe(name string, s string) *EmbedElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -223,10 +235,18 @@ func (e *EmbedElement) Dir(a EmbedDirEnum) *EmbedElement {
 	return e
 }
 
+func EmbedDirCustom(s string) EmbedDirEnum {
+	return EmbedDirEnum(s)
+}
+
 func (e *EmbedElement) Draggable(a EmbedDraggableEnum) *EmbedElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func EmbedDraggableCustom(s string) EmbedDraggableEnum {
+	return EmbedDraggableEnum(s)
 }
 
 func (e *EmbedElement) Enterkeyhint(a EmbedEnterkeyhintEnum) *EmbedElement {
@@ -235,10 +255,18 @@ func (e *EmbedElement) Enterkeyhint(a EmbedEnterkeyhintEnum) *EmbedElement {
 	return e
 }
 
+func EmbedEnterkeyhintCustom(s string) EmbedEnterkeyhintEnum {
+	return EmbedEnterkeyhintEnum(s)
+}
+
 func (e *EmbedElement) Hidden(a EmbedHiddenEnum) *EmbedElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func EmbedHiddenCustom(s string) EmbedHiddenEnum {
+	return EmbedHiddenEnum(s)
 }
 
 func (e *EmbedElement) Id(s string) *EmbedElement {
@@ -257,6 +285,10 @@ func (e *EmbedElement) Inputmode(a EmbedInputmodeEnum) *EmbedElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func EmbedInputmodeCustom(s string) EmbedInputmodeEnum {
+	return EmbedInputmodeEnum(s)
 }
 
 func (e *EmbedElement) Itemid(s string) *EmbedElement {
@@ -319,6 +351,10 @@ func (e *EmbedElement) Spellcheck(a EmbedSpellcheckEnum) *EmbedElement {
 	return e
 }
 
+func EmbedSpellcheckCustom(s string) EmbedSpellcheckEnum {
+	return EmbedSpellcheckEnum(s)
+}
+
 func (e *EmbedElement) Style(s string) *EmbedElement {
 	e.attributes["style"] = s
 
@@ -343,10 +379,18 @@ func (e *EmbedElement) Translate(a EmbedTranslateEnum) *EmbedElement {
 	return e
 }
 
+func EmbedTranslateCustom(s string) EmbedTranslateEnum {
+	return EmbedTranslateEnum(s)
+}
+
 func (e *EmbedElement) Writingsuggestions(a EmbedWritingsuggestionsEnum) *EmbedElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func EmbedWritingsuggestionsCustom(s string) EmbedWritingsuggestionsEnum {
+	return EmbedWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

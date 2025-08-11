@@ -60,12 +60,12 @@ func (e *MainElement) AddIndent(i int) {
 type MainAutocapitalizeEnum string
 
 const (
+	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
 	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
 	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
 	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
-	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 )
 
 type MainAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type MainContenteditableEnum string
 
 const (
+	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
 	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
-	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumEmpty         MainContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type MainEnterkeyhintEnum string
 
 const (
+	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
+	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
+	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
 	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
 	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
 	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
-	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
-	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
-	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
 )
 
 type MainHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type MainInputmodeEnum string
 
 const (
-	MainInputmodeEnumText    MainInputmodeEnum = "text"
 	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
 	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
@@ -131,29 +130,30 @@ const (
 	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
 	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
+	MainInputmodeEnumText    MainInputmodeEnum = "text"
 )
 
 type MainSpellcheckEnum string
 
 const (
-	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
 	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
+	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
 	MainSpellcheckEnumEmpty MainSpellcheckEnum = ""
 )
 
 type MainTranslateEnum string
 
 const (
-	MainTranslateEnumYes   MainTranslateEnum = "yes"
 	MainTranslateEnumNo    MainTranslateEnum = "no"
+	MainTranslateEnumYes   MainTranslateEnum = "yes"
 	MainTranslateEnumEmpty MainTranslateEnum = ""
 )
 
 type MainWritingsuggestionsEnum string
 
 const (
-	MainWritingsuggestionsEnumFalse MainWritingsuggestionsEnum = "false"
 	MainWritingsuggestionsEnumTrue  MainWritingsuggestionsEnum = "true"
+	MainWritingsuggestionsEnumFalse MainWritingsuggestionsEnum = "false"
 	MainWritingsuggestionsEnumEmpty MainWritingsuggestionsEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *MainElement) Autocapitalize(a MainAutocapitalizeEnum) *MainElement {
 	return e
 }
 
+func MainAutocapitalizeCustom(s string) MainAutocapitalizeEnum {
+	return MainAutocapitalizeEnum(s)
+}
+
 func (e *MainElement) Autocorrect(a MainAutocorrectEnum) *MainElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func MainAutocorrectCustom(s string) MainAutocorrectEnum {
+	return MainAutocorrectEnum(s)
 }
 
 func (e *MainElement) Autofocus(b bool) *MainElement {
@@ -189,6 +197,10 @@ func (e *MainElement) Contenteditable(a MainContenteditableEnum) *MainElement {
 	return e
 }
 
+func MainContenteditableCustom(s string) MainContenteditableEnum {
+	return MainContenteditableEnum(s)
+}
+
 func (e *MainElement) DataUnsafe(name string, s string) *MainElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *MainElement) Dir(a MainDirEnum) *MainElement {
 	return e
 }
 
+func MainDirCustom(s string) MainDirEnum {
+	return MainDirEnum(s)
+}
+
 func (e *MainElement) Draggable(a MainDraggableEnum) *MainElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func MainDraggableCustom(s string) MainDraggableEnum {
+	return MainDraggableEnum(s)
 }
 
 func (e *MainElement) Enterkeyhint(a MainEnterkeyhintEnum) *MainElement {
@@ -219,10 +239,18 @@ func (e *MainElement) Enterkeyhint(a MainEnterkeyhintEnum) *MainElement {
 	return e
 }
 
+func MainEnterkeyhintCustom(s string) MainEnterkeyhintEnum {
+	return MainEnterkeyhintEnum(s)
+}
+
 func (e *MainElement) Hidden(a MainHiddenEnum) *MainElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func MainHiddenCustom(s string) MainHiddenEnum {
+	return MainHiddenEnum(s)
 }
 
 func (e *MainElement) Id(s string) *MainElement {
@@ -241,6 +269,10 @@ func (e *MainElement) Inputmode(a MainInputmodeEnum) *MainElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func MainInputmodeCustom(s string) MainInputmodeEnum {
+	return MainInputmodeEnum(s)
 }
 
 func (e *MainElement) Itemid(s string) *MainElement {
@@ -303,6 +335,10 @@ func (e *MainElement) Spellcheck(a MainSpellcheckEnum) *MainElement {
 	return e
 }
 
+func MainSpellcheckCustom(s string) MainSpellcheckEnum {
+	return MainSpellcheckEnum(s)
+}
+
 func (e *MainElement) Style(s string) *MainElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *MainElement) Translate(a MainTranslateEnum) *MainElement {
 	return e
 }
 
+func MainTranslateCustom(s string) MainTranslateEnum {
+	return MainTranslateEnum(s)
+}
+
 func (e *MainElement) Writingsuggestions(a MainWritingsuggestionsEnum) *MainElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func MainWritingsuggestionsCustom(s string) MainWritingsuggestionsEnum {
+	return MainWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

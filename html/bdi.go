@@ -60,12 +60,12 @@ func (e *BdiElement) AddIndent(i int) {
 type BdiAutocapitalizeEnum string
 
 const (
+	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
 	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 	BdiAutocapitalizeEnumNone       BdiAutocapitalizeEnum = "none"
 	BdiAutocapitalizeEnumOff        BdiAutocapitalizeEnum = "off"
 	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
 	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
-	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
 )
 
 type BdiAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type BdiContenteditableEnum string
 
 const (
+	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
 	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
 	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
-	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
 	BdiContenteditableEnumEmpty         BdiContenteditableEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type BdiEnterkeyhintEnum string
 
 const (
-	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
-	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
 	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
 	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 	BdiEnterkeyhintEnumNext     BdiEnterkeyhintEnum = "next"
 	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
 	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
+	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
+	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
 )
 
 type BdiHiddenEnum string
 
 const (
-	BdiHiddenEnumUntilFound BdiHiddenEnum = "until-found"
 	BdiHiddenEnumHidden     BdiHiddenEnum = "hidden"
+	BdiHiddenEnumUntilFound BdiHiddenEnum = "until-found"
 	BdiHiddenEnumEmpty      BdiHiddenEnum = ""
 )
 
 type BdiInputmodeEnum string
 
 const (
-	BdiInputmodeEnumUrl     BdiInputmodeEnum = "url"
-	BdiInputmodeEnumDecimal BdiInputmodeEnum = "decimal"
-	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
 	BdiInputmodeEnumNone    BdiInputmodeEnum = "none"
 	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
 	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
 	BdiInputmodeEnumTel     BdiInputmodeEnum = "tel"
 	BdiInputmodeEnumText    BdiInputmodeEnum = "text"
+	BdiInputmodeEnumUrl     BdiInputmodeEnum = "url"
+	BdiInputmodeEnumDecimal BdiInputmodeEnum = "decimal"
+	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
 )
 
 type BdiSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *BdiElement) Autocapitalize(a BdiAutocapitalizeEnum) *BdiElement {
 	return e
 }
 
+func BdiAutocapitalizeCustom(s string) BdiAutocapitalizeEnum {
+	return BdiAutocapitalizeEnum(s)
+}
+
 func (e *BdiElement) Autocorrect(a BdiAutocorrectEnum) *BdiElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func BdiAutocorrectCustom(s string) BdiAutocorrectEnum {
+	return BdiAutocorrectEnum(s)
 }
 
 func (e *BdiElement) Autofocus(b bool) *BdiElement {
@@ -189,6 +197,10 @@ func (e *BdiElement) Contenteditable(a BdiContenteditableEnum) *BdiElement {
 	return e
 }
 
+func BdiContenteditableCustom(s string) BdiContenteditableEnum {
+	return BdiContenteditableEnum(s)
+}
+
 func (e *BdiElement) DataUnsafe(name string, s string) *BdiElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *BdiElement) Dir(a BdiDirEnum) *BdiElement {
 	return e
 }
 
+func BdiDirCustom(s string) BdiDirEnum {
+	return BdiDirEnum(s)
+}
+
 func (e *BdiElement) Draggable(a BdiDraggableEnum) *BdiElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func BdiDraggableCustom(s string) BdiDraggableEnum {
+	return BdiDraggableEnum(s)
 }
 
 func (e *BdiElement) Enterkeyhint(a BdiEnterkeyhintEnum) *BdiElement {
@@ -219,10 +239,18 @@ func (e *BdiElement) Enterkeyhint(a BdiEnterkeyhintEnum) *BdiElement {
 	return e
 }
 
+func BdiEnterkeyhintCustom(s string) BdiEnterkeyhintEnum {
+	return BdiEnterkeyhintEnum(s)
+}
+
 func (e *BdiElement) Hidden(a BdiHiddenEnum) *BdiElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func BdiHiddenCustom(s string) BdiHiddenEnum {
+	return BdiHiddenEnum(s)
 }
 
 func (e *BdiElement) Id(s string) *BdiElement {
@@ -241,6 +269,10 @@ func (e *BdiElement) Inputmode(a BdiInputmodeEnum) *BdiElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func BdiInputmodeCustom(s string) BdiInputmodeEnum {
+	return BdiInputmodeEnum(s)
 }
 
 func (e *BdiElement) Itemid(s string) *BdiElement {
@@ -303,6 +335,10 @@ func (e *BdiElement) Spellcheck(a BdiSpellcheckEnum) *BdiElement {
 	return e
 }
 
+func BdiSpellcheckCustom(s string) BdiSpellcheckEnum {
+	return BdiSpellcheckEnum(s)
+}
+
 func (e *BdiElement) Style(s string) *BdiElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *BdiElement) Translate(a BdiTranslateEnum) *BdiElement {
 	return e
 }
 
+func BdiTranslateCustom(s string) BdiTranslateEnum {
+	return BdiTranslateEnum(s)
+}
+
 func (e *BdiElement) Writingsuggestions(a BdiWritingsuggestionsEnum) *BdiElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func BdiWritingsuggestionsCustom(s string) BdiWritingsuggestionsEnum {
+	return BdiWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

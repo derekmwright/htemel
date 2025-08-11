@@ -60,12 +60,12 @@ func (e *TableElement) AddIndent(i int) {
 type TableAutocapitalizeEnum string
 
 const (
-	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
-	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
-	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
 	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
+	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
+	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
+	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 )
 
 type TableAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type TableContenteditableEnum string
 
 const (
+	TableContenteditableEnumTrue          TableContenteditableEnum = "true"
 	TableContenteditableEnumFalse         TableContenteditableEnum = "false"
 	TableContenteditableEnumPlaintextOnly TableContenteditableEnum = "plaintext-only"
-	TableContenteditableEnumTrue          TableContenteditableEnum = "true"
 	TableContenteditableEnumEmpty         TableContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type TableDraggableEnum string
 
 const (
-	TableDraggableEnumFalse TableDraggableEnum = "false"
 	TableDraggableEnumTrue  TableDraggableEnum = "true"
+	TableDraggableEnumFalse TableDraggableEnum = "false"
 )
 
 type TableEnterkeyhintEnum string
 
 const (
+	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
+	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
+	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
 	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
 	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
 	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
 	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
-	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
-	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
-	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
 )
 
 type TableHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type TableInputmodeEnum string
 
 const (
+	TableInputmodeEnumNone    TableInputmodeEnum = "none"
+	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
 	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 	TableInputmodeEnumText    TableInputmodeEnum = "text"
 	TableInputmodeEnumUrl     TableInputmodeEnum = "url"
 	TableInputmodeEnumDecimal TableInputmodeEnum = "decimal"
 	TableInputmodeEnumEmail   TableInputmodeEnum = "email"
-	TableInputmodeEnumNone    TableInputmodeEnum = "none"
-	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
 )
 
 type TableSpellcheckEnum string
 
 const (
-	TableSpellcheckEnumFalse TableSpellcheckEnum = "false"
 	TableSpellcheckEnumTrue  TableSpellcheckEnum = "true"
+	TableSpellcheckEnumFalse TableSpellcheckEnum = "false"
 	TableSpellcheckEnumEmpty TableSpellcheckEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *TableElement) Autocapitalize(a TableAutocapitalizeEnum) *TableElement {
 	return e
 }
 
+func TableAutocapitalizeCustom(s string) TableAutocapitalizeEnum {
+	return TableAutocapitalizeEnum(s)
+}
+
 func (e *TableElement) Autocorrect(a TableAutocorrectEnum) *TableElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func TableAutocorrectCustom(s string) TableAutocorrectEnum {
+	return TableAutocorrectEnum(s)
 }
 
 func (e *TableElement) Autofocus(b bool) *TableElement {
@@ -189,6 +197,10 @@ func (e *TableElement) Contenteditable(a TableContenteditableEnum) *TableElement
 	return e
 }
 
+func TableContenteditableCustom(s string) TableContenteditableEnum {
+	return TableContenteditableEnum(s)
+}
+
 func (e *TableElement) DataUnsafe(name string, s string) *TableElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *TableElement) Dir(a TableDirEnum) *TableElement {
 	return e
 }
 
+func TableDirCustom(s string) TableDirEnum {
+	return TableDirEnum(s)
+}
+
 func (e *TableElement) Draggable(a TableDraggableEnum) *TableElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func TableDraggableCustom(s string) TableDraggableEnum {
+	return TableDraggableEnum(s)
 }
 
 func (e *TableElement) Enterkeyhint(a TableEnterkeyhintEnum) *TableElement {
@@ -219,10 +239,18 @@ func (e *TableElement) Enterkeyhint(a TableEnterkeyhintEnum) *TableElement {
 	return e
 }
 
+func TableEnterkeyhintCustom(s string) TableEnterkeyhintEnum {
+	return TableEnterkeyhintEnum(s)
+}
+
 func (e *TableElement) Hidden(a TableHiddenEnum) *TableElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func TableHiddenCustom(s string) TableHiddenEnum {
+	return TableHiddenEnum(s)
 }
 
 func (e *TableElement) Id(s string) *TableElement {
@@ -241,6 +269,10 @@ func (e *TableElement) Inputmode(a TableInputmodeEnum) *TableElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func TableInputmodeCustom(s string) TableInputmodeEnum {
+	return TableInputmodeEnum(s)
 }
 
 func (e *TableElement) Itemid(s string) *TableElement {
@@ -303,6 +335,10 @@ func (e *TableElement) Spellcheck(a TableSpellcheckEnum) *TableElement {
 	return e
 }
 
+func TableSpellcheckCustom(s string) TableSpellcheckEnum {
+	return TableSpellcheckEnum(s)
+}
+
 func (e *TableElement) Style(s string) *TableElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *TableElement) Translate(a TableTranslateEnum) *TableElement {
 	return e
 }
 
+func TableTranslateCustom(s string) TableTranslateEnum {
+	return TableTranslateEnum(s)
+}
+
 func (e *TableElement) Writingsuggestions(a TableWritingsuggestionsEnum) *TableElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func TableWritingsuggestionsCustom(s string) TableWritingsuggestionsEnum {
+	return TableWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

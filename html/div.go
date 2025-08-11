@@ -79,58 +79,58 @@ const (
 type DivContenteditableEnum string
 
 const (
-	DivContenteditableEnumFalse         DivContenteditableEnum = "false"
 	DivContenteditableEnumPlaintextOnly DivContenteditableEnum = "plaintext-only"
 	DivContenteditableEnumTrue          DivContenteditableEnum = "true"
+	DivContenteditableEnumFalse         DivContenteditableEnum = "false"
 	DivContenteditableEnumEmpty         DivContenteditableEnum = ""
 )
 
 type DivDirEnum string
 
 const (
+	DivDirEnumRtl  DivDirEnum = "rtl"
 	DivDirEnumAuto DivDirEnum = "auto"
 	DivDirEnumLtr  DivDirEnum = "ltr"
-	DivDirEnumRtl  DivDirEnum = "rtl"
 )
 
 type DivDraggableEnum string
 
 const (
-	DivDraggableEnumFalse DivDraggableEnum = "false"
 	DivDraggableEnumTrue  DivDraggableEnum = "true"
+	DivDraggableEnumFalse DivDraggableEnum = "false"
 )
 
 type DivEnterkeyhintEnum string
 
 const (
-	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
-	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
-	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 	DivEnterkeyhintEnumGo       DivEnterkeyhintEnum = "go"
 	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
 	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
 	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
+	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
+	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
+	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 )
 
 type DivHiddenEnum string
 
 const (
-	DivHiddenEnumHidden     DivHiddenEnum = "hidden"
 	DivHiddenEnumUntilFound DivHiddenEnum = "until-found"
+	DivHiddenEnumHidden     DivHiddenEnum = "hidden"
 	DivHiddenEnumEmpty      DivHiddenEnum = ""
 )
 
 type DivInputmodeEnum string
 
 const (
+	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
+	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
 	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
 	DivInputmodeEnumText    DivInputmodeEnum = "text"
 	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
 	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
 	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
 	DivInputmodeEnumNone    DivInputmodeEnum = "none"
-	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
-	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
 )
 
 type DivSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *DivElement) Autocapitalize(a DivAutocapitalizeEnum) *DivElement {
 	return e
 }
 
+func DivAutocapitalizeCustom(s string) DivAutocapitalizeEnum {
+	return DivAutocapitalizeEnum(s)
+}
+
 func (e *DivElement) Autocorrect(a DivAutocorrectEnum) *DivElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func DivAutocorrectCustom(s string) DivAutocorrectEnum {
+	return DivAutocorrectEnum(s)
 }
 
 func (e *DivElement) Autofocus(b bool) *DivElement {
@@ -189,6 +197,10 @@ func (e *DivElement) Contenteditable(a DivContenteditableEnum) *DivElement {
 	return e
 }
 
+func DivContenteditableCustom(s string) DivContenteditableEnum {
+	return DivContenteditableEnum(s)
+}
+
 func (e *DivElement) DataUnsafe(name string, s string) *DivElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *DivElement) Dir(a DivDirEnum) *DivElement {
 	return e
 }
 
+func DivDirCustom(s string) DivDirEnum {
+	return DivDirEnum(s)
+}
+
 func (e *DivElement) Draggable(a DivDraggableEnum) *DivElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func DivDraggableCustom(s string) DivDraggableEnum {
+	return DivDraggableEnum(s)
 }
 
 func (e *DivElement) Enterkeyhint(a DivEnterkeyhintEnum) *DivElement {
@@ -219,10 +239,18 @@ func (e *DivElement) Enterkeyhint(a DivEnterkeyhintEnum) *DivElement {
 	return e
 }
 
+func DivEnterkeyhintCustom(s string) DivEnterkeyhintEnum {
+	return DivEnterkeyhintEnum(s)
+}
+
 func (e *DivElement) Hidden(a DivHiddenEnum) *DivElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func DivHiddenCustom(s string) DivHiddenEnum {
+	return DivHiddenEnum(s)
 }
 
 func (e *DivElement) Id(s string) *DivElement {
@@ -241,6 +269,10 @@ func (e *DivElement) Inputmode(a DivInputmodeEnum) *DivElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func DivInputmodeCustom(s string) DivInputmodeEnum {
+	return DivInputmodeEnum(s)
 }
 
 func (e *DivElement) Itemid(s string) *DivElement {
@@ -303,6 +335,10 @@ func (e *DivElement) Spellcheck(a DivSpellcheckEnum) *DivElement {
 	return e
 }
 
+func DivSpellcheckCustom(s string) DivSpellcheckEnum {
+	return DivSpellcheckEnum(s)
+}
+
 func (e *DivElement) Style(s string) *DivElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *DivElement) Translate(a DivTranslateEnum) *DivElement {
 	return e
 }
 
+func DivTranslateCustom(s string) DivTranslateEnum {
+	return DivTranslateEnum(s)
+}
+
 func (e *DivElement) Writingsuggestions(a DivWritingsuggestionsEnum) *DivElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func DivWritingsuggestionsCustom(s string) DivWritingsuggestionsEnum {
+	return DivWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

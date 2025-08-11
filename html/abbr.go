@@ -96,20 +96,20 @@ const (
 type AbbrDraggableEnum string
 
 const (
-	AbbrDraggableEnumFalse AbbrDraggableEnum = "false"
 	AbbrDraggableEnumTrue  AbbrDraggableEnum = "true"
+	AbbrDraggableEnumFalse AbbrDraggableEnum = "false"
 )
 
 type AbbrEnterkeyhintEnum string
 
 const (
-	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
-	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
 	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 	AbbrEnterkeyhintEnumEnter    AbbrEnterkeyhintEnum = "enter"
 	AbbrEnterkeyhintEnumGo       AbbrEnterkeyhintEnum = "go"
 	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
 	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
+	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
+	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
 )
 
 type AbbrHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type AbbrInputmodeEnum string
 
 const (
-	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
-	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
 	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
 	AbbrInputmodeEnumText    AbbrInputmodeEnum = "text"
 	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
 	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
+	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
+	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 )
 
 type AbbrSpellcheckEnum string
 
 const (
-	AbbrSpellcheckEnumFalse AbbrSpellcheckEnum = "false"
 	AbbrSpellcheckEnumTrue  AbbrSpellcheckEnum = "true"
+	AbbrSpellcheckEnumFalse AbbrSpellcheckEnum = "false"
 	AbbrSpellcheckEnumEmpty AbbrSpellcheckEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *AbbrElement) Autocapitalize(a AbbrAutocapitalizeEnum) *AbbrElement {
 	return e
 }
 
+func AbbrAutocapitalizeCustom(s string) AbbrAutocapitalizeEnum {
+	return AbbrAutocapitalizeEnum(s)
+}
+
 func (e *AbbrElement) Autocorrect(a AbbrAutocorrectEnum) *AbbrElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func AbbrAutocorrectCustom(s string) AbbrAutocorrectEnum {
+	return AbbrAutocorrectEnum(s)
 }
 
 func (e *AbbrElement) Autofocus(b bool) *AbbrElement {
@@ -189,6 +197,10 @@ func (e *AbbrElement) Contenteditable(a AbbrContenteditableEnum) *AbbrElement {
 	return e
 }
 
+func AbbrContenteditableCustom(s string) AbbrContenteditableEnum {
+	return AbbrContenteditableEnum(s)
+}
+
 func (e *AbbrElement) DataUnsafe(name string, s string) *AbbrElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *AbbrElement) Dir(a AbbrDirEnum) *AbbrElement {
 	return e
 }
 
+func AbbrDirCustom(s string) AbbrDirEnum {
+	return AbbrDirEnum(s)
+}
+
 func (e *AbbrElement) Draggable(a AbbrDraggableEnum) *AbbrElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func AbbrDraggableCustom(s string) AbbrDraggableEnum {
+	return AbbrDraggableEnum(s)
 }
 
 func (e *AbbrElement) Enterkeyhint(a AbbrEnterkeyhintEnum) *AbbrElement {
@@ -219,10 +239,18 @@ func (e *AbbrElement) Enterkeyhint(a AbbrEnterkeyhintEnum) *AbbrElement {
 	return e
 }
 
+func AbbrEnterkeyhintCustom(s string) AbbrEnterkeyhintEnum {
+	return AbbrEnterkeyhintEnum(s)
+}
+
 func (e *AbbrElement) Hidden(a AbbrHiddenEnum) *AbbrElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func AbbrHiddenCustom(s string) AbbrHiddenEnum {
+	return AbbrHiddenEnum(s)
 }
 
 func (e *AbbrElement) Id(s string) *AbbrElement {
@@ -241,6 +269,10 @@ func (e *AbbrElement) Inputmode(a AbbrInputmodeEnum) *AbbrElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func AbbrInputmodeCustom(s string) AbbrInputmodeEnum {
+	return AbbrInputmodeEnum(s)
 }
 
 func (e *AbbrElement) Itemid(s string) *AbbrElement {
@@ -303,6 +335,10 @@ func (e *AbbrElement) Spellcheck(a AbbrSpellcheckEnum) *AbbrElement {
 	return e
 }
 
+func AbbrSpellcheckCustom(s string) AbbrSpellcheckEnum {
+	return AbbrSpellcheckEnum(s)
+}
+
 func (e *AbbrElement) Style(s string) *AbbrElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *AbbrElement) Translate(a AbbrTranslateEnum) *AbbrElement {
 	return e
 }
 
+func AbbrTranslateCustom(s string) AbbrTranslateEnum {
+	return AbbrTranslateEnum(s)
+}
+
 func (e *AbbrElement) Writingsuggestions(a AbbrWritingsuggestionsEnum) *AbbrElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func AbbrWritingsuggestionsCustom(s string) AbbrWritingsuggestionsEnum {
+	return AbbrWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

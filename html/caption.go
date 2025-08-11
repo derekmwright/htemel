@@ -60,12 +60,12 @@ func (e *CaptionElement) AddIndent(i int) {
 type CaptionAutocapitalizeEnum string
 
 const (
-	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
-	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
 	CaptionAutocapitalizeEnumOff        CaptionAutocapitalizeEnum = "off"
 	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
 	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
 	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
+	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
+	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
 )
 
 type CaptionAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type CaptionContenteditableEnum string
 
 const (
-	CaptionContenteditableEnumTrue          CaptionContenteditableEnum = "true"
 	CaptionContenteditableEnumFalse         CaptionContenteditableEnum = "false"
 	CaptionContenteditableEnumPlaintextOnly CaptionContenteditableEnum = "plaintext-only"
+	CaptionContenteditableEnumTrue          CaptionContenteditableEnum = "true"
 	CaptionContenteditableEnumEmpty         CaptionContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type CaptionEnterkeyhintEnum string
 
 const (
-	CaptionEnterkeyhintEnumSearch   CaptionEnterkeyhintEnum = "search"
-	CaptionEnterkeyhintEnumSend     CaptionEnterkeyhintEnum = "send"
-	CaptionEnterkeyhintEnumDone     CaptionEnterkeyhintEnum = "done"
 	CaptionEnterkeyhintEnumEnter    CaptionEnterkeyhintEnum = "enter"
 	CaptionEnterkeyhintEnumGo       CaptionEnterkeyhintEnum = "go"
 	CaptionEnterkeyhintEnumNext     CaptionEnterkeyhintEnum = "next"
 	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
+	CaptionEnterkeyhintEnumSearch   CaptionEnterkeyhintEnum = "search"
+	CaptionEnterkeyhintEnumSend     CaptionEnterkeyhintEnum = "send"
+	CaptionEnterkeyhintEnumDone     CaptionEnterkeyhintEnum = "done"
 )
 
 type CaptionHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type CaptionInputmodeEnum string
 
 const (
+	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
+	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
+	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
 	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
 	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
 	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
 	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
 	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
-	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
-	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
-	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
 )
 
 type CaptionSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *CaptionElement) Autocapitalize(a CaptionAutocapitalizeEnum) *CaptionEle
 	return e
 }
 
+func CaptionAutocapitalizeCustom(s string) CaptionAutocapitalizeEnum {
+	return CaptionAutocapitalizeEnum(s)
+}
+
 func (e *CaptionElement) Autocorrect(a CaptionAutocorrectEnum) *CaptionElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func CaptionAutocorrectCustom(s string) CaptionAutocorrectEnum {
+	return CaptionAutocorrectEnum(s)
 }
 
 func (e *CaptionElement) Autofocus(b bool) *CaptionElement {
@@ -189,6 +197,10 @@ func (e *CaptionElement) Contenteditable(a CaptionContenteditableEnum) *CaptionE
 	return e
 }
 
+func CaptionContenteditableCustom(s string) CaptionContenteditableEnum {
+	return CaptionContenteditableEnum(s)
+}
+
 func (e *CaptionElement) DataUnsafe(name string, s string) *CaptionElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *CaptionElement) Dir(a CaptionDirEnum) *CaptionElement {
 	return e
 }
 
+func CaptionDirCustom(s string) CaptionDirEnum {
+	return CaptionDirEnum(s)
+}
+
 func (e *CaptionElement) Draggable(a CaptionDraggableEnum) *CaptionElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func CaptionDraggableCustom(s string) CaptionDraggableEnum {
+	return CaptionDraggableEnum(s)
 }
 
 func (e *CaptionElement) Enterkeyhint(a CaptionEnterkeyhintEnum) *CaptionElement {
@@ -219,10 +239,18 @@ func (e *CaptionElement) Enterkeyhint(a CaptionEnterkeyhintEnum) *CaptionElement
 	return e
 }
 
+func CaptionEnterkeyhintCustom(s string) CaptionEnterkeyhintEnum {
+	return CaptionEnterkeyhintEnum(s)
+}
+
 func (e *CaptionElement) Hidden(a CaptionHiddenEnum) *CaptionElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func CaptionHiddenCustom(s string) CaptionHiddenEnum {
+	return CaptionHiddenEnum(s)
 }
 
 func (e *CaptionElement) Id(s string) *CaptionElement {
@@ -241,6 +269,10 @@ func (e *CaptionElement) Inputmode(a CaptionInputmodeEnum) *CaptionElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func CaptionInputmodeCustom(s string) CaptionInputmodeEnum {
+	return CaptionInputmodeEnum(s)
 }
 
 func (e *CaptionElement) Itemid(s string) *CaptionElement {
@@ -303,6 +335,10 @@ func (e *CaptionElement) Spellcheck(a CaptionSpellcheckEnum) *CaptionElement {
 	return e
 }
 
+func CaptionSpellcheckCustom(s string) CaptionSpellcheckEnum {
+	return CaptionSpellcheckEnum(s)
+}
+
 func (e *CaptionElement) Style(s string) *CaptionElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *CaptionElement) Translate(a CaptionTranslateEnum) *CaptionElement {
 	return e
 }
 
+func CaptionTranslateCustom(s string) CaptionTranslateEnum {
+	return CaptionTranslateEnum(s)
+}
+
 func (e *CaptionElement) Writingsuggestions(a CaptionWritingsuggestionsEnum) *CaptionElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func CaptionWritingsuggestionsCustom(s string) CaptionWritingsuggestionsEnum {
+	return CaptionWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -60,12 +60,12 @@ func (e *DfnElement) AddIndent(i int) {
 type DfnAutocapitalizeEnum string
 
 const (
+	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
+	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
 	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
 	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
 	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
-	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
-	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
 )
 
 type DfnAutocorrectEnum string
@@ -88,28 +88,28 @@ const (
 type DfnDirEnum string
 
 const (
-	DfnDirEnumAuto DfnDirEnum = "auto"
 	DfnDirEnumLtr  DfnDirEnum = "ltr"
 	DfnDirEnumRtl  DfnDirEnum = "rtl"
+	DfnDirEnumAuto DfnDirEnum = "auto"
 )
 
 type DfnDraggableEnum string
 
 const (
-	DfnDraggableEnumTrue  DfnDraggableEnum = "true"
 	DfnDraggableEnumFalse DfnDraggableEnum = "false"
+	DfnDraggableEnumTrue  DfnDraggableEnum = "true"
 )
 
 type DfnEnterkeyhintEnum string
 
 const (
-	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
 	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
 	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
 	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
+	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 )
 
 type DfnHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type DfnInputmodeEnum string
 
 const (
+	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
+	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
+	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
 	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
 	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
 	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
 	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
-	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
-	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
-	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 )
 
 type DfnSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type DfnTranslateEnum string
 
 const (
-	DfnTranslateEnumYes   DfnTranslateEnum = "yes"
 	DfnTranslateEnumNo    DfnTranslateEnum = "no"
+	DfnTranslateEnumYes   DfnTranslateEnum = "yes"
 	DfnTranslateEnumEmpty DfnTranslateEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *DfnElement) Autocapitalize(a DfnAutocapitalizeEnum) *DfnElement {
 	return e
 }
 
+func DfnAutocapitalizeCustom(s string) DfnAutocapitalizeEnum {
+	return DfnAutocapitalizeEnum(s)
+}
+
 func (e *DfnElement) Autocorrect(a DfnAutocorrectEnum) *DfnElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func DfnAutocorrectCustom(s string) DfnAutocorrectEnum {
+	return DfnAutocorrectEnum(s)
 }
 
 func (e *DfnElement) Autofocus(b bool) *DfnElement {
@@ -189,6 +197,10 @@ func (e *DfnElement) Contenteditable(a DfnContenteditableEnum) *DfnElement {
 	return e
 }
 
+func DfnContenteditableCustom(s string) DfnContenteditableEnum {
+	return DfnContenteditableEnum(s)
+}
+
 func (e *DfnElement) DataUnsafe(name string, s string) *DfnElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *DfnElement) Dir(a DfnDirEnum) *DfnElement {
 	return e
 }
 
+func DfnDirCustom(s string) DfnDirEnum {
+	return DfnDirEnum(s)
+}
+
 func (e *DfnElement) Draggable(a DfnDraggableEnum) *DfnElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func DfnDraggableCustom(s string) DfnDraggableEnum {
+	return DfnDraggableEnum(s)
 }
 
 func (e *DfnElement) Enterkeyhint(a DfnEnterkeyhintEnum) *DfnElement {
@@ -219,10 +239,18 @@ func (e *DfnElement) Enterkeyhint(a DfnEnterkeyhintEnum) *DfnElement {
 	return e
 }
 
+func DfnEnterkeyhintCustom(s string) DfnEnterkeyhintEnum {
+	return DfnEnterkeyhintEnum(s)
+}
+
 func (e *DfnElement) Hidden(a DfnHiddenEnum) *DfnElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func DfnHiddenCustom(s string) DfnHiddenEnum {
+	return DfnHiddenEnum(s)
 }
 
 func (e *DfnElement) Id(s string) *DfnElement {
@@ -241,6 +269,10 @@ func (e *DfnElement) Inputmode(a DfnInputmodeEnum) *DfnElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func DfnInputmodeCustom(s string) DfnInputmodeEnum {
+	return DfnInputmodeEnum(s)
 }
 
 func (e *DfnElement) Itemid(s string) *DfnElement {
@@ -303,6 +335,10 @@ func (e *DfnElement) Spellcheck(a DfnSpellcheckEnum) *DfnElement {
 	return e
 }
 
+func DfnSpellcheckCustom(s string) DfnSpellcheckEnum {
+	return DfnSpellcheckEnum(s)
+}
+
 func (e *DfnElement) Style(s string) *DfnElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *DfnElement) Translate(a DfnTranslateEnum) *DfnElement {
 	return e
 }
 
+func DfnTranslateCustom(s string) DfnTranslateEnum {
+	return DfnTranslateEnum(s)
+}
+
 func (e *DfnElement) Writingsuggestions(a DfnWritingsuggestionsEnum) *DfnElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func DfnWritingsuggestionsCustom(s string) DfnWritingsuggestionsEnum {
+	return DfnWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

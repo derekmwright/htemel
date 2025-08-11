@@ -60,12 +60,12 @@ func (e *AElement) AddIndent(i int) {
 type AAutocapitalizeEnum string
 
 const (
-	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
 	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
 	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
 	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
 	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
 	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
+	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
 )
 
 type AAutocorrectEnum string
@@ -88,28 +88,28 @@ const (
 type ADirEnum string
 
 const (
-	ADirEnumRtl  ADirEnum = "rtl"
 	ADirEnumAuto ADirEnum = "auto"
 	ADirEnumLtr  ADirEnum = "ltr"
+	ADirEnumRtl  ADirEnum = "rtl"
 )
 
 type ADraggableEnum string
 
 const (
-	ADraggableEnumTrue  ADraggableEnum = "true"
 	ADraggableEnumFalse ADraggableEnum = "false"
+	ADraggableEnumTrue  ADraggableEnum = "true"
 )
 
 type AEnterkeyhintEnum string
 
 const (
+	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
 	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
 	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
 	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
 	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
-	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 )
 
 type AHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type AInputmodeEnum string
 
 const (
+	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
+	AInputmodeEnumSearch  AInputmodeEnum = "search"
+	AInputmodeEnumTel     AInputmodeEnum = "tel"
 	AInputmodeEnumText    AInputmodeEnum = "text"
 	AInputmodeEnumUrl     AInputmodeEnum = "url"
 	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
 	AInputmodeEnumEmail   AInputmodeEnum = "email"
 	AInputmodeEnumNone    AInputmodeEnum = "none"
-	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
-	AInputmodeEnumSearch  AInputmodeEnum = "search"
-	AInputmodeEnumTel     AInputmodeEnum = "tel"
 )
 
 type ASpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type ATranslateEnum string
 
 const (
-	ATranslateEnumNo    ATranslateEnum = "no"
 	ATranslateEnumYes   ATranslateEnum = "yes"
+	ATranslateEnumNo    ATranslateEnum = "no"
 	ATranslateEnumEmpty ATranslateEnum = ""
 )
 
@@ -213,10 +213,18 @@ func (e *AElement) Autocapitalize(a AAutocapitalizeEnum) *AElement {
 	return e
 }
 
+func AAutocapitalizeCustom(s string) AAutocapitalizeEnum {
+	return AAutocapitalizeEnum(s)
+}
+
 func (e *AElement) Autocorrect(a AAutocorrectEnum) *AElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func AAutocorrectCustom(s string) AAutocorrectEnum {
+	return AAutocorrectEnum(s)
 }
 
 func (e *AElement) Autofocus(b bool) *AElement {
@@ -237,6 +245,10 @@ func (e *AElement) Contenteditable(a AContenteditableEnum) *AElement {
 	return e
 }
 
+func AContenteditableCustom(s string) AContenteditableEnum {
+	return AContenteditableEnum(s)
+}
+
 func (e *AElement) DataUnsafe(name string, s string) *AElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -255,10 +267,18 @@ func (e *AElement) Dir(a ADirEnum) *AElement {
 	return e
 }
 
+func ADirCustom(s string) ADirEnum {
+	return ADirEnum(s)
+}
+
 func (e *AElement) Draggable(a ADraggableEnum) *AElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func ADraggableCustom(s string) ADraggableEnum {
+	return ADraggableEnum(s)
 }
 
 func (e *AElement) Enterkeyhint(a AEnterkeyhintEnum) *AElement {
@@ -267,10 +287,18 @@ func (e *AElement) Enterkeyhint(a AEnterkeyhintEnum) *AElement {
 	return e
 }
 
+func AEnterkeyhintCustom(s string) AEnterkeyhintEnum {
+	return AEnterkeyhintEnum(s)
+}
+
 func (e *AElement) Hidden(a AHiddenEnum) *AElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func AHiddenCustom(s string) AHiddenEnum {
+	return AHiddenEnum(s)
 }
 
 func (e *AElement) Id(s string) *AElement {
@@ -289,6 +317,10 @@ func (e *AElement) Inputmode(a AInputmodeEnum) *AElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func AInputmodeCustom(s string) AInputmodeEnum {
+	return AInputmodeEnum(s)
 }
 
 func (e *AElement) Itemid(s string) *AElement {
@@ -351,6 +383,10 @@ func (e *AElement) Spellcheck(a ASpellcheckEnum) *AElement {
 	return e
 }
 
+func ASpellcheckCustom(s string) ASpellcheckEnum {
+	return ASpellcheckEnum(s)
+}
+
 func (e *AElement) Style(s string) *AElement {
 	e.attributes["style"] = s
 
@@ -375,10 +411,18 @@ func (e *AElement) Translate(a ATranslateEnum) *AElement {
 	return e
 }
 
+func ATranslateCustom(s string) ATranslateEnum {
+	return ATranslateEnum(s)
+}
+
 func (e *AElement) Writingsuggestions(a AWritingsuggestionsEnum) *AElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func AWritingsuggestionsCustom(s string) AWritingsuggestionsEnum {
+	return AWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

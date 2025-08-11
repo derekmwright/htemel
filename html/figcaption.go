@@ -60,19 +60,19 @@ func (e *FigcaptionElement) AddIndent(i int) {
 type FigcaptionAutocapitalizeEnum string
 
 const (
-	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
-	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
-	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
 	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
+	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
+	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
+	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 )
 
 type FigcaptionAutocorrectEnum string
 
 const (
-	FigcaptionAutocorrectEnumOn    FigcaptionAutocorrectEnum = "on"
 	FigcaptionAutocorrectEnumOff   FigcaptionAutocorrectEnum = "off"
+	FigcaptionAutocorrectEnumOn    FigcaptionAutocorrectEnum = "on"
 	FigcaptionAutocorrectEnumEmpty FigcaptionAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type FigcaptionEnterkeyhintEnum string
 
 const (
-	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
-	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
 	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
 	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
 	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
+	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
+	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 )
 
 type FigcaptionHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type FigcaptionInputmodeEnum string
 
 const (
+	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
 	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
 	FigcaptionInputmodeEnumTel     FigcaptionInputmodeEnum = "tel"
 	FigcaptionInputmodeEnumText    FigcaptionInputmodeEnum = "text"
@@ -130,7 +131,6 @@ const (
 	FigcaptionInputmodeEnumDecimal FigcaptionInputmodeEnum = "decimal"
 	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
 	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
-	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
 )
 
 type FigcaptionSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *FigcaptionElement) Autocapitalize(a FigcaptionAutocapitalizeEnum) *Figc
 	return e
 }
 
+func FigcaptionAutocapitalizeCustom(s string) FigcaptionAutocapitalizeEnum {
+	return FigcaptionAutocapitalizeEnum(s)
+}
+
 func (e *FigcaptionElement) Autocorrect(a FigcaptionAutocorrectEnum) *FigcaptionElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func FigcaptionAutocorrectCustom(s string) FigcaptionAutocorrectEnum {
+	return FigcaptionAutocorrectEnum(s)
 }
 
 func (e *FigcaptionElement) Autofocus(b bool) *FigcaptionElement {
@@ -189,6 +197,10 @@ func (e *FigcaptionElement) Contenteditable(a FigcaptionContenteditableEnum) *Fi
 	return e
 }
 
+func FigcaptionContenteditableCustom(s string) FigcaptionContenteditableEnum {
+	return FigcaptionContenteditableEnum(s)
+}
+
 func (e *FigcaptionElement) DataUnsafe(name string, s string) *FigcaptionElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *FigcaptionElement) Dir(a FigcaptionDirEnum) *FigcaptionElement {
 	return e
 }
 
+func FigcaptionDirCustom(s string) FigcaptionDirEnum {
+	return FigcaptionDirEnum(s)
+}
+
 func (e *FigcaptionElement) Draggable(a FigcaptionDraggableEnum) *FigcaptionElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func FigcaptionDraggableCustom(s string) FigcaptionDraggableEnum {
+	return FigcaptionDraggableEnum(s)
 }
 
 func (e *FigcaptionElement) Enterkeyhint(a FigcaptionEnterkeyhintEnum) *FigcaptionElement {
@@ -219,10 +239,18 @@ func (e *FigcaptionElement) Enterkeyhint(a FigcaptionEnterkeyhintEnum) *Figcapti
 	return e
 }
 
+func FigcaptionEnterkeyhintCustom(s string) FigcaptionEnterkeyhintEnum {
+	return FigcaptionEnterkeyhintEnum(s)
+}
+
 func (e *FigcaptionElement) Hidden(a FigcaptionHiddenEnum) *FigcaptionElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func FigcaptionHiddenCustom(s string) FigcaptionHiddenEnum {
+	return FigcaptionHiddenEnum(s)
 }
 
 func (e *FigcaptionElement) Id(s string) *FigcaptionElement {
@@ -241,6 +269,10 @@ func (e *FigcaptionElement) Inputmode(a FigcaptionInputmodeEnum) *FigcaptionElem
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func FigcaptionInputmodeCustom(s string) FigcaptionInputmodeEnum {
+	return FigcaptionInputmodeEnum(s)
 }
 
 func (e *FigcaptionElement) Itemid(s string) *FigcaptionElement {
@@ -303,6 +335,10 @@ func (e *FigcaptionElement) Spellcheck(a FigcaptionSpellcheckEnum) *FigcaptionEl
 	return e
 }
 
+func FigcaptionSpellcheckCustom(s string) FigcaptionSpellcheckEnum {
+	return FigcaptionSpellcheckEnum(s)
+}
+
 func (e *FigcaptionElement) Style(s string) *FigcaptionElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *FigcaptionElement) Translate(a FigcaptionTranslateEnum) *FigcaptionElem
 	return e
 }
 
+func FigcaptionTranslateCustom(s string) FigcaptionTranslateEnum {
+	return FigcaptionTranslateEnum(s)
+}
+
 func (e *FigcaptionElement) Writingsuggestions(a FigcaptionWritingsuggestionsEnum) *FigcaptionElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func FigcaptionWritingsuggestionsCustom(s string) FigcaptionWritingsuggestionsEnum {
+	return FigcaptionWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -103,13 +103,13 @@ const (
 type StyleEnterkeyhintEnum string
 
 const (
+	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
+	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
 	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
 	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
 	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
 	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
-	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
-	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
 )
 
 type StyleHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type StyleInputmodeEnum string
 
 const (
-	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
 	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
 	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
@@ -131,6 +130,7 @@ const (
 	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
 	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
+	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
 )
 
 type StyleSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type StyleWritingsuggestionsEnum string
 
 const (
-	StyleWritingsuggestionsEnumFalse StyleWritingsuggestionsEnum = "false"
 	StyleWritingsuggestionsEnumTrue  StyleWritingsuggestionsEnum = "true"
+	StyleWritingsuggestionsEnumFalse StyleWritingsuggestionsEnum = "false"
 	StyleWritingsuggestionsEnumEmpty StyleWritingsuggestionsEnum = ""
 )
 
@@ -177,10 +177,18 @@ func (e *StyleElement) Autocapitalize(a StyleAutocapitalizeEnum) *StyleElement {
 	return e
 }
 
+func StyleAutocapitalizeCustom(s string) StyleAutocapitalizeEnum {
+	return StyleAutocapitalizeEnum(s)
+}
+
 func (e *StyleElement) Autocorrect(a StyleAutocorrectEnum) *StyleElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func StyleAutocorrectCustom(s string) StyleAutocorrectEnum {
+	return StyleAutocorrectEnum(s)
 }
 
 func (e *StyleElement) Autofocus(b bool) *StyleElement {
@@ -201,6 +209,10 @@ func (e *StyleElement) Contenteditable(a StyleContenteditableEnum) *StyleElement
 	return e
 }
 
+func StyleContenteditableCustom(s string) StyleContenteditableEnum {
+	return StyleContenteditableEnum(s)
+}
+
 func (e *StyleElement) DataUnsafe(name string, s string) *StyleElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,10 +231,18 @@ func (e *StyleElement) Dir(a StyleDirEnum) *StyleElement {
 	return e
 }
 
+func StyleDirCustom(s string) StyleDirEnum {
+	return StyleDirEnum(s)
+}
+
 func (e *StyleElement) Draggable(a StyleDraggableEnum) *StyleElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func StyleDraggableCustom(s string) StyleDraggableEnum {
+	return StyleDraggableEnum(s)
 }
 
 func (e *StyleElement) Enterkeyhint(a StyleEnterkeyhintEnum) *StyleElement {
@@ -231,10 +251,18 @@ func (e *StyleElement) Enterkeyhint(a StyleEnterkeyhintEnum) *StyleElement {
 	return e
 }
 
+func StyleEnterkeyhintCustom(s string) StyleEnterkeyhintEnum {
+	return StyleEnterkeyhintEnum(s)
+}
+
 func (e *StyleElement) Hidden(a StyleHiddenEnum) *StyleElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func StyleHiddenCustom(s string) StyleHiddenEnum {
+	return StyleHiddenEnum(s)
 }
 
 func (e *StyleElement) Id(s string) *StyleElement {
@@ -253,6 +281,10 @@ func (e *StyleElement) Inputmode(a StyleInputmodeEnum) *StyleElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func StyleInputmodeCustom(s string) StyleInputmodeEnum {
+	return StyleInputmodeEnum(s)
 }
 
 func (e *StyleElement) Itemid(s string) *StyleElement {
@@ -315,6 +347,10 @@ func (e *StyleElement) Spellcheck(a StyleSpellcheckEnum) *StyleElement {
 	return e
 }
 
+func StyleSpellcheckCustom(s string) StyleSpellcheckEnum {
+	return StyleSpellcheckEnum(s)
+}
+
 func (e *StyleElement) Style(s string) *StyleElement {
 	e.attributes["style"] = s
 
@@ -339,10 +375,18 @@ func (e *StyleElement) Translate(a StyleTranslateEnum) *StyleElement {
 	return e
 }
 
+func StyleTranslateCustom(s string) StyleTranslateEnum {
+	return StyleTranslateEnum(s)
+}
+
 func (e *StyleElement) Writingsuggestions(a StyleWritingsuggestionsEnum) *StyleElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func StyleWritingsuggestionsCustom(s string) StyleWritingsuggestionsEnum {
+	return StyleWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

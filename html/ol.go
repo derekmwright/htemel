@@ -60,12 +60,12 @@ func (e *OlElement) AddIndent(i int) {
 type OlAutocapitalizeEnum string
 
 const (
-	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
-	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
-	OlAutocapitalizeEnumSentences  OlAutocapitalizeEnum = "sentences"
 	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
 	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 	OlAutocapitalizeEnumNone       OlAutocapitalizeEnum = "none"
+	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
+	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
+	OlAutocapitalizeEnumSentences  OlAutocapitalizeEnum = "sentences"
 )
 
 type OlAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type OlContenteditableEnum string
 
 const (
-	OlContenteditableEnumFalse         OlContenteditableEnum = "false"
 	OlContenteditableEnumPlaintextOnly OlContenteditableEnum = "plaintext-only"
 	OlContenteditableEnumTrue          OlContenteditableEnum = "true"
+	OlContenteditableEnumFalse         OlContenteditableEnum = "false"
 	OlContenteditableEnumEmpty         OlContenteditableEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type OlEnterkeyhintEnum string
 
 const (
+	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
+	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
 	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
 	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
 	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
 	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
-	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
-	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 )
 
 type OlHiddenEnum string
 
 const (
-	OlHiddenEnumUntilFound OlHiddenEnum = "until-found"
 	OlHiddenEnumHidden     OlHiddenEnum = "hidden"
+	OlHiddenEnumUntilFound OlHiddenEnum = "until-found"
 	OlHiddenEnumEmpty      OlHiddenEnum = ""
 )
 
 type OlInputmodeEnum string
 
 const (
+	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
+	OlInputmodeEnumNone    OlInputmodeEnum = "none"
 	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
 	OlInputmodeEnumSearch  OlInputmodeEnum = "search"
 	OlInputmodeEnumTel     OlInputmodeEnum = "tel"
 	OlInputmodeEnumText    OlInputmodeEnum = "text"
 	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
 	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
-	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
-	OlInputmodeEnumNone    OlInputmodeEnum = "none"
 )
 
 type OlSpellcheckEnum string
@@ -177,10 +177,18 @@ func (e *OlElement) Autocapitalize(a OlAutocapitalizeEnum) *OlElement {
 	return e
 }
 
+func OlAutocapitalizeCustom(s string) OlAutocapitalizeEnum {
+	return OlAutocapitalizeEnum(s)
+}
+
 func (e *OlElement) Autocorrect(a OlAutocorrectEnum) *OlElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func OlAutocorrectCustom(s string) OlAutocorrectEnum {
+	return OlAutocorrectEnum(s)
 }
 
 func (e *OlElement) Autofocus(b bool) *OlElement {
@@ -201,6 +209,10 @@ func (e *OlElement) Contenteditable(a OlContenteditableEnum) *OlElement {
 	return e
 }
 
+func OlContenteditableCustom(s string) OlContenteditableEnum {
+	return OlContenteditableEnum(s)
+}
+
 func (e *OlElement) DataUnsafe(name string, s string) *OlElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,10 +231,18 @@ func (e *OlElement) Dir(a OlDirEnum) *OlElement {
 	return e
 }
 
+func OlDirCustom(s string) OlDirEnum {
+	return OlDirEnum(s)
+}
+
 func (e *OlElement) Draggable(a OlDraggableEnum) *OlElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func OlDraggableCustom(s string) OlDraggableEnum {
+	return OlDraggableEnum(s)
 }
 
 func (e *OlElement) Enterkeyhint(a OlEnterkeyhintEnum) *OlElement {
@@ -231,10 +251,18 @@ func (e *OlElement) Enterkeyhint(a OlEnterkeyhintEnum) *OlElement {
 	return e
 }
 
+func OlEnterkeyhintCustom(s string) OlEnterkeyhintEnum {
+	return OlEnterkeyhintEnum(s)
+}
+
 func (e *OlElement) Hidden(a OlHiddenEnum) *OlElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func OlHiddenCustom(s string) OlHiddenEnum {
+	return OlHiddenEnum(s)
 }
 
 func (e *OlElement) Id(s string) *OlElement {
@@ -253,6 +281,10 @@ func (e *OlElement) Inputmode(a OlInputmodeEnum) *OlElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func OlInputmodeCustom(s string) OlInputmodeEnum {
+	return OlInputmodeEnum(s)
 }
 
 func (e *OlElement) Itemid(s string) *OlElement {
@@ -315,6 +347,10 @@ func (e *OlElement) Spellcheck(a OlSpellcheckEnum) *OlElement {
 	return e
 }
 
+func OlSpellcheckCustom(s string) OlSpellcheckEnum {
+	return OlSpellcheckEnum(s)
+}
+
 func (e *OlElement) Style(s string) *OlElement {
 	e.attributes["style"] = s
 
@@ -339,10 +375,18 @@ func (e *OlElement) Translate(a OlTranslateEnum) *OlElement {
 	return e
 }
 
+func OlTranslateCustom(s string) OlTranslateEnum {
+	return OlTranslateEnum(s)
+}
+
 func (e *OlElement) Writingsuggestions(a OlWritingsuggestionsEnum) *OlElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func OlWritingsuggestionsCustom(s string) OlWritingsuggestionsEnum {
+	return OlWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

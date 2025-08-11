@@ -60,12 +60,12 @@ func (e *TrElement) AddIndent(i int) {
 type TrAutocapitalizeEnum string
 
 const (
-	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
-	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
 	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
 	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
 	TrAutocapitalizeEnumOff        TrAutocapitalizeEnum = "off"
 	TrAutocapitalizeEnumOn         TrAutocapitalizeEnum = "on"
+	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
+	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
 )
 
 type TrAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type TrContenteditableEnum string
 
 const (
-	TrContenteditableEnumFalse         TrContenteditableEnum = "false"
 	TrContenteditableEnumPlaintextOnly TrContenteditableEnum = "plaintext-only"
 	TrContenteditableEnumTrue          TrContenteditableEnum = "true"
+	TrContenteditableEnumFalse         TrContenteditableEnum = "false"
 	TrContenteditableEnumEmpty         TrContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type TrEnterkeyhintEnum string
 
 const (
+	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
+	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
 	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
 	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
 	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
 	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
 	TrEnterkeyhintEnumGo       TrEnterkeyhintEnum = "go"
-	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
-	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
 )
 
 type TrHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type TrInputmodeEnum string
 
 const (
+	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
 	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
 	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
 	TrInputmodeEnumText    TrInputmodeEnum = "text"
@@ -130,7 +131,6 @@ const (
 	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
 	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
 	TrInputmodeEnumNone    TrInputmodeEnum = "none"
-	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
 )
 
 type TrSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type TrTranslateEnum string
 
 const (
-	TrTranslateEnumNo    TrTranslateEnum = "no"
 	TrTranslateEnumYes   TrTranslateEnum = "yes"
+	TrTranslateEnumNo    TrTranslateEnum = "no"
 	TrTranslateEnumEmpty TrTranslateEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *TrElement) Autocapitalize(a TrAutocapitalizeEnum) *TrElement {
 	return e
 }
 
+func TrAutocapitalizeCustom(s string) TrAutocapitalizeEnum {
+	return TrAutocapitalizeEnum(s)
+}
+
 func (e *TrElement) Autocorrect(a TrAutocorrectEnum) *TrElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func TrAutocorrectCustom(s string) TrAutocorrectEnum {
+	return TrAutocorrectEnum(s)
 }
 
 func (e *TrElement) Autofocus(b bool) *TrElement {
@@ -189,6 +197,10 @@ func (e *TrElement) Contenteditable(a TrContenteditableEnum) *TrElement {
 	return e
 }
 
+func TrContenteditableCustom(s string) TrContenteditableEnum {
+	return TrContenteditableEnum(s)
+}
+
 func (e *TrElement) DataUnsafe(name string, s string) *TrElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *TrElement) Dir(a TrDirEnum) *TrElement {
 	return e
 }
 
+func TrDirCustom(s string) TrDirEnum {
+	return TrDirEnum(s)
+}
+
 func (e *TrElement) Draggable(a TrDraggableEnum) *TrElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func TrDraggableCustom(s string) TrDraggableEnum {
+	return TrDraggableEnum(s)
 }
 
 func (e *TrElement) Enterkeyhint(a TrEnterkeyhintEnum) *TrElement {
@@ -219,10 +239,18 @@ func (e *TrElement) Enterkeyhint(a TrEnterkeyhintEnum) *TrElement {
 	return e
 }
 
+func TrEnterkeyhintCustom(s string) TrEnterkeyhintEnum {
+	return TrEnterkeyhintEnum(s)
+}
+
 func (e *TrElement) Hidden(a TrHiddenEnum) *TrElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func TrHiddenCustom(s string) TrHiddenEnum {
+	return TrHiddenEnum(s)
 }
 
 func (e *TrElement) Id(s string) *TrElement {
@@ -241,6 +269,10 @@ func (e *TrElement) Inputmode(a TrInputmodeEnum) *TrElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func TrInputmodeCustom(s string) TrInputmodeEnum {
+	return TrInputmodeEnum(s)
 }
 
 func (e *TrElement) Itemid(s string) *TrElement {
@@ -303,6 +335,10 @@ func (e *TrElement) Spellcheck(a TrSpellcheckEnum) *TrElement {
 	return e
 }
 
+func TrSpellcheckCustom(s string) TrSpellcheckEnum {
+	return TrSpellcheckEnum(s)
+}
+
 func (e *TrElement) Style(s string) *TrElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *TrElement) Translate(a TrTranslateEnum) *TrElement {
 	return e
 }
 
+func TrTranslateCustom(s string) TrTranslateEnum {
+	return TrTranslateEnum(s)
+}
+
 func (e *TrElement) Writingsuggestions(a TrWritingsuggestionsEnum) *TrElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func TrWritingsuggestionsCustom(s string) TrWritingsuggestionsEnum {
+	return TrWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

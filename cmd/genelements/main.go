@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 
 	"golang.org/x/tools/imports"
@@ -101,7 +102,14 @@ func main() {
 
 	for _, e := range sp.Elements {
 		// Merge global attributes into element
-		e.Attributes = append(e.Attributes, sp.Attributes...)
+		for _, a := range sp.Attributes {
+			if !slices.ContainsFunc(e.Attributes, func(eAttr spec.Attribute) bool {
+				return a.GetName() == eAttr.GetName()
+			}) {
+				e.Attributes = append(e.Attributes, a)
+			}
+		}
+
 		if err = generate(strings.ToLower(sp.Name), e); err != nil {
 			panic(err)
 		}

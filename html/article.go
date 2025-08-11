@@ -60,12 +60,12 @@ func (e *ArticleElement) AddIndent(i int) {
 type ArticleAutocapitalizeEnum string
 
 const (
+	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
+	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
 	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
 	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
-	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
-	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 )
 
 type ArticleAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type ArticleContenteditableEnum string
 
 const (
-	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
 	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
+	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumEmpty         ArticleContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type ArticleDraggableEnum string
 
 const (
-	ArticleDraggableEnumFalse ArticleDraggableEnum = "false"
 	ArticleDraggableEnumTrue  ArticleDraggableEnum = "true"
+	ArticleDraggableEnumFalse ArticleDraggableEnum = "false"
 )
 
 type ArticleEnterkeyhintEnum string
 
 const (
-	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
 	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
 	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
 	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
 	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
 	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
+	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
 )
 
 type ArticleHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type ArticleInputmodeEnum string
 
 const (
+	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
 	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
 	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
 	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
@@ -130,7 +131,6 @@ const (
 	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
 	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
 	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
-	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
 )
 
 type ArticleSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *ArticleElement) Autocapitalize(a ArticleAutocapitalizeEnum) *ArticleEle
 	return e
 }
 
+func ArticleAutocapitalizeCustom(s string) ArticleAutocapitalizeEnum {
+	return ArticleAutocapitalizeEnum(s)
+}
+
 func (e *ArticleElement) Autocorrect(a ArticleAutocorrectEnum) *ArticleElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func ArticleAutocorrectCustom(s string) ArticleAutocorrectEnum {
+	return ArticleAutocorrectEnum(s)
 }
 
 func (e *ArticleElement) Autofocus(b bool) *ArticleElement {
@@ -189,6 +197,10 @@ func (e *ArticleElement) Contenteditable(a ArticleContenteditableEnum) *ArticleE
 	return e
 }
 
+func ArticleContenteditableCustom(s string) ArticleContenteditableEnum {
+	return ArticleContenteditableEnum(s)
+}
+
 func (e *ArticleElement) DataUnsafe(name string, s string) *ArticleElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *ArticleElement) Dir(a ArticleDirEnum) *ArticleElement {
 	return e
 }
 
+func ArticleDirCustom(s string) ArticleDirEnum {
+	return ArticleDirEnum(s)
+}
+
 func (e *ArticleElement) Draggable(a ArticleDraggableEnum) *ArticleElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func ArticleDraggableCustom(s string) ArticleDraggableEnum {
+	return ArticleDraggableEnum(s)
 }
 
 func (e *ArticleElement) Enterkeyhint(a ArticleEnterkeyhintEnum) *ArticleElement {
@@ -219,10 +239,18 @@ func (e *ArticleElement) Enterkeyhint(a ArticleEnterkeyhintEnum) *ArticleElement
 	return e
 }
 
+func ArticleEnterkeyhintCustom(s string) ArticleEnterkeyhintEnum {
+	return ArticleEnterkeyhintEnum(s)
+}
+
 func (e *ArticleElement) Hidden(a ArticleHiddenEnum) *ArticleElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func ArticleHiddenCustom(s string) ArticleHiddenEnum {
+	return ArticleHiddenEnum(s)
 }
 
 func (e *ArticleElement) Id(s string) *ArticleElement {
@@ -241,6 +269,10 @@ func (e *ArticleElement) Inputmode(a ArticleInputmodeEnum) *ArticleElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func ArticleInputmodeCustom(s string) ArticleInputmodeEnum {
+	return ArticleInputmodeEnum(s)
 }
 
 func (e *ArticleElement) Itemid(s string) *ArticleElement {
@@ -303,6 +335,10 @@ func (e *ArticleElement) Spellcheck(a ArticleSpellcheckEnum) *ArticleElement {
 	return e
 }
 
+func ArticleSpellcheckCustom(s string) ArticleSpellcheckEnum {
+	return ArticleSpellcheckEnum(s)
+}
+
 func (e *ArticleElement) Style(s string) *ArticleElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *ArticleElement) Translate(a ArticleTranslateEnum) *ArticleElement {
 	return e
 }
 
+func ArticleTranslateCustom(s string) ArticleTranslateEnum {
+	return ArticleTranslateEnum(s)
+}
+
 func (e *ArticleElement) Writingsuggestions(a ArticleWritingsuggestionsEnum) *ArticleElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func ArticleWritingsuggestionsCustom(s string) ArticleWritingsuggestionsEnum {
+	return ArticleWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

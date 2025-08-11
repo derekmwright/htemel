@@ -57,15 +57,50 @@ func (e *ButtonElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type ButtonCommandEnum string
+
+const (
+	ButtonCommandEnumClose         ButtonCommandEnum = "close"
+	ButtonCommandEnumHidePopover   ButtonCommandEnum = "hide-popover"
+	ButtonCommandEnumRequestClose  ButtonCommandEnum = "request-close"
+	ButtonCommandEnumShowModal     ButtonCommandEnum = "show-modal"
+	ButtonCommandEnumShowPopover   ButtonCommandEnum = "show-popover"
+	ButtonCommandEnumTogglePopover ButtonCommandEnum = "toggle-popover"
+)
+
+type ButtonFormmethodEnum string
+
+const (
+	ButtonFormmethodEnumDialog ButtonFormmethodEnum = "dialog"
+	ButtonFormmethodEnumGet    ButtonFormmethodEnum = "get"
+	ButtonFormmethodEnumPost   ButtonFormmethodEnum = "post"
+)
+
+type ButtonPopovertargetactionEnum string
+
+const (
+	ButtonPopovertargetactionEnumHide   ButtonPopovertargetactionEnum = "hide"
+	ButtonPopovertargetactionEnumShow   ButtonPopovertargetactionEnum = "show"
+	ButtonPopovertargetactionEnumToggle ButtonPopovertargetactionEnum = "toggle"
+)
+
+type ButtonTypeEnum string
+
+const (
+	ButtonTypeEnumButton ButtonTypeEnum = "button"
+	ButtonTypeEnumReset  ButtonTypeEnum = "reset"
+	ButtonTypeEnumSubmit ButtonTypeEnum = "submit"
+)
+
 type ButtonAutocapitalizeEnum string
 
 const (
-	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
 	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
 	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
 	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
+	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 )
 
 type ButtonAutocorrectEnum string
@@ -88,9 +123,9 @@ const (
 type ButtonDirEnum string
 
 const (
+	ButtonDirEnumRtl  ButtonDirEnum = "rtl"
 	ButtonDirEnumAuto ButtonDirEnum = "auto"
 	ButtonDirEnumLtr  ButtonDirEnum = "ltr"
-	ButtonDirEnumRtl  ButtonDirEnum = "rtl"
 )
 
 type ButtonDraggableEnum string
@@ -103,13 +138,13 @@ const (
 type ButtonEnterkeyhintEnum string
 
 const (
-	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
-	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
-	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
 	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
 	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
 	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
+	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
+	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
+	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
 )
 
 type ButtonHiddenEnum string
@@ -159,16 +194,124 @@ const (
 
 type buttonAttrs map[string]any
 
+func (e *ButtonElement) Command(a ButtonCommandEnum) *ButtonElement {
+	e.attributes["command"] = a
+
+	return e
+}
+
+func ButtonCommandCustom(s string) ButtonCommandEnum {
+	return ButtonCommandEnum(s)
+}
+
+func (e *ButtonElement) Commandfor(s string) *ButtonElement {
+	e.attributes["commandfor"] = s
+
+	return e
+}
+
+func (e *ButtonElement) Disabled(b bool) *ButtonElement {
+	e.attributes["disabled"] = b
+
+	return e
+}
+
+func (e *ButtonElement) Form(s string) *ButtonElement {
+	e.attributes["form"] = s
+
+	return e
+}
+
+func (e *ButtonElement) Formaction(s string) *ButtonElement {
+	e.attributes["formaction"] = s
+
+	return e
+}
+
+func (e *ButtonElement) Formenctype(s string) *ButtonElement {
+	e.attributes["formenctype"] = s
+
+	return e
+}
+
+func (e *ButtonElement) Formmethod(a ButtonFormmethodEnum) *ButtonElement {
+	e.attributes["formmethod"] = a
+
+	return e
+}
+
+func ButtonFormmethodCustom(s string) ButtonFormmethodEnum {
+	return ButtonFormmethodEnum(s)
+}
+
+func (e *ButtonElement) Formnovalidate(b bool) *ButtonElement {
+	e.attributes["formnovalidate"] = b
+
+	return e
+}
+
+func (e *ButtonElement) Formtarget(s string) *ButtonElement {
+	e.attributes["formtarget"] = s
+
+	return e
+}
+
+func (e *ButtonElement) Name(s string) *ButtonElement {
+	e.attributes["name"] = s
+
+	return e
+}
+
+func (e *ButtonElement) Popovertarget(s string) *ButtonElement {
+	e.attributes["popovertarget"] = s
+
+	return e
+}
+
+func (e *ButtonElement) Popovertargetaction(a ButtonPopovertargetactionEnum) *ButtonElement {
+	e.attributes["popovertargetaction"] = a
+
+	return e
+}
+
+func ButtonPopovertargetactionCustom(s string) ButtonPopovertargetactionEnum {
+	return ButtonPopovertargetactionEnum(s)
+}
+
+func (e *ButtonElement) Type(a ButtonTypeEnum) *ButtonElement {
+	e.attributes["type"] = a
+
+	return e
+}
+
+func ButtonTypeCustom(s string) ButtonTypeEnum {
+	return ButtonTypeEnum(s)
+}
+
+func (e *ButtonElement) Value(s string) *ButtonElement {
+	e.attributes["value"] = s
+
+	return e
+}
+
 func (e *ButtonElement) Autocapitalize(a ButtonAutocapitalizeEnum) *ButtonElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
+func ButtonAutocapitalizeCustom(s string) ButtonAutocapitalizeEnum {
+	return ButtonAutocapitalizeEnum(s)
+}
+
 func (e *ButtonElement) Autocorrect(a ButtonAutocorrectEnum) *ButtonElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func ButtonAutocorrectCustom(s string) ButtonAutocorrectEnum {
+	return ButtonAutocorrectEnum(s)
 }
 
 func (e *ButtonElement) Autofocus(b bool) *ButtonElement {
@@ -189,6 +332,10 @@ func (e *ButtonElement) Contenteditable(a ButtonContenteditableEnum) *ButtonElem
 	return e
 }
 
+func ButtonContenteditableCustom(s string) ButtonContenteditableEnum {
+	return ButtonContenteditableEnum(s)
+}
+
 func (e *ButtonElement) DataUnsafe(name string, s string) *ButtonElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +354,18 @@ func (e *ButtonElement) Dir(a ButtonDirEnum) *ButtonElement {
 	return e
 }
 
+func ButtonDirCustom(s string) ButtonDirEnum {
+	return ButtonDirEnum(s)
+}
+
 func (e *ButtonElement) Draggable(a ButtonDraggableEnum) *ButtonElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func ButtonDraggableCustom(s string) ButtonDraggableEnum {
+	return ButtonDraggableEnum(s)
 }
 
 func (e *ButtonElement) Enterkeyhint(a ButtonEnterkeyhintEnum) *ButtonElement {
@@ -219,10 +374,18 @@ func (e *ButtonElement) Enterkeyhint(a ButtonEnterkeyhintEnum) *ButtonElement {
 	return e
 }
 
+func ButtonEnterkeyhintCustom(s string) ButtonEnterkeyhintEnum {
+	return ButtonEnterkeyhintEnum(s)
+}
+
 func (e *ButtonElement) Hidden(a ButtonHiddenEnum) *ButtonElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func ButtonHiddenCustom(s string) ButtonHiddenEnum {
+	return ButtonHiddenEnum(s)
 }
 
 func (e *ButtonElement) Id(s string) *ButtonElement {
@@ -241,6 +404,10 @@ func (e *ButtonElement) Inputmode(a ButtonInputmodeEnum) *ButtonElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func ButtonInputmodeCustom(s string) ButtonInputmodeEnum {
+	return ButtonInputmodeEnum(s)
 }
 
 func (e *ButtonElement) Itemid(s string) *ButtonElement {
@@ -303,6 +470,10 @@ func (e *ButtonElement) Spellcheck(a ButtonSpellcheckEnum) *ButtonElement {
 	return e
 }
 
+func ButtonSpellcheckCustom(s string) ButtonSpellcheckEnum {
+	return ButtonSpellcheckEnum(s)
+}
+
 func (e *ButtonElement) Style(s string) *ButtonElement {
 	e.attributes["style"] = s
 
@@ -327,10 +498,18 @@ func (e *ButtonElement) Translate(a ButtonTranslateEnum) *ButtonElement {
 	return e
 }
 
+func ButtonTranslateCustom(s string) ButtonTranslateEnum {
+	return ButtonTranslateEnum(s)
+}
+
 func (e *ButtonElement) Writingsuggestions(a ButtonWritingsuggestionsEnum) *ButtonElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func ButtonWritingsuggestionsCustom(s string) ButtonWritingsuggestionsEnum {
+	return ButtonWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -52,24 +52,24 @@ func (e *MetaElement) AddIndent(i int) {
 type MetaHttpEquivEnum string
 
 const (
-	MetaHttpEquivEnumSetCookie             MetaHttpEquivEnum = "set-cookie"
-	MetaHttpEquivEnumXUaCompatible         MetaHttpEquivEnum = "x-ua-compatible"
 	MetaHttpEquivEnumContentLanguage       MetaHttpEquivEnum = "content-language"
 	MetaHttpEquivEnumContentSecurityPolicy MetaHttpEquivEnum = "content-security-policy"
 	MetaHttpEquivEnumContentType           MetaHttpEquivEnum = "content-type"
 	MetaHttpEquivEnumDefaultStyle          MetaHttpEquivEnum = "default-style"
 	MetaHttpEquivEnumRefresh               MetaHttpEquivEnum = "refresh"
+	MetaHttpEquivEnumSetCookie             MetaHttpEquivEnum = "set-cookie"
+	MetaHttpEquivEnumXUaCompatible         MetaHttpEquivEnum = "x-ua-compatible"
 )
 
 type MetaAutocapitalizeEnum string
 
 const (
-	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
-	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
 	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
 	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
 	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
 	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
+	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
+	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
 )
 
 type MetaAutocorrectEnum string
@@ -92,9 +92,9 @@ const (
 type MetaDirEnum string
 
 const (
-	MetaDirEnumAuto MetaDirEnum = "auto"
 	MetaDirEnumLtr  MetaDirEnum = "ltr"
 	MetaDirEnumRtl  MetaDirEnum = "rtl"
+	MetaDirEnumAuto MetaDirEnum = "auto"
 )
 
 type MetaDraggableEnum string
@@ -107,13 +107,13 @@ const (
 type MetaEnterkeyhintEnum string
 
 const (
-	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
 	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
 	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
 	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
 	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
 	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
+	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
 )
 
 type MetaHiddenEnum string
@@ -127,21 +127,21 @@ const (
 type MetaInputmodeEnum string
 
 const (
-	MetaInputmodeEnumNumeric MetaInputmodeEnum = "numeric"
-	MetaInputmodeEnumSearch  MetaInputmodeEnum = "search"
-	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
-	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
 	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
 	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
 	MetaInputmodeEnumEmail   MetaInputmodeEnum = "email"
 	MetaInputmodeEnumNone    MetaInputmodeEnum = "none"
+	MetaInputmodeEnumNumeric MetaInputmodeEnum = "numeric"
+	MetaInputmodeEnumSearch  MetaInputmodeEnum = "search"
+	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
+	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
 )
 
 type MetaSpellcheckEnum string
 
 const (
-	MetaSpellcheckEnumFalse MetaSpellcheckEnum = "false"
 	MetaSpellcheckEnumTrue  MetaSpellcheckEnum = "true"
+	MetaSpellcheckEnumFalse MetaSpellcheckEnum = "false"
 	MetaSpellcheckEnumEmpty MetaSpellcheckEnum = ""
 )
 
@@ -175,6 +175,10 @@ func (e *MetaElement) HttpEquiv(a MetaHttpEquivEnum) *MetaElement {
 	return e
 }
 
+func MetaHttpEquivCustom(s string) MetaHttpEquivEnum {
+	return MetaHttpEquivEnum(s)
+}
+
 func (e *MetaElement) Content(s string) *MetaElement {
 	e.attributes["content"] = s
 
@@ -199,10 +203,18 @@ func (e *MetaElement) Autocapitalize(a MetaAutocapitalizeEnum) *MetaElement {
 	return e
 }
 
+func MetaAutocapitalizeCustom(s string) MetaAutocapitalizeEnum {
+	return MetaAutocapitalizeEnum(s)
+}
+
 func (e *MetaElement) Autocorrect(a MetaAutocorrectEnum) *MetaElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func MetaAutocorrectCustom(s string) MetaAutocorrectEnum {
+	return MetaAutocorrectEnum(s)
 }
 
 func (e *MetaElement) Autofocus(b bool) *MetaElement {
@@ -223,6 +235,10 @@ func (e *MetaElement) Contenteditable(a MetaContenteditableEnum) *MetaElement {
 	return e
 }
 
+func MetaContenteditableCustom(s string) MetaContenteditableEnum {
+	return MetaContenteditableEnum(s)
+}
+
 func (e *MetaElement) DataUnsafe(name string, s string) *MetaElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -241,10 +257,18 @@ func (e *MetaElement) Dir(a MetaDirEnum) *MetaElement {
 	return e
 }
 
+func MetaDirCustom(s string) MetaDirEnum {
+	return MetaDirEnum(s)
+}
+
 func (e *MetaElement) Draggable(a MetaDraggableEnum) *MetaElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func MetaDraggableCustom(s string) MetaDraggableEnum {
+	return MetaDraggableEnum(s)
 }
 
 func (e *MetaElement) Enterkeyhint(a MetaEnterkeyhintEnum) *MetaElement {
@@ -253,10 +277,18 @@ func (e *MetaElement) Enterkeyhint(a MetaEnterkeyhintEnum) *MetaElement {
 	return e
 }
 
+func MetaEnterkeyhintCustom(s string) MetaEnterkeyhintEnum {
+	return MetaEnterkeyhintEnum(s)
+}
+
 func (e *MetaElement) Hidden(a MetaHiddenEnum) *MetaElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func MetaHiddenCustom(s string) MetaHiddenEnum {
+	return MetaHiddenEnum(s)
 }
 
 func (e *MetaElement) Id(s string) *MetaElement {
@@ -275,6 +307,10 @@ func (e *MetaElement) Inputmode(a MetaInputmodeEnum) *MetaElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func MetaInputmodeCustom(s string) MetaInputmodeEnum {
+	return MetaInputmodeEnum(s)
 }
 
 func (e *MetaElement) Itemid(s string) *MetaElement {
@@ -337,6 +373,10 @@ func (e *MetaElement) Spellcheck(a MetaSpellcheckEnum) *MetaElement {
 	return e
 }
 
+func MetaSpellcheckCustom(s string) MetaSpellcheckEnum {
+	return MetaSpellcheckEnum(s)
+}
+
 func (e *MetaElement) Style(s string) *MetaElement {
 	e.attributes["style"] = s
 
@@ -361,10 +401,18 @@ func (e *MetaElement) Translate(a MetaTranslateEnum) *MetaElement {
 	return e
 }
 
+func MetaTranslateCustom(s string) MetaTranslateEnum {
+	return MetaTranslateEnum(s)
+}
+
 func (e *MetaElement) Writingsuggestions(a MetaWritingsuggestionsEnum) *MetaElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func MetaWritingsuggestionsCustom(s string) MetaWritingsuggestionsEnum {
+	return MetaWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

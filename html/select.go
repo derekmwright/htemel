@@ -71,17 +71,17 @@ const (
 type SelectAutocorrectEnum string
 
 const (
-	SelectAutocorrectEnumOn    SelectAutocorrectEnum = "on"
 	SelectAutocorrectEnumOff   SelectAutocorrectEnum = "off"
+	SelectAutocorrectEnumOn    SelectAutocorrectEnum = "on"
 	SelectAutocorrectEnumEmpty SelectAutocorrectEnum = ""
 )
 
 type SelectContenteditableEnum string
 
 const (
-	SelectContenteditableEnumFalse         SelectContenteditableEnum = "false"
 	SelectContenteditableEnumPlaintextOnly SelectContenteditableEnum = "plaintext-only"
 	SelectContenteditableEnumTrue          SelectContenteditableEnum = "true"
+	SelectContenteditableEnumFalse         SelectContenteditableEnum = "false"
 	SelectContenteditableEnumEmpty         SelectContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type SelectDraggableEnum string
 
 const (
-	SelectDraggableEnumTrue  SelectDraggableEnum = "true"
 	SelectDraggableEnumFalse SelectDraggableEnum = "false"
+	SelectDraggableEnumTrue  SelectDraggableEnum = "true"
 )
 
 type SelectEnterkeyhintEnum string
 
 const (
+	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
+	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
 	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
 	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
-	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
-	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 )
 
 type SelectHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SelectInputmodeEnum string
 
 const (
-	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
-	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
 	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
 	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
 	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
 	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
 	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
 	SelectInputmodeEnumUrl     SelectInputmodeEnum = "url"
+	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
+	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
 )
 
 type SelectSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type SelectWritingsuggestionsEnum string
 
 const (
-	SelectWritingsuggestionsEnumFalse SelectWritingsuggestionsEnum = "false"
 	SelectWritingsuggestionsEnumTrue  SelectWritingsuggestionsEnum = "true"
+	SelectWritingsuggestionsEnumFalse SelectWritingsuggestionsEnum = "false"
 	SelectWritingsuggestionsEnumEmpty SelectWritingsuggestionsEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *SelectElement) Autocapitalize(a SelectAutocapitalizeEnum) *SelectElemen
 	return e
 }
 
+func SelectAutocapitalizeCustom(s string) SelectAutocapitalizeEnum {
+	return SelectAutocapitalizeEnum(s)
+}
+
 func (e *SelectElement) Autocorrect(a SelectAutocorrectEnum) *SelectElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func SelectAutocorrectCustom(s string) SelectAutocorrectEnum {
+	return SelectAutocorrectEnum(s)
 }
 
 func (e *SelectElement) Autofocus(b bool) *SelectElement {
@@ -189,6 +197,10 @@ func (e *SelectElement) Contenteditable(a SelectContenteditableEnum) *SelectElem
 	return e
 }
 
+func SelectContenteditableCustom(s string) SelectContenteditableEnum {
+	return SelectContenteditableEnum(s)
+}
+
 func (e *SelectElement) DataUnsafe(name string, s string) *SelectElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *SelectElement) Dir(a SelectDirEnum) *SelectElement {
 	return e
 }
 
+func SelectDirCustom(s string) SelectDirEnum {
+	return SelectDirEnum(s)
+}
+
 func (e *SelectElement) Draggable(a SelectDraggableEnum) *SelectElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func SelectDraggableCustom(s string) SelectDraggableEnum {
+	return SelectDraggableEnum(s)
 }
 
 func (e *SelectElement) Enterkeyhint(a SelectEnterkeyhintEnum) *SelectElement {
@@ -219,10 +239,18 @@ func (e *SelectElement) Enterkeyhint(a SelectEnterkeyhintEnum) *SelectElement {
 	return e
 }
 
+func SelectEnterkeyhintCustom(s string) SelectEnterkeyhintEnum {
+	return SelectEnterkeyhintEnum(s)
+}
+
 func (e *SelectElement) Hidden(a SelectHiddenEnum) *SelectElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func SelectHiddenCustom(s string) SelectHiddenEnum {
+	return SelectHiddenEnum(s)
 }
 
 func (e *SelectElement) Id(s string) *SelectElement {
@@ -241,6 +269,10 @@ func (e *SelectElement) Inputmode(a SelectInputmodeEnum) *SelectElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func SelectInputmodeCustom(s string) SelectInputmodeEnum {
+	return SelectInputmodeEnum(s)
 }
 
 func (e *SelectElement) Itemid(s string) *SelectElement {
@@ -303,6 +335,10 @@ func (e *SelectElement) Spellcheck(a SelectSpellcheckEnum) *SelectElement {
 	return e
 }
 
+func SelectSpellcheckCustom(s string) SelectSpellcheckEnum {
+	return SelectSpellcheckEnum(s)
+}
+
 func (e *SelectElement) Style(s string) *SelectElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *SelectElement) Translate(a SelectTranslateEnum) *SelectElement {
 	return e
 }
 
+func SelectTranslateCustom(s string) SelectTranslateEnum {
+	return SelectTranslateEnum(s)
+}
+
 func (e *SelectElement) Writingsuggestions(a SelectWritingsuggestionsEnum) *SelectElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func SelectWritingsuggestionsCustom(s string) SelectWritingsuggestionsEnum {
+	return SelectWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

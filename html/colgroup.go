@@ -60,19 +60,19 @@ func (e *ColgroupElement) AddIndent(i int) {
 type ColgroupAutocapitalizeEnum string
 
 const (
+	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
+	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 	ColgroupAutocapitalizeEnumOff        ColgroupAutocapitalizeEnum = "off"
 	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
 	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
 	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
-	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
-	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 )
 
 type ColgroupAutocorrectEnum string
 
 const (
-	ColgroupAutocorrectEnumOff   ColgroupAutocorrectEnum = "off"
 	ColgroupAutocorrectEnumOn    ColgroupAutocorrectEnum = "on"
+	ColgroupAutocorrectEnumOff   ColgroupAutocorrectEnum = "off"
 	ColgroupAutocorrectEnumEmpty ColgroupAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type ColgroupEnterkeyhintEnum string
 
 const (
+	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
+	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
 	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
 	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
 	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
 	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
 	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
-	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
-	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
 )
 
 type ColgroupHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type ColgroupInputmodeEnum string
 
 const (
+	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
+	ColgroupInputmodeEnumSearch  ColgroupInputmodeEnum = "search"
+	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
 	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
 	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
 	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
 	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
 	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
-	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
-	ColgroupInputmodeEnumSearch  ColgroupInputmodeEnum = "search"
-	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
 )
 
 type ColgroupSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type ColgroupWritingsuggestionsEnum string
 
 const (
-	ColgroupWritingsuggestionsEnumFalse ColgroupWritingsuggestionsEnum = "false"
 	ColgroupWritingsuggestionsEnumTrue  ColgroupWritingsuggestionsEnum = "true"
+	ColgroupWritingsuggestionsEnumFalse ColgroupWritingsuggestionsEnum = "false"
 	ColgroupWritingsuggestionsEnumEmpty ColgroupWritingsuggestionsEnum = ""
 )
 
@@ -171,10 +171,18 @@ func (e *ColgroupElement) Autocapitalize(a ColgroupAutocapitalizeEnum) *Colgroup
 	return e
 }
 
+func ColgroupAutocapitalizeCustom(s string) ColgroupAutocapitalizeEnum {
+	return ColgroupAutocapitalizeEnum(s)
+}
+
 func (e *ColgroupElement) Autocorrect(a ColgroupAutocorrectEnum) *ColgroupElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func ColgroupAutocorrectCustom(s string) ColgroupAutocorrectEnum {
+	return ColgroupAutocorrectEnum(s)
 }
 
 func (e *ColgroupElement) Autofocus(b bool) *ColgroupElement {
@@ -195,6 +203,10 @@ func (e *ColgroupElement) Contenteditable(a ColgroupContenteditableEnum) *Colgro
 	return e
 }
 
+func ColgroupContenteditableCustom(s string) ColgroupContenteditableEnum {
+	return ColgroupContenteditableEnum(s)
+}
+
 func (e *ColgroupElement) DataUnsafe(name string, s string) *ColgroupElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -213,10 +225,18 @@ func (e *ColgroupElement) Dir(a ColgroupDirEnum) *ColgroupElement {
 	return e
 }
 
+func ColgroupDirCustom(s string) ColgroupDirEnum {
+	return ColgroupDirEnum(s)
+}
+
 func (e *ColgroupElement) Draggable(a ColgroupDraggableEnum) *ColgroupElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func ColgroupDraggableCustom(s string) ColgroupDraggableEnum {
+	return ColgroupDraggableEnum(s)
 }
 
 func (e *ColgroupElement) Enterkeyhint(a ColgroupEnterkeyhintEnum) *ColgroupElement {
@@ -225,10 +245,18 @@ func (e *ColgroupElement) Enterkeyhint(a ColgroupEnterkeyhintEnum) *ColgroupElem
 	return e
 }
 
+func ColgroupEnterkeyhintCustom(s string) ColgroupEnterkeyhintEnum {
+	return ColgroupEnterkeyhintEnum(s)
+}
+
 func (e *ColgroupElement) Hidden(a ColgroupHiddenEnum) *ColgroupElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func ColgroupHiddenCustom(s string) ColgroupHiddenEnum {
+	return ColgroupHiddenEnum(s)
 }
 
 func (e *ColgroupElement) Id(s string) *ColgroupElement {
@@ -247,6 +275,10 @@ func (e *ColgroupElement) Inputmode(a ColgroupInputmodeEnum) *ColgroupElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func ColgroupInputmodeCustom(s string) ColgroupInputmodeEnum {
+	return ColgroupInputmodeEnum(s)
 }
 
 func (e *ColgroupElement) Itemid(s string) *ColgroupElement {
@@ -309,6 +341,10 @@ func (e *ColgroupElement) Spellcheck(a ColgroupSpellcheckEnum) *ColgroupElement 
 	return e
 }
 
+func ColgroupSpellcheckCustom(s string) ColgroupSpellcheckEnum {
+	return ColgroupSpellcheckEnum(s)
+}
+
 func (e *ColgroupElement) Style(s string) *ColgroupElement {
 	e.attributes["style"] = s
 
@@ -333,10 +369,18 @@ func (e *ColgroupElement) Translate(a ColgroupTranslateEnum) *ColgroupElement {
 	return e
 }
 
+func ColgroupTranslateCustom(s string) ColgroupTranslateEnum {
+	return ColgroupTranslateEnum(s)
+}
+
 func (e *ColgroupElement) Writingsuggestions(a ColgroupWritingsuggestionsEnum) *ColgroupElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func ColgroupWritingsuggestionsCustom(s string) ColgroupWritingsuggestionsEnum {
+	return ColgroupWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

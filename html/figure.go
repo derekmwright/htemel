@@ -60,19 +60,19 @@ func (e *FigureElement) AddIndent(i int) {
 type FigureAutocapitalizeEnum string
 
 const (
+	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
 	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
 	FigureAutocapitalizeEnumNone       FigureAutocapitalizeEnum = "none"
 	FigureAutocapitalizeEnumOff        FigureAutocapitalizeEnum = "off"
 	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
 	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
-	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
 )
 
 type FigureAutocorrectEnum string
 
 const (
-	FigureAutocorrectEnumOn    FigureAutocorrectEnum = "on"
 	FigureAutocorrectEnumOff   FigureAutocorrectEnum = "off"
+	FigureAutocorrectEnumOn    FigureAutocorrectEnum = "on"
 	FigureAutocorrectEnumEmpty FigureAutocorrectEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type FigureDraggableEnum string
 
 const (
-	FigureDraggableEnumFalse FigureDraggableEnum = "false"
 	FigureDraggableEnumTrue  FigureDraggableEnum = "true"
+	FigureDraggableEnumFalse FigureDraggableEnum = "false"
 )
 
 type FigureEnterkeyhintEnum string
 
 const (
+	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
+	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
 	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
 	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
 	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
 	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
 	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
-	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
-	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
 )
 
 type FigureHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type FigureInputmodeEnum string
 
 const (
-	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
 	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
 	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
 	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
@@ -131,6 +130,7 @@ const (
 	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
 	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
 	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
+	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
 )
 
 type FigureSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *FigureElement) Autocapitalize(a FigureAutocapitalizeEnum) *FigureElemen
 	return e
 }
 
+func FigureAutocapitalizeCustom(s string) FigureAutocapitalizeEnum {
+	return FigureAutocapitalizeEnum(s)
+}
+
 func (e *FigureElement) Autocorrect(a FigureAutocorrectEnum) *FigureElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func FigureAutocorrectCustom(s string) FigureAutocorrectEnum {
+	return FigureAutocorrectEnum(s)
 }
 
 func (e *FigureElement) Autofocus(b bool) *FigureElement {
@@ -189,6 +197,10 @@ func (e *FigureElement) Contenteditable(a FigureContenteditableEnum) *FigureElem
 	return e
 }
 
+func FigureContenteditableCustom(s string) FigureContenteditableEnum {
+	return FigureContenteditableEnum(s)
+}
+
 func (e *FigureElement) DataUnsafe(name string, s string) *FigureElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *FigureElement) Dir(a FigureDirEnum) *FigureElement {
 	return e
 }
 
+func FigureDirCustom(s string) FigureDirEnum {
+	return FigureDirEnum(s)
+}
+
 func (e *FigureElement) Draggable(a FigureDraggableEnum) *FigureElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func FigureDraggableCustom(s string) FigureDraggableEnum {
+	return FigureDraggableEnum(s)
 }
 
 func (e *FigureElement) Enterkeyhint(a FigureEnterkeyhintEnum) *FigureElement {
@@ -219,10 +239,18 @@ func (e *FigureElement) Enterkeyhint(a FigureEnterkeyhintEnum) *FigureElement {
 	return e
 }
 
+func FigureEnterkeyhintCustom(s string) FigureEnterkeyhintEnum {
+	return FigureEnterkeyhintEnum(s)
+}
+
 func (e *FigureElement) Hidden(a FigureHiddenEnum) *FigureElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func FigureHiddenCustom(s string) FigureHiddenEnum {
+	return FigureHiddenEnum(s)
 }
 
 func (e *FigureElement) Id(s string) *FigureElement {
@@ -241,6 +269,10 @@ func (e *FigureElement) Inputmode(a FigureInputmodeEnum) *FigureElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func FigureInputmodeCustom(s string) FigureInputmodeEnum {
+	return FigureInputmodeEnum(s)
 }
 
 func (e *FigureElement) Itemid(s string) *FigureElement {
@@ -303,6 +335,10 @@ func (e *FigureElement) Spellcheck(a FigureSpellcheckEnum) *FigureElement {
 	return e
 }
 
+func FigureSpellcheckCustom(s string) FigureSpellcheckEnum {
+	return FigureSpellcheckEnum(s)
+}
+
 func (e *FigureElement) Style(s string) *FigureElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *FigureElement) Translate(a FigureTranslateEnum) *FigureElement {
 	return e
 }
 
+func FigureTranslateCustom(s string) FigureTranslateEnum {
+	return FigureTranslateEnum(s)
+}
+
 func (e *FigureElement) Writingsuggestions(a FigureWritingsuggestionsEnum) *FigureElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func FigureWritingsuggestionsCustom(s string) FigureWritingsuggestionsEnum {
+	return FigureWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

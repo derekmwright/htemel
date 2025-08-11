@@ -60,19 +60,19 @@ func (e *LabelElement) AddIndent(i int) {
 type LabelAutocapitalizeEnum string
 
 const (
-	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
-	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
 	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 	LabelAutocapitalizeEnumCharacters LabelAutocapitalizeEnum = "characters"
 	LabelAutocapitalizeEnumNone       LabelAutocapitalizeEnum = "none"
 	LabelAutocapitalizeEnumOff        LabelAutocapitalizeEnum = "off"
+	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
+	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
 )
 
 type LabelAutocorrectEnum string
 
 const (
-	LabelAutocorrectEnumOff   LabelAutocorrectEnum = "off"
 	LabelAutocorrectEnumOn    LabelAutocorrectEnum = "on"
+	LabelAutocorrectEnumOff   LabelAutocorrectEnum = "off"
 	LabelAutocorrectEnumEmpty LabelAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type LabelEnterkeyhintEnum string
 
 const (
+	LabelEnterkeyhintEnumSend     LabelEnterkeyhintEnum = "send"
+	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
+	LabelEnterkeyhintEnumEnter    LabelEnterkeyhintEnum = "enter"
 	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
 	LabelEnterkeyhintEnumNext     LabelEnterkeyhintEnum = "next"
 	LabelEnterkeyhintEnumPrevious LabelEnterkeyhintEnum = "previous"
 	LabelEnterkeyhintEnumSearch   LabelEnterkeyhintEnum = "search"
-	LabelEnterkeyhintEnumSend     LabelEnterkeyhintEnum = "send"
-	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
-	LabelEnterkeyhintEnumEnter    LabelEnterkeyhintEnum = "enter"
 )
 
 type LabelHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type LabelInputmodeEnum string
 
 const (
-	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
-	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
 	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
 	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
 	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
 	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
 	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
+	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
+	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
 )
 
 type LabelSpellcheckEnum string
 
 const (
-	LabelSpellcheckEnumFalse LabelSpellcheckEnum = "false"
 	LabelSpellcheckEnumTrue  LabelSpellcheckEnum = "true"
+	LabelSpellcheckEnumFalse LabelSpellcheckEnum = "false"
 	LabelSpellcheckEnumEmpty LabelSpellcheckEnum = ""
 )
 
@@ -152,12 +152,18 @@ const (
 type LabelWritingsuggestionsEnum string
 
 const (
-	LabelWritingsuggestionsEnumFalse LabelWritingsuggestionsEnum = "false"
 	LabelWritingsuggestionsEnumTrue  LabelWritingsuggestionsEnum = "true"
+	LabelWritingsuggestionsEnumFalse LabelWritingsuggestionsEnum = "false"
 	LabelWritingsuggestionsEnumEmpty LabelWritingsuggestionsEnum = ""
 )
 
 type labelAttrs map[string]any
+
+func (e *LabelElement) For(s string) *LabelElement {
+	e.attributes["for"] = s
+
+	return e
+}
 
 func (e *LabelElement) Autocapitalize(a LabelAutocapitalizeEnum) *LabelElement {
 	e.attributes["autocapitalize"] = a
@@ -165,10 +171,18 @@ func (e *LabelElement) Autocapitalize(a LabelAutocapitalizeEnum) *LabelElement {
 	return e
 }
 
+func LabelAutocapitalizeCustom(s string) LabelAutocapitalizeEnum {
+	return LabelAutocapitalizeEnum(s)
+}
+
 func (e *LabelElement) Autocorrect(a LabelAutocorrectEnum) *LabelElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func LabelAutocorrectCustom(s string) LabelAutocorrectEnum {
+	return LabelAutocorrectEnum(s)
 }
 
 func (e *LabelElement) Autofocus(b bool) *LabelElement {
@@ -189,6 +203,10 @@ func (e *LabelElement) Contenteditable(a LabelContenteditableEnum) *LabelElement
 	return e
 }
 
+func LabelContenteditableCustom(s string) LabelContenteditableEnum {
+	return LabelContenteditableEnum(s)
+}
+
 func (e *LabelElement) DataUnsafe(name string, s string) *LabelElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +225,18 @@ func (e *LabelElement) Dir(a LabelDirEnum) *LabelElement {
 	return e
 }
 
+func LabelDirCustom(s string) LabelDirEnum {
+	return LabelDirEnum(s)
+}
+
 func (e *LabelElement) Draggable(a LabelDraggableEnum) *LabelElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func LabelDraggableCustom(s string) LabelDraggableEnum {
+	return LabelDraggableEnum(s)
 }
 
 func (e *LabelElement) Enterkeyhint(a LabelEnterkeyhintEnum) *LabelElement {
@@ -219,10 +245,18 @@ func (e *LabelElement) Enterkeyhint(a LabelEnterkeyhintEnum) *LabelElement {
 	return e
 }
 
+func LabelEnterkeyhintCustom(s string) LabelEnterkeyhintEnum {
+	return LabelEnterkeyhintEnum(s)
+}
+
 func (e *LabelElement) Hidden(a LabelHiddenEnum) *LabelElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func LabelHiddenCustom(s string) LabelHiddenEnum {
+	return LabelHiddenEnum(s)
 }
 
 func (e *LabelElement) Id(s string) *LabelElement {
@@ -241,6 +275,10 @@ func (e *LabelElement) Inputmode(a LabelInputmodeEnum) *LabelElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func LabelInputmodeCustom(s string) LabelInputmodeEnum {
+	return LabelInputmodeEnum(s)
 }
 
 func (e *LabelElement) Itemid(s string) *LabelElement {
@@ -303,6 +341,10 @@ func (e *LabelElement) Spellcheck(a LabelSpellcheckEnum) *LabelElement {
 	return e
 }
 
+func LabelSpellcheckCustom(s string) LabelSpellcheckEnum {
+	return LabelSpellcheckEnum(s)
+}
+
 func (e *LabelElement) Style(s string) *LabelElement {
 	e.attributes["style"] = s
 
@@ -327,10 +369,18 @@ func (e *LabelElement) Translate(a LabelTranslateEnum) *LabelElement {
 	return e
 }
 
+func LabelTranslateCustom(s string) LabelTranslateEnum {
+	return LabelTranslateEnum(s)
+}
+
 func (e *LabelElement) Writingsuggestions(a LabelWritingsuggestionsEnum) *LabelElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func LabelWritingsuggestionsCustom(s string) LabelWritingsuggestionsEnum {
+	return LabelWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

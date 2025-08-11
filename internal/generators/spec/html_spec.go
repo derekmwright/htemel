@@ -638,6 +638,7 @@ func embedAttr() []Attribute {
 
 func objectAttr() []Attribute {
 	return []Attribute{
+		// TODO: Fix this collision with `data-`
 		&AttributeTypeString{
 			Name:        "data",
 			Description: "Address of the resource",
@@ -851,6 +852,320 @@ func thAttr() []Attribute {
 	}
 }
 
+func formAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "accept-charset",
+			Description: "Character encodings to use for form submission",
+		},
+		&AttributeTypeString{
+			Name:        "action",
+			Description: "URL to use for form submission",
+		},
+		&AttributeTypeEnum{
+			Name:        "autocomplete",
+			Description: "Default setting for autofill feature for controls in the form",
+			Allowed: map[string]struct{}{
+				"on":  {},
+				"off": {},
+			},
+		},
+		&AttributeTypeString{
+			Name:        "enctype",
+			Description: "Entry list encoding type to use for form submission",
+		},
+		&AttributeTypeEnum{
+			Name:        "method",
+			Description: "Variant to use for form submission",
+			Allowed: map[string]struct{}{
+				"get":    {},
+				"post":   {},
+				"dialog": {},
+			},
+		},
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of form to use in the document.forms API",
+		},
+		&AttributeTypeBool{
+			Name:        "novalidate",
+			Description: "Bypass form control validation for form submission",
+		},
+		&AttributeTypeString{
+			Name:        "target",
+			Description: "Navigable for form submission",
+		},
+		&AttributeTypeSST{
+			Name:        "rel",
+			Description: "The rel attribute on form elements controls what kinds of links the elements create.",
+		},
+	}
+}
+
+func labelAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "for",
+			Description: "Associate the label with form control",
+		},
+	}
+}
+
+func inputAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "accept",
+			Description: "Hint for expected file type in file upload controls",
+		},
+		&AttributeTypeBool{
+			Name:        "alpha",
+			Description: "Allow the color's alpha component to be set",
+		},
+		&AttributeTypeString{
+			Name:        "alt",
+			Description: "Replacement text for use when images are not available",
+		},
+		&AttributeTypeSST{
+			Name:        "autocomplete",
+			Description: "Hint for form autofill feature",
+		},
+		&AttributeTypeBool{
+			Name:        "checked",
+			Description: "Hint for form autofill feature",
+		},
+		&AttributeTypeEnum{
+			Name:        "colorspace",
+			Description: "The color space of the serialized color",
+			Allowed: map[string]struct{}{
+				"limited-srgb": {},
+				"display-p3":   {},
+			},
+		},
+		&AttributeTypeString{
+			Name:        "dirname",
+			Description: "Name of form control to use for sending the element's directionality in form submission",
+		},
+		&AttributeTypeBool{
+			Name:        "disabled",
+			Description: "Whether the form control is disabled",
+		},
+		&AttributeTypeString{
+			Name:        "form",
+			Description: "Associates the element with a form element",
+		},
+		&AttributeTypeString{
+			Name:        "formaction",
+			Description: "URL to use for form submission",
+		},
+		&AttributeTypeString{
+			Name:        "formenctype",
+			Description: "Entry list encoding type to use for form submission",
+		},
+		&AttributeTypeEnum{
+			Name:        "formmethod",
+			Description: "Variant to use for form submission",
+			Allowed: map[string]struct{}{
+				"get":    {},
+				"post":   {},
+				"dialog": {},
+			},
+		},
+		&AttributeTypeBool{
+			Name:        "formnovalidate",
+			Description: "Bypass form control validation for form submission",
+		},
+		&AttributeTypeString{
+			Name:        "formtarget",
+			Description: "Navigable for form submission",
+		},
+		height,
+		&AttributeTypeString{
+			Name:        "list",
+			Description: "List of autocomplete options",
+		},
+		&AttributeTypeNumber{
+			Name:        "max",
+			Description: "Maximum value",
+		},
+		&AttributeTypeNumber{
+			Name:        "maxlength",
+			Description: "Maximum length of value",
+		},
+		&AttributeTypeNumber{
+			Name:        "min",
+			Description: "Minimum value",
+		},
+		&AttributeTypeNumber{
+			Name:        "minlength",
+			Description: "Minimum length of value",
+		},
+		&AttributeTypeBool{
+			Name:        "multiple",
+			Description: "Whether to allow multiple values",
+		},
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of the element to use for form submission and in the form.elements API",
+		},
+		&AttributeTypeString{
+			Name:        "pattern",
+			Description: "Pattern to be matched by the form control's value",
+		},
+		&AttributeTypeString{
+			Name:        "placeholder",
+			Description: "User-visible label to be placed within the form control",
+		},
+		&AttributeTypeString{
+			Name:        "popovertarget",
+			Description: "Targets a popover element to toggle, show, or hide",
+		},
+		&AttributeTypeEnum{
+			Name:        "popovertargetaction",
+			Description: "Indicates whether a targeted popover element is to be toggled, shown, or hidden",
+			Allowed: map[string]struct{}{
+				"toggle": {},
+				"show":   {},
+				"hide":   {},
+			},
+		},
+		&AttributeTypeBool{
+			Name:        "readonly",
+			Description: "Whether to allow the value to be edited by the user",
+		},
+		&AttributeTypeBool{
+			Name:        "required",
+			Description: "Whether the control is required for form submission",
+		},
+		&AttributeTypeNumber{
+			Name:        "size",
+			Description: "Size of the control",
+		},
+		src,
+		&AttributeTypeString{
+			Name:        "step",
+			Description: "Granularity to be matched by the form control's value",
+		},
+		&AttributeTypeEnum{
+			Name:        "type",
+			Description: "Type of form control",
+			Allowed: map[string]struct{}{
+				"hidden":         {},
+				"text":           {},
+				"search":         {},
+				"tel":            {},
+				"url":            {},
+				"email":          {},
+				"password":       {},
+				"date":           {},
+				"month":          {},
+				"week":           {},
+				"time":           {},
+				"datetime-local": {},
+				"number":         {},
+				"range":          {},
+				"color":          {},
+				"checkbox":       {},
+				"radio":          {},
+				"file":           {},
+				"submit":         {},
+				"image":          {},
+				"reset":          {},
+				"button":         {},
+			},
+		},
+		&AttributeTypeString{
+			Name:        "value",
+			Description: "Value of the form control",
+		},
+		width,
+	}
+}
+
+func buttonAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeEnum{
+			Name:        "command",
+			Description: "Indicates to the targeted element which action to take.",
+			AllowCustom: true,
+			Allowed: map[string]struct{}{
+				"toggle-popover": {},
+				"show-popover":   {},
+				"hide-popover":   {},
+				"close":          {},
+				"request-close":  {},
+				"show-modal":     {},
+			},
+		},
+		&AttributeTypeString{
+			Name:        "commandfor",
+			Description: "Targets another element to be invoked.",
+		},
+		&AttributeTypeBool{
+			Name:        "disabled",
+			Description: "Whether the form control is disabled",
+		},
+		&AttributeTypeString{
+			Name:        "form",
+			Description: "Associates the element with a form element",
+		},
+		&AttributeTypeString{
+			Name:        "formaction",
+			Description: "URL to use for form submission",
+		},
+		&AttributeTypeString{
+			Name:        "formenctype",
+			Description: "Entry list encoding type to use for form submission",
+		},
+		&AttributeTypeEnum{
+			Name:        "formmethod",
+			Description: "Variant to use for form submission",
+			Allowed: map[string]struct{}{
+				"get":    {},
+				"post":   {},
+				"dialog": {},
+			},
+		},
+		&AttributeTypeBool{
+			Name:        "formnovalidate",
+			Description: "Bypass form control validation for form submission",
+		},
+		&AttributeTypeString{
+			Name:        "formtarget",
+			Description: "Navigable for form submission",
+		},
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of the element to use for form submission and in the form.elements API",
+		},
+		&AttributeTypeString{
+			Name:        "popovertarget",
+			Description: "Targets a popover element to toggle, show, or hide",
+		},
+		&AttributeTypeEnum{
+			Name:        "popovertargetaction",
+			Description: "Indicates whether a targeted popover element is to be toggled, shown, or hidden",
+			Allowed: map[string]struct{}{
+				"toggle": {},
+				"show":   {},
+				"hide":   {},
+			},
+		},
+		&AttributeTypeEnum{
+			Name:        "type",
+			Description: "Type of button",
+			Allowed: map[string]struct{}{
+				"submit": {},
+				"reset":  {},
+				"button": {},
+			},
+		},
+		&AttributeTypeString{
+			Name:        "value",
+			Description: "Value to be used for form submission",
+		},
+	}
+}
+
 var attrFuncs = map[string]func() []Attribute{
 	"html":       htmlAttr,
 	"head":       headAttr,
@@ -883,6 +1198,10 @@ var attrFuncs = map[string]func() []Attribute{
 	"col":        colAttr,
 	"td":         tdAttr,
 	"th":         thAttr,
+	"form":       formAttr,
+	"label":      labelAttr,
+	"input":      inputAttr,
+	"button":     buttonAttr,
 }
 
 func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {

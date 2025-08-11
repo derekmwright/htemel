@@ -60,12 +60,12 @@ func (e *TimeElement) AddIndent(i int) {
 type TimeAutocapitalizeEnum string
 
 const (
+	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
 	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
 	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
-	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
 )
 
 type TimeAutocorrectEnum string
@@ -96,8 +96,8 @@ const (
 type TimeDraggableEnum string
 
 const (
-	TimeDraggableEnumTrue  TimeDraggableEnum = "true"
 	TimeDraggableEnumFalse TimeDraggableEnum = "false"
+	TimeDraggableEnumTrue  TimeDraggableEnum = "true"
 )
 
 type TimeEnterkeyhintEnum string
@@ -115,22 +115,22 @@ const (
 type TimeHiddenEnum string
 
 const (
-	TimeHiddenEnumUntilFound TimeHiddenEnum = "until-found"
 	TimeHiddenEnumHidden     TimeHiddenEnum = "hidden"
+	TimeHiddenEnumUntilFound TimeHiddenEnum = "until-found"
 	TimeHiddenEnumEmpty      TimeHiddenEnum = ""
 )
 
 type TimeInputmodeEnum string
 
 const (
-	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
-	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
-	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
-	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
 	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
 	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
 	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
 	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
+	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
+	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
+	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
+	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
 )
 
 type TimeSpellcheckEnum string
@@ -171,10 +171,18 @@ func (e *TimeElement) Autocapitalize(a TimeAutocapitalizeEnum) *TimeElement {
 	return e
 }
 
+func TimeAutocapitalizeCustom(s string) TimeAutocapitalizeEnum {
+	return TimeAutocapitalizeEnum(s)
+}
+
 func (e *TimeElement) Autocorrect(a TimeAutocorrectEnum) *TimeElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func TimeAutocorrectCustom(s string) TimeAutocorrectEnum {
+	return TimeAutocorrectEnum(s)
 }
 
 func (e *TimeElement) Autofocus(b bool) *TimeElement {
@@ -195,6 +203,10 @@ func (e *TimeElement) Contenteditable(a TimeContenteditableEnum) *TimeElement {
 	return e
 }
 
+func TimeContenteditableCustom(s string) TimeContenteditableEnum {
+	return TimeContenteditableEnum(s)
+}
+
 func (e *TimeElement) DataUnsafe(name string, s string) *TimeElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -213,10 +225,18 @@ func (e *TimeElement) Dir(a TimeDirEnum) *TimeElement {
 	return e
 }
 
+func TimeDirCustom(s string) TimeDirEnum {
+	return TimeDirEnum(s)
+}
+
 func (e *TimeElement) Draggable(a TimeDraggableEnum) *TimeElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func TimeDraggableCustom(s string) TimeDraggableEnum {
+	return TimeDraggableEnum(s)
 }
 
 func (e *TimeElement) Enterkeyhint(a TimeEnterkeyhintEnum) *TimeElement {
@@ -225,10 +245,18 @@ func (e *TimeElement) Enterkeyhint(a TimeEnterkeyhintEnum) *TimeElement {
 	return e
 }
 
+func TimeEnterkeyhintCustom(s string) TimeEnterkeyhintEnum {
+	return TimeEnterkeyhintEnum(s)
+}
+
 func (e *TimeElement) Hidden(a TimeHiddenEnum) *TimeElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func TimeHiddenCustom(s string) TimeHiddenEnum {
+	return TimeHiddenEnum(s)
 }
 
 func (e *TimeElement) Id(s string) *TimeElement {
@@ -247,6 +275,10 @@ func (e *TimeElement) Inputmode(a TimeInputmodeEnum) *TimeElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func TimeInputmodeCustom(s string) TimeInputmodeEnum {
+	return TimeInputmodeEnum(s)
 }
 
 func (e *TimeElement) Itemid(s string) *TimeElement {
@@ -309,6 +341,10 @@ func (e *TimeElement) Spellcheck(a TimeSpellcheckEnum) *TimeElement {
 	return e
 }
 
+func TimeSpellcheckCustom(s string) TimeSpellcheckEnum {
+	return TimeSpellcheckEnum(s)
+}
+
 func (e *TimeElement) Style(s string) *TimeElement {
 	e.attributes["style"] = s
 
@@ -333,10 +369,18 @@ func (e *TimeElement) Translate(a TimeTranslateEnum) *TimeElement {
 	return e
 }
 
+func TimeTranslateCustom(s string) TimeTranslateEnum {
+	return TimeTranslateEnum(s)
+}
+
 func (e *TimeElement) Writingsuggestions(a TimeWritingsuggestionsEnum) *TimeElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func TimeWritingsuggestionsCustom(s string) TimeWritingsuggestionsEnum {
+	return TimeWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

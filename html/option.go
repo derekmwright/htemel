@@ -60,28 +60,28 @@ func (e *OptionElement) AddIndent(i int) {
 type OptionAutocapitalizeEnum string
 
 const (
+	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
 	OptionAutocapitalizeEnumNone       OptionAutocapitalizeEnum = "none"
 	OptionAutocapitalizeEnumOff        OptionAutocapitalizeEnum = "off"
 	OptionAutocapitalizeEnumOn         OptionAutocapitalizeEnum = "on"
 	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
-	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 )
 
 type OptionAutocorrectEnum string
 
 const (
-	OptionAutocorrectEnumOff   OptionAutocorrectEnum = "off"
 	OptionAutocorrectEnumOn    OptionAutocorrectEnum = "on"
+	OptionAutocorrectEnumOff   OptionAutocorrectEnum = "off"
 	OptionAutocorrectEnumEmpty OptionAutocorrectEnum = ""
 )
 
 type OptionContenteditableEnum string
 
 const (
-	OptionContenteditableEnumFalse         OptionContenteditableEnum = "false"
 	OptionContenteditableEnumPlaintextOnly OptionContenteditableEnum = "plaintext-only"
 	OptionContenteditableEnumTrue          OptionContenteditableEnum = "true"
+	OptionContenteditableEnumFalse         OptionContenteditableEnum = "false"
 	OptionContenteditableEnumEmpty         OptionContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type OptionDraggableEnum string
 
 const (
-	OptionDraggableEnumFalse OptionDraggableEnum = "false"
 	OptionDraggableEnumTrue  OptionDraggableEnum = "true"
+	OptionDraggableEnumFalse OptionDraggableEnum = "false"
 )
 
 type OptionEnterkeyhintEnum string
 
 const (
+	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
 	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
 	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
 	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
-	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 )
 
 type OptionHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type OptionInputmodeEnum string
 
 const (
+	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
 	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
 	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
 	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
@@ -130,7 +131,6 @@ const (
 	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
 	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
-	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
 )
 
 type OptionSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *OptionElement) Autocapitalize(a OptionAutocapitalizeEnum) *OptionElemen
 	return e
 }
 
+func OptionAutocapitalizeCustom(s string) OptionAutocapitalizeEnum {
+	return OptionAutocapitalizeEnum(s)
+}
+
 func (e *OptionElement) Autocorrect(a OptionAutocorrectEnum) *OptionElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func OptionAutocorrectCustom(s string) OptionAutocorrectEnum {
+	return OptionAutocorrectEnum(s)
 }
 
 func (e *OptionElement) Autofocus(b bool) *OptionElement {
@@ -189,6 +197,10 @@ func (e *OptionElement) Contenteditable(a OptionContenteditableEnum) *OptionElem
 	return e
 }
 
+func OptionContenteditableCustom(s string) OptionContenteditableEnum {
+	return OptionContenteditableEnum(s)
+}
+
 func (e *OptionElement) DataUnsafe(name string, s string) *OptionElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *OptionElement) Dir(a OptionDirEnum) *OptionElement {
 	return e
 }
 
+func OptionDirCustom(s string) OptionDirEnum {
+	return OptionDirEnum(s)
+}
+
 func (e *OptionElement) Draggable(a OptionDraggableEnum) *OptionElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func OptionDraggableCustom(s string) OptionDraggableEnum {
+	return OptionDraggableEnum(s)
 }
 
 func (e *OptionElement) Enterkeyhint(a OptionEnterkeyhintEnum) *OptionElement {
@@ -219,10 +239,18 @@ func (e *OptionElement) Enterkeyhint(a OptionEnterkeyhintEnum) *OptionElement {
 	return e
 }
 
+func OptionEnterkeyhintCustom(s string) OptionEnterkeyhintEnum {
+	return OptionEnterkeyhintEnum(s)
+}
+
 func (e *OptionElement) Hidden(a OptionHiddenEnum) *OptionElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func OptionHiddenCustom(s string) OptionHiddenEnum {
+	return OptionHiddenEnum(s)
 }
 
 func (e *OptionElement) Id(s string) *OptionElement {
@@ -241,6 +269,10 @@ func (e *OptionElement) Inputmode(a OptionInputmodeEnum) *OptionElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func OptionInputmodeCustom(s string) OptionInputmodeEnum {
+	return OptionInputmodeEnum(s)
 }
 
 func (e *OptionElement) Itemid(s string) *OptionElement {
@@ -303,6 +335,10 @@ func (e *OptionElement) Spellcheck(a OptionSpellcheckEnum) *OptionElement {
 	return e
 }
 
+func OptionSpellcheckCustom(s string) OptionSpellcheckEnum {
+	return OptionSpellcheckEnum(s)
+}
+
 func (e *OptionElement) Style(s string) *OptionElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *OptionElement) Translate(a OptionTranslateEnum) *OptionElement {
 	return e
 }
 
+func OptionTranslateCustom(s string) OptionTranslateEnum {
+	return OptionTranslateEnum(s)
+}
+
 func (e *OptionElement) Writingsuggestions(a OptionWritingsuggestionsEnum) *OptionElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func OptionWritingsuggestionsCustom(s string) OptionWritingsuggestionsEnum {
+	return OptionWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

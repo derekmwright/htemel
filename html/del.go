@@ -60,12 +60,12 @@ func (e *DelElement) AddIndent(i int) {
 type DelAutocapitalizeEnum string
 
 const (
+	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
 	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
 	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
 	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
 	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
 	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
-	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
 )
 
 type DelAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type DelContenteditableEnum string
 
 const (
+	DelContenteditableEnumTrue          DelContenteditableEnum = "true"
 	DelContenteditableEnumFalse         DelContenteditableEnum = "false"
 	DelContenteditableEnumPlaintextOnly DelContenteditableEnum = "plaintext-only"
-	DelContenteditableEnumTrue          DelContenteditableEnum = "true"
 	DelContenteditableEnumEmpty         DelContenteditableEnum = ""
 )
 
@@ -177,10 +177,18 @@ func (e *DelElement) Autocapitalize(a DelAutocapitalizeEnum) *DelElement {
 	return e
 }
 
+func DelAutocapitalizeCustom(s string) DelAutocapitalizeEnum {
+	return DelAutocapitalizeEnum(s)
+}
+
 func (e *DelElement) Autocorrect(a DelAutocorrectEnum) *DelElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func DelAutocorrectCustom(s string) DelAutocorrectEnum {
+	return DelAutocorrectEnum(s)
 }
 
 func (e *DelElement) Autofocus(b bool) *DelElement {
@@ -201,6 +209,10 @@ func (e *DelElement) Contenteditable(a DelContenteditableEnum) *DelElement {
 	return e
 }
 
+func DelContenteditableCustom(s string) DelContenteditableEnum {
+	return DelContenteditableEnum(s)
+}
+
 func (e *DelElement) DataUnsafe(name string, s string) *DelElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,10 +231,18 @@ func (e *DelElement) Dir(a DelDirEnum) *DelElement {
 	return e
 }
 
+func DelDirCustom(s string) DelDirEnum {
+	return DelDirEnum(s)
+}
+
 func (e *DelElement) Draggable(a DelDraggableEnum) *DelElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func DelDraggableCustom(s string) DelDraggableEnum {
+	return DelDraggableEnum(s)
 }
 
 func (e *DelElement) Enterkeyhint(a DelEnterkeyhintEnum) *DelElement {
@@ -231,10 +251,18 @@ func (e *DelElement) Enterkeyhint(a DelEnterkeyhintEnum) *DelElement {
 	return e
 }
 
+func DelEnterkeyhintCustom(s string) DelEnterkeyhintEnum {
+	return DelEnterkeyhintEnum(s)
+}
+
 func (e *DelElement) Hidden(a DelHiddenEnum) *DelElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func DelHiddenCustom(s string) DelHiddenEnum {
+	return DelHiddenEnum(s)
 }
 
 func (e *DelElement) Id(s string) *DelElement {
@@ -253,6 +281,10 @@ func (e *DelElement) Inputmode(a DelInputmodeEnum) *DelElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func DelInputmodeCustom(s string) DelInputmodeEnum {
+	return DelInputmodeEnum(s)
 }
 
 func (e *DelElement) Itemid(s string) *DelElement {
@@ -315,6 +347,10 @@ func (e *DelElement) Spellcheck(a DelSpellcheckEnum) *DelElement {
 	return e
 }
 
+func DelSpellcheckCustom(s string) DelSpellcheckEnum {
+	return DelSpellcheckEnum(s)
+}
+
 func (e *DelElement) Style(s string) *DelElement {
 	e.attributes["style"] = s
 
@@ -339,10 +375,18 @@ func (e *DelElement) Translate(a DelTranslateEnum) *DelElement {
 	return e
 }
 
+func DelTranslateCustom(s string) DelTranslateEnum {
+	return DelTranslateEnum(s)
+}
+
 func (e *DelElement) Writingsuggestions(a DelWritingsuggestionsEnum) *DelElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func DelWritingsuggestionsCustom(s string) DelWritingsuggestionsEnum {
+	return DelWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

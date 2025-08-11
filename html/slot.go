@@ -60,12 +60,12 @@ func (e *SlotElement) AddIndent(i int) {
 type SlotAutocapitalizeEnum string
 
 const (
-	SlotAutocapitalizeEnumWords      SlotAutocapitalizeEnum = "words"
 	SlotAutocapitalizeEnumCharacters SlotAutocapitalizeEnum = "characters"
 	SlotAutocapitalizeEnumNone       SlotAutocapitalizeEnum = "none"
 	SlotAutocapitalizeEnumOff        SlotAutocapitalizeEnum = "off"
 	SlotAutocapitalizeEnumOn         SlotAutocapitalizeEnum = "on"
 	SlotAutocapitalizeEnumSentences  SlotAutocapitalizeEnum = "sentences"
+	SlotAutocapitalizeEnumWords      SlotAutocapitalizeEnum = "words"
 )
 
 type SlotAutocorrectEnum string
@@ -123,7 +123,6 @@ const (
 type SlotInputmodeEnum string
 
 const (
-	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
 	SlotInputmodeEnumEmail   SlotInputmodeEnum = "email"
 	SlotInputmodeEnumNone    SlotInputmodeEnum = "none"
@@ -131,21 +130,22 @@ const (
 	SlotInputmodeEnumSearch  SlotInputmodeEnum = "search"
 	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
 	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
+	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 )
 
 type SlotSpellcheckEnum string
 
 const (
-	SlotSpellcheckEnumTrue  SlotSpellcheckEnum = "true"
 	SlotSpellcheckEnumFalse SlotSpellcheckEnum = "false"
+	SlotSpellcheckEnumTrue  SlotSpellcheckEnum = "true"
 	SlotSpellcheckEnumEmpty SlotSpellcheckEnum = ""
 )
 
 type SlotTranslateEnum string
 
 const (
-	SlotTranslateEnumNo    SlotTranslateEnum = "no"
 	SlotTranslateEnumYes   SlotTranslateEnum = "yes"
+	SlotTranslateEnumNo    SlotTranslateEnum = "no"
 	SlotTranslateEnumEmpty SlotTranslateEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *SlotElement) Autocapitalize(a SlotAutocapitalizeEnum) *SlotElement {
 	return e
 }
 
+func SlotAutocapitalizeCustom(s string) SlotAutocapitalizeEnum {
+	return SlotAutocapitalizeEnum(s)
+}
+
 func (e *SlotElement) Autocorrect(a SlotAutocorrectEnum) *SlotElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func SlotAutocorrectCustom(s string) SlotAutocorrectEnum {
+	return SlotAutocorrectEnum(s)
 }
 
 func (e *SlotElement) Autofocus(b bool) *SlotElement {
@@ -189,6 +197,10 @@ func (e *SlotElement) Contenteditable(a SlotContenteditableEnum) *SlotElement {
 	return e
 }
 
+func SlotContenteditableCustom(s string) SlotContenteditableEnum {
+	return SlotContenteditableEnum(s)
+}
+
 func (e *SlotElement) DataUnsafe(name string, s string) *SlotElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *SlotElement) Dir(a SlotDirEnum) *SlotElement {
 	return e
 }
 
+func SlotDirCustom(s string) SlotDirEnum {
+	return SlotDirEnum(s)
+}
+
 func (e *SlotElement) Draggable(a SlotDraggableEnum) *SlotElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func SlotDraggableCustom(s string) SlotDraggableEnum {
+	return SlotDraggableEnum(s)
 }
 
 func (e *SlotElement) Enterkeyhint(a SlotEnterkeyhintEnum) *SlotElement {
@@ -219,10 +239,18 @@ func (e *SlotElement) Enterkeyhint(a SlotEnterkeyhintEnum) *SlotElement {
 	return e
 }
 
+func SlotEnterkeyhintCustom(s string) SlotEnterkeyhintEnum {
+	return SlotEnterkeyhintEnum(s)
+}
+
 func (e *SlotElement) Hidden(a SlotHiddenEnum) *SlotElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func SlotHiddenCustom(s string) SlotHiddenEnum {
+	return SlotHiddenEnum(s)
 }
 
 func (e *SlotElement) Id(s string) *SlotElement {
@@ -241,6 +269,10 @@ func (e *SlotElement) Inputmode(a SlotInputmodeEnum) *SlotElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func SlotInputmodeCustom(s string) SlotInputmodeEnum {
+	return SlotInputmodeEnum(s)
 }
 
 func (e *SlotElement) Itemid(s string) *SlotElement {
@@ -303,6 +335,10 @@ func (e *SlotElement) Spellcheck(a SlotSpellcheckEnum) *SlotElement {
 	return e
 }
 
+func SlotSpellcheckCustom(s string) SlotSpellcheckEnum {
+	return SlotSpellcheckEnum(s)
+}
+
 func (e *SlotElement) Style(s string) *SlotElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *SlotElement) Translate(a SlotTranslateEnum) *SlotElement {
 	return e
 }
 
+func SlotTranslateCustom(s string) SlotTranslateEnum {
+	return SlotTranslateEnum(s)
+}
+
 func (e *SlotElement) Writingsuggestions(a SlotWritingsuggestionsEnum) *SlotElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func SlotWritingsuggestionsCustom(s string) SlotWritingsuggestionsEnum {
+	return SlotWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

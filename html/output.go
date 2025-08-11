@@ -60,12 +60,12 @@ func (e *OutputElement) AddIndent(i int) {
 type OutputAutocapitalizeEnum string
 
 const (
+	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
 	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
 	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
 	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
 	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
-	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
 )
 
 type OutputAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type OutputEnterkeyhintEnum string
 
 const (
-	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
-	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
 	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
 	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
 	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
 	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
+	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
+	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 )
 
 type OutputHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type OutputInputmodeEnum string
 
 const (
-	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
 	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
 	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
@@ -131,6 +130,7 @@ const (
 	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
 	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
 	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
+	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
 )
 
 type OutputSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *OutputElement) Autocapitalize(a OutputAutocapitalizeEnum) *OutputElemen
 	return e
 }
 
+func OutputAutocapitalizeCustom(s string) OutputAutocapitalizeEnum {
+	return OutputAutocapitalizeEnum(s)
+}
+
 func (e *OutputElement) Autocorrect(a OutputAutocorrectEnum) *OutputElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func OutputAutocorrectCustom(s string) OutputAutocorrectEnum {
+	return OutputAutocorrectEnum(s)
 }
 
 func (e *OutputElement) Autofocus(b bool) *OutputElement {
@@ -189,6 +197,10 @@ func (e *OutputElement) Contenteditable(a OutputContenteditableEnum) *OutputElem
 	return e
 }
 
+func OutputContenteditableCustom(s string) OutputContenteditableEnum {
+	return OutputContenteditableEnum(s)
+}
+
 func (e *OutputElement) DataUnsafe(name string, s string) *OutputElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *OutputElement) Dir(a OutputDirEnum) *OutputElement {
 	return e
 }
 
+func OutputDirCustom(s string) OutputDirEnum {
+	return OutputDirEnum(s)
+}
+
 func (e *OutputElement) Draggable(a OutputDraggableEnum) *OutputElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func OutputDraggableCustom(s string) OutputDraggableEnum {
+	return OutputDraggableEnum(s)
 }
 
 func (e *OutputElement) Enterkeyhint(a OutputEnterkeyhintEnum) *OutputElement {
@@ -219,10 +239,18 @@ func (e *OutputElement) Enterkeyhint(a OutputEnterkeyhintEnum) *OutputElement {
 	return e
 }
 
+func OutputEnterkeyhintCustom(s string) OutputEnterkeyhintEnum {
+	return OutputEnterkeyhintEnum(s)
+}
+
 func (e *OutputElement) Hidden(a OutputHiddenEnum) *OutputElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func OutputHiddenCustom(s string) OutputHiddenEnum {
+	return OutputHiddenEnum(s)
 }
 
 func (e *OutputElement) Id(s string) *OutputElement {
@@ -241,6 +269,10 @@ func (e *OutputElement) Inputmode(a OutputInputmodeEnum) *OutputElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func OutputInputmodeCustom(s string) OutputInputmodeEnum {
+	return OutputInputmodeEnum(s)
 }
 
 func (e *OutputElement) Itemid(s string) *OutputElement {
@@ -303,6 +335,10 @@ func (e *OutputElement) Spellcheck(a OutputSpellcheckEnum) *OutputElement {
 	return e
 }
 
+func OutputSpellcheckCustom(s string) OutputSpellcheckEnum {
+	return OutputSpellcheckEnum(s)
+}
+
 func (e *OutputElement) Style(s string) *OutputElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *OutputElement) Translate(a OutputTranslateEnum) *OutputElement {
 	return e
 }
 
+func OutputTranslateCustom(s string) OutputTranslateEnum {
+	return OutputTranslateEnum(s)
+}
+
 func (e *OutputElement) Writingsuggestions(a OutputWritingsuggestionsEnum) *OutputElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func OutputWritingsuggestionsCustom(s string) OutputWritingsuggestionsEnum {
+	return OutputWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

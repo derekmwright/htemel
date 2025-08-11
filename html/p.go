@@ -60,12 +60,12 @@ func (e *PElement) AddIndent(i int) {
 type PAutocapitalizeEnum string
 
 const (
+	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
 	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
 	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
 	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
 	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
 	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
-	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
 )
 
 type PAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type PDirEnum string
 
 const (
+	PDirEnumRtl  PDirEnum = "rtl"
 	PDirEnumAuto PDirEnum = "auto"
 	PDirEnumLtr  PDirEnum = "ltr"
-	PDirEnumRtl  PDirEnum = "rtl"
 )
 
 type PDraggableEnum string
@@ -103,34 +103,34 @@ const (
 type PEnterkeyhintEnum string
 
 const (
-	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
-	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
 	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
 	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
 	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
+	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
+	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
 )
 
 type PHiddenEnum string
 
 const (
-	PHiddenEnumUntilFound PHiddenEnum = "until-found"
 	PHiddenEnumHidden     PHiddenEnum = "hidden"
+	PHiddenEnumUntilFound PHiddenEnum = "until-found"
 	PHiddenEnumEmpty      PHiddenEnum = ""
 )
 
 type PInputmodeEnum string
 
 const (
+	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
+	PInputmodeEnumEmail   PInputmodeEnum = "email"
+	PInputmodeEnumNone    PInputmodeEnum = "none"
 	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
 	PInputmodeEnumSearch  PInputmodeEnum = "search"
 	PInputmodeEnumTel     PInputmodeEnum = "tel"
 	PInputmodeEnumText    PInputmodeEnum = "text"
 	PInputmodeEnumUrl     PInputmodeEnum = "url"
-	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
-	PInputmodeEnumEmail   PInputmodeEnum = "email"
-	PInputmodeEnumNone    PInputmodeEnum = "none"
 )
 
 type PSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *PElement) Autocapitalize(a PAutocapitalizeEnum) *PElement {
 	return e
 }
 
+func PAutocapitalizeCustom(s string) PAutocapitalizeEnum {
+	return PAutocapitalizeEnum(s)
+}
+
 func (e *PElement) Autocorrect(a PAutocorrectEnum) *PElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func PAutocorrectCustom(s string) PAutocorrectEnum {
+	return PAutocorrectEnum(s)
 }
 
 func (e *PElement) Autofocus(b bool) *PElement {
@@ -189,6 +197,10 @@ func (e *PElement) Contenteditable(a PContenteditableEnum) *PElement {
 	return e
 }
 
+func PContenteditableCustom(s string) PContenteditableEnum {
+	return PContenteditableEnum(s)
+}
+
 func (e *PElement) DataUnsafe(name string, s string) *PElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *PElement) Dir(a PDirEnum) *PElement {
 	return e
 }
 
+func PDirCustom(s string) PDirEnum {
+	return PDirEnum(s)
+}
+
 func (e *PElement) Draggable(a PDraggableEnum) *PElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func PDraggableCustom(s string) PDraggableEnum {
+	return PDraggableEnum(s)
 }
 
 func (e *PElement) Enterkeyhint(a PEnterkeyhintEnum) *PElement {
@@ -219,10 +239,18 @@ func (e *PElement) Enterkeyhint(a PEnterkeyhintEnum) *PElement {
 	return e
 }
 
+func PEnterkeyhintCustom(s string) PEnterkeyhintEnum {
+	return PEnterkeyhintEnum(s)
+}
+
 func (e *PElement) Hidden(a PHiddenEnum) *PElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func PHiddenCustom(s string) PHiddenEnum {
+	return PHiddenEnum(s)
 }
 
 func (e *PElement) Id(s string) *PElement {
@@ -241,6 +269,10 @@ func (e *PElement) Inputmode(a PInputmodeEnum) *PElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func PInputmodeCustom(s string) PInputmodeEnum {
+	return PInputmodeEnum(s)
 }
 
 func (e *PElement) Itemid(s string) *PElement {
@@ -303,6 +335,10 @@ func (e *PElement) Spellcheck(a PSpellcheckEnum) *PElement {
 	return e
 }
 
+func PSpellcheckCustom(s string) PSpellcheckEnum {
+	return PSpellcheckEnum(s)
+}
+
 func (e *PElement) Style(s string) *PElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *PElement) Translate(a PTranslateEnum) *PElement {
 	return e
 }
 
+func PTranslateCustom(s string) PTranslateEnum {
+	return PTranslateEnum(s)
+}
+
 func (e *PElement) Writingsuggestions(a PWritingsuggestionsEnum) *PElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func PWritingsuggestionsCustom(s string) PWritingsuggestionsEnum {
+	return PWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

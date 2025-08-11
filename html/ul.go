@@ -60,19 +60,19 @@ func (e *UlElement) AddIndent(i int) {
 type UlAutocapitalizeEnum string
 
 const (
-	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
 	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 	UlAutocapitalizeEnumNone       UlAutocapitalizeEnum = "none"
 	UlAutocapitalizeEnumOff        UlAutocapitalizeEnum = "off"
 	UlAutocapitalizeEnumOn         UlAutocapitalizeEnum = "on"
 	UlAutocapitalizeEnumSentences  UlAutocapitalizeEnum = "sentences"
+	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
 )
 
 type UlAutocorrectEnum string
 
 const (
-	UlAutocorrectEnumOn    UlAutocorrectEnum = "on"
 	UlAutocorrectEnumOff   UlAutocorrectEnum = "off"
+	UlAutocorrectEnumOn    UlAutocorrectEnum = "on"
 	UlAutocorrectEnumEmpty UlAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type UlDirEnum string
 
 const (
-	UlDirEnumRtl  UlDirEnum = "rtl"
 	UlDirEnumAuto UlDirEnum = "auto"
 	UlDirEnumLtr  UlDirEnum = "ltr"
+	UlDirEnumRtl  UlDirEnum = "rtl"
 )
 
 type UlDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
+	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
+	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
 	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
 	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
 	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
-	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
-	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 )
 
 type UlHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type UlInputmodeEnum string
 
 const (
+	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
 	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
 	UlInputmodeEnumNone    UlInputmodeEnum = "none"
 	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
@@ -130,7 +131,6 @@ const (
 	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
 	UlInputmodeEnumText    UlInputmodeEnum = "text"
 	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
-	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
 )
 
 type UlSpellcheckEnum string
@@ -144,16 +144,16 @@ const (
 type UlTranslateEnum string
 
 const (
-	UlTranslateEnumNo    UlTranslateEnum = "no"
 	UlTranslateEnumYes   UlTranslateEnum = "yes"
+	UlTranslateEnumNo    UlTranslateEnum = "no"
 	UlTranslateEnumEmpty UlTranslateEnum = ""
 )
 
 type UlWritingsuggestionsEnum string
 
 const (
-	UlWritingsuggestionsEnumFalse UlWritingsuggestionsEnum = "false"
 	UlWritingsuggestionsEnumTrue  UlWritingsuggestionsEnum = "true"
+	UlWritingsuggestionsEnumFalse UlWritingsuggestionsEnum = "false"
 	UlWritingsuggestionsEnumEmpty UlWritingsuggestionsEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *UlElement) Autocapitalize(a UlAutocapitalizeEnum) *UlElement {
 	return e
 }
 
+func UlAutocapitalizeCustom(s string) UlAutocapitalizeEnum {
+	return UlAutocapitalizeEnum(s)
+}
+
 func (e *UlElement) Autocorrect(a UlAutocorrectEnum) *UlElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func UlAutocorrectCustom(s string) UlAutocorrectEnum {
+	return UlAutocorrectEnum(s)
 }
 
 func (e *UlElement) Autofocus(b bool) *UlElement {
@@ -189,6 +197,10 @@ func (e *UlElement) Contenteditable(a UlContenteditableEnum) *UlElement {
 	return e
 }
 
+func UlContenteditableCustom(s string) UlContenteditableEnum {
+	return UlContenteditableEnum(s)
+}
+
 func (e *UlElement) DataUnsafe(name string, s string) *UlElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *UlElement) Dir(a UlDirEnum) *UlElement {
 	return e
 }
 
+func UlDirCustom(s string) UlDirEnum {
+	return UlDirEnum(s)
+}
+
 func (e *UlElement) Draggable(a UlDraggableEnum) *UlElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func UlDraggableCustom(s string) UlDraggableEnum {
+	return UlDraggableEnum(s)
 }
 
 func (e *UlElement) Enterkeyhint(a UlEnterkeyhintEnum) *UlElement {
@@ -219,10 +239,18 @@ func (e *UlElement) Enterkeyhint(a UlEnterkeyhintEnum) *UlElement {
 	return e
 }
 
+func UlEnterkeyhintCustom(s string) UlEnterkeyhintEnum {
+	return UlEnterkeyhintEnum(s)
+}
+
 func (e *UlElement) Hidden(a UlHiddenEnum) *UlElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func UlHiddenCustom(s string) UlHiddenEnum {
+	return UlHiddenEnum(s)
 }
 
 func (e *UlElement) Id(s string) *UlElement {
@@ -241,6 +269,10 @@ func (e *UlElement) Inputmode(a UlInputmodeEnum) *UlElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func UlInputmodeCustom(s string) UlInputmodeEnum {
+	return UlInputmodeEnum(s)
 }
 
 func (e *UlElement) Itemid(s string) *UlElement {
@@ -303,6 +335,10 @@ func (e *UlElement) Spellcheck(a UlSpellcheckEnum) *UlElement {
 	return e
 }
 
+func UlSpellcheckCustom(s string) UlSpellcheckEnum {
+	return UlSpellcheckEnum(s)
+}
+
 func (e *UlElement) Style(s string) *UlElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *UlElement) Translate(a UlTranslateEnum) *UlElement {
 	return e
 }
 
+func UlTranslateCustom(s string) UlTranslateEnum {
+	return UlTranslateEnum(s)
+}
+
 func (e *UlElement) Writingsuggestions(a UlWritingsuggestionsEnum) *UlElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func UlWritingsuggestionsCustom(s string) UlWritingsuggestionsEnum {
+	return UlWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

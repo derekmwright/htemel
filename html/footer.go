@@ -60,12 +60,12 @@ func (e *FooterElement) AddIndent(i int) {
 type FooterAutocapitalizeEnum string
 
 const (
-	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
-	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
 	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 	FooterAutocapitalizeEnumOn         FooterAutocapitalizeEnum = "on"
 	FooterAutocapitalizeEnumSentences  FooterAutocapitalizeEnum = "sentences"
 	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
+	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
+	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
 )
 
 type FooterAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type FooterEnterkeyhintEnum string
 
 const (
-	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
-	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
-	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
 	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
 	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
 	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
 	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
+	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
+	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
+	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
 )
 
 type FooterHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type FooterInputmodeEnum string
 
 const (
-	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
 	FooterInputmodeEnumEmail   FooterInputmodeEnum = "email"
 	FooterInputmodeEnumNone    FooterInputmodeEnum = "none"
 	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
@@ -131,6 +130,7 @@ const (
 	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
 	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
 	FooterInputmodeEnumUrl     FooterInputmodeEnum = "url"
+	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
 )
 
 type FooterSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *FooterElement) Autocapitalize(a FooterAutocapitalizeEnum) *FooterElemen
 	return e
 }
 
+func FooterAutocapitalizeCustom(s string) FooterAutocapitalizeEnum {
+	return FooterAutocapitalizeEnum(s)
+}
+
 func (e *FooterElement) Autocorrect(a FooterAutocorrectEnum) *FooterElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func FooterAutocorrectCustom(s string) FooterAutocorrectEnum {
+	return FooterAutocorrectEnum(s)
 }
 
 func (e *FooterElement) Autofocus(b bool) *FooterElement {
@@ -189,6 +197,10 @@ func (e *FooterElement) Contenteditable(a FooterContenteditableEnum) *FooterElem
 	return e
 }
 
+func FooterContenteditableCustom(s string) FooterContenteditableEnum {
+	return FooterContenteditableEnum(s)
+}
+
 func (e *FooterElement) DataUnsafe(name string, s string) *FooterElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *FooterElement) Dir(a FooterDirEnum) *FooterElement {
 	return e
 }
 
+func FooterDirCustom(s string) FooterDirEnum {
+	return FooterDirEnum(s)
+}
+
 func (e *FooterElement) Draggable(a FooterDraggableEnum) *FooterElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func FooterDraggableCustom(s string) FooterDraggableEnum {
+	return FooterDraggableEnum(s)
 }
 
 func (e *FooterElement) Enterkeyhint(a FooterEnterkeyhintEnum) *FooterElement {
@@ -219,10 +239,18 @@ func (e *FooterElement) Enterkeyhint(a FooterEnterkeyhintEnum) *FooterElement {
 	return e
 }
 
+func FooterEnterkeyhintCustom(s string) FooterEnterkeyhintEnum {
+	return FooterEnterkeyhintEnum(s)
+}
+
 func (e *FooterElement) Hidden(a FooterHiddenEnum) *FooterElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func FooterHiddenCustom(s string) FooterHiddenEnum {
+	return FooterHiddenEnum(s)
 }
 
 func (e *FooterElement) Id(s string) *FooterElement {
@@ -241,6 +269,10 @@ func (e *FooterElement) Inputmode(a FooterInputmodeEnum) *FooterElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func FooterInputmodeCustom(s string) FooterInputmodeEnum {
+	return FooterInputmodeEnum(s)
 }
 
 func (e *FooterElement) Itemid(s string) *FooterElement {
@@ -303,6 +335,10 @@ func (e *FooterElement) Spellcheck(a FooterSpellcheckEnum) *FooterElement {
 	return e
 }
 
+func FooterSpellcheckCustom(s string) FooterSpellcheckEnum {
+	return FooterSpellcheckEnum(s)
+}
+
 func (e *FooterElement) Style(s string) *FooterElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *FooterElement) Translate(a FooterTranslateEnum) *FooterElement {
 	return e
 }
 
+func FooterTranslateCustom(s string) FooterTranslateEnum {
+	return FooterTranslateEnum(s)
+}
+
 func (e *FooterElement) Writingsuggestions(a FooterWritingsuggestionsEnum) *FooterElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func FooterWritingsuggestionsCustom(s string) FooterWritingsuggestionsEnum {
+	return FooterWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -57,6 +57,21 @@ func (e *FormElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type FormAutocompleteEnum string
+
+const (
+	FormAutocompleteEnumOff FormAutocompleteEnum = "off"
+	FormAutocompleteEnumOn  FormAutocompleteEnum = "on"
+)
+
+type FormMethodEnum string
+
+const (
+	FormMethodEnumDialog FormMethodEnum = "dialog"
+	FormMethodEnumGet    FormMethodEnum = "get"
+	FormMethodEnumPost   FormMethodEnum = "post"
+)
+
 type FormAutocapitalizeEnum string
 
 const (
@@ -103,13 +118,13 @@ const (
 type FormEnterkeyhintEnum string
 
 const (
+	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
 	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
 	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
 	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
 	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
-	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
 )
 
 type FormHiddenEnum string
@@ -159,16 +174,86 @@ const (
 
 type formAttrs map[string]any
 
+func (e *FormElement) AcceptCharset(s string) *FormElement {
+	e.attributes["accept-charset"] = s
+
+	return e
+}
+
+func (e *FormElement) Action(s string) *FormElement {
+	e.attributes["action"] = s
+
+	return e
+}
+
+func (e *FormElement) Autocomplete(a FormAutocompleteEnum) *FormElement {
+	e.attributes["autocomplete"] = a
+
+	return e
+}
+
+func FormAutocompleteCustom(s string) FormAutocompleteEnum {
+	return FormAutocompleteEnum(s)
+}
+
+func (e *FormElement) Enctype(s string) *FormElement {
+	e.attributes["enctype"] = s
+
+	return e
+}
+
+func (e *FormElement) Method(a FormMethodEnum) *FormElement {
+	e.attributes["method"] = a
+
+	return e
+}
+
+func FormMethodCustom(s string) FormMethodEnum {
+	return FormMethodEnum(s)
+}
+
+func (e *FormElement) Name(s string) *FormElement {
+	e.attributes["name"] = s
+
+	return e
+}
+
+func (e *FormElement) Novalidate(b bool) *FormElement {
+	e.attributes["novalidate"] = b
+
+	return e
+}
+
+func (e *FormElement) Target(s string) *FormElement {
+	e.attributes["target"] = s
+
+	return e
+}
+
+func (e *FormElement) Rel(s ...string) *FormElement {
+	e.attributes["rel"] = strings.Join(s, " ")
+
+	return e
+}
+
 func (e *FormElement) Autocapitalize(a FormAutocapitalizeEnum) *FormElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
+func FormAutocapitalizeCustom(s string) FormAutocapitalizeEnum {
+	return FormAutocapitalizeEnum(s)
+}
+
 func (e *FormElement) Autocorrect(a FormAutocorrectEnum) *FormElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func FormAutocorrectCustom(s string) FormAutocorrectEnum {
+	return FormAutocorrectEnum(s)
 }
 
 func (e *FormElement) Autofocus(b bool) *FormElement {
@@ -189,6 +274,10 @@ func (e *FormElement) Contenteditable(a FormContenteditableEnum) *FormElement {
 	return e
 }
 
+func FormContenteditableCustom(s string) FormContenteditableEnum {
+	return FormContenteditableEnum(s)
+}
+
 func (e *FormElement) DataUnsafe(name string, s string) *FormElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +296,18 @@ func (e *FormElement) Dir(a FormDirEnum) *FormElement {
 	return e
 }
 
+func FormDirCustom(s string) FormDirEnum {
+	return FormDirEnum(s)
+}
+
 func (e *FormElement) Draggable(a FormDraggableEnum) *FormElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func FormDraggableCustom(s string) FormDraggableEnum {
+	return FormDraggableEnum(s)
 }
 
 func (e *FormElement) Enterkeyhint(a FormEnterkeyhintEnum) *FormElement {
@@ -219,10 +316,18 @@ func (e *FormElement) Enterkeyhint(a FormEnterkeyhintEnum) *FormElement {
 	return e
 }
 
+func FormEnterkeyhintCustom(s string) FormEnterkeyhintEnum {
+	return FormEnterkeyhintEnum(s)
+}
+
 func (e *FormElement) Hidden(a FormHiddenEnum) *FormElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func FormHiddenCustom(s string) FormHiddenEnum {
+	return FormHiddenEnum(s)
 }
 
 func (e *FormElement) Id(s string) *FormElement {
@@ -241,6 +346,10 @@ func (e *FormElement) Inputmode(a FormInputmodeEnum) *FormElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func FormInputmodeCustom(s string) FormInputmodeEnum {
+	return FormInputmodeEnum(s)
 }
 
 func (e *FormElement) Itemid(s string) *FormElement {
@@ -303,6 +412,10 @@ func (e *FormElement) Spellcheck(a FormSpellcheckEnum) *FormElement {
 	return e
 }
 
+func FormSpellcheckCustom(s string) FormSpellcheckEnum {
+	return FormSpellcheckEnum(s)
+}
+
 func (e *FormElement) Style(s string) *FormElement {
 	e.attributes["style"] = s
 
@@ -327,10 +440,18 @@ func (e *FormElement) Translate(a FormTranslateEnum) *FormElement {
 	return e
 }
 
+func FormTranslateCustom(s string) FormTranslateEnum {
+	return FormTranslateEnum(s)
+}
+
 func (e *FormElement) Writingsuggestions(a FormWritingsuggestionsEnum) *FormElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func FormWritingsuggestionsCustom(s string) FormWritingsuggestionsEnum {
+	return FormWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -60,12 +60,12 @@ func (e *DetailsElement) AddIndent(i int) {
 type DetailsAutocapitalizeEnum string
 
 const (
+	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
+	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
 	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
 	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
 	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
-	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
-	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
 )
 
 type DetailsAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type DetailsEnterkeyhintEnum string
 
 const (
+	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
+	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
 	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
 	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
 	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
 	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
-	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
-	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 )
 
 type DetailsHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type DetailsInputmodeEnum string
 
 const (
-	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
-	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
-	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
-	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
 	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
 	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
 	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
+	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
+	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
+	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
+	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
 )
 
 type DetailsSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DetailsWritingsuggestionsEnum string
 
 const (
-	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
 	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
+	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
 	DetailsWritingsuggestionsEnumEmpty DetailsWritingsuggestionsEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *DetailsElement) Autocapitalize(a DetailsAutocapitalizeEnum) *DetailsEle
 	return e
 }
 
+func DetailsAutocapitalizeCustom(s string) DetailsAutocapitalizeEnum {
+	return DetailsAutocapitalizeEnum(s)
+}
+
 func (e *DetailsElement) Autocorrect(a DetailsAutocorrectEnum) *DetailsElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func DetailsAutocorrectCustom(s string) DetailsAutocorrectEnum {
+	return DetailsAutocorrectEnum(s)
 }
 
 func (e *DetailsElement) Autofocus(b bool) *DetailsElement {
@@ -189,6 +197,10 @@ func (e *DetailsElement) Contenteditable(a DetailsContenteditableEnum) *DetailsE
 	return e
 }
 
+func DetailsContenteditableCustom(s string) DetailsContenteditableEnum {
+	return DetailsContenteditableEnum(s)
+}
+
 func (e *DetailsElement) DataUnsafe(name string, s string) *DetailsElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *DetailsElement) Dir(a DetailsDirEnum) *DetailsElement {
 	return e
 }
 
+func DetailsDirCustom(s string) DetailsDirEnum {
+	return DetailsDirEnum(s)
+}
+
 func (e *DetailsElement) Draggable(a DetailsDraggableEnum) *DetailsElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func DetailsDraggableCustom(s string) DetailsDraggableEnum {
+	return DetailsDraggableEnum(s)
 }
 
 func (e *DetailsElement) Enterkeyhint(a DetailsEnterkeyhintEnum) *DetailsElement {
@@ -219,10 +239,18 @@ func (e *DetailsElement) Enterkeyhint(a DetailsEnterkeyhintEnum) *DetailsElement
 	return e
 }
 
+func DetailsEnterkeyhintCustom(s string) DetailsEnterkeyhintEnum {
+	return DetailsEnterkeyhintEnum(s)
+}
+
 func (e *DetailsElement) Hidden(a DetailsHiddenEnum) *DetailsElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func DetailsHiddenCustom(s string) DetailsHiddenEnum {
+	return DetailsHiddenEnum(s)
 }
 
 func (e *DetailsElement) Id(s string) *DetailsElement {
@@ -241,6 +269,10 @@ func (e *DetailsElement) Inputmode(a DetailsInputmodeEnum) *DetailsElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func DetailsInputmodeCustom(s string) DetailsInputmodeEnum {
+	return DetailsInputmodeEnum(s)
 }
 
 func (e *DetailsElement) Itemid(s string) *DetailsElement {
@@ -303,6 +335,10 @@ func (e *DetailsElement) Spellcheck(a DetailsSpellcheckEnum) *DetailsElement {
 	return e
 }
 
+func DetailsSpellcheckCustom(s string) DetailsSpellcheckEnum {
+	return DetailsSpellcheckEnum(s)
+}
+
 func (e *DetailsElement) Style(s string) *DetailsElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *DetailsElement) Translate(a DetailsTranslateEnum) *DetailsElement {
 	return e
 }
 
+func DetailsTranslateCustom(s string) DetailsTranslateEnum {
+	return DetailsTranslateEnum(s)
+}
+
 func (e *DetailsElement) Writingsuggestions(a DetailsWritingsuggestionsEnum) *DetailsElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func DetailsWritingsuggestionsCustom(s string) DetailsWritingsuggestionsEnum {
+	return DetailsWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

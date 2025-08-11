@@ -79,9 +79,9 @@ const (
 type BodyContenteditableEnum string
 
 const (
-	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
 	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
+	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumEmpty         BodyContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type BodyDraggableEnum string
 
 const (
-	BodyDraggableEnumFalse BodyDraggableEnum = "false"
 	BodyDraggableEnumTrue  BodyDraggableEnum = "true"
+	BodyDraggableEnumFalse BodyDraggableEnum = "false"
 )
 
 type BodyEnterkeyhintEnum string
 
 const (
-	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
 	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
 	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
 	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
 	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
 	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
 	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
+	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
 )
 
 type BodyHiddenEnum string
@@ -273,10 +273,18 @@ func (e *BodyElement) Autocapitalize(a BodyAutocapitalizeEnum) *BodyElement {
 	return e
 }
 
+func BodyAutocapitalizeCustom(s string) BodyAutocapitalizeEnum {
+	return BodyAutocapitalizeEnum(s)
+}
+
 func (e *BodyElement) Autocorrect(a BodyAutocorrectEnum) *BodyElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func BodyAutocorrectCustom(s string) BodyAutocorrectEnum {
+	return BodyAutocorrectEnum(s)
 }
 
 func (e *BodyElement) Autofocus(b bool) *BodyElement {
@@ -297,6 +305,10 @@ func (e *BodyElement) Contenteditable(a BodyContenteditableEnum) *BodyElement {
 	return e
 }
 
+func BodyContenteditableCustom(s string) BodyContenteditableEnum {
+	return BodyContenteditableEnum(s)
+}
+
 func (e *BodyElement) DataUnsafe(name string, s string) *BodyElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -315,10 +327,18 @@ func (e *BodyElement) Dir(a BodyDirEnum) *BodyElement {
 	return e
 }
 
+func BodyDirCustom(s string) BodyDirEnum {
+	return BodyDirEnum(s)
+}
+
 func (e *BodyElement) Draggable(a BodyDraggableEnum) *BodyElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func BodyDraggableCustom(s string) BodyDraggableEnum {
+	return BodyDraggableEnum(s)
 }
 
 func (e *BodyElement) Enterkeyhint(a BodyEnterkeyhintEnum) *BodyElement {
@@ -327,10 +347,18 @@ func (e *BodyElement) Enterkeyhint(a BodyEnterkeyhintEnum) *BodyElement {
 	return e
 }
 
+func BodyEnterkeyhintCustom(s string) BodyEnterkeyhintEnum {
+	return BodyEnterkeyhintEnum(s)
+}
+
 func (e *BodyElement) Hidden(a BodyHiddenEnum) *BodyElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func BodyHiddenCustom(s string) BodyHiddenEnum {
+	return BodyHiddenEnum(s)
 }
 
 func (e *BodyElement) Id(s string) *BodyElement {
@@ -349,6 +377,10 @@ func (e *BodyElement) Inputmode(a BodyInputmodeEnum) *BodyElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func BodyInputmodeCustom(s string) BodyInputmodeEnum {
+	return BodyInputmodeEnum(s)
 }
 
 func (e *BodyElement) Itemid(s string) *BodyElement {
@@ -411,6 +443,10 @@ func (e *BodyElement) Spellcheck(a BodySpellcheckEnum) *BodyElement {
 	return e
 }
 
+func BodySpellcheckCustom(s string) BodySpellcheckEnum {
+	return BodySpellcheckEnum(s)
+}
+
 func (e *BodyElement) Style(s string) *BodyElement {
 	e.attributes["style"] = s
 
@@ -435,10 +471,18 @@ func (e *BodyElement) Translate(a BodyTranslateEnum) *BodyElement {
 	return e
 }
 
+func BodyTranslateCustom(s string) BodyTranslateEnum {
+	return BodyTranslateEnum(s)
+}
+
 func (e *BodyElement) Writingsuggestions(a BodyWritingsuggestionsEnum) *BodyElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func BodyWritingsuggestionsCustom(s string) BodyWritingsuggestionsEnum {
+	return BodyWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

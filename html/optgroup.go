@@ -60,12 +60,12 @@ func (e *OptgroupElement) AddIndent(i int) {
 type OptgroupAutocapitalizeEnum string
 
 const (
+	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
+	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
 	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
 	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 	OptgroupAutocapitalizeEnumOff        OptgroupAutocapitalizeEnum = "off"
 	OptgroupAutocapitalizeEnumOn         OptgroupAutocapitalizeEnum = "on"
-	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
-	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
 )
 
 type OptgroupAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type OptgroupDraggableEnum string
 
 const (
-	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
 	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
+	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
 )
 
 type OptgroupEnterkeyhintEnum string
 
 const (
+	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
+	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
+	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
 	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
 	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
 	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
-	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
-	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
-	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
 )
 
 type OptgroupHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type OptgroupInputmodeEnum string
 
 const (
-	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
-	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
-	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
 	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
 	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
 	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
 	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
+	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
+	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
+	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
 )
 
 type OptgroupSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type OptgroupTranslateEnum string
 
 const (
-	OptgroupTranslateEnumNo    OptgroupTranslateEnum = "no"
 	OptgroupTranslateEnumYes   OptgroupTranslateEnum = "yes"
+	OptgroupTranslateEnumNo    OptgroupTranslateEnum = "no"
 	OptgroupTranslateEnumEmpty OptgroupTranslateEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *OptgroupElement) Autocapitalize(a OptgroupAutocapitalizeEnum) *Optgroup
 	return e
 }
 
+func OptgroupAutocapitalizeCustom(s string) OptgroupAutocapitalizeEnum {
+	return OptgroupAutocapitalizeEnum(s)
+}
+
 func (e *OptgroupElement) Autocorrect(a OptgroupAutocorrectEnum) *OptgroupElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func OptgroupAutocorrectCustom(s string) OptgroupAutocorrectEnum {
+	return OptgroupAutocorrectEnum(s)
 }
 
 func (e *OptgroupElement) Autofocus(b bool) *OptgroupElement {
@@ -189,6 +197,10 @@ func (e *OptgroupElement) Contenteditable(a OptgroupContenteditableEnum) *Optgro
 	return e
 }
 
+func OptgroupContenteditableCustom(s string) OptgroupContenteditableEnum {
+	return OptgroupContenteditableEnum(s)
+}
+
 func (e *OptgroupElement) DataUnsafe(name string, s string) *OptgroupElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *OptgroupElement) Dir(a OptgroupDirEnum) *OptgroupElement {
 	return e
 }
 
+func OptgroupDirCustom(s string) OptgroupDirEnum {
+	return OptgroupDirEnum(s)
+}
+
 func (e *OptgroupElement) Draggable(a OptgroupDraggableEnum) *OptgroupElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func OptgroupDraggableCustom(s string) OptgroupDraggableEnum {
+	return OptgroupDraggableEnum(s)
 }
 
 func (e *OptgroupElement) Enterkeyhint(a OptgroupEnterkeyhintEnum) *OptgroupElement {
@@ -219,10 +239,18 @@ func (e *OptgroupElement) Enterkeyhint(a OptgroupEnterkeyhintEnum) *OptgroupElem
 	return e
 }
 
+func OptgroupEnterkeyhintCustom(s string) OptgroupEnterkeyhintEnum {
+	return OptgroupEnterkeyhintEnum(s)
+}
+
 func (e *OptgroupElement) Hidden(a OptgroupHiddenEnum) *OptgroupElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func OptgroupHiddenCustom(s string) OptgroupHiddenEnum {
+	return OptgroupHiddenEnum(s)
 }
 
 func (e *OptgroupElement) Id(s string) *OptgroupElement {
@@ -241,6 +269,10 @@ func (e *OptgroupElement) Inputmode(a OptgroupInputmodeEnum) *OptgroupElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func OptgroupInputmodeCustom(s string) OptgroupInputmodeEnum {
+	return OptgroupInputmodeEnum(s)
 }
 
 func (e *OptgroupElement) Itemid(s string) *OptgroupElement {
@@ -303,6 +335,10 @@ func (e *OptgroupElement) Spellcheck(a OptgroupSpellcheckEnum) *OptgroupElement 
 	return e
 }
 
+func OptgroupSpellcheckCustom(s string) OptgroupSpellcheckEnum {
+	return OptgroupSpellcheckEnum(s)
+}
+
 func (e *OptgroupElement) Style(s string) *OptgroupElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *OptgroupElement) Translate(a OptgroupTranslateEnum) *OptgroupElement {
 	return e
 }
 
+func OptgroupTranslateCustom(s string) OptgroupTranslateEnum {
+	return OptgroupTranslateEnum(s)
+}
+
 func (e *OptgroupElement) Writingsuggestions(a OptgroupWritingsuggestionsEnum) *OptgroupElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func OptgroupWritingsuggestionsCustom(s string) OptgroupWritingsuggestionsEnum {
+	return OptgroupWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

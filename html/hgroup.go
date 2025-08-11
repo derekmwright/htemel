@@ -60,12 +60,12 @@ func (e *HgroupElement) AddIndent(i int) {
 type HgroupAutocapitalizeEnum string
 
 const (
-	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
-	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
-	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
 	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
 	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
+	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
+	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
+	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 )
 
 type HgroupAutocorrectEnum string
@@ -115,14 +115,15 @@ const (
 type HgroupHiddenEnum string
 
 const (
-	HgroupHiddenEnumHidden     HgroupHiddenEnum = "hidden"
 	HgroupHiddenEnumUntilFound HgroupHiddenEnum = "until-found"
+	HgroupHiddenEnumHidden     HgroupHiddenEnum = "hidden"
 	HgroupHiddenEnumEmpty      HgroupHiddenEnum = ""
 )
 
 type HgroupInputmodeEnum string
 
 const (
+	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
 	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
 	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
 	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
@@ -130,7 +131,6 @@ const (
 	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
 	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
 	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
-	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
 )
 
 type HgroupSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type HgroupTranslateEnum string
 
 const (
-	HgroupTranslateEnumNo    HgroupTranslateEnum = "no"
 	HgroupTranslateEnumYes   HgroupTranslateEnum = "yes"
+	HgroupTranslateEnumNo    HgroupTranslateEnum = "no"
 	HgroupTranslateEnumEmpty HgroupTranslateEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *HgroupElement) Autocapitalize(a HgroupAutocapitalizeEnum) *HgroupElemen
 	return e
 }
 
+func HgroupAutocapitalizeCustom(s string) HgroupAutocapitalizeEnum {
+	return HgroupAutocapitalizeEnum(s)
+}
+
 func (e *HgroupElement) Autocorrect(a HgroupAutocorrectEnum) *HgroupElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func HgroupAutocorrectCustom(s string) HgroupAutocorrectEnum {
+	return HgroupAutocorrectEnum(s)
 }
 
 func (e *HgroupElement) Autofocus(b bool) *HgroupElement {
@@ -189,6 +197,10 @@ func (e *HgroupElement) Contenteditable(a HgroupContenteditableEnum) *HgroupElem
 	return e
 }
 
+func HgroupContenteditableCustom(s string) HgroupContenteditableEnum {
+	return HgroupContenteditableEnum(s)
+}
+
 func (e *HgroupElement) DataUnsafe(name string, s string) *HgroupElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *HgroupElement) Dir(a HgroupDirEnum) *HgroupElement {
 	return e
 }
 
+func HgroupDirCustom(s string) HgroupDirEnum {
+	return HgroupDirEnum(s)
+}
+
 func (e *HgroupElement) Draggable(a HgroupDraggableEnum) *HgroupElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func HgroupDraggableCustom(s string) HgroupDraggableEnum {
+	return HgroupDraggableEnum(s)
 }
 
 func (e *HgroupElement) Enterkeyhint(a HgroupEnterkeyhintEnum) *HgroupElement {
@@ -219,10 +239,18 @@ func (e *HgroupElement) Enterkeyhint(a HgroupEnterkeyhintEnum) *HgroupElement {
 	return e
 }
 
+func HgroupEnterkeyhintCustom(s string) HgroupEnterkeyhintEnum {
+	return HgroupEnterkeyhintEnum(s)
+}
+
 func (e *HgroupElement) Hidden(a HgroupHiddenEnum) *HgroupElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func HgroupHiddenCustom(s string) HgroupHiddenEnum {
+	return HgroupHiddenEnum(s)
 }
 
 func (e *HgroupElement) Id(s string) *HgroupElement {
@@ -241,6 +269,10 @@ func (e *HgroupElement) Inputmode(a HgroupInputmodeEnum) *HgroupElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func HgroupInputmodeCustom(s string) HgroupInputmodeEnum {
+	return HgroupInputmodeEnum(s)
 }
 
 func (e *HgroupElement) Itemid(s string) *HgroupElement {
@@ -303,6 +335,10 @@ func (e *HgroupElement) Spellcheck(a HgroupSpellcheckEnum) *HgroupElement {
 	return e
 }
 
+func HgroupSpellcheckCustom(s string) HgroupSpellcheckEnum {
+	return HgroupSpellcheckEnum(s)
+}
+
 func (e *HgroupElement) Style(s string) *HgroupElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *HgroupElement) Translate(a HgroupTranslateEnum) *HgroupElement {
 	return e
 }
 
+func HgroupTranslateCustom(s string) HgroupTranslateEnum {
+	return HgroupTranslateEnum(s)
+}
+
 func (e *HgroupElement) Writingsuggestions(a HgroupWritingsuggestionsEnum) *HgroupElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func HgroupWritingsuggestionsCustom(s string) HgroupWritingsuggestionsEnum {
+	return HgroupWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

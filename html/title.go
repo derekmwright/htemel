@@ -60,28 +60,28 @@ func (e *TitleElement) AddIndent(i int) {
 type TitleAutocapitalizeEnum string
 
 const (
+	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
 	TitleAutocapitalizeEnumNone       TitleAutocapitalizeEnum = "none"
 	TitleAutocapitalizeEnumOff        TitleAutocapitalizeEnum = "off"
 	TitleAutocapitalizeEnumOn         TitleAutocapitalizeEnum = "on"
 	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
-	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 )
 
 type TitleAutocorrectEnum string
 
 const (
-	TitleAutocorrectEnumOn    TitleAutocorrectEnum = "on"
 	TitleAutocorrectEnumOff   TitleAutocorrectEnum = "off"
+	TitleAutocorrectEnumOn    TitleAutocorrectEnum = "on"
 	TitleAutocorrectEnumEmpty TitleAutocorrectEnum = ""
 )
 
 type TitleContenteditableEnum string
 
 const (
-	TitleContenteditableEnumFalse         TitleContenteditableEnum = "false"
 	TitleContenteditableEnumPlaintextOnly TitleContenteditableEnum = "plaintext-only"
 	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
+	TitleContenteditableEnumFalse         TitleContenteditableEnum = "false"
 	TitleContenteditableEnumEmpty         TitleContenteditableEnum = ""
 )
 
@@ -96,8 +96,8 @@ const (
 type TitleDraggableEnum string
 
 const (
-	TitleDraggableEnumFalse TitleDraggableEnum = "false"
 	TitleDraggableEnumTrue  TitleDraggableEnum = "true"
+	TitleDraggableEnumFalse TitleDraggableEnum = "false"
 )
 
 type TitleEnterkeyhintEnum string
@@ -123,14 +123,14 @@ const (
 type TitleInputmodeEnum string
 
 const (
-	TitleInputmodeEnumSearch  TitleInputmodeEnum = "search"
-	TitleInputmodeEnumTel     TitleInputmodeEnum = "tel"
-	TitleInputmodeEnumText    TitleInputmodeEnum = "text"
 	TitleInputmodeEnumUrl     TitleInputmodeEnum = "url"
 	TitleInputmodeEnumDecimal TitleInputmodeEnum = "decimal"
 	TitleInputmodeEnumEmail   TitleInputmodeEnum = "email"
 	TitleInputmodeEnumNone    TitleInputmodeEnum = "none"
 	TitleInputmodeEnumNumeric TitleInputmodeEnum = "numeric"
+	TitleInputmodeEnumSearch  TitleInputmodeEnum = "search"
+	TitleInputmodeEnumTel     TitleInputmodeEnum = "tel"
+	TitleInputmodeEnumText    TitleInputmodeEnum = "text"
 )
 
 type TitleSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *TitleElement) Autocapitalize(a TitleAutocapitalizeEnum) *TitleElement {
 	return e
 }
 
+func TitleAutocapitalizeCustom(s string) TitleAutocapitalizeEnum {
+	return TitleAutocapitalizeEnum(s)
+}
+
 func (e *TitleElement) Autocorrect(a TitleAutocorrectEnum) *TitleElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func TitleAutocorrectCustom(s string) TitleAutocorrectEnum {
+	return TitleAutocorrectEnum(s)
 }
 
 func (e *TitleElement) Autofocus(b bool) *TitleElement {
@@ -189,6 +197,10 @@ func (e *TitleElement) Contenteditable(a TitleContenteditableEnum) *TitleElement
 	return e
 }
 
+func TitleContenteditableCustom(s string) TitleContenteditableEnum {
+	return TitleContenteditableEnum(s)
+}
+
 func (e *TitleElement) DataUnsafe(name string, s string) *TitleElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *TitleElement) Dir(a TitleDirEnum) *TitleElement {
 	return e
 }
 
+func TitleDirCustom(s string) TitleDirEnum {
+	return TitleDirEnum(s)
+}
+
 func (e *TitleElement) Draggable(a TitleDraggableEnum) *TitleElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func TitleDraggableCustom(s string) TitleDraggableEnum {
+	return TitleDraggableEnum(s)
 }
 
 func (e *TitleElement) Enterkeyhint(a TitleEnterkeyhintEnum) *TitleElement {
@@ -219,10 +239,18 @@ func (e *TitleElement) Enterkeyhint(a TitleEnterkeyhintEnum) *TitleElement {
 	return e
 }
 
+func TitleEnterkeyhintCustom(s string) TitleEnterkeyhintEnum {
+	return TitleEnterkeyhintEnum(s)
+}
+
 func (e *TitleElement) Hidden(a TitleHiddenEnum) *TitleElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func TitleHiddenCustom(s string) TitleHiddenEnum {
+	return TitleHiddenEnum(s)
 }
 
 func (e *TitleElement) Id(s string) *TitleElement {
@@ -241,6 +269,10 @@ func (e *TitleElement) Inputmode(a TitleInputmodeEnum) *TitleElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func TitleInputmodeCustom(s string) TitleInputmodeEnum {
+	return TitleInputmodeEnum(s)
 }
 
 func (e *TitleElement) Itemid(s string) *TitleElement {
@@ -303,6 +335,10 @@ func (e *TitleElement) Spellcheck(a TitleSpellcheckEnum) *TitleElement {
 	return e
 }
 
+func TitleSpellcheckCustom(s string) TitleSpellcheckEnum {
+	return TitleSpellcheckEnum(s)
+}
+
 func (e *TitleElement) Style(s string) *TitleElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *TitleElement) Translate(a TitleTranslateEnum) *TitleElement {
 	return e
 }
 
+func TitleTranslateCustom(s string) TitleTranslateEnum {
+	return TitleTranslateEnum(s)
+}
+
 func (e *TitleElement) Writingsuggestions(a TitleWritingsuggestionsEnum) *TitleElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func TitleWritingsuggestionsCustom(s string) TitleWritingsuggestionsEnum {
+	return TitleWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

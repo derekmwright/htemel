@@ -71,65 +71,65 @@ const (
 type BaseContenteditableEnum string
 
 const (
-	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
 	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
 	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
+	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
 	BaseContenteditableEnumEmpty         BaseContenteditableEnum = ""
 )
 
 type BaseDirEnum string
 
 const (
+	BaseDirEnumRtl  BaseDirEnum = "rtl"
 	BaseDirEnumAuto BaseDirEnum = "auto"
 	BaseDirEnumLtr  BaseDirEnum = "ltr"
-	BaseDirEnumRtl  BaseDirEnum = "rtl"
 )
 
 type BaseDraggableEnum string
 
 const (
-	BaseDraggableEnumFalse BaseDraggableEnum = "false"
 	BaseDraggableEnumTrue  BaseDraggableEnum = "true"
+	BaseDraggableEnumFalse BaseDraggableEnum = "false"
 )
 
 type BaseEnterkeyhintEnum string
 
 const (
+	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
+	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
 	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
 	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
-	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
-	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 )
 
 type BaseHiddenEnum string
 
 const (
-	BaseHiddenEnumUntilFound BaseHiddenEnum = "until-found"
 	BaseHiddenEnumHidden     BaseHiddenEnum = "hidden"
+	BaseHiddenEnumUntilFound BaseHiddenEnum = "until-found"
 	BaseHiddenEnumEmpty      BaseHiddenEnum = ""
 )
 
 type BaseInputmodeEnum string
 
 const (
-	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
-	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
-	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
-	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
 	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
 	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
 	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
+	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
+	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
+	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
+	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
 )
 
 type BaseSpellcheckEnum string
 
 const (
-	BaseSpellcheckEnumFalse BaseSpellcheckEnum = "false"
 	BaseSpellcheckEnumTrue  BaseSpellcheckEnum = "true"
+	BaseSpellcheckEnumFalse BaseSpellcheckEnum = "false"
 	BaseSpellcheckEnumEmpty BaseSpellcheckEnum = ""
 )
 
@@ -169,10 +169,18 @@ func (e *BaseElement) Autocapitalize(a BaseAutocapitalizeEnum) *BaseElement {
 	return e
 }
 
+func BaseAutocapitalizeCustom(s string) BaseAutocapitalizeEnum {
+	return BaseAutocapitalizeEnum(s)
+}
+
 func (e *BaseElement) Autocorrect(a BaseAutocorrectEnum) *BaseElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func BaseAutocorrectCustom(s string) BaseAutocorrectEnum {
+	return BaseAutocorrectEnum(s)
 }
 
 func (e *BaseElement) Autofocus(b bool) *BaseElement {
@@ -193,6 +201,10 @@ func (e *BaseElement) Contenteditable(a BaseContenteditableEnum) *BaseElement {
 	return e
 }
 
+func BaseContenteditableCustom(s string) BaseContenteditableEnum {
+	return BaseContenteditableEnum(s)
+}
+
 func (e *BaseElement) DataUnsafe(name string, s string) *BaseElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -211,10 +223,18 @@ func (e *BaseElement) Dir(a BaseDirEnum) *BaseElement {
 	return e
 }
 
+func BaseDirCustom(s string) BaseDirEnum {
+	return BaseDirEnum(s)
+}
+
 func (e *BaseElement) Draggable(a BaseDraggableEnum) *BaseElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func BaseDraggableCustom(s string) BaseDraggableEnum {
+	return BaseDraggableEnum(s)
 }
 
 func (e *BaseElement) Enterkeyhint(a BaseEnterkeyhintEnum) *BaseElement {
@@ -223,10 +243,18 @@ func (e *BaseElement) Enterkeyhint(a BaseEnterkeyhintEnum) *BaseElement {
 	return e
 }
 
+func BaseEnterkeyhintCustom(s string) BaseEnterkeyhintEnum {
+	return BaseEnterkeyhintEnum(s)
+}
+
 func (e *BaseElement) Hidden(a BaseHiddenEnum) *BaseElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func BaseHiddenCustom(s string) BaseHiddenEnum {
+	return BaseHiddenEnum(s)
 }
 
 func (e *BaseElement) Id(s string) *BaseElement {
@@ -245,6 +273,10 @@ func (e *BaseElement) Inputmode(a BaseInputmodeEnum) *BaseElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func BaseInputmodeCustom(s string) BaseInputmodeEnum {
+	return BaseInputmodeEnum(s)
 }
 
 func (e *BaseElement) Itemid(s string) *BaseElement {
@@ -307,6 +339,10 @@ func (e *BaseElement) Spellcheck(a BaseSpellcheckEnum) *BaseElement {
 	return e
 }
 
+func BaseSpellcheckCustom(s string) BaseSpellcheckEnum {
+	return BaseSpellcheckEnum(s)
+}
+
 func (e *BaseElement) Style(s string) *BaseElement {
 	e.attributes["style"] = s
 
@@ -331,10 +367,18 @@ func (e *BaseElement) Translate(a BaseTranslateEnum) *BaseElement {
 	return e
 }
 
+func BaseTranslateCustom(s string) BaseTranslateEnum {
+	return BaseTranslateEnum(s)
+}
+
 func (e *BaseElement) Writingsuggestions(a BaseWritingsuggestionsEnum) *BaseElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func BaseWritingsuggestionsCustom(s string) BaseWritingsuggestionsEnum {
+	return BaseWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

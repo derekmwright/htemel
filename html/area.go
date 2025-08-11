@@ -52,37 +52,37 @@ func (e *AreaElement) AddIndent(i int) {
 type AreaShapeEnum string
 
 const (
-	AreaShapeEnumCircle  AreaShapeEnum = "circle"
-	AreaShapeEnumDefault AreaShapeEnum = "default"
 	AreaShapeEnumPoly    AreaShapeEnum = "poly"
 	AreaShapeEnumRect    AreaShapeEnum = "rect"
+	AreaShapeEnumCircle  AreaShapeEnum = "circle"
+	AreaShapeEnumDefault AreaShapeEnum = "default"
 )
 
 type AreaAutocapitalizeEnum string
 
 const (
-	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
 	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
 	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
 	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
 	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
 	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
+	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
 )
 
 type AreaAutocorrectEnum string
 
 const (
-	AreaAutocorrectEnumOn    AreaAutocorrectEnum = "on"
 	AreaAutocorrectEnumOff   AreaAutocorrectEnum = "off"
+	AreaAutocorrectEnumOn    AreaAutocorrectEnum = "on"
 	AreaAutocorrectEnumEmpty AreaAutocorrectEnum = ""
 )
 
 type AreaContenteditableEnum string
 
 const (
-	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
 	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumPlaintextOnly AreaContenteditableEnum = "plaintext-only"
+	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
 	AreaContenteditableEnumEmpty         AreaContenteditableEnum = ""
 )
 
@@ -104,41 +104,41 @@ const (
 type AreaEnterkeyhintEnum string
 
 const (
-	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
 	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
 	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
 	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
 	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
 	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
 	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
+	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
 )
 
 type AreaHiddenEnum string
 
 const (
-	AreaHiddenEnumUntilFound AreaHiddenEnum = "until-found"
 	AreaHiddenEnumHidden     AreaHiddenEnum = "hidden"
+	AreaHiddenEnumUntilFound AreaHiddenEnum = "until-found"
 	AreaHiddenEnumEmpty      AreaHiddenEnum = ""
 )
 
 type AreaInputmodeEnum string
 
 const (
-	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
-	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
-	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
 	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
 	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
 	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
+	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
+	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
+	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 )
 
 type AreaSpellcheckEnum string
 
 const (
-	AreaSpellcheckEnumFalse AreaSpellcheckEnum = "false"
 	AreaSpellcheckEnumTrue  AreaSpellcheckEnum = "true"
+	AreaSpellcheckEnumFalse AreaSpellcheckEnum = "false"
 	AreaSpellcheckEnumEmpty AreaSpellcheckEnum = ""
 )
 
@@ -176,6 +176,10 @@ func (e *AreaElement) Shape(a AreaShapeEnum) *AreaElement {
 	e.attributes["shape"] = a
 
 	return e
+}
+
+func AreaShapeCustom(s string) AreaShapeEnum {
+	return AreaShapeEnum(s)
 }
 
 func (e *AreaElement) Href(s string) *AreaElement {
@@ -220,10 +224,18 @@ func (e *AreaElement) Autocapitalize(a AreaAutocapitalizeEnum) *AreaElement {
 	return e
 }
 
+func AreaAutocapitalizeCustom(s string) AreaAutocapitalizeEnum {
+	return AreaAutocapitalizeEnum(s)
+}
+
 func (e *AreaElement) Autocorrect(a AreaAutocorrectEnum) *AreaElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func AreaAutocorrectCustom(s string) AreaAutocorrectEnum {
+	return AreaAutocorrectEnum(s)
 }
 
 func (e *AreaElement) Autofocus(b bool) *AreaElement {
@@ -244,6 +256,10 @@ func (e *AreaElement) Contenteditable(a AreaContenteditableEnum) *AreaElement {
 	return e
 }
 
+func AreaContenteditableCustom(s string) AreaContenteditableEnum {
+	return AreaContenteditableEnum(s)
+}
+
 func (e *AreaElement) DataUnsafe(name string, s string) *AreaElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -262,10 +278,18 @@ func (e *AreaElement) Dir(a AreaDirEnum) *AreaElement {
 	return e
 }
 
+func AreaDirCustom(s string) AreaDirEnum {
+	return AreaDirEnum(s)
+}
+
 func (e *AreaElement) Draggable(a AreaDraggableEnum) *AreaElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func AreaDraggableCustom(s string) AreaDraggableEnum {
+	return AreaDraggableEnum(s)
 }
 
 func (e *AreaElement) Enterkeyhint(a AreaEnterkeyhintEnum) *AreaElement {
@@ -274,10 +298,18 @@ func (e *AreaElement) Enterkeyhint(a AreaEnterkeyhintEnum) *AreaElement {
 	return e
 }
 
+func AreaEnterkeyhintCustom(s string) AreaEnterkeyhintEnum {
+	return AreaEnterkeyhintEnum(s)
+}
+
 func (e *AreaElement) Hidden(a AreaHiddenEnum) *AreaElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func AreaHiddenCustom(s string) AreaHiddenEnum {
+	return AreaHiddenEnum(s)
 }
 
 func (e *AreaElement) Id(s string) *AreaElement {
@@ -296,6 +328,10 @@ func (e *AreaElement) Inputmode(a AreaInputmodeEnum) *AreaElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func AreaInputmodeCustom(s string) AreaInputmodeEnum {
+	return AreaInputmodeEnum(s)
 }
 
 func (e *AreaElement) Itemid(s string) *AreaElement {
@@ -358,6 +394,10 @@ func (e *AreaElement) Spellcheck(a AreaSpellcheckEnum) *AreaElement {
 	return e
 }
 
+func AreaSpellcheckCustom(s string) AreaSpellcheckEnum {
+	return AreaSpellcheckEnum(s)
+}
+
 func (e *AreaElement) Style(s string) *AreaElement {
 	e.attributes["style"] = s
 
@@ -382,10 +422,18 @@ func (e *AreaElement) Translate(a AreaTranslateEnum) *AreaElement {
 	return e
 }
 
+func AreaTranslateCustom(s string) AreaTranslateEnum {
+	return AreaTranslateEnum(s)
+}
+
 func (e *AreaElement) Writingsuggestions(a AreaWritingsuggestionsEnum) *AreaElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func AreaWritingsuggestionsCustom(s string) AreaWritingsuggestionsEnum {
+	return AreaWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

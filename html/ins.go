@@ -60,19 +60,19 @@ func (e *InsElement) AddIndent(i int) {
 type InsAutocapitalizeEnum string
 
 const (
+	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
 	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
 	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
 	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
 	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
-	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 )
 
 type InsAutocorrectEnum string
 
 const (
-	InsAutocorrectEnumOff   InsAutocorrectEnum = "off"
 	InsAutocorrectEnumOn    InsAutocorrectEnum = "on"
+	InsAutocorrectEnumOff   InsAutocorrectEnum = "off"
 	InsAutocorrectEnumEmpty InsAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type InsDirEnum string
 
 const (
-	InsDirEnumAuto InsDirEnum = "auto"
 	InsDirEnumLtr  InsDirEnum = "ltr"
 	InsDirEnumRtl  InsDirEnum = "rtl"
+	InsDirEnumAuto InsDirEnum = "auto"
 )
 
 type InsDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type InsEnterkeyhintEnum string
 
 const (
-	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
-	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
-	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
 	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
+	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
+	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
+	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 )
 
 type InsHiddenEnum string
@@ -123,29 +123,29 @@ const (
 type InsInputmodeEnum string
 
 const (
-	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
-	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
 	InsInputmodeEnumText    InsInputmodeEnum = "text"
 	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
 	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
 	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
 	InsInputmodeEnumNone    InsInputmodeEnum = "none"
 	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
+	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
+	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
 )
 
 type InsSpellcheckEnum string
 
 const (
-	InsSpellcheckEnumFalse InsSpellcheckEnum = "false"
 	InsSpellcheckEnumTrue  InsSpellcheckEnum = "true"
+	InsSpellcheckEnumFalse InsSpellcheckEnum = "false"
 	InsSpellcheckEnumEmpty InsSpellcheckEnum = ""
 )
 
 type InsTranslateEnum string
 
 const (
-	InsTranslateEnumYes   InsTranslateEnum = "yes"
 	InsTranslateEnumNo    InsTranslateEnum = "no"
+	InsTranslateEnumYes   InsTranslateEnum = "yes"
 	InsTranslateEnumEmpty InsTranslateEnum = ""
 )
 
@@ -177,10 +177,18 @@ func (e *InsElement) Autocapitalize(a InsAutocapitalizeEnum) *InsElement {
 	return e
 }
 
+func InsAutocapitalizeCustom(s string) InsAutocapitalizeEnum {
+	return InsAutocapitalizeEnum(s)
+}
+
 func (e *InsElement) Autocorrect(a InsAutocorrectEnum) *InsElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func InsAutocorrectCustom(s string) InsAutocorrectEnum {
+	return InsAutocorrectEnum(s)
 }
 
 func (e *InsElement) Autofocus(b bool) *InsElement {
@@ -201,6 +209,10 @@ func (e *InsElement) Contenteditable(a InsContenteditableEnum) *InsElement {
 	return e
 }
 
+func InsContenteditableCustom(s string) InsContenteditableEnum {
+	return InsContenteditableEnum(s)
+}
+
 func (e *InsElement) DataUnsafe(name string, s string) *InsElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,10 +231,18 @@ func (e *InsElement) Dir(a InsDirEnum) *InsElement {
 	return e
 }
 
+func InsDirCustom(s string) InsDirEnum {
+	return InsDirEnum(s)
+}
+
 func (e *InsElement) Draggable(a InsDraggableEnum) *InsElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func InsDraggableCustom(s string) InsDraggableEnum {
+	return InsDraggableEnum(s)
 }
 
 func (e *InsElement) Enterkeyhint(a InsEnterkeyhintEnum) *InsElement {
@@ -231,10 +251,18 @@ func (e *InsElement) Enterkeyhint(a InsEnterkeyhintEnum) *InsElement {
 	return e
 }
 
+func InsEnterkeyhintCustom(s string) InsEnterkeyhintEnum {
+	return InsEnterkeyhintEnum(s)
+}
+
 func (e *InsElement) Hidden(a InsHiddenEnum) *InsElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func InsHiddenCustom(s string) InsHiddenEnum {
+	return InsHiddenEnum(s)
 }
 
 func (e *InsElement) Id(s string) *InsElement {
@@ -253,6 +281,10 @@ func (e *InsElement) Inputmode(a InsInputmodeEnum) *InsElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func InsInputmodeCustom(s string) InsInputmodeEnum {
+	return InsInputmodeEnum(s)
 }
 
 func (e *InsElement) Itemid(s string) *InsElement {
@@ -315,6 +347,10 @@ func (e *InsElement) Spellcheck(a InsSpellcheckEnum) *InsElement {
 	return e
 }
 
+func InsSpellcheckCustom(s string) InsSpellcheckEnum {
+	return InsSpellcheckEnum(s)
+}
+
 func (e *InsElement) Style(s string) *InsElement {
 	e.attributes["style"] = s
 
@@ -339,10 +375,18 @@ func (e *InsElement) Translate(a InsTranslateEnum) *InsElement {
 	return e
 }
 
+func InsTranslateCustom(s string) InsTranslateEnum {
+	return InsTranslateEnum(s)
+}
+
 func (e *InsElement) Writingsuggestions(a InsWritingsuggestionsEnum) *InsElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func InsWritingsuggestionsCustom(s string) InsWritingsuggestionsEnum {
+	return InsWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

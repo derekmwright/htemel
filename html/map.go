@@ -60,12 +60,12 @@ func (e *MapElement) AddIndent(i int) {
 type MapAutocapitalizeEnum string
 
 const (
-	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
-	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 	MapAutocapitalizeEnumCharacters MapAutocapitalizeEnum = "characters"
 	MapAutocapitalizeEnumNone       MapAutocapitalizeEnum = "none"
 	MapAutocapitalizeEnumOff        MapAutocapitalizeEnum = "off"
 	MapAutocapitalizeEnumOn         MapAutocapitalizeEnum = "on"
+	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
+	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 )
 
 type MapAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type MapDirEnum string
 
 const (
-	MapDirEnumRtl  MapDirEnum = "rtl"
 	MapDirEnumAuto MapDirEnum = "auto"
 	MapDirEnumLtr  MapDirEnum = "ltr"
+	MapDirEnumRtl  MapDirEnum = "rtl"
 )
 
 type MapDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type MapEnterkeyhintEnum string
 
 const (
-	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
-	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
-	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
 	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
 	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
 	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 	MapEnterkeyhintEnumSend     MapEnterkeyhintEnum = "send"
+	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
+	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
+	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
 )
 
 type MapHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type MapInputmodeEnum string
 
 const (
+	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
 	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
 	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
 	MapInputmodeEnumText    MapInputmodeEnum = "text"
@@ -130,7 +131,6 @@ const (
 	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
 	MapInputmodeEnumEmail   MapInputmodeEnum = "email"
 	MapInputmodeEnumNone    MapInputmodeEnum = "none"
-	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
 )
 
 type MapSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type MapWritingsuggestionsEnum string
 
 const (
-	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
 	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
+	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
 	MapWritingsuggestionsEnumEmpty MapWritingsuggestionsEnum = ""
 )
 
@@ -171,10 +171,18 @@ func (e *MapElement) Autocapitalize(a MapAutocapitalizeEnum) *MapElement {
 	return e
 }
 
+func MapAutocapitalizeCustom(s string) MapAutocapitalizeEnum {
+	return MapAutocapitalizeEnum(s)
+}
+
 func (e *MapElement) Autocorrect(a MapAutocorrectEnum) *MapElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func MapAutocorrectCustom(s string) MapAutocorrectEnum {
+	return MapAutocorrectEnum(s)
 }
 
 func (e *MapElement) Autofocus(b bool) *MapElement {
@@ -195,6 +203,10 @@ func (e *MapElement) Contenteditable(a MapContenteditableEnum) *MapElement {
 	return e
 }
 
+func MapContenteditableCustom(s string) MapContenteditableEnum {
+	return MapContenteditableEnum(s)
+}
+
 func (e *MapElement) DataUnsafe(name string, s string) *MapElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -213,10 +225,18 @@ func (e *MapElement) Dir(a MapDirEnum) *MapElement {
 	return e
 }
 
+func MapDirCustom(s string) MapDirEnum {
+	return MapDirEnum(s)
+}
+
 func (e *MapElement) Draggable(a MapDraggableEnum) *MapElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func MapDraggableCustom(s string) MapDraggableEnum {
+	return MapDraggableEnum(s)
 }
 
 func (e *MapElement) Enterkeyhint(a MapEnterkeyhintEnum) *MapElement {
@@ -225,10 +245,18 @@ func (e *MapElement) Enterkeyhint(a MapEnterkeyhintEnum) *MapElement {
 	return e
 }
 
+func MapEnterkeyhintCustom(s string) MapEnterkeyhintEnum {
+	return MapEnterkeyhintEnum(s)
+}
+
 func (e *MapElement) Hidden(a MapHiddenEnum) *MapElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func MapHiddenCustom(s string) MapHiddenEnum {
+	return MapHiddenEnum(s)
 }
 
 func (e *MapElement) Id(s string) *MapElement {
@@ -247,6 +275,10 @@ func (e *MapElement) Inputmode(a MapInputmodeEnum) *MapElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func MapInputmodeCustom(s string) MapInputmodeEnum {
+	return MapInputmodeEnum(s)
 }
 
 func (e *MapElement) Itemid(s string) *MapElement {
@@ -309,6 +341,10 @@ func (e *MapElement) Spellcheck(a MapSpellcheckEnum) *MapElement {
 	return e
 }
 
+func MapSpellcheckCustom(s string) MapSpellcheckEnum {
+	return MapSpellcheckEnum(s)
+}
+
 func (e *MapElement) Style(s string) *MapElement {
 	e.attributes["style"] = s
 
@@ -333,10 +369,18 @@ func (e *MapElement) Translate(a MapTranslateEnum) *MapElement {
 	return e
 }
 
+func MapTranslateCustom(s string) MapTranslateEnum {
+	return MapTranslateEnum(s)
+}
+
 func (e *MapElement) Writingsuggestions(a MapWritingsuggestionsEnum) *MapElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func MapWritingsuggestionsCustom(s string) MapWritingsuggestionsEnum {
+	return MapWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

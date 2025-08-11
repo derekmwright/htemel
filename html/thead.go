@@ -60,12 +60,12 @@ func (e *TheadElement) AddIndent(i int) {
 type TheadAutocapitalizeEnum string
 
 const (
+	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
 	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
 	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
 	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
-	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 )
 
 type TheadAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type TheadDraggableEnum string
 
 const (
-	TheadDraggableEnumFalse TheadDraggableEnum = "false"
 	TheadDraggableEnumTrue  TheadDraggableEnum = "true"
+	TheadDraggableEnumFalse TheadDraggableEnum = "false"
 )
 
 type TheadEnterkeyhintEnum string
 
 const (
+	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
+	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
 	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
 	TheadEnterkeyhintEnumGo       TheadEnterkeyhintEnum = "go"
 	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
 	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
-	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
-	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 )
 
 type TheadHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type TheadInputmodeEnum string
 
 const (
-	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
-	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
 	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
 	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
 	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
 	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
 	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
 	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
+	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
+	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
 )
 
 type TheadSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *TheadElement) Autocapitalize(a TheadAutocapitalizeEnum) *TheadElement {
 	return e
 }
 
+func TheadAutocapitalizeCustom(s string) TheadAutocapitalizeEnum {
+	return TheadAutocapitalizeEnum(s)
+}
+
 func (e *TheadElement) Autocorrect(a TheadAutocorrectEnum) *TheadElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func TheadAutocorrectCustom(s string) TheadAutocorrectEnum {
+	return TheadAutocorrectEnum(s)
 }
 
 func (e *TheadElement) Autofocus(b bool) *TheadElement {
@@ -189,6 +197,10 @@ func (e *TheadElement) Contenteditable(a TheadContenteditableEnum) *TheadElement
 	return e
 }
 
+func TheadContenteditableCustom(s string) TheadContenteditableEnum {
+	return TheadContenteditableEnum(s)
+}
+
 func (e *TheadElement) DataUnsafe(name string, s string) *TheadElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *TheadElement) Dir(a TheadDirEnum) *TheadElement {
 	return e
 }
 
+func TheadDirCustom(s string) TheadDirEnum {
+	return TheadDirEnum(s)
+}
+
 func (e *TheadElement) Draggable(a TheadDraggableEnum) *TheadElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func TheadDraggableCustom(s string) TheadDraggableEnum {
+	return TheadDraggableEnum(s)
 }
 
 func (e *TheadElement) Enterkeyhint(a TheadEnterkeyhintEnum) *TheadElement {
@@ -219,10 +239,18 @@ func (e *TheadElement) Enterkeyhint(a TheadEnterkeyhintEnum) *TheadElement {
 	return e
 }
 
+func TheadEnterkeyhintCustom(s string) TheadEnterkeyhintEnum {
+	return TheadEnterkeyhintEnum(s)
+}
+
 func (e *TheadElement) Hidden(a TheadHiddenEnum) *TheadElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func TheadHiddenCustom(s string) TheadHiddenEnum {
+	return TheadHiddenEnum(s)
 }
 
 func (e *TheadElement) Id(s string) *TheadElement {
@@ -241,6 +269,10 @@ func (e *TheadElement) Inputmode(a TheadInputmodeEnum) *TheadElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func TheadInputmodeCustom(s string) TheadInputmodeEnum {
+	return TheadInputmodeEnum(s)
 }
 
 func (e *TheadElement) Itemid(s string) *TheadElement {
@@ -303,6 +335,10 @@ func (e *TheadElement) Spellcheck(a TheadSpellcheckEnum) *TheadElement {
 	return e
 }
 
+func TheadSpellcheckCustom(s string) TheadSpellcheckEnum {
+	return TheadSpellcheckEnum(s)
+}
+
 func (e *TheadElement) Style(s string) *TheadElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *TheadElement) Translate(a TheadTranslateEnum) *TheadElement {
 	return e
 }
 
+func TheadTranslateCustom(s string) TheadTranslateEnum {
+	return TheadTranslateEnum(s)
+}
+
 func (e *TheadElement) Writingsuggestions(a TheadWritingsuggestionsEnum) *TheadElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func TheadWritingsuggestionsCustom(s string) TheadWritingsuggestionsEnum {
+	return TheadWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

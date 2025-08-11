@@ -60,12 +60,12 @@ func (e *ScriptElement) AddIndent(i int) {
 type ScriptAutocapitalizeEnum string
 
 const (
+	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
+	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
 	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
 	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
 	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
-	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
-	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
 )
 
 type ScriptAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type ScriptEnterkeyhintEnum string
 
 const (
+	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
+	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
 	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
 	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 	ScriptEnterkeyhintEnumNext     ScriptEnterkeyhintEnum = "next"
 	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
-	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
-	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 )
 
 type ScriptHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type ScriptInputmodeEnum string
 
 const (
-	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
 	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
@@ -131,6 +130,7 @@ const (
 	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
 	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
+	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 )
 
 type ScriptSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *ScriptElement) Autocapitalize(a ScriptAutocapitalizeEnum) *ScriptElemen
 	return e
 }
 
+func ScriptAutocapitalizeCustom(s string) ScriptAutocapitalizeEnum {
+	return ScriptAutocapitalizeEnum(s)
+}
+
 func (e *ScriptElement) Autocorrect(a ScriptAutocorrectEnum) *ScriptElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func ScriptAutocorrectCustom(s string) ScriptAutocorrectEnum {
+	return ScriptAutocorrectEnum(s)
 }
 
 func (e *ScriptElement) Autofocus(b bool) *ScriptElement {
@@ -189,6 +197,10 @@ func (e *ScriptElement) Contenteditable(a ScriptContenteditableEnum) *ScriptElem
 	return e
 }
 
+func ScriptContenteditableCustom(s string) ScriptContenteditableEnum {
+	return ScriptContenteditableEnum(s)
+}
+
 func (e *ScriptElement) DataUnsafe(name string, s string) *ScriptElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *ScriptElement) Dir(a ScriptDirEnum) *ScriptElement {
 	return e
 }
 
+func ScriptDirCustom(s string) ScriptDirEnum {
+	return ScriptDirEnum(s)
+}
+
 func (e *ScriptElement) Draggable(a ScriptDraggableEnum) *ScriptElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func ScriptDraggableCustom(s string) ScriptDraggableEnum {
+	return ScriptDraggableEnum(s)
 }
 
 func (e *ScriptElement) Enterkeyhint(a ScriptEnterkeyhintEnum) *ScriptElement {
@@ -219,10 +239,18 @@ func (e *ScriptElement) Enterkeyhint(a ScriptEnterkeyhintEnum) *ScriptElement {
 	return e
 }
 
+func ScriptEnterkeyhintCustom(s string) ScriptEnterkeyhintEnum {
+	return ScriptEnterkeyhintEnum(s)
+}
+
 func (e *ScriptElement) Hidden(a ScriptHiddenEnum) *ScriptElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func ScriptHiddenCustom(s string) ScriptHiddenEnum {
+	return ScriptHiddenEnum(s)
 }
 
 func (e *ScriptElement) Id(s string) *ScriptElement {
@@ -241,6 +269,10 @@ func (e *ScriptElement) Inputmode(a ScriptInputmodeEnum) *ScriptElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func ScriptInputmodeCustom(s string) ScriptInputmodeEnum {
+	return ScriptInputmodeEnum(s)
 }
 
 func (e *ScriptElement) Itemid(s string) *ScriptElement {
@@ -303,6 +335,10 @@ func (e *ScriptElement) Spellcheck(a ScriptSpellcheckEnum) *ScriptElement {
 	return e
 }
 
+func ScriptSpellcheckCustom(s string) ScriptSpellcheckEnum {
+	return ScriptSpellcheckEnum(s)
+}
+
 func (e *ScriptElement) Style(s string) *ScriptElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *ScriptElement) Translate(a ScriptTranslateEnum) *ScriptElement {
 	return e
 }
 
+func ScriptTranslateCustom(s string) ScriptTranslateEnum {
+	return ScriptTranslateEnum(s)
+}
+
 func (e *ScriptElement) Writingsuggestions(a ScriptWritingsuggestionsEnum) *ScriptElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func ScriptWritingsuggestionsCustom(s string) ScriptWritingsuggestionsEnum {
+	return ScriptWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

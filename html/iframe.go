@@ -86,9 +86,9 @@ const (
 type IframeContenteditableEnum string
 
 const (
+	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
 	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
 	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
-	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
 	IframeContenteditableEnumEmpty         IframeContenteditableEnum = ""
 )
 
@@ -110,13 +110,13 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
+	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
+	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
+	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
 	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
 	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
 	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
-	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
-	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
-	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
 )
 
 type IframeHiddenEnum string
@@ -130,14 +130,14 @@ const (
 type IframeInputmodeEnum string
 
 const (
-	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
-	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
 	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
 	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
 	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
 	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
 	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
+	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
+	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 )
 
 type IframeSpellcheckEnum string
@@ -226,16 +226,28 @@ func (e *IframeElement) Loading(a IframeLoadingEnum) *IframeElement {
 	return e
 }
 
+func IframeLoadingCustom(s string) IframeLoadingEnum {
+	return IframeLoadingEnum(s)
+}
+
 func (e *IframeElement) Autocapitalize(a IframeAutocapitalizeEnum) *IframeElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
+func IframeAutocapitalizeCustom(s string) IframeAutocapitalizeEnum {
+	return IframeAutocapitalizeEnum(s)
+}
+
 func (e *IframeElement) Autocorrect(a IframeAutocorrectEnum) *IframeElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func IframeAutocorrectCustom(s string) IframeAutocorrectEnum {
+	return IframeAutocorrectEnum(s)
 }
 
 func (e *IframeElement) Autofocus(b bool) *IframeElement {
@@ -256,6 +268,10 @@ func (e *IframeElement) Contenteditable(a IframeContenteditableEnum) *IframeElem
 	return e
 }
 
+func IframeContenteditableCustom(s string) IframeContenteditableEnum {
+	return IframeContenteditableEnum(s)
+}
+
 func (e *IframeElement) DataUnsafe(name string, s string) *IframeElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -274,10 +290,18 @@ func (e *IframeElement) Dir(a IframeDirEnum) *IframeElement {
 	return e
 }
 
+func IframeDirCustom(s string) IframeDirEnum {
+	return IframeDirEnum(s)
+}
+
 func (e *IframeElement) Draggable(a IframeDraggableEnum) *IframeElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func IframeDraggableCustom(s string) IframeDraggableEnum {
+	return IframeDraggableEnum(s)
 }
 
 func (e *IframeElement) Enterkeyhint(a IframeEnterkeyhintEnum) *IframeElement {
@@ -286,10 +310,18 @@ func (e *IframeElement) Enterkeyhint(a IframeEnterkeyhintEnum) *IframeElement {
 	return e
 }
 
+func IframeEnterkeyhintCustom(s string) IframeEnterkeyhintEnum {
+	return IframeEnterkeyhintEnum(s)
+}
+
 func (e *IframeElement) Hidden(a IframeHiddenEnum) *IframeElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func IframeHiddenCustom(s string) IframeHiddenEnum {
+	return IframeHiddenEnum(s)
 }
 
 func (e *IframeElement) Id(s string) *IframeElement {
@@ -308,6 +340,10 @@ func (e *IframeElement) Inputmode(a IframeInputmodeEnum) *IframeElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func IframeInputmodeCustom(s string) IframeInputmodeEnum {
+	return IframeInputmodeEnum(s)
 }
 
 func (e *IframeElement) Itemid(s string) *IframeElement {
@@ -370,6 +406,10 @@ func (e *IframeElement) Spellcheck(a IframeSpellcheckEnum) *IframeElement {
 	return e
 }
 
+func IframeSpellcheckCustom(s string) IframeSpellcheckEnum {
+	return IframeSpellcheckEnum(s)
+}
+
 func (e *IframeElement) Style(s string) *IframeElement {
 	e.attributes["style"] = s
 
@@ -394,10 +434,18 @@ func (e *IframeElement) Translate(a IframeTranslateEnum) *IframeElement {
 	return e
 }
 
+func IframeTranslateCustom(s string) IframeTranslateEnum {
+	return IframeTranslateEnum(s)
+}
+
 func (e *IframeElement) Writingsuggestions(a IframeWritingsuggestionsEnum) *IframeElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func IframeWritingsuggestionsCustom(s string) IframeWritingsuggestionsEnum {
+	return IframeWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

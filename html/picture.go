@@ -123,14 +123,14 @@ const (
 type PictureInputmodeEnum string
 
 const (
+	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
+	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
+	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
 	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
 	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
 	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
 	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
-	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
-	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
-	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
 )
 
 type PictureSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type PictureWritingsuggestionsEnum string
 
 const (
-	PictureWritingsuggestionsEnumFalse PictureWritingsuggestionsEnum = "false"
 	PictureWritingsuggestionsEnumTrue  PictureWritingsuggestionsEnum = "true"
+	PictureWritingsuggestionsEnumFalse PictureWritingsuggestionsEnum = "false"
 	PictureWritingsuggestionsEnumEmpty PictureWritingsuggestionsEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *PictureElement) Autocapitalize(a PictureAutocapitalizeEnum) *PictureEle
 	return e
 }
 
+func PictureAutocapitalizeCustom(s string) PictureAutocapitalizeEnum {
+	return PictureAutocapitalizeEnum(s)
+}
+
 func (e *PictureElement) Autocorrect(a PictureAutocorrectEnum) *PictureElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func PictureAutocorrectCustom(s string) PictureAutocorrectEnum {
+	return PictureAutocorrectEnum(s)
 }
 
 func (e *PictureElement) Autofocus(b bool) *PictureElement {
@@ -189,6 +197,10 @@ func (e *PictureElement) Contenteditable(a PictureContenteditableEnum) *PictureE
 	return e
 }
 
+func PictureContenteditableCustom(s string) PictureContenteditableEnum {
+	return PictureContenteditableEnum(s)
+}
+
 func (e *PictureElement) DataUnsafe(name string, s string) *PictureElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *PictureElement) Dir(a PictureDirEnum) *PictureElement {
 	return e
 }
 
+func PictureDirCustom(s string) PictureDirEnum {
+	return PictureDirEnum(s)
+}
+
 func (e *PictureElement) Draggable(a PictureDraggableEnum) *PictureElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func PictureDraggableCustom(s string) PictureDraggableEnum {
+	return PictureDraggableEnum(s)
 }
 
 func (e *PictureElement) Enterkeyhint(a PictureEnterkeyhintEnum) *PictureElement {
@@ -219,10 +239,18 @@ func (e *PictureElement) Enterkeyhint(a PictureEnterkeyhintEnum) *PictureElement
 	return e
 }
 
+func PictureEnterkeyhintCustom(s string) PictureEnterkeyhintEnum {
+	return PictureEnterkeyhintEnum(s)
+}
+
 func (e *PictureElement) Hidden(a PictureHiddenEnum) *PictureElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func PictureHiddenCustom(s string) PictureHiddenEnum {
+	return PictureHiddenEnum(s)
 }
 
 func (e *PictureElement) Id(s string) *PictureElement {
@@ -241,6 +269,10 @@ func (e *PictureElement) Inputmode(a PictureInputmodeEnum) *PictureElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func PictureInputmodeCustom(s string) PictureInputmodeEnum {
+	return PictureInputmodeEnum(s)
 }
 
 func (e *PictureElement) Itemid(s string) *PictureElement {
@@ -303,6 +335,10 @@ func (e *PictureElement) Spellcheck(a PictureSpellcheckEnum) *PictureElement {
 	return e
 }
 
+func PictureSpellcheckCustom(s string) PictureSpellcheckEnum {
+	return PictureSpellcheckEnum(s)
+}
+
 func (e *PictureElement) Style(s string) *PictureElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *PictureElement) Translate(a PictureTranslateEnum) *PictureElement {
 	return e
 }
 
+func PictureTranslateCustom(s string) PictureTranslateEnum {
+	return PictureTranslateEnum(s)
+}
+
 func (e *PictureElement) Writingsuggestions(a PictureWritingsuggestionsEnum) *PictureElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func PictureWritingsuggestionsCustom(s string) PictureWritingsuggestionsEnum {
+	return PictureWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

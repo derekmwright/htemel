@@ -88,9 +88,9 @@ const (
 type DtDirEnum string
 
 const (
-	DtDirEnumRtl  DtDirEnum = "rtl"
 	DtDirEnumAuto DtDirEnum = "auto"
 	DtDirEnumLtr  DtDirEnum = "ltr"
+	DtDirEnumRtl  DtDirEnum = "rtl"
 )
 
 type DtDraggableEnum string
@@ -103,20 +103,20 @@ const (
 type DtEnterkeyhintEnum string
 
 const (
+	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
+	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
 	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
 	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
 	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
 	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
-	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
-	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 )
 
 type DtHiddenEnum string
 
 const (
-	DtHiddenEnumHidden     DtHiddenEnum = "hidden"
 	DtHiddenEnumUntilFound DtHiddenEnum = "until-found"
+	DtHiddenEnumHidden     DtHiddenEnum = "hidden"
 	DtHiddenEnumEmpty      DtHiddenEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type DtWritingsuggestionsEnum string
 
 const (
-	DtWritingsuggestionsEnumFalse DtWritingsuggestionsEnum = "false"
 	DtWritingsuggestionsEnumTrue  DtWritingsuggestionsEnum = "true"
+	DtWritingsuggestionsEnumFalse DtWritingsuggestionsEnum = "false"
 	DtWritingsuggestionsEnumEmpty DtWritingsuggestionsEnum = ""
 )
 
@@ -165,10 +165,18 @@ func (e *DtElement) Autocapitalize(a DtAutocapitalizeEnum) *DtElement {
 	return e
 }
 
+func DtAutocapitalizeCustom(s string) DtAutocapitalizeEnum {
+	return DtAutocapitalizeEnum(s)
+}
+
 func (e *DtElement) Autocorrect(a DtAutocorrectEnum) *DtElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func DtAutocorrectCustom(s string) DtAutocorrectEnum {
+	return DtAutocorrectEnum(s)
 }
 
 func (e *DtElement) Autofocus(b bool) *DtElement {
@@ -189,6 +197,10 @@ func (e *DtElement) Contenteditable(a DtContenteditableEnum) *DtElement {
 	return e
 }
 
+func DtContenteditableCustom(s string) DtContenteditableEnum {
+	return DtContenteditableEnum(s)
+}
+
 func (e *DtElement) DataUnsafe(name string, s string) *DtElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *DtElement) Dir(a DtDirEnum) *DtElement {
 	return e
 }
 
+func DtDirCustom(s string) DtDirEnum {
+	return DtDirEnum(s)
+}
+
 func (e *DtElement) Draggable(a DtDraggableEnum) *DtElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func DtDraggableCustom(s string) DtDraggableEnum {
+	return DtDraggableEnum(s)
 }
 
 func (e *DtElement) Enterkeyhint(a DtEnterkeyhintEnum) *DtElement {
@@ -219,10 +239,18 @@ func (e *DtElement) Enterkeyhint(a DtEnterkeyhintEnum) *DtElement {
 	return e
 }
 
+func DtEnterkeyhintCustom(s string) DtEnterkeyhintEnum {
+	return DtEnterkeyhintEnum(s)
+}
+
 func (e *DtElement) Hidden(a DtHiddenEnum) *DtElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func DtHiddenCustom(s string) DtHiddenEnum {
+	return DtHiddenEnum(s)
 }
 
 func (e *DtElement) Id(s string) *DtElement {
@@ -241,6 +269,10 @@ func (e *DtElement) Inputmode(a DtInputmodeEnum) *DtElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func DtInputmodeCustom(s string) DtInputmodeEnum {
+	return DtInputmodeEnum(s)
 }
 
 func (e *DtElement) Itemid(s string) *DtElement {
@@ -303,6 +335,10 @@ func (e *DtElement) Spellcheck(a DtSpellcheckEnum) *DtElement {
 	return e
 }
 
+func DtSpellcheckCustom(s string) DtSpellcheckEnum {
+	return DtSpellcheckEnum(s)
+}
+
 func (e *DtElement) Style(s string) *DtElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *DtElement) Translate(a DtTranslateEnum) *DtElement {
 	return e
 }
 
+func DtTranslateCustom(s string) DtTranslateEnum {
+	return DtTranslateEnum(s)
+}
+
 func (e *DtElement) Writingsuggestions(a DtWritingsuggestionsEnum) *DtElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func DtWritingsuggestionsCustom(s string) DtWritingsuggestionsEnum {
+	return DtWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

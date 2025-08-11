@@ -60,12 +60,12 @@ func (e *CanvasElement) AddIndent(i int) {
 type CanvasAutocapitalizeEnum string
 
 const (
+	CanvasAutocapitalizeEnumOff        CanvasAutocapitalizeEnum = "off"
 	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
 	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
 	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
 	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
 	CanvasAutocapitalizeEnumNone       CanvasAutocapitalizeEnum = "none"
-	CanvasAutocapitalizeEnumOff        CanvasAutocapitalizeEnum = "off"
 )
 
 type CanvasAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type CanvasEnterkeyhintEnum string
 
 const (
+	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
 	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
 	CanvasEnterkeyhintEnumGo       CanvasEnterkeyhintEnum = "go"
 	CanvasEnterkeyhintEnumNext     CanvasEnterkeyhintEnum = "next"
 	CanvasEnterkeyhintEnumPrevious CanvasEnterkeyhintEnum = "previous"
 	CanvasEnterkeyhintEnumSearch   CanvasEnterkeyhintEnum = "search"
 	CanvasEnterkeyhintEnumSend     CanvasEnterkeyhintEnum = "send"
-	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
 )
 
 type CanvasHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type CanvasInputmodeEnum string
 
 const (
-	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
-	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
 	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
 	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
 	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
 	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
 	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
 	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
+	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
+	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
 )
 
 type CanvasSpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *CanvasElement) Autocapitalize(a CanvasAutocapitalizeEnum) *CanvasElemen
 	return e
 }
 
+func CanvasAutocapitalizeCustom(s string) CanvasAutocapitalizeEnum {
+	return CanvasAutocapitalizeEnum(s)
+}
+
 func (e *CanvasElement) Autocorrect(a CanvasAutocorrectEnum) *CanvasElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func CanvasAutocorrectCustom(s string) CanvasAutocorrectEnum {
+	return CanvasAutocorrectEnum(s)
 }
 
 func (e *CanvasElement) Autofocus(b bool) *CanvasElement {
@@ -189,6 +197,10 @@ func (e *CanvasElement) Contenteditable(a CanvasContenteditableEnum) *CanvasElem
 	return e
 }
 
+func CanvasContenteditableCustom(s string) CanvasContenteditableEnum {
+	return CanvasContenteditableEnum(s)
+}
+
 func (e *CanvasElement) DataUnsafe(name string, s string) *CanvasElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *CanvasElement) Dir(a CanvasDirEnum) *CanvasElement {
 	return e
 }
 
+func CanvasDirCustom(s string) CanvasDirEnum {
+	return CanvasDirEnum(s)
+}
+
 func (e *CanvasElement) Draggable(a CanvasDraggableEnum) *CanvasElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func CanvasDraggableCustom(s string) CanvasDraggableEnum {
+	return CanvasDraggableEnum(s)
 }
 
 func (e *CanvasElement) Enterkeyhint(a CanvasEnterkeyhintEnum) *CanvasElement {
@@ -219,10 +239,18 @@ func (e *CanvasElement) Enterkeyhint(a CanvasEnterkeyhintEnum) *CanvasElement {
 	return e
 }
 
+func CanvasEnterkeyhintCustom(s string) CanvasEnterkeyhintEnum {
+	return CanvasEnterkeyhintEnum(s)
+}
+
 func (e *CanvasElement) Hidden(a CanvasHiddenEnum) *CanvasElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func CanvasHiddenCustom(s string) CanvasHiddenEnum {
+	return CanvasHiddenEnum(s)
 }
 
 func (e *CanvasElement) Id(s string) *CanvasElement {
@@ -241,6 +269,10 @@ func (e *CanvasElement) Inputmode(a CanvasInputmodeEnum) *CanvasElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func CanvasInputmodeCustom(s string) CanvasInputmodeEnum {
+	return CanvasInputmodeEnum(s)
 }
 
 func (e *CanvasElement) Itemid(s string) *CanvasElement {
@@ -303,6 +335,10 @@ func (e *CanvasElement) Spellcheck(a CanvasSpellcheckEnum) *CanvasElement {
 	return e
 }
 
+func CanvasSpellcheckCustom(s string) CanvasSpellcheckEnum {
+	return CanvasSpellcheckEnum(s)
+}
+
 func (e *CanvasElement) Style(s string) *CanvasElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *CanvasElement) Translate(a CanvasTranslateEnum) *CanvasElement {
 	return e
 }
 
+func CanvasTranslateCustom(s string) CanvasTranslateEnum {
+	return CanvasTranslateEnum(s)
+}
+
 func (e *CanvasElement) Writingsuggestions(a CanvasWritingsuggestionsEnum) *CanvasElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func CanvasWritingsuggestionsCustom(s string) CanvasWritingsuggestionsEnum {
+	return CanvasWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -60,12 +60,12 @@ func (e *RubyElement) AddIndent(i int) {
 type RubyAutocapitalizeEnum string
 
 const (
-	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
-	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 	RubyAutocapitalizeEnumOff        RubyAutocapitalizeEnum = "off"
 	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
 	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
 	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
+	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
+	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 )
 
 type RubyAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type RubyContenteditableEnum string
 
 const (
-	RubyContenteditableEnumFalse         RubyContenteditableEnum = "false"
 	RubyContenteditableEnumPlaintextOnly RubyContenteditableEnum = "plaintext-only"
 	RubyContenteditableEnumTrue          RubyContenteditableEnum = "true"
+	RubyContenteditableEnumFalse         RubyContenteditableEnum = "false"
 	RubyContenteditableEnumEmpty         RubyContenteditableEnum = ""
 )
 
@@ -103,34 +103,34 @@ const (
 type RubyEnterkeyhintEnum string
 
 const (
-	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
-	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
 	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
 	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
+	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
+	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
 )
 
 type RubyHiddenEnum string
 
 const (
-	RubyHiddenEnumHidden     RubyHiddenEnum = "hidden"
 	RubyHiddenEnumUntilFound RubyHiddenEnum = "until-found"
+	RubyHiddenEnumHidden     RubyHiddenEnum = "hidden"
 	RubyHiddenEnumEmpty      RubyHiddenEnum = ""
 )
 
 type RubyInputmodeEnum string
 
 const (
+	RubyInputmodeEnumDecimal RubyInputmodeEnum = "decimal"
+	RubyInputmodeEnumEmail   RubyInputmodeEnum = "email"
+	RubyInputmodeEnumNone    RubyInputmodeEnum = "none"
 	RubyInputmodeEnumNumeric RubyInputmodeEnum = "numeric"
 	RubyInputmodeEnumSearch  RubyInputmodeEnum = "search"
 	RubyInputmodeEnumTel     RubyInputmodeEnum = "tel"
 	RubyInputmodeEnumText    RubyInputmodeEnum = "text"
 	RubyInputmodeEnumUrl     RubyInputmodeEnum = "url"
-	RubyInputmodeEnumDecimal RubyInputmodeEnum = "decimal"
-	RubyInputmodeEnumEmail   RubyInputmodeEnum = "email"
-	RubyInputmodeEnumNone    RubyInputmodeEnum = "none"
 )
 
 type RubySpellcheckEnum string
@@ -165,10 +165,18 @@ func (e *RubyElement) Autocapitalize(a RubyAutocapitalizeEnum) *RubyElement {
 	return e
 }
 
+func RubyAutocapitalizeCustom(s string) RubyAutocapitalizeEnum {
+	return RubyAutocapitalizeEnum(s)
+}
+
 func (e *RubyElement) Autocorrect(a RubyAutocorrectEnum) *RubyElement {
 	e.attributes["autocorrect"] = a
 
 	return e
+}
+
+func RubyAutocorrectCustom(s string) RubyAutocorrectEnum {
+	return RubyAutocorrectEnum(s)
 }
 
 func (e *RubyElement) Autofocus(b bool) *RubyElement {
@@ -189,6 +197,10 @@ func (e *RubyElement) Contenteditable(a RubyContenteditableEnum) *RubyElement {
 	return e
 }
 
+func RubyContenteditableCustom(s string) RubyContenteditableEnum {
+	return RubyContenteditableEnum(s)
+}
+
 func (e *RubyElement) DataUnsafe(name string, s string) *RubyElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -207,10 +219,18 @@ func (e *RubyElement) Dir(a RubyDirEnum) *RubyElement {
 	return e
 }
 
+func RubyDirCustom(s string) RubyDirEnum {
+	return RubyDirEnum(s)
+}
+
 func (e *RubyElement) Draggable(a RubyDraggableEnum) *RubyElement {
 	e.attributes["draggable"] = a
 
 	return e
+}
+
+func RubyDraggableCustom(s string) RubyDraggableEnum {
+	return RubyDraggableEnum(s)
 }
 
 func (e *RubyElement) Enterkeyhint(a RubyEnterkeyhintEnum) *RubyElement {
@@ -219,10 +239,18 @@ func (e *RubyElement) Enterkeyhint(a RubyEnterkeyhintEnum) *RubyElement {
 	return e
 }
 
+func RubyEnterkeyhintCustom(s string) RubyEnterkeyhintEnum {
+	return RubyEnterkeyhintEnum(s)
+}
+
 func (e *RubyElement) Hidden(a RubyHiddenEnum) *RubyElement {
 	e.attributes["hidden"] = a
 
 	return e
+}
+
+func RubyHiddenCustom(s string) RubyHiddenEnum {
+	return RubyHiddenEnum(s)
 }
 
 func (e *RubyElement) Id(s string) *RubyElement {
@@ -241,6 +269,10 @@ func (e *RubyElement) Inputmode(a RubyInputmodeEnum) *RubyElement {
 	e.attributes["inputmode"] = a
 
 	return e
+}
+
+func RubyInputmodeCustom(s string) RubyInputmodeEnum {
+	return RubyInputmodeEnum(s)
 }
 
 func (e *RubyElement) Itemid(s string) *RubyElement {
@@ -303,6 +335,10 @@ func (e *RubyElement) Spellcheck(a RubySpellcheckEnum) *RubyElement {
 	return e
 }
 
+func RubySpellcheckCustom(s string) RubySpellcheckEnum {
+	return RubySpellcheckEnum(s)
+}
+
 func (e *RubyElement) Style(s string) *RubyElement {
 	e.attributes["style"] = s
 
@@ -327,10 +363,18 @@ func (e *RubyElement) Translate(a RubyTranslateEnum) *RubyElement {
 	return e
 }
 
+func RubyTranslateCustom(s string) RubyTranslateEnum {
+	return RubyTranslateEnum(s)
+}
+
 func (e *RubyElement) Writingsuggestions(a RubyWritingsuggestionsEnum) *RubyElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
+}
+
+func RubyWritingsuggestionsCustom(s string) RubyWritingsuggestionsEnum {
+	return RubyWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.
