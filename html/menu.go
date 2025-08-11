@@ -22,8 +22,7 @@ type MenuElement struct {
 // Spec Description: The menu element represents a toolbar consisting of its contents, in the form of an unordered list of items (represented by li elements), each of which represents a command that the user can perform or activate.
 func Menu(children ...htemel.Node) *MenuElement {
 	node := &MenuElement{
-		children:   children,
-		attributes: make(menuAttrs),
+		children: children, attributes: make(menuAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func MenuTernary(condition bool, true htemel.Node, false htemel.Node) *MenuEleme
 type MenuAutocapitalizeEnum string
 
 const (
-	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
 	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
 	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
 	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
+	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
 )
 
 type MenuAutocorrectEnum string
@@ -93,13 +92,13 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
+	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
+	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
+	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
 	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
 	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
 	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
-	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
-	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
-	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 )
 
 type MenuHiddenEnum string
@@ -134,8 +133,8 @@ const (
 type MenuTranslateEnum string
 
 const (
-	MenuTranslateEnumYes   MenuTranslateEnum = "yes"
 	MenuTranslateEnumNo    MenuTranslateEnum = "no"
+	MenuTranslateEnumYes   MenuTranslateEnum = "yes"
 	MenuTranslateEnumEmpty MenuTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *MenuElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

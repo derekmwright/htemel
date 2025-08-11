@@ -22,8 +22,7 @@ type H1Element struct {
 // Spec Description: These elements represent headings for their sections.
 func H1(children ...htemel.Node) *H1Element {
 	node := &H1Element{
-		children:   children,
-		attributes: make(h1Attrs),
+		children: children, attributes: make(h1Attrs),
 	}
 
 	return node
@@ -50,28 +49,28 @@ func H1Ternary(condition bool, true htemel.Node, false htemel.Node) *H1Element {
 type H1AutocapitalizeEnum string
 
 const (
-	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
-	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
-	H1AutocapitalizeEnumOff        H1AutocapitalizeEnum = "off"
 	H1AutocapitalizeEnumOn         H1AutocapitalizeEnum = "on"
 	H1AutocapitalizeEnumSentences  H1AutocapitalizeEnum = "sentences"
 	H1AutocapitalizeEnumWords      H1AutocapitalizeEnum = "words"
+	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
+	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
+	H1AutocapitalizeEnumOff        H1AutocapitalizeEnum = "off"
 )
 
 type H1AutocorrectEnum string
 
 const (
-	H1AutocorrectEnumOn    H1AutocorrectEnum = "on"
 	H1AutocorrectEnumOff   H1AutocorrectEnum = "off"
+	H1AutocorrectEnumOn    H1AutocorrectEnum = "on"
 	H1AutocorrectEnumEmpty H1AutocorrectEnum = ""
 )
 
 type H1ContenteditableEnum string
 
 const (
-	H1ContenteditableEnumFalse         H1ContenteditableEnum = "false"
 	H1ContenteditableEnumPlaintextOnly H1ContenteditableEnum = "plaintext-only"
 	H1ContenteditableEnumTrue          H1ContenteditableEnum = "true"
+	H1ContenteditableEnumFalse         H1ContenteditableEnum = "false"
 	H1ContenteditableEnumEmpty         H1ContenteditableEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type H1EnterkeyhintEnum string
 
 const (
+	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
+	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
+	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
 	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
 	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
 	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
 	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
-	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
-	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
-	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
 )
 
 type H1HiddenEnum string
@@ -113,21 +112,21 @@ const (
 type H1InputmodeEnum string
 
 const (
+	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
+	H1InputmodeEnumText    H1InputmodeEnum = "text"
 	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
 	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
 	H1InputmodeEnumEmail   H1InputmodeEnum = "email"
 	H1InputmodeEnumNone    H1InputmodeEnum = "none"
 	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
 	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
-	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
-	H1InputmodeEnumText    H1InputmodeEnum = "text"
 )
 
 type H1SpellcheckEnum string
 
 const (
-	H1SpellcheckEnumTrue  H1SpellcheckEnum = "true"
 	H1SpellcheckEnumFalse H1SpellcheckEnum = "false"
+	H1SpellcheckEnumTrue  H1SpellcheckEnum = "true"
 	H1SpellcheckEnumEmpty H1SpellcheckEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *H1Element) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

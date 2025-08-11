@@ -22,8 +22,7 @@ type TitleElement struct {
 // Spec Description: The title element represents the document's title or name. Authors should use titles that identify their documents even when they are used out of context, for example in a user's history or bookmarks, or in search results. The document's title is often different from its first heading, since the first heading does not have to stand alone when taken out of context.
 func Title(children ...htemel.Node) *TitleElement {
 	node := &TitleElement{
-		children:   children,
-		attributes: make(titleAttrs),
+		children: children, attributes: make(titleAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func TitleTernary(condition bool, true htemel.Node, false htemel.Node) *TitleEle
 type TitleAutocapitalizeEnum string
 
 const (
-	TitleAutocapitalizeEnumOn         TitleAutocapitalizeEnum = "on"
-	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
-	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
 	TitleAutocapitalizeEnumNone       TitleAutocapitalizeEnum = "none"
 	TitleAutocapitalizeEnumOff        TitleAutocapitalizeEnum = "off"
+	TitleAutocapitalizeEnumOn         TitleAutocapitalizeEnum = "on"
+	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
+	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 )
 
 type TitleAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type TitleDirEnum string
 
 const (
+	TitleDirEnumAuto TitleDirEnum = "auto"
 	TitleDirEnumLtr  TitleDirEnum = "ltr"
 	TitleDirEnumRtl  TitleDirEnum = "rtl"
-	TitleDirEnumAuto TitleDirEnum = "auto"
 )
 
 type TitleDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type TitleEnterkeyhintEnum string
 
 const (
-	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
-	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
 	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
 	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
 	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
 	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
+	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
+	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 )
 
 type TitleHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type TitleInputmodeEnum string
 
 const (
+	TitleInputmodeEnumTel     TitleInputmodeEnum = "tel"
+	TitleInputmodeEnumText    TitleInputmodeEnum = "text"
+	TitleInputmodeEnumUrl     TitleInputmodeEnum = "url"
 	TitleInputmodeEnumDecimal TitleInputmodeEnum = "decimal"
 	TitleInputmodeEnumEmail   TitleInputmodeEnum = "email"
 	TitleInputmodeEnumNone    TitleInputmodeEnum = "none"
 	TitleInputmodeEnumNumeric TitleInputmodeEnum = "numeric"
 	TitleInputmodeEnumSearch  TitleInputmodeEnum = "search"
-	TitleInputmodeEnumTel     TitleInputmodeEnum = "tel"
-	TitleInputmodeEnumText    TitleInputmodeEnum = "text"
-	TitleInputmodeEnumUrl     TitleInputmodeEnum = "url"
 )
 
 type TitleSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type TitleTranslateEnum string
 
 const (
-	TitleTranslateEnumNo    TitleTranslateEnum = "no"
 	TitleTranslateEnumYes   TitleTranslateEnum = "yes"
+	TitleTranslateEnumNo    TitleTranslateEnum = "no"
 	TitleTranslateEnumEmpty TitleTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *TitleElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

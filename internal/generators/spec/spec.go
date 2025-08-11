@@ -10,6 +10,69 @@ type Spec struct {
 	Attributes []Attribute `json:"attributes,omitempty"`
 }
 
+func attrUnmarshal(in []json.RawMessage) ([]Attribute, error) {
+	out := make([]Attribute, 0)
+
+	var tmpAttr struct {
+		Name          string `json:"name"`
+		Description   string `json:"description"`
+		AttributeType string `json:"attribute_type"`
+	}
+
+	for _, attr := range in {
+		if err := json.Unmarshal(attr, &tmpAttr); err != nil {
+			return nil, err
+		}
+
+		switch tmpAttr.AttributeType {
+		case "AttributeTypeString":
+			a := &AttributeTypeString{}
+			if err := json.Unmarshal(attr, &a); err != nil {
+				return nil, err
+			}
+			out = append(out, a)
+		case "AttributeType":
+			a := &AttributeTypeChar{}
+			if err := json.Unmarshal(attr, &a); err != nil {
+				return nil, err
+			}
+			out = append(out, a)
+		case "AttributeTypeNumber":
+			a := &AttributeTypeNumber{}
+			if err := json.Unmarshal(attr, &a); err != nil {
+				return nil, err
+			}
+			out = append(out, a)
+		case "AttributeTypeBool":
+			a := &AttributeTypeBool{}
+			if err := json.Unmarshal(attr, &a); err != nil {
+				return nil, err
+			}
+			out = append(out, a)
+		case "AttributeTypeEnum":
+			a := &AttributeTypeEnum{}
+			if err := json.Unmarshal(attr, &a); err != nil {
+				return nil, err
+			}
+			out = append(out, a)
+		case "AttributeTypeSST":
+			a := &AttributeTypeSST{}
+			if err := json.Unmarshal(attr, &a); err != nil {
+				return nil, err
+			}
+			out = append(out, a)
+		case "AttributeTypePrefixedCustom":
+			a := &AttributeTypePrefixedCustom{}
+			if err := json.Unmarshal(attr, &a); err != nil {
+				return nil, err
+			}
+			out = append(out, a)
+		}
+	}
+
+	return out, nil
+}
+
 func (sp *Spec) UnmarshalJSON(b []byte) error {
 	var tmp struct {
 		Name       string            `json:"name"`
@@ -23,63 +86,11 @@ func (sp *Spec) UnmarshalJSON(b []byte) error {
 
 	sp.Name = tmp.Name
 	sp.Elements = tmp.Elements
-
-	var tmpAttr struct {
-		Name          string `json:"name"`
-		Description   string `json:"description"`
-		AttributeType string `json:"attribute_type"`
+	attrs, err := attrUnmarshal(tmp.Attributes)
+	if err != nil {
+		return err
 	}
-
-	for _, attr := range tmp.Attributes {
-		if err := json.Unmarshal(attr, &tmpAttr); err != nil {
-			return err
-		}
-
-		switch tmpAttr.AttributeType {
-		case "AttributeTypeString":
-			a := &AttributeTypeString{}
-			if err := json.Unmarshal(attr, &a); err != nil {
-				return err
-			}
-			sp.Attributes = append(sp.Attributes, a)
-		case "AttributeType":
-			a := &AttributeTypeChar{}
-			if err := json.Unmarshal(attr, &a); err != nil {
-				return err
-			}
-			sp.Attributes = append(sp.Attributes, a)
-		case "AttributeTypeNumber":
-			a := &AttributeTypeNumber{}
-			if err := json.Unmarshal(attr, &a); err != nil {
-				return err
-			}
-			sp.Attributes = append(sp.Attributes, a)
-		case "AttributeTypeBool":
-			a := &AttributeTypeBool{}
-			if err := json.Unmarshal(attr, &a); err != nil {
-				return err
-			}
-			sp.Attributes = append(sp.Attributes, a)
-		case "AttributeTypeEnum":
-			a := &AttributeTypeEnum{}
-			if err := json.Unmarshal(attr, &a); err != nil {
-				return err
-			}
-			sp.Attributes = append(sp.Attributes, a)
-		case "AttributeTypeSST":
-			a := &AttributeTypeSST{}
-			if err := json.Unmarshal(attr, &a); err != nil {
-				return err
-			}
-			sp.Attributes = append(sp.Attributes, a)
-		case "AttributeTypePrefixedCustom":
-			a := &AttributeTypePrefixedCustom{}
-			if err := json.Unmarshal(attr, &a); err != nil {
-				return err
-			}
-			sp.Attributes = append(sp.Attributes, a)
-		}
-	}
+	sp.Attributes = attrs
 
 	return nil
 }
@@ -91,6 +102,30 @@ type Element struct {
 
 	// A Void element has no children
 	Void bool `json:"void,omitempty"`
+}
+
+func (e *Element) UnmarshalJSON(b []byte) error {
+	var tmp struct {
+		Tag         string            `json:"tag"`
+		Description string            `json:"description,omitempty"`
+		Attributes  []json.RawMessage `json:"attributes,omitempty"`
+		Void        bool              `json:"void,omitempty"`
+	}
+
+	if err := json.Unmarshal(b, &tmp); err != nil {
+		return err
+	}
+
+	e.Tag = tmp.Tag
+	e.Description = tmp.Description
+	e.Void = tmp.Void
+	attrs, err := attrUnmarshal(tmp.Attributes)
+	if err != nil {
+		return err
+	}
+	e.Attributes = attrs
+
+	return nil
 }
 
 type Attribute interface {

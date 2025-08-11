@@ -22,8 +22,7 @@ type CiteElement struct {
 // Spec Description: The cite element represents the title of a work (e.g. a book, a paper, an essay, a poem, a score, a song, a script, a film, a TV show, a game, a sculpture, a painting, a theatre production, a play, an opera, a musical, an exhibition, a legal case report, a computer program,  etc.). This can be a work that is being quoted or referenced in detail (i.e., a citation), or it can just be a work that is mentioned in passing.
 func Cite(children ...htemel.Node) *CiteElement {
 	node := &CiteElement{
-		children:   children,
-		attributes: make(citeAttrs),
+		children: children, attributes: make(citeAttrs),
 	}
 
 	return node
@@ -50,37 +49,37 @@ func CiteTernary(condition bool, true htemel.Node, false htemel.Node) *CiteEleme
 type CiteAutocapitalizeEnum string
 
 const (
+	CiteAutocapitalizeEnumOn         CiteAutocapitalizeEnum = "on"
+	CiteAutocapitalizeEnumSentences  CiteAutocapitalizeEnum = "sentences"
 	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
 	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
 	CiteAutocapitalizeEnumNone       CiteAutocapitalizeEnum = "none"
 	CiteAutocapitalizeEnumOff        CiteAutocapitalizeEnum = "off"
-	CiteAutocapitalizeEnumOn         CiteAutocapitalizeEnum = "on"
-	CiteAutocapitalizeEnumSentences  CiteAutocapitalizeEnum = "sentences"
 )
 
 type CiteAutocorrectEnum string
 
 const (
-	CiteAutocorrectEnumOn    CiteAutocorrectEnum = "on"
 	CiteAutocorrectEnumOff   CiteAutocorrectEnum = "off"
+	CiteAutocorrectEnumOn    CiteAutocorrectEnum = "on"
 	CiteAutocorrectEnumEmpty CiteAutocorrectEnum = ""
 )
 
 type CiteContenteditableEnum string
 
 const (
-	CiteContenteditableEnumFalse         CiteContenteditableEnum = "false"
 	CiteContenteditableEnumPlaintextOnly CiteContenteditableEnum = "plaintext-only"
 	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
+	CiteContenteditableEnumFalse         CiteContenteditableEnum = "false"
 	CiteContenteditableEnumEmpty         CiteContenteditableEnum = ""
 )
 
 type CiteDirEnum string
 
 const (
-	CiteDirEnumAuto CiteDirEnum = "auto"
 	CiteDirEnumLtr  CiteDirEnum = "ltr"
 	CiteDirEnumRtl  CiteDirEnum = "rtl"
+	CiteDirEnumAuto CiteDirEnum = "auto"
 )
 
 type CiteDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type CiteEnterkeyhintEnum string
 
 const (
+	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
+	CiteEnterkeyhintEnumSearch   CiteEnterkeyhintEnum = "search"
+	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
 	CiteEnterkeyhintEnumDone     CiteEnterkeyhintEnum = "done"
 	CiteEnterkeyhintEnumEnter    CiteEnterkeyhintEnum = "enter"
 	CiteEnterkeyhintEnumGo       CiteEnterkeyhintEnum = "go"
 	CiteEnterkeyhintEnumNext     CiteEnterkeyhintEnum = "next"
-	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
-	CiteEnterkeyhintEnumSearch   CiteEnterkeyhintEnum = "search"
-	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
 )
 
 type CiteHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type CiteInputmodeEnum string
 
 const (
+	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
+	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
+	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
 	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
 	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
 	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
 	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
-	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
-	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
-	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
 )
 
 type CiteSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type CiteTranslateEnum string
 
 const (
-	CiteTranslateEnumNo    CiteTranslateEnum = "no"
 	CiteTranslateEnumYes   CiteTranslateEnum = "yes"
+	CiteTranslateEnumNo    CiteTranslateEnum = "no"
 	CiteTranslateEnumEmpty CiteTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *CiteElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

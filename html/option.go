@@ -22,8 +22,7 @@ type OptionElement struct {
 // Spec Description: The option element represents an option in a select element or as part of a list of suggestions in a datalist element.
 func Option(children ...htemel.Node) *OptionElement {
 	node := &OptionElement{
-		children:   children,
-		attributes: make(optionAttrs),
+		children: children, attributes: make(optionAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func OptionTernary(condition bool, true htemel.Node, false htemel.Node) *OptionE
 type OptionAutocapitalizeEnum string
 
 const (
-	OptionAutocapitalizeEnumOn         OptionAutocapitalizeEnum = "on"
 	OptionAutocapitalizeEnumSentences  OptionAutocapitalizeEnum = "sentences"
 	OptionAutocapitalizeEnumWords      OptionAutocapitalizeEnum = "words"
 	OptionAutocapitalizeEnumCharacters OptionAutocapitalizeEnum = "characters"
 	OptionAutocapitalizeEnumNone       OptionAutocapitalizeEnum = "none"
 	OptionAutocapitalizeEnumOff        OptionAutocapitalizeEnum = "off"
+	OptionAutocapitalizeEnumOn         OptionAutocapitalizeEnum = "on"
 )
 
 type OptionAutocorrectEnum string
@@ -69,18 +68,18 @@ const (
 type OptionContenteditableEnum string
 
 const (
+	OptionContenteditableEnumTrue          OptionContenteditableEnum = "true"
 	OptionContenteditableEnumFalse         OptionContenteditableEnum = "false"
 	OptionContenteditableEnumPlaintextOnly OptionContenteditableEnum = "plaintext-only"
-	OptionContenteditableEnumTrue          OptionContenteditableEnum = "true"
 	OptionContenteditableEnumEmpty         OptionContenteditableEnum = ""
 )
 
 type OptionDirEnum string
 
 const (
+	OptionDirEnumRtl  OptionDirEnum = "rtl"
 	OptionDirEnumAuto OptionDirEnum = "auto"
 	OptionDirEnumLtr  OptionDirEnum = "ltr"
-	OptionDirEnumRtl  OptionDirEnum = "rtl"
 )
 
 type OptionDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type OptionEnterkeyhintEnum string
 
 const (
+	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
 	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
 	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
 	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
-	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
 )
 
 type OptionHiddenEnum string
@@ -113,21 +112,21 @@ const (
 type OptionInputmodeEnum string
 
 const (
-	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
-	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
-	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
-	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
 	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
 	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
+	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
+	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
+	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
+	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 )
 
 type OptionSpellcheckEnum string
 
 const (
-	OptionSpellcheckEnumFalse OptionSpellcheckEnum = "false"
 	OptionSpellcheckEnumTrue  OptionSpellcheckEnum = "true"
+	OptionSpellcheckEnumFalse OptionSpellcheckEnum = "false"
 	OptionSpellcheckEnumEmpty OptionSpellcheckEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *OptionElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

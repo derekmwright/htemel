@@ -22,8 +22,7 @@ type DdElement struct {
 // Spec Description: The dd element represents the description, definition, or value, part of a term-description group in a description list (dl element).
 func Dd(children ...htemel.Node) *DdElement {
 	node := &DdElement{
-		children:   children,
-		attributes: make(ddAttrs),
+		children: children, attributes: make(ddAttrs),
 	}
 
 	return node
@@ -61,8 +60,8 @@ const (
 type DdAutocorrectEnum string
 
 const (
-	DdAutocorrectEnumOn    DdAutocorrectEnum = "on"
 	DdAutocorrectEnumOff   DdAutocorrectEnum = "off"
+	DdAutocorrectEnumOn    DdAutocorrectEnum = "on"
 	DdAutocorrectEnumEmpty DdAutocorrectEnum = ""
 )
 
@@ -93,41 +92,41 @@ const (
 type DdEnterkeyhintEnum string
 
 const (
-	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
-	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
 	DdEnterkeyhintEnumGo       DdEnterkeyhintEnum = "go"
 	DdEnterkeyhintEnumNext     DdEnterkeyhintEnum = "next"
 	DdEnterkeyhintEnumPrevious DdEnterkeyhintEnum = "previous"
 	DdEnterkeyhintEnumSearch   DdEnterkeyhintEnum = "search"
 	DdEnterkeyhintEnumSend     DdEnterkeyhintEnum = "send"
+	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
+	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
 )
 
 type DdHiddenEnum string
 
 const (
-	DdHiddenEnumUntilFound DdHiddenEnum = "until-found"
 	DdHiddenEnumHidden     DdHiddenEnum = "hidden"
+	DdHiddenEnumUntilFound DdHiddenEnum = "until-found"
 	DdHiddenEnumEmpty      DdHiddenEnum = ""
 )
 
 type DdInputmodeEnum string
 
 const (
-	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
-	DdInputmodeEnumText    DdInputmodeEnum = "text"
-	DdInputmodeEnumUrl     DdInputmodeEnum = "url"
-	DdInputmodeEnumDecimal DdInputmodeEnum = "decimal"
 	DdInputmodeEnumEmail   DdInputmodeEnum = "email"
 	DdInputmodeEnumNone    DdInputmodeEnum = "none"
 	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
 	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
+	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
+	DdInputmodeEnumText    DdInputmodeEnum = "text"
+	DdInputmodeEnumUrl     DdInputmodeEnum = "url"
+	DdInputmodeEnumDecimal DdInputmodeEnum = "decimal"
 )
 
 type DdSpellcheckEnum string
 
 const (
-	DdSpellcheckEnumFalse DdSpellcheckEnum = "false"
 	DdSpellcheckEnumTrue  DdSpellcheckEnum = "true"
+	DdSpellcheckEnumFalse DdSpellcheckEnum = "false"
 	DdSpellcheckEnumEmpty DdSpellcheckEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *DdElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

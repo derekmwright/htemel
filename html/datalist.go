@@ -22,8 +22,7 @@ type DatalistElement struct {
 // Spec Description: The datalist element represents a set of option elements that represent predefined options for other controls. In the rendering, the datalist element represents nothing and it, along with its children, should be hidden.
 func Datalist(children ...htemel.Node) *DatalistElement {
 	node := &DatalistElement{
-		children:   children,
-		attributes: make(datalistAttrs),
+		children: children, attributes: make(datalistAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func DatalistTernary(condition bool, true htemel.Node, false htemel.Node) *Datal
 type DatalistAutocapitalizeEnum string
 
 const (
+	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
 	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
 	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
 	DatalistAutocapitalizeEnumOn         DatalistAutocapitalizeEnum = "on"
 	DatalistAutocapitalizeEnumSentences  DatalistAutocapitalizeEnum = "sentences"
 	DatalistAutocapitalizeEnumWords      DatalistAutocapitalizeEnum = "words"
-	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
 )
 
 type DatalistAutocorrectEnum string
@@ -86,20 +85,20 @@ const (
 type DatalistDraggableEnum string
 
 const (
-	DatalistDraggableEnumFalse DatalistDraggableEnum = "false"
 	DatalistDraggableEnumTrue  DatalistDraggableEnum = "true"
+	DatalistDraggableEnumFalse DatalistDraggableEnum = "false"
 )
 
 type DatalistEnterkeyhintEnum string
 
 const (
-	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
 	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 	DatalistEnterkeyhintEnumEnter    DatalistEnterkeyhintEnum = "enter"
 	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
 	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
 	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
+	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
 )
 
 type DatalistHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type DatalistInputmodeEnum string
 
 const (
+	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
+	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
+	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
 	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
 	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
 	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
 	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
 	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
-	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
-	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
-	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
 )
 
 type DatalistSpellcheckEnum string
@@ -142,8 +141,8 @@ const (
 type DatalistWritingsuggestionsEnum string
 
 const (
-	DatalistWritingsuggestionsEnumTrue  DatalistWritingsuggestionsEnum = "true"
 	DatalistWritingsuggestionsEnumFalse DatalistWritingsuggestionsEnum = "false"
+	DatalistWritingsuggestionsEnumTrue  DatalistWritingsuggestionsEnum = "true"
 	DatalistWritingsuggestionsEnumEmpty DatalistWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *DatalistElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

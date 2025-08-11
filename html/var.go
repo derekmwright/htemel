@@ -22,8 +22,7 @@ type VarElement struct {
 // Spec Description: The var element represents a variable. This could be an actual variable in a mathematical expression or programming context, an identifier representing a constant, a symbol identifying a physical quantity, a function parameter, or just be a term used as a placeholder in prose.
 func Var(children ...htemel.Node) *VarElement {
 	node := &VarElement{
-		children:   children,
-		attributes: make(varAttrs),
+		children: children, attributes: make(varAttrs),
 	}
 
 	return node
@@ -61,8 +60,8 @@ const (
 type VarAutocorrectEnum string
 
 const (
-	VarAutocorrectEnumOff   VarAutocorrectEnum = "off"
 	VarAutocorrectEnumOn    VarAutocorrectEnum = "on"
+	VarAutocorrectEnumOff   VarAutocorrectEnum = "off"
 	VarAutocorrectEnumEmpty VarAutocorrectEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type VarEnterkeyhintEnum string
 
 const (
-	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
-	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
 	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
 	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
 	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
 	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
+	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
+	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 )
 
 type VarHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type VarInputmodeEnum string
 
 const (
-	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
-	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
-	VarInputmodeEnumNone    VarInputmodeEnum = "none"
-	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
 	VarInputmodeEnumText    VarInputmodeEnum = "text"
 	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
+	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
+	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
+	VarInputmodeEnumNone    VarInputmodeEnum = "none"
+	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 )
 
 type VarSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *VarElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

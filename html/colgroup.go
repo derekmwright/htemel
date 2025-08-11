@@ -22,8 +22,7 @@ type ColgroupElement struct {
 // Spec Description: The colgroup element represents a group of one or more columns in the table that is its parent, if it has a parent and that is a table element.
 func Colgroup(children ...htemel.Node) *ColgroupElement {
 	node := &ColgroupElement{
-		children:   children,
-		attributes: make(colgroupAttrs),
+		children: children, attributes: make(colgroupAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func ColgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Colgr
 type ColgroupAutocapitalizeEnum string
 
 const (
+	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
 	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
 	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
 	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 	ColgroupAutocapitalizeEnumOff        ColgroupAutocapitalizeEnum = "off"
-	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
 )
 
 type ColgroupAutocorrectEnum string
@@ -69,18 +68,18 @@ const (
 type ColgroupContenteditableEnum string
 
 const (
+	ColgroupContenteditableEnumTrue          ColgroupContenteditableEnum = "true"
 	ColgroupContenteditableEnumFalse         ColgroupContenteditableEnum = "false"
 	ColgroupContenteditableEnumPlaintextOnly ColgroupContenteditableEnum = "plaintext-only"
-	ColgroupContenteditableEnumTrue          ColgroupContenteditableEnum = "true"
 	ColgroupContenteditableEnumEmpty         ColgroupContenteditableEnum = ""
 )
 
 type ColgroupDirEnum string
 
 const (
-	ColgroupDirEnumAuto ColgroupDirEnum = "auto"
 	ColgroupDirEnumLtr  ColgroupDirEnum = "ltr"
 	ColgroupDirEnumRtl  ColgroupDirEnum = "rtl"
+	ColgroupDirEnumAuto ColgroupDirEnum = "auto"
 )
 
 type ColgroupDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type ColgroupEnterkeyhintEnum string
 
 const (
-	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
 	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
 	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
 	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
 	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
 	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
 	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
+	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
 )
 
 type ColgroupHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type ColgroupInputmodeEnum string
 
 const (
-	ColgroupInputmodeEnumSearch  ColgroupInputmodeEnum = "search"
-	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
-	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
 	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
 	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
 	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
 	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
 	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
+	ColgroupInputmodeEnumSearch  ColgroupInputmodeEnum = "search"
+	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
+	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
 )
 
 type ColgroupSpellcheckEnum string
@@ -134,16 +133,16 @@ const (
 type ColgroupTranslateEnum string
 
 const (
-	ColgroupTranslateEnumYes   ColgroupTranslateEnum = "yes"
 	ColgroupTranslateEnumNo    ColgroupTranslateEnum = "no"
+	ColgroupTranslateEnumYes   ColgroupTranslateEnum = "yes"
 	ColgroupTranslateEnumEmpty ColgroupTranslateEnum = ""
 )
 
 type ColgroupWritingsuggestionsEnum string
 
 const (
-	ColgroupWritingsuggestionsEnumFalse ColgroupWritingsuggestionsEnum = "false"
 	ColgroupWritingsuggestionsEnumTrue  ColgroupWritingsuggestionsEnum = "true"
+	ColgroupWritingsuggestionsEnumFalse ColgroupWritingsuggestionsEnum = "false"
 	ColgroupWritingsuggestionsEnumEmpty ColgroupWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *ColgroupElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

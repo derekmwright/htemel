@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type MetaElement struct {
 	attributes metaAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type MetaElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The meta element represents various kinds of metadata that cannot be expressed using the title, base, link, style, and script elements.
-func Meta(children ...htemel.Node) *MetaElement {
+func Meta() *MetaElement {
 	node := &MetaElement{
-		children:   children,
 		attributes: make(metaAttrs),
 	}
 
 	return node
 }
 
-func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
+func MetaIf(condition bool) *MetaElement {
 	if condition {
-		return Meta(children...)
+		return Meta()
 	}
 
 	return &MetaElement{
@@ -39,13 +37,17 @@ func MetaIf(condition bool, children ...htemel.Node) *MetaElement {
 	}
 }
 
-func MetaTernary(condition bool, true htemel.Node, false htemel.Node) *MetaElement {
-	if condition {
-		return Meta(true)
-	}
+type MetaHttpEquivEnum string
 
-	return Meta(false)
-}
+const (
+	MetaHttpEquivEnumContentLanguage       MetaHttpEquivEnum = "content-language"
+	MetaHttpEquivEnumContentSecurityPolicy MetaHttpEquivEnum = "content-security-policy"
+	MetaHttpEquivEnumContentType           MetaHttpEquivEnum = "content-type"
+	MetaHttpEquivEnumDefaultStyle          MetaHttpEquivEnum = "default-style"
+	MetaHttpEquivEnumRefresh               MetaHttpEquivEnum = "refresh"
+	MetaHttpEquivEnumSetCookie             MetaHttpEquivEnum = "set-cookie"
+	MetaHttpEquivEnumXUaCompatible         MetaHttpEquivEnum = "x-ua-compatible"
+)
 
 type MetaAutocapitalizeEnum string
 
@@ -69,9 +71,9 @@ const (
 type MetaContenteditableEnum string
 
 const (
+	MetaContenteditableEnumFalse         MetaContenteditableEnum = "false"
 	MetaContenteditableEnumPlaintextOnly MetaContenteditableEnum = "plaintext-only"
 	MetaContenteditableEnumTrue          MetaContenteditableEnum = "true"
-	MetaContenteditableEnumFalse         MetaContenteditableEnum = "false"
 	MetaContenteditableEnumEmpty         MetaContenteditableEnum = ""
 )
 
@@ -93,13 +95,13 @@ const (
 type MetaEnterkeyhintEnum string
 
 const (
+	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
 	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
 	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
 	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
 	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
-	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 )
 
 type MetaHiddenEnum string
@@ -113,14 +115,14 @@ const (
 type MetaInputmodeEnum string
 
 const (
-	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
-	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
-	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
 	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
 	MetaInputmodeEnumEmail   MetaInputmodeEnum = "email"
 	MetaInputmodeEnumNone    MetaInputmodeEnum = "none"
 	MetaInputmodeEnumNumeric MetaInputmodeEnum = "numeric"
 	MetaInputmodeEnumSearch  MetaInputmodeEnum = "search"
+	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
+	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
+	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
 )
 
 type MetaSpellcheckEnum string
@@ -148,6 +150,36 @@ const (
 )
 
 type metaAttrs map[string]any
+
+func (e *MetaElement) Name(s string) *MetaElement {
+	e.attributes["name"] = s
+
+	return e
+}
+
+func (e *MetaElement) HttpEquiv(a MetaHttpEquivEnum) *MetaElement {
+	e.attributes["http-equiv"] = a
+
+	return e
+}
+
+func (e *MetaElement) Content(s string) *MetaElement {
+	e.attributes["content"] = s
+
+	return e
+}
+
+func (e *MetaElement) Charset(s string) *MetaElement {
+	e.attributes["charset"] = s
+
+	return e
+}
+
+func (e *MetaElement) Media(s string) *MetaElement {
+	e.attributes["media"] = s
+
+	return e
+}
 
 func (e *MetaElement) Autocapitalize(a MetaAutocapitalizeEnum) *MetaElement {
 	e.attributes["autocapitalize"] = a
@@ -364,16 +396,6 @@ func (e *MetaElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</meta>")); err != nil {
 		return err
 	}
 

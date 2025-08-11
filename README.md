@@ -24,63 +24,90 @@ package main
 import (
 	"os"
 
-	"github.com/derekmwright/htemel"
+	. "github.com/derekmwright/htemel"
 	. "github.com/derekmwright/htemel/html"
 )
 
-func main() {
-	loggedIn := false
-	htemel.Group(
-		htemel.GenericVoid("!DOCTYPE", map[string]any{"html": nil}),
+func MainLayout(children ...Node) Node {
+	return Group(
+		GenericVoid("!DOCTYPE", map[string]any{"html": nil}),
 		Html(
-			BodyIf(
-				!loggedIn,
+			Head(
+				Meta().Charset("UTF-8"),
+				Meta().Content("width=device-width, initial-scale=1.0"),
+				Title(Text("Example htemel Page")),
+				Link().Href("site.css").Rel("stylesheet"),
+			),
+			Body(
+				children...,
+			).Id("app-content"),
+		).Class("h-dvh bg-gray-200").Lang("en"),
+	)
+}
+
+func Navigation(menuItems ...Node) Node {
+	c := Nav(
+		Ul(
+			Group(menuItems...),
+		).Class("flex list-none"),
+	).Id("main-navigation")
+
+	return c
+}
+
+func main() {
+	loggedIn := true
+	MainLayout(
+		DivTernary(
+			loggedIn,
+			Group(
+				Navigation(),
 				Div(
-					P(
-						htemel.Text(
-							"Please Login ",
-							A(
-								htemel.Text("Here"),
-							).
-								Contenteditable(AContenteditableAttrEnumFalse).
-								Class("font-bold"),
-						),
-					),
+					P(Text("Welcome back!")),
 				),
 			),
-			BodyIf(
-				loggedIn,
-				htemel.Group(
-					Nav(),
-					Div(
-						P(
-							htemel.Text("Welcome Back!"),
-						),
-					).Class("flex border border-amber-500 w-dvh"),
-				),
+			Div(
+				P(Text("Please login.")),
 			),
 		),
-	).
-		Render(os.Stdout)
+	).Render(os.Stdout)
 }
 ```
 
-Outputs:
-```text
-<!DOCTYPE html><html><body><div><p>Please Login <a contenteditable="false" class="font-bold">Here</a></p></div></body></html>
+Outputs (I formatted the result to help readability of the output):
+```html
+<!DOCTYPE html>
+<html class="h-dvh bg-gray-200" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0">
+    <title>Example htemel Page</title>
+    <link href="site.css" rel="stylesheet">
+</head>
+<body id="app-content">
+<div>
+    <nav id="main-navigation">
+        <ul class="flex list-none"></ul>
+    </nav>
+    <div>
+        <p>Welcome back!</p>
+    </div>
+</div>
+</body>
+</html>
 ```
-I have no plans on supporting indentation levels for nested elements, plus it's a waste of electrons for all that whitespace :P
+I currently have no plans on supporting indentation levels for nested elements, plus it's a waste of electrons for all that whitespace :P
 
 ## Why
 
-I looked at `templ`, `gomponents`, and `gostar` but they just felt like there was too many rough edges.
+I looked at `templ`, `gomponents`, and `gostar` but they just felt like none of them fully met my needs.
 
 With templ, it was still too much writing html and interpolating in templates.
 
 Gomponents, definitely piqued my interest but seemed a little loose with what attributes were allowed on certain elements.
 Given it was hand-crafted, trying to adjust global attributes vs element-specific attributes would be quite burdensome, so I get it.
 
-Gostar, seemed a bit unmaintained but definitely felt like it could have potential, until I tried to figure out how to implement some custom TailwindPlus components with it.
+Gostar, seemed a bit unmaintained but definitely felt like it could have potential, but I had some issues trying to figure out how to implement some custom TailwindPlus components with it.
 
 So, I figured, I can write Go, lets give it a shot.
 
@@ -92,9 +119,9 @@ My only ask is that you try to consider the feel and direction of the API before
 ## Generating
 
 There's couple generators here...
-I've included the HTML spec generator that pulls from the living HTML standard spec @ https://html.spec.whatwg.org/
+I've included the HTML spec generator that pulls from the living HTML standard spec @ https://html.spec.whatwg.org/ - caveat: The parser is a WIP and there are a bunch of hand-crafted attributes to fill in gaps.
 I'd like the generator to be able to also generate a spec for SVG and MathML or other markup languages that you may feel would be beneficial.
 Once a spec is generated, it can be used to generate package namespaced elements based on the provided spec.
 
 You don't HAVE to generate a spec, if you have a custom web component, you can quickly write your own spec, and feed it to the element generator.
-You can then use the generated elements for your own use-cases.
+Then use the generated elements for your own use-cases.

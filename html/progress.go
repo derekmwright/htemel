@@ -22,8 +22,7 @@ type ProgressElement struct {
 // Spec Description: The progress element represents the completion progress of a task. The progress is either indeterminate, indicating that progress is being made but that it is not clear how much more work remains to be done before the task is complete (e.g. because the task is waiting for a remote host to respond), or the progress is a number in the range zero to a maximum, giving the fraction of work that has so far been completed.
 func Progress(children ...htemel.Node) *ProgressElement {
 	node := &ProgressElement{
-		children:   children,
-		attributes: make(progressAttrs),
+		children: children, attributes: make(progressAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func ProgressTernary(condition bool, true htemel.Node, false htemel.Node) *Progr
 type ProgressAutocapitalizeEnum string
 
 const (
-	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
 	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
 	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
 	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
 	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
 	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
+	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
 )
 
 type ProgressAutocorrectEnum string
@@ -93,13 +92,13 @@ const (
 type ProgressEnterkeyhintEnum string
 
 const (
-	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
 	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
 	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
 	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
 	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
 	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
 	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
+	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
 )
 
 type ProgressHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type ProgressInputmodeEnum string
 
 const (
+	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
+	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
 	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
 	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
 	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
 	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
 	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
 	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
-	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
-	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
 )
 
 type ProgressSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *ProgressElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

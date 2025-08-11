@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type LinkElement struct {
 	attributes linkAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type LinkElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The link element allows authors to link their document to other resources.
-func Link(children ...htemel.Node) *LinkElement {
+func Link() *LinkElement {
 	node := &LinkElement{
-		children:   children,
 		attributes: make(linkAttrs),
 	}
 
 	return node
 }
 
-func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
+func LinkIf(condition bool) *LinkElement {
 	if condition {
-		return Link(children...)
+		return Link()
 	}
 
 	return &LinkElement{
@@ -39,23 +37,37 @@ func LinkIf(condition bool, children ...htemel.Node) *LinkElement {
 	}
 }
 
-func LinkTernary(condition bool, true htemel.Node, false htemel.Node) *LinkElement {
-	if condition {
-		return Link(true)
-	}
+type LinkCrossoriginEnum string
 
-	return Link(false)
-}
+const (
+	LinkCrossoriginEnumAnonymous      LinkCrossoriginEnum = "anonymous"
+	LinkCrossoriginEnumUseCredentials LinkCrossoriginEnum = "use-credentials"
+	LinkCrossoriginEnumEmpty          LinkCrossoriginEnum = ""
+)
+
+type LinkBlockingEnum string
+
+const (
+	LinkBlockingEnumRender LinkBlockingEnum = "render"
+)
+
+type LinkFetchpriorityEnum string
+
+const (
+	LinkFetchpriorityEnumLow  LinkFetchpriorityEnum = "low"
+	LinkFetchpriorityEnumAuto LinkFetchpriorityEnum = "auto"
+	LinkFetchpriorityEnumHigh LinkFetchpriorityEnum = "high"
+)
 
 type LinkAutocapitalizeEnum string
 
 const (
+	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
+	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
 	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
 	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
 	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
-	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
-	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 )
 
 type LinkAutocorrectEnum string
@@ -78,9 +90,9 @@ const (
 type LinkDirEnum string
 
 const (
-	LinkDirEnumRtl  LinkDirEnum = "rtl"
 	LinkDirEnumAuto LinkDirEnum = "auto"
 	LinkDirEnumLtr  LinkDirEnum = "ltr"
+	LinkDirEnumRtl  LinkDirEnum = "rtl"
 )
 
 type LinkDraggableEnum string
@@ -93,13 +105,13 @@ const (
 type LinkEnterkeyhintEnum string
 
 const (
+	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
 	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
 	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
 	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
 	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
-	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
 )
 
 type LinkHiddenEnum string
@@ -113,7 +125,6 @@ const (
 type LinkInputmodeEnum string
 
 const (
-	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
 	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
 	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
@@ -121,6 +132,7 @@ const (
 	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
 	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
 	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
+	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 )
 
 type LinkSpellcheckEnum string
@@ -134,8 +146,8 @@ const (
 type LinkTranslateEnum string
 
 const (
-	LinkTranslateEnumYes   LinkTranslateEnum = "yes"
 	LinkTranslateEnumNo    LinkTranslateEnum = "no"
+	LinkTranslateEnumYes   LinkTranslateEnum = "yes"
 	LinkTranslateEnumEmpty LinkTranslateEnum = ""
 )
 
@@ -148,6 +160,102 @@ const (
 )
 
 type linkAttrs map[string]any
+
+func (e *LinkElement) Href(s string) *LinkElement {
+	e.attributes["href"] = s
+
+	return e
+}
+
+func (e *LinkElement) Crossorigin(a LinkCrossoriginEnum) *LinkElement {
+	e.attributes["crossorigin"] = a
+
+	return e
+}
+
+func (e *LinkElement) Rel(s ...string) *LinkElement {
+	e.attributes["rel"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *LinkElement) Media(s string) *LinkElement {
+	e.attributes["media"] = s
+
+	return e
+}
+
+func (e *LinkElement) Integrity(s string) *LinkElement {
+	e.attributes["integrity"] = s
+
+	return e
+}
+
+func (e *LinkElement) Hreflang(s string) *LinkElement {
+	e.attributes["hreflang"] = s
+
+	return e
+}
+
+func (e *LinkElement) Type(s string) *LinkElement {
+	e.attributes["type"] = s
+
+	return e
+}
+
+func (e *LinkElement) Referrerpolicy(s string) *LinkElement {
+	e.attributes["referrerpolicy"] = s
+
+	return e
+}
+
+func (e *LinkElement) Sizes(s ...string) *LinkElement {
+	e.attributes["sizes"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *LinkElement) Imagesrcset(s string) *LinkElement {
+	e.attributes["imagesrcset"] = s
+
+	return e
+}
+
+func (e *LinkElement) Imagesizes(s string) *LinkElement {
+	e.attributes["imagesizes"] = s
+
+	return e
+}
+
+func (e *LinkElement) As(s string) *LinkElement {
+	e.attributes["as"] = s
+
+	return e
+}
+
+func (e *LinkElement) Blocking(a LinkBlockingEnum) *LinkElement {
+	e.attributes["blocking"] = a
+
+	return e
+}
+
+func (e *LinkElement) Color(s string) *LinkElement {
+	e.attributes["color"] = s
+
+	return e
+}
+
+func (e *LinkElement) Disabled(b bool) *LinkElement {
+	e.attributes["disabled"] = b
+
+	return e
+}
+
+func (e *LinkElement) Fetchpriority(a LinkFetchpriorityEnum) *LinkElement {
+	e.attributes["fetchpriority"] = a
+
+	return e
+}
 
 func (e *LinkElement) Autocapitalize(a LinkAutocapitalizeEnum) *LinkElement {
 	e.attributes["autocapitalize"] = a
@@ -364,16 +472,6 @@ func (e *LinkElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</link>")); err != nil {
 		return err
 	}
 

@@ -22,8 +22,7 @@ type UElement struct {
 // Spec Description: The u element represents a span of text with an unarticulated, though explicitly rendered, non-textual annotation, such as labeling the text as being a proper name in Chinese text (a Chinese proper name mark), or labeling the text as being misspelt.
 func U(children ...htemel.Node) *UElement {
 	node := &UElement{
-		children:   children,
-		attributes: make(uAttrs),
+		children: children, attributes: make(uAttrs),
 	}
 
 	return node
@@ -50,19 +49,19 @@ func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
 type UAutocapitalizeEnum string
 
 const (
-	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
-	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
-	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
 	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
 	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
 	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
+	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
+	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
+	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
 )
 
 type UAutocorrectEnum string
 
 const (
-	UAutocorrectEnumOff   UAutocorrectEnum = "off"
 	UAutocorrectEnumOn    UAutocorrectEnum = "on"
+	UAutocorrectEnumOff   UAutocorrectEnum = "off"
 	UAutocorrectEnumEmpty UAutocorrectEnum = ""
 )
 
@@ -78,9 +77,9 @@ const (
 type UDirEnum string
 
 const (
-	UDirEnumRtl  UDirEnum = "rtl"
 	UDirEnumAuto UDirEnum = "auto"
 	UDirEnumLtr  UDirEnum = "ltr"
+	UDirEnumRtl  UDirEnum = "rtl"
 )
 
 type UDraggableEnum string
@@ -113,6 +112,7 @@ const (
 type UInputmodeEnum string
 
 const (
+	UInputmodeEnumSearch  UInputmodeEnum = "search"
 	UInputmodeEnumTel     UInputmodeEnum = "tel"
 	UInputmodeEnumText    UInputmodeEnum = "text"
 	UInputmodeEnumUrl     UInputmodeEnum = "url"
@@ -120,7 +120,6 @@ const (
 	UInputmodeEnumEmail   UInputmodeEnum = "email"
 	UInputmodeEnumNone    UInputmodeEnum = "none"
 	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
-	UInputmodeEnumSearch  UInputmodeEnum = "search"
 )
 
 type USpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *UElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

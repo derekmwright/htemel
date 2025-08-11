@@ -22,8 +22,7 @@ type BdoElement struct {
 // Spec Description: The bdo element represents explicit text directionality formatting control for its children. It allows authors to override the Unicode bidirectional algorithm by explicitly specifying a direction override. [BIDI]
 func Bdo(children ...htemel.Node) *BdoElement {
 	node := &BdoElement{
-		children:   children,
-		attributes: make(bdoAttrs),
+		children: children, attributes: make(bdoAttrs),
 	}
 
 	return node
@@ -69,9 +68,9 @@ const (
 type BdoContenteditableEnum string
 
 const (
-	BdoContenteditableEnumFalse         BdoContenteditableEnum = "false"
 	BdoContenteditableEnumPlaintextOnly BdoContenteditableEnum = "plaintext-only"
 	BdoContenteditableEnumTrue          BdoContenteditableEnum = "true"
+	BdoContenteditableEnumFalse         BdoContenteditableEnum = "false"
 	BdoContenteditableEnumEmpty         BdoContenteditableEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type BdoEnterkeyhintEnum string
 
 const (
-	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
-	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
-	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
 	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
 	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
 	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
+	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
+	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
+	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
 )
 
 type BdoHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type BdoInputmodeEnum string
 
 const (
-	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
-	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
-	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
 	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
 	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
 	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
 	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
 	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
+	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
+	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
+	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
 )
 
 type BdoSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type BdoTranslateEnum string
 
 const (
-	BdoTranslateEnumNo    BdoTranslateEnum = "no"
 	BdoTranslateEnumYes   BdoTranslateEnum = "yes"
+	BdoTranslateEnumNo    BdoTranslateEnum = "no"
 	BdoTranslateEnumEmpty BdoTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *BdoElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

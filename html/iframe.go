@@ -22,8 +22,7 @@ type IframeElement struct {
 // Spec Description: The iframe element represents its content navigable.
 func Iframe(children ...htemel.Node) *IframeElement {
 	node := &IframeElement{
-		children:   children,
-		attributes: make(iframeAttrs),
+		children: children, attributes: make(iframeAttrs),
 	}
 
 	return node
@@ -69,18 +68,18 @@ const (
 type IframeContenteditableEnum string
 
 const (
-	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
 	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
 	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
+	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
 	IframeContenteditableEnumEmpty         IframeContenteditableEnum = ""
 )
 
 type IframeDirEnum string
 
 const (
-	IframeDirEnumAuto IframeDirEnum = "auto"
 	IframeDirEnumLtr  IframeDirEnum = "ltr"
 	IframeDirEnumRtl  IframeDirEnum = "rtl"
+	IframeDirEnumAuto IframeDirEnum = "auto"
 )
 
 type IframeDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
+	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
 	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
 	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
-	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
 )
 
 type IframeHiddenEnum string
@@ -113,7 +112,6 @@ const (
 type IframeInputmodeEnum string
 
 const (
-	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
 	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
 	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
@@ -121,6 +119,7 @@ const (
 	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
 	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
 	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
+	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
 )
 
 type IframeSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *IframeElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

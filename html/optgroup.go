@@ -22,8 +22,7 @@ type OptgroupElement struct {
 // Spec Description: The optgroup element represents a group of option elements with a common label.
 func Optgroup(children ...htemel.Node) *OptgroupElement {
 	node := &OptgroupElement{
-		children:   children,
-		attributes: make(optgroupAttrs),
+		children: children, attributes: make(optgroupAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func OptgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Optgr
 type OptgroupAutocapitalizeEnum string
 
 const (
+	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
+	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 	OptgroupAutocapitalizeEnumOff        OptgroupAutocapitalizeEnum = "off"
 	OptgroupAutocapitalizeEnumOn         OptgroupAutocapitalizeEnum = "on"
 	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
 	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
-	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
-	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 )
 
 type OptgroupAutocorrectEnum string
@@ -78,28 +77,28 @@ const (
 type OptgroupDirEnum string
 
 const (
+	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
 	OptgroupDirEnumLtr  OptgroupDirEnum = "ltr"
 	OptgroupDirEnumRtl  OptgroupDirEnum = "rtl"
-	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
 )
 
 type OptgroupDraggableEnum string
 
 const (
-	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
 	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
+	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
 )
 
 type OptgroupEnterkeyhintEnum string
 
 const (
+	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
+	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
+	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
 	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
 	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
 	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
-	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
-	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
-	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 )
 
 type OptgroupHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type OptgroupInputmodeEnum string
 
 const (
-	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
-	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
 	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
 	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
 	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
 	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
 	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
+	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
+	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
 )
 
 type OptgroupSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *OptgroupElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

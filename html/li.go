@@ -22,8 +22,7 @@ type LiElement struct {
 // Spec Description: The li element represents a list item. If its parent element is an ol, ul, or menu element, then the element is an item of the parent element's list, as defined for those elements. Otherwise, the list item has no defined list-related relationship to any other li element.
 func Li(children ...htemel.Node) *LiElement {
 	node := &LiElement{
-		children:   children,
-		attributes: make(liAttrs),
+		children: children, attributes: make(liAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
 type LiAutocapitalizeEnum string
 
 const (
-	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
 	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
 	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
+	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 )
 
 type LiAutocorrectEnum string
@@ -93,13 +92,13 @@ const (
 type LiEnterkeyhintEnum string
 
 const (
+	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
 	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
 	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
 	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
 	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
 	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
-	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
 )
 
 type LiHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type LiInputmodeEnum string
 
 const (
-	LiInputmodeEnumText    LiInputmodeEnum = "text"
-	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
-	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 	LiInputmodeEnumNone    LiInputmodeEnum = "none"
 	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
 	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
 	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
+	LiInputmodeEnumText    LiInputmodeEnum = "text"
+	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
+	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 )
 
 type LiSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type LiTranslateEnum string
 
 const (
-	LiTranslateEnumNo    LiTranslateEnum = "no"
 	LiTranslateEnumYes   LiTranslateEnum = "yes"
+	LiTranslateEnumNo    LiTranslateEnum = "no"
 	LiTranslateEnumEmpty LiTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *LiElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type AddressElement struct {
 // Spec Description: The address element represents the contact information for its nearest article or body element ancestor. If that is the body element, then the contact information applies to the document as a whole.
 func Address(children ...htemel.Node) *AddressElement {
 	node := &AddressElement{
-		children:   children,
-		attributes: make(addressAttrs),
+		children: children, attributes: make(addressAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func AddressTernary(condition bool, true htemel.Node, false htemel.Node) *Addres
 type AddressAutocapitalizeEnum string
 
 const (
+	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
+	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
 	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
 	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
 	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
-	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
-	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 )
 
 type AddressAutocorrectEnum string
@@ -69,18 +68,18 @@ const (
 type AddressContenteditableEnum string
 
 const (
-	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
 	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
+	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
 	AddressContenteditableEnumEmpty         AddressContenteditableEnum = ""
 )
 
 type AddressDirEnum string
 
 const (
+	AddressDirEnumRtl  AddressDirEnum = "rtl"
 	AddressDirEnumAuto AddressDirEnum = "auto"
 	AddressDirEnumLtr  AddressDirEnum = "ltr"
-	AddressDirEnumRtl  AddressDirEnum = "rtl"
 )
 
 type AddressDraggableEnum string
@@ -93,20 +92,20 @@ const (
 type AddressEnterkeyhintEnum string
 
 const (
+	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
+	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
 	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
 	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
 	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
 	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
-	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
-	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 )
 
 type AddressHiddenEnum string
 
 const (
-	AddressHiddenEnumHidden     AddressHiddenEnum = "hidden"
 	AddressHiddenEnumUntilFound AddressHiddenEnum = "until-found"
+	AddressHiddenEnumHidden     AddressHiddenEnum = "hidden"
 	AddressHiddenEnumEmpty      AddressHiddenEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *AddressElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

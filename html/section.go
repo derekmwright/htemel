@@ -22,8 +22,7 @@ type SectionElement struct {
 // Spec Description: The section element represents a generic section of a document or application. A section, in this context, is a thematic grouping of content, typically with a heading.
 func Section(children ...htemel.Node) *SectionElement {
 	node := &SectionElement{
-		children:   children,
-		attributes: make(sectionAttrs),
+		children: children, attributes: make(sectionAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func SectionTernary(condition bool, true htemel.Node, false htemel.Node) *Sectio
 type SectionAutocapitalizeEnum string
 
 const (
+	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
 	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
 	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
 	SectionAutocapitalizeEnumWords      SectionAutocapitalizeEnum = "words"
 	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
 	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
-	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
 )
 
 type SectionAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type SectionContenteditableEnum string
 
 const (
+	SectionContenteditableEnumPlaintextOnly SectionContenteditableEnum = "plaintext-only"
 	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
 	SectionContenteditableEnumFalse         SectionContenteditableEnum = "false"
-	SectionContenteditableEnumPlaintextOnly SectionContenteditableEnum = "plaintext-only"
 	SectionContenteditableEnumEmpty         SectionContenteditableEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *SectionElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type LegendElement struct {
 // Spec Description: The legend element represents a caption for the rest of the contents of the legend element's parent fieldset element, if any. Otherwise, if the legend has a parent optgroup element, then the legend represents the optgroup's label.
 func Legend(children ...htemel.Node) *LegendElement {
 	node := &LegendElement{
-		children:   children,
-		attributes: make(legendAttrs),
+		children: children, attributes: make(legendAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func LegendTernary(condition bool, true htemel.Node, false htemel.Node) *LegendE
 type LegendAutocapitalizeEnum string
 
 const (
-	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
-	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
-	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
 	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
 	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
+	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
+	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
+	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
 )
 
 type LegendAutocorrectEnum string
@@ -86,20 +85,20 @@ const (
 type LegendDraggableEnum string
 
 const (
-	LegendDraggableEnumFalse LegendDraggableEnum = "false"
 	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
+	LegendDraggableEnumFalse LegendDraggableEnum = "false"
 )
 
 type LegendEnterkeyhintEnum string
 
 const (
-	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
-	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
 	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
 	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
 	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
 	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
 	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
+	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
+	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
 )
 
 type LegendHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type LegendInputmodeEnum string
 
 const (
-	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
-	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
-	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
-	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
 	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
 	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
 	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
+	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
+	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
+	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
+	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 )
 
 type LegendSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type LegendTranslateEnum string
 
 const (
-	LegendTranslateEnumYes   LegendTranslateEnum = "yes"
 	LegendTranslateEnumNo    LegendTranslateEnum = "no"
+	LegendTranslateEnumYes   LegendTranslateEnum = "yes"
 	LegendTranslateEnumEmpty LegendTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *LegendElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

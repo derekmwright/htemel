@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type EmbedElement struct {
 	attributes embedAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type EmbedElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The embed element provides an integration point for an external application or interactive content.
-func Embed(children ...htemel.Node) *EmbedElement {
+func Embed() *EmbedElement {
 	node := &EmbedElement{
-		children:   children,
 		attributes: make(embedAttrs),
 	}
 
 	return node
 }
 
-func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
+func EmbedIf(condition bool) *EmbedElement {
 	if condition {
-		return Embed(children...)
+		return Embed()
 	}
 
 	return &EmbedElement{
@@ -39,23 +37,15 @@ func EmbedIf(condition bool, children ...htemel.Node) *EmbedElement {
 	}
 }
 
-func EmbedTernary(condition bool, true htemel.Node, false htemel.Node) *EmbedElement {
-	if condition {
-		return Embed(true)
-	}
-
-	return Embed(false)
-}
-
 type EmbedAutocapitalizeEnum string
 
 const (
+	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
 	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
 	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
-	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
 )
 
 type EmbedAutocorrectEnum string
@@ -69,9 +59,9 @@ const (
 type EmbedContenteditableEnum string
 
 const (
-	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
 	EmbedContenteditableEnumFalse         EmbedContenteditableEnum = "false"
 	EmbedContenteditableEnumPlaintextOnly EmbedContenteditableEnum = "plaintext-only"
+	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
 	EmbedContenteditableEnumEmpty         EmbedContenteditableEnum = ""
 )
 
@@ -93,13 +83,13 @@ const (
 type EmbedEnterkeyhintEnum string
 
 const (
-	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
 	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
 	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
 	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
 	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
+	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
 )
 
 type EmbedHiddenEnum string
@@ -113,14 +103,14 @@ const (
 type EmbedInputmodeEnum string
 
 const (
-	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
-	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
 	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
 	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
 	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
+	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
+	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 )
 
 type EmbedSpellcheckEnum string
@@ -364,16 +354,6 @@ func (e *EmbedElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</embed>")); err != nil {
 		return err
 	}
 

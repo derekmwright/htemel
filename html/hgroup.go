@@ -22,8 +22,7 @@ type HgroupElement struct {
 // Spec Description: The hgroup element represents a heading and related content. The element may be used to group an h1–h6 element with one or more p elements containing content representing a subheading, alternative title, or tagline.
 func Hgroup(children ...htemel.Node) *HgroupElement {
 	node := &HgroupElement{
-		children:   children,
-		attributes: make(hgroupAttrs),
+		children: children, attributes: make(hgroupAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func HgroupTernary(condition bool, true htemel.Node, false htemel.Node) *HgroupE
 type HgroupAutocapitalizeEnum string
 
 const (
+	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
+	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
 	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
 	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
 	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
-	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
-	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 )
 
 type HgroupAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type HgroupContenteditableEnum string
 
 const (
+	HgroupContenteditableEnumPlaintextOnly HgroupContenteditableEnum = "plaintext-only"
 	HgroupContenteditableEnumTrue          HgroupContenteditableEnum = "true"
 	HgroupContenteditableEnumFalse         HgroupContenteditableEnum = "false"
-	HgroupContenteditableEnumPlaintextOnly HgroupContenteditableEnum = "plaintext-only"
 	HgroupContenteditableEnumEmpty         HgroupContenteditableEnum = ""
 )
 
@@ -86,8 +85,8 @@ const (
 type HgroupDraggableEnum string
 
 const (
-	HgroupDraggableEnumFalse HgroupDraggableEnum = "false"
 	HgroupDraggableEnumTrue  HgroupDraggableEnum = "true"
+	HgroupDraggableEnumFalse HgroupDraggableEnum = "false"
 )
 
 type HgroupEnterkeyhintEnum string
@@ -113,29 +112,29 @@ const (
 type HgroupInputmodeEnum string
 
 const (
-	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
-	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
 	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
 	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
 	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
 	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
 	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
 	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
+	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
+	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
 )
 
 type HgroupSpellcheckEnum string
 
 const (
-	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
 	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
+	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
 	HgroupSpellcheckEnumEmpty HgroupSpellcheckEnum = ""
 )
 
 type HgroupTranslateEnum string
 
 const (
-	HgroupTranslateEnumNo    HgroupTranslateEnum = "no"
 	HgroupTranslateEnumYes   HgroupTranslateEnum = "yes"
+	HgroupTranslateEnumNo    HgroupTranslateEnum = "no"
 	HgroupTranslateEnumEmpty HgroupTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *HgroupElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

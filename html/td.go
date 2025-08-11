@@ -22,8 +22,7 @@ type TdElement struct {
 // Spec Description: The td element represents a data cell in a table.
 func Td(children ...htemel.Node) *TdElement {
 	node := &TdElement{
-		children:   children,
-		attributes: make(tdAttrs),
+		children: children, attributes: make(tdAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func TdTernary(condition bool, true htemel.Node, false htemel.Node) *TdElement {
 type TdAutocapitalizeEnum string
 
 const (
-	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
-	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
-	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
 	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
 	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
 	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
+	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
+	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
+	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
 )
 
 type TdAutocorrectEnum string
@@ -69,37 +68,37 @@ const (
 type TdContenteditableEnum string
 
 const (
+	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
 	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
 	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
-	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
 	TdContenteditableEnumEmpty         TdContenteditableEnum = ""
 )
 
 type TdDirEnum string
 
 const (
+	TdDirEnumRtl  TdDirEnum = "rtl"
 	TdDirEnumAuto TdDirEnum = "auto"
 	TdDirEnumLtr  TdDirEnum = "ltr"
-	TdDirEnumRtl  TdDirEnum = "rtl"
 )
 
 type TdDraggableEnum string
 
 const (
-	TdDraggableEnumFalse TdDraggableEnum = "false"
 	TdDraggableEnumTrue  TdDraggableEnum = "true"
+	TdDraggableEnumFalse TdDraggableEnum = "false"
 )
 
 type TdEnterkeyhintEnum string
 
 const (
-	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
-	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
-	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
 	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
 	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
 	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
 	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
+	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
+	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
+	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
 )
 
 type TdHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type TdInputmodeEnum string
 
 const (
-	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
-	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
-	TdInputmodeEnumText    TdInputmodeEnum = "text"
-	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
 	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
 	TdInputmodeEnumNone    TdInputmodeEnum = "none"
 	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
+	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
+	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
+	TdInputmodeEnumText    TdInputmodeEnum = "text"
+	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 )
 
 type TdSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *TdElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

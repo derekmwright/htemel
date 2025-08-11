@@ -22,8 +22,7 @@ type DetailsElement struct {
 // Spec Description: The details element represents a disclosure widget from which the user can obtain additional information or controls.
 func Details(children ...htemel.Node) *DetailsElement {
 	node := &DetailsElement{
-		children:   children,
-		attributes: make(detailsAttrs),
+		children: children, attributes: make(detailsAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *Detail
 type DetailsAutocapitalizeEnum string
 
 const (
+	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
 	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
 	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
 	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
 	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
-	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
 )
 
 type DetailsAutocorrectEnum string
@@ -86,8 +85,8 @@ const (
 type DetailsDraggableEnum string
 
 const (
-	DetailsDraggableEnumTrue  DetailsDraggableEnum = "true"
 	DetailsDraggableEnumFalse DetailsDraggableEnum = "false"
+	DetailsDraggableEnumTrue  DetailsDraggableEnum = "true"
 )
 
 type DetailsEnterkeyhintEnum string
@@ -113,14 +112,14 @@ const (
 type DetailsInputmodeEnum string
 
 const (
-	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
-	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
-	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
-	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
 	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
 	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
 	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
+	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
+	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
+	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
+	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
 )
 
 type DetailsSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *DetailsElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type FigcaptionElement struct {
 // Spec Description: The figcaption element represents a caption or legend for the rest of the contents of the figcaption element's parent figure element, if any.
 func Figcaption(children ...htemel.Node) *FigcaptionElement {
 	node := &FigcaptionElement{
-		children:   children,
-		attributes: make(figcaptionAttrs),
+		children: children, attributes: make(figcaptionAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func FigcaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Fig
 type FigcaptionAutocapitalizeEnum string
 
 const (
+	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
+	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
 	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
 	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
 	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
-	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
-	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
 )
 
 type FigcaptionAutocorrectEnum string
@@ -86,20 +85,20 @@ const (
 type FigcaptionDraggableEnum string
 
 const (
-	FigcaptionDraggableEnumFalse FigcaptionDraggableEnum = "false"
 	FigcaptionDraggableEnumTrue  FigcaptionDraggableEnum = "true"
+	FigcaptionDraggableEnumFalse FigcaptionDraggableEnum = "false"
 )
 
 type FigcaptionEnterkeyhintEnum string
 
 const (
+	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
+	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
+	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
 	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
 	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
-	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
-	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
-	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
 )
 
 type FigcaptionHiddenEnum string
@@ -126,8 +125,8 @@ const (
 type FigcaptionSpellcheckEnum string
 
 const (
-	FigcaptionSpellcheckEnumTrue  FigcaptionSpellcheckEnum = "true"
 	FigcaptionSpellcheckEnumFalse FigcaptionSpellcheckEnum = "false"
+	FigcaptionSpellcheckEnumTrue  FigcaptionSpellcheckEnum = "true"
 	FigcaptionSpellcheckEnumEmpty FigcaptionSpellcheckEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *FigcaptionElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

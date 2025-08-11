@@ -22,8 +22,7 @@ type SelectedcontentElement struct {
 // Spec Description: The selectedcontent element reflects the contents of a select element's currently selected option element. selectedcontent elements can be used to declaratively show the selected option element's contents within the select element's first child button element.
 func Selectedcontent(children ...htemel.Node) *SelectedcontentElement {
 	node := &SelectedcontentElement{
-		children:   children,
-		attributes: make(selectedcontentAttrs),
+		children: children, attributes: make(selectedcontentAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node)
 type SelectedcontentAutocapitalizeEnum string
 
 const (
-	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
 	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
 	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
 	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
 	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
 	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
+	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
 )
 
 type SelectedcontentAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type SelectedcontentDirEnum string
 
 const (
-	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 	SelectedcontentDirEnumAuto SelectedcontentDirEnum = "auto"
 	SelectedcontentDirEnumLtr  SelectedcontentDirEnum = "ltr"
+	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 )
 
 type SelectedcontentDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type SelectedcontentEnterkeyhintEnum string
 
 const (
+	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
+	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
+	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
 	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
 	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
-	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
-	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
-	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 )
 
 type SelectedcontentHiddenEnum string
@@ -113,7 +112,6 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
-	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
 	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
@@ -121,6 +119,7 @@ const (
 	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
 	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
 	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
+	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
 )
 
 type SelectedcontentSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type SelectedcontentTranslateEnum string
 
 const (
-	SelectedcontentTranslateEnumYes   SelectedcontentTranslateEnum = "yes"
 	SelectedcontentTranslateEnumNo    SelectedcontentTranslateEnum = "no"
+	SelectedcontentTranslateEnumYes   SelectedcontentTranslateEnum = "yes"
 	SelectedcontentTranslateEnumEmpty SelectedcontentTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *SelectedcontentElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

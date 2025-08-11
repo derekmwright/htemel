@@ -22,8 +22,7 @@ type PElement struct {
 // Spec Description: The p element represents a paragraph.
 func P(children ...htemel.Node) *PElement {
 	node := &PElement{
-		children:   children,
-		attributes: make(pAttrs),
+		children: children, attributes: make(pAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
 type PAutocapitalizeEnum string
 
 const (
+	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
 	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
 	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
 	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
 	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
 	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
-	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
 )
 
 type PAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type PDirEnum string
 
 const (
-	PDirEnumRtl  PDirEnum = "rtl"
 	PDirEnumAuto PDirEnum = "auto"
 	PDirEnumLtr  PDirEnum = "ltr"
+	PDirEnumRtl  PDirEnum = "rtl"
 )
 
 type PDraggableEnum string
@@ -93,34 +92,34 @@ const (
 type PEnterkeyhintEnum string
 
 const (
-	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
-	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
-	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
 	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
 	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
+	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
+	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
+	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
 )
 
 type PHiddenEnum string
 
 const (
-	PHiddenEnumHidden     PHiddenEnum = "hidden"
 	PHiddenEnumUntilFound PHiddenEnum = "until-found"
+	PHiddenEnumHidden     PHiddenEnum = "hidden"
 	PHiddenEnumEmpty      PHiddenEnum = ""
 )
 
 type PInputmodeEnum string
 
 const (
-	PInputmodeEnumEmail   PInputmodeEnum = "email"
-	PInputmodeEnumNone    PInputmodeEnum = "none"
-	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
-	PInputmodeEnumSearch  PInputmodeEnum = "search"
 	PInputmodeEnumTel     PInputmodeEnum = "tel"
 	PInputmodeEnumText    PInputmodeEnum = "text"
 	PInputmodeEnumUrl     PInputmodeEnum = "url"
 	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
+	PInputmodeEnumEmail   PInputmodeEnum = "email"
+	PInputmodeEnumNone    PInputmodeEnum = "none"
+	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
+	PInputmodeEnumSearch  PInputmodeEnum = "search"
 )
 
 type PSpellcheckEnum string
@@ -142,8 +141,8 @@ const (
 type PWritingsuggestionsEnum string
 
 const (
-	PWritingsuggestionsEnumTrue  PWritingsuggestionsEnum = "true"
 	PWritingsuggestionsEnumFalse PWritingsuggestionsEnum = "false"
+	PWritingsuggestionsEnumTrue  PWritingsuggestionsEnum = "true"
 	PWritingsuggestionsEnumEmpty PWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *PElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

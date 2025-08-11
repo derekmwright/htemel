@@ -22,8 +22,7 @@ type MainElement struct {
 // Spec Description: The main element represents the dominant contents of the document.
 func Main(children ...htemel.Node) *MainElement {
 	node := &MainElement{
-		children:   children,
-		attributes: make(mainAttrs),
+		children: children, attributes: make(mainAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainEleme
 type MainAutocapitalizeEnum string
 
 const (
-	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
 	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
 	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
 	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
+	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
 )
 
 type MainAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type MainContenteditableEnum string
 
 const (
-	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
 	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
 	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
+	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
 	MainContenteditableEnumEmpty         MainContenteditableEnum = ""
 )
 
@@ -93,26 +92,27 @@ const (
 type MainEnterkeyhintEnum string
 
 const (
-	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
-	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
 	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
 	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
 	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
 	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
+	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
+	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
 )
 
 type MainHiddenEnum string
 
 const (
-	MainHiddenEnumUntilFound MainHiddenEnum = "until-found"
 	MainHiddenEnumHidden     MainHiddenEnum = "hidden"
+	MainHiddenEnumUntilFound MainHiddenEnum = "until-found"
 	MainHiddenEnumEmpty      MainHiddenEnum = ""
 )
 
 type MainInputmodeEnum string
 
 const (
+	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
 	MainInputmodeEnumText    MainInputmodeEnum = "text"
 	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
@@ -120,14 +120,13 @@ const (
 	MainInputmodeEnumNone    MainInputmodeEnum = "none"
 	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
-	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
 )
 
 type MainSpellcheckEnum string
 
 const (
-	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
 	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
+	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
 	MainSpellcheckEnumEmpty MainSpellcheckEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *MainElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

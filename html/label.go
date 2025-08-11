@@ -22,8 +22,7 @@ type LabelElement struct {
 // Spec Description: The label element represents a caption in a user interface. The caption can be associated with a specific form control, known as the label element's labeled control, either using the for attribute, or by putting the form control inside the label element itself.
 func Label(children ...htemel.Node) *LabelElement {
 	node := &LabelElement{
-		children:   children,
-		attributes: make(labelAttrs),
+		children: children, attributes: make(labelAttrs),
 	}
 
 	return node
@@ -61,17 +60,17 @@ const (
 type LabelAutocorrectEnum string
 
 const (
-	LabelAutocorrectEnumOn    LabelAutocorrectEnum = "on"
 	LabelAutocorrectEnumOff   LabelAutocorrectEnum = "off"
+	LabelAutocorrectEnumOn    LabelAutocorrectEnum = "on"
 	LabelAutocorrectEnumEmpty LabelAutocorrectEnum = ""
 )
 
 type LabelContenteditableEnum string
 
 const (
-	LabelContenteditableEnumFalse         LabelContenteditableEnum = "false"
 	LabelContenteditableEnumPlaintextOnly LabelContenteditableEnum = "plaintext-only"
 	LabelContenteditableEnumTrue          LabelContenteditableEnum = "true"
+	LabelContenteditableEnumFalse         LabelContenteditableEnum = "false"
 	LabelContenteditableEnumEmpty         LabelContenteditableEnum = ""
 )
 
@@ -105,22 +104,22 @@ const (
 type LabelHiddenEnum string
 
 const (
-	LabelHiddenEnumHidden     LabelHiddenEnum = "hidden"
 	LabelHiddenEnumUntilFound LabelHiddenEnum = "until-found"
+	LabelHiddenEnumHidden     LabelHiddenEnum = "hidden"
 	LabelHiddenEnumEmpty      LabelHiddenEnum = ""
 )
 
 type LabelInputmodeEnum string
 
 const (
+	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
+	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
 	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
 	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
 	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
 	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
-	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
-	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 )
 
 type LabelSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *LabelElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

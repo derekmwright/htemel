@@ -22,8 +22,7 @@ type DivElement struct {
 // Spec Description: The div element has no special meaning at all. It represents its children. It can be used with the class, lang, and title attributes to mark up semantics common to a group of consecutive elements. It can also be used in a dl element, wrapping groups of dt and dd elements.
 func Div(children ...htemel.Node) *DivElement {
 	node := &DivElement{
-		children:   children,
-		attributes: make(divAttrs),
+		children: children, attributes: make(divAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func DivTernary(condition bool, true htemel.Node, false htemel.Node) *DivElement
 type DivAutocapitalizeEnum string
 
 const (
+	DivAutocapitalizeEnumOn         DivAutocapitalizeEnum = "on"
 	DivAutocapitalizeEnumSentences  DivAutocapitalizeEnum = "sentences"
 	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
 	DivAutocapitalizeEnumCharacters DivAutocapitalizeEnum = "characters"
 	DivAutocapitalizeEnumNone       DivAutocapitalizeEnum = "none"
 	DivAutocapitalizeEnumOff        DivAutocapitalizeEnum = "off"
-	DivAutocapitalizeEnumOn         DivAutocapitalizeEnum = "on"
 )
 
 type DivAutocorrectEnum string
@@ -93,20 +92,20 @@ const (
 type DivEnterkeyhintEnum string
 
 const (
+	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
+	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 	DivEnterkeyhintEnumGo       DivEnterkeyhintEnum = "go"
 	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
 	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
 	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
 	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
-	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
-	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 )
 
 type DivHiddenEnum string
 
 const (
-	DivHiddenEnumHidden     DivHiddenEnum = "hidden"
 	DivHiddenEnumUntilFound DivHiddenEnum = "until-found"
+	DivHiddenEnumHidden     DivHiddenEnum = "hidden"
 	DivHiddenEnumEmpty      DivHiddenEnum = ""
 )
 
@@ -142,8 +141,8 @@ const (
 type DivWritingsuggestionsEnum string
 
 const (
-	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
 	DivWritingsuggestionsEnumTrue  DivWritingsuggestionsEnum = "true"
+	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
 	DivWritingsuggestionsEnumEmpty DivWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *DivElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

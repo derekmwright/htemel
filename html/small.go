@@ -22,8 +22,7 @@ type SmallElement struct {
 // Spec Description: The small element represents side comments such as small print.
 func Small(children ...htemel.Node) *SmallElement {
 	node := &SmallElement{
-		children:   children,
-		attributes: make(smallAttrs),
+		children: children, attributes: make(smallAttrs),
 	}
 
 	return node
@@ -69,37 +68,37 @@ const (
 type SmallContenteditableEnum string
 
 const (
-	SmallContenteditableEnumPlaintextOnly SmallContenteditableEnum = "plaintext-only"
 	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
 	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
+	SmallContenteditableEnumPlaintextOnly SmallContenteditableEnum = "plaintext-only"
 	SmallContenteditableEnumEmpty         SmallContenteditableEnum = ""
 )
 
 type SmallDirEnum string
 
 const (
-	SmallDirEnumRtl  SmallDirEnum = "rtl"
 	SmallDirEnumAuto SmallDirEnum = "auto"
 	SmallDirEnumLtr  SmallDirEnum = "ltr"
+	SmallDirEnumRtl  SmallDirEnum = "rtl"
 )
 
 type SmallDraggableEnum string
 
 const (
-	SmallDraggableEnumFalse SmallDraggableEnum = "false"
 	SmallDraggableEnumTrue  SmallDraggableEnum = "true"
+	SmallDraggableEnumFalse SmallDraggableEnum = "false"
 )
 
 type SmallEnterkeyhintEnum string
 
 const (
+	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
+	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
 	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
 	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
 	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
 	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
-	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
-	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 )
 
 type SmallHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type SmallInputmodeEnum string
 
 const (
-	SmallInputmodeEnumSearch  SmallInputmodeEnum = "search"
-	SmallInputmodeEnumTel     SmallInputmodeEnum = "tel"
-	SmallInputmodeEnumText    SmallInputmodeEnum = "text"
 	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
 	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
 	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
 	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
 	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
+	SmallInputmodeEnumSearch  SmallInputmodeEnum = "search"
+	SmallInputmodeEnumTel     SmallInputmodeEnum = "tel"
+	SmallInputmodeEnumText    SmallInputmodeEnum = "text"
 )
 
 type SmallSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *SmallElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

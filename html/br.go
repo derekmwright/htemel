@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type BrElement struct {
 	attributes brAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,31 +19,22 @@ type BrElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The br element represents a line break.
-func Br(children ...htemel.Node) *BrElement {
+func Br() *BrElement {
 	node := &BrElement{
-		children:   children,
 		attributes: make(brAttrs),
 	}
 
 	return node
 }
 
-func BrIf(condition bool, children ...htemel.Node) *BrElement {
+func BrIf(condition bool) *BrElement {
 	if condition {
-		return Br(children...)
+		return Br()
 	}
 
 	return &BrElement{
 		skipRender: true,
 	}
-}
-
-func BrTernary(condition bool, true htemel.Node, false htemel.Node) *BrElement {
-	if condition {
-		return Br(true)
-	}
-
-	return Br(false)
 }
 
 type BrAutocapitalizeEnum string
@@ -78,28 +68,28 @@ const (
 type BrDirEnum string
 
 const (
+	BrDirEnumRtl  BrDirEnum = "rtl"
 	BrDirEnumAuto BrDirEnum = "auto"
 	BrDirEnumLtr  BrDirEnum = "ltr"
-	BrDirEnumRtl  BrDirEnum = "rtl"
 )
 
 type BrDraggableEnum string
 
 const (
-	BrDraggableEnumTrue  BrDraggableEnum = "true"
 	BrDraggableEnumFalse BrDraggableEnum = "false"
+	BrDraggableEnumTrue  BrDraggableEnum = "true"
 )
 
 type BrEnterkeyhintEnum string
 
 const (
+	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
 	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
 	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
 	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
 	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
-	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 )
 
 type BrHiddenEnum string
@@ -113,14 +103,14 @@ const (
 type BrInputmodeEnum string
 
 const (
+	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
+	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
 	BrInputmodeEnumText    BrInputmodeEnum = "text"
 	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
 	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
 	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
 	BrInputmodeEnumNone    BrInputmodeEnum = "none"
 	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
-	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
-	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
 )
 
 type BrSpellcheckEnum string
@@ -134,8 +124,8 @@ const (
 type BrTranslateEnum string
 
 const (
-	BrTranslateEnumYes   BrTranslateEnum = "yes"
 	BrTranslateEnumNo    BrTranslateEnum = "no"
+	BrTranslateEnumYes   BrTranslateEnum = "yes"
 	BrTranslateEnumEmpty BrTranslateEnum = ""
 )
 
@@ -364,16 +354,6 @@ func (e *BrElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</br>")); err != nil {
 		return err
 	}
 

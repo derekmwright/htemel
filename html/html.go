@@ -22,8 +22,7 @@ type HtmlElement struct {
 // Spec Description: The html element represents the root of an HTML document.
 func Html(children ...htemel.Node) *HtmlElement {
 	node := &HtmlElement{
-		children:   children,
-		attributes: make(htmlAttrs),
+		children: children, attributes: make(htmlAttrs),
 	}
 
 	return node
@@ -113,7 +112,6 @@ const (
 type HtmlInputmodeEnum string
 
 const (
-	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
 	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
 	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
@@ -121,6 +119,7 @@ const (
 	HtmlInputmodeEnumNone    HtmlInputmodeEnum = "none"
 	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
 	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
+	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
 )
 
 type HtmlSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *HtmlElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

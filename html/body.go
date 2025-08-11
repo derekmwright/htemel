@@ -22,8 +22,7 @@ type BodyElement struct {
 // Spec Description: The body element represents the contents of the document.
 func Body(children ...htemel.Node) *BodyElement {
 	node := &BodyElement{
-		children:   children,
-		attributes: make(bodyAttrs),
+		children: children, attributes: make(bodyAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func BodyTernary(condition bool, true htemel.Node, false htemel.Node) *BodyEleme
 type BodyAutocapitalizeEnum string
 
 const (
+	BodyAutocapitalizeEnumSentences  BodyAutocapitalizeEnum = "sentences"
+	BodyAutocapitalizeEnumWords      BodyAutocapitalizeEnum = "words"
 	BodyAutocapitalizeEnumCharacters BodyAutocapitalizeEnum = "characters"
 	BodyAutocapitalizeEnumNone       BodyAutocapitalizeEnum = "none"
 	BodyAutocapitalizeEnumOff        BodyAutocapitalizeEnum = "off"
 	BodyAutocapitalizeEnumOn         BodyAutocapitalizeEnum = "on"
-	BodyAutocapitalizeEnumSentences  BodyAutocapitalizeEnum = "sentences"
-	BodyAutocapitalizeEnumWords      BodyAutocapitalizeEnum = "words"
 )
 
 type BodyAutocorrectEnum string
@@ -69,18 +68,18 @@ const (
 type BodyContenteditableEnum string
 
 const (
-	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
 	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
 	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
+	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
 	BodyContenteditableEnumEmpty         BodyContenteditableEnum = ""
 )
 
 type BodyDirEnum string
 
 const (
+	BodyDirEnumAuto BodyDirEnum = "auto"
 	BodyDirEnumLtr  BodyDirEnum = "ltr"
 	BodyDirEnumRtl  BodyDirEnum = "rtl"
-	BodyDirEnumAuto BodyDirEnum = "auto"
 )
 
 type BodyDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type BodyEnterkeyhintEnum string
 
 const (
+	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
+	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
 	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
 	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
 	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
 	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
 	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
-	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
-	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
 )
 
 type BodyHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type BodyInputmodeEnum string
 
 const (
+	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
+	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
 	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
 	BodyInputmodeEnumSearch  BodyInputmodeEnum = "search"
 	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
 	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
 	BodyInputmodeEnumUrl     BodyInputmodeEnum = "url"
 	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
-	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
-	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
 )
 
 type BodySpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *BodyElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type KbdElement struct {
 // Spec Description: The kbd element represents user input (typically keyboard input, although it may also be used to represent other input, such as voice commands).
 func Kbd(children ...htemel.Node) *KbdElement {
 	node := &KbdElement{
-		children:   children,
-		attributes: make(kbdAttrs),
+		children: children, attributes: make(kbdAttrs),
 	}
 
 	return node
@@ -50,19 +49,19 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 type KbdAutocapitalizeEnum string
 
 const (
-	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
-	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
 	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
 	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
 	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
+	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
+	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
 )
 
 type KbdAutocorrectEnum string
 
 const (
-	KbdAutocorrectEnumOn    KbdAutocorrectEnum = "on"
 	KbdAutocorrectEnumOff   KbdAutocorrectEnum = "off"
+	KbdAutocorrectEnumOn    KbdAutocorrectEnum = "on"
 	KbdAutocorrectEnumEmpty KbdAutocorrectEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type KbdEnterkeyhintEnum string
 
 const (
+	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
+	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
 	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
 	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
 	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
 	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
-	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
-	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
 )
 
 type KbdHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type KbdInputmodeEnum string
 
 const (
+	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
+	KbdInputmodeEnumText    KbdInputmodeEnum = "text"
 	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
 	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
 	KbdInputmodeEnumEmail   KbdInputmodeEnum = "email"
 	KbdInputmodeEnumNone    KbdInputmodeEnum = "none"
 	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
 	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
-	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
-	KbdInputmodeEnumText    KbdInputmodeEnum = "text"
 )
 
 type KbdSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type KbdTranslateEnum string
 
 const (
-	KbdTranslateEnumYes   KbdTranslateEnum = "yes"
 	KbdTranslateEnumNo    KbdTranslateEnum = "no"
+	KbdTranslateEnumYes   KbdTranslateEnum = "yes"
 	KbdTranslateEnumEmpty KbdTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *KbdElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

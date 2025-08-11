@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type SourceElement struct {
 	attributes sourceAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type SourceElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The source element allows authors to specify multiple alternative source sets for img elements or multiple alternative media resources for media elements. It does not represent anything on its own.
-func Source(children ...htemel.Node) *SourceElement {
+func Source() *SourceElement {
 	node := &SourceElement{
-		children:   children,
 		attributes: make(sourceAttrs),
 	}
 
 	return node
 }
 
-func SourceIf(condition bool, children ...htemel.Node) *SourceElement {
+func SourceIf(condition bool) *SourceElement {
 	if condition {
-		return Source(children...)
+		return Source()
 	}
 
 	return &SourceElement{
@@ -39,23 +37,15 @@ func SourceIf(condition bool, children ...htemel.Node) *SourceElement {
 	}
 }
 
-func SourceTernary(condition bool, true htemel.Node, false htemel.Node) *SourceElement {
-	if condition {
-		return Source(true)
-	}
-
-	return Source(false)
-}
-
 type SourceAutocapitalizeEnum string
 
 const (
+	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
 	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
 	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
 	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
 	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
 	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
-	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
 )
 
 type SourceAutocorrectEnum string
@@ -78,9 +68,9 @@ const (
 type SourceDirEnum string
 
 const (
-	SourceDirEnumAuto SourceDirEnum = "auto"
 	SourceDirEnumLtr  SourceDirEnum = "ltr"
 	SourceDirEnumRtl  SourceDirEnum = "rtl"
+	SourceDirEnumAuto SourceDirEnum = "auto"
 )
 
 type SourceDraggableEnum string
@@ -93,13 +83,13 @@ const (
 type SourceEnterkeyhintEnum string
 
 const (
+	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
 	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
 	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
 	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
 	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
 	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
-	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
 )
 
 type SourceHiddenEnum string
@@ -113,14 +103,14 @@ const (
 type SourceInputmodeEnum string
 
 const (
+	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
+	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
+	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
 	SourceInputmodeEnumText    SourceInputmodeEnum = "text"
 	SourceInputmodeEnumUrl     SourceInputmodeEnum = "url"
 	SourceInputmodeEnumDecimal SourceInputmodeEnum = "decimal"
 	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
 	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
-	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
-	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
-	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
 )
 
 type SourceSpellcheckEnum string
@@ -364,16 +354,6 @@ func (e *SourceElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</source>")); err != nil {
 		return err
 	}
 

@@ -22,8 +22,7 @@ type MapElement struct {
 // Spec Description: The map element, in conjunction with an img element and any area element descendants, defines an image map. The element represents its children.
 func Map(children ...htemel.Node) *MapElement {
 	node := &MapElement{
-		children:   children,
-		attributes: make(mapAttrs),
+		children: children, attributes: make(mapAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func MapTernary(condition bool, true htemel.Node, false htemel.Node) *MapElement
 type MapAutocapitalizeEnum string
 
 const (
+	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
+	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 	MapAutocapitalizeEnumCharacters MapAutocapitalizeEnum = "characters"
 	MapAutocapitalizeEnumNone       MapAutocapitalizeEnum = "none"
 	MapAutocapitalizeEnumOff        MapAutocapitalizeEnum = "off"
 	MapAutocapitalizeEnumOn         MapAutocapitalizeEnum = "on"
-	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
-	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 )
 
 type MapAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type MapContenteditableEnum string
 
 const (
-	MapContenteditableEnumTrue          MapContenteditableEnum = "true"
 	MapContenteditableEnumFalse         MapContenteditableEnum = "false"
 	MapContenteditableEnumPlaintextOnly MapContenteditableEnum = "plaintext-only"
+	MapContenteditableEnumTrue          MapContenteditableEnum = "true"
 	MapContenteditableEnumEmpty         MapContenteditableEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type MapEnterkeyhintEnum string
 
 const (
+	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
+	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 	MapEnterkeyhintEnumSend     MapEnterkeyhintEnum = "send"
 	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
 	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
 	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
 	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
-	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
-	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 )
 
 type MapHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type MapInputmodeEnum string
 
 const (
+	MapInputmodeEnumText    MapInputmodeEnum = "text"
+	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
 	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
 	MapInputmodeEnumEmail   MapInputmodeEnum = "email"
 	MapInputmodeEnumNone    MapInputmodeEnum = "none"
 	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
 	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
 	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
-	MapInputmodeEnumText    MapInputmodeEnum = "text"
-	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
 )
 
 type MapSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *MapElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

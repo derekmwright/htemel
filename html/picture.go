@@ -22,8 +22,7 @@ type PictureElement struct {
 // Spec Description: The picture element is a container which provides multiple sources to its contained img element to allow authors to declaratively control or give hints to the user agent about which image resource to use, based on the screen pixel density, viewport size, image format, and other factors. It represents its children.
 func Picture(children ...htemel.Node) *PictureElement {
 	node := &PictureElement{
-		children:   children,
-		attributes: make(pictureAttrs),
+		children: children, attributes: make(pictureAttrs),
 	}
 
 	return node
@@ -50,28 +49,28 @@ func PictureTernary(condition bool, true htemel.Node, false htemel.Node) *Pictur
 type PictureAutocapitalizeEnum string
 
 const (
+	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
+	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
 	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
 	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 	PictureAutocapitalizeEnumSentences  PictureAutocapitalizeEnum = "sentences"
 	PictureAutocapitalizeEnumWords      PictureAutocapitalizeEnum = "words"
-	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
-	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
 )
 
 type PictureAutocorrectEnum string
 
 const (
-	PictureAutocorrectEnumOn    PictureAutocorrectEnum = "on"
 	PictureAutocorrectEnumOff   PictureAutocorrectEnum = "off"
+	PictureAutocorrectEnumOn    PictureAutocorrectEnum = "on"
 	PictureAutocorrectEnumEmpty PictureAutocorrectEnum = ""
 )
 
 type PictureContenteditableEnum string
 
 const (
-	PictureContenteditableEnumTrue          PictureContenteditableEnum = "true"
 	PictureContenteditableEnumFalse         PictureContenteditableEnum = "false"
 	PictureContenteditableEnumPlaintextOnly PictureContenteditableEnum = "plaintext-only"
+	PictureContenteditableEnumTrue          PictureContenteditableEnum = "true"
 	PictureContenteditableEnumEmpty         PictureContenteditableEnum = ""
 )
 
@@ -93,41 +92,41 @@ const (
 type PictureEnterkeyhintEnum string
 
 const (
+	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
+	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
 	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
 	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
 	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
 	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
-	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
-	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
 )
 
 type PictureHiddenEnum string
 
 const (
-	PictureHiddenEnumUntilFound PictureHiddenEnum = "until-found"
 	PictureHiddenEnumHidden     PictureHiddenEnum = "hidden"
+	PictureHiddenEnumUntilFound PictureHiddenEnum = "until-found"
 	PictureHiddenEnumEmpty      PictureHiddenEnum = ""
 )
 
 type PictureInputmodeEnum string
 
 const (
-	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
-	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
-	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
 	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
 	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
 	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
+	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
+	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
+	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 )
 
 type PictureSpellcheckEnum string
 
 const (
-	PictureSpellcheckEnumTrue  PictureSpellcheckEnum = "true"
 	PictureSpellcheckEnumFalse PictureSpellcheckEnum = "false"
+	PictureSpellcheckEnumTrue  PictureSpellcheckEnum = "true"
 	PictureSpellcheckEnumEmpty PictureSpellcheckEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *PictureElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

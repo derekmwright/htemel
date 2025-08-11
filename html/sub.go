@@ -22,8 +22,7 @@ type SubElement struct {
 // Spec Description: The sup element represents a superscript and the sub element represents a subscript.
 func Sub(children ...htemel.Node) *SubElement {
 	node := &SubElement{
-		children:   children,
-		attributes: make(subAttrs),
+		children: children, attributes: make(subAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func SubTernary(condition bool, true htemel.Node, false htemel.Node) *SubElement
 type SubAutocapitalizeEnum string
 
 const (
+	SubAutocapitalizeEnumOn         SubAutocapitalizeEnum = "on"
 	SubAutocapitalizeEnumSentences  SubAutocapitalizeEnum = "sentences"
 	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
 	SubAutocapitalizeEnumCharacters SubAutocapitalizeEnum = "characters"
 	SubAutocapitalizeEnumNone       SubAutocapitalizeEnum = "none"
 	SubAutocapitalizeEnumOff        SubAutocapitalizeEnum = "off"
-	SubAutocapitalizeEnumOn         SubAutocapitalizeEnum = "on"
 )
 
 type SubAutocorrectEnum string
@@ -69,37 +68,37 @@ const (
 type SubContenteditableEnum string
 
 const (
+	SubContenteditableEnumFalse         SubContenteditableEnum = "false"
 	SubContenteditableEnumPlaintextOnly SubContenteditableEnum = "plaintext-only"
 	SubContenteditableEnumTrue          SubContenteditableEnum = "true"
-	SubContenteditableEnumFalse         SubContenteditableEnum = "false"
 	SubContenteditableEnumEmpty         SubContenteditableEnum = ""
 )
 
 type SubDirEnum string
 
 const (
-	SubDirEnumAuto SubDirEnum = "auto"
 	SubDirEnumLtr  SubDirEnum = "ltr"
 	SubDirEnumRtl  SubDirEnum = "rtl"
+	SubDirEnumAuto SubDirEnum = "auto"
 )
 
 type SubDraggableEnum string
 
 const (
-	SubDraggableEnumFalse SubDraggableEnum = "false"
 	SubDraggableEnumTrue  SubDraggableEnum = "true"
+	SubDraggableEnumFalse SubDraggableEnum = "false"
 )
 
 type SubEnterkeyhintEnum string
 
 const (
+	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
+	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
+	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
 	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
 	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
-	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
-	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
-	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
 )
 
 type SubHiddenEnum string
@@ -366,7 +365,6 @@ func (e *SubElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

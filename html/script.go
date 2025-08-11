@@ -22,8 +22,7 @@ type ScriptElement struct {
 // Spec Description: The script element allows authors to include dynamic script, instructions to the user agent, and data blocks in their documents. The element does not represent content for the user.
 func Script(children ...htemel.Node) *ScriptElement {
 	node := &ScriptElement{
-		children:   children,
-		attributes: make(scriptAttrs),
+		children: children, attributes: make(scriptAttrs),
 	}
 
 	return node
@@ -69,18 +68,18 @@ const (
 type ScriptContenteditableEnum string
 
 const (
-	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
 	ScriptContenteditableEnumPlaintextOnly ScriptContenteditableEnum = "plaintext-only"
 	ScriptContenteditableEnumTrue          ScriptContenteditableEnum = "true"
+	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
 	ScriptContenteditableEnumEmpty         ScriptContenteditableEnum = ""
 )
 
 type ScriptDirEnum string
 
 const (
+	ScriptDirEnumRtl  ScriptDirEnum = "rtl"
 	ScriptDirEnumAuto ScriptDirEnum = "auto"
 	ScriptDirEnumLtr  ScriptDirEnum = "ltr"
-	ScriptDirEnumRtl  ScriptDirEnum = "rtl"
 )
 
 type ScriptDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type ScriptEnterkeyhintEnum string
 
 const (
+	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
 	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
 	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 	ScriptEnterkeyhintEnumNext     ScriptEnterkeyhintEnum = "next"
 	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
 	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
 	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
-	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
 )
 
 type ScriptHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type ScriptInputmodeEnum string
 
 const (
+	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
+	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
 	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
 	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
 	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
 	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
-	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
-	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 )
 
 type ScriptSpellcheckEnum string
@@ -134,16 +133,16 @@ const (
 type ScriptTranslateEnum string
 
 const (
-	ScriptTranslateEnumNo    ScriptTranslateEnum = "no"
 	ScriptTranslateEnumYes   ScriptTranslateEnum = "yes"
+	ScriptTranslateEnumNo    ScriptTranslateEnum = "no"
 	ScriptTranslateEnumEmpty ScriptTranslateEnum = ""
 )
 
 type ScriptWritingsuggestionsEnum string
 
 const (
-	ScriptWritingsuggestionsEnumFalse ScriptWritingsuggestionsEnum = "false"
 	ScriptWritingsuggestionsEnumTrue  ScriptWritingsuggestionsEnum = "true"
+	ScriptWritingsuggestionsEnumFalse ScriptWritingsuggestionsEnum = "false"
 	ScriptWritingsuggestionsEnumEmpty ScriptWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *ScriptElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

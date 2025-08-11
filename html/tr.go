@@ -22,8 +22,7 @@ type TrElement struct {
 // Spec Description: The tr element represents a row of cells in a table.
 func Tr(children ...htemel.Node) *TrElement {
 	node := &TrElement{
-		children:   children,
-		attributes: make(trAttrs),
+		children: children, attributes: make(trAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func TrTernary(condition bool, true htemel.Node, false htemel.Node) *TrElement {
 type TrAutocapitalizeEnum string
 
 const (
+	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
+	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
 	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
 	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
 	TrAutocapitalizeEnumOff        TrAutocapitalizeEnum = "off"
 	TrAutocapitalizeEnumOn         TrAutocapitalizeEnum = "on"
-	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
-	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
 )
 
 type TrAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type TrDirEnum string
 
 const (
+	TrDirEnumRtl  TrDirEnum = "rtl"
 	TrDirEnumAuto TrDirEnum = "auto"
 	TrDirEnumLtr  TrDirEnum = "ltr"
-	TrDirEnumRtl  TrDirEnum = "rtl"
 )
 
 type TrDraggableEnum string
@@ -105,22 +104,22 @@ const (
 type TrHiddenEnum string
 
 const (
-	TrHiddenEnumHidden     TrHiddenEnum = "hidden"
 	TrHiddenEnumUntilFound TrHiddenEnum = "until-found"
+	TrHiddenEnumHidden     TrHiddenEnum = "hidden"
 	TrHiddenEnumEmpty      TrHiddenEnum = ""
 )
 
 type TrInputmodeEnum string
 
 const (
+	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
+	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
+	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
 	TrInputmodeEnumText    TrInputmodeEnum = "text"
 	TrInputmodeEnumUrl     TrInputmodeEnum = "url"
 	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
 	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
 	TrInputmodeEnumNone    TrInputmodeEnum = "none"
-	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
-	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
-	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
 )
 
 type TrSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *TrElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

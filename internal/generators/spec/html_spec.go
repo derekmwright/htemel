@@ -3,6 +3,7 @@ package spec
 import (
 	"errors"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -197,6 +198,173 @@ func GlobalAttributes() []Attribute {
 	}
 }
 
+// More statically defined things because parsing this from the whatwg spec is painful.
+// Ordering them as per the way the reference site orders them for quick reference/upkeep.
+
+func HtmlAttr() []Attribute {
+	return make([]Attribute, 0)
+}
+
+func HeadAttr() []Attribute {
+	return make([]Attribute, 0)
+}
+
+func TitleAttr() []Attribute {
+	return make([]Attribute, 0)
+}
+
+func BaseAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "href",
+			Description: "Document base URL",
+		},
+		&AttributeTypeString{
+			Name:        "target",
+			Description: "Default navigable for hyperlink navigation and form submission",
+		},
+	}
+}
+
+func LinkAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "href",
+			Description: "Address of the hyperlink",
+		},
+		&AttributeTypeEnum{
+			Name:        "crossorigin",
+			Description: "How the element handles crossorigin requests",
+			AllowEmpty:  true,
+			Allowed: map[string]struct{}{
+				"anonymous":       {},
+				"use-credentials": {},
+			},
+		},
+		&AttributeTypeSST{
+			Name:        "rel",
+			Description: "Relationship between the document containing the hyperlink and the destination resource",
+		},
+		&AttributeTypeString{
+			Name:        "media",
+			Description: "Applicable media",
+		},
+		&AttributeTypeString{
+			Name:        "integrity",
+			Description: "Integrity metadata used in Subresource Integrity checks [SRI]",
+		},
+		&AttributeTypeString{
+			Name:        "hreflang",
+			Description: "Language of the linked resource",
+		},
+		&AttributeTypeString{
+			Name:        "type",
+			Description: "Hint for the type of the referenced resource",
+		},
+		&AttributeTypeString{
+			Name:        "referrerpolicy",
+			Description: "Referrer policy for fetches initiated by the element",
+		},
+		&AttributeTypeSST{
+			Name:        "sizes",
+			Description: "Sizes of the icons (for rel=\"icon\")",
+		},
+		&AttributeTypeString{
+			Name:        "imagesrcset",
+			Description: "Images to use in different situations, e.g., high-resolution displays, small monitors, etc. (for rel=\"preload\")",
+		},
+		&AttributeTypeString{
+			Name:        "imagesizes",
+			Description: "Image sizes for different page layouts (for rel=\"preload\")",
+		},
+		&AttributeTypeString{
+			Name:        "as",
+			Description: "Potential destination for a preload request (for rel=\"preload\" and rel=\"modulepreload\")",
+		},
+		&AttributeTypeEnum{
+			Name:        "blocking",
+			Description: "Whether the element is potentially render-blocking",
+			Allowed: map[string]struct{}{
+				"render": {},
+			},
+		},
+		&AttributeTypeString{
+			Name:        "color",
+			Description: "Color to use when customizing a site's icon (for rel=\"mask-icon\")",
+		},
+		&AttributeTypeBool{
+			Name:        "disabled",
+			Description: "Whether the link is disabled",
+		},
+		&AttributeTypeEnum{
+			Name:        "fetchpriority",
+			Description: "Sets the priority for fetches initiated by the element",
+			Allowed: map[string]struct{}{
+				"high": {},
+				"low":  {},
+				"auto": {},
+			},
+		},
+	}
+}
+
+func MetaAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Metadata name",
+		},
+		&AttributeTypeEnum{
+			Name:        "http-equiv",
+			Description: "Pragma directive",
+			Allowed: map[string]struct{}{
+				"content-language":        {},
+				"content-type":            {},
+				"default-style":           {},
+				"refresh":                 {},
+				"set-cookie":              {},
+				"x-ua-compatible":         {},
+				"content-security-policy": {},
+			},
+		},
+		&AttributeTypeString{
+			Name:        "content",
+			Description: "Value of the element",
+		},
+		&AttributeTypeString{
+			Name:        "charset",
+			Description: "Character encoding declaration",
+		},
+		&AttributeTypeString{
+			Name:        "media",
+			Description: "Applicable media",
+		},
+	}
+}
+
+func StyleAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "media",
+			Description: "Applicable media",
+		},
+		&AttributeTypeString{
+			Name:        "blocking",
+			Description: "Whether the element is potentially render-blocking",
+		},
+	}
+}
+
+var attrFuncs = map[string]func() []Attribute{
+	"html":  HtmlAttr,
+	"head":  HeadAttr,
+	"title": TitleAttr,
+	"base":  BaseAttr,
+	"link":  LinkAttr,
+	"meta":  MetaAttr,
+	"style": StyleAttr,
+}
+
 func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
 	p := NewSpecParser(HTML)
 
@@ -261,6 +429,32 @@ func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
 					p.Reset()
 				}
 			}
+		}
+	}
+
+	// Void Elements
+	isVoid := []string{
+		"area",
+		"base",
+		"br",
+		"col",
+		"embed",
+		"hr",
+		"img",
+		"input",
+		"link",
+		"meta",
+		"source",
+		"track",
+		"wbr",
+	}
+
+	for _, e := range p.Spec.Elements {
+		if fn, ok := attrFuncs[e.Tag]; ok {
+			e.Attributes = append(e.Attributes, fn()...)
+		}
+		if slices.Contains(isVoid, e.Tag) {
+			e.Void = true
 		}
 	}
 

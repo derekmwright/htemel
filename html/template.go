@@ -22,8 +22,7 @@ type TemplateElement struct {
 // Spec Description: The template element is used to declare fragments of HTML that can be cloned and inserted in the document by script.
 func Template(children ...htemel.Node) *TemplateElement {
 	node := &TemplateElement{
-		children:   children,
-		attributes: make(templateAttrs),
+		children: children, attributes: make(templateAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func TemplateTernary(condition bool, true htemel.Node, false htemel.Node) *Templ
 type TemplateAutocapitalizeEnum string
 
 const (
-	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
 	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
 	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
+	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 )
 
 type TemplateAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type TemplateContenteditableEnum string
 
 const (
+	TemplateContenteditableEnumFalse         TemplateContenteditableEnum = "false"
 	TemplateContenteditableEnumPlaintextOnly TemplateContenteditableEnum = "plaintext-only"
 	TemplateContenteditableEnumTrue          TemplateContenteditableEnum = "true"
-	TemplateContenteditableEnumFalse         TemplateContenteditableEnum = "false"
 	TemplateContenteditableEnumEmpty         TemplateContenteditableEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type TemplateEnterkeyhintEnum string
 
 const (
+	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
+	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
+	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 	TemplateEnterkeyhintEnumEnter    TemplateEnterkeyhintEnum = "enter"
 	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
 	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
 	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
-	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
-	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
-	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 )
 
 type TemplateHiddenEnum string
@@ -113,37 +112,37 @@ const (
 type TemplateInputmodeEnum string
 
 const (
-	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
-	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
-	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
-	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
 	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
 	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
 	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
 	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
+	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
+	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
+	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
+	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
 )
 
 type TemplateSpellcheckEnum string
 
 const (
-	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
 	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
+	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
 	TemplateSpellcheckEnumEmpty TemplateSpellcheckEnum = ""
 )
 
 type TemplateTranslateEnum string
 
 const (
-	TemplateTranslateEnumNo    TemplateTranslateEnum = "no"
 	TemplateTranslateEnumYes   TemplateTranslateEnum = "yes"
+	TemplateTranslateEnumNo    TemplateTranslateEnum = "no"
 	TemplateTranslateEnumEmpty TemplateTranslateEnum = ""
 )
 
 type TemplateWritingsuggestionsEnum string
 
 const (
-	TemplateWritingsuggestionsEnumTrue  TemplateWritingsuggestionsEnum = "true"
 	TemplateWritingsuggestionsEnumFalse TemplateWritingsuggestionsEnum = "false"
+	TemplateWritingsuggestionsEnumTrue  TemplateWritingsuggestionsEnum = "true"
 	TemplateWritingsuggestionsEnumEmpty TemplateWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *TemplateElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type TimeElement struct {
 // Spec Description: The time element represents its contents, along with a machine-readable form of those contents in the datetime attribute. The kind of content is limited to various kinds of dates, times, time-zone offsets, and durations, as described below.
 func Time(children ...htemel.Node) *TimeElement {
 	node := &TimeElement{
-		children:   children,
-		attributes: make(timeAttrs),
+		children: children, attributes: make(timeAttrs),
 	}
 
 	return node
@@ -78,9 +77,9 @@ const (
 type TimeDirEnum string
 
 const (
+	TimeDirEnumAuto TimeDirEnum = "auto"
 	TimeDirEnumLtr  TimeDirEnum = "ltr"
 	TimeDirEnumRtl  TimeDirEnum = "rtl"
-	TimeDirEnumAuto TimeDirEnum = "auto"
 )
 
 type TimeDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type TimeEnterkeyhintEnum string
 
 const (
+	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
+	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
+	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
 	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 	TimeEnterkeyhintEnumEnter    TimeEnterkeyhintEnum = "enter"
 	TimeEnterkeyhintEnumGo       TimeEnterkeyhintEnum = "go"
 	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
-	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
-	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
-	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
 )
 
 type TimeHiddenEnum string
@@ -142,8 +141,8 @@ const (
 type TimeWritingsuggestionsEnum string
 
 const (
-	TimeWritingsuggestionsEnumFalse TimeWritingsuggestionsEnum = "false"
 	TimeWritingsuggestionsEnumTrue  TimeWritingsuggestionsEnum = "true"
+	TimeWritingsuggestionsEnumFalse TimeWritingsuggestionsEnum = "false"
 	TimeWritingsuggestionsEnumEmpty TimeWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *TimeElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type QElement struct {
 // Spec Description: The q element represents some phrasing content quoted from another source.
 func Q(children ...htemel.Node) *QElement {
 	node := &QElement{
-		children:   children,
-		attributes: make(qAttrs),
+		children: children, attributes: make(qAttrs),
 	}
 
 	return node
@@ -50,19 +49,19 @@ func QTernary(condition bool, true htemel.Node, false htemel.Node) *QElement {
 type QAutocapitalizeEnum string
 
 const (
+	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 	QAutocapitalizeEnumOff        QAutocapitalizeEnum = "off"
 	QAutocapitalizeEnumOn         QAutocapitalizeEnum = "on"
 	QAutocapitalizeEnumSentences  QAutocapitalizeEnum = "sentences"
 	QAutocapitalizeEnumWords      QAutocapitalizeEnum = "words"
 	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
-	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 )
 
 type QAutocorrectEnum string
 
 const (
-	QAutocorrectEnumOn    QAutocorrectEnum = "on"
 	QAutocorrectEnumOff   QAutocorrectEnum = "off"
+	QAutocorrectEnumOn    QAutocorrectEnum = "on"
 	QAutocorrectEnumEmpty QAutocorrectEnum = ""
 )
 
@@ -86,20 +85,20 @@ const (
 type QDraggableEnum string
 
 const (
-	QDraggableEnumTrue  QDraggableEnum = "true"
 	QDraggableEnumFalse QDraggableEnum = "false"
+	QDraggableEnumTrue  QDraggableEnum = "true"
 )
 
 type QEnterkeyhintEnum string
 
 const (
-	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
-	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
-	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
 	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
 	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
+	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
+	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
+	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 )
 
 type QHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type QInputmodeEnum string
 
 const (
-	QInputmodeEnumUrl     QInputmodeEnum = "url"
-	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
 	QInputmodeEnumEmail   QInputmodeEnum = "email"
 	QInputmodeEnumNone    QInputmodeEnum = "none"
 	QInputmodeEnumNumeric QInputmodeEnum = "numeric"
 	QInputmodeEnumSearch  QInputmodeEnum = "search"
 	QInputmodeEnumTel     QInputmodeEnum = "tel"
 	QInputmodeEnumText    QInputmodeEnum = "text"
+	QInputmodeEnumUrl     QInputmodeEnum = "url"
+	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
 )
 
 type QSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *QElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

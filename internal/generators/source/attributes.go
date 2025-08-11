@@ -23,7 +23,7 @@ type ` + e.Tag + `Attrs map[string]any
 			switch a := attr.(type) {
 			case *spec.AttributeTypeString:
 				buf.WriteString(`
-func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(s string) *` + titleCase(e.Tag) + `Element {
+func (e *` + titleCase(e.Tag) + `Element) ` + PascalCase(a.Name) + `(s string) *` + titleCase(e.Tag) + `Element {
 	e.attributes["` + a.Name + `"] = s
 	
 	return e
@@ -31,7 +31,7 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(s string) *`
 `)
 			case *spec.AttributeTypeChar:
 				buf.WriteString(`
-func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(r rune) *` + titleCase(e.Tag) + `Element {
+func (e *` + titleCase(e.Tag) + `Element) ` + PascalCase(a.Name) + `(r rune) *` + titleCase(e.Tag) + `Element {
 	e.attributes["` + a.Name + `"] = r
 	
 	return e
@@ -39,7 +39,7 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(r rune) *` +
 `)
 			case *spec.AttributeTypeNumber:
 				buf.WriteString(`
-func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(i int) *` + titleCase(e.Tag) + `Element {
+func (e *` + titleCase(e.Tag) + `Element) ` + PascalCase(a.Name) + `(i int) *` + titleCase(e.Tag) + `Element {
 	e.attributes["` + a.Name + `"] = i
 	
 	return e
@@ -47,14 +47,14 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(i int) *` + 
 `)
 			case *spec.AttributeTypeBool:
 				buf.WriteString(`
-func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(b bool) *` + titleCase(e.Tag) + `Element {
+func (e *` + titleCase(e.Tag) + `Element) ` + PascalCase(a.Name) + `(b bool) *` + titleCase(e.Tag) + `Element {
 	e.attributes["` + a.Name + `"] = b
 	
 	return e
 }
 `)
 			case *spec.AttributeTypeEnum:
-				typeName := titleCase(e.Tag) + titleCase(a.Name) + "Enum"
+				typeName := titleCase(e.Tag) + PascalCase(a.Name) + "Enum"
 
 				addTypes.WriteString("\ntype " + typeName + " string\n")
 				addTypes.WriteString("\nconst (\n")
@@ -68,7 +68,7 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(b bool) *` +
 				addTypes.WriteString(")\n")
 
 				buf.WriteString(`
-func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(a ` + typeName + `) *` + titleCase(e.Tag) + `Element {
+func (e *` + titleCase(e.Tag) + `Element) ` + PascalCase(a.Name) + `(a ` + typeName + `) *` + titleCase(e.Tag) + `Element {
 	e.attributes["` + a.Name + `"] = a
 	
 	return e

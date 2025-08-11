@@ -22,8 +22,7 @@ type TheadElement struct {
 // Spec Description: The thead element represents the block of rows that consist of the column labels (headers) and any ancillary non-header cells for the parent table element, if the thead element has a parent and it is a table.
 func Thead(children ...htemel.Node) *TheadElement {
 	node := &TheadElement{
-		children:   children,
-		attributes: make(theadAttrs),
+		children: children, attributes: make(theadAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadEle
 type TheadAutocapitalizeEnum string
 
 const (
+	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
+	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
 	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
 	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
-	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
-	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 )
 
 type TheadAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type TheadDirEnum string
 
 const (
-	TheadDirEnumRtl  TheadDirEnum = "rtl"
 	TheadDirEnumAuto TheadDirEnum = "auto"
 	TheadDirEnumLtr  TheadDirEnum = "ltr"
+	TheadDirEnumRtl  TheadDirEnum = "rtl"
 )
 
 type TheadDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type TheadEnterkeyhintEnum string
 
 const (
-	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
-	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
-	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
 	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
 	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
 	TheadEnterkeyhintEnumGo       TheadEnterkeyhintEnum = "go"
+	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
+	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
+	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
 )
 
 type TheadHiddenEnum string
@@ -113,7 +112,6 @@ const (
 type TheadInputmodeEnum string
 
 const (
-	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
 	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
 	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
 	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
@@ -121,13 +119,14 @@ const (
 	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
 	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
 	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
+	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
 )
 
 type TheadSpellcheckEnum string
 
 const (
-	TheadSpellcheckEnumTrue  TheadSpellcheckEnum = "true"
 	TheadSpellcheckEnumFalse TheadSpellcheckEnum = "false"
+	TheadSpellcheckEnumTrue  TheadSpellcheckEnum = "true"
 	TheadSpellcheckEnumEmpty TheadSpellcheckEnum = ""
 )
 
@@ -142,8 +141,8 @@ const (
 type TheadWritingsuggestionsEnum string
 
 const (
-	TheadWritingsuggestionsEnumTrue  TheadWritingsuggestionsEnum = "true"
 	TheadWritingsuggestionsEnumFalse TheadWritingsuggestionsEnum = "false"
+	TheadWritingsuggestionsEnumTrue  TheadWritingsuggestionsEnum = "true"
 	TheadWritingsuggestionsEnumEmpty TheadWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *TheadElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

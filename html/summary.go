@@ -22,8 +22,7 @@ type SummaryElement struct {
 // Spec Description: The summary element represents a summary, caption, or legend for the rest of the contents of the summary element's parent details element, if any.
 func Summary(children ...htemel.Node) *SummaryElement {
 	node := &SummaryElement{
-		children:   children,
-		attributes: make(summaryAttrs),
+		children: children, attributes: make(summaryAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *Summar
 type SummaryAutocapitalizeEnum string
 
 const (
+	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
 	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
 	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
-	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 )
 
 type SummaryAutocorrectEnum string
@@ -69,25 +68,25 @@ const (
 type SummaryContenteditableEnum string
 
 const (
-	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
 	SummaryContenteditableEnumFalse         SummaryContenteditableEnum = "false"
 	SummaryContenteditableEnumPlaintextOnly SummaryContenteditableEnum = "plaintext-only"
+	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
 	SummaryContenteditableEnumEmpty         SummaryContenteditableEnum = ""
 )
 
 type SummaryDirEnum string
 
 const (
-	SummaryDirEnumAuto SummaryDirEnum = "auto"
 	SummaryDirEnumLtr  SummaryDirEnum = "ltr"
 	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
+	SummaryDirEnumAuto SummaryDirEnum = "auto"
 )
 
 type SummaryDraggableEnum string
 
 const (
-	SummaryDraggableEnumFalse SummaryDraggableEnum = "false"
 	SummaryDraggableEnumTrue  SummaryDraggableEnum = "true"
+	SummaryDraggableEnumFalse SummaryDraggableEnum = "false"
 )
 
 type SummaryEnterkeyhintEnum string
@@ -113,6 +112,7 @@ const (
 type SummaryInputmodeEnum string
 
 const (
+	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
 	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
 	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
@@ -120,7 +120,6 @@ const (
 	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
 	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
 	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
-	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
 )
 
 type SummarySpellcheckEnum string
@@ -142,8 +141,8 @@ const (
 type SummaryWritingsuggestionsEnum string
 
 const (
-	SummaryWritingsuggestionsEnumFalse SummaryWritingsuggestionsEnum = "false"
 	SummaryWritingsuggestionsEnumTrue  SummaryWritingsuggestionsEnum = "true"
+	SummaryWritingsuggestionsEnumFalse SummaryWritingsuggestionsEnum = "false"
 	SummaryWritingsuggestionsEnumEmpty SummaryWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *SummaryElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

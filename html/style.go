@@ -22,8 +22,7 @@ type StyleElement struct {
 // Spec Description: The style element allows authors to embed CSS style sheets in their documents. The style element is one of several inputs to the styling processing model. The element does not represent content for the user.
 func Style(children ...htemel.Node) *StyleElement {
 	node := &StyleElement{
-		children:   children,
-		attributes: make(styleAttrs),
+		children: children, attributes: make(styleAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func StyleTernary(condition bool, true htemel.Node, false htemel.Node) *StyleEle
 type StyleAutocapitalizeEnum string
 
 const (
+	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
 	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
 	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
 	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
 	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
 	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
-	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
 )
 
 type StyleAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type StyleContenteditableEnum string
 
 const (
-	StyleContenteditableEnumTrue          StyleContenteditableEnum = "true"
 	StyleContenteditableEnumFalse         StyleContenteditableEnum = "false"
 	StyleContenteditableEnumPlaintextOnly StyleContenteditableEnum = "plaintext-only"
+	StyleContenteditableEnumTrue          StyleContenteditableEnum = "true"
 	StyleContenteditableEnumEmpty         StyleContenteditableEnum = ""
 )
 
@@ -113,21 +112,21 @@ const (
 type StyleInputmodeEnum string
 
 const (
-	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
-	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
 	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
 	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
 	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
 	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
+	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
+	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 )
 
 type StyleSpellcheckEnum string
 
 const (
-	StyleSpellcheckEnumFalse StyleSpellcheckEnum = "false"
 	StyleSpellcheckEnumTrue  StyleSpellcheckEnum = "true"
+	StyleSpellcheckEnumFalse StyleSpellcheckEnum = "false"
 	StyleSpellcheckEnumEmpty StyleSpellcheckEnum = ""
 )
 
@@ -148,6 +147,18 @@ const (
 )
 
 type styleAttrs map[string]any
+
+func (e *StyleElement) Media(s string) *StyleElement {
+	e.attributes["media"] = s
+
+	return e
+}
+
+func (e *StyleElement) Blocking(s string) *StyleElement {
+	e.attributes["blocking"] = s
+
+	return e
+}
 
 func (e *StyleElement) Autocapitalize(a StyleAutocapitalizeEnum) *StyleElement {
 	e.attributes["autocapitalize"] = a
@@ -366,7 +377,6 @@ func (e *StyleElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

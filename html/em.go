@@ -22,8 +22,7 @@ type EmElement struct {
 // Spec Description: The em element represents stress emphasis of its contents.
 func Em(children ...htemel.Node) *EmElement {
 	node := &EmElement{
-		children:   children,
-		attributes: make(emAttrs),
+		children: children, attributes: make(emAttrs),
 	}
 
 	return node
@@ -50,37 +49,37 @@ func EmTernary(condition bool, true htemel.Node, false htemel.Node) *EmElement {
 type EmAutocapitalizeEnum string
 
 const (
+	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
 	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
 	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
 	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
-	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 )
 
 type EmAutocorrectEnum string
 
 const (
-	EmAutocorrectEnumOn    EmAutocorrectEnum = "on"
 	EmAutocorrectEnumOff   EmAutocorrectEnum = "off"
+	EmAutocorrectEnumOn    EmAutocorrectEnum = "on"
 	EmAutocorrectEnumEmpty EmAutocorrectEnum = ""
 )
 
 type EmContenteditableEnum string
 
 const (
-	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 	EmContenteditableEnumPlaintextOnly EmContenteditableEnum = "plaintext-only"
 	EmContenteditableEnumTrue          EmContenteditableEnum = "true"
+	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 	EmContenteditableEnumEmpty         EmContenteditableEnum = ""
 )
 
 type EmDirEnum string
 
 const (
+	EmDirEnumAuto EmDirEnum = "auto"
 	EmDirEnumLtr  EmDirEnum = "ltr"
 	EmDirEnumRtl  EmDirEnum = "rtl"
-	EmDirEnumAuto EmDirEnum = "auto"
 )
 
 type EmDraggableEnum string
@@ -113,14 +112,14 @@ const (
 type EmInputmodeEnum string
 
 const (
-	EmInputmodeEnumNone    EmInputmodeEnum = "none"
-	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
-	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
-	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
 	EmInputmodeEnumText    EmInputmodeEnum = "text"
 	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
 	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
 	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
+	EmInputmodeEnumNone    EmInputmodeEnum = "none"
+	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
+	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
+	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
 )
 
 type EmSpellcheckEnum string
@@ -142,8 +141,8 @@ const (
 type EmWritingsuggestionsEnum string
 
 const (
-	EmWritingsuggestionsEnumTrue  EmWritingsuggestionsEnum = "true"
 	EmWritingsuggestionsEnumFalse EmWritingsuggestionsEnum = "false"
+	EmWritingsuggestionsEnumTrue  EmWritingsuggestionsEnum = "true"
 	EmWritingsuggestionsEnumEmpty EmWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *EmElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

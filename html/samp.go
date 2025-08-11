@@ -22,8 +22,7 @@ type SampElement struct {
 // Spec Description: The samp element represents sample or quoted output from another program or computing system.
 func Samp(children ...htemel.Node) *SampElement {
 	node := &SampElement{
-		children:   children,
-		attributes: make(sampAttrs),
+		children: children, attributes: make(sampAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func SampTernary(condition bool, true htemel.Node, false htemel.Node) *SampEleme
 type SampAutocapitalizeEnum string
 
 const (
-	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
-	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
 	SampAutocapitalizeEnumOff        SampAutocapitalizeEnum = "off"
 	SampAutocapitalizeEnumOn         SampAutocapitalizeEnum = "on"
 	SampAutocapitalizeEnumSentences  SampAutocapitalizeEnum = "sentences"
 	SampAutocapitalizeEnumWords      SampAutocapitalizeEnum = "words"
+	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
+	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
 )
 
 type SampAutocorrectEnum string
@@ -69,18 +68,18 @@ const (
 type SampContenteditableEnum string
 
 const (
+	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
 	SampContenteditableEnumPlaintextOnly SampContenteditableEnum = "plaintext-only"
 	SampContenteditableEnumTrue          SampContenteditableEnum = "true"
-	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
 	SampContenteditableEnumEmpty         SampContenteditableEnum = ""
 )
 
 type SampDirEnum string
 
 const (
-	SampDirEnumRtl  SampDirEnum = "rtl"
 	SampDirEnumAuto SampDirEnum = "auto"
 	SampDirEnumLtr  SampDirEnum = "ltr"
+	SampDirEnumRtl  SampDirEnum = "rtl"
 )
 
 type SampDraggableEnum string
@@ -113,14 +112,14 @@ const (
 type SampInputmodeEnum string
 
 const (
+	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
+	SampInputmodeEnumNone    SampInputmodeEnum = "none"
 	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
 	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
 	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
 	SampInputmodeEnumText    SampInputmodeEnum = "text"
 	SampInputmodeEnumUrl     SampInputmodeEnum = "url"
 	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
-	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
-	SampInputmodeEnumNone    SampInputmodeEnum = "none"
 )
 
 type SampSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *SampElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

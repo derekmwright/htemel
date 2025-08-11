@@ -22,8 +22,7 @@ type ThElement struct {
 // Spec Description: The th element represents a header cell in a table.
 func Th(children ...htemel.Node) *ThElement {
 	node := &ThElement{
-		children:   children,
-		attributes: make(thAttrs),
+		children: children, attributes: make(thAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 type ThAutocapitalizeEnum string
 
 const (
-	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
-	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
-	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
 	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
 	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
 	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
+	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
+	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
+	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
 )
 
 type ThAutocorrectEnum string
@@ -69,18 +68,18 @@ const (
 type ThContenteditableEnum string
 
 const (
+	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumPlaintextOnly ThContenteditableEnum = "plaintext-only"
 	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
-	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumEmpty         ThContenteditableEnum = ""
 )
 
 type ThDirEnum string
 
 const (
+	ThDirEnumRtl  ThDirEnum = "rtl"
 	ThDirEnumAuto ThDirEnum = "auto"
 	ThDirEnumLtr  ThDirEnum = "ltr"
-	ThDirEnumRtl  ThDirEnum = "rtl"
 )
 
 type ThDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type ThEnterkeyhintEnum string
 
 const (
+	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
+	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
+	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
 	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
 	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
 	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
-	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
-	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
-	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
 )
 
 type ThHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type ThInputmodeEnum string
 
 const (
+	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
+	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
 	ThInputmodeEnumText    ThInputmodeEnum = "text"
 	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
 	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
 	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
 	ThInputmodeEnumNone    ThInputmodeEnum = "none"
-	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
-	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 )
 
 type ThSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *ThElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

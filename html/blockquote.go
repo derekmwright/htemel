@@ -22,8 +22,7 @@ type BlockquoteElement struct {
 // Spec Description: The blockquote element represents a section that is quoted from another source.
 func Blockquote(children ...htemel.Node) *BlockquoteElement {
 	node := &BlockquoteElement{
-		children:   children,
-		attributes: make(blockquoteAttrs),
+		children: children, attributes: make(blockquoteAttrs),
 	}
 
 	return node
@@ -50,37 +49,37 @@ func BlockquoteTernary(condition bool, true htemel.Node, false htemel.Node) *Blo
 type BlockquoteAutocapitalizeEnum string
 
 const (
+	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
+	BlockquoteAutocapitalizeEnumNone       BlockquoteAutocapitalizeEnum = "none"
 	BlockquoteAutocapitalizeEnumOff        BlockquoteAutocapitalizeEnum = "off"
 	BlockquoteAutocapitalizeEnumOn         BlockquoteAutocapitalizeEnum = "on"
 	BlockquoteAutocapitalizeEnumSentences  BlockquoteAutocapitalizeEnum = "sentences"
 	BlockquoteAutocapitalizeEnumWords      BlockquoteAutocapitalizeEnum = "words"
-	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
-	BlockquoteAutocapitalizeEnumNone       BlockquoteAutocapitalizeEnum = "none"
 )
 
 type BlockquoteAutocorrectEnum string
 
 const (
-	BlockquoteAutocorrectEnumOff   BlockquoteAutocorrectEnum = "off"
 	BlockquoteAutocorrectEnumOn    BlockquoteAutocorrectEnum = "on"
+	BlockquoteAutocorrectEnumOff   BlockquoteAutocorrectEnum = "off"
 	BlockquoteAutocorrectEnumEmpty BlockquoteAutocorrectEnum = ""
 )
 
 type BlockquoteContenteditableEnum string
 
 const (
-	BlockquoteContenteditableEnumFalse         BlockquoteContenteditableEnum = "false"
 	BlockquoteContenteditableEnumPlaintextOnly BlockquoteContenteditableEnum = "plaintext-only"
 	BlockquoteContenteditableEnumTrue          BlockquoteContenteditableEnum = "true"
+	BlockquoteContenteditableEnumFalse         BlockquoteContenteditableEnum = "false"
 	BlockquoteContenteditableEnumEmpty         BlockquoteContenteditableEnum = ""
 )
 
 type BlockquoteDirEnum string
 
 const (
+	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 	BlockquoteDirEnumLtr  BlockquoteDirEnum = "ltr"
 	BlockquoteDirEnumRtl  BlockquoteDirEnum = "rtl"
-	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 )
 
 type BlockquoteDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type BlockquoteEnterkeyhintEnum string
 
 const (
+	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
+	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
 	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 	BlockquoteEnterkeyhintEnumNext     BlockquoteEnterkeyhintEnum = "next"
 	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
 	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
-	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
-	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
 )
 
 type BlockquoteHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type BlockquoteInputmodeEnum string
 
 const (
+	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
+	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
+	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
 	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
 	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
 	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
 	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
-	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
-	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
-	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 )
 
 type BlockquoteSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type BlockquoteTranslateEnum string
 
 const (
-	BlockquoteTranslateEnumNo    BlockquoteTranslateEnum = "no"
 	BlockquoteTranslateEnumYes   BlockquoteTranslateEnum = "yes"
+	BlockquoteTranslateEnumNo    BlockquoteTranslateEnum = "no"
 	BlockquoteTranslateEnumEmpty BlockquoteTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *BlockquoteElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

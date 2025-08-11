@@ -22,8 +22,7 @@ type RtElement struct {
 // Spec Description: The rt element marks the ruby text component of a ruby annotation. When it is the child of a ruby element, it doesn't represent anything itself, but the ruby element uses it as part of determining what it represents.
 func Rt(children ...htemel.Node) *RtElement {
 	node := &RtElement{
-		children:   children,
-		attributes: make(rtAttrs),
+		children: children, attributes: make(rtAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func RtTernary(condition bool, true htemel.Node, false htemel.Node) *RtElement {
 type RtAutocapitalizeEnum string
 
 const (
+	RtAutocapitalizeEnumOn         RtAutocapitalizeEnum = "on"
+	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
 	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
 	RtAutocapitalizeEnumCharacters RtAutocapitalizeEnum = "characters"
 	RtAutocapitalizeEnumNone       RtAutocapitalizeEnum = "none"
 	RtAutocapitalizeEnumOff        RtAutocapitalizeEnum = "off"
-	RtAutocapitalizeEnumOn         RtAutocapitalizeEnum = "on"
-	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
 )
 
 type RtAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type RtContenteditableEnum string
 
 const (
+	RtContenteditableEnumFalse         RtContenteditableEnum = "false"
 	RtContenteditableEnumPlaintextOnly RtContenteditableEnum = "plaintext-only"
 	RtContenteditableEnumTrue          RtContenteditableEnum = "true"
-	RtContenteditableEnumFalse         RtContenteditableEnum = "false"
 	RtContenteditableEnumEmpty         RtContenteditableEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type RtEnterkeyhintEnum string
 
 const (
-	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
 	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
 	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
 	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
 	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
 	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
 	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
+	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
 )
 
 type RtHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type RtInputmodeEnum string
 
 const (
-	RtInputmodeEnumNone    RtInputmodeEnum = "none"
-	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
-	RtInputmodeEnumSearch  RtInputmodeEnum = "search"
 	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
 	RtInputmodeEnumText    RtInputmodeEnum = "text"
 	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
 	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
 	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
+	RtInputmodeEnumNone    RtInputmodeEnum = "none"
+	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
+	RtInputmodeEnumSearch  RtInputmodeEnum = "search"
 )
 
 type RtSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *RtElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type OutputElement struct {
 // Spec Description: The output element represents the result of a calculation performed by the application, or the result of a user action.
 func Output(children ...htemel.Node) *OutputElement {
 	node := &OutputElement{
-		children:   children,
-		attributes: make(outputAttrs),
+		children: children, attributes: make(outputAttrs),
 	}
 
 	return node
@@ -50,28 +49,28 @@ func OutputTernary(condition bool, true htemel.Node, false htemel.Node) *OutputE
 type OutputAutocapitalizeEnum string
 
 const (
-	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
-	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
 	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
 	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
 	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
+	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
+	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 )
 
 type OutputAutocorrectEnum string
 
 const (
-	OutputAutocorrectEnumOn    OutputAutocorrectEnum = "on"
 	OutputAutocorrectEnumOff   OutputAutocorrectEnum = "off"
+	OutputAutocorrectEnumOn    OutputAutocorrectEnum = "on"
 	OutputAutocorrectEnumEmpty OutputAutocorrectEnum = ""
 )
 
 type OutputContenteditableEnum string
 
 const (
+	OutputContenteditableEnumFalse         OutputContenteditableEnum = "false"
 	OutputContenteditableEnumPlaintextOnly OutputContenteditableEnum = "plaintext-only"
 	OutputContenteditableEnumTrue          OutputContenteditableEnum = "true"
-	OutputContenteditableEnumFalse         OutputContenteditableEnum = "false"
 	OutputContenteditableEnumEmpty         OutputContenteditableEnum = ""
 )
 
@@ -113,14 +112,14 @@ const (
 type OutputInputmodeEnum string
 
 const (
-	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
-	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
-	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
-	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
 	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
 	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
 	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
+	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
+	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
+	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
+	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
 )
 
 type OutputSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type OutputTranslateEnum string
 
 const (
-	OutputTranslateEnumYes   OutputTranslateEnum = "yes"
 	OutputTranslateEnumNo    OutputTranslateEnum = "no"
+	OutputTranslateEnumYes   OutputTranslateEnum = "yes"
 	OutputTranslateEnumEmpty OutputTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *OutputElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

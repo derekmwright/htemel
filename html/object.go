@@ -22,8 +22,7 @@ type ObjectElement struct {
 // Spec Description: The object element can represent an external resource, which, depending on the type of the resource, will either be treated as an image or as a child navigable.
 func Object(children ...htemel.Node) *ObjectElement {
 	node := &ObjectElement{
-		children:   children,
-		attributes: make(objectAttrs),
+		children: children, attributes: make(objectAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func ObjectTernary(condition bool, true htemel.Node, false htemel.Node) *ObjectE
 type ObjectAutocapitalizeEnum string
 
 const (
-	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
 	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
 	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
 	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
 	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
+	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
 )
 
 type ObjectAutocorrectEnum string
@@ -93,13 +92,13 @@ const (
 type ObjectEnterkeyhintEnum string
 
 const (
-	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
-	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
-	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 	ObjectEnterkeyhintEnumNext     ObjectEnterkeyhintEnum = "next"
 	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
 	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
 	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
+	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
+	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
+	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 )
 
 type ObjectHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type ObjectInputmodeEnum string
 
 const (
-	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
-	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
-	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
 	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
 	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
 	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
 	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
 	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
+	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
+	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
+	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
 )
 
 type ObjectSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *ObjectElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

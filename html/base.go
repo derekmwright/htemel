@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type BaseElement struct {
 	attributes baseAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type BaseElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The base element allows authors to specify the document base URL for the purposes of parsing URLs, and the name of the default navigable for the purposes of following hyperlinks. The element does not represent any content beyond this information.
-func Base(children ...htemel.Node) *BaseElement {
+func Base() *BaseElement {
 	node := &BaseElement{
-		children:   children,
 		attributes: make(baseAttrs),
 	}
 
 	return node
 }
 
-func BaseIf(condition bool, children ...htemel.Node) *BaseElement {
+func BaseIf(condition bool) *BaseElement {
 	if condition {
-		return Base(children...)
+		return Base()
 	}
 
 	return &BaseElement{
@@ -39,23 +37,15 @@ func BaseIf(condition bool, children ...htemel.Node) *BaseElement {
 	}
 }
 
-func BaseTernary(condition bool, true htemel.Node, false htemel.Node) *BaseElement {
-	if condition {
-		return Base(true)
-	}
-
-	return Base(false)
-}
-
 type BaseAutocapitalizeEnum string
 
 const (
-	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
-	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
-	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
 	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
 	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
 	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
+	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
+	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
+	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
 )
 
 type BaseAutocorrectEnum string
@@ -69,18 +59,18 @@ const (
 type BaseContenteditableEnum string
 
 const (
+	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
 	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
 	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
-	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
 	BaseContenteditableEnumEmpty         BaseContenteditableEnum = ""
 )
 
 type BaseDirEnum string
 
 const (
-	BaseDirEnumRtl  BaseDirEnum = "rtl"
 	BaseDirEnumAuto BaseDirEnum = "auto"
 	BaseDirEnumLtr  BaseDirEnum = "ltr"
+	BaseDirEnumRtl  BaseDirEnum = "rtl"
 )
 
 type BaseDraggableEnum string
@@ -93,13 +83,13 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
+	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
+	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
+	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
 	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
-	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
-	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
-	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 )
 
 type BaseHiddenEnum string
@@ -113,14 +103,14 @@ const (
 type BaseInputmodeEnum string
 
 const (
+	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
+	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
+	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
 	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
 	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
 	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
 	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
 	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
-	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
-	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
-	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
 )
 
 type BaseSpellcheckEnum string
@@ -142,12 +132,24 @@ const (
 type BaseWritingsuggestionsEnum string
 
 const (
-	BaseWritingsuggestionsEnumFalse BaseWritingsuggestionsEnum = "false"
 	BaseWritingsuggestionsEnumTrue  BaseWritingsuggestionsEnum = "true"
+	BaseWritingsuggestionsEnumFalse BaseWritingsuggestionsEnum = "false"
 	BaseWritingsuggestionsEnumEmpty BaseWritingsuggestionsEnum = ""
 )
 
 type baseAttrs map[string]any
+
+func (e *BaseElement) Href(s string) *BaseElement {
+	e.attributes["href"] = s
+
+	return e
+}
+
+func (e *BaseElement) Target(s string) *BaseElement {
+	e.attributes["target"] = s
+
+	return e
+}
 
 func (e *BaseElement) Autocapitalize(a BaseAutocapitalizeEnum) *BaseElement {
 	e.attributes["autocapitalize"] = a
@@ -364,16 +366,6 @@ func (e *BaseElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</base>")); err != nil {
 		return err
 	}
 

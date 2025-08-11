@@ -22,8 +22,7 @@ type SlotElement struct {
 // Spec Description: The slot element defines a slot. It is typically used in a shadow tree. A slot element represents its assigned nodes, if any, and its contents otherwise.
 func Slot(children ...htemel.Node) *SlotElement {
 	node := &SlotElement{
-		children:   children,
-		attributes: make(slotAttrs),
+		children: children, attributes: make(slotAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func SlotTernary(condition bool, true htemel.Node, false htemel.Node) *SlotEleme
 type SlotAutocapitalizeEnum string
 
 const (
+	SlotAutocapitalizeEnumNone       SlotAutocapitalizeEnum = "none"
 	SlotAutocapitalizeEnumOff        SlotAutocapitalizeEnum = "off"
 	SlotAutocapitalizeEnumOn         SlotAutocapitalizeEnum = "on"
 	SlotAutocapitalizeEnumSentences  SlotAutocapitalizeEnum = "sentences"
 	SlotAutocapitalizeEnumWords      SlotAutocapitalizeEnum = "words"
 	SlotAutocapitalizeEnumCharacters SlotAutocapitalizeEnum = "characters"
-	SlotAutocapitalizeEnumNone       SlotAutocapitalizeEnum = "none"
 )
 
 type SlotAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type SlotDirEnum string
 
 const (
+	SlotDirEnumRtl  SlotDirEnum = "rtl"
 	SlotDirEnumAuto SlotDirEnum = "auto"
 	SlotDirEnumLtr  SlotDirEnum = "ltr"
-	SlotDirEnumRtl  SlotDirEnum = "rtl"
 )
 
 type SlotDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type SlotEnterkeyhintEnum string
 
 const (
-	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
-	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 	SlotEnterkeyhintEnumDone     SlotEnterkeyhintEnum = "done"
 	SlotEnterkeyhintEnumEnter    SlotEnterkeyhintEnum = "enter"
 	SlotEnterkeyhintEnumGo       SlotEnterkeyhintEnum = "go"
 	SlotEnterkeyhintEnumNext     SlotEnterkeyhintEnum = "next"
 	SlotEnterkeyhintEnumPrevious SlotEnterkeyhintEnum = "previous"
+	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
+	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 )
 
 type SlotHiddenEnum string
@@ -113,6 +112,7 @@ const (
 type SlotInputmodeEnum string
 
 const (
+	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
 	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
 	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
@@ -120,7 +120,6 @@ const (
 	SlotInputmodeEnumNone    SlotInputmodeEnum = "none"
 	SlotInputmodeEnumNumeric SlotInputmodeEnum = "numeric"
 	SlotInputmodeEnumSearch  SlotInputmodeEnum = "search"
-	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
 )
 
 type SlotSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type SlotTranslateEnum string
 
 const (
-	SlotTranslateEnumNo    SlotTranslateEnum = "no"
 	SlotTranslateEnumYes   SlotTranslateEnum = "yes"
+	SlotTranslateEnumNo    SlotTranslateEnum = "no"
 	SlotTranslateEnumEmpty SlotTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *SlotElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

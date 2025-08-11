@@ -22,8 +22,7 @@ type InsElement struct {
 // Spec Description: The ins element represents an addition to the document.
 func Ins(children ...htemel.Node) *InsElement {
 	node := &InsElement{
-		children:   children,
-		attributes: make(insAttrs),
+		children: children, attributes: make(insAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement
 type InsAutocapitalizeEnum string
 
 const (
-	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
-	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
 	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
 	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
 	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
 	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
+	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
+	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
 )
 
 type InsAutocorrectEnum string
@@ -86,20 +85,20 @@ const (
 type InsDraggableEnum string
 
 const (
-	InsDraggableEnumFalse InsDraggableEnum = "false"
 	InsDraggableEnumTrue  InsDraggableEnum = "true"
+	InsDraggableEnumFalse InsDraggableEnum = "false"
 )
 
 type InsEnterkeyhintEnum string
 
 const (
+	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
 	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
 	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
 	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
 	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
-	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
 )
 
 type InsHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type InsInputmodeEnum string
 
 const (
-	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
-	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
-	InsInputmodeEnumNone    InsInputmodeEnum = "none"
-	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
 	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
 	InsInputmodeEnumText    InsInputmodeEnum = "text"
 	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
+	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
+	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
+	InsInputmodeEnumNone    InsInputmodeEnum = "none"
+	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 )
 
 type InsSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *InsElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

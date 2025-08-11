@@ -22,8 +22,7 @@ type StrongElement struct {
 // Spec Description: The strong element represents strong importance, seriousness, or urgency for its contents.
 func Strong(children ...htemel.Node) *StrongElement {
 	node := &StrongElement{
-		children:   children,
-		attributes: make(strongAttrs),
+		children: children, attributes: make(strongAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongE
 type StrongAutocapitalizeEnum string
 
 const (
-	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
 	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
 	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
 	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
 	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
 	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
+	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
 )
 
 type StrongAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type StrongContenteditableEnum string
 
 const (
-	StrongContenteditableEnumFalse         StrongContenteditableEnum = "false"
 	StrongContenteditableEnumPlaintextOnly StrongContenteditableEnum = "plaintext-only"
 	StrongContenteditableEnumTrue          StrongContenteditableEnum = "true"
+	StrongContenteditableEnumFalse         StrongContenteditableEnum = "false"
 	StrongContenteditableEnumEmpty         StrongContenteditableEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
+	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
+	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
+	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
 	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
 	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
-	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
-	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
-	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 )
 
 type StrongHiddenEnum string
@@ -113,21 +112,21 @@ const (
 type StrongInputmodeEnum string
 
 const (
-	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
-	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
 	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
 	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
 	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
 	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
+	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
+	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 )
 
 type StrongSpellcheckEnum string
 
 const (
-	StrongSpellcheckEnumTrue  StrongSpellcheckEnum = "true"
 	StrongSpellcheckEnumFalse StrongSpellcheckEnum = "false"
+	StrongSpellcheckEnumTrue  StrongSpellcheckEnum = "true"
 	StrongSpellcheckEnumEmpty StrongSpellcheckEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *StrongElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

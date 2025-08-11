@@ -22,8 +22,7 @@ type OlElement struct {
 // Spec Description: The ol element represents a list of items, where the items have been intentionally ordered, such that changing the order would change the meaning of the document.
 func Ol(children ...htemel.Node) *OlElement {
 	node := &OlElement{
-		children:   children,
-		attributes: make(olAttrs),
+		children: children, attributes: make(olAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func OlTernary(condition bool, true htemel.Node, false htemel.Node) *OlElement {
 type OlAutocapitalizeEnum string
 
 const (
-	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
 	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
 	OlAutocapitalizeEnumNone       OlAutocapitalizeEnum = "none"
 	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
 	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
 	OlAutocapitalizeEnumSentences  OlAutocapitalizeEnum = "sentences"
+	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
 )
 
 type OlAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type OlContenteditableEnum string
 
 const (
-	OlContenteditableEnumPlaintextOnly OlContenteditableEnum = "plaintext-only"
 	OlContenteditableEnumTrue          OlContenteditableEnum = "true"
 	OlContenteditableEnumFalse         OlContenteditableEnum = "false"
+	OlContenteditableEnumPlaintextOnly OlContenteditableEnum = "plaintext-only"
 	OlContenteditableEnumEmpty         OlContenteditableEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type OlEnterkeyhintEnum string
 
 const (
+	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
+	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
 	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
 	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
 	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
-	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
-	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 )
 
 type OlHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type OlInputmodeEnum string
 
 const (
-	OlInputmodeEnumNone    OlInputmodeEnum = "none"
-	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
 	OlInputmodeEnumSearch  OlInputmodeEnum = "search"
 	OlInputmodeEnumTel     OlInputmodeEnum = "tel"
 	OlInputmodeEnumText    OlInputmodeEnum = "text"
 	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
 	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
 	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
+	OlInputmodeEnumNone    OlInputmodeEnum = "none"
+	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
 )
 
 type OlSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *OlElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

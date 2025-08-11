@@ -22,8 +22,7 @@ type IElement struct {
 // Spec Description: The i element represents a span of text in an alternate voice or mood, or otherwise offset from the normal prose in a manner indicating a different quality of text, such as a taxonomic designation, a technical term, an idiomatic phrase from another language, transliteration, a thought, or a ship name in Western texts.
 func I(children ...htemel.Node) *IElement {
 	node := &IElement{
-		children:   children,
-		attributes: make(iAttrs),
+		children: children, attributes: make(iAttrs),
 	}
 
 	return node
@@ -61,8 +60,8 @@ const (
 type IAutocorrectEnum string
 
 const (
-	IAutocorrectEnumOn    IAutocorrectEnum = "on"
 	IAutocorrectEnumOff   IAutocorrectEnum = "off"
+	IAutocorrectEnumOn    IAutocorrectEnum = "on"
 	IAutocorrectEnumEmpty IAutocorrectEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
+	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
 	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
 	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
 	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
 	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
-	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
 )
 
 type IHiddenEnum string
@@ -113,37 +112,37 @@ const (
 type IInputmodeEnum string
 
 const (
-	IInputmodeEnumText    IInputmodeEnum = "text"
-	IInputmodeEnumUrl     IInputmodeEnum = "url"
-	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
 	IInputmodeEnumEmail   IInputmodeEnum = "email"
 	IInputmodeEnumNone    IInputmodeEnum = "none"
 	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
 	IInputmodeEnumSearch  IInputmodeEnum = "search"
 	IInputmodeEnumTel     IInputmodeEnum = "tel"
+	IInputmodeEnumText    IInputmodeEnum = "text"
+	IInputmodeEnumUrl     IInputmodeEnum = "url"
+	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
 )
 
 type ISpellcheckEnum string
 
 const (
-	ISpellcheckEnumTrue  ISpellcheckEnum = "true"
 	ISpellcheckEnumFalse ISpellcheckEnum = "false"
+	ISpellcheckEnumTrue  ISpellcheckEnum = "true"
 	ISpellcheckEnumEmpty ISpellcheckEnum = ""
 )
 
 type ITranslateEnum string
 
 const (
-	ITranslateEnumYes   ITranslateEnum = "yes"
 	ITranslateEnumNo    ITranslateEnum = "no"
+	ITranslateEnumYes   ITranslateEnum = "yes"
 	ITranslateEnumEmpty ITranslateEnum = ""
 )
 
 type IWritingsuggestionsEnum string
 
 const (
-	IWritingsuggestionsEnumFalse IWritingsuggestionsEnum = "false"
 	IWritingsuggestionsEnumTrue  IWritingsuggestionsEnum = "true"
+	IWritingsuggestionsEnumFalse IWritingsuggestionsEnum = "false"
 	IWritingsuggestionsEnumEmpty IWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *IElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

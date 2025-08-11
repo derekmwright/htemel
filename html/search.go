@@ -22,8 +22,7 @@ type SearchElement struct {
 // Spec Description: The search element represents a part of a document or application that contains a set of form controls or other content related to performing a search or filtering operation. This could be a search of the web site or application; a way of searching or filtering search results on the current web page; or a global or Internet-wide search function.
 func Search(children ...htemel.Node) *SearchElement {
 	node := &SearchElement{
-		children:   children,
-		attributes: make(searchAttrs),
+		children: children, attributes: make(searchAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func SearchTernary(condition bool, true htemel.Node, false htemel.Node) *SearchE
 type SearchAutocapitalizeEnum string
 
 const (
-	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
-	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
 	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
 	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
 	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
 	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
+	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
+	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
 )
 
 type SearchAutocorrectEnum string
@@ -69,18 +68,18 @@ const (
 type SearchContenteditableEnum string
 
 const (
-	SearchContenteditableEnumTrue          SearchContenteditableEnum = "true"
 	SearchContenteditableEnumFalse         SearchContenteditableEnum = "false"
 	SearchContenteditableEnumPlaintextOnly SearchContenteditableEnum = "plaintext-only"
+	SearchContenteditableEnumTrue          SearchContenteditableEnum = "true"
 	SearchContenteditableEnumEmpty         SearchContenteditableEnum = ""
 )
 
 type SearchDirEnum string
 
 const (
+	SearchDirEnumRtl  SearchDirEnum = "rtl"
 	SearchDirEnumAuto SearchDirEnum = "auto"
 	SearchDirEnumLtr  SearchDirEnum = "ltr"
-	SearchDirEnumRtl  SearchDirEnum = "rtl"
 )
 
 type SearchDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type SearchEnterkeyhintEnum string
 
 const (
-	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
-	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
 	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
 	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
 	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
+	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
+	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 )
 
 type SearchHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type SearchInputmodeEnum string
 
 const (
+	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
+	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
 	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
 	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
 	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
 	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
 	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
-	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
-	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 )
 
 type SearchSpellcheckEnum string
@@ -134,16 +133,16 @@ const (
 type SearchTranslateEnum string
 
 const (
-	SearchTranslateEnumNo    SearchTranslateEnum = "no"
 	SearchTranslateEnumYes   SearchTranslateEnum = "yes"
+	SearchTranslateEnumNo    SearchTranslateEnum = "no"
 	SearchTranslateEnumEmpty SearchTranslateEnum = ""
 )
 
 type SearchWritingsuggestionsEnum string
 
 const (
-	SearchWritingsuggestionsEnumFalse SearchWritingsuggestionsEnum = "false"
 	SearchWritingsuggestionsEnumTrue  SearchWritingsuggestionsEnum = "true"
+	SearchWritingsuggestionsEnumFalse SearchWritingsuggestionsEnum = "false"
 	SearchWritingsuggestionsEnumEmpty SearchWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *SearchElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

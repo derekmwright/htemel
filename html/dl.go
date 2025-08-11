@@ -22,8 +22,7 @@ type DlElement struct {
 // Spec Description: The dl element represents an association list consisting of zero or more name-value groups (a description list). A name-value group consists of one or more names (dt elements, possibly as children of a div element child) followed by one or more values (dd elements, possibly as children of a div element child), ignoring any nodes other than dt and dd element children, and dt and dd elements that are children of div element children. Within a single dl element, there should not be more than one dt element for each name.
 func Dl(children ...htemel.Node) *DlElement {
 	node := &DlElement{
-		children:   children,
-		attributes: make(dlAttrs),
+		children: children, attributes: make(dlAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func DlTernary(condition bool, true htemel.Node, false htemel.Node) *DlElement {
 type DlAutocapitalizeEnum string
 
 const (
+	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
 	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
 	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
 	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
 	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
 	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
-	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
 )
 
 type DlAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type DlContenteditableEnum string
 
 const (
-	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
 	DlContenteditableEnumTrue          DlContenteditableEnum = "true"
+	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumEmpty         DlContenteditableEnum = ""
 )
 
@@ -93,20 +92,20 @@ const (
 type DlEnterkeyhintEnum string
 
 const (
-	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
 	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
 	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
 	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
 	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
 	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
+	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
 )
 
 type DlHiddenEnum string
 
 const (
-	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
 	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
+	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
 	DlHiddenEnumEmpty      DlHiddenEnum = ""
 )
 
@@ -134,16 +133,16 @@ const (
 type DlTranslateEnum string
 
 const (
-	DlTranslateEnumYes   DlTranslateEnum = "yes"
 	DlTranslateEnumNo    DlTranslateEnum = "no"
+	DlTranslateEnumYes   DlTranslateEnum = "yes"
 	DlTranslateEnumEmpty DlTranslateEnum = ""
 )
 
 type DlWritingsuggestionsEnum string
 
 const (
-	DlWritingsuggestionsEnumFalse DlWritingsuggestionsEnum = "false"
 	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
+	DlWritingsuggestionsEnumFalse DlWritingsuggestionsEnum = "false"
 	DlWritingsuggestionsEnumEmpty DlWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *DlElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

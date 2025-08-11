@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type HrElement struct {
 	attributes hrAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type HrElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The hr element represents a paragraph-level thematic break, e.g., a scene change in a story, or a transition to another topic within a section of a reference book; alternatively, it represents a separator between a set of options of a select element.
-func Hr(children ...htemel.Node) *HrElement {
+func Hr() *HrElement {
 	node := &HrElement{
-		children:   children,
 		attributes: make(hrAttrs),
 	}
 
 	return node
 }
 
-func HrIf(condition bool, children ...htemel.Node) *HrElement {
+func HrIf(condition bool) *HrElement {
 	if condition {
-		return Hr(children...)
+		return Hr()
 	}
 
 	return &HrElement{
@@ -39,23 +37,15 @@ func HrIf(condition bool, children ...htemel.Node) *HrElement {
 	}
 }
 
-func HrTernary(condition bool, true htemel.Node, false htemel.Node) *HrElement {
-	if condition {
-		return Hr(true)
-	}
-
-	return Hr(false)
-}
-
 type HrAutocapitalizeEnum string
 
 const (
-	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
-	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
 	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
 	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
 	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
+	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
+	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
 )
 
 type HrAutocorrectEnum string
@@ -78,9 +68,9 @@ const (
 type HrDirEnum string
 
 const (
+	HrDirEnumRtl  HrDirEnum = "rtl"
 	HrDirEnumAuto HrDirEnum = "auto"
 	HrDirEnumLtr  HrDirEnum = "ltr"
-	HrDirEnumRtl  HrDirEnum = "rtl"
 )
 
 type HrDraggableEnum string
@@ -93,13 +83,13 @@ const (
 type HrEnterkeyhintEnum string
 
 const (
-	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
-	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
 	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
 	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
 	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
 	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
+	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
+	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
 )
 
 type HrHiddenEnum string
@@ -113,29 +103,29 @@ const (
 type HrInputmodeEnum string
 
 const (
-	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
-	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
 	HrInputmodeEnumText    HrInputmodeEnum = "text"
 	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
 	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
 	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
 	HrInputmodeEnumNone    HrInputmodeEnum = "none"
 	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
+	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
+	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
 )
 
 type HrSpellcheckEnum string
 
 const (
-	HrSpellcheckEnumFalse HrSpellcheckEnum = "false"
 	HrSpellcheckEnumTrue  HrSpellcheckEnum = "true"
+	HrSpellcheckEnumFalse HrSpellcheckEnum = "false"
 	HrSpellcheckEnumEmpty HrSpellcheckEnum = ""
 )
 
 type HrTranslateEnum string
 
 const (
-	HrTranslateEnumYes   HrTranslateEnum = "yes"
 	HrTranslateEnumNo    HrTranslateEnum = "no"
+	HrTranslateEnumYes   HrTranslateEnum = "yes"
 	HrTranslateEnumEmpty HrTranslateEnum = ""
 )
 
@@ -364,16 +354,6 @@ func (e *HrElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</hr>")); err != nil {
 		return err
 	}
 

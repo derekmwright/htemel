@@ -22,8 +22,7 @@ type DataElement struct {
 // Spec Description: The data element represents its contents, along with a machine-readable form of those contents in the value attribute.
 func Data(children ...htemel.Node) *DataElement {
 	node := &DataElement{
-		children:   children,
-		attributes: make(dataAttrs),
+		children: children, attributes: make(dataAttrs),
 	}
 
 	return node
@@ -50,56 +49,56 @@ func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataEleme
 type DataAutocapitalizeEnum string
 
 const (
-	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
-	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
 	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
 	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
+	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
+	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
 )
 
 type DataAutocorrectEnum string
 
 const (
-	DataAutocorrectEnumOn    DataAutocorrectEnum = "on"
 	DataAutocorrectEnumOff   DataAutocorrectEnum = "off"
+	DataAutocorrectEnumOn    DataAutocorrectEnum = "on"
 	DataAutocorrectEnumEmpty DataAutocorrectEnum = ""
 )
 
 type DataContenteditableEnum string
 
 const (
+	DataContenteditableEnumFalse         DataContenteditableEnum = "false"
 	DataContenteditableEnumPlaintextOnly DataContenteditableEnum = "plaintext-only"
 	DataContenteditableEnumTrue          DataContenteditableEnum = "true"
-	DataContenteditableEnumFalse         DataContenteditableEnum = "false"
 	DataContenteditableEnumEmpty         DataContenteditableEnum = ""
 )
 
 type DataDirEnum string
 
 const (
-	DataDirEnumAuto DataDirEnum = "auto"
 	DataDirEnumLtr  DataDirEnum = "ltr"
 	DataDirEnumRtl  DataDirEnum = "rtl"
+	DataDirEnumAuto DataDirEnum = "auto"
 )
 
 type DataDraggableEnum string
 
 const (
-	DataDraggableEnumTrue  DataDraggableEnum = "true"
 	DataDraggableEnumFalse DataDraggableEnum = "false"
+	DataDraggableEnumTrue  DataDraggableEnum = "true"
 )
 
 type DataEnterkeyhintEnum string
 
 const (
+	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
+	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
 	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
 	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
 	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
 	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
-	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
-	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
 )
 
 type DataHiddenEnum string
@@ -113,6 +112,7 @@ const (
 type DataInputmodeEnum string
 
 const (
+	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
 	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
 	DataInputmodeEnumText    DataInputmodeEnum = "text"
 	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
@@ -120,7 +120,6 @@ const (
 	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
 	DataInputmodeEnumNone    DataInputmodeEnum = "none"
 	DataInputmodeEnumNumeric DataInputmodeEnum = "numeric"
-	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
 )
 
 type DataSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *DataElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

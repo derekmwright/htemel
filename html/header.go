@@ -22,8 +22,7 @@ type HeaderElement struct {
 // Spec Description: The header element represents a group of introductory or navigational aids.
 func Header(children ...htemel.Node) *HeaderElement {
 	node := &HeaderElement{
-		children:   children,
-		attributes: make(headerAttrs),
+		children: children, attributes: make(headerAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderE
 type HeaderAutocapitalizeEnum string
 
 const (
-	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
-	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
 	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
 	HeaderAutocapitalizeEnumNone       HeaderAutocapitalizeEnum = "none"
 	HeaderAutocapitalizeEnumOff        HeaderAutocapitalizeEnum = "off"
 	HeaderAutocapitalizeEnumOn         HeaderAutocapitalizeEnum = "on"
+	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
+	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
 )
 
 type HeaderAutocorrectEnum string
@@ -93,13 +92,13 @@ const (
 type HeaderEnterkeyhintEnum string
 
 const (
-	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
-	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
-	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
 	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
 	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
 	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
+	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
+	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
+	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 )
 
 type HeaderHiddenEnum string
@@ -113,7 +112,6 @@ const (
 type HeaderInputmodeEnum string
 
 const (
-	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 	HeaderInputmodeEnumUrl     HeaderInputmodeEnum = "url"
 	HeaderInputmodeEnumDecimal HeaderInputmodeEnum = "decimal"
 	HeaderInputmodeEnumEmail   HeaderInputmodeEnum = "email"
@@ -121,6 +119,7 @@ const (
 	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
 	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
 	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
+	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 )
 
 type HeaderSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *HeaderElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type AElement struct {
 // Spec Description: If the a element has an href attribute, then it represents a hyperlink (a hypertext anchor) labeled by its contents.
 func A(children ...htemel.Node) *AElement {
 	node := &AElement{
-		children:   children,
-		attributes: make(aAttrs),
+		children: children, attributes: make(aAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
 type AAutocapitalizeEnum string
 
 const (
-	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
-	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
-	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
 	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
 	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
 	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
+	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
+	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
+	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
 )
 
 type AAutocorrectEnum string
@@ -93,13 +92,13 @@ const (
 type AEnterkeyhintEnum string
 
 const (
+	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
+	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
+	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
 	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
 	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
 	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
-	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
-	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
-	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 )
 
 type AHiddenEnum string
@@ -113,6 +112,7 @@ const (
 type AInputmodeEnum string
 
 const (
+	AInputmodeEnumText    AInputmodeEnum = "text"
 	AInputmodeEnumUrl     AInputmodeEnum = "url"
 	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
 	AInputmodeEnumEmail   AInputmodeEnum = "email"
@@ -120,7 +120,6 @@ const (
 	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
 	AInputmodeEnumSearch  AInputmodeEnum = "search"
 	AInputmodeEnumTel     AInputmodeEnum = "tel"
-	AInputmodeEnumText    AInputmodeEnum = "text"
 )
 
 type ASpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type ATranslateEnum string
 
 const (
-	ATranslateEnumNo    ATranslateEnum = "no"
 	ATranslateEnumYes   ATranslateEnum = "yes"
+	ATranslateEnumNo    ATranslateEnum = "no"
 	ATranslateEnumEmpty ATranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *AElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type SpanElement struct {
 // Spec Description: The span element doesn't mean anything on its own, but can be useful when used together with the global attributes, e.g. class, lang, or dir. It represents its children.
 func Span(children ...htemel.Node) *SpanElement {
 	node := &SpanElement{
-		children:   children,
-		attributes: make(spanAttrs),
+		children: children, attributes: make(spanAttrs),
 	}
 
 	return node
@@ -69,18 +68,18 @@ const (
 type SpanContenteditableEnum string
 
 const (
+	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
 	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
-	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumEmpty         SpanContenteditableEnum = ""
 )
 
 type SpanDirEnum string
 
 const (
+	SpanDirEnumAuto SpanDirEnum = "auto"
 	SpanDirEnumLtr  SpanDirEnum = "ltr"
 	SpanDirEnumRtl  SpanDirEnum = "rtl"
-	SpanDirEnumAuto SpanDirEnum = "auto"
 )
 
 type SpanDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
-	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
-	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
-	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
 	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
 	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
 	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
+	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
+	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
+	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
 )
 
 type SpanHiddenEnum string
@@ -113,6 +112,7 @@ const (
 type SpanInputmodeEnum string
 
 const (
+	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
 	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
 	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
 	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
@@ -120,7 +120,6 @@ const (
 	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
 	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
 	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
-	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
 )
 
 type SpanSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *SpanElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

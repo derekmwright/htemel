@@ -22,8 +22,7 @@ type UlElement struct {
 // Spec Description: The ul element represents a list of items, where the order of the items is not important — that is, where changing the order would not materially change the meaning of the document.
 func Ul(children ...htemel.Node) *UlElement {
 	node := &UlElement{
-		children:   children,
-		attributes: make(ulAttrs),
+		children: children, attributes: make(ulAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func UlTernary(condition bool, true htemel.Node, false htemel.Node) *UlElement {
 type UlAutocapitalizeEnum string
 
 const (
-	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
-	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 	UlAutocapitalizeEnumNone       UlAutocapitalizeEnum = "none"
 	UlAutocapitalizeEnumOff        UlAutocapitalizeEnum = "off"
 	UlAutocapitalizeEnumOn         UlAutocapitalizeEnum = "on"
 	UlAutocapitalizeEnumSentences  UlAutocapitalizeEnum = "sentences"
+	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
+	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 )
 
 type UlAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type UlDirEnum string
 
 const (
+	UlDirEnumRtl  UlDirEnum = "rtl"
 	UlDirEnumAuto UlDirEnum = "auto"
 	UlDirEnumLtr  UlDirEnum = "ltr"
-	UlDirEnumRtl  UlDirEnum = "rtl"
 )
 
 type UlDraggableEnum string
@@ -113,14 +112,14 @@ const (
 type UlInputmodeEnum string
 
 const (
+	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
+	UlInputmodeEnumText    UlInputmodeEnum = "text"
+	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
 	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
 	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
 	UlInputmodeEnumNone    UlInputmodeEnum = "none"
 	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
 	UlInputmodeEnumSearch  UlInputmodeEnum = "search"
-	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
-	UlInputmodeEnumText    UlInputmodeEnum = "text"
-	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
 )
 
 type UlSpellcheckEnum string
@@ -142,8 +141,8 @@ const (
 type UlWritingsuggestionsEnum string
 
 const (
-	UlWritingsuggestionsEnumTrue  UlWritingsuggestionsEnum = "true"
 	UlWritingsuggestionsEnumFalse UlWritingsuggestionsEnum = "false"
+	UlWritingsuggestionsEnumTrue  UlWritingsuggestionsEnum = "true"
 	UlWritingsuggestionsEnumEmpty UlWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *UlElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

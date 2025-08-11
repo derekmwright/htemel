@@ -22,8 +22,7 @@ type SelectElement struct {
 // Spec Description: The select element represents a control for selecting amongst a set of options.
 func Select(children ...htemel.Node) *SelectElement {
 	node := &SelectElement{
-		children:   children,
-		attributes: make(selectAttrs),
+		children: children, attributes: make(selectAttrs),
 	}
 
 	return node
@@ -50,19 +49,19 @@ func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectE
 type SelectAutocapitalizeEnum string
 
 const (
+	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
+	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
 	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
 	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
-	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
-	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 )
 
 type SelectAutocorrectEnum string
 
 const (
-	SelectAutocorrectEnumOff   SelectAutocorrectEnum = "off"
 	SelectAutocorrectEnumOn    SelectAutocorrectEnum = "on"
+	SelectAutocorrectEnumOff   SelectAutocorrectEnum = "off"
 	SelectAutocorrectEnumEmpty SelectAutocorrectEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type SelectEnterkeyhintEnum string
 
 const (
-	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
 	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
 	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
 	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
 	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
+	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
 )
 
 type SelectHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type SelectInputmodeEnum string
 
 const (
+	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
+	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
 	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
 	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
 	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
 	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
 	SelectInputmodeEnumUrl     SelectInputmodeEnum = "url"
 	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
-	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
-	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
 )
 
 type SelectSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *SelectElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

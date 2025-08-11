@@ -22,8 +22,7 @@ type VideoElement struct {
 // Spec Description: A video element is used for playing videos or movies, and audio files with captions.
 func Video(children ...htemel.Node) *VideoElement {
 	node := &VideoElement{
-		children:   children,
-		attributes: make(videoAttrs),
+		children: children, attributes: make(videoAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func VideoTernary(condition bool, true htemel.Node, false htemel.Node) *VideoEle
 type VideoAutocapitalizeEnum string
 
 const (
-	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
-	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
 	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
 	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
 	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
+	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
+	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
 )
 
 type VideoAutocorrectEnum string
@@ -69,18 +68,18 @@ const (
 type VideoContenteditableEnum string
 
 const (
-	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
 	VideoContenteditableEnumPlaintextOnly VideoContenteditableEnum = "plaintext-only"
 	VideoContenteditableEnumTrue          VideoContenteditableEnum = "true"
+	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
 	VideoContenteditableEnumEmpty         VideoContenteditableEnum = ""
 )
 
 type VideoDirEnum string
 
 const (
+	VideoDirEnumAuto VideoDirEnum = "auto"
 	VideoDirEnumLtr  VideoDirEnum = "ltr"
 	VideoDirEnumRtl  VideoDirEnum = "rtl"
-	VideoDirEnumAuto VideoDirEnum = "auto"
 )
 
 type VideoDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type VideoEnterkeyhintEnum string
 
 const (
-	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
-	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
-	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
 	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
 	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
 	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
 	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
+	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
+	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
+	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
 )
 
 type VideoHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type VideoInputmodeEnum string
 
 const (
-	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
-	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
-	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
 	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
 	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
 	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
 	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
 	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
+	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
+	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
+	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
 )
 
 type VideoSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *VideoElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

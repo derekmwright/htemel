@@ -22,8 +22,7 @@ type RpElement struct {
 // Spec Description: The rp element can be used to provide parentheses or other content around a ruby text component of a ruby annotation, to be shown by user agents that don't support ruby annotations.
 func Rp(children ...htemel.Node) *RpElement {
 	node := &RpElement{
-		children:   children,
-		attributes: make(rpAttrs),
+		children: children, attributes: make(rpAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func RpTernary(condition bool, true htemel.Node, false htemel.Node) *RpElement {
 type RpAutocapitalizeEnum string
 
 const (
-	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
-	RpAutocapitalizeEnumCharacters RpAutocapitalizeEnum = "characters"
-	RpAutocapitalizeEnumNone       RpAutocapitalizeEnum = "none"
 	RpAutocapitalizeEnumOff        RpAutocapitalizeEnum = "off"
 	RpAutocapitalizeEnumOn         RpAutocapitalizeEnum = "on"
 	RpAutocapitalizeEnumSentences  RpAutocapitalizeEnum = "sentences"
+	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
+	RpAutocapitalizeEnumCharacters RpAutocapitalizeEnum = "characters"
+	RpAutocapitalizeEnumNone       RpAutocapitalizeEnum = "none"
 )
 
 type RpAutocorrectEnum string
@@ -93,27 +92,26 @@ const (
 type RpEnterkeyhintEnum string
 
 const (
+	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
+	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
+	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
 	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
 	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
 	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
 	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
-	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
-	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
-	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
 )
 
 type RpHiddenEnum string
 
 const (
-	RpHiddenEnumUntilFound RpHiddenEnum = "until-found"
 	RpHiddenEnumHidden     RpHiddenEnum = "hidden"
+	RpHiddenEnumUntilFound RpHiddenEnum = "until-found"
 	RpHiddenEnumEmpty      RpHiddenEnum = ""
 )
 
 type RpInputmodeEnum string
 
 const (
-	RpInputmodeEnumNone    RpInputmodeEnum = "none"
 	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
 	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
 	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
@@ -121,6 +119,7 @@ const (
 	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
 	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
 	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
+	RpInputmodeEnumNone    RpInputmodeEnum = "none"
 )
 
 type RpSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type RpTranslateEnum string
 
 const (
-	RpTranslateEnumYes   RpTranslateEnum = "yes"
 	RpTranslateEnumNo    RpTranslateEnum = "no"
+	RpTranslateEnumYes   RpTranslateEnum = "yes"
 	RpTranslateEnumEmpty RpTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *RpElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

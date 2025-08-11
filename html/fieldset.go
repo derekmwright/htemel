@@ -22,8 +22,7 @@ type FieldsetElement struct {
 // Spec Description: The fieldset element represents a set of form controls (or other content) grouped together, optionally with a caption. The caption is given by the first legend element that is a child of the fieldset element, if any. The remainder of the descendants form the group.
 func Fieldset(children ...htemel.Node) *FieldsetElement {
 	node := &FieldsetElement{
-		children:   children,
-		attributes: make(fieldsetAttrs),
+		children: children, attributes: make(fieldsetAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func FieldsetTernary(condition bool, true htemel.Node, false htemel.Node) *Field
 type FieldsetAutocapitalizeEnum string
 
 const (
+	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
+	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
 	FieldsetAutocapitalizeEnumOn         FieldsetAutocapitalizeEnum = "on"
 	FieldsetAutocapitalizeEnumSentences  FieldsetAutocapitalizeEnum = "sentences"
 	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
 	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
-	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
-	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
 )
 
 type FieldsetAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type FieldsetDirEnum string
 
 const (
-	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 	FieldsetDirEnumLtr  FieldsetDirEnum = "ltr"
 	FieldsetDirEnumRtl  FieldsetDirEnum = "rtl"
+	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 )
 
 type FieldsetDraggableEnum string
@@ -113,14 +112,14 @@ const (
 type FieldsetInputmodeEnum string
 
 const (
+	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
+	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
 	FieldsetInputmodeEnumNumeric FieldsetInputmodeEnum = "numeric"
 	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
 	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
 	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
 	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
-	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
-	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 )
 
 type FieldsetSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *FieldsetElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

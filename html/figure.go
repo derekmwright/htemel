@@ -22,8 +22,7 @@ type FigureElement struct {
 // Spec Description: The figure element represents some flow content, optionally with a caption, that is self-contained (like a complete sentence) and is typically referenced as a single unit from the main flow of the document.
 func Figure(children ...htemel.Node) *FigureElement {
 	node := &FigureElement{
-		children:   children,
-		attributes: make(figureAttrs),
+		children: children, attributes: make(figureAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func FigureTernary(condition bool, true htemel.Node, false htemel.Node) *FigureE
 type FigureAutocapitalizeEnum string
 
 const (
+	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
 	FigureAutocapitalizeEnumNone       FigureAutocapitalizeEnum = "none"
 	FigureAutocapitalizeEnumOff        FigureAutocapitalizeEnum = "off"
 	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
 	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
 	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
-	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
 )
 
 type FigureAutocorrectEnum string
@@ -93,41 +92,41 @@ const (
 type FigureEnterkeyhintEnum string
 
 const (
+	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
 	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
 	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
 	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
 	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
 	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
 	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
-	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
 )
 
 type FigureHiddenEnum string
 
 const (
-	FigureHiddenEnumHidden     FigureHiddenEnum = "hidden"
 	FigureHiddenEnumUntilFound FigureHiddenEnum = "until-found"
+	FigureHiddenEnumHidden     FigureHiddenEnum = "hidden"
 	FigureHiddenEnumEmpty      FigureHiddenEnum = ""
 )
 
 type FigureInputmodeEnum string
 
 const (
-	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
-	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
-	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
-	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
 	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
 	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
 	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
 	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
+	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
+	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
+	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
+	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
 )
 
 type FigureSpellcheckEnum string
 
 const (
-	FigureSpellcheckEnumFalse FigureSpellcheckEnum = "false"
 	FigureSpellcheckEnumTrue  FigureSpellcheckEnum = "true"
+	FigureSpellcheckEnumFalse FigureSpellcheckEnum = "false"
 	FigureSpellcheckEnumEmpty FigureSpellcheckEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *FigureElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

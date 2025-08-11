@@ -110,7 +110,7 @@ type TextElement struct {
 	children []Node
 }
 
-func UnsafeText(text string, children ...Node) *TextElement {
+func TextUnsafe(text string, children ...Node) *TextElement {
 	return &TextElement{
 		text:     text,
 		children: children,

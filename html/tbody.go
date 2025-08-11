@@ -22,8 +22,7 @@ type TbodyElement struct {
 // Spec Description: The tbody element represents a block of rows that consist of a body of data for the parent table element, if the tbody element has a parent and it is a table.
 func Tbody(children ...htemel.Node) *TbodyElement {
 	node := &TbodyElement{
-		children:   children,
-		attributes: make(tbodyAttrs),
+		children: children, attributes: make(tbodyAttrs),
 	}
 
 	return node
@@ -69,18 +68,18 @@ const (
 type TbodyContenteditableEnum string
 
 const (
+	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
 	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
-	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumEmpty         TbodyContenteditableEnum = ""
 )
 
 type TbodyDirEnum string
 
 const (
+	TbodyDirEnumRtl  TbodyDirEnum = "rtl"
 	TbodyDirEnumAuto TbodyDirEnum = "auto"
 	TbodyDirEnumLtr  TbodyDirEnum = "ltr"
-	TbodyDirEnumRtl  TbodyDirEnum = "rtl"
 )
 
 type TbodyDraggableEnum string
@@ -93,20 +92,20 @@ const (
 type TbodyEnterkeyhintEnum string
 
 const (
-	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
-	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 	TbodyEnterkeyhintEnumDone     TbodyEnterkeyhintEnum = "done"
 	TbodyEnterkeyhintEnumEnter    TbodyEnterkeyhintEnum = "enter"
 	TbodyEnterkeyhintEnumGo       TbodyEnterkeyhintEnum = "go"
 	TbodyEnterkeyhintEnumNext     TbodyEnterkeyhintEnum = "next"
 	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
+	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
+	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 )
 
 type TbodyHiddenEnum string
 
 const (
-	TbodyHiddenEnumUntilFound TbodyHiddenEnum = "until-found"
 	TbodyHiddenEnumHidden     TbodyHiddenEnum = "hidden"
+	TbodyHiddenEnumUntilFound TbodyHiddenEnum = "until-found"
 	TbodyHiddenEnumEmpty      TbodyHiddenEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *TbodyElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

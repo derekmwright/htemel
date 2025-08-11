@@ -22,8 +22,7 @@ type DtElement struct {
 // Spec Description: The dt element represents the term, or name, part of a term-description group in a description list (dl element).
 func Dt(children ...htemel.Node) *DtElement {
 	node := &DtElement{
-		children:   children,
-		attributes: make(dtAttrs),
+		children: children, attributes: make(dtAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func DtTernary(condition bool, true htemel.Node, false htemel.Node) *DtElement {
 type DtAutocapitalizeEnum string
 
 const (
+	DtAutocapitalizeEnumOff        DtAutocapitalizeEnum = "off"
 	DtAutocapitalizeEnumOn         DtAutocapitalizeEnum = "on"
 	DtAutocapitalizeEnumSentences  DtAutocapitalizeEnum = "sentences"
 	DtAutocapitalizeEnumWords      DtAutocapitalizeEnum = "words"
 	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
 	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
-	DtAutocapitalizeEnumOff        DtAutocapitalizeEnum = "off"
 )
 
 type DtAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type DtDirEnum string
 
 const (
-	DtDirEnumRtl  DtDirEnum = "rtl"
 	DtDirEnumAuto DtDirEnum = "auto"
 	DtDirEnumLtr  DtDirEnum = "ltr"
+	DtDirEnumRtl  DtDirEnum = "rtl"
 )
 
 type DtDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type DtEnterkeyhintEnum string
 
 const (
+	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
+	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
 	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
 	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
 	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
-	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
-	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
 )
 
 type DtHiddenEnum string
@@ -113,29 +112,29 @@ const (
 type DtInputmodeEnum string
 
 const (
+	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
+	DtInputmodeEnumNone    DtInputmodeEnum = "none"
 	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
 	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
 	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 	DtInputmodeEnumText    DtInputmodeEnum = "text"
 	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
 	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
-	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
-	DtInputmodeEnumNone    DtInputmodeEnum = "none"
 )
 
 type DtSpellcheckEnum string
 
 const (
-	DtSpellcheckEnumFalse DtSpellcheckEnum = "false"
 	DtSpellcheckEnumTrue  DtSpellcheckEnum = "true"
+	DtSpellcheckEnumFalse DtSpellcheckEnum = "false"
 	DtSpellcheckEnumEmpty DtSpellcheckEnum = ""
 )
 
 type DtTranslateEnum string
 
 const (
-	DtTranslateEnumYes   DtTranslateEnum = "yes"
 	DtTranslateEnumNo    DtTranslateEnum = "no"
+	DtTranslateEnumYes   DtTranslateEnum = "yes"
 	DtTranslateEnumEmpty DtTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *DtElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

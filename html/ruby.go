@@ -22,8 +22,7 @@ type RubyElement struct {
 // Spec Description: The ruby element allows one or more spans of phrasing content to be marked with ruby annotations. Ruby annotations are short runs of text presented alongside base text, primarily used in East Asian typography as a guide for pronunciation or to include other annotations. In Japanese, this form of typography is also known as furigana.
 func Ruby(children ...htemel.Node) *RubyElement {
 	node := &RubyElement{
-		children:   children,
-		attributes: make(rubyAttrs),
+		children: children, attributes: make(rubyAttrs),
 	}
 
 	return node
@@ -93,13 +92,13 @@ const (
 type RubyEnterkeyhintEnum string
 
 const (
-	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
 	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
 	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
+	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 )
 
 type RubyHiddenEnum string
@@ -113,21 +112,21 @@ const (
 type RubyInputmodeEnum string
 
 const (
-	RubyInputmodeEnumEmail   RubyInputmodeEnum = "email"
-	RubyInputmodeEnumNone    RubyInputmodeEnum = "none"
 	RubyInputmodeEnumNumeric RubyInputmodeEnum = "numeric"
 	RubyInputmodeEnumSearch  RubyInputmodeEnum = "search"
 	RubyInputmodeEnumTel     RubyInputmodeEnum = "tel"
 	RubyInputmodeEnumText    RubyInputmodeEnum = "text"
 	RubyInputmodeEnumUrl     RubyInputmodeEnum = "url"
 	RubyInputmodeEnumDecimal RubyInputmodeEnum = "decimal"
+	RubyInputmodeEnumEmail   RubyInputmodeEnum = "email"
+	RubyInputmodeEnumNone    RubyInputmodeEnum = "none"
 )
 
 type RubySpellcheckEnum string
 
 const (
-	RubySpellcheckEnumTrue  RubySpellcheckEnum = "true"
 	RubySpellcheckEnumFalse RubySpellcheckEnum = "false"
+	RubySpellcheckEnumTrue  RubySpellcheckEnum = "true"
 	RubySpellcheckEnumEmpty RubySpellcheckEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *RubyElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

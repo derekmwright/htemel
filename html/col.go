@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type ColElement struct {
 	attributes colAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type ColElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: If a col element has a parent and that is a colgroup element that itself has a parent that is a table element, then the col element represents one or more columns in the column group represented by that colgroup.
-func Col(children ...htemel.Node) *ColElement {
+func Col() *ColElement {
 	node := &ColElement{
-		children:   children,
 		attributes: make(colAttrs),
 	}
 
 	return node
 }
 
-func ColIf(condition bool, children ...htemel.Node) *ColElement {
+func ColIf(condition bool) *ColElement {
 	if condition {
-		return Col(children...)
+		return Col()
 	}
 
 	return &ColElement{
@@ -39,23 +37,15 @@ func ColIf(condition bool, children ...htemel.Node) *ColElement {
 	}
 }
 
-func ColTernary(condition bool, true htemel.Node, false htemel.Node) *ColElement {
-	if condition {
-		return Col(true)
-	}
-
-	return Col(false)
-}
-
 type ColAutocapitalizeEnum string
 
 const (
+	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
 	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
 	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
 	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
 	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
-	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 )
 
 type ColAutocorrectEnum string
@@ -93,13 +83,13 @@ const (
 type ColEnterkeyhintEnum string
 
 const (
+	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
 	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
 	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
 	ColEnterkeyhintEnumPrevious ColEnterkeyhintEnum = "previous"
 	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
 	ColEnterkeyhintEnumSend     ColEnterkeyhintEnum = "send"
 	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
-	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
 )
 
 type ColHiddenEnum string
@@ -113,14 +103,14 @@ const (
 type ColInputmodeEnum string
 
 const (
-	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
-	ColInputmodeEnumNone    ColInputmodeEnum = "none"
-	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
 	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
 	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 	ColInputmodeEnumText    ColInputmodeEnum = "text"
 	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
 	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
+	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
+	ColInputmodeEnumNone    ColInputmodeEnum = "none"
+	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
 )
 
 type ColSpellcheckEnum string
@@ -364,16 +354,6 @@ func (e *ColElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</col>")); err != nil {
 		return err
 	}
 

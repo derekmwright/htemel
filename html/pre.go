@@ -22,8 +22,7 @@ type PreElement struct {
 // Spec Description: The pre element represents a block of preformatted text, in which structure is represented by typographic conventions rather than by elements.
 func Pre(children ...htemel.Node) *PreElement {
 	node := &PreElement{
-		children:   children,
-		attributes: make(preAttrs),
+		children: children, attributes: make(preAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func PreTernary(condition bool, true htemel.Node, false htemel.Node) *PreElement
 type PreAutocapitalizeEnum string
 
 const (
+	PreAutocapitalizeEnumSentences  PreAutocapitalizeEnum = "sentences"
 	PreAutocapitalizeEnumWords      PreAutocapitalizeEnum = "words"
 	PreAutocapitalizeEnumCharacters PreAutocapitalizeEnum = "characters"
 	PreAutocapitalizeEnumNone       PreAutocapitalizeEnum = "none"
 	PreAutocapitalizeEnumOff        PreAutocapitalizeEnum = "off"
 	PreAutocapitalizeEnumOn         PreAutocapitalizeEnum = "on"
-	PreAutocapitalizeEnumSentences  PreAutocapitalizeEnum = "sentences"
 )
 
 type PreAutocorrectEnum string
@@ -78,49 +77,49 @@ const (
 type PreDirEnum string
 
 const (
+	PreDirEnumRtl  PreDirEnum = "rtl"
 	PreDirEnumAuto PreDirEnum = "auto"
 	PreDirEnumLtr  PreDirEnum = "ltr"
-	PreDirEnumRtl  PreDirEnum = "rtl"
 )
 
 type PreDraggableEnum string
 
 const (
-	PreDraggableEnumFalse PreDraggableEnum = "false"
 	PreDraggableEnumTrue  PreDraggableEnum = "true"
+	PreDraggableEnumFalse PreDraggableEnum = "false"
 )
 
 type PreEnterkeyhintEnum string
 
 const (
-	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
-	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
 	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
 	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
 	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
 	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
 	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
+	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
+	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
 )
 
 type PreHiddenEnum string
 
 const (
-	PreHiddenEnumHidden     PreHiddenEnum = "hidden"
 	PreHiddenEnumUntilFound PreHiddenEnum = "until-found"
+	PreHiddenEnumHidden     PreHiddenEnum = "hidden"
 	PreHiddenEnumEmpty      PreHiddenEnum = ""
 )
 
 type PreInputmodeEnum string
 
 const (
-	PreInputmodeEnumText    PreInputmodeEnum = "text"
-	PreInputmodeEnumUrl     PreInputmodeEnum = "url"
 	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
 	PreInputmodeEnumEmail   PreInputmodeEnum = "email"
 	PreInputmodeEnumNone    PreInputmodeEnum = "none"
 	PreInputmodeEnumNumeric PreInputmodeEnum = "numeric"
 	PreInputmodeEnumSearch  PreInputmodeEnum = "search"
 	PreInputmodeEnumTel     PreInputmodeEnum = "tel"
+	PreInputmodeEnumText    PreInputmodeEnum = "text"
+	PreInputmodeEnumUrl     PreInputmodeEnum = "url"
 )
 
 type PreSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *PreElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type FormElement struct {
 // Spec Description: The form element represents a hyperlink that can be manipulated through a collection of form-associated elements, some of which can represent editable values that can be submitted to a server for processing.
 func Form(children ...htemel.Node) *FormElement {
 	node := &FormElement{
-		children:   children,
-		attributes: make(formAttrs),
+		children: children, attributes: make(formAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func FormTernary(condition bool, true htemel.Node, false htemel.Node) *FormEleme
 type FormAutocapitalizeEnum string
 
 const (
-	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
-	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
 	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
 	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
+	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
+	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 )
 
 type FormAutocorrectEnum string
@@ -93,13 +92,13 @@ const (
 type FormEnterkeyhintEnum string
 
 const (
-	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
-	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
-	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
 	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
 	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
 	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
+	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
+	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
+	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
 )
 
 type FormHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type FormInputmodeEnum string
 
 const (
-	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
-	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
-	FormInputmodeEnumText    FormInputmodeEnum = "text"
-	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
 	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
 	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
 	FormInputmodeEnumNone    FormInputmodeEnum = "none"
 	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
+	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
+	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
+	FormInputmodeEnumText    FormInputmodeEnum = "text"
+	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
 )
 
 type FormSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *FormElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

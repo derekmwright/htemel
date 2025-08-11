@@ -2,6 +2,7 @@ package source
 
 import (
 	"io"
+	"strings"
 	"text/template"
 
 	"golang.org/x/text/cases"
@@ -31,13 +32,23 @@ var titleCase = func(s string) string {
 	return cases.Title(language.English).String(s)
 }
 
+var PascalCase = func(s string) string {
+	if strings.Index(strings.ToLower(s), "-") < 1 {
+		return titleCase(s)
+	}
+	s = titleCase(strings.ReplaceAll(s, "-", " "))
+	return strings.ReplaceAll(s, " ", "")
+}
+
 func SourceHeader(w io.Writer, pkg string, e *spec.Element, children ...TemplateFunc) error {
 	var (
 		colTmpls   []*template.Template
 		colImports = make(ImportSet)
 	)
 
-	colImports.Add("github.com/derekmwright/htemel")
+	if !e.Void {
+		colImports.Add("github.com/derekmwright/htemel")
+	}
 
 	for _, child := range children {
 		t, imps := child()
@@ -106,7 +117,7 @@ func BaseFunc() (*template.Template, ImportSet) {
 // Spec Description: {{ .Description }}
 func {{ .Tag | titleCase }}({{ if not .Void }}children ...htemel.Node{{ end }}) *{{ .Tag | titleCase }}Element {
 	node := &{{ .Tag | titleCase }}Element{
-		children: children,
+		{{ if not .Void }}children: children,{{ end -}}
 		attributes: make({{ .Tag }}Attrs),
 	}
 
@@ -124,7 +135,7 @@ func BaseCondFunc() (*template.Template, ImportSet) {
 		}).Parse(`
 func {{ .Tag | titleCase }}If(condition bool{{ if not .Void }}, children ...htemel.Node{{ end }}) *{{ .Tag | titleCase }}Element {
 	if condition {
-		return {{ .Tag | titleCase }}(children...)
+		return {{ .Tag | titleCase }}({{ if not .Void }}children...{{ end }})
 	}
 
 	return &{{ .Tag | titleCase }}Element{
@@ -205,6 +216,7 @@ func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
 		return err
 	}
 
+{{- if not .Void }}
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err
@@ -214,6 +226,7 @@ func (e *{{ .Tag | titleCase }}Element) Render(w io.Writer) error {
 	if _, err := w.Write([]byte("</{{ .Tag }}>")); err != nil {
 		return err
 	}
+{{- end }}
 
 	return nil
 }

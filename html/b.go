@@ -22,8 +22,7 @@ type BElement struct {
 // Spec Description: The b element represents a span of text to which attention is being drawn for utilitarian purposes without conveying any extra importance and with no implication of an alternate voice or mood, such as key words in a document abstract, product names in a review, actionable words in interactive text-driven software, or an article lede.
 func B(children ...htemel.Node) *BElement {
 	node := &BElement{
-		children:   children,
-		attributes: make(bAttrs),
+		children: children, attributes: make(bAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func BTernary(condition bool, true htemel.Node, false htemel.Node) *BElement {
 type BAutocapitalizeEnum string
 
 const (
+	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
 	BAutocapitalizeEnumNone       BAutocapitalizeEnum = "none"
 	BAutocapitalizeEnumOff        BAutocapitalizeEnum = "off"
 	BAutocapitalizeEnumOn         BAutocapitalizeEnum = "on"
 	BAutocapitalizeEnumSentences  BAutocapitalizeEnum = "sentences"
 	BAutocapitalizeEnumWords      BAutocapitalizeEnum = "words"
-	BAutocapitalizeEnumCharacters BAutocapitalizeEnum = "characters"
 )
 
 type BAutocorrectEnum string
@@ -93,13 +92,13 @@ const (
 type BEnterkeyhintEnum string
 
 const (
-	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
-	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
 	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
 	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
 	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
+	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
+	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
 )
 
 type BHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type BInputmodeEnum string
 
 const (
-	BInputmodeEnumSearch  BInputmodeEnum = "search"
-	BInputmodeEnumTel     BInputmodeEnum = "tel"
 	BInputmodeEnumText    BInputmodeEnum = "text"
 	BInputmodeEnumUrl     BInputmodeEnum = "url"
 	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
 	BInputmodeEnumEmail   BInputmodeEnum = "email"
 	BInputmodeEnumNone    BInputmodeEnum = "none"
 	BInputmodeEnumNumeric BInputmodeEnum = "numeric"
+	BInputmodeEnumSearch  BInputmodeEnum = "search"
+	BInputmodeEnumTel     BInputmodeEnum = "tel"
 )
 
 type BSpellcheckEnum string
@@ -142,8 +141,8 @@ const (
 type BWritingsuggestionsEnum string
 
 const (
-	BWritingsuggestionsEnumFalse BWritingsuggestionsEnum = "false"
 	BWritingsuggestionsEnumTrue  BWritingsuggestionsEnum = "true"
+	BWritingsuggestionsEnumFalse BWritingsuggestionsEnum = "false"
 	BWritingsuggestionsEnumEmpty BWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *BElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

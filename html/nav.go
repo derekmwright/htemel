@@ -22,8 +22,7 @@ type NavElement struct {
 // Spec Description: The nav element represents a section of a page that links to other pages or to parts within the page: a section with navigation links.
 func Nav(children ...htemel.Node) *NavElement {
 	node := &NavElement{
-		children:   children,
-		attributes: make(navAttrs),
+		children: children, attributes: make(navAttrs),
 	}
 
 	return node
@@ -69,9 +68,9 @@ const (
 type NavContenteditableEnum string
 
 const (
-	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
+	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumEmpty         NavContenteditableEnum = ""
 )
 
@@ -93,13 +92,13 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
+	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
+	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
+	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
 	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
 	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
-	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
-	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
-	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 )
 
 type NavHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type NavInputmodeEnum string
 
 const (
-	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
-	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
-	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
-	NavInputmodeEnumText    NavInputmodeEnum = "text"
 	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
 	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
 	NavInputmodeEnumNone    NavInputmodeEnum = "none"
+	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
+	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
+	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
+	NavInputmodeEnumText    NavInputmodeEnum = "text"
 )
 
 type NavSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *NavElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

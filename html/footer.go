@@ -22,8 +22,7 @@ type FooterElement struct {
 // Spec Description: The footer element represents a footer for its nearest ancestor sectioning content element, or for the body element if there is no such ancestor. A footer typically contains information about its section such as who wrote it, links to related documents, copyright data, and the like.
 func Footer(children ...htemel.Node) *FooterElement {
 	node := &FooterElement{
-		children:   children,
-		attributes: make(footerAttrs),
+		children: children, attributes: make(footerAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func FooterTernary(condition bool, true htemel.Node, false htemel.Node) *FooterE
 type FooterAutocapitalizeEnum string
 
 const (
+	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 	FooterAutocapitalizeEnumOn         FooterAutocapitalizeEnum = "on"
 	FooterAutocapitalizeEnumSentences  FooterAutocapitalizeEnum = "sentences"
 	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
 	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
 	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
-	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 )
 
 type FooterAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type FooterContenteditableEnum string
 
 const (
-	FooterContenteditableEnumFalse         FooterContenteditableEnum = "false"
 	FooterContenteditableEnumPlaintextOnly FooterContenteditableEnum = "plaintext-only"
 	FooterContenteditableEnumTrue          FooterContenteditableEnum = "true"
+	FooterContenteditableEnumFalse         FooterContenteditableEnum = "false"
 	FooterContenteditableEnumEmpty         FooterContenteditableEnum = ""
 )
 
@@ -93,27 +92,26 @@ const (
 type FooterEnterkeyhintEnum string
 
 const (
+	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
+	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
 	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
 	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
 	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
 	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
 	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
-	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
-	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
 )
 
 type FooterHiddenEnum string
 
 const (
-	FooterHiddenEnumUntilFound FooterHiddenEnum = "until-found"
 	FooterHiddenEnumHidden     FooterHiddenEnum = "hidden"
+	FooterHiddenEnumUntilFound FooterHiddenEnum = "until-found"
 	FooterHiddenEnumEmpty      FooterHiddenEnum = ""
 )
 
 type FooterInputmodeEnum string
 
 const (
-	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
 	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
 	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
 	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
@@ -121,6 +119,7 @@ const (
 	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
 	FooterInputmodeEnumEmail   FooterInputmodeEnum = "email"
 	FooterInputmodeEnumNone    FooterInputmodeEnum = "none"
+	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
 )
 
 type FooterSpellcheckEnum string
@@ -142,8 +141,8 @@ const (
 type FooterWritingsuggestionsEnum string
 
 const (
-	FooterWritingsuggestionsEnumFalse FooterWritingsuggestionsEnum = "false"
 	FooterWritingsuggestionsEnumTrue  FooterWritingsuggestionsEnum = "true"
+	FooterWritingsuggestionsEnumFalse FooterWritingsuggestionsEnum = "false"
 	FooterWritingsuggestionsEnumEmpty FooterWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *FooterElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

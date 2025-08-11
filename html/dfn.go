@@ -22,8 +22,7 @@ type DfnElement struct {
 // Spec Description: The dfn element represents the defining instance of a term. The paragraph, description list group, or section that is the nearest ancestor of the dfn element must also contain the definition(s) for the term given by the dfn element.
 func Dfn(children ...htemel.Node) *DfnElement {
 	node := &DfnElement{
-		children:   children,
-		attributes: make(dfnAttrs),
+		children: children, attributes: make(dfnAttrs),
 	}
 
 	return node
@@ -78,9 +77,9 @@ const (
 type DfnDirEnum string
 
 const (
-	DfnDirEnumAuto DfnDirEnum = "auto"
 	DfnDirEnumLtr  DfnDirEnum = "ltr"
 	DfnDirEnumRtl  DfnDirEnum = "rtl"
+	DfnDirEnumAuto DfnDirEnum = "auto"
 )
 
 type DfnDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type DfnEnterkeyhintEnum string
 
 const (
+	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
+	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
+	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
 	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
 	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
-	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
-	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
-	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 )
 
 type DfnHiddenEnum string
@@ -113,7 +112,6 @@ const (
 type DfnInputmodeEnum string
 
 const (
-	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
 	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
 	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
 	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
@@ -121,6 +119,7 @@ const (
 	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
 	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
+	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
 )
 
 type DfnSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *DfnElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type AreaElement struct {
 	attributes areaAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type AreaElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The area element represents either a hyperlink with some text and a corresponding area on an image map, or a dead area on an image map.
-func Area(children ...htemel.Node) *AreaElement {
+func Area() *AreaElement {
 	node := &AreaElement{
-		children:   children,
 		attributes: make(areaAttrs),
 	}
 
 	return node
 }
 
-func AreaIf(condition bool, children ...htemel.Node) *AreaElement {
+func AreaIf(condition bool) *AreaElement {
 	if condition {
-		return Area(children...)
+		return Area()
 	}
 
 	return &AreaElement{
@@ -39,39 +37,31 @@ func AreaIf(condition bool, children ...htemel.Node) *AreaElement {
 	}
 }
 
-func AreaTernary(condition bool, true htemel.Node, false htemel.Node) *AreaElement {
-	if condition {
-		return Area(true)
-	}
-
-	return Area(false)
-}
-
 type AreaAutocapitalizeEnum string
 
 const (
+	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
+	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
 	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
 	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
 	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
-	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
-	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
 )
 
 type AreaAutocorrectEnum string
 
 const (
-	AreaAutocorrectEnumOff   AreaAutocorrectEnum = "off"
 	AreaAutocorrectEnumOn    AreaAutocorrectEnum = "on"
+	AreaAutocorrectEnumOff   AreaAutocorrectEnum = "off"
 	AreaAutocorrectEnumEmpty AreaAutocorrectEnum = ""
 )
 
 type AreaContenteditableEnum string
 
 const (
-	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumPlaintextOnly AreaContenteditableEnum = "plaintext-only"
 	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
+	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumEmpty         AreaContenteditableEnum = ""
 )
 
@@ -86,8 +76,8 @@ const (
 type AreaDraggableEnum string
 
 const (
-	AreaDraggableEnumTrue  AreaDraggableEnum = "true"
 	AreaDraggableEnumFalse AreaDraggableEnum = "false"
+	AreaDraggableEnumTrue  AreaDraggableEnum = "true"
 )
 
 type AreaEnterkeyhintEnum string
@@ -113,7 +103,6 @@ const (
 type AreaInputmodeEnum string
 
 const (
-	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
 	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
 	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
@@ -121,6 +110,7 @@ const (
 	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
 	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
 	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
+	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 )
 
 type AreaSpellcheckEnum string
@@ -364,16 +354,6 @@ func (e *AreaElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</area>")); err != nil {
 		return err
 	}
 

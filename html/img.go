@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type ImgElement struct {
 	attributes imgAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type ImgElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: An img element represents an image.
-func Img(children ...htemel.Node) *ImgElement {
+func Img() *ImgElement {
 	node := &ImgElement{
-		children:   children,
 		attributes: make(imgAttrs),
 	}
 
 	return node
 }
 
-func ImgIf(condition bool, children ...htemel.Node) *ImgElement {
+func ImgIf(condition bool) *ImgElement {
 	if condition {
-		return Img(children...)
+		return Img()
 	}
 
 	return &ImgElement{
@@ -39,23 +37,15 @@ func ImgIf(condition bool, children ...htemel.Node) *ImgElement {
 	}
 }
 
-func ImgTernary(condition bool, true htemel.Node, false htemel.Node) *ImgElement {
-	if condition {
-		return Img(true)
-	}
-
-	return Img(false)
-}
-
 type ImgAutocapitalizeEnum string
 
 const (
-	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
-	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
 	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
 	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
+	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
+	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
 )
 
 type ImgAutocorrectEnum string
@@ -69,9 +59,9 @@ const (
 type ImgContenteditableEnum string
 
 const (
-	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumPlaintextOnly ImgContenteditableEnum = "plaintext-only"
+	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumEmpty         ImgContenteditableEnum = ""
 )
 
@@ -93,20 +83,20 @@ const (
 type ImgEnterkeyhintEnum string
 
 const (
+	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
+	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
 	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
 	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
-	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
-	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 )
 
 type ImgHiddenEnum string
 
 const (
-	ImgHiddenEnumHidden     ImgHiddenEnum = "hidden"
 	ImgHiddenEnumUntilFound ImgHiddenEnum = "until-found"
+	ImgHiddenEnumHidden     ImgHiddenEnum = "hidden"
 	ImgHiddenEnumEmpty      ImgHiddenEnum = ""
 )
 
@@ -134,8 +124,8 @@ const (
 type ImgTranslateEnum string
 
 const (
-	ImgTranslateEnumNo    ImgTranslateEnum = "no"
 	ImgTranslateEnumYes   ImgTranslateEnum = "yes"
+	ImgTranslateEnumNo    ImgTranslateEnum = "no"
 	ImgTranslateEnumEmpty ImgTranslateEnum = ""
 )
 
@@ -364,16 +354,6 @@ func (e *ImgElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</img>")); err != nil {
 		return err
 	}
 

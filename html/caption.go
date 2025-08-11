@@ -22,8 +22,7 @@ type CaptionElement struct {
 // Spec Description: The caption element represents the title of the table that is its parent, if it has a parent and that is a table element.
 func Caption(children ...htemel.Node) *CaptionElement {
 	node := &CaptionElement{
-		children:   children,
-		attributes: make(captionAttrs),
+		children: children, attributes: make(captionAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Captio
 type CaptionAutocapitalizeEnum string
 
 const (
-	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
-	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
-	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
 	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
 	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
 	CaptionAutocapitalizeEnumOff        CaptionAutocapitalizeEnum = "off"
+	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
+	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
+	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
 )
 
 type CaptionAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type CaptionDirEnum string
 
 const (
-	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
 	CaptionDirEnumAuto CaptionDirEnum = "auto"
 	CaptionDirEnumLtr  CaptionDirEnum = "ltr"
+	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
 )
 
 type CaptionDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type CaptionEnterkeyhintEnum string
 
 const (
-	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
-	CaptionEnterkeyhintEnumSearch   CaptionEnterkeyhintEnum = "search"
-	CaptionEnterkeyhintEnumSend     CaptionEnterkeyhintEnum = "send"
 	CaptionEnterkeyhintEnumDone     CaptionEnterkeyhintEnum = "done"
 	CaptionEnterkeyhintEnumEnter    CaptionEnterkeyhintEnum = "enter"
 	CaptionEnterkeyhintEnumGo       CaptionEnterkeyhintEnum = "go"
 	CaptionEnterkeyhintEnumNext     CaptionEnterkeyhintEnum = "next"
+	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
+	CaptionEnterkeyhintEnumSearch   CaptionEnterkeyhintEnum = "search"
+	CaptionEnterkeyhintEnumSend     CaptionEnterkeyhintEnum = "send"
 )
 
 type CaptionHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type CaptionInputmodeEnum string
 
 const (
-	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
-	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
-	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
-	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
 	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
 	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
 	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
 	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
+	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
+	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
+	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
+	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
 )
 
 type CaptionSpellcheckEnum string
@@ -142,8 +141,8 @@ const (
 type CaptionWritingsuggestionsEnum string
 
 const (
-	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
 	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
+	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
 	CaptionWritingsuggestionsEnumEmpty CaptionWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *CaptionElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

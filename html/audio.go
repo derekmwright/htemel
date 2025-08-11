@@ -22,8 +22,7 @@ type AudioElement struct {
 // Spec Description: An audio element represents a sound or audio stream.
 func Audio(children ...htemel.Node) *AudioElement {
 	node := &AudioElement{
-		children:   children,
-		attributes: make(audioAttrs),
+		children: children, attributes: make(audioAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func AudioTernary(condition bool, true htemel.Node, false htemel.Node) *AudioEle
 type AudioAutocapitalizeEnum string
 
 const (
-	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
-	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 	AudioAutocapitalizeEnumOff        AudioAutocapitalizeEnum = "off"
 	AudioAutocapitalizeEnumOn         AudioAutocapitalizeEnum = "on"
 	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
 	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
+	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
+	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 )
 
 type AudioAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type AudioDirEnum string
 
 const (
-	AudioDirEnumAuto AudioDirEnum = "auto"
 	AudioDirEnumLtr  AudioDirEnum = "ltr"
 	AudioDirEnumRtl  AudioDirEnum = "rtl"
+	AudioDirEnumAuto AudioDirEnum = "auto"
 )
 
 type AudioDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type AudioEnterkeyhintEnum string
 
 const (
-	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
-	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
 	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
 	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
 	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
+	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
+	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
 )
 
 type AudioHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type AudioInputmodeEnum string
 
 const (
-	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
-	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
 	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
 	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
 	AudioInputmodeEnumTel     AudioInputmodeEnum = "tel"
 	AudioInputmodeEnumText    AudioInputmodeEnum = "text"
 	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
 	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
+	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
+	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
 )
 
 type AudioSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *AudioElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

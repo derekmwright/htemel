@@ -22,8 +22,7 @@ type CodeElement struct {
 // Spec Description: The code element represents a fragment of computer code. This could be an XML element name, a filename, a computer program, or any other string that a computer would recognize.
 func Code(children ...htemel.Node) *CodeElement {
 	node := &CodeElement{
-		children:   children,
-		attributes: make(codeAttrs),
+		children: children, attributes: make(codeAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func CodeTernary(condition bool, true htemel.Node, false htemel.Node) *CodeEleme
 type CodeAutocapitalizeEnum string
 
 const (
+	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
+	CodeAutocapitalizeEnumOff        CodeAutocapitalizeEnum = "off"
 	CodeAutocapitalizeEnumOn         CodeAutocapitalizeEnum = "on"
 	CodeAutocapitalizeEnumSentences  CodeAutocapitalizeEnum = "sentences"
 	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
 	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
-	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
-	CodeAutocapitalizeEnumOff        CodeAutocapitalizeEnum = "off"
 )
 
 type CodeAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type CodeContenteditableEnum string
 
 const (
+	CodeContenteditableEnumTrue          CodeContenteditableEnum = "true"
 	CodeContenteditableEnumFalse         CodeContenteditableEnum = "false"
 	CodeContenteditableEnumPlaintextOnly CodeContenteditableEnum = "plaintext-only"
-	CodeContenteditableEnumTrue          CodeContenteditableEnum = "true"
 	CodeContenteditableEnumEmpty         CodeContenteditableEnum = ""
 )
 
@@ -86,20 +85,20 @@ const (
 type CodeDraggableEnum string
 
 const (
-	CodeDraggableEnumFalse CodeDraggableEnum = "false"
 	CodeDraggableEnumTrue  CodeDraggableEnum = "true"
+	CodeDraggableEnumFalse CodeDraggableEnum = "false"
 )
 
 type CodeEnterkeyhintEnum string
 
 const (
+	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
+	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
 	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
 	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
 	CodeEnterkeyhintEnumEnter    CodeEnterkeyhintEnum = "enter"
 	CodeEnterkeyhintEnumGo       CodeEnterkeyhintEnum = "go"
 	CodeEnterkeyhintEnumNext     CodeEnterkeyhintEnum = "next"
-	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
-	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
 )
 
 type CodeHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type CodeInputmodeEnum string
 
 const (
-	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
-	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
-	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
-	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
 	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
 	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
+	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
+	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
+	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
+	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 )
 
 type CodeSpellcheckEnum string
@@ -142,8 +141,8 @@ const (
 type CodeWritingsuggestionsEnum string
 
 const (
-	CodeWritingsuggestionsEnumTrue  CodeWritingsuggestionsEnum = "true"
 	CodeWritingsuggestionsEnumFalse CodeWritingsuggestionsEnum = "false"
+	CodeWritingsuggestionsEnumTrue  CodeWritingsuggestionsEnum = "true"
 	CodeWritingsuggestionsEnumEmpty CodeWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *CodeElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

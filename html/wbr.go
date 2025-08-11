@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type WbrElement struct {
 	attributes wbrAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,31 +19,22 @@ type WbrElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The wbr element represents a line break opportunity.
-func Wbr(children ...htemel.Node) *WbrElement {
+func Wbr() *WbrElement {
 	node := &WbrElement{
-		children:   children,
 		attributes: make(wbrAttrs),
 	}
 
 	return node
 }
 
-func WbrIf(condition bool, children ...htemel.Node) *WbrElement {
+func WbrIf(condition bool) *WbrElement {
 	if condition {
-		return Wbr(children...)
+		return Wbr()
 	}
 
 	return &WbrElement{
 		skipRender: true,
 	}
-}
-
-func WbrTernary(condition bool, true htemel.Node, false htemel.Node) *WbrElement {
-	if condition {
-		return Wbr(true)
-	}
-
-	return Wbr(false)
 }
 
 type WbrAutocapitalizeEnum string
@@ -69,9 +59,9 @@ const (
 type WbrContenteditableEnum string
 
 const (
+	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
 	WbrContenteditableEnumFalse         WbrContenteditableEnum = "false"
 	WbrContenteditableEnumPlaintextOnly WbrContenteditableEnum = "plaintext-only"
-	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
 	WbrContenteditableEnumEmpty         WbrContenteditableEnum = ""
 )
 
@@ -93,13 +83,13 @@ const (
 type WbrEnterkeyhintEnum string
 
 const (
+	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
 	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
 	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
 	WbrEnterkeyhintEnumSearch   WbrEnterkeyhintEnum = "search"
 	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
-	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 )
 
 type WbrHiddenEnum string
@@ -113,7 +103,6 @@ const (
 type WbrInputmodeEnum string
 
 const (
-	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
 	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
 	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
 	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
@@ -121,13 +110,14 @@ const (
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
 	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
 	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
+	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
 )
 
 type WbrSpellcheckEnum string
 
 const (
-	WbrSpellcheckEnumFalse WbrSpellcheckEnum = "false"
 	WbrSpellcheckEnumTrue  WbrSpellcheckEnum = "true"
+	WbrSpellcheckEnumFalse WbrSpellcheckEnum = "false"
 	WbrSpellcheckEnumEmpty WbrSpellcheckEnum = ""
 )
 
@@ -364,16 +354,6 @@ func (e *WbrElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</wbr>")); err != nil {
 		return err
 	}
 

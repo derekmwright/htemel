@@ -22,8 +22,7 @@ type TextareaElement struct {
 // Spec Description: The textarea element represents a multiline plain text edit control for the element's raw value. The contents of the control represent the control's default value.
 func Textarea(children ...htemel.Node) *TextareaElement {
 	node := &TextareaElement{
-		children:   children,
-		attributes: make(textareaAttrs),
+		children: children, attributes: make(textareaAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func TextareaTernary(condition bool, true htemel.Node, false htemel.Node) *Texta
 type TextareaAutocapitalizeEnum string
 
 const (
-	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
-	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
 	TextareaAutocapitalizeEnumWords      TextareaAutocapitalizeEnum = "words"
 	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
 	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
 	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
+	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
+	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
 )
 
 type TextareaAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type TextareaDirEnum string
 
 const (
-	TextareaDirEnumAuto TextareaDirEnum = "auto"
 	TextareaDirEnumLtr  TextareaDirEnum = "ltr"
 	TextareaDirEnumRtl  TextareaDirEnum = "rtl"
+	TextareaDirEnumAuto TextareaDirEnum = "auto"
 )
 
 type TextareaDraggableEnum string
@@ -93,27 +92,26 @@ const (
 type TextareaEnterkeyhintEnum string
 
 const (
+	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
+	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
+	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
 	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
 	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
 	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
 	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
-	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
-	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
-	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
 )
 
 type TextareaHiddenEnum string
 
 const (
-	TextareaHiddenEnumHidden     TextareaHiddenEnum = "hidden"
 	TextareaHiddenEnumUntilFound TextareaHiddenEnum = "until-found"
+	TextareaHiddenEnumHidden     TextareaHiddenEnum = "hidden"
 	TextareaHiddenEnumEmpty      TextareaHiddenEnum = ""
 )
 
 type TextareaInputmodeEnum string
 
 const (
-	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
 	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
 	TextareaInputmodeEnumSearch  TextareaInputmodeEnum = "search"
 	TextareaInputmodeEnumTel     TextareaInputmodeEnum = "tel"
@@ -121,6 +119,7 @@ const (
 	TextareaInputmodeEnumUrl     TextareaInputmodeEnum = "url"
 	TextareaInputmodeEnumDecimal TextareaInputmodeEnum = "decimal"
 	TextareaInputmodeEnumEmail   TextareaInputmodeEnum = "email"
+	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
 )
 
 type TextareaSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type TextareaTranslateEnum string
 
 const (
-	TextareaTranslateEnumNo    TextareaTranslateEnum = "no"
 	TextareaTranslateEnumYes   TextareaTranslateEnum = "yes"
+	TextareaTranslateEnumNo    TextareaTranslateEnum = "no"
 	TextareaTranslateEnumEmpty TextareaTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *TextareaElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

@@ -22,8 +22,7 @@ type AsideElement struct {
 // Spec Description: The aside element represents a section of a page that consists of content that is tangentially related to the content around the aside element, and which could be considered separate from that content. Such sections are often represented as sidebars in printed typography.
 func Aside(children ...htemel.Node) *AsideElement {
 	node := &AsideElement{
-		children:   children,
-		attributes: make(asideAttrs),
+		children: children, attributes: make(asideAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideEle
 type AsideAutocapitalizeEnum string
 
 const (
+	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
+	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
 	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
 	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
 	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
-	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
-	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
 )
 
 type AsideAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type AsideContenteditableEnum string
 
 const (
-	AsideContenteditableEnumPlaintextOnly AsideContenteditableEnum = "plaintext-only"
 	AsideContenteditableEnumTrue          AsideContenteditableEnum = "true"
 	AsideContenteditableEnumFalse         AsideContenteditableEnum = "false"
+	AsideContenteditableEnumPlaintextOnly AsideContenteditableEnum = "plaintext-only"
 	AsideContenteditableEnumEmpty         AsideContenteditableEnum = ""
 )
 
@@ -86,20 +85,20 @@ const (
 type AsideDraggableEnum string
 
 const (
-	AsideDraggableEnumTrue  AsideDraggableEnum = "true"
 	AsideDraggableEnumFalse AsideDraggableEnum = "false"
+	AsideDraggableEnumTrue  AsideDraggableEnum = "true"
 )
 
 type AsideEnterkeyhintEnum string
 
 const (
+	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
 	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
 	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
 	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
 	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
 	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
-	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 )
 
 type AsideHiddenEnum string
@@ -366,7 +365,6 @@ func (e *AsideElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

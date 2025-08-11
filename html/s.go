@@ -22,8 +22,7 @@ type SElement struct {
 // Spec Description: The s element represents contents that are no longer accurate or no longer relevant.
 func S(children ...htemel.Node) *SElement {
 	node := &SElement{
-		children:   children,
-		attributes: make(sAttrs),
+		children: children, attributes: make(sAttrs),
 	}
 
 	return node
@@ -50,19 +49,19 @@ func STernary(condition bool, true htemel.Node, false htemel.Node) *SElement {
 type SAutocapitalizeEnum string
 
 const (
+	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
 	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
 	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
 	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
 	SAutocapitalizeEnumSentences  SAutocapitalizeEnum = "sentences"
 	SAutocapitalizeEnumWords      SAutocapitalizeEnum = "words"
-	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
 )
 
 type SAutocorrectEnum string
 
 const (
-	SAutocorrectEnumOff   SAutocorrectEnum = "off"
 	SAutocorrectEnumOn    SAutocorrectEnum = "on"
+	SAutocorrectEnumOff   SAutocorrectEnum = "off"
 	SAutocorrectEnumEmpty SAutocorrectEnum = ""
 )
 
@@ -78,9 +77,9 @@ const (
 type SDirEnum string
 
 const (
-	SDirEnumRtl  SDirEnum = "rtl"
 	SDirEnumAuto SDirEnum = "auto"
 	SDirEnumLtr  SDirEnum = "ltr"
+	SDirEnumRtl  SDirEnum = "rtl"
 )
 
 type SDraggableEnum string
@@ -113,21 +112,21 @@ const (
 type SInputmodeEnum string
 
 const (
-	SInputmodeEnumNone    SInputmodeEnum = "none"
-	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
-	SInputmodeEnumSearch  SInputmodeEnum = "search"
 	SInputmodeEnumTel     SInputmodeEnum = "tel"
 	SInputmodeEnumText    SInputmodeEnum = "text"
 	SInputmodeEnumUrl     SInputmodeEnum = "url"
 	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
 	SInputmodeEnumEmail   SInputmodeEnum = "email"
+	SInputmodeEnumNone    SInputmodeEnum = "none"
+	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
+	SInputmodeEnumSearch  SInputmodeEnum = "search"
 )
 
 type SSpellcheckEnum string
 
 const (
-	SSpellcheckEnumFalse SSpellcheckEnum = "false"
 	SSpellcheckEnumTrue  SSpellcheckEnum = "true"
+	SSpellcheckEnumFalse SSpellcheckEnum = "false"
 	SSpellcheckEnumEmpty SSpellcheckEnum = ""
 )
 
@@ -142,8 +141,8 @@ const (
 type SWritingsuggestionsEnum string
 
 const (
-	SWritingsuggestionsEnumFalse SWritingsuggestionsEnum = "false"
 	SWritingsuggestionsEnumTrue  SWritingsuggestionsEnum = "true"
+	SWritingsuggestionsEnumFalse SWritingsuggestionsEnum = "false"
 	SWritingsuggestionsEnumEmpty SWritingsuggestionsEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *SElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

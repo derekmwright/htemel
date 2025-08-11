@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type InputElement struct {
 	attributes inputAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type InputElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The input element represents a typed data field, usually with a form control to allow the user to edit the data.
-func Input(children ...htemel.Node) *InputElement {
+func Input() *InputElement {
 	node := &InputElement{
-		children:   children,
 		attributes: make(inputAttrs),
 	}
 
 	return node
 }
 
-func InputIf(condition bool, children ...htemel.Node) *InputElement {
+func InputIf(condition bool) *InputElement {
 	if condition {
-		return Input(children...)
+		return Input()
 	}
 
 	return &InputElement{
@@ -39,23 +37,15 @@ func InputIf(condition bool, children ...htemel.Node) *InputElement {
 	}
 }
 
-func InputTernary(condition bool, true htemel.Node, false htemel.Node) *InputElement {
-	if condition {
-		return Input(true)
-	}
-
-	return Input(false)
-}
-
 type InputAutocapitalizeEnum string
 
 const (
-	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
-	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
-	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
 	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
 	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
+	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
+	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
+	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 )
 
 type InputAutocorrectEnum string
@@ -93,13 +83,13 @@ const (
 type InputEnterkeyhintEnum string
 
 const (
+	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
+	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
+	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
 	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
 	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
 	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
-	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
-	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
-	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 )
 
 type InputHiddenEnum string
@@ -113,14 +103,14 @@ const (
 type InputInputmodeEnum string
 
 const (
-	InputInputmodeEnumText    InputInputmodeEnum = "text"
-	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
 	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
 	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 	InputInputmodeEnumNone    InputInputmodeEnum = "none"
 	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
 	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
 	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
+	InputInputmodeEnumText    InputInputmodeEnum = "text"
+	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
 )
 
 type InputSpellcheckEnum string
@@ -134,8 +124,8 @@ const (
 type InputTranslateEnum string
 
 const (
-	InputTranslateEnumYes   InputTranslateEnum = "yes"
 	InputTranslateEnumNo    InputTranslateEnum = "no"
+	InputTranslateEnumYes   InputTranslateEnum = "yes"
 	InputTranslateEnumEmpty InputTranslateEnum = ""
 )
 
@@ -364,16 +354,6 @@ func (e *InputElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</input>")); err != nil {
 		return err
 	}
 

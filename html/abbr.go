@@ -22,8 +22,7 @@ type AbbrElement struct {
 // Spec Description: The abbr element represents an abbreviation or acronym, optionally with its expansion. The title attribute may be used to provide an expansion of the abbreviation. The attribute, if specified, must contain an expansion of the abbreviation, and nothing else.
 func Abbr(children ...htemel.Node) *AbbrElement {
 	node := &AbbrElement{
-		children:   children,
-		attributes: make(abbrAttrs),
+		children: children, attributes: make(abbrAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrEleme
 type AbbrAutocapitalizeEnum string
 
 const (
+	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
 	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
 	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
 	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
 	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
 	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
-	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
 )
 
 type AbbrAutocorrectEnum string
@@ -69,9 +68,9 @@ const (
 type AbbrContenteditableEnum string
 
 const (
+	AbbrContenteditableEnumFalse         AbbrContenteditableEnum = "false"
 	AbbrContenteditableEnumPlaintextOnly AbbrContenteditableEnum = "plaintext-only"
 	AbbrContenteditableEnumTrue          AbbrContenteditableEnum = "true"
-	AbbrContenteditableEnumFalse         AbbrContenteditableEnum = "false"
 	AbbrContenteditableEnumEmpty         AbbrContenteditableEnum = ""
 )
 
@@ -93,26 +92,27 @@ const (
 type AbbrEnterkeyhintEnum string
 
 const (
+	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
 	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 	AbbrEnterkeyhintEnumEnter    AbbrEnterkeyhintEnum = "enter"
 	AbbrEnterkeyhintEnumGo       AbbrEnterkeyhintEnum = "go"
 	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
 	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
 	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
-	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
 )
 
 type AbbrHiddenEnum string
 
 const (
-	AbbrHiddenEnumUntilFound AbbrHiddenEnum = "until-found"
 	AbbrHiddenEnumHidden     AbbrHiddenEnum = "hidden"
+	AbbrHiddenEnumUntilFound AbbrHiddenEnum = "until-found"
 	AbbrHiddenEnumEmpty      AbbrHiddenEnum = ""
 )
 
 type AbbrInputmodeEnum string
 
 const (
+	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
 	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
@@ -120,7 +120,6 @@ const (
 	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
 	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
 	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
-	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 )
 
 type AbbrSpellcheckEnum string
@@ -366,7 +365,6 @@ func (e *AbbrElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

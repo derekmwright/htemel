@@ -22,8 +22,7 @@ type HeadElement struct {
 // Spec Description: The head element represents a collection of metadata for the Document.
 func Head(children ...htemel.Node) *HeadElement {
 	node := &HeadElement{
-		children:   children,
-		attributes: make(headAttrs),
+		children: children, attributes: make(headAttrs),
 	}
 
 	return node
@@ -50,12 +49,12 @@ func HeadTernary(condition bool, true htemel.Node, false htemel.Node) *HeadEleme
 type HeadAutocapitalizeEnum string
 
 const (
+	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
+	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 	HeadAutocapitalizeEnumCharacters HeadAutocapitalizeEnum = "characters"
 	HeadAutocapitalizeEnumNone       HeadAutocapitalizeEnum = "none"
 	HeadAutocapitalizeEnumOff        HeadAutocapitalizeEnum = "off"
 	HeadAutocapitalizeEnumOn         HeadAutocapitalizeEnum = "on"
-	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
-	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 )
 
 type HeadAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type HeadDirEnum string
 
 const (
-	HeadDirEnumRtl  HeadDirEnum = "rtl"
 	HeadDirEnumAuto HeadDirEnum = "auto"
 	HeadDirEnumLtr  HeadDirEnum = "ltr"
+	HeadDirEnumRtl  HeadDirEnum = "rtl"
 )
 
 type HeadDraggableEnum string
@@ -93,13 +92,13 @@ const (
 type HeadEnterkeyhintEnum string
 
 const (
-	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
 	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
 	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
 	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
 	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
 	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
+	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
 )
 
 type HeadHiddenEnum string
@@ -113,14 +112,14 @@ const (
 type HeadInputmodeEnum string
 
 const (
-	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
-	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
-	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
 	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
 	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
 	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
 	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
 	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
+	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
+	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
+	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
 )
 
 type HeadSpellcheckEnum string
@@ -134,8 +133,8 @@ const (
 type HeadTranslateEnum string
 
 const (
-	HeadTranslateEnumNo    HeadTranslateEnum = "no"
 	HeadTranslateEnumYes   HeadTranslateEnum = "yes"
+	HeadTranslateEnumNo    HeadTranslateEnum = "no"
 	HeadTranslateEnumEmpty HeadTranslateEnum = ""
 )
 
@@ -366,7 +365,6 @@ func (e *HeadElement) Render(w io.Writer) error {
 	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
-
 	for _, child := range e.children {
 		if err := child.Render(w); err != nil {
 			return err

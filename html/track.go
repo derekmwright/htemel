@@ -6,13 +6,12 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
 type TrackElement struct {
 	attributes trackAttrs
-	children   []htemel.Node
+
 	skipRender bool
 }
 
@@ -20,18 +19,17 @@ type TrackElement struct {
 // Any children passed will be nested within the tag.
 //
 // Spec Description: The track element allows authors to specify explicit external timed text tracks for media elements. It does not represent anything on its own.
-func Track(children ...htemel.Node) *TrackElement {
+func Track() *TrackElement {
 	node := &TrackElement{
-		children:   children,
 		attributes: make(trackAttrs),
 	}
 
 	return node
 }
 
-func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
+func TrackIf(condition bool) *TrackElement {
 	if condition {
-		return Track(children...)
+		return Track()
 	}
 
 	return &TrackElement{
@@ -39,39 +37,31 @@ func TrackIf(condition bool, children ...htemel.Node) *TrackElement {
 	}
 }
 
-func TrackTernary(condition bool, true htemel.Node, false htemel.Node) *TrackElement {
-	if condition {
-		return Track(true)
-	}
-
-	return Track(false)
-}
-
 type TrackAutocapitalizeEnum string
 
 const (
-	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
 	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
 	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
 	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
 	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
 	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
+	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
 )
 
 type TrackAutocorrectEnum string
 
 const (
-	TrackAutocorrectEnumOff   TrackAutocorrectEnum = "off"
 	TrackAutocorrectEnumOn    TrackAutocorrectEnum = "on"
+	TrackAutocorrectEnumOff   TrackAutocorrectEnum = "off"
 	TrackAutocorrectEnumEmpty TrackAutocorrectEnum = ""
 )
 
 type TrackContenteditableEnum string
 
 const (
-	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
 	TrackContenteditableEnumFalse         TrackContenteditableEnum = "false"
 	TrackContenteditableEnumPlaintextOnly TrackContenteditableEnum = "plaintext-only"
+	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
 	TrackContenteditableEnumEmpty         TrackContenteditableEnum = ""
 )
 
@@ -93,13 +83,13 @@ const (
 type TrackEnterkeyhintEnum string
 
 const (
-	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
-	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
-	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
 	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
 	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
+	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
+	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
+	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 )
 
 type TrackHiddenEnum string
@@ -113,14 +103,14 @@ const (
 type TrackInputmodeEnum string
 
 const (
+	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
+	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
+	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
 	TrackInputmodeEnumDecimal TrackInputmodeEnum = "decimal"
 	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
 	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
 	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
 	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
-	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
-	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
-	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
 )
 
 type TrackSpellcheckEnum string
@@ -364,16 +354,6 @@ func (e *TrackElement) Render(w io.Writer) error {
 	}
 
 	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
-
-	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
-			return err
-		}
-	}
-
-	if _, err := w.Write([]byte("</track>")); err != nil {
 		return err
 	}
 
