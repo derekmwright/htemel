@@ -1,20 +1,21 @@
-⚠️ This project is a **work in progress**, check back often and throw a ⭐ on it if you are interested!
+⚠️ This project is a **work in progress**. Check back often and give it a ⭐ if you're interested!
 
 # htemel
 
-Pronounced HTML, htemel is a library focused on generating documents for the web using pure Go functions and not a templating language.
-The library is being written in a way that makes it easy to extend and add additional functionality, or provide support for any custom web components you may have.
+Pronounced like "HTML," **htemel** is a Go library for generating web documents using pure Go functions, avoiding traditional templating languages. The library is designed for extensibility, making it easy to add custom functionality or support for bespoke web components.
 
 ## Installation
+
+To install htemel, run the following commands:
 
 ```shell
 go get github.com/derekmwright/htemel
 go get github.com/derekmwright/htemel/html
 ```
 
-## Examples
+## Example
 
-Using a `.` (dot) import on a namespaced element package helps readability, but it's not required.
+Using a `.` (dot) import for namespaced element packages improves readability but is optional.
 
 ### Basic Usage
 
@@ -22,132 +23,122 @@ Using a `.` (dot) import on a namespaced element package helps readability, but 
 package main
 
 import (
-	"os"
+    "os"
 
-	. "github.com/derekmwright/htemel"
-	. "github.com/derekmwright/htemel/html"
+    . "github.com/derekmwright/htemel"
+    . "github.com/derekmwright/htemel/html"
 )
 
 func MainLayout(children ...Node) Node {
-	return Group(
-		GenericVoid("!DOCTYPE", map[string]any{"html": nil}),
-		Html(
-			Head(
-				Meta().Charset("UTF-8"),
-				Meta().Content("width=device-width, initial-scale=1.0"),
-				Title(Text("Example htemel Page")),
-				Link().Href("site.css").Rel("stylesheet"),
-			),
-			Body(
-				children...,
-			).Id("app-content"),
-		).Class("h-dvh bg-gray-200").Lang("en"),
-	)
+    return Group(
+        GenericVoid("!DOCTYPE", map[string]any{"html": nil}),
+        Html(
+            Head(
+                Meta().Charset("UTF-8"),
+                Meta().Name("viewport").Content("width=device-width, initial-scale=1.0"),
+                Title(Text("Example htemel Page")),
+                Link().Href("site.css").Rel("stylesheet"),
+            ),
+            Body(
+                children...,
+            ).Id("app-content"),
+        ).Class("h-dvh bg-gray-200").Lang("en"),
+    )
 }
 
 func Navigation(menuItems ...Node) Node {
-	c := Nav(
-		Ul(
-			Group(menuItems...),
-		).Class("flex list-none"),
-	).Id("main-navigation")
-
-	return c
+    return Nav(
+        Ul(
+            Group(menuItems...),
+        ).Class("flex list-none"),
+    ).Id("main-navigation")
 }
 
 func main() {
-	loggedIn := true
-	MainLayout(
-		DivTernary(
-			loggedIn,
-			Group(
-				Navigation(),
-				Div(
-					P(Text("Welcome back!")),
-				),
-			),
-			Div(
-				P(Text("Please login.")),
-			),
-		),
-	).Render(os.Stdout)
+    loggedIn := true
+    MainLayout(
+        DivTernary(
+            loggedIn,
+            Group(
+                Navigation(),
+                Div(
+                    P(Text("Welcome back!")),
+                ),
+            ),
+            Div(
+                P(Text("Please log in.")),
+            ),
+        ),
+    ).Render(os.Stdout)
 }
 ```
 
-Outputs (I formatted the result to help readability of the output):
+**Output** (formatted for readability):
+
 ```html
 <!DOCTYPE html>
 <html class="h-dvh bg-gray-200" lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Example htemel Page</title>
     <link href="site.css" rel="stylesheet">
 </head>
 <body id="app-content">
-<div>
-    <nav id="main-navigation">
-        <ul class="flex list-none"></ul>
-    </nav>
     <div>
-        <p>Welcome back!</p>
+        <nav id="main-navigation">
+            <ul class="flex list-none"></ul>
+        </nav>
+        <div>
+            <p>Welcome back!</p>
+        </div>
     </div>
-</div>
 </body>
 </html>
 ```
 
-## The Goal
+## Goals
 
-The aim of this package is to provide a robust and **compile time safe** way to generate HTML.
-HTML elements are represented by functions that return a related struct that can then be chain called for further modification.
-An element has a limited set of attributes available to it and are unique to an instance of it.
-This means, when using code completion or hinting in your editor, you will only see attributes allowed for the specific element.
-If an attribute is an enumerated-type, special types are generated to conform to the HTML spec for you.
+The primary goal of **htemel** is to provide a **compile-time safe** method for generating HTML. HTML elements are represented as functions that return structs, enabling method chaining for attribute modifications. Each element has a restricted set of attributes, ensuring only valid attributes appear in code completion or editor hints. For enumerated attributes, types are generated to conform to the HTML specification.
 
-Example:
+**Example**:
+
 ```go
 html.Link().HttpEquiv(html.MetaHttpEquivEnumContentType)
 ```
 
-Additionally, due to the way function chain calling works, and HTML attributes are mutually exclusive on an element, the most recent chain call takes precedence.
+Attributes are mutually exclusive per element, with the most recent chain call taking precedence:
 
-Example:
 ```go
-// You can also pass a list of strings to space-seperated-token type attributes
-// ie: Class("active", "hover:bg-indigo-400")
-html.A().Class("active hover:bg-indigo-400").Class("this-takes-precedence")
+// Space-separated token attributes (e.g., class) accept multiple strings
+html.A().Class("active", "hover:bg-indigo-400").Class("this-takes-precedence")
 ```
 
-Resuls:
-```text
-<a class="this-takes-precedence">
+**Output**:
+
+```html
+<a class="this-takes-precedence"></a>
 ```
 
-## Why
+## Why htemel?
 
-I looked at `templ`, `gomponents`, and `gostar` but they just felt like none of them fully met my needs.
+After evaluating alternatives like `templ`, `gomponents`, and `gostar`, none fully met the need for a robust, type-safe, and extensible HTML generation library in Go:
 
-With templ, it was still too much writing html and interpolating in templates.
+- **templ**: Felt too much like writing HTML with interpolated templates.
+- **gomponents**: Promising but too permissive with attributes, and distinguishing global vs. element-specific attributes was cumbersome.
+- **gostar**: Showed potential but appeared unmaintained, with challenges in implementing custom components like TailwindPlus.
 
-Gomponents, definitely piqued my interest but seemed a little loose with what attributes were allowed on certain elements.
-Given it was hand-crafted, trying to adjust global attributes vs element-specific attributes would be quite burdensome, so I get it.
-
-Gostar, seemed a bit unmaintained but definitely felt like it could have potential, but I had some issues trying to figure out how to implement some custom TailwindPlus components with it.
-
-So, I figured, I can write Go, lets give it a shot.
+Thus, **htemel** was created to address these gaps with a focus on type safety and extensibility.
 
 ## Contributing
 
-Feel free to fork and submit a PR if you want to help development.
-My only ask is that you try to consider the feel and direction of the API before implementing new features.
+Contributions are welcome! Fork the repository and submit a pull request. Please align new features with the API's existing design and direction.
 
-## Generating
+## Generators
 
-There's couple generators here...
-I've included the HTML spec generator that pulls from the living HTML standard spec @ https://html.spec.whatwg.org/ - caveat: The parser is a WIP and there are a bunch of hand-crafted attributes to fill in gaps.
-I'd like the generator to be able to also generate a spec for SVG and MathML or other markup languages that you may feel would be beneficial.
-Once a spec is generated, it can be used to generate package namespaced elements based on the provided spec.
+**htemel** includes generators to streamline development:
 
-You don't HAVE to generate a spec, if you have a custom web component, you can quickly write your own spec, and feed it to the element generator.
-Then use the generated elements for your own use-cases.
+1. **HTML Spec Generator**: Pulls from the [Living HTML Standard](https://html.spec.whatwg.org/). Note: The parser is a work in progress, with some hand-crafted attributes to fill gaps.
+2. **Element Generator**: Generates namespaced elements from a provided spec. You can write custom specs for your web components and generate corresponding elements.
+
+Support for additional markup languages like SVG or MathML is planned. Contributions to enhance the generator are encouraged!
