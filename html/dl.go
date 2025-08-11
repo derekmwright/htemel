@@ -17,8 +17,7 @@ type DlElement struct {
 }
 
 // Dl creates a tag <dl> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The dl element represents an association list consisting of zero or more name-value groups (a description list). A name-value group consists of one or more names (dt elements, possibly as children of a div element child) followed by one or more values (dd elements, possibly as children of a div element child), ignoring any nodes other than dt and dd element children, and dt and dd elements that are children of div element children. Within a single dl element, there should not be more than one dt element for each name.
 func Dl(children ...htemel.Node) *DlElement {
 	node := &DlElement{
@@ -49,12 +48,12 @@ func DlTernary(condition bool, true htemel.Node, false htemel.Node) *DlElement {
 type DlAutocapitalizeEnum string
 
 const (
+	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
 	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
 	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
 	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
 	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
 	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
-	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
 )
 
 type DlAutocorrectEnum string
@@ -68,18 +67,18 @@ const (
 type DlContenteditableEnum string
 
 const (
+	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
 	DlContenteditableEnumTrue          DlContenteditableEnum = "true"
-	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumEmpty         DlContenteditableEnum = ""
 )
 
 type DlDirEnum string
 
 const (
-	DlDirEnumAuto DlDirEnum = "auto"
 	DlDirEnumLtr  DlDirEnum = "ltr"
 	DlDirEnumRtl  DlDirEnum = "rtl"
+	DlDirEnumAuto DlDirEnum = "auto"
 )
 
 type DlDraggableEnum string
@@ -92,20 +91,20 @@ const (
 type DlEnterkeyhintEnum string
 
 const (
+	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
 	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
 	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
 	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
 	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
 	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
-	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
 )
 
 type DlHiddenEnum string
 
 const (
-	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
 	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
+	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
 	DlHiddenEnumEmpty      DlHiddenEnum = ""
 )
 
@@ -141,8 +140,8 @@ const (
 type DlWritingsuggestionsEnum string
 
 const (
-	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
 	DlWritingsuggestionsEnumFalse DlWritingsuggestionsEnum = "false"
+	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
 	DlWritingsuggestionsEnumEmpty DlWritingsuggestionsEnum = ""
 )
 

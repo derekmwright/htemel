@@ -17,8 +17,7 @@ type IframeElement struct {
 }
 
 // Iframe creates a tag <iframe> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The iframe element represents its content navigable.
 func Iframe(children ...htemel.Node) *IframeElement {
 	node := &IframeElement{
@@ -68,18 +67,18 @@ const (
 type IframeContenteditableEnum string
 
 const (
+	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
 	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
 	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
-	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
 	IframeContenteditableEnumEmpty         IframeContenteditableEnum = ""
 )
 
 type IframeDirEnum string
 
 const (
+	IframeDirEnumAuto IframeDirEnum = "auto"
 	IframeDirEnumLtr  IframeDirEnum = "ltr"
 	IframeDirEnumRtl  IframeDirEnum = "rtl"
-	IframeDirEnumAuto IframeDirEnum = "auto"
 )
 
 type IframeDraggableEnum string
@@ -92,34 +91,34 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
-	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
-	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
 	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
+	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
+	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 )
 
 type IframeHiddenEnum string
 
 const (
-	IframeHiddenEnumHidden     IframeHiddenEnum = "hidden"
 	IframeHiddenEnumUntilFound IframeHiddenEnum = "until-found"
+	IframeHiddenEnumHidden     IframeHiddenEnum = "hidden"
 	IframeHiddenEnumEmpty      IframeHiddenEnum = ""
 )
 
 type IframeInputmodeEnum string
 
 const (
-	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
-	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
-	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
-	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
 	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
 	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
 	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
 	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
+	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
+	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
+	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
+	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
 )
 
 type IframeSpellcheckEnum string

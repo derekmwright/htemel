@@ -17,8 +17,7 @@ type SelectedcontentElement struct {
 }
 
 // Selectedcontent creates a tag <selectedcontent> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The selectedcontent element reflects the contents of a select element's currently selected option element. selectedcontent elements can be used to declaratively show the selected option element's contents within the select element's first child button element.
 func Selectedcontent(children ...htemel.Node) *SelectedcontentElement {
 	node := &SelectedcontentElement{
@@ -49,12 +48,12 @@ func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node)
 type SelectedcontentAutocapitalizeEnum string
 
 const (
-	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
-	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
 	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
 	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
 	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
+	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
+	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
 )
 
 type SelectedcontentAutocorrectEnum string
@@ -68,18 +67,18 @@ const (
 type SelectedcontentContenteditableEnum string
 
 const (
+	SelectedcontentContenteditableEnumTrue          SelectedcontentContenteditableEnum = "true"
 	SelectedcontentContenteditableEnumFalse         SelectedcontentContenteditableEnum = "false"
 	SelectedcontentContenteditableEnumPlaintextOnly SelectedcontentContenteditableEnum = "plaintext-only"
-	SelectedcontentContenteditableEnumTrue          SelectedcontentContenteditableEnum = "true"
 	SelectedcontentContenteditableEnumEmpty         SelectedcontentContenteditableEnum = ""
 )
 
 type SelectedcontentDirEnum string
 
 const (
+	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 	SelectedcontentDirEnumAuto SelectedcontentDirEnum = "auto"
 	SelectedcontentDirEnumLtr  SelectedcontentDirEnum = "ltr"
-	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
 )
 
 type SelectedcontentDraggableEnum string
@@ -112,7 +111,6 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
-	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
 	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
@@ -120,6 +118,7 @@ const (
 	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
 	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
 	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
+	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 )
 
 type SelectedcontentSpellcheckEnum string

@@ -17,8 +17,7 @@ type SummaryElement struct {
 }
 
 // Summary creates a tag <summary> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The summary element represents a summary, caption, or legend for the rest of the contents of the summary element's parent details element, if any.
 func Summary(children ...htemel.Node) *SummaryElement {
 	node := &SummaryElement{
@@ -49,12 +48,12 @@ func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *Summar
 type SummaryAutocapitalizeEnum string
 
 const (
+	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
+	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
 	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
-	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
-	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
 )
 
 type SummaryAutocorrectEnum string
@@ -77,16 +76,16 @@ const (
 type SummaryDirEnum string
 
 const (
-	SummaryDirEnumLtr  SummaryDirEnum = "ltr"
 	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
 	SummaryDirEnumAuto SummaryDirEnum = "auto"
+	SummaryDirEnumLtr  SummaryDirEnum = "ltr"
 )
 
 type SummaryDraggableEnum string
 
 const (
-	SummaryDraggableEnumTrue  SummaryDraggableEnum = "true"
 	SummaryDraggableEnumFalse SummaryDraggableEnum = "false"
+	SummaryDraggableEnumTrue  SummaryDraggableEnum = "true"
 )
 
 type SummaryEnterkeyhintEnum string
@@ -104,22 +103,22 @@ const (
 type SummaryHiddenEnum string
 
 const (
-	SummaryHiddenEnumUntilFound SummaryHiddenEnum = "until-found"
 	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
+	SummaryHiddenEnumUntilFound SummaryHiddenEnum = "until-found"
 	SummaryHiddenEnumEmpty      SummaryHiddenEnum = ""
 )
 
 type SummaryInputmodeEnum string
 
 const (
+	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
+	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
+	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
 	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
 	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
 	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
 	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
-	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
-	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
-	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
 )
 
 type SummarySpellcheckEnum string
@@ -133,16 +132,16 @@ const (
 type SummaryTranslateEnum string
 
 const (
-	SummaryTranslateEnumNo    SummaryTranslateEnum = "no"
 	SummaryTranslateEnumYes   SummaryTranslateEnum = "yes"
+	SummaryTranslateEnumNo    SummaryTranslateEnum = "no"
 	SummaryTranslateEnumEmpty SummaryTranslateEnum = ""
 )
 
 type SummaryWritingsuggestionsEnum string
 
 const (
-	SummaryWritingsuggestionsEnumTrue  SummaryWritingsuggestionsEnum = "true"
 	SummaryWritingsuggestionsEnumFalse SummaryWritingsuggestionsEnum = "false"
+	SummaryWritingsuggestionsEnumTrue  SummaryWritingsuggestionsEnum = "true"
 	SummaryWritingsuggestionsEnumEmpty SummaryWritingsuggestionsEnum = ""
 )
 

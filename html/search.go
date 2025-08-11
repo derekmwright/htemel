@@ -17,8 +17,7 @@ type SearchElement struct {
 }
 
 // Search creates a tag <search> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The search element represents a part of a document or application that contains a set of form controls or other content related to performing a search or filtering operation. This could be a search of the web site or application; a way of searching or filtering search results on the current web page; or a global or Internet-wide search function.
 func Search(children ...htemel.Node) *SearchElement {
 	node := &SearchElement{
@@ -49,12 +48,12 @@ func SearchTernary(condition bool, true htemel.Node, false htemel.Node) *SearchE
 type SearchAutocapitalizeEnum string
 
 const (
+	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
+	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
 	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
 	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
 	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
 	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
-	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
-	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
 )
 
 type SearchAutocorrectEnum string
@@ -77,9 +76,9 @@ const (
 type SearchDirEnum string
 
 const (
-	SearchDirEnumRtl  SearchDirEnum = "rtl"
 	SearchDirEnumAuto SearchDirEnum = "auto"
 	SearchDirEnumLtr  SearchDirEnum = "ltr"
+	SearchDirEnumRtl  SearchDirEnum = "rtl"
 )
 
 type SearchDraggableEnum string
@@ -104,22 +103,22 @@ const (
 type SearchHiddenEnum string
 
 const (
-	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
 	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
+	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
 	SearchHiddenEnumEmpty      SearchHiddenEnum = ""
 )
 
 type SearchInputmodeEnum string
 
 const (
+	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
+	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
 	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
 	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
 	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
 	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
 	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
-	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
-	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
 )
 
 type SearchSpellcheckEnum string
@@ -133,16 +132,16 @@ const (
 type SearchTranslateEnum string
 
 const (
-	SearchTranslateEnumYes   SearchTranslateEnum = "yes"
 	SearchTranslateEnumNo    SearchTranslateEnum = "no"
+	SearchTranslateEnumYes   SearchTranslateEnum = "yes"
 	SearchTranslateEnumEmpty SearchTranslateEnum = ""
 )
 
 type SearchWritingsuggestionsEnum string
 
 const (
-	SearchWritingsuggestionsEnumTrue  SearchWritingsuggestionsEnum = "true"
 	SearchWritingsuggestionsEnumFalse SearchWritingsuggestionsEnum = "false"
+	SearchWritingsuggestionsEnumTrue  SearchWritingsuggestionsEnum = "true"
 	SearchWritingsuggestionsEnumEmpty SearchWritingsuggestionsEnum = ""
 )
 

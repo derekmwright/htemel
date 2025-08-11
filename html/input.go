@@ -16,7 +16,6 @@ type InputElement struct {
 }
 
 // Input creates a tag <input> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: The input element represents a typed data field, usually with a form control to allow the user to edit the data.
 func Input() *InputElement {
@@ -40,12 +39,12 @@ func InputIf(condition bool) *InputElement {
 type InputAutocapitalizeEnum string
 
 const (
+	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
+	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
 	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
 	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
 	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
-	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
-	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 )
 
 type InputAutocorrectEnum string
@@ -83,13 +82,13 @@ const (
 type InputEnterkeyhintEnum string
 
 const (
+	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
+	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
+	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
 	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
 	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
 	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
-	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
-	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
-	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
 )
 
 type InputHiddenEnum string
@@ -103,14 +102,14 @@ const (
 type InputInputmodeEnum string
 
 const (
-	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
-	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 	InputInputmodeEnumNone    InputInputmodeEnum = "none"
 	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
 	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
 	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
 	InputInputmodeEnumText    InputInputmodeEnum = "text"
 	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
+	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
+	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 )
 
 type InputSpellcheckEnum string
@@ -124,8 +123,8 @@ const (
 type InputTranslateEnum string
 
 const (
-	InputTranslateEnumNo    InputTranslateEnum = "no"
 	InputTranslateEnumYes   InputTranslateEnum = "yes"
+	InputTranslateEnumNo    InputTranslateEnum = "no"
 	InputTranslateEnumEmpty InputTranslateEnum = ""
 )
 

@@ -17,8 +17,7 @@ type AElement struct {
 }
 
 // A creates a tag <a> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: If the a element has an href attribute, then it represents a hyperlink (a hypertext anchor) labeled by its contents.
 func A(children ...htemel.Node) *AElement {
 	node := &AElement{
@@ -77,9 +76,9 @@ const (
 type ADirEnum string
 
 const (
-	ADirEnumAuto ADirEnum = "auto"
 	ADirEnumLtr  ADirEnum = "ltr"
 	ADirEnumRtl  ADirEnum = "rtl"
+	ADirEnumAuto ADirEnum = "auto"
 )
 
 type ADraggableEnum string
@@ -92,26 +91,27 @@ const (
 type AEnterkeyhintEnum string
 
 const (
+	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
 	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
 	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
 	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
 	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
-	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 )
 
 type AHiddenEnum string
 
 const (
-	AHiddenEnumHidden     AHiddenEnum = "hidden"
 	AHiddenEnumUntilFound AHiddenEnum = "until-found"
+	AHiddenEnumHidden     AHiddenEnum = "hidden"
 	AHiddenEnumEmpty      AHiddenEnum = ""
 )
 
 type AInputmodeEnum string
 
 const (
+	AInputmodeEnumTel     AInputmodeEnum = "tel"
 	AInputmodeEnumText    AInputmodeEnum = "text"
 	AInputmodeEnumUrl     AInputmodeEnum = "url"
 	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
@@ -119,7 +119,6 @@ const (
 	AInputmodeEnumNone    AInputmodeEnum = "none"
 	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
 	AInputmodeEnumSearch  AInputmodeEnum = "search"
-	AInputmodeEnumTel     AInputmodeEnum = "tel"
 )
 
 type ASpellcheckEnum string
@@ -133,8 +132,8 @@ const (
 type ATranslateEnum string
 
 const (
-	ATranslateEnumYes   ATranslateEnum = "yes"
 	ATranslateEnumNo    ATranslateEnum = "no"
+	ATranslateEnumYes   ATranslateEnum = "yes"
 	ATranslateEnumEmpty ATranslateEnum = ""
 )
 
@@ -147,6 +146,54 @@ const (
 )
 
 type aAttrs map[string]any
+
+func (e *AElement) Href(s string) *AElement {
+	e.attributes["href"] = s
+
+	return e
+}
+
+func (e *AElement) Target(s string) *AElement {
+	e.attributes["target"] = s
+
+	return e
+}
+
+func (e *AElement) Download(b bool) *AElement {
+	e.attributes["download"] = b
+
+	return e
+}
+
+func (e *AElement) Ping(s ...string) *AElement {
+	e.attributes["ping"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AElement) Rel(s ...string) *AElement {
+	e.attributes["rel"] = strings.Join(s, " ")
+
+	return e
+}
+
+func (e *AElement) Hreflang(s string) *AElement {
+	e.attributes["hreflang"] = s
+
+	return e
+}
+
+func (e *AElement) Type(s string) *AElement {
+	e.attributes["type"] = s
+
+	return e
+}
+
+func (e *AElement) Referrerpolicy(s string) *AElement {
+	e.attributes["referrerpolicy"] = s
+
+	return e
+}
 
 func (e *AElement) Autocapitalize(a AAutocapitalizeEnum) *AElement {
 	e.attributes["autocapitalize"] = a

@@ -17,8 +17,7 @@ type DtElement struct {
 }
 
 // Dt creates a tag <dt> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The dt element represents the term, or name, part of a term-description group in a description list (dl element).
 func Dt(children ...htemel.Node) *DtElement {
 	node := &DtElement{
@@ -68,9 +67,9 @@ const (
 type DtContenteditableEnum string
 
 const (
-	DtContenteditableEnumFalse         DtContenteditableEnum = "false"
 	DtContenteditableEnumPlaintextOnly DtContenteditableEnum = "plaintext-only"
 	DtContenteditableEnumTrue          DtContenteditableEnum = "true"
+	DtContenteditableEnumFalse         DtContenteditableEnum = "false"
 	DtContenteditableEnumEmpty         DtContenteditableEnum = ""
 )
 
@@ -85,20 +84,20 @@ const (
 type DtDraggableEnum string
 
 const (
-	DtDraggableEnumFalse DtDraggableEnum = "false"
 	DtDraggableEnumTrue  DtDraggableEnum = "true"
+	DtDraggableEnumFalse DtDraggableEnum = "false"
 )
 
 type DtEnterkeyhintEnum string
 
 const (
-	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
-	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
-	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
 	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
 	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
+	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
+	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
+	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 )
 
 type DtHiddenEnum string
@@ -112,21 +111,21 @@ const (
 type DtInputmodeEnum string
 
 const (
+	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
+	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
 	DtInputmodeEnumNone    DtInputmodeEnum = "none"
 	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
 	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
 	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 	DtInputmodeEnumText    DtInputmodeEnum = "text"
-	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
-	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 )
 
 type DtSpellcheckEnum string
 
 const (
-	DtSpellcheckEnumTrue  DtSpellcheckEnum = "true"
 	DtSpellcheckEnumFalse DtSpellcheckEnum = "false"
+	DtSpellcheckEnumTrue  DtSpellcheckEnum = "true"
 	DtSpellcheckEnumEmpty DtSpellcheckEnum = ""
 )
 

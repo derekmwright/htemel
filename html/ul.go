@@ -17,8 +17,7 @@ type UlElement struct {
 }
 
 // Ul creates a tag <ul> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The ul element represents a list of items, where the order of the items is not important — that is, where changing the order would not materially change the meaning of the document.
 func Ul(children ...htemel.Node) *UlElement {
 	node := &UlElement{
@@ -49,12 +48,12 @@ func UlTernary(condition bool, true htemel.Node, false htemel.Node) *UlElement {
 type UlAutocapitalizeEnum string
 
 const (
+	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
+	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 	UlAutocapitalizeEnumNone       UlAutocapitalizeEnum = "none"
 	UlAutocapitalizeEnumOff        UlAutocapitalizeEnum = "off"
 	UlAutocapitalizeEnumOn         UlAutocapitalizeEnum = "on"
 	UlAutocapitalizeEnumSentences  UlAutocapitalizeEnum = "sentences"
-	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
-	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 )
 
 type UlAutocorrectEnum string
@@ -77,9 +76,9 @@ const (
 type UlDirEnum string
 
 const (
-	UlDirEnumRtl  UlDirEnum = "rtl"
 	UlDirEnumAuto UlDirEnum = "auto"
 	UlDirEnumLtr  UlDirEnum = "ltr"
+	UlDirEnumRtl  UlDirEnum = "rtl"
 )
 
 type UlDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
-	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
-	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
 	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
 	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
 	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
 	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
+	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
+	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 )
 
 type UlHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type UlInputmodeEnum string
 
 const (
-	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
-	UlInputmodeEnumText    UlInputmodeEnum = "text"
-	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
 	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
 	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
 	UlInputmodeEnumNone    UlInputmodeEnum = "none"
 	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
 	UlInputmodeEnumSearch  UlInputmodeEnum = "search"
+	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
+	UlInputmodeEnumText    UlInputmodeEnum = "text"
+	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
 )
 
 type UlSpellcheckEnum string
@@ -133,8 +132,8 @@ const (
 type UlTranslateEnum string
 
 const (
-	UlTranslateEnumNo    UlTranslateEnum = "no"
 	UlTranslateEnumYes   UlTranslateEnum = "yes"
+	UlTranslateEnumNo    UlTranslateEnum = "no"
 	UlTranslateEnumEmpty UlTranslateEnum = ""
 )
 

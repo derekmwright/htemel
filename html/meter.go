@@ -17,8 +17,7 @@ type MeterElement struct {
 }
 
 // Meter creates a tag <meter> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The meter element represents a scalar measurement within a known range, or a fractional value; for example disk usage, the relevance of a query result, or the fraction of a voting population to have selected a particular candidate.
 func Meter(children ...htemel.Node) *MeterElement {
 	node := &MeterElement{
@@ -49,12 +48,12 @@ func MeterTernary(condition bool, true htemel.Node, false htemel.Node) *MeterEle
 type MeterAutocapitalizeEnum string
 
 const (
+	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
+	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
 	MeterAutocapitalizeEnumNone       MeterAutocapitalizeEnum = "none"
 	MeterAutocapitalizeEnumOff        MeterAutocapitalizeEnum = "off"
 	MeterAutocapitalizeEnumOn         MeterAutocapitalizeEnum = "on"
 	MeterAutocapitalizeEnumSentences  MeterAutocapitalizeEnum = "sentences"
-	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
-	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
 )
 
 type MeterAutocorrectEnum string
@@ -68,58 +67,58 @@ const (
 type MeterContenteditableEnum string
 
 const (
-	MeterContenteditableEnumFalse         MeterContenteditableEnum = "false"
 	MeterContenteditableEnumPlaintextOnly MeterContenteditableEnum = "plaintext-only"
 	MeterContenteditableEnumTrue          MeterContenteditableEnum = "true"
+	MeterContenteditableEnumFalse         MeterContenteditableEnum = "false"
 	MeterContenteditableEnumEmpty         MeterContenteditableEnum = ""
 )
 
 type MeterDirEnum string
 
 const (
+	MeterDirEnumAuto MeterDirEnum = "auto"
 	MeterDirEnumLtr  MeterDirEnum = "ltr"
 	MeterDirEnumRtl  MeterDirEnum = "rtl"
-	MeterDirEnumAuto MeterDirEnum = "auto"
 )
 
 type MeterDraggableEnum string
 
 const (
-	MeterDraggableEnumTrue  MeterDraggableEnum = "true"
 	MeterDraggableEnumFalse MeterDraggableEnum = "false"
+	MeterDraggableEnumTrue  MeterDraggableEnum = "true"
 )
 
 type MeterEnterkeyhintEnum string
 
 const (
+	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
 	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
 	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 	MeterEnterkeyhintEnumDone     MeterEnterkeyhintEnum = "done"
 	MeterEnterkeyhintEnumEnter    MeterEnterkeyhintEnum = "enter"
 	MeterEnterkeyhintEnumGo       MeterEnterkeyhintEnum = "go"
 	MeterEnterkeyhintEnumNext     MeterEnterkeyhintEnum = "next"
-	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
 )
 
 type MeterHiddenEnum string
 
 const (
-	MeterHiddenEnumHidden     MeterHiddenEnum = "hidden"
 	MeterHiddenEnumUntilFound MeterHiddenEnum = "until-found"
+	MeterHiddenEnumHidden     MeterHiddenEnum = "hidden"
 	MeterHiddenEnumEmpty      MeterHiddenEnum = ""
 )
 
 type MeterInputmodeEnum string
 
 const (
+	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
+	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
+	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 	MeterInputmodeEnumDecimal MeterInputmodeEnum = "decimal"
 	MeterInputmodeEnumEmail   MeterInputmodeEnum = "email"
 	MeterInputmodeEnumNone    MeterInputmodeEnum = "none"
 	MeterInputmodeEnumNumeric MeterInputmodeEnum = "numeric"
 	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
-	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
-	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
-	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 )
 
 type MeterSpellcheckEnum string
@@ -133,8 +132,8 @@ const (
 type MeterTranslateEnum string
 
 const (
-	MeterTranslateEnumNo    MeterTranslateEnum = "no"
 	MeterTranslateEnumYes   MeterTranslateEnum = "yes"
+	MeterTranslateEnumNo    MeterTranslateEnum = "no"
 	MeterTranslateEnumEmpty MeterTranslateEnum = ""
 )
 

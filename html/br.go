@@ -16,7 +16,6 @@ type BrElement struct {
 }
 
 // Br creates a tag <br> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: The br element represents a line break.
 func Br() *BrElement {
@@ -40,12 +39,12 @@ func BrIf(condition bool) *BrElement {
 type BrAutocapitalizeEnum string
 
 const (
-	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
-	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
-	BrAutocapitalizeEnumOff        BrAutocapitalizeEnum = "off"
 	BrAutocapitalizeEnumOn         BrAutocapitalizeEnum = "on"
 	BrAutocapitalizeEnumSentences  BrAutocapitalizeEnum = "sentences"
 	BrAutocapitalizeEnumWords      BrAutocapitalizeEnum = "words"
+	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
+	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
+	BrAutocapitalizeEnumOff        BrAutocapitalizeEnum = "off"
 )
 
 type BrAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type BrDirEnum string
 
 const (
-	BrDirEnumRtl  BrDirEnum = "rtl"
 	BrDirEnumAuto BrDirEnum = "auto"
 	BrDirEnumLtr  BrDirEnum = "ltr"
+	BrDirEnumRtl  BrDirEnum = "rtl"
 )
 
 type BrDraggableEnum string
@@ -83,13 +82,13 @@ const (
 type BrEnterkeyhintEnum string
 
 const (
+	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
+	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
+	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
 	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
 	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
 	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
-	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
-	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
-	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
 )
 
 type BrHiddenEnum string
@@ -103,14 +102,14 @@ const (
 type BrInputmodeEnum string
 
 const (
+	BrInputmodeEnumNone    BrInputmodeEnum = "none"
+	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
 	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
 	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
 	BrInputmodeEnumText    BrInputmodeEnum = "text"
 	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
 	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
 	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
-	BrInputmodeEnumNone    BrInputmodeEnum = "none"
-	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
 )
 
 type BrSpellcheckEnum string
@@ -124,16 +123,16 @@ const (
 type BrTranslateEnum string
 
 const (
-	BrTranslateEnumNo    BrTranslateEnum = "no"
 	BrTranslateEnumYes   BrTranslateEnum = "yes"
+	BrTranslateEnumNo    BrTranslateEnum = "no"
 	BrTranslateEnumEmpty BrTranslateEnum = ""
 )
 
 type BrWritingsuggestionsEnum string
 
 const (
-	BrWritingsuggestionsEnumFalse BrWritingsuggestionsEnum = "false"
 	BrWritingsuggestionsEnumTrue  BrWritingsuggestionsEnum = "true"
+	BrWritingsuggestionsEnumFalse BrWritingsuggestionsEnum = "false"
 	BrWritingsuggestionsEnumEmpty BrWritingsuggestionsEnum = ""
 )
 

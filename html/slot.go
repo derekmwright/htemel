@@ -17,8 +17,7 @@ type SlotElement struct {
 }
 
 // Slot creates a tag <slot> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The slot element defines a slot. It is typically used in a shadow tree. A slot element represents its assigned nodes, if any, and its contents otherwise.
 func Slot(children ...htemel.Node) *SlotElement {
 	node := &SlotElement{
@@ -49,12 +48,12 @@ func SlotTernary(condition bool, true htemel.Node, false htemel.Node) *SlotEleme
 type SlotAutocapitalizeEnum string
 
 const (
+	SlotAutocapitalizeEnumCharacters SlotAutocapitalizeEnum = "characters"
 	SlotAutocapitalizeEnumNone       SlotAutocapitalizeEnum = "none"
 	SlotAutocapitalizeEnumOff        SlotAutocapitalizeEnum = "off"
 	SlotAutocapitalizeEnumOn         SlotAutocapitalizeEnum = "on"
 	SlotAutocapitalizeEnumSentences  SlotAutocapitalizeEnum = "sentences"
 	SlotAutocapitalizeEnumWords      SlotAutocapitalizeEnum = "words"
-	SlotAutocapitalizeEnumCharacters SlotAutocapitalizeEnum = "characters"
 )
 
 type SlotAutocorrectEnum string
@@ -77,9 +76,9 @@ const (
 type SlotDirEnum string
 
 const (
-	SlotDirEnumRtl  SlotDirEnum = "rtl"
 	SlotDirEnumAuto SlotDirEnum = "auto"
 	SlotDirEnumLtr  SlotDirEnum = "ltr"
+	SlotDirEnumRtl  SlotDirEnum = "rtl"
 )
 
 type SlotDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type SlotEnterkeyhintEnum string
 
 const (
-	SlotEnterkeyhintEnumDone     SlotEnterkeyhintEnum = "done"
 	SlotEnterkeyhintEnumEnter    SlotEnterkeyhintEnum = "enter"
 	SlotEnterkeyhintEnumGo       SlotEnterkeyhintEnum = "go"
 	SlotEnterkeyhintEnumNext     SlotEnterkeyhintEnum = "next"
 	SlotEnterkeyhintEnumPrevious SlotEnterkeyhintEnum = "previous"
 	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
 	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
+	SlotEnterkeyhintEnumDone     SlotEnterkeyhintEnum = "done"
 )
 
 type SlotHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type SlotInputmodeEnum string
 
 const (
-	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
-	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
-	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
-	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
 	SlotInputmodeEnumEmail   SlotInputmodeEnum = "email"
 	SlotInputmodeEnumNone    SlotInputmodeEnum = "none"
 	SlotInputmodeEnumNumeric SlotInputmodeEnum = "numeric"
 	SlotInputmodeEnumSearch  SlotInputmodeEnum = "search"
+	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
+	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
+	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
+	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
 )
 
 type SlotSpellcheckEnum string
@@ -133,16 +132,16 @@ const (
 type SlotTranslateEnum string
 
 const (
-	SlotTranslateEnumYes   SlotTranslateEnum = "yes"
 	SlotTranslateEnumNo    SlotTranslateEnum = "no"
+	SlotTranslateEnumYes   SlotTranslateEnum = "yes"
 	SlotTranslateEnumEmpty SlotTranslateEnum = ""
 )
 
 type SlotWritingsuggestionsEnum string
 
 const (
-	SlotWritingsuggestionsEnumFalse SlotWritingsuggestionsEnum = "false"
 	SlotWritingsuggestionsEnumTrue  SlotWritingsuggestionsEnum = "true"
+	SlotWritingsuggestionsEnumFalse SlotWritingsuggestionsEnum = "false"
 	SlotWritingsuggestionsEnumEmpty SlotWritingsuggestionsEnum = ""
 )
 

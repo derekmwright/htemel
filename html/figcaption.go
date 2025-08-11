@@ -17,8 +17,7 @@ type FigcaptionElement struct {
 }
 
 // Figcaption creates a tag <figcaption> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The figcaption element represents a caption or legend for the rest of the contents of the figcaption element's parent figure element, if any.
 func Figcaption(children ...htemel.Node) *FigcaptionElement {
 	node := &FigcaptionElement{
@@ -49,12 +48,12 @@ func FigcaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Fig
 type FigcaptionAutocapitalizeEnum string
 
 const (
-	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
 	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
 	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
 	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
+	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 )
 
 type FigcaptionAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type FigcaptionContenteditableEnum string
 
 const (
+	FigcaptionContenteditableEnumTrue          FigcaptionContenteditableEnum = "true"
 	FigcaptionContenteditableEnumFalse         FigcaptionContenteditableEnum = "false"
 	FigcaptionContenteditableEnumPlaintextOnly FigcaptionContenteditableEnum = "plaintext-only"
-	FigcaptionContenteditableEnumTrue          FigcaptionContenteditableEnum = "true"
 	FigcaptionContenteditableEnumEmpty         FigcaptionContenteditableEnum = ""
 )
 
@@ -85,20 +84,20 @@ const (
 type FigcaptionDraggableEnum string
 
 const (
-	FigcaptionDraggableEnumTrue  FigcaptionDraggableEnum = "true"
 	FigcaptionDraggableEnumFalse FigcaptionDraggableEnum = "false"
+	FigcaptionDraggableEnumTrue  FigcaptionDraggableEnum = "true"
 )
 
 type FigcaptionEnterkeyhintEnum string
 
 const (
-	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
-	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
 	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
 	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
 	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
 	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
+	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
+	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
 )
 
 type FigcaptionHiddenEnum string
@@ -112,6 +111,7 @@ const (
 type FigcaptionInputmodeEnum string
 
 const (
+	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
 	FigcaptionInputmodeEnumTel     FigcaptionInputmodeEnum = "tel"
 	FigcaptionInputmodeEnumText    FigcaptionInputmodeEnum = "text"
 	FigcaptionInputmodeEnumUrl     FigcaptionInputmodeEnum = "url"
@@ -119,7 +119,6 @@ const (
 	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
 	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
 	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
-	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
 )
 
 type FigcaptionSpellcheckEnum string

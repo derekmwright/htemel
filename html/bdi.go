@@ -17,8 +17,7 @@ type BdiElement struct {
 }
 
 // Bdi creates a tag <bdi> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The bdi element represents a span of text that is to be isolated from its surroundings for the purposes of bidirectional text formatting. [BIDI]
 func Bdi(children ...htemel.Node) *BdiElement {
 	node := &BdiElement{
@@ -68,9 +67,9 @@ const (
 type BdiContenteditableEnum string
 
 const (
-	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
 	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
 	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
+	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
 	BdiContenteditableEnumEmpty         BdiContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type BdiEnterkeyhintEnum string
 
 const (
-	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
-	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
-	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
 	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
 	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
 	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 	BdiEnterkeyhintEnumNext     BdiEnterkeyhintEnum = "next"
+	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
+	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
+	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
 )
 
 type BdiHiddenEnum string
@@ -133,8 +132,8 @@ const (
 type BdiTranslateEnum string
 
 const (
-	BdiTranslateEnumNo    BdiTranslateEnum = "no"
 	BdiTranslateEnumYes   BdiTranslateEnum = "yes"
+	BdiTranslateEnumNo    BdiTranslateEnum = "no"
 	BdiTranslateEnumEmpty BdiTranslateEnum = ""
 )
 

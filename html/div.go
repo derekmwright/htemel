@@ -17,8 +17,7 @@ type DivElement struct {
 }
 
 // Div creates a tag <div> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The div element has no special meaning at all. It represents its children. It can be used with the class, lang, and title attributes to mark up semantics common to a group of consecutive elements. It can also be used in a dl element, wrapping groups of dt and dd elements.
 func Div(children ...htemel.Node) *DivElement {
 	node := &DivElement{
@@ -49,12 +48,12 @@ func DivTernary(condition bool, true htemel.Node, false htemel.Node) *DivElement
 type DivAutocapitalizeEnum string
 
 const (
-	DivAutocapitalizeEnumOn         DivAutocapitalizeEnum = "on"
-	DivAutocapitalizeEnumSentences  DivAutocapitalizeEnum = "sentences"
-	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
 	DivAutocapitalizeEnumCharacters DivAutocapitalizeEnum = "characters"
 	DivAutocapitalizeEnumNone       DivAutocapitalizeEnum = "none"
 	DivAutocapitalizeEnumOff        DivAutocapitalizeEnum = "off"
+	DivAutocapitalizeEnumOn         DivAutocapitalizeEnum = "on"
+	DivAutocapitalizeEnumSentences  DivAutocapitalizeEnum = "sentences"
+	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
 )
 
 type DivAutocorrectEnum string
@@ -92,34 +91,34 @@ const (
 type DivEnterkeyhintEnum string
 
 const (
+	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
+	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
+	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
 	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
 	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 	DivEnterkeyhintEnumGo       DivEnterkeyhintEnum = "go"
 	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
-	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
-	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
-	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
 )
 
 type DivHiddenEnum string
 
 const (
-	DivHiddenEnumUntilFound DivHiddenEnum = "until-found"
 	DivHiddenEnumHidden     DivHiddenEnum = "hidden"
+	DivHiddenEnumUntilFound DivHiddenEnum = "until-found"
 	DivHiddenEnumEmpty      DivHiddenEnum = ""
 )
 
 type DivInputmodeEnum string
 
 const (
+	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
+	DivInputmodeEnumNone    DivInputmodeEnum = "none"
 	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
 	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
 	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
 	DivInputmodeEnumText    DivInputmodeEnum = "text"
 	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
 	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
-	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
-	DivInputmodeEnumNone    DivInputmodeEnum = "none"
 )
 
 type DivSpellcheckEnum string
@@ -141,8 +140,8 @@ const (
 type DivWritingsuggestionsEnum string
 
 const (
-	DivWritingsuggestionsEnumTrue  DivWritingsuggestionsEnum = "true"
 	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
+	DivWritingsuggestionsEnumTrue  DivWritingsuggestionsEnum = "true"
 	DivWritingsuggestionsEnumEmpty DivWritingsuggestionsEnum = ""
 )
 

@@ -17,8 +17,7 @@ type RtElement struct {
 }
 
 // Rt creates a tag <rt> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The rt element marks the ruby text component of a ruby annotation. When it is the child of a ruby element, it doesn't represent anything itself, but the ruby element uses it as part of determining what it represents.
 func Rt(children ...htemel.Node) *RtElement {
 	node := &RtElement{
@@ -77,9 +76,9 @@ const (
 type RtDirEnum string
 
 const (
+	RtDirEnumRtl  RtDirEnum = "rtl"
 	RtDirEnumAuto RtDirEnum = "auto"
 	RtDirEnumLtr  RtDirEnum = "ltr"
-	RtDirEnumRtl  RtDirEnum = "rtl"
 )
 
 type RtDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type RtEnterkeyhintEnum string
 
 const (
-	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
 	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
 	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
 	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
 	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
 	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
 	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
+	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
 )
 
 type RtHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type RtInputmodeEnum string
 
 const (
-	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
-	RtInputmodeEnumText    RtInputmodeEnum = "text"
-	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
-	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
 	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
 	RtInputmodeEnumNone    RtInputmodeEnum = "none"
 	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
 	RtInputmodeEnumSearch  RtInputmodeEnum = "search"
+	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
+	RtInputmodeEnumText    RtInputmodeEnum = "text"
+	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
+	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
 )
 
 type RtSpellcheckEnum string

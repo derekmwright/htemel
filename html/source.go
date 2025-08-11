@@ -16,7 +16,6 @@ type SourceElement struct {
 }
 
 // Source creates a tag <source> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: The source element allows authors to specify multiple alternative source sets for img elements or multiple alternative media resources for media elements. It does not represent anything on its own.
 func Source() *SourceElement {
@@ -40,12 +39,12 @@ func SourceIf(condition bool) *SourceElement {
 type SourceAutocapitalizeEnum string
 
 const (
-	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
 	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
 	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
 	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
 	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
 	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
+	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
 )
 
 type SourceAutocorrectEnum string
@@ -59,9 +58,9 @@ const (
 type SourceContenteditableEnum string
 
 const (
-	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
 	SourceContenteditableEnumPlaintextOnly SourceContenteditableEnum = "plaintext-only"
 	SourceContenteditableEnumTrue          SourceContenteditableEnum = "true"
+	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
 	SourceContenteditableEnumEmpty         SourceContenteditableEnum = ""
 )
 
@@ -83,27 +82,26 @@ const (
 type SourceEnterkeyhintEnum string
 
 const (
+	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
+	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
+	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
 	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
 	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
 	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
-	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
-	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
-	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 )
 
 type SourceHiddenEnum string
 
 const (
-	SourceHiddenEnumHidden     SourceHiddenEnum = "hidden"
 	SourceHiddenEnumUntilFound SourceHiddenEnum = "until-found"
+	SourceHiddenEnumHidden     SourceHiddenEnum = "hidden"
 	SourceHiddenEnumEmpty      SourceHiddenEnum = ""
 )
 
 type SourceInputmodeEnum string
 
 const (
-	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
 	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
 	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
 	SourceInputmodeEnumText    SourceInputmodeEnum = "text"
@@ -111,6 +109,7 @@ const (
 	SourceInputmodeEnumDecimal SourceInputmodeEnum = "decimal"
 	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
 	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
+	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
 )
 
 type SourceSpellcheckEnum string
@@ -124,8 +123,8 @@ const (
 type SourceTranslateEnum string
 
 const (
-	SourceTranslateEnumNo    SourceTranslateEnum = "no"
 	SourceTranslateEnumYes   SourceTranslateEnum = "yes"
+	SourceTranslateEnumNo    SourceTranslateEnum = "no"
 	SourceTranslateEnumEmpty SourceTranslateEnum = ""
 )
 
@@ -138,6 +137,48 @@ const (
 )
 
 type sourceAttrs map[string]any
+
+func (e *SourceElement) Type(s string) *SourceElement {
+	e.attributes["type"] = s
+
+	return e
+}
+
+func (e *SourceElement) Media(s string) *SourceElement {
+	e.attributes["media"] = s
+
+	return e
+}
+
+func (e *SourceElement) Src(s string) *SourceElement {
+	e.attributes["src"] = s
+
+	return e
+}
+
+func (e *SourceElement) Srcset(s string) *SourceElement {
+	e.attributes["srcset"] = s
+
+	return e
+}
+
+func (e *SourceElement) Sizes(s string) *SourceElement {
+	e.attributes["sizes"] = s
+
+	return e
+}
+
+func (e *SourceElement) Width(i int) *SourceElement {
+	e.attributes["width"] = i
+
+	return e
+}
+
+func (e *SourceElement) Height(i int) *SourceElement {
+	e.attributes["height"] = i
+
+	return e
+}
 
 func (e *SourceElement) Autocapitalize(a SourceAutocapitalizeEnum) *SourceElement {
 	e.attributes["autocapitalize"] = a

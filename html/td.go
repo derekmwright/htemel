@@ -17,8 +17,7 @@ type TdElement struct {
 }
 
 // Td creates a tag <td> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The td element represents a data cell in a table.
 func Td(children ...htemel.Node) *TdElement {
 	node := &TdElement{
@@ -49,12 +48,12 @@ func TdTernary(condition bool, true htemel.Node, false htemel.Node) *TdElement {
 type TdAutocapitalizeEnum string
 
 const (
-	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
-	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
 	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
 	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
 	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
 	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
+	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
+	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
 )
 
 type TdAutocorrectEnum string
@@ -68,37 +67,37 @@ const (
 type TdContenteditableEnum string
 
 const (
-	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
 	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
 	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
+	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
 	TdContenteditableEnumEmpty         TdContenteditableEnum = ""
 )
 
 type TdDirEnum string
 
 const (
-	TdDirEnumRtl  TdDirEnum = "rtl"
 	TdDirEnumAuto TdDirEnum = "auto"
 	TdDirEnumLtr  TdDirEnum = "ltr"
+	TdDirEnumRtl  TdDirEnum = "rtl"
 )
 
 type TdDraggableEnum string
 
 const (
-	TdDraggableEnumTrue  TdDraggableEnum = "true"
 	TdDraggableEnumFalse TdDraggableEnum = "false"
+	TdDraggableEnumTrue  TdDraggableEnum = "true"
 )
 
 type TdEnterkeyhintEnum string
 
 const (
-	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
-	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
-	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
 	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
 	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
 	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
 	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
+	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
+	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
+	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
 )
 
 type TdHiddenEnum string
@@ -112,6 +111,7 @@ const (
 type TdInputmodeEnum string
 
 const (
+	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
 	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
 	TdInputmodeEnumNone    TdInputmodeEnum = "none"
@@ -119,7 +119,6 @@ const (
 	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
 	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
 	TdInputmodeEnumText    TdInputmodeEnum = "text"
-	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 )
 
 type TdSpellcheckEnum string
@@ -133,16 +132,16 @@ const (
 type TdTranslateEnum string
 
 const (
-	TdTranslateEnumNo    TdTranslateEnum = "no"
 	TdTranslateEnumYes   TdTranslateEnum = "yes"
+	TdTranslateEnumNo    TdTranslateEnum = "no"
 	TdTranslateEnumEmpty TdTranslateEnum = ""
 )
 
 type TdWritingsuggestionsEnum string
 
 const (
-	TdWritingsuggestionsEnumFalse TdWritingsuggestionsEnum = "false"
 	TdWritingsuggestionsEnumTrue  TdWritingsuggestionsEnum = "true"
+	TdWritingsuggestionsEnumFalse TdWritingsuggestionsEnum = "false"
 	TdWritingsuggestionsEnumEmpty TdWritingsuggestionsEnum = ""
 )
 

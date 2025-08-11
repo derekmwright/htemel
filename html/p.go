@@ -17,8 +17,7 @@ type PElement struct {
 }
 
 // P creates a tag <p> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The p element represents a paragraph.
 func P(children ...htemel.Node) *PElement {
 	node := &PElement{
@@ -49,19 +48,19 @@ func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
 type PAutocapitalizeEnum string
 
 const (
-	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
-	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
 	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
 	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
 	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
 	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
+	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
+	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
 )
 
 type PAutocorrectEnum string
 
 const (
-	PAutocorrectEnumOff   PAutocorrectEnum = "off"
 	PAutocorrectEnumOn    PAutocorrectEnum = "on"
+	PAutocorrectEnumOff   PAutocorrectEnum = "off"
 	PAutocorrectEnumEmpty PAutocorrectEnum = ""
 )
 
@@ -92,34 +91,34 @@ const (
 type PEnterkeyhintEnum string
 
 const (
-	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
 	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
 	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
 	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
+	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 )
 
 type PHiddenEnum string
 
 const (
-	PHiddenEnumUntilFound PHiddenEnum = "until-found"
 	PHiddenEnumHidden     PHiddenEnum = "hidden"
+	PHiddenEnumUntilFound PHiddenEnum = "until-found"
 	PHiddenEnumEmpty      PHiddenEnum = ""
 )
 
 type PInputmodeEnum string
 
 const (
-	PInputmodeEnumTel     PInputmodeEnum = "tel"
-	PInputmodeEnumText    PInputmodeEnum = "text"
-	PInputmodeEnumUrl     PInputmodeEnum = "url"
 	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
 	PInputmodeEnumEmail   PInputmodeEnum = "email"
 	PInputmodeEnumNone    PInputmodeEnum = "none"
 	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
 	PInputmodeEnumSearch  PInputmodeEnum = "search"
+	PInputmodeEnumTel     PInputmodeEnum = "tel"
+	PInputmodeEnumText    PInputmodeEnum = "text"
+	PInputmodeEnumUrl     PInputmodeEnum = "url"
 )
 
 type PSpellcheckEnum string

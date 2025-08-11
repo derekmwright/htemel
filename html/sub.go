@@ -17,8 +17,7 @@ type SubElement struct {
 }
 
 // Sub creates a tag <sub> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The sup element represents a superscript and the sub element represents a subscript.
 func Sub(children ...htemel.Node) *SubElement {
 	node := &SubElement{
@@ -49,12 +48,12 @@ func SubTernary(condition bool, true htemel.Node, false htemel.Node) *SubElement
 type SubAutocapitalizeEnum string
 
 const (
+	SubAutocapitalizeEnumOff        SubAutocapitalizeEnum = "off"
 	SubAutocapitalizeEnumOn         SubAutocapitalizeEnum = "on"
 	SubAutocapitalizeEnumSentences  SubAutocapitalizeEnum = "sentences"
 	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
 	SubAutocapitalizeEnumCharacters SubAutocapitalizeEnum = "characters"
 	SubAutocapitalizeEnumNone       SubAutocapitalizeEnum = "none"
-	SubAutocapitalizeEnumOff        SubAutocapitalizeEnum = "off"
 )
 
 type SubAutocorrectEnum string
@@ -85,20 +84,20 @@ const (
 type SubDraggableEnum string
 
 const (
-	SubDraggableEnumTrue  SubDraggableEnum = "true"
 	SubDraggableEnumFalse SubDraggableEnum = "false"
+	SubDraggableEnumTrue  SubDraggableEnum = "true"
 )
 
 type SubEnterkeyhintEnum string
 
 const (
+	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
+	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
 	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
 	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
 	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
 	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
-	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
-	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
 )
 
 type SubHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type SubInputmodeEnum string
 
 const (
+	SubInputmodeEnumNone    SubInputmodeEnum = "none"
+	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
+	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
 	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
 	SubInputmodeEnumText    SubInputmodeEnum = "text"
 	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
 	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
 	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
-	SubInputmodeEnumNone    SubInputmodeEnum = "none"
-	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
-	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
 )
 
 type SubSpellcheckEnum string

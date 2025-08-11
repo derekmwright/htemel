@@ -17,8 +17,7 @@ type MenuElement struct {
 }
 
 // Menu creates a tag <menu> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The menu element represents a toolbar consisting of its contents, in the form of an unordered list of items (represented by li elements), each of which represents a command that the user can perform or activate.
 func Menu(children ...htemel.Node) *MenuElement {
 	node := &MenuElement{
@@ -68,9 +67,9 @@ const (
 type MenuContenteditableEnum string
 
 const (
+	MenuContenteditableEnumTrue          MenuContenteditableEnum = "true"
 	MenuContenteditableEnumFalse         MenuContenteditableEnum = "false"
 	MenuContenteditableEnumPlaintextOnly MenuContenteditableEnum = "plaintext-only"
-	MenuContenteditableEnumTrue          MenuContenteditableEnum = "true"
 	MenuContenteditableEnumEmpty         MenuContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
-	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
-	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
 	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
 	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
 	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
+	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
+	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 )
 
 type MenuHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type MenuInputmodeEnum string
 
 const (
+	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
+	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
+	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
 	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
 	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
 	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
-	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
-	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
-	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 )
 
 type MenuSpellcheckEnum string

@@ -17,8 +17,7 @@ type HgroupElement struct {
 }
 
 // Hgroup creates a tag <hgroup> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The hgroup element represents a heading and related content. The element may be used to group an h1–h6 element with one or more p elements containing content representing a subheading, alternative title, or tagline.
 func Hgroup(children ...htemel.Node) *HgroupElement {
 	node := &HgroupElement{
@@ -49,12 +48,12 @@ func HgroupTernary(condition bool, true htemel.Node, false htemel.Node) *HgroupE
 type HgroupAutocapitalizeEnum string
 
 const (
+	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
 	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
 	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
 	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
 	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
-	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
 )
 
 type HgroupAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type HgroupContenteditableEnum string
 
 const (
-	HgroupContenteditableEnumPlaintextOnly HgroupContenteditableEnum = "plaintext-only"
 	HgroupContenteditableEnumTrue          HgroupContenteditableEnum = "true"
 	HgroupContenteditableEnumFalse         HgroupContenteditableEnum = "false"
+	HgroupContenteditableEnumPlaintextOnly HgroupContenteditableEnum = "plaintext-only"
 	HgroupContenteditableEnumEmpty         HgroupContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type HgroupEnterkeyhintEnum string
 
 const (
-	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
-	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
 	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
 	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
 	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
 	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
+	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
+	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
 )
 
 type HgroupHiddenEnum string
@@ -133,8 +132,8 @@ const (
 type HgroupTranslateEnum string
 
 const (
-	HgroupTranslateEnumYes   HgroupTranslateEnum = "yes"
 	HgroupTranslateEnumNo    HgroupTranslateEnum = "no"
+	HgroupTranslateEnumYes   HgroupTranslateEnum = "yes"
 	HgroupTranslateEnumEmpty HgroupTranslateEnum = ""
 )
 

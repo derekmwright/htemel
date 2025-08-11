@@ -17,8 +17,7 @@ type HtmlElement struct {
 }
 
 // Html creates a tag <html> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The html element represents the root of an HTML document.
 func Html(children ...htemel.Node) *HtmlElement {
 	node := &HtmlElement{
@@ -68,9 +67,9 @@ const (
 type HtmlContenteditableEnum string
 
 const (
-	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumPlaintextOnly HtmlContenteditableEnum = "plaintext-only"
 	HtmlContenteditableEnumTrue          HtmlContenteditableEnum = "true"
+	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumEmpty         HtmlContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type HtmlEnterkeyhintEnum string
 
 const (
+	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
+	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
+	HtmlEnterkeyhintEnumNext     HtmlEnterkeyhintEnum = "next"
 	HtmlEnterkeyhintEnumPrevious HtmlEnterkeyhintEnum = "previous"
 	HtmlEnterkeyhintEnumSearch   HtmlEnterkeyhintEnum = "search"
 	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
 	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
-	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
-	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
-	HtmlEnterkeyhintEnumNext     HtmlEnterkeyhintEnum = "next"
 )
 
 type HtmlHiddenEnum string
@@ -112,7 +111,6 @@ const (
 type HtmlInputmodeEnum string
 
 const (
-	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
 	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
 	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
@@ -120,6 +118,7 @@ const (
 	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
 	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
 	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
+	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 )
 
 type HtmlSpellcheckEnum string

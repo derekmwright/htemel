@@ -17,8 +17,7 @@ type StyleElement struct {
 }
 
 // Style creates a tag <style> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The style element allows authors to embed CSS style sheets in their documents. The style element is one of several inputs to the styling processing model. The element does not represent content for the user.
 func Style(children ...htemel.Node) *StyleElement {
 	node := &StyleElement{
@@ -49,12 +48,12 @@ func StyleTernary(condition bool, true htemel.Node, false htemel.Node) *StyleEle
 type StyleAutocapitalizeEnum string
 
 const (
-	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
-	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
 	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
 	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
 	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
 	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
+	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
+	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
 )
 
 type StyleAutocorrectEnum string
@@ -92,13 +91,13 @@ const (
 type StyleEnterkeyhintEnum string
 
 const (
-	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
-	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
 	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
 	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
 	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
 	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
+	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
+	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
 )
 
 type StyleHiddenEnum string
@@ -112,6 +111,7 @@ const (
 type StyleInputmodeEnum string
 
 const (
+	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
 	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
 	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
@@ -119,7 +119,6 @@ const (
 	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
 	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
-	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 )
 
 type StyleSpellcheckEnum string
@@ -141,8 +140,8 @@ const (
 type StyleWritingsuggestionsEnum string
 
 const (
-	StyleWritingsuggestionsEnumFalse StyleWritingsuggestionsEnum = "false"
 	StyleWritingsuggestionsEnumTrue  StyleWritingsuggestionsEnum = "true"
+	StyleWritingsuggestionsEnumFalse StyleWritingsuggestionsEnum = "false"
 	StyleWritingsuggestionsEnumEmpty StyleWritingsuggestionsEnum = ""
 )
 

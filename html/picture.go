@@ -17,8 +17,7 @@ type PictureElement struct {
 }
 
 // Picture creates a tag <picture> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The picture element is a container which provides multiple sources to its contained img element to allow authors to declaratively control or give hints to the user agent about which image resource to use, based on the screen pixel density, viewport size, image format, and other factors. It represents its children.
 func Picture(children ...htemel.Node) *PictureElement {
 	node := &PictureElement{
@@ -92,13 +91,13 @@ const (
 type PictureEnterkeyhintEnum string
 
 const (
+	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
+	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
 	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
 	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
 	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
 	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
 	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
-	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
-	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
 )
 
 type PictureHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type PictureInputmodeEnum string
 
 const (
+	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
+	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
 	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
 	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
 	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
 	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
 	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
-	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
-	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 )
 
 type PictureSpellcheckEnum string

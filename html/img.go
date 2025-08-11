@@ -16,7 +16,6 @@ type ImgElement struct {
 }
 
 // Img creates a tag <img> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: An img element represents an image.
 func Img() *ImgElement {
@@ -37,15 +36,38 @@ func ImgIf(condition bool) *ImgElement {
 	}
 }
 
+type ImgDecodingEnum string
+
+const (
+	ImgDecodingEnumAuto  ImgDecodingEnum = "auto"
+	ImgDecodingEnumSync  ImgDecodingEnum = "sync"
+	ImgDecodingEnumAsync ImgDecodingEnum = "async"
+)
+
+type ImgLoadingEnum string
+
+const (
+	ImgLoadingEnumEager ImgLoadingEnum = "eager"
+	ImgLoadingEnumLazy  ImgLoadingEnum = "lazy"
+)
+
+type ImgFetchpriorityEnum string
+
+const (
+	ImgFetchpriorityEnumAuto ImgFetchpriorityEnum = "auto"
+	ImgFetchpriorityEnumHigh ImgFetchpriorityEnum = "high"
+	ImgFetchpriorityEnumLow  ImgFetchpriorityEnum = "low"
+)
+
 type ImgAutocapitalizeEnum string
 
 const (
-	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
-	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
 	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
+	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
+	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 )
 
 type ImgAutocorrectEnum string
@@ -95,22 +117,22 @@ const (
 type ImgHiddenEnum string
 
 const (
-	ImgHiddenEnumUntilFound ImgHiddenEnum = "until-found"
 	ImgHiddenEnumHidden     ImgHiddenEnum = "hidden"
+	ImgHiddenEnumUntilFound ImgHiddenEnum = "until-found"
 	ImgHiddenEnumEmpty      ImgHiddenEnum = ""
 )
 
 type ImgInputmodeEnum string
 
 const (
-	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
-	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
-	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
 	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
 	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
 	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
 	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
+	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
+	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
+	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 )
 
 type ImgSpellcheckEnum string
@@ -124,8 +146,8 @@ const (
 type ImgTranslateEnum string
 
 const (
-	ImgTranslateEnumYes   ImgTranslateEnum = "yes"
 	ImgTranslateEnumNo    ImgTranslateEnum = "no"
+	ImgTranslateEnumYes   ImgTranslateEnum = "yes"
 	ImgTranslateEnumEmpty ImgTranslateEnum = ""
 )
 
@@ -138,6 +160,84 @@ const (
 )
 
 type imgAttrs map[string]any
+
+func (e *ImgElement) Alt(s string) *ImgElement {
+	e.attributes["alt"] = s
+
+	return e
+}
+
+func (e *ImgElement) Src(s string) *ImgElement {
+	e.attributes["src"] = s
+
+	return e
+}
+
+func (e *ImgElement) Srcset(s string) *ImgElement {
+	e.attributes["srcset"] = s
+
+	return e
+}
+
+func (e *ImgElement) Sizes(s string) *ImgElement {
+	e.attributes["sizes"] = s
+
+	return e
+}
+
+func (e *ImgElement) Crossorigin(s string) *ImgElement {
+	e.attributes["crossorigin"] = s
+
+	return e
+}
+
+func (e *ImgElement) Usemap(s string) *ImgElement {
+	e.attributes["usemap"] = s
+
+	return e
+}
+
+func (e *ImgElement) Ismap(b bool) *ImgElement {
+	e.attributes["ismap"] = b
+
+	return e
+}
+
+func (e *ImgElement) Width(i int) *ImgElement {
+	e.attributes["width"] = i
+
+	return e
+}
+
+func (e *ImgElement) Height(i int) *ImgElement {
+	e.attributes["height"] = i
+
+	return e
+}
+
+func (e *ImgElement) Referrerpolicy(s string) *ImgElement {
+	e.attributes["referrerpolicy"] = s
+
+	return e
+}
+
+func (e *ImgElement) Decoding(a ImgDecodingEnum) *ImgElement {
+	e.attributes["decoding"] = a
+
+	return e
+}
+
+func (e *ImgElement) Loading(a ImgLoadingEnum) *ImgElement {
+	e.attributes["loading"] = a
+
+	return e
+}
+
+func (e *ImgElement) Fetchpriority(a ImgFetchpriorityEnum) *ImgElement {
+	e.attributes["fetchpriority"] = a
+
+	return e
+}
 
 func (e *ImgElement) Autocapitalize(a ImgAutocapitalizeEnum) *ImgElement {
 	e.attributes["autocapitalize"] = a

@@ -16,7 +16,6 @@ type EmbedElement struct {
 }
 
 // Embed creates a tag <embed> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: The embed element provides an integration point for an external application or interactive content.
 func Embed() *EmbedElement {
@@ -40,12 +39,12 @@ func EmbedIf(condition bool) *EmbedElement {
 type EmbedAutocapitalizeEnum string
 
 const (
-	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
-	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
 	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
+	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
+	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 )
 
 type EmbedAutocorrectEnum string
@@ -83,13 +82,13 @@ const (
 type EmbedEnterkeyhintEnum string
 
 const (
-	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
-	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
 	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
 	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
 	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
+	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
+	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 )
 
 type EmbedHiddenEnum string
@@ -103,7 +102,6 @@ const (
 type EmbedInputmodeEnum string
 
 const (
-	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
 	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
@@ -111,13 +109,14 @@ const (
 	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
 	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
 	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
+	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 )
 
 type EmbedSpellcheckEnum string
 
 const (
-	EmbedSpellcheckEnumFalse EmbedSpellcheckEnum = "false"
 	EmbedSpellcheckEnumTrue  EmbedSpellcheckEnum = "true"
+	EmbedSpellcheckEnumFalse EmbedSpellcheckEnum = "false"
 	EmbedSpellcheckEnumEmpty EmbedSpellcheckEnum = ""
 )
 

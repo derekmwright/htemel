@@ -17,8 +17,7 @@ type RubyElement struct {
 }
 
 // Ruby creates a tag <ruby> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The ruby element allows one or more spans of phrasing content to be marked with ruby annotations. Ruby annotations are short runs of text presented alongside base text, primarily used in East Asian typography as a guide for pronunciation or to include other annotations. In Japanese, this form of typography is also known as furigana.
 func Ruby(children ...htemel.Node) *RubyElement {
 	node := &RubyElement{
@@ -49,12 +48,12 @@ func RubyTernary(condition bool, true htemel.Node, false htemel.Node) *RubyEleme
 type RubyAutocapitalizeEnum string
 
 const (
+	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
+	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
 	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
 	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 	RubyAutocapitalizeEnumOff        RubyAutocapitalizeEnum = "off"
 	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
-	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
-	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
 )
 
 type RubyAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type RubyContenteditableEnum string
 
 const (
+	RubyContenteditableEnumTrue          RubyContenteditableEnum = "true"
 	RubyContenteditableEnumFalse         RubyContenteditableEnum = "false"
 	RubyContenteditableEnumPlaintextOnly RubyContenteditableEnum = "plaintext-only"
-	RubyContenteditableEnumTrue          RubyContenteditableEnum = "true"
 	RubyContenteditableEnumEmpty         RubyContenteditableEnum = ""
 )
 
@@ -85,20 +84,20 @@ const (
 type RubyDraggableEnum string
 
 const (
-	RubyDraggableEnumFalse RubyDraggableEnum = "false"
 	RubyDraggableEnumTrue  RubyDraggableEnum = "true"
+	RubyDraggableEnumFalse RubyDraggableEnum = "false"
 )
 
 type RubyEnterkeyhintEnum string
 
 const (
+	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
 	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
 	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
-	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 )
 
 type RubyHiddenEnum string
@@ -133,16 +132,16 @@ const (
 type RubyTranslateEnum string
 
 const (
-	RubyTranslateEnumNo    RubyTranslateEnum = "no"
 	RubyTranslateEnumYes   RubyTranslateEnum = "yes"
+	RubyTranslateEnumNo    RubyTranslateEnum = "no"
 	RubyTranslateEnumEmpty RubyTranslateEnum = ""
 )
 
 type RubyWritingsuggestionsEnum string
 
 const (
-	RubyWritingsuggestionsEnumFalse RubyWritingsuggestionsEnum = "false"
 	RubyWritingsuggestionsEnumTrue  RubyWritingsuggestionsEnum = "true"
+	RubyWritingsuggestionsEnumFalse RubyWritingsuggestionsEnum = "false"
 	RubyWritingsuggestionsEnumEmpty RubyWritingsuggestionsEnum = ""
 )
 

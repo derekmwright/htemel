@@ -16,7 +16,6 @@ type LinkElement struct {
 }
 
 // Link creates a tag <link> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: The link element allows authors to link their document to other resources.
 func Link() *LinkElement {
@@ -54,9 +53,9 @@ const (
 type LinkFetchpriorityEnum string
 
 const (
+	LinkFetchpriorityEnumHigh LinkFetchpriorityEnum = "high"
 	LinkFetchpriorityEnumLow  LinkFetchpriorityEnum = "low"
 	LinkFetchpriorityEnumAuto LinkFetchpriorityEnum = "auto"
-	LinkFetchpriorityEnumHigh LinkFetchpriorityEnum = "high"
 )
 
 type LinkAutocapitalizeEnum string
@@ -81,9 +80,9 @@ const (
 type LinkContenteditableEnum string
 
 const (
-	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
 	LinkContenteditableEnumPlaintextOnly LinkContenteditableEnum = "plaintext-only"
 	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
+	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
 	LinkContenteditableEnumEmpty         LinkContenteditableEnum = ""
 )
 
@@ -105,34 +104,34 @@ const (
 type LinkEnterkeyhintEnum string
 
 const (
-	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
-	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
-	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
 	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
 	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
+	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
+	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
+	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
 )
 
 type LinkHiddenEnum string
 
 const (
-	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
 	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
+	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
 	LinkHiddenEnumEmpty      LinkHiddenEnum = ""
 )
 
 type LinkInputmodeEnum string
 
 const (
+	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
+	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
+	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
 	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
 	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
 	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
 	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
-	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
-	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
-	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 )
 
 type LinkSpellcheckEnum string

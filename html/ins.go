@@ -17,8 +17,7 @@ type InsElement struct {
 }
 
 // Ins creates a tag <ins> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The ins element represents an addition to the document.
 func Ins(children ...htemel.Node) *InsElement {
 	node := &InsElement{
@@ -49,12 +48,12 @@ func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement
 type InsAutocapitalizeEnum string
 
 const (
-	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
 	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
 	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
 	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
 	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
+	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
 )
 
 type InsAutocorrectEnum string
@@ -77,28 +76,28 @@ const (
 type InsDirEnum string
 
 const (
-	InsDirEnumAuto InsDirEnum = "auto"
 	InsDirEnumLtr  InsDirEnum = "ltr"
 	InsDirEnumRtl  InsDirEnum = "rtl"
+	InsDirEnumAuto InsDirEnum = "auto"
 )
 
 type InsDraggableEnum string
 
 const (
-	InsDraggableEnumTrue  InsDraggableEnum = "true"
 	InsDraggableEnumFalse InsDraggableEnum = "false"
+	InsDraggableEnumTrue  InsDraggableEnum = "true"
 )
 
 type InsEnterkeyhintEnum string
 
 const (
+	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
+	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
 	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
 	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
-	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
-	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 )
 
 type InsHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type InsInputmodeEnum string
 
 const (
+	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
+	InsInputmodeEnumNone    InsInputmodeEnum = "none"
+	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
 	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
 	InsInputmodeEnumText    InsInputmodeEnum = "text"
 	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
 	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
-	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
-	InsInputmodeEnumNone    InsInputmodeEnum = "none"
-	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 )
 
 type InsSpellcheckEnum string
@@ -147,6 +146,18 @@ const (
 )
 
 type insAttrs map[string]any
+
+func (e *InsElement) Cite(s string) *InsElement {
+	e.attributes["cite"] = s
+
+	return e
+}
+
+func (e *InsElement) Datetime(s string) *InsElement {
+	e.attributes["datetime"] = s
+
+	return e
+}
 
 func (e *InsElement) Autocapitalize(a InsAutocapitalizeEnum) *InsElement {
 	e.attributes["autocapitalize"] = a

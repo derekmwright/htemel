@@ -17,8 +17,7 @@ type OutputElement struct {
 }
 
 // Output creates a tag <output> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The output element represents the result of a calculation performed by the application, or the result of a user action.
 func Output(children ...htemel.Node) *OutputElement {
 	node := &OutputElement{
@@ -49,12 +48,12 @@ func OutputTernary(condition bool, true htemel.Node, false htemel.Node) *OutputE
 type OutputAutocapitalizeEnum string
 
 const (
-	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
-	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
-	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
 	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
 	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
 	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
+	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
+	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
+	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
 )
 
 type OutputAutocorrectEnum string
@@ -92,13 +91,13 @@ const (
 type OutputEnterkeyhintEnum string
 
 const (
+	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
+	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
 	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
 	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
 	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
 	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
-	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
-	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
 )
 
 type OutputHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type OutputInputmodeEnum string
 
 const (
-	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
-	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
 	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
 	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
 	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
 	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
 	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
 	OutputInputmodeEnumTel     OutputInputmodeEnum = "tel"
+	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
+	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
 )
 
 type OutputSpellcheckEnum string

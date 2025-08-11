@@ -17,8 +17,7 @@ type KbdElement struct {
 }
 
 // Kbd creates a tag <kbd> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The kbd element represents user input (typically keyboard input, although it may also be used to represent other input, such as voice commands).
 func Kbd(children ...htemel.Node) *KbdElement {
 	node := &KbdElement{
@@ -49,12 +48,12 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 type KbdAutocapitalizeEnum string
 
 const (
-	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
-	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
-	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
 	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
+	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
+	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
+	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 )
 
 type KbdAutocorrectEnum string
@@ -92,13 +91,13 @@ const (
 type KbdEnterkeyhintEnum string
 
 const (
+	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
+	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
 	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
 	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
 	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
 	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
-	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
-	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
 )
 
 type KbdHiddenEnum string
@@ -112,7 +111,6 @@ const (
 type KbdInputmodeEnum string
 
 const (
-	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
 	KbdInputmodeEnumText    KbdInputmodeEnum = "text"
 	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
 	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
@@ -120,6 +118,7 @@ const (
 	KbdInputmodeEnumNone    KbdInputmodeEnum = "none"
 	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
 	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
+	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
 )
 
 type KbdSpellcheckEnum string

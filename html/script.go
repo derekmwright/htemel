@@ -17,8 +17,7 @@ type ScriptElement struct {
 }
 
 // Script creates a tag <script> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The script element allows authors to include dynamic script, instructions to the user agent, and data blocks in their documents. The element does not represent content for the user.
 func Script(children ...htemel.Node) *ScriptElement {
 	node := &ScriptElement{
@@ -68,9 +67,9 @@ const (
 type ScriptContenteditableEnum string
 
 const (
+	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
 	ScriptContenteditableEnumPlaintextOnly ScriptContenteditableEnum = "plaintext-only"
 	ScriptContenteditableEnumTrue          ScriptContenteditableEnum = "true"
-	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
 	ScriptContenteditableEnumEmpty         ScriptContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type ScriptEnterkeyhintEnum string
 
 const (
+	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
+	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
+	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
 	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
 	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 	ScriptEnterkeyhintEnumNext     ScriptEnterkeyhintEnum = "next"
-	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
-	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
-	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 )
 
 type ScriptHiddenEnum string
@@ -112,6 +111,7 @@ const (
 type ScriptInputmodeEnum string
 
 const (
+	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
 	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
@@ -119,7 +119,6 @@ const (
 	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
 	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
-	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 )
 
 type ScriptSpellcheckEnum string
@@ -133,8 +132,8 @@ const (
 type ScriptTranslateEnum string
 
 const (
-	ScriptTranslateEnumYes   ScriptTranslateEnum = "yes"
 	ScriptTranslateEnumNo    ScriptTranslateEnum = "no"
+	ScriptTranslateEnumYes   ScriptTranslateEnum = "yes"
 	ScriptTranslateEnumEmpty ScriptTranslateEnum = ""
 )
 

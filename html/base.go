@@ -16,7 +16,6 @@ type BaseElement struct {
 }
 
 // Base creates a tag <base> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: The base element allows authors to specify the document base URL for the purposes of parsing URLs, and the name of the default navigable for the purposes of following hyperlinks. The element does not represent any content beyond this information.
 func Base() *BaseElement {
@@ -40,12 +39,12 @@ func BaseIf(condition bool) *BaseElement {
 type BaseAutocapitalizeEnum string
 
 const (
-	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
 	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
 	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
 	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
 	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
+	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
 )
 
 type BaseAutocorrectEnum string
@@ -59,9 +58,9 @@ const (
 type BaseContenteditableEnum string
 
 const (
-	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
 	BaseContenteditableEnumTrue          BaseContenteditableEnum = "true"
 	BaseContenteditableEnumFalse         BaseContenteditableEnum = "false"
+	BaseContenteditableEnumPlaintextOnly BaseContenteditableEnum = "plaintext-only"
 	BaseContenteditableEnumEmpty         BaseContenteditableEnum = ""
 )
 
@@ -83,13 +82,13 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
+	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
+	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
 	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
-	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
-	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 )
 
 type BaseHiddenEnum string
@@ -103,6 +102,7 @@ const (
 type BaseInputmodeEnum string
 
 const (
+	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
 	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
 	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
@@ -110,7 +110,6 @@ const (
 	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
 	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
 	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
-	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
 )
 
 type BaseSpellcheckEnum string
@@ -132,8 +131,8 @@ const (
 type BaseWritingsuggestionsEnum string
 
 const (
-	BaseWritingsuggestionsEnumTrue  BaseWritingsuggestionsEnum = "true"
 	BaseWritingsuggestionsEnumFalse BaseWritingsuggestionsEnum = "false"
+	BaseWritingsuggestionsEnumTrue  BaseWritingsuggestionsEnum = "true"
 	BaseWritingsuggestionsEnumEmpty BaseWritingsuggestionsEnum = ""
 )
 

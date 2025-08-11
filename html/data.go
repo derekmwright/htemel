@@ -17,8 +17,7 @@ type DataElement struct {
 }
 
 // Data creates a tag <data> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The data element represents its contents, along with a machine-readable form of those contents in the value attribute.
 func Data(children ...htemel.Node) *DataElement {
 	node := &DataElement{
@@ -49,12 +48,12 @@ func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataEleme
 type DataAutocapitalizeEnum string
 
 const (
-	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
 	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
 	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
+	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 )
 
 type DataAutocorrectEnum string
@@ -68,18 +67,18 @@ const (
 type DataContenteditableEnum string
 
 const (
+	DataContenteditableEnumTrue          DataContenteditableEnum = "true"
 	DataContenteditableEnumFalse         DataContenteditableEnum = "false"
 	DataContenteditableEnumPlaintextOnly DataContenteditableEnum = "plaintext-only"
-	DataContenteditableEnumTrue          DataContenteditableEnum = "true"
 	DataContenteditableEnumEmpty         DataContenteditableEnum = ""
 )
 
 type DataDirEnum string
 
 const (
+	DataDirEnumAuto DataDirEnum = "auto"
 	DataDirEnumLtr  DataDirEnum = "ltr"
 	DataDirEnumRtl  DataDirEnum = "rtl"
-	DataDirEnumAuto DataDirEnum = "auto"
 )
 
 type DataDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type DataEnterkeyhintEnum string
 
 const (
-	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
 	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
 	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
 	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
 	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
+	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 )
 
 type DataHiddenEnum string
@@ -147,6 +146,12 @@ const (
 )
 
 type dataAttrs map[string]any
+
+func (e *DataElement) Value(s string) *DataElement {
+	e.attributes["value"] = s
+
+	return e
+}
 
 func (e *DataElement) Autocapitalize(a DataAutocapitalizeEnum) *DataElement {
 	e.attributes["autocapitalize"] = a

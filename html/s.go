@@ -17,8 +17,7 @@ type SElement struct {
 }
 
 // S creates a tag <s> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The s element represents contents that are no longer accurate or no longer relevant.
 func S(children ...htemel.Node) *SElement {
 	node := &SElement{
@@ -49,12 +48,12 @@ func STernary(condition bool, true htemel.Node, false htemel.Node) *SElement {
 type SAutocapitalizeEnum string
 
 const (
+	SAutocapitalizeEnumSentences  SAutocapitalizeEnum = "sentences"
+	SAutocapitalizeEnumWords      SAutocapitalizeEnum = "words"
 	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
 	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
 	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
 	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
-	SAutocapitalizeEnumSentences  SAutocapitalizeEnum = "sentences"
-	SAutocapitalizeEnumWords      SAutocapitalizeEnum = "words"
 )
 
 type SAutocorrectEnum string
@@ -77,9 +76,9 @@ const (
 type SDirEnum string
 
 const (
+	SDirEnumRtl  SDirEnum = "rtl"
 	SDirEnumAuto SDirEnum = "auto"
 	SDirEnumLtr  SDirEnum = "ltr"
-	SDirEnumRtl  SDirEnum = "rtl"
 )
 
 type SDraggableEnum string
@@ -112,21 +111,21 @@ const (
 type SInputmodeEnum string
 
 const (
+	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
+	SInputmodeEnumSearch  SInputmodeEnum = "search"
 	SInputmodeEnumTel     SInputmodeEnum = "tel"
 	SInputmodeEnumText    SInputmodeEnum = "text"
 	SInputmodeEnumUrl     SInputmodeEnum = "url"
 	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
 	SInputmodeEnumEmail   SInputmodeEnum = "email"
 	SInputmodeEnumNone    SInputmodeEnum = "none"
-	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
-	SInputmodeEnumSearch  SInputmodeEnum = "search"
 )
 
 type SSpellcheckEnum string
 
 const (
-	SSpellcheckEnumTrue  SSpellcheckEnum = "true"
 	SSpellcheckEnumFalse SSpellcheckEnum = "false"
+	SSpellcheckEnumTrue  SSpellcheckEnum = "true"
 	SSpellcheckEnumEmpty SSpellcheckEnum = ""
 )
 

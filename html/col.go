@@ -16,7 +16,6 @@ type ColElement struct {
 }
 
 // Col creates a tag <col> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: If a col element has a parent and that is a colgroup element that itself has a parent that is a table element, then the col element represents one or more columns in the column group represented by that colgroup.
 func Col() *ColElement {
@@ -40,12 +39,12 @@ func ColIf(condition bool) *ColElement {
 type ColAutocapitalizeEnum string
 
 const (
-	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
 	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
 	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
 	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
 	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
+	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 )
 
 type ColAutocorrectEnum string
@@ -76,8 +75,8 @@ const (
 type ColDraggableEnum string
 
 const (
-	ColDraggableEnumFalse ColDraggableEnum = "false"
 	ColDraggableEnumTrue  ColDraggableEnum = "true"
+	ColDraggableEnumFalse ColDraggableEnum = "false"
 )
 
 type ColEnterkeyhintEnum string
@@ -103,14 +102,14 @@ const (
 type ColInputmodeEnum string
 
 const (
-	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
-	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
-	ColInputmodeEnumText    ColInputmodeEnum = "text"
 	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
 	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
 	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
 	ColInputmodeEnumNone    ColInputmodeEnum = "none"
 	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
+	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
+	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
+	ColInputmodeEnumText    ColInputmodeEnum = "text"
 )
 
 type ColSpellcheckEnum string
@@ -132,8 +131,8 @@ const (
 type ColWritingsuggestionsEnum string
 
 const (
-	ColWritingsuggestionsEnumFalse ColWritingsuggestionsEnum = "false"
 	ColWritingsuggestionsEnumTrue  ColWritingsuggestionsEnum = "true"
+	ColWritingsuggestionsEnumFalse ColWritingsuggestionsEnum = "false"
 	ColWritingsuggestionsEnumEmpty ColWritingsuggestionsEnum = ""
 )
 

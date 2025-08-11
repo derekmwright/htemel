@@ -17,8 +17,7 @@ type SectionElement struct {
 }
 
 // Section creates a tag <section> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The section element represents a generic section of a document or application. A section, in this context, is a thematic grouping of content, typically with a heading.
 func Section(children ...htemel.Node) *SectionElement {
 	node := &SectionElement{
@@ -49,12 +48,12 @@ func SectionTernary(condition bool, true htemel.Node, false htemel.Node) *Sectio
 type SectionAutocapitalizeEnum string
 
 const (
+	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
+	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
 	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
 	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
 	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
 	SectionAutocapitalizeEnumWords      SectionAutocapitalizeEnum = "words"
-	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
-	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
 )
 
 type SectionAutocorrectEnum string
@@ -68,18 +67,18 @@ const (
 type SectionContenteditableEnum string
 
 const (
+	SectionContenteditableEnumFalse         SectionContenteditableEnum = "false"
 	SectionContenteditableEnumPlaintextOnly SectionContenteditableEnum = "plaintext-only"
 	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
-	SectionContenteditableEnumFalse         SectionContenteditableEnum = "false"
 	SectionContenteditableEnumEmpty         SectionContenteditableEnum = ""
 )
 
 type SectionDirEnum string
 
 const (
+	SectionDirEnumRtl  SectionDirEnum = "rtl"
 	SectionDirEnumAuto SectionDirEnum = "auto"
 	SectionDirEnumLtr  SectionDirEnum = "ltr"
-	SectionDirEnumRtl  SectionDirEnum = "rtl"
 )
 
 type SectionDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type SectionEnterkeyhintEnum string
 
 const (
-	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
-	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
 	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
 	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
 	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
 	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
 	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
+	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
+	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
 )
 
 type SectionHiddenEnum string
@@ -112,6 +111,7 @@ const (
 type SectionInputmodeEnum string
 
 const (
+	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
 	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
 	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
 	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
@@ -119,7 +119,6 @@ const (
 	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
 	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
 	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
-	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
 )
 
 type SectionSpellcheckEnum string

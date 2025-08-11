@@ -17,8 +17,7 @@ type AudioElement struct {
 }
 
 // Audio creates a tag <audio> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: An audio element represents a sound or audio stream.
 func Audio(children ...htemel.Node) *AudioElement {
 	node := &AudioElement{
@@ -92,13 +91,13 @@ const (
 type AudioEnterkeyhintEnum string
 
 const (
+	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
+	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
+	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
 	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
 	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
 	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
-	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
-	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
-	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
 )
 
 type AudioHiddenEnum string
@@ -112,6 +111,7 @@ const (
 type AudioInputmodeEnum string
 
 const (
+	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
 	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
 	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
 	AudioInputmodeEnumTel     AudioInputmodeEnum = "tel"
@@ -119,7 +119,6 @@ const (
 	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
 	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
 	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
-	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
 )
 
 type AudioSpellcheckEnum string
@@ -141,8 +140,8 @@ const (
 type AudioWritingsuggestionsEnum string
 
 const (
-	AudioWritingsuggestionsEnumFalse AudioWritingsuggestionsEnum = "false"
 	AudioWritingsuggestionsEnumTrue  AudioWritingsuggestionsEnum = "true"
+	AudioWritingsuggestionsEnumFalse AudioWritingsuggestionsEnum = "false"
 	AudioWritingsuggestionsEnumEmpty AudioWritingsuggestionsEnum = ""
 )
 

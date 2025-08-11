@@ -17,8 +17,7 @@ type TimeElement struct {
 }
 
 // Time creates a tag <time> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The time element represents its contents, along with a machine-readable form of those contents in the datetime attribute. The kind of content is limited to various kinds of dates, times, time-zone offsets, and durations, as described below.
 func Time(children ...htemel.Node) *TimeElement {
 	node := &TimeElement{
@@ -49,12 +48,12 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 type TimeAutocapitalizeEnum string
 
 const (
+	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
 	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
 	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
-	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 )
 
 type TimeAutocorrectEnum string
@@ -77,9 +76,9 @@ const (
 type TimeDirEnum string
 
 const (
+	TimeDirEnumRtl  TimeDirEnum = "rtl"
 	TimeDirEnumAuto TimeDirEnum = "auto"
 	TimeDirEnumLtr  TimeDirEnum = "ltr"
-	TimeDirEnumRtl  TimeDirEnum = "rtl"
 )
 
 type TimeDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type TimeEnterkeyhintEnum string
 
 const (
-	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
 	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
 	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 	TimeEnterkeyhintEnumEnter    TimeEnterkeyhintEnum = "enter"
 	TimeEnterkeyhintEnumGo       TimeEnterkeyhintEnum = "go"
 	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
+	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 )
 
 type TimeHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type TimeInputmodeEnum string
 
 const (
+	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
+	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
 	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
 	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
 	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
 	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
 	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
 	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
-	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
-	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
 )
 
 type TimeSpellcheckEnum string
@@ -141,12 +140,18 @@ const (
 type TimeWritingsuggestionsEnum string
 
 const (
-	TimeWritingsuggestionsEnumTrue  TimeWritingsuggestionsEnum = "true"
 	TimeWritingsuggestionsEnumFalse TimeWritingsuggestionsEnum = "false"
+	TimeWritingsuggestionsEnumTrue  TimeWritingsuggestionsEnum = "true"
 	TimeWritingsuggestionsEnumEmpty TimeWritingsuggestionsEnum = ""
 )
 
 type timeAttrs map[string]any
+
+func (e *TimeElement) Datetime(s string) *TimeElement {
+	e.attributes["datetime"] = s
+
+	return e
+}
 
 func (e *TimeElement) Autocapitalize(a TimeAutocapitalizeEnum) *TimeElement {
 	e.attributes["autocapitalize"] = a

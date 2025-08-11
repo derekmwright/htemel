@@ -17,8 +17,7 @@ type HeadElement struct {
 }
 
 // Head creates a tag <head> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The head element represents a collection of metadata for the Document.
 func Head(children ...htemel.Node) *HeadElement {
 	node := &HeadElement{
@@ -60,8 +59,8 @@ const (
 type HeadAutocorrectEnum string
 
 const (
-	HeadAutocorrectEnumOff   HeadAutocorrectEnum = "off"
 	HeadAutocorrectEnumOn    HeadAutocorrectEnum = "on"
+	HeadAutocorrectEnumOff   HeadAutocorrectEnum = "off"
 	HeadAutocorrectEnumEmpty HeadAutocorrectEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type HeadEnterkeyhintEnum string
 
 const (
-	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
-	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
-	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
 	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
 	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
 	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
+	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
+	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
+	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
 )
 
 type HeadHiddenEnum string
@@ -112,29 +111,29 @@ const (
 type HeadInputmodeEnum string
 
 const (
-	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
-	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
-	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
 	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
 	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
 	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
 	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
+	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
+	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
+	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
 )
 
 type HeadSpellcheckEnum string
 
 const (
-	HeadSpellcheckEnumTrue  HeadSpellcheckEnum = "true"
 	HeadSpellcheckEnumFalse HeadSpellcheckEnum = "false"
+	HeadSpellcheckEnumTrue  HeadSpellcheckEnum = "true"
 	HeadSpellcheckEnumEmpty HeadSpellcheckEnum = ""
 )
 
 type HeadTranslateEnum string
 
 const (
-	HeadTranslateEnumYes   HeadTranslateEnum = "yes"
 	HeadTranslateEnumNo    HeadTranslateEnum = "no"
+	HeadTranslateEnumYes   HeadTranslateEnum = "yes"
 	HeadTranslateEnumEmpty HeadTranslateEnum = ""
 )
 

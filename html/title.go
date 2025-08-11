@@ -17,8 +17,7 @@ type TitleElement struct {
 }
 
 // Title creates a tag <title> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The title element represents the document's title or name. Authors should use titles that identify their documents even when they are used out of context, for example in a user's history or bookmarks, or in search results. The document's title is often different from its first heading, since the first heading does not have to stand alone when taken out of context.
 func Title(children ...htemel.Node) *TitleElement {
 	node := &TitleElement{
@@ -49,12 +48,12 @@ func TitleTernary(condition bool, true htemel.Node, false htemel.Node) *TitleEle
 type TitleAutocapitalizeEnum string
 
 const (
+	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
 	TitleAutocapitalizeEnumNone       TitleAutocapitalizeEnum = "none"
 	TitleAutocapitalizeEnumOff        TitleAutocapitalizeEnum = "off"
 	TitleAutocapitalizeEnumOn         TitleAutocapitalizeEnum = "on"
 	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
-	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
 )
 
 type TitleAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type TitleContenteditableEnum string
 
 const (
+	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
 	TitleContenteditableEnumFalse         TitleContenteditableEnum = "false"
 	TitleContenteditableEnumPlaintextOnly TitleContenteditableEnum = "plaintext-only"
-	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
 	TitleContenteditableEnumEmpty         TitleContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type TitleEnterkeyhintEnum string
 
 const (
-	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
 	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
 	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
 	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
 	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
 	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
 	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
+	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
 )
 
 type TitleHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type TitleInputmodeEnum string
 
 const (
+	TitleInputmodeEnumNumeric TitleInputmodeEnum = "numeric"
+	TitleInputmodeEnumSearch  TitleInputmodeEnum = "search"
 	TitleInputmodeEnumTel     TitleInputmodeEnum = "tel"
 	TitleInputmodeEnumText    TitleInputmodeEnum = "text"
 	TitleInputmodeEnumUrl     TitleInputmodeEnum = "url"
 	TitleInputmodeEnumDecimal TitleInputmodeEnum = "decimal"
 	TitleInputmodeEnumEmail   TitleInputmodeEnum = "email"
 	TitleInputmodeEnumNone    TitleInputmodeEnum = "none"
-	TitleInputmodeEnumNumeric TitleInputmodeEnum = "numeric"
-	TitleInputmodeEnumSearch  TitleInputmodeEnum = "search"
 )
 
 type TitleSpellcheckEnum string
@@ -133,16 +132,16 @@ const (
 type TitleTranslateEnum string
 
 const (
-	TitleTranslateEnumYes   TitleTranslateEnum = "yes"
 	TitleTranslateEnumNo    TitleTranslateEnum = "no"
+	TitleTranslateEnumYes   TitleTranslateEnum = "yes"
 	TitleTranslateEnumEmpty TitleTranslateEnum = ""
 )
 
 type TitleWritingsuggestionsEnum string
 
 const (
-	TitleWritingsuggestionsEnumFalse TitleWritingsuggestionsEnum = "false"
 	TitleWritingsuggestionsEnumTrue  TitleWritingsuggestionsEnum = "true"
+	TitleWritingsuggestionsEnumFalse TitleWritingsuggestionsEnum = "false"
 	TitleWritingsuggestionsEnumEmpty TitleWritingsuggestionsEnum = ""
 )
 

@@ -17,8 +17,7 @@ type SelectElement struct {
 }
 
 // Select creates a tag <select> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The select element represents a control for selecting amongst a set of options.
 func Select(children ...htemel.Node) *SelectElement {
 	node := &SelectElement{
@@ -60,8 +59,8 @@ const (
 type SelectAutocorrectEnum string
 
 const (
-	SelectAutocorrectEnumOn    SelectAutocorrectEnum = "on"
 	SelectAutocorrectEnumOff   SelectAutocorrectEnum = "off"
+	SelectAutocorrectEnumOn    SelectAutocorrectEnum = "on"
 	SelectAutocorrectEnumEmpty SelectAutocorrectEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type SelectEnterkeyhintEnum string
 
 const (
-	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
-	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
 	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
 	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
 	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
+	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
+	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 )
 
 type SelectHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type SelectInputmodeEnum string
 
 const (
-	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
-	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
 	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
 	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
 	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
 	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
 	SelectInputmodeEnumUrl     SelectInputmodeEnum = "url"
 	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
+	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
+	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
 )
 
 type SelectSpellcheckEnum string

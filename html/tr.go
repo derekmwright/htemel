@@ -17,8 +17,7 @@ type TrElement struct {
 }
 
 // Tr creates a tag <tr> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The tr element represents a row of cells in a table.
 func Tr(children ...htemel.Node) *TrElement {
 	node := &TrElement{
@@ -49,69 +48,70 @@ func TrTernary(condition bool, true htemel.Node, false htemel.Node) *TrElement {
 type TrAutocapitalizeEnum string
 
 const (
-	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
-	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
-	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
 	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
 	TrAutocapitalizeEnumOff        TrAutocapitalizeEnum = "off"
 	TrAutocapitalizeEnumOn         TrAutocapitalizeEnum = "on"
+	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
+	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
+	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
 )
 
 type TrAutocorrectEnum string
 
 const (
-	TrAutocorrectEnumOff   TrAutocorrectEnum = "off"
 	TrAutocorrectEnumOn    TrAutocorrectEnum = "on"
+	TrAutocorrectEnumOff   TrAutocorrectEnum = "off"
 	TrAutocorrectEnumEmpty TrAutocorrectEnum = ""
 )
 
 type TrContenteditableEnum string
 
 const (
-	TrContenteditableEnumFalse         TrContenteditableEnum = "false"
 	TrContenteditableEnumPlaintextOnly TrContenteditableEnum = "plaintext-only"
 	TrContenteditableEnumTrue          TrContenteditableEnum = "true"
+	TrContenteditableEnumFalse         TrContenteditableEnum = "false"
 	TrContenteditableEnumEmpty         TrContenteditableEnum = ""
 )
 
 type TrDirEnum string
 
 const (
-	TrDirEnumRtl  TrDirEnum = "rtl"
 	TrDirEnumAuto TrDirEnum = "auto"
 	TrDirEnumLtr  TrDirEnum = "ltr"
+	TrDirEnumRtl  TrDirEnum = "rtl"
 )
 
 type TrDraggableEnum string
 
 const (
-	TrDraggableEnumFalse TrDraggableEnum = "false"
 	TrDraggableEnumTrue  TrDraggableEnum = "true"
+	TrDraggableEnumFalse TrDraggableEnum = "false"
 )
 
 type TrEnterkeyhintEnum string
 
 const (
+	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
+	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
+	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
 	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
 	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
 	TrEnterkeyhintEnumGo       TrEnterkeyhintEnum = "go"
 	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
-	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
-	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
-	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
 )
 
 type TrHiddenEnum string
 
 const (
-	TrHiddenEnumUntilFound TrHiddenEnum = "until-found"
 	TrHiddenEnumHidden     TrHiddenEnum = "hidden"
+	TrHiddenEnumUntilFound TrHiddenEnum = "until-found"
 	TrHiddenEnumEmpty      TrHiddenEnum = ""
 )
 
 type TrInputmodeEnum string
 
 const (
+	TrInputmodeEnumNone    TrInputmodeEnum = "none"
 	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
 	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
 	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
@@ -119,7 +119,6 @@ const (
 	TrInputmodeEnumUrl     TrInputmodeEnum = "url"
 	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
 	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
-	TrInputmodeEnumNone    TrInputmodeEnum = "none"
 )
 
 type TrSpellcheckEnum string

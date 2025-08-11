@@ -17,8 +17,7 @@ type SmallElement struct {
 }
 
 // Small creates a tag <small> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The small element represents side comments such as small print.
 func Small(children ...htemel.Node) *SmallElement {
 	node := &SmallElement{
@@ -49,19 +48,19 @@ func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallEle
 type SmallAutocapitalizeEnum string
 
 const (
-	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
 	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
 	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
 	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
+	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
 )
 
 type SmallAutocorrectEnum string
 
 const (
-	SmallAutocorrectEnumOff   SmallAutocorrectEnum = "off"
 	SmallAutocorrectEnumOn    SmallAutocorrectEnum = "on"
+	SmallAutocorrectEnumOff   SmallAutocorrectEnum = "off"
 	SmallAutocorrectEnumEmpty SmallAutocorrectEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type SmallEnterkeyhintEnum string
 
 const (
+	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
+	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
 	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
 	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
 	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
-	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
-	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 )
 
 type SmallHiddenEnum string
@@ -125,8 +124,8 @@ const (
 type SmallSpellcheckEnum string
 
 const (
-	SmallSpellcheckEnumFalse SmallSpellcheckEnum = "false"
 	SmallSpellcheckEnumTrue  SmallSpellcheckEnum = "true"
+	SmallSpellcheckEnumFalse SmallSpellcheckEnum = "false"
 	SmallSpellcheckEnumEmpty SmallSpellcheckEnum = ""
 )
 

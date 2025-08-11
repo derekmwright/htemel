@@ -17,8 +17,7 @@ type LiElement struct {
 }
 
 // Li creates a tag <li> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The li element represents a list item. If its parent element is an ol, ul, or menu element, then the element is an item of the parent element's list, as defined for those elements. Otherwise, the list item has no defined list-related relationship to any other li element.
 func Li(children ...htemel.Node) *LiElement {
 	node := &LiElement{
@@ -49,12 +48,12 @@ func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
 type LiAutocapitalizeEnum string
 
 const (
+	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
+	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
 	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
 	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
-	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
-	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 )
 
 type LiAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type LiContenteditableEnum string
 
 const (
-	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
 	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
+	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumEmpty         LiContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type LiEnterkeyhintEnum string
 
 const (
-	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
-	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
 	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
 	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
 	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
 	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
+	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
+	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
 )
 
 type LiHiddenEnum string
@@ -112,6 +111,7 @@ const (
 type LiInputmodeEnum string
 
 const (
+	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 	LiInputmodeEnumNone    LiInputmodeEnum = "none"
 	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
@@ -119,7 +119,6 @@ const (
 	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
 	LiInputmodeEnumText    LiInputmodeEnum = "text"
 	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
-	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 )
 
 type LiSpellcheckEnum string
@@ -133,8 +132,8 @@ const (
 type LiTranslateEnum string
 
 const (
-	LiTranslateEnumYes   LiTranslateEnum = "yes"
 	LiTranslateEnumNo    LiTranslateEnum = "no"
+	LiTranslateEnumYes   LiTranslateEnum = "yes"
 	LiTranslateEnumEmpty LiTranslateEnum = ""
 )
 
@@ -147,6 +146,12 @@ const (
 )
 
 type liAttrs map[string]any
+
+func (e *LiElement) Value(i int) *LiElement {
+	e.attributes["value"] = i
+
+	return e
+}
 
 func (e *LiElement) Autocapitalize(a LiAutocapitalizeEnum) *LiElement {
 	e.attributes["autocapitalize"] = a

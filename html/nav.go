@@ -17,8 +17,7 @@ type NavElement struct {
 }
 
 // Nav creates a tag <nav> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The nav element represents a section of a page that links to other pages or to parts within the page: a section with navigation links.
 func Nav(children ...htemel.Node) *NavElement {
 	node := &NavElement{
@@ -49,12 +48,12 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 type NavAutocapitalizeEnum string
 
 const (
+	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
 	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
 	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
 	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
 	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
-	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
 )
 
 type NavAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type NavContenteditableEnum string
 
 const (
+	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
-	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumEmpty         NavContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
-	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
-	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
-	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
 	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
 	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
+	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
+	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
+	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 )
 
 type NavHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type NavInputmodeEnum string
 
 const (
-	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
-	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
-	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
-	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
 	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
 	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 	NavInputmodeEnumText    NavInputmodeEnum = "text"
+	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
+	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
+	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
+	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 )
 
 type NavSpellcheckEnum string

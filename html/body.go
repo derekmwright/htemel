@@ -17,8 +17,7 @@ type BodyElement struct {
 }
 
 // Body creates a tag <body> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The body element represents the contents of the document.
 func Body(children ...htemel.Node) *BodyElement {
 	node := &BodyElement{
@@ -49,12 +48,12 @@ func BodyTernary(condition bool, true htemel.Node, false htemel.Node) *BodyEleme
 type BodyAutocapitalizeEnum string
 
 const (
+	BodyAutocapitalizeEnumOff        BodyAutocapitalizeEnum = "off"
+	BodyAutocapitalizeEnumOn         BodyAutocapitalizeEnum = "on"
 	BodyAutocapitalizeEnumSentences  BodyAutocapitalizeEnum = "sentences"
 	BodyAutocapitalizeEnumWords      BodyAutocapitalizeEnum = "words"
 	BodyAutocapitalizeEnumCharacters BodyAutocapitalizeEnum = "characters"
 	BodyAutocapitalizeEnumNone       BodyAutocapitalizeEnum = "none"
-	BodyAutocapitalizeEnumOff        BodyAutocapitalizeEnum = "off"
-	BodyAutocapitalizeEnumOn         BodyAutocapitalizeEnum = "on"
 )
 
 type BodyAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type BodyContenteditableEnum string
 
 const (
-	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
 	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
+	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
 	BodyContenteditableEnumEmpty         BodyContenteditableEnum = ""
 )
 
@@ -112,14 +111,14 @@ const (
 type BodyInputmodeEnum string
 
 const (
-	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
-	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
 	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
 	BodyInputmodeEnumSearch  BodyInputmodeEnum = "search"
 	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
 	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
 	BodyInputmodeEnumUrl     BodyInputmodeEnum = "url"
 	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
+	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
+	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
 )
 
 type BodySpellcheckEnum string
@@ -133,8 +132,8 @@ const (
 type BodyTranslateEnum string
 
 const (
-	BodyTranslateEnumNo    BodyTranslateEnum = "no"
 	BodyTranslateEnumYes   BodyTranslateEnum = "yes"
+	BodyTranslateEnumNo    BodyTranslateEnum = "no"
 	BodyTranslateEnumEmpty BodyTranslateEnum = ""
 )
 
@@ -147,6 +146,114 @@ const (
 )
 
 type bodyAttrs map[string]any
+
+func (e *BodyElement) Onafterprint(s string) *BodyElement {
+	e.attributes["onafterprint"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onbeforeprint(s string) *BodyElement {
+	e.attributes["onbeforeprint"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onbeforeunload(s string) *BodyElement {
+	e.attributes["onbeforeunload"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onhashchange(s string) *BodyElement {
+	e.attributes["onhashchange"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onlanguagechange(s string) *BodyElement {
+	e.attributes["onlanguagechange"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onmessage(s string) *BodyElement {
+	e.attributes["onmessage"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onmessageerror(s string) *BodyElement {
+	e.attributes["onmessageerror"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onoffline(s string) *BodyElement {
+	e.attributes["onoffline"] = s
+
+	return e
+}
+
+func (e *BodyElement) Ononline(s string) *BodyElement {
+	e.attributes["ononline"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onpageswap(s string) *BodyElement {
+	e.attributes["onpageswap"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onpagehide(s string) *BodyElement {
+	e.attributes["onpagehide"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onpagereveal(s string) *BodyElement {
+	e.attributes["onpagereveal"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onpageshow(s string) *BodyElement {
+	e.attributes["onpageshow"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onpopstate(s string) *BodyElement {
+	e.attributes["onpopstate"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onrejectionhandled(s string) *BodyElement {
+	e.attributes["onrejectionhandled"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onstorage(s string) *BodyElement {
+	e.attributes["onstorage"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onunhandledrejection(s string) *BodyElement {
+	e.attributes["onunhandledrejection"] = s
+
+	return e
+}
+
+func (e *BodyElement) Onunload(s string) *BodyElement {
+	e.attributes["onunload"] = s
+
+	return e
+}
 
 func (e *BodyElement) Autocapitalize(a BodyAutocapitalizeEnum) *BodyElement {
 	e.attributes["autocapitalize"] = a

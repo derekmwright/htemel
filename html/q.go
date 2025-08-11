@@ -17,8 +17,7 @@ type QElement struct {
 }
 
 // Q creates a tag <q> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The q element represents some phrasing content quoted from another source.
 func Q(children ...htemel.Node) *QElement {
 	node := &QElement{
@@ -49,12 +48,12 @@ func QTernary(condition bool, true htemel.Node, false htemel.Node) *QElement {
 type QAutocapitalizeEnum string
 
 const (
+	QAutocapitalizeEnumWords      QAutocapitalizeEnum = "words"
+	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
 	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 	QAutocapitalizeEnumOff        QAutocapitalizeEnum = "off"
 	QAutocapitalizeEnumOn         QAutocapitalizeEnum = "on"
 	QAutocapitalizeEnumSentences  QAutocapitalizeEnum = "sentences"
-	QAutocapitalizeEnumWords      QAutocapitalizeEnum = "words"
-	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
 )
 
 type QAutocorrectEnum string
@@ -92,13 +91,13 @@ const (
 type QEnterkeyhintEnum string
 
 const (
+	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
+	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
+	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
 	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
 	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
-	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
-	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
-	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 )
 
 type QHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type QInputmodeEnum string
 
 const (
-	QInputmodeEnumEmail   QInputmodeEnum = "email"
-	QInputmodeEnumNone    QInputmodeEnum = "none"
 	QInputmodeEnumNumeric QInputmodeEnum = "numeric"
 	QInputmodeEnumSearch  QInputmodeEnum = "search"
 	QInputmodeEnumTel     QInputmodeEnum = "tel"
 	QInputmodeEnumText    QInputmodeEnum = "text"
 	QInputmodeEnumUrl     QInputmodeEnum = "url"
 	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
+	QInputmodeEnumEmail   QInputmodeEnum = "email"
+	QInputmodeEnumNone    QInputmodeEnum = "none"
 )
 
 type QSpellcheckEnum string
@@ -147,6 +146,12 @@ const (
 )
 
 type qAttrs map[string]any
+
+func (e *QElement) Cite(s string) *QElement {
+	e.attributes["cite"] = s
+
+	return e
+}
 
 func (e *QElement) Autocapitalize(a QAutocapitalizeEnum) *QElement {
 	e.attributes["autocapitalize"] = a

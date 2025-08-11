@@ -16,7 +16,6 @@ type WbrElement struct {
 }
 
 // Wbr creates a tag <wbr> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: The wbr element represents a line break opportunity.
 func Wbr() *WbrElement {
@@ -59,9 +58,9 @@ const (
 type WbrContenteditableEnum string
 
 const (
-	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
 	WbrContenteditableEnumFalse         WbrContenteditableEnum = "false"
 	WbrContenteditableEnumPlaintextOnly WbrContenteditableEnum = "plaintext-only"
+	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
 	WbrContenteditableEnumEmpty         WbrContenteditableEnum = ""
 )
 
@@ -76,8 +75,8 @@ const (
 type WbrDraggableEnum string
 
 const (
-	WbrDraggableEnumFalse WbrDraggableEnum = "false"
 	WbrDraggableEnumTrue  WbrDraggableEnum = "true"
+	WbrDraggableEnumFalse WbrDraggableEnum = "false"
 )
 
 type WbrEnterkeyhintEnum string
@@ -103,29 +102,29 @@ const (
 type WbrInputmodeEnum string
 
 const (
-	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
-	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
-	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
 	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
 	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
 	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
+	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
+	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
+	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 )
 
 type WbrSpellcheckEnum string
 
 const (
-	WbrSpellcheckEnumTrue  WbrSpellcheckEnum = "true"
 	WbrSpellcheckEnumFalse WbrSpellcheckEnum = "false"
+	WbrSpellcheckEnumTrue  WbrSpellcheckEnum = "true"
 	WbrSpellcheckEnumEmpty WbrSpellcheckEnum = ""
 )
 
 type WbrTranslateEnum string
 
 const (
-	WbrTranslateEnumYes   WbrTranslateEnum = "yes"
 	WbrTranslateEnumNo    WbrTranslateEnum = "no"
+	WbrTranslateEnumYes   WbrTranslateEnum = "yes"
 	WbrTranslateEnumEmpty WbrTranslateEnum = ""
 )
 

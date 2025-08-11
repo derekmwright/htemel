@@ -4,6 +4,7 @@ import (
 	"errors"
 	"io"
 	"slices"
+	"strconv"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -201,19 +202,49 @@ func GlobalAttributes() []Attribute {
 // More statically defined things because parsing this from the whatwg spec is painful.
 // Ordering them as per the way the reference site orders them for quick reference/upkeep.
 
-func HtmlAttr() []Attribute {
+var fetchPriority = &AttributeTypeEnum{
+	Name:        "fetchpriority",
+	Description: "Sets the priority for fetches initiated by the element",
+	Allowed: map[string]struct{}{
+		"high": {},
+		"low":  {},
+		"auto": {},
+	},
+}
+var referrerPolicy = &AttributeTypeString{
+	Name:        "referrerpolicy",
+	Description: "Referrer policy for fetches initiated by the element",
+}
+var width = &AttributeTypeNumber{
+	Name:        "width",
+	Description: "Horizontal dimension",
+}
+var height = &AttributeTypeNumber{
+	Name:        "height",
+	Description: "Vertical dimension",
+}
+var loading = &AttributeTypeEnum{
+	Name:        "loading",
+	Description: "Used when determining loading deferral",
+	Allowed: map[string]struct{}{
+		"lazy":  {},
+		"eager": {},
+	},
+}
+
+func htmlAttr() []Attribute {
 	return make([]Attribute, 0)
 }
 
-func HeadAttr() []Attribute {
+func headAttr() []Attribute {
 	return make([]Attribute, 0)
 }
 
-func TitleAttr() []Attribute {
+func titleAttr() []Attribute {
 	return make([]Attribute, 0)
 }
 
-func BaseAttr() []Attribute {
+func baseAttr() []Attribute {
 	return []Attribute{
 		&AttributeTypeString{
 			Name:        "href",
@@ -226,7 +257,7 @@ func BaseAttr() []Attribute {
 	}
 }
 
-func LinkAttr() []Attribute {
+func linkAttr() []Attribute {
 	return []Attribute{
 		&AttributeTypeString{
 			Name:        "href",
@@ -261,10 +292,7 @@ func LinkAttr() []Attribute {
 			Name:        "type",
 			Description: "Hint for the type of the referenced resource",
 		},
-		&AttributeTypeString{
-			Name:        "referrerpolicy",
-			Description: "Referrer policy for fetches initiated by the element",
-		},
+		referrerPolicy,
 		&AttributeTypeSST{
 			Name:        "sizes",
 			Description: "Sizes of the icons (for rel=\"icon\")",
@@ -296,19 +324,11 @@ func LinkAttr() []Attribute {
 			Name:        "disabled",
 			Description: "Whether the link is disabled",
 		},
-		&AttributeTypeEnum{
-			Name:        "fetchpriority",
-			Description: "Sets the priority for fetches initiated by the element",
-			Allowed: map[string]struct{}{
-				"high": {},
-				"low":  {},
-				"auto": {},
-			},
-		},
+		fetchPriority,
 	}
 }
 
-func MetaAttr() []Attribute {
+func metaAttr() []Attribute {
 	return []Attribute{
 		&AttributeTypeString{
 			Name:        "name",
@@ -342,7 +362,7 @@ func MetaAttr() []Attribute {
 	}
 }
 
-func StyleAttr() []Attribute {
+func styleAttr() []Attribute {
 	return []Attribute{
 		&AttributeTypeString{
 			Name:        "media",
@@ -355,14 +375,241 @@ func StyleAttr() []Attribute {
 	}
 }
 
+func bodyAttr() []Attribute {
+	attrs := []string{
+		"onafterprint",
+		"onbeforeprint",
+		"onbeforeunload",
+		"onhashchange",
+		"onlanguagechange",
+		"onmessage",
+		"onmessageerror",
+		"onoffline",
+		"ononline",
+		"onpageswap",
+		"onpagehide",
+		"onpagereveal",
+		"onpageshow",
+		"onpopstate",
+		"onrejectionhandled",
+		"onstorage",
+		"onunhandledrejection",
+		"onunload",
+	}
+
+	var out []Attribute
+	for _, attr := range attrs {
+		out = append(out, &AttributeTypeString{
+			Name: attr,
+		})
+	}
+
+	return out
+}
+
+func blockQuoteAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "cite",
+			Description: "Content inside a blockquote must be quoted from another source, whose address, if it has one, may be cited in the cite attribute.",
+		},
+	}
+}
+
+func olAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeBool{
+			Name:        "reversed",
+			Description: "Number the list backwards",
+		},
+		&AttributeTypeNumber{
+			Name:        "start",
+			Description: "The start attribute, if present, must be a valid integer. It is used to determine the starting value of the list.",
+		},
+		&AttributeTypeChar{
+			Name:        "type",
+			Description: "The type attribute can be used to specify the kind of marker to use in the list, in the cases where that matters (e.g. because items are to be referenced by their number/letter).",
+		},
+	}
+}
+
+func liAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeNumber{
+			Name:        "value",
+			Description: "If the element is not a child of an ul or menu element: value — Ordinal value of the list item",
+		},
+	}
+}
+
+func aAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "href",
+			Description: "Address of the hyperlink",
+		},
+		&AttributeTypeString{
+			Name:        "target",
+			Description: "Navigable for hyperlink navigation",
+		},
+		&AttributeTypeBool{
+			Name:        "download",
+			Description: "Whether to download the resource instead of navigating to it, and its filename if so",
+		},
+		&AttributeTypeSST{
+			Name:        "ping",
+			Description: "URLs to ping",
+		},
+		&AttributeTypeSST{
+			Name:        "rel",
+			Description: "Relationship between the location in the document containing the hyperlink and the destination resource",
+		},
+		&AttributeTypeString{
+			Name:        "hreflang",
+			Description: "Language of the linked resource",
+		},
+		&AttributeTypeString{
+			Name:        "type",
+			Description: "Hint for the type of the referenced resource",
+		},
+		referrerPolicy,
+	}
+}
+
+func qAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "cite",
+			Description: "Link to the source of the quotation or more information about the edit",
+		},
+	}
+}
+
+func dataAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "value",
+			Description: "Machine-readable value",
+		},
+	}
+}
+
+func timeAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "datetime",
+			Description: "Machine-readable value",
+		},
+	}
+}
+
+func insDelAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "cite",
+			Description: "Link to the source of the quotation or more information about the edit",
+		},
+		&AttributeTypeString{
+			Name:        "datetime",
+			Description: "Date and (optionally) time of the change",
+		},
+	}
+}
+
+func sourceAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "type",
+			Description: "Type of embedded resource",
+		},
+		&AttributeTypeString{
+			Name:        "media",
+			Description: "Applicable media",
+		},
+		&AttributeTypeString{
+			Name:        "src",
+			Description: "Address of the resource",
+		},
+		&AttributeTypeString{
+			Name:        "srcset",
+			Description: "Images to use in different situations, e.g., high-resolution displays, small monitors, etc.",
+		},
+		&AttributeTypeString{
+			Name:        "sizes",
+			Description: "Image sizes for different page layouts",
+		},
+		width,
+		height,
+	}
+}
+
+func imgAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "alt",
+			Description: "Replacement text for use when images are not available",
+		},
+		&AttributeTypeString{
+			Name:        "src",
+			Description: "Address of the resource",
+		},
+		&AttributeTypeString{
+			Name:        "srcset",
+			Description: "Images to use in different situations, e.g., high-resolution displays, small monitors, etc.",
+		},
+		&AttributeTypeString{
+			Name:        "sizes",
+			Description: "Image sizes for different page layouts",
+		},
+		&AttributeTypeString{
+			Name:        "crossorigin",
+			Description: "How the element handles crossorigin requests",
+		},
+		&AttributeTypeString{
+			Name:        "usemap",
+			Description: "Name of image map to use",
+		},
+		&AttributeTypeBool{
+			Name:        "ismap",
+			Description: "Whether the image is a server-side image map",
+		},
+		width,
+		height,
+		referrerPolicy,
+		&AttributeTypeEnum{
+			Name:        "decoding",
+			Description: "Decoding hint to use when processing this image for presentation",
+			Allowed: map[string]struct{}{
+				"sync":  {},
+				"async": {},
+				"auto":  {},
+			},
+		},
+		loading,
+		fetchPriority,
+	}
+}
+
 var attrFuncs = map[string]func() []Attribute{
-	"html":  HtmlAttr,
-	"head":  HeadAttr,
-	"title": TitleAttr,
-	"base":  BaseAttr,
-	"link":  LinkAttr,
-	"meta":  MetaAttr,
-	"style": StyleAttr,
+	"html":       htmlAttr,
+	"head":       headAttr,
+	"title":      titleAttr,
+	"base":       baseAttr,
+	"link":       linkAttr,
+	"meta":       metaAttr,
+	"style":      styleAttr,
+	"body":       bodyAttr,
+	"blockquote": blockQuoteAttr,
+	"ol":         olAttr,
+	"li":         liAttr,
+	"a":          aAttr,
+	"q":          qAttr,
+	"data":       dataAttr,
+	"time":       timeAttr,
+	"ins":        insDelAttr,
+	"del":        insDelAttr,
+	"source":     sourceAttr,
+	"img":        imgAttr,
 }
 
 func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
@@ -456,6 +703,16 @@ func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {
 		if slices.Contains(isVoid, e.Tag) {
 			e.Void = true
 		}
+	}
+
+	// Manually add h2-h6
+	for i := 2; i < 7; i++ {
+		e := &Element{
+			Tag:         "h" + strconv.Itoa(i),
+			Description: "These elements represent headings for their sections.",
+		}
+
+		p.Spec.Elements = append(p.Spec.Elements, e)
 	}
 
 	return p.Spec, nil

@@ -17,8 +17,7 @@ type DelElement struct {
 }
 
 // Del creates a tag <del> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The del element represents a removal from the document.
 func Del(children ...htemel.Node) *DelElement {
 	node := &DelElement{
@@ -49,12 +48,12 @@ func DelTernary(condition bool, true htemel.Node, false htemel.Node) *DelElement
 type DelAutocapitalizeEnum string
 
 const (
+	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
 	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
 	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
 	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
 	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
 	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
-	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
 )
 
 type DelAutocorrectEnum string
@@ -77,9 +76,9 @@ const (
 type DelDirEnum string
 
 const (
+	DelDirEnumAuto DelDirEnum = "auto"
 	DelDirEnumLtr  DelDirEnum = "ltr"
 	DelDirEnumRtl  DelDirEnum = "rtl"
-	DelDirEnumAuto DelDirEnum = "auto"
 )
 
 type DelDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type DelEnterkeyhintEnum string
 
 const (
-	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
-	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
-	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
 	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
 	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
 	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
 	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
+	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
+	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
+	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
 )
 
 type DelHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type DelInputmodeEnum string
 
 const (
-	DelInputmodeEnumText    DelInputmodeEnum = "text"
-	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
-	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
 	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 	DelInputmodeEnumNone    DelInputmodeEnum = "none"
 	DelInputmodeEnumNumeric DelInputmodeEnum = "numeric"
 	DelInputmodeEnumSearch  DelInputmodeEnum = "search"
 	DelInputmodeEnumTel     DelInputmodeEnum = "tel"
+	DelInputmodeEnumText    DelInputmodeEnum = "text"
+	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
+	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
 )
 
 type DelSpellcheckEnum string
@@ -147,6 +146,18 @@ const (
 )
 
 type delAttrs map[string]any
+
+func (e *DelElement) Cite(s string) *DelElement {
+	e.attributes["cite"] = s
+
+	return e
+}
+
+func (e *DelElement) Datetime(s string) *DelElement {
+	e.attributes["datetime"] = s
+
+	return e
+}
 
 func (e *DelElement) Autocapitalize(a DelAutocapitalizeEnum) *DelElement {
 	e.attributes["autocapitalize"] = a

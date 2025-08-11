@@ -17,8 +17,7 @@ type OptgroupElement struct {
 }
 
 // Optgroup creates a tag <optgroup> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The optgroup element represents a group of option elements with a common label.
 func Optgroup(children ...htemel.Node) *OptgroupElement {
 	node := &OptgroupElement{
@@ -49,12 +48,12 @@ func OptgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Optgr
 type OptgroupAutocapitalizeEnum string
 
 const (
-	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
-	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 	OptgroupAutocapitalizeEnumOff        OptgroupAutocapitalizeEnum = "off"
 	OptgroupAutocapitalizeEnumOn         OptgroupAutocapitalizeEnum = "on"
 	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
 	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
+	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
+	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 )
 
 type OptgroupAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type OptgroupContenteditableEnum string
 
 const (
-	OptgroupContenteditableEnumFalse         OptgroupContenteditableEnum = "false"
 	OptgroupContenteditableEnumPlaintextOnly OptgroupContenteditableEnum = "plaintext-only"
 	OptgroupContenteditableEnumTrue          OptgroupContenteditableEnum = "true"
+	OptgroupContenteditableEnumFalse         OptgroupContenteditableEnum = "false"
 	OptgroupContenteditableEnumEmpty         OptgroupContenteditableEnum = ""
 )
 
@@ -92,34 +91,34 @@ const (
 type OptgroupEnterkeyhintEnum string
 
 const (
-	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
-	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
 	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
 	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
 	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
 	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
+	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
+	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
 )
 
 type OptgroupHiddenEnum string
 
 const (
-	OptgroupHiddenEnumHidden     OptgroupHiddenEnum = "hidden"
 	OptgroupHiddenEnumUntilFound OptgroupHiddenEnum = "until-found"
+	OptgroupHiddenEnumHidden     OptgroupHiddenEnum = "hidden"
 	OptgroupHiddenEnumEmpty      OptgroupHiddenEnum = ""
 )
 
 type OptgroupInputmodeEnum string
 
 const (
+	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
+	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
+	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
 	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
 	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
 	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
 	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
-	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
-	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
-	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
 )
 
 type OptgroupSpellcheckEnum string

@@ -17,8 +17,7 @@ type SampElement struct {
 }
 
 // Samp creates a tag <samp> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The samp element represents sample or quoted output from another program or computing system.
 func Samp(children ...htemel.Node) *SampElement {
 	node := &SampElement{
@@ -49,12 +48,12 @@ func SampTernary(condition bool, true htemel.Node, false htemel.Node) *SampEleme
 type SampAutocapitalizeEnum string
 
 const (
+	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
 	SampAutocapitalizeEnumOff        SampAutocapitalizeEnum = "off"
 	SampAutocapitalizeEnumOn         SampAutocapitalizeEnum = "on"
 	SampAutocapitalizeEnumSentences  SampAutocapitalizeEnum = "sentences"
 	SampAutocapitalizeEnumWords      SampAutocapitalizeEnum = "words"
 	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
-	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
 )
 
 type SampAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type SampContenteditableEnum string
 
 const (
-	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
 	SampContenteditableEnumPlaintextOnly SampContenteditableEnum = "plaintext-only"
 	SampContenteditableEnumTrue          SampContenteditableEnum = "true"
+	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
 	SampContenteditableEnumEmpty         SampContenteditableEnum = ""
 )
 
@@ -92,26 +91,27 @@ const (
 type SampEnterkeyhintEnum string
 
 const (
+	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
 	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
 	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
 	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
 	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
 	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
 	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
-	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
 )
 
 type SampHiddenEnum string
 
 const (
-	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
 	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
+	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
 	SampHiddenEnumEmpty      SampHiddenEnum = ""
 )
 
 type SampInputmodeEnum string
 
 const (
+	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
 	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
 	SampInputmodeEnumNone    SampInputmodeEnum = "none"
 	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
@@ -119,14 +119,13 @@ const (
 	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
 	SampInputmodeEnumText    SampInputmodeEnum = "text"
 	SampInputmodeEnumUrl     SampInputmodeEnum = "url"
-	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
 )
 
 type SampSpellcheckEnum string
 
 const (
-	SampSpellcheckEnumFalse SampSpellcheckEnum = "false"
 	SampSpellcheckEnumTrue  SampSpellcheckEnum = "true"
+	SampSpellcheckEnumFalse SampSpellcheckEnum = "false"
 	SampSpellcheckEnumEmpty SampSpellcheckEnum = ""
 )
 
@@ -141,8 +140,8 @@ const (
 type SampWritingsuggestionsEnum string
 
 const (
-	SampWritingsuggestionsEnumFalse SampWritingsuggestionsEnum = "false"
 	SampWritingsuggestionsEnumTrue  SampWritingsuggestionsEnum = "true"
+	SampWritingsuggestionsEnumFalse SampWritingsuggestionsEnum = "false"
 	SampWritingsuggestionsEnumEmpty SampWritingsuggestionsEnum = ""
 )
 

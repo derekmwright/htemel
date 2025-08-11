@@ -16,7 +16,6 @@ type TrackElement struct {
 }
 
 // Track creates a tag <track> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: The track element allows authors to specify explicit external timed text tracks for media elements. It does not represent anything on its own.
 func Track() *TrackElement {
@@ -40,19 +39,19 @@ func TrackIf(condition bool) *TrackElement {
 type TrackAutocapitalizeEnum string
 
 const (
+	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
 	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
 	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
 	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
 	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
 	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
-	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
 )
 
 type TrackAutocorrectEnum string
 
 const (
-	TrackAutocorrectEnumOn    TrackAutocorrectEnum = "on"
 	TrackAutocorrectEnumOff   TrackAutocorrectEnum = "off"
+	TrackAutocorrectEnumOn    TrackAutocorrectEnum = "on"
 	TrackAutocorrectEnumEmpty TrackAutocorrectEnum = ""
 )
 
@@ -68,28 +67,28 @@ const (
 type TrackDirEnum string
 
 const (
-	TrackDirEnumAuto TrackDirEnum = "auto"
 	TrackDirEnumLtr  TrackDirEnum = "ltr"
 	TrackDirEnumRtl  TrackDirEnum = "rtl"
+	TrackDirEnumAuto TrackDirEnum = "auto"
 )
 
 type TrackDraggableEnum string
 
 const (
-	TrackDraggableEnumFalse TrackDraggableEnum = "false"
 	TrackDraggableEnumTrue  TrackDraggableEnum = "true"
+	TrackDraggableEnumFalse TrackDraggableEnum = "false"
 )
 
 type TrackEnterkeyhintEnum string
 
 const (
-	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
-	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
-	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
 	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
 	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
 	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
 	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
+	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
+	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
+	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
 )
 
 type TrackHiddenEnum string
@@ -124,16 +123,16 @@ const (
 type TrackTranslateEnum string
 
 const (
-	TrackTranslateEnumNo    TrackTranslateEnum = "no"
 	TrackTranslateEnumYes   TrackTranslateEnum = "yes"
+	TrackTranslateEnumNo    TrackTranslateEnum = "no"
 	TrackTranslateEnumEmpty TrackTranslateEnum = ""
 )
 
 type TrackWritingsuggestionsEnum string
 
 const (
-	TrackWritingsuggestionsEnumFalse TrackWritingsuggestionsEnum = "false"
 	TrackWritingsuggestionsEnumTrue  TrackWritingsuggestionsEnum = "true"
+	TrackWritingsuggestionsEnumFalse TrackWritingsuggestionsEnum = "false"
 	TrackWritingsuggestionsEnumEmpty TrackWritingsuggestionsEnum = ""
 )
 

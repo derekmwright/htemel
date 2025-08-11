@@ -17,8 +17,7 @@ type BElement struct {
 }
 
 // B creates a tag <b> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The b element represents a span of text to which attention is being drawn for utilitarian purposes without conveying any extra importance and with no implication of an alternate voice or mood, such as key words in a document abstract, product names in a review, actionable words in interactive text-driven software, or an article lede.
 func B(children ...htemel.Node) *BElement {
 	node := &BElement{
@@ -60,8 +59,8 @@ const (
 type BAutocorrectEnum string
 
 const (
-	BAutocorrectEnumOff   BAutocorrectEnum = "off"
 	BAutocorrectEnumOn    BAutocorrectEnum = "on"
+	BAutocorrectEnumOff   BAutocorrectEnum = "off"
 	BAutocorrectEnumEmpty BAutocorrectEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type BEnterkeyhintEnum string
 
 const (
-	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
 	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
 	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
 	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
+	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 )
 
 type BHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type BInputmodeEnum string
 
 const (
-	BInputmodeEnumText    BInputmodeEnum = "text"
-	BInputmodeEnumUrl     BInputmodeEnum = "url"
-	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
-	BInputmodeEnumEmail   BInputmodeEnum = "email"
 	BInputmodeEnumNone    BInputmodeEnum = "none"
 	BInputmodeEnumNumeric BInputmodeEnum = "numeric"
 	BInputmodeEnumSearch  BInputmodeEnum = "search"
 	BInputmodeEnumTel     BInputmodeEnum = "tel"
+	BInputmodeEnumText    BInputmodeEnum = "text"
+	BInputmodeEnumUrl     BInputmodeEnum = "url"
+	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
+	BInputmodeEnumEmail   BInputmodeEnum = "email"
 )
 
 type BSpellcheckEnum string
@@ -133,16 +132,16 @@ const (
 type BTranslateEnum string
 
 const (
-	BTranslateEnumNo    BTranslateEnum = "no"
 	BTranslateEnumYes   BTranslateEnum = "yes"
+	BTranslateEnumNo    BTranslateEnum = "no"
 	BTranslateEnumEmpty BTranslateEnum = ""
 )
 
 type BWritingsuggestionsEnum string
 
 const (
-	BWritingsuggestionsEnumTrue  BWritingsuggestionsEnum = "true"
 	BWritingsuggestionsEnumFalse BWritingsuggestionsEnum = "false"
+	BWritingsuggestionsEnumTrue  BWritingsuggestionsEnum = "true"
 	BWritingsuggestionsEnumEmpty BWritingsuggestionsEnum = ""
 )
 

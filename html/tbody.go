@@ -17,8 +17,7 @@ type TbodyElement struct {
 }
 
 // Tbody creates a tag <tbody> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The tbody element represents a block of rows that consist of a body of data for the parent table element, if the tbody element has a parent and it is a table.
 func Tbody(children ...htemel.Node) *TbodyElement {
 	node := &TbodyElement{
@@ -49,12 +48,12 @@ func TbodyTernary(condition bool, true htemel.Node, false htemel.Node) *TbodyEle
 type TbodyAutocapitalizeEnum string
 
 const (
-	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 	TbodyAutocapitalizeEnumWords      TbodyAutocapitalizeEnum = "words"
 	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
 	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
 	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
 	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
+	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 )
 
 type TbodyAutocorrectEnum string
@@ -68,25 +67,25 @@ const (
 type TbodyContenteditableEnum string
 
 const (
-	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
 	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
+	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumEmpty         TbodyContenteditableEnum = ""
 )
 
 type TbodyDirEnum string
 
 const (
-	TbodyDirEnumRtl  TbodyDirEnum = "rtl"
 	TbodyDirEnumAuto TbodyDirEnum = "auto"
 	TbodyDirEnumLtr  TbodyDirEnum = "ltr"
+	TbodyDirEnumRtl  TbodyDirEnum = "rtl"
 )
 
 type TbodyDraggableEnum string
 
 const (
-	TbodyDraggableEnumTrue  TbodyDraggableEnum = "true"
 	TbodyDraggableEnumFalse TbodyDraggableEnum = "false"
+	TbodyDraggableEnumTrue  TbodyDraggableEnum = "true"
 )
 
 type TbodyEnterkeyhintEnum string
@@ -112,14 +111,14 @@ const (
 type TbodyInputmodeEnum string
 
 const (
-	TbodyInputmodeEnumSearch  TbodyInputmodeEnum = "search"
-	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
-	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
-	TbodyInputmodeEnumUrl     TbodyInputmodeEnum = "url"
 	TbodyInputmodeEnumDecimal TbodyInputmodeEnum = "decimal"
 	TbodyInputmodeEnumEmail   TbodyInputmodeEnum = "email"
 	TbodyInputmodeEnumNone    TbodyInputmodeEnum = "none"
 	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
+	TbodyInputmodeEnumSearch  TbodyInputmodeEnum = "search"
+	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
+	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
+	TbodyInputmodeEnumUrl     TbodyInputmodeEnum = "url"
 )
 
 type TbodySpellcheckEnum string

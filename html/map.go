@@ -17,8 +17,7 @@ type MapElement struct {
 }
 
 // Map creates a tag <map> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The map element, in conjunction with an img element and any area element descendants, defines an image map. The element represents its children.
 func Map(children ...htemel.Node) *MapElement {
 	node := &MapElement{
@@ -49,12 +48,12 @@ func MapTernary(condition bool, true htemel.Node, false htemel.Node) *MapElement
 type MapAutocapitalizeEnum string
 
 const (
-	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
 	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 	MapAutocapitalizeEnumCharacters MapAutocapitalizeEnum = "characters"
 	MapAutocapitalizeEnumNone       MapAutocapitalizeEnum = "none"
 	MapAutocapitalizeEnumOff        MapAutocapitalizeEnum = "off"
 	MapAutocapitalizeEnumOn         MapAutocapitalizeEnum = "on"
+	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
 )
 
 type MapAutocorrectEnum string
@@ -104,22 +103,22 @@ const (
 type MapHiddenEnum string
 
 const (
-	MapHiddenEnumHidden     MapHiddenEnum = "hidden"
 	MapHiddenEnumUntilFound MapHiddenEnum = "until-found"
+	MapHiddenEnumHidden     MapHiddenEnum = "hidden"
 	MapHiddenEnumEmpty      MapHiddenEnum = ""
 )
 
 type MapInputmodeEnum string
 
 const (
-	MapInputmodeEnumText    MapInputmodeEnum = "text"
-	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
-	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
 	MapInputmodeEnumEmail   MapInputmodeEnum = "email"
 	MapInputmodeEnumNone    MapInputmodeEnum = "none"
 	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
 	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
 	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
+	MapInputmodeEnumText    MapInputmodeEnum = "text"
+	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
+	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
 )
 
 type MapSpellcheckEnum string
@@ -141,8 +140,8 @@ const (
 type MapWritingsuggestionsEnum string
 
 const (
-	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
 	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
+	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
 	MapWritingsuggestionsEnumEmpty MapWritingsuggestionsEnum = ""
 )
 

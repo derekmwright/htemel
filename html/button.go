@@ -17,8 +17,7 @@ type ButtonElement struct {
 }
 
 // Button creates a tag <button> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The button element represents a button labeled by its contents.
 func Button(children ...htemel.Node) *ButtonElement {
 	node := &ButtonElement{
@@ -49,19 +48,19 @@ func ButtonTernary(condition bool, true htemel.Node, false htemel.Node) *ButtonE
 type ButtonAutocapitalizeEnum string
 
 const (
-	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
-	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
 	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
 	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
 	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
+	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
+	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
 )
 
 type ButtonAutocorrectEnum string
 
 const (
-	ButtonAutocorrectEnumOff   ButtonAutocorrectEnum = "off"
 	ButtonAutocorrectEnumOn    ButtonAutocorrectEnum = "on"
+	ButtonAutocorrectEnumOff   ButtonAutocorrectEnum = "off"
 	ButtonAutocorrectEnumEmpty ButtonAutocorrectEnum = ""
 )
 
@@ -92,34 +91,34 @@ const (
 type ButtonEnterkeyhintEnum string
 
 const (
-	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
-	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
 	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
 	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
 	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
+	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
+	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
 )
 
 type ButtonHiddenEnum string
 
 const (
-	ButtonHiddenEnumUntilFound ButtonHiddenEnum = "until-found"
 	ButtonHiddenEnumHidden     ButtonHiddenEnum = "hidden"
+	ButtonHiddenEnumUntilFound ButtonHiddenEnum = "until-found"
 	ButtonHiddenEnumEmpty      ButtonHiddenEnum = ""
 )
 
 type ButtonInputmodeEnum string
 
 const (
-	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
-	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
 	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
 	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
 	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
 	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
 	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
 	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
+	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
+	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
 )
 
 type ButtonSpellcheckEnum string

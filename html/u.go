@@ -17,8 +17,7 @@ type UElement struct {
 }
 
 // U creates a tag <u> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The u element represents a span of text with an unarticulated, though explicitly rendered, non-textual annotation, such as labeling the text as being a proper name in Chinese text (a Chinese proper name mark), or labeling the text as being misspelt.
 func U(children ...htemel.Node) *UElement {
 	node := &UElement{
@@ -49,28 +48,28 @@ func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
 type UAutocapitalizeEnum string
 
 const (
-	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
-	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
-	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
 	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
 	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
+	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
+	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
+	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 )
 
 type UAutocorrectEnum string
 
 const (
-	UAutocorrectEnumOn    UAutocorrectEnum = "on"
 	UAutocorrectEnumOff   UAutocorrectEnum = "off"
+	UAutocorrectEnumOn    UAutocorrectEnum = "on"
 	UAutocorrectEnumEmpty UAutocorrectEnum = ""
 )
 
 type UContenteditableEnum string
 
 const (
-	UContenteditableEnumFalse         UContenteditableEnum = "false"
 	UContenteditableEnumPlaintextOnly UContenteditableEnum = "plaintext-only"
 	UContenteditableEnumTrue          UContenteditableEnum = "true"
+	UContenteditableEnumFalse         UContenteditableEnum = "false"
 	UContenteditableEnumEmpty         UContenteditableEnum = ""
 )
 
@@ -92,20 +91,20 @@ const (
 type UEnterkeyhintEnum string
 
 const (
+	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
 	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
 	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
 	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
-	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 )
 
 type UHiddenEnum string
 
 const (
-	UHiddenEnumHidden     UHiddenEnum = "hidden"
 	UHiddenEnumUntilFound UHiddenEnum = "until-found"
+	UHiddenEnumHidden     UHiddenEnum = "hidden"
 	UHiddenEnumEmpty      UHiddenEnum = ""
 )
 

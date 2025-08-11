@@ -112,7 +112,7 @@ func BaseFunc() (*template.Template, ImportSet) {
 			"titleCase": titleCase,
 		}).Parse(`
 // {{ .Tag | titleCase }} creates a tag <{{ .Tag }}> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
+{{ if not .Void }}// Any children passed will be nested within the tag.{{ end -}}
 //
 // Spec Description: {{ .Description }}
 func {{ .Tag | titleCase }}({{ if not .Void }}children ...htemel.Node{{ end }}) *{{ .Tag | titleCase }}Element {

@@ -17,8 +17,7 @@ type VideoElement struct {
 }
 
 // Video creates a tag <video> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: A video element is used for playing videos or movies, and audio files with captions.
 func Video(children ...htemel.Node) *VideoElement {
 	node := &VideoElement{
@@ -68,9 +67,9 @@ const (
 type VideoContenteditableEnum string
 
 const (
+	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
 	VideoContenteditableEnumPlaintextOnly VideoContenteditableEnum = "plaintext-only"
 	VideoContenteditableEnumTrue          VideoContenteditableEnum = "true"
-	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
 	VideoContenteditableEnumEmpty         VideoContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type VideoEnterkeyhintEnum string
 
 const (
-	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
-	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
-	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
 	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
 	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
 	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
 	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
+	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
+	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
+	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
 )
 
 type VideoHiddenEnum string

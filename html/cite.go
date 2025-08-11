@@ -17,8 +17,7 @@ type CiteElement struct {
 }
 
 // Cite creates a tag <cite> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The cite element represents the title of a work (e.g. a book, a paper, an essay, a poem, a score, a song, a script, a film, a TV show, a game, a sculpture, a painting, a theatre production, a play, an opera, a musical, an exhibition, a legal case report, a computer program,  etc.). This can be a work that is being quoted or referenced in detail (i.e., a citation), or it can just be a work that is mentioned in passing.
 func Cite(children ...htemel.Node) *CiteElement {
 	node := &CiteElement{
@@ -68,18 +67,18 @@ const (
 type CiteContenteditableEnum string
 
 const (
-	CiteContenteditableEnumPlaintextOnly CiteContenteditableEnum = "plaintext-only"
 	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
 	CiteContenteditableEnumFalse         CiteContenteditableEnum = "false"
+	CiteContenteditableEnumPlaintextOnly CiteContenteditableEnum = "plaintext-only"
 	CiteContenteditableEnumEmpty         CiteContenteditableEnum = ""
 )
 
 type CiteDirEnum string
 
 const (
+	CiteDirEnumAuto CiteDirEnum = "auto"
 	CiteDirEnumLtr  CiteDirEnum = "ltr"
 	CiteDirEnumRtl  CiteDirEnum = "rtl"
-	CiteDirEnumAuto CiteDirEnum = "auto"
 )
 
 type CiteDraggableEnum string
@@ -112,6 +111,7 @@ const (
 type CiteInputmodeEnum string
 
 const (
+	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
 	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
 	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
 	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
@@ -119,7 +119,6 @@ const (
 	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
 	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
-	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
 )
 
 type CiteSpellcheckEnum string
@@ -133,8 +132,8 @@ const (
 type CiteTranslateEnum string
 
 const (
-	CiteTranslateEnumYes   CiteTranslateEnum = "yes"
 	CiteTranslateEnumNo    CiteTranslateEnum = "no"
+	CiteTranslateEnumYes   CiteTranslateEnum = "yes"
 	CiteTranslateEnumEmpty CiteTranslateEnum = ""
 )
 

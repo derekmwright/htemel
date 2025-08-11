@@ -17,8 +17,7 @@ type SpanElement struct {
 }
 
 // Span creates a tag <span> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The span element doesn't mean anything on its own, but can be useful when used together with the global attributes, e.g. class, lang, or dir. It represents its children.
 func Span(children ...htemel.Node) *SpanElement {
 	node := &SpanElement{
@@ -49,37 +48,37 @@ func SpanTernary(condition bool, true htemel.Node, false htemel.Node) *SpanEleme
 type SpanAutocapitalizeEnum string
 
 const (
-	SpanAutocapitalizeEnumCharacters SpanAutocapitalizeEnum = "characters"
 	SpanAutocapitalizeEnumNone       SpanAutocapitalizeEnum = "none"
 	SpanAutocapitalizeEnumOff        SpanAutocapitalizeEnum = "off"
 	SpanAutocapitalizeEnumOn         SpanAutocapitalizeEnum = "on"
 	SpanAutocapitalizeEnumSentences  SpanAutocapitalizeEnum = "sentences"
 	SpanAutocapitalizeEnumWords      SpanAutocapitalizeEnum = "words"
+	SpanAutocapitalizeEnumCharacters SpanAutocapitalizeEnum = "characters"
 )
 
 type SpanAutocorrectEnum string
 
 const (
-	SpanAutocorrectEnumOff   SpanAutocorrectEnum = "off"
 	SpanAutocorrectEnumOn    SpanAutocorrectEnum = "on"
+	SpanAutocorrectEnumOff   SpanAutocorrectEnum = "off"
 	SpanAutocorrectEnumEmpty SpanAutocorrectEnum = ""
 )
 
 type SpanContenteditableEnum string
 
 const (
-	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
 	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
+	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumEmpty         SpanContenteditableEnum = ""
 )
 
 type SpanDirEnum string
 
 const (
-	SpanDirEnumAuto SpanDirEnum = "auto"
 	SpanDirEnumLtr  SpanDirEnum = "ltr"
 	SpanDirEnumRtl  SpanDirEnum = "rtl"
+	SpanDirEnumAuto SpanDirEnum = "auto"
 )
 
 type SpanDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
+	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
+	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
+	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
 	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
 	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
 	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
-	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
-	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
-	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
 )
 
 type SpanHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type SpanInputmodeEnum string
 
 const (
+	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
+	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
 	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
 	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
 	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
 	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
 	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
-	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
-	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
 )
 
 type SpanSpellcheckEnum string
@@ -133,8 +132,8 @@ const (
 type SpanTranslateEnum string
 
 const (
-	SpanTranslateEnumNo    SpanTranslateEnum = "no"
 	SpanTranslateEnumYes   SpanTranslateEnum = "yes"
+	SpanTranslateEnumNo    SpanTranslateEnum = "no"
 	SpanTranslateEnumEmpty SpanTranslateEnum = ""
 )
 

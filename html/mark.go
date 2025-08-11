@@ -17,8 +17,7 @@ type MarkElement struct {
 }
 
 // Mark creates a tag <mark> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The mark element represents a run of text in one document marked or highlighted for reference purposes, due to its relevance in another context. When used in a quotation or other block of text referred to from the prose, it indicates a highlight that was not originally present but which has been added to bring the reader's attention to a part of the text that might not have been considered important by the original author when the block was originally written, but which is now under previously unexpected scrutiny. When used in the main prose of a document, it indicates a part of the document that has been highlighted due to its likely relevance to the user's current activity.
 func Mark(children ...htemel.Node) *MarkElement {
 	node := &MarkElement{
@@ -49,19 +48,19 @@ func MarkTernary(condition bool, true htemel.Node, false htemel.Node) *MarkEleme
 type MarkAutocapitalizeEnum string
 
 const (
+	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
+	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
 	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
 	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
 	MarkAutocapitalizeEnumNone       MarkAutocapitalizeEnum = "none"
 	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
-	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
-	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
 )
 
 type MarkAutocorrectEnum string
 
 const (
-	MarkAutocorrectEnumOff   MarkAutocorrectEnum = "off"
 	MarkAutocorrectEnumOn    MarkAutocorrectEnum = "on"
+	MarkAutocorrectEnumOff   MarkAutocorrectEnum = "off"
 	MarkAutocorrectEnumEmpty MarkAutocorrectEnum = ""
 )
 
@@ -104,14 +103,15 @@ const (
 type MarkHiddenEnum string
 
 const (
-	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
 	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
+	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
 	MarkHiddenEnumEmpty      MarkHiddenEnum = ""
 )
 
 type MarkInputmodeEnum string
 
 const (
+	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
 	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
 	MarkInputmodeEnumDecimal MarkInputmodeEnum = "decimal"
 	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
@@ -119,7 +119,6 @@ const (
 	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
 	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
 	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
-	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
 )
 
 type MarkSpellcheckEnum string
@@ -133,16 +132,16 @@ const (
 type MarkTranslateEnum string
 
 const (
-	MarkTranslateEnumNo    MarkTranslateEnum = "no"
 	MarkTranslateEnumYes   MarkTranslateEnum = "yes"
+	MarkTranslateEnumNo    MarkTranslateEnum = "no"
 	MarkTranslateEnumEmpty MarkTranslateEnum = ""
 )
 
 type MarkWritingsuggestionsEnum string
 
 const (
-	MarkWritingsuggestionsEnumFalse MarkWritingsuggestionsEnum = "false"
 	MarkWritingsuggestionsEnumTrue  MarkWritingsuggestionsEnum = "true"
+	MarkWritingsuggestionsEnumFalse MarkWritingsuggestionsEnum = "false"
 	MarkWritingsuggestionsEnumEmpty MarkWritingsuggestionsEnum = ""
 )
 

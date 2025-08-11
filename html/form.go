@@ -17,8 +17,7 @@ type FormElement struct {
 }
 
 // Form creates a tag <form> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The form element represents a hyperlink that can be manipulated through a collection of form-associated elements, some of which can represent editable values that can be submitted to a server for processing.
 func Form(children ...htemel.Node) *FormElement {
 	node := &FormElement{
@@ -49,12 +48,12 @@ func FormTernary(condition bool, true htemel.Node, false htemel.Node) *FormEleme
 type FormAutocapitalizeEnum string
 
 const (
+	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
 	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
 	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
 	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
-	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 )
 
 type FormAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type FormContenteditableEnum string
 
 const (
+	FormContenteditableEnumTrue          FormContenteditableEnum = "true"
 	FormContenteditableEnumFalse         FormContenteditableEnum = "false"
 	FormContenteditableEnumPlaintextOnly FormContenteditableEnum = "plaintext-only"
-	FormContenteditableEnumTrue          FormContenteditableEnum = "true"
 	FormContenteditableEnumEmpty         FormContenteditableEnum = ""
 )
 
@@ -92,20 +91,20 @@ const (
 type FormEnterkeyhintEnum string
 
 const (
-	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
 	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
 	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
 	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
 	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
+	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
 )
 
 type FormHiddenEnum string
 
 const (
-	FormHiddenEnumHidden     FormHiddenEnum = "hidden"
 	FormHiddenEnumUntilFound FormHiddenEnum = "until-found"
+	FormHiddenEnumHidden     FormHiddenEnum = "hidden"
 	FormHiddenEnumEmpty      FormHiddenEnum = ""
 )
 
@@ -133,16 +132,16 @@ const (
 type FormTranslateEnum string
 
 const (
-	FormTranslateEnumNo    FormTranslateEnum = "no"
 	FormTranslateEnumYes   FormTranslateEnum = "yes"
+	FormTranslateEnumNo    FormTranslateEnum = "no"
 	FormTranslateEnumEmpty FormTranslateEnum = ""
 )
 
 type FormWritingsuggestionsEnum string
 
 const (
-	FormWritingsuggestionsEnumTrue  FormWritingsuggestionsEnum = "true"
 	FormWritingsuggestionsEnumFalse FormWritingsuggestionsEnum = "false"
+	FormWritingsuggestionsEnumTrue  FormWritingsuggestionsEnum = "true"
 	FormWritingsuggestionsEnumEmpty FormWritingsuggestionsEnum = ""
 )
 

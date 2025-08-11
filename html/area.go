@@ -16,7 +16,6 @@ type AreaElement struct {
 }
 
 // Area creates a tag <area> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
 //
 // Spec Description: The area element represents either a hyperlink with some text and a corresponding area on an image map, or a dead area on an image map.
 func Area() *AreaElement {
@@ -40,37 +39,37 @@ func AreaIf(condition bool) *AreaElement {
 type AreaAutocapitalizeEnum string
 
 const (
-	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
-	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
 	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
 	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
 	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
+	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
+	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
 )
 
 type AreaAutocorrectEnum string
 
 const (
-	AreaAutocorrectEnumOn    AreaAutocorrectEnum = "on"
 	AreaAutocorrectEnumOff   AreaAutocorrectEnum = "off"
+	AreaAutocorrectEnumOn    AreaAutocorrectEnum = "on"
 	AreaAutocorrectEnumEmpty AreaAutocorrectEnum = ""
 )
 
 type AreaContenteditableEnum string
 
 const (
+	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumPlaintextOnly AreaContenteditableEnum = "plaintext-only"
 	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
-	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumEmpty         AreaContenteditableEnum = ""
 )
 
 type AreaDirEnum string
 
 const (
-	AreaDirEnumAuto AreaDirEnum = "auto"
 	AreaDirEnumLtr  AreaDirEnum = "ltr"
 	AreaDirEnumRtl  AreaDirEnum = "rtl"
+	AreaDirEnumAuto AreaDirEnum = "auto"
 )
 
 type AreaDraggableEnum string
@@ -83,26 +82,27 @@ const (
 type AreaEnterkeyhintEnum string
 
 const (
-	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
-	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
 	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
 	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
 	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
 	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
 	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
+	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
+	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
 )
 
 type AreaHiddenEnum string
 
 const (
-	AreaHiddenEnumHidden     AreaHiddenEnum = "hidden"
 	AreaHiddenEnumUntilFound AreaHiddenEnum = "until-found"
+	AreaHiddenEnumHidden     AreaHiddenEnum = "hidden"
 	AreaHiddenEnumEmpty      AreaHiddenEnum = ""
 )
 
 type AreaInputmodeEnum string
 
 const (
+	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
 	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
 	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
@@ -110,7 +110,6 @@ const (
 	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
 	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
 	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
-	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 )
 
 type AreaSpellcheckEnum string
@@ -132,8 +131,8 @@ const (
 type AreaWritingsuggestionsEnum string
 
 const (
-	AreaWritingsuggestionsEnumFalse AreaWritingsuggestionsEnum = "false"
 	AreaWritingsuggestionsEnumTrue  AreaWritingsuggestionsEnum = "true"
+	AreaWritingsuggestionsEnumFalse AreaWritingsuggestionsEnum = "false"
 	AreaWritingsuggestionsEnumEmpty AreaWritingsuggestionsEnum = ""
 )
 

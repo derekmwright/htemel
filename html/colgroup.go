@@ -17,8 +17,7 @@ type ColgroupElement struct {
 }
 
 // Colgroup creates a tag <colgroup> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The colgroup element represents a group of one or more columns in the table that is its parent, if it has a parent and that is a table element.
 func Colgroup(children ...htemel.Node) *ColgroupElement {
 	node := &ColgroupElement{
@@ -49,12 +48,12 @@ func ColgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Colgr
 type ColgroupAutocapitalizeEnum string
 
 const (
-	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
-	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
-	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
 	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 	ColgroupAutocapitalizeEnumOff        ColgroupAutocapitalizeEnum = "off"
+	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
+	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
+	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 )
 
 type ColgroupAutocorrectEnum string
@@ -68,37 +67,37 @@ const (
 type ColgroupContenteditableEnum string
 
 const (
-	ColgroupContenteditableEnumTrue          ColgroupContenteditableEnum = "true"
 	ColgroupContenteditableEnumFalse         ColgroupContenteditableEnum = "false"
 	ColgroupContenteditableEnumPlaintextOnly ColgroupContenteditableEnum = "plaintext-only"
+	ColgroupContenteditableEnumTrue          ColgroupContenteditableEnum = "true"
 	ColgroupContenteditableEnumEmpty         ColgroupContenteditableEnum = ""
 )
 
 type ColgroupDirEnum string
 
 const (
+	ColgroupDirEnumAuto ColgroupDirEnum = "auto"
 	ColgroupDirEnumLtr  ColgroupDirEnum = "ltr"
 	ColgroupDirEnumRtl  ColgroupDirEnum = "rtl"
-	ColgroupDirEnumAuto ColgroupDirEnum = "auto"
 )
 
 type ColgroupDraggableEnum string
 
 const (
-	ColgroupDraggableEnumTrue  ColgroupDraggableEnum = "true"
 	ColgroupDraggableEnumFalse ColgroupDraggableEnum = "false"
+	ColgroupDraggableEnumTrue  ColgroupDraggableEnum = "true"
 )
 
 type ColgroupEnterkeyhintEnum string
 
 const (
-	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
-	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
-	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
 	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
 	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
 	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
 	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
+	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
+	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
+	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
 )
 
 type ColgroupHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type ColgroupInputmodeEnum string
 
 const (
-	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
-	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
-	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
-	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
 	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
 	ColgroupInputmodeEnumSearch  ColgroupInputmodeEnum = "search"
 	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
 	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
+	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
+	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
+	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
+	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
 )
 
 type ColgroupSpellcheckEnum string
@@ -133,16 +132,16 @@ const (
 type ColgroupTranslateEnum string
 
 const (
-	ColgroupTranslateEnumNo    ColgroupTranslateEnum = "no"
 	ColgroupTranslateEnumYes   ColgroupTranslateEnum = "yes"
+	ColgroupTranslateEnumNo    ColgroupTranslateEnum = "no"
 	ColgroupTranslateEnumEmpty ColgroupTranslateEnum = ""
 )
 
 type ColgroupWritingsuggestionsEnum string
 
 const (
-	ColgroupWritingsuggestionsEnumTrue  ColgroupWritingsuggestionsEnum = "true"
 	ColgroupWritingsuggestionsEnumFalse ColgroupWritingsuggestionsEnum = "false"
+	ColgroupWritingsuggestionsEnumTrue  ColgroupWritingsuggestionsEnum = "true"
 	ColgroupWritingsuggestionsEnumEmpty ColgroupWritingsuggestionsEnum = ""
 )
 

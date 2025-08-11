@@ -17,8 +17,7 @@ type IElement struct {
 }
 
 // I creates a tag <i> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The i element represents a span of text in an alternate voice or mood, or otherwise offset from the normal prose in a manner indicating a different quality of text, such as a taxonomic designation, a technical term, an idiomatic phrase from another language, transliteration, a thought, or a ship name in Western texts.
 func I(children ...htemel.Node) *IElement {
 	node := &IElement{
@@ -49,12 +48,12 @@ func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
 type IAutocapitalizeEnum string
 
 const (
-	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
-	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
 	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
 	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
 	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
+	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
+	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
 )
 
 type IAutocorrectEnum string
@@ -92,13 +91,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
+	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
 	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
 	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
 	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
 	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
-	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
 )
 
 type IHiddenEnum string
@@ -133,16 +132,16 @@ const (
 type ITranslateEnum string
 
 const (
-	ITranslateEnumNo    ITranslateEnum = "no"
 	ITranslateEnumYes   ITranslateEnum = "yes"
+	ITranslateEnumNo    ITranslateEnum = "no"
 	ITranslateEnumEmpty ITranslateEnum = ""
 )
 
 type IWritingsuggestionsEnum string
 
 const (
-	IWritingsuggestionsEnumTrue  IWritingsuggestionsEnum = "true"
 	IWritingsuggestionsEnumFalse IWritingsuggestionsEnum = "false"
+	IWritingsuggestionsEnumTrue  IWritingsuggestionsEnum = "true"
 	IWritingsuggestionsEnumEmpty IWritingsuggestionsEnum = ""
 )
 

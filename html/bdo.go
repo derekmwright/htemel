@@ -17,8 +17,7 @@ type BdoElement struct {
 }
 
 // Bdo creates a tag <bdo> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The bdo element represents explicit text directionality formatting control for its children. It allows authors to override the Unicode bidirectional algorithm by explicitly specifying a direction override. [BIDI]
 func Bdo(children ...htemel.Node) *BdoElement {
 	node := &BdoElement{
@@ -49,12 +48,12 @@ func BdoTernary(condition bool, true htemel.Node, false htemel.Node) *BdoElement
 type BdoAutocapitalizeEnum string
 
 const (
-	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
-	BdoAutocapitalizeEnumWords      BdoAutocapitalizeEnum = "words"
 	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
 	BdoAutocapitalizeEnumNone       BdoAutocapitalizeEnum = "none"
 	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
 	BdoAutocapitalizeEnumOn         BdoAutocapitalizeEnum = "on"
+	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
+	BdoAutocapitalizeEnumWords      BdoAutocapitalizeEnum = "words"
 )
 
 type BdoAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type BdoContenteditableEnum string
 
 const (
+	BdoContenteditableEnumFalse         BdoContenteditableEnum = "false"
 	BdoContenteditableEnumPlaintextOnly BdoContenteditableEnum = "plaintext-only"
 	BdoContenteditableEnumTrue          BdoContenteditableEnum = "true"
-	BdoContenteditableEnumFalse         BdoContenteditableEnum = "false"
 	BdoContenteditableEnumEmpty         BdoContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type BdoEnterkeyhintEnum string
 
 const (
-	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
 	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
 	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
 	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
 	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
 	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
+	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 )
 
 type BdoHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type BdoInputmodeEnum string
 
 const (
-	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
-	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
 	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
 	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
 	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
 	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
 	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
 	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
+	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
+	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
 )
 
 type BdoSpellcheckEnum string
@@ -133,16 +132,16 @@ const (
 type BdoTranslateEnum string
 
 const (
-	BdoTranslateEnumYes   BdoTranslateEnum = "yes"
 	BdoTranslateEnumNo    BdoTranslateEnum = "no"
+	BdoTranslateEnumYes   BdoTranslateEnum = "yes"
 	BdoTranslateEnumEmpty BdoTranslateEnum = ""
 )
 
 type BdoWritingsuggestionsEnum string
 
 const (
-	BdoWritingsuggestionsEnumFalse BdoWritingsuggestionsEnum = "false"
 	BdoWritingsuggestionsEnumTrue  BdoWritingsuggestionsEnum = "true"
+	BdoWritingsuggestionsEnumFalse BdoWritingsuggestionsEnum = "false"
 	BdoWritingsuggestionsEnumEmpty BdoWritingsuggestionsEnum = ""
 )
 

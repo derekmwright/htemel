@@ -17,8 +17,7 @@ type VarElement struct {
 }
 
 // Var creates a tag <var> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The var element represents a variable. This could be an actual variable in a mathematical expression or programming context, an identifier representing a constant, a symbol identifying a physical quantity, a function parameter, or just be a term used as a placeholder in prose.
 func Var(children ...htemel.Node) *VarElement {
 	node := &VarElement{
@@ -49,19 +48,19 @@ func VarTernary(condition bool, true htemel.Node, false htemel.Node) *VarElement
 type VarAutocapitalizeEnum string
 
 const (
-	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
-	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
 	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
 	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
 	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
 	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
+	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
+	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
 )
 
 type VarAutocorrectEnum string
 
 const (
-	VarAutocorrectEnumOn    VarAutocorrectEnum = "on"
 	VarAutocorrectEnumOff   VarAutocorrectEnum = "off"
+	VarAutocorrectEnumOn    VarAutocorrectEnum = "on"
 	VarAutocorrectEnumEmpty VarAutocorrectEnum = ""
 )
 
@@ -85,20 +84,20 @@ const (
 type VarDraggableEnum string
 
 const (
-	VarDraggableEnumFalse VarDraggableEnum = "false"
 	VarDraggableEnumTrue  VarDraggableEnum = "true"
+	VarDraggableEnumFalse VarDraggableEnum = "false"
 )
 
 type VarEnterkeyhintEnum string
 
 const (
-	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
-	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
 	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
 	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
 	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
 	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
+	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
+	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
 )
 
 type VarHiddenEnum string
@@ -112,7 +111,6 @@ const (
 type VarInputmodeEnum string
 
 const (
-	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
 	VarInputmodeEnumText    VarInputmodeEnum = "text"
 	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
@@ -120,6 +118,7 @@ const (
 	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
 	VarInputmodeEnumNone    VarInputmodeEnum = "none"
 	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
+	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 )
 
 type VarSpellcheckEnum string

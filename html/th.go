@@ -17,8 +17,7 @@ type ThElement struct {
 }
 
 // Th creates a tag <th> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The th element represents a header cell in a table.
 func Th(children ...htemel.Node) *ThElement {
 	node := &ThElement{
@@ -49,12 +48,12 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 type ThAutocapitalizeEnum string
 
 const (
+	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
+	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
 	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
 	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
 	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
-	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
-	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
 )
 
 type ThAutocorrectEnum string
@@ -77,42 +76,41 @@ const (
 type ThDirEnum string
 
 const (
-	ThDirEnumRtl  ThDirEnum = "rtl"
 	ThDirEnumAuto ThDirEnum = "auto"
 	ThDirEnumLtr  ThDirEnum = "ltr"
+	ThDirEnumRtl  ThDirEnum = "rtl"
 )
 
 type ThDraggableEnum string
 
 const (
-	ThDraggableEnumFalse ThDraggableEnum = "false"
 	ThDraggableEnumTrue  ThDraggableEnum = "true"
+	ThDraggableEnumFalse ThDraggableEnum = "false"
 )
 
 type ThEnterkeyhintEnum string
 
 const (
+	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
 	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
 	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
 	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
 	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
 	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
-	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
 )
 
 type ThHiddenEnum string
 
 const (
-	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
 	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
+	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
 	ThHiddenEnumEmpty      ThHiddenEnum = ""
 )
 
 type ThInputmodeEnum string
 
 const (
-	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
 	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
 	ThInputmodeEnumText    ThInputmodeEnum = "text"
@@ -120,6 +118,7 @@ const (
 	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
 	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
 	ThInputmodeEnumNone    ThInputmodeEnum = "none"
+	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
 )
 
 type ThSpellcheckEnum string

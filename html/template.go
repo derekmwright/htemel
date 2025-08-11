@@ -17,8 +17,7 @@ type TemplateElement struct {
 }
 
 // Template creates a tag <template> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The template element is used to declare fragments of HTML that can be cloned and inserted in the document by script.
 func Template(children ...htemel.Node) *TemplateElement {
 	node := &TemplateElement{
@@ -49,12 +48,12 @@ func TemplateTernary(condition bool, true htemel.Node, false htemel.Node) *Templ
 type TemplateAutocapitalizeEnum string
 
 const (
+	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
 	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
 	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
-	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 )
 
 type TemplateAutocorrectEnum string
@@ -77,9 +76,9 @@ const (
 type TemplateDirEnum string
 
 const (
-	TemplateDirEnumRtl  TemplateDirEnum = "rtl"
 	TemplateDirEnumAuto TemplateDirEnum = "auto"
 	TemplateDirEnumLtr  TemplateDirEnum = "ltr"
+	TemplateDirEnumRtl  TemplateDirEnum = "rtl"
 )
 
 type TemplateDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type TemplateEnterkeyhintEnum string
 
 const (
-	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
-	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
 	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 	TemplateEnterkeyhintEnumEnter    TemplateEnterkeyhintEnum = "enter"
 	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
 	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
 	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
+	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
+	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
 )
 
 type TemplateHiddenEnum string
@@ -112,21 +111,21 @@ const (
 type TemplateInputmodeEnum string
 
 const (
-	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
-	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
-	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
 	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
 	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
 	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
 	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
 	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
+	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
+	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
+	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
 )
 
 type TemplateSpellcheckEnum string
 
 const (
-	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
 	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
+	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
 	TemplateSpellcheckEnumEmpty TemplateSpellcheckEnum = ""
 )
 

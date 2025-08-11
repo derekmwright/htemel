@@ -17,8 +17,7 @@ type CodeElement struct {
 }
 
 // Code creates a tag <code> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The code element represents a fragment of computer code. This could be an XML element name, a filename, a computer program, or any other string that a computer would recognize.
 func Code(children ...htemel.Node) *CodeElement {
 	node := &CodeElement{
@@ -68,37 +67,37 @@ const (
 type CodeContenteditableEnum string
 
 const (
+	CodeContenteditableEnumPlaintextOnly CodeContenteditableEnum = "plaintext-only"
 	CodeContenteditableEnumTrue          CodeContenteditableEnum = "true"
 	CodeContenteditableEnumFalse         CodeContenteditableEnum = "false"
-	CodeContenteditableEnumPlaintextOnly CodeContenteditableEnum = "plaintext-only"
 	CodeContenteditableEnumEmpty         CodeContenteditableEnum = ""
 )
 
 type CodeDirEnum string
 
 const (
+	CodeDirEnumRtl  CodeDirEnum = "rtl"
 	CodeDirEnumAuto CodeDirEnum = "auto"
 	CodeDirEnumLtr  CodeDirEnum = "ltr"
-	CodeDirEnumRtl  CodeDirEnum = "rtl"
 )
 
 type CodeDraggableEnum string
 
 const (
-	CodeDraggableEnumTrue  CodeDraggableEnum = "true"
 	CodeDraggableEnumFalse CodeDraggableEnum = "false"
+	CodeDraggableEnumTrue  CodeDraggableEnum = "true"
 )
 
 type CodeEnterkeyhintEnum string
 
 const (
+	CodeEnterkeyhintEnumGo       CodeEnterkeyhintEnum = "go"
+	CodeEnterkeyhintEnumNext     CodeEnterkeyhintEnum = "next"
 	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
 	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
 	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
 	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
 	CodeEnterkeyhintEnumEnter    CodeEnterkeyhintEnum = "enter"
-	CodeEnterkeyhintEnumGo       CodeEnterkeyhintEnum = "go"
-	CodeEnterkeyhintEnumNext     CodeEnterkeyhintEnum = "next"
 )
 
 type CodeHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type CodeInputmodeEnum string
 
 const (
+	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
+	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
 	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
 	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
 	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
 	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
-	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
-	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 )
 
 type CodeSpellcheckEnum string

@@ -17,8 +17,7 @@ type TableElement struct {
 }
 
 // Table creates a tag <table> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The table element represents data with more than one dimension, in the form of a table.
 func Table(children ...htemel.Node) *TableElement {
 	node := &TableElement{
@@ -49,19 +48,19 @@ func TableTernary(condition bool, true htemel.Node, false htemel.Node) *TableEle
 type TableAutocapitalizeEnum string
 
 const (
-	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
-	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
 	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
 	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
+	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
+	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 )
 
 type TableAutocorrectEnum string
 
 const (
-	TableAutocorrectEnumOff   TableAutocorrectEnum = "off"
 	TableAutocorrectEnumOn    TableAutocorrectEnum = "on"
+	TableAutocorrectEnumOff   TableAutocorrectEnum = "off"
 	TableAutocorrectEnumEmpty TableAutocorrectEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type TableEnterkeyhintEnum string
 
 const (
-	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
 	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
 	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
 	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
 	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
 	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
 	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
+	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
 )
 
 type TableHiddenEnum string
@@ -112,7 +111,6 @@ const (
 type TableInputmodeEnum string
 
 const (
-	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 	TableInputmodeEnumText    TableInputmodeEnum = "text"
 	TableInputmodeEnumUrl     TableInputmodeEnum = "url"
 	TableInputmodeEnumDecimal TableInputmodeEnum = "decimal"
@@ -120,13 +118,14 @@ const (
 	TableInputmodeEnumNone    TableInputmodeEnum = "none"
 	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
 	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
+	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 )
 
 type TableSpellcheckEnum string
 
 const (
-	TableSpellcheckEnumTrue  TableSpellcheckEnum = "true"
 	TableSpellcheckEnumFalse TableSpellcheckEnum = "false"
+	TableSpellcheckEnumTrue  TableSpellcheckEnum = "true"
 	TableSpellcheckEnumEmpty TableSpellcheckEnum = ""
 )
 
@@ -141,8 +140,8 @@ const (
 type TableWritingsuggestionsEnum string
 
 const (
-	TableWritingsuggestionsEnumTrue  TableWritingsuggestionsEnum = "true"
 	TableWritingsuggestionsEnumFalse TableWritingsuggestionsEnum = "false"
+	TableWritingsuggestionsEnumTrue  TableWritingsuggestionsEnum = "true"
 	TableWritingsuggestionsEnumEmpty TableWritingsuggestionsEnum = ""
 )
 

@@ -17,8 +17,7 @@ type NoscriptElement struct {
 }
 
 // Noscript creates a tag <noscript> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The noscript element represents nothing if scripting is enabled, and represents its children if scripting is disabled. It is used to present different markup to user agents that support scripting and those that don't support scripting, by affecting how the document is parsed.
 func Noscript(children ...htemel.Node) *NoscriptElement {
 	node := &NoscriptElement{
@@ -49,12 +48,12 @@ func NoscriptTernary(condition bool, true htemel.Node, false htemel.Node) *Noscr
 type NoscriptAutocapitalizeEnum string
 
 const (
+	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
+	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
 	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
 	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
 	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
 	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
-	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
-	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
 )
 
 type NoscriptAutocorrectEnum string
@@ -68,18 +67,18 @@ const (
 type NoscriptContenteditableEnum string
 
 const (
+	NoscriptContenteditableEnumFalse         NoscriptContenteditableEnum = "false"
 	NoscriptContenteditableEnumPlaintextOnly NoscriptContenteditableEnum = "plaintext-only"
 	NoscriptContenteditableEnumTrue          NoscriptContenteditableEnum = "true"
-	NoscriptContenteditableEnumFalse         NoscriptContenteditableEnum = "false"
 	NoscriptContenteditableEnumEmpty         NoscriptContenteditableEnum = ""
 )
 
 type NoscriptDirEnum string
 
 const (
-	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
 	NoscriptDirEnumLtr  NoscriptDirEnum = "ltr"
 	NoscriptDirEnumRtl  NoscriptDirEnum = "rtl"
+	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
 )
 
 type NoscriptDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type NoscriptEnterkeyhintEnum string
 
 const (
+	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
 	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
 	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
 	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
 	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
 	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
 	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
-	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
 )
 
 type NoscriptHiddenEnum string
@@ -112,6 +111,7 @@ const (
 type NoscriptInputmodeEnum string
 
 const (
+	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
 	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
 	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
 	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
@@ -119,7 +119,6 @@ const (
 	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
 	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
 	NoscriptInputmodeEnumNone    NoscriptInputmodeEnum = "none"
-	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
 )
 
 type NoscriptSpellcheckEnum string
@@ -133,8 +132,8 @@ const (
 type NoscriptTranslateEnum string
 
 const (
-	NoscriptTranslateEnumYes   NoscriptTranslateEnum = "yes"
 	NoscriptTranslateEnumNo    NoscriptTranslateEnum = "no"
+	NoscriptTranslateEnumYes   NoscriptTranslateEnum = "yes"
 	NoscriptTranslateEnumEmpty NoscriptTranslateEnum = ""
 )
 

@@ -17,8 +17,7 @@ type DfnElement struct {
 }
 
 // Dfn creates a tag <dfn> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The dfn element represents the defining instance of a term. The paragraph, description list group, or section that is the nearest ancestor of the dfn element must also contain the definition(s) for the term given by the dfn element.
 func Dfn(children ...htemel.Node) *DfnElement {
 	node := &DfnElement{
@@ -60,8 +59,8 @@ const (
 type DfnAutocorrectEnum string
 
 const (
-	DfnAutocorrectEnumOff   DfnAutocorrectEnum = "off"
 	DfnAutocorrectEnumOn    DfnAutocorrectEnum = "on"
+	DfnAutocorrectEnumOff   DfnAutocorrectEnum = "off"
 	DfnAutocorrectEnumEmpty DfnAutocorrectEnum = ""
 )
 
@@ -77,9 +76,9 @@ const (
 type DfnDirEnum string
 
 const (
+	DfnDirEnumAuto DfnDirEnum = "auto"
 	DfnDirEnumLtr  DfnDirEnum = "ltr"
 	DfnDirEnumRtl  DfnDirEnum = "rtl"
-	DfnDirEnumAuto DfnDirEnum = "auto"
 )
 
 type DfnDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type DfnEnterkeyhintEnum string
 
 const (
-	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
-	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
-	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
 	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
 	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
+	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
+	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
+	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 )
 
 type DfnHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type DfnInputmodeEnum string
 
 const (
+	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
+	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
+	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
 	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
 	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
 	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
 	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
 	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
-	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
-	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
-	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
 )
 
 type DfnSpellcheckEnum string

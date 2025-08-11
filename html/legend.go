@@ -17,8 +17,7 @@ type LegendElement struct {
 }
 
 // Legend creates a tag <legend> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The legend element represents a caption for the rest of the contents of the legend element's parent fieldset element, if any. Otherwise, if the legend has a parent optgroup element, then the legend represents the optgroup's label.
 func Legend(children ...htemel.Node) *LegendElement {
 	node := &LegendElement{
@@ -49,12 +48,12 @@ func LegendTernary(condition bool, true htemel.Node, false htemel.Node) *LegendE
 type LegendAutocapitalizeEnum string
 
 const (
-	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
-	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
 	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
 	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
 	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
+	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
+	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 )
 
 type LegendAutocorrectEnum string
@@ -85,20 +84,20 @@ const (
 type LegendDraggableEnum string
 
 const (
-	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
 	LegendDraggableEnumFalse LegendDraggableEnum = "false"
+	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
 )
 
 type LegendEnterkeyhintEnum string
 
 const (
+	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
+	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
 	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
 	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
 	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
 	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
 	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
-	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
-	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
 )
 
 type LegendHiddenEnum string
@@ -112,6 +111,7 @@ const (
 type LegendInputmodeEnum string
 
 const (
+	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
 	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
 	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
@@ -119,7 +119,6 @@ const (
 	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
 	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
 	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
-	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 )
 
 type LegendSpellcheckEnum string

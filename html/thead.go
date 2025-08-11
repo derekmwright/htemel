@@ -17,8 +17,7 @@ type TheadElement struct {
 }
 
 // Thead creates a tag <thead> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The thead element represents the block of rows that consist of the column labels (headers) and any ancillary non-header cells for the parent table element, if the thead element has a parent and it is a table.
 func Thead(children ...htemel.Node) *TheadElement {
 	node := &TheadElement{
@@ -49,12 +48,12 @@ func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadEle
 type TheadAutocapitalizeEnum string
 
 const (
-	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
-	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
 	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
 	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
+	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
+	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 )
 
 type TheadAutocorrectEnum string
@@ -68,9 +67,9 @@ const (
 type TheadContenteditableEnum string
 
 const (
-	TheadContenteditableEnumTrue          TheadContenteditableEnum = "true"
 	TheadContenteditableEnumFalse         TheadContenteditableEnum = "false"
 	TheadContenteditableEnumPlaintextOnly TheadContenteditableEnum = "plaintext-only"
+	TheadContenteditableEnumTrue          TheadContenteditableEnum = "true"
 	TheadContenteditableEnumEmpty         TheadContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type TheadEnterkeyhintEnum string
 
 const (
-	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
 	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
 	TheadEnterkeyhintEnumGo       TheadEnterkeyhintEnum = "go"
 	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
 	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
 	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
+	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
 )
 
 type TheadHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type TheadInputmodeEnum string
 
 const (
-	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
-	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
-	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
-	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
 	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
 	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
 	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
 	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
+	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
+	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
+	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
+	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
 )
 
 type TheadSpellcheckEnum string

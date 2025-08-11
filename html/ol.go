@@ -17,8 +17,7 @@ type OlElement struct {
 }
 
 // Ol creates a tag <ol> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The ol element represents a list of items, where the items have been intentionally ordered, such that changing the order would change the meaning of the document.
 func Ol(children ...htemel.Node) *OlElement {
 	node := &OlElement{
@@ -60,17 +59,17 @@ const (
 type OlAutocorrectEnum string
 
 const (
-	OlAutocorrectEnumOff   OlAutocorrectEnum = "off"
 	OlAutocorrectEnumOn    OlAutocorrectEnum = "on"
+	OlAutocorrectEnumOff   OlAutocorrectEnum = "off"
 	OlAutocorrectEnumEmpty OlAutocorrectEnum = ""
 )
 
 type OlContenteditableEnum string
 
 const (
-	OlContenteditableEnumTrue          OlContenteditableEnum = "true"
 	OlContenteditableEnumFalse         OlContenteditableEnum = "false"
 	OlContenteditableEnumPlaintextOnly OlContenteditableEnum = "plaintext-only"
+	OlContenteditableEnumTrue          OlContenteditableEnum = "true"
 	OlContenteditableEnumEmpty         OlContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type OlEnterkeyhintEnum string
 
 const (
-	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
-	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
-	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
 	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
 	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
 	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
+	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
+	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
+	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 )
 
 type OlHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type OlInputmodeEnum string
 
 const (
-	OlInputmodeEnumSearch  OlInputmodeEnum = "search"
-	OlInputmodeEnumTel     OlInputmodeEnum = "tel"
-	OlInputmodeEnumText    OlInputmodeEnum = "text"
 	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
 	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
 	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
 	OlInputmodeEnumNone    OlInputmodeEnum = "none"
 	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
+	OlInputmodeEnumSearch  OlInputmodeEnum = "search"
+	OlInputmodeEnumTel     OlInputmodeEnum = "tel"
+	OlInputmodeEnumText    OlInputmodeEnum = "text"
 )
 
 type OlSpellcheckEnum string
@@ -147,6 +146,18 @@ const (
 )
 
 type olAttrs map[string]any
+
+func (e *OlElement) Reversed(b bool) *OlElement {
+	e.attributes["reversed"] = b
+
+	return e
+}
+
+func (e *OlElement) Start(i int) *OlElement {
+	e.attributes["start"] = i
+
+	return e
+}
 
 func (e *OlElement) Autocapitalize(a OlAutocapitalizeEnum) *OlElement {
 	e.attributes["autocapitalize"] = a

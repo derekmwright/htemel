@@ -17,8 +17,7 @@ type MainElement struct {
 }
 
 // Main creates a tag <main> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The main element represents the dominant contents of the document.
 func Main(children ...htemel.Node) *MainElement {
 	node := &MainElement{
@@ -49,28 +48,28 @@ func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainEleme
 type MainAutocapitalizeEnum string
 
 const (
-	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
-	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
-	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
 	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
+	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
+	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
+	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 )
 
 type MainAutocorrectEnum string
 
 const (
-	MainAutocorrectEnumOff   MainAutocorrectEnum = "off"
 	MainAutocorrectEnumOn    MainAutocorrectEnum = "on"
+	MainAutocorrectEnumOff   MainAutocorrectEnum = "off"
 	MainAutocorrectEnumEmpty MainAutocorrectEnum = ""
 )
 
 type MainContenteditableEnum string
 
 const (
-	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
 	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
+	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
 	MainContenteditableEnumEmpty         MainContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type MainEnterkeyhintEnum string
 
 const (
+	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
 	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
 	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
 	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
 	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
 	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
-	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
 )
 
 type MainHiddenEnum string
@@ -112,21 +111,21 @@ const (
 type MainInputmodeEnum string
 
 const (
-	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
-	MainInputmodeEnumText    MainInputmodeEnum = "text"
-	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
 	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
 	MainInputmodeEnumNone    MainInputmodeEnum = "none"
 	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
+	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
+	MainInputmodeEnumText    MainInputmodeEnum = "text"
+	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 )
 
 type MainSpellcheckEnum string
 
 const (
-	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
 	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
+	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
 	MainSpellcheckEnumEmpty MainSpellcheckEnum = ""
 )
 

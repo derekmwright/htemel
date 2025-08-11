@@ -17,8 +17,7 @@ type FieldsetElement struct {
 }
 
 // Fieldset creates a tag <fieldset> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The fieldset element represents a set of form controls (or other content) grouped together, optionally with a caption. The caption is given by the first legend element that is a child of the fieldset element, if any. The remainder of the descendants form the group.
 func Fieldset(children ...htemel.Node) *FieldsetElement {
 	node := &FieldsetElement{
@@ -68,18 +67,18 @@ const (
 type FieldsetContenteditableEnum string
 
 const (
-	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumPlaintextOnly FieldsetContenteditableEnum = "plaintext-only"
 	FieldsetContenteditableEnumTrue          FieldsetContenteditableEnum = "true"
+	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumEmpty         FieldsetContenteditableEnum = ""
 )
 
 type FieldsetDirEnum string
 
 const (
+	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 	FieldsetDirEnumLtr  FieldsetDirEnum = "ltr"
 	FieldsetDirEnumRtl  FieldsetDirEnum = "rtl"
-	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 )
 
 type FieldsetDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type FieldsetEnterkeyhintEnum string
 
 const (
+	FieldsetEnterkeyhintEnumNext     FieldsetEnterkeyhintEnum = "next"
+	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
 	FieldsetEnterkeyhintEnumSearch   FieldsetEnterkeyhintEnum = "search"
 	FieldsetEnterkeyhintEnumSend     FieldsetEnterkeyhintEnum = "send"
 	FieldsetEnterkeyhintEnumDone     FieldsetEnterkeyhintEnum = "done"
 	FieldsetEnterkeyhintEnumEnter    FieldsetEnterkeyhintEnum = "enter"
 	FieldsetEnterkeyhintEnumGo       FieldsetEnterkeyhintEnum = "go"
-	FieldsetEnterkeyhintEnumNext     FieldsetEnterkeyhintEnum = "next"
-	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
 )
 
 type FieldsetHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type FieldsetInputmodeEnum string
 
 const (
-	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
-	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
 	FieldsetInputmodeEnumNumeric FieldsetInputmodeEnum = "numeric"
 	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
 	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
 	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
 	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
+	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
+	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 )
 
 type FieldsetSpellcheckEnum string
@@ -141,8 +140,8 @@ const (
 type FieldsetWritingsuggestionsEnum string
 
 const (
-	FieldsetWritingsuggestionsEnumFalse FieldsetWritingsuggestionsEnum = "false"
 	FieldsetWritingsuggestionsEnumTrue  FieldsetWritingsuggestionsEnum = "true"
+	FieldsetWritingsuggestionsEnumFalse FieldsetWritingsuggestionsEnum = "false"
 	FieldsetWritingsuggestionsEnumEmpty FieldsetWritingsuggestionsEnum = ""
 )
 

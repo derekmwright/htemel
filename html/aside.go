@@ -17,8 +17,7 @@ type AsideElement struct {
 }
 
 // Aside creates a tag <aside> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The aside element represents a section of a page that consists of content that is tangentially related to the content around the aside element, and which could be considered separate from that content. Such sections are often represented as sidebars in printed typography.
 func Aside(children ...htemel.Node) *AsideElement {
 	node := &AsideElement{
@@ -49,28 +48,28 @@ func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideEle
 type AsideAutocapitalizeEnum string
 
 const (
-	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
-	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
-	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
 	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
 	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
+	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
+	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
+	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
 )
 
 type AsideAutocorrectEnum string
 
 const (
-	AsideAutocorrectEnumOff   AsideAutocorrectEnum = "off"
 	AsideAutocorrectEnumOn    AsideAutocorrectEnum = "on"
+	AsideAutocorrectEnumOff   AsideAutocorrectEnum = "off"
 	AsideAutocorrectEnumEmpty AsideAutocorrectEnum = ""
 )
 
 type AsideContenteditableEnum string
 
 const (
-	AsideContenteditableEnumTrue          AsideContenteditableEnum = "true"
 	AsideContenteditableEnumFalse         AsideContenteditableEnum = "false"
 	AsideContenteditableEnumPlaintextOnly AsideContenteditableEnum = "plaintext-only"
+	AsideContenteditableEnumTrue          AsideContenteditableEnum = "true"
 	AsideContenteditableEnumEmpty         AsideContenteditableEnum = ""
 )
 
@@ -92,13 +91,13 @@ const (
 type AsideEnterkeyhintEnum string
 
 const (
+	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
 	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
 	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
 	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
 	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
 	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
-	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
 )
 
 type AsideHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type AsideInputmodeEnum string
 
 const (
-	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
-	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
 	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
 	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
 	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
 	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
 	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
+	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
+	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 )
 
 type AsideSpellcheckEnum string

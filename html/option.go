@@ -17,8 +17,7 @@ type OptionElement struct {
 }
 
 // Option creates a tag <option> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The option element represents an option in a select element or as part of a list of suggestions in a datalist element.
 func Option(children ...htemel.Node) *OptionElement {
 	node := &OptionElement{
@@ -60,26 +59,26 @@ const (
 type OptionAutocorrectEnum string
 
 const (
-	OptionAutocorrectEnumOff   OptionAutocorrectEnum = "off"
 	OptionAutocorrectEnumOn    OptionAutocorrectEnum = "on"
+	OptionAutocorrectEnumOff   OptionAutocorrectEnum = "off"
 	OptionAutocorrectEnumEmpty OptionAutocorrectEnum = ""
 )
 
 type OptionContenteditableEnum string
 
 const (
-	OptionContenteditableEnumTrue          OptionContenteditableEnum = "true"
 	OptionContenteditableEnumFalse         OptionContenteditableEnum = "false"
 	OptionContenteditableEnumPlaintextOnly OptionContenteditableEnum = "plaintext-only"
+	OptionContenteditableEnumTrue          OptionContenteditableEnum = "true"
 	OptionContenteditableEnumEmpty         OptionContenteditableEnum = ""
 )
 
 type OptionDirEnum string
 
 const (
-	OptionDirEnumRtl  OptionDirEnum = "rtl"
 	OptionDirEnumAuto OptionDirEnum = "auto"
 	OptionDirEnumLtr  OptionDirEnum = "ltr"
+	OptionDirEnumRtl  OptionDirEnum = "rtl"
 )
 
 type OptionDraggableEnum string
@@ -92,41 +91,41 @@ const (
 type OptionEnterkeyhintEnum string
 
 const (
-	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
-	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
 	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
 	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
 	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
 	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
+	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
+	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 )
 
 type OptionHiddenEnum string
 
 const (
-	OptionHiddenEnumHidden     OptionHiddenEnum = "hidden"
 	OptionHiddenEnumUntilFound OptionHiddenEnum = "until-found"
+	OptionHiddenEnumHidden     OptionHiddenEnum = "hidden"
 	OptionHiddenEnumEmpty      OptionHiddenEnum = ""
 )
 
 type OptionInputmodeEnum string
 
 const (
+	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
+	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
 	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
 	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
 	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
 	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
-	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
-	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 )
 
 type OptionSpellcheckEnum string
 
 const (
-	OptionSpellcheckEnumTrue  OptionSpellcheckEnum = "true"
 	OptionSpellcheckEnumFalse OptionSpellcheckEnum = "false"
+	OptionSpellcheckEnumTrue  OptionSpellcheckEnum = "true"
 	OptionSpellcheckEnumEmpty OptionSpellcheckEnum = ""
 )
 

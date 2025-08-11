@@ -17,8 +17,7 @@ type DatalistElement struct {
 }
 
 // Datalist creates a tag <datalist> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The datalist element represents a set of option elements that represent predefined options for other controls. In the rendering, the datalist element represents nothing and it, along with its children, should be hidden.
 func Datalist(children ...htemel.Node) *DatalistElement {
 	node := &DatalistElement{
@@ -77,28 +76,28 @@ const (
 type DatalistDirEnum string
 
 const (
+	DatalistDirEnumRtl  DatalistDirEnum = "rtl"
 	DatalistDirEnumAuto DatalistDirEnum = "auto"
 	DatalistDirEnumLtr  DatalistDirEnum = "ltr"
-	DatalistDirEnumRtl  DatalistDirEnum = "rtl"
 )
 
 type DatalistDraggableEnum string
 
 const (
-	DatalistDraggableEnumTrue  DatalistDraggableEnum = "true"
 	DatalistDraggableEnumFalse DatalistDraggableEnum = "false"
+	DatalistDraggableEnumTrue  DatalistDraggableEnum = "true"
 )
 
 type DatalistEnterkeyhintEnum string
 
 const (
-	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 	DatalistEnterkeyhintEnumEnter    DatalistEnterkeyhintEnum = "enter"
 	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
 	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
 	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
 	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
+	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 )
 
 type DatalistHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type DatalistInputmodeEnum string
 
 const (
+	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
+	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
+	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
 	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
 	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
 	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
 	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
 	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
-	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
-	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
-	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
 )
 
 type DatalistSpellcheckEnum string

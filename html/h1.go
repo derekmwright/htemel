@@ -17,8 +17,7 @@ type H1Element struct {
 }
 
 // H1 creates a tag <h1> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: These elements represent headings for their sections.
 func H1(children ...htemel.Node) *H1Element {
 	node := &H1Element{
@@ -49,12 +48,12 @@ func H1Ternary(condition bool, true htemel.Node, false htemel.Node) *H1Element {
 type H1AutocapitalizeEnum string
 
 const (
-	H1AutocapitalizeEnumOn         H1AutocapitalizeEnum = "on"
-	H1AutocapitalizeEnumSentences  H1AutocapitalizeEnum = "sentences"
-	H1AutocapitalizeEnumWords      H1AutocapitalizeEnum = "words"
 	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
 	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
 	H1AutocapitalizeEnumOff        H1AutocapitalizeEnum = "off"
+	H1AutocapitalizeEnumOn         H1AutocapitalizeEnum = "on"
+	H1AutocapitalizeEnumSentences  H1AutocapitalizeEnum = "sentences"
+	H1AutocapitalizeEnumWords      H1AutocapitalizeEnum = "words"
 )
 
 type H1AutocorrectEnum string
@@ -92,13 +91,13 @@ const (
 type H1EnterkeyhintEnum string
 
 const (
-	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
 	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
 	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
 	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
 	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
 	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
 	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
+	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
 )
 
 type H1HiddenEnum string
@@ -112,7 +111,6 @@ const (
 type H1InputmodeEnum string
 
 const (
-	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 	H1InputmodeEnumText    H1InputmodeEnum = "text"
 	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
 	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
@@ -120,13 +118,14 @@ const (
 	H1InputmodeEnumNone    H1InputmodeEnum = "none"
 	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
 	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
+	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 )
 
 type H1SpellcheckEnum string
 
 const (
-	H1SpellcheckEnumFalse H1SpellcheckEnum = "false"
 	H1SpellcheckEnumTrue  H1SpellcheckEnum = "true"
+	H1SpellcheckEnumFalse H1SpellcheckEnum = "false"
 	H1SpellcheckEnumEmpty H1SpellcheckEnum = ""
 )
 

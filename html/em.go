@@ -17,8 +17,7 @@ type EmElement struct {
 }
 
 // Em creates a tag <em> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The em element represents stress emphasis of its contents.
 func Em(children ...htemel.Node) *EmElement {
 	node := &EmElement{
@@ -49,37 +48,37 @@ func EmTernary(condition bool, true htemel.Node, false htemel.Node) *EmElement {
 type EmAutocapitalizeEnum string
 
 const (
-	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
 	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
 	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
 	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
+	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 )
 
 type EmAutocorrectEnum string
 
 const (
-	EmAutocorrectEnumOff   EmAutocorrectEnum = "off"
 	EmAutocorrectEnumOn    EmAutocorrectEnum = "on"
+	EmAutocorrectEnumOff   EmAutocorrectEnum = "off"
 	EmAutocorrectEnumEmpty EmAutocorrectEnum = ""
 )
 
 type EmContenteditableEnum string
 
 const (
+	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 	EmContenteditableEnumPlaintextOnly EmContenteditableEnum = "plaintext-only"
 	EmContenteditableEnumTrue          EmContenteditableEnum = "true"
-	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 	EmContenteditableEnumEmpty         EmContenteditableEnum = ""
 )
 
 type EmDirEnum string
 
 const (
-	EmDirEnumAuto EmDirEnum = "auto"
 	EmDirEnumLtr  EmDirEnum = "ltr"
 	EmDirEnumRtl  EmDirEnum = "rtl"
+	EmDirEnumAuto EmDirEnum = "auto"
 )
 
 type EmDraggableEnum string
@@ -92,34 +91,34 @@ const (
 type EmEnterkeyhintEnum string
 
 const (
-	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
-	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
 	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
 	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
 	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
 	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
+	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
+	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
 )
 
 type EmHiddenEnum string
 
 const (
-	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
 	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
+	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
 	EmHiddenEnumEmpty      EmHiddenEnum = ""
 )
 
 type EmInputmodeEnum string
 
 const (
-	EmInputmodeEnumText    EmInputmodeEnum = "text"
-	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
-	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
 	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
 	EmInputmodeEnumNone    EmInputmodeEnum = "none"
 	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
 	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
 	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
+	EmInputmodeEnumText    EmInputmodeEnum = "text"
+	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
+	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
 )
 
 type EmSpellcheckEnum string

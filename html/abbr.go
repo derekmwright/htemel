@@ -17,8 +17,7 @@ type AbbrElement struct {
 }
 
 // Abbr creates a tag <abbr> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The abbr element represents an abbreviation or acronym, optionally with its expansion. The title attribute may be used to provide an expansion of the abbreviation. The attribute, if specified, must contain an expansion of the abbreviation, and nothing else.
 func Abbr(children ...htemel.Node) *AbbrElement {
 	node := &AbbrElement{
@@ -49,12 +48,12 @@ func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrEleme
 type AbbrAutocapitalizeEnum string
 
 const (
-	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
-	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
-	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
 	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
 	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
 	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
+	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
+	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
+	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
 )
 
 type AbbrAutocorrectEnum string
@@ -92,13 +91,13 @@ const (
 type AbbrEnterkeyhintEnum string
 
 const (
+	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
+	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
+	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
 	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
 	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 	AbbrEnterkeyhintEnumEnter    AbbrEnterkeyhintEnum = "enter"
 	AbbrEnterkeyhintEnumGo       AbbrEnterkeyhintEnum = "go"
-	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
-	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
-	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
 )
 
 type AbbrHiddenEnum string
@@ -112,7 +111,6 @@ const (
 type AbbrInputmodeEnum string
 
 const (
-	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 	AbbrInputmodeEnumNumeric AbbrInputmodeEnum = "numeric"
 	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
@@ -120,6 +118,7 @@ const (
 	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
 	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
 	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
+	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
 )
 
 type AbbrSpellcheckEnum string

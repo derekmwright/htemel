@@ -192,7 +192,81 @@
     },
     {
       "tag": "body",
-      "description": "The body element represents the contents of the document."
+      "description": "The body element represents the contents of the document.",
+      "attributes": [
+        {
+          "name": "onafterprint",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onbeforeprint",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onbeforeunload",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onhashchange",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onlanguagechange",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onmessage",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onmessageerror",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onoffline",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "ononline",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onpageswap",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onpagehide",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onpagereveal",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onpageshow",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onpopstate",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onrejectionhandled",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onstorage",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onunhandledrejection",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "onunload",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "article",
@@ -245,11 +319,35 @@
     },
     {
       "tag": "blockquote",
-      "description": "The blockquote element represents a section that is quoted from another source."
+      "description": "The blockquote element represents a section that is quoted from another source.",
+      "attributes": [
+        {
+          "name": "cite",
+          "description": "Content inside a blockquote must be quoted from another source, whose address, if it has one, may be cited in the cite attribute.",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "ol",
-      "description": "The ol element represents a list of items, where the items have been intentionally ordered, such that changing the order would change the meaning of the document."
+      "description": "The ol element represents a list of items, where the items have been intentionally ordered, such that changing the order would change the meaning of the document.",
+      "attributes": [
+        {
+          "name": "reversed",
+          "description": "Number the list backwards",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "start",
+          "description": "The start attribute, if present, must be a valid integer. It is used to determine the starting value of the list.",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "type",
+          "description": "The type attribute can be used to specify the kind of marker to use in the list, in the cases where that matters (e.g. because items are to be referenced by their number/letter).",
+          "attribute_type": "AttributeTypeChar"
+        }
+      ]
     },
     {
       "tag": "ul",
@@ -261,7 +359,14 @@
     },
     {
       "tag": "li",
-      "description": "The li element represents a list item. If its parent element is an ol, ul, or menu element, then the element is an item of the parent element's list, as defined for those elements. Otherwise, the list item has no defined list-related relationship to any other li element."
+      "description": "The li element represents a list item. If its parent element is an ol, ul, or menu element, then the element is an item of the parent element's list, as defined for those elements. Otherwise, the list item has no defined list-related relationship to any other li element.",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "If the element is not a child of an ul or menu element: value — Ordinal value of the list item",
+          "attribute_type": "AttributeTypeNumber"
+        }
+      ]
     },
     {
       "tag": "dl",
@@ -297,7 +402,49 @@
     },
     {
       "tag": "a",
-      "description": "If the a element has an href attribute, then it represents a hyperlink (a hypertext anchor) labeled by its contents."
+      "description": "If the a element has an href attribute, then it represents a hyperlink (a hypertext anchor) labeled by its contents.",
+      "attributes": [
+        {
+          "name": "href",
+          "description": "Address of the hyperlink",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "target",
+          "description": "Navigable for hyperlink navigation",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "download",
+          "description": "Whether to download the resource instead of navigating to it, and its filename if so",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "ping",
+          "description": "URLs to ping",
+          "attribute_type": "AttributeTypeSST"
+        },
+        {
+          "name": "rel",
+          "description": "Relationship between the location in the document containing the hyperlink and the destination resource",
+          "attribute_type": "AttributeTypeSST"
+        },
+        {
+          "name": "hreflang",
+          "description": "Language of the linked resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "type",
+          "description": "Hint for the type of the referenced resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "referrerpolicy",
+          "description": "Referrer policy for fetches initiated by the element",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "em",
@@ -321,7 +468,14 @@
     },
     {
       "tag": "q",
-      "description": "The q element represents some phrasing content quoted from another source."
+      "description": "The q element represents some phrasing content quoted from another source.",
+      "attributes": [
+        {
+          "name": "cite",
+          "description": "Link to the source of the quotation or more information about the edit",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "dfn",
@@ -345,11 +499,25 @@
     },
     {
       "tag": "data",
-      "description": "The data element represents its contents, along with a machine-readable form of those contents in the value attribute."
+      "description": "The data element represents its contents, along with a machine-readable form of those contents in the value attribute.",
+      "attributes": [
+        {
+          "name": "value",
+          "description": "Machine-readable value",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "time",
-      "description": "The time element represents its contents, along with a machine-readable form of those contents in the datetime attribute. The kind of content is limited to various kinds of dates, times, time-zone offsets, and durations, as described below."
+      "description": "The time element represents its contents, along with a machine-readable form of those contents in the datetime attribute. The kind of content is limited to various kinds of dates, times, time-zone offsets, and durations, as described below.",
+      "attributes": [
+        {
+          "name": "datetime",
+          "description": "Machine-readable value",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "code",
@@ -411,11 +579,35 @@
     },
     {
       "tag": "ins",
-      "description": "The ins element represents an addition to the document."
+      "description": "The ins element represents an addition to the document.",
+      "attributes": [
+        {
+          "name": "cite",
+          "description": "Link to the source of the quotation or more information about the edit",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "datetime",
+          "description": "Date and (optionally) time of the change",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "del",
-      "description": "The del element represents a removal from the document."
+      "description": "The del element represents a removal from the document.",
+      "attributes": [
+        {
+          "name": "cite",
+          "description": "Link to the source of the quotation or more information about the edit",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "datetime",
+          "description": "Date and (optionally) time of the change",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "picture",
@@ -424,11 +616,132 @@
     {
       "tag": "source",
       "description": "The source element allows authors to specify multiple alternative source sets for img elements or multiple alternative media resources for media elements. It does not represent anything on its own.",
+      "attributes": [
+        {
+          "name": "type",
+          "description": "Type of embedded resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "media",
+          "description": "Applicable media",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "src",
+          "description": "Address of the resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "srcset",
+          "description": "Images to use in different situations, e.g., high-resolution displays, small monitors, etc.",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "sizes",
+          "description": "Image sizes for different page layouts",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "width",
+          "description": "Horizontal dimension",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "height",
+          "description": "Vertical dimension",
+          "attribute_type": "AttributeTypeNumber"
+        }
+      ],
       "void": true
     },
     {
       "tag": "img",
       "description": "An img element represents an image.",
+      "attributes": [
+        {
+          "name": "alt",
+          "description": "Replacement text for use when images are not available",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "src",
+          "description": "Address of the resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "srcset",
+          "description": "Images to use in different situations, e.g., high-resolution displays, small monitors, etc.",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "sizes",
+          "description": "Image sizes for different page layouts",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "crossorigin",
+          "description": "How the element handles crossorigin requests",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "usemap",
+          "description": "Name of image map to use",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "ismap",
+          "description": "Whether the image is a server-side image map",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "width",
+          "description": "Horizontal dimension",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "height",
+          "description": "Vertical dimension",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "referrerpolicy",
+          "description": "Referrer policy for fetches initiated by the element",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "decoding",
+          "description": "Decoding hint to use when processing this image for presentation",
+          "allowed": {
+            "async": {},
+            "auto": {},
+            "sync": {}
+          },
+          "allow_empty": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "loading",
+          "description": "Used when determining loading deferral",
+          "allowed": {
+            "eager": {},
+            "lazy": {}
+          },
+          "allow_empty": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "fetchpriority",
+          "description": "Sets the priority for fetches initiated by the element",
+          "allowed": {
+            "auto": {},
+            "high": {},
+            "low": {}
+          },
+          "allow_empty": false,
+          "attribute_type": "AttributeTypeEnum"
+        }
+      ],
       "void": true
     },
     {
@@ -599,6 +912,26 @@
     {
       "tag": "canvas",
       "description": "The canvas element provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly."
+    },
+    {
+      "tag": "h2",
+      "description": "These elements represent headings for their sections."
+    },
+    {
+      "tag": "h3",
+      "description": "These elements represent headings for their sections."
+    },
+    {
+      "tag": "h4",
+      "description": "These elements represent headings for their sections."
+    },
+    {
+      "tag": "h5",
+      "description": "These elements represent headings for their sections."
+    },
+    {
+      "tag": "h6",
+      "description": "These elements represent headings for their sections."
     }
   ],
   "attributes": [

@@ -17,8 +17,7 @@ type BlockquoteElement struct {
 }
 
 // Blockquote creates a tag <blockquote> instance and returns it for further modification.
-// Any children passed will be nested within the tag.
-//
+// Any children passed will be nested within the tag.//
 // Spec Description: The blockquote element represents a section that is quoted from another source.
 func Blockquote(children ...htemel.Node) *BlockquoteElement {
 	node := &BlockquoteElement{
@@ -60,26 +59,26 @@ const (
 type BlockquoteAutocorrectEnum string
 
 const (
-	BlockquoteAutocorrectEnumOn    BlockquoteAutocorrectEnum = "on"
 	BlockquoteAutocorrectEnumOff   BlockquoteAutocorrectEnum = "off"
+	BlockquoteAutocorrectEnumOn    BlockquoteAutocorrectEnum = "on"
 	BlockquoteAutocorrectEnumEmpty BlockquoteAutocorrectEnum = ""
 )
 
 type BlockquoteContenteditableEnum string
 
 const (
-	BlockquoteContenteditableEnumPlaintextOnly BlockquoteContenteditableEnum = "plaintext-only"
 	BlockquoteContenteditableEnumTrue          BlockquoteContenteditableEnum = "true"
 	BlockquoteContenteditableEnumFalse         BlockquoteContenteditableEnum = "false"
+	BlockquoteContenteditableEnumPlaintextOnly BlockquoteContenteditableEnum = "plaintext-only"
 	BlockquoteContenteditableEnumEmpty         BlockquoteContenteditableEnum = ""
 )
 
 type BlockquoteDirEnum string
 
 const (
-	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 	BlockquoteDirEnumLtr  BlockquoteDirEnum = "ltr"
 	BlockquoteDirEnumRtl  BlockquoteDirEnum = "rtl"
+	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 )
 
 type BlockquoteDraggableEnum string
@@ -92,13 +91,13 @@ const (
 type BlockquoteEnterkeyhintEnum string
 
 const (
+	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
+	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
 	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
 	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
 	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 	BlockquoteEnterkeyhintEnumNext     BlockquoteEnterkeyhintEnum = "next"
-	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
-	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
 )
 
 type BlockquoteHiddenEnum string
@@ -112,14 +111,14 @@ const (
 type BlockquoteInputmodeEnum string
 
 const (
+	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
+	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
 	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
 	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
 	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
 	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
 	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
-	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
-	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
 )
 
 type BlockquoteSpellcheckEnum string
@@ -133,8 +132,8 @@ const (
 type BlockquoteTranslateEnum string
 
 const (
-	BlockquoteTranslateEnumYes   BlockquoteTranslateEnum = "yes"
 	BlockquoteTranslateEnumNo    BlockquoteTranslateEnum = "no"
+	BlockquoteTranslateEnumYes   BlockquoteTranslateEnum = "yes"
 	BlockquoteTranslateEnumEmpty BlockquoteTranslateEnum = ""
 )
 
@@ -147,6 +146,12 @@ const (
 )
 
 type blockquoteAttrs map[string]any
+
+func (e *BlockquoteElement) Cite(s string) *BlockquoteElement {
+	e.attributes["cite"] = s
+
+	return e
+}
 
 func (e *BlockquoteElement) Autocapitalize(a BlockquoteAutocapitalizeEnum) *BlockquoteElement {
 	e.attributes["autocapitalize"] = a
