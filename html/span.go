@@ -46,26 +46,15 @@ func SpanTernary(condition bool, true htemel.Node, false htemel.Node) *SpanEleme
 	return Span(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *SpanElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *SpanElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type SpanAutocapitalizeEnum string
 
 const (
+	SpanAutocapitalizeEnumSentences  SpanAutocapitalizeEnum = "sentences"
+	SpanAutocapitalizeEnumWords      SpanAutocapitalizeEnum = "words"
 	SpanAutocapitalizeEnumCharacters SpanAutocapitalizeEnum = "characters"
 	SpanAutocapitalizeEnumNone       SpanAutocapitalizeEnum = "none"
 	SpanAutocapitalizeEnumOff        SpanAutocapitalizeEnum = "off"
 	SpanAutocapitalizeEnumOn         SpanAutocapitalizeEnum = "on"
-	SpanAutocapitalizeEnumSentences  SpanAutocapitalizeEnum = "sentences"
-	SpanAutocapitalizeEnumWords      SpanAutocapitalizeEnum = "words"
 )
 
 type SpanAutocorrectEnum string
@@ -79,9 +68,9 @@ const (
 type SpanContenteditableEnum string
 
 const (
-	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
 	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
+	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumEmpty         SpanContenteditableEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
-	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
 	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
 	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
 	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
 	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
 	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
+	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
 )
 
 type SpanHiddenEnum string
@@ -123,6 +112,7 @@ const (
 type SpanInputmodeEnum string
 
 const (
+	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
 	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
 	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
@@ -130,14 +120,13 @@ const (
 	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
 	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
 	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
-	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
 )
 
 type SpanSpellcheckEnum string
 
 const (
-	SpanSpellcheckEnumTrue  SpanSpellcheckEnum = "true"
 	SpanSpellcheckEnumFalse SpanSpellcheckEnum = "false"
+	SpanSpellcheckEnumTrue  SpanSpellcheckEnum = "true"
 	SpanSpellcheckEnumEmpty SpanSpellcheckEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *SpanElement) Writingsuggestions(a SpanWritingsuggestionsEnum) *SpanElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SpanElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<span")); err != nil {
+	if _, err := w.Write([]byte("<span")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *SpanElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</span>\n")); err != nil {
+	if _, err := w.Write([]byte("</span>")); err != nil {
 		return err
 	}
 

@@ -46,26 +46,15 @@ func RtTernary(condition bool, true htemel.Node, false htemel.Node) *RtElement {
 	return Rt(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *RtElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *RtElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type RtAutocapitalizeEnum string
 
 const (
-	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
 	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
 	RtAutocapitalizeEnumCharacters RtAutocapitalizeEnum = "characters"
 	RtAutocapitalizeEnumNone       RtAutocapitalizeEnum = "none"
 	RtAutocapitalizeEnumOff        RtAutocapitalizeEnum = "off"
 	RtAutocapitalizeEnumOn         RtAutocapitalizeEnum = "on"
+	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
 )
 
 type RtAutocorrectEnum string
@@ -88,9 +77,9 @@ const (
 type RtDirEnum string
 
 const (
+	RtDirEnumRtl  RtDirEnum = "rtl"
 	RtDirEnumAuto RtDirEnum = "auto"
 	RtDirEnumLtr  RtDirEnum = "ltr"
-	RtDirEnumRtl  RtDirEnum = "rtl"
 )
 
 type RtDraggableEnum string
@@ -103,26 +92,27 @@ const (
 type RtEnterkeyhintEnum string
 
 const (
+	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
+	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
 	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
 	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
 	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
 	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
 	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
-	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
-	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
 )
 
 type RtHiddenEnum string
 
 const (
-	RtHiddenEnumHidden     RtHiddenEnum = "hidden"
 	RtHiddenEnumUntilFound RtHiddenEnum = "until-found"
+	RtHiddenEnumHidden     RtHiddenEnum = "hidden"
 	RtHiddenEnumEmpty      RtHiddenEnum = ""
 )
 
 type RtInputmodeEnum string
 
 const (
+	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
 	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
 	RtInputmodeEnumNone    RtInputmodeEnum = "none"
 	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
@@ -130,7 +120,6 @@ const (
 	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
 	RtInputmodeEnumText    RtInputmodeEnum = "text"
 	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
-	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
 )
 
 type RtSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type RtWritingsuggestionsEnum string
 
 const (
-	RtWritingsuggestionsEnumTrue  RtWritingsuggestionsEnum = "true"
 	RtWritingsuggestionsEnumFalse RtWritingsuggestionsEnum = "false"
+	RtWritingsuggestionsEnumTrue  RtWritingsuggestionsEnum = "true"
 	RtWritingsuggestionsEnumEmpty RtWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *RtElement) Writingsuggestions(a RtWritingsuggestionsEnum) *RtElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *RtElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<rt")); err != nil {
+	if _, err := w.Write([]byte("<rt")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *RtElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</rt>\n")); err != nil {
+	if _, err := w.Write([]byte("</rt>")); err != nil {
 		return err
 	}
 

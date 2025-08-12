@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,42 +37,31 @@ func WbrIf(condition bool) *WbrElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *WbrElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *WbrElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type WbrAutocapitalizeEnum string
 
 const (
-	WbrAutocapitalizeEnumOff        WbrAutocapitalizeEnum = "off"
-	WbrAutocapitalizeEnumOn         WbrAutocapitalizeEnum = "on"
 	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
 	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
 	WbrAutocapitalizeEnumCharacters WbrAutocapitalizeEnum = "characters"
 	WbrAutocapitalizeEnumNone       WbrAutocapitalizeEnum = "none"
+	WbrAutocapitalizeEnumOff        WbrAutocapitalizeEnum = "off"
+	WbrAutocapitalizeEnumOn         WbrAutocapitalizeEnum = "on"
 )
 
 type WbrAutocorrectEnum string
 
 const (
-	WbrAutocorrectEnumOn    WbrAutocorrectEnum = "on"
 	WbrAutocorrectEnumOff   WbrAutocorrectEnum = "off"
+	WbrAutocorrectEnumOn    WbrAutocorrectEnum = "on"
 	WbrAutocorrectEnumEmpty WbrAutocorrectEnum = ""
 )
 
 type WbrContenteditableEnum string
 
 const (
+	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
 	WbrContenteditableEnumFalse         WbrContenteditableEnum = "false"
 	WbrContenteditableEnumPlaintextOnly WbrContenteditableEnum = "plaintext-only"
-	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
 	WbrContenteditableEnumEmpty         WbrContenteditableEnum = ""
 )
 
@@ -95,13 +83,13 @@ const (
 type WbrEnterkeyhintEnum string
 
 const (
+	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
+	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
 	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
 	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
 	WbrEnterkeyhintEnumSearch   WbrEnterkeyhintEnum = "search"
-	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
-	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 )
 
 type WbrHiddenEnum string
@@ -115,14 +103,14 @@ const (
 type WbrInputmodeEnum string
 
 const (
+	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
+	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
+	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
 	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
 	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
 	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
 	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
-	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
-	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
-	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 )
 
 type WbrSpellcheckEnum string
@@ -136,8 +124,8 @@ const (
 type WbrTranslateEnum string
 
 const (
-	WbrTranslateEnumYes   WbrTranslateEnum = "yes"
 	WbrTranslateEnumNo    WbrTranslateEnum = "no"
+	WbrTranslateEnumYes   WbrTranslateEnum = "yes"
 	WbrTranslateEnumEmpty WbrTranslateEnum = ""
 )
 
@@ -331,13 +319,11 @@ func (e *WbrElement) Writingsuggestions(a WbrWritingsuggestionsEnum) *WbrElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *WbrElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<wbr")); err != nil {
+	if _, err := w.Write([]byte("<wbr")); err != nil {
 		return err
 	}
 
@@ -367,7 +353,7 @@ func (e *WbrElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 

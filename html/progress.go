@@ -46,33 +46,22 @@ func ProgressTernary(condition bool, true htemel.Node, false htemel.Node) *Progr
 	return Progress(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *ProgressElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *ProgressElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type ProgressAutocapitalizeEnum string
 
 const (
-	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
 	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
 	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
 	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
 	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
+	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
 )
 
 type ProgressAutocorrectEnum string
 
 const (
-	ProgressAutocorrectEnumOn    ProgressAutocorrectEnum = "on"
 	ProgressAutocorrectEnumOff   ProgressAutocorrectEnum = "off"
+	ProgressAutocorrectEnumOn    ProgressAutocorrectEnum = "on"
 	ProgressAutocorrectEnumEmpty ProgressAutocorrectEnum = ""
 )
 
@@ -88,28 +77,28 @@ const (
 type ProgressDirEnum string
 
 const (
-	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
 	ProgressDirEnumAuto ProgressDirEnum = "auto"
 	ProgressDirEnumLtr  ProgressDirEnum = "ltr"
+	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
 )
 
 type ProgressDraggableEnum string
 
 const (
-	ProgressDraggableEnumFalse ProgressDraggableEnum = "false"
 	ProgressDraggableEnumTrue  ProgressDraggableEnum = "true"
+	ProgressDraggableEnumFalse ProgressDraggableEnum = "false"
 )
 
 type ProgressEnterkeyhintEnum string
 
 const (
+	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
+	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
+	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
 	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
 	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
 	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
 	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
-	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
-	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
-	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
 )
 
 type ProgressHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type ProgressInputmodeEnum string
 
 const (
-	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
-	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
-	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
-	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
 	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
 	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
 	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
 	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
+	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
+	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
+	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
+	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
 )
 
 type ProgressSpellcheckEnum string
@@ -144,8 +133,8 @@ const (
 type ProgressTranslateEnum string
 
 const (
-	ProgressTranslateEnumNo    ProgressTranslateEnum = "no"
 	ProgressTranslateEnumYes   ProgressTranslateEnum = "yes"
+	ProgressTranslateEnumNo    ProgressTranslateEnum = "no"
 	ProgressTranslateEnumEmpty ProgressTranslateEnum = ""
 )
 
@@ -351,13 +340,11 @@ func (e *ProgressElement) Writingsuggestions(a ProgressWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ProgressElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<progress")); err != nil {
+	if _, err := w.Write([]byte("<progress")); err != nil {
 		return err
 	}
 
@@ -387,17 +374,16 @@ func (e *ProgressElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</progress>\n")); err != nil {
+	if _, err := w.Write([]byte("</progress>")); err != nil {
 		return err
 	}
 

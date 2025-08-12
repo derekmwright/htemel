@@ -46,17 +46,6 @@ func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node)
 	return Selectedcontent(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *SelectedcontentElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *SelectedcontentElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type SelectedcontentAutocapitalizeEnum string
 
 const (
@@ -96,20 +85,20 @@ const (
 type SelectedcontentDraggableEnum string
 
 const (
-	SelectedcontentDraggableEnumFalse SelectedcontentDraggableEnum = "false"
 	SelectedcontentDraggableEnumTrue  SelectedcontentDraggableEnum = "true"
+	SelectedcontentDraggableEnumFalse SelectedcontentDraggableEnum = "false"
 )
 
 type SelectedcontentEnterkeyhintEnum string
 
 const (
+	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
+	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
 	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
 	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
 	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
-	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
-	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
 )
 
 type SelectedcontentHiddenEnum string
@@ -123,21 +112,21 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
+	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
+	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
 	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
 	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
 	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
 	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
-	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
-	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
 )
 
 type SelectedcontentSpellcheckEnum string
 
 const (
-	SelectedcontentSpellcheckEnumFalse SelectedcontentSpellcheckEnum = "false"
 	SelectedcontentSpellcheckEnumTrue  SelectedcontentSpellcheckEnum = "true"
+	SelectedcontentSpellcheckEnumFalse SelectedcontentSpellcheckEnum = "false"
 	SelectedcontentSpellcheckEnumEmpty SelectedcontentSpellcheckEnum = ""
 )
 
@@ -152,8 +141,8 @@ const (
 type SelectedcontentWritingsuggestionsEnum string
 
 const (
-	SelectedcontentWritingsuggestionsEnumFalse SelectedcontentWritingsuggestionsEnum = "false"
 	SelectedcontentWritingsuggestionsEnumTrue  SelectedcontentWritingsuggestionsEnum = "true"
+	SelectedcontentWritingsuggestionsEnumFalse SelectedcontentWritingsuggestionsEnum = "false"
 	SelectedcontentWritingsuggestionsEnumEmpty SelectedcontentWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *SelectedcontentElement) Writingsuggestions(a SelectedcontentWritingsugg
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SelectedcontentElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<selectedcontent")); err != nil {
+	if _, err := w.Write([]byte("<selectedcontent")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *SelectedcontentElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</selectedcontent>\n")); err != nil {
+	if _, err := w.Write([]byte("</selectedcontent>")); err != nil {
 		return err
 	}
 

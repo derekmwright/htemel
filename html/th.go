@@ -46,17 +46,6 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 	return Th(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *ThElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *ThElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type ThAutocapitalizeEnum string
 
 const (
@@ -79,18 +68,18 @@ const (
 type ThContenteditableEnum string
 
 const (
+	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
 	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumPlaintextOnly ThContenteditableEnum = "plaintext-only"
-	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
 	ThContenteditableEnumEmpty         ThContenteditableEnum = ""
 )
 
 type ThDirEnum string
 
 const (
-	ThDirEnumAuto ThDirEnum = "auto"
 	ThDirEnumLtr  ThDirEnum = "ltr"
 	ThDirEnumRtl  ThDirEnum = "rtl"
+	ThDirEnumAuto ThDirEnum = "auto"
 )
 
 type ThDraggableEnum string
@@ -103,13 +92,13 @@ const (
 type ThEnterkeyhintEnum string
 
 const (
-	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
-	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
-	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
 	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
 	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
 	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
+	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
+	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
+	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 )
 
 type ThHiddenEnum string
@@ -123,7 +112,6 @@ const (
 type ThInputmodeEnum string
 
 const (
-	ThInputmodeEnumText    ThInputmodeEnum = "text"
 	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
 	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
 	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
@@ -131,6 +119,7 @@ const (
 	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
 	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
+	ThInputmodeEnumText    ThInputmodeEnum = "text"
 )
 
 type ThSpellcheckEnum string
@@ -369,13 +358,11 @@ func (e *ThElement) Writingsuggestions(a ThWritingsuggestionsEnum) *ThElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ThElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<th")); err != nil {
+	if _, err := w.Write([]byte("<th")); err != nil {
 		return err
 	}
 
@@ -405,17 +392,16 @@ func (e *ThElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</th>\n")); err != nil {
+	if _, err := w.Write([]byte("</th>")); err != nil {
 		return err
 	}
 

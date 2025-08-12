@@ -46,17 +46,6 @@ func CiteTernary(condition bool, true htemel.Node, false htemel.Node) *CiteEleme
 	return Cite(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *CiteElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *CiteElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type CiteAutocapitalizeEnum string
 
 const (
@@ -79,25 +68,25 @@ const (
 type CiteContenteditableEnum string
 
 const (
+	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
 	CiteContenteditableEnumFalse         CiteContenteditableEnum = "false"
 	CiteContenteditableEnumPlaintextOnly CiteContenteditableEnum = "plaintext-only"
-	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
 	CiteContenteditableEnumEmpty         CiteContenteditableEnum = ""
 )
 
 type CiteDirEnum string
 
 const (
+	CiteDirEnumRtl  CiteDirEnum = "rtl"
 	CiteDirEnumAuto CiteDirEnum = "auto"
 	CiteDirEnumLtr  CiteDirEnum = "ltr"
-	CiteDirEnumRtl  CiteDirEnum = "rtl"
 )
 
 type CiteDraggableEnum string
 
 const (
-	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
 	CiteDraggableEnumFalse CiteDraggableEnum = "false"
+	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
 )
 
 type CiteEnterkeyhintEnum string
@@ -115,29 +104,29 @@ const (
 type CiteHiddenEnum string
 
 const (
-	CiteHiddenEnumHidden     CiteHiddenEnum = "hidden"
 	CiteHiddenEnumUntilFound CiteHiddenEnum = "until-found"
+	CiteHiddenEnumHidden     CiteHiddenEnum = "hidden"
 	CiteHiddenEnumEmpty      CiteHiddenEnum = ""
 )
 
 type CiteInputmodeEnum string
 
 const (
-	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
-	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
-	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
-	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
 	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
 	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
 	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
+	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
+	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
+	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
+	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
 )
 
 type CiteSpellcheckEnum string
 
 const (
-	CiteSpellcheckEnumFalse CiteSpellcheckEnum = "false"
 	CiteSpellcheckEnumTrue  CiteSpellcheckEnum = "true"
+	CiteSpellcheckEnumFalse CiteSpellcheckEnum = "false"
 	CiteSpellcheckEnumEmpty CiteSpellcheckEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *CiteElement) Writingsuggestions(a CiteWritingsuggestionsEnum) *CiteElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *CiteElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<cite")); err != nil {
+	if _, err := w.Write([]byte("<cite")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *CiteElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</cite>\n")); err != nil {
+	if _, err := w.Write([]byte("</cite>")); err != nil {
 		return err
 	}
 

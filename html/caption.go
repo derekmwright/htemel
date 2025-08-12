@@ -46,17 +46,6 @@ func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Captio
 	return Caption(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *CaptionElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *CaptionElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type CaptionAutocapitalizeEnum string
 
 const (
@@ -88,9 +77,9 @@ const (
 type CaptionDirEnum string
 
 const (
-	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
 	CaptionDirEnumAuto CaptionDirEnum = "auto"
 	CaptionDirEnumLtr  CaptionDirEnum = "ltr"
+	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
 )
 
 type CaptionDraggableEnum string
@@ -103,13 +92,13 @@ const (
 type CaptionEnterkeyhintEnum string
 
 const (
+	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
 	CaptionEnterkeyhintEnumSearch   CaptionEnterkeyhintEnum = "search"
 	CaptionEnterkeyhintEnumSend     CaptionEnterkeyhintEnum = "send"
 	CaptionEnterkeyhintEnumDone     CaptionEnterkeyhintEnum = "done"
 	CaptionEnterkeyhintEnumEnter    CaptionEnterkeyhintEnum = "enter"
 	CaptionEnterkeyhintEnumGo       CaptionEnterkeyhintEnum = "go"
 	CaptionEnterkeyhintEnumNext     CaptionEnterkeyhintEnum = "next"
-	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
 )
 
 type CaptionHiddenEnum string
@@ -123,7 +112,6 @@ const (
 type CaptionInputmodeEnum string
 
 const (
-	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
 	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
 	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
 	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
@@ -131,6 +119,7 @@ const (
 	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
 	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
 	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
+	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
 )
 
 type CaptionSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type CaptionWritingsuggestionsEnum string
 
 const (
-	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
 	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
+	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
 	CaptionWritingsuggestionsEnumEmpty CaptionWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *CaptionElement) Writingsuggestions(a CaptionWritingsuggestionsEnum) *Ca
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *CaptionElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<caption")); err != nil {
+	if _, err := w.Write([]byte("<caption")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *CaptionElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</caption>\n")); err != nil {
+	if _, err := w.Write([]byte("</caption>")); err != nil {
 		return err
 	}
 

@@ -46,33 +46,22 @@ func StyleTernary(condition bool, true htemel.Node, false htemel.Node) *StyleEle
 	return Style(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *StyleElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *StyleElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type StyleAutocapitalizeEnum string
 
 const (
+	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
 	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
 	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
 	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
 	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
 	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
-	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
 )
 
 type StyleAutocorrectEnum string
 
 const (
-	StyleAutocorrectEnumOn    StyleAutocorrectEnum = "on"
 	StyleAutocorrectEnumOff   StyleAutocorrectEnum = "off"
+	StyleAutocorrectEnumOn    StyleAutocorrectEnum = "on"
 	StyleAutocorrectEnumEmpty StyleAutocorrectEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type StyleEnterkeyhintEnum string
 
 const (
+	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
+	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
 	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
 	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
 	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
 	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
 	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
-	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
-	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
 )
 
 type StyleHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type StyleInputmodeEnum string
 
 const (
-	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
-	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
-	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
 	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
 	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
 	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
+	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
+	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
+	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 )
 
 type StyleSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type StyleWritingsuggestionsEnum string
 
 const (
-	StyleWritingsuggestionsEnumTrue  StyleWritingsuggestionsEnum = "true"
 	StyleWritingsuggestionsEnumFalse StyleWritingsuggestionsEnum = "false"
+	StyleWritingsuggestionsEnumTrue  StyleWritingsuggestionsEnum = "true"
 	StyleWritingsuggestionsEnumEmpty StyleWritingsuggestionsEnum = ""
 )
 
@@ -351,13 +340,11 @@ func (e *StyleElement) Writingsuggestions(a StyleWritingsuggestionsEnum) *StyleE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *StyleElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<style")); err != nil {
+	if _, err := w.Write([]byte("<style")); err != nil {
 		return err
 	}
 
@@ -387,17 +374,16 @@ func (e *StyleElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</style>\n")); err != nil {
+	if _, err := w.Write([]byte("</style>")); err != nil {
 		return err
 	}
 

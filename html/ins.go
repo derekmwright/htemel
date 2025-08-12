@@ -46,17 +46,6 @@ func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement
 	return Ins(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *InsElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *InsElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type InsAutocapitalizeEnum string
 
 const (
@@ -79,18 +68,18 @@ const (
 type InsContenteditableEnum string
 
 const (
-	InsContenteditableEnumTrue          InsContenteditableEnum = "true"
 	InsContenteditableEnumFalse         InsContenteditableEnum = "false"
 	InsContenteditableEnumPlaintextOnly InsContenteditableEnum = "plaintext-only"
+	InsContenteditableEnumTrue          InsContenteditableEnum = "true"
 	InsContenteditableEnumEmpty         InsContenteditableEnum = ""
 )
 
 type InsDirEnum string
 
 const (
-	InsDirEnumAuto InsDirEnum = "auto"
 	InsDirEnumLtr  InsDirEnum = "ltr"
 	InsDirEnumRtl  InsDirEnum = "rtl"
+	InsDirEnumAuto InsDirEnum = "auto"
 )
 
 type InsDraggableEnum string
@@ -103,13 +92,13 @@ const (
 type InsEnterkeyhintEnum string
 
 const (
+	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
 	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
 	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
 	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
-	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 )
 
 type InsHiddenEnum string
@@ -123,6 +112,7 @@ const (
 type InsInputmodeEnum string
 
 const (
+	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
 	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
 	InsInputmodeEnumText    InsInputmodeEnum = "text"
@@ -130,7 +120,6 @@ const (
 	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
 	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
 	InsInputmodeEnumNone    InsInputmodeEnum = "none"
-	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 )
 
 type InsSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type InsWritingsuggestionsEnum string
 
 const (
-	InsWritingsuggestionsEnumTrue  InsWritingsuggestionsEnum = "true"
 	InsWritingsuggestionsEnumFalse InsWritingsuggestionsEnum = "false"
+	InsWritingsuggestionsEnumTrue  InsWritingsuggestionsEnum = "true"
 	InsWritingsuggestionsEnumEmpty InsWritingsuggestionsEnum = ""
 )
 
@@ -351,13 +340,11 @@ func (e *InsElement) Writingsuggestions(a InsWritingsuggestionsEnum) *InsElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *InsElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<ins")); err != nil {
+	if _, err := w.Write([]byte("<ins")); err != nil {
 		return err
 	}
 
@@ -387,17 +374,16 @@ func (e *InsElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</ins>\n")); err != nil {
+	if _, err := w.Write([]byte("</ins>")); err != nil {
 		return err
 	}
 

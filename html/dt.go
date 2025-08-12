@@ -46,17 +46,6 @@ func DtTernary(condition bool, true htemel.Node, false htemel.Node) *DtElement {
 	return Dt(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *DtElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *DtElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type DtAutocapitalizeEnum string
 
 const (
@@ -88,9 +77,9 @@ const (
 type DtDirEnum string
 
 const (
+	DtDirEnumRtl  DtDirEnum = "rtl"
 	DtDirEnumAuto DtDirEnum = "auto"
 	DtDirEnumLtr  DtDirEnum = "ltr"
-	DtDirEnumRtl  DtDirEnum = "rtl"
 )
 
 type DtDraggableEnum string
@@ -103,13 +92,13 @@ const (
 type DtEnterkeyhintEnum string
 
 const (
-	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
-	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
-	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
 	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
 	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
+	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
+	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
+	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 )
 
 type DtHiddenEnum string
@@ -123,7 +112,6 @@ const (
 type DtInputmodeEnum string
 
 const (
-	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
 	DtInputmodeEnumNone    DtInputmodeEnum = "none"
 	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
@@ -131,6 +119,7 @@ const (
 	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 	DtInputmodeEnumText    DtInputmodeEnum = "text"
 	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
+	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 )
 
 type DtSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *DtElement) Writingsuggestions(a DtWritingsuggestionsEnum) *DtElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DtElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<dt")); err != nil {
+	if _, err := w.Write([]byte("<dt")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *DtElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</dt>\n")); err != nil {
+	if _, err := w.Write([]byte("</dt>")); err != nil {
 		return err
 	}
 

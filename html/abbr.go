@@ -46,17 +46,6 @@ func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrEleme
 	return Abbr(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *AbbrElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *AbbrElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type AbbrAutocapitalizeEnum string
 
 const (
@@ -79,9 +68,9 @@ const (
 type AbbrContenteditableEnum string
 
 const (
+	AbbrContenteditableEnumPlaintextOnly AbbrContenteditableEnum = "plaintext-only"
 	AbbrContenteditableEnumTrue          AbbrContenteditableEnum = "true"
 	AbbrContenteditableEnumFalse         AbbrContenteditableEnum = "false"
-	AbbrContenteditableEnumPlaintextOnly AbbrContenteditableEnum = "plaintext-only"
 	AbbrContenteditableEnumEmpty         AbbrContenteditableEnum = ""
 )
 
@@ -103,20 +92,20 @@ const (
 type AbbrEnterkeyhintEnum string
 
 const (
-	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
-	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
-	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
 	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
 	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 	AbbrEnterkeyhintEnumEnter    AbbrEnterkeyhintEnum = "enter"
 	AbbrEnterkeyhintEnumGo       AbbrEnterkeyhintEnum = "go"
+	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
+	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
+	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
 )
 
 type AbbrHiddenEnum string
 
 const (
-	AbbrHiddenEnumHidden     AbbrHiddenEnum = "hidden"
 	AbbrHiddenEnumUntilFound AbbrHiddenEnum = "until-found"
+	AbbrHiddenEnumHidden     AbbrHiddenEnum = "hidden"
 	AbbrHiddenEnumEmpty      AbbrHiddenEnum = ""
 )
 
@@ -152,8 +141,8 @@ const (
 type AbbrWritingsuggestionsEnum string
 
 const (
-	AbbrWritingsuggestionsEnumTrue  AbbrWritingsuggestionsEnum = "true"
 	AbbrWritingsuggestionsEnumFalse AbbrWritingsuggestionsEnum = "false"
+	AbbrWritingsuggestionsEnumTrue  AbbrWritingsuggestionsEnum = "true"
 	AbbrWritingsuggestionsEnumEmpty AbbrWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *AbbrElement) Writingsuggestions(a AbbrWritingsuggestionsEnum) *AbbrElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AbbrElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<abbr")); err != nil {
+	if _, err := w.Write([]byte("<abbr")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *AbbrElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</abbr>\n")); err != nil {
+	if _, err := w.Write([]byte("</abbr>")); err != nil {
 		return err
 	}
 

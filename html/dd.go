@@ -46,33 +46,22 @@ func DdTernary(condition bool, true htemel.Node, false htemel.Node) *DdElement {
 	return Dd(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *DdElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *DdElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type DdAutocapitalizeEnum string
 
 const (
-	DdAutocapitalizeEnumOff        DdAutocapitalizeEnum = "off"
-	DdAutocapitalizeEnumOn         DdAutocapitalizeEnum = "on"
-	DdAutocapitalizeEnumSentences  DdAutocapitalizeEnum = "sentences"
 	DdAutocapitalizeEnumWords      DdAutocapitalizeEnum = "words"
 	DdAutocapitalizeEnumCharacters DdAutocapitalizeEnum = "characters"
 	DdAutocapitalizeEnumNone       DdAutocapitalizeEnum = "none"
+	DdAutocapitalizeEnumOff        DdAutocapitalizeEnum = "off"
+	DdAutocapitalizeEnumOn         DdAutocapitalizeEnum = "on"
+	DdAutocapitalizeEnumSentences  DdAutocapitalizeEnum = "sentences"
 )
 
 type DdAutocorrectEnum string
 
 const (
-	DdAutocorrectEnumOff   DdAutocorrectEnum = "off"
 	DdAutocorrectEnumOn    DdAutocorrectEnum = "on"
+	DdAutocorrectEnumOff   DdAutocorrectEnum = "off"
 	DdAutocorrectEnumEmpty DdAutocorrectEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *DdElement) Writingsuggestions(a DdWritingsuggestionsEnum) *DdElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DdElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<dd")); err != nil {
+	if _, err := w.Write([]byte("<dd")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *DdElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</dd>\n")); err != nil {
+	if _, err := w.Write([]byte("</dd>")); err != nil {
 		return err
 	}
 

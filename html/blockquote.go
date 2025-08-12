@@ -46,33 +46,22 @@ func BlockquoteTernary(condition bool, true htemel.Node, false htemel.Node) *Blo
 	return Blockquote(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *BlockquoteElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *BlockquoteElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type BlockquoteAutocapitalizeEnum string
 
 const (
-	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
-	BlockquoteAutocapitalizeEnumNone       BlockquoteAutocapitalizeEnum = "none"
-	BlockquoteAutocapitalizeEnumOff        BlockquoteAutocapitalizeEnum = "off"
 	BlockquoteAutocapitalizeEnumOn         BlockquoteAutocapitalizeEnum = "on"
 	BlockquoteAutocapitalizeEnumSentences  BlockquoteAutocapitalizeEnum = "sentences"
 	BlockquoteAutocapitalizeEnumWords      BlockquoteAutocapitalizeEnum = "words"
+	BlockquoteAutocapitalizeEnumCharacters BlockquoteAutocapitalizeEnum = "characters"
+	BlockquoteAutocapitalizeEnumNone       BlockquoteAutocapitalizeEnum = "none"
+	BlockquoteAutocapitalizeEnumOff        BlockquoteAutocapitalizeEnum = "off"
 )
 
 type BlockquoteAutocorrectEnum string
 
 const (
-	BlockquoteAutocorrectEnumOn    BlockquoteAutocorrectEnum = "on"
 	BlockquoteAutocorrectEnumOff   BlockquoteAutocorrectEnum = "off"
+	BlockquoteAutocorrectEnumOn    BlockquoteAutocorrectEnum = "on"
 	BlockquoteAutocorrectEnumEmpty BlockquoteAutocorrectEnum = ""
 )
 
@@ -96,8 +85,8 @@ const (
 type BlockquoteDraggableEnum string
 
 const (
-	BlockquoteDraggableEnumTrue  BlockquoteDraggableEnum = "true"
 	BlockquoteDraggableEnumFalse BlockquoteDraggableEnum = "false"
+	BlockquoteDraggableEnumTrue  BlockquoteDraggableEnum = "true"
 )
 
 type BlockquoteEnterkeyhintEnum string
@@ -123,14 +112,14 @@ const (
 type BlockquoteInputmodeEnum string
 
 const (
-	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
-	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
-	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
-	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
 	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
 	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
 	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
+	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
+	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
+	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
+	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 )
 
 type BlockquoteSpellcheckEnum string
@@ -345,13 +334,11 @@ func (e *BlockquoteElement) Writingsuggestions(a BlockquoteWritingsuggestionsEnu
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BlockquoteElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<blockquote")); err != nil {
+	if _, err := w.Write([]byte("<blockquote")); err != nil {
 		return err
 	}
 
@@ -381,17 +368,16 @@ func (e *BlockquoteElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</blockquote>\n")); err != nil {
+	if _, err := w.Write([]byte("</blockquote>")); err != nil {
 		return err
 	}
 

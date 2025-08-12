@@ -46,26 +46,15 @@ func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *Detail
 	return Details(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *DetailsElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *DetailsElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type DetailsAutocapitalizeEnum string
 
 const (
-	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
-	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
-	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
 	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
 	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
 	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
+	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
+	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
+	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
 )
 
 type DetailsAutocorrectEnum string
@@ -103,13 +92,13 @@ const (
 type DetailsEnterkeyhintEnum string
 
 const (
+	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
+	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
+	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
 	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
 	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
 	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
-	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
-	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
-	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
 )
 
 type DetailsHiddenEnum string
@@ -123,6 +112,7 @@ const (
 type DetailsInputmodeEnum string
 
 const (
+	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
 	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
 	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
 	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
@@ -130,7 +120,6 @@ const (
 	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
 	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
-	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
 )
 
 type DetailsSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type DetailsWritingsuggestionsEnum string
 
 const (
-	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
 	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
+	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
 	DetailsWritingsuggestionsEnumEmpty DetailsWritingsuggestionsEnum = ""
 )
 
@@ -351,13 +340,11 @@ func (e *DetailsElement) Writingsuggestions(a DetailsWritingsuggestionsEnum) *De
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DetailsElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<details")); err != nil {
+	if _, err := w.Write([]byte("<details")); err != nil {
 		return err
 	}
 
@@ -387,17 +374,16 @@ func (e *DetailsElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</details>\n")); err != nil {
+	if _, err := w.Write([]byte("</details>")); err != nil {
 		return err
 	}
 

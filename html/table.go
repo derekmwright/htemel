@@ -46,26 +46,15 @@ func TableTernary(condition bool, true htemel.Node, false htemel.Node) *TableEle
 	return Table(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *TableElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *TableElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type TableAutocapitalizeEnum string
 
 const (
-	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
-	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
-	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
 	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
 	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
+	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
+	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
+	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
 )
 
 type TableAutocorrectEnum string
@@ -79,9 +68,9 @@ const (
 type TableContenteditableEnum string
 
 const (
+	TableContenteditableEnumFalse         TableContenteditableEnum = "false"
 	TableContenteditableEnumPlaintextOnly TableContenteditableEnum = "plaintext-only"
 	TableContenteditableEnumTrue          TableContenteditableEnum = "true"
-	TableContenteditableEnumFalse         TableContenteditableEnum = "false"
 	TableContenteditableEnumEmpty         TableContenteditableEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type TableEnterkeyhintEnum string
 
 const (
+	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
 	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
 	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
 	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
 	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
 	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
 	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
-	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
 )
 
 type TableHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type TableInputmodeEnum string
 
 const (
-	TableInputmodeEnumEmail   TableInputmodeEnum = "email"
-	TableInputmodeEnumNone    TableInputmodeEnum = "none"
 	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
 	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 	TableInputmodeEnumText    TableInputmodeEnum = "text"
 	TableInputmodeEnumUrl     TableInputmodeEnum = "url"
 	TableInputmodeEnumDecimal TableInputmodeEnum = "decimal"
+	TableInputmodeEnumEmail   TableInputmodeEnum = "email"
+	TableInputmodeEnumNone    TableInputmodeEnum = "none"
 )
 
 type TableSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *TableElement) Writingsuggestions(a TableWritingsuggestionsEnum) *TableE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TableElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<table")); err != nil {
+	if _, err := w.Write([]byte("<table")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *TableElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</table>\n")); err != nil {
+	if _, err := w.Write([]byte("</table>")); err != nil {
 		return err
 	}
 

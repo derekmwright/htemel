@@ -46,17 +46,6 @@ func H2Ternary(condition bool, true htemel.Node, false htemel.Node) *H2Element {
 	return H2(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *H2Element) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *H2Element) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type H2AutocapitalizeEnum string
 
 const (
@@ -79,9 +68,9 @@ const (
 type H2ContenteditableEnum string
 
 const (
-	H2ContenteditableEnumPlaintextOnly H2ContenteditableEnum = "plaintext-only"
 	H2ContenteditableEnumTrue          H2ContenteditableEnum = "true"
 	H2ContenteditableEnumFalse         H2ContenteditableEnum = "false"
+	H2ContenteditableEnumPlaintextOnly H2ContenteditableEnum = "plaintext-only"
 	H2ContenteditableEnumEmpty         H2ContenteditableEnum = ""
 )
 
@@ -123,14 +112,14 @@ const (
 type H2InputmodeEnum string
 
 const (
-	H2InputmodeEnumTel     H2InputmodeEnum = "tel"
-	H2InputmodeEnumText    H2InputmodeEnum = "text"
 	H2InputmodeEnumUrl     H2InputmodeEnum = "url"
 	H2InputmodeEnumDecimal H2InputmodeEnum = "decimal"
 	H2InputmodeEnumEmail   H2InputmodeEnum = "email"
 	H2InputmodeEnumNone    H2InputmodeEnum = "none"
 	H2InputmodeEnumNumeric H2InputmodeEnum = "numeric"
 	H2InputmodeEnumSearch  H2InputmodeEnum = "search"
+	H2InputmodeEnumTel     H2InputmodeEnum = "tel"
+	H2InputmodeEnumText    H2InputmodeEnum = "text"
 )
 
 type H2SpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *H2Element) Writingsuggestions(a H2WritingsuggestionsEnum) *H2Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H2Element) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<h2")); err != nil {
+	if _, err := w.Write([]byte("<h2")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *H2Element) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</h2>\n")); err != nil {
+	if _, err := w.Write([]byte("</h2>")); err != nil {
 		return err
 	}
 

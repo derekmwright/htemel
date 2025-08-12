@@ -46,17 +46,6 @@ func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongE
 	return Strong(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *StrongElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *StrongElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type StrongAutocapitalizeEnum string
 
 const (
@@ -88,9 +77,9 @@ const (
 type StrongDirEnum string
 
 const (
+	StrongDirEnumRtl  StrongDirEnum = "rtl"
 	StrongDirEnumAuto StrongDirEnum = "auto"
 	StrongDirEnumLtr  StrongDirEnum = "ltr"
-	StrongDirEnumRtl  StrongDirEnum = "rtl"
 )
 
 type StrongDraggableEnum string
@@ -103,34 +92,34 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
+	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
 	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
 	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
-	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 )
 
 type StrongHiddenEnum string
 
 const (
-	StrongHiddenEnumHidden     StrongHiddenEnum = "hidden"
 	StrongHiddenEnumUntilFound StrongHiddenEnum = "until-found"
+	StrongHiddenEnumHidden     StrongHiddenEnum = "hidden"
 	StrongHiddenEnumEmpty      StrongHiddenEnum = ""
 )
 
 type StrongInputmodeEnum string
 
 const (
-	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
-	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
-	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
 	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
 	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
 	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
+	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
+	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
+	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 )
 
 type StrongSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type StrongWritingsuggestionsEnum string
 
 const (
-	StrongWritingsuggestionsEnumFalse StrongWritingsuggestionsEnum = "false"
 	StrongWritingsuggestionsEnumTrue  StrongWritingsuggestionsEnum = "true"
+	StrongWritingsuggestionsEnumFalse StrongWritingsuggestionsEnum = "false"
 	StrongWritingsuggestionsEnumEmpty StrongWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *StrongElement) Writingsuggestions(a StrongWritingsuggestionsEnum) *Stro
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *StrongElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<strong")); err != nil {
+	if _, err := w.Write([]byte("<strong")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *StrongElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</strong>\n")); err != nil {
+	if _, err := w.Write([]byte("</strong>")); err != nil {
 		return err
 	}
 

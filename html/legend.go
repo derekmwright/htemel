@@ -46,33 +46,22 @@ func LegendTernary(condition bool, true htemel.Node, false htemel.Node) *LegendE
 	return Legend(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *LegendElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *LegendElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type LegendAutocapitalizeEnum string
 
 const (
-	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
-	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
 	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
 	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
 	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
 	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
+	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
+	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
 )
 
 type LegendAutocorrectEnum string
 
 const (
-	LegendAutocorrectEnumOn    LegendAutocorrectEnum = "on"
 	LegendAutocorrectEnumOff   LegendAutocorrectEnum = "off"
+	LegendAutocorrectEnumOn    LegendAutocorrectEnum = "on"
 	LegendAutocorrectEnumEmpty LegendAutocorrectEnum = ""
 )
 
@@ -88,28 +77,28 @@ const (
 type LegendDirEnum string
 
 const (
+	LegendDirEnumAuto LegendDirEnum = "auto"
 	LegendDirEnumLtr  LegendDirEnum = "ltr"
 	LegendDirEnumRtl  LegendDirEnum = "rtl"
-	LegendDirEnumAuto LegendDirEnum = "auto"
 )
 
 type LegendDraggableEnum string
 
 const (
-	LegendDraggableEnumFalse LegendDraggableEnum = "false"
 	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
+	LegendDraggableEnumFalse LegendDraggableEnum = "false"
 )
 
 type LegendEnterkeyhintEnum string
 
 const (
-	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
 	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
 	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
 	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
 	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
 	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
 	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
+	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
 )
 
 type LegendHiddenEnum string
@@ -136,8 +125,8 @@ const (
 type LegendSpellcheckEnum string
 
 const (
-	LegendSpellcheckEnumFalse LegendSpellcheckEnum = "false"
 	LegendSpellcheckEnumTrue  LegendSpellcheckEnum = "true"
+	LegendSpellcheckEnumFalse LegendSpellcheckEnum = "false"
 	LegendSpellcheckEnumEmpty LegendSpellcheckEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *LegendElement) Writingsuggestions(a LegendWritingsuggestionsEnum) *Lege
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LegendElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<legend")); err != nil {
+	if _, err := w.Write([]byte("<legend")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *LegendElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</legend>\n")); err != nil {
+	if _, err := w.Write([]byte("</legend>")); err != nil {
 		return err
 	}
 

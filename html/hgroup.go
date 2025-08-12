@@ -46,26 +46,15 @@ func HgroupTernary(condition bool, true htemel.Node, false htemel.Node) *HgroupE
 	return Hgroup(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *HgroupElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *HgroupElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type HgroupAutocapitalizeEnum string
 
 const (
-	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
-	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
-	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
 	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
 	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
+	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
+	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
+	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
 )
 
 type HgroupAutocorrectEnum string
@@ -79,18 +68,18 @@ const (
 type HgroupContenteditableEnum string
 
 const (
-	HgroupContenteditableEnumTrue          HgroupContenteditableEnum = "true"
 	HgroupContenteditableEnumFalse         HgroupContenteditableEnum = "false"
 	HgroupContenteditableEnumPlaintextOnly HgroupContenteditableEnum = "plaintext-only"
+	HgroupContenteditableEnumTrue          HgroupContenteditableEnum = "true"
 	HgroupContenteditableEnumEmpty         HgroupContenteditableEnum = ""
 )
 
 type HgroupDirEnum string
 
 const (
-	HgroupDirEnumLtr  HgroupDirEnum = "ltr"
 	HgroupDirEnumRtl  HgroupDirEnum = "rtl"
 	HgroupDirEnumAuto HgroupDirEnum = "auto"
+	HgroupDirEnumLtr  HgroupDirEnum = "ltr"
 )
 
 type HgroupDraggableEnum string
@@ -103,13 +92,13 @@ const (
 type HgroupEnterkeyhintEnum string
 
 const (
-	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
 	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
 	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
 	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
 	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
 	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
+	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 )
 
 type HgroupHiddenEnum string
@@ -123,6 +112,7 @@ const (
 type HgroupInputmodeEnum string
 
 const (
+	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
 	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
 	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
 	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
@@ -130,22 +120,21 @@ const (
 	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
 	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
 	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
-	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
 )
 
 type HgroupSpellcheckEnum string
 
 const (
-	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
 	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
+	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
 	HgroupSpellcheckEnumEmpty HgroupSpellcheckEnum = ""
 )
 
 type HgroupTranslateEnum string
 
 const (
-	HgroupTranslateEnumYes   HgroupTranslateEnum = "yes"
 	HgroupTranslateEnumNo    HgroupTranslateEnum = "no"
+	HgroupTranslateEnumYes   HgroupTranslateEnum = "yes"
 	HgroupTranslateEnumEmpty HgroupTranslateEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *HgroupElement) Writingsuggestions(a HgroupWritingsuggestionsEnum) *Hgro
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HgroupElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<hgroup")); err != nil {
+	if _, err := w.Write([]byte("<hgroup")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *HgroupElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</hgroup>\n")); err != nil {
+	if _, err := w.Write([]byte("</hgroup>")); err != nil {
 		return err
 	}
 

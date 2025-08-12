@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,36 +37,25 @@ func TrackIf(condition bool) *TrackElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *TrackElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *TrackElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type TrackKindEnum string
 
 const (
+	TrackKindEnumSubtitles    TrackKindEnum = "subtitles"
 	TrackKindEnumCaptions     TrackKindEnum = "captions"
 	TrackKindEnumChapters     TrackKindEnum = "chapters"
 	TrackKindEnumDescriptions TrackKindEnum = "descriptions"
 	TrackKindEnumMetadata     TrackKindEnum = "metadata"
-	TrackKindEnumSubtitles    TrackKindEnum = "subtitles"
 )
 
 type TrackAutocapitalizeEnum string
 
 const (
+	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
+	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
 	TrackAutocapitalizeEnumOff        TrackAutocapitalizeEnum = "off"
 	TrackAutocapitalizeEnumOn         TrackAutocapitalizeEnum = "on"
 	TrackAutocapitalizeEnumSentences  TrackAutocapitalizeEnum = "sentences"
 	TrackAutocapitalizeEnumWords      TrackAutocapitalizeEnum = "words"
-	TrackAutocapitalizeEnumCharacters TrackAutocapitalizeEnum = "characters"
-	TrackAutocapitalizeEnumNone       TrackAutocapitalizeEnum = "none"
 )
 
 type TrackAutocorrectEnum string
@@ -90,49 +78,49 @@ const (
 type TrackDirEnum string
 
 const (
+	TrackDirEnumAuto TrackDirEnum = "auto"
 	TrackDirEnumLtr  TrackDirEnum = "ltr"
 	TrackDirEnumRtl  TrackDirEnum = "rtl"
-	TrackDirEnumAuto TrackDirEnum = "auto"
 )
 
 type TrackDraggableEnum string
 
 const (
-	TrackDraggableEnumFalse TrackDraggableEnum = "false"
 	TrackDraggableEnumTrue  TrackDraggableEnum = "true"
+	TrackDraggableEnumFalse TrackDraggableEnum = "false"
 )
 
 type TrackEnterkeyhintEnum string
 
 const (
-	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
-	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
-	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
 	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
 	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
+	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
+	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
+	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 )
 
 type TrackHiddenEnum string
 
 const (
-	TrackHiddenEnumUntilFound TrackHiddenEnum = "until-found"
 	TrackHiddenEnumHidden     TrackHiddenEnum = "hidden"
+	TrackHiddenEnumUntilFound TrackHiddenEnum = "until-found"
 	TrackHiddenEnumEmpty      TrackHiddenEnum = ""
 )
 
 type TrackInputmodeEnum string
 
 const (
+	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
+	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
 	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
 	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
 	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
 	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
 	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
 	TrackInputmodeEnumDecimal TrackInputmodeEnum = "decimal"
-	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
-	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
 )
 
 type TrackSpellcheckEnum string
@@ -371,13 +359,11 @@ func (e *TrackElement) Writingsuggestions(a TrackWritingsuggestionsEnum) *TrackE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TrackElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<track")); err != nil {
+	if _, err := w.Write([]byte("<track")); err != nil {
 		return err
 	}
 
@@ -407,7 +393,7 @@ func (e *TrackElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 

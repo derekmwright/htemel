@@ -46,17 +46,6 @@ func OptionTernary(condition bool, true htemel.Node, false htemel.Node) *OptionE
 	return Option(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *OptionElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *OptionElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type OptionAutocapitalizeEnum string
 
 const (
@@ -88,9 +77,9 @@ const (
 type OptionDirEnum string
 
 const (
-	OptionDirEnumRtl  OptionDirEnum = "rtl"
 	OptionDirEnumAuto OptionDirEnum = "auto"
 	OptionDirEnumLtr  OptionDirEnum = "ltr"
+	OptionDirEnumRtl  OptionDirEnum = "rtl"
 )
 
 type OptionDraggableEnum string
@@ -123,14 +112,14 @@ const (
 type OptionInputmodeEnum string
 
 const (
+	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
+	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
+	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
 	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
 	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
 	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
-	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
-	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
-	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
 )
 
 type OptionSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type OptionWritingsuggestionsEnum string
 
 const (
-	OptionWritingsuggestionsEnumTrue  OptionWritingsuggestionsEnum = "true"
 	OptionWritingsuggestionsEnumFalse OptionWritingsuggestionsEnum = "false"
+	OptionWritingsuggestionsEnumTrue  OptionWritingsuggestionsEnum = "true"
 	OptionWritingsuggestionsEnumEmpty OptionWritingsuggestionsEnum = ""
 )
 
@@ -363,13 +352,11 @@ func (e *OptionElement) Writingsuggestions(a OptionWritingsuggestionsEnum) *Opti
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *OptionElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<option")); err != nil {
+	if _, err := w.Write([]byte("<option")); err != nil {
 		return err
 	}
 
@@ -399,17 +386,16 @@ func (e *OptionElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</option>\n")); err != nil {
+	if _, err := w.Write([]byte("</option>")); err != nil {
 		return err
 	}
 

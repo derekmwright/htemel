@@ -46,17 +46,6 @@ func TemplateTernary(condition bool, true htemel.Node, false htemel.Node) *Templ
 	return Template(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *TemplateElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *TemplateElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type TemplateShadowrootmodeEnum string
 
 const (
@@ -67,12 +56,12 @@ const (
 type TemplateAutocapitalizeEnum string
 
 const (
-	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
 	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
 	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
+	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 )
 
 type TemplateAutocorrectEnum string
@@ -103,20 +92,20 @@ const (
 type TemplateDraggableEnum string
 
 const (
-	TemplateDraggableEnumTrue  TemplateDraggableEnum = "true"
 	TemplateDraggableEnumFalse TemplateDraggableEnum = "false"
+	TemplateDraggableEnumTrue  TemplateDraggableEnum = "true"
 )
 
 type TemplateEnterkeyhintEnum string
 
 const (
-	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
 	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
 	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
 	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
 	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
 	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 	TemplateEnterkeyhintEnumEnter    TemplateEnterkeyhintEnum = "enter"
+	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
 )
 
 type TemplateHiddenEnum string
@@ -130,14 +119,14 @@ const (
 type TemplateInputmodeEnum string
 
 const (
-	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
-	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
-	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
 	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
 	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
 	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
 	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
 	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
+	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
+	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
+	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
 )
 
 type TemplateSpellcheckEnum string
@@ -376,13 +365,11 @@ func (e *TemplateElement) Writingsuggestions(a TemplateWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TemplateElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<template")); err != nil {
+	if _, err := w.Write([]byte("<template")); err != nil {
 		return err
 	}
 
@@ -412,17 +399,16 @@ func (e *TemplateElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</template>\n")); err != nil {
+	if _, err := w.Write([]byte("</template>")); err != nil {
 		return err
 	}
 

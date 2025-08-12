@@ -46,17 +46,6 @@ func MarkTernary(condition bool, true htemel.Node, false htemel.Node) *MarkEleme
 	return Mark(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *MarkElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *MarkElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type MarkAutocapitalizeEnum string
 
 const (
@@ -71,17 +60,17 @@ const (
 type MarkAutocorrectEnum string
 
 const (
-	MarkAutocorrectEnumOn    MarkAutocorrectEnum = "on"
 	MarkAutocorrectEnumOff   MarkAutocorrectEnum = "off"
+	MarkAutocorrectEnumOn    MarkAutocorrectEnum = "on"
 	MarkAutocorrectEnumEmpty MarkAutocorrectEnum = ""
 )
 
 type MarkContenteditableEnum string
 
 const (
+	MarkContenteditableEnumTrue          MarkContenteditableEnum = "true"
 	MarkContenteditableEnumFalse         MarkContenteditableEnum = "false"
 	MarkContenteditableEnumPlaintextOnly MarkContenteditableEnum = "plaintext-only"
-	MarkContenteditableEnumTrue          MarkContenteditableEnum = "true"
 	MarkContenteditableEnumEmpty         MarkContenteditableEnum = ""
 )
 
@@ -96,20 +85,20 @@ const (
 type MarkDraggableEnum string
 
 const (
-	MarkDraggableEnumFalse MarkDraggableEnum = "false"
 	MarkDraggableEnumTrue  MarkDraggableEnum = "true"
+	MarkDraggableEnumFalse MarkDraggableEnum = "false"
 )
 
 type MarkEnterkeyhintEnum string
 
 const (
+	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
+	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
 	MarkEnterkeyhintEnumGo       MarkEnterkeyhintEnum = "go"
 	MarkEnterkeyhintEnumNext     MarkEnterkeyhintEnum = "next"
 	MarkEnterkeyhintEnumPrevious MarkEnterkeyhintEnum = "previous"
 	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
 	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
-	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
-	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
 )
 
 type MarkHiddenEnum string
@@ -339,13 +328,11 @@ func (e *MarkElement) Writingsuggestions(a MarkWritingsuggestionsEnum) *MarkElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MarkElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<mark")); err != nil {
+	if _, err := w.Write([]byte("<mark")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *MarkElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</mark>\n")); err != nil {
+	if _, err := w.Write([]byte("</mark>")); err != nil {
 		return err
 	}
 

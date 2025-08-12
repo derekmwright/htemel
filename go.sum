@@ -1,3 +1,7 @@
+github.com/go-htemel/spec v0.0.1-1 h1:NW3v3TQhVoTQjKuLyU197KztjCT/+Tiaj+wgBwspXAU=
+github.com/go-htemel/spec v0.0.1-1/go.mod h1:jpW1alpSWUyZXoZH20UyApRr1UF45DL9n7k5Vl1tVKY=
+github.com/go-htemel/spec v0.0.1 h1:/KYNiSN3DQsybARXgmfqgtu78owRzF3xKePXbGfrUro=
+github.com/go-htemel/spec v0.0.1/go.mod h1:jpW1alpSWUyZXoZH20UyApRr1UF45DL9n7k5Vl1tVKY=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 golang.org/x/mod v0.26.0 h1:EGMPT//Ezu+ylkCijjPc+f4Aih7sZvaAr+O3EHBxvZg=

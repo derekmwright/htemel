@@ -46,26 +46,15 @@ func FigcaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Fig
 	return Figcaption(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *FigcaptionElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *FigcaptionElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type FigcaptionAutocapitalizeEnum string
 
 const (
+	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
+	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
 	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
 	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
 	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
-	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
-	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 )
 
 type FigcaptionAutocorrectEnum string
@@ -79,9 +68,9 @@ const (
 type FigcaptionContenteditableEnum string
 
 const (
-	FigcaptionContenteditableEnumTrue          FigcaptionContenteditableEnum = "true"
 	FigcaptionContenteditableEnumFalse         FigcaptionContenteditableEnum = "false"
 	FigcaptionContenteditableEnumPlaintextOnly FigcaptionContenteditableEnum = "plaintext-only"
+	FigcaptionContenteditableEnumTrue          FigcaptionContenteditableEnum = "true"
 	FigcaptionContenteditableEnumEmpty         FigcaptionContenteditableEnum = ""
 )
 
@@ -96,20 +85,20 @@ const (
 type FigcaptionDraggableEnum string
 
 const (
-	FigcaptionDraggableEnumTrue  FigcaptionDraggableEnum = "true"
 	FigcaptionDraggableEnumFalse FigcaptionDraggableEnum = "false"
+	FigcaptionDraggableEnumTrue  FigcaptionDraggableEnum = "true"
 )
 
 type FigcaptionEnterkeyhintEnum string
 
 const (
-	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
-	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 	FigcaptionEnterkeyhintEnumNext     FigcaptionEnterkeyhintEnum = "next"
 	FigcaptionEnterkeyhintEnumPrevious FigcaptionEnterkeyhintEnum = "previous"
 	FigcaptionEnterkeyhintEnumSearch   FigcaptionEnterkeyhintEnum = "search"
 	FigcaptionEnterkeyhintEnumSend     FigcaptionEnterkeyhintEnum = "send"
 	FigcaptionEnterkeyhintEnumDone     FigcaptionEnterkeyhintEnum = "done"
+	FigcaptionEnterkeyhintEnumEnter    FigcaptionEnterkeyhintEnum = "enter"
+	FigcaptionEnterkeyhintEnumGo       FigcaptionEnterkeyhintEnum = "go"
 )
 
 type FigcaptionHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type FigcaptionInputmodeEnum string
 
 const (
-	FigcaptionInputmodeEnumUrl     FigcaptionInputmodeEnum = "url"
-	FigcaptionInputmodeEnumDecimal FigcaptionInputmodeEnum = "decimal"
-	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
-	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
 	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
 	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
 	FigcaptionInputmodeEnumTel     FigcaptionInputmodeEnum = "tel"
 	FigcaptionInputmodeEnumText    FigcaptionInputmodeEnum = "text"
+	FigcaptionInputmodeEnumUrl     FigcaptionInputmodeEnum = "url"
+	FigcaptionInputmodeEnumDecimal FigcaptionInputmodeEnum = "decimal"
+	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
+	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
 )
 
 type FigcaptionSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *FigcaptionElement) Writingsuggestions(a FigcaptionWritingsuggestionsEnu
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *FigcaptionElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<figcaption")); err != nil {
+	if _, err := w.Write([]byte("<figcaption")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *FigcaptionElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</figcaption>\n")); err != nil {
+	if _, err := w.Write([]byte("</figcaption>")); err != nil {
 		return err
 	}
 

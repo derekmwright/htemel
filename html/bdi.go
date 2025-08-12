@@ -46,17 +46,6 @@ func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement
 	return Bdi(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *BdiElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *BdiElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type BdiAutocapitalizeEnum string
 
 const (
@@ -123,7 +112,6 @@ const (
 type BdiInputmodeEnum string
 
 const (
-	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
 	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
 	BdiInputmodeEnumTel     BdiInputmodeEnum = "tel"
 	BdiInputmodeEnumText    BdiInputmodeEnum = "text"
@@ -131,6 +119,7 @@ const (
 	BdiInputmodeEnumDecimal BdiInputmodeEnum = "decimal"
 	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
 	BdiInputmodeEnumNone    BdiInputmodeEnum = "none"
+	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
 )
 
 type BdiSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *BdiElement) Writingsuggestions(a BdiWritingsuggestionsEnum) *BdiElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BdiElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<bdi")); err != nil {
+	if _, err := w.Write([]byte("<bdi")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *BdiElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</bdi>\n")); err != nil {
+	if _, err := w.Write([]byte("</bdi>")); err != nil {
 		return err
 	}
 

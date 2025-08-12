@@ -46,33 +46,22 @@ func IframeTernary(condition bool, true htemel.Node, false htemel.Node) *IframeE
 	return Iframe(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *IframeElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *IframeElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type IframeLoadingEnum string
 
 const (
-	IframeLoadingEnumLazy  IframeLoadingEnum = "lazy"
 	IframeLoadingEnumEager IframeLoadingEnum = "eager"
+	IframeLoadingEnumLazy  IframeLoadingEnum = "lazy"
 )
 
 type IframeAutocapitalizeEnum string
 
 const (
-	IframeAutocapitalizeEnumOff        IframeAutocapitalizeEnum = "off"
 	IframeAutocapitalizeEnumOn         IframeAutocapitalizeEnum = "on"
 	IframeAutocapitalizeEnumSentences  IframeAutocapitalizeEnum = "sentences"
 	IframeAutocapitalizeEnumWords      IframeAutocapitalizeEnum = "words"
 	IframeAutocapitalizeEnumCharacters IframeAutocapitalizeEnum = "characters"
 	IframeAutocapitalizeEnumNone       IframeAutocapitalizeEnum = "none"
+	IframeAutocapitalizeEnumOff        IframeAutocapitalizeEnum = "off"
 )
 
 type IframeAutocorrectEnum string
@@ -110,26 +99,27 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
+	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
+	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
+	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
 	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
 	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
-	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
-	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
-	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 )
 
 type IframeHiddenEnum string
 
 const (
-	IframeHiddenEnumUntilFound IframeHiddenEnum = "until-found"
 	IframeHiddenEnumHidden     IframeHiddenEnum = "hidden"
+	IframeHiddenEnumUntilFound IframeHiddenEnum = "until-found"
 	IframeHiddenEnumEmpty      IframeHiddenEnum = ""
 )
 
 type IframeInputmodeEnum string
 
 const (
+	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
 	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
 	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
 	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
@@ -137,7 +127,6 @@ const (
 	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
 	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
-	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
 )
 
 type IframeSpellcheckEnum string
@@ -406,13 +395,11 @@ func (e *IframeElement) Writingsuggestions(a IframeWritingsuggestionsEnum) *Ifra
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *IframeElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<iframe")); err != nil {
+	if _, err := w.Write([]byte("<iframe")); err != nil {
 		return err
 	}
 
@@ -442,17 +429,16 @@ func (e *IframeElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</iframe>\n")); err != nil {
+	if _, err := w.Write([]byte("</iframe>")); err != nil {
 		return err
 	}
 

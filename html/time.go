@@ -46,26 +46,15 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 	return Time(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *TimeElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *TimeElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type TimeAutocapitalizeEnum string
 
 const (
-	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
-	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
 	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
 	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
+	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
+	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 )
 
 type TimeAutocorrectEnum string
@@ -79,58 +68,58 @@ const (
 type TimeContenteditableEnum string
 
 const (
-	TimeContenteditableEnumPlaintextOnly TimeContenteditableEnum = "plaintext-only"
 	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
 	TimeContenteditableEnumFalse         TimeContenteditableEnum = "false"
+	TimeContenteditableEnumPlaintextOnly TimeContenteditableEnum = "plaintext-only"
 	TimeContenteditableEnumEmpty         TimeContenteditableEnum = ""
 )
 
 type TimeDirEnum string
 
 const (
-	TimeDirEnumRtl  TimeDirEnum = "rtl"
 	TimeDirEnumAuto TimeDirEnum = "auto"
 	TimeDirEnumLtr  TimeDirEnum = "ltr"
+	TimeDirEnumRtl  TimeDirEnum = "rtl"
 )
 
 type TimeDraggableEnum string
 
 const (
-	TimeDraggableEnumFalse TimeDraggableEnum = "false"
 	TimeDraggableEnumTrue  TimeDraggableEnum = "true"
+	TimeDraggableEnumFalse TimeDraggableEnum = "false"
 )
 
 type TimeEnterkeyhintEnum string
 
 const (
-	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
-	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
 	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 	TimeEnterkeyhintEnumEnter    TimeEnterkeyhintEnum = "enter"
 	TimeEnterkeyhintEnumGo       TimeEnterkeyhintEnum = "go"
 	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
 	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
+	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
+	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
 )
 
 type TimeHiddenEnum string
 
 const (
-	TimeHiddenEnumHidden     TimeHiddenEnum = "hidden"
 	TimeHiddenEnumUntilFound TimeHiddenEnum = "until-found"
+	TimeHiddenEnumHidden     TimeHiddenEnum = "hidden"
 	TimeHiddenEnumEmpty      TimeHiddenEnum = ""
 )
 
 type TimeInputmodeEnum string
 
 const (
-	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
-	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
-	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
-	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
 	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
 	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
 	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
 	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
+	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
+	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
+	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
+	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
 )
 
 type TimeSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type TimeWritingsuggestionsEnum string
 
 const (
-	TimeWritingsuggestionsEnumFalse TimeWritingsuggestionsEnum = "false"
 	TimeWritingsuggestionsEnumTrue  TimeWritingsuggestionsEnum = "true"
+	TimeWritingsuggestionsEnumFalse TimeWritingsuggestionsEnum = "false"
 	TimeWritingsuggestionsEnumEmpty TimeWritingsuggestionsEnum = ""
 )
 
@@ -345,13 +334,11 @@ func (e *TimeElement) Writingsuggestions(a TimeWritingsuggestionsEnum) *TimeElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TimeElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<time")); err != nil {
+	if _, err := w.Write([]byte("<time")); err != nil {
 		return err
 	}
 
@@ -381,17 +368,16 @@ func (e *TimeElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</time>\n")); err != nil {
+	if _, err := w.Write([]byte("</time>")); err != nil {
 		return err
 	}
 

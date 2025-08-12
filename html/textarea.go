@@ -46,17 +46,6 @@ func TextareaTernary(condition bool, true htemel.Node, false htemel.Node) *Texta
 	return Textarea(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *TextareaElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *TextareaElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type TextareaWrapEnum string
 
 const (
@@ -67,12 +56,12 @@ const (
 type TextareaAutocapitalizeEnum string
 
 const (
-	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
-	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
-	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
 	TextareaAutocapitalizeEnumWords      TextareaAutocapitalizeEnum = "words"
 	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
 	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
+	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
+	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
+	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
 )
 
 type TextareaAutocorrectEnum string
@@ -95,9 +84,9 @@ const (
 type TextareaDirEnum string
 
 const (
-	TextareaDirEnumAuto TextareaDirEnum = "auto"
 	TextareaDirEnumLtr  TextareaDirEnum = "ltr"
 	TextareaDirEnumRtl  TextareaDirEnum = "rtl"
+	TextareaDirEnumAuto TextareaDirEnum = "auto"
 )
 
 type TextareaDraggableEnum string
@@ -110,13 +99,13 @@ const (
 type TextareaEnterkeyhintEnum string
 
 const (
-	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
-	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
 	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
 	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
 	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
 	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
 	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
+	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
+	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
 )
 
 type TextareaHiddenEnum string
@@ -151,8 +140,8 @@ const (
 type TextareaTranslateEnum string
 
 const (
-	TextareaTranslateEnumYes   TextareaTranslateEnum = "yes"
 	TextareaTranslateEnumNo    TextareaTranslateEnum = "no"
+	TextareaTranslateEnumYes   TextareaTranslateEnum = "yes"
 	TextareaTranslateEnumEmpty TextareaTranslateEnum = ""
 )
 
@@ -424,13 +413,11 @@ func (e *TextareaElement) Writingsuggestions(a TextareaWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TextareaElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<textarea")); err != nil {
+	if _, err := w.Write([]byte("<textarea")); err != nil {
 		return err
 	}
 
@@ -460,17 +447,16 @@ func (e *TextareaElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</textarea>\n")); err != nil {
+	if _, err := w.Write([]byte("</textarea>")); err != nil {
 		return err
 	}
 

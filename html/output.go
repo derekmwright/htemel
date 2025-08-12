@@ -46,17 +46,6 @@ func OutputTernary(condition bool, true htemel.Node, false htemel.Node) *OutputE
 	return Output(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *OutputElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *OutputElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type OutputAutocapitalizeEnum string
 
 const (
@@ -96,8 +85,8 @@ const (
 type OutputDraggableEnum string
 
 const (
-	OutputDraggableEnumFalse OutputDraggableEnum = "false"
 	OutputDraggableEnumTrue  OutputDraggableEnum = "true"
+	OutputDraggableEnumFalse OutputDraggableEnum = "false"
 )
 
 type OutputEnterkeyhintEnum string
@@ -115,15 +104,14 @@ const (
 type OutputHiddenEnum string
 
 const (
-	OutputHiddenEnumUntilFound OutputHiddenEnum = "until-found"
 	OutputHiddenEnumHidden     OutputHiddenEnum = "hidden"
+	OutputHiddenEnumUntilFound OutputHiddenEnum = "until-found"
 	OutputHiddenEnumEmpty      OutputHiddenEnum = ""
 )
 
 type OutputInputmodeEnum string
 
 const (
-	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
 	OutputInputmodeEnumNone    OutputInputmodeEnum = "none"
 	OutputInputmodeEnumNumeric OutputInputmodeEnum = "numeric"
 	OutputInputmodeEnumSearch  OutputInputmodeEnum = "search"
@@ -131,6 +119,7 @@ const (
 	OutputInputmodeEnumText    OutputInputmodeEnum = "text"
 	OutputInputmodeEnumUrl     OutputInputmodeEnum = "url"
 	OutputInputmodeEnumDecimal OutputInputmodeEnum = "decimal"
+	OutputInputmodeEnumEmail   OutputInputmodeEnum = "email"
 )
 
 type OutputSpellcheckEnum string
@@ -144,16 +133,16 @@ const (
 type OutputTranslateEnum string
 
 const (
-	OutputTranslateEnumYes   OutputTranslateEnum = "yes"
 	OutputTranslateEnumNo    OutputTranslateEnum = "no"
+	OutputTranslateEnumYes   OutputTranslateEnum = "yes"
 	OutputTranslateEnumEmpty OutputTranslateEnum = ""
 )
 
 type OutputWritingsuggestionsEnum string
 
 const (
-	OutputWritingsuggestionsEnumTrue  OutputWritingsuggestionsEnum = "true"
 	OutputWritingsuggestionsEnumFalse OutputWritingsuggestionsEnum = "false"
+	OutputWritingsuggestionsEnumTrue  OutputWritingsuggestionsEnum = "true"
 	OutputWritingsuggestionsEnumEmpty OutputWritingsuggestionsEnum = ""
 )
 
@@ -357,13 +346,11 @@ func (e *OutputElement) Writingsuggestions(a OutputWritingsuggestionsEnum) *Outp
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *OutputElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<output")); err != nil {
+	if _, err := w.Write([]byte("<output")); err != nil {
 		return err
 	}
 
@@ -393,17 +380,16 @@ func (e *OutputElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</output>\n")); err != nil {
+	if _, err := w.Write([]byte("</output>")); err != nil {
 		return err
 	}
 

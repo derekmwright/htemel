@@ -46,26 +46,15 @@ func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderE
 	return Header(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *HeaderElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *HeaderElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type HeaderAutocapitalizeEnum string
 
 const (
-	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
 	HeaderAutocapitalizeEnumNone       HeaderAutocapitalizeEnum = "none"
 	HeaderAutocapitalizeEnumOff        HeaderAutocapitalizeEnum = "off"
 	HeaderAutocapitalizeEnumOn         HeaderAutocapitalizeEnum = "on"
 	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
 	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
+	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
 )
 
 type HeaderAutocorrectEnum string
@@ -79,18 +68,18 @@ const (
 type HeaderContenteditableEnum string
 
 const (
+	HeaderContenteditableEnumFalse         HeaderContenteditableEnum = "false"
 	HeaderContenteditableEnumPlaintextOnly HeaderContenteditableEnum = "plaintext-only"
 	HeaderContenteditableEnumTrue          HeaderContenteditableEnum = "true"
-	HeaderContenteditableEnumFalse         HeaderContenteditableEnum = "false"
 	HeaderContenteditableEnumEmpty         HeaderContenteditableEnum = ""
 )
 
 type HeaderDirEnum string
 
 const (
+	HeaderDirEnumRtl  HeaderDirEnum = "rtl"
 	HeaderDirEnumAuto HeaderDirEnum = "auto"
 	HeaderDirEnumLtr  HeaderDirEnum = "ltr"
-	HeaderDirEnumRtl  HeaderDirEnum = "rtl"
 )
 
 type HeaderDraggableEnum string
@@ -103,13 +92,13 @@ const (
 type HeaderEnterkeyhintEnum string
 
 const (
+	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
 	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
 	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
 	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
 	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
 	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
-	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
 )
 
 type HeaderHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type HeaderInputmodeEnum string
 
 const (
-	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
-	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 	HeaderInputmodeEnumUrl     HeaderInputmodeEnum = "url"
 	HeaderInputmodeEnumDecimal HeaderInputmodeEnum = "decimal"
 	HeaderInputmodeEnumEmail   HeaderInputmodeEnum = "email"
 	HeaderInputmodeEnumNone    HeaderInputmodeEnum = "none"
 	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
 	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
+	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
+	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 )
 
 type HeaderSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type HeaderWritingsuggestionsEnum string
 
 const (
-	HeaderWritingsuggestionsEnumTrue  HeaderWritingsuggestionsEnum = "true"
 	HeaderWritingsuggestionsEnumFalse HeaderWritingsuggestionsEnum = "false"
+	HeaderWritingsuggestionsEnumTrue  HeaderWritingsuggestionsEnum = "true"
 	HeaderWritingsuggestionsEnumEmpty HeaderWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *HeaderElement) Writingsuggestions(a HeaderWritingsuggestionsEnum) *Head
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HeaderElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<header")); err != nil {
+	if _, err := w.Write([]byte("<header")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *HeaderElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</header>\n")); err != nil {
+	if _, err := w.Write([]byte("</header>")); err != nil {
 		return err
 	}
 

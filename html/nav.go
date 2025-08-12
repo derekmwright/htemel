@@ -46,42 +46,31 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 	return Nav(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *NavElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *NavElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type NavAutocapitalizeEnum string
 
 const (
-	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
-	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
-	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
 	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
 	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
+	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
+	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
+	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
 )
 
 type NavAutocorrectEnum string
 
 const (
-	NavAutocorrectEnumOff   NavAutocorrectEnum = "off"
 	NavAutocorrectEnumOn    NavAutocorrectEnum = "on"
+	NavAutocorrectEnumOff   NavAutocorrectEnum = "off"
 	NavAutocorrectEnumEmpty NavAutocorrectEnum = ""
 )
 
 type NavContenteditableEnum string
 
 const (
+	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
 	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
-	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
 	NavContenteditableEnumEmpty         NavContenteditableEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
-	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
 	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
 	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
 	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
 	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
+	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
 )
 
 type NavHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type NavInputmodeEnum string
 
 const (
+	NavInputmodeEnumText    NavInputmodeEnum = "text"
+	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
 	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
 	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
 	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
 	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
-	NavInputmodeEnumText    NavInputmodeEnum = "text"
-	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 )
 
 type NavSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *NavElement) Writingsuggestions(a NavWritingsuggestionsEnum) *NavElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *NavElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<nav")); err != nil {
+	if _, err := w.Write([]byte("<nav")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *NavElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</nav>\n")); err != nil {
+	if _, err := w.Write([]byte("</nav>")); err != nil {
 		return err
 	}
 

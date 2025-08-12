@@ -46,26 +46,15 @@ func H3Ternary(condition bool, true htemel.Node, false htemel.Node) *H3Element {
 	return H3(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *H3Element) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *H3Element) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type H3AutocapitalizeEnum string
 
 const (
-	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
 	H3AutocapitalizeEnumNone       H3AutocapitalizeEnum = "none"
 	H3AutocapitalizeEnumOff        H3AutocapitalizeEnum = "off"
 	H3AutocapitalizeEnumOn         H3AutocapitalizeEnum = "on"
 	H3AutocapitalizeEnumSentences  H3AutocapitalizeEnum = "sentences"
 	H3AutocapitalizeEnumWords      H3AutocapitalizeEnum = "words"
+	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
 )
 
 type H3AutocorrectEnum string
@@ -103,13 +92,13 @@ const (
 type H3EnterkeyhintEnum string
 
 const (
-	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
-	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
 	H3EnterkeyhintEnumSend     H3EnterkeyhintEnum = "send"
 	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
 	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
 	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
 	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
+	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
+	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
 )
 
 type H3HiddenEnum string
@@ -123,7 +112,6 @@ const (
 type H3InputmodeEnum string
 
 const (
-	H3InputmodeEnumText    H3InputmodeEnum = "text"
 	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
 	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
 	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
@@ -131,6 +119,7 @@ const (
 	H3InputmodeEnumNumeric H3InputmodeEnum = "numeric"
 	H3InputmodeEnumSearch  H3InputmodeEnum = "search"
 	H3InputmodeEnumTel     H3InputmodeEnum = "tel"
+	H3InputmodeEnumText    H3InputmodeEnum = "text"
 )
 
 type H3SpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *H3Element) Writingsuggestions(a H3WritingsuggestionsEnum) *H3Element {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *H3Element) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<h3")); err != nil {
+	if _, err := w.Write([]byte("<h3")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *H3Element) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</h3>\n")); err != nil {
+	if _, err := w.Write([]byte("</h3>")); err != nil {
 		return err
 	}
 

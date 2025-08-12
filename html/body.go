@@ -46,17 +46,6 @@ func BodyTernary(condition bool, true htemel.Node, false htemel.Node) *BodyEleme
 	return Body(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *BodyElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *BodyElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type BodyAutocapitalizeEnum string
 
 const (
@@ -103,13 +92,13 @@ const (
 type BodyEnterkeyhintEnum string
 
 const (
+	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
+	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
+	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
 	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
 	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
 	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
 	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
-	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
-	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
-	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
 )
 
 type BodyHiddenEnum string
@@ -123,6 +112,7 @@ const (
 type BodyInputmodeEnum string
 
 const (
+	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
 	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
 	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
 	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
@@ -130,22 +120,21 @@ const (
 	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
 	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
 	BodyInputmodeEnumUrl     BodyInputmodeEnum = "url"
-	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
 )
 
 type BodySpellcheckEnum string
 
 const (
-	BodySpellcheckEnumTrue  BodySpellcheckEnum = "true"
 	BodySpellcheckEnumFalse BodySpellcheckEnum = "false"
+	BodySpellcheckEnumTrue  BodySpellcheckEnum = "true"
 	BodySpellcheckEnumEmpty BodySpellcheckEnum = ""
 )
 
 type BodyTranslateEnum string
 
 const (
-	BodyTranslateEnumNo    BodyTranslateEnum = "no"
 	BodyTranslateEnumYes   BodyTranslateEnum = "yes"
+	BodyTranslateEnumNo    BodyTranslateEnum = "no"
 	BodyTranslateEnumEmpty BodyTranslateEnum = ""
 )
 
@@ -447,13 +436,11 @@ func (e *BodyElement) Writingsuggestions(a BodyWritingsuggestionsEnum) *BodyElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BodyElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<body")); err != nil {
+	if _, err := w.Write([]byte("<body")); err != nil {
 		return err
 	}
 
@@ -483,17 +470,16 @@ func (e *BodyElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</body>\n")); err != nil {
+	if _, err := w.Write([]byte("</body>")); err != nil {
 		return err
 	}
 

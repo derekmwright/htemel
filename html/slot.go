@@ -46,33 +46,22 @@ func SlotTernary(condition bool, true htemel.Node, false htemel.Node) *SlotEleme
 	return Slot(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *SlotElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *SlotElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type SlotAutocapitalizeEnum string
 
 const (
-	SlotAutocapitalizeEnumSentences  SlotAutocapitalizeEnum = "sentences"
-	SlotAutocapitalizeEnumWords      SlotAutocapitalizeEnum = "words"
 	SlotAutocapitalizeEnumCharacters SlotAutocapitalizeEnum = "characters"
 	SlotAutocapitalizeEnumNone       SlotAutocapitalizeEnum = "none"
 	SlotAutocapitalizeEnumOff        SlotAutocapitalizeEnum = "off"
 	SlotAutocapitalizeEnumOn         SlotAutocapitalizeEnum = "on"
+	SlotAutocapitalizeEnumSentences  SlotAutocapitalizeEnum = "sentences"
+	SlotAutocapitalizeEnumWords      SlotAutocapitalizeEnum = "words"
 )
 
 type SlotAutocorrectEnum string
 
 const (
-	SlotAutocorrectEnumOn    SlotAutocorrectEnum = "on"
 	SlotAutocorrectEnumOff   SlotAutocorrectEnum = "off"
+	SlotAutocorrectEnumOn    SlotAutocorrectEnum = "on"
 	SlotAutocorrectEnumEmpty SlotAutocorrectEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type SlotEnterkeyhintEnum string
 
 const (
+	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
 	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 	SlotEnterkeyhintEnumDone     SlotEnterkeyhintEnum = "done"
 	SlotEnterkeyhintEnumEnter    SlotEnterkeyhintEnum = "enter"
 	SlotEnterkeyhintEnumGo       SlotEnterkeyhintEnum = "go"
 	SlotEnterkeyhintEnumNext     SlotEnterkeyhintEnum = "next"
 	SlotEnterkeyhintEnumPrevious SlotEnterkeyhintEnum = "previous"
-	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
 )
 
 type SlotHiddenEnum string
@@ -345,13 +334,11 @@ func (e *SlotElement) Writingsuggestions(a SlotWritingsuggestionsEnum) *SlotElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SlotElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<slot")); err != nil {
+	if _, err := w.Write([]byte("<slot")); err != nil {
 		return err
 	}
 
@@ -381,17 +368,16 @@ func (e *SlotElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</slot>\n")); err != nil {
+	if _, err := w.Write([]byte("</slot>")); err != nil {
 		return err
 	}
 

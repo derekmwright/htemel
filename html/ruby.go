@@ -46,26 +46,15 @@ func RubyTernary(condition bool, true htemel.Node, false htemel.Node) *RubyEleme
 	return Ruby(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *RubyElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *RubyElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type RubyAutocapitalizeEnum string
 
 const (
+	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
 	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
 	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 	RubyAutocapitalizeEnumOff        RubyAutocapitalizeEnum = "off"
 	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
 	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
-	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
 )
 
 type RubyAutocorrectEnum string
@@ -88,9 +77,9 @@ const (
 type RubyDirEnum string
 
 const (
-	RubyDirEnumAuto RubyDirEnum = "auto"
 	RubyDirEnumLtr  RubyDirEnum = "ltr"
 	RubyDirEnumRtl  RubyDirEnum = "rtl"
+	RubyDirEnumAuto RubyDirEnum = "auto"
 )
 
 type RubyDraggableEnum string
@@ -103,20 +92,20 @@ const (
 type RubyEnterkeyhintEnum string
 
 const (
-	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
 	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
 	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
+	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 )
 
 type RubyHiddenEnum string
 
 const (
-	RubyHiddenEnumUntilFound RubyHiddenEnum = "until-found"
 	RubyHiddenEnumHidden     RubyHiddenEnum = "hidden"
+	RubyHiddenEnumUntilFound RubyHiddenEnum = "until-found"
 	RubyHiddenEnumEmpty      RubyHiddenEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *RubyElement) Writingsuggestions(a RubyWritingsuggestionsEnum) *RubyElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *RubyElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<ruby")); err != nil {
+	if _, err := w.Write([]byte("<ruby")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *RubyElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</ruby>\n")); err != nil {
+	if _, err := w.Write([]byte("</ruby>")); err != nil {
 		return err
 	}
 

@@ -46,26 +46,15 @@ func SectionTernary(condition bool, true htemel.Node, false htemel.Node) *Sectio
 	return Section(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *SectionElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *SectionElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type SectionAutocapitalizeEnum string
 
 const (
-	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
-	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
 	SectionAutocapitalizeEnumWords      SectionAutocapitalizeEnum = "words"
 	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
 	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
 	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
+	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
+	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
 )
 
 type SectionAutocorrectEnum string
@@ -79,37 +68,37 @@ const (
 type SectionContenteditableEnum string
 
 const (
-	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
 	SectionContenteditableEnumFalse         SectionContenteditableEnum = "false"
 	SectionContenteditableEnumPlaintextOnly SectionContenteditableEnum = "plaintext-only"
+	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
 	SectionContenteditableEnumEmpty         SectionContenteditableEnum = ""
 )
 
 type SectionDirEnum string
 
 const (
+	SectionDirEnumRtl  SectionDirEnum = "rtl"
 	SectionDirEnumAuto SectionDirEnum = "auto"
 	SectionDirEnumLtr  SectionDirEnum = "ltr"
-	SectionDirEnumRtl  SectionDirEnum = "rtl"
 )
 
 type SectionDraggableEnum string
 
 const (
-	SectionDraggableEnumFalse SectionDraggableEnum = "false"
 	SectionDraggableEnumTrue  SectionDraggableEnum = "true"
+	SectionDraggableEnumFalse SectionDraggableEnum = "false"
 )
 
 type SectionEnterkeyhintEnum string
 
 const (
-	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
-	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
 	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
 	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
 	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
 	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
 	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
+	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
+	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
 )
 
 type SectionHiddenEnum string
@@ -123,6 +112,7 @@ const (
 type SectionInputmodeEnum string
 
 const (
+	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
 	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
 	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
 	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
@@ -130,7 +120,6 @@ const (
 	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
 	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
 	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
-	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
 )
 
 type SectionSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *SectionElement) Writingsuggestions(a SectionWritingsuggestionsEnum) *Se
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SectionElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<section")); err != nil {
+	if _, err := w.Write([]byte("<section")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *SectionElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</section>\n")); err != nil {
+	if _, err := w.Write([]byte("</section>")); err != nil {
 		return err
 	}
 

@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,26 +37,15 @@ func SourceIf(condition bool) *SourceElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *SourceElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *SourceElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type SourceAutocapitalizeEnum string
 
 const (
+	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
+	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
 	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
 	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
 	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
 	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
-	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
-	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
 )
 
 type SourceAutocorrectEnum string
@@ -71,18 +59,18 @@ const (
 type SourceContenteditableEnum string
 
 const (
-	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
 	SourceContenteditableEnumPlaintextOnly SourceContenteditableEnum = "plaintext-only"
 	SourceContenteditableEnumTrue          SourceContenteditableEnum = "true"
+	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
 	SourceContenteditableEnumEmpty         SourceContenteditableEnum = ""
 )
 
 type SourceDirEnum string
 
 const (
-	SourceDirEnumAuto SourceDirEnum = "auto"
 	SourceDirEnumLtr  SourceDirEnum = "ltr"
 	SourceDirEnumRtl  SourceDirEnum = "rtl"
+	SourceDirEnumAuto SourceDirEnum = "auto"
 )
 
 type SourceDraggableEnum string
@@ -95,13 +83,13 @@ const (
 type SourceEnterkeyhintEnum string
 
 const (
+	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
+	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
+	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
 	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
 	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
 	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
-	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
-	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
-	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
 )
 
 type SourceHiddenEnum string
@@ -115,14 +103,14 @@ const (
 type SourceInputmodeEnum string
 
 const (
-	SourceInputmodeEnumDecimal SourceInputmodeEnum = "decimal"
-	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
-	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
-	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
 	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
 	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
 	SourceInputmodeEnumText    SourceInputmodeEnum = "text"
 	SourceInputmodeEnumUrl     SourceInputmodeEnum = "url"
+	SourceInputmodeEnumDecimal SourceInputmodeEnum = "decimal"
+	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
+	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
+	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
 )
 
 type SourceSpellcheckEnum string
@@ -144,8 +132,8 @@ const (
 type SourceWritingsuggestionsEnum string
 
 const (
-	SourceWritingsuggestionsEnumFalse SourceWritingsuggestionsEnum = "false"
 	SourceWritingsuggestionsEnumTrue  SourceWritingsuggestionsEnum = "true"
+	SourceWritingsuggestionsEnumFalse SourceWritingsuggestionsEnum = "false"
 	SourceWritingsuggestionsEnumEmpty SourceWritingsuggestionsEnum = ""
 )
 
@@ -373,13 +361,11 @@ func (e *SourceElement) Writingsuggestions(a SourceWritingsuggestionsEnum) *Sour
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SourceElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<source")); err != nil {
+	if _, err := w.Write([]byte("<source")); err != nil {
 		return err
 	}
 
@@ -409,7 +395,7 @@ func (e *SourceElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 

@@ -46,17 +46,6 @@ func DivTernary(condition bool, true htemel.Node, false htemel.Node) *DivElement
 	return Div(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *DivElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *DivElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type DivAutocapitalizeEnum string
 
 const (
@@ -88,9 +77,9 @@ const (
 type DivDirEnum string
 
 const (
-	DivDirEnumAuto DivDirEnum = "auto"
 	DivDirEnumLtr  DivDirEnum = "ltr"
 	DivDirEnumRtl  DivDirEnum = "rtl"
+	DivDirEnumAuto DivDirEnum = "auto"
 )
 
 type DivDraggableEnum string
@@ -103,13 +92,13 @@ const (
 type DivEnterkeyhintEnum string
 
 const (
+	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
+	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
 	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
 	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
 	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
 	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 	DivEnterkeyhintEnumGo       DivEnterkeyhintEnum = "go"
-	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
-	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
 )
 
 type DivHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type DivInputmodeEnum string
 
 const (
-	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
-	DivInputmodeEnumText    DivInputmodeEnum = "text"
 	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
 	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
 	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
 	DivInputmodeEnumNone    DivInputmodeEnum = "none"
 	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
 	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
+	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
+	DivInputmodeEnumText    DivInputmodeEnum = "text"
 )
 
 type DivSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *DivElement) Writingsuggestions(a DivWritingsuggestionsEnum) *DivElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DivElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<div")); err != nil {
+	if _, err := w.Write([]byte("<div")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *DivElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</div>\n")); err != nil {
+	if _, err := w.Write([]byte("</div>")); err != nil {
 		return err
 	}
 

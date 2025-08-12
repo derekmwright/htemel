@@ -46,26 +46,15 @@ func ColgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Colgr
 	return Colgroup(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *ColgroupElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *ColgroupElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type ColgroupAutocapitalizeEnum string
 
 const (
-	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
-	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
-	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
 	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 	ColgroupAutocapitalizeEnumOff        ColgroupAutocapitalizeEnum = "off"
+	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
+	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
+	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
 )
 
 type ColgroupAutocorrectEnum string
@@ -79,37 +68,37 @@ const (
 type ColgroupContenteditableEnum string
 
 const (
-	ColgroupContenteditableEnumTrue          ColgroupContenteditableEnum = "true"
 	ColgroupContenteditableEnumFalse         ColgroupContenteditableEnum = "false"
 	ColgroupContenteditableEnumPlaintextOnly ColgroupContenteditableEnum = "plaintext-only"
+	ColgroupContenteditableEnumTrue          ColgroupContenteditableEnum = "true"
 	ColgroupContenteditableEnumEmpty         ColgroupContenteditableEnum = ""
 )
 
 type ColgroupDirEnum string
 
 const (
+	ColgroupDirEnumRtl  ColgroupDirEnum = "rtl"
 	ColgroupDirEnumAuto ColgroupDirEnum = "auto"
 	ColgroupDirEnumLtr  ColgroupDirEnum = "ltr"
-	ColgroupDirEnumRtl  ColgroupDirEnum = "rtl"
 )
 
 type ColgroupDraggableEnum string
 
 const (
-	ColgroupDraggableEnumFalse ColgroupDraggableEnum = "false"
 	ColgroupDraggableEnumTrue  ColgroupDraggableEnum = "true"
+	ColgroupDraggableEnumFalse ColgroupDraggableEnum = "false"
 )
 
 type ColgroupEnterkeyhintEnum string
 
 const (
-	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
 	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
 	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
 	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
 	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
 	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
 	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
+	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
 )
 
 type ColgroupHiddenEnum string
@@ -123,6 +112,7 @@ const (
 type ColgroupInputmodeEnum string
 
 const (
+	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
 	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
 	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
 	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
@@ -130,7 +120,6 @@ const (
 	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
 	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
 	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
-	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
 )
 
 type ColgroupSpellcheckEnum string
@@ -345,13 +334,11 @@ func (e *ColgroupElement) Writingsuggestions(a ColgroupWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ColgroupElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<colgroup")); err != nil {
+	if _, err := w.Write([]byte("<colgroup")); err != nil {
 		return err
 	}
 
@@ -381,17 +368,16 @@ func (e *ColgroupElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</colgroup>\n")); err != nil {
+	if _, err := w.Write([]byte("</colgroup>")); err != nil {
 		return err
 	}
 

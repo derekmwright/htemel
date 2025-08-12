@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,51 +37,40 @@ func ColIf(condition bool) *ColElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *ColElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *ColElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type ColAutocapitalizeEnum string
 
 const (
-	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
-	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
-	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
 	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
 	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
+	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
+	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
+	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
 )
 
 type ColAutocorrectEnum string
 
 const (
-	ColAutocorrectEnumOn    ColAutocorrectEnum = "on"
 	ColAutocorrectEnumOff   ColAutocorrectEnum = "off"
+	ColAutocorrectEnumOn    ColAutocorrectEnum = "on"
 	ColAutocorrectEnumEmpty ColAutocorrectEnum = ""
 )
 
 type ColContenteditableEnum string
 
 const (
-	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
 	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
 	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
+	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
 	ColContenteditableEnumEmpty         ColContenteditableEnum = ""
 )
 
 type ColDirEnum string
 
 const (
-	ColDirEnumAuto ColDirEnum = "auto"
 	ColDirEnumLtr  ColDirEnum = "ltr"
 	ColDirEnumRtl  ColDirEnum = "rtl"
+	ColDirEnumAuto ColDirEnum = "auto"
 )
 
 type ColDraggableEnum string
@@ -95,26 +83,27 @@ const (
 type ColEnterkeyhintEnum string
 
 const (
-	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
-	ColEnterkeyhintEnumSend     ColEnterkeyhintEnum = "send"
-	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
 	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
 	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
 	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
 	ColEnterkeyhintEnumPrevious ColEnterkeyhintEnum = "previous"
+	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
+	ColEnterkeyhintEnumSend     ColEnterkeyhintEnum = "send"
+	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
 )
 
 type ColHiddenEnum string
 
 const (
-	ColHiddenEnumUntilFound ColHiddenEnum = "until-found"
 	ColHiddenEnumHidden     ColHiddenEnum = "hidden"
+	ColHiddenEnumUntilFound ColHiddenEnum = "until-found"
 	ColHiddenEnumEmpty      ColHiddenEnum = ""
 )
 
 type ColInputmodeEnum string
 
 const (
+	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 	ColInputmodeEnumText    ColInputmodeEnum = "text"
 	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
 	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
@@ -122,7 +111,6 @@ const (
 	ColInputmodeEnumNone    ColInputmodeEnum = "none"
 	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
 	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
-	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 )
 
 type ColSpellcheckEnum string
@@ -337,13 +325,11 @@ func (e *ColElement) Writingsuggestions(a ColWritingsuggestionsEnum) *ColElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ColElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<col")); err != nil {
+	if _, err := w.Write([]byte("<col")); err != nil {
 		return err
 	}
 
@@ -373,7 +359,7 @@ func (e *ColElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 

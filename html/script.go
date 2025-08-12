@@ -46,17 +46,6 @@ func ScriptTernary(condition bool, true htemel.Node, false htemel.Node) *ScriptE
 	return Script(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *ScriptElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *ScriptElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type ScriptBlockingEnum string
 
 const (
@@ -74,20 +63,20 @@ const (
 type ScriptFetchpriorityEnum string
 
 const (
-	ScriptFetchpriorityEnumLow  ScriptFetchpriorityEnum = "low"
 	ScriptFetchpriorityEnumAuto ScriptFetchpriorityEnum = "auto"
 	ScriptFetchpriorityEnumHigh ScriptFetchpriorityEnum = "high"
+	ScriptFetchpriorityEnumLow  ScriptFetchpriorityEnum = "low"
 )
 
 type ScriptAutocapitalizeEnum string
 
 const (
-	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
-	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
-	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
 	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
 	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
+	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
+	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
+	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 )
 
 type ScriptAutocorrectEnum string
@@ -101,9 +90,9 @@ const (
 type ScriptContenteditableEnum string
 
 const (
+	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
 	ScriptContenteditableEnumPlaintextOnly ScriptContenteditableEnum = "plaintext-only"
 	ScriptContenteditableEnumTrue          ScriptContenteditableEnum = "true"
-	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
 	ScriptContenteditableEnumEmpty         ScriptContenteditableEnum = ""
 )
 
@@ -125,13 +114,13 @@ const (
 type ScriptEnterkeyhintEnum string
 
 const (
-	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
-	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
-	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
 	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
 	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 	ScriptEnterkeyhintEnumNext     ScriptEnterkeyhintEnum = "next"
+	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
+	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
+	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
 )
 
 type ScriptHiddenEnum string
@@ -145,7 +134,6 @@ const (
 type ScriptInputmodeEnum string
 
 const (
-	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
 	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
 	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
@@ -153,6 +141,7 @@ const (
 	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
 	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
+	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
 )
 
 type ScriptSpellcheckEnum string
@@ -166,16 +155,16 @@ const (
 type ScriptTranslateEnum string
 
 const (
-	ScriptTranslateEnumNo    ScriptTranslateEnum = "no"
 	ScriptTranslateEnumYes   ScriptTranslateEnum = "yes"
+	ScriptTranslateEnumNo    ScriptTranslateEnum = "no"
 	ScriptTranslateEnumEmpty ScriptTranslateEnum = ""
 )
 
 type ScriptWritingsuggestionsEnum string
 
 const (
-	ScriptWritingsuggestionsEnumTrue  ScriptWritingsuggestionsEnum = "true"
 	ScriptWritingsuggestionsEnumFalse ScriptWritingsuggestionsEnum = "false"
+	ScriptWritingsuggestionsEnumTrue  ScriptWritingsuggestionsEnum = "true"
 	ScriptWritingsuggestionsEnumEmpty ScriptWritingsuggestionsEnum = ""
 )
 
@@ -421,13 +410,11 @@ func (e *ScriptElement) Writingsuggestions(a ScriptWritingsuggestionsEnum) *Scri
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ScriptElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<script")); err != nil {
+	if _, err := w.Write([]byte("<script")); err != nil {
 		return err
 	}
 
@@ -457,17 +444,16 @@ func (e *ScriptElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</script>\n")); err != nil {
+	if _, err := w.Write([]byte("</script>")); err != nil {
 		return err
 	}
 

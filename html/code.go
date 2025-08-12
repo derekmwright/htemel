@@ -46,26 +46,15 @@ func CodeTernary(condition bool, true htemel.Node, false htemel.Node) *CodeEleme
 	return Code(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *CodeElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *CodeElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type CodeAutocapitalizeEnum string
 
 const (
-	CodeAutocapitalizeEnumSentences  CodeAutocapitalizeEnum = "sentences"
-	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
 	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
 	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
 	CodeAutocapitalizeEnumOff        CodeAutocapitalizeEnum = "off"
 	CodeAutocapitalizeEnumOn         CodeAutocapitalizeEnum = "on"
+	CodeAutocapitalizeEnumSentences  CodeAutocapitalizeEnum = "sentences"
+	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
 )
 
 type CodeAutocorrectEnum string
@@ -79,9 +68,9 @@ const (
 type CodeContenteditableEnum string
 
 const (
-	CodeContenteditableEnumFalse         CodeContenteditableEnum = "false"
 	CodeContenteditableEnumPlaintextOnly CodeContenteditableEnum = "plaintext-only"
 	CodeContenteditableEnumTrue          CodeContenteditableEnum = "true"
+	CodeContenteditableEnumFalse         CodeContenteditableEnum = "false"
 	CodeContenteditableEnumEmpty         CodeContenteditableEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type CodeEnterkeyhintEnum string
 
 const (
-	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
 	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
 	CodeEnterkeyhintEnumEnter    CodeEnterkeyhintEnum = "enter"
 	CodeEnterkeyhintEnumGo       CodeEnterkeyhintEnum = "go"
 	CodeEnterkeyhintEnumNext     CodeEnterkeyhintEnum = "next"
 	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
 	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
+	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
 )
 
 type CodeHiddenEnum string
@@ -123,7 +112,6 @@ const (
 type CodeInputmodeEnum string
 
 const (
-	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
 	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
@@ -131,6 +119,7 @@ const (
 	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
 	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
 	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
+	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
 )
 
 type CodeSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *CodeElement) Writingsuggestions(a CodeWritingsuggestionsEnum) *CodeElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *CodeElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<code")); err != nil {
+	if _, err := w.Write([]byte("<code")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *CodeElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</code>\n")); err != nil {
+	if _, err := w.Write([]byte("</code>")); err != nil {
 		return err
 	}
 

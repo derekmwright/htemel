@@ -46,26 +46,15 @@ func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
 	return Li(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *LiElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *LiElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type LiAutocapitalizeEnum string
 
 const (
+	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
+	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
 	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
 	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
-	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
-	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 )
 
 type LiAutocorrectEnum string
@@ -79,9 +68,9 @@ const (
 type LiContenteditableEnum string
 
 const (
+	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
 	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
-	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumEmpty         LiContenteditableEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type LiEnterkeyhintEnum string
 
 const (
+	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
+	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
+	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
 	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
 	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
 	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
-	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
-	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
-	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
 )
 
 type LiHiddenEnum string
@@ -123,7 +112,6 @@ const (
 type LiInputmodeEnum string
 
 const (
-	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 	LiInputmodeEnumNone    LiInputmodeEnum = "none"
 	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
 	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
@@ -131,6 +119,7 @@ const (
 	LiInputmodeEnumText    LiInputmodeEnum = "text"
 	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
 	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
+	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 )
 
 type LiSpellcheckEnum string
@@ -345,13 +334,11 @@ func (e *LiElement) Writingsuggestions(a LiWritingsuggestionsEnum) *LiElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LiElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<li")); err != nil {
+	if _, err := w.Write([]byte("<li")); err != nil {
 		return err
 	}
 
@@ -381,17 +368,16 @@ func (e *LiElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</li>\n")); err != nil {
+	if _, err := w.Write([]byte("</li>")); err != nil {
 		return err
 	}
 

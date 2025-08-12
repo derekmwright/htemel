@@ -46,17 +46,6 @@ func QTernary(condition bool, true htemel.Node, false htemel.Node) *QElement {
 	return Q(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *QElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *QElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type QAutocapitalizeEnum string
 
 const (
@@ -71,8 +60,8 @@ const (
 type QAutocorrectEnum string
 
 const (
-	QAutocorrectEnumOn    QAutocorrectEnum = "on"
 	QAutocorrectEnumOff   QAutocorrectEnum = "off"
+	QAutocorrectEnumOn    QAutocorrectEnum = "on"
 	QAutocorrectEnumEmpty QAutocorrectEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type QEnterkeyhintEnum string
 
 const (
+	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
 	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
 	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
 	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
 	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
-	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 )
 
 type QHiddenEnum string
@@ -123,7 +112,6 @@ const (
 type QInputmodeEnum string
 
 const (
-	QInputmodeEnumEmail   QInputmodeEnum = "email"
 	QInputmodeEnumNone    QInputmodeEnum = "none"
 	QInputmodeEnumNumeric QInputmodeEnum = "numeric"
 	QInputmodeEnumSearch  QInputmodeEnum = "search"
@@ -131,6 +119,7 @@ const (
 	QInputmodeEnumText    QInputmodeEnum = "text"
 	QInputmodeEnumUrl     QInputmodeEnum = "url"
 	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
+	QInputmodeEnumEmail   QInputmodeEnum = "email"
 )
 
 type QSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type QWritingsuggestionsEnum string
 
 const (
-	QWritingsuggestionsEnumFalse QWritingsuggestionsEnum = "false"
 	QWritingsuggestionsEnumTrue  QWritingsuggestionsEnum = "true"
+	QWritingsuggestionsEnumFalse QWritingsuggestionsEnum = "false"
 	QWritingsuggestionsEnumEmpty QWritingsuggestionsEnum = ""
 )
 
@@ -345,13 +334,11 @@ func (e *QElement) Writingsuggestions(a QWritingsuggestionsEnum) *QElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *QElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<q")); err != nil {
+	if _, err := w.Write([]byte("<q")); err != nil {
 		return err
 	}
 
@@ -381,17 +368,16 @@ func (e *QElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</q>\n")); err != nil {
+	if _, err := w.Write([]byte("</q>")); err != nil {
 		return err
 	}
 

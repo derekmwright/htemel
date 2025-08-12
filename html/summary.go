@@ -46,26 +46,15 @@ func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *Summar
 	return Summary(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *SummaryElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *SummaryElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type SummaryAutocapitalizeEnum string
 
 const (
+	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
+	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
 	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
-	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
-	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 )
 
 type SummaryAutocorrectEnum string
@@ -88,9 +77,9 @@ const (
 type SummaryDirEnum string
 
 const (
+	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
 	SummaryDirEnumAuto SummaryDirEnum = "auto"
 	SummaryDirEnumLtr  SummaryDirEnum = "ltr"
-	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
 )
 
 type SummaryDraggableEnum string
@@ -103,27 +92,26 @@ const (
 type SummaryEnterkeyhintEnum string
 
 const (
-	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
-	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
-	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
 	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
 	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
 	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
+	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
+	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
+	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 )
 
 type SummaryHiddenEnum string
 
 const (
-	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
 	SummaryHiddenEnumUntilFound SummaryHiddenEnum = "until-found"
+	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
 	SummaryHiddenEnumEmpty      SummaryHiddenEnum = ""
 )
 
 type SummaryInputmodeEnum string
 
 const (
-	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
 	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
 	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
@@ -131,13 +119,14 @@ const (
 	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
 	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
 	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
+	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
 )
 
 type SummarySpellcheckEnum string
 
 const (
-	SummarySpellcheckEnumFalse SummarySpellcheckEnum = "false"
 	SummarySpellcheckEnumTrue  SummarySpellcheckEnum = "true"
+	SummarySpellcheckEnumFalse SummarySpellcheckEnum = "false"
 	SummarySpellcheckEnumEmpty SummarySpellcheckEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *SummaryElement) Writingsuggestions(a SummaryWritingsuggestionsEnum) *Su
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SummaryElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<summary")); err != nil {
+	if _, err := w.Write([]byte("<summary")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *SummaryElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</summary>\n")); err != nil {
+	if _, err := w.Write([]byte("</summary>")); err != nil {
 		return err
 	}
 

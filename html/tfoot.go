@@ -46,26 +46,15 @@ func TfootTernary(condition bool, true htemel.Node, false htemel.Node) *TfootEle
 	return Tfoot(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *TfootElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *TfootElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type TfootAutocapitalizeEnum string
 
 const (
-	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
 	TfootAutocapitalizeEnumOn         TfootAutocapitalizeEnum = "on"
 	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
 	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
 	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
 	TfootAutocapitalizeEnumNone       TfootAutocapitalizeEnum = "none"
+	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
 )
 
 type TfootAutocorrectEnum string
@@ -79,9 +68,9 @@ const (
 type TfootContenteditableEnum string
 
 const (
+	TfootContenteditableEnumTrue          TfootContenteditableEnum = "true"
 	TfootContenteditableEnumFalse         TfootContenteditableEnum = "false"
 	TfootContenteditableEnumPlaintextOnly TfootContenteditableEnum = "plaintext-only"
-	TfootContenteditableEnumTrue          TfootContenteditableEnum = "true"
 	TfootContenteditableEnumEmpty         TfootContenteditableEnum = ""
 )
 
@@ -103,34 +92,34 @@ const (
 type TfootEnterkeyhintEnum string
 
 const (
+	TfootEnterkeyhintEnumPrevious TfootEnterkeyhintEnum = "previous"
+	TfootEnterkeyhintEnumSearch   TfootEnterkeyhintEnum = "search"
+	TfootEnterkeyhintEnumSend     TfootEnterkeyhintEnum = "send"
 	TfootEnterkeyhintEnumDone     TfootEnterkeyhintEnum = "done"
 	TfootEnterkeyhintEnumEnter    TfootEnterkeyhintEnum = "enter"
 	TfootEnterkeyhintEnumGo       TfootEnterkeyhintEnum = "go"
 	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
-	TfootEnterkeyhintEnumPrevious TfootEnterkeyhintEnum = "previous"
-	TfootEnterkeyhintEnumSearch   TfootEnterkeyhintEnum = "search"
-	TfootEnterkeyhintEnumSend     TfootEnterkeyhintEnum = "send"
 )
 
 type TfootHiddenEnum string
 
 const (
-	TfootHiddenEnumHidden     TfootHiddenEnum = "hidden"
 	TfootHiddenEnumUntilFound TfootHiddenEnum = "until-found"
+	TfootHiddenEnumHidden     TfootHiddenEnum = "hidden"
 	TfootHiddenEnumEmpty      TfootHiddenEnum = ""
 )
 
 type TfootInputmodeEnum string
 
 const (
+	TfootInputmodeEnumTel     TfootInputmodeEnum = "tel"
+	TfootInputmodeEnumText    TfootInputmodeEnum = "text"
+	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
 	TfootInputmodeEnumDecimal TfootInputmodeEnum = "decimal"
 	TfootInputmodeEnumEmail   TfootInputmodeEnum = "email"
 	TfootInputmodeEnumNone    TfootInputmodeEnum = "none"
 	TfootInputmodeEnumNumeric TfootInputmodeEnum = "numeric"
 	TfootInputmodeEnumSearch  TfootInputmodeEnum = "search"
-	TfootInputmodeEnumTel     TfootInputmodeEnum = "tel"
-	TfootInputmodeEnumText    TfootInputmodeEnum = "text"
-	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
 )
 
 type TfootSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type TfootWritingsuggestionsEnum string
 
 const (
-	TfootWritingsuggestionsEnumFalse TfootWritingsuggestionsEnum = "false"
 	TfootWritingsuggestionsEnumTrue  TfootWritingsuggestionsEnum = "true"
+	TfootWritingsuggestionsEnumFalse TfootWritingsuggestionsEnum = "false"
 	TfootWritingsuggestionsEnumEmpty TfootWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *TfootElement) Writingsuggestions(a TfootWritingsuggestionsEnum) *TfootE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TfootElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<tfoot")); err != nil {
+	if _, err := w.Write([]byte("<tfoot")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *TfootElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</tfoot>\n")); err != nil {
+	if _, err := w.Write([]byte("</tfoot>")); err != nil {
 		return err
 	}
 

@@ -46,26 +46,15 @@ func OptgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Optgr
 	return Optgroup(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *OptgroupElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *OptgroupElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type OptgroupAutocapitalizeEnum string
 
 const (
-	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
-	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
 	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
 	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
 	OptgroupAutocapitalizeEnumOff        OptgroupAutocapitalizeEnum = "off"
 	OptgroupAutocapitalizeEnumOn         OptgroupAutocapitalizeEnum = "on"
+	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
+	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
 )
 
 type OptgroupAutocorrectEnum string
@@ -88,28 +77,28 @@ const (
 type OptgroupDirEnum string
 
 const (
-	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
 	OptgroupDirEnumLtr  OptgroupDirEnum = "ltr"
 	OptgroupDirEnumRtl  OptgroupDirEnum = "rtl"
+	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
 )
 
 type OptgroupDraggableEnum string
 
 const (
-	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
 	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
+	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
 )
 
 type OptgroupEnterkeyhintEnum string
 
 const (
-	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
 	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
 	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
 	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
 	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
 	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
+	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 )
 
 type OptgroupHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type OptgroupInputmodeEnum string
 
 const (
-	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
-	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
-	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
-	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
 	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
 	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
 	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
+	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
+	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
+	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
+	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 )
 
 type OptgroupSpellcheckEnum string
@@ -144,8 +133,8 @@ const (
 type OptgroupTranslateEnum string
 
 const (
-	OptgroupTranslateEnumYes   OptgroupTranslateEnum = "yes"
 	OptgroupTranslateEnumNo    OptgroupTranslateEnum = "no"
+	OptgroupTranslateEnumYes   OptgroupTranslateEnum = "yes"
 	OptgroupTranslateEnumEmpty OptgroupTranslateEnum = ""
 )
 
@@ -351,13 +340,11 @@ func (e *OptgroupElement) Writingsuggestions(a OptgroupWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *OptgroupElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<optgroup")); err != nil {
+	if _, err := w.Write([]byte("<optgroup")); err != nil {
 		return err
 	}
 
@@ -387,17 +374,16 @@ func (e *OptgroupElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</optgroup>\n")); err != nil {
+	if _, err := w.Write([]byte("</optgroup>")); err != nil {
 		return err
 	}
 

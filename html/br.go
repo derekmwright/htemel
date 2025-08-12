@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,17 +37,6 @@ func BrIf(condition bool) *BrElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *BrElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *BrElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type BrAutocapitalizeEnum string
 
 const (
@@ -63,8 +51,8 @@ const (
 type BrAutocorrectEnum string
 
 const (
-	BrAutocorrectEnumOff   BrAutocorrectEnum = "off"
 	BrAutocorrectEnumOn    BrAutocorrectEnum = "on"
+	BrAutocorrectEnumOff   BrAutocorrectEnum = "off"
 	BrAutocorrectEnumEmpty BrAutocorrectEnum = ""
 )
 
@@ -107,22 +95,22 @@ const (
 type BrHiddenEnum string
 
 const (
-	BrHiddenEnumUntilFound BrHiddenEnum = "until-found"
 	BrHiddenEnumHidden     BrHiddenEnum = "hidden"
+	BrHiddenEnumUntilFound BrHiddenEnum = "until-found"
 	BrHiddenEnumEmpty      BrHiddenEnum = ""
 )
 
 type BrInputmodeEnum string
 
 const (
-	BrInputmodeEnumNone    BrInputmodeEnum = "none"
-	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
-	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
 	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
 	BrInputmodeEnumText    BrInputmodeEnum = "text"
 	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
 	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
 	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
+	BrInputmodeEnumNone    BrInputmodeEnum = "none"
+	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
+	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
 )
 
 type BrSpellcheckEnum string
@@ -331,13 +319,11 @@ func (e *BrElement) Writingsuggestions(a BrWritingsuggestionsEnum) *BrElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BrElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<br")); err != nil {
+	if _, err := w.Write([]byte("<br")); err != nil {
 		return err
 	}
 
@@ -367,7 +353,7 @@ func (e *BrElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 

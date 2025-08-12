@@ -46,17 +46,6 @@ func HtmlTernary(condition bool, true htemel.Node, false htemel.Node) *HtmlEleme
 	return Html(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *HtmlElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *HtmlElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type HtmlAutocapitalizeEnum string
 
 const (
@@ -71,26 +60,26 @@ const (
 type HtmlAutocorrectEnum string
 
 const (
-	HtmlAutocorrectEnumOn    HtmlAutocorrectEnum = "on"
 	HtmlAutocorrectEnumOff   HtmlAutocorrectEnum = "off"
+	HtmlAutocorrectEnumOn    HtmlAutocorrectEnum = "on"
 	HtmlAutocorrectEnumEmpty HtmlAutocorrectEnum = ""
 )
 
 type HtmlContenteditableEnum string
 
 const (
-	HtmlContenteditableEnumTrue          HtmlContenteditableEnum = "true"
 	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumPlaintextOnly HtmlContenteditableEnum = "plaintext-only"
+	HtmlContenteditableEnumTrue          HtmlContenteditableEnum = "true"
 	HtmlContenteditableEnumEmpty         HtmlContenteditableEnum = ""
 )
 
 type HtmlDirEnum string
 
 const (
+	HtmlDirEnumRtl  HtmlDirEnum = "rtl"
 	HtmlDirEnumAuto HtmlDirEnum = "auto"
 	HtmlDirEnumLtr  HtmlDirEnum = "ltr"
-	HtmlDirEnumRtl  HtmlDirEnum = "rtl"
 )
 
 type HtmlDraggableEnum string
@@ -103,13 +92,13 @@ const (
 type HtmlEnterkeyhintEnum string
 
 const (
-	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
 	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
 	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
 	HtmlEnterkeyhintEnumNext     HtmlEnterkeyhintEnum = "next"
 	HtmlEnterkeyhintEnumPrevious HtmlEnterkeyhintEnum = "previous"
 	HtmlEnterkeyhintEnumSearch   HtmlEnterkeyhintEnum = "search"
 	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
+	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
 )
 
 type HtmlHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type HtmlInputmodeEnum string
 
 const (
-	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
-	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
 	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
 	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
 	HtmlInputmodeEnumNone    HtmlInputmodeEnum = "none"
 	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
 	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
+	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
+	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 )
 
 type HtmlSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type HtmlWritingsuggestionsEnum string
 
 const (
-	HtmlWritingsuggestionsEnumFalse HtmlWritingsuggestionsEnum = "false"
 	HtmlWritingsuggestionsEnumTrue  HtmlWritingsuggestionsEnum = "true"
+	HtmlWritingsuggestionsEnumFalse HtmlWritingsuggestionsEnum = "false"
 	HtmlWritingsuggestionsEnumEmpty HtmlWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *HtmlElement) Writingsuggestions(a HtmlWritingsuggestionsEnum) *HtmlElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HtmlElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<html")); err != nil {
+	if _, err := w.Write([]byte("<html")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</html>\n")); err != nil {
+	if _, err := w.Write([]byte("</html>")); err != nil {
 		return err
 	}
 

@@ -46,17 +46,6 @@ func BdoTernary(condition bool, true htemel.Node, false htemel.Node) *BdoElement
 	return Bdo(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *BdoElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *BdoElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type BdoAutocapitalizeEnum string
 
 const (
@@ -103,13 +92,13 @@ const (
 type BdoEnterkeyhintEnum string
 
 const (
-	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
-	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
-	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
 	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
 	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
 	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
 	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
+	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
+	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
+	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
 )
 
 type BdoHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type BdoInputmodeEnum string
 
 const (
+	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
+	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
 	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
 	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
 	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
 	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
 	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
 	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
-	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
-	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
 )
 
 type BdoSpellcheckEnum string
@@ -144,16 +133,16 @@ const (
 type BdoTranslateEnum string
 
 const (
-	BdoTranslateEnumNo    BdoTranslateEnum = "no"
 	BdoTranslateEnumYes   BdoTranslateEnum = "yes"
+	BdoTranslateEnumNo    BdoTranslateEnum = "no"
 	BdoTranslateEnumEmpty BdoTranslateEnum = ""
 )
 
 type BdoWritingsuggestionsEnum string
 
 const (
-	BdoWritingsuggestionsEnumFalse BdoWritingsuggestionsEnum = "false"
 	BdoWritingsuggestionsEnumTrue  BdoWritingsuggestionsEnum = "true"
+	BdoWritingsuggestionsEnumFalse BdoWritingsuggestionsEnum = "false"
 	BdoWritingsuggestionsEnumEmpty BdoWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *BdoElement) Writingsuggestions(a BdoWritingsuggestionsEnum) *BdoElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BdoElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<bdo")); err != nil {
+	if _, err := w.Write([]byte("<bdo")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *BdoElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</bdo>\n")); err != nil {
+	if _, err := w.Write([]byte("</bdo>")); err != nil {
 		return err
 	}
 

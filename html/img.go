@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,17 +37,6 @@ func ImgIf(condition bool) *ImgElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *ImgElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *ImgElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type ImgCrossoriginEnum string
 
 const (
@@ -60,9 +48,9 @@ const (
 type ImgDecodingEnum string
 
 const (
+	ImgDecodingEnumAsync ImgDecodingEnum = "async"
 	ImgDecodingEnumAuto  ImgDecodingEnum = "auto"
 	ImgDecodingEnumSync  ImgDecodingEnum = "sync"
-	ImgDecodingEnumAsync ImgDecodingEnum = "async"
 )
 
 type ImgLoadingEnum string
@@ -75,20 +63,20 @@ const (
 type ImgFetchpriorityEnum string
 
 const (
-	ImgFetchpriorityEnumAuto ImgFetchpriorityEnum = "auto"
 	ImgFetchpriorityEnumHigh ImgFetchpriorityEnum = "high"
 	ImgFetchpriorityEnumLow  ImgFetchpriorityEnum = "low"
+	ImgFetchpriorityEnumAuto ImgFetchpriorityEnum = "auto"
 )
 
 type ImgAutocapitalizeEnum string
 
 const (
-	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
 	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
 	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
+	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
 )
 
 type ImgAutocorrectEnum string
@@ -102,9 +90,9 @@ const (
 type ImgContenteditableEnum string
 
 const (
-	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumPlaintextOnly ImgContenteditableEnum = "plaintext-only"
+	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumEmpty         ImgContenteditableEnum = ""
 )
 
@@ -119,20 +107,20 @@ const (
 type ImgDraggableEnum string
 
 const (
-	ImgDraggableEnumFalse ImgDraggableEnum = "false"
 	ImgDraggableEnumTrue  ImgDraggableEnum = "true"
+	ImgDraggableEnumFalse ImgDraggableEnum = "false"
 )
 
 type ImgEnterkeyhintEnum string
 
 const (
+	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
+	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
 	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
 	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
-	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
-	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 )
 
 type ImgHiddenEnum string
@@ -146,14 +134,14 @@ const (
 type ImgInputmodeEnum string
 
 const (
+	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
+	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
 	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
 	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
 	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
 	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
 	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
-	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
-	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
 )
 
 type ImgSpellcheckEnum string
@@ -440,13 +428,11 @@ func (e *ImgElement) Writingsuggestions(a ImgWritingsuggestionsEnum) *ImgElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ImgElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<img")); err != nil {
+	if _, err := w.Write([]byte("<img")); err != nil {
 		return err
 	}
 
@@ -476,7 +462,7 @@ func (e *ImgElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 

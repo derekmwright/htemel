@@ -46,26 +46,15 @@ func FieldsetTernary(condition bool, true htemel.Node, false htemel.Node) *Field
 	return Fieldset(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *FieldsetElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *FieldsetElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type FieldsetAutocapitalizeEnum string
 
 const (
-	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
-	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
-	FieldsetAutocapitalizeEnumOn         FieldsetAutocapitalizeEnum = "on"
 	FieldsetAutocapitalizeEnumSentences  FieldsetAutocapitalizeEnum = "sentences"
 	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
 	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
+	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
+	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
+	FieldsetAutocapitalizeEnumOn         FieldsetAutocapitalizeEnum = "on"
 )
 
 type FieldsetAutocorrectEnum string
@@ -79,9 +68,9 @@ const (
 type FieldsetContenteditableEnum string
 
 const (
-	FieldsetContenteditableEnumTrue          FieldsetContenteditableEnum = "true"
 	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumPlaintextOnly FieldsetContenteditableEnum = "plaintext-only"
+	FieldsetContenteditableEnumTrue          FieldsetContenteditableEnum = "true"
 	FieldsetContenteditableEnumEmpty         FieldsetContenteditableEnum = ""
 )
 
@@ -96,20 +85,20 @@ const (
 type FieldsetDraggableEnum string
 
 const (
-	FieldsetDraggableEnumFalse FieldsetDraggableEnum = "false"
 	FieldsetDraggableEnumTrue  FieldsetDraggableEnum = "true"
+	FieldsetDraggableEnumFalse FieldsetDraggableEnum = "false"
 )
 
 type FieldsetEnterkeyhintEnum string
 
 const (
+	FieldsetEnterkeyhintEnumDone     FieldsetEnterkeyhintEnum = "done"
+	FieldsetEnterkeyhintEnumEnter    FieldsetEnterkeyhintEnum = "enter"
+	FieldsetEnterkeyhintEnumGo       FieldsetEnterkeyhintEnum = "go"
 	FieldsetEnterkeyhintEnumNext     FieldsetEnterkeyhintEnum = "next"
 	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
 	FieldsetEnterkeyhintEnumSearch   FieldsetEnterkeyhintEnum = "search"
 	FieldsetEnterkeyhintEnumSend     FieldsetEnterkeyhintEnum = "send"
-	FieldsetEnterkeyhintEnumDone     FieldsetEnterkeyhintEnum = "done"
-	FieldsetEnterkeyhintEnumEnter    FieldsetEnterkeyhintEnum = "enter"
-	FieldsetEnterkeyhintEnumGo       FieldsetEnterkeyhintEnum = "go"
 )
 
 type FieldsetHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type FieldsetInputmodeEnum string
 
 const (
-	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
-	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
-	FieldsetInputmodeEnumNumeric FieldsetInputmodeEnum = "numeric"
-	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
 	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
 	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
 	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
 	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
+	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
+	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
+	FieldsetInputmodeEnumNumeric FieldsetInputmodeEnum = "numeric"
+	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
 )
 
 type FieldsetSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type FieldsetWritingsuggestionsEnum string
 
 const (
-	FieldsetWritingsuggestionsEnumTrue  FieldsetWritingsuggestionsEnum = "true"
 	FieldsetWritingsuggestionsEnumFalse FieldsetWritingsuggestionsEnum = "false"
+	FieldsetWritingsuggestionsEnumTrue  FieldsetWritingsuggestionsEnum = "true"
 	FieldsetWritingsuggestionsEnumEmpty FieldsetWritingsuggestionsEnum = ""
 )
 
@@ -357,13 +346,11 @@ func (e *FieldsetElement) Writingsuggestions(a FieldsetWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *FieldsetElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<fieldset")); err != nil {
+	if _, err := w.Write([]byte("<fieldset")); err != nil {
 		return err
 	}
 
@@ -393,17 +380,16 @@ func (e *FieldsetElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</fieldset>\n")); err != nil {
+	if _, err := w.Write([]byte("</fieldset>")); err != nil {
 		return err
 	}
 

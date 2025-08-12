@@ -46,17 +46,6 @@ func VideoTernary(condition bool, true htemel.Node, false htemel.Node) *VideoEle
 	return Video(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *VideoElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *VideoElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type VideoCrossoriginEnum string
 
 const (
@@ -140,14 +129,14 @@ const (
 type VideoInputmodeEnum string
 
 const (
-	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
-	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
-	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
 	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
 	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
 	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
 	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
 	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
+	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
+	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
+	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
 )
 
 type VideoSpellcheckEnum string
@@ -161,16 +150,16 @@ const (
 type VideoTranslateEnum string
 
 const (
-	VideoTranslateEnumYes   VideoTranslateEnum = "yes"
 	VideoTranslateEnumNo    VideoTranslateEnum = "no"
+	VideoTranslateEnumYes   VideoTranslateEnum = "yes"
 	VideoTranslateEnumEmpty VideoTranslateEnum = ""
 )
 
 type VideoWritingsuggestionsEnum string
 
 const (
-	VideoWritingsuggestionsEnumFalse VideoWritingsuggestionsEnum = "false"
 	VideoWritingsuggestionsEnumTrue  VideoWritingsuggestionsEnum = "true"
+	VideoWritingsuggestionsEnumFalse VideoWritingsuggestionsEnum = "false"
 	VideoWritingsuggestionsEnumEmpty VideoWritingsuggestionsEnum = ""
 )
 
@@ -422,13 +411,11 @@ func (e *VideoElement) Writingsuggestions(a VideoWritingsuggestionsEnum) *VideoE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *VideoElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<video")); err != nil {
+	if _, err := w.Write([]byte("<video")); err != nil {
 		return err
 	}
 
@@ -458,17 +445,16 @@ func (e *VideoElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</video>\n")); err != nil {
+	if _, err := w.Write([]byte("</video>")); err != nil {
 		return err
 	}
 

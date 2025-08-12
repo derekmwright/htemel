@@ -46,17 +46,6 @@ func LabelTernary(condition bool, true htemel.Node, false htemel.Node) *LabelEle
 	return Label(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *LabelElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *LabelElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type LabelAutocapitalizeEnum string
 
 const (
@@ -71,8 +60,8 @@ const (
 type LabelAutocorrectEnum string
 
 const (
-	LabelAutocorrectEnumOff   LabelAutocorrectEnum = "off"
 	LabelAutocorrectEnumOn    LabelAutocorrectEnum = "on"
+	LabelAutocorrectEnumOff   LabelAutocorrectEnum = "off"
 	LabelAutocorrectEnumEmpty LabelAutocorrectEnum = ""
 )
 
@@ -96,41 +85,41 @@ const (
 type LabelDraggableEnum string
 
 const (
-	LabelDraggableEnumFalse LabelDraggableEnum = "false"
 	LabelDraggableEnumTrue  LabelDraggableEnum = "true"
+	LabelDraggableEnumFalse LabelDraggableEnum = "false"
 )
 
 type LabelEnterkeyhintEnum string
 
 const (
-	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
 	LabelEnterkeyhintEnumNext     LabelEnterkeyhintEnum = "next"
 	LabelEnterkeyhintEnumPrevious LabelEnterkeyhintEnum = "previous"
 	LabelEnterkeyhintEnumSearch   LabelEnterkeyhintEnum = "search"
 	LabelEnterkeyhintEnumSend     LabelEnterkeyhintEnum = "send"
 	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
 	LabelEnterkeyhintEnumEnter    LabelEnterkeyhintEnum = "enter"
+	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
 )
 
 type LabelHiddenEnum string
 
 const (
-	LabelHiddenEnumHidden     LabelHiddenEnum = "hidden"
 	LabelHiddenEnumUntilFound LabelHiddenEnum = "until-found"
+	LabelHiddenEnumHidden     LabelHiddenEnum = "hidden"
 	LabelHiddenEnumEmpty      LabelHiddenEnum = ""
 )
 
 type LabelInputmodeEnum string
 
 const (
+	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
+	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
+	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
 	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
 	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
 	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
 	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
-	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
-	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
-	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 )
 
 type LabelSpellcheckEnum string
@@ -144,16 +133,16 @@ const (
 type LabelTranslateEnum string
 
 const (
-	LabelTranslateEnumNo    LabelTranslateEnum = "no"
 	LabelTranslateEnumYes   LabelTranslateEnum = "yes"
+	LabelTranslateEnumNo    LabelTranslateEnum = "no"
 	LabelTranslateEnumEmpty LabelTranslateEnum = ""
 )
 
 type LabelWritingsuggestionsEnum string
 
 const (
-	LabelWritingsuggestionsEnumTrue  LabelWritingsuggestionsEnum = "true"
 	LabelWritingsuggestionsEnumFalse LabelWritingsuggestionsEnum = "false"
+	LabelWritingsuggestionsEnumTrue  LabelWritingsuggestionsEnum = "true"
 	LabelWritingsuggestionsEnumEmpty LabelWritingsuggestionsEnum = ""
 )
 
@@ -345,13 +334,11 @@ func (e *LabelElement) Writingsuggestions(a LabelWritingsuggestionsEnum) *LabelE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LabelElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<label")); err != nil {
+	if _, err := w.Write([]byte("<label")); err != nil {
 		return err
 	}
 
@@ -381,17 +368,16 @@ func (e *LabelElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</label>\n")); err != nil {
+	if _, err := w.Write([]byte("</label>")); err != nil {
 		return err
 	}
 

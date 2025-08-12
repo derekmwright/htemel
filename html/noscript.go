@@ -46,26 +46,15 @@ func NoscriptTernary(condition bool, true htemel.Node, false htemel.Node) *Noscr
 	return Noscript(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *NoscriptElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *NoscriptElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type NoscriptAutocapitalizeEnum string
 
 const (
+	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
+	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
 	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
 	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
 	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
 	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
-	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
-	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
 )
 
 type NoscriptAutocorrectEnum string
@@ -88,9 +77,9 @@ const (
 type NoscriptDirEnum string
 
 const (
+	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
 	NoscriptDirEnumLtr  NoscriptDirEnum = "ltr"
 	NoscriptDirEnumRtl  NoscriptDirEnum = "rtl"
-	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
 )
 
 type NoscriptDraggableEnum string
@@ -103,13 +92,13 @@ const (
 type NoscriptEnterkeyhintEnum string
 
 const (
+	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
 	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
 	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
 	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
 	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
 	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
 	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
-	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
 )
 
 type NoscriptHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type NoscriptInputmodeEnum string
 
 const (
-	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
-	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
-	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
 	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
 	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
 	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
 	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
 	NoscriptInputmodeEnumNone    NoscriptInputmodeEnum = "none"
+	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
+	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
+	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
 )
 
 type NoscriptSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *NoscriptElement) Writingsuggestions(a NoscriptWritingsuggestionsEnum) *
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *NoscriptElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<noscript")); err != nil {
+	if _, err := w.Write([]byte("<noscript")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *NoscriptElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</noscript>\n")); err != nil {
+	if _, err := w.Write([]byte("</noscript>")); err != nil {
 		return err
 	}
 

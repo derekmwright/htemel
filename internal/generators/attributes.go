@@ -1,11 +1,11 @@
-package source
+package generators
 
 import (
 	"bytes"
 	"strings"
 	"text/template"
 
-	"github.com/derekmwright/htemel/internal/generators/spec"
+	"github.com/go-htemel/spec"
 )
 
 func BuildAttributes(e *spec.Element) func() (*template.Template, ImportSet) {

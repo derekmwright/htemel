@@ -46,33 +46,22 @@ func MeterTernary(condition bool, true htemel.Node, false htemel.Node) *MeterEle
 	return Meter(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *MeterElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *MeterElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type MeterAutocapitalizeEnum string
 
 const (
+	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
+	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
 	MeterAutocapitalizeEnumNone       MeterAutocapitalizeEnum = "none"
 	MeterAutocapitalizeEnumOff        MeterAutocapitalizeEnum = "off"
 	MeterAutocapitalizeEnumOn         MeterAutocapitalizeEnum = "on"
 	MeterAutocapitalizeEnumSentences  MeterAutocapitalizeEnum = "sentences"
-	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
-	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
 )
 
 type MeterAutocorrectEnum string
 
 const (
-	MeterAutocorrectEnumOn    MeterAutocorrectEnum = "on"
 	MeterAutocorrectEnumOff   MeterAutocorrectEnum = "off"
+	MeterAutocorrectEnumOn    MeterAutocorrectEnum = "on"
 	MeterAutocorrectEnumEmpty MeterAutocorrectEnum = ""
 )
 
@@ -88,9 +77,9 @@ const (
 type MeterDirEnum string
 
 const (
+	MeterDirEnumRtl  MeterDirEnum = "rtl"
 	MeterDirEnumAuto MeterDirEnum = "auto"
 	MeterDirEnumLtr  MeterDirEnum = "ltr"
-	MeterDirEnumRtl  MeterDirEnum = "rtl"
 )
 
 type MeterDraggableEnum string
@@ -123,6 +112,7 @@ const (
 type MeterInputmodeEnum string
 
 const (
+	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
 	MeterInputmodeEnumText    MeterInputmodeEnum = "text"
 	MeterInputmodeEnumUrl     MeterInputmodeEnum = "url"
 	MeterInputmodeEnumDecimal MeterInputmodeEnum = "decimal"
@@ -130,7 +120,6 @@ const (
 	MeterInputmodeEnumNone    MeterInputmodeEnum = "none"
 	MeterInputmodeEnumNumeric MeterInputmodeEnum = "numeric"
 	MeterInputmodeEnumSearch  MeterInputmodeEnum = "search"
-	MeterInputmodeEnumTel     MeterInputmodeEnum = "tel"
 )
 
 type MeterSpellcheckEnum string
@@ -375,13 +364,11 @@ func (e *MeterElement) Writingsuggestions(a MeterWritingsuggestionsEnum) *MeterE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MeterElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<meter")); err != nil {
+	if _, err := w.Write([]byte("<meter")); err != nil {
 		return err
 	}
 
@@ -411,17 +398,16 @@ func (e *MeterElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</meter>\n")); err != nil {
+	if _, err := w.Write([]byte("</meter>")); err != nil {
 		return err
 	}
 

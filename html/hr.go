@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,26 +37,15 @@ func HrIf(condition bool) *HrElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *HrElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *HrElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type HrAutocapitalizeEnum string
 
 const (
+	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
+	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
 	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
 	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
-	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
-	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 )
 
 type HrAutocorrectEnum string
@@ -71,9 +59,9 @@ const (
 type HrContenteditableEnum string
 
 const (
-	HrContenteditableEnumTrue          HrContenteditableEnum = "true"
 	HrContenteditableEnumFalse         HrContenteditableEnum = "false"
 	HrContenteditableEnumPlaintextOnly HrContenteditableEnum = "plaintext-only"
+	HrContenteditableEnumTrue          HrContenteditableEnum = "true"
 	HrContenteditableEnumEmpty         HrContenteditableEnum = ""
 )
 
@@ -115,14 +103,14 @@ const (
 type HrInputmodeEnum string
 
 const (
+	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
+	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
 	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
 	HrInputmodeEnumText    HrInputmodeEnum = "text"
 	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
 	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
 	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
 	HrInputmodeEnumNone    HrInputmodeEnum = "none"
-	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
-	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
 )
 
 type HrSpellcheckEnum string
@@ -331,13 +319,11 @@ func (e *HrElement) Writingsuggestions(a HrWritingsuggestionsEnum) *HrElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HrElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<hr")); err != nil {
+	if _, err := w.Write([]byte("<hr")); err != nil {
 		return err
 	}
 
@@ -367,7 +353,7 @@ func (e *HrElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 

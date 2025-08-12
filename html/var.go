@@ -46,33 +46,22 @@ func VarTernary(condition bool, true htemel.Node, false htemel.Node) *VarElement
 	return Var(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *VarElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *VarElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type VarAutocapitalizeEnum string
 
 const (
-	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
-	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
-	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
 	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
 	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
 	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
+	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
+	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
+	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
 )
 
 type VarAutocorrectEnum string
 
 const (
-	VarAutocorrectEnumOn    VarAutocorrectEnum = "on"
 	VarAutocorrectEnumOff   VarAutocorrectEnum = "off"
+	VarAutocorrectEnumOn    VarAutocorrectEnum = "on"
 	VarAutocorrectEnumEmpty VarAutocorrectEnum = ""
 )
 
@@ -88,9 +77,9 @@ const (
 type VarDirEnum string
 
 const (
-	VarDirEnumRtl  VarDirEnum = "rtl"
 	VarDirEnumAuto VarDirEnum = "auto"
 	VarDirEnumLtr  VarDirEnum = "ltr"
+	VarDirEnumRtl  VarDirEnum = "rtl"
 )
 
 type VarDraggableEnum string
@@ -103,13 +92,13 @@ const (
 type VarEnterkeyhintEnum string
 
 const (
-	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
-	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
 	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
 	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
 	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
+	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
+	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
 )
 
 type VarHiddenEnum string
@@ -123,7 +112,6 @@ const (
 type VarInputmodeEnum string
 
 const (
-	VarInputmodeEnumNone    VarInputmodeEnum = "none"
 	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
@@ -131,21 +119,22 @@ const (
 	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
 	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
 	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
+	VarInputmodeEnumNone    VarInputmodeEnum = "none"
 )
 
 type VarSpellcheckEnum string
 
 const (
-	VarSpellcheckEnumFalse VarSpellcheckEnum = "false"
 	VarSpellcheckEnumTrue  VarSpellcheckEnum = "true"
+	VarSpellcheckEnumFalse VarSpellcheckEnum = "false"
 	VarSpellcheckEnumEmpty VarSpellcheckEnum = ""
 )
 
 type VarTranslateEnum string
 
 const (
-	VarTranslateEnumYes   VarTranslateEnum = "yes"
 	VarTranslateEnumNo    VarTranslateEnum = "no"
+	VarTranslateEnumYes   VarTranslateEnum = "yes"
 	VarTranslateEnumEmpty VarTranslateEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *VarElement) Writingsuggestions(a VarWritingsuggestionsEnum) *VarElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *VarElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<var")); err != nil {
+	if _, err := w.Write([]byte("<var")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *VarElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</var>\n")); err != nil {
+	if _, err := w.Write([]byte("</var>")); err != nil {
 		return err
 	}
 

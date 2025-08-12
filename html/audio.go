@@ -46,17 +46,6 @@ func AudioTernary(condition bool, true htemel.Node, false htemel.Node) *AudioEle
 	return Audio(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *AudioElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *AudioElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type AudioCrossoriginEnum string
 
 const (
@@ -68,9 +57,9 @@ const (
 type AudioPreloadEnum string
 
 const (
-	AudioPreloadEnumNone     AudioPreloadEnum = "none"
 	AudioPreloadEnumAuto     AudioPreloadEnum = "auto"
 	AudioPreloadEnumMetadata AudioPreloadEnum = "metadata"
+	AudioPreloadEnumNone     AudioPreloadEnum = "none"
 	AudioPreloadEnumEmpty    AudioPreloadEnum = ""
 )
 
@@ -88,8 +77,8 @@ const (
 type AudioAutocorrectEnum string
 
 const (
-	AudioAutocorrectEnumOn    AudioAutocorrectEnum = "on"
 	AudioAutocorrectEnumOff   AudioAutocorrectEnum = "off"
+	AudioAutocorrectEnumOn    AudioAutocorrectEnum = "on"
 	AudioAutocorrectEnumEmpty AudioAutocorrectEnum = ""
 )
 
@@ -105,9 +94,9 @@ const (
 type AudioDirEnum string
 
 const (
-	AudioDirEnumAuto AudioDirEnum = "auto"
 	AudioDirEnumLtr  AudioDirEnum = "ltr"
 	AudioDirEnumRtl  AudioDirEnum = "rtl"
+	AudioDirEnumAuto AudioDirEnum = "auto"
 )
 
 type AudioDraggableEnum string
@@ -140,14 +129,14 @@ const (
 type AudioInputmodeEnum string
 
 const (
-	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
-	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
-	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
-	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
 	AudioInputmodeEnumTel     AudioInputmodeEnum = "tel"
 	AudioInputmodeEnumText    AudioInputmodeEnum = "text"
 	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
 	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
+	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
+	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
+	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
+	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
 )
 
 type AudioSpellcheckEnum string
@@ -404,13 +393,11 @@ func (e *AudioElement) Writingsuggestions(a AudioWritingsuggestionsEnum) *AudioE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AudioElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<audio")); err != nil {
+	if _, err := w.Write([]byte("<audio")); err != nil {
 		return err
 	}
 
@@ -440,17 +427,16 @@ func (e *AudioElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</audio>\n")); err != nil {
+	if _, err := w.Write([]byte("</audio>")); err != nil {
 		return err
 	}
 

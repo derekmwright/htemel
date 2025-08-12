@@ -46,42 +46,31 @@ func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *Articl
 	return Article(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *ArticleElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *ArticleElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type ArticleAutocapitalizeEnum string
 
 const (
-	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
 	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
 	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
 	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
+	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
 )
 
 type ArticleAutocorrectEnum string
 
 const (
-	ArticleAutocorrectEnumOff   ArticleAutocorrectEnum = "off"
 	ArticleAutocorrectEnumOn    ArticleAutocorrectEnum = "on"
+	ArticleAutocorrectEnumOff   ArticleAutocorrectEnum = "off"
 	ArticleAutocorrectEnumEmpty ArticleAutocorrectEnum = ""
 )
 
 type ArticleContenteditableEnum string
 
 const (
-	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
 	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
+	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
 	ArticleContenteditableEnumEmpty         ArticleContenteditableEnum = ""
 )
 
@@ -96,20 +85,20 @@ const (
 type ArticleDraggableEnum string
 
 const (
-	ArticleDraggableEnumTrue  ArticleDraggableEnum = "true"
 	ArticleDraggableEnumFalse ArticleDraggableEnum = "false"
+	ArticleDraggableEnumTrue  ArticleDraggableEnum = "true"
 )
 
 type ArticleEnterkeyhintEnum string
 
 const (
+	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
+	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
 	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
 	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
 	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
 	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
-	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
-	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
 )
 
 type ArticleHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type ArticleInputmodeEnum string
 
 const (
+	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
+	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
 	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
 	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
 	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
 	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
 	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
 	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
-	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
-	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
 )
 
 type ArticleSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *ArticleElement) Writingsuggestions(a ArticleWritingsuggestionsEnum) *Ar
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ArticleElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<article")); err != nil {
+	if _, err := w.Write([]byte("<article")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *ArticleElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</article>\n")); err != nil {
+	if _, err := w.Write([]byte("</article>")); err != nil {
 		return err
 	}
 

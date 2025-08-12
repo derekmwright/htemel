@@ -46,17 +46,6 @@ func STernary(condition bool, true htemel.Node, false htemel.Node) *SElement {
 	return S(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *SElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *SElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type SAutocapitalizeEnum string
 
 const (
@@ -88,9 +77,9 @@ const (
 type SDirEnum string
 
 const (
-	SDirEnumAuto SDirEnum = "auto"
 	SDirEnumLtr  SDirEnum = "ltr"
 	SDirEnumRtl  SDirEnum = "rtl"
+	SDirEnumAuto SDirEnum = "auto"
 )
 
 type SDraggableEnum string
@@ -103,34 +92,34 @@ const (
 type SEnterkeyhintEnum string
 
 const (
-	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
 	SEnterkeyhintEnumSend     SEnterkeyhintEnum = "send"
 	SEnterkeyhintEnumDone     SEnterkeyhintEnum = "done"
 	SEnterkeyhintEnumEnter    SEnterkeyhintEnum = "enter"
 	SEnterkeyhintEnumGo       SEnterkeyhintEnum = "go"
 	SEnterkeyhintEnumNext     SEnterkeyhintEnum = "next"
 	SEnterkeyhintEnumPrevious SEnterkeyhintEnum = "previous"
+	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
 )
 
 type SHiddenEnum string
 
 const (
-	SHiddenEnumUntilFound SHiddenEnum = "until-found"
 	SHiddenEnumHidden     SHiddenEnum = "hidden"
+	SHiddenEnumUntilFound SHiddenEnum = "until-found"
 	SHiddenEnumEmpty      SHiddenEnum = ""
 )
 
 type SInputmodeEnum string
 
 const (
-	SInputmodeEnumTel     SInputmodeEnum = "tel"
-	SInputmodeEnumText    SInputmodeEnum = "text"
-	SInputmodeEnumUrl     SInputmodeEnum = "url"
-	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
 	SInputmodeEnumEmail   SInputmodeEnum = "email"
 	SInputmodeEnumNone    SInputmodeEnum = "none"
 	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
 	SInputmodeEnumSearch  SInputmodeEnum = "search"
+	SInputmodeEnumTel     SInputmodeEnum = "tel"
+	SInputmodeEnumText    SInputmodeEnum = "text"
+	SInputmodeEnumUrl     SInputmodeEnum = "url"
+	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
 )
 
 type SSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *SElement) Writingsuggestions(a SWritingsuggestionsEnum) *SElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<s")); err != nil {
+	if _, err := w.Write([]byte("<s")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *SElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</s>\n")); err != nil {
+	if _, err := w.Write([]byte("</s>")); err != nil {
 		return err
 	}
 

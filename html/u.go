@@ -46,26 +46,15 @@ func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
 	return U(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *UElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *UElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type UAutocapitalizeEnum string
 
 const (
-	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
 	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
 	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
 	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
 	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
+	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
 )
 
 type UAutocorrectEnum string
@@ -103,13 +92,13 @@ const (
 type UEnterkeyhintEnum string
 
 const (
-	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
 	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
 	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
 	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
 	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
+	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
 )
 
 type UHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type UInputmodeEnum string
 
 const (
+	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
+	UInputmodeEnumEmail   UInputmodeEnum = "email"
 	UInputmodeEnumNone    UInputmodeEnum = "none"
 	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
 	UInputmodeEnumSearch  UInputmodeEnum = "search"
 	UInputmodeEnumTel     UInputmodeEnum = "tel"
 	UInputmodeEnumText    UInputmodeEnum = "text"
 	UInputmodeEnumUrl     UInputmodeEnum = "url"
-	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
-	UInputmodeEnumEmail   UInputmodeEnum = "email"
 )
 
 type USpellcheckEnum string
@@ -144,16 +133,16 @@ const (
 type UTranslateEnum string
 
 const (
-	UTranslateEnumNo    UTranslateEnum = "no"
 	UTranslateEnumYes   UTranslateEnum = "yes"
+	UTranslateEnumNo    UTranslateEnum = "no"
 	UTranslateEnumEmpty UTranslateEnum = ""
 )
 
 type UWritingsuggestionsEnum string
 
 const (
-	UWritingsuggestionsEnumTrue  UWritingsuggestionsEnum = "true"
 	UWritingsuggestionsEnumFalse UWritingsuggestionsEnum = "false"
+	UWritingsuggestionsEnumTrue  UWritingsuggestionsEnum = "true"
 	UWritingsuggestionsEnumEmpty UWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *UElement) Writingsuggestions(a UWritingsuggestionsEnum) *UElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *UElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<u")); err != nil {
+	if _, err := w.Write([]byte("<u")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *UElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</u>\n")); err != nil {
+	if _, err := w.Write([]byte("</u>")); err != nil {
 		return err
 	}
 

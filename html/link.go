@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,17 +37,6 @@ func LinkIf(condition bool) *LinkElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *LinkElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *LinkElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type LinkCrossoriginEnum string
 
 const (
@@ -66,20 +54,20 @@ const (
 type LinkFetchpriorityEnum string
 
 const (
+	LinkFetchpriorityEnumHigh LinkFetchpriorityEnum = "high"
 	LinkFetchpriorityEnumLow  LinkFetchpriorityEnum = "low"
 	LinkFetchpriorityEnumAuto LinkFetchpriorityEnum = "auto"
-	LinkFetchpriorityEnumHigh LinkFetchpriorityEnum = "high"
 )
 
 type LinkAutocapitalizeEnum string
 
 const (
+	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
+	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
 	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
 	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
 	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
-	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
-	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
 )
 
 type LinkAutocorrectEnum string
@@ -102,28 +90,28 @@ const (
 type LinkDirEnum string
 
 const (
+	LinkDirEnumRtl  LinkDirEnum = "rtl"
 	LinkDirEnumAuto LinkDirEnum = "auto"
 	LinkDirEnumLtr  LinkDirEnum = "ltr"
-	LinkDirEnumRtl  LinkDirEnum = "rtl"
 )
 
 type LinkDraggableEnum string
 
 const (
-	LinkDraggableEnumFalse LinkDraggableEnum = "false"
 	LinkDraggableEnumTrue  LinkDraggableEnum = "true"
+	LinkDraggableEnumFalse LinkDraggableEnum = "false"
 )
 
 type LinkEnterkeyhintEnum string
 
 const (
-	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
 	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
 	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
 	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
+	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 )
 
 type LinkHiddenEnum string
@@ -137,14 +125,14 @@ const (
 type LinkInputmodeEnum string
 
 const (
-	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
-	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
-	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
-	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
 	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
 	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
 	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
+	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
+	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
+	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
+	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
 )
 
 type LinkSpellcheckEnum string
@@ -449,13 +437,11 @@ func (e *LinkElement) Writingsuggestions(a LinkWritingsuggestionsEnum) *LinkElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *LinkElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<link")); err != nil {
+	if _, err := w.Write([]byte("<link")); err != nil {
 		return err
 	}
 
@@ -485,7 +471,7 @@ func (e *LinkElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 

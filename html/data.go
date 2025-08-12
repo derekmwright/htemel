@@ -46,26 +46,15 @@ func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataEleme
 	return Data(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *DataElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *DataElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type DataAutocapitalizeEnum string
 
 const (
+	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
 	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
 	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
-	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
 )
 
 type DataAutocorrectEnum string
@@ -103,13 +92,13 @@ const (
 type DataEnterkeyhintEnum string
 
 const (
+	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
+	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
 	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
 	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
 	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
-	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
-	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 )
 
 type DataHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type DataInputmodeEnum string
 
 const (
+	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
+	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
+	DataInputmodeEnumText    DataInputmodeEnum = "text"
 	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
 	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
 	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
 	DataInputmodeEnumNone    DataInputmodeEnum = "none"
 	DataInputmodeEnumNumeric DataInputmodeEnum = "numeric"
-	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
-	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
-	DataInputmodeEnumText    DataInputmodeEnum = "text"
 )
 
 type DataSpellcheckEnum string
@@ -144,8 +133,8 @@ const (
 type DataTranslateEnum string
 
 const (
-	DataTranslateEnumNo    DataTranslateEnum = "no"
 	DataTranslateEnumYes   DataTranslateEnum = "yes"
+	DataTranslateEnumNo    DataTranslateEnum = "no"
 	DataTranslateEnumEmpty DataTranslateEnum = ""
 )
 
@@ -345,13 +334,11 @@ func (e *DataElement) Writingsuggestions(a DataWritingsuggestionsEnum) *DataElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *DataElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<data")); err != nil {
+	if _, err := w.Write([]byte("<data")); err != nil {
 		return err
 	}
 
@@ -381,17 +368,16 @@ func (e *DataElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</data>\n")); err != nil {
+	if _, err := w.Write([]byte("</data>")); err != nil {
 		return err
 	}
 

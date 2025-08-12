@@ -46,26 +46,15 @@ func FooterTernary(condition bool, true htemel.Node, false htemel.Node) *FooterE
 	return Footer(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *FooterElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *FooterElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type FooterAutocapitalizeEnum string
 
 const (
-	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
-	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
 	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 	FooterAutocapitalizeEnumOn         FooterAutocapitalizeEnum = "on"
 	FooterAutocapitalizeEnumSentences  FooterAutocapitalizeEnum = "sentences"
 	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
+	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
+	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
 )
 
 type FooterAutocorrectEnum string
@@ -79,9 +68,9 @@ const (
 type FooterContenteditableEnum string
 
 const (
+	FooterContenteditableEnumTrue          FooterContenteditableEnum = "true"
 	FooterContenteditableEnumFalse         FooterContenteditableEnum = "false"
 	FooterContenteditableEnumPlaintextOnly FooterContenteditableEnum = "plaintext-only"
-	FooterContenteditableEnumTrue          FooterContenteditableEnum = "true"
 	FooterContenteditableEnumEmpty         FooterContenteditableEnum = ""
 )
 
@@ -103,41 +92,41 @@ const (
 type FooterEnterkeyhintEnum string
 
 const (
+	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
+	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
 	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
 	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
 	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
 	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
 	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
-	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
-	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
 )
 
 type FooterHiddenEnum string
 
 const (
-	FooterHiddenEnumUntilFound FooterHiddenEnum = "until-found"
 	FooterHiddenEnumHidden     FooterHiddenEnum = "hidden"
+	FooterHiddenEnumUntilFound FooterHiddenEnum = "until-found"
 	FooterHiddenEnumEmpty      FooterHiddenEnum = ""
 )
 
 type FooterInputmodeEnum string
 
 const (
-	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
-	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
 	FooterInputmodeEnumUrl     FooterInputmodeEnum = "url"
 	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
 	FooterInputmodeEnumEmail   FooterInputmodeEnum = "email"
 	FooterInputmodeEnumNone    FooterInputmodeEnum = "none"
 	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
 	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
+	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
+	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
 )
 
 type FooterSpellcheckEnum string
 
 const (
-	FooterSpellcheckEnumTrue  FooterSpellcheckEnum = "true"
 	FooterSpellcheckEnumFalse FooterSpellcheckEnum = "false"
+	FooterSpellcheckEnumTrue  FooterSpellcheckEnum = "true"
 	FooterSpellcheckEnumEmpty FooterSpellcheckEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *FooterElement) Writingsuggestions(a FooterWritingsuggestionsEnum) *Foot
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *FooterElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<footer")); err != nil {
+	if _, err := w.Write([]byte("<footer")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *FooterElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</footer>\n")); err != nil {
+	if _, err := w.Write([]byte("</footer>")); err != nil {
 		return err
 	}
 

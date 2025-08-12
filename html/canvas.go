@@ -46,26 +46,15 @@ func CanvasTernary(condition bool, true htemel.Node, false htemel.Node) *CanvasE
 	return Canvas(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *CanvasElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *CanvasElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type CanvasAutocapitalizeEnum string
 
 const (
+	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
 	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
 	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
 	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
 	CanvasAutocapitalizeEnumNone       CanvasAutocapitalizeEnum = "none"
 	CanvasAutocapitalizeEnumOff        CanvasAutocapitalizeEnum = "off"
-	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
 )
 
 type CanvasAutocorrectEnum string
@@ -79,18 +68,18 @@ const (
 type CanvasContenteditableEnum string
 
 const (
+	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
 	CanvasContenteditableEnumFalse         CanvasContenteditableEnum = "false"
 	CanvasContenteditableEnumPlaintextOnly CanvasContenteditableEnum = "plaintext-only"
-	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
 	CanvasContenteditableEnumEmpty         CanvasContenteditableEnum = ""
 )
 
 type CanvasDirEnum string
 
 const (
+	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
 	CanvasDirEnumAuto CanvasDirEnum = "auto"
 	CanvasDirEnumLtr  CanvasDirEnum = "ltr"
-	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
 )
 
 type CanvasDraggableEnum string
@@ -123,14 +112,14 @@ const (
 type CanvasInputmodeEnum string
 
 const (
+	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
+	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
 	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
 	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
 	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
 	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
 	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
 	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
-	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
-	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
 )
 
 type CanvasSpellcheckEnum string
@@ -351,13 +340,11 @@ func (e *CanvasElement) Writingsuggestions(a CanvasWritingsuggestionsEnum) *Canv
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *CanvasElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<canvas")); err != nil {
+	if _, err := w.Write([]byte("<canvas")); err != nil {
 		return err
 	}
 
@@ -387,17 +374,16 @@ func (e *CanvasElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</canvas>\n")); err != nil {
+	if _, err := w.Write([]byte("</canvas>")); err != nil {
 		return err
 	}
 

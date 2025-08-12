@@ -46,26 +46,15 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 	return Kbd(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *KbdElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *KbdElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type KbdAutocapitalizeEnum string
 
 const (
+	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
 	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
 	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
 	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
-	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
 )
 
 type KbdAutocorrectEnum string
@@ -103,13 +92,13 @@ const (
 type KbdEnterkeyhintEnum string
 
 const (
+	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
+	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
+	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
 	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
 	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
 	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
-	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
-	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
-	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 )
 
 type KbdHiddenEnum string
@@ -136,8 +125,8 @@ const (
 type KbdSpellcheckEnum string
 
 const (
-	KbdSpellcheckEnumTrue  KbdSpellcheckEnum = "true"
 	KbdSpellcheckEnumFalse KbdSpellcheckEnum = "false"
+	KbdSpellcheckEnumTrue  KbdSpellcheckEnum = "true"
 	KbdSpellcheckEnumEmpty KbdSpellcheckEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *KbdElement) Writingsuggestions(a KbdWritingsuggestionsEnum) *KbdElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *KbdElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<kbd")); err != nil {
+	if _, err := w.Write([]byte("<kbd")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *KbdElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</kbd>\n")); err != nil {
+	if _, err := w.Write([]byte("</kbd>")); err != nil {
 		return err
 	}
 

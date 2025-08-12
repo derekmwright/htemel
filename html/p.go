@@ -46,17 +46,6 @@ func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
 	return P(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *PElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *PElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type PAutocapitalizeEnum string
 
 const (
@@ -96,20 +85,20 @@ const (
 type PDraggableEnum string
 
 const (
-	PDraggableEnumTrue  PDraggableEnum = "true"
 	PDraggableEnumFalse PDraggableEnum = "false"
+	PDraggableEnumTrue  PDraggableEnum = "true"
 )
 
 type PEnterkeyhintEnum string
 
 const (
-	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
 	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
 	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
 	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
 	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
+	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 )
 
 type PHiddenEnum string
@@ -123,7 +112,6 @@ const (
 type PInputmodeEnum string
 
 const (
-	PInputmodeEnumNone    PInputmodeEnum = "none"
 	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
 	PInputmodeEnumSearch  PInputmodeEnum = "search"
 	PInputmodeEnumTel     PInputmodeEnum = "tel"
@@ -131,6 +119,7 @@ const (
 	PInputmodeEnumUrl     PInputmodeEnum = "url"
 	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
 	PInputmodeEnumEmail   PInputmodeEnum = "email"
+	PInputmodeEnumNone    PInputmodeEnum = "none"
 )
 
 type PSpellcheckEnum string
@@ -152,8 +141,8 @@ const (
 type PWritingsuggestionsEnum string
 
 const (
-	PWritingsuggestionsEnumTrue  PWritingsuggestionsEnum = "true"
 	PWritingsuggestionsEnumFalse PWritingsuggestionsEnum = "false"
+	PWritingsuggestionsEnumTrue  PWritingsuggestionsEnum = "true"
 	PWritingsuggestionsEnumEmpty PWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *PElement) Writingsuggestions(a PWritingsuggestionsEnum) *PElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *PElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<p")); err != nil {
+	if _, err := w.Write([]byte("<p")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *PElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</p>\n")); err != nil {
+	if _, err := w.Write([]byte("</p>")); err != nil {
 		return err
 	}
 

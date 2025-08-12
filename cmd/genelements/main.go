@@ -10,8 +10,9 @@ import (
 
 	"golang.org/x/tools/imports"
 
-	"github.com/derekmwright/htemel/internal/generators/source"
-	"github.com/derekmwright/htemel/internal/generators/spec"
+	"github.com/go-htemel/spec"
+
+	"github.com/derekmwright/htemel/internal/generators"
 )
 
 func generate(pkg string, e *spec.Element) error {
@@ -22,18 +23,16 @@ func generate(pkg string, e *spec.Element) error {
 
 	buf := &bytes.Buffer{}
 
-	var funcs = []source.TemplateFunc{
-		source.BaseStruct,
-		source.BaseFunc,
-		source.BaseCondFunc,
-		source.BaseTernaryFunc,
-		source.IndentFunc,
-		source.AddIndentFunc,
-		source.BuildAttributes(e),
-		source.RenderFunc,
+	var funcs = []generators.TemplateFunc{
+		generators.BaseStruct,
+		generators.BaseFunc,
+		generators.BaseCondFunc,
+		generators.BaseTernaryFunc,
+		generators.BuildAttributes(e),
+		generators.RenderFunc,
 	}
 
-	if err = source.SourceHeader(
+	if err = generators.SourceHeader(
 		buf,
 		"html",
 		e,
@@ -91,7 +90,7 @@ func fmtFiles(dir string) error {
 func main() {
 	sp := spec.Spec{}
 
-	specFile, err := os.ReadFile("spec/html.json")
+	specFile, err := os.ReadFile("specs/html.json")
 	if err != nil {
 		panic(err)
 	}

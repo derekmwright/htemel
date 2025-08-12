@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,51 +37,40 @@ func AreaIf(condition bool) *AreaElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *AreaElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *AreaElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type AreaShapeEnum string
 
 const (
+	AreaShapeEnumCircle  AreaShapeEnum = "circle"
 	AreaShapeEnumDefault AreaShapeEnum = "default"
 	AreaShapeEnumPoly    AreaShapeEnum = "poly"
 	AreaShapeEnumRect    AreaShapeEnum = "rect"
-	AreaShapeEnumCircle  AreaShapeEnum = "circle"
 )
 
 type AreaAutocapitalizeEnum string
 
 const (
-	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
-	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
 	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
 	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
 	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
+	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
+	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 )
 
 type AreaAutocorrectEnum string
 
 const (
-	AreaAutocorrectEnumOff   AreaAutocorrectEnum = "off"
 	AreaAutocorrectEnumOn    AreaAutocorrectEnum = "on"
+	AreaAutocorrectEnumOff   AreaAutocorrectEnum = "off"
 	AreaAutocorrectEnumEmpty AreaAutocorrectEnum = ""
 )
 
 type AreaContenteditableEnum string
 
 const (
+	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumPlaintextOnly AreaContenteditableEnum = "plaintext-only"
 	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
-	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumEmpty         AreaContenteditableEnum = ""
 )
 
@@ -104,13 +92,13 @@ const (
 type AreaEnterkeyhintEnum string
 
 const (
+	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
+	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
+	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
 	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
 	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
 	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
 	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
-	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
-	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
-	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
 )
 
 type AreaHiddenEnum string
@@ -124,14 +112,14 @@ const (
 type AreaInputmodeEnum string
 
 const (
-	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
-	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
-	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
 	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
 	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
 	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
 	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
+	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
+	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
+	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 )
 
 type AreaSpellcheckEnum string
@@ -394,13 +382,11 @@ func (e *AreaElement) Writingsuggestions(a AreaWritingsuggestionsEnum) *AreaElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AreaElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<area")); err != nil {
+	if _, err := w.Write([]byte("<area")); err != nil {
 		return err
 	}
 
@@ -430,7 +416,7 @@ func (e *AreaElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 

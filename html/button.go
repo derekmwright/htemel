@@ -46,34 +46,23 @@ func ButtonTernary(condition bool, true htemel.Node, false htemel.Node) *ButtonE
 	return Button(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *ButtonElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *ButtonElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type ButtonCommandEnum string
 
 const (
-	ButtonCommandEnumRequestClose  ButtonCommandEnum = "request-close"
-	ButtonCommandEnumShowModal     ButtonCommandEnum = "show-modal"
-	ButtonCommandEnumShowPopover   ButtonCommandEnum = "show-popover"
 	ButtonCommandEnumTogglePopover ButtonCommandEnum = "toggle-popover"
 	ButtonCommandEnumClose         ButtonCommandEnum = "close"
 	ButtonCommandEnumHidePopover   ButtonCommandEnum = "hide-popover"
+	ButtonCommandEnumRequestClose  ButtonCommandEnum = "request-close"
+	ButtonCommandEnumShowModal     ButtonCommandEnum = "show-modal"
+	ButtonCommandEnumShowPopover   ButtonCommandEnum = "show-popover"
 )
 
 type ButtonFormmethodEnum string
 
 const (
-	ButtonFormmethodEnumDialog ButtonFormmethodEnum = "dialog"
 	ButtonFormmethodEnumGet    ButtonFormmethodEnum = "get"
 	ButtonFormmethodEnumPost   ButtonFormmethodEnum = "post"
+	ButtonFormmethodEnumDialog ButtonFormmethodEnum = "dialog"
 )
 
 type ButtonPopovertargetactionEnum string
@@ -87,20 +76,20 @@ const (
 type ButtonTypeEnum string
 
 const (
-	ButtonTypeEnumSubmit ButtonTypeEnum = "submit"
 	ButtonTypeEnumButton ButtonTypeEnum = "button"
 	ButtonTypeEnumReset  ButtonTypeEnum = "reset"
+	ButtonTypeEnumSubmit ButtonTypeEnum = "submit"
 )
 
 type ButtonAutocapitalizeEnum string
 
 const (
-	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
-	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
 	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
 	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
+	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
+	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 )
 
 type ButtonAutocorrectEnum string
@@ -138,13 +127,13 @@ const (
 type ButtonEnterkeyhintEnum string
 
 const (
+	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
 	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
 	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
 	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
 	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
-	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 )
 
 type ButtonHiddenEnum string
@@ -158,14 +147,14 @@ const (
 type ButtonInputmodeEnum string
 
 const (
+	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
+	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
 	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
 	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
 	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
 	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
 	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
 	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
-	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
-	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
 )
 
 type ButtonSpellcheckEnum string
@@ -462,13 +451,11 @@ func (e *ButtonElement) Writingsuggestions(a ButtonWritingsuggestionsEnum) *Butt
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *ButtonElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<button")); err != nil {
+	if _, err := w.Write([]byte("<button")); err != nil {
 		return err
 	}
 
@@ -498,17 +485,16 @@ func (e *ButtonElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</button>\n")); err != nil {
+	if _, err := w.Write([]byte("</button>")); err != nil {
 		return err
 	}
 

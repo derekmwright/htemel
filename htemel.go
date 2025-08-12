@@ -3,7 +3,6 @@ package htemel
 import (
 	"fmt"
 	"io"
-	"strings"
 
 	"golang.org/x/net/html"
 )
@@ -11,15 +10,6 @@ import (
 // Node defines the interface that must be implemented in order to render elements.
 type Node interface {
 	Render(w io.Writer) error
-	AddIndent(i int)
-	Indent() int
-}
-
-func SetIndent(i int) string {
-	if i > 0 {
-		return strings.Repeat("  ", i)
-	}
-	return ""
 }
 
 // GroupElement is a struct that backs the Group function.
@@ -47,10 +37,6 @@ func (e *GroupElement) Indent() int {
 // Render implements the Node interface by calling Render on all child nodes.
 func (e *GroupElement) Render(w io.Writer) error {
 	for _, child := range e.children {
-		if e.indent > 0 {
-			child.AddIndent(e.indent)
-		}
-
 		if err := child.Render(w); err != nil {
 			return err
 		}
@@ -102,9 +88,7 @@ func (e *GenericElement) Indent() int {
 }
 
 func (e *GenericElement) Render(w io.Writer) error {
-	indent := SetIndent(e.indent)
-
-	if _, err := w.Write([]byte(indent + "<" + e.tag)); err != nil {
+	if _, err := w.Write([]byte("<" + e.tag)); err != nil {
 		return err
 	}
 
@@ -120,7 +104,7 @@ func (e *GenericElement) Render(w io.Writer) error {
 		}
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 
@@ -129,13 +113,12 @@ func (e *GenericElement) Render(w io.Writer) error {
 	}
 
 	for _, child := range e.children {
-		child.AddIndent(e.indent)
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</" + e.tag + ">\n")); err != nil {
+	if _, err := w.Write([]byte("</" + e.tag + ">")); err != nil {
 		return err
 	}
 
@@ -171,21 +154,14 @@ func (e *TextElement) Indent() int {
 }
 
 func (e *TextElement) Render(w io.Writer) error {
-	indent := SetIndent(e.indent)
-
-	if _, err := w.Write([]byte(indent + e.text)); err != nil {
+	if _, err := w.Write([]byte(e.text)); err != nil {
 		return err
 	}
 
 	for _, child := range e.children {
-		child.AddIndent(e.indent)
 		if err := child.Render(w); err != nil {
 			return err
 		}
-	}
-
-	if _, err := w.Write([]byte("\n")); err != nil {
-		return err
 	}
 
 	return nil

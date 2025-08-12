@@ -46,17 +46,6 @@ func FormTernary(condition bool, true htemel.Node, false htemel.Node) *FormEleme
 	return Form(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *FormElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *FormElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type FormAutocompleteEnum string
 
 const (
@@ -67,20 +56,20 @@ const (
 type FormMethodEnum string
 
 const (
-	FormMethodEnumPost   FormMethodEnum = "post"
 	FormMethodEnumDialog FormMethodEnum = "dialog"
 	FormMethodEnumGet    FormMethodEnum = "get"
+	FormMethodEnumPost   FormMethodEnum = "post"
 )
 
 type FormAutocapitalizeEnum string
 
 const (
-	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
-	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
 	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
+	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
+	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 )
 
 type FormAutocorrectEnum string
@@ -103,64 +92,64 @@ const (
 type FormDirEnum string
 
 const (
-	FormDirEnumAuto FormDirEnum = "auto"
 	FormDirEnumLtr  FormDirEnum = "ltr"
 	FormDirEnumRtl  FormDirEnum = "rtl"
+	FormDirEnumAuto FormDirEnum = "auto"
 )
 
 type FormDraggableEnum string
 
 const (
-	FormDraggableEnumFalse FormDraggableEnum = "false"
 	FormDraggableEnumTrue  FormDraggableEnum = "true"
+	FormDraggableEnumFalse FormDraggableEnum = "false"
 )
 
 type FormEnterkeyhintEnum string
 
 const (
-	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
-	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
-	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
 	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
 	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
+	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
+	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
+	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 )
 
 type FormHiddenEnum string
 
 const (
-	FormHiddenEnumUntilFound FormHiddenEnum = "until-found"
 	FormHiddenEnumHidden     FormHiddenEnum = "hidden"
+	FormHiddenEnumUntilFound FormHiddenEnum = "until-found"
 	FormHiddenEnumEmpty      FormHiddenEnum = ""
 )
 
 type FormInputmodeEnum string
 
 const (
+	FormInputmodeEnumNone    FormInputmodeEnum = "none"
+	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
 	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
 	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
 	FormInputmodeEnumText    FormInputmodeEnum = "text"
 	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
 	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
 	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
-	FormInputmodeEnumNone    FormInputmodeEnum = "none"
-	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
 )
 
 type FormSpellcheckEnum string
 
 const (
-	FormSpellcheckEnumTrue  FormSpellcheckEnum = "true"
 	FormSpellcheckEnumFalse FormSpellcheckEnum = "false"
+	FormSpellcheckEnumTrue  FormSpellcheckEnum = "true"
 	FormSpellcheckEnumEmpty FormSpellcheckEnum = ""
 )
 
 type FormTranslateEnum string
 
 const (
-	FormTranslateEnumNo    FormTranslateEnum = "no"
 	FormTranslateEnumYes   FormTranslateEnum = "yes"
+	FormTranslateEnumNo    FormTranslateEnum = "no"
 	FormTranslateEnumEmpty FormTranslateEnum = ""
 )
 
@@ -408,13 +397,11 @@ func (e *FormElement) Writingsuggestions(a FormWritingsuggestionsEnum) *FormElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *FormElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<form")); err != nil {
+	if _, err := w.Write([]byte("<form")); err != nil {
 		return err
 	}
 
@@ -444,17 +431,16 @@ func (e *FormElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</form>\n")); err != nil {
+	if _, err := w.Write([]byte("</form>")); err != nil {
 		return err
 	}
 

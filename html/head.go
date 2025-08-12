@@ -46,17 +46,6 @@ func HeadTernary(condition bool, true htemel.Node, false htemel.Node) *HeadEleme
 	return Head(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *HeadElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *HeadElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type HeadAutocapitalizeEnum string
 
 const (
@@ -71,8 +60,8 @@ const (
 type HeadAutocorrectEnum string
 
 const (
-	HeadAutocorrectEnumOn    HeadAutocorrectEnum = "on"
 	HeadAutocorrectEnumOff   HeadAutocorrectEnum = "off"
+	HeadAutocorrectEnumOn    HeadAutocorrectEnum = "on"
 	HeadAutocorrectEnumEmpty HeadAutocorrectEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type HeadEnterkeyhintEnum string
 
 const (
+	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
+	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
+	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
 	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
 	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
 	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
-	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
-	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
-	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 )
 
 type HeadHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type HeadInputmodeEnum string
 
 const (
+	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
+	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
+	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
 	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
 	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
 	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
 	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
 	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
-	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
-	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
-	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
 )
 
 type HeadSpellcheckEnum string
@@ -339,13 +328,11 @@ func (e *HeadElement) Writingsuggestions(a HeadWritingsuggestionsEnum) *HeadElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *HeadElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<head")); err != nil {
+	if _, err := w.Write([]byte("<head")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *HeadElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</head>\n")); err != nil {
+	if _, err := w.Write([]byte("</head>")); err != nil {
 		return err
 	}
 

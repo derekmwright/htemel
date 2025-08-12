@@ -46,26 +46,15 @@ func MapTernary(condition bool, true htemel.Node, false htemel.Node) *MapElement
 	return Map(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *MapElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *MapElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type MapAutocapitalizeEnum string
 
 const (
+	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 	MapAutocapitalizeEnumCharacters MapAutocapitalizeEnum = "characters"
 	MapAutocapitalizeEnumNone       MapAutocapitalizeEnum = "none"
 	MapAutocapitalizeEnumOff        MapAutocapitalizeEnum = "off"
 	MapAutocapitalizeEnumOn         MapAutocapitalizeEnum = "on"
 	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
-	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 )
 
 type MapAutocorrectEnum string
@@ -103,34 +92,34 @@ const (
 type MapEnterkeyhintEnum string
 
 const (
+	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
+	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 	MapEnterkeyhintEnumSend     MapEnterkeyhintEnum = "send"
 	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
 	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
 	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
 	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
-	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
-	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 )
 
 type MapHiddenEnum string
 
 const (
-	MapHiddenEnumUntilFound MapHiddenEnum = "until-found"
 	MapHiddenEnumHidden     MapHiddenEnum = "hidden"
+	MapHiddenEnumUntilFound MapHiddenEnum = "until-found"
 	MapHiddenEnumEmpty      MapHiddenEnum = ""
 )
 
 type MapInputmodeEnum string
 
 const (
-	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
-	MapInputmodeEnumEmail   MapInputmodeEnum = "email"
-	MapInputmodeEnumNone    MapInputmodeEnum = "none"
-	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
 	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
 	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
 	MapInputmodeEnumText    MapInputmodeEnum = "text"
 	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
+	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
+	MapInputmodeEnumEmail   MapInputmodeEnum = "email"
+	MapInputmodeEnumNone    MapInputmodeEnum = "none"
+	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
 )
 
 type MapSpellcheckEnum string
@@ -144,16 +133,16 @@ const (
 type MapTranslateEnum string
 
 const (
-	MapTranslateEnumNo    MapTranslateEnum = "no"
 	MapTranslateEnumYes   MapTranslateEnum = "yes"
+	MapTranslateEnumNo    MapTranslateEnum = "no"
 	MapTranslateEnumEmpty MapTranslateEnum = ""
 )
 
 type MapWritingsuggestionsEnum string
 
 const (
-	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
 	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
+	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
 	MapWritingsuggestionsEnumEmpty MapWritingsuggestionsEnum = ""
 )
 
@@ -345,13 +334,11 @@ func (e *MapElement) Writingsuggestions(a MapWritingsuggestionsEnum) *MapElement
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MapElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<map")); err != nil {
+	if _, err := w.Write([]byte("<map")); err != nil {
 		return err
 	}
 
@@ -381,17 +368,16 @@ func (e *MapElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</map>\n")); err != nil {
+	if _, err := w.Write([]byte("</map>")); err != nil {
 		return err
 	}
 

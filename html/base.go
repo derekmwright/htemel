@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,33 +37,22 @@ func BaseIf(condition bool) *BaseElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *BaseElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *BaseElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type BaseAutocapitalizeEnum string
 
 const (
-	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
-	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
 	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
 	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
 	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
+	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
+	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
 )
 
 type BaseAutocorrectEnum string
 
 const (
-	BaseAutocorrectEnumOn    BaseAutocorrectEnum = "on"
 	BaseAutocorrectEnumOff   BaseAutocorrectEnum = "off"
+	BaseAutocorrectEnumOn    BaseAutocorrectEnum = "on"
 	BaseAutocorrectEnumEmpty BaseAutocorrectEnum = ""
 )
 
@@ -95,34 +83,34 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
+	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
+	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
+	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
-	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
-	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
-	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 )
 
 type BaseHiddenEnum string
 
 const (
-	BaseHiddenEnumUntilFound BaseHiddenEnum = "until-found"
 	BaseHiddenEnumHidden     BaseHiddenEnum = "hidden"
+	BaseHiddenEnumUntilFound BaseHiddenEnum = "until-found"
 	BaseHiddenEnumEmpty      BaseHiddenEnum = ""
 )
 
 type BaseInputmodeEnum string
 
 const (
-	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
-	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
-	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
-	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
 	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
 	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
 	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
+	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
+	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
+	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
+	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
 )
 
 type BaseSpellcheckEnum string
@@ -343,13 +331,11 @@ func (e *BaseElement) Writingsuggestions(a BaseWritingsuggestionsEnum) *BaseElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *BaseElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<base")); err != nil {
+	if _, err := w.Write([]byte("<base")); err != nil {
 		return err
 	}
 
@@ -379,7 +365,7 @@ func (e *BaseElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 

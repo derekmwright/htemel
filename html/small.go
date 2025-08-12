@@ -46,26 +46,15 @@ func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallEle
 	return Small(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *SmallElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *SmallElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type SmallAutocapitalizeEnum string
 
 const (
-	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
-	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
 	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
 	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
+	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
+	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 )
 
 type SmallAutocorrectEnum string
@@ -103,13 +92,13 @@ const (
 type SmallEnterkeyhintEnum string
 
 const (
-	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
 	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
 	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
 	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
 	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
+	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 )
 
 type SmallHiddenEnum string
@@ -152,8 +141,8 @@ const (
 type SmallWritingsuggestionsEnum string
 
 const (
-	SmallWritingsuggestionsEnumTrue  SmallWritingsuggestionsEnum = "true"
 	SmallWritingsuggestionsEnumFalse SmallWritingsuggestionsEnum = "false"
+	SmallWritingsuggestionsEnumTrue  SmallWritingsuggestionsEnum = "true"
 	SmallWritingsuggestionsEnumEmpty SmallWritingsuggestionsEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *SmallElement) Writingsuggestions(a SmallWritingsuggestionsEnum) *SmallE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *SmallElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<small")); err != nil {
+	if _, err := w.Write([]byte("<small")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *SmallElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</small>\n")); err != nil {
+	if _, err := w.Write([]byte("</small>")); err != nil {
 		return err
 	}
 

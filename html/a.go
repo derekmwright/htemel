@@ -46,17 +46,6 @@ func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
 	return A(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *AElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *AElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type AAutocapitalizeEnum string
 
 const (
@@ -79,9 +68,9 @@ const (
 type AContenteditableEnum string
 
 const (
+	AContenteditableEnumTrue          AContenteditableEnum = "true"
 	AContenteditableEnumFalse         AContenteditableEnum = "false"
 	AContenteditableEnumPlaintextOnly AContenteditableEnum = "plaintext-only"
-	AContenteditableEnumTrue          AContenteditableEnum = "true"
 	AContenteditableEnumEmpty         AContenteditableEnum = ""
 )
 
@@ -96,20 +85,20 @@ const (
 type ADraggableEnum string
 
 const (
-	ADraggableEnumTrue  ADraggableEnum = "true"
 	ADraggableEnumFalse ADraggableEnum = "false"
+	ADraggableEnumTrue  ADraggableEnum = "true"
 )
 
 type AEnterkeyhintEnum string
 
 const (
+	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
 	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
 	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
 	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
 	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
-	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
 )
 
 type AHiddenEnum string
@@ -123,14 +112,14 @@ const (
 type AInputmodeEnum string
 
 const (
-	AInputmodeEnumSearch  AInputmodeEnum = "search"
-	AInputmodeEnumTel     AInputmodeEnum = "tel"
-	AInputmodeEnumText    AInputmodeEnum = "text"
-	AInputmodeEnumUrl     AInputmodeEnum = "url"
 	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
 	AInputmodeEnumEmail   AInputmodeEnum = "email"
 	AInputmodeEnumNone    AInputmodeEnum = "none"
 	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
+	AInputmodeEnumSearch  AInputmodeEnum = "search"
+	AInputmodeEnumTel     AInputmodeEnum = "tel"
+	AInputmodeEnumText    AInputmodeEnum = "text"
+	AInputmodeEnumUrl     AInputmodeEnum = "url"
 )
 
 type ASpellcheckEnum string
@@ -144,8 +133,8 @@ const (
 type ATranslateEnum string
 
 const (
-	ATranslateEnumYes   ATranslateEnum = "yes"
 	ATranslateEnumNo    ATranslateEnum = "no"
+	ATranslateEnumYes   ATranslateEnum = "yes"
 	ATranslateEnumEmpty ATranslateEnum = ""
 )
 
@@ -387,13 +376,11 @@ func (e *AElement) Writingsuggestions(a AWritingsuggestionsEnum) *AElement {
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *AElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<a")); err != nil {
+	if _, err := w.Write([]byte("<a")); err != nil {
 		return err
 	}
 
@@ -423,17 +410,16 @@ func (e *AElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</a>\n")); err != nil {
+	if _, err := w.Write([]byte("</a>")); err != nil {
 		return err
 	}
 

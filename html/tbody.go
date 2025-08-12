@@ -46,42 +46,31 @@ func TbodyTernary(condition bool, true htemel.Node, false htemel.Node) *TbodyEle
 	return Tbody(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *TbodyElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *TbodyElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type TbodyAutocapitalizeEnum string
 
 const (
-	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
 	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
 	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 	TbodyAutocapitalizeEnumWords      TbodyAutocapitalizeEnum = "words"
 	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
 	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
+	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
 )
 
 type TbodyAutocorrectEnum string
 
 const (
-	TbodyAutocorrectEnumOn    TbodyAutocorrectEnum = "on"
 	TbodyAutocorrectEnumOff   TbodyAutocorrectEnum = "off"
+	TbodyAutocorrectEnumOn    TbodyAutocorrectEnum = "on"
 	TbodyAutocorrectEnumEmpty TbodyAutocorrectEnum = ""
 )
 
 type TbodyContenteditableEnum string
 
 const (
-	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
 	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
+	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumEmpty         TbodyContenteditableEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type TbodyEnterkeyhintEnum string
 
 const (
-	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
-	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
-	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 	TbodyEnterkeyhintEnumDone     TbodyEnterkeyhintEnum = "done"
 	TbodyEnterkeyhintEnumEnter    TbodyEnterkeyhintEnum = "enter"
 	TbodyEnterkeyhintEnumGo       TbodyEnterkeyhintEnum = "go"
 	TbodyEnterkeyhintEnumNext     TbodyEnterkeyhintEnum = "next"
+	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
+	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
+	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 )
 
 type TbodyHiddenEnum string
@@ -123,29 +112,29 @@ const (
 type TbodyInputmodeEnum string
 
 const (
+	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
+	TbodyInputmodeEnumSearch  TbodyInputmodeEnum = "search"
+	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
 	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
 	TbodyInputmodeEnumUrl     TbodyInputmodeEnum = "url"
 	TbodyInputmodeEnumDecimal TbodyInputmodeEnum = "decimal"
 	TbodyInputmodeEnumEmail   TbodyInputmodeEnum = "email"
 	TbodyInputmodeEnumNone    TbodyInputmodeEnum = "none"
-	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
-	TbodyInputmodeEnumSearch  TbodyInputmodeEnum = "search"
-	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
 )
 
 type TbodySpellcheckEnum string
 
 const (
-	TbodySpellcheckEnumTrue  TbodySpellcheckEnum = "true"
 	TbodySpellcheckEnumFalse TbodySpellcheckEnum = "false"
+	TbodySpellcheckEnumTrue  TbodySpellcheckEnum = "true"
 	TbodySpellcheckEnumEmpty TbodySpellcheckEnum = ""
 )
 
 type TbodyTranslateEnum string
 
 const (
-	TbodyTranslateEnumNo    TbodyTranslateEnum = "no"
 	TbodyTranslateEnumYes   TbodyTranslateEnum = "yes"
+	TbodyTranslateEnumNo    TbodyTranslateEnum = "no"
 	TbodyTranslateEnumEmpty TbodyTranslateEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *TbodyElement) Writingsuggestions(a TbodyWritingsuggestionsEnum) *TbodyE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *TbodyElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<tbody")); err != nil {
+	if _, err := w.Write([]byte("<tbody")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *TbodyElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</tbody>\n")); err != nil {
+	if _, err := w.Write([]byte("</tbody>")); err != nil {
 		return err
 	}
 

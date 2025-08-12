@@ -46,42 +46,31 @@ func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainEleme
 	return Main(false)
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *MainElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *MainElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type MainAutocapitalizeEnum string
 
 const (
-	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
 	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
 	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
 	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
+	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
 )
 
 type MainAutocorrectEnum string
 
 const (
-	MainAutocorrectEnumOn    MainAutocorrectEnum = "on"
 	MainAutocorrectEnumOff   MainAutocorrectEnum = "off"
+	MainAutocorrectEnumOn    MainAutocorrectEnum = "on"
 	MainAutocorrectEnumEmpty MainAutocorrectEnum = ""
 )
 
 type MainContenteditableEnum string
 
 const (
+	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
 	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
-	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumEmpty         MainContenteditableEnum = ""
 )
 
@@ -103,13 +92,13 @@ const (
 type MainEnterkeyhintEnum string
 
 const (
+	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
+	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
+	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
 	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
 	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
 	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
-	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
-	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
-	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 )
 
 type MainHiddenEnum string
@@ -123,6 +112,7 @@ const (
 type MainInputmodeEnum string
 
 const (
+	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
 	MainInputmodeEnumNone    MainInputmodeEnum = "none"
 	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
@@ -130,22 +120,21 @@ const (
 	MainInputmodeEnumText    MainInputmodeEnum = "text"
 	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
-	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
 )
 
 type MainSpellcheckEnum string
 
 const (
-	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
 	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
+	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
 	MainSpellcheckEnumEmpty MainSpellcheckEnum = ""
 )
 
 type MainTranslateEnum string
 
 const (
-	MainTranslateEnumNo    MainTranslateEnum = "no"
 	MainTranslateEnumYes   MainTranslateEnum = "yes"
+	MainTranslateEnumNo    MainTranslateEnum = "no"
 	MainTranslateEnumEmpty MainTranslateEnum = ""
 )
 
@@ -339,13 +328,11 @@ func (e *MainElement) Writingsuggestions(a MainWritingsuggestionsEnum) *MainElem
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *MainElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<main")); err != nil {
+	if _, err := w.Write([]byte("<main")); err != nil {
 		return err
 	}
 
@@ -375,17 +362,16 @@ func (e *MainElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 	for _, child := range e.children {
-		child.AddIndent(e.Indent())
 		if err := child.Render(w); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte(indent + "</main>\n")); err != nil {
+	if _, err := w.Write([]byte("</main>")); err != nil {
 		return err
 	}
 

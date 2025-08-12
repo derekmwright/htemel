@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/derekmwright/htemel"
 	"golang.org/x/net/html"
 )
 
@@ -38,17 +37,6 @@ func InputIf(condition bool) *InputElement {
 	}
 }
 
-// AddIndent is called by the Render function on children elements to set their indentation.
-func (e *InputElement) Indent() int {
-	return e.indent
-}
-
-// AddIndent is called by the Render function on children elements to set their indentation.
-// The parent should pass its own indentation value and this function will increment it for itself.
-func (e *InputElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
 type InputColorspaceEnum string
 
 const (
@@ -67,47 +55,47 @@ const (
 type InputPopovertargetactionEnum string
 
 const (
+	InputPopovertargetactionEnumToggle InputPopovertargetactionEnum = "toggle"
 	InputPopovertargetactionEnumHide   InputPopovertargetactionEnum = "hide"
 	InputPopovertargetactionEnumShow   InputPopovertargetactionEnum = "show"
-	InputPopovertargetactionEnumToggle InputPopovertargetactionEnum = "toggle"
 )
 
 type InputTypeEnum string
 
 const (
-	InputTypeEnumButton        InputTypeEnum = "button"
-	InputTypeEnumCheckbox      InputTypeEnum = "checkbox"
-	InputTypeEnumFile          InputTypeEnum = "file"
-	InputTypeEnumNumber        InputTypeEnum = "number"
-	InputTypeEnumWeek          InputTypeEnum = "week"
-	InputTypeEnumColor         InputTypeEnum = "color"
-	InputTypeEnumDate          InputTypeEnum = "date"
-	InputTypeEnumDatetimeLocal InputTypeEnum = "datetime-local"
-	InputTypeEnumEmail         InputTypeEnum = "email"
 	InputTypeEnumRange         InputTypeEnum = "range"
+	InputTypeEnumButton        InputTypeEnum = "button"
+	InputTypeEnumColor         InputTypeEnum = "color"
+	InputTypeEnumEmail         InputTypeEnum = "email"
+	InputTypeEnumHidden        InputTypeEnum = "hidden"
+	InputTypeEnumUrl           InputTypeEnum = "url"
+	InputTypeEnumDatetimeLocal InputTypeEnum = "datetime-local"
+	InputTypeEnumFile          InputTypeEnum = "file"
+	InputTypeEnumPassword      InputTypeEnum = "password"
+	InputTypeEnumSearch        InputTypeEnum = "search"
 	InputTypeEnumText          InputTypeEnum = "text"
+	InputTypeEnumWeek          InputTypeEnum = "week"
+	InputTypeEnumDate          InputTypeEnum = "date"
 	InputTypeEnumImage         InputTypeEnum = "image"
 	InputTypeEnumMonth         InputTypeEnum = "month"
-	InputTypeEnumPassword      InputTypeEnum = "password"
+	InputTypeEnumNumber        InputTypeEnum = "number"
+	InputTypeEnumTel           InputTypeEnum = "tel"
+	InputTypeEnumTime          InputTypeEnum = "time"
+	InputTypeEnumCheckbox      InputTypeEnum = "checkbox"
 	InputTypeEnumRadio         InputTypeEnum = "radio"
 	InputTypeEnumReset         InputTypeEnum = "reset"
-	InputTypeEnumTime          InputTypeEnum = "time"
-	InputTypeEnumUrl           InputTypeEnum = "url"
-	InputTypeEnumHidden        InputTypeEnum = "hidden"
-	InputTypeEnumSearch        InputTypeEnum = "search"
 	InputTypeEnumSubmit        InputTypeEnum = "submit"
-	InputTypeEnumTel           InputTypeEnum = "tel"
 )
 
 type InputAutocapitalizeEnum string
 
 const (
-	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
 	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
 	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
 	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
 	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
+	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 )
 
 type InputAutocorrectEnum string
@@ -130,9 +118,9 @@ const (
 type InputDirEnum string
 
 const (
-	InputDirEnumRtl  InputDirEnum = "rtl"
 	InputDirEnumAuto InputDirEnum = "auto"
 	InputDirEnumLtr  InputDirEnum = "ltr"
+	InputDirEnumRtl  InputDirEnum = "rtl"
 )
 
 type InputDraggableEnum string
@@ -145,13 +133,13 @@ const (
 type InputEnterkeyhintEnum string
 
 const (
+	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
 	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
 	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
 	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
 	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
 	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
 	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
-	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
 )
 
 type InputHiddenEnum string
@@ -165,14 +153,14 @@ const (
 type InputInputmodeEnum string
 
 const (
+	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
+	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
+	InputInputmodeEnumText    InputInputmodeEnum = "text"
 	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
 	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
 	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 	InputInputmodeEnumNone    InputInputmodeEnum = "none"
 	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
-	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
-	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
-	InputInputmodeEnumText    InputInputmodeEnum = "text"
 )
 
 type InputSpellcheckEnum string
@@ -186,16 +174,16 @@ const (
 type InputTranslateEnum string
 
 const (
-	InputTranslateEnumNo    InputTranslateEnum = "no"
 	InputTranslateEnumYes   InputTranslateEnum = "yes"
+	InputTranslateEnumNo    InputTranslateEnum = "no"
 	InputTranslateEnumEmpty InputTranslateEnum = ""
 )
 
 type InputWritingsuggestionsEnum string
 
 const (
-	InputWritingsuggestionsEnumFalse InputWritingsuggestionsEnum = "false"
 	InputWritingsuggestionsEnumTrue  InputWritingsuggestionsEnum = "true"
+	InputWritingsuggestionsEnumFalse InputWritingsuggestionsEnum = "false"
 	InputWritingsuggestionsEnumEmpty InputWritingsuggestionsEnum = ""
 )
 
@@ -585,13 +573,11 @@ func (e *InputElement) Writingsuggestions(a InputWritingsuggestionsEnum) *InputE
 //
 // *Except for void elements as they are self closing and do not contain children.
 func (e *InputElement) Render(w io.Writer) error {
-	indent := htemel.SetIndent(e.indent)
-
 	if e.skipRender {
 		return nil
 	}
 
-	if _, err := w.Write([]byte(indent + "<input")); err != nil {
+	if _, err := w.Write([]byte("<input")); err != nil {
 		return err
 	}
 
@@ -621,7 +607,7 @@ func (e *InputElement) Render(w io.Writer) error {
 		i++
 	}
 
-	if _, err := w.Write([]byte(">\n")); err != nil {
+	if _, err := w.Write([]byte(">")); err != nil {
 		return err
 	}
 
