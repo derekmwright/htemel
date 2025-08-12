@@ -52,12 +52,12 @@ func (e *BrElement) AddIndent(i int) {
 type BrAutocapitalizeEnum string
 
 const (
-	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
-	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 	BrAutocapitalizeEnumOff        BrAutocapitalizeEnum = "off"
 	BrAutocapitalizeEnumOn         BrAutocapitalizeEnum = "on"
 	BrAutocapitalizeEnumSentences  BrAutocapitalizeEnum = "sentences"
 	BrAutocapitalizeEnumWords      BrAutocapitalizeEnum = "words"
+	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
+	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 )
 
 type BrAutocorrectEnum string
@@ -95,26 +95,27 @@ const (
 type BrEnterkeyhintEnum string
 
 const (
-	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
-	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
-	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
 	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
 	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
 	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
+	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
+	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
+	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
 )
 
 type BrHiddenEnum string
 
 const (
-	BrHiddenEnumHidden     BrHiddenEnum = "hidden"
 	BrHiddenEnumUntilFound BrHiddenEnum = "until-found"
+	BrHiddenEnumHidden     BrHiddenEnum = "hidden"
 	BrHiddenEnumEmpty      BrHiddenEnum = ""
 )
 
 type BrInputmodeEnum string
 
 const (
+	BrInputmodeEnumNone    BrInputmodeEnum = "none"
 	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
 	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
 	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
@@ -122,7 +123,6 @@ const (
 	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
 	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
 	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
-	BrInputmodeEnumNone    BrInputmodeEnum = "none"
 )
 
 type BrSpellcheckEnum string
@@ -157,18 +157,10 @@ func (e *BrElement) Autocapitalize(a BrAutocapitalizeEnum) *BrElement {
 	return e
 }
 
-func BrAutocapitalizeCustom(s string) BrAutocapitalizeEnum {
-	return BrAutocapitalizeEnum(s)
-}
-
 func (e *BrElement) Autocorrect(a BrAutocorrectEnum) *BrElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func BrAutocorrectCustom(s string) BrAutocorrectEnum {
-	return BrAutocorrectEnum(s)
 }
 
 func (e *BrElement) Autofocus(b bool) *BrElement {
@@ -189,10 +181,6 @@ func (e *BrElement) Contenteditable(a BrContenteditableEnum) *BrElement {
 	return e
 }
 
-func BrContenteditableCustom(s string) BrContenteditableEnum {
-	return BrContenteditableEnum(s)
-}
-
 func (e *BrElement) DataUnsafe(name string, s string) *BrElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -211,18 +199,10 @@ func (e *BrElement) Dir(a BrDirEnum) *BrElement {
 	return e
 }
 
-func BrDirCustom(s string) BrDirEnum {
-	return BrDirEnum(s)
-}
-
 func (e *BrElement) Draggable(a BrDraggableEnum) *BrElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func BrDraggableCustom(s string) BrDraggableEnum {
-	return BrDraggableEnum(s)
 }
 
 func (e *BrElement) Enterkeyhint(a BrEnterkeyhintEnum) *BrElement {
@@ -231,18 +211,10 @@ func (e *BrElement) Enterkeyhint(a BrEnterkeyhintEnum) *BrElement {
 	return e
 }
 
-func BrEnterkeyhintCustom(s string) BrEnterkeyhintEnum {
-	return BrEnterkeyhintEnum(s)
-}
-
 func (e *BrElement) Hidden(a BrHiddenEnum) *BrElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func BrHiddenCustom(s string) BrHiddenEnum {
-	return BrHiddenEnum(s)
 }
 
 func (e *BrElement) Id(s string) *BrElement {
@@ -261,10 +233,6 @@ func (e *BrElement) Inputmode(a BrInputmodeEnum) *BrElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func BrInputmodeCustom(s string) BrInputmodeEnum {
-	return BrInputmodeEnum(s)
 }
 
 func (e *BrElement) Itemid(s string) *BrElement {
@@ -327,10 +295,6 @@ func (e *BrElement) Spellcheck(a BrSpellcheckEnum) *BrElement {
 	return e
 }
 
-func BrSpellcheckCustom(s string) BrSpellcheckEnum {
-	return BrSpellcheckEnum(s)
-}
-
 func (e *BrElement) Style(s string) *BrElement {
 	e.attributes["style"] = s
 
@@ -355,18 +319,10 @@ func (e *BrElement) Translate(a BrTranslateEnum) *BrElement {
 	return e
 }
 
-func BrTranslateCustom(s string) BrTranslateEnum {
-	return BrTranslateEnum(s)
-}
-
 func (e *BrElement) Writingsuggestions(a BrWritingsuggestionsEnum) *BrElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func BrWritingsuggestionsCustom(s string) BrWritingsuggestionsEnum {
-	return BrWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

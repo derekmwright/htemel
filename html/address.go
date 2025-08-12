@@ -60,12 +60,12 @@ func (e *AddressElement) AddIndent(i int) {
 type AddressAutocapitalizeEnum string
 
 const (
+	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
 	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
 	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
 	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
-	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 )
 
 type AddressAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type AddressDirEnum string
 
 const (
+	AddressDirEnumRtl  AddressDirEnum = "rtl"
 	AddressDirEnumAuto AddressDirEnum = "auto"
 	AddressDirEnumLtr  AddressDirEnum = "ltr"
-	AddressDirEnumRtl  AddressDirEnum = "rtl"
 )
 
 type AddressDraggableEnum string
@@ -115,22 +115,22 @@ const (
 type AddressHiddenEnum string
 
 const (
-	AddressHiddenEnumUntilFound AddressHiddenEnum = "until-found"
 	AddressHiddenEnumHidden     AddressHiddenEnum = "hidden"
+	AddressHiddenEnumUntilFound AddressHiddenEnum = "until-found"
 	AddressHiddenEnumEmpty      AddressHiddenEnum = ""
 )
 
 type AddressInputmodeEnum string
 
 const (
-	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
-	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
-	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 	AddressInputmodeEnumText    AddressInputmodeEnum = "text"
 	AddressInputmodeEnumUrl     AddressInputmodeEnum = "url"
 	AddressInputmodeEnumDecimal AddressInputmodeEnum = "decimal"
 	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
+	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
+	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
+	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 )
 
 type AddressSpellcheckEnum string
@@ -144,16 +144,16 @@ const (
 type AddressTranslateEnum string
 
 const (
-	AddressTranslateEnumNo    AddressTranslateEnum = "no"
 	AddressTranslateEnumYes   AddressTranslateEnum = "yes"
+	AddressTranslateEnumNo    AddressTranslateEnum = "no"
 	AddressTranslateEnumEmpty AddressTranslateEnum = ""
 )
 
 type AddressWritingsuggestionsEnum string
 
 const (
-	AddressWritingsuggestionsEnumTrue  AddressWritingsuggestionsEnum = "true"
 	AddressWritingsuggestionsEnumFalse AddressWritingsuggestionsEnum = "false"
+	AddressWritingsuggestionsEnumTrue  AddressWritingsuggestionsEnum = "true"
 	AddressWritingsuggestionsEnumEmpty AddressWritingsuggestionsEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *AddressElement) Autocapitalize(a AddressAutocapitalizeEnum) *AddressEle
 	return e
 }
 
-func AddressAutocapitalizeCustom(s string) AddressAutocapitalizeEnum {
-	return AddressAutocapitalizeEnum(s)
-}
-
 func (e *AddressElement) Autocorrect(a AddressAutocorrectEnum) *AddressElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func AddressAutocorrectCustom(s string) AddressAutocorrectEnum {
-	return AddressAutocorrectEnum(s)
 }
 
 func (e *AddressElement) Autofocus(b bool) *AddressElement {
@@ -197,10 +189,6 @@ func (e *AddressElement) Contenteditable(a AddressContenteditableEnum) *AddressE
 	return e
 }
 
-func AddressContenteditableCustom(s string) AddressContenteditableEnum {
-	return AddressContenteditableEnum(s)
-}
-
 func (e *AddressElement) DataUnsafe(name string, s string) *AddressElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *AddressElement) Dir(a AddressDirEnum) *AddressElement {
 	return e
 }
 
-func AddressDirCustom(s string) AddressDirEnum {
-	return AddressDirEnum(s)
-}
-
 func (e *AddressElement) Draggable(a AddressDraggableEnum) *AddressElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func AddressDraggableCustom(s string) AddressDraggableEnum {
-	return AddressDraggableEnum(s)
 }
 
 func (e *AddressElement) Enterkeyhint(a AddressEnterkeyhintEnum) *AddressElement {
@@ -239,18 +219,10 @@ func (e *AddressElement) Enterkeyhint(a AddressEnterkeyhintEnum) *AddressElement
 	return e
 }
 
-func AddressEnterkeyhintCustom(s string) AddressEnterkeyhintEnum {
-	return AddressEnterkeyhintEnum(s)
-}
-
 func (e *AddressElement) Hidden(a AddressHiddenEnum) *AddressElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func AddressHiddenCustom(s string) AddressHiddenEnum {
-	return AddressHiddenEnum(s)
 }
 
 func (e *AddressElement) Id(s string) *AddressElement {
@@ -269,10 +241,6 @@ func (e *AddressElement) Inputmode(a AddressInputmodeEnum) *AddressElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func AddressInputmodeCustom(s string) AddressInputmodeEnum {
-	return AddressInputmodeEnum(s)
 }
 
 func (e *AddressElement) Itemid(s string) *AddressElement {
@@ -335,10 +303,6 @@ func (e *AddressElement) Spellcheck(a AddressSpellcheckEnum) *AddressElement {
 	return e
 }
 
-func AddressSpellcheckCustom(s string) AddressSpellcheckEnum {
-	return AddressSpellcheckEnum(s)
-}
-
 func (e *AddressElement) Style(s string) *AddressElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *AddressElement) Translate(a AddressTranslateEnum) *AddressElement {
 	return e
 }
 
-func AddressTranslateCustom(s string) AddressTranslateEnum {
-	return AddressTranslateEnum(s)
-}
-
 func (e *AddressElement) Writingsuggestions(a AddressWritingsuggestionsEnum) *AddressElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func AddressWritingsuggestionsCustom(s string) AddressWritingsuggestionsEnum {
-	return AddressWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

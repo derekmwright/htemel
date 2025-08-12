@@ -1870,7 +1870,24 @@
     },
     {
       "tag": "fieldset",
-      "description": "The fieldset element represents a set of form controls (or other content) grouped together, optionally with a caption. The caption is given by the first legend element that is a child of the fieldset element, if any. The remainder of the descendants form the group."
+      "description": "The fieldset element represents a set of form controls (or other content) grouped together, optionally with a caption. The caption is given by the first legend element that is a child of the fieldset element, if any. The remainder of the descendants form the group.",
+      "attributes": [
+        {
+          "name": "disabled",
+          "description": "Whether the descendant form controls, except any inside legend, are disabled",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "form",
+          "description": "Associates the element with a form element",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "name",
+          "description": "Name of the element to use in the form.elements API.",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "legend",
@@ -1882,7 +1899,19 @@
     },
     {
       "tag": "details",
-      "description": "The details element represents a disclosure widget from which the user can obtain additional information or controls."
+      "description": "The details element represents a disclosure widget from which the user can obtain additional information or controls.",
+      "attributes": [
+        {
+          "name": "name",
+          "description": "Name of group of mutually-exclusive details elements",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "open",
+          "description": "Whether the details are visible",
+          "attribute_type": "AttributeTypeBool"
+        }
+      ]
     },
     {
       "tag": "summary",
@@ -1890,11 +1919,100 @@
     },
     {
       "tag": "dialog",
-      "description": "The dialog element represents a transitory part of an application, in the form of a small window (\"dialog box\"), which the user interacts with to perform a task or gather information. Once the user is done, the dialog can be automatically closed by the application, or manually closed by the user."
+      "description": "The dialog element represents a transitory part of an application, in the form of a small window (\"dialog box\"), which the user interacts with to perform a task or gather information. Once the user is done, the dialog can be automatically closed by the application, or manually closed by the user.",
+      "attributes": [
+        {
+          "name": "closedby",
+          "description": "Which user actions will close the dialog",
+          "allowed": {
+            "any": {},
+            "closerequest": {},
+            "none": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "open",
+          "description": "Whether the dialog box is showing",
+          "attribute_type": "AttributeTypeBool"
+        }
+      ]
     },
     {
       "tag": "script",
-      "description": "The script element allows authors to include dynamic script, instructions to the user agent, and data blocks in their documents. The element does not represent content for the user."
+      "description": "The script element allows authors to include dynamic script, instructions to the user agent, and data blocks in their documents. The element does not represent content for the user.",
+      "attributes": [
+        {
+          "name": "type",
+          "description": "Type of script",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "src",
+          "description": "Address of the resource",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "nomodule",
+          "description": "Prevents execution in user agents that support module scripts",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "async",
+          "description": "Execute script when available, without blocking while fetching",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "defer",
+          "description": "Defer script execution",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "blocking",
+          "description": "Whether the element is potentially render-blocking",
+          "allowed": {
+            "render": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "crossorigin",
+          "description": "How the element handles crossorigin requests",
+          "allowed": {
+            "anonymous": {},
+            "use-credentials": {}
+          },
+          "allow_empty": true,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "referrerpolicy",
+          "description": "Referrer policy for fetches initiated by the element",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "integrity",
+          "description": "Integrity metadata used in Subresource Integrity checks [SRI]",
+          "attribute_type": "AttributeTypeString"
+        },
+        {
+          "name": "fetchpriority",
+          "description": "Sets the priority for fetches initiated by the element",
+          "allowed": {
+            "auto": {},
+            "high": {},
+            "low": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        }
+      ]
     },
     {
       "tag": "noscript",
@@ -1902,15 +2020,67 @@
     },
     {
       "tag": "template",
-      "description": "The template element is used to declare fragments of HTML that can be cloned and inserted in the document by script."
+      "description": "The template element is used to declare fragments of HTML that can be cloned and inserted in the document by script.",
+      "attributes": [
+        {
+          "name": "shadowrootmode",
+          "description": "Enables streaming declarative shadow roots",
+          "allowed": {
+            "closed": {},
+            "open": {}
+          },
+          "allow_empty": false,
+          "allow_custom": false,
+          "attribute_type": "AttributeTypeEnum"
+        },
+        {
+          "name": "shadowrootdelegatefocus",
+          "description": "Sets delegates focus on a declarative shadow root",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "shadowrootclonable",
+          "description": "Sets clonable on a declarative shadow root",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "shadowrootserializable",
+          "description": "Sets serializable on a declarative shadow root",
+          "attribute_type": "AttributeTypeBool"
+        },
+        {
+          "name": "shadowrootcustomelementregistry",
+          "description": "Enables declarative shadow roots to indicate they will use a custom element registry\n",
+          "attribute_type": "AttributeTypeBool"
+        }
+      ]
     },
     {
       "tag": "slot",
-      "description": "The slot element defines a slot. It is typically used in a shadow tree. A slot element represents its assigned nodes, if any, and its contents otherwise."
+      "description": "The slot element defines a slot. It is typically used in a shadow tree. A slot element represents its assigned nodes, if any, and its contents otherwise.",
+      "attributes": [
+        {
+          "name": "name",
+          "description": "Name of shadow tree slot",
+          "attribute_type": "AttributeTypeString"
+        }
+      ]
     },
     {
       "tag": "canvas",
-      "description": "The canvas element provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly."
+      "description": "The canvas element provides scripts with a resolution-dependent bitmap canvas, which can be used for rendering graphs, game graphics, art, or other visual images on the fly.",
+      "attributes": [
+        {
+          "name": "width",
+          "description": "Horizontal dimension",
+          "attribute_type": "AttributeTypeNumber"
+        },
+        {
+          "name": "height",
+          "description": "Vertical dimension",
+          "attribute_type": "AttributeTypeNumber"
+        }
+      ]
     },
     {
       "tag": "h2",

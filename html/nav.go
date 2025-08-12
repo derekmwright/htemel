@@ -60,12 +60,12 @@ func (e *NavElement) AddIndent(i int) {
 type NavAutocapitalizeEnum string
 
 const (
+	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
 	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
 	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
 	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
 	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
-	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
 )
 
 type NavAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type NavContenteditableEnum string
 
 const (
+	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
-	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
 	NavContenteditableEnumEmpty         NavContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
+	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
+	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
 	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
 	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
 	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
-	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
-	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
 )
 
 type NavHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type NavInputmodeEnum string
 
 const (
-	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
-	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
-	NavInputmodeEnumText    NavInputmodeEnum = "text"
-	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
 	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
 	NavInputmodeEnumNone    NavInputmodeEnum = "none"
 	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
+	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
+	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
+	NavInputmodeEnumText    NavInputmodeEnum = "text"
+	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 )
 
 type NavSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type NavTranslateEnum string
 
 const (
-	NavTranslateEnumYes   NavTranslateEnum = "yes"
 	NavTranslateEnumNo    NavTranslateEnum = "no"
+	NavTranslateEnumYes   NavTranslateEnum = "yes"
 	NavTranslateEnumEmpty NavTranslateEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *NavElement) Autocapitalize(a NavAutocapitalizeEnum) *NavElement {
 	return e
 }
 
-func NavAutocapitalizeCustom(s string) NavAutocapitalizeEnum {
-	return NavAutocapitalizeEnum(s)
-}
-
 func (e *NavElement) Autocorrect(a NavAutocorrectEnum) *NavElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func NavAutocorrectCustom(s string) NavAutocorrectEnum {
-	return NavAutocorrectEnum(s)
 }
 
 func (e *NavElement) Autofocus(b bool) *NavElement {
@@ -197,10 +189,6 @@ func (e *NavElement) Contenteditable(a NavContenteditableEnum) *NavElement {
 	return e
 }
 
-func NavContenteditableCustom(s string) NavContenteditableEnum {
-	return NavContenteditableEnum(s)
-}
-
 func (e *NavElement) DataUnsafe(name string, s string) *NavElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *NavElement) Dir(a NavDirEnum) *NavElement {
 	return e
 }
 
-func NavDirCustom(s string) NavDirEnum {
-	return NavDirEnum(s)
-}
-
 func (e *NavElement) Draggable(a NavDraggableEnum) *NavElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func NavDraggableCustom(s string) NavDraggableEnum {
-	return NavDraggableEnum(s)
 }
 
 func (e *NavElement) Enterkeyhint(a NavEnterkeyhintEnum) *NavElement {
@@ -239,18 +219,10 @@ func (e *NavElement) Enterkeyhint(a NavEnterkeyhintEnum) *NavElement {
 	return e
 }
 
-func NavEnterkeyhintCustom(s string) NavEnterkeyhintEnum {
-	return NavEnterkeyhintEnum(s)
-}
-
 func (e *NavElement) Hidden(a NavHiddenEnum) *NavElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func NavHiddenCustom(s string) NavHiddenEnum {
-	return NavHiddenEnum(s)
 }
 
 func (e *NavElement) Id(s string) *NavElement {
@@ -269,10 +241,6 @@ func (e *NavElement) Inputmode(a NavInputmodeEnum) *NavElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func NavInputmodeCustom(s string) NavInputmodeEnum {
-	return NavInputmodeEnum(s)
 }
 
 func (e *NavElement) Itemid(s string) *NavElement {
@@ -335,10 +303,6 @@ func (e *NavElement) Spellcheck(a NavSpellcheckEnum) *NavElement {
 	return e
 }
 
-func NavSpellcheckCustom(s string) NavSpellcheckEnum {
-	return NavSpellcheckEnum(s)
-}
-
 func (e *NavElement) Style(s string) *NavElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *NavElement) Translate(a NavTranslateEnum) *NavElement {
 	return e
 }
 
-func NavTranslateCustom(s string) NavTranslateEnum {
-	return NavTranslateEnum(s)
-}
-
 func (e *NavElement) Writingsuggestions(a NavWritingsuggestionsEnum) *NavElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func NavWritingsuggestionsCustom(s string) NavWritingsuggestionsEnum {
-	return NavWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

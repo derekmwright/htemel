@@ -60,12 +60,12 @@ func (e *RtElement) AddIndent(i int) {
 type RtAutocapitalizeEnum string
 
 const (
+	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
+	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
 	RtAutocapitalizeEnumCharacters RtAutocapitalizeEnum = "characters"
 	RtAutocapitalizeEnumNone       RtAutocapitalizeEnum = "none"
 	RtAutocapitalizeEnumOff        RtAutocapitalizeEnum = "off"
 	RtAutocapitalizeEnumOn         RtAutocapitalizeEnum = "on"
-	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
-	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
 )
 
 type RtAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type RtEnterkeyhintEnum string
 
 const (
+	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
 	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
 	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
 	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
 	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
 	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
 	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
-	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
 )
 
 type RtHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type RtInputmodeEnum string
 
 const (
-	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
 	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
 	RtInputmodeEnumNone    RtInputmodeEnum = "none"
 	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
@@ -131,6 +130,7 @@ const (
 	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
 	RtInputmodeEnumText    RtInputmodeEnum = "text"
 	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
+	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
 )
 
 type RtSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type RtWritingsuggestionsEnum string
 
 const (
-	RtWritingsuggestionsEnumFalse RtWritingsuggestionsEnum = "false"
 	RtWritingsuggestionsEnumTrue  RtWritingsuggestionsEnum = "true"
+	RtWritingsuggestionsEnumFalse RtWritingsuggestionsEnum = "false"
 	RtWritingsuggestionsEnumEmpty RtWritingsuggestionsEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *RtElement) Autocapitalize(a RtAutocapitalizeEnum) *RtElement {
 	return e
 }
 
-func RtAutocapitalizeCustom(s string) RtAutocapitalizeEnum {
-	return RtAutocapitalizeEnum(s)
-}
-
 func (e *RtElement) Autocorrect(a RtAutocorrectEnum) *RtElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func RtAutocorrectCustom(s string) RtAutocorrectEnum {
-	return RtAutocorrectEnum(s)
 }
 
 func (e *RtElement) Autofocus(b bool) *RtElement {
@@ -197,10 +189,6 @@ func (e *RtElement) Contenteditable(a RtContenteditableEnum) *RtElement {
 	return e
 }
 
-func RtContenteditableCustom(s string) RtContenteditableEnum {
-	return RtContenteditableEnum(s)
-}
-
 func (e *RtElement) DataUnsafe(name string, s string) *RtElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *RtElement) Dir(a RtDirEnum) *RtElement {
 	return e
 }
 
-func RtDirCustom(s string) RtDirEnum {
-	return RtDirEnum(s)
-}
-
 func (e *RtElement) Draggable(a RtDraggableEnum) *RtElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func RtDraggableCustom(s string) RtDraggableEnum {
-	return RtDraggableEnum(s)
 }
 
 func (e *RtElement) Enterkeyhint(a RtEnterkeyhintEnum) *RtElement {
@@ -239,18 +219,10 @@ func (e *RtElement) Enterkeyhint(a RtEnterkeyhintEnum) *RtElement {
 	return e
 }
 
-func RtEnterkeyhintCustom(s string) RtEnterkeyhintEnum {
-	return RtEnterkeyhintEnum(s)
-}
-
 func (e *RtElement) Hidden(a RtHiddenEnum) *RtElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func RtHiddenCustom(s string) RtHiddenEnum {
-	return RtHiddenEnum(s)
 }
 
 func (e *RtElement) Id(s string) *RtElement {
@@ -269,10 +241,6 @@ func (e *RtElement) Inputmode(a RtInputmodeEnum) *RtElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func RtInputmodeCustom(s string) RtInputmodeEnum {
-	return RtInputmodeEnum(s)
 }
 
 func (e *RtElement) Itemid(s string) *RtElement {
@@ -335,10 +303,6 @@ func (e *RtElement) Spellcheck(a RtSpellcheckEnum) *RtElement {
 	return e
 }
 
-func RtSpellcheckCustom(s string) RtSpellcheckEnum {
-	return RtSpellcheckEnum(s)
-}
-
 func (e *RtElement) Style(s string) *RtElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *RtElement) Translate(a RtTranslateEnum) *RtElement {
 	return e
 }
 
-func RtTranslateCustom(s string) RtTranslateEnum {
-	return RtTranslateEnum(s)
-}
-
 func (e *RtElement) Writingsuggestions(a RtWritingsuggestionsEnum) *RtElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func RtWritingsuggestionsCustom(s string) RtWritingsuggestionsEnum {
-	return RtWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -57,15 +57,22 @@ func (e *TemplateElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type TemplateShadowrootmodeEnum string
+
+const (
+	TemplateShadowrootmodeEnumClosed TemplateShadowrootmodeEnum = "closed"
+	TemplateShadowrootmodeEnumOpen   TemplateShadowrootmodeEnum = "open"
+)
+
 type TemplateAutocapitalizeEnum string
 
 const (
+	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
 	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
 	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
-	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
 )
 
 type TemplateAutocorrectEnum string
@@ -96,20 +103,20 @@ const (
 type TemplateDraggableEnum string
 
 const (
-	TemplateDraggableEnumFalse TemplateDraggableEnum = "false"
 	TemplateDraggableEnumTrue  TemplateDraggableEnum = "true"
+	TemplateDraggableEnumFalse TemplateDraggableEnum = "false"
 )
 
 type TemplateEnterkeyhintEnum string
 
 const (
+	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
+	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
+	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
 	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
 	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
 	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 	TemplateEnterkeyhintEnumEnter    TemplateEnterkeyhintEnum = "enter"
-	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
-	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
-	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
 )
 
 type TemplateHiddenEnum string
@@ -123,21 +130,21 @@ const (
 type TemplateInputmodeEnum string
 
 const (
-	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
-	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
-	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
-	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
 	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
 	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
 	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
 	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
+	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
+	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
+	TemplateInputmodeEnumDecimal TemplateInputmodeEnum = "decimal"
+	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
 )
 
 type TemplateSpellcheckEnum string
 
 const (
-	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
 	TemplateSpellcheckEnumFalse TemplateSpellcheckEnum = "false"
+	TemplateSpellcheckEnumTrue  TemplateSpellcheckEnum = "true"
 	TemplateSpellcheckEnumEmpty TemplateSpellcheckEnum = ""
 )
 
@@ -152,12 +159,42 @@ const (
 type TemplateWritingsuggestionsEnum string
 
 const (
-	TemplateWritingsuggestionsEnumTrue  TemplateWritingsuggestionsEnum = "true"
 	TemplateWritingsuggestionsEnumFalse TemplateWritingsuggestionsEnum = "false"
+	TemplateWritingsuggestionsEnumTrue  TemplateWritingsuggestionsEnum = "true"
 	TemplateWritingsuggestionsEnumEmpty TemplateWritingsuggestionsEnum = ""
 )
 
 type templateAttrs map[string]any
+
+func (e *TemplateElement) Shadowrootmode(a TemplateShadowrootmodeEnum) *TemplateElement {
+	e.attributes["shadowrootmode"] = a
+
+	return e
+}
+
+func (e *TemplateElement) Shadowrootdelegatefocus(b bool) *TemplateElement {
+	e.attributes["shadowrootdelegatefocus"] = b
+
+	return e
+}
+
+func (e *TemplateElement) Shadowrootclonable(b bool) *TemplateElement {
+	e.attributes["shadowrootclonable"] = b
+
+	return e
+}
+
+func (e *TemplateElement) Shadowrootserializable(b bool) *TemplateElement {
+	e.attributes["shadowrootserializable"] = b
+
+	return e
+}
+
+func (e *TemplateElement) Shadowrootcustomelementregistry(b bool) *TemplateElement {
+	e.attributes["shadowrootcustomelementregistry"] = b
+
+	return e
+}
 
 func (e *TemplateElement) Autocapitalize(a TemplateAutocapitalizeEnum) *TemplateElement {
 	e.attributes["autocapitalize"] = a
@@ -165,18 +202,10 @@ func (e *TemplateElement) Autocapitalize(a TemplateAutocapitalizeEnum) *Template
 	return e
 }
 
-func TemplateAutocapitalizeCustom(s string) TemplateAutocapitalizeEnum {
-	return TemplateAutocapitalizeEnum(s)
-}
-
 func (e *TemplateElement) Autocorrect(a TemplateAutocorrectEnum) *TemplateElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func TemplateAutocorrectCustom(s string) TemplateAutocorrectEnum {
-	return TemplateAutocorrectEnum(s)
 }
 
 func (e *TemplateElement) Autofocus(b bool) *TemplateElement {
@@ -197,10 +226,6 @@ func (e *TemplateElement) Contenteditable(a TemplateContenteditableEnum) *Templa
 	return e
 }
 
-func TemplateContenteditableCustom(s string) TemplateContenteditableEnum {
-	return TemplateContenteditableEnum(s)
-}
-
 func (e *TemplateElement) DataUnsafe(name string, s string) *TemplateElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +244,10 @@ func (e *TemplateElement) Dir(a TemplateDirEnum) *TemplateElement {
 	return e
 }
 
-func TemplateDirCustom(s string) TemplateDirEnum {
-	return TemplateDirEnum(s)
-}
-
 func (e *TemplateElement) Draggable(a TemplateDraggableEnum) *TemplateElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func TemplateDraggableCustom(s string) TemplateDraggableEnum {
-	return TemplateDraggableEnum(s)
 }
 
 func (e *TemplateElement) Enterkeyhint(a TemplateEnterkeyhintEnum) *TemplateElement {
@@ -239,18 +256,10 @@ func (e *TemplateElement) Enterkeyhint(a TemplateEnterkeyhintEnum) *TemplateElem
 	return e
 }
 
-func TemplateEnterkeyhintCustom(s string) TemplateEnterkeyhintEnum {
-	return TemplateEnterkeyhintEnum(s)
-}
-
 func (e *TemplateElement) Hidden(a TemplateHiddenEnum) *TemplateElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func TemplateHiddenCustom(s string) TemplateHiddenEnum {
-	return TemplateHiddenEnum(s)
 }
 
 func (e *TemplateElement) Id(s string) *TemplateElement {
@@ -269,10 +278,6 @@ func (e *TemplateElement) Inputmode(a TemplateInputmodeEnum) *TemplateElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func TemplateInputmodeCustom(s string) TemplateInputmodeEnum {
-	return TemplateInputmodeEnum(s)
 }
 
 func (e *TemplateElement) Itemid(s string) *TemplateElement {
@@ -335,10 +340,6 @@ func (e *TemplateElement) Spellcheck(a TemplateSpellcheckEnum) *TemplateElement 
 	return e
 }
 
-func TemplateSpellcheckCustom(s string) TemplateSpellcheckEnum {
-	return TemplateSpellcheckEnum(s)
-}
-
 func (e *TemplateElement) Style(s string) *TemplateElement {
 	e.attributes["style"] = s
 
@@ -363,18 +364,10 @@ func (e *TemplateElement) Translate(a TemplateTranslateEnum) *TemplateElement {
 	return e
 }
 
-func TemplateTranslateCustom(s string) TemplateTranslateEnum {
-	return TemplateTranslateEnum(s)
-}
-
 func (e *TemplateElement) Writingsuggestions(a TemplateWritingsuggestionsEnum) *TemplateElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func TemplateWritingsuggestionsCustom(s string) TemplateWritingsuggestionsEnum {
-	return TemplateWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

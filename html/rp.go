@@ -60,12 +60,12 @@ func (e *RpElement) AddIndent(i int) {
 type RpAutocapitalizeEnum string
 
 const (
-	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
-	RpAutocapitalizeEnumCharacters RpAutocapitalizeEnum = "characters"
 	RpAutocapitalizeEnumNone       RpAutocapitalizeEnum = "none"
 	RpAutocapitalizeEnumOff        RpAutocapitalizeEnum = "off"
 	RpAutocapitalizeEnumOn         RpAutocapitalizeEnum = "on"
 	RpAutocapitalizeEnumSentences  RpAutocapitalizeEnum = "sentences"
+	RpAutocapitalizeEnumWords      RpAutocapitalizeEnum = "words"
+	RpAutocapitalizeEnumCharacters RpAutocapitalizeEnum = "characters"
 )
 
 type RpAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type RpContenteditableEnum string
 
 const (
-	RpContenteditableEnumPlaintextOnly RpContenteditableEnum = "plaintext-only"
 	RpContenteditableEnumTrue          RpContenteditableEnum = "true"
 	RpContenteditableEnumFalse         RpContenteditableEnum = "false"
+	RpContenteditableEnumPlaintextOnly RpContenteditableEnum = "plaintext-only"
 	RpContenteditableEnumEmpty         RpContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type RpEnterkeyhintEnum string
 
 const (
-	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
-	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
-	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
 	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
 	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
 	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
+	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
+	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
+	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
 )
 
 type RpHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type RpInputmodeEnum string
 
 const (
+	RpInputmodeEnumText    RpInputmodeEnum = "text"
 	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
 	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
 	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
@@ -130,7 +131,6 @@ const (
 	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
 	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
 	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
-	RpInputmodeEnumText    RpInputmodeEnum = "text"
 )
 
 type RpSpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *RpElement) Autocapitalize(a RpAutocapitalizeEnum) *RpElement {
 	return e
 }
 
-func RpAutocapitalizeCustom(s string) RpAutocapitalizeEnum {
-	return RpAutocapitalizeEnum(s)
-}
-
 func (e *RpElement) Autocorrect(a RpAutocorrectEnum) *RpElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func RpAutocorrectCustom(s string) RpAutocorrectEnum {
-	return RpAutocorrectEnum(s)
 }
 
 func (e *RpElement) Autofocus(b bool) *RpElement {
@@ -197,10 +189,6 @@ func (e *RpElement) Contenteditable(a RpContenteditableEnum) *RpElement {
 	return e
 }
 
-func RpContenteditableCustom(s string) RpContenteditableEnum {
-	return RpContenteditableEnum(s)
-}
-
 func (e *RpElement) DataUnsafe(name string, s string) *RpElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *RpElement) Dir(a RpDirEnum) *RpElement {
 	return e
 }
 
-func RpDirCustom(s string) RpDirEnum {
-	return RpDirEnum(s)
-}
-
 func (e *RpElement) Draggable(a RpDraggableEnum) *RpElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func RpDraggableCustom(s string) RpDraggableEnum {
-	return RpDraggableEnum(s)
 }
 
 func (e *RpElement) Enterkeyhint(a RpEnterkeyhintEnum) *RpElement {
@@ -239,18 +219,10 @@ func (e *RpElement) Enterkeyhint(a RpEnterkeyhintEnum) *RpElement {
 	return e
 }
 
-func RpEnterkeyhintCustom(s string) RpEnterkeyhintEnum {
-	return RpEnterkeyhintEnum(s)
-}
-
 func (e *RpElement) Hidden(a RpHiddenEnum) *RpElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func RpHiddenCustom(s string) RpHiddenEnum {
-	return RpHiddenEnum(s)
 }
 
 func (e *RpElement) Id(s string) *RpElement {
@@ -269,10 +241,6 @@ func (e *RpElement) Inputmode(a RpInputmodeEnum) *RpElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func RpInputmodeCustom(s string) RpInputmodeEnum {
-	return RpInputmodeEnum(s)
 }
 
 func (e *RpElement) Itemid(s string) *RpElement {
@@ -335,10 +303,6 @@ func (e *RpElement) Spellcheck(a RpSpellcheckEnum) *RpElement {
 	return e
 }
 
-func RpSpellcheckCustom(s string) RpSpellcheckEnum {
-	return RpSpellcheckEnum(s)
-}
-
 func (e *RpElement) Style(s string) *RpElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *RpElement) Translate(a RpTranslateEnum) *RpElement {
 	return e
 }
 
-func RpTranslateCustom(s string) RpTranslateEnum {
-	return RpTranslateEnum(s)
-}
-
 func (e *RpElement) Writingsuggestions(a RpWritingsuggestionsEnum) *RpElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func RpWritingsuggestionsCustom(s string) RpWritingsuggestionsEnum {
-	return RpWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

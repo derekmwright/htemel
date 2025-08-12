@@ -60,12 +60,12 @@ func (e *H1Element) AddIndent(i int) {
 type H1AutocapitalizeEnum string
 
 const (
-	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
-	H1AutocapitalizeEnumOff        H1AutocapitalizeEnum = "off"
 	H1AutocapitalizeEnumOn         H1AutocapitalizeEnum = "on"
 	H1AutocapitalizeEnumSentences  H1AutocapitalizeEnum = "sentences"
 	H1AutocapitalizeEnumWords      H1AutocapitalizeEnum = "words"
 	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
+	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
+	H1AutocapitalizeEnumOff        H1AutocapitalizeEnum = "off"
 )
 
 type H1AutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type H1EnterkeyhintEnum string
 
 const (
+	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
 	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
 	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
 	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
 	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
 	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
 	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
-	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
 )
 
 type H1HiddenEnum string
@@ -123,14 +123,14 @@ const (
 type H1InputmodeEnum string
 
 const (
-	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
-	H1InputmodeEnumText    H1InputmodeEnum = "text"
-	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
-	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
 	H1InputmodeEnumEmail   H1InputmodeEnum = "email"
 	H1InputmodeEnumNone    H1InputmodeEnum = "none"
 	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
 	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
+	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
+	H1InputmodeEnumText    H1InputmodeEnum = "text"
+	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
+	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
 )
 
 type H1SpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type H1TranslateEnum string
 
 const (
-	H1TranslateEnumYes   H1TranslateEnum = "yes"
 	H1TranslateEnumNo    H1TranslateEnum = "no"
+	H1TranslateEnumYes   H1TranslateEnum = "yes"
 	H1TranslateEnumEmpty H1TranslateEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *H1Element) Autocapitalize(a H1AutocapitalizeEnum) *H1Element {
 	return e
 }
 
-func H1AutocapitalizeCustom(s string) H1AutocapitalizeEnum {
-	return H1AutocapitalizeEnum(s)
-}
-
 func (e *H1Element) Autocorrect(a H1AutocorrectEnum) *H1Element {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func H1AutocorrectCustom(s string) H1AutocorrectEnum {
-	return H1AutocorrectEnum(s)
 }
 
 func (e *H1Element) Autofocus(b bool) *H1Element {
@@ -197,10 +189,6 @@ func (e *H1Element) Contenteditable(a H1ContenteditableEnum) *H1Element {
 	return e
 }
 
-func H1ContenteditableCustom(s string) H1ContenteditableEnum {
-	return H1ContenteditableEnum(s)
-}
-
 func (e *H1Element) DataUnsafe(name string, s string) *H1Element {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *H1Element) Dir(a H1DirEnum) *H1Element {
 	return e
 }
 
-func H1DirCustom(s string) H1DirEnum {
-	return H1DirEnum(s)
-}
-
 func (e *H1Element) Draggable(a H1DraggableEnum) *H1Element {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func H1DraggableCustom(s string) H1DraggableEnum {
-	return H1DraggableEnum(s)
 }
 
 func (e *H1Element) Enterkeyhint(a H1EnterkeyhintEnum) *H1Element {
@@ -239,18 +219,10 @@ func (e *H1Element) Enterkeyhint(a H1EnterkeyhintEnum) *H1Element {
 	return e
 }
 
-func H1EnterkeyhintCustom(s string) H1EnterkeyhintEnum {
-	return H1EnterkeyhintEnum(s)
-}
-
 func (e *H1Element) Hidden(a H1HiddenEnum) *H1Element {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func H1HiddenCustom(s string) H1HiddenEnum {
-	return H1HiddenEnum(s)
 }
 
 func (e *H1Element) Id(s string) *H1Element {
@@ -269,10 +241,6 @@ func (e *H1Element) Inputmode(a H1InputmodeEnum) *H1Element {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func H1InputmodeCustom(s string) H1InputmodeEnum {
-	return H1InputmodeEnum(s)
 }
 
 func (e *H1Element) Itemid(s string) *H1Element {
@@ -335,10 +303,6 @@ func (e *H1Element) Spellcheck(a H1SpellcheckEnum) *H1Element {
 	return e
 }
 
-func H1SpellcheckCustom(s string) H1SpellcheckEnum {
-	return H1SpellcheckEnum(s)
-}
-
 func (e *H1Element) Style(s string) *H1Element {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *H1Element) Translate(a H1TranslateEnum) *H1Element {
 	return e
 }
 
-func H1TranslateCustom(s string) H1TranslateEnum {
-	return H1TranslateEnum(s)
-}
-
 func (e *H1Element) Writingsuggestions(a H1WritingsuggestionsEnum) *H1Element {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func H1WritingsuggestionsCustom(s string) H1WritingsuggestionsEnum {
-	return H1WritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

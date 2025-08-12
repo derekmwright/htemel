@@ -60,16 +60,16 @@ const (
 type ImgDecodingEnum string
 
 const (
-	ImgDecodingEnumAsync ImgDecodingEnum = "async"
 	ImgDecodingEnumAuto  ImgDecodingEnum = "auto"
 	ImgDecodingEnumSync  ImgDecodingEnum = "sync"
+	ImgDecodingEnumAsync ImgDecodingEnum = "async"
 )
 
 type ImgLoadingEnum string
 
 const (
-	ImgLoadingEnumLazy  ImgLoadingEnum = "lazy"
 	ImgLoadingEnumEager ImgLoadingEnum = "eager"
+	ImgLoadingEnumLazy  ImgLoadingEnum = "lazy"
 )
 
 type ImgFetchpriorityEnum string
@@ -83,12 +83,12 @@ const (
 type ImgAutocapitalizeEnum string
 
 const (
+	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
+	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
 	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
-	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
-	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
 )
 
 type ImgAutocorrectEnum string
@@ -102,18 +102,18 @@ const (
 type ImgContenteditableEnum string
 
 const (
+	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumPlaintextOnly ImgContenteditableEnum = "plaintext-only"
-	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
 	ImgContenteditableEnumEmpty         ImgContenteditableEnum = ""
 )
 
 type ImgDirEnum string
 
 const (
+	ImgDirEnumAuto ImgDirEnum = "auto"
 	ImgDirEnumLtr  ImgDirEnum = "ltr"
 	ImgDirEnumRtl  ImgDirEnum = "rtl"
-	ImgDirEnumAuto ImgDirEnum = "auto"
 )
 
 type ImgDraggableEnum string
@@ -146,6 +146,7 @@ const (
 type ImgInputmodeEnum string
 
 const (
+	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
 	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
 	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
@@ -153,7 +154,6 @@ const (
 	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
 	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
 	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
-	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
 )
 
 type ImgSpellcheckEnum string
@@ -212,10 +212,6 @@ func (e *ImgElement) Crossorigin(a ImgCrossoriginEnum) *ImgElement {
 	return e
 }
 
-func ImgCrossoriginCustom(s string) ImgCrossoriginEnum {
-	return ImgCrossoriginEnum(s)
-}
-
 func (e *ImgElement) Usemap(s string) *ImgElement {
 	e.attributes["usemap"] = s
 
@@ -252,18 +248,10 @@ func (e *ImgElement) Decoding(a ImgDecodingEnum) *ImgElement {
 	return e
 }
 
-func ImgDecodingCustom(s string) ImgDecodingEnum {
-	return ImgDecodingEnum(s)
-}
-
 func (e *ImgElement) Loading(a ImgLoadingEnum) *ImgElement {
 	e.attributes["loading"] = a
 
 	return e
-}
-
-func ImgLoadingCustom(s string) ImgLoadingEnum {
-	return ImgLoadingEnum(s)
 }
 
 func (e *ImgElement) Fetchpriority(a ImgFetchpriorityEnum) *ImgElement {
@@ -272,28 +260,16 @@ func (e *ImgElement) Fetchpriority(a ImgFetchpriorityEnum) *ImgElement {
 	return e
 }
 
-func ImgFetchpriorityCustom(s string) ImgFetchpriorityEnum {
-	return ImgFetchpriorityEnum(s)
-}
-
 func (e *ImgElement) Autocapitalize(a ImgAutocapitalizeEnum) *ImgElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func ImgAutocapitalizeCustom(s string) ImgAutocapitalizeEnum {
-	return ImgAutocapitalizeEnum(s)
-}
-
 func (e *ImgElement) Autocorrect(a ImgAutocorrectEnum) *ImgElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func ImgAutocorrectCustom(s string) ImgAutocorrectEnum {
-	return ImgAutocorrectEnum(s)
 }
 
 func (e *ImgElement) Autofocus(b bool) *ImgElement {
@@ -314,10 +290,6 @@ func (e *ImgElement) Contenteditable(a ImgContenteditableEnum) *ImgElement {
 	return e
 }
 
-func ImgContenteditableCustom(s string) ImgContenteditableEnum {
-	return ImgContenteditableEnum(s)
-}
-
 func (e *ImgElement) DataUnsafe(name string, s string) *ImgElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -336,18 +308,10 @@ func (e *ImgElement) Dir(a ImgDirEnum) *ImgElement {
 	return e
 }
 
-func ImgDirCustom(s string) ImgDirEnum {
-	return ImgDirEnum(s)
-}
-
 func (e *ImgElement) Draggable(a ImgDraggableEnum) *ImgElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func ImgDraggableCustom(s string) ImgDraggableEnum {
-	return ImgDraggableEnum(s)
 }
 
 func (e *ImgElement) Enterkeyhint(a ImgEnterkeyhintEnum) *ImgElement {
@@ -356,18 +320,10 @@ func (e *ImgElement) Enterkeyhint(a ImgEnterkeyhintEnum) *ImgElement {
 	return e
 }
 
-func ImgEnterkeyhintCustom(s string) ImgEnterkeyhintEnum {
-	return ImgEnterkeyhintEnum(s)
-}
-
 func (e *ImgElement) Hidden(a ImgHiddenEnum) *ImgElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func ImgHiddenCustom(s string) ImgHiddenEnum {
-	return ImgHiddenEnum(s)
 }
 
 func (e *ImgElement) Id(s string) *ImgElement {
@@ -386,10 +342,6 @@ func (e *ImgElement) Inputmode(a ImgInputmodeEnum) *ImgElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func ImgInputmodeCustom(s string) ImgInputmodeEnum {
-	return ImgInputmodeEnum(s)
 }
 
 func (e *ImgElement) Itemid(s string) *ImgElement {
@@ -452,10 +404,6 @@ func (e *ImgElement) Spellcheck(a ImgSpellcheckEnum) *ImgElement {
 	return e
 }
 
-func ImgSpellcheckCustom(s string) ImgSpellcheckEnum {
-	return ImgSpellcheckEnum(s)
-}
-
 func (e *ImgElement) Style(s string) *ImgElement {
 	e.attributes["style"] = s
 
@@ -480,18 +428,10 @@ func (e *ImgElement) Translate(a ImgTranslateEnum) *ImgElement {
 	return e
 }
 
-func ImgTranslateCustom(s string) ImgTranslateEnum {
-	return ImgTranslateEnum(s)
-}
-
 func (e *ImgElement) Writingsuggestions(a ImgWritingsuggestionsEnum) *ImgElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func ImgWritingsuggestionsCustom(s string) ImgWritingsuggestionsEnum {
-	return ImgWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

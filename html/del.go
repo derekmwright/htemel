@@ -79,37 +79,37 @@ const (
 type DelContenteditableEnum string
 
 const (
+	DelContenteditableEnumTrue          DelContenteditableEnum = "true"
 	DelContenteditableEnumFalse         DelContenteditableEnum = "false"
 	DelContenteditableEnumPlaintextOnly DelContenteditableEnum = "plaintext-only"
-	DelContenteditableEnumTrue          DelContenteditableEnum = "true"
 	DelContenteditableEnumEmpty         DelContenteditableEnum = ""
 )
 
 type DelDirEnum string
 
 const (
-	DelDirEnumRtl  DelDirEnum = "rtl"
 	DelDirEnumAuto DelDirEnum = "auto"
 	DelDirEnumLtr  DelDirEnum = "ltr"
+	DelDirEnumRtl  DelDirEnum = "rtl"
 )
 
 type DelDraggableEnum string
 
 const (
-	DelDraggableEnumFalse DelDraggableEnum = "false"
 	DelDraggableEnumTrue  DelDraggableEnum = "true"
+	DelDraggableEnumFalse DelDraggableEnum = "false"
 )
 
 type DelEnterkeyhintEnum string
 
 const (
+	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
+	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
 	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
 	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
 	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
 	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
 	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
-	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
-	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
 )
 
 type DelHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type DelInputmodeEnum string
 
 const (
-	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 	DelInputmodeEnumNone    DelInputmodeEnum = "none"
 	DelInputmodeEnumNumeric DelInputmodeEnum = "numeric"
 	DelInputmodeEnumSearch  DelInputmodeEnum = "search"
@@ -131,6 +130,7 @@ const (
 	DelInputmodeEnumText    DelInputmodeEnum = "text"
 	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
 	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
+	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 )
 
 type DelSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DelWritingsuggestionsEnum string
 
 const (
-	DelWritingsuggestionsEnumFalse DelWritingsuggestionsEnum = "false"
 	DelWritingsuggestionsEnumTrue  DelWritingsuggestionsEnum = "true"
+	DelWritingsuggestionsEnumFalse DelWritingsuggestionsEnum = "false"
 	DelWritingsuggestionsEnumEmpty DelWritingsuggestionsEnum = ""
 )
 
@@ -177,18 +177,10 @@ func (e *DelElement) Autocapitalize(a DelAutocapitalizeEnum) *DelElement {
 	return e
 }
 
-func DelAutocapitalizeCustom(s string) DelAutocapitalizeEnum {
-	return DelAutocapitalizeEnum(s)
-}
-
 func (e *DelElement) Autocorrect(a DelAutocorrectEnum) *DelElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func DelAutocorrectCustom(s string) DelAutocorrectEnum {
-	return DelAutocorrectEnum(s)
 }
 
 func (e *DelElement) Autofocus(b bool) *DelElement {
@@ -209,10 +201,6 @@ func (e *DelElement) Contenteditable(a DelContenteditableEnum) *DelElement {
 	return e
 }
 
-func DelContenteditableCustom(s string) DelContenteditableEnum {
-	return DelContenteditableEnum(s)
-}
-
 func (e *DelElement) DataUnsafe(name string, s string) *DelElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -231,18 +219,10 @@ func (e *DelElement) Dir(a DelDirEnum) *DelElement {
 	return e
 }
 
-func DelDirCustom(s string) DelDirEnum {
-	return DelDirEnum(s)
-}
-
 func (e *DelElement) Draggable(a DelDraggableEnum) *DelElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func DelDraggableCustom(s string) DelDraggableEnum {
-	return DelDraggableEnum(s)
 }
 
 func (e *DelElement) Enterkeyhint(a DelEnterkeyhintEnum) *DelElement {
@@ -251,18 +231,10 @@ func (e *DelElement) Enterkeyhint(a DelEnterkeyhintEnum) *DelElement {
 	return e
 }
 
-func DelEnterkeyhintCustom(s string) DelEnterkeyhintEnum {
-	return DelEnterkeyhintEnum(s)
-}
-
 func (e *DelElement) Hidden(a DelHiddenEnum) *DelElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func DelHiddenCustom(s string) DelHiddenEnum {
-	return DelHiddenEnum(s)
 }
 
 func (e *DelElement) Id(s string) *DelElement {
@@ -281,10 +253,6 @@ func (e *DelElement) Inputmode(a DelInputmodeEnum) *DelElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func DelInputmodeCustom(s string) DelInputmodeEnum {
-	return DelInputmodeEnum(s)
 }
 
 func (e *DelElement) Itemid(s string) *DelElement {
@@ -347,10 +315,6 @@ func (e *DelElement) Spellcheck(a DelSpellcheckEnum) *DelElement {
 	return e
 }
 
-func DelSpellcheckCustom(s string) DelSpellcheckEnum {
-	return DelSpellcheckEnum(s)
-}
-
 func (e *DelElement) Style(s string) *DelElement {
 	e.attributes["style"] = s
 
@@ -375,18 +339,10 @@ func (e *DelElement) Translate(a DelTranslateEnum) *DelElement {
 	return e
 }
 
-func DelTranslateCustom(s string) DelTranslateEnum {
-	return DelTranslateEnum(s)
-}
-
 func (e *DelElement) Writingsuggestions(a DelWritingsuggestionsEnum) *DelElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func DelWritingsuggestionsCustom(s string) DelWritingsuggestionsEnum {
-	return DelWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

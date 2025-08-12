@@ -90,9 +90,9 @@ const (
 type TrackDirEnum string
 
 const (
-	TrackDirEnumAuto TrackDirEnum = "auto"
 	TrackDirEnumLtr  TrackDirEnum = "ltr"
 	TrackDirEnumRtl  TrackDirEnum = "rtl"
+	TrackDirEnumAuto TrackDirEnum = "auto"
 )
 
 type TrackDraggableEnum string
@@ -105,26 +105,27 @@ const (
 type TrackEnterkeyhintEnum string
 
 const (
+	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
+	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
+	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
 	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
 	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
-	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
-	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
-	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
 )
 
 type TrackHiddenEnum string
 
 const (
-	TrackHiddenEnumHidden     TrackHiddenEnum = "hidden"
 	TrackHiddenEnumUntilFound TrackHiddenEnum = "until-found"
+	TrackHiddenEnumHidden     TrackHiddenEnum = "hidden"
 	TrackHiddenEnumEmpty      TrackHiddenEnum = ""
 )
 
 type TrackInputmodeEnum string
 
 const (
+	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
 	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
 	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
 	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
@@ -132,7 +133,6 @@ const (
 	TrackInputmodeEnumDecimal TrackInputmodeEnum = "decimal"
 	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
 	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
-	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
 )
 
 type TrackSpellcheckEnum string
@@ -167,10 +167,6 @@ func (e *TrackElement) Kind(a TrackKindEnum) *TrackElement {
 	return e
 }
 
-func TrackKindCustom(s string) TrackKindEnum {
-	return TrackKindEnum(s)
-}
-
 func (e *TrackElement) Src(s string) *TrackElement {
 	e.attributes["src"] = s
 
@@ -201,18 +197,10 @@ func (e *TrackElement) Autocapitalize(a TrackAutocapitalizeEnum) *TrackElement {
 	return e
 }
 
-func TrackAutocapitalizeCustom(s string) TrackAutocapitalizeEnum {
-	return TrackAutocapitalizeEnum(s)
-}
-
 func (e *TrackElement) Autocorrect(a TrackAutocorrectEnum) *TrackElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func TrackAutocorrectCustom(s string) TrackAutocorrectEnum {
-	return TrackAutocorrectEnum(s)
 }
 
 func (e *TrackElement) Autofocus(b bool) *TrackElement {
@@ -233,10 +221,6 @@ func (e *TrackElement) Contenteditable(a TrackContenteditableEnum) *TrackElement
 	return e
 }
 
-func TrackContenteditableCustom(s string) TrackContenteditableEnum {
-	return TrackContenteditableEnum(s)
-}
-
 func (e *TrackElement) DataUnsafe(name string, s string) *TrackElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -255,18 +239,10 @@ func (e *TrackElement) Dir(a TrackDirEnum) *TrackElement {
 	return e
 }
 
-func TrackDirCustom(s string) TrackDirEnum {
-	return TrackDirEnum(s)
-}
-
 func (e *TrackElement) Draggable(a TrackDraggableEnum) *TrackElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func TrackDraggableCustom(s string) TrackDraggableEnum {
-	return TrackDraggableEnum(s)
 }
 
 func (e *TrackElement) Enterkeyhint(a TrackEnterkeyhintEnum) *TrackElement {
@@ -275,18 +251,10 @@ func (e *TrackElement) Enterkeyhint(a TrackEnterkeyhintEnum) *TrackElement {
 	return e
 }
 
-func TrackEnterkeyhintCustom(s string) TrackEnterkeyhintEnum {
-	return TrackEnterkeyhintEnum(s)
-}
-
 func (e *TrackElement) Hidden(a TrackHiddenEnum) *TrackElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func TrackHiddenCustom(s string) TrackHiddenEnum {
-	return TrackHiddenEnum(s)
 }
 
 func (e *TrackElement) Id(s string) *TrackElement {
@@ -305,10 +273,6 @@ func (e *TrackElement) Inputmode(a TrackInputmodeEnum) *TrackElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func TrackInputmodeCustom(s string) TrackInputmodeEnum {
-	return TrackInputmodeEnum(s)
 }
 
 func (e *TrackElement) Itemid(s string) *TrackElement {
@@ -371,10 +335,6 @@ func (e *TrackElement) Spellcheck(a TrackSpellcheckEnum) *TrackElement {
 	return e
 }
 
-func TrackSpellcheckCustom(s string) TrackSpellcheckEnum {
-	return TrackSpellcheckEnum(s)
-}
-
 func (e *TrackElement) Style(s string) *TrackElement {
 	e.attributes["style"] = s
 
@@ -399,18 +359,10 @@ func (e *TrackElement) Translate(a TrackTranslateEnum) *TrackElement {
 	return e
 }
 
-func TrackTranslateCustom(s string) TrackTranslateEnum {
-	return TrackTranslateEnum(s)
-}
-
 func (e *TrackElement) Writingsuggestions(a TrackWritingsuggestionsEnum) *TrackElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func TrackWritingsuggestionsCustom(s string) TrackWritingsuggestionsEnum {
-	return TrackWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

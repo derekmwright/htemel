@@ -71,8 +71,8 @@ const (
 type BlockquoteAutocorrectEnum string
 
 const (
-	BlockquoteAutocorrectEnumOff   BlockquoteAutocorrectEnum = "off"
 	BlockquoteAutocorrectEnumOn    BlockquoteAutocorrectEnum = "on"
+	BlockquoteAutocorrectEnumOff   BlockquoteAutocorrectEnum = "off"
 	BlockquoteAutocorrectEnumEmpty BlockquoteAutocorrectEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type BlockquoteDraggableEnum string
 
 const (
-	BlockquoteDraggableEnumFalse BlockquoteDraggableEnum = "false"
 	BlockquoteDraggableEnumTrue  BlockquoteDraggableEnum = "true"
+	BlockquoteDraggableEnumFalse BlockquoteDraggableEnum = "false"
 )
 
 type BlockquoteEnterkeyhintEnum string
 
 const (
+	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
 	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
 	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 	BlockquoteEnterkeyhintEnumNext     BlockquoteEnterkeyhintEnum = "next"
 	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
 	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
-	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
 )
 
 type BlockquoteHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type BlockquoteInputmodeEnum string
 
 const (
-	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
-	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
-	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
-	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
 	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
 	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
 	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
 	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
+	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
+	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
+	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
+	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
 )
 
 type BlockquoteSpellcheckEnum string
@@ -171,18 +171,10 @@ func (e *BlockquoteElement) Autocapitalize(a BlockquoteAutocapitalizeEnum) *Bloc
 	return e
 }
 
-func BlockquoteAutocapitalizeCustom(s string) BlockquoteAutocapitalizeEnum {
-	return BlockquoteAutocapitalizeEnum(s)
-}
-
 func (e *BlockquoteElement) Autocorrect(a BlockquoteAutocorrectEnum) *BlockquoteElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func BlockquoteAutocorrectCustom(s string) BlockquoteAutocorrectEnum {
-	return BlockquoteAutocorrectEnum(s)
 }
 
 func (e *BlockquoteElement) Autofocus(b bool) *BlockquoteElement {
@@ -203,10 +195,6 @@ func (e *BlockquoteElement) Contenteditable(a BlockquoteContenteditableEnum) *Bl
 	return e
 }
 
-func BlockquoteContenteditableCustom(s string) BlockquoteContenteditableEnum {
-	return BlockquoteContenteditableEnum(s)
-}
-
 func (e *BlockquoteElement) DataUnsafe(name string, s string) *BlockquoteElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -225,18 +213,10 @@ func (e *BlockquoteElement) Dir(a BlockquoteDirEnum) *BlockquoteElement {
 	return e
 }
 
-func BlockquoteDirCustom(s string) BlockquoteDirEnum {
-	return BlockquoteDirEnum(s)
-}
-
 func (e *BlockquoteElement) Draggable(a BlockquoteDraggableEnum) *BlockquoteElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func BlockquoteDraggableCustom(s string) BlockquoteDraggableEnum {
-	return BlockquoteDraggableEnum(s)
 }
 
 func (e *BlockquoteElement) Enterkeyhint(a BlockquoteEnterkeyhintEnum) *BlockquoteElement {
@@ -245,18 +225,10 @@ func (e *BlockquoteElement) Enterkeyhint(a BlockquoteEnterkeyhintEnum) *Blockquo
 	return e
 }
 
-func BlockquoteEnterkeyhintCustom(s string) BlockquoteEnterkeyhintEnum {
-	return BlockquoteEnterkeyhintEnum(s)
-}
-
 func (e *BlockquoteElement) Hidden(a BlockquoteHiddenEnum) *BlockquoteElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func BlockquoteHiddenCustom(s string) BlockquoteHiddenEnum {
-	return BlockquoteHiddenEnum(s)
 }
 
 func (e *BlockquoteElement) Id(s string) *BlockquoteElement {
@@ -275,10 +247,6 @@ func (e *BlockquoteElement) Inputmode(a BlockquoteInputmodeEnum) *BlockquoteElem
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func BlockquoteInputmodeCustom(s string) BlockquoteInputmodeEnum {
-	return BlockquoteInputmodeEnum(s)
 }
 
 func (e *BlockquoteElement) Itemid(s string) *BlockquoteElement {
@@ -341,10 +309,6 @@ func (e *BlockquoteElement) Spellcheck(a BlockquoteSpellcheckEnum) *BlockquoteEl
 	return e
 }
 
-func BlockquoteSpellcheckCustom(s string) BlockquoteSpellcheckEnum {
-	return BlockquoteSpellcheckEnum(s)
-}
-
 func (e *BlockquoteElement) Style(s string) *BlockquoteElement {
 	e.attributes["style"] = s
 
@@ -369,18 +333,10 @@ func (e *BlockquoteElement) Translate(a BlockquoteTranslateEnum) *BlockquoteElem
 	return e
 }
 
-func BlockquoteTranslateCustom(s string) BlockquoteTranslateEnum {
-	return BlockquoteTranslateEnum(s)
-}
-
 func (e *BlockquoteElement) Writingsuggestions(a BlockquoteWritingsuggestionsEnum) *BlockquoteElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func BlockquoteWritingsuggestionsCustom(s string) BlockquoteWritingsuggestionsEnum {
-	return BlockquoteWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

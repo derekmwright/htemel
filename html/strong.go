@@ -60,19 +60,19 @@ func (e *StrongElement) AddIndent(i int) {
 type StrongAutocapitalizeEnum string
 
 const (
-	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
 	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
 	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
 	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
 	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
 	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
+	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
 )
 
 type StrongAutocorrectEnum string
 
 const (
-	StrongAutocorrectEnumOn    StrongAutocorrectEnum = "on"
 	StrongAutocorrectEnumOff   StrongAutocorrectEnum = "off"
+	StrongAutocorrectEnumOn    StrongAutocorrectEnum = "on"
 	StrongAutocorrectEnumEmpty StrongAutocorrectEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
-	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
 	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
 	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
+	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 )
 
 type StrongHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type StrongInputmodeEnum string
 
 const (
+	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
+	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
 	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
 	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
 	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
 	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
-	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
-	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
 )
 
 type StrongSpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *StrongElement) Autocapitalize(a StrongAutocapitalizeEnum) *StrongElemen
 	return e
 }
 
-func StrongAutocapitalizeCustom(s string) StrongAutocapitalizeEnum {
-	return StrongAutocapitalizeEnum(s)
-}
-
 func (e *StrongElement) Autocorrect(a StrongAutocorrectEnum) *StrongElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func StrongAutocorrectCustom(s string) StrongAutocorrectEnum {
-	return StrongAutocorrectEnum(s)
 }
 
 func (e *StrongElement) Autofocus(b bool) *StrongElement {
@@ -197,10 +189,6 @@ func (e *StrongElement) Contenteditable(a StrongContenteditableEnum) *StrongElem
 	return e
 }
 
-func StrongContenteditableCustom(s string) StrongContenteditableEnum {
-	return StrongContenteditableEnum(s)
-}
-
 func (e *StrongElement) DataUnsafe(name string, s string) *StrongElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *StrongElement) Dir(a StrongDirEnum) *StrongElement {
 	return e
 }
 
-func StrongDirCustom(s string) StrongDirEnum {
-	return StrongDirEnum(s)
-}
-
 func (e *StrongElement) Draggable(a StrongDraggableEnum) *StrongElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func StrongDraggableCustom(s string) StrongDraggableEnum {
-	return StrongDraggableEnum(s)
 }
 
 func (e *StrongElement) Enterkeyhint(a StrongEnterkeyhintEnum) *StrongElement {
@@ -239,18 +219,10 @@ func (e *StrongElement) Enterkeyhint(a StrongEnterkeyhintEnum) *StrongElement {
 	return e
 }
 
-func StrongEnterkeyhintCustom(s string) StrongEnterkeyhintEnum {
-	return StrongEnterkeyhintEnum(s)
-}
-
 func (e *StrongElement) Hidden(a StrongHiddenEnum) *StrongElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func StrongHiddenCustom(s string) StrongHiddenEnum {
-	return StrongHiddenEnum(s)
 }
 
 func (e *StrongElement) Id(s string) *StrongElement {
@@ -269,10 +241,6 @@ func (e *StrongElement) Inputmode(a StrongInputmodeEnum) *StrongElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func StrongInputmodeCustom(s string) StrongInputmodeEnum {
-	return StrongInputmodeEnum(s)
 }
 
 func (e *StrongElement) Itemid(s string) *StrongElement {
@@ -335,10 +303,6 @@ func (e *StrongElement) Spellcheck(a StrongSpellcheckEnum) *StrongElement {
 	return e
 }
 
-func StrongSpellcheckCustom(s string) StrongSpellcheckEnum {
-	return StrongSpellcheckEnum(s)
-}
-
 func (e *StrongElement) Style(s string) *StrongElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *StrongElement) Translate(a StrongTranslateEnum) *StrongElement {
 	return e
 }
 
-func StrongTranslateCustom(s string) StrongTranslateEnum {
-	return StrongTranslateEnum(s)
-}
-
 func (e *StrongElement) Writingsuggestions(a StrongWritingsuggestionsEnum) *StrongElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func StrongWritingsuggestionsCustom(s string) StrongWritingsuggestionsEnum {
-	return StrongWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -60,12 +60,12 @@ func (e *SElement) AddIndent(i int) {
 type SAutocapitalizeEnum string
 
 const (
+	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
 	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
 	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
 	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
 	SAutocapitalizeEnumSentences  SAutocapitalizeEnum = "sentences"
 	SAutocapitalizeEnumWords      SAutocapitalizeEnum = "words"
-	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
 )
 
 type SAutocorrectEnum string
@@ -79,18 +79,18 @@ const (
 type SContenteditableEnum string
 
 const (
-	SContenteditableEnumTrue          SContenteditableEnum = "true"
 	SContenteditableEnumFalse         SContenteditableEnum = "false"
 	SContenteditableEnumPlaintextOnly SContenteditableEnum = "plaintext-only"
+	SContenteditableEnumTrue          SContenteditableEnum = "true"
 	SContenteditableEnumEmpty         SContenteditableEnum = ""
 )
 
 type SDirEnum string
 
 const (
-	SDirEnumRtl  SDirEnum = "rtl"
 	SDirEnumAuto SDirEnum = "auto"
 	SDirEnumLtr  SDirEnum = "ltr"
+	SDirEnumRtl  SDirEnum = "rtl"
 )
 
 type SDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type SEnterkeyhintEnum string
 
 const (
+	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
+	SEnterkeyhintEnumSend     SEnterkeyhintEnum = "send"
 	SEnterkeyhintEnumDone     SEnterkeyhintEnum = "done"
 	SEnterkeyhintEnumEnter    SEnterkeyhintEnum = "enter"
 	SEnterkeyhintEnumGo       SEnterkeyhintEnum = "go"
 	SEnterkeyhintEnumNext     SEnterkeyhintEnum = "next"
 	SEnterkeyhintEnumPrevious SEnterkeyhintEnum = "previous"
-	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
-	SEnterkeyhintEnumSend     SEnterkeyhintEnum = "send"
 )
 
 type SHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type SInputmodeEnum string
 
 const (
-	SInputmodeEnumNone    SInputmodeEnum = "none"
-	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
-	SInputmodeEnumSearch  SInputmodeEnum = "search"
 	SInputmodeEnumTel     SInputmodeEnum = "tel"
 	SInputmodeEnumText    SInputmodeEnum = "text"
 	SInputmodeEnumUrl     SInputmodeEnum = "url"
 	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
 	SInputmodeEnumEmail   SInputmodeEnum = "email"
+	SInputmodeEnumNone    SInputmodeEnum = "none"
+	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
+	SInputmodeEnumSearch  SInputmodeEnum = "search"
 )
 
 type SSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type STranslateEnum string
 
 const (
-	STranslateEnumYes   STranslateEnum = "yes"
 	STranslateEnumNo    STranslateEnum = "no"
+	STranslateEnumYes   STranslateEnum = "yes"
 	STranslateEnumEmpty STranslateEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *SElement) Autocapitalize(a SAutocapitalizeEnum) *SElement {
 	return e
 }
 
-func SAutocapitalizeCustom(s string) SAutocapitalizeEnum {
-	return SAutocapitalizeEnum(s)
-}
-
 func (e *SElement) Autocorrect(a SAutocorrectEnum) *SElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func SAutocorrectCustom(s string) SAutocorrectEnum {
-	return SAutocorrectEnum(s)
 }
 
 func (e *SElement) Autofocus(b bool) *SElement {
@@ -197,10 +189,6 @@ func (e *SElement) Contenteditable(a SContenteditableEnum) *SElement {
 	return e
 }
 
-func SContenteditableCustom(s string) SContenteditableEnum {
-	return SContenteditableEnum(s)
-}
-
 func (e *SElement) DataUnsafe(name string, s string) *SElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *SElement) Dir(a SDirEnum) *SElement {
 	return e
 }
 
-func SDirCustom(s string) SDirEnum {
-	return SDirEnum(s)
-}
-
 func (e *SElement) Draggable(a SDraggableEnum) *SElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func SDraggableCustom(s string) SDraggableEnum {
-	return SDraggableEnum(s)
 }
 
 func (e *SElement) Enterkeyhint(a SEnterkeyhintEnum) *SElement {
@@ -239,18 +219,10 @@ func (e *SElement) Enterkeyhint(a SEnterkeyhintEnum) *SElement {
 	return e
 }
 
-func SEnterkeyhintCustom(s string) SEnterkeyhintEnum {
-	return SEnterkeyhintEnum(s)
-}
-
 func (e *SElement) Hidden(a SHiddenEnum) *SElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func SHiddenCustom(s string) SHiddenEnum {
-	return SHiddenEnum(s)
 }
 
 func (e *SElement) Id(s string) *SElement {
@@ -269,10 +241,6 @@ func (e *SElement) Inputmode(a SInputmodeEnum) *SElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func SInputmodeCustom(s string) SInputmodeEnum {
-	return SInputmodeEnum(s)
 }
 
 func (e *SElement) Itemid(s string) *SElement {
@@ -335,10 +303,6 @@ func (e *SElement) Spellcheck(a SSpellcheckEnum) *SElement {
 	return e
 }
 
-func SSpellcheckCustom(s string) SSpellcheckEnum {
-	return SSpellcheckEnum(s)
-}
-
 func (e *SElement) Style(s string) *SElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *SElement) Translate(a STranslateEnum) *SElement {
 	return e
 }
 
-func STranslateCustom(s string) STranslateEnum {
-	return STranslateEnum(s)
-}
-
 func (e *SElement) Writingsuggestions(a SWritingsuggestionsEnum) *SElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func SWritingsuggestionsCustom(s string) SWritingsuggestionsEnum {
-	return SWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

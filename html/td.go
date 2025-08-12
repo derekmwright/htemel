@@ -60,12 +60,12 @@ func (e *TdElement) AddIndent(i int) {
 type TdAutocapitalizeEnum string
 
 const (
+	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
+	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
 	TdAutocapitalizeEnumCharacters TdAutocapitalizeEnum = "characters"
 	TdAutocapitalizeEnumNone       TdAutocapitalizeEnum = "none"
 	TdAutocapitalizeEnumOff        TdAutocapitalizeEnum = "off"
 	TdAutocapitalizeEnumOn         TdAutocapitalizeEnum = "on"
-	TdAutocapitalizeEnumSentences  TdAutocapitalizeEnum = "sentences"
-	TdAutocapitalizeEnumWords      TdAutocapitalizeEnum = "words"
 )
 
 type TdAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type TdEnterkeyhintEnum string
 
 const (
+	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
+	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
 	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
 	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
 	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
 	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
 	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
-	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
-	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
 )
 
 type TdHiddenEnum string
@@ -123,29 +123,29 @@ const (
 type TdInputmodeEnum string
 
 const (
-	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
-	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
-	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
 	TdInputmodeEnumText    TdInputmodeEnum = "text"
 	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
 	TdInputmodeEnumDecimal TdInputmodeEnum = "decimal"
 	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
 	TdInputmodeEnumNone    TdInputmodeEnum = "none"
+	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
+	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
+	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
 )
 
 type TdSpellcheckEnum string
 
 const (
-	TdSpellcheckEnumTrue  TdSpellcheckEnum = "true"
 	TdSpellcheckEnumFalse TdSpellcheckEnum = "false"
+	TdSpellcheckEnumTrue  TdSpellcheckEnum = "true"
 	TdSpellcheckEnumEmpty TdSpellcheckEnum = ""
 )
 
 type TdTranslateEnum string
 
 const (
-	TdTranslateEnumNo    TdTranslateEnum = "no"
 	TdTranslateEnumYes   TdTranslateEnum = "yes"
+	TdTranslateEnumNo    TdTranslateEnum = "no"
 	TdTranslateEnumEmpty TdTranslateEnum = ""
 )
 
@@ -183,18 +183,10 @@ func (e *TdElement) Autocapitalize(a TdAutocapitalizeEnum) *TdElement {
 	return e
 }
 
-func TdAutocapitalizeCustom(s string) TdAutocapitalizeEnum {
-	return TdAutocapitalizeEnum(s)
-}
-
 func (e *TdElement) Autocorrect(a TdAutocorrectEnum) *TdElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func TdAutocorrectCustom(s string) TdAutocorrectEnum {
-	return TdAutocorrectEnum(s)
 }
 
 func (e *TdElement) Autofocus(b bool) *TdElement {
@@ -215,10 +207,6 @@ func (e *TdElement) Contenteditable(a TdContenteditableEnum) *TdElement {
 	return e
 }
 
-func TdContenteditableCustom(s string) TdContenteditableEnum {
-	return TdContenteditableEnum(s)
-}
-
 func (e *TdElement) DataUnsafe(name string, s string) *TdElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -237,18 +225,10 @@ func (e *TdElement) Dir(a TdDirEnum) *TdElement {
 	return e
 }
 
-func TdDirCustom(s string) TdDirEnum {
-	return TdDirEnum(s)
-}
-
 func (e *TdElement) Draggable(a TdDraggableEnum) *TdElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func TdDraggableCustom(s string) TdDraggableEnum {
-	return TdDraggableEnum(s)
 }
 
 func (e *TdElement) Enterkeyhint(a TdEnterkeyhintEnum) *TdElement {
@@ -257,18 +237,10 @@ func (e *TdElement) Enterkeyhint(a TdEnterkeyhintEnum) *TdElement {
 	return e
 }
 
-func TdEnterkeyhintCustom(s string) TdEnterkeyhintEnum {
-	return TdEnterkeyhintEnum(s)
-}
-
 func (e *TdElement) Hidden(a TdHiddenEnum) *TdElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func TdHiddenCustom(s string) TdHiddenEnum {
-	return TdHiddenEnum(s)
 }
 
 func (e *TdElement) Id(s string) *TdElement {
@@ -287,10 +259,6 @@ func (e *TdElement) Inputmode(a TdInputmodeEnum) *TdElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func TdInputmodeCustom(s string) TdInputmodeEnum {
-	return TdInputmodeEnum(s)
 }
 
 func (e *TdElement) Itemid(s string) *TdElement {
@@ -353,10 +321,6 @@ func (e *TdElement) Spellcheck(a TdSpellcheckEnum) *TdElement {
 	return e
 }
 
-func TdSpellcheckCustom(s string) TdSpellcheckEnum {
-	return TdSpellcheckEnum(s)
-}
-
 func (e *TdElement) Style(s string) *TdElement {
 	e.attributes["style"] = s
 
@@ -381,18 +345,10 @@ func (e *TdElement) Translate(a TdTranslateEnum) *TdElement {
 	return e
 }
 
-func TdTranslateCustom(s string) TdTranslateEnum {
-	return TdTranslateEnum(s)
-}
-
 func (e *TdElement) Writingsuggestions(a TdWritingsuggestionsEnum) *TdElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func TdWritingsuggestionsCustom(s string) TdWritingsuggestionsEnum {
-	return TdWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

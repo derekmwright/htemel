@@ -103,26 +103,27 @@ const (
 type DlEnterkeyhintEnum string
 
 const (
-	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
 	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
 	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
 	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
 	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
 	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
 	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
+	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
 )
 
 type DlHiddenEnum string
 
 const (
-	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
 	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
+	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
 	DlHiddenEnumEmpty      DlHiddenEnum = ""
 )
 
 type DlInputmodeEnum string
 
 const (
+	DlInputmodeEnumNone    DlInputmodeEnum = "none"
 	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
 	DlInputmodeEnumSearch  DlInputmodeEnum = "search"
 	DlInputmodeEnumTel     DlInputmodeEnum = "tel"
@@ -130,7 +131,6 @@ const (
 	DlInputmodeEnumUrl     DlInputmodeEnum = "url"
 	DlInputmodeEnumDecimal DlInputmodeEnum = "decimal"
 	DlInputmodeEnumEmail   DlInputmodeEnum = "email"
-	DlInputmodeEnumNone    DlInputmodeEnum = "none"
 )
 
 type DlSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type DlWritingsuggestionsEnum string
 
 const (
-	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
 	DlWritingsuggestionsEnumFalse DlWritingsuggestionsEnum = "false"
+	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
 	DlWritingsuggestionsEnumEmpty DlWritingsuggestionsEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *DlElement) Autocapitalize(a DlAutocapitalizeEnum) *DlElement {
 	return e
 }
 
-func DlAutocapitalizeCustom(s string) DlAutocapitalizeEnum {
-	return DlAutocapitalizeEnum(s)
-}
-
 func (e *DlElement) Autocorrect(a DlAutocorrectEnum) *DlElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func DlAutocorrectCustom(s string) DlAutocorrectEnum {
-	return DlAutocorrectEnum(s)
 }
 
 func (e *DlElement) Autofocus(b bool) *DlElement {
@@ -197,10 +189,6 @@ func (e *DlElement) Contenteditable(a DlContenteditableEnum) *DlElement {
 	return e
 }
 
-func DlContenteditableCustom(s string) DlContenteditableEnum {
-	return DlContenteditableEnum(s)
-}
-
 func (e *DlElement) DataUnsafe(name string, s string) *DlElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *DlElement) Dir(a DlDirEnum) *DlElement {
 	return e
 }
 
-func DlDirCustom(s string) DlDirEnum {
-	return DlDirEnum(s)
-}
-
 func (e *DlElement) Draggable(a DlDraggableEnum) *DlElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func DlDraggableCustom(s string) DlDraggableEnum {
-	return DlDraggableEnum(s)
 }
 
 func (e *DlElement) Enterkeyhint(a DlEnterkeyhintEnum) *DlElement {
@@ -239,18 +219,10 @@ func (e *DlElement) Enterkeyhint(a DlEnterkeyhintEnum) *DlElement {
 	return e
 }
 
-func DlEnterkeyhintCustom(s string) DlEnterkeyhintEnum {
-	return DlEnterkeyhintEnum(s)
-}
-
 func (e *DlElement) Hidden(a DlHiddenEnum) *DlElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func DlHiddenCustom(s string) DlHiddenEnum {
-	return DlHiddenEnum(s)
 }
 
 func (e *DlElement) Id(s string) *DlElement {
@@ -269,10 +241,6 @@ func (e *DlElement) Inputmode(a DlInputmodeEnum) *DlElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func DlInputmodeCustom(s string) DlInputmodeEnum {
-	return DlInputmodeEnum(s)
 }
 
 func (e *DlElement) Itemid(s string) *DlElement {
@@ -335,10 +303,6 @@ func (e *DlElement) Spellcheck(a DlSpellcheckEnum) *DlElement {
 	return e
 }
 
-func DlSpellcheckCustom(s string) DlSpellcheckEnum {
-	return DlSpellcheckEnum(s)
-}
-
 func (e *DlElement) Style(s string) *DlElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *DlElement) Translate(a DlTranslateEnum) *DlElement {
 	return e
 }
 
-func DlTranslateCustom(s string) DlTranslateEnum {
-	return DlTranslateEnum(s)
-}
-
 func (e *DlElement) Writingsuggestions(a DlWritingsuggestionsEnum) *DlElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func DlWritingsuggestionsCustom(s string) DlWritingsuggestionsEnum {
-	return DlWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

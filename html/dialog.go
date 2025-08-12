@@ -57,22 +57,30 @@ func (e *DialogElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type DialogClosedbyEnum string
+
+const (
+	DialogClosedbyEnumAny          DialogClosedbyEnum = "any"
+	DialogClosedbyEnumCloserequest DialogClosedbyEnum = "closerequest"
+	DialogClosedbyEnumNone         DialogClosedbyEnum = "none"
+)
+
 type DialogAutocapitalizeEnum string
 
 const (
-	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
-	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
 	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
 	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
 	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
+	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
+	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 )
 
 type DialogAutocorrectEnum string
 
 const (
-	DialogAutocorrectEnumOff   DialogAutocorrectEnum = "off"
 	DialogAutocorrectEnumOn    DialogAutocorrectEnum = "on"
+	DialogAutocorrectEnumOff   DialogAutocorrectEnum = "off"
 	DialogAutocorrectEnumEmpty DialogAutocorrectEnum = ""
 )
 
@@ -88,9 +96,9 @@ const (
 type DialogDirEnum string
 
 const (
-	DialogDirEnumRtl  DialogDirEnum = "rtl"
 	DialogDirEnumAuto DialogDirEnum = "auto"
 	DialogDirEnumLtr  DialogDirEnum = "ltr"
+	DialogDirEnumRtl  DialogDirEnum = "rtl"
 )
 
 type DialogDraggableEnum string
@@ -103,61 +111,73 @@ const (
 type DialogEnterkeyhintEnum string
 
 const (
+	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
+	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
+	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
 	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
 	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
 	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 	DialogEnterkeyhintEnumSearch   DialogEnterkeyhintEnum = "search"
-	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
-	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
-	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
 )
 
 type DialogHiddenEnum string
 
 const (
-	DialogHiddenEnumUntilFound DialogHiddenEnum = "until-found"
 	DialogHiddenEnumHidden     DialogHiddenEnum = "hidden"
+	DialogHiddenEnumUntilFound DialogHiddenEnum = "until-found"
 	DialogHiddenEnumEmpty      DialogHiddenEnum = ""
 )
 
 type DialogInputmodeEnum string
 
 const (
-	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
-	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
 	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
 	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
 	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
 	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
 	DialogInputmodeEnumNumeric DialogInputmodeEnum = "numeric"
+	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
+	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
 )
 
 type DialogSpellcheckEnum string
 
 const (
-	DialogSpellcheckEnumTrue  DialogSpellcheckEnum = "true"
 	DialogSpellcheckEnumFalse DialogSpellcheckEnum = "false"
+	DialogSpellcheckEnumTrue  DialogSpellcheckEnum = "true"
 	DialogSpellcheckEnumEmpty DialogSpellcheckEnum = ""
 )
 
 type DialogTranslateEnum string
 
 const (
-	DialogTranslateEnumNo    DialogTranslateEnum = "no"
 	DialogTranslateEnumYes   DialogTranslateEnum = "yes"
+	DialogTranslateEnumNo    DialogTranslateEnum = "no"
 	DialogTranslateEnumEmpty DialogTranslateEnum = ""
 )
 
 type DialogWritingsuggestionsEnum string
 
 const (
-	DialogWritingsuggestionsEnumFalse DialogWritingsuggestionsEnum = "false"
 	DialogWritingsuggestionsEnumTrue  DialogWritingsuggestionsEnum = "true"
+	DialogWritingsuggestionsEnumFalse DialogWritingsuggestionsEnum = "false"
 	DialogWritingsuggestionsEnumEmpty DialogWritingsuggestionsEnum = ""
 )
 
 type dialogAttrs map[string]any
+
+func (e *DialogElement) Closedby(a DialogClosedbyEnum) *DialogElement {
+	e.attributes["closedby"] = a
+
+	return e
+}
+
+func (e *DialogElement) Open(b bool) *DialogElement {
+	e.attributes["open"] = b
+
+	return e
+}
 
 func (e *DialogElement) Autocapitalize(a DialogAutocapitalizeEnum) *DialogElement {
 	e.attributes["autocapitalize"] = a
@@ -165,18 +185,10 @@ func (e *DialogElement) Autocapitalize(a DialogAutocapitalizeEnum) *DialogElemen
 	return e
 }
 
-func DialogAutocapitalizeCustom(s string) DialogAutocapitalizeEnum {
-	return DialogAutocapitalizeEnum(s)
-}
-
 func (e *DialogElement) Autocorrect(a DialogAutocorrectEnum) *DialogElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func DialogAutocorrectCustom(s string) DialogAutocorrectEnum {
-	return DialogAutocorrectEnum(s)
 }
 
 func (e *DialogElement) Autofocus(b bool) *DialogElement {
@@ -197,10 +209,6 @@ func (e *DialogElement) Contenteditable(a DialogContenteditableEnum) *DialogElem
 	return e
 }
 
-func DialogContenteditableCustom(s string) DialogContenteditableEnum {
-	return DialogContenteditableEnum(s)
-}
-
 func (e *DialogElement) DataUnsafe(name string, s string) *DialogElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +227,10 @@ func (e *DialogElement) Dir(a DialogDirEnum) *DialogElement {
 	return e
 }
 
-func DialogDirCustom(s string) DialogDirEnum {
-	return DialogDirEnum(s)
-}
-
 func (e *DialogElement) Draggable(a DialogDraggableEnum) *DialogElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func DialogDraggableCustom(s string) DialogDraggableEnum {
-	return DialogDraggableEnum(s)
 }
 
 func (e *DialogElement) Enterkeyhint(a DialogEnterkeyhintEnum) *DialogElement {
@@ -239,18 +239,10 @@ func (e *DialogElement) Enterkeyhint(a DialogEnterkeyhintEnum) *DialogElement {
 	return e
 }
 
-func DialogEnterkeyhintCustom(s string) DialogEnterkeyhintEnum {
-	return DialogEnterkeyhintEnum(s)
-}
-
 func (e *DialogElement) Hidden(a DialogHiddenEnum) *DialogElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func DialogHiddenCustom(s string) DialogHiddenEnum {
-	return DialogHiddenEnum(s)
 }
 
 func (e *DialogElement) Id(s string) *DialogElement {
@@ -269,10 +261,6 @@ func (e *DialogElement) Inputmode(a DialogInputmodeEnum) *DialogElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func DialogInputmodeCustom(s string) DialogInputmodeEnum {
-	return DialogInputmodeEnum(s)
 }
 
 func (e *DialogElement) Itemid(s string) *DialogElement {
@@ -335,10 +323,6 @@ func (e *DialogElement) Spellcheck(a DialogSpellcheckEnum) *DialogElement {
 	return e
 }
 
-func DialogSpellcheckCustom(s string) DialogSpellcheckEnum {
-	return DialogSpellcheckEnum(s)
-}
-
 func (e *DialogElement) Style(s string) *DialogElement {
 	e.attributes["style"] = s
 
@@ -363,18 +347,10 @@ func (e *DialogElement) Translate(a DialogTranslateEnum) *DialogElement {
 	return e
 }
 
-func DialogTranslateCustom(s string) DialogTranslateEnum {
-	return DialogTranslateEnum(s)
-}
-
 func (e *DialogElement) Writingsuggestions(a DialogWritingsuggestionsEnum) *DialogElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func DialogWritingsuggestionsCustom(s string) DialogWritingsuggestionsEnum {
-	return DialogWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

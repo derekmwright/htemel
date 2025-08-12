@@ -105,9 +105,9 @@ const (
 type VideoDirEnum string
 
 const (
-	VideoDirEnumRtl  VideoDirEnum = "rtl"
 	VideoDirEnumAuto VideoDirEnum = "auto"
 	VideoDirEnumLtr  VideoDirEnum = "ltr"
+	VideoDirEnumRtl  VideoDirEnum = "rtl"
 )
 
 type VideoDraggableEnum string
@@ -140,6 +140,7 @@ const (
 type VideoInputmodeEnum string
 
 const (
+	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
 	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
 	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
 	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
@@ -147,7 +148,6 @@ const (
 	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
 	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
 	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
-	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
 )
 
 type VideoSpellcheckEnum string
@@ -161,8 +161,8 @@ const (
 type VideoTranslateEnum string
 
 const (
-	VideoTranslateEnumNo    VideoTranslateEnum = "no"
 	VideoTranslateEnumYes   VideoTranslateEnum = "yes"
+	VideoTranslateEnumNo    VideoTranslateEnum = "no"
 	VideoTranslateEnumEmpty VideoTranslateEnum = ""
 )
 
@@ -188,10 +188,6 @@ func (e *VideoElement) Crossorigin(a VideoCrossoriginEnum) *VideoElement {
 	return e
 }
 
-func VideoCrossoriginCustom(s string) VideoCrossoriginEnum {
-	return VideoCrossoriginEnum(s)
-}
-
 func (e *VideoElement) Poster(s string) *VideoElement {
 	e.attributes["poster"] = s
 
@@ -202,10 +198,6 @@ func (e *VideoElement) Preload(a VideoPreloadEnum) *VideoElement {
 	e.attributes["preload"] = a
 
 	return e
-}
-
-func VideoPreloadCustom(s string) VideoPreloadEnum {
-	return VideoPreloadEnum(s)
 }
 
 func (e *VideoElement) Autoplay(b bool) *VideoElement {
@@ -256,18 +248,10 @@ func (e *VideoElement) Autocapitalize(a VideoAutocapitalizeEnum) *VideoElement {
 	return e
 }
 
-func VideoAutocapitalizeCustom(s string) VideoAutocapitalizeEnum {
-	return VideoAutocapitalizeEnum(s)
-}
-
 func (e *VideoElement) Autocorrect(a VideoAutocorrectEnum) *VideoElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func VideoAutocorrectCustom(s string) VideoAutocorrectEnum {
-	return VideoAutocorrectEnum(s)
 }
 
 func (e *VideoElement) Autofocus(b bool) *VideoElement {
@@ -288,10 +272,6 @@ func (e *VideoElement) Contenteditable(a VideoContenteditableEnum) *VideoElement
 	return e
 }
 
-func VideoContenteditableCustom(s string) VideoContenteditableEnum {
-	return VideoContenteditableEnum(s)
-}
-
 func (e *VideoElement) DataUnsafe(name string, s string) *VideoElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -310,18 +290,10 @@ func (e *VideoElement) Dir(a VideoDirEnum) *VideoElement {
 	return e
 }
 
-func VideoDirCustom(s string) VideoDirEnum {
-	return VideoDirEnum(s)
-}
-
 func (e *VideoElement) Draggable(a VideoDraggableEnum) *VideoElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func VideoDraggableCustom(s string) VideoDraggableEnum {
-	return VideoDraggableEnum(s)
 }
 
 func (e *VideoElement) Enterkeyhint(a VideoEnterkeyhintEnum) *VideoElement {
@@ -330,18 +302,10 @@ func (e *VideoElement) Enterkeyhint(a VideoEnterkeyhintEnum) *VideoElement {
 	return e
 }
 
-func VideoEnterkeyhintCustom(s string) VideoEnterkeyhintEnum {
-	return VideoEnterkeyhintEnum(s)
-}
-
 func (e *VideoElement) Hidden(a VideoHiddenEnum) *VideoElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func VideoHiddenCustom(s string) VideoHiddenEnum {
-	return VideoHiddenEnum(s)
 }
 
 func (e *VideoElement) Id(s string) *VideoElement {
@@ -360,10 +324,6 @@ func (e *VideoElement) Inputmode(a VideoInputmodeEnum) *VideoElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func VideoInputmodeCustom(s string) VideoInputmodeEnum {
-	return VideoInputmodeEnum(s)
 }
 
 func (e *VideoElement) Itemid(s string) *VideoElement {
@@ -426,10 +386,6 @@ func (e *VideoElement) Spellcheck(a VideoSpellcheckEnum) *VideoElement {
 	return e
 }
 
-func VideoSpellcheckCustom(s string) VideoSpellcheckEnum {
-	return VideoSpellcheckEnum(s)
-}
-
 func (e *VideoElement) Style(s string) *VideoElement {
 	e.attributes["style"] = s
 
@@ -454,18 +410,10 @@ func (e *VideoElement) Translate(a VideoTranslateEnum) *VideoElement {
 	return e
 }
 
-func VideoTranslateCustom(s string) VideoTranslateEnum {
-	return VideoTranslateEnum(s)
-}
-
 func (e *VideoElement) Writingsuggestions(a VideoWritingsuggestionsEnum) *VideoElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func VideoWritingsuggestionsCustom(s string) VideoWritingsuggestionsEnum {
-	return VideoWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

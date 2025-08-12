@@ -60,12 +60,12 @@ func (e *LiElement) AddIndent(i int) {
 type LiAutocapitalizeEnum string
 
 const (
-	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
-	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
-	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
 	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
+	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
+	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
+	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 )
 
 type LiAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type LiContenteditableEnum string
 
 const (
-	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
 	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
+	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumEmpty         LiContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type LiEnterkeyhintEnum string
 
 const (
+	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
+	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
+	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
 	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
 	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
 	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
-	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
-	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
-	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 )
 
 type LiHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type LiInputmodeEnum string
 
 const (
-	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 	LiInputmodeEnumNone    LiInputmodeEnum = "none"
 	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
@@ -131,6 +130,7 @@ const (
 	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
 	LiInputmodeEnumText    LiInputmodeEnum = "text"
 	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
+	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 )
 
 type LiSpellcheckEnum string
@@ -171,18 +171,10 @@ func (e *LiElement) Autocapitalize(a LiAutocapitalizeEnum) *LiElement {
 	return e
 }
 
-func LiAutocapitalizeCustom(s string) LiAutocapitalizeEnum {
-	return LiAutocapitalizeEnum(s)
-}
-
 func (e *LiElement) Autocorrect(a LiAutocorrectEnum) *LiElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func LiAutocorrectCustom(s string) LiAutocorrectEnum {
-	return LiAutocorrectEnum(s)
 }
 
 func (e *LiElement) Autofocus(b bool) *LiElement {
@@ -203,10 +195,6 @@ func (e *LiElement) Contenteditable(a LiContenteditableEnum) *LiElement {
 	return e
 }
 
-func LiContenteditableCustom(s string) LiContenteditableEnum {
-	return LiContenteditableEnum(s)
-}
-
 func (e *LiElement) DataUnsafe(name string, s string) *LiElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -225,18 +213,10 @@ func (e *LiElement) Dir(a LiDirEnum) *LiElement {
 	return e
 }
 
-func LiDirCustom(s string) LiDirEnum {
-	return LiDirEnum(s)
-}
-
 func (e *LiElement) Draggable(a LiDraggableEnum) *LiElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func LiDraggableCustom(s string) LiDraggableEnum {
-	return LiDraggableEnum(s)
 }
 
 func (e *LiElement) Enterkeyhint(a LiEnterkeyhintEnum) *LiElement {
@@ -245,18 +225,10 @@ func (e *LiElement) Enterkeyhint(a LiEnterkeyhintEnum) *LiElement {
 	return e
 }
 
-func LiEnterkeyhintCustom(s string) LiEnterkeyhintEnum {
-	return LiEnterkeyhintEnum(s)
-}
-
 func (e *LiElement) Hidden(a LiHiddenEnum) *LiElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func LiHiddenCustom(s string) LiHiddenEnum {
-	return LiHiddenEnum(s)
 }
 
 func (e *LiElement) Id(s string) *LiElement {
@@ -275,10 +247,6 @@ func (e *LiElement) Inputmode(a LiInputmodeEnum) *LiElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func LiInputmodeCustom(s string) LiInputmodeEnum {
-	return LiInputmodeEnum(s)
 }
 
 func (e *LiElement) Itemid(s string) *LiElement {
@@ -341,10 +309,6 @@ func (e *LiElement) Spellcheck(a LiSpellcheckEnum) *LiElement {
 	return e
 }
 
-func LiSpellcheckCustom(s string) LiSpellcheckEnum {
-	return LiSpellcheckEnum(s)
-}
-
 func (e *LiElement) Style(s string) *LiElement {
 	e.attributes["style"] = s
 
@@ -369,18 +333,10 @@ func (e *LiElement) Translate(a LiTranslateEnum) *LiElement {
 	return e
 }
 
-func LiTranslateCustom(s string) LiTranslateEnum {
-	return LiTranslateEnum(s)
-}
-
 func (e *LiElement) Writingsuggestions(a LiWritingsuggestionsEnum) *LiElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func LiWritingsuggestionsCustom(s string) LiWritingsuggestionsEnum {
-	return LiWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

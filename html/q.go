@@ -71,8 +71,8 @@ const (
 type QAutocorrectEnum string
 
 const (
-	QAutocorrectEnumOff   QAutocorrectEnum = "off"
 	QAutocorrectEnumOn    QAutocorrectEnum = "on"
+	QAutocorrectEnumOff   QAutocorrectEnum = "off"
 	QAutocorrectEnumEmpty QAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type QDirEnum string
 
 const (
-	QDirEnumRtl  QDirEnum = "rtl"
 	QDirEnumAuto QDirEnum = "auto"
 	QDirEnumLtr  QDirEnum = "ltr"
+	QDirEnumRtl  QDirEnum = "rtl"
 )
 
 type QDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type QEnterkeyhintEnum string
 
 const (
-	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
-	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
-	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
 	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
 	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
+	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
+	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
+	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 )
 
 type QHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type QInputmodeEnum string
 
 const (
-	QInputmodeEnumText    QInputmodeEnum = "text"
-	QInputmodeEnumUrl     QInputmodeEnum = "url"
-	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
 	QInputmodeEnumEmail   QInputmodeEnum = "email"
 	QInputmodeEnumNone    QInputmodeEnum = "none"
 	QInputmodeEnumNumeric QInputmodeEnum = "numeric"
 	QInputmodeEnumSearch  QInputmodeEnum = "search"
 	QInputmodeEnumTel     QInputmodeEnum = "tel"
+	QInputmodeEnumText    QInputmodeEnum = "text"
+	QInputmodeEnumUrl     QInputmodeEnum = "url"
+	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
 )
 
 type QSpellcheckEnum string
@@ -171,18 +171,10 @@ func (e *QElement) Autocapitalize(a QAutocapitalizeEnum) *QElement {
 	return e
 }
 
-func QAutocapitalizeCustom(s string) QAutocapitalizeEnum {
-	return QAutocapitalizeEnum(s)
-}
-
 func (e *QElement) Autocorrect(a QAutocorrectEnum) *QElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func QAutocorrectCustom(s string) QAutocorrectEnum {
-	return QAutocorrectEnum(s)
 }
 
 func (e *QElement) Autofocus(b bool) *QElement {
@@ -203,10 +195,6 @@ func (e *QElement) Contenteditable(a QContenteditableEnum) *QElement {
 	return e
 }
 
-func QContenteditableCustom(s string) QContenteditableEnum {
-	return QContenteditableEnum(s)
-}
-
 func (e *QElement) DataUnsafe(name string, s string) *QElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -225,18 +213,10 @@ func (e *QElement) Dir(a QDirEnum) *QElement {
 	return e
 }
 
-func QDirCustom(s string) QDirEnum {
-	return QDirEnum(s)
-}
-
 func (e *QElement) Draggable(a QDraggableEnum) *QElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func QDraggableCustom(s string) QDraggableEnum {
-	return QDraggableEnum(s)
 }
 
 func (e *QElement) Enterkeyhint(a QEnterkeyhintEnum) *QElement {
@@ -245,18 +225,10 @@ func (e *QElement) Enterkeyhint(a QEnterkeyhintEnum) *QElement {
 	return e
 }
 
-func QEnterkeyhintCustom(s string) QEnterkeyhintEnum {
-	return QEnterkeyhintEnum(s)
-}
-
 func (e *QElement) Hidden(a QHiddenEnum) *QElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func QHiddenCustom(s string) QHiddenEnum {
-	return QHiddenEnum(s)
 }
 
 func (e *QElement) Id(s string) *QElement {
@@ -275,10 +247,6 @@ func (e *QElement) Inputmode(a QInputmodeEnum) *QElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func QInputmodeCustom(s string) QInputmodeEnum {
-	return QInputmodeEnum(s)
 }
 
 func (e *QElement) Itemid(s string) *QElement {
@@ -341,10 +309,6 @@ func (e *QElement) Spellcheck(a QSpellcheckEnum) *QElement {
 	return e
 }
 
-func QSpellcheckCustom(s string) QSpellcheckEnum {
-	return QSpellcheckEnum(s)
-}
-
 func (e *QElement) Style(s string) *QElement {
 	e.attributes["style"] = s
 
@@ -369,18 +333,10 @@ func (e *QElement) Translate(a QTranslateEnum) *QElement {
 	return e
 }
 
-func QTranslateCustom(s string) QTranslateEnum {
-	return QTranslateEnum(s)
-}
-
 func (e *QElement) Writingsuggestions(a QWritingsuggestionsEnum) *QElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func QWritingsuggestionsCustom(s string) QWritingsuggestionsEnum {
-	return QWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

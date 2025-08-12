@@ -60,12 +60,12 @@ func (e *CodeElement) AddIndent(i int) {
 type CodeAutocapitalizeEnum string
 
 const (
-	CodeAutocapitalizeEnumOff        CodeAutocapitalizeEnum = "off"
-	CodeAutocapitalizeEnumOn         CodeAutocapitalizeEnum = "on"
 	CodeAutocapitalizeEnumSentences  CodeAutocapitalizeEnum = "sentences"
 	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
 	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
 	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
+	CodeAutocapitalizeEnumOff        CodeAutocapitalizeEnum = "off"
+	CodeAutocapitalizeEnumOn         CodeAutocapitalizeEnum = "on"
 )
 
 type CodeAutocorrectEnum string
@@ -88,28 +88,28 @@ const (
 type CodeDirEnum string
 
 const (
+	CodeDirEnumRtl  CodeDirEnum = "rtl"
 	CodeDirEnumAuto CodeDirEnum = "auto"
 	CodeDirEnumLtr  CodeDirEnum = "ltr"
-	CodeDirEnumRtl  CodeDirEnum = "rtl"
 )
 
 type CodeDraggableEnum string
 
 const (
-	CodeDraggableEnumFalse CodeDraggableEnum = "false"
 	CodeDraggableEnumTrue  CodeDraggableEnum = "true"
+	CodeDraggableEnumFalse CodeDraggableEnum = "false"
 )
 
 type CodeEnterkeyhintEnum string
 
 const (
+	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
 	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
 	CodeEnterkeyhintEnumEnter    CodeEnterkeyhintEnum = "enter"
 	CodeEnterkeyhintEnumGo       CodeEnterkeyhintEnum = "go"
 	CodeEnterkeyhintEnumNext     CodeEnterkeyhintEnum = "next"
 	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
 	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
-	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
 )
 
 type CodeHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type CodeInputmodeEnum string
 
 const (
+	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
+	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
 	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
 	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
 	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
 	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
 	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
-	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
-	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 )
 
 type CodeSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type CodeTranslateEnum string
 
 const (
-	CodeTranslateEnumYes   CodeTranslateEnum = "yes"
 	CodeTranslateEnumNo    CodeTranslateEnum = "no"
+	CodeTranslateEnumYes   CodeTranslateEnum = "yes"
 	CodeTranslateEnumEmpty CodeTranslateEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *CodeElement) Autocapitalize(a CodeAutocapitalizeEnum) *CodeElement {
 	return e
 }
 
-func CodeAutocapitalizeCustom(s string) CodeAutocapitalizeEnum {
-	return CodeAutocapitalizeEnum(s)
-}
-
 func (e *CodeElement) Autocorrect(a CodeAutocorrectEnum) *CodeElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func CodeAutocorrectCustom(s string) CodeAutocorrectEnum {
-	return CodeAutocorrectEnum(s)
 }
 
 func (e *CodeElement) Autofocus(b bool) *CodeElement {
@@ -197,10 +189,6 @@ func (e *CodeElement) Contenteditable(a CodeContenteditableEnum) *CodeElement {
 	return e
 }
 
-func CodeContenteditableCustom(s string) CodeContenteditableEnum {
-	return CodeContenteditableEnum(s)
-}
-
 func (e *CodeElement) DataUnsafe(name string, s string) *CodeElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *CodeElement) Dir(a CodeDirEnum) *CodeElement {
 	return e
 }
 
-func CodeDirCustom(s string) CodeDirEnum {
-	return CodeDirEnum(s)
-}
-
 func (e *CodeElement) Draggable(a CodeDraggableEnum) *CodeElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func CodeDraggableCustom(s string) CodeDraggableEnum {
-	return CodeDraggableEnum(s)
 }
 
 func (e *CodeElement) Enterkeyhint(a CodeEnterkeyhintEnum) *CodeElement {
@@ -239,18 +219,10 @@ func (e *CodeElement) Enterkeyhint(a CodeEnterkeyhintEnum) *CodeElement {
 	return e
 }
 
-func CodeEnterkeyhintCustom(s string) CodeEnterkeyhintEnum {
-	return CodeEnterkeyhintEnum(s)
-}
-
 func (e *CodeElement) Hidden(a CodeHiddenEnum) *CodeElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func CodeHiddenCustom(s string) CodeHiddenEnum {
-	return CodeHiddenEnum(s)
 }
 
 func (e *CodeElement) Id(s string) *CodeElement {
@@ -269,10 +241,6 @@ func (e *CodeElement) Inputmode(a CodeInputmodeEnum) *CodeElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func CodeInputmodeCustom(s string) CodeInputmodeEnum {
-	return CodeInputmodeEnum(s)
 }
 
 func (e *CodeElement) Itemid(s string) *CodeElement {
@@ -335,10 +303,6 @@ func (e *CodeElement) Spellcheck(a CodeSpellcheckEnum) *CodeElement {
 	return e
 }
 
-func CodeSpellcheckCustom(s string) CodeSpellcheckEnum {
-	return CodeSpellcheckEnum(s)
-}
-
 func (e *CodeElement) Style(s string) *CodeElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *CodeElement) Translate(a CodeTranslateEnum) *CodeElement {
 	return e
 }
 
-func CodeTranslateCustom(s string) CodeTranslateEnum {
-	return CodeTranslateEnum(s)
-}
-
 func (e *CodeElement) Writingsuggestions(a CodeWritingsuggestionsEnum) *CodeElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func CodeWritingsuggestionsCustom(s string) CodeWritingsuggestionsEnum {
-	return CodeWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

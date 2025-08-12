@@ -85,12 +85,14 @@ func (e *` + titleCase(e.Tag) + `Element) ` + pascalCase(a.Name) + `(a ` + typeN
 	return e
 }
 `)
-				// Generate func to return a custom attribute value
-				buf.WriteString(`
+				if a.AllowCustom {
+					// Generate func to return a custom attribute value
+					buf.WriteString(`
 func  ` + titleCase(e.Tag) + pascalCase(a.Name) + `Custom(s string) ` + typeName + ` {
 	return ` + typeName + `(s)
 }
 `)
+				}
 
 			case *spec.AttributeTypeSST:
 				buf.WriteString(`

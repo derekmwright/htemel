@@ -60,28 +60,28 @@ func (e *HtmlElement) AddIndent(i int) {
 type HtmlAutocapitalizeEnum string
 
 const (
+	HtmlAutocapitalizeEnumWords      HtmlAutocapitalizeEnum = "words"
 	HtmlAutocapitalizeEnumCharacters HtmlAutocapitalizeEnum = "characters"
 	HtmlAutocapitalizeEnumNone       HtmlAutocapitalizeEnum = "none"
 	HtmlAutocapitalizeEnumOff        HtmlAutocapitalizeEnum = "off"
 	HtmlAutocapitalizeEnumOn         HtmlAutocapitalizeEnum = "on"
 	HtmlAutocapitalizeEnumSentences  HtmlAutocapitalizeEnum = "sentences"
-	HtmlAutocapitalizeEnumWords      HtmlAutocapitalizeEnum = "words"
 )
 
 type HtmlAutocorrectEnum string
 
 const (
-	HtmlAutocorrectEnumOff   HtmlAutocorrectEnum = "off"
 	HtmlAutocorrectEnumOn    HtmlAutocorrectEnum = "on"
+	HtmlAutocorrectEnumOff   HtmlAutocorrectEnum = "off"
 	HtmlAutocorrectEnumEmpty HtmlAutocorrectEnum = ""
 )
 
 type HtmlContenteditableEnum string
 
 const (
-	HtmlContenteditableEnumPlaintextOnly HtmlContenteditableEnum = "plaintext-only"
 	HtmlContenteditableEnumTrue          HtmlContenteditableEnum = "true"
 	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
+	HtmlContenteditableEnumPlaintextOnly HtmlContenteditableEnum = "plaintext-only"
 	HtmlContenteditableEnumEmpty         HtmlContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type HtmlEnterkeyhintEnum string
 
 const (
+	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
 	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
 	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
 	HtmlEnterkeyhintEnumNext     HtmlEnterkeyhintEnum = "next"
 	HtmlEnterkeyhintEnumPrevious HtmlEnterkeyhintEnum = "previous"
 	HtmlEnterkeyhintEnumSearch   HtmlEnterkeyhintEnum = "search"
 	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
-	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
 )
 
 type HtmlHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type HtmlInputmodeEnum string
 
 const (
-	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
-	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
 	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
 	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
 	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
 	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
 	HtmlInputmodeEnumNone    HtmlInputmodeEnum = "none"
+	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
+	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
 )
 
 type HtmlSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type HtmlWritingsuggestionsEnum string
 
 const (
-	HtmlWritingsuggestionsEnumTrue  HtmlWritingsuggestionsEnum = "true"
 	HtmlWritingsuggestionsEnumFalse HtmlWritingsuggestionsEnum = "false"
+	HtmlWritingsuggestionsEnumTrue  HtmlWritingsuggestionsEnum = "true"
 	HtmlWritingsuggestionsEnumEmpty HtmlWritingsuggestionsEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *HtmlElement) Autocapitalize(a HtmlAutocapitalizeEnum) *HtmlElement {
 	return e
 }
 
-func HtmlAutocapitalizeCustom(s string) HtmlAutocapitalizeEnum {
-	return HtmlAutocapitalizeEnum(s)
-}
-
 func (e *HtmlElement) Autocorrect(a HtmlAutocorrectEnum) *HtmlElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func HtmlAutocorrectCustom(s string) HtmlAutocorrectEnum {
-	return HtmlAutocorrectEnum(s)
 }
 
 func (e *HtmlElement) Autofocus(b bool) *HtmlElement {
@@ -197,10 +189,6 @@ func (e *HtmlElement) Contenteditable(a HtmlContenteditableEnum) *HtmlElement {
 	return e
 }
 
-func HtmlContenteditableCustom(s string) HtmlContenteditableEnum {
-	return HtmlContenteditableEnum(s)
-}
-
 func (e *HtmlElement) DataUnsafe(name string, s string) *HtmlElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *HtmlElement) Dir(a HtmlDirEnum) *HtmlElement {
 	return e
 }
 
-func HtmlDirCustom(s string) HtmlDirEnum {
-	return HtmlDirEnum(s)
-}
-
 func (e *HtmlElement) Draggable(a HtmlDraggableEnum) *HtmlElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func HtmlDraggableCustom(s string) HtmlDraggableEnum {
-	return HtmlDraggableEnum(s)
 }
 
 func (e *HtmlElement) Enterkeyhint(a HtmlEnterkeyhintEnum) *HtmlElement {
@@ -239,18 +219,10 @@ func (e *HtmlElement) Enterkeyhint(a HtmlEnterkeyhintEnum) *HtmlElement {
 	return e
 }
 
-func HtmlEnterkeyhintCustom(s string) HtmlEnterkeyhintEnum {
-	return HtmlEnterkeyhintEnum(s)
-}
-
 func (e *HtmlElement) Hidden(a HtmlHiddenEnum) *HtmlElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func HtmlHiddenCustom(s string) HtmlHiddenEnum {
-	return HtmlHiddenEnum(s)
 }
 
 func (e *HtmlElement) Id(s string) *HtmlElement {
@@ -269,10 +241,6 @@ func (e *HtmlElement) Inputmode(a HtmlInputmodeEnum) *HtmlElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func HtmlInputmodeCustom(s string) HtmlInputmodeEnum {
-	return HtmlInputmodeEnum(s)
 }
 
 func (e *HtmlElement) Itemid(s string) *HtmlElement {
@@ -335,10 +303,6 @@ func (e *HtmlElement) Spellcheck(a HtmlSpellcheckEnum) *HtmlElement {
 	return e
 }
 
-func HtmlSpellcheckCustom(s string) HtmlSpellcheckEnum {
-	return HtmlSpellcheckEnum(s)
-}
-
 func (e *HtmlElement) Style(s string) *HtmlElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *HtmlElement) Translate(a HtmlTranslateEnum) *HtmlElement {
 	return e
 }
 
-func HtmlTranslateCustom(s string) HtmlTranslateEnum {
-	return HtmlTranslateEnum(s)
-}
-
 func (e *HtmlElement) Writingsuggestions(a HtmlWritingsuggestionsEnum) *HtmlElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func HtmlWritingsuggestionsCustom(s string) HtmlWritingsuggestionsEnum {
-	return HtmlWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

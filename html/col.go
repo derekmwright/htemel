@@ -52,37 +52,37 @@ func (e *ColElement) AddIndent(i int) {
 type ColAutocapitalizeEnum string
 
 const (
-	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
 	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
 	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
 	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
 	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
 	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
+	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
 )
 
 type ColAutocorrectEnum string
 
 const (
-	ColAutocorrectEnumOff   ColAutocorrectEnum = "off"
 	ColAutocorrectEnumOn    ColAutocorrectEnum = "on"
+	ColAutocorrectEnumOff   ColAutocorrectEnum = "off"
 	ColAutocorrectEnumEmpty ColAutocorrectEnum = ""
 )
 
 type ColContenteditableEnum string
 
 const (
-	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
 	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
 	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
+	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
 	ColContenteditableEnumEmpty         ColContenteditableEnum = ""
 )
 
 type ColDirEnum string
 
 const (
+	ColDirEnumAuto ColDirEnum = "auto"
 	ColDirEnumLtr  ColDirEnum = "ltr"
 	ColDirEnumRtl  ColDirEnum = "rtl"
-	ColDirEnumAuto ColDirEnum = "auto"
 )
 
 type ColDraggableEnum string
@@ -95,34 +95,34 @@ const (
 type ColEnterkeyhintEnum string
 
 const (
+	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
 	ColEnterkeyhintEnumSend     ColEnterkeyhintEnum = "send"
 	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
 	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
 	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
 	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
 	ColEnterkeyhintEnumPrevious ColEnterkeyhintEnum = "previous"
-	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
 )
 
 type ColHiddenEnum string
 
 const (
-	ColHiddenEnumHidden     ColHiddenEnum = "hidden"
 	ColHiddenEnumUntilFound ColHiddenEnum = "until-found"
+	ColHiddenEnumHidden     ColHiddenEnum = "hidden"
 	ColHiddenEnumEmpty      ColHiddenEnum = ""
 )
 
 type ColInputmodeEnum string
 
 const (
-	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
-	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 	ColInputmodeEnumText    ColInputmodeEnum = "text"
 	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
 	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
 	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
 	ColInputmodeEnumNone    ColInputmodeEnum = "none"
 	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
+	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
+	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 )
 
 type ColSpellcheckEnum string
@@ -163,18 +163,10 @@ func (e *ColElement) Autocapitalize(a ColAutocapitalizeEnum) *ColElement {
 	return e
 }
 
-func ColAutocapitalizeCustom(s string) ColAutocapitalizeEnum {
-	return ColAutocapitalizeEnum(s)
-}
-
 func (e *ColElement) Autocorrect(a ColAutocorrectEnum) *ColElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func ColAutocorrectCustom(s string) ColAutocorrectEnum {
-	return ColAutocorrectEnum(s)
 }
 
 func (e *ColElement) Autofocus(b bool) *ColElement {
@@ -195,10 +187,6 @@ func (e *ColElement) Contenteditable(a ColContenteditableEnum) *ColElement {
 	return e
 }
 
-func ColContenteditableCustom(s string) ColContenteditableEnum {
-	return ColContenteditableEnum(s)
-}
-
 func (e *ColElement) DataUnsafe(name string, s string) *ColElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -217,18 +205,10 @@ func (e *ColElement) Dir(a ColDirEnum) *ColElement {
 	return e
 }
 
-func ColDirCustom(s string) ColDirEnum {
-	return ColDirEnum(s)
-}
-
 func (e *ColElement) Draggable(a ColDraggableEnum) *ColElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func ColDraggableCustom(s string) ColDraggableEnum {
-	return ColDraggableEnum(s)
 }
 
 func (e *ColElement) Enterkeyhint(a ColEnterkeyhintEnum) *ColElement {
@@ -237,18 +217,10 @@ func (e *ColElement) Enterkeyhint(a ColEnterkeyhintEnum) *ColElement {
 	return e
 }
 
-func ColEnterkeyhintCustom(s string) ColEnterkeyhintEnum {
-	return ColEnterkeyhintEnum(s)
-}
-
 func (e *ColElement) Hidden(a ColHiddenEnum) *ColElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func ColHiddenCustom(s string) ColHiddenEnum {
-	return ColHiddenEnum(s)
 }
 
 func (e *ColElement) Id(s string) *ColElement {
@@ -267,10 +239,6 @@ func (e *ColElement) Inputmode(a ColInputmodeEnum) *ColElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func ColInputmodeCustom(s string) ColInputmodeEnum {
-	return ColInputmodeEnum(s)
 }
 
 func (e *ColElement) Itemid(s string) *ColElement {
@@ -333,10 +301,6 @@ func (e *ColElement) Spellcheck(a ColSpellcheckEnum) *ColElement {
 	return e
 }
 
-func ColSpellcheckCustom(s string) ColSpellcheckEnum {
-	return ColSpellcheckEnum(s)
-}
-
 func (e *ColElement) Style(s string) *ColElement {
 	e.attributes["style"] = s
 
@@ -361,18 +325,10 @@ func (e *ColElement) Translate(a ColTranslateEnum) *ColElement {
 	return e
 }
 
-func ColTranslateCustom(s string) ColTranslateEnum {
-	return ColTranslateEnum(s)
-}
-
 func (e *ColElement) Writingsuggestions(a ColWritingsuggestionsEnum) *ColElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func ColWritingsuggestionsCustom(s string) ColWritingsuggestionsEnum {
-	return ColWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

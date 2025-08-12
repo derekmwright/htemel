@@ -60,12 +60,12 @@ func (e *CiteElement) AddIndent(i int) {
 type CiteAutocapitalizeEnum string
 
 const (
+	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
+	CiteAutocapitalizeEnumNone       CiteAutocapitalizeEnum = "none"
 	CiteAutocapitalizeEnumOff        CiteAutocapitalizeEnum = "off"
 	CiteAutocapitalizeEnumOn         CiteAutocapitalizeEnum = "on"
 	CiteAutocapitalizeEnumSentences  CiteAutocapitalizeEnum = "sentences"
 	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
-	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
-	CiteAutocapitalizeEnumNone       CiteAutocapitalizeEnum = "none"
 )
 
 type CiteAutocorrectEnum string
@@ -96,20 +96,20 @@ const (
 type CiteDraggableEnum string
 
 const (
-	CiteDraggableEnumFalse CiteDraggableEnum = "false"
 	CiteDraggableEnumTrue  CiteDraggableEnum = "true"
+	CiteDraggableEnumFalse CiteDraggableEnum = "false"
 )
 
 type CiteEnterkeyhintEnum string
 
 const (
+	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
+	CiteEnterkeyhintEnumSearch   CiteEnterkeyhintEnum = "search"
+	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
 	CiteEnterkeyhintEnumDone     CiteEnterkeyhintEnum = "done"
 	CiteEnterkeyhintEnumEnter    CiteEnterkeyhintEnum = "enter"
 	CiteEnterkeyhintEnumGo       CiteEnterkeyhintEnum = "go"
 	CiteEnterkeyhintEnumNext     CiteEnterkeyhintEnum = "next"
-	CiteEnterkeyhintEnumPrevious CiteEnterkeyhintEnum = "previous"
-	CiteEnterkeyhintEnumSearch   CiteEnterkeyhintEnum = "search"
-	CiteEnterkeyhintEnumSend     CiteEnterkeyhintEnum = "send"
 )
 
 type CiteHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type CiteInputmodeEnum string
 
 const (
+	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
 	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
 	CiteInputmodeEnumSearch  CiteInputmodeEnum = "search"
 	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
@@ -130,14 +131,13 @@ const (
 	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
 	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
-	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
 )
 
 type CiteSpellcheckEnum string
 
 const (
-	CiteSpellcheckEnumTrue  CiteSpellcheckEnum = "true"
 	CiteSpellcheckEnumFalse CiteSpellcheckEnum = "false"
+	CiteSpellcheckEnumTrue  CiteSpellcheckEnum = "true"
 	CiteSpellcheckEnumEmpty CiteSpellcheckEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *CiteElement) Autocapitalize(a CiteAutocapitalizeEnum) *CiteElement {
 	return e
 }
 
-func CiteAutocapitalizeCustom(s string) CiteAutocapitalizeEnum {
-	return CiteAutocapitalizeEnum(s)
-}
-
 func (e *CiteElement) Autocorrect(a CiteAutocorrectEnum) *CiteElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func CiteAutocorrectCustom(s string) CiteAutocorrectEnum {
-	return CiteAutocorrectEnum(s)
 }
 
 func (e *CiteElement) Autofocus(b bool) *CiteElement {
@@ -197,10 +189,6 @@ func (e *CiteElement) Contenteditable(a CiteContenteditableEnum) *CiteElement {
 	return e
 }
 
-func CiteContenteditableCustom(s string) CiteContenteditableEnum {
-	return CiteContenteditableEnum(s)
-}
-
 func (e *CiteElement) DataUnsafe(name string, s string) *CiteElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *CiteElement) Dir(a CiteDirEnum) *CiteElement {
 	return e
 }
 
-func CiteDirCustom(s string) CiteDirEnum {
-	return CiteDirEnum(s)
-}
-
 func (e *CiteElement) Draggable(a CiteDraggableEnum) *CiteElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func CiteDraggableCustom(s string) CiteDraggableEnum {
-	return CiteDraggableEnum(s)
 }
 
 func (e *CiteElement) Enterkeyhint(a CiteEnterkeyhintEnum) *CiteElement {
@@ -239,18 +219,10 @@ func (e *CiteElement) Enterkeyhint(a CiteEnterkeyhintEnum) *CiteElement {
 	return e
 }
 
-func CiteEnterkeyhintCustom(s string) CiteEnterkeyhintEnum {
-	return CiteEnterkeyhintEnum(s)
-}
-
 func (e *CiteElement) Hidden(a CiteHiddenEnum) *CiteElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func CiteHiddenCustom(s string) CiteHiddenEnum {
-	return CiteHiddenEnum(s)
 }
 
 func (e *CiteElement) Id(s string) *CiteElement {
@@ -269,10 +241,6 @@ func (e *CiteElement) Inputmode(a CiteInputmodeEnum) *CiteElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func CiteInputmodeCustom(s string) CiteInputmodeEnum {
-	return CiteInputmodeEnum(s)
 }
 
 func (e *CiteElement) Itemid(s string) *CiteElement {
@@ -335,10 +303,6 @@ func (e *CiteElement) Spellcheck(a CiteSpellcheckEnum) *CiteElement {
 	return e
 }
 
-func CiteSpellcheckCustom(s string) CiteSpellcheckEnum {
-	return CiteSpellcheckEnum(s)
-}
-
 func (e *CiteElement) Style(s string) *CiteElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *CiteElement) Translate(a CiteTranslateEnum) *CiteElement {
 	return e
 }
 
-func CiteTranslateCustom(s string) CiteTranslateEnum {
-	return CiteTranslateEnum(s)
-}
-
 func (e *CiteElement) Writingsuggestions(a CiteWritingsuggestionsEnum) *CiteElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func CiteWritingsuggestionsCustom(s string) CiteWritingsuggestionsEnum {
-	return CiteWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

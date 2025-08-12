@@ -57,40 +57,62 @@ func (e *ScriptElement) AddIndent(i int) {
 	e.indent = i + 1
 }
 
+type ScriptBlockingEnum string
+
+const (
+	ScriptBlockingEnumRender ScriptBlockingEnum = "render"
+)
+
+type ScriptCrossoriginEnum string
+
+const (
+	ScriptCrossoriginEnumAnonymous      ScriptCrossoriginEnum = "anonymous"
+	ScriptCrossoriginEnumUseCredentials ScriptCrossoriginEnum = "use-credentials"
+	ScriptCrossoriginEnumEmpty          ScriptCrossoriginEnum = ""
+)
+
+type ScriptFetchpriorityEnum string
+
+const (
+	ScriptFetchpriorityEnumLow  ScriptFetchpriorityEnum = "low"
+	ScriptFetchpriorityEnumAuto ScriptFetchpriorityEnum = "auto"
+	ScriptFetchpriorityEnumHigh ScriptFetchpriorityEnum = "high"
+)
+
 type ScriptAutocapitalizeEnum string
 
 const (
-	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
-	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
-	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
 	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
 	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
 	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
+	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
+	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
+	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
 )
 
 type ScriptAutocorrectEnum string
 
 const (
-	ScriptAutocorrectEnumOn    ScriptAutocorrectEnum = "on"
 	ScriptAutocorrectEnumOff   ScriptAutocorrectEnum = "off"
+	ScriptAutocorrectEnumOn    ScriptAutocorrectEnum = "on"
 	ScriptAutocorrectEnumEmpty ScriptAutocorrectEnum = ""
 )
 
 type ScriptContenteditableEnum string
 
 const (
+	ScriptContenteditableEnumPlaintextOnly ScriptContenteditableEnum = "plaintext-only"
 	ScriptContenteditableEnumTrue          ScriptContenteditableEnum = "true"
 	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
-	ScriptContenteditableEnumPlaintextOnly ScriptContenteditableEnum = "plaintext-only"
 	ScriptContenteditableEnumEmpty         ScriptContenteditableEnum = ""
 )
 
 type ScriptDirEnum string
 
 const (
-	ScriptDirEnumRtl  ScriptDirEnum = "rtl"
 	ScriptDirEnumAuto ScriptDirEnum = "auto"
 	ScriptDirEnumLtr  ScriptDirEnum = "ltr"
+	ScriptDirEnumRtl  ScriptDirEnum = "rtl"
 )
 
 type ScriptDraggableEnum string
@@ -115,22 +137,22 @@ const (
 type ScriptHiddenEnum string
 
 const (
-	ScriptHiddenEnumUntilFound ScriptHiddenEnum = "until-found"
 	ScriptHiddenEnumHidden     ScriptHiddenEnum = "hidden"
+	ScriptHiddenEnumUntilFound ScriptHiddenEnum = "until-found"
 	ScriptHiddenEnumEmpty      ScriptHiddenEnum = ""
 )
 
 type ScriptInputmodeEnum string
 
 const (
+	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
+	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
 	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
 	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
 	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
 	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
-	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
-	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
 )
 
 type ScriptSpellcheckEnum string
@@ -159,24 +181,76 @@ const (
 
 type scriptAttrs map[string]any
 
+func (e *ScriptElement) Type(s string) *ScriptElement {
+	e.attributes["type"] = s
+
+	return e
+}
+
+func (e *ScriptElement) Src(s string) *ScriptElement {
+	e.attributes["src"] = s
+
+	return e
+}
+
+func (e *ScriptElement) Nomodule(b bool) *ScriptElement {
+	e.attributes["nomodule"] = b
+
+	return e
+}
+
+func (e *ScriptElement) Async(b bool) *ScriptElement {
+	e.attributes["async"] = b
+
+	return e
+}
+
+func (e *ScriptElement) Defer(b bool) *ScriptElement {
+	e.attributes["defer"] = b
+
+	return e
+}
+
+func (e *ScriptElement) Blocking(a ScriptBlockingEnum) *ScriptElement {
+	e.attributes["blocking"] = a
+
+	return e
+}
+
+func (e *ScriptElement) Crossorigin(a ScriptCrossoriginEnum) *ScriptElement {
+	e.attributes["crossorigin"] = a
+
+	return e
+}
+
+func (e *ScriptElement) Referrerpolicy(s string) *ScriptElement {
+	e.attributes["referrerpolicy"] = s
+
+	return e
+}
+
+func (e *ScriptElement) Integrity(s string) *ScriptElement {
+	e.attributes["integrity"] = s
+
+	return e
+}
+
+func (e *ScriptElement) Fetchpriority(a ScriptFetchpriorityEnum) *ScriptElement {
+	e.attributes["fetchpriority"] = a
+
+	return e
+}
+
 func (e *ScriptElement) Autocapitalize(a ScriptAutocapitalizeEnum) *ScriptElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func ScriptAutocapitalizeCustom(s string) ScriptAutocapitalizeEnum {
-	return ScriptAutocapitalizeEnum(s)
-}
-
 func (e *ScriptElement) Autocorrect(a ScriptAutocorrectEnum) *ScriptElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func ScriptAutocorrectCustom(s string) ScriptAutocorrectEnum {
-	return ScriptAutocorrectEnum(s)
 }
 
 func (e *ScriptElement) Autofocus(b bool) *ScriptElement {
@@ -197,10 +271,6 @@ func (e *ScriptElement) Contenteditable(a ScriptContenteditableEnum) *ScriptElem
 	return e
 }
 
-func ScriptContenteditableCustom(s string) ScriptContenteditableEnum {
-	return ScriptContenteditableEnum(s)
-}
-
 func (e *ScriptElement) DataUnsafe(name string, s string) *ScriptElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +289,10 @@ func (e *ScriptElement) Dir(a ScriptDirEnum) *ScriptElement {
 	return e
 }
 
-func ScriptDirCustom(s string) ScriptDirEnum {
-	return ScriptDirEnum(s)
-}
-
 func (e *ScriptElement) Draggable(a ScriptDraggableEnum) *ScriptElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func ScriptDraggableCustom(s string) ScriptDraggableEnum {
-	return ScriptDraggableEnum(s)
 }
 
 func (e *ScriptElement) Enterkeyhint(a ScriptEnterkeyhintEnum) *ScriptElement {
@@ -239,18 +301,10 @@ func (e *ScriptElement) Enterkeyhint(a ScriptEnterkeyhintEnum) *ScriptElement {
 	return e
 }
 
-func ScriptEnterkeyhintCustom(s string) ScriptEnterkeyhintEnum {
-	return ScriptEnterkeyhintEnum(s)
-}
-
 func (e *ScriptElement) Hidden(a ScriptHiddenEnum) *ScriptElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func ScriptHiddenCustom(s string) ScriptHiddenEnum {
-	return ScriptHiddenEnum(s)
 }
 
 func (e *ScriptElement) Id(s string) *ScriptElement {
@@ -269,10 +323,6 @@ func (e *ScriptElement) Inputmode(a ScriptInputmodeEnum) *ScriptElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func ScriptInputmodeCustom(s string) ScriptInputmodeEnum {
-	return ScriptInputmodeEnum(s)
 }
 
 func (e *ScriptElement) Itemid(s string) *ScriptElement {
@@ -335,10 +385,6 @@ func (e *ScriptElement) Spellcheck(a ScriptSpellcheckEnum) *ScriptElement {
 	return e
 }
 
-func ScriptSpellcheckCustom(s string) ScriptSpellcheckEnum {
-	return ScriptSpellcheckEnum(s)
-}
-
 func (e *ScriptElement) Style(s string) *ScriptElement {
 	e.attributes["style"] = s
 
@@ -363,18 +409,10 @@ func (e *ScriptElement) Translate(a ScriptTranslateEnum) *ScriptElement {
 	return e
 }
 
-func ScriptTranslateCustom(s string) ScriptTranslateEnum {
-	return ScriptTranslateEnum(s)
-}
-
 func (e *ScriptElement) Writingsuggestions(a ScriptWritingsuggestionsEnum) *ScriptElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func ScriptWritingsuggestionsCustom(s string) ScriptWritingsuggestionsEnum {
-	return ScriptWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

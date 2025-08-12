@@ -60,19 +60,19 @@ func (e *TbodyElement) AddIndent(i int) {
 type TbodyAutocapitalizeEnum string
 
 const (
-	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
-	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
 	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
 	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
 	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 	TbodyAutocapitalizeEnumWords      TbodyAutocapitalizeEnum = "words"
+	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
+	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
 )
 
 type TbodyAutocorrectEnum string
 
 const (
-	TbodyAutocorrectEnumOff   TbodyAutocorrectEnum = "off"
 	TbodyAutocorrectEnumOn    TbodyAutocorrectEnum = "on"
+	TbodyAutocorrectEnumOff   TbodyAutocorrectEnum = "off"
 	TbodyAutocorrectEnumEmpty TbodyAutocorrectEnum = ""
 )
 
@@ -123,6 +123,7 @@ const (
 type TbodyInputmodeEnum string
 
 const (
+	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
 	TbodyInputmodeEnumUrl     TbodyInputmodeEnum = "url"
 	TbodyInputmodeEnumDecimal TbodyInputmodeEnum = "decimal"
 	TbodyInputmodeEnumEmail   TbodyInputmodeEnum = "email"
@@ -130,14 +131,13 @@ const (
 	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
 	TbodyInputmodeEnumSearch  TbodyInputmodeEnum = "search"
 	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
-	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
 )
 
 type TbodySpellcheckEnum string
 
 const (
-	TbodySpellcheckEnumFalse TbodySpellcheckEnum = "false"
 	TbodySpellcheckEnumTrue  TbodySpellcheckEnum = "true"
+	TbodySpellcheckEnumFalse TbodySpellcheckEnum = "false"
 	TbodySpellcheckEnumEmpty TbodySpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type TbodyWritingsuggestionsEnum string
 
 const (
-	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
 	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
+	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
 	TbodyWritingsuggestionsEnumEmpty TbodyWritingsuggestionsEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *TbodyElement) Autocapitalize(a TbodyAutocapitalizeEnum) *TbodyElement {
 	return e
 }
 
-func TbodyAutocapitalizeCustom(s string) TbodyAutocapitalizeEnum {
-	return TbodyAutocapitalizeEnum(s)
-}
-
 func (e *TbodyElement) Autocorrect(a TbodyAutocorrectEnum) *TbodyElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func TbodyAutocorrectCustom(s string) TbodyAutocorrectEnum {
-	return TbodyAutocorrectEnum(s)
 }
 
 func (e *TbodyElement) Autofocus(b bool) *TbodyElement {
@@ -197,10 +189,6 @@ func (e *TbodyElement) Contenteditable(a TbodyContenteditableEnum) *TbodyElement
 	return e
 }
 
-func TbodyContenteditableCustom(s string) TbodyContenteditableEnum {
-	return TbodyContenteditableEnum(s)
-}
-
 func (e *TbodyElement) DataUnsafe(name string, s string) *TbodyElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *TbodyElement) Dir(a TbodyDirEnum) *TbodyElement {
 	return e
 }
 
-func TbodyDirCustom(s string) TbodyDirEnum {
-	return TbodyDirEnum(s)
-}
-
 func (e *TbodyElement) Draggable(a TbodyDraggableEnum) *TbodyElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func TbodyDraggableCustom(s string) TbodyDraggableEnum {
-	return TbodyDraggableEnum(s)
 }
 
 func (e *TbodyElement) Enterkeyhint(a TbodyEnterkeyhintEnum) *TbodyElement {
@@ -239,18 +219,10 @@ func (e *TbodyElement) Enterkeyhint(a TbodyEnterkeyhintEnum) *TbodyElement {
 	return e
 }
 
-func TbodyEnterkeyhintCustom(s string) TbodyEnterkeyhintEnum {
-	return TbodyEnterkeyhintEnum(s)
-}
-
 func (e *TbodyElement) Hidden(a TbodyHiddenEnum) *TbodyElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func TbodyHiddenCustom(s string) TbodyHiddenEnum {
-	return TbodyHiddenEnum(s)
 }
 
 func (e *TbodyElement) Id(s string) *TbodyElement {
@@ -269,10 +241,6 @@ func (e *TbodyElement) Inputmode(a TbodyInputmodeEnum) *TbodyElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func TbodyInputmodeCustom(s string) TbodyInputmodeEnum {
-	return TbodyInputmodeEnum(s)
 }
 
 func (e *TbodyElement) Itemid(s string) *TbodyElement {
@@ -335,10 +303,6 @@ func (e *TbodyElement) Spellcheck(a TbodySpellcheckEnum) *TbodyElement {
 	return e
 }
 
-func TbodySpellcheckCustom(s string) TbodySpellcheckEnum {
-	return TbodySpellcheckEnum(s)
-}
-
 func (e *TbodyElement) Style(s string) *TbodyElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *TbodyElement) Translate(a TbodyTranslateEnum) *TbodyElement {
 	return e
 }
 
-func TbodyTranslateCustom(s string) TbodyTranslateEnum {
-	return TbodyTranslateEnum(s)
-}
-
 func (e *TbodyElement) Writingsuggestions(a TbodyWritingsuggestionsEnum) *TbodyElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func TbodyWritingsuggestionsCustom(s string) TbodyWritingsuggestionsEnum {
-	return TbodyWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

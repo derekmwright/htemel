@@ -60,12 +60,12 @@ func (e *KbdElement) AddIndent(i int) {
 type KbdAutocapitalizeEnum string
 
 const (
+	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
 	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
 	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
 	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
-	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
 )
 
 type KbdAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type KbdDirEnum string
 
 const (
+	KbdDirEnumAuto KbdDirEnum = "auto"
 	KbdDirEnumLtr  KbdDirEnum = "ltr"
 	KbdDirEnumRtl  KbdDirEnum = "rtl"
-	KbdDirEnumAuto KbdDirEnum = "auto"
 )
 
 type KbdDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type KbdEnterkeyhintEnum string
 
 const (
-	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
 	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
 	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
 	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
 	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
 	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
+	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 )
 
 type KbdHiddenEnum string
@@ -123,7 +123,6 @@ const (
 type KbdInputmodeEnum string
 
 const (
-	KbdInputmodeEnumNone    KbdInputmodeEnum = "none"
 	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
 	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
 	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
@@ -131,13 +130,14 @@ const (
 	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
 	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
 	KbdInputmodeEnumEmail   KbdInputmodeEnum = "email"
+	KbdInputmodeEnumNone    KbdInputmodeEnum = "none"
 )
 
 type KbdSpellcheckEnum string
 
 const (
-	KbdSpellcheckEnumFalse KbdSpellcheckEnum = "false"
 	KbdSpellcheckEnumTrue  KbdSpellcheckEnum = "true"
+	KbdSpellcheckEnumFalse KbdSpellcheckEnum = "false"
 	KbdSpellcheckEnumEmpty KbdSpellcheckEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *KbdElement) Autocapitalize(a KbdAutocapitalizeEnum) *KbdElement {
 	return e
 }
 
-func KbdAutocapitalizeCustom(s string) KbdAutocapitalizeEnum {
-	return KbdAutocapitalizeEnum(s)
-}
-
 func (e *KbdElement) Autocorrect(a KbdAutocorrectEnum) *KbdElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func KbdAutocorrectCustom(s string) KbdAutocorrectEnum {
-	return KbdAutocorrectEnum(s)
 }
 
 func (e *KbdElement) Autofocus(b bool) *KbdElement {
@@ -197,10 +189,6 @@ func (e *KbdElement) Contenteditable(a KbdContenteditableEnum) *KbdElement {
 	return e
 }
 
-func KbdContenteditableCustom(s string) KbdContenteditableEnum {
-	return KbdContenteditableEnum(s)
-}
-
 func (e *KbdElement) DataUnsafe(name string, s string) *KbdElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *KbdElement) Dir(a KbdDirEnum) *KbdElement {
 	return e
 }
 
-func KbdDirCustom(s string) KbdDirEnum {
-	return KbdDirEnum(s)
-}
-
 func (e *KbdElement) Draggable(a KbdDraggableEnum) *KbdElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func KbdDraggableCustom(s string) KbdDraggableEnum {
-	return KbdDraggableEnum(s)
 }
 
 func (e *KbdElement) Enterkeyhint(a KbdEnterkeyhintEnum) *KbdElement {
@@ -239,18 +219,10 @@ func (e *KbdElement) Enterkeyhint(a KbdEnterkeyhintEnum) *KbdElement {
 	return e
 }
 
-func KbdEnterkeyhintCustom(s string) KbdEnterkeyhintEnum {
-	return KbdEnterkeyhintEnum(s)
-}
-
 func (e *KbdElement) Hidden(a KbdHiddenEnum) *KbdElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func KbdHiddenCustom(s string) KbdHiddenEnum {
-	return KbdHiddenEnum(s)
 }
 
 func (e *KbdElement) Id(s string) *KbdElement {
@@ -269,10 +241,6 @@ func (e *KbdElement) Inputmode(a KbdInputmodeEnum) *KbdElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func KbdInputmodeCustom(s string) KbdInputmodeEnum {
-	return KbdInputmodeEnum(s)
 }
 
 func (e *KbdElement) Itemid(s string) *KbdElement {
@@ -335,10 +303,6 @@ func (e *KbdElement) Spellcheck(a KbdSpellcheckEnum) *KbdElement {
 	return e
 }
 
-func KbdSpellcheckCustom(s string) KbdSpellcheckEnum {
-	return KbdSpellcheckEnum(s)
-}
-
 func (e *KbdElement) Style(s string) *KbdElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *KbdElement) Translate(a KbdTranslateEnum) *KbdElement {
 	return e
 }
 
-func KbdTranslateCustom(s string) KbdTranslateEnum {
-	return KbdTranslateEnum(s)
-}
-
 func (e *KbdElement) Writingsuggestions(a KbdWritingsuggestionsEnum) *KbdElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func KbdWritingsuggestionsCustom(s string) KbdWritingsuggestionsEnum {
-	return KbdWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

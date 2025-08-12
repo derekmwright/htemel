@@ -60,12 +60,12 @@ func (e *SelectedcontentElement) AddIndent(i int) {
 type SelectedcontentAutocapitalizeEnum string
 
 const (
+	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
 	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
 	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
 	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
 	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
-	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
 )
 
 type SelectedcontentAutocorrectEnum string
@@ -123,29 +123,29 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
+	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
+	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
+	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
 	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
 	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
 	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
 	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
-	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
-	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
-	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 )
 
 type SelectedcontentSpellcheckEnum string
 
 const (
-	SelectedcontentSpellcheckEnumTrue  SelectedcontentSpellcheckEnum = "true"
 	SelectedcontentSpellcheckEnumFalse SelectedcontentSpellcheckEnum = "false"
+	SelectedcontentSpellcheckEnumTrue  SelectedcontentSpellcheckEnum = "true"
 	SelectedcontentSpellcheckEnumEmpty SelectedcontentSpellcheckEnum = ""
 )
 
 type SelectedcontentTranslateEnum string
 
 const (
-	SelectedcontentTranslateEnumYes   SelectedcontentTranslateEnum = "yes"
 	SelectedcontentTranslateEnumNo    SelectedcontentTranslateEnum = "no"
+	SelectedcontentTranslateEnumYes   SelectedcontentTranslateEnum = "yes"
 	SelectedcontentTranslateEnumEmpty SelectedcontentTranslateEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *SelectedcontentElement) Autocapitalize(a SelectedcontentAutocapitalizeE
 	return e
 }
 
-func SelectedcontentAutocapitalizeCustom(s string) SelectedcontentAutocapitalizeEnum {
-	return SelectedcontentAutocapitalizeEnum(s)
-}
-
 func (e *SelectedcontentElement) Autocorrect(a SelectedcontentAutocorrectEnum) *SelectedcontentElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func SelectedcontentAutocorrectCustom(s string) SelectedcontentAutocorrectEnum {
-	return SelectedcontentAutocorrectEnum(s)
 }
 
 func (e *SelectedcontentElement) Autofocus(b bool) *SelectedcontentElement {
@@ -197,10 +189,6 @@ func (e *SelectedcontentElement) Contenteditable(a SelectedcontentContenteditabl
 	return e
 }
 
-func SelectedcontentContenteditableCustom(s string) SelectedcontentContenteditableEnum {
-	return SelectedcontentContenteditableEnum(s)
-}
-
 func (e *SelectedcontentElement) DataUnsafe(name string, s string) *SelectedcontentElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *SelectedcontentElement) Dir(a SelectedcontentDirEnum) *SelectedcontentE
 	return e
 }
 
-func SelectedcontentDirCustom(s string) SelectedcontentDirEnum {
-	return SelectedcontentDirEnum(s)
-}
-
 func (e *SelectedcontentElement) Draggable(a SelectedcontentDraggableEnum) *SelectedcontentElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func SelectedcontentDraggableCustom(s string) SelectedcontentDraggableEnum {
-	return SelectedcontentDraggableEnum(s)
 }
 
 func (e *SelectedcontentElement) Enterkeyhint(a SelectedcontentEnterkeyhintEnum) *SelectedcontentElement {
@@ -239,18 +219,10 @@ func (e *SelectedcontentElement) Enterkeyhint(a SelectedcontentEnterkeyhintEnum)
 	return e
 }
 
-func SelectedcontentEnterkeyhintCustom(s string) SelectedcontentEnterkeyhintEnum {
-	return SelectedcontentEnterkeyhintEnum(s)
-}
-
 func (e *SelectedcontentElement) Hidden(a SelectedcontentHiddenEnum) *SelectedcontentElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func SelectedcontentHiddenCustom(s string) SelectedcontentHiddenEnum {
-	return SelectedcontentHiddenEnum(s)
 }
 
 func (e *SelectedcontentElement) Id(s string) *SelectedcontentElement {
@@ -269,10 +241,6 @@ func (e *SelectedcontentElement) Inputmode(a SelectedcontentInputmodeEnum) *Sele
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func SelectedcontentInputmodeCustom(s string) SelectedcontentInputmodeEnum {
-	return SelectedcontentInputmodeEnum(s)
 }
 
 func (e *SelectedcontentElement) Itemid(s string) *SelectedcontentElement {
@@ -335,10 +303,6 @@ func (e *SelectedcontentElement) Spellcheck(a SelectedcontentSpellcheckEnum) *Se
 	return e
 }
 
-func SelectedcontentSpellcheckCustom(s string) SelectedcontentSpellcheckEnum {
-	return SelectedcontentSpellcheckEnum(s)
-}
-
 func (e *SelectedcontentElement) Style(s string) *SelectedcontentElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *SelectedcontentElement) Translate(a SelectedcontentTranslateEnum) *Sele
 	return e
 }
 
-func SelectedcontentTranslateCustom(s string) SelectedcontentTranslateEnum {
-	return SelectedcontentTranslateEnum(s)
-}
-
 func (e *SelectedcontentElement) Writingsuggestions(a SelectedcontentWritingsuggestionsEnum) *SelectedcontentElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func SelectedcontentWritingsuggestionsCustom(s string) SelectedcontentWritingsuggestionsEnum {
-	return SelectedcontentWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

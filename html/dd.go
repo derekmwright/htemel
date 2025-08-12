@@ -60,12 +60,12 @@ func (e *DdElement) AddIndent(i int) {
 type DdAutocapitalizeEnum string
 
 const (
-	DdAutocapitalizeEnumCharacters DdAutocapitalizeEnum = "characters"
-	DdAutocapitalizeEnumNone       DdAutocapitalizeEnum = "none"
 	DdAutocapitalizeEnumOff        DdAutocapitalizeEnum = "off"
 	DdAutocapitalizeEnumOn         DdAutocapitalizeEnum = "on"
 	DdAutocapitalizeEnumSentences  DdAutocapitalizeEnum = "sentences"
 	DdAutocapitalizeEnumWords      DdAutocapitalizeEnum = "words"
+	DdAutocapitalizeEnumCharacters DdAutocapitalizeEnum = "characters"
+	DdAutocapitalizeEnumNone       DdAutocapitalizeEnum = "none"
 )
 
 type DdAutocorrectEnum string
@@ -123,6 +123,7 @@ const (
 type DdInputmodeEnum string
 
 const (
+	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
 	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
 	DdInputmodeEnumText    DdInputmodeEnum = "text"
 	DdInputmodeEnumUrl     DdInputmodeEnum = "url"
@@ -130,14 +131,13 @@ const (
 	DdInputmodeEnumEmail   DdInputmodeEnum = "email"
 	DdInputmodeEnumNone    DdInputmodeEnum = "none"
 	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
-	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
 )
 
 type DdSpellcheckEnum string
 
 const (
-	DdSpellcheckEnumFalse DdSpellcheckEnum = "false"
 	DdSpellcheckEnumTrue  DdSpellcheckEnum = "true"
+	DdSpellcheckEnumFalse DdSpellcheckEnum = "false"
 	DdSpellcheckEnumEmpty DdSpellcheckEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *DdElement) Autocapitalize(a DdAutocapitalizeEnum) *DdElement {
 	return e
 }
 
-func DdAutocapitalizeCustom(s string) DdAutocapitalizeEnum {
-	return DdAutocapitalizeEnum(s)
-}
-
 func (e *DdElement) Autocorrect(a DdAutocorrectEnum) *DdElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func DdAutocorrectCustom(s string) DdAutocorrectEnum {
-	return DdAutocorrectEnum(s)
 }
 
 func (e *DdElement) Autofocus(b bool) *DdElement {
@@ -197,10 +189,6 @@ func (e *DdElement) Contenteditable(a DdContenteditableEnum) *DdElement {
 	return e
 }
 
-func DdContenteditableCustom(s string) DdContenteditableEnum {
-	return DdContenteditableEnum(s)
-}
-
 func (e *DdElement) DataUnsafe(name string, s string) *DdElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *DdElement) Dir(a DdDirEnum) *DdElement {
 	return e
 }
 
-func DdDirCustom(s string) DdDirEnum {
-	return DdDirEnum(s)
-}
-
 func (e *DdElement) Draggable(a DdDraggableEnum) *DdElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func DdDraggableCustom(s string) DdDraggableEnum {
-	return DdDraggableEnum(s)
 }
 
 func (e *DdElement) Enterkeyhint(a DdEnterkeyhintEnum) *DdElement {
@@ -239,18 +219,10 @@ func (e *DdElement) Enterkeyhint(a DdEnterkeyhintEnum) *DdElement {
 	return e
 }
 
-func DdEnterkeyhintCustom(s string) DdEnterkeyhintEnum {
-	return DdEnterkeyhintEnum(s)
-}
-
 func (e *DdElement) Hidden(a DdHiddenEnum) *DdElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func DdHiddenCustom(s string) DdHiddenEnum {
-	return DdHiddenEnum(s)
 }
 
 func (e *DdElement) Id(s string) *DdElement {
@@ -269,10 +241,6 @@ func (e *DdElement) Inputmode(a DdInputmodeEnum) *DdElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func DdInputmodeCustom(s string) DdInputmodeEnum {
-	return DdInputmodeEnum(s)
 }
 
 func (e *DdElement) Itemid(s string) *DdElement {
@@ -335,10 +303,6 @@ func (e *DdElement) Spellcheck(a DdSpellcheckEnum) *DdElement {
 	return e
 }
 
-func DdSpellcheckCustom(s string) DdSpellcheckEnum {
-	return DdSpellcheckEnum(s)
-}
-
 func (e *DdElement) Style(s string) *DdElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *DdElement) Translate(a DdTranslateEnum) *DdElement {
 	return e
 }
 
-func DdTranslateCustom(s string) DdTranslateEnum {
-	return DdTranslateEnum(s)
-}
-
 func (e *DdElement) Writingsuggestions(a DdWritingsuggestionsEnum) *DdElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func DdWritingsuggestionsCustom(s string) DdWritingsuggestionsEnum {
-	return DdWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

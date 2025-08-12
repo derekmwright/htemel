@@ -60,19 +60,19 @@ func (e *MenuElement) AddIndent(i int) {
 type MenuAutocapitalizeEnum string
 
 const (
-	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
-	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
-	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
 	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
 	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
+	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
+	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
+	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
 )
 
 type MenuAutocorrectEnum string
 
 const (
-	MenuAutocorrectEnumOff   MenuAutocorrectEnum = "off"
 	MenuAutocorrectEnumOn    MenuAutocorrectEnum = "on"
+	MenuAutocorrectEnumOff   MenuAutocorrectEnum = "off"
 	MenuAutocorrectEnumEmpty MenuAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type MenuDirEnum string
 
 const (
+	MenuDirEnumAuto MenuDirEnum = "auto"
 	MenuDirEnumLtr  MenuDirEnum = "ltr"
 	MenuDirEnumRtl  MenuDirEnum = "rtl"
-	MenuDirEnumAuto MenuDirEnum = "auto"
 )
 
 type MenuDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
+	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
 	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
 	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
 	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
 	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
-	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
 )
 
 type MenuHiddenEnum string
@@ -123,21 +123,21 @@ const (
 type MenuInputmodeEnum string
 
 const (
-	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
-	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
-	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
 	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
 	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
 	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
+	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
+	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
+	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 )
 
 type MenuSpellcheckEnum string
 
 const (
-	MenuSpellcheckEnumFalse MenuSpellcheckEnum = "false"
 	MenuSpellcheckEnumTrue  MenuSpellcheckEnum = "true"
+	MenuSpellcheckEnumFalse MenuSpellcheckEnum = "false"
 	MenuSpellcheckEnumEmpty MenuSpellcheckEnum = ""
 )
 
@@ -152,8 +152,8 @@ const (
 type MenuWritingsuggestionsEnum string
 
 const (
-	MenuWritingsuggestionsEnumTrue  MenuWritingsuggestionsEnum = "true"
 	MenuWritingsuggestionsEnumFalse MenuWritingsuggestionsEnum = "false"
+	MenuWritingsuggestionsEnumTrue  MenuWritingsuggestionsEnum = "true"
 	MenuWritingsuggestionsEnumEmpty MenuWritingsuggestionsEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *MenuElement) Autocapitalize(a MenuAutocapitalizeEnum) *MenuElement {
 	return e
 }
 
-func MenuAutocapitalizeCustom(s string) MenuAutocapitalizeEnum {
-	return MenuAutocapitalizeEnum(s)
-}
-
 func (e *MenuElement) Autocorrect(a MenuAutocorrectEnum) *MenuElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func MenuAutocorrectCustom(s string) MenuAutocorrectEnum {
-	return MenuAutocorrectEnum(s)
 }
 
 func (e *MenuElement) Autofocus(b bool) *MenuElement {
@@ -197,10 +189,6 @@ func (e *MenuElement) Contenteditable(a MenuContenteditableEnum) *MenuElement {
 	return e
 }
 
-func MenuContenteditableCustom(s string) MenuContenteditableEnum {
-	return MenuContenteditableEnum(s)
-}
-
 func (e *MenuElement) DataUnsafe(name string, s string) *MenuElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *MenuElement) Dir(a MenuDirEnum) *MenuElement {
 	return e
 }
 
-func MenuDirCustom(s string) MenuDirEnum {
-	return MenuDirEnum(s)
-}
-
 func (e *MenuElement) Draggable(a MenuDraggableEnum) *MenuElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func MenuDraggableCustom(s string) MenuDraggableEnum {
-	return MenuDraggableEnum(s)
 }
 
 func (e *MenuElement) Enterkeyhint(a MenuEnterkeyhintEnum) *MenuElement {
@@ -239,18 +219,10 @@ func (e *MenuElement) Enterkeyhint(a MenuEnterkeyhintEnum) *MenuElement {
 	return e
 }
 
-func MenuEnterkeyhintCustom(s string) MenuEnterkeyhintEnum {
-	return MenuEnterkeyhintEnum(s)
-}
-
 func (e *MenuElement) Hidden(a MenuHiddenEnum) *MenuElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func MenuHiddenCustom(s string) MenuHiddenEnum {
-	return MenuHiddenEnum(s)
 }
 
 func (e *MenuElement) Id(s string) *MenuElement {
@@ -269,10 +241,6 @@ func (e *MenuElement) Inputmode(a MenuInputmodeEnum) *MenuElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func MenuInputmodeCustom(s string) MenuInputmodeEnum {
-	return MenuInputmodeEnum(s)
 }
 
 func (e *MenuElement) Itemid(s string) *MenuElement {
@@ -335,10 +303,6 @@ func (e *MenuElement) Spellcheck(a MenuSpellcheckEnum) *MenuElement {
 	return e
 }
 
-func MenuSpellcheckCustom(s string) MenuSpellcheckEnum {
-	return MenuSpellcheckEnum(s)
-}
-
 func (e *MenuElement) Style(s string) *MenuElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *MenuElement) Translate(a MenuTranslateEnum) *MenuElement {
 	return e
 }
 
-func MenuTranslateCustom(s string) MenuTranslateEnum {
-	return MenuTranslateEnum(s)
-}
-
 func (e *MenuElement) Writingsuggestions(a MenuWritingsuggestionsEnum) *MenuElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func MenuWritingsuggestionsCustom(s string) MenuWritingsuggestionsEnum {
-	return MenuWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

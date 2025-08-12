@@ -60,12 +60,12 @@ func (e *EmElement) AddIndent(i int) {
 type EmAutocapitalizeEnum string
 
 const (
-	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
-	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
 	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
 	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
+	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
+	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 )
 
 type EmAutocorrectEnum string
@@ -96,34 +96,33 @@ const (
 type EmDraggableEnum string
 
 const (
-	EmDraggableEnumFalse EmDraggableEnum = "false"
 	EmDraggableEnumTrue  EmDraggableEnum = "true"
+	EmDraggableEnumFalse EmDraggableEnum = "false"
 )
 
 type EmEnterkeyhintEnum string
 
 const (
-	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
 	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
 	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
 	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
 	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
 	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
+	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
 )
 
 type EmHiddenEnum string
 
 const (
-	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
 	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
+	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
 	EmHiddenEnumEmpty      EmHiddenEnum = ""
 )
 
 type EmInputmodeEnum string
 
 const (
-	EmInputmodeEnumText    EmInputmodeEnum = "text"
 	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
 	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
 	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
@@ -131,6 +130,7 @@ const (
 	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
 	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
 	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
+	EmInputmodeEnumText    EmInputmodeEnum = "text"
 )
 
 type EmSpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *EmElement) Autocapitalize(a EmAutocapitalizeEnum) *EmElement {
 	return e
 }
 
-func EmAutocapitalizeCustom(s string) EmAutocapitalizeEnum {
-	return EmAutocapitalizeEnum(s)
-}
-
 func (e *EmElement) Autocorrect(a EmAutocorrectEnum) *EmElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func EmAutocorrectCustom(s string) EmAutocorrectEnum {
-	return EmAutocorrectEnum(s)
 }
 
 func (e *EmElement) Autofocus(b bool) *EmElement {
@@ -197,10 +189,6 @@ func (e *EmElement) Contenteditable(a EmContenteditableEnum) *EmElement {
 	return e
 }
 
-func EmContenteditableCustom(s string) EmContenteditableEnum {
-	return EmContenteditableEnum(s)
-}
-
 func (e *EmElement) DataUnsafe(name string, s string) *EmElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *EmElement) Dir(a EmDirEnum) *EmElement {
 	return e
 }
 
-func EmDirCustom(s string) EmDirEnum {
-	return EmDirEnum(s)
-}
-
 func (e *EmElement) Draggable(a EmDraggableEnum) *EmElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func EmDraggableCustom(s string) EmDraggableEnum {
-	return EmDraggableEnum(s)
 }
 
 func (e *EmElement) Enterkeyhint(a EmEnterkeyhintEnum) *EmElement {
@@ -239,18 +219,10 @@ func (e *EmElement) Enterkeyhint(a EmEnterkeyhintEnum) *EmElement {
 	return e
 }
 
-func EmEnterkeyhintCustom(s string) EmEnterkeyhintEnum {
-	return EmEnterkeyhintEnum(s)
-}
-
 func (e *EmElement) Hidden(a EmHiddenEnum) *EmElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func EmHiddenCustom(s string) EmHiddenEnum {
-	return EmHiddenEnum(s)
 }
 
 func (e *EmElement) Id(s string) *EmElement {
@@ -269,10 +241,6 @@ func (e *EmElement) Inputmode(a EmInputmodeEnum) *EmElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func EmInputmodeCustom(s string) EmInputmodeEnum {
-	return EmInputmodeEnum(s)
 }
 
 func (e *EmElement) Itemid(s string) *EmElement {
@@ -335,10 +303,6 @@ func (e *EmElement) Spellcheck(a EmSpellcheckEnum) *EmElement {
 	return e
 }
 
-func EmSpellcheckCustom(s string) EmSpellcheckEnum {
-	return EmSpellcheckEnum(s)
-}
-
 func (e *EmElement) Style(s string) *EmElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *EmElement) Translate(a EmTranslateEnum) *EmElement {
 	return e
 }
 
-func EmTranslateCustom(s string) EmTranslateEnum {
-	return EmTranslateEnum(s)
-}
-
 func (e *EmElement) Writingsuggestions(a EmWritingsuggestionsEnum) *EmElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func EmWritingsuggestionsCustom(s string) EmWritingsuggestionsEnum {
-	return EmWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

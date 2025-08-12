@@ -60,19 +60,19 @@ func (e *IElement) AddIndent(i int) {
 type IAutocapitalizeEnum string
 
 const (
+	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
+	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
 	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
 	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
 	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
-	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
-	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 )
 
 type IAutocorrectEnum string
 
 const (
-	IAutocorrectEnumOff   IAutocorrectEnum = "off"
 	IAutocorrectEnumOn    IAutocorrectEnum = "on"
+	IAutocorrectEnumOff   IAutocorrectEnum = "off"
 	IAutocorrectEnumEmpty IAutocorrectEnum = ""
 )
 
@@ -88,9 +88,9 @@ const (
 type IDirEnum string
 
 const (
+	IDirEnumRtl  IDirEnum = "rtl"
 	IDirEnumAuto IDirEnum = "auto"
 	IDirEnumLtr  IDirEnum = "ltr"
-	IDirEnumRtl  IDirEnum = "rtl"
 )
 
 type IDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
-	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
-	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
-	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
 	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
 	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
+	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
+	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
+	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 )
 
 type IHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type IInputmodeEnum string
 
 const (
+	IInputmodeEnumTel     IInputmodeEnum = "tel"
+	IInputmodeEnumText    IInputmodeEnum = "text"
 	IInputmodeEnumUrl     IInputmodeEnum = "url"
 	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
 	IInputmodeEnumEmail   IInputmodeEnum = "email"
 	IInputmodeEnumNone    IInputmodeEnum = "none"
 	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
 	IInputmodeEnumSearch  IInputmodeEnum = "search"
-	IInputmodeEnumTel     IInputmodeEnum = "tel"
-	IInputmodeEnumText    IInputmodeEnum = "text"
 )
 
 type ISpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *IElement) Autocapitalize(a IAutocapitalizeEnum) *IElement {
 	return e
 }
 
-func IAutocapitalizeCustom(s string) IAutocapitalizeEnum {
-	return IAutocapitalizeEnum(s)
-}
-
 func (e *IElement) Autocorrect(a IAutocorrectEnum) *IElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func IAutocorrectCustom(s string) IAutocorrectEnum {
-	return IAutocorrectEnum(s)
 }
 
 func (e *IElement) Autofocus(b bool) *IElement {
@@ -197,10 +189,6 @@ func (e *IElement) Contenteditable(a IContenteditableEnum) *IElement {
 	return e
 }
 
-func IContenteditableCustom(s string) IContenteditableEnum {
-	return IContenteditableEnum(s)
-}
-
 func (e *IElement) DataUnsafe(name string, s string) *IElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *IElement) Dir(a IDirEnum) *IElement {
 	return e
 }
 
-func IDirCustom(s string) IDirEnum {
-	return IDirEnum(s)
-}
-
 func (e *IElement) Draggable(a IDraggableEnum) *IElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func IDraggableCustom(s string) IDraggableEnum {
-	return IDraggableEnum(s)
 }
 
 func (e *IElement) Enterkeyhint(a IEnterkeyhintEnum) *IElement {
@@ -239,18 +219,10 @@ func (e *IElement) Enterkeyhint(a IEnterkeyhintEnum) *IElement {
 	return e
 }
 
-func IEnterkeyhintCustom(s string) IEnterkeyhintEnum {
-	return IEnterkeyhintEnum(s)
-}
-
 func (e *IElement) Hidden(a IHiddenEnum) *IElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func IHiddenCustom(s string) IHiddenEnum {
-	return IHiddenEnum(s)
 }
 
 func (e *IElement) Id(s string) *IElement {
@@ -269,10 +241,6 @@ func (e *IElement) Inputmode(a IInputmodeEnum) *IElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func IInputmodeCustom(s string) IInputmodeEnum {
-	return IInputmodeEnum(s)
 }
 
 func (e *IElement) Itemid(s string) *IElement {
@@ -335,10 +303,6 @@ func (e *IElement) Spellcheck(a ISpellcheckEnum) *IElement {
 	return e
 }
 
-func ISpellcheckCustom(s string) ISpellcheckEnum {
-	return ISpellcheckEnum(s)
-}
-
 func (e *IElement) Style(s string) *IElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *IElement) Translate(a ITranslateEnum) *IElement {
 	return e
 }
 
-func ITranslateCustom(s string) ITranslateEnum {
-	return ITranslateEnum(s)
-}
-
 func (e *IElement) Writingsuggestions(a IWritingsuggestionsEnum) *IElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func IWritingsuggestionsCustom(s string) IWritingsuggestionsEnum {
-	return IWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -60,12 +60,12 @@ func (e *SectionElement) AddIndent(i int) {
 type SectionAutocapitalizeEnum string
 
 const (
-	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
-	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
 	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
 	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
 	SectionAutocapitalizeEnumWords      SectionAutocapitalizeEnum = "words"
 	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
+	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
+	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
 )
 
 type SectionAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type SectionContenteditableEnum string
 
 const (
+	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
 	SectionContenteditableEnumFalse         SectionContenteditableEnum = "false"
 	SectionContenteditableEnumPlaintextOnly SectionContenteditableEnum = "plaintext-only"
-	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
 	SectionContenteditableEnumEmpty         SectionContenteditableEnum = ""
 )
 
@@ -96,8 +96,8 @@ const (
 type SectionDraggableEnum string
 
 const (
-	SectionDraggableEnumTrue  SectionDraggableEnum = "true"
 	SectionDraggableEnumFalse SectionDraggableEnum = "false"
+	SectionDraggableEnumTrue  SectionDraggableEnum = "true"
 )
 
 type SectionEnterkeyhintEnum string
@@ -115,22 +115,22 @@ const (
 type SectionHiddenEnum string
 
 const (
-	SectionHiddenEnumHidden     SectionHiddenEnum = "hidden"
 	SectionHiddenEnumUntilFound SectionHiddenEnum = "until-found"
+	SectionHiddenEnumHidden     SectionHiddenEnum = "hidden"
 	SectionHiddenEnumEmpty      SectionHiddenEnum = ""
 )
 
 type SectionInputmodeEnum string
 
 const (
-	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
-	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
 	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
 	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
 	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
 	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
 	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
 	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
+	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
+	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
 )
 
 type SectionSpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *SectionElement) Autocapitalize(a SectionAutocapitalizeEnum) *SectionEle
 	return e
 }
 
-func SectionAutocapitalizeCustom(s string) SectionAutocapitalizeEnum {
-	return SectionAutocapitalizeEnum(s)
-}
-
 func (e *SectionElement) Autocorrect(a SectionAutocorrectEnum) *SectionElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func SectionAutocorrectCustom(s string) SectionAutocorrectEnum {
-	return SectionAutocorrectEnum(s)
 }
 
 func (e *SectionElement) Autofocus(b bool) *SectionElement {
@@ -197,10 +189,6 @@ func (e *SectionElement) Contenteditable(a SectionContenteditableEnum) *SectionE
 	return e
 }
 
-func SectionContenteditableCustom(s string) SectionContenteditableEnum {
-	return SectionContenteditableEnum(s)
-}
-
 func (e *SectionElement) DataUnsafe(name string, s string) *SectionElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *SectionElement) Dir(a SectionDirEnum) *SectionElement {
 	return e
 }
 
-func SectionDirCustom(s string) SectionDirEnum {
-	return SectionDirEnum(s)
-}
-
 func (e *SectionElement) Draggable(a SectionDraggableEnum) *SectionElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func SectionDraggableCustom(s string) SectionDraggableEnum {
-	return SectionDraggableEnum(s)
 }
 
 func (e *SectionElement) Enterkeyhint(a SectionEnterkeyhintEnum) *SectionElement {
@@ -239,18 +219,10 @@ func (e *SectionElement) Enterkeyhint(a SectionEnterkeyhintEnum) *SectionElement
 	return e
 }
 
-func SectionEnterkeyhintCustom(s string) SectionEnterkeyhintEnum {
-	return SectionEnterkeyhintEnum(s)
-}
-
 func (e *SectionElement) Hidden(a SectionHiddenEnum) *SectionElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func SectionHiddenCustom(s string) SectionHiddenEnum {
-	return SectionHiddenEnum(s)
 }
 
 func (e *SectionElement) Id(s string) *SectionElement {
@@ -269,10 +241,6 @@ func (e *SectionElement) Inputmode(a SectionInputmodeEnum) *SectionElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func SectionInputmodeCustom(s string) SectionInputmodeEnum {
-	return SectionInputmodeEnum(s)
 }
 
 func (e *SectionElement) Itemid(s string) *SectionElement {
@@ -335,10 +303,6 @@ func (e *SectionElement) Spellcheck(a SectionSpellcheckEnum) *SectionElement {
 	return e
 }
 
-func SectionSpellcheckCustom(s string) SectionSpellcheckEnum {
-	return SectionSpellcheckEnum(s)
-}
-
 func (e *SectionElement) Style(s string) *SectionElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *SectionElement) Translate(a SectionTranslateEnum) *SectionElement {
 	return e
 }
 
-func SectionTranslateCustom(s string) SectionTranslateEnum {
-	return SectionTranslateEnum(s)
-}
-
 func (e *SectionElement) Writingsuggestions(a SectionWritingsuggestionsEnum) *SectionElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func SectionWritingsuggestionsCustom(s string) SectionWritingsuggestionsEnum {
-	return SectionWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

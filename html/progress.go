@@ -60,37 +60,37 @@ func (e *ProgressElement) AddIndent(i int) {
 type ProgressAutocapitalizeEnum string
 
 const (
+	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
+	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
 	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
 	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
 	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
-	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
-	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
 )
 
 type ProgressAutocorrectEnum string
 
 const (
-	ProgressAutocorrectEnumOff   ProgressAutocorrectEnum = "off"
 	ProgressAutocorrectEnumOn    ProgressAutocorrectEnum = "on"
+	ProgressAutocorrectEnumOff   ProgressAutocorrectEnum = "off"
 	ProgressAutocorrectEnumEmpty ProgressAutocorrectEnum = ""
 )
 
 type ProgressContenteditableEnum string
 
 const (
+	ProgressContenteditableEnumFalse         ProgressContenteditableEnum = "false"
 	ProgressContenteditableEnumPlaintextOnly ProgressContenteditableEnum = "plaintext-only"
 	ProgressContenteditableEnumTrue          ProgressContenteditableEnum = "true"
-	ProgressContenteditableEnumFalse         ProgressContenteditableEnum = "false"
 	ProgressContenteditableEnumEmpty         ProgressContenteditableEnum = ""
 )
 
 type ProgressDirEnum string
 
 const (
+	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
 	ProgressDirEnumAuto ProgressDirEnum = "auto"
 	ProgressDirEnumLtr  ProgressDirEnum = "ltr"
-	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
 )
 
 type ProgressDraggableEnum string
@@ -103,27 +103,26 @@ const (
 type ProgressEnterkeyhintEnum string
 
 const (
-	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
-	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
 	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
 	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
 	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
 	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
 	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
+	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
+	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
 )
 
 type ProgressHiddenEnum string
 
 const (
-	ProgressHiddenEnumUntilFound ProgressHiddenEnum = "until-found"
 	ProgressHiddenEnumHidden     ProgressHiddenEnum = "hidden"
+	ProgressHiddenEnumUntilFound ProgressHiddenEnum = "until-found"
 	ProgressHiddenEnumEmpty      ProgressHiddenEnum = ""
 )
 
 type ProgressInputmodeEnum string
 
 const (
-	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
 	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
 	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
 	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
@@ -131,6 +130,7 @@ const (
 	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
 	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
 	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
+	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
 )
 
 type ProgressSpellcheckEnum string
@@ -177,18 +177,10 @@ func (e *ProgressElement) Autocapitalize(a ProgressAutocapitalizeEnum) *Progress
 	return e
 }
 
-func ProgressAutocapitalizeCustom(s string) ProgressAutocapitalizeEnum {
-	return ProgressAutocapitalizeEnum(s)
-}
-
 func (e *ProgressElement) Autocorrect(a ProgressAutocorrectEnum) *ProgressElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func ProgressAutocorrectCustom(s string) ProgressAutocorrectEnum {
-	return ProgressAutocorrectEnum(s)
 }
 
 func (e *ProgressElement) Autofocus(b bool) *ProgressElement {
@@ -209,10 +201,6 @@ func (e *ProgressElement) Contenteditable(a ProgressContenteditableEnum) *Progre
 	return e
 }
 
-func ProgressContenteditableCustom(s string) ProgressContenteditableEnum {
-	return ProgressContenteditableEnum(s)
-}
-
 func (e *ProgressElement) DataUnsafe(name string, s string) *ProgressElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -231,18 +219,10 @@ func (e *ProgressElement) Dir(a ProgressDirEnum) *ProgressElement {
 	return e
 }
 
-func ProgressDirCustom(s string) ProgressDirEnum {
-	return ProgressDirEnum(s)
-}
-
 func (e *ProgressElement) Draggable(a ProgressDraggableEnum) *ProgressElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func ProgressDraggableCustom(s string) ProgressDraggableEnum {
-	return ProgressDraggableEnum(s)
 }
 
 func (e *ProgressElement) Enterkeyhint(a ProgressEnterkeyhintEnum) *ProgressElement {
@@ -251,18 +231,10 @@ func (e *ProgressElement) Enterkeyhint(a ProgressEnterkeyhintEnum) *ProgressElem
 	return e
 }
 
-func ProgressEnterkeyhintCustom(s string) ProgressEnterkeyhintEnum {
-	return ProgressEnterkeyhintEnum(s)
-}
-
 func (e *ProgressElement) Hidden(a ProgressHiddenEnum) *ProgressElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func ProgressHiddenCustom(s string) ProgressHiddenEnum {
-	return ProgressHiddenEnum(s)
 }
 
 func (e *ProgressElement) Id(s string) *ProgressElement {
@@ -281,10 +253,6 @@ func (e *ProgressElement) Inputmode(a ProgressInputmodeEnum) *ProgressElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func ProgressInputmodeCustom(s string) ProgressInputmodeEnum {
-	return ProgressInputmodeEnum(s)
 }
 
 func (e *ProgressElement) Itemid(s string) *ProgressElement {
@@ -347,10 +315,6 @@ func (e *ProgressElement) Spellcheck(a ProgressSpellcheckEnum) *ProgressElement 
 	return e
 }
 
-func ProgressSpellcheckCustom(s string) ProgressSpellcheckEnum {
-	return ProgressSpellcheckEnum(s)
-}
-
 func (e *ProgressElement) Style(s string) *ProgressElement {
 	e.attributes["style"] = s
 
@@ -375,18 +339,10 @@ func (e *ProgressElement) Translate(a ProgressTranslateEnum) *ProgressElement {
 	return e
 }
 
-func ProgressTranslateCustom(s string) ProgressTranslateEnum {
-	return ProgressTranslateEnum(s)
-}
-
 func (e *ProgressElement) Writingsuggestions(a ProgressWritingsuggestionsEnum) *ProgressElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func ProgressWritingsuggestionsCustom(s string) ProgressWritingsuggestionsEnum {
-	return ProgressWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

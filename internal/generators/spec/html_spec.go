@@ -1353,6 +1353,135 @@ func meterAttr() []Attribute {
 	}
 }
 
+func fieldsetAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeBool{
+			Name:        "disabled",
+			Description: "Whether the descendant form controls, except any inside legend, are disabled",
+		},
+		&AttributeTypeString{
+			Name:        "form",
+			Description: "Associates the element with a form element",
+		},
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of the element to use in the form.elements API.",
+		},
+	}
+}
+
+func detailsAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of group of mutually-exclusive details elements",
+		},
+		&AttributeTypeBool{
+			Name:        "open",
+			Description: "Whether the details are visible",
+		},
+	}
+}
+
+func dialogAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeEnum{
+			Name:        "closedby",
+			Description: "Which user actions will close the dialog",
+			Allowed: map[string]struct{}{
+				"any":          {},
+				"closerequest": {},
+				"none":         {},
+			},
+		},
+		&AttributeTypeBool{
+			Name:        "open",
+			Description: "Whether the dialog box is showing",
+		},
+	}
+}
+
+func scriptAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "type",
+			Description: "Type of script",
+		},
+		src,
+		&AttributeTypeBool{
+			Name:        "nomodule",
+			Description: "Prevents execution in user agents that support module scripts",
+		},
+		&AttributeTypeBool{
+			Name:        "async",
+			Description: "Execute script when available, without blocking while fetching",
+		},
+		&AttributeTypeBool{
+			Name:        "defer",
+			Description: "Defer script execution",
+		},
+		&AttributeTypeEnum{
+			Name:        "blocking",
+			Description: "Whether the element is potentially render-blocking",
+			Allowed: map[string]struct{}{
+				"render": {},
+			},
+		},
+		crossorigin,
+		referrerPolicy,
+		&AttributeTypeString{
+			Name:        "integrity",
+			Description: "Integrity metadata used in Subresource Integrity checks [SRI]",
+		},
+		fetchPriority,
+	}
+}
+
+func templateAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeEnum{
+			Name:        "shadowrootmode",
+			Description: "Enables streaming declarative shadow roots",
+			Allowed: map[string]struct{}{
+				"open":   {},
+				"closed": {},
+			},
+		},
+		&AttributeTypeBool{
+			Name:        "shadowrootdelegatefocus",
+			Description: "Sets delegates focus on a declarative shadow root",
+		},
+		&AttributeTypeBool{
+			Name:        "shadowrootclonable",
+			Description: "Sets clonable on a declarative shadow root",
+		},
+		&AttributeTypeBool{
+			Name:        "shadowrootserializable",
+			Description: "Sets serializable on a declarative shadow root",
+		},
+		&AttributeTypeBool{
+			Name:        "shadowrootcustomelementregistry",
+			Description: "Enables declarative shadow roots to indicate they will use a custom element registry\n",
+		},
+	}
+}
+
+func slotAttr() []Attribute {
+	return []Attribute{
+		&AttributeTypeString{
+			Name:        "name",
+			Description: "Name of shadow tree slot",
+		},
+	}
+}
+
+func canvasAttr() []Attribute {
+	return []Attribute{
+		width,
+		height,
+	}
+}
+
 var attrFuncs = map[string]func() []Attribute{
 	"html":       htmlAttr,
 	"head":       headAttr,
@@ -1396,6 +1525,13 @@ var attrFuncs = map[string]func() []Attribute{
 	"output":     outputAttr,
 	"progress":   progressAttr,
 	"meter":      meterAttr,
+	"fieldset":   fieldsetAttr,
+	"details":    detailsAttr,
+	"dialog":     dialogAttr,
+	"script":     scriptAttr,
+	"template":   templateAttr,
+	"slot":       slotAttr,
+	"canvas":     canvasAttr,
 }
 
 func GenerateHTMLSpec(closer io.ReadCloser) (*Spec, error) {

@@ -60,12 +60,12 @@ func (e *BdoElement) AddIndent(i int) {
 type BdoAutocapitalizeEnum string
 
 const (
+	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
 	BdoAutocapitalizeEnumNone       BdoAutocapitalizeEnum = "none"
 	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
 	BdoAutocapitalizeEnumOn         BdoAutocapitalizeEnum = "on"
 	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
 	BdoAutocapitalizeEnumWords      BdoAutocapitalizeEnum = "words"
-	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
 )
 
 type BdoAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type BdoDirEnum string
 
 const (
-	BdoDirEnumRtl  BdoDirEnum = "rtl"
 	BdoDirEnumAuto BdoDirEnum = "auto"
 	BdoDirEnumLtr  BdoDirEnum = "ltr"
+	BdoDirEnumRtl  BdoDirEnum = "rtl"
 )
 
 type BdoDraggableEnum string
@@ -123,14 +123,14 @@ const (
 type BdoInputmodeEnum string
 
 const (
-	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
-	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
 	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
 	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
 	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
 	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
 	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
 	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
+	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
+	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
 )
 
 type BdoSpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *BdoElement) Autocapitalize(a BdoAutocapitalizeEnum) *BdoElement {
 	return e
 }
 
-func BdoAutocapitalizeCustom(s string) BdoAutocapitalizeEnum {
-	return BdoAutocapitalizeEnum(s)
-}
-
 func (e *BdoElement) Autocorrect(a BdoAutocorrectEnum) *BdoElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func BdoAutocorrectCustom(s string) BdoAutocorrectEnum {
-	return BdoAutocorrectEnum(s)
 }
 
 func (e *BdoElement) Autofocus(b bool) *BdoElement {
@@ -197,10 +189,6 @@ func (e *BdoElement) Contenteditable(a BdoContenteditableEnum) *BdoElement {
 	return e
 }
 
-func BdoContenteditableCustom(s string) BdoContenteditableEnum {
-	return BdoContenteditableEnum(s)
-}
-
 func (e *BdoElement) DataUnsafe(name string, s string) *BdoElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *BdoElement) Dir(a BdoDirEnum) *BdoElement {
 	return e
 }
 
-func BdoDirCustom(s string) BdoDirEnum {
-	return BdoDirEnum(s)
-}
-
 func (e *BdoElement) Draggable(a BdoDraggableEnum) *BdoElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func BdoDraggableCustom(s string) BdoDraggableEnum {
-	return BdoDraggableEnum(s)
 }
 
 func (e *BdoElement) Enterkeyhint(a BdoEnterkeyhintEnum) *BdoElement {
@@ -239,18 +219,10 @@ func (e *BdoElement) Enterkeyhint(a BdoEnterkeyhintEnum) *BdoElement {
 	return e
 }
 
-func BdoEnterkeyhintCustom(s string) BdoEnterkeyhintEnum {
-	return BdoEnterkeyhintEnum(s)
-}
-
 func (e *BdoElement) Hidden(a BdoHiddenEnum) *BdoElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func BdoHiddenCustom(s string) BdoHiddenEnum {
-	return BdoHiddenEnum(s)
 }
 
 func (e *BdoElement) Id(s string) *BdoElement {
@@ -269,10 +241,6 @@ func (e *BdoElement) Inputmode(a BdoInputmodeEnum) *BdoElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func BdoInputmodeCustom(s string) BdoInputmodeEnum {
-	return BdoInputmodeEnum(s)
 }
 
 func (e *BdoElement) Itemid(s string) *BdoElement {
@@ -335,10 +303,6 @@ func (e *BdoElement) Spellcheck(a BdoSpellcheckEnum) *BdoElement {
 	return e
 }
 
-func BdoSpellcheckCustom(s string) BdoSpellcheckEnum {
-	return BdoSpellcheckEnum(s)
-}
-
 func (e *BdoElement) Style(s string) *BdoElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *BdoElement) Translate(a BdoTranslateEnum) *BdoElement {
 	return e
 }
 
-func BdoTranslateCustom(s string) BdoTranslateEnum {
-	return BdoTranslateEnum(s)
-}
-
 func (e *BdoElement) Writingsuggestions(a BdoWritingsuggestionsEnum) *BdoElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func BdoWritingsuggestionsCustom(s string) BdoWritingsuggestionsEnum {
-	return BdoWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

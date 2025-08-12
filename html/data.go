@@ -60,12 +60,12 @@ func (e *DataElement) AddIndent(i int) {
 type DataAutocapitalizeEnum string
 
 const (
-	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
-	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
 	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
 	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
+	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
+	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
 )
 
 type DataAutocorrectEnum string
@@ -103,13 +103,13 @@ const (
 type DataEnterkeyhintEnum string
 
 const (
-	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
-	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
 	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
 	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
 	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
+	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
+	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 )
 
 type DataHiddenEnum string
@@ -123,6 +123,7 @@ const (
 type DataInputmodeEnum string
 
 const (
+	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
 	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
 	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
 	DataInputmodeEnumNone    DataInputmodeEnum = "none"
@@ -130,7 +131,6 @@ const (
 	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
 	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
 	DataInputmodeEnumText    DataInputmodeEnum = "text"
-	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
 )
 
 type DataSpellcheckEnum string
@@ -144,8 +144,8 @@ const (
 type DataTranslateEnum string
 
 const (
-	DataTranslateEnumYes   DataTranslateEnum = "yes"
 	DataTranslateEnumNo    DataTranslateEnum = "no"
+	DataTranslateEnumYes   DataTranslateEnum = "yes"
 	DataTranslateEnumEmpty DataTranslateEnum = ""
 )
 
@@ -171,18 +171,10 @@ func (e *DataElement) Autocapitalize(a DataAutocapitalizeEnum) *DataElement {
 	return e
 }
 
-func DataAutocapitalizeCustom(s string) DataAutocapitalizeEnum {
-	return DataAutocapitalizeEnum(s)
-}
-
 func (e *DataElement) Autocorrect(a DataAutocorrectEnum) *DataElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func DataAutocorrectCustom(s string) DataAutocorrectEnum {
-	return DataAutocorrectEnum(s)
 }
 
 func (e *DataElement) Autofocus(b bool) *DataElement {
@@ -203,10 +195,6 @@ func (e *DataElement) Contenteditable(a DataContenteditableEnum) *DataElement {
 	return e
 }
 
-func DataContenteditableCustom(s string) DataContenteditableEnum {
-	return DataContenteditableEnum(s)
-}
-
 func (e *DataElement) DataUnsafe(name string, s string) *DataElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -225,18 +213,10 @@ func (e *DataElement) Dir(a DataDirEnum) *DataElement {
 	return e
 }
 
-func DataDirCustom(s string) DataDirEnum {
-	return DataDirEnum(s)
-}
-
 func (e *DataElement) Draggable(a DataDraggableEnum) *DataElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func DataDraggableCustom(s string) DataDraggableEnum {
-	return DataDraggableEnum(s)
 }
 
 func (e *DataElement) Enterkeyhint(a DataEnterkeyhintEnum) *DataElement {
@@ -245,18 +225,10 @@ func (e *DataElement) Enterkeyhint(a DataEnterkeyhintEnum) *DataElement {
 	return e
 }
 
-func DataEnterkeyhintCustom(s string) DataEnterkeyhintEnum {
-	return DataEnterkeyhintEnum(s)
-}
-
 func (e *DataElement) Hidden(a DataHiddenEnum) *DataElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func DataHiddenCustom(s string) DataHiddenEnum {
-	return DataHiddenEnum(s)
 }
 
 func (e *DataElement) Id(s string) *DataElement {
@@ -275,10 +247,6 @@ func (e *DataElement) Inputmode(a DataInputmodeEnum) *DataElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func DataInputmodeCustom(s string) DataInputmodeEnum {
-	return DataInputmodeEnum(s)
 }
 
 func (e *DataElement) Itemid(s string) *DataElement {
@@ -341,10 +309,6 @@ func (e *DataElement) Spellcheck(a DataSpellcheckEnum) *DataElement {
 	return e
 }
 
-func DataSpellcheckCustom(s string) DataSpellcheckEnum {
-	return DataSpellcheckEnum(s)
-}
-
 func (e *DataElement) Style(s string) *DataElement {
 	e.attributes["style"] = s
 
@@ -369,18 +333,10 @@ func (e *DataElement) Translate(a DataTranslateEnum) *DataElement {
 	return e
 }
 
-func DataTranslateCustom(s string) DataTranslateEnum {
-	return DataTranslateEnum(s)
-}
-
 func (e *DataElement) Writingsuggestions(a DataWritingsuggestionsEnum) *DataElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func DataWritingsuggestionsCustom(s string) DataWritingsuggestionsEnum {
-	return DataWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -71,8 +71,8 @@ const (
 type DatalistAutocorrectEnum string
 
 const (
-	DatalistAutocorrectEnumOn    DatalistAutocorrectEnum = "on"
 	DatalistAutocorrectEnumOff   DatalistAutocorrectEnum = "off"
+	DatalistAutocorrectEnumOn    DatalistAutocorrectEnum = "on"
 	DatalistAutocorrectEnumEmpty DatalistAutocorrectEnum = ""
 )
 
@@ -103,20 +103,20 @@ const (
 type DatalistEnterkeyhintEnum string
 
 const (
+	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
+	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
+	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 	DatalistEnterkeyhintEnumEnter    DatalistEnterkeyhintEnum = "enter"
 	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
 	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
-	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
-	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
-	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 )
 
 type DatalistHiddenEnum string
 
 const (
-	DatalistHiddenEnumHidden     DatalistHiddenEnum = "hidden"
 	DatalistHiddenEnumUntilFound DatalistHiddenEnum = "until-found"
+	DatalistHiddenEnumHidden     DatalistHiddenEnum = "hidden"
 	DatalistHiddenEnumEmpty      DatalistHiddenEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *DatalistElement) Autocapitalize(a DatalistAutocapitalizeEnum) *Datalist
 	return e
 }
 
-func DatalistAutocapitalizeCustom(s string) DatalistAutocapitalizeEnum {
-	return DatalistAutocapitalizeEnum(s)
-}
-
 func (e *DatalistElement) Autocorrect(a DatalistAutocorrectEnum) *DatalistElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func DatalistAutocorrectCustom(s string) DatalistAutocorrectEnum {
-	return DatalistAutocorrectEnum(s)
 }
 
 func (e *DatalistElement) Autofocus(b bool) *DatalistElement {
@@ -197,10 +189,6 @@ func (e *DatalistElement) Contenteditable(a DatalistContenteditableEnum) *Datali
 	return e
 }
 
-func DatalistContenteditableCustom(s string) DatalistContenteditableEnum {
-	return DatalistContenteditableEnum(s)
-}
-
 func (e *DatalistElement) DataUnsafe(name string, s string) *DatalistElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *DatalistElement) Dir(a DatalistDirEnum) *DatalistElement {
 	return e
 }
 
-func DatalistDirCustom(s string) DatalistDirEnum {
-	return DatalistDirEnum(s)
-}
-
 func (e *DatalistElement) Draggable(a DatalistDraggableEnum) *DatalistElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func DatalistDraggableCustom(s string) DatalistDraggableEnum {
-	return DatalistDraggableEnum(s)
 }
 
 func (e *DatalistElement) Enterkeyhint(a DatalistEnterkeyhintEnum) *DatalistElement {
@@ -239,18 +219,10 @@ func (e *DatalistElement) Enterkeyhint(a DatalistEnterkeyhintEnum) *DatalistElem
 	return e
 }
 
-func DatalistEnterkeyhintCustom(s string) DatalistEnterkeyhintEnum {
-	return DatalistEnterkeyhintEnum(s)
-}
-
 func (e *DatalistElement) Hidden(a DatalistHiddenEnum) *DatalistElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func DatalistHiddenCustom(s string) DatalistHiddenEnum {
-	return DatalistHiddenEnum(s)
 }
 
 func (e *DatalistElement) Id(s string) *DatalistElement {
@@ -269,10 +241,6 @@ func (e *DatalistElement) Inputmode(a DatalistInputmodeEnum) *DatalistElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func DatalistInputmodeCustom(s string) DatalistInputmodeEnum {
-	return DatalistInputmodeEnum(s)
 }
 
 func (e *DatalistElement) Itemid(s string) *DatalistElement {
@@ -335,10 +303,6 @@ func (e *DatalistElement) Spellcheck(a DatalistSpellcheckEnum) *DatalistElement 
 	return e
 }
 
-func DatalistSpellcheckCustom(s string) DatalistSpellcheckEnum {
-	return DatalistSpellcheckEnum(s)
-}
-
 func (e *DatalistElement) Style(s string) *DatalistElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *DatalistElement) Translate(a DatalistTranslateEnum) *DatalistElement {
 	return e
 }
 
-func DatalistTranslateCustom(s string) DatalistTranslateEnum {
-	return DatalistTranslateEnum(s)
-}
-
 func (e *DatalistElement) Writingsuggestions(a DatalistWritingsuggestionsEnum) *DatalistElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func DatalistWritingsuggestionsCustom(s string) DatalistWritingsuggestionsEnum {
-	return DatalistWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

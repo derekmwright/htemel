@@ -60,12 +60,12 @@ func (e *H5Element) AddIndent(i int) {
 type H5AutocapitalizeEnum string
 
 const (
-	H5AutocapitalizeEnumWords      H5AutocapitalizeEnum = "words"
 	H5AutocapitalizeEnumCharacters H5AutocapitalizeEnum = "characters"
 	H5AutocapitalizeEnumNone       H5AutocapitalizeEnum = "none"
 	H5AutocapitalizeEnumOff        H5AutocapitalizeEnum = "off"
 	H5AutocapitalizeEnumOn         H5AutocapitalizeEnum = "on"
 	H5AutocapitalizeEnumSentences  H5AutocapitalizeEnum = "sentences"
+	H5AutocapitalizeEnumWords      H5AutocapitalizeEnum = "words"
 )
 
 type H5AutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type H5ContenteditableEnum string
 
 const (
-	H5ContenteditableEnumTrue          H5ContenteditableEnum = "true"
 	H5ContenteditableEnumFalse         H5ContenteditableEnum = "false"
 	H5ContenteditableEnumPlaintextOnly H5ContenteditableEnum = "plaintext-only"
+	H5ContenteditableEnumTrue          H5ContenteditableEnum = "true"
 	H5ContenteditableEnumEmpty         H5ContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type H5EnterkeyhintEnum string
 
 const (
-	H5EnterkeyhintEnumDone     H5EnterkeyhintEnum = "done"
 	H5EnterkeyhintEnumEnter    H5EnterkeyhintEnum = "enter"
 	H5EnterkeyhintEnumGo       H5EnterkeyhintEnum = "go"
 	H5EnterkeyhintEnumNext     H5EnterkeyhintEnum = "next"
 	H5EnterkeyhintEnumPrevious H5EnterkeyhintEnum = "previous"
 	H5EnterkeyhintEnumSearch   H5EnterkeyhintEnum = "search"
 	H5EnterkeyhintEnumSend     H5EnterkeyhintEnum = "send"
+	H5EnterkeyhintEnumDone     H5EnterkeyhintEnum = "done"
 )
 
 type H5HiddenEnum string
@@ -123,14 +123,14 @@ const (
 type H5InputmodeEnum string
 
 const (
+	H5InputmodeEnumText    H5InputmodeEnum = "text"
+	H5InputmodeEnumUrl     H5InputmodeEnum = "url"
+	H5InputmodeEnumDecimal H5InputmodeEnum = "decimal"
 	H5InputmodeEnumEmail   H5InputmodeEnum = "email"
 	H5InputmodeEnumNone    H5InputmodeEnum = "none"
 	H5InputmodeEnumNumeric H5InputmodeEnum = "numeric"
 	H5InputmodeEnumSearch  H5InputmodeEnum = "search"
 	H5InputmodeEnumTel     H5InputmodeEnum = "tel"
-	H5InputmodeEnumText    H5InputmodeEnum = "text"
-	H5InputmodeEnumUrl     H5InputmodeEnum = "url"
-	H5InputmodeEnumDecimal H5InputmodeEnum = "decimal"
 )
 
 type H5SpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *H5Element) Autocapitalize(a H5AutocapitalizeEnum) *H5Element {
 	return e
 }
 
-func H5AutocapitalizeCustom(s string) H5AutocapitalizeEnum {
-	return H5AutocapitalizeEnum(s)
-}
-
 func (e *H5Element) Autocorrect(a H5AutocorrectEnum) *H5Element {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func H5AutocorrectCustom(s string) H5AutocorrectEnum {
-	return H5AutocorrectEnum(s)
 }
 
 func (e *H5Element) Autofocus(b bool) *H5Element {
@@ -197,10 +189,6 @@ func (e *H5Element) Contenteditable(a H5ContenteditableEnum) *H5Element {
 	return e
 }
 
-func H5ContenteditableCustom(s string) H5ContenteditableEnum {
-	return H5ContenteditableEnum(s)
-}
-
 func (e *H5Element) DataUnsafe(name string, s string) *H5Element {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *H5Element) Dir(a H5DirEnum) *H5Element {
 	return e
 }
 
-func H5DirCustom(s string) H5DirEnum {
-	return H5DirEnum(s)
-}
-
 func (e *H5Element) Draggable(a H5DraggableEnum) *H5Element {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func H5DraggableCustom(s string) H5DraggableEnum {
-	return H5DraggableEnum(s)
 }
 
 func (e *H5Element) Enterkeyhint(a H5EnterkeyhintEnum) *H5Element {
@@ -239,18 +219,10 @@ func (e *H5Element) Enterkeyhint(a H5EnterkeyhintEnum) *H5Element {
 	return e
 }
 
-func H5EnterkeyhintCustom(s string) H5EnterkeyhintEnum {
-	return H5EnterkeyhintEnum(s)
-}
-
 func (e *H5Element) Hidden(a H5HiddenEnum) *H5Element {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func H5HiddenCustom(s string) H5HiddenEnum {
-	return H5HiddenEnum(s)
 }
 
 func (e *H5Element) Id(s string) *H5Element {
@@ -269,10 +241,6 @@ func (e *H5Element) Inputmode(a H5InputmodeEnum) *H5Element {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func H5InputmodeCustom(s string) H5InputmodeEnum {
-	return H5InputmodeEnum(s)
 }
 
 func (e *H5Element) Itemid(s string) *H5Element {
@@ -335,10 +303,6 @@ func (e *H5Element) Spellcheck(a H5SpellcheckEnum) *H5Element {
 	return e
 }
 
-func H5SpellcheckCustom(s string) H5SpellcheckEnum {
-	return H5SpellcheckEnum(s)
-}
-
 func (e *H5Element) Style(s string) *H5Element {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *H5Element) Translate(a H5TranslateEnum) *H5Element {
 	return e
 }
 
-func H5TranslateCustom(s string) H5TranslateEnum {
-	return H5TranslateEnum(s)
-}
-
 func (e *H5Element) Writingsuggestions(a H5WritingsuggestionsEnum) *H5Element {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func H5WritingsuggestionsCustom(s string) H5WritingsuggestionsEnum {
-	return H5WritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

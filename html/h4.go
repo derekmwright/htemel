@@ -60,12 +60,12 @@ func (e *H4Element) AddIndent(i int) {
 type H4AutocapitalizeEnum string
 
 const (
+	H4AutocapitalizeEnumOff        H4AutocapitalizeEnum = "off"
+	H4AutocapitalizeEnumOn         H4AutocapitalizeEnum = "on"
 	H4AutocapitalizeEnumSentences  H4AutocapitalizeEnum = "sentences"
 	H4AutocapitalizeEnumWords      H4AutocapitalizeEnum = "words"
 	H4AutocapitalizeEnumCharacters H4AutocapitalizeEnum = "characters"
 	H4AutocapitalizeEnumNone       H4AutocapitalizeEnum = "none"
-	H4AutocapitalizeEnumOff        H4AutocapitalizeEnum = "off"
-	H4AutocapitalizeEnumOn         H4AutocapitalizeEnum = "on"
 )
 
 type H4AutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type H4DirEnum string
 
 const (
-	H4DirEnumRtl  H4DirEnum = "rtl"
 	H4DirEnumAuto H4DirEnum = "auto"
 	H4DirEnumLtr  H4DirEnum = "ltr"
+	H4DirEnumRtl  H4DirEnum = "rtl"
 )
 
 type H4DraggableEnum string
@@ -103,13 +103,13 @@ const (
 type H4EnterkeyhintEnum string
 
 const (
+	H4EnterkeyhintEnumPrevious H4EnterkeyhintEnum = "previous"
 	H4EnterkeyhintEnumSearch   H4EnterkeyhintEnum = "search"
 	H4EnterkeyhintEnumSend     H4EnterkeyhintEnum = "send"
 	H4EnterkeyhintEnumDone     H4EnterkeyhintEnum = "done"
 	H4EnterkeyhintEnumEnter    H4EnterkeyhintEnum = "enter"
 	H4EnterkeyhintEnumGo       H4EnterkeyhintEnum = "go"
 	H4EnterkeyhintEnumNext     H4EnterkeyhintEnum = "next"
-	H4EnterkeyhintEnumPrevious H4EnterkeyhintEnum = "previous"
 )
 
 type H4HiddenEnum string
@@ -123,14 +123,14 @@ const (
 type H4InputmodeEnum string
 
 const (
-	H4InputmodeEnumText    H4InputmodeEnum = "text"
-	H4InputmodeEnumUrl     H4InputmodeEnum = "url"
-	H4InputmodeEnumDecimal H4InputmodeEnum = "decimal"
 	H4InputmodeEnumEmail   H4InputmodeEnum = "email"
 	H4InputmodeEnumNone    H4InputmodeEnum = "none"
 	H4InputmodeEnumNumeric H4InputmodeEnum = "numeric"
 	H4InputmodeEnumSearch  H4InputmodeEnum = "search"
 	H4InputmodeEnumTel     H4InputmodeEnum = "tel"
+	H4InputmodeEnumText    H4InputmodeEnum = "text"
+	H4InputmodeEnumUrl     H4InputmodeEnum = "url"
+	H4InputmodeEnumDecimal H4InputmodeEnum = "decimal"
 )
 
 type H4SpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *H4Element) Autocapitalize(a H4AutocapitalizeEnum) *H4Element {
 	return e
 }
 
-func H4AutocapitalizeCustom(s string) H4AutocapitalizeEnum {
-	return H4AutocapitalizeEnum(s)
-}
-
 func (e *H4Element) Autocorrect(a H4AutocorrectEnum) *H4Element {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func H4AutocorrectCustom(s string) H4AutocorrectEnum {
-	return H4AutocorrectEnum(s)
 }
 
 func (e *H4Element) Autofocus(b bool) *H4Element {
@@ -197,10 +189,6 @@ func (e *H4Element) Contenteditable(a H4ContenteditableEnum) *H4Element {
 	return e
 }
 
-func H4ContenteditableCustom(s string) H4ContenteditableEnum {
-	return H4ContenteditableEnum(s)
-}
-
 func (e *H4Element) DataUnsafe(name string, s string) *H4Element {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *H4Element) Dir(a H4DirEnum) *H4Element {
 	return e
 }
 
-func H4DirCustom(s string) H4DirEnum {
-	return H4DirEnum(s)
-}
-
 func (e *H4Element) Draggable(a H4DraggableEnum) *H4Element {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func H4DraggableCustom(s string) H4DraggableEnum {
-	return H4DraggableEnum(s)
 }
 
 func (e *H4Element) Enterkeyhint(a H4EnterkeyhintEnum) *H4Element {
@@ -239,18 +219,10 @@ func (e *H4Element) Enterkeyhint(a H4EnterkeyhintEnum) *H4Element {
 	return e
 }
 
-func H4EnterkeyhintCustom(s string) H4EnterkeyhintEnum {
-	return H4EnterkeyhintEnum(s)
-}
-
 func (e *H4Element) Hidden(a H4HiddenEnum) *H4Element {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func H4HiddenCustom(s string) H4HiddenEnum {
-	return H4HiddenEnum(s)
 }
 
 func (e *H4Element) Id(s string) *H4Element {
@@ -269,10 +241,6 @@ func (e *H4Element) Inputmode(a H4InputmodeEnum) *H4Element {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func H4InputmodeCustom(s string) H4InputmodeEnum {
-	return H4InputmodeEnum(s)
 }
 
 func (e *H4Element) Itemid(s string) *H4Element {
@@ -335,10 +303,6 @@ func (e *H4Element) Spellcheck(a H4SpellcheckEnum) *H4Element {
 	return e
 }
 
-func H4SpellcheckCustom(s string) H4SpellcheckEnum {
-	return H4SpellcheckEnum(s)
-}
-
 func (e *H4Element) Style(s string) *H4Element {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *H4Element) Translate(a H4TranslateEnum) *H4Element {
 	return e
 }
 
-func H4TranslateCustom(s string) H4TranslateEnum {
-	return H4TranslateEnum(s)
-}
-
 func (e *H4Element) Writingsuggestions(a H4WritingsuggestionsEnum) *H4Element {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func H4WritingsuggestionsCustom(s string) H4WritingsuggestionsEnum {
-	return H4WritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

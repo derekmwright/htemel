@@ -79,18 +79,18 @@ const (
 type SpanContenteditableEnum string
 
 const (
-	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
 	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
 	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
+	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
 	SpanContenteditableEnumEmpty         SpanContenteditableEnum = ""
 )
 
 type SpanDirEnum string
 
 const (
+	SpanDirEnumAuto SpanDirEnum = "auto"
 	SpanDirEnumLtr  SpanDirEnum = "ltr"
 	SpanDirEnumRtl  SpanDirEnum = "rtl"
-	SpanDirEnumAuto SpanDirEnum = "auto"
 )
 
 type SpanDraggableEnum string
@@ -123,14 +123,14 @@ const (
 type SpanInputmodeEnum string
 
 const (
+	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
+	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
+	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
 	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
 	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
 	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
 	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
 	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
-	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
-	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
-	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
 )
 
 type SpanSpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *SpanElement) Autocapitalize(a SpanAutocapitalizeEnum) *SpanElement {
 	return e
 }
 
-func SpanAutocapitalizeCustom(s string) SpanAutocapitalizeEnum {
-	return SpanAutocapitalizeEnum(s)
-}
-
 func (e *SpanElement) Autocorrect(a SpanAutocorrectEnum) *SpanElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func SpanAutocorrectCustom(s string) SpanAutocorrectEnum {
-	return SpanAutocorrectEnum(s)
 }
 
 func (e *SpanElement) Autofocus(b bool) *SpanElement {
@@ -197,10 +189,6 @@ func (e *SpanElement) Contenteditable(a SpanContenteditableEnum) *SpanElement {
 	return e
 }
 
-func SpanContenteditableCustom(s string) SpanContenteditableEnum {
-	return SpanContenteditableEnum(s)
-}
-
 func (e *SpanElement) DataUnsafe(name string, s string) *SpanElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *SpanElement) Dir(a SpanDirEnum) *SpanElement {
 	return e
 }
 
-func SpanDirCustom(s string) SpanDirEnum {
-	return SpanDirEnum(s)
-}
-
 func (e *SpanElement) Draggable(a SpanDraggableEnum) *SpanElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func SpanDraggableCustom(s string) SpanDraggableEnum {
-	return SpanDraggableEnum(s)
 }
 
 func (e *SpanElement) Enterkeyhint(a SpanEnterkeyhintEnum) *SpanElement {
@@ -239,18 +219,10 @@ func (e *SpanElement) Enterkeyhint(a SpanEnterkeyhintEnum) *SpanElement {
 	return e
 }
 
-func SpanEnterkeyhintCustom(s string) SpanEnterkeyhintEnum {
-	return SpanEnterkeyhintEnum(s)
-}
-
 func (e *SpanElement) Hidden(a SpanHiddenEnum) *SpanElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func SpanHiddenCustom(s string) SpanHiddenEnum {
-	return SpanHiddenEnum(s)
 }
 
 func (e *SpanElement) Id(s string) *SpanElement {
@@ -269,10 +241,6 @@ func (e *SpanElement) Inputmode(a SpanInputmodeEnum) *SpanElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func SpanInputmodeCustom(s string) SpanInputmodeEnum {
-	return SpanInputmodeEnum(s)
 }
 
 func (e *SpanElement) Itemid(s string) *SpanElement {
@@ -335,10 +303,6 @@ func (e *SpanElement) Spellcheck(a SpanSpellcheckEnum) *SpanElement {
 	return e
 }
 
-func SpanSpellcheckCustom(s string) SpanSpellcheckEnum {
-	return SpanSpellcheckEnum(s)
-}
-
 func (e *SpanElement) Style(s string) *SpanElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *SpanElement) Translate(a SpanTranslateEnum) *SpanElement {
 	return e
 }
 
-func SpanTranslateCustom(s string) SpanTranslateEnum {
-	return SpanTranslateEnum(s)
-}
-
 func (e *SpanElement) Writingsuggestions(a SpanWritingsuggestionsEnum) *SpanElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func SpanWritingsuggestionsCustom(s string) SpanWritingsuggestionsEnum {
-	return SpanWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

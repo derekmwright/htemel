@@ -71,9 +71,9 @@ const (
 type HrContenteditableEnum string
 
 const (
+	HrContenteditableEnumTrue          HrContenteditableEnum = "true"
 	HrContenteditableEnumFalse         HrContenteditableEnum = "false"
 	HrContenteditableEnumPlaintextOnly HrContenteditableEnum = "plaintext-only"
-	HrContenteditableEnumTrue          HrContenteditableEnum = "true"
 	HrContenteditableEnumEmpty         HrContenteditableEnum = ""
 )
 
@@ -88,20 +88,20 @@ const (
 type HrDraggableEnum string
 
 const (
-	HrDraggableEnumFalse HrDraggableEnum = "false"
 	HrDraggableEnumTrue  HrDraggableEnum = "true"
+	HrDraggableEnumFalse HrDraggableEnum = "false"
 )
 
 type HrEnterkeyhintEnum string
 
 const (
-	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
-	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
 	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
 	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
 	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
 	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
+	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
+	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
 )
 
 type HrHiddenEnum string
@@ -115,14 +115,14 @@ const (
 type HrInputmodeEnum string
 
 const (
-	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
-	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
 	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
 	HrInputmodeEnumText    HrInputmodeEnum = "text"
 	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
 	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
 	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
 	HrInputmodeEnumNone    HrInputmodeEnum = "none"
+	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
+	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
 )
 
 type HrSpellcheckEnum string
@@ -157,18 +157,10 @@ func (e *HrElement) Autocapitalize(a HrAutocapitalizeEnum) *HrElement {
 	return e
 }
 
-func HrAutocapitalizeCustom(s string) HrAutocapitalizeEnum {
-	return HrAutocapitalizeEnum(s)
-}
-
 func (e *HrElement) Autocorrect(a HrAutocorrectEnum) *HrElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func HrAutocorrectCustom(s string) HrAutocorrectEnum {
-	return HrAutocorrectEnum(s)
 }
 
 func (e *HrElement) Autofocus(b bool) *HrElement {
@@ -189,10 +181,6 @@ func (e *HrElement) Contenteditable(a HrContenteditableEnum) *HrElement {
 	return e
 }
 
-func HrContenteditableCustom(s string) HrContenteditableEnum {
-	return HrContenteditableEnum(s)
-}
-
 func (e *HrElement) DataUnsafe(name string, s string) *HrElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -211,18 +199,10 @@ func (e *HrElement) Dir(a HrDirEnum) *HrElement {
 	return e
 }
 
-func HrDirCustom(s string) HrDirEnum {
-	return HrDirEnum(s)
-}
-
 func (e *HrElement) Draggable(a HrDraggableEnum) *HrElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func HrDraggableCustom(s string) HrDraggableEnum {
-	return HrDraggableEnum(s)
 }
 
 func (e *HrElement) Enterkeyhint(a HrEnterkeyhintEnum) *HrElement {
@@ -231,18 +211,10 @@ func (e *HrElement) Enterkeyhint(a HrEnterkeyhintEnum) *HrElement {
 	return e
 }
 
-func HrEnterkeyhintCustom(s string) HrEnterkeyhintEnum {
-	return HrEnterkeyhintEnum(s)
-}
-
 func (e *HrElement) Hidden(a HrHiddenEnum) *HrElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func HrHiddenCustom(s string) HrHiddenEnum {
-	return HrHiddenEnum(s)
 }
 
 func (e *HrElement) Id(s string) *HrElement {
@@ -261,10 +233,6 @@ func (e *HrElement) Inputmode(a HrInputmodeEnum) *HrElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func HrInputmodeCustom(s string) HrInputmodeEnum {
-	return HrInputmodeEnum(s)
 }
 
 func (e *HrElement) Itemid(s string) *HrElement {
@@ -327,10 +295,6 @@ func (e *HrElement) Spellcheck(a HrSpellcheckEnum) *HrElement {
 	return e
 }
 
-func HrSpellcheckCustom(s string) HrSpellcheckEnum {
-	return HrSpellcheckEnum(s)
-}
-
 func (e *HrElement) Style(s string) *HrElement {
 	e.attributes["style"] = s
 
@@ -355,18 +319,10 @@ func (e *HrElement) Translate(a HrTranslateEnum) *HrElement {
 	return e
 }
 
-func HrTranslateCustom(s string) HrTranslateEnum {
-	return HrTranslateEnum(s)
-}
-
 func (e *HrElement) Writingsuggestions(a HrWritingsuggestionsEnum) *HrElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func HrWritingsuggestionsCustom(s string) HrWritingsuggestionsEnum {
-	return HrWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

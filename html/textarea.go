@@ -67,19 +67,19 @@ const (
 type TextareaAutocapitalizeEnum string
 
 const (
-	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
-	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
 	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
 	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
 	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
 	TextareaAutocapitalizeEnumWords      TextareaAutocapitalizeEnum = "words"
+	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
+	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
 )
 
 type TextareaAutocorrectEnum string
 
 const (
-	TextareaAutocorrectEnumOn    TextareaAutocorrectEnum = "on"
 	TextareaAutocorrectEnumOff   TextareaAutocorrectEnum = "off"
+	TextareaAutocorrectEnumOn    TextareaAutocorrectEnum = "on"
 	TextareaAutocorrectEnumEmpty TextareaAutocorrectEnum = ""
 )
 
@@ -110,13 +110,13 @@ const (
 type TextareaEnterkeyhintEnum string
 
 const (
+	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
 	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
 	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
 	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
 	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
 	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
 	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
-	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
 )
 
 type TextareaHiddenEnum string
@@ -244,28 +244,16 @@ func (e *TextareaElement) Wrap(a TextareaWrapEnum) *TextareaElement {
 	return e
 }
 
-func TextareaWrapCustom(s string) TextareaWrapEnum {
-	return TextareaWrapEnum(s)
-}
-
 func (e *TextareaElement) Autocapitalize(a TextareaAutocapitalizeEnum) *TextareaElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func TextareaAutocapitalizeCustom(s string) TextareaAutocapitalizeEnum {
-	return TextareaAutocapitalizeEnum(s)
-}
-
 func (e *TextareaElement) Autocorrect(a TextareaAutocorrectEnum) *TextareaElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func TextareaAutocorrectCustom(s string) TextareaAutocorrectEnum {
-	return TextareaAutocorrectEnum(s)
 }
 
 func (e *TextareaElement) Autofocus(b bool) *TextareaElement {
@@ -286,10 +274,6 @@ func (e *TextareaElement) Contenteditable(a TextareaContenteditableEnum) *Textar
 	return e
 }
 
-func TextareaContenteditableCustom(s string) TextareaContenteditableEnum {
-	return TextareaContenteditableEnum(s)
-}
-
 func (e *TextareaElement) DataUnsafe(name string, s string) *TextareaElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -308,18 +292,10 @@ func (e *TextareaElement) Dir(a TextareaDirEnum) *TextareaElement {
 	return e
 }
 
-func TextareaDirCustom(s string) TextareaDirEnum {
-	return TextareaDirEnum(s)
-}
-
 func (e *TextareaElement) Draggable(a TextareaDraggableEnum) *TextareaElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func TextareaDraggableCustom(s string) TextareaDraggableEnum {
-	return TextareaDraggableEnum(s)
 }
 
 func (e *TextareaElement) Enterkeyhint(a TextareaEnterkeyhintEnum) *TextareaElement {
@@ -328,18 +304,10 @@ func (e *TextareaElement) Enterkeyhint(a TextareaEnterkeyhintEnum) *TextareaElem
 	return e
 }
 
-func TextareaEnterkeyhintCustom(s string) TextareaEnterkeyhintEnum {
-	return TextareaEnterkeyhintEnum(s)
-}
-
 func (e *TextareaElement) Hidden(a TextareaHiddenEnum) *TextareaElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func TextareaHiddenCustom(s string) TextareaHiddenEnum {
-	return TextareaHiddenEnum(s)
 }
 
 func (e *TextareaElement) Id(s string) *TextareaElement {
@@ -358,10 +326,6 @@ func (e *TextareaElement) Inputmode(a TextareaInputmodeEnum) *TextareaElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func TextareaInputmodeCustom(s string) TextareaInputmodeEnum {
-	return TextareaInputmodeEnum(s)
 }
 
 func (e *TextareaElement) Itemid(s string) *TextareaElement {
@@ -424,10 +388,6 @@ func (e *TextareaElement) Spellcheck(a TextareaSpellcheckEnum) *TextareaElement 
 	return e
 }
 
-func TextareaSpellcheckCustom(s string) TextareaSpellcheckEnum {
-	return TextareaSpellcheckEnum(s)
-}
-
 func (e *TextareaElement) Style(s string) *TextareaElement {
 	e.attributes["style"] = s
 
@@ -452,18 +412,10 @@ func (e *TextareaElement) Translate(a TextareaTranslateEnum) *TextareaElement {
 	return e
 }
 
-func TextareaTranslateCustom(s string) TextareaTranslateEnum {
-	return TextareaTranslateEnum(s)
-}
-
 func (e *TextareaElement) Writingsuggestions(a TextareaWritingsuggestionsEnum) *TextareaElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func TextareaWritingsuggestionsCustom(s string) TextareaWritingsuggestionsEnum {
-	return TextareaWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

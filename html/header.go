@@ -60,12 +60,12 @@ func (e *HeaderElement) AddIndent(i int) {
 type HeaderAutocapitalizeEnum string
 
 const (
-	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
 	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
 	HeaderAutocapitalizeEnumNone       HeaderAutocapitalizeEnum = "none"
 	HeaderAutocapitalizeEnumOff        HeaderAutocapitalizeEnum = "off"
 	HeaderAutocapitalizeEnumOn         HeaderAutocapitalizeEnum = "on"
 	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
+	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
 )
 
 type HeaderAutocorrectEnum string
@@ -79,9 +79,9 @@ const (
 type HeaderContenteditableEnum string
 
 const (
+	HeaderContenteditableEnumPlaintextOnly HeaderContenteditableEnum = "plaintext-only"
 	HeaderContenteditableEnumTrue          HeaderContenteditableEnum = "true"
 	HeaderContenteditableEnumFalse         HeaderContenteditableEnum = "false"
-	HeaderContenteditableEnumPlaintextOnly HeaderContenteditableEnum = "plaintext-only"
 	HeaderContenteditableEnumEmpty         HeaderContenteditableEnum = ""
 )
 
@@ -96,20 +96,20 @@ const (
 type HeaderDraggableEnum string
 
 const (
-	HeaderDraggableEnumTrue  HeaderDraggableEnum = "true"
 	HeaderDraggableEnumFalse HeaderDraggableEnum = "false"
+	HeaderDraggableEnumTrue  HeaderDraggableEnum = "true"
 )
 
 type HeaderEnterkeyhintEnum string
 
 const (
+	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
+	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
 	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
 	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
 	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
 	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
 	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
-	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
-	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
 )
 
 type HeaderHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type HeaderInputmodeEnum string
 
 const (
-	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
-	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
 	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
 	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 	HeaderInputmodeEnumUrl     HeaderInputmodeEnum = "url"
 	HeaderInputmodeEnumDecimal HeaderInputmodeEnum = "decimal"
 	HeaderInputmodeEnumEmail   HeaderInputmodeEnum = "email"
 	HeaderInputmodeEnumNone    HeaderInputmodeEnum = "none"
+	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
+	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
 )
 
 type HeaderSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type HeaderWritingsuggestionsEnum string
 
 const (
-	HeaderWritingsuggestionsEnumFalse HeaderWritingsuggestionsEnum = "false"
 	HeaderWritingsuggestionsEnumTrue  HeaderWritingsuggestionsEnum = "true"
+	HeaderWritingsuggestionsEnumFalse HeaderWritingsuggestionsEnum = "false"
 	HeaderWritingsuggestionsEnumEmpty HeaderWritingsuggestionsEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *HeaderElement) Autocapitalize(a HeaderAutocapitalizeEnum) *HeaderElemen
 	return e
 }
 
-func HeaderAutocapitalizeCustom(s string) HeaderAutocapitalizeEnum {
-	return HeaderAutocapitalizeEnum(s)
-}
-
 func (e *HeaderElement) Autocorrect(a HeaderAutocorrectEnum) *HeaderElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func HeaderAutocorrectCustom(s string) HeaderAutocorrectEnum {
-	return HeaderAutocorrectEnum(s)
 }
 
 func (e *HeaderElement) Autofocus(b bool) *HeaderElement {
@@ -197,10 +189,6 @@ func (e *HeaderElement) Contenteditable(a HeaderContenteditableEnum) *HeaderElem
 	return e
 }
 
-func HeaderContenteditableCustom(s string) HeaderContenteditableEnum {
-	return HeaderContenteditableEnum(s)
-}
-
 func (e *HeaderElement) DataUnsafe(name string, s string) *HeaderElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *HeaderElement) Dir(a HeaderDirEnum) *HeaderElement {
 	return e
 }
 
-func HeaderDirCustom(s string) HeaderDirEnum {
-	return HeaderDirEnum(s)
-}
-
 func (e *HeaderElement) Draggable(a HeaderDraggableEnum) *HeaderElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func HeaderDraggableCustom(s string) HeaderDraggableEnum {
-	return HeaderDraggableEnum(s)
 }
 
 func (e *HeaderElement) Enterkeyhint(a HeaderEnterkeyhintEnum) *HeaderElement {
@@ -239,18 +219,10 @@ func (e *HeaderElement) Enterkeyhint(a HeaderEnterkeyhintEnum) *HeaderElement {
 	return e
 }
 
-func HeaderEnterkeyhintCustom(s string) HeaderEnterkeyhintEnum {
-	return HeaderEnterkeyhintEnum(s)
-}
-
 func (e *HeaderElement) Hidden(a HeaderHiddenEnum) *HeaderElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func HeaderHiddenCustom(s string) HeaderHiddenEnum {
-	return HeaderHiddenEnum(s)
 }
 
 func (e *HeaderElement) Id(s string) *HeaderElement {
@@ -269,10 +241,6 @@ func (e *HeaderElement) Inputmode(a HeaderInputmodeEnum) *HeaderElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func HeaderInputmodeCustom(s string) HeaderInputmodeEnum {
-	return HeaderInputmodeEnum(s)
 }
 
 func (e *HeaderElement) Itemid(s string) *HeaderElement {
@@ -335,10 +303,6 @@ func (e *HeaderElement) Spellcheck(a HeaderSpellcheckEnum) *HeaderElement {
 	return e
 }
 
-func HeaderSpellcheckCustom(s string) HeaderSpellcheckEnum {
-	return HeaderSpellcheckEnum(s)
-}
-
 func (e *HeaderElement) Style(s string) *HeaderElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *HeaderElement) Translate(a HeaderTranslateEnum) *HeaderElement {
 	return e
 }
 
-func HeaderTranslateCustom(s string) HeaderTranslateEnum {
-	return HeaderTranslateEnum(s)
-}
-
 func (e *HeaderElement) Writingsuggestions(a HeaderWritingsuggestionsEnum) *HeaderElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func HeaderWritingsuggestionsCustom(s string) HeaderWritingsuggestionsEnum {
-	return HeaderWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

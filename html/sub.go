@@ -60,12 +60,12 @@ func (e *SubElement) AddIndent(i int) {
 type SubAutocapitalizeEnum string
 
 const (
+	SubAutocapitalizeEnumOn         SubAutocapitalizeEnum = "on"
 	SubAutocapitalizeEnumSentences  SubAutocapitalizeEnum = "sentences"
 	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
 	SubAutocapitalizeEnumCharacters SubAutocapitalizeEnum = "characters"
 	SubAutocapitalizeEnumNone       SubAutocapitalizeEnum = "none"
 	SubAutocapitalizeEnumOff        SubAutocapitalizeEnum = "off"
-	SubAutocapitalizeEnumOn         SubAutocapitalizeEnum = "on"
 )
 
 type SubAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type SubDirEnum string
 
 const (
+	SubDirEnumRtl  SubDirEnum = "rtl"
 	SubDirEnumAuto SubDirEnum = "auto"
 	SubDirEnumLtr  SubDirEnum = "ltr"
-	SubDirEnumRtl  SubDirEnum = "rtl"
 )
 
 type SubDraggableEnum string
@@ -103,34 +103,34 @@ const (
 type SubEnterkeyhintEnum string
 
 const (
+	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
 	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
 	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
 	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
 	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
-	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 )
 
 type SubHiddenEnum string
 
 const (
-	SubHiddenEnumUntilFound SubHiddenEnum = "until-found"
 	SubHiddenEnumHidden     SubHiddenEnum = "hidden"
+	SubHiddenEnumUntilFound SubHiddenEnum = "until-found"
 	SubHiddenEnumEmpty      SubHiddenEnum = ""
 )
 
 type SubInputmodeEnum string
 
 const (
-	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
-	SubInputmodeEnumText    SubInputmodeEnum = "text"
-	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
-	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
 	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
 	SubInputmodeEnumNone    SubInputmodeEnum = "none"
 	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
 	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
+	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
+	SubInputmodeEnumText    SubInputmodeEnum = "text"
+	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
+	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
 )
 
 type SubSpellcheckEnum string
@@ -152,8 +152,8 @@ const (
 type SubWritingsuggestionsEnum string
 
 const (
-	SubWritingsuggestionsEnumFalse SubWritingsuggestionsEnum = "false"
 	SubWritingsuggestionsEnumTrue  SubWritingsuggestionsEnum = "true"
+	SubWritingsuggestionsEnumFalse SubWritingsuggestionsEnum = "false"
 	SubWritingsuggestionsEnumEmpty SubWritingsuggestionsEnum = ""
 )
 
@@ -165,18 +165,10 @@ func (e *SubElement) Autocapitalize(a SubAutocapitalizeEnum) *SubElement {
 	return e
 }
 
-func SubAutocapitalizeCustom(s string) SubAutocapitalizeEnum {
-	return SubAutocapitalizeEnum(s)
-}
-
 func (e *SubElement) Autocorrect(a SubAutocorrectEnum) *SubElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func SubAutocorrectCustom(s string) SubAutocorrectEnum {
-	return SubAutocorrectEnum(s)
 }
 
 func (e *SubElement) Autofocus(b bool) *SubElement {
@@ -197,10 +189,6 @@ func (e *SubElement) Contenteditable(a SubContenteditableEnum) *SubElement {
 	return e
 }
 
-func SubContenteditableCustom(s string) SubContenteditableEnum {
-	return SubContenteditableEnum(s)
-}
-
 func (e *SubElement) DataUnsafe(name string, s string) *SubElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *SubElement) Dir(a SubDirEnum) *SubElement {
 	return e
 }
 
-func SubDirCustom(s string) SubDirEnum {
-	return SubDirEnum(s)
-}
-
 func (e *SubElement) Draggable(a SubDraggableEnum) *SubElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func SubDraggableCustom(s string) SubDraggableEnum {
-	return SubDraggableEnum(s)
 }
 
 func (e *SubElement) Enterkeyhint(a SubEnterkeyhintEnum) *SubElement {
@@ -239,18 +219,10 @@ func (e *SubElement) Enterkeyhint(a SubEnterkeyhintEnum) *SubElement {
 	return e
 }
 
-func SubEnterkeyhintCustom(s string) SubEnterkeyhintEnum {
-	return SubEnterkeyhintEnum(s)
-}
-
 func (e *SubElement) Hidden(a SubHiddenEnum) *SubElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func SubHiddenCustom(s string) SubHiddenEnum {
-	return SubHiddenEnum(s)
 }
 
 func (e *SubElement) Id(s string) *SubElement {
@@ -269,10 +241,6 @@ func (e *SubElement) Inputmode(a SubInputmodeEnum) *SubElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func SubInputmodeCustom(s string) SubInputmodeEnum {
-	return SubInputmodeEnum(s)
 }
 
 func (e *SubElement) Itemid(s string) *SubElement {
@@ -335,10 +303,6 @@ func (e *SubElement) Spellcheck(a SubSpellcheckEnum) *SubElement {
 	return e
 }
 
-func SubSpellcheckCustom(s string) SubSpellcheckEnum {
-	return SubSpellcheckEnum(s)
-}
-
 func (e *SubElement) Style(s string) *SubElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *SubElement) Translate(a SubTranslateEnum) *SubElement {
 	return e
 }
 
-func SubTranslateCustom(s string) SubTranslateEnum {
-	return SubTranslateEnum(s)
-}
-
 func (e *SubElement) Writingsuggestions(a SubWritingsuggestionsEnum) *SubElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func SubWritingsuggestionsCustom(s string) SubWritingsuggestionsEnum {
-	return SubWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

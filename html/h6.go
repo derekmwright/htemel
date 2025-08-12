@@ -71,17 +71,17 @@ const (
 type H6AutocorrectEnum string
 
 const (
-	H6AutocorrectEnumOff   H6AutocorrectEnum = "off"
 	H6AutocorrectEnumOn    H6AutocorrectEnum = "on"
+	H6AutocorrectEnumOff   H6AutocorrectEnum = "off"
 	H6AutocorrectEnumEmpty H6AutocorrectEnum = ""
 )
 
 type H6ContenteditableEnum string
 
 const (
+	H6ContenteditableEnumTrue          H6ContenteditableEnum = "true"
 	H6ContenteditableEnumFalse         H6ContenteditableEnum = "false"
 	H6ContenteditableEnumPlaintextOnly H6ContenteditableEnum = "plaintext-only"
-	H6ContenteditableEnumTrue          H6ContenteditableEnum = "true"
 	H6ContenteditableEnumEmpty         H6ContenteditableEnum = ""
 )
 
@@ -103,13 +103,13 @@ const (
 type H6EnterkeyhintEnum string
 
 const (
+	H6EnterkeyhintEnumSearch   H6EnterkeyhintEnum = "search"
+	H6EnterkeyhintEnumSend     H6EnterkeyhintEnum = "send"
 	H6EnterkeyhintEnumDone     H6EnterkeyhintEnum = "done"
 	H6EnterkeyhintEnumEnter    H6EnterkeyhintEnum = "enter"
 	H6EnterkeyhintEnumGo       H6EnterkeyhintEnum = "go"
 	H6EnterkeyhintEnumNext     H6EnterkeyhintEnum = "next"
 	H6EnterkeyhintEnumPrevious H6EnterkeyhintEnum = "previous"
-	H6EnterkeyhintEnumSearch   H6EnterkeyhintEnum = "search"
-	H6EnterkeyhintEnumSend     H6EnterkeyhintEnum = "send"
 )
 
 type H6HiddenEnum string
@@ -123,14 +123,14 @@ const (
 type H6InputmodeEnum string
 
 const (
-	H6InputmodeEnumTel     H6InputmodeEnum = "tel"
-	H6InputmodeEnumText    H6InputmodeEnum = "text"
 	H6InputmodeEnumUrl     H6InputmodeEnum = "url"
 	H6InputmodeEnumDecimal H6InputmodeEnum = "decimal"
 	H6InputmodeEnumEmail   H6InputmodeEnum = "email"
 	H6InputmodeEnumNone    H6InputmodeEnum = "none"
 	H6InputmodeEnumNumeric H6InputmodeEnum = "numeric"
 	H6InputmodeEnumSearch  H6InputmodeEnum = "search"
+	H6InputmodeEnumTel     H6InputmodeEnum = "tel"
+	H6InputmodeEnumText    H6InputmodeEnum = "text"
 )
 
 type H6SpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *H6Element) Autocapitalize(a H6AutocapitalizeEnum) *H6Element {
 	return e
 }
 
-func H6AutocapitalizeCustom(s string) H6AutocapitalizeEnum {
-	return H6AutocapitalizeEnum(s)
-}
-
 func (e *H6Element) Autocorrect(a H6AutocorrectEnum) *H6Element {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func H6AutocorrectCustom(s string) H6AutocorrectEnum {
-	return H6AutocorrectEnum(s)
 }
 
 func (e *H6Element) Autofocus(b bool) *H6Element {
@@ -197,10 +189,6 @@ func (e *H6Element) Contenteditable(a H6ContenteditableEnum) *H6Element {
 	return e
 }
 
-func H6ContenteditableCustom(s string) H6ContenteditableEnum {
-	return H6ContenteditableEnum(s)
-}
-
 func (e *H6Element) DataUnsafe(name string, s string) *H6Element {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *H6Element) Dir(a H6DirEnum) *H6Element {
 	return e
 }
 
-func H6DirCustom(s string) H6DirEnum {
-	return H6DirEnum(s)
-}
-
 func (e *H6Element) Draggable(a H6DraggableEnum) *H6Element {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func H6DraggableCustom(s string) H6DraggableEnum {
-	return H6DraggableEnum(s)
 }
 
 func (e *H6Element) Enterkeyhint(a H6EnterkeyhintEnum) *H6Element {
@@ -239,18 +219,10 @@ func (e *H6Element) Enterkeyhint(a H6EnterkeyhintEnum) *H6Element {
 	return e
 }
 
-func H6EnterkeyhintCustom(s string) H6EnterkeyhintEnum {
-	return H6EnterkeyhintEnum(s)
-}
-
 func (e *H6Element) Hidden(a H6HiddenEnum) *H6Element {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func H6HiddenCustom(s string) H6HiddenEnum {
-	return H6HiddenEnum(s)
 }
 
 func (e *H6Element) Id(s string) *H6Element {
@@ -269,10 +241,6 @@ func (e *H6Element) Inputmode(a H6InputmodeEnum) *H6Element {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func H6InputmodeCustom(s string) H6InputmodeEnum {
-	return H6InputmodeEnum(s)
 }
 
 func (e *H6Element) Itemid(s string) *H6Element {
@@ -335,10 +303,6 @@ func (e *H6Element) Spellcheck(a H6SpellcheckEnum) *H6Element {
 	return e
 }
 
-func H6SpellcheckCustom(s string) H6SpellcheckEnum {
-	return H6SpellcheckEnum(s)
-}
-
 func (e *H6Element) Style(s string) *H6Element {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *H6Element) Translate(a H6TranslateEnum) *H6Element {
 	return e
 }
 
-func H6TranslateCustom(s string) H6TranslateEnum {
-	return H6TranslateEnum(s)
-}
-
 func (e *H6Element) Writingsuggestions(a H6WritingsuggestionsEnum) *H6Element {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func H6WritingsuggestionsCustom(s string) H6WritingsuggestionsEnum {
-	return H6WritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

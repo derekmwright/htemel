@@ -52,28 +52,28 @@ func (e *WbrElement) AddIndent(i int) {
 type WbrAutocapitalizeEnum string
 
 const (
-	WbrAutocapitalizeEnumCharacters WbrAutocapitalizeEnum = "characters"
-	WbrAutocapitalizeEnumNone       WbrAutocapitalizeEnum = "none"
 	WbrAutocapitalizeEnumOff        WbrAutocapitalizeEnum = "off"
 	WbrAutocapitalizeEnumOn         WbrAutocapitalizeEnum = "on"
 	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
 	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
+	WbrAutocapitalizeEnumCharacters WbrAutocapitalizeEnum = "characters"
+	WbrAutocapitalizeEnumNone       WbrAutocapitalizeEnum = "none"
 )
 
 type WbrAutocorrectEnum string
 
 const (
-	WbrAutocorrectEnumOff   WbrAutocorrectEnum = "off"
 	WbrAutocorrectEnumOn    WbrAutocorrectEnum = "on"
+	WbrAutocorrectEnumOff   WbrAutocorrectEnum = "off"
 	WbrAutocorrectEnumEmpty WbrAutocorrectEnum = ""
 )
 
 type WbrContenteditableEnum string
 
 const (
+	WbrContenteditableEnumFalse         WbrContenteditableEnum = "false"
 	WbrContenteditableEnumPlaintextOnly WbrContenteditableEnum = "plaintext-only"
 	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
-	WbrContenteditableEnumFalse         WbrContenteditableEnum = "false"
 	WbrContenteditableEnumEmpty         WbrContenteditableEnum = ""
 )
 
@@ -95,13 +95,13 @@ const (
 type WbrEnterkeyhintEnum string
 
 const (
-	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
 	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
 	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
 	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
 	WbrEnterkeyhintEnumSearch   WbrEnterkeyhintEnum = "search"
 	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
+	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
 )
 
 type WbrHiddenEnum string
@@ -136,8 +136,8 @@ const (
 type WbrTranslateEnum string
 
 const (
-	WbrTranslateEnumNo    WbrTranslateEnum = "no"
 	WbrTranslateEnumYes   WbrTranslateEnum = "yes"
+	WbrTranslateEnumNo    WbrTranslateEnum = "no"
 	WbrTranslateEnumEmpty WbrTranslateEnum = ""
 )
 
@@ -157,18 +157,10 @@ func (e *WbrElement) Autocapitalize(a WbrAutocapitalizeEnum) *WbrElement {
 	return e
 }
 
-func WbrAutocapitalizeCustom(s string) WbrAutocapitalizeEnum {
-	return WbrAutocapitalizeEnum(s)
-}
-
 func (e *WbrElement) Autocorrect(a WbrAutocorrectEnum) *WbrElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func WbrAutocorrectCustom(s string) WbrAutocorrectEnum {
-	return WbrAutocorrectEnum(s)
 }
 
 func (e *WbrElement) Autofocus(b bool) *WbrElement {
@@ -189,10 +181,6 @@ func (e *WbrElement) Contenteditable(a WbrContenteditableEnum) *WbrElement {
 	return e
 }
 
-func WbrContenteditableCustom(s string) WbrContenteditableEnum {
-	return WbrContenteditableEnum(s)
-}
-
 func (e *WbrElement) DataUnsafe(name string, s string) *WbrElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -211,18 +199,10 @@ func (e *WbrElement) Dir(a WbrDirEnum) *WbrElement {
 	return e
 }
 
-func WbrDirCustom(s string) WbrDirEnum {
-	return WbrDirEnum(s)
-}
-
 func (e *WbrElement) Draggable(a WbrDraggableEnum) *WbrElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func WbrDraggableCustom(s string) WbrDraggableEnum {
-	return WbrDraggableEnum(s)
 }
 
 func (e *WbrElement) Enterkeyhint(a WbrEnterkeyhintEnum) *WbrElement {
@@ -231,18 +211,10 @@ func (e *WbrElement) Enterkeyhint(a WbrEnterkeyhintEnum) *WbrElement {
 	return e
 }
 
-func WbrEnterkeyhintCustom(s string) WbrEnterkeyhintEnum {
-	return WbrEnterkeyhintEnum(s)
-}
-
 func (e *WbrElement) Hidden(a WbrHiddenEnum) *WbrElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func WbrHiddenCustom(s string) WbrHiddenEnum {
-	return WbrHiddenEnum(s)
 }
 
 func (e *WbrElement) Id(s string) *WbrElement {
@@ -261,10 +233,6 @@ func (e *WbrElement) Inputmode(a WbrInputmodeEnum) *WbrElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func WbrInputmodeCustom(s string) WbrInputmodeEnum {
-	return WbrInputmodeEnum(s)
 }
 
 func (e *WbrElement) Itemid(s string) *WbrElement {
@@ -327,10 +295,6 @@ func (e *WbrElement) Spellcheck(a WbrSpellcheckEnum) *WbrElement {
 	return e
 }
 
-func WbrSpellcheckCustom(s string) WbrSpellcheckEnum {
-	return WbrSpellcheckEnum(s)
-}
-
 func (e *WbrElement) Style(s string) *WbrElement {
 	e.attributes["style"] = s
 
@@ -355,18 +319,10 @@ func (e *WbrElement) Translate(a WbrTranslateEnum) *WbrElement {
 	return e
 }
 
-func WbrTranslateCustom(s string) WbrTranslateEnum {
-	return WbrTranslateEnum(s)
-}
-
 func (e *WbrElement) Writingsuggestions(a WbrWritingsuggestionsEnum) *WbrElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func WbrWritingsuggestionsCustom(s string) WbrWritingsuggestionsEnum {
-	return WbrWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

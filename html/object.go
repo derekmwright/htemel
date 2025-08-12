@@ -59,12 +59,12 @@ func (e *ObjectElement) AddIndent(i int) {
 type ObjectAutocapitalizeEnum string
 
 const (
-	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
-	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
 	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
 	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
 	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
 	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
+	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
+	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
 )
 
 type ObjectAutocorrectEnum string
@@ -95,20 +95,20 @@ const (
 type ObjectDraggableEnum string
 
 const (
-	ObjectDraggableEnumTrue  ObjectDraggableEnum = "true"
 	ObjectDraggableEnumFalse ObjectDraggableEnum = "false"
+	ObjectDraggableEnumTrue  ObjectDraggableEnum = "true"
 )
 
 type ObjectEnterkeyhintEnum string
 
 const (
+	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
 	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
 	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
 	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
 	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 	ObjectEnterkeyhintEnumNext     ObjectEnterkeyhintEnum = "next"
 	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
-	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
 )
 
 type ObjectHiddenEnum string
@@ -122,14 +122,14 @@ const (
 type ObjectInputmodeEnum string
 
 const (
-	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
-	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
-	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
-	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
 	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
 	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
 	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
 	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
+	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
+	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
+	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
+	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
 )
 
 type ObjectSpellcheckEnum string
@@ -200,18 +200,10 @@ func (e *ObjectElement) Autocapitalize(a ObjectAutocapitalizeEnum) *ObjectElemen
 	return e
 }
 
-func ObjectAutocapitalizeCustom(s string) ObjectAutocapitalizeEnum {
-	return ObjectAutocapitalizeEnum(s)
-}
-
 func (e *ObjectElement) Autocorrect(a ObjectAutocorrectEnum) *ObjectElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func ObjectAutocorrectCustom(s string) ObjectAutocorrectEnum {
-	return ObjectAutocorrectEnum(s)
 }
 
 func (e *ObjectElement) Autofocus(b bool) *ObjectElement {
@@ -232,18 +224,10 @@ func (e *ObjectElement) Contenteditable(a ObjectContenteditableEnum) *ObjectElem
 	return e
 }
 
-func ObjectContenteditableCustom(s string) ObjectContenteditableEnum {
-	return ObjectContenteditableEnum(s)
-}
-
 func (e *ObjectElement) Dir(a ObjectDirEnum) *ObjectElement {
 	e.attributes["dir"] = a
 
 	return e
-}
-
-func ObjectDirCustom(s string) ObjectDirEnum {
-	return ObjectDirEnum(s)
 }
 
 func (e *ObjectElement) Draggable(a ObjectDraggableEnum) *ObjectElement {
@@ -252,28 +236,16 @@ func (e *ObjectElement) Draggable(a ObjectDraggableEnum) *ObjectElement {
 	return e
 }
 
-func ObjectDraggableCustom(s string) ObjectDraggableEnum {
-	return ObjectDraggableEnum(s)
-}
-
 func (e *ObjectElement) Enterkeyhint(a ObjectEnterkeyhintEnum) *ObjectElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func ObjectEnterkeyhintCustom(s string) ObjectEnterkeyhintEnum {
-	return ObjectEnterkeyhintEnum(s)
-}
-
 func (e *ObjectElement) Hidden(a ObjectHiddenEnum) *ObjectElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func ObjectHiddenCustom(s string) ObjectHiddenEnum {
-	return ObjectHiddenEnum(s)
 }
 
 func (e *ObjectElement) Id(s string) *ObjectElement {
@@ -292,10 +264,6 @@ func (e *ObjectElement) Inputmode(a ObjectInputmodeEnum) *ObjectElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func ObjectInputmodeCustom(s string) ObjectInputmodeEnum {
-	return ObjectInputmodeEnum(s)
 }
 
 func (e *ObjectElement) Itemid(s string) *ObjectElement {
@@ -358,10 +326,6 @@ func (e *ObjectElement) Spellcheck(a ObjectSpellcheckEnum) *ObjectElement {
 	return e
 }
 
-func ObjectSpellcheckCustom(s string) ObjectSpellcheckEnum {
-	return ObjectSpellcheckEnum(s)
-}
-
 func (e *ObjectElement) Style(s string) *ObjectElement {
 	e.attributes["style"] = s
 
@@ -386,18 +350,10 @@ func (e *ObjectElement) Translate(a ObjectTranslateEnum) *ObjectElement {
 	return e
 }
 
-func ObjectTranslateCustom(s string) ObjectTranslateEnum {
-	return ObjectTranslateEnum(s)
-}
-
 func (e *ObjectElement) Writingsuggestions(a ObjectWritingsuggestionsEnum) *ObjectElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func ObjectWritingsuggestionsCustom(s string) ObjectWritingsuggestionsEnum {
-	return ObjectWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

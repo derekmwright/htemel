@@ -79,18 +79,18 @@ const (
 type H3ContenteditableEnum string
 
 const (
-	H3ContenteditableEnumTrue          H3ContenteditableEnum = "true"
 	H3ContenteditableEnumFalse         H3ContenteditableEnum = "false"
 	H3ContenteditableEnumPlaintextOnly H3ContenteditableEnum = "plaintext-only"
+	H3ContenteditableEnumTrue          H3ContenteditableEnum = "true"
 	H3ContenteditableEnumEmpty         H3ContenteditableEnum = ""
 )
 
 type H3DirEnum string
 
 const (
-	H3DirEnumAuto H3DirEnum = "auto"
 	H3DirEnumLtr  H3DirEnum = "ltr"
 	H3DirEnumRtl  H3DirEnum = "rtl"
+	H3DirEnumAuto H3DirEnum = "auto"
 )
 
 type H3DraggableEnum string
@@ -103,13 +103,13 @@ const (
 type H3EnterkeyhintEnum string
 
 const (
-	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
-	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
 	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
 	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
 	H3EnterkeyhintEnumSend     H3EnterkeyhintEnum = "send"
 	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
 	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
+	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
+	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
 )
 
 type H3HiddenEnum string
@@ -123,6 +123,7 @@ const (
 type H3InputmodeEnum string
 
 const (
+	H3InputmodeEnumText    H3InputmodeEnum = "text"
 	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
 	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
 	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
@@ -130,7 +131,6 @@ const (
 	H3InputmodeEnumNumeric H3InputmodeEnum = "numeric"
 	H3InputmodeEnumSearch  H3InputmodeEnum = "search"
 	H3InputmodeEnumTel     H3InputmodeEnum = "tel"
-	H3InputmodeEnumText    H3InputmodeEnum = "text"
 )
 
 type H3SpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *H3Element) Autocapitalize(a H3AutocapitalizeEnum) *H3Element {
 	return e
 }
 
-func H3AutocapitalizeCustom(s string) H3AutocapitalizeEnum {
-	return H3AutocapitalizeEnum(s)
-}
-
 func (e *H3Element) Autocorrect(a H3AutocorrectEnum) *H3Element {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func H3AutocorrectCustom(s string) H3AutocorrectEnum {
-	return H3AutocorrectEnum(s)
 }
 
 func (e *H3Element) Autofocus(b bool) *H3Element {
@@ -197,10 +189,6 @@ func (e *H3Element) Contenteditable(a H3ContenteditableEnum) *H3Element {
 	return e
 }
 
-func H3ContenteditableCustom(s string) H3ContenteditableEnum {
-	return H3ContenteditableEnum(s)
-}
-
 func (e *H3Element) DataUnsafe(name string, s string) *H3Element {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *H3Element) Dir(a H3DirEnum) *H3Element {
 	return e
 }
 
-func H3DirCustom(s string) H3DirEnum {
-	return H3DirEnum(s)
-}
-
 func (e *H3Element) Draggable(a H3DraggableEnum) *H3Element {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func H3DraggableCustom(s string) H3DraggableEnum {
-	return H3DraggableEnum(s)
 }
 
 func (e *H3Element) Enterkeyhint(a H3EnterkeyhintEnum) *H3Element {
@@ -239,18 +219,10 @@ func (e *H3Element) Enterkeyhint(a H3EnterkeyhintEnum) *H3Element {
 	return e
 }
 
-func H3EnterkeyhintCustom(s string) H3EnterkeyhintEnum {
-	return H3EnterkeyhintEnum(s)
-}
-
 func (e *H3Element) Hidden(a H3HiddenEnum) *H3Element {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func H3HiddenCustom(s string) H3HiddenEnum {
-	return H3HiddenEnum(s)
 }
 
 func (e *H3Element) Id(s string) *H3Element {
@@ -269,10 +241,6 @@ func (e *H3Element) Inputmode(a H3InputmodeEnum) *H3Element {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func H3InputmodeCustom(s string) H3InputmodeEnum {
-	return H3InputmodeEnum(s)
 }
 
 func (e *H3Element) Itemid(s string) *H3Element {
@@ -335,10 +303,6 @@ func (e *H3Element) Spellcheck(a H3SpellcheckEnum) *H3Element {
 	return e
 }
 
-func H3SpellcheckCustom(s string) H3SpellcheckEnum {
-	return H3SpellcheckEnum(s)
-}
-
 func (e *H3Element) Style(s string) *H3Element {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *H3Element) Translate(a H3TranslateEnum) *H3Element {
 	return e
 }
 
-func H3TranslateCustom(s string) H3TranslateEnum {
-	return H3TranslateEnum(s)
-}
-
 func (e *H3Element) Writingsuggestions(a H3WritingsuggestionsEnum) *H3Element {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func H3WritingsuggestionsCustom(s string) H3WritingsuggestionsEnum {
-	return H3WritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.

@@ -60,12 +60,12 @@ func (e *NoscriptElement) AddIndent(i int) {
 type NoscriptAutocapitalizeEnum string
 
 const (
-	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
 	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
 	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
 	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
 	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
 	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
+	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
 )
 
 type NoscriptAutocorrectEnum string
@@ -88,9 +88,9 @@ const (
 type NoscriptDirEnum string
 
 const (
-	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
 	NoscriptDirEnumLtr  NoscriptDirEnum = "ltr"
 	NoscriptDirEnumRtl  NoscriptDirEnum = "rtl"
+	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
 )
 
 type NoscriptDraggableEnum string
@@ -103,13 +103,13 @@ const (
 type NoscriptEnterkeyhintEnum string
 
 const (
-	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
-	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
 	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
 	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
 	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
 	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
 	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
+	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
+	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
 )
 
 type NoscriptHiddenEnum string
@@ -123,14 +123,14 @@ const (
 type NoscriptInputmodeEnum string
 
 const (
+	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
+	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
+	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
 	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
 	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
 	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
 	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
 	NoscriptInputmodeEnumNone    NoscriptInputmodeEnum = "none"
-	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
-	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
-	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
 )
 
 type NoscriptSpellcheckEnum string
@@ -165,18 +165,10 @@ func (e *NoscriptElement) Autocapitalize(a NoscriptAutocapitalizeEnum) *Noscript
 	return e
 }
 
-func NoscriptAutocapitalizeCustom(s string) NoscriptAutocapitalizeEnum {
-	return NoscriptAutocapitalizeEnum(s)
-}
-
 func (e *NoscriptElement) Autocorrect(a NoscriptAutocorrectEnum) *NoscriptElement {
 	e.attributes["autocorrect"] = a
 
 	return e
-}
-
-func NoscriptAutocorrectCustom(s string) NoscriptAutocorrectEnum {
-	return NoscriptAutocorrectEnum(s)
 }
 
 func (e *NoscriptElement) Autofocus(b bool) *NoscriptElement {
@@ -197,10 +189,6 @@ func (e *NoscriptElement) Contenteditable(a NoscriptContenteditableEnum) *Noscri
 	return e
 }
 
-func NoscriptContenteditableCustom(s string) NoscriptContenteditableEnum {
-	return NoscriptContenteditableEnum(s)
-}
-
 func (e *NoscriptElement) DataUnsafe(name string, s string) *NoscriptElement {
 	tag := strings.ToLower("data-" + name)
 
@@ -219,18 +207,10 @@ func (e *NoscriptElement) Dir(a NoscriptDirEnum) *NoscriptElement {
 	return e
 }
 
-func NoscriptDirCustom(s string) NoscriptDirEnum {
-	return NoscriptDirEnum(s)
-}
-
 func (e *NoscriptElement) Draggable(a NoscriptDraggableEnum) *NoscriptElement {
 	e.attributes["draggable"] = a
 
 	return e
-}
-
-func NoscriptDraggableCustom(s string) NoscriptDraggableEnum {
-	return NoscriptDraggableEnum(s)
 }
 
 func (e *NoscriptElement) Enterkeyhint(a NoscriptEnterkeyhintEnum) *NoscriptElement {
@@ -239,18 +219,10 @@ func (e *NoscriptElement) Enterkeyhint(a NoscriptEnterkeyhintEnum) *NoscriptElem
 	return e
 }
 
-func NoscriptEnterkeyhintCustom(s string) NoscriptEnterkeyhintEnum {
-	return NoscriptEnterkeyhintEnum(s)
-}
-
 func (e *NoscriptElement) Hidden(a NoscriptHiddenEnum) *NoscriptElement {
 	e.attributes["hidden"] = a
 
 	return e
-}
-
-func NoscriptHiddenCustom(s string) NoscriptHiddenEnum {
-	return NoscriptHiddenEnum(s)
 }
 
 func (e *NoscriptElement) Id(s string) *NoscriptElement {
@@ -269,10 +241,6 @@ func (e *NoscriptElement) Inputmode(a NoscriptInputmodeEnum) *NoscriptElement {
 	e.attributes["inputmode"] = a
 
 	return e
-}
-
-func NoscriptInputmodeCustom(s string) NoscriptInputmodeEnum {
-	return NoscriptInputmodeEnum(s)
 }
 
 func (e *NoscriptElement) Itemid(s string) *NoscriptElement {
@@ -335,10 +303,6 @@ func (e *NoscriptElement) Spellcheck(a NoscriptSpellcheckEnum) *NoscriptElement 
 	return e
 }
 
-func NoscriptSpellcheckCustom(s string) NoscriptSpellcheckEnum {
-	return NoscriptSpellcheckEnum(s)
-}
-
 func (e *NoscriptElement) Style(s string) *NoscriptElement {
 	e.attributes["style"] = s
 
@@ -363,18 +327,10 @@ func (e *NoscriptElement) Translate(a NoscriptTranslateEnum) *NoscriptElement {
 	return e
 }
 
-func NoscriptTranslateCustom(s string) NoscriptTranslateEnum {
-	return NoscriptTranslateEnum(s)
-}
-
 func (e *NoscriptElement) Writingsuggestions(a NoscriptWritingsuggestionsEnum) *NoscriptElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
-}
-
-func NoscriptWritingsuggestionsCustom(s string) NoscriptWritingsuggestionsEnum {
-	return NoscriptWritingsuggestionsEnum(s)
 }
 
 // Render processes the current element, and writes the initial tag.
