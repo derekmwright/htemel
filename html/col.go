@@ -21,6 +21,7 @@ type ColElement struct {
 // Spec Description: If a col element has a parent and that is a colgroup element that itself has a parent that is a table element, then the col element represents one or more columns in the column group represented by that colgroup.
 func Col() *ColElement {
 	node := &ColElement{
+
 		attributes: make(colAttrs),
 	}
 
@@ -33,6 +34,8 @@ func ColIf(condition bool) *ColElement {
 	}
 
 	return &ColElement{
+
+		attributes: make(colAttrs),
 		skipRender: true,
 	}
 }
@@ -40,12 +43,12 @@ func ColIf(condition bool) *ColElement {
 type ColAutocapitalizeEnum string
 
 const (
+	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
 	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
 	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
 	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
 	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
-	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
 )
 
 type ColAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type ColDirEnum string
 
 const (
+	ColDirEnumAuto ColDirEnum = "auto"
 	ColDirEnumLtr  ColDirEnum = "ltr"
 	ColDirEnumRtl  ColDirEnum = "rtl"
-	ColDirEnumAuto ColDirEnum = "auto"
 )
 
 type ColDraggableEnum string
@@ -83,13 +86,13 @@ const (
 type ColEnterkeyhintEnum string
 
 const (
-	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
 	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
 	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
 	ColEnterkeyhintEnumPrevious ColEnterkeyhintEnum = "previous"
 	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
 	ColEnterkeyhintEnumSend     ColEnterkeyhintEnum = "send"
 	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
+	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
 )
 
 type ColHiddenEnum string
@@ -103,14 +106,14 @@ const (
 type ColInputmodeEnum string
 
 const (
+	ColInputmodeEnumNone    ColInputmodeEnum = "none"
+	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
+	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
 	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 	ColInputmodeEnumText    ColInputmodeEnum = "text"
 	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
 	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
 	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
-	ColInputmodeEnumNone    ColInputmodeEnum = "none"
-	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
-	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
 )
 
 type ColSpellcheckEnum string

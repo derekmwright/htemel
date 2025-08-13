@@ -22,7 +22,8 @@ type DatalistElement struct {
 // Spec Description: The datalist element represents a set of option elements that represent predefined options for other controls. In the rendering, the datalist element represents nothing and it, along with its children, should be hidden.
 func Datalist(children ...htemel.Node) *DatalistElement {
 	node := &DatalistElement{
-		children: children, attributes: make(datalistAttrs),
+		children:   children,
+		attributes: make(datalistAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func DatalistIf(condition bool, children ...htemel.Node) *DatalistElement {
 	}
 
 	return &DatalistElement{
+		children:   children,
+		attributes: make(datalistAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func DatalistTernary(condition bool, true htemel.Node, false htemel.Node) *Datal
 type DatalistAutocapitalizeEnum string
 
 const (
-	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
-	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
 	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
 	DatalistAutocapitalizeEnumOn         DatalistAutocapitalizeEnum = "on"
 	DatalistAutocapitalizeEnumSentences  DatalistAutocapitalizeEnum = "sentences"
 	DatalistAutocapitalizeEnumWords      DatalistAutocapitalizeEnum = "words"
+	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
+	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
 )
 
 type DatalistAutocorrectEnum string
@@ -92,34 +95,34 @@ const (
 type DatalistEnterkeyhintEnum string
 
 const (
-	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
-	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
 	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
 	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
 	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
 	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
 	DatalistEnterkeyhintEnumEnter    DatalistEnterkeyhintEnum = "enter"
+	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
+	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
 )
 
 type DatalistHiddenEnum string
 
 const (
-	DatalistHiddenEnumUntilFound DatalistHiddenEnum = "until-found"
 	DatalistHiddenEnumHidden     DatalistHiddenEnum = "hidden"
+	DatalistHiddenEnumUntilFound DatalistHiddenEnum = "until-found"
 	DatalistHiddenEnumEmpty      DatalistHiddenEnum = ""
 )
 
 type DatalistInputmodeEnum string
 
 const (
+	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
+	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
+	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
 	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
 	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
 	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
 	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
 	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
-	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
-	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
-	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
 )
 
 type DatalistSpellcheckEnum string
@@ -133,16 +136,16 @@ const (
 type DatalistTranslateEnum string
 
 const (
-	DatalistTranslateEnumYes   DatalistTranslateEnum = "yes"
 	DatalistTranslateEnumNo    DatalistTranslateEnum = "no"
+	DatalistTranslateEnumYes   DatalistTranslateEnum = "yes"
 	DatalistTranslateEnumEmpty DatalistTranslateEnum = ""
 )
 
 type DatalistWritingsuggestionsEnum string
 
 const (
-	DatalistWritingsuggestionsEnumFalse DatalistWritingsuggestionsEnum = "false"
 	DatalistWritingsuggestionsEnumTrue  DatalistWritingsuggestionsEnum = "true"
+	DatalistWritingsuggestionsEnumFalse DatalistWritingsuggestionsEnum = "false"
 	DatalistWritingsuggestionsEnumEmpty DatalistWritingsuggestionsEnum = ""
 )
 

@@ -22,7 +22,8 @@ type SampElement struct {
 // Spec Description: The samp element represents sample or quoted output from another program or computing system.
 func Samp(children ...htemel.Node) *SampElement {
 	node := &SampElement{
-		children: children, attributes: make(sampAttrs),
+		children:   children,
+		attributes: make(sampAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func SampIf(condition bool, children ...htemel.Node) *SampElement {
 	}
 
 	return &SampElement{
+		children:   children,
+		attributes: make(sampAttrs),
 		skipRender: true,
 	}
 }
@@ -68,18 +71,18 @@ const (
 type SampContenteditableEnum string
 
 const (
-	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
 	SampContenteditableEnumPlaintextOnly SampContenteditableEnum = "plaintext-only"
 	SampContenteditableEnumTrue          SampContenteditableEnum = "true"
+	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
 	SampContenteditableEnumEmpty         SampContenteditableEnum = ""
 )
 
 type SampDirEnum string
 
 const (
-	SampDirEnumRtl  SampDirEnum = "rtl"
 	SampDirEnumAuto SampDirEnum = "auto"
 	SampDirEnumLtr  SampDirEnum = "ltr"
+	SampDirEnumRtl  SampDirEnum = "rtl"
 )
 
 type SampDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type SampEnterkeyhintEnum string
 
 const (
-	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
-	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
-	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
 	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
 	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
 	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
 	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
+	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
+	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
+	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
 )
 
 type SampHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type SampInputmodeEnum string
 
 const (
-	SampInputmodeEnumNone    SampInputmodeEnum = "none"
-	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
-	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
 	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
 	SampInputmodeEnumText    SampInputmodeEnum = "text"
 	SampInputmodeEnumUrl     SampInputmodeEnum = "url"
 	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
 	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
+	SampInputmodeEnumNone    SampInputmodeEnum = "none"
+	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
+	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
 )
 
 type SampSpellcheckEnum string

@@ -22,7 +22,8 @@ type TemplateElement struct {
 // Spec Description: The template element is used to declare fragments of HTML that can be cloned and inserted in the document by script.
 func Template(children ...htemel.Node) *TemplateElement {
 	node := &TemplateElement{
-		children: children, attributes: make(templateAttrs),
+		children:   children,
+		attributes: make(templateAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func TemplateIf(condition bool, children ...htemel.Node) *TemplateElement {
 	}
 
 	return &TemplateElement{
+		children:   children,
+		attributes: make(templateAttrs),
 		skipRender: true,
 	}
 }
@@ -49,19 +52,19 @@ func TemplateTernary(condition bool, true htemel.Node, false htemel.Node) *Templ
 type TemplateShadowrootmodeEnum string
 
 const (
-	TemplateShadowrootmodeEnumClosed TemplateShadowrootmodeEnum = "closed"
 	TemplateShadowrootmodeEnumOpen   TemplateShadowrootmodeEnum = "open"
+	TemplateShadowrootmodeEnumClosed TemplateShadowrootmodeEnum = "closed"
 )
 
 type TemplateAutocapitalizeEnum string
 
 const (
-	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 	TemplateAutocapitalizeEnumOff        TemplateAutocapitalizeEnum = "off"
 	TemplateAutocapitalizeEnumOn         TemplateAutocapitalizeEnum = "on"
 	TemplateAutocapitalizeEnumSentences  TemplateAutocapitalizeEnum = "sentences"
 	TemplateAutocapitalizeEnumWords      TemplateAutocapitalizeEnum = "words"
 	TemplateAutocapitalizeEnumCharacters TemplateAutocapitalizeEnum = "characters"
+	TemplateAutocapitalizeEnumNone       TemplateAutocapitalizeEnum = "none"
 )
 
 type TemplateAutocorrectEnum string
@@ -75,9 +78,9 @@ const (
 type TemplateContenteditableEnum string
 
 const (
+	TemplateContenteditableEnumTrue          TemplateContenteditableEnum = "true"
 	TemplateContenteditableEnumFalse         TemplateContenteditableEnum = "false"
 	TemplateContenteditableEnumPlaintextOnly TemplateContenteditableEnum = "plaintext-only"
-	TemplateContenteditableEnumTrue          TemplateContenteditableEnum = "true"
 	TemplateContenteditableEnumEmpty         TemplateContenteditableEnum = ""
 )
 
@@ -99,13 +102,13 @@ const (
 type TemplateEnterkeyhintEnum string
 
 const (
-	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
 	TemplateEnterkeyhintEnumPrevious TemplateEnterkeyhintEnum = "previous"
 	TemplateEnterkeyhintEnumSearch   TemplateEnterkeyhintEnum = "search"
 	TemplateEnterkeyhintEnumSend     TemplateEnterkeyhintEnum = "send"
 	TemplateEnterkeyhintEnumDone     TemplateEnterkeyhintEnum = "done"
 	TemplateEnterkeyhintEnumEnter    TemplateEnterkeyhintEnum = "enter"
 	TemplateEnterkeyhintEnumGo       TemplateEnterkeyhintEnum = "go"
+	TemplateEnterkeyhintEnumNext     TemplateEnterkeyhintEnum = "next"
 )
 
 type TemplateHiddenEnum string
@@ -119,6 +122,7 @@ const (
 type TemplateInputmodeEnum string
 
 const (
+	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
 	TemplateInputmodeEnumTel     TemplateInputmodeEnum = "tel"
 	TemplateInputmodeEnumText    TemplateInputmodeEnum = "text"
 	TemplateInputmodeEnumUrl     TemplateInputmodeEnum = "url"
@@ -126,7 +130,6 @@ const (
 	TemplateInputmodeEnumEmail   TemplateInputmodeEnum = "email"
 	TemplateInputmodeEnumNone    TemplateInputmodeEnum = "none"
 	TemplateInputmodeEnumNumeric TemplateInputmodeEnum = "numeric"
-	TemplateInputmodeEnumSearch  TemplateInputmodeEnum = "search"
 )
 
 type TemplateSpellcheckEnum string

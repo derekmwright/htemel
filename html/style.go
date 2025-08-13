@@ -22,7 +22,8 @@ type StyleElement struct {
 // Spec Description: The style element allows authors to embed CSS style sheets in their documents. The style element is one of several inputs to the styling processing model. The element does not represent content for the user.
 func Style(children ...htemel.Node) *StyleElement {
 	node := &StyleElement{
-		children: children, attributes: make(styleAttrs),
+		children:   children,
+		attributes: make(styleAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func StyleIf(condition bool, children ...htemel.Node) *StyleElement {
 	}
 
 	return &StyleElement{
+		children:   children,
+		attributes: make(styleAttrs),
 		skipRender: true,
 	}
 }
@@ -77,9 +80,9 @@ const (
 type StyleDirEnum string
 
 const (
+	StyleDirEnumRtl  StyleDirEnum = "rtl"
 	StyleDirEnumAuto StyleDirEnum = "auto"
 	StyleDirEnumLtr  StyleDirEnum = "ltr"
-	StyleDirEnumRtl  StyleDirEnum = "rtl"
 )
 
 type StyleDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type StyleEnterkeyhintEnum string
 
 const (
+	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
+	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
 	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
 	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
 	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
 	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
 	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
-	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
-	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
 )
 
 type StyleHiddenEnum string
@@ -112,7 +115,6 @@ const (
 type StyleInputmodeEnum string
 
 const (
-	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
 	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
 	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
 	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
@@ -120,6 +122,7 @@ const (
 	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
 	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
 	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
+	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
 )
 
 type StyleSpellcheckEnum string
@@ -133,8 +136,8 @@ const (
 type StyleTranslateEnum string
 
 const (
-	StyleTranslateEnumNo    StyleTranslateEnum = "no"
 	StyleTranslateEnumYes   StyleTranslateEnum = "yes"
+	StyleTranslateEnumNo    StyleTranslateEnum = "no"
 	StyleTranslateEnumEmpty StyleTranslateEnum = ""
 )
 

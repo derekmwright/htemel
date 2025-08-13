@@ -21,6 +21,7 @@ type ImgElement struct {
 // Spec Description: An img element represents an image.
 func Img() *ImgElement {
 	node := &ImgElement{
+
 		attributes: make(imgAttrs),
 	}
 
@@ -33,6 +34,8 @@ func ImgIf(condition bool) *ImgElement {
 	}
 
 	return &ImgElement{
+
+		attributes: make(imgAttrs),
 		skipRender: true,
 	}
 }
@@ -71,12 +74,12 @@ const (
 type ImgAutocapitalizeEnum string
 
 const (
-	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
-	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
 	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
 	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
+	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
+	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 )
 
 type ImgAutocorrectEnum string
@@ -90,9 +93,9 @@ const (
 type ImgContenteditableEnum string
 
 const (
-	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumPlaintextOnly ImgContenteditableEnum = "plaintext-only"
 	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
+	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumEmpty         ImgContenteditableEnum = ""
 )
 
@@ -107,20 +110,20 @@ const (
 type ImgDraggableEnum string
 
 const (
-	ImgDraggableEnumTrue  ImgDraggableEnum = "true"
 	ImgDraggableEnumFalse ImgDraggableEnum = "false"
+	ImgDraggableEnumTrue  ImgDraggableEnum = "true"
 )
 
 type ImgEnterkeyhintEnum string
 
 const (
-	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
-	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
 	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
 	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
+	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
+	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
 )
 
 type ImgHiddenEnum string

@@ -22,7 +22,8 @@ type UElement struct {
 // Spec Description: The u element represents a span of text with an unarticulated, though explicitly rendered, non-textual annotation, such as labeling the text as being a proper name in Chinese text (a Chinese proper name mark), or labeling the text as being misspelt.
 func U(children ...htemel.Node) *UElement {
 	node := &UElement{
-		children: children, attributes: make(uAttrs),
+		children:   children,
+		attributes: make(uAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func UIf(condition bool, children ...htemel.Node) *UElement {
 	}
 
 	return &UElement{
+		children:   children,
+		attributes: make(uAttrs),
 		skipRender: true,
 	}
 }
@@ -92,13 +95,13 @@ const (
 type UEnterkeyhintEnum string
 
 const (
+	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
+	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
 	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
 	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
 	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
-	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
-	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
 )
 
 type UHiddenEnum string
@@ -112,7 +115,6 @@ const (
 type UInputmodeEnum string
 
 const (
-	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
 	UInputmodeEnumEmail   UInputmodeEnum = "email"
 	UInputmodeEnumNone    UInputmodeEnum = "none"
 	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
@@ -120,6 +122,7 @@ const (
 	UInputmodeEnumTel     UInputmodeEnum = "tel"
 	UInputmodeEnumText    UInputmodeEnum = "text"
 	UInputmodeEnumUrl     UInputmodeEnum = "url"
+	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
 )
 
 type USpellcheckEnum string
@@ -133,8 +136,8 @@ const (
 type UTranslateEnum string
 
 const (
-	UTranslateEnumYes   UTranslateEnum = "yes"
 	UTranslateEnumNo    UTranslateEnum = "no"
+	UTranslateEnumYes   UTranslateEnum = "yes"
 	UTranslateEnumEmpty UTranslateEnum = ""
 )
 

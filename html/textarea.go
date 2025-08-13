@@ -22,7 +22,8 @@ type TextareaElement struct {
 // Spec Description: The textarea element represents a multiline plain text edit control for the element's raw value. The contents of the control represent the control's default value.
 func Textarea(children ...htemel.Node) *TextareaElement {
 	node := &TextareaElement{
-		children: children, attributes: make(textareaAttrs),
+		children:   children,
+		attributes: make(textareaAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func TextareaIf(condition bool, children ...htemel.Node) *TextareaElement {
 	}
 
 	return &TextareaElement{
+		children:   children,
+		attributes: make(textareaAttrs),
 		skipRender: true,
 	}
 }
@@ -56,12 +59,12 @@ const (
 type TextareaAutocapitalizeEnum string
 
 const (
-	TextareaAutocapitalizeEnumWords      TextareaAutocapitalizeEnum = "words"
-	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
 	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
 	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
 	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
 	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
+	TextareaAutocapitalizeEnumWords      TextareaAutocapitalizeEnum = "words"
+	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
 )
 
 type TextareaAutocorrectEnum string
@@ -99,34 +102,34 @@ const (
 type TextareaEnterkeyhintEnum string
 
 const (
-	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
 	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
 	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
 	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
 	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
 	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
 	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
+	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
 )
 
 type TextareaHiddenEnum string
 
 const (
-	TextareaHiddenEnumHidden     TextareaHiddenEnum = "hidden"
 	TextareaHiddenEnumUntilFound TextareaHiddenEnum = "until-found"
+	TextareaHiddenEnumHidden     TextareaHiddenEnum = "hidden"
 	TextareaHiddenEnumEmpty      TextareaHiddenEnum = ""
 )
 
 type TextareaInputmodeEnum string
 
 const (
-	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
-	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
 	TextareaInputmodeEnumSearch  TextareaInputmodeEnum = "search"
 	TextareaInputmodeEnumTel     TextareaInputmodeEnum = "tel"
 	TextareaInputmodeEnumText    TextareaInputmodeEnum = "text"
 	TextareaInputmodeEnumUrl     TextareaInputmodeEnum = "url"
 	TextareaInputmodeEnumDecimal TextareaInputmodeEnum = "decimal"
 	TextareaInputmodeEnumEmail   TextareaInputmodeEnum = "email"
+	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
+	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
 )
 
 type TextareaSpellcheckEnum string
@@ -148,8 +151,8 @@ const (
 type TextareaWritingsuggestionsEnum string
 
 const (
-	TextareaWritingsuggestionsEnumFalse TextareaWritingsuggestionsEnum = "false"
 	TextareaWritingsuggestionsEnumTrue  TextareaWritingsuggestionsEnum = "true"
+	TextareaWritingsuggestionsEnumFalse TextareaWritingsuggestionsEnum = "false"
 	TextareaWritingsuggestionsEnumEmpty TextareaWritingsuggestionsEnum = ""
 )
 

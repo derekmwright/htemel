@@ -22,7 +22,8 @@ type H4Element struct {
 // Spec Description: These elements represent headings for their sections.
 func H4(children ...htemel.Node) *H4Element {
 	node := &H4Element{
-		children: children, attributes: make(h4Attrs),
+		children:   children,
+		attributes: make(h4Attrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func H4If(condition bool, children ...htemel.Node) *H4Element {
 	}
 
 	return &H4Element{
+		children:   children,
+		attributes: make(h4Attrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func H4Ternary(condition bool, true htemel.Node, false htemel.Node) *H4Element {
 type H4AutocapitalizeEnum string
 
 const (
+	H4AutocapitalizeEnumCharacters H4AutocapitalizeEnum = "characters"
+	H4AutocapitalizeEnumNone       H4AutocapitalizeEnum = "none"
 	H4AutocapitalizeEnumOff        H4AutocapitalizeEnum = "off"
 	H4AutocapitalizeEnumOn         H4AutocapitalizeEnum = "on"
 	H4AutocapitalizeEnumSentences  H4AutocapitalizeEnum = "sentences"
 	H4AutocapitalizeEnumWords      H4AutocapitalizeEnum = "words"
-	H4AutocapitalizeEnumCharacters H4AutocapitalizeEnum = "characters"
-	H4AutocapitalizeEnumNone       H4AutocapitalizeEnum = "none"
 )
 
 type H4AutocorrectEnum string
@@ -92,13 +95,13 @@ const (
 type H4EnterkeyhintEnum string
 
 const (
-	H4EnterkeyhintEnumDone     H4EnterkeyhintEnum = "done"
-	H4EnterkeyhintEnumEnter    H4EnterkeyhintEnum = "enter"
-	H4EnterkeyhintEnumGo       H4EnterkeyhintEnum = "go"
 	H4EnterkeyhintEnumNext     H4EnterkeyhintEnum = "next"
 	H4EnterkeyhintEnumPrevious H4EnterkeyhintEnum = "previous"
 	H4EnterkeyhintEnumSearch   H4EnterkeyhintEnum = "search"
 	H4EnterkeyhintEnumSend     H4EnterkeyhintEnum = "send"
+	H4EnterkeyhintEnumDone     H4EnterkeyhintEnum = "done"
+	H4EnterkeyhintEnumEnter    H4EnterkeyhintEnum = "enter"
+	H4EnterkeyhintEnumGo       H4EnterkeyhintEnum = "go"
 )
 
 type H4HiddenEnum string
@@ -112,14 +115,14 @@ const (
 type H4InputmodeEnum string
 
 const (
-	H4InputmodeEnumDecimal H4InputmodeEnum = "decimal"
-	H4InputmodeEnumEmail   H4InputmodeEnum = "email"
-	H4InputmodeEnumNone    H4InputmodeEnum = "none"
 	H4InputmodeEnumNumeric H4InputmodeEnum = "numeric"
 	H4InputmodeEnumSearch  H4InputmodeEnum = "search"
 	H4InputmodeEnumTel     H4InputmodeEnum = "tel"
 	H4InputmodeEnumText    H4InputmodeEnum = "text"
 	H4InputmodeEnumUrl     H4InputmodeEnum = "url"
+	H4InputmodeEnumDecimal H4InputmodeEnum = "decimal"
+	H4InputmodeEnumEmail   H4InputmodeEnum = "email"
+	H4InputmodeEnumNone    H4InputmodeEnum = "none"
 )
 
 type H4SpellcheckEnum string

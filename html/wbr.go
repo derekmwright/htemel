@@ -21,6 +21,7 @@ type WbrElement struct {
 // Spec Description: The wbr element represents a line break opportunity.
 func Wbr() *WbrElement {
 	node := &WbrElement{
+
 		attributes: make(wbrAttrs),
 	}
 
@@ -33,6 +34,8 @@ func WbrIf(condition bool) *WbrElement {
 	}
 
 	return &WbrElement{
+
+		attributes: make(wbrAttrs),
 		skipRender: true,
 	}
 }
@@ -40,12 +43,12 @@ func WbrIf(condition bool) *WbrElement {
 type WbrAutocapitalizeEnum string
 
 const (
-	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
 	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
 	WbrAutocapitalizeEnumCharacters WbrAutocapitalizeEnum = "characters"
 	WbrAutocapitalizeEnumNone       WbrAutocapitalizeEnum = "none"
 	WbrAutocapitalizeEnumOff        WbrAutocapitalizeEnum = "off"
 	WbrAutocapitalizeEnumOn         WbrAutocapitalizeEnum = "on"
+	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
 )
 
 type WbrAutocorrectEnum string
@@ -59,9 +62,9 @@ const (
 type WbrContenteditableEnum string
 
 const (
-	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
 	WbrContenteditableEnumFalse         WbrContenteditableEnum = "false"
 	WbrContenteditableEnumPlaintextOnly WbrContenteditableEnum = "plaintext-only"
+	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
 	WbrContenteditableEnumEmpty         WbrContenteditableEnum = ""
 )
 
@@ -95,29 +98,29 @@ const (
 type WbrHiddenEnum string
 
 const (
-	WbrHiddenEnumHidden     WbrHiddenEnum = "hidden"
 	WbrHiddenEnumUntilFound WbrHiddenEnum = "until-found"
+	WbrHiddenEnumHidden     WbrHiddenEnum = "hidden"
 	WbrHiddenEnumEmpty      WbrHiddenEnum = ""
 )
 
 type WbrInputmodeEnum string
 
 const (
+	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
+	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
+	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
 	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
 	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
 	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
-	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
-	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
-	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
 )
 
 type WbrSpellcheckEnum string
 
 const (
-	WbrSpellcheckEnumFalse WbrSpellcheckEnum = "false"
 	WbrSpellcheckEnumTrue  WbrSpellcheckEnum = "true"
+	WbrSpellcheckEnumFalse WbrSpellcheckEnum = "false"
 	WbrSpellcheckEnumEmpty WbrSpellcheckEnum = ""
 )
 

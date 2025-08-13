@@ -21,6 +21,7 @@ type LinkElement struct {
 // Spec Description: The link element allows authors to link their document to other resources.
 func Link() *LinkElement {
 	node := &LinkElement{
+
 		attributes: make(linkAttrs),
 	}
 
@@ -33,6 +34,8 @@ func LinkIf(condition bool) *LinkElement {
 	}
 
 	return &LinkElement{
+
+		attributes: make(linkAttrs),
 		skipRender: true,
 	}
 }
@@ -40,8 +43,8 @@ func LinkIf(condition bool) *LinkElement {
 type LinkCrossoriginEnum string
 
 const (
-	LinkCrossoriginEnumUseCredentials LinkCrossoriginEnum = "use-credentials"
 	LinkCrossoriginEnumAnonymous      LinkCrossoriginEnum = "anonymous"
+	LinkCrossoriginEnumUseCredentials LinkCrossoriginEnum = "use-credentials"
 	LinkCrossoriginEnumEmpty          LinkCrossoriginEnum = ""
 )
 
@@ -54,27 +57,27 @@ const (
 type LinkFetchpriorityEnum string
 
 const (
+	LinkFetchpriorityEnumAuto LinkFetchpriorityEnum = "auto"
 	LinkFetchpriorityEnumHigh LinkFetchpriorityEnum = "high"
 	LinkFetchpriorityEnumLow  LinkFetchpriorityEnum = "low"
-	LinkFetchpriorityEnumAuto LinkFetchpriorityEnum = "auto"
 )
 
 type LinkAutocapitalizeEnum string
 
 const (
-	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
-	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
-	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
 	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
 	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
+	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
+	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
+	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 )
 
 type LinkAutocorrectEnum string
 
 const (
-	LinkAutocorrectEnumOff   LinkAutocorrectEnum = "off"
 	LinkAutocorrectEnumOn    LinkAutocorrectEnum = "on"
+	LinkAutocorrectEnumOff   LinkAutocorrectEnum = "off"
 	LinkAutocorrectEnumEmpty LinkAutocorrectEnum = ""
 )
 
@@ -98,41 +101,41 @@ const (
 type LinkDraggableEnum string
 
 const (
-	LinkDraggableEnumTrue  LinkDraggableEnum = "true"
 	LinkDraggableEnumFalse LinkDraggableEnum = "false"
+	LinkDraggableEnumTrue  LinkDraggableEnum = "true"
 )
 
 type LinkEnterkeyhintEnum string
 
 const (
+	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
 	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
 	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
 	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
-	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 )
 
 type LinkHiddenEnum string
 
 const (
-	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
 	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
+	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
 	LinkHiddenEnumEmpty      LinkHiddenEnum = ""
 )
 
 type LinkInputmodeEnum string
 
 const (
-	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
-	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
 	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
 	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
 	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
 	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
 	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
+	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
+	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 )
 
 type LinkSpellcheckEnum string

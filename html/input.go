@@ -21,6 +21,7 @@ type InputElement struct {
 // Spec Description: The input element represents a typed data field, usually with a form control to allow the user to edit the data.
 func Input() *InputElement {
 	node := &InputElement{
+
 		attributes: make(inputAttrs),
 	}
 
@@ -33,6 +34,8 @@ func InputIf(condition bool) *InputElement {
 	}
 
 	return &InputElement{
+
+		attributes: make(inputAttrs),
 		skipRender: true,
 	}
 }
@@ -47,55 +50,55 @@ const (
 type InputFormmethodEnum string
 
 const (
-	InputFormmethodEnumDialog InputFormmethodEnum = "dialog"
 	InputFormmethodEnumGet    InputFormmethodEnum = "get"
 	InputFormmethodEnumPost   InputFormmethodEnum = "post"
+	InputFormmethodEnumDialog InputFormmethodEnum = "dialog"
 )
 
 type InputPopovertargetactionEnum string
 
 const (
-	InputPopovertargetactionEnumToggle InputPopovertargetactionEnum = "toggle"
 	InputPopovertargetactionEnumHide   InputPopovertargetactionEnum = "hide"
 	InputPopovertargetactionEnumShow   InputPopovertargetactionEnum = "show"
+	InputPopovertargetactionEnumToggle InputPopovertargetactionEnum = "toggle"
 )
 
 type InputTypeEnum string
 
 const (
-	InputTypeEnumRange         InputTypeEnum = "range"
-	InputTypeEnumButton        InputTypeEnum = "button"
-	InputTypeEnumColor         InputTypeEnum = "color"
-	InputTypeEnumEmail         InputTypeEnum = "email"
-	InputTypeEnumHidden        InputTypeEnum = "hidden"
-	InputTypeEnumUrl           InputTypeEnum = "url"
 	InputTypeEnumDatetimeLocal InputTypeEnum = "datetime-local"
-	InputTypeEnumFile          InputTypeEnum = "file"
+	InputTypeEnumNumber        InputTypeEnum = "number"
 	InputTypeEnumPassword      InputTypeEnum = "password"
-	InputTypeEnumSearch        InputTypeEnum = "search"
-	InputTypeEnumText          InputTypeEnum = "text"
+	InputTypeEnumTime          InputTypeEnum = "time"
 	InputTypeEnumWeek          InputTypeEnum = "week"
+	InputTypeEnumColor         InputTypeEnum = "color"
 	InputTypeEnumDate          InputTypeEnum = "date"
+	InputTypeEnumHidden        InputTypeEnum = "hidden"
 	InputTypeEnumImage         InputTypeEnum = "image"
 	InputTypeEnumMonth         InputTypeEnum = "month"
-	InputTypeEnumNumber        InputTypeEnum = "number"
-	InputTypeEnumTel           InputTypeEnum = "tel"
-	InputTypeEnumTime          InputTypeEnum = "time"
-	InputTypeEnumCheckbox      InputTypeEnum = "checkbox"
 	InputTypeEnumRadio         InputTypeEnum = "radio"
-	InputTypeEnumReset         InputTypeEnum = "reset"
 	InputTypeEnumSubmit        InputTypeEnum = "submit"
+	InputTypeEnumTel           InputTypeEnum = "tel"
+	InputTypeEnumUrl           InputTypeEnum = "url"
+	InputTypeEnumButton        InputTypeEnum = "button"
+	InputTypeEnumEmail         InputTypeEnum = "email"
+	InputTypeEnumFile          InputTypeEnum = "file"
+	InputTypeEnumReset         InputTypeEnum = "reset"
+	InputTypeEnumSearch        InputTypeEnum = "search"
+	InputTypeEnumText          InputTypeEnum = "text"
+	InputTypeEnumRange         InputTypeEnum = "range"
+	InputTypeEnumCheckbox      InputTypeEnum = "checkbox"
 )
 
 type InputAutocapitalizeEnum string
 
 const (
+	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
+	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
 	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
 	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
 	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
-	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
-	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 )
 
 type InputAutocorrectEnum string
@@ -118,9 +121,9 @@ const (
 type InputDirEnum string
 
 const (
-	InputDirEnumAuto InputDirEnum = "auto"
 	InputDirEnumLtr  InputDirEnum = "ltr"
 	InputDirEnumRtl  InputDirEnum = "rtl"
+	InputDirEnumAuto InputDirEnum = "auto"
 )
 
 type InputDraggableEnum string
@@ -153,6 +156,7 @@ const (
 type InputInputmodeEnum string
 
 const (
+	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
 	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
 	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
 	InputInputmodeEnumText    InputInputmodeEnum = "text"
@@ -160,7 +164,6 @@ const (
 	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
 	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 	InputInputmodeEnumNone    InputInputmodeEnum = "none"
-	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
 )
 
 type InputSpellcheckEnum string
@@ -174,16 +177,16 @@ const (
 type InputTranslateEnum string
 
 const (
-	InputTranslateEnumYes   InputTranslateEnum = "yes"
 	InputTranslateEnumNo    InputTranslateEnum = "no"
+	InputTranslateEnumYes   InputTranslateEnum = "yes"
 	InputTranslateEnumEmpty InputTranslateEnum = ""
 )
 
 type InputWritingsuggestionsEnum string
 
 const (
-	InputWritingsuggestionsEnumTrue  InputWritingsuggestionsEnum = "true"
 	InputWritingsuggestionsEnumFalse InputWritingsuggestionsEnum = "false"
+	InputWritingsuggestionsEnumTrue  InputWritingsuggestionsEnum = "true"
 	InputWritingsuggestionsEnumEmpty InputWritingsuggestionsEnum = ""
 )
 

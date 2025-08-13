@@ -22,7 +22,8 @@ type CaptionElement struct {
 // Spec Description: The caption element represents the title of the table that is its parent, if it has a parent and that is a table element.
 func Caption(children ...htemel.Node) *CaptionElement {
 	node := &CaptionElement{
-		children: children, attributes: make(captionAttrs),
+		children:   children,
+		attributes: make(captionAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func CaptionIf(condition bool, children ...htemel.Node) *CaptionElement {
 	}
 
 	return &CaptionElement{
+		children:   children,
+		attributes: make(captionAttrs),
 		skipRender: true,
 	}
 }
@@ -49,19 +52,19 @@ func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Captio
 type CaptionAutocapitalizeEnum string
 
 const (
-	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
-	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
-	CaptionAutocapitalizeEnumOff        CaptionAutocapitalizeEnum = "off"
 	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
 	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
 	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
+	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
+	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
+	CaptionAutocapitalizeEnumOff        CaptionAutocapitalizeEnum = "off"
 )
 
 type CaptionAutocorrectEnum string
 
 const (
-	CaptionAutocorrectEnumOff   CaptionAutocorrectEnum = "off"
 	CaptionAutocorrectEnumOn    CaptionAutocorrectEnum = "on"
+	CaptionAutocorrectEnumOff   CaptionAutocorrectEnum = "off"
 	CaptionAutocorrectEnumEmpty CaptionAutocorrectEnum = ""
 )
 
@@ -112,14 +115,14 @@ const (
 type CaptionInputmodeEnum string
 
 const (
-	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
-	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
-	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
-	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
 	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
 	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
 	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
 	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
+	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
+	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
+	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
+	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
 )
 
 type CaptionSpellcheckEnum string
@@ -141,8 +144,8 @@ const (
 type CaptionWritingsuggestionsEnum string
 
 const (
-	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
 	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
+	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
 	CaptionWritingsuggestionsEnumEmpty CaptionWritingsuggestionsEnum = ""
 )
 

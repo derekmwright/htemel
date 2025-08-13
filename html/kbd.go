@@ -22,7 +22,8 @@ type KbdElement struct {
 // Spec Description: The kbd element represents user input (typically keyboard input, although it may also be used to represent other input, such as voice commands).
 func Kbd(children ...htemel.Node) *KbdElement {
 	node := &KbdElement{
-		children: children, attributes: make(kbdAttrs),
+		children:   children,
+		attributes: make(kbdAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func KbdIf(condition bool, children ...htemel.Node) *KbdElement {
 	}
 
 	return &KbdElement{
+		children:   children,
+		attributes: make(kbdAttrs),
 		skipRender: true,
 	}
 }
@@ -49,19 +52,19 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 type KbdAutocapitalizeEnum string
 
 const (
-	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
-	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
 	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
 	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
 	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
+	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
+	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
 )
 
 type KbdAutocorrectEnum string
 
 const (
-	KbdAutocorrectEnumOff   KbdAutocorrectEnum = "off"
 	KbdAutocorrectEnumOn    KbdAutocorrectEnum = "on"
+	KbdAutocorrectEnumOff   KbdAutocorrectEnum = "off"
 	KbdAutocorrectEnumEmpty KbdAutocorrectEnum = ""
 )
 
@@ -77,9 +80,9 @@ const (
 type KbdDirEnum string
 
 const (
+	KbdDirEnumRtl  KbdDirEnum = "rtl"
 	KbdDirEnumAuto KbdDirEnum = "auto"
 	KbdDirEnumLtr  KbdDirEnum = "ltr"
-	KbdDirEnumRtl  KbdDirEnum = "rtl"
 )
 
 type KbdDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type KbdEnterkeyhintEnum string
 
 const (
-	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
-	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
-	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
 	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
 	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
 	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
+	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
+	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
+	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 )
 
 type KbdHiddenEnum string

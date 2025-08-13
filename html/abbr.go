@@ -22,7 +22,8 @@ type AbbrElement struct {
 // Spec Description: The abbr element represents an abbreviation or acronym, optionally with its expansion. The title attribute may be used to provide an expansion of the abbreviation. The attribute, if specified, must contain an expansion of the abbreviation, and nothing else.
 func Abbr(children ...htemel.Node) *AbbrElement {
 	node := &AbbrElement{
-		children: children, attributes: make(abbrAttrs),
+		children:   children,
+		attributes: make(abbrAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func AbbrIf(condition bool, children ...htemel.Node) *AbbrElement {
 	}
 
 	return &AbbrElement{
+		children:   children,
+		attributes: make(abbrAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrEleme
 type AbbrAutocapitalizeEnum string
 
 const (
-	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
 	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
 	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
 	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
 	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
 	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
+	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
 )
 
 type AbbrAutocorrectEnum string
@@ -68,18 +71,18 @@ const (
 type AbbrContenteditableEnum string
 
 const (
+	AbbrContenteditableEnumFalse         AbbrContenteditableEnum = "false"
 	AbbrContenteditableEnumPlaintextOnly AbbrContenteditableEnum = "plaintext-only"
 	AbbrContenteditableEnumTrue          AbbrContenteditableEnum = "true"
-	AbbrContenteditableEnumFalse         AbbrContenteditableEnum = "false"
 	AbbrContenteditableEnumEmpty         AbbrContenteditableEnum = ""
 )
 
 type AbbrDirEnum string
 
 const (
+	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
 	AbbrDirEnumAuto AbbrDirEnum = "auto"
 	AbbrDirEnumLtr  AbbrDirEnum = "ltr"
-	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
 )
 
 type AbbrDraggableEnum string
@@ -92,27 +95,26 @@ const (
 type AbbrEnterkeyhintEnum string
 
 const (
+	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
 	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
 	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 	AbbrEnterkeyhintEnumEnter    AbbrEnterkeyhintEnum = "enter"
 	AbbrEnterkeyhintEnumGo       AbbrEnterkeyhintEnum = "go"
 	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
 	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
-	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
 )
 
 type AbbrHiddenEnum string
 
 const (
-	AbbrHiddenEnumUntilFound AbbrHiddenEnum = "until-found"
 	AbbrHiddenEnumHidden     AbbrHiddenEnum = "hidden"
+	AbbrHiddenEnumUntilFound AbbrHiddenEnum = "until-found"
 	AbbrHiddenEnumEmpty      AbbrHiddenEnum = ""
 )
 
 type AbbrInputmodeEnum string
 
 const (
-	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
 	AbbrInputmodeEnumDecimal AbbrInputmodeEnum = "decimal"
 	AbbrInputmodeEnumEmail   AbbrInputmodeEnum = "email"
 	AbbrInputmodeEnumNone    AbbrInputmodeEnum = "none"
@@ -120,6 +122,7 @@ const (
 	AbbrInputmodeEnumSearch  AbbrInputmodeEnum = "search"
 	AbbrInputmodeEnumTel     AbbrInputmodeEnum = "tel"
 	AbbrInputmodeEnumText    AbbrInputmodeEnum = "text"
+	AbbrInputmodeEnumUrl     AbbrInputmodeEnum = "url"
 )
 
 type AbbrSpellcheckEnum string
@@ -141,8 +144,8 @@ const (
 type AbbrWritingsuggestionsEnum string
 
 const (
-	AbbrWritingsuggestionsEnumFalse AbbrWritingsuggestionsEnum = "false"
 	AbbrWritingsuggestionsEnumTrue  AbbrWritingsuggestionsEnum = "true"
+	AbbrWritingsuggestionsEnumFalse AbbrWritingsuggestionsEnum = "false"
 	AbbrWritingsuggestionsEnumEmpty AbbrWritingsuggestionsEnum = ""
 )
 

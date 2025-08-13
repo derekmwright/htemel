@@ -22,7 +22,8 @@ type MapElement struct {
 // Spec Description: The map element, in conjunction with an img element and any area element descendants, defines an image map. The element represents its children.
 func Map(children ...htemel.Node) *MapElement {
 	node := &MapElement{
-		children: children, attributes: make(mapAttrs),
+		children:   children,
+		attributes: make(mapAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func MapIf(condition bool, children ...htemel.Node) *MapElement {
 	}
 
 	return &MapElement{
+		children:   children,
+		attributes: make(mapAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func MapTernary(condition bool, true htemel.Node, false htemel.Node) *MapElement
 type MapAutocapitalizeEnum string
 
 const (
-	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 	MapAutocapitalizeEnumCharacters MapAutocapitalizeEnum = "characters"
 	MapAutocapitalizeEnumNone       MapAutocapitalizeEnum = "none"
 	MapAutocapitalizeEnumOff        MapAutocapitalizeEnum = "off"
 	MapAutocapitalizeEnumOn         MapAutocapitalizeEnum = "on"
 	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
+	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 )
 
 type MapAutocorrectEnum string
@@ -68,37 +71,37 @@ const (
 type MapContenteditableEnum string
 
 const (
+	MapContenteditableEnumFalse         MapContenteditableEnum = "false"
 	MapContenteditableEnumPlaintextOnly MapContenteditableEnum = "plaintext-only"
 	MapContenteditableEnumTrue          MapContenteditableEnum = "true"
-	MapContenteditableEnumFalse         MapContenteditableEnum = "false"
 	MapContenteditableEnumEmpty         MapContenteditableEnum = ""
 )
 
 type MapDirEnum string
 
 const (
-	MapDirEnumRtl  MapDirEnum = "rtl"
 	MapDirEnumAuto MapDirEnum = "auto"
 	MapDirEnumLtr  MapDirEnum = "ltr"
+	MapDirEnumRtl  MapDirEnum = "rtl"
 )
 
 type MapDraggableEnum string
 
 const (
-	MapDraggableEnumFalse MapDraggableEnum = "false"
 	MapDraggableEnumTrue  MapDraggableEnum = "true"
+	MapDraggableEnumFalse MapDraggableEnum = "false"
 )
 
 type MapEnterkeyhintEnum string
 
 const (
-	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
 	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 	MapEnterkeyhintEnumSend     MapEnterkeyhintEnum = "send"
 	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
 	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
 	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
 	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
+	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
 )
 
 type MapHiddenEnum string
@@ -112,7 +115,6 @@ const (
 type MapInputmodeEnum string
 
 const (
-	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
 	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
 	MapInputmodeEnumText    MapInputmodeEnum = "text"
 	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
@@ -120,6 +122,7 @@ const (
 	MapInputmodeEnumEmail   MapInputmodeEnum = "email"
 	MapInputmodeEnumNone    MapInputmodeEnum = "none"
 	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
+	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
 )
 
 type MapSpellcheckEnum string
@@ -133,8 +136,8 @@ const (
 type MapTranslateEnum string
 
 const (
-	MapTranslateEnumYes   MapTranslateEnum = "yes"
 	MapTranslateEnumNo    MapTranslateEnum = "no"
+	MapTranslateEnumYes   MapTranslateEnum = "yes"
 	MapTranslateEnumEmpty MapTranslateEnum = ""
 )
 

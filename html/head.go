@@ -22,7 +22,8 @@ type HeadElement struct {
 // Spec Description: The head element represents a collection of metadata for the Document.
 func Head(children ...htemel.Node) *HeadElement {
 	node := &HeadElement{
-		children: children, attributes: make(headAttrs),
+		children:   children,
+		attributes: make(headAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func HeadIf(condition bool, children ...htemel.Node) *HeadElement {
 	}
 
 	return &HeadElement{
+		children:   children,
+		attributes: make(headAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func HeadTernary(condition bool, true htemel.Node, false htemel.Node) *HeadEleme
 type HeadAutocapitalizeEnum string
 
 const (
+	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
+	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 	HeadAutocapitalizeEnumCharacters HeadAutocapitalizeEnum = "characters"
 	HeadAutocapitalizeEnumNone       HeadAutocapitalizeEnum = "none"
 	HeadAutocapitalizeEnumOff        HeadAutocapitalizeEnum = "off"
 	HeadAutocapitalizeEnumOn         HeadAutocapitalizeEnum = "on"
-	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
-	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 )
 
 type HeadAutocorrectEnum string
@@ -68,18 +71,18 @@ const (
 type HeadContenteditableEnum string
 
 const (
-	HeadContenteditableEnumTrue          HeadContenteditableEnum = "true"
 	HeadContenteditableEnumFalse         HeadContenteditableEnum = "false"
 	HeadContenteditableEnumPlaintextOnly HeadContenteditableEnum = "plaintext-only"
+	HeadContenteditableEnumTrue          HeadContenteditableEnum = "true"
 	HeadContenteditableEnumEmpty         HeadContenteditableEnum = ""
 )
 
 type HeadDirEnum string
 
 const (
+	HeadDirEnumRtl  HeadDirEnum = "rtl"
 	HeadDirEnumAuto HeadDirEnum = "auto"
 	HeadDirEnumLtr  HeadDirEnum = "ltr"
-	HeadDirEnumRtl  HeadDirEnum = "rtl"
 )
 
 type HeadDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type HeadEnterkeyhintEnum string
 
 const (
+	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
+	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
+	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
 	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
 	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
-	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
-	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
-	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 )
 
 type HeadHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type HeadInputmodeEnum string
 
 const (
+	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
+	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 	HeadInputmodeEnumText    HeadInputmodeEnum = "text"
 	HeadInputmodeEnumUrl     HeadInputmodeEnum = "url"
 	HeadInputmodeEnumDecimal HeadInputmodeEnum = "decimal"
 	HeadInputmodeEnumEmail   HeadInputmodeEnum = "email"
 	HeadInputmodeEnumNone    HeadInputmodeEnum = "none"
 	HeadInputmodeEnumNumeric HeadInputmodeEnum = "numeric"
-	HeadInputmodeEnumSearch  HeadInputmodeEnum = "search"
-	HeadInputmodeEnumTel     HeadInputmodeEnum = "tel"
 )
 
 type HeadSpellcheckEnum string
@@ -133,8 +136,8 @@ const (
 type HeadTranslateEnum string
 
 const (
-	HeadTranslateEnumNo    HeadTranslateEnum = "no"
 	HeadTranslateEnumYes   HeadTranslateEnum = "yes"
+	HeadTranslateEnumNo    HeadTranslateEnum = "no"
 	HeadTranslateEnumEmpty HeadTranslateEnum = ""
 )
 

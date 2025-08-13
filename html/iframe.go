@@ -22,7 +22,8 @@ type IframeElement struct {
 // Spec Description: The iframe element represents its content navigable.
 func Iframe(children ...htemel.Node) *IframeElement {
 	node := &IframeElement{
-		children: children, attributes: make(iframeAttrs),
+		children:   children,
+		attributes: make(iframeAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func IframeIf(condition bool, children ...htemel.Node) *IframeElement {
 	}
 
 	return &IframeElement{
+		children:   children,
+		attributes: make(iframeAttrs),
 		skipRender: true,
 	}
 }
@@ -56,12 +59,12 @@ const (
 type IframeAutocapitalizeEnum string
 
 const (
-	IframeAutocapitalizeEnumOn         IframeAutocapitalizeEnum = "on"
-	IframeAutocapitalizeEnumSentences  IframeAutocapitalizeEnum = "sentences"
-	IframeAutocapitalizeEnumWords      IframeAutocapitalizeEnum = "words"
 	IframeAutocapitalizeEnumCharacters IframeAutocapitalizeEnum = "characters"
 	IframeAutocapitalizeEnumNone       IframeAutocapitalizeEnum = "none"
 	IframeAutocapitalizeEnumOff        IframeAutocapitalizeEnum = "off"
+	IframeAutocapitalizeEnumOn         IframeAutocapitalizeEnum = "on"
+	IframeAutocapitalizeEnumSentences  IframeAutocapitalizeEnum = "sentences"
+	IframeAutocapitalizeEnumWords      IframeAutocapitalizeEnum = "words"
 )
 
 type IframeAutocorrectEnum string
@@ -75,9 +78,9 @@ const (
 type IframeContenteditableEnum string
 
 const (
+	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
 	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
 	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
-	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
 	IframeContenteditableEnumEmpty         IframeContenteditableEnum = ""
 )
 
@@ -99,13 +102,13 @@ const (
 type IframeEnterkeyhintEnum string
 
 const (
-	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
 	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
 	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
 	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
 	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
 	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
+	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
 )
 
 type IframeHiddenEnum string
@@ -119,14 +122,14 @@ const (
 type IframeInputmodeEnum string
 
 const (
-	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
-	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
-	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
-	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
 	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
 	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
 	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
+	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
+	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
+	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
+	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
 )
 
 type IframeSpellcheckEnum string

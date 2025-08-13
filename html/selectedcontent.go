@@ -22,7 +22,8 @@ type SelectedcontentElement struct {
 // Spec Description: The selectedcontent element reflects the contents of a select element's currently selected option element. selectedcontent elements can be used to declaratively show the selected option element's contents within the select element's first child button element.
 func Selectedcontent(children ...htemel.Node) *SelectedcontentElement {
 	node := &SelectedcontentElement{
-		children: children, attributes: make(selectedcontentAttrs),
+		children:   children,
+		attributes: make(selectedcontentAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func SelectedcontentIf(condition bool, children ...htemel.Node) *Selectedcontent
 	}
 
 	return &SelectedcontentElement{
+		children:   children,
+		attributes: make(selectedcontentAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node)
 type SelectedcontentAutocapitalizeEnum string
 
 const (
-	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
-	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
-	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
 	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
 	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
+	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
+	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
+	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
 )
 
 type SelectedcontentAutocorrectEnum string
@@ -85,20 +88,20 @@ const (
 type SelectedcontentDraggableEnum string
 
 const (
-	SelectedcontentDraggableEnumTrue  SelectedcontentDraggableEnum = "true"
 	SelectedcontentDraggableEnumFalse SelectedcontentDraggableEnum = "false"
+	SelectedcontentDraggableEnumTrue  SelectedcontentDraggableEnum = "true"
 )
 
 type SelectedcontentEnterkeyhintEnum string
 
 const (
-	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
-	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
-	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
 	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
 	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
+	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
+	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
+	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 )
 
 type SelectedcontentHiddenEnum string
@@ -112,21 +115,21 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
-	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
-	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
-	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
 	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
 	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
 	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
+	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
+	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
+	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
 )
 
 type SelectedcontentSpellcheckEnum string
 
 const (
-	SelectedcontentSpellcheckEnumTrue  SelectedcontentSpellcheckEnum = "true"
 	SelectedcontentSpellcheckEnumFalse SelectedcontentSpellcheckEnum = "false"
+	SelectedcontentSpellcheckEnumTrue  SelectedcontentSpellcheckEnum = "true"
 	SelectedcontentSpellcheckEnumEmpty SelectedcontentSpellcheckEnum = ""
 )
 
@@ -141,8 +144,8 @@ const (
 type SelectedcontentWritingsuggestionsEnum string
 
 const (
-	SelectedcontentWritingsuggestionsEnumTrue  SelectedcontentWritingsuggestionsEnum = "true"
 	SelectedcontentWritingsuggestionsEnumFalse SelectedcontentWritingsuggestionsEnum = "false"
+	SelectedcontentWritingsuggestionsEnumTrue  SelectedcontentWritingsuggestionsEnum = "true"
 	SelectedcontentWritingsuggestionsEnumEmpty SelectedcontentWritingsuggestionsEnum = ""
 )
 

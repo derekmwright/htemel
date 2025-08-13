@@ -22,7 +22,8 @@ type ArticleElement struct {
 // Spec Description: The article element represents a complete, or self-contained, composition in a document, page, application, or site and that is, in principle, independently distributable or reusable, e.g. in syndication. This could be a forum post, a magazine or newspaper article, a blog entry, a user-submitted comment, an interactive widget or gadget, or any other independent item of content.
 func Article(children ...htemel.Node) *ArticleElement {
 	node := &ArticleElement{
-		children: children, attributes: make(articleAttrs),
+		children:   children,
+		attributes: make(articleAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func ArticleIf(condition bool, children ...htemel.Node) *ArticleElement {
 	}
 
 	return &ArticleElement{
+		children:   children,
+		attributes: make(articleAttrs),
 		skipRender: true,
 	}
 }
@@ -49,28 +52,28 @@ func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *Articl
 type ArticleAutocapitalizeEnum string
 
 const (
-	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
-	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
-	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
 	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
+	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
+	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
+	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 )
 
 type ArticleAutocorrectEnum string
 
 const (
-	ArticleAutocorrectEnumOn    ArticleAutocorrectEnum = "on"
 	ArticleAutocorrectEnumOff   ArticleAutocorrectEnum = "off"
+	ArticleAutocorrectEnumOn    ArticleAutocorrectEnum = "on"
 	ArticleAutocorrectEnumEmpty ArticleAutocorrectEnum = ""
 )
 
 type ArticleContenteditableEnum string
 
 const (
-	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
 	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
+	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumEmpty         ArticleContenteditableEnum = ""
 )
 
@@ -112,14 +115,14 @@ const (
 type ArticleInputmodeEnum string
 
 const (
-	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
-	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
-	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
 	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
 	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
 	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
 	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
 	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
+	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
+	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
+	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
 )
 
 type ArticleSpellcheckEnum string

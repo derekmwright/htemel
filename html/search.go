@@ -22,7 +22,8 @@ type SearchElement struct {
 // Spec Description: The search element represents a part of a document or application that contains a set of form controls or other content related to performing a search or filtering operation. This could be a search of the web site or application; a way of searching or filtering search results on the current web page; or a global or Internet-wide search function.
 func Search(children ...htemel.Node) *SearchElement {
 	node := &SearchElement{
-		children: children, attributes: make(searchAttrs),
+		children:   children,
+		attributes: make(searchAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func SearchIf(condition bool, children ...htemel.Node) *SearchElement {
 	}
 
 	return &SearchElement{
+		children:   children,
+		attributes: make(searchAttrs),
 		skipRender: true,
 	}
 }
@@ -49,19 +52,19 @@ func SearchTernary(condition bool, true htemel.Node, false htemel.Node) *SearchE
 type SearchAutocapitalizeEnum string
 
 const (
+	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
 	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
 	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
 	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
 	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
 	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
-	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
 )
 
 type SearchAutocorrectEnum string
 
 const (
-	SearchAutocorrectEnumOff   SearchAutocorrectEnum = "off"
 	SearchAutocorrectEnumOn    SearchAutocorrectEnum = "on"
+	SearchAutocorrectEnumOff   SearchAutocorrectEnum = "off"
 	SearchAutocorrectEnumEmpty SearchAutocorrectEnum = ""
 )
 
@@ -112,14 +115,14 @@ const (
 type SearchInputmodeEnum string
 
 const (
+	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
+	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
+	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
 	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
 	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
 	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
 	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
 	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
-	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
-	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
-	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
 )
 
 type SearchSpellcheckEnum string
@@ -133,8 +136,8 @@ const (
 type SearchTranslateEnum string
 
 const (
-	SearchTranslateEnumYes   SearchTranslateEnum = "yes"
 	SearchTranslateEnumNo    SearchTranslateEnum = "no"
+	SearchTranslateEnumYes   SearchTranslateEnum = "yes"
 	SearchTranslateEnumEmpty SearchTranslateEnum = ""
 )
 

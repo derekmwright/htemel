@@ -21,6 +21,7 @@ type HrElement struct {
 // Spec Description: The hr element represents a paragraph-level thematic break, e.g., a scene change in a story, or a transition to another topic within a section of a reference book; alternatively, it represents a separator between a set of options of a select element.
 func Hr() *HrElement {
 	node := &HrElement{
+
 		attributes: make(hrAttrs),
 	}
 
@@ -33,6 +34,8 @@ func HrIf(condition bool) *HrElement {
 	}
 
 	return &HrElement{
+
+		attributes: make(hrAttrs),
 		skipRender: true,
 	}
 }
@@ -40,12 +43,12 @@ func HrIf(condition bool) *HrElement {
 type HrAutocapitalizeEnum string
 
 const (
-	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
-	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
 	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
 	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
+	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
+	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 )
 
 type HrAutocorrectEnum string
@@ -76,20 +79,20 @@ const (
 type HrDraggableEnum string
 
 const (
-	HrDraggableEnumTrue  HrDraggableEnum = "true"
 	HrDraggableEnumFalse HrDraggableEnum = "false"
+	HrDraggableEnumTrue  HrDraggableEnum = "true"
 )
 
 type HrEnterkeyhintEnum string
 
 const (
+	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
+	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
+	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
 	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
 	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
 	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
 	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
-	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
-	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
-	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
 )
 
 type HrHiddenEnum string
@@ -103,14 +106,14 @@ const (
 type HrInputmodeEnum string
 
 const (
+	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
+	HrInputmodeEnumNone    HrInputmodeEnum = "none"
 	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
 	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
 	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
 	HrInputmodeEnumText    HrInputmodeEnum = "text"
 	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
 	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
-	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
-	HrInputmodeEnumNone    HrInputmodeEnum = "none"
 )
 
 type HrSpellcheckEnum string

@@ -22,7 +22,8 @@ type MeterElement struct {
 // Spec Description: The meter element represents a scalar measurement within a known range, or a fractional value; for example disk usage, the relevance of a query result, or the fraction of a voting population to have selected a particular candidate.
 func Meter(children ...htemel.Node) *MeterElement {
 	node := &MeterElement{
-		children: children, attributes: make(meterAttrs),
+		children:   children,
+		attributes: make(meterAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func MeterIf(condition bool, children ...htemel.Node) *MeterElement {
 	}
 
 	return &MeterElement{
+		children:   children,
+		attributes: make(meterAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func MeterTernary(condition bool, true htemel.Node, false htemel.Node) *MeterEle
 type MeterAutocapitalizeEnum string
 
 const (
-	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
 	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
 	MeterAutocapitalizeEnumNone       MeterAutocapitalizeEnum = "none"
 	MeterAutocapitalizeEnumOff        MeterAutocapitalizeEnum = "off"
 	MeterAutocapitalizeEnumOn         MeterAutocapitalizeEnum = "on"
 	MeterAutocapitalizeEnumSentences  MeterAutocapitalizeEnum = "sentences"
+	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
 )
 
 type MeterAutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type MeterDirEnum string
 
 const (
-	MeterDirEnumRtl  MeterDirEnum = "rtl"
 	MeterDirEnumAuto MeterDirEnum = "auto"
 	MeterDirEnumLtr  MeterDirEnum = "ltr"
+	MeterDirEnumRtl  MeterDirEnum = "rtl"
 )
 
 type MeterDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type MeterEnterkeyhintEnum string
 
 const (
+	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
+	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
+	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 	MeterEnterkeyhintEnumDone     MeterEnterkeyhintEnum = "done"
 	MeterEnterkeyhintEnumEnter    MeterEnterkeyhintEnum = "enter"
 	MeterEnterkeyhintEnumGo       MeterEnterkeyhintEnum = "go"
 	MeterEnterkeyhintEnumNext     MeterEnterkeyhintEnum = "next"
-	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
-	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
-	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 )
 
 type MeterHiddenEnum string

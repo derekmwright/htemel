@@ -22,7 +22,8 @@ type FigureElement struct {
 // Spec Description: The figure element represents some flow content, optionally with a caption, that is self-contained (like a complete sentence) and is typically referenced as a single unit from the main flow of the document.
 func Figure(children ...htemel.Node) *FigureElement {
 	node := &FigureElement{
-		children: children, attributes: make(figureAttrs),
+		children:   children,
+		attributes: make(figureAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func FigureIf(condition bool, children ...htemel.Node) *FigureElement {
 	}
 
 	return &FigureElement{
+		children:   children,
+		attributes: make(figureAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func FigureTernary(condition bool, true htemel.Node, false htemel.Node) *FigureE
 type FigureAutocapitalizeEnum string
 
 const (
-	FigureAutocapitalizeEnumOff        FigureAutocapitalizeEnum = "off"
-	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
-	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
 	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
 	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
 	FigureAutocapitalizeEnumNone       FigureAutocapitalizeEnum = "none"
+	FigureAutocapitalizeEnumOff        FigureAutocapitalizeEnum = "off"
+	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
+	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
 )
 
 type FigureAutocorrectEnum string
@@ -92,13 +95,13 @@ const (
 type FigureEnterkeyhintEnum string
 
 const (
-	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
-	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
-	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
 	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
 	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
 	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
 	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
+	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
+	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
+	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
 )
 
 type FigureHiddenEnum string
@@ -112,37 +115,37 @@ const (
 type FigureInputmodeEnum string
 
 const (
+	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
+	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
 	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
 	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
 	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
 	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
 	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
 	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
-	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
-	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
 )
 
 type FigureSpellcheckEnum string
 
 const (
-	FigureSpellcheckEnumTrue  FigureSpellcheckEnum = "true"
 	FigureSpellcheckEnumFalse FigureSpellcheckEnum = "false"
+	FigureSpellcheckEnumTrue  FigureSpellcheckEnum = "true"
 	FigureSpellcheckEnumEmpty FigureSpellcheckEnum = ""
 )
 
 type FigureTranslateEnum string
 
 const (
-	FigureTranslateEnumNo    FigureTranslateEnum = "no"
 	FigureTranslateEnumYes   FigureTranslateEnum = "yes"
+	FigureTranslateEnumNo    FigureTranslateEnum = "no"
 	FigureTranslateEnumEmpty FigureTranslateEnum = ""
 )
 
 type FigureWritingsuggestionsEnum string
 
 const (
-	FigureWritingsuggestionsEnumFalse FigureWritingsuggestionsEnum = "false"
 	FigureWritingsuggestionsEnumTrue  FigureWritingsuggestionsEnum = "true"
+	FigureWritingsuggestionsEnumFalse FigureWritingsuggestionsEnum = "false"
 	FigureWritingsuggestionsEnumEmpty FigureWritingsuggestionsEnum = ""
 )
 

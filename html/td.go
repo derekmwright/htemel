@@ -22,7 +22,8 @@ type TdElement struct {
 // Spec Description: The td element represents a data cell in a table.
 func Td(children ...htemel.Node) *TdElement {
 	node := &TdElement{
-		children: children, attributes: make(tdAttrs),
+		children:   children,
+		attributes: make(tdAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func TdIf(condition bool, children ...htemel.Node) *TdElement {
 	}
 
 	return &TdElement{
+		children:   children,
+		attributes: make(tdAttrs),
 		skipRender: true,
 	}
 }
@@ -68,18 +71,18 @@ const (
 type TdContenteditableEnum string
 
 const (
+	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
 	TdContenteditableEnumFalse         TdContenteditableEnum = "false"
 	TdContenteditableEnumPlaintextOnly TdContenteditableEnum = "plaintext-only"
-	TdContenteditableEnumTrue          TdContenteditableEnum = "true"
 	TdContenteditableEnumEmpty         TdContenteditableEnum = ""
 )
 
 type TdDirEnum string
 
 const (
-	TdDirEnumAuto TdDirEnum = "auto"
 	TdDirEnumLtr  TdDirEnum = "ltr"
 	TdDirEnumRtl  TdDirEnum = "rtl"
+	TdDirEnumAuto TdDirEnum = "auto"
 )
 
 type TdDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type TdEnterkeyhintEnum string
 
 const (
-	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
 	TdEnterkeyhintEnumEnter    TdEnterkeyhintEnum = "enter"
 	TdEnterkeyhintEnumGo       TdEnterkeyhintEnum = "go"
 	TdEnterkeyhintEnumNext     TdEnterkeyhintEnum = "next"
 	TdEnterkeyhintEnumPrevious TdEnterkeyhintEnum = "previous"
 	TdEnterkeyhintEnumSearch   TdEnterkeyhintEnum = "search"
 	TdEnterkeyhintEnumSend     TdEnterkeyhintEnum = "send"
+	TdEnterkeyhintEnumDone     TdEnterkeyhintEnum = "done"
 )
 
 type TdHiddenEnum string
@@ -112,7 +115,6 @@ const (
 type TdInputmodeEnum string
 
 const (
-	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
 	TdInputmodeEnumTel     TdInputmodeEnum = "tel"
 	TdInputmodeEnumText    TdInputmodeEnum = "text"
 	TdInputmodeEnumUrl     TdInputmodeEnum = "url"
@@ -120,6 +122,7 @@ const (
 	TdInputmodeEnumEmail   TdInputmodeEnum = "email"
 	TdInputmodeEnumNone    TdInputmodeEnum = "none"
 	TdInputmodeEnumNumeric TdInputmodeEnum = "numeric"
+	TdInputmodeEnumSearch  TdInputmodeEnum = "search"
 )
 
 type TdSpellcheckEnum string

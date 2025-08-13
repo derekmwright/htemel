@@ -22,7 +22,8 @@ type DtElement struct {
 // Spec Description: The dt element represents the term, or name, part of a term-description group in a description list (dl element).
 func Dt(children ...htemel.Node) *DtElement {
 	node := &DtElement{
-		children: children, attributes: make(dtAttrs),
+		children:   children,
+		attributes: make(dtAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func DtIf(condition bool, children ...htemel.Node) *DtElement {
 	}
 
 	return &DtElement{
+		children:   children,
+		attributes: make(dtAttrs),
 		skipRender: true,
 	}
 }
@@ -49,19 +52,19 @@ func DtTernary(condition bool, true htemel.Node, false htemel.Node) *DtElement {
 type DtAutocapitalizeEnum string
 
 const (
-	DtAutocapitalizeEnumSentences  DtAutocapitalizeEnum = "sentences"
-	DtAutocapitalizeEnumWords      DtAutocapitalizeEnum = "words"
 	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
 	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
 	DtAutocapitalizeEnumOff        DtAutocapitalizeEnum = "off"
 	DtAutocapitalizeEnumOn         DtAutocapitalizeEnum = "on"
+	DtAutocapitalizeEnumSentences  DtAutocapitalizeEnum = "sentences"
+	DtAutocapitalizeEnumWords      DtAutocapitalizeEnum = "words"
 )
 
 type DtAutocorrectEnum string
 
 const (
-	DtAutocorrectEnumOff   DtAutocorrectEnum = "off"
 	DtAutocorrectEnumOn    DtAutocorrectEnum = "on"
+	DtAutocorrectEnumOff   DtAutocorrectEnum = "off"
 	DtAutocorrectEnumEmpty DtAutocorrectEnum = ""
 )
 
@@ -77,9 +80,9 @@ const (
 type DtDirEnum string
 
 const (
-	DtDirEnumRtl  DtDirEnum = "rtl"
 	DtDirEnumAuto DtDirEnum = "auto"
 	DtDirEnumLtr  DtDirEnum = "ltr"
+	DtDirEnumRtl  DtDirEnum = "rtl"
 )
 
 type DtDraggableEnum string
@@ -92,34 +95,34 @@ const (
 type DtEnterkeyhintEnum string
 
 const (
+	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
+	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
+	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
 	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
 	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
-	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
-	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
-	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 )
 
 type DtHiddenEnum string
 
 const (
-	DtHiddenEnumHidden     DtHiddenEnum = "hidden"
 	DtHiddenEnumUntilFound DtHiddenEnum = "until-found"
+	DtHiddenEnumHidden     DtHiddenEnum = "hidden"
 	DtHiddenEnumEmpty      DtHiddenEnum = ""
 )
 
 type DtInputmodeEnum string
 
 const (
+	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
+	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
 	DtInputmodeEnumNone    DtInputmodeEnum = "none"
 	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
 	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
 	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 	DtInputmodeEnumText    DtInputmodeEnum = "text"
-	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
-	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 )
 
 type DtSpellcheckEnum string

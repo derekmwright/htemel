@@ -22,7 +22,8 @@ type H1Element struct {
 // Spec Description: These elements represent headings for their sections.
 func H1(children ...htemel.Node) *H1Element {
 	node := &H1Element{
-		children: children, attributes: make(h1Attrs),
+		children:   children,
+		attributes: make(h1Attrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func H1If(condition bool, children ...htemel.Node) *H1Element {
 	}
 
 	return &H1Element{
+		children:   children,
+		attributes: make(h1Attrs),
 		skipRender: true,
 	}
 }
@@ -68,25 +71,25 @@ const (
 type H1ContenteditableEnum string
 
 const (
+	H1ContenteditableEnumFalse         H1ContenteditableEnum = "false"
 	H1ContenteditableEnumPlaintextOnly H1ContenteditableEnum = "plaintext-only"
 	H1ContenteditableEnumTrue          H1ContenteditableEnum = "true"
-	H1ContenteditableEnumFalse         H1ContenteditableEnum = "false"
 	H1ContenteditableEnumEmpty         H1ContenteditableEnum = ""
 )
 
 type H1DirEnum string
 
 const (
-	H1DirEnumRtl  H1DirEnum = "rtl"
 	H1DirEnumAuto H1DirEnum = "auto"
 	H1DirEnumLtr  H1DirEnum = "ltr"
+	H1DirEnumRtl  H1DirEnum = "rtl"
 )
 
 type H1DraggableEnum string
 
 const (
-	H1DraggableEnumTrue  H1DraggableEnum = "true"
 	H1DraggableEnumFalse H1DraggableEnum = "false"
+	H1DraggableEnumTrue  H1DraggableEnum = "true"
 )
 
 type H1EnterkeyhintEnum string
@@ -104,22 +107,22 @@ const (
 type H1HiddenEnum string
 
 const (
-	H1HiddenEnumUntilFound H1HiddenEnum = "until-found"
 	H1HiddenEnumHidden     H1HiddenEnum = "hidden"
+	H1HiddenEnumUntilFound H1HiddenEnum = "until-found"
 	H1HiddenEnumEmpty      H1HiddenEnum = ""
 )
 
 type H1InputmodeEnum string
 
 const (
-	H1InputmodeEnumEmail   H1InputmodeEnum = "email"
-	H1InputmodeEnumNone    H1InputmodeEnum = "none"
-	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
-	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
 	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
 	H1InputmodeEnumText    H1InputmodeEnum = "text"
 	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
 	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
+	H1InputmodeEnumEmail   H1InputmodeEnum = "email"
+	H1InputmodeEnumNone    H1InputmodeEnum = "none"
+	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
+	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
 )
 
 type H1SpellcheckEnum string

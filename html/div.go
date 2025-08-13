@@ -22,7 +22,8 @@ type DivElement struct {
 // Spec Description: The div element has no special meaning at all. It represents its children. It can be used with the class, lang, and title attributes to mark up semantics common to a group of consecutive elements. It can also be used in a dl element, wrapping groups of dt and dd elements.
 func Div(children ...htemel.Node) *DivElement {
 	node := &DivElement{
-		children: children, attributes: make(divAttrs),
+		children:   children,
+		attributes: make(divAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func DivIf(condition bool, children ...htemel.Node) *DivElement {
 	}
 
 	return &DivElement{
+		children:   children,
+		attributes: make(divAttrs),
 		skipRender: true,
 	}
 }
@@ -60,8 +63,8 @@ const (
 type DivAutocorrectEnum string
 
 const (
-	DivAutocorrectEnumOff   DivAutocorrectEnum = "off"
 	DivAutocorrectEnumOn    DivAutocorrectEnum = "on"
+	DivAutocorrectEnumOff   DivAutocorrectEnum = "off"
 	DivAutocorrectEnumEmpty DivAutocorrectEnum = ""
 )
 
@@ -77,16 +80,16 @@ const (
 type DivDirEnum string
 
 const (
+	DivDirEnumAuto DivDirEnum = "auto"
 	DivDirEnumLtr  DivDirEnum = "ltr"
 	DivDirEnumRtl  DivDirEnum = "rtl"
-	DivDirEnumAuto DivDirEnum = "auto"
 )
 
 type DivDraggableEnum string
 
 const (
-	DivDraggableEnumFalse DivDraggableEnum = "false"
 	DivDraggableEnumTrue  DivDraggableEnum = "true"
+	DivDraggableEnumFalse DivDraggableEnum = "false"
 )
 
 type DivEnterkeyhintEnum string
@@ -112,6 +115,7 @@ const (
 type DivInputmodeEnum string
 
 const (
+	DivInputmodeEnumText    DivInputmodeEnum = "text"
 	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
 	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
 	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
@@ -119,7 +123,6 @@ const (
 	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
 	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
 	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
-	DivInputmodeEnumText    DivInputmodeEnum = "text"
 )
 
 type DivSpellcheckEnum string

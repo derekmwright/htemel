@@ -118,7 +118,7 @@ func BaseFunc() (*template.Template, ImportSet) {
 // Spec Description: {{ .Description }}
 func {{ .Tag | titleCase }}({{ if not .Void }}children ...htemel.Node{{ end }}) *{{ .Tag | titleCase }}Element {
 	node := &{{ .Tag | titleCase }}Element{
-		{{ if not .Void }}children: children,{{ end -}}
+		{{ if not .Void }}children: children,{{ end }}
 		attributes: make({{ .Tag }}Attrs),
 	}
 
@@ -140,6 +140,8 @@ func {{ .Tag | titleCase }}If(condition bool{{ if not .Void }}, children ...htem
 	}
 
 	return &{{ .Tag | titleCase }}Element{
+		{{ if not .Void }}children: children,{{ end }}
+		attributes: make({{ .Tag }}Attrs),
 		skipRender: true,
 	}
 }

@@ -22,7 +22,8 @@ type VarElement struct {
 // Spec Description: The var element represents a variable. This could be an actual variable in a mathematical expression or programming context, an identifier representing a constant, a symbol identifying a physical quantity, a function parameter, or just be a term used as a placeholder in prose.
 func Var(children ...htemel.Node) *VarElement {
 	node := &VarElement{
-		children: children, attributes: make(varAttrs),
+		children:   children,
+		attributes: make(varAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func VarIf(condition bool, children ...htemel.Node) *VarElement {
 	}
 
 	return &VarElement{
+		children:   children,
+		attributes: make(varAttrs),
 		skipRender: true,
 	}
 }
@@ -49,28 +52,28 @@ func VarTernary(condition bool, true htemel.Node, false htemel.Node) *VarElement
 type VarAutocapitalizeEnum string
 
 const (
-	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
 	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
 	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
 	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
 	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
 	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
+	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
 )
 
 type VarAutocorrectEnum string
 
 const (
-	VarAutocorrectEnumOff   VarAutocorrectEnum = "off"
 	VarAutocorrectEnumOn    VarAutocorrectEnum = "on"
+	VarAutocorrectEnumOff   VarAutocorrectEnum = "off"
 	VarAutocorrectEnumEmpty VarAutocorrectEnum = ""
 )
 
 type VarContenteditableEnum string
 
 const (
-	VarContenteditableEnumFalse         VarContenteditableEnum = "false"
 	VarContenteditableEnumPlaintextOnly VarContenteditableEnum = "plaintext-only"
 	VarContenteditableEnumTrue          VarContenteditableEnum = "true"
+	VarContenteditableEnumFalse         VarContenteditableEnum = "false"
 	VarContenteditableEnumEmpty         VarContenteditableEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type VarEnterkeyhintEnum string
 
 const (
-	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
 	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
 	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
 	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
 	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
 	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
+	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
 )
 
 type VarHiddenEnum string
@@ -112,29 +115,29 @@ const (
 type VarInputmodeEnum string
 
 const (
-	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
-	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
 	VarInputmodeEnumText    VarInputmodeEnum = "text"
 	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
 	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
 	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
 	VarInputmodeEnumNone    VarInputmodeEnum = "none"
+	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
+	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
 )
 
 type VarSpellcheckEnum string
 
 const (
-	VarSpellcheckEnumTrue  VarSpellcheckEnum = "true"
 	VarSpellcheckEnumFalse VarSpellcheckEnum = "false"
+	VarSpellcheckEnumTrue  VarSpellcheckEnum = "true"
 	VarSpellcheckEnumEmpty VarSpellcheckEnum = ""
 )
 
 type VarTranslateEnum string
 
 const (
-	VarTranslateEnumNo    VarTranslateEnum = "no"
 	VarTranslateEnumYes   VarTranslateEnum = "yes"
+	VarTranslateEnumNo    VarTranslateEnum = "no"
 	VarTranslateEnumEmpty VarTranslateEnum = ""
 )
 

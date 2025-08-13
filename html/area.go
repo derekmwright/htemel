@@ -21,6 +21,7 @@ type AreaElement struct {
 // Spec Description: The area element represents either a hyperlink with some text and a corresponding area on an image map, or a dead area on an image map.
 func Area() *AreaElement {
 	node := &AreaElement{
+
 		attributes: make(areaAttrs),
 	}
 
@@ -33,6 +34,8 @@ func AreaIf(condition bool) *AreaElement {
 	}
 
 	return &AreaElement{
+
+		attributes: make(areaAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ const (
 type AreaAutocapitalizeEnum string
 
 const (
+	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
+	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 	AreaAutocapitalizeEnumOff        AreaAutocapitalizeEnum = "off"
 	AreaAutocapitalizeEnumOn         AreaAutocapitalizeEnum = "on"
 	AreaAutocapitalizeEnumSentences  AreaAutocapitalizeEnum = "sentences"
 	AreaAutocapitalizeEnumWords      AreaAutocapitalizeEnum = "words"
-	AreaAutocapitalizeEnumCharacters AreaAutocapitalizeEnum = "characters"
-	AreaAutocapitalizeEnumNone       AreaAutocapitalizeEnum = "none"
 )
 
 type AreaAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type AreaContenteditableEnum string
 
 const (
+	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
 	AreaContenteditableEnumFalse         AreaContenteditableEnum = "false"
 	AreaContenteditableEnumPlaintextOnly AreaContenteditableEnum = "plaintext-only"
-	AreaContenteditableEnumTrue          AreaContenteditableEnum = "true"
 	AreaContenteditableEnumEmpty         AreaContenteditableEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type AreaEnterkeyhintEnum string
 
 const (
-	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
-	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
 	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
 	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
 	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
 	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
 	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
+	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
+	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
 )
 
 type AreaHiddenEnum string
@@ -112,21 +115,21 @@ const (
 type AreaInputmodeEnum string
 
 const (
+	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
+	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
 	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
 	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
 	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
 	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
-	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
-	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
 )
 
 type AreaSpellcheckEnum string
 
 const (
-	AreaSpellcheckEnumTrue  AreaSpellcheckEnum = "true"
 	AreaSpellcheckEnumFalse AreaSpellcheckEnum = "false"
+	AreaSpellcheckEnumTrue  AreaSpellcheckEnum = "true"
 	AreaSpellcheckEnumEmpty AreaSpellcheckEnum = ""
 )
 

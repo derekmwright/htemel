@@ -21,6 +21,7 @@ type BrElement struct {
 // Spec Description: The br element represents a line break.
 func Br() *BrElement {
 	node := &BrElement{
+
 		attributes: make(brAttrs),
 	}
 
@@ -33,6 +34,8 @@ func BrIf(condition bool) *BrElement {
 	}
 
 	return &BrElement{
+
+		attributes: make(brAttrs),
 		skipRender: true,
 	}
 }
@@ -51,8 +54,8 @@ const (
 type BrAutocorrectEnum string
 
 const (
-	BrAutocorrectEnumOn    BrAutocorrectEnum = "on"
 	BrAutocorrectEnumOff   BrAutocorrectEnum = "off"
+	BrAutocorrectEnumOn    BrAutocorrectEnum = "on"
 	BrAutocorrectEnumEmpty BrAutocorrectEnum = ""
 )
 
@@ -68,9 +71,9 @@ const (
 type BrDirEnum string
 
 const (
-	BrDirEnumAuto BrDirEnum = "auto"
 	BrDirEnumLtr  BrDirEnum = "ltr"
 	BrDirEnumRtl  BrDirEnum = "rtl"
+	BrDirEnumAuto BrDirEnum = "auto"
 )
 
 type BrDraggableEnum string
@@ -83,13 +86,13 @@ const (
 type BrEnterkeyhintEnum string
 
 const (
-	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
-	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
 	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
 	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
 	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
+	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
+	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
 )
 
 type BrHiddenEnum string
@@ -103,7 +106,6 @@ const (
 type BrInputmodeEnum string
 
 const (
-	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
 	BrInputmodeEnumText    BrInputmodeEnum = "text"
 	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
 	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
@@ -111,6 +113,7 @@ const (
 	BrInputmodeEnumNone    BrInputmodeEnum = "none"
 	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
 	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
+	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
 )
 
 type BrSpellcheckEnum string
@@ -132,8 +135,8 @@ const (
 type BrWritingsuggestionsEnum string
 
 const (
-	BrWritingsuggestionsEnumFalse BrWritingsuggestionsEnum = "false"
 	BrWritingsuggestionsEnumTrue  BrWritingsuggestionsEnum = "true"
+	BrWritingsuggestionsEnumFalse BrWritingsuggestionsEnum = "false"
 	BrWritingsuggestionsEnumEmpty BrWritingsuggestionsEnum = ""
 )
 

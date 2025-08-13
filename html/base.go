@@ -21,6 +21,7 @@ type BaseElement struct {
 // Spec Description: The base element allows authors to specify the document base URL for the purposes of parsing URLs, and the name of the default navigable for the purposes of following hyperlinks. The element does not represent any content beyond this information.
 func Base() *BaseElement {
 	node := &BaseElement{
+
 		attributes: make(baseAttrs),
 	}
 
@@ -33,6 +34,8 @@ func BaseIf(condition bool) *BaseElement {
 	}
 
 	return &BaseElement{
+
+		attributes: make(baseAttrs),
 		skipRender: true,
 	}
 }
@@ -83,13 +86,13 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
-	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
-	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
-	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
+	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
+	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
+	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 )
 
 type BaseHiddenEnum string
@@ -103,21 +106,21 @@ const (
 type BaseInputmodeEnum string
 
 const (
-	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
-	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
 	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
 	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
 	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
 	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
 	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
+	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
+	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
 )
 
 type BaseSpellcheckEnum string
 
 const (
-	BaseSpellcheckEnumFalse BaseSpellcheckEnum = "false"
 	BaseSpellcheckEnumTrue  BaseSpellcheckEnum = "true"
+	BaseSpellcheckEnumFalse BaseSpellcheckEnum = "false"
 	BaseSpellcheckEnumEmpty BaseSpellcheckEnum = ""
 )
 

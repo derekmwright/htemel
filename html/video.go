@@ -22,7 +22,8 @@ type VideoElement struct {
 // Spec Description: A video element is used for playing videos or movies, and audio files with captions.
 func Video(children ...htemel.Node) *VideoElement {
 	node := &VideoElement{
-		children: children, attributes: make(videoAttrs),
+		children:   children,
+		attributes: make(videoAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func VideoIf(condition bool, children ...htemel.Node) *VideoElement {
 	}
 
 	return &VideoElement{
+		children:   children,
+		attributes: make(videoAttrs),
 		skipRender: true,
 	}
 }
@@ -66,12 +69,12 @@ const (
 type VideoAutocapitalizeEnum string
 
 const (
-	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
-	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
 	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
 	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
 	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
+	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
+	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
 )
 
 type VideoAutocorrectEnum string
@@ -102,20 +105,20 @@ const (
 type VideoDraggableEnum string
 
 const (
-	VideoDraggableEnumFalse VideoDraggableEnum = "false"
 	VideoDraggableEnumTrue  VideoDraggableEnum = "true"
+	VideoDraggableEnumFalse VideoDraggableEnum = "false"
 )
 
 type VideoEnterkeyhintEnum string
 
 const (
-	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
 	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
 	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
 	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
 	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
 	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
 	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
+	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
 )
 
 type VideoHiddenEnum string
@@ -129,6 +132,7 @@ const (
 type VideoInputmodeEnum string
 
 const (
+	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
 	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
 	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
 	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
@@ -136,7 +140,6 @@ const (
 	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
 	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
 	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
-	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
 )
 
 type VideoSpellcheckEnum string
@@ -158,8 +161,8 @@ const (
 type VideoWritingsuggestionsEnum string
 
 const (
-	VideoWritingsuggestionsEnumTrue  VideoWritingsuggestionsEnum = "true"
 	VideoWritingsuggestionsEnumFalse VideoWritingsuggestionsEnum = "false"
+	VideoWritingsuggestionsEnumTrue  VideoWritingsuggestionsEnum = "true"
 	VideoWritingsuggestionsEnumEmpty VideoWritingsuggestionsEnum = ""
 )
 

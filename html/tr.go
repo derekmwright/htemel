@@ -22,7 +22,8 @@ type TrElement struct {
 // Spec Description: The tr element represents a row of cells in a table.
 func Tr(children ...htemel.Node) *TrElement {
 	node := &TrElement{
-		children: children, attributes: make(trAttrs),
+		children:   children,
+		attributes: make(trAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func TrIf(condition bool, children ...htemel.Node) *TrElement {
 	}
 
 	return &TrElement{
+		children:   children,
+		attributes: make(trAttrs),
 		skipRender: true,
 	}
 }
@@ -49,19 +52,19 @@ func TrTernary(condition bool, true htemel.Node, false htemel.Node) *TrElement {
 type TrAutocapitalizeEnum string
 
 const (
+	TrAutocapitalizeEnumOff        TrAutocapitalizeEnum = "off"
 	TrAutocapitalizeEnumOn         TrAutocapitalizeEnum = "on"
 	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
 	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
 	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
 	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
-	TrAutocapitalizeEnumOff        TrAutocapitalizeEnum = "off"
 )
 
 type TrAutocorrectEnum string
 
 const (
-	TrAutocorrectEnumOff   TrAutocorrectEnum = "off"
 	TrAutocorrectEnumOn    TrAutocorrectEnum = "on"
+	TrAutocorrectEnumOff   TrAutocorrectEnum = "off"
 	TrAutocorrectEnumEmpty TrAutocorrectEnum = ""
 )
 
@@ -77,9 +80,9 @@ const (
 type TrDirEnum string
 
 const (
-	TrDirEnumLtr  TrDirEnum = "ltr"
 	TrDirEnumRtl  TrDirEnum = "rtl"
 	TrDirEnumAuto TrDirEnum = "auto"
+	TrDirEnumLtr  TrDirEnum = "ltr"
 )
 
 type TrDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type TrEnterkeyhintEnum string
 
 const (
-	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
-	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
 	TrEnterkeyhintEnumGo       TrEnterkeyhintEnum = "go"
 	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
 	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
 	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
 	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
+	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
+	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
 )
 
 type TrHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type TrInputmodeEnum string
 
 const (
-	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
-	TrInputmodeEnumNone    TrInputmodeEnum = "none"
 	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
 	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
 	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
 	TrInputmodeEnumText    TrInputmodeEnum = "text"
 	TrInputmodeEnumUrl     TrInputmodeEnum = "url"
 	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
+	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
+	TrInputmodeEnumNone    TrInputmodeEnum = "none"
 )
 
 type TrSpellcheckEnum string

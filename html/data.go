@@ -22,7 +22,8 @@ type DataElement struct {
 // Spec Description: The data element represents its contents, along with a machine-readable form of those contents in the value attribute.
 func Data(children ...htemel.Node) *DataElement {
 	node := &DataElement{
-		children: children, attributes: make(dataAttrs),
+		children:   children,
+		attributes: make(dataAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func DataIf(condition bool, children ...htemel.Node) *DataElement {
 	}
 
 	return &DataElement{
+		children:   children,
+		attributes: make(dataAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataEleme
 type DataAutocapitalizeEnum string
 
 const (
-	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
-	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
 	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
+	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
+	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 )
 
 type DataAutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type DataDirEnum string
 
 const (
+	DataDirEnumRtl  DataDirEnum = "rtl"
 	DataDirEnumAuto DataDirEnum = "auto"
 	DataDirEnumLtr  DataDirEnum = "ltr"
-	DataDirEnumRtl  DataDirEnum = "rtl"
 )
 
 type DataDraggableEnum string
@@ -133,8 +136,8 @@ const (
 type DataTranslateEnum string
 
 const (
-	DataTranslateEnumYes   DataTranslateEnum = "yes"
 	DataTranslateEnumNo    DataTranslateEnum = "no"
+	DataTranslateEnumYes   DataTranslateEnum = "yes"
 	DataTranslateEnumEmpty DataTranslateEnum = ""
 )
 

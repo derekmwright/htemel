@@ -22,7 +22,8 @@ type UlElement struct {
 // Spec Description: The ul element represents a list of items, where the order of the items is not important — that is, where changing the order would not materially change the meaning of the document.
 func Ul(children ...htemel.Node) *UlElement {
 	node := &UlElement{
-		children: children, attributes: make(ulAttrs),
+		children:   children,
+		attributes: make(ulAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func UlIf(condition bool, children ...htemel.Node) *UlElement {
 	}
 
 	return &UlElement{
+		children:   children,
+		attributes: make(ulAttrs),
 		skipRender: true,
 	}
 }
@@ -77,9 +80,9 @@ const (
 type UlDirEnum string
 
 const (
+	UlDirEnumAuto UlDirEnum = "auto"
 	UlDirEnumLtr  UlDirEnum = "ltr"
 	UlDirEnumRtl  UlDirEnum = "rtl"
-	UlDirEnumAuto UlDirEnum = "auto"
 )
 
 type UlDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
-	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
-	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
 	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
 	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
 	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
 	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
+	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
+	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
 )
 
 type UlHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type UlInputmodeEnum string
 
 const (
-	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
-	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
-	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
-	UlInputmodeEnumNone    UlInputmodeEnum = "none"
 	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
 	UlInputmodeEnumSearch  UlInputmodeEnum = "search"
 	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
 	UlInputmodeEnumText    UlInputmodeEnum = "text"
+	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
+	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
+	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
+	UlInputmodeEnumNone    UlInputmodeEnum = "none"
 )
 
 type UlSpellcheckEnum string

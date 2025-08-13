@@ -22,7 +22,8 @@ type NavElement struct {
 // Spec Description: The nav element represents a section of a page that links to other pages or to parts within the page: a section with navigation links.
 func Nav(children ...htemel.Node) *NavElement {
 	node := &NavElement{
-		children: children, attributes: make(navAttrs),
+		children:   children,
+		attributes: make(navAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func NavIf(condition bool, children ...htemel.Node) *NavElement {
 	}
 
 	return &NavElement{
+		children:   children,
+		attributes: make(navAttrs),
 		skipRender: true,
 	}
 }
@@ -49,37 +52,37 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 type NavAutocapitalizeEnum string
 
 const (
-	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
-	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
 	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
 	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
 	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
 	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
+	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
+	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
 )
 
 type NavAutocorrectEnum string
 
 const (
-	NavAutocorrectEnumOn    NavAutocorrectEnum = "on"
 	NavAutocorrectEnumOff   NavAutocorrectEnum = "off"
+	NavAutocorrectEnumOn    NavAutocorrectEnum = "on"
 	NavAutocorrectEnumEmpty NavAutocorrectEnum = ""
 )
 
 type NavContenteditableEnum string
 
 const (
+	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
 	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
-	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
 	NavContenteditableEnumEmpty         NavContenteditableEnum = ""
 )
 
 type NavDirEnum string
 
 const (
+	NavDirEnumRtl  NavDirEnum = "rtl"
 	NavDirEnumAuto NavDirEnum = "auto"
 	NavDirEnumLtr  NavDirEnum = "ltr"
-	NavDirEnumRtl  NavDirEnum = "rtl"
 )
 
 type NavDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type NavEnterkeyhintEnum string
 
 const (
-	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
 	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
 	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
 	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
+	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
 )
 
 type NavHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type NavInputmodeEnum string
 
 const (
+	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
+	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
+	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 	NavInputmodeEnumText    NavInputmodeEnum = "text"
 	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
 	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
 	NavInputmodeEnumNone    NavInputmodeEnum = "none"
-	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
-	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
-	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 )
 
 type NavSpellcheckEnum string

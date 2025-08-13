@@ -22,7 +22,8 @@ type BlockquoteElement struct {
 // Spec Description: The blockquote element represents a section that is quoted from another source.
 func Blockquote(children ...htemel.Node) *BlockquoteElement {
 	node := &BlockquoteElement{
-		children: children, attributes: make(blockquoteAttrs),
+		children:   children,
+		attributes: make(blockquoteAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func BlockquoteIf(condition bool, children ...htemel.Node) *BlockquoteElement {
 	}
 
 	return &BlockquoteElement{
+		children:   children,
+		attributes: make(blockquoteAttrs),
 		skipRender: true,
 	}
 }
@@ -77,9 +80,9 @@ const (
 type BlockquoteDirEnum string
 
 const (
-	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 	BlockquoteDirEnumLtr  BlockquoteDirEnum = "ltr"
 	BlockquoteDirEnumRtl  BlockquoteDirEnum = "rtl"
+	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 )
 
 type BlockquoteDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type BlockquoteEnterkeyhintEnum string
 
 const (
-	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
 	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
 	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 	BlockquoteEnterkeyhintEnumNext     BlockquoteEnterkeyhintEnum = "next"
 	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
 	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
+	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
 )
 
 type BlockquoteHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type BlockquoteInputmodeEnum string
 
 const (
-	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
-	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
-	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
 	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
 	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
 	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
 	BlockquoteInputmodeEnumTel     BlockquoteInputmodeEnum = "tel"
 	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
+	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
+	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
+	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
 )
 
 type BlockquoteSpellcheckEnum string

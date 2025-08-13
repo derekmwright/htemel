@@ -22,7 +22,8 @@ type FormElement struct {
 // Spec Description: The form element represents a hyperlink that can be manipulated through a collection of form-associated elements, some of which can represent editable values that can be submitted to a server for processing.
 func Form(children ...htemel.Node) *FormElement {
 	node := &FormElement{
-		children: children, attributes: make(formAttrs),
+		children:   children,
+		attributes: make(formAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func FormIf(condition bool, children ...htemel.Node) *FormElement {
 	}
 
 	return &FormElement{
+		children:   children,
+		attributes: make(formAttrs),
 		skipRender: true,
 	}
 }
@@ -64,28 +67,28 @@ const (
 type FormAutocapitalizeEnum string
 
 const (
-	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
-	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
-	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
 	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
 	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
+	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
+	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
+	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
 )
 
 type FormAutocorrectEnum string
 
 const (
-	FormAutocorrectEnumOff   FormAutocorrectEnum = "off"
 	FormAutocorrectEnumOn    FormAutocorrectEnum = "on"
+	FormAutocorrectEnumOff   FormAutocorrectEnum = "off"
 	FormAutocorrectEnumEmpty FormAutocorrectEnum = ""
 )
 
 type FormContenteditableEnum string
 
 const (
-	FormContenteditableEnumFalse         FormContenteditableEnum = "false"
 	FormContenteditableEnumPlaintextOnly FormContenteditableEnum = "plaintext-only"
 	FormContenteditableEnumTrue          FormContenteditableEnum = "true"
+	FormContenteditableEnumFalse         FormContenteditableEnum = "false"
 	FormContenteditableEnumEmpty         FormContenteditableEnum = ""
 )
 
@@ -100,8 +103,8 @@ const (
 type FormDraggableEnum string
 
 const (
-	FormDraggableEnumTrue  FormDraggableEnum = "true"
 	FormDraggableEnumFalse FormDraggableEnum = "false"
+	FormDraggableEnumTrue  FormDraggableEnum = "true"
 )
 
 type FormEnterkeyhintEnum string
@@ -127,14 +130,14 @@ const (
 type FormInputmodeEnum string
 
 const (
+	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
+	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
 	FormInputmodeEnumNone    FormInputmodeEnum = "none"
 	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
 	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
 	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
 	FormInputmodeEnumText    FormInputmodeEnum = "text"
 	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
-	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
-	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
 )
 
 type FormSpellcheckEnum string
@@ -148,8 +151,8 @@ const (
 type FormTranslateEnum string
 
 const (
-	FormTranslateEnumYes   FormTranslateEnum = "yes"
 	FormTranslateEnumNo    FormTranslateEnum = "no"
+	FormTranslateEnumYes   FormTranslateEnum = "yes"
 	FormTranslateEnumEmpty FormTranslateEnum = ""
 )
 

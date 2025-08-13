@@ -22,7 +22,8 @@ type SpanElement struct {
 // Spec Description: The span element doesn't mean anything on its own, but can be useful when used together with the global attributes, e.g. class, lang, or dir. It represents its children.
 func Span(children ...htemel.Node) *SpanElement {
 	node := &SpanElement{
-		children: children, attributes: make(spanAttrs),
+		children:   children,
+		attributes: make(spanAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func SpanIf(condition bool, children ...htemel.Node) *SpanElement {
 	}
 
 	return &SpanElement{
+		children:   children,
+		attributes: make(spanAttrs),
 		skipRender: true,
 	}
 }
@@ -92,13 +95,13 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
-	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
 	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
 	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
 	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
 	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
 	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
+	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
 )
 
 type SpanHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type SpanInputmodeEnum string
 
 const (
-	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
-	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
-	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
 	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
 	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
 	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
 	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
+	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
+	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
+	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 )
 
 type SpanSpellcheckEnum string
@@ -133,8 +136,8 @@ const (
 type SpanTranslateEnum string
 
 const (
-	SpanTranslateEnumNo    SpanTranslateEnum = "no"
 	SpanTranslateEnumYes   SpanTranslateEnum = "yes"
+	SpanTranslateEnumNo    SpanTranslateEnum = "no"
 	SpanTranslateEnumEmpty SpanTranslateEnum = ""
 )
 

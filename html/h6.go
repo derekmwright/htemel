@@ -22,7 +22,8 @@ type H6Element struct {
 // Spec Description: These elements represent headings for their sections.
 func H6(children ...htemel.Node) *H6Element {
 	node := &H6Element{
-		children: children, attributes: make(h6Attrs),
+		children:   children,
+		attributes: make(h6Attrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func H6If(condition bool, children ...htemel.Node) *H6Element {
 	}
 
 	return &H6Element{
+		children:   children,
+		attributes: make(h6Attrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func H6Ternary(condition bool, true htemel.Node, false htemel.Node) *H6Element {
 type H6AutocapitalizeEnum string
 
 const (
-	H6AutocapitalizeEnumCharacters H6AutocapitalizeEnum = "characters"
-	H6AutocapitalizeEnumNone       H6AutocapitalizeEnum = "none"
-	H6AutocapitalizeEnumOff        H6AutocapitalizeEnum = "off"
 	H6AutocapitalizeEnumOn         H6AutocapitalizeEnum = "on"
 	H6AutocapitalizeEnumSentences  H6AutocapitalizeEnum = "sentences"
 	H6AutocapitalizeEnumWords      H6AutocapitalizeEnum = "words"
+	H6AutocapitalizeEnumCharacters H6AutocapitalizeEnum = "characters"
+	H6AutocapitalizeEnumNone       H6AutocapitalizeEnum = "none"
+	H6AutocapitalizeEnumOff        H6AutocapitalizeEnum = "off"
 )
 
 type H6AutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type H6DirEnum string
 
 const (
-	H6DirEnumRtl  H6DirEnum = "rtl"
 	H6DirEnumAuto H6DirEnum = "auto"
 	H6DirEnumLtr  H6DirEnum = "ltr"
+	H6DirEnumRtl  H6DirEnum = "rtl"
 )
 
 type H6DraggableEnum string
@@ -92,13 +95,13 @@ const (
 type H6EnterkeyhintEnum string
 
 const (
+	H6EnterkeyhintEnumSend     H6EnterkeyhintEnum = "send"
+	H6EnterkeyhintEnumDone     H6EnterkeyhintEnum = "done"
+	H6EnterkeyhintEnumEnter    H6EnterkeyhintEnum = "enter"
 	H6EnterkeyhintEnumGo       H6EnterkeyhintEnum = "go"
 	H6EnterkeyhintEnumNext     H6EnterkeyhintEnum = "next"
 	H6EnterkeyhintEnumPrevious H6EnterkeyhintEnum = "previous"
 	H6EnterkeyhintEnumSearch   H6EnterkeyhintEnum = "search"
-	H6EnterkeyhintEnumSend     H6EnterkeyhintEnum = "send"
-	H6EnterkeyhintEnumDone     H6EnterkeyhintEnum = "done"
-	H6EnterkeyhintEnumEnter    H6EnterkeyhintEnum = "enter"
 )
 
 type H6HiddenEnum string
@@ -112,14 +115,14 @@ const (
 type H6InputmodeEnum string
 
 const (
-	H6InputmodeEnumText    H6InputmodeEnum = "text"
-	H6InputmodeEnumUrl     H6InputmodeEnum = "url"
 	H6InputmodeEnumDecimal H6InputmodeEnum = "decimal"
 	H6InputmodeEnumEmail   H6InputmodeEnum = "email"
 	H6InputmodeEnumNone    H6InputmodeEnum = "none"
 	H6InputmodeEnumNumeric H6InputmodeEnum = "numeric"
 	H6InputmodeEnumSearch  H6InputmodeEnum = "search"
 	H6InputmodeEnumTel     H6InputmodeEnum = "tel"
+	H6InputmodeEnumText    H6InputmodeEnum = "text"
+	H6InputmodeEnumUrl     H6InputmodeEnum = "url"
 )
 
 type H6SpellcheckEnum string
@@ -133,8 +136,8 @@ const (
 type H6TranslateEnum string
 
 const (
-	H6TranslateEnumYes   H6TranslateEnum = "yes"
 	H6TranslateEnumNo    H6TranslateEnum = "no"
+	H6TranslateEnumYes   H6TranslateEnum = "yes"
 	H6TranslateEnumEmpty H6TranslateEnum = ""
 )
 

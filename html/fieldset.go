@@ -22,7 +22,8 @@ type FieldsetElement struct {
 // Spec Description: The fieldset element represents a set of form controls (or other content) grouped together, optionally with a caption. The caption is given by the first legend element that is a child of the fieldset element, if any. The remainder of the descendants form the group.
 func Fieldset(children ...htemel.Node) *FieldsetElement {
 	node := &FieldsetElement{
-		children: children, attributes: make(fieldsetAttrs),
+		children:   children,
+		attributes: make(fieldsetAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func FieldsetIf(condition bool, children ...htemel.Node) *FieldsetElement {
 	}
 
 	return &FieldsetElement{
+		children:   children,
+		attributes: make(fieldsetAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func FieldsetTernary(condition bool, true htemel.Node, false htemel.Node) *Field
 type FieldsetAutocapitalizeEnum string
 
 const (
-	FieldsetAutocapitalizeEnumSentences  FieldsetAutocapitalizeEnum = "sentences"
-	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
 	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
 	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
 	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
 	FieldsetAutocapitalizeEnumOn         FieldsetAutocapitalizeEnum = "on"
+	FieldsetAutocapitalizeEnumSentences  FieldsetAutocapitalizeEnum = "sentences"
+	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
 )
 
 type FieldsetAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type FieldsetContenteditableEnum string
 
 const (
-	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumPlaintextOnly FieldsetContenteditableEnum = "plaintext-only"
 	FieldsetContenteditableEnumTrue          FieldsetContenteditableEnum = "true"
+	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumEmpty         FieldsetContenteditableEnum = ""
 )
 
@@ -85,8 +88,8 @@ const (
 type FieldsetDraggableEnum string
 
 const (
-	FieldsetDraggableEnumTrue  FieldsetDraggableEnum = "true"
 	FieldsetDraggableEnumFalse FieldsetDraggableEnum = "false"
+	FieldsetDraggableEnumTrue  FieldsetDraggableEnum = "true"
 )
 
 type FieldsetEnterkeyhintEnum string
@@ -104,22 +107,22 @@ const (
 type FieldsetHiddenEnum string
 
 const (
-	FieldsetHiddenEnumHidden     FieldsetHiddenEnum = "hidden"
 	FieldsetHiddenEnumUntilFound FieldsetHiddenEnum = "until-found"
+	FieldsetHiddenEnumHidden     FieldsetHiddenEnum = "hidden"
 	FieldsetHiddenEnumEmpty      FieldsetHiddenEnum = ""
 )
 
 type FieldsetInputmodeEnum string
 
 const (
-	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
-	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
-	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
 	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
 	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
 	FieldsetInputmodeEnumNumeric FieldsetInputmodeEnum = "numeric"
 	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
+	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
+	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
+	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
 )
 
 type FieldsetSpellcheckEnum string

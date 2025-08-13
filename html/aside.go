@@ -22,7 +22,8 @@ type AsideElement struct {
 // Spec Description: The aside element represents a section of a page that consists of content that is tangentially related to the content around the aside element, and which could be considered separate from that content. Such sections are often represented as sidebars in printed typography.
 func Aside(children ...htemel.Node) *AsideElement {
 	node := &AsideElement{
-		children: children, attributes: make(asideAttrs),
+		children:   children,
+		attributes: make(asideAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func AsideIf(condition bool, children ...htemel.Node) *AsideElement {
 	}
 
 	return &AsideElement{
+		children:   children,
+		attributes: make(asideAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideEle
 type AsideAutocapitalizeEnum string
 
 const (
-	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
-	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
 	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
 	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
 	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
+	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
+	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
 )
 
 type AsideAutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type AsideDirEnum string
 
 const (
-	AsideDirEnumRtl  AsideDirEnum = "rtl"
 	AsideDirEnumAuto AsideDirEnum = "auto"
 	AsideDirEnumLtr  AsideDirEnum = "ltr"
+	AsideDirEnumRtl  AsideDirEnum = "rtl"
 )
 
 type AsideDraggableEnum string
@@ -112,14 +115,14 @@ const (
 type AsideInputmodeEnum string
 
 const (
+	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
+	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
 	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
 	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
 	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
 	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
 	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
-	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
-	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
 )
 
 type AsideSpellcheckEnum string

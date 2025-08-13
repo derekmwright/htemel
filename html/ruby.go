@@ -22,7 +22,8 @@ type RubyElement struct {
 // Spec Description: The ruby element allows one or more spans of phrasing content to be marked with ruby annotations. Ruby annotations are short runs of text presented alongside base text, primarily used in East Asian typography as a guide for pronunciation or to include other annotations. In Japanese, this form of typography is also known as furigana.
 func Ruby(children ...htemel.Node) *RubyElement {
 	node := &RubyElement{
-		children: children, attributes: make(rubyAttrs),
+		children:   children,
+		attributes: make(rubyAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func RubyIf(condition bool, children ...htemel.Node) *RubyElement {
 	}
 
 	return &RubyElement{
+		children:   children,
+		attributes: make(rubyAttrs),
 		skipRender: true,
 	}
 }
@@ -60,8 +63,8 @@ const (
 type RubyAutocorrectEnum string
 
 const (
-	RubyAutocorrectEnumOn    RubyAutocorrectEnum = "on"
 	RubyAutocorrectEnumOff   RubyAutocorrectEnum = "off"
+	RubyAutocorrectEnumOn    RubyAutocorrectEnum = "on"
 	RubyAutocorrectEnumEmpty RubyAutocorrectEnum = ""
 )
 
@@ -77,9 +80,9 @@ const (
 type RubyDirEnum string
 
 const (
+	RubyDirEnumAuto RubyDirEnum = "auto"
 	RubyDirEnumLtr  RubyDirEnum = "ltr"
 	RubyDirEnumRtl  RubyDirEnum = "rtl"
-	RubyDirEnumAuto RubyDirEnum = "auto"
 )
 
 type RubyDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type RubyEnterkeyhintEnum string
 
 const (
-	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
-	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
 	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
 	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
+	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
+	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
 )
 
 type RubyHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type RubyInputmodeEnum string
 
 const (
+	RubyInputmodeEnumTel     RubyInputmodeEnum = "tel"
+	RubyInputmodeEnumText    RubyInputmodeEnum = "text"
 	RubyInputmodeEnumUrl     RubyInputmodeEnum = "url"
 	RubyInputmodeEnumDecimal RubyInputmodeEnum = "decimal"
 	RubyInputmodeEnumEmail   RubyInputmodeEnum = "email"
 	RubyInputmodeEnumNone    RubyInputmodeEnum = "none"
 	RubyInputmodeEnumNumeric RubyInputmodeEnum = "numeric"
 	RubyInputmodeEnumSearch  RubyInputmodeEnum = "search"
-	RubyInputmodeEnumTel     RubyInputmodeEnum = "tel"
-	RubyInputmodeEnumText    RubyInputmodeEnum = "text"
 )
 
 type RubySpellcheckEnum string

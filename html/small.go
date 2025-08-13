@@ -22,7 +22,8 @@ type SmallElement struct {
 // Spec Description: The small element represents side comments such as small print.
 func Small(children ...htemel.Node) *SmallElement {
 	node := &SmallElement{
-		children: children, attributes: make(smallAttrs),
+		children:   children,
+		attributes: make(smallAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func SmallIf(condition bool, children ...htemel.Node) *SmallElement {
 	}
 
 	return &SmallElement{
+		children:   children,
+		attributes: make(smallAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallEle
 type SmallAutocapitalizeEnum string
 
 const (
+	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
 	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
 	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
 	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
-	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 )
 
 type SmallAutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type SmallDirEnum string
 
 const (
-	SmallDirEnumAuto SmallDirEnum = "auto"
 	SmallDirEnumLtr  SmallDirEnum = "ltr"
 	SmallDirEnumRtl  SmallDirEnum = "rtl"
+	SmallDirEnumAuto SmallDirEnum = "auto"
 )
 
 type SmallDraggableEnum string
@@ -112,14 +115,14 @@ const (
 type SmallInputmodeEnum string
 
 const (
-	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
-	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
-	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
 	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
 	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
 	SmallInputmodeEnumSearch  SmallInputmodeEnum = "search"
 	SmallInputmodeEnumTel     SmallInputmodeEnum = "tel"
 	SmallInputmodeEnumText    SmallInputmodeEnum = "text"
+	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
+	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
+	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
 )
 
 type SmallSpellcheckEnum string

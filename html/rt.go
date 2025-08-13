@@ -22,7 +22,8 @@ type RtElement struct {
 // Spec Description: The rt element marks the ruby text component of a ruby annotation. When it is the child of a ruby element, it doesn't represent anything itself, but the ruby element uses it as part of determining what it represents.
 func Rt(children ...htemel.Node) *RtElement {
 	node := &RtElement{
-		children: children, attributes: make(rtAttrs),
+		children:   children,
+		attributes: make(rtAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func RtIf(condition bool, children ...htemel.Node) *RtElement {
 	}
 
 	return &RtElement{
+		children:   children,
+		attributes: make(rtAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func RtTernary(condition bool, true htemel.Node, false htemel.Node) *RtElement {
 type RtAutocapitalizeEnum string
 
 const (
-	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
 	RtAutocapitalizeEnumCharacters RtAutocapitalizeEnum = "characters"
 	RtAutocapitalizeEnumNone       RtAutocapitalizeEnum = "none"
 	RtAutocapitalizeEnumOff        RtAutocapitalizeEnum = "off"
 	RtAutocapitalizeEnumOn         RtAutocapitalizeEnum = "on"
 	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
+	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
 )
 
 type RtAutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type RtDirEnum string
 
 const (
-	RtDirEnumRtl  RtDirEnum = "rtl"
 	RtDirEnumAuto RtDirEnum = "auto"
 	RtDirEnumLtr  RtDirEnum = "ltr"
+	RtDirEnumRtl  RtDirEnum = "rtl"
 )
 
 type RtDraggableEnum string
@@ -92,34 +95,34 @@ const (
 type RtEnterkeyhintEnum string
 
 const (
-	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
-	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
 	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
 	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
 	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
 	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
 	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
+	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
+	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
 )
 
 type RtHiddenEnum string
 
 const (
-	RtHiddenEnumUntilFound RtHiddenEnum = "until-found"
 	RtHiddenEnumHidden     RtHiddenEnum = "hidden"
+	RtHiddenEnumUntilFound RtHiddenEnum = "until-found"
 	RtHiddenEnumEmpty      RtHiddenEnum = ""
 )
 
 type RtInputmodeEnum string
 
 const (
+	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
+	RtInputmodeEnumText    RtInputmodeEnum = "text"
+	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
 	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
 	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
 	RtInputmodeEnumNone    RtInputmodeEnum = "none"
 	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
 	RtInputmodeEnumSearch  RtInputmodeEnum = "search"
-	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
-	RtInputmodeEnumText    RtInputmodeEnum = "text"
-	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
 )
 
 type RtSpellcheckEnum string

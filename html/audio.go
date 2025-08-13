@@ -22,7 +22,8 @@ type AudioElement struct {
 // Spec Description: An audio element represents a sound or audio stream.
 func Audio(children ...htemel.Node) *AudioElement {
 	node := &AudioElement{
-		children: children, attributes: make(audioAttrs),
+		children:   children,
+		attributes: make(audioAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func AudioIf(condition bool, children ...htemel.Node) *AudioElement {
 	}
 
 	return &AudioElement{
+		children:   children,
+		attributes: make(audioAttrs),
 		skipRender: true,
 	}
 }
@@ -49,29 +52,29 @@ func AudioTernary(condition bool, true htemel.Node, false htemel.Node) *AudioEle
 type AudioCrossoriginEnum string
 
 const (
-	AudioCrossoriginEnumAnonymous      AudioCrossoriginEnum = "anonymous"
 	AudioCrossoriginEnumUseCredentials AudioCrossoriginEnum = "use-credentials"
+	AudioCrossoriginEnumAnonymous      AudioCrossoriginEnum = "anonymous"
 	AudioCrossoriginEnumEmpty          AudioCrossoriginEnum = ""
 )
 
 type AudioPreloadEnum string
 
 const (
+	AudioPreloadEnumNone     AudioPreloadEnum = "none"
 	AudioPreloadEnumAuto     AudioPreloadEnum = "auto"
 	AudioPreloadEnumMetadata AudioPreloadEnum = "metadata"
-	AudioPreloadEnumNone     AudioPreloadEnum = "none"
 	AudioPreloadEnumEmpty    AudioPreloadEnum = ""
 )
 
 type AudioAutocapitalizeEnum string
 
 const (
-	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
 	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
 	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 	AudioAutocapitalizeEnumOff        AudioAutocapitalizeEnum = "off"
 	AudioAutocapitalizeEnumOn         AudioAutocapitalizeEnum = "on"
 	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
+	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
 )
 
 type AudioAutocorrectEnum string
@@ -94,9 +97,9 @@ const (
 type AudioDirEnum string
 
 const (
+	AudioDirEnumAuto AudioDirEnum = "auto"
 	AudioDirEnumLtr  AudioDirEnum = "ltr"
 	AudioDirEnumRtl  AudioDirEnum = "rtl"
-	AudioDirEnumAuto AudioDirEnum = "auto"
 )
 
 type AudioDraggableEnum string
@@ -109,13 +112,13 @@ const (
 type AudioEnterkeyhintEnum string
 
 const (
-	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
-	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
-	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
 	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
 	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
+	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
+	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
+	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 )
 
 type AudioHiddenEnum string
@@ -129,14 +132,14 @@ const (
 type AudioInputmodeEnum string
 
 const (
-	AudioInputmodeEnumTel     AudioInputmodeEnum = "tel"
-	AudioInputmodeEnumText    AudioInputmodeEnum = "text"
-	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
 	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
 	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
 	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
 	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
 	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
+	AudioInputmodeEnumTel     AudioInputmodeEnum = "tel"
+	AudioInputmodeEnumText    AudioInputmodeEnum = "text"
+	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
 )
 
 type AudioSpellcheckEnum string

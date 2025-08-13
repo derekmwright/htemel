@@ -22,7 +22,8 @@ type QElement struct {
 // Spec Description: The q element represents some phrasing content quoted from another source.
 func Q(children ...htemel.Node) *QElement {
 	node := &QElement{
-		children: children, attributes: make(qAttrs),
+		children:   children,
+		attributes: make(qAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func QIf(condition bool, children ...htemel.Node) *QElement {
 	}
 
 	return &QElement{
+		children:   children,
+		attributes: make(qAttrs),
 		skipRender: true,
 	}
 }
@@ -92,13 +95,13 @@ const (
 type QEnterkeyhintEnum string
 
 const (
-	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
 	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
 	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
 	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
 	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
+	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 )
 
 type QHiddenEnum string
@@ -112,7 +115,6 @@ const (
 type QInputmodeEnum string
 
 const (
-	QInputmodeEnumNone    QInputmodeEnum = "none"
 	QInputmodeEnumNumeric QInputmodeEnum = "numeric"
 	QInputmodeEnumSearch  QInputmodeEnum = "search"
 	QInputmodeEnumTel     QInputmodeEnum = "tel"
@@ -120,6 +122,7 @@ const (
 	QInputmodeEnumUrl     QInputmodeEnum = "url"
 	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
 	QInputmodeEnumEmail   QInputmodeEnum = "email"
+	QInputmodeEnumNone    QInputmodeEnum = "none"
 )
 
 type QSpellcheckEnum string

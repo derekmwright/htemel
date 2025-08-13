@@ -22,7 +22,8 @@ type EmElement struct {
 // Spec Description: The em element represents stress emphasis of its contents.
 func Em(children ...htemel.Node) *EmElement {
 	node := &EmElement{
-		children: children, attributes: make(emAttrs),
+		children:   children,
+		attributes: make(emAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func EmIf(condition bool, children ...htemel.Node) *EmElement {
 	}
 
 	return &EmElement{
+		children:   children,
+		attributes: make(emAttrs),
 		skipRender: true,
 	}
 }
@@ -68,9 +71,9 @@ const (
 type EmContenteditableEnum string
 
 const (
+	EmContenteditableEnumTrue          EmContenteditableEnum = "true"
 	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
 	EmContenteditableEnumPlaintextOnly EmContenteditableEnum = "plaintext-only"
-	EmContenteditableEnumTrue          EmContenteditableEnum = "true"
 	EmContenteditableEnumEmpty         EmContenteditableEnum = ""
 )
 
@@ -85,20 +88,20 @@ const (
 type EmDraggableEnum string
 
 const (
-	EmDraggableEnumFalse EmDraggableEnum = "false"
 	EmDraggableEnumTrue  EmDraggableEnum = "true"
+	EmDraggableEnumFalse EmDraggableEnum = "false"
 )
 
 type EmEnterkeyhintEnum string
 
 const (
-	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
-	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
 	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
 	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
 	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
 	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
+	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
+	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
 )
 
 type EmHiddenEnum string
@@ -112,6 +115,7 @@ const (
 type EmInputmodeEnum string
 
 const (
+	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
 	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
 	EmInputmodeEnumText    EmInputmodeEnum = "text"
 	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
@@ -119,22 +123,21 @@ const (
 	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
 	EmInputmodeEnumNone    EmInputmodeEnum = "none"
 	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
-	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
 )
 
 type EmSpellcheckEnum string
 
 const (
-	EmSpellcheckEnumFalse EmSpellcheckEnum = "false"
 	EmSpellcheckEnumTrue  EmSpellcheckEnum = "true"
+	EmSpellcheckEnumFalse EmSpellcheckEnum = "false"
 	EmSpellcheckEnumEmpty EmSpellcheckEnum = ""
 )
 
 type EmTranslateEnum string
 
 const (
-	EmTranslateEnumYes   EmTranslateEnum = "yes"
 	EmTranslateEnumNo    EmTranslateEnum = "no"
+	EmTranslateEnumYes   EmTranslateEnum = "yes"
 	EmTranslateEnumEmpty EmTranslateEnum = ""
 )
 

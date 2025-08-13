@@ -22,7 +22,8 @@ type ColgroupElement struct {
 // Spec Description: The colgroup element represents a group of one or more columns in the table that is its parent, if it has a parent and that is a table element.
 func Colgroup(children ...htemel.Node) *ColgroupElement {
 	node := &ColgroupElement{
-		children: children, attributes: make(colgroupAttrs),
+		children:   children,
+		attributes: make(colgroupAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func ColgroupIf(condition bool, children ...htemel.Node) *ColgroupElement {
 	}
 
 	return &ColgroupElement{
+		children:   children,
+		attributes: make(colgroupAttrs),
 		skipRender: true,
 	}
 }
@@ -77,28 +80,28 @@ const (
 type ColgroupDirEnum string
 
 const (
-	ColgroupDirEnumRtl  ColgroupDirEnum = "rtl"
 	ColgroupDirEnumAuto ColgroupDirEnum = "auto"
 	ColgroupDirEnumLtr  ColgroupDirEnum = "ltr"
+	ColgroupDirEnumRtl  ColgroupDirEnum = "rtl"
 )
 
 type ColgroupDraggableEnum string
 
 const (
-	ColgroupDraggableEnumTrue  ColgroupDraggableEnum = "true"
 	ColgroupDraggableEnumFalse ColgroupDraggableEnum = "false"
+	ColgroupDraggableEnumTrue  ColgroupDraggableEnum = "true"
 )
 
 type ColgroupEnterkeyhintEnum string
 
 const (
+	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
+	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
+	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
 	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
 	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
 	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
 	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
-	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
-	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
-	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
 )
 
 type ColgroupHiddenEnum string
@@ -112,7 +115,6 @@ const (
 type ColgroupInputmodeEnum string
 
 const (
-	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
 	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
 	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
 	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
@@ -120,6 +122,7 @@ const (
 	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
 	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
 	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
+	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
 )
 
 type ColgroupSpellcheckEnum string

@@ -21,6 +21,7 @@ type TrackElement struct {
 // Spec Description: The track element allows authors to specify explicit external timed text tracks for media elements. It does not represent anything on its own.
 func Track() *TrackElement {
 	node := &TrackElement{
+
 		attributes: make(trackAttrs),
 	}
 
@@ -33,6 +34,8 @@ func TrackIf(condition bool) *TrackElement {
 	}
 
 	return &TrackElement{
+
+		attributes: make(trackAttrs),
 		skipRender: true,
 	}
 }
@@ -40,11 +43,11 @@ func TrackIf(condition bool) *TrackElement {
 type TrackKindEnum string
 
 const (
-	TrackKindEnumSubtitles    TrackKindEnum = "subtitles"
-	TrackKindEnumCaptions     TrackKindEnum = "captions"
 	TrackKindEnumChapters     TrackKindEnum = "chapters"
 	TrackKindEnumDescriptions TrackKindEnum = "descriptions"
 	TrackKindEnumMetadata     TrackKindEnum = "metadata"
+	TrackKindEnumSubtitles    TrackKindEnum = "subtitles"
+	TrackKindEnumCaptions     TrackKindEnum = "captions"
 )
 
 type TrackAutocapitalizeEnum string
@@ -69,9 +72,9 @@ const (
 type TrackContenteditableEnum string
 
 const (
-	TrackContenteditableEnumFalse         TrackContenteditableEnum = "false"
 	TrackContenteditableEnumPlaintextOnly TrackContenteditableEnum = "plaintext-only"
 	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
+	TrackContenteditableEnumFalse         TrackContenteditableEnum = "false"
 	TrackContenteditableEnumEmpty         TrackContenteditableEnum = ""
 )
 
@@ -113,14 +116,14 @@ const (
 type TrackInputmodeEnum string
 
 const (
-	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
-	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
-	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
 	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
 	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
 	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
 	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
 	TrackInputmodeEnumDecimal TrackInputmodeEnum = "decimal"
+	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
+	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
+	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
 )
 
 type TrackSpellcheckEnum string

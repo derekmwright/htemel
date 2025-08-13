@@ -22,7 +22,8 @@ type H3Element struct {
 // Spec Description: These elements represent headings for their sections.
 func H3(children ...htemel.Node) *H3Element {
 	node := &H3Element{
-		children: children, attributes: make(h3Attrs),
+		children:   children,
+		attributes: make(h3Attrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func H3If(condition bool, children ...htemel.Node) *H3Element {
 	}
 
 	return &H3Element{
+		children:   children,
+		attributes: make(h3Attrs),
 		skipRender: true,
 	}
 }
@@ -77,9 +80,9 @@ const (
 type H3DirEnum string
 
 const (
+	H3DirEnumAuto H3DirEnum = "auto"
 	H3DirEnumLtr  H3DirEnum = "ltr"
 	H3DirEnumRtl  H3DirEnum = "rtl"
-	H3DirEnumAuto H3DirEnum = "auto"
 )
 
 type H3DraggableEnum string
@@ -92,13 +95,13 @@ const (
 type H3EnterkeyhintEnum string
 
 const (
+	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
+	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
+	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
 	H3EnterkeyhintEnumSend     H3EnterkeyhintEnum = "send"
 	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
 	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
 	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
-	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
-	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
-	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
 )
 
 type H3HiddenEnum string
@@ -112,14 +115,14 @@ const (
 type H3InputmodeEnum string
 
 const (
-	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
-	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
-	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
 	H3InputmodeEnumNone    H3InputmodeEnum = "none"
 	H3InputmodeEnumNumeric H3InputmodeEnum = "numeric"
 	H3InputmodeEnumSearch  H3InputmodeEnum = "search"
 	H3InputmodeEnumTel     H3InputmodeEnum = "tel"
 	H3InputmodeEnumText    H3InputmodeEnum = "text"
+	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
+	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
+	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
 )
 
 type H3SpellcheckEnum string

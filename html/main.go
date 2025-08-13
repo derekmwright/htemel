@@ -22,7 +22,8 @@ type MainElement struct {
 // Spec Description: The main element represents the dominant contents of the document.
 func Main(children ...htemel.Node) *MainElement {
 	node := &MainElement{
-		children: children, attributes: make(mainAttrs),
+		children:   children,
+		attributes: make(mainAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func MainIf(condition bool, children ...htemel.Node) *MainElement {
 	}
 
 	return &MainElement{
+		children:   children,
+		attributes: make(mainAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainEleme
 type MainAutocapitalizeEnum string
 
 const (
-	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
 	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
 	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
 	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
 	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
+	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 )
 
 type MainAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type MainContenteditableEnum string
 
 const (
-	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
 	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
+	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
 	MainContenteditableEnumEmpty         MainContenteditableEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type MainEnterkeyhintEnum string
 
 const (
-	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
-	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
-	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
 	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
 	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
 	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
+	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
+	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
+	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 )
 
 type MainHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type MainInputmodeEnum string
 
 const (
-	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
-	MainInputmodeEnumNone    MainInputmodeEnum = "none"
-	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
 	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
 	MainInputmodeEnumText    MainInputmodeEnum = "text"
 	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
 	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
+	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
+	MainInputmodeEnumNone    MainInputmodeEnum = "none"
+	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
 )
 
 type MainSpellcheckEnum string
@@ -133,16 +136,16 @@ const (
 type MainTranslateEnum string
 
 const (
-	MainTranslateEnumYes   MainTranslateEnum = "yes"
 	MainTranslateEnumNo    MainTranslateEnum = "no"
+	MainTranslateEnumYes   MainTranslateEnum = "yes"
 	MainTranslateEnumEmpty MainTranslateEnum = ""
 )
 
 type MainWritingsuggestionsEnum string
 
 const (
-	MainWritingsuggestionsEnumFalse MainWritingsuggestionsEnum = "false"
 	MainWritingsuggestionsEnumTrue  MainWritingsuggestionsEnum = "true"
+	MainWritingsuggestionsEnumFalse MainWritingsuggestionsEnum = "false"
 	MainWritingsuggestionsEnumEmpty MainWritingsuggestionsEnum = ""
 )
 

@@ -22,7 +22,8 @@ type DlElement struct {
 // Spec Description: The dl element represents an association list consisting of zero or more name-value groups (a description list). A name-value group consists of one or more names (dt elements, possibly as children of a div element child) followed by one or more values (dd elements, possibly as children of a div element child), ignoring any nodes other than dt and dd element children, and dt and dd elements that are children of div element children. Within a single dl element, there should not be more than one dt element for each name.
 func Dl(children ...htemel.Node) *DlElement {
 	node := &DlElement{
-		children: children, attributes: make(dlAttrs),
+		children:   children,
+		attributes: make(dlAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func DlIf(condition bool, children ...htemel.Node) *DlElement {
 	}
 
 	return &DlElement{
+		children:   children,
+		attributes: make(dlAttrs),
 		skipRender: true,
 	}
 }
@@ -68,18 +71,18 @@ const (
 type DlContenteditableEnum string
 
 const (
+	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
 	DlContenteditableEnumTrue          DlContenteditableEnum = "true"
-	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumEmpty         DlContenteditableEnum = ""
 )
 
 type DlDirEnum string
 
 const (
+	DlDirEnumRtl  DlDirEnum = "rtl"
 	DlDirEnumAuto DlDirEnum = "auto"
 	DlDirEnumLtr  DlDirEnum = "ltr"
-	DlDirEnumRtl  DlDirEnum = "rtl"
 )
 
 type DlDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type DlEnterkeyhintEnum string
 
 const (
+	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
 	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
 	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
 	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
 	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
 	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
 	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
-	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
 )
 
 type DlHiddenEnum string
@@ -112,21 +115,21 @@ const (
 type DlInputmodeEnum string
 
 const (
-	DlInputmodeEnumUrl     DlInputmodeEnum = "url"
-	DlInputmodeEnumDecimal DlInputmodeEnum = "decimal"
-	DlInputmodeEnumEmail   DlInputmodeEnum = "email"
 	DlInputmodeEnumNone    DlInputmodeEnum = "none"
 	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
 	DlInputmodeEnumSearch  DlInputmodeEnum = "search"
 	DlInputmodeEnumTel     DlInputmodeEnum = "tel"
 	DlInputmodeEnumText    DlInputmodeEnum = "text"
+	DlInputmodeEnumUrl     DlInputmodeEnum = "url"
+	DlInputmodeEnumDecimal DlInputmodeEnum = "decimal"
+	DlInputmodeEnumEmail   DlInputmodeEnum = "email"
 )
 
 type DlSpellcheckEnum string
 
 const (
-	DlSpellcheckEnumTrue  DlSpellcheckEnum = "true"
 	DlSpellcheckEnumFalse DlSpellcheckEnum = "false"
+	DlSpellcheckEnumTrue  DlSpellcheckEnum = "true"
 	DlSpellcheckEnumEmpty DlSpellcheckEnum = ""
 )
 

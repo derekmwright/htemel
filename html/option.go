@@ -22,7 +22,8 @@ type OptionElement struct {
 // Spec Description: The option element represents an option in a select element or as part of a list of suggestions in a datalist element.
 func Option(children ...htemel.Node) *OptionElement {
 	node := &OptionElement{
-		children: children, attributes: make(optionAttrs),
+		children:   children,
+		attributes: make(optionAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func OptionIf(condition bool, children ...htemel.Node) *OptionElement {
 	}
 
 	return &OptionElement{
+		children:   children,
+		attributes: make(optionAttrs),
 		skipRender: true,
 	}
 }
@@ -92,13 +95,13 @@ const (
 type OptionEnterkeyhintEnum string
 
 const (
+	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
+	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
+	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
 	OptionEnterkeyhintEnumDone     OptionEnterkeyhintEnum = "done"
 	OptionEnterkeyhintEnumEnter    OptionEnterkeyhintEnum = "enter"
 	OptionEnterkeyhintEnumGo       OptionEnterkeyhintEnum = "go"
 	OptionEnterkeyhintEnumNext     OptionEnterkeyhintEnum = "next"
-	OptionEnterkeyhintEnumPrevious OptionEnterkeyhintEnum = "previous"
-	OptionEnterkeyhintEnumSearch   OptionEnterkeyhintEnum = "search"
-	OptionEnterkeyhintEnumSend     OptionEnterkeyhintEnum = "send"
 )
 
 type OptionHiddenEnum string
@@ -133,8 +136,8 @@ const (
 type OptionTranslateEnum string
 
 const (
-	OptionTranslateEnumNo    OptionTranslateEnum = "no"
 	OptionTranslateEnumYes   OptionTranslateEnum = "yes"
+	OptionTranslateEnumNo    OptionTranslateEnum = "no"
 	OptionTranslateEnumEmpty OptionTranslateEnum = ""
 )
 

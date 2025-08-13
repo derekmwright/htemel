@@ -22,7 +22,8 @@ type SummaryElement struct {
 // Spec Description: The summary element represents a summary, caption, or legend for the rest of the contents of the summary element's parent details element, if any.
 func Summary(children ...htemel.Node) *SummaryElement {
 	node := &SummaryElement{
-		children: children, attributes: make(summaryAttrs),
+		children:   children,
+		attributes: make(summaryAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func SummaryIf(condition bool, children ...htemel.Node) *SummaryElement {
 	}
 
 	return &SummaryElement{
+		children:   children,
+		attributes: make(summaryAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *Summar
 type SummaryAutocapitalizeEnum string
 
 const (
-	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
-	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
 	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
 	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
 	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
+	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
+	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
 )
 
 type SummaryAutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type SummaryDirEnum string
 
 const (
-	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
 	SummaryDirEnumAuto SummaryDirEnum = "auto"
 	SummaryDirEnumLtr  SummaryDirEnum = "ltr"
+	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
 )
 
 type SummaryDraggableEnum string
@@ -92,41 +95,41 @@ const (
 type SummaryEnterkeyhintEnum string
 
 const (
+	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
 	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
 	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
 	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
 	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
 	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
-	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
 )
 
 type SummaryHiddenEnum string
 
 const (
-	SummaryHiddenEnumUntilFound SummaryHiddenEnum = "until-found"
 	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
+	SummaryHiddenEnumUntilFound SummaryHiddenEnum = "until-found"
 	SummaryHiddenEnumEmpty      SummaryHiddenEnum = ""
 )
 
 type SummaryInputmodeEnum string
 
 const (
-	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
-	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
-	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
 	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
 	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
 	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
 	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
 	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
+	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
+	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
+	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
 )
 
 type SummarySpellcheckEnum string
 
 const (
-	SummarySpellcheckEnumTrue  SummarySpellcheckEnum = "true"
 	SummarySpellcheckEnumFalse SummarySpellcheckEnum = "false"
+	SummarySpellcheckEnumTrue  SummarySpellcheckEnum = "true"
 	SummarySpellcheckEnumEmpty SummarySpellcheckEnum = ""
 )
 

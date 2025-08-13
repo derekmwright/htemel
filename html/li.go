@@ -22,7 +22,8 @@ type LiElement struct {
 // Spec Description: The li element represents a list item. If its parent element is an ol, ul, or menu element, then the element is an item of the parent element's list, as defined for those elements. Otherwise, the list item has no defined list-related relationship to any other li element.
 func Li(children ...htemel.Node) *LiElement {
 	node := &LiElement{
-		children: children, attributes: make(liAttrs),
+		children:   children,
+		attributes: make(liAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func LiIf(condition bool, children ...htemel.Node) *LiElement {
 	}
 
 	return &LiElement{
+		children:   children,
+		attributes: make(liAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
 type LiAutocapitalizeEnum string
 
 const (
+	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
 	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
 	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
-	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 )
 
 type LiAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type LiContenteditableEnum string
 
 const (
+	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
 	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
-	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
 	LiContenteditableEnumEmpty         LiContenteditableEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type LiEnterkeyhintEnum string
 
 const (
-	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
-	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
-	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
 	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
 	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
 	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
 	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
+	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
+	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
+	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
 )
 
 type LiHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type LiInputmodeEnum string
 
 const (
-	LiInputmodeEnumNone    LiInputmodeEnum = "none"
-	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
-	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
-	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
 	LiInputmodeEnumText    LiInputmodeEnum = "text"
 	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
 	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
+	LiInputmodeEnumNone    LiInputmodeEnum = "none"
+	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
+	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
+	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
 )
 
 type LiSpellcheckEnum string

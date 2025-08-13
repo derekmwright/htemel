@@ -22,7 +22,8 @@ type SubElement struct {
 // Spec Description: The sup element represents a superscript and the sub element represents a subscript.
 func Sub(children ...htemel.Node) *SubElement {
 	node := &SubElement{
-		children: children, attributes: make(subAttrs),
+		children:   children,
+		attributes: make(subAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func SubIf(condition bool, children ...htemel.Node) *SubElement {
 	}
 
 	return &SubElement{
+		children:   children,
+		attributes: make(subAttrs),
 		skipRender: true,
 	}
 }
@@ -77,9 +80,9 @@ const (
 type SubDirEnum string
 
 const (
+	SubDirEnumRtl  SubDirEnum = "rtl"
 	SubDirEnumAuto SubDirEnum = "auto"
 	SubDirEnumLtr  SubDirEnum = "ltr"
-	SubDirEnumRtl  SubDirEnum = "rtl"
 )
 
 type SubDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type SubEnterkeyhintEnum string
 
 const (
+	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
 	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
 	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
 	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
 	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
 	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
 	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
-	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
 )
 
 type SubHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type SubInputmodeEnum string
 
 const (
+	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
+	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
+	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
 	SubInputmodeEnumText    SubInputmodeEnum = "text"
 	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
 	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
 	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
 	SubInputmodeEnumNone    SubInputmodeEnum = "none"
-	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
-	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
-	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
 )
 
 type SubSpellcheckEnum string
@@ -133,8 +136,8 @@ const (
 type SubTranslateEnum string
 
 const (
-	SubTranslateEnumYes   SubTranslateEnum = "yes"
 	SubTranslateEnumNo    SubTranslateEnum = "no"
+	SubTranslateEnumYes   SubTranslateEnum = "yes"
 	SubTranslateEnumEmpty SubTranslateEnum = ""
 )
 

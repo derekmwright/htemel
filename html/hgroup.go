@@ -22,7 +22,8 @@ type HgroupElement struct {
 // Spec Description: The hgroup element represents a heading and related content. The element may be used to group an h1–h6 element with one or more p elements containing content representing a subheading, alternative title, or tagline.
 func Hgroup(children ...htemel.Node) *HgroupElement {
 	node := &HgroupElement{
-		children: children, attributes: make(hgroupAttrs),
+		children:   children,
+		attributes: make(hgroupAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func HgroupIf(condition bool, children ...htemel.Node) *HgroupElement {
 	}
 
 	return &HgroupElement{
+		children:   children,
+		attributes: make(hgroupAttrs),
 		skipRender: true,
 	}
 }
@@ -77,9 +80,9 @@ const (
 type HgroupDirEnum string
 
 const (
-	HgroupDirEnumRtl  HgroupDirEnum = "rtl"
 	HgroupDirEnumAuto HgroupDirEnum = "auto"
 	HgroupDirEnumLtr  HgroupDirEnum = "ltr"
+	HgroupDirEnumRtl  HgroupDirEnum = "rtl"
 )
 
 type HgroupDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type HgroupEnterkeyhintEnum string
 
 const (
+	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
+	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
+	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
 	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
 	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
 	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
-	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
-	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
-	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 )
 
 type HgroupHiddenEnum string
@@ -112,21 +115,21 @@ const (
 type HgroupInputmodeEnum string
 
 const (
-	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
-	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
 	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
 	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
 	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
 	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
 	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
 	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
+	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
+	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
 )
 
 type HgroupSpellcheckEnum string
 
 const (
-	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
 	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
+	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
 	HgroupSpellcheckEnumEmpty HgroupSpellcheckEnum = ""
 )
 

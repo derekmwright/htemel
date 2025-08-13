@@ -21,6 +21,7 @@ type EmbedElement struct {
 // Spec Description: The embed element provides an integration point for an external application or interactive content.
 func Embed() *EmbedElement {
 	node := &EmbedElement{
+
 		attributes: make(embedAttrs),
 	}
 
@@ -33,6 +34,8 @@ func EmbedIf(condition bool) *EmbedElement {
 	}
 
 	return &EmbedElement{
+
+		attributes: make(embedAttrs),
 		skipRender: true,
 	}
 }
@@ -40,37 +43,37 @@ func EmbedIf(condition bool) *EmbedElement {
 type EmbedAutocapitalizeEnum string
 
 const (
-	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
-	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
 	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
 	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
 	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
+	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
+	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
 )
 
 type EmbedAutocorrectEnum string
 
 const (
-	EmbedAutocorrectEnumOff   EmbedAutocorrectEnum = "off"
 	EmbedAutocorrectEnumOn    EmbedAutocorrectEnum = "on"
+	EmbedAutocorrectEnumOff   EmbedAutocorrectEnum = "off"
 	EmbedAutocorrectEnumEmpty EmbedAutocorrectEnum = ""
 )
 
 type EmbedContenteditableEnum string
 
 const (
+	EmbedContenteditableEnumFalse         EmbedContenteditableEnum = "false"
 	EmbedContenteditableEnumPlaintextOnly EmbedContenteditableEnum = "plaintext-only"
 	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
-	EmbedContenteditableEnumFalse         EmbedContenteditableEnum = "false"
 	EmbedContenteditableEnumEmpty         EmbedContenteditableEnum = ""
 )
 
 type EmbedDirEnum string
 
 const (
-	EmbedDirEnumAuto EmbedDirEnum = "auto"
 	EmbedDirEnumLtr  EmbedDirEnum = "ltr"
 	EmbedDirEnumRtl  EmbedDirEnum = "rtl"
+	EmbedDirEnumAuto EmbedDirEnum = "auto"
 )
 
 type EmbedDraggableEnum string
@@ -83,13 +86,13 @@ const (
 type EmbedEnterkeyhintEnum string
 
 const (
+	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
+	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
 	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
 	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
 	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
-	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
-	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 )
 
 type EmbedHiddenEnum string
@@ -103,14 +106,14 @@ const (
 type EmbedInputmodeEnum string
 
 const (
+	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
+	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
 	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
 	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
 	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
-	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
-	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
 )
 
 type EmbedSpellcheckEnum string

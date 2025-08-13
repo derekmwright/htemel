@@ -22,7 +22,8 @@ type AddressElement struct {
 // Spec Description: The address element represents the contact information for its nearest article or body element ancestor. If that is the body element, then the contact information applies to the document as a whole.
 func Address(children ...htemel.Node) *AddressElement {
 	node := &AddressElement{
-		children: children, attributes: make(addressAttrs),
+		children:   children,
+		attributes: make(addressAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func AddressIf(condition bool, children ...htemel.Node) *AddressElement {
 	}
 
 	return &AddressElement{
+		children:   children,
+		attributes: make(addressAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func AddressTernary(condition bool, true htemel.Node, false htemel.Node) *Addres
 type AddressAutocapitalizeEnum string
 
 const (
-	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
-	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
-	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
 	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
 	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
+	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
+	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
+	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
 )
 
 type AddressAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type AddressContenteditableEnum string
 
 const (
-	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
 	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
+	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumEmpty         AddressContenteditableEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type AddressEnterkeyhintEnum string
 
 const (
-	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
 	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
 	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
 	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
 	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
 	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
+	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 )
 
 type AddressHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type AddressInputmodeEnum string
 
 const (
+	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
+	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
 	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
 	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 	AddressInputmodeEnumText    AddressInputmodeEnum = "text"
 	AddressInputmodeEnumUrl     AddressInputmodeEnum = "url"
 	AddressInputmodeEnumDecimal AddressInputmodeEnum = "decimal"
-	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
-	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
 )
 
 type AddressSpellcheckEnum string

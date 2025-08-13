@@ -22,7 +22,8 @@ type TableElement struct {
 // Spec Description: The table element represents data with more than one dimension, in the form of a table.
 func Table(children ...htemel.Node) *TableElement {
 	node := &TableElement{
-		children: children, attributes: make(tableAttrs),
+		children:   children,
+		attributes: make(tableAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func TableIf(condition bool, children ...htemel.Node) *TableElement {
 	}
 
 	return &TableElement{
+		children:   children,
+		attributes: make(tableAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func TableTernary(condition bool, true htemel.Node, false htemel.Node) *TableEle
 type TableAutocapitalizeEnum string
 
 const (
-	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
 	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
 	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
 	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
 	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
+	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 )
 
 type TableAutocorrectEnum string
@@ -92,13 +95,13 @@ const (
 type TableEnterkeyhintEnum string
 
 const (
-	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
-	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
-	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
 	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
 	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
 	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
 	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
+	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
+	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
+	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
 )
 
 type TableHiddenEnum string
@@ -112,7 +115,6 @@ const (
 type TableInputmodeEnum string
 
 const (
-	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
 	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 	TableInputmodeEnumText    TableInputmodeEnum = "text"
@@ -120,6 +122,7 @@ const (
 	TableInputmodeEnumDecimal TableInputmodeEnum = "decimal"
 	TableInputmodeEnumEmail   TableInputmodeEnum = "email"
 	TableInputmodeEnumNone    TableInputmodeEnum = "none"
+	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
 )
 
 type TableSpellcheckEnum string

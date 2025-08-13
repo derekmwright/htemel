@@ -22,7 +22,8 @@ type HeaderElement struct {
 // Spec Description: The header element represents a group of introductory or navigational aids.
 func Header(children ...htemel.Node) *HeaderElement {
 	node := &HeaderElement{
-		children: children, attributes: make(headerAttrs),
+		children:   children,
+		attributes: make(headerAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func HeaderIf(condition bool, children ...htemel.Node) *HeaderElement {
 	}
 
 	return &HeaderElement{
+		children:   children,
+		attributes: make(headerAttrs),
 		skipRender: true,
 	}
 }
@@ -77,9 +80,9 @@ const (
 type HeaderDirEnum string
 
 const (
+	HeaderDirEnumLtr  HeaderDirEnum = "ltr"
 	HeaderDirEnumRtl  HeaderDirEnum = "rtl"
 	HeaderDirEnumAuto HeaderDirEnum = "auto"
-	HeaderDirEnumLtr  HeaderDirEnum = "ltr"
 )
 
 type HeaderDraggableEnum string
@@ -104,8 +107,8 @@ const (
 type HeaderHiddenEnum string
 
 const (
-	HeaderHiddenEnumHidden     HeaderHiddenEnum = "hidden"
 	HeaderHiddenEnumUntilFound HeaderHiddenEnum = "until-found"
+	HeaderHiddenEnumHidden     HeaderHiddenEnum = "hidden"
 	HeaderHiddenEnumEmpty      HeaderHiddenEnum = ""
 )
 

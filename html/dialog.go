@@ -22,7 +22,8 @@ type DialogElement struct {
 // Spec Description: The dialog element represents a transitory part of an application, in the form of a small window ("dialog box"), which the user interacts with to perform a task or gather information. Once the user is done, the dialog can be automatically closed by the application, or manually closed by the user.
 func Dialog(children ...htemel.Node) *DialogElement {
 	node := &DialogElement{
-		children: children, attributes: make(dialogAttrs),
+		children:   children,
+		attributes: make(dialogAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func DialogIf(condition bool, children ...htemel.Node) *DialogElement {
 	}
 
 	return &DialogElement{
+		children:   children,
+		attributes: make(dialogAttrs),
 		skipRender: true,
 	}
 }
@@ -57,12 +60,12 @@ const (
 type DialogAutocapitalizeEnum string
 
 const (
-	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
 	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
 	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
 	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
 	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
+	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
 )
 
 type DialogAutocorrectEnum string
@@ -100,13 +103,13 @@ const (
 type DialogEnterkeyhintEnum string
 
 const (
-	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
-	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
-	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
 	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
 	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
 	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 	DialogEnterkeyhintEnumSearch   DialogEnterkeyhintEnum = "search"
+	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
+	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
+	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
 )
 
 type DialogHiddenEnum string
@@ -120,14 +123,14 @@ const (
 type DialogInputmodeEnum string
 
 const (
-	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
-	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
-	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
 	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
 	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
 	DialogInputmodeEnumNumeric DialogInputmodeEnum = "numeric"
 	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
+	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
+	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
+	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 )
 
 type DialogSpellcheckEnum string

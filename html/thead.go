@@ -22,7 +22,8 @@ type TheadElement struct {
 // Spec Description: The thead element represents the block of rows that consist of the column labels (headers) and any ancillary non-header cells for the parent table element, if the thead element has a parent and it is a table.
 func Thead(children ...htemel.Node) *TheadElement {
 	node := &TheadElement{
-		children: children, attributes: make(theadAttrs),
+		children:   children,
+		attributes: make(theadAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func TheadIf(condition bool, children ...htemel.Node) *TheadElement {
 	}
 
 	return &TheadElement{
+		children:   children,
+		attributes: make(theadAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadEle
 type TheadAutocapitalizeEnum string
 
 const (
-	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
-	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
 	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
 	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
 	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
 	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
+	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
+	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
 )
 
 type TheadAutocorrectEnum string
@@ -92,13 +95,13 @@ const (
 type TheadEnterkeyhintEnum string
 
 const (
+	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
+	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
+	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
 	TheadEnterkeyhintEnumGo       TheadEnterkeyhintEnum = "go"
 	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
 	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
 	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
-	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
-	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
-	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
 )
 
 type TheadHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type TheadInputmodeEnum string
 
 const (
+	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
+	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
 	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
 	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
 	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
 	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
 	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
 	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
-	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
-	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
 )
 
 type TheadSpellcheckEnum string

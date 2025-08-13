@@ -22,7 +22,8 @@ type LegendElement struct {
 // Spec Description: The legend element represents a caption for the rest of the contents of the legend element's parent fieldset element, if any. Otherwise, if the legend has a parent optgroup element, then the legend represents the optgroup's label.
 func Legend(children ...htemel.Node) *LegendElement {
 	node := &LegendElement{
-		children: children, attributes: make(legendAttrs),
+		children:   children,
+		attributes: make(legendAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func LegendIf(condition bool, children ...htemel.Node) *LegendElement {
 	}
 
 	return &LegendElement{
+		children:   children,
+		attributes: make(legendAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func LegendTernary(condition bool, true htemel.Node, false htemel.Node) *LegendE
 type LegendAutocapitalizeEnum string
 
 const (
-	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
-	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
 	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
 	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
 	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
 	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
+	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
+	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
 )
 
 type LegendAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type LegendContenteditableEnum string
 
 const (
+	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
 	LegendContenteditableEnumFalse         LegendContenteditableEnum = "false"
 	LegendContenteditableEnumPlaintextOnly LegendContenteditableEnum = "plaintext-only"
-	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
 	LegendContenteditableEnumEmpty         LegendContenteditableEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type LegendEnterkeyhintEnum string
 
 const (
+	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
+	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
 	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
 	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
 	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
 	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
 	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
-	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
-	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
 )
 
 type LegendHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type LegendInputmodeEnum string
 
 const (
+	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
+	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
+	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
 	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
 	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
 	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
 	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
-	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
-	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
-	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
 )
 
 type LegendSpellcheckEnum string
@@ -141,8 +144,8 @@ const (
 type LegendWritingsuggestionsEnum string
 
 const (
-	LegendWritingsuggestionsEnumFalse LegendWritingsuggestionsEnum = "false"
 	LegendWritingsuggestionsEnumTrue  LegendWritingsuggestionsEnum = "true"
+	LegendWritingsuggestionsEnumFalse LegendWritingsuggestionsEnum = "false"
 	LegendWritingsuggestionsEnumEmpty LegendWritingsuggestionsEnum = ""
 )
 

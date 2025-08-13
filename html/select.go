@@ -22,7 +22,8 @@ type SelectElement struct {
 // Spec Description: The select element represents a control for selecting amongst a set of options.
 func Select(children ...htemel.Node) *SelectElement {
 	node := &SelectElement{
-		children: children, attributes: make(selectAttrs),
+		children:   children,
+		attributes: make(selectAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func SelectIf(condition bool, children ...htemel.Node) *SelectElement {
 	}
 
 	return &SelectElement{
+		children:   children,
+		attributes: make(selectAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectE
 type SelectAutocapitalizeEnum string
 
 const (
-	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
-	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
-	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
 	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
 	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
+	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
+	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
+	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
 )
 
 type SelectAutocorrectEnum string
@@ -85,20 +88,20 @@ const (
 type SelectDraggableEnum string
 
 const (
-	SelectDraggableEnumTrue  SelectDraggableEnum = "true"
 	SelectDraggableEnumFalse SelectDraggableEnum = "false"
+	SelectDraggableEnumTrue  SelectDraggableEnum = "true"
 )
 
 type SelectEnterkeyhintEnum string
 
 const (
+	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
 	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
 	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
 	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
-	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 )
 
 type SelectHiddenEnum string

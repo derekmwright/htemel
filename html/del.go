@@ -22,7 +22,8 @@ type DelElement struct {
 // Spec Description: The del element represents a removal from the document.
 func Del(children ...htemel.Node) *DelElement {
 	node := &DelElement{
-		children: children, attributes: make(delAttrs),
+		children:   children,
+		attributes: make(delAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func DelIf(condition bool, children ...htemel.Node) *DelElement {
 	}
 
 	return &DelElement{
+		children:   children,
+		attributes: make(delAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func DelTernary(condition bool, true htemel.Node, false htemel.Node) *DelElement
 type DelAutocapitalizeEnum string
 
 const (
+	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
+	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
 	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
 	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
 	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
 	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
-	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
-	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
 )
 
 type DelAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type DelContenteditableEnum string
 
 const (
+	DelContenteditableEnumFalse         DelContenteditableEnum = "false"
 	DelContenteditableEnumPlaintextOnly DelContenteditableEnum = "plaintext-only"
 	DelContenteditableEnumTrue          DelContenteditableEnum = "true"
-	DelContenteditableEnumFalse         DelContenteditableEnum = "false"
 	DelContenteditableEnumEmpty         DelContenteditableEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type DelEnterkeyhintEnum string
 
 const (
+	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
+	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
 	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
 	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
 	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
 	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
 	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
-	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
-	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
 )
 
 type DelHiddenEnum string
@@ -112,7 +115,6 @@ const (
 type DelInputmodeEnum string
 
 const (
-	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 	DelInputmodeEnumNone    DelInputmodeEnum = "none"
 	DelInputmodeEnumNumeric DelInputmodeEnum = "numeric"
 	DelInputmodeEnumSearch  DelInputmodeEnum = "search"
@@ -120,13 +122,14 @@ const (
 	DelInputmodeEnumText    DelInputmodeEnum = "text"
 	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
 	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
+	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 )
 
 type DelSpellcheckEnum string
 
 const (
-	DelSpellcheckEnumTrue  DelSpellcheckEnum = "true"
 	DelSpellcheckEnumFalse DelSpellcheckEnum = "false"
+	DelSpellcheckEnumTrue  DelSpellcheckEnum = "true"
 	DelSpellcheckEnumEmpty DelSpellcheckEnum = ""
 )
 
@@ -141,8 +144,8 @@ const (
 type DelWritingsuggestionsEnum string
 
 const (
-	DelWritingsuggestionsEnumFalse DelWritingsuggestionsEnum = "false"
 	DelWritingsuggestionsEnumTrue  DelWritingsuggestionsEnum = "true"
+	DelWritingsuggestionsEnumFalse DelWritingsuggestionsEnum = "false"
 	DelWritingsuggestionsEnumEmpty DelWritingsuggestionsEnum = ""
 )
 

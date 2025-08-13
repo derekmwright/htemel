@@ -22,7 +22,8 @@ type H5Element struct {
 // Spec Description: These elements represent headings for their sections.
 func H5(children ...htemel.Node) *H5Element {
 	node := &H5Element{
-		children: children, attributes: make(h5Attrs),
+		children:   children,
+		attributes: make(h5Attrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func H5If(condition bool, children ...htemel.Node) *H5Element {
 	}
 
 	return &H5Element{
+		children:   children,
+		attributes: make(h5Attrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func H5Ternary(condition bool, true htemel.Node, false htemel.Node) *H5Element {
 type H5AutocapitalizeEnum string
 
 const (
+	H5AutocapitalizeEnumCharacters H5AutocapitalizeEnum = "characters"
 	H5AutocapitalizeEnumNone       H5AutocapitalizeEnum = "none"
 	H5AutocapitalizeEnumOff        H5AutocapitalizeEnum = "off"
 	H5AutocapitalizeEnumOn         H5AutocapitalizeEnum = "on"
 	H5AutocapitalizeEnumSentences  H5AutocapitalizeEnum = "sentences"
 	H5AutocapitalizeEnumWords      H5AutocapitalizeEnum = "words"
-	H5AutocapitalizeEnumCharacters H5AutocapitalizeEnum = "characters"
 )
 
 type H5AutocorrectEnum string
@@ -92,13 +95,13 @@ const (
 type H5EnterkeyhintEnum string
 
 const (
+	H5EnterkeyhintEnumGo       H5EnterkeyhintEnum = "go"
 	H5EnterkeyhintEnumNext     H5EnterkeyhintEnum = "next"
 	H5EnterkeyhintEnumPrevious H5EnterkeyhintEnum = "previous"
 	H5EnterkeyhintEnumSearch   H5EnterkeyhintEnum = "search"
 	H5EnterkeyhintEnumSend     H5EnterkeyhintEnum = "send"
 	H5EnterkeyhintEnumDone     H5EnterkeyhintEnum = "done"
 	H5EnterkeyhintEnumEnter    H5EnterkeyhintEnum = "enter"
-	H5EnterkeyhintEnumGo       H5EnterkeyhintEnum = "go"
 )
 
 type H5HiddenEnum string
@@ -112,21 +115,21 @@ const (
 type H5InputmodeEnum string
 
 const (
+	H5InputmodeEnumSearch  H5InputmodeEnum = "search"
+	H5InputmodeEnumTel     H5InputmodeEnum = "tel"
+	H5InputmodeEnumText    H5InputmodeEnum = "text"
 	H5InputmodeEnumUrl     H5InputmodeEnum = "url"
 	H5InputmodeEnumDecimal H5InputmodeEnum = "decimal"
 	H5InputmodeEnumEmail   H5InputmodeEnum = "email"
 	H5InputmodeEnumNone    H5InputmodeEnum = "none"
 	H5InputmodeEnumNumeric H5InputmodeEnum = "numeric"
-	H5InputmodeEnumSearch  H5InputmodeEnum = "search"
-	H5InputmodeEnumTel     H5InputmodeEnum = "tel"
-	H5InputmodeEnumText    H5InputmodeEnum = "text"
 )
 
 type H5SpellcheckEnum string
 
 const (
-	H5SpellcheckEnumTrue  H5SpellcheckEnum = "true"
 	H5SpellcheckEnumFalse H5SpellcheckEnum = "false"
+	H5SpellcheckEnumTrue  H5SpellcheckEnum = "true"
 	H5SpellcheckEnumEmpty H5SpellcheckEnum = ""
 )
 

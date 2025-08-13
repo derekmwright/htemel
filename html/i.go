@@ -22,7 +22,8 @@ type IElement struct {
 // Spec Description: The i element represents a span of text in an alternate voice or mood, or otherwise offset from the normal prose in a manner indicating a different quality of text, such as a taxonomic designation, a technical term, an idiomatic phrase from another language, transliteration, a thought, or a ship name in Western texts.
 func I(children ...htemel.Node) *IElement {
 	node := &IElement{
-		children: children, attributes: make(iAttrs),
+		children:   children,
+		attributes: make(iAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func IIf(condition bool, children ...htemel.Node) *IElement {
 	}
 
 	return &IElement{
+		children:   children,
+		attributes: make(iAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
 type IAutocapitalizeEnum string
 
 const (
+	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
 	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
 	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
 	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
 	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
-	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
 )
 
 type IAutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type IDirEnum string
 
 const (
+	IDirEnumRtl  IDirEnum = "rtl"
 	IDirEnumAuto IDirEnum = "auto"
 	IDirEnumLtr  IDirEnum = "ltr"
-	IDirEnumRtl  IDirEnum = "rtl"
 )
 
 type IDraggableEnum string
@@ -92,13 +95,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
-	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
 	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
 	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
 	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
 	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
+	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
 )
 
 type IHiddenEnum string
@@ -112,21 +115,21 @@ const (
 type IInputmodeEnum string
 
 const (
-	IInputmodeEnumSearch  IInputmodeEnum = "search"
-	IInputmodeEnumTel     IInputmodeEnum = "tel"
 	IInputmodeEnumText    IInputmodeEnum = "text"
 	IInputmodeEnumUrl     IInputmodeEnum = "url"
 	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
 	IInputmodeEnumEmail   IInputmodeEnum = "email"
 	IInputmodeEnumNone    IInputmodeEnum = "none"
 	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
+	IInputmodeEnumSearch  IInputmodeEnum = "search"
+	IInputmodeEnumTel     IInputmodeEnum = "tel"
 )
 
 type ISpellcheckEnum string
 
 const (
-	ISpellcheckEnumFalse ISpellcheckEnum = "false"
 	ISpellcheckEnumTrue  ISpellcheckEnum = "true"
+	ISpellcheckEnumFalse ISpellcheckEnum = "false"
 	ISpellcheckEnumEmpty ISpellcheckEnum = ""
 )
 

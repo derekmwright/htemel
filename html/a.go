@@ -22,7 +22,8 @@ type AElement struct {
 // Spec Description: If the a element has an href attribute, then it represents a hyperlink (a hypertext anchor) labeled by its contents.
 func A(children ...htemel.Node) *AElement {
 	node := &AElement{
-		children: children, attributes: make(aAttrs),
+		children:   children,
+		attributes: make(aAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func AIf(condition bool, children ...htemel.Node) *AElement {
 	}
 
 	return &AElement{
+		children:   children,
+		attributes: make(aAttrs),
 		skipRender: true,
 	}
 }
@@ -49,37 +52,37 @@ func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
 type AAutocapitalizeEnum string
 
 const (
-	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
 	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
 	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
 	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
 	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
 	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
+	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
 )
 
 type AAutocorrectEnum string
 
 const (
-	AAutocorrectEnumOff   AAutocorrectEnum = "off"
 	AAutocorrectEnumOn    AAutocorrectEnum = "on"
+	AAutocorrectEnumOff   AAutocorrectEnum = "off"
 	AAutocorrectEnumEmpty AAutocorrectEnum = ""
 )
 
 type AContenteditableEnum string
 
 const (
-	AContenteditableEnumTrue          AContenteditableEnum = "true"
 	AContenteditableEnumFalse         AContenteditableEnum = "false"
 	AContenteditableEnumPlaintextOnly AContenteditableEnum = "plaintext-only"
+	AContenteditableEnumTrue          AContenteditableEnum = "true"
 	AContenteditableEnumEmpty         AContenteditableEnum = ""
 )
 
 type ADirEnum string
 
 const (
-	ADirEnumAuto ADirEnum = "auto"
 	ADirEnumLtr  ADirEnum = "ltr"
 	ADirEnumRtl  ADirEnum = "rtl"
+	ADirEnumAuto ADirEnum = "auto"
 )
 
 type ADraggableEnum string
@@ -92,13 +95,13 @@ const (
 type AEnterkeyhintEnum string
 
 const (
-	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
 	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
 	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
 	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
 	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
 	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
 	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
+	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
 )
 
 type AHiddenEnum string

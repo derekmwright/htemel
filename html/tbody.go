@@ -22,7 +22,8 @@ type TbodyElement struct {
 // Spec Description: The tbody element represents a block of rows that consist of a body of data for the parent table element, if the tbody element has a parent and it is a table.
 func Tbody(children ...htemel.Node) *TbodyElement {
 	node := &TbodyElement{
-		children: children, attributes: make(tbodyAttrs),
+		children:   children,
+		attributes: make(tbodyAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func TbodyIf(condition bool, children ...htemel.Node) *TbodyElement {
 	}
 
 	return &TbodyElement{
+		children:   children,
+		attributes: make(tbodyAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func TbodyTernary(condition bool, true htemel.Node, false htemel.Node) *TbodyEle
 type TbodyAutocapitalizeEnum string
 
 const (
+	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
 	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
 	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 	TbodyAutocapitalizeEnumWords      TbodyAutocapitalizeEnum = "words"
 	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
 	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
-	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
 )
 
 type TbodyAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type TbodyContenteditableEnum string
 
 const (
+	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
 	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
-	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumEmpty         TbodyContenteditableEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type TbodyEnterkeyhintEnum string
 
 const (
+	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 	TbodyEnterkeyhintEnumDone     TbodyEnterkeyhintEnum = "done"
 	TbodyEnterkeyhintEnumEnter    TbodyEnterkeyhintEnum = "enter"
 	TbodyEnterkeyhintEnumGo       TbodyEnterkeyhintEnum = "go"
 	TbodyEnterkeyhintEnumNext     TbodyEnterkeyhintEnum = "next"
 	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
 	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
-	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 )
 
 type TbodyHiddenEnum string

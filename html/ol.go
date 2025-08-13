@@ -22,7 +22,8 @@ type OlElement struct {
 // Spec Description: The ol element represents a list of items, where the items have been intentionally ordered, such that changing the order would change the meaning of the document.
 func Ol(children ...htemel.Node) *OlElement {
 	node := &OlElement{
-		children: children, attributes: make(olAttrs),
+		children:   children,
+		attributes: make(olAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func OlIf(condition bool, children ...htemel.Node) *OlElement {
 	}
 
 	return &OlElement{
+		children:   children,
+		attributes: make(olAttrs),
 		skipRender: true,
 	}
 }
@@ -92,13 +95,13 @@ const (
 type OlEnterkeyhintEnum string
 
 const (
-	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
 	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
 	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
 	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
 	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
+	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 )
 
 type OlHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type OlInputmodeEnum string
 
 const (
+	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
+	OlInputmodeEnumNone    OlInputmodeEnum = "none"
+	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
 	OlInputmodeEnumSearch  OlInputmodeEnum = "search"
 	OlInputmodeEnumTel     OlInputmodeEnum = "tel"
 	OlInputmodeEnumText    OlInputmodeEnum = "text"
 	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
 	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
-	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
-	OlInputmodeEnumNone    OlInputmodeEnum = "none"
-	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
 )
 
 type OlSpellcheckEnum string

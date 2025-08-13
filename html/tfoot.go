@@ -22,7 +22,8 @@ type TfootElement struct {
 // Spec Description: The tfoot element represents the block of rows that consist of the column summaries (footers) for the parent table element, if the tfoot element has a parent and it is a table.
 func Tfoot(children ...htemel.Node) *TfootElement {
 	node := &TfootElement{
-		children: children, attributes: make(tfootAttrs),
+		children:   children,
+		attributes: make(tfootAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func TfootIf(condition bool, children ...htemel.Node) *TfootElement {
 	}
 
 	return &TfootElement{
+		children:   children,
+		attributes: make(tfootAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func TfootTernary(condition bool, true htemel.Node, false htemel.Node) *TfootEle
 type TfootAutocapitalizeEnum string
 
 const (
+	TfootAutocapitalizeEnumNone       TfootAutocapitalizeEnum = "none"
+	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
 	TfootAutocapitalizeEnumOn         TfootAutocapitalizeEnum = "on"
 	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
 	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
 	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
-	TfootAutocapitalizeEnumNone       TfootAutocapitalizeEnum = "none"
-	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
 )
 
 type TfootAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type TfootContenteditableEnum string
 
 const (
+	TfootContenteditableEnumPlaintextOnly TfootContenteditableEnum = "plaintext-only"
 	TfootContenteditableEnumTrue          TfootContenteditableEnum = "true"
 	TfootContenteditableEnumFalse         TfootContenteditableEnum = "false"
-	TfootContenteditableEnumPlaintextOnly TfootContenteditableEnum = "plaintext-only"
 	TfootContenteditableEnumEmpty         TfootContenteditableEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type TfootEnterkeyhintEnum string
 
 const (
+	TfootEnterkeyhintEnumGo       TfootEnterkeyhintEnum = "go"
+	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
 	TfootEnterkeyhintEnumPrevious TfootEnterkeyhintEnum = "previous"
 	TfootEnterkeyhintEnumSearch   TfootEnterkeyhintEnum = "search"
 	TfootEnterkeyhintEnumSend     TfootEnterkeyhintEnum = "send"
 	TfootEnterkeyhintEnumDone     TfootEnterkeyhintEnum = "done"
 	TfootEnterkeyhintEnumEnter    TfootEnterkeyhintEnum = "enter"
-	TfootEnterkeyhintEnumGo       TfootEnterkeyhintEnum = "go"
-	TfootEnterkeyhintEnumNext     TfootEnterkeyhintEnum = "next"
 )
 
 type TfootHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type TfootInputmodeEnum string
 
 const (
-	TfootInputmodeEnumTel     TfootInputmodeEnum = "tel"
-	TfootInputmodeEnumText    TfootInputmodeEnum = "text"
-	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
 	TfootInputmodeEnumDecimal TfootInputmodeEnum = "decimal"
 	TfootInputmodeEnumEmail   TfootInputmodeEnum = "email"
 	TfootInputmodeEnumNone    TfootInputmodeEnum = "none"
 	TfootInputmodeEnumNumeric TfootInputmodeEnum = "numeric"
 	TfootInputmodeEnumSearch  TfootInputmodeEnum = "search"
+	TfootInputmodeEnumTel     TfootInputmodeEnum = "tel"
+	TfootInputmodeEnumText    TfootInputmodeEnum = "text"
+	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
 )
 
 type TfootSpellcheckEnum string
@@ -141,8 +144,8 @@ const (
 type TfootWritingsuggestionsEnum string
 
 const (
-	TfootWritingsuggestionsEnumTrue  TfootWritingsuggestionsEnum = "true"
 	TfootWritingsuggestionsEnumFalse TfootWritingsuggestionsEnum = "false"
+	TfootWritingsuggestionsEnumTrue  TfootWritingsuggestionsEnum = "true"
 	TfootWritingsuggestionsEnumEmpty TfootWritingsuggestionsEnum = ""
 )
 

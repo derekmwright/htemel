@@ -22,7 +22,8 @@ type MarkElement struct {
 // Spec Description: The mark element represents a run of text in one document marked or highlighted for reference purposes, due to its relevance in another context. When used in a quotation or other block of text referred to from the prose, it indicates a highlight that was not originally present but which has been added to bring the reader's attention to a part of the text that might not have been considered important by the original author when the block was originally written, but which is now under previously unexpected scrutiny. When used in the main prose of a document, it indicates a part of the document that has been highlighted due to its likely relevance to the user's current activity.
 func Mark(children ...htemel.Node) *MarkElement {
 	node := &MarkElement{
-		children: children, attributes: make(markAttrs),
+		children:   children,
+		attributes: make(markAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func MarkIf(condition bool, children ...htemel.Node) *MarkElement {
 	}
 
 	return &MarkElement{
+		children:   children,
+		attributes: make(markAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func MarkTernary(condition bool, true htemel.Node, false htemel.Node) *MarkEleme
 type MarkAutocapitalizeEnum string
 
 const (
+	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
 	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
 	MarkAutocapitalizeEnumNone       MarkAutocapitalizeEnum = "none"
 	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
 	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
 	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
-	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
 )
 
 type MarkAutocorrectEnum string
@@ -68,58 +71,58 @@ const (
 type MarkContenteditableEnum string
 
 const (
-	MarkContenteditableEnumTrue          MarkContenteditableEnum = "true"
 	MarkContenteditableEnumFalse         MarkContenteditableEnum = "false"
 	MarkContenteditableEnumPlaintextOnly MarkContenteditableEnum = "plaintext-only"
+	MarkContenteditableEnumTrue          MarkContenteditableEnum = "true"
 	MarkContenteditableEnumEmpty         MarkContenteditableEnum = ""
 )
 
 type MarkDirEnum string
 
 const (
-	MarkDirEnumAuto MarkDirEnum = "auto"
 	MarkDirEnumLtr  MarkDirEnum = "ltr"
 	MarkDirEnumRtl  MarkDirEnum = "rtl"
+	MarkDirEnumAuto MarkDirEnum = "auto"
 )
 
 type MarkDraggableEnum string
 
 const (
-	MarkDraggableEnumTrue  MarkDraggableEnum = "true"
 	MarkDraggableEnumFalse MarkDraggableEnum = "false"
+	MarkDraggableEnumTrue  MarkDraggableEnum = "true"
 )
 
 type MarkEnterkeyhintEnum string
 
 const (
-	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
 	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
 	MarkEnterkeyhintEnumGo       MarkEnterkeyhintEnum = "go"
 	MarkEnterkeyhintEnumNext     MarkEnterkeyhintEnum = "next"
 	MarkEnterkeyhintEnumPrevious MarkEnterkeyhintEnum = "previous"
 	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
 	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
+	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
 )
 
 type MarkHiddenEnum string
 
 const (
-	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
 	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
+	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
 	MarkHiddenEnumEmpty      MarkHiddenEnum = ""
 )
 
 type MarkInputmodeEnum string
 
 const (
-	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
-	MarkInputmodeEnumNone    MarkInputmodeEnum = "none"
-	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
 	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
 	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
 	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
 	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
 	MarkInputmodeEnumDecimal MarkInputmodeEnum = "decimal"
+	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
+	MarkInputmodeEnumNone    MarkInputmodeEnum = "none"
+	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
 )
 
 type MarkSpellcheckEnum string

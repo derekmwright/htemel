@@ -22,7 +22,8 @@ type TimeElement struct {
 // Spec Description: The time element represents its contents, along with a machine-readable form of those contents in the datetime attribute. The kind of content is limited to various kinds of dates, times, time-zone offsets, and durations, as described below.
 func Time(children ...htemel.Node) *TimeElement {
 	node := &TimeElement{
-		children: children, attributes: make(timeAttrs),
+		children:   children,
+		attributes: make(timeAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func TimeIf(condition bool, children ...htemel.Node) *TimeElement {
 	}
 
 	return &TimeElement{
+		children:   children,
+		attributes: make(timeAttrs),
 		skipRender: true,
 	}
 }
@@ -49,19 +52,19 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 type TimeAutocapitalizeEnum string
 
 const (
+	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
+	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
 	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
 	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
 	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
-	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
-	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 )
 
 type TimeAutocorrectEnum string
 
 const (
-	TimeAutocorrectEnumOff   TimeAutocorrectEnum = "off"
 	TimeAutocorrectEnumOn    TimeAutocorrectEnum = "on"
+	TimeAutocorrectEnumOff   TimeAutocorrectEnum = "off"
 	TimeAutocorrectEnumEmpty TimeAutocorrectEnum = ""
 )
 
@@ -85,33 +88,34 @@ const (
 type TimeDraggableEnum string
 
 const (
-	TimeDraggableEnumTrue  TimeDraggableEnum = "true"
 	TimeDraggableEnumFalse TimeDraggableEnum = "false"
+	TimeDraggableEnumTrue  TimeDraggableEnum = "true"
 )
 
 type TimeEnterkeyhintEnum string
 
 const (
-	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 	TimeEnterkeyhintEnumEnter    TimeEnterkeyhintEnum = "enter"
 	TimeEnterkeyhintEnumGo       TimeEnterkeyhintEnum = "go"
 	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
 	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
 	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
+	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 )
 
 type TimeHiddenEnum string
 
 const (
-	TimeHiddenEnumUntilFound TimeHiddenEnum = "until-found"
 	TimeHiddenEnumHidden     TimeHiddenEnum = "hidden"
+	TimeHiddenEnumUntilFound TimeHiddenEnum = "until-found"
 	TimeHiddenEnumEmpty      TimeHiddenEnum = ""
 )
 
 type TimeInputmodeEnum string
 
 const (
+	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
 	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
 	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
 	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
@@ -119,14 +123,13 @@ const (
 	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
 	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
 	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
-	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
 )
 
 type TimeSpellcheckEnum string
 
 const (
-	TimeSpellcheckEnumFalse TimeSpellcheckEnum = "false"
 	TimeSpellcheckEnumTrue  TimeSpellcheckEnum = "true"
+	TimeSpellcheckEnumFalse TimeSpellcheckEnum = "false"
 	TimeSpellcheckEnumEmpty TimeSpellcheckEnum = ""
 )
 
@@ -141,8 +144,8 @@ const (
 type TimeWritingsuggestionsEnum string
 
 const (
-	TimeWritingsuggestionsEnumTrue  TimeWritingsuggestionsEnum = "true"
 	TimeWritingsuggestionsEnumFalse TimeWritingsuggestionsEnum = "false"
+	TimeWritingsuggestionsEnumTrue  TimeWritingsuggestionsEnum = "true"
 	TimeWritingsuggestionsEnumEmpty TimeWritingsuggestionsEnum = ""
 )
 

@@ -22,7 +22,8 @@ type InsElement struct {
 // Spec Description: The ins element represents an addition to the document.
 func Ins(children ...htemel.Node) *InsElement {
 	node := &InsElement{
-		children: children, attributes: make(insAttrs),
+		children:   children,
+		attributes: make(insAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func InsIf(condition bool, children ...htemel.Node) *InsElement {
 	}
 
 	return &InsElement{
+		children:   children,
+		attributes: make(insAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement
 type InsAutocapitalizeEnum string
 
 const (
-	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
 	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
 	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
 	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
 	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
 	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
+	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
 )
 
 type InsAutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type InsDirEnum string
 
 const (
+	InsDirEnumAuto InsDirEnum = "auto"
 	InsDirEnumLtr  InsDirEnum = "ltr"
 	InsDirEnumRtl  InsDirEnum = "rtl"
-	InsDirEnumAuto InsDirEnum = "auto"
 )
 
 type InsDraggableEnum string
@@ -92,34 +95,34 @@ const (
 type InsEnterkeyhintEnum string
 
 const (
-	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
-	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
-	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
 	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
 	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
 	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
+	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
+	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
+	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
 )
 
 type InsHiddenEnum string
 
 const (
-	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
 	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
+	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
 	InsHiddenEnumEmpty      InsHiddenEnum = ""
 )
 
 type InsInputmodeEnum string
 
 const (
+	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
+	InsInputmodeEnumNone    InsInputmodeEnum = "none"
 	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
 	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
 	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
 	InsInputmodeEnumText    InsInputmodeEnum = "text"
 	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
 	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
-	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
-	InsInputmodeEnumNone    InsInputmodeEnum = "none"
 )
 
 type InsSpellcheckEnum string

@@ -22,7 +22,8 @@ type OutputElement struct {
 // Spec Description: The output element represents the result of a calculation performed by the application, or the result of a user action.
 func Output(children ...htemel.Node) *OutputElement {
 	node := &OutputElement{
-		children: children, attributes: make(outputAttrs),
+		children:   children,
+		attributes: make(outputAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func OutputIf(condition bool, children ...htemel.Node) *OutputElement {
 	}
 
 	return &OutputElement{
+		children:   children,
+		attributes: make(outputAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func OutputTernary(condition bool, true htemel.Node, false htemel.Node) *OutputE
 type OutputAutocapitalizeEnum string
 
 const (
+	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
+	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
 	OutputAutocapitalizeEnumCharacters OutputAutocapitalizeEnum = "characters"
 	OutputAutocapitalizeEnumNone       OutputAutocapitalizeEnum = "none"
 	OutputAutocapitalizeEnumOff        OutputAutocapitalizeEnum = "off"
 	OutputAutocapitalizeEnumOn         OutputAutocapitalizeEnum = "on"
-	OutputAutocapitalizeEnumSentences  OutputAutocapitalizeEnum = "sentences"
-	OutputAutocapitalizeEnumWords      OutputAutocapitalizeEnum = "words"
 )
 
 type OutputAutocorrectEnum string
@@ -85,20 +88,20 @@ const (
 type OutputDraggableEnum string
 
 const (
-	OutputDraggableEnumTrue  OutputDraggableEnum = "true"
 	OutputDraggableEnumFalse OutputDraggableEnum = "false"
+	OutputDraggableEnumTrue  OutputDraggableEnum = "true"
 )
 
 type OutputEnterkeyhintEnum string
 
 const (
-	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
-	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
 	OutputEnterkeyhintEnumGo       OutputEnterkeyhintEnum = "go"
 	OutputEnterkeyhintEnumNext     OutputEnterkeyhintEnum = "next"
 	OutputEnterkeyhintEnumPrevious OutputEnterkeyhintEnum = "previous"
 	OutputEnterkeyhintEnumSearch   OutputEnterkeyhintEnum = "search"
 	OutputEnterkeyhintEnumSend     OutputEnterkeyhintEnum = "send"
+	OutputEnterkeyhintEnumDone     OutputEnterkeyhintEnum = "done"
+	OutputEnterkeyhintEnumEnter    OutputEnterkeyhintEnum = "enter"
 )
 
 type OutputHiddenEnum string

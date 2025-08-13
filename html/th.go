@@ -22,7 +22,8 @@ type ThElement struct {
 // Spec Description: The th element represents a header cell in a table.
 func Th(children ...htemel.Node) *ThElement {
 	node := &ThElement{
-		children: children, attributes: make(thAttrs),
+		children:   children,
+		attributes: make(thAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func ThIf(condition bool, children ...htemel.Node) *ThElement {
 	}
 
 	return &ThElement{
+		children:   children,
+		attributes: make(thAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 type ThAutocapitalizeEnum string
 
 const (
-	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
 	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
 	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
 	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
 	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
 	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
+	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
 )
 
 type ThAutocorrectEnum string
@@ -68,18 +71,18 @@ const (
 type ThContenteditableEnum string
 
 const (
-	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
 	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumPlaintextOnly ThContenteditableEnum = "plaintext-only"
+	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
 	ThContenteditableEnumEmpty         ThContenteditableEnum = ""
 )
 
 type ThDirEnum string
 
 const (
+	ThDirEnumAuto ThDirEnum = "auto"
 	ThDirEnumLtr  ThDirEnum = "ltr"
 	ThDirEnumRtl  ThDirEnum = "rtl"
-	ThDirEnumAuto ThDirEnum = "auto"
 )
 
 type ThDraggableEnum string
@@ -92,34 +95,34 @@ const (
 type ThEnterkeyhintEnum string
 
 const (
+	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
 	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
 	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
 	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
 	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
 	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
-	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 )
 
 type ThHiddenEnum string
 
 const (
-	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
 	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
+	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
 	ThHiddenEnumEmpty      ThHiddenEnum = ""
 )
 
 type ThInputmodeEnum string
 
 const (
-	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
-	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
-	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
-	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
 	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
 	ThInputmodeEnumText    ThInputmodeEnum = "text"
+	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
+	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
+	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
+	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 )
 
 type ThSpellcheckEnum string

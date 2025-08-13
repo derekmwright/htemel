@@ -22,7 +22,8 @@ type ScriptElement struct {
 // Spec Description: The script element allows authors to include dynamic script, instructions to the user agent, and data blocks in their documents. The element does not represent content for the user.
 func Script(children ...htemel.Node) *ScriptElement {
 	node := &ScriptElement{
-		children: children, attributes: make(scriptAttrs),
+		children:   children,
+		attributes: make(scriptAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func ScriptIf(condition bool, children ...htemel.Node) *ScriptElement {
 	}
 
 	return &ScriptElement{
+		children:   children,
+		attributes: make(scriptAttrs),
 		skipRender: true,
 	}
 }
@@ -71,12 +74,12 @@ const (
 type ScriptAutocapitalizeEnum string
 
 const (
+	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
+	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
 	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
 	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
 	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
-	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
-	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 )
 
 type ScriptAutocorrectEnum string
@@ -114,13 +117,13 @@ const (
 type ScriptEnterkeyhintEnum string
 
 const (
-	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
-	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
 	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
 	ScriptEnterkeyhintEnumNext     ScriptEnterkeyhintEnum = "next"
 	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
 	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
 	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
+	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
+	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
 )
 
 type ScriptHiddenEnum string
@@ -134,14 +137,14 @@ const (
 type ScriptInputmodeEnum string
 
 const (
-	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
-	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
 	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
 	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
 	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
 	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
+	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
+	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
 )
 
 type ScriptSpellcheckEnum string
@@ -155,16 +158,16 @@ const (
 type ScriptTranslateEnum string
 
 const (
-	ScriptTranslateEnumYes   ScriptTranslateEnum = "yes"
 	ScriptTranslateEnumNo    ScriptTranslateEnum = "no"
+	ScriptTranslateEnumYes   ScriptTranslateEnum = "yes"
 	ScriptTranslateEnumEmpty ScriptTranslateEnum = ""
 )
 
 type ScriptWritingsuggestionsEnum string
 
 const (
-	ScriptWritingsuggestionsEnumFalse ScriptWritingsuggestionsEnum = "false"
 	ScriptWritingsuggestionsEnumTrue  ScriptWritingsuggestionsEnum = "true"
+	ScriptWritingsuggestionsEnumFalse ScriptWritingsuggestionsEnum = "false"
 	ScriptWritingsuggestionsEnumEmpty ScriptWritingsuggestionsEnum = ""
 )
 

@@ -22,7 +22,8 @@ type BdiElement struct {
 // Spec Description: The bdi element represents a span of text that is to be isolated from its surroundings for the purposes of bidirectional text formatting. [BIDI]
 func Bdi(children ...htemel.Node) *BdiElement {
 	node := &BdiElement{
-		children: children, attributes: make(bdiAttrs),
+		children:   children,
+		attributes: make(bdiAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func BdiIf(condition bool, children ...htemel.Node) *BdiElement {
 	}
 
 	return &BdiElement{
+		children:   children,
+		attributes: make(bdiAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement
 type BdiAutocapitalizeEnum string
 
 const (
-	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 	BdiAutocapitalizeEnumNone       BdiAutocapitalizeEnum = "none"
 	BdiAutocapitalizeEnumOff        BdiAutocapitalizeEnum = "off"
 	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
 	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
 	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
+	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 )
 
 type BdiAutocorrectEnum string
@@ -92,13 +95,13 @@ const (
 type BdiEnterkeyhintEnum string
 
 const (
-	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
-	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
-	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 	BdiEnterkeyhintEnumNext     BdiEnterkeyhintEnum = "next"
 	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
 	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
 	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
+	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
+	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
+	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
 )
 
 type BdiHiddenEnum string

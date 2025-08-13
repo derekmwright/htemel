@@ -22,7 +22,8 @@ type TitleElement struct {
 // Spec Description: The title element represents the document's title or name. Authors should use titles that identify their documents even when they are used out of context, for example in a user's history or bookmarks, or in search results. The document's title is often different from its first heading, since the first heading does not have to stand alone when taken out of context.
 func Title(children ...htemel.Node) *TitleElement {
 	node := &TitleElement{
-		children: children, attributes: make(titleAttrs),
+		children:   children,
+		attributes: make(titleAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func TitleIf(condition bool, children ...htemel.Node) *TitleElement {
 	}
 
 	return &TitleElement{
+		children:   children,
+		attributes: make(titleAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func TitleTernary(condition bool, true htemel.Node, false htemel.Node) *TitleEle
 type TitleAutocapitalizeEnum string
 
 const (
-	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
-	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
-	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
 	TitleAutocapitalizeEnumNone       TitleAutocapitalizeEnum = "none"
 	TitleAutocapitalizeEnumOff        TitleAutocapitalizeEnum = "off"
 	TitleAutocapitalizeEnumOn         TitleAutocapitalizeEnum = "on"
+	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
+	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
+	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
 )
 
 type TitleAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type TitleContenteditableEnum string
 
 const (
+	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
 	TitleContenteditableEnumFalse         TitleContenteditableEnum = "false"
 	TitleContenteditableEnumPlaintextOnly TitleContenteditableEnum = "plaintext-only"
-	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
 	TitleContenteditableEnumEmpty         TitleContenteditableEnum = ""
 )
 
@@ -85,20 +88,20 @@ const (
 type TitleDraggableEnum string
 
 const (
-	TitleDraggableEnumFalse TitleDraggableEnum = "false"
 	TitleDraggableEnumTrue  TitleDraggableEnum = "true"
+	TitleDraggableEnumFalse TitleDraggableEnum = "false"
 )
 
 type TitleEnterkeyhintEnum string
 
 const (
-	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
-	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
 	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
 	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
 	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
 	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
 	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
+	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
+	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
 )
 
 type TitleHiddenEnum string
@@ -133,8 +136,8 @@ const (
 type TitleTranslateEnum string
 
 const (
-	TitleTranslateEnumNo    TitleTranslateEnum = "no"
 	TitleTranslateEnumYes   TitleTranslateEnum = "yes"
+	TitleTranslateEnumNo    TitleTranslateEnum = "no"
 	TitleTranslateEnumEmpty TitleTranslateEnum = ""
 )
 

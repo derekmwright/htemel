@@ -22,7 +22,8 @@ type StrongElement struct {
 // Spec Description: The strong element represents strong importance, seriousness, or urgency for its contents.
 func Strong(children ...htemel.Node) *StrongElement {
 	node := &StrongElement{
-		children: children, attributes: make(strongAttrs),
+		children:   children,
+		attributes: make(strongAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func StrongIf(condition bool, children ...htemel.Node) *StrongElement {
 	}
 
 	return &StrongElement{
+		children:   children,
+		attributes: make(strongAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongE
 type StrongAutocapitalizeEnum string
 
 const (
-	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
-	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
-	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
 	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
 	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
 	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
+	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
+	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
+	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
 )
 
 type StrongAutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type StrongDirEnum string
 
 const (
-	StrongDirEnumRtl  StrongDirEnum = "rtl"
 	StrongDirEnumAuto StrongDirEnum = "auto"
 	StrongDirEnumLtr  StrongDirEnum = "ltr"
+	StrongDirEnumRtl  StrongDirEnum = "rtl"
 )
 
 type StrongDraggableEnum string
@@ -92,20 +95,20 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
-	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
 	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
 	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
+	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
 )
 
 type StrongHiddenEnum string
 
 const (
-	StrongHiddenEnumUntilFound StrongHiddenEnum = "until-found"
 	StrongHiddenEnumHidden     StrongHiddenEnum = "hidden"
+	StrongHiddenEnumUntilFound StrongHiddenEnum = "until-found"
 	StrongHiddenEnumEmpty      StrongHiddenEnum = ""
 )
 

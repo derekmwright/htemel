@@ -22,7 +22,8 @@ type DetailsElement struct {
 // Spec Description: The details element represents a disclosure widget from which the user can obtain additional information or controls.
 func Details(children ...htemel.Node) *DetailsElement {
 	node := &DetailsElement{
-		children: children, attributes: make(detailsAttrs),
+		children:   children,
+		attributes: make(detailsAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func DetailsIf(condition bool, children ...htemel.Node) *DetailsElement {
 	}
 
 	return &DetailsElement{
+		children:   children,
+		attributes: make(detailsAttrs),
 		skipRender: true,
 	}
 }
@@ -92,34 +95,34 @@ const (
 type DetailsEnterkeyhintEnum string
 
 const (
-	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
 	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
 	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
 	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
 	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
 	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
+	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
 )
 
 type DetailsHiddenEnum string
 
 const (
-	DetailsHiddenEnumHidden     DetailsHiddenEnum = "hidden"
 	DetailsHiddenEnumUntilFound DetailsHiddenEnum = "until-found"
+	DetailsHiddenEnumHidden     DetailsHiddenEnum = "hidden"
 	DetailsHiddenEnumEmpty      DetailsHiddenEnum = ""
 )
 
 type DetailsInputmodeEnum string
 
 const (
-	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
-	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
-	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
-	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
 	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
 	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
 	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
+	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
+	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
+	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
+	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
 )
 
 type DetailsSpellcheckEnum string
@@ -141,8 +144,8 @@ const (
 type DetailsWritingsuggestionsEnum string
 
 const (
-	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
 	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
+	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
 	DetailsWritingsuggestionsEnumEmpty DetailsWritingsuggestionsEnum = ""
 )
 

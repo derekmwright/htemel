@@ -22,7 +22,8 @@ type SElement struct {
 // Spec Description: The s element represents contents that are no longer accurate or no longer relevant.
 func S(children ...htemel.Node) *SElement {
 	node := &SElement{
-		children: children, attributes: make(sAttrs),
+		children:   children,
+		attributes: make(sAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func SIf(condition bool, children ...htemel.Node) *SElement {
 	}
 
 	return &SElement{
+		children:   children,
+		attributes: make(sAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func STernary(condition bool, true htemel.Node, false htemel.Node) *SElement {
 type SAutocapitalizeEnum string
 
 const (
-	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
 	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
 	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
 	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
 	SAutocapitalizeEnumSentences  SAutocapitalizeEnum = "sentences"
 	SAutocapitalizeEnumWords      SAutocapitalizeEnum = "words"
+	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
 )
 
 type SAutocorrectEnum string
@@ -77,9 +80,9 @@ const (
 type SDirEnum string
 
 const (
-	SDirEnumLtr  SDirEnum = "ltr"
 	SDirEnumRtl  SDirEnum = "rtl"
 	SDirEnumAuto SDirEnum = "auto"
+	SDirEnumLtr  SDirEnum = "ltr"
 )
 
 type SDraggableEnum string
@@ -92,34 +95,34 @@ const (
 type SEnterkeyhintEnum string
 
 const (
+	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
 	SEnterkeyhintEnumSend     SEnterkeyhintEnum = "send"
 	SEnterkeyhintEnumDone     SEnterkeyhintEnum = "done"
 	SEnterkeyhintEnumEnter    SEnterkeyhintEnum = "enter"
 	SEnterkeyhintEnumGo       SEnterkeyhintEnum = "go"
 	SEnterkeyhintEnumNext     SEnterkeyhintEnum = "next"
 	SEnterkeyhintEnumPrevious SEnterkeyhintEnum = "previous"
-	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
 )
 
 type SHiddenEnum string
 
 const (
-	SHiddenEnumHidden     SHiddenEnum = "hidden"
 	SHiddenEnumUntilFound SHiddenEnum = "until-found"
+	SHiddenEnumHidden     SHiddenEnum = "hidden"
 	SHiddenEnumEmpty      SHiddenEnum = ""
 )
 
 type SInputmodeEnum string
 
 const (
-	SInputmodeEnumEmail   SInputmodeEnum = "email"
-	SInputmodeEnumNone    SInputmodeEnum = "none"
-	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
-	SInputmodeEnumSearch  SInputmodeEnum = "search"
 	SInputmodeEnumTel     SInputmodeEnum = "tel"
 	SInputmodeEnumText    SInputmodeEnum = "text"
 	SInputmodeEnumUrl     SInputmodeEnum = "url"
 	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
+	SInputmodeEnumEmail   SInputmodeEnum = "email"
+	SInputmodeEnumNone    SInputmodeEnum = "none"
+	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
+	SInputmodeEnumSearch  SInputmodeEnum = "search"
 )
 
 type SSpellcheckEnum string

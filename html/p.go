@@ -22,7 +22,8 @@ type PElement struct {
 // Spec Description: The p element represents a paragraph.
 func P(children ...htemel.Node) *PElement {
 	node := &PElement{
-		children: children, attributes: make(pAttrs),
+		children:   children,
+		attributes: make(pAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func PIf(condition bool, children ...htemel.Node) *PElement {
 	}
 
 	return &PElement{
+		children:   children,
+		attributes: make(pAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
 type PAutocapitalizeEnum string
 
 const (
+	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
 	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
 	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
 	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
 	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
 	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
-	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
 )
 
 type PAutocorrectEnum string
@@ -85,8 +88,8 @@ const (
 type PDraggableEnum string
 
 const (
-	PDraggableEnumFalse PDraggableEnum = "false"
 	PDraggableEnumTrue  PDraggableEnum = "true"
+	PDraggableEnumFalse PDraggableEnum = "false"
 )
 
 type PEnterkeyhintEnum string
@@ -112,14 +115,14 @@ const (
 type PInputmodeEnum string
 
 const (
+	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
+	PInputmodeEnumEmail   PInputmodeEnum = "email"
+	PInputmodeEnumNone    PInputmodeEnum = "none"
 	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
 	PInputmodeEnumSearch  PInputmodeEnum = "search"
 	PInputmodeEnumTel     PInputmodeEnum = "tel"
 	PInputmodeEnumText    PInputmodeEnum = "text"
 	PInputmodeEnumUrl     PInputmodeEnum = "url"
-	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
-	PInputmodeEnumEmail   PInputmodeEnum = "email"
-	PInputmodeEnumNone    PInputmodeEnum = "none"
 )
 
 type PSpellcheckEnum string
@@ -133,8 +136,8 @@ const (
 type PTranslateEnum string
 
 const (
-	PTranslateEnumNo    PTranslateEnum = "no"
 	PTranslateEnumYes   PTranslateEnum = "yes"
+	PTranslateEnumNo    PTranslateEnum = "no"
 	PTranslateEnumEmpty PTranslateEnum = ""
 )
 

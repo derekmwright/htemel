@@ -22,7 +22,8 @@ type ButtonElement struct {
 // Spec Description: The button element represents a button labeled by its contents.
 func Button(children ...htemel.Node) *ButtonElement {
 	node := &ButtonElement{
-		children: children, attributes: make(buttonAttrs),
+		children:   children,
+		attributes: make(buttonAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func ButtonIf(condition bool, children ...htemel.Node) *ButtonElement {
 	}
 
 	return &ButtonElement{
+		children:   children,
+		attributes: make(buttonAttrs),
 		skipRender: true,
 	}
 }
@@ -49,20 +52,20 @@ func ButtonTernary(condition bool, true htemel.Node, false htemel.Node) *ButtonE
 type ButtonCommandEnum string
 
 const (
-	ButtonCommandEnumTogglePopover ButtonCommandEnum = "toggle-popover"
 	ButtonCommandEnumClose         ButtonCommandEnum = "close"
 	ButtonCommandEnumHidePopover   ButtonCommandEnum = "hide-popover"
 	ButtonCommandEnumRequestClose  ButtonCommandEnum = "request-close"
 	ButtonCommandEnumShowModal     ButtonCommandEnum = "show-modal"
 	ButtonCommandEnumShowPopover   ButtonCommandEnum = "show-popover"
+	ButtonCommandEnumTogglePopover ButtonCommandEnum = "toggle-popover"
 )
 
 type ButtonFormmethodEnum string
 
 const (
+	ButtonFormmethodEnumDialog ButtonFormmethodEnum = "dialog"
 	ButtonFormmethodEnumGet    ButtonFormmethodEnum = "get"
 	ButtonFormmethodEnumPost   ButtonFormmethodEnum = "post"
-	ButtonFormmethodEnumDialog ButtonFormmethodEnum = "dialog"
 )
 
 type ButtonPopovertargetactionEnum string
@@ -84,12 +87,12 @@ const (
 type ButtonAutocapitalizeEnum string
 
 const (
-	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
-	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
-	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
 	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
 	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
+	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
+	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
+	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 )
 
 type ButtonAutocorrectEnum string
@@ -103,9 +106,9 @@ const (
 type ButtonContenteditableEnum string
 
 const (
-	ButtonContenteditableEnumTrue          ButtonContenteditableEnum = "true"
 	ButtonContenteditableEnumFalse         ButtonContenteditableEnum = "false"
 	ButtonContenteditableEnumPlaintextOnly ButtonContenteditableEnum = "plaintext-only"
+	ButtonContenteditableEnumTrue          ButtonContenteditableEnum = "true"
 	ButtonContenteditableEnumEmpty         ButtonContenteditableEnum = ""
 )
 
@@ -127,13 +130,13 @@ const (
 type ButtonEnterkeyhintEnum string
 
 const (
+	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
+	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
+	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
 	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
 	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
 	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
-	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
-	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
-	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
 )
 
 type ButtonHiddenEnum string
@@ -147,14 +150,14 @@ const (
 type ButtonInputmodeEnum string
 
 const (
-	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
-	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
-	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
 	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
 	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
 	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
 	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
 	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
+	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
+	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
+	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
 )
 
 type ButtonSpellcheckEnum string

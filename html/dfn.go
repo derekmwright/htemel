@@ -22,7 +22,8 @@ type DfnElement struct {
 // Spec Description: The dfn element represents the defining instance of a term. The paragraph, description list group, or section that is the nearest ancestor of the dfn element must also contain the definition(s) for the term given by the dfn element.
 func Dfn(children ...htemel.Node) *DfnElement {
 	node := &DfnElement{
-		children: children, attributes: make(dfnAttrs),
+		children:   children,
+		attributes: make(dfnAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func DfnIf(condition bool, children ...htemel.Node) *DfnElement {
 	}
 
 	return &DfnElement{
+		children:   children,
+		attributes: make(dfnAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func DfnTernary(condition bool, true htemel.Node, false htemel.Node) *DfnElement
 type DfnAutocapitalizeEnum string
 
 const (
-	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
-	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
-	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
 	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
 	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
 	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
+	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
+	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
+	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
 )
 
 type DfnAutocorrectEnum string
@@ -92,13 +95,13 @@ const (
 type DfnEnterkeyhintEnum string
 
 const (
-	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
 	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
 	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
 	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
 	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
+	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 )
 
 type DfnHiddenEnum string
@@ -112,7 +115,6 @@ const (
 type DfnInputmodeEnum string
 
 const (
-	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
 	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
 	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
 	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
@@ -120,6 +122,7 @@ const (
 	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
 	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
 	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
+	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
 )
 
 type DfnSpellcheckEnum string
@@ -133,16 +136,16 @@ const (
 type DfnTranslateEnum string
 
 const (
-	DfnTranslateEnumYes   DfnTranslateEnum = "yes"
 	DfnTranslateEnumNo    DfnTranslateEnum = "no"
+	DfnTranslateEnumYes   DfnTranslateEnum = "yes"
 	DfnTranslateEnumEmpty DfnTranslateEnum = ""
 )
 
 type DfnWritingsuggestionsEnum string
 
 const (
-	DfnWritingsuggestionsEnumFalse DfnWritingsuggestionsEnum = "false"
 	DfnWritingsuggestionsEnumTrue  DfnWritingsuggestionsEnum = "true"
+	DfnWritingsuggestionsEnumFalse DfnWritingsuggestionsEnum = "false"
 	DfnWritingsuggestionsEnumEmpty DfnWritingsuggestionsEnum = ""
 )
 

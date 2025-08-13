@@ -22,7 +22,8 @@ type MenuElement struct {
 // Spec Description: The menu element represents a toolbar consisting of its contents, in the form of an unordered list of items (represented by li elements), each of which represents a command that the user can perform or activate.
 func Menu(children ...htemel.Node) *MenuElement {
 	node := &MenuElement{
-		children: children, attributes: make(menuAttrs),
+		children:   children,
+		attributes: make(menuAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func MenuIf(condition bool, children ...htemel.Node) *MenuElement {
 	}
 
 	return &MenuElement{
+		children:   children,
+		attributes: make(menuAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func MenuTernary(condition bool, true htemel.Node, false htemel.Node) *MenuEleme
 type MenuAutocapitalizeEnum string
 
 const (
-	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
-	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
 	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
 	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
+	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
+	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 )
 
 type MenuAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type MenuContenteditableEnum string
 
 const (
-	MenuContenteditableEnumFalse         MenuContenteditableEnum = "false"
 	MenuContenteditableEnumPlaintextOnly MenuContenteditableEnum = "plaintext-only"
 	MenuContenteditableEnumTrue          MenuContenteditableEnum = "true"
+	MenuContenteditableEnumFalse         MenuContenteditableEnum = "false"
 	MenuContenteditableEnumEmpty         MenuContenteditableEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
+	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
 	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
 	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
 	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
-	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 )
 
 type MenuHiddenEnum string
@@ -112,21 +115,21 @@ const (
 type MenuInputmodeEnum string
 
 const (
-	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
-	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
 	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
 	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
 	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
+	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
+	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 )
 
 type MenuSpellcheckEnum string
 
 const (
-	MenuSpellcheckEnumFalse MenuSpellcheckEnum = "false"
 	MenuSpellcheckEnumTrue  MenuSpellcheckEnum = "true"
+	MenuSpellcheckEnumFalse MenuSpellcheckEnum = "false"
 	MenuSpellcheckEnumEmpty MenuSpellcheckEnum = ""
 )
 

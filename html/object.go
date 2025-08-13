@@ -21,7 +21,8 @@ type ObjectElement struct {
 // Spec Description: The object element can represent an external resource, which, depending on the type of the resource, will either be treated as an image or as a child navigable.
 func Object(children ...htemel.Node) *ObjectElement {
 	node := &ObjectElement{
-		children: children, attributes: make(objectAttrs),
+		children:   children,
+		attributes: make(objectAttrs),
 	}
 
 	return node
@@ -33,6 +34,8 @@ func ObjectIf(condition bool, children ...htemel.Node) *ObjectElement {
 	}
 
 	return &ObjectElement{
+		children:   children,
+		attributes: make(objectAttrs),
 		skipRender: true,
 	}
 }
@@ -59,8 +62,8 @@ const (
 type ObjectAutocorrectEnum string
 
 const (
-	ObjectAutocorrectEnumOff   ObjectAutocorrectEnum = "off"
 	ObjectAutocorrectEnumOn    ObjectAutocorrectEnum = "on"
+	ObjectAutocorrectEnumOff   ObjectAutocorrectEnum = "off"
 	ObjectAutocorrectEnumEmpty ObjectAutocorrectEnum = ""
 )
 
@@ -76,56 +79,56 @@ const (
 type ObjectDirEnum string
 
 const (
+	ObjectDirEnumRtl  ObjectDirEnum = "rtl"
 	ObjectDirEnumAuto ObjectDirEnum = "auto"
 	ObjectDirEnumLtr  ObjectDirEnum = "ltr"
-	ObjectDirEnumRtl  ObjectDirEnum = "rtl"
 )
 
 type ObjectDraggableEnum string
 
 const (
-	ObjectDraggableEnumFalse ObjectDraggableEnum = "false"
 	ObjectDraggableEnumTrue  ObjectDraggableEnum = "true"
+	ObjectDraggableEnumFalse ObjectDraggableEnum = "false"
 )
 
 type ObjectEnterkeyhintEnum string
 
 const (
-	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
-	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
 	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
 	ObjectEnterkeyhintEnumNext     ObjectEnterkeyhintEnum = "next"
 	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
 	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
 	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
+	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
+	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
 )
 
 type ObjectHiddenEnum string
 
 const (
-	ObjectHiddenEnumHidden     ObjectHiddenEnum = "hidden"
 	ObjectHiddenEnumUntilFound ObjectHiddenEnum = "until-found"
+	ObjectHiddenEnumHidden     ObjectHiddenEnum = "hidden"
 	ObjectHiddenEnumEmpty      ObjectHiddenEnum = ""
 )
 
 type ObjectInputmodeEnum string
 
 const (
-	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
-	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
-	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
-	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
 	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
 	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
 	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
+	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
+	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
+	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
+	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
 )
 
 type ObjectSpellcheckEnum string
 
 const (
-	ObjectSpellcheckEnumFalse ObjectSpellcheckEnum = "false"
 	ObjectSpellcheckEnumTrue  ObjectSpellcheckEnum = "true"
+	ObjectSpellcheckEnumFalse ObjectSpellcheckEnum = "false"
 	ObjectSpellcheckEnumEmpty ObjectSpellcheckEnum = ""
 )
 

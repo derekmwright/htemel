@@ -22,7 +22,8 @@ type FooterElement struct {
 // Spec Description: The footer element represents a footer for its nearest ancestor sectioning content element, or for the body element if there is no such ancestor. A footer typically contains information about its section such as who wrote it, links to related documents, copyright data, and the like.
 func Footer(children ...htemel.Node) *FooterElement {
 	node := &FooterElement{
-		children: children, attributes: make(footerAttrs),
+		children:   children,
+		attributes: make(footerAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func FooterIf(condition bool, children ...htemel.Node) *FooterElement {
 	}
 
 	return &FooterElement{
+		children:   children,
+		attributes: make(footerAttrs),
 		skipRender: true,
 	}
 }
@@ -49,12 +52,12 @@ func FooterTernary(condition bool, true htemel.Node, false htemel.Node) *FooterE
 type FooterAutocapitalizeEnum string
 
 const (
+	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
+	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
 	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 	FooterAutocapitalizeEnumOn         FooterAutocapitalizeEnum = "on"
 	FooterAutocapitalizeEnumSentences  FooterAutocapitalizeEnum = "sentences"
 	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
-	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
-	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
 )
 
 type FooterAutocorrectEnum string
@@ -68,9 +71,9 @@ const (
 type FooterContenteditableEnum string
 
 const (
+	FooterContenteditableEnumPlaintextOnly FooterContenteditableEnum = "plaintext-only"
 	FooterContenteditableEnumTrue          FooterContenteditableEnum = "true"
 	FooterContenteditableEnumFalse         FooterContenteditableEnum = "false"
-	FooterContenteditableEnumPlaintextOnly FooterContenteditableEnum = "plaintext-only"
 	FooterContenteditableEnumEmpty         FooterContenteditableEnum = ""
 )
 
@@ -85,20 +88,20 @@ const (
 type FooterDraggableEnum string
 
 const (
-	FooterDraggableEnumFalse FooterDraggableEnum = "false"
 	FooterDraggableEnumTrue  FooterDraggableEnum = "true"
+	FooterDraggableEnumFalse FooterDraggableEnum = "false"
 )
 
 type FooterEnterkeyhintEnum string
 
 const (
-	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
 	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
 	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
 	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
 	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
 	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
 	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
+	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
 )
 
 type FooterHiddenEnum string
@@ -112,6 +115,7 @@ const (
 type FooterInputmodeEnum string
 
 const (
+	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
 	FooterInputmodeEnumUrl     FooterInputmodeEnum = "url"
 	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
 	FooterInputmodeEnumEmail   FooterInputmodeEnum = "email"
@@ -119,14 +123,13 @@ const (
 	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
 	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
 	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
-	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
 )
 
 type FooterSpellcheckEnum string
 
 const (
-	FooterSpellcheckEnumFalse FooterSpellcheckEnum = "false"
 	FooterSpellcheckEnumTrue  FooterSpellcheckEnum = "true"
+	FooterSpellcheckEnumFalse FooterSpellcheckEnum = "false"
 	FooterSpellcheckEnumEmpty FooterSpellcheckEnum = ""
 )
 

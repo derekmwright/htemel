@@ -22,7 +22,8 @@ type DdElement struct {
 // Spec Description: The dd element represents the description, definition, or value, part of a term-description group in a description list (dl element).
 func Dd(children ...htemel.Node) *DdElement {
 	node := &DdElement{
-		children: children, attributes: make(ddAttrs),
+		children:   children,
+		attributes: make(ddAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func DdIf(condition bool, children ...htemel.Node) *DdElement {
 	}
 
 	return &DdElement{
+		children:   children,
+		attributes: make(ddAttrs),
 		skipRender: true,
 	}
 }
@@ -49,19 +52,19 @@ func DdTernary(condition bool, true htemel.Node, false htemel.Node) *DdElement {
 type DdAutocapitalizeEnum string
 
 const (
-	DdAutocapitalizeEnumWords      DdAutocapitalizeEnum = "words"
 	DdAutocapitalizeEnumCharacters DdAutocapitalizeEnum = "characters"
 	DdAutocapitalizeEnumNone       DdAutocapitalizeEnum = "none"
 	DdAutocapitalizeEnumOff        DdAutocapitalizeEnum = "off"
 	DdAutocapitalizeEnumOn         DdAutocapitalizeEnum = "on"
 	DdAutocapitalizeEnumSentences  DdAutocapitalizeEnum = "sentences"
+	DdAutocapitalizeEnumWords      DdAutocapitalizeEnum = "words"
 )
 
 type DdAutocorrectEnum string
 
 const (
-	DdAutocorrectEnumOn    DdAutocorrectEnum = "on"
 	DdAutocorrectEnumOff   DdAutocorrectEnum = "off"
+	DdAutocorrectEnumOn    DdAutocorrectEnum = "on"
 	DdAutocorrectEnumEmpty DdAutocorrectEnum = ""
 )
 
@@ -92,13 +95,13 @@ const (
 type DdEnterkeyhintEnum string
 
 const (
+	DdEnterkeyhintEnumSearch   DdEnterkeyhintEnum = "search"
+	DdEnterkeyhintEnumSend     DdEnterkeyhintEnum = "send"
 	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
 	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
 	DdEnterkeyhintEnumGo       DdEnterkeyhintEnum = "go"
 	DdEnterkeyhintEnumNext     DdEnterkeyhintEnum = "next"
 	DdEnterkeyhintEnumPrevious DdEnterkeyhintEnum = "previous"
-	DdEnterkeyhintEnumSearch   DdEnterkeyhintEnum = "search"
-	DdEnterkeyhintEnumSend     DdEnterkeyhintEnum = "send"
 )
 
 type DdHiddenEnum string
@@ -112,6 +115,7 @@ const (
 type DdInputmodeEnum string
 
 const (
+	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
 	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
 	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
 	DdInputmodeEnumText    DdInputmodeEnum = "text"
@@ -119,14 +123,13 @@ const (
 	DdInputmodeEnumDecimal DdInputmodeEnum = "decimal"
 	DdInputmodeEnumEmail   DdInputmodeEnum = "email"
 	DdInputmodeEnumNone    DdInputmodeEnum = "none"
-	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
 )
 
 type DdSpellcheckEnum string
 
 const (
-	DdSpellcheckEnumTrue  DdSpellcheckEnum = "true"
 	DdSpellcheckEnumFalse DdSpellcheckEnum = "false"
+	DdSpellcheckEnumTrue  DdSpellcheckEnum = "true"
 	DdSpellcheckEnumEmpty DdSpellcheckEnum = ""
 )
 

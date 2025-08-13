@@ -22,7 +22,8 @@ type OptgroupElement struct {
 // Spec Description: The optgroup element represents a group of option elements with a common label.
 func Optgroup(children ...htemel.Node) *OptgroupElement {
 	node := &OptgroupElement{
-		children: children, attributes: make(optgroupAttrs),
+		children:   children,
+		attributes: make(optgroupAttrs),
 	}
 
 	return node
@@ -34,6 +35,8 @@ func OptgroupIf(condition bool, children ...htemel.Node) *OptgroupElement {
 	}
 
 	return &OptgroupElement{
+		children:   children,
+		attributes: make(optgroupAttrs),
 		skipRender: true,
 	}
 }
@@ -77,28 +80,28 @@ const (
 type OptgroupDirEnum string
 
 const (
+	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
 	OptgroupDirEnumLtr  OptgroupDirEnum = "ltr"
 	OptgroupDirEnumRtl  OptgroupDirEnum = "rtl"
-	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
 )
 
 type OptgroupDraggableEnum string
 
 const (
-	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
 	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
+	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
 )
 
 type OptgroupEnterkeyhintEnum string
 
 const (
+	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
+	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
+	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
 	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
 	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
 	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
-	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
-	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
-	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
 )
 
 type OptgroupHiddenEnum string
@@ -112,14 +115,14 @@ const (
 type OptgroupInputmodeEnum string
 
 const (
+	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
+	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
 	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
 	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
 	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
 	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
 	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
-	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
-	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
 )
 
 type OptgroupSpellcheckEnum string
