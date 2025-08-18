@@ -14,7 +14,6 @@ type HgroupElement struct {
 	attributes hgroupAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Hgroup creates a tag <hgroup> instance and returns it for further modification.
@@ -95,13 +94,13 @@ const (
 type HgroupEnterkeyhintEnum string
 
 const (
+	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
+	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
 	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
 	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
 	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
 	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
 	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
-	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
-	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
 )
 
 type HgroupHiddenEnum string
@@ -115,21 +114,21 @@ const (
 type HgroupInputmodeEnum string
 
 const (
-	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
-	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
-	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
-	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
 	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
 	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
 	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
 	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
+	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
+	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
+	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
+	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
 )
 
 type HgroupSpellcheckEnum string
 
 const (
-	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
 	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
+	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
 	HgroupSpellcheckEnumEmpty HgroupSpellcheckEnum = ""
 )
 

@@ -14,7 +14,6 @@ type LegendElement struct {
 	attributes legendAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Legend creates a tag <legend> instance and returns it for further modification.
@@ -71,9 +70,9 @@ const (
 type LegendContenteditableEnum string
 
 const (
-	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
 	LegendContenteditableEnumFalse         LegendContenteditableEnum = "false"
 	LegendContenteditableEnumPlaintextOnly LegendContenteditableEnum = "plaintext-only"
+	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
 	LegendContenteditableEnumEmpty         LegendContenteditableEnum = ""
 )
 
@@ -88,20 +87,20 @@ const (
 type LegendDraggableEnum string
 
 const (
-	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
 	LegendDraggableEnumFalse LegendDraggableEnum = "false"
+	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
 )
 
 type LegendEnterkeyhintEnum string
 
 const (
+	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
 	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
 	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
 	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
 	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
 	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
 	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
-	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
 )
 
 type LegendHiddenEnum string
@@ -128,8 +127,8 @@ const (
 type LegendSpellcheckEnum string
 
 const (
-	LegendSpellcheckEnumTrue  LegendSpellcheckEnum = "true"
 	LegendSpellcheckEnumFalse LegendSpellcheckEnum = "false"
+	LegendSpellcheckEnumTrue  LegendSpellcheckEnum = "true"
 	LegendSpellcheckEnumEmpty LegendSpellcheckEnum = ""
 )
 
@@ -144,8 +143,8 @@ const (
 type LegendWritingsuggestionsEnum string
 
 const (
-	LegendWritingsuggestionsEnumTrue  LegendWritingsuggestionsEnum = "true"
 	LegendWritingsuggestionsEnumFalse LegendWritingsuggestionsEnum = "false"
+	LegendWritingsuggestionsEnumTrue  LegendWritingsuggestionsEnum = "true"
 	LegendWritingsuggestionsEnumEmpty LegendWritingsuggestionsEnum = ""
 )
 

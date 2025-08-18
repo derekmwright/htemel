@@ -14,7 +14,6 @@ type SearchElement struct {
 	attributes searchAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Search creates a tag <search> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func SearchTernary(condition bool, true htemel.Node, false htemel.Node) *SearchE
 type SearchAutocapitalizeEnum string
 
 const (
-	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
-	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
-	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
 	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
 	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
 	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
+	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
+	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
+	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
 )
 
 type SearchAutocorrectEnum string
 
 const (
-	SearchAutocorrectEnumOn    SearchAutocorrectEnum = "on"
 	SearchAutocorrectEnumOff   SearchAutocorrectEnum = "off"
+	SearchAutocorrectEnumOn    SearchAutocorrectEnum = "on"
 	SearchAutocorrectEnumEmpty SearchAutocorrectEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type SearchEnterkeyhintEnum string
 
 const (
-	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
-	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
-	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
 	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
 	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
 	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
+	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
+	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
+	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
 )
 
 type SearchHiddenEnum string
@@ -115,7 +114,6 @@ const (
 type SearchInputmodeEnum string
 
 const (
-	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
 	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
 	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
 	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
@@ -123,6 +121,7 @@ const (
 	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
 	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
 	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
+	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
 )
 
 type SearchSpellcheckEnum string

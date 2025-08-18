@@ -14,7 +14,6 @@ type UElement struct {
 	attributes uAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // U creates a tag <u> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
 type UAutocapitalizeEnum string
 
 const (
-	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
-	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
-	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
 	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
 	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
+	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
+	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
+	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
 )
 
 type UAutocorrectEnum string
 
 const (
-	UAutocorrectEnumOff   UAutocorrectEnum = "off"
 	UAutocorrectEnumOn    UAutocorrectEnum = "on"
+	UAutocorrectEnumOff   UAutocorrectEnum = "off"
 	UAutocorrectEnumEmpty UAutocorrectEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type UEnterkeyhintEnum string
 
 const (
-	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
-	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
-	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
 	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
 	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
 	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
+	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
+	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
+	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
 )
 
 type UHiddenEnum string
@@ -115,6 +114,7 @@ const (
 type UInputmodeEnum string
 
 const (
+	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
 	UInputmodeEnumEmail   UInputmodeEnum = "email"
 	UInputmodeEnumNone    UInputmodeEnum = "none"
 	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
@@ -122,7 +122,6 @@ const (
 	UInputmodeEnumTel     UInputmodeEnum = "tel"
 	UInputmodeEnumText    UInputmodeEnum = "text"
 	UInputmodeEnumUrl     UInputmodeEnum = "url"
-	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
 )
 
 type USpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type UWritingsuggestionsEnum string
 
 const (
-	UWritingsuggestionsEnumFalse UWritingsuggestionsEnum = "false"
 	UWritingsuggestionsEnumTrue  UWritingsuggestionsEnum = "true"
+	UWritingsuggestionsEnumFalse UWritingsuggestionsEnum = "false"
 	UWritingsuggestionsEnumEmpty UWritingsuggestionsEnum = ""
 )
 

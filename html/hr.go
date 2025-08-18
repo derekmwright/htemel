@@ -13,7 +13,6 @@ type HrElement struct {
 	attributes hrAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Hr creates a tag <hr> instance and returns it for further modification.
@@ -43,12 +42,12 @@ func HrIf(condition bool) *HrElement {
 type HrAutocapitalizeEnum string
 
 const (
+	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
+	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
 	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
 	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
 	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
-	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
-	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
 )
 
 type HrAutocorrectEnum string
@@ -79,8 +78,8 @@ const (
 type HrDraggableEnum string
 
 const (
-	HrDraggableEnumFalse HrDraggableEnum = "false"
 	HrDraggableEnumTrue  HrDraggableEnum = "true"
+	HrDraggableEnumFalse HrDraggableEnum = "false"
 )
 
 type HrEnterkeyhintEnum string
@@ -98,22 +97,22 @@ const (
 type HrHiddenEnum string
 
 const (
-	HrHiddenEnumHidden     HrHiddenEnum = "hidden"
 	HrHiddenEnumUntilFound HrHiddenEnum = "until-found"
+	HrHiddenEnumHidden     HrHiddenEnum = "hidden"
 	HrHiddenEnumEmpty      HrHiddenEnum = ""
 )
 
 type HrInputmodeEnum string
 
 const (
+	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
+	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
 	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
 	HrInputmodeEnumNone    HrInputmodeEnum = "none"
 	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
 	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
 	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
 	HrInputmodeEnumText    HrInputmodeEnum = "text"
-	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
-	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
 )
 
 type HrSpellcheckEnum string
@@ -135,8 +134,8 @@ const (
 type HrWritingsuggestionsEnum string
 
 const (
-	HrWritingsuggestionsEnumFalse HrWritingsuggestionsEnum = "false"
 	HrWritingsuggestionsEnumTrue  HrWritingsuggestionsEnum = "true"
+	HrWritingsuggestionsEnumFalse HrWritingsuggestionsEnum = "false"
 	HrWritingsuggestionsEnumEmpty HrWritingsuggestionsEnum = ""
 )
 

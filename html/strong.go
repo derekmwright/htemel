@@ -14,7 +14,6 @@ type StrongElement struct {
 	attributes strongAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Strong creates a tag <strong> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongE
 type StrongAutocapitalizeEnum string
 
 const (
-	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
 	StrongAutocapitalizeEnumSentences  StrongAutocapitalizeEnum = "sentences"
 	StrongAutocapitalizeEnumWords      StrongAutocapitalizeEnum = "words"
 	StrongAutocapitalizeEnumCharacters StrongAutocapitalizeEnum = "characters"
 	StrongAutocapitalizeEnumNone       StrongAutocapitalizeEnum = "none"
 	StrongAutocapitalizeEnumOff        StrongAutocapitalizeEnum = "off"
+	StrongAutocapitalizeEnumOn         StrongAutocapitalizeEnum = "on"
 )
 
 type StrongAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type StrongContenteditableEnum string
 
 const (
+	StrongContenteditableEnumTrue          StrongContenteditableEnum = "true"
 	StrongContenteditableEnumFalse         StrongContenteditableEnum = "false"
 	StrongContenteditableEnumPlaintextOnly StrongContenteditableEnum = "plaintext-only"
-	StrongContenteditableEnumTrue          StrongContenteditableEnum = "true"
 	StrongContenteditableEnumEmpty         StrongContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type StrongEnterkeyhintEnum string
 
 const (
-	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
-	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 	StrongEnterkeyhintEnumGo       StrongEnterkeyhintEnum = "go"
 	StrongEnterkeyhintEnumNext     StrongEnterkeyhintEnum = "next"
 	StrongEnterkeyhintEnumPrevious StrongEnterkeyhintEnum = "previous"
 	StrongEnterkeyhintEnumSearch   StrongEnterkeyhintEnum = "search"
 	StrongEnterkeyhintEnumSend     StrongEnterkeyhintEnum = "send"
+	StrongEnterkeyhintEnumDone     StrongEnterkeyhintEnum = "done"
+	StrongEnterkeyhintEnumEnter    StrongEnterkeyhintEnum = "enter"
 )
 
 type StrongHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type StrongInputmodeEnum string
 
 const (
+	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
+	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 	StrongInputmodeEnumNone    StrongInputmodeEnum = "none"
 	StrongInputmodeEnumNumeric StrongInputmodeEnum = "numeric"
 	StrongInputmodeEnumSearch  StrongInputmodeEnum = "search"
 	StrongInputmodeEnumTel     StrongInputmodeEnum = "tel"
 	StrongInputmodeEnumText    StrongInputmodeEnum = "text"
 	StrongInputmodeEnumUrl     StrongInputmodeEnum = "url"
-	StrongInputmodeEnumDecimal StrongInputmodeEnum = "decimal"
-	StrongInputmodeEnumEmail   StrongInputmodeEnum = "email"
 )
 
 type StrongSpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type StrongWritingsuggestionsEnum string
 
 const (
-	StrongWritingsuggestionsEnumTrue  StrongWritingsuggestionsEnum = "true"
 	StrongWritingsuggestionsEnumFalse StrongWritingsuggestionsEnum = "false"
+	StrongWritingsuggestionsEnumTrue  StrongWritingsuggestionsEnum = "true"
 	StrongWritingsuggestionsEnumEmpty StrongWritingsuggestionsEnum = ""
 )
 

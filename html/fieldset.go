@@ -14,7 +14,6 @@ type FieldsetElement struct {
 	attributes fieldsetAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Fieldset creates a tag <fieldset> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func FieldsetTernary(condition bool, true htemel.Node, false htemel.Node) *Field
 type FieldsetAutocapitalizeEnum string
 
 const (
-	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
 	FieldsetAutocapitalizeEnumNone       FieldsetAutocapitalizeEnum = "none"
 	FieldsetAutocapitalizeEnumOff        FieldsetAutocapitalizeEnum = "off"
 	FieldsetAutocapitalizeEnumOn         FieldsetAutocapitalizeEnum = "on"
 	FieldsetAutocapitalizeEnumSentences  FieldsetAutocapitalizeEnum = "sentences"
 	FieldsetAutocapitalizeEnumWords      FieldsetAutocapitalizeEnum = "words"
+	FieldsetAutocapitalizeEnumCharacters FieldsetAutocapitalizeEnum = "characters"
 )
 
 type FieldsetAutocorrectEnum string
@@ -71,18 +70,18 @@ const (
 type FieldsetContenteditableEnum string
 
 const (
+	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumPlaintextOnly FieldsetContenteditableEnum = "plaintext-only"
 	FieldsetContenteditableEnumTrue          FieldsetContenteditableEnum = "true"
-	FieldsetContenteditableEnumFalse         FieldsetContenteditableEnum = "false"
 	FieldsetContenteditableEnumEmpty         FieldsetContenteditableEnum = ""
 )
 
 type FieldsetDirEnum string
 
 const (
+	FieldsetDirEnumRtl  FieldsetDirEnum = "rtl"
 	FieldsetDirEnumAuto FieldsetDirEnum = "auto"
 	FieldsetDirEnumLtr  FieldsetDirEnum = "ltr"
-	FieldsetDirEnumRtl  FieldsetDirEnum = "rtl"
 )
 
 type FieldsetDraggableEnum string
@@ -95,26 +94,27 @@ const (
 type FieldsetEnterkeyhintEnum string
 
 const (
+	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
+	FieldsetEnterkeyhintEnumSearch   FieldsetEnterkeyhintEnum = "search"
+	FieldsetEnterkeyhintEnumSend     FieldsetEnterkeyhintEnum = "send"
 	FieldsetEnterkeyhintEnumDone     FieldsetEnterkeyhintEnum = "done"
 	FieldsetEnterkeyhintEnumEnter    FieldsetEnterkeyhintEnum = "enter"
 	FieldsetEnterkeyhintEnumGo       FieldsetEnterkeyhintEnum = "go"
 	FieldsetEnterkeyhintEnumNext     FieldsetEnterkeyhintEnum = "next"
-	FieldsetEnterkeyhintEnumPrevious FieldsetEnterkeyhintEnum = "previous"
-	FieldsetEnterkeyhintEnumSearch   FieldsetEnterkeyhintEnum = "search"
-	FieldsetEnterkeyhintEnumSend     FieldsetEnterkeyhintEnum = "send"
 )
 
 type FieldsetHiddenEnum string
 
 const (
-	FieldsetHiddenEnumUntilFound FieldsetHiddenEnum = "until-found"
 	FieldsetHiddenEnumHidden     FieldsetHiddenEnum = "hidden"
+	FieldsetHiddenEnumUntilFound FieldsetHiddenEnum = "until-found"
 	FieldsetHiddenEnumEmpty      FieldsetHiddenEnum = ""
 )
 
 type FieldsetInputmodeEnum string
 
 const (
+	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
 	FieldsetInputmodeEnumDecimal FieldsetInputmodeEnum = "decimal"
 	FieldsetInputmodeEnumEmail   FieldsetInputmodeEnum = "email"
 	FieldsetInputmodeEnumNone    FieldsetInputmodeEnum = "none"
@@ -122,7 +122,6 @@ const (
 	FieldsetInputmodeEnumSearch  FieldsetInputmodeEnum = "search"
 	FieldsetInputmodeEnumTel     FieldsetInputmodeEnum = "tel"
 	FieldsetInputmodeEnumText    FieldsetInputmodeEnum = "text"
-	FieldsetInputmodeEnumUrl     FieldsetInputmodeEnum = "url"
 )
 
 type FieldsetSpellcheckEnum string

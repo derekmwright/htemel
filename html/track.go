@@ -13,7 +13,6 @@ type TrackElement struct {
 	attributes trackAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Track creates a tag <track> instance and returns it for further modification.
@@ -43,11 +42,11 @@ func TrackIf(condition bool) *TrackElement {
 type TrackKindEnum string
 
 const (
+	TrackKindEnumCaptions     TrackKindEnum = "captions"
 	TrackKindEnumChapters     TrackKindEnum = "chapters"
 	TrackKindEnumDescriptions TrackKindEnum = "descriptions"
 	TrackKindEnumMetadata     TrackKindEnum = "metadata"
 	TrackKindEnumSubtitles    TrackKindEnum = "subtitles"
-	TrackKindEnumCaptions     TrackKindEnum = "captions"
 )
 
 type TrackAutocapitalizeEnum string
@@ -72,9 +71,9 @@ const (
 type TrackContenteditableEnum string
 
 const (
+	TrackContenteditableEnumFalse         TrackContenteditableEnum = "false"
 	TrackContenteditableEnumPlaintextOnly TrackContenteditableEnum = "plaintext-only"
 	TrackContenteditableEnumTrue          TrackContenteditableEnum = "true"
-	TrackContenteditableEnumFalse         TrackContenteditableEnum = "false"
 	TrackContenteditableEnumEmpty         TrackContenteditableEnum = ""
 )
 
@@ -89,20 +88,20 @@ const (
 type TrackDraggableEnum string
 
 const (
-	TrackDraggableEnumTrue  TrackDraggableEnum = "true"
 	TrackDraggableEnumFalse TrackDraggableEnum = "false"
+	TrackDraggableEnumTrue  TrackDraggableEnum = "true"
 )
 
 type TrackEnterkeyhintEnum string
 
 const (
-	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
-	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 	TrackEnterkeyhintEnumPrevious TrackEnterkeyhintEnum = "previous"
 	TrackEnterkeyhintEnumSearch   TrackEnterkeyhintEnum = "search"
 	TrackEnterkeyhintEnumSend     TrackEnterkeyhintEnum = "send"
 	TrackEnterkeyhintEnumDone     TrackEnterkeyhintEnum = "done"
 	TrackEnterkeyhintEnumEnter    TrackEnterkeyhintEnum = "enter"
+	TrackEnterkeyhintEnumGo       TrackEnterkeyhintEnum = "go"
+	TrackEnterkeyhintEnumNext     TrackEnterkeyhintEnum = "next"
 )
 
 type TrackHiddenEnum string
@@ -116,7 +115,6 @@ const (
 type TrackInputmodeEnum string
 
 const (
-	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
 	TrackInputmodeEnumTel     TrackInputmodeEnum = "tel"
 	TrackInputmodeEnumText    TrackInputmodeEnum = "text"
 	TrackInputmodeEnumUrl     TrackInputmodeEnum = "url"
@@ -124,6 +122,7 @@ const (
 	TrackInputmodeEnumEmail   TrackInputmodeEnum = "email"
 	TrackInputmodeEnumNone    TrackInputmodeEnum = "none"
 	TrackInputmodeEnumNumeric TrackInputmodeEnum = "numeric"
+	TrackInputmodeEnumSearch  TrackInputmodeEnum = "search"
 )
 
 type TrackSpellcheckEnum string

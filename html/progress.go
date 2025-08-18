@@ -14,7 +14,6 @@ type ProgressElement struct {
 	attributes progressAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Progress creates a tag <progress> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func ProgressTernary(condition bool, true htemel.Node, false htemel.Node) *Progr
 type ProgressAutocapitalizeEnum string
 
 const (
+	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
 	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
 	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
 	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
 	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
-	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
 )
 
 type ProgressAutocorrectEnum string
 
 const (
-	ProgressAutocorrectEnumOff   ProgressAutocorrectEnum = "off"
 	ProgressAutocorrectEnumOn    ProgressAutocorrectEnum = "on"
+	ProgressAutocorrectEnumOff   ProgressAutocorrectEnum = "off"
 	ProgressAutocorrectEnumEmpty ProgressAutocorrectEnum = ""
 )
 
@@ -115,14 +114,14 @@ const (
 type ProgressInputmodeEnum string
 
 const (
+	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
+	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
 	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
 	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
 	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
 	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
 	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
 	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
-	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
-	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
 )
 
 type ProgressSpellcheckEnum string

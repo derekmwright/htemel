@@ -14,7 +14,6 @@ type QElement struct {
 	attributes qAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Q creates a tag <q> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func QTernary(condition bool, true htemel.Node, false htemel.Node) *QElement {
 type QAutocapitalizeEnum string
 
 const (
-	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
-	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 	QAutocapitalizeEnumOff        QAutocapitalizeEnum = "off"
 	QAutocapitalizeEnumOn         QAutocapitalizeEnum = "on"
 	QAutocapitalizeEnumSentences  QAutocapitalizeEnum = "sentences"
 	QAutocapitalizeEnumWords      QAutocapitalizeEnum = "words"
+	QAutocapitalizeEnumCharacters QAutocapitalizeEnum = "characters"
+	QAutocapitalizeEnumNone       QAutocapitalizeEnum = "none"
 )
 
 type QAutocorrectEnum string
@@ -95,13 +94,13 @@ const (
 type QEnterkeyhintEnum string
 
 const (
+	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
+	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
+	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 	QEnterkeyhintEnumDone     QEnterkeyhintEnum = "done"
 	QEnterkeyhintEnumEnter    QEnterkeyhintEnum = "enter"
 	QEnterkeyhintEnumGo       QEnterkeyhintEnum = "go"
 	QEnterkeyhintEnumNext     QEnterkeyhintEnum = "next"
-	QEnterkeyhintEnumPrevious QEnterkeyhintEnum = "previous"
-	QEnterkeyhintEnumSearch   QEnterkeyhintEnum = "search"
-	QEnterkeyhintEnumSend     QEnterkeyhintEnum = "send"
 )
 
 type QHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type QInputmodeEnum string
 
 const (
+	QInputmodeEnumEmail   QInputmodeEnum = "email"
+	QInputmodeEnumNone    QInputmodeEnum = "none"
 	QInputmodeEnumNumeric QInputmodeEnum = "numeric"
 	QInputmodeEnumSearch  QInputmodeEnum = "search"
 	QInputmodeEnumTel     QInputmodeEnum = "tel"
 	QInputmodeEnumText    QInputmodeEnum = "text"
 	QInputmodeEnumUrl     QInputmodeEnum = "url"
 	QInputmodeEnumDecimal QInputmodeEnum = "decimal"
-	QInputmodeEnumEmail   QInputmodeEnum = "email"
-	QInputmodeEnumNone    QInputmodeEnum = "none"
 )
 
 type QSpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type QWritingsuggestionsEnum string
 
 const (
-	QWritingsuggestionsEnumTrue  QWritingsuggestionsEnum = "true"
 	QWritingsuggestionsEnumFalse QWritingsuggestionsEnum = "false"
+	QWritingsuggestionsEnumTrue  QWritingsuggestionsEnum = "true"
 	QWritingsuggestionsEnumEmpty QWritingsuggestionsEnum = ""
 )
 

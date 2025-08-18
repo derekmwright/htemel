@@ -13,7 +13,6 @@ type ImgElement struct {
 	attributes imgAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Img creates a tag <img> instance and returns it for further modification.
@@ -51,9 +50,9 @@ const (
 type ImgDecodingEnum string
 
 const (
+	ImgDecodingEnumSync  ImgDecodingEnum = "sync"
 	ImgDecodingEnumAsync ImgDecodingEnum = "async"
 	ImgDecodingEnumAuto  ImgDecodingEnum = "auto"
-	ImgDecodingEnumSync  ImgDecodingEnum = "sync"
 )
 
 type ImgLoadingEnum string
@@ -66,36 +65,36 @@ const (
 type ImgFetchpriorityEnum string
 
 const (
+	ImgFetchpriorityEnumAuto ImgFetchpriorityEnum = "auto"
 	ImgFetchpriorityEnumHigh ImgFetchpriorityEnum = "high"
 	ImgFetchpriorityEnumLow  ImgFetchpriorityEnum = "low"
-	ImgFetchpriorityEnumAuto ImgFetchpriorityEnum = "auto"
 )
 
 type ImgAutocapitalizeEnum string
 
 const (
+	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
+	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 	ImgAutocapitalizeEnumOn         ImgAutocapitalizeEnum = "on"
 	ImgAutocapitalizeEnumSentences  ImgAutocapitalizeEnum = "sentences"
 	ImgAutocapitalizeEnumWords      ImgAutocapitalizeEnum = "words"
 	ImgAutocapitalizeEnumCharacters ImgAutocapitalizeEnum = "characters"
-	ImgAutocapitalizeEnumNone       ImgAutocapitalizeEnum = "none"
-	ImgAutocapitalizeEnumOff        ImgAutocapitalizeEnum = "off"
 )
 
 type ImgAutocorrectEnum string
 
 const (
-	ImgAutocorrectEnumOff   ImgAutocorrectEnum = "off"
 	ImgAutocorrectEnumOn    ImgAutocorrectEnum = "on"
+	ImgAutocorrectEnumOff   ImgAutocorrectEnum = "off"
 	ImgAutocorrectEnumEmpty ImgAutocorrectEnum = ""
 )
 
 type ImgContenteditableEnum string
 
 const (
+	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumPlaintextOnly ImgContenteditableEnum = "plaintext-only"
 	ImgContenteditableEnumTrue          ImgContenteditableEnum = "true"
-	ImgContenteditableEnumFalse         ImgContenteditableEnum = "false"
 	ImgContenteditableEnumEmpty         ImgContenteditableEnum = ""
 )
 
@@ -117,13 +116,13 @@ const (
 type ImgEnterkeyhintEnum string
 
 const (
-	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
-	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 	ImgEnterkeyhintEnumPrevious ImgEnterkeyhintEnum = "previous"
 	ImgEnterkeyhintEnumSearch   ImgEnterkeyhintEnum = "search"
 	ImgEnterkeyhintEnumSend     ImgEnterkeyhintEnum = "send"
 	ImgEnterkeyhintEnumDone     ImgEnterkeyhintEnum = "done"
 	ImgEnterkeyhintEnumEnter    ImgEnterkeyhintEnum = "enter"
+	ImgEnterkeyhintEnumGo       ImgEnterkeyhintEnum = "go"
+	ImgEnterkeyhintEnumNext     ImgEnterkeyhintEnum = "next"
 )
 
 type ImgHiddenEnum string
@@ -137,14 +136,14 @@ const (
 type ImgInputmodeEnum string
 
 const (
+	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
+	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
 	ImgInputmodeEnumTel     ImgInputmodeEnum = "tel"
 	ImgInputmodeEnumText    ImgInputmodeEnum = "text"
 	ImgInputmodeEnumUrl     ImgInputmodeEnum = "url"
 	ImgInputmodeEnumDecimal ImgInputmodeEnum = "decimal"
 	ImgInputmodeEnumEmail   ImgInputmodeEnum = "email"
 	ImgInputmodeEnumNone    ImgInputmodeEnum = "none"
-	ImgInputmodeEnumNumeric ImgInputmodeEnum = "numeric"
-	ImgInputmodeEnumSearch  ImgInputmodeEnum = "search"
 )
 
 type ImgSpellcheckEnum string

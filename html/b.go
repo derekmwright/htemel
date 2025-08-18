@@ -14,7 +14,6 @@ type BElement struct {
 	attributes bAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // B creates a tag <b> instance and returns it for further modification.
@@ -95,13 +94,13 @@ const (
 type BEnterkeyhintEnum string
 
 const (
+	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 	BEnterkeyhintEnumEnter    BEnterkeyhintEnum = "enter"
 	BEnterkeyhintEnumGo       BEnterkeyhintEnum = "go"
 	BEnterkeyhintEnumNext     BEnterkeyhintEnum = "next"
 	BEnterkeyhintEnumPrevious BEnterkeyhintEnum = "previous"
 	BEnterkeyhintEnumSearch   BEnterkeyhintEnum = "search"
 	BEnterkeyhintEnumSend     BEnterkeyhintEnum = "send"
-	BEnterkeyhintEnumDone     BEnterkeyhintEnum = "done"
 )
 
 type BHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type BInputmodeEnum string
 
 const (
-	BInputmodeEnumNone    BInputmodeEnum = "none"
-	BInputmodeEnumNumeric BInputmodeEnum = "numeric"
 	BInputmodeEnumSearch  BInputmodeEnum = "search"
 	BInputmodeEnumTel     BInputmodeEnum = "tel"
 	BInputmodeEnumText    BInputmodeEnum = "text"
 	BInputmodeEnumUrl     BInputmodeEnum = "url"
 	BInputmodeEnumDecimal BInputmodeEnum = "decimal"
 	BInputmodeEnumEmail   BInputmodeEnum = "email"
+	BInputmodeEnumNone    BInputmodeEnum = "none"
+	BInputmodeEnumNumeric BInputmodeEnum = "numeric"
 )
 
 type BSpellcheckEnum string

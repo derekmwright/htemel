@@ -14,7 +14,6 @@ type DataElement struct {
 	attributes dataAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Data creates a tag <data> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataEleme
 type DataAutocapitalizeEnum string
 
 const (
+	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
 	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
 	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
 	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
 	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
-	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
 )
 
 type DataAutocorrectEnum string
@@ -80,9 +79,9 @@ const (
 type DataDirEnum string
 
 const (
-	DataDirEnumRtl  DataDirEnum = "rtl"
 	DataDirEnumAuto DataDirEnum = "auto"
 	DataDirEnumLtr  DataDirEnum = "ltr"
+	DataDirEnumRtl  DataDirEnum = "rtl"
 )
 
 type DataDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type DataEnterkeyhintEnum string
 
 const (
+	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
+	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
 	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
 	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
 	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
 	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
 	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
-	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
-	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
 )
 
 type DataHiddenEnum string

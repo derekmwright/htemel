@@ -14,7 +14,6 @@ type H5Element struct {
 	attributes h5Attrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // H5 creates a tag <h5> instance and returns it for further modification.
@@ -80,9 +79,9 @@ const (
 type H5DirEnum string
 
 const (
-	H5DirEnumAuto H5DirEnum = "auto"
 	H5DirEnumLtr  H5DirEnum = "ltr"
 	H5DirEnumRtl  H5DirEnum = "rtl"
+	H5DirEnumAuto H5DirEnum = "auto"
 )
 
 type H5DraggableEnum string
@@ -95,13 +94,13 @@ const (
 type H5EnterkeyhintEnum string
 
 const (
-	H5EnterkeyhintEnumGo       H5EnterkeyhintEnum = "go"
-	H5EnterkeyhintEnumNext     H5EnterkeyhintEnum = "next"
-	H5EnterkeyhintEnumPrevious H5EnterkeyhintEnum = "previous"
 	H5EnterkeyhintEnumSearch   H5EnterkeyhintEnum = "search"
 	H5EnterkeyhintEnumSend     H5EnterkeyhintEnum = "send"
 	H5EnterkeyhintEnumDone     H5EnterkeyhintEnum = "done"
 	H5EnterkeyhintEnumEnter    H5EnterkeyhintEnum = "enter"
+	H5EnterkeyhintEnumGo       H5EnterkeyhintEnum = "go"
+	H5EnterkeyhintEnumNext     H5EnterkeyhintEnum = "next"
+	H5EnterkeyhintEnumPrevious H5EnterkeyhintEnum = "previous"
 )
 
 type H5HiddenEnum string
@@ -115,14 +114,14 @@ const (
 type H5InputmodeEnum string
 
 const (
+	H5InputmodeEnumEmail   H5InputmodeEnum = "email"
+	H5InputmodeEnumNone    H5InputmodeEnum = "none"
+	H5InputmodeEnumNumeric H5InputmodeEnum = "numeric"
 	H5InputmodeEnumSearch  H5InputmodeEnum = "search"
 	H5InputmodeEnumTel     H5InputmodeEnum = "tel"
 	H5InputmodeEnumText    H5InputmodeEnum = "text"
 	H5InputmodeEnumUrl     H5InputmodeEnum = "url"
 	H5InputmodeEnumDecimal H5InputmodeEnum = "decimal"
-	H5InputmodeEnumEmail   H5InputmodeEnum = "email"
-	H5InputmodeEnumNone    H5InputmodeEnum = "none"
-	H5InputmodeEnumNumeric H5InputmodeEnum = "numeric"
 )
 
 type H5SpellcheckEnum string

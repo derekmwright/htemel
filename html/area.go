@@ -13,7 +13,6 @@ type AreaElement struct {
 	attributes areaAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Area creates a tag <area> instance and returns it for further modification.
@@ -43,10 +42,10 @@ func AreaIf(condition bool) *AreaElement {
 type AreaShapeEnum string
 
 const (
-	AreaShapeEnumCircle  AreaShapeEnum = "circle"
 	AreaShapeEnumDefault AreaShapeEnum = "default"
 	AreaShapeEnumPoly    AreaShapeEnum = "poly"
 	AreaShapeEnumRect    AreaShapeEnum = "rect"
+	AreaShapeEnumCircle  AreaShapeEnum = "circle"
 )
 
 type AreaAutocapitalizeEnum string
@@ -80,9 +79,9 @@ const (
 type AreaDirEnum string
 
 const (
-	AreaDirEnumAuto AreaDirEnum = "auto"
 	AreaDirEnumLtr  AreaDirEnum = "ltr"
 	AreaDirEnumRtl  AreaDirEnum = "rtl"
+	AreaDirEnumAuto AreaDirEnum = "auto"
 )
 
 type AreaDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type AreaEnterkeyhintEnum string
 
 const (
-	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
-	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
-	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
 	AreaEnterkeyhintEnumEnter    AreaEnterkeyhintEnum = "enter"
 	AreaEnterkeyhintEnumGo       AreaEnterkeyhintEnum = "go"
 	AreaEnterkeyhintEnumNext     AreaEnterkeyhintEnum = "next"
 	AreaEnterkeyhintEnumPrevious AreaEnterkeyhintEnum = "previous"
+	AreaEnterkeyhintEnumSearch   AreaEnterkeyhintEnum = "search"
+	AreaEnterkeyhintEnumSend     AreaEnterkeyhintEnum = "send"
+	AreaEnterkeyhintEnumDone     AreaEnterkeyhintEnum = "done"
 )
 
 type AreaHiddenEnum string
@@ -115,21 +114,21 @@ const (
 type AreaInputmodeEnum string
 
 const (
-	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
-	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
-	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
 	AreaInputmodeEnumDecimal AreaInputmodeEnum = "decimal"
 	AreaInputmodeEnumEmail   AreaInputmodeEnum = "email"
 	AreaInputmodeEnumNone    AreaInputmodeEnum = "none"
 	AreaInputmodeEnumNumeric AreaInputmodeEnum = "numeric"
 	AreaInputmodeEnumSearch  AreaInputmodeEnum = "search"
+	AreaInputmodeEnumTel     AreaInputmodeEnum = "tel"
+	AreaInputmodeEnumText    AreaInputmodeEnum = "text"
+	AreaInputmodeEnumUrl     AreaInputmodeEnum = "url"
 )
 
 type AreaSpellcheckEnum string
 
 const (
-	AreaSpellcheckEnumFalse AreaSpellcheckEnum = "false"
 	AreaSpellcheckEnumTrue  AreaSpellcheckEnum = "true"
+	AreaSpellcheckEnumFalse AreaSpellcheckEnum = "false"
 	AreaSpellcheckEnumEmpty AreaSpellcheckEnum = ""
 )
 

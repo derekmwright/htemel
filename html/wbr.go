@@ -13,7 +13,6 @@ type WbrElement struct {
 	attributes wbrAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Wbr creates a tag <wbr> instance and returns it for further modification.
@@ -43,12 +42,12 @@ func WbrIf(condition bool) *WbrElement {
 type WbrAutocapitalizeEnum string
 
 const (
-	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
 	WbrAutocapitalizeEnumCharacters WbrAutocapitalizeEnum = "characters"
 	WbrAutocapitalizeEnumNone       WbrAutocapitalizeEnum = "none"
 	WbrAutocapitalizeEnumOff        WbrAutocapitalizeEnum = "off"
 	WbrAutocapitalizeEnumOn         WbrAutocapitalizeEnum = "on"
 	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
+	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
 )
 
 type WbrAutocorrectEnum string
@@ -79,8 +78,8 @@ const (
 type WbrDraggableEnum string
 
 const (
-	WbrDraggableEnumFalse WbrDraggableEnum = "false"
 	WbrDraggableEnumTrue  WbrDraggableEnum = "true"
+	WbrDraggableEnumFalse WbrDraggableEnum = "false"
 )
 
 type WbrEnterkeyhintEnum string
@@ -98,29 +97,29 @@ const (
 type WbrHiddenEnum string
 
 const (
-	WbrHiddenEnumUntilFound WbrHiddenEnum = "until-found"
 	WbrHiddenEnumHidden     WbrHiddenEnum = "hidden"
+	WbrHiddenEnumUntilFound WbrHiddenEnum = "until-found"
 	WbrHiddenEnumEmpty      WbrHiddenEnum = ""
 )
 
 type WbrInputmodeEnum string
 
 const (
-	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
-	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
-	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
 	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
 	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
 	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
 	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
 	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
+	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
+	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
+	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
 )
 
 type WbrSpellcheckEnum string
 
 const (
-	WbrSpellcheckEnumTrue  WbrSpellcheckEnum = "true"
 	WbrSpellcheckEnumFalse WbrSpellcheckEnum = "false"
+	WbrSpellcheckEnumTrue  WbrSpellcheckEnum = "true"
 	WbrSpellcheckEnumEmpty WbrSpellcheckEnum = ""
 )
 

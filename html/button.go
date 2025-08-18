@@ -14,7 +14,6 @@ type ButtonElement struct {
 	attributes buttonAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Button creates a tag <button> instance and returns it for further modification.
@@ -71,9 +70,9 @@ const (
 type ButtonPopovertargetactionEnum string
 
 const (
+	ButtonPopovertargetactionEnumToggle ButtonPopovertargetactionEnum = "toggle"
 	ButtonPopovertargetactionEnumHide   ButtonPopovertargetactionEnum = "hide"
 	ButtonPopovertargetactionEnumShow   ButtonPopovertargetactionEnum = "show"
-	ButtonPopovertargetactionEnumToggle ButtonPopovertargetactionEnum = "toggle"
 )
 
 type ButtonTypeEnum string
@@ -87,12 +86,12 @@ const (
 type ButtonAutocapitalizeEnum string
 
 const (
+	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
+	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
 	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
 	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
 	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
-	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
-	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
 )
 
 type ButtonAutocorrectEnum string
@@ -130,13 +129,13 @@ const (
 type ButtonEnterkeyhintEnum string
 
 const (
+	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
+	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
 	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
 	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
 	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
 	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
-	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
-	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
 )
 
 type ButtonHiddenEnum string
@@ -150,14 +149,14 @@ const (
 type ButtonInputmodeEnum string
 
 const (
-	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
-	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
-	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
 	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
 	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
 	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
 	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
 	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
+	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
+	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
+	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
 )
 
 type ButtonSpellcheckEnum string

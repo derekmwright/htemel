@@ -14,7 +14,6 @@ type FooterElement struct {
 	attributes footerAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Footer creates a tag <footer> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func FooterTernary(condition bool, true htemel.Node, false htemel.Node) *FooterE
 type FooterAutocapitalizeEnum string
 
 const (
+	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
 	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
 	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
 	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
 	FooterAutocapitalizeEnumOn         FooterAutocapitalizeEnum = "on"
 	FooterAutocapitalizeEnumSentences  FooterAutocapitalizeEnum = "sentences"
-	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
 )
 
 type FooterAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type FooterContenteditableEnum string
 
 const (
+	FooterContenteditableEnumFalse         FooterContenteditableEnum = "false"
 	FooterContenteditableEnumPlaintextOnly FooterContenteditableEnum = "plaintext-only"
 	FooterContenteditableEnumTrue          FooterContenteditableEnum = "true"
-	FooterContenteditableEnumFalse         FooterContenteditableEnum = "false"
 	FooterContenteditableEnumEmpty         FooterContenteditableEnum = ""
 )
 
@@ -88,20 +87,20 @@ const (
 type FooterDraggableEnum string
 
 const (
-	FooterDraggableEnumTrue  FooterDraggableEnum = "true"
 	FooterDraggableEnumFalse FooterDraggableEnum = "false"
+	FooterDraggableEnumTrue  FooterDraggableEnum = "true"
 )
 
 type FooterEnterkeyhintEnum string
 
 const (
-	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
-	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
-	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
 	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
 	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
 	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
 	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
+	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
+	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
+	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
 )
 
 type FooterHiddenEnum string
@@ -115,21 +114,21 @@ const (
 type FooterInputmodeEnum string
 
 const (
-	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
-	FooterInputmodeEnumUrl     FooterInputmodeEnum = "url"
-	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
-	FooterInputmodeEnumEmail   FooterInputmodeEnum = "email"
 	FooterInputmodeEnumNone    FooterInputmodeEnum = "none"
 	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
 	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
 	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
+	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
+	FooterInputmodeEnumUrl     FooterInputmodeEnum = "url"
+	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
+	FooterInputmodeEnumEmail   FooterInputmodeEnum = "email"
 )
 
 type FooterSpellcheckEnum string
 
 const (
-	FooterSpellcheckEnumTrue  FooterSpellcheckEnum = "true"
 	FooterSpellcheckEnumFalse FooterSpellcheckEnum = "false"
+	FooterSpellcheckEnumTrue  FooterSpellcheckEnum = "true"
 	FooterSpellcheckEnumEmpty FooterSpellcheckEnum = ""
 )
 

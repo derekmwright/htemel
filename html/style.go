@@ -14,7 +14,6 @@ type StyleElement struct {
 	attributes styleAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Style creates a tag <style> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func StyleTernary(condition bool, true htemel.Node, false htemel.Node) *StyleEle
 type StyleAutocapitalizeEnum string
 
 const (
-	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
-	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
-	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
 	StyleAutocapitalizeEnumOn         StyleAutocapitalizeEnum = "on"
 	StyleAutocapitalizeEnumSentences  StyleAutocapitalizeEnum = "sentences"
 	StyleAutocapitalizeEnumWords      StyleAutocapitalizeEnum = "words"
+	StyleAutocapitalizeEnumCharacters StyleAutocapitalizeEnum = "characters"
+	StyleAutocapitalizeEnumNone       StyleAutocapitalizeEnum = "none"
+	StyleAutocapitalizeEnumOff        StyleAutocapitalizeEnum = "off"
 )
 
 type StyleAutocorrectEnum string
@@ -80,9 +79,9 @@ const (
 type StyleDirEnum string
 
 const (
-	StyleDirEnumRtl  StyleDirEnum = "rtl"
 	StyleDirEnumAuto StyleDirEnum = "auto"
 	StyleDirEnumLtr  StyleDirEnum = "ltr"
+	StyleDirEnumRtl  StyleDirEnum = "rtl"
 )
 
 type StyleDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type StyleEnterkeyhintEnum string
 
 const (
-	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
-	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
-	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
 	StyleEnterkeyhintEnumNext     StyleEnterkeyhintEnum = "next"
 	StyleEnterkeyhintEnumPrevious StyleEnterkeyhintEnum = "previous"
 	StyleEnterkeyhintEnumSearch   StyleEnterkeyhintEnum = "search"
 	StyleEnterkeyhintEnumSend     StyleEnterkeyhintEnum = "send"
+	StyleEnterkeyhintEnumDone     StyleEnterkeyhintEnum = "done"
+	StyleEnterkeyhintEnumEnter    StyleEnterkeyhintEnum = "enter"
+	StyleEnterkeyhintEnumGo       StyleEnterkeyhintEnum = "go"
 )
 
 type StyleHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type StyleInputmodeEnum string
 
 const (
-	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
-	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
-	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
-	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
 	StyleInputmodeEnumDecimal StyleInputmodeEnum = "decimal"
 	StyleInputmodeEnumEmail   StyleInputmodeEnum = "email"
 	StyleInputmodeEnumNone    StyleInputmodeEnum = "none"
 	StyleInputmodeEnumNumeric StyleInputmodeEnum = "numeric"
+	StyleInputmodeEnumSearch  StyleInputmodeEnum = "search"
+	StyleInputmodeEnumTel     StyleInputmodeEnum = "tel"
+	StyleInputmodeEnumText    StyleInputmodeEnum = "text"
+	StyleInputmodeEnumUrl     StyleInputmodeEnum = "url"
 )
 
 type StyleSpellcheckEnum string
@@ -136,8 +135,8 @@ const (
 type StyleTranslateEnum string
 
 const (
-	StyleTranslateEnumYes   StyleTranslateEnum = "yes"
 	StyleTranslateEnumNo    StyleTranslateEnum = "no"
+	StyleTranslateEnumYes   StyleTranslateEnum = "yes"
 	StyleTranslateEnumEmpty StyleTranslateEnum = ""
 )
 

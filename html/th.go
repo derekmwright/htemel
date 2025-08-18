@@ -14,7 +14,6 @@ type ThElement struct {
 	attributes thAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Th creates a tag <th> instance and returns it for further modification.
@@ -71,9 +70,9 @@ const (
 type ThContenteditableEnum string
 
 const (
-	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumPlaintextOnly ThContenteditableEnum = "plaintext-only"
 	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
+	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
 	ThContenteditableEnumEmpty         ThContenteditableEnum = ""
 )
 
@@ -95,34 +94,34 @@ const (
 type ThEnterkeyhintEnum string
 
 const (
+	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
+	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
+	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
 	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
 	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
 	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
 	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
-	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
-	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
-	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
 )
 
 type ThHiddenEnum string
 
 const (
-	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
 	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
+	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
 	ThHiddenEnumEmpty      ThHiddenEnum = ""
 )
 
 type ThInputmodeEnum string
 
 const (
+	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
+	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
 	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
 	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
 	ThInputmodeEnumText    ThInputmodeEnum = "text"
 	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
 	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
-	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
-	ThInputmodeEnumNone    ThInputmodeEnum = "none"
 )
 
 type ThSpellcheckEnum string

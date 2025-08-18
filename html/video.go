@@ -14,7 +14,6 @@ type VideoElement struct {
 	attributes videoAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Video creates a tag <video> instance and returns it for further modification.
@@ -69,12 +68,12 @@ const (
 type VideoAutocapitalizeEnum string
 
 const (
+	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
+	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
 	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
 	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
 	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
 	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
-	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
-	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
 )
 
 type VideoAutocorrectEnum string
@@ -105,20 +104,20 @@ const (
 type VideoDraggableEnum string
 
 const (
-	VideoDraggableEnumTrue  VideoDraggableEnum = "true"
 	VideoDraggableEnumFalse VideoDraggableEnum = "false"
+	VideoDraggableEnumTrue  VideoDraggableEnum = "true"
 )
 
 type VideoEnterkeyhintEnum string
 
 const (
+	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
+	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
 	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
 	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
 	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
 	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
 	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
-	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
-	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
 )
 
 type VideoHiddenEnum string
@@ -145,8 +144,8 @@ const (
 type VideoSpellcheckEnum string
 
 const (
-	VideoSpellcheckEnumFalse VideoSpellcheckEnum = "false"
 	VideoSpellcheckEnumTrue  VideoSpellcheckEnum = "true"
+	VideoSpellcheckEnumFalse VideoSpellcheckEnum = "false"
 	VideoSpellcheckEnumEmpty VideoSpellcheckEnum = ""
 )
 

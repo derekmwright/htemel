@@ -14,7 +14,6 @@ type HeaderElement struct {
 	attributes headerAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Header creates a tag <header> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderE
 type HeaderAutocapitalizeEnum string
 
 const (
+	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
 	HeaderAutocapitalizeEnumNone       HeaderAutocapitalizeEnum = "none"
 	HeaderAutocapitalizeEnumOff        HeaderAutocapitalizeEnum = "off"
 	HeaderAutocapitalizeEnumOn         HeaderAutocapitalizeEnum = "on"
 	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
 	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
-	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
 )
 
 type HeaderAutocorrectEnum string
@@ -80,9 +79,9 @@ const (
 type HeaderDirEnum string
 
 const (
+	HeaderDirEnumAuto HeaderDirEnum = "auto"
 	HeaderDirEnumLtr  HeaderDirEnum = "ltr"
 	HeaderDirEnumRtl  HeaderDirEnum = "rtl"
-	HeaderDirEnumAuto HeaderDirEnum = "auto"
 )
 
 type HeaderDraggableEnum string
@@ -95,26 +94,27 @@ const (
 type HeaderEnterkeyhintEnum string
 
 const (
+	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
+	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
 	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
 	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
 	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
 	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
 	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
-	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
-	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
 )
 
 type HeaderHiddenEnum string
 
 const (
-	HeaderHiddenEnumUntilFound HeaderHiddenEnum = "until-found"
 	HeaderHiddenEnumHidden     HeaderHiddenEnum = "hidden"
+	HeaderHiddenEnumUntilFound HeaderHiddenEnum = "until-found"
 	HeaderHiddenEnumEmpty      HeaderHiddenEnum = ""
 )
 
 type HeaderInputmodeEnum string
 
 const (
+	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 	HeaderInputmodeEnumUrl     HeaderInputmodeEnum = "url"
 	HeaderInputmodeEnumDecimal HeaderInputmodeEnum = "decimal"
 	HeaderInputmodeEnumEmail   HeaderInputmodeEnum = "email"
@@ -122,14 +122,13 @@ const (
 	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
 	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
 	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
-	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
 )
 
 type HeaderSpellcheckEnum string
 
 const (
-	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
 	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
+	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
 	HeaderSpellcheckEnumEmpty HeaderSpellcheckEnum = ""
 )
 

@@ -14,7 +14,6 @@ type TfootElement struct {
 	attributes tfootAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Tfoot creates a tag <tfoot> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func TfootTernary(condition bool, true htemel.Node, false htemel.Node) *TfootEle
 type TfootAutocapitalizeEnum string
 
 const (
+	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
 	TfootAutocapitalizeEnumNone       TfootAutocapitalizeEnum = "none"
 	TfootAutocapitalizeEnumOff        TfootAutocapitalizeEnum = "off"
 	TfootAutocapitalizeEnumOn         TfootAutocapitalizeEnum = "on"
 	TfootAutocapitalizeEnumSentences  TfootAutocapitalizeEnum = "sentences"
 	TfootAutocapitalizeEnumWords      TfootAutocapitalizeEnum = "words"
-	TfootAutocapitalizeEnumCharacters TfootAutocapitalizeEnum = "characters"
 )
 
 type TfootAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type TfootContenteditableEnum string
 
 const (
+	TfootContenteditableEnumFalse         TfootContenteditableEnum = "false"
 	TfootContenteditableEnumPlaintextOnly TfootContenteditableEnum = "plaintext-only"
 	TfootContenteditableEnumTrue          TfootContenteditableEnum = "true"
-	TfootContenteditableEnumFalse         TfootContenteditableEnum = "false"
 	TfootContenteditableEnumEmpty         TfootContenteditableEnum = ""
 )
 
@@ -107,14 +106,15 @@ const (
 type TfootHiddenEnum string
 
 const (
-	TfootHiddenEnumUntilFound TfootHiddenEnum = "until-found"
 	TfootHiddenEnumHidden     TfootHiddenEnum = "hidden"
+	TfootHiddenEnumUntilFound TfootHiddenEnum = "until-found"
 	TfootHiddenEnumEmpty      TfootHiddenEnum = ""
 )
 
 type TfootInputmodeEnum string
 
 const (
+	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
 	TfootInputmodeEnumDecimal TfootInputmodeEnum = "decimal"
 	TfootInputmodeEnumEmail   TfootInputmodeEnum = "email"
 	TfootInputmodeEnumNone    TfootInputmodeEnum = "none"
@@ -122,7 +122,6 @@ const (
 	TfootInputmodeEnumSearch  TfootInputmodeEnum = "search"
 	TfootInputmodeEnumTel     TfootInputmodeEnum = "tel"
 	TfootInputmodeEnumText    TfootInputmodeEnum = "text"
-	TfootInputmodeEnumUrl     TfootInputmodeEnum = "url"
 )
 
 type TfootSpellcheckEnum string

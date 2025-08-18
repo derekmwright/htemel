@@ -14,7 +14,6 @@ type CodeElement struct {
 	attributes codeAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Code creates a tag <code> instance and returns it for further modification.
@@ -63,8 +62,8 @@ const (
 type CodeAutocorrectEnum string
 
 const (
-	CodeAutocorrectEnumOff   CodeAutocorrectEnum = "off"
 	CodeAutocorrectEnumOn    CodeAutocorrectEnum = "on"
+	CodeAutocorrectEnumOff   CodeAutocorrectEnum = "off"
 	CodeAutocorrectEnumEmpty CodeAutocorrectEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type CodeEnterkeyhintEnum string
 
 const (
+	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
 	CodeEnterkeyhintEnumEnter    CodeEnterkeyhintEnum = "enter"
 	CodeEnterkeyhintEnumGo       CodeEnterkeyhintEnum = "go"
 	CodeEnterkeyhintEnumNext     CodeEnterkeyhintEnum = "next"
 	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
 	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
 	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
-	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
 )
 
 type CodeHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type CodeInputmodeEnum string
 
 const (
-	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
-	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
-	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
 	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
 	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
 	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
 	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
+	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
+	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
+	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
 )
 
 type CodeSpellcheckEnum string

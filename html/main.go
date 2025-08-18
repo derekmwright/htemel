@@ -14,7 +14,6 @@ type MainElement struct {
 	attributes mainAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Main creates a tag <main> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainEleme
 type MainAutocapitalizeEnum string
 
 const (
+	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
+	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
 	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
 	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
 	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
-	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
-	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
 )
 
 type MainAutocorrectEnum string
@@ -95,13 +94,13 @@ const (
 type MainEnterkeyhintEnum string
 
 const (
+	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
+	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
 	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
 	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
 	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
 	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
-	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
-	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
 )
 
 type MainHiddenEnum string
@@ -144,8 +143,8 @@ const (
 type MainWritingsuggestionsEnum string
 
 const (
-	MainWritingsuggestionsEnumTrue  MainWritingsuggestionsEnum = "true"
 	MainWritingsuggestionsEnumFalse MainWritingsuggestionsEnum = "false"
+	MainWritingsuggestionsEnumTrue  MainWritingsuggestionsEnum = "true"
 	MainWritingsuggestionsEnumEmpty MainWritingsuggestionsEnum = ""
 )
 

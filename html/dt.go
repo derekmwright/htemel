@@ -14,7 +14,6 @@ type DtElement struct {
 	attributes dtAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Dt creates a tag <dt> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func DtTernary(condition bool, true htemel.Node, false htemel.Node) *DtElement {
 type DtAutocapitalizeEnum string
 
 const (
+	DtAutocapitalizeEnumWords      DtAutocapitalizeEnum = "words"
 	DtAutocapitalizeEnumCharacters DtAutocapitalizeEnum = "characters"
 	DtAutocapitalizeEnumNone       DtAutocapitalizeEnum = "none"
 	DtAutocapitalizeEnumOff        DtAutocapitalizeEnum = "off"
 	DtAutocapitalizeEnumOn         DtAutocapitalizeEnum = "on"
 	DtAutocapitalizeEnumSentences  DtAutocapitalizeEnum = "sentences"
-	DtAutocapitalizeEnumWords      DtAutocapitalizeEnum = "words"
 )
 
 type DtAutocorrectEnum string
 
 const (
-	DtAutocorrectEnumOn    DtAutocorrectEnum = "on"
 	DtAutocorrectEnumOff   DtAutocorrectEnum = "off"
+	DtAutocorrectEnumOn    DtAutocorrectEnum = "on"
 	DtAutocorrectEnumEmpty DtAutocorrectEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type DtEnterkeyhintEnum string
 
 const (
-	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
-	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
 	DtEnterkeyhintEnumGo       DtEnterkeyhintEnum = "go"
 	DtEnterkeyhintEnumNext     DtEnterkeyhintEnum = "next"
 	DtEnterkeyhintEnumPrevious DtEnterkeyhintEnum = "previous"
 	DtEnterkeyhintEnumSearch   DtEnterkeyhintEnum = "search"
 	DtEnterkeyhintEnumSend     DtEnterkeyhintEnum = "send"
+	DtEnterkeyhintEnumDone     DtEnterkeyhintEnum = "done"
+	DtEnterkeyhintEnumEnter    DtEnterkeyhintEnum = "enter"
 )
 
 type DtHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type DtInputmodeEnum string
 
 const (
-	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
-	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 	DtInputmodeEnumEmail   DtInputmodeEnum = "email"
 	DtInputmodeEnumNone    DtInputmodeEnum = "none"
 	DtInputmodeEnumNumeric DtInputmodeEnum = "numeric"
 	DtInputmodeEnumSearch  DtInputmodeEnum = "search"
 	DtInputmodeEnumTel     DtInputmodeEnum = "tel"
 	DtInputmodeEnumText    DtInputmodeEnum = "text"
+	DtInputmodeEnumUrl     DtInputmodeEnum = "url"
+	DtInputmodeEnumDecimal DtInputmodeEnum = "decimal"
 )
 
 type DtSpellcheckEnum string

@@ -14,7 +14,6 @@ type EmElement struct {
 	attributes emAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Em creates a tag <em> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func EmTernary(condition bool, true htemel.Node, false htemel.Node) *EmElement {
 type EmAutocapitalizeEnum string
 
 const (
-	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
 	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
 	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
 	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
 	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
+	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
 )
 
 type EmAutocorrectEnum string
@@ -80,9 +79,9 @@ const (
 type EmDirEnum string
 
 const (
+	EmDirEnumRtl  EmDirEnum = "rtl"
 	EmDirEnumAuto EmDirEnum = "auto"
 	EmDirEnumLtr  EmDirEnum = "ltr"
-	EmDirEnumRtl  EmDirEnum = "rtl"
 )
 
 type EmDraggableEnum string
@@ -115,21 +114,21 @@ const (
 type EmInputmodeEnum string
 
 const (
-	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
-	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
-	EmInputmodeEnumText    EmInputmodeEnum = "text"
 	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
 	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
 	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
 	EmInputmodeEnumNone    EmInputmodeEnum = "none"
 	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
+	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
+	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
+	EmInputmodeEnumText    EmInputmodeEnum = "text"
 )
 
 type EmSpellcheckEnum string
 
 const (
-	EmSpellcheckEnumTrue  EmSpellcheckEnum = "true"
 	EmSpellcheckEnumFalse EmSpellcheckEnum = "false"
+	EmSpellcheckEnumTrue  EmSpellcheckEnum = "true"
 	EmSpellcheckEnumEmpty EmSpellcheckEnum = ""
 )
 

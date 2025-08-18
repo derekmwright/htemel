@@ -14,7 +14,6 @@ type FormElement struct {
 	attributes formAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Form creates a tag <form> instance and returns it for further modification.
@@ -67,19 +66,19 @@ const (
 type FormAutocapitalizeEnum string
 
 const (
-	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
 	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
 	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
 	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
 	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
 	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
+	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
 )
 
 type FormAutocorrectEnum string
 
 const (
-	FormAutocorrectEnumOn    FormAutocorrectEnum = "on"
 	FormAutocorrectEnumOff   FormAutocorrectEnum = "off"
+	FormAutocorrectEnumOn    FormAutocorrectEnum = "on"
 	FormAutocorrectEnumEmpty FormAutocorrectEnum = ""
 )
 
@@ -95,9 +94,9 @@ const (
 type FormDirEnum string
 
 const (
+	FormDirEnumAuto FormDirEnum = "auto"
 	FormDirEnumLtr  FormDirEnum = "ltr"
 	FormDirEnumRtl  FormDirEnum = "rtl"
-	FormDirEnumAuto FormDirEnum = "auto"
 )
 
 type FormDraggableEnum string
@@ -110,13 +109,13 @@ const (
 type FormEnterkeyhintEnum string
 
 const (
+	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
+	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
+	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
 	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
 	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
 	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
-	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
-	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
-	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
 )
 
 type FormHiddenEnum string
@@ -130,29 +129,29 @@ const (
 type FormInputmodeEnum string
 
 const (
-	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
-	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
 	FormInputmodeEnumNone    FormInputmodeEnum = "none"
 	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
 	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
 	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
 	FormInputmodeEnumText    FormInputmodeEnum = "text"
 	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
+	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
+	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
 )
 
 type FormSpellcheckEnum string
 
 const (
-	FormSpellcheckEnumFalse FormSpellcheckEnum = "false"
 	FormSpellcheckEnumTrue  FormSpellcheckEnum = "true"
+	FormSpellcheckEnumFalse FormSpellcheckEnum = "false"
 	FormSpellcheckEnumEmpty FormSpellcheckEnum = ""
 )
 
 type FormTranslateEnum string
 
 const (
-	FormTranslateEnumNo    FormTranslateEnum = "no"
 	FormTranslateEnumYes   FormTranslateEnum = "yes"
+	FormTranslateEnumNo    FormTranslateEnum = "no"
 	FormTranslateEnumEmpty FormTranslateEnum = ""
 )
 

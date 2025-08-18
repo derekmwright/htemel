@@ -13,7 +13,6 @@ type LinkElement struct {
 	attributes linkAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Link creates a tag <link> instance and returns it for further modification.
@@ -65,37 +64,37 @@ const (
 type LinkAutocapitalizeEnum string
 
 const (
+	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
+	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
 	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
 	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
 	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
-	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
-	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
 )
 
 type LinkAutocorrectEnum string
 
 const (
-	LinkAutocorrectEnumOn    LinkAutocorrectEnum = "on"
 	LinkAutocorrectEnumOff   LinkAutocorrectEnum = "off"
+	LinkAutocorrectEnumOn    LinkAutocorrectEnum = "on"
 	LinkAutocorrectEnumEmpty LinkAutocorrectEnum = ""
 )
 
 type LinkContenteditableEnum string
 
 const (
+	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
 	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
 	LinkContenteditableEnumPlaintextOnly LinkContenteditableEnum = "plaintext-only"
-	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
 	LinkContenteditableEnumEmpty         LinkContenteditableEnum = ""
 )
 
 type LinkDirEnum string
 
 const (
-	LinkDirEnumRtl  LinkDirEnum = "rtl"
 	LinkDirEnumAuto LinkDirEnum = "auto"
 	LinkDirEnumLtr  LinkDirEnum = "ltr"
+	LinkDirEnumRtl  LinkDirEnum = "rtl"
 )
 
 type LinkDraggableEnum string
@@ -108,34 +107,34 @@ const (
 type LinkEnterkeyhintEnum string
 
 const (
-	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
 	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
 	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
 	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
 	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
 	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
+	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
 )
 
 type LinkHiddenEnum string
 
 const (
-	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
 	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
+	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
 	LinkHiddenEnumEmpty      LinkHiddenEnum = ""
 )
 
 type LinkInputmodeEnum string
 
 const (
+	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
+	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
 	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
 	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
 	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
 	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
 	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
-	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
-	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
 )
 
 type LinkSpellcheckEnum string

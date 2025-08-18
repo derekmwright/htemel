@@ -14,7 +14,6 @@ type DialogElement struct {
 	attributes dialogAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Dialog creates a tag <dialog> instance and returns it for further modification.
@@ -60,12 +59,12 @@ const (
 type DialogAutocapitalizeEnum string
 
 const (
-	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
 	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
 	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
 	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
 	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
+	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
 )
 
 type DialogAutocorrectEnum string
@@ -103,13 +102,13 @@ const (
 type DialogEnterkeyhintEnum string
 
 const (
-	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
-	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
-	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 	DialogEnterkeyhintEnumSearch   DialogEnterkeyhintEnum = "search"
 	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
 	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
 	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
+	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
+	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
+	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
 )
 
 type DialogHiddenEnum string
@@ -123,6 +122,7 @@ const (
 type DialogInputmodeEnum string
 
 const (
+	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
 	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
 	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
@@ -130,7 +130,6 @@ const (
 	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
 	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
 	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
-	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
 )
 
 type DialogSpellcheckEnum string

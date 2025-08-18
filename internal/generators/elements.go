@@ -100,7 +100,6 @@ type {{ .Tag | titleCase }}Element struct {
 	attributes {{ .Tag }}Attrs
 	{{ if not .Void }}children []htemel.Node{{ end }}
 	skipRender bool
-	indent int
 }
 `))
 

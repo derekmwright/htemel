@@ -14,7 +14,6 @@ type SectionElement struct {
 	attributes sectionAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Section creates a tag <section> instance and returns it for further modification.
@@ -80,9 +79,9 @@ const (
 type SectionDirEnum string
 
 const (
+	SectionDirEnumRtl  SectionDirEnum = "rtl"
 	SectionDirEnumAuto SectionDirEnum = "auto"
 	SectionDirEnumLtr  SectionDirEnum = "ltr"
-	SectionDirEnumRtl  SectionDirEnum = "rtl"
 )
 
 type SectionDraggableEnum string
@@ -95,26 +94,27 @@ const (
 type SectionEnterkeyhintEnum string
 
 const (
+	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
 	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
 	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
 	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
 	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
 	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
 	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
-	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
 )
 
 type SectionHiddenEnum string
 
 const (
-	SectionHiddenEnumUntilFound SectionHiddenEnum = "until-found"
 	SectionHiddenEnumHidden     SectionHiddenEnum = "hidden"
+	SectionHiddenEnumUntilFound SectionHiddenEnum = "until-found"
 	SectionHiddenEnumEmpty      SectionHiddenEnum = ""
 )
 
 type SectionInputmodeEnum string
 
 const (
+	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
 	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
 	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
 	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
@@ -122,7 +122,6 @@ const (
 	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
 	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
 	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
-	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
 )
 
 type SectionSpellcheckEnum string

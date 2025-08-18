@@ -14,7 +14,6 @@ type FigureElement struct {
 	attributes figureAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Figure creates a tag <figure> instance and returns it for further modification.
@@ -52,56 +51,56 @@ func FigureTernary(condition bool, true htemel.Node, false htemel.Node) *FigureE
 type FigureAutocapitalizeEnum string
 
 const (
-	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
 	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
 	FigureAutocapitalizeEnumNone       FigureAutocapitalizeEnum = "none"
 	FigureAutocapitalizeEnumOff        FigureAutocapitalizeEnum = "off"
 	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
 	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
+	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
 )
 
 type FigureAutocorrectEnum string
 
 const (
-	FigureAutocorrectEnumOff   FigureAutocorrectEnum = "off"
 	FigureAutocorrectEnumOn    FigureAutocorrectEnum = "on"
+	FigureAutocorrectEnumOff   FigureAutocorrectEnum = "off"
 	FigureAutocorrectEnumEmpty FigureAutocorrectEnum = ""
 )
 
 type FigureContenteditableEnum string
 
 const (
-	FigureContenteditableEnumFalse         FigureContenteditableEnum = "false"
 	FigureContenteditableEnumPlaintextOnly FigureContenteditableEnum = "plaintext-only"
 	FigureContenteditableEnumTrue          FigureContenteditableEnum = "true"
+	FigureContenteditableEnumFalse         FigureContenteditableEnum = "false"
 	FigureContenteditableEnumEmpty         FigureContenteditableEnum = ""
 )
 
 type FigureDirEnum string
 
 const (
-	FigureDirEnumAuto FigureDirEnum = "auto"
 	FigureDirEnumLtr  FigureDirEnum = "ltr"
 	FigureDirEnumRtl  FigureDirEnum = "rtl"
+	FigureDirEnumAuto FigureDirEnum = "auto"
 )
 
 type FigureDraggableEnum string
 
 const (
-	FigureDraggableEnumFalse FigureDraggableEnum = "false"
 	FigureDraggableEnumTrue  FigureDraggableEnum = "true"
+	FigureDraggableEnumFalse FigureDraggableEnum = "false"
 )
 
 type FigureEnterkeyhintEnum string
 
 const (
+	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
+	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
+	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
 	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
 	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
 	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
 	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
-	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
-	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
-	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
 )
 
 type FigureHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type FigureInputmodeEnum string
 
 const (
+	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
+	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
 	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
 	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
 	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
 	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
 	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
 	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
-	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
-	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
 )
 
 type FigureSpellcheckEnum string
@@ -136,16 +135,16 @@ const (
 type FigureTranslateEnum string
 
 const (
-	FigureTranslateEnumYes   FigureTranslateEnum = "yes"
 	FigureTranslateEnumNo    FigureTranslateEnum = "no"
+	FigureTranslateEnumYes   FigureTranslateEnum = "yes"
 	FigureTranslateEnumEmpty FigureTranslateEnum = ""
 )
 
 type FigureWritingsuggestionsEnum string
 
 const (
-	FigureWritingsuggestionsEnumTrue  FigureWritingsuggestionsEnum = "true"
 	FigureWritingsuggestionsEnumFalse FigureWritingsuggestionsEnum = "false"
+	FigureWritingsuggestionsEnumTrue  FigureWritingsuggestionsEnum = "true"
 	FigureWritingsuggestionsEnumEmpty FigureWritingsuggestionsEnum = ""
 )
 

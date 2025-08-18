@@ -14,7 +14,6 @@ type TableElement struct {
 	attributes tableAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Table creates a tag <table> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func TableTernary(condition bool, true htemel.Node, false htemel.Node) *TableEle
 type TableAutocapitalizeEnum string
 
 const (
+	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
+	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
 	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
 	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
 	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
-	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
-	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
 )
 
 type TableAutocorrectEnum string
@@ -80,9 +79,9 @@ const (
 type TableDirEnum string
 
 const (
-	TableDirEnumAuto TableDirEnum = "auto"
 	TableDirEnumLtr  TableDirEnum = "ltr"
 	TableDirEnumRtl  TableDirEnum = "rtl"
+	TableDirEnumAuto TableDirEnum = "auto"
 )
 
 type TableDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type TableEnterkeyhintEnum string
 
 const (
+	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
 	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
 	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
 	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
 	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
 	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
 	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
-	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
 )
 
 type TableHiddenEnum string
@@ -115,7 +114,6 @@ const (
 type TableInputmodeEnum string
 
 const (
-	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
 	TableInputmodeEnumText    TableInputmodeEnum = "text"
 	TableInputmodeEnumUrl     TableInputmodeEnum = "url"
@@ -123,6 +121,7 @@ const (
 	TableInputmodeEnumEmail   TableInputmodeEnum = "email"
 	TableInputmodeEnumNone    TableInputmodeEnum = "none"
 	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
+	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
 )
 
 type TableSpellcheckEnum string

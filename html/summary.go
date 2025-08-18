@@ -14,7 +14,6 @@ type SummaryElement struct {
 	attributes summaryAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Summary creates a tag <summary> instance and returns it for further modification.
@@ -80,9 +79,9 @@ const (
 type SummaryDirEnum string
 
 const (
-	SummaryDirEnumAuto SummaryDirEnum = "auto"
 	SummaryDirEnumLtr  SummaryDirEnum = "ltr"
 	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
+	SummaryDirEnumAuto SummaryDirEnum = "auto"
 )
 
 type SummaryDraggableEnum string
@@ -115,14 +114,14 @@ const (
 type SummaryInputmodeEnum string
 
 const (
-	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
-	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
 	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
 	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
 	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
 	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
 	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
 	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
+	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
+	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
 )
 
 type SummarySpellcheckEnum string

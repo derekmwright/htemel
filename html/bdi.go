@@ -14,7 +14,6 @@ type BdiElement struct {
 	attributes bdiAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Bdi creates a tag <bdi> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement
 type BdiAutocapitalizeEnum string
 
 const (
+	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 	BdiAutocapitalizeEnumNone       BdiAutocapitalizeEnum = "none"
 	BdiAutocapitalizeEnumOff        BdiAutocapitalizeEnum = "off"
 	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
 	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
 	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
-	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
 )
 
 type BdiAutocorrectEnum string
@@ -115,7 +114,6 @@ const (
 type BdiInputmodeEnum string
 
 const (
-	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
 	BdiInputmodeEnumTel     BdiInputmodeEnum = "tel"
 	BdiInputmodeEnumText    BdiInputmodeEnum = "text"
 	BdiInputmodeEnumUrl     BdiInputmodeEnum = "url"
@@ -123,6 +121,7 @@ const (
 	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
 	BdiInputmodeEnumNone    BdiInputmodeEnum = "none"
 	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
+	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
 )
 
 type BdiSpellcheckEnum string

@@ -14,7 +14,6 @@ type H3Element struct {
 	attributes h3Attrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // H3 creates a tag <h3> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func H3Ternary(condition bool, true htemel.Node, false htemel.Node) *H3Element {
 type H3AutocapitalizeEnum string
 
 const (
+	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
 	H3AutocapitalizeEnumNone       H3AutocapitalizeEnum = "none"
 	H3AutocapitalizeEnumOff        H3AutocapitalizeEnum = "off"
 	H3AutocapitalizeEnumOn         H3AutocapitalizeEnum = "on"
 	H3AutocapitalizeEnumSentences  H3AutocapitalizeEnum = "sentences"
 	H3AutocapitalizeEnumWords      H3AutocapitalizeEnum = "words"
-	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
 )
 
 type H3AutocorrectEnum string
@@ -95,13 +94,13 @@ const (
 type H3EnterkeyhintEnum string
 
 const (
+	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
 	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
 	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
 	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
 	H3EnterkeyhintEnumSend     H3EnterkeyhintEnum = "send"
 	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
 	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
-	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
 )
 
 type H3HiddenEnum string
@@ -115,6 +114,7 @@ const (
 type H3InputmodeEnum string
 
 const (
+	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
 	H3InputmodeEnumNone    H3InputmodeEnum = "none"
 	H3InputmodeEnumNumeric H3InputmodeEnum = "numeric"
 	H3InputmodeEnumSearch  H3InputmodeEnum = "search"
@@ -122,7 +122,6 @@ const (
 	H3InputmodeEnumText    H3InputmodeEnum = "text"
 	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
 	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
-	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
 )
 
 type H3SpellcheckEnum string

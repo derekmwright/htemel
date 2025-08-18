@@ -14,7 +14,6 @@ type DlElement struct {
 	attributes dlAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Dl creates a tag <dl> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func DlTernary(condition bool, true htemel.Node, false htemel.Node) *DlElement {
 type DlAutocapitalizeEnum string
 
 const (
+	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
 	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
 	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
 	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
 	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
 	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
-	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
 )
 
 type DlAutocorrectEnum string
@@ -71,18 +70,18 @@ const (
 type DlContenteditableEnum string
 
 const (
-	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
 	DlContenteditableEnumTrue          DlContenteditableEnum = "true"
+	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
 	DlContenteditableEnumEmpty         DlContenteditableEnum = ""
 )
 
 type DlDirEnum string
 
 const (
-	DlDirEnumRtl  DlDirEnum = "rtl"
 	DlDirEnumAuto DlDirEnum = "auto"
 	DlDirEnumLtr  DlDirEnum = "ltr"
+	DlDirEnumRtl  DlDirEnum = "rtl"
 )
 
 type DlDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type DlEnterkeyhintEnum string
 
 const (
-	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
-	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
 	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
 	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
 	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
 	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
 	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
+	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
+	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
 )
 
 type DlHiddenEnum string
@@ -136,8 +135,8 @@ const (
 type DlTranslateEnum string
 
 const (
-	DlTranslateEnumNo    DlTranslateEnum = "no"
 	DlTranslateEnumYes   DlTranslateEnum = "yes"
+	DlTranslateEnumNo    DlTranslateEnum = "no"
 	DlTranslateEnumEmpty DlTranslateEnum = ""
 )
 

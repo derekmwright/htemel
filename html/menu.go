@@ -14,7 +14,6 @@ type MenuElement struct {
 	attributes menuAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Menu creates a tag <menu> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func MenuTernary(condition bool, true htemel.Node, false htemel.Node) *MenuEleme
 type MenuAutocapitalizeEnum string
 
 const (
+	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
+	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 	MenuAutocapitalizeEnumOff        MenuAutocapitalizeEnum = "off"
 	MenuAutocapitalizeEnumOn         MenuAutocapitalizeEnum = "on"
 	MenuAutocapitalizeEnumSentences  MenuAutocapitalizeEnum = "sentences"
 	MenuAutocapitalizeEnumWords      MenuAutocapitalizeEnum = "words"
-	MenuAutocapitalizeEnumCharacters MenuAutocapitalizeEnum = "characters"
-	MenuAutocapitalizeEnumNone       MenuAutocapitalizeEnum = "none"
 )
 
 type MenuAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type MenuContenteditableEnum string
 
 const (
+	MenuContenteditableEnumFalse         MenuContenteditableEnum = "false"
 	MenuContenteditableEnumPlaintextOnly MenuContenteditableEnum = "plaintext-only"
 	MenuContenteditableEnumTrue          MenuContenteditableEnum = "true"
-	MenuContenteditableEnumFalse         MenuContenteditableEnum = "false"
 	MenuContenteditableEnumEmpty         MenuContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type MenuEnterkeyhintEnum string
 
 const (
-	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 	MenuEnterkeyhintEnumDone     MenuEnterkeyhintEnum = "done"
 	MenuEnterkeyhintEnumEnter    MenuEnterkeyhintEnum = "enter"
 	MenuEnterkeyhintEnumGo       MenuEnterkeyhintEnum = "go"
 	MenuEnterkeyhintEnumNext     MenuEnterkeyhintEnum = "next"
 	MenuEnterkeyhintEnumPrevious MenuEnterkeyhintEnum = "previous"
 	MenuEnterkeyhintEnumSearch   MenuEnterkeyhintEnum = "search"
+	MenuEnterkeyhintEnumSend     MenuEnterkeyhintEnum = "send"
 )
 
 type MenuHiddenEnum string
@@ -115,29 +114,29 @@ const (
 type MenuInputmodeEnum string
 
 const (
+	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
+	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
+	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 	MenuInputmodeEnumTel     MenuInputmodeEnum = "tel"
 	MenuInputmodeEnumText    MenuInputmodeEnum = "text"
 	MenuInputmodeEnumUrl     MenuInputmodeEnum = "url"
 	MenuInputmodeEnumDecimal MenuInputmodeEnum = "decimal"
 	MenuInputmodeEnumEmail   MenuInputmodeEnum = "email"
-	MenuInputmodeEnumNone    MenuInputmodeEnum = "none"
-	MenuInputmodeEnumNumeric MenuInputmodeEnum = "numeric"
-	MenuInputmodeEnumSearch  MenuInputmodeEnum = "search"
 )
 
 type MenuSpellcheckEnum string
 
 const (
-	MenuSpellcheckEnumTrue  MenuSpellcheckEnum = "true"
 	MenuSpellcheckEnumFalse MenuSpellcheckEnum = "false"
+	MenuSpellcheckEnumTrue  MenuSpellcheckEnum = "true"
 	MenuSpellcheckEnumEmpty MenuSpellcheckEnum = ""
 )
 
 type MenuTranslateEnum string
 
 const (
-	MenuTranslateEnumNo    MenuTranslateEnum = "no"
 	MenuTranslateEnumYes   MenuTranslateEnum = "yes"
+	MenuTranslateEnumNo    MenuTranslateEnum = "no"
 	MenuTranslateEnumEmpty MenuTranslateEnum = ""
 )
 

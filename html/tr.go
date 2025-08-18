@@ -14,7 +14,6 @@ type TrElement struct {
 	attributes trAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Tr creates a tag <tr> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func TrTernary(condition bool, true htemel.Node, false htemel.Node) *TrElement {
 type TrAutocapitalizeEnum string
 
 const (
+	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
+	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
 	TrAutocapitalizeEnumOff        TrAutocapitalizeEnum = "off"
 	TrAutocapitalizeEnumOn         TrAutocapitalizeEnum = "on"
 	TrAutocapitalizeEnumSentences  TrAutocapitalizeEnum = "sentences"
 	TrAutocapitalizeEnumWords      TrAutocapitalizeEnum = "words"
-	TrAutocapitalizeEnumCharacters TrAutocapitalizeEnum = "characters"
-	TrAutocapitalizeEnumNone       TrAutocapitalizeEnum = "none"
 )
 
 type TrAutocorrectEnum string
 
 const (
-	TrAutocorrectEnumOn    TrAutocorrectEnum = "on"
 	TrAutocorrectEnumOff   TrAutocorrectEnum = "off"
+	TrAutocorrectEnumOn    TrAutocorrectEnum = "on"
 	TrAutocorrectEnumEmpty TrAutocorrectEnum = ""
 )
 
@@ -80,9 +79,9 @@ const (
 type TrDirEnum string
 
 const (
-	TrDirEnumRtl  TrDirEnum = "rtl"
 	TrDirEnumAuto TrDirEnum = "auto"
 	TrDirEnumLtr  TrDirEnum = "ltr"
+	TrDirEnumRtl  TrDirEnum = "rtl"
 )
 
 type TrDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type TrEnterkeyhintEnum string
 
 const (
+	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
+	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
+	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
 	TrEnterkeyhintEnumGo       TrEnterkeyhintEnum = "go"
 	TrEnterkeyhintEnumNext     TrEnterkeyhintEnum = "next"
 	TrEnterkeyhintEnumPrevious TrEnterkeyhintEnum = "previous"
 	TrEnterkeyhintEnumSearch   TrEnterkeyhintEnum = "search"
-	TrEnterkeyhintEnumSend     TrEnterkeyhintEnum = "send"
-	TrEnterkeyhintEnumDone     TrEnterkeyhintEnum = "done"
-	TrEnterkeyhintEnumEnter    TrEnterkeyhintEnum = "enter"
 )
 
 type TrHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type TrInputmodeEnum string
 
 const (
+	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
+	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
+	TrInputmodeEnumNone    TrInputmodeEnum = "none"
 	TrInputmodeEnumNumeric TrInputmodeEnum = "numeric"
 	TrInputmodeEnumSearch  TrInputmodeEnum = "search"
 	TrInputmodeEnumTel     TrInputmodeEnum = "tel"
 	TrInputmodeEnumText    TrInputmodeEnum = "text"
 	TrInputmodeEnumUrl     TrInputmodeEnum = "url"
-	TrInputmodeEnumDecimal TrInputmodeEnum = "decimal"
-	TrInputmodeEnumEmail   TrInputmodeEnum = "email"
-	TrInputmodeEnumNone    TrInputmodeEnum = "none"
 )
 
 type TrSpellcheckEnum string

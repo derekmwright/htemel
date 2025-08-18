@@ -14,7 +14,6 @@ type HeadElement struct {
 	attributes headAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Head creates a tag <head> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func HeadTernary(condition bool, true htemel.Node, false htemel.Node) *HeadEleme
 type HeadAutocapitalizeEnum string
 
 const (
-	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
 	HeadAutocapitalizeEnumWords      HeadAutocapitalizeEnum = "words"
 	HeadAutocapitalizeEnumCharacters HeadAutocapitalizeEnum = "characters"
 	HeadAutocapitalizeEnumNone       HeadAutocapitalizeEnum = "none"
 	HeadAutocapitalizeEnumOff        HeadAutocapitalizeEnum = "off"
 	HeadAutocapitalizeEnumOn         HeadAutocapitalizeEnum = "on"
+	HeadAutocapitalizeEnumSentences  HeadAutocapitalizeEnum = "sentences"
 )
 
 type HeadAutocorrectEnum string
 
 const (
-	HeadAutocorrectEnumOff   HeadAutocorrectEnum = "off"
 	HeadAutocorrectEnumOn    HeadAutocorrectEnum = "on"
+	HeadAutocorrectEnumOff   HeadAutocorrectEnum = "off"
 	HeadAutocorrectEnumEmpty HeadAutocorrectEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type HeadEnterkeyhintEnum string
 
 const (
-	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
-	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
-	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 	HeadEnterkeyhintEnumEnter    HeadEnterkeyhintEnum = "enter"
 	HeadEnterkeyhintEnumGo       HeadEnterkeyhintEnum = "go"
 	HeadEnterkeyhintEnumNext     HeadEnterkeyhintEnum = "next"
 	HeadEnterkeyhintEnumPrevious HeadEnterkeyhintEnum = "previous"
+	HeadEnterkeyhintEnumSearch   HeadEnterkeyhintEnum = "search"
+	HeadEnterkeyhintEnumSend     HeadEnterkeyhintEnum = "send"
+	HeadEnterkeyhintEnumDone     HeadEnterkeyhintEnum = "done"
 )
 
 type HeadHiddenEnum string
@@ -136,8 +135,8 @@ const (
 type HeadTranslateEnum string
 
 const (
-	HeadTranslateEnumYes   HeadTranslateEnum = "yes"
 	HeadTranslateEnumNo    HeadTranslateEnum = "no"
+	HeadTranslateEnumYes   HeadTranslateEnum = "yes"
 	HeadTranslateEnumEmpty HeadTranslateEnum = ""
 )
 

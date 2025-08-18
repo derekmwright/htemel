@@ -14,7 +14,6 @@ type SmallElement struct {
 	attributes smallAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Small creates a tag <small> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallEle
 type SmallAutocapitalizeEnum string
 
 const (
-	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 	SmallAutocapitalizeEnumNone       SmallAutocapitalizeEnum = "none"
 	SmallAutocapitalizeEnumOff        SmallAutocapitalizeEnum = "off"
 	SmallAutocapitalizeEnumOn         SmallAutocapitalizeEnum = "on"
 	SmallAutocapitalizeEnumSentences  SmallAutocapitalizeEnum = "sentences"
 	SmallAutocapitalizeEnumWords      SmallAutocapitalizeEnum = "words"
+	SmallAutocapitalizeEnumCharacters SmallAutocapitalizeEnum = "characters"
 )
 
 type SmallAutocorrectEnum string
@@ -71,18 +70,18 @@ const (
 type SmallContenteditableEnum string
 
 const (
+	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
 	SmallContenteditableEnumFalse         SmallContenteditableEnum = "false"
 	SmallContenteditableEnumPlaintextOnly SmallContenteditableEnum = "plaintext-only"
-	SmallContenteditableEnumTrue          SmallContenteditableEnum = "true"
 	SmallContenteditableEnumEmpty         SmallContenteditableEnum = ""
 )
 
 type SmallDirEnum string
 
 const (
+	SmallDirEnumAuto SmallDirEnum = "auto"
 	SmallDirEnumLtr  SmallDirEnum = "ltr"
 	SmallDirEnumRtl  SmallDirEnum = "rtl"
-	SmallDirEnumAuto SmallDirEnum = "auto"
 )
 
 type SmallDraggableEnum string
@@ -95,34 +94,34 @@ const (
 type SmallEnterkeyhintEnum string
 
 const (
+	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
+	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
+	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 	SmallEnterkeyhintEnumNext     SmallEnterkeyhintEnum = "next"
 	SmallEnterkeyhintEnumPrevious SmallEnterkeyhintEnum = "previous"
 	SmallEnterkeyhintEnumSearch   SmallEnterkeyhintEnum = "search"
 	SmallEnterkeyhintEnumSend     SmallEnterkeyhintEnum = "send"
-	SmallEnterkeyhintEnumDone     SmallEnterkeyhintEnum = "done"
-	SmallEnterkeyhintEnumEnter    SmallEnterkeyhintEnum = "enter"
-	SmallEnterkeyhintEnumGo       SmallEnterkeyhintEnum = "go"
 )
 
 type SmallHiddenEnum string
 
 const (
-	SmallHiddenEnumHidden     SmallHiddenEnum = "hidden"
 	SmallHiddenEnumUntilFound SmallHiddenEnum = "until-found"
+	SmallHiddenEnumHidden     SmallHiddenEnum = "hidden"
 	SmallHiddenEnumEmpty      SmallHiddenEnum = ""
 )
 
 type SmallInputmodeEnum string
 
 const (
-	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
-	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
 	SmallInputmodeEnumSearch  SmallInputmodeEnum = "search"
 	SmallInputmodeEnumTel     SmallInputmodeEnum = "tel"
 	SmallInputmodeEnumText    SmallInputmodeEnum = "text"
 	SmallInputmodeEnumUrl     SmallInputmodeEnum = "url"
 	SmallInputmodeEnumDecimal SmallInputmodeEnum = "decimal"
 	SmallInputmodeEnumEmail   SmallInputmodeEnum = "email"
+	SmallInputmodeEnumNone    SmallInputmodeEnum = "none"
+	SmallInputmodeEnumNumeric SmallInputmodeEnum = "numeric"
 )
 
 type SmallSpellcheckEnum string

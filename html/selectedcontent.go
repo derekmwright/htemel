@@ -14,7 +14,6 @@ type SelectedcontentElement struct {
 	attributes selectedcontentAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Selectedcontent creates a tag <selectedcontent> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node)
 type SelectedcontentAutocapitalizeEnum string
 
 const (
+	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
+	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
 	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
 	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
 	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
 	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
-	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
-	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
 )
 
 type SelectedcontentAutocorrectEnum string
@@ -95,13 +94,13 @@ const (
 type SelectedcontentEnterkeyhintEnum string
 
 const (
+	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
+	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
 	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
 	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
 	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
 	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
-	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
-	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
 )
 
 type SelectedcontentHiddenEnum string
@@ -115,7 +114,6 @@ const (
 type SelectedcontentInputmodeEnum string
 
 const (
-	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
 	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
 	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
@@ -123,6 +121,7 @@ const (
 	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
 	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
 	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
+	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
 )
 
 type SelectedcontentSpellcheckEnum string

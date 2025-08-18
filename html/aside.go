@@ -14,7 +14,6 @@ type AsideElement struct {
 	attributes asideAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Aside creates a tag <aside> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideEle
 type AsideAutocapitalizeEnum string
 
 const (
-	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
-	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
 	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
 	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
 	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
 	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
+	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
+	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
 )
 
 type AsideAutocorrectEnum string
@@ -95,34 +94,34 @@ const (
 type AsideEnterkeyhintEnum string
 
 const (
+	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
+	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
+	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
 	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
 	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
 	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
 	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
-	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
-	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
-	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
 )
 
 type AsideHiddenEnum string
 
 const (
-	AsideHiddenEnumHidden     AsideHiddenEnum = "hidden"
 	AsideHiddenEnumUntilFound AsideHiddenEnum = "until-found"
+	AsideHiddenEnumHidden     AsideHiddenEnum = "hidden"
 	AsideHiddenEnumEmpty      AsideHiddenEnum = ""
 )
 
 type AsideInputmodeEnum string
 
 const (
-	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
-	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
 	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
 	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
 	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
 	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
 	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
 	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
+	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
+	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
 )
 
 type AsideSpellcheckEnum string

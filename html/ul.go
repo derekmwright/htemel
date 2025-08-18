@@ -14,7 +14,6 @@ type UlElement struct {
 	attributes ulAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Ul creates a tag <ul> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func UlTernary(condition bool, true htemel.Node, false htemel.Node) *UlElement {
 type UlAutocapitalizeEnum string
 
 const (
+	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
 	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
 	UlAutocapitalizeEnumNone       UlAutocapitalizeEnum = "none"
 	UlAutocapitalizeEnumOff        UlAutocapitalizeEnum = "off"
 	UlAutocapitalizeEnumOn         UlAutocapitalizeEnum = "on"
 	UlAutocapitalizeEnumSentences  UlAutocapitalizeEnum = "sentences"
-	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
 )
 
 type UlAutocorrectEnum string
@@ -95,13 +94,13 @@ const (
 type UlEnterkeyhintEnum string
 
 const (
-	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
-	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
-	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
 	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
 	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
 	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
+	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
+	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
+	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
 )
 
 type UlHiddenEnum string

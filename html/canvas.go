@@ -14,7 +14,6 @@ type CanvasElement struct {
 	attributes canvasAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Canvas creates a tag <canvas> instance and returns it for further modification.
@@ -63,26 +62,26 @@ const (
 type CanvasAutocorrectEnum string
 
 const (
-	CanvasAutocorrectEnumOff   CanvasAutocorrectEnum = "off"
 	CanvasAutocorrectEnumOn    CanvasAutocorrectEnum = "on"
+	CanvasAutocorrectEnumOff   CanvasAutocorrectEnum = "off"
 	CanvasAutocorrectEnumEmpty CanvasAutocorrectEnum = ""
 )
 
 type CanvasContenteditableEnum string
 
 const (
-	CanvasContenteditableEnumFalse         CanvasContenteditableEnum = "false"
 	CanvasContenteditableEnumPlaintextOnly CanvasContenteditableEnum = "plaintext-only"
 	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
+	CanvasContenteditableEnumFalse         CanvasContenteditableEnum = "false"
 	CanvasContenteditableEnumEmpty         CanvasContenteditableEnum = ""
 )
 
 type CanvasDirEnum string
 
 const (
-	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
 	CanvasDirEnumAuto CanvasDirEnum = "auto"
 	CanvasDirEnumLtr  CanvasDirEnum = "ltr"
+	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
 )
 
 type CanvasDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type CanvasEnterkeyhintEnum string
 
 const (
+	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
+	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
+	CanvasEnterkeyhintEnumGo       CanvasEnterkeyhintEnum = "go"
 	CanvasEnterkeyhintEnumNext     CanvasEnterkeyhintEnum = "next"
 	CanvasEnterkeyhintEnumPrevious CanvasEnterkeyhintEnum = "previous"
 	CanvasEnterkeyhintEnumSearch   CanvasEnterkeyhintEnum = "search"
 	CanvasEnterkeyhintEnumSend     CanvasEnterkeyhintEnum = "send"
-	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
-	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
-	CanvasEnterkeyhintEnumGo       CanvasEnterkeyhintEnum = "go"
 )
 
 type CanvasHiddenEnum string
@@ -115,21 +114,21 @@ const (
 type CanvasInputmodeEnum string
 
 const (
+	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
+	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
 	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
 	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
 	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
 	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
 	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
 	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
-	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
-	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
 )
 
 type CanvasSpellcheckEnum string
 
 const (
-	CanvasSpellcheckEnumFalse CanvasSpellcheckEnum = "false"
 	CanvasSpellcheckEnumTrue  CanvasSpellcheckEnum = "true"
+	CanvasSpellcheckEnumFalse CanvasSpellcheckEnum = "false"
 	CanvasSpellcheckEnumEmpty CanvasSpellcheckEnum = ""
 )
 

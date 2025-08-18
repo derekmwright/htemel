@@ -13,7 +13,6 @@ type ObjectElement struct {
 	attributes objectAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Object creates a tag <object> instance and returns it for further modification.
@@ -51,19 +50,19 @@ func ObjectTernary(condition bool, true htemel.Node, false htemel.Node) *ObjectE
 type ObjectAutocapitalizeEnum string
 
 const (
-	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
-	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
-	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
 	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
 	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
+	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
+	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
+	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
 )
 
 type ObjectAutocorrectEnum string
 
 const (
-	ObjectAutocorrectEnumOn    ObjectAutocorrectEnum = "on"
 	ObjectAutocorrectEnumOff   ObjectAutocorrectEnum = "off"
+	ObjectAutocorrectEnumOn    ObjectAutocorrectEnum = "on"
 	ObjectAutocorrectEnumEmpty ObjectAutocorrectEnum = ""
 )
 
@@ -79,16 +78,16 @@ const (
 type ObjectDirEnum string
 
 const (
+	ObjectDirEnumLtr  ObjectDirEnum = "ltr"
 	ObjectDirEnumRtl  ObjectDirEnum = "rtl"
 	ObjectDirEnumAuto ObjectDirEnum = "auto"
-	ObjectDirEnumLtr  ObjectDirEnum = "ltr"
 )
 
 type ObjectDraggableEnum string
 
 const (
-	ObjectDraggableEnumTrue  ObjectDraggableEnum = "true"
 	ObjectDraggableEnumFalse ObjectDraggableEnum = "false"
+	ObjectDraggableEnumTrue  ObjectDraggableEnum = "true"
 )
 
 type ObjectEnterkeyhintEnum string
@@ -106,14 +105,15 @@ const (
 type ObjectHiddenEnum string
 
 const (
-	ObjectHiddenEnumUntilFound ObjectHiddenEnum = "until-found"
 	ObjectHiddenEnumHidden     ObjectHiddenEnum = "hidden"
+	ObjectHiddenEnumUntilFound ObjectHiddenEnum = "until-found"
 	ObjectHiddenEnumEmpty      ObjectHiddenEnum = ""
 )
 
 type ObjectInputmodeEnum string
 
 const (
+	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
 	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
 	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
 	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
@@ -121,14 +121,13 @@ const (
 	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
 	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
 	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
-	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
 )
 
 type ObjectSpellcheckEnum string
 
 const (
-	ObjectSpellcheckEnumTrue  ObjectSpellcheckEnum = "true"
 	ObjectSpellcheckEnumFalse ObjectSpellcheckEnum = "false"
+	ObjectSpellcheckEnumTrue  ObjectSpellcheckEnum = "true"
 	ObjectSpellcheckEnumEmpty ObjectSpellcheckEnum = ""
 )
 

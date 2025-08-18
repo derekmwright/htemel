@@ -13,7 +13,6 @@ type ColElement struct {
 	attributes colAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Col creates a tag <col> instance and returns it for further modification.
@@ -43,12 +42,12 @@ func ColIf(condition bool) *ColElement {
 type ColAutocapitalizeEnum string
 
 const (
+	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
+	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
 	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
 	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
 	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
 	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
-	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
-	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
 )
 
 type ColAutocorrectEnum string
@@ -62,9 +61,9 @@ const (
 type ColContenteditableEnum string
 
 const (
+	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
 	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
 	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
-	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
 	ColContenteditableEnumEmpty         ColContenteditableEnum = ""
 )
 
@@ -106,21 +105,21 @@ const (
 type ColInputmodeEnum string
 
 const (
+	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
+	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
 	ColInputmodeEnumNone    ColInputmodeEnum = "none"
 	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
 	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
 	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
 	ColInputmodeEnumText    ColInputmodeEnum = "text"
 	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
-	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
-	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
 )
 
 type ColSpellcheckEnum string
 
 const (
-	ColSpellcheckEnumFalse ColSpellcheckEnum = "false"
 	ColSpellcheckEnumTrue  ColSpellcheckEnum = "true"
+	ColSpellcheckEnumFalse ColSpellcheckEnum = "false"
 	ColSpellcheckEnumEmpty ColSpellcheckEnum = ""
 )
 
@@ -135,8 +134,8 @@ const (
 type ColWritingsuggestionsEnum string
 
 const (
-	ColWritingsuggestionsEnumFalse ColWritingsuggestionsEnum = "false"
 	ColWritingsuggestionsEnumTrue  ColWritingsuggestionsEnum = "true"
+	ColWritingsuggestionsEnumFalse ColWritingsuggestionsEnum = "false"
 	ColWritingsuggestionsEnumEmpty ColWritingsuggestionsEnum = ""
 )
 

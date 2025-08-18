@@ -14,7 +14,6 @@ type IElement struct {
 	attributes iAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // I creates a tag <i> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
 type IAutocapitalizeEnum string
 
 const (
+	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
 	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
 	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
 	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
 	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
 	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
-	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
 )
 
 type IAutocorrectEnum string
@@ -80,9 +79,9 @@ const (
 type IDirEnum string
 
 const (
-	IDirEnumRtl  IDirEnum = "rtl"
 	IDirEnumAuto IDirEnum = "auto"
 	IDirEnumLtr  IDirEnum = "ltr"
+	IDirEnumRtl  IDirEnum = "rtl"
 )
 
 type IDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type IEnterkeyhintEnum string
 
 const (
-	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
-	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
-	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
 	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
 	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
 	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
 	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
+	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
+	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
+	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
 )
 
 type IHiddenEnum string
@@ -115,21 +114,21 @@ const (
 type IInputmodeEnum string
 
 const (
-	IInputmodeEnumText    IInputmodeEnum = "text"
-	IInputmodeEnumUrl     IInputmodeEnum = "url"
-	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
-	IInputmodeEnumEmail   IInputmodeEnum = "email"
 	IInputmodeEnumNone    IInputmodeEnum = "none"
 	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
 	IInputmodeEnumSearch  IInputmodeEnum = "search"
 	IInputmodeEnumTel     IInputmodeEnum = "tel"
+	IInputmodeEnumText    IInputmodeEnum = "text"
+	IInputmodeEnumUrl     IInputmodeEnum = "url"
+	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
+	IInputmodeEnumEmail   IInputmodeEnum = "email"
 )
 
 type ISpellcheckEnum string
 
 const (
-	ISpellcheckEnumTrue  ISpellcheckEnum = "true"
 	ISpellcheckEnumFalse ISpellcheckEnum = "false"
+	ISpellcheckEnumTrue  ISpellcheckEnum = "true"
 	ISpellcheckEnumEmpty ISpellcheckEnum = ""
 )
 

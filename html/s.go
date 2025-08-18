@@ -14,7 +14,6 @@ type SElement struct {
 	attributes sAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // S creates a tag <s> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func STernary(condition bool, true htemel.Node, false htemel.Node) *SElement {
 type SAutocapitalizeEnum string
 
 const (
-	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
-	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
 	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
 	SAutocapitalizeEnumSentences  SAutocapitalizeEnum = "sentences"
 	SAutocapitalizeEnumWords      SAutocapitalizeEnum = "words"
 	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
+	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
+	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
 )
 
 type SAutocorrectEnum string
@@ -80,9 +79,9 @@ const (
 type SDirEnum string
 
 const (
-	SDirEnumRtl  SDirEnum = "rtl"
 	SDirEnumAuto SDirEnum = "auto"
 	SDirEnumLtr  SDirEnum = "ltr"
+	SDirEnumRtl  SDirEnum = "rtl"
 )
 
 type SDraggableEnum string
@@ -95,34 +94,34 @@ const (
 type SEnterkeyhintEnum string
 
 const (
+	SEnterkeyhintEnumNext     SEnterkeyhintEnum = "next"
+	SEnterkeyhintEnumPrevious SEnterkeyhintEnum = "previous"
 	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
 	SEnterkeyhintEnumSend     SEnterkeyhintEnum = "send"
 	SEnterkeyhintEnumDone     SEnterkeyhintEnum = "done"
 	SEnterkeyhintEnumEnter    SEnterkeyhintEnum = "enter"
 	SEnterkeyhintEnumGo       SEnterkeyhintEnum = "go"
-	SEnterkeyhintEnumNext     SEnterkeyhintEnum = "next"
-	SEnterkeyhintEnumPrevious SEnterkeyhintEnum = "previous"
 )
 
 type SHiddenEnum string
 
 const (
-	SHiddenEnumUntilFound SHiddenEnum = "until-found"
 	SHiddenEnumHidden     SHiddenEnum = "hidden"
+	SHiddenEnumUntilFound SHiddenEnum = "until-found"
 	SHiddenEnumEmpty      SHiddenEnum = ""
 )
 
 type SInputmodeEnum string
 
 const (
-	SInputmodeEnumTel     SInputmodeEnum = "tel"
-	SInputmodeEnumText    SInputmodeEnum = "text"
 	SInputmodeEnumUrl     SInputmodeEnum = "url"
 	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
 	SInputmodeEnumEmail   SInputmodeEnum = "email"
 	SInputmodeEnumNone    SInputmodeEnum = "none"
 	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
 	SInputmodeEnumSearch  SInputmodeEnum = "search"
+	SInputmodeEnumTel     SInputmodeEnum = "tel"
+	SInputmodeEnumText    SInputmodeEnum = "text"
 )
 
 type SSpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type SWritingsuggestionsEnum string
 
 const (
-	SWritingsuggestionsEnumFalse SWritingsuggestionsEnum = "false"
 	SWritingsuggestionsEnumTrue  SWritingsuggestionsEnum = "true"
+	SWritingsuggestionsEnumFalse SWritingsuggestionsEnum = "false"
 	SWritingsuggestionsEnumEmpty SWritingsuggestionsEnum = ""
 )
 

@@ -14,7 +14,6 @@ type SelectElement struct {
 	attributes selectAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Select creates a tag <select> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectE
 type SelectAutocapitalizeEnum string
 
 const (
-	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
-	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
 	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
 	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
 	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
+	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
+	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
 )
 
 type SelectAutocorrectEnum string
@@ -95,34 +94,34 @@ const (
 type SelectEnterkeyhintEnum string
 
 const (
-	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
 	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
 	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
 	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
 	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
 	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
+	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
 )
 
 type SelectHiddenEnum string
 
 const (
-	SelectHiddenEnumHidden     SelectHiddenEnum = "hidden"
 	SelectHiddenEnumUntilFound SelectHiddenEnum = "until-found"
+	SelectHiddenEnumHidden     SelectHiddenEnum = "hidden"
 	SelectHiddenEnumEmpty      SelectHiddenEnum = ""
 )
 
 type SelectInputmodeEnum string
 
 const (
-	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
-	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
-	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
 	SelectInputmodeEnumUrl     SelectInputmodeEnum = "url"
 	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
 	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
 	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
 	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
+	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
+	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
+	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
 )
 
 type SelectSpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type SelectWritingsuggestionsEnum string
 
 const (
-	SelectWritingsuggestionsEnumFalse SelectWritingsuggestionsEnum = "false"
 	SelectWritingsuggestionsEnumTrue  SelectWritingsuggestionsEnum = "true"
+	SelectWritingsuggestionsEnumFalse SelectWritingsuggestionsEnum = "false"
 	SelectWritingsuggestionsEnumEmpty SelectWritingsuggestionsEnum = ""
 )
 

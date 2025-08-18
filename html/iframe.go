@@ -14,7 +14,6 @@ type IframeElement struct {
 	attributes iframeAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Iframe creates a tag <iframe> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func IframeTernary(condition bool, true htemel.Node, false htemel.Node) *IframeE
 type IframeLoadingEnum string
 
 const (
-	IframeLoadingEnumEager IframeLoadingEnum = "eager"
 	IframeLoadingEnumLazy  IframeLoadingEnum = "lazy"
+	IframeLoadingEnumEager IframeLoadingEnum = "eager"
 )
 
 type IframeAutocapitalizeEnum string
 
 const (
+	IframeAutocapitalizeEnumWords      IframeAutocapitalizeEnum = "words"
 	IframeAutocapitalizeEnumCharacters IframeAutocapitalizeEnum = "characters"
 	IframeAutocapitalizeEnumNone       IframeAutocapitalizeEnum = "none"
 	IframeAutocapitalizeEnumOff        IframeAutocapitalizeEnum = "off"
 	IframeAutocapitalizeEnumOn         IframeAutocapitalizeEnum = "on"
 	IframeAutocapitalizeEnumSentences  IframeAutocapitalizeEnum = "sentences"
-	IframeAutocapitalizeEnumWords      IframeAutocapitalizeEnum = "words"
 )
 
 type IframeAutocorrectEnum string
@@ -78,9 +77,9 @@ const (
 type IframeContenteditableEnum string
 
 const (
+	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
 	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
 	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
-	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
 	IframeContenteditableEnumEmpty         IframeContenteditableEnum = ""
 )
 
@@ -122,14 +121,14 @@ const (
 type IframeInputmodeEnum string
 
 const (
-	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
-	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
 	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
 	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
 	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
 	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
 	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
 	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
+	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
+	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
 )
 
 type IframeSpellcheckEnum string

@@ -14,7 +14,6 @@ type SlotElement struct {
 	attributes slotAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Slot creates a tag <slot> instance and returns it for further modification.
@@ -63,17 +62,17 @@ const (
 type SlotAutocorrectEnum string
 
 const (
-	SlotAutocorrectEnumOff   SlotAutocorrectEnum = "off"
 	SlotAutocorrectEnumOn    SlotAutocorrectEnum = "on"
+	SlotAutocorrectEnumOff   SlotAutocorrectEnum = "off"
 	SlotAutocorrectEnumEmpty SlotAutocorrectEnum = ""
 )
 
 type SlotContenteditableEnum string
 
 const (
-	SlotContenteditableEnumFalse         SlotContenteditableEnum = "false"
 	SlotContenteditableEnumPlaintextOnly SlotContenteditableEnum = "plaintext-only"
 	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
+	SlotContenteditableEnumFalse         SlotContenteditableEnum = "false"
 	SlotContenteditableEnumEmpty         SlotContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type SlotEnterkeyhintEnum string
 
 const (
-	SlotEnterkeyhintEnumEnter    SlotEnterkeyhintEnum = "enter"
-	SlotEnterkeyhintEnumGo       SlotEnterkeyhintEnum = "go"
-	SlotEnterkeyhintEnumNext     SlotEnterkeyhintEnum = "next"
 	SlotEnterkeyhintEnumPrevious SlotEnterkeyhintEnum = "previous"
 	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
 	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
 	SlotEnterkeyhintEnumDone     SlotEnterkeyhintEnum = "done"
+	SlotEnterkeyhintEnumEnter    SlotEnterkeyhintEnum = "enter"
+	SlotEnterkeyhintEnumGo       SlotEnterkeyhintEnum = "go"
+	SlotEnterkeyhintEnumNext     SlotEnterkeyhintEnum = "next"
 )
 
 type SlotHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type SlotInputmodeEnum string
 
 const (
+	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
+	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
+	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
 	SlotInputmodeEnumEmail   SlotInputmodeEnum = "email"
 	SlotInputmodeEnumNone    SlotInputmodeEnum = "none"
 	SlotInputmodeEnumNumeric SlotInputmodeEnum = "numeric"
 	SlotInputmodeEnumSearch  SlotInputmodeEnum = "search"
-	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
-	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
-	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
 )
 
 type SlotSpellcheckEnum string
@@ -136,8 +135,8 @@ const (
 type SlotTranslateEnum string
 
 const (
-	SlotTranslateEnumNo    SlotTranslateEnum = "no"
 	SlotTranslateEnumYes   SlotTranslateEnum = "yes"
+	SlotTranslateEnumNo    SlotTranslateEnum = "no"
 	SlotTranslateEnumEmpty SlotTranslateEnum = ""
 )
 

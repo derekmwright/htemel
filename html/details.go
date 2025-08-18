@@ -14,7 +14,6 @@ type DetailsElement struct {
 	attributes detailsAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Details creates a tag <details> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *Detail
 type DetailsAutocapitalizeEnum string
 
 const (
-	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
-	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
-	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
 	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
 	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
 	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
+	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
+	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
+	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
 )
 
 type DetailsAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type DetailsContenteditableEnum string
 
 const (
-	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 	DetailsContenteditableEnumPlaintextOnly DetailsContenteditableEnum = "plaintext-only"
 	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
+	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
 	DetailsContenteditableEnumEmpty         DetailsContenteditableEnum = ""
 )
 
@@ -95,34 +94,34 @@ const (
 type DetailsEnterkeyhintEnum string
 
 const (
-	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
-	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
-	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
 	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
 	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
 	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
 	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
+	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
+	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
+	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
 )
 
 type DetailsHiddenEnum string
 
 const (
-	DetailsHiddenEnumUntilFound DetailsHiddenEnum = "until-found"
 	DetailsHiddenEnumHidden     DetailsHiddenEnum = "hidden"
+	DetailsHiddenEnumUntilFound DetailsHiddenEnum = "until-found"
 	DetailsHiddenEnumEmpty      DetailsHiddenEnum = ""
 )
 
 type DetailsInputmodeEnum string
 
 const (
-	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
-	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
 	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
 	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
 	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
 	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
 	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
 	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
+	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
+	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
 )
 
 type DetailsSpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type DetailsWritingsuggestionsEnum string
 
 const (
-	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
 	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
+	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
 	DetailsWritingsuggestionsEnumEmpty DetailsWritingsuggestionsEnum = ""
 )
 

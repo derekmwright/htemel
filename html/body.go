@@ -14,7 +14,6 @@ type BodyElement struct {
 	attributes bodyAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Body creates a tag <body> instance and returns it for further modification.
@@ -52,28 +51,28 @@ func BodyTernary(condition bool, true htemel.Node, false htemel.Node) *BodyEleme
 type BodyAutocapitalizeEnum string
 
 const (
-	BodyAutocapitalizeEnumCharacters BodyAutocapitalizeEnum = "characters"
 	BodyAutocapitalizeEnumNone       BodyAutocapitalizeEnum = "none"
 	BodyAutocapitalizeEnumOff        BodyAutocapitalizeEnum = "off"
 	BodyAutocapitalizeEnumOn         BodyAutocapitalizeEnum = "on"
 	BodyAutocapitalizeEnumSentences  BodyAutocapitalizeEnum = "sentences"
 	BodyAutocapitalizeEnumWords      BodyAutocapitalizeEnum = "words"
+	BodyAutocapitalizeEnumCharacters BodyAutocapitalizeEnum = "characters"
 )
 
 type BodyAutocorrectEnum string
 
 const (
-	BodyAutocorrectEnumOn    BodyAutocorrectEnum = "on"
 	BodyAutocorrectEnumOff   BodyAutocorrectEnum = "off"
+	BodyAutocorrectEnumOn    BodyAutocorrectEnum = "on"
 	BodyAutocorrectEnumEmpty BodyAutocorrectEnum = ""
 )
 
 type BodyContenteditableEnum string
 
 const (
-	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
 	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
+	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
 	BodyContenteditableEnumEmpty         BodyContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type BodyEnterkeyhintEnum string
 
 const (
+	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
+	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
 	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
 	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
 	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
 	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
 	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
-	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
-	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
 )
 
 type BodyHiddenEnum string
@@ -115,6 +114,7 @@ const (
 type BodyInputmodeEnum string
 
 const (
+	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
 	BodyInputmodeEnumSearch  BodyInputmodeEnum = "search"
 	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
 	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
@@ -122,7 +122,6 @@ const (
 	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
 	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
 	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
-	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
 )
 
 type BodySpellcheckEnum string

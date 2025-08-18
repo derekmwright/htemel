@@ -14,7 +14,6 @@ type AddressElement struct {
 	attributes addressAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Address creates a tag <address> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func AddressTernary(condition bool, true htemel.Node, false htemel.Node) *Addres
 type AddressAutocapitalizeEnum string
 
 const (
-	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
-	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
 	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
 	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
 	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
+	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
+	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
 )
 
 type AddressAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type AddressContenteditableEnum string
 
 const (
+	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
 	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
-	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
 	AddressContenteditableEnumEmpty         AddressContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type AddressEnterkeyhintEnum string
 
 const (
+	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
+	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
 	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
 	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
 	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
 	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
-	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
-	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
 )
 
 type AddressHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type AddressInputmodeEnum string
 
 const (
-	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
-	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
 	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
 	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
 	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
 	AddressInputmodeEnumText    AddressInputmodeEnum = "text"
 	AddressInputmodeEnumUrl     AddressInputmodeEnum = "url"
 	AddressInputmodeEnumDecimal AddressInputmodeEnum = "decimal"
+	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
+	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
 )
 
 type AddressSpellcheckEnum string

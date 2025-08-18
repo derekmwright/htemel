@@ -14,7 +14,6 @@ type DelElement struct {
 	attributes delAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Del creates a tag <del> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func DelTernary(condition bool, true htemel.Node, false htemel.Node) *DelElement
 type DelAutocapitalizeEnum string
 
 const (
-	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
-	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
-	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
 	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
 	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
 	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
+	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
+	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
+	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
 )
 
 type DelAutocorrectEnum string
@@ -95,26 +94,27 @@ const (
 type DelEnterkeyhintEnum string
 
 const (
+	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
 	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
 	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
 	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
 	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
 	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
 	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
-	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
 )
 
 type DelHiddenEnum string
 
 const (
-	DelHiddenEnumHidden     DelHiddenEnum = "hidden"
 	DelHiddenEnumUntilFound DelHiddenEnum = "until-found"
+	DelHiddenEnumHidden     DelHiddenEnum = "hidden"
 	DelHiddenEnumEmpty      DelHiddenEnum = ""
 )
 
 type DelInputmodeEnum string
 
 const (
+	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 	DelInputmodeEnumNone    DelInputmodeEnum = "none"
 	DelInputmodeEnumNumeric DelInputmodeEnum = "numeric"
 	DelInputmodeEnumSearch  DelInputmodeEnum = "search"
@@ -122,7 +122,6 @@ const (
 	DelInputmodeEnumText    DelInputmodeEnum = "text"
 	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
 	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
-	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
 )
 
 type DelSpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type DelWritingsuggestionsEnum string
 
 const (
-	DelWritingsuggestionsEnumTrue  DelWritingsuggestionsEnum = "true"
 	DelWritingsuggestionsEnumFalse DelWritingsuggestionsEnum = "false"
+	DelWritingsuggestionsEnumTrue  DelWritingsuggestionsEnum = "true"
 	DelWritingsuggestionsEnumEmpty DelWritingsuggestionsEnum = ""
 )
 

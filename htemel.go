@@ -15,7 +15,6 @@ type Node interface {
 // GroupElement is a struct that backs the Group function.
 type GroupElement struct {
 	children []Node
-	indent   int
 }
 
 // Group is a generic wrapper that can be used to wrap one or more elements that may not have a suitable parent type.
@@ -23,15 +22,6 @@ func Group(children ...Node) *GroupElement {
 	return &GroupElement{
 		children: children,
 	}
-}
-
-// AddIndent should not increase indent on a pseudo-element.
-func (e *GroupElement) AddIndent(i int) {
-	e.indent = i
-}
-
-func (e *GroupElement) Indent() int {
-	return e.indent
 }
 
 // Render implements the Node interface by calling Render on all child nodes.
@@ -51,7 +41,6 @@ type GenericElement struct {
 	attrs    map[string]any
 	void     bool
 	children []Node
-	indent   int
 }
 
 // Generic element is provided as an escape-hatch for when the provided generated elements are not sufficient.
@@ -77,14 +66,6 @@ func GenericVoid(tag string, attrs map[string]any) *GenericElement {
 		void:     true,
 		children: nil,
 	}
-}
-
-func (e *GenericElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
-func (e *GenericElement) Indent() int {
-	return e.indent
 }
 
 func (e *GenericElement) Render(w io.Writer) error {
@@ -128,7 +109,6 @@ func (e *GenericElement) Render(w io.Writer) error {
 type TextElement struct {
 	text     string
 	children []Node
-	indent   int
 }
 
 func TextUnsafe(text string, children ...Node) *TextElement {
@@ -143,14 +123,6 @@ func Text(text string, children ...Node) *TextElement {
 		text:     html.EscapeString(text),
 		children: children,
 	}
-}
-
-func (e *TextElement) AddIndent(i int) {
-	e.indent = i + 1
-}
-
-func (e *TextElement) Indent() int {
-	return e.indent
 }
 
 func (e *TextElement) Render(w io.Writer) error {

@@ -14,7 +14,6 @@ type ScriptElement struct {
 	attributes scriptAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Script creates a tag <script> instance and returns it for further modification.
@@ -66,20 +65,20 @@ const (
 type ScriptFetchpriorityEnum string
 
 const (
+	ScriptFetchpriorityEnumLow  ScriptFetchpriorityEnum = "low"
 	ScriptFetchpriorityEnumAuto ScriptFetchpriorityEnum = "auto"
 	ScriptFetchpriorityEnumHigh ScriptFetchpriorityEnum = "high"
-	ScriptFetchpriorityEnumLow  ScriptFetchpriorityEnum = "low"
 )
 
 type ScriptAutocapitalizeEnum string
 
 const (
-	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
 	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
 	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
 	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
 	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
 	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
+	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
 )
 
 type ScriptAutocorrectEnum string
@@ -93,9 +92,9 @@ const (
 type ScriptContenteditableEnum string
 
 const (
-	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
 	ScriptContenteditableEnumPlaintextOnly ScriptContenteditableEnum = "plaintext-only"
 	ScriptContenteditableEnumTrue          ScriptContenteditableEnum = "true"
+	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
 	ScriptContenteditableEnumEmpty         ScriptContenteditableEnum = ""
 )
 
@@ -137,14 +136,14 @@ const (
 type ScriptInputmodeEnum string
 
 const (
-	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
-	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
-	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
-	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
 	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
 	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
 	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
 	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
+	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
+	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
+	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
+	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
 )
 
 type ScriptSpellcheckEnum string
@@ -166,8 +165,8 @@ const (
 type ScriptWritingsuggestionsEnum string
 
 const (
-	ScriptWritingsuggestionsEnumTrue  ScriptWritingsuggestionsEnum = "true"
 	ScriptWritingsuggestionsEnumFalse ScriptWritingsuggestionsEnum = "false"
+	ScriptWritingsuggestionsEnumTrue  ScriptWritingsuggestionsEnum = "true"
 	ScriptWritingsuggestionsEnumEmpty ScriptWritingsuggestionsEnum = ""
 )
 

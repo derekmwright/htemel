@@ -14,7 +14,6 @@ type BlockquoteElement struct {
 	attributes blockquoteAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Blockquote creates a tag <blockquote> instance and returns it for further modification.
@@ -63,8 +62,8 @@ const (
 type BlockquoteAutocorrectEnum string
 
 const (
-	BlockquoteAutocorrectEnumOff   BlockquoteAutocorrectEnum = "off"
 	BlockquoteAutocorrectEnumOn    BlockquoteAutocorrectEnum = "on"
+	BlockquoteAutocorrectEnumOff   BlockquoteAutocorrectEnum = "off"
 	BlockquoteAutocorrectEnumEmpty BlockquoteAutocorrectEnum = ""
 )
 
@@ -80,28 +79,28 @@ const (
 type BlockquoteDirEnum string
 
 const (
+	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 	BlockquoteDirEnumLtr  BlockquoteDirEnum = "ltr"
 	BlockquoteDirEnumRtl  BlockquoteDirEnum = "rtl"
-	BlockquoteDirEnumAuto BlockquoteDirEnum = "auto"
 )
 
 type BlockquoteDraggableEnum string
 
 const (
-	BlockquoteDraggableEnumFalse BlockquoteDraggableEnum = "false"
 	BlockquoteDraggableEnumTrue  BlockquoteDraggableEnum = "true"
+	BlockquoteDraggableEnumFalse BlockquoteDraggableEnum = "false"
 )
 
 type BlockquoteEnterkeyhintEnum string
 
 const (
+	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
+	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
 	BlockquoteEnterkeyhintEnumDone     BlockquoteEnterkeyhintEnum = "done"
 	BlockquoteEnterkeyhintEnumEnter    BlockquoteEnterkeyhintEnum = "enter"
 	BlockquoteEnterkeyhintEnumGo       BlockquoteEnterkeyhintEnum = "go"
 	BlockquoteEnterkeyhintEnumNext     BlockquoteEnterkeyhintEnum = "next"
 	BlockquoteEnterkeyhintEnumPrevious BlockquoteEnterkeyhintEnum = "previous"
-	BlockquoteEnterkeyhintEnumSearch   BlockquoteEnterkeyhintEnum = "search"
-	BlockquoteEnterkeyhintEnumSend     BlockquoteEnterkeyhintEnum = "send"
 )
 
 type BlockquoteHiddenEnum string
@@ -115,6 +114,7 @@ const (
 type BlockquoteInputmodeEnum string
 
 const (
+	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
 	BlockquoteInputmodeEnumNone    BlockquoteInputmodeEnum = "none"
 	BlockquoteInputmodeEnumNumeric BlockquoteInputmodeEnum = "numeric"
 	BlockquoteInputmodeEnumSearch  BlockquoteInputmodeEnum = "search"
@@ -122,14 +122,13 @@ const (
 	BlockquoteInputmodeEnumText    BlockquoteInputmodeEnum = "text"
 	BlockquoteInputmodeEnumUrl     BlockquoteInputmodeEnum = "url"
 	BlockquoteInputmodeEnumDecimal BlockquoteInputmodeEnum = "decimal"
-	BlockquoteInputmodeEnumEmail   BlockquoteInputmodeEnum = "email"
 )
 
 type BlockquoteSpellcheckEnum string
 
 const (
-	BlockquoteSpellcheckEnumFalse BlockquoteSpellcheckEnum = "false"
 	BlockquoteSpellcheckEnumTrue  BlockquoteSpellcheckEnum = "true"
+	BlockquoteSpellcheckEnumFalse BlockquoteSpellcheckEnum = "false"
 	BlockquoteSpellcheckEnumEmpty BlockquoteSpellcheckEnum = ""
 )
 
@@ -144,8 +143,8 @@ const (
 type BlockquoteWritingsuggestionsEnum string
 
 const (
-	BlockquoteWritingsuggestionsEnumFalse BlockquoteWritingsuggestionsEnum = "false"
 	BlockquoteWritingsuggestionsEnumTrue  BlockquoteWritingsuggestionsEnum = "true"
+	BlockquoteWritingsuggestionsEnumFalse BlockquoteWritingsuggestionsEnum = "false"
 	BlockquoteWritingsuggestionsEnumEmpty BlockquoteWritingsuggestionsEnum = ""
 )
 

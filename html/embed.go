@@ -13,7 +13,6 @@ type EmbedElement struct {
 	attributes embedAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Embed creates a tag <embed> instance and returns it for further modification.
@@ -43,19 +42,19 @@ func EmbedIf(condition bool) *EmbedElement {
 type EmbedAutocapitalizeEnum string
 
 const (
-	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
-	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
-	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
 	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
 	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
 	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
+	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
+	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
+	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
 )
 
 type EmbedAutocorrectEnum string
 
 const (
-	EmbedAutocorrectEnumOn    EmbedAutocorrectEnum = "on"
 	EmbedAutocorrectEnumOff   EmbedAutocorrectEnum = "off"
+	EmbedAutocorrectEnumOn    EmbedAutocorrectEnum = "on"
 	EmbedAutocorrectEnumEmpty EmbedAutocorrectEnum = ""
 )
 
@@ -86,13 +85,13 @@ const (
 type EmbedEnterkeyhintEnum string
 
 const (
-	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
-	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
 	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
 	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
 	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
 	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
+	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
+	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
 )
 
 type EmbedHiddenEnum string
@@ -106,14 +105,14 @@ const (
 type EmbedInputmodeEnum string
 
 const (
-	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
-	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
-	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
 	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
 	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
 	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
 	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
+	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
+	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
+	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
 )
 
 type EmbedSpellcheckEnum string

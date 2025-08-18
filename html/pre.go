@@ -14,7 +14,6 @@ type PreElement struct {
 	attributes preAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Pre creates a tag <pre> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func PreTernary(condition bool, true htemel.Node, false htemel.Node) *PreElement
 type PreAutocapitalizeEnum string
 
 const (
-	PreAutocapitalizeEnumOff        PreAutocapitalizeEnum = "off"
-	PreAutocapitalizeEnumOn         PreAutocapitalizeEnum = "on"
-	PreAutocapitalizeEnumSentences  PreAutocapitalizeEnum = "sentences"
 	PreAutocapitalizeEnumWords      PreAutocapitalizeEnum = "words"
 	PreAutocapitalizeEnumCharacters PreAutocapitalizeEnum = "characters"
 	PreAutocapitalizeEnumNone       PreAutocapitalizeEnum = "none"
+	PreAutocapitalizeEnumOff        PreAutocapitalizeEnum = "off"
+	PreAutocapitalizeEnumOn         PreAutocapitalizeEnum = "on"
+	PreAutocapitalizeEnumSentences  PreAutocapitalizeEnum = "sentences"
 )
 
 type PreAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type PreContenteditableEnum string
 
 const (
+	PreContenteditableEnumFalse         PreContenteditableEnum = "false"
 	PreContenteditableEnumPlaintextOnly PreContenteditableEnum = "plaintext-only"
 	PreContenteditableEnumTrue          PreContenteditableEnum = "true"
-	PreContenteditableEnumFalse         PreContenteditableEnum = "false"
 	PreContenteditableEnumEmpty         PreContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type PreEnterkeyhintEnum string
 
 const (
+	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
+	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
 	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
 	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
 	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
 	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
 	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
-	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
-	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
 )
 
 type PreHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type PreInputmodeEnum string
 
 const (
+	PreInputmodeEnumSearch  PreInputmodeEnum = "search"
+	PreInputmodeEnumTel     PreInputmodeEnum = "tel"
+	PreInputmodeEnumText    PreInputmodeEnum = "text"
 	PreInputmodeEnumUrl     PreInputmodeEnum = "url"
 	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
 	PreInputmodeEnumEmail   PreInputmodeEnum = "email"
 	PreInputmodeEnumNone    PreInputmodeEnum = "none"
 	PreInputmodeEnumNumeric PreInputmodeEnum = "numeric"
-	PreInputmodeEnumSearch  PreInputmodeEnum = "search"
-	PreInputmodeEnumTel     PreInputmodeEnum = "tel"
-	PreInputmodeEnumText    PreInputmodeEnum = "text"
 )
 
 type PreSpellcheckEnum string

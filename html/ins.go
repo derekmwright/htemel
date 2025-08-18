@@ -14,7 +14,6 @@ type InsElement struct {
 	attributes insAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Ins creates a tag <ins> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement
 type InsAutocapitalizeEnum string
 
 const (
-	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
-	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
-	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
 	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
 	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
 	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
+	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
+	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
+	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
 )
 
 type InsAutocorrectEnum string
@@ -80,9 +79,9 @@ const (
 type InsDirEnum string
 
 const (
-	InsDirEnumAuto InsDirEnum = "auto"
 	InsDirEnumLtr  InsDirEnum = "ltr"
 	InsDirEnumRtl  InsDirEnum = "rtl"
+	InsDirEnumAuto InsDirEnum = "auto"
 )
 
 type InsDraggableEnum string
@@ -95,20 +94,20 @@ const (
 type InsEnterkeyhintEnum string
 
 const (
-	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
-	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
-	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
 	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
 	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
 	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
 	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
+	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
+	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
+	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
 )
 
 type InsHiddenEnum string
 
 const (
-	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
 	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
+	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
 	InsHiddenEnumEmpty      InsHiddenEnum = ""
 )
 
@@ -136,8 +135,8 @@ const (
 type InsTranslateEnum string
 
 const (
-	InsTranslateEnumNo    InsTranslateEnum = "no"
 	InsTranslateEnumYes   InsTranslateEnum = "yes"
+	InsTranslateEnumNo    InsTranslateEnum = "no"
 	InsTranslateEnumEmpty InsTranslateEnum = ""
 )
 

@@ -14,7 +14,6 @@ type ColgroupElement struct {
 	attributes colgroupAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Colgroup creates a tag <colgroup> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func ColgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Colgr
 type ColgroupAutocapitalizeEnum string
 
 const (
-	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
-	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 	ColgroupAutocapitalizeEnumOff        ColgroupAutocapitalizeEnum = "off"
 	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
 	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
 	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
+	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
+	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
 )
 
 type ColgroupAutocorrectEnum string
@@ -95,13 +94,13 @@ const (
 type ColgroupEnterkeyhintEnum string
 
 const (
-	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
-	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
 	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
 	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
 	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
 	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
 	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
+	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
+	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
 )
 
 type ColgroupHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type ColgroupInputmodeEnum string
 
 const (
-	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
-	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
 	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
 	ColgroupInputmodeEnumSearch  ColgroupInputmodeEnum = "search"
 	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
 	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
 	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
 	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
+	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
+	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
 )
 
 type ColgroupSpellcheckEnum string

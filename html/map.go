@@ -14,7 +14,6 @@ type MapElement struct {
 	attributes mapAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Map creates a tag <map> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func MapTernary(condition bool, true htemel.Node, false htemel.Node) *MapElement
 type MapAutocapitalizeEnum string
 
 const (
+	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 	MapAutocapitalizeEnumCharacters MapAutocapitalizeEnum = "characters"
 	MapAutocapitalizeEnumNone       MapAutocapitalizeEnum = "none"
 	MapAutocapitalizeEnumOff        MapAutocapitalizeEnum = "off"
 	MapAutocapitalizeEnumOn         MapAutocapitalizeEnum = "on"
 	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
-	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
 )
 
 type MapAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type MapContenteditableEnum string
 
 const (
-	MapContenteditableEnumFalse         MapContenteditableEnum = "false"
 	MapContenteditableEnumPlaintextOnly MapContenteditableEnum = "plaintext-only"
 	MapContenteditableEnumTrue          MapContenteditableEnum = "true"
+	MapContenteditableEnumFalse         MapContenteditableEnum = "false"
 	MapContenteditableEnumEmpty         MapContenteditableEnum = ""
 )
 
@@ -88,20 +87,20 @@ const (
 type MapDraggableEnum string
 
 const (
-	MapDraggableEnumTrue  MapDraggableEnum = "true"
 	MapDraggableEnumFalse MapDraggableEnum = "false"
+	MapDraggableEnumTrue  MapDraggableEnum = "true"
 )
 
 type MapEnterkeyhintEnum string
 
 const (
+	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
+	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
+	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
 	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
 	MapEnterkeyhintEnumSend     MapEnterkeyhintEnum = "send"
 	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
 	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
-	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
-	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
-	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
 )
 
 type MapHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type MapInputmodeEnum string
 
 const (
-	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
-	MapInputmodeEnumText    MapInputmodeEnum = "text"
-	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
-	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
 	MapInputmodeEnumEmail   MapInputmodeEnum = "email"
 	MapInputmodeEnumNone    MapInputmodeEnum = "none"
 	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
 	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
+	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
+	MapInputmodeEnumText    MapInputmodeEnum = "text"
+	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
+	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
 )
 
 type MapSpellcheckEnum string

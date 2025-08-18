@@ -14,7 +14,6 @@ type PictureElement struct {
 	attributes pictureAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Picture creates a tag <picture> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func PictureTernary(condition bool, true htemel.Node, false htemel.Node) *Pictur
 type PictureAutocapitalizeEnum string
 
 const (
-	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
-	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 	PictureAutocapitalizeEnumSentences  PictureAutocapitalizeEnum = "sentences"
 	PictureAutocapitalizeEnumWords      PictureAutocapitalizeEnum = "words"
 	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
 	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
+	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
+	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
 )
 
 type PictureAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type PictureContenteditableEnum string
 
 const (
+	PictureContenteditableEnumTrue          PictureContenteditableEnum = "true"
 	PictureContenteditableEnumFalse         PictureContenteditableEnum = "false"
 	PictureContenteditableEnumPlaintextOnly PictureContenteditableEnum = "plaintext-only"
-	PictureContenteditableEnumTrue          PictureContenteditableEnum = "true"
 	PictureContenteditableEnumEmpty         PictureContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type PictureEnterkeyhintEnum string
 
 const (
-	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
-	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
 	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
 	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
 	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
 	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
 	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
+	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
+	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
 )
 
 type PictureHiddenEnum string
@@ -115,7 +114,6 @@ const (
 type PictureInputmodeEnum string
 
 const (
-	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
 	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
 	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
@@ -123,6 +121,7 @@ const (
 	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
 	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
 	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
+	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
 )
 
 type PictureSpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type PictureWritingsuggestionsEnum string
 
 const (
-	PictureWritingsuggestionsEnumTrue  PictureWritingsuggestionsEnum = "true"
 	PictureWritingsuggestionsEnumFalse PictureWritingsuggestionsEnum = "false"
+	PictureWritingsuggestionsEnumTrue  PictureWritingsuggestionsEnum = "true"
 	PictureWritingsuggestionsEnumEmpty PictureWritingsuggestionsEnum = ""
 )
 

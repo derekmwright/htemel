@@ -14,7 +14,6 @@ type ArticleElement struct {
 	attributes articleAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Article creates a tag <article> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *Articl
 type ArticleAutocapitalizeEnum string
 
 const (
+	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
+	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
 	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
 	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
 	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
-	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
-	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
 )
 
 type ArticleAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type ArticleContenteditableEnum string
 
 const (
+	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
 	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
-	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
 	ArticleContenteditableEnumEmpty         ArticleContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type ArticleEnterkeyhintEnum string
 
 const (
-	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
-	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
-	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
 	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
 	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
 	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
+	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
+	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
+	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
 )
 
 type ArticleHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type ArticleInputmodeEnum string
 
 const (
-	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
-	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
-	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
 	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
 	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
 	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
 	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
 	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
+	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
+	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
+	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
 )
 
 type ArticleSpellcheckEnum string

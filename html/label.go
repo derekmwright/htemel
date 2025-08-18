@@ -14,7 +14,6 @@ type LabelElement struct {
 	attributes labelAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Label creates a tag <label> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func LabelTernary(condition bool, true htemel.Node, false htemel.Node) *LabelEle
 type LabelAutocapitalizeEnum string
 
 const (
-	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
-	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
 	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
 	LabelAutocapitalizeEnumCharacters LabelAutocapitalizeEnum = "characters"
 	LabelAutocapitalizeEnumNone       LabelAutocapitalizeEnum = "none"
 	LabelAutocapitalizeEnumOff        LabelAutocapitalizeEnum = "off"
+	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
+	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
 )
 
 type LabelAutocorrectEnum string
@@ -71,37 +70,37 @@ const (
 type LabelContenteditableEnum string
 
 const (
-	LabelContenteditableEnumTrue          LabelContenteditableEnum = "true"
 	LabelContenteditableEnumFalse         LabelContenteditableEnum = "false"
 	LabelContenteditableEnumPlaintextOnly LabelContenteditableEnum = "plaintext-only"
+	LabelContenteditableEnumTrue          LabelContenteditableEnum = "true"
 	LabelContenteditableEnumEmpty         LabelContenteditableEnum = ""
 )
 
 type LabelDirEnum string
 
 const (
-	LabelDirEnumRtl  LabelDirEnum = "rtl"
 	LabelDirEnumAuto LabelDirEnum = "auto"
 	LabelDirEnumLtr  LabelDirEnum = "ltr"
+	LabelDirEnumRtl  LabelDirEnum = "rtl"
 )
 
 type LabelDraggableEnum string
 
 const (
-	LabelDraggableEnumTrue  LabelDraggableEnum = "true"
 	LabelDraggableEnumFalse LabelDraggableEnum = "false"
+	LabelDraggableEnumTrue  LabelDraggableEnum = "true"
 )
 
 type LabelEnterkeyhintEnum string
 
 const (
+	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
+	LabelEnterkeyhintEnumNext     LabelEnterkeyhintEnum = "next"
 	LabelEnterkeyhintEnumPrevious LabelEnterkeyhintEnum = "previous"
 	LabelEnterkeyhintEnumSearch   LabelEnterkeyhintEnum = "search"
 	LabelEnterkeyhintEnumSend     LabelEnterkeyhintEnum = "send"
 	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
 	LabelEnterkeyhintEnumEnter    LabelEnterkeyhintEnum = "enter"
-	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
-	LabelEnterkeyhintEnumNext     LabelEnterkeyhintEnum = "next"
 )
 
 type LabelHiddenEnum string
@@ -115,6 +114,7 @@ const (
 type LabelInputmodeEnum string
 
 const (
+	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
 	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
 	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
 	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
@@ -122,7 +122,6 @@ const (
 	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
 	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
 	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
-	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
 )
 
 type LabelSpellcheckEnum string

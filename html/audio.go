@@ -14,7 +14,6 @@ type AudioElement struct {
 	attributes audioAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Audio creates a tag <audio> instance and returns it for further modification.
@@ -52,29 +51,29 @@ func AudioTernary(condition bool, true htemel.Node, false htemel.Node) *AudioEle
 type AudioCrossoriginEnum string
 
 const (
-	AudioCrossoriginEnumUseCredentials AudioCrossoriginEnum = "use-credentials"
 	AudioCrossoriginEnumAnonymous      AudioCrossoriginEnum = "anonymous"
+	AudioCrossoriginEnumUseCredentials AudioCrossoriginEnum = "use-credentials"
 	AudioCrossoriginEnumEmpty          AudioCrossoriginEnum = ""
 )
 
 type AudioPreloadEnum string
 
 const (
-	AudioPreloadEnumNone     AudioPreloadEnum = "none"
 	AudioPreloadEnumAuto     AudioPreloadEnum = "auto"
 	AudioPreloadEnumMetadata AudioPreloadEnum = "metadata"
+	AudioPreloadEnumNone     AudioPreloadEnum = "none"
 	AudioPreloadEnumEmpty    AudioPreloadEnum = ""
 )
 
 type AudioAutocapitalizeEnum string
 
 const (
-	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
-	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 	AudioAutocapitalizeEnumOff        AudioAutocapitalizeEnum = "off"
 	AudioAutocapitalizeEnumOn         AudioAutocapitalizeEnum = "on"
 	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
 	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
+	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
+	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
 )
 
 type AudioAutocorrectEnum string
@@ -112,13 +111,13 @@ const (
 type AudioEnterkeyhintEnum string
 
 const (
+	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
+	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
 	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
 	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
 	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
 	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
-	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
-	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
 )
 
 type AudioHiddenEnum string
@@ -132,14 +131,14 @@ const (
 type AudioInputmodeEnum string
 
 const (
-	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
-	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
 	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
 	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
 	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
 	AudioInputmodeEnumTel     AudioInputmodeEnum = "tel"
 	AudioInputmodeEnumText    AudioInputmodeEnum = "text"
 	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
+	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
+	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
 )
 
 type AudioSpellcheckEnum string

@@ -14,7 +14,6 @@ type CiteElement struct {
 	attributes citeAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Cite creates a tag <cite> instance and returns it for further modification.
@@ -52,37 +51,37 @@ func CiteTernary(condition bool, true htemel.Node, false htemel.Node) *CiteEleme
 type CiteAutocapitalizeEnum string
 
 const (
-	CiteAutocapitalizeEnumOn         CiteAutocapitalizeEnum = "on"
-	CiteAutocapitalizeEnumSentences  CiteAutocapitalizeEnum = "sentences"
-	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
 	CiteAutocapitalizeEnumCharacters CiteAutocapitalizeEnum = "characters"
 	CiteAutocapitalizeEnumNone       CiteAutocapitalizeEnum = "none"
 	CiteAutocapitalizeEnumOff        CiteAutocapitalizeEnum = "off"
+	CiteAutocapitalizeEnumOn         CiteAutocapitalizeEnum = "on"
+	CiteAutocapitalizeEnumSentences  CiteAutocapitalizeEnum = "sentences"
+	CiteAutocapitalizeEnumWords      CiteAutocapitalizeEnum = "words"
 )
 
 type CiteAutocorrectEnum string
 
 const (
-	CiteAutocorrectEnumOff   CiteAutocorrectEnum = "off"
 	CiteAutocorrectEnumOn    CiteAutocorrectEnum = "on"
+	CiteAutocorrectEnumOff   CiteAutocorrectEnum = "off"
 	CiteAutocorrectEnumEmpty CiteAutocorrectEnum = ""
 )
 
 type CiteContenteditableEnum string
 
 const (
-	CiteContenteditableEnumFalse         CiteContenteditableEnum = "false"
 	CiteContenteditableEnumPlaintextOnly CiteContenteditableEnum = "plaintext-only"
 	CiteContenteditableEnumTrue          CiteContenteditableEnum = "true"
+	CiteContenteditableEnumFalse         CiteContenteditableEnum = "false"
 	CiteContenteditableEnumEmpty         CiteContenteditableEnum = ""
 )
 
 type CiteDirEnum string
 
 const (
+	CiteDirEnumRtl  CiteDirEnum = "rtl"
 	CiteDirEnumAuto CiteDirEnum = "auto"
 	CiteDirEnumLtr  CiteDirEnum = "ltr"
-	CiteDirEnumRtl  CiteDirEnum = "rtl"
 )
 
 type CiteDraggableEnum string
@@ -107,15 +106,14 @@ const (
 type CiteHiddenEnum string
 
 const (
-	CiteHiddenEnumHidden     CiteHiddenEnum = "hidden"
 	CiteHiddenEnumUntilFound CiteHiddenEnum = "until-found"
+	CiteHiddenEnumHidden     CiteHiddenEnum = "hidden"
 	CiteHiddenEnumEmpty      CiteHiddenEnum = ""
 )
 
 type CiteInputmodeEnum string
 
 const (
-	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 	CiteInputmodeEnumEmail   CiteInputmodeEnum = "email"
 	CiteInputmodeEnumNone    CiteInputmodeEnum = "none"
 	CiteInputmodeEnumNumeric CiteInputmodeEnum = "numeric"
@@ -123,6 +121,7 @@ const (
 	CiteInputmodeEnumTel     CiteInputmodeEnum = "tel"
 	CiteInputmodeEnumText    CiteInputmodeEnum = "text"
 	CiteInputmodeEnumUrl     CiteInputmodeEnum = "url"
+	CiteInputmodeEnumDecimal CiteInputmodeEnum = "decimal"
 )
 
 type CiteSpellcheckEnum string

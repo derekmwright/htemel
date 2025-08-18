@@ -14,7 +14,6 @@ type OlElement struct {
 	attributes olAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Ol creates a tag <ol> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func OlTernary(condition bool, true htemel.Node, false htemel.Node) *OlElement {
 type OlAutocapitalizeEnum string
 
 const (
-	OlAutocapitalizeEnumNone       OlAutocapitalizeEnum = "none"
-	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
-	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
 	OlAutocapitalizeEnumSentences  OlAutocapitalizeEnum = "sentences"
 	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
 	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
+	OlAutocapitalizeEnumNone       OlAutocapitalizeEnum = "none"
+	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
+	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
 )
 
 type OlAutocorrectEnum string
@@ -95,13 +94,13 @@ const (
 type OlEnterkeyhintEnum string
 
 const (
+	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
+	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
 	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
 	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
 	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
 	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
-	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
-	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
 )
 
 type OlHiddenEnum string
@@ -115,6 +114,7 @@ const (
 type OlInputmodeEnum string
 
 const (
+	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
 	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
 	OlInputmodeEnumNone    OlInputmodeEnum = "none"
 	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
@@ -122,7 +122,6 @@ const (
 	OlInputmodeEnumTel     OlInputmodeEnum = "tel"
 	OlInputmodeEnumText    OlInputmodeEnum = "text"
 	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
-	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
 )
 
 type OlSpellcheckEnum string
@@ -136,8 +135,8 @@ const (
 type OlTranslateEnum string
 
 const (
-	OlTranslateEnumNo    OlTranslateEnum = "no"
 	OlTranslateEnumYes   OlTranslateEnum = "yes"
+	OlTranslateEnumNo    OlTranslateEnum = "no"
 	OlTranslateEnumEmpty OlTranslateEnum = ""
 )
 

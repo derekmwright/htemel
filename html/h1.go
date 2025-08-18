@@ -14,7 +14,6 @@ type H1Element struct {
 	attributes h1Attrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // H1 creates a tag <h1> instance and returns it for further modification.
@@ -80,9 +79,9 @@ const (
 type H1DirEnum string
 
 const (
+	H1DirEnumRtl  H1DirEnum = "rtl"
 	H1DirEnumAuto H1DirEnum = "auto"
 	H1DirEnumLtr  H1DirEnum = "ltr"
-	H1DirEnumRtl  H1DirEnum = "rtl"
 )
 
 type H1DraggableEnum string
@@ -95,13 +94,13 @@ const (
 type H1EnterkeyhintEnum string
 
 const (
-	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
-	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
-	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
 	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
 	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
 	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
 	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
+	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
+	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
+	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
 )
 
 type H1HiddenEnum string
@@ -115,14 +114,14 @@ const (
 type H1InputmodeEnum string
 
 const (
-	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
-	H1InputmodeEnumText    H1InputmodeEnum = "text"
 	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
 	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
 	H1InputmodeEnumEmail   H1InputmodeEnum = "email"
 	H1InputmodeEnumNone    H1InputmodeEnum = "none"
 	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
 	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
+	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
+	H1InputmodeEnumText    H1InputmodeEnum = "text"
 )
 
 type H1SpellcheckEnum string

@@ -14,7 +14,6 @@ type AbbrElement struct {
 	attributes abbrAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Abbr creates a tag <abbr> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrEleme
 type AbbrAutocapitalizeEnum string
 
 const (
-	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
-	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
 	AbbrAutocapitalizeEnumOff        AbbrAutocapitalizeEnum = "off"
 	AbbrAutocapitalizeEnumOn         AbbrAutocapitalizeEnum = "on"
 	AbbrAutocapitalizeEnumSentences  AbbrAutocapitalizeEnum = "sentences"
 	AbbrAutocapitalizeEnumWords      AbbrAutocapitalizeEnum = "words"
+	AbbrAutocapitalizeEnumCharacters AbbrAutocapitalizeEnum = "characters"
+	AbbrAutocapitalizeEnumNone       AbbrAutocapitalizeEnum = "none"
 )
 
 type AbbrAutocorrectEnum string
 
 const (
-	AbbrAutocorrectEnumOff   AbbrAutocorrectEnum = "off"
 	AbbrAutocorrectEnumOn    AbbrAutocorrectEnum = "on"
+	AbbrAutocorrectEnumOff   AbbrAutocorrectEnum = "off"
 	AbbrAutocorrectEnumEmpty AbbrAutocorrectEnum = ""
 )
 
@@ -80,9 +79,9 @@ const (
 type AbbrDirEnum string
 
 const (
+	AbbrDirEnumLtr  AbbrDirEnum = "ltr"
 	AbbrDirEnumRtl  AbbrDirEnum = "rtl"
 	AbbrDirEnumAuto AbbrDirEnum = "auto"
-	AbbrDirEnumLtr  AbbrDirEnum = "ltr"
 )
 
 type AbbrDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type AbbrEnterkeyhintEnum string
 
 const (
-	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
-	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
-	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 	AbbrEnterkeyhintEnumEnter    AbbrEnterkeyhintEnum = "enter"
 	AbbrEnterkeyhintEnumGo       AbbrEnterkeyhintEnum = "go"
 	AbbrEnterkeyhintEnumNext     AbbrEnterkeyhintEnum = "next"
 	AbbrEnterkeyhintEnumPrevious AbbrEnterkeyhintEnum = "previous"
+	AbbrEnterkeyhintEnumSearch   AbbrEnterkeyhintEnum = "search"
+	AbbrEnterkeyhintEnumSend     AbbrEnterkeyhintEnum = "send"
+	AbbrEnterkeyhintEnumDone     AbbrEnterkeyhintEnum = "done"
 )
 
 type AbbrHiddenEnum string
@@ -144,8 +143,8 @@ const (
 type AbbrWritingsuggestionsEnum string
 
 const (
-	AbbrWritingsuggestionsEnumTrue  AbbrWritingsuggestionsEnum = "true"
 	AbbrWritingsuggestionsEnumFalse AbbrWritingsuggestionsEnum = "false"
+	AbbrWritingsuggestionsEnumTrue  AbbrWritingsuggestionsEnum = "true"
 	AbbrWritingsuggestionsEnumEmpty AbbrWritingsuggestionsEnum = ""
 )
 

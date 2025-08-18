@@ -14,7 +14,6 @@ type DdElement struct {
 	attributes ddAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Dd creates a tag <dd> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func DdTernary(condition bool, true htemel.Node, false htemel.Node) *DdElement {
 type DdAutocapitalizeEnum string
 
 const (
-	DdAutocapitalizeEnumCharacters DdAutocapitalizeEnum = "characters"
-	DdAutocapitalizeEnumNone       DdAutocapitalizeEnum = "none"
-	DdAutocapitalizeEnumOff        DdAutocapitalizeEnum = "off"
 	DdAutocapitalizeEnumOn         DdAutocapitalizeEnum = "on"
 	DdAutocapitalizeEnumSentences  DdAutocapitalizeEnum = "sentences"
 	DdAutocapitalizeEnumWords      DdAutocapitalizeEnum = "words"
+	DdAutocapitalizeEnumCharacters DdAutocapitalizeEnum = "characters"
+	DdAutocapitalizeEnumNone       DdAutocapitalizeEnum = "none"
+	DdAutocapitalizeEnumOff        DdAutocapitalizeEnum = "off"
 )
 
 type DdAutocorrectEnum string
@@ -95,13 +94,13 @@ const (
 type DdEnterkeyhintEnum string
 
 const (
-	DdEnterkeyhintEnumSearch   DdEnterkeyhintEnum = "search"
-	DdEnterkeyhintEnumSend     DdEnterkeyhintEnum = "send"
 	DdEnterkeyhintEnumDone     DdEnterkeyhintEnum = "done"
 	DdEnterkeyhintEnumEnter    DdEnterkeyhintEnum = "enter"
 	DdEnterkeyhintEnumGo       DdEnterkeyhintEnum = "go"
 	DdEnterkeyhintEnumNext     DdEnterkeyhintEnum = "next"
 	DdEnterkeyhintEnumPrevious DdEnterkeyhintEnum = "previous"
+	DdEnterkeyhintEnumSearch   DdEnterkeyhintEnum = "search"
+	DdEnterkeyhintEnumSend     DdEnterkeyhintEnum = "send"
 )
 
 type DdHiddenEnum string
@@ -115,29 +114,29 @@ const (
 type DdInputmodeEnum string
 
 const (
-	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
-	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
-	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
-	DdInputmodeEnumText    DdInputmodeEnum = "text"
 	DdInputmodeEnumUrl     DdInputmodeEnum = "url"
 	DdInputmodeEnumDecimal DdInputmodeEnum = "decimal"
 	DdInputmodeEnumEmail   DdInputmodeEnum = "email"
 	DdInputmodeEnumNone    DdInputmodeEnum = "none"
+	DdInputmodeEnumNumeric DdInputmodeEnum = "numeric"
+	DdInputmodeEnumSearch  DdInputmodeEnum = "search"
+	DdInputmodeEnumTel     DdInputmodeEnum = "tel"
+	DdInputmodeEnumText    DdInputmodeEnum = "text"
 )
 
 type DdSpellcheckEnum string
 
 const (
-	DdSpellcheckEnumFalse DdSpellcheckEnum = "false"
 	DdSpellcheckEnumTrue  DdSpellcheckEnum = "true"
+	DdSpellcheckEnumFalse DdSpellcheckEnum = "false"
 	DdSpellcheckEnumEmpty DdSpellcheckEnum = ""
 )
 
 type DdTranslateEnum string
 
 const (
-	DdTranslateEnumNo    DdTranslateEnum = "no"
 	DdTranslateEnumYes   DdTranslateEnum = "yes"
+	DdTranslateEnumNo    DdTranslateEnum = "no"
 	DdTranslateEnumEmpty DdTranslateEnum = ""
 )
 

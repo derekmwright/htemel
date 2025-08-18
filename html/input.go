@@ -13,7 +13,6 @@ type InputElement struct {
 	attributes inputAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Input creates a tag <input> instance and returns it for further modification.
@@ -50,9 +49,9 @@ const (
 type InputFormmethodEnum string
 
 const (
-	InputFormmethodEnumGet    InputFormmethodEnum = "get"
 	InputFormmethodEnumPost   InputFormmethodEnum = "post"
 	InputFormmethodEnumDialog InputFormmethodEnum = "dialog"
+	InputFormmethodEnumGet    InputFormmethodEnum = "get"
 )
 
 type InputPopovertargetactionEnum string
@@ -66,39 +65,39 @@ const (
 type InputTypeEnum string
 
 const (
-	InputTypeEnumDatetimeLocal InputTypeEnum = "datetime-local"
-	InputTypeEnumNumber        InputTypeEnum = "number"
-	InputTypeEnumPassword      InputTypeEnum = "password"
-	InputTypeEnumTime          InputTypeEnum = "time"
-	InputTypeEnumWeek          InputTypeEnum = "week"
 	InputTypeEnumColor         InputTypeEnum = "color"
 	InputTypeEnumDate          InputTypeEnum = "date"
+	InputTypeEnumDatetimeLocal InputTypeEnum = "datetime-local"
+	InputTypeEnumText          InputTypeEnum = "text"
+	InputTypeEnumUrl           InputTypeEnum = "url"
+	InputTypeEnumCheckbox      InputTypeEnum = "checkbox"
 	InputTypeEnumHidden        InputTypeEnum = "hidden"
+	InputTypeEnumNumber        InputTypeEnum = "number"
+	InputTypeEnumSearch        InputTypeEnum = "search"
+	InputTypeEnumTime          InputTypeEnum = "time"
+	InputTypeEnumEmail         InputTypeEnum = "email"
+	InputTypeEnumFile          InputTypeEnum = "file"
+	InputTypeEnumPassword      InputTypeEnum = "password"
+	InputTypeEnumRange         InputTypeEnum = "range"
+	InputTypeEnumTel           InputTypeEnum = "tel"
+	InputTypeEnumWeek          InputTypeEnum = "week"
 	InputTypeEnumImage         InputTypeEnum = "image"
 	InputTypeEnumMonth         InputTypeEnum = "month"
 	InputTypeEnumRadio         InputTypeEnum = "radio"
-	InputTypeEnumSubmit        InputTypeEnum = "submit"
-	InputTypeEnumTel           InputTypeEnum = "tel"
-	InputTypeEnumUrl           InputTypeEnum = "url"
-	InputTypeEnumButton        InputTypeEnum = "button"
-	InputTypeEnumEmail         InputTypeEnum = "email"
-	InputTypeEnumFile          InputTypeEnum = "file"
 	InputTypeEnumReset         InputTypeEnum = "reset"
-	InputTypeEnumSearch        InputTypeEnum = "search"
-	InputTypeEnumText          InputTypeEnum = "text"
-	InputTypeEnumRange         InputTypeEnum = "range"
-	InputTypeEnumCheckbox      InputTypeEnum = "checkbox"
+	InputTypeEnumSubmit        InputTypeEnum = "submit"
+	InputTypeEnumButton        InputTypeEnum = "button"
 )
 
 type InputAutocapitalizeEnum string
 
 const (
+	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
+	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
 	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
 	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
 	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
 	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
-	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
-	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
 )
 
 type InputAutocorrectEnum string
@@ -112,58 +111,58 @@ const (
 type InputContenteditableEnum string
 
 const (
-	InputContenteditableEnumFalse         InputContenteditableEnum = "false"
 	InputContenteditableEnumPlaintextOnly InputContenteditableEnum = "plaintext-only"
 	InputContenteditableEnumTrue          InputContenteditableEnum = "true"
+	InputContenteditableEnumFalse         InputContenteditableEnum = "false"
 	InputContenteditableEnumEmpty         InputContenteditableEnum = ""
 )
 
 type InputDirEnum string
 
 const (
-	InputDirEnumLtr  InputDirEnum = "ltr"
 	InputDirEnumRtl  InputDirEnum = "rtl"
 	InputDirEnumAuto InputDirEnum = "auto"
+	InputDirEnumLtr  InputDirEnum = "ltr"
 )
 
 type InputDraggableEnum string
 
 const (
-	InputDraggableEnumFalse InputDraggableEnum = "false"
 	InputDraggableEnumTrue  InputDraggableEnum = "true"
+	InputDraggableEnumFalse InputDraggableEnum = "false"
 )
 
 type InputEnterkeyhintEnum string
 
 const (
-	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
-	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
-	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
 	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
 	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
 	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
 	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
+	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
+	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
+	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
 )
 
 type InputHiddenEnum string
 
 const (
-	InputHiddenEnumHidden     InputHiddenEnum = "hidden"
 	InputHiddenEnumUntilFound InputHiddenEnum = "until-found"
+	InputHiddenEnumHidden     InputHiddenEnum = "hidden"
 	InputHiddenEnumEmpty      InputHiddenEnum = ""
 )
 
 type InputInputmodeEnum string
 
 const (
-	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
-	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
-	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
 	InputInputmodeEnumText    InputInputmodeEnum = "text"
 	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
 	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
 	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
 	InputInputmodeEnumNone    InputInputmodeEnum = "none"
+	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
+	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
+	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
 )
 
 type InputSpellcheckEnum string
@@ -177,16 +176,16 @@ const (
 type InputTranslateEnum string
 
 const (
-	InputTranslateEnumNo    InputTranslateEnum = "no"
 	InputTranslateEnumYes   InputTranslateEnum = "yes"
+	InputTranslateEnumNo    InputTranslateEnum = "no"
 	InputTranslateEnumEmpty InputTranslateEnum = ""
 )
 
 type InputWritingsuggestionsEnum string
 
 const (
-	InputWritingsuggestionsEnumFalse InputWritingsuggestionsEnum = "false"
 	InputWritingsuggestionsEnumTrue  InputWritingsuggestionsEnum = "true"
+	InputWritingsuggestionsEnumFalse InputWritingsuggestionsEnum = "false"
 	InputWritingsuggestionsEnumEmpty InputWritingsuggestionsEnum = ""
 )
 

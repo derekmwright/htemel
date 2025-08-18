@@ -14,7 +14,6 @@ type LiElement struct {
 	attributes liAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Li creates a tag <li> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
 type LiAutocapitalizeEnum string
 
 const (
-	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
 	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
 	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
 	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
 	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
+	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
 )
 
 type LiAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type LiContenteditableEnum string
 
 const (
-	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
 	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
 	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
+	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
 	LiContenteditableEnumEmpty         LiContenteditableEnum = ""
 )
 
@@ -107,29 +106,29 @@ const (
 type LiHiddenEnum string
 
 const (
-	LiHiddenEnumHidden     LiHiddenEnum = "hidden"
 	LiHiddenEnumUntilFound LiHiddenEnum = "until-found"
+	LiHiddenEnumHidden     LiHiddenEnum = "hidden"
 	LiHiddenEnumEmpty      LiHiddenEnum = ""
 )
 
 type LiInputmodeEnum string
 
 const (
-	LiInputmodeEnumText    LiInputmodeEnum = "text"
-	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
-	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
 	LiInputmodeEnumNone    LiInputmodeEnum = "none"
 	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
 	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
 	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
+	LiInputmodeEnumText    LiInputmodeEnum = "text"
+	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
+	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
 )
 
 type LiSpellcheckEnum string
 
 const (
-	LiSpellcheckEnumFalse LiSpellcheckEnum = "false"
 	LiSpellcheckEnumTrue  LiSpellcheckEnum = "true"
+	LiSpellcheckEnumFalse LiSpellcheckEnum = "false"
 	LiSpellcheckEnumEmpty LiSpellcheckEnum = ""
 )
 

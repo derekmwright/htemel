@@ -14,7 +14,6 @@ type TbodyElement struct {
 	attributes tbodyAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Tbody creates a tag <tbody> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func TbodyTernary(condition bool, true htemel.Node, false htemel.Node) *TbodyEle
 type TbodyAutocapitalizeEnum string
 
 const (
-	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
 	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
 	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
 	TbodyAutocapitalizeEnumWords      TbodyAutocapitalizeEnum = "words"
 	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
 	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
+	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
 )
 
 type TbodyAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type TbodyContenteditableEnum string
 
 const (
+	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
 	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
 	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
-	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
 	TbodyContenteditableEnumEmpty         TbodyContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type TbodyEnterkeyhintEnum string
 
 const (
+	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
 	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
 	TbodyEnterkeyhintEnumDone     TbodyEnterkeyhintEnum = "done"
 	TbodyEnterkeyhintEnumEnter    TbodyEnterkeyhintEnum = "enter"
 	TbodyEnterkeyhintEnumGo       TbodyEnterkeyhintEnum = "go"
 	TbodyEnterkeyhintEnumNext     TbodyEnterkeyhintEnum = "next"
 	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
-	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
 )
 
 type TbodyHiddenEnum string
@@ -136,8 +135,8 @@ const (
 type TbodyTranslateEnum string
 
 const (
-	TbodyTranslateEnumYes   TbodyTranslateEnum = "yes"
 	TbodyTranslateEnumNo    TbodyTranslateEnum = "no"
+	TbodyTranslateEnumYes   TbodyTranslateEnum = "yes"
 	TbodyTranslateEnumEmpty TbodyTranslateEnum = ""
 )
 

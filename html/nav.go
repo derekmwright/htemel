@@ -14,7 +14,6 @@ type NavElement struct {
 	attributes navAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Nav creates a tag <nav> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 type NavAutocapitalizeEnum string
 
 const (
-	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
-	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
 	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
 	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
 	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
 	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
+	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
+	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
 )
 
 type NavAutocorrectEnum string
@@ -80,28 +79,28 @@ const (
 type NavDirEnum string
 
 const (
-	NavDirEnumRtl  NavDirEnum = "rtl"
 	NavDirEnumAuto NavDirEnum = "auto"
 	NavDirEnumLtr  NavDirEnum = "ltr"
+	NavDirEnumRtl  NavDirEnum = "rtl"
 )
 
 type NavDraggableEnum string
 
 const (
-	NavDraggableEnumFalse NavDraggableEnum = "false"
 	NavDraggableEnumTrue  NavDraggableEnum = "true"
+	NavDraggableEnumFalse NavDraggableEnum = "false"
 )
 
 type NavEnterkeyhintEnum string
 
 const (
-	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
 	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
 	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
 	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
 	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
 	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
+	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
 )
 
 type NavHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type NavInputmodeEnum string
 
 const (
-	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
-	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
-	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 	NavInputmodeEnumText    NavInputmodeEnum = "text"
 	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
 	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
 	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
 	NavInputmodeEnumNone    NavInputmodeEnum = "none"
+	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
+	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
+	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
 )
 
 type NavSpellcheckEnum string

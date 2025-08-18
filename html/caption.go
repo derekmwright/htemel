@@ -14,7 +14,6 @@ type CaptionElement struct {
 	attributes captionAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Caption creates a tag <caption> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Captio
 type CaptionAutocapitalizeEnum string
 
 const (
-	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
-	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
-	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
 	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
 	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
 	CaptionAutocapitalizeEnumOff        CaptionAutocapitalizeEnum = "off"
+	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
+	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
+	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
 )
 
 type CaptionAutocorrectEnum string
 
 const (
-	CaptionAutocorrectEnumOn    CaptionAutocorrectEnum = "on"
 	CaptionAutocorrectEnumOff   CaptionAutocorrectEnum = "off"
+	CaptionAutocorrectEnumOn    CaptionAutocorrectEnum = "on"
 	CaptionAutocorrectEnumEmpty CaptionAutocorrectEnum = ""
 )
 
@@ -80,9 +79,9 @@ const (
 type CaptionDirEnum string
 
 const (
+	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
 	CaptionDirEnumAuto CaptionDirEnum = "auto"
 	CaptionDirEnumLtr  CaptionDirEnum = "ltr"
-	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
 )
 
 type CaptionDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type CaptionEnterkeyhintEnum string
 
 const (
-	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
 	CaptionEnterkeyhintEnumSearch   CaptionEnterkeyhintEnum = "search"
 	CaptionEnterkeyhintEnumSend     CaptionEnterkeyhintEnum = "send"
 	CaptionEnterkeyhintEnumDone     CaptionEnterkeyhintEnum = "done"
 	CaptionEnterkeyhintEnumEnter    CaptionEnterkeyhintEnum = "enter"
 	CaptionEnterkeyhintEnumGo       CaptionEnterkeyhintEnum = "go"
 	CaptionEnterkeyhintEnumNext     CaptionEnterkeyhintEnum = "next"
+	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
 )
 
 type CaptionHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type CaptionInputmodeEnum string
 
 const (
+	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
+	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
 	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
 	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
 	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
 	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
 	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
 	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
-	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
-	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
 )
 
 type CaptionSpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type CaptionWritingsuggestionsEnum string
 
 const (
-	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
 	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
+	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
 	CaptionWritingsuggestionsEnumEmpty CaptionWritingsuggestionsEnum = ""
 )
 

@@ -14,7 +14,6 @@ type MeterElement struct {
 	attributes meterAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Meter creates a tag <meter> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func MeterTernary(condition bool, true htemel.Node, false htemel.Node) *MeterEle
 type MeterAutocapitalizeEnum string
 
 const (
-	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
-	MeterAutocapitalizeEnumNone       MeterAutocapitalizeEnum = "none"
 	MeterAutocapitalizeEnumOff        MeterAutocapitalizeEnum = "off"
 	MeterAutocapitalizeEnumOn         MeterAutocapitalizeEnum = "on"
 	MeterAutocapitalizeEnumSentences  MeterAutocapitalizeEnum = "sentences"
 	MeterAutocapitalizeEnumWords      MeterAutocapitalizeEnum = "words"
+	MeterAutocapitalizeEnumCharacters MeterAutocapitalizeEnum = "characters"
+	MeterAutocapitalizeEnumNone       MeterAutocapitalizeEnum = "none"
 )
 
 type MeterAutocorrectEnum string
@@ -95,20 +94,20 @@ const (
 type MeterEnterkeyhintEnum string
 
 const (
+	MeterEnterkeyhintEnumNext     MeterEnterkeyhintEnum = "next"
 	MeterEnterkeyhintEnumPrevious MeterEnterkeyhintEnum = "previous"
 	MeterEnterkeyhintEnumSearch   MeterEnterkeyhintEnum = "search"
 	MeterEnterkeyhintEnumSend     MeterEnterkeyhintEnum = "send"
 	MeterEnterkeyhintEnumDone     MeterEnterkeyhintEnum = "done"
 	MeterEnterkeyhintEnumEnter    MeterEnterkeyhintEnum = "enter"
 	MeterEnterkeyhintEnumGo       MeterEnterkeyhintEnum = "go"
-	MeterEnterkeyhintEnumNext     MeterEnterkeyhintEnum = "next"
 )
 
 type MeterHiddenEnum string
 
 const (
-	MeterHiddenEnumHidden     MeterHiddenEnum = "hidden"
 	MeterHiddenEnumUntilFound MeterHiddenEnum = "until-found"
+	MeterHiddenEnumHidden     MeterHiddenEnum = "hidden"
 	MeterHiddenEnumEmpty      MeterHiddenEnum = ""
 )
 

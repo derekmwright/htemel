@@ -13,7 +13,6 @@ type MetaElement struct {
 	attributes metaAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Meta creates a tag <meta> instance and returns it for further modification.
@@ -43,24 +42,24 @@ func MetaIf(condition bool) *MetaElement {
 type MetaHttpEquivEnum string
 
 const (
-	MetaHttpEquivEnumXUaCompatible         MetaHttpEquivEnum = "x-ua-compatible"
 	MetaHttpEquivEnumContentLanguage       MetaHttpEquivEnum = "content-language"
 	MetaHttpEquivEnumContentSecurityPolicy MetaHttpEquivEnum = "content-security-policy"
 	MetaHttpEquivEnumContentType           MetaHttpEquivEnum = "content-type"
 	MetaHttpEquivEnumDefaultStyle          MetaHttpEquivEnum = "default-style"
 	MetaHttpEquivEnumRefresh               MetaHttpEquivEnum = "refresh"
 	MetaHttpEquivEnumSetCookie             MetaHttpEquivEnum = "set-cookie"
+	MetaHttpEquivEnumXUaCompatible         MetaHttpEquivEnum = "x-ua-compatible"
 )
 
 type MetaAutocapitalizeEnum string
 
 const (
-	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
-	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
-	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
 	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
 	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
 	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
+	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
+	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
+	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
 )
 
 type MetaAutocorrectEnum string
@@ -98,13 +97,13 @@ const (
 type MetaEnterkeyhintEnum string
 
 const (
-	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
 	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
 	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
 	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
 	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
 	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
 	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
+	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
 )
 
 type MetaHiddenEnum string
@@ -118,7 +117,6 @@ const (
 type MetaInputmodeEnum string
 
 const (
-	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
 	MetaInputmodeEnumEmail   MetaInputmodeEnum = "email"
 	MetaInputmodeEnumNone    MetaInputmodeEnum = "none"
 	MetaInputmodeEnumNumeric MetaInputmodeEnum = "numeric"
@@ -126,13 +124,14 @@ const (
 	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
 	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
 	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
+	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
 )
 
 type MetaSpellcheckEnum string
 
 const (
-	MetaSpellcheckEnumFalse MetaSpellcheckEnum = "false"
 	MetaSpellcheckEnumTrue  MetaSpellcheckEnum = "true"
+	MetaSpellcheckEnumFalse MetaSpellcheckEnum = "false"
 	MetaSpellcheckEnumEmpty MetaSpellcheckEnum = ""
 )
 

@@ -14,7 +14,6 @@ type OptionElement struct {
 	attributes optionAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Option creates a tag <option> instance and returns it for further modification.
@@ -71,18 +70,18 @@ const (
 type OptionContenteditableEnum string
 
 const (
+	OptionContenteditableEnumTrue          OptionContenteditableEnum = "true"
 	OptionContenteditableEnumFalse         OptionContenteditableEnum = "false"
 	OptionContenteditableEnumPlaintextOnly OptionContenteditableEnum = "plaintext-only"
-	OptionContenteditableEnumTrue          OptionContenteditableEnum = "true"
 	OptionContenteditableEnumEmpty         OptionContenteditableEnum = ""
 )
 
 type OptionDirEnum string
 
 const (
-	OptionDirEnumAuto OptionDirEnum = "auto"
 	OptionDirEnumLtr  OptionDirEnum = "ltr"
 	OptionDirEnumRtl  OptionDirEnum = "rtl"
+	OptionDirEnumAuto OptionDirEnum = "auto"
 )
 
 type OptionDraggableEnum string
@@ -115,14 +114,14 @@ const (
 type OptionInputmodeEnum string
 
 const (
-	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
-	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
-	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
-	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 	OptionInputmodeEnumTel     OptionInputmodeEnum = "tel"
 	OptionInputmodeEnumText    OptionInputmodeEnum = "text"
 	OptionInputmodeEnumUrl     OptionInputmodeEnum = "url"
 	OptionInputmodeEnumDecimal OptionInputmodeEnum = "decimal"
+	OptionInputmodeEnumEmail   OptionInputmodeEnum = "email"
+	OptionInputmodeEnumNone    OptionInputmodeEnum = "none"
+	OptionInputmodeEnumNumeric OptionInputmodeEnum = "numeric"
+	OptionInputmodeEnumSearch  OptionInputmodeEnum = "search"
 )
 
 type OptionSpellcheckEnum string
@@ -136,8 +135,8 @@ const (
 type OptionTranslateEnum string
 
 const (
-	OptionTranslateEnumYes   OptionTranslateEnum = "yes"
 	OptionTranslateEnumNo    OptionTranslateEnum = "no"
+	OptionTranslateEnumYes   OptionTranslateEnum = "yes"
 	OptionTranslateEnumEmpty OptionTranslateEnum = ""
 )
 

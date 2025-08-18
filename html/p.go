@@ -14,7 +14,6 @@ type PElement struct {
 	attributes pAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // P creates a tag <p> instance and returns it for further modification.
@@ -71,9 +70,9 @@ const (
 type PContenteditableEnum string
 
 const (
+	PContenteditableEnumTrue          PContenteditableEnum = "true"
 	PContenteditableEnumFalse         PContenteditableEnum = "false"
 	PContenteditableEnumPlaintextOnly PContenteditableEnum = "plaintext-only"
-	PContenteditableEnumTrue          PContenteditableEnum = "true"
 	PContenteditableEnumEmpty         PContenteditableEnum = ""
 )
 
@@ -88,20 +87,20 @@ const (
 type PDraggableEnum string
 
 const (
-	PDraggableEnumTrue  PDraggableEnum = "true"
 	PDraggableEnumFalse PDraggableEnum = "false"
+	PDraggableEnumTrue  PDraggableEnum = "true"
 )
 
 type PEnterkeyhintEnum string
 
 const (
+	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
+	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
 	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
 	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
 	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
 	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
-	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
-	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
 )
 
 type PHiddenEnum string
@@ -115,6 +114,7 @@ const (
 type PInputmodeEnum string
 
 const (
+	PInputmodeEnumUrl     PInputmodeEnum = "url"
 	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
 	PInputmodeEnumEmail   PInputmodeEnum = "email"
 	PInputmodeEnumNone    PInputmodeEnum = "none"
@@ -122,7 +122,6 @@ const (
 	PInputmodeEnumSearch  PInputmodeEnum = "search"
 	PInputmodeEnumTel     PInputmodeEnum = "tel"
 	PInputmodeEnumText    PInputmodeEnum = "text"
-	PInputmodeEnumUrl     PInputmodeEnum = "url"
 )
 
 type PSpellcheckEnum string

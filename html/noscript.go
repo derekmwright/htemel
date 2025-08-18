@@ -14,7 +14,6 @@ type NoscriptElement struct {
 	attributes noscriptAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Noscript creates a tag <noscript> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func NoscriptTernary(condition bool, true htemel.Node, false htemel.Node) *Noscr
 type NoscriptAutocapitalizeEnum string
 
 const (
-	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
 	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
 	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
 	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
 	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
 	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
+	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
 )
 
 type NoscriptAutocorrectEnum string
@@ -115,14 +114,14 @@ const (
 type NoscriptInputmodeEnum string
 
 const (
-	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
-	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
-	NoscriptInputmodeEnumNone    NoscriptInputmodeEnum = "none"
 	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
 	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
 	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
 	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
 	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
+	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
+	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
+	NoscriptInputmodeEnumNone    NoscriptInputmodeEnum = "none"
 )
 
 type NoscriptSpellcheckEnum string

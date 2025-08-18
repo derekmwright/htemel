@@ -14,7 +14,6 @@ type DfnElement struct {
 	attributes dfnAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Dfn creates a tag <dfn> instance and returns it for further modification.
@@ -80,9 +79,9 @@ const (
 type DfnDirEnum string
 
 const (
-	DfnDirEnumAuto DfnDirEnum = "auto"
 	DfnDirEnumLtr  DfnDirEnum = "ltr"
 	DfnDirEnumRtl  DfnDirEnum = "rtl"
+	DfnDirEnumAuto DfnDirEnum = "auto"
 )
 
 type DfnDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type DfnEnterkeyhintEnum string
 
 const (
+	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
+	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
+	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
 	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
 	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
 	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
-	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
-	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
-	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
 )
 
 type DfnHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type DfnInputmodeEnum string
 
 const (
+	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
+	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
+	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
 	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
 	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
 	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
 	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
 	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
-	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
-	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
-	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
 )
 
 type DfnSpellcheckEnum string

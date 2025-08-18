@@ -14,7 +14,6 @@ type KbdElement struct {
 	attributes kbdAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Kbd creates a tag <kbd> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 type KbdAutocapitalizeEnum string
 
 const (
-	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
-	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
 	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
 	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
 	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
+	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
+	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
 )
 
 type KbdAutocorrectEnum string
 
 const (
-	KbdAutocorrectEnumOn    KbdAutocorrectEnum = "on"
 	KbdAutocorrectEnumOff   KbdAutocorrectEnum = "off"
+	KbdAutocorrectEnumOn    KbdAutocorrectEnum = "on"
 	KbdAutocorrectEnumEmpty KbdAutocorrectEnum = ""
 )
 
@@ -80,9 +79,9 @@ const (
 type KbdDirEnum string
 
 const (
+	KbdDirEnumLtr  KbdDirEnum = "ltr"
 	KbdDirEnumRtl  KbdDirEnum = "rtl"
 	KbdDirEnumAuto KbdDirEnum = "auto"
-	KbdDirEnumLtr  KbdDirEnum = "ltr"
 )
 
 type KbdDraggableEnum string
@@ -95,13 +94,13 @@ const (
 type KbdEnterkeyhintEnum string
 
 const (
+	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
+	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
+	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
 	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
 	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
 	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
-	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
-	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
-	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
 )
 
 type KbdHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type KbdInputmodeEnum string
 
 const (
-	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
-	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
-	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
 	KbdInputmodeEnumText    KbdInputmodeEnum = "text"
 	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
 	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
 	KbdInputmodeEnumEmail   KbdInputmodeEnum = "email"
 	KbdInputmodeEnumNone    KbdInputmodeEnum = "none"
+	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
+	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
+	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
 )
 
 type KbdSpellcheckEnum string

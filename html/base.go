@@ -13,7 +13,6 @@ type BaseElement struct {
 	attributes baseAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Base creates a tag <base> instance and returns it for further modification.
@@ -43,12 +42,12 @@ func BaseIf(condition bool) *BaseElement {
 type BaseAutocapitalizeEnum string
 
 const (
-	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
-	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
-	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 	BaseAutocapitalizeEnumOn         BaseAutocapitalizeEnum = "on"
 	BaseAutocapitalizeEnumSentences  BaseAutocapitalizeEnum = "sentences"
 	BaseAutocapitalizeEnumWords      BaseAutocapitalizeEnum = "words"
+	BaseAutocapitalizeEnumCharacters BaseAutocapitalizeEnum = "characters"
+	BaseAutocapitalizeEnumNone       BaseAutocapitalizeEnum = "none"
+	BaseAutocapitalizeEnumOff        BaseAutocapitalizeEnum = "off"
 )
 
 type BaseAutocorrectEnum string
@@ -86,13 +85,13 @@ const (
 type BaseEnterkeyhintEnum string
 
 const (
+	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 	BaseEnterkeyhintEnumSend     BaseEnterkeyhintEnum = "send"
 	BaseEnterkeyhintEnumDone     BaseEnterkeyhintEnum = "done"
 	BaseEnterkeyhintEnumEnter    BaseEnterkeyhintEnum = "enter"
 	BaseEnterkeyhintEnumGo       BaseEnterkeyhintEnum = "go"
 	BaseEnterkeyhintEnumNext     BaseEnterkeyhintEnum = "next"
 	BaseEnterkeyhintEnumPrevious BaseEnterkeyhintEnum = "previous"
-	BaseEnterkeyhintEnumSearch   BaseEnterkeyhintEnum = "search"
 )
 
 type BaseHiddenEnum string
@@ -106,21 +105,21 @@ const (
 type BaseInputmodeEnum string
 
 const (
-	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
-	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
 	BaseInputmodeEnumTel     BaseInputmodeEnum = "tel"
 	BaseInputmodeEnumText    BaseInputmodeEnum = "text"
 	BaseInputmodeEnumUrl     BaseInputmodeEnum = "url"
 	BaseInputmodeEnumDecimal BaseInputmodeEnum = "decimal"
 	BaseInputmodeEnumEmail   BaseInputmodeEnum = "email"
 	BaseInputmodeEnumNone    BaseInputmodeEnum = "none"
+	BaseInputmodeEnumNumeric BaseInputmodeEnum = "numeric"
+	BaseInputmodeEnumSearch  BaseInputmodeEnum = "search"
 )
 
 type BaseSpellcheckEnum string
 
 const (
-	BaseSpellcheckEnumTrue  BaseSpellcheckEnum = "true"
 	BaseSpellcheckEnumFalse BaseSpellcheckEnum = "false"
+	BaseSpellcheckEnumTrue  BaseSpellcheckEnum = "true"
 	BaseSpellcheckEnumEmpty BaseSpellcheckEnum = ""
 )
 

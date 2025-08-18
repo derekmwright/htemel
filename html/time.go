@@ -14,7 +14,6 @@ type TimeElement struct {
 	attributes timeAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Time creates a tag <time> instance and returns it for further modification.
@@ -52,28 +51,28 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 type TimeAutocapitalizeEnum string
 
 const (
+	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
+	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
 	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
 	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
 	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
 	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
-	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
-	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
 )
 
 type TimeAutocorrectEnum string
 
 const (
-	TimeAutocorrectEnumOn    TimeAutocorrectEnum = "on"
 	TimeAutocorrectEnumOff   TimeAutocorrectEnum = "off"
+	TimeAutocorrectEnumOn    TimeAutocorrectEnum = "on"
 	TimeAutocorrectEnumEmpty TimeAutocorrectEnum = ""
 )
 
 type TimeContenteditableEnum string
 
 const (
-	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
 	TimeContenteditableEnumFalse         TimeContenteditableEnum = "false"
 	TimeContenteditableEnumPlaintextOnly TimeContenteditableEnum = "plaintext-only"
+	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
 	TimeContenteditableEnumEmpty         TimeContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type TimeEnterkeyhintEnum string
 
 const (
+	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
+	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 	TimeEnterkeyhintEnumEnter    TimeEnterkeyhintEnum = "enter"
 	TimeEnterkeyhintEnumGo       TimeEnterkeyhintEnum = "go"
 	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
 	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
 	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
-	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
-	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
 )
 
 type TimeHiddenEnum string
@@ -128,8 +127,8 @@ const (
 type TimeSpellcheckEnum string
 
 const (
-	TimeSpellcheckEnumTrue  TimeSpellcheckEnum = "true"
 	TimeSpellcheckEnumFalse TimeSpellcheckEnum = "false"
+	TimeSpellcheckEnumTrue  TimeSpellcheckEnum = "true"
 	TimeSpellcheckEnumEmpty TimeSpellcheckEnum = ""
 )
 

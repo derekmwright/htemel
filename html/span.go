@@ -14,7 +14,6 @@ type SpanElement struct {
 	attributes spanAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Span creates a tag <span> instance and returns it for further modification.
@@ -95,13 +94,13 @@ const (
 type SpanEnterkeyhintEnum string
 
 const (
-	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
-	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
-	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
 	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
 	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
 	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
+	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
+	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
+	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
 )
 
 type SpanHiddenEnum string
@@ -115,6 +114,7 @@ const (
 type SpanInputmodeEnum string
 
 const (
+	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
 	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
 	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
@@ -122,7 +122,6 @@ const (
 	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
 	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
 	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
-	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
 )
 
 type SpanSpellcheckEnum string
@@ -136,16 +135,16 @@ const (
 type SpanTranslateEnum string
 
 const (
-	SpanTranslateEnumYes   SpanTranslateEnum = "yes"
 	SpanTranslateEnumNo    SpanTranslateEnum = "no"
+	SpanTranslateEnumYes   SpanTranslateEnum = "yes"
 	SpanTranslateEnumEmpty SpanTranslateEnum = ""
 )
 
 type SpanWritingsuggestionsEnum string
 
 const (
-	SpanWritingsuggestionsEnumFalse SpanWritingsuggestionsEnum = "false"
 	SpanWritingsuggestionsEnumTrue  SpanWritingsuggestionsEnum = "true"
+	SpanWritingsuggestionsEnumFalse SpanWritingsuggestionsEnum = "false"
 	SpanWritingsuggestionsEnumEmpty SpanWritingsuggestionsEnum = ""
 )
 

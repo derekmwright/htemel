@@ -14,7 +14,6 @@ type RpElement struct {
 	attributes rpAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Rp creates a tag <rp> instance and returns it for further modification.
@@ -71,9 +70,9 @@ const (
 type RpContenteditableEnum string
 
 const (
-	RpContenteditableEnumTrue          RpContenteditableEnum = "true"
 	RpContenteditableEnumFalse         RpContenteditableEnum = "false"
 	RpContenteditableEnumPlaintextOnly RpContenteditableEnum = "plaintext-only"
+	RpContenteditableEnumTrue          RpContenteditableEnum = "true"
 	RpContenteditableEnumEmpty         RpContenteditableEnum = ""
 )
 
@@ -95,13 +94,13 @@ const (
 type RpEnterkeyhintEnum string
 
 const (
+	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
+	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
 	RpEnterkeyhintEnumEnter    RpEnterkeyhintEnum = "enter"
 	RpEnterkeyhintEnumGo       RpEnterkeyhintEnum = "go"
 	RpEnterkeyhintEnumNext     RpEnterkeyhintEnum = "next"
 	RpEnterkeyhintEnumPrevious RpEnterkeyhintEnum = "previous"
 	RpEnterkeyhintEnumSearch   RpEnterkeyhintEnum = "search"
-	RpEnterkeyhintEnumSend     RpEnterkeyhintEnum = "send"
-	RpEnterkeyhintEnumDone     RpEnterkeyhintEnum = "done"
 )
 
 type RpHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type RpInputmodeEnum string
 
 const (
-	RpInputmodeEnumNone    RpInputmodeEnum = "none"
-	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
-	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
-	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
 	RpInputmodeEnumText    RpInputmodeEnum = "text"
 	RpInputmodeEnumUrl     RpInputmodeEnum = "url"
 	RpInputmodeEnumDecimal RpInputmodeEnum = "decimal"
 	RpInputmodeEnumEmail   RpInputmodeEnum = "email"
+	RpInputmodeEnumNone    RpInputmodeEnum = "none"
+	RpInputmodeEnumNumeric RpInputmodeEnum = "numeric"
+	RpInputmodeEnumSearch  RpInputmodeEnum = "search"
+	RpInputmodeEnumTel     RpInputmodeEnum = "tel"
 )
 
 type RpSpellcheckEnum string

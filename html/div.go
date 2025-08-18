@@ -14,7 +14,6 @@ type DivElement struct {
 	attributes divAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Div creates a tag <div> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func DivTernary(condition bool, true htemel.Node, false htemel.Node) *DivElement
 type DivAutocapitalizeEnum string
 
 const (
+	DivAutocapitalizeEnumSentences  DivAutocapitalizeEnum = "sentences"
+	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
 	DivAutocapitalizeEnumCharacters DivAutocapitalizeEnum = "characters"
 	DivAutocapitalizeEnumNone       DivAutocapitalizeEnum = "none"
 	DivAutocapitalizeEnumOff        DivAutocapitalizeEnum = "off"
 	DivAutocapitalizeEnumOn         DivAutocapitalizeEnum = "on"
-	DivAutocapitalizeEnumSentences  DivAutocapitalizeEnum = "sentences"
-	DivAutocapitalizeEnumWords      DivAutocapitalizeEnum = "words"
 )
 
 type DivAutocorrectEnum string
 
 const (
-	DivAutocorrectEnumOn    DivAutocorrectEnum = "on"
 	DivAutocorrectEnumOff   DivAutocorrectEnum = "off"
+	DivAutocorrectEnumOn    DivAutocorrectEnum = "on"
 	DivAutocorrectEnumEmpty DivAutocorrectEnum = ""
 )
 
@@ -80,28 +79,28 @@ const (
 type DivDirEnum string
 
 const (
-	DivDirEnumAuto DivDirEnum = "auto"
 	DivDirEnumLtr  DivDirEnum = "ltr"
 	DivDirEnumRtl  DivDirEnum = "rtl"
+	DivDirEnumAuto DivDirEnum = "auto"
 )
 
 type DivDraggableEnum string
 
 const (
-	DivDraggableEnumTrue  DivDraggableEnum = "true"
 	DivDraggableEnumFalse DivDraggableEnum = "false"
+	DivDraggableEnumTrue  DivDraggableEnum = "true"
 )
 
 type DivEnterkeyhintEnum string
 
 const (
-	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
 	DivEnterkeyhintEnumPrevious DivEnterkeyhintEnum = "previous"
 	DivEnterkeyhintEnumSearch   DivEnterkeyhintEnum = "search"
 	DivEnterkeyhintEnumSend     DivEnterkeyhintEnum = "send"
 	DivEnterkeyhintEnumDone     DivEnterkeyhintEnum = "done"
 	DivEnterkeyhintEnumEnter    DivEnterkeyhintEnum = "enter"
 	DivEnterkeyhintEnumGo       DivEnterkeyhintEnum = "go"
+	DivEnterkeyhintEnumNext     DivEnterkeyhintEnum = "next"
 )
 
 type DivHiddenEnum string
@@ -115,14 +114,14 @@ const (
 type DivInputmodeEnum string
 
 const (
-	DivInputmodeEnumText    DivInputmodeEnum = "text"
-	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
-	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
 	DivInputmodeEnumEmail   DivInputmodeEnum = "email"
 	DivInputmodeEnumNone    DivInputmodeEnum = "none"
 	DivInputmodeEnumNumeric DivInputmodeEnum = "numeric"
 	DivInputmodeEnumSearch  DivInputmodeEnum = "search"
 	DivInputmodeEnumTel     DivInputmodeEnum = "tel"
+	DivInputmodeEnumText    DivInputmodeEnum = "text"
+	DivInputmodeEnumUrl     DivInputmodeEnum = "url"
+	DivInputmodeEnumDecimal DivInputmodeEnum = "decimal"
 )
 
 type DivSpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type DivWritingsuggestionsEnum string
 
 const (
-	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
 	DivWritingsuggestionsEnumTrue  DivWritingsuggestionsEnum = "true"
+	DivWritingsuggestionsEnumFalse DivWritingsuggestionsEnum = "false"
 	DivWritingsuggestionsEnumEmpty DivWritingsuggestionsEnum = ""
 )
 

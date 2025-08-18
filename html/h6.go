@@ -14,7 +14,6 @@ type H6Element struct {
 	attributes h6Attrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // H6 creates a tag <h6> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func H6Ternary(condition bool, true htemel.Node, false htemel.Node) *H6Element {
 type H6AutocapitalizeEnum string
 
 const (
-	H6AutocapitalizeEnumOn         H6AutocapitalizeEnum = "on"
-	H6AutocapitalizeEnumSentences  H6AutocapitalizeEnum = "sentences"
-	H6AutocapitalizeEnumWords      H6AutocapitalizeEnum = "words"
 	H6AutocapitalizeEnumCharacters H6AutocapitalizeEnum = "characters"
 	H6AutocapitalizeEnumNone       H6AutocapitalizeEnum = "none"
 	H6AutocapitalizeEnumOff        H6AutocapitalizeEnum = "off"
+	H6AutocapitalizeEnumOn         H6AutocapitalizeEnum = "on"
+	H6AutocapitalizeEnumSentences  H6AutocapitalizeEnum = "sentences"
+	H6AutocapitalizeEnumWords      H6AutocapitalizeEnum = "words"
 )
 
 type H6AutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type H6ContenteditableEnum string
 
 const (
-	H6ContenteditableEnumFalse         H6ContenteditableEnum = "false"
 	H6ContenteditableEnumPlaintextOnly H6ContenteditableEnum = "plaintext-only"
 	H6ContenteditableEnumTrue          H6ContenteditableEnum = "true"
+	H6ContenteditableEnumFalse         H6ContenteditableEnum = "false"
 	H6ContenteditableEnumEmpty         H6ContenteditableEnum = ""
 )
 
@@ -95,34 +94,34 @@ const (
 type H6EnterkeyhintEnum string
 
 const (
-	H6EnterkeyhintEnumSend     H6EnterkeyhintEnum = "send"
 	H6EnterkeyhintEnumDone     H6EnterkeyhintEnum = "done"
 	H6EnterkeyhintEnumEnter    H6EnterkeyhintEnum = "enter"
 	H6EnterkeyhintEnumGo       H6EnterkeyhintEnum = "go"
 	H6EnterkeyhintEnumNext     H6EnterkeyhintEnum = "next"
 	H6EnterkeyhintEnumPrevious H6EnterkeyhintEnum = "previous"
 	H6EnterkeyhintEnumSearch   H6EnterkeyhintEnum = "search"
+	H6EnterkeyhintEnumSend     H6EnterkeyhintEnum = "send"
 )
 
 type H6HiddenEnum string
 
 const (
-	H6HiddenEnumUntilFound H6HiddenEnum = "until-found"
 	H6HiddenEnumHidden     H6HiddenEnum = "hidden"
+	H6HiddenEnumUntilFound H6HiddenEnum = "until-found"
 	H6HiddenEnumEmpty      H6HiddenEnum = ""
 )
 
 type H6InputmodeEnum string
 
 const (
+	H6InputmodeEnumText    H6InputmodeEnum = "text"
+	H6InputmodeEnumUrl     H6InputmodeEnum = "url"
 	H6InputmodeEnumDecimal H6InputmodeEnum = "decimal"
 	H6InputmodeEnumEmail   H6InputmodeEnum = "email"
 	H6InputmodeEnumNone    H6InputmodeEnum = "none"
 	H6InputmodeEnumNumeric H6InputmodeEnum = "numeric"
 	H6InputmodeEnumSearch  H6InputmodeEnum = "search"
 	H6InputmodeEnumTel     H6InputmodeEnum = "tel"
-	H6InputmodeEnumText    H6InputmodeEnum = "text"
-	H6InputmodeEnumUrl     H6InputmodeEnum = "url"
 )
 
 type H6SpellcheckEnum string

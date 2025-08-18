@@ -14,7 +14,6 @@ type RubyElement struct {
 	attributes rubyAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Ruby creates a tag <ruby> instance and returns it for further modification.
@@ -52,28 +51,28 @@ func RubyTernary(condition bool, true htemel.Node, false htemel.Node) *RubyEleme
 type RubyAutocapitalizeEnum string
 
 const (
+	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
+	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
 	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
 	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
 	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
 	RubyAutocapitalizeEnumOff        RubyAutocapitalizeEnum = "off"
-	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
-	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
 )
 
 type RubyAutocorrectEnum string
 
 const (
-	RubyAutocorrectEnumOff   RubyAutocorrectEnum = "off"
 	RubyAutocorrectEnumOn    RubyAutocorrectEnum = "on"
+	RubyAutocorrectEnumOff   RubyAutocorrectEnum = "off"
 	RubyAutocorrectEnumEmpty RubyAutocorrectEnum = ""
 )
 
 type RubyContenteditableEnum string
 
 const (
+	RubyContenteditableEnumTrue          RubyContenteditableEnum = "true"
 	RubyContenteditableEnumFalse         RubyContenteditableEnum = "false"
 	RubyContenteditableEnumPlaintextOnly RubyContenteditableEnum = "plaintext-only"
-	RubyContenteditableEnumTrue          RubyContenteditableEnum = "true"
 	RubyContenteditableEnumEmpty         RubyContenteditableEnum = ""
 )
 
@@ -95,34 +94,34 @@ const (
 type RubyEnterkeyhintEnum string
 
 const (
-	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
-	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
 	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
 	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
 	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
 	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
+	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
+	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
 )
 
 type RubyHiddenEnum string
 
 const (
-	RubyHiddenEnumHidden     RubyHiddenEnum = "hidden"
 	RubyHiddenEnumUntilFound RubyHiddenEnum = "until-found"
+	RubyHiddenEnumHidden     RubyHiddenEnum = "hidden"
 	RubyHiddenEnumEmpty      RubyHiddenEnum = ""
 )
 
 type RubyInputmodeEnum string
 
 const (
-	RubyInputmodeEnumTel     RubyInputmodeEnum = "tel"
-	RubyInputmodeEnumText    RubyInputmodeEnum = "text"
-	RubyInputmodeEnumUrl     RubyInputmodeEnum = "url"
-	RubyInputmodeEnumDecimal RubyInputmodeEnum = "decimal"
 	RubyInputmodeEnumEmail   RubyInputmodeEnum = "email"
 	RubyInputmodeEnumNone    RubyInputmodeEnum = "none"
 	RubyInputmodeEnumNumeric RubyInputmodeEnum = "numeric"
 	RubyInputmodeEnumSearch  RubyInputmodeEnum = "search"
+	RubyInputmodeEnumTel     RubyInputmodeEnum = "tel"
+	RubyInputmodeEnumText    RubyInputmodeEnum = "text"
+	RubyInputmodeEnumUrl     RubyInputmodeEnum = "url"
+	RubyInputmodeEnumDecimal RubyInputmodeEnum = "decimal"
 )
 
 type RubySpellcheckEnum string
@@ -136,8 +135,8 @@ const (
 type RubyTranslateEnum string
 
 const (
-	RubyTranslateEnumNo    RubyTranslateEnum = "no"
 	RubyTranslateEnumYes   RubyTranslateEnum = "yes"
+	RubyTranslateEnumNo    RubyTranslateEnum = "no"
 	RubyTranslateEnumEmpty RubyTranslateEnum = ""
 )
 

@@ -14,7 +14,6 @@ type HtmlElement struct {
 	attributes htmlAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Html creates a tag <html> instance and returns it for further modification.
@@ -52,28 +51,28 @@ func HtmlTernary(condition bool, true htemel.Node, false htemel.Node) *HtmlEleme
 type HtmlAutocapitalizeEnum string
 
 const (
-	HtmlAutocapitalizeEnumCharacters HtmlAutocapitalizeEnum = "characters"
-	HtmlAutocapitalizeEnumNone       HtmlAutocapitalizeEnum = "none"
 	HtmlAutocapitalizeEnumOff        HtmlAutocapitalizeEnum = "off"
 	HtmlAutocapitalizeEnumOn         HtmlAutocapitalizeEnum = "on"
 	HtmlAutocapitalizeEnumSentences  HtmlAutocapitalizeEnum = "sentences"
 	HtmlAutocapitalizeEnumWords      HtmlAutocapitalizeEnum = "words"
+	HtmlAutocapitalizeEnumCharacters HtmlAutocapitalizeEnum = "characters"
+	HtmlAutocapitalizeEnumNone       HtmlAutocapitalizeEnum = "none"
 )
 
 type HtmlAutocorrectEnum string
 
 const (
-	HtmlAutocorrectEnumOn    HtmlAutocorrectEnum = "on"
 	HtmlAutocorrectEnumOff   HtmlAutocorrectEnum = "off"
+	HtmlAutocorrectEnumOn    HtmlAutocorrectEnum = "on"
 	HtmlAutocorrectEnumEmpty HtmlAutocorrectEnum = ""
 )
 
 type HtmlContenteditableEnum string
 
 const (
-	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumPlaintextOnly HtmlContenteditableEnum = "plaintext-only"
 	HtmlContenteditableEnumTrue          HtmlContenteditableEnum = "true"
+	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
 	HtmlContenteditableEnumEmpty         HtmlContenteditableEnum = ""
 )
 
@@ -88,20 +87,20 @@ const (
 type HtmlDraggableEnum string
 
 const (
-	HtmlDraggableEnumFalse HtmlDraggableEnum = "false"
 	HtmlDraggableEnumTrue  HtmlDraggableEnum = "true"
+	HtmlDraggableEnumFalse HtmlDraggableEnum = "false"
 )
 
 type HtmlEnterkeyhintEnum string
 
 const (
-	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
-	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
 	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
 	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
 	HtmlEnterkeyhintEnumNext     HtmlEnterkeyhintEnum = "next"
 	HtmlEnterkeyhintEnumPrevious HtmlEnterkeyhintEnum = "previous"
 	HtmlEnterkeyhintEnumSearch   HtmlEnterkeyhintEnum = "search"
+	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
+	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
 )
 
 type HtmlHiddenEnum string
@@ -115,7 +114,6 @@ const (
 type HtmlInputmodeEnum string
 
 const (
-	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
 	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
 	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
 	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
@@ -123,6 +121,7 @@ const (
 	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
 	HtmlInputmodeEnumNone    HtmlInputmodeEnum = "none"
 	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
+	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
 )
 
 type HtmlSpellcheckEnum string

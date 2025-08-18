@@ -14,7 +14,6 @@ type FigcaptionElement struct {
 	attributes figcaptionAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Figcaption creates a tag <figcaption> instance and returns it for further modification.
@@ -52,12 +51,12 @@ func FigcaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Fig
 type FigcaptionAutocapitalizeEnum string
 
 const (
+	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
+	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 	FigcaptionAutocapitalizeEnumCharacters FigcaptionAutocapitalizeEnum = "characters"
 	FigcaptionAutocapitalizeEnumNone       FigcaptionAutocapitalizeEnum = "none"
 	FigcaptionAutocapitalizeEnumOff        FigcaptionAutocapitalizeEnum = "off"
 	FigcaptionAutocapitalizeEnumOn         FigcaptionAutocapitalizeEnum = "on"
-	FigcaptionAutocapitalizeEnumSentences  FigcaptionAutocapitalizeEnum = "sentences"
-	FigcaptionAutocapitalizeEnumWords      FigcaptionAutocapitalizeEnum = "words"
 )
 
 type FigcaptionAutocorrectEnum string
@@ -80,9 +79,9 @@ const (
 type FigcaptionDirEnum string
 
 const (
-	FigcaptionDirEnumRtl  FigcaptionDirEnum = "rtl"
 	FigcaptionDirEnumAuto FigcaptionDirEnum = "auto"
 	FigcaptionDirEnumLtr  FigcaptionDirEnum = "ltr"
+	FigcaptionDirEnumRtl  FigcaptionDirEnum = "rtl"
 )
 
 type FigcaptionDraggableEnum string
@@ -115,6 +114,7 @@ const (
 type FigcaptionInputmodeEnum string
 
 const (
+	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
 	FigcaptionInputmodeEnumNone    FigcaptionInputmodeEnum = "none"
 	FigcaptionInputmodeEnumNumeric FigcaptionInputmodeEnum = "numeric"
 	FigcaptionInputmodeEnumSearch  FigcaptionInputmodeEnum = "search"
@@ -122,7 +122,6 @@ const (
 	FigcaptionInputmodeEnumText    FigcaptionInputmodeEnum = "text"
 	FigcaptionInputmodeEnumUrl     FigcaptionInputmodeEnum = "url"
 	FigcaptionInputmodeEnumDecimal FigcaptionInputmodeEnum = "decimal"
-	FigcaptionInputmodeEnumEmail   FigcaptionInputmodeEnum = "email"
 )
 
 type FigcaptionSpellcheckEnum string
@@ -144,8 +143,8 @@ const (
 type FigcaptionWritingsuggestionsEnum string
 
 const (
-	FigcaptionWritingsuggestionsEnumTrue  FigcaptionWritingsuggestionsEnum = "true"
 	FigcaptionWritingsuggestionsEnumFalse FigcaptionWritingsuggestionsEnum = "false"
+	FigcaptionWritingsuggestionsEnumTrue  FigcaptionWritingsuggestionsEnum = "true"
 	FigcaptionWritingsuggestionsEnumEmpty FigcaptionWritingsuggestionsEnum = ""
 )
 

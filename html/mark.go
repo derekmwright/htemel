@@ -14,7 +14,6 @@ type MarkElement struct {
 	attributes markAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Mark creates a tag <mark> instance and returns it for further modification.
@@ -71,18 +70,18 @@ const (
 type MarkContenteditableEnum string
 
 const (
-	MarkContenteditableEnumFalse         MarkContenteditableEnum = "false"
 	MarkContenteditableEnumPlaintextOnly MarkContenteditableEnum = "plaintext-only"
 	MarkContenteditableEnumTrue          MarkContenteditableEnum = "true"
+	MarkContenteditableEnumFalse         MarkContenteditableEnum = "false"
 	MarkContenteditableEnumEmpty         MarkContenteditableEnum = ""
 )
 
 type MarkDirEnum string
 
 const (
+	MarkDirEnumAuto MarkDirEnum = "auto"
 	MarkDirEnumLtr  MarkDirEnum = "ltr"
 	MarkDirEnumRtl  MarkDirEnum = "rtl"
-	MarkDirEnumAuto MarkDirEnum = "auto"
 )
 
 type MarkDraggableEnum string
@@ -95,34 +94,34 @@ const (
 type MarkEnterkeyhintEnum string
 
 const (
+	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
 	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
 	MarkEnterkeyhintEnumGo       MarkEnterkeyhintEnum = "go"
 	MarkEnterkeyhintEnumNext     MarkEnterkeyhintEnum = "next"
 	MarkEnterkeyhintEnumPrevious MarkEnterkeyhintEnum = "previous"
 	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
 	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
-	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
 )
 
 type MarkHiddenEnum string
 
 const (
-	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
 	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
+	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
 	MarkHiddenEnumEmpty      MarkHiddenEnum = ""
 )
 
 type MarkInputmodeEnum string
 
 const (
-	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
-	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
 	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
 	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
 	MarkInputmodeEnumDecimal MarkInputmodeEnum = "decimal"
 	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
 	MarkInputmodeEnumNone    MarkInputmodeEnum = "none"
 	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
+	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
+	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
 )
 
 type MarkSpellcheckEnum string

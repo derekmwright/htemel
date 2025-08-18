@@ -13,7 +13,6 @@ type SourceElement struct {
 	attributes sourceAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Source creates a tag <source> instance and returns it for further modification.
@@ -43,19 +42,19 @@ func SourceIf(condition bool) *SourceElement {
 type SourceAutocapitalizeEnum string
 
 const (
+	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
+	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
 	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
 	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
 	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
 	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
-	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
-	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
 )
 
 type SourceAutocorrectEnum string
 
 const (
-	SourceAutocorrectEnumOn    SourceAutocorrectEnum = "on"
 	SourceAutocorrectEnumOff   SourceAutocorrectEnum = "off"
+	SourceAutocorrectEnumOn    SourceAutocorrectEnum = "on"
 	SourceAutocorrectEnumEmpty SourceAutocorrectEnum = ""
 )
 
@@ -135,8 +134,8 @@ const (
 type SourceWritingsuggestionsEnum string
 
 const (
-	SourceWritingsuggestionsEnumTrue  SourceWritingsuggestionsEnum = "true"
 	SourceWritingsuggestionsEnumFalse SourceWritingsuggestionsEnum = "false"
+	SourceWritingsuggestionsEnumTrue  SourceWritingsuggestionsEnum = "true"
 	SourceWritingsuggestionsEnumEmpty SourceWritingsuggestionsEnum = ""
 )
 

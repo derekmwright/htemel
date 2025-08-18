@@ -14,7 +14,6 @@ type VarElement struct {
 	attributes varAttrs
 	children   []htemel.Node
 	skipRender bool
-	indent     int
 }
 
 // Var creates a tag <var> instance and returns it for further modification.
@@ -52,19 +51,19 @@ func VarTernary(condition bool, true htemel.Node, false htemel.Node) *VarElement
 type VarAutocapitalizeEnum string
 
 const (
+	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
+	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
 	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
 	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
 	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
 	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
-	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
-	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
 )
 
 type VarAutocorrectEnum string
 
 const (
-	VarAutocorrectEnumOn    VarAutocorrectEnum = "on"
 	VarAutocorrectEnumOff   VarAutocorrectEnum = "off"
+	VarAutocorrectEnumOn    VarAutocorrectEnum = "on"
 	VarAutocorrectEnumEmpty VarAutocorrectEnum = ""
 )
 
@@ -115,29 +114,29 @@ const (
 type VarInputmodeEnum string
 
 const (
-	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
-	VarInputmodeEnumText    VarInputmodeEnum = "text"
-	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
 	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
 	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
 	VarInputmodeEnumNone    VarInputmodeEnum = "none"
 	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
 	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
+	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
+	VarInputmodeEnumText    VarInputmodeEnum = "text"
+	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
 )
 
 type VarSpellcheckEnum string
 
 const (
-	VarSpellcheckEnumFalse VarSpellcheckEnum = "false"
 	VarSpellcheckEnumTrue  VarSpellcheckEnum = "true"
+	VarSpellcheckEnumFalse VarSpellcheckEnum = "false"
 	VarSpellcheckEnumEmpty VarSpellcheckEnum = ""
 )
 
 type VarTranslateEnum string
 
 const (
-	VarTranslateEnumYes   VarTranslateEnum = "yes"
 	VarTranslateEnumNo    VarTranslateEnum = "no"
+	VarTranslateEnumYes   VarTranslateEnum = "yes"
 	VarTranslateEnumEmpty VarTranslateEnum = ""
 )
 

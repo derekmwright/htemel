@@ -13,7 +13,6 @@ type BrElement struct {
 	attributes brAttrs
 
 	skipRender bool
-	indent     int
 }
 
 // Br creates a tag <br> instance and returns it for further modification.
@@ -43,12 +42,12 @@ func BrIf(condition bool) *BrElement {
 type BrAutocapitalizeEnum string
 
 const (
+	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
+	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 	BrAutocapitalizeEnumOff        BrAutocapitalizeEnum = "off"
 	BrAutocapitalizeEnumOn         BrAutocapitalizeEnum = "on"
 	BrAutocapitalizeEnumSentences  BrAutocapitalizeEnum = "sentences"
 	BrAutocapitalizeEnumWords      BrAutocapitalizeEnum = "words"
-	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
-	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
 )
 
 type BrAutocorrectEnum string
@@ -71,9 +70,9 @@ const (
 type BrDirEnum string
 
 const (
+	BrDirEnumAuto BrDirEnum = "auto"
 	BrDirEnumLtr  BrDirEnum = "ltr"
 	BrDirEnumRtl  BrDirEnum = "rtl"
-	BrDirEnumAuto BrDirEnum = "auto"
 )
 
 type BrDraggableEnum string
@@ -86,13 +85,13 @@ const (
 type BrEnterkeyhintEnum string
 
 const (
+	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
+	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
 	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
 	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
 	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
 	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
 	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
-	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
-	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
 )
 
 type BrHiddenEnum string
@@ -106,6 +105,7 @@ const (
 type BrInputmodeEnum string
 
 const (
+	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
 	BrInputmodeEnumText    BrInputmodeEnum = "text"
 	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
 	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
@@ -113,7 +113,6 @@ const (
 	BrInputmodeEnumNone    BrInputmodeEnum = "none"
 	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
 	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
-	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
 )
 
 type BrSpellcheckEnum string
@@ -135,8 +134,8 @@ const (
 type BrWritingsuggestionsEnum string
 
 const (
-	BrWritingsuggestionsEnumTrue  BrWritingsuggestionsEnum = "true"
 	BrWritingsuggestionsEnumFalse BrWritingsuggestionsEnum = "false"
+	BrWritingsuggestionsEnumTrue  BrWritingsuggestionsEnum = "true"
 	BrWritingsuggestionsEnumEmpty BrWritingsuggestionsEnum = ""
 )
 
