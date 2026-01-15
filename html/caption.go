@@ -48,115 +48,127 @@ func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Captio
 	return Caption(false)
 }
 
-type CaptionAutocapitalizeEnum string
+type CaptionAutocapitalize string
 
 const (
-	CaptionAutocapitalizeEnumCharacters CaptionAutocapitalizeEnum = "characters"
-	CaptionAutocapitalizeEnumNone       CaptionAutocapitalizeEnum = "none"
-	CaptionAutocapitalizeEnumOff        CaptionAutocapitalizeEnum = "off"
-	CaptionAutocapitalizeEnumOn         CaptionAutocapitalizeEnum = "on"
-	CaptionAutocapitalizeEnumSentences  CaptionAutocapitalizeEnum = "sentences"
-	CaptionAutocapitalizeEnumWords      CaptionAutocapitalizeEnum = "words"
+	CaptionAutocapitalizeWords      CaptionAutocapitalize = "words"
+	CaptionAutocapitalizeCharacters CaptionAutocapitalize = "characters"
+	CaptionAutocapitalizeNone       CaptionAutocapitalize = "none"
+	CaptionAutocapitalizeOff        CaptionAutocapitalize = "off"
+	CaptionAutocapitalizeOn         CaptionAutocapitalize = "on"
+	CaptionAutocapitalizeSentences  CaptionAutocapitalize = "sentences"
 )
 
-type CaptionAutocorrectEnum string
+type CaptionAutocorrect string
 
 const (
-	CaptionAutocorrectEnumOff   CaptionAutocorrectEnum = "off"
-	CaptionAutocorrectEnumOn    CaptionAutocorrectEnum = "on"
-	CaptionAutocorrectEnumEmpty CaptionAutocorrectEnum = ""
+	CaptionAutocorrectOff   CaptionAutocorrect = "off"
+	CaptionAutocorrectOn    CaptionAutocorrect = "on"
+	CaptionAutocorrectEmpty CaptionAutocorrect = ""
 )
 
-type CaptionContenteditableEnum string
+type CaptionContenteditable string
 
 const (
-	CaptionContenteditableEnumPlaintextOnly CaptionContenteditableEnum = "plaintext-only"
-	CaptionContenteditableEnumTrue          CaptionContenteditableEnum = "true"
-	CaptionContenteditableEnumFalse         CaptionContenteditableEnum = "false"
-	CaptionContenteditableEnumEmpty         CaptionContenteditableEnum = ""
+	CaptionContenteditableFalse         CaptionContenteditable = "false"
+	CaptionContenteditablePlaintextOnly CaptionContenteditable = "plaintext-only"
+	CaptionContenteditableTrue          CaptionContenteditable = "true"
+	CaptionContenteditableEmpty         CaptionContenteditable = ""
 )
 
-type CaptionDirEnum string
+type CaptionDir string
 
 const (
-	CaptionDirEnumRtl  CaptionDirEnum = "rtl"
-	CaptionDirEnumAuto CaptionDirEnum = "auto"
-	CaptionDirEnumLtr  CaptionDirEnum = "ltr"
+	CaptionDirAuto CaptionDir = "auto"
+	CaptionDirLtr  CaptionDir = "ltr"
+	CaptionDirRtl  CaptionDir = "rtl"
 )
 
-type CaptionDraggableEnum string
+type CaptionDraggable string
 
 const (
-	CaptionDraggableEnumFalse CaptionDraggableEnum = "false"
-	CaptionDraggableEnumTrue  CaptionDraggableEnum = "true"
+	CaptionDraggableFalse CaptionDraggable = "false"
+	CaptionDraggableTrue  CaptionDraggable = "true"
 )
 
-type CaptionEnterkeyhintEnum string
+type CaptionEnterkeyhint string
 
 const (
-	CaptionEnterkeyhintEnumSearch   CaptionEnterkeyhintEnum = "search"
-	CaptionEnterkeyhintEnumSend     CaptionEnterkeyhintEnum = "send"
-	CaptionEnterkeyhintEnumDone     CaptionEnterkeyhintEnum = "done"
-	CaptionEnterkeyhintEnumEnter    CaptionEnterkeyhintEnum = "enter"
-	CaptionEnterkeyhintEnumGo       CaptionEnterkeyhintEnum = "go"
-	CaptionEnterkeyhintEnumNext     CaptionEnterkeyhintEnum = "next"
-	CaptionEnterkeyhintEnumPrevious CaptionEnterkeyhintEnum = "previous"
+	CaptionEnterkeyhintNext     CaptionEnterkeyhint = "next"
+	CaptionEnterkeyhintPrevious CaptionEnterkeyhint = "previous"
+	CaptionEnterkeyhintSearch   CaptionEnterkeyhint = "search"
+	CaptionEnterkeyhintSend     CaptionEnterkeyhint = "send"
+	CaptionEnterkeyhintDone     CaptionEnterkeyhint = "done"
+	CaptionEnterkeyhintEnter    CaptionEnterkeyhint = "enter"
+	CaptionEnterkeyhintGo       CaptionEnterkeyhint = "go"
 )
 
-type CaptionHiddenEnum string
+type CaptionHidden string
 
 const (
-	CaptionHiddenEnumHidden     CaptionHiddenEnum = "hidden"
-	CaptionHiddenEnumUntilFound CaptionHiddenEnum = "until-found"
-	CaptionHiddenEnumEmpty      CaptionHiddenEnum = ""
+	CaptionHiddenUntilFound CaptionHidden = "until-found"
+	CaptionHiddenHidden     CaptionHidden = "hidden"
+	CaptionHiddenEmpty      CaptionHidden = ""
 )
 
-type CaptionInputmodeEnum string
+type CaptionInputmode string
 
 const (
-	CaptionInputmodeEnumTel     CaptionInputmodeEnum = "tel"
-	CaptionInputmodeEnumText    CaptionInputmodeEnum = "text"
-	CaptionInputmodeEnumUrl     CaptionInputmodeEnum = "url"
-	CaptionInputmodeEnumDecimal CaptionInputmodeEnum = "decimal"
-	CaptionInputmodeEnumEmail   CaptionInputmodeEnum = "email"
-	CaptionInputmodeEnumNone    CaptionInputmodeEnum = "none"
-	CaptionInputmodeEnumNumeric CaptionInputmodeEnum = "numeric"
-	CaptionInputmodeEnumSearch  CaptionInputmodeEnum = "search"
+	CaptionInputmodeNone    CaptionInputmode = "none"
+	CaptionInputmodeNumeric CaptionInputmode = "numeric"
+	CaptionInputmodeSearch  CaptionInputmode = "search"
+	CaptionInputmodeTel     CaptionInputmode = "tel"
+	CaptionInputmodeText    CaptionInputmode = "text"
+	CaptionInputmodeUrl     CaptionInputmode = "url"
+	CaptionInputmodeDecimal CaptionInputmode = "decimal"
+	CaptionInputmodeEmail   CaptionInputmode = "email"
 )
 
-type CaptionSpellcheckEnum string
+type CaptionSpellcheck string
 
 const (
-	CaptionSpellcheckEnumFalse CaptionSpellcheckEnum = "false"
-	CaptionSpellcheckEnumTrue  CaptionSpellcheckEnum = "true"
-	CaptionSpellcheckEnumEmpty CaptionSpellcheckEnum = ""
+	CaptionSpellcheckFalse CaptionSpellcheck = "false"
+	CaptionSpellcheckTrue  CaptionSpellcheck = "true"
+	CaptionSpellcheckEmpty CaptionSpellcheck = ""
 )
 
-type CaptionTranslateEnum string
+type CaptionTranslate string
 
 const (
-	CaptionTranslateEnumNo    CaptionTranslateEnum = "no"
-	CaptionTranslateEnumYes   CaptionTranslateEnum = "yes"
-	CaptionTranslateEnumEmpty CaptionTranslateEnum = ""
+	CaptionTranslateNo    CaptionTranslate = "no"
+	CaptionTranslateYes   CaptionTranslate = "yes"
+	CaptionTranslateEmpty CaptionTranslate = ""
 )
 
-type CaptionWritingsuggestionsEnum string
+type CaptionWritingsuggestions string
 
 const (
-	CaptionWritingsuggestionsEnumTrue  CaptionWritingsuggestionsEnum = "true"
-	CaptionWritingsuggestionsEnumFalse CaptionWritingsuggestionsEnum = "false"
-	CaptionWritingsuggestionsEnumEmpty CaptionWritingsuggestionsEnum = ""
+	CaptionWritingsuggestionsFalse CaptionWritingsuggestions = "false"
+	CaptionWritingsuggestionsTrue  CaptionWritingsuggestions = "true"
+	CaptionWritingsuggestionsEmpty CaptionWritingsuggestions = ""
 )
 
 type captionAttrs map[string]any
 
-func (e *CaptionElement) Autocapitalize(a CaptionAutocapitalizeEnum) *CaptionElement {
+func (e *CaptionElement) AriaUnsafe(name string, s string) *CaptionElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *CaptionElement) Aria(name string, s string) *CaptionElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *CaptionElement) Autocapitalize(a CaptionAutocapitalize) *CaptionElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *CaptionElement) Autocorrect(a CaptionAutocorrectEnum) *CaptionElement {
+func (e *CaptionElement) Autocorrect(a CaptionAutocorrect) *CaptionElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *CaptionElement) Class(s ...string) *CaptionElement {
 	return e
 }
 
-func (e *CaptionElement) Contenteditable(a CaptionContenteditableEnum) *CaptionElement {
+func (e *CaptionElement) Contenteditable(a CaptionContenteditable) *CaptionElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *CaptionElement) Data(name string, s string) *CaptionElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *CaptionElement) Dir(a CaptionDirEnum) *CaptionElement {
+func (e *CaptionElement) Dir(a CaptionDir) *CaptionElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *CaptionElement) Draggable(a CaptionDraggableEnum) *CaptionElement {
+func (e *CaptionElement) Draggable(a CaptionDraggable) *CaptionElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *CaptionElement) Enterkeyhint(a CaptionEnterkeyhintEnum) *CaptionElement {
+func (e *CaptionElement) Enterkeyhint(a CaptionEnterkeyhint) *CaptionElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *CaptionElement) Hidden(a CaptionHiddenEnum) *CaptionElement {
+func (e *CaptionElement) Hidden(a CaptionHidden) *CaptionElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *CaptionElement) Inert(b bool) *CaptionElement {
 	return e
 }
 
-func (e *CaptionElement) Inputmode(a CaptionInputmodeEnum) *CaptionElement {
+func (e *CaptionElement) Inputmode(a CaptionInputmode) *CaptionElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *CaptionElement) Slot(s string) *CaptionElement {
 	return e
 }
 
-func (e *CaptionElement) Spellcheck(a CaptionSpellcheckEnum) *CaptionElement {
+func (e *CaptionElement) Spellcheck(a CaptionSpellcheck) *CaptionElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *CaptionElement) Title(s string) *CaptionElement {
 	return e
 }
 
-func (e *CaptionElement) Translate(a CaptionTranslateEnum) *CaptionElement {
+func (e *CaptionElement) Translate(a CaptionTranslate) *CaptionElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *CaptionElement) Writingsuggestions(a CaptionWritingsuggestionsEnum) *CaptionElement {
+func (e *CaptionElement) Writingsuggestions(a CaptionWritingsuggestions) *CaptionElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

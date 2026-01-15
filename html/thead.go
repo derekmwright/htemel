@@ -48,115 +48,127 @@ func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadEle
 	return Thead(false)
 }
 
-type TheadAutocapitalizeEnum string
+type TheadAutocapitalize string
 
 const (
-	TheadAutocapitalizeEnumWords      TheadAutocapitalizeEnum = "words"
-	TheadAutocapitalizeEnumCharacters TheadAutocapitalizeEnum = "characters"
-	TheadAutocapitalizeEnumNone       TheadAutocapitalizeEnum = "none"
-	TheadAutocapitalizeEnumOff        TheadAutocapitalizeEnum = "off"
-	TheadAutocapitalizeEnumOn         TheadAutocapitalizeEnum = "on"
-	TheadAutocapitalizeEnumSentences  TheadAutocapitalizeEnum = "sentences"
+	TheadAutocapitalizeOn         TheadAutocapitalize = "on"
+	TheadAutocapitalizeSentences  TheadAutocapitalize = "sentences"
+	TheadAutocapitalizeWords      TheadAutocapitalize = "words"
+	TheadAutocapitalizeCharacters TheadAutocapitalize = "characters"
+	TheadAutocapitalizeNone       TheadAutocapitalize = "none"
+	TheadAutocapitalizeOff        TheadAutocapitalize = "off"
 )
 
-type TheadAutocorrectEnum string
+type TheadAutocorrect string
 
 const (
-	TheadAutocorrectEnumOff   TheadAutocorrectEnum = "off"
-	TheadAutocorrectEnumOn    TheadAutocorrectEnum = "on"
-	TheadAutocorrectEnumEmpty TheadAutocorrectEnum = ""
+	TheadAutocorrectOff   TheadAutocorrect = "off"
+	TheadAutocorrectOn    TheadAutocorrect = "on"
+	TheadAutocorrectEmpty TheadAutocorrect = ""
 )
 
-type TheadContenteditableEnum string
+type TheadContenteditable string
 
 const (
-	TheadContenteditableEnumFalse         TheadContenteditableEnum = "false"
-	TheadContenteditableEnumPlaintextOnly TheadContenteditableEnum = "plaintext-only"
-	TheadContenteditableEnumTrue          TheadContenteditableEnum = "true"
-	TheadContenteditableEnumEmpty         TheadContenteditableEnum = ""
+	TheadContenteditableFalse         TheadContenteditable = "false"
+	TheadContenteditablePlaintextOnly TheadContenteditable = "plaintext-only"
+	TheadContenteditableTrue          TheadContenteditable = "true"
+	TheadContenteditableEmpty         TheadContenteditable = ""
 )
 
-type TheadDirEnum string
+type TheadDir string
 
 const (
-	TheadDirEnumLtr  TheadDirEnum = "ltr"
-	TheadDirEnumRtl  TheadDirEnum = "rtl"
-	TheadDirEnumAuto TheadDirEnum = "auto"
+	TheadDirAuto TheadDir = "auto"
+	TheadDirLtr  TheadDir = "ltr"
+	TheadDirRtl  TheadDir = "rtl"
 )
 
-type TheadDraggableEnum string
+type TheadDraggable string
 
 const (
-	TheadDraggableEnumFalse TheadDraggableEnum = "false"
-	TheadDraggableEnumTrue  TheadDraggableEnum = "true"
+	TheadDraggableFalse TheadDraggable = "false"
+	TheadDraggableTrue  TheadDraggable = "true"
 )
 
-type TheadEnterkeyhintEnum string
+type TheadEnterkeyhint string
 
 const (
-	TheadEnterkeyhintEnumDone     TheadEnterkeyhintEnum = "done"
-	TheadEnterkeyhintEnumEnter    TheadEnterkeyhintEnum = "enter"
-	TheadEnterkeyhintEnumGo       TheadEnterkeyhintEnum = "go"
-	TheadEnterkeyhintEnumNext     TheadEnterkeyhintEnum = "next"
-	TheadEnterkeyhintEnumPrevious TheadEnterkeyhintEnum = "previous"
-	TheadEnterkeyhintEnumSearch   TheadEnterkeyhintEnum = "search"
-	TheadEnterkeyhintEnumSend     TheadEnterkeyhintEnum = "send"
+	TheadEnterkeyhintDone     TheadEnterkeyhint = "done"
+	TheadEnterkeyhintEnter    TheadEnterkeyhint = "enter"
+	TheadEnterkeyhintGo       TheadEnterkeyhint = "go"
+	TheadEnterkeyhintNext     TheadEnterkeyhint = "next"
+	TheadEnterkeyhintPrevious TheadEnterkeyhint = "previous"
+	TheadEnterkeyhintSearch   TheadEnterkeyhint = "search"
+	TheadEnterkeyhintSend     TheadEnterkeyhint = "send"
 )
 
-type TheadHiddenEnum string
+type TheadHidden string
 
 const (
-	TheadHiddenEnumHidden     TheadHiddenEnum = "hidden"
-	TheadHiddenEnumUntilFound TheadHiddenEnum = "until-found"
-	TheadHiddenEnumEmpty      TheadHiddenEnum = ""
+	TheadHiddenHidden     TheadHidden = "hidden"
+	TheadHiddenUntilFound TheadHidden = "until-found"
+	TheadHiddenEmpty      TheadHidden = ""
 )
 
-type TheadInputmodeEnum string
+type TheadInputmode string
 
 const (
-	TheadInputmodeEnumText    TheadInputmodeEnum = "text"
-	TheadInputmodeEnumUrl     TheadInputmodeEnum = "url"
-	TheadInputmodeEnumDecimal TheadInputmodeEnum = "decimal"
-	TheadInputmodeEnumEmail   TheadInputmodeEnum = "email"
-	TheadInputmodeEnumNone    TheadInputmodeEnum = "none"
-	TheadInputmodeEnumNumeric TheadInputmodeEnum = "numeric"
-	TheadInputmodeEnumSearch  TheadInputmodeEnum = "search"
-	TheadInputmodeEnumTel     TheadInputmodeEnum = "tel"
+	TheadInputmodeNone    TheadInputmode = "none"
+	TheadInputmodeNumeric TheadInputmode = "numeric"
+	TheadInputmodeSearch  TheadInputmode = "search"
+	TheadInputmodeTel     TheadInputmode = "tel"
+	TheadInputmodeText    TheadInputmode = "text"
+	TheadInputmodeUrl     TheadInputmode = "url"
+	TheadInputmodeDecimal TheadInputmode = "decimal"
+	TheadInputmodeEmail   TheadInputmode = "email"
 )
 
-type TheadSpellcheckEnum string
+type TheadSpellcheck string
 
 const (
-	TheadSpellcheckEnumFalse TheadSpellcheckEnum = "false"
-	TheadSpellcheckEnumTrue  TheadSpellcheckEnum = "true"
-	TheadSpellcheckEnumEmpty TheadSpellcheckEnum = ""
+	TheadSpellcheckFalse TheadSpellcheck = "false"
+	TheadSpellcheckTrue  TheadSpellcheck = "true"
+	TheadSpellcheckEmpty TheadSpellcheck = ""
 )
 
-type TheadTranslateEnum string
+type TheadTranslate string
 
 const (
-	TheadTranslateEnumNo    TheadTranslateEnum = "no"
-	TheadTranslateEnumYes   TheadTranslateEnum = "yes"
-	TheadTranslateEnumEmpty TheadTranslateEnum = ""
+	TheadTranslateYes   TheadTranslate = "yes"
+	TheadTranslateNo    TheadTranslate = "no"
+	TheadTranslateEmpty TheadTranslate = ""
 )
 
-type TheadWritingsuggestionsEnum string
+type TheadWritingsuggestions string
 
 const (
-	TheadWritingsuggestionsEnumFalse TheadWritingsuggestionsEnum = "false"
-	TheadWritingsuggestionsEnumTrue  TheadWritingsuggestionsEnum = "true"
-	TheadWritingsuggestionsEnumEmpty TheadWritingsuggestionsEnum = ""
+	TheadWritingsuggestionsFalse TheadWritingsuggestions = "false"
+	TheadWritingsuggestionsTrue  TheadWritingsuggestions = "true"
+	TheadWritingsuggestionsEmpty TheadWritingsuggestions = ""
 )
 
 type theadAttrs map[string]any
 
-func (e *TheadElement) Autocapitalize(a TheadAutocapitalizeEnum) *TheadElement {
+func (e *TheadElement) AriaUnsafe(name string, s string) *TheadElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TheadElement) Aria(name string, s string) *TheadElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *TheadElement) Autocapitalize(a TheadAutocapitalize) *TheadElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *TheadElement) Autocorrect(a TheadAutocorrectEnum) *TheadElement {
+func (e *TheadElement) Autocorrect(a TheadAutocorrect) *TheadElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *TheadElement) Class(s ...string) *TheadElement {
 	return e
 }
 
-func (e *TheadElement) Contenteditable(a TheadContenteditableEnum) *TheadElement {
+func (e *TheadElement) Contenteditable(a TheadContenteditable) *TheadElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *TheadElement) Data(name string, s string) *TheadElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *TheadElement) Dir(a TheadDirEnum) *TheadElement {
+func (e *TheadElement) Dir(a TheadDir) *TheadElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *TheadElement) Draggable(a TheadDraggableEnum) *TheadElement {
+func (e *TheadElement) Draggable(a TheadDraggable) *TheadElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *TheadElement) Enterkeyhint(a TheadEnterkeyhintEnum) *TheadElement {
+func (e *TheadElement) Enterkeyhint(a TheadEnterkeyhint) *TheadElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *TheadElement) Hidden(a TheadHiddenEnum) *TheadElement {
+func (e *TheadElement) Hidden(a TheadHidden) *TheadElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *TheadElement) Inert(b bool) *TheadElement {
 	return e
 }
 
-func (e *TheadElement) Inputmode(a TheadInputmodeEnum) *TheadElement {
+func (e *TheadElement) Inputmode(a TheadInputmode) *TheadElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *TheadElement) Slot(s string) *TheadElement {
 	return e
 }
 
-func (e *TheadElement) Spellcheck(a TheadSpellcheckEnum) *TheadElement {
+func (e *TheadElement) Spellcheck(a TheadSpellcheck) *TheadElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *TheadElement) Title(s string) *TheadElement {
 	return e
 }
 
-func (e *TheadElement) Translate(a TheadTranslateEnum) *TheadElement {
+func (e *TheadElement) Translate(a TheadTranslate) *TheadElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *TheadElement) Writingsuggestions(a TheadWritingsuggestionsEnum) *TheadElement {
+func (e *TheadElement) Writingsuggestions(a TheadWritingsuggestions) *TheadElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,111 +48,111 @@ func TextareaTernary(condition bool, true htemel.Node, false htemel.Node) *Texta
 	return Textarea(false)
 }
 
-type TextareaWrapEnum string
+type TextareaWrap string
 
 const (
-	TextareaWrapEnumHard TextareaWrapEnum = "hard"
-	TextareaWrapEnumSoft TextareaWrapEnum = "soft"
+	TextareaWrapHard TextareaWrap = "hard"
+	TextareaWrapSoft TextareaWrap = "soft"
 )
 
-type TextareaAutocapitalizeEnum string
+type TextareaAutocapitalize string
 
 const (
-	TextareaAutocapitalizeEnumCharacters TextareaAutocapitalizeEnum = "characters"
-	TextareaAutocapitalizeEnumNone       TextareaAutocapitalizeEnum = "none"
-	TextareaAutocapitalizeEnumOff        TextareaAutocapitalizeEnum = "off"
-	TextareaAutocapitalizeEnumOn         TextareaAutocapitalizeEnum = "on"
-	TextareaAutocapitalizeEnumSentences  TextareaAutocapitalizeEnum = "sentences"
-	TextareaAutocapitalizeEnumWords      TextareaAutocapitalizeEnum = "words"
+	TextareaAutocapitalizeCharacters TextareaAutocapitalize = "characters"
+	TextareaAutocapitalizeNone       TextareaAutocapitalize = "none"
+	TextareaAutocapitalizeOff        TextareaAutocapitalize = "off"
+	TextareaAutocapitalizeOn         TextareaAutocapitalize = "on"
+	TextareaAutocapitalizeSentences  TextareaAutocapitalize = "sentences"
+	TextareaAutocapitalizeWords      TextareaAutocapitalize = "words"
 )
 
-type TextareaAutocorrectEnum string
+type TextareaAutocorrect string
 
 const (
-	TextareaAutocorrectEnumOff   TextareaAutocorrectEnum = "off"
-	TextareaAutocorrectEnumOn    TextareaAutocorrectEnum = "on"
-	TextareaAutocorrectEnumEmpty TextareaAutocorrectEnum = ""
+	TextareaAutocorrectOff   TextareaAutocorrect = "off"
+	TextareaAutocorrectOn    TextareaAutocorrect = "on"
+	TextareaAutocorrectEmpty TextareaAutocorrect = ""
 )
 
-type TextareaContenteditableEnum string
+type TextareaContenteditable string
 
 const (
-	TextareaContenteditableEnumFalse         TextareaContenteditableEnum = "false"
-	TextareaContenteditableEnumPlaintextOnly TextareaContenteditableEnum = "plaintext-only"
-	TextareaContenteditableEnumTrue          TextareaContenteditableEnum = "true"
-	TextareaContenteditableEnumEmpty         TextareaContenteditableEnum = ""
+	TextareaContenteditableFalse         TextareaContenteditable = "false"
+	TextareaContenteditablePlaintextOnly TextareaContenteditable = "plaintext-only"
+	TextareaContenteditableTrue          TextareaContenteditable = "true"
+	TextareaContenteditableEmpty         TextareaContenteditable = ""
 )
 
-type TextareaDirEnum string
+type TextareaDir string
 
 const (
-	TextareaDirEnumAuto TextareaDirEnum = "auto"
-	TextareaDirEnumLtr  TextareaDirEnum = "ltr"
-	TextareaDirEnumRtl  TextareaDirEnum = "rtl"
+	TextareaDirAuto TextareaDir = "auto"
+	TextareaDirLtr  TextareaDir = "ltr"
+	TextareaDirRtl  TextareaDir = "rtl"
 )
 
-type TextareaDraggableEnum string
+type TextareaDraggable string
 
 const (
-	TextareaDraggableEnumFalse TextareaDraggableEnum = "false"
-	TextareaDraggableEnumTrue  TextareaDraggableEnum = "true"
+	TextareaDraggableTrue  TextareaDraggable = "true"
+	TextareaDraggableFalse TextareaDraggable = "false"
 )
 
-type TextareaEnterkeyhintEnum string
+type TextareaEnterkeyhint string
 
 const (
-	TextareaEnterkeyhintEnumSend     TextareaEnterkeyhintEnum = "send"
-	TextareaEnterkeyhintEnumDone     TextareaEnterkeyhintEnum = "done"
-	TextareaEnterkeyhintEnumEnter    TextareaEnterkeyhintEnum = "enter"
-	TextareaEnterkeyhintEnumGo       TextareaEnterkeyhintEnum = "go"
-	TextareaEnterkeyhintEnumNext     TextareaEnterkeyhintEnum = "next"
-	TextareaEnterkeyhintEnumPrevious TextareaEnterkeyhintEnum = "previous"
-	TextareaEnterkeyhintEnumSearch   TextareaEnterkeyhintEnum = "search"
+	TextareaEnterkeyhintDone     TextareaEnterkeyhint = "done"
+	TextareaEnterkeyhintEnter    TextareaEnterkeyhint = "enter"
+	TextareaEnterkeyhintGo       TextareaEnterkeyhint = "go"
+	TextareaEnterkeyhintNext     TextareaEnterkeyhint = "next"
+	TextareaEnterkeyhintPrevious TextareaEnterkeyhint = "previous"
+	TextareaEnterkeyhintSearch   TextareaEnterkeyhint = "search"
+	TextareaEnterkeyhintSend     TextareaEnterkeyhint = "send"
 )
 
-type TextareaHiddenEnum string
+type TextareaHidden string
 
 const (
-	TextareaHiddenEnumHidden     TextareaHiddenEnum = "hidden"
-	TextareaHiddenEnumUntilFound TextareaHiddenEnum = "until-found"
-	TextareaHiddenEnumEmpty      TextareaHiddenEnum = ""
+	TextareaHiddenHidden     TextareaHidden = "hidden"
+	TextareaHiddenUntilFound TextareaHidden = "until-found"
+	TextareaHiddenEmpty      TextareaHidden = ""
 )
 
-type TextareaInputmodeEnum string
+type TextareaInputmode string
 
 const (
-	TextareaInputmodeEnumEmail   TextareaInputmodeEnum = "email"
-	TextareaInputmodeEnumNone    TextareaInputmodeEnum = "none"
-	TextareaInputmodeEnumNumeric TextareaInputmodeEnum = "numeric"
-	TextareaInputmodeEnumSearch  TextareaInputmodeEnum = "search"
-	TextareaInputmodeEnumTel     TextareaInputmodeEnum = "tel"
-	TextareaInputmodeEnumText    TextareaInputmodeEnum = "text"
-	TextareaInputmodeEnumUrl     TextareaInputmodeEnum = "url"
-	TextareaInputmodeEnumDecimal TextareaInputmodeEnum = "decimal"
+	TextareaInputmodeTel     TextareaInputmode = "tel"
+	TextareaInputmodeText    TextareaInputmode = "text"
+	TextareaInputmodeUrl     TextareaInputmode = "url"
+	TextareaInputmodeDecimal TextareaInputmode = "decimal"
+	TextareaInputmodeEmail   TextareaInputmode = "email"
+	TextareaInputmodeNone    TextareaInputmode = "none"
+	TextareaInputmodeNumeric TextareaInputmode = "numeric"
+	TextareaInputmodeSearch  TextareaInputmode = "search"
 )
 
-type TextareaSpellcheckEnum string
+type TextareaSpellcheck string
 
 const (
-	TextareaSpellcheckEnumFalse TextareaSpellcheckEnum = "false"
-	TextareaSpellcheckEnumTrue  TextareaSpellcheckEnum = "true"
-	TextareaSpellcheckEnumEmpty TextareaSpellcheckEnum = ""
+	TextareaSpellcheckFalse TextareaSpellcheck = "false"
+	TextareaSpellcheckTrue  TextareaSpellcheck = "true"
+	TextareaSpellcheckEmpty TextareaSpellcheck = ""
 )
 
-type TextareaTranslateEnum string
+type TextareaTranslate string
 
 const (
-	TextareaTranslateEnumNo    TextareaTranslateEnum = "no"
-	TextareaTranslateEnumYes   TextareaTranslateEnum = "yes"
-	TextareaTranslateEnumEmpty TextareaTranslateEnum = ""
+	TextareaTranslateNo    TextareaTranslate = "no"
+	TextareaTranslateYes   TextareaTranslate = "yes"
+	TextareaTranslateEmpty TextareaTranslate = ""
 )
 
-type TextareaWritingsuggestionsEnum string
+type TextareaWritingsuggestions string
 
 const (
-	TextareaWritingsuggestionsEnumFalse TextareaWritingsuggestionsEnum = "false"
-	TextareaWritingsuggestionsEnumTrue  TextareaWritingsuggestionsEnum = "true"
-	TextareaWritingsuggestionsEnumEmpty TextareaWritingsuggestionsEnum = ""
+	TextareaWritingsuggestionsTrue  TextareaWritingsuggestions = "true"
+	TextareaWritingsuggestionsFalse TextareaWritingsuggestions = "false"
+	TextareaWritingsuggestionsEmpty TextareaWritingsuggestions = ""
 )
 
 type textareaAttrs map[string]any
@@ -229,19 +229,31 @@ func (e *TextareaElement) Rows(s string) *TextareaElement {
 	return e
 }
 
-func (e *TextareaElement) Wrap(a TextareaWrapEnum) *TextareaElement {
+func (e *TextareaElement) Wrap(a TextareaWrap) *TextareaElement {
 	e.attributes["wrap"] = a
 
 	return e
 }
 
-func (e *TextareaElement) Autocapitalize(a TextareaAutocapitalizeEnum) *TextareaElement {
+func (e *TextareaElement) AriaUnsafe(name string, s string) *TextareaElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TextareaElement) Aria(name string, s string) *TextareaElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *TextareaElement) Autocapitalize(a TextareaAutocapitalize) *TextareaElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *TextareaElement) Autocorrect(a TextareaAutocorrectEnum) *TextareaElement {
+func (e *TextareaElement) Autocorrect(a TextareaAutocorrect) *TextareaElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -259,7 +271,7 @@ func (e *TextareaElement) Class(s ...string) *TextareaElement {
 	return e
 }
 
-func (e *TextareaElement) Contenteditable(a TextareaContenteditableEnum) *TextareaElement {
+func (e *TextareaElement) Contenteditable(a TextareaContenteditable) *TextareaElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -277,25 +289,25 @@ func (e *TextareaElement) Data(name string, s string) *TextareaElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *TextareaElement) Dir(a TextareaDirEnum) *TextareaElement {
+func (e *TextareaElement) Dir(a TextareaDir) *TextareaElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *TextareaElement) Draggable(a TextareaDraggableEnum) *TextareaElement {
+func (e *TextareaElement) Draggable(a TextareaDraggable) *TextareaElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *TextareaElement) Enterkeyhint(a TextareaEnterkeyhintEnum) *TextareaElement {
+func (e *TextareaElement) Enterkeyhint(a TextareaEnterkeyhint) *TextareaElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *TextareaElement) Hidden(a TextareaHiddenEnum) *TextareaElement {
+func (e *TextareaElement) Hidden(a TextareaHidden) *TextareaElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -313,7 +325,7 @@ func (e *TextareaElement) Inert(b bool) *TextareaElement {
 	return e
 }
 
-func (e *TextareaElement) Inputmode(a TextareaInputmodeEnum) *TextareaElement {
+func (e *TextareaElement) Inputmode(a TextareaInputmode) *TextareaElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -373,7 +385,7 @@ func (e *TextareaElement) Slot(s string) *TextareaElement {
 	return e
 }
 
-func (e *TextareaElement) Spellcheck(a TextareaSpellcheckEnum) *TextareaElement {
+func (e *TextareaElement) Spellcheck(a TextareaSpellcheck) *TextareaElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -397,13 +409,13 @@ func (e *TextareaElement) Title(s string) *TextareaElement {
 	return e
 }
 
-func (e *TextareaElement) Translate(a TextareaTranslateEnum) *TextareaElement {
+func (e *TextareaElement) Translate(a TextareaTranslate) *TextareaElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *TextareaElement) Writingsuggestions(a TextareaWritingsuggestionsEnum) *TextareaElement {
+func (e *TextareaElement) Writingsuggestions(a TextareaWritingsuggestions) *TextareaElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

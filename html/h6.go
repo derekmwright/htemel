@@ -48,115 +48,127 @@ func H6Ternary(condition bool, true htemel.Node, false htemel.Node) *H6Element {
 	return H6(false)
 }
 
-type H6AutocapitalizeEnum string
+type H6Autocapitalize string
 
 const (
-	H6AutocapitalizeEnumCharacters H6AutocapitalizeEnum = "characters"
-	H6AutocapitalizeEnumNone       H6AutocapitalizeEnum = "none"
-	H6AutocapitalizeEnumOff        H6AutocapitalizeEnum = "off"
-	H6AutocapitalizeEnumOn         H6AutocapitalizeEnum = "on"
-	H6AutocapitalizeEnumSentences  H6AutocapitalizeEnum = "sentences"
-	H6AutocapitalizeEnumWords      H6AutocapitalizeEnum = "words"
+	H6AutocapitalizeCharacters H6Autocapitalize = "characters"
+	H6AutocapitalizeNone       H6Autocapitalize = "none"
+	H6AutocapitalizeOff        H6Autocapitalize = "off"
+	H6AutocapitalizeOn         H6Autocapitalize = "on"
+	H6AutocapitalizeSentences  H6Autocapitalize = "sentences"
+	H6AutocapitalizeWords      H6Autocapitalize = "words"
 )
 
-type H6AutocorrectEnum string
+type H6Autocorrect string
 
 const (
-	H6AutocorrectEnumOff   H6AutocorrectEnum = "off"
-	H6AutocorrectEnumOn    H6AutocorrectEnum = "on"
-	H6AutocorrectEnumEmpty H6AutocorrectEnum = ""
+	H6AutocorrectOff   H6Autocorrect = "off"
+	H6AutocorrectOn    H6Autocorrect = "on"
+	H6AutocorrectEmpty H6Autocorrect = ""
 )
 
-type H6ContenteditableEnum string
+type H6Contenteditable string
 
 const (
-	H6ContenteditableEnumPlaintextOnly H6ContenteditableEnum = "plaintext-only"
-	H6ContenteditableEnumTrue          H6ContenteditableEnum = "true"
-	H6ContenteditableEnumFalse         H6ContenteditableEnum = "false"
-	H6ContenteditableEnumEmpty         H6ContenteditableEnum = ""
+	H6ContenteditablePlaintextOnly H6Contenteditable = "plaintext-only"
+	H6ContenteditableTrue          H6Contenteditable = "true"
+	H6ContenteditableFalse         H6Contenteditable = "false"
+	H6ContenteditableEmpty         H6Contenteditable = ""
 )
 
-type H6DirEnum string
+type H6Dir string
 
 const (
-	H6DirEnumAuto H6DirEnum = "auto"
-	H6DirEnumLtr  H6DirEnum = "ltr"
-	H6DirEnumRtl  H6DirEnum = "rtl"
+	H6DirLtr  H6Dir = "ltr"
+	H6DirRtl  H6Dir = "rtl"
+	H6DirAuto H6Dir = "auto"
 )
 
-type H6DraggableEnum string
+type H6Draggable string
 
 const (
-	H6DraggableEnumFalse H6DraggableEnum = "false"
-	H6DraggableEnumTrue  H6DraggableEnum = "true"
+	H6DraggableFalse H6Draggable = "false"
+	H6DraggableTrue  H6Draggable = "true"
 )
 
-type H6EnterkeyhintEnum string
+type H6Enterkeyhint string
 
 const (
-	H6EnterkeyhintEnumDone     H6EnterkeyhintEnum = "done"
-	H6EnterkeyhintEnumEnter    H6EnterkeyhintEnum = "enter"
-	H6EnterkeyhintEnumGo       H6EnterkeyhintEnum = "go"
-	H6EnterkeyhintEnumNext     H6EnterkeyhintEnum = "next"
-	H6EnterkeyhintEnumPrevious H6EnterkeyhintEnum = "previous"
-	H6EnterkeyhintEnumSearch   H6EnterkeyhintEnum = "search"
-	H6EnterkeyhintEnumSend     H6EnterkeyhintEnum = "send"
+	H6EnterkeyhintEnter    H6Enterkeyhint = "enter"
+	H6EnterkeyhintGo       H6Enterkeyhint = "go"
+	H6EnterkeyhintNext     H6Enterkeyhint = "next"
+	H6EnterkeyhintPrevious H6Enterkeyhint = "previous"
+	H6EnterkeyhintSearch   H6Enterkeyhint = "search"
+	H6EnterkeyhintSend     H6Enterkeyhint = "send"
+	H6EnterkeyhintDone     H6Enterkeyhint = "done"
 )
 
-type H6HiddenEnum string
+type H6Hidden string
 
 const (
-	H6HiddenEnumHidden     H6HiddenEnum = "hidden"
-	H6HiddenEnumUntilFound H6HiddenEnum = "until-found"
-	H6HiddenEnumEmpty      H6HiddenEnum = ""
+	H6HiddenHidden     H6Hidden = "hidden"
+	H6HiddenUntilFound H6Hidden = "until-found"
+	H6HiddenEmpty      H6Hidden = ""
 )
 
-type H6InputmodeEnum string
+type H6Inputmode string
 
 const (
-	H6InputmodeEnumText    H6InputmodeEnum = "text"
-	H6InputmodeEnumUrl     H6InputmodeEnum = "url"
-	H6InputmodeEnumDecimal H6InputmodeEnum = "decimal"
-	H6InputmodeEnumEmail   H6InputmodeEnum = "email"
-	H6InputmodeEnumNone    H6InputmodeEnum = "none"
-	H6InputmodeEnumNumeric H6InputmodeEnum = "numeric"
-	H6InputmodeEnumSearch  H6InputmodeEnum = "search"
-	H6InputmodeEnumTel     H6InputmodeEnum = "tel"
+	H6InputmodeText    H6Inputmode = "text"
+	H6InputmodeUrl     H6Inputmode = "url"
+	H6InputmodeDecimal H6Inputmode = "decimal"
+	H6InputmodeEmail   H6Inputmode = "email"
+	H6InputmodeNone    H6Inputmode = "none"
+	H6InputmodeNumeric H6Inputmode = "numeric"
+	H6InputmodeSearch  H6Inputmode = "search"
+	H6InputmodeTel     H6Inputmode = "tel"
 )
 
-type H6SpellcheckEnum string
+type H6Spellcheck string
 
 const (
-	H6SpellcheckEnumFalse H6SpellcheckEnum = "false"
-	H6SpellcheckEnumTrue  H6SpellcheckEnum = "true"
-	H6SpellcheckEnumEmpty H6SpellcheckEnum = ""
+	H6SpellcheckFalse H6Spellcheck = "false"
+	H6SpellcheckTrue  H6Spellcheck = "true"
+	H6SpellcheckEmpty H6Spellcheck = ""
 )
 
-type H6TranslateEnum string
+type H6Translate string
 
 const (
-	H6TranslateEnumNo    H6TranslateEnum = "no"
-	H6TranslateEnumYes   H6TranslateEnum = "yes"
-	H6TranslateEnumEmpty H6TranslateEnum = ""
+	H6TranslateNo    H6Translate = "no"
+	H6TranslateYes   H6Translate = "yes"
+	H6TranslateEmpty H6Translate = ""
 )
 
-type H6WritingsuggestionsEnum string
+type H6Writingsuggestions string
 
 const (
-	H6WritingsuggestionsEnumFalse H6WritingsuggestionsEnum = "false"
-	H6WritingsuggestionsEnumTrue  H6WritingsuggestionsEnum = "true"
-	H6WritingsuggestionsEnumEmpty H6WritingsuggestionsEnum = ""
+	H6WritingsuggestionsFalse H6Writingsuggestions = "false"
+	H6WritingsuggestionsTrue  H6Writingsuggestions = "true"
+	H6WritingsuggestionsEmpty H6Writingsuggestions = ""
 )
 
 type h6Attrs map[string]any
 
-func (e *H6Element) Autocapitalize(a H6AutocapitalizeEnum) *H6Element {
+func (e *H6Element) AriaUnsafe(name string, s string) *H6Element {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *H6Element) Aria(name string, s string) *H6Element {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *H6Element) Autocapitalize(a H6Autocapitalize) *H6Element {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *H6Element) Autocorrect(a H6AutocorrectEnum) *H6Element {
+func (e *H6Element) Autocorrect(a H6Autocorrect) *H6Element {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *H6Element) Class(s ...string) *H6Element {
 	return e
 }
 
-func (e *H6Element) Contenteditable(a H6ContenteditableEnum) *H6Element {
+func (e *H6Element) Contenteditable(a H6Contenteditable) *H6Element {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *H6Element) Data(name string, s string) *H6Element {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *H6Element) Dir(a H6DirEnum) *H6Element {
+func (e *H6Element) Dir(a H6Dir) *H6Element {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *H6Element) Draggable(a H6DraggableEnum) *H6Element {
+func (e *H6Element) Draggable(a H6Draggable) *H6Element {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *H6Element) Enterkeyhint(a H6EnterkeyhintEnum) *H6Element {
+func (e *H6Element) Enterkeyhint(a H6Enterkeyhint) *H6Element {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *H6Element) Hidden(a H6HiddenEnum) *H6Element {
+func (e *H6Element) Hidden(a H6Hidden) *H6Element {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *H6Element) Inert(b bool) *H6Element {
 	return e
 }
 
-func (e *H6Element) Inputmode(a H6InputmodeEnum) *H6Element {
+func (e *H6Element) Inputmode(a H6Inputmode) *H6Element {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *H6Element) Slot(s string) *H6Element {
 	return e
 }
 
-func (e *H6Element) Spellcheck(a H6SpellcheckEnum) *H6Element {
+func (e *H6Element) Spellcheck(a H6Spellcheck) *H6Element {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *H6Element) Title(s string) *H6Element {
 	return e
 }
 
-func (e *H6Element) Translate(a H6TranslateEnum) *H6Element {
+func (e *H6Element) Translate(a H6Translate) *H6Element {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *H6Element) Writingsuggestions(a H6WritingsuggestionsEnum) *H6Element {
+func (e *H6Element) Writingsuggestions(a H6Writingsuggestions) *H6Element {
 	e.attributes["writingsuggestions"] = a
 
 	return e

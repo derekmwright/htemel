@@ -48,115 +48,127 @@ func PictureTernary(condition bool, true htemel.Node, false htemel.Node) *Pictur
 	return Picture(false)
 }
 
-type PictureAutocapitalizeEnum string
+type PictureAutocapitalize string
 
 const (
-	PictureAutocapitalizeEnumSentences  PictureAutocapitalizeEnum = "sentences"
-	PictureAutocapitalizeEnumWords      PictureAutocapitalizeEnum = "words"
-	PictureAutocapitalizeEnumCharacters PictureAutocapitalizeEnum = "characters"
-	PictureAutocapitalizeEnumNone       PictureAutocapitalizeEnum = "none"
-	PictureAutocapitalizeEnumOff        PictureAutocapitalizeEnum = "off"
-	PictureAutocapitalizeEnumOn         PictureAutocapitalizeEnum = "on"
+	PictureAutocapitalizeWords      PictureAutocapitalize = "words"
+	PictureAutocapitalizeCharacters PictureAutocapitalize = "characters"
+	PictureAutocapitalizeNone       PictureAutocapitalize = "none"
+	PictureAutocapitalizeOff        PictureAutocapitalize = "off"
+	PictureAutocapitalizeOn         PictureAutocapitalize = "on"
+	PictureAutocapitalizeSentences  PictureAutocapitalize = "sentences"
 )
 
-type PictureAutocorrectEnum string
+type PictureAutocorrect string
 
 const (
-	PictureAutocorrectEnumOff   PictureAutocorrectEnum = "off"
-	PictureAutocorrectEnumOn    PictureAutocorrectEnum = "on"
-	PictureAutocorrectEnumEmpty PictureAutocorrectEnum = ""
+	PictureAutocorrectOn    PictureAutocorrect = "on"
+	PictureAutocorrectOff   PictureAutocorrect = "off"
+	PictureAutocorrectEmpty PictureAutocorrect = ""
 )
 
-type PictureContenteditableEnum string
+type PictureContenteditable string
 
 const (
-	PictureContenteditableEnumTrue          PictureContenteditableEnum = "true"
-	PictureContenteditableEnumFalse         PictureContenteditableEnum = "false"
-	PictureContenteditableEnumPlaintextOnly PictureContenteditableEnum = "plaintext-only"
-	PictureContenteditableEnumEmpty         PictureContenteditableEnum = ""
+	PictureContenteditableFalse         PictureContenteditable = "false"
+	PictureContenteditablePlaintextOnly PictureContenteditable = "plaintext-only"
+	PictureContenteditableTrue          PictureContenteditable = "true"
+	PictureContenteditableEmpty         PictureContenteditable = ""
 )
 
-type PictureDirEnum string
+type PictureDir string
 
 const (
-	PictureDirEnumAuto PictureDirEnum = "auto"
-	PictureDirEnumLtr  PictureDirEnum = "ltr"
-	PictureDirEnumRtl  PictureDirEnum = "rtl"
+	PictureDirAuto PictureDir = "auto"
+	PictureDirLtr  PictureDir = "ltr"
+	PictureDirRtl  PictureDir = "rtl"
 )
 
-type PictureDraggableEnum string
+type PictureDraggable string
 
 const (
-	PictureDraggableEnumFalse PictureDraggableEnum = "false"
-	PictureDraggableEnumTrue  PictureDraggableEnum = "true"
+	PictureDraggableFalse PictureDraggable = "false"
+	PictureDraggableTrue  PictureDraggable = "true"
 )
 
-type PictureEnterkeyhintEnum string
+type PictureEnterkeyhint string
 
 const (
-	PictureEnterkeyhintEnumPrevious PictureEnterkeyhintEnum = "previous"
-	PictureEnterkeyhintEnumSearch   PictureEnterkeyhintEnum = "search"
-	PictureEnterkeyhintEnumSend     PictureEnterkeyhintEnum = "send"
-	PictureEnterkeyhintEnumDone     PictureEnterkeyhintEnum = "done"
-	PictureEnterkeyhintEnumEnter    PictureEnterkeyhintEnum = "enter"
-	PictureEnterkeyhintEnumGo       PictureEnterkeyhintEnum = "go"
-	PictureEnterkeyhintEnumNext     PictureEnterkeyhintEnum = "next"
+	PictureEnterkeyhintDone     PictureEnterkeyhint = "done"
+	PictureEnterkeyhintEnter    PictureEnterkeyhint = "enter"
+	PictureEnterkeyhintGo       PictureEnterkeyhint = "go"
+	PictureEnterkeyhintNext     PictureEnterkeyhint = "next"
+	PictureEnterkeyhintPrevious PictureEnterkeyhint = "previous"
+	PictureEnterkeyhintSearch   PictureEnterkeyhint = "search"
+	PictureEnterkeyhintSend     PictureEnterkeyhint = "send"
 )
 
-type PictureHiddenEnum string
+type PictureHidden string
 
 const (
-	PictureHiddenEnumHidden     PictureHiddenEnum = "hidden"
-	PictureHiddenEnumUntilFound PictureHiddenEnum = "until-found"
-	PictureHiddenEnumEmpty      PictureHiddenEnum = ""
+	PictureHiddenHidden     PictureHidden = "hidden"
+	PictureHiddenUntilFound PictureHidden = "until-found"
+	PictureHiddenEmpty      PictureHidden = ""
 )
 
-type PictureInputmodeEnum string
+type PictureInputmode string
 
 const (
-	PictureInputmodeEnumNumeric PictureInputmodeEnum = "numeric"
-	PictureInputmodeEnumSearch  PictureInputmodeEnum = "search"
-	PictureInputmodeEnumTel     PictureInputmodeEnum = "tel"
-	PictureInputmodeEnumText    PictureInputmodeEnum = "text"
-	PictureInputmodeEnumUrl     PictureInputmodeEnum = "url"
-	PictureInputmodeEnumDecimal PictureInputmodeEnum = "decimal"
-	PictureInputmodeEnumEmail   PictureInputmodeEnum = "email"
-	PictureInputmodeEnumNone    PictureInputmodeEnum = "none"
+	PictureInputmodeEmail   PictureInputmode = "email"
+	PictureInputmodeNone    PictureInputmode = "none"
+	PictureInputmodeNumeric PictureInputmode = "numeric"
+	PictureInputmodeSearch  PictureInputmode = "search"
+	PictureInputmodeTel     PictureInputmode = "tel"
+	PictureInputmodeText    PictureInputmode = "text"
+	PictureInputmodeUrl     PictureInputmode = "url"
+	PictureInputmodeDecimal PictureInputmode = "decimal"
 )
 
-type PictureSpellcheckEnum string
+type PictureSpellcheck string
 
 const (
-	PictureSpellcheckEnumFalse PictureSpellcheckEnum = "false"
-	PictureSpellcheckEnumTrue  PictureSpellcheckEnum = "true"
-	PictureSpellcheckEnumEmpty PictureSpellcheckEnum = ""
+	PictureSpellcheckFalse PictureSpellcheck = "false"
+	PictureSpellcheckTrue  PictureSpellcheck = "true"
+	PictureSpellcheckEmpty PictureSpellcheck = ""
 )
 
-type PictureTranslateEnum string
+type PictureTranslate string
 
 const (
-	PictureTranslateEnumNo    PictureTranslateEnum = "no"
-	PictureTranslateEnumYes   PictureTranslateEnum = "yes"
-	PictureTranslateEnumEmpty PictureTranslateEnum = ""
+	PictureTranslateNo    PictureTranslate = "no"
+	PictureTranslateYes   PictureTranslate = "yes"
+	PictureTranslateEmpty PictureTranslate = ""
 )
 
-type PictureWritingsuggestionsEnum string
+type PictureWritingsuggestions string
 
 const (
-	PictureWritingsuggestionsEnumFalse PictureWritingsuggestionsEnum = "false"
-	PictureWritingsuggestionsEnumTrue  PictureWritingsuggestionsEnum = "true"
-	PictureWritingsuggestionsEnumEmpty PictureWritingsuggestionsEnum = ""
+	PictureWritingsuggestionsFalse PictureWritingsuggestions = "false"
+	PictureWritingsuggestionsTrue  PictureWritingsuggestions = "true"
+	PictureWritingsuggestionsEmpty PictureWritingsuggestions = ""
 )
 
 type pictureAttrs map[string]any
 
-func (e *PictureElement) Autocapitalize(a PictureAutocapitalizeEnum) *PictureElement {
+func (e *PictureElement) AriaUnsafe(name string, s string) *PictureElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *PictureElement) Aria(name string, s string) *PictureElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *PictureElement) Autocapitalize(a PictureAutocapitalize) *PictureElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *PictureElement) Autocorrect(a PictureAutocorrectEnum) *PictureElement {
+func (e *PictureElement) Autocorrect(a PictureAutocorrect) *PictureElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *PictureElement) Class(s ...string) *PictureElement {
 	return e
 }
 
-func (e *PictureElement) Contenteditable(a PictureContenteditableEnum) *PictureElement {
+func (e *PictureElement) Contenteditable(a PictureContenteditable) *PictureElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *PictureElement) Data(name string, s string) *PictureElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *PictureElement) Dir(a PictureDirEnum) *PictureElement {
+func (e *PictureElement) Dir(a PictureDir) *PictureElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *PictureElement) Draggable(a PictureDraggableEnum) *PictureElement {
+func (e *PictureElement) Draggable(a PictureDraggable) *PictureElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *PictureElement) Enterkeyhint(a PictureEnterkeyhintEnum) *PictureElement {
+func (e *PictureElement) Enterkeyhint(a PictureEnterkeyhint) *PictureElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *PictureElement) Hidden(a PictureHiddenEnum) *PictureElement {
+func (e *PictureElement) Hidden(a PictureHidden) *PictureElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *PictureElement) Inert(b bool) *PictureElement {
 	return e
 }
 
-func (e *PictureElement) Inputmode(a PictureInputmodeEnum) *PictureElement {
+func (e *PictureElement) Inputmode(a PictureInputmode) *PictureElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *PictureElement) Slot(s string) *PictureElement {
 	return e
 }
 
-func (e *PictureElement) Spellcheck(a PictureSpellcheckEnum) *PictureElement {
+func (e *PictureElement) Spellcheck(a PictureSpellcheck) *PictureElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *PictureElement) Title(s string) *PictureElement {
 	return e
 }
 
-func (e *PictureElement) Translate(a PictureTranslateEnum) *PictureElement {
+func (e *PictureElement) Translate(a PictureTranslate) *PictureElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *PictureElement) Writingsuggestions(a PictureWritingsuggestionsEnum) *PictureElement {
+func (e *PictureElement) Writingsuggestions(a PictureWritingsuggestions) *PictureElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

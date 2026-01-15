@@ -39,154 +39,154 @@ func InputIf(condition bool) *InputElement {
 	}
 }
 
-type InputColorspaceEnum string
+type InputColorspace string
 
 const (
-	InputColorspaceEnumDisplayP3   InputColorspaceEnum = "display-p3"
-	InputColorspaceEnumLimitedSrgb InputColorspaceEnum = "limited-srgb"
+	InputColorspaceDisplayP3   InputColorspace = "display-p3"
+	InputColorspaceLimitedSrgb InputColorspace = "limited-srgb"
 )
 
-type InputFormmethodEnum string
+type InputFormmethod string
 
 const (
-	InputFormmethodEnumPost   InputFormmethodEnum = "post"
-	InputFormmethodEnumDialog InputFormmethodEnum = "dialog"
-	InputFormmethodEnumGet    InputFormmethodEnum = "get"
+	InputFormmethodDialog InputFormmethod = "dialog"
+	InputFormmethodGet    InputFormmethod = "get"
+	InputFormmethodPost   InputFormmethod = "post"
 )
 
-type InputPopovertargetactionEnum string
+type InputPopovertargetaction string
 
 const (
-	InputPopovertargetactionEnumHide   InputPopovertargetactionEnum = "hide"
-	InputPopovertargetactionEnumShow   InputPopovertargetactionEnum = "show"
-	InputPopovertargetactionEnumToggle InputPopovertargetactionEnum = "toggle"
+	InputPopovertargetactionShow   InputPopovertargetaction = "show"
+	InputPopovertargetactionToggle InputPopovertargetaction = "toggle"
+	InputPopovertargetactionHide   InputPopovertargetaction = "hide"
 )
 
-type InputTypeEnum string
+type InputType string
 
 const (
-	InputTypeEnumColor         InputTypeEnum = "color"
-	InputTypeEnumDate          InputTypeEnum = "date"
-	InputTypeEnumDatetimeLocal InputTypeEnum = "datetime-local"
-	InputTypeEnumText          InputTypeEnum = "text"
-	InputTypeEnumUrl           InputTypeEnum = "url"
-	InputTypeEnumCheckbox      InputTypeEnum = "checkbox"
-	InputTypeEnumHidden        InputTypeEnum = "hidden"
-	InputTypeEnumNumber        InputTypeEnum = "number"
-	InputTypeEnumSearch        InputTypeEnum = "search"
-	InputTypeEnumTime          InputTypeEnum = "time"
-	InputTypeEnumEmail         InputTypeEnum = "email"
-	InputTypeEnumFile          InputTypeEnum = "file"
-	InputTypeEnumPassword      InputTypeEnum = "password"
-	InputTypeEnumRange         InputTypeEnum = "range"
-	InputTypeEnumTel           InputTypeEnum = "tel"
-	InputTypeEnumWeek          InputTypeEnum = "week"
-	InputTypeEnumImage         InputTypeEnum = "image"
-	InputTypeEnumMonth         InputTypeEnum = "month"
-	InputTypeEnumRadio         InputTypeEnum = "radio"
-	InputTypeEnumReset         InputTypeEnum = "reset"
-	InputTypeEnumSubmit        InputTypeEnum = "submit"
-	InputTypeEnumButton        InputTypeEnum = "button"
+	InputTypeTel           InputType = "tel"
+	InputTypeText          InputType = "text"
+	InputTypeCheckbox      InputType = "checkbox"
+	InputTypeColor         InputType = "color"
+	InputTypeFile          InputType = "file"
+	InputTypeHidden        InputType = "hidden"
+	InputTypeImage         InputType = "image"
+	InputTypeReset         InputType = "reset"
+	InputTypeSearch        InputType = "search"
+	InputTypeRange         InputType = "range"
+	InputTypeWeek          InputType = "week"
+	InputTypeRadio         InputType = "radio"
+	InputTypeEmail         InputType = "email"
+	InputTypeMonth         InputType = "month"
+	InputTypeNumber        InputType = "number"
+	InputTypeTime          InputType = "time"
+	InputTypeUrl           InputType = "url"
+	InputTypeButton        InputType = "button"
+	InputTypeDate          InputType = "date"
+	InputTypeDatetimeLocal InputType = "datetime-local"
+	InputTypePassword      InputType = "password"
+	InputTypeSubmit        InputType = "submit"
 )
 
-type InputAutocapitalizeEnum string
+type InputAutocapitalize string
 
 const (
-	InputAutocapitalizeEnumOff        InputAutocapitalizeEnum = "off"
-	InputAutocapitalizeEnumOn         InputAutocapitalizeEnum = "on"
-	InputAutocapitalizeEnumSentences  InputAutocapitalizeEnum = "sentences"
-	InputAutocapitalizeEnumWords      InputAutocapitalizeEnum = "words"
-	InputAutocapitalizeEnumCharacters InputAutocapitalizeEnum = "characters"
-	InputAutocapitalizeEnumNone       InputAutocapitalizeEnum = "none"
+	InputAutocapitalizeCharacters InputAutocapitalize = "characters"
+	InputAutocapitalizeNone       InputAutocapitalize = "none"
+	InputAutocapitalizeOff        InputAutocapitalize = "off"
+	InputAutocapitalizeOn         InputAutocapitalize = "on"
+	InputAutocapitalizeSentences  InputAutocapitalize = "sentences"
+	InputAutocapitalizeWords      InputAutocapitalize = "words"
 )
 
-type InputAutocorrectEnum string
+type InputAutocorrect string
 
 const (
-	InputAutocorrectEnumOff   InputAutocorrectEnum = "off"
-	InputAutocorrectEnumOn    InputAutocorrectEnum = "on"
-	InputAutocorrectEnumEmpty InputAutocorrectEnum = ""
+	InputAutocorrectOff   InputAutocorrect = "off"
+	InputAutocorrectOn    InputAutocorrect = "on"
+	InputAutocorrectEmpty InputAutocorrect = ""
 )
 
-type InputContenteditableEnum string
+type InputContenteditable string
 
 const (
-	InputContenteditableEnumPlaintextOnly InputContenteditableEnum = "plaintext-only"
-	InputContenteditableEnumTrue          InputContenteditableEnum = "true"
-	InputContenteditableEnumFalse         InputContenteditableEnum = "false"
-	InputContenteditableEnumEmpty         InputContenteditableEnum = ""
+	InputContenteditablePlaintextOnly InputContenteditable = "plaintext-only"
+	InputContenteditableTrue          InputContenteditable = "true"
+	InputContenteditableFalse         InputContenteditable = "false"
+	InputContenteditableEmpty         InputContenteditable = ""
 )
 
-type InputDirEnum string
+type InputDir string
 
 const (
-	InputDirEnumRtl  InputDirEnum = "rtl"
-	InputDirEnumAuto InputDirEnum = "auto"
-	InputDirEnumLtr  InputDirEnum = "ltr"
+	InputDirAuto InputDir = "auto"
+	InputDirLtr  InputDir = "ltr"
+	InputDirRtl  InputDir = "rtl"
 )
 
-type InputDraggableEnum string
+type InputDraggable string
 
 const (
-	InputDraggableEnumTrue  InputDraggableEnum = "true"
-	InputDraggableEnumFalse InputDraggableEnum = "false"
+	InputDraggableFalse InputDraggable = "false"
+	InputDraggableTrue  InputDraggable = "true"
 )
 
-type InputEnterkeyhintEnum string
+type InputEnterkeyhint string
 
 const (
-	InputEnterkeyhintEnumGo       InputEnterkeyhintEnum = "go"
-	InputEnterkeyhintEnumNext     InputEnterkeyhintEnum = "next"
-	InputEnterkeyhintEnumPrevious InputEnterkeyhintEnum = "previous"
-	InputEnterkeyhintEnumSearch   InputEnterkeyhintEnum = "search"
-	InputEnterkeyhintEnumSend     InputEnterkeyhintEnum = "send"
-	InputEnterkeyhintEnumDone     InputEnterkeyhintEnum = "done"
-	InputEnterkeyhintEnumEnter    InputEnterkeyhintEnum = "enter"
+	InputEnterkeyhintEnter    InputEnterkeyhint = "enter"
+	InputEnterkeyhintGo       InputEnterkeyhint = "go"
+	InputEnterkeyhintNext     InputEnterkeyhint = "next"
+	InputEnterkeyhintPrevious InputEnterkeyhint = "previous"
+	InputEnterkeyhintSearch   InputEnterkeyhint = "search"
+	InputEnterkeyhintSend     InputEnterkeyhint = "send"
+	InputEnterkeyhintDone     InputEnterkeyhint = "done"
 )
 
-type InputHiddenEnum string
+type InputHidden string
 
 const (
-	InputHiddenEnumUntilFound InputHiddenEnum = "until-found"
-	InputHiddenEnumHidden     InputHiddenEnum = "hidden"
-	InputHiddenEnumEmpty      InputHiddenEnum = ""
+	InputHiddenHidden     InputHidden = "hidden"
+	InputHiddenUntilFound InputHidden = "until-found"
+	InputHiddenEmpty      InputHidden = ""
 )
 
-type InputInputmodeEnum string
+type InputInputmode string
 
 const (
-	InputInputmodeEnumText    InputInputmodeEnum = "text"
-	InputInputmodeEnumUrl     InputInputmodeEnum = "url"
-	InputInputmodeEnumDecimal InputInputmodeEnum = "decimal"
-	InputInputmodeEnumEmail   InputInputmodeEnum = "email"
-	InputInputmodeEnumNone    InputInputmodeEnum = "none"
-	InputInputmodeEnumNumeric InputInputmodeEnum = "numeric"
-	InputInputmodeEnumSearch  InputInputmodeEnum = "search"
-	InputInputmodeEnumTel     InputInputmodeEnum = "tel"
+	InputInputmodeDecimal InputInputmode = "decimal"
+	InputInputmodeEmail   InputInputmode = "email"
+	InputInputmodeNone    InputInputmode = "none"
+	InputInputmodeNumeric InputInputmode = "numeric"
+	InputInputmodeSearch  InputInputmode = "search"
+	InputInputmodeTel     InputInputmode = "tel"
+	InputInputmodeText    InputInputmode = "text"
+	InputInputmodeUrl     InputInputmode = "url"
 )
 
-type InputSpellcheckEnum string
+type InputSpellcheck string
 
 const (
-	InputSpellcheckEnumFalse InputSpellcheckEnum = "false"
-	InputSpellcheckEnumTrue  InputSpellcheckEnum = "true"
-	InputSpellcheckEnumEmpty InputSpellcheckEnum = ""
+	InputSpellcheckFalse InputSpellcheck = "false"
+	InputSpellcheckTrue  InputSpellcheck = "true"
+	InputSpellcheckEmpty InputSpellcheck = ""
 )
 
-type InputTranslateEnum string
+type InputTranslate string
 
 const (
-	InputTranslateEnumYes   InputTranslateEnum = "yes"
-	InputTranslateEnumNo    InputTranslateEnum = "no"
-	InputTranslateEnumEmpty InputTranslateEnum = ""
+	InputTranslateNo    InputTranslate = "no"
+	InputTranslateYes   InputTranslate = "yes"
+	InputTranslateEmpty InputTranslate = ""
 )
 
-type InputWritingsuggestionsEnum string
+type InputWritingsuggestions string
 
 const (
-	InputWritingsuggestionsEnumTrue  InputWritingsuggestionsEnum = "true"
-	InputWritingsuggestionsEnumFalse InputWritingsuggestionsEnum = "false"
-	InputWritingsuggestionsEnumEmpty InputWritingsuggestionsEnum = ""
+	InputWritingsuggestionsFalse InputWritingsuggestions = "false"
+	InputWritingsuggestionsTrue  InputWritingsuggestions = "true"
+	InputWritingsuggestionsEmpty InputWritingsuggestions = ""
 )
 
 type inputAttrs map[string]any
@@ -221,7 +221,7 @@ func (e *InputElement) Checked(b bool) *InputElement {
 	return e
 }
 
-func (e *InputElement) Colorspace(a InputColorspaceEnum) *InputElement {
+func (e *InputElement) Colorspace(a InputColorspace) *InputElement {
 	e.attributes["colorspace"] = a
 
 	return e
@@ -257,7 +257,7 @@ func (e *InputElement) Formenctype(s string) *InputElement {
 	return e
 }
 
-func (e *InputElement) Formmethod(a InputFormmethodEnum) *InputElement {
+func (e *InputElement) Formmethod(a InputFormmethod) *InputElement {
 	e.attributes["formmethod"] = a
 
 	return e
@@ -341,7 +341,7 @@ func (e *InputElement) Popovertarget(s string) *InputElement {
 	return e
 }
 
-func (e *InputElement) Popovertargetaction(a InputPopovertargetactionEnum) *InputElement {
+func (e *InputElement) Popovertargetaction(a InputPopovertargetaction) *InputElement {
 	e.attributes["popovertargetaction"] = a
 
 	return e
@@ -377,7 +377,7 @@ func (e *InputElement) Step(s string) *InputElement {
 	return e
 }
 
-func (e *InputElement) Type(a InputTypeEnum) *InputElement {
+func (e *InputElement) Type(a InputType) *InputElement {
 	e.attributes["type"] = a
 
 	return e
@@ -395,13 +395,25 @@ func (e *InputElement) Width(i int) *InputElement {
 	return e
 }
 
-func (e *InputElement) Autocapitalize(a InputAutocapitalizeEnum) *InputElement {
+func (e *InputElement) AriaUnsafe(name string, s string) *InputElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *InputElement) Aria(name string, s string) *InputElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *InputElement) Autocapitalize(a InputAutocapitalize) *InputElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *InputElement) Autocorrect(a InputAutocorrectEnum) *InputElement {
+func (e *InputElement) Autocorrect(a InputAutocorrect) *InputElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -419,7 +431,7 @@ func (e *InputElement) Class(s ...string) *InputElement {
 	return e
 }
 
-func (e *InputElement) Contenteditable(a InputContenteditableEnum) *InputElement {
+func (e *InputElement) Contenteditable(a InputContenteditable) *InputElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -437,25 +449,25 @@ func (e *InputElement) Data(name string, s string) *InputElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *InputElement) Dir(a InputDirEnum) *InputElement {
+func (e *InputElement) Dir(a InputDir) *InputElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *InputElement) Draggable(a InputDraggableEnum) *InputElement {
+func (e *InputElement) Draggable(a InputDraggable) *InputElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *InputElement) Enterkeyhint(a InputEnterkeyhintEnum) *InputElement {
+func (e *InputElement) Enterkeyhint(a InputEnterkeyhint) *InputElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *InputElement) Hidden(a InputHiddenEnum) *InputElement {
+func (e *InputElement) Hidden(a InputHidden) *InputElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -473,7 +485,7 @@ func (e *InputElement) Inert(b bool) *InputElement {
 	return e
 }
 
-func (e *InputElement) Inputmode(a InputInputmodeEnum) *InputElement {
+func (e *InputElement) Inputmode(a InputInputmode) *InputElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -533,7 +545,7 @@ func (e *InputElement) Slot(s string) *InputElement {
 	return e
 }
 
-func (e *InputElement) Spellcheck(a InputSpellcheckEnum) *InputElement {
+func (e *InputElement) Spellcheck(a InputSpellcheck) *InputElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -557,13 +569,13 @@ func (e *InputElement) Title(s string) *InputElement {
 	return e
 }
 
-func (e *InputElement) Translate(a InputTranslateEnum) *InputElement {
+func (e *InputElement) Translate(a InputTranslate) *InputElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *InputElement) Writingsuggestions(a InputWritingsuggestionsEnum) *InputElement {
+func (e *InputElement) Writingsuggestions(a InputWritingsuggestions) *InputElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

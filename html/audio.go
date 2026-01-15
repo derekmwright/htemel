@@ -48,121 +48,121 @@ func AudioTernary(condition bool, true htemel.Node, false htemel.Node) *AudioEle
 	return Audio(false)
 }
 
-type AudioCrossoriginEnum string
+type AudioCrossorigin string
 
 const (
-	AudioCrossoriginEnumAnonymous      AudioCrossoriginEnum = "anonymous"
-	AudioCrossoriginEnumUseCredentials AudioCrossoriginEnum = "use-credentials"
-	AudioCrossoriginEnumEmpty          AudioCrossoriginEnum = ""
+	AudioCrossoriginAnonymous      AudioCrossorigin = "anonymous"
+	AudioCrossoriginUseCredentials AudioCrossorigin = "use-credentials"
+	AudioCrossoriginEmpty          AudioCrossorigin = ""
 )
 
-type AudioPreloadEnum string
+type AudioPreload string
 
 const (
-	AudioPreloadEnumAuto     AudioPreloadEnum = "auto"
-	AudioPreloadEnumMetadata AudioPreloadEnum = "metadata"
-	AudioPreloadEnumNone     AudioPreloadEnum = "none"
-	AudioPreloadEnumEmpty    AudioPreloadEnum = ""
+	AudioPreloadAuto     AudioPreload = "auto"
+	AudioPreloadMetadata AudioPreload = "metadata"
+	AudioPreloadNone     AudioPreload = "none"
+	AudioPreloadEmpty    AudioPreload = ""
 )
 
-type AudioAutocapitalizeEnum string
+type AudioAutocapitalize string
 
 const (
-	AudioAutocapitalizeEnumOff        AudioAutocapitalizeEnum = "off"
-	AudioAutocapitalizeEnumOn         AudioAutocapitalizeEnum = "on"
-	AudioAutocapitalizeEnumSentences  AudioAutocapitalizeEnum = "sentences"
-	AudioAutocapitalizeEnumWords      AudioAutocapitalizeEnum = "words"
-	AudioAutocapitalizeEnumCharacters AudioAutocapitalizeEnum = "characters"
-	AudioAutocapitalizeEnumNone       AudioAutocapitalizeEnum = "none"
+	AudioAutocapitalizeCharacters AudioAutocapitalize = "characters"
+	AudioAutocapitalizeNone       AudioAutocapitalize = "none"
+	AudioAutocapitalizeOff        AudioAutocapitalize = "off"
+	AudioAutocapitalizeOn         AudioAutocapitalize = "on"
+	AudioAutocapitalizeSentences  AudioAutocapitalize = "sentences"
+	AudioAutocapitalizeWords      AudioAutocapitalize = "words"
 )
 
-type AudioAutocorrectEnum string
+type AudioAutocorrect string
 
 const (
-	AudioAutocorrectEnumOff   AudioAutocorrectEnum = "off"
-	AudioAutocorrectEnumOn    AudioAutocorrectEnum = "on"
-	AudioAutocorrectEnumEmpty AudioAutocorrectEnum = ""
+	AudioAutocorrectOff   AudioAutocorrect = "off"
+	AudioAutocorrectOn    AudioAutocorrect = "on"
+	AudioAutocorrectEmpty AudioAutocorrect = ""
 )
 
-type AudioContenteditableEnum string
+type AudioContenteditable string
 
 const (
-	AudioContenteditableEnumFalse         AudioContenteditableEnum = "false"
-	AudioContenteditableEnumPlaintextOnly AudioContenteditableEnum = "plaintext-only"
-	AudioContenteditableEnumTrue          AudioContenteditableEnum = "true"
-	AudioContenteditableEnumEmpty         AudioContenteditableEnum = ""
+	AudioContenteditablePlaintextOnly AudioContenteditable = "plaintext-only"
+	AudioContenteditableTrue          AudioContenteditable = "true"
+	AudioContenteditableFalse         AudioContenteditable = "false"
+	AudioContenteditableEmpty         AudioContenteditable = ""
 )
 
-type AudioDirEnum string
+type AudioDir string
 
 const (
-	AudioDirEnumAuto AudioDirEnum = "auto"
-	AudioDirEnumLtr  AudioDirEnum = "ltr"
-	AudioDirEnumRtl  AudioDirEnum = "rtl"
+	AudioDirAuto AudioDir = "auto"
+	AudioDirLtr  AudioDir = "ltr"
+	AudioDirRtl  AudioDir = "rtl"
 )
 
-type AudioDraggableEnum string
+type AudioDraggable string
 
 const (
-	AudioDraggableEnumFalse AudioDraggableEnum = "false"
-	AudioDraggableEnumTrue  AudioDraggableEnum = "true"
+	AudioDraggableFalse AudioDraggable = "false"
+	AudioDraggableTrue  AudioDraggable = "true"
 )
 
-type AudioEnterkeyhintEnum string
+type AudioEnterkeyhint string
 
 const (
-	AudioEnterkeyhintEnumPrevious AudioEnterkeyhintEnum = "previous"
-	AudioEnterkeyhintEnumSearch   AudioEnterkeyhintEnum = "search"
-	AudioEnterkeyhintEnumSend     AudioEnterkeyhintEnum = "send"
-	AudioEnterkeyhintEnumDone     AudioEnterkeyhintEnum = "done"
-	AudioEnterkeyhintEnumEnter    AudioEnterkeyhintEnum = "enter"
-	AudioEnterkeyhintEnumGo       AudioEnterkeyhintEnum = "go"
-	AudioEnterkeyhintEnumNext     AudioEnterkeyhintEnum = "next"
+	AudioEnterkeyhintSend     AudioEnterkeyhint = "send"
+	AudioEnterkeyhintDone     AudioEnterkeyhint = "done"
+	AudioEnterkeyhintEnter    AudioEnterkeyhint = "enter"
+	AudioEnterkeyhintGo       AudioEnterkeyhint = "go"
+	AudioEnterkeyhintNext     AudioEnterkeyhint = "next"
+	AudioEnterkeyhintPrevious AudioEnterkeyhint = "previous"
+	AudioEnterkeyhintSearch   AudioEnterkeyhint = "search"
 )
 
-type AudioHiddenEnum string
+type AudioHidden string
 
 const (
-	AudioHiddenEnumHidden     AudioHiddenEnum = "hidden"
-	AudioHiddenEnumUntilFound AudioHiddenEnum = "until-found"
-	AudioHiddenEnumEmpty      AudioHiddenEnum = ""
+	AudioHiddenHidden     AudioHidden = "hidden"
+	AudioHiddenUntilFound AudioHidden = "until-found"
+	AudioHiddenEmpty      AudioHidden = ""
 )
 
-type AudioInputmodeEnum string
+type AudioInputmode string
 
 const (
-	AudioInputmodeEnumNone    AudioInputmodeEnum = "none"
-	AudioInputmodeEnumNumeric AudioInputmodeEnum = "numeric"
-	AudioInputmodeEnumSearch  AudioInputmodeEnum = "search"
-	AudioInputmodeEnumTel     AudioInputmodeEnum = "tel"
-	AudioInputmodeEnumText    AudioInputmodeEnum = "text"
-	AudioInputmodeEnumUrl     AudioInputmodeEnum = "url"
-	AudioInputmodeEnumDecimal AudioInputmodeEnum = "decimal"
-	AudioInputmodeEnumEmail   AudioInputmodeEnum = "email"
+	AudioInputmodeNumeric AudioInputmode = "numeric"
+	AudioInputmodeSearch  AudioInputmode = "search"
+	AudioInputmodeTel     AudioInputmode = "tel"
+	AudioInputmodeText    AudioInputmode = "text"
+	AudioInputmodeUrl     AudioInputmode = "url"
+	AudioInputmodeDecimal AudioInputmode = "decimal"
+	AudioInputmodeEmail   AudioInputmode = "email"
+	AudioInputmodeNone    AudioInputmode = "none"
 )
 
-type AudioSpellcheckEnum string
+type AudioSpellcheck string
 
 const (
-	AudioSpellcheckEnumFalse AudioSpellcheckEnum = "false"
-	AudioSpellcheckEnumTrue  AudioSpellcheckEnum = "true"
-	AudioSpellcheckEnumEmpty AudioSpellcheckEnum = ""
+	AudioSpellcheckTrue  AudioSpellcheck = "true"
+	AudioSpellcheckFalse AudioSpellcheck = "false"
+	AudioSpellcheckEmpty AudioSpellcheck = ""
 )
 
-type AudioTranslateEnum string
+type AudioTranslate string
 
 const (
-	AudioTranslateEnumNo    AudioTranslateEnum = "no"
-	AudioTranslateEnumYes   AudioTranslateEnum = "yes"
-	AudioTranslateEnumEmpty AudioTranslateEnum = ""
+	AudioTranslateNo    AudioTranslate = "no"
+	AudioTranslateYes   AudioTranslate = "yes"
+	AudioTranslateEmpty AudioTranslate = ""
 )
 
-type AudioWritingsuggestionsEnum string
+type AudioWritingsuggestions string
 
 const (
-	AudioWritingsuggestionsEnumFalse AudioWritingsuggestionsEnum = "false"
-	AudioWritingsuggestionsEnumTrue  AudioWritingsuggestionsEnum = "true"
-	AudioWritingsuggestionsEnumEmpty AudioWritingsuggestionsEnum = ""
+	AudioWritingsuggestionsTrue  AudioWritingsuggestions = "true"
+	AudioWritingsuggestionsFalse AudioWritingsuggestions = "false"
+	AudioWritingsuggestionsEmpty AudioWritingsuggestions = ""
 )
 
 type audioAttrs map[string]any
@@ -173,13 +173,13 @@ func (e *AudioElement) Src(s string) *AudioElement {
 	return e
 }
 
-func (e *AudioElement) Crossorigin(a AudioCrossoriginEnum) *AudioElement {
+func (e *AudioElement) Crossorigin(a AudioCrossorigin) *AudioElement {
 	e.attributes["crossorigin"] = a
 
 	return e
 }
 
-func (e *AudioElement) Preload(a AudioPreloadEnum) *AudioElement {
+func (e *AudioElement) Preload(a AudioPreload) *AudioElement {
 	e.attributes["preload"] = a
 
 	return e
@@ -215,13 +215,25 @@ func (e *AudioElement) Controls(b bool) *AudioElement {
 	return e
 }
 
-func (e *AudioElement) Autocapitalize(a AudioAutocapitalizeEnum) *AudioElement {
+func (e *AudioElement) AriaUnsafe(name string, s string) *AudioElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *AudioElement) Aria(name string, s string) *AudioElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *AudioElement) Autocapitalize(a AudioAutocapitalize) *AudioElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *AudioElement) Autocorrect(a AudioAutocorrectEnum) *AudioElement {
+func (e *AudioElement) Autocorrect(a AudioAutocorrect) *AudioElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -239,7 +251,7 @@ func (e *AudioElement) Class(s ...string) *AudioElement {
 	return e
 }
 
-func (e *AudioElement) Contenteditable(a AudioContenteditableEnum) *AudioElement {
+func (e *AudioElement) Contenteditable(a AudioContenteditable) *AudioElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -257,25 +269,25 @@ func (e *AudioElement) Data(name string, s string) *AudioElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *AudioElement) Dir(a AudioDirEnum) *AudioElement {
+func (e *AudioElement) Dir(a AudioDir) *AudioElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *AudioElement) Draggable(a AudioDraggableEnum) *AudioElement {
+func (e *AudioElement) Draggable(a AudioDraggable) *AudioElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *AudioElement) Enterkeyhint(a AudioEnterkeyhintEnum) *AudioElement {
+func (e *AudioElement) Enterkeyhint(a AudioEnterkeyhint) *AudioElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *AudioElement) Hidden(a AudioHiddenEnum) *AudioElement {
+func (e *AudioElement) Hidden(a AudioHidden) *AudioElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -293,7 +305,7 @@ func (e *AudioElement) Inert(b bool) *AudioElement {
 	return e
 }
 
-func (e *AudioElement) Inputmode(a AudioInputmodeEnum) *AudioElement {
+func (e *AudioElement) Inputmode(a AudioInputmode) *AudioElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -353,7 +365,7 @@ func (e *AudioElement) Slot(s string) *AudioElement {
 	return e
 }
 
-func (e *AudioElement) Spellcheck(a AudioSpellcheckEnum) *AudioElement {
+func (e *AudioElement) Spellcheck(a AudioSpellcheck) *AudioElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -377,13 +389,13 @@ func (e *AudioElement) Title(s string) *AudioElement {
 	return e
 }
 
-func (e *AudioElement) Translate(a AudioTranslateEnum) *AudioElement {
+func (e *AudioElement) Translate(a AudioTranslate) *AudioElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *AudioElement) Writingsuggestions(a AudioWritingsuggestionsEnum) *AudioElement {
+func (e *AudioElement) Writingsuggestions(a AudioWritingsuggestions) *AudioElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

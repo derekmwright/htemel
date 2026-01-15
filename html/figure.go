@@ -48,115 +48,127 @@ func FigureTernary(condition bool, true htemel.Node, false htemel.Node) *FigureE
 	return Figure(false)
 }
 
-type FigureAutocapitalizeEnum string
+type FigureAutocapitalize string
 
 const (
-	FigureAutocapitalizeEnumCharacters FigureAutocapitalizeEnum = "characters"
-	FigureAutocapitalizeEnumNone       FigureAutocapitalizeEnum = "none"
-	FigureAutocapitalizeEnumOff        FigureAutocapitalizeEnum = "off"
-	FigureAutocapitalizeEnumOn         FigureAutocapitalizeEnum = "on"
-	FigureAutocapitalizeEnumSentences  FigureAutocapitalizeEnum = "sentences"
-	FigureAutocapitalizeEnumWords      FigureAutocapitalizeEnum = "words"
+	FigureAutocapitalizeCharacters FigureAutocapitalize = "characters"
+	FigureAutocapitalizeNone       FigureAutocapitalize = "none"
+	FigureAutocapitalizeOff        FigureAutocapitalize = "off"
+	FigureAutocapitalizeOn         FigureAutocapitalize = "on"
+	FigureAutocapitalizeSentences  FigureAutocapitalize = "sentences"
+	FigureAutocapitalizeWords      FigureAutocapitalize = "words"
 )
 
-type FigureAutocorrectEnum string
+type FigureAutocorrect string
 
 const (
-	FigureAutocorrectEnumOn    FigureAutocorrectEnum = "on"
-	FigureAutocorrectEnumOff   FigureAutocorrectEnum = "off"
-	FigureAutocorrectEnumEmpty FigureAutocorrectEnum = ""
+	FigureAutocorrectOff   FigureAutocorrect = "off"
+	FigureAutocorrectOn    FigureAutocorrect = "on"
+	FigureAutocorrectEmpty FigureAutocorrect = ""
 )
 
-type FigureContenteditableEnum string
+type FigureContenteditable string
 
 const (
-	FigureContenteditableEnumPlaintextOnly FigureContenteditableEnum = "plaintext-only"
-	FigureContenteditableEnumTrue          FigureContenteditableEnum = "true"
-	FigureContenteditableEnumFalse         FigureContenteditableEnum = "false"
-	FigureContenteditableEnumEmpty         FigureContenteditableEnum = ""
+	FigureContenteditableFalse         FigureContenteditable = "false"
+	FigureContenteditablePlaintextOnly FigureContenteditable = "plaintext-only"
+	FigureContenteditableTrue          FigureContenteditable = "true"
+	FigureContenteditableEmpty         FigureContenteditable = ""
 )
 
-type FigureDirEnum string
+type FigureDir string
 
 const (
-	FigureDirEnumLtr  FigureDirEnum = "ltr"
-	FigureDirEnumRtl  FigureDirEnum = "rtl"
-	FigureDirEnumAuto FigureDirEnum = "auto"
+	FigureDirAuto FigureDir = "auto"
+	FigureDirLtr  FigureDir = "ltr"
+	FigureDirRtl  FigureDir = "rtl"
 )
 
-type FigureDraggableEnum string
+type FigureDraggable string
 
 const (
-	FigureDraggableEnumTrue  FigureDraggableEnum = "true"
-	FigureDraggableEnumFalse FigureDraggableEnum = "false"
+	FigureDraggableFalse FigureDraggable = "false"
+	FigureDraggableTrue  FigureDraggable = "true"
 )
 
-type FigureEnterkeyhintEnum string
+type FigureEnterkeyhint string
 
 const (
-	FigureEnterkeyhintEnumEnter    FigureEnterkeyhintEnum = "enter"
-	FigureEnterkeyhintEnumGo       FigureEnterkeyhintEnum = "go"
-	FigureEnterkeyhintEnumNext     FigureEnterkeyhintEnum = "next"
-	FigureEnterkeyhintEnumPrevious FigureEnterkeyhintEnum = "previous"
-	FigureEnterkeyhintEnumSearch   FigureEnterkeyhintEnum = "search"
-	FigureEnterkeyhintEnumSend     FigureEnterkeyhintEnum = "send"
-	FigureEnterkeyhintEnumDone     FigureEnterkeyhintEnum = "done"
+	FigureEnterkeyhintEnter    FigureEnterkeyhint = "enter"
+	FigureEnterkeyhintGo       FigureEnterkeyhint = "go"
+	FigureEnterkeyhintNext     FigureEnterkeyhint = "next"
+	FigureEnterkeyhintPrevious FigureEnterkeyhint = "previous"
+	FigureEnterkeyhintSearch   FigureEnterkeyhint = "search"
+	FigureEnterkeyhintSend     FigureEnterkeyhint = "send"
+	FigureEnterkeyhintDone     FigureEnterkeyhint = "done"
 )
 
-type FigureHiddenEnum string
+type FigureHidden string
 
 const (
-	FigureHiddenEnumHidden     FigureHiddenEnum = "hidden"
-	FigureHiddenEnumUntilFound FigureHiddenEnum = "until-found"
-	FigureHiddenEnumEmpty      FigureHiddenEnum = ""
+	FigureHiddenUntilFound FigureHidden = "until-found"
+	FigureHiddenHidden     FigureHidden = "hidden"
+	FigureHiddenEmpty      FigureHidden = ""
 )
 
-type FigureInputmodeEnum string
+type FigureInputmode string
 
 const (
-	FigureInputmodeEnumText    FigureInputmodeEnum = "text"
-	FigureInputmodeEnumUrl     FigureInputmodeEnum = "url"
-	FigureInputmodeEnumDecimal FigureInputmodeEnum = "decimal"
-	FigureInputmodeEnumEmail   FigureInputmodeEnum = "email"
-	FigureInputmodeEnumNone    FigureInputmodeEnum = "none"
-	FigureInputmodeEnumNumeric FigureInputmodeEnum = "numeric"
-	FigureInputmodeEnumSearch  FigureInputmodeEnum = "search"
-	FigureInputmodeEnumTel     FigureInputmodeEnum = "tel"
+	FigureInputmodeDecimal FigureInputmode = "decimal"
+	FigureInputmodeEmail   FigureInputmode = "email"
+	FigureInputmodeNone    FigureInputmode = "none"
+	FigureInputmodeNumeric FigureInputmode = "numeric"
+	FigureInputmodeSearch  FigureInputmode = "search"
+	FigureInputmodeTel     FigureInputmode = "tel"
+	FigureInputmodeText    FigureInputmode = "text"
+	FigureInputmodeUrl     FigureInputmode = "url"
 )
 
-type FigureSpellcheckEnum string
+type FigureSpellcheck string
 
 const (
-	FigureSpellcheckEnumFalse FigureSpellcheckEnum = "false"
-	FigureSpellcheckEnumTrue  FigureSpellcheckEnum = "true"
-	FigureSpellcheckEnumEmpty FigureSpellcheckEnum = ""
+	FigureSpellcheckTrue  FigureSpellcheck = "true"
+	FigureSpellcheckFalse FigureSpellcheck = "false"
+	FigureSpellcheckEmpty FigureSpellcheck = ""
 )
 
-type FigureTranslateEnum string
+type FigureTranslate string
 
 const (
-	FigureTranslateEnumNo    FigureTranslateEnum = "no"
-	FigureTranslateEnumYes   FigureTranslateEnum = "yes"
-	FigureTranslateEnumEmpty FigureTranslateEnum = ""
+	FigureTranslateNo    FigureTranslate = "no"
+	FigureTranslateYes   FigureTranslate = "yes"
+	FigureTranslateEmpty FigureTranslate = ""
 )
 
-type FigureWritingsuggestionsEnum string
+type FigureWritingsuggestions string
 
 const (
-	FigureWritingsuggestionsEnumFalse FigureWritingsuggestionsEnum = "false"
-	FigureWritingsuggestionsEnumTrue  FigureWritingsuggestionsEnum = "true"
-	FigureWritingsuggestionsEnumEmpty FigureWritingsuggestionsEnum = ""
+	FigureWritingsuggestionsFalse FigureWritingsuggestions = "false"
+	FigureWritingsuggestionsTrue  FigureWritingsuggestions = "true"
+	FigureWritingsuggestionsEmpty FigureWritingsuggestions = ""
 )
 
 type figureAttrs map[string]any
 
-func (e *FigureElement) Autocapitalize(a FigureAutocapitalizeEnum) *FigureElement {
+func (e *FigureElement) AriaUnsafe(name string, s string) *FigureElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *FigureElement) Aria(name string, s string) *FigureElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *FigureElement) Autocapitalize(a FigureAutocapitalize) *FigureElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *FigureElement) Autocorrect(a FigureAutocorrectEnum) *FigureElement {
+func (e *FigureElement) Autocorrect(a FigureAutocorrect) *FigureElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *FigureElement) Class(s ...string) *FigureElement {
 	return e
 }
 
-func (e *FigureElement) Contenteditable(a FigureContenteditableEnum) *FigureElement {
+func (e *FigureElement) Contenteditable(a FigureContenteditable) *FigureElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *FigureElement) Data(name string, s string) *FigureElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *FigureElement) Dir(a FigureDirEnum) *FigureElement {
+func (e *FigureElement) Dir(a FigureDir) *FigureElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *FigureElement) Draggable(a FigureDraggableEnum) *FigureElement {
+func (e *FigureElement) Draggable(a FigureDraggable) *FigureElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *FigureElement) Enterkeyhint(a FigureEnterkeyhintEnum) *FigureElement {
+func (e *FigureElement) Enterkeyhint(a FigureEnterkeyhint) *FigureElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *FigureElement) Hidden(a FigureHiddenEnum) *FigureElement {
+func (e *FigureElement) Hidden(a FigureHidden) *FigureElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *FigureElement) Inert(b bool) *FigureElement {
 	return e
 }
 
-func (e *FigureElement) Inputmode(a FigureInputmodeEnum) *FigureElement {
+func (e *FigureElement) Inputmode(a FigureInputmode) *FigureElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *FigureElement) Slot(s string) *FigureElement {
 	return e
 }
 
-func (e *FigureElement) Spellcheck(a FigureSpellcheckEnum) *FigureElement {
+func (e *FigureElement) Spellcheck(a FigureSpellcheck) *FigureElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *FigureElement) Title(s string) *FigureElement {
 	return e
 }
 
-func (e *FigureElement) Translate(a FigureTranslateEnum) *FigureElement {
+func (e *FigureElement) Translate(a FigureTranslate) *FigureElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *FigureElement) Writingsuggestions(a FigureWritingsuggestionsEnum) *FigureElement {
+func (e *FigureElement) Writingsuggestions(a FigureWritingsuggestions) *FigureElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

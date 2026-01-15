@@ -48,115 +48,127 @@ func H3Ternary(condition bool, true htemel.Node, false htemel.Node) *H3Element {
 	return H3(false)
 }
 
-type H3AutocapitalizeEnum string
+type H3Autocapitalize string
 
 const (
-	H3AutocapitalizeEnumCharacters H3AutocapitalizeEnum = "characters"
-	H3AutocapitalizeEnumNone       H3AutocapitalizeEnum = "none"
-	H3AutocapitalizeEnumOff        H3AutocapitalizeEnum = "off"
-	H3AutocapitalizeEnumOn         H3AutocapitalizeEnum = "on"
-	H3AutocapitalizeEnumSentences  H3AutocapitalizeEnum = "sentences"
-	H3AutocapitalizeEnumWords      H3AutocapitalizeEnum = "words"
+	H3AutocapitalizeOff        H3Autocapitalize = "off"
+	H3AutocapitalizeOn         H3Autocapitalize = "on"
+	H3AutocapitalizeSentences  H3Autocapitalize = "sentences"
+	H3AutocapitalizeWords      H3Autocapitalize = "words"
+	H3AutocapitalizeCharacters H3Autocapitalize = "characters"
+	H3AutocapitalizeNone       H3Autocapitalize = "none"
 )
 
-type H3AutocorrectEnum string
+type H3Autocorrect string
 
 const (
-	H3AutocorrectEnumOff   H3AutocorrectEnum = "off"
-	H3AutocorrectEnumOn    H3AutocorrectEnum = "on"
-	H3AutocorrectEnumEmpty H3AutocorrectEnum = ""
+	H3AutocorrectOff   H3Autocorrect = "off"
+	H3AutocorrectOn    H3Autocorrect = "on"
+	H3AutocorrectEmpty H3Autocorrect = ""
 )
 
-type H3ContenteditableEnum string
+type H3Contenteditable string
 
 const (
-	H3ContenteditableEnumFalse         H3ContenteditableEnum = "false"
-	H3ContenteditableEnumPlaintextOnly H3ContenteditableEnum = "plaintext-only"
-	H3ContenteditableEnumTrue          H3ContenteditableEnum = "true"
-	H3ContenteditableEnumEmpty         H3ContenteditableEnum = ""
+	H3ContenteditableFalse         H3Contenteditable = "false"
+	H3ContenteditablePlaintextOnly H3Contenteditable = "plaintext-only"
+	H3ContenteditableTrue          H3Contenteditable = "true"
+	H3ContenteditableEmpty         H3Contenteditable = ""
 )
 
-type H3DirEnum string
+type H3Dir string
 
 const (
-	H3DirEnumAuto H3DirEnum = "auto"
-	H3DirEnumLtr  H3DirEnum = "ltr"
-	H3DirEnumRtl  H3DirEnum = "rtl"
+	H3DirAuto H3Dir = "auto"
+	H3DirLtr  H3Dir = "ltr"
+	H3DirRtl  H3Dir = "rtl"
 )
 
-type H3DraggableEnum string
+type H3Draggable string
 
 const (
-	H3DraggableEnumFalse H3DraggableEnum = "false"
-	H3DraggableEnumTrue  H3DraggableEnum = "true"
+	H3DraggableTrue  H3Draggable = "true"
+	H3DraggableFalse H3Draggable = "false"
 )
 
-type H3EnterkeyhintEnum string
+type H3Enterkeyhint string
 
 const (
-	H3EnterkeyhintEnumGo       H3EnterkeyhintEnum = "go"
-	H3EnterkeyhintEnumNext     H3EnterkeyhintEnum = "next"
-	H3EnterkeyhintEnumPrevious H3EnterkeyhintEnum = "previous"
-	H3EnterkeyhintEnumSearch   H3EnterkeyhintEnum = "search"
-	H3EnterkeyhintEnumSend     H3EnterkeyhintEnum = "send"
-	H3EnterkeyhintEnumDone     H3EnterkeyhintEnum = "done"
-	H3EnterkeyhintEnumEnter    H3EnterkeyhintEnum = "enter"
+	H3EnterkeyhintGo       H3Enterkeyhint = "go"
+	H3EnterkeyhintNext     H3Enterkeyhint = "next"
+	H3EnterkeyhintPrevious H3Enterkeyhint = "previous"
+	H3EnterkeyhintSearch   H3Enterkeyhint = "search"
+	H3EnterkeyhintSend     H3Enterkeyhint = "send"
+	H3EnterkeyhintDone     H3Enterkeyhint = "done"
+	H3EnterkeyhintEnter    H3Enterkeyhint = "enter"
 )
 
-type H3HiddenEnum string
+type H3Hidden string
 
 const (
-	H3HiddenEnumHidden     H3HiddenEnum = "hidden"
-	H3HiddenEnumUntilFound H3HiddenEnum = "until-found"
-	H3HiddenEnumEmpty      H3HiddenEnum = ""
+	H3HiddenHidden     H3Hidden = "hidden"
+	H3HiddenUntilFound H3Hidden = "until-found"
+	H3HiddenEmpty      H3Hidden = ""
 )
 
-type H3InputmodeEnum string
+type H3Inputmode string
 
 const (
-	H3InputmodeEnumEmail   H3InputmodeEnum = "email"
-	H3InputmodeEnumNone    H3InputmodeEnum = "none"
-	H3InputmodeEnumNumeric H3InputmodeEnum = "numeric"
-	H3InputmodeEnumSearch  H3InputmodeEnum = "search"
-	H3InputmodeEnumTel     H3InputmodeEnum = "tel"
-	H3InputmodeEnumText    H3InputmodeEnum = "text"
-	H3InputmodeEnumUrl     H3InputmodeEnum = "url"
-	H3InputmodeEnumDecimal H3InputmodeEnum = "decimal"
+	H3InputmodeEmail   H3Inputmode = "email"
+	H3InputmodeNone    H3Inputmode = "none"
+	H3InputmodeNumeric H3Inputmode = "numeric"
+	H3InputmodeSearch  H3Inputmode = "search"
+	H3InputmodeTel     H3Inputmode = "tel"
+	H3InputmodeText    H3Inputmode = "text"
+	H3InputmodeUrl     H3Inputmode = "url"
+	H3InputmodeDecimal H3Inputmode = "decimal"
 )
 
-type H3SpellcheckEnum string
+type H3Spellcheck string
 
 const (
-	H3SpellcheckEnumFalse H3SpellcheckEnum = "false"
-	H3SpellcheckEnumTrue  H3SpellcheckEnum = "true"
-	H3SpellcheckEnumEmpty H3SpellcheckEnum = ""
+	H3SpellcheckFalse H3Spellcheck = "false"
+	H3SpellcheckTrue  H3Spellcheck = "true"
+	H3SpellcheckEmpty H3Spellcheck = ""
 )
 
-type H3TranslateEnum string
+type H3Translate string
 
 const (
-	H3TranslateEnumNo    H3TranslateEnum = "no"
-	H3TranslateEnumYes   H3TranslateEnum = "yes"
-	H3TranslateEnumEmpty H3TranslateEnum = ""
+	H3TranslateNo    H3Translate = "no"
+	H3TranslateYes   H3Translate = "yes"
+	H3TranslateEmpty H3Translate = ""
 )
 
-type H3WritingsuggestionsEnum string
+type H3Writingsuggestions string
 
 const (
-	H3WritingsuggestionsEnumFalse H3WritingsuggestionsEnum = "false"
-	H3WritingsuggestionsEnumTrue  H3WritingsuggestionsEnum = "true"
-	H3WritingsuggestionsEnumEmpty H3WritingsuggestionsEnum = ""
+	H3WritingsuggestionsFalse H3Writingsuggestions = "false"
+	H3WritingsuggestionsTrue  H3Writingsuggestions = "true"
+	H3WritingsuggestionsEmpty H3Writingsuggestions = ""
 )
 
 type h3Attrs map[string]any
 
-func (e *H3Element) Autocapitalize(a H3AutocapitalizeEnum) *H3Element {
+func (e *H3Element) AriaUnsafe(name string, s string) *H3Element {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *H3Element) Aria(name string, s string) *H3Element {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *H3Element) Autocapitalize(a H3Autocapitalize) *H3Element {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *H3Element) Autocorrect(a H3AutocorrectEnum) *H3Element {
+func (e *H3Element) Autocorrect(a H3Autocorrect) *H3Element {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *H3Element) Class(s ...string) *H3Element {
 	return e
 }
 
-func (e *H3Element) Contenteditable(a H3ContenteditableEnum) *H3Element {
+func (e *H3Element) Contenteditable(a H3Contenteditable) *H3Element {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *H3Element) Data(name string, s string) *H3Element {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *H3Element) Dir(a H3DirEnum) *H3Element {
+func (e *H3Element) Dir(a H3Dir) *H3Element {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *H3Element) Draggable(a H3DraggableEnum) *H3Element {
+func (e *H3Element) Draggable(a H3Draggable) *H3Element {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *H3Element) Enterkeyhint(a H3EnterkeyhintEnum) *H3Element {
+func (e *H3Element) Enterkeyhint(a H3Enterkeyhint) *H3Element {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *H3Element) Hidden(a H3HiddenEnum) *H3Element {
+func (e *H3Element) Hidden(a H3Hidden) *H3Element {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *H3Element) Inert(b bool) *H3Element {
 	return e
 }
 
-func (e *H3Element) Inputmode(a H3InputmodeEnum) *H3Element {
+func (e *H3Element) Inputmode(a H3Inputmode) *H3Element {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *H3Element) Slot(s string) *H3Element {
 	return e
 }
 
-func (e *H3Element) Spellcheck(a H3SpellcheckEnum) *H3Element {
+func (e *H3Element) Spellcheck(a H3Spellcheck) *H3Element {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *H3Element) Title(s string) *H3Element {
 	return e
 }
 
-func (e *H3Element) Translate(a H3TranslateEnum) *H3Element {
+func (e *H3Element) Translate(a H3Translate) *H3Element {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *H3Element) Writingsuggestions(a H3WritingsuggestionsEnum) *H3Element {
+func (e *H3Element) Writingsuggestions(a H3Writingsuggestions) *H3Element {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,151 +48,151 @@ func ButtonTernary(condition bool, true htemel.Node, false htemel.Node) *ButtonE
 	return Button(false)
 }
 
-type ButtonCommandEnum string
+type ButtonCommand string
 
 const (
-	ButtonCommandEnumClose         ButtonCommandEnum = "close"
-	ButtonCommandEnumHidePopover   ButtonCommandEnum = "hide-popover"
-	ButtonCommandEnumRequestClose  ButtonCommandEnum = "request-close"
-	ButtonCommandEnumShowModal     ButtonCommandEnum = "show-modal"
-	ButtonCommandEnumShowPopover   ButtonCommandEnum = "show-popover"
-	ButtonCommandEnumTogglePopover ButtonCommandEnum = "toggle-popover"
+	ButtonCommandHidePopover   ButtonCommand = "hide-popover"
+	ButtonCommandRequestClose  ButtonCommand = "request-close"
+	ButtonCommandShowModal     ButtonCommand = "show-modal"
+	ButtonCommandShowPopover   ButtonCommand = "show-popover"
+	ButtonCommandTogglePopover ButtonCommand = "toggle-popover"
+	ButtonCommandClose         ButtonCommand = "close"
 )
 
-type ButtonFormmethodEnum string
+type ButtonFormmethod string
 
 const (
-	ButtonFormmethodEnumDialog ButtonFormmethodEnum = "dialog"
-	ButtonFormmethodEnumGet    ButtonFormmethodEnum = "get"
-	ButtonFormmethodEnumPost   ButtonFormmethodEnum = "post"
+	ButtonFormmethodDialog ButtonFormmethod = "dialog"
+	ButtonFormmethodGet    ButtonFormmethod = "get"
+	ButtonFormmethodPost   ButtonFormmethod = "post"
 )
 
-type ButtonPopovertargetactionEnum string
+type ButtonPopovertargetaction string
 
 const (
-	ButtonPopovertargetactionEnumToggle ButtonPopovertargetactionEnum = "toggle"
-	ButtonPopovertargetactionEnumHide   ButtonPopovertargetactionEnum = "hide"
-	ButtonPopovertargetactionEnumShow   ButtonPopovertargetactionEnum = "show"
+	ButtonPopovertargetactionHide   ButtonPopovertargetaction = "hide"
+	ButtonPopovertargetactionShow   ButtonPopovertargetaction = "show"
+	ButtonPopovertargetactionToggle ButtonPopovertargetaction = "toggle"
 )
 
-type ButtonTypeEnum string
+type ButtonType string
 
 const (
-	ButtonTypeEnumButton ButtonTypeEnum = "button"
-	ButtonTypeEnumReset  ButtonTypeEnum = "reset"
-	ButtonTypeEnumSubmit ButtonTypeEnum = "submit"
+	ButtonTypeButton ButtonType = "button"
+	ButtonTypeReset  ButtonType = "reset"
+	ButtonTypeSubmit ButtonType = "submit"
 )
 
-type ButtonAutocapitalizeEnum string
+type ButtonAutocapitalize string
 
 const (
-	ButtonAutocapitalizeEnumOff        ButtonAutocapitalizeEnum = "off"
-	ButtonAutocapitalizeEnumOn         ButtonAutocapitalizeEnum = "on"
-	ButtonAutocapitalizeEnumSentences  ButtonAutocapitalizeEnum = "sentences"
-	ButtonAutocapitalizeEnumWords      ButtonAutocapitalizeEnum = "words"
-	ButtonAutocapitalizeEnumCharacters ButtonAutocapitalizeEnum = "characters"
-	ButtonAutocapitalizeEnumNone       ButtonAutocapitalizeEnum = "none"
+	ButtonAutocapitalizeOn         ButtonAutocapitalize = "on"
+	ButtonAutocapitalizeSentences  ButtonAutocapitalize = "sentences"
+	ButtonAutocapitalizeWords      ButtonAutocapitalize = "words"
+	ButtonAutocapitalizeCharacters ButtonAutocapitalize = "characters"
+	ButtonAutocapitalizeNone       ButtonAutocapitalize = "none"
+	ButtonAutocapitalizeOff        ButtonAutocapitalize = "off"
 )
 
-type ButtonAutocorrectEnum string
+type ButtonAutocorrect string
 
 const (
-	ButtonAutocorrectEnumOff   ButtonAutocorrectEnum = "off"
-	ButtonAutocorrectEnumOn    ButtonAutocorrectEnum = "on"
-	ButtonAutocorrectEnumEmpty ButtonAutocorrectEnum = ""
+	ButtonAutocorrectOff   ButtonAutocorrect = "off"
+	ButtonAutocorrectOn    ButtonAutocorrect = "on"
+	ButtonAutocorrectEmpty ButtonAutocorrect = ""
 )
 
-type ButtonContenteditableEnum string
+type ButtonContenteditable string
 
 const (
-	ButtonContenteditableEnumFalse         ButtonContenteditableEnum = "false"
-	ButtonContenteditableEnumPlaintextOnly ButtonContenteditableEnum = "plaintext-only"
-	ButtonContenteditableEnumTrue          ButtonContenteditableEnum = "true"
-	ButtonContenteditableEnumEmpty         ButtonContenteditableEnum = ""
+	ButtonContenteditableFalse         ButtonContenteditable = "false"
+	ButtonContenteditablePlaintextOnly ButtonContenteditable = "plaintext-only"
+	ButtonContenteditableTrue          ButtonContenteditable = "true"
+	ButtonContenteditableEmpty         ButtonContenteditable = ""
 )
 
-type ButtonDirEnum string
+type ButtonDir string
 
 const (
-	ButtonDirEnumAuto ButtonDirEnum = "auto"
-	ButtonDirEnumLtr  ButtonDirEnum = "ltr"
-	ButtonDirEnumRtl  ButtonDirEnum = "rtl"
+	ButtonDirAuto ButtonDir = "auto"
+	ButtonDirLtr  ButtonDir = "ltr"
+	ButtonDirRtl  ButtonDir = "rtl"
 )
 
-type ButtonDraggableEnum string
+type ButtonDraggable string
 
 const (
-	ButtonDraggableEnumFalse ButtonDraggableEnum = "false"
-	ButtonDraggableEnumTrue  ButtonDraggableEnum = "true"
+	ButtonDraggableFalse ButtonDraggable = "false"
+	ButtonDraggableTrue  ButtonDraggable = "true"
 )
 
-type ButtonEnterkeyhintEnum string
+type ButtonEnterkeyhint string
 
 const (
-	ButtonEnterkeyhintEnumGo       ButtonEnterkeyhintEnum = "go"
-	ButtonEnterkeyhintEnumNext     ButtonEnterkeyhintEnum = "next"
-	ButtonEnterkeyhintEnumPrevious ButtonEnterkeyhintEnum = "previous"
-	ButtonEnterkeyhintEnumSearch   ButtonEnterkeyhintEnum = "search"
-	ButtonEnterkeyhintEnumSend     ButtonEnterkeyhintEnum = "send"
-	ButtonEnterkeyhintEnumDone     ButtonEnterkeyhintEnum = "done"
-	ButtonEnterkeyhintEnumEnter    ButtonEnterkeyhintEnum = "enter"
+	ButtonEnterkeyhintPrevious ButtonEnterkeyhint = "previous"
+	ButtonEnterkeyhintSearch   ButtonEnterkeyhint = "search"
+	ButtonEnterkeyhintSend     ButtonEnterkeyhint = "send"
+	ButtonEnterkeyhintDone     ButtonEnterkeyhint = "done"
+	ButtonEnterkeyhintEnter    ButtonEnterkeyhint = "enter"
+	ButtonEnterkeyhintGo       ButtonEnterkeyhint = "go"
+	ButtonEnterkeyhintNext     ButtonEnterkeyhint = "next"
 )
 
-type ButtonHiddenEnum string
+type ButtonHidden string
 
 const (
-	ButtonHiddenEnumHidden     ButtonHiddenEnum = "hidden"
-	ButtonHiddenEnumUntilFound ButtonHiddenEnum = "until-found"
-	ButtonHiddenEnumEmpty      ButtonHiddenEnum = ""
+	ButtonHiddenHidden     ButtonHidden = "hidden"
+	ButtonHiddenUntilFound ButtonHidden = "until-found"
+	ButtonHiddenEmpty      ButtonHidden = ""
 )
 
-type ButtonInputmodeEnum string
+type ButtonInputmode string
 
 const (
-	ButtonInputmodeEnumEmail   ButtonInputmodeEnum = "email"
-	ButtonInputmodeEnumNone    ButtonInputmodeEnum = "none"
-	ButtonInputmodeEnumNumeric ButtonInputmodeEnum = "numeric"
-	ButtonInputmodeEnumSearch  ButtonInputmodeEnum = "search"
-	ButtonInputmodeEnumTel     ButtonInputmodeEnum = "tel"
-	ButtonInputmodeEnumText    ButtonInputmodeEnum = "text"
-	ButtonInputmodeEnumUrl     ButtonInputmodeEnum = "url"
-	ButtonInputmodeEnumDecimal ButtonInputmodeEnum = "decimal"
+	ButtonInputmodeUrl     ButtonInputmode = "url"
+	ButtonInputmodeDecimal ButtonInputmode = "decimal"
+	ButtonInputmodeEmail   ButtonInputmode = "email"
+	ButtonInputmodeNone    ButtonInputmode = "none"
+	ButtonInputmodeNumeric ButtonInputmode = "numeric"
+	ButtonInputmodeSearch  ButtonInputmode = "search"
+	ButtonInputmodeTel     ButtonInputmode = "tel"
+	ButtonInputmodeText    ButtonInputmode = "text"
 )
 
-type ButtonSpellcheckEnum string
+type ButtonSpellcheck string
 
 const (
-	ButtonSpellcheckEnumFalse ButtonSpellcheckEnum = "false"
-	ButtonSpellcheckEnumTrue  ButtonSpellcheckEnum = "true"
-	ButtonSpellcheckEnumEmpty ButtonSpellcheckEnum = ""
+	ButtonSpellcheckTrue  ButtonSpellcheck = "true"
+	ButtonSpellcheckFalse ButtonSpellcheck = "false"
+	ButtonSpellcheckEmpty ButtonSpellcheck = ""
 )
 
-type ButtonTranslateEnum string
+type ButtonTranslate string
 
 const (
-	ButtonTranslateEnumNo    ButtonTranslateEnum = "no"
-	ButtonTranslateEnumYes   ButtonTranslateEnum = "yes"
-	ButtonTranslateEnumEmpty ButtonTranslateEnum = ""
+	ButtonTranslateNo    ButtonTranslate = "no"
+	ButtonTranslateYes   ButtonTranslate = "yes"
+	ButtonTranslateEmpty ButtonTranslate = ""
 )
 
-type ButtonWritingsuggestionsEnum string
+type ButtonWritingsuggestions string
 
 const (
-	ButtonWritingsuggestionsEnumFalse ButtonWritingsuggestionsEnum = "false"
-	ButtonWritingsuggestionsEnumTrue  ButtonWritingsuggestionsEnum = "true"
-	ButtonWritingsuggestionsEnumEmpty ButtonWritingsuggestionsEnum = ""
+	ButtonWritingsuggestionsFalse ButtonWritingsuggestions = "false"
+	ButtonWritingsuggestionsTrue  ButtonWritingsuggestions = "true"
+	ButtonWritingsuggestionsEmpty ButtonWritingsuggestions = ""
 )
 
 type buttonAttrs map[string]any
 
-func (e *ButtonElement) Command(a ButtonCommandEnum) *ButtonElement {
+func (e *ButtonElement) Command(a ButtonCommand) *ButtonElement {
 	e.attributes["command"] = a
 
 	return e
 }
 
-func ButtonCommandCustom(s string) ButtonCommandEnum {
-	return ButtonCommandEnum(s)
+func ButtonCommandCustom(s string) ButtonCommand {
+	return ButtonCommand(s)
 }
 
 func (e *ButtonElement) Commandfor(s string) *ButtonElement {
@@ -225,7 +225,7 @@ func (e *ButtonElement) Formenctype(s string) *ButtonElement {
 	return e
 }
 
-func (e *ButtonElement) Formmethod(a ButtonFormmethodEnum) *ButtonElement {
+func (e *ButtonElement) Formmethod(a ButtonFormmethod) *ButtonElement {
 	e.attributes["formmethod"] = a
 
 	return e
@@ -255,13 +255,13 @@ func (e *ButtonElement) Popovertarget(s string) *ButtonElement {
 	return e
 }
 
-func (e *ButtonElement) Popovertargetaction(a ButtonPopovertargetactionEnum) *ButtonElement {
+func (e *ButtonElement) Popovertargetaction(a ButtonPopovertargetaction) *ButtonElement {
 	e.attributes["popovertargetaction"] = a
 
 	return e
 }
 
-func (e *ButtonElement) Type(a ButtonTypeEnum) *ButtonElement {
+func (e *ButtonElement) Type(a ButtonType) *ButtonElement {
 	e.attributes["type"] = a
 
 	return e
@@ -273,13 +273,25 @@ func (e *ButtonElement) Value(s string) *ButtonElement {
 	return e
 }
 
-func (e *ButtonElement) Autocapitalize(a ButtonAutocapitalizeEnum) *ButtonElement {
+func (e *ButtonElement) AriaUnsafe(name string, s string) *ButtonElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ButtonElement) Aria(name string, s string) *ButtonElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *ButtonElement) Autocapitalize(a ButtonAutocapitalize) *ButtonElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *ButtonElement) Autocorrect(a ButtonAutocorrectEnum) *ButtonElement {
+func (e *ButtonElement) Autocorrect(a ButtonAutocorrect) *ButtonElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -297,7 +309,7 @@ func (e *ButtonElement) Class(s ...string) *ButtonElement {
 	return e
 }
 
-func (e *ButtonElement) Contenteditable(a ButtonContenteditableEnum) *ButtonElement {
+func (e *ButtonElement) Contenteditable(a ButtonContenteditable) *ButtonElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -315,25 +327,25 @@ func (e *ButtonElement) Data(name string, s string) *ButtonElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *ButtonElement) Dir(a ButtonDirEnum) *ButtonElement {
+func (e *ButtonElement) Dir(a ButtonDir) *ButtonElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *ButtonElement) Draggable(a ButtonDraggableEnum) *ButtonElement {
+func (e *ButtonElement) Draggable(a ButtonDraggable) *ButtonElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *ButtonElement) Enterkeyhint(a ButtonEnterkeyhintEnum) *ButtonElement {
+func (e *ButtonElement) Enterkeyhint(a ButtonEnterkeyhint) *ButtonElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *ButtonElement) Hidden(a ButtonHiddenEnum) *ButtonElement {
+func (e *ButtonElement) Hidden(a ButtonHidden) *ButtonElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -351,7 +363,7 @@ func (e *ButtonElement) Inert(b bool) *ButtonElement {
 	return e
 }
 
-func (e *ButtonElement) Inputmode(a ButtonInputmodeEnum) *ButtonElement {
+func (e *ButtonElement) Inputmode(a ButtonInputmode) *ButtonElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -411,7 +423,7 @@ func (e *ButtonElement) Slot(s string) *ButtonElement {
 	return e
 }
 
-func (e *ButtonElement) Spellcheck(a ButtonSpellcheckEnum) *ButtonElement {
+func (e *ButtonElement) Spellcheck(a ButtonSpellcheck) *ButtonElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -435,13 +447,13 @@ func (e *ButtonElement) Title(s string) *ButtonElement {
 	return e
 }
 
-func (e *ButtonElement) Translate(a ButtonTranslateEnum) *ButtonElement {
+func (e *ButtonElement) Translate(a ButtonTranslate) *ButtonElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *ButtonElement) Writingsuggestions(a ButtonWritingsuggestionsEnum) *ButtonElement {
+func (e *ButtonElement) Writingsuggestions(a ButtonWritingsuggestions) *ButtonElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

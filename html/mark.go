@@ -48,115 +48,127 @@ func MarkTernary(condition bool, true htemel.Node, false htemel.Node) *MarkEleme
 	return Mark(false)
 }
 
-type MarkAutocapitalizeEnum string
+type MarkAutocapitalize string
 
 const (
-	MarkAutocapitalizeEnumWords      MarkAutocapitalizeEnum = "words"
-	MarkAutocapitalizeEnumCharacters MarkAutocapitalizeEnum = "characters"
-	MarkAutocapitalizeEnumNone       MarkAutocapitalizeEnum = "none"
-	MarkAutocapitalizeEnumOff        MarkAutocapitalizeEnum = "off"
-	MarkAutocapitalizeEnumOn         MarkAutocapitalizeEnum = "on"
-	MarkAutocapitalizeEnumSentences  MarkAutocapitalizeEnum = "sentences"
+	MarkAutocapitalizeOff        MarkAutocapitalize = "off"
+	MarkAutocapitalizeOn         MarkAutocapitalize = "on"
+	MarkAutocapitalizeSentences  MarkAutocapitalize = "sentences"
+	MarkAutocapitalizeWords      MarkAutocapitalize = "words"
+	MarkAutocapitalizeCharacters MarkAutocapitalize = "characters"
+	MarkAutocapitalizeNone       MarkAutocapitalize = "none"
 )
 
-type MarkAutocorrectEnum string
+type MarkAutocorrect string
 
 const (
-	MarkAutocorrectEnumOff   MarkAutocorrectEnum = "off"
-	MarkAutocorrectEnumOn    MarkAutocorrectEnum = "on"
-	MarkAutocorrectEnumEmpty MarkAutocorrectEnum = ""
+	MarkAutocorrectOff   MarkAutocorrect = "off"
+	MarkAutocorrectOn    MarkAutocorrect = "on"
+	MarkAutocorrectEmpty MarkAutocorrect = ""
 )
 
-type MarkContenteditableEnum string
+type MarkContenteditable string
 
 const (
-	MarkContenteditableEnumPlaintextOnly MarkContenteditableEnum = "plaintext-only"
-	MarkContenteditableEnumTrue          MarkContenteditableEnum = "true"
-	MarkContenteditableEnumFalse         MarkContenteditableEnum = "false"
-	MarkContenteditableEnumEmpty         MarkContenteditableEnum = ""
+	MarkContenteditableFalse         MarkContenteditable = "false"
+	MarkContenteditablePlaintextOnly MarkContenteditable = "plaintext-only"
+	MarkContenteditableTrue          MarkContenteditable = "true"
+	MarkContenteditableEmpty         MarkContenteditable = ""
 )
 
-type MarkDirEnum string
+type MarkDir string
 
 const (
-	MarkDirEnumAuto MarkDirEnum = "auto"
-	MarkDirEnumLtr  MarkDirEnum = "ltr"
-	MarkDirEnumRtl  MarkDirEnum = "rtl"
+	MarkDirAuto MarkDir = "auto"
+	MarkDirLtr  MarkDir = "ltr"
+	MarkDirRtl  MarkDir = "rtl"
 )
 
-type MarkDraggableEnum string
+type MarkDraggable string
 
 const (
-	MarkDraggableEnumFalse MarkDraggableEnum = "false"
-	MarkDraggableEnumTrue  MarkDraggableEnum = "true"
+	MarkDraggableFalse MarkDraggable = "false"
+	MarkDraggableTrue  MarkDraggable = "true"
 )
 
-type MarkEnterkeyhintEnum string
+type MarkEnterkeyhint string
 
 const (
-	MarkEnterkeyhintEnumDone     MarkEnterkeyhintEnum = "done"
-	MarkEnterkeyhintEnumEnter    MarkEnterkeyhintEnum = "enter"
-	MarkEnterkeyhintEnumGo       MarkEnterkeyhintEnum = "go"
-	MarkEnterkeyhintEnumNext     MarkEnterkeyhintEnum = "next"
-	MarkEnterkeyhintEnumPrevious MarkEnterkeyhintEnum = "previous"
-	MarkEnterkeyhintEnumSearch   MarkEnterkeyhintEnum = "search"
-	MarkEnterkeyhintEnumSend     MarkEnterkeyhintEnum = "send"
+	MarkEnterkeyhintGo       MarkEnterkeyhint = "go"
+	MarkEnterkeyhintNext     MarkEnterkeyhint = "next"
+	MarkEnterkeyhintPrevious MarkEnterkeyhint = "previous"
+	MarkEnterkeyhintSearch   MarkEnterkeyhint = "search"
+	MarkEnterkeyhintSend     MarkEnterkeyhint = "send"
+	MarkEnterkeyhintDone     MarkEnterkeyhint = "done"
+	MarkEnterkeyhintEnter    MarkEnterkeyhint = "enter"
 )
 
-type MarkHiddenEnum string
+type MarkHidden string
 
 const (
-	MarkHiddenEnumHidden     MarkHiddenEnum = "hidden"
-	MarkHiddenEnumUntilFound MarkHiddenEnum = "until-found"
-	MarkHiddenEnumEmpty      MarkHiddenEnum = ""
+	MarkHiddenHidden     MarkHidden = "hidden"
+	MarkHiddenUntilFound MarkHidden = "until-found"
+	MarkHiddenEmpty      MarkHidden = ""
 )
 
-type MarkInputmodeEnum string
+type MarkInputmode string
 
 const (
-	MarkInputmodeEnumText    MarkInputmodeEnum = "text"
-	MarkInputmodeEnumUrl     MarkInputmodeEnum = "url"
-	MarkInputmodeEnumDecimal MarkInputmodeEnum = "decimal"
-	MarkInputmodeEnumEmail   MarkInputmodeEnum = "email"
-	MarkInputmodeEnumNone    MarkInputmodeEnum = "none"
-	MarkInputmodeEnumNumeric MarkInputmodeEnum = "numeric"
-	MarkInputmodeEnumSearch  MarkInputmodeEnum = "search"
-	MarkInputmodeEnumTel     MarkInputmodeEnum = "tel"
+	MarkInputmodeTel     MarkInputmode = "tel"
+	MarkInputmodeText    MarkInputmode = "text"
+	MarkInputmodeUrl     MarkInputmode = "url"
+	MarkInputmodeDecimal MarkInputmode = "decimal"
+	MarkInputmodeEmail   MarkInputmode = "email"
+	MarkInputmodeNone    MarkInputmode = "none"
+	MarkInputmodeNumeric MarkInputmode = "numeric"
+	MarkInputmodeSearch  MarkInputmode = "search"
 )
 
-type MarkSpellcheckEnum string
+type MarkSpellcheck string
 
 const (
-	MarkSpellcheckEnumFalse MarkSpellcheckEnum = "false"
-	MarkSpellcheckEnumTrue  MarkSpellcheckEnum = "true"
-	MarkSpellcheckEnumEmpty MarkSpellcheckEnum = ""
+	MarkSpellcheckFalse MarkSpellcheck = "false"
+	MarkSpellcheckTrue  MarkSpellcheck = "true"
+	MarkSpellcheckEmpty MarkSpellcheck = ""
 )
 
-type MarkTranslateEnum string
+type MarkTranslate string
 
 const (
-	MarkTranslateEnumNo    MarkTranslateEnum = "no"
-	MarkTranslateEnumYes   MarkTranslateEnum = "yes"
-	MarkTranslateEnumEmpty MarkTranslateEnum = ""
+	MarkTranslateNo    MarkTranslate = "no"
+	MarkTranslateYes   MarkTranslate = "yes"
+	MarkTranslateEmpty MarkTranslate = ""
 )
 
-type MarkWritingsuggestionsEnum string
+type MarkWritingsuggestions string
 
 const (
-	MarkWritingsuggestionsEnumFalse MarkWritingsuggestionsEnum = "false"
-	MarkWritingsuggestionsEnumTrue  MarkWritingsuggestionsEnum = "true"
-	MarkWritingsuggestionsEnumEmpty MarkWritingsuggestionsEnum = ""
+	MarkWritingsuggestionsFalse MarkWritingsuggestions = "false"
+	MarkWritingsuggestionsTrue  MarkWritingsuggestions = "true"
+	MarkWritingsuggestionsEmpty MarkWritingsuggestions = ""
 )
 
 type markAttrs map[string]any
 
-func (e *MarkElement) Autocapitalize(a MarkAutocapitalizeEnum) *MarkElement {
+func (e *MarkElement) AriaUnsafe(name string, s string) *MarkElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *MarkElement) Aria(name string, s string) *MarkElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *MarkElement) Autocapitalize(a MarkAutocapitalize) *MarkElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *MarkElement) Autocorrect(a MarkAutocorrectEnum) *MarkElement {
+func (e *MarkElement) Autocorrect(a MarkAutocorrect) *MarkElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *MarkElement) Class(s ...string) *MarkElement {
 	return e
 }
 
-func (e *MarkElement) Contenteditable(a MarkContenteditableEnum) *MarkElement {
+func (e *MarkElement) Contenteditable(a MarkContenteditable) *MarkElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *MarkElement) Data(name string, s string) *MarkElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *MarkElement) Dir(a MarkDirEnum) *MarkElement {
+func (e *MarkElement) Dir(a MarkDir) *MarkElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *MarkElement) Draggable(a MarkDraggableEnum) *MarkElement {
+func (e *MarkElement) Draggable(a MarkDraggable) *MarkElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *MarkElement) Enterkeyhint(a MarkEnterkeyhintEnum) *MarkElement {
+func (e *MarkElement) Enterkeyhint(a MarkEnterkeyhint) *MarkElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *MarkElement) Hidden(a MarkHiddenEnum) *MarkElement {
+func (e *MarkElement) Hidden(a MarkHidden) *MarkElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *MarkElement) Inert(b bool) *MarkElement {
 	return e
 }
 
-func (e *MarkElement) Inputmode(a MarkInputmodeEnum) *MarkElement {
+func (e *MarkElement) Inputmode(a MarkInputmode) *MarkElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *MarkElement) Slot(s string) *MarkElement {
 	return e
 }
 
-func (e *MarkElement) Spellcheck(a MarkSpellcheckEnum) *MarkElement {
+func (e *MarkElement) Spellcheck(a MarkSpellcheck) *MarkElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *MarkElement) Title(s string) *MarkElement {
 	return e
 }
 
-func (e *MarkElement) Translate(a MarkTranslateEnum) *MarkElement {
+func (e *MarkElement) Translate(a MarkTranslate) *MarkElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *MarkElement) Writingsuggestions(a MarkWritingsuggestionsEnum) *MarkElement {
+func (e *MarkElement) Writingsuggestions(a MarkWritingsuggestions) *MarkElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

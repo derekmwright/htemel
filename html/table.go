@@ -48,115 +48,127 @@ func TableTernary(condition bool, true htemel.Node, false htemel.Node) *TableEle
 	return Table(false)
 }
 
-type TableAutocapitalizeEnum string
+type TableAutocapitalize string
 
 const (
-	TableAutocapitalizeEnumCharacters TableAutocapitalizeEnum = "characters"
-	TableAutocapitalizeEnumNone       TableAutocapitalizeEnum = "none"
-	TableAutocapitalizeEnumOff        TableAutocapitalizeEnum = "off"
-	TableAutocapitalizeEnumOn         TableAutocapitalizeEnum = "on"
-	TableAutocapitalizeEnumSentences  TableAutocapitalizeEnum = "sentences"
-	TableAutocapitalizeEnumWords      TableAutocapitalizeEnum = "words"
+	TableAutocapitalizeCharacters TableAutocapitalize = "characters"
+	TableAutocapitalizeNone       TableAutocapitalize = "none"
+	TableAutocapitalizeOff        TableAutocapitalize = "off"
+	TableAutocapitalizeOn         TableAutocapitalize = "on"
+	TableAutocapitalizeSentences  TableAutocapitalize = "sentences"
+	TableAutocapitalizeWords      TableAutocapitalize = "words"
 )
 
-type TableAutocorrectEnum string
+type TableAutocorrect string
 
 const (
-	TableAutocorrectEnumOff   TableAutocorrectEnum = "off"
-	TableAutocorrectEnumOn    TableAutocorrectEnum = "on"
-	TableAutocorrectEnumEmpty TableAutocorrectEnum = ""
+	TableAutocorrectOff   TableAutocorrect = "off"
+	TableAutocorrectOn    TableAutocorrect = "on"
+	TableAutocorrectEmpty TableAutocorrect = ""
 )
 
-type TableContenteditableEnum string
+type TableContenteditable string
 
 const (
-	TableContenteditableEnumFalse         TableContenteditableEnum = "false"
-	TableContenteditableEnumPlaintextOnly TableContenteditableEnum = "plaintext-only"
-	TableContenteditableEnumTrue          TableContenteditableEnum = "true"
-	TableContenteditableEnumEmpty         TableContenteditableEnum = ""
+	TableContenteditableFalse         TableContenteditable = "false"
+	TableContenteditablePlaintextOnly TableContenteditable = "plaintext-only"
+	TableContenteditableTrue          TableContenteditable = "true"
+	TableContenteditableEmpty         TableContenteditable = ""
 )
 
-type TableDirEnum string
+type TableDir string
 
 const (
-	TableDirEnumLtr  TableDirEnum = "ltr"
-	TableDirEnumRtl  TableDirEnum = "rtl"
-	TableDirEnumAuto TableDirEnum = "auto"
+	TableDirAuto TableDir = "auto"
+	TableDirLtr  TableDir = "ltr"
+	TableDirRtl  TableDir = "rtl"
 )
 
-type TableDraggableEnum string
+type TableDraggable string
 
 const (
-	TableDraggableEnumFalse TableDraggableEnum = "false"
-	TableDraggableEnumTrue  TableDraggableEnum = "true"
+	TableDraggableFalse TableDraggable = "false"
+	TableDraggableTrue  TableDraggable = "true"
 )
 
-type TableEnterkeyhintEnum string
+type TableEnterkeyhint string
 
 const (
-	TableEnterkeyhintEnumDone     TableEnterkeyhintEnum = "done"
-	TableEnterkeyhintEnumEnter    TableEnterkeyhintEnum = "enter"
-	TableEnterkeyhintEnumGo       TableEnterkeyhintEnum = "go"
-	TableEnterkeyhintEnumNext     TableEnterkeyhintEnum = "next"
-	TableEnterkeyhintEnumPrevious TableEnterkeyhintEnum = "previous"
-	TableEnterkeyhintEnumSearch   TableEnterkeyhintEnum = "search"
-	TableEnterkeyhintEnumSend     TableEnterkeyhintEnum = "send"
+	TableEnterkeyhintSend     TableEnterkeyhint = "send"
+	TableEnterkeyhintDone     TableEnterkeyhint = "done"
+	TableEnterkeyhintEnter    TableEnterkeyhint = "enter"
+	TableEnterkeyhintGo       TableEnterkeyhint = "go"
+	TableEnterkeyhintNext     TableEnterkeyhint = "next"
+	TableEnterkeyhintPrevious TableEnterkeyhint = "previous"
+	TableEnterkeyhintSearch   TableEnterkeyhint = "search"
 )
 
-type TableHiddenEnum string
+type TableHidden string
 
 const (
-	TableHiddenEnumHidden     TableHiddenEnum = "hidden"
-	TableHiddenEnumUntilFound TableHiddenEnum = "until-found"
-	TableHiddenEnumEmpty      TableHiddenEnum = ""
+	TableHiddenHidden     TableHidden = "hidden"
+	TableHiddenUntilFound TableHidden = "until-found"
+	TableHiddenEmpty      TableHidden = ""
 )
 
-type TableInputmodeEnum string
+type TableInputmode string
 
 const (
-	TableInputmodeEnumTel     TableInputmodeEnum = "tel"
-	TableInputmodeEnumText    TableInputmodeEnum = "text"
-	TableInputmodeEnumUrl     TableInputmodeEnum = "url"
-	TableInputmodeEnumDecimal TableInputmodeEnum = "decimal"
-	TableInputmodeEnumEmail   TableInputmodeEnum = "email"
-	TableInputmodeEnumNone    TableInputmodeEnum = "none"
-	TableInputmodeEnumNumeric TableInputmodeEnum = "numeric"
-	TableInputmodeEnumSearch  TableInputmodeEnum = "search"
+	TableInputmodeTel     TableInputmode = "tel"
+	TableInputmodeText    TableInputmode = "text"
+	TableInputmodeUrl     TableInputmode = "url"
+	TableInputmodeDecimal TableInputmode = "decimal"
+	TableInputmodeEmail   TableInputmode = "email"
+	TableInputmodeNone    TableInputmode = "none"
+	TableInputmodeNumeric TableInputmode = "numeric"
+	TableInputmodeSearch  TableInputmode = "search"
 )
 
-type TableSpellcheckEnum string
+type TableSpellcheck string
 
 const (
-	TableSpellcheckEnumFalse TableSpellcheckEnum = "false"
-	TableSpellcheckEnumTrue  TableSpellcheckEnum = "true"
-	TableSpellcheckEnumEmpty TableSpellcheckEnum = ""
+	TableSpellcheckFalse TableSpellcheck = "false"
+	TableSpellcheckTrue  TableSpellcheck = "true"
+	TableSpellcheckEmpty TableSpellcheck = ""
 )
 
-type TableTranslateEnum string
+type TableTranslate string
 
 const (
-	TableTranslateEnumNo    TableTranslateEnum = "no"
-	TableTranslateEnumYes   TableTranslateEnum = "yes"
-	TableTranslateEnumEmpty TableTranslateEnum = ""
+	TableTranslateYes   TableTranslate = "yes"
+	TableTranslateNo    TableTranslate = "no"
+	TableTranslateEmpty TableTranslate = ""
 )
 
-type TableWritingsuggestionsEnum string
+type TableWritingsuggestions string
 
 const (
-	TableWritingsuggestionsEnumFalse TableWritingsuggestionsEnum = "false"
-	TableWritingsuggestionsEnumTrue  TableWritingsuggestionsEnum = "true"
-	TableWritingsuggestionsEnumEmpty TableWritingsuggestionsEnum = ""
+	TableWritingsuggestionsFalse TableWritingsuggestions = "false"
+	TableWritingsuggestionsTrue  TableWritingsuggestions = "true"
+	TableWritingsuggestionsEmpty TableWritingsuggestions = ""
 )
 
 type tableAttrs map[string]any
 
-func (e *TableElement) Autocapitalize(a TableAutocapitalizeEnum) *TableElement {
+func (e *TableElement) AriaUnsafe(name string, s string) *TableElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TableElement) Aria(name string, s string) *TableElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *TableElement) Autocapitalize(a TableAutocapitalize) *TableElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *TableElement) Autocorrect(a TableAutocorrectEnum) *TableElement {
+func (e *TableElement) Autocorrect(a TableAutocorrect) *TableElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *TableElement) Class(s ...string) *TableElement {
 	return e
 }
 
-func (e *TableElement) Contenteditable(a TableContenteditableEnum) *TableElement {
+func (e *TableElement) Contenteditable(a TableContenteditable) *TableElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *TableElement) Data(name string, s string) *TableElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *TableElement) Dir(a TableDirEnum) *TableElement {
+func (e *TableElement) Dir(a TableDir) *TableElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *TableElement) Draggable(a TableDraggableEnum) *TableElement {
+func (e *TableElement) Draggable(a TableDraggable) *TableElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *TableElement) Enterkeyhint(a TableEnterkeyhintEnum) *TableElement {
+func (e *TableElement) Enterkeyhint(a TableEnterkeyhint) *TableElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *TableElement) Hidden(a TableHiddenEnum) *TableElement {
+func (e *TableElement) Hidden(a TableHidden) *TableElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *TableElement) Inert(b bool) *TableElement {
 	return e
 }
 
-func (e *TableElement) Inputmode(a TableInputmodeEnum) *TableElement {
+func (e *TableElement) Inputmode(a TableInputmode) *TableElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *TableElement) Slot(s string) *TableElement {
 	return e
 }
 
-func (e *TableElement) Spellcheck(a TableSpellcheckEnum) *TableElement {
+func (e *TableElement) Spellcheck(a TableSpellcheck) *TableElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *TableElement) Title(s string) *TableElement {
 	return e
 }
 
-func (e *TableElement) Translate(a TableTranslateEnum) *TableElement {
+func (e *TableElement) Translate(a TableTranslate) *TableElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *TableElement) Writingsuggestions(a TableWritingsuggestionsEnum) *TableElement {
+func (e *TableElement) Writingsuggestions(a TableWritingsuggestions) *TableElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

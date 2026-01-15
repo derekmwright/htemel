@@ -48,115 +48,127 @@ func DatalistTernary(condition bool, true htemel.Node, false htemel.Node) *Datal
 	return Datalist(false)
 }
 
-type DatalistAutocapitalizeEnum string
+type DatalistAutocapitalize string
 
 const (
-	DatalistAutocapitalizeEnumSentences  DatalistAutocapitalizeEnum = "sentences"
-	DatalistAutocapitalizeEnumWords      DatalistAutocapitalizeEnum = "words"
-	DatalistAutocapitalizeEnumCharacters DatalistAutocapitalizeEnum = "characters"
-	DatalistAutocapitalizeEnumNone       DatalistAutocapitalizeEnum = "none"
-	DatalistAutocapitalizeEnumOff        DatalistAutocapitalizeEnum = "off"
-	DatalistAutocapitalizeEnumOn         DatalistAutocapitalizeEnum = "on"
+	DatalistAutocapitalizeWords      DatalistAutocapitalize = "words"
+	DatalistAutocapitalizeCharacters DatalistAutocapitalize = "characters"
+	DatalistAutocapitalizeNone       DatalistAutocapitalize = "none"
+	DatalistAutocapitalizeOff        DatalistAutocapitalize = "off"
+	DatalistAutocapitalizeOn         DatalistAutocapitalize = "on"
+	DatalistAutocapitalizeSentences  DatalistAutocapitalize = "sentences"
 )
 
-type DatalistAutocorrectEnum string
+type DatalistAutocorrect string
 
 const (
-	DatalistAutocorrectEnumOff   DatalistAutocorrectEnum = "off"
-	DatalistAutocorrectEnumOn    DatalistAutocorrectEnum = "on"
-	DatalistAutocorrectEnumEmpty DatalistAutocorrectEnum = ""
+	DatalistAutocorrectOff   DatalistAutocorrect = "off"
+	DatalistAutocorrectOn    DatalistAutocorrect = "on"
+	DatalistAutocorrectEmpty DatalistAutocorrect = ""
 )
 
-type DatalistContenteditableEnum string
+type DatalistContenteditable string
 
 const (
-	DatalistContenteditableEnumFalse         DatalistContenteditableEnum = "false"
-	DatalistContenteditableEnumPlaintextOnly DatalistContenteditableEnum = "plaintext-only"
-	DatalistContenteditableEnumTrue          DatalistContenteditableEnum = "true"
-	DatalistContenteditableEnumEmpty         DatalistContenteditableEnum = ""
+	DatalistContenteditableFalse         DatalistContenteditable = "false"
+	DatalistContenteditablePlaintextOnly DatalistContenteditable = "plaintext-only"
+	DatalistContenteditableTrue          DatalistContenteditable = "true"
+	DatalistContenteditableEmpty         DatalistContenteditable = ""
 )
 
-type DatalistDirEnum string
+type DatalistDir string
 
 const (
-	DatalistDirEnumAuto DatalistDirEnum = "auto"
-	DatalistDirEnumLtr  DatalistDirEnum = "ltr"
-	DatalistDirEnumRtl  DatalistDirEnum = "rtl"
+	DatalistDirAuto DatalistDir = "auto"
+	DatalistDirLtr  DatalistDir = "ltr"
+	DatalistDirRtl  DatalistDir = "rtl"
 )
 
-type DatalistDraggableEnum string
+type DatalistDraggable string
 
 const (
-	DatalistDraggableEnumFalse DatalistDraggableEnum = "false"
-	DatalistDraggableEnumTrue  DatalistDraggableEnum = "true"
+	DatalistDraggableFalse DatalistDraggable = "false"
+	DatalistDraggableTrue  DatalistDraggable = "true"
 )
 
-type DatalistEnterkeyhintEnum string
+type DatalistEnterkeyhint string
 
 const (
-	DatalistEnterkeyhintEnumSend     DatalistEnterkeyhintEnum = "send"
-	DatalistEnterkeyhintEnumDone     DatalistEnterkeyhintEnum = "done"
-	DatalistEnterkeyhintEnumEnter    DatalistEnterkeyhintEnum = "enter"
-	DatalistEnterkeyhintEnumGo       DatalistEnterkeyhintEnum = "go"
-	DatalistEnterkeyhintEnumNext     DatalistEnterkeyhintEnum = "next"
-	DatalistEnterkeyhintEnumPrevious DatalistEnterkeyhintEnum = "previous"
-	DatalistEnterkeyhintEnumSearch   DatalistEnterkeyhintEnum = "search"
+	DatalistEnterkeyhintDone     DatalistEnterkeyhint = "done"
+	DatalistEnterkeyhintEnter    DatalistEnterkeyhint = "enter"
+	DatalistEnterkeyhintGo       DatalistEnterkeyhint = "go"
+	DatalistEnterkeyhintNext     DatalistEnterkeyhint = "next"
+	DatalistEnterkeyhintPrevious DatalistEnterkeyhint = "previous"
+	DatalistEnterkeyhintSearch   DatalistEnterkeyhint = "search"
+	DatalistEnterkeyhintSend     DatalistEnterkeyhint = "send"
 )
 
-type DatalistHiddenEnum string
+type DatalistHidden string
 
 const (
-	DatalistHiddenEnumHidden     DatalistHiddenEnum = "hidden"
-	DatalistHiddenEnumUntilFound DatalistHiddenEnum = "until-found"
-	DatalistHiddenEnumEmpty      DatalistHiddenEnum = ""
+	DatalistHiddenHidden     DatalistHidden = "hidden"
+	DatalistHiddenUntilFound DatalistHidden = "until-found"
+	DatalistHiddenEmpty      DatalistHidden = ""
 )
 
-type DatalistInputmodeEnum string
+type DatalistInputmode string
 
 const (
-	DatalistInputmodeEnumDecimal DatalistInputmodeEnum = "decimal"
-	DatalistInputmodeEnumEmail   DatalistInputmodeEnum = "email"
-	DatalistInputmodeEnumNone    DatalistInputmodeEnum = "none"
-	DatalistInputmodeEnumNumeric DatalistInputmodeEnum = "numeric"
-	DatalistInputmodeEnumSearch  DatalistInputmodeEnum = "search"
-	DatalistInputmodeEnumTel     DatalistInputmodeEnum = "tel"
-	DatalistInputmodeEnumText    DatalistInputmodeEnum = "text"
-	DatalistInputmodeEnumUrl     DatalistInputmodeEnum = "url"
+	DatalistInputmodeNumeric DatalistInputmode = "numeric"
+	DatalistInputmodeSearch  DatalistInputmode = "search"
+	DatalistInputmodeTel     DatalistInputmode = "tel"
+	DatalistInputmodeText    DatalistInputmode = "text"
+	DatalistInputmodeUrl     DatalistInputmode = "url"
+	DatalistInputmodeDecimal DatalistInputmode = "decimal"
+	DatalistInputmodeEmail   DatalistInputmode = "email"
+	DatalistInputmodeNone    DatalistInputmode = "none"
 )
 
-type DatalistSpellcheckEnum string
+type DatalistSpellcheck string
 
 const (
-	DatalistSpellcheckEnumFalse DatalistSpellcheckEnum = "false"
-	DatalistSpellcheckEnumTrue  DatalistSpellcheckEnum = "true"
-	DatalistSpellcheckEnumEmpty DatalistSpellcheckEnum = ""
+	DatalistSpellcheckFalse DatalistSpellcheck = "false"
+	DatalistSpellcheckTrue  DatalistSpellcheck = "true"
+	DatalistSpellcheckEmpty DatalistSpellcheck = ""
 )
 
-type DatalistTranslateEnum string
+type DatalistTranslate string
 
 const (
-	DatalistTranslateEnumNo    DatalistTranslateEnum = "no"
-	DatalistTranslateEnumYes   DatalistTranslateEnum = "yes"
-	DatalistTranslateEnumEmpty DatalistTranslateEnum = ""
+	DatalistTranslateNo    DatalistTranslate = "no"
+	DatalistTranslateYes   DatalistTranslate = "yes"
+	DatalistTranslateEmpty DatalistTranslate = ""
 )
 
-type DatalistWritingsuggestionsEnum string
+type DatalistWritingsuggestions string
 
 const (
-	DatalistWritingsuggestionsEnumTrue  DatalistWritingsuggestionsEnum = "true"
-	DatalistWritingsuggestionsEnumFalse DatalistWritingsuggestionsEnum = "false"
-	DatalistWritingsuggestionsEnumEmpty DatalistWritingsuggestionsEnum = ""
+	DatalistWritingsuggestionsFalse DatalistWritingsuggestions = "false"
+	DatalistWritingsuggestionsTrue  DatalistWritingsuggestions = "true"
+	DatalistWritingsuggestionsEmpty DatalistWritingsuggestions = ""
 )
 
 type datalistAttrs map[string]any
 
-func (e *DatalistElement) Autocapitalize(a DatalistAutocapitalizeEnum) *DatalistElement {
+func (e *DatalistElement) AriaUnsafe(name string, s string) *DatalistElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DatalistElement) Aria(name string, s string) *DatalistElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *DatalistElement) Autocapitalize(a DatalistAutocapitalize) *DatalistElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *DatalistElement) Autocorrect(a DatalistAutocorrectEnum) *DatalistElement {
+func (e *DatalistElement) Autocorrect(a DatalistAutocorrect) *DatalistElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *DatalistElement) Class(s ...string) *DatalistElement {
 	return e
 }
 
-func (e *DatalistElement) Contenteditable(a DatalistContenteditableEnum) *DatalistElement {
+func (e *DatalistElement) Contenteditable(a DatalistContenteditable) *DatalistElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *DatalistElement) Data(name string, s string) *DatalistElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *DatalistElement) Dir(a DatalistDirEnum) *DatalistElement {
+func (e *DatalistElement) Dir(a DatalistDir) *DatalistElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *DatalistElement) Draggable(a DatalistDraggableEnum) *DatalistElement {
+func (e *DatalistElement) Draggable(a DatalistDraggable) *DatalistElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *DatalistElement) Enterkeyhint(a DatalistEnterkeyhintEnum) *DatalistElement {
+func (e *DatalistElement) Enterkeyhint(a DatalistEnterkeyhint) *DatalistElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *DatalistElement) Hidden(a DatalistHiddenEnum) *DatalistElement {
+func (e *DatalistElement) Hidden(a DatalistHidden) *DatalistElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *DatalistElement) Inert(b bool) *DatalistElement {
 	return e
 }
 
-func (e *DatalistElement) Inputmode(a DatalistInputmodeEnum) *DatalistElement {
+func (e *DatalistElement) Inputmode(a DatalistInputmode) *DatalistElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *DatalistElement) Slot(s string) *DatalistElement {
 	return e
 }
 
-func (e *DatalistElement) Spellcheck(a DatalistSpellcheckEnum) *DatalistElement {
+func (e *DatalistElement) Spellcheck(a DatalistSpellcheck) *DatalistElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *DatalistElement) Title(s string) *DatalistElement {
 	return e
 }
 
-func (e *DatalistElement) Translate(a DatalistTranslateEnum) *DatalistElement {
+func (e *DatalistElement) Translate(a DatalistTranslate) *DatalistElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *DatalistElement) Writingsuggestions(a DatalistWritingsuggestionsEnum) *DatalistElement {
+func (e *DatalistElement) Writingsuggestions(a DatalistWritingsuggestions) *DatalistElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

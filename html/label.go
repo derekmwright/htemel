@@ -48,104 +48,104 @@ func LabelTernary(condition bool, true htemel.Node, false htemel.Node) *LabelEle
 	return Label(false)
 }
 
-type LabelAutocapitalizeEnum string
+type LabelAutocapitalize string
 
 const (
-	LabelAutocapitalizeEnumWords      LabelAutocapitalizeEnum = "words"
-	LabelAutocapitalizeEnumCharacters LabelAutocapitalizeEnum = "characters"
-	LabelAutocapitalizeEnumNone       LabelAutocapitalizeEnum = "none"
-	LabelAutocapitalizeEnumOff        LabelAutocapitalizeEnum = "off"
-	LabelAutocapitalizeEnumOn         LabelAutocapitalizeEnum = "on"
-	LabelAutocapitalizeEnumSentences  LabelAutocapitalizeEnum = "sentences"
+	LabelAutocapitalizeOn         LabelAutocapitalize = "on"
+	LabelAutocapitalizeSentences  LabelAutocapitalize = "sentences"
+	LabelAutocapitalizeWords      LabelAutocapitalize = "words"
+	LabelAutocapitalizeCharacters LabelAutocapitalize = "characters"
+	LabelAutocapitalizeNone       LabelAutocapitalize = "none"
+	LabelAutocapitalizeOff        LabelAutocapitalize = "off"
 )
 
-type LabelAutocorrectEnum string
+type LabelAutocorrect string
 
 const (
-	LabelAutocorrectEnumOff   LabelAutocorrectEnum = "off"
-	LabelAutocorrectEnumOn    LabelAutocorrectEnum = "on"
-	LabelAutocorrectEnumEmpty LabelAutocorrectEnum = ""
+	LabelAutocorrectOff   LabelAutocorrect = "off"
+	LabelAutocorrectOn    LabelAutocorrect = "on"
+	LabelAutocorrectEmpty LabelAutocorrect = ""
 )
 
-type LabelContenteditableEnum string
+type LabelContenteditable string
 
 const (
-	LabelContenteditableEnumFalse         LabelContenteditableEnum = "false"
-	LabelContenteditableEnumPlaintextOnly LabelContenteditableEnum = "plaintext-only"
-	LabelContenteditableEnumTrue          LabelContenteditableEnum = "true"
-	LabelContenteditableEnumEmpty         LabelContenteditableEnum = ""
+	LabelContenteditableFalse         LabelContenteditable = "false"
+	LabelContenteditablePlaintextOnly LabelContenteditable = "plaintext-only"
+	LabelContenteditableTrue          LabelContenteditable = "true"
+	LabelContenteditableEmpty         LabelContenteditable = ""
 )
 
-type LabelDirEnum string
+type LabelDir string
 
 const (
-	LabelDirEnumAuto LabelDirEnum = "auto"
-	LabelDirEnumLtr  LabelDirEnum = "ltr"
-	LabelDirEnumRtl  LabelDirEnum = "rtl"
+	LabelDirRtl  LabelDir = "rtl"
+	LabelDirAuto LabelDir = "auto"
+	LabelDirLtr  LabelDir = "ltr"
 )
 
-type LabelDraggableEnum string
+type LabelDraggable string
 
 const (
-	LabelDraggableEnumFalse LabelDraggableEnum = "false"
-	LabelDraggableEnumTrue  LabelDraggableEnum = "true"
+	LabelDraggableFalse LabelDraggable = "false"
+	LabelDraggableTrue  LabelDraggable = "true"
 )
 
-type LabelEnterkeyhintEnum string
+type LabelEnterkeyhint string
 
 const (
-	LabelEnterkeyhintEnumGo       LabelEnterkeyhintEnum = "go"
-	LabelEnterkeyhintEnumNext     LabelEnterkeyhintEnum = "next"
-	LabelEnterkeyhintEnumPrevious LabelEnterkeyhintEnum = "previous"
-	LabelEnterkeyhintEnumSearch   LabelEnterkeyhintEnum = "search"
-	LabelEnterkeyhintEnumSend     LabelEnterkeyhintEnum = "send"
-	LabelEnterkeyhintEnumDone     LabelEnterkeyhintEnum = "done"
-	LabelEnterkeyhintEnumEnter    LabelEnterkeyhintEnum = "enter"
+	LabelEnterkeyhintDone     LabelEnterkeyhint = "done"
+	LabelEnterkeyhintEnter    LabelEnterkeyhint = "enter"
+	LabelEnterkeyhintGo       LabelEnterkeyhint = "go"
+	LabelEnterkeyhintNext     LabelEnterkeyhint = "next"
+	LabelEnterkeyhintPrevious LabelEnterkeyhint = "previous"
+	LabelEnterkeyhintSearch   LabelEnterkeyhint = "search"
+	LabelEnterkeyhintSend     LabelEnterkeyhint = "send"
 )
 
-type LabelHiddenEnum string
+type LabelHidden string
 
 const (
-	LabelHiddenEnumHidden     LabelHiddenEnum = "hidden"
-	LabelHiddenEnumUntilFound LabelHiddenEnum = "until-found"
-	LabelHiddenEnumEmpty      LabelHiddenEnum = ""
+	LabelHiddenUntilFound LabelHidden = "until-found"
+	LabelHiddenHidden     LabelHidden = "hidden"
+	LabelHiddenEmpty      LabelHidden = ""
 )
 
-type LabelInputmodeEnum string
+type LabelInputmode string
 
 const (
-	LabelInputmodeEnumUrl     LabelInputmodeEnum = "url"
-	LabelInputmodeEnumDecimal LabelInputmodeEnum = "decimal"
-	LabelInputmodeEnumEmail   LabelInputmodeEnum = "email"
-	LabelInputmodeEnumNone    LabelInputmodeEnum = "none"
-	LabelInputmodeEnumNumeric LabelInputmodeEnum = "numeric"
-	LabelInputmodeEnumSearch  LabelInputmodeEnum = "search"
-	LabelInputmodeEnumTel     LabelInputmodeEnum = "tel"
-	LabelInputmodeEnumText    LabelInputmodeEnum = "text"
+	LabelInputmodeNone    LabelInputmode = "none"
+	LabelInputmodeNumeric LabelInputmode = "numeric"
+	LabelInputmodeSearch  LabelInputmode = "search"
+	LabelInputmodeTel     LabelInputmode = "tel"
+	LabelInputmodeText    LabelInputmode = "text"
+	LabelInputmodeUrl     LabelInputmode = "url"
+	LabelInputmodeDecimal LabelInputmode = "decimal"
+	LabelInputmodeEmail   LabelInputmode = "email"
 )
 
-type LabelSpellcheckEnum string
+type LabelSpellcheck string
 
 const (
-	LabelSpellcheckEnumFalse LabelSpellcheckEnum = "false"
-	LabelSpellcheckEnumTrue  LabelSpellcheckEnum = "true"
-	LabelSpellcheckEnumEmpty LabelSpellcheckEnum = ""
+	LabelSpellcheckFalse LabelSpellcheck = "false"
+	LabelSpellcheckTrue  LabelSpellcheck = "true"
+	LabelSpellcheckEmpty LabelSpellcheck = ""
 )
 
-type LabelTranslateEnum string
+type LabelTranslate string
 
 const (
-	LabelTranslateEnumNo    LabelTranslateEnum = "no"
-	LabelTranslateEnumYes   LabelTranslateEnum = "yes"
-	LabelTranslateEnumEmpty LabelTranslateEnum = ""
+	LabelTranslateYes   LabelTranslate = "yes"
+	LabelTranslateNo    LabelTranslate = "no"
+	LabelTranslateEmpty LabelTranslate = ""
 )
 
-type LabelWritingsuggestionsEnum string
+type LabelWritingsuggestions string
 
 const (
-	LabelWritingsuggestionsEnumFalse LabelWritingsuggestionsEnum = "false"
-	LabelWritingsuggestionsEnumTrue  LabelWritingsuggestionsEnum = "true"
-	LabelWritingsuggestionsEnumEmpty LabelWritingsuggestionsEnum = ""
+	LabelWritingsuggestionsFalse LabelWritingsuggestions = "false"
+	LabelWritingsuggestionsTrue  LabelWritingsuggestions = "true"
+	LabelWritingsuggestionsEmpty LabelWritingsuggestions = ""
 )
 
 type labelAttrs map[string]any
@@ -156,13 +156,25 @@ func (e *LabelElement) For(s string) *LabelElement {
 	return e
 }
 
-func (e *LabelElement) Autocapitalize(a LabelAutocapitalizeEnum) *LabelElement {
+func (e *LabelElement) AriaUnsafe(name string, s string) *LabelElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *LabelElement) Aria(name string, s string) *LabelElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *LabelElement) Autocapitalize(a LabelAutocapitalize) *LabelElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *LabelElement) Autocorrect(a LabelAutocorrectEnum) *LabelElement {
+func (e *LabelElement) Autocorrect(a LabelAutocorrect) *LabelElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -180,7 +192,7 @@ func (e *LabelElement) Class(s ...string) *LabelElement {
 	return e
 }
 
-func (e *LabelElement) Contenteditable(a LabelContenteditableEnum) *LabelElement {
+func (e *LabelElement) Contenteditable(a LabelContenteditable) *LabelElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -198,25 +210,25 @@ func (e *LabelElement) Data(name string, s string) *LabelElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *LabelElement) Dir(a LabelDirEnum) *LabelElement {
+func (e *LabelElement) Dir(a LabelDir) *LabelElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *LabelElement) Draggable(a LabelDraggableEnum) *LabelElement {
+func (e *LabelElement) Draggable(a LabelDraggable) *LabelElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *LabelElement) Enterkeyhint(a LabelEnterkeyhintEnum) *LabelElement {
+func (e *LabelElement) Enterkeyhint(a LabelEnterkeyhint) *LabelElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *LabelElement) Hidden(a LabelHiddenEnum) *LabelElement {
+func (e *LabelElement) Hidden(a LabelHidden) *LabelElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -234,7 +246,7 @@ func (e *LabelElement) Inert(b bool) *LabelElement {
 	return e
 }
 
-func (e *LabelElement) Inputmode(a LabelInputmodeEnum) *LabelElement {
+func (e *LabelElement) Inputmode(a LabelInputmode) *LabelElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -294,7 +306,7 @@ func (e *LabelElement) Slot(s string) *LabelElement {
 	return e
 }
 
-func (e *LabelElement) Spellcheck(a LabelSpellcheckEnum) *LabelElement {
+func (e *LabelElement) Spellcheck(a LabelSpellcheck) *LabelElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -318,13 +330,13 @@ func (e *LabelElement) Title(s string) *LabelElement {
 	return e
 }
 
-func (e *LabelElement) Translate(a LabelTranslateEnum) *LabelElement {
+func (e *LabelElement) Translate(a LabelTranslate) *LabelElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *LabelElement) Writingsuggestions(a LabelWritingsuggestionsEnum) *LabelElement {
+func (e *LabelElement) Writingsuggestions(a LabelWritingsuggestions) *LabelElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

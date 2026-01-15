@@ -48,115 +48,127 @@ func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node)
 	return Selectedcontent(false)
 }
 
-type SelectedcontentAutocapitalizeEnum string
+type SelectedcontentAutocapitalize string
 
 const (
-	SelectedcontentAutocapitalizeEnumCharacters SelectedcontentAutocapitalizeEnum = "characters"
-	SelectedcontentAutocapitalizeEnumNone       SelectedcontentAutocapitalizeEnum = "none"
-	SelectedcontentAutocapitalizeEnumOff        SelectedcontentAutocapitalizeEnum = "off"
-	SelectedcontentAutocapitalizeEnumOn         SelectedcontentAutocapitalizeEnum = "on"
-	SelectedcontentAutocapitalizeEnumSentences  SelectedcontentAutocapitalizeEnum = "sentences"
-	SelectedcontentAutocapitalizeEnumWords      SelectedcontentAutocapitalizeEnum = "words"
+	SelectedcontentAutocapitalizeCharacters SelectedcontentAutocapitalize = "characters"
+	SelectedcontentAutocapitalizeNone       SelectedcontentAutocapitalize = "none"
+	SelectedcontentAutocapitalizeOff        SelectedcontentAutocapitalize = "off"
+	SelectedcontentAutocapitalizeOn         SelectedcontentAutocapitalize = "on"
+	SelectedcontentAutocapitalizeSentences  SelectedcontentAutocapitalize = "sentences"
+	SelectedcontentAutocapitalizeWords      SelectedcontentAutocapitalize = "words"
 )
 
-type SelectedcontentAutocorrectEnum string
+type SelectedcontentAutocorrect string
 
 const (
-	SelectedcontentAutocorrectEnumOff   SelectedcontentAutocorrectEnum = "off"
-	SelectedcontentAutocorrectEnumOn    SelectedcontentAutocorrectEnum = "on"
-	SelectedcontentAutocorrectEnumEmpty SelectedcontentAutocorrectEnum = ""
+	SelectedcontentAutocorrectOn    SelectedcontentAutocorrect = "on"
+	SelectedcontentAutocorrectOff   SelectedcontentAutocorrect = "off"
+	SelectedcontentAutocorrectEmpty SelectedcontentAutocorrect = ""
 )
 
-type SelectedcontentContenteditableEnum string
+type SelectedcontentContenteditable string
 
 const (
-	SelectedcontentContenteditableEnumFalse         SelectedcontentContenteditableEnum = "false"
-	SelectedcontentContenteditableEnumPlaintextOnly SelectedcontentContenteditableEnum = "plaintext-only"
-	SelectedcontentContenteditableEnumTrue          SelectedcontentContenteditableEnum = "true"
-	SelectedcontentContenteditableEnumEmpty         SelectedcontentContenteditableEnum = ""
+	SelectedcontentContenteditableFalse         SelectedcontentContenteditable = "false"
+	SelectedcontentContenteditablePlaintextOnly SelectedcontentContenteditable = "plaintext-only"
+	SelectedcontentContenteditableTrue          SelectedcontentContenteditable = "true"
+	SelectedcontentContenteditableEmpty         SelectedcontentContenteditable = ""
 )
 
-type SelectedcontentDirEnum string
+type SelectedcontentDir string
 
 const (
-	SelectedcontentDirEnumAuto SelectedcontentDirEnum = "auto"
-	SelectedcontentDirEnumLtr  SelectedcontentDirEnum = "ltr"
-	SelectedcontentDirEnumRtl  SelectedcontentDirEnum = "rtl"
+	SelectedcontentDirAuto SelectedcontentDir = "auto"
+	SelectedcontentDirLtr  SelectedcontentDir = "ltr"
+	SelectedcontentDirRtl  SelectedcontentDir = "rtl"
 )
 
-type SelectedcontentDraggableEnum string
+type SelectedcontentDraggable string
 
 const (
-	SelectedcontentDraggableEnumFalse SelectedcontentDraggableEnum = "false"
-	SelectedcontentDraggableEnumTrue  SelectedcontentDraggableEnum = "true"
+	SelectedcontentDraggableFalse SelectedcontentDraggable = "false"
+	SelectedcontentDraggableTrue  SelectedcontentDraggable = "true"
 )
 
-type SelectedcontentEnterkeyhintEnum string
+type SelectedcontentEnterkeyhint string
 
 const (
-	SelectedcontentEnterkeyhintEnumEnter    SelectedcontentEnterkeyhintEnum = "enter"
-	SelectedcontentEnterkeyhintEnumGo       SelectedcontentEnterkeyhintEnum = "go"
-	SelectedcontentEnterkeyhintEnumNext     SelectedcontentEnterkeyhintEnum = "next"
-	SelectedcontentEnterkeyhintEnumPrevious SelectedcontentEnterkeyhintEnum = "previous"
-	SelectedcontentEnterkeyhintEnumSearch   SelectedcontentEnterkeyhintEnum = "search"
-	SelectedcontentEnterkeyhintEnumSend     SelectedcontentEnterkeyhintEnum = "send"
-	SelectedcontentEnterkeyhintEnumDone     SelectedcontentEnterkeyhintEnum = "done"
+	SelectedcontentEnterkeyhintNext     SelectedcontentEnterkeyhint = "next"
+	SelectedcontentEnterkeyhintPrevious SelectedcontentEnterkeyhint = "previous"
+	SelectedcontentEnterkeyhintSearch   SelectedcontentEnterkeyhint = "search"
+	SelectedcontentEnterkeyhintSend     SelectedcontentEnterkeyhint = "send"
+	SelectedcontentEnterkeyhintDone     SelectedcontentEnterkeyhint = "done"
+	SelectedcontentEnterkeyhintEnter    SelectedcontentEnterkeyhint = "enter"
+	SelectedcontentEnterkeyhintGo       SelectedcontentEnterkeyhint = "go"
 )
 
-type SelectedcontentHiddenEnum string
+type SelectedcontentHidden string
 
 const (
-	SelectedcontentHiddenEnumHidden     SelectedcontentHiddenEnum = "hidden"
-	SelectedcontentHiddenEnumUntilFound SelectedcontentHiddenEnum = "until-found"
-	SelectedcontentHiddenEnumEmpty      SelectedcontentHiddenEnum = ""
+	SelectedcontentHiddenHidden     SelectedcontentHidden = "hidden"
+	SelectedcontentHiddenUntilFound SelectedcontentHidden = "until-found"
+	SelectedcontentHiddenEmpty      SelectedcontentHidden = ""
 )
 
-type SelectedcontentInputmodeEnum string
+type SelectedcontentInputmode string
 
 const (
-	SelectedcontentInputmodeEnumText    SelectedcontentInputmodeEnum = "text"
-	SelectedcontentInputmodeEnumUrl     SelectedcontentInputmodeEnum = "url"
-	SelectedcontentInputmodeEnumDecimal SelectedcontentInputmodeEnum = "decimal"
-	SelectedcontentInputmodeEnumEmail   SelectedcontentInputmodeEnum = "email"
-	SelectedcontentInputmodeEnumNone    SelectedcontentInputmodeEnum = "none"
-	SelectedcontentInputmodeEnumNumeric SelectedcontentInputmodeEnum = "numeric"
-	SelectedcontentInputmodeEnumSearch  SelectedcontentInputmodeEnum = "search"
-	SelectedcontentInputmodeEnumTel     SelectedcontentInputmodeEnum = "tel"
+	SelectedcontentInputmodeDecimal SelectedcontentInputmode = "decimal"
+	SelectedcontentInputmodeEmail   SelectedcontentInputmode = "email"
+	SelectedcontentInputmodeNone    SelectedcontentInputmode = "none"
+	SelectedcontentInputmodeNumeric SelectedcontentInputmode = "numeric"
+	SelectedcontentInputmodeSearch  SelectedcontentInputmode = "search"
+	SelectedcontentInputmodeTel     SelectedcontentInputmode = "tel"
+	SelectedcontentInputmodeText    SelectedcontentInputmode = "text"
+	SelectedcontentInputmodeUrl     SelectedcontentInputmode = "url"
 )
 
-type SelectedcontentSpellcheckEnum string
+type SelectedcontentSpellcheck string
 
 const (
-	SelectedcontentSpellcheckEnumFalse SelectedcontentSpellcheckEnum = "false"
-	SelectedcontentSpellcheckEnumTrue  SelectedcontentSpellcheckEnum = "true"
-	SelectedcontentSpellcheckEnumEmpty SelectedcontentSpellcheckEnum = ""
+	SelectedcontentSpellcheckFalse SelectedcontentSpellcheck = "false"
+	SelectedcontentSpellcheckTrue  SelectedcontentSpellcheck = "true"
+	SelectedcontentSpellcheckEmpty SelectedcontentSpellcheck = ""
 )
 
-type SelectedcontentTranslateEnum string
+type SelectedcontentTranslate string
 
 const (
-	SelectedcontentTranslateEnumNo    SelectedcontentTranslateEnum = "no"
-	SelectedcontentTranslateEnumYes   SelectedcontentTranslateEnum = "yes"
-	SelectedcontentTranslateEnumEmpty SelectedcontentTranslateEnum = ""
+	SelectedcontentTranslateNo    SelectedcontentTranslate = "no"
+	SelectedcontentTranslateYes   SelectedcontentTranslate = "yes"
+	SelectedcontentTranslateEmpty SelectedcontentTranslate = ""
 )
 
-type SelectedcontentWritingsuggestionsEnum string
+type SelectedcontentWritingsuggestions string
 
 const (
-	SelectedcontentWritingsuggestionsEnumFalse SelectedcontentWritingsuggestionsEnum = "false"
-	SelectedcontentWritingsuggestionsEnumTrue  SelectedcontentWritingsuggestionsEnum = "true"
-	SelectedcontentWritingsuggestionsEnumEmpty SelectedcontentWritingsuggestionsEnum = ""
+	SelectedcontentWritingsuggestionsFalse SelectedcontentWritingsuggestions = "false"
+	SelectedcontentWritingsuggestionsTrue  SelectedcontentWritingsuggestions = "true"
+	SelectedcontentWritingsuggestionsEmpty SelectedcontentWritingsuggestions = ""
 )
 
 type selectedcontentAttrs map[string]any
 
-func (e *SelectedcontentElement) Autocapitalize(a SelectedcontentAutocapitalizeEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) AriaUnsafe(name string, s string) *SelectedcontentElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SelectedcontentElement) Aria(name string, s string) *SelectedcontentElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SelectedcontentElement) Autocapitalize(a SelectedcontentAutocapitalize) *SelectedcontentElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SelectedcontentElement) Autocorrect(a SelectedcontentAutocorrectEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) Autocorrect(a SelectedcontentAutocorrect) *SelectedcontentElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *SelectedcontentElement) Class(s ...string) *SelectedcontentElement {
 	return e
 }
 
-func (e *SelectedcontentElement) Contenteditable(a SelectedcontentContenteditableEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) Contenteditable(a SelectedcontentContenteditable) *SelectedcontentElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *SelectedcontentElement) Data(name string, s string) *SelectedcontentEle
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SelectedcontentElement) Dir(a SelectedcontentDirEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) Dir(a SelectedcontentDir) *SelectedcontentElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SelectedcontentElement) Draggable(a SelectedcontentDraggableEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) Draggable(a SelectedcontentDraggable) *SelectedcontentElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SelectedcontentElement) Enterkeyhint(a SelectedcontentEnterkeyhintEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) Enterkeyhint(a SelectedcontentEnterkeyhint) *SelectedcontentElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SelectedcontentElement) Hidden(a SelectedcontentHiddenEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) Hidden(a SelectedcontentHidden) *SelectedcontentElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *SelectedcontentElement) Inert(b bool) *SelectedcontentElement {
 	return e
 }
 
-func (e *SelectedcontentElement) Inputmode(a SelectedcontentInputmodeEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) Inputmode(a SelectedcontentInputmode) *SelectedcontentElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *SelectedcontentElement) Slot(s string) *SelectedcontentElement {
 	return e
 }
 
-func (e *SelectedcontentElement) Spellcheck(a SelectedcontentSpellcheckEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) Spellcheck(a SelectedcontentSpellcheck) *SelectedcontentElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *SelectedcontentElement) Title(s string) *SelectedcontentElement {
 	return e
 }
 
-func (e *SelectedcontentElement) Translate(a SelectedcontentTranslateEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) Translate(a SelectedcontentTranslate) *SelectedcontentElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SelectedcontentElement) Writingsuggestions(a SelectedcontentWritingsuggestionsEnum) *SelectedcontentElement {
+func (e *SelectedcontentElement) Writingsuggestions(a SelectedcontentWritingsuggestions) *SelectedcontentElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,104 +48,104 @@ func OlTernary(condition bool, true htemel.Node, false htemel.Node) *OlElement {
 	return Ol(false)
 }
 
-type OlAutocapitalizeEnum string
+type OlAutocapitalize string
 
 const (
-	OlAutocapitalizeEnumSentences  OlAutocapitalizeEnum = "sentences"
-	OlAutocapitalizeEnumWords      OlAutocapitalizeEnum = "words"
-	OlAutocapitalizeEnumCharacters OlAutocapitalizeEnum = "characters"
-	OlAutocapitalizeEnumNone       OlAutocapitalizeEnum = "none"
-	OlAutocapitalizeEnumOff        OlAutocapitalizeEnum = "off"
-	OlAutocapitalizeEnumOn         OlAutocapitalizeEnum = "on"
+	OlAutocapitalizeCharacters OlAutocapitalize = "characters"
+	OlAutocapitalizeNone       OlAutocapitalize = "none"
+	OlAutocapitalizeOff        OlAutocapitalize = "off"
+	OlAutocapitalizeOn         OlAutocapitalize = "on"
+	OlAutocapitalizeSentences  OlAutocapitalize = "sentences"
+	OlAutocapitalizeWords      OlAutocapitalize = "words"
 )
 
-type OlAutocorrectEnum string
+type OlAutocorrect string
 
 const (
-	OlAutocorrectEnumOff   OlAutocorrectEnum = "off"
-	OlAutocorrectEnumOn    OlAutocorrectEnum = "on"
-	OlAutocorrectEnumEmpty OlAutocorrectEnum = ""
+	OlAutocorrectOff   OlAutocorrect = "off"
+	OlAutocorrectOn    OlAutocorrect = "on"
+	OlAutocorrectEmpty OlAutocorrect = ""
 )
 
-type OlContenteditableEnum string
+type OlContenteditable string
 
 const (
-	OlContenteditableEnumFalse         OlContenteditableEnum = "false"
-	OlContenteditableEnumPlaintextOnly OlContenteditableEnum = "plaintext-only"
-	OlContenteditableEnumTrue          OlContenteditableEnum = "true"
-	OlContenteditableEnumEmpty         OlContenteditableEnum = ""
+	OlContenteditableFalse         OlContenteditable = "false"
+	OlContenteditablePlaintextOnly OlContenteditable = "plaintext-only"
+	OlContenteditableTrue          OlContenteditable = "true"
+	OlContenteditableEmpty         OlContenteditable = ""
 )
 
-type OlDirEnum string
+type OlDir string
 
 const (
-	OlDirEnumAuto OlDirEnum = "auto"
-	OlDirEnumLtr  OlDirEnum = "ltr"
-	OlDirEnumRtl  OlDirEnum = "rtl"
+	OlDirAuto OlDir = "auto"
+	OlDirLtr  OlDir = "ltr"
+	OlDirRtl  OlDir = "rtl"
 )
 
-type OlDraggableEnum string
+type OlDraggable string
 
 const (
-	OlDraggableEnumFalse OlDraggableEnum = "false"
-	OlDraggableEnumTrue  OlDraggableEnum = "true"
+	OlDraggableFalse OlDraggable = "false"
+	OlDraggableTrue  OlDraggable = "true"
 )
 
-type OlEnterkeyhintEnum string
+type OlEnterkeyhint string
 
 const (
-	OlEnterkeyhintEnumSearch   OlEnterkeyhintEnum = "search"
-	OlEnterkeyhintEnumSend     OlEnterkeyhintEnum = "send"
-	OlEnterkeyhintEnumDone     OlEnterkeyhintEnum = "done"
-	OlEnterkeyhintEnumEnter    OlEnterkeyhintEnum = "enter"
-	OlEnterkeyhintEnumGo       OlEnterkeyhintEnum = "go"
-	OlEnterkeyhintEnumNext     OlEnterkeyhintEnum = "next"
-	OlEnterkeyhintEnumPrevious OlEnterkeyhintEnum = "previous"
+	OlEnterkeyhintSend     OlEnterkeyhint = "send"
+	OlEnterkeyhintDone     OlEnterkeyhint = "done"
+	OlEnterkeyhintEnter    OlEnterkeyhint = "enter"
+	OlEnterkeyhintGo       OlEnterkeyhint = "go"
+	OlEnterkeyhintNext     OlEnterkeyhint = "next"
+	OlEnterkeyhintPrevious OlEnterkeyhint = "previous"
+	OlEnterkeyhintSearch   OlEnterkeyhint = "search"
 )
 
-type OlHiddenEnum string
+type OlHidden string
 
 const (
-	OlHiddenEnumHidden     OlHiddenEnum = "hidden"
-	OlHiddenEnumUntilFound OlHiddenEnum = "until-found"
-	OlHiddenEnumEmpty      OlHiddenEnum = ""
+	OlHiddenHidden     OlHidden = "hidden"
+	OlHiddenUntilFound OlHidden = "until-found"
+	OlHiddenEmpty      OlHidden = ""
 )
 
-type OlInputmodeEnum string
+type OlInputmode string
 
 const (
-	OlInputmodeEnumDecimal OlInputmodeEnum = "decimal"
-	OlInputmodeEnumEmail   OlInputmodeEnum = "email"
-	OlInputmodeEnumNone    OlInputmodeEnum = "none"
-	OlInputmodeEnumNumeric OlInputmodeEnum = "numeric"
-	OlInputmodeEnumSearch  OlInputmodeEnum = "search"
-	OlInputmodeEnumTel     OlInputmodeEnum = "tel"
-	OlInputmodeEnumText    OlInputmodeEnum = "text"
-	OlInputmodeEnumUrl     OlInputmodeEnum = "url"
+	OlInputmodeEmail   OlInputmode = "email"
+	OlInputmodeNone    OlInputmode = "none"
+	OlInputmodeNumeric OlInputmode = "numeric"
+	OlInputmodeSearch  OlInputmode = "search"
+	OlInputmodeTel     OlInputmode = "tel"
+	OlInputmodeText    OlInputmode = "text"
+	OlInputmodeUrl     OlInputmode = "url"
+	OlInputmodeDecimal OlInputmode = "decimal"
 )
 
-type OlSpellcheckEnum string
+type OlSpellcheck string
 
 const (
-	OlSpellcheckEnumFalse OlSpellcheckEnum = "false"
-	OlSpellcheckEnumTrue  OlSpellcheckEnum = "true"
-	OlSpellcheckEnumEmpty OlSpellcheckEnum = ""
+	OlSpellcheckFalse OlSpellcheck = "false"
+	OlSpellcheckTrue  OlSpellcheck = "true"
+	OlSpellcheckEmpty OlSpellcheck = ""
 )
 
-type OlTranslateEnum string
+type OlTranslate string
 
 const (
-	OlTranslateEnumYes   OlTranslateEnum = "yes"
-	OlTranslateEnumNo    OlTranslateEnum = "no"
-	OlTranslateEnumEmpty OlTranslateEnum = ""
+	OlTranslateNo    OlTranslate = "no"
+	OlTranslateYes   OlTranslate = "yes"
+	OlTranslateEmpty OlTranslate = ""
 )
 
-type OlWritingsuggestionsEnum string
+type OlWritingsuggestions string
 
 const (
-	OlWritingsuggestionsEnumFalse OlWritingsuggestionsEnum = "false"
-	OlWritingsuggestionsEnumTrue  OlWritingsuggestionsEnum = "true"
-	OlWritingsuggestionsEnumEmpty OlWritingsuggestionsEnum = ""
+	OlWritingsuggestionsFalse OlWritingsuggestions = "false"
+	OlWritingsuggestionsTrue  OlWritingsuggestions = "true"
+	OlWritingsuggestionsEmpty OlWritingsuggestions = ""
 )
 
 type olAttrs map[string]any
@@ -162,13 +162,25 @@ func (e *OlElement) Start(i int) *OlElement {
 	return e
 }
 
-func (e *OlElement) Autocapitalize(a OlAutocapitalizeEnum) *OlElement {
+func (e *OlElement) AriaUnsafe(name string, s string) *OlElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *OlElement) Aria(name string, s string) *OlElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *OlElement) Autocapitalize(a OlAutocapitalize) *OlElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *OlElement) Autocorrect(a OlAutocorrectEnum) *OlElement {
+func (e *OlElement) Autocorrect(a OlAutocorrect) *OlElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -186,7 +198,7 @@ func (e *OlElement) Class(s ...string) *OlElement {
 	return e
 }
 
-func (e *OlElement) Contenteditable(a OlContenteditableEnum) *OlElement {
+func (e *OlElement) Contenteditable(a OlContenteditable) *OlElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -204,25 +216,25 @@ func (e *OlElement) Data(name string, s string) *OlElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *OlElement) Dir(a OlDirEnum) *OlElement {
+func (e *OlElement) Dir(a OlDir) *OlElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *OlElement) Draggable(a OlDraggableEnum) *OlElement {
+func (e *OlElement) Draggable(a OlDraggable) *OlElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *OlElement) Enterkeyhint(a OlEnterkeyhintEnum) *OlElement {
+func (e *OlElement) Enterkeyhint(a OlEnterkeyhint) *OlElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *OlElement) Hidden(a OlHiddenEnum) *OlElement {
+func (e *OlElement) Hidden(a OlHidden) *OlElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -240,7 +252,7 @@ func (e *OlElement) Inert(b bool) *OlElement {
 	return e
 }
 
-func (e *OlElement) Inputmode(a OlInputmodeEnum) *OlElement {
+func (e *OlElement) Inputmode(a OlInputmode) *OlElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -300,7 +312,7 @@ func (e *OlElement) Slot(s string) *OlElement {
 	return e
 }
 
-func (e *OlElement) Spellcheck(a OlSpellcheckEnum) *OlElement {
+func (e *OlElement) Spellcheck(a OlSpellcheck) *OlElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -324,13 +336,13 @@ func (e *OlElement) Title(s string) *OlElement {
 	return e
 }
 
-func (e *OlElement) Translate(a OlTranslateEnum) *OlElement {
+func (e *OlElement) Translate(a OlTranslate) *OlElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *OlElement) Writingsuggestions(a OlWritingsuggestionsEnum) *OlElement {
+func (e *OlElement) Writingsuggestions(a OlWritingsuggestions) *OlElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

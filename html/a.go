@@ -48,104 +48,104 @@ func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
 	return A(false)
 }
 
-type AAutocapitalizeEnum string
+type AAutocapitalize string
 
 const (
-	AAutocapitalizeEnumOn         AAutocapitalizeEnum = "on"
-	AAutocapitalizeEnumSentences  AAutocapitalizeEnum = "sentences"
-	AAutocapitalizeEnumWords      AAutocapitalizeEnum = "words"
-	AAutocapitalizeEnumCharacters AAutocapitalizeEnum = "characters"
-	AAutocapitalizeEnumNone       AAutocapitalizeEnum = "none"
-	AAutocapitalizeEnumOff        AAutocapitalizeEnum = "off"
+	AAutocapitalizeCharacters AAutocapitalize = "characters"
+	AAutocapitalizeNone       AAutocapitalize = "none"
+	AAutocapitalizeOff        AAutocapitalize = "off"
+	AAutocapitalizeOn         AAutocapitalize = "on"
+	AAutocapitalizeSentences  AAutocapitalize = "sentences"
+	AAutocapitalizeWords      AAutocapitalize = "words"
 )
 
-type AAutocorrectEnum string
+type AAutocorrect string
 
 const (
-	AAutocorrectEnumOff   AAutocorrectEnum = "off"
-	AAutocorrectEnumOn    AAutocorrectEnum = "on"
-	AAutocorrectEnumEmpty AAutocorrectEnum = ""
+	AAutocorrectOff   AAutocorrect = "off"
+	AAutocorrectOn    AAutocorrect = "on"
+	AAutocorrectEmpty AAutocorrect = ""
 )
 
-type AContenteditableEnum string
+type AContenteditable string
 
 const (
-	AContenteditableEnumPlaintextOnly AContenteditableEnum = "plaintext-only"
-	AContenteditableEnumTrue          AContenteditableEnum = "true"
-	AContenteditableEnumFalse         AContenteditableEnum = "false"
-	AContenteditableEnumEmpty         AContenteditableEnum = ""
+	AContenteditableTrue          AContenteditable = "true"
+	AContenteditableFalse         AContenteditable = "false"
+	AContenteditablePlaintextOnly AContenteditable = "plaintext-only"
+	AContenteditableEmpty         AContenteditable = ""
 )
 
-type ADirEnum string
+type ADir string
 
 const (
-	ADirEnumAuto ADirEnum = "auto"
-	ADirEnumLtr  ADirEnum = "ltr"
-	ADirEnumRtl  ADirEnum = "rtl"
+	ADirRtl  ADir = "rtl"
+	ADirAuto ADir = "auto"
+	ADirLtr  ADir = "ltr"
 )
 
-type ADraggableEnum string
+type ADraggable string
 
 const (
-	ADraggableEnumFalse ADraggableEnum = "false"
-	ADraggableEnumTrue  ADraggableEnum = "true"
+	ADraggableFalse ADraggable = "false"
+	ADraggableTrue  ADraggable = "true"
 )
 
-type AEnterkeyhintEnum string
+type AEnterkeyhint string
 
 const (
-	AEnterkeyhintEnumGo       AEnterkeyhintEnum = "go"
-	AEnterkeyhintEnumNext     AEnterkeyhintEnum = "next"
-	AEnterkeyhintEnumPrevious AEnterkeyhintEnum = "previous"
-	AEnterkeyhintEnumSearch   AEnterkeyhintEnum = "search"
-	AEnterkeyhintEnumSend     AEnterkeyhintEnum = "send"
-	AEnterkeyhintEnumDone     AEnterkeyhintEnum = "done"
-	AEnterkeyhintEnumEnter    AEnterkeyhintEnum = "enter"
+	AEnterkeyhintSearch   AEnterkeyhint = "search"
+	AEnterkeyhintSend     AEnterkeyhint = "send"
+	AEnterkeyhintDone     AEnterkeyhint = "done"
+	AEnterkeyhintEnter    AEnterkeyhint = "enter"
+	AEnterkeyhintGo       AEnterkeyhint = "go"
+	AEnterkeyhintNext     AEnterkeyhint = "next"
+	AEnterkeyhintPrevious AEnterkeyhint = "previous"
 )
 
-type AHiddenEnum string
+type AHidden string
 
 const (
-	AHiddenEnumHidden     AHiddenEnum = "hidden"
-	AHiddenEnumUntilFound AHiddenEnum = "until-found"
-	AHiddenEnumEmpty      AHiddenEnum = ""
+	AHiddenHidden     AHidden = "hidden"
+	AHiddenUntilFound AHidden = "until-found"
+	AHiddenEmpty      AHidden = ""
 )
 
-type AInputmodeEnum string
+type AInputmode string
 
 const (
-	AInputmodeEnumEmail   AInputmodeEnum = "email"
-	AInputmodeEnumNone    AInputmodeEnum = "none"
-	AInputmodeEnumNumeric AInputmodeEnum = "numeric"
-	AInputmodeEnumSearch  AInputmodeEnum = "search"
-	AInputmodeEnumTel     AInputmodeEnum = "tel"
-	AInputmodeEnumText    AInputmodeEnum = "text"
-	AInputmodeEnumUrl     AInputmodeEnum = "url"
-	AInputmodeEnumDecimal AInputmodeEnum = "decimal"
+	AInputmodeTel     AInputmode = "tel"
+	AInputmodeText    AInputmode = "text"
+	AInputmodeUrl     AInputmode = "url"
+	AInputmodeDecimal AInputmode = "decimal"
+	AInputmodeEmail   AInputmode = "email"
+	AInputmodeNone    AInputmode = "none"
+	AInputmodeNumeric AInputmode = "numeric"
+	AInputmodeSearch  AInputmode = "search"
 )
 
-type ASpellcheckEnum string
+type ASpellcheck string
 
 const (
-	ASpellcheckEnumTrue  ASpellcheckEnum = "true"
-	ASpellcheckEnumFalse ASpellcheckEnum = "false"
-	ASpellcheckEnumEmpty ASpellcheckEnum = ""
+	ASpellcheckFalse ASpellcheck = "false"
+	ASpellcheckTrue  ASpellcheck = "true"
+	ASpellcheckEmpty ASpellcheck = ""
 )
 
-type ATranslateEnum string
+type ATranslate string
 
 const (
-	ATranslateEnumNo    ATranslateEnum = "no"
-	ATranslateEnumYes   ATranslateEnum = "yes"
-	ATranslateEnumEmpty ATranslateEnum = ""
+	ATranslateNo    ATranslate = "no"
+	ATranslateYes   ATranslate = "yes"
+	ATranslateEmpty ATranslate = ""
 )
 
-type AWritingsuggestionsEnum string
+type AWritingsuggestions string
 
 const (
-	AWritingsuggestionsEnumFalse AWritingsuggestionsEnum = "false"
-	AWritingsuggestionsEnumTrue  AWritingsuggestionsEnum = "true"
-	AWritingsuggestionsEnumEmpty AWritingsuggestionsEnum = ""
+	AWritingsuggestionsFalse AWritingsuggestions = "false"
+	AWritingsuggestionsTrue  AWritingsuggestions = "true"
+	AWritingsuggestionsEmpty AWritingsuggestions = ""
 )
 
 type aAttrs map[string]any
@@ -198,13 +198,25 @@ func (e *AElement) Referrerpolicy(s string) *AElement {
 	return e
 }
 
-func (e *AElement) Autocapitalize(a AAutocapitalizeEnum) *AElement {
+func (e *AElement) AriaUnsafe(name string, s string) *AElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *AElement) Aria(name string, s string) *AElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *AElement) Autocapitalize(a AAutocapitalize) *AElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *AElement) Autocorrect(a AAutocorrectEnum) *AElement {
+func (e *AElement) Autocorrect(a AAutocorrect) *AElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -222,7 +234,7 @@ func (e *AElement) Class(s ...string) *AElement {
 	return e
 }
 
-func (e *AElement) Contenteditable(a AContenteditableEnum) *AElement {
+func (e *AElement) Contenteditable(a AContenteditable) *AElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -240,25 +252,25 @@ func (e *AElement) Data(name string, s string) *AElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *AElement) Dir(a ADirEnum) *AElement {
+func (e *AElement) Dir(a ADir) *AElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *AElement) Draggable(a ADraggableEnum) *AElement {
+func (e *AElement) Draggable(a ADraggable) *AElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *AElement) Enterkeyhint(a AEnterkeyhintEnum) *AElement {
+func (e *AElement) Enterkeyhint(a AEnterkeyhint) *AElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *AElement) Hidden(a AHiddenEnum) *AElement {
+func (e *AElement) Hidden(a AHidden) *AElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -276,7 +288,7 @@ func (e *AElement) Inert(b bool) *AElement {
 	return e
 }
 
-func (e *AElement) Inputmode(a AInputmodeEnum) *AElement {
+func (e *AElement) Inputmode(a AInputmode) *AElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -336,7 +348,7 @@ func (e *AElement) Slot(s string) *AElement {
 	return e
 }
 
-func (e *AElement) Spellcheck(a ASpellcheckEnum) *AElement {
+func (e *AElement) Spellcheck(a ASpellcheck) *AElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -360,13 +372,13 @@ func (e *AElement) Title(s string) *AElement {
 	return e
 }
 
-func (e *AElement) Translate(a ATranslateEnum) *AElement {
+func (e *AElement) Translate(a ATranslate) *AElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *AElement) Writingsuggestions(a AWritingsuggestionsEnum) *AElement {
+func (e *AElement) Writingsuggestions(a AWritingsuggestions) *AElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

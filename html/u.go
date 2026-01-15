@@ -48,115 +48,127 @@ func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
 	return U(false)
 }
 
-type UAutocapitalizeEnum string
+type UAutocapitalize string
 
 const (
-	UAutocapitalizeEnumCharacters UAutocapitalizeEnum = "characters"
-	UAutocapitalizeEnumNone       UAutocapitalizeEnum = "none"
-	UAutocapitalizeEnumOff        UAutocapitalizeEnum = "off"
-	UAutocapitalizeEnumOn         UAutocapitalizeEnum = "on"
-	UAutocapitalizeEnumSentences  UAutocapitalizeEnum = "sentences"
-	UAutocapitalizeEnumWords      UAutocapitalizeEnum = "words"
+	UAutocapitalizeOn         UAutocapitalize = "on"
+	UAutocapitalizeSentences  UAutocapitalize = "sentences"
+	UAutocapitalizeWords      UAutocapitalize = "words"
+	UAutocapitalizeCharacters UAutocapitalize = "characters"
+	UAutocapitalizeNone       UAutocapitalize = "none"
+	UAutocapitalizeOff        UAutocapitalize = "off"
 )
 
-type UAutocorrectEnum string
+type UAutocorrect string
 
 const (
-	UAutocorrectEnumOn    UAutocorrectEnum = "on"
-	UAutocorrectEnumOff   UAutocorrectEnum = "off"
-	UAutocorrectEnumEmpty UAutocorrectEnum = ""
+	UAutocorrectOff   UAutocorrect = "off"
+	UAutocorrectOn    UAutocorrect = "on"
+	UAutocorrectEmpty UAutocorrect = ""
 )
 
-type UContenteditableEnum string
+type UContenteditable string
 
 const (
-	UContenteditableEnumFalse         UContenteditableEnum = "false"
-	UContenteditableEnumPlaintextOnly UContenteditableEnum = "plaintext-only"
-	UContenteditableEnumTrue          UContenteditableEnum = "true"
-	UContenteditableEnumEmpty         UContenteditableEnum = ""
+	UContenteditableFalse         UContenteditable = "false"
+	UContenteditablePlaintextOnly UContenteditable = "plaintext-only"
+	UContenteditableTrue          UContenteditable = "true"
+	UContenteditableEmpty         UContenteditable = ""
 )
 
-type UDirEnum string
+type UDir string
 
 const (
-	UDirEnumAuto UDirEnum = "auto"
-	UDirEnumLtr  UDirEnum = "ltr"
-	UDirEnumRtl  UDirEnum = "rtl"
+	UDirRtl  UDir = "rtl"
+	UDirAuto UDir = "auto"
+	UDirLtr  UDir = "ltr"
 )
 
-type UDraggableEnum string
+type UDraggable string
 
 const (
-	UDraggableEnumFalse UDraggableEnum = "false"
-	UDraggableEnumTrue  UDraggableEnum = "true"
+	UDraggableFalse UDraggable = "false"
+	UDraggableTrue  UDraggable = "true"
 )
 
-type UEnterkeyhintEnum string
+type UEnterkeyhint string
 
 const (
-	UEnterkeyhintEnumPrevious UEnterkeyhintEnum = "previous"
-	UEnterkeyhintEnumSearch   UEnterkeyhintEnum = "search"
-	UEnterkeyhintEnumSend     UEnterkeyhintEnum = "send"
-	UEnterkeyhintEnumDone     UEnterkeyhintEnum = "done"
-	UEnterkeyhintEnumEnter    UEnterkeyhintEnum = "enter"
-	UEnterkeyhintEnumGo       UEnterkeyhintEnum = "go"
-	UEnterkeyhintEnumNext     UEnterkeyhintEnum = "next"
+	UEnterkeyhintSend     UEnterkeyhint = "send"
+	UEnterkeyhintDone     UEnterkeyhint = "done"
+	UEnterkeyhintEnter    UEnterkeyhint = "enter"
+	UEnterkeyhintGo       UEnterkeyhint = "go"
+	UEnterkeyhintNext     UEnterkeyhint = "next"
+	UEnterkeyhintPrevious UEnterkeyhint = "previous"
+	UEnterkeyhintSearch   UEnterkeyhint = "search"
 )
 
-type UHiddenEnum string
+type UHidden string
 
 const (
-	UHiddenEnumHidden     UHiddenEnum = "hidden"
-	UHiddenEnumUntilFound UHiddenEnum = "until-found"
-	UHiddenEnumEmpty      UHiddenEnum = ""
+	UHiddenUntilFound UHidden = "until-found"
+	UHiddenHidden     UHidden = "hidden"
+	UHiddenEmpty      UHidden = ""
 )
 
-type UInputmodeEnum string
+type UInputmode string
 
 const (
-	UInputmodeEnumDecimal UInputmodeEnum = "decimal"
-	UInputmodeEnumEmail   UInputmodeEnum = "email"
-	UInputmodeEnumNone    UInputmodeEnum = "none"
-	UInputmodeEnumNumeric UInputmodeEnum = "numeric"
-	UInputmodeEnumSearch  UInputmodeEnum = "search"
-	UInputmodeEnumTel     UInputmodeEnum = "tel"
-	UInputmodeEnumText    UInputmodeEnum = "text"
-	UInputmodeEnumUrl     UInputmodeEnum = "url"
+	UInputmodeTel     UInputmode = "tel"
+	UInputmodeText    UInputmode = "text"
+	UInputmodeUrl     UInputmode = "url"
+	UInputmodeDecimal UInputmode = "decimal"
+	UInputmodeEmail   UInputmode = "email"
+	UInputmodeNone    UInputmode = "none"
+	UInputmodeNumeric UInputmode = "numeric"
+	UInputmodeSearch  UInputmode = "search"
 )
 
-type USpellcheckEnum string
+type USpellcheck string
 
 const (
-	USpellcheckEnumFalse USpellcheckEnum = "false"
-	USpellcheckEnumTrue  USpellcheckEnum = "true"
-	USpellcheckEnumEmpty USpellcheckEnum = ""
+	USpellcheckFalse USpellcheck = "false"
+	USpellcheckTrue  USpellcheck = "true"
+	USpellcheckEmpty USpellcheck = ""
 )
 
-type UTranslateEnum string
+type UTranslate string
 
 const (
-	UTranslateEnumNo    UTranslateEnum = "no"
-	UTranslateEnumYes   UTranslateEnum = "yes"
-	UTranslateEnumEmpty UTranslateEnum = ""
+	UTranslateYes   UTranslate = "yes"
+	UTranslateNo    UTranslate = "no"
+	UTranslateEmpty UTranslate = ""
 )
 
-type UWritingsuggestionsEnum string
+type UWritingsuggestions string
 
 const (
-	UWritingsuggestionsEnumTrue  UWritingsuggestionsEnum = "true"
-	UWritingsuggestionsEnumFalse UWritingsuggestionsEnum = "false"
-	UWritingsuggestionsEnumEmpty UWritingsuggestionsEnum = ""
+	UWritingsuggestionsFalse UWritingsuggestions = "false"
+	UWritingsuggestionsTrue  UWritingsuggestions = "true"
+	UWritingsuggestionsEmpty UWritingsuggestions = ""
 )
 
 type uAttrs map[string]any
 
-func (e *UElement) Autocapitalize(a UAutocapitalizeEnum) *UElement {
+func (e *UElement) AriaUnsafe(name string, s string) *UElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *UElement) Aria(name string, s string) *UElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *UElement) Autocapitalize(a UAutocapitalize) *UElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *UElement) Autocorrect(a UAutocorrectEnum) *UElement {
+func (e *UElement) Autocorrect(a UAutocorrect) *UElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *UElement) Class(s ...string) *UElement {
 	return e
 }
 
-func (e *UElement) Contenteditable(a UContenteditableEnum) *UElement {
+func (e *UElement) Contenteditable(a UContenteditable) *UElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *UElement) Data(name string, s string) *UElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *UElement) Dir(a UDirEnum) *UElement {
+func (e *UElement) Dir(a UDir) *UElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *UElement) Draggable(a UDraggableEnum) *UElement {
+func (e *UElement) Draggable(a UDraggable) *UElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *UElement) Enterkeyhint(a UEnterkeyhintEnum) *UElement {
+func (e *UElement) Enterkeyhint(a UEnterkeyhint) *UElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *UElement) Hidden(a UHiddenEnum) *UElement {
+func (e *UElement) Hidden(a UHidden) *UElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *UElement) Inert(b bool) *UElement {
 	return e
 }
 
-func (e *UElement) Inputmode(a UInputmodeEnum) *UElement {
+func (e *UElement) Inputmode(a UInputmode) *UElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *UElement) Slot(s string) *UElement {
 	return e
 }
 
-func (e *UElement) Spellcheck(a USpellcheckEnum) *UElement {
+func (e *UElement) Spellcheck(a USpellcheck) *UElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *UElement) Title(s string) *UElement {
 	return e
 }
 
-func (e *UElement) Translate(a UTranslateEnum) *UElement {
+func (e *UElement) Translate(a UTranslate) *UElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *UElement) Writingsuggestions(a UWritingsuggestionsEnum) *UElement {
+func (e *UElement) Writingsuggestions(a UWritingsuggestions) *UElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

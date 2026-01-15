@@ -48,115 +48,127 @@ func EmTernary(condition bool, true htemel.Node, false htemel.Node) *EmElement {
 	return Em(false)
 }
 
-type EmAutocapitalizeEnum string
+type EmAutocapitalize string
 
 const (
-	EmAutocapitalizeEnumOn         EmAutocapitalizeEnum = "on"
-	EmAutocapitalizeEnumSentences  EmAutocapitalizeEnum = "sentences"
-	EmAutocapitalizeEnumWords      EmAutocapitalizeEnum = "words"
-	EmAutocapitalizeEnumCharacters EmAutocapitalizeEnum = "characters"
-	EmAutocapitalizeEnumNone       EmAutocapitalizeEnum = "none"
-	EmAutocapitalizeEnumOff        EmAutocapitalizeEnum = "off"
+	EmAutocapitalizeCharacters EmAutocapitalize = "characters"
+	EmAutocapitalizeNone       EmAutocapitalize = "none"
+	EmAutocapitalizeOff        EmAutocapitalize = "off"
+	EmAutocapitalizeOn         EmAutocapitalize = "on"
+	EmAutocapitalizeSentences  EmAutocapitalize = "sentences"
+	EmAutocapitalizeWords      EmAutocapitalize = "words"
 )
 
-type EmAutocorrectEnum string
+type EmAutocorrect string
 
 const (
-	EmAutocorrectEnumOff   EmAutocorrectEnum = "off"
-	EmAutocorrectEnumOn    EmAutocorrectEnum = "on"
-	EmAutocorrectEnumEmpty EmAutocorrectEnum = ""
+	EmAutocorrectOff   EmAutocorrect = "off"
+	EmAutocorrectOn    EmAutocorrect = "on"
+	EmAutocorrectEmpty EmAutocorrect = ""
 )
 
-type EmContenteditableEnum string
+type EmContenteditable string
 
 const (
-	EmContenteditableEnumTrue          EmContenteditableEnum = "true"
-	EmContenteditableEnumFalse         EmContenteditableEnum = "false"
-	EmContenteditableEnumPlaintextOnly EmContenteditableEnum = "plaintext-only"
-	EmContenteditableEnumEmpty         EmContenteditableEnum = ""
+	EmContenteditablePlaintextOnly EmContenteditable = "plaintext-only"
+	EmContenteditableTrue          EmContenteditable = "true"
+	EmContenteditableFalse         EmContenteditable = "false"
+	EmContenteditableEmpty         EmContenteditable = ""
 )
 
-type EmDirEnum string
+type EmDir string
 
 const (
-	EmDirEnumRtl  EmDirEnum = "rtl"
-	EmDirEnumAuto EmDirEnum = "auto"
-	EmDirEnumLtr  EmDirEnum = "ltr"
+	EmDirAuto EmDir = "auto"
+	EmDirLtr  EmDir = "ltr"
+	EmDirRtl  EmDir = "rtl"
 )
 
-type EmDraggableEnum string
+type EmDraggable string
 
 const (
-	EmDraggableEnumTrue  EmDraggableEnum = "true"
-	EmDraggableEnumFalse EmDraggableEnum = "false"
+	EmDraggableFalse EmDraggable = "false"
+	EmDraggableTrue  EmDraggable = "true"
 )
 
-type EmEnterkeyhintEnum string
+type EmEnterkeyhint string
 
 const (
-	EmEnterkeyhintEnumDone     EmEnterkeyhintEnum = "done"
-	EmEnterkeyhintEnumEnter    EmEnterkeyhintEnum = "enter"
-	EmEnterkeyhintEnumGo       EmEnterkeyhintEnum = "go"
-	EmEnterkeyhintEnumNext     EmEnterkeyhintEnum = "next"
-	EmEnterkeyhintEnumPrevious EmEnterkeyhintEnum = "previous"
-	EmEnterkeyhintEnumSearch   EmEnterkeyhintEnum = "search"
-	EmEnterkeyhintEnumSend     EmEnterkeyhintEnum = "send"
+	EmEnterkeyhintSearch   EmEnterkeyhint = "search"
+	EmEnterkeyhintSend     EmEnterkeyhint = "send"
+	EmEnterkeyhintDone     EmEnterkeyhint = "done"
+	EmEnterkeyhintEnter    EmEnterkeyhint = "enter"
+	EmEnterkeyhintGo       EmEnterkeyhint = "go"
+	EmEnterkeyhintNext     EmEnterkeyhint = "next"
+	EmEnterkeyhintPrevious EmEnterkeyhint = "previous"
 )
 
-type EmHiddenEnum string
+type EmHidden string
 
 const (
-	EmHiddenEnumHidden     EmHiddenEnum = "hidden"
-	EmHiddenEnumUntilFound EmHiddenEnum = "until-found"
-	EmHiddenEnumEmpty      EmHiddenEnum = ""
+	EmHiddenHidden     EmHidden = "hidden"
+	EmHiddenUntilFound EmHidden = "until-found"
+	EmHiddenEmpty      EmHidden = ""
 )
 
-type EmInputmodeEnum string
+type EmInputmode string
 
 const (
-	EmInputmodeEnumUrl     EmInputmodeEnum = "url"
-	EmInputmodeEnumDecimal EmInputmodeEnum = "decimal"
-	EmInputmodeEnumEmail   EmInputmodeEnum = "email"
-	EmInputmodeEnumNone    EmInputmodeEnum = "none"
-	EmInputmodeEnumNumeric EmInputmodeEnum = "numeric"
-	EmInputmodeEnumSearch  EmInputmodeEnum = "search"
-	EmInputmodeEnumTel     EmInputmodeEnum = "tel"
-	EmInputmodeEnumText    EmInputmodeEnum = "text"
+	EmInputmodeTel     EmInputmode = "tel"
+	EmInputmodeText    EmInputmode = "text"
+	EmInputmodeUrl     EmInputmode = "url"
+	EmInputmodeDecimal EmInputmode = "decimal"
+	EmInputmodeEmail   EmInputmode = "email"
+	EmInputmodeNone    EmInputmode = "none"
+	EmInputmodeNumeric EmInputmode = "numeric"
+	EmInputmodeSearch  EmInputmode = "search"
 )
 
-type EmSpellcheckEnum string
+type EmSpellcheck string
 
 const (
-	EmSpellcheckEnumFalse EmSpellcheckEnum = "false"
-	EmSpellcheckEnumTrue  EmSpellcheckEnum = "true"
-	EmSpellcheckEnumEmpty EmSpellcheckEnum = ""
+	EmSpellcheckFalse EmSpellcheck = "false"
+	EmSpellcheckTrue  EmSpellcheck = "true"
+	EmSpellcheckEmpty EmSpellcheck = ""
 )
 
-type EmTranslateEnum string
+type EmTranslate string
 
 const (
-	EmTranslateEnumNo    EmTranslateEnum = "no"
-	EmTranslateEnumYes   EmTranslateEnum = "yes"
-	EmTranslateEnumEmpty EmTranslateEnum = ""
+	EmTranslateNo    EmTranslate = "no"
+	EmTranslateYes   EmTranslate = "yes"
+	EmTranslateEmpty EmTranslate = ""
 )
 
-type EmWritingsuggestionsEnum string
+type EmWritingsuggestions string
 
 const (
-	EmWritingsuggestionsEnumFalse EmWritingsuggestionsEnum = "false"
-	EmWritingsuggestionsEnumTrue  EmWritingsuggestionsEnum = "true"
-	EmWritingsuggestionsEnumEmpty EmWritingsuggestionsEnum = ""
+	EmWritingsuggestionsFalse EmWritingsuggestions = "false"
+	EmWritingsuggestionsTrue  EmWritingsuggestions = "true"
+	EmWritingsuggestionsEmpty EmWritingsuggestions = ""
 )
 
 type emAttrs map[string]any
 
-func (e *EmElement) Autocapitalize(a EmAutocapitalizeEnum) *EmElement {
+func (e *EmElement) AriaUnsafe(name string, s string) *EmElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *EmElement) Aria(name string, s string) *EmElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *EmElement) Autocapitalize(a EmAutocapitalize) *EmElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *EmElement) Autocorrect(a EmAutocorrectEnum) *EmElement {
+func (e *EmElement) Autocorrect(a EmAutocorrect) *EmElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *EmElement) Class(s ...string) *EmElement {
 	return e
 }
 
-func (e *EmElement) Contenteditable(a EmContenteditableEnum) *EmElement {
+func (e *EmElement) Contenteditable(a EmContenteditable) *EmElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *EmElement) Data(name string, s string) *EmElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *EmElement) Dir(a EmDirEnum) *EmElement {
+func (e *EmElement) Dir(a EmDir) *EmElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *EmElement) Draggable(a EmDraggableEnum) *EmElement {
+func (e *EmElement) Draggable(a EmDraggable) *EmElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *EmElement) Enterkeyhint(a EmEnterkeyhintEnum) *EmElement {
+func (e *EmElement) Enterkeyhint(a EmEnterkeyhint) *EmElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *EmElement) Hidden(a EmHiddenEnum) *EmElement {
+func (e *EmElement) Hidden(a EmHidden) *EmElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *EmElement) Inert(b bool) *EmElement {
 	return e
 }
 
-func (e *EmElement) Inputmode(a EmInputmodeEnum) *EmElement {
+func (e *EmElement) Inputmode(a EmInputmode) *EmElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *EmElement) Slot(s string) *EmElement {
 	return e
 }
 
-func (e *EmElement) Spellcheck(a EmSpellcheckEnum) *EmElement {
+func (e *EmElement) Spellcheck(a EmSpellcheck) *EmElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *EmElement) Title(s string) *EmElement {
 	return e
 }
 
-func (e *EmElement) Translate(a EmTranslateEnum) *EmElement {
+func (e *EmElement) Translate(a EmTranslate) *EmElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *EmElement) Writingsuggestions(a EmWritingsuggestionsEnum) *EmElement {
+func (e *EmElement) Writingsuggestions(a EmWritingsuggestions) *EmElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

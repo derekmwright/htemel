@@ -48,115 +48,127 @@ func H1Ternary(condition bool, true htemel.Node, false htemel.Node) *H1Element {
 	return H1(false)
 }
 
-type H1AutocapitalizeEnum string
+type H1Autocapitalize string
 
 const (
-	H1AutocapitalizeEnumCharacters H1AutocapitalizeEnum = "characters"
-	H1AutocapitalizeEnumNone       H1AutocapitalizeEnum = "none"
-	H1AutocapitalizeEnumOff        H1AutocapitalizeEnum = "off"
-	H1AutocapitalizeEnumOn         H1AutocapitalizeEnum = "on"
-	H1AutocapitalizeEnumSentences  H1AutocapitalizeEnum = "sentences"
-	H1AutocapitalizeEnumWords      H1AutocapitalizeEnum = "words"
+	H1AutocapitalizeWords      H1Autocapitalize = "words"
+	H1AutocapitalizeCharacters H1Autocapitalize = "characters"
+	H1AutocapitalizeNone       H1Autocapitalize = "none"
+	H1AutocapitalizeOff        H1Autocapitalize = "off"
+	H1AutocapitalizeOn         H1Autocapitalize = "on"
+	H1AutocapitalizeSentences  H1Autocapitalize = "sentences"
 )
 
-type H1AutocorrectEnum string
+type H1Autocorrect string
 
 const (
-	H1AutocorrectEnumOff   H1AutocorrectEnum = "off"
-	H1AutocorrectEnumOn    H1AutocorrectEnum = "on"
-	H1AutocorrectEnumEmpty H1AutocorrectEnum = ""
+	H1AutocorrectOff   H1Autocorrect = "off"
+	H1AutocorrectOn    H1Autocorrect = "on"
+	H1AutocorrectEmpty H1Autocorrect = ""
 )
 
-type H1ContenteditableEnum string
+type H1Contenteditable string
 
 const (
-	H1ContenteditableEnumFalse         H1ContenteditableEnum = "false"
-	H1ContenteditableEnumPlaintextOnly H1ContenteditableEnum = "plaintext-only"
-	H1ContenteditableEnumTrue          H1ContenteditableEnum = "true"
-	H1ContenteditableEnumEmpty         H1ContenteditableEnum = ""
+	H1ContenteditableFalse         H1Contenteditable = "false"
+	H1ContenteditablePlaintextOnly H1Contenteditable = "plaintext-only"
+	H1ContenteditableTrue          H1Contenteditable = "true"
+	H1ContenteditableEmpty         H1Contenteditable = ""
 )
 
-type H1DirEnum string
+type H1Dir string
 
 const (
-	H1DirEnumRtl  H1DirEnum = "rtl"
-	H1DirEnumAuto H1DirEnum = "auto"
-	H1DirEnumLtr  H1DirEnum = "ltr"
+	H1DirAuto H1Dir = "auto"
+	H1DirLtr  H1Dir = "ltr"
+	H1DirRtl  H1Dir = "rtl"
 )
 
-type H1DraggableEnum string
+type H1Draggable string
 
 const (
-	H1DraggableEnumFalse H1DraggableEnum = "false"
-	H1DraggableEnumTrue  H1DraggableEnum = "true"
+	H1DraggableFalse H1Draggable = "false"
+	H1DraggableTrue  H1Draggable = "true"
 )
 
-type H1EnterkeyhintEnum string
+type H1Enterkeyhint string
 
 const (
-	H1EnterkeyhintEnumPrevious H1EnterkeyhintEnum = "previous"
-	H1EnterkeyhintEnumSearch   H1EnterkeyhintEnum = "search"
-	H1EnterkeyhintEnumSend     H1EnterkeyhintEnum = "send"
-	H1EnterkeyhintEnumDone     H1EnterkeyhintEnum = "done"
-	H1EnterkeyhintEnumEnter    H1EnterkeyhintEnum = "enter"
-	H1EnterkeyhintEnumGo       H1EnterkeyhintEnum = "go"
-	H1EnterkeyhintEnumNext     H1EnterkeyhintEnum = "next"
+	H1EnterkeyhintDone     H1Enterkeyhint = "done"
+	H1EnterkeyhintEnter    H1Enterkeyhint = "enter"
+	H1EnterkeyhintGo       H1Enterkeyhint = "go"
+	H1EnterkeyhintNext     H1Enterkeyhint = "next"
+	H1EnterkeyhintPrevious H1Enterkeyhint = "previous"
+	H1EnterkeyhintSearch   H1Enterkeyhint = "search"
+	H1EnterkeyhintSend     H1Enterkeyhint = "send"
 )
 
-type H1HiddenEnum string
+type H1Hidden string
 
 const (
-	H1HiddenEnumHidden     H1HiddenEnum = "hidden"
-	H1HiddenEnumUntilFound H1HiddenEnum = "until-found"
-	H1HiddenEnumEmpty      H1HiddenEnum = ""
+	H1HiddenHidden     H1Hidden = "hidden"
+	H1HiddenUntilFound H1Hidden = "until-found"
+	H1HiddenEmpty      H1Hidden = ""
 )
 
-type H1InputmodeEnum string
+type H1Inputmode string
 
 const (
-	H1InputmodeEnumUrl     H1InputmodeEnum = "url"
-	H1InputmodeEnumDecimal H1InputmodeEnum = "decimal"
-	H1InputmodeEnumEmail   H1InputmodeEnum = "email"
-	H1InputmodeEnumNone    H1InputmodeEnum = "none"
-	H1InputmodeEnumNumeric H1InputmodeEnum = "numeric"
-	H1InputmodeEnumSearch  H1InputmodeEnum = "search"
-	H1InputmodeEnumTel     H1InputmodeEnum = "tel"
-	H1InputmodeEnumText    H1InputmodeEnum = "text"
+	H1InputmodeEmail   H1Inputmode = "email"
+	H1InputmodeNone    H1Inputmode = "none"
+	H1InputmodeNumeric H1Inputmode = "numeric"
+	H1InputmodeSearch  H1Inputmode = "search"
+	H1InputmodeTel     H1Inputmode = "tel"
+	H1InputmodeText    H1Inputmode = "text"
+	H1InputmodeUrl     H1Inputmode = "url"
+	H1InputmodeDecimal H1Inputmode = "decimal"
 )
 
-type H1SpellcheckEnum string
+type H1Spellcheck string
 
 const (
-	H1SpellcheckEnumFalse H1SpellcheckEnum = "false"
-	H1SpellcheckEnumTrue  H1SpellcheckEnum = "true"
-	H1SpellcheckEnumEmpty H1SpellcheckEnum = ""
+	H1SpellcheckTrue  H1Spellcheck = "true"
+	H1SpellcheckFalse H1Spellcheck = "false"
+	H1SpellcheckEmpty H1Spellcheck = ""
 )
 
-type H1TranslateEnum string
+type H1Translate string
 
 const (
-	H1TranslateEnumNo    H1TranslateEnum = "no"
-	H1TranslateEnumYes   H1TranslateEnum = "yes"
-	H1TranslateEnumEmpty H1TranslateEnum = ""
+	H1TranslateNo    H1Translate = "no"
+	H1TranslateYes   H1Translate = "yes"
+	H1TranslateEmpty H1Translate = ""
 )
 
-type H1WritingsuggestionsEnum string
+type H1Writingsuggestions string
 
 const (
-	H1WritingsuggestionsEnumFalse H1WritingsuggestionsEnum = "false"
-	H1WritingsuggestionsEnumTrue  H1WritingsuggestionsEnum = "true"
-	H1WritingsuggestionsEnumEmpty H1WritingsuggestionsEnum = ""
+	H1WritingsuggestionsTrue  H1Writingsuggestions = "true"
+	H1WritingsuggestionsFalse H1Writingsuggestions = "false"
+	H1WritingsuggestionsEmpty H1Writingsuggestions = ""
 )
 
 type h1Attrs map[string]any
 
-func (e *H1Element) Autocapitalize(a H1AutocapitalizeEnum) *H1Element {
+func (e *H1Element) AriaUnsafe(name string, s string) *H1Element {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *H1Element) Aria(name string, s string) *H1Element {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *H1Element) Autocapitalize(a H1Autocapitalize) *H1Element {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *H1Element) Autocorrect(a H1AutocorrectEnum) *H1Element {
+func (e *H1Element) Autocorrect(a H1Autocorrect) *H1Element {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *H1Element) Class(s ...string) *H1Element {
 	return e
 }
 
-func (e *H1Element) Contenteditable(a H1ContenteditableEnum) *H1Element {
+func (e *H1Element) Contenteditable(a H1Contenteditable) *H1Element {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *H1Element) Data(name string, s string) *H1Element {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *H1Element) Dir(a H1DirEnum) *H1Element {
+func (e *H1Element) Dir(a H1Dir) *H1Element {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *H1Element) Draggable(a H1DraggableEnum) *H1Element {
+func (e *H1Element) Draggable(a H1Draggable) *H1Element {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *H1Element) Enterkeyhint(a H1EnterkeyhintEnum) *H1Element {
+func (e *H1Element) Enterkeyhint(a H1Enterkeyhint) *H1Element {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *H1Element) Hidden(a H1HiddenEnum) *H1Element {
+func (e *H1Element) Hidden(a H1Hidden) *H1Element {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *H1Element) Inert(b bool) *H1Element {
 	return e
 }
 
-func (e *H1Element) Inputmode(a H1InputmodeEnum) *H1Element {
+func (e *H1Element) Inputmode(a H1Inputmode) *H1Element {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *H1Element) Slot(s string) *H1Element {
 	return e
 }
 
-func (e *H1Element) Spellcheck(a H1SpellcheckEnum) *H1Element {
+func (e *H1Element) Spellcheck(a H1Spellcheck) *H1Element {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *H1Element) Title(s string) *H1Element {
 	return e
 }
 
-func (e *H1Element) Translate(a H1TranslateEnum) *H1Element {
+func (e *H1Element) Translate(a H1Translate) *H1Element {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *H1Element) Writingsuggestions(a H1WritingsuggestionsEnum) *H1Element {
+func (e *H1Element) Writingsuggestions(a H1Writingsuggestions) *H1Element {
 	e.attributes["writingsuggestions"] = a
 
 	return e

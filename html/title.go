@@ -48,115 +48,127 @@ func TitleTernary(condition bool, true htemel.Node, false htemel.Node) *TitleEle
 	return Title(false)
 }
 
-type TitleAutocapitalizeEnum string
+type TitleAutocapitalize string
 
 const (
-	TitleAutocapitalizeEnumNone       TitleAutocapitalizeEnum = "none"
-	TitleAutocapitalizeEnumOff        TitleAutocapitalizeEnum = "off"
-	TitleAutocapitalizeEnumOn         TitleAutocapitalizeEnum = "on"
-	TitleAutocapitalizeEnumSentences  TitleAutocapitalizeEnum = "sentences"
-	TitleAutocapitalizeEnumWords      TitleAutocapitalizeEnum = "words"
-	TitleAutocapitalizeEnumCharacters TitleAutocapitalizeEnum = "characters"
+	TitleAutocapitalizeOn         TitleAutocapitalize = "on"
+	TitleAutocapitalizeSentences  TitleAutocapitalize = "sentences"
+	TitleAutocapitalizeWords      TitleAutocapitalize = "words"
+	TitleAutocapitalizeCharacters TitleAutocapitalize = "characters"
+	TitleAutocapitalizeNone       TitleAutocapitalize = "none"
+	TitleAutocapitalizeOff        TitleAutocapitalize = "off"
 )
 
-type TitleAutocorrectEnum string
+type TitleAutocorrect string
 
 const (
-	TitleAutocorrectEnumOn    TitleAutocorrectEnum = "on"
-	TitleAutocorrectEnumOff   TitleAutocorrectEnum = "off"
-	TitleAutocorrectEnumEmpty TitleAutocorrectEnum = ""
+	TitleAutocorrectOff   TitleAutocorrect = "off"
+	TitleAutocorrectOn    TitleAutocorrect = "on"
+	TitleAutocorrectEmpty TitleAutocorrect = ""
 )
 
-type TitleContenteditableEnum string
+type TitleContenteditable string
 
 const (
-	TitleContenteditableEnumPlaintextOnly TitleContenteditableEnum = "plaintext-only"
-	TitleContenteditableEnumTrue          TitleContenteditableEnum = "true"
-	TitleContenteditableEnumFalse         TitleContenteditableEnum = "false"
-	TitleContenteditableEnumEmpty         TitleContenteditableEnum = ""
+	TitleContenteditableFalse         TitleContenteditable = "false"
+	TitleContenteditablePlaintextOnly TitleContenteditable = "plaintext-only"
+	TitleContenteditableTrue          TitleContenteditable = "true"
+	TitleContenteditableEmpty         TitleContenteditable = ""
 )
 
-type TitleDirEnum string
+type TitleDir string
 
 const (
-	TitleDirEnumAuto TitleDirEnum = "auto"
-	TitleDirEnumLtr  TitleDirEnum = "ltr"
-	TitleDirEnumRtl  TitleDirEnum = "rtl"
+	TitleDirAuto TitleDir = "auto"
+	TitleDirLtr  TitleDir = "ltr"
+	TitleDirRtl  TitleDir = "rtl"
 )
 
-type TitleDraggableEnum string
+type TitleDraggable string
 
 const (
-	TitleDraggableEnumFalse TitleDraggableEnum = "false"
-	TitleDraggableEnumTrue  TitleDraggableEnum = "true"
+	TitleDraggableFalse TitleDraggable = "false"
+	TitleDraggableTrue  TitleDraggable = "true"
 )
 
-type TitleEnterkeyhintEnum string
+type TitleEnterkeyhint string
 
 const (
-	TitleEnterkeyhintEnumPrevious TitleEnterkeyhintEnum = "previous"
-	TitleEnterkeyhintEnumSearch   TitleEnterkeyhintEnum = "search"
-	TitleEnterkeyhintEnumSend     TitleEnterkeyhintEnum = "send"
-	TitleEnterkeyhintEnumDone     TitleEnterkeyhintEnum = "done"
-	TitleEnterkeyhintEnumEnter    TitleEnterkeyhintEnum = "enter"
-	TitleEnterkeyhintEnumGo       TitleEnterkeyhintEnum = "go"
-	TitleEnterkeyhintEnumNext     TitleEnterkeyhintEnum = "next"
+	TitleEnterkeyhintDone     TitleEnterkeyhint = "done"
+	TitleEnterkeyhintEnter    TitleEnterkeyhint = "enter"
+	TitleEnterkeyhintGo       TitleEnterkeyhint = "go"
+	TitleEnterkeyhintNext     TitleEnterkeyhint = "next"
+	TitleEnterkeyhintPrevious TitleEnterkeyhint = "previous"
+	TitleEnterkeyhintSearch   TitleEnterkeyhint = "search"
+	TitleEnterkeyhintSend     TitleEnterkeyhint = "send"
 )
 
-type TitleHiddenEnum string
+type TitleHidden string
 
 const (
-	TitleHiddenEnumHidden     TitleHiddenEnum = "hidden"
-	TitleHiddenEnumUntilFound TitleHiddenEnum = "until-found"
-	TitleHiddenEnumEmpty      TitleHiddenEnum = ""
+	TitleHiddenHidden     TitleHidden = "hidden"
+	TitleHiddenUntilFound TitleHidden = "until-found"
+	TitleHiddenEmpty      TitleHidden = ""
 )
 
-type TitleInputmodeEnum string
+type TitleInputmode string
 
 const (
-	TitleInputmodeEnumNone    TitleInputmodeEnum = "none"
-	TitleInputmodeEnumNumeric TitleInputmodeEnum = "numeric"
-	TitleInputmodeEnumSearch  TitleInputmodeEnum = "search"
-	TitleInputmodeEnumTel     TitleInputmodeEnum = "tel"
-	TitleInputmodeEnumText    TitleInputmodeEnum = "text"
-	TitleInputmodeEnumUrl     TitleInputmodeEnum = "url"
-	TitleInputmodeEnumDecimal TitleInputmodeEnum = "decimal"
-	TitleInputmodeEnumEmail   TitleInputmodeEnum = "email"
+	TitleInputmodeEmail   TitleInputmode = "email"
+	TitleInputmodeNone    TitleInputmode = "none"
+	TitleInputmodeNumeric TitleInputmode = "numeric"
+	TitleInputmodeSearch  TitleInputmode = "search"
+	TitleInputmodeTel     TitleInputmode = "tel"
+	TitleInputmodeText    TitleInputmode = "text"
+	TitleInputmodeUrl     TitleInputmode = "url"
+	TitleInputmodeDecimal TitleInputmode = "decimal"
 )
 
-type TitleSpellcheckEnum string
+type TitleSpellcheck string
 
 const (
-	TitleSpellcheckEnumFalse TitleSpellcheckEnum = "false"
-	TitleSpellcheckEnumTrue  TitleSpellcheckEnum = "true"
-	TitleSpellcheckEnumEmpty TitleSpellcheckEnum = ""
+	TitleSpellcheckFalse TitleSpellcheck = "false"
+	TitleSpellcheckTrue  TitleSpellcheck = "true"
+	TitleSpellcheckEmpty TitleSpellcheck = ""
 )
 
-type TitleTranslateEnum string
+type TitleTranslate string
 
 const (
-	TitleTranslateEnumNo    TitleTranslateEnum = "no"
-	TitleTranslateEnumYes   TitleTranslateEnum = "yes"
-	TitleTranslateEnumEmpty TitleTranslateEnum = ""
+	TitleTranslateNo    TitleTranslate = "no"
+	TitleTranslateYes   TitleTranslate = "yes"
+	TitleTranslateEmpty TitleTranslate = ""
 )
 
-type TitleWritingsuggestionsEnum string
+type TitleWritingsuggestions string
 
 const (
-	TitleWritingsuggestionsEnumFalse TitleWritingsuggestionsEnum = "false"
-	TitleWritingsuggestionsEnumTrue  TitleWritingsuggestionsEnum = "true"
-	TitleWritingsuggestionsEnumEmpty TitleWritingsuggestionsEnum = ""
+	TitleWritingsuggestionsFalse TitleWritingsuggestions = "false"
+	TitleWritingsuggestionsTrue  TitleWritingsuggestions = "true"
+	TitleWritingsuggestionsEmpty TitleWritingsuggestions = ""
 )
 
 type titleAttrs map[string]any
 
-func (e *TitleElement) Autocapitalize(a TitleAutocapitalizeEnum) *TitleElement {
+func (e *TitleElement) AriaUnsafe(name string, s string) *TitleElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TitleElement) Aria(name string, s string) *TitleElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *TitleElement) Autocapitalize(a TitleAutocapitalize) *TitleElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *TitleElement) Autocorrect(a TitleAutocorrectEnum) *TitleElement {
+func (e *TitleElement) Autocorrect(a TitleAutocorrect) *TitleElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *TitleElement) Class(s ...string) *TitleElement {
 	return e
 }
 
-func (e *TitleElement) Contenteditable(a TitleContenteditableEnum) *TitleElement {
+func (e *TitleElement) Contenteditable(a TitleContenteditable) *TitleElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *TitleElement) Data(name string, s string) *TitleElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *TitleElement) Dir(a TitleDirEnum) *TitleElement {
+func (e *TitleElement) Dir(a TitleDir) *TitleElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *TitleElement) Draggable(a TitleDraggableEnum) *TitleElement {
+func (e *TitleElement) Draggable(a TitleDraggable) *TitleElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *TitleElement) Enterkeyhint(a TitleEnterkeyhintEnum) *TitleElement {
+func (e *TitleElement) Enterkeyhint(a TitleEnterkeyhint) *TitleElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *TitleElement) Hidden(a TitleHiddenEnum) *TitleElement {
+func (e *TitleElement) Hidden(a TitleHidden) *TitleElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *TitleElement) Inert(b bool) *TitleElement {
 	return e
 }
 
-func (e *TitleElement) Inputmode(a TitleInputmodeEnum) *TitleElement {
+func (e *TitleElement) Inputmode(a TitleInputmode) *TitleElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *TitleElement) Slot(s string) *TitleElement {
 	return e
 }
 
-func (e *TitleElement) Spellcheck(a TitleSpellcheckEnum) *TitleElement {
+func (e *TitleElement) Spellcheck(a TitleSpellcheck) *TitleElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *TitleElement) Title(s string) *TitleElement {
 	return e
 }
 
-func (e *TitleElement) Translate(a TitleTranslateEnum) *TitleElement {
+func (e *TitleElement) Translate(a TitleTranslate) *TitleElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *TitleElement) Writingsuggestions(a TitleWritingsuggestionsEnum) *TitleElement {
+func (e *TitleElement) Writingsuggestions(a TitleWritingsuggestions) *TitleElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

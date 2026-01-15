@@ -48,126 +48,126 @@ func ScriptTernary(condition bool, true htemel.Node, false htemel.Node) *ScriptE
 	return Script(false)
 }
 
-type ScriptBlockingEnum string
+type ScriptBlocking string
 
 const (
-	ScriptBlockingEnumRender ScriptBlockingEnum = "render"
+	ScriptBlockingRender ScriptBlocking = "render"
 )
 
-type ScriptCrossoriginEnum string
+type ScriptCrossorigin string
 
 const (
-	ScriptCrossoriginEnumAnonymous      ScriptCrossoriginEnum = "anonymous"
-	ScriptCrossoriginEnumUseCredentials ScriptCrossoriginEnum = "use-credentials"
-	ScriptCrossoriginEnumEmpty          ScriptCrossoriginEnum = ""
+	ScriptCrossoriginAnonymous      ScriptCrossorigin = "anonymous"
+	ScriptCrossoriginUseCredentials ScriptCrossorigin = "use-credentials"
+	ScriptCrossoriginEmpty          ScriptCrossorigin = ""
 )
 
-type ScriptFetchpriorityEnum string
+type ScriptFetchpriority string
 
 const (
-	ScriptFetchpriorityEnumLow  ScriptFetchpriorityEnum = "low"
-	ScriptFetchpriorityEnumAuto ScriptFetchpriorityEnum = "auto"
-	ScriptFetchpriorityEnumHigh ScriptFetchpriorityEnum = "high"
+	ScriptFetchpriorityAuto ScriptFetchpriority = "auto"
+	ScriptFetchpriorityHigh ScriptFetchpriority = "high"
+	ScriptFetchpriorityLow  ScriptFetchpriority = "low"
 )
 
-type ScriptAutocapitalizeEnum string
+type ScriptAutocapitalize string
 
 const (
-	ScriptAutocapitalizeEnumOff        ScriptAutocapitalizeEnum = "off"
-	ScriptAutocapitalizeEnumOn         ScriptAutocapitalizeEnum = "on"
-	ScriptAutocapitalizeEnumSentences  ScriptAutocapitalizeEnum = "sentences"
-	ScriptAutocapitalizeEnumWords      ScriptAutocapitalizeEnum = "words"
-	ScriptAutocapitalizeEnumCharacters ScriptAutocapitalizeEnum = "characters"
-	ScriptAutocapitalizeEnumNone       ScriptAutocapitalizeEnum = "none"
+	ScriptAutocapitalizeNone       ScriptAutocapitalize = "none"
+	ScriptAutocapitalizeOff        ScriptAutocapitalize = "off"
+	ScriptAutocapitalizeOn         ScriptAutocapitalize = "on"
+	ScriptAutocapitalizeSentences  ScriptAutocapitalize = "sentences"
+	ScriptAutocapitalizeWords      ScriptAutocapitalize = "words"
+	ScriptAutocapitalizeCharacters ScriptAutocapitalize = "characters"
 )
 
-type ScriptAutocorrectEnum string
+type ScriptAutocorrect string
 
 const (
-	ScriptAutocorrectEnumOff   ScriptAutocorrectEnum = "off"
-	ScriptAutocorrectEnumOn    ScriptAutocorrectEnum = "on"
-	ScriptAutocorrectEnumEmpty ScriptAutocorrectEnum = ""
+	ScriptAutocorrectOff   ScriptAutocorrect = "off"
+	ScriptAutocorrectOn    ScriptAutocorrect = "on"
+	ScriptAutocorrectEmpty ScriptAutocorrect = ""
 )
 
-type ScriptContenteditableEnum string
+type ScriptContenteditable string
 
 const (
-	ScriptContenteditableEnumPlaintextOnly ScriptContenteditableEnum = "plaintext-only"
-	ScriptContenteditableEnumTrue          ScriptContenteditableEnum = "true"
-	ScriptContenteditableEnumFalse         ScriptContenteditableEnum = "false"
-	ScriptContenteditableEnumEmpty         ScriptContenteditableEnum = ""
+	ScriptContenteditableFalse         ScriptContenteditable = "false"
+	ScriptContenteditablePlaintextOnly ScriptContenteditable = "plaintext-only"
+	ScriptContenteditableTrue          ScriptContenteditable = "true"
+	ScriptContenteditableEmpty         ScriptContenteditable = ""
 )
 
-type ScriptDirEnum string
+type ScriptDir string
 
 const (
-	ScriptDirEnumAuto ScriptDirEnum = "auto"
-	ScriptDirEnumLtr  ScriptDirEnum = "ltr"
-	ScriptDirEnumRtl  ScriptDirEnum = "rtl"
+	ScriptDirAuto ScriptDir = "auto"
+	ScriptDirLtr  ScriptDir = "ltr"
+	ScriptDirRtl  ScriptDir = "rtl"
 )
 
-type ScriptDraggableEnum string
+type ScriptDraggable string
 
 const (
-	ScriptDraggableEnumFalse ScriptDraggableEnum = "false"
-	ScriptDraggableEnumTrue  ScriptDraggableEnum = "true"
+	ScriptDraggableFalse ScriptDraggable = "false"
+	ScriptDraggableTrue  ScriptDraggable = "true"
 )
 
-type ScriptEnterkeyhintEnum string
+type ScriptEnterkeyhint string
 
 const (
-	ScriptEnterkeyhintEnumGo       ScriptEnterkeyhintEnum = "go"
-	ScriptEnterkeyhintEnumNext     ScriptEnterkeyhintEnum = "next"
-	ScriptEnterkeyhintEnumPrevious ScriptEnterkeyhintEnum = "previous"
-	ScriptEnterkeyhintEnumSearch   ScriptEnterkeyhintEnum = "search"
-	ScriptEnterkeyhintEnumSend     ScriptEnterkeyhintEnum = "send"
-	ScriptEnterkeyhintEnumDone     ScriptEnterkeyhintEnum = "done"
-	ScriptEnterkeyhintEnumEnter    ScriptEnterkeyhintEnum = "enter"
+	ScriptEnterkeyhintSearch   ScriptEnterkeyhint = "search"
+	ScriptEnterkeyhintSend     ScriptEnterkeyhint = "send"
+	ScriptEnterkeyhintDone     ScriptEnterkeyhint = "done"
+	ScriptEnterkeyhintEnter    ScriptEnterkeyhint = "enter"
+	ScriptEnterkeyhintGo       ScriptEnterkeyhint = "go"
+	ScriptEnterkeyhintNext     ScriptEnterkeyhint = "next"
+	ScriptEnterkeyhintPrevious ScriptEnterkeyhint = "previous"
 )
 
-type ScriptHiddenEnum string
+type ScriptHidden string
 
 const (
-	ScriptHiddenEnumHidden     ScriptHiddenEnum = "hidden"
-	ScriptHiddenEnumUntilFound ScriptHiddenEnum = "until-found"
-	ScriptHiddenEnumEmpty      ScriptHiddenEnum = ""
+	ScriptHiddenHidden     ScriptHidden = "hidden"
+	ScriptHiddenUntilFound ScriptHidden = "until-found"
+	ScriptHiddenEmpty      ScriptHidden = ""
 )
 
-type ScriptInputmodeEnum string
+type ScriptInputmode string
 
 const (
-	ScriptInputmodeEnumTel     ScriptInputmodeEnum = "tel"
-	ScriptInputmodeEnumText    ScriptInputmodeEnum = "text"
-	ScriptInputmodeEnumUrl     ScriptInputmodeEnum = "url"
-	ScriptInputmodeEnumDecimal ScriptInputmodeEnum = "decimal"
-	ScriptInputmodeEnumEmail   ScriptInputmodeEnum = "email"
-	ScriptInputmodeEnumNone    ScriptInputmodeEnum = "none"
-	ScriptInputmodeEnumNumeric ScriptInputmodeEnum = "numeric"
-	ScriptInputmodeEnumSearch  ScriptInputmodeEnum = "search"
+	ScriptInputmodeText    ScriptInputmode = "text"
+	ScriptInputmodeUrl     ScriptInputmode = "url"
+	ScriptInputmodeDecimal ScriptInputmode = "decimal"
+	ScriptInputmodeEmail   ScriptInputmode = "email"
+	ScriptInputmodeNone    ScriptInputmode = "none"
+	ScriptInputmodeNumeric ScriptInputmode = "numeric"
+	ScriptInputmodeSearch  ScriptInputmode = "search"
+	ScriptInputmodeTel     ScriptInputmode = "tel"
 )
 
-type ScriptSpellcheckEnum string
+type ScriptSpellcheck string
 
 const (
-	ScriptSpellcheckEnumFalse ScriptSpellcheckEnum = "false"
-	ScriptSpellcheckEnumTrue  ScriptSpellcheckEnum = "true"
-	ScriptSpellcheckEnumEmpty ScriptSpellcheckEnum = ""
+	ScriptSpellcheckFalse ScriptSpellcheck = "false"
+	ScriptSpellcheckTrue  ScriptSpellcheck = "true"
+	ScriptSpellcheckEmpty ScriptSpellcheck = ""
 )
 
-type ScriptTranslateEnum string
+type ScriptTranslate string
 
 const (
-	ScriptTranslateEnumNo    ScriptTranslateEnum = "no"
-	ScriptTranslateEnumYes   ScriptTranslateEnum = "yes"
-	ScriptTranslateEnumEmpty ScriptTranslateEnum = ""
+	ScriptTranslateNo    ScriptTranslate = "no"
+	ScriptTranslateYes   ScriptTranslate = "yes"
+	ScriptTranslateEmpty ScriptTranslate = ""
 )
 
-type ScriptWritingsuggestionsEnum string
+type ScriptWritingsuggestions string
 
 const (
-	ScriptWritingsuggestionsEnumFalse ScriptWritingsuggestionsEnum = "false"
-	ScriptWritingsuggestionsEnumTrue  ScriptWritingsuggestionsEnum = "true"
-	ScriptWritingsuggestionsEnumEmpty ScriptWritingsuggestionsEnum = ""
+	ScriptWritingsuggestionsFalse ScriptWritingsuggestions = "false"
+	ScriptWritingsuggestionsTrue  ScriptWritingsuggestions = "true"
+	ScriptWritingsuggestionsEmpty ScriptWritingsuggestions = ""
 )
 
 type scriptAttrs map[string]any
@@ -202,13 +202,13 @@ func (e *ScriptElement) Defer(b bool) *ScriptElement {
 	return e
 }
 
-func (e *ScriptElement) Blocking(a ScriptBlockingEnum) *ScriptElement {
+func (e *ScriptElement) Blocking(a ScriptBlocking) *ScriptElement {
 	e.attributes["blocking"] = a
 
 	return e
 }
 
-func (e *ScriptElement) Crossorigin(a ScriptCrossoriginEnum) *ScriptElement {
+func (e *ScriptElement) Crossorigin(a ScriptCrossorigin) *ScriptElement {
 	e.attributes["crossorigin"] = a
 
 	return e
@@ -226,19 +226,31 @@ func (e *ScriptElement) Integrity(s string) *ScriptElement {
 	return e
 }
 
-func (e *ScriptElement) Fetchpriority(a ScriptFetchpriorityEnum) *ScriptElement {
+func (e *ScriptElement) Fetchpriority(a ScriptFetchpriority) *ScriptElement {
 	e.attributes["fetchpriority"] = a
 
 	return e
 }
 
-func (e *ScriptElement) Autocapitalize(a ScriptAutocapitalizeEnum) *ScriptElement {
+func (e *ScriptElement) AriaUnsafe(name string, s string) *ScriptElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ScriptElement) Aria(name string, s string) *ScriptElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *ScriptElement) Autocapitalize(a ScriptAutocapitalize) *ScriptElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *ScriptElement) Autocorrect(a ScriptAutocorrectEnum) *ScriptElement {
+func (e *ScriptElement) Autocorrect(a ScriptAutocorrect) *ScriptElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -256,7 +268,7 @@ func (e *ScriptElement) Class(s ...string) *ScriptElement {
 	return e
 }
 
-func (e *ScriptElement) Contenteditable(a ScriptContenteditableEnum) *ScriptElement {
+func (e *ScriptElement) Contenteditable(a ScriptContenteditable) *ScriptElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -274,25 +286,25 @@ func (e *ScriptElement) Data(name string, s string) *ScriptElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *ScriptElement) Dir(a ScriptDirEnum) *ScriptElement {
+func (e *ScriptElement) Dir(a ScriptDir) *ScriptElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *ScriptElement) Draggable(a ScriptDraggableEnum) *ScriptElement {
+func (e *ScriptElement) Draggable(a ScriptDraggable) *ScriptElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *ScriptElement) Enterkeyhint(a ScriptEnterkeyhintEnum) *ScriptElement {
+func (e *ScriptElement) Enterkeyhint(a ScriptEnterkeyhint) *ScriptElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *ScriptElement) Hidden(a ScriptHiddenEnum) *ScriptElement {
+func (e *ScriptElement) Hidden(a ScriptHidden) *ScriptElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -310,7 +322,7 @@ func (e *ScriptElement) Inert(b bool) *ScriptElement {
 	return e
 }
 
-func (e *ScriptElement) Inputmode(a ScriptInputmodeEnum) *ScriptElement {
+func (e *ScriptElement) Inputmode(a ScriptInputmode) *ScriptElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -370,7 +382,7 @@ func (e *ScriptElement) Slot(s string) *ScriptElement {
 	return e
 }
 
-func (e *ScriptElement) Spellcheck(a ScriptSpellcheckEnum) *ScriptElement {
+func (e *ScriptElement) Spellcheck(a ScriptSpellcheck) *ScriptElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -394,13 +406,13 @@ func (e *ScriptElement) Title(s string) *ScriptElement {
 	return e
 }
 
-func (e *ScriptElement) Translate(a ScriptTranslateEnum) *ScriptElement {
+func (e *ScriptElement) Translate(a ScriptTranslate) *ScriptElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *ScriptElement) Writingsuggestions(a ScriptWritingsuggestionsEnum) *ScriptElement {
+func (e *ScriptElement) Writingsuggestions(a ScriptWritingsuggestions) *ScriptElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

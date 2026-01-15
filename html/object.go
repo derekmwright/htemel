@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/derekmwright/htemel"
+	"golang.org/x/net/html"
 )
 
 type ObjectElement struct {
@@ -47,104 +48,104 @@ func ObjectTernary(condition bool, true htemel.Node, false htemel.Node) *ObjectE
 	return Object(false)
 }
 
-type ObjectAutocapitalizeEnum string
+type ObjectAutocapitalize string
 
 const (
-	ObjectAutocapitalizeEnumOn         ObjectAutocapitalizeEnum = "on"
-	ObjectAutocapitalizeEnumSentences  ObjectAutocapitalizeEnum = "sentences"
-	ObjectAutocapitalizeEnumWords      ObjectAutocapitalizeEnum = "words"
-	ObjectAutocapitalizeEnumCharacters ObjectAutocapitalizeEnum = "characters"
-	ObjectAutocapitalizeEnumNone       ObjectAutocapitalizeEnum = "none"
-	ObjectAutocapitalizeEnumOff        ObjectAutocapitalizeEnum = "off"
+	ObjectAutocapitalizeOn         ObjectAutocapitalize = "on"
+	ObjectAutocapitalizeSentences  ObjectAutocapitalize = "sentences"
+	ObjectAutocapitalizeWords      ObjectAutocapitalize = "words"
+	ObjectAutocapitalizeCharacters ObjectAutocapitalize = "characters"
+	ObjectAutocapitalizeNone       ObjectAutocapitalize = "none"
+	ObjectAutocapitalizeOff        ObjectAutocapitalize = "off"
 )
 
-type ObjectAutocorrectEnum string
+type ObjectAutocorrect string
 
 const (
-	ObjectAutocorrectEnumOff   ObjectAutocorrectEnum = "off"
-	ObjectAutocorrectEnumOn    ObjectAutocorrectEnum = "on"
-	ObjectAutocorrectEnumEmpty ObjectAutocorrectEnum = ""
+	ObjectAutocorrectOff   ObjectAutocorrect = "off"
+	ObjectAutocorrectOn    ObjectAutocorrect = "on"
+	ObjectAutocorrectEmpty ObjectAutocorrect = ""
 )
 
-type ObjectContenteditableEnum string
+type ObjectContenteditable string
 
 const (
-	ObjectContenteditableEnumFalse         ObjectContenteditableEnum = "false"
-	ObjectContenteditableEnumPlaintextOnly ObjectContenteditableEnum = "plaintext-only"
-	ObjectContenteditableEnumTrue          ObjectContenteditableEnum = "true"
-	ObjectContenteditableEnumEmpty         ObjectContenteditableEnum = ""
+	ObjectContenteditableFalse         ObjectContenteditable = "false"
+	ObjectContenteditablePlaintextOnly ObjectContenteditable = "plaintext-only"
+	ObjectContenteditableTrue          ObjectContenteditable = "true"
+	ObjectContenteditableEmpty         ObjectContenteditable = ""
 )
 
-type ObjectDirEnum string
+type ObjectDir string
 
 const (
-	ObjectDirEnumLtr  ObjectDirEnum = "ltr"
-	ObjectDirEnumRtl  ObjectDirEnum = "rtl"
-	ObjectDirEnumAuto ObjectDirEnum = "auto"
+	ObjectDirAuto ObjectDir = "auto"
+	ObjectDirLtr  ObjectDir = "ltr"
+	ObjectDirRtl  ObjectDir = "rtl"
 )
 
-type ObjectDraggableEnum string
+type ObjectDraggable string
 
 const (
-	ObjectDraggableEnumFalse ObjectDraggableEnum = "false"
-	ObjectDraggableEnumTrue  ObjectDraggableEnum = "true"
+	ObjectDraggableFalse ObjectDraggable = "false"
+	ObjectDraggableTrue  ObjectDraggable = "true"
 )
 
-type ObjectEnterkeyhintEnum string
+type ObjectEnterkeyhint string
 
 const (
-	ObjectEnterkeyhintEnumGo       ObjectEnterkeyhintEnum = "go"
-	ObjectEnterkeyhintEnumNext     ObjectEnterkeyhintEnum = "next"
-	ObjectEnterkeyhintEnumPrevious ObjectEnterkeyhintEnum = "previous"
-	ObjectEnterkeyhintEnumSearch   ObjectEnterkeyhintEnum = "search"
-	ObjectEnterkeyhintEnumSend     ObjectEnterkeyhintEnum = "send"
-	ObjectEnterkeyhintEnumDone     ObjectEnterkeyhintEnum = "done"
-	ObjectEnterkeyhintEnumEnter    ObjectEnterkeyhintEnum = "enter"
+	ObjectEnterkeyhintGo       ObjectEnterkeyhint = "go"
+	ObjectEnterkeyhintNext     ObjectEnterkeyhint = "next"
+	ObjectEnterkeyhintPrevious ObjectEnterkeyhint = "previous"
+	ObjectEnterkeyhintSearch   ObjectEnterkeyhint = "search"
+	ObjectEnterkeyhintSend     ObjectEnterkeyhint = "send"
+	ObjectEnterkeyhintDone     ObjectEnterkeyhint = "done"
+	ObjectEnterkeyhintEnter    ObjectEnterkeyhint = "enter"
 )
 
-type ObjectHiddenEnum string
+type ObjectHidden string
 
 const (
-	ObjectHiddenEnumHidden     ObjectHiddenEnum = "hidden"
-	ObjectHiddenEnumUntilFound ObjectHiddenEnum = "until-found"
-	ObjectHiddenEnumEmpty      ObjectHiddenEnum = ""
+	ObjectHiddenHidden     ObjectHidden = "hidden"
+	ObjectHiddenUntilFound ObjectHidden = "until-found"
+	ObjectHiddenEmpty      ObjectHidden = ""
 )
 
-type ObjectInputmodeEnum string
+type ObjectInputmode string
 
 const (
-	ObjectInputmodeEnumSearch  ObjectInputmodeEnum = "search"
-	ObjectInputmodeEnumTel     ObjectInputmodeEnum = "tel"
-	ObjectInputmodeEnumText    ObjectInputmodeEnum = "text"
-	ObjectInputmodeEnumUrl     ObjectInputmodeEnum = "url"
-	ObjectInputmodeEnumDecimal ObjectInputmodeEnum = "decimal"
-	ObjectInputmodeEnumEmail   ObjectInputmodeEnum = "email"
-	ObjectInputmodeEnumNone    ObjectInputmodeEnum = "none"
-	ObjectInputmodeEnumNumeric ObjectInputmodeEnum = "numeric"
+	ObjectInputmodeTel     ObjectInputmode = "tel"
+	ObjectInputmodeText    ObjectInputmode = "text"
+	ObjectInputmodeUrl     ObjectInputmode = "url"
+	ObjectInputmodeDecimal ObjectInputmode = "decimal"
+	ObjectInputmodeEmail   ObjectInputmode = "email"
+	ObjectInputmodeNone    ObjectInputmode = "none"
+	ObjectInputmodeNumeric ObjectInputmode = "numeric"
+	ObjectInputmodeSearch  ObjectInputmode = "search"
 )
 
-type ObjectSpellcheckEnum string
+type ObjectSpellcheck string
 
 const (
-	ObjectSpellcheckEnumFalse ObjectSpellcheckEnum = "false"
-	ObjectSpellcheckEnumTrue  ObjectSpellcheckEnum = "true"
-	ObjectSpellcheckEnumEmpty ObjectSpellcheckEnum = ""
+	ObjectSpellcheckFalse ObjectSpellcheck = "false"
+	ObjectSpellcheckTrue  ObjectSpellcheck = "true"
+	ObjectSpellcheckEmpty ObjectSpellcheck = ""
 )
 
-type ObjectTranslateEnum string
+type ObjectTranslate string
 
 const (
-	ObjectTranslateEnumNo    ObjectTranslateEnum = "no"
-	ObjectTranslateEnumYes   ObjectTranslateEnum = "yes"
-	ObjectTranslateEnumEmpty ObjectTranslateEnum = ""
+	ObjectTranslateNo    ObjectTranslate = "no"
+	ObjectTranslateYes   ObjectTranslate = "yes"
+	ObjectTranslateEmpty ObjectTranslate = ""
 )
 
-type ObjectWritingsuggestionsEnum string
+type ObjectWritingsuggestions string
 
 const (
-	ObjectWritingsuggestionsEnumFalse ObjectWritingsuggestionsEnum = "false"
-	ObjectWritingsuggestionsEnumTrue  ObjectWritingsuggestionsEnum = "true"
-	ObjectWritingsuggestionsEnumEmpty ObjectWritingsuggestionsEnum = ""
+	ObjectWritingsuggestionsFalse ObjectWritingsuggestions = "false"
+	ObjectWritingsuggestionsTrue  ObjectWritingsuggestions = "true"
+	ObjectWritingsuggestionsEmpty ObjectWritingsuggestions = ""
 )
 
 type objectAttrs map[string]any
@@ -185,13 +186,25 @@ func (e *ObjectElement) Height(i int) *ObjectElement {
 	return e
 }
 
-func (e *ObjectElement) Autocapitalize(a ObjectAutocapitalizeEnum) *ObjectElement {
+func (e *ObjectElement) AriaUnsafe(name string, s string) *ObjectElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ObjectElement) Aria(name string, s string) *ObjectElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *ObjectElement) Autocapitalize(a ObjectAutocapitalize) *ObjectElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *ObjectElement) Autocorrect(a ObjectAutocorrectEnum) *ObjectElement {
+func (e *ObjectElement) Autocorrect(a ObjectAutocorrect) *ObjectElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -209,31 +222,31 @@ func (e *ObjectElement) Class(s ...string) *ObjectElement {
 	return e
 }
 
-func (e *ObjectElement) Contenteditable(a ObjectContenteditableEnum) *ObjectElement {
+func (e *ObjectElement) Contenteditable(a ObjectContenteditable) *ObjectElement {
 	e.attributes["contenteditable"] = a
 
 	return e
 }
 
-func (e *ObjectElement) Dir(a ObjectDirEnum) *ObjectElement {
+func (e *ObjectElement) Dir(a ObjectDir) *ObjectElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *ObjectElement) Draggable(a ObjectDraggableEnum) *ObjectElement {
+func (e *ObjectElement) Draggable(a ObjectDraggable) *ObjectElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *ObjectElement) Enterkeyhint(a ObjectEnterkeyhintEnum) *ObjectElement {
+func (e *ObjectElement) Enterkeyhint(a ObjectEnterkeyhint) *ObjectElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *ObjectElement) Hidden(a ObjectHiddenEnum) *ObjectElement {
+func (e *ObjectElement) Hidden(a ObjectHidden) *ObjectElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -251,7 +264,7 @@ func (e *ObjectElement) Inert(b bool) *ObjectElement {
 	return e
 }
 
-func (e *ObjectElement) Inputmode(a ObjectInputmodeEnum) *ObjectElement {
+func (e *ObjectElement) Inputmode(a ObjectInputmode) *ObjectElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -311,7 +324,7 @@ func (e *ObjectElement) Slot(s string) *ObjectElement {
 	return e
 }
 
-func (e *ObjectElement) Spellcheck(a ObjectSpellcheckEnum) *ObjectElement {
+func (e *ObjectElement) Spellcheck(a ObjectSpellcheck) *ObjectElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -335,13 +348,13 @@ func (e *ObjectElement) Title(s string) *ObjectElement {
 	return e
 }
 
-func (e *ObjectElement) Translate(a ObjectTranslateEnum) *ObjectElement {
+func (e *ObjectElement) Translate(a ObjectTranslate) *ObjectElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *ObjectElement) Writingsuggestions(a ObjectWritingsuggestionsEnum) *ObjectElement {
+func (e *ObjectElement) Writingsuggestions(a ObjectWritingsuggestions) *ObjectElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

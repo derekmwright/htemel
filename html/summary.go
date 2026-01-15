@@ -48,115 +48,127 @@ func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *Summar
 	return Summary(false)
 }
 
-type SummaryAutocapitalizeEnum string
+type SummaryAutocapitalize string
 
 const (
-	SummaryAutocapitalizeEnumCharacters SummaryAutocapitalizeEnum = "characters"
-	SummaryAutocapitalizeEnumNone       SummaryAutocapitalizeEnum = "none"
-	SummaryAutocapitalizeEnumOff        SummaryAutocapitalizeEnum = "off"
-	SummaryAutocapitalizeEnumOn         SummaryAutocapitalizeEnum = "on"
-	SummaryAutocapitalizeEnumSentences  SummaryAutocapitalizeEnum = "sentences"
-	SummaryAutocapitalizeEnumWords      SummaryAutocapitalizeEnum = "words"
+	SummaryAutocapitalizeOn         SummaryAutocapitalize = "on"
+	SummaryAutocapitalizeSentences  SummaryAutocapitalize = "sentences"
+	SummaryAutocapitalizeWords      SummaryAutocapitalize = "words"
+	SummaryAutocapitalizeCharacters SummaryAutocapitalize = "characters"
+	SummaryAutocapitalizeNone       SummaryAutocapitalize = "none"
+	SummaryAutocapitalizeOff        SummaryAutocapitalize = "off"
 )
 
-type SummaryAutocorrectEnum string
+type SummaryAutocorrect string
 
 const (
-	SummaryAutocorrectEnumOff   SummaryAutocorrectEnum = "off"
-	SummaryAutocorrectEnumOn    SummaryAutocorrectEnum = "on"
-	SummaryAutocorrectEnumEmpty SummaryAutocorrectEnum = ""
+	SummaryAutocorrectOff   SummaryAutocorrect = "off"
+	SummaryAutocorrectOn    SummaryAutocorrect = "on"
+	SummaryAutocorrectEmpty SummaryAutocorrect = ""
 )
 
-type SummaryContenteditableEnum string
+type SummaryContenteditable string
 
 const (
-	SummaryContenteditableEnumFalse         SummaryContenteditableEnum = "false"
-	SummaryContenteditableEnumPlaintextOnly SummaryContenteditableEnum = "plaintext-only"
-	SummaryContenteditableEnumTrue          SummaryContenteditableEnum = "true"
-	SummaryContenteditableEnumEmpty         SummaryContenteditableEnum = ""
+	SummaryContenteditableFalse         SummaryContenteditable = "false"
+	SummaryContenteditablePlaintextOnly SummaryContenteditable = "plaintext-only"
+	SummaryContenteditableTrue          SummaryContenteditable = "true"
+	SummaryContenteditableEmpty         SummaryContenteditable = ""
 )
 
-type SummaryDirEnum string
+type SummaryDir string
 
 const (
-	SummaryDirEnumLtr  SummaryDirEnum = "ltr"
-	SummaryDirEnumRtl  SummaryDirEnum = "rtl"
-	SummaryDirEnumAuto SummaryDirEnum = "auto"
+	SummaryDirAuto SummaryDir = "auto"
+	SummaryDirLtr  SummaryDir = "ltr"
+	SummaryDirRtl  SummaryDir = "rtl"
 )
 
-type SummaryDraggableEnum string
+type SummaryDraggable string
 
 const (
-	SummaryDraggableEnumFalse SummaryDraggableEnum = "false"
-	SummaryDraggableEnumTrue  SummaryDraggableEnum = "true"
+	SummaryDraggableFalse SummaryDraggable = "false"
+	SummaryDraggableTrue  SummaryDraggable = "true"
 )
 
-type SummaryEnterkeyhintEnum string
+type SummaryEnterkeyhint string
 
 const (
-	SummaryEnterkeyhintEnumDone     SummaryEnterkeyhintEnum = "done"
-	SummaryEnterkeyhintEnumEnter    SummaryEnterkeyhintEnum = "enter"
-	SummaryEnterkeyhintEnumGo       SummaryEnterkeyhintEnum = "go"
-	SummaryEnterkeyhintEnumNext     SummaryEnterkeyhintEnum = "next"
-	SummaryEnterkeyhintEnumPrevious SummaryEnterkeyhintEnum = "previous"
-	SummaryEnterkeyhintEnumSearch   SummaryEnterkeyhintEnum = "search"
-	SummaryEnterkeyhintEnumSend     SummaryEnterkeyhintEnum = "send"
+	SummaryEnterkeyhintGo       SummaryEnterkeyhint = "go"
+	SummaryEnterkeyhintNext     SummaryEnterkeyhint = "next"
+	SummaryEnterkeyhintPrevious SummaryEnterkeyhint = "previous"
+	SummaryEnterkeyhintSearch   SummaryEnterkeyhint = "search"
+	SummaryEnterkeyhintSend     SummaryEnterkeyhint = "send"
+	SummaryEnterkeyhintDone     SummaryEnterkeyhint = "done"
+	SummaryEnterkeyhintEnter    SummaryEnterkeyhint = "enter"
 )
 
-type SummaryHiddenEnum string
+type SummaryHidden string
 
 const (
-	SummaryHiddenEnumHidden     SummaryHiddenEnum = "hidden"
-	SummaryHiddenEnumUntilFound SummaryHiddenEnum = "until-found"
-	SummaryHiddenEnumEmpty      SummaryHiddenEnum = ""
+	SummaryHiddenHidden     SummaryHidden = "hidden"
+	SummaryHiddenUntilFound SummaryHidden = "until-found"
+	SummaryHiddenEmpty      SummaryHidden = ""
 )
 
-type SummaryInputmodeEnum string
+type SummaryInputmode string
 
 const (
-	SummaryInputmodeEnumUrl     SummaryInputmodeEnum = "url"
-	SummaryInputmodeEnumDecimal SummaryInputmodeEnum = "decimal"
-	SummaryInputmodeEnumEmail   SummaryInputmodeEnum = "email"
-	SummaryInputmodeEnumNone    SummaryInputmodeEnum = "none"
-	SummaryInputmodeEnumNumeric SummaryInputmodeEnum = "numeric"
-	SummaryInputmodeEnumSearch  SummaryInputmodeEnum = "search"
-	SummaryInputmodeEnumTel     SummaryInputmodeEnum = "tel"
-	SummaryInputmodeEnumText    SummaryInputmodeEnum = "text"
+	SummaryInputmodeNumeric SummaryInputmode = "numeric"
+	SummaryInputmodeSearch  SummaryInputmode = "search"
+	SummaryInputmodeTel     SummaryInputmode = "tel"
+	SummaryInputmodeText    SummaryInputmode = "text"
+	SummaryInputmodeUrl     SummaryInputmode = "url"
+	SummaryInputmodeDecimal SummaryInputmode = "decimal"
+	SummaryInputmodeEmail   SummaryInputmode = "email"
+	SummaryInputmodeNone    SummaryInputmode = "none"
 )
 
-type SummarySpellcheckEnum string
+type SummarySpellcheck string
 
 const (
-	SummarySpellcheckEnumFalse SummarySpellcheckEnum = "false"
-	SummarySpellcheckEnumTrue  SummarySpellcheckEnum = "true"
-	SummarySpellcheckEnumEmpty SummarySpellcheckEnum = ""
+	SummarySpellcheckFalse SummarySpellcheck = "false"
+	SummarySpellcheckTrue  SummarySpellcheck = "true"
+	SummarySpellcheckEmpty SummarySpellcheck = ""
 )
 
-type SummaryTranslateEnum string
+type SummaryTranslate string
 
 const (
-	SummaryTranslateEnumNo    SummaryTranslateEnum = "no"
-	SummaryTranslateEnumYes   SummaryTranslateEnum = "yes"
-	SummaryTranslateEnumEmpty SummaryTranslateEnum = ""
+	SummaryTranslateNo    SummaryTranslate = "no"
+	SummaryTranslateYes   SummaryTranslate = "yes"
+	SummaryTranslateEmpty SummaryTranslate = ""
 )
 
-type SummaryWritingsuggestionsEnum string
+type SummaryWritingsuggestions string
 
 const (
-	SummaryWritingsuggestionsEnumFalse SummaryWritingsuggestionsEnum = "false"
-	SummaryWritingsuggestionsEnumTrue  SummaryWritingsuggestionsEnum = "true"
-	SummaryWritingsuggestionsEnumEmpty SummaryWritingsuggestionsEnum = ""
+	SummaryWritingsuggestionsFalse SummaryWritingsuggestions = "false"
+	SummaryWritingsuggestionsTrue  SummaryWritingsuggestions = "true"
+	SummaryWritingsuggestionsEmpty SummaryWritingsuggestions = ""
 )
 
 type summaryAttrs map[string]any
 
-func (e *SummaryElement) Autocapitalize(a SummaryAutocapitalizeEnum) *SummaryElement {
+func (e *SummaryElement) AriaUnsafe(name string, s string) *SummaryElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SummaryElement) Aria(name string, s string) *SummaryElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SummaryElement) Autocapitalize(a SummaryAutocapitalize) *SummaryElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SummaryElement) Autocorrect(a SummaryAutocorrectEnum) *SummaryElement {
+func (e *SummaryElement) Autocorrect(a SummaryAutocorrect) *SummaryElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *SummaryElement) Class(s ...string) *SummaryElement {
 	return e
 }
 
-func (e *SummaryElement) Contenteditable(a SummaryContenteditableEnum) *SummaryElement {
+func (e *SummaryElement) Contenteditable(a SummaryContenteditable) *SummaryElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *SummaryElement) Data(name string, s string) *SummaryElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SummaryElement) Dir(a SummaryDirEnum) *SummaryElement {
+func (e *SummaryElement) Dir(a SummaryDir) *SummaryElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SummaryElement) Draggable(a SummaryDraggableEnum) *SummaryElement {
+func (e *SummaryElement) Draggable(a SummaryDraggable) *SummaryElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SummaryElement) Enterkeyhint(a SummaryEnterkeyhintEnum) *SummaryElement {
+func (e *SummaryElement) Enterkeyhint(a SummaryEnterkeyhint) *SummaryElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SummaryElement) Hidden(a SummaryHiddenEnum) *SummaryElement {
+func (e *SummaryElement) Hidden(a SummaryHidden) *SummaryElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *SummaryElement) Inert(b bool) *SummaryElement {
 	return e
 }
 
-func (e *SummaryElement) Inputmode(a SummaryInputmodeEnum) *SummaryElement {
+func (e *SummaryElement) Inputmode(a SummaryInputmode) *SummaryElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *SummaryElement) Slot(s string) *SummaryElement {
 	return e
 }
 
-func (e *SummaryElement) Spellcheck(a SummarySpellcheckEnum) *SummaryElement {
+func (e *SummaryElement) Spellcheck(a SummarySpellcheck) *SummaryElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *SummaryElement) Title(s string) *SummaryElement {
 	return e
 }
 
-func (e *SummaryElement) Translate(a SummaryTranslateEnum) *SummaryElement {
+func (e *SummaryElement) Translate(a SummaryTranslate) *SummaryElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SummaryElement) Writingsuggestions(a SummaryWritingsuggestionsEnum) *SummaryElement {
+func (e *SummaryElement) Writingsuggestions(a SummaryWritingsuggestions) *SummaryElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

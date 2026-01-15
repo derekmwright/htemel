@@ -48,119 +48,119 @@ func FormTernary(condition bool, true htemel.Node, false htemel.Node) *FormEleme
 	return Form(false)
 }
 
-type FormAutocompleteEnum string
+type FormAutocomplete string
 
 const (
-	FormAutocompleteEnumOff FormAutocompleteEnum = "off"
-	FormAutocompleteEnumOn  FormAutocompleteEnum = "on"
+	FormAutocompleteOff FormAutocomplete = "off"
+	FormAutocompleteOn  FormAutocomplete = "on"
 )
 
-type FormMethodEnum string
+type FormMethod string
 
 const (
-	FormMethodEnumDialog FormMethodEnum = "dialog"
-	FormMethodEnumGet    FormMethodEnum = "get"
-	FormMethodEnumPost   FormMethodEnum = "post"
+	FormMethodDialog FormMethod = "dialog"
+	FormMethodGet    FormMethod = "get"
+	FormMethodPost   FormMethod = "post"
 )
 
-type FormAutocapitalizeEnum string
+type FormAutocapitalize string
 
 const (
-	FormAutocapitalizeEnumOn         FormAutocapitalizeEnum = "on"
-	FormAutocapitalizeEnumSentences  FormAutocapitalizeEnum = "sentences"
-	FormAutocapitalizeEnumWords      FormAutocapitalizeEnum = "words"
-	FormAutocapitalizeEnumCharacters FormAutocapitalizeEnum = "characters"
-	FormAutocapitalizeEnumNone       FormAutocapitalizeEnum = "none"
-	FormAutocapitalizeEnumOff        FormAutocapitalizeEnum = "off"
+	FormAutocapitalizeCharacters FormAutocapitalize = "characters"
+	FormAutocapitalizeNone       FormAutocapitalize = "none"
+	FormAutocapitalizeOff        FormAutocapitalize = "off"
+	FormAutocapitalizeOn         FormAutocapitalize = "on"
+	FormAutocapitalizeSentences  FormAutocapitalize = "sentences"
+	FormAutocapitalizeWords      FormAutocapitalize = "words"
 )
 
-type FormAutocorrectEnum string
+type FormAutocorrect string
 
 const (
-	FormAutocorrectEnumOff   FormAutocorrectEnum = "off"
-	FormAutocorrectEnumOn    FormAutocorrectEnum = "on"
-	FormAutocorrectEnumEmpty FormAutocorrectEnum = ""
+	FormAutocorrectOff   FormAutocorrect = "off"
+	FormAutocorrectOn    FormAutocorrect = "on"
+	FormAutocorrectEmpty FormAutocorrect = ""
 )
 
-type FormContenteditableEnum string
+type FormContenteditable string
 
 const (
-	FormContenteditableEnumPlaintextOnly FormContenteditableEnum = "plaintext-only"
-	FormContenteditableEnumTrue          FormContenteditableEnum = "true"
-	FormContenteditableEnumFalse         FormContenteditableEnum = "false"
-	FormContenteditableEnumEmpty         FormContenteditableEnum = ""
+	FormContenteditableFalse         FormContenteditable = "false"
+	FormContenteditablePlaintextOnly FormContenteditable = "plaintext-only"
+	FormContenteditableTrue          FormContenteditable = "true"
+	FormContenteditableEmpty         FormContenteditable = ""
 )
 
-type FormDirEnum string
+type FormDir string
 
 const (
-	FormDirEnumAuto FormDirEnum = "auto"
-	FormDirEnumLtr  FormDirEnum = "ltr"
-	FormDirEnumRtl  FormDirEnum = "rtl"
+	FormDirAuto FormDir = "auto"
+	FormDirLtr  FormDir = "ltr"
+	FormDirRtl  FormDir = "rtl"
 )
 
-type FormDraggableEnum string
+type FormDraggable string
 
 const (
-	FormDraggableEnumFalse FormDraggableEnum = "false"
-	FormDraggableEnumTrue  FormDraggableEnum = "true"
+	FormDraggableFalse FormDraggable = "false"
+	FormDraggableTrue  FormDraggable = "true"
 )
 
-type FormEnterkeyhintEnum string
+type FormEnterkeyhint string
 
 const (
-	FormEnterkeyhintEnumSend     FormEnterkeyhintEnum = "send"
-	FormEnterkeyhintEnumDone     FormEnterkeyhintEnum = "done"
-	FormEnterkeyhintEnumEnter    FormEnterkeyhintEnum = "enter"
-	FormEnterkeyhintEnumGo       FormEnterkeyhintEnum = "go"
-	FormEnterkeyhintEnumNext     FormEnterkeyhintEnum = "next"
-	FormEnterkeyhintEnumPrevious FormEnterkeyhintEnum = "previous"
-	FormEnterkeyhintEnumSearch   FormEnterkeyhintEnum = "search"
+	FormEnterkeyhintNext     FormEnterkeyhint = "next"
+	FormEnterkeyhintPrevious FormEnterkeyhint = "previous"
+	FormEnterkeyhintSearch   FormEnterkeyhint = "search"
+	FormEnterkeyhintSend     FormEnterkeyhint = "send"
+	FormEnterkeyhintDone     FormEnterkeyhint = "done"
+	FormEnterkeyhintEnter    FormEnterkeyhint = "enter"
+	FormEnterkeyhintGo       FormEnterkeyhint = "go"
 )
 
-type FormHiddenEnum string
+type FormHidden string
 
 const (
-	FormHiddenEnumHidden     FormHiddenEnum = "hidden"
-	FormHiddenEnumUntilFound FormHiddenEnum = "until-found"
-	FormHiddenEnumEmpty      FormHiddenEnum = ""
+	FormHiddenHidden     FormHidden = "hidden"
+	FormHiddenUntilFound FormHidden = "until-found"
+	FormHiddenEmpty      FormHidden = ""
 )
 
-type FormInputmodeEnum string
+type FormInputmode string
 
 const (
-	FormInputmodeEnumNone    FormInputmodeEnum = "none"
-	FormInputmodeEnumNumeric FormInputmodeEnum = "numeric"
-	FormInputmodeEnumSearch  FormInputmodeEnum = "search"
-	FormInputmodeEnumTel     FormInputmodeEnum = "tel"
-	FormInputmodeEnumText    FormInputmodeEnum = "text"
-	FormInputmodeEnumUrl     FormInputmodeEnum = "url"
-	FormInputmodeEnumDecimal FormInputmodeEnum = "decimal"
-	FormInputmodeEnumEmail   FormInputmodeEnum = "email"
+	FormInputmodeDecimal FormInputmode = "decimal"
+	FormInputmodeEmail   FormInputmode = "email"
+	FormInputmodeNone    FormInputmode = "none"
+	FormInputmodeNumeric FormInputmode = "numeric"
+	FormInputmodeSearch  FormInputmode = "search"
+	FormInputmodeTel     FormInputmode = "tel"
+	FormInputmodeText    FormInputmode = "text"
+	FormInputmodeUrl     FormInputmode = "url"
 )
 
-type FormSpellcheckEnum string
+type FormSpellcheck string
 
 const (
-	FormSpellcheckEnumTrue  FormSpellcheckEnum = "true"
-	FormSpellcheckEnumFalse FormSpellcheckEnum = "false"
-	FormSpellcheckEnumEmpty FormSpellcheckEnum = ""
+	FormSpellcheckTrue  FormSpellcheck = "true"
+	FormSpellcheckFalse FormSpellcheck = "false"
+	FormSpellcheckEmpty FormSpellcheck = ""
 )
 
-type FormTranslateEnum string
+type FormTranslate string
 
 const (
-	FormTranslateEnumYes   FormTranslateEnum = "yes"
-	FormTranslateEnumNo    FormTranslateEnum = "no"
-	FormTranslateEnumEmpty FormTranslateEnum = ""
+	FormTranslateNo    FormTranslate = "no"
+	FormTranslateYes   FormTranslate = "yes"
+	FormTranslateEmpty FormTranslate = ""
 )
 
-type FormWritingsuggestionsEnum string
+type FormWritingsuggestions string
 
 const (
-	FormWritingsuggestionsEnumFalse FormWritingsuggestionsEnum = "false"
-	FormWritingsuggestionsEnumTrue  FormWritingsuggestionsEnum = "true"
-	FormWritingsuggestionsEnumEmpty FormWritingsuggestionsEnum = ""
+	FormWritingsuggestionsFalse FormWritingsuggestions = "false"
+	FormWritingsuggestionsTrue  FormWritingsuggestions = "true"
+	FormWritingsuggestionsEmpty FormWritingsuggestions = ""
 )
 
 type formAttrs map[string]any
@@ -177,7 +177,7 @@ func (e *FormElement) Action(s string) *FormElement {
 	return e
 }
 
-func (e *FormElement) Autocomplete(a FormAutocompleteEnum) *FormElement {
+func (e *FormElement) Autocomplete(a FormAutocomplete) *FormElement {
 	e.attributes["autocomplete"] = a
 
 	return e
@@ -189,7 +189,7 @@ func (e *FormElement) Enctype(s string) *FormElement {
 	return e
 }
 
-func (e *FormElement) Method(a FormMethodEnum) *FormElement {
+func (e *FormElement) Method(a FormMethod) *FormElement {
 	e.attributes["method"] = a
 
 	return e
@@ -219,13 +219,25 @@ func (e *FormElement) Rel(s ...string) *FormElement {
 	return e
 }
 
-func (e *FormElement) Autocapitalize(a FormAutocapitalizeEnum) *FormElement {
+func (e *FormElement) AriaUnsafe(name string, s string) *FormElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *FormElement) Aria(name string, s string) *FormElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *FormElement) Autocapitalize(a FormAutocapitalize) *FormElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *FormElement) Autocorrect(a FormAutocorrectEnum) *FormElement {
+func (e *FormElement) Autocorrect(a FormAutocorrect) *FormElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -243,7 +255,7 @@ func (e *FormElement) Class(s ...string) *FormElement {
 	return e
 }
 
-func (e *FormElement) Contenteditable(a FormContenteditableEnum) *FormElement {
+func (e *FormElement) Contenteditable(a FormContenteditable) *FormElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -261,25 +273,25 @@ func (e *FormElement) Data(name string, s string) *FormElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *FormElement) Dir(a FormDirEnum) *FormElement {
+func (e *FormElement) Dir(a FormDir) *FormElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *FormElement) Draggable(a FormDraggableEnum) *FormElement {
+func (e *FormElement) Draggable(a FormDraggable) *FormElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *FormElement) Enterkeyhint(a FormEnterkeyhintEnum) *FormElement {
+func (e *FormElement) Enterkeyhint(a FormEnterkeyhint) *FormElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *FormElement) Hidden(a FormHiddenEnum) *FormElement {
+func (e *FormElement) Hidden(a FormHidden) *FormElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -297,7 +309,7 @@ func (e *FormElement) Inert(b bool) *FormElement {
 	return e
 }
 
-func (e *FormElement) Inputmode(a FormInputmodeEnum) *FormElement {
+func (e *FormElement) Inputmode(a FormInputmode) *FormElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -357,7 +369,7 @@ func (e *FormElement) Slot(s string) *FormElement {
 	return e
 }
 
-func (e *FormElement) Spellcheck(a FormSpellcheckEnum) *FormElement {
+func (e *FormElement) Spellcheck(a FormSpellcheck) *FormElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -381,13 +393,13 @@ func (e *FormElement) Title(s string) *FormElement {
 	return e
 }
 
-func (e *FormElement) Translate(a FormTranslateEnum) *FormElement {
+func (e *FormElement) Translate(a FormTranslate) *FormElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *FormElement) Writingsuggestions(a FormWritingsuggestionsEnum) *FormElement {
+func (e *FormElement) Writingsuggestions(a FormWritingsuggestions) *FormElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

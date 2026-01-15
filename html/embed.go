@@ -39,104 +39,104 @@ func EmbedIf(condition bool) *EmbedElement {
 	}
 }
 
-type EmbedAutocapitalizeEnum string
+type EmbedAutocapitalize string
 
 const (
-	EmbedAutocapitalizeEnumCharacters EmbedAutocapitalizeEnum = "characters"
-	EmbedAutocapitalizeEnumNone       EmbedAutocapitalizeEnum = "none"
-	EmbedAutocapitalizeEnumOff        EmbedAutocapitalizeEnum = "off"
-	EmbedAutocapitalizeEnumOn         EmbedAutocapitalizeEnum = "on"
-	EmbedAutocapitalizeEnumSentences  EmbedAutocapitalizeEnum = "sentences"
-	EmbedAutocapitalizeEnumWords      EmbedAutocapitalizeEnum = "words"
+	EmbedAutocapitalizeSentences  EmbedAutocapitalize = "sentences"
+	EmbedAutocapitalizeWords      EmbedAutocapitalize = "words"
+	EmbedAutocapitalizeCharacters EmbedAutocapitalize = "characters"
+	EmbedAutocapitalizeNone       EmbedAutocapitalize = "none"
+	EmbedAutocapitalizeOff        EmbedAutocapitalize = "off"
+	EmbedAutocapitalizeOn         EmbedAutocapitalize = "on"
 )
 
-type EmbedAutocorrectEnum string
+type EmbedAutocorrect string
 
 const (
-	EmbedAutocorrectEnumOff   EmbedAutocorrectEnum = "off"
-	EmbedAutocorrectEnumOn    EmbedAutocorrectEnum = "on"
-	EmbedAutocorrectEnumEmpty EmbedAutocorrectEnum = ""
+	EmbedAutocorrectOff   EmbedAutocorrect = "off"
+	EmbedAutocorrectOn    EmbedAutocorrect = "on"
+	EmbedAutocorrectEmpty EmbedAutocorrect = ""
 )
 
-type EmbedContenteditableEnum string
+type EmbedContenteditable string
 
 const (
-	EmbedContenteditableEnumFalse         EmbedContenteditableEnum = "false"
-	EmbedContenteditableEnumPlaintextOnly EmbedContenteditableEnum = "plaintext-only"
-	EmbedContenteditableEnumTrue          EmbedContenteditableEnum = "true"
-	EmbedContenteditableEnumEmpty         EmbedContenteditableEnum = ""
+	EmbedContenteditableFalse         EmbedContenteditable = "false"
+	EmbedContenteditablePlaintextOnly EmbedContenteditable = "plaintext-only"
+	EmbedContenteditableTrue          EmbedContenteditable = "true"
+	EmbedContenteditableEmpty         EmbedContenteditable = ""
 )
 
-type EmbedDirEnum string
+type EmbedDir string
 
 const (
-	EmbedDirEnumLtr  EmbedDirEnum = "ltr"
-	EmbedDirEnumRtl  EmbedDirEnum = "rtl"
-	EmbedDirEnumAuto EmbedDirEnum = "auto"
+	EmbedDirAuto EmbedDir = "auto"
+	EmbedDirLtr  EmbedDir = "ltr"
+	EmbedDirRtl  EmbedDir = "rtl"
 )
 
-type EmbedDraggableEnum string
+type EmbedDraggable string
 
 const (
-	EmbedDraggableEnumFalse EmbedDraggableEnum = "false"
-	EmbedDraggableEnumTrue  EmbedDraggableEnum = "true"
+	EmbedDraggableFalse EmbedDraggable = "false"
+	EmbedDraggableTrue  EmbedDraggable = "true"
 )
 
-type EmbedEnterkeyhintEnum string
+type EmbedEnterkeyhint string
 
 const (
-	EmbedEnterkeyhintEnumSend     EmbedEnterkeyhintEnum = "send"
-	EmbedEnterkeyhintEnumDone     EmbedEnterkeyhintEnum = "done"
-	EmbedEnterkeyhintEnumEnter    EmbedEnterkeyhintEnum = "enter"
-	EmbedEnterkeyhintEnumGo       EmbedEnterkeyhintEnum = "go"
-	EmbedEnterkeyhintEnumNext     EmbedEnterkeyhintEnum = "next"
-	EmbedEnterkeyhintEnumPrevious EmbedEnterkeyhintEnum = "previous"
-	EmbedEnterkeyhintEnumSearch   EmbedEnterkeyhintEnum = "search"
+	EmbedEnterkeyhintDone     EmbedEnterkeyhint = "done"
+	EmbedEnterkeyhintEnter    EmbedEnterkeyhint = "enter"
+	EmbedEnterkeyhintGo       EmbedEnterkeyhint = "go"
+	EmbedEnterkeyhintNext     EmbedEnterkeyhint = "next"
+	EmbedEnterkeyhintPrevious EmbedEnterkeyhint = "previous"
+	EmbedEnterkeyhintSearch   EmbedEnterkeyhint = "search"
+	EmbedEnterkeyhintSend     EmbedEnterkeyhint = "send"
 )
 
-type EmbedHiddenEnum string
+type EmbedHidden string
 
 const (
-	EmbedHiddenEnumHidden     EmbedHiddenEnum = "hidden"
-	EmbedHiddenEnumUntilFound EmbedHiddenEnum = "until-found"
-	EmbedHiddenEnumEmpty      EmbedHiddenEnum = ""
+	EmbedHiddenHidden     EmbedHidden = "hidden"
+	EmbedHiddenUntilFound EmbedHidden = "until-found"
+	EmbedHiddenEmpty      EmbedHidden = ""
 )
 
-type EmbedInputmodeEnum string
+type EmbedInputmode string
 
 const (
-	EmbedInputmodeEnumTel     EmbedInputmodeEnum = "tel"
-	EmbedInputmodeEnumText    EmbedInputmodeEnum = "text"
-	EmbedInputmodeEnumUrl     EmbedInputmodeEnum = "url"
-	EmbedInputmodeEnumDecimal EmbedInputmodeEnum = "decimal"
-	EmbedInputmodeEnumEmail   EmbedInputmodeEnum = "email"
-	EmbedInputmodeEnumNone    EmbedInputmodeEnum = "none"
-	EmbedInputmodeEnumNumeric EmbedInputmodeEnum = "numeric"
-	EmbedInputmodeEnumSearch  EmbedInputmodeEnum = "search"
+	EmbedInputmodeUrl     EmbedInputmode = "url"
+	EmbedInputmodeDecimal EmbedInputmode = "decimal"
+	EmbedInputmodeEmail   EmbedInputmode = "email"
+	EmbedInputmodeNone    EmbedInputmode = "none"
+	EmbedInputmodeNumeric EmbedInputmode = "numeric"
+	EmbedInputmodeSearch  EmbedInputmode = "search"
+	EmbedInputmodeTel     EmbedInputmode = "tel"
+	EmbedInputmodeText    EmbedInputmode = "text"
 )
 
-type EmbedSpellcheckEnum string
+type EmbedSpellcheck string
 
 const (
-	EmbedSpellcheckEnumFalse EmbedSpellcheckEnum = "false"
-	EmbedSpellcheckEnumTrue  EmbedSpellcheckEnum = "true"
-	EmbedSpellcheckEnumEmpty EmbedSpellcheckEnum = ""
+	EmbedSpellcheckFalse EmbedSpellcheck = "false"
+	EmbedSpellcheckTrue  EmbedSpellcheck = "true"
+	EmbedSpellcheckEmpty EmbedSpellcheck = ""
 )
 
-type EmbedTranslateEnum string
+type EmbedTranslate string
 
 const (
-	EmbedTranslateEnumNo    EmbedTranslateEnum = "no"
-	EmbedTranslateEnumYes   EmbedTranslateEnum = "yes"
-	EmbedTranslateEnumEmpty EmbedTranslateEnum = ""
+	EmbedTranslateNo    EmbedTranslate = "no"
+	EmbedTranslateYes   EmbedTranslate = "yes"
+	EmbedTranslateEmpty EmbedTranslate = ""
 )
 
-type EmbedWritingsuggestionsEnum string
+type EmbedWritingsuggestions string
 
 const (
-	EmbedWritingsuggestionsEnumFalse EmbedWritingsuggestionsEnum = "false"
-	EmbedWritingsuggestionsEnumTrue  EmbedWritingsuggestionsEnum = "true"
-	EmbedWritingsuggestionsEnumEmpty EmbedWritingsuggestionsEnum = ""
+	EmbedWritingsuggestionsFalse EmbedWritingsuggestions = "false"
+	EmbedWritingsuggestionsTrue  EmbedWritingsuggestions = "true"
+	EmbedWritingsuggestionsEmpty EmbedWritingsuggestions = ""
 )
 
 type embedAttrs map[string]any
@@ -165,13 +165,25 @@ func (e *EmbedElement) Height(i int) *EmbedElement {
 	return e
 }
 
-func (e *EmbedElement) Autocapitalize(a EmbedAutocapitalizeEnum) *EmbedElement {
+func (e *EmbedElement) AriaUnsafe(name string, s string) *EmbedElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *EmbedElement) Aria(name string, s string) *EmbedElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *EmbedElement) Autocapitalize(a EmbedAutocapitalize) *EmbedElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *EmbedElement) Autocorrect(a EmbedAutocorrectEnum) *EmbedElement {
+func (e *EmbedElement) Autocorrect(a EmbedAutocorrect) *EmbedElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -189,7 +201,7 @@ func (e *EmbedElement) Class(s ...string) *EmbedElement {
 	return e
 }
 
-func (e *EmbedElement) Contenteditable(a EmbedContenteditableEnum) *EmbedElement {
+func (e *EmbedElement) Contenteditable(a EmbedContenteditable) *EmbedElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -207,25 +219,25 @@ func (e *EmbedElement) Data(name string, s string) *EmbedElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *EmbedElement) Dir(a EmbedDirEnum) *EmbedElement {
+func (e *EmbedElement) Dir(a EmbedDir) *EmbedElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *EmbedElement) Draggable(a EmbedDraggableEnum) *EmbedElement {
+func (e *EmbedElement) Draggable(a EmbedDraggable) *EmbedElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *EmbedElement) Enterkeyhint(a EmbedEnterkeyhintEnum) *EmbedElement {
+func (e *EmbedElement) Enterkeyhint(a EmbedEnterkeyhint) *EmbedElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *EmbedElement) Hidden(a EmbedHiddenEnum) *EmbedElement {
+func (e *EmbedElement) Hidden(a EmbedHidden) *EmbedElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -243,7 +255,7 @@ func (e *EmbedElement) Inert(b bool) *EmbedElement {
 	return e
 }
 
-func (e *EmbedElement) Inputmode(a EmbedInputmodeEnum) *EmbedElement {
+func (e *EmbedElement) Inputmode(a EmbedInputmode) *EmbedElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -303,7 +315,7 @@ func (e *EmbedElement) Slot(s string) *EmbedElement {
 	return e
 }
 
-func (e *EmbedElement) Spellcheck(a EmbedSpellcheckEnum) *EmbedElement {
+func (e *EmbedElement) Spellcheck(a EmbedSpellcheck) *EmbedElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -327,13 +339,13 @@ func (e *EmbedElement) Title(s string) *EmbedElement {
 	return e
 }
 
-func (e *EmbedElement) Translate(a EmbedTranslateEnum) *EmbedElement {
+func (e *EmbedElement) Translate(a EmbedTranslate) *EmbedElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *EmbedElement) Writingsuggestions(a EmbedWritingsuggestionsEnum) *EmbedElement {
+func (e *EmbedElement) Writingsuggestions(a EmbedWritingsuggestions) *EmbedElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

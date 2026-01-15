@@ -48,115 +48,127 @@ func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideEle
 	return Aside(false)
 }
 
-type AsideAutocapitalizeEnum string
+type AsideAutocapitalize string
 
 const (
-	AsideAutocapitalizeEnumSentences  AsideAutocapitalizeEnum = "sentences"
-	AsideAutocapitalizeEnumWords      AsideAutocapitalizeEnum = "words"
-	AsideAutocapitalizeEnumCharacters AsideAutocapitalizeEnum = "characters"
-	AsideAutocapitalizeEnumNone       AsideAutocapitalizeEnum = "none"
-	AsideAutocapitalizeEnumOff        AsideAutocapitalizeEnum = "off"
-	AsideAutocapitalizeEnumOn         AsideAutocapitalizeEnum = "on"
+	AsideAutocapitalizeWords      AsideAutocapitalize = "words"
+	AsideAutocapitalizeCharacters AsideAutocapitalize = "characters"
+	AsideAutocapitalizeNone       AsideAutocapitalize = "none"
+	AsideAutocapitalizeOff        AsideAutocapitalize = "off"
+	AsideAutocapitalizeOn         AsideAutocapitalize = "on"
+	AsideAutocapitalizeSentences  AsideAutocapitalize = "sentences"
 )
 
-type AsideAutocorrectEnum string
+type AsideAutocorrect string
 
 const (
-	AsideAutocorrectEnumOff   AsideAutocorrectEnum = "off"
-	AsideAutocorrectEnumOn    AsideAutocorrectEnum = "on"
-	AsideAutocorrectEnumEmpty AsideAutocorrectEnum = ""
+	AsideAutocorrectOff   AsideAutocorrect = "off"
+	AsideAutocorrectOn    AsideAutocorrect = "on"
+	AsideAutocorrectEmpty AsideAutocorrect = ""
 )
 
-type AsideContenteditableEnum string
+type AsideContenteditable string
 
 const (
-	AsideContenteditableEnumFalse         AsideContenteditableEnum = "false"
-	AsideContenteditableEnumPlaintextOnly AsideContenteditableEnum = "plaintext-only"
-	AsideContenteditableEnumTrue          AsideContenteditableEnum = "true"
-	AsideContenteditableEnumEmpty         AsideContenteditableEnum = ""
+	AsideContenteditableFalse         AsideContenteditable = "false"
+	AsideContenteditablePlaintextOnly AsideContenteditable = "plaintext-only"
+	AsideContenteditableTrue          AsideContenteditable = "true"
+	AsideContenteditableEmpty         AsideContenteditable = ""
 )
 
-type AsideDirEnum string
+type AsideDir string
 
 const (
-	AsideDirEnumAuto AsideDirEnum = "auto"
-	AsideDirEnumLtr  AsideDirEnum = "ltr"
-	AsideDirEnumRtl  AsideDirEnum = "rtl"
+	AsideDirAuto AsideDir = "auto"
+	AsideDirLtr  AsideDir = "ltr"
+	AsideDirRtl  AsideDir = "rtl"
 )
 
-type AsideDraggableEnum string
+type AsideDraggable string
 
 const (
-	AsideDraggableEnumFalse AsideDraggableEnum = "false"
-	AsideDraggableEnumTrue  AsideDraggableEnum = "true"
+	AsideDraggableFalse AsideDraggable = "false"
+	AsideDraggableTrue  AsideDraggable = "true"
 )
 
-type AsideEnterkeyhintEnum string
+type AsideEnterkeyhint string
 
 const (
-	AsideEnterkeyhintEnumGo       AsideEnterkeyhintEnum = "go"
-	AsideEnterkeyhintEnumNext     AsideEnterkeyhintEnum = "next"
-	AsideEnterkeyhintEnumPrevious AsideEnterkeyhintEnum = "previous"
-	AsideEnterkeyhintEnumSearch   AsideEnterkeyhintEnum = "search"
-	AsideEnterkeyhintEnumSend     AsideEnterkeyhintEnum = "send"
-	AsideEnterkeyhintEnumDone     AsideEnterkeyhintEnum = "done"
-	AsideEnterkeyhintEnumEnter    AsideEnterkeyhintEnum = "enter"
+	AsideEnterkeyhintPrevious AsideEnterkeyhint = "previous"
+	AsideEnterkeyhintSearch   AsideEnterkeyhint = "search"
+	AsideEnterkeyhintSend     AsideEnterkeyhint = "send"
+	AsideEnterkeyhintDone     AsideEnterkeyhint = "done"
+	AsideEnterkeyhintEnter    AsideEnterkeyhint = "enter"
+	AsideEnterkeyhintGo       AsideEnterkeyhint = "go"
+	AsideEnterkeyhintNext     AsideEnterkeyhint = "next"
 )
 
-type AsideHiddenEnum string
+type AsideHidden string
 
 const (
-	AsideHiddenEnumUntilFound AsideHiddenEnum = "until-found"
-	AsideHiddenEnumHidden     AsideHiddenEnum = "hidden"
-	AsideHiddenEnumEmpty      AsideHiddenEnum = ""
+	AsideHiddenHidden     AsideHidden = "hidden"
+	AsideHiddenUntilFound AsideHidden = "until-found"
+	AsideHiddenEmpty      AsideHidden = ""
 )
 
-type AsideInputmodeEnum string
+type AsideInputmode string
 
 const (
-	AsideInputmodeEnumDecimal AsideInputmodeEnum = "decimal"
-	AsideInputmodeEnumEmail   AsideInputmodeEnum = "email"
-	AsideInputmodeEnumNone    AsideInputmodeEnum = "none"
-	AsideInputmodeEnumNumeric AsideInputmodeEnum = "numeric"
-	AsideInputmodeEnumSearch  AsideInputmodeEnum = "search"
-	AsideInputmodeEnumTel     AsideInputmodeEnum = "tel"
-	AsideInputmodeEnumText    AsideInputmodeEnum = "text"
-	AsideInputmodeEnumUrl     AsideInputmodeEnum = "url"
+	AsideInputmodeNumeric AsideInputmode = "numeric"
+	AsideInputmodeSearch  AsideInputmode = "search"
+	AsideInputmodeTel     AsideInputmode = "tel"
+	AsideInputmodeText    AsideInputmode = "text"
+	AsideInputmodeUrl     AsideInputmode = "url"
+	AsideInputmodeDecimal AsideInputmode = "decimal"
+	AsideInputmodeEmail   AsideInputmode = "email"
+	AsideInputmodeNone    AsideInputmode = "none"
 )
 
-type AsideSpellcheckEnum string
+type AsideSpellcheck string
 
 const (
-	AsideSpellcheckEnumFalse AsideSpellcheckEnum = "false"
-	AsideSpellcheckEnumTrue  AsideSpellcheckEnum = "true"
-	AsideSpellcheckEnumEmpty AsideSpellcheckEnum = ""
+	AsideSpellcheckTrue  AsideSpellcheck = "true"
+	AsideSpellcheckFalse AsideSpellcheck = "false"
+	AsideSpellcheckEmpty AsideSpellcheck = ""
 )
 
-type AsideTranslateEnum string
+type AsideTranslate string
 
 const (
-	AsideTranslateEnumNo    AsideTranslateEnum = "no"
-	AsideTranslateEnumYes   AsideTranslateEnum = "yes"
-	AsideTranslateEnumEmpty AsideTranslateEnum = ""
+	AsideTranslateNo    AsideTranslate = "no"
+	AsideTranslateYes   AsideTranslate = "yes"
+	AsideTranslateEmpty AsideTranslate = ""
 )
 
-type AsideWritingsuggestionsEnum string
+type AsideWritingsuggestions string
 
 const (
-	AsideWritingsuggestionsEnumFalse AsideWritingsuggestionsEnum = "false"
-	AsideWritingsuggestionsEnumTrue  AsideWritingsuggestionsEnum = "true"
-	AsideWritingsuggestionsEnumEmpty AsideWritingsuggestionsEnum = ""
+	AsideWritingsuggestionsTrue  AsideWritingsuggestions = "true"
+	AsideWritingsuggestionsFalse AsideWritingsuggestions = "false"
+	AsideWritingsuggestionsEmpty AsideWritingsuggestions = ""
 )
 
 type asideAttrs map[string]any
 
-func (e *AsideElement) Autocapitalize(a AsideAutocapitalizeEnum) *AsideElement {
+func (e *AsideElement) AriaUnsafe(name string, s string) *AsideElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *AsideElement) Aria(name string, s string) *AsideElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *AsideElement) Autocapitalize(a AsideAutocapitalize) *AsideElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *AsideElement) Autocorrect(a AsideAutocorrectEnum) *AsideElement {
+func (e *AsideElement) Autocorrect(a AsideAutocorrect) *AsideElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *AsideElement) Class(s ...string) *AsideElement {
 	return e
 }
 
-func (e *AsideElement) Contenteditable(a AsideContenteditableEnum) *AsideElement {
+func (e *AsideElement) Contenteditable(a AsideContenteditable) *AsideElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *AsideElement) Data(name string, s string) *AsideElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *AsideElement) Dir(a AsideDirEnum) *AsideElement {
+func (e *AsideElement) Dir(a AsideDir) *AsideElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *AsideElement) Draggable(a AsideDraggableEnum) *AsideElement {
+func (e *AsideElement) Draggable(a AsideDraggable) *AsideElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *AsideElement) Enterkeyhint(a AsideEnterkeyhintEnum) *AsideElement {
+func (e *AsideElement) Enterkeyhint(a AsideEnterkeyhint) *AsideElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *AsideElement) Hidden(a AsideHiddenEnum) *AsideElement {
+func (e *AsideElement) Hidden(a AsideHidden) *AsideElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *AsideElement) Inert(b bool) *AsideElement {
 	return e
 }
 
-func (e *AsideElement) Inputmode(a AsideInputmodeEnum) *AsideElement {
+func (e *AsideElement) Inputmode(a AsideInputmode) *AsideElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *AsideElement) Slot(s string) *AsideElement {
 	return e
 }
 
-func (e *AsideElement) Spellcheck(a AsideSpellcheckEnum) *AsideElement {
+func (e *AsideElement) Spellcheck(a AsideSpellcheck) *AsideElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *AsideElement) Title(s string) *AsideElement {
 	return e
 }
 
-func (e *AsideElement) Translate(a AsideTranslateEnum) *AsideElement {
+func (e *AsideElement) Translate(a AsideTranslate) *AsideElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *AsideElement) Writingsuggestions(a AsideWritingsuggestionsEnum) *AsideElement {
+func (e *AsideElement) Writingsuggestions(a AsideWritingsuggestions) *AsideElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

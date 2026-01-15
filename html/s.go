@@ -48,115 +48,127 @@ func STernary(condition bool, true htemel.Node, false htemel.Node) *SElement {
 	return S(false)
 }
 
-type SAutocapitalizeEnum string
+type SAutocapitalize string
 
 const (
-	SAutocapitalizeEnumOn         SAutocapitalizeEnum = "on"
-	SAutocapitalizeEnumSentences  SAutocapitalizeEnum = "sentences"
-	SAutocapitalizeEnumWords      SAutocapitalizeEnum = "words"
-	SAutocapitalizeEnumCharacters SAutocapitalizeEnum = "characters"
-	SAutocapitalizeEnumNone       SAutocapitalizeEnum = "none"
-	SAutocapitalizeEnumOff        SAutocapitalizeEnum = "off"
+	SAutocapitalizeNone       SAutocapitalize = "none"
+	SAutocapitalizeOff        SAutocapitalize = "off"
+	SAutocapitalizeOn         SAutocapitalize = "on"
+	SAutocapitalizeSentences  SAutocapitalize = "sentences"
+	SAutocapitalizeWords      SAutocapitalize = "words"
+	SAutocapitalizeCharacters SAutocapitalize = "characters"
 )
 
-type SAutocorrectEnum string
+type SAutocorrect string
 
 const (
-	SAutocorrectEnumOff   SAutocorrectEnum = "off"
-	SAutocorrectEnumOn    SAutocorrectEnum = "on"
-	SAutocorrectEnumEmpty SAutocorrectEnum = ""
+	SAutocorrectOff   SAutocorrect = "off"
+	SAutocorrectOn    SAutocorrect = "on"
+	SAutocorrectEmpty SAutocorrect = ""
 )
 
-type SContenteditableEnum string
+type SContenteditable string
 
 const (
-	SContenteditableEnumFalse         SContenteditableEnum = "false"
-	SContenteditableEnumPlaintextOnly SContenteditableEnum = "plaintext-only"
-	SContenteditableEnumTrue          SContenteditableEnum = "true"
-	SContenteditableEnumEmpty         SContenteditableEnum = ""
+	SContenteditableFalse         SContenteditable = "false"
+	SContenteditablePlaintextOnly SContenteditable = "plaintext-only"
+	SContenteditableTrue          SContenteditable = "true"
+	SContenteditableEmpty         SContenteditable = ""
 )
 
-type SDirEnum string
+type SDir string
 
 const (
-	SDirEnumAuto SDirEnum = "auto"
-	SDirEnumLtr  SDirEnum = "ltr"
-	SDirEnumRtl  SDirEnum = "rtl"
+	SDirAuto SDir = "auto"
+	SDirLtr  SDir = "ltr"
+	SDirRtl  SDir = "rtl"
 )
 
-type SDraggableEnum string
+type SDraggable string
 
 const (
-	SDraggableEnumFalse SDraggableEnum = "false"
-	SDraggableEnumTrue  SDraggableEnum = "true"
+	SDraggableFalse SDraggable = "false"
+	SDraggableTrue  SDraggable = "true"
 )
 
-type SEnterkeyhintEnum string
+type SEnterkeyhint string
 
 const (
-	SEnterkeyhintEnumNext     SEnterkeyhintEnum = "next"
-	SEnterkeyhintEnumPrevious SEnterkeyhintEnum = "previous"
-	SEnterkeyhintEnumSearch   SEnterkeyhintEnum = "search"
-	SEnterkeyhintEnumSend     SEnterkeyhintEnum = "send"
-	SEnterkeyhintEnumDone     SEnterkeyhintEnum = "done"
-	SEnterkeyhintEnumEnter    SEnterkeyhintEnum = "enter"
-	SEnterkeyhintEnumGo       SEnterkeyhintEnum = "go"
+	SEnterkeyhintDone     SEnterkeyhint = "done"
+	SEnterkeyhintEnter    SEnterkeyhint = "enter"
+	SEnterkeyhintGo       SEnterkeyhint = "go"
+	SEnterkeyhintNext     SEnterkeyhint = "next"
+	SEnterkeyhintPrevious SEnterkeyhint = "previous"
+	SEnterkeyhintSearch   SEnterkeyhint = "search"
+	SEnterkeyhintSend     SEnterkeyhint = "send"
 )
 
-type SHiddenEnum string
+type SHidden string
 
 const (
-	SHiddenEnumHidden     SHiddenEnum = "hidden"
-	SHiddenEnumUntilFound SHiddenEnum = "until-found"
-	SHiddenEnumEmpty      SHiddenEnum = ""
+	SHiddenHidden     SHidden = "hidden"
+	SHiddenUntilFound SHidden = "until-found"
+	SHiddenEmpty      SHidden = ""
 )
 
-type SInputmodeEnum string
+type SInputmode string
 
 const (
-	SInputmodeEnumUrl     SInputmodeEnum = "url"
-	SInputmodeEnumDecimal SInputmodeEnum = "decimal"
-	SInputmodeEnumEmail   SInputmodeEnum = "email"
-	SInputmodeEnumNone    SInputmodeEnum = "none"
-	SInputmodeEnumNumeric SInputmodeEnum = "numeric"
-	SInputmodeEnumSearch  SInputmodeEnum = "search"
-	SInputmodeEnumTel     SInputmodeEnum = "tel"
-	SInputmodeEnumText    SInputmodeEnum = "text"
+	SInputmodeNone    SInputmode = "none"
+	SInputmodeNumeric SInputmode = "numeric"
+	SInputmodeSearch  SInputmode = "search"
+	SInputmodeTel     SInputmode = "tel"
+	SInputmodeText    SInputmode = "text"
+	SInputmodeUrl     SInputmode = "url"
+	SInputmodeDecimal SInputmode = "decimal"
+	SInputmodeEmail   SInputmode = "email"
 )
 
-type SSpellcheckEnum string
+type SSpellcheck string
 
 const (
-	SSpellcheckEnumFalse SSpellcheckEnum = "false"
-	SSpellcheckEnumTrue  SSpellcheckEnum = "true"
-	SSpellcheckEnumEmpty SSpellcheckEnum = ""
+	SSpellcheckFalse SSpellcheck = "false"
+	SSpellcheckTrue  SSpellcheck = "true"
+	SSpellcheckEmpty SSpellcheck = ""
 )
 
-type STranslateEnum string
+type STranslate string
 
 const (
-	STranslateEnumNo    STranslateEnum = "no"
-	STranslateEnumYes   STranslateEnum = "yes"
-	STranslateEnumEmpty STranslateEnum = ""
+	STranslateNo    STranslate = "no"
+	STranslateYes   STranslate = "yes"
+	STranslateEmpty STranslate = ""
 )
 
-type SWritingsuggestionsEnum string
+type SWritingsuggestions string
 
 const (
-	SWritingsuggestionsEnumTrue  SWritingsuggestionsEnum = "true"
-	SWritingsuggestionsEnumFalse SWritingsuggestionsEnum = "false"
-	SWritingsuggestionsEnumEmpty SWritingsuggestionsEnum = ""
+	SWritingsuggestionsFalse SWritingsuggestions = "false"
+	SWritingsuggestionsTrue  SWritingsuggestions = "true"
+	SWritingsuggestionsEmpty SWritingsuggestions = ""
 )
 
 type sAttrs map[string]any
 
-func (e *SElement) Autocapitalize(a SAutocapitalizeEnum) *SElement {
+func (e *SElement) AriaUnsafe(name string, s string) *SElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SElement) Aria(name string, s string) *SElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SElement) Autocapitalize(a SAutocapitalize) *SElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SElement) Autocorrect(a SAutocorrectEnum) *SElement {
+func (e *SElement) Autocorrect(a SAutocorrect) *SElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *SElement) Class(s ...string) *SElement {
 	return e
 }
 
-func (e *SElement) Contenteditable(a SContenteditableEnum) *SElement {
+func (e *SElement) Contenteditable(a SContenteditable) *SElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *SElement) Data(name string, s string) *SElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SElement) Dir(a SDirEnum) *SElement {
+func (e *SElement) Dir(a SDir) *SElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SElement) Draggable(a SDraggableEnum) *SElement {
+func (e *SElement) Draggable(a SDraggable) *SElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SElement) Enterkeyhint(a SEnterkeyhintEnum) *SElement {
+func (e *SElement) Enterkeyhint(a SEnterkeyhint) *SElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SElement) Hidden(a SHiddenEnum) *SElement {
+func (e *SElement) Hidden(a SHidden) *SElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *SElement) Inert(b bool) *SElement {
 	return e
 }
 
-func (e *SElement) Inputmode(a SInputmodeEnum) *SElement {
+func (e *SElement) Inputmode(a SInputmode) *SElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *SElement) Slot(s string) *SElement {
 	return e
 }
 
-func (e *SElement) Spellcheck(a SSpellcheckEnum) *SElement {
+func (e *SElement) Spellcheck(a SSpellcheck) *SElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *SElement) Title(s string) *SElement {
 	return e
 }
 
-func (e *SElement) Translate(a STranslateEnum) *SElement {
+func (e *SElement) Translate(a STranslate) *SElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SElement) Writingsuggestions(a SWritingsuggestionsEnum) *SElement {
+func (e *SElement) Writingsuggestions(a SWritingsuggestions) *SElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

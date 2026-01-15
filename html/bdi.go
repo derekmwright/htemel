@@ -48,115 +48,127 @@ func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement
 	return Bdi(false)
 }
 
-type BdiAutocapitalizeEnum string
+type BdiAutocapitalize string
 
 const (
-	BdiAutocapitalizeEnumCharacters BdiAutocapitalizeEnum = "characters"
-	BdiAutocapitalizeEnumNone       BdiAutocapitalizeEnum = "none"
-	BdiAutocapitalizeEnumOff        BdiAutocapitalizeEnum = "off"
-	BdiAutocapitalizeEnumOn         BdiAutocapitalizeEnum = "on"
-	BdiAutocapitalizeEnumSentences  BdiAutocapitalizeEnum = "sentences"
-	BdiAutocapitalizeEnumWords      BdiAutocapitalizeEnum = "words"
+	BdiAutocapitalizeOn         BdiAutocapitalize = "on"
+	BdiAutocapitalizeSentences  BdiAutocapitalize = "sentences"
+	BdiAutocapitalizeWords      BdiAutocapitalize = "words"
+	BdiAutocapitalizeCharacters BdiAutocapitalize = "characters"
+	BdiAutocapitalizeNone       BdiAutocapitalize = "none"
+	BdiAutocapitalizeOff        BdiAutocapitalize = "off"
 )
 
-type BdiAutocorrectEnum string
+type BdiAutocorrect string
 
 const (
-	BdiAutocorrectEnumOff   BdiAutocorrectEnum = "off"
-	BdiAutocorrectEnumOn    BdiAutocorrectEnum = "on"
-	BdiAutocorrectEnumEmpty BdiAutocorrectEnum = ""
+	BdiAutocorrectOff   BdiAutocorrect = "off"
+	BdiAutocorrectOn    BdiAutocorrect = "on"
+	BdiAutocorrectEmpty BdiAutocorrect = ""
 )
 
-type BdiContenteditableEnum string
+type BdiContenteditable string
 
 const (
-	BdiContenteditableEnumFalse         BdiContenteditableEnum = "false"
-	BdiContenteditableEnumPlaintextOnly BdiContenteditableEnum = "plaintext-only"
-	BdiContenteditableEnumTrue          BdiContenteditableEnum = "true"
-	BdiContenteditableEnumEmpty         BdiContenteditableEnum = ""
+	BdiContenteditableFalse         BdiContenteditable = "false"
+	BdiContenteditablePlaintextOnly BdiContenteditable = "plaintext-only"
+	BdiContenteditableTrue          BdiContenteditable = "true"
+	BdiContenteditableEmpty         BdiContenteditable = ""
 )
 
-type BdiDirEnum string
+type BdiDir string
 
 const (
-	BdiDirEnumAuto BdiDirEnum = "auto"
-	BdiDirEnumLtr  BdiDirEnum = "ltr"
-	BdiDirEnumRtl  BdiDirEnum = "rtl"
+	BdiDirAuto BdiDir = "auto"
+	BdiDirLtr  BdiDir = "ltr"
+	BdiDirRtl  BdiDir = "rtl"
 )
 
-type BdiDraggableEnum string
+type BdiDraggable string
 
 const (
-	BdiDraggableEnumFalse BdiDraggableEnum = "false"
-	BdiDraggableEnumTrue  BdiDraggableEnum = "true"
+	BdiDraggableFalse BdiDraggable = "false"
+	BdiDraggableTrue  BdiDraggable = "true"
 )
 
-type BdiEnterkeyhintEnum string
+type BdiEnterkeyhint string
 
 const (
-	BdiEnterkeyhintEnumNext     BdiEnterkeyhintEnum = "next"
-	BdiEnterkeyhintEnumPrevious BdiEnterkeyhintEnum = "previous"
-	BdiEnterkeyhintEnumSearch   BdiEnterkeyhintEnum = "search"
-	BdiEnterkeyhintEnumSend     BdiEnterkeyhintEnum = "send"
-	BdiEnterkeyhintEnumDone     BdiEnterkeyhintEnum = "done"
-	BdiEnterkeyhintEnumEnter    BdiEnterkeyhintEnum = "enter"
-	BdiEnterkeyhintEnumGo       BdiEnterkeyhintEnum = "go"
+	BdiEnterkeyhintDone     BdiEnterkeyhint = "done"
+	BdiEnterkeyhintEnter    BdiEnterkeyhint = "enter"
+	BdiEnterkeyhintGo       BdiEnterkeyhint = "go"
+	BdiEnterkeyhintNext     BdiEnterkeyhint = "next"
+	BdiEnterkeyhintPrevious BdiEnterkeyhint = "previous"
+	BdiEnterkeyhintSearch   BdiEnterkeyhint = "search"
+	BdiEnterkeyhintSend     BdiEnterkeyhint = "send"
 )
 
-type BdiHiddenEnum string
+type BdiHidden string
 
 const (
-	BdiHiddenEnumHidden     BdiHiddenEnum = "hidden"
-	BdiHiddenEnumUntilFound BdiHiddenEnum = "until-found"
-	BdiHiddenEnumEmpty      BdiHiddenEnum = ""
+	BdiHiddenUntilFound BdiHidden = "until-found"
+	BdiHiddenHidden     BdiHidden = "hidden"
+	BdiHiddenEmpty      BdiHidden = ""
 )
 
-type BdiInputmodeEnum string
+type BdiInputmode string
 
 const (
-	BdiInputmodeEnumTel     BdiInputmodeEnum = "tel"
-	BdiInputmodeEnumText    BdiInputmodeEnum = "text"
-	BdiInputmodeEnumUrl     BdiInputmodeEnum = "url"
-	BdiInputmodeEnumDecimal BdiInputmodeEnum = "decimal"
-	BdiInputmodeEnumEmail   BdiInputmodeEnum = "email"
-	BdiInputmodeEnumNone    BdiInputmodeEnum = "none"
-	BdiInputmodeEnumNumeric BdiInputmodeEnum = "numeric"
-	BdiInputmodeEnumSearch  BdiInputmodeEnum = "search"
+	BdiInputmodeTel     BdiInputmode = "tel"
+	BdiInputmodeText    BdiInputmode = "text"
+	BdiInputmodeUrl     BdiInputmode = "url"
+	BdiInputmodeDecimal BdiInputmode = "decimal"
+	BdiInputmodeEmail   BdiInputmode = "email"
+	BdiInputmodeNone    BdiInputmode = "none"
+	BdiInputmodeNumeric BdiInputmode = "numeric"
+	BdiInputmodeSearch  BdiInputmode = "search"
 )
 
-type BdiSpellcheckEnum string
+type BdiSpellcheck string
 
 const (
-	BdiSpellcheckEnumFalse BdiSpellcheckEnum = "false"
-	BdiSpellcheckEnumTrue  BdiSpellcheckEnum = "true"
-	BdiSpellcheckEnumEmpty BdiSpellcheckEnum = ""
+	BdiSpellcheckFalse BdiSpellcheck = "false"
+	BdiSpellcheckTrue  BdiSpellcheck = "true"
+	BdiSpellcheckEmpty BdiSpellcheck = ""
 )
 
-type BdiTranslateEnum string
+type BdiTranslate string
 
 const (
-	BdiTranslateEnumNo    BdiTranslateEnum = "no"
-	BdiTranslateEnumYes   BdiTranslateEnum = "yes"
-	BdiTranslateEnumEmpty BdiTranslateEnum = ""
+	BdiTranslateNo    BdiTranslate = "no"
+	BdiTranslateYes   BdiTranslate = "yes"
+	BdiTranslateEmpty BdiTranslate = ""
 )
 
-type BdiWritingsuggestionsEnum string
+type BdiWritingsuggestions string
 
 const (
-	BdiWritingsuggestionsEnumFalse BdiWritingsuggestionsEnum = "false"
-	BdiWritingsuggestionsEnumTrue  BdiWritingsuggestionsEnum = "true"
-	BdiWritingsuggestionsEnumEmpty BdiWritingsuggestionsEnum = ""
+	BdiWritingsuggestionsFalse BdiWritingsuggestions = "false"
+	BdiWritingsuggestionsTrue  BdiWritingsuggestions = "true"
+	BdiWritingsuggestionsEmpty BdiWritingsuggestions = ""
 )
 
 type bdiAttrs map[string]any
 
-func (e *BdiElement) Autocapitalize(a BdiAutocapitalizeEnum) *BdiElement {
+func (e *BdiElement) AriaUnsafe(name string, s string) *BdiElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BdiElement) Aria(name string, s string) *BdiElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *BdiElement) Autocapitalize(a BdiAutocapitalize) *BdiElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *BdiElement) Autocorrect(a BdiAutocorrectEnum) *BdiElement {
+func (e *BdiElement) Autocorrect(a BdiAutocorrect) *BdiElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *BdiElement) Class(s ...string) *BdiElement {
 	return e
 }
 
-func (e *BdiElement) Contenteditable(a BdiContenteditableEnum) *BdiElement {
+func (e *BdiElement) Contenteditable(a BdiContenteditable) *BdiElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *BdiElement) Data(name string, s string) *BdiElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *BdiElement) Dir(a BdiDirEnum) *BdiElement {
+func (e *BdiElement) Dir(a BdiDir) *BdiElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *BdiElement) Draggable(a BdiDraggableEnum) *BdiElement {
+func (e *BdiElement) Draggable(a BdiDraggable) *BdiElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *BdiElement) Enterkeyhint(a BdiEnterkeyhintEnum) *BdiElement {
+func (e *BdiElement) Enterkeyhint(a BdiEnterkeyhint) *BdiElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *BdiElement) Hidden(a BdiHiddenEnum) *BdiElement {
+func (e *BdiElement) Hidden(a BdiHidden) *BdiElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *BdiElement) Inert(b bool) *BdiElement {
 	return e
 }
 
-func (e *BdiElement) Inputmode(a BdiInputmodeEnum) *BdiElement {
+func (e *BdiElement) Inputmode(a BdiInputmode) *BdiElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *BdiElement) Slot(s string) *BdiElement {
 	return e
 }
 
-func (e *BdiElement) Spellcheck(a BdiSpellcheckEnum) *BdiElement {
+func (e *BdiElement) Spellcheck(a BdiSpellcheck) *BdiElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *BdiElement) Title(s string) *BdiElement {
 	return e
 }
 
-func (e *BdiElement) Translate(a BdiTranslateEnum) *BdiElement {
+func (e *BdiElement) Translate(a BdiTranslate) *BdiElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *BdiElement) Writingsuggestions(a BdiWritingsuggestionsEnum) *BdiElement {
+func (e *BdiElement) Writingsuggestions(a BdiWritingsuggestions) *BdiElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

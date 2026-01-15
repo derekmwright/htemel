@@ -48,104 +48,104 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 	return Th(false)
 }
 
-type ThAutocapitalizeEnum string
+type ThAutocapitalize string
 
 const (
-	ThAutocapitalizeEnumNone       ThAutocapitalizeEnum = "none"
-	ThAutocapitalizeEnumOff        ThAutocapitalizeEnum = "off"
-	ThAutocapitalizeEnumOn         ThAutocapitalizeEnum = "on"
-	ThAutocapitalizeEnumSentences  ThAutocapitalizeEnum = "sentences"
-	ThAutocapitalizeEnumWords      ThAutocapitalizeEnum = "words"
-	ThAutocapitalizeEnumCharacters ThAutocapitalizeEnum = "characters"
+	ThAutocapitalizeOff        ThAutocapitalize = "off"
+	ThAutocapitalizeOn         ThAutocapitalize = "on"
+	ThAutocapitalizeSentences  ThAutocapitalize = "sentences"
+	ThAutocapitalizeWords      ThAutocapitalize = "words"
+	ThAutocapitalizeCharacters ThAutocapitalize = "characters"
+	ThAutocapitalizeNone       ThAutocapitalize = "none"
 )
 
-type ThAutocorrectEnum string
+type ThAutocorrect string
 
 const (
-	ThAutocorrectEnumOff   ThAutocorrectEnum = "off"
-	ThAutocorrectEnumOn    ThAutocorrectEnum = "on"
-	ThAutocorrectEnumEmpty ThAutocorrectEnum = ""
+	ThAutocorrectOff   ThAutocorrect = "off"
+	ThAutocorrectOn    ThAutocorrect = "on"
+	ThAutocorrectEmpty ThAutocorrect = ""
 )
 
-type ThContenteditableEnum string
+type ThContenteditable string
 
 const (
-	ThContenteditableEnumPlaintextOnly ThContenteditableEnum = "plaintext-only"
-	ThContenteditableEnumTrue          ThContenteditableEnum = "true"
-	ThContenteditableEnumFalse         ThContenteditableEnum = "false"
-	ThContenteditableEnumEmpty         ThContenteditableEnum = ""
+	ThContenteditableFalse         ThContenteditable = "false"
+	ThContenteditablePlaintextOnly ThContenteditable = "plaintext-only"
+	ThContenteditableTrue          ThContenteditable = "true"
+	ThContenteditableEmpty         ThContenteditable = ""
 )
 
-type ThDirEnum string
+type ThDir string
 
 const (
-	ThDirEnumAuto ThDirEnum = "auto"
-	ThDirEnumLtr  ThDirEnum = "ltr"
-	ThDirEnumRtl  ThDirEnum = "rtl"
+	ThDirAuto ThDir = "auto"
+	ThDirLtr  ThDir = "ltr"
+	ThDirRtl  ThDir = "rtl"
 )
 
-type ThDraggableEnum string
+type ThDraggable string
 
 const (
-	ThDraggableEnumFalse ThDraggableEnum = "false"
-	ThDraggableEnumTrue  ThDraggableEnum = "true"
+	ThDraggableFalse ThDraggable = "false"
+	ThDraggableTrue  ThDraggable = "true"
 )
 
-type ThEnterkeyhintEnum string
+type ThEnterkeyhint string
 
 const (
-	ThEnterkeyhintEnumSend     ThEnterkeyhintEnum = "send"
-	ThEnterkeyhintEnumDone     ThEnterkeyhintEnum = "done"
-	ThEnterkeyhintEnumEnter    ThEnterkeyhintEnum = "enter"
-	ThEnterkeyhintEnumGo       ThEnterkeyhintEnum = "go"
-	ThEnterkeyhintEnumNext     ThEnterkeyhintEnum = "next"
-	ThEnterkeyhintEnumPrevious ThEnterkeyhintEnum = "previous"
-	ThEnterkeyhintEnumSearch   ThEnterkeyhintEnum = "search"
+	ThEnterkeyhintNext     ThEnterkeyhint = "next"
+	ThEnterkeyhintPrevious ThEnterkeyhint = "previous"
+	ThEnterkeyhintSearch   ThEnterkeyhint = "search"
+	ThEnterkeyhintSend     ThEnterkeyhint = "send"
+	ThEnterkeyhintDone     ThEnterkeyhint = "done"
+	ThEnterkeyhintEnter    ThEnterkeyhint = "enter"
+	ThEnterkeyhintGo       ThEnterkeyhint = "go"
 )
 
-type ThHiddenEnum string
+type ThHidden string
 
 const (
-	ThHiddenEnumHidden     ThHiddenEnum = "hidden"
-	ThHiddenEnumUntilFound ThHiddenEnum = "until-found"
-	ThHiddenEnumEmpty      ThHiddenEnum = ""
+	ThHiddenHidden     ThHidden = "hidden"
+	ThHiddenUntilFound ThHidden = "until-found"
+	ThHiddenEmpty      ThHidden = ""
 )
 
-type ThInputmodeEnum string
+type ThInputmode string
 
 const (
-	ThInputmodeEnumEmail   ThInputmodeEnum = "email"
-	ThInputmodeEnumNone    ThInputmodeEnum = "none"
-	ThInputmodeEnumNumeric ThInputmodeEnum = "numeric"
-	ThInputmodeEnumSearch  ThInputmodeEnum = "search"
-	ThInputmodeEnumTel     ThInputmodeEnum = "tel"
-	ThInputmodeEnumText    ThInputmodeEnum = "text"
-	ThInputmodeEnumUrl     ThInputmodeEnum = "url"
-	ThInputmodeEnumDecimal ThInputmodeEnum = "decimal"
+	ThInputmodeEmail   ThInputmode = "email"
+	ThInputmodeNone    ThInputmode = "none"
+	ThInputmodeNumeric ThInputmode = "numeric"
+	ThInputmodeSearch  ThInputmode = "search"
+	ThInputmodeTel     ThInputmode = "tel"
+	ThInputmodeText    ThInputmode = "text"
+	ThInputmodeUrl     ThInputmode = "url"
+	ThInputmodeDecimal ThInputmode = "decimal"
 )
 
-type ThSpellcheckEnum string
+type ThSpellcheck string
 
 const (
-	ThSpellcheckEnumFalse ThSpellcheckEnum = "false"
-	ThSpellcheckEnumTrue  ThSpellcheckEnum = "true"
-	ThSpellcheckEnumEmpty ThSpellcheckEnum = ""
+	ThSpellcheckFalse ThSpellcheck = "false"
+	ThSpellcheckTrue  ThSpellcheck = "true"
+	ThSpellcheckEmpty ThSpellcheck = ""
 )
 
-type ThTranslateEnum string
+type ThTranslate string
 
 const (
-	ThTranslateEnumNo    ThTranslateEnum = "no"
-	ThTranslateEnumYes   ThTranslateEnum = "yes"
-	ThTranslateEnumEmpty ThTranslateEnum = ""
+	ThTranslateYes   ThTranslate = "yes"
+	ThTranslateNo    ThTranslate = "no"
+	ThTranslateEmpty ThTranslate = ""
 )
 
-type ThWritingsuggestionsEnum string
+type ThWritingsuggestions string
 
 const (
-	ThWritingsuggestionsEnumFalse ThWritingsuggestionsEnum = "false"
-	ThWritingsuggestionsEnumTrue  ThWritingsuggestionsEnum = "true"
-	ThWritingsuggestionsEnumEmpty ThWritingsuggestionsEnum = ""
+	ThWritingsuggestionsFalse ThWritingsuggestions = "false"
+	ThWritingsuggestionsTrue  ThWritingsuggestions = "true"
+	ThWritingsuggestionsEmpty ThWritingsuggestions = ""
 )
 
 type thAttrs map[string]any
@@ -180,13 +180,25 @@ func (e *ThElement) Abbr(s string) *ThElement {
 	return e
 }
 
-func (e *ThElement) Autocapitalize(a ThAutocapitalizeEnum) *ThElement {
+func (e *ThElement) AriaUnsafe(name string, s string) *ThElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ThElement) Aria(name string, s string) *ThElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *ThElement) Autocapitalize(a ThAutocapitalize) *ThElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *ThElement) Autocorrect(a ThAutocorrectEnum) *ThElement {
+func (e *ThElement) Autocorrect(a ThAutocorrect) *ThElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -204,7 +216,7 @@ func (e *ThElement) Class(s ...string) *ThElement {
 	return e
 }
 
-func (e *ThElement) Contenteditable(a ThContenteditableEnum) *ThElement {
+func (e *ThElement) Contenteditable(a ThContenteditable) *ThElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -222,25 +234,25 @@ func (e *ThElement) Data(name string, s string) *ThElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *ThElement) Dir(a ThDirEnum) *ThElement {
+func (e *ThElement) Dir(a ThDir) *ThElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *ThElement) Draggable(a ThDraggableEnum) *ThElement {
+func (e *ThElement) Draggable(a ThDraggable) *ThElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *ThElement) Enterkeyhint(a ThEnterkeyhintEnum) *ThElement {
+func (e *ThElement) Enterkeyhint(a ThEnterkeyhint) *ThElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *ThElement) Hidden(a ThHiddenEnum) *ThElement {
+func (e *ThElement) Hidden(a ThHidden) *ThElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -258,7 +270,7 @@ func (e *ThElement) Inert(b bool) *ThElement {
 	return e
 }
 
-func (e *ThElement) Inputmode(a ThInputmodeEnum) *ThElement {
+func (e *ThElement) Inputmode(a ThInputmode) *ThElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -318,7 +330,7 @@ func (e *ThElement) Slot(s string) *ThElement {
 	return e
 }
 
-func (e *ThElement) Spellcheck(a ThSpellcheckEnum) *ThElement {
+func (e *ThElement) Spellcheck(a ThSpellcheck) *ThElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -342,13 +354,13 @@ func (e *ThElement) Title(s string) *ThElement {
 	return e
 }
 
-func (e *ThElement) Translate(a ThTranslateEnum) *ThElement {
+func (e *ThElement) Translate(a ThTranslate) *ThElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *ThElement) Writingsuggestions(a ThWritingsuggestionsEnum) *ThElement {
+func (e *ThElement) Writingsuggestions(a ThWritingsuggestions) *ThElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,115 +48,127 @@ func LegendTernary(condition bool, true htemel.Node, false htemel.Node) *LegendE
 	return Legend(false)
 }
 
-type LegendAutocapitalizeEnum string
+type LegendAutocapitalize string
 
 const (
-	LegendAutocapitalizeEnumWords      LegendAutocapitalizeEnum = "words"
-	LegendAutocapitalizeEnumCharacters LegendAutocapitalizeEnum = "characters"
-	LegendAutocapitalizeEnumNone       LegendAutocapitalizeEnum = "none"
-	LegendAutocapitalizeEnumOff        LegendAutocapitalizeEnum = "off"
-	LegendAutocapitalizeEnumOn         LegendAutocapitalizeEnum = "on"
-	LegendAutocapitalizeEnumSentences  LegendAutocapitalizeEnum = "sentences"
+	LegendAutocapitalizeCharacters LegendAutocapitalize = "characters"
+	LegendAutocapitalizeNone       LegendAutocapitalize = "none"
+	LegendAutocapitalizeOff        LegendAutocapitalize = "off"
+	LegendAutocapitalizeOn         LegendAutocapitalize = "on"
+	LegendAutocapitalizeSentences  LegendAutocapitalize = "sentences"
+	LegendAutocapitalizeWords      LegendAutocapitalize = "words"
 )
 
-type LegendAutocorrectEnum string
+type LegendAutocorrect string
 
 const (
-	LegendAutocorrectEnumOff   LegendAutocorrectEnum = "off"
-	LegendAutocorrectEnumOn    LegendAutocorrectEnum = "on"
-	LegendAutocorrectEnumEmpty LegendAutocorrectEnum = ""
+	LegendAutocorrectOff   LegendAutocorrect = "off"
+	LegendAutocorrectOn    LegendAutocorrect = "on"
+	LegendAutocorrectEmpty LegendAutocorrect = ""
 )
 
-type LegendContenteditableEnum string
+type LegendContenteditable string
 
 const (
-	LegendContenteditableEnumFalse         LegendContenteditableEnum = "false"
-	LegendContenteditableEnumPlaintextOnly LegendContenteditableEnum = "plaintext-only"
-	LegendContenteditableEnumTrue          LegendContenteditableEnum = "true"
-	LegendContenteditableEnumEmpty         LegendContenteditableEnum = ""
+	LegendContenteditableFalse         LegendContenteditable = "false"
+	LegendContenteditablePlaintextOnly LegendContenteditable = "plaintext-only"
+	LegendContenteditableTrue          LegendContenteditable = "true"
+	LegendContenteditableEmpty         LegendContenteditable = ""
 )
 
-type LegendDirEnum string
+type LegendDir string
 
 const (
-	LegendDirEnumAuto LegendDirEnum = "auto"
-	LegendDirEnumLtr  LegendDirEnum = "ltr"
-	LegendDirEnumRtl  LegendDirEnum = "rtl"
+	LegendDirAuto LegendDir = "auto"
+	LegendDirLtr  LegendDir = "ltr"
+	LegendDirRtl  LegendDir = "rtl"
 )
 
-type LegendDraggableEnum string
+type LegendDraggable string
 
 const (
-	LegendDraggableEnumFalse LegendDraggableEnum = "false"
-	LegendDraggableEnumTrue  LegendDraggableEnum = "true"
+	LegendDraggableFalse LegendDraggable = "false"
+	LegendDraggableTrue  LegendDraggable = "true"
 )
 
-type LegendEnterkeyhintEnum string
+type LegendEnterkeyhint string
 
 const (
-	LegendEnterkeyhintEnumPrevious LegendEnterkeyhintEnum = "previous"
-	LegendEnterkeyhintEnumSearch   LegendEnterkeyhintEnum = "search"
-	LegendEnterkeyhintEnumSend     LegendEnterkeyhintEnum = "send"
-	LegendEnterkeyhintEnumDone     LegendEnterkeyhintEnum = "done"
-	LegendEnterkeyhintEnumEnter    LegendEnterkeyhintEnum = "enter"
-	LegendEnterkeyhintEnumGo       LegendEnterkeyhintEnum = "go"
-	LegendEnterkeyhintEnumNext     LegendEnterkeyhintEnum = "next"
+	LegendEnterkeyhintGo       LegendEnterkeyhint = "go"
+	LegendEnterkeyhintNext     LegendEnterkeyhint = "next"
+	LegendEnterkeyhintPrevious LegendEnterkeyhint = "previous"
+	LegendEnterkeyhintSearch   LegendEnterkeyhint = "search"
+	LegendEnterkeyhintSend     LegendEnterkeyhint = "send"
+	LegendEnterkeyhintDone     LegendEnterkeyhint = "done"
+	LegendEnterkeyhintEnter    LegendEnterkeyhint = "enter"
 )
 
-type LegendHiddenEnum string
+type LegendHidden string
 
 const (
-	LegendHiddenEnumHidden     LegendHiddenEnum = "hidden"
-	LegendHiddenEnumUntilFound LegendHiddenEnum = "until-found"
-	LegendHiddenEnumEmpty      LegendHiddenEnum = ""
+	LegendHiddenHidden     LegendHidden = "hidden"
+	LegendHiddenUntilFound LegendHidden = "until-found"
+	LegendHiddenEmpty      LegendHidden = ""
 )
 
-type LegendInputmodeEnum string
+type LegendInputmode string
 
 const (
-	LegendInputmodeEnumNone    LegendInputmodeEnum = "none"
-	LegendInputmodeEnumNumeric LegendInputmodeEnum = "numeric"
-	LegendInputmodeEnumSearch  LegendInputmodeEnum = "search"
-	LegendInputmodeEnumTel     LegendInputmodeEnum = "tel"
-	LegendInputmodeEnumText    LegendInputmodeEnum = "text"
-	LegendInputmodeEnumUrl     LegendInputmodeEnum = "url"
-	LegendInputmodeEnumDecimal LegendInputmodeEnum = "decimal"
-	LegendInputmodeEnumEmail   LegendInputmodeEnum = "email"
+	LegendInputmodeNone    LegendInputmode = "none"
+	LegendInputmodeNumeric LegendInputmode = "numeric"
+	LegendInputmodeSearch  LegendInputmode = "search"
+	LegendInputmodeTel     LegendInputmode = "tel"
+	LegendInputmodeText    LegendInputmode = "text"
+	LegendInputmodeUrl     LegendInputmode = "url"
+	LegendInputmodeDecimal LegendInputmode = "decimal"
+	LegendInputmodeEmail   LegendInputmode = "email"
 )
 
-type LegendSpellcheckEnum string
+type LegendSpellcheck string
 
 const (
-	LegendSpellcheckEnumFalse LegendSpellcheckEnum = "false"
-	LegendSpellcheckEnumTrue  LegendSpellcheckEnum = "true"
-	LegendSpellcheckEnumEmpty LegendSpellcheckEnum = ""
+	LegendSpellcheckTrue  LegendSpellcheck = "true"
+	LegendSpellcheckFalse LegendSpellcheck = "false"
+	LegendSpellcheckEmpty LegendSpellcheck = ""
 )
 
-type LegendTranslateEnum string
+type LegendTranslate string
 
 const (
-	LegendTranslateEnumNo    LegendTranslateEnum = "no"
-	LegendTranslateEnumYes   LegendTranslateEnum = "yes"
-	LegendTranslateEnumEmpty LegendTranslateEnum = ""
+	LegendTranslateNo    LegendTranslate = "no"
+	LegendTranslateYes   LegendTranslate = "yes"
+	LegendTranslateEmpty LegendTranslate = ""
 )
 
-type LegendWritingsuggestionsEnum string
+type LegendWritingsuggestions string
 
 const (
-	LegendWritingsuggestionsEnumFalse LegendWritingsuggestionsEnum = "false"
-	LegendWritingsuggestionsEnumTrue  LegendWritingsuggestionsEnum = "true"
-	LegendWritingsuggestionsEnumEmpty LegendWritingsuggestionsEnum = ""
+	LegendWritingsuggestionsFalse LegendWritingsuggestions = "false"
+	LegendWritingsuggestionsTrue  LegendWritingsuggestions = "true"
+	LegendWritingsuggestionsEmpty LegendWritingsuggestions = ""
 )
 
 type legendAttrs map[string]any
 
-func (e *LegendElement) Autocapitalize(a LegendAutocapitalizeEnum) *LegendElement {
+func (e *LegendElement) AriaUnsafe(name string, s string) *LegendElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *LegendElement) Aria(name string, s string) *LegendElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *LegendElement) Autocapitalize(a LegendAutocapitalize) *LegendElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *LegendElement) Autocorrect(a LegendAutocorrectEnum) *LegendElement {
+func (e *LegendElement) Autocorrect(a LegendAutocorrect) *LegendElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *LegendElement) Class(s ...string) *LegendElement {
 	return e
 }
 
-func (e *LegendElement) Contenteditable(a LegendContenteditableEnum) *LegendElement {
+func (e *LegendElement) Contenteditable(a LegendContenteditable) *LegendElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *LegendElement) Data(name string, s string) *LegendElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *LegendElement) Dir(a LegendDirEnum) *LegendElement {
+func (e *LegendElement) Dir(a LegendDir) *LegendElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *LegendElement) Draggable(a LegendDraggableEnum) *LegendElement {
+func (e *LegendElement) Draggable(a LegendDraggable) *LegendElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *LegendElement) Enterkeyhint(a LegendEnterkeyhintEnum) *LegendElement {
+func (e *LegendElement) Enterkeyhint(a LegendEnterkeyhint) *LegendElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *LegendElement) Hidden(a LegendHiddenEnum) *LegendElement {
+func (e *LegendElement) Hidden(a LegendHidden) *LegendElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *LegendElement) Inert(b bool) *LegendElement {
 	return e
 }
 
-func (e *LegendElement) Inputmode(a LegendInputmodeEnum) *LegendElement {
+func (e *LegendElement) Inputmode(a LegendInputmode) *LegendElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *LegendElement) Slot(s string) *LegendElement {
 	return e
 }
 
-func (e *LegendElement) Spellcheck(a LegendSpellcheckEnum) *LegendElement {
+func (e *LegendElement) Spellcheck(a LegendSpellcheck) *LegendElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *LegendElement) Title(s string) *LegendElement {
 	return e
 }
 
-func (e *LegendElement) Translate(a LegendTranslateEnum) *LegendElement {
+func (e *LegendElement) Translate(a LegendTranslate) *LegendElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *LegendElement) Writingsuggestions(a LegendWritingsuggestionsEnum) *LegendElement {
+func (e *LegendElement) Writingsuggestions(a LegendWritingsuggestions) *LegendElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

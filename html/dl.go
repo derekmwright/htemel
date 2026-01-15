@@ -48,115 +48,127 @@ func DlTernary(condition bool, true htemel.Node, false htemel.Node) *DlElement {
 	return Dl(false)
 }
 
-type DlAutocapitalizeEnum string
+type DlAutocapitalize string
 
 const (
-	DlAutocapitalizeEnumOff        DlAutocapitalizeEnum = "off"
-	DlAutocapitalizeEnumOn         DlAutocapitalizeEnum = "on"
-	DlAutocapitalizeEnumSentences  DlAutocapitalizeEnum = "sentences"
-	DlAutocapitalizeEnumWords      DlAutocapitalizeEnum = "words"
-	DlAutocapitalizeEnumCharacters DlAutocapitalizeEnum = "characters"
-	DlAutocapitalizeEnumNone       DlAutocapitalizeEnum = "none"
+	DlAutocapitalizeCharacters DlAutocapitalize = "characters"
+	DlAutocapitalizeNone       DlAutocapitalize = "none"
+	DlAutocapitalizeOff        DlAutocapitalize = "off"
+	DlAutocapitalizeOn         DlAutocapitalize = "on"
+	DlAutocapitalizeSentences  DlAutocapitalize = "sentences"
+	DlAutocapitalizeWords      DlAutocapitalize = "words"
 )
 
-type DlAutocorrectEnum string
+type DlAutocorrect string
 
 const (
-	DlAutocorrectEnumOff   DlAutocorrectEnum = "off"
-	DlAutocorrectEnumOn    DlAutocorrectEnum = "on"
-	DlAutocorrectEnumEmpty DlAutocorrectEnum = ""
+	DlAutocorrectOff   DlAutocorrect = "off"
+	DlAutocorrectOn    DlAutocorrect = "on"
+	DlAutocorrectEmpty DlAutocorrect = ""
 )
 
-type DlContenteditableEnum string
+type DlContenteditable string
 
 const (
-	DlContenteditableEnumPlaintextOnly DlContenteditableEnum = "plaintext-only"
-	DlContenteditableEnumTrue          DlContenteditableEnum = "true"
-	DlContenteditableEnumFalse         DlContenteditableEnum = "false"
-	DlContenteditableEnumEmpty         DlContenteditableEnum = ""
+	DlContenteditableFalse         DlContenteditable = "false"
+	DlContenteditablePlaintextOnly DlContenteditable = "plaintext-only"
+	DlContenteditableTrue          DlContenteditable = "true"
+	DlContenteditableEmpty         DlContenteditable = ""
 )
 
-type DlDirEnum string
+type DlDir string
 
 const (
-	DlDirEnumAuto DlDirEnum = "auto"
-	DlDirEnumLtr  DlDirEnum = "ltr"
-	DlDirEnumRtl  DlDirEnum = "rtl"
+	DlDirAuto DlDir = "auto"
+	DlDirLtr  DlDir = "ltr"
+	DlDirRtl  DlDir = "rtl"
 )
 
-type DlDraggableEnum string
+type DlDraggable string
 
 const (
-	DlDraggableEnumFalse DlDraggableEnum = "false"
-	DlDraggableEnumTrue  DlDraggableEnum = "true"
+	DlDraggableFalse DlDraggable = "false"
+	DlDraggableTrue  DlDraggable = "true"
 )
 
-type DlEnterkeyhintEnum string
+type DlEnterkeyhint string
 
 const (
-	DlEnterkeyhintEnumSend     DlEnterkeyhintEnum = "send"
-	DlEnterkeyhintEnumDone     DlEnterkeyhintEnum = "done"
-	DlEnterkeyhintEnumEnter    DlEnterkeyhintEnum = "enter"
-	DlEnterkeyhintEnumGo       DlEnterkeyhintEnum = "go"
-	DlEnterkeyhintEnumNext     DlEnterkeyhintEnum = "next"
-	DlEnterkeyhintEnumPrevious DlEnterkeyhintEnum = "previous"
-	DlEnterkeyhintEnumSearch   DlEnterkeyhintEnum = "search"
+	DlEnterkeyhintDone     DlEnterkeyhint = "done"
+	DlEnterkeyhintEnter    DlEnterkeyhint = "enter"
+	DlEnterkeyhintGo       DlEnterkeyhint = "go"
+	DlEnterkeyhintNext     DlEnterkeyhint = "next"
+	DlEnterkeyhintPrevious DlEnterkeyhint = "previous"
+	DlEnterkeyhintSearch   DlEnterkeyhint = "search"
+	DlEnterkeyhintSend     DlEnterkeyhint = "send"
 )
 
-type DlHiddenEnum string
+type DlHidden string
 
 const (
-	DlHiddenEnumHidden     DlHiddenEnum = "hidden"
-	DlHiddenEnumUntilFound DlHiddenEnum = "until-found"
-	DlHiddenEnumEmpty      DlHiddenEnum = ""
+	DlHiddenHidden     DlHidden = "hidden"
+	DlHiddenUntilFound DlHidden = "until-found"
+	DlHiddenEmpty      DlHidden = ""
 )
 
-type DlInputmodeEnum string
+type DlInputmode string
 
 const (
-	DlInputmodeEnumNone    DlInputmodeEnum = "none"
-	DlInputmodeEnumNumeric DlInputmodeEnum = "numeric"
-	DlInputmodeEnumSearch  DlInputmodeEnum = "search"
-	DlInputmodeEnumTel     DlInputmodeEnum = "tel"
-	DlInputmodeEnumText    DlInputmodeEnum = "text"
-	DlInputmodeEnumUrl     DlInputmodeEnum = "url"
-	DlInputmodeEnumDecimal DlInputmodeEnum = "decimal"
-	DlInputmodeEnumEmail   DlInputmodeEnum = "email"
+	DlInputmodeDecimal DlInputmode = "decimal"
+	DlInputmodeEmail   DlInputmode = "email"
+	DlInputmodeNone    DlInputmode = "none"
+	DlInputmodeNumeric DlInputmode = "numeric"
+	DlInputmodeSearch  DlInputmode = "search"
+	DlInputmodeTel     DlInputmode = "tel"
+	DlInputmodeText    DlInputmode = "text"
+	DlInputmodeUrl     DlInputmode = "url"
 )
 
-type DlSpellcheckEnum string
+type DlSpellcheck string
 
 const (
-	DlSpellcheckEnumFalse DlSpellcheckEnum = "false"
-	DlSpellcheckEnumTrue  DlSpellcheckEnum = "true"
-	DlSpellcheckEnumEmpty DlSpellcheckEnum = ""
+	DlSpellcheckFalse DlSpellcheck = "false"
+	DlSpellcheckTrue  DlSpellcheck = "true"
+	DlSpellcheckEmpty DlSpellcheck = ""
 )
 
-type DlTranslateEnum string
+type DlTranslate string
 
 const (
-	DlTranslateEnumYes   DlTranslateEnum = "yes"
-	DlTranslateEnumNo    DlTranslateEnum = "no"
-	DlTranslateEnumEmpty DlTranslateEnum = ""
+	DlTranslateYes   DlTranslate = "yes"
+	DlTranslateNo    DlTranslate = "no"
+	DlTranslateEmpty DlTranslate = ""
 )
 
-type DlWritingsuggestionsEnum string
+type DlWritingsuggestions string
 
 const (
-	DlWritingsuggestionsEnumFalse DlWritingsuggestionsEnum = "false"
-	DlWritingsuggestionsEnumTrue  DlWritingsuggestionsEnum = "true"
-	DlWritingsuggestionsEnumEmpty DlWritingsuggestionsEnum = ""
+	DlWritingsuggestionsFalse DlWritingsuggestions = "false"
+	DlWritingsuggestionsTrue  DlWritingsuggestions = "true"
+	DlWritingsuggestionsEmpty DlWritingsuggestions = ""
 )
 
 type dlAttrs map[string]any
 
-func (e *DlElement) Autocapitalize(a DlAutocapitalizeEnum) *DlElement {
+func (e *DlElement) AriaUnsafe(name string, s string) *DlElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DlElement) Aria(name string, s string) *DlElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *DlElement) Autocapitalize(a DlAutocapitalize) *DlElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *DlElement) Autocorrect(a DlAutocorrectEnum) *DlElement {
+func (e *DlElement) Autocorrect(a DlAutocorrect) *DlElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *DlElement) Class(s ...string) *DlElement {
 	return e
 }
 
-func (e *DlElement) Contenteditable(a DlContenteditableEnum) *DlElement {
+func (e *DlElement) Contenteditable(a DlContenteditable) *DlElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *DlElement) Data(name string, s string) *DlElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *DlElement) Dir(a DlDirEnum) *DlElement {
+func (e *DlElement) Dir(a DlDir) *DlElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *DlElement) Draggable(a DlDraggableEnum) *DlElement {
+func (e *DlElement) Draggable(a DlDraggable) *DlElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *DlElement) Enterkeyhint(a DlEnterkeyhintEnum) *DlElement {
+func (e *DlElement) Enterkeyhint(a DlEnterkeyhint) *DlElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *DlElement) Hidden(a DlHiddenEnum) *DlElement {
+func (e *DlElement) Hidden(a DlHidden) *DlElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *DlElement) Inert(b bool) *DlElement {
 	return e
 }
 
-func (e *DlElement) Inputmode(a DlInputmodeEnum) *DlElement {
+func (e *DlElement) Inputmode(a DlInputmode) *DlElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *DlElement) Slot(s string) *DlElement {
 	return e
 }
 
-func (e *DlElement) Spellcheck(a DlSpellcheckEnum) *DlElement {
+func (e *DlElement) Spellcheck(a DlSpellcheck) *DlElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *DlElement) Title(s string) *DlElement {
 	return e
 }
 
-func (e *DlElement) Translate(a DlTranslateEnum) *DlElement {
+func (e *DlElement) Translate(a DlTranslate) *DlElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *DlElement) Writingsuggestions(a DlWritingsuggestionsEnum) *DlElement {
+func (e *DlElement) Writingsuggestions(a DlWritingsuggestions) *DlElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

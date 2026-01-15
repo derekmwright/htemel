@@ -48,115 +48,127 @@ func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *Articl
 	return Article(false)
 }
 
-type ArticleAutocapitalizeEnum string
+type ArticleAutocapitalize string
 
 const (
-	ArticleAutocapitalizeEnumCharacters ArticleAutocapitalizeEnum = "characters"
-	ArticleAutocapitalizeEnumNone       ArticleAutocapitalizeEnum = "none"
-	ArticleAutocapitalizeEnumOff        ArticleAutocapitalizeEnum = "off"
-	ArticleAutocapitalizeEnumOn         ArticleAutocapitalizeEnum = "on"
-	ArticleAutocapitalizeEnumSentences  ArticleAutocapitalizeEnum = "sentences"
-	ArticleAutocapitalizeEnumWords      ArticleAutocapitalizeEnum = "words"
+	ArticleAutocapitalizeWords      ArticleAutocapitalize = "words"
+	ArticleAutocapitalizeCharacters ArticleAutocapitalize = "characters"
+	ArticleAutocapitalizeNone       ArticleAutocapitalize = "none"
+	ArticleAutocapitalizeOff        ArticleAutocapitalize = "off"
+	ArticleAutocapitalizeOn         ArticleAutocapitalize = "on"
+	ArticleAutocapitalizeSentences  ArticleAutocapitalize = "sentences"
 )
 
-type ArticleAutocorrectEnum string
+type ArticleAutocorrect string
 
 const (
-	ArticleAutocorrectEnumOff   ArticleAutocorrectEnum = "off"
-	ArticleAutocorrectEnumOn    ArticleAutocorrectEnum = "on"
-	ArticleAutocorrectEnumEmpty ArticleAutocorrectEnum = ""
+	ArticleAutocorrectOff   ArticleAutocorrect = "off"
+	ArticleAutocorrectOn    ArticleAutocorrect = "on"
+	ArticleAutocorrectEmpty ArticleAutocorrect = ""
 )
 
-type ArticleContenteditableEnum string
+type ArticleContenteditable string
 
 const (
-	ArticleContenteditableEnumFalse         ArticleContenteditableEnum = "false"
-	ArticleContenteditableEnumPlaintextOnly ArticleContenteditableEnum = "plaintext-only"
-	ArticleContenteditableEnumTrue          ArticleContenteditableEnum = "true"
-	ArticleContenteditableEnumEmpty         ArticleContenteditableEnum = ""
+	ArticleContenteditableFalse         ArticleContenteditable = "false"
+	ArticleContenteditablePlaintextOnly ArticleContenteditable = "plaintext-only"
+	ArticleContenteditableTrue          ArticleContenteditable = "true"
+	ArticleContenteditableEmpty         ArticleContenteditable = ""
 )
 
-type ArticleDirEnum string
+type ArticleDir string
 
 const (
-	ArticleDirEnumAuto ArticleDirEnum = "auto"
-	ArticleDirEnumLtr  ArticleDirEnum = "ltr"
-	ArticleDirEnumRtl  ArticleDirEnum = "rtl"
+	ArticleDirAuto ArticleDir = "auto"
+	ArticleDirLtr  ArticleDir = "ltr"
+	ArticleDirRtl  ArticleDir = "rtl"
 )
 
-type ArticleDraggableEnum string
+type ArticleDraggable string
 
 const (
-	ArticleDraggableEnumFalse ArticleDraggableEnum = "false"
-	ArticleDraggableEnumTrue  ArticleDraggableEnum = "true"
+	ArticleDraggableFalse ArticleDraggable = "false"
+	ArticleDraggableTrue  ArticleDraggable = "true"
 )
 
-type ArticleEnterkeyhintEnum string
+type ArticleEnterkeyhint string
 
 const (
-	ArticleEnterkeyhintEnumDone     ArticleEnterkeyhintEnum = "done"
-	ArticleEnterkeyhintEnumEnter    ArticleEnterkeyhintEnum = "enter"
-	ArticleEnterkeyhintEnumGo       ArticleEnterkeyhintEnum = "go"
-	ArticleEnterkeyhintEnumNext     ArticleEnterkeyhintEnum = "next"
-	ArticleEnterkeyhintEnumPrevious ArticleEnterkeyhintEnum = "previous"
-	ArticleEnterkeyhintEnumSearch   ArticleEnterkeyhintEnum = "search"
-	ArticleEnterkeyhintEnumSend     ArticleEnterkeyhintEnum = "send"
+	ArticleEnterkeyhintGo       ArticleEnterkeyhint = "go"
+	ArticleEnterkeyhintNext     ArticleEnterkeyhint = "next"
+	ArticleEnterkeyhintPrevious ArticleEnterkeyhint = "previous"
+	ArticleEnterkeyhintSearch   ArticleEnterkeyhint = "search"
+	ArticleEnterkeyhintSend     ArticleEnterkeyhint = "send"
+	ArticleEnterkeyhintDone     ArticleEnterkeyhint = "done"
+	ArticleEnterkeyhintEnter    ArticleEnterkeyhint = "enter"
 )
 
-type ArticleHiddenEnum string
+type ArticleHidden string
 
 const (
-	ArticleHiddenEnumHidden     ArticleHiddenEnum = "hidden"
-	ArticleHiddenEnumUntilFound ArticleHiddenEnum = "until-found"
-	ArticleHiddenEnumEmpty      ArticleHiddenEnum = ""
+	ArticleHiddenHidden     ArticleHidden = "hidden"
+	ArticleHiddenUntilFound ArticleHidden = "until-found"
+	ArticleHiddenEmpty      ArticleHidden = ""
 )
 
-type ArticleInputmodeEnum string
+type ArticleInputmode string
 
 const (
-	ArticleInputmodeEnumSearch  ArticleInputmodeEnum = "search"
-	ArticleInputmodeEnumTel     ArticleInputmodeEnum = "tel"
-	ArticleInputmodeEnumText    ArticleInputmodeEnum = "text"
-	ArticleInputmodeEnumUrl     ArticleInputmodeEnum = "url"
-	ArticleInputmodeEnumDecimal ArticleInputmodeEnum = "decimal"
-	ArticleInputmodeEnumEmail   ArticleInputmodeEnum = "email"
-	ArticleInputmodeEnumNone    ArticleInputmodeEnum = "none"
-	ArticleInputmodeEnumNumeric ArticleInputmodeEnum = "numeric"
+	ArticleInputmodeUrl     ArticleInputmode = "url"
+	ArticleInputmodeDecimal ArticleInputmode = "decimal"
+	ArticleInputmodeEmail   ArticleInputmode = "email"
+	ArticleInputmodeNone    ArticleInputmode = "none"
+	ArticleInputmodeNumeric ArticleInputmode = "numeric"
+	ArticleInputmodeSearch  ArticleInputmode = "search"
+	ArticleInputmodeTel     ArticleInputmode = "tel"
+	ArticleInputmodeText    ArticleInputmode = "text"
 )
 
-type ArticleSpellcheckEnum string
+type ArticleSpellcheck string
 
 const (
-	ArticleSpellcheckEnumFalse ArticleSpellcheckEnum = "false"
-	ArticleSpellcheckEnumTrue  ArticleSpellcheckEnum = "true"
-	ArticleSpellcheckEnumEmpty ArticleSpellcheckEnum = ""
+	ArticleSpellcheckFalse ArticleSpellcheck = "false"
+	ArticleSpellcheckTrue  ArticleSpellcheck = "true"
+	ArticleSpellcheckEmpty ArticleSpellcheck = ""
 )
 
-type ArticleTranslateEnum string
+type ArticleTranslate string
 
 const (
-	ArticleTranslateEnumNo    ArticleTranslateEnum = "no"
-	ArticleTranslateEnumYes   ArticleTranslateEnum = "yes"
-	ArticleTranslateEnumEmpty ArticleTranslateEnum = ""
+	ArticleTranslateNo    ArticleTranslate = "no"
+	ArticleTranslateYes   ArticleTranslate = "yes"
+	ArticleTranslateEmpty ArticleTranslate = ""
 )
 
-type ArticleWritingsuggestionsEnum string
+type ArticleWritingsuggestions string
 
 const (
-	ArticleWritingsuggestionsEnumFalse ArticleWritingsuggestionsEnum = "false"
-	ArticleWritingsuggestionsEnumTrue  ArticleWritingsuggestionsEnum = "true"
-	ArticleWritingsuggestionsEnumEmpty ArticleWritingsuggestionsEnum = ""
+	ArticleWritingsuggestionsFalse ArticleWritingsuggestions = "false"
+	ArticleWritingsuggestionsTrue  ArticleWritingsuggestions = "true"
+	ArticleWritingsuggestionsEmpty ArticleWritingsuggestions = ""
 )
 
 type articleAttrs map[string]any
 
-func (e *ArticleElement) Autocapitalize(a ArticleAutocapitalizeEnum) *ArticleElement {
+func (e *ArticleElement) AriaUnsafe(name string, s string) *ArticleElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ArticleElement) Aria(name string, s string) *ArticleElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *ArticleElement) Autocapitalize(a ArticleAutocapitalize) *ArticleElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *ArticleElement) Autocorrect(a ArticleAutocorrectEnum) *ArticleElement {
+func (e *ArticleElement) Autocorrect(a ArticleAutocorrect) *ArticleElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *ArticleElement) Class(s ...string) *ArticleElement {
 	return e
 }
 
-func (e *ArticleElement) Contenteditable(a ArticleContenteditableEnum) *ArticleElement {
+func (e *ArticleElement) Contenteditable(a ArticleContenteditable) *ArticleElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *ArticleElement) Data(name string, s string) *ArticleElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *ArticleElement) Dir(a ArticleDirEnum) *ArticleElement {
+func (e *ArticleElement) Dir(a ArticleDir) *ArticleElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *ArticleElement) Draggable(a ArticleDraggableEnum) *ArticleElement {
+func (e *ArticleElement) Draggable(a ArticleDraggable) *ArticleElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *ArticleElement) Enterkeyhint(a ArticleEnterkeyhintEnum) *ArticleElement {
+func (e *ArticleElement) Enterkeyhint(a ArticleEnterkeyhint) *ArticleElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *ArticleElement) Hidden(a ArticleHiddenEnum) *ArticleElement {
+func (e *ArticleElement) Hidden(a ArticleHidden) *ArticleElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *ArticleElement) Inert(b bool) *ArticleElement {
 	return e
 }
 
-func (e *ArticleElement) Inputmode(a ArticleInputmodeEnum) *ArticleElement {
+func (e *ArticleElement) Inputmode(a ArticleInputmode) *ArticleElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *ArticleElement) Slot(s string) *ArticleElement {
 	return e
 }
 
-func (e *ArticleElement) Spellcheck(a ArticleSpellcheckEnum) *ArticleElement {
+func (e *ArticleElement) Spellcheck(a ArticleSpellcheck) *ArticleElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *ArticleElement) Title(s string) *ArticleElement {
 	return e
 }
 
-func (e *ArticleElement) Translate(a ArticleTranslateEnum) *ArticleElement {
+func (e *ArticleElement) Translate(a ArticleTranslate) *ArticleElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *ArticleElement) Writingsuggestions(a ArticleWritingsuggestionsEnum) *ArticleElement {
+func (e *ArticleElement) Writingsuggestions(a ArticleWritingsuggestions) *ArticleElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

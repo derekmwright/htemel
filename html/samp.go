@@ -48,115 +48,127 @@ func SampTernary(condition bool, true htemel.Node, false htemel.Node) *SampEleme
 	return Samp(false)
 }
 
-type SampAutocapitalizeEnum string
+type SampAutocapitalize string
 
 const (
-	SampAutocapitalizeEnumNone       SampAutocapitalizeEnum = "none"
-	SampAutocapitalizeEnumOff        SampAutocapitalizeEnum = "off"
-	SampAutocapitalizeEnumOn         SampAutocapitalizeEnum = "on"
-	SampAutocapitalizeEnumSentences  SampAutocapitalizeEnum = "sentences"
-	SampAutocapitalizeEnumWords      SampAutocapitalizeEnum = "words"
-	SampAutocapitalizeEnumCharacters SampAutocapitalizeEnum = "characters"
+	SampAutocapitalizeCharacters SampAutocapitalize = "characters"
+	SampAutocapitalizeNone       SampAutocapitalize = "none"
+	SampAutocapitalizeOff        SampAutocapitalize = "off"
+	SampAutocapitalizeOn         SampAutocapitalize = "on"
+	SampAutocapitalizeSentences  SampAutocapitalize = "sentences"
+	SampAutocapitalizeWords      SampAutocapitalize = "words"
 )
 
-type SampAutocorrectEnum string
+type SampAutocorrect string
 
 const (
-	SampAutocorrectEnumOff   SampAutocorrectEnum = "off"
-	SampAutocorrectEnumOn    SampAutocorrectEnum = "on"
-	SampAutocorrectEnumEmpty SampAutocorrectEnum = ""
+	SampAutocorrectOff   SampAutocorrect = "off"
+	SampAutocorrectOn    SampAutocorrect = "on"
+	SampAutocorrectEmpty SampAutocorrect = ""
 )
 
-type SampContenteditableEnum string
+type SampContenteditable string
 
 const (
-	SampContenteditableEnumFalse         SampContenteditableEnum = "false"
-	SampContenteditableEnumPlaintextOnly SampContenteditableEnum = "plaintext-only"
-	SampContenteditableEnumTrue          SampContenteditableEnum = "true"
-	SampContenteditableEnumEmpty         SampContenteditableEnum = ""
+	SampContenteditableFalse         SampContenteditable = "false"
+	SampContenteditablePlaintextOnly SampContenteditable = "plaintext-only"
+	SampContenteditableTrue          SampContenteditable = "true"
+	SampContenteditableEmpty         SampContenteditable = ""
 )
 
-type SampDirEnum string
+type SampDir string
 
 const (
-	SampDirEnumRtl  SampDirEnum = "rtl"
-	SampDirEnumAuto SampDirEnum = "auto"
-	SampDirEnumLtr  SampDirEnum = "ltr"
+	SampDirAuto SampDir = "auto"
+	SampDirLtr  SampDir = "ltr"
+	SampDirRtl  SampDir = "rtl"
 )
 
-type SampDraggableEnum string
+type SampDraggable string
 
 const (
-	SampDraggableEnumFalse SampDraggableEnum = "false"
-	SampDraggableEnumTrue  SampDraggableEnum = "true"
+	SampDraggableFalse SampDraggable = "false"
+	SampDraggableTrue  SampDraggable = "true"
 )
 
-type SampEnterkeyhintEnum string
+type SampEnterkeyhint string
 
 const (
-	SampEnterkeyhintEnumEnter    SampEnterkeyhintEnum = "enter"
-	SampEnterkeyhintEnumGo       SampEnterkeyhintEnum = "go"
-	SampEnterkeyhintEnumNext     SampEnterkeyhintEnum = "next"
-	SampEnterkeyhintEnumPrevious SampEnterkeyhintEnum = "previous"
-	SampEnterkeyhintEnumSearch   SampEnterkeyhintEnum = "search"
-	SampEnterkeyhintEnumSend     SampEnterkeyhintEnum = "send"
-	SampEnterkeyhintEnumDone     SampEnterkeyhintEnum = "done"
+	SampEnterkeyhintDone     SampEnterkeyhint = "done"
+	SampEnterkeyhintEnter    SampEnterkeyhint = "enter"
+	SampEnterkeyhintGo       SampEnterkeyhint = "go"
+	SampEnterkeyhintNext     SampEnterkeyhint = "next"
+	SampEnterkeyhintPrevious SampEnterkeyhint = "previous"
+	SampEnterkeyhintSearch   SampEnterkeyhint = "search"
+	SampEnterkeyhintSend     SampEnterkeyhint = "send"
 )
 
-type SampHiddenEnum string
+type SampHidden string
 
 const (
-	SampHiddenEnumHidden     SampHiddenEnum = "hidden"
-	SampHiddenEnumUntilFound SampHiddenEnum = "until-found"
-	SampHiddenEnumEmpty      SampHiddenEnum = ""
+	SampHiddenHidden     SampHidden = "hidden"
+	SampHiddenUntilFound SampHidden = "until-found"
+	SampHiddenEmpty      SampHidden = ""
 )
 
-type SampInputmodeEnum string
+type SampInputmode string
 
 const (
-	SampInputmodeEnumText    SampInputmodeEnum = "text"
-	SampInputmodeEnumUrl     SampInputmodeEnum = "url"
-	SampInputmodeEnumDecimal SampInputmodeEnum = "decimal"
-	SampInputmodeEnumEmail   SampInputmodeEnum = "email"
-	SampInputmodeEnumNone    SampInputmodeEnum = "none"
-	SampInputmodeEnumNumeric SampInputmodeEnum = "numeric"
-	SampInputmodeEnumSearch  SampInputmodeEnum = "search"
-	SampInputmodeEnumTel     SampInputmodeEnum = "tel"
+	SampInputmodeUrl     SampInputmode = "url"
+	SampInputmodeDecimal SampInputmode = "decimal"
+	SampInputmodeEmail   SampInputmode = "email"
+	SampInputmodeNone    SampInputmode = "none"
+	SampInputmodeNumeric SampInputmode = "numeric"
+	SampInputmodeSearch  SampInputmode = "search"
+	SampInputmodeTel     SampInputmode = "tel"
+	SampInputmodeText    SampInputmode = "text"
 )
 
-type SampSpellcheckEnum string
+type SampSpellcheck string
 
 const (
-	SampSpellcheckEnumFalse SampSpellcheckEnum = "false"
-	SampSpellcheckEnumTrue  SampSpellcheckEnum = "true"
-	SampSpellcheckEnumEmpty SampSpellcheckEnum = ""
+	SampSpellcheckFalse SampSpellcheck = "false"
+	SampSpellcheckTrue  SampSpellcheck = "true"
+	SampSpellcheckEmpty SampSpellcheck = ""
 )
 
-type SampTranslateEnum string
+type SampTranslate string
 
 const (
-	SampTranslateEnumNo    SampTranslateEnum = "no"
-	SampTranslateEnumYes   SampTranslateEnum = "yes"
-	SampTranslateEnumEmpty SampTranslateEnum = ""
+	SampTranslateNo    SampTranslate = "no"
+	SampTranslateYes   SampTranslate = "yes"
+	SampTranslateEmpty SampTranslate = ""
 )
 
-type SampWritingsuggestionsEnum string
+type SampWritingsuggestions string
 
 const (
-	SampWritingsuggestionsEnumFalse SampWritingsuggestionsEnum = "false"
-	SampWritingsuggestionsEnumTrue  SampWritingsuggestionsEnum = "true"
-	SampWritingsuggestionsEnumEmpty SampWritingsuggestionsEnum = ""
+	SampWritingsuggestionsFalse SampWritingsuggestions = "false"
+	SampWritingsuggestionsTrue  SampWritingsuggestions = "true"
+	SampWritingsuggestionsEmpty SampWritingsuggestions = ""
 )
 
 type sampAttrs map[string]any
 
-func (e *SampElement) Autocapitalize(a SampAutocapitalizeEnum) *SampElement {
+func (e *SampElement) AriaUnsafe(name string, s string) *SampElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SampElement) Aria(name string, s string) *SampElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SampElement) Autocapitalize(a SampAutocapitalize) *SampElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SampElement) Autocorrect(a SampAutocorrectEnum) *SampElement {
+func (e *SampElement) Autocorrect(a SampAutocorrect) *SampElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *SampElement) Class(s ...string) *SampElement {
 	return e
 }
 
-func (e *SampElement) Contenteditable(a SampContenteditableEnum) *SampElement {
+func (e *SampElement) Contenteditable(a SampContenteditable) *SampElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *SampElement) Data(name string, s string) *SampElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SampElement) Dir(a SampDirEnum) *SampElement {
+func (e *SampElement) Dir(a SampDir) *SampElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SampElement) Draggable(a SampDraggableEnum) *SampElement {
+func (e *SampElement) Draggable(a SampDraggable) *SampElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SampElement) Enterkeyhint(a SampEnterkeyhintEnum) *SampElement {
+func (e *SampElement) Enterkeyhint(a SampEnterkeyhint) *SampElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SampElement) Hidden(a SampHiddenEnum) *SampElement {
+func (e *SampElement) Hidden(a SampHidden) *SampElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *SampElement) Inert(b bool) *SampElement {
 	return e
 }
 
-func (e *SampElement) Inputmode(a SampInputmodeEnum) *SampElement {
+func (e *SampElement) Inputmode(a SampInputmode) *SampElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *SampElement) Slot(s string) *SampElement {
 	return e
 }
 
-func (e *SampElement) Spellcheck(a SampSpellcheckEnum) *SampElement {
+func (e *SampElement) Spellcheck(a SampSpellcheck) *SampElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *SampElement) Title(s string) *SampElement {
 	return e
 }
 
-func (e *SampElement) Translate(a SampTranslateEnum) *SampElement {
+func (e *SampElement) Translate(a SampTranslate) *SampElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SampElement) Writingsuggestions(a SampWritingsuggestionsEnum) *SampElement {
+func (e *SampElement) Writingsuggestions(a SampWritingsuggestions) *SampElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

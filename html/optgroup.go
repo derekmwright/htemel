@@ -48,104 +48,104 @@ func OptgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Optgr
 	return Optgroup(false)
 }
 
-type OptgroupAutocapitalizeEnum string
+type OptgroupAutocapitalize string
 
 const (
-	OptgroupAutocapitalizeEnumOff        OptgroupAutocapitalizeEnum = "off"
-	OptgroupAutocapitalizeEnumOn         OptgroupAutocapitalizeEnum = "on"
-	OptgroupAutocapitalizeEnumSentences  OptgroupAutocapitalizeEnum = "sentences"
-	OptgroupAutocapitalizeEnumWords      OptgroupAutocapitalizeEnum = "words"
-	OptgroupAutocapitalizeEnumCharacters OptgroupAutocapitalizeEnum = "characters"
-	OptgroupAutocapitalizeEnumNone       OptgroupAutocapitalizeEnum = "none"
+	OptgroupAutocapitalizeSentences  OptgroupAutocapitalize = "sentences"
+	OptgroupAutocapitalizeWords      OptgroupAutocapitalize = "words"
+	OptgroupAutocapitalizeCharacters OptgroupAutocapitalize = "characters"
+	OptgroupAutocapitalizeNone       OptgroupAutocapitalize = "none"
+	OptgroupAutocapitalizeOff        OptgroupAutocapitalize = "off"
+	OptgroupAutocapitalizeOn         OptgroupAutocapitalize = "on"
 )
 
-type OptgroupAutocorrectEnum string
+type OptgroupAutocorrect string
 
 const (
-	OptgroupAutocorrectEnumOff   OptgroupAutocorrectEnum = "off"
-	OptgroupAutocorrectEnumOn    OptgroupAutocorrectEnum = "on"
-	OptgroupAutocorrectEnumEmpty OptgroupAutocorrectEnum = ""
+	OptgroupAutocorrectOn    OptgroupAutocorrect = "on"
+	OptgroupAutocorrectOff   OptgroupAutocorrect = "off"
+	OptgroupAutocorrectEmpty OptgroupAutocorrect = ""
 )
 
-type OptgroupContenteditableEnum string
+type OptgroupContenteditable string
 
 const (
-	OptgroupContenteditableEnumFalse         OptgroupContenteditableEnum = "false"
-	OptgroupContenteditableEnumPlaintextOnly OptgroupContenteditableEnum = "plaintext-only"
-	OptgroupContenteditableEnumTrue          OptgroupContenteditableEnum = "true"
-	OptgroupContenteditableEnumEmpty         OptgroupContenteditableEnum = ""
+	OptgroupContenteditablePlaintextOnly OptgroupContenteditable = "plaintext-only"
+	OptgroupContenteditableTrue          OptgroupContenteditable = "true"
+	OptgroupContenteditableFalse         OptgroupContenteditable = "false"
+	OptgroupContenteditableEmpty         OptgroupContenteditable = ""
 )
 
-type OptgroupDirEnum string
+type OptgroupDir string
 
 const (
-	OptgroupDirEnumAuto OptgroupDirEnum = "auto"
-	OptgroupDirEnumLtr  OptgroupDirEnum = "ltr"
-	OptgroupDirEnumRtl  OptgroupDirEnum = "rtl"
+	OptgroupDirAuto OptgroupDir = "auto"
+	OptgroupDirLtr  OptgroupDir = "ltr"
+	OptgroupDirRtl  OptgroupDir = "rtl"
 )
 
-type OptgroupDraggableEnum string
+type OptgroupDraggable string
 
 const (
-	OptgroupDraggableEnumTrue  OptgroupDraggableEnum = "true"
-	OptgroupDraggableEnumFalse OptgroupDraggableEnum = "false"
+	OptgroupDraggableFalse OptgroupDraggable = "false"
+	OptgroupDraggableTrue  OptgroupDraggable = "true"
 )
 
-type OptgroupEnterkeyhintEnum string
+type OptgroupEnterkeyhint string
 
 const (
-	OptgroupEnterkeyhintEnumSearch   OptgroupEnterkeyhintEnum = "search"
-	OptgroupEnterkeyhintEnumSend     OptgroupEnterkeyhintEnum = "send"
-	OptgroupEnterkeyhintEnumDone     OptgroupEnterkeyhintEnum = "done"
-	OptgroupEnterkeyhintEnumEnter    OptgroupEnterkeyhintEnum = "enter"
-	OptgroupEnterkeyhintEnumGo       OptgroupEnterkeyhintEnum = "go"
-	OptgroupEnterkeyhintEnumNext     OptgroupEnterkeyhintEnum = "next"
-	OptgroupEnterkeyhintEnumPrevious OptgroupEnterkeyhintEnum = "previous"
+	OptgroupEnterkeyhintDone     OptgroupEnterkeyhint = "done"
+	OptgroupEnterkeyhintEnter    OptgroupEnterkeyhint = "enter"
+	OptgroupEnterkeyhintGo       OptgroupEnterkeyhint = "go"
+	OptgroupEnterkeyhintNext     OptgroupEnterkeyhint = "next"
+	OptgroupEnterkeyhintPrevious OptgroupEnterkeyhint = "previous"
+	OptgroupEnterkeyhintSearch   OptgroupEnterkeyhint = "search"
+	OptgroupEnterkeyhintSend     OptgroupEnterkeyhint = "send"
 )
 
-type OptgroupHiddenEnum string
+type OptgroupHidden string
 
 const (
-	OptgroupHiddenEnumHidden     OptgroupHiddenEnum = "hidden"
-	OptgroupHiddenEnumUntilFound OptgroupHiddenEnum = "until-found"
-	OptgroupHiddenEnumEmpty      OptgroupHiddenEnum = ""
+	OptgroupHiddenHidden     OptgroupHidden = "hidden"
+	OptgroupHiddenUntilFound OptgroupHidden = "until-found"
+	OptgroupHiddenEmpty      OptgroupHidden = ""
 )
 
-type OptgroupInputmodeEnum string
+type OptgroupInputmode string
 
 const (
-	OptgroupInputmodeEnumEmail   OptgroupInputmodeEnum = "email"
-	OptgroupInputmodeEnumNone    OptgroupInputmodeEnum = "none"
-	OptgroupInputmodeEnumNumeric OptgroupInputmodeEnum = "numeric"
-	OptgroupInputmodeEnumSearch  OptgroupInputmodeEnum = "search"
-	OptgroupInputmodeEnumTel     OptgroupInputmodeEnum = "tel"
-	OptgroupInputmodeEnumText    OptgroupInputmodeEnum = "text"
-	OptgroupInputmodeEnumUrl     OptgroupInputmodeEnum = "url"
-	OptgroupInputmodeEnumDecimal OptgroupInputmodeEnum = "decimal"
+	OptgroupInputmodeTel     OptgroupInputmode = "tel"
+	OptgroupInputmodeText    OptgroupInputmode = "text"
+	OptgroupInputmodeUrl     OptgroupInputmode = "url"
+	OptgroupInputmodeDecimal OptgroupInputmode = "decimal"
+	OptgroupInputmodeEmail   OptgroupInputmode = "email"
+	OptgroupInputmodeNone    OptgroupInputmode = "none"
+	OptgroupInputmodeNumeric OptgroupInputmode = "numeric"
+	OptgroupInputmodeSearch  OptgroupInputmode = "search"
 )
 
-type OptgroupSpellcheckEnum string
+type OptgroupSpellcheck string
 
 const (
-	OptgroupSpellcheckEnumFalse OptgroupSpellcheckEnum = "false"
-	OptgroupSpellcheckEnumTrue  OptgroupSpellcheckEnum = "true"
-	OptgroupSpellcheckEnumEmpty OptgroupSpellcheckEnum = ""
+	OptgroupSpellcheckFalse OptgroupSpellcheck = "false"
+	OptgroupSpellcheckTrue  OptgroupSpellcheck = "true"
+	OptgroupSpellcheckEmpty OptgroupSpellcheck = ""
 )
 
-type OptgroupTranslateEnum string
+type OptgroupTranslate string
 
 const (
-	OptgroupTranslateEnumNo    OptgroupTranslateEnum = "no"
-	OptgroupTranslateEnumYes   OptgroupTranslateEnum = "yes"
-	OptgroupTranslateEnumEmpty OptgroupTranslateEnum = ""
+	OptgroupTranslateYes   OptgroupTranslate = "yes"
+	OptgroupTranslateNo    OptgroupTranslate = "no"
+	OptgroupTranslateEmpty OptgroupTranslate = ""
 )
 
-type OptgroupWritingsuggestionsEnum string
+type OptgroupWritingsuggestions string
 
 const (
-	OptgroupWritingsuggestionsEnumFalse OptgroupWritingsuggestionsEnum = "false"
-	OptgroupWritingsuggestionsEnumTrue  OptgroupWritingsuggestionsEnum = "true"
-	OptgroupWritingsuggestionsEnumEmpty OptgroupWritingsuggestionsEnum = ""
+	OptgroupWritingsuggestionsFalse OptgroupWritingsuggestions = "false"
+	OptgroupWritingsuggestionsTrue  OptgroupWritingsuggestions = "true"
+	OptgroupWritingsuggestionsEmpty OptgroupWritingsuggestions = ""
 )
 
 type optgroupAttrs map[string]any
@@ -162,13 +162,25 @@ func (e *OptgroupElement) Label(s string) *OptgroupElement {
 	return e
 }
 
-func (e *OptgroupElement) Autocapitalize(a OptgroupAutocapitalizeEnum) *OptgroupElement {
+func (e *OptgroupElement) AriaUnsafe(name string, s string) *OptgroupElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *OptgroupElement) Aria(name string, s string) *OptgroupElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *OptgroupElement) Autocapitalize(a OptgroupAutocapitalize) *OptgroupElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *OptgroupElement) Autocorrect(a OptgroupAutocorrectEnum) *OptgroupElement {
+func (e *OptgroupElement) Autocorrect(a OptgroupAutocorrect) *OptgroupElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -186,7 +198,7 @@ func (e *OptgroupElement) Class(s ...string) *OptgroupElement {
 	return e
 }
 
-func (e *OptgroupElement) Contenteditable(a OptgroupContenteditableEnum) *OptgroupElement {
+func (e *OptgroupElement) Contenteditable(a OptgroupContenteditable) *OptgroupElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -204,25 +216,25 @@ func (e *OptgroupElement) Data(name string, s string) *OptgroupElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *OptgroupElement) Dir(a OptgroupDirEnum) *OptgroupElement {
+func (e *OptgroupElement) Dir(a OptgroupDir) *OptgroupElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *OptgroupElement) Draggable(a OptgroupDraggableEnum) *OptgroupElement {
+func (e *OptgroupElement) Draggable(a OptgroupDraggable) *OptgroupElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *OptgroupElement) Enterkeyhint(a OptgroupEnterkeyhintEnum) *OptgroupElement {
+func (e *OptgroupElement) Enterkeyhint(a OptgroupEnterkeyhint) *OptgroupElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *OptgroupElement) Hidden(a OptgroupHiddenEnum) *OptgroupElement {
+func (e *OptgroupElement) Hidden(a OptgroupHidden) *OptgroupElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -240,7 +252,7 @@ func (e *OptgroupElement) Inert(b bool) *OptgroupElement {
 	return e
 }
 
-func (e *OptgroupElement) Inputmode(a OptgroupInputmodeEnum) *OptgroupElement {
+func (e *OptgroupElement) Inputmode(a OptgroupInputmode) *OptgroupElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -300,7 +312,7 @@ func (e *OptgroupElement) Slot(s string) *OptgroupElement {
 	return e
 }
 
-func (e *OptgroupElement) Spellcheck(a OptgroupSpellcheckEnum) *OptgroupElement {
+func (e *OptgroupElement) Spellcheck(a OptgroupSpellcheck) *OptgroupElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -324,13 +336,13 @@ func (e *OptgroupElement) Title(s string) *OptgroupElement {
 	return e
 }
 
-func (e *OptgroupElement) Translate(a OptgroupTranslateEnum) *OptgroupElement {
+func (e *OptgroupElement) Translate(a OptgroupTranslate) *OptgroupElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *OptgroupElement) Writingsuggestions(a OptgroupWritingsuggestionsEnum) *OptgroupElement {
+func (e *OptgroupElement) Writingsuggestions(a OptgroupWritingsuggestions) *OptgroupElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

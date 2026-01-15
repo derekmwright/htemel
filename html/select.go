@@ -48,104 +48,104 @@ func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectE
 	return Select(false)
 }
 
-type SelectAutocapitalizeEnum string
+type SelectAutocapitalize string
 
 const (
-	SelectAutocapitalizeEnumOff        SelectAutocapitalizeEnum = "off"
-	SelectAutocapitalizeEnumOn         SelectAutocapitalizeEnum = "on"
-	SelectAutocapitalizeEnumSentences  SelectAutocapitalizeEnum = "sentences"
-	SelectAutocapitalizeEnumWords      SelectAutocapitalizeEnum = "words"
-	SelectAutocapitalizeEnumCharacters SelectAutocapitalizeEnum = "characters"
-	SelectAutocapitalizeEnumNone       SelectAutocapitalizeEnum = "none"
+	SelectAutocapitalizeSentences  SelectAutocapitalize = "sentences"
+	SelectAutocapitalizeWords      SelectAutocapitalize = "words"
+	SelectAutocapitalizeCharacters SelectAutocapitalize = "characters"
+	SelectAutocapitalizeNone       SelectAutocapitalize = "none"
+	SelectAutocapitalizeOff        SelectAutocapitalize = "off"
+	SelectAutocapitalizeOn         SelectAutocapitalize = "on"
 )
 
-type SelectAutocorrectEnum string
+type SelectAutocorrect string
 
 const (
-	SelectAutocorrectEnumOff   SelectAutocorrectEnum = "off"
-	SelectAutocorrectEnumOn    SelectAutocorrectEnum = "on"
-	SelectAutocorrectEnumEmpty SelectAutocorrectEnum = ""
+	SelectAutocorrectOff   SelectAutocorrect = "off"
+	SelectAutocorrectOn    SelectAutocorrect = "on"
+	SelectAutocorrectEmpty SelectAutocorrect = ""
 )
 
-type SelectContenteditableEnum string
+type SelectContenteditable string
 
 const (
-	SelectContenteditableEnumFalse         SelectContenteditableEnum = "false"
-	SelectContenteditableEnumPlaintextOnly SelectContenteditableEnum = "plaintext-only"
-	SelectContenteditableEnumTrue          SelectContenteditableEnum = "true"
-	SelectContenteditableEnumEmpty         SelectContenteditableEnum = ""
+	SelectContenteditableFalse         SelectContenteditable = "false"
+	SelectContenteditablePlaintextOnly SelectContenteditable = "plaintext-only"
+	SelectContenteditableTrue          SelectContenteditable = "true"
+	SelectContenteditableEmpty         SelectContenteditable = ""
 )
 
-type SelectDirEnum string
+type SelectDir string
 
 const (
-	SelectDirEnumAuto SelectDirEnum = "auto"
-	SelectDirEnumLtr  SelectDirEnum = "ltr"
-	SelectDirEnumRtl  SelectDirEnum = "rtl"
+	SelectDirAuto SelectDir = "auto"
+	SelectDirLtr  SelectDir = "ltr"
+	SelectDirRtl  SelectDir = "rtl"
 )
 
-type SelectDraggableEnum string
+type SelectDraggable string
 
 const (
-	SelectDraggableEnumFalse SelectDraggableEnum = "false"
-	SelectDraggableEnumTrue  SelectDraggableEnum = "true"
+	SelectDraggableFalse SelectDraggable = "false"
+	SelectDraggableTrue  SelectDraggable = "true"
 )
 
-type SelectEnterkeyhintEnum string
+type SelectEnterkeyhint string
 
 const (
-	SelectEnterkeyhintEnumGo       SelectEnterkeyhintEnum = "go"
-	SelectEnterkeyhintEnumNext     SelectEnterkeyhintEnum = "next"
-	SelectEnterkeyhintEnumPrevious SelectEnterkeyhintEnum = "previous"
-	SelectEnterkeyhintEnumSearch   SelectEnterkeyhintEnum = "search"
-	SelectEnterkeyhintEnumSend     SelectEnterkeyhintEnum = "send"
-	SelectEnterkeyhintEnumDone     SelectEnterkeyhintEnum = "done"
-	SelectEnterkeyhintEnumEnter    SelectEnterkeyhintEnum = "enter"
+	SelectEnterkeyhintEnter    SelectEnterkeyhint = "enter"
+	SelectEnterkeyhintGo       SelectEnterkeyhint = "go"
+	SelectEnterkeyhintNext     SelectEnterkeyhint = "next"
+	SelectEnterkeyhintPrevious SelectEnterkeyhint = "previous"
+	SelectEnterkeyhintSearch   SelectEnterkeyhint = "search"
+	SelectEnterkeyhintSend     SelectEnterkeyhint = "send"
+	SelectEnterkeyhintDone     SelectEnterkeyhint = "done"
 )
 
-type SelectHiddenEnum string
+type SelectHidden string
 
 const (
-	SelectHiddenEnumUntilFound SelectHiddenEnum = "until-found"
-	SelectHiddenEnumHidden     SelectHiddenEnum = "hidden"
-	SelectHiddenEnumEmpty      SelectHiddenEnum = ""
+	SelectHiddenHidden     SelectHidden = "hidden"
+	SelectHiddenUntilFound SelectHidden = "until-found"
+	SelectHiddenEmpty      SelectHidden = ""
 )
 
-type SelectInputmodeEnum string
+type SelectInputmode string
 
 const (
-	SelectInputmodeEnumUrl     SelectInputmodeEnum = "url"
-	SelectInputmodeEnumDecimal SelectInputmodeEnum = "decimal"
-	SelectInputmodeEnumEmail   SelectInputmodeEnum = "email"
-	SelectInputmodeEnumNone    SelectInputmodeEnum = "none"
-	SelectInputmodeEnumNumeric SelectInputmodeEnum = "numeric"
-	SelectInputmodeEnumSearch  SelectInputmodeEnum = "search"
-	SelectInputmodeEnumTel     SelectInputmodeEnum = "tel"
-	SelectInputmodeEnumText    SelectInputmodeEnum = "text"
+	SelectInputmodeSearch  SelectInputmode = "search"
+	SelectInputmodeTel     SelectInputmode = "tel"
+	SelectInputmodeText    SelectInputmode = "text"
+	SelectInputmodeUrl     SelectInputmode = "url"
+	SelectInputmodeDecimal SelectInputmode = "decimal"
+	SelectInputmodeEmail   SelectInputmode = "email"
+	SelectInputmodeNone    SelectInputmode = "none"
+	SelectInputmodeNumeric SelectInputmode = "numeric"
 )
 
-type SelectSpellcheckEnum string
+type SelectSpellcheck string
 
 const (
-	SelectSpellcheckEnumFalse SelectSpellcheckEnum = "false"
-	SelectSpellcheckEnumTrue  SelectSpellcheckEnum = "true"
-	SelectSpellcheckEnumEmpty SelectSpellcheckEnum = ""
+	SelectSpellcheckFalse SelectSpellcheck = "false"
+	SelectSpellcheckTrue  SelectSpellcheck = "true"
+	SelectSpellcheckEmpty SelectSpellcheck = ""
 )
 
-type SelectTranslateEnum string
+type SelectTranslate string
 
 const (
-	SelectTranslateEnumNo    SelectTranslateEnum = "no"
-	SelectTranslateEnumYes   SelectTranslateEnum = "yes"
-	SelectTranslateEnumEmpty SelectTranslateEnum = ""
+	SelectTranslateNo    SelectTranslate = "no"
+	SelectTranslateYes   SelectTranslate = "yes"
+	SelectTranslateEmpty SelectTranslate = ""
 )
 
-type SelectWritingsuggestionsEnum string
+type SelectWritingsuggestions string
 
 const (
-	SelectWritingsuggestionsEnumTrue  SelectWritingsuggestionsEnum = "true"
-	SelectWritingsuggestionsEnumFalse SelectWritingsuggestionsEnum = "false"
-	SelectWritingsuggestionsEnumEmpty SelectWritingsuggestionsEnum = ""
+	SelectWritingsuggestionsFalse SelectWritingsuggestions = "false"
+	SelectWritingsuggestionsTrue  SelectWritingsuggestions = "true"
+	SelectWritingsuggestionsEmpty SelectWritingsuggestions = ""
 )
 
 type selectAttrs map[string]any
@@ -192,13 +192,25 @@ func (e *SelectElement) Size(i int) *SelectElement {
 	return e
 }
 
-func (e *SelectElement) Autocapitalize(a SelectAutocapitalizeEnum) *SelectElement {
+func (e *SelectElement) AriaUnsafe(name string, s string) *SelectElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SelectElement) Aria(name string, s string) *SelectElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SelectElement) Autocapitalize(a SelectAutocapitalize) *SelectElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SelectElement) Autocorrect(a SelectAutocorrectEnum) *SelectElement {
+func (e *SelectElement) Autocorrect(a SelectAutocorrect) *SelectElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -216,7 +228,7 @@ func (e *SelectElement) Class(s ...string) *SelectElement {
 	return e
 }
 
-func (e *SelectElement) Contenteditable(a SelectContenteditableEnum) *SelectElement {
+func (e *SelectElement) Contenteditable(a SelectContenteditable) *SelectElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -234,25 +246,25 @@ func (e *SelectElement) Data(name string, s string) *SelectElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SelectElement) Dir(a SelectDirEnum) *SelectElement {
+func (e *SelectElement) Dir(a SelectDir) *SelectElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SelectElement) Draggable(a SelectDraggableEnum) *SelectElement {
+func (e *SelectElement) Draggable(a SelectDraggable) *SelectElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SelectElement) Enterkeyhint(a SelectEnterkeyhintEnum) *SelectElement {
+func (e *SelectElement) Enterkeyhint(a SelectEnterkeyhint) *SelectElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SelectElement) Hidden(a SelectHiddenEnum) *SelectElement {
+func (e *SelectElement) Hidden(a SelectHidden) *SelectElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -270,7 +282,7 @@ func (e *SelectElement) Inert(b bool) *SelectElement {
 	return e
 }
 
-func (e *SelectElement) Inputmode(a SelectInputmodeEnum) *SelectElement {
+func (e *SelectElement) Inputmode(a SelectInputmode) *SelectElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -330,7 +342,7 @@ func (e *SelectElement) Slot(s string) *SelectElement {
 	return e
 }
 
-func (e *SelectElement) Spellcheck(a SelectSpellcheckEnum) *SelectElement {
+func (e *SelectElement) Spellcheck(a SelectSpellcheck) *SelectElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -354,13 +366,13 @@ func (e *SelectElement) Title(s string) *SelectElement {
 	return e
 }
 
-func (e *SelectElement) Translate(a SelectTranslateEnum) *SelectElement {
+func (e *SelectElement) Translate(a SelectTranslate) *SelectElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SelectElement) Writingsuggestions(a SelectWritingsuggestionsEnum) *SelectElement {
+func (e *SelectElement) Writingsuggestions(a SelectWritingsuggestions) *SelectElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

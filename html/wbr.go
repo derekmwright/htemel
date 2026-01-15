@@ -39,115 +39,127 @@ func WbrIf(condition bool) *WbrElement {
 	}
 }
 
-type WbrAutocapitalizeEnum string
+type WbrAutocapitalize string
 
 const (
-	WbrAutocapitalizeEnumCharacters WbrAutocapitalizeEnum = "characters"
-	WbrAutocapitalizeEnumNone       WbrAutocapitalizeEnum = "none"
-	WbrAutocapitalizeEnumOff        WbrAutocapitalizeEnum = "off"
-	WbrAutocapitalizeEnumOn         WbrAutocapitalizeEnum = "on"
-	WbrAutocapitalizeEnumSentences  WbrAutocapitalizeEnum = "sentences"
-	WbrAutocapitalizeEnumWords      WbrAutocapitalizeEnum = "words"
+	WbrAutocapitalizeWords      WbrAutocapitalize = "words"
+	WbrAutocapitalizeCharacters WbrAutocapitalize = "characters"
+	WbrAutocapitalizeNone       WbrAutocapitalize = "none"
+	WbrAutocapitalizeOff        WbrAutocapitalize = "off"
+	WbrAutocapitalizeOn         WbrAutocapitalize = "on"
+	WbrAutocapitalizeSentences  WbrAutocapitalize = "sentences"
 )
 
-type WbrAutocorrectEnum string
+type WbrAutocorrect string
 
 const (
-	WbrAutocorrectEnumOff   WbrAutocorrectEnum = "off"
-	WbrAutocorrectEnumOn    WbrAutocorrectEnum = "on"
-	WbrAutocorrectEnumEmpty WbrAutocorrectEnum = ""
+	WbrAutocorrectOff   WbrAutocorrect = "off"
+	WbrAutocorrectOn    WbrAutocorrect = "on"
+	WbrAutocorrectEmpty WbrAutocorrect = ""
 )
 
-type WbrContenteditableEnum string
+type WbrContenteditable string
 
 const (
-	WbrContenteditableEnumFalse         WbrContenteditableEnum = "false"
-	WbrContenteditableEnumPlaintextOnly WbrContenteditableEnum = "plaintext-only"
-	WbrContenteditableEnumTrue          WbrContenteditableEnum = "true"
-	WbrContenteditableEnumEmpty         WbrContenteditableEnum = ""
+	WbrContenteditableFalse         WbrContenteditable = "false"
+	WbrContenteditablePlaintextOnly WbrContenteditable = "plaintext-only"
+	WbrContenteditableTrue          WbrContenteditable = "true"
+	WbrContenteditableEmpty         WbrContenteditable = ""
 )
 
-type WbrDirEnum string
+type WbrDir string
 
 const (
-	WbrDirEnumAuto WbrDirEnum = "auto"
-	WbrDirEnumLtr  WbrDirEnum = "ltr"
-	WbrDirEnumRtl  WbrDirEnum = "rtl"
+	WbrDirAuto WbrDir = "auto"
+	WbrDirLtr  WbrDir = "ltr"
+	WbrDirRtl  WbrDir = "rtl"
 )
 
-type WbrDraggableEnum string
+type WbrDraggable string
 
 const (
-	WbrDraggableEnumTrue  WbrDraggableEnum = "true"
-	WbrDraggableEnumFalse WbrDraggableEnum = "false"
+	WbrDraggableFalse WbrDraggable = "false"
+	WbrDraggableTrue  WbrDraggable = "true"
 )
 
-type WbrEnterkeyhintEnum string
+type WbrEnterkeyhint string
 
 const (
-	WbrEnterkeyhintEnumSend     WbrEnterkeyhintEnum = "send"
-	WbrEnterkeyhintEnumDone     WbrEnterkeyhintEnum = "done"
-	WbrEnterkeyhintEnumEnter    WbrEnterkeyhintEnum = "enter"
-	WbrEnterkeyhintEnumGo       WbrEnterkeyhintEnum = "go"
-	WbrEnterkeyhintEnumNext     WbrEnterkeyhintEnum = "next"
-	WbrEnterkeyhintEnumPrevious WbrEnterkeyhintEnum = "previous"
-	WbrEnterkeyhintEnumSearch   WbrEnterkeyhintEnum = "search"
+	WbrEnterkeyhintGo       WbrEnterkeyhint = "go"
+	WbrEnterkeyhintNext     WbrEnterkeyhint = "next"
+	WbrEnterkeyhintPrevious WbrEnterkeyhint = "previous"
+	WbrEnterkeyhintSearch   WbrEnterkeyhint = "search"
+	WbrEnterkeyhintSend     WbrEnterkeyhint = "send"
+	WbrEnterkeyhintDone     WbrEnterkeyhint = "done"
+	WbrEnterkeyhintEnter    WbrEnterkeyhint = "enter"
 )
 
-type WbrHiddenEnum string
+type WbrHidden string
 
 const (
-	WbrHiddenEnumHidden     WbrHiddenEnum = "hidden"
-	WbrHiddenEnumUntilFound WbrHiddenEnum = "until-found"
-	WbrHiddenEnumEmpty      WbrHiddenEnum = ""
+	WbrHiddenUntilFound WbrHidden = "until-found"
+	WbrHiddenHidden     WbrHidden = "hidden"
+	WbrHiddenEmpty      WbrHidden = ""
 )
 
-type WbrInputmodeEnum string
+type WbrInputmode string
 
 const (
-	WbrInputmodeEnumTel     WbrInputmodeEnum = "tel"
-	WbrInputmodeEnumText    WbrInputmodeEnum = "text"
-	WbrInputmodeEnumUrl     WbrInputmodeEnum = "url"
-	WbrInputmodeEnumDecimal WbrInputmodeEnum = "decimal"
-	WbrInputmodeEnumEmail   WbrInputmodeEnum = "email"
-	WbrInputmodeEnumNone    WbrInputmodeEnum = "none"
-	WbrInputmodeEnumNumeric WbrInputmodeEnum = "numeric"
-	WbrInputmodeEnumSearch  WbrInputmodeEnum = "search"
+	WbrInputmodeSearch  WbrInputmode = "search"
+	WbrInputmodeTel     WbrInputmode = "tel"
+	WbrInputmodeText    WbrInputmode = "text"
+	WbrInputmodeUrl     WbrInputmode = "url"
+	WbrInputmodeDecimal WbrInputmode = "decimal"
+	WbrInputmodeEmail   WbrInputmode = "email"
+	WbrInputmodeNone    WbrInputmode = "none"
+	WbrInputmodeNumeric WbrInputmode = "numeric"
 )
 
-type WbrSpellcheckEnum string
+type WbrSpellcheck string
 
 const (
-	WbrSpellcheckEnumFalse WbrSpellcheckEnum = "false"
-	WbrSpellcheckEnumTrue  WbrSpellcheckEnum = "true"
-	WbrSpellcheckEnumEmpty WbrSpellcheckEnum = ""
+	WbrSpellcheckTrue  WbrSpellcheck = "true"
+	WbrSpellcheckFalse WbrSpellcheck = "false"
+	WbrSpellcheckEmpty WbrSpellcheck = ""
 )
 
-type WbrTranslateEnum string
+type WbrTranslate string
 
 const (
-	WbrTranslateEnumNo    WbrTranslateEnum = "no"
-	WbrTranslateEnumYes   WbrTranslateEnum = "yes"
-	WbrTranslateEnumEmpty WbrTranslateEnum = ""
+	WbrTranslateYes   WbrTranslate = "yes"
+	WbrTranslateNo    WbrTranslate = "no"
+	WbrTranslateEmpty WbrTranslate = ""
 )
 
-type WbrWritingsuggestionsEnum string
+type WbrWritingsuggestions string
 
 const (
-	WbrWritingsuggestionsEnumFalse WbrWritingsuggestionsEnum = "false"
-	WbrWritingsuggestionsEnumTrue  WbrWritingsuggestionsEnum = "true"
-	WbrWritingsuggestionsEnumEmpty WbrWritingsuggestionsEnum = ""
+	WbrWritingsuggestionsFalse WbrWritingsuggestions = "false"
+	WbrWritingsuggestionsTrue  WbrWritingsuggestions = "true"
+	WbrWritingsuggestionsEmpty WbrWritingsuggestions = ""
 )
 
 type wbrAttrs map[string]any
 
-func (e *WbrElement) Autocapitalize(a WbrAutocapitalizeEnum) *WbrElement {
+func (e *WbrElement) AriaUnsafe(name string, s string) *WbrElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *WbrElement) Aria(name string, s string) *WbrElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *WbrElement) Autocapitalize(a WbrAutocapitalize) *WbrElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *WbrElement) Autocorrect(a WbrAutocorrectEnum) *WbrElement {
+func (e *WbrElement) Autocorrect(a WbrAutocorrect) *WbrElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -165,7 +177,7 @@ func (e *WbrElement) Class(s ...string) *WbrElement {
 	return e
 }
 
-func (e *WbrElement) Contenteditable(a WbrContenteditableEnum) *WbrElement {
+func (e *WbrElement) Contenteditable(a WbrContenteditable) *WbrElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -183,25 +195,25 @@ func (e *WbrElement) Data(name string, s string) *WbrElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *WbrElement) Dir(a WbrDirEnum) *WbrElement {
+func (e *WbrElement) Dir(a WbrDir) *WbrElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *WbrElement) Draggable(a WbrDraggableEnum) *WbrElement {
+func (e *WbrElement) Draggable(a WbrDraggable) *WbrElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *WbrElement) Enterkeyhint(a WbrEnterkeyhintEnum) *WbrElement {
+func (e *WbrElement) Enterkeyhint(a WbrEnterkeyhint) *WbrElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *WbrElement) Hidden(a WbrHiddenEnum) *WbrElement {
+func (e *WbrElement) Hidden(a WbrHidden) *WbrElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -219,7 +231,7 @@ func (e *WbrElement) Inert(b bool) *WbrElement {
 	return e
 }
 
-func (e *WbrElement) Inputmode(a WbrInputmodeEnum) *WbrElement {
+func (e *WbrElement) Inputmode(a WbrInputmode) *WbrElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -279,7 +291,7 @@ func (e *WbrElement) Slot(s string) *WbrElement {
 	return e
 }
 
-func (e *WbrElement) Spellcheck(a WbrSpellcheckEnum) *WbrElement {
+func (e *WbrElement) Spellcheck(a WbrSpellcheck) *WbrElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -303,13 +315,13 @@ func (e *WbrElement) Title(s string) *WbrElement {
 	return e
 }
 
-func (e *WbrElement) Translate(a WbrTranslateEnum) *WbrElement {
+func (e *WbrElement) Translate(a WbrTranslate) *WbrElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *WbrElement) Writingsuggestions(a WbrWritingsuggestionsEnum) *WbrElement {
+func (e *WbrElement) Writingsuggestions(a WbrWritingsuggestions) *WbrElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

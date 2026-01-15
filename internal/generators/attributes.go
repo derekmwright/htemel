@@ -62,7 +62,7 @@ func (e *` + titleCase(e.Tag) + `Element) ` + pascalCase(a.Name) + `(b bool) *` 
 }
 `)
 			case *spec.AttributeTypeEnum:
-				typeName := titleCase(e.Tag) + pascalCase(a.Name) + "Enum"
+				typeName := titleCase(e.Tag) + pascalCase(a.Name)
 
 				addTypes.WriteString("\ntype " + typeName + " string\n")
 
@@ -93,7 +93,6 @@ func  ` + titleCase(e.Tag) + pascalCase(a.Name) + `Custom(s string) ` + typeName
 }
 `)
 				}
-
 			case *spec.AttributeTypeSST:
 				buf.WriteString(`
 func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(s ...string) *` + titleCase(e.Tag) + `Element {

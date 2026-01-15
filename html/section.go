@@ -48,115 +48,127 @@ func SectionTernary(condition bool, true htemel.Node, false htemel.Node) *Sectio
 	return Section(false)
 }
 
-type SectionAutocapitalizeEnum string
+type SectionAutocapitalize string
 
 const (
-	SectionAutocapitalizeEnumCharacters SectionAutocapitalizeEnum = "characters"
-	SectionAutocapitalizeEnumNone       SectionAutocapitalizeEnum = "none"
-	SectionAutocapitalizeEnumOff        SectionAutocapitalizeEnum = "off"
-	SectionAutocapitalizeEnumOn         SectionAutocapitalizeEnum = "on"
-	SectionAutocapitalizeEnumSentences  SectionAutocapitalizeEnum = "sentences"
-	SectionAutocapitalizeEnumWords      SectionAutocapitalizeEnum = "words"
+	SectionAutocapitalizeOn         SectionAutocapitalize = "on"
+	SectionAutocapitalizeSentences  SectionAutocapitalize = "sentences"
+	SectionAutocapitalizeWords      SectionAutocapitalize = "words"
+	SectionAutocapitalizeCharacters SectionAutocapitalize = "characters"
+	SectionAutocapitalizeNone       SectionAutocapitalize = "none"
+	SectionAutocapitalizeOff        SectionAutocapitalize = "off"
 )
 
-type SectionAutocorrectEnum string
+type SectionAutocorrect string
 
 const (
-	SectionAutocorrectEnumOff   SectionAutocorrectEnum = "off"
-	SectionAutocorrectEnumOn    SectionAutocorrectEnum = "on"
-	SectionAutocorrectEnumEmpty SectionAutocorrectEnum = ""
+	SectionAutocorrectOff   SectionAutocorrect = "off"
+	SectionAutocorrectOn    SectionAutocorrect = "on"
+	SectionAutocorrectEmpty SectionAutocorrect = ""
 )
 
-type SectionContenteditableEnum string
+type SectionContenteditable string
 
 const (
-	SectionContenteditableEnumFalse         SectionContenteditableEnum = "false"
-	SectionContenteditableEnumPlaintextOnly SectionContenteditableEnum = "plaintext-only"
-	SectionContenteditableEnumTrue          SectionContenteditableEnum = "true"
-	SectionContenteditableEnumEmpty         SectionContenteditableEnum = ""
+	SectionContenteditableFalse         SectionContenteditable = "false"
+	SectionContenteditablePlaintextOnly SectionContenteditable = "plaintext-only"
+	SectionContenteditableTrue          SectionContenteditable = "true"
+	SectionContenteditableEmpty         SectionContenteditable = ""
 )
 
-type SectionDirEnum string
+type SectionDir string
 
 const (
-	SectionDirEnumRtl  SectionDirEnum = "rtl"
-	SectionDirEnumAuto SectionDirEnum = "auto"
-	SectionDirEnumLtr  SectionDirEnum = "ltr"
+	SectionDirLtr  SectionDir = "ltr"
+	SectionDirRtl  SectionDir = "rtl"
+	SectionDirAuto SectionDir = "auto"
 )
 
-type SectionDraggableEnum string
+type SectionDraggable string
 
 const (
-	SectionDraggableEnumFalse SectionDraggableEnum = "false"
-	SectionDraggableEnumTrue  SectionDraggableEnum = "true"
+	SectionDraggableFalse SectionDraggable = "false"
+	SectionDraggableTrue  SectionDraggable = "true"
 )
 
-type SectionEnterkeyhintEnum string
+type SectionEnterkeyhint string
 
 const (
-	SectionEnterkeyhintEnumSearch   SectionEnterkeyhintEnum = "search"
-	SectionEnterkeyhintEnumSend     SectionEnterkeyhintEnum = "send"
-	SectionEnterkeyhintEnumDone     SectionEnterkeyhintEnum = "done"
-	SectionEnterkeyhintEnumEnter    SectionEnterkeyhintEnum = "enter"
-	SectionEnterkeyhintEnumGo       SectionEnterkeyhintEnum = "go"
-	SectionEnterkeyhintEnumNext     SectionEnterkeyhintEnum = "next"
-	SectionEnterkeyhintEnumPrevious SectionEnterkeyhintEnum = "previous"
+	SectionEnterkeyhintDone     SectionEnterkeyhint = "done"
+	SectionEnterkeyhintEnter    SectionEnterkeyhint = "enter"
+	SectionEnterkeyhintGo       SectionEnterkeyhint = "go"
+	SectionEnterkeyhintNext     SectionEnterkeyhint = "next"
+	SectionEnterkeyhintPrevious SectionEnterkeyhint = "previous"
+	SectionEnterkeyhintSearch   SectionEnterkeyhint = "search"
+	SectionEnterkeyhintSend     SectionEnterkeyhint = "send"
 )
 
-type SectionHiddenEnum string
+type SectionHidden string
 
 const (
-	SectionHiddenEnumHidden     SectionHiddenEnum = "hidden"
-	SectionHiddenEnumUntilFound SectionHiddenEnum = "until-found"
-	SectionHiddenEnumEmpty      SectionHiddenEnum = ""
+	SectionHiddenHidden     SectionHidden = "hidden"
+	SectionHiddenUntilFound SectionHidden = "until-found"
+	SectionHiddenEmpty      SectionHidden = ""
 )
 
-type SectionInputmodeEnum string
+type SectionInputmode string
 
 const (
-	SectionInputmodeEnumText    SectionInputmodeEnum = "text"
-	SectionInputmodeEnumUrl     SectionInputmodeEnum = "url"
-	SectionInputmodeEnumDecimal SectionInputmodeEnum = "decimal"
-	SectionInputmodeEnumEmail   SectionInputmodeEnum = "email"
-	SectionInputmodeEnumNone    SectionInputmodeEnum = "none"
-	SectionInputmodeEnumNumeric SectionInputmodeEnum = "numeric"
-	SectionInputmodeEnumSearch  SectionInputmodeEnum = "search"
-	SectionInputmodeEnumTel     SectionInputmodeEnum = "tel"
+	SectionInputmodeNone    SectionInputmode = "none"
+	SectionInputmodeNumeric SectionInputmode = "numeric"
+	SectionInputmodeSearch  SectionInputmode = "search"
+	SectionInputmodeTel     SectionInputmode = "tel"
+	SectionInputmodeText    SectionInputmode = "text"
+	SectionInputmodeUrl     SectionInputmode = "url"
+	SectionInputmodeDecimal SectionInputmode = "decimal"
+	SectionInputmodeEmail   SectionInputmode = "email"
 )
 
-type SectionSpellcheckEnum string
+type SectionSpellcheck string
 
 const (
-	SectionSpellcheckEnumFalse SectionSpellcheckEnum = "false"
-	SectionSpellcheckEnumTrue  SectionSpellcheckEnum = "true"
-	SectionSpellcheckEnumEmpty SectionSpellcheckEnum = ""
+	SectionSpellcheckFalse SectionSpellcheck = "false"
+	SectionSpellcheckTrue  SectionSpellcheck = "true"
+	SectionSpellcheckEmpty SectionSpellcheck = ""
 )
 
-type SectionTranslateEnum string
+type SectionTranslate string
 
 const (
-	SectionTranslateEnumNo    SectionTranslateEnum = "no"
-	SectionTranslateEnumYes   SectionTranslateEnum = "yes"
-	SectionTranslateEnumEmpty SectionTranslateEnum = ""
+	SectionTranslateNo    SectionTranslate = "no"
+	SectionTranslateYes   SectionTranslate = "yes"
+	SectionTranslateEmpty SectionTranslate = ""
 )
 
-type SectionWritingsuggestionsEnum string
+type SectionWritingsuggestions string
 
 const (
-	SectionWritingsuggestionsEnumFalse SectionWritingsuggestionsEnum = "false"
-	SectionWritingsuggestionsEnumTrue  SectionWritingsuggestionsEnum = "true"
-	SectionWritingsuggestionsEnumEmpty SectionWritingsuggestionsEnum = ""
+	SectionWritingsuggestionsFalse SectionWritingsuggestions = "false"
+	SectionWritingsuggestionsTrue  SectionWritingsuggestions = "true"
+	SectionWritingsuggestionsEmpty SectionWritingsuggestions = ""
 )
 
 type sectionAttrs map[string]any
 
-func (e *SectionElement) Autocapitalize(a SectionAutocapitalizeEnum) *SectionElement {
+func (e *SectionElement) AriaUnsafe(name string, s string) *SectionElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SectionElement) Aria(name string, s string) *SectionElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SectionElement) Autocapitalize(a SectionAutocapitalize) *SectionElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SectionElement) Autocorrect(a SectionAutocorrectEnum) *SectionElement {
+func (e *SectionElement) Autocorrect(a SectionAutocorrect) *SectionElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *SectionElement) Class(s ...string) *SectionElement {
 	return e
 }
 
-func (e *SectionElement) Contenteditable(a SectionContenteditableEnum) *SectionElement {
+func (e *SectionElement) Contenteditable(a SectionContenteditable) *SectionElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *SectionElement) Data(name string, s string) *SectionElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SectionElement) Dir(a SectionDirEnum) *SectionElement {
+func (e *SectionElement) Dir(a SectionDir) *SectionElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SectionElement) Draggable(a SectionDraggableEnum) *SectionElement {
+func (e *SectionElement) Draggable(a SectionDraggable) *SectionElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SectionElement) Enterkeyhint(a SectionEnterkeyhintEnum) *SectionElement {
+func (e *SectionElement) Enterkeyhint(a SectionEnterkeyhint) *SectionElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SectionElement) Hidden(a SectionHiddenEnum) *SectionElement {
+func (e *SectionElement) Hidden(a SectionHidden) *SectionElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *SectionElement) Inert(b bool) *SectionElement {
 	return e
 }
 
-func (e *SectionElement) Inputmode(a SectionInputmodeEnum) *SectionElement {
+func (e *SectionElement) Inputmode(a SectionInputmode) *SectionElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *SectionElement) Slot(s string) *SectionElement {
 	return e
 }
 
-func (e *SectionElement) Spellcheck(a SectionSpellcheckEnum) *SectionElement {
+func (e *SectionElement) Spellcheck(a SectionSpellcheck) *SectionElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *SectionElement) Title(s string) *SectionElement {
 	return e
 }
 
-func (e *SectionElement) Translate(a SectionTranslateEnum) *SectionElement {
+func (e *SectionElement) Translate(a SectionTranslate) *SectionElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SectionElement) Writingsuggestions(a SectionWritingsuggestionsEnum) *SectionElement {
+func (e *SectionElement) Writingsuggestions(a SectionWritingsuggestions) *SectionElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

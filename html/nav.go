@@ -48,115 +48,127 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 	return Nav(false)
 }
 
-type NavAutocapitalizeEnum string
+type NavAutocapitalize string
 
 const (
-	NavAutocapitalizeEnumWords      NavAutocapitalizeEnum = "words"
-	NavAutocapitalizeEnumCharacters NavAutocapitalizeEnum = "characters"
-	NavAutocapitalizeEnumNone       NavAutocapitalizeEnum = "none"
-	NavAutocapitalizeEnumOff        NavAutocapitalizeEnum = "off"
-	NavAutocapitalizeEnumOn         NavAutocapitalizeEnum = "on"
-	NavAutocapitalizeEnumSentences  NavAutocapitalizeEnum = "sentences"
+	NavAutocapitalizeOff        NavAutocapitalize = "off"
+	NavAutocapitalizeOn         NavAutocapitalize = "on"
+	NavAutocapitalizeSentences  NavAutocapitalize = "sentences"
+	NavAutocapitalizeWords      NavAutocapitalize = "words"
+	NavAutocapitalizeCharacters NavAutocapitalize = "characters"
+	NavAutocapitalizeNone       NavAutocapitalize = "none"
 )
 
-type NavAutocorrectEnum string
+type NavAutocorrect string
 
 const (
-	NavAutocorrectEnumOff   NavAutocorrectEnum = "off"
-	NavAutocorrectEnumOn    NavAutocorrectEnum = "on"
-	NavAutocorrectEnumEmpty NavAutocorrectEnum = ""
+	NavAutocorrectOff   NavAutocorrect = "off"
+	NavAutocorrectOn    NavAutocorrect = "on"
+	NavAutocorrectEmpty NavAutocorrect = ""
 )
 
-type NavContenteditableEnum string
+type NavContenteditable string
 
 const (
-	NavContenteditableEnumFalse         NavContenteditableEnum = "false"
-	NavContenteditableEnumPlaintextOnly NavContenteditableEnum = "plaintext-only"
-	NavContenteditableEnumTrue          NavContenteditableEnum = "true"
-	NavContenteditableEnumEmpty         NavContenteditableEnum = ""
+	NavContenteditableTrue          NavContenteditable = "true"
+	NavContenteditableFalse         NavContenteditable = "false"
+	NavContenteditablePlaintextOnly NavContenteditable = "plaintext-only"
+	NavContenteditableEmpty         NavContenteditable = ""
 )
 
-type NavDirEnum string
+type NavDir string
 
 const (
-	NavDirEnumAuto NavDirEnum = "auto"
-	NavDirEnumLtr  NavDirEnum = "ltr"
-	NavDirEnumRtl  NavDirEnum = "rtl"
+	NavDirLtr  NavDir = "ltr"
+	NavDirRtl  NavDir = "rtl"
+	NavDirAuto NavDir = "auto"
 )
 
-type NavDraggableEnum string
+type NavDraggable string
 
 const (
-	NavDraggableEnumTrue  NavDraggableEnum = "true"
-	NavDraggableEnumFalse NavDraggableEnum = "false"
+	NavDraggableFalse NavDraggable = "false"
+	NavDraggableTrue  NavDraggable = "true"
 )
 
-type NavEnterkeyhintEnum string
+type NavEnterkeyhint string
 
 const (
-	NavEnterkeyhintEnumGo       NavEnterkeyhintEnum = "go"
-	NavEnterkeyhintEnumNext     NavEnterkeyhintEnum = "next"
-	NavEnterkeyhintEnumPrevious NavEnterkeyhintEnum = "previous"
-	NavEnterkeyhintEnumSearch   NavEnterkeyhintEnum = "search"
-	NavEnterkeyhintEnumSend     NavEnterkeyhintEnum = "send"
-	NavEnterkeyhintEnumDone     NavEnterkeyhintEnum = "done"
-	NavEnterkeyhintEnumEnter    NavEnterkeyhintEnum = "enter"
+	NavEnterkeyhintPrevious NavEnterkeyhint = "previous"
+	NavEnterkeyhintSearch   NavEnterkeyhint = "search"
+	NavEnterkeyhintSend     NavEnterkeyhint = "send"
+	NavEnterkeyhintDone     NavEnterkeyhint = "done"
+	NavEnterkeyhintEnter    NavEnterkeyhint = "enter"
+	NavEnterkeyhintGo       NavEnterkeyhint = "go"
+	NavEnterkeyhintNext     NavEnterkeyhint = "next"
 )
 
-type NavHiddenEnum string
+type NavHidden string
 
 const (
-	NavHiddenEnumHidden     NavHiddenEnum = "hidden"
-	NavHiddenEnumUntilFound NavHiddenEnum = "until-found"
-	NavHiddenEnumEmpty      NavHiddenEnum = ""
+	NavHiddenUntilFound NavHidden = "until-found"
+	NavHiddenHidden     NavHidden = "hidden"
+	NavHiddenEmpty      NavHidden = ""
 )
 
-type NavInputmodeEnum string
+type NavInputmode string
 
 const (
-	NavInputmodeEnumText    NavInputmodeEnum = "text"
-	NavInputmodeEnumUrl     NavInputmodeEnum = "url"
-	NavInputmodeEnumDecimal NavInputmodeEnum = "decimal"
-	NavInputmodeEnumEmail   NavInputmodeEnum = "email"
-	NavInputmodeEnumNone    NavInputmodeEnum = "none"
-	NavInputmodeEnumNumeric NavInputmodeEnum = "numeric"
-	NavInputmodeEnumSearch  NavInputmodeEnum = "search"
-	NavInputmodeEnumTel     NavInputmodeEnum = "tel"
+	NavInputmodeEmail   NavInputmode = "email"
+	NavInputmodeNone    NavInputmode = "none"
+	NavInputmodeNumeric NavInputmode = "numeric"
+	NavInputmodeSearch  NavInputmode = "search"
+	NavInputmodeTel     NavInputmode = "tel"
+	NavInputmodeText    NavInputmode = "text"
+	NavInputmodeUrl     NavInputmode = "url"
+	NavInputmodeDecimal NavInputmode = "decimal"
 )
 
-type NavSpellcheckEnum string
+type NavSpellcheck string
 
 const (
-	NavSpellcheckEnumFalse NavSpellcheckEnum = "false"
-	NavSpellcheckEnumTrue  NavSpellcheckEnum = "true"
-	NavSpellcheckEnumEmpty NavSpellcheckEnum = ""
+	NavSpellcheckFalse NavSpellcheck = "false"
+	NavSpellcheckTrue  NavSpellcheck = "true"
+	NavSpellcheckEmpty NavSpellcheck = ""
 )
 
-type NavTranslateEnum string
+type NavTranslate string
 
 const (
-	NavTranslateEnumNo    NavTranslateEnum = "no"
-	NavTranslateEnumYes   NavTranslateEnum = "yes"
-	NavTranslateEnumEmpty NavTranslateEnum = ""
+	NavTranslateNo    NavTranslate = "no"
+	NavTranslateYes   NavTranslate = "yes"
+	NavTranslateEmpty NavTranslate = ""
 )
 
-type NavWritingsuggestionsEnum string
+type NavWritingsuggestions string
 
 const (
-	NavWritingsuggestionsEnumFalse NavWritingsuggestionsEnum = "false"
-	NavWritingsuggestionsEnumTrue  NavWritingsuggestionsEnum = "true"
-	NavWritingsuggestionsEnumEmpty NavWritingsuggestionsEnum = ""
+	NavWritingsuggestionsFalse NavWritingsuggestions = "false"
+	NavWritingsuggestionsTrue  NavWritingsuggestions = "true"
+	NavWritingsuggestionsEmpty NavWritingsuggestions = ""
 )
 
 type navAttrs map[string]any
 
-func (e *NavElement) Autocapitalize(a NavAutocapitalizeEnum) *NavElement {
+func (e *NavElement) AriaUnsafe(name string, s string) *NavElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *NavElement) Aria(name string, s string) *NavElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *NavElement) Autocapitalize(a NavAutocapitalize) *NavElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *NavElement) Autocorrect(a NavAutocorrectEnum) *NavElement {
+func (e *NavElement) Autocorrect(a NavAutocorrect) *NavElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *NavElement) Class(s ...string) *NavElement {
 	return e
 }
 
-func (e *NavElement) Contenteditable(a NavContenteditableEnum) *NavElement {
+func (e *NavElement) Contenteditable(a NavContenteditable) *NavElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *NavElement) Data(name string, s string) *NavElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *NavElement) Dir(a NavDirEnum) *NavElement {
+func (e *NavElement) Dir(a NavDir) *NavElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *NavElement) Draggable(a NavDraggableEnum) *NavElement {
+func (e *NavElement) Draggable(a NavDraggable) *NavElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *NavElement) Enterkeyhint(a NavEnterkeyhintEnum) *NavElement {
+func (e *NavElement) Enterkeyhint(a NavEnterkeyhint) *NavElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *NavElement) Hidden(a NavHiddenEnum) *NavElement {
+func (e *NavElement) Hidden(a NavHidden) *NavElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *NavElement) Inert(b bool) *NavElement {
 	return e
 }
 
-func (e *NavElement) Inputmode(a NavInputmodeEnum) *NavElement {
+func (e *NavElement) Inputmode(a NavInputmode) *NavElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *NavElement) Slot(s string) *NavElement {
 	return e
 }
 
-func (e *NavElement) Spellcheck(a NavSpellcheckEnum) *NavElement {
+func (e *NavElement) Spellcheck(a NavSpellcheck) *NavElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *NavElement) Title(s string) *NavElement {
 	return e
 }
 
-func (e *NavElement) Translate(a NavTranslateEnum) *NavElement {
+func (e *NavElement) Translate(a NavTranslate) *NavElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *NavElement) Writingsuggestions(a NavWritingsuggestionsEnum) *NavElement {
+func (e *NavElement) Writingsuggestions(a NavWritingsuggestions) *NavElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

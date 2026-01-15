@@ -48,104 +48,104 @@ func BodyTernary(condition bool, true htemel.Node, false htemel.Node) *BodyEleme
 	return Body(false)
 }
 
-type BodyAutocapitalizeEnum string
+type BodyAutocapitalize string
 
 const (
-	BodyAutocapitalizeEnumNone       BodyAutocapitalizeEnum = "none"
-	BodyAutocapitalizeEnumOff        BodyAutocapitalizeEnum = "off"
-	BodyAutocapitalizeEnumOn         BodyAutocapitalizeEnum = "on"
-	BodyAutocapitalizeEnumSentences  BodyAutocapitalizeEnum = "sentences"
-	BodyAutocapitalizeEnumWords      BodyAutocapitalizeEnum = "words"
-	BodyAutocapitalizeEnumCharacters BodyAutocapitalizeEnum = "characters"
+	BodyAutocapitalizeCharacters BodyAutocapitalize = "characters"
+	BodyAutocapitalizeNone       BodyAutocapitalize = "none"
+	BodyAutocapitalizeOff        BodyAutocapitalize = "off"
+	BodyAutocapitalizeOn         BodyAutocapitalize = "on"
+	BodyAutocapitalizeSentences  BodyAutocapitalize = "sentences"
+	BodyAutocapitalizeWords      BodyAutocapitalize = "words"
 )
 
-type BodyAutocorrectEnum string
+type BodyAutocorrect string
 
 const (
-	BodyAutocorrectEnumOff   BodyAutocorrectEnum = "off"
-	BodyAutocorrectEnumOn    BodyAutocorrectEnum = "on"
-	BodyAutocorrectEnumEmpty BodyAutocorrectEnum = ""
+	BodyAutocorrectOff   BodyAutocorrect = "off"
+	BodyAutocorrectOn    BodyAutocorrect = "on"
+	BodyAutocorrectEmpty BodyAutocorrect = ""
 )
 
-type BodyContenteditableEnum string
+type BodyContenteditable string
 
 const (
-	BodyContenteditableEnumPlaintextOnly BodyContenteditableEnum = "plaintext-only"
-	BodyContenteditableEnumTrue          BodyContenteditableEnum = "true"
-	BodyContenteditableEnumFalse         BodyContenteditableEnum = "false"
-	BodyContenteditableEnumEmpty         BodyContenteditableEnum = ""
+	BodyContenteditableFalse         BodyContenteditable = "false"
+	BodyContenteditablePlaintextOnly BodyContenteditable = "plaintext-only"
+	BodyContenteditableTrue          BodyContenteditable = "true"
+	BodyContenteditableEmpty         BodyContenteditable = ""
 )
 
-type BodyDirEnum string
+type BodyDir string
 
 const (
-	BodyDirEnumAuto BodyDirEnum = "auto"
-	BodyDirEnumLtr  BodyDirEnum = "ltr"
-	BodyDirEnumRtl  BodyDirEnum = "rtl"
+	BodyDirRtl  BodyDir = "rtl"
+	BodyDirAuto BodyDir = "auto"
+	BodyDirLtr  BodyDir = "ltr"
 )
 
-type BodyDraggableEnum string
+type BodyDraggable string
 
 const (
-	BodyDraggableEnumFalse BodyDraggableEnum = "false"
-	BodyDraggableEnumTrue  BodyDraggableEnum = "true"
+	BodyDraggableFalse BodyDraggable = "false"
+	BodyDraggableTrue  BodyDraggable = "true"
 )
 
-type BodyEnterkeyhintEnum string
+type BodyEnterkeyhint string
 
 const (
-	BodyEnterkeyhintEnumNext     BodyEnterkeyhintEnum = "next"
-	BodyEnterkeyhintEnumPrevious BodyEnterkeyhintEnum = "previous"
-	BodyEnterkeyhintEnumSearch   BodyEnterkeyhintEnum = "search"
-	BodyEnterkeyhintEnumSend     BodyEnterkeyhintEnum = "send"
-	BodyEnterkeyhintEnumDone     BodyEnterkeyhintEnum = "done"
-	BodyEnterkeyhintEnumEnter    BodyEnterkeyhintEnum = "enter"
-	BodyEnterkeyhintEnumGo       BodyEnterkeyhintEnum = "go"
+	BodyEnterkeyhintGo       BodyEnterkeyhint = "go"
+	BodyEnterkeyhintNext     BodyEnterkeyhint = "next"
+	BodyEnterkeyhintPrevious BodyEnterkeyhint = "previous"
+	BodyEnterkeyhintSearch   BodyEnterkeyhint = "search"
+	BodyEnterkeyhintSend     BodyEnterkeyhint = "send"
+	BodyEnterkeyhintDone     BodyEnterkeyhint = "done"
+	BodyEnterkeyhintEnter    BodyEnterkeyhint = "enter"
 )
 
-type BodyHiddenEnum string
+type BodyHidden string
 
 const (
-	BodyHiddenEnumUntilFound BodyHiddenEnum = "until-found"
-	BodyHiddenEnumHidden     BodyHiddenEnum = "hidden"
-	BodyHiddenEnumEmpty      BodyHiddenEnum = ""
+	BodyHiddenHidden     BodyHidden = "hidden"
+	BodyHiddenUntilFound BodyHidden = "until-found"
+	BodyHiddenEmpty      BodyHidden = ""
 )
 
-type BodyInputmodeEnum string
+type BodyInputmode string
 
 const (
-	BodyInputmodeEnumNumeric BodyInputmodeEnum = "numeric"
-	BodyInputmodeEnumSearch  BodyInputmodeEnum = "search"
-	BodyInputmodeEnumTel     BodyInputmodeEnum = "tel"
-	BodyInputmodeEnumText    BodyInputmodeEnum = "text"
-	BodyInputmodeEnumUrl     BodyInputmodeEnum = "url"
-	BodyInputmodeEnumDecimal BodyInputmodeEnum = "decimal"
-	BodyInputmodeEnumEmail   BodyInputmodeEnum = "email"
-	BodyInputmodeEnumNone    BodyInputmodeEnum = "none"
+	BodyInputmodeNumeric BodyInputmode = "numeric"
+	BodyInputmodeSearch  BodyInputmode = "search"
+	BodyInputmodeTel     BodyInputmode = "tel"
+	BodyInputmodeText    BodyInputmode = "text"
+	BodyInputmodeUrl     BodyInputmode = "url"
+	BodyInputmodeDecimal BodyInputmode = "decimal"
+	BodyInputmodeEmail   BodyInputmode = "email"
+	BodyInputmodeNone    BodyInputmode = "none"
 )
 
-type BodySpellcheckEnum string
+type BodySpellcheck string
 
 const (
-	BodySpellcheckEnumFalse BodySpellcheckEnum = "false"
-	BodySpellcheckEnumTrue  BodySpellcheckEnum = "true"
-	BodySpellcheckEnumEmpty BodySpellcheckEnum = ""
+	BodySpellcheckFalse BodySpellcheck = "false"
+	BodySpellcheckTrue  BodySpellcheck = "true"
+	BodySpellcheckEmpty BodySpellcheck = ""
 )
 
-type BodyTranslateEnum string
+type BodyTranslate string
 
 const (
-	BodyTranslateEnumNo    BodyTranslateEnum = "no"
-	BodyTranslateEnumYes   BodyTranslateEnum = "yes"
-	BodyTranslateEnumEmpty BodyTranslateEnum = ""
+	BodyTranslateNo    BodyTranslate = "no"
+	BodyTranslateYes   BodyTranslate = "yes"
+	BodyTranslateEmpty BodyTranslate = ""
 )
 
-type BodyWritingsuggestionsEnum string
+type BodyWritingsuggestions string
 
 const (
-	BodyWritingsuggestionsEnumFalse BodyWritingsuggestionsEnum = "false"
-	BodyWritingsuggestionsEnumTrue  BodyWritingsuggestionsEnum = "true"
-	BodyWritingsuggestionsEnumEmpty BodyWritingsuggestionsEnum = ""
+	BodyWritingsuggestionsTrue  BodyWritingsuggestions = "true"
+	BodyWritingsuggestionsFalse BodyWritingsuggestions = "false"
+	BodyWritingsuggestionsEmpty BodyWritingsuggestions = ""
 )
 
 type bodyAttrs map[string]any
@@ -258,13 +258,25 @@ func (e *BodyElement) Onunload(s string) *BodyElement {
 	return e
 }
 
-func (e *BodyElement) Autocapitalize(a BodyAutocapitalizeEnum) *BodyElement {
+func (e *BodyElement) AriaUnsafe(name string, s string) *BodyElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BodyElement) Aria(name string, s string) *BodyElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *BodyElement) Autocapitalize(a BodyAutocapitalize) *BodyElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *BodyElement) Autocorrect(a BodyAutocorrectEnum) *BodyElement {
+func (e *BodyElement) Autocorrect(a BodyAutocorrect) *BodyElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -282,7 +294,7 @@ func (e *BodyElement) Class(s ...string) *BodyElement {
 	return e
 }
 
-func (e *BodyElement) Contenteditable(a BodyContenteditableEnum) *BodyElement {
+func (e *BodyElement) Contenteditable(a BodyContenteditable) *BodyElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -300,25 +312,25 @@ func (e *BodyElement) Data(name string, s string) *BodyElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *BodyElement) Dir(a BodyDirEnum) *BodyElement {
+func (e *BodyElement) Dir(a BodyDir) *BodyElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *BodyElement) Draggable(a BodyDraggableEnum) *BodyElement {
+func (e *BodyElement) Draggable(a BodyDraggable) *BodyElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *BodyElement) Enterkeyhint(a BodyEnterkeyhintEnum) *BodyElement {
+func (e *BodyElement) Enterkeyhint(a BodyEnterkeyhint) *BodyElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *BodyElement) Hidden(a BodyHiddenEnum) *BodyElement {
+func (e *BodyElement) Hidden(a BodyHidden) *BodyElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -336,7 +348,7 @@ func (e *BodyElement) Inert(b bool) *BodyElement {
 	return e
 }
 
-func (e *BodyElement) Inputmode(a BodyInputmodeEnum) *BodyElement {
+func (e *BodyElement) Inputmode(a BodyInputmode) *BodyElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -396,7 +408,7 @@ func (e *BodyElement) Slot(s string) *BodyElement {
 	return e
 }
 
-func (e *BodyElement) Spellcheck(a BodySpellcheckEnum) *BodyElement {
+func (e *BodyElement) Spellcheck(a BodySpellcheck) *BodyElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -420,13 +432,13 @@ func (e *BodyElement) Title(s string) *BodyElement {
 	return e
 }
 
-func (e *BodyElement) Translate(a BodyTranslateEnum) *BodyElement {
+func (e *BodyElement) Translate(a BodyTranslate) *BodyElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *BodyElement) Writingsuggestions(a BodyWritingsuggestionsEnum) *BodyElement {
+func (e *BodyElement) Writingsuggestions(a BodyWritingsuggestions) *BodyElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

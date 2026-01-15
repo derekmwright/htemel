@@ -48,115 +48,127 @@ func DfnTernary(condition bool, true htemel.Node, false htemel.Node) *DfnElement
 	return Dfn(false)
 }
 
-type DfnAutocapitalizeEnum string
+type DfnAutocapitalize string
 
 const (
-	DfnAutocapitalizeEnumCharacters DfnAutocapitalizeEnum = "characters"
-	DfnAutocapitalizeEnumNone       DfnAutocapitalizeEnum = "none"
-	DfnAutocapitalizeEnumOff        DfnAutocapitalizeEnum = "off"
-	DfnAutocapitalizeEnumOn         DfnAutocapitalizeEnum = "on"
-	DfnAutocapitalizeEnumSentences  DfnAutocapitalizeEnum = "sentences"
-	DfnAutocapitalizeEnumWords      DfnAutocapitalizeEnum = "words"
+	DfnAutocapitalizeCharacters DfnAutocapitalize = "characters"
+	DfnAutocapitalizeNone       DfnAutocapitalize = "none"
+	DfnAutocapitalizeOff        DfnAutocapitalize = "off"
+	DfnAutocapitalizeOn         DfnAutocapitalize = "on"
+	DfnAutocapitalizeSentences  DfnAutocapitalize = "sentences"
+	DfnAutocapitalizeWords      DfnAutocapitalize = "words"
 )
 
-type DfnAutocorrectEnum string
+type DfnAutocorrect string
 
 const (
-	DfnAutocorrectEnumOff   DfnAutocorrectEnum = "off"
-	DfnAutocorrectEnumOn    DfnAutocorrectEnum = "on"
-	DfnAutocorrectEnumEmpty DfnAutocorrectEnum = ""
+	DfnAutocorrectOff   DfnAutocorrect = "off"
+	DfnAutocorrectOn    DfnAutocorrect = "on"
+	DfnAutocorrectEmpty DfnAutocorrect = ""
 )
 
-type DfnContenteditableEnum string
+type DfnContenteditable string
 
 const (
-	DfnContenteditableEnumFalse         DfnContenteditableEnum = "false"
-	DfnContenteditableEnumPlaintextOnly DfnContenteditableEnum = "plaintext-only"
-	DfnContenteditableEnumTrue          DfnContenteditableEnum = "true"
-	DfnContenteditableEnumEmpty         DfnContenteditableEnum = ""
+	DfnContenteditableFalse         DfnContenteditable = "false"
+	DfnContenteditablePlaintextOnly DfnContenteditable = "plaintext-only"
+	DfnContenteditableTrue          DfnContenteditable = "true"
+	DfnContenteditableEmpty         DfnContenteditable = ""
 )
 
-type DfnDirEnum string
+type DfnDir string
 
 const (
-	DfnDirEnumLtr  DfnDirEnum = "ltr"
-	DfnDirEnumRtl  DfnDirEnum = "rtl"
-	DfnDirEnumAuto DfnDirEnum = "auto"
+	DfnDirAuto DfnDir = "auto"
+	DfnDirLtr  DfnDir = "ltr"
+	DfnDirRtl  DfnDir = "rtl"
 )
 
-type DfnDraggableEnum string
+type DfnDraggable string
 
 const (
-	DfnDraggableEnumFalse DfnDraggableEnum = "false"
-	DfnDraggableEnumTrue  DfnDraggableEnum = "true"
+	DfnDraggableFalse DfnDraggable = "false"
+	DfnDraggableTrue  DfnDraggable = "true"
 )
 
-type DfnEnterkeyhintEnum string
+type DfnEnterkeyhint string
 
 const (
-	DfnEnterkeyhintEnumPrevious DfnEnterkeyhintEnum = "previous"
-	DfnEnterkeyhintEnumSearch   DfnEnterkeyhintEnum = "search"
-	DfnEnterkeyhintEnumSend     DfnEnterkeyhintEnum = "send"
-	DfnEnterkeyhintEnumDone     DfnEnterkeyhintEnum = "done"
-	DfnEnterkeyhintEnumEnter    DfnEnterkeyhintEnum = "enter"
-	DfnEnterkeyhintEnumGo       DfnEnterkeyhintEnum = "go"
-	DfnEnterkeyhintEnumNext     DfnEnterkeyhintEnum = "next"
+	DfnEnterkeyhintDone     DfnEnterkeyhint = "done"
+	DfnEnterkeyhintEnter    DfnEnterkeyhint = "enter"
+	DfnEnterkeyhintGo       DfnEnterkeyhint = "go"
+	DfnEnterkeyhintNext     DfnEnterkeyhint = "next"
+	DfnEnterkeyhintPrevious DfnEnterkeyhint = "previous"
+	DfnEnterkeyhintSearch   DfnEnterkeyhint = "search"
+	DfnEnterkeyhintSend     DfnEnterkeyhint = "send"
 )
 
-type DfnHiddenEnum string
+type DfnHidden string
 
 const (
-	DfnHiddenEnumHidden     DfnHiddenEnum = "hidden"
-	DfnHiddenEnumUntilFound DfnHiddenEnum = "until-found"
-	DfnHiddenEnumEmpty      DfnHiddenEnum = ""
+	DfnHiddenHidden     DfnHidden = "hidden"
+	DfnHiddenUntilFound DfnHidden = "until-found"
+	DfnHiddenEmpty      DfnHidden = ""
 )
 
-type DfnInputmodeEnum string
+type DfnInputmode string
 
 const (
-	DfnInputmodeEnumText    DfnInputmodeEnum = "text"
-	DfnInputmodeEnumUrl     DfnInputmodeEnum = "url"
-	DfnInputmodeEnumDecimal DfnInputmodeEnum = "decimal"
-	DfnInputmodeEnumEmail   DfnInputmodeEnum = "email"
-	DfnInputmodeEnumNone    DfnInputmodeEnum = "none"
-	DfnInputmodeEnumNumeric DfnInputmodeEnum = "numeric"
-	DfnInputmodeEnumSearch  DfnInputmodeEnum = "search"
-	DfnInputmodeEnumTel     DfnInputmodeEnum = "tel"
+	DfnInputmodeDecimal DfnInputmode = "decimal"
+	DfnInputmodeEmail   DfnInputmode = "email"
+	DfnInputmodeNone    DfnInputmode = "none"
+	DfnInputmodeNumeric DfnInputmode = "numeric"
+	DfnInputmodeSearch  DfnInputmode = "search"
+	DfnInputmodeTel     DfnInputmode = "tel"
+	DfnInputmodeText    DfnInputmode = "text"
+	DfnInputmodeUrl     DfnInputmode = "url"
 )
 
-type DfnSpellcheckEnum string
+type DfnSpellcheck string
 
 const (
-	DfnSpellcheckEnumFalse DfnSpellcheckEnum = "false"
-	DfnSpellcheckEnumTrue  DfnSpellcheckEnum = "true"
-	DfnSpellcheckEnumEmpty DfnSpellcheckEnum = ""
+	DfnSpellcheckFalse DfnSpellcheck = "false"
+	DfnSpellcheckTrue  DfnSpellcheck = "true"
+	DfnSpellcheckEmpty DfnSpellcheck = ""
 )
 
-type DfnTranslateEnum string
+type DfnTranslate string
 
 const (
-	DfnTranslateEnumNo    DfnTranslateEnum = "no"
-	DfnTranslateEnumYes   DfnTranslateEnum = "yes"
-	DfnTranslateEnumEmpty DfnTranslateEnum = ""
+	DfnTranslateYes   DfnTranslate = "yes"
+	DfnTranslateNo    DfnTranslate = "no"
+	DfnTranslateEmpty DfnTranslate = ""
 )
 
-type DfnWritingsuggestionsEnum string
+type DfnWritingsuggestions string
 
 const (
-	DfnWritingsuggestionsEnumTrue  DfnWritingsuggestionsEnum = "true"
-	DfnWritingsuggestionsEnumFalse DfnWritingsuggestionsEnum = "false"
-	DfnWritingsuggestionsEnumEmpty DfnWritingsuggestionsEnum = ""
+	DfnWritingsuggestionsFalse DfnWritingsuggestions = "false"
+	DfnWritingsuggestionsTrue  DfnWritingsuggestions = "true"
+	DfnWritingsuggestionsEmpty DfnWritingsuggestions = ""
 )
 
 type dfnAttrs map[string]any
 
-func (e *DfnElement) Autocapitalize(a DfnAutocapitalizeEnum) *DfnElement {
+func (e *DfnElement) AriaUnsafe(name string, s string) *DfnElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DfnElement) Aria(name string, s string) *DfnElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *DfnElement) Autocapitalize(a DfnAutocapitalize) *DfnElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *DfnElement) Autocorrect(a DfnAutocorrectEnum) *DfnElement {
+func (e *DfnElement) Autocorrect(a DfnAutocorrect) *DfnElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *DfnElement) Class(s ...string) *DfnElement {
 	return e
 }
 
-func (e *DfnElement) Contenteditable(a DfnContenteditableEnum) *DfnElement {
+func (e *DfnElement) Contenteditable(a DfnContenteditable) *DfnElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *DfnElement) Data(name string, s string) *DfnElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *DfnElement) Dir(a DfnDirEnum) *DfnElement {
+func (e *DfnElement) Dir(a DfnDir) *DfnElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *DfnElement) Draggable(a DfnDraggableEnum) *DfnElement {
+func (e *DfnElement) Draggable(a DfnDraggable) *DfnElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *DfnElement) Enterkeyhint(a DfnEnterkeyhintEnum) *DfnElement {
+func (e *DfnElement) Enterkeyhint(a DfnEnterkeyhint) *DfnElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *DfnElement) Hidden(a DfnHiddenEnum) *DfnElement {
+func (e *DfnElement) Hidden(a DfnHidden) *DfnElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *DfnElement) Inert(b bool) *DfnElement {
 	return e
 }
 
-func (e *DfnElement) Inputmode(a DfnInputmodeEnum) *DfnElement {
+func (e *DfnElement) Inputmode(a DfnInputmode) *DfnElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *DfnElement) Slot(s string) *DfnElement {
 	return e
 }
 
-func (e *DfnElement) Spellcheck(a DfnSpellcheckEnum) *DfnElement {
+func (e *DfnElement) Spellcheck(a DfnSpellcheck) *DfnElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *DfnElement) Title(s string) *DfnElement {
 	return e
 }
 
-func (e *DfnElement) Translate(a DfnTranslateEnum) *DfnElement {
+func (e *DfnElement) Translate(a DfnTranslate) *DfnElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *DfnElement) Writingsuggestions(a DfnWritingsuggestionsEnum) *DfnElement {
+func (e *DfnElement) Writingsuggestions(a DfnWritingsuggestions) *DfnElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

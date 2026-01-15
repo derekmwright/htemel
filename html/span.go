@@ -48,115 +48,127 @@ func SpanTernary(condition bool, true htemel.Node, false htemel.Node) *SpanEleme
 	return Span(false)
 }
 
-type SpanAutocapitalizeEnum string
+type SpanAutocapitalize string
 
 const (
-	SpanAutocapitalizeEnumSentences  SpanAutocapitalizeEnum = "sentences"
-	SpanAutocapitalizeEnumWords      SpanAutocapitalizeEnum = "words"
-	SpanAutocapitalizeEnumCharacters SpanAutocapitalizeEnum = "characters"
-	SpanAutocapitalizeEnumNone       SpanAutocapitalizeEnum = "none"
-	SpanAutocapitalizeEnumOff        SpanAutocapitalizeEnum = "off"
-	SpanAutocapitalizeEnumOn         SpanAutocapitalizeEnum = "on"
+	SpanAutocapitalizeNone       SpanAutocapitalize = "none"
+	SpanAutocapitalizeOff        SpanAutocapitalize = "off"
+	SpanAutocapitalizeOn         SpanAutocapitalize = "on"
+	SpanAutocapitalizeSentences  SpanAutocapitalize = "sentences"
+	SpanAutocapitalizeWords      SpanAutocapitalize = "words"
+	SpanAutocapitalizeCharacters SpanAutocapitalize = "characters"
 )
 
-type SpanAutocorrectEnum string
+type SpanAutocorrect string
 
 const (
-	SpanAutocorrectEnumOff   SpanAutocorrectEnum = "off"
-	SpanAutocorrectEnumOn    SpanAutocorrectEnum = "on"
-	SpanAutocorrectEnumEmpty SpanAutocorrectEnum = ""
+	SpanAutocorrectOff   SpanAutocorrect = "off"
+	SpanAutocorrectOn    SpanAutocorrect = "on"
+	SpanAutocorrectEmpty SpanAutocorrect = ""
 )
 
-type SpanContenteditableEnum string
+type SpanContenteditable string
 
 const (
-	SpanContenteditableEnumFalse         SpanContenteditableEnum = "false"
-	SpanContenteditableEnumPlaintextOnly SpanContenteditableEnum = "plaintext-only"
-	SpanContenteditableEnumTrue          SpanContenteditableEnum = "true"
-	SpanContenteditableEnumEmpty         SpanContenteditableEnum = ""
+	SpanContenteditableFalse         SpanContenteditable = "false"
+	SpanContenteditablePlaintextOnly SpanContenteditable = "plaintext-only"
+	SpanContenteditableTrue          SpanContenteditable = "true"
+	SpanContenteditableEmpty         SpanContenteditable = ""
 )
 
-type SpanDirEnum string
+type SpanDir string
 
 const (
-	SpanDirEnumAuto SpanDirEnum = "auto"
-	SpanDirEnumLtr  SpanDirEnum = "ltr"
-	SpanDirEnumRtl  SpanDirEnum = "rtl"
+	SpanDirRtl  SpanDir = "rtl"
+	SpanDirAuto SpanDir = "auto"
+	SpanDirLtr  SpanDir = "ltr"
 )
 
-type SpanDraggableEnum string
+type SpanDraggable string
 
 const (
-	SpanDraggableEnumFalse SpanDraggableEnum = "false"
-	SpanDraggableEnumTrue  SpanDraggableEnum = "true"
+	SpanDraggableFalse SpanDraggable = "false"
+	SpanDraggableTrue  SpanDraggable = "true"
 )
 
-type SpanEnterkeyhintEnum string
+type SpanEnterkeyhint string
 
 const (
-	SpanEnterkeyhintEnumDone     SpanEnterkeyhintEnum = "done"
-	SpanEnterkeyhintEnumEnter    SpanEnterkeyhintEnum = "enter"
-	SpanEnterkeyhintEnumGo       SpanEnterkeyhintEnum = "go"
-	SpanEnterkeyhintEnumNext     SpanEnterkeyhintEnum = "next"
-	SpanEnterkeyhintEnumPrevious SpanEnterkeyhintEnum = "previous"
-	SpanEnterkeyhintEnumSearch   SpanEnterkeyhintEnum = "search"
-	SpanEnterkeyhintEnumSend     SpanEnterkeyhintEnum = "send"
+	SpanEnterkeyhintDone     SpanEnterkeyhint = "done"
+	SpanEnterkeyhintEnter    SpanEnterkeyhint = "enter"
+	SpanEnterkeyhintGo       SpanEnterkeyhint = "go"
+	SpanEnterkeyhintNext     SpanEnterkeyhint = "next"
+	SpanEnterkeyhintPrevious SpanEnterkeyhint = "previous"
+	SpanEnterkeyhintSearch   SpanEnterkeyhint = "search"
+	SpanEnterkeyhintSend     SpanEnterkeyhint = "send"
 )
 
-type SpanHiddenEnum string
+type SpanHidden string
 
 const (
-	SpanHiddenEnumHidden     SpanHiddenEnum = "hidden"
-	SpanHiddenEnumUntilFound SpanHiddenEnum = "until-found"
-	SpanHiddenEnumEmpty      SpanHiddenEnum = ""
+	SpanHiddenHidden     SpanHidden = "hidden"
+	SpanHiddenUntilFound SpanHidden = "until-found"
+	SpanHiddenEmpty      SpanHidden = ""
 )
 
-type SpanInputmodeEnum string
+type SpanInputmode string
 
 const (
-	SpanInputmodeEnumUrl     SpanInputmodeEnum = "url"
-	SpanInputmodeEnumDecimal SpanInputmodeEnum = "decimal"
-	SpanInputmodeEnumEmail   SpanInputmodeEnum = "email"
-	SpanInputmodeEnumNone    SpanInputmodeEnum = "none"
-	SpanInputmodeEnumNumeric SpanInputmodeEnum = "numeric"
-	SpanInputmodeEnumSearch  SpanInputmodeEnum = "search"
-	SpanInputmodeEnumTel     SpanInputmodeEnum = "tel"
-	SpanInputmodeEnumText    SpanInputmodeEnum = "text"
+	SpanInputmodeTel     SpanInputmode = "tel"
+	SpanInputmodeText    SpanInputmode = "text"
+	SpanInputmodeUrl     SpanInputmode = "url"
+	SpanInputmodeDecimal SpanInputmode = "decimal"
+	SpanInputmodeEmail   SpanInputmode = "email"
+	SpanInputmodeNone    SpanInputmode = "none"
+	SpanInputmodeNumeric SpanInputmode = "numeric"
+	SpanInputmodeSearch  SpanInputmode = "search"
 )
 
-type SpanSpellcheckEnum string
+type SpanSpellcheck string
 
 const (
-	SpanSpellcheckEnumFalse SpanSpellcheckEnum = "false"
-	SpanSpellcheckEnumTrue  SpanSpellcheckEnum = "true"
-	SpanSpellcheckEnumEmpty SpanSpellcheckEnum = ""
+	SpanSpellcheckFalse SpanSpellcheck = "false"
+	SpanSpellcheckTrue  SpanSpellcheck = "true"
+	SpanSpellcheckEmpty SpanSpellcheck = ""
 )
 
-type SpanTranslateEnum string
+type SpanTranslate string
 
 const (
-	SpanTranslateEnumNo    SpanTranslateEnum = "no"
-	SpanTranslateEnumYes   SpanTranslateEnum = "yes"
-	SpanTranslateEnumEmpty SpanTranslateEnum = ""
+	SpanTranslateNo    SpanTranslate = "no"
+	SpanTranslateYes   SpanTranslate = "yes"
+	SpanTranslateEmpty SpanTranslate = ""
 )
 
-type SpanWritingsuggestionsEnum string
+type SpanWritingsuggestions string
 
 const (
-	SpanWritingsuggestionsEnumTrue  SpanWritingsuggestionsEnum = "true"
-	SpanWritingsuggestionsEnumFalse SpanWritingsuggestionsEnum = "false"
-	SpanWritingsuggestionsEnumEmpty SpanWritingsuggestionsEnum = ""
+	SpanWritingsuggestionsFalse SpanWritingsuggestions = "false"
+	SpanWritingsuggestionsTrue  SpanWritingsuggestions = "true"
+	SpanWritingsuggestionsEmpty SpanWritingsuggestions = ""
 )
 
 type spanAttrs map[string]any
 
-func (e *SpanElement) Autocapitalize(a SpanAutocapitalizeEnum) *SpanElement {
+func (e *SpanElement) AriaUnsafe(name string, s string) *SpanElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SpanElement) Aria(name string, s string) *SpanElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SpanElement) Autocapitalize(a SpanAutocapitalize) *SpanElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SpanElement) Autocorrect(a SpanAutocorrectEnum) *SpanElement {
+func (e *SpanElement) Autocorrect(a SpanAutocorrect) *SpanElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *SpanElement) Class(s ...string) *SpanElement {
 	return e
 }
 
-func (e *SpanElement) Contenteditable(a SpanContenteditableEnum) *SpanElement {
+func (e *SpanElement) Contenteditable(a SpanContenteditable) *SpanElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *SpanElement) Data(name string, s string) *SpanElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SpanElement) Dir(a SpanDirEnum) *SpanElement {
+func (e *SpanElement) Dir(a SpanDir) *SpanElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SpanElement) Draggable(a SpanDraggableEnum) *SpanElement {
+func (e *SpanElement) Draggable(a SpanDraggable) *SpanElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SpanElement) Enterkeyhint(a SpanEnterkeyhintEnum) *SpanElement {
+func (e *SpanElement) Enterkeyhint(a SpanEnterkeyhint) *SpanElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SpanElement) Hidden(a SpanHiddenEnum) *SpanElement {
+func (e *SpanElement) Hidden(a SpanHidden) *SpanElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *SpanElement) Inert(b bool) *SpanElement {
 	return e
 }
 
-func (e *SpanElement) Inputmode(a SpanInputmodeEnum) *SpanElement {
+func (e *SpanElement) Inputmode(a SpanInputmode) *SpanElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *SpanElement) Slot(s string) *SpanElement {
 	return e
 }
 
-func (e *SpanElement) Spellcheck(a SpanSpellcheckEnum) *SpanElement {
+func (e *SpanElement) Spellcheck(a SpanSpellcheck) *SpanElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *SpanElement) Title(s string) *SpanElement {
 	return e
 }
 
-func (e *SpanElement) Translate(a SpanTranslateEnum) *SpanElement {
+func (e *SpanElement) Translate(a SpanTranslate) *SpanElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SpanElement) Writingsuggestions(a SpanWritingsuggestionsEnum) *SpanElement {
+func (e *SpanElement) Writingsuggestions(a SpanWritingsuggestions) *SpanElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

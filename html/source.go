@@ -39,104 +39,104 @@ func SourceIf(condition bool) *SourceElement {
 	}
 }
 
-type SourceAutocapitalizeEnum string
+type SourceAutocapitalize string
 
 const (
-	SourceAutocapitalizeEnumSentences  SourceAutocapitalizeEnum = "sentences"
-	SourceAutocapitalizeEnumWords      SourceAutocapitalizeEnum = "words"
-	SourceAutocapitalizeEnumCharacters SourceAutocapitalizeEnum = "characters"
-	SourceAutocapitalizeEnumNone       SourceAutocapitalizeEnum = "none"
-	SourceAutocapitalizeEnumOff        SourceAutocapitalizeEnum = "off"
-	SourceAutocapitalizeEnumOn         SourceAutocapitalizeEnum = "on"
+	SourceAutocapitalizeOff        SourceAutocapitalize = "off"
+	SourceAutocapitalizeOn         SourceAutocapitalize = "on"
+	SourceAutocapitalizeSentences  SourceAutocapitalize = "sentences"
+	SourceAutocapitalizeWords      SourceAutocapitalize = "words"
+	SourceAutocapitalizeCharacters SourceAutocapitalize = "characters"
+	SourceAutocapitalizeNone       SourceAutocapitalize = "none"
 )
 
-type SourceAutocorrectEnum string
+type SourceAutocorrect string
 
 const (
-	SourceAutocorrectEnumOff   SourceAutocorrectEnum = "off"
-	SourceAutocorrectEnumOn    SourceAutocorrectEnum = "on"
-	SourceAutocorrectEnumEmpty SourceAutocorrectEnum = ""
+	SourceAutocorrectOff   SourceAutocorrect = "off"
+	SourceAutocorrectOn    SourceAutocorrect = "on"
+	SourceAutocorrectEmpty SourceAutocorrect = ""
 )
 
-type SourceContenteditableEnum string
+type SourceContenteditable string
 
 const (
-	SourceContenteditableEnumFalse         SourceContenteditableEnum = "false"
-	SourceContenteditableEnumPlaintextOnly SourceContenteditableEnum = "plaintext-only"
-	SourceContenteditableEnumTrue          SourceContenteditableEnum = "true"
-	SourceContenteditableEnumEmpty         SourceContenteditableEnum = ""
+	SourceContenteditableFalse         SourceContenteditable = "false"
+	SourceContenteditablePlaintextOnly SourceContenteditable = "plaintext-only"
+	SourceContenteditableTrue          SourceContenteditable = "true"
+	SourceContenteditableEmpty         SourceContenteditable = ""
 )
 
-type SourceDirEnum string
+type SourceDir string
 
 const (
-	SourceDirEnumAuto SourceDirEnum = "auto"
-	SourceDirEnumLtr  SourceDirEnum = "ltr"
-	SourceDirEnumRtl  SourceDirEnum = "rtl"
+	SourceDirAuto SourceDir = "auto"
+	SourceDirLtr  SourceDir = "ltr"
+	SourceDirRtl  SourceDir = "rtl"
 )
 
-type SourceDraggableEnum string
+type SourceDraggable string
 
 const (
-	SourceDraggableEnumFalse SourceDraggableEnum = "false"
-	SourceDraggableEnumTrue  SourceDraggableEnum = "true"
+	SourceDraggableFalse SourceDraggable = "false"
+	SourceDraggableTrue  SourceDraggable = "true"
 )
 
-type SourceEnterkeyhintEnum string
+type SourceEnterkeyhint string
 
 const (
-	SourceEnterkeyhintEnumSend     SourceEnterkeyhintEnum = "send"
-	SourceEnterkeyhintEnumDone     SourceEnterkeyhintEnum = "done"
-	SourceEnterkeyhintEnumEnter    SourceEnterkeyhintEnum = "enter"
-	SourceEnterkeyhintEnumGo       SourceEnterkeyhintEnum = "go"
-	SourceEnterkeyhintEnumNext     SourceEnterkeyhintEnum = "next"
-	SourceEnterkeyhintEnumPrevious SourceEnterkeyhintEnum = "previous"
-	SourceEnterkeyhintEnumSearch   SourceEnterkeyhintEnum = "search"
+	SourceEnterkeyhintDone     SourceEnterkeyhint = "done"
+	SourceEnterkeyhintEnter    SourceEnterkeyhint = "enter"
+	SourceEnterkeyhintGo       SourceEnterkeyhint = "go"
+	SourceEnterkeyhintNext     SourceEnterkeyhint = "next"
+	SourceEnterkeyhintPrevious SourceEnterkeyhint = "previous"
+	SourceEnterkeyhintSearch   SourceEnterkeyhint = "search"
+	SourceEnterkeyhintSend     SourceEnterkeyhint = "send"
 )
 
-type SourceHiddenEnum string
+type SourceHidden string
 
 const (
-	SourceHiddenEnumHidden     SourceHiddenEnum = "hidden"
-	SourceHiddenEnumUntilFound SourceHiddenEnum = "until-found"
-	SourceHiddenEnumEmpty      SourceHiddenEnum = ""
+	SourceHiddenHidden     SourceHidden = "hidden"
+	SourceHiddenUntilFound SourceHidden = "until-found"
+	SourceHiddenEmpty      SourceHidden = ""
 )
 
-type SourceInputmodeEnum string
+type SourceInputmode string
 
 const (
-	SourceInputmodeEnumTel     SourceInputmodeEnum = "tel"
-	SourceInputmodeEnumText    SourceInputmodeEnum = "text"
-	SourceInputmodeEnumUrl     SourceInputmodeEnum = "url"
-	SourceInputmodeEnumDecimal SourceInputmodeEnum = "decimal"
-	SourceInputmodeEnumEmail   SourceInputmodeEnum = "email"
-	SourceInputmodeEnumNone    SourceInputmodeEnum = "none"
-	SourceInputmodeEnumNumeric SourceInputmodeEnum = "numeric"
-	SourceInputmodeEnumSearch  SourceInputmodeEnum = "search"
+	SourceInputmodeNone    SourceInputmode = "none"
+	SourceInputmodeNumeric SourceInputmode = "numeric"
+	SourceInputmodeSearch  SourceInputmode = "search"
+	SourceInputmodeTel     SourceInputmode = "tel"
+	SourceInputmodeText    SourceInputmode = "text"
+	SourceInputmodeUrl     SourceInputmode = "url"
+	SourceInputmodeDecimal SourceInputmode = "decimal"
+	SourceInputmodeEmail   SourceInputmode = "email"
 )
 
-type SourceSpellcheckEnum string
+type SourceSpellcheck string
 
 const (
-	SourceSpellcheckEnumFalse SourceSpellcheckEnum = "false"
-	SourceSpellcheckEnumTrue  SourceSpellcheckEnum = "true"
-	SourceSpellcheckEnumEmpty SourceSpellcheckEnum = ""
+	SourceSpellcheckFalse SourceSpellcheck = "false"
+	SourceSpellcheckTrue  SourceSpellcheck = "true"
+	SourceSpellcheckEmpty SourceSpellcheck = ""
 )
 
-type SourceTranslateEnum string
+type SourceTranslate string
 
 const (
-	SourceTranslateEnumNo    SourceTranslateEnum = "no"
-	SourceTranslateEnumYes   SourceTranslateEnum = "yes"
-	SourceTranslateEnumEmpty SourceTranslateEnum = ""
+	SourceTranslateNo    SourceTranslate = "no"
+	SourceTranslateYes   SourceTranslate = "yes"
+	SourceTranslateEmpty SourceTranslate = ""
 )
 
-type SourceWritingsuggestionsEnum string
+type SourceWritingsuggestions string
 
 const (
-	SourceWritingsuggestionsEnumFalse SourceWritingsuggestionsEnum = "false"
-	SourceWritingsuggestionsEnumTrue  SourceWritingsuggestionsEnum = "true"
-	SourceWritingsuggestionsEnumEmpty SourceWritingsuggestionsEnum = ""
+	SourceWritingsuggestionsFalse SourceWritingsuggestions = "false"
+	SourceWritingsuggestionsTrue  SourceWritingsuggestions = "true"
+	SourceWritingsuggestionsEmpty SourceWritingsuggestions = ""
 )
 
 type sourceAttrs map[string]any
@@ -183,13 +183,25 @@ func (e *SourceElement) Height(i int) *SourceElement {
 	return e
 }
 
-func (e *SourceElement) Autocapitalize(a SourceAutocapitalizeEnum) *SourceElement {
+func (e *SourceElement) AriaUnsafe(name string, s string) *SourceElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SourceElement) Aria(name string, s string) *SourceElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SourceElement) Autocapitalize(a SourceAutocapitalize) *SourceElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SourceElement) Autocorrect(a SourceAutocorrectEnum) *SourceElement {
+func (e *SourceElement) Autocorrect(a SourceAutocorrect) *SourceElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -207,7 +219,7 @@ func (e *SourceElement) Class(s ...string) *SourceElement {
 	return e
 }
 
-func (e *SourceElement) Contenteditable(a SourceContenteditableEnum) *SourceElement {
+func (e *SourceElement) Contenteditable(a SourceContenteditable) *SourceElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -225,25 +237,25 @@ func (e *SourceElement) Data(name string, s string) *SourceElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SourceElement) Dir(a SourceDirEnum) *SourceElement {
+func (e *SourceElement) Dir(a SourceDir) *SourceElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SourceElement) Draggable(a SourceDraggableEnum) *SourceElement {
+func (e *SourceElement) Draggable(a SourceDraggable) *SourceElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SourceElement) Enterkeyhint(a SourceEnterkeyhintEnum) *SourceElement {
+func (e *SourceElement) Enterkeyhint(a SourceEnterkeyhint) *SourceElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SourceElement) Hidden(a SourceHiddenEnum) *SourceElement {
+func (e *SourceElement) Hidden(a SourceHidden) *SourceElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -261,7 +273,7 @@ func (e *SourceElement) Inert(b bool) *SourceElement {
 	return e
 }
 
-func (e *SourceElement) Inputmode(a SourceInputmodeEnum) *SourceElement {
+func (e *SourceElement) Inputmode(a SourceInputmode) *SourceElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -321,7 +333,7 @@ func (e *SourceElement) Slot(s string) *SourceElement {
 	return e
 }
 
-func (e *SourceElement) Spellcheck(a SourceSpellcheckEnum) *SourceElement {
+func (e *SourceElement) Spellcheck(a SourceSpellcheck) *SourceElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -345,13 +357,13 @@ func (e *SourceElement) Title(s string) *SourceElement {
 	return e
 }
 
-func (e *SourceElement) Translate(a SourceTranslateEnum) *SourceElement {
+func (e *SourceElement) Translate(a SourceTranslate) *SourceElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SourceElement) Writingsuggestions(a SourceWritingsuggestionsEnum) *SourceElement {
+func (e *SourceElement) Writingsuggestions(a SourceWritingsuggestions) *SourceElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,115 +48,127 @@ func PreTernary(condition bool, true htemel.Node, false htemel.Node) *PreElement
 	return Pre(false)
 }
 
-type PreAutocapitalizeEnum string
+type PreAutocapitalize string
 
 const (
-	PreAutocapitalizeEnumWords      PreAutocapitalizeEnum = "words"
-	PreAutocapitalizeEnumCharacters PreAutocapitalizeEnum = "characters"
-	PreAutocapitalizeEnumNone       PreAutocapitalizeEnum = "none"
-	PreAutocapitalizeEnumOff        PreAutocapitalizeEnum = "off"
-	PreAutocapitalizeEnumOn         PreAutocapitalizeEnum = "on"
-	PreAutocapitalizeEnumSentences  PreAutocapitalizeEnum = "sentences"
+	PreAutocapitalizeOn         PreAutocapitalize = "on"
+	PreAutocapitalizeSentences  PreAutocapitalize = "sentences"
+	PreAutocapitalizeWords      PreAutocapitalize = "words"
+	PreAutocapitalizeCharacters PreAutocapitalize = "characters"
+	PreAutocapitalizeNone       PreAutocapitalize = "none"
+	PreAutocapitalizeOff        PreAutocapitalize = "off"
 )
 
-type PreAutocorrectEnum string
+type PreAutocorrect string
 
 const (
-	PreAutocorrectEnumOff   PreAutocorrectEnum = "off"
-	PreAutocorrectEnumOn    PreAutocorrectEnum = "on"
-	PreAutocorrectEnumEmpty PreAutocorrectEnum = ""
+	PreAutocorrectOff   PreAutocorrect = "off"
+	PreAutocorrectOn    PreAutocorrect = "on"
+	PreAutocorrectEmpty PreAutocorrect = ""
 )
 
-type PreContenteditableEnum string
+type PreContenteditable string
 
 const (
-	PreContenteditableEnumFalse         PreContenteditableEnum = "false"
-	PreContenteditableEnumPlaintextOnly PreContenteditableEnum = "plaintext-only"
-	PreContenteditableEnumTrue          PreContenteditableEnum = "true"
-	PreContenteditableEnumEmpty         PreContenteditableEnum = ""
+	PreContenteditableFalse         PreContenteditable = "false"
+	PreContenteditablePlaintextOnly PreContenteditable = "plaintext-only"
+	PreContenteditableTrue          PreContenteditable = "true"
+	PreContenteditableEmpty         PreContenteditable = ""
 )
 
-type PreDirEnum string
+type PreDir string
 
 const (
-	PreDirEnumAuto PreDirEnum = "auto"
-	PreDirEnumLtr  PreDirEnum = "ltr"
-	PreDirEnumRtl  PreDirEnum = "rtl"
+	PreDirRtl  PreDir = "rtl"
+	PreDirAuto PreDir = "auto"
+	PreDirLtr  PreDir = "ltr"
 )
 
-type PreDraggableEnum string
+type PreDraggable string
 
 const (
-	PreDraggableEnumFalse PreDraggableEnum = "false"
-	PreDraggableEnumTrue  PreDraggableEnum = "true"
+	PreDraggableFalse PreDraggable = "false"
+	PreDraggableTrue  PreDraggable = "true"
 )
 
-type PreEnterkeyhintEnum string
+type PreEnterkeyhint string
 
 const (
-	PreEnterkeyhintEnumDone     PreEnterkeyhintEnum = "done"
-	PreEnterkeyhintEnumEnter    PreEnterkeyhintEnum = "enter"
-	PreEnterkeyhintEnumGo       PreEnterkeyhintEnum = "go"
-	PreEnterkeyhintEnumNext     PreEnterkeyhintEnum = "next"
-	PreEnterkeyhintEnumPrevious PreEnterkeyhintEnum = "previous"
-	PreEnterkeyhintEnumSearch   PreEnterkeyhintEnum = "search"
-	PreEnterkeyhintEnumSend     PreEnterkeyhintEnum = "send"
+	PreEnterkeyhintGo       PreEnterkeyhint = "go"
+	PreEnterkeyhintNext     PreEnterkeyhint = "next"
+	PreEnterkeyhintPrevious PreEnterkeyhint = "previous"
+	PreEnterkeyhintSearch   PreEnterkeyhint = "search"
+	PreEnterkeyhintSend     PreEnterkeyhint = "send"
+	PreEnterkeyhintDone     PreEnterkeyhint = "done"
+	PreEnterkeyhintEnter    PreEnterkeyhint = "enter"
 )
 
-type PreHiddenEnum string
+type PreHidden string
 
 const (
-	PreHiddenEnumHidden     PreHiddenEnum = "hidden"
-	PreHiddenEnumUntilFound PreHiddenEnum = "until-found"
-	PreHiddenEnumEmpty      PreHiddenEnum = ""
+	PreHiddenUntilFound PreHidden = "until-found"
+	PreHiddenHidden     PreHidden = "hidden"
+	PreHiddenEmpty      PreHidden = ""
 )
 
-type PreInputmodeEnum string
+type PreInputmode string
 
 const (
-	PreInputmodeEnumSearch  PreInputmodeEnum = "search"
-	PreInputmodeEnumTel     PreInputmodeEnum = "tel"
-	PreInputmodeEnumText    PreInputmodeEnum = "text"
-	PreInputmodeEnumUrl     PreInputmodeEnum = "url"
-	PreInputmodeEnumDecimal PreInputmodeEnum = "decimal"
-	PreInputmodeEnumEmail   PreInputmodeEnum = "email"
-	PreInputmodeEnumNone    PreInputmodeEnum = "none"
-	PreInputmodeEnumNumeric PreInputmodeEnum = "numeric"
+	PreInputmodeUrl     PreInputmode = "url"
+	PreInputmodeDecimal PreInputmode = "decimal"
+	PreInputmodeEmail   PreInputmode = "email"
+	PreInputmodeNone    PreInputmode = "none"
+	PreInputmodeNumeric PreInputmode = "numeric"
+	PreInputmodeSearch  PreInputmode = "search"
+	PreInputmodeTel     PreInputmode = "tel"
+	PreInputmodeText    PreInputmode = "text"
 )
 
-type PreSpellcheckEnum string
+type PreSpellcheck string
 
 const (
-	PreSpellcheckEnumFalse PreSpellcheckEnum = "false"
-	PreSpellcheckEnumTrue  PreSpellcheckEnum = "true"
-	PreSpellcheckEnumEmpty PreSpellcheckEnum = ""
+	PreSpellcheckFalse PreSpellcheck = "false"
+	PreSpellcheckTrue  PreSpellcheck = "true"
+	PreSpellcheckEmpty PreSpellcheck = ""
 )
 
-type PreTranslateEnum string
+type PreTranslate string
 
 const (
-	PreTranslateEnumNo    PreTranslateEnum = "no"
-	PreTranslateEnumYes   PreTranslateEnum = "yes"
-	PreTranslateEnumEmpty PreTranslateEnum = ""
+	PreTranslateNo    PreTranslate = "no"
+	PreTranslateYes   PreTranslate = "yes"
+	PreTranslateEmpty PreTranslate = ""
 )
 
-type PreWritingsuggestionsEnum string
+type PreWritingsuggestions string
 
 const (
-	PreWritingsuggestionsEnumFalse PreWritingsuggestionsEnum = "false"
-	PreWritingsuggestionsEnumTrue  PreWritingsuggestionsEnum = "true"
-	PreWritingsuggestionsEnumEmpty PreWritingsuggestionsEnum = ""
+	PreWritingsuggestionsFalse PreWritingsuggestions = "false"
+	PreWritingsuggestionsTrue  PreWritingsuggestions = "true"
+	PreWritingsuggestionsEmpty PreWritingsuggestions = ""
 )
 
 type preAttrs map[string]any
 
-func (e *PreElement) Autocapitalize(a PreAutocapitalizeEnum) *PreElement {
+func (e *PreElement) AriaUnsafe(name string, s string) *PreElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *PreElement) Aria(name string, s string) *PreElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *PreElement) Autocapitalize(a PreAutocapitalize) *PreElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *PreElement) Autocorrect(a PreAutocorrectEnum) *PreElement {
+func (e *PreElement) Autocorrect(a PreAutocorrect) *PreElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *PreElement) Class(s ...string) *PreElement {
 	return e
 }
 
-func (e *PreElement) Contenteditable(a PreContenteditableEnum) *PreElement {
+func (e *PreElement) Contenteditable(a PreContenteditable) *PreElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *PreElement) Data(name string, s string) *PreElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *PreElement) Dir(a PreDirEnum) *PreElement {
+func (e *PreElement) Dir(a PreDir) *PreElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *PreElement) Draggable(a PreDraggableEnum) *PreElement {
+func (e *PreElement) Draggable(a PreDraggable) *PreElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *PreElement) Enterkeyhint(a PreEnterkeyhintEnum) *PreElement {
+func (e *PreElement) Enterkeyhint(a PreEnterkeyhint) *PreElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *PreElement) Hidden(a PreHiddenEnum) *PreElement {
+func (e *PreElement) Hidden(a PreHidden) *PreElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *PreElement) Inert(b bool) *PreElement {
 	return e
 }
 
-func (e *PreElement) Inputmode(a PreInputmodeEnum) *PreElement {
+func (e *PreElement) Inputmode(a PreInputmode) *PreElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *PreElement) Slot(s string) *PreElement {
 	return e
 }
 
-func (e *PreElement) Spellcheck(a PreSpellcheckEnum) *PreElement {
+func (e *PreElement) Spellcheck(a PreSpellcheck) *PreElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *PreElement) Title(s string) *PreElement {
 	return e
 }
 
-func (e *PreElement) Translate(a PreTranslateEnum) *PreElement {
+func (e *PreElement) Translate(a PreTranslate) *PreElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *PreElement) Writingsuggestions(a PreWritingsuggestionsEnum) *PreElement {
+func (e *PreElement) Writingsuggestions(a PreWritingsuggestions) *PreElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

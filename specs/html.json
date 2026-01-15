@@ -2110,6 +2110,11 @@
       "attribute_type": "AttributeTypeChar"
     },
     {
+      "name": "aria",
+      "description": "The aria attribute is a custom attribute whose name starts with the string \"aria-\", has at least one character after the hyphen, is a valid attribute local name, and contains no ASCII upper alphas.",
+      "attribute_type": "AttributeTypePrefixedCustom"
+    },
+    {
       "name": "autocapitalize",
       "description": "The autocapitalize attribute is an enumerated attribute whose states are the possible autocapitalization hints. The autocapitalization hint specified by the attribute's state combines with other considerations to form the used autocapitalization hint, which informs the behavior of the user agent.",
       "allowed": {

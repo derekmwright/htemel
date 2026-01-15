@@ -48,121 +48,121 @@ func VideoTernary(condition bool, true htemel.Node, false htemel.Node) *VideoEle
 	return Video(false)
 }
 
-type VideoCrossoriginEnum string
+type VideoCrossorigin string
 
 const (
-	VideoCrossoriginEnumAnonymous      VideoCrossoriginEnum = "anonymous"
-	VideoCrossoriginEnumUseCredentials VideoCrossoriginEnum = "use-credentials"
-	VideoCrossoriginEnumEmpty          VideoCrossoriginEnum = ""
+	VideoCrossoriginAnonymous      VideoCrossorigin = "anonymous"
+	VideoCrossoriginUseCredentials VideoCrossorigin = "use-credentials"
+	VideoCrossoriginEmpty          VideoCrossorigin = ""
 )
 
-type VideoPreloadEnum string
+type VideoPreload string
 
 const (
-	VideoPreloadEnumAuto     VideoPreloadEnum = "auto"
-	VideoPreloadEnumMetadata VideoPreloadEnum = "metadata"
-	VideoPreloadEnumNone     VideoPreloadEnum = "none"
-	VideoPreloadEnumEmpty    VideoPreloadEnum = ""
+	VideoPreloadAuto     VideoPreload = "auto"
+	VideoPreloadMetadata VideoPreload = "metadata"
+	VideoPreloadNone     VideoPreload = "none"
+	VideoPreloadEmpty    VideoPreload = ""
 )
 
-type VideoAutocapitalizeEnum string
+type VideoAutocapitalize string
 
 const (
-	VideoAutocapitalizeEnumCharacters VideoAutocapitalizeEnum = "characters"
-	VideoAutocapitalizeEnumNone       VideoAutocapitalizeEnum = "none"
-	VideoAutocapitalizeEnumOff        VideoAutocapitalizeEnum = "off"
-	VideoAutocapitalizeEnumOn         VideoAutocapitalizeEnum = "on"
-	VideoAutocapitalizeEnumSentences  VideoAutocapitalizeEnum = "sentences"
-	VideoAutocapitalizeEnumWords      VideoAutocapitalizeEnum = "words"
+	VideoAutocapitalizeSentences  VideoAutocapitalize = "sentences"
+	VideoAutocapitalizeWords      VideoAutocapitalize = "words"
+	VideoAutocapitalizeCharacters VideoAutocapitalize = "characters"
+	VideoAutocapitalizeNone       VideoAutocapitalize = "none"
+	VideoAutocapitalizeOff        VideoAutocapitalize = "off"
+	VideoAutocapitalizeOn         VideoAutocapitalize = "on"
 )
 
-type VideoAutocorrectEnum string
+type VideoAutocorrect string
 
 const (
-	VideoAutocorrectEnumOff   VideoAutocorrectEnum = "off"
-	VideoAutocorrectEnumOn    VideoAutocorrectEnum = "on"
-	VideoAutocorrectEnumEmpty VideoAutocorrectEnum = ""
+	VideoAutocorrectOff   VideoAutocorrect = "off"
+	VideoAutocorrectOn    VideoAutocorrect = "on"
+	VideoAutocorrectEmpty VideoAutocorrect = ""
 )
 
-type VideoContenteditableEnum string
+type VideoContenteditable string
 
 const (
-	VideoContenteditableEnumFalse         VideoContenteditableEnum = "false"
-	VideoContenteditableEnumPlaintextOnly VideoContenteditableEnum = "plaintext-only"
-	VideoContenteditableEnumTrue          VideoContenteditableEnum = "true"
-	VideoContenteditableEnumEmpty         VideoContenteditableEnum = ""
+	VideoContenteditableTrue          VideoContenteditable = "true"
+	VideoContenteditableFalse         VideoContenteditable = "false"
+	VideoContenteditablePlaintextOnly VideoContenteditable = "plaintext-only"
+	VideoContenteditableEmpty         VideoContenteditable = ""
 )
 
-type VideoDirEnum string
+type VideoDir string
 
 const (
-	VideoDirEnumAuto VideoDirEnum = "auto"
-	VideoDirEnumLtr  VideoDirEnum = "ltr"
-	VideoDirEnumRtl  VideoDirEnum = "rtl"
+	VideoDirLtr  VideoDir = "ltr"
+	VideoDirRtl  VideoDir = "rtl"
+	VideoDirAuto VideoDir = "auto"
 )
 
-type VideoDraggableEnum string
+type VideoDraggable string
 
 const (
-	VideoDraggableEnumFalse VideoDraggableEnum = "false"
-	VideoDraggableEnumTrue  VideoDraggableEnum = "true"
+	VideoDraggableFalse VideoDraggable = "false"
+	VideoDraggableTrue  VideoDraggable = "true"
 )
 
-type VideoEnterkeyhintEnum string
+type VideoEnterkeyhint string
 
 const (
-	VideoEnterkeyhintEnumDone     VideoEnterkeyhintEnum = "done"
-	VideoEnterkeyhintEnumEnter    VideoEnterkeyhintEnum = "enter"
-	VideoEnterkeyhintEnumGo       VideoEnterkeyhintEnum = "go"
-	VideoEnterkeyhintEnumNext     VideoEnterkeyhintEnum = "next"
-	VideoEnterkeyhintEnumPrevious VideoEnterkeyhintEnum = "previous"
-	VideoEnterkeyhintEnumSearch   VideoEnterkeyhintEnum = "search"
-	VideoEnterkeyhintEnumSend     VideoEnterkeyhintEnum = "send"
+	VideoEnterkeyhintEnter    VideoEnterkeyhint = "enter"
+	VideoEnterkeyhintGo       VideoEnterkeyhint = "go"
+	VideoEnterkeyhintNext     VideoEnterkeyhint = "next"
+	VideoEnterkeyhintPrevious VideoEnterkeyhint = "previous"
+	VideoEnterkeyhintSearch   VideoEnterkeyhint = "search"
+	VideoEnterkeyhintSend     VideoEnterkeyhint = "send"
+	VideoEnterkeyhintDone     VideoEnterkeyhint = "done"
 )
 
-type VideoHiddenEnum string
+type VideoHidden string
 
 const (
-	VideoHiddenEnumHidden     VideoHiddenEnum = "hidden"
-	VideoHiddenEnumUntilFound VideoHiddenEnum = "until-found"
-	VideoHiddenEnumEmpty      VideoHiddenEnum = ""
+	VideoHiddenHidden     VideoHidden = "hidden"
+	VideoHiddenUntilFound VideoHidden = "until-found"
+	VideoHiddenEmpty      VideoHidden = ""
 )
 
-type VideoInputmodeEnum string
+type VideoInputmode string
 
 const (
-	VideoInputmodeEnumUrl     VideoInputmodeEnum = "url"
-	VideoInputmodeEnumDecimal VideoInputmodeEnum = "decimal"
-	VideoInputmodeEnumEmail   VideoInputmodeEnum = "email"
-	VideoInputmodeEnumNone    VideoInputmodeEnum = "none"
-	VideoInputmodeEnumNumeric VideoInputmodeEnum = "numeric"
-	VideoInputmodeEnumSearch  VideoInputmodeEnum = "search"
-	VideoInputmodeEnumTel     VideoInputmodeEnum = "tel"
-	VideoInputmodeEnumText    VideoInputmodeEnum = "text"
+	VideoInputmodeTel     VideoInputmode = "tel"
+	VideoInputmodeText    VideoInputmode = "text"
+	VideoInputmodeUrl     VideoInputmode = "url"
+	VideoInputmodeDecimal VideoInputmode = "decimal"
+	VideoInputmodeEmail   VideoInputmode = "email"
+	VideoInputmodeNone    VideoInputmode = "none"
+	VideoInputmodeNumeric VideoInputmode = "numeric"
+	VideoInputmodeSearch  VideoInputmode = "search"
 )
 
-type VideoSpellcheckEnum string
+type VideoSpellcheck string
 
 const (
-	VideoSpellcheckEnumTrue  VideoSpellcheckEnum = "true"
-	VideoSpellcheckEnumFalse VideoSpellcheckEnum = "false"
-	VideoSpellcheckEnumEmpty VideoSpellcheckEnum = ""
+	VideoSpellcheckFalse VideoSpellcheck = "false"
+	VideoSpellcheckTrue  VideoSpellcheck = "true"
+	VideoSpellcheckEmpty VideoSpellcheck = ""
 )
 
-type VideoTranslateEnum string
+type VideoTranslate string
 
 const (
-	VideoTranslateEnumNo    VideoTranslateEnum = "no"
-	VideoTranslateEnumYes   VideoTranslateEnum = "yes"
-	VideoTranslateEnumEmpty VideoTranslateEnum = ""
+	VideoTranslateNo    VideoTranslate = "no"
+	VideoTranslateYes   VideoTranslate = "yes"
+	VideoTranslateEmpty VideoTranslate = ""
 )
 
-type VideoWritingsuggestionsEnum string
+type VideoWritingsuggestions string
 
 const (
-	VideoWritingsuggestionsEnumFalse VideoWritingsuggestionsEnum = "false"
-	VideoWritingsuggestionsEnumTrue  VideoWritingsuggestionsEnum = "true"
-	VideoWritingsuggestionsEnumEmpty VideoWritingsuggestionsEnum = ""
+	VideoWritingsuggestionsFalse VideoWritingsuggestions = "false"
+	VideoWritingsuggestionsTrue  VideoWritingsuggestions = "true"
+	VideoWritingsuggestionsEmpty VideoWritingsuggestions = ""
 )
 
 type videoAttrs map[string]any
@@ -173,7 +173,7 @@ func (e *VideoElement) Src(s string) *VideoElement {
 	return e
 }
 
-func (e *VideoElement) Crossorigin(a VideoCrossoriginEnum) *VideoElement {
+func (e *VideoElement) Crossorigin(a VideoCrossorigin) *VideoElement {
 	e.attributes["crossorigin"] = a
 
 	return e
@@ -185,7 +185,7 @@ func (e *VideoElement) Poster(s string) *VideoElement {
 	return e
 }
 
-func (e *VideoElement) Preload(a VideoPreloadEnum) *VideoElement {
+func (e *VideoElement) Preload(a VideoPreload) *VideoElement {
 	e.attributes["preload"] = a
 
 	return e
@@ -233,13 +233,25 @@ func (e *VideoElement) Height(i int) *VideoElement {
 	return e
 }
 
-func (e *VideoElement) Autocapitalize(a VideoAutocapitalizeEnum) *VideoElement {
+func (e *VideoElement) AriaUnsafe(name string, s string) *VideoElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *VideoElement) Aria(name string, s string) *VideoElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *VideoElement) Autocapitalize(a VideoAutocapitalize) *VideoElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *VideoElement) Autocorrect(a VideoAutocorrectEnum) *VideoElement {
+func (e *VideoElement) Autocorrect(a VideoAutocorrect) *VideoElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -257,7 +269,7 @@ func (e *VideoElement) Class(s ...string) *VideoElement {
 	return e
 }
 
-func (e *VideoElement) Contenteditable(a VideoContenteditableEnum) *VideoElement {
+func (e *VideoElement) Contenteditable(a VideoContenteditable) *VideoElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -275,25 +287,25 @@ func (e *VideoElement) Data(name string, s string) *VideoElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *VideoElement) Dir(a VideoDirEnum) *VideoElement {
+func (e *VideoElement) Dir(a VideoDir) *VideoElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *VideoElement) Draggable(a VideoDraggableEnum) *VideoElement {
+func (e *VideoElement) Draggable(a VideoDraggable) *VideoElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *VideoElement) Enterkeyhint(a VideoEnterkeyhintEnum) *VideoElement {
+func (e *VideoElement) Enterkeyhint(a VideoEnterkeyhint) *VideoElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *VideoElement) Hidden(a VideoHiddenEnum) *VideoElement {
+func (e *VideoElement) Hidden(a VideoHidden) *VideoElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -311,7 +323,7 @@ func (e *VideoElement) Inert(b bool) *VideoElement {
 	return e
 }
 
-func (e *VideoElement) Inputmode(a VideoInputmodeEnum) *VideoElement {
+func (e *VideoElement) Inputmode(a VideoInputmode) *VideoElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -371,7 +383,7 @@ func (e *VideoElement) Slot(s string) *VideoElement {
 	return e
 }
 
-func (e *VideoElement) Spellcheck(a VideoSpellcheckEnum) *VideoElement {
+func (e *VideoElement) Spellcheck(a VideoSpellcheck) *VideoElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -395,13 +407,13 @@ func (e *VideoElement) Title(s string) *VideoElement {
 	return e
 }
 
-func (e *VideoElement) Translate(a VideoTranslateEnum) *VideoElement {
+func (e *VideoElement) Translate(a VideoTranslate) *VideoElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *VideoElement) Writingsuggestions(a VideoWritingsuggestionsEnum) *VideoElement {
+func (e *VideoElement) Writingsuggestions(a VideoWritingsuggestions) *VideoElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

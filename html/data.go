@@ -48,104 +48,104 @@ func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataEleme
 	return Data(false)
 }
 
-type DataAutocapitalizeEnum string
+type DataAutocapitalize string
 
 const (
-	DataAutocapitalizeEnumCharacters DataAutocapitalizeEnum = "characters"
-	DataAutocapitalizeEnumNone       DataAutocapitalizeEnum = "none"
-	DataAutocapitalizeEnumOff        DataAutocapitalizeEnum = "off"
-	DataAutocapitalizeEnumOn         DataAutocapitalizeEnum = "on"
-	DataAutocapitalizeEnumSentences  DataAutocapitalizeEnum = "sentences"
-	DataAutocapitalizeEnumWords      DataAutocapitalizeEnum = "words"
+	DataAutocapitalizeCharacters DataAutocapitalize = "characters"
+	DataAutocapitalizeNone       DataAutocapitalize = "none"
+	DataAutocapitalizeOff        DataAutocapitalize = "off"
+	DataAutocapitalizeOn         DataAutocapitalize = "on"
+	DataAutocapitalizeSentences  DataAutocapitalize = "sentences"
+	DataAutocapitalizeWords      DataAutocapitalize = "words"
 )
 
-type DataAutocorrectEnum string
+type DataAutocorrect string
 
 const (
-	DataAutocorrectEnumOff   DataAutocorrectEnum = "off"
-	DataAutocorrectEnumOn    DataAutocorrectEnum = "on"
-	DataAutocorrectEnumEmpty DataAutocorrectEnum = ""
+	DataAutocorrectOff   DataAutocorrect = "off"
+	DataAutocorrectOn    DataAutocorrect = "on"
+	DataAutocorrectEmpty DataAutocorrect = ""
 )
 
-type DataContenteditableEnum string
+type DataContenteditable string
 
 const (
-	DataContenteditableEnumFalse         DataContenteditableEnum = "false"
-	DataContenteditableEnumPlaintextOnly DataContenteditableEnum = "plaintext-only"
-	DataContenteditableEnumTrue          DataContenteditableEnum = "true"
-	DataContenteditableEnumEmpty         DataContenteditableEnum = ""
+	DataContenteditableFalse         DataContenteditable = "false"
+	DataContenteditablePlaintextOnly DataContenteditable = "plaintext-only"
+	DataContenteditableTrue          DataContenteditable = "true"
+	DataContenteditableEmpty         DataContenteditable = ""
 )
 
-type DataDirEnum string
+type DataDir string
 
 const (
-	DataDirEnumAuto DataDirEnum = "auto"
-	DataDirEnumLtr  DataDirEnum = "ltr"
-	DataDirEnumRtl  DataDirEnum = "rtl"
+	DataDirLtr  DataDir = "ltr"
+	DataDirRtl  DataDir = "rtl"
+	DataDirAuto DataDir = "auto"
 )
 
-type DataDraggableEnum string
+type DataDraggable string
 
 const (
-	DataDraggableEnumFalse DataDraggableEnum = "false"
-	DataDraggableEnumTrue  DataDraggableEnum = "true"
+	DataDraggableFalse DataDraggable = "false"
+	DataDraggableTrue  DataDraggable = "true"
 )
 
-type DataEnterkeyhintEnum string
+type DataEnterkeyhint string
 
 const (
-	DataEnterkeyhintEnumSearch   DataEnterkeyhintEnum = "search"
-	DataEnterkeyhintEnumSend     DataEnterkeyhintEnum = "send"
-	DataEnterkeyhintEnumDone     DataEnterkeyhintEnum = "done"
-	DataEnterkeyhintEnumEnter    DataEnterkeyhintEnum = "enter"
-	DataEnterkeyhintEnumGo       DataEnterkeyhintEnum = "go"
-	DataEnterkeyhintEnumNext     DataEnterkeyhintEnum = "next"
-	DataEnterkeyhintEnumPrevious DataEnterkeyhintEnum = "previous"
+	DataEnterkeyhintNext     DataEnterkeyhint = "next"
+	DataEnterkeyhintPrevious DataEnterkeyhint = "previous"
+	DataEnterkeyhintSearch   DataEnterkeyhint = "search"
+	DataEnterkeyhintSend     DataEnterkeyhint = "send"
+	DataEnterkeyhintDone     DataEnterkeyhint = "done"
+	DataEnterkeyhintEnter    DataEnterkeyhint = "enter"
+	DataEnterkeyhintGo       DataEnterkeyhint = "go"
 )
 
-type DataHiddenEnum string
+type DataHidden string
 
 const (
-	DataHiddenEnumHidden     DataHiddenEnum = "hidden"
-	DataHiddenEnumUntilFound DataHiddenEnum = "until-found"
-	DataHiddenEnumEmpty      DataHiddenEnum = ""
+	DataHiddenUntilFound DataHidden = "until-found"
+	DataHiddenHidden     DataHidden = "hidden"
+	DataHiddenEmpty      DataHidden = ""
 )
 
-type DataInputmodeEnum string
+type DataInputmode string
 
 const (
-	DataInputmodeEnumSearch  DataInputmodeEnum = "search"
-	DataInputmodeEnumTel     DataInputmodeEnum = "tel"
-	DataInputmodeEnumText    DataInputmodeEnum = "text"
-	DataInputmodeEnumUrl     DataInputmodeEnum = "url"
-	DataInputmodeEnumDecimal DataInputmodeEnum = "decimal"
-	DataInputmodeEnumEmail   DataInputmodeEnum = "email"
-	DataInputmodeEnumNone    DataInputmodeEnum = "none"
-	DataInputmodeEnumNumeric DataInputmodeEnum = "numeric"
+	DataInputmodeSearch  DataInputmode = "search"
+	DataInputmodeTel     DataInputmode = "tel"
+	DataInputmodeText    DataInputmode = "text"
+	DataInputmodeUrl     DataInputmode = "url"
+	DataInputmodeDecimal DataInputmode = "decimal"
+	DataInputmodeEmail   DataInputmode = "email"
+	DataInputmodeNone    DataInputmode = "none"
+	DataInputmodeNumeric DataInputmode = "numeric"
 )
 
-type DataSpellcheckEnum string
+type DataSpellcheck string
 
 const (
-	DataSpellcheckEnumFalse DataSpellcheckEnum = "false"
-	DataSpellcheckEnumTrue  DataSpellcheckEnum = "true"
-	DataSpellcheckEnumEmpty DataSpellcheckEnum = ""
+	DataSpellcheckFalse DataSpellcheck = "false"
+	DataSpellcheckTrue  DataSpellcheck = "true"
+	DataSpellcheckEmpty DataSpellcheck = ""
 )
 
-type DataTranslateEnum string
+type DataTranslate string
 
 const (
-	DataTranslateEnumNo    DataTranslateEnum = "no"
-	DataTranslateEnumYes   DataTranslateEnum = "yes"
-	DataTranslateEnumEmpty DataTranslateEnum = ""
+	DataTranslateNo    DataTranslate = "no"
+	DataTranslateYes   DataTranslate = "yes"
+	DataTranslateEmpty DataTranslate = ""
 )
 
-type DataWritingsuggestionsEnum string
+type DataWritingsuggestions string
 
 const (
-	DataWritingsuggestionsEnumFalse DataWritingsuggestionsEnum = "false"
-	DataWritingsuggestionsEnumTrue  DataWritingsuggestionsEnum = "true"
-	DataWritingsuggestionsEnumEmpty DataWritingsuggestionsEnum = ""
+	DataWritingsuggestionsFalse DataWritingsuggestions = "false"
+	DataWritingsuggestionsTrue  DataWritingsuggestions = "true"
+	DataWritingsuggestionsEmpty DataWritingsuggestions = ""
 )
 
 type dataAttrs map[string]any
@@ -156,13 +156,25 @@ func (e *DataElement) Value(s string) *DataElement {
 	return e
 }
 
-func (e *DataElement) Autocapitalize(a DataAutocapitalizeEnum) *DataElement {
+func (e *DataElement) AriaUnsafe(name string, s string) *DataElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DataElement) Aria(name string, s string) *DataElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *DataElement) Autocapitalize(a DataAutocapitalize) *DataElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *DataElement) Autocorrect(a DataAutocorrectEnum) *DataElement {
+func (e *DataElement) Autocorrect(a DataAutocorrect) *DataElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -180,7 +192,7 @@ func (e *DataElement) Class(s ...string) *DataElement {
 	return e
 }
 
-func (e *DataElement) Contenteditable(a DataContenteditableEnum) *DataElement {
+func (e *DataElement) Contenteditable(a DataContenteditable) *DataElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -198,25 +210,25 @@ func (e *DataElement) Data(name string, s string) *DataElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *DataElement) Dir(a DataDirEnum) *DataElement {
+func (e *DataElement) Dir(a DataDir) *DataElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *DataElement) Draggable(a DataDraggableEnum) *DataElement {
+func (e *DataElement) Draggable(a DataDraggable) *DataElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *DataElement) Enterkeyhint(a DataEnterkeyhintEnum) *DataElement {
+func (e *DataElement) Enterkeyhint(a DataEnterkeyhint) *DataElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *DataElement) Hidden(a DataHiddenEnum) *DataElement {
+func (e *DataElement) Hidden(a DataHidden) *DataElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -234,7 +246,7 @@ func (e *DataElement) Inert(b bool) *DataElement {
 	return e
 }
 
-func (e *DataElement) Inputmode(a DataInputmodeEnum) *DataElement {
+func (e *DataElement) Inputmode(a DataInputmode) *DataElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -294,7 +306,7 @@ func (e *DataElement) Slot(s string) *DataElement {
 	return e
 }
 
-func (e *DataElement) Spellcheck(a DataSpellcheckEnum) *DataElement {
+func (e *DataElement) Spellcheck(a DataSpellcheck) *DataElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -318,13 +330,13 @@ func (e *DataElement) Title(s string) *DataElement {
 	return e
 }
 
-func (e *DataElement) Translate(a DataTranslateEnum) *DataElement {
+func (e *DataElement) Translate(a DataTranslate) *DataElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *DataElement) Writingsuggestions(a DataWritingsuggestionsEnum) *DataElement {
+func (e *DataElement) Writingsuggestions(a DataWritingsuggestions) *DataElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,115 +48,127 @@ func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderE
 	return Header(false)
 }
 
-type HeaderAutocapitalizeEnum string
+type HeaderAutocapitalize string
 
 const (
-	HeaderAutocapitalizeEnumCharacters HeaderAutocapitalizeEnum = "characters"
-	HeaderAutocapitalizeEnumNone       HeaderAutocapitalizeEnum = "none"
-	HeaderAutocapitalizeEnumOff        HeaderAutocapitalizeEnum = "off"
-	HeaderAutocapitalizeEnumOn         HeaderAutocapitalizeEnum = "on"
-	HeaderAutocapitalizeEnumSentences  HeaderAutocapitalizeEnum = "sentences"
-	HeaderAutocapitalizeEnumWords      HeaderAutocapitalizeEnum = "words"
+	HeaderAutocapitalizeOff        HeaderAutocapitalize = "off"
+	HeaderAutocapitalizeOn         HeaderAutocapitalize = "on"
+	HeaderAutocapitalizeSentences  HeaderAutocapitalize = "sentences"
+	HeaderAutocapitalizeWords      HeaderAutocapitalize = "words"
+	HeaderAutocapitalizeCharacters HeaderAutocapitalize = "characters"
+	HeaderAutocapitalizeNone       HeaderAutocapitalize = "none"
 )
 
-type HeaderAutocorrectEnum string
+type HeaderAutocorrect string
 
 const (
-	HeaderAutocorrectEnumOff   HeaderAutocorrectEnum = "off"
-	HeaderAutocorrectEnumOn    HeaderAutocorrectEnum = "on"
-	HeaderAutocorrectEnumEmpty HeaderAutocorrectEnum = ""
+	HeaderAutocorrectOff   HeaderAutocorrect = "off"
+	HeaderAutocorrectOn    HeaderAutocorrect = "on"
+	HeaderAutocorrectEmpty HeaderAutocorrect = ""
 )
 
-type HeaderContenteditableEnum string
+type HeaderContenteditable string
 
 const (
-	HeaderContenteditableEnumFalse         HeaderContenteditableEnum = "false"
-	HeaderContenteditableEnumPlaintextOnly HeaderContenteditableEnum = "plaintext-only"
-	HeaderContenteditableEnumTrue          HeaderContenteditableEnum = "true"
-	HeaderContenteditableEnumEmpty         HeaderContenteditableEnum = ""
+	HeaderContenteditableTrue          HeaderContenteditable = "true"
+	HeaderContenteditableFalse         HeaderContenteditable = "false"
+	HeaderContenteditablePlaintextOnly HeaderContenteditable = "plaintext-only"
+	HeaderContenteditableEmpty         HeaderContenteditable = ""
 )
 
-type HeaderDirEnum string
+type HeaderDir string
 
 const (
-	HeaderDirEnumAuto HeaderDirEnum = "auto"
-	HeaderDirEnumLtr  HeaderDirEnum = "ltr"
-	HeaderDirEnumRtl  HeaderDirEnum = "rtl"
+	HeaderDirAuto HeaderDir = "auto"
+	HeaderDirLtr  HeaderDir = "ltr"
+	HeaderDirRtl  HeaderDir = "rtl"
 )
 
-type HeaderDraggableEnum string
+type HeaderDraggable string
 
 const (
-	HeaderDraggableEnumFalse HeaderDraggableEnum = "false"
-	HeaderDraggableEnumTrue  HeaderDraggableEnum = "true"
+	HeaderDraggableFalse HeaderDraggable = "false"
+	HeaderDraggableTrue  HeaderDraggable = "true"
 )
 
-type HeaderEnterkeyhintEnum string
+type HeaderEnterkeyhint string
 
 const (
-	HeaderEnterkeyhintEnumGo       HeaderEnterkeyhintEnum = "go"
-	HeaderEnterkeyhintEnumNext     HeaderEnterkeyhintEnum = "next"
-	HeaderEnterkeyhintEnumPrevious HeaderEnterkeyhintEnum = "previous"
-	HeaderEnterkeyhintEnumSearch   HeaderEnterkeyhintEnum = "search"
-	HeaderEnterkeyhintEnumSend     HeaderEnterkeyhintEnum = "send"
-	HeaderEnterkeyhintEnumDone     HeaderEnterkeyhintEnum = "done"
-	HeaderEnterkeyhintEnumEnter    HeaderEnterkeyhintEnum = "enter"
+	HeaderEnterkeyhintNext     HeaderEnterkeyhint = "next"
+	HeaderEnterkeyhintPrevious HeaderEnterkeyhint = "previous"
+	HeaderEnterkeyhintSearch   HeaderEnterkeyhint = "search"
+	HeaderEnterkeyhintSend     HeaderEnterkeyhint = "send"
+	HeaderEnterkeyhintDone     HeaderEnterkeyhint = "done"
+	HeaderEnterkeyhintEnter    HeaderEnterkeyhint = "enter"
+	HeaderEnterkeyhintGo       HeaderEnterkeyhint = "go"
 )
 
-type HeaderHiddenEnum string
+type HeaderHidden string
 
 const (
-	HeaderHiddenEnumHidden     HeaderHiddenEnum = "hidden"
-	HeaderHiddenEnumUntilFound HeaderHiddenEnum = "until-found"
-	HeaderHiddenEnumEmpty      HeaderHiddenEnum = ""
+	HeaderHiddenHidden     HeaderHidden = "hidden"
+	HeaderHiddenUntilFound HeaderHidden = "until-found"
+	HeaderHiddenEmpty      HeaderHidden = ""
 )
 
-type HeaderInputmodeEnum string
+type HeaderInputmode string
 
 const (
-	HeaderInputmodeEnumText    HeaderInputmodeEnum = "text"
-	HeaderInputmodeEnumUrl     HeaderInputmodeEnum = "url"
-	HeaderInputmodeEnumDecimal HeaderInputmodeEnum = "decimal"
-	HeaderInputmodeEnumEmail   HeaderInputmodeEnum = "email"
-	HeaderInputmodeEnumNone    HeaderInputmodeEnum = "none"
-	HeaderInputmodeEnumNumeric HeaderInputmodeEnum = "numeric"
-	HeaderInputmodeEnumSearch  HeaderInputmodeEnum = "search"
-	HeaderInputmodeEnumTel     HeaderInputmodeEnum = "tel"
+	HeaderInputmodeNone    HeaderInputmode = "none"
+	HeaderInputmodeNumeric HeaderInputmode = "numeric"
+	HeaderInputmodeSearch  HeaderInputmode = "search"
+	HeaderInputmodeTel     HeaderInputmode = "tel"
+	HeaderInputmodeText    HeaderInputmode = "text"
+	HeaderInputmodeUrl     HeaderInputmode = "url"
+	HeaderInputmodeDecimal HeaderInputmode = "decimal"
+	HeaderInputmodeEmail   HeaderInputmode = "email"
 )
 
-type HeaderSpellcheckEnum string
+type HeaderSpellcheck string
 
 const (
-	HeaderSpellcheckEnumTrue  HeaderSpellcheckEnum = "true"
-	HeaderSpellcheckEnumFalse HeaderSpellcheckEnum = "false"
-	HeaderSpellcheckEnumEmpty HeaderSpellcheckEnum = ""
+	HeaderSpellcheckFalse HeaderSpellcheck = "false"
+	HeaderSpellcheckTrue  HeaderSpellcheck = "true"
+	HeaderSpellcheckEmpty HeaderSpellcheck = ""
 )
 
-type HeaderTranslateEnum string
+type HeaderTranslate string
 
 const (
-	HeaderTranslateEnumNo    HeaderTranslateEnum = "no"
-	HeaderTranslateEnumYes   HeaderTranslateEnum = "yes"
-	HeaderTranslateEnumEmpty HeaderTranslateEnum = ""
+	HeaderTranslateNo    HeaderTranslate = "no"
+	HeaderTranslateYes   HeaderTranslate = "yes"
+	HeaderTranslateEmpty HeaderTranslate = ""
 )
 
-type HeaderWritingsuggestionsEnum string
+type HeaderWritingsuggestions string
 
 const (
-	HeaderWritingsuggestionsEnumFalse HeaderWritingsuggestionsEnum = "false"
-	HeaderWritingsuggestionsEnumTrue  HeaderWritingsuggestionsEnum = "true"
-	HeaderWritingsuggestionsEnumEmpty HeaderWritingsuggestionsEnum = ""
+	HeaderWritingsuggestionsFalse HeaderWritingsuggestions = "false"
+	HeaderWritingsuggestionsTrue  HeaderWritingsuggestions = "true"
+	HeaderWritingsuggestionsEmpty HeaderWritingsuggestions = ""
 )
 
 type headerAttrs map[string]any
 
-func (e *HeaderElement) Autocapitalize(a HeaderAutocapitalizeEnum) *HeaderElement {
+func (e *HeaderElement) AriaUnsafe(name string, s string) *HeaderElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *HeaderElement) Aria(name string, s string) *HeaderElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *HeaderElement) Autocapitalize(a HeaderAutocapitalize) *HeaderElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *HeaderElement) Autocorrect(a HeaderAutocorrectEnum) *HeaderElement {
+func (e *HeaderElement) Autocorrect(a HeaderAutocorrect) *HeaderElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *HeaderElement) Class(s ...string) *HeaderElement {
 	return e
 }
 
-func (e *HeaderElement) Contenteditable(a HeaderContenteditableEnum) *HeaderElement {
+func (e *HeaderElement) Contenteditable(a HeaderContenteditable) *HeaderElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *HeaderElement) Data(name string, s string) *HeaderElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *HeaderElement) Dir(a HeaderDirEnum) *HeaderElement {
+func (e *HeaderElement) Dir(a HeaderDir) *HeaderElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *HeaderElement) Draggable(a HeaderDraggableEnum) *HeaderElement {
+func (e *HeaderElement) Draggable(a HeaderDraggable) *HeaderElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *HeaderElement) Enterkeyhint(a HeaderEnterkeyhintEnum) *HeaderElement {
+func (e *HeaderElement) Enterkeyhint(a HeaderEnterkeyhint) *HeaderElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *HeaderElement) Hidden(a HeaderHiddenEnum) *HeaderElement {
+func (e *HeaderElement) Hidden(a HeaderHidden) *HeaderElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *HeaderElement) Inert(b bool) *HeaderElement {
 	return e
 }
 
-func (e *HeaderElement) Inputmode(a HeaderInputmodeEnum) *HeaderElement {
+func (e *HeaderElement) Inputmode(a HeaderInputmode) *HeaderElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *HeaderElement) Slot(s string) *HeaderElement {
 	return e
 }
 
-func (e *HeaderElement) Spellcheck(a HeaderSpellcheckEnum) *HeaderElement {
+func (e *HeaderElement) Spellcheck(a HeaderSpellcheck) *HeaderElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *HeaderElement) Title(s string) *HeaderElement {
 	return e
 }
 
-func (e *HeaderElement) Translate(a HeaderTranslateEnum) *HeaderElement {
+func (e *HeaderElement) Translate(a HeaderTranslate) *HeaderElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *HeaderElement) Writingsuggestions(a HeaderWritingsuggestionsEnum) *HeaderElement {
+func (e *HeaderElement) Writingsuggestions(a HeaderWritingsuggestions) *HeaderElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

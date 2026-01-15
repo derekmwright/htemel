@@ -48,104 +48,104 @@ func ColgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Colgr
 	return Colgroup(false)
 }
 
-type ColgroupAutocapitalizeEnum string
+type ColgroupAutocapitalize string
 
 const (
-	ColgroupAutocapitalizeEnumOff        ColgroupAutocapitalizeEnum = "off"
-	ColgroupAutocapitalizeEnumOn         ColgroupAutocapitalizeEnum = "on"
-	ColgroupAutocapitalizeEnumSentences  ColgroupAutocapitalizeEnum = "sentences"
-	ColgroupAutocapitalizeEnumWords      ColgroupAutocapitalizeEnum = "words"
-	ColgroupAutocapitalizeEnumCharacters ColgroupAutocapitalizeEnum = "characters"
-	ColgroupAutocapitalizeEnumNone       ColgroupAutocapitalizeEnum = "none"
+	ColgroupAutocapitalizeNone       ColgroupAutocapitalize = "none"
+	ColgroupAutocapitalizeOff        ColgroupAutocapitalize = "off"
+	ColgroupAutocapitalizeOn         ColgroupAutocapitalize = "on"
+	ColgroupAutocapitalizeSentences  ColgroupAutocapitalize = "sentences"
+	ColgroupAutocapitalizeWords      ColgroupAutocapitalize = "words"
+	ColgroupAutocapitalizeCharacters ColgroupAutocapitalize = "characters"
 )
 
-type ColgroupAutocorrectEnum string
+type ColgroupAutocorrect string
 
 const (
-	ColgroupAutocorrectEnumOff   ColgroupAutocorrectEnum = "off"
-	ColgroupAutocorrectEnumOn    ColgroupAutocorrectEnum = "on"
-	ColgroupAutocorrectEnumEmpty ColgroupAutocorrectEnum = ""
+	ColgroupAutocorrectOn    ColgroupAutocorrect = "on"
+	ColgroupAutocorrectOff   ColgroupAutocorrect = "off"
+	ColgroupAutocorrectEmpty ColgroupAutocorrect = ""
 )
 
-type ColgroupContenteditableEnum string
+type ColgroupContenteditable string
 
 const (
-	ColgroupContenteditableEnumFalse         ColgroupContenteditableEnum = "false"
-	ColgroupContenteditableEnumPlaintextOnly ColgroupContenteditableEnum = "plaintext-only"
-	ColgroupContenteditableEnumTrue          ColgroupContenteditableEnum = "true"
-	ColgroupContenteditableEnumEmpty         ColgroupContenteditableEnum = ""
+	ColgroupContenteditableTrue          ColgroupContenteditable = "true"
+	ColgroupContenteditableFalse         ColgroupContenteditable = "false"
+	ColgroupContenteditablePlaintextOnly ColgroupContenteditable = "plaintext-only"
+	ColgroupContenteditableEmpty         ColgroupContenteditable = ""
 )
 
-type ColgroupDirEnum string
+type ColgroupDir string
 
 const (
-	ColgroupDirEnumAuto ColgroupDirEnum = "auto"
-	ColgroupDirEnumLtr  ColgroupDirEnum = "ltr"
-	ColgroupDirEnumRtl  ColgroupDirEnum = "rtl"
+	ColgroupDirLtr  ColgroupDir = "ltr"
+	ColgroupDirRtl  ColgroupDir = "rtl"
+	ColgroupDirAuto ColgroupDir = "auto"
 )
 
-type ColgroupDraggableEnum string
+type ColgroupDraggable string
 
 const (
-	ColgroupDraggableEnumFalse ColgroupDraggableEnum = "false"
-	ColgroupDraggableEnumTrue  ColgroupDraggableEnum = "true"
+	ColgroupDraggableFalse ColgroupDraggable = "false"
+	ColgroupDraggableTrue  ColgroupDraggable = "true"
 )
 
-type ColgroupEnterkeyhintEnum string
+type ColgroupEnterkeyhint string
 
 const (
-	ColgroupEnterkeyhintEnumGo       ColgroupEnterkeyhintEnum = "go"
-	ColgroupEnterkeyhintEnumNext     ColgroupEnterkeyhintEnum = "next"
-	ColgroupEnterkeyhintEnumPrevious ColgroupEnterkeyhintEnum = "previous"
-	ColgroupEnterkeyhintEnumSearch   ColgroupEnterkeyhintEnum = "search"
-	ColgroupEnterkeyhintEnumSend     ColgroupEnterkeyhintEnum = "send"
-	ColgroupEnterkeyhintEnumDone     ColgroupEnterkeyhintEnum = "done"
-	ColgroupEnterkeyhintEnumEnter    ColgroupEnterkeyhintEnum = "enter"
+	ColgroupEnterkeyhintEnter    ColgroupEnterkeyhint = "enter"
+	ColgroupEnterkeyhintGo       ColgroupEnterkeyhint = "go"
+	ColgroupEnterkeyhintNext     ColgroupEnterkeyhint = "next"
+	ColgroupEnterkeyhintPrevious ColgroupEnterkeyhint = "previous"
+	ColgroupEnterkeyhintSearch   ColgroupEnterkeyhint = "search"
+	ColgroupEnterkeyhintSend     ColgroupEnterkeyhint = "send"
+	ColgroupEnterkeyhintDone     ColgroupEnterkeyhint = "done"
 )
 
-type ColgroupHiddenEnum string
+type ColgroupHidden string
 
 const (
-	ColgroupHiddenEnumHidden     ColgroupHiddenEnum = "hidden"
-	ColgroupHiddenEnumUntilFound ColgroupHiddenEnum = "until-found"
-	ColgroupHiddenEnumEmpty      ColgroupHiddenEnum = ""
+	ColgroupHiddenHidden     ColgroupHidden = "hidden"
+	ColgroupHiddenUntilFound ColgroupHidden = "until-found"
+	ColgroupHiddenEmpty      ColgroupHidden = ""
 )
 
-type ColgroupInputmodeEnum string
+type ColgroupInputmode string
 
 const (
-	ColgroupInputmodeEnumNumeric ColgroupInputmodeEnum = "numeric"
-	ColgroupInputmodeEnumSearch  ColgroupInputmodeEnum = "search"
-	ColgroupInputmodeEnumTel     ColgroupInputmodeEnum = "tel"
-	ColgroupInputmodeEnumText    ColgroupInputmodeEnum = "text"
-	ColgroupInputmodeEnumUrl     ColgroupInputmodeEnum = "url"
-	ColgroupInputmodeEnumDecimal ColgroupInputmodeEnum = "decimal"
-	ColgroupInputmodeEnumEmail   ColgroupInputmodeEnum = "email"
-	ColgroupInputmodeEnumNone    ColgroupInputmodeEnum = "none"
+	ColgroupInputmodeNone    ColgroupInputmode = "none"
+	ColgroupInputmodeNumeric ColgroupInputmode = "numeric"
+	ColgroupInputmodeSearch  ColgroupInputmode = "search"
+	ColgroupInputmodeTel     ColgroupInputmode = "tel"
+	ColgroupInputmodeText    ColgroupInputmode = "text"
+	ColgroupInputmodeUrl     ColgroupInputmode = "url"
+	ColgroupInputmodeDecimal ColgroupInputmode = "decimal"
+	ColgroupInputmodeEmail   ColgroupInputmode = "email"
 )
 
-type ColgroupSpellcheckEnum string
+type ColgroupSpellcheck string
 
 const (
-	ColgroupSpellcheckEnumFalse ColgroupSpellcheckEnum = "false"
-	ColgroupSpellcheckEnumTrue  ColgroupSpellcheckEnum = "true"
-	ColgroupSpellcheckEnumEmpty ColgroupSpellcheckEnum = ""
+	ColgroupSpellcheckFalse ColgroupSpellcheck = "false"
+	ColgroupSpellcheckTrue  ColgroupSpellcheck = "true"
+	ColgroupSpellcheckEmpty ColgroupSpellcheck = ""
 )
 
-type ColgroupTranslateEnum string
+type ColgroupTranslate string
 
 const (
-	ColgroupTranslateEnumNo    ColgroupTranslateEnum = "no"
-	ColgroupTranslateEnumYes   ColgroupTranslateEnum = "yes"
-	ColgroupTranslateEnumEmpty ColgroupTranslateEnum = ""
+	ColgroupTranslateNo    ColgroupTranslate = "no"
+	ColgroupTranslateYes   ColgroupTranslate = "yes"
+	ColgroupTranslateEmpty ColgroupTranslate = ""
 )
 
-type ColgroupWritingsuggestionsEnum string
+type ColgroupWritingsuggestions string
 
 const (
-	ColgroupWritingsuggestionsEnumFalse ColgroupWritingsuggestionsEnum = "false"
-	ColgroupWritingsuggestionsEnumTrue  ColgroupWritingsuggestionsEnum = "true"
-	ColgroupWritingsuggestionsEnumEmpty ColgroupWritingsuggestionsEnum = ""
+	ColgroupWritingsuggestionsFalse ColgroupWritingsuggestions = "false"
+	ColgroupWritingsuggestionsTrue  ColgroupWritingsuggestions = "true"
+	ColgroupWritingsuggestionsEmpty ColgroupWritingsuggestions = ""
 )
 
 type colgroupAttrs map[string]any
@@ -156,13 +156,25 @@ func (e *ColgroupElement) Span(i int) *ColgroupElement {
 	return e
 }
 
-func (e *ColgroupElement) Autocapitalize(a ColgroupAutocapitalizeEnum) *ColgroupElement {
+func (e *ColgroupElement) AriaUnsafe(name string, s string) *ColgroupElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ColgroupElement) Aria(name string, s string) *ColgroupElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *ColgroupElement) Autocapitalize(a ColgroupAutocapitalize) *ColgroupElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *ColgroupElement) Autocorrect(a ColgroupAutocorrectEnum) *ColgroupElement {
+func (e *ColgroupElement) Autocorrect(a ColgroupAutocorrect) *ColgroupElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -180,7 +192,7 @@ func (e *ColgroupElement) Class(s ...string) *ColgroupElement {
 	return e
 }
 
-func (e *ColgroupElement) Contenteditable(a ColgroupContenteditableEnum) *ColgroupElement {
+func (e *ColgroupElement) Contenteditable(a ColgroupContenteditable) *ColgroupElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -198,25 +210,25 @@ func (e *ColgroupElement) Data(name string, s string) *ColgroupElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *ColgroupElement) Dir(a ColgroupDirEnum) *ColgroupElement {
+func (e *ColgroupElement) Dir(a ColgroupDir) *ColgroupElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *ColgroupElement) Draggable(a ColgroupDraggableEnum) *ColgroupElement {
+func (e *ColgroupElement) Draggable(a ColgroupDraggable) *ColgroupElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *ColgroupElement) Enterkeyhint(a ColgroupEnterkeyhintEnum) *ColgroupElement {
+func (e *ColgroupElement) Enterkeyhint(a ColgroupEnterkeyhint) *ColgroupElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *ColgroupElement) Hidden(a ColgroupHiddenEnum) *ColgroupElement {
+func (e *ColgroupElement) Hidden(a ColgroupHidden) *ColgroupElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -234,7 +246,7 @@ func (e *ColgroupElement) Inert(b bool) *ColgroupElement {
 	return e
 }
 
-func (e *ColgroupElement) Inputmode(a ColgroupInputmodeEnum) *ColgroupElement {
+func (e *ColgroupElement) Inputmode(a ColgroupInputmode) *ColgroupElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -294,7 +306,7 @@ func (e *ColgroupElement) Slot(s string) *ColgroupElement {
 	return e
 }
 
-func (e *ColgroupElement) Spellcheck(a ColgroupSpellcheckEnum) *ColgroupElement {
+func (e *ColgroupElement) Spellcheck(a ColgroupSpellcheck) *ColgroupElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -318,13 +330,13 @@ func (e *ColgroupElement) Title(s string) *ColgroupElement {
 	return e
 }
 
-func (e *ColgroupElement) Translate(a ColgroupTranslateEnum) *ColgroupElement {
+func (e *ColgroupElement) Translate(a ColgroupTranslate) *ColgroupElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *ColgroupElement) Writingsuggestions(a ColgroupWritingsuggestionsEnum) *ColgroupElement {
+func (e *ColgroupElement) Writingsuggestions(a ColgroupWritingsuggestions) *ColgroupElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,115 +48,127 @@ func RtTernary(condition bool, true htemel.Node, false htemel.Node) *RtElement {
 	return Rt(false)
 }
 
-type RtAutocapitalizeEnum string
+type RtAutocapitalize string
 
 const (
-	RtAutocapitalizeEnumNone       RtAutocapitalizeEnum = "none"
-	RtAutocapitalizeEnumOff        RtAutocapitalizeEnum = "off"
-	RtAutocapitalizeEnumOn         RtAutocapitalizeEnum = "on"
-	RtAutocapitalizeEnumSentences  RtAutocapitalizeEnum = "sentences"
-	RtAutocapitalizeEnumWords      RtAutocapitalizeEnum = "words"
-	RtAutocapitalizeEnumCharacters RtAutocapitalizeEnum = "characters"
+	RtAutocapitalizeNone       RtAutocapitalize = "none"
+	RtAutocapitalizeOff        RtAutocapitalize = "off"
+	RtAutocapitalizeOn         RtAutocapitalize = "on"
+	RtAutocapitalizeSentences  RtAutocapitalize = "sentences"
+	RtAutocapitalizeWords      RtAutocapitalize = "words"
+	RtAutocapitalizeCharacters RtAutocapitalize = "characters"
 )
 
-type RtAutocorrectEnum string
+type RtAutocorrect string
 
 const (
-	RtAutocorrectEnumOff   RtAutocorrectEnum = "off"
-	RtAutocorrectEnumOn    RtAutocorrectEnum = "on"
-	RtAutocorrectEnumEmpty RtAutocorrectEnum = ""
+	RtAutocorrectOff   RtAutocorrect = "off"
+	RtAutocorrectOn    RtAutocorrect = "on"
+	RtAutocorrectEmpty RtAutocorrect = ""
 )
 
-type RtContenteditableEnum string
+type RtContenteditable string
 
 const (
-	RtContenteditableEnumFalse         RtContenteditableEnum = "false"
-	RtContenteditableEnumPlaintextOnly RtContenteditableEnum = "plaintext-only"
-	RtContenteditableEnumTrue          RtContenteditableEnum = "true"
-	RtContenteditableEnumEmpty         RtContenteditableEnum = ""
+	RtContenteditableFalse         RtContenteditable = "false"
+	RtContenteditablePlaintextOnly RtContenteditable = "plaintext-only"
+	RtContenteditableTrue          RtContenteditable = "true"
+	RtContenteditableEmpty         RtContenteditable = ""
 )
 
-type RtDirEnum string
+type RtDir string
 
 const (
-	RtDirEnumAuto RtDirEnum = "auto"
-	RtDirEnumLtr  RtDirEnum = "ltr"
-	RtDirEnumRtl  RtDirEnum = "rtl"
+	RtDirAuto RtDir = "auto"
+	RtDirLtr  RtDir = "ltr"
+	RtDirRtl  RtDir = "rtl"
 )
 
-type RtDraggableEnum string
+type RtDraggable string
 
 const (
-	RtDraggableEnumFalse RtDraggableEnum = "false"
-	RtDraggableEnumTrue  RtDraggableEnum = "true"
+	RtDraggableFalse RtDraggable = "false"
+	RtDraggableTrue  RtDraggable = "true"
 )
 
-type RtEnterkeyhintEnum string
+type RtEnterkeyhint string
 
 const (
-	RtEnterkeyhintEnumDone     RtEnterkeyhintEnum = "done"
-	RtEnterkeyhintEnumEnter    RtEnterkeyhintEnum = "enter"
-	RtEnterkeyhintEnumGo       RtEnterkeyhintEnum = "go"
-	RtEnterkeyhintEnumNext     RtEnterkeyhintEnum = "next"
-	RtEnterkeyhintEnumPrevious RtEnterkeyhintEnum = "previous"
-	RtEnterkeyhintEnumSearch   RtEnterkeyhintEnum = "search"
-	RtEnterkeyhintEnumSend     RtEnterkeyhintEnum = "send"
+	RtEnterkeyhintDone     RtEnterkeyhint = "done"
+	RtEnterkeyhintEnter    RtEnterkeyhint = "enter"
+	RtEnterkeyhintGo       RtEnterkeyhint = "go"
+	RtEnterkeyhintNext     RtEnterkeyhint = "next"
+	RtEnterkeyhintPrevious RtEnterkeyhint = "previous"
+	RtEnterkeyhintSearch   RtEnterkeyhint = "search"
+	RtEnterkeyhintSend     RtEnterkeyhint = "send"
 )
 
-type RtHiddenEnum string
+type RtHidden string
 
 const (
-	RtHiddenEnumHidden     RtHiddenEnum = "hidden"
-	RtHiddenEnumUntilFound RtHiddenEnum = "until-found"
-	RtHiddenEnumEmpty      RtHiddenEnum = ""
+	RtHiddenHidden     RtHidden = "hidden"
+	RtHiddenUntilFound RtHidden = "until-found"
+	RtHiddenEmpty      RtHidden = ""
 )
 
-type RtInputmodeEnum string
+type RtInputmode string
 
 const (
-	RtInputmodeEnumEmail   RtInputmodeEnum = "email"
-	RtInputmodeEnumNone    RtInputmodeEnum = "none"
-	RtInputmodeEnumNumeric RtInputmodeEnum = "numeric"
-	RtInputmodeEnumSearch  RtInputmodeEnum = "search"
-	RtInputmodeEnumTel     RtInputmodeEnum = "tel"
-	RtInputmodeEnumText    RtInputmodeEnum = "text"
-	RtInputmodeEnumUrl     RtInputmodeEnum = "url"
-	RtInputmodeEnumDecimal RtInputmodeEnum = "decimal"
+	RtInputmodeDecimal RtInputmode = "decimal"
+	RtInputmodeEmail   RtInputmode = "email"
+	RtInputmodeNone    RtInputmode = "none"
+	RtInputmodeNumeric RtInputmode = "numeric"
+	RtInputmodeSearch  RtInputmode = "search"
+	RtInputmodeTel     RtInputmode = "tel"
+	RtInputmodeText    RtInputmode = "text"
+	RtInputmodeUrl     RtInputmode = "url"
 )
 
-type RtSpellcheckEnum string
+type RtSpellcheck string
 
 const (
-	RtSpellcheckEnumFalse RtSpellcheckEnum = "false"
-	RtSpellcheckEnumTrue  RtSpellcheckEnum = "true"
-	RtSpellcheckEnumEmpty RtSpellcheckEnum = ""
+	RtSpellcheckFalse RtSpellcheck = "false"
+	RtSpellcheckTrue  RtSpellcheck = "true"
+	RtSpellcheckEmpty RtSpellcheck = ""
 )
 
-type RtTranslateEnum string
+type RtTranslate string
 
 const (
-	RtTranslateEnumNo    RtTranslateEnum = "no"
-	RtTranslateEnumYes   RtTranslateEnum = "yes"
-	RtTranslateEnumEmpty RtTranslateEnum = ""
+	RtTranslateNo    RtTranslate = "no"
+	RtTranslateYes   RtTranslate = "yes"
+	RtTranslateEmpty RtTranslate = ""
 )
 
-type RtWritingsuggestionsEnum string
+type RtWritingsuggestions string
 
 const (
-	RtWritingsuggestionsEnumFalse RtWritingsuggestionsEnum = "false"
-	RtWritingsuggestionsEnumTrue  RtWritingsuggestionsEnum = "true"
-	RtWritingsuggestionsEnumEmpty RtWritingsuggestionsEnum = ""
+	RtWritingsuggestionsFalse RtWritingsuggestions = "false"
+	RtWritingsuggestionsTrue  RtWritingsuggestions = "true"
+	RtWritingsuggestionsEmpty RtWritingsuggestions = ""
 )
 
 type rtAttrs map[string]any
 
-func (e *RtElement) Autocapitalize(a RtAutocapitalizeEnum) *RtElement {
+func (e *RtElement) AriaUnsafe(name string, s string) *RtElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *RtElement) Aria(name string, s string) *RtElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *RtElement) Autocapitalize(a RtAutocapitalize) *RtElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *RtElement) Autocorrect(a RtAutocorrectEnum) *RtElement {
+func (e *RtElement) Autocorrect(a RtAutocorrect) *RtElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *RtElement) Class(s ...string) *RtElement {
 	return e
 }
 
-func (e *RtElement) Contenteditable(a RtContenteditableEnum) *RtElement {
+func (e *RtElement) Contenteditable(a RtContenteditable) *RtElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *RtElement) Data(name string, s string) *RtElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *RtElement) Dir(a RtDirEnum) *RtElement {
+func (e *RtElement) Dir(a RtDir) *RtElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *RtElement) Draggable(a RtDraggableEnum) *RtElement {
+func (e *RtElement) Draggable(a RtDraggable) *RtElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *RtElement) Enterkeyhint(a RtEnterkeyhintEnum) *RtElement {
+func (e *RtElement) Enterkeyhint(a RtEnterkeyhint) *RtElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *RtElement) Hidden(a RtHiddenEnum) *RtElement {
+func (e *RtElement) Hidden(a RtHidden) *RtElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *RtElement) Inert(b bool) *RtElement {
 	return e
 }
 
-func (e *RtElement) Inputmode(a RtInputmodeEnum) *RtElement {
+func (e *RtElement) Inputmode(a RtInputmode) *RtElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *RtElement) Slot(s string) *RtElement {
 	return e
 }
 
-func (e *RtElement) Spellcheck(a RtSpellcheckEnum) *RtElement {
+func (e *RtElement) Spellcheck(a RtSpellcheck) *RtElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *RtElement) Title(s string) *RtElement {
 	return e
 }
 
-func (e *RtElement) Translate(a RtTranslateEnum) *RtElement {
+func (e *RtElement) Translate(a RtTranslate) *RtElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *RtElement) Writingsuggestions(a RtWritingsuggestionsEnum) *RtElement {
+func (e *RtElement) Writingsuggestions(a RtWritingsuggestions) *RtElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

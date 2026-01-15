@@ -48,115 +48,127 @@ func AddressTernary(condition bool, true htemel.Node, false htemel.Node) *Addres
 	return Address(false)
 }
 
-type AddressAutocapitalizeEnum string
+type AddressAutocapitalize string
 
 const (
-	AddressAutocapitalizeEnumCharacters AddressAutocapitalizeEnum = "characters"
-	AddressAutocapitalizeEnumNone       AddressAutocapitalizeEnum = "none"
-	AddressAutocapitalizeEnumOff        AddressAutocapitalizeEnum = "off"
-	AddressAutocapitalizeEnumOn         AddressAutocapitalizeEnum = "on"
-	AddressAutocapitalizeEnumSentences  AddressAutocapitalizeEnum = "sentences"
-	AddressAutocapitalizeEnumWords      AddressAutocapitalizeEnum = "words"
+	AddressAutocapitalizeWords      AddressAutocapitalize = "words"
+	AddressAutocapitalizeCharacters AddressAutocapitalize = "characters"
+	AddressAutocapitalizeNone       AddressAutocapitalize = "none"
+	AddressAutocapitalizeOff        AddressAutocapitalize = "off"
+	AddressAutocapitalizeOn         AddressAutocapitalize = "on"
+	AddressAutocapitalizeSentences  AddressAutocapitalize = "sentences"
 )
 
-type AddressAutocorrectEnum string
+type AddressAutocorrect string
 
 const (
-	AddressAutocorrectEnumOff   AddressAutocorrectEnum = "off"
-	AddressAutocorrectEnumOn    AddressAutocorrectEnum = "on"
-	AddressAutocorrectEnumEmpty AddressAutocorrectEnum = ""
+	AddressAutocorrectOff   AddressAutocorrect = "off"
+	AddressAutocorrectOn    AddressAutocorrect = "on"
+	AddressAutocorrectEmpty AddressAutocorrect = ""
 )
 
-type AddressContenteditableEnum string
+type AddressContenteditable string
 
 const (
-	AddressContenteditableEnumFalse         AddressContenteditableEnum = "false"
-	AddressContenteditableEnumPlaintextOnly AddressContenteditableEnum = "plaintext-only"
-	AddressContenteditableEnumTrue          AddressContenteditableEnum = "true"
-	AddressContenteditableEnumEmpty         AddressContenteditableEnum = ""
+	AddressContenteditableFalse         AddressContenteditable = "false"
+	AddressContenteditablePlaintextOnly AddressContenteditable = "plaintext-only"
+	AddressContenteditableTrue          AddressContenteditable = "true"
+	AddressContenteditableEmpty         AddressContenteditable = ""
 )
 
-type AddressDirEnum string
+type AddressDir string
 
 const (
-	AddressDirEnumAuto AddressDirEnum = "auto"
-	AddressDirEnumLtr  AddressDirEnum = "ltr"
-	AddressDirEnumRtl  AddressDirEnum = "rtl"
+	AddressDirAuto AddressDir = "auto"
+	AddressDirLtr  AddressDir = "ltr"
+	AddressDirRtl  AddressDir = "rtl"
 )
 
-type AddressDraggableEnum string
+type AddressDraggable string
 
 const (
-	AddressDraggableEnumFalse AddressDraggableEnum = "false"
-	AddressDraggableEnumTrue  AddressDraggableEnum = "true"
+	AddressDraggableFalse AddressDraggable = "false"
+	AddressDraggableTrue  AddressDraggable = "true"
 )
 
-type AddressEnterkeyhintEnum string
+type AddressEnterkeyhint string
 
 const (
-	AddressEnterkeyhintEnumNext     AddressEnterkeyhintEnum = "next"
-	AddressEnterkeyhintEnumPrevious AddressEnterkeyhintEnum = "previous"
-	AddressEnterkeyhintEnumSearch   AddressEnterkeyhintEnum = "search"
-	AddressEnterkeyhintEnumSend     AddressEnterkeyhintEnum = "send"
-	AddressEnterkeyhintEnumDone     AddressEnterkeyhintEnum = "done"
-	AddressEnterkeyhintEnumEnter    AddressEnterkeyhintEnum = "enter"
-	AddressEnterkeyhintEnumGo       AddressEnterkeyhintEnum = "go"
+	AddressEnterkeyhintGo       AddressEnterkeyhint = "go"
+	AddressEnterkeyhintNext     AddressEnterkeyhint = "next"
+	AddressEnterkeyhintPrevious AddressEnterkeyhint = "previous"
+	AddressEnterkeyhintSearch   AddressEnterkeyhint = "search"
+	AddressEnterkeyhintSend     AddressEnterkeyhint = "send"
+	AddressEnterkeyhintDone     AddressEnterkeyhint = "done"
+	AddressEnterkeyhintEnter    AddressEnterkeyhint = "enter"
 )
 
-type AddressHiddenEnum string
+type AddressHidden string
 
 const (
-	AddressHiddenEnumHidden     AddressHiddenEnum = "hidden"
-	AddressHiddenEnumUntilFound AddressHiddenEnum = "until-found"
-	AddressHiddenEnumEmpty      AddressHiddenEnum = ""
+	AddressHiddenHidden     AddressHidden = "hidden"
+	AddressHiddenUntilFound AddressHidden = "until-found"
+	AddressHiddenEmpty      AddressHidden = ""
 )
 
-type AddressInputmodeEnum string
+type AddressInputmode string
 
 const (
-	AddressInputmodeEnumNumeric AddressInputmodeEnum = "numeric"
-	AddressInputmodeEnumSearch  AddressInputmodeEnum = "search"
-	AddressInputmodeEnumTel     AddressInputmodeEnum = "tel"
-	AddressInputmodeEnumText    AddressInputmodeEnum = "text"
-	AddressInputmodeEnumUrl     AddressInputmodeEnum = "url"
-	AddressInputmodeEnumDecimal AddressInputmodeEnum = "decimal"
-	AddressInputmodeEnumEmail   AddressInputmodeEnum = "email"
-	AddressInputmodeEnumNone    AddressInputmodeEnum = "none"
+	AddressInputmodeUrl     AddressInputmode = "url"
+	AddressInputmodeDecimal AddressInputmode = "decimal"
+	AddressInputmodeEmail   AddressInputmode = "email"
+	AddressInputmodeNone    AddressInputmode = "none"
+	AddressInputmodeNumeric AddressInputmode = "numeric"
+	AddressInputmodeSearch  AddressInputmode = "search"
+	AddressInputmodeTel     AddressInputmode = "tel"
+	AddressInputmodeText    AddressInputmode = "text"
 )
 
-type AddressSpellcheckEnum string
+type AddressSpellcheck string
 
 const (
-	AddressSpellcheckEnumFalse AddressSpellcheckEnum = "false"
-	AddressSpellcheckEnumTrue  AddressSpellcheckEnum = "true"
-	AddressSpellcheckEnumEmpty AddressSpellcheckEnum = ""
+	AddressSpellcheckFalse AddressSpellcheck = "false"
+	AddressSpellcheckTrue  AddressSpellcheck = "true"
+	AddressSpellcheckEmpty AddressSpellcheck = ""
 )
 
-type AddressTranslateEnum string
+type AddressTranslate string
 
 const (
-	AddressTranslateEnumNo    AddressTranslateEnum = "no"
-	AddressTranslateEnumYes   AddressTranslateEnum = "yes"
-	AddressTranslateEnumEmpty AddressTranslateEnum = ""
+	AddressTranslateYes   AddressTranslate = "yes"
+	AddressTranslateNo    AddressTranslate = "no"
+	AddressTranslateEmpty AddressTranslate = ""
 )
 
-type AddressWritingsuggestionsEnum string
+type AddressWritingsuggestions string
 
 const (
-	AddressWritingsuggestionsEnumFalse AddressWritingsuggestionsEnum = "false"
-	AddressWritingsuggestionsEnumTrue  AddressWritingsuggestionsEnum = "true"
-	AddressWritingsuggestionsEnumEmpty AddressWritingsuggestionsEnum = ""
+	AddressWritingsuggestionsFalse AddressWritingsuggestions = "false"
+	AddressWritingsuggestionsTrue  AddressWritingsuggestions = "true"
+	AddressWritingsuggestionsEmpty AddressWritingsuggestions = ""
 )
 
 type addressAttrs map[string]any
 
-func (e *AddressElement) Autocapitalize(a AddressAutocapitalizeEnum) *AddressElement {
+func (e *AddressElement) AriaUnsafe(name string, s string) *AddressElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *AddressElement) Aria(name string, s string) *AddressElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *AddressElement) Autocapitalize(a AddressAutocapitalize) *AddressElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *AddressElement) Autocorrect(a AddressAutocorrectEnum) *AddressElement {
+func (e *AddressElement) Autocorrect(a AddressAutocorrect) *AddressElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *AddressElement) Class(s ...string) *AddressElement {
 	return e
 }
 
-func (e *AddressElement) Contenteditable(a AddressContenteditableEnum) *AddressElement {
+func (e *AddressElement) Contenteditable(a AddressContenteditable) *AddressElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *AddressElement) Data(name string, s string) *AddressElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *AddressElement) Dir(a AddressDirEnum) *AddressElement {
+func (e *AddressElement) Dir(a AddressDir) *AddressElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *AddressElement) Draggable(a AddressDraggableEnum) *AddressElement {
+func (e *AddressElement) Draggable(a AddressDraggable) *AddressElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *AddressElement) Enterkeyhint(a AddressEnterkeyhintEnum) *AddressElement {
+func (e *AddressElement) Enterkeyhint(a AddressEnterkeyhint) *AddressElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *AddressElement) Hidden(a AddressHiddenEnum) *AddressElement {
+func (e *AddressElement) Hidden(a AddressHidden) *AddressElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *AddressElement) Inert(b bool) *AddressElement {
 	return e
 }
 
-func (e *AddressElement) Inputmode(a AddressInputmodeEnum) *AddressElement {
+func (e *AddressElement) Inputmode(a AddressInputmode) *AddressElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *AddressElement) Slot(s string) *AddressElement {
 	return e
 }
 
-func (e *AddressElement) Spellcheck(a AddressSpellcheckEnum) *AddressElement {
+func (e *AddressElement) Spellcheck(a AddressSpellcheck) *AddressElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *AddressElement) Title(s string) *AddressElement {
 	return e
 }
 
-func (e *AddressElement) Translate(a AddressTranslateEnum) *AddressElement {
+func (e *AddressElement) Translate(a AddressTranslate) *AddressElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *AddressElement) Writingsuggestions(a AddressWritingsuggestionsEnum) *AddressElement {
+func (e *AddressElement) Writingsuggestions(a AddressWritingsuggestions) *AddressElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,115 +48,127 @@ func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainEleme
 	return Main(false)
 }
 
-type MainAutocapitalizeEnum string
+type MainAutocapitalize string
 
 const (
-	MainAutocapitalizeEnumOn         MainAutocapitalizeEnum = "on"
-	MainAutocapitalizeEnumSentences  MainAutocapitalizeEnum = "sentences"
-	MainAutocapitalizeEnumWords      MainAutocapitalizeEnum = "words"
-	MainAutocapitalizeEnumCharacters MainAutocapitalizeEnum = "characters"
-	MainAutocapitalizeEnumNone       MainAutocapitalizeEnum = "none"
-	MainAutocapitalizeEnumOff        MainAutocapitalizeEnum = "off"
+	MainAutocapitalizeNone       MainAutocapitalize = "none"
+	MainAutocapitalizeOff        MainAutocapitalize = "off"
+	MainAutocapitalizeOn         MainAutocapitalize = "on"
+	MainAutocapitalizeSentences  MainAutocapitalize = "sentences"
+	MainAutocapitalizeWords      MainAutocapitalize = "words"
+	MainAutocapitalizeCharacters MainAutocapitalize = "characters"
 )
 
-type MainAutocorrectEnum string
+type MainAutocorrect string
 
 const (
-	MainAutocorrectEnumOff   MainAutocorrectEnum = "off"
-	MainAutocorrectEnumOn    MainAutocorrectEnum = "on"
-	MainAutocorrectEnumEmpty MainAutocorrectEnum = ""
+	MainAutocorrectOff   MainAutocorrect = "off"
+	MainAutocorrectOn    MainAutocorrect = "on"
+	MainAutocorrectEmpty MainAutocorrect = ""
 )
 
-type MainContenteditableEnum string
+type MainContenteditable string
 
 const (
-	MainContenteditableEnumFalse         MainContenteditableEnum = "false"
-	MainContenteditableEnumPlaintextOnly MainContenteditableEnum = "plaintext-only"
-	MainContenteditableEnumTrue          MainContenteditableEnum = "true"
-	MainContenteditableEnumEmpty         MainContenteditableEnum = ""
+	MainContenteditableFalse         MainContenteditable = "false"
+	MainContenteditablePlaintextOnly MainContenteditable = "plaintext-only"
+	MainContenteditableTrue          MainContenteditable = "true"
+	MainContenteditableEmpty         MainContenteditable = ""
 )
 
-type MainDirEnum string
+type MainDir string
 
 const (
-	MainDirEnumAuto MainDirEnum = "auto"
-	MainDirEnumLtr  MainDirEnum = "ltr"
-	MainDirEnumRtl  MainDirEnum = "rtl"
+	MainDirAuto MainDir = "auto"
+	MainDirLtr  MainDir = "ltr"
+	MainDirRtl  MainDir = "rtl"
 )
 
-type MainDraggableEnum string
+type MainDraggable string
 
 const (
-	MainDraggableEnumFalse MainDraggableEnum = "false"
-	MainDraggableEnumTrue  MainDraggableEnum = "true"
+	MainDraggableFalse MainDraggable = "false"
+	MainDraggableTrue  MainDraggable = "true"
 )
 
-type MainEnterkeyhintEnum string
+type MainEnterkeyhint string
 
 const (
-	MainEnterkeyhintEnumEnter    MainEnterkeyhintEnum = "enter"
-	MainEnterkeyhintEnumGo       MainEnterkeyhintEnum = "go"
-	MainEnterkeyhintEnumNext     MainEnterkeyhintEnum = "next"
-	MainEnterkeyhintEnumPrevious MainEnterkeyhintEnum = "previous"
-	MainEnterkeyhintEnumSearch   MainEnterkeyhintEnum = "search"
-	MainEnterkeyhintEnumSend     MainEnterkeyhintEnum = "send"
-	MainEnterkeyhintEnumDone     MainEnterkeyhintEnum = "done"
+	MainEnterkeyhintPrevious MainEnterkeyhint = "previous"
+	MainEnterkeyhintSearch   MainEnterkeyhint = "search"
+	MainEnterkeyhintSend     MainEnterkeyhint = "send"
+	MainEnterkeyhintDone     MainEnterkeyhint = "done"
+	MainEnterkeyhintEnter    MainEnterkeyhint = "enter"
+	MainEnterkeyhintGo       MainEnterkeyhint = "go"
+	MainEnterkeyhintNext     MainEnterkeyhint = "next"
 )
 
-type MainHiddenEnum string
+type MainHidden string
 
 const (
-	MainHiddenEnumHidden     MainHiddenEnum = "hidden"
-	MainHiddenEnumUntilFound MainHiddenEnum = "until-found"
-	MainHiddenEnumEmpty      MainHiddenEnum = ""
+	MainHiddenHidden     MainHidden = "hidden"
+	MainHiddenUntilFound MainHidden = "until-found"
+	MainHiddenEmpty      MainHidden = ""
 )
 
-type MainInputmodeEnum string
+type MainInputmode string
 
 const (
-	MainInputmodeEnumSearch  MainInputmodeEnum = "search"
-	MainInputmodeEnumTel     MainInputmodeEnum = "tel"
-	MainInputmodeEnumText    MainInputmodeEnum = "text"
-	MainInputmodeEnumUrl     MainInputmodeEnum = "url"
-	MainInputmodeEnumDecimal MainInputmodeEnum = "decimal"
-	MainInputmodeEnumEmail   MainInputmodeEnum = "email"
-	MainInputmodeEnumNone    MainInputmodeEnum = "none"
-	MainInputmodeEnumNumeric MainInputmodeEnum = "numeric"
+	MainInputmodeUrl     MainInputmode = "url"
+	MainInputmodeDecimal MainInputmode = "decimal"
+	MainInputmodeEmail   MainInputmode = "email"
+	MainInputmodeNone    MainInputmode = "none"
+	MainInputmodeNumeric MainInputmode = "numeric"
+	MainInputmodeSearch  MainInputmode = "search"
+	MainInputmodeTel     MainInputmode = "tel"
+	MainInputmodeText    MainInputmode = "text"
 )
 
-type MainSpellcheckEnum string
+type MainSpellcheck string
 
 const (
-	MainSpellcheckEnumFalse MainSpellcheckEnum = "false"
-	MainSpellcheckEnumTrue  MainSpellcheckEnum = "true"
-	MainSpellcheckEnumEmpty MainSpellcheckEnum = ""
+	MainSpellcheckFalse MainSpellcheck = "false"
+	MainSpellcheckTrue  MainSpellcheck = "true"
+	MainSpellcheckEmpty MainSpellcheck = ""
 )
 
-type MainTranslateEnum string
+type MainTranslate string
 
 const (
-	MainTranslateEnumNo    MainTranslateEnum = "no"
-	MainTranslateEnumYes   MainTranslateEnum = "yes"
-	MainTranslateEnumEmpty MainTranslateEnum = ""
+	MainTranslateNo    MainTranslate = "no"
+	MainTranslateYes   MainTranslate = "yes"
+	MainTranslateEmpty MainTranslate = ""
 )
 
-type MainWritingsuggestionsEnum string
+type MainWritingsuggestions string
 
 const (
-	MainWritingsuggestionsEnumFalse MainWritingsuggestionsEnum = "false"
-	MainWritingsuggestionsEnumTrue  MainWritingsuggestionsEnum = "true"
-	MainWritingsuggestionsEnumEmpty MainWritingsuggestionsEnum = ""
+	MainWritingsuggestionsFalse MainWritingsuggestions = "false"
+	MainWritingsuggestionsTrue  MainWritingsuggestions = "true"
+	MainWritingsuggestionsEmpty MainWritingsuggestions = ""
 )
 
 type mainAttrs map[string]any
 
-func (e *MainElement) Autocapitalize(a MainAutocapitalizeEnum) *MainElement {
+func (e *MainElement) AriaUnsafe(name string, s string) *MainElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *MainElement) Aria(name string, s string) *MainElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *MainElement) Autocapitalize(a MainAutocapitalize) *MainElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *MainElement) Autocorrect(a MainAutocorrectEnum) *MainElement {
+func (e *MainElement) Autocorrect(a MainAutocorrect) *MainElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *MainElement) Class(s ...string) *MainElement {
 	return e
 }
 
-func (e *MainElement) Contenteditable(a MainContenteditableEnum) *MainElement {
+func (e *MainElement) Contenteditable(a MainContenteditable) *MainElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *MainElement) Data(name string, s string) *MainElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *MainElement) Dir(a MainDirEnum) *MainElement {
+func (e *MainElement) Dir(a MainDir) *MainElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *MainElement) Draggable(a MainDraggableEnum) *MainElement {
+func (e *MainElement) Draggable(a MainDraggable) *MainElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *MainElement) Enterkeyhint(a MainEnterkeyhintEnum) *MainElement {
+func (e *MainElement) Enterkeyhint(a MainEnterkeyhint) *MainElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *MainElement) Hidden(a MainHiddenEnum) *MainElement {
+func (e *MainElement) Hidden(a MainHidden) *MainElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *MainElement) Inert(b bool) *MainElement {
 	return e
 }
 
-func (e *MainElement) Inputmode(a MainInputmodeEnum) *MainElement {
+func (e *MainElement) Inputmode(a MainInputmode) *MainElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *MainElement) Slot(s string) *MainElement {
 	return e
 }
 
-func (e *MainElement) Spellcheck(a MainSpellcheckEnum) *MainElement {
+func (e *MainElement) Spellcheck(a MainSpellcheck) *MainElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *MainElement) Title(s string) *MainElement {
 	return e
 }
 
-func (e *MainElement) Translate(a MainTranslateEnum) *MainElement {
+func (e *MainElement) Translate(a MainTranslate) *MainElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *MainElement) Writingsuggestions(a MainWritingsuggestionsEnum) *MainElement {
+func (e *MainElement) Writingsuggestions(a MainWritingsuggestions) *MainElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

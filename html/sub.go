@@ -48,115 +48,127 @@ func SubTernary(condition bool, true htemel.Node, false htemel.Node) *SubElement
 	return Sub(false)
 }
 
-type SubAutocapitalizeEnum string
+type SubAutocapitalize string
 
 const (
-	SubAutocapitalizeEnumOn         SubAutocapitalizeEnum = "on"
-	SubAutocapitalizeEnumSentences  SubAutocapitalizeEnum = "sentences"
-	SubAutocapitalizeEnumWords      SubAutocapitalizeEnum = "words"
-	SubAutocapitalizeEnumCharacters SubAutocapitalizeEnum = "characters"
-	SubAutocapitalizeEnumNone       SubAutocapitalizeEnum = "none"
-	SubAutocapitalizeEnumOff        SubAutocapitalizeEnum = "off"
+	SubAutocapitalizeNone       SubAutocapitalize = "none"
+	SubAutocapitalizeOff        SubAutocapitalize = "off"
+	SubAutocapitalizeOn         SubAutocapitalize = "on"
+	SubAutocapitalizeSentences  SubAutocapitalize = "sentences"
+	SubAutocapitalizeWords      SubAutocapitalize = "words"
+	SubAutocapitalizeCharacters SubAutocapitalize = "characters"
 )
 
-type SubAutocorrectEnum string
+type SubAutocorrect string
 
 const (
-	SubAutocorrectEnumOff   SubAutocorrectEnum = "off"
-	SubAutocorrectEnumOn    SubAutocorrectEnum = "on"
-	SubAutocorrectEnumEmpty SubAutocorrectEnum = ""
+	SubAutocorrectOff   SubAutocorrect = "off"
+	SubAutocorrectOn    SubAutocorrect = "on"
+	SubAutocorrectEmpty SubAutocorrect = ""
 )
 
-type SubContenteditableEnum string
+type SubContenteditable string
 
 const (
-	SubContenteditableEnumFalse         SubContenteditableEnum = "false"
-	SubContenteditableEnumPlaintextOnly SubContenteditableEnum = "plaintext-only"
-	SubContenteditableEnumTrue          SubContenteditableEnum = "true"
-	SubContenteditableEnumEmpty         SubContenteditableEnum = ""
+	SubContenteditableFalse         SubContenteditable = "false"
+	SubContenteditablePlaintextOnly SubContenteditable = "plaintext-only"
+	SubContenteditableTrue          SubContenteditable = "true"
+	SubContenteditableEmpty         SubContenteditable = ""
 )
 
-type SubDirEnum string
+type SubDir string
 
 const (
-	SubDirEnumAuto SubDirEnum = "auto"
-	SubDirEnumLtr  SubDirEnum = "ltr"
-	SubDirEnumRtl  SubDirEnum = "rtl"
+	SubDirAuto SubDir = "auto"
+	SubDirLtr  SubDir = "ltr"
+	SubDirRtl  SubDir = "rtl"
 )
 
-type SubDraggableEnum string
+type SubDraggable string
 
 const (
-	SubDraggableEnumFalse SubDraggableEnum = "false"
-	SubDraggableEnumTrue  SubDraggableEnum = "true"
+	SubDraggableFalse SubDraggable = "false"
+	SubDraggableTrue  SubDraggable = "true"
 )
 
-type SubEnterkeyhintEnum string
+type SubEnterkeyhint string
 
 const (
-	SubEnterkeyhintEnumSend     SubEnterkeyhintEnum = "send"
-	SubEnterkeyhintEnumDone     SubEnterkeyhintEnum = "done"
-	SubEnterkeyhintEnumEnter    SubEnterkeyhintEnum = "enter"
-	SubEnterkeyhintEnumGo       SubEnterkeyhintEnum = "go"
-	SubEnterkeyhintEnumNext     SubEnterkeyhintEnum = "next"
-	SubEnterkeyhintEnumPrevious SubEnterkeyhintEnum = "previous"
-	SubEnterkeyhintEnumSearch   SubEnterkeyhintEnum = "search"
+	SubEnterkeyhintSearch   SubEnterkeyhint = "search"
+	SubEnterkeyhintSend     SubEnterkeyhint = "send"
+	SubEnterkeyhintDone     SubEnterkeyhint = "done"
+	SubEnterkeyhintEnter    SubEnterkeyhint = "enter"
+	SubEnterkeyhintGo       SubEnterkeyhint = "go"
+	SubEnterkeyhintNext     SubEnterkeyhint = "next"
+	SubEnterkeyhintPrevious SubEnterkeyhint = "previous"
 )
 
-type SubHiddenEnum string
+type SubHidden string
 
 const (
-	SubHiddenEnumHidden     SubHiddenEnum = "hidden"
-	SubHiddenEnumUntilFound SubHiddenEnum = "until-found"
-	SubHiddenEnumEmpty      SubHiddenEnum = ""
+	SubHiddenHidden     SubHidden = "hidden"
+	SubHiddenUntilFound SubHidden = "until-found"
+	SubHiddenEmpty      SubHidden = ""
 )
 
-type SubInputmodeEnum string
+type SubInputmode string
 
 const (
-	SubInputmodeEnumSearch  SubInputmodeEnum = "search"
-	SubInputmodeEnumTel     SubInputmodeEnum = "tel"
-	SubInputmodeEnumText    SubInputmodeEnum = "text"
-	SubInputmodeEnumUrl     SubInputmodeEnum = "url"
-	SubInputmodeEnumDecimal SubInputmodeEnum = "decimal"
-	SubInputmodeEnumEmail   SubInputmodeEnum = "email"
-	SubInputmodeEnumNone    SubInputmodeEnum = "none"
-	SubInputmodeEnumNumeric SubInputmodeEnum = "numeric"
+	SubInputmodeSearch  SubInputmode = "search"
+	SubInputmodeTel     SubInputmode = "tel"
+	SubInputmodeText    SubInputmode = "text"
+	SubInputmodeUrl     SubInputmode = "url"
+	SubInputmodeDecimal SubInputmode = "decimal"
+	SubInputmodeEmail   SubInputmode = "email"
+	SubInputmodeNone    SubInputmode = "none"
+	SubInputmodeNumeric SubInputmode = "numeric"
 )
 
-type SubSpellcheckEnum string
+type SubSpellcheck string
 
 const (
-	SubSpellcheckEnumFalse SubSpellcheckEnum = "false"
-	SubSpellcheckEnumTrue  SubSpellcheckEnum = "true"
-	SubSpellcheckEnumEmpty SubSpellcheckEnum = ""
+	SubSpellcheckFalse SubSpellcheck = "false"
+	SubSpellcheckTrue  SubSpellcheck = "true"
+	SubSpellcheckEmpty SubSpellcheck = ""
 )
 
-type SubTranslateEnum string
+type SubTranslate string
 
 const (
-	SubTranslateEnumNo    SubTranslateEnum = "no"
-	SubTranslateEnumYes   SubTranslateEnum = "yes"
-	SubTranslateEnumEmpty SubTranslateEnum = ""
+	SubTranslateNo    SubTranslate = "no"
+	SubTranslateYes   SubTranslate = "yes"
+	SubTranslateEmpty SubTranslate = ""
 )
 
-type SubWritingsuggestionsEnum string
+type SubWritingsuggestions string
 
 const (
-	SubWritingsuggestionsEnumFalse SubWritingsuggestionsEnum = "false"
-	SubWritingsuggestionsEnumTrue  SubWritingsuggestionsEnum = "true"
-	SubWritingsuggestionsEnumEmpty SubWritingsuggestionsEnum = ""
+	SubWritingsuggestionsFalse SubWritingsuggestions = "false"
+	SubWritingsuggestionsTrue  SubWritingsuggestions = "true"
+	SubWritingsuggestionsEmpty SubWritingsuggestions = ""
 )
 
 type subAttrs map[string]any
 
-func (e *SubElement) Autocapitalize(a SubAutocapitalizeEnum) *SubElement {
+func (e *SubElement) AriaUnsafe(name string, s string) *SubElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SubElement) Aria(name string, s string) *SubElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SubElement) Autocapitalize(a SubAutocapitalize) *SubElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SubElement) Autocorrect(a SubAutocorrectEnum) *SubElement {
+func (e *SubElement) Autocorrect(a SubAutocorrect) *SubElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *SubElement) Class(s ...string) *SubElement {
 	return e
 }
 
-func (e *SubElement) Contenteditable(a SubContenteditableEnum) *SubElement {
+func (e *SubElement) Contenteditable(a SubContenteditable) *SubElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *SubElement) Data(name string, s string) *SubElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SubElement) Dir(a SubDirEnum) *SubElement {
+func (e *SubElement) Dir(a SubDir) *SubElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SubElement) Draggable(a SubDraggableEnum) *SubElement {
+func (e *SubElement) Draggable(a SubDraggable) *SubElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SubElement) Enterkeyhint(a SubEnterkeyhintEnum) *SubElement {
+func (e *SubElement) Enterkeyhint(a SubEnterkeyhint) *SubElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SubElement) Hidden(a SubHiddenEnum) *SubElement {
+func (e *SubElement) Hidden(a SubHidden) *SubElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *SubElement) Inert(b bool) *SubElement {
 	return e
 }
 
-func (e *SubElement) Inputmode(a SubInputmodeEnum) *SubElement {
+func (e *SubElement) Inputmode(a SubInputmode) *SubElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *SubElement) Slot(s string) *SubElement {
 	return e
 }
 
-func (e *SubElement) Spellcheck(a SubSpellcheckEnum) *SubElement {
+func (e *SubElement) Spellcheck(a SubSpellcheck) *SubElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *SubElement) Title(s string) *SubElement {
 	return e
 }
 
-func (e *SubElement) Translate(a SubTranslateEnum) *SubElement {
+func (e *SubElement) Translate(a SubTranslate) *SubElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SubElement) Writingsuggestions(a SubWritingsuggestionsEnum) *SubElement {
+func (e *SubElement) Writingsuggestions(a SubWritingsuggestions) *SubElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

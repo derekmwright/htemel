@@ -48,115 +48,127 @@ func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
 	return I(false)
 }
 
-type IAutocapitalizeEnum string
+type IAutocapitalize string
 
 const (
-	IAutocapitalizeEnumSentences  IAutocapitalizeEnum = "sentences"
-	IAutocapitalizeEnumWords      IAutocapitalizeEnum = "words"
-	IAutocapitalizeEnumCharacters IAutocapitalizeEnum = "characters"
-	IAutocapitalizeEnumNone       IAutocapitalizeEnum = "none"
-	IAutocapitalizeEnumOff        IAutocapitalizeEnum = "off"
-	IAutocapitalizeEnumOn         IAutocapitalizeEnum = "on"
+	IAutocapitalizeSentences  IAutocapitalize = "sentences"
+	IAutocapitalizeWords      IAutocapitalize = "words"
+	IAutocapitalizeCharacters IAutocapitalize = "characters"
+	IAutocapitalizeNone       IAutocapitalize = "none"
+	IAutocapitalizeOff        IAutocapitalize = "off"
+	IAutocapitalizeOn         IAutocapitalize = "on"
 )
 
-type IAutocorrectEnum string
+type IAutocorrect string
 
 const (
-	IAutocorrectEnumOff   IAutocorrectEnum = "off"
-	IAutocorrectEnumOn    IAutocorrectEnum = "on"
-	IAutocorrectEnumEmpty IAutocorrectEnum = ""
+	IAutocorrectOff   IAutocorrect = "off"
+	IAutocorrectOn    IAutocorrect = "on"
+	IAutocorrectEmpty IAutocorrect = ""
 )
 
-type IContenteditableEnum string
+type IContenteditable string
 
 const (
-	IContenteditableEnumFalse         IContenteditableEnum = "false"
-	IContenteditableEnumPlaintextOnly IContenteditableEnum = "plaintext-only"
-	IContenteditableEnumTrue          IContenteditableEnum = "true"
-	IContenteditableEnumEmpty         IContenteditableEnum = ""
+	IContenteditableFalse         IContenteditable = "false"
+	IContenteditablePlaintextOnly IContenteditable = "plaintext-only"
+	IContenteditableTrue          IContenteditable = "true"
+	IContenteditableEmpty         IContenteditable = ""
 )
 
-type IDirEnum string
+type IDir string
 
 const (
-	IDirEnumAuto IDirEnum = "auto"
-	IDirEnumLtr  IDirEnum = "ltr"
-	IDirEnumRtl  IDirEnum = "rtl"
+	IDirAuto IDir = "auto"
+	IDirLtr  IDir = "ltr"
+	IDirRtl  IDir = "rtl"
 )
 
-type IDraggableEnum string
+type IDraggable string
 
 const (
-	IDraggableEnumFalse IDraggableEnum = "false"
-	IDraggableEnumTrue  IDraggableEnum = "true"
+	IDraggableTrue  IDraggable = "true"
+	IDraggableFalse IDraggable = "false"
 )
 
-type IEnterkeyhintEnum string
+type IEnterkeyhint string
 
 const (
-	IEnterkeyhintEnumGo       IEnterkeyhintEnum = "go"
-	IEnterkeyhintEnumNext     IEnterkeyhintEnum = "next"
-	IEnterkeyhintEnumPrevious IEnterkeyhintEnum = "previous"
-	IEnterkeyhintEnumSearch   IEnterkeyhintEnum = "search"
-	IEnterkeyhintEnumSend     IEnterkeyhintEnum = "send"
-	IEnterkeyhintEnumDone     IEnterkeyhintEnum = "done"
-	IEnterkeyhintEnumEnter    IEnterkeyhintEnum = "enter"
+	IEnterkeyhintEnter    IEnterkeyhint = "enter"
+	IEnterkeyhintGo       IEnterkeyhint = "go"
+	IEnterkeyhintNext     IEnterkeyhint = "next"
+	IEnterkeyhintPrevious IEnterkeyhint = "previous"
+	IEnterkeyhintSearch   IEnterkeyhint = "search"
+	IEnterkeyhintSend     IEnterkeyhint = "send"
+	IEnterkeyhintDone     IEnterkeyhint = "done"
 )
 
-type IHiddenEnum string
+type IHidden string
 
 const (
-	IHiddenEnumHidden     IHiddenEnum = "hidden"
-	IHiddenEnumUntilFound IHiddenEnum = "until-found"
-	IHiddenEnumEmpty      IHiddenEnum = ""
+	IHiddenHidden     IHidden = "hidden"
+	IHiddenUntilFound IHidden = "until-found"
+	IHiddenEmpty      IHidden = ""
 )
 
-type IInputmodeEnum string
+type IInputmode string
 
 const (
-	IInputmodeEnumNone    IInputmodeEnum = "none"
-	IInputmodeEnumNumeric IInputmodeEnum = "numeric"
-	IInputmodeEnumSearch  IInputmodeEnum = "search"
-	IInputmodeEnumTel     IInputmodeEnum = "tel"
-	IInputmodeEnumText    IInputmodeEnum = "text"
-	IInputmodeEnumUrl     IInputmodeEnum = "url"
-	IInputmodeEnumDecimal IInputmodeEnum = "decimal"
-	IInputmodeEnumEmail   IInputmodeEnum = "email"
+	IInputmodeDecimal IInputmode = "decimal"
+	IInputmodeEmail   IInputmode = "email"
+	IInputmodeNone    IInputmode = "none"
+	IInputmodeNumeric IInputmode = "numeric"
+	IInputmodeSearch  IInputmode = "search"
+	IInputmodeTel     IInputmode = "tel"
+	IInputmodeText    IInputmode = "text"
+	IInputmodeUrl     IInputmode = "url"
 )
 
-type ISpellcheckEnum string
+type ISpellcheck string
 
 const (
-	ISpellcheckEnumFalse ISpellcheckEnum = "false"
-	ISpellcheckEnumTrue  ISpellcheckEnum = "true"
-	ISpellcheckEnumEmpty ISpellcheckEnum = ""
+	ISpellcheckFalse ISpellcheck = "false"
+	ISpellcheckTrue  ISpellcheck = "true"
+	ISpellcheckEmpty ISpellcheck = ""
 )
 
-type ITranslateEnum string
+type ITranslate string
 
 const (
-	ITranslateEnumNo    ITranslateEnum = "no"
-	ITranslateEnumYes   ITranslateEnum = "yes"
-	ITranslateEnumEmpty ITranslateEnum = ""
+	ITranslateNo    ITranslate = "no"
+	ITranslateYes   ITranslate = "yes"
+	ITranslateEmpty ITranslate = ""
 )
 
-type IWritingsuggestionsEnum string
+type IWritingsuggestions string
 
 const (
-	IWritingsuggestionsEnumFalse IWritingsuggestionsEnum = "false"
-	IWritingsuggestionsEnumTrue  IWritingsuggestionsEnum = "true"
-	IWritingsuggestionsEnumEmpty IWritingsuggestionsEnum = ""
+	IWritingsuggestionsFalse IWritingsuggestions = "false"
+	IWritingsuggestionsTrue  IWritingsuggestions = "true"
+	IWritingsuggestionsEmpty IWritingsuggestions = ""
 )
 
 type iAttrs map[string]any
 
-func (e *IElement) Autocapitalize(a IAutocapitalizeEnum) *IElement {
+func (e *IElement) AriaUnsafe(name string, s string) *IElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *IElement) Aria(name string, s string) *IElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *IElement) Autocapitalize(a IAutocapitalize) *IElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *IElement) Autocorrect(a IAutocorrectEnum) *IElement {
+func (e *IElement) Autocorrect(a IAutocorrect) *IElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *IElement) Class(s ...string) *IElement {
 	return e
 }
 
-func (e *IElement) Contenteditable(a IContenteditableEnum) *IElement {
+func (e *IElement) Contenteditable(a IContenteditable) *IElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *IElement) Data(name string, s string) *IElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *IElement) Dir(a IDirEnum) *IElement {
+func (e *IElement) Dir(a IDir) *IElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *IElement) Draggable(a IDraggableEnum) *IElement {
+func (e *IElement) Draggable(a IDraggable) *IElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *IElement) Enterkeyhint(a IEnterkeyhintEnum) *IElement {
+func (e *IElement) Enterkeyhint(a IEnterkeyhint) *IElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *IElement) Hidden(a IHiddenEnum) *IElement {
+func (e *IElement) Hidden(a IHidden) *IElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *IElement) Inert(b bool) *IElement {
 	return e
 }
 
-func (e *IElement) Inputmode(a IInputmodeEnum) *IElement {
+func (e *IElement) Inputmode(a IInputmode) *IElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *IElement) Slot(s string) *IElement {
 	return e
 }
 
-func (e *IElement) Spellcheck(a ISpellcheckEnum) *IElement {
+func (e *IElement) Spellcheck(a ISpellcheck) *IElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *IElement) Title(s string) *IElement {
 	return e
 }
 
-func (e *IElement) Translate(a ITranslateEnum) *IElement {
+func (e *IElement) Translate(a ITranslate) *IElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *IElement) Writingsuggestions(a IWritingsuggestionsEnum) *IElement {
+func (e *IElement) Writingsuggestions(a IWritingsuggestions) *IElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

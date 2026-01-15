@@ -48,111 +48,111 @@ func IframeTernary(condition bool, true htemel.Node, false htemel.Node) *IframeE
 	return Iframe(false)
 }
 
-type IframeLoadingEnum string
+type IframeLoading string
 
 const (
-	IframeLoadingEnumLazy  IframeLoadingEnum = "lazy"
-	IframeLoadingEnumEager IframeLoadingEnum = "eager"
+	IframeLoadingEager IframeLoading = "eager"
+	IframeLoadingLazy  IframeLoading = "lazy"
 )
 
-type IframeAutocapitalizeEnum string
+type IframeAutocapitalize string
 
 const (
-	IframeAutocapitalizeEnumWords      IframeAutocapitalizeEnum = "words"
-	IframeAutocapitalizeEnumCharacters IframeAutocapitalizeEnum = "characters"
-	IframeAutocapitalizeEnumNone       IframeAutocapitalizeEnum = "none"
-	IframeAutocapitalizeEnumOff        IframeAutocapitalizeEnum = "off"
-	IframeAutocapitalizeEnumOn         IframeAutocapitalizeEnum = "on"
-	IframeAutocapitalizeEnumSentences  IframeAutocapitalizeEnum = "sentences"
+	IframeAutocapitalizeCharacters IframeAutocapitalize = "characters"
+	IframeAutocapitalizeNone       IframeAutocapitalize = "none"
+	IframeAutocapitalizeOff        IframeAutocapitalize = "off"
+	IframeAutocapitalizeOn         IframeAutocapitalize = "on"
+	IframeAutocapitalizeSentences  IframeAutocapitalize = "sentences"
+	IframeAutocapitalizeWords      IframeAutocapitalize = "words"
 )
 
-type IframeAutocorrectEnum string
+type IframeAutocorrect string
 
 const (
-	IframeAutocorrectEnumOff   IframeAutocorrectEnum = "off"
-	IframeAutocorrectEnumOn    IframeAutocorrectEnum = "on"
-	IframeAutocorrectEnumEmpty IframeAutocorrectEnum = ""
+	IframeAutocorrectOff   IframeAutocorrect = "off"
+	IframeAutocorrectOn    IframeAutocorrect = "on"
+	IframeAutocorrectEmpty IframeAutocorrect = ""
 )
 
-type IframeContenteditableEnum string
+type IframeContenteditable string
 
 const (
-	IframeContenteditableEnumPlaintextOnly IframeContenteditableEnum = "plaintext-only"
-	IframeContenteditableEnumTrue          IframeContenteditableEnum = "true"
-	IframeContenteditableEnumFalse         IframeContenteditableEnum = "false"
-	IframeContenteditableEnumEmpty         IframeContenteditableEnum = ""
+	IframeContenteditableFalse         IframeContenteditable = "false"
+	IframeContenteditablePlaintextOnly IframeContenteditable = "plaintext-only"
+	IframeContenteditableTrue          IframeContenteditable = "true"
+	IframeContenteditableEmpty         IframeContenteditable = ""
 )
 
-type IframeDirEnum string
+type IframeDir string
 
 const (
-	IframeDirEnumAuto IframeDirEnum = "auto"
-	IframeDirEnumLtr  IframeDirEnum = "ltr"
-	IframeDirEnumRtl  IframeDirEnum = "rtl"
+	IframeDirAuto IframeDir = "auto"
+	IframeDirLtr  IframeDir = "ltr"
+	IframeDirRtl  IframeDir = "rtl"
 )
 
-type IframeDraggableEnum string
+type IframeDraggable string
 
 const (
-	IframeDraggableEnumFalse IframeDraggableEnum = "false"
-	IframeDraggableEnumTrue  IframeDraggableEnum = "true"
+	IframeDraggableFalse IframeDraggable = "false"
+	IframeDraggableTrue  IframeDraggable = "true"
 )
 
-type IframeEnterkeyhintEnum string
+type IframeEnterkeyhint string
 
 const (
-	IframeEnterkeyhintEnumDone     IframeEnterkeyhintEnum = "done"
-	IframeEnterkeyhintEnumEnter    IframeEnterkeyhintEnum = "enter"
-	IframeEnterkeyhintEnumGo       IframeEnterkeyhintEnum = "go"
-	IframeEnterkeyhintEnumNext     IframeEnterkeyhintEnum = "next"
-	IframeEnterkeyhintEnumPrevious IframeEnterkeyhintEnum = "previous"
-	IframeEnterkeyhintEnumSearch   IframeEnterkeyhintEnum = "search"
-	IframeEnterkeyhintEnumSend     IframeEnterkeyhintEnum = "send"
+	IframeEnterkeyhintNext     IframeEnterkeyhint = "next"
+	IframeEnterkeyhintPrevious IframeEnterkeyhint = "previous"
+	IframeEnterkeyhintSearch   IframeEnterkeyhint = "search"
+	IframeEnterkeyhintSend     IframeEnterkeyhint = "send"
+	IframeEnterkeyhintDone     IframeEnterkeyhint = "done"
+	IframeEnterkeyhintEnter    IframeEnterkeyhint = "enter"
+	IframeEnterkeyhintGo       IframeEnterkeyhint = "go"
 )
 
-type IframeHiddenEnum string
+type IframeHidden string
 
 const (
-	IframeHiddenEnumHidden     IframeHiddenEnum = "hidden"
-	IframeHiddenEnumUntilFound IframeHiddenEnum = "until-found"
-	IframeHiddenEnumEmpty      IframeHiddenEnum = ""
+	IframeHiddenHidden     IframeHidden = "hidden"
+	IframeHiddenUntilFound IframeHidden = "until-found"
+	IframeHiddenEmpty      IframeHidden = ""
 )
 
-type IframeInputmodeEnum string
+type IframeInputmode string
 
 const (
-	IframeInputmodeEnumNumeric IframeInputmodeEnum = "numeric"
-	IframeInputmodeEnumSearch  IframeInputmodeEnum = "search"
-	IframeInputmodeEnumTel     IframeInputmodeEnum = "tel"
-	IframeInputmodeEnumText    IframeInputmodeEnum = "text"
-	IframeInputmodeEnumUrl     IframeInputmodeEnum = "url"
-	IframeInputmodeEnumDecimal IframeInputmodeEnum = "decimal"
-	IframeInputmodeEnumEmail   IframeInputmodeEnum = "email"
-	IframeInputmodeEnumNone    IframeInputmodeEnum = "none"
+	IframeInputmodeNone    IframeInputmode = "none"
+	IframeInputmodeNumeric IframeInputmode = "numeric"
+	IframeInputmodeSearch  IframeInputmode = "search"
+	IframeInputmodeTel     IframeInputmode = "tel"
+	IframeInputmodeText    IframeInputmode = "text"
+	IframeInputmodeUrl     IframeInputmode = "url"
+	IframeInputmodeDecimal IframeInputmode = "decimal"
+	IframeInputmodeEmail   IframeInputmode = "email"
 )
 
-type IframeSpellcheckEnum string
+type IframeSpellcheck string
 
 const (
-	IframeSpellcheckEnumFalse IframeSpellcheckEnum = "false"
-	IframeSpellcheckEnumTrue  IframeSpellcheckEnum = "true"
-	IframeSpellcheckEnumEmpty IframeSpellcheckEnum = ""
+	IframeSpellcheckFalse IframeSpellcheck = "false"
+	IframeSpellcheckTrue  IframeSpellcheck = "true"
+	IframeSpellcheckEmpty IframeSpellcheck = ""
 )
 
-type IframeTranslateEnum string
+type IframeTranslate string
 
 const (
-	IframeTranslateEnumNo    IframeTranslateEnum = "no"
-	IframeTranslateEnumYes   IframeTranslateEnum = "yes"
-	IframeTranslateEnumEmpty IframeTranslateEnum = ""
+	IframeTranslateNo    IframeTranslate = "no"
+	IframeTranslateYes   IframeTranslate = "yes"
+	IframeTranslateEmpty IframeTranslate = ""
 )
 
-type IframeWritingsuggestionsEnum string
+type IframeWritingsuggestions string
 
 const (
-	IframeWritingsuggestionsEnumFalse IframeWritingsuggestionsEnum = "false"
-	IframeWritingsuggestionsEnumTrue  IframeWritingsuggestionsEnum = "true"
-	IframeWritingsuggestionsEnumEmpty IframeWritingsuggestionsEnum = ""
+	IframeWritingsuggestionsTrue  IframeWritingsuggestions = "true"
+	IframeWritingsuggestionsFalse IframeWritingsuggestions = "false"
+	IframeWritingsuggestionsEmpty IframeWritingsuggestions = ""
 )
 
 type iframeAttrs map[string]any
@@ -211,19 +211,31 @@ func (e *IframeElement) Referrerpolicy(s string) *IframeElement {
 	return e
 }
 
-func (e *IframeElement) Loading(a IframeLoadingEnum) *IframeElement {
+func (e *IframeElement) Loading(a IframeLoading) *IframeElement {
 	e.attributes["loading"] = a
 
 	return e
 }
 
-func (e *IframeElement) Autocapitalize(a IframeAutocapitalizeEnum) *IframeElement {
+func (e *IframeElement) AriaUnsafe(name string, s string) *IframeElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *IframeElement) Aria(name string, s string) *IframeElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *IframeElement) Autocapitalize(a IframeAutocapitalize) *IframeElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *IframeElement) Autocorrect(a IframeAutocorrectEnum) *IframeElement {
+func (e *IframeElement) Autocorrect(a IframeAutocorrect) *IframeElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -241,7 +253,7 @@ func (e *IframeElement) Class(s ...string) *IframeElement {
 	return e
 }
 
-func (e *IframeElement) Contenteditable(a IframeContenteditableEnum) *IframeElement {
+func (e *IframeElement) Contenteditable(a IframeContenteditable) *IframeElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -259,25 +271,25 @@ func (e *IframeElement) Data(name string, s string) *IframeElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *IframeElement) Dir(a IframeDirEnum) *IframeElement {
+func (e *IframeElement) Dir(a IframeDir) *IframeElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *IframeElement) Draggable(a IframeDraggableEnum) *IframeElement {
+func (e *IframeElement) Draggable(a IframeDraggable) *IframeElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *IframeElement) Enterkeyhint(a IframeEnterkeyhintEnum) *IframeElement {
+func (e *IframeElement) Enterkeyhint(a IframeEnterkeyhint) *IframeElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *IframeElement) Hidden(a IframeHiddenEnum) *IframeElement {
+func (e *IframeElement) Hidden(a IframeHidden) *IframeElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -295,7 +307,7 @@ func (e *IframeElement) Inert(b bool) *IframeElement {
 	return e
 }
 
-func (e *IframeElement) Inputmode(a IframeInputmodeEnum) *IframeElement {
+func (e *IframeElement) Inputmode(a IframeInputmode) *IframeElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -355,7 +367,7 @@ func (e *IframeElement) Slot(s string) *IframeElement {
 	return e
 }
 
-func (e *IframeElement) Spellcheck(a IframeSpellcheckEnum) *IframeElement {
+func (e *IframeElement) Spellcheck(a IframeSpellcheck) *IframeElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -379,13 +391,13 @@ func (e *IframeElement) Title(s string) *IframeElement {
 	return e
 }
 
-func (e *IframeElement) Translate(a IframeTranslateEnum) *IframeElement {
+func (e *IframeElement) Translate(a IframeTranslate) *IframeElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *IframeElement) Writingsuggestions(a IframeWritingsuggestionsEnum) *IframeElement {
+func (e *IframeElement) Writingsuggestions(a IframeWritingsuggestions) *IframeElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

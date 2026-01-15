@@ -48,104 +48,104 @@ func DelTernary(condition bool, true htemel.Node, false htemel.Node) *DelElement
 	return Del(false)
 }
 
-type DelAutocapitalizeEnum string
+type DelAutocapitalize string
 
 const (
-	DelAutocapitalizeEnumNone       DelAutocapitalizeEnum = "none"
-	DelAutocapitalizeEnumOff        DelAutocapitalizeEnum = "off"
-	DelAutocapitalizeEnumOn         DelAutocapitalizeEnum = "on"
-	DelAutocapitalizeEnumSentences  DelAutocapitalizeEnum = "sentences"
-	DelAutocapitalizeEnumWords      DelAutocapitalizeEnum = "words"
-	DelAutocapitalizeEnumCharacters DelAutocapitalizeEnum = "characters"
+	DelAutocapitalizeWords      DelAutocapitalize = "words"
+	DelAutocapitalizeCharacters DelAutocapitalize = "characters"
+	DelAutocapitalizeNone       DelAutocapitalize = "none"
+	DelAutocapitalizeOff        DelAutocapitalize = "off"
+	DelAutocapitalizeOn         DelAutocapitalize = "on"
+	DelAutocapitalizeSentences  DelAutocapitalize = "sentences"
 )
 
-type DelAutocorrectEnum string
+type DelAutocorrect string
 
 const (
-	DelAutocorrectEnumOff   DelAutocorrectEnum = "off"
-	DelAutocorrectEnumOn    DelAutocorrectEnum = "on"
-	DelAutocorrectEnumEmpty DelAutocorrectEnum = ""
+	DelAutocorrectOff   DelAutocorrect = "off"
+	DelAutocorrectOn    DelAutocorrect = "on"
+	DelAutocorrectEmpty DelAutocorrect = ""
 )
 
-type DelContenteditableEnum string
+type DelContenteditable string
 
 const (
-	DelContenteditableEnumFalse         DelContenteditableEnum = "false"
-	DelContenteditableEnumPlaintextOnly DelContenteditableEnum = "plaintext-only"
-	DelContenteditableEnumTrue          DelContenteditableEnum = "true"
-	DelContenteditableEnumEmpty         DelContenteditableEnum = ""
+	DelContenteditableFalse         DelContenteditable = "false"
+	DelContenteditablePlaintextOnly DelContenteditable = "plaintext-only"
+	DelContenteditableTrue          DelContenteditable = "true"
+	DelContenteditableEmpty         DelContenteditable = ""
 )
 
-type DelDirEnum string
+type DelDir string
 
 const (
-	DelDirEnumAuto DelDirEnum = "auto"
-	DelDirEnumLtr  DelDirEnum = "ltr"
-	DelDirEnumRtl  DelDirEnum = "rtl"
+	DelDirAuto DelDir = "auto"
+	DelDirLtr  DelDir = "ltr"
+	DelDirRtl  DelDir = "rtl"
 )
 
-type DelDraggableEnum string
+type DelDraggable string
 
 const (
-	DelDraggableEnumFalse DelDraggableEnum = "false"
-	DelDraggableEnumTrue  DelDraggableEnum = "true"
+	DelDraggableFalse DelDraggable = "false"
+	DelDraggableTrue  DelDraggable = "true"
 )
 
-type DelEnterkeyhintEnum string
+type DelEnterkeyhint string
 
 const (
-	DelEnterkeyhintEnumNext     DelEnterkeyhintEnum = "next"
-	DelEnterkeyhintEnumPrevious DelEnterkeyhintEnum = "previous"
-	DelEnterkeyhintEnumSearch   DelEnterkeyhintEnum = "search"
-	DelEnterkeyhintEnumSend     DelEnterkeyhintEnum = "send"
-	DelEnterkeyhintEnumDone     DelEnterkeyhintEnum = "done"
-	DelEnterkeyhintEnumEnter    DelEnterkeyhintEnum = "enter"
-	DelEnterkeyhintEnumGo       DelEnterkeyhintEnum = "go"
+	DelEnterkeyhintSend     DelEnterkeyhint = "send"
+	DelEnterkeyhintDone     DelEnterkeyhint = "done"
+	DelEnterkeyhintEnter    DelEnterkeyhint = "enter"
+	DelEnterkeyhintGo       DelEnterkeyhint = "go"
+	DelEnterkeyhintNext     DelEnterkeyhint = "next"
+	DelEnterkeyhintPrevious DelEnterkeyhint = "previous"
+	DelEnterkeyhintSearch   DelEnterkeyhint = "search"
 )
 
-type DelHiddenEnum string
+type DelHidden string
 
 const (
-	DelHiddenEnumUntilFound DelHiddenEnum = "until-found"
-	DelHiddenEnumHidden     DelHiddenEnum = "hidden"
-	DelHiddenEnumEmpty      DelHiddenEnum = ""
+	DelHiddenHidden     DelHidden = "hidden"
+	DelHiddenUntilFound DelHidden = "until-found"
+	DelHiddenEmpty      DelHidden = ""
 )
 
-type DelInputmodeEnum string
+type DelInputmode string
 
 const (
-	DelInputmodeEnumEmail   DelInputmodeEnum = "email"
-	DelInputmodeEnumNone    DelInputmodeEnum = "none"
-	DelInputmodeEnumNumeric DelInputmodeEnum = "numeric"
-	DelInputmodeEnumSearch  DelInputmodeEnum = "search"
-	DelInputmodeEnumTel     DelInputmodeEnum = "tel"
-	DelInputmodeEnumText    DelInputmodeEnum = "text"
-	DelInputmodeEnumUrl     DelInputmodeEnum = "url"
-	DelInputmodeEnumDecimal DelInputmodeEnum = "decimal"
+	DelInputmodeDecimal DelInputmode = "decimal"
+	DelInputmodeEmail   DelInputmode = "email"
+	DelInputmodeNone    DelInputmode = "none"
+	DelInputmodeNumeric DelInputmode = "numeric"
+	DelInputmodeSearch  DelInputmode = "search"
+	DelInputmodeTel     DelInputmode = "tel"
+	DelInputmodeText    DelInputmode = "text"
+	DelInputmodeUrl     DelInputmode = "url"
 )
 
-type DelSpellcheckEnum string
+type DelSpellcheck string
 
 const (
-	DelSpellcheckEnumFalse DelSpellcheckEnum = "false"
-	DelSpellcheckEnumTrue  DelSpellcheckEnum = "true"
-	DelSpellcheckEnumEmpty DelSpellcheckEnum = ""
+	DelSpellcheckFalse DelSpellcheck = "false"
+	DelSpellcheckTrue  DelSpellcheck = "true"
+	DelSpellcheckEmpty DelSpellcheck = ""
 )
 
-type DelTranslateEnum string
+type DelTranslate string
 
 const (
-	DelTranslateEnumNo    DelTranslateEnum = "no"
-	DelTranslateEnumYes   DelTranslateEnum = "yes"
-	DelTranslateEnumEmpty DelTranslateEnum = ""
+	DelTranslateYes   DelTranslate = "yes"
+	DelTranslateNo    DelTranslate = "no"
+	DelTranslateEmpty DelTranslate = ""
 )
 
-type DelWritingsuggestionsEnum string
+type DelWritingsuggestions string
 
 const (
-	DelWritingsuggestionsEnumFalse DelWritingsuggestionsEnum = "false"
-	DelWritingsuggestionsEnumTrue  DelWritingsuggestionsEnum = "true"
-	DelWritingsuggestionsEnumEmpty DelWritingsuggestionsEnum = ""
+	DelWritingsuggestionsTrue  DelWritingsuggestions = "true"
+	DelWritingsuggestionsFalse DelWritingsuggestions = "false"
+	DelWritingsuggestionsEmpty DelWritingsuggestions = ""
 )
 
 type delAttrs map[string]any
@@ -162,13 +162,25 @@ func (e *DelElement) Datetime(s string) *DelElement {
 	return e
 }
 
-func (e *DelElement) Autocapitalize(a DelAutocapitalizeEnum) *DelElement {
+func (e *DelElement) AriaUnsafe(name string, s string) *DelElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DelElement) Aria(name string, s string) *DelElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *DelElement) Autocapitalize(a DelAutocapitalize) *DelElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *DelElement) Autocorrect(a DelAutocorrectEnum) *DelElement {
+func (e *DelElement) Autocorrect(a DelAutocorrect) *DelElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -186,7 +198,7 @@ func (e *DelElement) Class(s ...string) *DelElement {
 	return e
 }
 
-func (e *DelElement) Contenteditable(a DelContenteditableEnum) *DelElement {
+func (e *DelElement) Contenteditable(a DelContenteditable) *DelElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -204,25 +216,25 @@ func (e *DelElement) Data(name string, s string) *DelElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *DelElement) Dir(a DelDirEnum) *DelElement {
+func (e *DelElement) Dir(a DelDir) *DelElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *DelElement) Draggable(a DelDraggableEnum) *DelElement {
+func (e *DelElement) Draggable(a DelDraggable) *DelElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *DelElement) Enterkeyhint(a DelEnterkeyhintEnum) *DelElement {
+func (e *DelElement) Enterkeyhint(a DelEnterkeyhint) *DelElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *DelElement) Hidden(a DelHiddenEnum) *DelElement {
+func (e *DelElement) Hidden(a DelHidden) *DelElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -240,7 +252,7 @@ func (e *DelElement) Inert(b bool) *DelElement {
 	return e
 }
 
-func (e *DelElement) Inputmode(a DelInputmodeEnum) *DelElement {
+func (e *DelElement) Inputmode(a DelInputmode) *DelElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -300,7 +312,7 @@ func (e *DelElement) Slot(s string) *DelElement {
 	return e
 }
 
-func (e *DelElement) Spellcheck(a DelSpellcheckEnum) *DelElement {
+func (e *DelElement) Spellcheck(a DelSpellcheck) *DelElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -324,13 +336,13 @@ func (e *DelElement) Title(s string) *DelElement {
 	return e
 }
 
-func (e *DelElement) Translate(a DelTranslateEnum) *DelElement {
+func (e *DelElement) Translate(a DelTranslate) *DelElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *DelElement) Writingsuggestions(a DelWritingsuggestionsEnum) *DelElement {
+func (e *DelElement) Writingsuggestions(a DelWritingsuggestions) *DelElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

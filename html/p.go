@@ -48,115 +48,127 @@ func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
 	return P(false)
 }
 
-type PAutocapitalizeEnum string
+type PAutocapitalize string
 
 const (
-	PAutocapitalizeEnumCharacters PAutocapitalizeEnum = "characters"
-	PAutocapitalizeEnumNone       PAutocapitalizeEnum = "none"
-	PAutocapitalizeEnumOff        PAutocapitalizeEnum = "off"
-	PAutocapitalizeEnumOn         PAutocapitalizeEnum = "on"
-	PAutocapitalizeEnumSentences  PAutocapitalizeEnum = "sentences"
-	PAutocapitalizeEnumWords      PAutocapitalizeEnum = "words"
+	PAutocapitalizeCharacters PAutocapitalize = "characters"
+	PAutocapitalizeNone       PAutocapitalize = "none"
+	PAutocapitalizeOff        PAutocapitalize = "off"
+	PAutocapitalizeOn         PAutocapitalize = "on"
+	PAutocapitalizeSentences  PAutocapitalize = "sentences"
+	PAutocapitalizeWords      PAutocapitalize = "words"
 )
 
-type PAutocorrectEnum string
+type PAutocorrect string
 
 const (
-	PAutocorrectEnumOff   PAutocorrectEnum = "off"
-	PAutocorrectEnumOn    PAutocorrectEnum = "on"
-	PAutocorrectEnumEmpty PAutocorrectEnum = ""
+	PAutocorrectOn    PAutocorrect = "on"
+	PAutocorrectOff   PAutocorrect = "off"
+	PAutocorrectEmpty PAutocorrect = ""
 )
 
-type PContenteditableEnum string
+type PContenteditable string
 
 const (
-	PContenteditableEnumTrue          PContenteditableEnum = "true"
-	PContenteditableEnumFalse         PContenteditableEnum = "false"
-	PContenteditableEnumPlaintextOnly PContenteditableEnum = "plaintext-only"
-	PContenteditableEnumEmpty         PContenteditableEnum = ""
+	PContenteditableFalse         PContenteditable = "false"
+	PContenteditablePlaintextOnly PContenteditable = "plaintext-only"
+	PContenteditableTrue          PContenteditable = "true"
+	PContenteditableEmpty         PContenteditable = ""
 )
 
-type PDirEnum string
+type PDir string
 
 const (
-	PDirEnumAuto PDirEnum = "auto"
-	PDirEnumLtr  PDirEnum = "ltr"
-	PDirEnumRtl  PDirEnum = "rtl"
+	PDirAuto PDir = "auto"
+	PDirLtr  PDir = "ltr"
+	PDirRtl  PDir = "rtl"
 )
 
-type PDraggableEnum string
+type PDraggable string
 
 const (
-	PDraggableEnumFalse PDraggableEnum = "false"
-	PDraggableEnumTrue  PDraggableEnum = "true"
+	PDraggableFalse PDraggable = "false"
+	PDraggableTrue  PDraggable = "true"
 )
 
-type PEnterkeyhintEnum string
+type PEnterkeyhint string
 
 const (
-	PEnterkeyhintEnumDone     PEnterkeyhintEnum = "done"
-	PEnterkeyhintEnumEnter    PEnterkeyhintEnum = "enter"
-	PEnterkeyhintEnumGo       PEnterkeyhintEnum = "go"
-	PEnterkeyhintEnumNext     PEnterkeyhintEnum = "next"
-	PEnterkeyhintEnumPrevious PEnterkeyhintEnum = "previous"
-	PEnterkeyhintEnumSearch   PEnterkeyhintEnum = "search"
-	PEnterkeyhintEnumSend     PEnterkeyhintEnum = "send"
+	PEnterkeyhintDone     PEnterkeyhint = "done"
+	PEnterkeyhintEnter    PEnterkeyhint = "enter"
+	PEnterkeyhintGo       PEnterkeyhint = "go"
+	PEnterkeyhintNext     PEnterkeyhint = "next"
+	PEnterkeyhintPrevious PEnterkeyhint = "previous"
+	PEnterkeyhintSearch   PEnterkeyhint = "search"
+	PEnterkeyhintSend     PEnterkeyhint = "send"
 )
 
-type PHiddenEnum string
+type PHidden string
 
 const (
-	PHiddenEnumHidden     PHiddenEnum = "hidden"
-	PHiddenEnumUntilFound PHiddenEnum = "until-found"
-	PHiddenEnumEmpty      PHiddenEnum = ""
+	PHiddenHidden     PHidden = "hidden"
+	PHiddenUntilFound PHidden = "until-found"
+	PHiddenEmpty      PHidden = ""
 )
 
-type PInputmodeEnum string
+type PInputmode string
 
 const (
-	PInputmodeEnumUrl     PInputmodeEnum = "url"
-	PInputmodeEnumDecimal PInputmodeEnum = "decimal"
-	PInputmodeEnumEmail   PInputmodeEnum = "email"
-	PInputmodeEnumNone    PInputmodeEnum = "none"
-	PInputmodeEnumNumeric PInputmodeEnum = "numeric"
-	PInputmodeEnumSearch  PInputmodeEnum = "search"
-	PInputmodeEnumTel     PInputmodeEnum = "tel"
-	PInputmodeEnumText    PInputmodeEnum = "text"
+	PInputmodeText    PInputmode = "text"
+	PInputmodeUrl     PInputmode = "url"
+	PInputmodeDecimal PInputmode = "decimal"
+	PInputmodeEmail   PInputmode = "email"
+	PInputmodeNone    PInputmode = "none"
+	PInputmodeNumeric PInputmode = "numeric"
+	PInputmodeSearch  PInputmode = "search"
+	PInputmodeTel     PInputmode = "tel"
 )
 
-type PSpellcheckEnum string
+type PSpellcheck string
 
 const (
-	PSpellcheckEnumFalse PSpellcheckEnum = "false"
-	PSpellcheckEnumTrue  PSpellcheckEnum = "true"
-	PSpellcheckEnumEmpty PSpellcheckEnum = ""
+	PSpellcheckFalse PSpellcheck = "false"
+	PSpellcheckTrue  PSpellcheck = "true"
+	PSpellcheckEmpty PSpellcheck = ""
 )
 
-type PTranslateEnum string
+type PTranslate string
 
 const (
-	PTranslateEnumYes   PTranslateEnum = "yes"
-	PTranslateEnumNo    PTranslateEnum = "no"
-	PTranslateEnumEmpty PTranslateEnum = ""
+	PTranslateNo    PTranslate = "no"
+	PTranslateYes   PTranslate = "yes"
+	PTranslateEmpty PTranslate = ""
 )
 
-type PWritingsuggestionsEnum string
+type PWritingsuggestions string
 
 const (
-	PWritingsuggestionsEnumFalse PWritingsuggestionsEnum = "false"
-	PWritingsuggestionsEnumTrue  PWritingsuggestionsEnum = "true"
-	PWritingsuggestionsEnumEmpty PWritingsuggestionsEnum = ""
+	PWritingsuggestionsFalse PWritingsuggestions = "false"
+	PWritingsuggestionsTrue  PWritingsuggestions = "true"
+	PWritingsuggestionsEmpty PWritingsuggestions = ""
 )
 
 type pAttrs map[string]any
 
-func (e *PElement) Autocapitalize(a PAutocapitalizeEnum) *PElement {
+func (e *PElement) AriaUnsafe(name string, s string) *PElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *PElement) Aria(name string, s string) *PElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *PElement) Autocapitalize(a PAutocapitalize) *PElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *PElement) Autocorrect(a PAutocorrectEnum) *PElement {
+func (e *PElement) Autocorrect(a PAutocorrect) *PElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *PElement) Class(s ...string) *PElement {
 	return e
 }
 
-func (e *PElement) Contenteditable(a PContenteditableEnum) *PElement {
+func (e *PElement) Contenteditable(a PContenteditable) *PElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *PElement) Data(name string, s string) *PElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *PElement) Dir(a PDirEnum) *PElement {
+func (e *PElement) Dir(a PDir) *PElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *PElement) Draggable(a PDraggableEnum) *PElement {
+func (e *PElement) Draggable(a PDraggable) *PElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *PElement) Enterkeyhint(a PEnterkeyhintEnum) *PElement {
+func (e *PElement) Enterkeyhint(a PEnterkeyhint) *PElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *PElement) Hidden(a PHiddenEnum) *PElement {
+func (e *PElement) Hidden(a PHidden) *PElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *PElement) Inert(b bool) *PElement {
 	return e
 }
 
-func (e *PElement) Inputmode(a PInputmodeEnum) *PElement {
+func (e *PElement) Inputmode(a PInputmode) *PElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *PElement) Slot(s string) *PElement {
 	return e
 }
 
-func (e *PElement) Spellcheck(a PSpellcheckEnum) *PElement {
+func (e *PElement) Spellcheck(a PSpellcheck) *PElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *PElement) Title(s string) *PElement {
 	return e
 }
 
-func (e *PElement) Translate(a PTranslateEnum) *PElement {
+func (e *PElement) Translate(a PTranslate) *PElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *PElement) Writingsuggestions(a PWritingsuggestionsEnum) *PElement {
+func (e *PElement) Writingsuggestions(a PWritingsuggestions) *PElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

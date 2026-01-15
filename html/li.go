@@ -48,104 +48,104 @@ func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
 	return Li(false)
 }
 
-type LiAutocapitalizeEnum string
+type LiAutocapitalize string
 
 const (
-	LiAutocapitalizeEnumCharacters LiAutocapitalizeEnum = "characters"
-	LiAutocapitalizeEnumNone       LiAutocapitalizeEnum = "none"
-	LiAutocapitalizeEnumOff        LiAutocapitalizeEnum = "off"
-	LiAutocapitalizeEnumOn         LiAutocapitalizeEnum = "on"
-	LiAutocapitalizeEnumSentences  LiAutocapitalizeEnum = "sentences"
-	LiAutocapitalizeEnumWords      LiAutocapitalizeEnum = "words"
+	LiAutocapitalizeOn         LiAutocapitalize = "on"
+	LiAutocapitalizeSentences  LiAutocapitalize = "sentences"
+	LiAutocapitalizeWords      LiAutocapitalize = "words"
+	LiAutocapitalizeCharacters LiAutocapitalize = "characters"
+	LiAutocapitalizeNone       LiAutocapitalize = "none"
+	LiAutocapitalizeOff        LiAutocapitalize = "off"
 )
 
-type LiAutocorrectEnum string
+type LiAutocorrect string
 
 const (
-	LiAutocorrectEnumOff   LiAutocorrectEnum = "off"
-	LiAutocorrectEnumOn    LiAutocorrectEnum = "on"
-	LiAutocorrectEnumEmpty LiAutocorrectEnum = ""
+	LiAutocorrectOff   LiAutocorrect = "off"
+	LiAutocorrectOn    LiAutocorrect = "on"
+	LiAutocorrectEmpty LiAutocorrect = ""
 )
 
-type LiContenteditableEnum string
+type LiContenteditable string
 
 const (
-	LiContenteditableEnumFalse         LiContenteditableEnum = "false"
-	LiContenteditableEnumPlaintextOnly LiContenteditableEnum = "plaintext-only"
-	LiContenteditableEnumTrue          LiContenteditableEnum = "true"
-	LiContenteditableEnumEmpty         LiContenteditableEnum = ""
+	LiContenteditableFalse         LiContenteditable = "false"
+	LiContenteditablePlaintextOnly LiContenteditable = "plaintext-only"
+	LiContenteditableTrue          LiContenteditable = "true"
+	LiContenteditableEmpty         LiContenteditable = ""
 )
 
-type LiDirEnum string
+type LiDir string
 
 const (
-	LiDirEnumAuto LiDirEnum = "auto"
-	LiDirEnumLtr  LiDirEnum = "ltr"
-	LiDirEnumRtl  LiDirEnum = "rtl"
+	LiDirAuto LiDir = "auto"
+	LiDirLtr  LiDir = "ltr"
+	LiDirRtl  LiDir = "rtl"
 )
 
-type LiDraggableEnum string
+type LiDraggable string
 
 const (
-	LiDraggableEnumFalse LiDraggableEnum = "false"
-	LiDraggableEnumTrue  LiDraggableEnum = "true"
+	LiDraggableFalse LiDraggable = "false"
+	LiDraggableTrue  LiDraggable = "true"
 )
 
-type LiEnterkeyhintEnum string
+type LiEnterkeyhint string
 
 const (
-	LiEnterkeyhintEnumPrevious LiEnterkeyhintEnum = "previous"
-	LiEnterkeyhintEnumSearch   LiEnterkeyhintEnum = "search"
-	LiEnterkeyhintEnumSend     LiEnterkeyhintEnum = "send"
-	LiEnterkeyhintEnumDone     LiEnterkeyhintEnum = "done"
-	LiEnterkeyhintEnumEnter    LiEnterkeyhintEnum = "enter"
-	LiEnterkeyhintEnumGo       LiEnterkeyhintEnum = "go"
-	LiEnterkeyhintEnumNext     LiEnterkeyhintEnum = "next"
+	LiEnterkeyhintEnter    LiEnterkeyhint = "enter"
+	LiEnterkeyhintGo       LiEnterkeyhint = "go"
+	LiEnterkeyhintNext     LiEnterkeyhint = "next"
+	LiEnterkeyhintPrevious LiEnterkeyhint = "previous"
+	LiEnterkeyhintSearch   LiEnterkeyhint = "search"
+	LiEnterkeyhintSend     LiEnterkeyhint = "send"
+	LiEnterkeyhintDone     LiEnterkeyhint = "done"
 )
 
-type LiHiddenEnum string
+type LiHidden string
 
 const (
-	LiHiddenEnumUntilFound LiHiddenEnum = "until-found"
-	LiHiddenEnumHidden     LiHiddenEnum = "hidden"
-	LiHiddenEnumEmpty      LiHiddenEnum = ""
+	LiHiddenHidden     LiHidden = "hidden"
+	LiHiddenUntilFound LiHidden = "until-found"
+	LiHiddenEmpty      LiHidden = ""
 )
 
-type LiInputmodeEnum string
+type LiInputmode string
 
 const (
-	LiInputmodeEnumEmail   LiInputmodeEnum = "email"
-	LiInputmodeEnumNone    LiInputmodeEnum = "none"
-	LiInputmodeEnumNumeric LiInputmodeEnum = "numeric"
-	LiInputmodeEnumSearch  LiInputmodeEnum = "search"
-	LiInputmodeEnumTel     LiInputmodeEnum = "tel"
-	LiInputmodeEnumText    LiInputmodeEnum = "text"
-	LiInputmodeEnumUrl     LiInputmodeEnum = "url"
-	LiInputmodeEnumDecimal LiInputmodeEnum = "decimal"
+	LiInputmodeSearch  LiInputmode = "search"
+	LiInputmodeTel     LiInputmode = "tel"
+	LiInputmodeText    LiInputmode = "text"
+	LiInputmodeUrl     LiInputmode = "url"
+	LiInputmodeDecimal LiInputmode = "decimal"
+	LiInputmodeEmail   LiInputmode = "email"
+	LiInputmodeNone    LiInputmode = "none"
+	LiInputmodeNumeric LiInputmode = "numeric"
 )
 
-type LiSpellcheckEnum string
+type LiSpellcheck string
 
 const (
-	LiSpellcheckEnumTrue  LiSpellcheckEnum = "true"
-	LiSpellcheckEnumFalse LiSpellcheckEnum = "false"
-	LiSpellcheckEnumEmpty LiSpellcheckEnum = ""
+	LiSpellcheckFalse LiSpellcheck = "false"
+	LiSpellcheckTrue  LiSpellcheck = "true"
+	LiSpellcheckEmpty LiSpellcheck = ""
 )
 
-type LiTranslateEnum string
+type LiTranslate string
 
 const (
-	LiTranslateEnumNo    LiTranslateEnum = "no"
-	LiTranslateEnumYes   LiTranslateEnum = "yes"
-	LiTranslateEnumEmpty LiTranslateEnum = ""
+	LiTranslateNo    LiTranslate = "no"
+	LiTranslateYes   LiTranslate = "yes"
+	LiTranslateEmpty LiTranslate = ""
 )
 
-type LiWritingsuggestionsEnum string
+type LiWritingsuggestions string
 
 const (
-	LiWritingsuggestionsEnumFalse LiWritingsuggestionsEnum = "false"
-	LiWritingsuggestionsEnumTrue  LiWritingsuggestionsEnum = "true"
-	LiWritingsuggestionsEnumEmpty LiWritingsuggestionsEnum = ""
+	LiWritingsuggestionsTrue  LiWritingsuggestions = "true"
+	LiWritingsuggestionsFalse LiWritingsuggestions = "false"
+	LiWritingsuggestionsEmpty LiWritingsuggestions = ""
 )
 
 type liAttrs map[string]any
@@ -156,13 +156,25 @@ func (e *LiElement) Value(i int) *LiElement {
 	return e
 }
 
-func (e *LiElement) Autocapitalize(a LiAutocapitalizeEnum) *LiElement {
+func (e *LiElement) AriaUnsafe(name string, s string) *LiElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *LiElement) Aria(name string, s string) *LiElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *LiElement) Autocapitalize(a LiAutocapitalize) *LiElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *LiElement) Autocorrect(a LiAutocorrectEnum) *LiElement {
+func (e *LiElement) Autocorrect(a LiAutocorrect) *LiElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -180,7 +192,7 @@ func (e *LiElement) Class(s ...string) *LiElement {
 	return e
 }
 
-func (e *LiElement) Contenteditable(a LiContenteditableEnum) *LiElement {
+func (e *LiElement) Contenteditable(a LiContenteditable) *LiElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -198,25 +210,25 @@ func (e *LiElement) Data(name string, s string) *LiElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *LiElement) Dir(a LiDirEnum) *LiElement {
+func (e *LiElement) Dir(a LiDir) *LiElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *LiElement) Draggable(a LiDraggableEnum) *LiElement {
+func (e *LiElement) Draggable(a LiDraggable) *LiElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *LiElement) Enterkeyhint(a LiEnterkeyhintEnum) *LiElement {
+func (e *LiElement) Enterkeyhint(a LiEnterkeyhint) *LiElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *LiElement) Hidden(a LiHiddenEnum) *LiElement {
+func (e *LiElement) Hidden(a LiHidden) *LiElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -234,7 +246,7 @@ func (e *LiElement) Inert(b bool) *LiElement {
 	return e
 }
 
-func (e *LiElement) Inputmode(a LiInputmodeEnum) *LiElement {
+func (e *LiElement) Inputmode(a LiInputmode) *LiElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -294,7 +306,7 @@ func (e *LiElement) Slot(s string) *LiElement {
 	return e
 }
 
-func (e *LiElement) Spellcheck(a LiSpellcheckEnum) *LiElement {
+func (e *LiElement) Spellcheck(a LiSpellcheck) *LiElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -318,13 +330,13 @@ func (e *LiElement) Title(s string) *LiElement {
 	return e
 }
 
-func (e *LiElement) Translate(a LiTranslateEnum) *LiElement {
+func (e *LiElement) Translate(a LiTranslate) *LiElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *LiElement) Writingsuggestions(a LiWritingsuggestionsEnum) *LiElement {
+func (e *LiElement) Writingsuggestions(a LiWritingsuggestions) *LiElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

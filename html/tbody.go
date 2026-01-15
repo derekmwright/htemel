@@ -48,115 +48,127 @@ func TbodyTernary(condition bool, true htemel.Node, false htemel.Node) *TbodyEle
 	return Tbody(false)
 }
 
-type TbodyAutocapitalizeEnum string
+type TbodyAutocapitalize string
 
 const (
-	TbodyAutocapitalizeEnumOn         TbodyAutocapitalizeEnum = "on"
-	TbodyAutocapitalizeEnumSentences  TbodyAutocapitalizeEnum = "sentences"
-	TbodyAutocapitalizeEnumWords      TbodyAutocapitalizeEnum = "words"
-	TbodyAutocapitalizeEnumCharacters TbodyAutocapitalizeEnum = "characters"
-	TbodyAutocapitalizeEnumNone       TbodyAutocapitalizeEnum = "none"
-	TbodyAutocapitalizeEnumOff        TbodyAutocapitalizeEnum = "off"
+	TbodyAutocapitalizeWords      TbodyAutocapitalize = "words"
+	TbodyAutocapitalizeCharacters TbodyAutocapitalize = "characters"
+	TbodyAutocapitalizeNone       TbodyAutocapitalize = "none"
+	TbodyAutocapitalizeOff        TbodyAutocapitalize = "off"
+	TbodyAutocapitalizeOn         TbodyAutocapitalize = "on"
+	TbodyAutocapitalizeSentences  TbodyAutocapitalize = "sentences"
 )
 
-type TbodyAutocorrectEnum string
+type TbodyAutocorrect string
 
 const (
-	TbodyAutocorrectEnumOff   TbodyAutocorrectEnum = "off"
-	TbodyAutocorrectEnumOn    TbodyAutocorrectEnum = "on"
-	TbodyAutocorrectEnumEmpty TbodyAutocorrectEnum = ""
+	TbodyAutocorrectOff   TbodyAutocorrect = "off"
+	TbodyAutocorrectOn    TbodyAutocorrect = "on"
+	TbodyAutocorrectEmpty TbodyAutocorrect = ""
 )
 
-type TbodyContenteditableEnum string
+type TbodyContenteditable string
 
 const (
-	TbodyContenteditableEnumTrue          TbodyContenteditableEnum = "true"
-	TbodyContenteditableEnumFalse         TbodyContenteditableEnum = "false"
-	TbodyContenteditableEnumPlaintextOnly TbodyContenteditableEnum = "plaintext-only"
-	TbodyContenteditableEnumEmpty         TbodyContenteditableEnum = ""
+	TbodyContenteditableTrue          TbodyContenteditable = "true"
+	TbodyContenteditableFalse         TbodyContenteditable = "false"
+	TbodyContenteditablePlaintextOnly TbodyContenteditable = "plaintext-only"
+	TbodyContenteditableEmpty         TbodyContenteditable = ""
 )
 
-type TbodyDirEnum string
+type TbodyDir string
 
 const (
-	TbodyDirEnumAuto TbodyDirEnum = "auto"
-	TbodyDirEnumLtr  TbodyDirEnum = "ltr"
-	TbodyDirEnumRtl  TbodyDirEnum = "rtl"
+	TbodyDirRtl  TbodyDir = "rtl"
+	TbodyDirAuto TbodyDir = "auto"
+	TbodyDirLtr  TbodyDir = "ltr"
 )
 
-type TbodyDraggableEnum string
+type TbodyDraggable string
 
 const (
-	TbodyDraggableEnumFalse TbodyDraggableEnum = "false"
-	TbodyDraggableEnumTrue  TbodyDraggableEnum = "true"
+	TbodyDraggableFalse TbodyDraggable = "false"
+	TbodyDraggableTrue  TbodyDraggable = "true"
 )
 
-type TbodyEnterkeyhintEnum string
+type TbodyEnterkeyhint string
 
 const (
-	TbodyEnterkeyhintEnumSearch   TbodyEnterkeyhintEnum = "search"
-	TbodyEnterkeyhintEnumSend     TbodyEnterkeyhintEnum = "send"
-	TbodyEnterkeyhintEnumDone     TbodyEnterkeyhintEnum = "done"
-	TbodyEnterkeyhintEnumEnter    TbodyEnterkeyhintEnum = "enter"
-	TbodyEnterkeyhintEnumGo       TbodyEnterkeyhintEnum = "go"
-	TbodyEnterkeyhintEnumNext     TbodyEnterkeyhintEnum = "next"
-	TbodyEnterkeyhintEnumPrevious TbodyEnterkeyhintEnum = "previous"
+	TbodyEnterkeyhintGo       TbodyEnterkeyhint = "go"
+	TbodyEnterkeyhintNext     TbodyEnterkeyhint = "next"
+	TbodyEnterkeyhintPrevious TbodyEnterkeyhint = "previous"
+	TbodyEnterkeyhintSearch   TbodyEnterkeyhint = "search"
+	TbodyEnterkeyhintSend     TbodyEnterkeyhint = "send"
+	TbodyEnterkeyhintDone     TbodyEnterkeyhint = "done"
+	TbodyEnterkeyhintEnter    TbodyEnterkeyhint = "enter"
 )
 
-type TbodyHiddenEnum string
+type TbodyHidden string
 
 const (
-	TbodyHiddenEnumHidden     TbodyHiddenEnum = "hidden"
-	TbodyHiddenEnumUntilFound TbodyHiddenEnum = "until-found"
-	TbodyHiddenEnumEmpty      TbodyHiddenEnum = ""
+	TbodyHiddenHidden     TbodyHidden = "hidden"
+	TbodyHiddenUntilFound TbodyHidden = "until-found"
+	TbodyHiddenEmpty      TbodyHidden = ""
 )
 
-type TbodyInputmodeEnum string
+type TbodyInputmode string
 
 const (
-	TbodyInputmodeEnumNumeric TbodyInputmodeEnum = "numeric"
-	TbodyInputmodeEnumSearch  TbodyInputmodeEnum = "search"
-	TbodyInputmodeEnumTel     TbodyInputmodeEnum = "tel"
-	TbodyInputmodeEnumText    TbodyInputmodeEnum = "text"
-	TbodyInputmodeEnumUrl     TbodyInputmodeEnum = "url"
-	TbodyInputmodeEnumDecimal TbodyInputmodeEnum = "decimal"
-	TbodyInputmodeEnumEmail   TbodyInputmodeEnum = "email"
-	TbodyInputmodeEnumNone    TbodyInputmodeEnum = "none"
+	TbodyInputmodeUrl     TbodyInputmode = "url"
+	TbodyInputmodeDecimal TbodyInputmode = "decimal"
+	TbodyInputmodeEmail   TbodyInputmode = "email"
+	TbodyInputmodeNone    TbodyInputmode = "none"
+	TbodyInputmodeNumeric TbodyInputmode = "numeric"
+	TbodyInputmodeSearch  TbodyInputmode = "search"
+	TbodyInputmodeTel     TbodyInputmode = "tel"
+	TbodyInputmodeText    TbodyInputmode = "text"
 )
 
-type TbodySpellcheckEnum string
+type TbodySpellcheck string
 
 const (
-	TbodySpellcheckEnumFalse TbodySpellcheckEnum = "false"
-	TbodySpellcheckEnumTrue  TbodySpellcheckEnum = "true"
-	TbodySpellcheckEnumEmpty TbodySpellcheckEnum = ""
+	TbodySpellcheckFalse TbodySpellcheck = "false"
+	TbodySpellcheckTrue  TbodySpellcheck = "true"
+	TbodySpellcheckEmpty TbodySpellcheck = ""
 )
 
-type TbodyTranslateEnum string
+type TbodyTranslate string
 
 const (
-	TbodyTranslateEnumNo    TbodyTranslateEnum = "no"
-	TbodyTranslateEnumYes   TbodyTranslateEnum = "yes"
-	TbodyTranslateEnumEmpty TbodyTranslateEnum = ""
+	TbodyTranslateNo    TbodyTranslate = "no"
+	TbodyTranslateYes   TbodyTranslate = "yes"
+	TbodyTranslateEmpty TbodyTranslate = ""
 )
 
-type TbodyWritingsuggestionsEnum string
+type TbodyWritingsuggestions string
 
 const (
-	TbodyWritingsuggestionsEnumFalse TbodyWritingsuggestionsEnum = "false"
-	TbodyWritingsuggestionsEnumTrue  TbodyWritingsuggestionsEnum = "true"
-	TbodyWritingsuggestionsEnumEmpty TbodyWritingsuggestionsEnum = ""
+	TbodyWritingsuggestionsFalse TbodyWritingsuggestions = "false"
+	TbodyWritingsuggestionsTrue  TbodyWritingsuggestions = "true"
+	TbodyWritingsuggestionsEmpty TbodyWritingsuggestions = ""
 )
 
 type tbodyAttrs map[string]any
 
-func (e *TbodyElement) Autocapitalize(a TbodyAutocapitalizeEnum) *TbodyElement {
+func (e *TbodyElement) AriaUnsafe(name string, s string) *TbodyElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TbodyElement) Aria(name string, s string) *TbodyElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *TbodyElement) Autocapitalize(a TbodyAutocapitalize) *TbodyElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *TbodyElement) Autocorrect(a TbodyAutocorrectEnum) *TbodyElement {
+func (e *TbodyElement) Autocorrect(a TbodyAutocorrect) *TbodyElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *TbodyElement) Class(s ...string) *TbodyElement {
 	return e
 }
 
-func (e *TbodyElement) Contenteditable(a TbodyContenteditableEnum) *TbodyElement {
+func (e *TbodyElement) Contenteditable(a TbodyContenteditable) *TbodyElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *TbodyElement) Data(name string, s string) *TbodyElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *TbodyElement) Dir(a TbodyDirEnum) *TbodyElement {
+func (e *TbodyElement) Dir(a TbodyDir) *TbodyElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *TbodyElement) Draggable(a TbodyDraggableEnum) *TbodyElement {
+func (e *TbodyElement) Draggable(a TbodyDraggable) *TbodyElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *TbodyElement) Enterkeyhint(a TbodyEnterkeyhintEnum) *TbodyElement {
+func (e *TbodyElement) Enterkeyhint(a TbodyEnterkeyhint) *TbodyElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *TbodyElement) Hidden(a TbodyHiddenEnum) *TbodyElement {
+func (e *TbodyElement) Hidden(a TbodyHidden) *TbodyElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *TbodyElement) Inert(b bool) *TbodyElement {
 	return e
 }
 
-func (e *TbodyElement) Inputmode(a TbodyInputmodeEnum) *TbodyElement {
+func (e *TbodyElement) Inputmode(a TbodyInputmode) *TbodyElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *TbodyElement) Slot(s string) *TbodyElement {
 	return e
 }
 
-func (e *TbodyElement) Spellcheck(a TbodySpellcheckEnum) *TbodyElement {
+func (e *TbodyElement) Spellcheck(a TbodySpellcheck) *TbodyElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *TbodyElement) Title(s string) *TbodyElement {
 	return e
 }
 
-func (e *TbodyElement) Translate(a TbodyTranslateEnum) *TbodyElement {
+func (e *TbodyElement) Translate(a TbodyTranslate) *TbodyElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *TbodyElement) Writingsuggestions(a TbodyWritingsuggestionsEnum) *TbodyElement {
+func (e *TbodyElement) Writingsuggestions(a TbodyWritingsuggestions) *TbodyElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

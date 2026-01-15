@@ -48,115 +48,127 @@ func BdoTernary(condition bool, true htemel.Node, false htemel.Node) *BdoElement
 	return Bdo(false)
 }
 
-type BdoAutocapitalizeEnum string
+type BdoAutocapitalize string
 
 const (
-	BdoAutocapitalizeEnumOff        BdoAutocapitalizeEnum = "off"
-	BdoAutocapitalizeEnumOn         BdoAutocapitalizeEnum = "on"
-	BdoAutocapitalizeEnumSentences  BdoAutocapitalizeEnum = "sentences"
-	BdoAutocapitalizeEnumWords      BdoAutocapitalizeEnum = "words"
-	BdoAutocapitalizeEnumCharacters BdoAutocapitalizeEnum = "characters"
-	BdoAutocapitalizeEnumNone       BdoAutocapitalizeEnum = "none"
+	BdoAutocapitalizeWords      BdoAutocapitalize = "words"
+	BdoAutocapitalizeCharacters BdoAutocapitalize = "characters"
+	BdoAutocapitalizeNone       BdoAutocapitalize = "none"
+	BdoAutocapitalizeOff        BdoAutocapitalize = "off"
+	BdoAutocapitalizeOn         BdoAutocapitalize = "on"
+	BdoAutocapitalizeSentences  BdoAutocapitalize = "sentences"
 )
 
-type BdoAutocorrectEnum string
+type BdoAutocorrect string
 
 const (
-	BdoAutocorrectEnumOff   BdoAutocorrectEnum = "off"
-	BdoAutocorrectEnumOn    BdoAutocorrectEnum = "on"
-	BdoAutocorrectEnumEmpty BdoAutocorrectEnum = ""
+	BdoAutocorrectOff   BdoAutocorrect = "off"
+	BdoAutocorrectOn    BdoAutocorrect = "on"
+	BdoAutocorrectEmpty BdoAutocorrect = ""
 )
 
-type BdoContenteditableEnum string
+type BdoContenteditable string
 
 const (
-	BdoContenteditableEnumFalse         BdoContenteditableEnum = "false"
-	BdoContenteditableEnumPlaintextOnly BdoContenteditableEnum = "plaintext-only"
-	BdoContenteditableEnumTrue          BdoContenteditableEnum = "true"
-	BdoContenteditableEnumEmpty         BdoContenteditableEnum = ""
+	BdoContenteditableFalse         BdoContenteditable = "false"
+	BdoContenteditablePlaintextOnly BdoContenteditable = "plaintext-only"
+	BdoContenteditableTrue          BdoContenteditable = "true"
+	BdoContenteditableEmpty         BdoContenteditable = ""
 )
 
-type BdoDirEnum string
+type BdoDir string
 
 const (
-	BdoDirEnumAuto BdoDirEnum = "auto"
-	BdoDirEnumLtr  BdoDirEnum = "ltr"
-	BdoDirEnumRtl  BdoDirEnum = "rtl"
+	BdoDirAuto BdoDir = "auto"
+	BdoDirLtr  BdoDir = "ltr"
+	BdoDirRtl  BdoDir = "rtl"
 )
 
-type BdoDraggableEnum string
+type BdoDraggable string
 
 const (
-	BdoDraggableEnumFalse BdoDraggableEnum = "false"
-	BdoDraggableEnumTrue  BdoDraggableEnum = "true"
+	BdoDraggableTrue  BdoDraggable = "true"
+	BdoDraggableFalse BdoDraggable = "false"
 )
 
-type BdoEnterkeyhintEnum string
+type BdoEnterkeyhint string
 
 const (
-	BdoEnterkeyhintEnumGo       BdoEnterkeyhintEnum = "go"
-	BdoEnterkeyhintEnumNext     BdoEnterkeyhintEnum = "next"
-	BdoEnterkeyhintEnumPrevious BdoEnterkeyhintEnum = "previous"
-	BdoEnterkeyhintEnumSearch   BdoEnterkeyhintEnum = "search"
-	BdoEnterkeyhintEnumSend     BdoEnterkeyhintEnum = "send"
-	BdoEnterkeyhintEnumDone     BdoEnterkeyhintEnum = "done"
-	BdoEnterkeyhintEnumEnter    BdoEnterkeyhintEnum = "enter"
+	BdoEnterkeyhintGo       BdoEnterkeyhint = "go"
+	BdoEnterkeyhintNext     BdoEnterkeyhint = "next"
+	BdoEnterkeyhintPrevious BdoEnterkeyhint = "previous"
+	BdoEnterkeyhintSearch   BdoEnterkeyhint = "search"
+	BdoEnterkeyhintSend     BdoEnterkeyhint = "send"
+	BdoEnterkeyhintDone     BdoEnterkeyhint = "done"
+	BdoEnterkeyhintEnter    BdoEnterkeyhint = "enter"
 )
 
-type BdoHiddenEnum string
+type BdoHidden string
 
 const (
-	BdoHiddenEnumHidden     BdoHiddenEnum = "hidden"
-	BdoHiddenEnumUntilFound BdoHiddenEnum = "until-found"
-	BdoHiddenEnumEmpty      BdoHiddenEnum = ""
+	BdoHiddenHidden     BdoHidden = "hidden"
+	BdoHiddenUntilFound BdoHidden = "until-found"
+	BdoHiddenEmpty      BdoHidden = ""
 )
 
-type BdoInputmodeEnum string
+type BdoInputmode string
 
 const (
-	BdoInputmodeEnumText    BdoInputmodeEnum = "text"
-	BdoInputmodeEnumUrl     BdoInputmodeEnum = "url"
-	BdoInputmodeEnumDecimal BdoInputmodeEnum = "decimal"
-	BdoInputmodeEnumEmail   BdoInputmodeEnum = "email"
-	BdoInputmodeEnumNone    BdoInputmodeEnum = "none"
-	BdoInputmodeEnumNumeric BdoInputmodeEnum = "numeric"
-	BdoInputmodeEnumSearch  BdoInputmodeEnum = "search"
-	BdoInputmodeEnumTel     BdoInputmodeEnum = "tel"
+	BdoInputmodeNumeric BdoInputmode = "numeric"
+	BdoInputmodeSearch  BdoInputmode = "search"
+	BdoInputmodeTel     BdoInputmode = "tel"
+	BdoInputmodeText    BdoInputmode = "text"
+	BdoInputmodeUrl     BdoInputmode = "url"
+	BdoInputmodeDecimal BdoInputmode = "decimal"
+	BdoInputmodeEmail   BdoInputmode = "email"
+	BdoInputmodeNone    BdoInputmode = "none"
 )
 
-type BdoSpellcheckEnum string
+type BdoSpellcheck string
 
 const (
-	BdoSpellcheckEnumFalse BdoSpellcheckEnum = "false"
-	BdoSpellcheckEnumTrue  BdoSpellcheckEnum = "true"
-	BdoSpellcheckEnumEmpty BdoSpellcheckEnum = ""
+	BdoSpellcheckFalse BdoSpellcheck = "false"
+	BdoSpellcheckTrue  BdoSpellcheck = "true"
+	BdoSpellcheckEmpty BdoSpellcheck = ""
 )
 
-type BdoTranslateEnum string
+type BdoTranslate string
 
 const (
-	BdoTranslateEnumNo    BdoTranslateEnum = "no"
-	BdoTranslateEnumYes   BdoTranslateEnum = "yes"
-	BdoTranslateEnumEmpty BdoTranslateEnum = ""
+	BdoTranslateNo    BdoTranslate = "no"
+	BdoTranslateYes   BdoTranslate = "yes"
+	BdoTranslateEmpty BdoTranslate = ""
 )
 
-type BdoWritingsuggestionsEnum string
+type BdoWritingsuggestions string
 
 const (
-	BdoWritingsuggestionsEnumFalse BdoWritingsuggestionsEnum = "false"
-	BdoWritingsuggestionsEnumTrue  BdoWritingsuggestionsEnum = "true"
-	BdoWritingsuggestionsEnumEmpty BdoWritingsuggestionsEnum = ""
+	BdoWritingsuggestionsTrue  BdoWritingsuggestions = "true"
+	BdoWritingsuggestionsFalse BdoWritingsuggestions = "false"
+	BdoWritingsuggestionsEmpty BdoWritingsuggestions = ""
 )
 
 type bdoAttrs map[string]any
 
-func (e *BdoElement) Autocapitalize(a BdoAutocapitalizeEnum) *BdoElement {
+func (e *BdoElement) AriaUnsafe(name string, s string) *BdoElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BdoElement) Aria(name string, s string) *BdoElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *BdoElement) Autocapitalize(a BdoAutocapitalize) *BdoElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *BdoElement) Autocorrect(a BdoAutocorrectEnum) *BdoElement {
+func (e *BdoElement) Autocorrect(a BdoAutocorrect) *BdoElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *BdoElement) Class(s ...string) *BdoElement {
 	return e
 }
 
-func (e *BdoElement) Contenteditable(a BdoContenteditableEnum) *BdoElement {
+func (e *BdoElement) Contenteditable(a BdoContenteditable) *BdoElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *BdoElement) Data(name string, s string) *BdoElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *BdoElement) Dir(a BdoDirEnum) *BdoElement {
+func (e *BdoElement) Dir(a BdoDir) *BdoElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *BdoElement) Draggable(a BdoDraggableEnum) *BdoElement {
+func (e *BdoElement) Draggable(a BdoDraggable) *BdoElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *BdoElement) Enterkeyhint(a BdoEnterkeyhintEnum) *BdoElement {
+func (e *BdoElement) Enterkeyhint(a BdoEnterkeyhint) *BdoElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *BdoElement) Hidden(a BdoHiddenEnum) *BdoElement {
+func (e *BdoElement) Hidden(a BdoHidden) *BdoElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *BdoElement) Inert(b bool) *BdoElement {
 	return e
 }
 
-func (e *BdoElement) Inputmode(a BdoInputmodeEnum) *BdoElement {
+func (e *BdoElement) Inputmode(a BdoInputmode) *BdoElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *BdoElement) Slot(s string) *BdoElement {
 	return e
 }
 
-func (e *BdoElement) Spellcheck(a BdoSpellcheckEnum) *BdoElement {
+func (e *BdoElement) Spellcheck(a BdoSpellcheck) *BdoElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *BdoElement) Title(s string) *BdoElement {
 	return e
 }
 
-func (e *BdoElement) Translate(a BdoTranslateEnum) *BdoElement {
+func (e *BdoElement) Translate(a BdoTranslate) *BdoElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *BdoElement) Writingsuggestions(a BdoWritingsuggestionsEnum) *BdoElement {
+func (e *BdoElement) Writingsuggestions(a BdoWritingsuggestions) *BdoElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

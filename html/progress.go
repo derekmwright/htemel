@@ -48,104 +48,104 @@ func ProgressTernary(condition bool, true htemel.Node, false htemel.Node) *Progr
 	return Progress(false)
 }
 
-type ProgressAutocapitalizeEnum string
+type ProgressAutocapitalize string
 
 const (
-	ProgressAutocapitalizeEnumWords      ProgressAutocapitalizeEnum = "words"
-	ProgressAutocapitalizeEnumCharacters ProgressAutocapitalizeEnum = "characters"
-	ProgressAutocapitalizeEnumNone       ProgressAutocapitalizeEnum = "none"
-	ProgressAutocapitalizeEnumOff        ProgressAutocapitalizeEnum = "off"
-	ProgressAutocapitalizeEnumOn         ProgressAutocapitalizeEnum = "on"
-	ProgressAutocapitalizeEnumSentences  ProgressAutocapitalizeEnum = "sentences"
+	ProgressAutocapitalizeCharacters ProgressAutocapitalize = "characters"
+	ProgressAutocapitalizeNone       ProgressAutocapitalize = "none"
+	ProgressAutocapitalizeOff        ProgressAutocapitalize = "off"
+	ProgressAutocapitalizeOn         ProgressAutocapitalize = "on"
+	ProgressAutocapitalizeSentences  ProgressAutocapitalize = "sentences"
+	ProgressAutocapitalizeWords      ProgressAutocapitalize = "words"
 )
 
-type ProgressAutocorrectEnum string
+type ProgressAutocorrect string
 
 const (
-	ProgressAutocorrectEnumOn    ProgressAutocorrectEnum = "on"
-	ProgressAutocorrectEnumOff   ProgressAutocorrectEnum = "off"
-	ProgressAutocorrectEnumEmpty ProgressAutocorrectEnum = ""
+	ProgressAutocorrectOff   ProgressAutocorrect = "off"
+	ProgressAutocorrectOn    ProgressAutocorrect = "on"
+	ProgressAutocorrectEmpty ProgressAutocorrect = ""
 )
 
-type ProgressContenteditableEnum string
+type ProgressContenteditable string
 
 const (
-	ProgressContenteditableEnumFalse         ProgressContenteditableEnum = "false"
-	ProgressContenteditableEnumPlaintextOnly ProgressContenteditableEnum = "plaintext-only"
-	ProgressContenteditableEnumTrue          ProgressContenteditableEnum = "true"
-	ProgressContenteditableEnumEmpty         ProgressContenteditableEnum = ""
+	ProgressContenteditableTrue          ProgressContenteditable = "true"
+	ProgressContenteditableFalse         ProgressContenteditable = "false"
+	ProgressContenteditablePlaintextOnly ProgressContenteditable = "plaintext-only"
+	ProgressContenteditableEmpty         ProgressContenteditable = ""
 )
 
-type ProgressDirEnum string
+type ProgressDir string
 
 const (
-	ProgressDirEnumAuto ProgressDirEnum = "auto"
-	ProgressDirEnumLtr  ProgressDirEnum = "ltr"
-	ProgressDirEnumRtl  ProgressDirEnum = "rtl"
+	ProgressDirAuto ProgressDir = "auto"
+	ProgressDirLtr  ProgressDir = "ltr"
+	ProgressDirRtl  ProgressDir = "rtl"
 )
 
-type ProgressDraggableEnum string
+type ProgressDraggable string
 
 const (
-	ProgressDraggableEnumFalse ProgressDraggableEnum = "false"
-	ProgressDraggableEnumTrue  ProgressDraggableEnum = "true"
+	ProgressDraggableFalse ProgressDraggable = "false"
+	ProgressDraggableTrue  ProgressDraggable = "true"
 )
 
-type ProgressEnterkeyhintEnum string
+type ProgressEnterkeyhint string
 
 const (
-	ProgressEnterkeyhintEnumSend     ProgressEnterkeyhintEnum = "send"
-	ProgressEnterkeyhintEnumDone     ProgressEnterkeyhintEnum = "done"
-	ProgressEnterkeyhintEnumEnter    ProgressEnterkeyhintEnum = "enter"
-	ProgressEnterkeyhintEnumGo       ProgressEnterkeyhintEnum = "go"
-	ProgressEnterkeyhintEnumNext     ProgressEnterkeyhintEnum = "next"
-	ProgressEnterkeyhintEnumPrevious ProgressEnterkeyhintEnum = "previous"
-	ProgressEnterkeyhintEnumSearch   ProgressEnterkeyhintEnum = "search"
+	ProgressEnterkeyhintEnter    ProgressEnterkeyhint = "enter"
+	ProgressEnterkeyhintGo       ProgressEnterkeyhint = "go"
+	ProgressEnterkeyhintNext     ProgressEnterkeyhint = "next"
+	ProgressEnterkeyhintPrevious ProgressEnterkeyhint = "previous"
+	ProgressEnterkeyhintSearch   ProgressEnterkeyhint = "search"
+	ProgressEnterkeyhintSend     ProgressEnterkeyhint = "send"
+	ProgressEnterkeyhintDone     ProgressEnterkeyhint = "done"
 )
 
-type ProgressHiddenEnum string
+type ProgressHidden string
 
 const (
-	ProgressHiddenEnumHidden     ProgressHiddenEnum = "hidden"
-	ProgressHiddenEnumUntilFound ProgressHiddenEnum = "until-found"
-	ProgressHiddenEnumEmpty      ProgressHiddenEnum = ""
+	ProgressHiddenHidden     ProgressHidden = "hidden"
+	ProgressHiddenUntilFound ProgressHidden = "until-found"
+	ProgressHiddenEmpty      ProgressHidden = ""
 )
 
-type ProgressInputmodeEnum string
+type ProgressInputmode string
 
 const (
-	ProgressInputmodeEnumUrl     ProgressInputmodeEnum = "url"
-	ProgressInputmodeEnumDecimal ProgressInputmodeEnum = "decimal"
-	ProgressInputmodeEnumEmail   ProgressInputmodeEnum = "email"
-	ProgressInputmodeEnumNone    ProgressInputmodeEnum = "none"
-	ProgressInputmodeEnumNumeric ProgressInputmodeEnum = "numeric"
-	ProgressInputmodeEnumSearch  ProgressInputmodeEnum = "search"
-	ProgressInputmodeEnumTel     ProgressInputmodeEnum = "tel"
-	ProgressInputmodeEnumText    ProgressInputmodeEnum = "text"
+	ProgressInputmodeNumeric ProgressInputmode = "numeric"
+	ProgressInputmodeSearch  ProgressInputmode = "search"
+	ProgressInputmodeTel     ProgressInputmode = "tel"
+	ProgressInputmodeText    ProgressInputmode = "text"
+	ProgressInputmodeUrl     ProgressInputmode = "url"
+	ProgressInputmodeDecimal ProgressInputmode = "decimal"
+	ProgressInputmodeEmail   ProgressInputmode = "email"
+	ProgressInputmodeNone    ProgressInputmode = "none"
 )
 
-type ProgressSpellcheckEnum string
+type ProgressSpellcheck string
 
 const (
-	ProgressSpellcheckEnumFalse ProgressSpellcheckEnum = "false"
-	ProgressSpellcheckEnumTrue  ProgressSpellcheckEnum = "true"
-	ProgressSpellcheckEnumEmpty ProgressSpellcheckEnum = ""
+	ProgressSpellcheckTrue  ProgressSpellcheck = "true"
+	ProgressSpellcheckFalse ProgressSpellcheck = "false"
+	ProgressSpellcheckEmpty ProgressSpellcheck = ""
 )
 
-type ProgressTranslateEnum string
+type ProgressTranslate string
 
 const (
-	ProgressTranslateEnumNo    ProgressTranslateEnum = "no"
-	ProgressTranslateEnumYes   ProgressTranslateEnum = "yes"
-	ProgressTranslateEnumEmpty ProgressTranslateEnum = ""
+	ProgressTranslateNo    ProgressTranslate = "no"
+	ProgressTranslateYes   ProgressTranslate = "yes"
+	ProgressTranslateEmpty ProgressTranslate = ""
 )
 
-type ProgressWritingsuggestionsEnum string
+type ProgressWritingsuggestions string
 
 const (
-	ProgressWritingsuggestionsEnumTrue  ProgressWritingsuggestionsEnum = "true"
-	ProgressWritingsuggestionsEnumFalse ProgressWritingsuggestionsEnum = "false"
-	ProgressWritingsuggestionsEnumEmpty ProgressWritingsuggestionsEnum = ""
+	ProgressWritingsuggestionsFalse ProgressWritingsuggestions = "false"
+	ProgressWritingsuggestionsTrue  ProgressWritingsuggestions = "true"
+	ProgressWritingsuggestionsEmpty ProgressWritingsuggestions = ""
 )
 
 type progressAttrs map[string]any
@@ -162,13 +162,25 @@ func (e *ProgressElement) Max(f float64) *ProgressElement {
 	return e
 }
 
-func (e *ProgressElement) Autocapitalize(a ProgressAutocapitalizeEnum) *ProgressElement {
+func (e *ProgressElement) AriaUnsafe(name string, s string) *ProgressElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ProgressElement) Aria(name string, s string) *ProgressElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *ProgressElement) Autocapitalize(a ProgressAutocapitalize) *ProgressElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *ProgressElement) Autocorrect(a ProgressAutocorrectEnum) *ProgressElement {
+func (e *ProgressElement) Autocorrect(a ProgressAutocorrect) *ProgressElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -186,7 +198,7 @@ func (e *ProgressElement) Class(s ...string) *ProgressElement {
 	return e
 }
 
-func (e *ProgressElement) Contenteditable(a ProgressContenteditableEnum) *ProgressElement {
+func (e *ProgressElement) Contenteditable(a ProgressContenteditable) *ProgressElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -204,25 +216,25 @@ func (e *ProgressElement) Data(name string, s string) *ProgressElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *ProgressElement) Dir(a ProgressDirEnum) *ProgressElement {
+func (e *ProgressElement) Dir(a ProgressDir) *ProgressElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *ProgressElement) Draggable(a ProgressDraggableEnum) *ProgressElement {
+func (e *ProgressElement) Draggable(a ProgressDraggable) *ProgressElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *ProgressElement) Enterkeyhint(a ProgressEnterkeyhintEnum) *ProgressElement {
+func (e *ProgressElement) Enterkeyhint(a ProgressEnterkeyhint) *ProgressElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *ProgressElement) Hidden(a ProgressHiddenEnum) *ProgressElement {
+func (e *ProgressElement) Hidden(a ProgressHidden) *ProgressElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -240,7 +252,7 @@ func (e *ProgressElement) Inert(b bool) *ProgressElement {
 	return e
 }
 
-func (e *ProgressElement) Inputmode(a ProgressInputmodeEnum) *ProgressElement {
+func (e *ProgressElement) Inputmode(a ProgressInputmode) *ProgressElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -300,7 +312,7 @@ func (e *ProgressElement) Slot(s string) *ProgressElement {
 	return e
 }
 
-func (e *ProgressElement) Spellcheck(a ProgressSpellcheckEnum) *ProgressElement {
+func (e *ProgressElement) Spellcheck(a ProgressSpellcheck) *ProgressElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -324,13 +336,13 @@ func (e *ProgressElement) Title(s string) *ProgressElement {
 	return e
 }
 
-func (e *ProgressElement) Translate(a ProgressTranslateEnum) *ProgressElement {
+func (e *ProgressElement) Translate(a ProgressTranslate) *ProgressElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *ProgressElement) Writingsuggestions(a ProgressWritingsuggestionsEnum) *ProgressElement {
+func (e *ProgressElement) Writingsuggestions(a ProgressWritingsuggestions) *ProgressElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -39,115 +39,127 @@ func BrIf(condition bool) *BrElement {
 	}
 }
 
-type BrAutocapitalizeEnum string
+type BrAutocapitalize string
 
 const (
-	BrAutocapitalizeEnumCharacters BrAutocapitalizeEnum = "characters"
-	BrAutocapitalizeEnumNone       BrAutocapitalizeEnum = "none"
-	BrAutocapitalizeEnumOff        BrAutocapitalizeEnum = "off"
-	BrAutocapitalizeEnumOn         BrAutocapitalizeEnum = "on"
-	BrAutocapitalizeEnumSentences  BrAutocapitalizeEnum = "sentences"
-	BrAutocapitalizeEnumWords      BrAutocapitalizeEnum = "words"
+	BrAutocapitalizeOff        BrAutocapitalize = "off"
+	BrAutocapitalizeOn         BrAutocapitalize = "on"
+	BrAutocapitalizeSentences  BrAutocapitalize = "sentences"
+	BrAutocapitalizeWords      BrAutocapitalize = "words"
+	BrAutocapitalizeCharacters BrAutocapitalize = "characters"
+	BrAutocapitalizeNone       BrAutocapitalize = "none"
 )
 
-type BrAutocorrectEnum string
+type BrAutocorrect string
 
 const (
-	BrAutocorrectEnumOff   BrAutocorrectEnum = "off"
-	BrAutocorrectEnumOn    BrAutocorrectEnum = "on"
-	BrAutocorrectEnumEmpty BrAutocorrectEnum = ""
+	BrAutocorrectOn    BrAutocorrect = "on"
+	BrAutocorrectOff   BrAutocorrect = "off"
+	BrAutocorrectEmpty BrAutocorrect = ""
 )
 
-type BrContenteditableEnum string
+type BrContenteditable string
 
 const (
-	BrContenteditableEnumFalse         BrContenteditableEnum = "false"
-	BrContenteditableEnumPlaintextOnly BrContenteditableEnum = "plaintext-only"
-	BrContenteditableEnumTrue          BrContenteditableEnum = "true"
-	BrContenteditableEnumEmpty         BrContenteditableEnum = ""
+	BrContenteditableFalse         BrContenteditable = "false"
+	BrContenteditablePlaintextOnly BrContenteditable = "plaintext-only"
+	BrContenteditableTrue          BrContenteditable = "true"
+	BrContenteditableEmpty         BrContenteditable = ""
 )
 
-type BrDirEnum string
+type BrDir string
 
 const (
-	BrDirEnumAuto BrDirEnum = "auto"
-	BrDirEnumLtr  BrDirEnum = "ltr"
-	BrDirEnumRtl  BrDirEnum = "rtl"
+	BrDirAuto BrDir = "auto"
+	BrDirLtr  BrDir = "ltr"
+	BrDirRtl  BrDir = "rtl"
 )
 
-type BrDraggableEnum string
+type BrDraggable string
 
 const (
-	BrDraggableEnumFalse BrDraggableEnum = "false"
-	BrDraggableEnumTrue  BrDraggableEnum = "true"
+	BrDraggableFalse BrDraggable = "false"
+	BrDraggableTrue  BrDraggable = "true"
 )
 
-type BrEnterkeyhintEnum string
+type BrEnterkeyhint string
 
 const (
-	BrEnterkeyhintEnumPrevious BrEnterkeyhintEnum = "previous"
-	BrEnterkeyhintEnumSearch   BrEnterkeyhintEnum = "search"
-	BrEnterkeyhintEnumSend     BrEnterkeyhintEnum = "send"
-	BrEnterkeyhintEnumDone     BrEnterkeyhintEnum = "done"
-	BrEnterkeyhintEnumEnter    BrEnterkeyhintEnum = "enter"
-	BrEnterkeyhintEnumGo       BrEnterkeyhintEnum = "go"
-	BrEnterkeyhintEnumNext     BrEnterkeyhintEnum = "next"
+	BrEnterkeyhintEnter    BrEnterkeyhint = "enter"
+	BrEnterkeyhintGo       BrEnterkeyhint = "go"
+	BrEnterkeyhintNext     BrEnterkeyhint = "next"
+	BrEnterkeyhintPrevious BrEnterkeyhint = "previous"
+	BrEnterkeyhintSearch   BrEnterkeyhint = "search"
+	BrEnterkeyhintSend     BrEnterkeyhint = "send"
+	BrEnterkeyhintDone     BrEnterkeyhint = "done"
 )
 
-type BrHiddenEnum string
+type BrHidden string
 
 const (
-	BrHiddenEnumHidden     BrHiddenEnum = "hidden"
-	BrHiddenEnumUntilFound BrHiddenEnum = "until-found"
-	BrHiddenEnumEmpty      BrHiddenEnum = ""
+	BrHiddenHidden     BrHidden = "hidden"
+	BrHiddenUntilFound BrHidden = "until-found"
+	BrHiddenEmpty      BrHidden = ""
 )
 
-type BrInputmodeEnum string
+type BrInputmode string
 
 const (
-	BrInputmodeEnumTel     BrInputmodeEnum = "tel"
-	BrInputmodeEnumText    BrInputmodeEnum = "text"
-	BrInputmodeEnumUrl     BrInputmodeEnum = "url"
-	BrInputmodeEnumDecimal BrInputmodeEnum = "decimal"
-	BrInputmodeEnumEmail   BrInputmodeEnum = "email"
-	BrInputmodeEnumNone    BrInputmodeEnum = "none"
-	BrInputmodeEnumNumeric BrInputmodeEnum = "numeric"
-	BrInputmodeEnumSearch  BrInputmodeEnum = "search"
+	BrInputmodeUrl     BrInputmode = "url"
+	BrInputmodeDecimal BrInputmode = "decimal"
+	BrInputmodeEmail   BrInputmode = "email"
+	BrInputmodeNone    BrInputmode = "none"
+	BrInputmodeNumeric BrInputmode = "numeric"
+	BrInputmodeSearch  BrInputmode = "search"
+	BrInputmodeTel     BrInputmode = "tel"
+	BrInputmodeText    BrInputmode = "text"
 )
 
-type BrSpellcheckEnum string
+type BrSpellcheck string
 
 const (
-	BrSpellcheckEnumFalse BrSpellcheckEnum = "false"
-	BrSpellcheckEnumTrue  BrSpellcheckEnum = "true"
-	BrSpellcheckEnumEmpty BrSpellcheckEnum = ""
+	BrSpellcheckFalse BrSpellcheck = "false"
+	BrSpellcheckTrue  BrSpellcheck = "true"
+	BrSpellcheckEmpty BrSpellcheck = ""
 )
 
-type BrTranslateEnum string
+type BrTranslate string
 
 const (
-	BrTranslateEnumNo    BrTranslateEnum = "no"
-	BrTranslateEnumYes   BrTranslateEnum = "yes"
-	BrTranslateEnumEmpty BrTranslateEnum = ""
+	BrTranslateNo    BrTranslate = "no"
+	BrTranslateYes   BrTranslate = "yes"
+	BrTranslateEmpty BrTranslate = ""
 )
 
-type BrWritingsuggestionsEnum string
+type BrWritingsuggestions string
 
 const (
-	BrWritingsuggestionsEnumFalse BrWritingsuggestionsEnum = "false"
-	BrWritingsuggestionsEnumTrue  BrWritingsuggestionsEnum = "true"
-	BrWritingsuggestionsEnumEmpty BrWritingsuggestionsEnum = ""
+	BrWritingsuggestionsFalse BrWritingsuggestions = "false"
+	BrWritingsuggestionsTrue  BrWritingsuggestions = "true"
+	BrWritingsuggestionsEmpty BrWritingsuggestions = ""
 )
 
 type brAttrs map[string]any
 
-func (e *BrElement) Autocapitalize(a BrAutocapitalizeEnum) *BrElement {
+func (e *BrElement) AriaUnsafe(name string, s string) *BrElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *BrElement) Aria(name string, s string) *BrElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *BrElement) Autocapitalize(a BrAutocapitalize) *BrElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *BrElement) Autocorrect(a BrAutocorrectEnum) *BrElement {
+func (e *BrElement) Autocorrect(a BrAutocorrect) *BrElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -165,7 +177,7 @@ func (e *BrElement) Class(s ...string) *BrElement {
 	return e
 }
 
-func (e *BrElement) Contenteditable(a BrContenteditableEnum) *BrElement {
+func (e *BrElement) Contenteditable(a BrContenteditable) *BrElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -183,25 +195,25 @@ func (e *BrElement) Data(name string, s string) *BrElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *BrElement) Dir(a BrDirEnum) *BrElement {
+func (e *BrElement) Dir(a BrDir) *BrElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *BrElement) Draggable(a BrDraggableEnum) *BrElement {
+func (e *BrElement) Draggable(a BrDraggable) *BrElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *BrElement) Enterkeyhint(a BrEnterkeyhintEnum) *BrElement {
+func (e *BrElement) Enterkeyhint(a BrEnterkeyhint) *BrElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *BrElement) Hidden(a BrHiddenEnum) *BrElement {
+func (e *BrElement) Hidden(a BrHidden) *BrElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -219,7 +231,7 @@ func (e *BrElement) Inert(b bool) *BrElement {
 	return e
 }
 
-func (e *BrElement) Inputmode(a BrInputmodeEnum) *BrElement {
+func (e *BrElement) Inputmode(a BrInputmode) *BrElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -279,7 +291,7 @@ func (e *BrElement) Slot(s string) *BrElement {
 	return e
 }
 
-func (e *BrElement) Spellcheck(a BrSpellcheckEnum) *BrElement {
+func (e *BrElement) Spellcheck(a BrSpellcheck) *BrElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -303,13 +315,13 @@ func (e *BrElement) Title(s string) *BrElement {
 	return e
 }
 
-func (e *BrElement) Translate(a BrTranslateEnum) *BrElement {
+func (e *BrElement) Translate(a BrTranslate) *BrElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *BrElement) Writingsuggestions(a BrWritingsuggestionsEnum) *BrElement {
+func (e *BrElement) Writingsuggestions(a BrWritingsuggestions) *BrElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

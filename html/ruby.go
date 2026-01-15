@@ -48,115 +48,127 @@ func RubyTernary(condition bool, true htemel.Node, false htemel.Node) *RubyEleme
 	return Ruby(false)
 }
 
-type RubyAutocapitalizeEnum string
+type RubyAutocapitalize string
 
 const (
-	RubyAutocapitalizeEnumOn         RubyAutocapitalizeEnum = "on"
-	RubyAutocapitalizeEnumSentences  RubyAutocapitalizeEnum = "sentences"
-	RubyAutocapitalizeEnumWords      RubyAutocapitalizeEnum = "words"
-	RubyAutocapitalizeEnumCharacters RubyAutocapitalizeEnum = "characters"
-	RubyAutocapitalizeEnumNone       RubyAutocapitalizeEnum = "none"
-	RubyAutocapitalizeEnumOff        RubyAutocapitalizeEnum = "off"
+	RubyAutocapitalizeCharacters RubyAutocapitalize = "characters"
+	RubyAutocapitalizeNone       RubyAutocapitalize = "none"
+	RubyAutocapitalizeOff        RubyAutocapitalize = "off"
+	RubyAutocapitalizeOn         RubyAutocapitalize = "on"
+	RubyAutocapitalizeSentences  RubyAutocapitalize = "sentences"
+	RubyAutocapitalizeWords      RubyAutocapitalize = "words"
 )
 
-type RubyAutocorrectEnum string
+type RubyAutocorrect string
 
 const (
-	RubyAutocorrectEnumOn    RubyAutocorrectEnum = "on"
-	RubyAutocorrectEnumOff   RubyAutocorrectEnum = "off"
-	RubyAutocorrectEnumEmpty RubyAutocorrectEnum = ""
+	RubyAutocorrectOff   RubyAutocorrect = "off"
+	RubyAutocorrectOn    RubyAutocorrect = "on"
+	RubyAutocorrectEmpty RubyAutocorrect = ""
 )
 
-type RubyContenteditableEnum string
+type RubyContenteditable string
 
 const (
-	RubyContenteditableEnumTrue          RubyContenteditableEnum = "true"
-	RubyContenteditableEnumFalse         RubyContenteditableEnum = "false"
-	RubyContenteditableEnumPlaintextOnly RubyContenteditableEnum = "plaintext-only"
-	RubyContenteditableEnumEmpty         RubyContenteditableEnum = ""
+	RubyContenteditableFalse         RubyContenteditable = "false"
+	RubyContenteditablePlaintextOnly RubyContenteditable = "plaintext-only"
+	RubyContenteditableTrue          RubyContenteditable = "true"
+	RubyContenteditableEmpty         RubyContenteditable = ""
 )
 
-type RubyDirEnum string
+type RubyDir string
 
 const (
-	RubyDirEnumAuto RubyDirEnum = "auto"
-	RubyDirEnumLtr  RubyDirEnum = "ltr"
-	RubyDirEnumRtl  RubyDirEnum = "rtl"
+	RubyDirAuto RubyDir = "auto"
+	RubyDirLtr  RubyDir = "ltr"
+	RubyDirRtl  RubyDir = "rtl"
 )
 
-type RubyDraggableEnum string
+type RubyDraggable string
 
 const (
-	RubyDraggableEnumFalse RubyDraggableEnum = "false"
-	RubyDraggableEnumTrue  RubyDraggableEnum = "true"
+	RubyDraggableFalse RubyDraggable = "false"
+	RubyDraggableTrue  RubyDraggable = "true"
 )
 
-type RubyEnterkeyhintEnum string
+type RubyEnterkeyhint string
 
 const (
-	RubyEnterkeyhintEnumSearch   RubyEnterkeyhintEnum = "search"
-	RubyEnterkeyhintEnumSend     RubyEnterkeyhintEnum = "send"
-	RubyEnterkeyhintEnumDone     RubyEnterkeyhintEnum = "done"
-	RubyEnterkeyhintEnumEnter    RubyEnterkeyhintEnum = "enter"
-	RubyEnterkeyhintEnumGo       RubyEnterkeyhintEnum = "go"
-	RubyEnterkeyhintEnumNext     RubyEnterkeyhintEnum = "next"
-	RubyEnterkeyhintEnumPrevious RubyEnterkeyhintEnum = "previous"
+	RubyEnterkeyhintNext     RubyEnterkeyhint = "next"
+	RubyEnterkeyhintPrevious RubyEnterkeyhint = "previous"
+	RubyEnterkeyhintSearch   RubyEnterkeyhint = "search"
+	RubyEnterkeyhintSend     RubyEnterkeyhint = "send"
+	RubyEnterkeyhintDone     RubyEnterkeyhint = "done"
+	RubyEnterkeyhintEnter    RubyEnterkeyhint = "enter"
+	RubyEnterkeyhintGo       RubyEnterkeyhint = "go"
 )
 
-type RubyHiddenEnum string
+type RubyHidden string
 
 const (
-	RubyHiddenEnumUntilFound RubyHiddenEnum = "until-found"
-	RubyHiddenEnumHidden     RubyHiddenEnum = "hidden"
-	RubyHiddenEnumEmpty      RubyHiddenEnum = ""
+	RubyHiddenHidden     RubyHidden = "hidden"
+	RubyHiddenUntilFound RubyHidden = "until-found"
+	RubyHiddenEmpty      RubyHidden = ""
 )
 
-type RubyInputmodeEnum string
+type RubyInputmode string
 
 const (
-	RubyInputmodeEnumEmail   RubyInputmodeEnum = "email"
-	RubyInputmodeEnumNone    RubyInputmodeEnum = "none"
-	RubyInputmodeEnumNumeric RubyInputmodeEnum = "numeric"
-	RubyInputmodeEnumSearch  RubyInputmodeEnum = "search"
-	RubyInputmodeEnumTel     RubyInputmodeEnum = "tel"
-	RubyInputmodeEnumText    RubyInputmodeEnum = "text"
-	RubyInputmodeEnumUrl     RubyInputmodeEnum = "url"
-	RubyInputmodeEnumDecimal RubyInputmodeEnum = "decimal"
+	RubyInputmodeText    RubyInputmode = "text"
+	RubyInputmodeUrl     RubyInputmode = "url"
+	RubyInputmodeDecimal RubyInputmode = "decimal"
+	RubyInputmodeEmail   RubyInputmode = "email"
+	RubyInputmodeNone    RubyInputmode = "none"
+	RubyInputmodeNumeric RubyInputmode = "numeric"
+	RubyInputmodeSearch  RubyInputmode = "search"
+	RubyInputmodeTel     RubyInputmode = "tel"
 )
 
-type RubySpellcheckEnum string
+type RubySpellcheck string
 
 const (
-	RubySpellcheckEnumFalse RubySpellcheckEnum = "false"
-	RubySpellcheckEnumTrue  RubySpellcheckEnum = "true"
-	RubySpellcheckEnumEmpty RubySpellcheckEnum = ""
+	RubySpellcheckFalse RubySpellcheck = "false"
+	RubySpellcheckTrue  RubySpellcheck = "true"
+	RubySpellcheckEmpty RubySpellcheck = ""
 )
 
-type RubyTranslateEnum string
+type RubyTranslate string
 
 const (
-	RubyTranslateEnumYes   RubyTranslateEnum = "yes"
-	RubyTranslateEnumNo    RubyTranslateEnum = "no"
-	RubyTranslateEnumEmpty RubyTranslateEnum = ""
+	RubyTranslateNo    RubyTranslate = "no"
+	RubyTranslateYes   RubyTranslate = "yes"
+	RubyTranslateEmpty RubyTranslate = ""
 )
 
-type RubyWritingsuggestionsEnum string
+type RubyWritingsuggestions string
 
 const (
-	RubyWritingsuggestionsEnumFalse RubyWritingsuggestionsEnum = "false"
-	RubyWritingsuggestionsEnumTrue  RubyWritingsuggestionsEnum = "true"
-	RubyWritingsuggestionsEnumEmpty RubyWritingsuggestionsEnum = ""
+	RubyWritingsuggestionsFalse RubyWritingsuggestions = "false"
+	RubyWritingsuggestionsTrue  RubyWritingsuggestions = "true"
+	RubyWritingsuggestionsEmpty RubyWritingsuggestions = ""
 )
 
 type rubyAttrs map[string]any
 
-func (e *RubyElement) Autocapitalize(a RubyAutocapitalizeEnum) *RubyElement {
+func (e *RubyElement) AriaUnsafe(name string, s string) *RubyElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *RubyElement) Aria(name string, s string) *RubyElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *RubyElement) Autocapitalize(a RubyAutocapitalize) *RubyElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *RubyElement) Autocorrect(a RubyAutocorrectEnum) *RubyElement {
+func (e *RubyElement) Autocorrect(a RubyAutocorrect) *RubyElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *RubyElement) Class(s ...string) *RubyElement {
 	return e
 }
 
-func (e *RubyElement) Contenteditable(a RubyContenteditableEnum) *RubyElement {
+func (e *RubyElement) Contenteditable(a RubyContenteditable) *RubyElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *RubyElement) Data(name string, s string) *RubyElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *RubyElement) Dir(a RubyDirEnum) *RubyElement {
+func (e *RubyElement) Dir(a RubyDir) *RubyElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *RubyElement) Draggable(a RubyDraggableEnum) *RubyElement {
+func (e *RubyElement) Draggable(a RubyDraggable) *RubyElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *RubyElement) Enterkeyhint(a RubyEnterkeyhintEnum) *RubyElement {
+func (e *RubyElement) Enterkeyhint(a RubyEnterkeyhint) *RubyElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *RubyElement) Hidden(a RubyHiddenEnum) *RubyElement {
+func (e *RubyElement) Hidden(a RubyHidden) *RubyElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *RubyElement) Inert(b bool) *RubyElement {
 	return e
 }
 
-func (e *RubyElement) Inputmode(a RubyInputmodeEnum) *RubyElement {
+func (e *RubyElement) Inputmode(a RubyInputmode) *RubyElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *RubyElement) Slot(s string) *RubyElement {
 	return e
 }
 
-func (e *RubyElement) Spellcheck(a RubySpellcheckEnum) *RubyElement {
+func (e *RubyElement) Spellcheck(a RubySpellcheck) *RubyElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *RubyElement) Title(s string) *RubyElement {
 	return e
 }
 
-func (e *RubyElement) Translate(a RubyTranslateEnum) *RubyElement {
+func (e *RubyElement) Translate(a RubyTranslate) *RubyElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *RubyElement) Writingsuggestions(a RubyWritingsuggestionsEnum) *RubyElement {
+func (e *RubyElement) Writingsuggestions(a RubyWritingsuggestions) *RubyElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

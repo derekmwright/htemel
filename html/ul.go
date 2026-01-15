@@ -48,115 +48,127 @@ func UlTernary(condition bool, true htemel.Node, false htemel.Node) *UlElement {
 	return Ul(false)
 }
 
-type UlAutocapitalizeEnum string
+type UlAutocapitalize string
 
 const (
-	UlAutocapitalizeEnumWords      UlAutocapitalizeEnum = "words"
-	UlAutocapitalizeEnumCharacters UlAutocapitalizeEnum = "characters"
-	UlAutocapitalizeEnumNone       UlAutocapitalizeEnum = "none"
-	UlAutocapitalizeEnumOff        UlAutocapitalizeEnum = "off"
-	UlAutocapitalizeEnumOn         UlAutocapitalizeEnum = "on"
-	UlAutocapitalizeEnumSentences  UlAutocapitalizeEnum = "sentences"
+	UlAutocapitalizeNone       UlAutocapitalize = "none"
+	UlAutocapitalizeOff        UlAutocapitalize = "off"
+	UlAutocapitalizeOn         UlAutocapitalize = "on"
+	UlAutocapitalizeSentences  UlAutocapitalize = "sentences"
+	UlAutocapitalizeWords      UlAutocapitalize = "words"
+	UlAutocapitalizeCharacters UlAutocapitalize = "characters"
 )
 
-type UlAutocorrectEnum string
+type UlAutocorrect string
 
 const (
-	UlAutocorrectEnumOff   UlAutocorrectEnum = "off"
-	UlAutocorrectEnumOn    UlAutocorrectEnum = "on"
-	UlAutocorrectEnumEmpty UlAutocorrectEnum = ""
+	UlAutocorrectOff   UlAutocorrect = "off"
+	UlAutocorrectOn    UlAutocorrect = "on"
+	UlAutocorrectEmpty UlAutocorrect = ""
 )
 
-type UlContenteditableEnum string
+type UlContenteditable string
 
 const (
-	UlContenteditableEnumFalse         UlContenteditableEnum = "false"
-	UlContenteditableEnumPlaintextOnly UlContenteditableEnum = "plaintext-only"
-	UlContenteditableEnumTrue          UlContenteditableEnum = "true"
-	UlContenteditableEnumEmpty         UlContenteditableEnum = ""
+	UlContenteditableFalse         UlContenteditable = "false"
+	UlContenteditablePlaintextOnly UlContenteditable = "plaintext-only"
+	UlContenteditableTrue          UlContenteditable = "true"
+	UlContenteditableEmpty         UlContenteditable = ""
 )
 
-type UlDirEnum string
+type UlDir string
 
 const (
-	UlDirEnumAuto UlDirEnum = "auto"
-	UlDirEnumLtr  UlDirEnum = "ltr"
-	UlDirEnumRtl  UlDirEnum = "rtl"
+	UlDirAuto UlDir = "auto"
+	UlDirLtr  UlDir = "ltr"
+	UlDirRtl  UlDir = "rtl"
 )
 
-type UlDraggableEnum string
+type UlDraggable string
 
 const (
-	UlDraggableEnumFalse UlDraggableEnum = "false"
-	UlDraggableEnumTrue  UlDraggableEnum = "true"
+	UlDraggableFalse UlDraggable = "false"
+	UlDraggableTrue  UlDraggable = "true"
 )
 
-type UlEnterkeyhintEnum string
+type UlEnterkeyhint string
 
 const (
-	UlEnterkeyhintEnumPrevious UlEnterkeyhintEnum = "previous"
-	UlEnterkeyhintEnumSearch   UlEnterkeyhintEnum = "search"
-	UlEnterkeyhintEnumSend     UlEnterkeyhintEnum = "send"
-	UlEnterkeyhintEnumDone     UlEnterkeyhintEnum = "done"
-	UlEnterkeyhintEnumEnter    UlEnterkeyhintEnum = "enter"
-	UlEnterkeyhintEnumGo       UlEnterkeyhintEnum = "go"
-	UlEnterkeyhintEnumNext     UlEnterkeyhintEnum = "next"
+	UlEnterkeyhintDone     UlEnterkeyhint = "done"
+	UlEnterkeyhintEnter    UlEnterkeyhint = "enter"
+	UlEnterkeyhintGo       UlEnterkeyhint = "go"
+	UlEnterkeyhintNext     UlEnterkeyhint = "next"
+	UlEnterkeyhintPrevious UlEnterkeyhint = "previous"
+	UlEnterkeyhintSearch   UlEnterkeyhint = "search"
+	UlEnterkeyhintSend     UlEnterkeyhint = "send"
 )
 
-type UlHiddenEnum string
+type UlHidden string
 
 const (
-	UlHiddenEnumHidden     UlHiddenEnum = "hidden"
-	UlHiddenEnumUntilFound UlHiddenEnum = "until-found"
-	UlHiddenEnumEmpty      UlHiddenEnum = ""
+	UlHiddenHidden     UlHidden = "hidden"
+	UlHiddenUntilFound UlHidden = "until-found"
+	UlHiddenEmpty      UlHidden = ""
 )
 
-type UlInputmodeEnum string
+type UlInputmode string
 
 const (
-	UlInputmodeEnumNumeric UlInputmodeEnum = "numeric"
-	UlInputmodeEnumSearch  UlInputmodeEnum = "search"
-	UlInputmodeEnumTel     UlInputmodeEnum = "tel"
-	UlInputmodeEnumText    UlInputmodeEnum = "text"
-	UlInputmodeEnumUrl     UlInputmodeEnum = "url"
-	UlInputmodeEnumDecimal UlInputmodeEnum = "decimal"
-	UlInputmodeEnumEmail   UlInputmodeEnum = "email"
-	UlInputmodeEnumNone    UlInputmodeEnum = "none"
+	UlInputmodeSearch  UlInputmode = "search"
+	UlInputmodeTel     UlInputmode = "tel"
+	UlInputmodeText    UlInputmode = "text"
+	UlInputmodeUrl     UlInputmode = "url"
+	UlInputmodeDecimal UlInputmode = "decimal"
+	UlInputmodeEmail   UlInputmode = "email"
+	UlInputmodeNone    UlInputmode = "none"
+	UlInputmodeNumeric UlInputmode = "numeric"
 )
 
-type UlSpellcheckEnum string
+type UlSpellcheck string
 
 const (
-	UlSpellcheckEnumFalse UlSpellcheckEnum = "false"
-	UlSpellcheckEnumTrue  UlSpellcheckEnum = "true"
-	UlSpellcheckEnumEmpty UlSpellcheckEnum = ""
+	UlSpellcheckFalse UlSpellcheck = "false"
+	UlSpellcheckTrue  UlSpellcheck = "true"
+	UlSpellcheckEmpty UlSpellcheck = ""
 )
 
-type UlTranslateEnum string
+type UlTranslate string
 
 const (
-	UlTranslateEnumNo    UlTranslateEnum = "no"
-	UlTranslateEnumYes   UlTranslateEnum = "yes"
-	UlTranslateEnumEmpty UlTranslateEnum = ""
+	UlTranslateNo    UlTranslate = "no"
+	UlTranslateYes   UlTranslate = "yes"
+	UlTranslateEmpty UlTranslate = ""
 )
 
-type UlWritingsuggestionsEnum string
+type UlWritingsuggestions string
 
 const (
-	UlWritingsuggestionsEnumFalse UlWritingsuggestionsEnum = "false"
-	UlWritingsuggestionsEnumTrue  UlWritingsuggestionsEnum = "true"
-	UlWritingsuggestionsEnumEmpty UlWritingsuggestionsEnum = ""
+	UlWritingsuggestionsFalse UlWritingsuggestions = "false"
+	UlWritingsuggestionsTrue  UlWritingsuggestions = "true"
+	UlWritingsuggestionsEmpty UlWritingsuggestions = ""
 )
 
 type ulAttrs map[string]any
 
-func (e *UlElement) Autocapitalize(a UlAutocapitalizeEnum) *UlElement {
+func (e *UlElement) AriaUnsafe(name string, s string) *UlElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *UlElement) Aria(name string, s string) *UlElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *UlElement) Autocapitalize(a UlAutocapitalize) *UlElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *UlElement) Autocorrect(a UlAutocorrectEnum) *UlElement {
+func (e *UlElement) Autocorrect(a UlAutocorrect) *UlElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *UlElement) Class(s ...string) *UlElement {
 	return e
 }
 
-func (e *UlElement) Contenteditable(a UlContenteditableEnum) *UlElement {
+func (e *UlElement) Contenteditable(a UlContenteditable) *UlElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *UlElement) Data(name string, s string) *UlElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *UlElement) Dir(a UlDirEnum) *UlElement {
+func (e *UlElement) Dir(a UlDir) *UlElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *UlElement) Draggable(a UlDraggableEnum) *UlElement {
+func (e *UlElement) Draggable(a UlDraggable) *UlElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *UlElement) Enterkeyhint(a UlEnterkeyhintEnum) *UlElement {
+func (e *UlElement) Enterkeyhint(a UlEnterkeyhint) *UlElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *UlElement) Hidden(a UlHiddenEnum) *UlElement {
+func (e *UlElement) Hidden(a UlHidden) *UlElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *UlElement) Inert(b bool) *UlElement {
 	return e
 }
 
-func (e *UlElement) Inputmode(a UlInputmodeEnum) *UlElement {
+func (e *UlElement) Inputmode(a UlInputmode) *UlElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *UlElement) Slot(s string) *UlElement {
 	return e
 }
 
-func (e *UlElement) Spellcheck(a UlSpellcheckEnum) *UlElement {
+func (e *UlElement) Spellcheck(a UlSpellcheck) *UlElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *UlElement) Title(s string) *UlElement {
 	return e
 }
 
-func (e *UlElement) Translate(a UlTranslateEnum) *UlElement {
+func (e *UlElement) Translate(a UlTranslate) *UlElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *UlElement) Writingsuggestions(a UlWritingsuggestionsEnum) *UlElement {
+func (e *UlElement) Writingsuggestions(a UlWritingsuggestions) *UlElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

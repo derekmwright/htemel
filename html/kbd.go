@@ -48,115 +48,127 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 	return Kbd(false)
 }
 
-type KbdAutocapitalizeEnum string
+type KbdAutocapitalize string
 
 const (
-	KbdAutocapitalizeEnumOn         KbdAutocapitalizeEnum = "on"
-	KbdAutocapitalizeEnumSentences  KbdAutocapitalizeEnum = "sentences"
-	KbdAutocapitalizeEnumWords      KbdAutocapitalizeEnum = "words"
-	KbdAutocapitalizeEnumCharacters KbdAutocapitalizeEnum = "characters"
-	KbdAutocapitalizeEnumNone       KbdAutocapitalizeEnum = "none"
-	KbdAutocapitalizeEnumOff        KbdAutocapitalizeEnum = "off"
+	KbdAutocapitalizeOff        KbdAutocapitalize = "off"
+	KbdAutocapitalizeOn         KbdAutocapitalize = "on"
+	KbdAutocapitalizeSentences  KbdAutocapitalize = "sentences"
+	KbdAutocapitalizeWords      KbdAutocapitalize = "words"
+	KbdAutocapitalizeCharacters KbdAutocapitalize = "characters"
+	KbdAutocapitalizeNone       KbdAutocapitalize = "none"
 )
 
-type KbdAutocorrectEnum string
+type KbdAutocorrect string
 
 const (
-	KbdAutocorrectEnumOff   KbdAutocorrectEnum = "off"
-	KbdAutocorrectEnumOn    KbdAutocorrectEnum = "on"
-	KbdAutocorrectEnumEmpty KbdAutocorrectEnum = ""
+	KbdAutocorrectOn    KbdAutocorrect = "on"
+	KbdAutocorrectOff   KbdAutocorrect = "off"
+	KbdAutocorrectEmpty KbdAutocorrect = ""
 )
 
-type KbdContenteditableEnum string
+type KbdContenteditable string
 
 const (
-	KbdContenteditableEnumFalse         KbdContenteditableEnum = "false"
-	KbdContenteditableEnumPlaintextOnly KbdContenteditableEnum = "plaintext-only"
-	KbdContenteditableEnumTrue          KbdContenteditableEnum = "true"
-	KbdContenteditableEnumEmpty         KbdContenteditableEnum = ""
+	KbdContenteditableFalse         KbdContenteditable = "false"
+	KbdContenteditablePlaintextOnly KbdContenteditable = "plaintext-only"
+	KbdContenteditableTrue          KbdContenteditable = "true"
+	KbdContenteditableEmpty         KbdContenteditable = ""
 )
 
-type KbdDirEnum string
+type KbdDir string
 
 const (
-	KbdDirEnumLtr  KbdDirEnum = "ltr"
-	KbdDirEnumRtl  KbdDirEnum = "rtl"
-	KbdDirEnumAuto KbdDirEnum = "auto"
+	KbdDirLtr  KbdDir = "ltr"
+	KbdDirRtl  KbdDir = "rtl"
+	KbdDirAuto KbdDir = "auto"
 )
 
-type KbdDraggableEnum string
+type KbdDraggable string
 
 const (
-	KbdDraggableEnumFalse KbdDraggableEnum = "false"
-	KbdDraggableEnumTrue  KbdDraggableEnum = "true"
+	KbdDraggableFalse KbdDraggable = "false"
+	KbdDraggableTrue  KbdDraggable = "true"
 )
 
-type KbdEnterkeyhintEnum string
+type KbdEnterkeyhint string
 
 const (
-	KbdEnterkeyhintEnumDone     KbdEnterkeyhintEnum = "done"
-	KbdEnterkeyhintEnumEnter    KbdEnterkeyhintEnum = "enter"
-	KbdEnterkeyhintEnumGo       KbdEnterkeyhintEnum = "go"
-	KbdEnterkeyhintEnumNext     KbdEnterkeyhintEnum = "next"
-	KbdEnterkeyhintEnumPrevious KbdEnterkeyhintEnum = "previous"
-	KbdEnterkeyhintEnumSearch   KbdEnterkeyhintEnum = "search"
-	KbdEnterkeyhintEnumSend     KbdEnterkeyhintEnum = "send"
+	KbdEnterkeyhintPrevious KbdEnterkeyhint = "previous"
+	KbdEnterkeyhintSearch   KbdEnterkeyhint = "search"
+	KbdEnterkeyhintSend     KbdEnterkeyhint = "send"
+	KbdEnterkeyhintDone     KbdEnterkeyhint = "done"
+	KbdEnterkeyhintEnter    KbdEnterkeyhint = "enter"
+	KbdEnterkeyhintGo       KbdEnterkeyhint = "go"
+	KbdEnterkeyhintNext     KbdEnterkeyhint = "next"
 )
 
-type KbdHiddenEnum string
+type KbdHidden string
 
 const (
-	KbdHiddenEnumHidden     KbdHiddenEnum = "hidden"
-	KbdHiddenEnumUntilFound KbdHiddenEnum = "until-found"
-	KbdHiddenEnumEmpty      KbdHiddenEnum = ""
+	KbdHiddenHidden     KbdHidden = "hidden"
+	KbdHiddenUntilFound KbdHidden = "until-found"
+	KbdHiddenEmpty      KbdHidden = ""
 )
 
-type KbdInputmodeEnum string
+type KbdInputmode string
 
 const (
-	KbdInputmodeEnumText    KbdInputmodeEnum = "text"
-	KbdInputmodeEnumUrl     KbdInputmodeEnum = "url"
-	KbdInputmodeEnumDecimal KbdInputmodeEnum = "decimal"
-	KbdInputmodeEnumEmail   KbdInputmodeEnum = "email"
-	KbdInputmodeEnumNone    KbdInputmodeEnum = "none"
-	KbdInputmodeEnumNumeric KbdInputmodeEnum = "numeric"
-	KbdInputmodeEnumSearch  KbdInputmodeEnum = "search"
-	KbdInputmodeEnumTel     KbdInputmodeEnum = "tel"
+	KbdInputmodeUrl     KbdInputmode = "url"
+	KbdInputmodeDecimal KbdInputmode = "decimal"
+	KbdInputmodeEmail   KbdInputmode = "email"
+	KbdInputmodeNone    KbdInputmode = "none"
+	KbdInputmodeNumeric KbdInputmode = "numeric"
+	KbdInputmodeSearch  KbdInputmode = "search"
+	KbdInputmodeTel     KbdInputmode = "tel"
+	KbdInputmodeText    KbdInputmode = "text"
 )
 
-type KbdSpellcheckEnum string
+type KbdSpellcheck string
 
 const (
-	KbdSpellcheckEnumFalse KbdSpellcheckEnum = "false"
-	KbdSpellcheckEnumTrue  KbdSpellcheckEnum = "true"
-	KbdSpellcheckEnumEmpty KbdSpellcheckEnum = ""
+	KbdSpellcheckTrue  KbdSpellcheck = "true"
+	KbdSpellcheckFalse KbdSpellcheck = "false"
+	KbdSpellcheckEmpty KbdSpellcheck = ""
 )
 
-type KbdTranslateEnum string
+type KbdTranslate string
 
 const (
-	KbdTranslateEnumNo    KbdTranslateEnum = "no"
-	KbdTranslateEnumYes   KbdTranslateEnum = "yes"
-	KbdTranslateEnumEmpty KbdTranslateEnum = ""
+	KbdTranslateNo    KbdTranslate = "no"
+	KbdTranslateYes   KbdTranslate = "yes"
+	KbdTranslateEmpty KbdTranslate = ""
 )
 
-type KbdWritingsuggestionsEnum string
+type KbdWritingsuggestions string
 
 const (
-	KbdWritingsuggestionsEnumFalse KbdWritingsuggestionsEnum = "false"
-	KbdWritingsuggestionsEnumTrue  KbdWritingsuggestionsEnum = "true"
-	KbdWritingsuggestionsEnumEmpty KbdWritingsuggestionsEnum = ""
+	KbdWritingsuggestionsFalse KbdWritingsuggestions = "false"
+	KbdWritingsuggestionsTrue  KbdWritingsuggestions = "true"
+	KbdWritingsuggestionsEmpty KbdWritingsuggestions = ""
 )
 
 type kbdAttrs map[string]any
 
-func (e *KbdElement) Autocapitalize(a KbdAutocapitalizeEnum) *KbdElement {
+func (e *KbdElement) AriaUnsafe(name string, s string) *KbdElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *KbdElement) Aria(name string, s string) *KbdElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *KbdElement) Autocapitalize(a KbdAutocapitalize) *KbdElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *KbdElement) Autocorrect(a KbdAutocorrectEnum) *KbdElement {
+func (e *KbdElement) Autocorrect(a KbdAutocorrect) *KbdElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *KbdElement) Class(s ...string) *KbdElement {
 	return e
 }
 
-func (e *KbdElement) Contenteditable(a KbdContenteditableEnum) *KbdElement {
+func (e *KbdElement) Contenteditable(a KbdContenteditable) *KbdElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *KbdElement) Data(name string, s string) *KbdElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *KbdElement) Dir(a KbdDirEnum) *KbdElement {
+func (e *KbdElement) Dir(a KbdDir) *KbdElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *KbdElement) Draggable(a KbdDraggableEnum) *KbdElement {
+func (e *KbdElement) Draggable(a KbdDraggable) *KbdElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *KbdElement) Enterkeyhint(a KbdEnterkeyhintEnum) *KbdElement {
+func (e *KbdElement) Enterkeyhint(a KbdEnterkeyhint) *KbdElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *KbdElement) Hidden(a KbdHiddenEnum) *KbdElement {
+func (e *KbdElement) Hidden(a KbdHidden) *KbdElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *KbdElement) Inert(b bool) *KbdElement {
 	return e
 }
 
-func (e *KbdElement) Inputmode(a KbdInputmodeEnum) *KbdElement {
+func (e *KbdElement) Inputmode(a KbdInputmode) *KbdElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *KbdElement) Slot(s string) *KbdElement {
 	return e
 }
 
-func (e *KbdElement) Spellcheck(a KbdSpellcheckEnum) *KbdElement {
+func (e *KbdElement) Spellcheck(a KbdSpellcheck) *KbdElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *KbdElement) Title(s string) *KbdElement {
 	return e
 }
 
-func (e *KbdElement) Translate(a KbdTranslateEnum) *KbdElement {
+func (e *KbdElement) Translate(a KbdTranslate) *KbdElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *KbdElement) Writingsuggestions(a KbdWritingsuggestionsEnum) *KbdElement {
+func (e *KbdElement) Writingsuggestions(a KbdWritingsuggestions) *KbdElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

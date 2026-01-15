@@ -48,104 +48,104 @@ func CanvasTernary(condition bool, true htemel.Node, false htemel.Node) *CanvasE
 	return Canvas(false)
 }
 
-type CanvasAutocapitalizeEnum string
+type CanvasAutocapitalize string
 
 const (
-	CanvasAutocapitalizeEnumCharacters CanvasAutocapitalizeEnum = "characters"
-	CanvasAutocapitalizeEnumNone       CanvasAutocapitalizeEnum = "none"
-	CanvasAutocapitalizeEnumOff        CanvasAutocapitalizeEnum = "off"
-	CanvasAutocapitalizeEnumOn         CanvasAutocapitalizeEnum = "on"
-	CanvasAutocapitalizeEnumSentences  CanvasAutocapitalizeEnum = "sentences"
-	CanvasAutocapitalizeEnumWords      CanvasAutocapitalizeEnum = "words"
+	CanvasAutocapitalizeSentences  CanvasAutocapitalize = "sentences"
+	CanvasAutocapitalizeWords      CanvasAutocapitalize = "words"
+	CanvasAutocapitalizeCharacters CanvasAutocapitalize = "characters"
+	CanvasAutocapitalizeNone       CanvasAutocapitalize = "none"
+	CanvasAutocapitalizeOff        CanvasAutocapitalize = "off"
+	CanvasAutocapitalizeOn         CanvasAutocapitalize = "on"
 )
 
-type CanvasAutocorrectEnum string
+type CanvasAutocorrect string
 
 const (
-	CanvasAutocorrectEnumOn    CanvasAutocorrectEnum = "on"
-	CanvasAutocorrectEnumOff   CanvasAutocorrectEnum = "off"
-	CanvasAutocorrectEnumEmpty CanvasAutocorrectEnum = ""
+	CanvasAutocorrectOff   CanvasAutocorrect = "off"
+	CanvasAutocorrectOn    CanvasAutocorrect = "on"
+	CanvasAutocorrectEmpty CanvasAutocorrect = ""
 )
 
-type CanvasContenteditableEnum string
+type CanvasContenteditable string
 
 const (
-	CanvasContenteditableEnumPlaintextOnly CanvasContenteditableEnum = "plaintext-only"
-	CanvasContenteditableEnumTrue          CanvasContenteditableEnum = "true"
-	CanvasContenteditableEnumFalse         CanvasContenteditableEnum = "false"
-	CanvasContenteditableEnumEmpty         CanvasContenteditableEnum = ""
+	CanvasContenteditableFalse         CanvasContenteditable = "false"
+	CanvasContenteditablePlaintextOnly CanvasContenteditable = "plaintext-only"
+	CanvasContenteditableTrue          CanvasContenteditable = "true"
+	CanvasContenteditableEmpty         CanvasContenteditable = ""
 )
 
-type CanvasDirEnum string
+type CanvasDir string
 
 const (
-	CanvasDirEnumAuto CanvasDirEnum = "auto"
-	CanvasDirEnumLtr  CanvasDirEnum = "ltr"
-	CanvasDirEnumRtl  CanvasDirEnum = "rtl"
+	CanvasDirAuto CanvasDir = "auto"
+	CanvasDirLtr  CanvasDir = "ltr"
+	CanvasDirRtl  CanvasDir = "rtl"
 )
 
-type CanvasDraggableEnum string
+type CanvasDraggable string
 
 const (
-	CanvasDraggableEnumFalse CanvasDraggableEnum = "false"
-	CanvasDraggableEnumTrue  CanvasDraggableEnum = "true"
+	CanvasDraggableFalse CanvasDraggable = "false"
+	CanvasDraggableTrue  CanvasDraggable = "true"
 )
 
-type CanvasEnterkeyhintEnum string
+type CanvasEnterkeyhint string
 
 const (
-	CanvasEnterkeyhintEnumDone     CanvasEnterkeyhintEnum = "done"
-	CanvasEnterkeyhintEnumEnter    CanvasEnterkeyhintEnum = "enter"
-	CanvasEnterkeyhintEnumGo       CanvasEnterkeyhintEnum = "go"
-	CanvasEnterkeyhintEnumNext     CanvasEnterkeyhintEnum = "next"
-	CanvasEnterkeyhintEnumPrevious CanvasEnterkeyhintEnum = "previous"
-	CanvasEnterkeyhintEnumSearch   CanvasEnterkeyhintEnum = "search"
-	CanvasEnterkeyhintEnumSend     CanvasEnterkeyhintEnum = "send"
+	CanvasEnterkeyhintGo       CanvasEnterkeyhint = "go"
+	CanvasEnterkeyhintNext     CanvasEnterkeyhint = "next"
+	CanvasEnterkeyhintPrevious CanvasEnterkeyhint = "previous"
+	CanvasEnterkeyhintSearch   CanvasEnterkeyhint = "search"
+	CanvasEnterkeyhintSend     CanvasEnterkeyhint = "send"
+	CanvasEnterkeyhintDone     CanvasEnterkeyhint = "done"
+	CanvasEnterkeyhintEnter    CanvasEnterkeyhint = "enter"
 )
 
-type CanvasHiddenEnum string
+type CanvasHidden string
 
 const (
-	CanvasHiddenEnumHidden     CanvasHiddenEnum = "hidden"
-	CanvasHiddenEnumUntilFound CanvasHiddenEnum = "until-found"
-	CanvasHiddenEnumEmpty      CanvasHiddenEnum = ""
+	CanvasHiddenHidden     CanvasHidden = "hidden"
+	CanvasHiddenUntilFound CanvasHidden = "until-found"
+	CanvasHiddenEmpty      CanvasHidden = ""
 )
 
-type CanvasInputmodeEnum string
+type CanvasInputmode string
 
 const (
-	CanvasInputmodeEnumNone    CanvasInputmodeEnum = "none"
-	CanvasInputmodeEnumNumeric CanvasInputmodeEnum = "numeric"
-	CanvasInputmodeEnumSearch  CanvasInputmodeEnum = "search"
-	CanvasInputmodeEnumTel     CanvasInputmodeEnum = "tel"
-	CanvasInputmodeEnumText    CanvasInputmodeEnum = "text"
-	CanvasInputmodeEnumUrl     CanvasInputmodeEnum = "url"
-	CanvasInputmodeEnumDecimal CanvasInputmodeEnum = "decimal"
-	CanvasInputmodeEnumEmail   CanvasInputmodeEnum = "email"
+	CanvasInputmodeNone    CanvasInputmode = "none"
+	CanvasInputmodeNumeric CanvasInputmode = "numeric"
+	CanvasInputmodeSearch  CanvasInputmode = "search"
+	CanvasInputmodeTel     CanvasInputmode = "tel"
+	CanvasInputmodeText    CanvasInputmode = "text"
+	CanvasInputmodeUrl     CanvasInputmode = "url"
+	CanvasInputmodeDecimal CanvasInputmode = "decimal"
+	CanvasInputmodeEmail   CanvasInputmode = "email"
 )
 
-type CanvasSpellcheckEnum string
+type CanvasSpellcheck string
 
 const (
-	CanvasSpellcheckEnumTrue  CanvasSpellcheckEnum = "true"
-	CanvasSpellcheckEnumFalse CanvasSpellcheckEnum = "false"
-	CanvasSpellcheckEnumEmpty CanvasSpellcheckEnum = ""
+	CanvasSpellcheckFalse CanvasSpellcheck = "false"
+	CanvasSpellcheckTrue  CanvasSpellcheck = "true"
+	CanvasSpellcheckEmpty CanvasSpellcheck = ""
 )
 
-type CanvasTranslateEnum string
+type CanvasTranslate string
 
 const (
-	CanvasTranslateEnumNo    CanvasTranslateEnum = "no"
-	CanvasTranslateEnumYes   CanvasTranslateEnum = "yes"
-	CanvasTranslateEnumEmpty CanvasTranslateEnum = ""
+	CanvasTranslateNo    CanvasTranslate = "no"
+	CanvasTranslateYes   CanvasTranslate = "yes"
+	CanvasTranslateEmpty CanvasTranslate = ""
 )
 
-type CanvasWritingsuggestionsEnum string
+type CanvasWritingsuggestions string
 
 const (
-	CanvasWritingsuggestionsEnumFalse CanvasWritingsuggestionsEnum = "false"
-	CanvasWritingsuggestionsEnumTrue  CanvasWritingsuggestionsEnum = "true"
-	CanvasWritingsuggestionsEnumEmpty CanvasWritingsuggestionsEnum = ""
+	CanvasWritingsuggestionsFalse CanvasWritingsuggestions = "false"
+	CanvasWritingsuggestionsTrue  CanvasWritingsuggestions = "true"
+	CanvasWritingsuggestionsEmpty CanvasWritingsuggestions = ""
 )
 
 type canvasAttrs map[string]any
@@ -162,13 +162,25 @@ func (e *CanvasElement) Height(i int) *CanvasElement {
 	return e
 }
 
-func (e *CanvasElement) Autocapitalize(a CanvasAutocapitalizeEnum) *CanvasElement {
+func (e *CanvasElement) AriaUnsafe(name string, s string) *CanvasElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *CanvasElement) Aria(name string, s string) *CanvasElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *CanvasElement) Autocapitalize(a CanvasAutocapitalize) *CanvasElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *CanvasElement) Autocorrect(a CanvasAutocorrectEnum) *CanvasElement {
+func (e *CanvasElement) Autocorrect(a CanvasAutocorrect) *CanvasElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -186,7 +198,7 @@ func (e *CanvasElement) Class(s ...string) *CanvasElement {
 	return e
 }
 
-func (e *CanvasElement) Contenteditable(a CanvasContenteditableEnum) *CanvasElement {
+func (e *CanvasElement) Contenteditable(a CanvasContenteditable) *CanvasElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -204,25 +216,25 @@ func (e *CanvasElement) Data(name string, s string) *CanvasElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *CanvasElement) Dir(a CanvasDirEnum) *CanvasElement {
+func (e *CanvasElement) Dir(a CanvasDir) *CanvasElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *CanvasElement) Draggable(a CanvasDraggableEnum) *CanvasElement {
+func (e *CanvasElement) Draggable(a CanvasDraggable) *CanvasElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *CanvasElement) Enterkeyhint(a CanvasEnterkeyhintEnum) *CanvasElement {
+func (e *CanvasElement) Enterkeyhint(a CanvasEnterkeyhint) *CanvasElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *CanvasElement) Hidden(a CanvasHiddenEnum) *CanvasElement {
+func (e *CanvasElement) Hidden(a CanvasHidden) *CanvasElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -240,7 +252,7 @@ func (e *CanvasElement) Inert(b bool) *CanvasElement {
 	return e
 }
 
-func (e *CanvasElement) Inputmode(a CanvasInputmodeEnum) *CanvasElement {
+func (e *CanvasElement) Inputmode(a CanvasInputmode) *CanvasElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -300,7 +312,7 @@ func (e *CanvasElement) Slot(s string) *CanvasElement {
 	return e
 }
 
-func (e *CanvasElement) Spellcheck(a CanvasSpellcheckEnum) *CanvasElement {
+func (e *CanvasElement) Spellcheck(a CanvasSpellcheck) *CanvasElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -324,13 +336,13 @@ func (e *CanvasElement) Title(s string) *CanvasElement {
 	return e
 }
 
-func (e *CanvasElement) Translate(a CanvasTranslateEnum) *CanvasElement {
+func (e *CanvasElement) Translate(a CanvasTranslate) *CanvasElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *CanvasElement) Writingsuggestions(a CanvasWritingsuggestionsEnum) *CanvasElement {
+func (e *CanvasElement) Writingsuggestions(a CanvasWritingsuggestions) *CanvasElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

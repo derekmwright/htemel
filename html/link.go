@@ -39,126 +39,126 @@ func LinkIf(condition bool) *LinkElement {
 	}
 }
 
-type LinkCrossoriginEnum string
+type LinkCrossorigin string
 
 const (
-	LinkCrossoriginEnumAnonymous      LinkCrossoriginEnum = "anonymous"
-	LinkCrossoriginEnumUseCredentials LinkCrossoriginEnum = "use-credentials"
-	LinkCrossoriginEnumEmpty          LinkCrossoriginEnum = ""
+	LinkCrossoriginAnonymous      LinkCrossorigin = "anonymous"
+	LinkCrossoriginUseCredentials LinkCrossorigin = "use-credentials"
+	LinkCrossoriginEmpty          LinkCrossorigin = ""
 )
 
-type LinkBlockingEnum string
+type LinkBlocking string
 
 const (
-	LinkBlockingEnumRender LinkBlockingEnum = "render"
+	LinkBlockingRender LinkBlocking = "render"
 )
 
-type LinkFetchpriorityEnum string
+type LinkFetchpriority string
 
 const (
-	LinkFetchpriorityEnumAuto LinkFetchpriorityEnum = "auto"
-	LinkFetchpriorityEnumHigh LinkFetchpriorityEnum = "high"
-	LinkFetchpriorityEnumLow  LinkFetchpriorityEnum = "low"
+	LinkFetchpriorityAuto LinkFetchpriority = "auto"
+	LinkFetchpriorityHigh LinkFetchpriority = "high"
+	LinkFetchpriorityLow  LinkFetchpriority = "low"
 )
 
-type LinkAutocapitalizeEnum string
+type LinkAutocapitalize string
 
 const (
-	LinkAutocapitalizeEnumCharacters LinkAutocapitalizeEnum = "characters"
-	LinkAutocapitalizeEnumNone       LinkAutocapitalizeEnum = "none"
-	LinkAutocapitalizeEnumOff        LinkAutocapitalizeEnum = "off"
-	LinkAutocapitalizeEnumOn         LinkAutocapitalizeEnum = "on"
-	LinkAutocapitalizeEnumSentences  LinkAutocapitalizeEnum = "sentences"
-	LinkAutocapitalizeEnumWords      LinkAutocapitalizeEnum = "words"
+	LinkAutocapitalizeOff        LinkAutocapitalize = "off"
+	LinkAutocapitalizeOn         LinkAutocapitalize = "on"
+	LinkAutocapitalizeSentences  LinkAutocapitalize = "sentences"
+	LinkAutocapitalizeWords      LinkAutocapitalize = "words"
+	LinkAutocapitalizeCharacters LinkAutocapitalize = "characters"
+	LinkAutocapitalizeNone       LinkAutocapitalize = "none"
 )
 
-type LinkAutocorrectEnum string
+type LinkAutocorrect string
 
 const (
-	LinkAutocorrectEnumOff   LinkAutocorrectEnum = "off"
-	LinkAutocorrectEnumOn    LinkAutocorrectEnum = "on"
-	LinkAutocorrectEnumEmpty LinkAutocorrectEnum = ""
+	LinkAutocorrectOff   LinkAutocorrect = "off"
+	LinkAutocorrectOn    LinkAutocorrect = "on"
+	LinkAutocorrectEmpty LinkAutocorrect = ""
 )
 
-type LinkContenteditableEnum string
+type LinkContenteditable string
 
 const (
-	LinkContenteditableEnumTrue          LinkContenteditableEnum = "true"
-	LinkContenteditableEnumFalse         LinkContenteditableEnum = "false"
-	LinkContenteditableEnumPlaintextOnly LinkContenteditableEnum = "plaintext-only"
-	LinkContenteditableEnumEmpty         LinkContenteditableEnum = ""
+	LinkContenteditableFalse         LinkContenteditable = "false"
+	LinkContenteditablePlaintextOnly LinkContenteditable = "plaintext-only"
+	LinkContenteditableTrue          LinkContenteditable = "true"
+	LinkContenteditableEmpty         LinkContenteditable = ""
 )
 
-type LinkDirEnum string
+type LinkDir string
 
 const (
-	LinkDirEnumAuto LinkDirEnum = "auto"
-	LinkDirEnumLtr  LinkDirEnum = "ltr"
-	LinkDirEnumRtl  LinkDirEnum = "rtl"
+	LinkDirRtl  LinkDir = "rtl"
+	LinkDirAuto LinkDir = "auto"
+	LinkDirLtr  LinkDir = "ltr"
 )
 
-type LinkDraggableEnum string
+type LinkDraggable string
 
 const (
-	LinkDraggableEnumFalse LinkDraggableEnum = "false"
-	LinkDraggableEnumTrue  LinkDraggableEnum = "true"
+	LinkDraggableFalse LinkDraggable = "false"
+	LinkDraggableTrue  LinkDraggable = "true"
 )
 
-type LinkEnterkeyhintEnum string
+type LinkEnterkeyhint string
 
 const (
-	LinkEnterkeyhintEnumSend     LinkEnterkeyhintEnum = "send"
-	LinkEnterkeyhintEnumDone     LinkEnterkeyhintEnum = "done"
-	LinkEnterkeyhintEnumEnter    LinkEnterkeyhintEnum = "enter"
-	LinkEnterkeyhintEnumGo       LinkEnterkeyhintEnum = "go"
-	LinkEnterkeyhintEnumNext     LinkEnterkeyhintEnum = "next"
-	LinkEnterkeyhintEnumPrevious LinkEnterkeyhintEnum = "previous"
-	LinkEnterkeyhintEnumSearch   LinkEnterkeyhintEnum = "search"
+	LinkEnterkeyhintEnter    LinkEnterkeyhint = "enter"
+	LinkEnterkeyhintGo       LinkEnterkeyhint = "go"
+	LinkEnterkeyhintNext     LinkEnterkeyhint = "next"
+	LinkEnterkeyhintPrevious LinkEnterkeyhint = "previous"
+	LinkEnterkeyhintSearch   LinkEnterkeyhint = "search"
+	LinkEnterkeyhintSend     LinkEnterkeyhint = "send"
+	LinkEnterkeyhintDone     LinkEnterkeyhint = "done"
 )
 
-type LinkHiddenEnum string
+type LinkHidden string
 
 const (
-	LinkHiddenEnumHidden     LinkHiddenEnum = "hidden"
-	LinkHiddenEnumUntilFound LinkHiddenEnum = "until-found"
-	LinkHiddenEnumEmpty      LinkHiddenEnum = ""
+	LinkHiddenUntilFound LinkHidden = "until-found"
+	LinkHiddenHidden     LinkHidden = "hidden"
+	LinkHiddenEmpty      LinkHidden = ""
 )
 
-type LinkInputmodeEnum string
+type LinkInputmode string
 
 const (
-	LinkInputmodeEnumUrl     LinkInputmodeEnum = "url"
-	LinkInputmodeEnumDecimal LinkInputmodeEnum = "decimal"
-	LinkInputmodeEnumEmail   LinkInputmodeEnum = "email"
-	LinkInputmodeEnumNone    LinkInputmodeEnum = "none"
-	LinkInputmodeEnumNumeric LinkInputmodeEnum = "numeric"
-	LinkInputmodeEnumSearch  LinkInputmodeEnum = "search"
-	LinkInputmodeEnumTel     LinkInputmodeEnum = "tel"
-	LinkInputmodeEnumText    LinkInputmodeEnum = "text"
+	LinkInputmodeSearch  LinkInputmode = "search"
+	LinkInputmodeTel     LinkInputmode = "tel"
+	LinkInputmodeText    LinkInputmode = "text"
+	LinkInputmodeUrl     LinkInputmode = "url"
+	LinkInputmodeDecimal LinkInputmode = "decimal"
+	LinkInputmodeEmail   LinkInputmode = "email"
+	LinkInputmodeNone    LinkInputmode = "none"
+	LinkInputmodeNumeric LinkInputmode = "numeric"
 )
 
-type LinkSpellcheckEnum string
+type LinkSpellcheck string
 
 const (
-	LinkSpellcheckEnumFalse LinkSpellcheckEnum = "false"
-	LinkSpellcheckEnumTrue  LinkSpellcheckEnum = "true"
-	LinkSpellcheckEnumEmpty LinkSpellcheckEnum = ""
+	LinkSpellcheckFalse LinkSpellcheck = "false"
+	LinkSpellcheckTrue  LinkSpellcheck = "true"
+	LinkSpellcheckEmpty LinkSpellcheck = ""
 )
 
-type LinkTranslateEnum string
+type LinkTranslate string
 
 const (
-	LinkTranslateEnumNo    LinkTranslateEnum = "no"
-	LinkTranslateEnumYes   LinkTranslateEnum = "yes"
-	LinkTranslateEnumEmpty LinkTranslateEnum = ""
+	LinkTranslateNo    LinkTranslate = "no"
+	LinkTranslateYes   LinkTranslate = "yes"
+	LinkTranslateEmpty LinkTranslate = ""
 )
 
-type LinkWritingsuggestionsEnum string
+type LinkWritingsuggestions string
 
 const (
-	LinkWritingsuggestionsEnumFalse LinkWritingsuggestionsEnum = "false"
-	LinkWritingsuggestionsEnumTrue  LinkWritingsuggestionsEnum = "true"
-	LinkWritingsuggestionsEnumEmpty LinkWritingsuggestionsEnum = ""
+	LinkWritingsuggestionsTrue  LinkWritingsuggestions = "true"
+	LinkWritingsuggestionsFalse LinkWritingsuggestions = "false"
+	LinkWritingsuggestionsEmpty LinkWritingsuggestions = ""
 )
 
 type linkAttrs map[string]any
@@ -169,7 +169,7 @@ func (e *LinkElement) Href(s string) *LinkElement {
 	return e
 }
 
-func (e *LinkElement) Crossorigin(a LinkCrossoriginEnum) *LinkElement {
+func (e *LinkElement) Crossorigin(a LinkCrossorigin) *LinkElement {
 	e.attributes["crossorigin"] = a
 
 	return e
@@ -235,7 +235,7 @@ func (e *LinkElement) As(s string) *LinkElement {
 	return e
 }
 
-func (e *LinkElement) Blocking(a LinkBlockingEnum) *LinkElement {
+func (e *LinkElement) Blocking(a LinkBlocking) *LinkElement {
 	e.attributes["blocking"] = a
 
 	return e
@@ -253,19 +253,31 @@ func (e *LinkElement) Disabled(b bool) *LinkElement {
 	return e
 }
 
-func (e *LinkElement) Fetchpriority(a LinkFetchpriorityEnum) *LinkElement {
+func (e *LinkElement) Fetchpriority(a LinkFetchpriority) *LinkElement {
 	e.attributes["fetchpriority"] = a
 
 	return e
 }
 
-func (e *LinkElement) Autocapitalize(a LinkAutocapitalizeEnum) *LinkElement {
+func (e *LinkElement) AriaUnsafe(name string, s string) *LinkElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *LinkElement) Aria(name string, s string) *LinkElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *LinkElement) Autocapitalize(a LinkAutocapitalize) *LinkElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *LinkElement) Autocorrect(a LinkAutocorrectEnum) *LinkElement {
+func (e *LinkElement) Autocorrect(a LinkAutocorrect) *LinkElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -283,7 +295,7 @@ func (e *LinkElement) Class(s ...string) *LinkElement {
 	return e
 }
 
-func (e *LinkElement) Contenteditable(a LinkContenteditableEnum) *LinkElement {
+func (e *LinkElement) Contenteditable(a LinkContenteditable) *LinkElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -301,25 +313,25 @@ func (e *LinkElement) Data(name string, s string) *LinkElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *LinkElement) Dir(a LinkDirEnum) *LinkElement {
+func (e *LinkElement) Dir(a LinkDir) *LinkElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *LinkElement) Draggable(a LinkDraggableEnum) *LinkElement {
+func (e *LinkElement) Draggable(a LinkDraggable) *LinkElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *LinkElement) Enterkeyhint(a LinkEnterkeyhintEnum) *LinkElement {
+func (e *LinkElement) Enterkeyhint(a LinkEnterkeyhint) *LinkElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *LinkElement) Hidden(a LinkHiddenEnum) *LinkElement {
+func (e *LinkElement) Hidden(a LinkHidden) *LinkElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -337,7 +349,7 @@ func (e *LinkElement) Inert(b bool) *LinkElement {
 	return e
 }
 
-func (e *LinkElement) Inputmode(a LinkInputmodeEnum) *LinkElement {
+func (e *LinkElement) Inputmode(a LinkInputmode) *LinkElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -397,7 +409,7 @@ func (e *LinkElement) Slot(s string) *LinkElement {
 	return e
 }
 
-func (e *LinkElement) Spellcheck(a LinkSpellcheckEnum) *LinkElement {
+func (e *LinkElement) Spellcheck(a LinkSpellcheck) *LinkElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -421,13 +433,13 @@ func (e *LinkElement) Title(s string) *LinkElement {
 	return e
 }
 
-func (e *LinkElement) Translate(a LinkTranslateEnum) *LinkElement {
+func (e *LinkElement) Translate(a LinkTranslate) *LinkElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *LinkElement) Writingsuggestions(a LinkWritingsuggestionsEnum) *LinkElement {
+func (e *LinkElement) Writingsuggestions(a LinkWritingsuggestions) *LinkElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

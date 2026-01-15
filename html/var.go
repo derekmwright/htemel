@@ -48,115 +48,127 @@ func VarTernary(condition bool, true htemel.Node, false htemel.Node) *VarElement
 	return Var(false)
 }
 
-type VarAutocapitalizeEnum string
+type VarAutocapitalize string
 
 const (
-	VarAutocapitalizeEnumCharacters VarAutocapitalizeEnum = "characters"
-	VarAutocapitalizeEnumNone       VarAutocapitalizeEnum = "none"
-	VarAutocapitalizeEnumOff        VarAutocapitalizeEnum = "off"
-	VarAutocapitalizeEnumOn         VarAutocapitalizeEnum = "on"
-	VarAutocapitalizeEnumSentences  VarAutocapitalizeEnum = "sentences"
-	VarAutocapitalizeEnumWords      VarAutocapitalizeEnum = "words"
+	VarAutocapitalizeCharacters VarAutocapitalize = "characters"
+	VarAutocapitalizeNone       VarAutocapitalize = "none"
+	VarAutocapitalizeOff        VarAutocapitalize = "off"
+	VarAutocapitalizeOn         VarAutocapitalize = "on"
+	VarAutocapitalizeSentences  VarAutocapitalize = "sentences"
+	VarAutocapitalizeWords      VarAutocapitalize = "words"
 )
 
-type VarAutocorrectEnum string
+type VarAutocorrect string
 
 const (
-	VarAutocorrectEnumOff   VarAutocorrectEnum = "off"
-	VarAutocorrectEnumOn    VarAutocorrectEnum = "on"
-	VarAutocorrectEnumEmpty VarAutocorrectEnum = ""
+	VarAutocorrectOff   VarAutocorrect = "off"
+	VarAutocorrectOn    VarAutocorrect = "on"
+	VarAutocorrectEmpty VarAutocorrect = ""
 )
 
-type VarContenteditableEnum string
+type VarContenteditable string
 
 const (
-	VarContenteditableEnumPlaintextOnly VarContenteditableEnum = "plaintext-only"
-	VarContenteditableEnumTrue          VarContenteditableEnum = "true"
-	VarContenteditableEnumFalse         VarContenteditableEnum = "false"
-	VarContenteditableEnumEmpty         VarContenteditableEnum = ""
+	VarContenteditableFalse         VarContenteditable = "false"
+	VarContenteditablePlaintextOnly VarContenteditable = "plaintext-only"
+	VarContenteditableTrue          VarContenteditable = "true"
+	VarContenteditableEmpty         VarContenteditable = ""
 )
 
-type VarDirEnum string
+type VarDir string
 
 const (
-	VarDirEnumAuto VarDirEnum = "auto"
-	VarDirEnumLtr  VarDirEnum = "ltr"
-	VarDirEnumRtl  VarDirEnum = "rtl"
+	VarDirAuto VarDir = "auto"
+	VarDirLtr  VarDir = "ltr"
+	VarDirRtl  VarDir = "rtl"
 )
 
-type VarDraggableEnum string
+type VarDraggable string
 
 const (
-	VarDraggableEnumFalse VarDraggableEnum = "false"
-	VarDraggableEnumTrue  VarDraggableEnum = "true"
+	VarDraggableFalse VarDraggable = "false"
+	VarDraggableTrue  VarDraggable = "true"
 )
 
-type VarEnterkeyhintEnum string
+type VarEnterkeyhint string
 
 const (
-	VarEnterkeyhintEnumDone     VarEnterkeyhintEnum = "done"
-	VarEnterkeyhintEnumEnter    VarEnterkeyhintEnum = "enter"
-	VarEnterkeyhintEnumGo       VarEnterkeyhintEnum = "go"
-	VarEnterkeyhintEnumNext     VarEnterkeyhintEnum = "next"
-	VarEnterkeyhintEnumPrevious VarEnterkeyhintEnum = "previous"
-	VarEnterkeyhintEnumSearch   VarEnterkeyhintEnum = "search"
-	VarEnterkeyhintEnumSend     VarEnterkeyhintEnum = "send"
+	VarEnterkeyhintDone     VarEnterkeyhint = "done"
+	VarEnterkeyhintEnter    VarEnterkeyhint = "enter"
+	VarEnterkeyhintGo       VarEnterkeyhint = "go"
+	VarEnterkeyhintNext     VarEnterkeyhint = "next"
+	VarEnterkeyhintPrevious VarEnterkeyhint = "previous"
+	VarEnterkeyhintSearch   VarEnterkeyhint = "search"
+	VarEnterkeyhintSend     VarEnterkeyhint = "send"
 )
 
-type VarHiddenEnum string
+type VarHidden string
 
 const (
-	VarHiddenEnumHidden     VarHiddenEnum = "hidden"
-	VarHiddenEnumUntilFound VarHiddenEnum = "until-found"
-	VarHiddenEnumEmpty      VarHiddenEnum = ""
+	VarHiddenHidden     VarHidden = "hidden"
+	VarHiddenUntilFound VarHidden = "until-found"
+	VarHiddenEmpty      VarHidden = ""
 )
 
-type VarInputmodeEnum string
+type VarInputmode string
 
 const (
-	VarInputmodeEnumDecimal VarInputmodeEnum = "decimal"
-	VarInputmodeEnumEmail   VarInputmodeEnum = "email"
-	VarInputmodeEnumNone    VarInputmodeEnum = "none"
-	VarInputmodeEnumNumeric VarInputmodeEnum = "numeric"
-	VarInputmodeEnumSearch  VarInputmodeEnum = "search"
-	VarInputmodeEnumTel     VarInputmodeEnum = "tel"
-	VarInputmodeEnumText    VarInputmodeEnum = "text"
-	VarInputmodeEnumUrl     VarInputmodeEnum = "url"
+	VarInputmodeUrl     VarInputmode = "url"
+	VarInputmodeDecimal VarInputmode = "decimal"
+	VarInputmodeEmail   VarInputmode = "email"
+	VarInputmodeNone    VarInputmode = "none"
+	VarInputmodeNumeric VarInputmode = "numeric"
+	VarInputmodeSearch  VarInputmode = "search"
+	VarInputmodeTel     VarInputmode = "tel"
+	VarInputmodeText    VarInputmode = "text"
 )
 
-type VarSpellcheckEnum string
+type VarSpellcheck string
 
 const (
-	VarSpellcheckEnumTrue  VarSpellcheckEnum = "true"
-	VarSpellcheckEnumFalse VarSpellcheckEnum = "false"
-	VarSpellcheckEnumEmpty VarSpellcheckEnum = ""
+	VarSpellcheckFalse VarSpellcheck = "false"
+	VarSpellcheckTrue  VarSpellcheck = "true"
+	VarSpellcheckEmpty VarSpellcheck = ""
 )
 
-type VarTranslateEnum string
+type VarTranslate string
 
 const (
-	VarTranslateEnumNo    VarTranslateEnum = "no"
-	VarTranslateEnumYes   VarTranslateEnum = "yes"
-	VarTranslateEnumEmpty VarTranslateEnum = ""
+	VarTranslateYes   VarTranslate = "yes"
+	VarTranslateNo    VarTranslate = "no"
+	VarTranslateEmpty VarTranslate = ""
 )
 
-type VarWritingsuggestionsEnum string
+type VarWritingsuggestions string
 
 const (
-	VarWritingsuggestionsEnumFalse VarWritingsuggestionsEnum = "false"
-	VarWritingsuggestionsEnumTrue  VarWritingsuggestionsEnum = "true"
-	VarWritingsuggestionsEnumEmpty VarWritingsuggestionsEnum = ""
+	VarWritingsuggestionsFalse VarWritingsuggestions = "false"
+	VarWritingsuggestionsTrue  VarWritingsuggestions = "true"
+	VarWritingsuggestionsEmpty VarWritingsuggestions = ""
 )
 
 type varAttrs map[string]any
 
-func (e *VarElement) Autocapitalize(a VarAutocapitalizeEnum) *VarElement {
+func (e *VarElement) AriaUnsafe(name string, s string) *VarElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *VarElement) Aria(name string, s string) *VarElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *VarElement) Autocapitalize(a VarAutocapitalize) *VarElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *VarElement) Autocorrect(a VarAutocorrectEnum) *VarElement {
+func (e *VarElement) Autocorrect(a VarAutocorrect) *VarElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *VarElement) Class(s ...string) *VarElement {
 	return e
 }
 
-func (e *VarElement) Contenteditable(a VarContenteditableEnum) *VarElement {
+func (e *VarElement) Contenteditable(a VarContenteditable) *VarElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *VarElement) Data(name string, s string) *VarElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *VarElement) Dir(a VarDirEnum) *VarElement {
+func (e *VarElement) Dir(a VarDir) *VarElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *VarElement) Draggable(a VarDraggableEnum) *VarElement {
+func (e *VarElement) Draggable(a VarDraggable) *VarElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *VarElement) Enterkeyhint(a VarEnterkeyhintEnum) *VarElement {
+func (e *VarElement) Enterkeyhint(a VarEnterkeyhint) *VarElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *VarElement) Hidden(a VarHiddenEnum) *VarElement {
+func (e *VarElement) Hidden(a VarHidden) *VarElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *VarElement) Inert(b bool) *VarElement {
 	return e
 }
 
-func (e *VarElement) Inputmode(a VarInputmodeEnum) *VarElement {
+func (e *VarElement) Inputmode(a VarInputmode) *VarElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *VarElement) Slot(s string) *VarElement {
 	return e
 }
 
-func (e *VarElement) Spellcheck(a VarSpellcheckEnum) *VarElement {
+func (e *VarElement) Spellcheck(a VarSpellcheck) *VarElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *VarElement) Title(s string) *VarElement {
 	return e
 }
 
-func (e *VarElement) Translate(a VarTranslateEnum) *VarElement {
+func (e *VarElement) Translate(a VarTranslate) *VarElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *VarElement) Writingsuggestions(a VarWritingsuggestionsEnum) *VarElement {
+func (e *VarElement) Writingsuggestions(a VarWritingsuggestions) *VarElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

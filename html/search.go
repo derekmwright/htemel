@@ -48,115 +48,127 @@ func SearchTernary(condition bool, true htemel.Node, false htemel.Node) *SearchE
 	return Search(false)
 }
 
-type SearchAutocapitalizeEnum string
+type SearchAutocapitalize string
 
 const (
-	SearchAutocapitalizeEnumOff        SearchAutocapitalizeEnum = "off"
-	SearchAutocapitalizeEnumOn         SearchAutocapitalizeEnum = "on"
-	SearchAutocapitalizeEnumSentences  SearchAutocapitalizeEnum = "sentences"
-	SearchAutocapitalizeEnumWords      SearchAutocapitalizeEnum = "words"
-	SearchAutocapitalizeEnumCharacters SearchAutocapitalizeEnum = "characters"
-	SearchAutocapitalizeEnumNone       SearchAutocapitalizeEnum = "none"
+	SearchAutocapitalizeCharacters SearchAutocapitalize = "characters"
+	SearchAutocapitalizeNone       SearchAutocapitalize = "none"
+	SearchAutocapitalizeOff        SearchAutocapitalize = "off"
+	SearchAutocapitalizeOn         SearchAutocapitalize = "on"
+	SearchAutocapitalizeSentences  SearchAutocapitalize = "sentences"
+	SearchAutocapitalizeWords      SearchAutocapitalize = "words"
 )
 
-type SearchAutocorrectEnum string
+type SearchAutocorrect string
 
 const (
-	SearchAutocorrectEnumOff   SearchAutocorrectEnum = "off"
-	SearchAutocorrectEnumOn    SearchAutocorrectEnum = "on"
-	SearchAutocorrectEnumEmpty SearchAutocorrectEnum = ""
+	SearchAutocorrectOff   SearchAutocorrect = "off"
+	SearchAutocorrectOn    SearchAutocorrect = "on"
+	SearchAutocorrectEmpty SearchAutocorrect = ""
 )
 
-type SearchContenteditableEnum string
+type SearchContenteditable string
 
 const (
-	SearchContenteditableEnumFalse         SearchContenteditableEnum = "false"
-	SearchContenteditableEnumPlaintextOnly SearchContenteditableEnum = "plaintext-only"
-	SearchContenteditableEnumTrue          SearchContenteditableEnum = "true"
-	SearchContenteditableEnumEmpty         SearchContenteditableEnum = ""
+	SearchContenteditableFalse         SearchContenteditable = "false"
+	SearchContenteditablePlaintextOnly SearchContenteditable = "plaintext-only"
+	SearchContenteditableTrue          SearchContenteditable = "true"
+	SearchContenteditableEmpty         SearchContenteditable = ""
 )
 
-type SearchDirEnum string
+type SearchDir string
 
 const (
-	SearchDirEnumAuto SearchDirEnum = "auto"
-	SearchDirEnumLtr  SearchDirEnum = "ltr"
-	SearchDirEnumRtl  SearchDirEnum = "rtl"
+	SearchDirAuto SearchDir = "auto"
+	SearchDirLtr  SearchDir = "ltr"
+	SearchDirRtl  SearchDir = "rtl"
 )
 
-type SearchDraggableEnum string
+type SearchDraggable string
 
 const (
-	SearchDraggableEnumFalse SearchDraggableEnum = "false"
-	SearchDraggableEnumTrue  SearchDraggableEnum = "true"
+	SearchDraggableTrue  SearchDraggable = "true"
+	SearchDraggableFalse SearchDraggable = "false"
 )
 
-type SearchEnterkeyhintEnum string
+type SearchEnterkeyhint string
 
 const (
-	SearchEnterkeyhintEnumPrevious SearchEnterkeyhintEnum = "previous"
-	SearchEnterkeyhintEnumSearch   SearchEnterkeyhintEnum = "search"
-	SearchEnterkeyhintEnumSend     SearchEnterkeyhintEnum = "send"
-	SearchEnterkeyhintEnumDone     SearchEnterkeyhintEnum = "done"
-	SearchEnterkeyhintEnumEnter    SearchEnterkeyhintEnum = "enter"
-	SearchEnterkeyhintEnumGo       SearchEnterkeyhintEnum = "go"
-	SearchEnterkeyhintEnumNext     SearchEnterkeyhintEnum = "next"
+	SearchEnterkeyhintEnter    SearchEnterkeyhint = "enter"
+	SearchEnterkeyhintGo       SearchEnterkeyhint = "go"
+	SearchEnterkeyhintNext     SearchEnterkeyhint = "next"
+	SearchEnterkeyhintPrevious SearchEnterkeyhint = "previous"
+	SearchEnterkeyhintSearch   SearchEnterkeyhint = "search"
+	SearchEnterkeyhintSend     SearchEnterkeyhint = "send"
+	SearchEnterkeyhintDone     SearchEnterkeyhint = "done"
 )
 
-type SearchHiddenEnum string
+type SearchHidden string
 
 const (
-	SearchHiddenEnumHidden     SearchHiddenEnum = "hidden"
-	SearchHiddenEnumUntilFound SearchHiddenEnum = "until-found"
-	SearchHiddenEnumEmpty      SearchHiddenEnum = ""
+	SearchHiddenHidden     SearchHidden = "hidden"
+	SearchHiddenUntilFound SearchHidden = "until-found"
+	SearchHiddenEmpty      SearchHidden = ""
 )
 
-type SearchInputmodeEnum string
+type SearchInputmode string
 
 const (
-	SearchInputmodeEnumEmail   SearchInputmodeEnum = "email"
-	SearchInputmodeEnumNone    SearchInputmodeEnum = "none"
-	SearchInputmodeEnumNumeric SearchInputmodeEnum = "numeric"
-	SearchInputmodeEnumSearch  SearchInputmodeEnum = "search"
-	SearchInputmodeEnumTel     SearchInputmodeEnum = "tel"
-	SearchInputmodeEnumText    SearchInputmodeEnum = "text"
-	SearchInputmodeEnumUrl     SearchInputmodeEnum = "url"
-	SearchInputmodeEnumDecimal SearchInputmodeEnum = "decimal"
+	SearchInputmodeEmail   SearchInputmode = "email"
+	SearchInputmodeNone    SearchInputmode = "none"
+	SearchInputmodeNumeric SearchInputmode = "numeric"
+	SearchInputmodeSearch  SearchInputmode = "search"
+	SearchInputmodeTel     SearchInputmode = "tel"
+	SearchInputmodeText    SearchInputmode = "text"
+	SearchInputmodeUrl     SearchInputmode = "url"
+	SearchInputmodeDecimal SearchInputmode = "decimal"
 )
 
-type SearchSpellcheckEnum string
+type SearchSpellcheck string
 
 const (
-	SearchSpellcheckEnumFalse SearchSpellcheckEnum = "false"
-	SearchSpellcheckEnumTrue  SearchSpellcheckEnum = "true"
-	SearchSpellcheckEnumEmpty SearchSpellcheckEnum = ""
+	SearchSpellcheckFalse SearchSpellcheck = "false"
+	SearchSpellcheckTrue  SearchSpellcheck = "true"
+	SearchSpellcheckEmpty SearchSpellcheck = ""
 )
 
-type SearchTranslateEnum string
+type SearchTranslate string
 
 const (
-	SearchTranslateEnumNo    SearchTranslateEnum = "no"
-	SearchTranslateEnumYes   SearchTranslateEnum = "yes"
-	SearchTranslateEnumEmpty SearchTranslateEnum = ""
+	SearchTranslateNo    SearchTranslate = "no"
+	SearchTranslateYes   SearchTranslate = "yes"
+	SearchTranslateEmpty SearchTranslate = ""
 )
 
-type SearchWritingsuggestionsEnum string
+type SearchWritingsuggestions string
 
 const (
-	SearchWritingsuggestionsEnumFalse SearchWritingsuggestionsEnum = "false"
-	SearchWritingsuggestionsEnumTrue  SearchWritingsuggestionsEnum = "true"
-	SearchWritingsuggestionsEnumEmpty SearchWritingsuggestionsEnum = ""
+	SearchWritingsuggestionsFalse SearchWritingsuggestions = "false"
+	SearchWritingsuggestionsTrue  SearchWritingsuggestions = "true"
+	SearchWritingsuggestionsEmpty SearchWritingsuggestions = ""
 )
 
 type searchAttrs map[string]any
 
-func (e *SearchElement) Autocapitalize(a SearchAutocapitalizeEnum) *SearchElement {
+func (e *SearchElement) AriaUnsafe(name string, s string) *SearchElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SearchElement) Aria(name string, s string) *SearchElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SearchElement) Autocapitalize(a SearchAutocapitalize) *SearchElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SearchElement) Autocorrect(a SearchAutocorrectEnum) *SearchElement {
+func (e *SearchElement) Autocorrect(a SearchAutocorrect) *SearchElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *SearchElement) Class(s ...string) *SearchElement {
 	return e
 }
 
-func (e *SearchElement) Contenteditable(a SearchContenteditableEnum) *SearchElement {
+func (e *SearchElement) Contenteditable(a SearchContenteditable) *SearchElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *SearchElement) Data(name string, s string) *SearchElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SearchElement) Dir(a SearchDirEnum) *SearchElement {
+func (e *SearchElement) Dir(a SearchDir) *SearchElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SearchElement) Draggable(a SearchDraggableEnum) *SearchElement {
+func (e *SearchElement) Draggable(a SearchDraggable) *SearchElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SearchElement) Enterkeyhint(a SearchEnterkeyhintEnum) *SearchElement {
+func (e *SearchElement) Enterkeyhint(a SearchEnterkeyhint) *SearchElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SearchElement) Hidden(a SearchHiddenEnum) *SearchElement {
+func (e *SearchElement) Hidden(a SearchHidden) *SearchElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *SearchElement) Inert(b bool) *SearchElement {
 	return e
 }
 
-func (e *SearchElement) Inputmode(a SearchInputmodeEnum) *SearchElement {
+func (e *SearchElement) Inputmode(a SearchInputmode) *SearchElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *SearchElement) Slot(s string) *SearchElement {
 	return e
 }
 
-func (e *SearchElement) Spellcheck(a SearchSpellcheckEnum) *SearchElement {
+func (e *SearchElement) Spellcheck(a SearchSpellcheck) *SearchElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *SearchElement) Title(s string) *SearchElement {
 	return e
 }
 
-func (e *SearchElement) Translate(a SearchTranslateEnum) *SearchElement {
+func (e *SearchElement) Translate(a SearchTranslate) *SearchElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SearchElement) Writingsuggestions(a SearchWritingsuggestionsEnum) *SearchElement {
+func (e *SearchElement) Writingsuggestions(a SearchWritingsuggestions) *SearchElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

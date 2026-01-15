@@ -48,104 +48,104 @@ func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *Detail
 	return Details(false)
 }
 
-type DetailsAutocapitalizeEnum string
+type DetailsAutocapitalize string
 
 const (
-	DetailsAutocapitalizeEnumOff        DetailsAutocapitalizeEnum = "off"
-	DetailsAutocapitalizeEnumOn         DetailsAutocapitalizeEnum = "on"
-	DetailsAutocapitalizeEnumSentences  DetailsAutocapitalizeEnum = "sentences"
-	DetailsAutocapitalizeEnumWords      DetailsAutocapitalizeEnum = "words"
-	DetailsAutocapitalizeEnumCharacters DetailsAutocapitalizeEnum = "characters"
-	DetailsAutocapitalizeEnumNone       DetailsAutocapitalizeEnum = "none"
+	DetailsAutocapitalizeOff        DetailsAutocapitalize = "off"
+	DetailsAutocapitalizeOn         DetailsAutocapitalize = "on"
+	DetailsAutocapitalizeSentences  DetailsAutocapitalize = "sentences"
+	DetailsAutocapitalizeWords      DetailsAutocapitalize = "words"
+	DetailsAutocapitalizeCharacters DetailsAutocapitalize = "characters"
+	DetailsAutocapitalizeNone       DetailsAutocapitalize = "none"
 )
 
-type DetailsAutocorrectEnum string
+type DetailsAutocorrect string
 
 const (
-	DetailsAutocorrectEnumOff   DetailsAutocorrectEnum = "off"
-	DetailsAutocorrectEnumOn    DetailsAutocorrectEnum = "on"
-	DetailsAutocorrectEnumEmpty DetailsAutocorrectEnum = ""
+	DetailsAutocorrectOff   DetailsAutocorrect = "off"
+	DetailsAutocorrectOn    DetailsAutocorrect = "on"
+	DetailsAutocorrectEmpty DetailsAutocorrect = ""
 )
 
-type DetailsContenteditableEnum string
+type DetailsContenteditable string
 
 const (
-	DetailsContenteditableEnumPlaintextOnly DetailsContenteditableEnum = "plaintext-only"
-	DetailsContenteditableEnumTrue          DetailsContenteditableEnum = "true"
-	DetailsContenteditableEnumFalse         DetailsContenteditableEnum = "false"
-	DetailsContenteditableEnumEmpty         DetailsContenteditableEnum = ""
+	DetailsContenteditableFalse         DetailsContenteditable = "false"
+	DetailsContenteditablePlaintextOnly DetailsContenteditable = "plaintext-only"
+	DetailsContenteditableTrue          DetailsContenteditable = "true"
+	DetailsContenteditableEmpty         DetailsContenteditable = ""
 )
 
-type DetailsDirEnum string
+type DetailsDir string
 
 const (
-	DetailsDirEnumAuto DetailsDirEnum = "auto"
-	DetailsDirEnumLtr  DetailsDirEnum = "ltr"
-	DetailsDirEnumRtl  DetailsDirEnum = "rtl"
+	DetailsDirLtr  DetailsDir = "ltr"
+	DetailsDirRtl  DetailsDir = "rtl"
+	DetailsDirAuto DetailsDir = "auto"
 )
 
-type DetailsDraggableEnum string
+type DetailsDraggable string
 
 const (
-	DetailsDraggableEnumFalse DetailsDraggableEnum = "false"
-	DetailsDraggableEnumTrue  DetailsDraggableEnum = "true"
+	DetailsDraggableTrue  DetailsDraggable = "true"
+	DetailsDraggableFalse DetailsDraggable = "false"
 )
 
-type DetailsEnterkeyhintEnum string
+type DetailsEnterkeyhint string
 
 const (
-	DetailsEnterkeyhintEnumSend     DetailsEnterkeyhintEnum = "send"
-	DetailsEnterkeyhintEnumDone     DetailsEnterkeyhintEnum = "done"
-	DetailsEnterkeyhintEnumEnter    DetailsEnterkeyhintEnum = "enter"
-	DetailsEnterkeyhintEnumGo       DetailsEnterkeyhintEnum = "go"
-	DetailsEnterkeyhintEnumNext     DetailsEnterkeyhintEnum = "next"
-	DetailsEnterkeyhintEnumPrevious DetailsEnterkeyhintEnum = "previous"
-	DetailsEnterkeyhintEnumSearch   DetailsEnterkeyhintEnum = "search"
+	DetailsEnterkeyhintPrevious DetailsEnterkeyhint = "previous"
+	DetailsEnterkeyhintSearch   DetailsEnterkeyhint = "search"
+	DetailsEnterkeyhintSend     DetailsEnterkeyhint = "send"
+	DetailsEnterkeyhintDone     DetailsEnterkeyhint = "done"
+	DetailsEnterkeyhintEnter    DetailsEnterkeyhint = "enter"
+	DetailsEnterkeyhintGo       DetailsEnterkeyhint = "go"
+	DetailsEnterkeyhintNext     DetailsEnterkeyhint = "next"
 )
 
-type DetailsHiddenEnum string
+type DetailsHidden string
 
 const (
-	DetailsHiddenEnumHidden     DetailsHiddenEnum = "hidden"
-	DetailsHiddenEnumUntilFound DetailsHiddenEnum = "until-found"
-	DetailsHiddenEnumEmpty      DetailsHiddenEnum = ""
+	DetailsHiddenHidden     DetailsHidden = "hidden"
+	DetailsHiddenUntilFound DetailsHidden = "until-found"
+	DetailsHiddenEmpty      DetailsHidden = ""
 )
 
-type DetailsInputmodeEnum string
+type DetailsInputmode string
 
 const (
-	DetailsInputmodeEnumDecimal DetailsInputmodeEnum = "decimal"
-	DetailsInputmodeEnumEmail   DetailsInputmodeEnum = "email"
-	DetailsInputmodeEnumNone    DetailsInputmodeEnum = "none"
-	DetailsInputmodeEnumNumeric DetailsInputmodeEnum = "numeric"
-	DetailsInputmodeEnumSearch  DetailsInputmodeEnum = "search"
-	DetailsInputmodeEnumTel     DetailsInputmodeEnum = "tel"
-	DetailsInputmodeEnumText    DetailsInputmodeEnum = "text"
-	DetailsInputmodeEnumUrl     DetailsInputmodeEnum = "url"
+	DetailsInputmodeUrl     DetailsInputmode = "url"
+	DetailsInputmodeDecimal DetailsInputmode = "decimal"
+	DetailsInputmodeEmail   DetailsInputmode = "email"
+	DetailsInputmodeNone    DetailsInputmode = "none"
+	DetailsInputmodeNumeric DetailsInputmode = "numeric"
+	DetailsInputmodeSearch  DetailsInputmode = "search"
+	DetailsInputmodeTel     DetailsInputmode = "tel"
+	DetailsInputmodeText    DetailsInputmode = "text"
 )
 
-type DetailsSpellcheckEnum string
+type DetailsSpellcheck string
 
 const (
-	DetailsSpellcheckEnumFalse DetailsSpellcheckEnum = "false"
-	DetailsSpellcheckEnumTrue  DetailsSpellcheckEnum = "true"
-	DetailsSpellcheckEnumEmpty DetailsSpellcheckEnum = ""
+	DetailsSpellcheckFalse DetailsSpellcheck = "false"
+	DetailsSpellcheckTrue  DetailsSpellcheck = "true"
+	DetailsSpellcheckEmpty DetailsSpellcheck = ""
 )
 
-type DetailsTranslateEnum string
+type DetailsTranslate string
 
 const (
-	DetailsTranslateEnumNo    DetailsTranslateEnum = "no"
-	DetailsTranslateEnumYes   DetailsTranslateEnum = "yes"
-	DetailsTranslateEnumEmpty DetailsTranslateEnum = ""
+	DetailsTranslateNo    DetailsTranslate = "no"
+	DetailsTranslateYes   DetailsTranslate = "yes"
+	DetailsTranslateEmpty DetailsTranslate = ""
 )
 
-type DetailsWritingsuggestionsEnum string
+type DetailsWritingsuggestions string
 
 const (
-	DetailsWritingsuggestionsEnumTrue  DetailsWritingsuggestionsEnum = "true"
-	DetailsWritingsuggestionsEnumFalse DetailsWritingsuggestionsEnum = "false"
-	DetailsWritingsuggestionsEnumEmpty DetailsWritingsuggestionsEnum = ""
+	DetailsWritingsuggestionsFalse DetailsWritingsuggestions = "false"
+	DetailsWritingsuggestionsTrue  DetailsWritingsuggestions = "true"
+	DetailsWritingsuggestionsEmpty DetailsWritingsuggestions = ""
 )
 
 type detailsAttrs map[string]any
@@ -162,13 +162,25 @@ func (e *DetailsElement) Open(b bool) *DetailsElement {
 	return e
 }
 
-func (e *DetailsElement) Autocapitalize(a DetailsAutocapitalizeEnum) *DetailsElement {
+func (e *DetailsElement) AriaUnsafe(name string, s string) *DetailsElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DetailsElement) Aria(name string, s string) *DetailsElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *DetailsElement) Autocapitalize(a DetailsAutocapitalize) *DetailsElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *DetailsElement) Autocorrect(a DetailsAutocorrectEnum) *DetailsElement {
+func (e *DetailsElement) Autocorrect(a DetailsAutocorrect) *DetailsElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -186,7 +198,7 @@ func (e *DetailsElement) Class(s ...string) *DetailsElement {
 	return e
 }
 
-func (e *DetailsElement) Contenteditable(a DetailsContenteditableEnum) *DetailsElement {
+func (e *DetailsElement) Contenteditable(a DetailsContenteditable) *DetailsElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -204,25 +216,25 @@ func (e *DetailsElement) Data(name string, s string) *DetailsElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *DetailsElement) Dir(a DetailsDirEnum) *DetailsElement {
+func (e *DetailsElement) Dir(a DetailsDir) *DetailsElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *DetailsElement) Draggable(a DetailsDraggableEnum) *DetailsElement {
+func (e *DetailsElement) Draggable(a DetailsDraggable) *DetailsElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *DetailsElement) Enterkeyhint(a DetailsEnterkeyhintEnum) *DetailsElement {
+func (e *DetailsElement) Enterkeyhint(a DetailsEnterkeyhint) *DetailsElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *DetailsElement) Hidden(a DetailsHiddenEnum) *DetailsElement {
+func (e *DetailsElement) Hidden(a DetailsHidden) *DetailsElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -240,7 +252,7 @@ func (e *DetailsElement) Inert(b bool) *DetailsElement {
 	return e
 }
 
-func (e *DetailsElement) Inputmode(a DetailsInputmodeEnum) *DetailsElement {
+func (e *DetailsElement) Inputmode(a DetailsInputmode) *DetailsElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -300,7 +312,7 @@ func (e *DetailsElement) Slot(s string) *DetailsElement {
 	return e
 }
 
-func (e *DetailsElement) Spellcheck(a DetailsSpellcheckEnum) *DetailsElement {
+func (e *DetailsElement) Spellcheck(a DetailsSpellcheck) *DetailsElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -324,13 +336,13 @@ func (e *DetailsElement) Title(s string) *DetailsElement {
 	return e
 }
 
-func (e *DetailsElement) Translate(a DetailsTranslateEnum) *DetailsElement {
+func (e *DetailsElement) Translate(a DetailsTranslate) *DetailsElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *DetailsElement) Writingsuggestions(a DetailsWritingsuggestionsEnum) *DetailsElement {
+func (e *DetailsElement) Writingsuggestions(a DetailsWritingsuggestions) *DetailsElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

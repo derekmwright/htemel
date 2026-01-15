@@ -39,104 +39,104 @@ func ColIf(condition bool) *ColElement {
 	}
 }
 
-type ColAutocapitalizeEnum string
+type ColAutocapitalize string
 
 const (
-	ColAutocapitalizeEnumNone       ColAutocapitalizeEnum = "none"
-	ColAutocapitalizeEnumOff        ColAutocapitalizeEnum = "off"
-	ColAutocapitalizeEnumOn         ColAutocapitalizeEnum = "on"
-	ColAutocapitalizeEnumSentences  ColAutocapitalizeEnum = "sentences"
-	ColAutocapitalizeEnumWords      ColAutocapitalizeEnum = "words"
-	ColAutocapitalizeEnumCharacters ColAutocapitalizeEnum = "characters"
+	ColAutocapitalizeCharacters ColAutocapitalize = "characters"
+	ColAutocapitalizeNone       ColAutocapitalize = "none"
+	ColAutocapitalizeOff        ColAutocapitalize = "off"
+	ColAutocapitalizeOn         ColAutocapitalize = "on"
+	ColAutocapitalizeSentences  ColAutocapitalize = "sentences"
+	ColAutocapitalizeWords      ColAutocapitalize = "words"
 )
 
-type ColAutocorrectEnum string
+type ColAutocorrect string
 
 const (
-	ColAutocorrectEnumOff   ColAutocorrectEnum = "off"
-	ColAutocorrectEnumOn    ColAutocorrectEnum = "on"
-	ColAutocorrectEnumEmpty ColAutocorrectEnum = ""
+	ColAutocorrectOff   ColAutocorrect = "off"
+	ColAutocorrectOn    ColAutocorrect = "on"
+	ColAutocorrectEmpty ColAutocorrect = ""
 )
 
-type ColContenteditableEnum string
+type ColContenteditable string
 
 const (
-	ColContenteditableEnumTrue          ColContenteditableEnum = "true"
-	ColContenteditableEnumFalse         ColContenteditableEnum = "false"
-	ColContenteditableEnumPlaintextOnly ColContenteditableEnum = "plaintext-only"
-	ColContenteditableEnumEmpty         ColContenteditableEnum = ""
+	ColContenteditableFalse         ColContenteditable = "false"
+	ColContenteditablePlaintextOnly ColContenteditable = "plaintext-only"
+	ColContenteditableTrue          ColContenteditable = "true"
+	ColContenteditableEmpty         ColContenteditable = ""
 )
 
-type ColDirEnum string
+type ColDir string
 
 const (
-	ColDirEnumAuto ColDirEnum = "auto"
-	ColDirEnumLtr  ColDirEnum = "ltr"
-	ColDirEnumRtl  ColDirEnum = "rtl"
+	ColDirLtr  ColDir = "ltr"
+	ColDirRtl  ColDir = "rtl"
+	ColDirAuto ColDir = "auto"
 )
 
-type ColDraggableEnum string
+type ColDraggable string
 
 const (
-	ColDraggableEnumFalse ColDraggableEnum = "false"
-	ColDraggableEnumTrue  ColDraggableEnum = "true"
+	ColDraggableFalse ColDraggable = "false"
+	ColDraggableTrue  ColDraggable = "true"
 )
 
-type ColEnterkeyhintEnum string
+type ColEnterkeyhint string
 
 const (
-	ColEnterkeyhintEnumGo       ColEnterkeyhintEnum = "go"
-	ColEnterkeyhintEnumNext     ColEnterkeyhintEnum = "next"
-	ColEnterkeyhintEnumPrevious ColEnterkeyhintEnum = "previous"
-	ColEnterkeyhintEnumSearch   ColEnterkeyhintEnum = "search"
-	ColEnterkeyhintEnumSend     ColEnterkeyhintEnum = "send"
-	ColEnterkeyhintEnumDone     ColEnterkeyhintEnum = "done"
-	ColEnterkeyhintEnumEnter    ColEnterkeyhintEnum = "enter"
+	ColEnterkeyhintPrevious ColEnterkeyhint = "previous"
+	ColEnterkeyhintSearch   ColEnterkeyhint = "search"
+	ColEnterkeyhintSend     ColEnterkeyhint = "send"
+	ColEnterkeyhintDone     ColEnterkeyhint = "done"
+	ColEnterkeyhintEnter    ColEnterkeyhint = "enter"
+	ColEnterkeyhintGo       ColEnterkeyhint = "go"
+	ColEnterkeyhintNext     ColEnterkeyhint = "next"
 )
 
-type ColHiddenEnum string
+type ColHidden string
 
 const (
-	ColHiddenEnumHidden     ColHiddenEnum = "hidden"
-	ColHiddenEnumUntilFound ColHiddenEnum = "until-found"
-	ColHiddenEnumEmpty      ColHiddenEnum = ""
+	ColHiddenHidden     ColHidden = "hidden"
+	ColHiddenUntilFound ColHidden = "until-found"
+	ColHiddenEmpty      ColHidden = ""
 )
 
-type ColInputmodeEnum string
+type ColInputmode string
 
 const (
-	ColInputmodeEnumDecimal ColInputmodeEnum = "decimal"
-	ColInputmodeEnumEmail   ColInputmodeEnum = "email"
-	ColInputmodeEnumNone    ColInputmodeEnum = "none"
-	ColInputmodeEnumNumeric ColInputmodeEnum = "numeric"
-	ColInputmodeEnumSearch  ColInputmodeEnum = "search"
-	ColInputmodeEnumTel     ColInputmodeEnum = "tel"
-	ColInputmodeEnumText    ColInputmodeEnum = "text"
-	ColInputmodeEnumUrl     ColInputmodeEnum = "url"
+	ColInputmodeUrl     ColInputmode = "url"
+	ColInputmodeDecimal ColInputmode = "decimal"
+	ColInputmodeEmail   ColInputmode = "email"
+	ColInputmodeNone    ColInputmode = "none"
+	ColInputmodeNumeric ColInputmode = "numeric"
+	ColInputmodeSearch  ColInputmode = "search"
+	ColInputmodeTel     ColInputmode = "tel"
+	ColInputmodeText    ColInputmode = "text"
 )
 
-type ColSpellcheckEnum string
+type ColSpellcheck string
 
 const (
-	ColSpellcheckEnumTrue  ColSpellcheckEnum = "true"
-	ColSpellcheckEnumFalse ColSpellcheckEnum = "false"
-	ColSpellcheckEnumEmpty ColSpellcheckEnum = ""
+	ColSpellcheckFalse ColSpellcheck = "false"
+	ColSpellcheckTrue  ColSpellcheck = "true"
+	ColSpellcheckEmpty ColSpellcheck = ""
 )
 
-type ColTranslateEnum string
+type ColTranslate string
 
 const (
-	ColTranslateEnumNo    ColTranslateEnum = "no"
-	ColTranslateEnumYes   ColTranslateEnum = "yes"
-	ColTranslateEnumEmpty ColTranslateEnum = ""
+	ColTranslateYes   ColTranslate = "yes"
+	ColTranslateNo    ColTranslate = "no"
+	ColTranslateEmpty ColTranslate = ""
 )
 
-type ColWritingsuggestionsEnum string
+type ColWritingsuggestions string
 
 const (
-	ColWritingsuggestionsEnumTrue  ColWritingsuggestionsEnum = "true"
-	ColWritingsuggestionsEnumFalse ColWritingsuggestionsEnum = "false"
-	ColWritingsuggestionsEnumEmpty ColWritingsuggestionsEnum = ""
+	ColWritingsuggestionsFalse ColWritingsuggestions = "false"
+	ColWritingsuggestionsTrue  ColWritingsuggestions = "true"
+	ColWritingsuggestionsEmpty ColWritingsuggestions = ""
 )
 
 type colAttrs map[string]any
@@ -147,13 +147,25 @@ func (e *ColElement) Span(i int) *ColElement {
 	return e
 }
 
-func (e *ColElement) Autocapitalize(a ColAutocapitalizeEnum) *ColElement {
+func (e *ColElement) AriaUnsafe(name string, s string) *ColElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *ColElement) Aria(name string, s string) *ColElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *ColElement) Autocapitalize(a ColAutocapitalize) *ColElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *ColElement) Autocorrect(a ColAutocorrectEnum) *ColElement {
+func (e *ColElement) Autocorrect(a ColAutocorrect) *ColElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -171,7 +183,7 @@ func (e *ColElement) Class(s ...string) *ColElement {
 	return e
 }
 
-func (e *ColElement) Contenteditable(a ColContenteditableEnum) *ColElement {
+func (e *ColElement) Contenteditable(a ColContenteditable) *ColElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -189,25 +201,25 @@ func (e *ColElement) Data(name string, s string) *ColElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *ColElement) Dir(a ColDirEnum) *ColElement {
+func (e *ColElement) Dir(a ColDir) *ColElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *ColElement) Draggable(a ColDraggableEnum) *ColElement {
+func (e *ColElement) Draggable(a ColDraggable) *ColElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *ColElement) Enterkeyhint(a ColEnterkeyhintEnum) *ColElement {
+func (e *ColElement) Enterkeyhint(a ColEnterkeyhint) *ColElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *ColElement) Hidden(a ColHiddenEnum) *ColElement {
+func (e *ColElement) Hidden(a ColHidden) *ColElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -225,7 +237,7 @@ func (e *ColElement) Inert(b bool) *ColElement {
 	return e
 }
 
-func (e *ColElement) Inputmode(a ColInputmodeEnum) *ColElement {
+func (e *ColElement) Inputmode(a ColInputmode) *ColElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -285,7 +297,7 @@ func (e *ColElement) Slot(s string) *ColElement {
 	return e
 }
 
-func (e *ColElement) Spellcheck(a ColSpellcheckEnum) *ColElement {
+func (e *ColElement) Spellcheck(a ColSpellcheck) *ColElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -309,13 +321,13 @@ func (e *ColElement) Title(s string) *ColElement {
 	return e
 }
 
-func (e *ColElement) Translate(a ColTranslateEnum) *ColElement {
+func (e *ColElement) Translate(a ColTranslate) *ColElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *ColElement) Writingsuggestions(a ColWritingsuggestionsEnum) *ColElement {
+func (e *ColElement) Writingsuggestions(a ColWritingsuggestions) *ColElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

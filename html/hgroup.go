@@ -48,115 +48,127 @@ func HgroupTernary(condition bool, true htemel.Node, false htemel.Node) *HgroupE
 	return Hgroup(false)
 }
 
-type HgroupAutocapitalizeEnum string
+type HgroupAutocapitalize string
 
 const (
-	HgroupAutocapitalizeEnumCharacters HgroupAutocapitalizeEnum = "characters"
-	HgroupAutocapitalizeEnumNone       HgroupAutocapitalizeEnum = "none"
-	HgroupAutocapitalizeEnumOff        HgroupAutocapitalizeEnum = "off"
-	HgroupAutocapitalizeEnumOn         HgroupAutocapitalizeEnum = "on"
-	HgroupAutocapitalizeEnumSentences  HgroupAutocapitalizeEnum = "sentences"
-	HgroupAutocapitalizeEnumWords      HgroupAutocapitalizeEnum = "words"
+	HgroupAutocapitalizeOn         HgroupAutocapitalize = "on"
+	HgroupAutocapitalizeSentences  HgroupAutocapitalize = "sentences"
+	HgroupAutocapitalizeWords      HgroupAutocapitalize = "words"
+	HgroupAutocapitalizeCharacters HgroupAutocapitalize = "characters"
+	HgroupAutocapitalizeNone       HgroupAutocapitalize = "none"
+	HgroupAutocapitalizeOff        HgroupAutocapitalize = "off"
 )
 
-type HgroupAutocorrectEnum string
+type HgroupAutocorrect string
 
 const (
-	HgroupAutocorrectEnumOff   HgroupAutocorrectEnum = "off"
-	HgroupAutocorrectEnumOn    HgroupAutocorrectEnum = "on"
-	HgroupAutocorrectEnumEmpty HgroupAutocorrectEnum = ""
+	HgroupAutocorrectOff   HgroupAutocorrect = "off"
+	HgroupAutocorrectOn    HgroupAutocorrect = "on"
+	HgroupAutocorrectEmpty HgroupAutocorrect = ""
 )
 
-type HgroupContenteditableEnum string
+type HgroupContenteditable string
 
 const (
-	HgroupContenteditableEnumFalse         HgroupContenteditableEnum = "false"
-	HgroupContenteditableEnumPlaintextOnly HgroupContenteditableEnum = "plaintext-only"
-	HgroupContenteditableEnumTrue          HgroupContenteditableEnum = "true"
-	HgroupContenteditableEnumEmpty         HgroupContenteditableEnum = ""
+	HgroupContenteditableTrue          HgroupContenteditable = "true"
+	HgroupContenteditableFalse         HgroupContenteditable = "false"
+	HgroupContenteditablePlaintextOnly HgroupContenteditable = "plaintext-only"
+	HgroupContenteditableEmpty         HgroupContenteditable = ""
 )
 
-type HgroupDirEnum string
+type HgroupDir string
 
 const (
-	HgroupDirEnumAuto HgroupDirEnum = "auto"
-	HgroupDirEnumLtr  HgroupDirEnum = "ltr"
-	HgroupDirEnumRtl  HgroupDirEnum = "rtl"
+	HgroupDirAuto HgroupDir = "auto"
+	HgroupDirLtr  HgroupDir = "ltr"
+	HgroupDirRtl  HgroupDir = "rtl"
 )
 
-type HgroupDraggableEnum string
+type HgroupDraggable string
 
 const (
-	HgroupDraggableEnumFalse HgroupDraggableEnum = "false"
-	HgroupDraggableEnumTrue  HgroupDraggableEnum = "true"
+	HgroupDraggableFalse HgroupDraggable = "false"
+	HgroupDraggableTrue  HgroupDraggable = "true"
 )
 
-type HgroupEnterkeyhintEnum string
+type HgroupEnterkeyhint string
 
 const (
-	HgroupEnterkeyhintEnumNext     HgroupEnterkeyhintEnum = "next"
-	HgroupEnterkeyhintEnumPrevious HgroupEnterkeyhintEnum = "previous"
-	HgroupEnterkeyhintEnumSearch   HgroupEnterkeyhintEnum = "search"
-	HgroupEnterkeyhintEnumSend     HgroupEnterkeyhintEnum = "send"
-	HgroupEnterkeyhintEnumDone     HgroupEnterkeyhintEnum = "done"
-	HgroupEnterkeyhintEnumEnter    HgroupEnterkeyhintEnum = "enter"
-	HgroupEnterkeyhintEnumGo       HgroupEnterkeyhintEnum = "go"
+	HgroupEnterkeyhintDone     HgroupEnterkeyhint = "done"
+	HgroupEnterkeyhintEnter    HgroupEnterkeyhint = "enter"
+	HgroupEnterkeyhintGo       HgroupEnterkeyhint = "go"
+	HgroupEnterkeyhintNext     HgroupEnterkeyhint = "next"
+	HgroupEnterkeyhintPrevious HgroupEnterkeyhint = "previous"
+	HgroupEnterkeyhintSearch   HgroupEnterkeyhint = "search"
+	HgroupEnterkeyhintSend     HgroupEnterkeyhint = "send"
 )
 
-type HgroupHiddenEnum string
+type HgroupHidden string
 
 const (
-	HgroupHiddenEnumHidden     HgroupHiddenEnum = "hidden"
-	HgroupHiddenEnumUntilFound HgroupHiddenEnum = "until-found"
-	HgroupHiddenEnumEmpty      HgroupHiddenEnum = ""
+	HgroupHiddenHidden     HgroupHidden = "hidden"
+	HgroupHiddenUntilFound HgroupHidden = "until-found"
+	HgroupHiddenEmpty      HgroupHidden = ""
 )
 
-type HgroupInputmodeEnum string
+type HgroupInputmode string
 
 const (
-	HgroupInputmodeEnumText    HgroupInputmodeEnum = "text"
-	HgroupInputmodeEnumUrl     HgroupInputmodeEnum = "url"
-	HgroupInputmodeEnumDecimal HgroupInputmodeEnum = "decimal"
-	HgroupInputmodeEnumEmail   HgroupInputmodeEnum = "email"
-	HgroupInputmodeEnumNone    HgroupInputmodeEnum = "none"
-	HgroupInputmodeEnumNumeric HgroupInputmodeEnum = "numeric"
-	HgroupInputmodeEnumSearch  HgroupInputmodeEnum = "search"
-	HgroupInputmodeEnumTel     HgroupInputmodeEnum = "tel"
+	HgroupInputmodeSearch  HgroupInputmode = "search"
+	HgroupInputmodeTel     HgroupInputmode = "tel"
+	HgroupInputmodeText    HgroupInputmode = "text"
+	HgroupInputmodeUrl     HgroupInputmode = "url"
+	HgroupInputmodeDecimal HgroupInputmode = "decimal"
+	HgroupInputmodeEmail   HgroupInputmode = "email"
+	HgroupInputmodeNone    HgroupInputmode = "none"
+	HgroupInputmodeNumeric HgroupInputmode = "numeric"
 )
 
-type HgroupSpellcheckEnum string
+type HgroupSpellcheck string
 
 const (
-	HgroupSpellcheckEnumFalse HgroupSpellcheckEnum = "false"
-	HgroupSpellcheckEnumTrue  HgroupSpellcheckEnum = "true"
-	HgroupSpellcheckEnumEmpty HgroupSpellcheckEnum = ""
+	HgroupSpellcheckFalse HgroupSpellcheck = "false"
+	HgroupSpellcheckTrue  HgroupSpellcheck = "true"
+	HgroupSpellcheckEmpty HgroupSpellcheck = ""
 )
 
-type HgroupTranslateEnum string
+type HgroupTranslate string
 
 const (
-	HgroupTranslateEnumNo    HgroupTranslateEnum = "no"
-	HgroupTranslateEnumYes   HgroupTranslateEnum = "yes"
-	HgroupTranslateEnumEmpty HgroupTranslateEnum = ""
+	HgroupTranslateYes   HgroupTranslate = "yes"
+	HgroupTranslateNo    HgroupTranslate = "no"
+	HgroupTranslateEmpty HgroupTranslate = ""
 )
 
-type HgroupWritingsuggestionsEnum string
+type HgroupWritingsuggestions string
 
 const (
-	HgroupWritingsuggestionsEnumFalse HgroupWritingsuggestionsEnum = "false"
-	HgroupWritingsuggestionsEnumTrue  HgroupWritingsuggestionsEnum = "true"
-	HgroupWritingsuggestionsEnumEmpty HgroupWritingsuggestionsEnum = ""
+	HgroupWritingsuggestionsFalse HgroupWritingsuggestions = "false"
+	HgroupWritingsuggestionsTrue  HgroupWritingsuggestions = "true"
+	HgroupWritingsuggestionsEmpty HgroupWritingsuggestions = ""
 )
 
 type hgroupAttrs map[string]any
 
-func (e *HgroupElement) Autocapitalize(a HgroupAutocapitalizeEnum) *HgroupElement {
+func (e *HgroupElement) AriaUnsafe(name string, s string) *HgroupElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *HgroupElement) Aria(name string, s string) *HgroupElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *HgroupElement) Autocapitalize(a HgroupAutocapitalize) *HgroupElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *HgroupElement) Autocorrect(a HgroupAutocorrectEnum) *HgroupElement {
+func (e *HgroupElement) Autocorrect(a HgroupAutocorrect) *HgroupElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *HgroupElement) Class(s ...string) *HgroupElement {
 	return e
 }
 
-func (e *HgroupElement) Contenteditable(a HgroupContenteditableEnum) *HgroupElement {
+func (e *HgroupElement) Contenteditable(a HgroupContenteditable) *HgroupElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *HgroupElement) Data(name string, s string) *HgroupElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *HgroupElement) Dir(a HgroupDirEnum) *HgroupElement {
+func (e *HgroupElement) Dir(a HgroupDir) *HgroupElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *HgroupElement) Draggable(a HgroupDraggableEnum) *HgroupElement {
+func (e *HgroupElement) Draggable(a HgroupDraggable) *HgroupElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *HgroupElement) Enterkeyhint(a HgroupEnterkeyhintEnum) *HgroupElement {
+func (e *HgroupElement) Enterkeyhint(a HgroupEnterkeyhint) *HgroupElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *HgroupElement) Hidden(a HgroupHiddenEnum) *HgroupElement {
+func (e *HgroupElement) Hidden(a HgroupHidden) *HgroupElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *HgroupElement) Inert(b bool) *HgroupElement {
 	return e
 }
 
-func (e *HgroupElement) Inputmode(a HgroupInputmodeEnum) *HgroupElement {
+func (e *HgroupElement) Inputmode(a HgroupInputmode) *HgroupElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *HgroupElement) Slot(s string) *HgroupElement {
 	return e
 }
 
-func (e *HgroupElement) Spellcheck(a HgroupSpellcheckEnum) *HgroupElement {
+func (e *HgroupElement) Spellcheck(a HgroupSpellcheck) *HgroupElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *HgroupElement) Title(s string) *HgroupElement {
 	return e
 }
 
-func (e *HgroupElement) Translate(a HgroupTranslateEnum) *HgroupElement {
+func (e *HgroupElement) Translate(a HgroupTranslate) *HgroupElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *HgroupElement) Writingsuggestions(a HgroupWritingsuggestionsEnum) *HgroupElement {
+func (e *HgroupElement) Writingsuggestions(a HgroupWritingsuggestions) *HgroupElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,115 +48,127 @@ func CodeTernary(condition bool, true htemel.Node, false htemel.Node) *CodeEleme
 	return Code(false)
 }
 
-type CodeAutocapitalizeEnum string
+type CodeAutocapitalize string
 
 const (
-	CodeAutocapitalizeEnumCharacters CodeAutocapitalizeEnum = "characters"
-	CodeAutocapitalizeEnumNone       CodeAutocapitalizeEnum = "none"
-	CodeAutocapitalizeEnumOff        CodeAutocapitalizeEnum = "off"
-	CodeAutocapitalizeEnumOn         CodeAutocapitalizeEnum = "on"
-	CodeAutocapitalizeEnumSentences  CodeAutocapitalizeEnum = "sentences"
-	CodeAutocapitalizeEnumWords      CodeAutocapitalizeEnum = "words"
+	CodeAutocapitalizeCharacters CodeAutocapitalize = "characters"
+	CodeAutocapitalizeNone       CodeAutocapitalize = "none"
+	CodeAutocapitalizeOff        CodeAutocapitalize = "off"
+	CodeAutocapitalizeOn         CodeAutocapitalize = "on"
+	CodeAutocapitalizeSentences  CodeAutocapitalize = "sentences"
+	CodeAutocapitalizeWords      CodeAutocapitalize = "words"
 )
 
-type CodeAutocorrectEnum string
+type CodeAutocorrect string
 
 const (
-	CodeAutocorrectEnumOn    CodeAutocorrectEnum = "on"
-	CodeAutocorrectEnumOff   CodeAutocorrectEnum = "off"
-	CodeAutocorrectEnumEmpty CodeAutocorrectEnum = ""
+	CodeAutocorrectOff   CodeAutocorrect = "off"
+	CodeAutocorrectOn    CodeAutocorrect = "on"
+	CodeAutocorrectEmpty CodeAutocorrect = ""
 )
 
-type CodeContenteditableEnum string
+type CodeContenteditable string
 
 const (
-	CodeContenteditableEnumFalse         CodeContenteditableEnum = "false"
-	CodeContenteditableEnumPlaintextOnly CodeContenteditableEnum = "plaintext-only"
-	CodeContenteditableEnumTrue          CodeContenteditableEnum = "true"
-	CodeContenteditableEnumEmpty         CodeContenteditableEnum = ""
+	CodeContenteditableFalse         CodeContenteditable = "false"
+	CodeContenteditablePlaintextOnly CodeContenteditable = "plaintext-only"
+	CodeContenteditableTrue          CodeContenteditable = "true"
+	CodeContenteditableEmpty         CodeContenteditable = ""
 )
 
-type CodeDirEnum string
+type CodeDir string
 
 const (
-	CodeDirEnumAuto CodeDirEnum = "auto"
-	CodeDirEnumLtr  CodeDirEnum = "ltr"
-	CodeDirEnumRtl  CodeDirEnum = "rtl"
+	CodeDirAuto CodeDir = "auto"
+	CodeDirLtr  CodeDir = "ltr"
+	CodeDirRtl  CodeDir = "rtl"
 )
 
-type CodeDraggableEnum string
+type CodeDraggable string
 
 const (
-	CodeDraggableEnumFalse CodeDraggableEnum = "false"
-	CodeDraggableEnumTrue  CodeDraggableEnum = "true"
+	CodeDraggableFalse CodeDraggable = "false"
+	CodeDraggableTrue  CodeDraggable = "true"
 )
 
-type CodeEnterkeyhintEnum string
+type CodeEnterkeyhint string
 
 const (
-	CodeEnterkeyhintEnumDone     CodeEnterkeyhintEnum = "done"
-	CodeEnterkeyhintEnumEnter    CodeEnterkeyhintEnum = "enter"
-	CodeEnterkeyhintEnumGo       CodeEnterkeyhintEnum = "go"
-	CodeEnterkeyhintEnumNext     CodeEnterkeyhintEnum = "next"
-	CodeEnterkeyhintEnumPrevious CodeEnterkeyhintEnum = "previous"
-	CodeEnterkeyhintEnumSearch   CodeEnterkeyhintEnum = "search"
-	CodeEnterkeyhintEnumSend     CodeEnterkeyhintEnum = "send"
+	CodeEnterkeyhintDone     CodeEnterkeyhint = "done"
+	CodeEnterkeyhintEnter    CodeEnterkeyhint = "enter"
+	CodeEnterkeyhintGo       CodeEnterkeyhint = "go"
+	CodeEnterkeyhintNext     CodeEnterkeyhint = "next"
+	CodeEnterkeyhintPrevious CodeEnterkeyhint = "previous"
+	CodeEnterkeyhintSearch   CodeEnterkeyhint = "search"
+	CodeEnterkeyhintSend     CodeEnterkeyhint = "send"
 )
 
-type CodeHiddenEnum string
+type CodeHidden string
 
 const (
-	CodeHiddenEnumHidden     CodeHiddenEnum = "hidden"
-	CodeHiddenEnumUntilFound CodeHiddenEnum = "until-found"
-	CodeHiddenEnumEmpty      CodeHiddenEnum = ""
+	CodeHiddenHidden     CodeHidden = "hidden"
+	CodeHiddenUntilFound CodeHidden = "until-found"
+	CodeHiddenEmpty      CodeHidden = ""
 )
 
-type CodeInputmodeEnum string
+type CodeInputmode string
 
 const (
-	CodeInputmodeEnumText    CodeInputmodeEnum = "text"
-	CodeInputmodeEnumUrl     CodeInputmodeEnum = "url"
-	CodeInputmodeEnumDecimal CodeInputmodeEnum = "decimal"
-	CodeInputmodeEnumEmail   CodeInputmodeEnum = "email"
-	CodeInputmodeEnumNone    CodeInputmodeEnum = "none"
-	CodeInputmodeEnumNumeric CodeInputmodeEnum = "numeric"
-	CodeInputmodeEnumSearch  CodeInputmodeEnum = "search"
-	CodeInputmodeEnumTel     CodeInputmodeEnum = "tel"
+	CodeInputmodeSearch  CodeInputmode = "search"
+	CodeInputmodeTel     CodeInputmode = "tel"
+	CodeInputmodeText    CodeInputmode = "text"
+	CodeInputmodeUrl     CodeInputmode = "url"
+	CodeInputmodeDecimal CodeInputmode = "decimal"
+	CodeInputmodeEmail   CodeInputmode = "email"
+	CodeInputmodeNone    CodeInputmode = "none"
+	CodeInputmodeNumeric CodeInputmode = "numeric"
 )
 
-type CodeSpellcheckEnum string
+type CodeSpellcheck string
 
 const (
-	CodeSpellcheckEnumTrue  CodeSpellcheckEnum = "true"
-	CodeSpellcheckEnumFalse CodeSpellcheckEnum = "false"
-	CodeSpellcheckEnumEmpty CodeSpellcheckEnum = ""
+	CodeSpellcheckTrue  CodeSpellcheck = "true"
+	CodeSpellcheckFalse CodeSpellcheck = "false"
+	CodeSpellcheckEmpty CodeSpellcheck = ""
 )
 
-type CodeTranslateEnum string
+type CodeTranslate string
 
 const (
-	CodeTranslateEnumNo    CodeTranslateEnum = "no"
-	CodeTranslateEnumYes   CodeTranslateEnum = "yes"
-	CodeTranslateEnumEmpty CodeTranslateEnum = ""
+	CodeTranslateYes   CodeTranslate = "yes"
+	CodeTranslateNo    CodeTranslate = "no"
+	CodeTranslateEmpty CodeTranslate = ""
 )
 
-type CodeWritingsuggestionsEnum string
+type CodeWritingsuggestions string
 
 const (
-	CodeWritingsuggestionsEnumFalse CodeWritingsuggestionsEnum = "false"
-	CodeWritingsuggestionsEnumTrue  CodeWritingsuggestionsEnum = "true"
-	CodeWritingsuggestionsEnumEmpty CodeWritingsuggestionsEnum = ""
+	CodeWritingsuggestionsTrue  CodeWritingsuggestions = "true"
+	CodeWritingsuggestionsFalse CodeWritingsuggestions = "false"
+	CodeWritingsuggestionsEmpty CodeWritingsuggestions = ""
 )
 
 type codeAttrs map[string]any
 
-func (e *CodeElement) Autocapitalize(a CodeAutocapitalizeEnum) *CodeElement {
+func (e *CodeElement) AriaUnsafe(name string, s string) *CodeElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *CodeElement) Aria(name string, s string) *CodeElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *CodeElement) Autocapitalize(a CodeAutocapitalize) *CodeElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *CodeElement) Autocorrect(a CodeAutocorrectEnum) *CodeElement {
+func (e *CodeElement) Autocorrect(a CodeAutocorrect) *CodeElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *CodeElement) Class(s ...string) *CodeElement {
 	return e
 }
 
-func (e *CodeElement) Contenteditable(a CodeContenteditableEnum) *CodeElement {
+func (e *CodeElement) Contenteditable(a CodeContenteditable) *CodeElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *CodeElement) Data(name string, s string) *CodeElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *CodeElement) Dir(a CodeDirEnum) *CodeElement {
+func (e *CodeElement) Dir(a CodeDir) *CodeElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *CodeElement) Draggable(a CodeDraggableEnum) *CodeElement {
+func (e *CodeElement) Draggable(a CodeDraggable) *CodeElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *CodeElement) Enterkeyhint(a CodeEnterkeyhintEnum) *CodeElement {
+func (e *CodeElement) Enterkeyhint(a CodeEnterkeyhint) *CodeElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *CodeElement) Hidden(a CodeHiddenEnum) *CodeElement {
+func (e *CodeElement) Hidden(a CodeHidden) *CodeElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *CodeElement) Inert(b bool) *CodeElement {
 	return e
 }
 
-func (e *CodeElement) Inputmode(a CodeInputmodeEnum) *CodeElement {
+func (e *CodeElement) Inputmode(a CodeInputmode) *CodeElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *CodeElement) Slot(s string) *CodeElement {
 	return e
 }
 
-func (e *CodeElement) Spellcheck(a CodeSpellcheckEnum) *CodeElement {
+func (e *CodeElement) Spellcheck(a CodeSpellcheck) *CodeElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *CodeElement) Title(s string) *CodeElement {
 	return e
 }
 
-func (e *CodeElement) Translate(a CodeTranslateEnum) *CodeElement {
+func (e *CodeElement) Translate(a CodeTranslate) *CodeElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *CodeElement) Writingsuggestions(a CodeWritingsuggestionsEnum) *CodeElement {
+func (e *CodeElement) Writingsuggestions(a CodeWritingsuggestions) *CodeElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

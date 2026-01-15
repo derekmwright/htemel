@@ -39,116 +39,116 @@ func MetaIf(condition bool) *MetaElement {
 	}
 }
 
-type MetaHttpEquivEnum string
+type MetaHttpEquiv string
 
 const (
-	MetaHttpEquivEnumContentLanguage       MetaHttpEquivEnum = "content-language"
-	MetaHttpEquivEnumContentSecurityPolicy MetaHttpEquivEnum = "content-security-policy"
-	MetaHttpEquivEnumContentType           MetaHttpEquivEnum = "content-type"
-	MetaHttpEquivEnumDefaultStyle          MetaHttpEquivEnum = "default-style"
-	MetaHttpEquivEnumRefresh               MetaHttpEquivEnum = "refresh"
-	MetaHttpEquivEnumSetCookie             MetaHttpEquivEnum = "set-cookie"
-	MetaHttpEquivEnumXUaCompatible         MetaHttpEquivEnum = "x-ua-compatible"
+	MetaHttpEquivSetCookie             MetaHttpEquiv = "set-cookie"
+	MetaHttpEquivXUaCompatible         MetaHttpEquiv = "x-ua-compatible"
+	MetaHttpEquivContentLanguage       MetaHttpEquiv = "content-language"
+	MetaHttpEquivContentSecurityPolicy MetaHttpEquiv = "content-security-policy"
+	MetaHttpEquivContentType           MetaHttpEquiv = "content-type"
+	MetaHttpEquivDefaultStyle          MetaHttpEquiv = "default-style"
+	MetaHttpEquivRefresh               MetaHttpEquiv = "refresh"
 )
 
-type MetaAutocapitalizeEnum string
+type MetaAutocapitalize string
 
 const (
-	MetaAutocapitalizeEnumWords      MetaAutocapitalizeEnum = "words"
-	MetaAutocapitalizeEnumCharacters MetaAutocapitalizeEnum = "characters"
-	MetaAutocapitalizeEnumNone       MetaAutocapitalizeEnum = "none"
-	MetaAutocapitalizeEnumOff        MetaAutocapitalizeEnum = "off"
-	MetaAutocapitalizeEnumOn         MetaAutocapitalizeEnum = "on"
-	MetaAutocapitalizeEnumSentences  MetaAutocapitalizeEnum = "sentences"
+	MetaAutocapitalizeWords      MetaAutocapitalize = "words"
+	MetaAutocapitalizeCharacters MetaAutocapitalize = "characters"
+	MetaAutocapitalizeNone       MetaAutocapitalize = "none"
+	MetaAutocapitalizeOff        MetaAutocapitalize = "off"
+	MetaAutocapitalizeOn         MetaAutocapitalize = "on"
+	MetaAutocapitalizeSentences  MetaAutocapitalize = "sentences"
 )
 
-type MetaAutocorrectEnum string
+type MetaAutocorrect string
 
 const (
-	MetaAutocorrectEnumOff   MetaAutocorrectEnum = "off"
-	MetaAutocorrectEnumOn    MetaAutocorrectEnum = "on"
-	MetaAutocorrectEnumEmpty MetaAutocorrectEnum = ""
+	MetaAutocorrectOff   MetaAutocorrect = "off"
+	MetaAutocorrectOn    MetaAutocorrect = "on"
+	MetaAutocorrectEmpty MetaAutocorrect = ""
 )
 
-type MetaContenteditableEnum string
+type MetaContenteditable string
 
 const (
-	MetaContenteditableEnumFalse         MetaContenteditableEnum = "false"
-	MetaContenteditableEnumPlaintextOnly MetaContenteditableEnum = "plaintext-only"
-	MetaContenteditableEnumTrue          MetaContenteditableEnum = "true"
-	MetaContenteditableEnumEmpty         MetaContenteditableEnum = ""
+	MetaContenteditableFalse         MetaContenteditable = "false"
+	MetaContenteditablePlaintextOnly MetaContenteditable = "plaintext-only"
+	MetaContenteditableTrue          MetaContenteditable = "true"
+	MetaContenteditableEmpty         MetaContenteditable = ""
 )
 
-type MetaDirEnum string
+type MetaDir string
 
 const (
-	MetaDirEnumAuto MetaDirEnum = "auto"
-	MetaDirEnumLtr  MetaDirEnum = "ltr"
-	MetaDirEnumRtl  MetaDirEnum = "rtl"
+	MetaDirAuto MetaDir = "auto"
+	MetaDirLtr  MetaDir = "ltr"
+	MetaDirRtl  MetaDir = "rtl"
 )
 
-type MetaDraggableEnum string
+type MetaDraggable string
 
 const (
-	MetaDraggableEnumFalse MetaDraggableEnum = "false"
-	MetaDraggableEnumTrue  MetaDraggableEnum = "true"
+	MetaDraggableFalse MetaDraggable = "false"
+	MetaDraggableTrue  MetaDraggable = "true"
 )
 
-type MetaEnterkeyhintEnum string
+type MetaEnterkeyhint string
 
 const (
-	MetaEnterkeyhintEnumEnter    MetaEnterkeyhintEnum = "enter"
-	MetaEnterkeyhintEnumGo       MetaEnterkeyhintEnum = "go"
-	MetaEnterkeyhintEnumNext     MetaEnterkeyhintEnum = "next"
-	MetaEnterkeyhintEnumPrevious MetaEnterkeyhintEnum = "previous"
-	MetaEnterkeyhintEnumSearch   MetaEnterkeyhintEnum = "search"
-	MetaEnterkeyhintEnumSend     MetaEnterkeyhintEnum = "send"
-	MetaEnterkeyhintEnumDone     MetaEnterkeyhintEnum = "done"
+	MetaEnterkeyhintPrevious MetaEnterkeyhint = "previous"
+	MetaEnterkeyhintSearch   MetaEnterkeyhint = "search"
+	MetaEnterkeyhintSend     MetaEnterkeyhint = "send"
+	MetaEnterkeyhintDone     MetaEnterkeyhint = "done"
+	MetaEnterkeyhintEnter    MetaEnterkeyhint = "enter"
+	MetaEnterkeyhintGo       MetaEnterkeyhint = "go"
+	MetaEnterkeyhintNext     MetaEnterkeyhint = "next"
 )
 
-type MetaHiddenEnum string
+type MetaHidden string
 
 const (
-	MetaHiddenEnumHidden     MetaHiddenEnum = "hidden"
-	MetaHiddenEnumUntilFound MetaHiddenEnum = "until-found"
-	MetaHiddenEnumEmpty      MetaHiddenEnum = ""
+	MetaHiddenHidden     MetaHidden = "hidden"
+	MetaHiddenUntilFound MetaHidden = "until-found"
+	MetaHiddenEmpty      MetaHidden = ""
 )
 
-type MetaInputmodeEnum string
+type MetaInputmode string
 
 const (
-	MetaInputmodeEnumEmail   MetaInputmodeEnum = "email"
-	MetaInputmodeEnumNone    MetaInputmodeEnum = "none"
-	MetaInputmodeEnumNumeric MetaInputmodeEnum = "numeric"
-	MetaInputmodeEnumSearch  MetaInputmodeEnum = "search"
-	MetaInputmodeEnumTel     MetaInputmodeEnum = "tel"
-	MetaInputmodeEnumText    MetaInputmodeEnum = "text"
-	MetaInputmodeEnumUrl     MetaInputmodeEnum = "url"
-	MetaInputmodeEnumDecimal MetaInputmodeEnum = "decimal"
+	MetaInputmodeUrl     MetaInputmode = "url"
+	MetaInputmodeDecimal MetaInputmode = "decimal"
+	MetaInputmodeEmail   MetaInputmode = "email"
+	MetaInputmodeNone    MetaInputmode = "none"
+	MetaInputmodeNumeric MetaInputmode = "numeric"
+	MetaInputmodeSearch  MetaInputmode = "search"
+	MetaInputmodeTel     MetaInputmode = "tel"
+	MetaInputmodeText    MetaInputmode = "text"
 )
 
-type MetaSpellcheckEnum string
+type MetaSpellcheck string
 
 const (
-	MetaSpellcheckEnumTrue  MetaSpellcheckEnum = "true"
-	MetaSpellcheckEnumFalse MetaSpellcheckEnum = "false"
-	MetaSpellcheckEnumEmpty MetaSpellcheckEnum = ""
+	MetaSpellcheckFalse MetaSpellcheck = "false"
+	MetaSpellcheckTrue  MetaSpellcheck = "true"
+	MetaSpellcheckEmpty MetaSpellcheck = ""
 )
 
-type MetaTranslateEnum string
+type MetaTranslate string
 
 const (
-	MetaTranslateEnumNo    MetaTranslateEnum = "no"
-	MetaTranslateEnumYes   MetaTranslateEnum = "yes"
-	MetaTranslateEnumEmpty MetaTranslateEnum = ""
+	MetaTranslateNo    MetaTranslate = "no"
+	MetaTranslateYes   MetaTranslate = "yes"
+	MetaTranslateEmpty MetaTranslate = ""
 )
 
-type MetaWritingsuggestionsEnum string
+type MetaWritingsuggestions string
 
 const (
-	MetaWritingsuggestionsEnumFalse MetaWritingsuggestionsEnum = "false"
-	MetaWritingsuggestionsEnumTrue  MetaWritingsuggestionsEnum = "true"
-	MetaWritingsuggestionsEnumEmpty MetaWritingsuggestionsEnum = ""
+	MetaWritingsuggestionsFalse MetaWritingsuggestions = "false"
+	MetaWritingsuggestionsTrue  MetaWritingsuggestions = "true"
+	MetaWritingsuggestionsEmpty MetaWritingsuggestions = ""
 )
 
 type metaAttrs map[string]any
@@ -159,7 +159,7 @@ func (e *MetaElement) Name(s string) *MetaElement {
 	return e
 }
 
-func (e *MetaElement) HttpEquiv(a MetaHttpEquivEnum) *MetaElement {
+func (e *MetaElement) HttpEquiv(a MetaHttpEquiv) *MetaElement {
 	e.attributes["http-equiv"] = a
 
 	return e
@@ -183,13 +183,25 @@ func (e *MetaElement) Media(s string) *MetaElement {
 	return e
 }
 
-func (e *MetaElement) Autocapitalize(a MetaAutocapitalizeEnum) *MetaElement {
+func (e *MetaElement) AriaUnsafe(name string, s string) *MetaElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *MetaElement) Aria(name string, s string) *MetaElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *MetaElement) Autocapitalize(a MetaAutocapitalize) *MetaElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *MetaElement) Autocorrect(a MetaAutocorrectEnum) *MetaElement {
+func (e *MetaElement) Autocorrect(a MetaAutocorrect) *MetaElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -207,7 +219,7 @@ func (e *MetaElement) Class(s ...string) *MetaElement {
 	return e
 }
 
-func (e *MetaElement) Contenteditable(a MetaContenteditableEnum) *MetaElement {
+func (e *MetaElement) Contenteditable(a MetaContenteditable) *MetaElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -225,25 +237,25 @@ func (e *MetaElement) Data(name string, s string) *MetaElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *MetaElement) Dir(a MetaDirEnum) *MetaElement {
+func (e *MetaElement) Dir(a MetaDir) *MetaElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *MetaElement) Draggable(a MetaDraggableEnum) *MetaElement {
+func (e *MetaElement) Draggable(a MetaDraggable) *MetaElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *MetaElement) Enterkeyhint(a MetaEnterkeyhintEnum) *MetaElement {
+func (e *MetaElement) Enterkeyhint(a MetaEnterkeyhint) *MetaElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *MetaElement) Hidden(a MetaHiddenEnum) *MetaElement {
+func (e *MetaElement) Hidden(a MetaHidden) *MetaElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -261,7 +273,7 @@ func (e *MetaElement) Inert(b bool) *MetaElement {
 	return e
 }
 
-func (e *MetaElement) Inputmode(a MetaInputmodeEnum) *MetaElement {
+func (e *MetaElement) Inputmode(a MetaInputmode) *MetaElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -321,7 +333,7 @@ func (e *MetaElement) Slot(s string) *MetaElement {
 	return e
 }
 
-func (e *MetaElement) Spellcheck(a MetaSpellcheckEnum) *MetaElement {
+func (e *MetaElement) Spellcheck(a MetaSpellcheck) *MetaElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -345,13 +357,13 @@ func (e *MetaElement) Title(s string) *MetaElement {
 	return e
 }
 
-func (e *MetaElement) Translate(a MetaTranslateEnum) *MetaElement {
+func (e *MetaElement) Translate(a MetaTranslate) *MetaElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *MetaElement) Writingsuggestions(a MetaWritingsuggestionsEnum) *MetaElement {
+func (e *MetaElement) Writingsuggestions(a MetaWritingsuggestions) *MetaElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

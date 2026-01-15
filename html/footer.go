@@ -48,115 +48,127 @@ func FooterTernary(condition bool, true htemel.Node, false htemel.Node) *FooterE
 	return Footer(false)
 }
 
-type FooterAutocapitalizeEnum string
+type FooterAutocapitalize string
 
 const (
-	FooterAutocapitalizeEnumWords      FooterAutocapitalizeEnum = "words"
-	FooterAutocapitalizeEnumCharacters FooterAutocapitalizeEnum = "characters"
-	FooterAutocapitalizeEnumNone       FooterAutocapitalizeEnum = "none"
-	FooterAutocapitalizeEnumOff        FooterAutocapitalizeEnum = "off"
-	FooterAutocapitalizeEnumOn         FooterAutocapitalizeEnum = "on"
-	FooterAutocapitalizeEnumSentences  FooterAutocapitalizeEnum = "sentences"
+	FooterAutocapitalizeCharacters FooterAutocapitalize = "characters"
+	FooterAutocapitalizeNone       FooterAutocapitalize = "none"
+	FooterAutocapitalizeOff        FooterAutocapitalize = "off"
+	FooterAutocapitalizeOn         FooterAutocapitalize = "on"
+	FooterAutocapitalizeSentences  FooterAutocapitalize = "sentences"
+	FooterAutocapitalizeWords      FooterAutocapitalize = "words"
 )
 
-type FooterAutocorrectEnum string
+type FooterAutocorrect string
 
 const (
-	FooterAutocorrectEnumOff   FooterAutocorrectEnum = "off"
-	FooterAutocorrectEnumOn    FooterAutocorrectEnum = "on"
-	FooterAutocorrectEnumEmpty FooterAutocorrectEnum = ""
+	FooterAutocorrectOff   FooterAutocorrect = "off"
+	FooterAutocorrectOn    FooterAutocorrect = "on"
+	FooterAutocorrectEmpty FooterAutocorrect = ""
 )
 
-type FooterContenteditableEnum string
+type FooterContenteditable string
 
 const (
-	FooterContenteditableEnumFalse         FooterContenteditableEnum = "false"
-	FooterContenteditableEnumPlaintextOnly FooterContenteditableEnum = "plaintext-only"
-	FooterContenteditableEnumTrue          FooterContenteditableEnum = "true"
-	FooterContenteditableEnumEmpty         FooterContenteditableEnum = ""
+	FooterContenteditableFalse         FooterContenteditable = "false"
+	FooterContenteditablePlaintextOnly FooterContenteditable = "plaintext-only"
+	FooterContenteditableTrue          FooterContenteditable = "true"
+	FooterContenteditableEmpty         FooterContenteditable = ""
 )
 
-type FooterDirEnum string
+type FooterDir string
 
 const (
-	FooterDirEnumAuto FooterDirEnum = "auto"
-	FooterDirEnumLtr  FooterDirEnum = "ltr"
-	FooterDirEnumRtl  FooterDirEnum = "rtl"
+	FooterDirLtr  FooterDir = "ltr"
+	FooterDirRtl  FooterDir = "rtl"
+	FooterDirAuto FooterDir = "auto"
 )
 
-type FooterDraggableEnum string
+type FooterDraggable string
 
 const (
-	FooterDraggableEnumFalse FooterDraggableEnum = "false"
-	FooterDraggableEnumTrue  FooterDraggableEnum = "true"
+	FooterDraggableFalse FooterDraggable = "false"
+	FooterDraggableTrue  FooterDraggable = "true"
 )
 
-type FooterEnterkeyhintEnum string
+type FooterEnterkeyhint string
 
 const (
-	FooterEnterkeyhintEnumDone     FooterEnterkeyhintEnum = "done"
-	FooterEnterkeyhintEnumEnter    FooterEnterkeyhintEnum = "enter"
-	FooterEnterkeyhintEnumGo       FooterEnterkeyhintEnum = "go"
-	FooterEnterkeyhintEnumNext     FooterEnterkeyhintEnum = "next"
-	FooterEnterkeyhintEnumPrevious FooterEnterkeyhintEnum = "previous"
-	FooterEnterkeyhintEnumSearch   FooterEnterkeyhintEnum = "search"
-	FooterEnterkeyhintEnumSend     FooterEnterkeyhintEnum = "send"
+	FooterEnterkeyhintGo       FooterEnterkeyhint = "go"
+	FooterEnterkeyhintNext     FooterEnterkeyhint = "next"
+	FooterEnterkeyhintPrevious FooterEnterkeyhint = "previous"
+	FooterEnterkeyhintSearch   FooterEnterkeyhint = "search"
+	FooterEnterkeyhintSend     FooterEnterkeyhint = "send"
+	FooterEnterkeyhintDone     FooterEnterkeyhint = "done"
+	FooterEnterkeyhintEnter    FooterEnterkeyhint = "enter"
 )
 
-type FooterHiddenEnum string
+type FooterHidden string
 
 const (
-	FooterHiddenEnumHidden     FooterHiddenEnum = "hidden"
-	FooterHiddenEnumUntilFound FooterHiddenEnum = "until-found"
-	FooterHiddenEnumEmpty      FooterHiddenEnum = ""
+	FooterHiddenHidden     FooterHidden = "hidden"
+	FooterHiddenUntilFound FooterHidden = "until-found"
+	FooterHiddenEmpty      FooterHidden = ""
 )
 
-type FooterInputmodeEnum string
+type FooterInputmode string
 
 const (
-	FooterInputmodeEnumNone    FooterInputmodeEnum = "none"
-	FooterInputmodeEnumNumeric FooterInputmodeEnum = "numeric"
-	FooterInputmodeEnumSearch  FooterInputmodeEnum = "search"
-	FooterInputmodeEnumTel     FooterInputmodeEnum = "tel"
-	FooterInputmodeEnumText    FooterInputmodeEnum = "text"
-	FooterInputmodeEnumUrl     FooterInputmodeEnum = "url"
-	FooterInputmodeEnumDecimal FooterInputmodeEnum = "decimal"
-	FooterInputmodeEnumEmail   FooterInputmodeEnum = "email"
+	FooterInputmodeText    FooterInputmode = "text"
+	FooterInputmodeUrl     FooterInputmode = "url"
+	FooterInputmodeDecimal FooterInputmode = "decimal"
+	FooterInputmodeEmail   FooterInputmode = "email"
+	FooterInputmodeNone    FooterInputmode = "none"
+	FooterInputmodeNumeric FooterInputmode = "numeric"
+	FooterInputmodeSearch  FooterInputmode = "search"
+	FooterInputmodeTel     FooterInputmode = "tel"
 )
 
-type FooterSpellcheckEnum string
+type FooterSpellcheck string
 
 const (
-	FooterSpellcheckEnumFalse FooterSpellcheckEnum = "false"
-	FooterSpellcheckEnumTrue  FooterSpellcheckEnum = "true"
-	FooterSpellcheckEnumEmpty FooterSpellcheckEnum = ""
+	FooterSpellcheckFalse FooterSpellcheck = "false"
+	FooterSpellcheckTrue  FooterSpellcheck = "true"
+	FooterSpellcheckEmpty FooterSpellcheck = ""
 )
 
-type FooterTranslateEnum string
+type FooterTranslate string
 
 const (
-	FooterTranslateEnumNo    FooterTranslateEnum = "no"
-	FooterTranslateEnumYes   FooterTranslateEnum = "yes"
-	FooterTranslateEnumEmpty FooterTranslateEnum = ""
+	FooterTranslateNo    FooterTranslate = "no"
+	FooterTranslateYes   FooterTranslate = "yes"
+	FooterTranslateEmpty FooterTranslate = ""
 )
 
-type FooterWritingsuggestionsEnum string
+type FooterWritingsuggestions string
 
 const (
-	FooterWritingsuggestionsEnumFalse FooterWritingsuggestionsEnum = "false"
-	FooterWritingsuggestionsEnumTrue  FooterWritingsuggestionsEnum = "true"
-	FooterWritingsuggestionsEnumEmpty FooterWritingsuggestionsEnum = ""
+	FooterWritingsuggestionsFalse FooterWritingsuggestions = "false"
+	FooterWritingsuggestionsTrue  FooterWritingsuggestions = "true"
+	FooterWritingsuggestionsEmpty FooterWritingsuggestions = ""
 )
 
 type footerAttrs map[string]any
 
-func (e *FooterElement) Autocapitalize(a FooterAutocapitalizeEnum) *FooterElement {
+func (e *FooterElement) AriaUnsafe(name string, s string) *FooterElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *FooterElement) Aria(name string, s string) *FooterElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *FooterElement) Autocapitalize(a FooterAutocapitalize) *FooterElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *FooterElement) Autocorrect(a FooterAutocorrectEnum) *FooterElement {
+func (e *FooterElement) Autocorrect(a FooterAutocorrect) *FooterElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *FooterElement) Class(s ...string) *FooterElement {
 	return e
 }
 
-func (e *FooterElement) Contenteditable(a FooterContenteditableEnum) *FooterElement {
+func (e *FooterElement) Contenteditable(a FooterContenteditable) *FooterElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *FooterElement) Data(name string, s string) *FooterElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *FooterElement) Dir(a FooterDirEnum) *FooterElement {
+func (e *FooterElement) Dir(a FooterDir) *FooterElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *FooterElement) Draggable(a FooterDraggableEnum) *FooterElement {
+func (e *FooterElement) Draggable(a FooterDraggable) *FooterElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *FooterElement) Enterkeyhint(a FooterEnterkeyhintEnum) *FooterElement {
+func (e *FooterElement) Enterkeyhint(a FooterEnterkeyhint) *FooterElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *FooterElement) Hidden(a FooterHiddenEnum) *FooterElement {
+func (e *FooterElement) Hidden(a FooterHidden) *FooterElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *FooterElement) Inert(b bool) *FooterElement {
 	return e
 }
 
-func (e *FooterElement) Inputmode(a FooterInputmodeEnum) *FooterElement {
+func (e *FooterElement) Inputmode(a FooterInputmode) *FooterElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *FooterElement) Slot(s string) *FooterElement {
 	return e
 }
 
-func (e *FooterElement) Spellcheck(a FooterSpellcheckEnum) *FooterElement {
+func (e *FooterElement) Spellcheck(a FooterSpellcheck) *FooterElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *FooterElement) Title(s string) *FooterElement {
 	return e
 }
 
-func (e *FooterElement) Translate(a FooterTranslateEnum) *FooterElement {
+func (e *FooterElement) Translate(a FooterTranslate) *FooterElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *FooterElement) Writingsuggestions(a FooterWritingsuggestionsEnum) *FooterElement {
+func (e *FooterElement) Writingsuggestions(a FooterWritingsuggestions) *FooterElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,104 +48,104 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 	return Time(false)
 }
 
-type TimeAutocapitalizeEnum string
+type TimeAutocapitalize string
 
 const (
-	TimeAutocapitalizeEnumSentences  TimeAutocapitalizeEnum = "sentences"
-	TimeAutocapitalizeEnumWords      TimeAutocapitalizeEnum = "words"
-	TimeAutocapitalizeEnumCharacters TimeAutocapitalizeEnum = "characters"
-	TimeAutocapitalizeEnumNone       TimeAutocapitalizeEnum = "none"
-	TimeAutocapitalizeEnumOff        TimeAutocapitalizeEnum = "off"
-	TimeAutocapitalizeEnumOn         TimeAutocapitalizeEnum = "on"
+	TimeAutocapitalizeCharacters TimeAutocapitalize = "characters"
+	TimeAutocapitalizeNone       TimeAutocapitalize = "none"
+	TimeAutocapitalizeOff        TimeAutocapitalize = "off"
+	TimeAutocapitalizeOn         TimeAutocapitalize = "on"
+	TimeAutocapitalizeSentences  TimeAutocapitalize = "sentences"
+	TimeAutocapitalizeWords      TimeAutocapitalize = "words"
 )
 
-type TimeAutocorrectEnum string
+type TimeAutocorrect string
 
 const (
-	TimeAutocorrectEnumOff   TimeAutocorrectEnum = "off"
-	TimeAutocorrectEnumOn    TimeAutocorrectEnum = "on"
-	TimeAutocorrectEnumEmpty TimeAutocorrectEnum = ""
+	TimeAutocorrectOff   TimeAutocorrect = "off"
+	TimeAutocorrectOn    TimeAutocorrect = "on"
+	TimeAutocorrectEmpty TimeAutocorrect = ""
 )
 
-type TimeContenteditableEnum string
+type TimeContenteditable string
 
 const (
-	TimeContenteditableEnumFalse         TimeContenteditableEnum = "false"
-	TimeContenteditableEnumPlaintextOnly TimeContenteditableEnum = "plaintext-only"
-	TimeContenteditableEnumTrue          TimeContenteditableEnum = "true"
-	TimeContenteditableEnumEmpty         TimeContenteditableEnum = ""
+	TimeContenteditableFalse         TimeContenteditable = "false"
+	TimeContenteditablePlaintextOnly TimeContenteditable = "plaintext-only"
+	TimeContenteditableTrue          TimeContenteditable = "true"
+	TimeContenteditableEmpty         TimeContenteditable = ""
 )
 
-type TimeDirEnum string
+type TimeDir string
 
 const (
-	TimeDirEnumAuto TimeDirEnum = "auto"
-	TimeDirEnumLtr  TimeDirEnum = "ltr"
-	TimeDirEnumRtl  TimeDirEnum = "rtl"
+	TimeDirAuto TimeDir = "auto"
+	TimeDirLtr  TimeDir = "ltr"
+	TimeDirRtl  TimeDir = "rtl"
 )
 
-type TimeDraggableEnum string
+type TimeDraggable string
 
 const (
-	TimeDraggableEnumFalse TimeDraggableEnum = "false"
-	TimeDraggableEnumTrue  TimeDraggableEnum = "true"
+	TimeDraggableFalse TimeDraggable = "false"
+	TimeDraggableTrue  TimeDraggable = "true"
 )
 
-type TimeEnterkeyhintEnum string
+type TimeEnterkeyhint string
 
 const (
-	TimeEnterkeyhintEnumSend     TimeEnterkeyhintEnum = "send"
-	TimeEnterkeyhintEnumDone     TimeEnterkeyhintEnum = "done"
-	TimeEnterkeyhintEnumEnter    TimeEnterkeyhintEnum = "enter"
-	TimeEnterkeyhintEnumGo       TimeEnterkeyhintEnum = "go"
-	TimeEnterkeyhintEnumNext     TimeEnterkeyhintEnum = "next"
-	TimeEnterkeyhintEnumPrevious TimeEnterkeyhintEnum = "previous"
-	TimeEnterkeyhintEnumSearch   TimeEnterkeyhintEnum = "search"
+	TimeEnterkeyhintGo       TimeEnterkeyhint = "go"
+	TimeEnterkeyhintNext     TimeEnterkeyhint = "next"
+	TimeEnterkeyhintPrevious TimeEnterkeyhint = "previous"
+	TimeEnterkeyhintSearch   TimeEnterkeyhint = "search"
+	TimeEnterkeyhintSend     TimeEnterkeyhint = "send"
+	TimeEnterkeyhintDone     TimeEnterkeyhint = "done"
+	TimeEnterkeyhintEnter    TimeEnterkeyhint = "enter"
 )
 
-type TimeHiddenEnum string
+type TimeHidden string
 
 const (
-	TimeHiddenEnumHidden     TimeHiddenEnum = "hidden"
-	TimeHiddenEnumUntilFound TimeHiddenEnum = "until-found"
-	TimeHiddenEnumEmpty      TimeHiddenEnum = ""
+	TimeHiddenHidden     TimeHidden = "hidden"
+	TimeHiddenUntilFound TimeHidden = "until-found"
+	TimeHiddenEmpty      TimeHidden = ""
 )
 
-type TimeInputmodeEnum string
+type TimeInputmode string
 
 const (
-	TimeInputmodeEnumNone    TimeInputmodeEnum = "none"
-	TimeInputmodeEnumNumeric TimeInputmodeEnum = "numeric"
-	TimeInputmodeEnumSearch  TimeInputmodeEnum = "search"
-	TimeInputmodeEnumTel     TimeInputmodeEnum = "tel"
-	TimeInputmodeEnumText    TimeInputmodeEnum = "text"
-	TimeInputmodeEnumUrl     TimeInputmodeEnum = "url"
-	TimeInputmodeEnumDecimal TimeInputmodeEnum = "decimal"
-	TimeInputmodeEnumEmail   TimeInputmodeEnum = "email"
+	TimeInputmodeDecimal TimeInputmode = "decimal"
+	TimeInputmodeEmail   TimeInputmode = "email"
+	TimeInputmodeNone    TimeInputmode = "none"
+	TimeInputmodeNumeric TimeInputmode = "numeric"
+	TimeInputmodeSearch  TimeInputmode = "search"
+	TimeInputmodeTel     TimeInputmode = "tel"
+	TimeInputmodeText    TimeInputmode = "text"
+	TimeInputmodeUrl     TimeInputmode = "url"
 )
 
-type TimeSpellcheckEnum string
+type TimeSpellcheck string
 
 const (
-	TimeSpellcheckEnumFalse TimeSpellcheckEnum = "false"
-	TimeSpellcheckEnumTrue  TimeSpellcheckEnum = "true"
-	TimeSpellcheckEnumEmpty TimeSpellcheckEnum = ""
+	TimeSpellcheckFalse TimeSpellcheck = "false"
+	TimeSpellcheckTrue  TimeSpellcheck = "true"
+	TimeSpellcheckEmpty TimeSpellcheck = ""
 )
 
-type TimeTranslateEnum string
+type TimeTranslate string
 
 const (
-	TimeTranslateEnumNo    TimeTranslateEnum = "no"
-	TimeTranslateEnumYes   TimeTranslateEnum = "yes"
-	TimeTranslateEnumEmpty TimeTranslateEnum = ""
+	TimeTranslateYes   TimeTranslate = "yes"
+	TimeTranslateNo    TimeTranslate = "no"
+	TimeTranslateEmpty TimeTranslate = ""
 )
 
-type TimeWritingsuggestionsEnum string
+type TimeWritingsuggestions string
 
 const (
-	TimeWritingsuggestionsEnumFalse TimeWritingsuggestionsEnum = "false"
-	TimeWritingsuggestionsEnumTrue  TimeWritingsuggestionsEnum = "true"
-	TimeWritingsuggestionsEnumEmpty TimeWritingsuggestionsEnum = ""
+	TimeWritingsuggestionsFalse TimeWritingsuggestions = "false"
+	TimeWritingsuggestionsTrue  TimeWritingsuggestions = "true"
+	TimeWritingsuggestionsEmpty TimeWritingsuggestions = ""
 )
 
 type timeAttrs map[string]any
@@ -156,13 +156,25 @@ func (e *TimeElement) Datetime(s string) *TimeElement {
 	return e
 }
 
-func (e *TimeElement) Autocapitalize(a TimeAutocapitalizeEnum) *TimeElement {
+func (e *TimeElement) AriaUnsafe(name string, s string) *TimeElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *TimeElement) Aria(name string, s string) *TimeElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *TimeElement) Autocapitalize(a TimeAutocapitalize) *TimeElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *TimeElement) Autocorrect(a TimeAutocorrectEnum) *TimeElement {
+func (e *TimeElement) Autocorrect(a TimeAutocorrect) *TimeElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -180,7 +192,7 @@ func (e *TimeElement) Class(s ...string) *TimeElement {
 	return e
 }
 
-func (e *TimeElement) Contenteditable(a TimeContenteditableEnum) *TimeElement {
+func (e *TimeElement) Contenteditable(a TimeContenteditable) *TimeElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -198,25 +210,25 @@ func (e *TimeElement) Data(name string, s string) *TimeElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *TimeElement) Dir(a TimeDirEnum) *TimeElement {
+func (e *TimeElement) Dir(a TimeDir) *TimeElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *TimeElement) Draggable(a TimeDraggableEnum) *TimeElement {
+func (e *TimeElement) Draggable(a TimeDraggable) *TimeElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *TimeElement) Enterkeyhint(a TimeEnterkeyhintEnum) *TimeElement {
+func (e *TimeElement) Enterkeyhint(a TimeEnterkeyhint) *TimeElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *TimeElement) Hidden(a TimeHiddenEnum) *TimeElement {
+func (e *TimeElement) Hidden(a TimeHidden) *TimeElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -234,7 +246,7 @@ func (e *TimeElement) Inert(b bool) *TimeElement {
 	return e
 }
 
-func (e *TimeElement) Inputmode(a TimeInputmodeEnum) *TimeElement {
+func (e *TimeElement) Inputmode(a TimeInputmode) *TimeElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -294,7 +306,7 @@ func (e *TimeElement) Slot(s string) *TimeElement {
 	return e
 }
 
-func (e *TimeElement) Spellcheck(a TimeSpellcheckEnum) *TimeElement {
+func (e *TimeElement) Spellcheck(a TimeSpellcheck) *TimeElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -318,13 +330,13 @@ func (e *TimeElement) Title(s string) *TimeElement {
 	return e
 }
 
-func (e *TimeElement) Translate(a TimeTranslateEnum) *TimeElement {
+func (e *TimeElement) Translate(a TimeTranslate) *TimeElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *TimeElement) Writingsuggestions(a TimeWritingsuggestionsEnum) *TimeElement {
+func (e *TimeElement) Writingsuggestions(a TimeWritingsuggestions) *TimeElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -39,115 +39,127 @@ func HrIf(condition bool) *HrElement {
 	}
 }
 
-type HrAutocapitalizeEnum string
+type HrAutocapitalize string
 
 const (
-	HrAutocapitalizeEnumOff        HrAutocapitalizeEnum = "off"
-	HrAutocapitalizeEnumOn         HrAutocapitalizeEnum = "on"
-	HrAutocapitalizeEnumSentences  HrAutocapitalizeEnum = "sentences"
-	HrAutocapitalizeEnumWords      HrAutocapitalizeEnum = "words"
-	HrAutocapitalizeEnumCharacters HrAutocapitalizeEnum = "characters"
-	HrAutocapitalizeEnumNone       HrAutocapitalizeEnum = "none"
+	HrAutocapitalizeSentences  HrAutocapitalize = "sentences"
+	HrAutocapitalizeWords      HrAutocapitalize = "words"
+	HrAutocapitalizeCharacters HrAutocapitalize = "characters"
+	HrAutocapitalizeNone       HrAutocapitalize = "none"
+	HrAutocapitalizeOff        HrAutocapitalize = "off"
+	HrAutocapitalizeOn         HrAutocapitalize = "on"
 )
 
-type HrAutocorrectEnum string
+type HrAutocorrect string
 
 const (
-	HrAutocorrectEnumOff   HrAutocorrectEnum = "off"
-	HrAutocorrectEnumOn    HrAutocorrectEnum = "on"
-	HrAutocorrectEnumEmpty HrAutocorrectEnum = ""
+	HrAutocorrectOn    HrAutocorrect = "on"
+	HrAutocorrectOff   HrAutocorrect = "off"
+	HrAutocorrectEmpty HrAutocorrect = ""
 )
 
-type HrContenteditableEnum string
+type HrContenteditable string
 
 const (
-	HrContenteditableEnumFalse         HrContenteditableEnum = "false"
-	HrContenteditableEnumPlaintextOnly HrContenteditableEnum = "plaintext-only"
-	HrContenteditableEnumTrue          HrContenteditableEnum = "true"
-	HrContenteditableEnumEmpty         HrContenteditableEnum = ""
+	HrContenteditableFalse         HrContenteditable = "false"
+	HrContenteditablePlaintextOnly HrContenteditable = "plaintext-only"
+	HrContenteditableTrue          HrContenteditable = "true"
+	HrContenteditableEmpty         HrContenteditable = ""
 )
 
-type HrDirEnum string
+type HrDir string
 
 const (
-	HrDirEnumAuto HrDirEnum = "auto"
-	HrDirEnumLtr  HrDirEnum = "ltr"
-	HrDirEnumRtl  HrDirEnum = "rtl"
+	HrDirLtr  HrDir = "ltr"
+	HrDirRtl  HrDir = "rtl"
+	HrDirAuto HrDir = "auto"
 )
 
-type HrDraggableEnum string
+type HrDraggable string
 
 const (
-	HrDraggableEnumTrue  HrDraggableEnum = "true"
-	HrDraggableEnumFalse HrDraggableEnum = "false"
+	HrDraggableFalse HrDraggable = "false"
+	HrDraggableTrue  HrDraggable = "true"
 )
 
-type HrEnterkeyhintEnum string
+type HrEnterkeyhint string
 
 const (
-	HrEnterkeyhintEnumSend     HrEnterkeyhintEnum = "send"
-	HrEnterkeyhintEnumDone     HrEnterkeyhintEnum = "done"
-	HrEnterkeyhintEnumEnter    HrEnterkeyhintEnum = "enter"
-	HrEnterkeyhintEnumGo       HrEnterkeyhintEnum = "go"
-	HrEnterkeyhintEnumNext     HrEnterkeyhintEnum = "next"
-	HrEnterkeyhintEnumPrevious HrEnterkeyhintEnum = "previous"
-	HrEnterkeyhintEnumSearch   HrEnterkeyhintEnum = "search"
+	HrEnterkeyhintDone     HrEnterkeyhint = "done"
+	HrEnterkeyhintEnter    HrEnterkeyhint = "enter"
+	HrEnterkeyhintGo       HrEnterkeyhint = "go"
+	HrEnterkeyhintNext     HrEnterkeyhint = "next"
+	HrEnterkeyhintPrevious HrEnterkeyhint = "previous"
+	HrEnterkeyhintSearch   HrEnterkeyhint = "search"
+	HrEnterkeyhintSend     HrEnterkeyhint = "send"
 )
 
-type HrHiddenEnum string
+type HrHidden string
 
 const (
-	HrHiddenEnumUntilFound HrHiddenEnum = "until-found"
-	HrHiddenEnumHidden     HrHiddenEnum = "hidden"
-	HrHiddenEnumEmpty      HrHiddenEnum = ""
+	HrHiddenHidden     HrHidden = "hidden"
+	HrHiddenUntilFound HrHidden = "until-found"
+	HrHiddenEmpty      HrHidden = ""
 )
 
-type HrInputmodeEnum string
+type HrInputmode string
 
 const (
-	HrInputmodeEnumUrl     HrInputmodeEnum = "url"
-	HrInputmodeEnumDecimal HrInputmodeEnum = "decimal"
-	HrInputmodeEnumEmail   HrInputmodeEnum = "email"
-	HrInputmodeEnumNone    HrInputmodeEnum = "none"
-	HrInputmodeEnumNumeric HrInputmodeEnum = "numeric"
-	HrInputmodeEnumSearch  HrInputmodeEnum = "search"
-	HrInputmodeEnumTel     HrInputmodeEnum = "tel"
-	HrInputmodeEnumText    HrInputmodeEnum = "text"
+	HrInputmodeEmail   HrInputmode = "email"
+	HrInputmodeNone    HrInputmode = "none"
+	HrInputmodeNumeric HrInputmode = "numeric"
+	HrInputmodeSearch  HrInputmode = "search"
+	HrInputmodeTel     HrInputmode = "tel"
+	HrInputmodeText    HrInputmode = "text"
+	HrInputmodeUrl     HrInputmode = "url"
+	HrInputmodeDecimal HrInputmode = "decimal"
 )
 
-type HrSpellcheckEnum string
+type HrSpellcheck string
 
 const (
-	HrSpellcheckEnumFalse HrSpellcheckEnum = "false"
-	HrSpellcheckEnumTrue  HrSpellcheckEnum = "true"
-	HrSpellcheckEnumEmpty HrSpellcheckEnum = ""
+	HrSpellcheckFalse HrSpellcheck = "false"
+	HrSpellcheckTrue  HrSpellcheck = "true"
+	HrSpellcheckEmpty HrSpellcheck = ""
 )
 
-type HrTranslateEnum string
+type HrTranslate string
 
 const (
-	HrTranslateEnumNo    HrTranslateEnum = "no"
-	HrTranslateEnumYes   HrTranslateEnum = "yes"
-	HrTranslateEnumEmpty HrTranslateEnum = ""
+	HrTranslateYes   HrTranslate = "yes"
+	HrTranslateNo    HrTranslate = "no"
+	HrTranslateEmpty HrTranslate = ""
 )
 
-type HrWritingsuggestionsEnum string
+type HrWritingsuggestions string
 
 const (
-	HrWritingsuggestionsEnumTrue  HrWritingsuggestionsEnum = "true"
-	HrWritingsuggestionsEnumFalse HrWritingsuggestionsEnum = "false"
-	HrWritingsuggestionsEnumEmpty HrWritingsuggestionsEnum = ""
+	HrWritingsuggestionsFalse HrWritingsuggestions = "false"
+	HrWritingsuggestionsTrue  HrWritingsuggestions = "true"
+	HrWritingsuggestionsEmpty HrWritingsuggestions = ""
 )
 
 type hrAttrs map[string]any
 
-func (e *HrElement) Autocapitalize(a HrAutocapitalizeEnum) *HrElement {
+func (e *HrElement) AriaUnsafe(name string, s string) *HrElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *HrElement) Aria(name string, s string) *HrElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *HrElement) Autocapitalize(a HrAutocapitalize) *HrElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *HrElement) Autocorrect(a HrAutocorrectEnum) *HrElement {
+func (e *HrElement) Autocorrect(a HrAutocorrect) *HrElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -165,7 +177,7 @@ func (e *HrElement) Class(s ...string) *HrElement {
 	return e
 }
 
-func (e *HrElement) Contenteditable(a HrContenteditableEnum) *HrElement {
+func (e *HrElement) Contenteditable(a HrContenteditable) *HrElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -183,25 +195,25 @@ func (e *HrElement) Data(name string, s string) *HrElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *HrElement) Dir(a HrDirEnum) *HrElement {
+func (e *HrElement) Dir(a HrDir) *HrElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *HrElement) Draggable(a HrDraggableEnum) *HrElement {
+func (e *HrElement) Draggable(a HrDraggable) *HrElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *HrElement) Enterkeyhint(a HrEnterkeyhintEnum) *HrElement {
+func (e *HrElement) Enterkeyhint(a HrEnterkeyhint) *HrElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *HrElement) Hidden(a HrHiddenEnum) *HrElement {
+func (e *HrElement) Hidden(a HrHidden) *HrElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -219,7 +231,7 @@ func (e *HrElement) Inert(b bool) *HrElement {
 	return e
 }
 
-func (e *HrElement) Inputmode(a HrInputmodeEnum) *HrElement {
+func (e *HrElement) Inputmode(a HrInputmode) *HrElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -279,7 +291,7 @@ func (e *HrElement) Slot(s string) *HrElement {
 	return e
 }
 
-func (e *HrElement) Spellcheck(a HrSpellcheckEnum) *HrElement {
+func (e *HrElement) Spellcheck(a HrSpellcheck) *HrElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -303,13 +315,13 @@ func (e *HrElement) Title(s string) *HrElement {
 	return e
 }
 
-func (e *HrElement) Translate(a HrTranslateEnum) *HrElement {
+func (e *HrElement) Translate(a HrTranslate) *HrElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *HrElement) Writingsuggestions(a HrWritingsuggestionsEnum) *HrElement {
+func (e *HrElement) Writingsuggestions(a HrWritingsuggestions) *HrElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

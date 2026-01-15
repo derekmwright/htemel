@@ -48,117 +48,117 @@ func DialogTernary(condition bool, true htemel.Node, false htemel.Node) *DialogE
 	return Dialog(false)
 }
 
-type DialogClosedbyEnum string
+type DialogClosedby string
 
 const (
-	DialogClosedbyEnumAny          DialogClosedbyEnum = "any"
-	DialogClosedbyEnumCloserequest DialogClosedbyEnum = "closerequest"
-	DialogClosedbyEnumNone         DialogClosedbyEnum = "none"
+	DialogClosedbyCloserequest DialogClosedby = "closerequest"
+	DialogClosedbyNone         DialogClosedby = "none"
+	DialogClosedbyAny          DialogClosedby = "any"
 )
 
-type DialogAutocapitalizeEnum string
+type DialogAutocapitalize string
 
 const (
-	DialogAutocapitalizeEnumOff        DialogAutocapitalizeEnum = "off"
-	DialogAutocapitalizeEnumOn         DialogAutocapitalizeEnum = "on"
-	DialogAutocapitalizeEnumSentences  DialogAutocapitalizeEnum = "sentences"
-	DialogAutocapitalizeEnumWords      DialogAutocapitalizeEnum = "words"
-	DialogAutocapitalizeEnumCharacters DialogAutocapitalizeEnum = "characters"
-	DialogAutocapitalizeEnumNone       DialogAutocapitalizeEnum = "none"
+	DialogAutocapitalizeWords      DialogAutocapitalize = "words"
+	DialogAutocapitalizeCharacters DialogAutocapitalize = "characters"
+	DialogAutocapitalizeNone       DialogAutocapitalize = "none"
+	DialogAutocapitalizeOff        DialogAutocapitalize = "off"
+	DialogAutocapitalizeOn         DialogAutocapitalize = "on"
+	DialogAutocapitalizeSentences  DialogAutocapitalize = "sentences"
 )
 
-type DialogAutocorrectEnum string
+type DialogAutocorrect string
 
 const (
-	DialogAutocorrectEnumOff   DialogAutocorrectEnum = "off"
-	DialogAutocorrectEnumOn    DialogAutocorrectEnum = "on"
-	DialogAutocorrectEnumEmpty DialogAutocorrectEnum = ""
+	DialogAutocorrectOff   DialogAutocorrect = "off"
+	DialogAutocorrectOn    DialogAutocorrect = "on"
+	DialogAutocorrectEmpty DialogAutocorrect = ""
 )
 
-type DialogContenteditableEnum string
+type DialogContenteditable string
 
 const (
-	DialogContenteditableEnumFalse         DialogContenteditableEnum = "false"
-	DialogContenteditableEnumPlaintextOnly DialogContenteditableEnum = "plaintext-only"
-	DialogContenteditableEnumTrue          DialogContenteditableEnum = "true"
-	DialogContenteditableEnumEmpty         DialogContenteditableEnum = ""
+	DialogContenteditableFalse         DialogContenteditable = "false"
+	DialogContenteditablePlaintextOnly DialogContenteditable = "plaintext-only"
+	DialogContenteditableTrue          DialogContenteditable = "true"
+	DialogContenteditableEmpty         DialogContenteditable = ""
 )
 
-type DialogDirEnum string
+type DialogDir string
 
 const (
-	DialogDirEnumAuto DialogDirEnum = "auto"
-	DialogDirEnumLtr  DialogDirEnum = "ltr"
-	DialogDirEnumRtl  DialogDirEnum = "rtl"
+	DialogDirAuto DialogDir = "auto"
+	DialogDirLtr  DialogDir = "ltr"
+	DialogDirRtl  DialogDir = "rtl"
 )
 
-type DialogDraggableEnum string
+type DialogDraggable string
 
 const (
-	DialogDraggableEnumFalse DialogDraggableEnum = "false"
-	DialogDraggableEnumTrue  DialogDraggableEnum = "true"
+	DialogDraggableFalse DialogDraggable = "false"
+	DialogDraggableTrue  DialogDraggable = "true"
 )
 
-type DialogEnterkeyhintEnum string
+type DialogEnterkeyhint string
 
 const (
-	DialogEnterkeyhintEnumSearch   DialogEnterkeyhintEnum = "search"
-	DialogEnterkeyhintEnumSend     DialogEnterkeyhintEnum = "send"
-	DialogEnterkeyhintEnumDone     DialogEnterkeyhintEnum = "done"
-	DialogEnterkeyhintEnumEnter    DialogEnterkeyhintEnum = "enter"
-	DialogEnterkeyhintEnumGo       DialogEnterkeyhintEnum = "go"
-	DialogEnterkeyhintEnumNext     DialogEnterkeyhintEnum = "next"
-	DialogEnterkeyhintEnumPrevious DialogEnterkeyhintEnum = "previous"
+	DialogEnterkeyhintSearch   DialogEnterkeyhint = "search"
+	DialogEnterkeyhintSend     DialogEnterkeyhint = "send"
+	DialogEnterkeyhintDone     DialogEnterkeyhint = "done"
+	DialogEnterkeyhintEnter    DialogEnterkeyhint = "enter"
+	DialogEnterkeyhintGo       DialogEnterkeyhint = "go"
+	DialogEnterkeyhintNext     DialogEnterkeyhint = "next"
+	DialogEnterkeyhintPrevious DialogEnterkeyhint = "previous"
 )
 
-type DialogHiddenEnum string
+type DialogHidden string
 
 const (
-	DialogHiddenEnumHidden     DialogHiddenEnum = "hidden"
-	DialogHiddenEnumUntilFound DialogHiddenEnum = "until-found"
-	DialogHiddenEnumEmpty      DialogHiddenEnum = ""
+	DialogHiddenUntilFound DialogHidden = "until-found"
+	DialogHiddenHidden     DialogHidden = "hidden"
+	DialogHiddenEmpty      DialogHidden = ""
 )
 
-type DialogInputmodeEnum string
+type DialogInputmode string
 
 const (
-	DialogInputmodeEnumUrl     DialogInputmodeEnum = "url"
-	DialogInputmodeEnumDecimal DialogInputmodeEnum = "decimal"
-	DialogInputmodeEnumEmail   DialogInputmodeEnum = "email"
-	DialogInputmodeEnumNone    DialogInputmodeEnum = "none"
-	DialogInputmodeEnumNumeric DialogInputmodeEnum = "numeric"
-	DialogInputmodeEnumSearch  DialogInputmodeEnum = "search"
-	DialogInputmodeEnumTel     DialogInputmodeEnum = "tel"
-	DialogInputmodeEnumText    DialogInputmodeEnum = "text"
+	DialogInputmodeSearch  DialogInputmode = "search"
+	DialogInputmodeTel     DialogInputmode = "tel"
+	DialogInputmodeText    DialogInputmode = "text"
+	DialogInputmodeUrl     DialogInputmode = "url"
+	DialogInputmodeDecimal DialogInputmode = "decimal"
+	DialogInputmodeEmail   DialogInputmode = "email"
+	DialogInputmodeNone    DialogInputmode = "none"
+	DialogInputmodeNumeric DialogInputmode = "numeric"
 )
 
-type DialogSpellcheckEnum string
+type DialogSpellcheck string
 
 const (
-	DialogSpellcheckEnumFalse DialogSpellcheckEnum = "false"
-	DialogSpellcheckEnumTrue  DialogSpellcheckEnum = "true"
-	DialogSpellcheckEnumEmpty DialogSpellcheckEnum = ""
+	DialogSpellcheckFalse DialogSpellcheck = "false"
+	DialogSpellcheckTrue  DialogSpellcheck = "true"
+	DialogSpellcheckEmpty DialogSpellcheck = ""
 )
 
-type DialogTranslateEnum string
+type DialogTranslate string
 
 const (
-	DialogTranslateEnumNo    DialogTranslateEnum = "no"
-	DialogTranslateEnumYes   DialogTranslateEnum = "yes"
-	DialogTranslateEnumEmpty DialogTranslateEnum = ""
+	DialogTranslateNo    DialogTranslate = "no"
+	DialogTranslateYes   DialogTranslate = "yes"
+	DialogTranslateEmpty DialogTranslate = ""
 )
 
-type DialogWritingsuggestionsEnum string
+type DialogWritingsuggestions string
 
 const (
-	DialogWritingsuggestionsEnumFalse DialogWritingsuggestionsEnum = "false"
-	DialogWritingsuggestionsEnumTrue  DialogWritingsuggestionsEnum = "true"
-	DialogWritingsuggestionsEnumEmpty DialogWritingsuggestionsEnum = ""
+	DialogWritingsuggestionsTrue  DialogWritingsuggestions = "true"
+	DialogWritingsuggestionsFalse DialogWritingsuggestions = "false"
+	DialogWritingsuggestionsEmpty DialogWritingsuggestions = ""
 )
 
 type dialogAttrs map[string]any
 
-func (e *DialogElement) Closedby(a DialogClosedbyEnum) *DialogElement {
+func (e *DialogElement) Closedby(a DialogClosedby) *DialogElement {
 	e.attributes["closedby"] = a
 
 	return e
@@ -170,13 +170,25 @@ func (e *DialogElement) Open(b bool) *DialogElement {
 	return e
 }
 
-func (e *DialogElement) Autocapitalize(a DialogAutocapitalizeEnum) *DialogElement {
+func (e *DialogElement) AriaUnsafe(name string, s string) *DialogElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *DialogElement) Aria(name string, s string) *DialogElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *DialogElement) Autocapitalize(a DialogAutocapitalize) *DialogElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *DialogElement) Autocorrect(a DialogAutocorrectEnum) *DialogElement {
+func (e *DialogElement) Autocorrect(a DialogAutocorrect) *DialogElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -194,7 +206,7 @@ func (e *DialogElement) Class(s ...string) *DialogElement {
 	return e
 }
 
-func (e *DialogElement) Contenteditable(a DialogContenteditableEnum) *DialogElement {
+func (e *DialogElement) Contenteditable(a DialogContenteditable) *DialogElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -212,25 +224,25 @@ func (e *DialogElement) Data(name string, s string) *DialogElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *DialogElement) Dir(a DialogDirEnum) *DialogElement {
+func (e *DialogElement) Dir(a DialogDir) *DialogElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *DialogElement) Draggable(a DialogDraggableEnum) *DialogElement {
+func (e *DialogElement) Draggable(a DialogDraggable) *DialogElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *DialogElement) Enterkeyhint(a DialogEnterkeyhintEnum) *DialogElement {
+func (e *DialogElement) Enterkeyhint(a DialogEnterkeyhint) *DialogElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *DialogElement) Hidden(a DialogHiddenEnum) *DialogElement {
+func (e *DialogElement) Hidden(a DialogHidden) *DialogElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -248,7 +260,7 @@ func (e *DialogElement) Inert(b bool) *DialogElement {
 	return e
 }
 
-func (e *DialogElement) Inputmode(a DialogInputmodeEnum) *DialogElement {
+func (e *DialogElement) Inputmode(a DialogInputmode) *DialogElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -308,7 +320,7 @@ func (e *DialogElement) Slot(s string) *DialogElement {
 	return e
 }
 
-func (e *DialogElement) Spellcheck(a DialogSpellcheckEnum) *DialogElement {
+func (e *DialogElement) Spellcheck(a DialogSpellcheck) *DialogElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -332,13 +344,13 @@ func (e *DialogElement) Title(s string) *DialogElement {
 	return e
 }
 
-func (e *DialogElement) Translate(a DialogTranslateEnum) *DialogElement {
+func (e *DialogElement) Translate(a DialogTranslate) *DialogElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *DialogElement) Writingsuggestions(a DialogWritingsuggestionsEnum) *DialogElement {
+func (e *DialogElement) Writingsuggestions(a DialogWritingsuggestions) *DialogElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

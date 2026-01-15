@@ -48,104 +48,104 @@ func SlotTernary(condition bool, true htemel.Node, false htemel.Node) *SlotEleme
 	return Slot(false)
 }
 
-type SlotAutocapitalizeEnum string
+type SlotAutocapitalize string
 
 const (
-	SlotAutocapitalizeEnumNone       SlotAutocapitalizeEnum = "none"
-	SlotAutocapitalizeEnumOff        SlotAutocapitalizeEnum = "off"
-	SlotAutocapitalizeEnumOn         SlotAutocapitalizeEnum = "on"
-	SlotAutocapitalizeEnumSentences  SlotAutocapitalizeEnum = "sentences"
-	SlotAutocapitalizeEnumWords      SlotAutocapitalizeEnum = "words"
-	SlotAutocapitalizeEnumCharacters SlotAutocapitalizeEnum = "characters"
+	SlotAutocapitalizeSentences  SlotAutocapitalize = "sentences"
+	SlotAutocapitalizeWords      SlotAutocapitalize = "words"
+	SlotAutocapitalizeCharacters SlotAutocapitalize = "characters"
+	SlotAutocapitalizeNone       SlotAutocapitalize = "none"
+	SlotAutocapitalizeOff        SlotAutocapitalize = "off"
+	SlotAutocapitalizeOn         SlotAutocapitalize = "on"
 )
 
-type SlotAutocorrectEnum string
+type SlotAutocorrect string
 
 const (
-	SlotAutocorrectEnumOn    SlotAutocorrectEnum = "on"
-	SlotAutocorrectEnumOff   SlotAutocorrectEnum = "off"
-	SlotAutocorrectEnumEmpty SlotAutocorrectEnum = ""
+	SlotAutocorrectOff   SlotAutocorrect = "off"
+	SlotAutocorrectOn    SlotAutocorrect = "on"
+	SlotAutocorrectEmpty SlotAutocorrect = ""
 )
 
-type SlotContenteditableEnum string
+type SlotContenteditable string
 
 const (
-	SlotContenteditableEnumPlaintextOnly SlotContenteditableEnum = "plaintext-only"
-	SlotContenteditableEnumTrue          SlotContenteditableEnum = "true"
-	SlotContenteditableEnumFalse         SlotContenteditableEnum = "false"
-	SlotContenteditableEnumEmpty         SlotContenteditableEnum = ""
+	SlotContenteditableFalse         SlotContenteditable = "false"
+	SlotContenteditablePlaintextOnly SlotContenteditable = "plaintext-only"
+	SlotContenteditableTrue          SlotContenteditable = "true"
+	SlotContenteditableEmpty         SlotContenteditable = ""
 )
 
-type SlotDirEnum string
+type SlotDir string
 
 const (
-	SlotDirEnumAuto SlotDirEnum = "auto"
-	SlotDirEnumLtr  SlotDirEnum = "ltr"
-	SlotDirEnumRtl  SlotDirEnum = "rtl"
+	SlotDirAuto SlotDir = "auto"
+	SlotDirLtr  SlotDir = "ltr"
+	SlotDirRtl  SlotDir = "rtl"
 )
 
-type SlotDraggableEnum string
+type SlotDraggable string
 
 const (
-	SlotDraggableEnumFalse SlotDraggableEnum = "false"
-	SlotDraggableEnumTrue  SlotDraggableEnum = "true"
+	SlotDraggableFalse SlotDraggable = "false"
+	SlotDraggableTrue  SlotDraggable = "true"
 )
 
-type SlotEnterkeyhintEnum string
+type SlotEnterkeyhint string
 
 const (
-	SlotEnterkeyhintEnumPrevious SlotEnterkeyhintEnum = "previous"
-	SlotEnterkeyhintEnumSearch   SlotEnterkeyhintEnum = "search"
-	SlotEnterkeyhintEnumSend     SlotEnterkeyhintEnum = "send"
-	SlotEnterkeyhintEnumDone     SlotEnterkeyhintEnum = "done"
-	SlotEnterkeyhintEnumEnter    SlotEnterkeyhintEnum = "enter"
-	SlotEnterkeyhintEnumGo       SlotEnterkeyhintEnum = "go"
-	SlotEnterkeyhintEnumNext     SlotEnterkeyhintEnum = "next"
+	SlotEnterkeyhintGo       SlotEnterkeyhint = "go"
+	SlotEnterkeyhintNext     SlotEnterkeyhint = "next"
+	SlotEnterkeyhintPrevious SlotEnterkeyhint = "previous"
+	SlotEnterkeyhintSearch   SlotEnterkeyhint = "search"
+	SlotEnterkeyhintSend     SlotEnterkeyhint = "send"
+	SlotEnterkeyhintDone     SlotEnterkeyhint = "done"
+	SlotEnterkeyhintEnter    SlotEnterkeyhint = "enter"
 )
 
-type SlotHiddenEnum string
+type SlotHidden string
 
 const (
-	SlotHiddenEnumHidden     SlotHiddenEnum = "hidden"
-	SlotHiddenEnumUntilFound SlotHiddenEnum = "until-found"
-	SlotHiddenEnumEmpty      SlotHiddenEnum = ""
+	SlotHiddenHidden     SlotHidden = "hidden"
+	SlotHiddenUntilFound SlotHidden = "until-found"
+	SlotHiddenEmpty      SlotHidden = ""
 )
 
-type SlotInputmodeEnum string
+type SlotInputmode string
 
 const (
-	SlotInputmodeEnumTel     SlotInputmodeEnum = "tel"
-	SlotInputmodeEnumText    SlotInputmodeEnum = "text"
-	SlotInputmodeEnumUrl     SlotInputmodeEnum = "url"
-	SlotInputmodeEnumDecimal SlotInputmodeEnum = "decimal"
-	SlotInputmodeEnumEmail   SlotInputmodeEnum = "email"
-	SlotInputmodeEnumNone    SlotInputmodeEnum = "none"
-	SlotInputmodeEnumNumeric SlotInputmodeEnum = "numeric"
-	SlotInputmodeEnumSearch  SlotInputmodeEnum = "search"
+	SlotInputmodeTel     SlotInputmode = "tel"
+	SlotInputmodeText    SlotInputmode = "text"
+	SlotInputmodeUrl     SlotInputmode = "url"
+	SlotInputmodeDecimal SlotInputmode = "decimal"
+	SlotInputmodeEmail   SlotInputmode = "email"
+	SlotInputmodeNone    SlotInputmode = "none"
+	SlotInputmodeNumeric SlotInputmode = "numeric"
+	SlotInputmodeSearch  SlotInputmode = "search"
 )
 
-type SlotSpellcheckEnum string
+type SlotSpellcheck string
 
 const (
-	SlotSpellcheckEnumFalse SlotSpellcheckEnum = "false"
-	SlotSpellcheckEnumTrue  SlotSpellcheckEnum = "true"
-	SlotSpellcheckEnumEmpty SlotSpellcheckEnum = ""
+	SlotSpellcheckFalse SlotSpellcheck = "false"
+	SlotSpellcheckTrue  SlotSpellcheck = "true"
+	SlotSpellcheckEmpty SlotSpellcheck = ""
 )
 
-type SlotTranslateEnum string
+type SlotTranslate string
 
 const (
-	SlotTranslateEnumYes   SlotTranslateEnum = "yes"
-	SlotTranslateEnumNo    SlotTranslateEnum = "no"
-	SlotTranslateEnumEmpty SlotTranslateEnum = ""
+	SlotTranslateYes   SlotTranslate = "yes"
+	SlotTranslateNo    SlotTranslate = "no"
+	SlotTranslateEmpty SlotTranslate = ""
 )
 
-type SlotWritingsuggestionsEnum string
+type SlotWritingsuggestions string
 
 const (
-	SlotWritingsuggestionsEnumFalse SlotWritingsuggestionsEnum = "false"
-	SlotWritingsuggestionsEnumTrue  SlotWritingsuggestionsEnum = "true"
-	SlotWritingsuggestionsEnumEmpty SlotWritingsuggestionsEnum = ""
+	SlotWritingsuggestionsFalse SlotWritingsuggestions = "false"
+	SlotWritingsuggestionsTrue  SlotWritingsuggestions = "true"
+	SlotWritingsuggestionsEmpty SlotWritingsuggestions = ""
 )
 
 type slotAttrs map[string]any
@@ -156,13 +156,25 @@ func (e *SlotElement) Name(s string) *SlotElement {
 	return e
 }
 
-func (e *SlotElement) Autocapitalize(a SlotAutocapitalizeEnum) *SlotElement {
+func (e *SlotElement) AriaUnsafe(name string, s string) *SlotElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *SlotElement) Aria(name string, s string) *SlotElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *SlotElement) Autocapitalize(a SlotAutocapitalize) *SlotElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *SlotElement) Autocorrect(a SlotAutocorrectEnum) *SlotElement {
+func (e *SlotElement) Autocorrect(a SlotAutocorrect) *SlotElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -180,7 +192,7 @@ func (e *SlotElement) Class(s ...string) *SlotElement {
 	return e
 }
 
-func (e *SlotElement) Contenteditable(a SlotContenteditableEnum) *SlotElement {
+func (e *SlotElement) Contenteditable(a SlotContenteditable) *SlotElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -198,25 +210,25 @@ func (e *SlotElement) Data(name string, s string) *SlotElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *SlotElement) Dir(a SlotDirEnum) *SlotElement {
+func (e *SlotElement) Dir(a SlotDir) *SlotElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *SlotElement) Draggable(a SlotDraggableEnum) *SlotElement {
+func (e *SlotElement) Draggable(a SlotDraggable) *SlotElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *SlotElement) Enterkeyhint(a SlotEnterkeyhintEnum) *SlotElement {
+func (e *SlotElement) Enterkeyhint(a SlotEnterkeyhint) *SlotElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *SlotElement) Hidden(a SlotHiddenEnum) *SlotElement {
+func (e *SlotElement) Hidden(a SlotHidden) *SlotElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -234,7 +246,7 @@ func (e *SlotElement) Inert(b bool) *SlotElement {
 	return e
 }
 
-func (e *SlotElement) Inputmode(a SlotInputmodeEnum) *SlotElement {
+func (e *SlotElement) Inputmode(a SlotInputmode) *SlotElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -294,7 +306,7 @@ func (e *SlotElement) Slot(s string) *SlotElement {
 	return e
 }
 
-func (e *SlotElement) Spellcheck(a SlotSpellcheckEnum) *SlotElement {
+func (e *SlotElement) Spellcheck(a SlotSpellcheck) *SlotElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -318,13 +330,13 @@ func (e *SlotElement) Title(s string) *SlotElement {
 	return e
 }
 
-func (e *SlotElement) Translate(a SlotTranslateEnum) *SlotElement {
+func (e *SlotElement) Translate(a SlotTranslate) *SlotElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *SlotElement) Writingsuggestions(a SlotWritingsuggestionsEnum) *SlotElement {
+func (e *SlotElement) Writingsuggestions(a SlotWritingsuggestions) *SlotElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

@@ -48,115 +48,127 @@ func NoscriptTernary(condition bool, true htemel.Node, false htemel.Node) *Noscr
 	return Noscript(false)
 }
 
-type NoscriptAutocapitalizeEnum string
+type NoscriptAutocapitalize string
 
 const (
-	NoscriptAutocapitalizeEnumOn         NoscriptAutocapitalizeEnum = "on"
-	NoscriptAutocapitalizeEnumSentences  NoscriptAutocapitalizeEnum = "sentences"
-	NoscriptAutocapitalizeEnumWords      NoscriptAutocapitalizeEnum = "words"
-	NoscriptAutocapitalizeEnumCharacters NoscriptAutocapitalizeEnum = "characters"
-	NoscriptAutocapitalizeEnumNone       NoscriptAutocapitalizeEnum = "none"
-	NoscriptAutocapitalizeEnumOff        NoscriptAutocapitalizeEnum = "off"
+	NoscriptAutocapitalizeCharacters NoscriptAutocapitalize = "characters"
+	NoscriptAutocapitalizeNone       NoscriptAutocapitalize = "none"
+	NoscriptAutocapitalizeOff        NoscriptAutocapitalize = "off"
+	NoscriptAutocapitalizeOn         NoscriptAutocapitalize = "on"
+	NoscriptAutocapitalizeSentences  NoscriptAutocapitalize = "sentences"
+	NoscriptAutocapitalizeWords      NoscriptAutocapitalize = "words"
 )
 
-type NoscriptAutocorrectEnum string
+type NoscriptAutocorrect string
 
 const (
-	NoscriptAutocorrectEnumOff   NoscriptAutocorrectEnum = "off"
-	NoscriptAutocorrectEnumOn    NoscriptAutocorrectEnum = "on"
-	NoscriptAutocorrectEnumEmpty NoscriptAutocorrectEnum = ""
+	NoscriptAutocorrectOff   NoscriptAutocorrect = "off"
+	NoscriptAutocorrectOn    NoscriptAutocorrect = "on"
+	NoscriptAutocorrectEmpty NoscriptAutocorrect = ""
 )
 
-type NoscriptContenteditableEnum string
+type NoscriptContenteditable string
 
 const (
-	NoscriptContenteditableEnumFalse         NoscriptContenteditableEnum = "false"
-	NoscriptContenteditableEnumPlaintextOnly NoscriptContenteditableEnum = "plaintext-only"
-	NoscriptContenteditableEnumTrue          NoscriptContenteditableEnum = "true"
-	NoscriptContenteditableEnumEmpty         NoscriptContenteditableEnum = ""
+	NoscriptContenteditableFalse         NoscriptContenteditable = "false"
+	NoscriptContenteditablePlaintextOnly NoscriptContenteditable = "plaintext-only"
+	NoscriptContenteditableTrue          NoscriptContenteditable = "true"
+	NoscriptContenteditableEmpty         NoscriptContenteditable = ""
 )
 
-type NoscriptDirEnum string
+type NoscriptDir string
 
 const (
-	NoscriptDirEnumAuto NoscriptDirEnum = "auto"
-	NoscriptDirEnumLtr  NoscriptDirEnum = "ltr"
-	NoscriptDirEnumRtl  NoscriptDirEnum = "rtl"
+	NoscriptDirAuto NoscriptDir = "auto"
+	NoscriptDirLtr  NoscriptDir = "ltr"
+	NoscriptDirRtl  NoscriptDir = "rtl"
 )
 
-type NoscriptDraggableEnum string
+type NoscriptDraggable string
 
 const (
-	NoscriptDraggableEnumFalse NoscriptDraggableEnum = "false"
-	NoscriptDraggableEnumTrue  NoscriptDraggableEnum = "true"
+	NoscriptDraggableFalse NoscriptDraggable = "false"
+	NoscriptDraggableTrue  NoscriptDraggable = "true"
 )
 
-type NoscriptEnterkeyhintEnum string
+type NoscriptEnterkeyhint string
 
 const (
-	NoscriptEnterkeyhintEnumGo       NoscriptEnterkeyhintEnum = "go"
-	NoscriptEnterkeyhintEnumNext     NoscriptEnterkeyhintEnum = "next"
-	NoscriptEnterkeyhintEnumPrevious NoscriptEnterkeyhintEnum = "previous"
-	NoscriptEnterkeyhintEnumSearch   NoscriptEnterkeyhintEnum = "search"
-	NoscriptEnterkeyhintEnumSend     NoscriptEnterkeyhintEnum = "send"
-	NoscriptEnterkeyhintEnumDone     NoscriptEnterkeyhintEnum = "done"
-	NoscriptEnterkeyhintEnumEnter    NoscriptEnterkeyhintEnum = "enter"
+	NoscriptEnterkeyhintPrevious NoscriptEnterkeyhint = "previous"
+	NoscriptEnterkeyhintSearch   NoscriptEnterkeyhint = "search"
+	NoscriptEnterkeyhintSend     NoscriptEnterkeyhint = "send"
+	NoscriptEnterkeyhintDone     NoscriptEnterkeyhint = "done"
+	NoscriptEnterkeyhintEnter    NoscriptEnterkeyhint = "enter"
+	NoscriptEnterkeyhintGo       NoscriptEnterkeyhint = "go"
+	NoscriptEnterkeyhintNext     NoscriptEnterkeyhint = "next"
 )
 
-type NoscriptHiddenEnum string
+type NoscriptHidden string
 
 const (
-	NoscriptHiddenEnumHidden     NoscriptHiddenEnum = "hidden"
-	NoscriptHiddenEnumUntilFound NoscriptHiddenEnum = "until-found"
-	NoscriptHiddenEnumEmpty      NoscriptHiddenEnum = ""
+	NoscriptHiddenHidden     NoscriptHidden = "hidden"
+	NoscriptHiddenUntilFound NoscriptHidden = "until-found"
+	NoscriptHiddenEmpty      NoscriptHidden = ""
 )
 
-type NoscriptInputmodeEnum string
+type NoscriptInputmode string
 
 const (
-	NoscriptInputmodeEnumNumeric NoscriptInputmodeEnum = "numeric"
-	NoscriptInputmodeEnumSearch  NoscriptInputmodeEnum = "search"
-	NoscriptInputmodeEnumTel     NoscriptInputmodeEnum = "tel"
-	NoscriptInputmodeEnumText    NoscriptInputmodeEnum = "text"
-	NoscriptInputmodeEnumUrl     NoscriptInputmodeEnum = "url"
-	NoscriptInputmodeEnumDecimal NoscriptInputmodeEnum = "decimal"
-	NoscriptInputmodeEnumEmail   NoscriptInputmodeEnum = "email"
-	NoscriptInputmodeEnumNone    NoscriptInputmodeEnum = "none"
+	NoscriptInputmodeUrl     NoscriptInputmode = "url"
+	NoscriptInputmodeDecimal NoscriptInputmode = "decimal"
+	NoscriptInputmodeEmail   NoscriptInputmode = "email"
+	NoscriptInputmodeNone    NoscriptInputmode = "none"
+	NoscriptInputmodeNumeric NoscriptInputmode = "numeric"
+	NoscriptInputmodeSearch  NoscriptInputmode = "search"
+	NoscriptInputmodeTel     NoscriptInputmode = "tel"
+	NoscriptInputmodeText    NoscriptInputmode = "text"
 )
 
-type NoscriptSpellcheckEnum string
+type NoscriptSpellcheck string
 
 const (
-	NoscriptSpellcheckEnumFalse NoscriptSpellcheckEnum = "false"
-	NoscriptSpellcheckEnumTrue  NoscriptSpellcheckEnum = "true"
-	NoscriptSpellcheckEnumEmpty NoscriptSpellcheckEnum = ""
+	NoscriptSpellcheckFalse NoscriptSpellcheck = "false"
+	NoscriptSpellcheckTrue  NoscriptSpellcheck = "true"
+	NoscriptSpellcheckEmpty NoscriptSpellcheck = ""
 )
 
-type NoscriptTranslateEnum string
+type NoscriptTranslate string
 
 const (
-	NoscriptTranslateEnumNo    NoscriptTranslateEnum = "no"
-	NoscriptTranslateEnumYes   NoscriptTranslateEnum = "yes"
-	NoscriptTranslateEnumEmpty NoscriptTranslateEnum = ""
+	NoscriptTranslateNo    NoscriptTranslate = "no"
+	NoscriptTranslateYes   NoscriptTranslate = "yes"
+	NoscriptTranslateEmpty NoscriptTranslate = ""
 )
 
-type NoscriptWritingsuggestionsEnum string
+type NoscriptWritingsuggestions string
 
 const (
-	NoscriptWritingsuggestionsEnumFalse NoscriptWritingsuggestionsEnum = "false"
-	NoscriptWritingsuggestionsEnumTrue  NoscriptWritingsuggestionsEnum = "true"
-	NoscriptWritingsuggestionsEnumEmpty NoscriptWritingsuggestionsEnum = ""
+	NoscriptWritingsuggestionsFalse NoscriptWritingsuggestions = "false"
+	NoscriptWritingsuggestionsTrue  NoscriptWritingsuggestions = "true"
+	NoscriptWritingsuggestionsEmpty NoscriptWritingsuggestions = ""
 )
 
 type noscriptAttrs map[string]any
 
-func (e *NoscriptElement) Autocapitalize(a NoscriptAutocapitalizeEnum) *NoscriptElement {
+func (e *NoscriptElement) AriaUnsafe(name string, s string) *NoscriptElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *NoscriptElement) Aria(name string, s string) *NoscriptElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *NoscriptElement) Autocapitalize(a NoscriptAutocapitalize) *NoscriptElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *NoscriptElement) Autocorrect(a NoscriptAutocorrectEnum) *NoscriptElement {
+func (e *NoscriptElement) Autocorrect(a NoscriptAutocorrect) *NoscriptElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *NoscriptElement) Class(s ...string) *NoscriptElement {
 	return e
 }
 
-func (e *NoscriptElement) Contenteditable(a NoscriptContenteditableEnum) *NoscriptElement {
+func (e *NoscriptElement) Contenteditable(a NoscriptContenteditable) *NoscriptElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *NoscriptElement) Data(name string, s string) *NoscriptElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *NoscriptElement) Dir(a NoscriptDirEnum) *NoscriptElement {
+func (e *NoscriptElement) Dir(a NoscriptDir) *NoscriptElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *NoscriptElement) Draggable(a NoscriptDraggableEnum) *NoscriptElement {
+func (e *NoscriptElement) Draggable(a NoscriptDraggable) *NoscriptElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *NoscriptElement) Enterkeyhint(a NoscriptEnterkeyhintEnum) *NoscriptElement {
+func (e *NoscriptElement) Enterkeyhint(a NoscriptEnterkeyhint) *NoscriptElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *NoscriptElement) Hidden(a NoscriptHiddenEnum) *NoscriptElement {
+func (e *NoscriptElement) Hidden(a NoscriptHidden) *NoscriptElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *NoscriptElement) Inert(b bool) *NoscriptElement {
 	return e
 }
 
-func (e *NoscriptElement) Inputmode(a NoscriptInputmodeEnum) *NoscriptElement {
+func (e *NoscriptElement) Inputmode(a NoscriptInputmode) *NoscriptElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *NoscriptElement) Slot(s string) *NoscriptElement {
 	return e
 }
 
-func (e *NoscriptElement) Spellcheck(a NoscriptSpellcheckEnum) *NoscriptElement {
+func (e *NoscriptElement) Spellcheck(a NoscriptSpellcheck) *NoscriptElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *NoscriptElement) Title(s string) *NoscriptElement {
 	return e
 }
 
-func (e *NoscriptElement) Translate(a NoscriptTranslateEnum) *NoscriptElement {
+func (e *NoscriptElement) Translate(a NoscriptTranslate) *NoscriptElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *NoscriptElement) Writingsuggestions(a NoscriptWritingsuggestionsEnum) *NoscriptElement {
+func (e *NoscriptElement) Writingsuggestions(a NoscriptWritingsuggestions) *NoscriptElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

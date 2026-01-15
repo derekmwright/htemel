@@ -48,104 +48,104 @@ func MapTernary(condition bool, true htemel.Node, false htemel.Node) *MapElement
 	return Map(false)
 }
 
-type MapAutocapitalizeEnum string
+type MapAutocapitalize string
 
 const (
-	MapAutocapitalizeEnumWords      MapAutocapitalizeEnum = "words"
-	MapAutocapitalizeEnumCharacters MapAutocapitalizeEnum = "characters"
-	MapAutocapitalizeEnumNone       MapAutocapitalizeEnum = "none"
-	MapAutocapitalizeEnumOff        MapAutocapitalizeEnum = "off"
-	MapAutocapitalizeEnumOn         MapAutocapitalizeEnum = "on"
-	MapAutocapitalizeEnumSentences  MapAutocapitalizeEnum = "sentences"
+	MapAutocapitalizeOff        MapAutocapitalize = "off"
+	MapAutocapitalizeOn         MapAutocapitalize = "on"
+	MapAutocapitalizeSentences  MapAutocapitalize = "sentences"
+	MapAutocapitalizeWords      MapAutocapitalize = "words"
+	MapAutocapitalizeCharacters MapAutocapitalize = "characters"
+	MapAutocapitalizeNone       MapAutocapitalize = "none"
 )
 
-type MapAutocorrectEnum string
+type MapAutocorrect string
 
 const (
-	MapAutocorrectEnumOff   MapAutocorrectEnum = "off"
-	MapAutocorrectEnumOn    MapAutocorrectEnum = "on"
-	MapAutocorrectEnumEmpty MapAutocorrectEnum = ""
+	MapAutocorrectOff   MapAutocorrect = "off"
+	MapAutocorrectOn    MapAutocorrect = "on"
+	MapAutocorrectEmpty MapAutocorrect = ""
 )
 
-type MapContenteditableEnum string
+type MapContenteditable string
 
 const (
-	MapContenteditableEnumPlaintextOnly MapContenteditableEnum = "plaintext-only"
-	MapContenteditableEnumTrue          MapContenteditableEnum = "true"
-	MapContenteditableEnumFalse         MapContenteditableEnum = "false"
-	MapContenteditableEnumEmpty         MapContenteditableEnum = ""
+	MapContenteditableFalse         MapContenteditable = "false"
+	MapContenteditablePlaintextOnly MapContenteditable = "plaintext-only"
+	MapContenteditableTrue          MapContenteditable = "true"
+	MapContenteditableEmpty         MapContenteditable = ""
 )
 
-type MapDirEnum string
+type MapDir string
 
 const (
-	MapDirEnumAuto MapDirEnum = "auto"
-	MapDirEnumLtr  MapDirEnum = "ltr"
-	MapDirEnumRtl  MapDirEnum = "rtl"
+	MapDirAuto MapDir = "auto"
+	MapDirLtr  MapDir = "ltr"
+	MapDirRtl  MapDir = "rtl"
 )
 
-type MapDraggableEnum string
+type MapDraggable string
 
 const (
-	MapDraggableEnumFalse MapDraggableEnum = "false"
-	MapDraggableEnumTrue  MapDraggableEnum = "true"
+	MapDraggableFalse MapDraggable = "false"
+	MapDraggableTrue  MapDraggable = "true"
 )
 
-type MapEnterkeyhintEnum string
+type MapEnterkeyhint string
 
 const (
-	MapEnterkeyhintEnumGo       MapEnterkeyhintEnum = "go"
-	MapEnterkeyhintEnumNext     MapEnterkeyhintEnum = "next"
-	MapEnterkeyhintEnumPrevious MapEnterkeyhintEnum = "previous"
-	MapEnterkeyhintEnumSearch   MapEnterkeyhintEnum = "search"
-	MapEnterkeyhintEnumSend     MapEnterkeyhintEnum = "send"
-	MapEnterkeyhintEnumDone     MapEnterkeyhintEnum = "done"
-	MapEnterkeyhintEnumEnter    MapEnterkeyhintEnum = "enter"
+	MapEnterkeyhintSearch   MapEnterkeyhint = "search"
+	MapEnterkeyhintSend     MapEnterkeyhint = "send"
+	MapEnterkeyhintDone     MapEnterkeyhint = "done"
+	MapEnterkeyhintEnter    MapEnterkeyhint = "enter"
+	MapEnterkeyhintGo       MapEnterkeyhint = "go"
+	MapEnterkeyhintNext     MapEnterkeyhint = "next"
+	MapEnterkeyhintPrevious MapEnterkeyhint = "previous"
 )
 
-type MapHiddenEnum string
+type MapHidden string
 
 const (
-	MapHiddenEnumHidden     MapHiddenEnum = "hidden"
-	MapHiddenEnumUntilFound MapHiddenEnum = "until-found"
-	MapHiddenEnumEmpty      MapHiddenEnum = ""
+	MapHiddenHidden     MapHidden = "hidden"
+	MapHiddenUntilFound MapHidden = "until-found"
+	MapHiddenEmpty      MapHidden = ""
 )
 
-type MapInputmodeEnum string
+type MapInputmode string
 
 const (
-	MapInputmodeEnumEmail   MapInputmodeEnum = "email"
-	MapInputmodeEnumNone    MapInputmodeEnum = "none"
-	MapInputmodeEnumNumeric MapInputmodeEnum = "numeric"
-	MapInputmodeEnumSearch  MapInputmodeEnum = "search"
-	MapInputmodeEnumTel     MapInputmodeEnum = "tel"
-	MapInputmodeEnumText    MapInputmodeEnum = "text"
-	MapInputmodeEnumUrl     MapInputmodeEnum = "url"
-	MapInputmodeEnumDecimal MapInputmodeEnum = "decimal"
+	MapInputmodeDecimal MapInputmode = "decimal"
+	MapInputmodeEmail   MapInputmode = "email"
+	MapInputmodeNone    MapInputmode = "none"
+	MapInputmodeNumeric MapInputmode = "numeric"
+	MapInputmodeSearch  MapInputmode = "search"
+	MapInputmodeTel     MapInputmode = "tel"
+	MapInputmodeText    MapInputmode = "text"
+	MapInputmodeUrl     MapInputmode = "url"
 )
 
-type MapSpellcheckEnum string
+type MapSpellcheck string
 
 const (
-	MapSpellcheckEnumFalse MapSpellcheckEnum = "false"
-	MapSpellcheckEnumTrue  MapSpellcheckEnum = "true"
-	MapSpellcheckEnumEmpty MapSpellcheckEnum = ""
+	MapSpellcheckFalse MapSpellcheck = "false"
+	MapSpellcheckTrue  MapSpellcheck = "true"
+	MapSpellcheckEmpty MapSpellcheck = ""
 )
 
-type MapTranslateEnum string
+type MapTranslate string
 
 const (
-	MapTranslateEnumNo    MapTranslateEnum = "no"
-	MapTranslateEnumYes   MapTranslateEnum = "yes"
-	MapTranslateEnumEmpty MapTranslateEnum = ""
+	MapTranslateNo    MapTranslate = "no"
+	MapTranslateYes   MapTranslate = "yes"
+	MapTranslateEmpty MapTranslate = ""
 )
 
-type MapWritingsuggestionsEnum string
+type MapWritingsuggestions string
 
 const (
-	MapWritingsuggestionsEnumFalse MapWritingsuggestionsEnum = "false"
-	MapWritingsuggestionsEnumTrue  MapWritingsuggestionsEnum = "true"
-	MapWritingsuggestionsEnumEmpty MapWritingsuggestionsEnum = ""
+	MapWritingsuggestionsTrue  MapWritingsuggestions = "true"
+	MapWritingsuggestionsFalse MapWritingsuggestions = "false"
+	MapWritingsuggestionsEmpty MapWritingsuggestions = ""
 )
 
 type mapAttrs map[string]any
@@ -156,13 +156,25 @@ func (e *MapElement) Name(s string) *MapElement {
 	return e
 }
 
-func (e *MapElement) Autocapitalize(a MapAutocapitalizeEnum) *MapElement {
+func (e *MapElement) AriaUnsafe(name string, s string) *MapElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *MapElement) Aria(name string, s string) *MapElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *MapElement) Autocapitalize(a MapAutocapitalize) *MapElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *MapElement) Autocorrect(a MapAutocorrectEnum) *MapElement {
+func (e *MapElement) Autocorrect(a MapAutocorrect) *MapElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -180,7 +192,7 @@ func (e *MapElement) Class(s ...string) *MapElement {
 	return e
 }
 
-func (e *MapElement) Contenteditable(a MapContenteditableEnum) *MapElement {
+func (e *MapElement) Contenteditable(a MapContenteditable) *MapElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -198,25 +210,25 @@ func (e *MapElement) Data(name string, s string) *MapElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *MapElement) Dir(a MapDirEnum) *MapElement {
+func (e *MapElement) Dir(a MapDir) *MapElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *MapElement) Draggable(a MapDraggableEnum) *MapElement {
+func (e *MapElement) Draggable(a MapDraggable) *MapElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *MapElement) Enterkeyhint(a MapEnterkeyhintEnum) *MapElement {
+func (e *MapElement) Enterkeyhint(a MapEnterkeyhint) *MapElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *MapElement) Hidden(a MapHiddenEnum) *MapElement {
+func (e *MapElement) Hidden(a MapHidden) *MapElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -234,7 +246,7 @@ func (e *MapElement) Inert(b bool) *MapElement {
 	return e
 }
 
-func (e *MapElement) Inputmode(a MapInputmodeEnum) *MapElement {
+func (e *MapElement) Inputmode(a MapInputmode) *MapElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -294,7 +306,7 @@ func (e *MapElement) Slot(s string) *MapElement {
 	return e
 }
 
-func (e *MapElement) Spellcheck(a MapSpellcheckEnum) *MapElement {
+func (e *MapElement) Spellcheck(a MapSpellcheck) *MapElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -318,13 +330,13 @@ func (e *MapElement) Title(s string) *MapElement {
 	return e
 }
 
-func (e *MapElement) Translate(a MapTranslateEnum) *MapElement {
+func (e *MapElement) Translate(a MapTranslate) *MapElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *MapElement) Writingsuggestions(a MapWritingsuggestionsEnum) *MapElement {
+func (e *MapElement) Writingsuggestions(a MapWritingsuggestions) *MapElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

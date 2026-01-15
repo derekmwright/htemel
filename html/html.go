@@ -48,115 +48,127 @@ func HtmlTernary(condition bool, true htemel.Node, false htemel.Node) *HtmlEleme
 	return Html(false)
 }
 
-type HtmlAutocapitalizeEnum string
+type HtmlAutocapitalize string
 
 const (
-	HtmlAutocapitalizeEnumOff        HtmlAutocapitalizeEnum = "off"
-	HtmlAutocapitalizeEnumOn         HtmlAutocapitalizeEnum = "on"
-	HtmlAutocapitalizeEnumSentences  HtmlAutocapitalizeEnum = "sentences"
-	HtmlAutocapitalizeEnumWords      HtmlAutocapitalizeEnum = "words"
-	HtmlAutocapitalizeEnumCharacters HtmlAutocapitalizeEnum = "characters"
-	HtmlAutocapitalizeEnumNone       HtmlAutocapitalizeEnum = "none"
+	HtmlAutocapitalizeSentences  HtmlAutocapitalize = "sentences"
+	HtmlAutocapitalizeWords      HtmlAutocapitalize = "words"
+	HtmlAutocapitalizeCharacters HtmlAutocapitalize = "characters"
+	HtmlAutocapitalizeNone       HtmlAutocapitalize = "none"
+	HtmlAutocapitalizeOff        HtmlAutocapitalize = "off"
+	HtmlAutocapitalizeOn         HtmlAutocapitalize = "on"
 )
 
-type HtmlAutocorrectEnum string
+type HtmlAutocorrect string
 
 const (
-	HtmlAutocorrectEnumOff   HtmlAutocorrectEnum = "off"
-	HtmlAutocorrectEnumOn    HtmlAutocorrectEnum = "on"
-	HtmlAutocorrectEnumEmpty HtmlAutocorrectEnum = ""
+	HtmlAutocorrectOff   HtmlAutocorrect = "off"
+	HtmlAutocorrectOn    HtmlAutocorrect = "on"
+	HtmlAutocorrectEmpty HtmlAutocorrect = ""
 )
 
-type HtmlContenteditableEnum string
+type HtmlContenteditable string
 
 const (
-	HtmlContenteditableEnumPlaintextOnly HtmlContenteditableEnum = "plaintext-only"
-	HtmlContenteditableEnumTrue          HtmlContenteditableEnum = "true"
-	HtmlContenteditableEnumFalse         HtmlContenteditableEnum = "false"
-	HtmlContenteditableEnumEmpty         HtmlContenteditableEnum = ""
+	HtmlContenteditableFalse         HtmlContenteditable = "false"
+	HtmlContenteditablePlaintextOnly HtmlContenteditable = "plaintext-only"
+	HtmlContenteditableTrue          HtmlContenteditable = "true"
+	HtmlContenteditableEmpty         HtmlContenteditable = ""
 )
 
-type HtmlDirEnum string
+type HtmlDir string
 
 const (
-	HtmlDirEnumAuto HtmlDirEnum = "auto"
-	HtmlDirEnumLtr  HtmlDirEnum = "ltr"
-	HtmlDirEnumRtl  HtmlDirEnum = "rtl"
+	HtmlDirAuto HtmlDir = "auto"
+	HtmlDirLtr  HtmlDir = "ltr"
+	HtmlDirRtl  HtmlDir = "rtl"
 )
 
-type HtmlDraggableEnum string
+type HtmlDraggable string
 
 const (
-	HtmlDraggableEnumTrue  HtmlDraggableEnum = "true"
-	HtmlDraggableEnumFalse HtmlDraggableEnum = "false"
+	HtmlDraggableFalse HtmlDraggable = "false"
+	HtmlDraggableTrue  HtmlDraggable = "true"
 )
 
-type HtmlEnterkeyhintEnum string
+type HtmlEnterkeyhint string
 
 const (
-	HtmlEnterkeyhintEnumEnter    HtmlEnterkeyhintEnum = "enter"
-	HtmlEnterkeyhintEnumGo       HtmlEnterkeyhintEnum = "go"
-	HtmlEnterkeyhintEnumNext     HtmlEnterkeyhintEnum = "next"
-	HtmlEnterkeyhintEnumPrevious HtmlEnterkeyhintEnum = "previous"
-	HtmlEnterkeyhintEnumSearch   HtmlEnterkeyhintEnum = "search"
-	HtmlEnterkeyhintEnumSend     HtmlEnterkeyhintEnum = "send"
-	HtmlEnterkeyhintEnumDone     HtmlEnterkeyhintEnum = "done"
+	HtmlEnterkeyhintDone     HtmlEnterkeyhint = "done"
+	HtmlEnterkeyhintEnter    HtmlEnterkeyhint = "enter"
+	HtmlEnterkeyhintGo       HtmlEnterkeyhint = "go"
+	HtmlEnterkeyhintNext     HtmlEnterkeyhint = "next"
+	HtmlEnterkeyhintPrevious HtmlEnterkeyhint = "previous"
+	HtmlEnterkeyhintSearch   HtmlEnterkeyhint = "search"
+	HtmlEnterkeyhintSend     HtmlEnterkeyhint = "send"
 )
 
-type HtmlHiddenEnum string
+type HtmlHidden string
 
 const (
-	HtmlHiddenEnumHidden     HtmlHiddenEnum = "hidden"
-	HtmlHiddenEnumUntilFound HtmlHiddenEnum = "until-found"
-	HtmlHiddenEnumEmpty      HtmlHiddenEnum = ""
+	HtmlHiddenHidden     HtmlHidden = "hidden"
+	HtmlHiddenUntilFound HtmlHidden = "until-found"
+	HtmlHiddenEmpty      HtmlHidden = ""
 )
 
-type HtmlInputmodeEnum string
+type HtmlInputmode string
 
 const (
-	HtmlInputmodeEnumTel     HtmlInputmodeEnum = "tel"
-	HtmlInputmodeEnumText    HtmlInputmodeEnum = "text"
-	HtmlInputmodeEnumUrl     HtmlInputmodeEnum = "url"
-	HtmlInputmodeEnumDecimal HtmlInputmodeEnum = "decimal"
-	HtmlInputmodeEnumEmail   HtmlInputmodeEnum = "email"
-	HtmlInputmodeEnumNone    HtmlInputmodeEnum = "none"
-	HtmlInputmodeEnumNumeric HtmlInputmodeEnum = "numeric"
-	HtmlInputmodeEnumSearch  HtmlInputmodeEnum = "search"
+	HtmlInputmodeNumeric HtmlInputmode = "numeric"
+	HtmlInputmodeSearch  HtmlInputmode = "search"
+	HtmlInputmodeTel     HtmlInputmode = "tel"
+	HtmlInputmodeText    HtmlInputmode = "text"
+	HtmlInputmodeUrl     HtmlInputmode = "url"
+	HtmlInputmodeDecimal HtmlInputmode = "decimal"
+	HtmlInputmodeEmail   HtmlInputmode = "email"
+	HtmlInputmodeNone    HtmlInputmode = "none"
 )
 
-type HtmlSpellcheckEnum string
+type HtmlSpellcheck string
 
 const (
-	HtmlSpellcheckEnumFalse HtmlSpellcheckEnum = "false"
-	HtmlSpellcheckEnumTrue  HtmlSpellcheckEnum = "true"
-	HtmlSpellcheckEnumEmpty HtmlSpellcheckEnum = ""
+	HtmlSpellcheckFalse HtmlSpellcheck = "false"
+	HtmlSpellcheckTrue  HtmlSpellcheck = "true"
+	HtmlSpellcheckEmpty HtmlSpellcheck = ""
 )
 
-type HtmlTranslateEnum string
+type HtmlTranslate string
 
 const (
-	HtmlTranslateEnumNo    HtmlTranslateEnum = "no"
-	HtmlTranslateEnumYes   HtmlTranslateEnum = "yes"
-	HtmlTranslateEnumEmpty HtmlTranslateEnum = ""
+	HtmlTranslateNo    HtmlTranslate = "no"
+	HtmlTranslateYes   HtmlTranslate = "yes"
+	HtmlTranslateEmpty HtmlTranslate = ""
 )
 
-type HtmlWritingsuggestionsEnum string
+type HtmlWritingsuggestions string
 
 const (
-	HtmlWritingsuggestionsEnumFalse HtmlWritingsuggestionsEnum = "false"
-	HtmlWritingsuggestionsEnumTrue  HtmlWritingsuggestionsEnum = "true"
-	HtmlWritingsuggestionsEnumEmpty HtmlWritingsuggestionsEnum = ""
+	HtmlWritingsuggestionsFalse HtmlWritingsuggestions = "false"
+	HtmlWritingsuggestionsTrue  HtmlWritingsuggestions = "true"
+	HtmlWritingsuggestionsEmpty HtmlWritingsuggestions = ""
 )
 
 type htmlAttrs map[string]any
 
-func (e *HtmlElement) Autocapitalize(a HtmlAutocapitalizeEnum) *HtmlElement {
+func (e *HtmlElement) AriaUnsafe(name string, s string) *HtmlElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *HtmlElement) Aria(name string, s string) *HtmlElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *HtmlElement) Autocapitalize(a HtmlAutocapitalize) *HtmlElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *HtmlElement) Autocorrect(a HtmlAutocorrectEnum) *HtmlElement {
+func (e *HtmlElement) Autocorrect(a HtmlAutocorrect) *HtmlElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -174,7 +186,7 @@ func (e *HtmlElement) Class(s ...string) *HtmlElement {
 	return e
 }
 
-func (e *HtmlElement) Contenteditable(a HtmlContenteditableEnum) *HtmlElement {
+func (e *HtmlElement) Contenteditable(a HtmlContenteditable) *HtmlElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -192,25 +204,25 @@ func (e *HtmlElement) Data(name string, s string) *HtmlElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *HtmlElement) Dir(a HtmlDirEnum) *HtmlElement {
+func (e *HtmlElement) Dir(a HtmlDir) *HtmlElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *HtmlElement) Draggable(a HtmlDraggableEnum) *HtmlElement {
+func (e *HtmlElement) Draggable(a HtmlDraggable) *HtmlElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *HtmlElement) Enterkeyhint(a HtmlEnterkeyhintEnum) *HtmlElement {
+func (e *HtmlElement) Enterkeyhint(a HtmlEnterkeyhint) *HtmlElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *HtmlElement) Hidden(a HtmlHiddenEnum) *HtmlElement {
+func (e *HtmlElement) Hidden(a HtmlHidden) *HtmlElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -228,7 +240,7 @@ func (e *HtmlElement) Inert(b bool) *HtmlElement {
 	return e
 }
 
-func (e *HtmlElement) Inputmode(a HtmlInputmodeEnum) *HtmlElement {
+func (e *HtmlElement) Inputmode(a HtmlInputmode) *HtmlElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -288,7 +300,7 @@ func (e *HtmlElement) Slot(s string) *HtmlElement {
 	return e
 }
 
-func (e *HtmlElement) Spellcheck(a HtmlSpellcheckEnum) *HtmlElement {
+func (e *HtmlElement) Spellcheck(a HtmlSpellcheck) *HtmlElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -312,13 +324,13 @@ func (e *HtmlElement) Title(s string) *HtmlElement {
 	return e
 }
 
-func (e *HtmlElement) Translate(a HtmlTranslateEnum) *HtmlElement {
+func (e *HtmlElement) Translate(a HtmlTranslate) *HtmlElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *HtmlElement) Writingsuggestions(a HtmlWritingsuggestionsEnum) *HtmlElement {
+func (e *HtmlElement) Writingsuggestions(a HtmlWritingsuggestions) *HtmlElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e

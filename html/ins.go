@@ -48,104 +48,104 @@ func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement
 	return Ins(false)
 }
 
-type InsAutocapitalizeEnum string
+type InsAutocapitalize string
 
 const (
-	InsAutocapitalizeEnumSentences  InsAutocapitalizeEnum = "sentences"
-	InsAutocapitalizeEnumWords      InsAutocapitalizeEnum = "words"
-	InsAutocapitalizeEnumCharacters InsAutocapitalizeEnum = "characters"
-	InsAutocapitalizeEnumNone       InsAutocapitalizeEnum = "none"
-	InsAutocapitalizeEnumOff        InsAutocapitalizeEnum = "off"
-	InsAutocapitalizeEnumOn         InsAutocapitalizeEnum = "on"
+	InsAutocapitalizeOff        InsAutocapitalize = "off"
+	InsAutocapitalizeOn         InsAutocapitalize = "on"
+	InsAutocapitalizeSentences  InsAutocapitalize = "sentences"
+	InsAutocapitalizeWords      InsAutocapitalize = "words"
+	InsAutocapitalizeCharacters InsAutocapitalize = "characters"
+	InsAutocapitalizeNone       InsAutocapitalize = "none"
 )
 
-type InsAutocorrectEnum string
+type InsAutocorrect string
 
 const (
-	InsAutocorrectEnumOff   InsAutocorrectEnum = "off"
-	InsAutocorrectEnumOn    InsAutocorrectEnum = "on"
-	InsAutocorrectEnumEmpty InsAutocorrectEnum = ""
+	InsAutocorrectOff   InsAutocorrect = "off"
+	InsAutocorrectOn    InsAutocorrect = "on"
+	InsAutocorrectEmpty InsAutocorrect = ""
 )
 
-type InsContenteditableEnum string
+type InsContenteditable string
 
 const (
-	InsContenteditableEnumFalse         InsContenteditableEnum = "false"
-	InsContenteditableEnumPlaintextOnly InsContenteditableEnum = "plaintext-only"
-	InsContenteditableEnumTrue          InsContenteditableEnum = "true"
-	InsContenteditableEnumEmpty         InsContenteditableEnum = ""
+	InsContenteditablePlaintextOnly InsContenteditable = "plaintext-only"
+	InsContenteditableTrue          InsContenteditable = "true"
+	InsContenteditableFalse         InsContenteditable = "false"
+	InsContenteditableEmpty         InsContenteditable = ""
 )
 
-type InsDirEnum string
+type InsDir string
 
 const (
-	InsDirEnumLtr  InsDirEnum = "ltr"
-	InsDirEnumRtl  InsDirEnum = "rtl"
-	InsDirEnumAuto InsDirEnum = "auto"
+	InsDirAuto InsDir = "auto"
+	InsDirLtr  InsDir = "ltr"
+	InsDirRtl  InsDir = "rtl"
 )
 
-type InsDraggableEnum string
+type InsDraggable string
 
 const (
-	InsDraggableEnumFalse InsDraggableEnum = "false"
-	InsDraggableEnumTrue  InsDraggableEnum = "true"
+	InsDraggableFalse InsDraggable = "false"
+	InsDraggableTrue  InsDraggable = "true"
 )
 
-type InsEnterkeyhintEnum string
+type InsEnterkeyhint string
 
 const (
-	InsEnterkeyhintEnumSearch   InsEnterkeyhintEnum = "search"
-	InsEnterkeyhintEnumSend     InsEnterkeyhintEnum = "send"
-	InsEnterkeyhintEnumDone     InsEnterkeyhintEnum = "done"
-	InsEnterkeyhintEnumEnter    InsEnterkeyhintEnum = "enter"
-	InsEnterkeyhintEnumGo       InsEnterkeyhintEnum = "go"
-	InsEnterkeyhintEnumNext     InsEnterkeyhintEnum = "next"
-	InsEnterkeyhintEnumPrevious InsEnterkeyhintEnum = "previous"
+	InsEnterkeyhintGo       InsEnterkeyhint = "go"
+	InsEnterkeyhintNext     InsEnterkeyhint = "next"
+	InsEnterkeyhintPrevious InsEnterkeyhint = "previous"
+	InsEnterkeyhintSearch   InsEnterkeyhint = "search"
+	InsEnterkeyhintSend     InsEnterkeyhint = "send"
+	InsEnterkeyhintDone     InsEnterkeyhint = "done"
+	InsEnterkeyhintEnter    InsEnterkeyhint = "enter"
 )
 
-type InsHiddenEnum string
+type InsHidden string
 
 const (
-	InsHiddenEnumHidden     InsHiddenEnum = "hidden"
-	InsHiddenEnumUntilFound InsHiddenEnum = "until-found"
-	InsHiddenEnumEmpty      InsHiddenEnum = ""
+	InsHiddenHidden     InsHidden = "hidden"
+	InsHiddenUntilFound InsHidden = "until-found"
+	InsHiddenEmpty      InsHidden = ""
 )
 
-type InsInputmodeEnum string
+type InsInputmode string
 
 const (
-	InsInputmodeEnumEmail   InsInputmodeEnum = "email"
-	InsInputmodeEnumNone    InsInputmodeEnum = "none"
-	InsInputmodeEnumNumeric InsInputmodeEnum = "numeric"
-	InsInputmodeEnumSearch  InsInputmodeEnum = "search"
-	InsInputmodeEnumTel     InsInputmodeEnum = "tel"
-	InsInputmodeEnumText    InsInputmodeEnum = "text"
-	InsInputmodeEnumUrl     InsInputmodeEnum = "url"
-	InsInputmodeEnumDecimal InsInputmodeEnum = "decimal"
+	InsInputmodeText    InsInputmode = "text"
+	InsInputmodeUrl     InsInputmode = "url"
+	InsInputmodeDecimal InsInputmode = "decimal"
+	InsInputmodeEmail   InsInputmode = "email"
+	InsInputmodeNone    InsInputmode = "none"
+	InsInputmodeNumeric InsInputmode = "numeric"
+	InsInputmodeSearch  InsInputmode = "search"
+	InsInputmodeTel     InsInputmode = "tel"
 )
 
-type InsSpellcheckEnum string
+type InsSpellcheck string
 
 const (
-	InsSpellcheckEnumFalse InsSpellcheckEnum = "false"
-	InsSpellcheckEnumTrue  InsSpellcheckEnum = "true"
-	InsSpellcheckEnumEmpty InsSpellcheckEnum = ""
+	InsSpellcheckFalse InsSpellcheck = "false"
+	InsSpellcheckTrue  InsSpellcheck = "true"
+	InsSpellcheckEmpty InsSpellcheck = ""
 )
 
-type InsTranslateEnum string
+type InsTranslate string
 
 const (
-	InsTranslateEnumYes   InsTranslateEnum = "yes"
-	InsTranslateEnumNo    InsTranslateEnum = "no"
-	InsTranslateEnumEmpty InsTranslateEnum = ""
+	InsTranslateNo    InsTranslate = "no"
+	InsTranslateYes   InsTranslate = "yes"
+	InsTranslateEmpty InsTranslate = ""
 )
 
-type InsWritingsuggestionsEnum string
+type InsWritingsuggestions string
 
 const (
-	InsWritingsuggestionsEnumFalse InsWritingsuggestionsEnum = "false"
-	InsWritingsuggestionsEnumTrue  InsWritingsuggestionsEnum = "true"
-	InsWritingsuggestionsEnumEmpty InsWritingsuggestionsEnum = ""
+	InsWritingsuggestionsFalse InsWritingsuggestions = "false"
+	InsWritingsuggestionsTrue  InsWritingsuggestions = "true"
+	InsWritingsuggestionsEmpty InsWritingsuggestions = ""
 )
 
 type insAttrs map[string]any
@@ -162,13 +162,25 @@ func (e *InsElement) Datetime(s string) *InsElement {
 	return e
 }
 
-func (e *InsElement) Autocapitalize(a InsAutocapitalizeEnum) *InsElement {
+func (e *InsElement) AriaUnsafe(name string, s string) *InsElement {
+	tag := strings.ToLower("aria-" + name)
+
+	e.attributes[tag] = s
+
+	return e
+}
+
+func (e *InsElement) Aria(name string, s string) *InsElement {
+	return e.AriaUnsafe(name, html.EscapeString(s))
+}
+
+func (e *InsElement) Autocapitalize(a InsAutocapitalize) *InsElement {
 	e.attributes["autocapitalize"] = a
 
 	return e
 }
 
-func (e *InsElement) Autocorrect(a InsAutocorrectEnum) *InsElement {
+func (e *InsElement) Autocorrect(a InsAutocorrect) *InsElement {
 	e.attributes["autocorrect"] = a
 
 	return e
@@ -186,7 +198,7 @@ func (e *InsElement) Class(s ...string) *InsElement {
 	return e
 }
 
-func (e *InsElement) Contenteditable(a InsContenteditableEnum) *InsElement {
+func (e *InsElement) Contenteditable(a InsContenteditable) *InsElement {
 	e.attributes["contenteditable"] = a
 
 	return e
@@ -204,25 +216,25 @@ func (e *InsElement) Data(name string, s string) *InsElement {
 	return e.DataUnsafe(name, html.EscapeString(s))
 }
 
-func (e *InsElement) Dir(a InsDirEnum) *InsElement {
+func (e *InsElement) Dir(a InsDir) *InsElement {
 	e.attributes["dir"] = a
 
 	return e
 }
 
-func (e *InsElement) Draggable(a InsDraggableEnum) *InsElement {
+func (e *InsElement) Draggable(a InsDraggable) *InsElement {
 	e.attributes["draggable"] = a
 
 	return e
 }
 
-func (e *InsElement) Enterkeyhint(a InsEnterkeyhintEnum) *InsElement {
+func (e *InsElement) Enterkeyhint(a InsEnterkeyhint) *InsElement {
 	e.attributes["enterkeyhint"] = a
 
 	return e
 }
 
-func (e *InsElement) Hidden(a InsHiddenEnum) *InsElement {
+func (e *InsElement) Hidden(a InsHidden) *InsElement {
 	e.attributes["hidden"] = a
 
 	return e
@@ -240,7 +252,7 @@ func (e *InsElement) Inert(b bool) *InsElement {
 	return e
 }
 
-func (e *InsElement) Inputmode(a InsInputmodeEnum) *InsElement {
+func (e *InsElement) Inputmode(a InsInputmode) *InsElement {
 	e.attributes["inputmode"] = a
 
 	return e
@@ -300,7 +312,7 @@ func (e *InsElement) Slot(s string) *InsElement {
 	return e
 }
 
-func (e *InsElement) Spellcheck(a InsSpellcheckEnum) *InsElement {
+func (e *InsElement) Spellcheck(a InsSpellcheck) *InsElement {
 	e.attributes["spellcheck"] = a
 
 	return e
@@ -324,13 +336,13 @@ func (e *InsElement) Title(s string) *InsElement {
 	return e
 }
 
-func (e *InsElement) Translate(a InsTranslateEnum) *InsElement {
+func (e *InsElement) Translate(a InsTranslate) *InsElement {
 	e.attributes["translate"] = a
 
 	return e
 }
 
-func (e *InsElement) Writingsuggestions(a InsWritingsuggestionsEnum) *InsElement {
+func (e *InsElement) Writingsuggestions(a InsWritingsuggestions) *InsElement {
 	e.attributes["writingsuggestions"] = a
 
 	return e
