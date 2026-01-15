@@ -51,12 +51,12 @@ func MarkTernary(condition bool, true htemel.Node, false htemel.Node) *MarkEleme
 type MarkAutocapitalize string
 
 const (
-	MarkAutocapitalizeOff        MarkAutocapitalize = "off"
-	MarkAutocapitalizeOn         MarkAutocapitalize = "on"
-	MarkAutocapitalizeSentences  MarkAutocapitalize = "sentences"
 	MarkAutocapitalizeWords      MarkAutocapitalize = "words"
 	MarkAutocapitalizeCharacters MarkAutocapitalize = "characters"
 	MarkAutocapitalizeNone       MarkAutocapitalize = "none"
+	MarkAutocapitalizeOff        MarkAutocapitalize = "off"
+	MarkAutocapitalizeOn         MarkAutocapitalize = "on"
+	MarkAutocapitalizeSentences  MarkAutocapitalize = "sentences"
 )
 
 type MarkAutocorrect string
@@ -79,9 +79,9 @@ const (
 type MarkDir string
 
 const (
-	MarkDirAuto MarkDir = "auto"
 	MarkDirLtr  MarkDir = "ltr"
 	MarkDirRtl  MarkDir = "rtl"
+	MarkDirAuto MarkDir = "auto"
 )
 
 type MarkDraggable string
@@ -106,22 +106,22 @@ const (
 type MarkHidden string
 
 const (
-	MarkHiddenHidden     MarkHidden = "hidden"
 	MarkHiddenUntilFound MarkHidden = "until-found"
+	MarkHiddenHidden     MarkHidden = "hidden"
 	MarkHiddenEmpty      MarkHidden = ""
 )
 
 type MarkInputmode string
 
 const (
+	MarkInputmodeNumeric MarkInputmode = "numeric"
+	MarkInputmodeSearch  MarkInputmode = "search"
 	MarkInputmodeTel     MarkInputmode = "tel"
 	MarkInputmodeText    MarkInputmode = "text"
 	MarkInputmodeUrl     MarkInputmode = "url"
 	MarkInputmodeDecimal MarkInputmode = "decimal"
 	MarkInputmodeEmail   MarkInputmode = "email"
 	MarkInputmodeNone    MarkInputmode = "none"
-	MarkInputmodeNumeric MarkInputmode = "numeric"
-	MarkInputmodeSearch  MarkInputmode = "search"
 )
 
 type MarkSpellcheck string
@@ -290,6 +290,12 @@ func (e *MarkElement) Nonce(s string) *MarkElement {
 
 func (e *MarkElement) Popover(s string) *MarkElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *MarkElement) Role(s string) *MarkElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,12 +51,12 @@ func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
 type UAutocapitalize string
 
 const (
-	UAutocapitalizeOn         UAutocapitalize = "on"
-	UAutocapitalizeSentences  UAutocapitalize = "sentences"
-	UAutocapitalizeWords      UAutocapitalize = "words"
 	UAutocapitalizeCharacters UAutocapitalize = "characters"
 	UAutocapitalizeNone       UAutocapitalize = "none"
 	UAutocapitalizeOff        UAutocapitalize = "off"
+	UAutocapitalizeOn         UAutocapitalize = "on"
+	UAutocapitalizeSentences  UAutocapitalize = "sentences"
+	UAutocapitalizeWords      UAutocapitalize = "words"
 )
 
 type UAutocorrect string
@@ -79,9 +79,9 @@ const (
 type UDir string
 
 const (
-	UDirRtl  UDir = "rtl"
 	UDirAuto UDir = "auto"
 	UDirLtr  UDir = "ltr"
+	UDirRtl  UDir = "rtl"
 )
 
 type UDraggable string
@@ -94,34 +94,34 @@ const (
 type UEnterkeyhint string
 
 const (
+	UEnterkeyhintNext     UEnterkeyhint = "next"
+	UEnterkeyhintPrevious UEnterkeyhint = "previous"
+	UEnterkeyhintSearch   UEnterkeyhint = "search"
 	UEnterkeyhintSend     UEnterkeyhint = "send"
 	UEnterkeyhintDone     UEnterkeyhint = "done"
 	UEnterkeyhintEnter    UEnterkeyhint = "enter"
 	UEnterkeyhintGo       UEnterkeyhint = "go"
-	UEnterkeyhintNext     UEnterkeyhint = "next"
-	UEnterkeyhintPrevious UEnterkeyhint = "previous"
-	UEnterkeyhintSearch   UEnterkeyhint = "search"
 )
 
 type UHidden string
 
 const (
-	UHiddenUntilFound UHidden = "until-found"
 	UHiddenHidden     UHidden = "hidden"
+	UHiddenUntilFound UHidden = "until-found"
 	UHiddenEmpty      UHidden = ""
 )
 
 type UInputmode string
 
 const (
+	UInputmodeNumeric UInputmode = "numeric"
+	UInputmodeSearch  UInputmode = "search"
 	UInputmodeTel     UInputmode = "tel"
 	UInputmodeText    UInputmode = "text"
 	UInputmodeUrl     UInputmode = "url"
 	UInputmodeDecimal UInputmode = "decimal"
 	UInputmodeEmail   UInputmode = "email"
 	UInputmodeNone    UInputmode = "none"
-	UInputmodeNumeric UInputmode = "numeric"
-	UInputmodeSearch  UInputmode = "search"
 )
 
 type USpellcheck string
@@ -135,8 +135,8 @@ const (
 type UTranslate string
 
 const (
-	UTranslateYes   UTranslate = "yes"
 	UTranslateNo    UTranslate = "no"
+	UTranslateYes   UTranslate = "yes"
 	UTranslateEmpty UTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *UElement) Nonce(s string) *UElement {
 
 func (e *UElement) Popover(s string) *UElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *UElement) Role(s string) *UElement {
+	e.attributes["role"] = s
 
 	return e
 }

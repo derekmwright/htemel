@@ -51,12 +51,12 @@ func H2Ternary(condition bool, true htemel.Node, false htemel.Node) *H2Element {
 type H2Autocapitalize string
 
 const (
-	H2AutocapitalizeCharacters H2Autocapitalize = "characters"
-	H2AutocapitalizeNone       H2Autocapitalize = "none"
-	H2AutocapitalizeOff        H2Autocapitalize = "off"
 	H2AutocapitalizeOn         H2Autocapitalize = "on"
 	H2AutocapitalizeSentences  H2Autocapitalize = "sentences"
 	H2AutocapitalizeWords      H2Autocapitalize = "words"
+	H2AutocapitalizeCharacters H2Autocapitalize = "characters"
+	H2AutocapitalizeNone       H2Autocapitalize = "none"
+	H2AutocapitalizeOff        H2Autocapitalize = "off"
 )
 
 type H2Autocorrect string
@@ -70,18 +70,18 @@ const (
 type H2Contenteditable string
 
 const (
+	H2ContenteditableFalse         H2Contenteditable = "false"
 	H2ContenteditablePlaintextOnly H2Contenteditable = "plaintext-only"
 	H2ContenteditableTrue          H2Contenteditable = "true"
-	H2ContenteditableFalse         H2Contenteditable = "false"
 	H2ContenteditableEmpty         H2Contenteditable = ""
 )
 
 type H2Dir string
 
 const (
+	H2DirRtl  H2Dir = "rtl"
 	H2DirAuto H2Dir = "auto"
 	H2DirLtr  H2Dir = "ltr"
-	H2DirRtl  H2Dir = "rtl"
 )
 
 type H2Draggable string
@@ -114,6 +114,7 @@ const (
 type H2Inputmode string
 
 const (
+	H2InputmodeNone    H2Inputmode = "none"
 	H2InputmodeNumeric H2Inputmode = "numeric"
 	H2InputmodeSearch  H2Inputmode = "search"
 	H2InputmodeTel     H2Inputmode = "tel"
@@ -121,7 +122,6 @@ const (
 	H2InputmodeUrl     H2Inputmode = "url"
 	H2InputmodeDecimal H2Inputmode = "decimal"
 	H2InputmodeEmail   H2Inputmode = "email"
-	H2InputmodeNone    H2Inputmode = "none"
 )
 
 type H2Spellcheck string
@@ -290,6 +290,12 @@ func (e *H2Element) Nonce(s string) *H2Element {
 
 func (e *H2Element) Popover(s string) *H2Element {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *H2Element) Role(s string) *H2Element {
+	e.attributes["role"] = s
 
 	return e
 }

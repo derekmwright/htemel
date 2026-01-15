@@ -51,12 +51,12 @@ func SlotTernary(condition bool, true htemel.Node, false htemel.Node) *SlotEleme
 type SlotAutocapitalize string
 
 const (
-	SlotAutocapitalizeSentences  SlotAutocapitalize = "sentences"
 	SlotAutocapitalizeWords      SlotAutocapitalize = "words"
 	SlotAutocapitalizeCharacters SlotAutocapitalize = "characters"
 	SlotAutocapitalizeNone       SlotAutocapitalize = "none"
 	SlotAutocapitalizeOff        SlotAutocapitalize = "off"
 	SlotAutocapitalizeOn         SlotAutocapitalize = "on"
+	SlotAutocapitalizeSentences  SlotAutocapitalize = "sentences"
 )
 
 type SlotAutocorrect string
@@ -94,13 +94,13 @@ const (
 type SlotEnterkeyhint string
 
 const (
-	SlotEnterkeyhintGo       SlotEnterkeyhint = "go"
-	SlotEnterkeyhintNext     SlotEnterkeyhint = "next"
-	SlotEnterkeyhintPrevious SlotEnterkeyhint = "previous"
 	SlotEnterkeyhintSearch   SlotEnterkeyhint = "search"
 	SlotEnterkeyhintSend     SlotEnterkeyhint = "send"
 	SlotEnterkeyhintDone     SlotEnterkeyhint = "done"
 	SlotEnterkeyhintEnter    SlotEnterkeyhint = "enter"
+	SlotEnterkeyhintGo       SlotEnterkeyhint = "go"
+	SlotEnterkeyhintNext     SlotEnterkeyhint = "next"
+	SlotEnterkeyhintPrevious SlotEnterkeyhint = "previous"
 )
 
 type SlotHidden string
@@ -114,14 +114,14 @@ const (
 type SlotInputmode string
 
 const (
-	SlotInputmodeTel     SlotInputmode = "tel"
-	SlotInputmodeText    SlotInputmode = "text"
-	SlotInputmodeUrl     SlotInputmode = "url"
-	SlotInputmodeDecimal SlotInputmode = "decimal"
 	SlotInputmodeEmail   SlotInputmode = "email"
 	SlotInputmodeNone    SlotInputmode = "none"
 	SlotInputmodeNumeric SlotInputmode = "numeric"
 	SlotInputmodeSearch  SlotInputmode = "search"
+	SlotInputmodeTel     SlotInputmode = "tel"
+	SlotInputmodeText    SlotInputmode = "text"
+	SlotInputmodeUrl     SlotInputmode = "url"
+	SlotInputmodeDecimal SlotInputmode = "decimal"
 )
 
 type SlotSpellcheck string
@@ -135,16 +135,16 @@ const (
 type SlotTranslate string
 
 const (
-	SlotTranslateYes   SlotTranslate = "yes"
 	SlotTranslateNo    SlotTranslate = "no"
+	SlotTranslateYes   SlotTranslate = "yes"
 	SlotTranslateEmpty SlotTranslate = ""
 )
 
 type SlotWritingsuggestions string
 
 const (
-	SlotWritingsuggestionsFalse SlotWritingsuggestions = "false"
 	SlotWritingsuggestionsTrue  SlotWritingsuggestions = "true"
+	SlotWritingsuggestionsFalse SlotWritingsuggestions = "false"
 	SlotWritingsuggestionsEmpty SlotWritingsuggestions = ""
 )
 
@@ -296,6 +296,12 @@ func (e *SlotElement) Nonce(s string) *SlotElement {
 
 func (e *SlotElement) Popover(s string) *SlotElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *SlotElement) Role(s string) *SlotElement {
+	e.attributes["role"] = s
 
 	return e
 }

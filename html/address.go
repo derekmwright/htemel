@@ -70,9 +70,9 @@ const (
 type AddressContenteditable string
 
 const (
-	AddressContenteditableFalse         AddressContenteditable = "false"
 	AddressContenteditablePlaintextOnly AddressContenteditable = "plaintext-only"
 	AddressContenteditableTrue          AddressContenteditable = "true"
+	AddressContenteditableFalse         AddressContenteditable = "false"
 	AddressContenteditableEmpty         AddressContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type AddressEnterkeyhint string
 
 const (
+	AddressEnterkeyhintSend     AddressEnterkeyhint = "send"
+	AddressEnterkeyhintDone     AddressEnterkeyhint = "done"
+	AddressEnterkeyhintEnter    AddressEnterkeyhint = "enter"
 	AddressEnterkeyhintGo       AddressEnterkeyhint = "go"
 	AddressEnterkeyhintNext     AddressEnterkeyhint = "next"
 	AddressEnterkeyhintPrevious AddressEnterkeyhint = "previous"
 	AddressEnterkeyhintSearch   AddressEnterkeyhint = "search"
-	AddressEnterkeyhintSend     AddressEnterkeyhint = "send"
-	AddressEnterkeyhintDone     AddressEnterkeyhint = "done"
-	AddressEnterkeyhintEnter    AddressEnterkeyhint = "enter"
 )
 
 type AddressHidden string
@@ -114,14 +114,14 @@ const (
 type AddressInputmode string
 
 const (
+	AddressInputmodeTel     AddressInputmode = "tel"
+	AddressInputmodeText    AddressInputmode = "text"
 	AddressInputmodeUrl     AddressInputmode = "url"
 	AddressInputmodeDecimal AddressInputmode = "decimal"
 	AddressInputmodeEmail   AddressInputmode = "email"
 	AddressInputmodeNone    AddressInputmode = "none"
 	AddressInputmodeNumeric AddressInputmode = "numeric"
 	AddressInputmodeSearch  AddressInputmode = "search"
-	AddressInputmodeTel     AddressInputmode = "tel"
-	AddressInputmodeText    AddressInputmode = "text"
 )
 
 type AddressSpellcheck string
@@ -135,8 +135,8 @@ const (
 type AddressTranslate string
 
 const (
-	AddressTranslateYes   AddressTranslate = "yes"
 	AddressTranslateNo    AddressTranslate = "no"
+	AddressTranslateYes   AddressTranslate = "yes"
 	AddressTranslateEmpty AddressTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *AddressElement) Nonce(s string) *AddressElement {
 
 func (e *AddressElement) Popover(s string) *AddressElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *AddressElement) Role(s string) *AddressElement {
+	e.attributes["role"] = s
 
 	return e
 }

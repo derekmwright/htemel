@@ -51,12 +51,12 @@ func DatalistTernary(condition bool, true htemel.Node, false htemel.Node) *Datal
 type DatalistAutocapitalize string
 
 const (
-	DatalistAutocapitalizeWords      DatalistAutocapitalize = "words"
 	DatalistAutocapitalizeCharacters DatalistAutocapitalize = "characters"
 	DatalistAutocapitalizeNone       DatalistAutocapitalize = "none"
 	DatalistAutocapitalizeOff        DatalistAutocapitalize = "off"
 	DatalistAutocapitalizeOn         DatalistAutocapitalize = "on"
 	DatalistAutocapitalizeSentences  DatalistAutocapitalize = "sentences"
+	DatalistAutocapitalizeWords      DatalistAutocapitalize = "words"
 )
 
 type DatalistAutocorrect string
@@ -94,13 +94,13 @@ const (
 type DatalistEnterkeyhint string
 
 const (
-	DatalistEnterkeyhintDone     DatalistEnterkeyhint = "done"
-	DatalistEnterkeyhintEnter    DatalistEnterkeyhint = "enter"
 	DatalistEnterkeyhintGo       DatalistEnterkeyhint = "go"
 	DatalistEnterkeyhintNext     DatalistEnterkeyhint = "next"
 	DatalistEnterkeyhintPrevious DatalistEnterkeyhint = "previous"
 	DatalistEnterkeyhintSearch   DatalistEnterkeyhint = "search"
 	DatalistEnterkeyhintSend     DatalistEnterkeyhint = "send"
+	DatalistEnterkeyhintDone     DatalistEnterkeyhint = "done"
+	DatalistEnterkeyhintEnter    DatalistEnterkeyhint = "enter"
 )
 
 type DatalistHidden string
@@ -114,14 +114,14 @@ const (
 type DatalistInputmode string
 
 const (
+	DatalistInputmodeDecimal DatalistInputmode = "decimal"
+	DatalistInputmodeEmail   DatalistInputmode = "email"
+	DatalistInputmodeNone    DatalistInputmode = "none"
 	DatalistInputmodeNumeric DatalistInputmode = "numeric"
 	DatalistInputmodeSearch  DatalistInputmode = "search"
 	DatalistInputmodeTel     DatalistInputmode = "tel"
 	DatalistInputmodeText    DatalistInputmode = "text"
 	DatalistInputmodeUrl     DatalistInputmode = "url"
-	DatalistInputmodeDecimal DatalistInputmode = "decimal"
-	DatalistInputmodeEmail   DatalistInputmode = "email"
-	DatalistInputmodeNone    DatalistInputmode = "none"
 )
 
 type DatalistSpellcheck string
@@ -290,6 +290,12 @@ func (e *DatalistElement) Nonce(s string) *DatalistElement {
 
 func (e *DatalistElement) Popover(s string) *DatalistElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *DatalistElement) Role(s string) *DatalistElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,37 +51,37 @@ func FieldsetTernary(condition bool, true htemel.Node, false htemel.Node) *Field
 type FieldsetAutocapitalize string
 
 const (
+	FieldsetAutocapitalizeWords      FieldsetAutocapitalize = "words"
 	FieldsetAutocapitalizeCharacters FieldsetAutocapitalize = "characters"
 	FieldsetAutocapitalizeNone       FieldsetAutocapitalize = "none"
 	FieldsetAutocapitalizeOff        FieldsetAutocapitalize = "off"
 	FieldsetAutocapitalizeOn         FieldsetAutocapitalize = "on"
 	FieldsetAutocapitalizeSentences  FieldsetAutocapitalize = "sentences"
-	FieldsetAutocapitalizeWords      FieldsetAutocapitalize = "words"
 )
 
 type FieldsetAutocorrect string
 
 const (
-	FieldsetAutocorrectOff   FieldsetAutocorrect = "off"
 	FieldsetAutocorrectOn    FieldsetAutocorrect = "on"
+	FieldsetAutocorrectOff   FieldsetAutocorrect = "off"
 	FieldsetAutocorrectEmpty FieldsetAutocorrect = ""
 )
 
 type FieldsetContenteditable string
 
 const (
-	FieldsetContenteditableTrue          FieldsetContenteditable = "true"
 	FieldsetContenteditableFalse         FieldsetContenteditable = "false"
 	FieldsetContenteditablePlaintextOnly FieldsetContenteditable = "plaintext-only"
+	FieldsetContenteditableTrue          FieldsetContenteditable = "true"
 	FieldsetContenteditableEmpty         FieldsetContenteditable = ""
 )
 
 type FieldsetDir string
 
 const (
-	FieldsetDirRtl  FieldsetDir = "rtl"
 	FieldsetDirAuto FieldsetDir = "auto"
 	FieldsetDirLtr  FieldsetDir = "ltr"
+	FieldsetDirRtl  FieldsetDir = "rtl"
 )
 
 type FieldsetDraggable string
@@ -106,22 +106,22 @@ const (
 type FieldsetHidden string
 
 const (
-	FieldsetHiddenUntilFound FieldsetHidden = "until-found"
 	FieldsetHiddenHidden     FieldsetHidden = "hidden"
+	FieldsetHiddenUntilFound FieldsetHidden = "until-found"
 	FieldsetHiddenEmpty      FieldsetHidden = ""
 )
 
 type FieldsetInputmode string
 
 const (
+	FieldsetInputmodeDecimal FieldsetInputmode = "decimal"
+	FieldsetInputmodeEmail   FieldsetInputmode = "email"
 	FieldsetInputmodeNone    FieldsetInputmode = "none"
 	FieldsetInputmodeNumeric FieldsetInputmode = "numeric"
 	FieldsetInputmodeSearch  FieldsetInputmode = "search"
 	FieldsetInputmodeTel     FieldsetInputmode = "tel"
 	FieldsetInputmodeText    FieldsetInputmode = "text"
 	FieldsetInputmodeUrl     FieldsetInputmode = "url"
-	FieldsetInputmodeDecimal FieldsetInputmode = "decimal"
-	FieldsetInputmodeEmail   FieldsetInputmode = "email"
 )
 
 type FieldsetSpellcheck string
@@ -135,8 +135,8 @@ const (
 type FieldsetTranslate string
 
 const (
-	FieldsetTranslateYes   FieldsetTranslate = "yes"
 	FieldsetTranslateNo    FieldsetTranslate = "no"
+	FieldsetTranslateYes   FieldsetTranslate = "yes"
 	FieldsetTranslateEmpty FieldsetTranslate = ""
 )
 
@@ -308,6 +308,12 @@ func (e *FieldsetElement) Nonce(s string) *FieldsetElement {
 
 func (e *FieldsetElement) Popover(s string) *FieldsetElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *FieldsetElement) Role(s string) *FieldsetElement {
+	e.attributes["role"] = s
 
 	return e
 }

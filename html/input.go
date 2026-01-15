@@ -57,36 +57,36 @@ const (
 type InputPopovertargetaction string
 
 const (
+	InputPopovertargetactionHide   InputPopovertargetaction = "hide"
 	InputPopovertargetactionShow   InputPopovertargetaction = "show"
 	InputPopovertargetactionToggle InputPopovertargetaction = "toggle"
-	InputPopovertargetactionHide   InputPopovertargetaction = "hide"
 )
 
 type InputType string
 
 const (
-	InputTypeTel           InputType = "tel"
-	InputTypeText          InputType = "text"
-	InputTypeCheckbox      InputType = "checkbox"
-	InputTypeColor         InputType = "color"
-	InputTypeFile          InputType = "file"
+	InputTypeMonth         InputType = "month"
+	InputTypePassword      InputType = "password"
+	InputTypeRange         InputType = "range"
+	InputTypeEmail         InputType = "email"
 	InputTypeHidden        InputType = "hidden"
+	InputTypeNumber        InputType = "number"
+	InputTypeWeek          InputType = "week"
+	InputTypeButton        InputType = "button"
+	InputTypeDatetimeLocal InputType = "datetime-local"
 	InputTypeImage         InputType = "image"
 	InputTypeReset         InputType = "reset"
 	InputTypeSearch        InputType = "search"
-	InputTypeRange         InputType = "range"
-	InputTypeWeek          InputType = "week"
+	InputTypeSubmit        InputType = "submit"
+	InputTypeTel           InputType = "tel"
+	InputTypeText          InputType = "text"
+	InputTypeDate          InputType = "date"
 	InputTypeRadio         InputType = "radio"
-	InputTypeEmail         InputType = "email"
-	InputTypeMonth         InputType = "month"
-	InputTypeNumber        InputType = "number"
 	InputTypeTime          InputType = "time"
 	InputTypeUrl           InputType = "url"
-	InputTypeButton        InputType = "button"
-	InputTypeDate          InputType = "date"
-	InputTypeDatetimeLocal InputType = "datetime-local"
-	InputTypePassword      InputType = "password"
-	InputTypeSubmit        InputType = "submit"
+	InputTypeCheckbox      InputType = "checkbox"
+	InputTypeColor         InputType = "color"
+	InputTypeFile          InputType = "file"
 )
 
 type InputAutocapitalize string
@@ -111,9 +111,9 @@ const (
 type InputContenteditable string
 
 const (
+	InputContenteditableFalse         InputContenteditable = "false"
 	InputContenteditablePlaintextOnly InputContenteditable = "plaintext-only"
 	InputContenteditableTrue          InputContenteditable = "true"
-	InputContenteditableFalse         InputContenteditable = "false"
 	InputContenteditableEmpty         InputContenteditable = ""
 )
 
@@ -135,13 +135,13 @@ const (
 type InputEnterkeyhint string
 
 const (
+	InputEnterkeyhintSearch   InputEnterkeyhint = "search"
+	InputEnterkeyhintSend     InputEnterkeyhint = "send"
+	InputEnterkeyhintDone     InputEnterkeyhint = "done"
 	InputEnterkeyhintEnter    InputEnterkeyhint = "enter"
 	InputEnterkeyhintGo       InputEnterkeyhint = "go"
 	InputEnterkeyhintNext     InputEnterkeyhint = "next"
 	InputEnterkeyhintPrevious InputEnterkeyhint = "previous"
-	InputEnterkeyhintSearch   InputEnterkeyhint = "search"
-	InputEnterkeyhintSend     InputEnterkeyhint = "send"
-	InputEnterkeyhintDone     InputEnterkeyhint = "done"
 )
 
 type InputHidden string
@@ -155,6 +155,7 @@ const (
 type InputInputmode string
 
 const (
+	InputInputmodeUrl     InputInputmode = "url"
 	InputInputmodeDecimal InputInputmode = "decimal"
 	InputInputmodeEmail   InputInputmode = "email"
 	InputInputmodeNone    InputInputmode = "none"
@@ -162,7 +163,6 @@ const (
 	InputInputmodeSearch  InputInputmode = "search"
 	InputInputmodeTel     InputInputmode = "tel"
 	InputInputmodeText    InputInputmode = "text"
-	InputInputmodeUrl     InputInputmode = "url"
 )
 
 type InputSpellcheck string
@@ -184,8 +184,8 @@ const (
 type InputWritingsuggestions string
 
 const (
-	InputWritingsuggestionsFalse InputWritingsuggestions = "false"
 	InputWritingsuggestionsTrue  InputWritingsuggestions = "true"
+	InputWritingsuggestionsFalse InputWritingsuggestions = "false"
 	InputWritingsuggestionsEmpty InputWritingsuggestions = ""
 )
 
@@ -535,6 +535,12 @@ func (e *InputElement) Nonce(s string) *InputElement {
 
 func (e *InputElement) Popover(s string) *InputElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *InputElement) Role(s string) *InputElement {
+	e.attributes["role"] = s
 
 	return e
 }

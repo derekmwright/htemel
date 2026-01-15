@@ -42,12 +42,12 @@ func BaseIf(condition bool) *BaseElement {
 type BaseAutocapitalize string
 
 const (
-	BaseAutocapitalizeCharacters BaseAutocapitalize = "characters"
-	BaseAutocapitalizeNone       BaseAutocapitalize = "none"
-	BaseAutocapitalizeOff        BaseAutocapitalize = "off"
 	BaseAutocapitalizeOn         BaseAutocapitalize = "on"
 	BaseAutocapitalizeSentences  BaseAutocapitalize = "sentences"
 	BaseAutocapitalizeWords      BaseAutocapitalize = "words"
+	BaseAutocapitalizeCharacters BaseAutocapitalize = "characters"
+	BaseAutocapitalizeNone       BaseAutocapitalize = "none"
+	BaseAutocapitalizeOff        BaseAutocapitalize = "off"
 )
 
 type BaseAutocorrect string
@@ -70,9 +70,9 @@ const (
 type BaseDir string
 
 const (
+	BaseDirRtl  BaseDir = "rtl"
 	BaseDirAuto BaseDir = "auto"
 	BaseDirLtr  BaseDir = "ltr"
-	BaseDirRtl  BaseDir = "rtl"
 )
 
 type BaseDraggable string
@@ -85,13 +85,13 @@ const (
 type BaseEnterkeyhint string
 
 const (
-	BaseEnterkeyhintSend     BaseEnterkeyhint = "send"
 	BaseEnterkeyhintDone     BaseEnterkeyhint = "done"
 	BaseEnterkeyhintEnter    BaseEnterkeyhint = "enter"
 	BaseEnterkeyhintGo       BaseEnterkeyhint = "go"
 	BaseEnterkeyhintNext     BaseEnterkeyhint = "next"
 	BaseEnterkeyhintPrevious BaseEnterkeyhint = "previous"
 	BaseEnterkeyhintSearch   BaseEnterkeyhint = "search"
+	BaseEnterkeyhintSend     BaseEnterkeyhint = "send"
 )
 
 type BaseHidden string
@@ -105,14 +105,14 @@ const (
 type BaseInputmode string
 
 const (
+	BaseInputmodeEmail   BaseInputmode = "email"
+	BaseInputmodeNone    BaseInputmode = "none"
 	BaseInputmodeNumeric BaseInputmode = "numeric"
 	BaseInputmodeSearch  BaseInputmode = "search"
 	BaseInputmodeTel     BaseInputmode = "tel"
 	BaseInputmodeText    BaseInputmode = "text"
 	BaseInputmodeUrl     BaseInputmode = "url"
 	BaseInputmodeDecimal BaseInputmode = "decimal"
-	BaseInputmodeEmail   BaseInputmode = "email"
-	BaseInputmodeNone    BaseInputmode = "none"
 )
 
 type BaseSpellcheck string
@@ -126,8 +126,8 @@ const (
 type BaseTranslate string
 
 const (
-	BaseTranslateYes   BaseTranslate = "yes"
 	BaseTranslateNo    BaseTranslate = "no"
+	BaseTranslateYes   BaseTranslate = "yes"
 	BaseTranslateEmpty BaseTranslate = ""
 )
 
@@ -293,6 +293,12 @@ func (e *BaseElement) Nonce(s string) *BaseElement {
 
 func (e *BaseElement) Popover(s string) *BaseElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *BaseElement) Role(s string) *BaseElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,12 +51,12 @@ func ButtonTernary(condition bool, true htemel.Node, false htemel.Node) *ButtonE
 type ButtonCommand string
 
 const (
-	ButtonCommandHidePopover   ButtonCommand = "hide-popover"
-	ButtonCommandRequestClose  ButtonCommand = "request-close"
 	ButtonCommandShowModal     ButtonCommand = "show-modal"
 	ButtonCommandShowPopover   ButtonCommand = "show-popover"
 	ButtonCommandTogglePopover ButtonCommand = "toggle-popover"
 	ButtonCommandClose         ButtonCommand = "close"
+	ButtonCommandHidePopover   ButtonCommand = "hide-popover"
+	ButtonCommandRequestClose  ButtonCommand = "request-close"
 )
 
 type ButtonFormmethod string
@@ -70,9 +70,9 @@ const (
 type ButtonPopovertargetaction string
 
 const (
+	ButtonPopovertargetactionToggle ButtonPopovertargetaction = "toggle"
 	ButtonPopovertargetactionHide   ButtonPopovertargetaction = "hide"
 	ButtonPopovertargetactionShow   ButtonPopovertargetaction = "show"
-	ButtonPopovertargetactionToggle ButtonPopovertargetaction = "toggle"
 )
 
 type ButtonType string
@@ -86,12 +86,12 @@ const (
 type ButtonAutocapitalize string
 
 const (
-	ButtonAutocapitalizeOn         ButtonAutocapitalize = "on"
 	ButtonAutocapitalizeSentences  ButtonAutocapitalize = "sentences"
 	ButtonAutocapitalizeWords      ButtonAutocapitalize = "words"
 	ButtonAutocapitalizeCharacters ButtonAutocapitalize = "characters"
 	ButtonAutocapitalizeNone       ButtonAutocapitalize = "none"
 	ButtonAutocapitalizeOff        ButtonAutocapitalize = "off"
+	ButtonAutocapitalizeOn         ButtonAutocapitalize = "on"
 )
 
 type ButtonAutocorrect string
@@ -129,13 +129,13 @@ const (
 type ButtonEnterkeyhint string
 
 const (
-	ButtonEnterkeyhintPrevious ButtonEnterkeyhint = "previous"
-	ButtonEnterkeyhintSearch   ButtonEnterkeyhint = "search"
 	ButtonEnterkeyhintSend     ButtonEnterkeyhint = "send"
 	ButtonEnterkeyhintDone     ButtonEnterkeyhint = "done"
 	ButtonEnterkeyhintEnter    ButtonEnterkeyhint = "enter"
 	ButtonEnterkeyhintGo       ButtonEnterkeyhint = "go"
 	ButtonEnterkeyhintNext     ButtonEnterkeyhint = "next"
+	ButtonEnterkeyhintPrevious ButtonEnterkeyhint = "previous"
+	ButtonEnterkeyhintSearch   ButtonEnterkeyhint = "search"
 )
 
 type ButtonHidden string
@@ -149,21 +149,21 @@ const (
 type ButtonInputmode string
 
 const (
-	ButtonInputmodeUrl     ButtonInputmode = "url"
-	ButtonInputmodeDecimal ButtonInputmode = "decimal"
-	ButtonInputmodeEmail   ButtonInputmode = "email"
-	ButtonInputmodeNone    ButtonInputmode = "none"
 	ButtonInputmodeNumeric ButtonInputmode = "numeric"
 	ButtonInputmodeSearch  ButtonInputmode = "search"
 	ButtonInputmodeTel     ButtonInputmode = "tel"
 	ButtonInputmodeText    ButtonInputmode = "text"
+	ButtonInputmodeUrl     ButtonInputmode = "url"
+	ButtonInputmodeDecimal ButtonInputmode = "decimal"
+	ButtonInputmodeEmail   ButtonInputmode = "email"
+	ButtonInputmodeNone    ButtonInputmode = "none"
 )
 
 type ButtonSpellcheck string
 
 const (
-	ButtonSpellcheckTrue  ButtonSpellcheck = "true"
 	ButtonSpellcheckFalse ButtonSpellcheck = "false"
+	ButtonSpellcheckTrue  ButtonSpellcheck = "true"
 	ButtonSpellcheckEmpty ButtonSpellcheck = ""
 )
 
@@ -413,6 +413,12 @@ func (e *ButtonElement) Nonce(s string) *ButtonElement {
 
 func (e *ButtonElement) Popover(s string) *ButtonElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *ButtonElement) Role(s string) *ButtonElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,12 +51,12 @@ func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderE
 type HeaderAutocapitalize string
 
 const (
+	HeaderAutocapitalizeNone       HeaderAutocapitalize = "none"
 	HeaderAutocapitalizeOff        HeaderAutocapitalize = "off"
 	HeaderAutocapitalizeOn         HeaderAutocapitalize = "on"
 	HeaderAutocapitalizeSentences  HeaderAutocapitalize = "sentences"
 	HeaderAutocapitalizeWords      HeaderAutocapitalize = "words"
 	HeaderAutocapitalizeCharacters HeaderAutocapitalize = "characters"
-	HeaderAutocapitalizeNone       HeaderAutocapitalize = "none"
 )
 
 type HeaderAutocorrect string
@@ -135,8 +135,8 @@ const (
 type HeaderTranslate string
 
 const (
-	HeaderTranslateNo    HeaderTranslate = "no"
 	HeaderTranslateYes   HeaderTranslate = "yes"
+	HeaderTranslateNo    HeaderTranslate = "no"
 	HeaderTranslateEmpty HeaderTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *HeaderElement) Nonce(s string) *HeaderElement {
 
 func (e *HeaderElement) Popover(s string) *HeaderElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *HeaderElement) Role(s string) *HeaderElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -62,8 +62,8 @@ const (
 type OutputAutocorrect string
 
 const (
-	OutputAutocorrectOn    OutputAutocorrect = "on"
 	OutputAutocorrectOff   OutputAutocorrect = "off"
+	OutputAutocorrectOn    OutputAutocorrect = "on"
 	OutputAutocorrectEmpty OutputAutocorrect = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type OutputEnterkeyhint string
 
 const (
-	OutputEnterkeyhintSend     OutputEnterkeyhint = "send"
-	OutputEnterkeyhintDone     OutputEnterkeyhint = "done"
-	OutputEnterkeyhintEnter    OutputEnterkeyhint = "enter"
 	OutputEnterkeyhintGo       OutputEnterkeyhint = "go"
 	OutputEnterkeyhintNext     OutputEnterkeyhint = "next"
 	OutputEnterkeyhintPrevious OutputEnterkeyhint = "previous"
 	OutputEnterkeyhintSearch   OutputEnterkeyhint = "search"
+	OutputEnterkeyhintSend     OutputEnterkeyhint = "send"
+	OutputEnterkeyhintDone     OutputEnterkeyhint = "done"
+	OutputEnterkeyhintEnter    OutputEnterkeyhint = "enter"
 )
 
 type OutputHidden string
@@ -114,21 +114,21 @@ const (
 type OutputInputmode string
 
 const (
-	OutputInputmodeText    OutputInputmode = "text"
-	OutputInputmodeUrl     OutputInputmode = "url"
 	OutputInputmodeDecimal OutputInputmode = "decimal"
 	OutputInputmodeEmail   OutputInputmode = "email"
 	OutputInputmodeNone    OutputInputmode = "none"
 	OutputInputmodeNumeric OutputInputmode = "numeric"
 	OutputInputmodeSearch  OutputInputmode = "search"
 	OutputInputmodeTel     OutputInputmode = "tel"
+	OutputInputmodeText    OutputInputmode = "text"
+	OutputInputmodeUrl     OutputInputmode = "url"
 )
 
 type OutputSpellcheck string
 
 const (
-	OutputSpellcheckFalse OutputSpellcheck = "false"
 	OutputSpellcheckTrue  OutputSpellcheck = "true"
+	OutputSpellcheckFalse OutputSpellcheck = "false"
 	OutputSpellcheckEmpty OutputSpellcheck = ""
 )
 
@@ -308,6 +308,12 @@ func (e *OutputElement) Nonce(s string) *OutputElement {
 
 func (e *OutputElement) Popover(s string) *OutputElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *OutputElement) Role(s string) *OutputElement {
+	e.attributes["role"] = s
 
 	return e
 }

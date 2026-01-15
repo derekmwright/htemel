@@ -51,84 +51,84 @@ func TemplateTernary(condition bool, true htemel.Node, false htemel.Node) *Templ
 type TemplateShadowrootmode string
 
 const (
-	TemplateShadowrootmodeClosed TemplateShadowrootmode = "closed"
 	TemplateShadowrootmodeOpen   TemplateShadowrootmode = "open"
+	TemplateShadowrootmodeClosed TemplateShadowrootmode = "closed"
 )
 
 type TemplateAutocapitalize string
 
 const (
-	TemplateAutocapitalizeOn         TemplateAutocapitalize = "on"
 	TemplateAutocapitalizeSentences  TemplateAutocapitalize = "sentences"
 	TemplateAutocapitalizeWords      TemplateAutocapitalize = "words"
 	TemplateAutocapitalizeCharacters TemplateAutocapitalize = "characters"
 	TemplateAutocapitalizeNone       TemplateAutocapitalize = "none"
 	TemplateAutocapitalizeOff        TemplateAutocapitalize = "off"
+	TemplateAutocapitalizeOn         TemplateAutocapitalize = "on"
 )
 
 type TemplateAutocorrect string
 
 const (
-	TemplateAutocorrectOff   TemplateAutocorrect = "off"
 	TemplateAutocorrectOn    TemplateAutocorrect = "on"
+	TemplateAutocorrectOff   TemplateAutocorrect = "off"
 	TemplateAutocorrectEmpty TemplateAutocorrect = ""
 )
 
 type TemplateContenteditable string
 
 const (
+	TemplateContenteditableFalse         TemplateContenteditable = "false"
 	TemplateContenteditablePlaintextOnly TemplateContenteditable = "plaintext-only"
 	TemplateContenteditableTrue          TemplateContenteditable = "true"
-	TemplateContenteditableFalse         TemplateContenteditable = "false"
 	TemplateContenteditableEmpty         TemplateContenteditable = ""
 )
 
 type TemplateDir string
 
 const (
-	TemplateDirRtl  TemplateDir = "rtl"
 	TemplateDirAuto TemplateDir = "auto"
 	TemplateDirLtr  TemplateDir = "ltr"
+	TemplateDirRtl  TemplateDir = "rtl"
 )
 
 type TemplateDraggable string
 
 const (
-	TemplateDraggableTrue  TemplateDraggable = "true"
 	TemplateDraggableFalse TemplateDraggable = "false"
+	TemplateDraggableTrue  TemplateDraggable = "true"
 )
 
 type TemplateEnterkeyhint string
 
 const (
+	TemplateEnterkeyhintGo       TemplateEnterkeyhint = "go"
+	TemplateEnterkeyhintNext     TemplateEnterkeyhint = "next"
 	TemplateEnterkeyhintPrevious TemplateEnterkeyhint = "previous"
 	TemplateEnterkeyhintSearch   TemplateEnterkeyhint = "search"
 	TemplateEnterkeyhintSend     TemplateEnterkeyhint = "send"
 	TemplateEnterkeyhintDone     TemplateEnterkeyhint = "done"
 	TemplateEnterkeyhintEnter    TemplateEnterkeyhint = "enter"
-	TemplateEnterkeyhintGo       TemplateEnterkeyhint = "go"
-	TemplateEnterkeyhintNext     TemplateEnterkeyhint = "next"
 )
 
 type TemplateHidden string
 
 const (
-	TemplateHiddenHidden     TemplateHidden = "hidden"
 	TemplateHiddenUntilFound TemplateHidden = "until-found"
+	TemplateHiddenHidden     TemplateHidden = "hidden"
 	TemplateHiddenEmpty      TemplateHidden = ""
 )
 
 type TemplateInputmode string
 
 const (
-	TemplateInputmodeEmail   TemplateInputmode = "email"
-	TemplateInputmodeNone    TemplateInputmode = "none"
 	TemplateInputmodeNumeric TemplateInputmode = "numeric"
 	TemplateInputmodeSearch  TemplateInputmode = "search"
 	TemplateInputmodeTel     TemplateInputmode = "tel"
 	TemplateInputmodeText    TemplateInputmode = "text"
 	TemplateInputmodeUrl     TemplateInputmode = "url"
 	TemplateInputmodeDecimal TemplateInputmode = "decimal"
+	TemplateInputmodeEmail   TemplateInputmode = "email"
+	TemplateInputmodeNone    TemplateInputmode = "none"
 )
 
 type TemplateSpellcheck string
@@ -327,6 +327,12 @@ func (e *TemplateElement) Nonce(s string) *TemplateElement {
 
 func (e *TemplateElement) Popover(s string) *TemplateElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TemplateElement) Role(s string) *TemplateElement {
+	e.attributes["role"] = s
 
 	return e
 }

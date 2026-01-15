@@ -70,9 +70,9 @@ const (
 type ProgressContenteditable string
 
 const (
-	ProgressContenteditableTrue          ProgressContenteditable = "true"
 	ProgressContenteditableFalse         ProgressContenteditable = "false"
 	ProgressContenteditablePlaintextOnly ProgressContenteditable = "plaintext-only"
+	ProgressContenteditableTrue          ProgressContenteditable = "true"
 	ProgressContenteditableEmpty         ProgressContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type ProgressEnterkeyhint string
 
 const (
+	ProgressEnterkeyhintDone     ProgressEnterkeyhint = "done"
 	ProgressEnterkeyhintEnter    ProgressEnterkeyhint = "enter"
 	ProgressEnterkeyhintGo       ProgressEnterkeyhint = "go"
 	ProgressEnterkeyhintNext     ProgressEnterkeyhint = "next"
 	ProgressEnterkeyhintPrevious ProgressEnterkeyhint = "previous"
 	ProgressEnterkeyhintSearch   ProgressEnterkeyhint = "search"
 	ProgressEnterkeyhintSend     ProgressEnterkeyhint = "send"
-	ProgressEnterkeyhintDone     ProgressEnterkeyhint = "done"
 )
 
 type ProgressHidden string
@@ -114,21 +114,21 @@ const (
 type ProgressInputmode string
 
 const (
-	ProgressInputmodeNumeric ProgressInputmode = "numeric"
-	ProgressInputmodeSearch  ProgressInputmode = "search"
-	ProgressInputmodeTel     ProgressInputmode = "tel"
 	ProgressInputmodeText    ProgressInputmode = "text"
 	ProgressInputmodeUrl     ProgressInputmode = "url"
 	ProgressInputmodeDecimal ProgressInputmode = "decimal"
 	ProgressInputmodeEmail   ProgressInputmode = "email"
 	ProgressInputmodeNone    ProgressInputmode = "none"
+	ProgressInputmodeNumeric ProgressInputmode = "numeric"
+	ProgressInputmodeSearch  ProgressInputmode = "search"
+	ProgressInputmodeTel     ProgressInputmode = "tel"
 )
 
 type ProgressSpellcheck string
 
 const (
-	ProgressSpellcheckTrue  ProgressSpellcheck = "true"
 	ProgressSpellcheckFalse ProgressSpellcheck = "false"
+	ProgressSpellcheckTrue  ProgressSpellcheck = "true"
 	ProgressSpellcheckEmpty ProgressSpellcheck = ""
 )
 
@@ -302,6 +302,12 @@ func (e *ProgressElement) Nonce(s string) *ProgressElement {
 
 func (e *ProgressElement) Popover(s string) *ProgressElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *ProgressElement) Role(s string) *ProgressElement {
+	e.attributes["role"] = s
 
 	return e
 }

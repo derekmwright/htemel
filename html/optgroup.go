@@ -51,28 +51,28 @@ func OptgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Optgr
 type OptgroupAutocapitalize string
 
 const (
-	OptgroupAutocapitalizeSentences  OptgroupAutocapitalize = "sentences"
-	OptgroupAutocapitalizeWords      OptgroupAutocapitalize = "words"
-	OptgroupAutocapitalizeCharacters OptgroupAutocapitalize = "characters"
 	OptgroupAutocapitalizeNone       OptgroupAutocapitalize = "none"
 	OptgroupAutocapitalizeOff        OptgroupAutocapitalize = "off"
 	OptgroupAutocapitalizeOn         OptgroupAutocapitalize = "on"
+	OptgroupAutocapitalizeSentences  OptgroupAutocapitalize = "sentences"
+	OptgroupAutocapitalizeWords      OptgroupAutocapitalize = "words"
+	OptgroupAutocapitalizeCharacters OptgroupAutocapitalize = "characters"
 )
 
 type OptgroupAutocorrect string
 
 const (
-	OptgroupAutocorrectOn    OptgroupAutocorrect = "on"
 	OptgroupAutocorrectOff   OptgroupAutocorrect = "off"
+	OptgroupAutocorrectOn    OptgroupAutocorrect = "on"
 	OptgroupAutocorrectEmpty OptgroupAutocorrect = ""
 )
 
 type OptgroupContenteditable string
 
 const (
+	OptgroupContenteditableFalse         OptgroupContenteditable = "false"
 	OptgroupContenteditablePlaintextOnly OptgroupContenteditable = "plaintext-only"
 	OptgroupContenteditableTrue          OptgroupContenteditable = "true"
-	OptgroupContenteditableFalse         OptgroupContenteditable = "false"
 	OptgroupContenteditableEmpty         OptgroupContenteditable = ""
 )
 
@@ -106,22 +106,22 @@ const (
 type OptgroupHidden string
 
 const (
-	OptgroupHiddenHidden     OptgroupHidden = "hidden"
 	OptgroupHiddenUntilFound OptgroupHidden = "until-found"
+	OptgroupHiddenHidden     OptgroupHidden = "hidden"
 	OptgroupHiddenEmpty      OptgroupHidden = ""
 )
 
 type OptgroupInputmode string
 
 const (
-	OptgroupInputmodeTel     OptgroupInputmode = "tel"
-	OptgroupInputmodeText    OptgroupInputmode = "text"
-	OptgroupInputmodeUrl     OptgroupInputmode = "url"
-	OptgroupInputmodeDecimal OptgroupInputmode = "decimal"
 	OptgroupInputmodeEmail   OptgroupInputmode = "email"
 	OptgroupInputmodeNone    OptgroupInputmode = "none"
 	OptgroupInputmodeNumeric OptgroupInputmode = "numeric"
 	OptgroupInputmodeSearch  OptgroupInputmode = "search"
+	OptgroupInputmodeTel     OptgroupInputmode = "tel"
+	OptgroupInputmodeText    OptgroupInputmode = "text"
+	OptgroupInputmodeUrl     OptgroupInputmode = "url"
+	OptgroupInputmodeDecimal OptgroupInputmode = "decimal"
 )
 
 type OptgroupSpellcheck string
@@ -135,8 +135,8 @@ const (
 type OptgroupTranslate string
 
 const (
-	OptgroupTranslateYes   OptgroupTranslate = "yes"
 	OptgroupTranslateNo    OptgroupTranslate = "no"
+	OptgroupTranslateYes   OptgroupTranslate = "yes"
 	OptgroupTranslateEmpty OptgroupTranslate = ""
 )
 
@@ -302,6 +302,12 @@ func (e *OptgroupElement) Nonce(s string) *OptgroupElement {
 
 func (e *OptgroupElement) Popover(s string) *OptgroupElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *OptgroupElement) Role(s string) *OptgroupElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,12 +51,12 @@ func HeadTernary(condition bool, true htemel.Node, false htemel.Node) *HeadEleme
 type HeadAutocapitalize string
 
 const (
-	HeadAutocapitalizeCharacters HeadAutocapitalize = "characters"
-	HeadAutocapitalizeNone       HeadAutocapitalize = "none"
 	HeadAutocapitalizeOff        HeadAutocapitalize = "off"
 	HeadAutocapitalizeOn         HeadAutocapitalize = "on"
 	HeadAutocapitalizeSentences  HeadAutocapitalize = "sentences"
 	HeadAutocapitalizeWords      HeadAutocapitalize = "words"
+	HeadAutocapitalizeCharacters HeadAutocapitalize = "characters"
+	HeadAutocapitalizeNone       HeadAutocapitalize = "none"
 )
 
 type HeadAutocorrect string
@@ -70,9 +70,9 @@ const (
 type HeadContenteditable string
 
 const (
+	HeadContenteditableFalse         HeadContenteditable = "false"
 	HeadContenteditablePlaintextOnly HeadContenteditable = "plaintext-only"
 	HeadContenteditableTrue          HeadContenteditable = "true"
-	HeadContenteditableFalse         HeadContenteditable = "false"
 	HeadContenteditableEmpty         HeadContenteditable = ""
 )
 
@@ -94,34 +94,34 @@ const (
 type HeadEnterkeyhint string
 
 const (
-	HeadEnterkeyhintGo       HeadEnterkeyhint = "go"
-	HeadEnterkeyhintNext     HeadEnterkeyhint = "next"
-	HeadEnterkeyhintPrevious HeadEnterkeyhint = "previous"
 	HeadEnterkeyhintSearch   HeadEnterkeyhint = "search"
 	HeadEnterkeyhintSend     HeadEnterkeyhint = "send"
 	HeadEnterkeyhintDone     HeadEnterkeyhint = "done"
 	HeadEnterkeyhintEnter    HeadEnterkeyhint = "enter"
+	HeadEnterkeyhintGo       HeadEnterkeyhint = "go"
+	HeadEnterkeyhintNext     HeadEnterkeyhint = "next"
+	HeadEnterkeyhintPrevious HeadEnterkeyhint = "previous"
 )
 
 type HeadHidden string
 
 const (
-	HeadHiddenUntilFound HeadHidden = "until-found"
 	HeadHiddenHidden     HeadHidden = "hidden"
+	HeadHiddenUntilFound HeadHidden = "until-found"
 	HeadHiddenEmpty      HeadHidden = ""
 )
 
 type HeadInputmode string
 
 const (
-	HeadInputmodeEmail   HeadInputmode = "email"
-	HeadInputmodeNone    HeadInputmode = "none"
-	HeadInputmodeNumeric HeadInputmode = "numeric"
-	HeadInputmodeSearch  HeadInputmode = "search"
 	HeadInputmodeTel     HeadInputmode = "tel"
 	HeadInputmodeText    HeadInputmode = "text"
 	HeadInputmodeUrl     HeadInputmode = "url"
 	HeadInputmodeDecimal HeadInputmode = "decimal"
+	HeadInputmodeEmail   HeadInputmode = "email"
+	HeadInputmodeNone    HeadInputmode = "none"
+	HeadInputmodeNumeric HeadInputmode = "numeric"
+	HeadInputmodeSearch  HeadInputmode = "search"
 )
 
 type HeadSpellcheck string
@@ -290,6 +290,12 @@ func (e *HeadElement) Nonce(s string) *HeadElement {
 
 func (e *HeadElement) Popover(s string) *HeadElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *HeadElement) Role(s string) *HeadElement {
+	e.attributes["role"] = s
 
 	return e
 }

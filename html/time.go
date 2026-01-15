@@ -51,12 +51,12 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 type TimeAutocapitalize string
 
 const (
-	TimeAutocapitalizeCharacters TimeAutocapitalize = "characters"
-	TimeAutocapitalizeNone       TimeAutocapitalize = "none"
 	TimeAutocapitalizeOff        TimeAutocapitalize = "off"
 	TimeAutocapitalizeOn         TimeAutocapitalize = "on"
 	TimeAutocapitalizeSentences  TimeAutocapitalize = "sentences"
 	TimeAutocapitalizeWords      TimeAutocapitalize = "words"
+	TimeAutocapitalizeCharacters TimeAutocapitalize = "characters"
+	TimeAutocapitalizeNone       TimeAutocapitalize = "none"
 )
 
 type TimeAutocorrect string
@@ -79,9 +79,9 @@ const (
 type TimeDir string
 
 const (
+	TimeDirRtl  TimeDir = "rtl"
 	TimeDirAuto TimeDir = "auto"
 	TimeDirLtr  TimeDir = "ltr"
-	TimeDirRtl  TimeDir = "rtl"
 )
 
 type TimeDraggable string
@@ -94,13 +94,13 @@ const (
 type TimeEnterkeyhint string
 
 const (
+	TimeEnterkeyhintSend     TimeEnterkeyhint = "send"
+	TimeEnterkeyhintDone     TimeEnterkeyhint = "done"
+	TimeEnterkeyhintEnter    TimeEnterkeyhint = "enter"
 	TimeEnterkeyhintGo       TimeEnterkeyhint = "go"
 	TimeEnterkeyhintNext     TimeEnterkeyhint = "next"
 	TimeEnterkeyhintPrevious TimeEnterkeyhint = "previous"
 	TimeEnterkeyhintSearch   TimeEnterkeyhint = "search"
-	TimeEnterkeyhintSend     TimeEnterkeyhint = "send"
-	TimeEnterkeyhintDone     TimeEnterkeyhint = "done"
-	TimeEnterkeyhintEnter    TimeEnterkeyhint = "enter"
 )
 
 type TimeHidden string
@@ -296,6 +296,12 @@ func (e *TimeElement) Nonce(s string) *TimeElement {
 
 func (e *TimeElement) Popover(s string) *TimeElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TimeElement) Role(s string) *TimeElement {
+	e.attributes["role"] = s
 
 	return e
 }

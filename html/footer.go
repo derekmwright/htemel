@@ -106,22 +106,22 @@ const (
 type FooterHidden string
 
 const (
-	FooterHiddenHidden     FooterHidden = "hidden"
 	FooterHiddenUntilFound FooterHidden = "until-found"
+	FooterHiddenHidden     FooterHidden = "hidden"
 	FooterHiddenEmpty      FooterHidden = ""
 )
 
 type FooterInputmode string
 
 const (
-	FooterInputmodeText    FooterInputmode = "text"
-	FooterInputmodeUrl     FooterInputmode = "url"
-	FooterInputmodeDecimal FooterInputmode = "decimal"
 	FooterInputmodeEmail   FooterInputmode = "email"
 	FooterInputmodeNone    FooterInputmode = "none"
 	FooterInputmodeNumeric FooterInputmode = "numeric"
 	FooterInputmodeSearch  FooterInputmode = "search"
 	FooterInputmodeTel     FooterInputmode = "tel"
+	FooterInputmodeText    FooterInputmode = "text"
+	FooterInputmodeUrl     FooterInputmode = "url"
+	FooterInputmodeDecimal FooterInputmode = "decimal"
 )
 
 type FooterSpellcheck string
@@ -290,6 +290,12 @@ func (e *FooterElement) Nonce(s string) *FooterElement {
 
 func (e *FooterElement) Popover(s string) *FooterElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *FooterElement) Role(s string) *FooterElement {
+	e.attributes["role"] = s
 
 	return e
 }

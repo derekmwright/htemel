@@ -62,17 +62,17 @@ const (
 type MenuAutocorrect string
 
 const (
-	MenuAutocorrectOff   MenuAutocorrect = "off"
 	MenuAutocorrectOn    MenuAutocorrect = "on"
+	MenuAutocorrectOff   MenuAutocorrect = "off"
 	MenuAutocorrectEmpty MenuAutocorrect = ""
 )
 
 type MenuContenteditable string
 
 const (
+	MenuContenteditableTrue          MenuContenteditable = "true"
 	MenuContenteditableFalse         MenuContenteditable = "false"
 	MenuContenteditablePlaintextOnly MenuContenteditable = "plaintext-only"
-	MenuContenteditableTrue          MenuContenteditable = "true"
 	MenuContenteditableEmpty         MenuContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type MenuEnterkeyhint string
 
 const (
-	MenuEnterkeyhintGo       MenuEnterkeyhint = "go"
-	MenuEnterkeyhintNext     MenuEnterkeyhint = "next"
 	MenuEnterkeyhintPrevious MenuEnterkeyhint = "previous"
 	MenuEnterkeyhintSearch   MenuEnterkeyhint = "search"
 	MenuEnterkeyhintSend     MenuEnterkeyhint = "send"
 	MenuEnterkeyhintDone     MenuEnterkeyhint = "done"
 	MenuEnterkeyhintEnter    MenuEnterkeyhint = "enter"
+	MenuEnterkeyhintGo       MenuEnterkeyhint = "go"
+	MenuEnterkeyhintNext     MenuEnterkeyhint = "next"
 )
 
 type MenuHidden string
@@ -290,6 +290,12 @@ func (e *MenuElement) Nonce(s string) *MenuElement {
 
 func (e *MenuElement) Popover(s string) *MenuElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *MenuElement) Role(s string) *MenuElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,12 +51,12 @@ func BlockquoteTernary(condition bool, true htemel.Node, false htemel.Node) *Blo
 type BlockquoteAutocapitalize string
 
 const (
-	BlockquoteAutocapitalizeSentences  BlockquoteAutocapitalize = "sentences"
-	BlockquoteAutocapitalizeWords      BlockquoteAutocapitalize = "words"
 	BlockquoteAutocapitalizeCharacters BlockquoteAutocapitalize = "characters"
 	BlockquoteAutocapitalizeNone       BlockquoteAutocapitalize = "none"
 	BlockquoteAutocapitalizeOff        BlockquoteAutocapitalize = "off"
 	BlockquoteAutocapitalizeOn         BlockquoteAutocapitalize = "on"
+	BlockquoteAutocapitalizeSentences  BlockquoteAutocapitalize = "sentences"
+	BlockquoteAutocapitalizeWords      BlockquoteAutocapitalize = "words"
 )
 
 type BlockquoteAutocorrect string
@@ -70,9 +70,9 @@ const (
 type BlockquoteContenteditable string
 
 const (
+	BlockquoteContenteditableTrue          BlockquoteContenteditable = "true"
 	BlockquoteContenteditableFalse         BlockquoteContenteditable = "false"
 	BlockquoteContenteditablePlaintextOnly BlockquoteContenteditable = "plaintext-only"
-	BlockquoteContenteditableTrue          BlockquoteContenteditable = "true"
 	BlockquoteContenteditableEmpty         BlockquoteContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type BlockquoteEnterkeyhint string
 
 const (
-	BlockquoteEnterkeyhintGo       BlockquoteEnterkeyhint = "go"
-	BlockquoteEnterkeyhintNext     BlockquoteEnterkeyhint = "next"
 	BlockquoteEnterkeyhintPrevious BlockquoteEnterkeyhint = "previous"
 	BlockquoteEnterkeyhintSearch   BlockquoteEnterkeyhint = "search"
 	BlockquoteEnterkeyhintSend     BlockquoteEnterkeyhint = "send"
 	BlockquoteEnterkeyhintDone     BlockquoteEnterkeyhint = "done"
 	BlockquoteEnterkeyhintEnter    BlockquoteEnterkeyhint = "enter"
+	BlockquoteEnterkeyhintGo       BlockquoteEnterkeyhint = "go"
+	BlockquoteEnterkeyhintNext     BlockquoteEnterkeyhint = "next"
 )
 
 type BlockquoteHidden string
@@ -114,14 +114,14 @@ const (
 type BlockquoteInputmode string
 
 const (
+	BlockquoteInputmodeSearch  BlockquoteInputmode = "search"
+	BlockquoteInputmodeTel     BlockquoteInputmode = "tel"
+	BlockquoteInputmodeText    BlockquoteInputmode = "text"
 	BlockquoteInputmodeUrl     BlockquoteInputmode = "url"
 	BlockquoteInputmodeDecimal BlockquoteInputmode = "decimal"
 	BlockquoteInputmodeEmail   BlockquoteInputmode = "email"
 	BlockquoteInputmodeNone    BlockquoteInputmode = "none"
 	BlockquoteInputmodeNumeric BlockquoteInputmode = "numeric"
-	BlockquoteInputmodeSearch  BlockquoteInputmode = "search"
-	BlockquoteInputmodeTel     BlockquoteInputmode = "tel"
-	BlockquoteInputmodeText    BlockquoteInputmode = "text"
 )
 
 type BlockquoteSpellcheck string
@@ -135,16 +135,16 @@ const (
 type BlockquoteTranslate string
 
 const (
-	BlockquoteTranslateYes   BlockquoteTranslate = "yes"
 	BlockquoteTranslateNo    BlockquoteTranslate = "no"
+	BlockquoteTranslateYes   BlockquoteTranslate = "yes"
 	BlockquoteTranslateEmpty BlockquoteTranslate = ""
 )
 
 type BlockquoteWritingsuggestions string
 
 const (
-	BlockquoteWritingsuggestionsFalse BlockquoteWritingsuggestions = "false"
 	BlockquoteWritingsuggestionsTrue  BlockquoteWritingsuggestions = "true"
+	BlockquoteWritingsuggestionsFalse BlockquoteWritingsuggestions = "false"
 	BlockquoteWritingsuggestionsEmpty BlockquoteWritingsuggestions = ""
 )
 
@@ -296,6 +296,12 @@ func (e *BlockquoteElement) Nonce(s string) *BlockquoteElement {
 
 func (e *BlockquoteElement) Popover(s string) *BlockquoteElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *BlockquoteElement) Role(s string) *BlockquoteElement {
+	e.attributes["role"] = s
 
 	return e
 }

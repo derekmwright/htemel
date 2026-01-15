@@ -51,12 +51,12 @@ func CodeTernary(condition bool, true htemel.Node, false htemel.Node) *CodeEleme
 type CodeAutocapitalize string
 
 const (
-	CodeAutocapitalizeCharacters CodeAutocapitalize = "characters"
 	CodeAutocapitalizeNone       CodeAutocapitalize = "none"
 	CodeAutocapitalizeOff        CodeAutocapitalize = "off"
 	CodeAutocapitalizeOn         CodeAutocapitalize = "on"
 	CodeAutocapitalizeSentences  CodeAutocapitalize = "sentences"
 	CodeAutocapitalizeWords      CodeAutocapitalize = "words"
+	CodeAutocapitalizeCharacters CodeAutocapitalize = "characters"
 )
 
 type CodeAutocorrect string
@@ -79,9 +79,9 @@ const (
 type CodeDir string
 
 const (
-	CodeDirAuto CodeDir = "auto"
 	CodeDirLtr  CodeDir = "ltr"
 	CodeDirRtl  CodeDir = "rtl"
+	CodeDirAuto CodeDir = "auto"
 )
 
 type CodeDraggable string
@@ -94,13 +94,13 @@ const (
 type CodeEnterkeyhint string
 
 const (
+	CodeEnterkeyhintSend     CodeEnterkeyhint = "send"
 	CodeEnterkeyhintDone     CodeEnterkeyhint = "done"
 	CodeEnterkeyhintEnter    CodeEnterkeyhint = "enter"
 	CodeEnterkeyhintGo       CodeEnterkeyhint = "go"
 	CodeEnterkeyhintNext     CodeEnterkeyhint = "next"
 	CodeEnterkeyhintPrevious CodeEnterkeyhint = "previous"
 	CodeEnterkeyhintSearch   CodeEnterkeyhint = "search"
-	CodeEnterkeyhintSend     CodeEnterkeyhint = "send"
 )
 
 type CodeHidden string
@@ -114,37 +114,37 @@ const (
 type CodeInputmode string
 
 const (
-	CodeInputmodeSearch  CodeInputmode = "search"
-	CodeInputmodeTel     CodeInputmode = "tel"
 	CodeInputmodeText    CodeInputmode = "text"
 	CodeInputmodeUrl     CodeInputmode = "url"
 	CodeInputmodeDecimal CodeInputmode = "decimal"
 	CodeInputmodeEmail   CodeInputmode = "email"
 	CodeInputmodeNone    CodeInputmode = "none"
 	CodeInputmodeNumeric CodeInputmode = "numeric"
+	CodeInputmodeSearch  CodeInputmode = "search"
+	CodeInputmodeTel     CodeInputmode = "tel"
 )
 
 type CodeSpellcheck string
 
 const (
-	CodeSpellcheckTrue  CodeSpellcheck = "true"
 	CodeSpellcheckFalse CodeSpellcheck = "false"
+	CodeSpellcheckTrue  CodeSpellcheck = "true"
 	CodeSpellcheckEmpty CodeSpellcheck = ""
 )
 
 type CodeTranslate string
 
 const (
-	CodeTranslateYes   CodeTranslate = "yes"
 	CodeTranslateNo    CodeTranslate = "no"
+	CodeTranslateYes   CodeTranslate = "yes"
 	CodeTranslateEmpty CodeTranslate = ""
 )
 
 type CodeWritingsuggestions string
 
 const (
-	CodeWritingsuggestionsTrue  CodeWritingsuggestions = "true"
 	CodeWritingsuggestionsFalse CodeWritingsuggestions = "false"
+	CodeWritingsuggestionsTrue  CodeWritingsuggestions = "true"
 	CodeWritingsuggestionsEmpty CodeWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *CodeElement) Nonce(s string) *CodeElement {
 
 func (e *CodeElement) Popover(s string) *CodeElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *CodeElement) Role(s string) *CodeElement {
+	e.attributes["role"] = s
 
 	return e
 }

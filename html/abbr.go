@@ -79,42 +79,41 @@ const (
 type AbbrDir string
 
 const (
-	AbbrDirAuto AbbrDir = "auto"
 	AbbrDirLtr  AbbrDir = "ltr"
 	AbbrDirRtl  AbbrDir = "rtl"
+	AbbrDirAuto AbbrDir = "auto"
 )
 
 type AbbrDraggable string
 
 const (
-	AbbrDraggableTrue  AbbrDraggable = "true"
 	AbbrDraggableFalse AbbrDraggable = "false"
+	AbbrDraggableTrue  AbbrDraggable = "true"
 )
 
 type AbbrEnterkeyhint string
 
 const (
+	AbbrEnterkeyhintDone     AbbrEnterkeyhint = "done"
 	AbbrEnterkeyhintEnter    AbbrEnterkeyhint = "enter"
 	AbbrEnterkeyhintGo       AbbrEnterkeyhint = "go"
 	AbbrEnterkeyhintNext     AbbrEnterkeyhint = "next"
 	AbbrEnterkeyhintPrevious AbbrEnterkeyhint = "previous"
 	AbbrEnterkeyhintSearch   AbbrEnterkeyhint = "search"
 	AbbrEnterkeyhintSend     AbbrEnterkeyhint = "send"
-	AbbrEnterkeyhintDone     AbbrEnterkeyhint = "done"
 )
 
 type AbbrHidden string
 
 const (
-	AbbrHiddenUntilFound AbbrHidden = "until-found"
 	AbbrHiddenHidden     AbbrHidden = "hidden"
+	AbbrHiddenUntilFound AbbrHidden = "until-found"
 	AbbrHiddenEmpty      AbbrHidden = ""
 )
 
 type AbbrInputmode string
 
 const (
-	AbbrInputmodeText    AbbrInputmode = "text"
 	AbbrInputmodeUrl     AbbrInputmode = "url"
 	AbbrInputmodeDecimal AbbrInputmode = "decimal"
 	AbbrInputmodeEmail   AbbrInputmode = "email"
@@ -122,6 +121,7 @@ const (
 	AbbrInputmodeNumeric AbbrInputmode = "numeric"
 	AbbrInputmodeSearch  AbbrInputmode = "search"
 	AbbrInputmodeTel     AbbrInputmode = "tel"
+	AbbrInputmodeText    AbbrInputmode = "text"
 )
 
 type AbbrSpellcheck string
@@ -135,8 +135,8 @@ const (
 type AbbrTranslate string
 
 const (
-	AbbrTranslateYes   AbbrTranslate = "yes"
 	AbbrTranslateNo    AbbrTranslate = "no"
+	AbbrTranslateYes   AbbrTranslate = "yes"
 	AbbrTranslateEmpty AbbrTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *AbbrElement) Nonce(s string) *AbbrElement {
 
 func (e *AbbrElement) Popover(s string) *AbbrElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *AbbrElement) Role(s string) *AbbrElement {
+	e.attributes["role"] = s
 
 	return e
 }

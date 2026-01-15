@@ -51,12 +51,12 @@ func H5Ternary(condition bool, true htemel.Node, false htemel.Node) *H5Element {
 type H5Autocapitalize string
 
 const (
-	H5AutocapitalizeWords      H5Autocapitalize = "words"
-	H5AutocapitalizeCharacters H5Autocapitalize = "characters"
 	H5AutocapitalizeNone       H5Autocapitalize = "none"
 	H5AutocapitalizeOff        H5Autocapitalize = "off"
 	H5AutocapitalizeOn         H5Autocapitalize = "on"
 	H5AutocapitalizeSentences  H5Autocapitalize = "sentences"
+	H5AutocapitalizeWords      H5Autocapitalize = "words"
+	H5AutocapitalizeCharacters H5Autocapitalize = "characters"
 )
 
 type H5Autocorrect string
@@ -94,13 +94,13 @@ const (
 type H5Enterkeyhint string
 
 const (
-	H5EnterkeyhintPrevious H5Enterkeyhint = "previous"
-	H5EnterkeyhintSearch   H5Enterkeyhint = "search"
 	H5EnterkeyhintSend     H5Enterkeyhint = "send"
 	H5EnterkeyhintDone     H5Enterkeyhint = "done"
 	H5EnterkeyhintEnter    H5Enterkeyhint = "enter"
 	H5EnterkeyhintGo       H5Enterkeyhint = "go"
 	H5EnterkeyhintNext     H5Enterkeyhint = "next"
+	H5EnterkeyhintPrevious H5Enterkeyhint = "previous"
+	H5EnterkeyhintSearch   H5Enterkeyhint = "search"
 )
 
 type H5Hidden string
@@ -290,6 +290,12 @@ func (e *H5Element) Nonce(s string) *H5Element {
 
 func (e *H5Element) Popover(s string) *H5Element {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *H5Element) Role(s string) *H5Element {
+	e.attributes["role"] = s
 
 	return e
 }

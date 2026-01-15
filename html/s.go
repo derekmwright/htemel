@@ -94,13 +94,13 @@ const (
 type SEnterkeyhint string
 
 const (
-	SEnterkeyhintDone     SEnterkeyhint = "done"
 	SEnterkeyhintEnter    SEnterkeyhint = "enter"
 	SEnterkeyhintGo       SEnterkeyhint = "go"
 	SEnterkeyhintNext     SEnterkeyhint = "next"
 	SEnterkeyhintPrevious SEnterkeyhint = "previous"
 	SEnterkeyhintSearch   SEnterkeyhint = "search"
 	SEnterkeyhintSend     SEnterkeyhint = "send"
+	SEnterkeyhintDone     SEnterkeyhint = "done"
 )
 
 type SHidden string
@@ -114,21 +114,21 @@ const (
 type SInputmode string
 
 const (
-	SInputmodeNone    SInputmode = "none"
-	SInputmodeNumeric SInputmode = "numeric"
 	SInputmodeSearch  SInputmode = "search"
 	SInputmodeTel     SInputmode = "tel"
 	SInputmodeText    SInputmode = "text"
 	SInputmodeUrl     SInputmode = "url"
 	SInputmodeDecimal SInputmode = "decimal"
 	SInputmodeEmail   SInputmode = "email"
+	SInputmodeNone    SInputmode = "none"
+	SInputmodeNumeric SInputmode = "numeric"
 )
 
 type SSpellcheck string
 
 const (
-	SSpellcheckFalse SSpellcheck = "false"
 	SSpellcheckTrue  SSpellcheck = "true"
+	SSpellcheckFalse SSpellcheck = "false"
 	SSpellcheckEmpty SSpellcheck = ""
 )
 
@@ -290,6 +290,12 @@ func (e *SElement) Nonce(s string) *SElement {
 
 func (e *SElement) Popover(s string) *SElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *SElement) Role(s string) *SElement {
+	e.attributes["role"] = s
 
 	return e
 }

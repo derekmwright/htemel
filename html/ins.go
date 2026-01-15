@@ -51,12 +51,12 @@ func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement
 type InsAutocapitalize string
 
 const (
+	InsAutocapitalizeCharacters InsAutocapitalize = "characters"
+	InsAutocapitalizeNone       InsAutocapitalize = "none"
 	InsAutocapitalizeOff        InsAutocapitalize = "off"
 	InsAutocapitalizeOn         InsAutocapitalize = "on"
 	InsAutocapitalizeSentences  InsAutocapitalize = "sentences"
 	InsAutocapitalizeWords      InsAutocapitalize = "words"
-	InsAutocapitalizeCharacters InsAutocapitalize = "characters"
-	InsAutocapitalizeNone       InsAutocapitalize = "none"
 )
 
 type InsAutocorrect string
@@ -79,9 +79,9 @@ const (
 type InsDir string
 
 const (
-	InsDirAuto InsDir = "auto"
 	InsDirLtr  InsDir = "ltr"
 	InsDirRtl  InsDir = "rtl"
+	InsDirAuto InsDir = "auto"
 )
 
 type InsDraggable string
@@ -94,13 +94,13 @@ const (
 type InsEnterkeyhint string
 
 const (
-	InsEnterkeyhintGo       InsEnterkeyhint = "go"
 	InsEnterkeyhintNext     InsEnterkeyhint = "next"
 	InsEnterkeyhintPrevious InsEnterkeyhint = "previous"
 	InsEnterkeyhintSearch   InsEnterkeyhint = "search"
 	InsEnterkeyhintSend     InsEnterkeyhint = "send"
 	InsEnterkeyhintDone     InsEnterkeyhint = "done"
 	InsEnterkeyhintEnter    InsEnterkeyhint = "enter"
+	InsEnterkeyhintGo       InsEnterkeyhint = "go"
 )
 
 type InsHidden string
@@ -114,14 +114,14 @@ const (
 type InsInputmode string
 
 const (
+	InsInputmodeNumeric InsInputmode = "numeric"
+	InsInputmodeSearch  InsInputmode = "search"
+	InsInputmodeTel     InsInputmode = "tel"
 	InsInputmodeText    InsInputmode = "text"
 	InsInputmodeUrl     InsInputmode = "url"
 	InsInputmodeDecimal InsInputmode = "decimal"
 	InsInputmodeEmail   InsInputmode = "email"
 	InsInputmodeNone    InsInputmode = "none"
-	InsInputmodeNumeric InsInputmode = "numeric"
-	InsInputmodeSearch  InsInputmode = "search"
-	InsInputmodeTel     InsInputmode = "tel"
 )
 
 type InsSpellcheck string
@@ -302,6 +302,12 @@ func (e *InsElement) Nonce(s string) *InsElement {
 
 func (e *InsElement) Popover(s string) *InsElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *InsElement) Role(s string) *InsElement {
+	e.attributes["role"] = s
 
 	return e
 }

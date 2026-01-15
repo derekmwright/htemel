@@ -51,12 +51,12 @@ func BodyTernary(condition bool, true htemel.Node, false htemel.Node) *BodyEleme
 type BodyAutocapitalize string
 
 const (
-	BodyAutocapitalizeCharacters BodyAutocapitalize = "characters"
-	BodyAutocapitalizeNone       BodyAutocapitalize = "none"
-	BodyAutocapitalizeOff        BodyAutocapitalize = "off"
 	BodyAutocapitalizeOn         BodyAutocapitalize = "on"
 	BodyAutocapitalizeSentences  BodyAutocapitalize = "sentences"
 	BodyAutocapitalizeWords      BodyAutocapitalize = "words"
+	BodyAutocapitalizeCharacters BodyAutocapitalize = "characters"
+	BodyAutocapitalizeNone       BodyAutocapitalize = "none"
+	BodyAutocapitalizeOff        BodyAutocapitalize = "off"
 )
 
 type BodyAutocorrect string
@@ -79,9 +79,9 @@ const (
 type BodyDir string
 
 const (
+	BodyDirLtr  BodyDir = "ltr"
 	BodyDirRtl  BodyDir = "rtl"
 	BodyDirAuto BodyDir = "auto"
-	BodyDirLtr  BodyDir = "ltr"
 )
 
 type BodyDraggable string
@@ -94,13 +94,13 @@ const (
 type BodyEnterkeyhint string
 
 const (
-	BodyEnterkeyhintGo       BodyEnterkeyhint = "go"
 	BodyEnterkeyhintNext     BodyEnterkeyhint = "next"
 	BodyEnterkeyhintPrevious BodyEnterkeyhint = "previous"
 	BodyEnterkeyhintSearch   BodyEnterkeyhint = "search"
 	BodyEnterkeyhintSend     BodyEnterkeyhint = "send"
 	BodyEnterkeyhintDone     BodyEnterkeyhint = "done"
 	BodyEnterkeyhintEnter    BodyEnterkeyhint = "enter"
+	BodyEnterkeyhintGo       BodyEnterkeyhint = "go"
 )
 
 type BodyHidden string
@@ -114,14 +114,14 @@ const (
 type BodyInputmode string
 
 const (
-	BodyInputmodeNumeric BodyInputmode = "numeric"
-	BodyInputmodeSearch  BodyInputmode = "search"
-	BodyInputmodeTel     BodyInputmode = "tel"
 	BodyInputmodeText    BodyInputmode = "text"
 	BodyInputmodeUrl     BodyInputmode = "url"
 	BodyInputmodeDecimal BodyInputmode = "decimal"
 	BodyInputmodeEmail   BodyInputmode = "email"
 	BodyInputmodeNone    BodyInputmode = "none"
+	BodyInputmodeNumeric BodyInputmode = "numeric"
+	BodyInputmodeSearch  BodyInputmode = "search"
+	BodyInputmodeTel     BodyInputmode = "tel"
 )
 
 type BodySpellcheck string
@@ -143,8 +143,8 @@ const (
 type BodyWritingsuggestions string
 
 const (
-	BodyWritingsuggestionsTrue  BodyWritingsuggestions = "true"
 	BodyWritingsuggestionsFalse BodyWritingsuggestions = "false"
+	BodyWritingsuggestionsTrue  BodyWritingsuggestions = "true"
 	BodyWritingsuggestionsEmpty BodyWritingsuggestions = ""
 )
 
@@ -398,6 +398,12 @@ func (e *BodyElement) Nonce(s string) *BodyElement {
 
 func (e *BodyElement) Popover(s string) *BodyElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *BodyElement) Role(s string) *BodyElement {
+	e.attributes["role"] = s
 
 	return e
 }

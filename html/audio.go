@@ -68,12 +68,12 @@ const (
 type AudioAutocapitalize string
 
 const (
+	AudioAutocapitalizeWords      AudioAutocapitalize = "words"
 	AudioAutocapitalizeCharacters AudioAutocapitalize = "characters"
 	AudioAutocapitalizeNone       AudioAutocapitalize = "none"
 	AudioAutocapitalizeOff        AudioAutocapitalize = "off"
 	AudioAutocapitalizeOn         AudioAutocapitalize = "on"
 	AudioAutocapitalizeSentences  AudioAutocapitalize = "sentences"
-	AudioAutocapitalizeWords      AudioAutocapitalize = "words"
 )
 
 type AudioAutocorrect string
@@ -87,9 +87,9 @@ const (
 type AudioContenteditable string
 
 const (
+	AudioContenteditableFalse         AudioContenteditable = "false"
 	AudioContenteditablePlaintextOnly AudioContenteditable = "plaintext-only"
 	AudioContenteditableTrue          AudioContenteditable = "true"
-	AudioContenteditableFalse         AudioContenteditable = "false"
 	AudioContenteditableEmpty         AudioContenteditable = ""
 )
 
@@ -111,13 +111,13 @@ const (
 type AudioEnterkeyhint string
 
 const (
-	AudioEnterkeyhintSend     AudioEnterkeyhint = "send"
 	AudioEnterkeyhintDone     AudioEnterkeyhint = "done"
 	AudioEnterkeyhintEnter    AudioEnterkeyhint = "enter"
 	AudioEnterkeyhintGo       AudioEnterkeyhint = "go"
 	AudioEnterkeyhintNext     AudioEnterkeyhint = "next"
 	AudioEnterkeyhintPrevious AudioEnterkeyhint = "previous"
 	AudioEnterkeyhintSearch   AudioEnterkeyhint = "search"
+	AudioEnterkeyhintSend     AudioEnterkeyhint = "send"
 )
 
 type AudioHidden string
@@ -131,21 +131,21 @@ const (
 type AudioInputmode string
 
 const (
-	AudioInputmodeNumeric AudioInputmode = "numeric"
-	AudioInputmodeSearch  AudioInputmode = "search"
-	AudioInputmodeTel     AudioInputmode = "tel"
 	AudioInputmodeText    AudioInputmode = "text"
 	AudioInputmodeUrl     AudioInputmode = "url"
 	AudioInputmodeDecimal AudioInputmode = "decimal"
 	AudioInputmodeEmail   AudioInputmode = "email"
 	AudioInputmodeNone    AudioInputmode = "none"
+	AudioInputmodeNumeric AudioInputmode = "numeric"
+	AudioInputmodeSearch  AudioInputmode = "search"
+	AudioInputmodeTel     AudioInputmode = "tel"
 )
 
 type AudioSpellcheck string
 
 const (
-	AudioSpellcheckTrue  AudioSpellcheck = "true"
 	AudioSpellcheckFalse AudioSpellcheck = "false"
+	AudioSpellcheckTrue  AudioSpellcheck = "true"
 	AudioSpellcheckEmpty AudioSpellcheck = ""
 )
 
@@ -160,8 +160,8 @@ const (
 type AudioWritingsuggestions string
 
 const (
-	AudioWritingsuggestionsTrue  AudioWritingsuggestions = "true"
 	AudioWritingsuggestionsFalse AudioWritingsuggestions = "false"
+	AudioWritingsuggestionsTrue  AudioWritingsuggestions = "true"
 	AudioWritingsuggestionsEmpty AudioWritingsuggestions = ""
 )
 
@@ -355,6 +355,12 @@ func (e *AudioElement) Nonce(s string) *AudioElement {
 
 func (e *AudioElement) Popover(s string) *AudioElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *AudioElement) Role(s string) *AudioElement {
+	e.attributes["role"] = s
 
 	return e
 }

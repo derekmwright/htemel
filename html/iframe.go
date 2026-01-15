@@ -58,12 +58,12 @@ const (
 type IframeAutocapitalize string
 
 const (
-	IframeAutocapitalizeCharacters IframeAutocapitalize = "characters"
 	IframeAutocapitalizeNone       IframeAutocapitalize = "none"
 	IframeAutocapitalizeOff        IframeAutocapitalize = "off"
 	IframeAutocapitalizeOn         IframeAutocapitalize = "on"
 	IframeAutocapitalizeSentences  IframeAutocapitalize = "sentences"
 	IframeAutocapitalizeWords      IframeAutocapitalize = "words"
+	IframeAutocapitalizeCharacters IframeAutocapitalize = "characters"
 )
 
 type IframeAutocorrect string
@@ -77,9 +77,9 @@ const (
 type IframeContenteditable string
 
 const (
+	IframeContenteditableTrue          IframeContenteditable = "true"
 	IframeContenteditableFalse         IframeContenteditable = "false"
 	IframeContenteditablePlaintextOnly IframeContenteditable = "plaintext-only"
-	IframeContenteditableTrue          IframeContenteditable = "true"
 	IframeContenteditableEmpty         IframeContenteditable = ""
 )
 
@@ -101,13 +101,13 @@ const (
 type IframeEnterkeyhint string
 
 const (
-	IframeEnterkeyhintNext     IframeEnterkeyhint = "next"
-	IframeEnterkeyhintPrevious IframeEnterkeyhint = "previous"
-	IframeEnterkeyhintSearch   IframeEnterkeyhint = "search"
 	IframeEnterkeyhintSend     IframeEnterkeyhint = "send"
 	IframeEnterkeyhintDone     IframeEnterkeyhint = "done"
 	IframeEnterkeyhintEnter    IframeEnterkeyhint = "enter"
 	IframeEnterkeyhintGo       IframeEnterkeyhint = "go"
+	IframeEnterkeyhintNext     IframeEnterkeyhint = "next"
+	IframeEnterkeyhintPrevious IframeEnterkeyhint = "previous"
+	IframeEnterkeyhintSearch   IframeEnterkeyhint = "search"
 )
 
 type IframeHidden string
@@ -121,21 +121,21 @@ const (
 type IframeInputmode string
 
 const (
+	IframeInputmodeUrl     IframeInputmode = "url"
+	IframeInputmodeDecimal IframeInputmode = "decimal"
+	IframeInputmodeEmail   IframeInputmode = "email"
 	IframeInputmodeNone    IframeInputmode = "none"
 	IframeInputmodeNumeric IframeInputmode = "numeric"
 	IframeInputmodeSearch  IframeInputmode = "search"
 	IframeInputmodeTel     IframeInputmode = "tel"
 	IframeInputmodeText    IframeInputmode = "text"
-	IframeInputmodeUrl     IframeInputmode = "url"
-	IframeInputmodeDecimal IframeInputmode = "decimal"
-	IframeInputmodeEmail   IframeInputmode = "email"
 )
 
 type IframeSpellcheck string
 
 const (
-	IframeSpellcheckFalse IframeSpellcheck = "false"
 	IframeSpellcheckTrue  IframeSpellcheck = "true"
+	IframeSpellcheckFalse IframeSpellcheck = "false"
 	IframeSpellcheckEmpty IframeSpellcheck = ""
 )
 
@@ -150,8 +150,8 @@ const (
 type IframeWritingsuggestions string
 
 const (
-	IframeWritingsuggestionsTrue  IframeWritingsuggestions = "true"
 	IframeWritingsuggestionsFalse IframeWritingsuggestions = "false"
+	IframeWritingsuggestionsTrue  IframeWritingsuggestions = "true"
 	IframeWritingsuggestionsEmpty IframeWritingsuggestions = ""
 )
 
@@ -357,6 +357,12 @@ func (e *IframeElement) Nonce(s string) *IframeElement {
 
 func (e *IframeElement) Popover(s string) *IframeElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *IframeElement) Role(s string) *IframeElement {
+	e.attributes["role"] = s
 
 	return e
 }

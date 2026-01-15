@@ -51,12 +51,12 @@ func HgroupTernary(condition bool, true htemel.Node, false htemel.Node) *HgroupE
 type HgroupAutocapitalize string
 
 const (
-	HgroupAutocapitalizeOn         HgroupAutocapitalize = "on"
-	HgroupAutocapitalizeSentences  HgroupAutocapitalize = "sentences"
-	HgroupAutocapitalizeWords      HgroupAutocapitalize = "words"
 	HgroupAutocapitalizeCharacters HgroupAutocapitalize = "characters"
 	HgroupAutocapitalizeNone       HgroupAutocapitalize = "none"
 	HgroupAutocapitalizeOff        HgroupAutocapitalize = "off"
+	HgroupAutocapitalizeOn         HgroupAutocapitalize = "on"
+	HgroupAutocapitalizeSentences  HgroupAutocapitalize = "sentences"
+	HgroupAutocapitalizeWords      HgroupAutocapitalize = "words"
 )
 
 type HgroupAutocorrect string
@@ -70,18 +70,18 @@ const (
 type HgroupContenteditable string
 
 const (
-	HgroupContenteditableTrue          HgroupContenteditable = "true"
 	HgroupContenteditableFalse         HgroupContenteditable = "false"
 	HgroupContenteditablePlaintextOnly HgroupContenteditable = "plaintext-only"
+	HgroupContenteditableTrue          HgroupContenteditable = "true"
 	HgroupContenteditableEmpty         HgroupContenteditable = ""
 )
 
 type HgroupDir string
 
 const (
-	HgroupDirAuto HgroupDir = "auto"
 	HgroupDirLtr  HgroupDir = "ltr"
 	HgroupDirRtl  HgroupDir = "rtl"
+	HgroupDirAuto HgroupDir = "auto"
 )
 
 type HgroupDraggable string
@@ -94,13 +94,13 @@ const (
 type HgroupEnterkeyhint string
 
 const (
-	HgroupEnterkeyhintDone     HgroupEnterkeyhint = "done"
-	HgroupEnterkeyhintEnter    HgroupEnterkeyhint = "enter"
-	HgroupEnterkeyhintGo       HgroupEnterkeyhint = "go"
 	HgroupEnterkeyhintNext     HgroupEnterkeyhint = "next"
 	HgroupEnterkeyhintPrevious HgroupEnterkeyhint = "previous"
 	HgroupEnterkeyhintSearch   HgroupEnterkeyhint = "search"
 	HgroupEnterkeyhintSend     HgroupEnterkeyhint = "send"
+	HgroupEnterkeyhintDone     HgroupEnterkeyhint = "done"
+	HgroupEnterkeyhintEnter    HgroupEnterkeyhint = "enter"
+	HgroupEnterkeyhintGo       HgroupEnterkeyhint = "go"
 )
 
 type HgroupHidden string
@@ -114,6 +114,7 @@ const (
 type HgroupInputmode string
 
 const (
+	HgroupInputmodeNumeric HgroupInputmode = "numeric"
 	HgroupInputmodeSearch  HgroupInputmode = "search"
 	HgroupInputmodeTel     HgroupInputmode = "tel"
 	HgroupInputmodeText    HgroupInputmode = "text"
@@ -121,7 +122,6 @@ const (
 	HgroupInputmodeDecimal HgroupInputmode = "decimal"
 	HgroupInputmodeEmail   HgroupInputmode = "email"
 	HgroupInputmodeNone    HgroupInputmode = "none"
-	HgroupInputmodeNumeric HgroupInputmode = "numeric"
 )
 
 type HgroupSpellcheck string
@@ -135,8 +135,8 @@ const (
 type HgroupTranslate string
 
 const (
-	HgroupTranslateYes   HgroupTranslate = "yes"
 	HgroupTranslateNo    HgroupTranslate = "no"
+	HgroupTranslateYes   HgroupTranslate = "yes"
 	HgroupTranslateEmpty HgroupTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *HgroupElement) Nonce(s string) *HgroupElement {
 
 func (e *HgroupElement) Popover(s string) *HgroupElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *HgroupElement) Role(s string) *HgroupElement {
+	e.attributes["role"] = s
 
 	return e
 }

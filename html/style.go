@@ -70,18 +70,18 @@ const (
 type StyleContenteditable string
 
 const (
+	StyleContenteditableFalse         StyleContenteditable = "false"
 	StyleContenteditablePlaintextOnly StyleContenteditable = "plaintext-only"
 	StyleContenteditableTrue          StyleContenteditable = "true"
-	StyleContenteditableFalse         StyleContenteditable = "false"
 	StyleContenteditableEmpty         StyleContenteditable = ""
 )
 
 type StyleDir string
 
 const (
+	StyleDirRtl  StyleDir = "rtl"
 	StyleDirAuto StyleDir = "auto"
 	StyleDirLtr  StyleDir = "ltr"
-	StyleDirRtl  StyleDir = "rtl"
 )
 
 type StyleDraggable string
@@ -94,13 +94,13 @@ const (
 type StyleEnterkeyhint string
 
 const (
+	StyleEnterkeyhintPrevious StyleEnterkeyhint = "previous"
 	StyleEnterkeyhintSearch   StyleEnterkeyhint = "search"
 	StyleEnterkeyhintSend     StyleEnterkeyhint = "send"
 	StyleEnterkeyhintDone     StyleEnterkeyhint = "done"
 	StyleEnterkeyhintEnter    StyleEnterkeyhint = "enter"
 	StyleEnterkeyhintGo       StyleEnterkeyhint = "go"
 	StyleEnterkeyhintNext     StyleEnterkeyhint = "next"
-	StyleEnterkeyhintPrevious StyleEnterkeyhint = "previous"
 )
 
 type StyleHidden string
@@ -114,14 +114,14 @@ const (
 type StyleInputmode string
 
 const (
+	StyleInputmodeDecimal StyleInputmode = "decimal"
+	StyleInputmodeEmail   StyleInputmode = "email"
+	StyleInputmodeNone    StyleInputmode = "none"
 	StyleInputmodeNumeric StyleInputmode = "numeric"
 	StyleInputmodeSearch  StyleInputmode = "search"
 	StyleInputmodeTel     StyleInputmode = "tel"
 	StyleInputmodeText    StyleInputmode = "text"
 	StyleInputmodeUrl     StyleInputmode = "url"
-	StyleInputmodeDecimal StyleInputmode = "decimal"
-	StyleInputmodeEmail   StyleInputmode = "email"
-	StyleInputmodeNone    StyleInputmode = "none"
 )
 
 type StyleSpellcheck string
@@ -135,16 +135,16 @@ const (
 type StyleTranslate string
 
 const (
-	StyleTranslateNo    StyleTranslate = "no"
 	StyleTranslateYes   StyleTranslate = "yes"
+	StyleTranslateNo    StyleTranslate = "no"
 	StyleTranslateEmpty StyleTranslate = ""
 )
 
 type StyleWritingsuggestions string
 
 const (
-	StyleWritingsuggestionsFalse StyleWritingsuggestions = "false"
 	StyleWritingsuggestionsTrue  StyleWritingsuggestions = "true"
+	StyleWritingsuggestionsFalse StyleWritingsuggestions = "false"
 	StyleWritingsuggestionsEmpty StyleWritingsuggestions = ""
 )
 
@@ -302,6 +302,12 @@ func (e *StyleElement) Nonce(s string) *StyleElement {
 
 func (e *StyleElement) Popover(s string) *StyleElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *StyleElement) Role(s string) *StyleElement {
+	e.attributes["role"] = s
 
 	return e
 }

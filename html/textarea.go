@@ -58,19 +58,19 @@ const (
 type TextareaAutocapitalize string
 
 const (
-	TextareaAutocapitalizeCharacters TextareaAutocapitalize = "characters"
-	TextareaAutocapitalizeNone       TextareaAutocapitalize = "none"
 	TextareaAutocapitalizeOff        TextareaAutocapitalize = "off"
 	TextareaAutocapitalizeOn         TextareaAutocapitalize = "on"
 	TextareaAutocapitalizeSentences  TextareaAutocapitalize = "sentences"
 	TextareaAutocapitalizeWords      TextareaAutocapitalize = "words"
+	TextareaAutocapitalizeCharacters TextareaAutocapitalize = "characters"
+	TextareaAutocapitalizeNone       TextareaAutocapitalize = "none"
 )
 
 type TextareaAutocorrect string
 
 const (
-	TextareaAutocorrectOff   TextareaAutocorrect = "off"
 	TextareaAutocorrectOn    TextareaAutocorrect = "on"
+	TextareaAutocorrectOff   TextareaAutocorrect = "off"
 	TextareaAutocorrectEmpty TextareaAutocorrect = ""
 )
 
@@ -94,8 +94,8 @@ const (
 type TextareaDraggable string
 
 const (
-	TextareaDraggableTrue  TextareaDraggable = "true"
 	TextareaDraggableFalse TextareaDraggable = "false"
+	TextareaDraggableTrue  TextareaDraggable = "true"
 )
 
 type TextareaEnterkeyhint string
@@ -121,14 +121,14 @@ const (
 type TextareaInputmode string
 
 const (
+	TextareaInputmodeNumeric TextareaInputmode = "numeric"
+	TextareaInputmodeSearch  TextareaInputmode = "search"
 	TextareaInputmodeTel     TextareaInputmode = "tel"
 	TextareaInputmodeText    TextareaInputmode = "text"
 	TextareaInputmodeUrl     TextareaInputmode = "url"
 	TextareaInputmodeDecimal TextareaInputmode = "decimal"
 	TextareaInputmodeEmail   TextareaInputmode = "email"
 	TextareaInputmodeNone    TextareaInputmode = "none"
-	TextareaInputmodeNumeric TextareaInputmode = "numeric"
-	TextareaInputmodeSearch  TextareaInputmode = "search"
 )
 
 type TextareaSpellcheck string
@@ -150,8 +150,8 @@ const (
 type TextareaWritingsuggestions string
 
 const (
-	TextareaWritingsuggestionsTrue  TextareaWritingsuggestions = "true"
 	TextareaWritingsuggestionsFalse TextareaWritingsuggestions = "false"
+	TextareaWritingsuggestionsTrue  TextareaWritingsuggestions = "true"
 	TextareaWritingsuggestionsEmpty TextareaWritingsuggestions = ""
 )
 
@@ -375,6 +375,12 @@ func (e *TextareaElement) Nonce(s string) *TextareaElement {
 
 func (e *TextareaElement) Popover(s string) *TextareaElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TextareaElement) Role(s string) *TextareaElement {
+	e.attributes["role"] = s
 
 	return e
 }

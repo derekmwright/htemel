@@ -66,12 +66,12 @@ const (
 type FormAutocapitalize string
 
 const (
+	FormAutocapitalizeSentences  FormAutocapitalize = "sentences"
+	FormAutocapitalizeWords      FormAutocapitalize = "words"
 	FormAutocapitalizeCharacters FormAutocapitalize = "characters"
 	FormAutocapitalizeNone       FormAutocapitalize = "none"
 	FormAutocapitalizeOff        FormAutocapitalize = "off"
 	FormAutocapitalizeOn         FormAutocapitalize = "on"
-	FormAutocapitalizeSentences  FormAutocapitalize = "sentences"
-	FormAutocapitalizeWords      FormAutocapitalize = "words"
 )
 
 type FormAutocorrect string
@@ -85,9 +85,9 @@ const (
 type FormContenteditable string
 
 const (
+	FormContenteditableTrue          FormContenteditable = "true"
 	FormContenteditableFalse         FormContenteditable = "false"
 	FormContenteditablePlaintextOnly FormContenteditable = "plaintext-only"
-	FormContenteditableTrue          FormContenteditable = "true"
 	FormContenteditableEmpty         FormContenteditable = ""
 )
 
@@ -109,13 +109,13 @@ const (
 type FormEnterkeyhint string
 
 const (
-	FormEnterkeyhintNext     FormEnterkeyhint = "next"
 	FormEnterkeyhintPrevious FormEnterkeyhint = "previous"
 	FormEnterkeyhintSearch   FormEnterkeyhint = "search"
 	FormEnterkeyhintSend     FormEnterkeyhint = "send"
 	FormEnterkeyhintDone     FormEnterkeyhint = "done"
 	FormEnterkeyhintEnter    FormEnterkeyhint = "enter"
 	FormEnterkeyhintGo       FormEnterkeyhint = "go"
+	FormEnterkeyhintNext     FormEnterkeyhint = "next"
 )
 
 type FormHidden string
@@ -129,21 +129,21 @@ const (
 type FormInputmode string
 
 const (
+	FormInputmodeTel     FormInputmode = "tel"
+	FormInputmodeText    FormInputmode = "text"
+	FormInputmodeUrl     FormInputmode = "url"
 	FormInputmodeDecimal FormInputmode = "decimal"
 	FormInputmodeEmail   FormInputmode = "email"
 	FormInputmodeNone    FormInputmode = "none"
 	FormInputmodeNumeric FormInputmode = "numeric"
 	FormInputmodeSearch  FormInputmode = "search"
-	FormInputmodeTel     FormInputmode = "tel"
-	FormInputmodeText    FormInputmode = "text"
-	FormInputmodeUrl     FormInputmode = "url"
 )
 
 type FormSpellcheck string
 
 const (
-	FormSpellcheckTrue  FormSpellcheck = "true"
 	FormSpellcheckFalse FormSpellcheck = "false"
+	FormSpellcheckTrue  FormSpellcheck = "true"
 	FormSpellcheckEmpty FormSpellcheck = ""
 )
 
@@ -359,6 +359,12 @@ func (e *FormElement) Nonce(s string) *FormElement {
 
 func (e *FormElement) Popover(s string) *FormElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *FormElement) Role(s string) *FormElement {
+	e.attributes["role"] = s
 
 	return e
 }

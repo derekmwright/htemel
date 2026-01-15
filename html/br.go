@@ -42,19 +42,19 @@ func BrIf(condition bool) *BrElement {
 type BrAutocapitalize string
 
 const (
+	BrAutocapitalizeCharacters BrAutocapitalize = "characters"
+	BrAutocapitalizeNone       BrAutocapitalize = "none"
 	BrAutocapitalizeOff        BrAutocapitalize = "off"
 	BrAutocapitalizeOn         BrAutocapitalize = "on"
 	BrAutocapitalizeSentences  BrAutocapitalize = "sentences"
 	BrAutocapitalizeWords      BrAutocapitalize = "words"
-	BrAutocapitalizeCharacters BrAutocapitalize = "characters"
-	BrAutocapitalizeNone       BrAutocapitalize = "none"
 )
 
 type BrAutocorrect string
 
 const (
-	BrAutocorrectOn    BrAutocorrect = "on"
 	BrAutocorrectOff   BrAutocorrect = "off"
+	BrAutocorrectOn    BrAutocorrect = "on"
 	BrAutocorrectEmpty BrAutocorrect = ""
 )
 
@@ -85,13 +85,13 @@ const (
 type BrEnterkeyhint string
 
 const (
-	BrEnterkeyhintEnter    BrEnterkeyhint = "enter"
 	BrEnterkeyhintGo       BrEnterkeyhint = "go"
 	BrEnterkeyhintNext     BrEnterkeyhint = "next"
 	BrEnterkeyhintPrevious BrEnterkeyhint = "previous"
 	BrEnterkeyhintSearch   BrEnterkeyhint = "search"
 	BrEnterkeyhintSend     BrEnterkeyhint = "send"
 	BrEnterkeyhintDone     BrEnterkeyhint = "done"
+	BrEnterkeyhintEnter    BrEnterkeyhint = "enter"
 )
 
 type BrHidden string
@@ -105,14 +105,14 @@ const (
 type BrInputmode string
 
 const (
-	BrInputmodeUrl     BrInputmode = "url"
-	BrInputmodeDecimal BrInputmode = "decimal"
-	BrInputmodeEmail   BrInputmode = "email"
 	BrInputmodeNone    BrInputmode = "none"
 	BrInputmodeNumeric BrInputmode = "numeric"
 	BrInputmodeSearch  BrInputmode = "search"
 	BrInputmodeTel     BrInputmode = "tel"
 	BrInputmodeText    BrInputmode = "text"
+	BrInputmodeUrl     BrInputmode = "url"
+	BrInputmodeDecimal BrInputmode = "decimal"
+	BrInputmodeEmail   BrInputmode = "email"
 )
 
 type BrSpellcheck string
@@ -281,6 +281,12 @@ func (e *BrElement) Nonce(s string) *BrElement {
 
 func (e *BrElement) Popover(s string) *BrElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *BrElement) Role(s string) *BrElement {
+	e.attributes["role"] = s
 
 	return e
 }

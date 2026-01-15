@@ -51,37 +51,37 @@ func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
 type AAutocapitalize string
 
 const (
+	AAutocapitalizeSentences  AAutocapitalize = "sentences"
+	AAutocapitalizeWords      AAutocapitalize = "words"
 	AAutocapitalizeCharacters AAutocapitalize = "characters"
 	AAutocapitalizeNone       AAutocapitalize = "none"
 	AAutocapitalizeOff        AAutocapitalize = "off"
 	AAutocapitalizeOn         AAutocapitalize = "on"
-	AAutocapitalizeSentences  AAutocapitalize = "sentences"
-	AAutocapitalizeWords      AAutocapitalize = "words"
 )
 
 type AAutocorrect string
 
 const (
-	AAutocorrectOff   AAutocorrect = "off"
 	AAutocorrectOn    AAutocorrect = "on"
+	AAutocorrectOff   AAutocorrect = "off"
 	AAutocorrectEmpty AAutocorrect = ""
 )
 
 type AContenteditable string
 
 const (
-	AContenteditableTrue          AContenteditable = "true"
 	AContenteditableFalse         AContenteditable = "false"
 	AContenteditablePlaintextOnly AContenteditable = "plaintext-only"
+	AContenteditableTrue          AContenteditable = "true"
 	AContenteditableEmpty         AContenteditable = ""
 )
 
 type ADir string
 
 const (
-	ADirRtl  ADir = "rtl"
 	ADirAuto ADir = "auto"
 	ADirLtr  ADir = "ltr"
+	ADirRtl  ADir = "rtl"
 )
 
 type ADraggable string
@@ -94,13 +94,13 @@ const (
 type AEnterkeyhint string
 
 const (
-	AEnterkeyhintSearch   AEnterkeyhint = "search"
 	AEnterkeyhintSend     AEnterkeyhint = "send"
 	AEnterkeyhintDone     AEnterkeyhint = "done"
 	AEnterkeyhintEnter    AEnterkeyhint = "enter"
 	AEnterkeyhintGo       AEnterkeyhint = "go"
 	AEnterkeyhintNext     AEnterkeyhint = "next"
 	AEnterkeyhintPrevious AEnterkeyhint = "previous"
+	AEnterkeyhintSearch   AEnterkeyhint = "search"
 )
 
 type AHidden string
@@ -114,14 +114,14 @@ const (
 type AInputmode string
 
 const (
+	AInputmodeNumeric AInputmode = "numeric"
+	AInputmodeSearch  AInputmode = "search"
 	AInputmodeTel     AInputmode = "tel"
 	AInputmodeText    AInputmode = "text"
 	AInputmodeUrl     AInputmode = "url"
 	AInputmodeDecimal AInputmode = "decimal"
 	AInputmodeEmail   AInputmode = "email"
 	AInputmodeNone    AInputmode = "none"
-	AInputmodeNumeric AInputmode = "numeric"
-	AInputmodeSearch  AInputmode = "search"
 )
 
 type ASpellcheck string
@@ -338,6 +338,12 @@ func (e *AElement) Nonce(s string) *AElement {
 
 func (e *AElement) Popover(s string) *AElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *AElement) Role(s string) *AElement {
+	e.attributes["role"] = s
 
 	return e
 }

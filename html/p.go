@@ -51,37 +51,37 @@ func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
 type PAutocapitalize string
 
 const (
+	PAutocapitalizeWords      PAutocapitalize = "words"
 	PAutocapitalizeCharacters PAutocapitalize = "characters"
 	PAutocapitalizeNone       PAutocapitalize = "none"
 	PAutocapitalizeOff        PAutocapitalize = "off"
 	PAutocapitalizeOn         PAutocapitalize = "on"
 	PAutocapitalizeSentences  PAutocapitalize = "sentences"
-	PAutocapitalizeWords      PAutocapitalize = "words"
 )
 
 type PAutocorrect string
 
 const (
-	PAutocorrectOn    PAutocorrect = "on"
 	PAutocorrectOff   PAutocorrect = "off"
+	PAutocorrectOn    PAutocorrect = "on"
 	PAutocorrectEmpty PAutocorrect = ""
 )
 
 type PContenteditable string
 
 const (
+	PContenteditableTrue          PContenteditable = "true"
 	PContenteditableFalse         PContenteditable = "false"
 	PContenteditablePlaintextOnly PContenteditable = "plaintext-only"
-	PContenteditableTrue          PContenteditable = "true"
 	PContenteditableEmpty         PContenteditable = ""
 )
 
 type PDir string
 
 const (
+	PDirRtl  PDir = "rtl"
 	PDirAuto PDir = "auto"
 	PDirLtr  PDir = "ltr"
-	PDirRtl  PDir = "rtl"
 )
 
 type PDraggable string
@@ -114,14 +114,14 @@ const (
 type PInputmode string
 
 const (
+	PInputmodeSearch  PInputmode = "search"
+	PInputmodeTel     PInputmode = "tel"
 	PInputmodeText    PInputmode = "text"
 	PInputmodeUrl     PInputmode = "url"
 	PInputmodeDecimal PInputmode = "decimal"
 	PInputmodeEmail   PInputmode = "email"
 	PInputmodeNone    PInputmode = "none"
 	PInputmodeNumeric PInputmode = "numeric"
-	PInputmodeSearch  PInputmode = "search"
-	PInputmodeTel     PInputmode = "tel"
 )
 
 type PSpellcheck string
@@ -290,6 +290,12 @@ func (e *PElement) Nonce(s string) *PElement {
 
 func (e *PElement) Popover(s string) *PElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *PElement) Role(s string) *PElement {
+	e.attributes["role"] = s
 
 	return e
 }

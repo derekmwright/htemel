@@ -79,9 +79,9 @@ const (
 type MainDir string
 
 const (
-	MainDirAuto MainDir = "auto"
 	MainDirLtr  MainDir = "ltr"
 	MainDirRtl  MainDir = "rtl"
+	MainDirAuto MainDir = "auto"
 )
 
 type MainDraggable string
@@ -94,13 +94,13 @@ const (
 type MainEnterkeyhint string
 
 const (
-	MainEnterkeyhintPrevious MainEnterkeyhint = "previous"
 	MainEnterkeyhintSearch   MainEnterkeyhint = "search"
 	MainEnterkeyhintSend     MainEnterkeyhint = "send"
 	MainEnterkeyhintDone     MainEnterkeyhint = "done"
 	MainEnterkeyhintEnter    MainEnterkeyhint = "enter"
 	MainEnterkeyhintGo       MainEnterkeyhint = "go"
 	MainEnterkeyhintNext     MainEnterkeyhint = "next"
+	MainEnterkeyhintPrevious MainEnterkeyhint = "previous"
 )
 
 type MainHidden string
@@ -114,14 +114,14 @@ const (
 type MainInputmode string
 
 const (
-	MainInputmodeUrl     MainInputmode = "url"
-	MainInputmodeDecimal MainInputmode = "decimal"
 	MainInputmodeEmail   MainInputmode = "email"
 	MainInputmodeNone    MainInputmode = "none"
 	MainInputmodeNumeric MainInputmode = "numeric"
 	MainInputmodeSearch  MainInputmode = "search"
 	MainInputmodeTel     MainInputmode = "tel"
 	MainInputmodeText    MainInputmode = "text"
+	MainInputmodeUrl     MainInputmode = "url"
+	MainInputmodeDecimal MainInputmode = "decimal"
 )
 
 type MainSpellcheck string
@@ -143,8 +143,8 @@ const (
 type MainWritingsuggestions string
 
 const (
-	MainWritingsuggestionsFalse MainWritingsuggestions = "false"
 	MainWritingsuggestionsTrue  MainWritingsuggestions = "true"
+	MainWritingsuggestionsFalse MainWritingsuggestions = "false"
 	MainWritingsuggestionsEmpty MainWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *MainElement) Nonce(s string) *MainElement {
 
 func (e *MainElement) Popover(s string) *MainElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *MainElement) Role(s string) *MainElement {
+	e.attributes["role"] = s
 
 	return e
 }

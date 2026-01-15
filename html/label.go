@@ -51,12 +51,12 @@ func LabelTernary(condition bool, true htemel.Node, false htemel.Node) *LabelEle
 type LabelAutocapitalize string
 
 const (
-	LabelAutocapitalizeOn         LabelAutocapitalize = "on"
-	LabelAutocapitalizeSentences  LabelAutocapitalize = "sentences"
-	LabelAutocapitalizeWords      LabelAutocapitalize = "words"
 	LabelAutocapitalizeCharacters LabelAutocapitalize = "characters"
 	LabelAutocapitalizeNone       LabelAutocapitalize = "none"
 	LabelAutocapitalizeOff        LabelAutocapitalize = "off"
+	LabelAutocapitalizeOn         LabelAutocapitalize = "on"
+	LabelAutocapitalizeSentences  LabelAutocapitalize = "sentences"
+	LabelAutocapitalizeWords      LabelAutocapitalize = "words"
 )
 
 type LabelAutocorrect string
@@ -70,18 +70,18 @@ const (
 type LabelContenteditable string
 
 const (
-	LabelContenteditableFalse         LabelContenteditable = "false"
 	LabelContenteditablePlaintextOnly LabelContenteditable = "plaintext-only"
 	LabelContenteditableTrue          LabelContenteditable = "true"
+	LabelContenteditableFalse         LabelContenteditable = "false"
 	LabelContenteditableEmpty         LabelContenteditable = ""
 )
 
 type LabelDir string
 
 const (
-	LabelDirRtl  LabelDir = "rtl"
 	LabelDirAuto LabelDir = "auto"
 	LabelDirLtr  LabelDir = "ltr"
+	LabelDirRtl  LabelDir = "rtl"
 )
 
 type LabelDraggable string
@@ -94,34 +94,34 @@ const (
 type LabelEnterkeyhint string
 
 const (
+	LabelEnterkeyhintPrevious LabelEnterkeyhint = "previous"
+	LabelEnterkeyhintSearch   LabelEnterkeyhint = "search"
+	LabelEnterkeyhintSend     LabelEnterkeyhint = "send"
 	LabelEnterkeyhintDone     LabelEnterkeyhint = "done"
 	LabelEnterkeyhintEnter    LabelEnterkeyhint = "enter"
 	LabelEnterkeyhintGo       LabelEnterkeyhint = "go"
 	LabelEnterkeyhintNext     LabelEnterkeyhint = "next"
-	LabelEnterkeyhintPrevious LabelEnterkeyhint = "previous"
-	LabelEnterkeyhintSearch   LabelEnterkeyhint = "search"
-	LabelEnterkeyhintSend     LabelEnterkeyhint = "send"
 )
 
 type LabelHidden string
 
 const (
-	LabelHiddenUntilFound LabelHidden = "until-found"
 	LabelHiddenHidden     LabelHidden = "hidden"
+	LabelHiddenUntilFound LabelHidden = "until-found"
 	LabelHiddenEmpty      LabelHidden = ""
 )
 
 type LabelInputmode string
 
 const (
+	LabelInputmodeDecimal LabelInputmode = "decimal"
+	LabelInputmodeEmail   LabelInputmode = "email"
 	LabelInputmodeNone    LabelInputmode = "none"
 	LabelInputmodeNumeric LabelInputmode = "numeric"
 	LabelInputmodeSearch  LabelInputmode = "search"
 	LabelInputmodeTel     LabelInputmode = "tel"
 	LabelInputmodeText    LabelInputmode = "text"
 	LabelInputmodeUrl     LabelInputmode = "url"
-	LabelInputmodeDecimal LabelInputmode = "decimal"
-	LabelInputmodeEmail   LabelInputmode = "email"
 )
 
 type LabelSpellcheck string
@@ -296,6 +296,12 @@ func (e *LabelElement) Nonce(s string) *LabelElement {
 
 func (e *LabelElement) Popover(s string) *LabelElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *LabelElement) Role(s string) *LabelElement {
+	e.attributes["role"] = s
 
 	return e
 }

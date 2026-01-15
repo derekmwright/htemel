@@ -2283,6 +2283,11 @@
       "attribute_type": "AttributeTypeString"
     },
     {
+      "name": "role",
+      "description": "The role attribute, if specified, must have a value that is a valid BCP 47 language tag, or the empty string. The attribute's value must conform to the ARIA in HTML specification.",
+      "attribute_type": "AttributeTypeString"
+    },
+    {
       "name": "slot",
       "description": "The slot attribute is used to assign a slot to an element: an element with a slot attribute is assigned to the slot created by the slot element whose name attribute's value matches that slot attribute's value — but only if that slot element finds itself in the shadow tree whose root's host has the corresponding slot attribute value.",
       "attribute_type": "AttributeTypeString"

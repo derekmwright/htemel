@@ -87,58 +87,58 @@ const (
 type VideoContenteditable string
 
 const (
-	VideoContenteditableTrue          VideoContenteditable = "true"
 	VideoContenteditableFalse         VideoContenteditable = "false"
 	VideoContenteditablePlaintextOnly VideoContenteditable = "plaintext-only"
+	VideoContenteditableTrue          VideoContenteditable = "true"
 	VideoContenteditableEmpty         VideoContenteditable = ""
 )
 
 type VideoDir string
 
 const (
+	VideoDirAuto VideoDir = "auto"
 	VideoDirLtr  VideoDir = "ltr"
 	VideoDirRtl  VideoDir = "rtl"
-	VideoDirAuto VideoDir = "auto"
 )
 
 type VideoDraggable string
 
 const (
-	VideoDraggableFalse VideoDraggable = "false"
 	VideoDraggableTrue  VideoDraggable = "true"
+	VideoDraggableFalse VideoDraggable = "false"
 )
 
 type VideoEnterkeyhint string
 
 const (
+	VideoEnterkeyhintDone     VideoEnterkeyhint = "done"
 	VideoEnterkeyhintEnter    VideoEnterkeyhint = "enter"
 	VideoEnterkeyhintGo       VideoEnterkeyhint = "go"
 	VideoEnterkeyhintNext     VideoEnterkeyhint = "next"
 	VideoEnterkeyhintPrevious VideoEnterkeyhint = "previous"
 	VideoEnterkeyhintSearch   VideoEnterkeyhint = "search"
 	VideoEnterkeyhintSend     VideoEnterkeyhint = "send"
-	VideoEnterkeyhintDone     VideoEnterkeyhint = "done"
 )
 
 type VideoHidden string
 
 const (
-	VideoHiddenHidden     VideoHidden = "hidden"
 	VideoHiddenUntilFound VideoHidden = "until-found"
+	VideoHiddenHidden     VideoHidden = "hidden"
 	VideoHiddenEmpty      VideoHidden = ""
 )
 
 type VideoInputmode string
 
 const (
-	VideoInputmodeTel     VideoInputmode = "tel"
-	VideoInputmodeText    VideoInputmode = "text"
-	VideoInputmodeUrl     VideoInputmode = "url"
-	VideoInputmodeDecimal VideoInputmode = "decimal"
 	VideoInputmodeEmail   VideoInputmode = "email"
 	VideoInputmodeNone    VideoInputmode = "none"
 	VideoInputmodeNumeric VideoInputmode = "numeric"
 	VideoInputmodeSearch  VideoInputmode = "search"
+	VideoInputmodeTel     VideoInputmode = "tel"
+	VideoInputmodeText    VideoInputmode = "text"
+	VideoInputmodeUrl     VideoInputmode = "url"
+	VideoInputmodeDecimal VideoInputmode = "decimal"
 )
 
 type VideoSpellcheck string
@@ -373,6 +373,12 @@ func (e *VideoElement) Nonce(s string) *VideoElement {
 
 func (e *VideoElement) Popover(s string) *VideoElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *VideoElement) Role(s string) *VideoElement {
+	e.attributes["role"] = s
 
 	return e
 }

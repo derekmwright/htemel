@@ -51,12 +51,12 @@ func TdTernary(condition bool, true htemel.Node, false htemel.Node) *TdElement {
 type TdAutocapitalize string
 
 const (
+	TdAutocapitalizeOn         TdAutocapitalize = "on"
+	TdAutocapitalizeSentences  TdAutocapitalize = "sentences"
 	TdAutocapitalizeWords      TdAutocapitalize = "words"
 	TdAutocapitalizeCharacters TdAutocapitalize = "characters"
 	TdAutocapitalizeNone       TdAutocapitalize = "none"
 	TdAutocapitalizeOff        TdAutocapitalize = "off"
-	TdAutocapitalizeOn         TdAutocapitalize = "on"
-	TdAutocapitalizeSentences  TdAutocapitalize = "sentences"
 )
 
 type TdAutocorrect string
@@ -70,9 +70,9 @@ const (
 type TdContenteditable string
 
 const (
+	TdContenteditableFalse         TdContenteditable = "false"
 	TdContenteditablePlaintextOnly TdContenteditable = "plaintext-only"
 	TdContenteditableTrue          TdContenteditable = "true"
-	TdContenteditableFalse         TdContenteditable = "false"
 	TdContenteditableEmpty         TdContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type TdEnterkeyhint string
 
 const (
+	TdEnterkeyhintSearch   TdEnterkeyhint = "search"
+	TdEnterkeyhintSend     TdEnterkeyhint = "send"
+	TdEnterkeyhintDone     TdEnterkeyhint = "done"
 	TdEnterkeyhintEnter    TdEnterkeyhint = "enter"
 	TdEnterkeyhintGo       TdEnterkeyhint = "go"
 	TdEnterkeyhintNext     TdEnterkeyhint = "next"
 	TdEnterkeyhintPrevious TdEnterkeyhint = "previous"
-	TdEnterkeyhintSearch   TdEnterkeyhint = "search"
-	TdEnterkeyhintSend     TdEnterkeyhint = "send"
-	TdEnterkeyhintDone     TdEnterkeyhint = "done"
 )
 
 type TdHidden string
@@ -114,7 +114,6 @@ const (
 type TdInputmode string
 
 const (
-	TdInputmodeUrl     TdInputmode = "url"
 	TdInputmodeDecimal TdInputmode = "decimal"
 	TdInputmodeEmail   TdInputmode = "email"
 	TdInputmodeNone    TdInputmode = "none"
@@ -122,6 +121,7 @@ const (
 	TdInputmodeSearch  TdInputmode = "search"
 	TdInputmodeTel     TdInputmode = "tel"
 	TdInputmodeText    TdInputmode = "text"
+	TdInputmodeUrl     TdInputmode = "url"
 )
 
 type TdSpellcheck string
@@ -308,6 +308,12 @@ func (e *TdElement) Nonce(s string) *TdElement {
 
 func (e *TdElement) Popover(s string) *TdElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TdElement) Role(s string) *TdElement {
+	e.attributes["role"] = s
 
 	return e
 }

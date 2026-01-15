@@ -51,12 +51,12 @@ func TbodyTernary(condition bool, true htemel.Node, false htemel.Node) *TbodyEle
 type TbodyAutocapitalize string
 
 const (
-	TbodyAutocapitalizeWords      TbodyAutocapitalize = "words"
-	TbodyAutocapitalizeCharacters TbodyAutocapitalize = "characters"
 	TbodyAutocapitalizeNone       TbodyAutocapitalize = "none"
 	TbodyAutocapitalizeOff        TbodyAutocapitalize = "off"
 	TbodyAutocapitalizeOn         TbodyAutocapitalize = "on"
 	TbodyAutocapitalizeSentences  TbodyAutocapitalize = "sentences"
+	TbodyAutocapitalizeWords      TbodyAutocapitalize = "words"
+	TbodyAutocapitalizeCharacters TbodyAutocapitalize = "characters"
 )
 
 type TbodyAutocorrect string
@@ -70,18 +70,18 @@ const (
 type TbodyContenteditable string
 
 const (
-	TbodyContenteditableTrue          TbodyContenteditable = "true"
 	TbodyContenteditableFalse         TbodyContenteditable = "false"
 	TbodyContenteditablePlaintextOnly TbodyContenteditable = "plaintext-only"
+	TbodyContenteditableTrue          TbodyContenteditable = "true"
 	TbodyContenteditableEmpty         TbodyContenteditable = ""
 )
 
 type TbodyDir string
 
 const (
-	TbodyDirRtl  TbodyDir = "rtl"
 	TbodyDirAuto TbodyDir = "auto"
 	TbodyDirLtr  TbodyDir = "ltr"
+	TbodyDirRtl  TbodyDir = "rtl"
 )
 
 type TbodyDraggable string
@@ -94,13 +94,13 @@ const (
 type TbodyEnterkeyhint string
 
 const (
+	TbodyEnterkeyhintDone     TbodyEnterkeyhint = "done"
+	TbodyEnterkeyhintEnter    TbodyEnterkeyhint = "enter"
 	TbodyEnterkeyhintGo       TbodyEnterkeyhint = "go"
 	TbodyEnterkeyhintNext     TbodyEnterkeyhint = "next"
 	TbodyEnterkeyhintPrevious TbodyEnterkeyhint = "previous"
 	TbodyEnterkeyhintSearch   TbodyEnterkeyhint = "search"
 	TbodyEnterkeyhintSend     TbodyEnterkeyhint = "send"
-	TbodyEnterkeyhintDone     TbodyEnterkeyhint = "done"
-	TbodyEnterkeyhintEnter    TbodyEnterkeyhint = "enter"
 )
 
 type TbodyHidden string
@@ -114,14 +114,14 @@ const (
 type TbodyInputmode string
 
 const (
-	TbodyInputmodeUrl     TbodyInputmode = "url"
-	TbodyInputmodeDecimal TbodyInputmode = "decimal"
 	TbodyInputmodeEmail   TbodyInputmode = "email"
 	TbodyInputmodeNone    TbodyInputmode = "none"
 	TbodyInputmodeNumeric TbodyInputmode = "numeric"
 	TbodyInputmodeSearch  TbodyInputmode = "search"
 	TbodyInputmodeTel     TbodyInputmode = "tel"
 	TbodyInputmodeText    TbodyInputmode = "text"
+	TbodyInputmodeUrl     TbodyInputmode = "url"
+	TbodyInputmodeDecimal TbodyInputmode = "decimal"
 )
 
 type TbodySpellcheck string
@@ -135,8 +135,8 @@ const (
 type TbodyTranslate string
 
 const (
-	TbodyTranslateNo    TbodyTranslate = "no"
 	TbodyTranslateYes   TbodyTranslate = "yes"
+	TbodyTranslateNo    TbodyTranslate = "no"
 	TbodyTranslateEmpty TbodyTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *TbodyElement) Nonce(s string) *TbodyElement {
 
 func (e *TbodyElement) Popover(s string) *TbodyElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TbodyElement) Role(s string) *TbodyElement {
+	e.attributes["role"] = s
 
 	return e
 }

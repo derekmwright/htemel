@@ -85,13 +85,13 @@ const (
 type ColEnterkeyhint string
 
 const (
-	ColEnterkeyhintPrevious ColEnterkeyhint = "previous"
-	ColEnterkeyhintSearch   ColEnterkeyhint = "search"
-	ColEnterkeyhintSend     ColEnterkeyhint = "send"
 	ColEnterkeyhintDone     ColEnterkeyhint = "done"
 	ColEnterkeyhintEnter    ColEnterkeyhint = "enter"
 	ColEnterkeyhintGo       ColEnterkeyhint = "go"
 	ColEnterkeyhintNext     ColEnterkeyhint = "next"
+	ColEnterkeyhintPrevious ColEnterkeyhint = "previous"
+	ColEnterkeyhintSearch   ColEnterkeyhint = "search"
+	ColEnterkeyhintSend     ColEnterkeyhint = "send"
 )
 
 type ColHidden string
@@ -105,7 +105,6 @@ const (
 type ColInputmode string
 
 const (
-	ColInputmodeUrl     ColInputmode = "url"
 	ColInputmodeDecimal ColInputmode = "decimal"
 	ColInputmodeEmail   ColInputmode = "email"
 	ColInputmodeNone    ColInputmode = "none"
@@ -113,21 +112,22 @@ const (
 	ColInputmodeSearch  ColInputmode = "search"
 	ColInputmodeTel     ColInputmode = "tel"
 	ColInputmodeText    ColInputmode = "text"
+	ColInputmodeUrl     ColInputmode = "url"
 )
 
 type ColSpellcheck string
 
 const (
-	ColSpellcheckFalse ColSpellcheck = "false"
 	ColSpellcheckTrue  ColSpellcheck = "true"
+	ColSpellcheckFalse ColSpellcheck = "false"
 	ColSpellcheckEmpty ColSpellcheck = ""
 )
 
 type ColTranslate string
 
 const (
-	ColTranslateYes   ColTranslate = "yes"
 	ColTranslateNo    ColTranslate = "no"
+	ColTranslateYes   ColTranslate = "yes"
 	ColTranslateEmpty ColTranslate = ""
 )
 
@@ -287,6 +287,12 @@ func (e *ColElement) Nonce(s string) *ColElement {
 
 func (e *ColElement) Popover(s string) *ColElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *ColElement) Role(s string) *ColElement {
+	e.attributes["role"] = s
 
 	return e
 }

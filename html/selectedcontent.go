@@ -62,17 +62,17 @@ const (
 type SelectedcontentAutocorrect string
 
 const (
-	SelectedcontentAutocorrectOn    SelectedcontentAutocorrect = "on"
 	SelectedcontentAutocorrectOff   SelectedcontentAutocorrect = "off"
+	SelectedcontentAutocorrectOn    SelectedcontentAutocorrect = "on"
 	SelectedcontentAutocorrectEmpty SelectedcontentAutocorrect = ""
 )
 
 type SelectedcontentContenteditable string
 
 const (
-	SelectedcontentContenteditableFalse         SelectedcontentContenteditable = "false"
 	SelectedcontentContenteditablePlaintextOnly SelectedcontentContenteditable = "plaintext-only"
 	SelectedcontentContenteditableTrue          SelectedcontentContenteditable = "true"
+	SelectedcontentContenteditableFalse         SelectedcontentContenteditable = "false"
 	SelectedcontentContenteditableEmpty         SelectedcontentContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type SelectedcontentEnterkeyhint string
 
 const (
-	SelectedcontentEnterkeyhintNext     SelectedcontentEnterkeyhint = "next"
 	SelectedcontentEnterkeyhintPrevious SelectedcontentEnterkeyhint = "previous"
 	SelectedcontentEnterkeyhintSearch   SelectedcontentEnterkeyhint = "search"
 	SelectedcontentEnterkeyhintSend     SelectedcontentEnterkeyhint = "send"
 	SelectedcontentEnterkeyhintDone     SelectedcontentEnterkeyhint = "done"
 	SelectedcontentEnterkeyhintEnter    SelectedcontentEnterkeyhint = "enter"
 	SelectedcontentEnterkeyhintGo       SelectedcontentEnterkeyhint = "go"
+	SelectedcontentEnterkeyhintNext     SelectedcontentEnterkeyhint = "next"
 )
 
 type SelectedcontentHidden string
@@ -114,6 +114,7 @@ const (
 type SelectedcontentInputmode string
 
 const (
+	SelectedcontentInputmodeUrl     SelectedcontentInputmode = "url"
 	SelectedcontentInputmodeDecimal SelectedcontentInputmode = "decimal"
 	SelectedcontentInputmodeEmail   SelectedcontentInputmode = "email"
 	SelectedcontentInputmodeNone    SelectedcontentInputmode = "none"
@@ -121,7 +122,6 @@ const (
 	SelectedcontentInputmodeSearch  SelectedcontentInputmode = "search"
 	SelectedcontentInputmodeTel     SelectedcontentInputmode = "tel"
 	SelectedcontentInputmodeText    SelectedcontentInputmode = "text"
-	SelectedcontentInputmodeUrl     SelectedcontentInputmode = "url"
 )
 
 type SelectedcontentSpellcheck string
@@ -290,6 +290,12 @@ func (e *SelectedcontentElement) Nonce(s string) *SelectedcontentElement {
 
 func (e *SelectedcontentElement) Popover(s string) *SelectedcontentElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *SelectedcontentElement) Role(s string) *SelectedcontentElement {
+	e.attributes["role"] = s
 
 	return e
 }

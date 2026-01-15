@@ -51,12 +51,12 @@ func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
 type LiAutocapitalize string
 
 const (
-	LiAutocapitalizeOn         LiAutocapitalize = "on"
 	LiAutocapitalizeSentences  LiAutocapitalize = "sentences"
 	LiAutocapitalizeWords      LiAutocapitalize = "words"
 	LiAutocapitalizeCharacters LiAutocapitalize = "characters"
 	LiAutocapitalizeNone       LiAutocapitalize = "none"
 	LiAutocapitalizeOff        LiAutocapitalize = "off"
+	LiAutocapitalizeOn         LiAutocapitalize = "on"
 )
 
 type LiAutocorrect string
@@ -94,13 +94,13 @@ const (
 type LiEnterkeyhint string
 
 const (
-	LiEnterkeyhintEnter    LiEnterkeyhint = "enter"
 	LiEnterkeyhintGo       LiEnterkeyhint = "go"
 	LiEnterkeyhintNext     LiEnterkeyhint = "next"
 	LiEnterkeyhintPrevious LiEnterkeyhint = "previous"
 	LiEnterkeyhintSearch   LiEnterkeyhint = "search"
 	LiEnterkeyhintSend     LiEnterkeyhint = "send"
 	LiEnterkeyhintDone     LiEnterkeyhint = "done"
+	LiEnterkeyhintEnter    LiEnterkeyhint = "enter"
 )
 
 type LiHidden string
@@ -114,6 +114,7 @@ const (
 type LiInputmode string
 
 const (
+	LiInputmodeNumeric LiInputmode = "numeric"
 	LiInputmodeSearch  LiInputmode = "search"
 	LiInputmodeTel     LiInputmode = "tel"
 	LiInputmodeText    LiInputmode = "text"
@@ -121,7 +122,6 @@ const (
 	LiInputmodeDecimal LiInputmode = "decimal"
 	LiInputmodeEmail   LiInputmode = "email"
 	LiInputmodeNone    LiInputmode = "none"
-	LiInputmodeNumeric LiInputmode = "numeric"
 )
 
 type LiSpellcheck string
@@ -296,6 +296,12 @@ func (e *LiElement) Nonce(s string) *LiElement {
 
 func (e *LiElement) Popover(s string) *LiElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *LiElement) Role(s string) *LiElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,19 +51,19 @@ func TitleTernary(condition bool, true htemel.Node, false htemel.Node) *TitleEle
 type TitleAutocapitalize string
 
 const (
+	TitleAutocapitalizeNone       TitleAutocapitalize = "none"
+	TitleAutocapitalizeOff        TitleAutocapitalize = "off"
 	TitleAutocapitalizeOn         TitleAutocapitalize = "on"
 	TitleAutocapitalizeSentences  TitleAutocapitalize = "sentences"
 	TitleAutocapitalizeWords      TitleAutocapitalize = "words"
 	TitleAutocapitalizeCharacters TitleAutocapitalize = "characters"
-	TitleAutocapitalizeNone       TitleAutocapitalize = "none"
-	TitleAutocapitalizeOff        TitleAutocapitalize = "off"
 )
 
 type TitleAutocorrect string
 
 const (
-	TitleAutocorrectOff   TitleAutocorrect = "off"
 	TitleAutocorrectOn    TitleAutocorrect = "on"
+	TitleAutocorrectOff   TitleAutocorrect = "off"
 	TitleAutocorrectEmpty TitleAutocorrect = ""
 )
 
@@ -79,9 +79,9 @@ const (
 type TitleDir string
 
 const (
+	TitleDirRtl  TitleDir = "rtl"
 	TitleDirAuto TitleDir = "auto"
 	TitleDirLtr  TitleDir = "ltr"
-	TitleDirRtl  TitleDir = "rtl"
 )
 
 type TitleDraggable string
@@ -94,13 +94,13 @@ const (
 type TitleEnterkeyhint string
 
 const (
-	TitleEnterkeyhintDone     TitleEnterkeyhint = "done"
-	TitleEnterkeyhintEnter    TitleEnterkeyhint = "enter"
-	TitleEnterkeyhintGo       TitleEnterkeyhint = "go"
 	TitleEnterkeyhintNext     TitleEnterkeyhint = "next"
 	TitleEnterkeyhintPrevious TitleEnterkeyhint = "previous"
 	TitleEnterkeyhintSearch   TitleEnterkeyhint = "search"
 	TitleEnterkeyhintSend     TitleEnterkeyhint = "send"
+	TitleEnterkeyhintDone     TitleEnterkeyhint = "done"
+	TitleEnterkeyhintEnter    TitleEnterkeyhint = "enter"
+	TitleEnterkeyhintGo       TitleEnterkeyhint = "go"
 )
 
 type TitleHidden string
@@ -127,8 +127,8 @@ const (
 type TitleSpellcheck string
 
 const (
-	TitleSpellcheckFalse TitleSpellcheck = "false"
 	TitleSpellcheckTrue  TitleSpellcheck = "true"
+	TitleSpellcheckFalse TitleSpellcheck = "false"
 	TitleSpellcheckEmpty TitleSpellcheck = ""
 )
 
@@ -143,8 +143,8 @@ const (
 type TitleWritingsuggestions string
 
 const (
-	TitleWritingsuggestionsFalse TitleWritingsuggestions = "false"
 	TitleWritingsuggestionsTrue  TitleWritingsuggestions = "true"
+	TitleWritingsuggestionsFalse TitleWritingsuggestions = "false"
 	TitleWritingsuggestionsEmpty TitleWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *TitleElement) Nonce(s string) *TitleElement {
 
 func (e *TitleElement) Popover(s string) *TitleElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TitleElement) Role(s string) *TitleElement {
+	e.attributes["role"] = s
 
 	return e
 }

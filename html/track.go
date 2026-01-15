@@ -52,12 +52,12 @@ const (
 type TrackAutocapitalize string
 
 const (
-	TrackAutocapitalizeOn         TrackAutocapitalize = "on"
-	TrackAutocapitalizeSentences  TrackAutocapitalize = "sentences"
-	TrackAutocapitalizeWords      TrackAutocapitalize = "words"
 	TrackAutocapitalizeCharacters TrackAutocapitalize = "characters"
 	TrackAutocapitalizeNone       TrackAutocapitalize = "none"
 	TrackAutocapitalizeOff        TrackAutocapitalize = "off"
+	TrackAutocapitalizeOn         TrackAutocapitalize = "on"
+	TrackAutocapitalizeSentences  TrackAutocapitalize = "sentences"
+	TrackAutocapitalizeWords      TrackAutocapitalize = "words"
 )
 
 type TrackAutocorrect string
@@ -115,6 +115,7 @@ const (
 type TrackInputmode string
 
 const (
+	TrackInputmodeNone    TrackInputmode = "none"
 	TrackInputmodeNumeric TrackInputmode = "numeric"
 	TrackInputmodeSearch  TrackInputmode = "search"
 	TrackInputmodeTel     TrackInputmode = "tel"
@@ -122,7 +123,6 @@ const (
 	TrackInputmodeUrl     TrackInputmode = "url"
 	TrackInputmodeDecimal TrackInputmode = "decimal"
 	TrackInputmodeEmail   TrackInputmode = "email"
-	TrackInputmodeNone    TrackInputmode = "none"
 )
 
 type TrackSpellcheck string
@@ -136,16 +136,16 @@ const (
 type TrackTranslate string
 
 const (
-	TrackTranslateNo    TrackTranslate = "no"
 	TrackTranslateYes   TrackTranslate = "yes"
+	TrackTranslateNo    TrackTranslate = "no"
 	TrackTranslateEmpty TrackTranslate = ""
 )
 
 type TrackWritingsuggestions string
 
 const (
-	TrackWritingsuggestionsTrue  TrackWritingsuggestions = "true"
 	TrackWritingsuggestionsFalse TrackWritingsuggestions = "false"
+	TrackWritingsuggestionsTrue  TrackWritingsuggestions = "true"
 	TrackWritingsuggestionsEmpty TrackWritingsuggestions = ""
 )
 
@@ -321,6 +321,12 @@ func (e *TrackElement) Nonce(s string) *TrackElement {
 
 func (e *TrackElement) Popover(s string) *TrackElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TrackElement) Role(s string) *TrackElement {
+	e.attributes["role"] = s
 
 	return e
 }

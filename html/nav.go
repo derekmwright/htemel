@@ -51,12 +51,12 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 type NavAutocapitalize string
 
 const (
+	NavAutocapitalizeCharacters NavAutocapitalize = "characters"
+	NavAutocapitalizeNone       NavAutocapitalize = "none"
 	NavAutocapitalizeOff        NavAutocapitalize = "off"
 	NavAutocapitalizeOn         NavAutocapitalize = "on"
 	NavAutocapitalizeSentences  NavAutocapitalize = "sentences"
 	NavAutocapitalizeWords      NavAutocapitalize = "words"
-	NavAutocapitalizeCharacters NavAutocapitalize = "characters"
-	NavAutocapitalizeNone       NavAutocapitalize = "none"
 )
 
 type NavAutocorrect string
@@ -70,18 +70,18 @@ const (
 type NavContenteditable string
 
 const (
-	NavContenteditableTrue          NavContenteditable = "true"
 	NavContenteditableFalse         NavContenteditable = "false"
 	NavContenteditablePlaintextOnly NavContenteditable = "plaintext-only"
+	NavContenteditableTrue          NavContenteditable = "true"
 	NavContenteditableEmpty         NavContenteditable = ""
 )
 
 type NavDir string
 
 const (
+	NavDirAuto NavDir = "auto"
 	NavDirLtr  NavDir = "ltr"
 	NavDirRtl  NavDir = "rtl"
-	NavDirAuto NavDir = "auto"
 )
 
 type NavDraggable string
@@ -94,13 +94,13 @@ const (
 type NavEnterkeyhint string
 
 const (
-	NavEnterkeyhintPrevious NavEnterkeyhint = "previous"
 	NavEnterkeyhintSearch   NavEnterkeyhint = "search"
 	NavEnterkeyhintSend     NavEnterkeyhint = "send"
 	NavEnterkeyhintDone     NavEnterkeyhint = "done"
 	NavEnterkeyhintEnter    NavEnterkeyhint = "enter"
 	NavEnterkeyhintGo       NavEnterkeyhint = "go"
 	NavEnterkeyhintNext     NavEnterkeyhint = "next"
+	NavEnterkeyhintPrevious NavEnterkeyhint = "previous"
 )
 
 type NavHidden string
@@ -114,14 +114,14 @@ const (
 type NavInputmode string
 
 const (
-	NavInputmodeEmail   NavInputmode = "email"
-	NavInputmodeNone    NavInputmode = "none"
-	NavInputmodeNumeric NavInputmode = "numeric"
-	NavInputmodeSearch  NavInputmode = "search"
 	NavInputmodeTel     NavInputmode = "tel"
 	NavInputmodeText    NavInputmode = "text"
 	NavInputmodeUrl     NavInputmode = "url"
 	NavInputmodeDecimal NavInputmode = "decimal"
+	NavInputmodeEmail   NavInputmode = "email"
+	NavInputmodeNone    NavInputmode = "none"
+	NavInputmodeNumeric NavInputmode = "numeric"
+	NavInputmodeSearch  NavInputmode = "search"
 )
 
 type NavSpellcheck string
@@ -135,8 +135,8 @@ const (
 type NavTranslate string
 
 const (
-	NavTranslateNo    NavTranslate = "no"
 	NavTranslateYes   NavTranslate = "yes"
+	NavTranslateNo    NavTranslate = "no"
 	NavTranslateEmpty NavTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *NavElement) Nonce(s string) *NavElement {
 
 func (e *NavElement) Popover(s string) *NavElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *NavElement) Role(s string) *NavElement {
+	e.attributes["role"] = s
 
 	return e
 }

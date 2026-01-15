@@ -51,12 +51,12 @@ func CiteTernary(condition bool, true htemel.Node, false htemel.Node) *CiteEleme
 type CiteAutocapitalize string
 
 const (
+	CiteAutocapitalizeOn         CiteAutocapitalize = "on"
+	CiteAutocapitalizeSentences  CiteAutocapitalize = "sentences"
 	CiteAutocapitalizeWords      CiteAutocapitalize = "words"
 	CiteAutocapitalizeCharacters CiteAutocapitalize = "characters"
 	CiteAutocapitalizeNone       CiteAutocapitalize = "none"
 	CiteAutocapitalizeOff        CiteAutocapitalize = "off"
-	CiteAutocapitalizeOn         CiteAutocapitalize = "on"
-	CiteAutocapitalizeSentences  CiteAutocapitalize = "sentences"
 )
 
 type CiteAutocorrect string
@@ -94,13 +94,13 @@ const (
 type CiteEnterkeyhint string
 
 const (
-	CiteEnterkeyhintSearch   CiteEnterkeyhint = "search"
-	CiteEnterkeyhintSend     CiteEnterkeyhint = "send"
 	CiteEnterkeyhintDone     CiteEnterkeyhint = "done"
 	CiteEnterkeyhintEnter    CiteEnterkeyhint = "enter"
 	CiteEnterkeyhintGo       CiteEnterkeyhint = "go"
 	CiteEnterkeyhintNext     CiteEnterkeyhint = "next"
 	CiteEnterkeyhintPrevious CiteEnterkeyhint = "previous"
+	CiteEnterkeyhintSearch   CiteEnterkeyhint = "search"
+	CiteEnterkeyhintSend     CiteEnterkeyhint = "send"
 )
 
 type CiteHidden string
@@ -114,6 +114,7 @@ const (
 type CiteInputmode string
 
 const (
+	CiteInputmodeText    CiteInputmode = "text"
 	CiteInputmodeUrl     CiteInputmode = "url"
 	CiteInputmodeDecimal CiteInputmode = "decimal"
 	CiteInputmodeEmail   CiteInputmode = "email"
@@ -121,7 +122,6 @@ const (
 	CiteInputmodeNumeric CiteInputmode = "numeric"
 	CiteInputmodeSearch  CiteInputmode = "search"
 	CiteInputmodeTel     CiteInputmode = "tel"
-	CiteInputmodeText    CiteInputmode = "text"
 )
 
 type CiteSpellcheck string
@@ -290,6 +290,12 @@ func (e *CiteElement) Nonce(s string) *CiteElement {
 
 func (e *CiteElement) Popover(s string) *CiteElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *CiteElement) Role(s string) *CiteElement {
+	e.attributes["role"] = s
 
 	return e
 }

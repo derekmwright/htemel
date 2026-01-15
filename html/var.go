@@ -51,12 +51,12 @@ func VarTernary(condition bool, true htemel.Node, false htemel.Node) *VarElement
 type VarAutocapitalize string
 
 const (
-	VarAutocapitalizeCharacters VarAutocapitalize = "characters"
-	VarAutocapitalizeNone       VarAutocapitalize = "none"
-	VarAutocapitalizeOff        VarAutocapitalize = "off"
 	VarAutocapitalizeOn         VarAutocapitalize = "on"
 	VarAutocapitalizeSentences  VarAutocapitalize = "sentences"
 	VarAutocapitalizeWords      VarAutocapitalize = "words"
+	VarAutocapitalizeCharacters VarAutocapitalize = "characters"
+	VarAutocapitalizeNone       VarAutocapitalize = "none"
+	VarAutocapitalizeOff        VarAutocapitalize = "off"
 )
 
 type VarAutocorrect string
@@ -114,14 +114,14 @@ const (
 type VarInputmode string
 
 const (
+	VarInputmodeTel     VarInputmode = "tel"
+	VarInputmodeText    VarInputmode = "text"
 	VarInputmodeUrl     VarInputmode = "url"
 	VarInputmodeDecimal VarInputmode = "decimal"
 	VarInputmodeEmail   VarInputmode = "email"
 	VarInputmodeNone    VarInputmode = "none"
 	VarInputmodeNumeric VarInputmode = "numeric"
 	VarInputmodeSearch  VarInputmode = "search"
-	VarInputmodeTel     VarInputmode = "tel"
-	VarInputmodeText    VarInputmode = "text"
 )
 
 type VarSpellcheck string
@@ -135,8 +135,8 @@ const (
 type VarTranslate string
 
 const (
-	VarTranslateYes   VarTranslate = "yes"
 	VarTranslateNo    VarTranslate = "no"
+	VarTranslateYes   VarTranslate = "yes"
 	VarTranslateEmpty VarTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *VarElement) Nonce(s string) *VarElement {
 
 func (e *VarElement) Popover(s string) *VarElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *VarElement) Role(s string) *VarElement {
+	e.attributes["role"] = s
 
 	return e
 }

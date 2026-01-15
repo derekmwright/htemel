@@ -62,8 +62,8 @@ const (
 type SearchAutocorrect string
 
 const (
-	SearchAutocorrectOff   SearchAutocorrect = "off"
 	SearchAutocorrectOn    SearchAutocorrect = "on"
+	SearchAutocorrectOff   SearchAutocorrect = "off"
 	SearchAutocorrectEmpty SearchAutocorrect = ""
 )
 
@@ -87,20 +87,20 @@ const (
 type SearchDraggable string
 
 const (
-	SearchDraggableTrue  SearchDraggable = "true"
 	SearchDraggableFalse SearchDraggable = "false"
+	SearchDraggableTrue  SearchDraggable = "true"
 )
 
 type SearchEnterkeyhint string
 
 const (
+	SearchEnterkeyhintSend     SearchEnterkeyhint = "send"
+	SearchEnterkeyhintDone     SearchEnterkeyhint = "done"
 	SearchEnterkeyhintEnter    SearchEnterkeyhint = "enter"
 	SearchEnterkeyhintGo       SearchEnterkeyhint = "go"
 	SearchEnterkeyhintNext     SearchEnterkeyhint = "next"
 	SearchEnterkeyhintPrevious SearchEnterkeyhint = "previous"
 	SearchEnterkeyhintSearch   SearchEnterkeyhint = "search"
-	SearchEnterkeyhintSend     SearchEnterkeyhint = "send"
-	SearchEnterkeyhintDone     SearchEnterkeyhint = "done"
 )
 
 type SearchHidden string
@@ -114,6 +114,7 @@ const (
 type SearchInputmode string
 
 const (
+	SearchInputmodeDecimal SearchInputmode = "decimal"
 	SearchInputmodeEmail   SearchInputmode = "email"
 	SearchInputmodeNone    SearchInputmode = "none"
 	SearchInputmodeNumeric SearchInputmode = "numeric"
@@ -121,7 +122,6 @@ const (
 	SearchInputmodeTel     SearchInputmode = "tel"
 	SearchInputmodeText    SearchInputmode = "text"
 	SearchInputmodeUrl     SearchInputmode = "url"
-	SearchInputmodeDecimal SearchInputmode = "decimal"
 )
 
 type SearchSpellcheck string
@@ -290,6 +290,12 @@ func (e *SearchElement) Nonce(s string) *SearchElement {
 
 func (e *SearchElement) Popover(s string) *SearchElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *SearchElement) Role(s string) *SearchElement {
+	e.attributes["role"] = s
 
 	return e
 }

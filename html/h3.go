@@ -51,12 +51,12 @@ func H3Ternary(condition bool, true htemel.Node, false htemel.Node) *H3Element {
 type H3Autocapitalize string
 
 const (
+	H3AutocapitalizeNone       H3Autocapitalize = "none"
 	H3AutocapitalizeOff        H3Autocapitalize = "off"
 	H3AutocapitalizeOn         H3Autocapitalize = "on"
 	H3AutocapitalizeSentences  H3Autocapitalize = "sentences"
 	H3AutocapitalizeWords      H3Autocapitalize = "words"
 	H3AutocapitalizeCharacters H3Autocapitalize = "characters"
-	H3AutocapitalizeNone       H3Autocapitalize = "none"
 )
 
 type H3Autocorrect string
@@ -87,20 +87,20 @@ const (
 type H3Draggable string
 
 const (
-	H3DraggableTrue  H3Draggable = "true"
 	H3DraggableFalse H3Draggable = "false"
+	H3DraggableTrue  H3Draggable = "true"
 )
 
 type H3Enterkeyhint string
 
 const (
+	H3EnterkeyhintEnter    H3Enterkeyhint = "enter"
 	H3EnterkeyhintGo       H3Enterkeyhint = "go"
 	H3EnterkeyhintNext     H3Enterkeyhint = "next"
 	H3EnterkeyhintPrevious H3Enterkeyhint = "previous"
 	H3EnterkeyhintSearch   H3Enterkeyhint = "search"
 	H3EnterkeyhintSend     H3Enterkeyhint = "send"
 	H3EnterkeyhintDone     H3Enterkeyhint = "done"
-	H3EnterkeyhintEnter    H3Enterkeyhint = "enter"
 )
 
 type H3Hidden string
@@ -290,6 +290,12 @@ func (e *H3Element) Nonce(s string) *H3Element {
 
 func (e *H3Element) Popover(s string) *H3Element {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *H3Element) Role(s string) *H3Element {
+	e.attributes["role"] = s
 
 	return e
 }

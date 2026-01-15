@@ -51,12 +51,12 @@ func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongE
 type StrongAutocapitalize string
 
 const (
-	StrongAutocapitalizeOff        StrongAutocapitalize = "off"
 	StrongAutocapitalizeOn         StrongAutocapitalize = "on"
 	StrongAutocapitalizeSentences  StrongAutocapitalize = "sentences"
 	StrongAutocapitalizeWords      StrongAutocapitalize = "words"
 	StrongAutocapitalizeCharacters StrongAutocapitalize = "characters"
 	StrongAutocapitalizeNone       StrongAutocapitalize = "none"
+	StrongAutocapitalizeOff        StrongAutocapitalize = "off"
 )
 
 type StrongAutocorrect string
@@ -70,9 +70,9 @@ const (
 type StrongContenteditable string
 
 const (
-	StrongContenteditableFalse         StrongContenteditable = "false"
 	StrongContenteditablePlaintextOnly StrongContenteditable = "plaintext-only"
 	StrongContenteditableTrue          StrongContenteditable = "true"
+	StrongContenteditableFalse         StrongContenteditable = "false"
 	StrongContenteditableEmpty         StrongContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type StrongEnterkeyhint string
 
 const (
+	StrongEnterkeyhintDone     StrongEnterkeyhint = "done"
+	StrongEnterkeyhintEnter    StrongEnterkeyhint = "enter"
 	StrongEnterkeyhintGo       StrongEnterkeyhint = "go"
 	StrongEnterkeyhintNext     StrongEnterkeyhint = "next"
 	StrongEnterkeyhintPrevious StrongEnterkeyhint = "previous"
 	StrongEnterkeyhintSearch   StrongEnterkeyhint = "search"
 	StrongEnterkeyhintSend     StrongEnterkeyhint = "send"
-	StrongEnterkeyhintDone     StrongEnterkeyhint = "done"
-	StrongEnterkeyhintEnter    StrongEnterkeyhint = "enter"
 )
 
 type StrongHidden string
@@ -114,14 +114,14 @@ const (
 type StrongInputmode string
 
 const (
-	StrongInputmodeEmail   StrongInputmode = "email"
-	StrongInputmodeNone    StrongInputmode = "none"
-	StrongInputmodeNumeric StrongInputmode = "numeric"
-	StrongInputmodeSearch  StrongInputmode = "search"
 	StrongInputmodeTel     StrongInputmode = "tel"
 	StrongInputmodeText    StrongInputmode = "text"
 	StrongInputmodeUrl     StrongInputmode = "url"
 	StrongInputmodeDecimal StrongInputmode = "decimal"
+	StrongInputmodeEmail   StrongInputmode = "email"
+	StrongInputmodeNone    StrongInputmode = "none"
+	StrongInputmodeNumeric StrongInputmode = "numeric"
+	StrongInputmodeSearch  StrongInputmode = "search"
 )
 
 type StrongSpellcheck string
@@ -290,6 +290,12 @@ func (e *StrongElement) Nonce(s string) *StrongElement {
 
 func (e *StrongElement) Popover(s string) *StrongElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *StrongElement) Role(s string) *StrongElement {
+	e.attributes["role"] = s
 
 	return e
 }

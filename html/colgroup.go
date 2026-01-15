@@ -51,28 +51,28 @@ func ColgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Colgr
 type ColgroupAutocapitalize string
 
 const (
-	ColgroupAutocapitalizeNone       ColgroupAutocapitalize = "none"
-	ColgroupAutocapitalizeOff        ColgroupAutocapitalize = "off"
-	ColgroupAutocapitalizeOn         ColgroupAutocapitalize = "on"
 	ColgroupAutocapitalizeSentences  ColgroupAutocapitalize = "sentences"
 	ColgroupAutocapitalizeWords      ColgroupAutocapitalize = "words"
 	ColgroupAutocapitalizeCharacters ColgroupAutocapitalize = "characters"
+	ColgroupAutocapitalizeNone       ColgroupAutocapitalize = "none"
+	ColgroupAutocapitalizeOff        ColgroupAutocapitalize = "off"
+	ColgroupAutocapitalizeOn         ColgroupAutocapitalize = "on"
 )
 
 type ColgroupAutocorrect string
 
 const (
-	ColgroupAutocorrectOn    ColgroupAutocorrect = "on"
 	ColgroupAutocorrectOff   ColgroupAutocorrect = "off"
+	ColgroupAutocorrectOn    ColgroupAutocorrect = "on"
 	ColgroupAutocorrectEmpty ColgroupAutocorrect = ""
 )
 
 type ColgroupContenteditable string
 
 const (
-	ColgroupContenteditableTrue          ColgroupContenteditable = "true"
 	ColgroupContenteditableFalse         ColgroupContenteditable = "false"
 	ColgroupContenteditablePlaintextOnly ColgroupContenteditable = "plaintext-only"
+	ColgroupContenteditableTrue          ColgroupContenteditable = "true"
 	ColgroupContenteditableEmpty         ColgroupContenteditable = ""
 )
 
@@ -114,14 +114,14 @@ const (
 type ColgroupInputmode string
 
 const (
+	ColgroupInputmodeUrl     ColgroupInputmode = "url"
+	ColgroupInputmodeDecimal ColgroupInputmode = "decimal"
+	ColgroupInputmodeEmail   ColgroupInputmode = "email"
 	ColgroupInputmodeNone    ColgroupInputmode = "none"
 	ColgroupInputmodeNumeric ColgroupInputmode = "numeric"
 	ColgroupInputmodeSearch  ColgroupInputmode = "search"
 	ColgroupInputmodeTel     ColgroupInputmode = "tel"
 	ColgroupInputmodeText    ColgroupInputmode = "text"
-	ColgroupInputmodeUrl     ColgroupInputmode = "url"
-	ColgroupInputmodeDecimal ColgroupInputmode = "decimal"
-	ColgroupInputmodeEmail   ColgroupInputmode = "email"
 )
 
 type ColgroupSpellcheck string
@@ -296,6 +296,12 @@ func (e *ColgroupElement) Nonce(s string) *ColgroupElement {
 
 func (e *ColgroupElement) Popover(s string) *ColgroupElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *ColgroupElement) Role(s string) *ColgroupElement {
+	e.attributes["role"] = s
 
 	return e
 }

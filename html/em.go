@@ -79,16 +79,16 @@ const (
 type EmDir string
 
 const (
-	EmDirAuto EmDir = "auto"
 	EmDirLtr  EmDir = "ltr"
 	EmDirRtl  EmDir = "rtl"
+	EmDirAuto EmDir = "auto"
 )
 
 type EmDraggable string
 
 const (
-	EmDraggableFalse EmDraggable = "false"
 	EmDraggableTrue  EmDraggable = "true"
+	EmDraggableFalse EmDraggable = "false"
 )
 
 type EmEnterkeyhint string
@@ -114,14 +114,14 @@ const (
 type EmInputmode string
 
 const (
+	EmInputmodeNumeric EmInputmode = "numeric"
+	EmInputmodeSearch  EmInputmode = "search"
 	EmInputmodeTel     EmInputmode = "tel"
 	EmInputmodeText    EmInputmode = "text"
 	EmInputmodeUrl     EmInputmode = "url"
 	EmInputmodeDecimal EmInputmode = "decimal"
 	EmInputmodeEmail   EmInputmode = "email"
 	EmInputmodeNone    EmInputmode = "none"
-	EmInputmodeNumeric EmInputmode = "numeric"
-	EmInputmodeSearch  EmInputmode = "search"
 )
 
 type EmSpellcheck string
@@ -290,6 +290,12 @@ func (e *EmElement) Nonce(s string) *EmElement {
 
 func (e *EmElement) Popover(s string) *EmElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *EmElement) Role(s string) *EmElement {
+	e.attributes["role"] = s
 
 	return e
 }

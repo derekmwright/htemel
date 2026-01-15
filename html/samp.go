@@ -79,9 +79,9 @@ const (
 type SampDir string
 
 const (
+	SampDirRtl  SampDir = "rtl"
 	SampDirAuto SampDir = "auto"
 	SampDirLtr  SampDir = "ltr"
-	SampDirRtl  SampDir = "rtl"
 )
 
 type SampDraggable string
@@ -114,7 +114,6 @@ const (
 type SampInputmode string
 
 const (
-	SampInputmodeUrl     SampInputmode = "url"
 	SampInputmodeDecimal SampInputmode = "decimal"
 	SampInputmodeEmail   SampInputmode = "email"
 	SampInputmodeNone    SampInputmode = "none"
@@ -122,6 +121,7 @@ const (
 	SampInputmodeSearch  SampInputmode = "search"
 	SampInputmodeTel     SampInputmode = "tel"
 	SampInputmodeText    SampInputmode = "text"
+	SampInputmodeUrl     SampInputmode = "url"
 )
 
 type SampSpellcheck string
@@ -290,6 +290,12 @@ func (e *SampElement) Nonce(s string) *SampElement {
 
 func (e *SampElement) Popover(s string) *SampElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *SampElement) Role(s string) *SampElement {
+	e.attributes["role"] = s
 
 	return e
 }

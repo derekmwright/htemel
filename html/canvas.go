@@ -51,12 +51,12 @@ func CanvasTernary(condition bool, true htemel.Node, false htemel.Node) *CanvasE
 type CanvasAutocapitalize string
 
 const (
-	CanvasAutocapitalizeSentences  CanvasAutocapitalize = "sentences"
-	CanvasAutocapitalizeWords      CanvasAutocapitalize = "words"
 	CanvasAutocapitalizeCharacters CanvasAutocapitalize = "characters"
 	CanvasAutocapitalizeNone       CanvasAutocapitalize = "none"
 	CanvasAutocapitalizeOff        CanvasAutocapitalize = "off"
 	CanvasAutocapitalizeOn         CanvasAutocapitalize = "on"
+	CanvasAutocapitalizeSentences  CanvasAutocapitalize = "sentences"
+	CanvasAutocapitalizeWords      CanvasAutocapitalize = "words"
 )
 
 type CanvasAutocorrect string
@@ -94,13 +94,13 @@ const (
 type CanvasEnterkeyhint string
 
 const (
+	CanvasEnterkeyhintEnter    CanvasEnterkeyhint = "enter"
 	CanvasEnterkeyhintGo       CanvasEnterkeyhint = "go"
 	CanvasEnterkeyhintNext     CanvasEnterkeyhint = "next"
 	CanvasEnterkeyhintPrevious CanvasEnterkeyhint = "previous"
 	CanvasEnterkeyhintSearch   CanvasEnterkeyhint = "search"
 	CanvasEnterkeyhintSend     CanvasEnterkeyhint = "send"
 	CanvasEnterkeyhintDone     CanvasEnterkeyhint = "done"
-	CanvasEnterkeyhintEnter    CanvasEnterkeyhint = "enter"
 )
 
 type CanvasHidden string
@@ -114,6 +114,7 @@ const (
 type CanvasInputmode string
 
 const (
+	CanvasInputmodeEmail   CanvasInputmode = "email"
 	CanvasInputmodeNone    CanvasInputmode = "none"
 	CanvasInputmodeNumeric CanvasInputmode = "numeric"
 	CanvasInputmodeSearch  CanvasInputmode = "search"
@@ -121,7 +122,6 @@ const (
 	CanvasInputmodeText    CanvasInputmode = "text"
 	CanvasInputmodeUrl     CanvasInputmode = "url"
 	CanvasInputmodeDecimal CanvasInputmode = "decimal"
-	CanvasInputmodeEmail   CanvasInputmode = "email"
 )
 
 type CanvasSpellcheck string
@@ -302,6 +302,12 @@ func (e *CanvasElement) Nonce(s string) *CanvasElement {
 
 func (e *CanvasElement) Popover(s string) *CanvasElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *CanvasElement) Role(s string) *CanvasElement {
+	e.attributes["role"] = s
 
 	return e
 }

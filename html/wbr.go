@@ -42,12 +42,12 @@ func WbrIf(condition bool) *WbrElement {
 type WbrAutocapitalize string
 
 const (
-	WbrAutocapitalizeWords      WbrAutocapitalize = "words"
 	WbrAutocapitalizeCharacters WbrAutocapitalize = "characters"
 	WbrAutocapitalizeNone       WbrAutocapitalize = "none"
 	WbrAutocapitalizeOff        WbrAutocapitalize = "off"
 	WbrAutocapitalizeOn         WbrAutocapitalize = "on"
 	WbrAutocapitalizeSentences  WbrAutocapitalize = "sentences"
+	WbrAutocapitalizeWords      WbrAutocapitalize = "words"
 )
 
 type WbrAutocorrect string
@@ -85,27 +85,26 @@ const (
 type WbrEnterkeyhint string
 
 const (
-	WbrEnterkeyhintGo       WbrEnterkeyhint = "go"
-	WbrEnterkeyhintNext     WbrEnterkeyhint = "next"
 	WbrEnterkeyhintPrevious WbrEnterkeyhint = "previous"
 	WbrEnterkeyhintSearch   WbrEnterkeyhint = "search"
 	WbrEnterkeyhintSend     WbrEnterkeyhint = "send"
 	WbrEnterkeyhintDone     WbrEnterkeyhint = "done"
 	WbrEnterkeyhintEnter    WbrEnterkeyhint = "enter"
+	WbrEnterkeyhintGo       WbrEnterkeyhint = "go"
+	WbrEnterkeyhintNext     WbrEnterkeyhint = "next"
 )
 
 type WbrHidden string
 
 const (
-	WbrHiddenUntilFound WbrHidden = "until-found"
 	WbrHiddenHidden     WbrHidden = "hidden"
+	WbrHiddenUntilFound WbrHidden = "until-found"
 	WbrHiddenEmpty      WbrHidden = ""
 )
 
 type WbrInputmode string
 
 const (
-	WbrInputmodeSearch  WbrInputmode = "search"
 	WbrInputmodeTel     WbrInputmode = "tel"
 	WbrInputmodeText    WbrInputmode = "text"
 	WbrInputmodeUrl     WbrInputmode = "url"
@@ -113,21 +112,22 @@ const (
 	WbrInputmodeEmail   WbrInputmode = "email"
 	WbrInputmodeNone    WbrInputmode = "none"
 	WbrInputmodeNumeric WbrInputmode = "numeric"
+	WbrInputmodeSearch  WbrInputmode = "search"
 )
 
 type WbrSpellcheck string
 
 const (
-	WbrSpellcheckTrue  WbrSpellcheck = "true"
 	WbrSpellcheckFalse WbrSpellcheck = "false"
+	WbrSpellcheckTrue  WbrSpellcheck = "true"
 	WbrSpellcheckEmpty WbrSpellcheck = ""
 )
 
 type WbrTranslate string
 
 const (
-	WbrTranslateYes   WbrTranslate = "yes"
 	WbrTranslateNo    WbrTranslate = "no"
+	WbrTranslateYes   WbrTranslate = "yes"
 	WbrTranslateEmpty WbrTranslate = ""
 )
 
@@ -281,6 +281,12 @@ func (e *WbrElement) Nonce(s string) *WbrElement {
 
 func (e *WbrElement) Popover(s string) *WbrElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *WbrElement) Role(s string) *WbrElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -94,13 +94,13 @@ const (
 type LegendEnterkeyhint string
 
 const (
-	LegendEnterkeyhintGo       LegendEnterkeyhint = "go"
-	LegendEnterkeyhintNext     LegendEnterkeyhint = "next"
 	LegendEnterkeyhintPrevious LegendEnterkeyhint = "previous"
 	LegendEnterkeyhintSearch   LegendEnterkeyhint = "search"
 	LegendEnterkeyhintSend     LegendEnterkeyhint = "send"
 	LegendEnterkeyhintDone     LegendEnterkeyhint = "done"
 	LegendEnterkeyhintEnter    LegendEnterkeyhint = "enter"
+	LegendEnterkeyhintGo       LegendEnterkeyhint = "go"
+	LegendEnterkeyhintNext     LegendEnterkeyhint = "next"
 )
 
 type LegendHidden string
@@ -114,6 +114,7 @@ const (
 type LegendInputmode string
 
 const (
+	LegendInputmodeEmail   LegendInputmode = "email"
 	LegendInputmodeNone    LegendInputmode = "none"
 	LegendInputmodeNumeric LegendInputmode = "numeric"
 	LegendInputmodeSearch  LegendInputmode = "search"
@@ -121,14 +122,13 @@ const (
 	LegendInputmodeText    LegendInputmode = "text"
 	LegendInputmodeUrl     LegendInputmode = "url"
 	LegendInputmodeDecimal LegendInputmode = "decimal"
-	LegendInputmodeEmail   LegendInputmode = "email"
 )
 
 type LegendSpellcheck string
 
 const (
-	LegendSpellcheckTrue  LegendSpellcheck = "true"
 	LegendSpellcheckFalse LegendSpellcheck = "false"
+	LegendSpellcheckTrue  LegendSpellcheck = "true"
 	LegendSpellcheckEmpty LegendSpellcheck = ""
 )
 
@@ -143,8 +143,8 @@ const (
 type LegendWritingsuggestions string
 
 const (
-	LegendWritingsuggestionsFalse LegendWritingsuggestions = "false"
 	LegendWritingsuggestionsTrue  LegendWritingsuggestions = "true"
+	LegendWritingsuggestionsFalse LegendWritingsuggestions = "false"
 	LegendWritingsuggestionsEmpty LegendWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *LegendElement) Nonce(s string) *LegendElement {
 
 func (e *LegendElement) Popover(s string) *LegendElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *LegendElement) Role(s string) *LegendElement {
+	e.attributes["role"] = s
 
 	return e
 }

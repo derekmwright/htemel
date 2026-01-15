@@ -51,19 +51,19 @@ func OlTernary(condition bool, true htemel.Node, false htemel.Node) *OlElement {
 type OlAutocapitalize string
 
 const (
-	OlAutocapitalizeCharacters OlAutocapitalize = "characters"
-	OlAutocapitalizeNone       OlAutocapitalize = "none"
 	OlAutocapitalizeOff        OlAutocapitalize = "off"
 	OlAutocapitalizeOn         OlAutocapitalize = "on"
 	OlAutocapitalizeSentences  OlAutocapitalize = "sentences"
 	OlAutocapitalizeWords      OlAutocapitalize = "words"
+	OlAutocapitalizeCharacters OlAutocapitalize = "characters"
+	OlAutocapitalizeNone       OlAutocapitalize = "none"
 )
 
 type OlAutocorrect string
 
 const (
-	OlAutocorrectOff   OlAutocorrect = "off"
 	OlAutocorrectOn    OlAutocorrect = "on"
+	OlAutocorrectOff   OlAutocorrect = "off"
 	OlAutocorrectEmpty OlAutocorrect = ""
 )
 
@@ -79,9 +79,9 @@ const (
 type OlDir string
 
 const (
+	OlDirRtl  OlDir = "rtl"
 	OlDirAuto OlDir = "auto"
 	OlDirLtr  OlDir = "ltr"
-	OlDirRtl  OlDir = "rtl"
 )
 
 type OlDraggable string
@@ -94,13 +94,13 @@ const (
 type OlEnterkeyhint string
 
 const (
-	OlEnterkeyhintSend     OlEnterkeyhint = "send"
 	OlEnterkeyhintDone     OlEnterkeyhint = "done"
 	OlEnterkeyhintEnter    OlEnterkeyhint = "enter"
 	OlEnterkeyhintGo       OlEnterkeyhint = "go"
 	OlEnterkeyhintNext     OlEnterkeyhint = "next"
 	OlEnterkeyhintPrevious OlEnterkeyhint = "previous"
 	OlEnterkeyhintSearch   OlEnterkeyhint = "search"
+	OlEnterkeyhintSend     OlEnterkeyhint = "send"
 )
 
 type OlHidden string
@@ -302,6 +302,12 @@ func (e *OlElement) Nonce(s string) *OlElement {
 
 func (e *OlElement) Popover(s string) *OlElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *OlElement) Role(s string) *OlElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,12 +51,12 @@ func BdoTernary(condition bool, true htemel.Node, false htemel.Node) *BdoElement
 type BdoAutocapitalize string
 
 const (
-	BdoAutocapitalizeWords      BdoAutocapitalize = "words"
-	BdoAutocapitalizeCharacters BdoAutocapitalize = "characters"
-	BdoAutocapitalizeNone       BdoAutocapitalize = "none"
 	BdoAutocapitalizeOff        BdoAutocapitalize = "off"
 	BdoAutocapitalizeOn         BdoAutocapitalize = "on"
 	BdoAutocapitalizeSentences  BdoAutocapitalize = "sentences"
+	BdoAutocapitalizeWords      BdoAutocapitalize = "words"
+	BdoAutocapitalizeCharacters BdoAutocapitalize = "characters"
+	BdoAutocapitalizeNone       BdoAutocapitalize = "none"
 )
 
 type BdoAutocorrect string
@@ -79,28 +79,28 @@ const (
 type BdoDir string
 
 const (
-	BdoDirAuto BdoDir = "auto"
 	BdoDirLtr  BdoDir = "ltr"
 	BdoDirRtl  BdoDir = "rtl"
+	BdoDirAuto BdoDir = "auto"
 )
 
 type BdoDraggable string
 
 const (
-	BdoDraggableTrue  BdoDraggable = "true"
 	BdoDraggableFalse BdoDraggable = "false"
+	BdoDraggableTrue  BdoDraggable = "true"
 )
 
 type BdoEnterkeyhint string
 
 const (
-	BdoEnterkeyhintGo       BdoEnterkeyhint = "go"
 	BdoEnterkeyhintNext     BdoEnterkeyhint = "next"
 	BdoEnterkeyhintPrevious BdoEnterkeyhint = "previous"
 	BdoEnterkeyhintSearch   BdoEnterkeyhint = "search"
 	BdoEnterkeyhintSend     BdoEnterkeyhint = "send"
 	BdoEnterkeyhintDone     BdoEnterkeyhint = "done"
 	BdoEnterkeyhintEnter    BdoEnterkeyhint = "enter"
+	BdoEnterkeyhintGo       BdoEnterkeyhint = "go"
 )
 
 type BdoHidden string
@@ -114,21 +114,21 @@ const (
 type BdoInputmode string
 
 const (
-	BdoInputmodeNumeric BdoInputmode = "numeric"
-	BdoInputmodeSearch  BdoInputmode = "search"
-	BdoInputmodeTel     BdoInputmode = "tel"
 	BdoInputmodeText    BdoInputmode = "text"
 	BdoInputmodeUrl     BdoInputmode = "url"
 	BdoInputmodeDecimal BdoInputmode = "decimal"
 	BdoInputmodeEmail   BdoInputmode = "email"
 	BdoInputmodeNone    BdoInputmode = "none"
+	BdoInputmodeNumeric BdoInputmode = "numeric"
+	BdoInputmodeSearch  BdoInputmode = "search"
+	BdoInputmodeTel     BdoInputmode = "tel"
 )
 
 type BdoSpellcheck string
 
 const (
-	BdoSpellcheckFalse BdoSpellcheck = "false"
 	BdoSpellcheckTrue  BdoSpellcheck = "true"
+	BdoSpellcheckFalse BdoSpellcheck = "false"
 	BdoSpellcheckEmpty BdoSpellcheck = ""
 )
 
@@ -143,8 +143,8 @@ const (
 type BdoWritingsuggestions string
 
 const (
-	BdoWritingsuggestionsTrue  BdoWritingsuggestions = "true"
 	BdoWritingsuggestionsFalse BdoWritingsuggestions = "false"
+	BdoWritingsuggestionsTrue  BdoWritingsuggestions = "true"
 	BdoWritingsuggestionsEmpty BdoWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *BdoElement) Nonce(s string) *BdoElement {
 
 func (e *BdoElement) Popover(s string) *BdoElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *BdoElement) Role(s string) *BdoElement {
+	e.attributes["role"] = s
 
 	return e
 }

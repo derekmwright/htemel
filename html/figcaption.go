@@ -62,17 +62,17 @@ const (
 type FigcaptionAutocorrect string
 
 const (
-	FigcaptionAutocorrectOff   FigcaptionAutocorrect = "off"
 	FigcaptionAutocorrectOn    FigcaptionAutocorrect = "on"
+	FigcaptionAutocorrectOff   FigcaptionAutocorrect = "off"
 	FigcaptionAutocorrectEmpty FigcaptionAutocorrect = ""
 )
 
 type FigcaptionContenteditable string
 
 const (
-	FigcaptionContenteditableTrue          FigcaptionContenteditable = "true"
 	FigcaptionContenteditableFalse         FigcaptionContenteditable = "false"
 	FigcaptionContenteditablePlaintextOnly FigcaptionContenteditable = "plaintext-only"
+	FigcaptionContenteditableTrue          FigcaptionContenteditable = "true"
 	FigcaptionContenteditableEmpty         FigcaptionContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type FigcaptionEnterkeyhint string
 
 const (
-	FigcaptionEnterkeyhintEnter    FigcaptionEnterkeyhint = "enter"
-	FigcaptionEnterkeyhintGo       FigcaptionEnterkeyhint = "go"
-	FigcaptionEnterkeyhintNext     FigcaptionEnterkeyhint = "next"
 	FigcaptionEnterkeyhintPrevious FigcaptionEnterkeyhint = "previous"
 	FigcaptionEnterkeyhintSearch   FigcaptionEnterkeyhint = "search"
 	FigcaptionEnterkeyhintSend     FigcaptionEnterkeyhint = "send"
 	FigcaptionEnterkeyhintDone     FigcaptionEnterkeyhint = "done"
+	FigcaptionEnterkeyhintEnter    FigcaptionEnterkeyhint = "enter"
+	FigcaptionEnterkeyhintGo       FigcaptionEnterkeyhint = "go"
+	FigcaptionEnterkeyhintNext     FigcaptionEnterkeyhint = "next"
 )
 
 type FigcaptionHidden string
@@ -114,14 +114,14 @@ const (
 type FigcaptionInputmode string
 
 const (
-	FigcaptionInputmodeText    FigcaptionInputmode = "text"
-	FigcaptionInputmodeUrl     FigcaptionInputmode = "url"
-	FigcaptionInputmodeDecimal FigcaptionInputmode = "decimal"
-	FigcaptionInputmodeEmail   FigcaptionInputmode = "email"
 	FigcaptionInputmodeNone    FigcaptionInputmode = "none"
 	FigcaptionInputmodeNumeric FigcaptionInputmode = "numeric"
 	FigcaptionInputmodeSearch  FigcaptionInputmode = "search"
 	FigcaptionInputmodeTel     FigcaptionInputmode = "tel"
+	FigcaptionInputmodeText    FigcaptionInputmode = "text"
+	FigcaptionInputmodeUrl     FigcaptionInputmode = "url"
+	FigcaptionInputmodeDecimal FigcaptionInputmode = "decimal"
+	FigcaptionInputmodeEmail   FigcaptionInputmode = "email"
 )
 
 type FigcaptionSpellcheck string
@@ -290,6 +290,12 @@ func (e *FigcaptionElement) Nonce(s string) *FigcaptionElement {
 
 func (e *FigcaptionElement) Popover(s string) *FigcaptionElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *FigcaptionElement) Role(s string) *FigcaptionElement {
+	e.attributes["role"] = s
 
 	return e
 }

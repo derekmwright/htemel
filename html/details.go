@@ -51,12 +51,12 @@ func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *Detail
 type DetailsAutocapitalize string
 
 const (
+	DetailsAutocapitalizeCharacters DetailsAutocapitalize = "characters"
+	DetailsAutocapitalizeNone       DetailsAutocapitalize = "none"
 	DetailsAutocapitalizeOff        DetailsAutocapitalize = "off"
 	DetailsAutocapitalizeOn         DetailsAutocapitalize = "on"
 	DetailsAutocapitalizeSentences  DetailsAutocapitalize = "sentences"
 	DetailsAutocapitalizeWords      DetailsAutocapitalize = "words"
-	DetailsAutocapitalizeCharacters DetailsAutocapitalize = "characters"
-	DetailsAutocapitalizeNone       DetailsAutocapitalize = "none"
 )
 
 type DetailsAutocorrect string
@@ -79,28 +79,28 @@ const (
 type DetailsDir string
 
 const (
+	DetailsDirAuto DetailsDir = "auto"
 	DetailsDirLtr  DetailsDir = "ltr"
 	DetailsDirRtl  DetailsDir = "rtl"
-	DetailsDirAuto DetailsDir = "auto"
 )
 
 type DetailsDraggable string
 
 const (
-	DetailsDraggableTrue  DetailsDraggable = "true"
 	DetailsDraggableFalse DetailsDraggable = "false"
+	DetailsDraggableTrue  DetailsDraggable = "true"
 )
 
 type DetailsEnterkeyhint string
 
 const (
+	DetailsEnterkeyhintEnter    DetailsEnterkeyhint = "enter"
+	DetailsEnterkeyhintGo       DetailsEnterkeyhint = "go"
+	DetailsEnterkeyhintNext     DetailsEnterkeyhint = "next"
 	DetailsEnterkeyhintPrevious DetailsEnterkeyhint = "previous"
 	DetailsEnterkeyhintSearch   DetailsEnterkeyhint = "search"
 	DetailsEnterkeyhintSend     DetailsEnterkeyhint = "send"
 	DetailsEnterkeyhintDone     DetailsEnterkeyhint = "done"
-	DetailsEnterkeyhintEnter    DetailsEnterkeyhint = "enter"
-	DetailsEnterkeyhintGo       DetailsEnterkeyhint = "go"
-	DetailsEnterkeyhintNext     DetailsEnterkeyhint = "next"
 )
 
 type DetailsHidden string
@@ -114,7 +114,6 @@ const (
 type DetailsInputmode string
 
 const (
-	DetailsInputmodeUrl     DetailsInputmode = "url"
 	DetailsInputmodeDecimal DetailsInputmode = "decimal"
 	DetailsInputmodeEmail   DetailsInputmode = "email"
 	DetailsInputmodeNone    DetailsInputmode = "none"
@@ -122,6 +121,7 @@ const (
 	DetailsInputmodeSearch  DetailsInputmode = "search"
 	DetailsInputmodeTel     DetailsInputmode = "tel"
 	DetailsInputmodeText    DetailsInputmode = "text"
+	DetailsInputmodeUrl     DetailsInputmode = "url"
 )
 
 type DetailsSpellcheck string
@@ -135,8 +135,8 @@ const (
 type DetailsTranslate string
 
 const (
-	DetailsTranslateNo    DetailsTranslate = "no"
 	DetailsTranslateYes   DetailsTranslate = "yes"
+	DetailsTranslateNo    DetailsTranslate = "no"
 	DetailsTranslateEmpty DetailsTranslate = ""
 )
 
@@ -302,6 +302,12 @@ func (e *DetailsElement) Nonce(s string) *DetailsElement {
 
 func (e *DetailsElement) Popover(s string) *DetailsElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *DetailsElement) Role(s string) *DetailsElement {
+	e.attributes["role"] = s
 
 	return e
 }

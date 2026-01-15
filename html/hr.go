@@ -42,19 +42,19 @@ func HrIf(condition bool) *HrElement {
 type HrAutocapitalize string
 
 const (
-	HrAutocapitalizeSentences  HrAutocapitalize = "sentences"
-	HrAutocapitalizeWords      HrAutocapitalize = "words"
 	HrAutocapitalizeCharacters HrAutocapitalize = "characters"
 	HrAutocapitalizeNone       HrAutocapitalize = "none"
 	HrAutocapitalizeOff        HrAutocapitalize = "off"
 	HrAutocapitalizeOn         HrAutocapitalize = "on"
+	HrAutocapitalizeSentences  HrAutocapitalize = "sentences"
+	HrAutocapitalizeWords      HrAutocapitalize = "words"
 )
 
 type HrAutocorrect string
 
 const (
-	HrAutocorrectOn    HrAutocorrect = "on"
 	HrAutocorrectOff   HrAutocorrect = "off"
+	HrAutocorrectOn    HrAutocorrect = "on"
 	HrAutocorrectEmpty HrAutocorrect = ""
 )
 
@@ -70,9 +70,9 @@ const (
 type HrDir string
 
 const (
+	HrDirAuto HrDir = "auto"
 	HrDirLtr  HrDir = "ltr"
 	HrDirRtl  HrDir = "rtl"
-	HrDirAuto HrDir = "auto"
 )
 
 type HrDraggable string
@@ -85,27 +85,26 @@ const (
 type HrEnterkeyhint string
 
 const (
-	HrEnterkeyhintDone     HrEnterkeyhint = "done"
-	HrEnterkeyhintEnter    HrEnterkeyhint = "enter"
-	HrEnterkeyhintGo       HrEnterkeyhint = "go"
 	HrEnterkeyhintNext     HrEnterkeyhint = "next"
 	HrEnterkeyhintPrevious HrEnterkeyhint = "previous"
 	HrEnterkeyhintSearch   HrEnterkeyhint = "search"
 	HrEnterkeyhintSend     HrEnterkeyhint = "send"
+	HrEnterkeyhintDone     HrEnterkeyhint = "done"
+	HrEnterkeyhintEnter    HrEnterkeyhint = "enter"
+	HrEnterkeyhintGo       HrEnterkeyhint = "go"
 )
 
 type HrHidden string
 
 const (
-	HrHiddenHidden     HrHidden = "hidden"
 	HrHiddenUntilFound HrHidden = "until-found"
+	HrHiddenHidden     HrHidden = "hidden"
 	HrHiddenEmpty      HrHidden = ""
 )
 
 type HrInputmode string
 
 const (
-	HrInputmodeEmail   HrInputmode = "email"
 	HrInputmodeNone    HrInputmode = "none"
 	HrInputmodeNumeric HrInputmode = "numeric"
 	HrInputmodeSearch  HrInputmode = "search"
@@ -113,6 +112,7 @@ const (
 	HrInputmodeText    HrInputmode = "text"
 	HrInputmodeUrl     HrInputmode = "url"
 	HrInputmodeDecimal HrInputmode = "decimal"
+	HrInputmodeEmail   HrInputmode = "email"
 )
 
 type HrSpellcheck string
@@ -126,16 +126,16 @@ const (
 type HrTranslate string
 
 const (
-	HrTranslateYes   HrTranslate = "yes"
 	HrTranslateNo    HrTranslate = "no"
+	HrTranslateYes   HrTranslate = "yes"
 	HrTranslateEmpty HrTranslate = ""
 )
 
 type HrWritingsuggestions string
 
 const (
-	HrWritingsuggestionsFalse HrWritingsuggestions = "false"
 	HrWritingsuggestionsTrue  HrWritingsuggestions = "true"
+	HrWritingsuggestionsFalse HrWritingsuggestions = "false"
 	HrWritingsuggestionsEmpty HrWritingsuggestions = ""
 )
 
@@ -281,6 +281,12 @@ func (e *HrElement) Nonce(s string) *HrElement {
 
 func (e *HrElement) Popover(s string) *HrElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *HrElement) Role(s string) *HrElement {
+	e.attributes["role"] = s
 
 	return e
 }

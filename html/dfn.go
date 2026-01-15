@@ -114,14 +114,14 @@ const (
 type DfnInputmode string
 
 const (
+	DfnInputmodeTel     DfnInputmode = "tel"
+	DfnInputmodeText    DfnInputmode = "text"
+	DfnInputmodeUrl     DfnInputmode = "url"
 	DfnInputmodeDecimal DfnInputmode = "decimal"
 	DfnInputmodeEmail   DfnInputmode = "email"
 	DfnInputmodeNone    DfnInputmode = "none"
 	DfnInputmodeNumeric DfnInputmode = "numeric"
 	DfnInputmodeSearch  DfnInputmode = "search"
-	DfnInputmodeTel     DfnInputmode = "tel"
-	DfnInputmodeText    DfnInputmode = "text"
-	DfnInputmodeUrl     DfnInputmode = "url"
 )
 
 type DfnSpellcheck string
@@ -135,8 +135,8 @@ const (
 type DfnTranslate string
 
 const (
-	DfnTranslateYes   DfnTranslate = "yes"
 	DfnTranslateNo    DfnTranslate = "no"
+	DfnTranslateYes   DfnTranslate = "yes"
 	DfnTranslateEmpty DfnTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *DfnElement) Nonce(s string) *DfnElement {
 
 func (e *DfnElement) Popover(s string) *DfnElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *DfnElement) Role(s string) *DfnElement {
+	e.attributes["role"] = s
 
 	return e
 }

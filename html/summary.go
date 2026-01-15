@@ -51,12 +51,12 @@ func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *Summar
 type SummaryAutocapitalize string
 
 const (
-	SummaryAutocapitalizeOn         SummaryAutocapitalize = "on"
-	SummaryAutocapitalizeSentences  SummaryAutocapitalize = "sentences"
-	SummaryAutocapitalizeWords      SummaryAutocapitalize = "words"
 	SummaryAutocapitalizeCharacters SummaryAutocapitalize = "characters"
 	SummaryAutocapitalizeNone       SummaryAutocapitalize = "none"
 	SummaryAutocapitalizeOff        SummaryAutocapitalize = "off"
+	SummaryAutocapitalizeOn         SummaryAutocapitalize = "on"
+	SummaryAutocapitalizeSentences  SummaryAutocapitalize = "sentences"
+	SummaryAutocapitalizeWords      SummaryAutocapitalize = "words"
 )
 
 type SummaryAutocorrect string
@@ -79,16 +79,16 @@ const (
 type SummaryDir string
 
 const (
+	SummaryDirRtl  SummaryDir = "rtl"
 	SummaryDirAuto SummaryDir = "auto"
 	SummaryDirLtr  SummaryDir = "ltr"
-	SummaryDirRtl  SummaryDir = "rtl"
 )
 
 type SummaryDraggable string
 
 const (
-	SummaryDraggableFalse SummaryDraggable = "false"
 	SummaryDraggableTrue  SummaryDraggable = "true"
+	SummaryDraggableFalse SummaryDraggable = "false"
 )
 
 type SummaryEnterkeyhint string
@@ -114,14 +114,14 @@ const (
 type SummaryInputmode string
 
 const (
+	SummaryInputmodeEmail   SummaryInputmode = "email"
+	SummaryInputmodeNone    SummaryInputmode = "none"
 	SummaryInputmodeNumeric SummaryInputmode = "numeric"
 	SummaryInputmodeSearch  SummaryInputmode = "search"
 	SummaryInputmodeTel     SummaryInputmode = "tel"
 	SummaryInputmodeText    SummaryInputmode = "text"
 	SummaryInputmodeUrl     SummaryInputmode = "url"
 	SummaryInputmodeDecimal SummaryInputmode = "decimal"
-	SummaryInputmodeEmail   SummaryInputmode = "email"
-	SummaryInputmodeNone    SummaryInputmode = "none"
 )
 
 type SummarySpellcheck string
@@ -290,6 +290,12 @@ func (e *SummaryElement) Nonce(s string) *SummaryElement {
 
 func (e *SummaryElement) Popover(s string) *SummaryElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *SummaryElement) Role(s string) *SummaryElement {
+	e.attributes["role"] = s
 
 	return e
 }

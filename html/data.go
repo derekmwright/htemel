@@ -51,12 +51,12 @@ func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataEleme
 type DataAutocapitalize string
 
 const (
-	DataAutocapitalizeCharacters DataAutocapitalize = "characters"
-	DataAutocapitalizeNone       DataAutocapitalize = "none"
-	DataAutocapitalizeOff        DataAutocapitalize = "off"
 	DataAutocapitalizeOn         DataAutocapitalize = "on"
 	DataAutocapitalizeSentences  DataAutocapitalize = "sentences"
 	DataAutocapitalizeWords      DataAutocapitalize = "words"
+	DataAutocapitalizeCharacters DataAutocapitalize = "characters"
+	DataAutocapitalizeNone       DataAutocapitalize = "none"
+	DataAutocapitalizeOff        DataAutocapitalize = "off"
 )
 
 type DataAutocorrect string
@@ -79,9 +79,9 @@ const (
 type DataDir string
 
 const (
+	DataDirAuto DataDir = "auto"
 	DataDirLtr  DataDir = "ltr"
 	DataDirRtl  DataDir = "rtl"
-	DataDirAuto DataDir = "auto"
 )
 
 type DataDraggable string
@@ -94,34 +94,34 @@ const (
 type DataEnterkeyhint string
 
 const (
-	DataEnterkeyhintNext     DataEnterkeyhint = "next"
 	DataEnterkeyhintPrevious DataEnterkeyhint = "previous"
 	DataEnterkeyhintSearch   DataEnterkeyhint = "search"
 	DataEnterkeyhintSend     DataEnterkeyhint = "send"
 	DataEnterkeyhintDone     DataEnterkeyhint = "done"
 	DataEnterkeyhintEnter    DataEnterkeyhint = "enter"
 	DataEnterkeyhintGo       DataEnterkeyhint = "go"
+	DataEnterkeyhintNext     DataEnterkeyhint = "next"
 )
 
 type DataHidden string
 
 const (
-	DataHiddenUntilFound DataHidden = "until-found"
 	DataHiddenHidden     DataHidden = "hidden"
+	DataHiddenUntilFound DataHidden = "until-found"
 	DataHiddenEmpty      DataHidden = ""
 )
 
 type DataInputmode string
 
 const (
+	DataInputmodeEmail   DataInputmode = "email"
+	DataInputmodeNone    DataInputmode = "none"
+	DataInputmodeNumeric DataInputmode = "numeric"
 	DataInputmodeSearch  DataInputmode = "search"
 	DataInputmodeTel     DataInputmode = "tel"
 	DataInputmodeText    DataInputmode = "text"
 	DataInputmodeUrl     DataInputmode = "url"
 	DataInputmodeDecimal DataInputmode = "decimal"
-	DataInputmodeEmail   DataInputmode = "email"
-	DataInputmodeNone    DataInputmode = "none"
-	DataInputmodeNumeric DataInputmode = "numeric"
 )
 
 type DataSpellcheck string
@@ -296,6 +296,12 @@ func (e *DataElement) Nonce(s string) *DataElement {
 
 func (e *DataElement) Popover(s string) *DataElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *DataElement) Role(s string) *DataElement {
+	e.attributes["role"] = s
 
 	return e
 }

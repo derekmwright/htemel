@@ -51,19 +51,19 @@ func TableTernary(condition bool, true htemel.Node, false htemel.Node) *TableEle
 type TableAutocapitalize string
 
 const (
-	TableAutocapitalizeCharacters TableAutocapitalize = "characters"
 	TableAutocapitalizeNone       TableAutocapitalize = "none"
 	TableAutocapitalizeOff        TableAutocapitalize = "off"
 	TableAutocapitalizeOn         TableAutocapitalize = "on"
 	TableAutocapitalizeSentences  TableAutocapitalize = "sentences"
 	TableAutocapitalizeWords      TableAutocapitalize = "words"
+	TableAutocapitalizeCharacters TableAutocapitalize = "characters"
 )
 
 type TableAutocorrect string
 
 const (
-	TableAutocorrectOff   TableAutocorrect = "off"
 	TableAutocorrectOn    TableAutocorrect = "on"
+	TableAutocorrectOff   TableAutocorrect = "off"
 	TableAutocorrectEmpty TableAutocorrect = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type TableEnterkeyhint string
 
 const (
-	TableEnterkeyhintSend     TableEnterkeyhint = "send"
-	TableEnterkeyhintDone     TableEnterkeyhint = "done"
 	TableEnterkeyhintEnter    TableEnterkeyhint = "enter"
 	TableEnterkeyhintGo       TableEnterkeyhint = "go"
 	TableEnterkeyhintNext     TableEnterkeyhint = "next"
 	TableEnterkeyhintPrevious TableEnterkeyhint = "previous"
 	TableEnterkeyhintSearch   TableEnterkeyhint = "search"
+	TableEnterkeyhintSend     TableEnterkeyhint = "send"
+	TableEnterkeyhintDone     TableEnterkeyhint = "done"
 )
 
 type TableHidden string
@@ -114,14 +114,14 @@ const (
 type TableInputmode string
 
 const (
-	TableInputmodeTel     TableInputmode = "tel"
-	TableInputmodeText    TableInputmode = "text"
 	TableInputmodeUrl     TableInputmode = "url"
 	TableInputmodeDecimal TableInputmode = "decimal"
 	TableInputmodeEmail   TableInputmode = "email"
 	TableInputmodeNone    TableInputmode = "none"
 	TableInputmodeNumeric TableInputmode = "numeric"
 	TableInputmodeSearch  TableInputmode = "search"
+	TableInputmodeTel     TableInputmode = "tel"
+	TableInputmodeText    TableInputmode = "text"
 )
 
 type TableSpellcheck string
@@ -135,8 +135,8 @@ const (
 type TableTranslate string
 
 const (
-	TableTranslateYes   TableTranslate = "yes"
 	TableTranslateNo    TableTranslate = "no"
+	TableTranslateYes   TableTranslate = "yes"
 	TableTranslateEmpty TableTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *TableElement) Nonce(s string) *TableElement {
 
 func (e *TableElement) Popover(s string) *TableElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TableElement) Role(s string) *TableElement {
+	e.attributes["role"] = s
 
 	return e
 }

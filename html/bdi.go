@@ -51,12 +51,12 @@ func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement
 type BdiAutocapitalize string
 
 const (
-	BdiAutocapitalizeOn         BdiAutocapitalize = "on"
-	BdiAutocapitalizeSentences  BdiAutocapitalize = "sentences"
 	BdiAutocapitalizeWords      BdiAutocapitalize = "words"
 	BdiAutocapitalizeCharacters BdiAutocapitalize = "characters"
 	BdiAutocapitalizeNone       BdiAutocapitalize = "none"
 	BdiAutocapitalizeOff        BdiAutocapitalize = "off"
+	BdiAutocapitalizeOn         BdiAutocapitalize = "on"
+	BdiAutocapitalizeSentences  BdiAutocapitalize = "sentences"
 )
 
 type BdiAutocorrect string
@@ -79,9 +79,9 @@ const (
 type BdiDir string
 
 const (
+	BdiDirRtl  BdiDir = "rtl"
 	BdiDirAuto BdiDir = "auto"
 	BdiDirLtr  BdiDir = "ltr"
-	BdiDirRtl  BdiDir = "rtl"
 )
 
 type BdiDraggable string
@@ -114,7 +114,6 @@ const (
 type BdiInputmode string
 
 const (
-	BdiInputmodeTel     BdiInputmode = "tel"
 	BdiInputmodeText    BdiInputmode = "text"
 	BdiInputmodeUrl     BdiInputmode = "url"
 	BdiInputmodeDecimal BdiInputmode = "decimal"
@@ -122,21 +121,22 @@ const (
 	BdiInputmodeNone    BdiInputmode = "none"
 	BdiInputmodeNumeric BdiInputmode = "numeric"
 	BdiInputmodeSearch  BdiInputmode = "search"
+	BdiInputmodeTel     BdiInputmode = "tel"
 )
 
 type BdiSpellcheck string
 
 const (
-	BdiSpellcheckFalse BdiSpellcheck = "false"
 	BdiSpellcheckTrue  BdiSpellcheck = "true"
+	BdiSpellcheckFalse BdiSpellcheck = "false"
 	BdiSpellcheckEmpty BdiSpellcheck = ""
 )
 
 type BdiTranslate string
 
 const (
-	BdiTranslateNo    BdiTranslate = "no"
 	BdiTranslateYes   BdiTranslate = "yes"
+	BdiTranslateNo    BdiTranslate = "no"
 	BdiTranslateEmpty BdiTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *BdiElement) Nonce(s string) *BdiElement {
 
 func (e *BdiElement) Popover(s string) *BdiElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *BdiElement) Role(s string) *BdiElement {
+	e.attributes["role"] = s
 
 	return e
 }

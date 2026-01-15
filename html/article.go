@@ -51,12 +51,12 @@ func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *Articl
 type ArticleAutocapitalize string
 
 const (
+	ArticleAutocapitalizeOn         ArticleAutocapitalize = "on"
+	ArticleAutocapitalizeSentences  ArticleAutocapitalize = "sentences"
 	ArticleAutocapitalizeWords      ArticleAutocapitalize = "words"
 	ArticleAutocapitalizeCharacters ArticleAutocapitalize = "characters"
 	ArticleAutocapitalizeNone       ArticleAutocapitalize = "none"
 	ArticleAutocapitalizeOff        ArticleAutocapitalize = "off"
-	ArticleAutocapitalizeOn         ArticleAutocapitalize = "on"
-	ArticleAutocapitalizeSentences  ArticleAutocapitalize = "sentences"
 )
 
 type ArticleAutocorrect string
@@ -94,13 +94,13 @@ const (
 type ArticleEnterkeyhint string
 
 const (
+	ArticleEnterkeyhintDone     ArticleEnterkeyhint = "done"
+	ArticleEnterkeyhintEnter    ArticleEnterkeyhint = "enter"
 	ArticleEnterkeyhintGo       ArticleEnterkeyhint = "go"
 	ArticleEnterkeyhintNext     ArticleEnterkeyhint = "next"
 	ArticleEnterkeyhintPrevious ArticleEnterkeyhint = "previous"
 	ArticleEnterkeyhintSearch   ArticleEnterkeyhint = "search"
 	ArticleEnterkeyhintSend     ArticleEnterkeyhint = "send"
-	ArticleEnterkeyhintDone     ArticleEnterkeyhint = "done"
-	ArticleEnterkeyhintEnter    ArticleEnterkeyhint = "enter"
 )
 
 type ArticleHidden string
@@ -114,14 +114,14 @@ const (
 type ArticleInputmode string
 
 const (
-	ArticleInputmodeUrl     ArticleInputmode = "url"
-	ArticleInputmodeDecimal ArticleInputmode = "decimal"
-	ArticleInputmodeEmail   ArticleInputmode = "email"
-	ArticleInputmodeNone    ArticleInputmode = "none"
 	ArticleInputmodeNumeric ArticleInputmode = "numeric"
 	ArticleInputmodeSearch  ArticleInputmode = "search"
 	ArticleInputmodeTel     ArticleInputmode = "tel"
 	ArticleInputmodeText    ArticleInputmode = "text"
+	ArticleInputmodeUrl     ArticleInputmode = "url"
+	ArticleInputmodeDecimal ArticleInputmode = "decimal"
+	ArticleInputmodeEmail   ArticleInputmode = "email"
+	ArticleInputmodeNone    ArticleInputmode = "none"
 )
 
 type ArticleSpellcheck string
@@ -290,6 +290,12 @@ func (e *ArticleElement) Nonce(s string) *ArticleElement {
 
 func (e *ArticleElement) Popover(s string) *ArticleElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *ArticleElement) Role(s string) *ArticleElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,12 +51,12 @@ func HtmlTernary(condition bool, true htemel.Node, false htemel.Node) *HtmlEleme
 type HtmlAutocapitalize string
 
 const (
-	HtmlAutocapitalizeSentences  HtmlAutocapitalize = "sentences"
-	HtmlAutocapitalizeWords      HtmlAutocapitalize = "words"
 	HtmlAutocapitalizeCharacters HtmlAutocapitalize = "characters"
 	HtmlAutocapitalizeNone       HtmlAutocapitalize = "none"
 	HtmlAutocapitalizeOff        HtmlAutocapitalize = "off"
 	HtmlAutocapitalizeOn         HtmlAutocapitalize = "on"
+	HtmlAutocapitalizeSentences  HtmlAutocapitalize = "sentences"
+	HtmlAutocapitalizeWords      HtmlAutocapitalize = "words"
 )
 
 type HtmlAutocorrect string
@@ -94,13 +94,13 @@ const (
 type HtmlEnterkeyhint string
 
 const (
-	HtmlEnterkeyhintDone     HtmlEnterkeyhint = "done"
 	HtmlEnterkeyhintEnter    HtmlEnterkeyhint = "enter"
 	HtmlEnterkeyhintGo       HtmlEnterkeyhint = "go"
 	HtmlEnterkeyhintNext     HtmlEnterkeyhint = "next"
 	HtmlEnterkeyhintPrevious HtmlEnterkeyhint = "previous"
 	HtmlEnterkeyhintSearch   HtmlEnterkeyhint = "search"
 	HtmlEnterkeyhintSend     HtmlEnterkeyhint = "send"
+	HtmlEnterkeyhintDone     HtmlEnterkeyhint = "done"
 )
 
 type HtmlHidden string
@@ -114,14 +114,14 @@ const (
 type HtmlInputmode string
 
 const (
+	HtmlInputmodeEmail   HtmlInputmode = "email"
+	HtmlInputmodeNone    HtmlInputmode = "none"
 	HtmlInputmodeNumeric HtmlInputmode = "numeric"
 	HtmlInputmodeSearch  HtmlInputmode = "search"
 	HtmlInputmodeTel     HtmlInputmode = "tel"
 	HtmlInputmodeText    HtmlInputmode = "text"
 	HtmlInputmodeUrl     HtmlInputmode = "url"
 	HtmlInputmodeDecimal HtmlInputmode = "decimal"
-	HtmlInputmodeEmail   HtmlInputmode = "email"
-	HtmlInputmodeNone    HtmlInputmode = "none"
 )
 
 type HtmlSpellcheck string
@@ -290,6 +290,12 @@ func (e *HtmlElement) Nonce(s string) *HtmlElement {
 
 func (e *HtmlElement) Popover(s string) *HtmlElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *HtmlElement) Role(s string) *HtmlElement {
+	e.attributes["role"] = s
 
 	return e
 }

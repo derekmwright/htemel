@@ -51,19 +51,19 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 type ThAutocapitalize string
 
 const (
-	ThAutocapitalizeOff        ThAutocapitalize = "off"
-	ThAutocapitalizeOn         ThAutocapitalize = "on"
 	ThAutocapitalizeSentences  ThAutocapitalize = "sentences"
 	ThAutocapitalizeWords      ThAutocapitalize = "words"
 	ThAutocapitalizeCharacters ThAutocapitalize = "characters"
 	ThAutocapitalizeNone       ThAutocapitalize = "none"
+	ThAutocapitalizeOff        ThAutocapitalize = "off"
+	ThAutocapitalizeOn         ThAutocapitalize = "on"
 )
 
 type ThAutocorrect string
 
 const (
-	ThAutocorrectOff   ThAutocorrect = "off"
 	ThAutocorrectOn    ThAutocorrect = "on"
+	ThAutocorrectOff   ThAutocorrect = "off"
 	ThAutocorrectEmpty ThAutocorrect = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type ThEnterkeyhint string
 
 const (
+	ThEnterkeyhintDone     ThEnterkeyhint = "done"
+	ThEnterkeyhintEnter    ThEnterkeyhint = "enter"
+	ThEnterkeyhintGo       ThEnterkeyhint = "go"
 	ThEnterkeyhintNext     ThEnterkeyhint = "next"
 	ThEnterkeyhintPrevious ThEnterkeyhint = "previous"
 	ThEnterkeyhintSearch   ThEnterkeyhint = "search"
 	ThEnterkeyhintSend     ThEnterkeyhint = "send"
-	ThEnterkeyhintDone     ThEnterkeyhint = "done"
-	ThEnterkeyhintEnter    ThEnterkeyhint = "enter"
-	ThEnterkeyhintGo       ThEnterkeyhint = "go"
 )
 
 type ThHidden string
@@ -114,14 +114,14 @@ const (
 type ThInputmode string
 
 const (
-	ThInputmodeEmail   ThInputmode = "email"
-	ThInputmodeNone    ThInputmode = "none"
-	ThInputmodeNumeric ThInputmode = "numeric"
 	ThInputmodeSearch  ThInputmode = "search"
 	ThInputmodeTel     ThInputmode = "tel"
 	ThInputmodeText    ThInputmode = "text"
 	ThInputmodeUrl     ThInputmode = "url"
 	ThInputmodeDecimal ThInputmode = "decimal"
+	ThInputmodeEmail   ThInputmode = "email"
+	ThInputmodeNone    ThInputmode = "none"
+	ThInputmodeNumeric ThInputmode = "numeric"
 )
 
 type ThSpellcheck string
@@ -135,8 +135,8 @@ const (
 type ThTranslate string
 
 const (
-	ThTranslateYes   ThTranslate = "yes"
 	ThTranslateNo    ThTranslate = "no"
+	ThTranslateYes   ThTranslate = "yes"
 	ThTranslateEmpty ThTranslate = ""
 )
 
@@ -320,6 +320,12 @@ func (e *ThElement) Nonce(s string) *ThElement {
 
 func (e *ThElement) Popover(s string) *ThElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *ThElement) Role(s string) *ThElement {
+	e.attributes["role"] = s
 
 	return e
 }

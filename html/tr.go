@@ -70,18 +70,18 @@ const (
 type TrContenteditable string
 
 const (
+	TrContenteditableFalse         TrContenteditable = "false"
 	TrContenteditablePlaintextOnly TrContenteditable = "plaintext-only"
 	TrContenteditableTrue          TrContenteditable = "true"
-	TrContenteditableFalse         TrContenteditable = "false"
 	TrContenteditableEmpty         TrContenteditable = ""
 )
 
 type TrDir string
 
 const (
-	TrDirRtl  TrDir = "rtl"
 	TrDirAuto TrDir = "auto"
 	TrDirLtr  TrDir = "ltr"
+	TrDirRtl  TrDir = "rtl"
 )
 
 type TrDraggable string
@@ -114,14 +114,14 @@ const (
 type TrInputmode string
 
 const (
-	TrInputmodeDecimal TrInputmode = "decimal"
-	TrInputmodeEmail   TrInputmode = "email"
-	TrInputmodeNone    TrInputmode = "none"
 	TrInputmodeNumeric TrInputmode = "numeric"
 	TrInputmodeSearch  TrInputmode = "search"
 	TrInputmodeTel     TrInputmode = "tel"
 	TrInputmodeText    TrInputmode = "text"
 	TrInputmodeUrl     TrInputmode = "url"
+	TrInputmodeDecimal TrInputmode = "decimal"
+	TrInputmodeEmail   TrInputmode = "email"
+	TrInputmodeNone    TrInputmode = "none"
 )
 
 type TrSpellcheck string
@@ -135,8 +135,8 @@ const (
 type TrTranslate string
 
 const (
-	TrTranslateNo    TrTranslate = "no"
 	TrTranslateYes   TrTranslate = "yes"
+	TrTranslateNo    TrTranslate = "no"
 	TrTranslateEmpty TrTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *TrElement) Nonce(s string) *TrElement {
 
 func (e *TrElement) Popover(s string) *TrElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TrElement) Role(s string) *TrElement {
+	e.attributes["role"] = s
 
 	return e
 }

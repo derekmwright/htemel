@@ -51,19 +51,19 @@ func RubyTernary(condition bool, true htemel.Node, false htemel.Node) *RubyEleme
 type RubyAutocapitalize string
 
 const (
-	RubyAutocapitalizeCharacters RubyAutocapitalize = "characters"
-	RubyAutocapitalizeNone       RubyAutocapitalize = "none"
 	RubyAutocapitalizeOff        RubyAutocapitalize = "off"
 	RubyAutocapitalizeOn         RubyAutocapitalize = "on"
 	RubyAutocapitalizeSentences  RubyAutocapitalize = "sentences"
 	RubyAutocapitalizeWords      RubyAutocapitalize = "words"
+	RubyAutocapitalizeCharacters RubyAutocapitalize = "characters"
+	RubyAutocapitalizeNone       RubyAutocapitalize = "none"
 )
 
 type RubyAutocorrect string
 
 const (
-	RubyAutocorrectOff   RubyAutocorrect = "off"
 	RubyAutocorrectOn    RubyAutocorrect = "on"
+	RubyAutocorrectOff   RubyAutocorrect = "off"
 	RubyAutocorrectEmpty RubyAutocorrect = ""
 )
 
@@ -94,34 +94,34 @@ const (
 type RubyEnterkeyhint string
 
 const (
+	RubyEnterkeyhintDone     RubyEnterkeyhint = "done"
+	RubyEnterkeyhintEnter    RubyEnterkeyhint = "enter"
+	RubyEnterkeyhintGo       RubyEnterkeyhint = "go"
 	RubyEnterkeyhintNext     RubyEnterkeyhint = "next"
 	RubyEnterkeyhintPrevious RubyEnterkeyhint = "previous"
 	RubyEnterkeyhintSearch   RubyEnterkeyhint = "search"
 	RubyEnterkeyhintSend     RubyEnterkeyhint = "send"
-	RubyEnterkeyhintDone     RubyEnterkeyhint = "done"
-	RubyEnterkeyhintEnter    RubyEnterkeyhint = "enter"
-	RubyEnterkeyhintGo       RubyEnterkeyhint = "go"
 )
 
 type RubyHidden string
 
 const (
-	RubyHiddenHidden     RubyHidden = "hidden"
 	RubyHiddenUntilFound RubyHidden = "until-found"
+	RubyHiddenHidden     RubyHidden = "hidden"
 	RubyHiddenEmpty      RubyHidden = ""
 )
 
 type RubyInputmode string
 
 const (
-	RubyInputmodeText    RubyInputmode = "text"
-	RubyInputmodeUrl     RubyInputmode = "url"
 	RubyInputmodeDecimal RubyInputmode = "decimal"
 	RubyInputmodeEmail   RubyInputmode = "email"
 	RubyInputmodeNone    RubyInputmode = "none"
 	RubyInputmodeNumeric RubyInputmode = "numeric"
 	RubyInputmodeSearch  RubyInputmode = "search"
 	RubyInputmodeTel     RubyInputmode = "tel"
+	RubyInputmodeText    RubyInputmode = "text"
+	RubyInputmodeUrl     RubyInputmode = "url"
 )
 
 type RubySpellcheck string
@@ -290,6 +290,12 @@ func (e *RubyElement) Nonce(s string) *RubyElement {
 
 func (e *RubyElement) Popover(s string) *RubyElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *RubyElement) Role(s string) *RubyElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -62,17 +62,17 @@ const (
 type H6Autocorrect string
 
 const (
-	H6AutocorrectOff   H6Autocorrect = "off"
 	H6AutocorrectOn    H6Autocorrect = "on"
+	H6AutocorrectOff   H6Autocorrect = "off"
 	H6AutocorrectEmpty H6Autocorrect = ""
 )
 
 type H6Contenteditable string
 
 const (
+	H6ContenteditableFalse         H6Contenteditable = "false"
 	H6ContenteditablePlaintextOnly H6Contenteditable = "plaintext-only"
 	H6ContenteditableTrue          H6Contenteditable = "true"
-	H6ContenteditableFalse         H6Contenteditable = "false"
 	H6ContenteditableEmpty         H6Contenteditable = ""
 )
 
@@ -87,20 +87,20 @@ const (
 type H6Draggable string
 
 const (
-	H6DraggableFalse H6Draggable = "false"
 	H6DraggableTrue  H6Draggable = "true"
+	H6DraggableFalse H6Draggable = "false"
 )
 
 type H6Enterkeyhint string
 
 const (
+	H6EnterkeyhintDone     H6Enterkeyhint = "done"
 	H6EnterkeyhintEnter    H6Enterkeyhint = "enter"
 	H6EnterkeyhintGo       H6Enterkeyhint = "go"
 	H6EnterkeyhintNext     H6Enterkeyhint = "next"
 	H6EnterkeyhintPrevious H6Enterkeyhint = "previous"
 	H6EnterkeyhintSearch   H6Enterkeyhint = "search"
 	H6EnterkeyhintSend     H6Enterkeyhint = "send"
-	H6EnterkeyhintDone     H6Enterkeyhint = "done"
 )
 
 type H6Hidden string
@@ -114,6 +114,7 @@ const (
 type H6Inputmode string
 
 const (
+	H6InputmodeTel     H6Inputmode = "tel"
 	H6InputmodeText    H6Inputmode = "text"
 	H6InputmodeUrl     H6Inputmode = "url"
 	H6InputmodeDecimal H6Inputmode = "decimal"
@@ -121,7 +122,6 @@ const (
 	H6InputmodeNone    H6Inputmode = "none"
 	H6InputmodeNumeric H6Inputmode = "numeric"
 	H6InputmodeSearch  H6Inputmode = "search"
-	H6InputmodeTel     H6Inputmode = "tel"
 )
 
 type H6Spellcheck string
@@ -290,6 +290,12 @@ func (e *H6Element) Nonce(s string) *H6Element {
 
 func (e *H6Element) Popover(s string) *H6Element {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *H6Element) Role(s string) *H6Element {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,19 +51,19 @@ func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallEle
 type SmallAutocapitalize string
 
 const (
-	SmallAutocapitalizeCharacters SmallAutocapitalize = "characters"
 	SmallAutocapitalizeNone       SmallAutocapitalize = "none"
 	SmallAutocapitalizeOff        SmallAutocapitalize = "off"
 	SmallAutocapitalizeOn         SmallAutocapitalize = "on"
 	SmallAutocapitalizeSentences  SmallAutocapitalize = "sentences"
 	SmallAutocapitalizeWords      SmallAutocapitalize = "words"
+	SmallAutocapitalizeCharacters SmallAutocapitalize = "characters"
 )
 
 type SmallAutocorrect string
 
 const (
-	SmallAutocorrectOff   SmallAutocorrect = "off"
 	SmallAutocorrectOn    SmallAutocorrect = "on"
+	SmallAutocorrectOff   SmallAutocorrect = "off"
 	SmallAutocorrectEmpty SmallAutocorrect = ""
 )
 
@@ -94,34 +94,34 @@ const (
 type SmallEnterkeyhint string
 
 const (
-	SmallEnterkeyhintEnter    SmallEnterkeyhint = "enter"
-	SmallEnterkeyhintGo       SmallEnterkeyhint = "go"
-	SmallEnterkeyhintNext     SmallEnterkeyhint = "next"
 	SmallEnterkeyhintPrevious SmallEnterkeyhint = "previous"
 	SmallEnterkeyhintSearch   SmallEnterkeyhint = "search"
 	SmallEnterkeyhintSend     SmallEnterkeyhint = "send"
 	SmallEnterkeyhintDone     SmallEnterkeyhint = "done"
+	SmallEnterkeyhintEnter    SmallEnterkeyhint = "enter"
+	SmallEnterkeyhintGo       SmallEnterkeyhint = "go"
+	SmallEnterkeyhintNext     SmallEnterkeyhint = "next"
 )
 
 type SmallHidden string
 
 const (
-	SmallHiddenUntilFound SmallHidden = "until-found"
 	SmallHiddenHidden     SmallHidden = "hidden"
+	SmallHiddenUntilFound SmallHidden = "until-found"
 	SmallHiddenEmpty      SmallHidden = ""
 )
 
 type SmallInputmode string
 
 const (
-	SmallInputmodeTel     SmallInputmode = "tel"
-	SmallInputmodeText    SmallInputmode = "text"
-	SmallInputmodeUrl     SmallInputmode = "url"
 	SmallInputmodeDecimal SmallInputmode = "decimal"
 	SmallInputmodeEmail   SmallInputmode = "email"
 	SmallInputmodeNone    SmallInputmode = "none"
 	SmallInputmodeNumeric SmallInputmode = "numeric"
 	SmallInputmodeSearch  SmallInputmode = "search"
+	SmallInputmodeTel     SmallInputmode = "tel"
+	SmallInputmodeText    SmallInputmode = "text"
+	SmallInputmodeUrl     SmallInputmode = "url"
 )
 
 type SmallSpellcheck string
@@ -290,6 +290,12 @@ func (e *SmallElement) Nonce(s string) *SmallElement {
 
 func (e *SmallElement) Popover(s string) *SmallElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *SmallElement) Role(s string) *SmallElement {
+	e.attributes["role"] = s
 
 	return e
 }

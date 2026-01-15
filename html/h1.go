@@ -51,12 +51,12 @@ func H1Ternary(condition bool, true htemel.Node, false htemel.Node) *H1Element {
 type H1Autocapitalize string
 
 const (
-	H1AutocapitalizeWords      H1Autocapitalize = "words"
-	H1AutocapitalizeCharacters H1Autocapitalize = "characters"
 	H1AutocapitalizeNone       H1Autocapitalize = "none"
 	H1AutocapitalizeOff        H1Autocapitalize = "off"
 	H1AutocapitalizeOn         H1Autocapitalize = "on"
 	H1AutocapitalizeSentences  H1Autocapitalize = "sentences"
+	H1AutocapitalizeWords      H1Autocapitalize = "words"
+	H1AutocapitalizeCharacters H1Autocapitalize = "characters"
 )
 
 type H1Autocorrect string
@@ -94,13 +94,13 @@ const (
 type H1Enterkeyhint string
 
 const (
-	H1EnterkeyhintDone     H1Enterkeyhint = "done"
 	H1EnterkeyhintEnter    H1Enterkeyhint = "enter"
 	H1EnterkeyhintGo       H1Enterkeyhint = "go"
 	H1EnterkeyhintNext     H1Enterkeyhint = "next"
 	H1EnterkeyhintPrevious H1Enterkeyhint = "previous"
 	H1EnterkeyhintSearch   H1Enterkeyhint = "search"
 	H1EnterkeyhintSend     H1Enterkeyhint = "send"
+	H1EnterkeyhintDone     H1Enterkeyhint = "done"
 )
 
 type H1Hidden string
@@ -114,21 +114,21 @@ const (
 type H1Inputmode string
 
 const (
-	H1InputmodeEmail   H1Inputmode = "email"
-	H1InputmodeNone    H1Inputmode = "none"
-	H1InputmodeNumeric H1Inputmode = "numeric"
 	H1InputmodeSearch  H1Inputmode = "search"
 	H1InputmodeTel     H1Inputmode = "tel"
 	H1InputmodeText    H1Inputmode = "text"
 	H1InputmodeUrl     H1Inputmode = "url"
 	H1InputmodeDecimal H1Inputmode = "decimal"
+	H1InputmodeEmail   H1Inputmode = "email"
+	H1InputmodeNone    H1Inputmode = "none"
+	H1InputmodeNumeric H1Inputmode = "numeric"
 )
 
 type H1Spellcheck string
 
 const (
-	H1SpellcheckTrue  H1Spellcheck = "true"
 	H1SpellcheckFalse H1Spellcheck = "false"
+	H1SpellcheckTrue  H1Spellcheck = "true"
 	H1SpellcheckEmpty H1Spellcheck = ""
 )
 
@@ -143,8 +143,8 @@ const (
 type H1Writingsuggestions string
 
 const (
-	H1WritingsuggestionsTrue  H1Writingsuggestions = "true"
 	H1WritingsuggestionsFalse H1Writingsuggestions = "false"
+	H1WritingsuggestionsTrue  H1Writingsuggestions = "true"
 	H1WritingsuggestionsEmpty H1Writingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *H1Element) Nonce(s string) *H1Element {
 
 func (e *H1Element) Popover(s string) *H1Element {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *H1Element) Role(s string) *H1Element {
+	e.attributes["role"] = s
 
 	return e
 }

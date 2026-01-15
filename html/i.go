@@ -51,12 +51,12 @@ func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
 type IAutocapitalize string
 
 const (
-	IAutocapitalizeSentences  IAutocapitalize = "sentences"
-	IAutocapitalizeWords      IAutocapitalize = "words"
 	IAutocapitalizeCharacters IAutocapitalize = "characters"
 	IAutocapitalizeNone       IAutocapitalize = "none"
 	IAutocapitalizeOff        IAutocapitalize = "off"
 	IAutocapitalizeOn         IAutocapitalize = "on"
+	IAutocapitalizeSentences  IAutocapitalize = "sentences"
+	IAutocapitalizeWords      IAutocapitalize = "words"
 )
 
 type IAutocorrect string
@@ -87,20 +87,20 @@ const (
 type IDraggable string
 
 const (
-	IDraggableTrue  IDraggable = "true"
 	IDraggableFalse IDraggable = "false"
+	IDraggableTrue  IDraggable = "true"
 )
 
 type IEnterkeyhint string
 
 const (
+	IEnterkeyhintSend     IEnterkeyhint = "send"
+	IEnterkeyhintDone     IEnterkeyhint = "done"
 	IEnterkeyhintEnter    IEnterkeyhint = "enter"
 	IEnterkeyhintGo       IEnterkeyhint = "go"
 	IEnterkeyhintNext     IEnterkeyhint = "next"
 	IEnterkeyhintPrevious IEnterkeyhint = "previous"
 	IEnterkeyhintSearch   IEnterkeyhint = "search"
-	IEnterkeyhintSend     IEnterkeyhint = "send"
-	IEnterkeyhintDone     IEnterkeyhint = "done"
 )
 
 type IHidden string
@@ -114,21 +114,21 @@ const (
 type IInputmode string
 
 const (
-	IInputmodeDecimal IInputmode = "decimal"
-	IInputmodeEmail   IInputmode = "email"
-	IInputmodeNone    IInputmode = "none"
-	IInputmodeNumeric IInputmode = "numeric"
 	IInputmodeSearch  IInputmode = "search"
 	IInputmodeTel     IInputmode = "tel"
 	IInputmodeText    IInputmode = "text"
 	IInputmodeUrl     IInputmode = "url"
+	IInputmodeDecimal IInputmode = "decimal"
+	IInputmodeEmail   IInputmode = "email"
+	IInputmodeNone    IInputmode = "none"
+	IInputmodeNumeric IInputmode = "numeric"
 )
 
 type ISpellcheck string
 
 const (
-	ISpellcheckFalse ISpellcheck = "false"
 	ISpellcheckTrue  ISpellcheck = "true"
+	ISpellcheckFalse ISpellcheck = "false"
 	ISpellcheckEmpty ISpellcheck = ""
 )
 
@@ -290,6 +290,12 @@ func (e *IElement) Nonce(s string) *IElement {
 
 func (e *IElement) Popover(s string) *IElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *IElement) Role(s string) *IElement {
+	e.attributes["role"] = s
 
 	return e
 }

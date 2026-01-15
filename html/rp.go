@@ -62,17 +62,17 @@ const (
 type RpAutocorrect string
 
 const (
-	RpAutocorrectOn    RpAutocorrect = "on"
 	RpAutocorrectOff   RpAutocorrect = "off"
+	RpAutocorrectOn    RpAutocorrect = "on"
 	RpAutocorrectEmpty RpAutocorrect = ""
 )
 
 type RpContenteditable string
 
 const (
-	RpContenteditableFalse         RpContenteditable = "false"
 	RpContenteditablePlaintextOnly RpContenteditable = "plaintext-only"
 	RpContenteditableTrue          RpContenteditable = "true"
+	RpContenteditableFalse         RpContenteditable = "false"
 	RpContenteditableEmpty         RpContenteditable = ""
 )
 
@@ -94,34 +94,34 @@ const (
 type RpEnterkeyhint string
 
 const (
+	RpEnterkeyhintDone     RpEnterkeyhint = "done"
+	RpEnterkeyhintEnter    RpEnterkeyhint = "enter"
+	RpEnterkeyhintGo       RpEnterkeyhint = "go"
 	RpEnterkeyhintNext     RpEnterkeyhint = "next"
 	RpEnterkeyhintPrevious RpEnterkeyhint = "previous"
 	RpEnterkeyhintSearch   RpEnterkeyhint = "search"
 	RpEnterkeyhintSend     RpEnterkeyhint = "send"
-	RpEnterkeyhintDone     RpEnterkeyhint = "done"
-	RpEnterkeyhintEnter    RpEnterkeyhint = "enter"
-	RpEnterkeyhintGo       RpEnterkeyhint = "go"
 )
 
 type RpHidden string
 
 const (
-	RpHiddenHidden     RpHidden = "hidden"
 	RpHiddenUntilFound RpHidden = "until-found"
+	RpHiddenHidden     RpHidden = "hidden"
 	RpHiddenEmpty      RpHidden = ""
 )
 
 type RpInputmode string
 
 const (
+	RpInputmodeNumeric RpInputmode = "numeric"
+	RpInputmodeSearch  RpInputmode = "search"
 	RpInputmodeTel     RpInputmode = "tel"
 	RpInputmodeText    RpInputmode = "text"
 	RpInputmodeUrl     RpInputmode = "url"
 	RpInputmodeDecimal RpInputmode = "decimal"
 	RpInputmodeEmail   RpInputmode = "email"
 	RpInputmodeNone    RpInputmode = "none"
-	RpInputmodeNumeric RpInputmode = "numeric"
-	RpInputmodeSearch  RpInputmode = "search"
 )
 
 type RpSpellcheck string
@@ -135,8 +135,8 @@ const (
 type RpTranslate string
 
 const (
-	RpTranslateYes   RpTranslate = "yes"
 	RpTranslateNo    RpTranslate = "no"
+	RpTranslateYes   RpTranslate = "yes"
 	RpTranslateEmpty RpTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *RpElement) Nonce(s string) *RpElement {
 
 func (e *RpElement) Popover(s string) *RpElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *RpElement) Role(s string) *RpElement {
+	e.attributes["role"] = s
 
 	return e
 }

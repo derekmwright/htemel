@@ -73,12 +73,12 @@ const (
 type ScriptAutocapitalize string
 
 const (
+	ScriptAutocapitalizeCharacters ScriptAutocapitalize = "characters"
 	ScriptAutocapitalizeNone       ScriptAutocapitalize = "none"
 	ScriptAutocapitalizeOff        ScriptAutocapitalize = "off"
 	ScriptAutocapitalizeOn         ScriptAutocapitalize = "on"
 	ScriptAutocapitalizeSentences  ScriptAutocapitalize = "sentences"
 	ScriptAutocapitalizeWords      ScriptAutocapitalize = "words"
-	ScriptAutocapitalizeCharacters ScriptAutocapitalize = "characters"
 )
 
 type ScriptAutocorrect string
@@ -101,9 +101,9 @@ const (
 type ScriptDir string
 
 const (
+	ScriptDirRtl  ScriptDir = "rtl"
 	ScriptDirAuto ScriptDir = "auto"
 	ScriptDirLtr  ScriptDir = "ltr"
-	ScriptDirRtl  ScriptDir = "rtl"
 )
 
 type ScriptDraggable string
@@ -116,13 +116,13 @@ const (
 type ScriptEnterkeyhint string
 
 const (
-	ScriptEnterkeyhintSearch   ScriptEnterkeyhint = "search"
-	ScriptEnterkeyhintSend     ScriptEnterkeyhint = "send"
-	ScriptEnterkeyhintDone     ScriptEnterkeyhint = "done"
 	ScriptEnterkeyhintEnter    ScriptEnterkeyhint = "enter"
 	ScriptEnterkeyhintGo       ScriptEnterkeyhint = "go"
 	ScriptEnterkeyhintNext     ScriptEnterkeyhint = "next"
 	ScriptEnterkeyhintPrevious ScriptEnterkeyhint = "previous"
+	ScriptEnterkeyhintSearch   ScriptEnterkeyhint = "search"
+	ScriptEnterkeyhintSend     ScriptEnterkeyhint = "send"
+	ScriptEnterkeyhintDone     ScriptEnterkeyhint = "done"
 )
 
 type ScriptHidden string
@@ -372,6 +372,12 @@ func (e *ScriptElement) Nonce(s string) *ScriptElement {
 
 func (e *ScriptElement) Popover(s string) *ScriptElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *ScriptElement) Role(s string) *ScriptElement {
+	e.attributes["role"] = s
 
 	return e
 }

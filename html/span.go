@@ -51,12 +51,12 @@ func SpanTernary(condition bool, true htemel.Node, false htemel.Node) *SpanEleme
 type SpanAutocapitalize string
 
 const (
-	SpanAutocapitalizeNone       SpanAutocapitalize = "none"
-	SpanAutocapitalizeOff        SpanAutocapitalize = "off"
 	SpanAutocapitalizeOn         SpanAutocapitalize = "on"
 	SpanAutocapitalizeSentences  SpanAutocapitalize = "sentences"
 	SpanAutocapitalizeWords      SpanAutocapitalize = "words"
 	SpanAutocapitalizeCharacters SpanAutocapitalize = "characters"
+	SpanAutocapitalizeNone       SpanAutocapitalize = "none"
+	SpanAutocapitalizeOff        SpanAutocapitalize = "off"
 )
 
 type SpanAutocorrect string
@@ -70,37 +70,37 @@ const (
 type SpanContenteditable string
 
 const (
+	SpanContenteditableTrue          SpanContenteditable = "true"
 	SpanContenteditableFalse         SpanContenteditable = "false"
 	SpanContenteditablePlaintextOnly SpanContenteditable = "plaintext-only"
-	SpanContenteditableTrue          SpanContenteditable = "true"
 	SpanContenteditableEmpty         SpanContenteditable = ""
 )
 
 type SpanDir string
 
 const (
-	SpanDirRtl  SpanDir = "rtl"
 	SpanDirAuto SpanDir = "auto"
 	SpanDirLtr  SpanDir = "ltr"
+	SpanDirRtl  SpanDir = "rtl"
 )
 
 type SpanDraggable string
 
 const (
-	SpanDraggableFalse SpanDraggable = "false"
 	SpanDraggableTrue  SpanDraggable = "true"
+	SpanDraggableFalse SpanDraggable = "false"
 )
 
 type SpanEnterkeyhint string
 
 const (
-	SpanEnterkeyhintDone     SpanEnterkeyhint = "done"
 	SpanEnterkeyhintEnter    SpanEnterkeyhint = "enter"
 	SpanEnterkeyhintGo       SpanEnterkeyhint = "go"
 	SpanEnterkeyhintNext     SpanEnterkeyhint = "next"
 	SpanEnterkeyhintPrevious SpanEnterkeyhint = "previous"
 	SpanEnterkeyhintSearch   SpanEnterkeyhint = "search"
 	SpanEnterkeyhintSend     SpanEnterkeyhint = "send"
+	SpanEnterkeyhintDone     SpanEnterkeyhint = "done"
 )
 
 type SpanHidden string
@@ -290,6 +290,12 @@ func (e *SpanElement) Nonce(s string) *SpanElement {
 
 func (e *SpanElement) Popover(s string) *SpanElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *SpanElement) Role(s string) *SpanElement {
+	e.attributes["role"] = s
 
 	return e
 }

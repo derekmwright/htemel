@@ -94,34 +94,34 @@ const (
 type DlEnterkeyhint string
 
 const (
-	DlEnterkeyhintDone     DlEnterkeyhint = "done"
-	DlEnterkeyhintEnter    DlEnterkeyhint = "enter"
 	DlEnterkeyhintGo       DlEnterkeyhint = "go"
 	DlEnterkeyhintNext     DlEnterkeyhint = "next"
 	DlEnterkeyhintPrevious DlEnterkeyhint = "previous"
 	DlEnterkeyhintSearch   DlEnterkeyhint = "search"
 	DlEnterkeyhintSend     DlEnterkeyhint = "send"
+	DlEnterkeyhintDone     DlEnterkeyhint = "done"
+	DlEnterkeyhintEnter    DlEnterkeyhint = "enter"
 )
 
 type DlHidden string
 
 const (
-	DlHiddenHidden     DlHidden = "hidden"
 	DlHiddenUntilFound DlHidden = "until-found"
+	DlHiddenHidden     DlHidden = "hidden"
 	DlHiddenEmpty      DlHidden = ""
 )
 
 type DlInputmode string
 
 const (
-	DlInputmodeDecimal DlInputmode = "decimal"
-	DlInputmodeEmail   DlInputmode = "email"
 	DlInputmodeNone    DlInputmode = "none"
 	DlInputmodeNumeric DlInputmode = "numeric"
 	DlInputmodeSearch  DlInputmode = "search"
 	DlInputmodeTel     DlInputmode = "tel"
 	DlInputmodeText    DlInputmode = "text"
 	DlInputmodeUrl     DlInputmode = "url"
+	DlInputmodeDecimal DlInputmode = "decimal"
+	DlInputmodeEmail   DlInputmode = "email"
 )
 
 type DlSpellcheck string
@@ -135,8 +135,8 @@ const (
 type DlTranslate string
 
 const (
-	DlTranslateYes   DlTranslate = "yes"
 	DlTranslateNo    DlTranslate = "no"
+	DlTranslateYes   DlTranslate = "yes"
 	DlTranslateEmpty DlTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *DlElement) Nonce(s string) *DlElement {
 
 func (e *DlElement) Popover(s string) *DlElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *DlElement) Role(s string) *DlElement {
+	e.attributes["role"] = s
 
 	return e
 }

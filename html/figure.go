@@ -51,12 +51,12 @@ func FigureTernary(condition bool, true htemel.Node, false htemel.Node) *FigureE
 type FigureAutocapitalize string
 
 const (
-	FigureAutocapitalizeCharacters FigureAutocapitalize = "characters"
-	FigureAutocapitalizeNone       FigureAutocapitalize = "none"
 	FigureAutocapitalizeOff        FigureAutocapitalize = "off"
 	FigureAutocapitalizeOn         FigureAutocapitalize = "on"
 	FigureAutocapitalizeSentences  FigureAutocapitalize = "sentences"
 	FigureAutocapitalizeWords      FigureAutocapitalize = "words"
+	FigureAutocapitalizeCharacters FigureAutocapitalize = "characters"
+	FigureAutocapitalizeNone       FigureAutocapitalize = "none"
 )
 
 type FigureAutocorrect string
@@ -79,9 +79,9 @@ const (
 type FigureDir string
 
 const (
+	FigureDirRtl  FigureDir = "rtl"
 	FigureDirAuto FigureDir = "auto"
 	FigureDirLtr  FigureDir = "ltr"
-	FigureDirRtl  FigureDir = "rtl"
 )
 
 type FigureDraggable string
@@ -94,13 +94,13 @@ const (
 type FigureEnterkeyhint string
 
 const (
+	FigureEnterkeyhintDone     FigureEnterkeyhint = "done"
 	FigureEnterkeyhintEnter    FigureEnterkeyhint = "enter"
 	FigureEnterkeyhintGo       FigureEnterkeyhint = "go"
 	FigureEnterkeyhintNext     FigureEnterkeyhint = "next"
 	FigureEnterkeyhintPrevious FigureEnterkeyhint = "previous"
 	FigureEnterkeyhintSearch   FigureEnterkeyhint = "search"
 	FigureEnterkeyhintSend     FigureEnterkeyhint = "send"
-	FigureEnterkeyhintDone     FigureEnterkeyhint = "done"
 )
 
 type FigureHidden string
@@ -114,21 +114,21 @@ const (
 type FigureInputmode string
 
 const (
-	FigureInputmodeDecimal FigureInputmode = "decimal"
-	FigureInputmodeEmail   FigureInputmode = "email"
-	FigureInputmodeNone    FigureInputmode = "none"
-	FigureInputmodeNumeric FigureInputmode = "numeric"
 	FigureInputmodeSearch  FigureInputmode = "search"
 	FigureInputmodeTel     FigureInputmode = "tel"
 	FigureInputmodeText    FigureInputmode = "text"
 	FigureInputmodeUrl     FigureInputmode = "url"
+	FigureInputmodeDecimal FigureInputmode = "decimal"
+	FigureInputmodeEmail   FigureInputmode = "email"
+	FigureInputmodeNone    FigureInputmode = "none"
+	FigureInputmodeNumeric FigureInputmode = "numeric"
 )
 
 type FigureSpellcheck string
 
 const (
-	FigureSpellcheckTrue  FigureSpellcheck = "true"
 	FigureSpellcheckFalse FigureSpellcheck = "false"
+	FigureSpellcheckTrue  FigureSpellcheck = "true"
 	FigureSpellcheckEmpty FigureSpellcheck = ""
 )
 
@@ -290,6 +290,12 @@ func (e *FigureElement) Nonce(s string) *FigureElement {
 
 func (e *FigureElement) Popover(s string) *FigureElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *FigureElement) Role(s string) *FigureElement {
+	e.attributes["role"] = s
 
 	return e
 }

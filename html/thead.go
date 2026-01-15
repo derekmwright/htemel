@@ -51,28 +51,28 @@ func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadEle
 type TheadAutocapitalize string
 
 const (
-	TheadAutocapitalizeOn         TheadAutocapitalize = "on"
-	TheadAutocapitalizeSentences  TheadAutocapitalize = "sentences"
-	TheadAutocapitalizeWords      TheadAutocapitalize = "words"
 	TheadAutocapitalizeCharacters TheadAutocapitalize = "characters"
 	TheadAutocapitalizeNone       TheadAutocapitalize = "none"
 	TheadAutocapitalizeOff        TheadAutocapitalize = "off"
+	TheadAutocapitalizeOn         TheadAutocapitalize = "on"
+	TheadAutocapitalizeSentences  TheadAutocapitalize = "sentences"
+	TheadAutocapitalizeWords      TheadAutocapitalize = "words"
 )
 
 type TheadAutocorrect string
 
 const (
-	TheadAutocorrectOff   TheadAutocorrect = "off"
 	TheadAutocorrectOn    TheadAutocorrect = "on"
+	TheadAutocorrectOff   TheadAutocorrect = "off"
 	TheadAutocorrectEmpty TheadAutocorrect = ""
 )
 
 type TheadContenteditable string
 
 const (
+	TheadContenteditableTrue          TheadContenteditable = "true"
 	TheadContenteditableFalse         TheadContenteditable = "false"
 	TheadContenteditablePlaintextOnly TheadContenteditable = "plaintext-only"
-	TheadContenteditableTrue          TheadContenteditable = "true"
 	TheadContenteditableEmpty         TheadContenteditable = ""
 )
 
@@ -114,14 +114,14 @@ const (
 type TheadInputmode string
 
 const (
-	TheadInputmodeNone    TheadInputmode = "none"
-	TheadInputmodeNumeric TheadInputmode = "numeric"
 	TheadInputmodeSearch  TheadInputmode = "search"
 	TheadInputmodeTel     TheadInputmode = "tel"
 	TheadInputmodeText    TheadInputmode = "text"
 	TheadInputmodeUrl     TheadInputmode = "url"
 	TheadInputmodeDecimal TheadInputmode = "decimal"
 	TheadInputmodeEmail   TheadInputmode = "email"
+	TheadInputmodeNone    TheadInputmode = "none"
+	TheadInputmodeNumeric TheadInputmode = "numeric"
 )
 
 type TheadSpellcheck string
@@ -143,8 +143,8 @@ const (
 type TheadWritingsuggestions string
 
 const (
-	TheadWritingsuggestionsFalse TheadWritingsuggestions = "false"
 	TheadWritingsuggestionsTrue  TheadWritingsuggestions = "true"
+	TheadWritingsuggestionsFalse TheadWritingsuggestions = "false"
 	TheadWritingsuggestionsEmpty TheadWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *TheadElement) Nonce(s string) *TheadElement {
 
 func (e *TheadElement) Popover(s string) *TheadElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TheadElement) Role(s string) *TheadElement {
+	e.attributes["role"] = s
 
 	return e
 }

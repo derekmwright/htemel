@@ -51,28 +51,28 @@ func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideEle
 type AsideAutocapitalize string
 
 const (
-	AsideAutocapitalizeWords      AsideAutocapitalize = "words"
-	AsideAutocapitalizeCharacters AsideAutocapitalize = "characters"
-	AsideAutocapitalizeNone       AsideAutocapitalize = "none"
 	AsideAutocapitalizeOff        AsideAutocapitalize = "off"
 	AsideAutocapitalizeOn         AsideAutocapitalize = "on"
 	AsideAutocapitalizeSentences  AsideAutocapitalize = "sentences"
+	AsideAutocapitalizeWords      AsideAutocapitalize = "words"
+	AsideAutocapitalizeCharacters AsideAutocapitalize = "characters"
+	AsideAutocapitalizeNone       AsideAutocapitalize = "none"
 )
 
 type AsideAutocorrect string
 
 const (
-	AsideAutocorrectOff   AsideAutocorrect = "off"
 	AsideAutocorrectOn    AsideAutocorrect = "on"
+	AsideAutocorrectOff   AsideAutocorrect = "off"
 	AsideAutocorrectEmpty AsideAutocorrect = ""
 )
 
 type AsideContenteditable string
 
 const (
-	AsideContenteditableFalse         AsideContenteditable = "false"
 	AsideContenteditablePlaintextOnly AsideContenteditable = "plaintext-only"
 	AsideContenteditableTrue          AsideContenteditable = "true"
+	AsideContenteditableFalse         AsideContenteditable = "false"
 	AsideContenteditableEmpty         AsideContenteditable = ""
 )
 
@@ -87,20 +87,20 @@ const (
 type AsideDraggable string
 
 const (
-	AsideDraggableFalse AsideDraggable = "false"
 	AsideDraggableTrue  AsideDraggable = "true"
+	AsideDraggableFalse AsideDraggable = "false"
 )
 
 type AsideEnterkeyhint string
 
 const (
+	AsideEnterkeyhintNext     AsideEnterkeyhint = "next"
 	AsideEnterkeyhintPrevious AsideEnterkeyhint = "previous"
 	AsideEnterkeyhintSearch   AsideEnterkeyhint = "search"
 	AsideEnterkeyhintSend     AsideEnterkeyhint = "send"
 	AsideEnterkeyhintDone     AsideEnterkeyhint = "done"
 	AsideEnterkeyhintEnter    AsideEnterkeyhint = "enter"
 	AsideEnterkeyhintGo       AsideEnterkeyhint = "go"
-	AsideEnterkeyhintNext     AsideEnterkeyhint = "next"
 )
 
 type AsideHidden string
@@ -114,21 +114,21 @@ const (
 type AsideInputmode string
 
 const (
-	AsideInputmodeNumeric AsideInputmode = "numeric"
-	AsideInputmodeSearch  AsideInputmode = "search"
-	AsideInputmodeTel     AsideInputmode = "tel"
-	AsideInputmodeText    AsideInputmode = "text"
 	AsideInputmodeUrl     AsideInputmode = "url"
 	AsideInputmodeDecimal AsideInputmode = "decimal"
 	AsideInputmodeEmail   AsideInputmode = "email"
 	AsideInputmodeNone    AsideInputmode = "none"
+	AsideInputmodeNumeric AsideInputmode = "numeric"
+	AsideInputmodeSearch  AsideInputmode = "search"
+	AsideInputmodeTel     AsideInputmode = "tel"
+	AsideInputmodeText    AsideInputmode = "text"
 )
 
 type AsideSpellcheck string
 
 const (
-	AsideSpellcheckTrue  AsideSpellcheck = "true"
 	AsideSpellcheckFalse AsideSpellcheck = "false"
+	AsideSpellcheckTrue  AsideSpellcheck = "true"
 	AsideSpellcheckEmpty AsideSpellcheck = ""
 )
 
@@ -143,8 +143,8 @@ const (
 type AsideWritingsuggestions string
 
 const (
-	AsideWritingsuggestionsTrue  AsideWritingsuggestions = "true"
 	AsideWritingsuggestionsFalse AsideWritingsuggestions = "false"
+	AsideWritingsuggestionsTrue  AsideWritingsuggestions = "true"
 	AsideWritingsuggestionsEmpty AsideWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *AsideElement) Nonce(s string) *AsideElement {
 
 func (e *AsideElement) Popover(s string) *AsideElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *AsideElement) Role(s string) *AsideElement {
+	e.attributes["role"] = s
 
 	return e
 }

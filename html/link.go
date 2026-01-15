@@ -83,18 +83,18 @@ const (
 type LinkContenteditable string
 
 const (
+	LinkContenteditableTrue          LinkContenteditable = "true"
 	LinkContenteditableFalse         LinkContenteditable = "false"
 	LinkContenteditablePlaintextOnly LinkContenteditable = "plaintext-only"
-	LinkContenteditableTrue          LinkContenteditable = "true"
 	LinkContenteditableEmpty         LinkContenteditable = ""
 )
 
 type LinkDir string
 
 const (
-	LinkDirRtl  LinkDir = "rtl"
 	LinkDirAuto LinkDir = "auto"
 	LinkDirLtr  LinkDir = "ltr"
+	LinkDirRtl  LinkDir = "rtl"
 )
 
 type LinkDraggable string
@@ -107,34 +107,34 @@ const (
 type LinkEnterkeyhint string
 
 const (
+	LinkEnterkeyhintSend     LinkEnterkeyhint = "send"
+	LinkEnterkeyhintDone     LinkEnterkeyhint = "done"
 	LinkEnterkeyhintEnter    LinkEnterkeyhint = "enter"
 	LinkEnterkeyhintGo       LinkEnterkeyhint = "go"
 	LinkEnterkeyhintNext     LinkEnterkeyhint = "next"
 	LinkEnterkeyhintPrevious LinkEnterkeyhint = "previous"
 	LinkEnterkeyhintSearch   LinkEnterkeyhint = "search"
-	LinkEnterkeyhintSend     LinkEnterkeyhint = "send"
-	LinkEnterkeyhintDone     LinkEnterkeyhint = "done"
 )
 
 type LinkHidden string
 
 const (
-	LinkHiddenUntilFound LinkHidden = "until-found"
 	LinkHiddenHidden     LinkHidden = "hidden"
+	LinkHiddenUntilFound LinkHidden = "until-found"
 	LinkHiddenEmpty      LinkHidden = ""
 )
 
 type LinkInputmode string
 
 const (
-	LinkInputmodeSearch  LinkInputmode = "search"
-	LinkInputmodeTel     LinkInputmode = "tel"
-	LinkInputmodeText    LinkInputmode = "text"
 	LinkInputmodeUrl     LinkInputmode = "url"
 	LinkInputmodeDecimal LinkInputmode = "decimal"
 	LinkInputmodeEmail   LinkInputmode = "email"
 	LinkInputmodeNone    LinkInputmode = "none"
 	LinkInputmodeNumeric LinkInputmode = "numeric"
+	LinkInputmodeSearch  LinkInputmode = "search"
+	LinkInputmodeTel     LinkInputmode = "tel"
+	LinkInputmodeText    LinkInputmode = "text"
 )
 
 type LinkSpellcheck string
@@ -156,8 +156,8 @@ const (
 type LinkWritingsuggestions string
 
 const (
-	LinkWritingsuggestionsTrue  LinkWritingsuggestions = "true"
 	LinkWritingsuggestionsFalse LinkWritingsuggestions = "false"
+	LinkWritingsuggestionsTrue  LinkWritingsuggestions = "true"
 	LinkWritingsuggestionsEmpty LinkWritingsuggestions = ""
 )
 
@@ -399,6 +399,12 @@ func (e *LinkElement) Nonce(s string) *LinkElement {
 
 func (e *LinkElement) Popover(s string) *LinkElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *LinkElement) Role(s string) *LinkElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -51,12 +51,12 @@ func TfootTernary(condition bool, true htemel.Node, false htemel.Node) *TfootEle
 type TfootAutocapitalize string
 
 const (
-	TfootAutocapitalizeSentences  TfootAutocapitalize = "sentences"
-	TfootAutocapitalizeWords      TfootAutocapitalize = "words"
-	TfootAutocapitalizeCharacters TfootAutocapitalize = "characters"
 	TfootAutocapitalizeNone       TfootAutocapitalize = "none"
 	TfootAutocapitalizeOff        TfootAutocapitalize = "off"
 	TfootAutocapitalizeOn         TfootAutocapitalize = "on"
+	TfootAutocapitalizeSentences  TfootAutocapitalize = "sentences"
+	TfootAutocapitalizeWords      TfootAutocapitalize = "words"
+	TfootAutocapitalizeCharacters TfootAutocapitalize = "characters"
 )
 
 type TfootAutocorrect string
@@ -70,9 +70,9 @@ const (
 type TfootContenteditable string
 
 const (
-	TfootContenteditableTrue          TfootContenteditable = "true"
 	TfootContenteditableFalse         TfootContenteditable = "false"
 	TfootContenteditablePlaintextOnly TfootContenteditable = "plaintext-only"
+	TfootContenteditableTrue          TfootContenteditable = "true"
 	TfootContenteditableEmpty         TfootContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type TfootEnterkeyhint string
 
 const (
+	TfootEnterkeyhintNext     TfootEnterkeyhint = "next"
+	TfootEnterkeyhintPrevious TfootEnterkeyhint = "previous"
+	TfootEnterkeyhintSearch   TfootEnterkeyhint = "search"
 	TfootEnterkeyhintSend     TfootEnterkeyhint = "send"
 	TfootEnterkeyhintDone     TfootEnterkeyhint = "done"
 	TfootEnterkeyhintEnter    TfootEnterkeyhint = "enter"
 	TfootEnterkeyhintGo       TfootEnterkeyhint = "go"
-	TfootEnterkeyhintNext     TfootEnterkeyhint = "next"
-	TfootEnterkeyhintPrevious TfootEnterkeyhint = "previous"
-	TfootEnterkeyhintSearch   TfootEnterkeyhint = "search"
 )
 
 type TfootHidden string
@@ -114,14 +114,14 @@ const (
 type TfootInputmode string
 
 const (
+	TfootInputmodeText    TfootInputmode = "text"
+	TfootInputmodeUrl     TfootInputmode = "url"
+	TfootInputmodeDecimal TfootInputmode = "decimal"
 	TfootInputmodeEmail   TfootInputmode = "email"
 	TfootInputmodeNone    TfootInputmode = "none"
 	TfootInputmodeNumeric TfootInputmode = "numeric"
 	TfootInputmodeSearch  TfootInputmode = "search"
 	TfootInputmodeTel     TfootInputmode = "tel"
-	TfootInputmodeText    TfootInputmode = "text"
-	TfootInputmodeUrl     TfootInputmode = "url"
-	TfootInputmodeDecimal TfootInputmode = "decimal"
 )
 
 type TfootSpellcheck string
@@ -143,8 +143,8 @@ const (
 type TfootWritingsuggestions string
 
 const (
-	TfootWritingsuggestionsFalse TfootWritingsuggestions = "false"
 	TfootWritingsuggestionsTrue  TfootWritingsuggestions = "true"
+	TfootWritingsuggestionsFalse TfootWritingsuggestions = "false"
 	TfootWritingsuggestionsEmpty TfootWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *TfootElement) Nonce(s string) *TfootElement {
 
 func (e *TfootElement) Popover(s string) *TfootElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *TfootElement) Role(s string) *TfootElement {
+	e.attributes["role"] = s
 
 	return e
 }

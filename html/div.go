@@ -70,9 +70,9 @@ const (
 type DivContenteditable string
 
 const (
-	DivContenteditableFalse         DivContenteditable = "false"
 	DivContenteditablePlaintextOnly DivContenteditable = "plaintext-only"
 	DivContenteditableTrue          DivContenteditable = "true"
+	DivContenteditableFalse         DivContenteditable = "false"
 	DivContenteditableEmpty         DivContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type DivEnterkeyhint string
 
 const (
-	DivEnterkeyhintDone     DivEnterkeyhint = "done"
-	DivEnterkeyhintEnter    DivEnterkeyhint = "enter"
 	DivEnterkeyhintGo       DivEnterkeyhint = "go"
 	DivEnterkeyhintNext     DivEnterkeyhint = "next"
 	DivEnterkeyhintPrevious DivEnterkeyhint = "previous"
 	DivEnterkeyhintSearch   DivEnterkeyhint = "search"
 	DivEnterkeyhintSend     DivEnterkeyhint = "send"
+	DivEnterkeyhintDone     DivEnterkeyhint = "done"
+	DivEnterkeyhintEnter    DivEnterkeyhint = "enter"
 )
 
 type DivHidden string
@@ -114,6 +114,7 @@ const (
 type DivInputmode string
 
 const (
+	DivInputmodeDecimal DivInputmode = "decimal"
 	DivInputmodeEmail   DivInputmode = "email"
 	DivInputmodeNone    DivInputmode = "none"
 	DivInputmodeNumeric DivInputmode = "numeric"
@@ -121,7 +122,6 @@ const (
 	DivInputmodeTel     DivInputmode = "tel"
 	DivInputmodeText    DivInputmode = "text"
 	DivInputmodeUrl     DivInputmode = "url"
-	DivInputmodeDecimal DivInputmode = "decimal"
 )
 
 type DivSpellcheck string
@@ -135,8 +135,8 @@ const (
 type DivTranslate string
 
 const (
-	DivTranslateYes   DivTranslate = "yes"
 	DivTranslateNo    DivTranslate = "no"
+	DivTranslateYes   DivTranslate = "yes"
 	DivTranslateEmpty DivTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *DivElement) Nonce(s string) *DivElement {
 
 func (e *DivElement) Popover(s string) *DivElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *DivElement) Role(s string) *DivElement {
+	e.attributes["role"] = s
 
 	return e
 }

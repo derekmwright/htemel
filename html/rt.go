@@ -62,8 +62,8 @@ const (
 type RtAutocorrect string
 
 const (
-	RtAutocorrectOff   RtAutocorrect = "off"
 	RtAutocorrectOn    RtAutocorrect = "on"
+	RtAutocorrectOff   RtAutocorrect = "off"
 	RtAutocorrectEmpty RtAutocorrect = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type RtEnterkeyhint string
 
 const (
+	RtEnterkeyhintSearch   RtEnterkeyhint = "search"
+	RtEnterkeyhintSend     RtEnterkeyhint = "send"
 	RtEnterkeyhintDone     RtEnterkeyhint = "done"
 	RtEnterkeyhintEnter    RtEnterkeyhint = "enter"
 	RtEnterkeyhintGo       RtEnterkeyhint = "go"
 	RtEnterkeyhintNext     RtEnterkeyhint = "next"
 	RtEnterkeyhintPrevious RtEnterkeyhint = "previous"
-	RtEnterkeyhintSearch   RtEnterkeyhint = "search"
-	RtEnterkeyhintSend     RtEnterkeyhint = "send"
 )
 
 type RtHidden string
@@ -114,6 +114,7 @@ const (
 type RtInputmode string
 
 const (
+	RtInputmodeUrl     RtInputmode = "url"
 	RtInputmodeDecimal RtInputmode = "decimal"
 	RtInputmodeEmail   RtInputmode = "email"
 	RtInputmodeNone    RtInputmode = "none"
@@ -121,7 +122,6 @@ const (
 	RtInputmodeSearch  RtInputmode = "search"
 	RtInputmodeTel     RtInputmode = "tel"
 	RtInputmodeText    RtInputmode = "text"
-	RtInputmodeUrl     RtInputmode = "url"
 )
 
 type RtSpellcheck string
@@ -290,6 +290,12 @@ func (e *RtElement) Nonce(s string) *RtElement {
 
 func (e *RtElement) Popover(s string) *RtElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *RtElement) Role(s string) *RtElement {
+	e.attributes["role"] = s
 
 	return e
 }

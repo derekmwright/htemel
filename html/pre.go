@@ -51,12 +51,12 @@ func PreTernary(condition bool, true htemel.Node, false htemel.Node) *PreElement
 type PreAutocapitalize string
 
 const (
-	PreAutocapitalizeOn         PreAutocapitalize = "on"
-	PreAutocapitalizeSentences  PreAutocapitalize = "sentences"
-	PreAutocapitalizeWords      PreAutocapitalize = "words"
 	PreAutocapitalizeCharacters PreAutocapitalize = "characters"
 	PreAutocapitalizeNone       PreAutocapitalize = "none"
 	PreAutocapitalizeOff        PreAutocapitalize = "off"
+	PreAutocapitalizeOn         PreAutocapitalize = "on"
+	PreAutocapitalizeSentences  PreAutocapitalize = "sentences"
+	PreAutocapitalizeWords      PreAutocapitalize = "words"
 )
 
 type PreAutocorrect string
@@ -94,34 +94,34 @@ const (
 type PreEnterkeyhint string
 
 const (
-	PreEnterkeyhintGo       PreEnterkeyhint = "go"
 	PreEnterkeyhintNext     PreEnterkeyhint = "next"
 	PreEnterkeyhintPrevious PreEnterkeyhint = "previous"
 	PreEnterkeyhintSearch   PreEnterkeyhint = "search"
 	PreEnterkeyhintSend     PreEnterkeyhint = "send"
 	PreEnterkeyhintDone     PreEnterkeyhint = "done"
 	PreEnterkeyhintEnter    PreEnterkeyhint = "enter"
+	PreEnterkeyhintGo       PreEnterkeyhint = "go"
 )
 
 type PreHidden string
 
 const (
-	PreHiddenUntilFound PreHidden = "until-found"
 	PreHiddenHidden     PreHidden = "hidden"
+	PreHiddenUntilFound PreHidden = "until-found"
 	PreHiddenEmpty      PreHidden = ""
 )
 
 type PreInputmode string
 
 const (
-	PreInputmodeUrl     PreInputmode = "url"
-	PreInputmodeDecimal PreInputmode = "decimal"
-	PreInputmodeEmail   PreInputmode = "email"
-	PreInputmodeNone    PreInputmode = "none"
 	PreInputmodeNumeric PreInputmode = "numeric"
 	PreInputmodeSearch  PreInputmode = "search"
 	PreInputmodeTel     PreInputmode = "tel"
 	PreInputmodeText    PreInputmode = "text"
+	PreInputmodeUrl     PreInputmode = "url"
+	PreInputmodeDecimal PreInputmode = "decimal"
+	PreInputmodeEmail   PreInputmode = "email"
+	PreInputmodeNone    PreInputmode = "none"
 )
 
 type PreSpellcheck string
@@ -143,8 +143,8 @@ const (
 type PreWritingsuggestions string
 
 const (
-	PreWritingsuggestionsFalse PreWritingsuggestions = "false"
 	PreWritingsuggestionsTrue  PreWritingsuggestions = "true"
+	PreWritingsuggestionsFalse PreWritingsuggestions = "false"
 	PreWritingsuggestionsEmpty PreWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *PreElement) Nonce(s string) *PreElement {
 
 func (e *PreElement) Popover(s string) *PreElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *PreElement) Role(s string) *PreElement {
+	e.attributes["role"] = s
 
 	return e
 }

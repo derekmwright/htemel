@@ -51,12 +51,12 @@ func DelTernary(condition bool, true htemel.Node, false htemel.Node) *DelElement
 type DelAutocapitalize string
 
 const (
-	DelAutocapitalizeWords      DelAutocapitalize = "words"
 	DelAutocapitalizeCharacters DelAutocapitalize = "characters"
 	DelAutocapitalizeNone       DelAutocapitalize = "none"
 	DelAutocapitalizeOff        DelAutocapitalize = "off"
 	DelAutocapitalizeOn         DelAutocapitalize = "on"
 	DelAutocapitalizeSentences  DelAutocapitalize = "sentences"
+	DelAutocapitalizeWords      DelAutocapitalize = "words"
 )
 
 type DelAutocorrect string
@@ -94,13 +94,13 @@ const (
 type DelEnterkeyhint string
 
 const (
+	DelEnterkeyhintSearch   DelEnterkeyhint = "search"
 	DelEnterkeyhintSend     DelEnterkeyhint = "send"
 	DelEnterkeyhintDone     DelEnterkeyhint = "done"
 	DelEnterkeyhintEnter    DelEnterkeyhint = "enter"
 	DelEnterkeyhintGo       DelEnterkeyhint = "go"
 	DelEnterkeyhintNext     DelEnterkeyhint = "next"
 	DelEnterkeyhintPrevious DelEnterkeyhint = "previous"
-	DelEnterkeyhintSearch   DelEnterkeyhint = "search"
 )
 
 type DelHidden string
@@ -114,14 +114,14 @@ const (
 type DelInputmode string
 
 const (
-	DelInputmodeDecimal DelInputmode = "decimal"
-	DelInputmodeEmail   DelInputmode = "email"
-	DelInputmodeNone    DelInputmode = "none"
-	DelInputmodeNumeric DelInputmode = "numeric"
 	DelInputmodeSearch  DelInputmode = "search"
 	DelInputmodeTel     DelInputmode = "tel"
 	DelInputmodeText    DelInputmode = "text"
 	DelInputmodeUrl     DelInputmode = "url"
+	DelInputmodeDecimal DelInputmode = "decimal"
+	DelInputmodeEmail   DelInputmode = "email"
+	DelInputmodeNone    DelInputmode = "none"
+	DelInputmodeNumeric DelInputmode = "numeric"
 )
 
 type DelSpellcheck string
@@ -135,8 +135,8 @@ const (
 type DelTranslate string
 
 const (
-	DelTranslateYes   DelTranslate = "yes"
 	DelTranslateNo    DelTranslate = "no"
+	DelTranslateYes   DelTranslate = "yes"
 	DelTranslateEmpty DelTranslate = ""
 )
 
@@ -302,6 +302,12 @@ func (e *DelElement) Nonce(s string) *DelElement {
 
 func (e *DelElement) Popover(s string) *DelElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *DelElement) Role(s string) *DelElement {
+	e.attributes["role"] = s
 
 	return e
 }

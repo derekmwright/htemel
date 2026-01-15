@@ -62,17 +62,17 @@ const (
 type MapAutocorrect string
 
 const (
-	MapAutocorrectOff   MapAutocorrect = "off"
 	MapAutocorrectOn    MapAutocorrect = "on"
+	MapAutocorrectOff   MapAutocorrect = "off"
 	MapAutocorrectEmpty MapAutocorrect = ""
 )
 
 type MapContenteditable string
 
 const (
-	MapContenteditableFalse         MapContenteditable = "false"
 	MapContenteditablePlaintextOnly MapContenteditable = "plaintext-only"
 	MapContenteditableTrue          MapContenteditable = "true"
+	MapContenteditableFalse         MapContenteditable = "false"
 	MapContenteditableEmpty         MapContenteditable = ""
 )
 
@@ -87,20 +87,20 @@ const (
 type MapDraggable string
 
 const (
-	MapDraggableFalse MapDraggable = "false"
 	MapDraggableTrue  MapDraggable = "true"
+	MapDraggableFalse MapDraggable = "false"
 )
 
 type MapEnterkeyhint string
 
 const (
-	MapEnterkeyhintSearch   MapEnterkeyhint = "search"
 	MapEnterkeyhintSend     MapEnterkeyhint = "send"
 	MapEnterkeyhintDone     MapEnterkeyhint = "done"
 	MapEnterkeyhintEnter    MapEnterkeyhint = "enter"
 	MapEnterkeyhintGo       MapEnterkeyhint = "go"
 	MapEnterkeyhintNext     MapEnterkeyhint = "next"
 	MapEnterkeyhintPrevious MapEnterkeyhint = "previous"
+	MapEnterkeyhintSearch   MapEnterkeyhint = "search"
 )
 
 type MapHidden string
@@ -114,6 +114,7 @@ const (
 type MapInputmode string
 
 const (
+	MapInputmodeUrl     MapInputmode = "url"
 	MapInputmodeDecimal MapInputmode = "decimal"
 	MapInputmodeEmail   MapInputmode = "email"
 	MapInputmodeNone    MapInputmode = "none"
@@ -121,7 +122,6 @@ const (
 	MapInputmodeSearch  MapInputmode = "search"
 	MapInputmodeTel     MapInputmode = "tel"
 	MapInputmodeText    MapInputmode = "text"
-	MapInputmodeUrl     MapInputmode = "url"
 )
 
 type MapSpellcheck string
@@ -135,16 +135,16 @@ const (
 type MapTranslate string
 
 const (
-	MapTranslateNo    MapTranslate = "no"
 	MapTranslateYes   MapTranslate = "yes"
+	MapTranslateNo    MapTranslate = "no"
 	MapTranslateEmpty MapTranslate = ""
 )
 
 type MapWritingsuggestions string
 
 const (
-	MapWritingsuggestionsTrue  MapWritingsuggestions = "true"
 	MapWritingsuggestionsFalse MapWritingsuggestions = "false"
+	MapWritingsuggestionsTrue  MapWritingsuggestions = "true"
 	MapWritingsuggestionsEmpty MapWritingsuggestions = ""
 )
 
@@ -296,6 +296,12 @@ func (e *MapElement) Nonce(s string) *MapElement {
 
 func (e *MapElement) Popover(s string) *MapElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *MapElement) Role(s string) *MapElement {
+	e.attributes["role"] = s
 
 	return e
 }

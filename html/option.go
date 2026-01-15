@@ -62,17 +62,17 @@ const (
 type OptionAutocorrect string
 
 const (
-	OptionAutocorrectOn    OptionAutocorrect = "on"
 	OptionAutocorrectOff   OptionAutocorrect = "off"
+	OptionAutocorrectOn    OptionAutocorrect = "on"
 	OptionAutocorrectEmpty OptionAutocorrect = ""
 )
 
 type OptionContenteditable string
 
 const (
+	OptionContenteditableTrue          OptionContenteditable = "true"
 	OptionContenteditableFalse         OptionContenteditable = "false"
 	OptionContenteditablePlaintextOnly OptionContenteditable = "plaintext-only"
-	OptionContenteditableTrue          OptionContenteditable = "true"
 	OptionContenteditableEmpty         OptionContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type OptionEnterkeyhint string
 
 const (
+	OptionEnterkeyhintSearch   OptionEnterkeyhint = "search"
+	OptionEnterkeyhintSend     OptionEnterkeyhint = "send"
 	OptionEnterkeyhintDone     OptionEnterkeyhint = "done"
 	OptionEnterkeyhintEnter    OptionEnterkeyhint = "enter"
 	OptionEnterkeyhintGo       OptionEnterkeyhint = "go"
 	OptionEnterkeyhintNext     OptionEnterkeyhint = "next"
 	OptionEnterkeyhintPrevious OptionEnterkeyhint = "previous"
-	OptionEnterkeyhintSearch   OptionEnterkeyhint = "search"
-	OptionEnterkeyhintSend     OptionEnterkeyhint = "send"
 )
 
 type OptionHidden string
@@ -114,14 +114,14 @@ const (
 type OptionInputmode string
 
 const (
+	OptionInputmodeNumeric OptionInputmode = "numeric"
+	OptionInputmodeSearch  OptionInputmode = "search"
 	OptionInputmodeTel     OptionInputmode = "tel"
 	OptionInputmodeText    OptionInputmode = "text"
 	OptionInputmodeUrl     OptionInputmode = "url"
 	OptionInputmodeDecimal OptionInputmode = "decimal"
 	OptionInputmodeEmail   OptionInputmode = "email"
 	OptionInputmodeNone    OptionInputmode = "none"
-	OptionInputmodeNumeric OptionInputmode = "numeric"
-	OptionInputmodeSearch  OptionInputmode = "search"
 )
 
 type OptionSpellcheck string
@@ -143,8 +143,8 @@ const (
 type OptionWritingsuggestions string
 
 const (
-	OptionWritingsuggestionsTrue  OptionWritingsuggestions = "true"
 	OptionWritingsuggestionsFalse OptionWritingsuggestions = "false"
+	OptionWritingsuggestionsTrue  OptionWritingsuggestions = "true"
 	OptionWritingsuggestionsEmpty OptionWritingsuggestions = ""
 )
 
@@ -314,6 +314,12 @@ func (e *OptionElement) Nonce(s string) *OptionElement {
 
 func (e *OptionElement) Popover(s string) *OptionElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *OptionElement) Role(s string) *OptionElement {
+	e.attributes["role"] = s
 
 	return e
 }

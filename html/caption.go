@@ -51,28 +51,28 @@ func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Captio
 type CaptionAutocapitalize string
 
 const (
+	CaptionAutocapitalizeOn         CaptionAutocapitalize = "on"
+	CaptionAutocapitalizeSentences  CaptionAutocapitalize = "sentences"
 	CaptionAutocapitalizeWords      CaptionAutocapitalize = "words"
 	CaptionAutocapitalizeCharacters CaptionAutocapitalize = "characters"
 	CaptionAutocapitalizeNone       CaptionAutocapitalize = "none"
 	CaptionAutocapitalizeOff        CaptionAutocapitalize = "off"
-	CaptionAutocapitalizeOn         CaptionAutocapitalize = "on"
-	CaptionAutocapitalizeSentences  CaptionAutocapitalize = "sentences"
 )
 
 type CaptionAutocorrect string
 
 const (
-	CaptionAutocorrectOff   CaptionAutocorrect = "off"
 	CaptionAutocorrectOn    CaptionAutocorrect = "on"
+	CaptionAutocorrectOff   CaptionAutocorrect = "off"
 	CaptionAutocorrectEmpty CaptionAutocorrect = ""
 )
 
 type CaptionContenteditable string
 
 const (
+	CaptionContenteditableTrue          CaptionContenteditable = "true"
 	CaptionContenteditableFalse         CaptionContenteditable = "false"
 	CaptionContenteditablePlaintextOnly CaptionContenteditable = "plaintext-only"
-	CaptionContenteditableTrue          CaptionContenteditable = "true"
 	CaptionContenteditableEmpty         CaptionContenteditable = ""
 )
 
@@ -106,22 +106,22 @@ const (
 type CaptionHidden string
 
 const (
-	CaptionHiddenUntilFound CaptionHidden = "until-found"
 	CaptionHiddenHidden     CaptionHidden = "hidden"
+	CaptionHiddenUntilFound CaptionHidden = "until-found"
 	CaptionHiddenEmpty      CaptionHidden = ""
 )
 
 type CaptionInputmode string
 
 const (
+	CaptionInputmodeUrl     CaptionInputmode = "url"
+	CaptionInputmodeDecimal CaptionInputmode = "decimal"
+	CaptionInputmodeEmail   CaptionInputmode = "email"
 	CaptionInputmodeNone    CaptionInputmode = "none"
 	CaptionInputmodeNumeric CaptionInputmode = "numeric"
 	CaptionInputmodeSearch  CaptionInputmode = "search"
 	CaptionInputmodeTel     CaptionInputmode = "tel"
 	CaptionInputmodeText    CaptionInputmode = "text"
-	CaptionInputmodeUrl     CaptionInputmode = "url"
-	CaptionInputmodeDecimal CaptionInputmode = "decimal"
-	CaptionInputmodeEmail   CaptionInputmode = "email"
 )
 
 type CaptionSpellcheck string
@@ -135,16 +135,16 @@ const (
 type CaptionTranslate string
 
 const (
-	CaptionTranslateNo    CaptionTranslate = "no"
 	CaptionTranslateYes   CaptionTranslate = "yes"
+	CaptionTranslateNo    CaptionTranslate = "no"
 	CaptionTranslateEmpty CaptionTranslate = ""
 )
 
 type CaptionWritingsuggestions string
 
 const (
-	CaptionWritingsuggestionsFalse CaptionWritingsuggestions = "false"
 	CaptionWritingsuggestionsTrue  CaptionWritingsuggestions = "true"
+	CaptionWritingsuggestionsFalse CaptionWritingsuggestions = "false"
 	CaptionWritingsuggestionsEmpty CaptionWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *CaptionElement) Nonce(s string) *CaptionElement {
 
 func (e *CaptionElement) Popover(s string) *CaptionElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *CaptionElement) Role(s string) *CaptionElement {
+	e.attributes["role"] = s
 
 	return e
 }

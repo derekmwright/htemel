@@ -58,8 +58,8 @@ const (
 type ImgLoading string
 
 const (
-	ImgLoadingEager ImgLoading = "eager"
 	ImgLoadingLazy  ImgLoading = "lazy"
+	ImgLoadingEager ImgLoading = "eager"
 )
 
 type ImgFetchpriority string
@@ -73,37 +73,37 @@ const (
 type ImgAutocapitalize string
 
 const (
-	ImgAutocapitalizeSentences  ImgAutocapitalize = "sentences"
 	ImgAutocapitalizeWords      ImgAutocapitalize = "words"
 	ImgAutocapitalizeCharacters ImgAutocapitalize = "characters"
 	ImgAutocapitalizeNone       ImgAutocapitalize = "none"
 	ImgAutocapitalizeOff        ImgAutocapitalize = "off"
 	ImgAutocapitalizeOn         ImgAutocapitalize = "on"
+	ImgAutocapitalizeSentences  ImgAutocapitalize = "sentences"
 )
 
 type ImgAutocorrect string
 
 const (
-	ImgAutocorrectOn    ImgAutocorrect = "on"
 	ImgAutocorrectOff   ImgAutocorrect = "off"
+	ImgAutocorrectOn    ImgAutocorrect = "on"
 	ImgAutocorrectEmpty ImgAutocorrect = ""
 )
 
 type ImgContenteditable string
 
 const (
-	ImgContenteditablePlaintextOnly ImgContenteditable = "plaintext-only"
 	ImgContenteditableTrue          ImgContenteditable = "true"
 	ImgContenteditableFalse         ImgContenteditable = "false"
+	ImgContenteditablePlaintextOnly ImgContenteditable = "plaintext-only"
 	ImgContenteditableEmpty         ImgContenteditable = ""
 )
 
 type ImgDir string
 
 const (
-	ImgDirAuto ImgDir = "auto"
 	ImgDirLtr  ImgDir = "ltr"
 	ImgDirRtl  ImgDir = "rtl"
+	ImgDirAuto ImgDir = "auto"
 )
 
 type ImgDraggable string
@@ -116,13 +116,13 @@ const (
 type ImgEnterkeyhint string
 
 const (
+	ImgEnterkeyhintSearch   ImgEnterkeyhint = "search"
 	ImgEnterkeyhintSend     ImgEnterkeyhint = "send"
 	ImgEnterkeyhintDone     ImgEnterkeyhint = "done"
 	ImgEnterkeyhintEnter    ImgEnterkeyhint = "enter"
 	ImgEnterkeyhintGo       ImgEnterkeyhint = "go"
 	ImgEnterkeyhintNext     ImgEnterkeyhint = "next"
 	ImgEnterkeyhintPrevious ImgEnterkeyhint = "previous"
-	ImgEnterkeyhintSearch   ImgEnterkeyhint = "search"
 )
 
 type ImgHidden string
@@ -390,6 +390,12 @@ func (e *ImgElement) Nonce(s string) *ImgElement {
 
 func (e *ImgElement) Popover(s string) *ImgElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *ImgElement) Role(s string) *ImgElement {
+	e.attributes["role"] = s
 
 	return e
 }

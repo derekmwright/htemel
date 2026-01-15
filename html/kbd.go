@@ -62,8 +62,8 @@ const (
 type KbdAutocorrect string
 
 const (
-	KbdAutocorrectOn    KbdAutocorrect = "on"
 	KbdAutocorrectOff   KbdAutocorrect = "off"
+	KbdAutocorrectOn    KbdAutocorrect = "on"
 	KbdAutocorrectEmpty KbdAutocorrect = ""
 )
 
@@ -79,9 +79,9 @@ const (
 type KbdDir string
 
 const (
-	KbdDirLtr  KbdDir = "ltr"
 	KbdDirRtl  KbdDir = "rtl"
 	KbdDirAuto KbdDir = "auto"
+	KbdDirLtr  KbdDir = "ltr"
 )
 
 type KbdDraggable string
@@ -94,13 +94,13 @@ const (
 type KbdEnterkeyhint string
 
 const (
+	KbdEnterkeyhintEnter    KbdEnterkeyhint = "enter"
+	KbdEnterkeyhintGo       KbdEnterkeyhint = "go"
+	KbdEnterkeyhintNext     KbdEnterkeyhint = "next"
 	KbdEnterkeyhintPrevious KbdEnterkeyhint = "previous"
 	KbdEnterkeyhintSearch   KbdEnterkeyhint = "search"
 	KbdEnterkeyhintSend     KbdEnterkeyhint = "send"
 	KbdEnterkeyhintDone     KbdEnterkeyhint = "done"
-	KbdEnterkeyhintEnter    KbdEnterkeyhint = "enter"
-	KbdEnterkeyhintGo       KbdEnterkeyhint = "go"
-	KbdEnterkeyhintNext     KbdEnterkeyhint = "next"
 )
 
 type KbdHidden string
@@ -114,6 +114,7 @@ const (
 type KbdInputmode string
 
 const (
+	KbdInputmodeText    KbdInputmode = "text"
 	KbdInputmodeUrl     KbdInputmode = "url"
 	KbdInputmodeDecimal KbdInputmode = "decimal"
 	KbdInputmodeEmail   KbdInputmode = "email"
@@ -121,14 +122,13 @@ const (
 	KbdInputmodeNumeric KbdInputmode = "numeric"
 	KbdInputmodeSearch  KbdInputmode = "search"
 	KbdInputmodeTel     KbdInputmode = "tel"
-	KbdInputmodeText    KbdInputmode = "text"
 )
 
 type KbdSpellcheck string
 
 const (
-	KbdSpellcheckTrue  KbdSpellcheck = "true"
 	KbdSpellcheckFalse KbdSpellcheck = "false"
+	KbdSpellcheckTrue  KbdSpellcheck = "true"
 	KbdSpellcheckEmpty KbdSpellcheck = ""
 )
 
@@ -290,6 +290,12 @@ func (e *KbdElement) Nonce(s string) *KbdElement {
 
 func (e *KbdElement) Popover(s string) *KbdElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *KbdElement) Role(s string) *KbdElement {
+	e.attributes["role"] = s
 
 	return e
 }

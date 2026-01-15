@@ -51,12 +51,12 @@ func BTernary(condition bool, true htemel.Node, false htemel.Node) *BElement {
 type BAutocapitalize string
 
 const (
-	BAutocapitalizeSentences  BAutocapitalize = "sentences"
-	BAutocapitalizeWords      BAutocapitalize = "words"
 	BAutocapitalizeCharacters BAutocapitalize = "characters"
 	BAutocapitalizeNone       BAutocapitalize = "none"
 	BAutocapitalizeOff        BAutocapitalize = "off"
 	BAutocapitalizeOn         BAutocapitalize = "on"
+	BAutocapitalizeSentences  BAutocapitalize = "sentences"
+	BAutocapitalizeWords      BAutocapitalize = "words"
 )
 
 type BAutocorrect string
@@ -70,9 +70,9 @@ const (
 type BContenteditable string
 
 const (
+	BContenteditablePlaintextOnly BContenteditable = "plaintext-only"
 	BContenteditableTrue          BContenteditable = "true"
 	BContenteditableFalse         BContenteditable = "false"
-	BContenteditablePlaintextOnly BContenteditable = "plaintext-only"
 	BContenteditableEmpty         BContenteditable = ""
 )
 
@@ -94,34 +94,34 @@ const (
 type BEnterkeyhint string
 
 const (
-	BEnterkeyhintGo       BEnterkeyhint = "go"
-	BEnterkeyhintNext     BEnterkeyhint = "next"
-	BEnterkeyhintPrevious BEnterkeyhint = "previous"
 	BEnterkeyhintSearch   BEnterkeyhint = "search"
 	BEnterkeyhintSend     BEnterkeyhint = "send"
 	BEnterkeyhintDone     BEnterkeyhint = "done"
 	BEnterkeyhintEnter    BEnterkeyhint = "enter"
+	BEnterkeyhintGo       BEnterkeyhint = "go"
+	BEnterkeyhintNext     BEnterkeyhint = "next"
+	BEnterkeyhintPrevious BEnterkeyhint = "previous"
 )
 
 type BHidden string
 
 const (
-	BHiddenUntilFound BHidden = "until-found"
 	BHiddenHidden     BHidden = "hidden"
+	BHiddenUntilFound BHidden = "until-found"
 	BHiddenEmpty      BHidden = ""
 )
 
 type BInputmode string
 
 const (
-	BInputmodeUrl     BInputmode = "url"
-	BInputmodeDecimal BInputmode = "decimal"
 	BInputmodeEmail   BInputmode = "email"
 	BInputmodeNone    BInputmode = "none"
 	BInputmodeNumeric BInputmode = "numeric"
 	BInputmodeSearch  BInputmode = "search"
 	BInputmodeTel     BInputmode = "tel"
 	BInputmodeText    BInputmode = "text"
+	BInputmodeUrl     BInputmode = "url"
+	BInputmodeDecimal BInputmode = "decimal"
 )
 
 type BSpellcheck string
@@ -135,8 +135,8 @@ const (
 type BTranslate string
 
 const (
-	BTranslateNo    BTranslate = "no"
 	BTranslateYes   BTranslate = "yes"
+	BTranslateNo    BTranslate = "no"
 	BTranslateEmpty BTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *BElement) Nonce(s string) *BElement {
 
 func (e *BElement) Popover(s string) *BElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *BElement) Role(s string) *BElement {
+	e.attributes["role"] = s
 
 	return e
 }

@@ -59,12 +59,12 @@ const (
 type DialogAutocapitalize string
 
 const (
-	DialogAutocapitalizeWords      DialogAutocapitalize = "words"
-	DialogAutocapitalizeCharacters DialogAutocapitalize = "characters"
 	DialogAutocapitalizeNone       DialogAutocapitalize = "none"
 	DialogAutocapitalizeOff        DialogAutocapitalize = "off"
 	DialogAutocapitalizeOn         DialogAutocapitalize = "on"
 	DialogAutocapitalizeSentences  DialogAutocapitalize = "sentences"
+	DialogAutocapitalizeWords      DialogAutocapitalize = "words"
+	DialogAutocapitalizeCharacters DialogAutocapitalize = "characters"
 )
 
 type DialogAutocorrect string
@@ -102,20 +102,20 @@ const (
 type DialogEnterkeyhint string
 
 const (
-	DialogEnterkeyhintSearch   DialogEnterkeyhint = "search"
 	DialogEnterkeyhintSend     DialogEnterkeyhint = "send"
 	DialogEnterkeyhintDone     DialogEnterkeyhint = "done"
 	DialogEnterkeyhintEnter    DialogEnterkeyhint = "enter"
 	DialogEnterkeyhintGo       DialogEnterkeyhint = "go"
 	DialogEnterkeyhintNext     DialogEnterkeyhint = "next"
 	DialogEnterkeyhintPrevious DialogEnterkeyhint = "previous"
+	DialogEnterkeyhintSearch   DialogEnterkeyhint = "search"
 )
 
 type DialogHidden string
 
 const (
-	DialogHiddenUntilFound DialogHidden = "until-found"
 	DialogHiddenHidden     DialogHidden = "hidden"
+	DialogHiddenUntilFound DialogHidden = "until-found"
 	DialogHiddenEmpty      DialogHidden = ""
 )
 
@@ -151,8 +151,8 @@ const (
 type DialogWritingsuggestions string
 
 const (
-	DialogWritingsuggestionsTrue  DialogWritingsuggestions = "true"
 	DialogWritingsuggestionsFalse DialogWritingsuggestions = "false"
+	DialogWritingsuggestionsTrue  DialogWritingsuggestions = "true"
 	DialogWritingsuggestionsEmpty DialogWritingsuggestions = ""
 )
 
@@ -310,6 +310,12 @@ func (e *DialogElement) Nonce(s string) *DialogElement {
 
 func (e *DialogElement) Popover(s string) *DialogElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *DialogElement) Role(s string) *DialogElement {
+	e.attributes["role"] = s
 
 	return e
 }

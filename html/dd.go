@@ -70,9 +70,9 @@ const (
 type DdContenteditable string
 
 const (
+	DdContenteditableTrue          DdContenteditable = "true"
 	DdContenteditableFalse         DdContenteditable = "false"
 	DdContenteditablePlaintextOnly DdContenteditable = "plaintext-only"
-	DdContenteditableTrue          DdContenteditable = "true"
 	DdContenteditableEmpty         DdContenteditable = ""
 )
 
@@ -87,20 +87,20 @@ const (
 type DdDraggable string
 
 const (
-	DdDraggableFalse DdDraggable = "false"
 	DdDraggableTrue  DdDraggable = "true"
+	DdDraggableFalse DdDraggable = "false"
 )
 
 type DdEnterkeyhint string
 
 const (
-	DdEnterkeyhintSearch   DdEnterkeyhint = "search"
-	DdEnterkeyhintSend     DdEnterkeyhint = "send"
-	DdEnterkeyhintDone     DdEnterkeyhint = "done"
 	DdEnterkeyhintEnter    DdEnterkeyhint = "enter"
 	DdEnterkeyhintGo       DdEnterkeyhint = "go"
 	DdEnterkeyhintNext     DdEnterkeyhint = "next"
 	DdEnterkeyhintPrevious DdEnterkeyhint = "previous"
+	DdEnterkeyhintSearch   DdEnterkeyhint = "search"
+	DdEnterkeyhintSend     DdEnterkeyhint = "send"
+	DdEnterkeyhintDone     DdEnterkeyhint = "done"
 )
 
 type DdHidden string
@@ -114,14 +114,14 @@ const (
 type DdInputmode string
 
 const (
-	DdInputmodeSearch  DdInputmode = "search"
-	DdInputmodeTel     DdInputmode = "tel"
-	DdInputmodeText    DdInputmode = "text"
 	DdInputmodeUrl     DdInputmode = "url"
 	DdInputmodeDecimal DdInputmode = "decimal"
 	DdInputmodeEmail   DdInputmode = "email"
 	DdInputmodeNone    DdInputmode = "none"
 	DdInputmodeNumeric DdInputmode = "numeric"
+	DdInputmodeSearch  DdInputmode = "search"
+	DdInputmodeTel     DdInputmode = "tel"
+	DdInputmodeText    DdInputmode = "text"
 )
 
 type DdSpellcheck string
@@ -290,6 +290,12 @@ func (e *DdElement) Nonce(s string) *DdElement {
 
 func (e *DdElement) Popover(s string) *DdElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *DdElement) Role(s string) *DdElement {
+	e.attributes["role"] = s
 
 	return e
 }

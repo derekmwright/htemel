@@ -94,13 +94,13 @@ const (
 type ObjectEnterkeyhint string
 
 const (
+	ObjectEnterkeyhintDone     ObjectEnterkeyhint = "done"
+	ObjectEnterkeyhintEnter    ObjectEnterkeyhint = "enter"
 	ObjectEnterkeyhintGo       ObjectEnterkeyhint = "go"
 	ObjectEnterkeyhintNext     ObjectEnterkeyhint = "next"
 	ObjectEnterkeyhintPrevious ObjectEnterkeyhint = "previous"
 	ObjectEnterkeyhintSearch   ObjectEnterkeyhint = "search"
 	ObjectEnterkeyhintSend     ObjectEnterkeyhint = "send"
-	ObjectEnterkeyhintDone     ObjectEnterkeyhint = "done"
-	ObjectEnterkeyhintEnter    ObjectEnterkeyhint = "enter"
 )
 
 type ObjectHidden string
@@ -114,7 +114,6 @@ const (
 type ObjectInputmode string
 
 const (
-	ObjectInputmodeTel     ObjectInputmode = "tel"
 	ObjectInputmodeText    ObjectInputmode = "text"
 	ObjectInputmodeUrl     ObjectInputmode = "url"
 	ObjectInputmodeDecimal ObjectInputmode = "decimal"
@@ -122,6 +121,7 @@ const (
 	ObjectInputmodeNone    ObjectInputmode = "none"
 	ObjectInputmodeNumeric ObjectInputmode = "numeric"
 	ObjectInputmodeSearch  ObjectInputmode = "search"
+	ObjectInputmodeTel     ObjectInputmode = "tel"
 )
 
 type ObjectSpellcheck string
@@ -314,6 +314,12 @@ func (e *ObjectElement) Nonce(s string) *ObjectElement {
 
 func (e *ObjectElement) Popover(s string) *ObjectElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *ObjectElement) Role(s string) *ObjectElement {
+	e.attributes["role"] = s
 
 	return e
 }

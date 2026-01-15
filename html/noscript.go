@@ -51,12 +51,12 @@ func NoscriptTernary(condition bool, true htemel.Node, false htemel.Node) *Noscr
 type NoscriptAutocapitalize string
 
 const (
+	NoscriptAutocapitalizeWords      NoscriptAutocapitalize = "words"
 	NoscriptAutocapitalizeCharacters NoscriptAutocapitalize = "characters"
 	NoscriptAutocapitalizeNone       NoscriptAutocapitalize = "none"
 	NoscriptAutocapitalizeOff        NoscriptAutocapitalize = "off"
 	NoscriptAutocapitalizeOn         NoscriptAutocapitalize = "on"
 	NoscriptAutocapitalizeSentences  NoscriptAutocapitalize = "sentences"
-	NoscriptAutocapitalizeWords      NoscriptAutocapitalize = "words"
 )
 
 type NoscriptAutocorrect string
@@ -79,9 +79,9 @@ const (
 type NoscriptDir string
 
 const (
-	NoscriptDirAuto NoscriptDir = "auto"
 	NoscriptDirLtr  NoscriptDir = "ltr"
 	NoscriptDirRtl  NoscriptDir = "rtl"
+	NoscriptDirAuto NoscriptDir = "auto"
 )
 
 type NoscriptDraggable string
@@ -106,8 +106,8 @@ const (
 type NoscriptHidden string
 
 const (
-	NoscriptHiddenHidden     NoscriptHidden = "hidden"
 	NoscriptHiddenUntilFound NoscriptHidden = "until-found"
+	NoscriptHiddenHidden     NoscriptHidden = "hidden"
 	NoscriptHiddenEmpty      NoscriptHidden = ""
 )
 
@@ -290,6 +290,12 @@ func (e *NoscriptElement) Nonce(s string) *NoscriptElement {
 
 func (e *NoscriptElement) Popover(s string) *NoscriptElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *NoscriptElement) Role(s string) *NoscriptElement {
+	e.attributes["role"] = s
 
 	return e
 }

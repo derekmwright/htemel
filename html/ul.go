@@ -51,12 +51,12 @@ func UlTernary(condition bool, true htemel.Node, false htemel.Node) *UlElement {
 type UlAutocapitalize string
 
 const (
-	UlAutocapitalizeNone       UlAutocapitalize = "none"
-	UlAutocapitalizeOff        UlAutocapitalize = "off"
 	UlAutocapitalizeOn         UlAutocapitalize = "on"
 	UlAutocapitalizeSentences  UlAutocapitalize = "sentences"
 	UlAutocapitalizeWords      UlAutocapitalize = "words"
 	UlAutocapitalizeCharacters UlAutocapitalize = "characters"
+	UlAutocapitalizeNone       UlAutocapitalize = "none"
+	UlAutocapitalizeOff        UlAutocapitalize = "off"
 )
 
 type UlAutocorrect string
@@ -70,9 +70,9 @@ const (
 type UlContenteditable string
 
 const (
-	UlContenteditableFalse         UlContenteditable = "false"
 	UlContenteditablePlaintextOnly UlContenteditable = "plaintext-only"
 	UlContenteditableTrue          UlContenteditable = "true"
+	UlContenteditableFalse         UlContenteditable = "false"
 	UlContenteditableEmpty         UlContenteditable = ""
 )
 
@@ -106,29 +106,29 @@ const (
 type UlHidden string
 
 const (
-	UlHiddenHidden     UlHidden = "hidden"
 	UlHiddenUntilFound UlHidden = "until-found"
+	UlHiddenHidden     UlHidden = "hidden"
 	UlHiddenEmpty      UlHidden = ""
 )
 
 type UlInputmode string
 
 const (
+	UlInputmodeNone    UlInputmode = "none"
+	UlInputmodeNumeric UlInputmode = "numeric"
 	UlInputmodeSearch  UlInputmode = "search"
 	UlInputmodeTel     UlInputmode = "tel"
 	UlInputmodeText    UlInputmode = "text"
 	UlInputmodeUrl     UlInputmode = "url"
 	UlInputmodeDecimal UlInputmode = "decimal"
 	UlInputmodeEmail   UlInputmode = "email"
-	UlInputmodeNone    UlInputmode = "none"
-	UlInputmodeNumeric UlInputmode = "numeric"
 )
 
 type UlSpellcheck string
 
 const (
-	UlSpellcheckFalse UlSpellcheck = "false"
 	UlSpellcheckTrue  UlSpellcheck = "true"
+	UlSpellcheckFalse UlSpellcheck = "false"
 	UlSpellcheckEmpty UlSpellcheck = ""
 )
 
@@ -143,8 +143,8 @@ const (
 type UlWritingsuggestions string
 
 const (
-	UlWritingsuggestionsFalse UlWritingsuggestions = "false"
 	UlWritingsuggestionsTrue  UlWritingsuggestions = "true"
+	UlWritingsuggestionsFalse UlWritingsuggestions = "false"
 	UlWritingsuggestionsEmpty UlWritingsuggestions = ""
 )
 
@@ -290,6 +290,12 @@ func (e *UlElement) Nonce(s string) *UlElement {
 
 func (e *UlElement) Popover(s string) *UlElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *UlElement) Role(s string) *UlElement {
+	e.attributes["role"] = s
 
 	return e
 }

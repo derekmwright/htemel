@@ -51,12 +51,12 @@ func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectE
 type SelectAutocapitalize string
 
 const (
-	SelectAutocapitalizeSentences  SelectAutocapitalize = "sentences"
-	SelectAutocapitalizeWords      SelectAutocapitalize = "words"
-	SelectAutocapitalizeCharacters SelectAutocapitalize = "characters"
 	SelectAutocapitalizeNone       SelectAutocapitalize = "none"
 	SelectAutocapitalizeOff        SelectAutocapitalize = "off"
 	SelectAutocapitalizeOn         SelectAutocapitalize = "on"
+	SelectAutocapitalizeSentences  SelectAutocapitalize = "sentences"
+	SelectAutocapitalizeWords      SelectAutocapitalize = "words"
+	SelectAutocapitalizeCharacters SelectAutocapitalize = "characters"
 )
 
 type SelectAutocorrect string
@@ -70,9 +70,9 @@ const (
 type SelectContenteditable string
 
 const (
+	SelectContenteditableTrue          SelectContenteditable = "true"
 	SelectContenteditableFalse         SelectContenteditable = "false"
 	SelectContenteditablePlaintextOnly SelectContenteditable = "plaintext-only"
-	SelectContenteditableTrue          SelectContenteditable = "true"
 	SelectContenteditableEmpty         SelectContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type SelectEnterkeyhint string
 
 const (
-	SelectEnterkeyhintEnter    SelectEnterkeyhint = "enter"
-	SelectEnterkeyhintGo       SelectEnterkeyhint = "go"
-	SelectEnterkeyhintNext     SelectEnterkeyhint = "next"
 	SelectEnterkeyhintPrevious SelectEnterkeyhint = "previous"
 	SelectEnterkeyhintSearch   SelectEnterkeyhint = "search"
 	SelectEnterkeyhintSend     SelectEnterkeyhint = "send"
 	SelectEnterkeyhintDone     SelectEnterkeyhint = "done"
+	SelectEnterkeyhintEnter    SelectEnterkeyhint = "enter"
+	SelectEnterkeyhintGo       SelectEnterkeyhint = "go"
+	SelectEnterkeyhintNext     SelectEnterkeyhint = "next"
 )
 
 type SelectHidden string
@@ -114,14 +114,14 @@ const (
 type SelectInputmode string
 
 const (
-	SelectInputmodeSearch  SelectInputmode = "search"
-	SelectInputmodeTel     SelectInputmode = "tel"
 	SelectInputmodeText    SelectInputmode = "text"
 	SelectInputmodeUrl     SelectInputmode = "url"
 	SelectInputmodeDecimal SelectInputmode = "decimal"
 	SelectInputmodeEmail   SelectInputmode = "email"
 	SelectInputmodeNone    SelectInputmode = "none"
 	SelectInputmodeNumeric SelectInputmode = "numeric"
+	SelectInputmodeSearch  SelectInputmode = "search"
+	SelectInputmodeTel     SelectInputmode = "tel"
 )
 
 type SelectSpellcheck string
@@ -332,6 +332,12 @@ func (e *SelectElement) Nonce(s string) *SelectElement {
 
 func (e *SelectElement) Popover(s string) *SelectElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *SelectElement) Role(s string) *SelectElement {
+	e.attributes["role"] = s
 
 	return e
 }

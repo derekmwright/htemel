@@ -51,12 +51,12 @@ func MeterTernary(condition bool, true htemel.Node, false htemel.Node) *MeterEle
 type MeterAutocapitalize string
 
 const (
-	MeterAutocapitalizeCharacters MeterAutocapitalize = "characters"
-	MeterAutocapitalizeNone       MeterAutocapitalize = "none"
 	MeterAutocapitalizeOff        MeterAutocapitalize = "off"
 	MeterAutocapitalizeOn         MeterAutocapitalize = "on"
 	MeterAutocapitalizeSentences  MeterAutocapitalize = "sentences"
 	MeterAutocapitalizeWords      MeterAutocapitalize = "words"
+	MeterAutocapitalizeCharacters MeterAutocapitalize = "characters"
+	MeterAutocapitalizeNone       MeterAutocapitalize = "none"
 )
 
 type MeterAutocorrect string
@@ -94,13 +94,13 @@ const (
 type MeterEnterkeyhint string
 
 const (
+	MeterEnterkeyhintSend     MeterEnterkeyhint = "send"
 	MeterEnterkeyhintDone     MeterEnterkeyhint = "done"
 	MeterEnterkeyhintEnter    MeterEnterkeyhint = "enter"
 	MeterEnterkeyhintGo       MeterEnterkeyhint = "go"
 	MeterEnterkeyhintNext     MeterEnterkeyhint = "next"
 	MeterEnterkeyhintPrevious MeterEnterkeyhint = "previous"
 	MeterEnterkeyhintSearch   MeterEnterkeyhint = "search"
-	MeterEnterkeyhintSend     MeterEnterkeyhint = "send"
 )
 
 type MeterHidden string
@@ -114,14 +114,14 @@ const (
 type MeterInputmode string
 
 const (
+	MeterInputmodeTel     MeterInputmode = "tel"
+	MeterInputmodeText    MeterInputmode = "text"
 	MeterInputmodeUrl     MeterInputmode = "url"
 	MeterInputmodeDecimal MeterInputmode = "decimal"
 	MeterInputmodeEmail   MeterInputmode = "email"
 	MeterInputmodeNone    MeterInputmode = "none"
 	MeterInputmodeNumeric MeterInputmode = "numeric"
 	MeterInputmodeSearch  MeterInputmode = "search"
-	MeterInputmodeTel     MeterInputmode = "tel"
-	MeterInputmodeText    MeterInputmode = "text"
 )
 
 type MeterSpellcheck string
@@ -143,8 +143,8 @@ const (
 type MeterWritingsuggestions string
 
 const (
-	MeterWritingsuggestionsTrue  MeterWritingsuggestions = "true"
 	MeterWritingsuggestionsFalse MeterWritingsuggestions = "false"
+	MeterWritingsuggestionsTrue  MeterWritingsuggestions = "true"
 	MeterWritingsuggestionsEmpty MeterWritingsuggestions = ""
 )
 
@@ -326,6 +326,12 @@ func (e *MeterElement) Nonce(s string) *MeterElement {
 
 func (e *MeterElement) Popover(s string) *MeterElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *MeterElement) Role(s string) *MeterElement {
+	e.attributes["role"] = s
 
 	return e
 }

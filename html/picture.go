@@ -51,28 +51,28 @@ func PictureTernary(condition bool, true htemel.Node, false htemel.Node) *Pictur
 type PictureAutocapitalize string
 
 const (
-	PictureAutocapitalizeWords      PictureAutocapitalize = "words"
-	PictureAutocapitalizeCharacters PictureAutocapitalize = "characters"
-	PictureAutocapitalizeNone       PictureAutocapitalize = "none"
 	PictureAutocapitalizeOff        PictureAutocapitalize = "off"
 	PictureAutocapitalizeOn         PictureAutocapitalize = "on"
 	PictureAutocapitalizeSentences  PictureAutocapitalize = "sentences"
+	PictureAutocapitalizeWords      PictureAutocapitalize = "words"
+	PictureAutocapitalizeCharacters PictureAutocapitalize = "characters"
+	PictureAutocapitalizeNone       PictureAutocapitalize = "none"
 )
 
 type PictureAutocorrect string
 
 const (
-	PictureAutocorrectOn    PictureAutocorrect = "on"
 	PictureAutocorrectOff   PictureAutocorrect = "off"
+	PictureAutocorrectOn    PictureAutocorrect = "on"
 	PictureAutocorrectEmpty PictureAutocorrect = ""
 )
 
 type PictureContenteditable string
 
 const (
+	PictureContenteditableTrue          PictureContenteditable = "true"
 	PictureContenteditableFalse         PictureContenteditable = "false"
 	PictureContenteditablePlaintextOnly PictureContenteditable = "plaintext-only"
-	PictureContenteditableTrue          PictureContenteditable = "true"
 	PictureContenteditableEmpty         PictureContenteditable = ""
 )
 
@@ -114,14 +114,14 @@ const (
 type PictureInputmode string
 
 const (
-	PictureInputmodeEmail   PictureInputmode = "email"
-	PictureInputmodeNone    PictureInputmode = "none"
-	PictureInputmodeNumeric PictureInputmode = "numeric"
-	PictureInputmodeSearch  PictureInputmode = "search"
 	PictureInputmodeTel     PictureInputmode = "tel"
 	PictureInputmodeText    PictureInputmode = "text"
 	PictureInputmodeUrl     PictureInputmode = "url"
 	PictureInputmodeDecimal PictureInputmode = "decimal"
+	PictureInputmodeEmail   PictureInputmode = "email"
+	PictureInputmodeNone    PictureInputmode = "none"
+	PictureInputmodeNumeric PictureInputmode = "numeric"
+	PictureInputmodeSearch  PictureInputmode = "search"
 )
 
 type PictureSpellcheck string
@@ -290,6 +290,12 @@ func (e *PictureElement) Nonce(s string) *PictureElement {
 
 func (e *PictureElement) Popover(s string) *PictureElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *PictureElement) Role(s string) *PictureElement {
+	e.attributes["role"] = s
 
 	return e
 }

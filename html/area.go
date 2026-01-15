@@ -42,10 +42,10 @@ func AreaIf(condition bool) *AreaElement {
 type AreaShape string
 
 const (
+	AreaShapeCircle  AreaShape = "circle"
 	AreaShapeDefault AreaShape = "default"
 	AreaShapePoly    AreaShape = "poly"
 	AreaShapeRect    AreaShape = "rect"
-	AreaShapeCircle  AreaShape = "circle"
 )
 
 type AreaAutocapitalize string
@@ -94,13 +94,13 @@ const (
 type AreaEnterkeyhint string
 
 const (
-	AreaEnterkeyhintEnter    AreaEnterkeyhint = "enter"
 	AreaEnterkeyhintGo       AreaEnterkeyhint = "go"
 	AreaEnterkeyhintNext     AreaEnterkeyhint = "next"
 	AreaEnterkeyhintPrevious AreaEnterkeyhint = "previous"
 	AreaEnterkeyhintSearch   AreaEnterkeyhint = "search"
 	AreaEnterkeyhintSend     AreaEnterkeyhint = "send"
 	AreaEnterkeyhintDone     AreaEnterkeyhint = "done"
+	AreaEnterkeyhintEnter    AreaEnterkeyhint = "enter"
 )
 
 type AreaHidden string
@@ -114,21 +114,21 @@ const (
 type AreaInputmode string
 
 const (
-	AreaInputmodeNumeric AreaInputmode = "numeric"
-	AreaInputmodeSearch  AreaInputmode = "search"
-	AreaInputmodeTel     AreaInputmode = "tel"
-	AreaInputmodeText    AreaInputmode = "text"
 	AreaInputmodeUrl     AreaInputmode = "url"
 	AreaInputmodeDecimal AreaInputmode = "decimal"
 	AreaInputmodeEmail   AreaInputmode = "email"
 	AreaInputmodeNone    AreaInputmode = "none"
+	AreaInputmodeNumeric AreaInputmode = "numeric"
+	AreaInputmodeSearch  AreaInputmode = "search"
+	AreaInputmodeTel     AreaInputmode = "tel"
+	AreaInputmodeText    AreaInputmode = "text"
 )
 
 type AreaSpellcheck string
 
 const (
-	AreaSpellcheckTrue  AreaSpellcheck = "true"
 	AreaSpellcheckFalse AreaSpellcheck = "false"
+	AreaSpellcheckTrue  AreaSpellcheck = "true"
 	AreaSpellcheckEmpty AreaSpellcheck = ""
 )
 
@@ -344,6 +344,12 @@ func (e *AreaElement) Nonce(s string) *AreaElement {
 
 func (e *AreaElement) Popover(s string) *AreaElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *AreaElement) Role(s string) *AreaElement {
+	e.attributes["role"] = s
 
 	return e
 }

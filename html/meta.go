@@ -42,13 +42,13 @@ func MetaIf(condition bool) *MetaElement {
 type MetaHttpEquiv string
 
 const (
-	MetaHttpEquivSetCookie             MetaHttpEquiv = "set-cookie"
 	MetaHttpEquivXUaCompatible         MetaHttpEquiv = "x-ua-compatible"
 	MetaHttpEquivContentLanguage       MetaHttpEquiv = "content-language"
 	MetaHttpEquivContentSecurityPolicy MetaHttpEquiv = "content-security-policy"
 	MetaHttpEquivContentType           MetaHttpEquiv = "content-type"
 	MetaHttpEquivDefaultStyle          MetaHttpEquiv = "default-style"
 	MetaHttpEquivRefresh               MetaHttpEquiv = "refresh"
+	MetaHttpEquivSetCookie             MetaHttpEquiv = "set-cookie"
 )
 
 type MetaAutocapitalize string
@@ -65,8 +65,8 @@ const (
 type MetaAutocorrect string
 
 const (
-	MetaAutocorrectOff   MetaAutocorrect = "off"
 	MetaAutocorrectOn    MetaAutocorrect = "on"
+	MetaAutocorrectOff   MetaAutocorrect = "off"
 	MetaAutocorrectEmpty MetaAutocorrect = ""
 )
 
@@ -97,13 +97,13 @@ const (
 type MetaEnterkeyhint string
 
 const (
-	MetaEnterkeyhintPrevious MetaEnterkeyhint = "previous"
-	MetaEnterkeyhintSearch   MetaEnterkeyhint = "search"
-	MetaEnterkeyhintSend     MetaEnterkeyhint = "send"
 	MetaEnterkeyhintDone     MetaEnterkeyhint = "done"
 	MetaEnterkeyhintEnter    MetaEnterkeyhint = "enter"
 	MetaEnterkeyhintGo       MetaEnterkeyhint = "go"
 	MetaEnterkeyhintNext     MetaEnterkeyhint = "next"
+	MetaEnterkeyhintPrevious MetaEnterkeyhint = "previous"
+	MetaEnterkeyhintSearch   MetaEnterkeyhint = "search"
+	MetaEnterkeyhintSend     MetaEnterkeyhint = "send"
 )
 
 type MetaHidden string
@@ -323,6 +323,12 @@ func (e *MetaElement) Nonce(s string) *MetaElement {
 
 func (e *MetaElement) Popover(s string) *MetaElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *MetaElement) Role(s string) *MetaElement {
+	e.attributes["role"] = s
 
 	return e
 }

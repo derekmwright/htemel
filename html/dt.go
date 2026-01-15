@@ -51,12 +51,12 @@ func DtTernary(condition bool, true htemel.Node, false htemel.Node) *DtElement {
 type DtAutocapitalize string
 
 const (
+	DtAutocapitalizeOff        DtAutocapitalize = "off"
+	DtAutocapitalizeOn         DtAutocapitalize = "on"
 	DtAutocapitalizeSentences  DtAutocapitalize = "sentences"
 	DtAutocapitalizeWords      DtAutocapitalize = "words"
 	DtAutocapitalizeCharacters DtAutocapitalize = "characters"
 	DtAutocapitalizeNone       DtAutocapitalize = "none"
-	DtAutocapitalizeOff        DtAutocapitalize = "off"
-	DtAutocapitalizeOn         DtAutocapitalize = "on"
 )
 
 type DtAutocorrect string
@@ -87,20 +87,20 @@ const (
 type DtDraggable string
 
 const (
-	DtDraggableFalse DtDraggable = "false"
 	DtDraggableTrue  DtDraggable = "true"
+	DtDraggableFalse DtDraggable = "false"
 )
 
 type DtEnterkeyhint string
 
 const (
-	DtEnterkeyhintSearch   DtEnterkeyhint = "search"
-	DtEnterkeyhintSend     DtEnterkeyhint = "send"
 	DtEnterkeyhintDone     DtEnterkeyhint = "done"
 	DtEnterkeyhintEnter    DtEnterkeyhint = "enter"
 	DtEnterkeyhintGo       DtEnterkeyhint = "go"
 	DtEnterkeyhintNext     DtEnterkeyhint = "next"
 	DtEnterkeyhintPrevious DtEnterkeyhint = "previous"
+	DtEnterkeyhintSearch   DtEnterkeyhint = "search"
+	DtEnterkeyhintSend     DtEnterkeyhint = "send"
 )
 
 type DtHidden string
@@ -114,7 +114,6 @@ const (
 type DtInputmode string
 
 const (
-	DtInputmodeDecimal DtInputmode = "decimal"
 	DtInputmodeEmail   DtInputmode = "email"
 	DtInputmodeNone    DtInputmode = "none"
 	DtInputmodeNumeric DtInputmode = "numeric"
@@ -122,21 +121,22 @@ const (
 	DtInputmodeTel     DtInputmode = "tel"
 	DtInputmodeText    DtInputmode = "text"
 	DtInputmodeUrl     DtInputmode = "url"
+	DtInputmodeDecimal DtInputmode = "decimal"
 )
 
 type DtSpellcheck string
 
 const (
-	DtSpellcheckFalse DtSpellcheck = "false"
 	DtSpellcheckTrue  DtSpellcheck = "true"
+	DtSpellcheckFalse DtSpellcheck = "false"
 	DtSpellcheckEmpty DtSpellcheck = ""
 )
 
 type DtTranslate string
 
 const (
-	DtTranslateNo    DtTranslate = "no"
 	DtTranslateYes   DtTranslate = "yes"
+	DtTranslateNo    DtTranslate = "no"
 	DtTranslateEmpty DtTranslate = ""
 )
 
@@ -290,6 +290,12 @@ func (e *DtElement) Nonce(s string) *DtElement {
 
 func (e *DtElement) Popover(s string) *DtElement {
 	e.attributes["popover"] = s
+
+	return e
+}
+
+func (e *DtElement) Role(s string) *DtElement {
+	e.attributes["role"] = s
 
 	return e
 }
