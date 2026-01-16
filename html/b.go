@@ -48,15 +48,22 @@ func BTernary(condition bool, true htemel.Node, false htemel.Node) *BElement {
 	return B(false)
 }
 
+// Children appends children to this element.
+func (e *BElement) Children(children ...htemel.Node) *BElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type BAutocapitalize string
 
 const (
-	BAutocapitalizeCharacters BAutocapitalize = "characters"
-	BAutocapitalizeNone       BAutocapitalize = "none"
-	BAutocapitalizeOff        BAutocapitalize = "off"
 	BAutocapitalizeOn         BAutocapitalize = "on"
 	BAutocapitalizeSentences  BAutocapitalize = "sentences"
 	BAutocapitalizeWords      BAutocapitalize = "words"
+	BAutocapitalizeCharacters BAutocapitalize = "characters"
+	BAutocapitalizeNone       BAutocapitalize = "none"
+	BAutocapitalizeOff        BAutocapitalize = "off"
 )
 
 type BAutocorrect string
@@ -70,9 +77,9 @@ const (
 type BContenteditable string
 
 const (
-	BContenteditablePlaintextOnly BContenteditable = "plaintext-only"
 	BContenteditableTrue          BContenteditable = "true"
 	BContenteditableFalse         BContenteditable = "false"
+	BContenteditablePlaintextOnly BContenteditable = "plaintext-only"
 	BContenteditableEmpty         BContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type BEnterkeyhint string
 
 const (
-	BEnterkeyhintSearch   BEnterkeyhint = "search"
 	BEnterkeyhintSend     BEnterkeyhint = "send"
 	BEnterkeyhintDone     BEnterkeyhint = "done"
 	BEnterkeyhintEnter    BEnterkeyhint = "enter"
 	BEnterkeyhintGo       BEnterkeyhint = "go"
 	BEnterkeyhintNext     BEnterkeyhint = "next"
 	BEnterkeyhintPrevious BEnterkeyhint = "previous"
+	BEnterkeyhintSearch   BEnterkeyhint = "search"
 )
 
 type BHidden string
@@ -135,8 +142,8 @@ const (
 type BTranslate string
 
 const (
-	BTranslateYes   BTranslate = "yes"
 	BTranslateNo    BTranslate = "no"
+	BTranslateYes   BTranslate = "yes"
 	BTranslateEmpty BTranslate = ""
 )
 

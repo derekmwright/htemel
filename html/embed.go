@@ -42,12 +42,12 @@ func EmbedIf(condition bool) *EmbedElement {
 type EmbedAutocapitalize string
 
 const (
-	EmbedAutocapitalizeCharacters EmbedAutocapitalize = "characters"
 	EmbedAutocapitalizeNone       EmbedAutocapitalize = "none"
 	EmbedAutocapitalizeOff        EmbedAutocapitalize = "off"
 	EmbedAutocapitalizeOn         EmbedAutocapitalize = "on"
 	EmbedAutocapitalizeSentences  EmbedAutocapitalize = "sentences"
 	EmbedAutocapitalizeWords      EmbedAutocapitalize = "words"
+	EmbedAutocapitalizeCharacters EmbedAutocapitalize = "characters"
 )
 
 type EmbedAutocorrect string
@@ -61,9 +61,9 @@ const (
 type EmbedContenteditable string
 
 const (
+	EmbedContenteditableFalse         EmbedContenteditable = "false"
 	EmbedContenteditablePlaintextOnly EmbedContenteditable = "plaintext-only"
 	EmbedContenteditableTrue          EmbedContenteditable = "true"
-	EmbedContenteditableFalse         EmbedContenteditable = "false"
 	EmbedContenteditableEmpty         EmbedContenteditable = ""
 )
 
@@ -85,13 +85,13 @@ const (
 type EmbedEnterkeyhint string
 
 const (
+	EmbedEnterkeyhintSearch   EmbedEnterkeyhint = "search"
+	EmbedEnterkeyhintSend     EmbedEnterkeyhint = "send"
+	EmbedEnterkeyhintDone     EmbedEnterkeyhint = "done"
 	EmbedEnterkeyhintEnter    EmbedEnterkeyhint = "enter"
 	EmbedEnterkeyhintGo       EmbedEnterkeyhint = "go"
 	EmbedEnterkeyhintNext     EmbedEnterkeyhint = "next"
 	EmbedEnterkeyhintPrevious EmbedEnterkeyhint = "previous"
-	EmbedEnterkeyhintSearch   EmbedEnterkeyhint = "search"
-	EmbedEnterkeyhintSend     EmbedEnterkeyhint = "send"
-	EmbedEnterkeyhintDone     EmbedEnterkeyhint = "done"
 )
 
 type EmbedHidden string
@@ -105,14 +105,14 @@ const (
 type EmbedInputmode string
 
 const (
-	EmbedInputmodeNone    EmbedInputmode = "none"
-	EmbedInputmodeNumeric EmbedInputmode = "numeric"
-	EmbedInputmodeSearch  EmbedInputmode = "search"
-	EmbedInputmodeTel     EmbedInputmode = "tel"
 	EmbedInputmodeText    EmbedInputmode = "text"
 	EmbedInputmodeUrl     EmbedInputmode = "url"
 	EmbedInputmodeDecimal EmbedInputmode = "decimal"
 	EmbedInputmodeEmail   EmbedInputmode = "email"
+	EmbedInputmodeNone    EmbedInputmode = "none"
+	EmbedInputmodeNumeric EmbedInputmode = "numeric"
+	EmbedInputmodeSearch  EmbedInputmode = "search"
+	EmbedInputmodeTel     EmbedInputmode = "tel"
 )
 
 type EmbedSpellcheck string

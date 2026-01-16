@@ -48,15 +48,22 @@ func ObjectTernary(condition bool, true htemel.Node, false htemel.Node) *ObjectE
 	return Object(false)
 }
 
+// Children appends children to this element.
+func (e *ObjectElement) Children(children ...htemel.Node) *ObjectElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type ObjectAutocapitalize string
 
 const (
+	ObjectAutocapitalizeNone       ObjectAutocapitalize = "none"
+	ObjectAutocapitalizeOff        ObjectAutocapitalize = "off"
 	ObjectAutocapitalizeOn         ObjectAutocapitalize = "on"
 	ObjectAutocapitalizeSentences  ObjectAutocapitalize = "sentences"
 	ObjectAutocapitalizeWords      ObjectAutocapitalize = "words"
 	ObjectAutocapitalizeCharacters ObjectAutocapitalize = "characters"
-	ObjectAutocapitalizeNone       ObjectAutocapitalize = "none"
-	ObjectAutocapitalizeOff        ObjectAutocapitalize = "off"
 )
 
 type ObjectAutocorrect string
@@ -70,9 +77,9 @@ const (
 type ObjectContenteditable string
 
 const (
+	ObjectContenteditableTrue          ObjectContenteditable = "true"
 	ObjectContenteditableFalse         ObjectContenteditable = "false"
 	ObjectContenteditablePlaintextOnly ObjectContenteditable = "plaintext-only"
-	ObjectContenteditableTrue          ObjectContenteditable = "true"
 	ObjectContenteditableEmpty         ObjectContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type ObjectEnterkeyhint string
 
 const (
+	ObjectEnterkeyhintPrevious ObjectEnterkeyhint = "previous"
+	ObjectEnterkeyhintSearch   ObjectEnterkeyhint = "search"
+	ObjectEnterkeyhintSend     ObjectEnterkeyhint = "send"
 	ObjectEnterkeyhintDone     ObjectEnterkeyhint = "done"
 	ObjectEnterkeyhintEnter    ObjectEnterkeyhint = "enter"
 	ObjectEnterkeyhintGo       ObjectEnterkeyhint = "go"
 	ObjectEnterkeyhintNext     ObjectEnterkeyhint = "next"
-	ObjectEnterkeyhintPrevious ObjectEnterkeyhint = "previous"
-	ObjectEnterkeyhintSearch   ObjectEnterkeyhint = "search"
-	ObjectEnterkeyhintSend     ObjectEnterkeyhint = "send"
 )
 
 type ObjectHidden string
@@ -114,14 +121,14 @@ const (
 type ObjectInputmode string
 
 const (
+	ObjectInputmodeSearch  ObjectInputmode = "search"
+	ObjectInputmodeTel     ObjectInputmode = "tel"
 	ObjectInputmodeText    ObjectInputmode = "text"
 	ObjectInputmodeUrl     ObjectInputmode = "url"
 	ObjectInputmodeDecimal ObjectInputmode = "decimal"
 	ObjectInputmodeEmail   ObjectInputmode = "email"
 	ObjectInputmodeNone    ObjectInputmode = "none"
 	ObjectInputmodeNumeric ObjectInputmode = "numeric"
-	ObjectInputmodeSearch  ObjectInputmode = "search"
-	ObjectInputmodeTel     ObjectInputmode = "tel"
 )
 
 type ObjectSpellcheck string

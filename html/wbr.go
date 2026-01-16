@@ -85,13 +85,13 @@ const (
 type WbrEnterkeyhint string
 
 const (
-	WbrEnterkeyhintPrevious WbrEnterkeyhint = "previous"
 	WbrEnterkeyhintSearch   WbrEnterkeyhint = "search"
 	WbrEnterkeyhintSend     WbrEnterkeyhint = "send"
 	WbrEnterkeyhintDone     WbrEnterkeyhint = "done"
 	WbrEnterkeyhintEnter    WbrEnterkeyhint = "enter"
 	WbrEnterkeyhintGo       WbrEnterkeyhint = "go"
 	WbrEnterkeyhintNext     WbrEnterkeyhint = "next"
+	WbrEnterkeyhintPrevious WbrEnterkeyhint = "previous"
 )
 
 type WbrHidden string
@@ -105,14 +105,14 @@ const (
 type WbrInputmode string
 
 const (
-	WbrInputmodeTel     WbrInputmode = "tel"
-	WbrInputmodeText    WbrInputmode = "text"
-	WbrInputmodeUrl     WbrInputmode = "url"
-	WbrInputmodeDecimal WbrInputmode = "decimal"
 	WbrInputmodeEmail   WbrInputmode = "email"
 	WbrInputmodeNone    WbrInputmode = "none"
 	WbrInputmodeNumeric WbrInputmode = "numeric"
 	WbrInputmodeSearch  WbrInputmode = "search"
+	WbrInputmodeTel     WbrInputmode = "tel"
+	WbrInputmodeText    WbrInputmode = "text"
+	WbrInputmodeUrl     WbrInputmode = "url"
+	WbrInputmodeDecimal WbrInputmode = "decimal"
 )
 
 type WbrSpellcheck string

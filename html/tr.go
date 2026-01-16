@@ -48,6 +48,13 @@ func TrTernary(condition bool, true htemel.Node, false htemel.Node) *TrElement {
 	return Tr(false)
 }
 
+// Children appends children to this element.
+func (e *TrElement) Children(children ...htemel.Node) *TrElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type TrAutocapitalize string
 
 const (
@@ -62,17 +69,17 @@ const (
 type TrAutocorrect string
 
 const (
-	TrAutocorrectOff   TrAutocorrect = "off"
 	TrAutocorrectOn    TrAutocorrect = "on"
+	TrAutocorrectOff   TrAutocorrect = "off"
 	TrAutocorrectEmpty TrAutocorrect = ""
 )
 
 type TrContenteditable string
 
 const (
-	TrContenteditableFalse         TrContenteditable = "false"
 	TrContenteditablePlaintextOnly TrContenteditable = "plaintext-only"
 	TrContenteditableTrue          TrContenteditable = "true"
+	TrContenteditableFalse         TrContenteditable = "false"
 	TrContenteditableEmpty         TrContenteditable = ""
 )
 
@@ -87,20 +94,20 @@ const (
 type TrDraggable string
 
 const (
-	TrDraggableFalse TrDraggable = "false"
 	TrDraggableTrue  TrDraggable = "true"
+	TrDraggableFalse TrDraggable = "false"
 )
 
 type TrEnterkeyhint string
 
 const (
+	TrEnterkeyhintSend     TrEnterkeyhint = "send"
 	TrEnterkeyhintDone     TrEnterkeyhint = "done"
 	TrEnterkeyhintEnter    TrEnterkeyhint = "enter"
 	TrEnterkeyhintGo       TrEnterkeyhint = "go"
 	TrEnterkeyhintNext     TrEnterkeyhint = "next"
 	TrEnterkeyhintPrevious TrEnterkeyhint = "previous"
 	TrEnterkeyhintSearch   TrEnterkeyhint = "search"
-	TrEnterkeyhintSend     TrEnterkeyhint = "send"
 )
 
 type TrHidden string
@@ -114,14 +121,14 @@ const (
 type TrInputmode string
 
 const (
-	TrInputmodeNumeric TrInputmode = "numeric"
-	TrInputmodeSearch  TrInputmode = "search"
-	TrInputmodeTel     TrInputmode = "tel"
 	TrInputmodeText    TrInputmode = "text"
 	TrInputmodeUrl     TrInputmode = "url"
 	TrInputmodeDecimal TrInputmode = "decimal"
 	TrInputmodeEmail   TrInputmode = "email"
 	TrInputmodeNone    TrInputmode = "none"
+	TrInputmodeNumeric TrInputmode = "numeric"
+	TrInputmodeSearch  TrInputmode = "search"
+	TrInputmodeTel     TrInputmode = "tel"
 )
 
 type TrSpellcheck string
@@ -135,8 +142,8 @@ const (
 type TrTranslate string
 
 const (
-	TrTranslateYes   TrTranslate = "yes"
 	TrTranslateNo    TrTranslate = "no"
+	TrTranslateYes   TrTranslate = "yes"
 	TrTranslateEmpty TrTranslate = ""
 )
 

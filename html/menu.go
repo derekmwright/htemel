@@ -48,40 +48,47 @@ func MenuTernary(condition bool, true htemel.Node, false htemel.Node) *MenuEleme
 	return Menu(false)
 }
 
+// Children appends children to this element.
+func (e *MenuElement) Children(children ...htemel.Node) *MenuElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type MenuAutocapitalize string
 
 const (
-	MenuAutocapitalizeWords      MenuAutocapitalize = "words"
 	MenuAutocapitalizeCharacters MenuAutocapitalize = "characters"
 	MenuAutocapitalizeNone       MenuAutocapitalize = "none"
 	MenuAutocapitalizeOff        MenuAutocapitalize = "off"
 	MenuAutocapitalizeOn         MenuAutocapitalize = "on"
 	MenuAutocapitalizeSentences  MenuAutocapitalize = "sentences"
+	MenuAutocapitalizeWords      MenuAutocapitalize = "words"
 )
 
 type MenuAutocorrect string
 
 const (
-	MenuAutocorrectOn    MenuAutocorrect = "on"
 	MenuAutocorrectOff   MenuAutocorrect = "off"
+	MenuAutocorrectOn    MenuAutocorrect = "on"
 	MenuAutocorrectEmpty MenuAutocorrect = ""
 )
 
 type MenuContenteditable string
 
 const (
+	MenuContenteditablePlaintextOnly MenuContenteditable = "plaintext-only"
 	MenuContenteditableTrue          MenuContenteditable = "true"
 	MenuContenteditableFalse         MenuContenteditable = "false"
-	MenuContenteditablePlaintextOnly MenuContenteditable = "plaintext-only"
 	MenuContenteditableEmpty         MenuContenteditable = ""
 )
 
 type MenuDir string
 
 const (
-	MenuDirAuto MenuDir = "auto"
 	MenuDirLtr  MenuDir = "ltr"
 	MenuDirRtl  MenuDir = "rtl"
+	MenuDirAuto MenuDir = "auto"
 )
 
 type MenuDraggable string
@@ -94,13 +101,13 @@ const (
 type MenuEnterkeyhint string
 
 const (
-	MenuEnterkeyhintPrevious MenuEnterkeyhint = "previous"
-	MenuEnterkeyhintSearch   MenuEnterkeyhint = "search"
-	MenuEnterkeyhintSend     MenuEnterkeyhint = "send"
 	MenuEnterkeyhintDone     MenuEnterkeyhint = "done"
 	MenuEnterkeyhintEnter    MenuEnterkeyhint = "enter"
 	MenuEnterkeyhintGo       MenuEnterkeyhint = "go"
 	MenuEnterkeyhintNext     MenuEnterkeyhint = "next"
+	MenuEnterkeyhintPrevious MenuEnterkeyhint = "previous"
+	MenuEnterkeyhintSearch   MenuEnterkeyhint = "search"
+	MenuEnterkeyhintSend     MenuEnterkeyhint = "send"
 )
 
 type MenuHidden string
@@ -114,6 +121,7 @@ const (
 type MenuInputmode string
 
 const (
+	MenuInputmodeText    MenuInputmode = "text"
 	MenuInputmodeUrl     MenuInputmode = "url"
 	MenuInputmodeDecimal MenuInputmode = "decimal"
 	MenuInputmodeEmail   MenuInputmode = "email"
@@ -121,7 +129,6 @@ const (
 	MenuInputmodeNumeric MenuInputmode = "numeric"
 	MenuInputmodeSearch  MenuInputmode = "search"
 	MenuInputmodeTel     MenuInputmode = "tel"
-	MenuInputmodeText    MenuInputmode = "text"
 )
 
 type MenuSpellcheck string

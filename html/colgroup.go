@@ -48,15 +48,22 @@ func ColgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Colgr
 	return Colgroup(false)
 }
 
+// Children appends children to this element.
+func (e *ColgroupElement) Children(children ...htemel.Node) *ColgroupElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type ColgroupAutocapitalize string
 
 const (
-	ColgroupAutocapitalizeSentences  ColgroupAutocapitalize = "sentences"
-	ColgroupAutocapitalizeWords      ColgroupAutocapitalize = "words"
 	ColgroupAutocapitalizeCharacters ColgroupAutocapitalize = "characters"
 	ColgroupAutocapitalizeNone       ColgroupAutocapitalize = "none"
 	ColgroupAutocapitalizeOff        ColgroupAutocapitalize = "off"
 	ColgroupAutocapitalizeOn         ColgroupAutocapitalize = "on"
+	ColgroupAutocapitalizeSentences  ColgroupAutocapitalize = "sentences"
+	ColgroupAutocapitalizeWords      ColgroupAutocapitalize = "words"
 )
 
 type ColgroupAutocorrect string
@@ -70,18 +77,18 @@ const (
 type ColgroupContenteditable string
 
 const (
+	ColgroupContenteditableTrue          ColgroupContenteditable = "true"
 	ColgroupContenteditableFalse         ColgroupContenteditable = "false"
 	ColgroupContenteditablePlaintextOnly ColgroupContenteditable = "plaintext-only"
-	ColgroupContenteditableTrue          ColgroupContenteditable = "true"
 	ColgroupContenteditableEmpty         ColgroupContenteditable = ""
 )
 
 type ColgroupDir string
 
 const (
+	ColgroupDirAuto ColgroupDir = "auto"
 	ColgroupDirLtr  ColgroupDir = "ltr"
 	ColgroupDirRtl  ColgroupDir = "rtl"
-	ColgroupDirAuto ColgroupDir = "auto"
 )
 
 type ColgroupDraggable string
@@ -94,13 +101,13 @@ const (
 type ColgroupEnterkeyhint string
 
 const (
-	ColgroupEnterkeyhintEnter    ColgroupEnterkeyhint = "enter"
-	ColgroupEnterkeyhintGo       ColgroupEnterkeyhint = "go"
 	ColgroupEnterkeyhintNext     ColgroupEnterkeyhint = "next"
 	ColgroupEnterkeyhintPrevious ColgroupEnterkeyhint = "previous"
 	ColgroupEnterkeyhintSearch   ColgroupEnterkeyhint = "search"
 	ColgroupEnterkeyhintSend     ColgroupEnterkeyhint = "send"
 	ColgroupEnterkeyhintDone     ColgroupEnterkeyhint = "done"
+	ColgroupEnterkeyhintEnter    ColgroupEnterkeyhint = "enter"
+	ColgroupEnterkeyhintGo       ColgroupEnterkeyhint = "go"
 )
 
 type ColgroupHidden string
@@ -114,14 +121,14 @@ const (
 type ColgroupInputmode string
 
 const (
-	ColgroupInputmodeUrl     ColgroupInputmode = "url"
-	ColgroupInputmodeDecimal ColgroupInputmode = "decimal"
 	ColgroupInputmodeEmail   ColgroupInputmode = "email"
 	ColgroupInputmodeNone    ColgroupInputmode = "none"
 	ColgroupInputmodeNumeric ColgroupInputmode = "numeric"
 	ColgroupInputmodeSearch  ColgroupInputmode = "search"
 	ColgroupInputmodeTel     ColgroupInputmode = "tel"
 	ColgroupInputmodeText    ColgroupInputmode = "text"
+	ColgroupInputmodeUrl     ColgroupInputmode = "url"
+	ColgroupInputmodeDecimal ColgroupInputmode = "decimal"
 )
 
 type ColgroupSpellcheck string

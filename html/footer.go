@@ -48,6 +48,13 @@ func FooterTernary(condition bool, true htemel.Node, false htemel.Node) *FooterE
 	return Footer(false)
 }
 
+// Children appends children to this element.
+func (e *FooterElement) Children(children ...htemel.Node) *FooterElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type FooterAutocapitalize string
 
 const (
@@ -70,18 +77,18 @@ const (
 type FooterContenteditable string
 
 const (
-	FooterContenteditableFalse         FooterContenteditable = "false"
 	FooterContenteditablePlaintextOnly FooterContenteditable = "plaintext-only"
 	FooterContenteditableTrue          FooterContenteditable = "true"
+	FooterContenteditableFalse         FooterContenteditable = "false"
 	FooterContenteditableEmpty         FooterContenteditable = ""
 )
 
 type FooterDir string
 
 const (
+	FooterDirAuto FooterDir = "auto"
 	FooterDirLtr  FooterDir = "ltr"
 	FooterDirRtl  FooterDir = "rtl"
-	FooterDirAuto FooterDir = "auto"
 )
 
 type FooterDraggable string
@@ -94,27 +101,26 @@ const (
 type FooterEnterkeyhint string
 
 const (
+	FooterEnterkeyhintDone     FooterEnterkeyhint = "done"
+	FooterEnterkeyhintEnter    FooterEnterkeyhint = "enter"
 	FooterEnterkeyhintGo       FooterEnterkeyhint = "go"
 	FooterEnterkeyhintNext     FooterEnterkeyhint = "next"
 	FooterEnterkeyhintPrevious FooterEnterkeyhint = "previous"
 	FooterEnterkeyhintSearch   FooterEnterkeyhint = "search"
 	FooterEnterkeyhintSend     FooterEnterkeyhint = "send"
-	FooterEnterkeyhintDone     FooterEnterkeyhint = "done"
-	FooterEnterkeyhintEnter    FooterEnterkeyhint = "enter"
 )
 
 type FooterHidden string
 
 const (
-	FooterHiddenUntilFound FooterHidden = "until-found"
 	FooterHiddenHidden     FooterHidden = "hidden"
+	FooterHiddenUntilFound FooterHidden = "until-found"
 	FooterHiddenEmpty      FooterHidden = ""
 )
 
 type FooterInputmode string
 
 const (
-	FooterInputmodeEmail   FooterInputmode = "email"
 	FooterInputmodeNone    FooterInputmode = "none"
 	FooterInputmodeNumeric FooterInputmode = "numeric"
 	FooterInputmodeSearch  FooterInputmode = "search"
@@ -122,6 +128,7 @@ const (
 	FooterInputmodeText    FooterInputmode = "text"
 	FooterInputmodeUrl     FooterInputmode = "url"
 	FooterInputmodeDecimal FooterInputmode = "decimal"
+	FooterInputmodeEmail   FooterInputmode = "email"
 )
 
 type FooterSpellcheck string

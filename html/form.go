@@ -48,6 +48,13 @@ func FormTernary(condition bool, true htemel.Node, false htemel.Node) *FormEleme
 	return Form(false)
 }
 
+// Children appends children to this element.
+func (e *FormElement) Children(children ...htemel.Node) *FormElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type FormAutocomplete string
 
 const (
@@ -58,20 +65,20 @@ const (
 type FormMethod string
 
 const (
-	FormMethodDialog FormMethod = "dialog"
 	FormMethodGet    FormMethod = "get"
 	FormMethodPost   FormMethod = "post"
+	FormMethodDialog FormMethod = "dialog"
 )
 
 type FormAutocapitalize string
 
 const (
-	FormAutocapitalizeSentences  FormAutocapitalize = "sentences"
-	FormAutocapitalizeWords      FormAutocapitalize = "words"
 	FormAutocapitalizeCharacters FormAutocapitalize = "characters"
 	FormAutocapitalizeNone       FormAutocapitalize = "none"
 	FormAutocapitalizeOff        FormAutocapitalize = "off"
 	FormAutocapitalizeOn         FormAutocapitalize = "on"
+	FormAutocapitalizeSentences  FormAutocapitalize = "sentences"
+	FormAutocapitalizeWords      FormAutocapitalize = "words"
 )
 
 type FormAutocorrect string
@@ -85,9 +92,9 @@ const (
 type FormContenteditable string
 
 const (
-	FormContenteditableTrue          FormContenteditable = "true"
 	FormContenteditableFalse         FormContenteditable = "false"
 	FormContenteditablePlaintextOnly FormContenteditable = "plaintext-only"
+	FormContenteditableTrue          FormContenteditable = "true"
 	FormContenteditableEmpty         FormContenteditable = ""
 )
 
@@ -109,13 +116,13 @@ const (
 type FormEnterkeyhint string
 
 const (
+	FormEnterkeyhintEnter    FormEnterkeyhint = "enter"
+	FormEnterkeyhintGo       FormEnterkeyhint = "go"
+	FormEnterkeyhintNext     FormEnterkeyhint = "next"
 	FormEnterkeyhintPrevious FormEnterkeyhint = "previous"
 	FormEnterkeyhintSearch   FormEnterkeyhint = "search"
 	FormEnterkeyhintSend     FormEnterkeyhint = "send"
 	FormEnterkeyhintDone     FormEnterkeyhint = "done"
-	FormEnterkeyhintEnter    FormEnterkeyhint = "enter"
-	FormEnterkeyhintGo       FormEnterkeyhint = "go"
-	FormEnterkeyhintNext     FormEnterkeyhint = "next"
 )
 
 type FormHidden string
@@ -129,14 +136,14 @@ const (
 type FormInputmode string
 
 const (
-	FormInputmodeTel     FormInputmode = "tel"
-	FormInputmodeText    FormInputmode = "text"
 	FormInputmodeUrl     FormInputmode = "url"
 	FormInputmodeDecimal FormInputmode = "decimal"
 	FormInputmodeEmail   FormInputmode = "email"
 	FormInputmodeNone    FormInputmode = "none"
 	FormInputmodeNumeric FormInputmode = "numeric"
 	FormInputmodeSearch  FormInputmode = "search"
+	FormInputmodeTel     FormInputmode = "tel"
+	FormInputmodeText    FormInputmode = "text"
 )
 
 type FormSpellcheck string

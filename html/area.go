@@ -42,21 +42,21 @@ func AreaIf(condition bool) *AreaElement {
 type AreaShape string
 
 const (
+	AreaShapeRect    AreaShape = "rect"
 	AreaShapeCircle  AreaShape = "circle"
 	AreaShapeDefault AreaShape = "default"
 	AreaShapePoly    AreaShape = "poly"
-	AreaShapeRect    AreaShape = "rect"
 )
 
 type AreaAutocapitalize string
 
 const (
+	AreaAutocapitalizeSentences  AreaAutocapitalize = "sentences"
 	AreaAutocapitalizeWords      AreaAutocapitalize = "words"
 	AreaAutocapitalizeCharacters AreaAutocapitalize = "characters"
 	AreaAutocapitalizeNone       AreaAutocapitalize = "none"
 	AreaAutocapitalizeOff        AreaAutocapitalize = "off"
 	AreaAutocapitalizeOn         AreaAutocapitalize = "on"
-	AreaAutocapitalizeSentences  AreaAutocapitalize = "sentences"
 )
 
 type AreaAutocorrect string
@@ -70,9 +70,9 @@ const (
 type AreaContenteditable string
 
 const (
+	AreaContenteditableTrue          AreaContenteditable = "true"
 	AreaContenteditableFalse         AreaContenteditable = "false"
 	AreaContenteditablePlaintextOnly AreaContenteditable = "plaintext-only"
-	AreaContenteditableTrue          AreaContenteditable = "true"
 	AreaContenteditableEmpty         AreaContenteditable = ""
 )
 
@@ -94,13 +94,13 @@ const (
 type AreaEnterkeyhint string
 
 const (
-	AreaEnterkeyhintGo       AreaEnterkeyhint = "go"
 	AreaEnterkeyhintNext     AreaEnterkeyhint = "next"
 	AreaEnterkeyhintPrevious AreaEnterkeyhint = "previous"
 	AreaEnterkeyhintSearch   AreaEnterkeyhint = "search"
 	AreaEnterkeyhintSend     AreaEnterkeyhint = "send"
 	AreaEnterkeyhintDone     AreaEnterkeyhint = "done"
 	AreaEnterkeyhintEnter    AreaEnterkeyhint = "enter"
+	AreaEnterkeyhintGo       AreaEnterkeyhint = "go"
 )
 
 type AreaHidden string
@@ -114,14 +114,14 @@ const (
 type AreaInputmode string
 
 const (
-	AreaInputmodeUrl     AreaInputmode = "url"
-	AreaInputmodeDecimal AreaInputmode = "decimal"
-	AreaInputmodeEmail   AreaInputmode = "email"
-	AreaInputmodeNone    AreaInputmode = "none"
 	AreaInputmodeNumeric AreaInputmode = "numeric"
 	AreaInputmodeSearch  AreaInputmode = "search"
 	AreaInputmodeTel     AreaInputmode = "tel"
 	AreaInputmodeText    AreaInputmode = "text"
+	AreaInputmodeUrl     AreaInputmode = "url"
+	AreaInputmodeDecimal AreaInputmode = "decimal"
+	AreaInputmodeEmail   AreaInputmode = "email"
+	AreaInputmodeNone    AreaInputmode = "none"
 )
 
 type AreaSpellcheck string

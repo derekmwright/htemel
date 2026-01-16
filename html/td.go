@@ -48,15 +48,22 @@ func TdTernary(condition bool, true htemel.Node, false htemel.Node) *TdElement {
 	return Td(false)
 }
 
+// Children appends children to this element.
+func (e *TdElement) Children(children ...htemel.Node) *TdElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type TdAutocapitalize string
 
 const (
-	TdAutocapitalizeOn         TdAutocapitalize = "on"
-	TdAutocapitalizeSentences  TdAutocapitalize = "sentences"
 	TdAutocapitalizeWords      TdAutocapitalize = "words"
 	TdAutocapitalizeCharacters TdAutocapitalize = "characters"
 	TdAutocapitalizeNone       TdAutocapitalize = "none"
 	TdAutocapitalizeOff        TdAutocapitalize = "off"
+	TdAutocapitalizeOn         TdAutocapitalize = "on"
+	TdAutocapitalizeSentences  TdAutocapitalize = "sentences"
 )
 
 type TdAutocorrect string
@@ -70,9 +77,9 @@ const (
 type TdContenteditable string
 
 const (
+	TdContenteditableTrue          TdContenteditable = "true"
 	TdContenteditableFalse         TdContenteditable = "false"
 	TdContenteditablePlaintextOnly TdContenteditable = "plaintext-only"
-	TdContenteditableTrue          TdContenteditable = "true"
 	TdContenteditableEmpty         TdContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type TdEnterkeyhint string
 
 const (
+	TdEnterkeyhintNext     TdEnterkeyhint = "next"
+	TdEnterkeyhintPrevious TdEnterkeyhint = "previous"
 	TdEnterkeyhintSearch   TdEnterkeyhint = "search"
 	TdEnterkeyhintSend     TdEnterkeyhint = "send"
 	TdEnterkeyhintDone     TdEnterkeyhint = "done"
 	TdEnterkeyhintEnter    TdEnterkeyhint = "enter"
 	TdEnterkeyhintGo       TdEnterkeyhint = "go"
-	TdEnterkeyhintNext     TdEnterkeyhint = "next"
-	TdEnterkeyhintPrevious TdEnterkeyhint = "previous"
 )
 
 type TdHidden string
@@ -114,21 +121,21 @@ const (
 type TdInputmode string
 
 const (
-	TdInputmodeDecimal TdInputmode = "decimal"
-	TdInputmodeEmail   TdInputmode = "email"
 	TdInputmodeNone    TdInputmode = "none"
 	TdInputmodeNumeric TdInputmode = "numeric"
 	TdInputmodeSearch  TdInputmode = "search"
 	TdInputmodeTel     TdInputmode = "tel"
 	TdInputmodeText    TdInputmode = "text"
 	TdInputmodeUrl     TdInputmode = "url"
+	TdInputmodeDecimal TdInputmode = "decimal"
+	TdInputmodeEmail   TdInputmode = "email"
 )
 
 type TdSpellcheck string
 
 const (
-	TdSpellcheckFalse TdSpellcheck = "false"
 	TdSpellcheckTrue  TdSpellcheck = "true"
+	TdSpellcheckFalse TdSpellcheck = "false"
 	TdSpellcheckEmpty TdSpellcheck = ""
 )
 

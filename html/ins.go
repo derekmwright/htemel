@@ -48,6 +48,13 @@ func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement
 	return Ins(false)
 }
 
+// Children appends children to this element.
+func (e *InsElement) Children(children ...htemel.Node) *InsElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type InsAutocapitalize string
 
 const (
@@ -79,9 +86,9 @@ const (
 type InsDir string
 
 const (
-	InsDirLtr  InsDir = "ltr"
 	InsDirRtl  InsDir = "rtl"
 	InsDirAuto InsDir = "auto"
+	InsDirLtr  InsDir = "ltr"
 )
 
 type InsDraggable string
@@ -94,13 +101,13 @@ const (
 type InsEnterkeyhint string
 
 const (
+	InsEnterkeyhintGo       InsEnterkeyhint = "go"
 	InsEnterkeyhintNext     InsEnterkeyhint = "next"
 	InsEnterkeyhintPrevious InsEnterkeyhint = "previous"
 	InsEnterkeyhintSearch   InsEnterkeyhint = "search"
 	InsEnterkeyhintSend     InsEnterkeyhint = "send"
 	InsEnterkeyhintDone     InsEnterkeyhint = "done"
 	InsEnterkeyhintEnter    InsEnterkeyhint = "enter"
-	InsEnterkeyhintGo       InsEnterkeyhint = "go"
 )
 
 type InsHidden string
@@ -114,21 +121,21 @@ const (
 type InsInputmode string
 
 const (
+	InsInputmodeDecimal InsInputmode = "decimal"
+	InsInputmodeEmail   InsInputmode = "email"
+	InsInputmodeNone    InsInputmode = "none"
 	InsInputmodeNumeric InsInputmode = "numeric"
 	InsInputmodeSearch  InsInputmode = "search"
 	InsInputmodeTel     InsInputmode = "tel"
 	InsInputmodeText    InsInputmode = "text"
 	InsInputmodeUrl     InsInputmode = "url"
-	InsInputmodeDecimal InsInputmode = "decimal"
-	InsInputmodeEmail   InsInputmode = "email"
-	InsInputmodeNone    InsInputmode = "none"
 )
 
 type InsSpellcheck string
 
 const (
-	InsSpellcheckFalse InsSpellcheck = "false"
 	InsSpellcheckTrue  InsSpellcheck = "true"
+	InsSpellcheckFalse InsSpellcheck = "false"
 	InsSpellcheckEmpty InsSpellcheck = ""
 )
 
@@ -143,8 +150,8 @@ const (
 type InsWritingsuggestions string
 
 const (
-	InsWritingsuggestionsFalse InsWritingsuggestions = "false"
 	InsWritingsuggestionsTrue  InsWritingsuggestions = "true"
+	InsWritingsuggestionsFalse InsWritingsuggestions = "false"
 	InsWritingsuggestionsEmpty InsWritingsuggestions = ""
 )
 

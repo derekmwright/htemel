@@ -48,15 +48,22 @@ func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *Summar
 	return Summary(false)
 }
 
+// Children appends children to this element.
+func (e *SummaryElement) Children(children ...htemel.Node) *SummaryElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SummaryAutocapitalize string
 
 const (
+	SummaryAutocapitalizeWords      SummaryAutocapitalize = "words"
 	SummaryAutocapitalizeCharacters SummaryAutocapitalize = "characters"
 	SummaryAutocapitalizeNone       SummaryAutocapitalize = "none"
 	SummaryAutocapitalizeOff        SummaryAutocapitalize = "off"
 	SummaryAutocapitalizeOn         SummaryAutocapitalize = "on"
 	SummaryAutocapitalizeSentences  SummaryAutocapitalize = "sentences"
-	SummaryAutocapitalizeWords      SummaryAutocapitalize = "words"
 )
 
 type SummaryAutocorrect string
@@ -70,37 +77,37 @@ const (
 type SummaryContenteditable string
 
 const (
+	SummaryContenteditableTrue          SummaryContenteditable = "true"
 	SummaryContenteditableFalse         SummaryContenteditable = "false"
 	SummaryContenteditablePlaintextOnly SummaryContenteditable = "plaintext-only"
-	SummaryContenteditableTrue          SummaryContenteditable = "true"
 	SummaryContenteditableEmpty         SummaryContenteditable = ""
 )
 
 type SummaryDir string
 
 const (
-	SummaryDirRtl  SummaryDir = "rtl"
 	SummaryDirAuto SummaryDir = "auto"
 	SummaryDirLtr  SummaryDir = "ltr"
+	SummaryDirRtl  SummaryDir = "rtl"
 )
 
 type SummaryDraggable string
 
 const (
-	SummaryDraggableTrue  SummaryDraggable = "true"
 	SummaryDraggableFalse SummaryDraggable = "false"
+	SummaryDraggableTrue  SummaryDraggable = "true"
 )
 
 type SummaryEnterkeyhint string
 
 const (
+	SummaryEnterkeyhintSend     SummaryEnterkeyhint = "send"
+	SummaryEnterkeyhintDone     SummaryEnterkeyhint = "done"
+	SummaryEnterkeyhintEnter    SummaryEnterkeyhint = "enter"
 	SummaryEnterkeyhintGo       SummaryEnterkeyhint = "go"
 	SummaryEnterkeyhintNext     SummaryEnterkeyhint = "next"
 	SummaryEnterkeyhintPrevious SummaryEnterkeyhint = "previous"
 	SummaryEnterkeyhintSearch   SummaryEnterkeyhint = "search"
-	SummaryEnterkeyhintSend     SummaryEnterkeyhint = "send"
-	SummaryEnterkeyhintDone     SummaryEnterkeyhint = "done"
-	SummaryEnterkeyhintEnter    SummaryEnterkeyhint = "enter"
 )
 
 type SummaryHidden string
@@ -114,7 +121,6 @@ const (
 type SummaryInputmode string
 
 const (
-	SummaryInputmodeEmail   SummaryInputmode = "email"
 	SummaryInputmodeNone    SummaryInputmode = "none"
 	SummaryInputmodeNumeric SummaryInputmode = "numeric"
 	SummaryInputmodeSearch  SummaryInputmode = "search"
@@ -122,6 +128,7 @@ const (
 	SummaryInputmodeText    SummaryInputmode = "text"
 	SummaryInputmodeUrl     SummaryInputmode = "url"
 	SummaryInputmodeDecimal SummaryInputmode = "decimal"
+	SummaryInputmodeEmail   SummaryInputmode = "email"
 )
 
 type SummarySpellcheck string

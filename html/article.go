@@ -48,15 +48,22 @@ func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *Articl
 	return Article(false)
 }
 
+// Children appends children to this element.
+func (e *ArticleElement) Children(children ...htemel.Node) *ArticleElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type ArticleAutocapitalize string
 
 const (
-	ArticleAutocapitalizeOn         ArticleAutocapitalize = "on"
-	ArticleAutocapitalizeSentences  ArticleAutocapitalize = "sentences"
-	ArticleAutocapitalizeWords      ArticleAutocapitalize = "words"
 	ArticleAutocapitalizeCharacters ArticleAutocapitalize = "characters"
 	ArticleAutocapitalizeNone       ArticleAutocapitalize = "none"
 	ArticleAutocapitalizeOff        ArticleAutocapitalize = "off"
+	ArticleAutocapitalizeOn         ArticleAutocapitalize = "on"
+	ArticleAutocapitalizeSentences  ArticleAutocapitalize = "sentences"
+	ArticleAutocapitalizeWords      ArticleAutocapitalize = "words"
 )
 
 type ArticleAutocorrect string
@@ -94,13 +101,13 @@ const (
 type ArticleEnterkeyhint string
 
 const (
+	ArticleEnterkeyhintSend     ArticleEnterkeyhint = "send"
 	ArticleEnterkeyhintDone     ArticleEnterkeyhint = "done"
 	ArticleEnterkeyhintEnter    ArticleEnterkeyhint = "enter"
 	ArticleEnterkeyhintGo       ArticleEnterkeyhint = "go"
 	ArticleEnterkeyhintNext     ArticleEnterkeyhint = "next"
 	ArticleEnterkeyhintPrevious ArticleEnterkeyhint = "previous"
 	ArticleEnterkeyhintSearch   ArticleEnterkeyhint = "search"
-	ArticleEnterkeyhintSend     ArticleEnterkeyhint = "send"
 )
 
 type ArticleHidden string
@@ -114,7 +121,6 @@ const (
 type ArticleInputmode string
 
 const (
-	ArticleInputmodeNumeric ArticleInputmode = "numeric"
 	ArticleInputmodeSearch  ArticleInputmode = "search"
 	ArticleInputmodeTel     ArticleInputmode = "tel"
 	ArticleInputmodeText    ArticleInputmode = "text"
@@ -122,6 +128,7 @@ const (
 	ArticleInputmodeDecimal ArticleInputmode = "decimal"
 	ArticleInputmodeEmail   ArticleInputmode = "email"
 	ArticleInputmodeNone    ArticleInputmode = "none"
+	ArticleInputmodeNumeric ArticleInputmode = "numeric"
 )
 
 type ArticleSpellcheck string
@@ -143,8 +150,8 @@ const (
 type ArticleWritingsuggestions string
 
 const (
-	ArticleWritingsuggestionsFalse ArticleWritingsuggestions = "false"
 	ArticleWritingsuggestionsTrue  ArticleWritingsuggestions = "true"
+	ArticleWritingsuggestionsFalse ArticleWritingsuggestions = "false"
 	ArticleWritingsuggestionsEmpty ArticleWritingsuggestions = ""
 )
 

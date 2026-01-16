@@ -48,6 +48,13 @@ func ScriptTernary(condition bool, true htemel.Node, false htemel.Node) *ScriptE
 	return Script(false)
 }
 
+// Children appends children to this element.
+func (e *ScriptElement) Children(children ...htemel.Node) *ScriptElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type ScriptBlocking string
 
 const (
@@ -65,20 +72,20 @@ const (
 type ScriptFetchpriority string
 
 const (
-	ScriptFetchpriorityAuto ScriptFetchpriority = "auto"
 	ScriptFetchpriorityHigh ScriptFetchpriority = "high"
 	ScriptFetchpriorityLow  ScriptFetchpriority = "low"
+	ScriptFetchpriorityAuto ScriptFetchpriority = "auto"
 )
 
 type ScriptAutocapitalize string
 
 const (
-	ScriptAutocapitalizeCharacters ScriptAutocapitalize = "characters"
-	ScriptAutocapitalizeNone       ScriptAutocapitalize = "none"
 	ScriptAutocapitalizeOff        ScriptAutocapitalize = "off"
 	ScriptAutocapitalizeOn         ScriptAutocapitalize = "on"
 	ScriptAutocapitalizeSentences  ScriptAutocapitalize = "sentences"
 	ScriptAutocapitalizeWords      ScriptAutocapitalize = "words"
+	ScriptAutocapitalizeCharacters ScriptAutocapitalize = "characters"
+	ScriptAutocapitalizeNone       ScriptAutocapitalize = "none"
 )
 
 type ScriptAutocorrect string
@@ -109,20 +116,20 @@ const (
 type ScriptDraggable string
 
 const (
-	ScriptDraggableFalse ScriptDraggable = "false"
 	ScriptDraggableTrue  ScriptDraggable = "true"
+	ScriptDraggableFalse ScriptDraggable = "false"
 )
 
 type ScriptEnterkeyhint string
 
 const (
+	ScriptEnterkeyhintSend     ScriptEnterkeyhint = "send"
+	ScriptEnterkeyhintDone     ScriptEnterkeyhint = "done"
 	ScriptEnterkeyhintEnter    ScriptEnterkeyhint = "enter"
 	ScriptEnterkeyhintGo       ScriptEnterkeyhint = "go"
 	ScriptEnterkeyhintNext     ScriptEnterkeyhint = "next"
 	ScriptEnterkeyhintPrevious ScriptEnterkeyhint = "previous"
 	ScriptEnterkeyhintSearch   ScriptEnterkeyhint = "search"
-	ScriptEnterkeyhintSend     ScriptEnterkeyhint = "send"
-	ScriptEnterkeyhintDone     ScriptEnterkeyhint = "done"
 )
 
 type ScriptHidden string
@@ -136,6 +143,7 @@ const (
 type ScriptInputmode string
 
 const (
+	ScriptInputmodeTel     ScriptInputmode = "tel"
 	ScriptInputmodeText    ScriptInputmode = "text"
 	ScriptInputmodeUrl     ScriptInputmode = "url"
 	ScriptInputmodeDecimal ScriptInputmode = "decimal"
@@ -143,7 +151,6 @@ const (
 	ScriptInputmodeNone    ScriptInputmode = "none"
 	ScriptInputmodeNumeric ScriptInputmode = "numeric"
 	ScriptInputmodeSearch  ScriptInputmode = "search"
-	ScriptInputmodeTel     ScriptInputmode = "tel"
 )
 
 type ScriptSpellcheck string

@@ -48,15 +48,22 @@ func HgroupTernary(condition bool, true htemel.Node, false htemel.Node) *HgroupE
 	return Hgroup(false)
 }
 
+// Children appends children to this element.
+func (e *HgroupElement) Children(children ...htemel.Node) *HgroupElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type HgroupAutocapitalize string
 
 const (
+	HgroupAutocapitalizeWords      HgroupAutocapitalize = "words"
 	HgroupAutocapitalizeCharacters HgroupAutocapitalize = "characters"
 	HgroupAutocapitalizeNone       HgroupAutocapitalize = "none"
 	HgroupAutocapitalizeOff        HgroupAutocapitalize = "off"
 	HgroupAutocapitalizeOn         HgroupAutocapitalize = "on"
 	HgroupAutocapitalizeSentences  HgroupAutocapitalize = "sentences"
-	HgroupAutocapitalizeWords      HgroupAutocapitalize = "words"
 )
 
 type HgroupAutocorrect string
@@ -70,18 +77,18 @@ const (
 type HgroupContenteditable string
 
 const (
+	HgroupContenteditableTrue          HgroupContenteditable = "true"
 	HgroupContenteditableFalse         HgroupContenteditable = "false"
 	HgroupContenteditablePlaintextOnly HgroupContenteditable = "plaintext-only"
-	HgroupContenteditableTrue          HgroupContenteditable = "true"
 	HgroupContenteditableEmpty         HgroupContenteditable = ""
 )
 
 type HgroupDir string
 
 const (
+	HgroupDirAuto HgroupDir = "auto"
 	HgroupDirLtr  HgroupDir = "ltr"
 	HgroupDirRtl  HgroupDir = "rtl"
-	HgroupDirAuto HgroupDir = "auto"
 )
 
 type HgroupDraggable string
@@ -94,13 +101,13 @@ const (
 type HgroupEnterkeyhint string
 
 const (
-	HgroupEnterkeyhintNext     HgroupEnterkeyhint = "next"
-	HgroupEnterkeyhintPrevious HgroupEnterkeyhint = "previous"
 	HgroupEnterkeyhintSearch   HgroupEnterkeyhint = "search"
 	HgroupEnterkeyhintSend     HgroupEnterkeyhint = "send"
 	HgroupEnterkeyhintDone     HgroupEnterkeyhint = "done"
 	HgroupEnterkeyhintEnter    HgroupEnterkeyhint = "enter"
 	HgroupEnterkeyhintGo       HgroupEnterkeyhint = "go"
+	HgroupEnterkeyhintNext     HgroupEnterkeyhint = "next"
+	HgroupEnterkeyhintPrevious HgroupEnterkeyhint = "previous"
 )
 
 type HgroupHidden string
@@ -114,6 +121,7 @@ const (
 type HgroupInputmode string
 
 const (
+	HgroupInputmodeNone    HgroupInputmode = "none"
 	HgroupInputmodeNumeric HgroupInputmode = "numeric"
 	HgroupInputmodeSearch  HgroupInputmode = "search"
 	HgroupInputmodeTel     HgroupInputmode = "tel"
@@ -121,7 +129,6 @@ const (
 	HgroupInputmodeUrl     HgroupInputmode = "url"
 	HgroupInputmodeDecimal HgroupInputmode = "decimal"
 	HgroupInputmodeEmail   HgroupInputmode = "email"
-	HgroupInputmodeNone    HgroupInputmode = "none"
 )
 
 type HgroupSpellcheck string

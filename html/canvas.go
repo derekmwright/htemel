@@ -48,15 +48,22 @@ func CanvasTernary(condition bool, true htemel.Node, false htemel.Node) *CanvasE
 	return Canvas(false)
 }
 
+// Children appends children to this element.
+func (e *CanvasElement) Children(children ...htemel.Node) *CanvasElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type CanvasAutocapitalize string
 
 const (
+	CanvasAutocapitalizeSentences  CanvasAutocapitalize = "sentences"
+	CanvasAutocapitalizeWords      CanvasAutocapitalize = "words"
 	CanvasAutocapitalizeCharacters CanvasAutocapitalize = "characters"
 	CanvasAutocapitalizeNone       CanvasAutocapitalize = "none"
 	CanvasAutocapitalizeOff        CanvasAutocapitalize = "off"
 	CanvasAutocapitalizeOn         CanvasAutocapitalize = "on"
-	CanvasAutocapitalizeSentences  CanvasAutocapitalize = "sentences"
-	CanvasAutocapitalizeWords      CanvasAutocapitalize = "words"
 )
 
 type CanvasAutocorrect string
@@ -94,13 +101,13 @@ const (
 type CanvasEnterkeyhint string
 
 const (
+	CanvasEnterkeyhintSend     CanvasEnterkeyhint = "send"
+	CanvasEnterkeyhintDone     CanvasEnterkeyhint = "done"
 	CanvasEnterkeyhintEnter    CanvasEnterkeyhint = "enter"
 	CanvasEnterkeyhintGo       CanvasEnterkeyhint = "go"
 	CanvasEnterkeyhintNext     CanvasEnterkeyhint = "next"
 	CanvasEnterkeyhintPrevious CanvasEnterkeyhint = "previous"
 	CanvasEnterkeyhintSearch   CanvasEnterkeyhint = "search"
-	CanvasEnterkeyhintSend     CanvasEnterkeyhint = "send"
-	CanvasEnterkeyhintDone     CanvasEnterkeyhint = "done"
 )
 
 type CanvasHidden string

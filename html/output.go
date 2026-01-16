@@ -48,15 +48,22 @@ func OutputTernary(condition bool, true htemel.Node, false htemel.Node) *OutputE
 	return Output(false)
 }
 
+// Children appends children to this element.
+func (e *OutputElement) Children(children ...htemel.Node) *OutputElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type OutputAutocapitalize string
 
 const (
+	OutputAutocapitalizeOn         OutputAutocapitalize = "on"
+	OutputAutocapitalizeSentences  OutputAutocapitalize = "sentences"
 	OutputAutocapitalizeWords      OutputAutocapitalize = "words"
 	OutputAutocapitalizeCharacters OutputAutocapitalize = "characters"
 	OutputAutocapitalizeNone       OutputAutocapitalize = "none"
 	OutputAutocapitalizeOff        OutputAutocapitalize = "off"
-	OutputAutocapitalizeOn         OutputAutocapitalize = "on"
-	OutputAutocapitalizeSentences  OutputAutocapitalize = "sentences"
 )
 
 type OutputAutocorrect string
@@ -94,13 +101,13 @@ const (
 type OutputEnterkeyhint string
 
 const (
+	OutputEnterkeyhintDone     OutputEnterkeyhint = "done"
+	OutputEnterkeyhintEnter    OutputEnterkeyhint = "enter"
 	OutputEnterkeyhintGo       OutputEnterkeyhint = "go"
 	OutputEnterkeyhintNext     OutputEnterkeyhint = "next"
 	OutputEnterkeyhintPrevious OutputEnterkeyhint = "previous"
 	OutputEnterkeyhintSearch   OutputEnterkeyhint = "search"
 	OutputEnterkeyhintSend     OutputEnterkeyhint = "send"
-	OutputEnterkeyhintDone     OutputEnterkeyhint = "done"
-	OutputEnterkeyhintEnter    OutputEnterkeyhint = "enter"
 )
 
 type OutputHidden string
@@ -114,7 +121,6 @@ const (
 type OutputInputmode string
 
 const (
-	OutputInputmodeDecimal OutputInputmode = "decimal"
 	OutputInputmodeEmail   OutputInputmode = "email"
 	OutputInputmodeNone    OutputInputmode = "none"
 	OutputInputmodeNumeric OutputInputmode = "numeric"
@@ -122,13 +128,14 @@ const (
 	OutputInputmodeTel     OutputInputmode = "tel"
 	OutputInputmodeText    OutputInputmode = "text"
 	OutputInputmodeUrl     OutputInputmode = "url"
+	OutputInputmodeDecimal OutputInputmode = "decimal"
 )
 
 type OutputSpellcheck string
 
 const (
-	OutputSpellcheckTrue  OutputSpellcheck = "true"
 	OutputSpellcheckFalse OutputSpellcheck = "false"
+	OutputSpellcheckTrue  OutputSpellcheck = "true"
 	OutputSpellcheckEmpty OutputSpellcheck = ""
 )
 

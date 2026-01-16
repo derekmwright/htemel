@@ -48,15 +48,22 @@ func TbodyTernary(condition bool, true htemel.Node, false htemel.Node) *TbodyEle
 	return Tbody(false)
 }
 
+// Children appends children to this element.
+func (e *TbodyElement) Children(children ...htemel.Node) *TbodyElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type TbodyAutocapitalize string
 
 const (
+	TbodyAutocapitalizeWords      TbodyAutocapitalize = "words"
+	TbodyAutocapitalizeCharacters TbodyAutocapitalize = "characters"
 	TbodyAutocapitalizeNone       TbodyAutocapitalize = "none"
 	TbodyAutocapitalizeOff        TbodyAutocapitalize = "off"
 	TbodyAutocapitalizeOn         TbodyAutocapitalize = "on"
 	TbodyAutocapitalizeSentences  TbodyAutocapitalize = "sentences"
-	TbodyAutocapitalizeWords      TbodyAutocapitalize = "words"
-	TbodyAutocapitalizeCharacters TbodyAutocapitalize = "characters"
 )
 
 type TbodyAutocorrect string
@@ -114,6 +121,7 @@ const (
 type TbodyInputmode string
 
 const (
+	TbodyInputmodeDecimal TbodyInputmode = "decimal"
 	TbodyInputmodeEmail   TbodyInputmode = "email"
 	TbodyInputmodeNone    TbodyInputmode = "none"
 	TbodyInputmodeNumeric TbodyInputmode = "numeric"
@@ -121,7 +129,6 @@ const (
 	TbodyInputmodeTel     TbodyInputmode = "tel"
 	TbodyInputmodeText    TbodyInputmode = "text"
 	TbodyInputmodeUrl     TbodyInputmode = "url"
-	TbodyInputmodeDecimal TbodyInputmode = "decimal"
 )
 
 type TbodySpellcheck string
@@ -135,8 +142,8 @@ const (
 type TbodyTranslate string
 
 const (
-	TbodyTranslateYes   TbodyTranslate = "yes"
 	TbodyTranslateNo    TbodyTranslate = "no"
+	TbodyTranslateYes   TbodyTranslate = "yes"
 	TbodyTranslateEmpty TbodyTranslate = ""
 )
 

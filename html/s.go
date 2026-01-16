@@ -48,15 +48,22 @@ func STernary(condition bool, true htemel.Node, false htemel.Node) *SElement {
 	return S(false)
 }
 
+// Children appends children to this element.
+func (e *SElement) Children(children ...htemel.Node) *SElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SAutocapitalize string
 
 const (
-	SAutocapitalizeNone       SAutocapitalize = "none"
 	SAutocapitalizeOff        SAutocapitalize = "off"
 	SAutocapitalizeOn         SAutocapitalize = "on"
 	SAutocapitalizeSentences  SAutocapitalize = "sentences"
 	SAutocapitalizeWords      SAutocapitalize = "words"
 	SAutocapitalizeCharacters SAutocapitalize = "characters"
+	SAutocapitalizeNone       SAutocapitalize = "none"
 )
 
 type SAutocorrect string
@@ -94,13 +101,13 @@ const (
 type SEnterkeyhint string
 
 const (
-	SEnterkeyhintEnter    SEnterkeyhint = "enter"
-	SEnterkeyhintGo       SEnterkeyhint = "go"
 	SEnterkeyhintNext     SEnterkeyhint = "next"
 	SEnterkeyhintPrevious SEnterkeyhint = "previous"
 	SEnterkeyhintSearch   SEnterkeyhint = "search"
 	SEnterkeyhintSend     SEnterkeyhint = "send"
 	SEnterkeyhintDone     SEnterkeyhint = "done"
+	SEnterkeyhintEnter    SEnterkeyhint = "enter"
+	SEnterkeyhintGo       SEnterkeyhint = "go"
 )
 
 type SHidden string
@@ -114,7 +121,6 @@ const (
 type SInputmode string
 
 const (
-	SInputmodeSearch  SInputmode = "search"
 	SInputmodeTel     SInputmode = "tel"
 	SInputmodeText    SInputmode = "text"
 	SInputmodeUrl     SInputmode = "url"
@@ -122,6 +128,7 @@ const (
 	SInputmodeEmail   SInputmode = "email"
 	SInputmodeNone    SInputmode = "none"
 	SInputmodeNumeric SInputmode = "numeric"
+	SInputmodeSearch  SInputmode = "search"
 )
 
 type SSpellcheck string

@@ -54,19 +54,19 @@ const (
 type MetaAutocapitalize string
 
 const (
-	MetaAutocapitalizeWords      MetaAutocapitalize = "words"
-	MetaAutocapitalizeCharacters MetaAutocapitalize = "characters"
-	MetaAutocapitalizeNone       MetaAutocapitalize = "none"
 	MetaAutocapitalizeOff        MetaAutocapitalize = "off"
 	MetaAutocapitalizeOn         MetaAutocapitalize = "on"
 	MetaAutocapitalizeSentences  MetaAutocapitalize = "sentences"
+	MetaAutocapitalizeWords      MetaAutocapitalize = "words"
+	MetaAutocapitalizeCharacters MetaAutocapitalize = "characters"
+	MetaAutocapitalizeNone       MetaAutocapitalize = "none"
 )
 
 type MetaAutocorrect string
 
 const (
-	MetaAutocorrectOn    MetaAutocorrect = "on"
 	MetaAutocorrectOff   MetaAutocorrect = "off"
+	MetaAutocorrectOn    MetaAutocorrect = "on"
 	MetaAutocorrectEmpty MetaAutocorrect = ""
 )
 
@@ -97,13 +97,13 @@ const (
 type MetaEnterkeyhint string
 
 const (
+	MetaEnterkeyhintPrevious MetaEnterkeyhint = "previous"
+	MetaEnterkeyhintSearch   MetaEnterkeyhint = "search"
+	MetaEnterkeyhintSend     MetaEnterkeyhint = "send"
 	MetaEnterkeyhintDone     MetaEnterkeyhint = "done"
 	MetaEnterkeyhintEnter    MetaEnterkeyhint = "enter"
 	MetaEnterkeyhintGo       MetaEnterkeyhint = "go"
 	MetaEnterkeyhintNext     MetaEnterkeyhint = "next"
-	MetaEnterkeyhintPrevious MetaEnterkeyhint = "previous"
-	MetaEnterkeyhintSearch   MetaEnterkeyhint = "search"
-	MetaEnterkeyhintSend     MetaEnterkeyhint = "send"
 )
 
 type MetaHidden string
@@ -117,14 +117,14 @@ const (
 type MetaInputmode string
 
 const (
-	MetaInputmodeUrl     MetaInputmode = "url"
-	MetaInputmodeDecimal MetaInputmode = "decimal"
-	MetaInputmodeEmail   MetaInputmode = "email"
 	MetaInputmodeNone    MetaInputmode = "none"
 	MetaInputmodeNumeric MetaInputmode = "numeric"
 	MetaInputmodeSearch  MetaInputmode = "search"
 	MetaInputmodeTel     MetaInputmode = "tel"
 	MetaInputmodeText    MetaInputmode = "text"
+	MetaInputmodeUrl     MetaInputmode = "url"
+	MetaInputmodeDecimal MetaInputmode = "decimal"
+	MetaInputmodeEmail   MetaInputmode = "email"
 )
 
 type MetaSpellcheck string

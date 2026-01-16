@@ -48,22 +48,29 @@ func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallEle
 	return Small(false)
 }
 
+// Children appends children to this element.
+func (e *SmallElement) Children(children ...htemel.Node) *SmallElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SmallAutocapitalize string
 
 const (
+	SmallAutocapitalizeCharacters SmallAutocapitalize = "characters"
 	SmallAutocapitalizeNone       SmallAutocapitalize = "none"
 	SmallAutocapitalizeOff        SmallAutocapitalize = "off"
 	SmallAutocapitalizeOn         SmallAutocapitalize = "on"
 	SmallAutocapitalizeSentences  SmallAutocapitalize = "sentences"
 	SmallAutocapitalizeWords      SmallAutocapitalize = "words"
-	SmallAutocapitalizeCharacters SmallAutocapitalize = "characters"
 )
 
 type SmallAutocorrect string
 
 const (
-	SmallAutocorrectOn    SmallAutocorrect = "on"
 	SmallAutocorrectOff   SmallAutocorrect = "off"
+	SmallAutocorrectOn    SmallAutocorrect = "on"
 	SmallAutocorrectEmpty SmallAutocorrect = ""
 )
 
@@ -114,14 +121,14 @@ const (
 type SmallInputmode string
 
 const (
-	SmallInputmodeDecimal SmallInputmode = "decimal"
-	SmallInputmodeEmail   SmallInputmode = "email"
-	SmallInputmodeNone    SmallInputmode = "none"
 	SmallInputmodeNumeric SmallInputmode = "numeric"
 	SmallInputmodeSearch  SmallInputmode = "search"
 	SmallInputmodeTel     SmallInputmode = "tel"
 	SmallInputmodeText    SmallInputmode = "text"
 	SmallInputmodeUrl     SmallInputmode = "url"
+	SmallInputmodeDecimal SmallInputmode = "decimal"
+	SmallInputmodeEmail   SmallInputmode = "email"
+	SmallInputmodeNone    SmallInputmode = "none"
 )
 
 type SmallSpellcheck string

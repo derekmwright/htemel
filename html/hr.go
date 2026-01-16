@@ -42,12 +42,12 @@ func HrIf(condition bool) *HrElement {
 type HrAutocapitalize string
 
 const (
-	HrAutocapitalizeCharacters HrAutocapitalize = "characters"
-	HrAutocapitalizeNone       HrAutocapitalize = "none"
 	HrAutocapitalizeOff        HrAutocapitalize = "off"
 	HrAutocapitalizeOn         HrAutocapitalize = "on"
 	HrAutocapitalizeSentences  HrAutocapitalize = "sentences"
 	HrAutocapitalizeWords      HrAutocapitalize = "words"
+	HrAutocapitalizeCharacters HrAutocapitalize = "characters"
+	HrAutocapitalizeNone       HrAutocapitalize = "none"
 )
 
 type HrAutocorrect string
@@ -61,9 +61,9 @@ const (
 type HrContenteditable string
 
 const (
+	HrContenteditableTrue          HrContenteditable = "true"
 	HrContenteditableFalse         HrContenteditable = "false"
 	HrContenteditablePlaintextOnly HrContenteditable = "plaintext-only"
-	HrContenteditableTrue          HrContenteditable = "true"
 	HrContenteditableEmpty         HrContenteditable = ""
 )
 
@@ -85,27 +85,26 @@ const (
 type HrEnterkeyhint string
 
 const (
+	HrEnterkeyhintEnter    HrEnterkeyhint = "enter"
+	HrEnterkeyhintGo       HrEnterkeyhint = "go"
 	HrEnterkeyhintNext     HrEnterkeyhint = "next"
 	HrEnterkeyhintPrevious HrEnterkeyhint = "previous"
 	HrEnterkeyhintSearch   HrEnterkeyhint = "search"
 	HrEnterkeyhintSend     HrEnterkeyhint = "send"
 	HrEnterkeyhintDone     HrEnterkeyhint = "done"
-	HrEnterkeyhintEnter    HrEnterkeyhint = "enter"
-	HrEnterkeyhintGo       HrEnterkeyhint = "go"
 )
 
 type HrHidden string
 
 const (
-	HrHiddenUntilFound HrHidden = "until-found"
 	HrHiddenHidden     HrHidden = "hidden"
+	HrHiddenUntilFound HrHidden = "until-found"
 	HrHiddenEmpty      HrHidden = ""
 )
 
 type HrInputmode string
 
 const (
-	HrInputmodeNone    HrInputmode = "none"
 	HrInputmodeNumeric HrInputmode = "numeric"
 	HrInputmodeSearch  HrInputmode = "search"
 	HrInputmodeTel     HrInputmode = "tel"
@@ -113,13 +112,14 @@ const (
 	HrInputmodeUrl     HrInputmode = "url"
 	HrInputmodeDecimal HrInputmode = "decimal"
 	HrInputmodeEmail   HrInputmode = "email"
+	HrInputmodeNone    HrInputmode = "none"
 )
 
 type HrSpellcheck string
 
 const (
-	HrSpellcheckFalse HrSpellcheck = "false"
 	HrSpellcheckTrue  HrSpellcheck = "true"
+	HrSpellcheckFalse HrSpellcheck = "false"
 	HrSpellcheckEmpty HrSpellcheck = ""
 )
 
@@ -134,8 +134,8 @@ const (
 type HrWritingsuggestions string
 
 const (
-	HrWritingsuggestionsTrue  HrWritingsuggestions = "true"
 	HrWritingsuggestionsFalse HrWritingsuggestions = "false"
+	HrWritingsuggestionsTrue  HrWritingsuggestions = "true"
 	HrWritingsuggestionsEmpty HrWritingsuggestions = ""
 )
 

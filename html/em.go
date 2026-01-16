@@ -48,15 +48,22 @@ func EmTernary(condition bool, true htemel.Node, false htemel.Node) *EmElement {
 	return Em(false)
 }
 
+// Children appends children to this element.
+func (e *EmElement) Children(children ...htemel.Node) *EmElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type EmAutocapitalize string
 
 const (
-	EmAutocapitalizeCharacters EmAutocapitalize = "characters"
 	EmAutocapitalizeNone       EmAutocapitalize = "none"
 	EmAutocapitalizeOff        EmAutocapitalize = "off"
 	EmAutocapitalizeOn         EmAutocapitalize = "on"
 	EmAutocapitalizeSentences  EmAutocapitalize = "sentences"
 	EmAutocapitalizeWords      EmAutocapitalize = "words"
+	EmAutocapitalizeCharacters EmAutocapitalize = "characters"
 )
 
 type EmAutocorrect string
@@ -70,37 +77,37 @@ const (
 type EmContenteditable string
 
 const (
+	EmContenteditableFalse         EmContenteditable = "false"
 	EmContenteditablePlaintextOnly EmContenteditable = "plaintext-only"
 	EmContenteditableTrue          EmContenteditable = "true"
-	EmContenteditableFalse         EmContenteditable = "false"
 	EmContenteditableEmpty         EmContenteditable = ""
 )
 
 type EmDir string
 
 const (
+	EmDirAuto EmDir = "auto"
 	EmDirLtr  EmDir = "ltr"
 	EmDirRtl  EmDir = "rtl"
-	EmDirAuto EmDir = "auto"
 )
 
 type EmDraggable string
 
 const (
-	EmDraggableTrue  EmDraggable = "true"
 	EmDraggableFalse EmDraggable = "false"
+	EmDraggableTrue  EmDraggable = "true"
 )
 
 type EmEnterkeyhint string
 
 const (
+	EmEnterkeyhintGo       EmEnterkeyhint = "go"
+	EmEnterkeyhintNext     EmEnterkeyhint = "next"
+	EmEnterkeyhintPrevious EmEnterkeyhint = "previous"
 	EmEnterkeyhintSearch   EmEnterkeyhint = "search"
 	EmEnterkeyhintSend     EmEnterkeyhint = "send"
 	EmEnterkeyhintDone     EmEnterkeyhint = "done"
 	EmEnterkeyhintEnter    EmEnterkeyhint = "enter"
-	EmEnterkeyhintGo       EmEnterkeyhint = "go"
-	EmEnterkeyhintNext     EmEnterkeyhint = "next"
-	EmEnterkeyhintPrevious EmEnterkeyhint = "previous"
 )
 
 type EmHidden string
@@ -114,6 +121,7 @@ const (
 type EmInputmode string
 
 const (
+	EmInputmodeNone    EmInputmode = "none"
 	EmInputmodeNumeric EmInputmode = "numeric"
 	EmInputmodeSearch  EmInputmode = "search"
 	EmInputmodeTel     EmInputmode = "tel"
@@ -121,14 +129,13 @@ const (
 	EmInputmodeUrl     EmInputmode = "url"
 	EmInputmodeDecimal EmInputmode = "decimal"
 	EmInputmodeEmail   EmInputmode = "email"
-	EmInputmodeNone    EmInputmode = "none"
 )
 
 type EmSpellcheck string
 
 const (
-	EmSpellcheckFalse EmSpellcheck = "false"
 	EmSpellcheckTrue  EmSpellcheck = "true"
+	EmSpellcheckFalse EmSpellcheck = "false"
 	EmSpellcheckEmpty EmSpellcheck = ""
 )
 
@@ -143,8 +150,8 @@ const (
 type EmWritingsuggestions string
 
 const (
-	EmWritingsuggestionsFalse EmWritingsuggestions = "false"
 	EmWritingsuggestionsTrue  EmWritingsuggestions = "true"
+	EmWritingsuggestionsFalse EmWritingsuggestions = "false"
 	EmWritingsuggestionsEmpty EmWritingsuggestions = ""
 )
 

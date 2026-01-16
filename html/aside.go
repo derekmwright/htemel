@@ -48,22 +48,29 @@ func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideEle
 	return Aside(false)
 }
 
+// Children appends children to this element.
+func (e *AsideElement) Children(children ...htemel.Node) *AsideElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type AsideAutocapitalize string
 
 const (
-	AsideAutocapitalizeOff        AsideAutocapitalize = "off"
-	AsideAutocapitalizeOn         AsideAutocapitalize = "on"
-	AsideAutocapitalizeSentences  AsideAutocapitalize = "sentences"
 	AsideAutocapitalizeWords      AsideAutocapitalize = "words"
 	AsideAutocapitalizeCharacters AsideAutocapitalize = "characters"
 	AsideAutocapitalizeNone       AsideAutocapitalize = "none"
+	AsideAutocapitalizeOff        AsideAutocapitalize = "off"
+	AsideAutocapitalizeOn         AsideAutocapitalize = "on"
+	AsideAutocapitalizeSentences  AsideAutocapitalize = "sentences"
 )
 
 type AsideAutocorrect string
 
 const (
-	AsideAutocorrectOn    AsideAutocorrect = "on"
 	AsideAutocorrectOff   AsideAutocorrect = "off"
+	AsideAutocorrectOn    AsideAutocorrect = "on"
 	AsideAutocorrectEmpty AsideAutocorrect = ""
 )
 
@@ -87,34 +94,33 @@ const (
 type AsideDraggable string
 
 const (
-	AsideDraggableTrue  AsideDraggable = "true"
 	AsideDraggableFalse AsideDraggable = "false"
+	AsideDraggableTrue  AsideDraggable = "true"
 )
 
 type AsideEnterkeyhint string
 
 const (
+	AsideEnterkeyhintGo       AsideEnterkeyhint = "go"
 	AsideEnterkeyhintNext     AsideEnterkeyhint = "next"
 	AsideEnterkeyhintPrevious AsideEnterkeyhint = "previous"
 	AsideEnterkeyhintSearch   AsideEnterkeyhint = "search"
 	AsideEnterkeyhintSend     AsideEnterkeyhint = "send"
 	AsideEnterkeyhintDone     AsideEnterkeyhint = "done"
 	AsideEnterkeyhintEnter    AsideEnterkeyhint = "enter"
-	AsideEnterkeyhintGo       AsideEnterkeyhint = "go"
 )
 
 type AsideHidden string
 
 const (
-	AsideHiddenHidden     AsideHidden = "hidden"
 	AsideHiddenUntilFound AsideHidden = "until-found"
+	AsideHiddenHidden     AsideHidden = "hidden"
 	AsideHiddenEmpty      AsideHidden = ""
 )
 
 type AsideInputmode string
 
 const (
-	AsideInputmodeUrl     AsideInputmode = "url"
 	AsideInputmodeDecimal AsideInputmode = "decimal"
 	AsideInputmodeEmail   AsideInputmode = "email"
 	AsideInputmodeNone    AsideInputmode = "none"
@@ -122,6 +128,7 @@ const (
 	AsideInputmodeSearch  AsideInputmode = "search"
 	AsideInputmodeTel     AsideInputmode = "tel"
 	AsideInputmodeText    AsideInputmode = "text"
+	AsideInputmodeUrl     AsideInputmode = "url"
 )
 
 type AsideSpellcheck string

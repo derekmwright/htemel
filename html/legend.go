@@ -48,15 +48,22 @@ func LegendTernary(condition bool, true htemel.Node, false htemel.Node) *LegendE
 	return Legend(false)
 }
 
+// Children appends children to this element.
+func (e *LegendElement) Children(children ...htemel.Node) *LegendElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type LegendAutocapitalize string
 
 const (
+	LegendAutocapitalizeWords      LegendAutocapitalize = "words"
 	LegendAutocapitalizeCharacters LegendAutocapitalize = "characters"
 	LegendAutocapitalizeNone       LegendAutocapitalize = "none"
 	LegendAutocapitalizeOff        LegendAutocapitalize = "off"
 	LegendAutocapitalizeOn         LegendAutocapitalize = "on"
 	LegendAutocapitalizeSentences  LegendAutocapitalize = "sentences"
-	LegendAutocapitalizeWords      LegendAutocapitalize = "words"
 )
 
 type LegendAutocorrect string
@@ -87,8 +94,8 @@ const (
 type LegendDraggable string
 
 const (
-	LegendDraggableFalse LegendDraggable = "false"
 	LegendDraggableTrue  LegendDraggable = "true"
+	LegendDraggableFalse LegendDraggable = "false"
 )
 
 type LegendEnterkeyhint string
@@ -106,22 +113,22 @@ const (
 type LegendHidden string
 
 const (
-	LegendHiddenHidden     LegendHidden = "hidden"
 	LegendHiddenUntilFound LegendHidden = "until-found"
+	LegendHiddenHidden     LegendHidden = "hidden"
 	LegendHiddenEmpty      LegendHidden = ""
 )
 
 type LegendInputmode string
 
 const (
-	LegendInputmodeEmail   LegendInputmode = "email"
-	LegendInputmodeNone    LegendInputmode = "none"
-	LegendInputmodeNumeric LegendInputmode = "numeric"
-	LegendInputmodeSearch  LegendInputmode = "search"
 	LegendInputmodeTel     LegendInputmode = "tel"
 	LegendInputmodeText    LegendInputmode = "text"
 	LegendInputmodeUrl     LegendInputmode = "url"
 	LegendInputmodeDecimal LegendInputmode = "decimal"
+	LegendInputmodeEmail   LegendInputmode = "email"
+	LegendInputmodeNone    LegendInputmode = "none"
+	LegendInputmodeNumeric LegendInputmode = "numeric"
+	LegendInputmodeSearch  LegendInputmode = "search"
 )
 
 type LegendSpellcheck string

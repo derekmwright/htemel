@@ -48,15 +48,22 @@ func PictureTernary(condition bool, true htemel.Node, false htemel.Node) *Pictur
 	return Picture(false)
 }
 
+// Children appends children to this element.
+func (e *PictureElement) Children(children ...htemel.Node) *PictureElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type PictureAutocapitalize string
 
 const (
-	PictureAutocapitalizeOff        PictureAutocapitalize = "off"
-	PictureAutocapitalizeOn         PictureAutocapitalize = "on"
-	PictureAutocapitalizeSentences  PictureAutocapitalize = "sentences"
 	PictureAutocapitalizeWords      PictureAutocapitalize = "words"
 	PictureAutocapitalizeCharacters PictureAutocapitalize = "characters"
 	PictureAutocapitalizeNone       PictureAutocapitalize = "none"
+	PictureAutocapitalizeOff        PictureAutocapitalize = "off"
+	PictureAutocapitalizeOn         PictureAutocapitalize = "on"
+	PictureAutocapitalizeSentences  PictureAutocapitalize = "sentences"
 )
 
 type PictureAutocorrect string
@@ -70,9 +77,9 @@ const (
 type PictureContenteditable string
 
 const (
+	PictureContenteditablePlaintextOnly PictureContenteditable = "plaintext-only"
 	PictureContenteditableTrue          PictureContenteditable = "true"
 	PictureContenteditableFalse         PictureContenteditable = "false"
-	PictureContenteditablePlaintextOnly PictureContenteditable = "plaintext-only"
 	PictureContenteditableEmpty         PictureContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type PictureEnterkeyhint string
 
 const (
-	PictureEnterkeyhintDone     PictureEnterkeyhint = "done"
 	PictureEnterkeyhintEnter    PictureEnterkeyhint = "enter"
 	PictureEnterkeyhintGo       PictureEnterkeyhint = "go"
 	PictureEnterkeyhintNext     PictureEnterkeyhint = "next"
 	PictureEnterkeyhintPrevious PictureEnterkeyhint = "previous"
 	PictureEnterkeyhintSearch   PictureEnterkeyhint = "search"
 	PictureEnterkeyhintSend     PictureEnterkeyhint = "send"
+	PictureEnterkeyhintDone     PictureEnterkeyhint = "done"
 )
 
 type PictureHidden string
@@ -114,14 +121,14 @@ const (
 type PictureInputmode string
 
 const (
-	PictureInputmodeTel     PictureInputmode = "tel"
-	PictureInputmodeText    PictureInputmode = "text"
 	PictureInputmodeUrl     PictureInputmode = "url"
 	PictureInputmodeDecimal PictureInputmode = "decimal"
 	PictureInputmodeEmail   PictureInputmode = "email"
 	PictureInputmodeNone    PictureInputmode = "none"
 	PictureInputmodeNumeric PictureInputmode = "numeric"
 	PictureInputmodeSearch  PictureInputmode = "search"
+	PictureInputmodeTel     PictureInputmode = "tel"
+	PictureInputmodeText    PictureInputmode = "text"
 )
 
 type PictureSpellcheck string
@@ -143,8 +150,8 @@ const (
 type PictureWritingsuggestions string
 
 const (
-	PictureWritingsuggestionsFalse PictureWritingsuggestions = "false"
 	PictureWritingsuggestionsTrue  PictureWritingsuggestions = "true"
+	PictureWritingsuggestionsFalse PictureWritingsuggestions = "false"
 	PictureWritingsuggestionsEmpty PictureWritingsuggestions = ""
 )
 

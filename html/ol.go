@@ -48,22 +48,29 @@ func OlTernary(condition bool, true htemel.Node, false htemel.Node) *OlElement {
 	return Ol(false)
 }
 
+// Children appends children to this element.
+func (e *OlElement) Children(children ...htemel.Node) *OlElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type OlAutocapitalize string
 
 const (
-	OlAutocapitalizeOff        OlAutocapitalize = "off"
 	OlAutocapitalizeOn         OlAutocapitalize = "on"
 	OlAutocapitalizeSentences  OlAutocapitalize = "sentences"
 	OlAutocapitalizeWords      OlAutocapitalize = "words"
 	OlAutocapitalizeCharacters OlAutocapitalize = "characters"
 	OlAutocapitalizeNone       OlAutocapitalize = "none"
+	OlAutocapitalizeOff        OlAutocapitalize = "off"
 )
 
 type OlAutocorrect string
 
 const (
-	OlAutocorrectOn    OlAutocorrect = "on"
 	OlAutocorrectOff   OlAutocorrect = "off"
+	OlAutocorrectOn    OlAutocorrect = "on"
 	OlAutocorrectEmpty OlAutocorrect = ""
 )
 
@@ -79,9 +86,9 @@ const (
 type OlDir string
 
 const (
-	OlDirRtl  OlDir = "rtl"
 	OlDirAuto OlDir = "auto"
 	OlDirLtr  OlDir = "ltr"
+	OlDirRtl  OlDir = "rtl"
 )
 
 type OlDraggable string
@@ -94,13 +101,13 @@ const (
 type OlEnterkeyhint string
 
 const (
-	OlEnterkeyhintDone     OlEnterkeyhint = "done"
-	OlEnterkeyhintEnter    OlEnterkeyhint = "enter"
-	OlEnterkeyhintGo       OlEnterkeyhint = "go"
 	OlEnterkeyhintNext     OlEnterkeyhint = "next"
 	OlEnterkeyhintPrevious OlEnterkeyhint = "previous"
 	OlEnterkeyhintSearch   OlEnterkeyhint = "search"
 	OlEnterkeyhintSend     OlEnterkeyhint = "send"
+	OlEnterkeyhintDone     OlEnterkeyhint = "done"
+	OlEnterkeyhintEnter    OlEnterkeyhint = "enter"
+	OlEnterkeyhintGo       OlEnterkeyhint = "go"
 )
 
 type OlHidden string
@@ -114,6 +121,7 @@ const (
 type OlInputmode string
 
 const (
+	OlInputmodeDecimal OlInputmode = "decimal"
 	OlInputmodeEmail   OlInputmode = "email"
 	OlInputmodeNone    OlInputmode = "none"
 	OlInputmodeNumeric OlInputmode = "numeric"
@@ -121,7 +129,6 @@ const (
 	OlInputmodeTel     OlInputmode = "tel"
 	OlInputmodeText    OlInputmode = "text"
 	OlInputmodeUrl     OlInputmode = "url"
-	OlInputmodeDecimal OlInputmode = "decimal"
 )
 
 type OlSpellcheck string

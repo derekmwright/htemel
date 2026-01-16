@@ -48,29 +48,36 @@ func TemplateTernary(condition bool, true htemel.Node, false htemel.Node) *Templ
 	return Template(false)
 }
 
+// Children appends children to this element.
+func (e *TemplateElement) Children(children ...htemel.Node) *TemplateElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type TemplateShadowrootmode string
 
 const (
-	TemplateShadowrootmodeOpen   TemplateShadowrootmode = "open"
 	TemplateShadowrootmodeClosed TemplateShadowrootmode = "closed"
+	TemplateShadowrootmodeOpen   TemplateShadowrootmode = "open"
 )
 
 type TemplateAutocapitalize string
 
 const (
-	TemplateAutocapitalizeSentences  TemplateAutocapitalize = "sentences"
-	TemplateAutocapitalizeWords      TemplateAutocapitalize = "words"
 	TemplateAutocapitalizeCharacters TemplateAutocapitalize = "characters"
 	TemplateAutocapitalizeNone       TemplateAutocapitalize = "none"
 	TemplateAutocapitalizeOff        TemplateAutocapitalize = "off"
 	TemplateAutocapitalizeOn         TemplateAutocapitalize = "on"
+	TemplateAutocapitalizeSentences  TemplateAutocapitalize = "sentences"
+	TemplateAutocapitalizeWords      TemplateAutocapitalize = "words"
 )
 
 type TemplateAutocorrect string
 
 const (
-	TemplateAutocorrectOn    TemplateAutocorrect = "on"
 	TemplateAutocorrectOff   TemplateAutocorrect = "off"
+	TemplateAutocorrectOn    TemplateAutocorrect = "on"
 	TemplateAutocorrectEmpty TemplateAutocorrect = ""
 )
 
@@ -101,27 +108,26 @@ const (
 type TemplateEnterkeyhint string
 
 const (
+	TemplateEnterkeyhintSend     TemplateEnterkeyhint = "send"
+	TemplateEnterkeyhintDone     TemplateEnterkeyhint = "done"
+	TemplateEnterkeyhintEnter    TemplateEnterkeyhint = "enter"
 	TemplateEnterkeyhintGo       TemplateEnterkeyhint = "go"
 	TemplateEnterkeyhintNext     TemplateEnterkeyhint = "next"
 	TemplateEnterkeyhintPrevious TemplateEnterkeyhint = "previous"
 	TemplateEnterkeyhintSearch   TemplateEnterkeyhint = "search"
-	TemplateEnterkeyhintSend     TemplateEnterkeyhint = "send"
-	TemplateEnterkeyhintDone     TemplateEnterkeyhint = "done"
-	TemplateEnterkeyhintEnter    TemplateEnterkeyhint = "enter"
 )
 
 type TemplateHidden string
 
 const (
-	TemplateHiddenUntilFound TemplateHidden = "until-found"
 	TemplateHiddenHidden     TemplateHidden = "hidden"
+	TemplateHiddenUntilFound TemplateHidden = "until-found"
 	TemplateHiddenEmpty      TemplateHidden = ""
 )
 
 type TemplateInputmode string
 
 const (
-	TemplateInputmodeNumeric TemplateInputmode = "numeric"
 	TemplateInputmodeSearch  TemplateInputmode = "search"
 	TemplateInputmodeTel     TemplateInputmode = "tel"
 	TemplateInputmodeText    TemplateInputmode = "text"
@@ -129,6 +135,7 @@ const (
 	TemplateInputmodeDecimal TemplateInputmode = "decimal"
 	TemplateInputmodeEmail   TemplateInputmode = "email"
 	TemplateInputmodeNone    TemplateInputmode = "none"
+	TemplateInputmodeNumeric TemplateInputmode = "numeric"
 )
 
 type TemplateSpellcheck string

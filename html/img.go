@@ -58,27 +58,27 @@ const (
 type ImgLoading string
 
 const (
-	ImgLoadingLazy  ImgLoading = "lazy"
 	ImgLoadingEager ImgLoading = "eager"
+	ImgLoadingLazy  ImgLoading = "lazy"
 )
 
 type ImgFetchpriority string
 
 const (
-	ImgFetchpriorityAuto ImgFetchpriority = "auto"
 	ImgFetchpriorityHigh ImgFetchpriority = "high"
 	ImgFetchpriorityLow  ImgFetchpriority = "low"
+	ImgFetchpriorityAuto ImgFetchpriority = "auto"
 )
 
 type ImgAutocapitalize string
 
 const (
-	ImgAutocapitalizeWords      ImgAutocapitalize = "words"
-	ImgAutocapitalizeCharacters ImgAutocapitalize = "characters"
 	ImgAutocapitalizeNone       ImgAutocapitalize = "none"
 	ImgAutocapitalizeOff        ImgAutocapitalize = "off"
 	ImgAutocapitalizeOn         ImgAutocapitalize = "on"
 	ImgAutocapitalizeSentences  ImgAutocapitalize = "sentences"
+	ImgAutocapitalizeWords      ImgAutocapitalize = "words"
+	ImgAutocapitalizeCharacters ImgAutocapitalize = "characters"
 )
 
 type ImgAutocorrect string
@@ -92,18 +92,18 @@ const (
 type ImgContenteditable string
 
 const (
+	ImgContenteditablePlaintextOnly ImgContenteditable = "plaintext-only"
 	ImgContenteditableTrue          ImgContenteditable = "true"
 	ImgContenteditableFalse         ImgContenteditable = "false"
-	ImgContenteditablePlaintextOnly ImgContenteditable = "plaintext-only"
 	ImgContenteditableEmpty         ImgContenteditable = ""
 )
 
 type ImgDir string
 
 const (
+	ImgDirAuto ImgDir = "auto"
 	ImgDirLtr  ImgDir = "ltr"
 	ImgDirRtl  ImgDir = "rtl"
-	ImgDirAuto ImgDir = "auto"
 )
 
 type ImgDraggable string
@@ -136,14 +136,14 @@ const (
 type ImgInputmode string
 
 const (
-	ImgInputmodeNone    ImgInputmode = "none"
-	ImgInputmodeNumeric ImgInputmode = "numeric"
 	ImgInputmodeSearch  ImgInputmode = "search"
 	ImgInputmodeTel     ImgInputmode = "tel"
 	ImgInputmodeText    ImgInputmode = "text"
 	ImgInputmodeUrl     ImgInputmode = "url"
 	ImgInputmodeDecimal ImgInputmode = "decimal"
 	ImgInputmodeEmail   ImgInputmode = "email"
+	ImgInputmodeNone    ImgInputmode = "none"
+	ImgInputmodeNumeric ImgInputmode = "numeric"
 )
 
 type ImgSpellcheck string

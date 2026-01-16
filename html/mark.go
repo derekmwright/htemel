@@ -48,15 +48,22 @@ func MarkTernary(condition bool, true htemel.Node, false htemel.Node) *MarkEleme
 	return Mark(false)
 }
 
+// Children appends children to this element.
+func (e *MarkElement) Children(children ...htemel.Node) *MarkElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type MarkAutocapitalize string
 
 const (
-	MarkAutocapitalizeWords      MarkAutocapitalize = "words"
 	MarkAutocapitalizeCharacters MarkAutocapitalize = "characters"
 	MarkAutocapitalizeNone       MarkAutocapitalize = "none"
 	MarkAutocapitalizeOff        MarkAutocapitalize = "off"
 	MarkAutocapitalizeOn         MarkAutocapitalize = "on"
 	MarkAutocapitalizeSentences  MarkAutocapitalize = "sentences"
+	MarkAutocapitalizeWords      MarkAutocapitalize = "words"
 )
 
 type MarkAutocorrect string
@@ -79,16 +86,16 @@ const (
 type MarkDir string
 
 const (
+	MarkDirAuto MarkDir = "auto"
 	MarkDirLtr  MarkDir = "ltr"
 	MarkDirRtl  MarkDir = "rtl"
-	MarkDirAuto MarkDir = "auto"
 )
 
 type MarkDraggable string
 
 const (
-	MarkDraggableFalse MarkDraggable = "false"
 	MarkDraggableTrue  MarkDraggable = "true"
+	MarkDraggableFalse MarkDraggable = "false"
 )
 
 type MarkEnterkeyhint string
@@ -106,8 +113,8 @@ const (
 type MarkHidden string
 
 const (
-	MarkHiddenUntilFound MarkHidden = "until-found"
 	MarkHiddenHidden     MarkHidden = "hidden"
+	MarkHiddenUntilFound MarkHidden = "until-found"
 	MarkHiddenEmpty      MarkHidden = ""
 )
 
@@ -143,8 +150,8 @@ const (
 type MarkWritingsuggestions string
 
 const (
-	MarkWritingsuggestionsFalse MarkWritingsuggestions = "false"
 	MarkWritingsuggestionsTrue  MarkWritingsuggestions = "true"
+	MarkWritingsuggestionsFalse MarkWritingsuggestions = "false"
 	MarkWritingsuggestionsEmpty MarkWritingsuggestions = ""
 )
 

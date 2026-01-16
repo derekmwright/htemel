@@ -48,15 +48,22 @@ func H3Ternary(condition bool, true htemel.Node, false htemel.Node) *H3Element {
 	return H3(false)
 }
 
+// Children appends children to this element.
+func (e *H3Element) Children(children ...htemel.Node) *H3Element {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type H3Autocapitalize string
 
 const (
+	H3AutocapitalizeWords      H3Autocapitalize = "words"
+	H3AutocapitalizeCharacters H3Autocapitalize = "characters"
 	H3AutocapitalizeNone       H3Autocapitalize = "none"
 	H3AutocapitalizeOff        H3Autocapitalize = "off"
 	H3AutocapitalizeOn         H3Autocapitalize = "on"
 	H3AutocapitalizeSentences  H3Autocapitalize = "sentences"
-	H3AutocapitalizeWords      H3Autocapitalize = "words"
-	H3AutocapitalizeCharacters H3Autocapitalize = "characters"
 )
 
 type H3Autocorrect string
@@ -94,13 +101,13 @@ const (
 type H3Enterkeyhint string
 
 const (
-	H3EnterkeyhintEnter    H3Enterkeyhint = "enter"
-	H3EnterkeyhintGo       H3Enterkeyhint = "go"
-	H3EnterkeyhintNext     H3Enterkeyhint = "next"
 	H3EnterkeyhintPrevious H3Enterkeyhint = "previous"
 	H3EnterkeyhintSearch   H3Enterkeyhint = "search"
 	H3EnterkeyhintSend     H3Enterkeyhint = "send"
 	H3EnterkeyhintDone     H3Enterkeyhint = "done"
+	H3EnterkeyhintEnter    H3Enterkeyhint = "enter"
+	H3EnterkeyhintGo       H3Enterkeyhint = "go"
+	H3EnterkeyhintNext     H3Enterkeyhint = "next"
 )
 
 type H3Hidden string
@@ -135,16 +142,16 @@ const (
 type H3Translate string
 
 const (
-	H3TranslateNo    H3Translate = "no"
 	H3TranslateYes   H3Translate = "yes"
+	H3TranslateNo    H3Translate = "no"
 	H3TranslateEmpty H3Translate = ""
 )
 
 type H3Writingsuggestions string
 
 const (
-	H3WritingsuggestionsFalse H3Writingsuggestions = "false"
 	H3WritingsuggestionsTrue  H3Writingsuggestions = "true"
+	H3WritingsuggestionsFalse H3Writingsuggestions = "false"
 	H3WritingsuggestionsEmpty H3Writingsuggestions = ""
 )
 

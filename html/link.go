@@ -56,20 +56,20 @@ const (
 type LinkFetchpriority string
 
 const (
+	LinkFetchpriorityLow  LinkFetchpriority = "low"
 	LinkFetchpriorityAuto LinkFetchpriority = "auto"
 	LinkFetchpriorityHigh LinkFetchpriority = "high"
-	LinkFetchpriorityLow  LinkFetchpriority = "low"
 )
 
 type LinkAutocapitalize string
 
 const (
-	LinkAutocapitalizeOff        LinkAutocapitalize = "off"
 	LinkAutocapitalizeOn         LinkAutocapitalize = "on"
 	LinkAutocapitalizeSentences  LinkAutocapitalize = "sentences"
 	LinkAutocapitalizeWords      LinkAutocapitalize = "words"
 	LinkAutocapitalizeCharacters LinkAutocapitalize = "characters"
 	LinkAutocapitalizeNone       LinkAutocapitalize = "none"
+	LinkAutocapitalizeOff        LinkAutocapitalize = "off"
 )
 
 type LinkAutocorrect string
@@ -83,9 +83,9 @@ const (
 type LinkContenteditable string
 
 const (
-	LinkContenteditableTrue          LinkContenteditable = "true"
 	LinkContenteditableFalse         LinkContenteditable = "false"
 	LinkContenteditablePlaintextOnly LinkContenteditable = "plaintext-only"
+	LinkContenteditableTrue          LinkContenteditable = "true"
 	LinkContenteditableEmpty         LinkContenteditable = ""
 )
 
@@ -107,13 +107,13 @@ const (
 type LinkEnterkeyhint string
 
 const (
+	LinkEnterkeyhintNext     LinkEnterkeyhint = "next"
+	LinkEnterkeyhintPrevious LinkEnterkeyhint = "previous"
+	LinkEnterkeyhintSearch   LinkEnterkeyhint = "search"
 	LinkEnterkeyhintSend     LinkEnterkeyhint = "send"
 	LinkEnterkeyhintDone     LinkEnterkeyhint = "done"
 	LinkEnterkeyhintEnter    LinkEnterkeyhint = "enter"
 	LinkEnterkeyhintGo       LinkEnterkeyhint = "go"
-	LinkEnterkeyhintNext     LinkEnterkeyhint = "next"
-	LinkEnterkeyhintPrevious LinkEnterkeyhint = "previous"
-	LinkEnterkeyhintSearch   LinkEnterkeyhint = "search"
 )
 
 type LinkHidden string
@@ -127,6 +127,7 @@ const (
 type LinkInputmode string
 
 const (
+	LinkInputmodeText    LinkInputmode = "text"
 	LinkInputmodeUrl     LinkInputmode = "url"
 	LinkInputmodeDecimal LinkInputmode = "decimal"
 	LinkInputmodeEmail   LinkInputmode = "email"
@@ -134,7 +135,6 @@ const (
 	LinkInputmodeNumeric LinkInputmode = "numeric"
 	LinkInputmodeSearch  LinkInputmode = "search"
 	LinkInputmodeTel     LinkInputmode = "tel"
-	LinkInputmodeText    LinkInputmode = "text"
 )
 
 type LinkSpellcheck string

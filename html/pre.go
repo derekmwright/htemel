@@ -48,15 +48,22 @@ func PreTernary(condition bool, true htemel.Node, false htemel.Node) *PreElement
 	return Pre(false)
 }
 
+// Children appends children to this element.
+func (e *PreElement) Children(children ...htemel.Node) *PreElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type PreAutocapitalize string
 
 const (
-	PreAutocapitalizeCharacters PreAutocapitalize = "characters"
-	PreAutocapitalizeNone       PreAutocapitalize = "none"
-	PreAutocapitalizeOff        PreAutocapitalize = "off"
 	PreAutocapitalizeOn         PreAutocapitalize = "on"
 	PreAutocapitalizeSentences  PreAutocapitalize = "sentences"
 	PreAutocapitalizeWords      PreAutocapitalize = "words"
+	PreAutocapitalizeCharacters PreAutocapitalize = "characters"
+	PreAutocapitalizeNone       PreAutocapitalize = "none"
+	PreAutocapitalizeOff        PreAutocapitalize = "off"
 )
 
 type PreAutocorrect string
@@ -79,28 +86,28 @@ const (
 type PreDir string
 
 const (
+	PreDirLtr  PreDir = "ltr"
 	PreDirRtl  PreDir = "rtl"
 	PreDirAuto PreDir = "auto"
-	PreDirLtr  PreDir = "ltr"
 )
 
 type PreDraggable string
 
 const (
-	PreDraggableFalse PreDraggable = "false"
 	PreDraggableTrue  PreDraggable = "true"
+	PreDraggableFalse PreDraggable = "false"
 )
 
 type PreEnterkeyhint string
 
 const (
+	PreEnterkeyhintDone     PreEnterkeyhint = "done"
+	PreEnterkeyhintEnter    PreEnterkeyhint = "enter"
+	PreEnterkeyhintGo       PreEnterkeyhint = "go"
 	PreEnterkeyhintNext     PreEnterkeyhint = "next"
 	PreEnterkeyhintPrevious PreEnterkeyhint = "previous"
 	PreEnterkeyhintSearch   PreEnterkeyhint = "search"
 	PreEnterkeyhintSend     PreEnterkeyhint = "send"
-	PreEnterkeyhintDone     PreEnterkeyhint = "done"
-	PreEnterkeyhintEnter    PreEnterkeyhint = "enter"
-	PreEnterkeyhintGo       PreEnterkeyhint = "go"
 )
 
 type PreHidden string
@@ -143,8 +150,8 @@ const (
 type PreWritingsuggestions string
 
 const (
-	PreWritingsuggestionsTrue  PreWritingsuggestions = "true"
 	PreWritingsuggestionsFalse PreWritingsuggestions = "false"
+	PreWritingsuggestionsTrue  PreWritingsuggestions = "true"
 	PreWritingsuggestionsEmpty PreWritingsuggestions = ""
 )
 

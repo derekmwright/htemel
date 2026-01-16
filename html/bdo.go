@@ -48,15 +48,22 @@ func BdoTernary(condition bool, true htemel.Node, false htemel.Node) *BdoElement
 	return Bdo(false)
 }
 
+// Children appends children to this element.
+func (e *BdoElement) Children(children ...htemel.Node) *BdoElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type BdoAutocapitalize string
 
 const (
+	BdoAutocapitalizeCharacters BdoAutocapitalize = "characters"
+	BdoAutocapitalizeNone       BdoAutocapitalize = "none"
 	BdoAutocapitalizeOff        BdoAutocapitalize = "off"
 	BdoAutocapitalizeOn         BdoAutocapitalize = "on"
 	BdoAutocapitalizeSentences  BdoAutocapitalize = "sentences"
 	BdoAutocapitalizeWords      BdoAutocapitalize = "words"
-	BdoAutocapitalizeCharacters BdoAutocapitalize = "characters"
-	BdoAutocapitalizeNone       BdoAutocapitalize = "none"
 )
 
 type BdoAutocorrect string
@@ -70,18 +77,18 @@ const (
 type BdoContenteditable string
 
 const (
-	BdoContenteditableFalse         BdoContenteditable = "false"
 	BdoContenteditablePlaintextOnly BdoContenteditable = "plaintext-only"
 	BdoContenteditableTrue          BdoContenteditable = "true"
+	BdoContenteditableFalse         BdoContenteditable = "false"
 	BdoContenteditableEmpty         BdoContenteditable = ""
 )
 
 type BdoDir string
 
 const (
+	BdoDirAuto BdoDir = "auto"
 	BdoDirLtr  BdoDir = "ltr"
 	BdoDirRtl  BdoDir = "rtl"
-	BdoDirAuto BdoDir = "auto"
 )
 
 type BdoDraggable string
@@ -94,13 +101,13 @@ const (
 type BdoEnterkeyhint string
 
 const (
-	BdoEnterkeyhintNext     BdoEnterkeyhint = "next"
 	BdoEnterkeyhintPrevious BdoEnterkeyhint = "previous"
 	BdoEnterkeyhintSearch   BdoEnterkeyhint = "search"
 	BdoEnterkeyhintSend     BdoEnterkeyhint = "send"
 	BdoEnterkeyhintDone     BdoEnterkeyhint = "done"
 	BdoEnterkeyhintEnter    BdoEnterkeyhint = "enter"
 	BdoEnterkeyhintGo       BdoEnterkeyhint = "go"
+	BdoEnterkeyhintNext     BdoEnterkeyhint = "next"
 )
 
 type BdoHidden string
@@ -127,8 +134,8 @@ const (
 type BdoSpellcheck string
 
 const (
-	BdoSpellcheckTrue  BdoSpellcheck = "true"
 	BdoSpellcheckFalse BdoSpellcheck = "false"
+	BdoSpellcheckTrue  BdoSpellcheck = "true"
 	BdoSpellcheckEmpty BdoSpellcheck = ""
 )
 

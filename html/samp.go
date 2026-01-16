@@ -48,15 +48,22 @@ func SampTernary(condition bool, true htemel.Node, false htemel.Node) *SampEleme
 	return Samp(false)
 }
 
+// Children appends children to this element.
+func (e *SampElement) Children(children ...htemel.Node) *SampElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SampAutocapitalize string
 
 const (
-	SampAutocapitalizeCharacters SampAutocapitalize = "characters"
-	SampAutocapitalizeNone       SampAutocapitalize = "none"
-	SampAutocapitalizeOff        SampAutocapitalize = "off"
 	SampAutocapitalizeOn         SampAutocapitalize = "on"
 	SampAutocapitalizeSentences  SampAutocapitalize = "sentences"
 	SampAutocapitalizeWords      SampAutocapitalize = "words"
+	SampAutocapitalizeCharacters SampAutocapitalize = "characters"
+	SampAutocapitalizeNone       SampAutocapitalize = "none"
+	SampAutocapitalizeOff        SampAutocapitalize = "off"
 )
 
 type SampAutocorrect string
@@ -70,18 +77,18 @@ const (
 type SampContenteditable string
 
 const (
-	SampContenteditableFalse         SampContenteditable = "false"
 	SampContenteditablePlaintextOnly SampContenteditable = "plaintext-only"
 	SampContenteditableTrue          SampContenteditable = "true"
+	SampContenteditableFalse         SampContenteditable = "false"
 	SampContenteditableEmpty         SampContenteditable = ""
 )
 
 type SampDir string
 
 const (
-	SampDirRtl  SampDir = "rtl"
 	SampDirAuto SampDir = "auto"
 	SampDirLtr  SampDir = "ltr"
+	SampDirRtl  SampDir = "rtl"
 )
 
 type SampDraggable string
@@ -94,26 +101,27 @@ const (
 type SampEnterkeyhint string
 
 const (
-	SampEnterkeyhintDone     SampEnterkeyhint = "done"
 	SampEnterkeyhintEnter    SampEnterkeyhint = "enter"
 	SampEnterkeyhintGo       SampEnterkeyhint = "go"
 	SampEnterkeyhintNext     SampEnterkeyhint = "next"
 	SampEnterkeyhintPrevious SampEnterkeyhint = "previous"
 	SampEnterkeyhintSearch   SampEnterkeyhint = "search"
 	SampEnterkeyhintSend     SampEnterkeyhint = "send"
+	SampEnterkeyhintDone     SampEnterkeyhint = "done"
 )
 
 type SampHidden string
 
 const (
-	SampHiddenHidden     SampHidden = "hidden"
 	SampHiddenUntilFound SampHidden = "until-found"
+	SampHiddenHidden     SampHidden = "hidden"
 	SampHiddenEmpty      SampHidden = ""
 )
 
 type SampInputmode string
 
 const (
+	SampInputmodeUrl     SampInputmode = "url"
 	SampInputmodeDecimal SampInputmode = "decimal"
 	SampInputmodeEmail   SampInputmode = "email"
 	SampInputmodeNone    SampInputmode = "none"
@@ -121,7 +129,6 @@ const (
 	SampInputmodeSearch  SampInputmode = "search"
 	SampInputmodeTel     SampInputmode = "tel"
 	SampInputmodeText    SampInputmode = "text"
-	SampInputmodeUrl     SampInputmode = "url"
 )
 
 type SampSpellcheck string

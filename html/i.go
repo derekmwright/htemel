@@ -48,15 +48,22 @@ func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
 	return I(false)
 }
 
+// Children appends children to this element.
+func (e *IElement) Children(children ...htemel.Node) *IElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type IAutocapitalize string
 
 const (
+	IAutocapitalizeWords      IAutocapitalize = "words"
 	IAutocapitalizeCharacters IAutocapitalize = "characters"
 	IAutocapitalizeNone       IAutocapitalize = "none"
 	IAutocapitalizeOff        IAutocapitalize = "off"
 	IAutocapitalizeOn         IAutocapitalize = "on"
 	IAutocapitalizeSentences  IAutocapitalize = "sentences"
-	IAutocapitalizeWords      IAutocapitalize = "words"
 )
 
 type IAutocorrect string
@@ -94,13 +101,13 @@ const (
 type IEnterkeyhint string
 
 const (
-	IEnterkeyhintSend     IEnterkeyhint = "send"
-	IEnterkeyhintDone     IEnterkeyhint = "done"
-	IEnterkeyhintEnter    IEnterkeyhint = "enter"
 	IEnterkeyhintGo       IEnterkeyhint = "go"
 	IEnterkeyhintNext     IEnterkeyhint = "next"
 	IEnterkeyhintPrevious IEnterkeyhint = "previous"
 	IEnterkeyhintSearch   IEnterkeyhint = "search"
+	IEnterkeyhintSend     IEnterkeyhint = "send"
+	IEnterkeyhintDone     IEnterkeyhint = "done"
+	IEnterkeyhintEnter    IEnterkeyhint = "enter"
 )
 
 type IHidden string
@@ -127,8 +134,8 @@ const (
 type ISpellcheck string
 
 const (
-	ISpellcheckTrue  ISpellcheck = "true"
 	ISpellcheckFalse ISpellcheck = "false"
+	ISpellcheckTrue  ISpellcheck = "true"
 	ISpellcheckEmpty ISpellcheck = ""
 )
 

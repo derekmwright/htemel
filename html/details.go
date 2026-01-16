@@ -48,22 +48,29 @@ func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *Detail
 	return Details(false)
 }
 
+// Children appends children to this element.
+func (e *DetailsElement) Children(children ...htemel.Node) *DetailsElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type DetailsAutocapitalize string
 
 const (
+	DetailsAutocapitalizeWords      DetailsAutocapitalize = "words"
 	DetailsAutocapitalizeCharacters DetailsAutocapitalize = "characters"
 	DetailsAutocapitalizeNone       DetailsAutocapitalize = "none"
 	DetailsAutocapitalizeOff        DetailsAutocapitalize = "off"
 	DetailsAutocapitalizeOn         DetailsAutocapitalize = "on"
 	DetailsAutocapitalizeSentences  DetailsAutocapitalize = "sentences"
-	DetailsAutocapitalizeWords      DetailsAutocapitalize = "words"
 )
 
 type DetailsAutocorrect string
 
 const (
-	DetailsAutocorrectOff   DetailsAutocorrect = "off"
 	DetailsAutocorrectOn    DetailsAutocorrect = "on"
+	DetailsAutocorrectOff   DetailsAutocorrect = "off"
 	DetailsAutocorrectEmpty DetailsAutocorrect = ""
 )
 
@@ -79,9 +86,9 @@ const (
 type DetailsDir string
 
 const (
+	DetailsDirRtl  DetailsDir = "rtl"
 	DetailsDirAuto DetailsDir = "auto"
 	DetailsDirLtr  DetailsDir = "ltr"
-	DetailsDirRtl  DetailsDir = "rtl"
 )
 
 type DetailsDraggable string
@@ -94,13 +101,13 @@ const (
 type DetailsEnterkeyhint string
 
 const (
+	DetailsEnterkeyhintSearch   DetailsEnterkeyhint = "search"
+	DetailsEnterkeyhintSend     DetailsEnterkeyhint = "send"
+	DetailsEnterkeyhintDone     DetailsEnterkeyhint = "done"
 	DetailsEnterkeyhintEnter    DetailsEnterkeyhint = "enter"
 	DetailsEnterkeyhintGo       DetailsEnterkeyhint = "go"
 	DetailsEnterkeyhintNext     DetailsEnterkeyhint = "next"
 	DetailsEnterkeyhintPrevious DetailsEnterkeyhint = "previous"
-	DetailsEnterkeyhintSearch   DetailsEnterkeyhint = "search"
-	DetailsEnterkeyhintSend     DetailsEnterkeyhint = "send"
-	DetailsEnterkeyhintDone     DetailsEnterkeyhint = "done"
 )
 
 type DetailsHidden string
@@ -114,29 +121,29 @@ const (
 type DetailsInputmode string
 
 const (
-	DetailsInputmodeDecimal DetailsInputmode = "decimal"
-	DetailsInputmodeEmail   DetailsInputmode = "email"
-	DetailsInputmodeNone    DetailsInputmode = "none"
 	DetailsInputmodeNumeric DetailsInputmode = "numeric"
 	DetailsInputmodeSearch  DetailsInputmode = "search"
 	DetailsInputmodeTel     DetailsInputmode = "tel"
 	DetailsInputmodeText    DetailsInputmode = "text"
 	DetailsInputmodeUrl     DetailsInputmode = "url"
+	DetailsInputmodeDecimal DetailsInputmode = "decimal"
+	DetailsInputmodeEmail   DetailsInputmode = "email"
+	DetailsInputmodeNone    DetailsInputmode = "none"
 )
 
 type DetailsSpellcheck string
 
 const (
-	DetailsSpellcheckFalse DetailsSpellcheck = "false"
 	DetailsSpellcheckTrue  DetailsSpellcheck = "true"
+	DetailsSpellcheckFalse DetailsSpellcheck = "false"
 	DetailsSpellcheckEmpty DetailsSpellcheck = ""
 )
 
 type DetailsTranslate string
 
 const (
-	DetailsTranslateYes   DetailsTranslate = "yes"
 	DetailsTranslateNo    DetailsTranslate = "no"
+	DetailsTranslateYes   DetailsTranslate = "yes"
 	DetailsTranslateEmpty DetailsTranslate = ""
 )
 

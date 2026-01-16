@@ -48,6 +48,13 @@ func ProgressTernary(condition bool, true htemel.Node, false htemel.Node) *Progr
 	return Progress(false)
 }
 
+// Children appends children to this element.
+func (e *ProgressElement) Children(children ...htemel.Node) *ProgressElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type ProgressAutocapitalize string
 
 const (
@@ -62,8 +69,8 @@ const (
 type ProgressAutocorrect string
 
 const (
-	ProgressAutocorrectOff   ProgressAutocorrect = "off"
 	ProgressAutocorrectOn    ProgressAutocorrect = "on"
+	ProgressAutocorrectOff   ProgressAutocorrect = "off"
 	ProgressAutocorrectEmpty ProgressAutocorrect = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type ProgressEnterkeyhint string
 
 const (
-	ProgressEnterkeyhintDone     ProgressEnterkeyhint = "done"
-	ProgressEnterkeyhintEnter    ProgressEnterkeyhint = "enter"
 	ProgressEnterkeyhintGo       ProgressEnterkeyhint = "go"
 	ProgressEnterkeyhintNext     ProgressEnterkeyhint = "next"
 	ProgressEnterkeyhintPrevious ProgressEnterkeyhint = "previous"
 	ProgressEnterkeyhintSearch   ProgressEnterkeyhint = "search"
 	ProgressEnterkeyhintSend     ProgressEnterkeyhint = "send"
+	ProgressEnterkeyhintDone     ProgressEnterkeyhint = "done"
+	ProgressEnterkeyhintEnter    ProgressEnterkeyhint = "enter"
 )
 
 type ProgressHidden string
@@ -114,7 +121,6 @@ const (
 type ProgressInputmode string
 
 const (
-	ProgressInputmodeText    ProgressInputmode = "text"
 	ProgressInputmodeUrl     ProgressInputmode = "url"
 	ProgressInputmodeDecimal ProgressInputmode = "decimal"
 	ProgressInputmodeEmail   ProgressInputmode = "email"
@@ -122,6 +128,7 @@ const (
 	ProgressInputmodeNumeric ProgressInputmode = "numeric"
 	ProgressInputmodeSearch  ProgressInputmode = "search"
 	ProgressInputmodeTel     ProgressInputmode = "tel"
+	ProgressInputmodeText    ProgressInputmode = "text"
 )
 
 type ProgressSpellcheck string

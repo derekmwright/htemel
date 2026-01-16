@@ -33,30 +33,30 @@ import (
 func MainLayout(children ...Node) Node {
     return Group(
         GenericVoid("!DOCTYPE", map[string]any{"html": nil}),
-        Html(
+        Html().Class("h-dvh bg-gray-200").Lang("en").Children(
             Head(
                 Meta().Charset("UTF-8"),
                 Meta().Name("viewport").Content("width=device-width, initial-scale=1.0"),
                 Title(Text("Example htemel Page")),
                 Link().Href("site.css").Rel("stylesheet"),
             ),
-            Body(
-                children...,
-            ).Id("app-content"),
-        ).Class("h-dvh bg-gray-200").Lang("en"),
+            Body().Id("app-content").Children(children...),
+        ),
     )
 }
 
 func Navigation(menuItems ...Node) Node {
     return Nav(
-        Ul(
+		// Child elements can be added using the Children method
+        Ul().Class("flex list-none").Children(
             Group(menuItems...),
-        ).Class("flex list-none"),
+        ),
     ).Id("main-navigation")
 }
 
 func main() {
     loggedIn := true
+	// Or, if you prefer, children can be passed directly to the base element
     MainLayout(
         DivTernary(
             loggedIn,

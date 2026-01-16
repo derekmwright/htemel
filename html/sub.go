@@ -48,40 +48,47 @@ func SubTernary(condition bool, true htemel.Node, false htemel.Node) *SubElement
 	return Sub(false)
 }
 
+// Children appends children to this element.
+func (e *SubElement) Children(children ...htemel.Node) *SubElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SubAutocapitalize string
 
 const (
+	SubAutocapitalizeOff        SubAutocapitalize = "off"
+	SubAutocapitalizeOn         SubAutocapitalize = "on"
 	SubAutocapitalizeSentences  SubAutocapitalize = "sentences"
 	SubAutocapitalizeWords      SubAutocapitalize = "words"
 	SubAutocapitalizeCharacters SubAutocapitalize = "characters"
 	SubAutocapitalizeNone       SubAutocapitalize = "none"
-	SubAutocapitalizeOff        SubAutocapitalize = "off"
-	SubAutocapitalizeOn         SubAutocapitalize = "on"
 )
 
 type SubAutocorrect string
 
 const (
-	SubAutocorrectOff   SubAutocorrect = "off"
 	SubAutocorrectOn    SubAutocorrect = "on"
+	SubAutocorrectOff   SubAutocorrect = "off"
 	SubAutocorrectEmpty SubAutocorrect = ""
 )
 
 type SubContenteditable string
 
 const (
+	SubContenteditableFalse         SubContenteditable = "false"
 	SubContenteditablePlaintextOnly SubContenteditable = "plaintext-only"
 	SubContenteditableTrue          SubContenteditable = "true"
-	SubContenteditableFalse         SubContenteditable = "false"
 	SubContenteditableEmpty         SubContenteditable = ""
 )
 
 type SubDir string
 
 const (
-	SubDirLtr  SubDir = "ltr"
 	SubDirRtl  SubDir = "rtl"
 	SubDirAuto SubDir = "auto"
+	SubDirLtr  SubDir = "ltr"
 )
 
 type SubDraggable string
@@ -94,13 +101,13 @@ const (
 type SubEnterkeyhint string
 
 const (
+	SubEnterkeyhintSearch   SubEnterkeyhint = "search"
 	SubEnterkeyhintSend     SubEnterkeyhint = "send"
 	SubEnterkeyhintDone     SubEnterkeyhint = "done"
 	SubEnterkeyhintEnter    SubEnterkeyhint = "enter"
 	SubEnterkeyhintGo       SubEnterkeyhint = "go"
 	SubEnterkeyhintNext     SubEnterkeyhint = "next"
 	SubEnterkeyhintPrevious SubEnterkeyhint = "previous"
-	SubEnterkeyhintSearch   SubEnterkeyhint = "search"
 )
 
 type SubHidden string
@@ -114,21 +121,21 @@ const (
 type SubInputmode string
 
 const (
-	SubInputmodeTel     SubInputmode = "tel"
-	SubInputmodeText    SubInputmode = "text"
 	SubInputmodeUrl     SubInputmode = "url"
 	SubInputmodeDecimal SubInputmode = "decimal"
 	SubInputmodeEmail   SubInputmode = "email"
 	SubInputmodeNone    SubInputmode = "none"
 	SubInputmodeNumeric SubInputmode = "numeric"
 	SubInputmodeSearch  SubInputmode = "search"
+	SubInputmodeTel     SubInputmode = "tel"
+	SubInputmodeText    SubInputmode = "text"
 )
 
 type SubSpellcheck string
 
 const (
-	SubSpellcheckFalse SubSpellcheck = "false"
 	SubSpellcheckTrue  SubSpellcheck = "true"
+	SubSpellcheckFalse SubSpellcheck = "false"
 	SubSpellcheckEmpty SubSpellcheck = ""
 )
 

@@ -48,22 +48,29 @@ func FigcaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Fig
 	return Figcaption(false)
 }
 
+// Children appends children to this element.
+func (e *FigcaptionElement) Children(children ...htemel.Node) *FigcaptionElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type FigcaptionAutocapitalize string
 
 const (
+	FigcaptionAutocapitalizeSentences  FigcaptionAutocapitalize = "sentences"
+	FigcaptionAutocapitalizeWords      FigcaptionAutocapitalize = "words"
 	FigcaptionAutocapitalizeCharacters FigcaptionAutocapitalize = "characters"
 	FigcaptionAutocapitalizeNone       FigcaptionAutocapitalize = "none"
 	FigcaptionAutocapitalizeOff        FigcaptionAutocapitalize = "off"
 	FigcaptionAutocapitalizeOn         FigcaptionAutocapitalize = "on"
-	FigcaptionAutocapitalizeSentences  FigcaptionAutocapitalize = "sentences"
-	FigcaptionAutocapitalizeWords      FigcaptionAutocapitalize = "words"
 )
 
 type FigcaptionAutocorrect string
 
 const (
-	FigcaptionAutocorrectOn    FigcaptionAutocorrect = "on"
 	FigcaptionAutocorrectOff   FigcaptionAutocorrect = "off"
+	FigcaptionAutocorrectOn    FigcaptionAutocorrect = "on"
 	FigcaptionAutocorrectEmpty FigcaptionAutocorrect = ""
 )
 
@@ -87,20 +94,20 @@ const (
 type FigcaptionDraggable string
 
 const (
-	FigcaptionDraggableFalse FigcaptionDraggable = "false"
 	FigcaptionDraggableTrue  FigcaptionDraggable = "true"
+	FigcaptionDraggableFalse FigcaptionDraggable = "false"
 )
 
 type FigcaptionEnterkeyhint string
 
 const (
+	FigcaptionEnterkeyhintGo       FigcaptionEnterkeyhint = "go"
+	FigcaptionEnterkeyhintNext     FigcaptionEnterkeyhint = "next"
 	FigcaptionEnterkeyhintPrevious FigcaptionEnterkeyhint = "previous"
 	FigcaptionEnterkeyhintSearch   FigcaptionEnterkeyhint = "search"
 	FigcaptionEnterkeyhintSend     FigcaptionEnterkeyhint = "send"
 	FigcaptionEnterkeyhintDone     FigcaptionEnterkeyhint = "done"
 	FigcaptionEnterkeyhintEnter    FigcaptionEnterkeyhint = "enter"
-	FigcaptionEnterkeyhintGo       FigcaptionEnterkeyhint = "go"
-	FigcaptionEnterkeyhintNext     FigcaptionEnterkeyhint = "next"
 )
 
 type FigcaptionHidden string
@@ -114,14 +121,14 @@ const (
 type FigcaptionInputmode string
 
 const (
-	FigcaptionInputmodeNone    FigcaptionInputmode = "none"
-	FigcaptionInputmodeNumeric FigcaptionInputmode = "numeric"
-	FigcaptionInputmodeSearch  FigcaptionInputmode = "search"
-	FigcaptionInputmodeTel     FigcaptionInputmode = "tel"
 	FigcaptionInputmodeText    FigcaptionInputmode = "text"
 	FigcaptionInputmodeUrl     FigcaptionInputmode = "url"
 	FigcaptionInputmodeDecimal FigcaptionInputmode = "decimal"
 	FigcaptionInputmodeEmail   FigcaptionInputmode = "email"
+	FigcaptionInputmodeNone    FigcaptionInputmode = "none"
+	FigcaptionInputmodeNumeric FigcaptionInputmode = "numeric"
+	FigcaptionInputmodeSearch  FigcaptionInputmode = "search"
+	FigcaptionInputmodeTel     FigcaptionInputmode = "tel"
 )
 
 type FigcaptionSpellcheck string

@@ -53,8 +53,8 @@ const (
 type BaseAutocorrect string
 
 const (
-	BaseAutocorrectOff   BaseAutocorrect = "off"
 	BaseAutocorrectOn    BaseAutocorrect = "on"
+	BaseAutocorrectOff   BaseAutocorrect = "off"
 	BaseAutocorrectEmpty BaseAutocorrect = ""
 )
 
@@ -70,9 +70,9 @@ const (
 type BaseDir string
 
 const (
-	BaseDirRtl  BaseDir = "rtl"
 	BaseDirAuto BaseDir = "auto"
 	BaseDirLtr  BaseDir = "ltr"
+	BaseDirRtl  BaseDir = "rtl"
 )
 
 type BaseDraggable string
@@ -85,13 +85,13 @@ const (
 type BaseEnterkeyhint string
 
 const (
+	BaseEnterkeyhintSearch   BaseEnterkeyhint = "search"
+	BaseEnterkeyhintSend     BaseEnterkeyhint = "send"
 	BaseEnterkeyhintDone     BaseEnterkeyhint = "done"
 	BaseEnterkeyhintEnter    BaseEnterkeyhint = "enter"
 	BaseEnterkeyhintGo       BaseEnterkeyhint = "go"
 	BaseEnterkeyhintNext     BaseEnterkeyhint = "next"
 	BaseEnterkeyhintPrevious BaseEnterkeyhint = "previous"
-	BaseEnterkeyhintSearch   BaseEnterkeyhint = "search"
-	BaseEnterkeyhintSend     BaseEnterkeyhint = "send"
 )
 
 type BaseHidden string
@@ -105,21 +105,21 @@ const (
 type BaseInputmode string
 
 const (
+	BaseInputmodeText    BaseInputmode = "text"
+	BaseInputmodeUrl     BaseInputmode = "url"
+	BaseInputmodeDecimal BaseInputmode = "decimal"
 	BaseInputmodeEmail   BaseInputmode = "email"
 	BaseInputmodeNone    BaseInputmode = "none"
 	BaseInputmodeNumeric BaseInputmode = "numeric"
 	BaseInputmodeSearch  BaseInputmode = "search"
 	BaseInputmodeTel     BaseInputmode = "tel"
-	BaseInputmodeText    BaseInputmode = "text"
-	BaseInputmodeUrl     BaseInputmode = "url"
-	BaseInputmodeDecimal BaseInputmode = "decimal"
 )
 
 type BaseSpellcheck string
 
 const (
-	BaseSpellcheckTrue  BaseSpellcheck = "true"
 	BaseSpellcheckFalse BaseSpellcheck = "false"
+	BaseSpellcheckTrue  BaseSpellcheck = "true"
 	BaseSpellcheckEmpty BaseSpellcheck = ""
 )
 

@@ -48,47 +48,54 @@ func IframeTernary(condition bool, true htemel.Node, false htemel.Node) *IframeE
 	return Iframe(false)
 }
 
+// Children appends children to this element.
+func (e *IframeElement) Children(children ...htemel.Node) *IframeElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type IframeLoading string
 
 const (
-	IframeLoadingEager IframeLoading = "eager"
 	IframeLoadingLazy  IframeLoading = "lazy"
+	IframeLoadingEager IframeLoading = "eager"
 )
 
 type IframeAutocapitalize string
 
 const (
+	IframeAutocapitalizeCharacters IframeAutocapitalize = "characters"
 	IframeAutocapitalizeNone       IframeAutocapitalize = "none"
 	IframeAutocapitalizeOff        IframeAutocapitalize = "off"
 	IframeAutocapitalizeOn         IframeAutocapitalize = "on"
 	IframeAutocapitalizeSentences  IframeAutocapitalize = "sentences"
 	IframeAutocapitalizeWords      IframeAutocapitalize = "words"
-	IframeAutocapitalizeCharacters IframeAutocapitalize = "characters"
 )
 
 type IframeAutocorrect string
 
 const (
-	IframeAutocorrectOff   IframeAutocorrect = "off"
 	IframeAutocorrectOn    IframeAutocorrect = "on"
+	IframeAutocorrectOff   IframeAutocorrect = "off"
 	IframeAutocorrectEmpty IframeAutocorrect = ""
 )
 
 type IframeContenteditable string
 
 const (
-	IframeContenteditableTrue          IframeContenteditable = "true"
 	IframeContenteditableFalse         IframeContenteditable = "false"
 	IframeContenteditablePlaintextOnly IframeContenteditable = "plaintext-only"
+	IframeContenteditableTrue          IframeContenteditable = "true"
 	IframeContenteditableEmpty         IframeContenteditable = ""
 )
 
 type IframeDir string
 
 const (
+	IframeDirRtl  IframeDir = "rtl"
 	IframeDirAuto IframeDir = "auto"
 	IframeDirLtr  IframeDir = "ltr"
-	IframeDirRtl  IframeDir = "rtl"
 )
 
 type IframeDraggable string
@@ -101,13 +108,13 @@ const (
 type IframeEnterkeyhint string
 
 const (
+	IframeEnterkeyhintSearch   IframeEnterkeyhint = "search"
 	IframeEnterkeyhintSend     IframeEnterkeyhint = "send"
 	IframeEnterkeyhintDone     IframeEnterkeyhint = "done"
 	IframeEnterkeyhintEnter    IframeEnterkeyhint = "enter"
 	IframeEnterkeyhintGo       IframeEnterkeyhint = "go"
 	IframeEnterkeyhintNext     IframeEnterkeyhint = "next"
 	IframeEnterkeyhintPrevious IframeEnterkeyhint = "previous"
-	IframeEnterkeyhintSearch   IframeEnterkeyhint = "search"
 )
 
 type IframeHidden string
@@ -121,29 +128,29 @@ const (
 type IframeInputmode string
 
 const (
-	IframeInputmodeUrl     IframeInputmode = "url"
-	IframeInputmodeDecimal IframeInputmode = "decimal"
-	IframeInputmodeEmail   IframeInputmode = "email"
-	IframeInputmodeNone    IframeInputmode = "none"
 	IframeInputmodeNumeric IframeInputmode = "numeric"
 	IframeInputmodeSearch  IframeInputmode = "search"
 	IframeInputmodeTel     IframeInputmode = "tel"
 	IframeInputmodeText    IframeInputmode = "text"
+	IframeInputmodeUrl     IframeInputmode = "url"
+	IframeInputmodeDecimal IframeInputmode = "decimal"
+	IframeInputmodeEmail   IframeInputmode = "email"
+	IframeInputmodeNone    IframeInputmode = "none"
 )
 
 type IframeSpellcheck string
 
 const (
-	IframeSpellcheckTrue  IframeSpellcheck = "true"
 	IframeSpellcheckFalse IframeSpellcheck = "false"
+	IframeSpellcheckTrue  IframeSpellcheck = "true"
 	IframeSpellcheckEmpty IframeSpellcheck = ""
 )
 
 type IframeTranslate string
 
 const (
-	IframeTranslateNo    IframeTranslate = "no"
 	IframeTranslateYes   IframeTranslate = "yes"
+	IframeTranslateNo    IframeTranslate = "no"
 	IframeTranslateEmpty IframeTranslate = ""
 )
 

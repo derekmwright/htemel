@@ -48,15 +48,22 @@ func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node)
 	return Selectedcontent(false)
 }
 
+// Children appends children to this element.
+func (e *SelectedcontentElement) Children(children ...htemel.Node) *SelectedcontentElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SelectedcontentAutocapitalize string
 
 const (
-	SelectedcontentAutocapitalizeCharacters SelectedcontentAutocapitalize = "characters"
 	SelectedcontentAutocapitalizeNone       SelectedcontentAutocapitalize = "none"
 	SelectedcontentAutocapitalizeOff        SelectedcontentAutocapitalize = "off"
 	SelectedcontentAutocapitalizeOn         SelectedcontentAutocapitalize = "on"
 	SelectedcontentAutocapitalizeSentences  SelectedcontentAutocapitalize = "sentences"
 	SelectedcontentAutocapitalizeWords      SelectedcontentAutocapitalize = "words"
+	SelectedcontentAutocapitalizeCharacters SelectedcontentAutocapitalize = "characters"
 )
 
 type SelectedcontentAutocorrect string
@@ -70,9 +77,9 @@ const (
 type SelectedcontentContenteditable string
 
 const (
+	SelectedcontentContenteditableFalse         SelectedcontentContenteditable = "false"
 	SelectedcontentContenteditablePlaintextOnly SelectedcontentContenteditable = "plaintext-only"
 	SelectedcontentContenteditableTrue          SelectedcontentContenteditable = "true"
-	SelectedcontentContenteditableFalse         SelectedcontentContenteditable = "false"
 	SelectedcontentContenteditableEmpty         SelectedcontentContenteditable = ""
 )
 
@@ -87,41 +94,41 @@ const (
 type SelectedcontentDraggable string
 
 const (
-	SelectedcontentDraggableFalse SelectedcontentDraggable = "false"
 	SelectedcontentDraggableTrue  SelectedcontentDraggable = "true"
+	SelectedcontentDraggableFalse SelectedcontentDraggable = "false"
 )
 
 type SelectedcontentEnterkeyhint string
 
 const (
+	SelectedcontentEnterkeyhintEnter    SelectedcontentEnterkeyhint = "enter"
+	SelectedcontentEnterkeyhintGo       SelectedcontentEnterkeyhint = "go"
+	SelectedcontentEnterkeyhintNext     SelectedcontentEnterkeyhint = "next"
 	SelectedcontentEnterkeyhintPrevious SelectedcontentEnterkeyhint = "previous"
 	SelectedcontentEnterkeyhintSearch   SelectedcontentEnterkeyhint = "search"
 	SelectedcontentEnterkeyhintSend     SelectedcontentEnterkeyhint = "send"
 	SelectedcontentEnterkeyhintDone     SelectedcontentEnterkeyhint = "done"
-	SelectedcontentEnterkeyhintEnter    SelectedcontentEnterkeyhint = "enter"
-	SelectedcontentEnterkeyhintGo       SelectedcontentEnterkeyhint = "go"
-	SelectedcontentEnterkeyhintNext     SelectedcontentEnterkeyhint = "next"
 )
 
 type SelectedcontentHidden string
 
 const (
-	SelectedcontentHiddenHidden     SelectedcontentHidden = "hidden"
 	SelectedcontentHiddenUntilFound SelectedcontentHidden = "until-found"
+	SelectedcontentHiddenHidden     SelectedcontentHidden = "hidden"
 	SelectedcontentHiddenEmpty      SelectedcontentHidden = ""
 )
 
 type SelectedcontentInputmode string
 
 const (
-	SelectedcontentInputmodeUrl     SelectedcontentInputmode = "url"
-	SelectedcontentInputmodeDecimal SelectedcontentInputmode = "decimal"
-	SelectedcontentInputmodeEmail   SelectedcontentInputmode = "email"
-	SelectedcontentInputmodeNone    SelectedcontentInputmode = "none"
 	SelectedcontentInputmodeNumeric SelectedcontentInputmode = "numeric"
 	SelectedcontentInputmodeSearch  SelectedcontentInputmode = "search"
 	SelectedcontentInputmodeTel     SelectedcontentInputmode = "tel"
 	SelectedcontentInputmodeText    SelectedcontentInputmode = "text"
+	SelectedcontentInputmodeUrl     SelectedcontentInputmode = "url"
+	SelectedcontentInputmodeDecimal SelectedcontentInputmode = "decimal"
+	SelectedcontentInputmodeEmail   SelectedcontentInputmode = "email"
+	SelectedcontentInputmodeNone    SelectedcontentInputmode = "none"
 )
 
 type SelectedcontentSpellcheck string

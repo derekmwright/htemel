@@ -48,31 +48,38 @@ func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Captio
 	return Caption(false)
 }
 
+// Children appends children to this element.
+func (e *CaptionElement) Children(children ...htemel.Node) *CaptionElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type CaptionAutocapitalize string
 
 const (
-	CaptionAutocapitalizeOn         CaptionAutocapitalize = "on"
-	CaptionAutocapitalizeSentences  CaptionAutocapitalize = "sentences"
-	CaptionAutocapitalizeWords      CaptionAutocapitalize = "words"
 	CaptionAutocapitalizeCharacters CaptionAutocapitalize = "characters"
 	CaptionAutocapitalizeNone       CaptionAutocapitalize = "none"
 	CaptionAutocapitalizeOff        CaptionAutocapitalize = "off"
+	CaptionAutocapitalizeOn         CaptionAutocapitalize = "on"
+	CaptionAutocapitalizeSentences  CaptionAutocapitalize = "sentences"
+	CaptionAutocapitalizeWords      CaptionAutocapitalize = "words"
 )
 
 type CaptionAutocorrect string
 
 const (
-	CaptionAutocorrectOn    CaptionAutocorrect = "on"
 	CaptionAutocorrectOff   CaptionAutocorrect = "off"
+	CaptionAutocorrectOn    CaptionAutocorrect = "on"
 	CaptionAutocorrectEmpty CaptionAutocorrect = ""
 )
 
 type CaptionContenteditable string
 
 const (
-	CaptionContenteditableTrue          CaptionContenteditable = "true"
 	CaptionContenteditableFalse         CaptionContenteditable = "false"
 	CaptionContenteditablePlaintextOnly CaptionContenteditable = "plaintext-only"
+	CaptionContenteditableTrue          CaptionContenteditable = "true"
 	CaptionContenteditableEmpty         CaptionContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type CaptionEnterkeyhint string
 
 const (
-	CaptionEnterkeyhintNext     CaptionEnterkeyhint = "next"
 	CaptionEnterkeyhintPrevious CaptionEnterkeyhint = "previous"
 	CaptionEnterkeyhintSearch   CaptionEnterkeyhint = "search"
 	CaptionEnterkeyhintSend     CaptionEnterkeyhint = "send"
 	CaptionEnterkeyhintDone     CaptionEnterkeyhint = "done"
 	CaptionEnterkeyhintEnter    CaptionEnterkeyhint = "enter"
 	CaptionEnterkeyhintGo       CaptionEnterkeyhint = "go"
+	CaptionEnterkeyhintNext     CaptionEnterkeyhint = "next"
 )
 
 type CaptionHidden string
@@ -114,14 +121,14 @@ const (
 type CaptionInputmode string
 
 const (
-	CaptionInputmodeUrl     CaptionInputmode = "url"
-	CaptionInputmodeDecimal CaptionInputmode = "decimal"
-	CaptionInputmodeEmail   CaptionInputmode = "email"
-	CaptionInputmodeNone    CaptionInputmode = "none"
 	CaptionInputmodeNumeric CaptionInputmode = "numeric"
 	CaptionInputmodeSearch  CaptionInputmode = "search"
 	CaptionInputmodeTel     CaptionInputmode = "tel"
 	CaptionInputmodeText    CaptionInputmode = "text"
+	CaptionInputmodeUrl     CaptionInputmode = "url"
+	CaptionInputmodeDecimal CaptionInputmode = "decimal"
+	CaptionInputmodeEmail   CaptionInputmode = "email"
+	CaptionInputmodeNone    CaptionInputmode = "none"
 )
 
 type CaptionSpellcheck string
@@ -135,16 +142,16 @@ const (
 type CaptionTranslate string
 
 const (
-	CaptionTranslateYes   CaptionTranslate = "yes"
 	CaptionTranslateNo    CaptionTranslate = "no"
+	CaptionTranslateYes   CaptionTranslate = "yes"
 	CaptionTranslateEmpty CaptionTranslate = ""
 )
 
 type CaptionWritingsuggestions string
 
 const (
-	CaptionWritingsuggestionsTrue  CaptionWritingsuggestions = "true"
 	CaptionWritingsuggestionsFalse CaptionWritingsuggestions = "false"
+	CaptionWritingsuggestionsTrue  CaptionWritingsuggestions = "true"
 	CaptionWritingsuggestionsEmpty CaptionWritingsuggestions = ""
 )
 

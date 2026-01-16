@@ -48,59 +48,66 @@ func H6Ternary(condition bool, true htemel.Node, false htemel.Node) *H6Element {
 	return H6(false)
 }
 
+// Children appends children to this element.
+func (e *H6Element) Children(children ...htemel.Node) *H6Element {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type H6Autocapitalize string
 
 const (
-	H6AutocapitalizeCharacters H6Autocapitalize = "characters"
-	H6AutocapitalizeNone       H6Autocapitalize = "none"
-	H6AutocapitalizeOff        H6Autocapitalize = "off"
 	H6AutocapitalizeOn         H6Autocapitalize = "on"
 	H6AutocapitalizeSentences  H6Autocapitalize = "sentences"
 	H6AutocapitalizeWords      H6Autocapitalize = "words"
+	H6AutocapitalizeCharacters H6Autocapitalize = "characters"
+	H6AutocapitalizeNone       H6Autocapitalize = "none"
+	H6AutocapitalizeOff        H6Autocapitalize = "off"
 )
 
 type H6Autocorrect string
 
 const (
-	H6AutocorrectOn    H6Autocorrect = "on"
 	H6AutocorrectOff   H6Autocorrect = "off"
+	H6AutocorrectOn    H6Autocorrect = "on"
 	H6AutocorrectEmpty H6Autocorrect = ""
 )
 
 type H6Contenteditable string
 
 const (
+	H6ContenteditableTrue          H6Contenteditable = "true"
 	H6ContenteditableFalse         H6Contenteditable = "false"
 	H6ContenteditablePlaintextOnly H6Contenteditable = "plaintext-only"
-	H6ContenteditableTrue          H6Contenteditable = "true"
 	H6ContenteditableEmpty         H6Contenteditable = ""
 )
 
 type H6Dir string
 
 const (
-	H6DirLtr  H6Dir = "ltr"
 	H6DirRtl  H6Dir = "rtl"
 	H6DirAuto H6Dir = "auto"
+	H6DirLtr  H6Dir = "ltr"
 )
 
 type H6Draggable string
 
 const (
-	H6DraggableTrue  H6Draggable = "true"
 	H6DraggableFalse H6Draggable = "false"
+	H6DraggableTrue  H6Draggable = "true"
 )
 
 type H6Enterkeyhint string
 
 const (
-	H6EnterkeyhintDone     H6Enterkeyhint = "done"
-	H6EnterkeyhintEnter    H6Enterkeyhint = "enter"
 	H6EnterkeyhintGo       H6Enterkeyhint = "go"
 	H6EnterkeyhintNext     H6Enterkeyhint = "next"
 	H6EnterkeyhintPrevious H6Enterkeyhint = "previous"
 	H6EnterkeyhintSearch   H6Enterkeyhint = "search"
 	H6EnterkeyhintSend     H6Enterkeyhint = "send"
+	H6EnterkeyhintDone     H6Enterkeyhint = "done"
+	H6EnterkeyhintEnter    H6Enterkeyhint = "enter"
 )
 
 type H6Hidden string
@@ -114,14 +121,14 @@ const (
 type H6Inputmode string
 
 const (
-	H6InputmodeTel     H6Inputmode = "tel"
-	H6InputmodeText    H6Inputmode = "text"
 	H6InputmodeUrl     H6Inputmode = "url"
 	H6InputmodeDecimal H6Inputmode = "decimal"
 	H6InputmodeEmail   H6Inputmode = "email"
 	H6InputmodeNone    H6Inputmode = "none"
 	H6InputmodeNumeric H6Inputmode = "numeric"
 	H6InputmodeSearch  H6Inputmode = "search"
+	H6InputmodeTel     H6Inputmode = "tel"
+	H6InputmodeText    H6Inputmode = "text"
 )
 
 type H6Spellcheck string
@@ -143,8 +150,8 @@ const (
 type H6Writingsuggestions string
 
 const (
-	H6WritingsuggestionsFalse H6Writingsuggestions = "false"
 	H6WritingsuggestionsTrue  H6Writingsuggestions = "true"
+	H6WritingsuggestionsFalse H6Writingsuggestions = "false"
 	H6WritingsuggestionsEmpty H6Writingsuggestions = ""
 )
 

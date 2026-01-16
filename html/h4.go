@@ -48,22 +48,29 @@ func H4Ternary(condition bool, true htemel.Node, false htemel.Node) *H4Element {
 	return H4(false)
 }
 
+// Children appends children to this element.
+func (e *H4Element) Children(children ...htemel.Node) *H4Element {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type H4Autocapitalize string
 
 const (
+	H4AutocapitalizeNone       H4Autocapitalize = "none"
+	H4AutocapitalizeOff        H4Autocapitalize = "off"
 	H4AutocapitalizeOn         H4Autocapitalize = "on"
 	H4AutocapitalizeSentences  H4Autocapitalize = "sentences"
 	H4AutocapitalizeWords      H4Autocapitalize = "words"
 	H4AutocapitalizeCharacters H4Autocapitalize = "characters"
-	H4AutocapitalizeNone       H4Autocapitalize = "none"
-	H4AutocapitalizeOff        H4Autocapitalize = "off"
 )
 
 type H4Autocorrect string
 
 const (
-	H4AutocorrectOff   H4Autocorrect = "off"
 	H4AutocorrectOn    H4Autocorrect = "on"
+	H4AutocorrectOff   H4Autocorrect = "off"
 	H4AutocorrectEmpty H4Autocorrect = ""
 )
 
@@ -79,9 +86,9 @@ const (
 type H4Dir string
 
 const (
+	H4DirRtl  H4Dir = "rtl"
 	H4DirAuto H4Dir = "auto"
 	H4DirLtr  H4Dir = "ltr"
-	H4DirRtl  H4Dir = "rtl"
 )
 
 type H4Draggable string
@@ -94,13 +101,13 @@ const (
 type H4Enterkeyhint string
 
 const (
+	H4EnterkeyhintPrevious H4Enterkeyhint = "previous"
+	H4EnterkeyhintSearch   H4Enterkeyhint = "search"
 	H4EnterkeyhintSend     H4Enterkeyhint = "send"
 	H4EnterkeyhintDone     H4Enterkeyhint = "done"
 	H4EnterkeyhintEnter    H4Enterkeyhint = "enter"
 	H4EnterkeyhintGo       H4Enterkeyhint = "go"
 	H4EnterkeyhintNext     H4Enterkeyhint = "next"
-	H4EnterkeyhintPrevious H4Enterkeyhint = "previous"
-	H4EnterkeyhintSearch   H4Enterkeyhint = "search"
 )
 
 type H4Hidden string
@@ -114,21 +121,21 @@ const (
 type H4Inputmode string
 
 const (
+	H4InputmodeNumeric H4Inputmode = "numeric"
+	H4InputmodeSearch  H4Inputmode = "search"
 	H4InputmodeTel     H4Inputmode = "tel"
 	H4InputmodeText    H4Inputmode = "text"
 	H4InputmodeUrl     H4Inputmode = "url"
 	H4InputmodeDecimal H4Inputmode = "decimal"
 	H4InputmodeEmail   H4Inputmode = "email"
 	H4InputmodeNone    H4Inputmode = "none"
-	H4InputmodeNumeric H4Inputmode = "numeric"
-	H4InputmodeSearch  H4Inputmode = "search"
 )
 
 type H4Spellcheck string
 
 const (
-	H4SpellcheckFalse H4Spellcheck = "false"
 	H4SpellcheckTrue  H4Spellcheck = "true"
+	H4SpellcheckFalse H4Spellcheck = "false"
 	H4SpellcheckEmpty H4Spellcheck = ""
 )
 

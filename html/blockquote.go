@@ -48,6 +48,13 @@ func BlockquoteTernary(condition bool, true htemel.Node, false htemel.Node) *Blo
 	return Blockquote(false)
 }
 
+// Children appends children to this element.
+func (e *BlockquoteElement) Children(children ...htemel.Node) *BlockquoteElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type BlockquoteAutocapitalize string
 
 const (
@@ -70,9 +77,9 @@ const (
 type BlockquoteContenteditable string
 
 const (
-	BlockquoteContenteditableTrue          BlockquoteContenteditable = "true"
 	BlockquoteContenteditableFalse         BlockquoteContenteditable = "false"
 	BlockquoteContenteditablePlaintextOnly BlockquoteContenteditable = "plaintext-only"
+	BlockquoteContenteditableTrue          BlockquoteContenteditable = "true"
 	BlockquoteContenteditableEmpty         BlockquoteContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type BlockquoteEnterkeyhint string
 
 const (
-	BlockquoteEnterkeyhintPrevious BlockquoteEnterkeyhint = "previous"
 	BlockquoteEnterkeyhintSearch   BlockquoteEnterkeyhint = "search"
 	BlockquoteEnterkeyhintSend     BlockquoteEnterkeyhint = "send"
 	BlockquoteEnterkeyhintDone     BlockquoteEnterkeyhint = "done"
 	BlockquoteEnterkeyhintEnter    BlockquoteEnterkeyhint = "enter"
 	BlockquoteEnterkeyhintGo       BlockquoteEnterkeyhint = "go"
 	BlockquoteEnterkeyhintNext     BlockquoteEnterkeyhint = "next"
+	BlockquoteEnterkeyhintPrevious BlockquoteEnterkeyhint = "previous"
 )
 
 type BlockquoteHidden string
@@ -114,14 +121,14 @@ const (
 type BlockquoteInputmode string
 
 const (
-	BlockquoteInputmodeSearch  BlockquoteInputmode = "search"
-	BlockquoteInputmodeTel     BlockquoteInputmode = "tel"
-	BlockquoteInputmodeText    BlockquoteInputmode = "text"
 	BlockquoteInputmodeUrl     BlockquoteInputmode = "url"
 	BlockquoteInputmodeDecimal BlockquoteInputmode = "decimal"
 	BlockquoteInputmodeEmail   BlockquoteInputmode = "email"
 	BlockquoteInputmodeNone    BlockquoteInputmode = "none"
 	BlockquoteInputmodeNumeric BlockquoteInputmode = "numeric"
+	BlockquoteInputmodeSearch  BlockquoteInputmode = "search"
+	BlockquoteInputmodeTel     BlockquoteInputmode = "tel"
+	BlockquoteInputmodeText    BlockquoteInputmode = "text"
 )
 
 type BlockquoteSpellcheck string
@@ -143,8 +150,8 @@ const (
 type BlockquoteWritingsuggestions string
 
 const (
-	BlockquoteWritingsuggestionsTrue  BlockquoteWritingsuggestions = "true"
 	BlockquoteWritingsuggestionsFalse BlockquoteWritingsuggestions = "false"
+	BlockquoteWritingsuggestionsTrue  BlockquoteWritingsuggestions = "true"
 	BlockquoteWritingsuggestionsEmpty BlockquoteWritingsuggestions = ""
 )
 

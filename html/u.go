@@ -48,15 +48,22 @@ func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
 	return U(false)
 }
 
+// Children appends children to this element.
+func (e *UElement) Children(children ...htemel.Node) *UElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type UAutocapitalize string
 
 const (
-	UAutocapitalizeCharacters UAutocapitalize = "characters"
-	UAutocapitalizeNone       UAutocapitalize = "none"
 	UAutocapitalizeOff        UAutocapitalize = "off"
 	UAutocapitalizeOn         UAutocapitalize = "on"
 	UAutocapitalizeSentences  UAutocapitalize = "sentences"
 	UAutocapitalizeWords      UAutocapitalize = "words"
+	UAutocapitalizeCharacters UAutocapitalize = "characters"
+	UAutocapitalizeNone       UAutocapitalize = "none"
 )
 
 type UAutocorrect string
@@ -70,9 +77,9 @@ const (
 type UContenteditable string
 
 const (
+	UContenteditableTrue          UContenteditable = "true"
 	UContenteditableFalse         UContenteditable = "false"
 	UContenteditablePlaintextOnly UContenteditable = "plaintext-only"
-	UContenteditableTrue          UContenteditable = "true"
 	UContenteditableEmpty         UContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type UEnterkeyhint string
 
 const (
-	UEnterkeyhintNext     UEnterkeyhint = "next"
 	UEnterkeyhintPrevious UEnterkeyhint = "previous"
 	UEnterkeyhintSearch   UEnterkeyhint = "search"
 	UEnterkeyhintSend     UEnterkeyhint = "send"
 	UEnterkeyhintDone     UEnterkeyhint = "done"
 	UEnterkeyhintEnter    UEnterkeyhint = "enter"
 	UEnterkeyhintGo       UEnterkeyhint = "go"
+	UEnterkeyhintNext     UEnterkeyhint = "next"
 )
 
 type UHidden string
@@ -114,6 +121,7 @@ const (
 type UInputmode string
 
 const (
+	UInputmodeNone    UInputmode = "none"
 	UInputmodeNumeric UInputmode = "numeric"
 	UInputmodeSearch  UInputmode = "search"
 	UInputmodeTel     UInputmode = "tel"
@@ -121,7 +129,6 @@ const (
 	UInputmodeUrl     UInputmode = "url"
 	UInputmodeDecimal UInputmode = "decimal"
 	UInputmodeEmail   UInputmode = "email"
-	UInputmodeNone    UInputmode = "none"
 )
 
 type USpellcheck string

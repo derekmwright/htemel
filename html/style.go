@@ -48,22 +48,29 @@ func StyleTernary(condition bool, true htemel.Node, false htemel.Node) *StyleEle
 	return Style(false)
 }
 
+// Children appends children to this element.
+func (e *StyleElement) Children(children ...htemel.Node) *StyleElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type StyleAutocapitalize string
 
 const (
-	StyleAutocapitalizeSentences  StyleAutocapitalize = "sentences"
-	StyleAutocapitalizeWords      StyleAutocapitalize = "words"
 	StyleAutocapitalizeCharacters StyleAutocapitalize = "characters"
 	StyleAutocapitalizeNone       StyleAutocapitalize = "none"
 	StyleAutocapitalizeOff        StyleAutocapitalize = "off"
 	StyleAutocapitalizeOn         StyleAutocapitalize = "on"
+	StyleAutocapitalizeSentences  StyleAutocapitalize = "sentences"
+	StyleAutocapitalizeWords      StyleAutocapitalize = "words"
 )
 
 type StyleAutocorrect string
 
 const (
-	StyleAutocorrectOff   StyleAutocorrect = "off"
 	StyleAutocorrectOn    StyleAutocorrect = "on"
+	StyleAutocorrectOff   StyleAutocorrect = "off"
 	StyleAutocorrectEmpty StyleAutocorrect = ""
 )
 
@@ -79,9 +86,9 @@ const (
 type StyleDir string
 
 const (
-	StyleDirRtl  StyleDir = "rtl"
 	StyleDirAuto StyleDir = "auto"
 	StyleDirLtr  StyleDir = "ltr"
+	StyleDirRtl  StyleDir = "rtl"
 )
 
 type StyleDraggable string
@@ -94,13 +101,13 @@ const (
 type StyleEnterkeyhint string
 
 const (
+	StyleEnterkeyhintNext     StyleEnterkeyhint = "next"
 	StyleEnterkeyhintPrevious StyleEnterkeyhint = "previous"
 	StyleEnterkeyhintSearch   StyleEnterkeyhint = "search"
 	StyleEnterkeyhintSend     StyleEnterkeyhint = "send"
 	StyleEnterkeyhintDone     StyleEnterkeyhint = "done"
 	StyleEnterkeyhintEnter    StyleEnterkeyhint = "enter"
 	StyleEnterkeyhintGo       StyleEnterkeyhint = "go"
-	StyleEnterkeyhintNext     StyleEnterkeyhint = "next"
 )
 
 type StyleHidden string
@@ -135,16 +142,16 @@ const (
 type StyleTranslate string
 
 const (
-	StyleTranslateYes   StyleTranslate = "yes"
 	StyleTranslateNo    StyleTranslate = "no"
+	StyleTranslateYes   StyleTranslate = "yes"
 	StyleTranslateEmpty StyleTranslate = ""
 )
 
 type StyleWritingsuggestions string
 
 const (
-	StyleWritingsuggestionsTrue  StyleWritingsuggestions = "true"
 	StyleWritingsuggestionsFalse StyleWritingsuggestions = "false"
+	StyleWritingsuggestionsTrue  StyleWritingsuggestions = "true"
 	StyleWritingsuggestionsEmpty StyleWritingsuggestions = ""
 )
 

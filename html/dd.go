@@ -48,15 +48,22 @@ func DdTernary(condition bool, true htemel.Node, false htemel.Node) *DdElement {
 	return Dd(false)
 }
 
+// Children appends children to this element.
+func (e *DdElement) Children(children ...htemel.Node) *DdElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type DdAutocapitalize string
 
 const (
+	DdAutocapitalizeWords      DdAutocapitalize = "words"
 	DdAutocapitalizeCharacters DdAutocapitalize = "characters"
 	DdAutocapitalizeNone       DdAutocapitalize = "none"
 	DdAutocapitalizeOff        DdAutocapitalize = "off"
 	DdAutocapitalizeOn         DdAutocapitalize = "on"
 	DdAutocapitalizeSentences  DdAutocapitalize = "sentences"
-	DdAutocapitalizeWords      DdAutocapitalize = "words"
 )
 
 type DdAutocorrect string
@@ -70,9 +77,9 @@ const (
 type DdContenteditable string
 
 const (
+	DdContenteditablePlaintextOnly DdContenteditable = "plaintext-only"
 	DdContenteditableTrue          DdContenteditable = "true"
 	DdContenteditableFalse         DdContenteditable = "false"
-	DdContenteditablePlaintextOnly DdContenteditable = "plaintext-only"
 	DdContenteditableEmpty         DdContenteditable = ""
 )
 
@@ -87,41 +94,41 @@ const (
 type DdDraggable string
 
 const (
-	DdDraggableTrue  DdDraggable = "true"
 	DdDraggableFalse DdDraggable = "false"
+	DdDraggableTrue  DdDraggable = "true"
 )
 
 type DdEnterkeyhint string
 
 const (
+	DdEnterkeyhintDone     DdEnterkeyhint = "done"
 	DdEnterkeyhintEnter    DdEnterkeyhint = "enter"
 	DdEnterkeyhintGo       DdEnterkeyhint = "go"
 	DdEnterkeyhintNext     DdEnterkeyhint = "next"
 	DdEnterkeyhintPrevious DdEnterkeyhint = "previous"
 	DdEnterkeyhintSearch   DdEnterkeyhint = "search"
 	DdEnterkeyhintSend     DdEnterkeyhint = "send"
-	DdEnterkeyhintDone     DdEnterkeyhint = "done"
 )
 
 type DdHidden string
 
 const (
-	DdHiddenHidden     DdHidden = "hidden"
 	DdHiddenUntilFound DdHidden = "until-found"
+	DdHiddenHidden     DdHidden = "hidden"
 	DdHiddenEmpty      DdHidden = ""
 )
 
 type DdInputmode string
 
 const (
+	DdInputmodeTel     DdInputmode = "tel"
+	DdInputmodeText    DdInputmode = "text"
 	DdInputmodeUrl     DdInputmode = "url"
 	DdInputmodeDecimal DdInputmode = "decimal"
 	DdInputmodeEmail   DdInputmode = "email"
 	DdInputmodeNone    DdInputmode = "none"
 	DdInputmodeNumeric DdInputmode = "numeric"
 	DdInputmodeSearch  DdInputmode = "search"
-	DdInputmodeTel     DdInputmode = "tel"
-	DdInputmodeText    DdInputmode = "text"
 )
 
 type DdSpellcheck string

@@ -48,15 +48,22 @@ func OptgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Optgr
 	return Optgroup(false)
 }
 
+// Children appends children to this element.
+func (e *OptgroupElement) Children(children ...htemel.Node) *OptgroupElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type OptgroupAutocapitalize string
 
 const (
-	OptgroupAutocapitalizeNone       OptgroupAutocapitalize = "none"
-	OptgroupAutocapitalizeOff        OptgroupAutocapitalize = "off"
 	OptgroupAutocapitalizeOn         OptgroupAutocapitalize = "on"
 	OptgroupAutocapitalizeSentences  OptgroupAutocapitalize = "sentences"
 	OptgroupAutocapitalizeWords      OptgroupAutocapitalize = "words"
 	OptgroupAutocapitalizeCharacters OptgroupAutocapitalize = "characters"
+	OptgroupAutocapitalizeNone       OptgroupAutocapitalize = "none"
+	OptgroupAutocapitalizeOff        OptgroupAutocapitalize = "off"
 )
 
 type OptgroupAutocorrect string
@@ -87,41 +94,41 @@ const (
 type OptgroupDraggable string
 
 const (
-	OptgroupDraggableFalse OptgroupDraggable = "false"
 	OptgroupDraggableTrue  OptgroupDraggable = "true"
+	OptgroupDraggableFalse OptgroupDraggable = "false"
 )
 
 type OptgroupEnterkeyhint string
 
 const (
+	OptgroupEnterkeyhintPrevious OptgroupEnterkeyhint = "previous"
+	OptgroupEnterkeyhintSearch   OptgroupEnterkeyhint = "search"
+	OptgroupEnterkeyhintSend     OptgroupEnterkeyhint = "send"
 	OptgroupEnterkeyhintDone     OptgroupEnterkeyhint = "done"
 	OptgroupEnterkeyhintEnter    OptgroupEnterkeyhint = "enter"
 	OptgroupEnterkeyhintGo       OptgroupEnterkeyhint = "go"
 	OptgroupEnterkeyhintNext     OptgroupEnterkeyhint = "next"
-	OptgroupEnterkeyhintPrevious OptgroupEnterkeyhint = "previous"
-	OptgroupEnterkeyhintSearch   OptgroupEnterkeyhint = "search"
-	OptgroupEnterkeyhintSend     OptgroupEnterkeyhint = "send"
 )
 
 type OptgroupHidden string
 
 const (
-	OptgroupHiddenUntilFound OptgroupHidden = "until-found"
 	OptgroupHiddenHidden     OptgroupHidden = "hidden"
+	OptgroupHiddenUntilFound OptgroupHidden = "until-found"
 	OptgroupHiddenEmpty      OptgroupHidden = ""
 )
 
 type OptgroupInputmode string
 
 const (
+	OptgroupInputmodeText    OptgroupInputmode = "text"
+	OptgroupInputmodeUrl     OptgroupInputmode = "url"
+	OptgroupInputmodeDecimal OptgroupInputmode = "decimal"
 	OptgroupInputmodeEmail   OptgroupInputmode = "email"
 	OptgroupInputmodeNone    OptgroupInputmode = "none"
 	OptgroupInputmodeNumeric OptgroupInputmode = "numeric"
 	OptgroupInputmodeSearch  OptgroupInputmode = "search"
 	OptgroupInputmodeTel     OptgroupInputmode = "tel"
-	OptgroupInputmodeText    OptgroupInputmode = "text"
-	OptgroupInputmodeUrl     OptgroupInputmode = "url"
-	OptgroupInputmodeDecimal OptgroupInputmode = "decimal"
 )
 
 type OptgroupSpellcheck string

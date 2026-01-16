@@ -48,6 +48,13 @@ func DatalistTernary(condition bool, true htemel.Node, false htemel.Node) *Datal
 	return Datalist(false)
 }
 
+// Children appends children to this element.
+func (e *DatalistElement) Children(children ...htemel.Node) *DatalistElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type DatalistAutocapitalize string
 
 const (
@@ -79,9 +86,9 @@ const (
 type DatalistDir string
 
 const (
+	DatalistDirRtl  DatalistDir = "rtl"
 	DatalistDirAuto DatalistDir = "auto"
 	DatalistDirLtr  DatalistDir = "ltr"
-	DatalistDirRtl  DatalistDir = "rtl"
 )
 
 type DatalistDraggable string
@@ -143,8 +150,8 @@ const (
 type DatalistWritingsuggestions string
 
 const (
-	DatalistWritingsuggestionsFalse DatalistWritingsuggestions = "false"
 	DatalistWritingsuggestionsTrue  DatalistWritingsuggestions = "true"
+	DatalistWritingsuggestionsFalse DatalistWritingsuggestions = "false"
 	DatalistWritingsuggestionsEmpty DatalistWritingsuggestions = ""
 )
 

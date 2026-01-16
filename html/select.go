@@ -48,15 +48,22 @@ func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectE
 	return Select(false)
 }
 
+// Children appends children to this element.
+func (e *SelectElement) Children(children ...htemel.Node) *SelectElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SelectAutocapitalize string
 
 const (
-	SelectAutocapitalizeNone       SelectAutocapitalize = "none"
 	SelectAutocapitalizeOff        SelectAutocapitalize = "off"
 	SelectAutocapitalizeOn         SelectAutocapitalize = "on"
 	SelectAutocapitalizeSentences  SelectAutocapitalize = "sentences"
 	SelectAutocapitalizeWords      SelectAutocapitalize = "words"
 	SelectAutocapitalizeCharacters SelectAutocapitalize = "characters"
+	SelectAutocapitalizeNone       SelectAutocapitalize = "none"
 )
 
 type SelectAutocorrect string
@@ -70,9 +77,9 @@ const (
 type SelectContenteditable string
 
 const (
-	SelectContenteditableTrue          SelectContenteditable = "true"
 	SelectContenteditableFalse         SelectContenteditable = "false"
 	SelectContenteditablePlaintextOnly SelectContenteditable = "plaintext-only"
+	SelectContenteditableTrue          SelectContenteditable = "true"
 	SelectContenteditableEmpty         SelectContenteditable = ""
 )
 
@@ -87,41 +94,41 @@ const (
 type SelectDraggable string
 
 const (
-	SelectDraggableFalse SelectDraggable = "false"
 	SelectDraggableTrue  SelectDraggable = "true"
+	SelectDraggableFalse SelectDraggable = "false"
 )
 
 type SelectEnterkeyhint string
 
 const (
+	SelectEnterkeyhintEnter    SelectEnterkeyhint = "enter"
+	SelectEnterkeyhintGo       SelectEnterkeyhint = "go"
+	SelectEnterkeyhintNext     SelectEnterkeyhint = "next"
 	SelectEnterkeyhintPrevious SelectEnterkeyhint = "previous"
 	SelectEnterkeyhintSearch   SelectEnterkeyhint = "search"
 	SelectEnterkeyhintSend     SelectEnterkeyhint = "send"
 	SelectEnterkeyhintDone     SelectEnterkeyhint = "done"
-	SelectEnterkeyhintEnter    SelectEnterkeyhint = "enter"
-	SelectEnterkeyhintGo       SelectEnterkeyhint = "go"
-	SelectEnterkeyhintNext     SelectEnterkeyhint = "next"
 )
 
 type SelectHidden string
 
 const (
-	SelectHiddenHidden     SelectHidden = "hidden"
 	SelectHiddenUntilFound SelectHidden = "until-found"
+	SelectHiddenHidden     SelectHidden = "hidden"
 	SelectHiddenEmpty      SelectHidden = ""
 )
 
 type SelectInputmode string
 
 const (
+	SelectInputmodeSearch  SelectInputmode = "search"
+	SelectInputmodeTel     SelectInputmode = "tel"
 	SelectInputmodeText    SelectInputmode = "text"
 	SelectInputmodeUrl     SelectInputmode = "url"
 	SelectInputmodeDecimal SelectInputmode = "decimal"
 	SelectInputmodeEmail   SelectInputmode = "email"
 	SelectInputmodeNone    SelectInputmode = "none"
 	SelectInputmodeNumeric SelectInputmode = "numeric"
-	SelectInputmodeSearch  SelectInputmode = "search"
-	SelectInputmodeTel     SelectInputmode = "tel"
 )
 
 type SelectSpellcheck string

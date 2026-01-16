@@ -48,15 +48,22 @@ func DtTernary(condition bool, true htemel.Node, false htemel.Node) *DtElement {
 	return Dt(false)
 }
 
+// Children appends children to this element.
+func (e *DtElement) Children(children ...htemel.Node) *DtElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type DtAutocapitalize string
 
 const (
-	DtAutocapitalizeOff        DtAutocapitalize = "off"
 	DtAutocapitalizeOn         DtAutocapitalize = "on"
 	DtAutocapitalizeSentences  DtAutocapitalize = "sentences"
 	DtAutocapitalizeWords      DtAutocapitalize = "words"
 	DtAutocapitalizeCharacters DtAutocapitalize = "characters"
 	DtAutocapitalizeNone       DtAutocapitalize = "none"
+	DtAutocapitalizeOff        DtAutocapitalize = "off"
 )
 
 type DtAutocorrect string
@@ -70,50 +77,51 @@ const (
 type DtContenteditable string
 
 const (
-	DtContenteditableFalse         DtContenteditable = "false"
 	DtContenteditablePlaintextOnly DtContenteditable = "plaintext-only"
 	DtContenteditableTrue          DtContenteditable = "true"
+	DtContenteditableFalse         DtContenteditable = "false"
 	DtContenteditableEmpty         DtContenteditable = ""
 )
 
 type DtDir string
 
 const (
-	DtDirAuto DtDir = "auto"
 	DtDirLtr  DtDir = "ltr"
 	DtDirRtl  DtDir = "rtl"
+	DtDirAuto DtDir = "auto"
 )
 
 type DtDraggable string
 
 const (
-	DtDraggableTrue  DtDraggable = "true"
 	DtDraggableFalse DtDraggable = "false"
+	DtDraggableTrue  DtDraggable = "true"
 )
 
 type DtEnterkeyhint string
 
 const (
+	DtEnterkeyhintSearch   DtEnterkeyhint = "search"
+	DtEnterkeyhintSend     DtEnterkeyhint = "send"
 	DtEnterkeyhintDone     DtEnterkeyhint = "done"
 	DtEnterkeyhintEnter    DtEnterkeyhint = "enter"
 	DtEnterkeyhintGo       DtEnterkeyhint = "go"
 	DtEnterkeyhintNext     DtEnterkeyhint = "next"
 	DtEnterkeyhintPrevious DtEnterkeyhint = "previous"
-	DtEnterkeyhintSearch   DtEnterkeyhint = "search"
-	DtEnterkeyhintSend     DtEnterkeyhint = "send"
 )
 
 type DtHidden string
 
 const (
-	DtHiddenUntilFound DtHidden = "until-found"
 	DtHiddenHidden     DtHidden = "hidden"
+	DtHiddenUntilFound DtHidden = "until-found"
 	DtHiddenEmpty      DtHidden = ""
 )
 
 type DtInputmode string
 
 const (
+	DtInputmodeDecimal DtInputmode = "decimal"
 	DtInputmodeEmail   DtInputmode = "email"
 	DtInputmodeNone    DtInputmode = "none"
 	DtInputmodeNumeric DtInputmode = "numeric"
@@ -121,22 +129,21 @@ const (
 	DtInputmodeTel     DtInputmode = "tel"
 	DtInputmodeText    DtInputmode = "text"
 	DtInputmodeUrl     DtInputmode = "url"
-	DtInputmodeDecimal DtInputmode = "decimal"
 )
 
 type DtSpellcheck string
 
 const (
-	DtSpellcheckTrue  DtSpellcheck = "true"
 	DtSpellcheckFalse DtSpellcheck = "false"
+	DtSpellcheckTrue  DtSpellcheck = "true"
 	DtSpellcheckEmpty DtSpellcheck = ""
 )
 
 type DtTranslate string
 
 const (
-	DtTranslateYes   DtTranslate = "yes"
 	DtTranslateNo    DtTranslate = "no"
+	DtTranslateYes   DtTranslate = "yes"
 	DtTranslateEmpty DtTranslate = ""
 )
 

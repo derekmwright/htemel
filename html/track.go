@@ -42,11 +42,11 @@ func TrackIf(condition bool) *TrackElement {
 type TrackKind string
 
 const (
-	TrackKindMetadata     TrackKind = "metadata"
-	TrackKindSubtitles    TrackKind = "subtitles"
 	TrackKindCaptions     TrackKind = "captions"
 	TrackKindChapters     TrackKind = "chapters"
 	TrackKindDescriptions TrackKind = "descriptions"
+	TrackKindMetadata     TrackKind = "metadata"
+	TrackKindSubtitles    TrackKind = "subtitles"
 )
 
 type TrackAutocapitalize string
@@ -95,13 +95,13 @@ const (
 type TrackEnterkeyhint string
 
 const (
+	TrackEnterkeyhintDone     TrackEnterkeyhint = "done"
 	TrackEnterkeyhintEnter    TrackEnterkeyhint = "enter"
 	TrackEnterkeyhintGo       TrackEnterkeyhint = "go"
 	TrackEnterkeyhintNext     TrackEnterkeyhint = "next"
 	TrackEnterkeyhintPrevious TrackEnterkeyhint = "previous"
 	TrackEnterkeyhintSearch   TrackEnterkeyhint = "search"
 	TrackEnterkeyhintSend     TrackEnterkeyhint = "send"
-	TrackEnterkeyhintDone     TrackEnterkeyhint = "done"
 )
 
 type TrackHidden string
@@ -115,14 +115,14 @@ const (
 type TrackInputmode string
 
 const (
-	TrackInputmodeNone    TrackInputmode = "none"
-	TrackInputmodeNumeric TrackInputmode = "numeric"
 	TrackInputmodeSearch  TrackInputmode = "search"
 	TrackInputmodeTel     TrackInputmode = "tel"
 	TrackInputmodeText    TrackInputmode = "text"
 	TrackInputmodeUrl     TrackInputmode = "url"
 	TrackInputmodeDecimal TrackInputmode = "decimal"
 	TrackInputmodeEmail   TrackInputmode = "email"
+	TrackInputmodeNone    TrackInputmode = "none"
+	TrackInputmodeNumeric TrackInputmode = "numeric"
 )
 
 type TrackSpellcheck string
@@ -136,8 +136,8 @@ const (
 type TrackTranslate string
 
 const (
-	TrackTranslateYes   TrackTranslate = "yes"
 	TrackTranslateNo    TrackTranslate = "no"
+	TrackTranslateYes   TrackTranslate = "yes"
 	TrackTranslateEmpty TrackTranslate = ""
 )
 

@@ -48,22 +48,29 @@ func SearchTernary(condition bool, true htemel.Node, false htemel.Node) *SearchE
 	return Search(false)
 }
 
+// Children appends children to this element.
+func (e *SearchElement) Children(children ...htemel.Node) *SearchElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SearchAutocapitalize string
 
 const (
-	SearchAutocapitalizeCharacters SearchAutocapitalize = "characters"
-	SearchAutocapitalizeNone       SearchAutocapitalize = "none"
-	SearchAutocapitalizeOff        SearchAutocapitalize = "off"
 	SearchAutocapitalizeOn         SearchAutocapitalize = "on"
 	SearchAutocapitalizeSentences  SearchAutocapitalize = "sentences"
 	SearchAutocapitalizeWords      SearchAutocapitalize = "words"
+	SearchAutocapitalizeCharacters SearchAutocapitalize = "characters"
+	SearchAutocapitalizeNone       SearchAutocapitalize = "none"
+	SearchAutocapitalizeOff        SearchAutocapitalize = "off"
 )
 
 type SearchAutocorrect string
 
 const (
-	SearchAutocorrectOn    SearchAutocorrect = "on"
 	SearchAutocorrectOff   SearchAutocorrect = "off"
+	SearchAutocorrectOn    SearchAutocorrect = "on"
 	SearchAutocorrectEmpty SearchAutocorrect = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type SearchEnterkeyhint string
 
 const (
-	SearchEnterkeyhintSend     SearchEnterkeyhint = "send"
 	SearchEnterkeyhintDone     SearchEnterkeyhint = "done"
 	SearchEnterkeyhintEnter    SearchEnterkeyhint = "enter"
 	SearchEnterkeyhintGo       SearchEnterkeyhint = "go"
 	SearchEnterkeyhintNext     SearchEnterkeyhint = "next"
 	SearchEnterkeyhintPrevious SearchEnterkeyhint = "previous"
 	SearchEnterkeyhintSearch   SearchEnterkeyhint = "search"
+	SearchEnterkeyhintSend     SearchEnterkeyhint = "send"
 )
 
 type SearchHidden string
@@ -114,14 +121,14 @@ const (
 type SearchInputmode string
 
 const (
-	SearchInputmodeDecimal SearchInputmode = "decimal"
-	SearchInputmodeEmail   SearchInputmode = "email"
-	SearchInputmodeNone    SearchInputmode = "none"
 	SearchInputmodeNumeric SearchInputmode = "numeric"
 	SearchInputmodeSearch  SearchInputmode = "search"
 	SearchInputmodeTel     SearchInputmode = "tel"
 	SearchInputmodeText    SearchInputmode = "text"
 	SearchInputmodeUrl     SearchInputmode = "url"
+	SearchInputmodeDecimal SearchInputmode = "decimal"
+	SearchInputmodeEmail   SearchInputmode = "email"
+	SearchInputmodeNone    SearchInputmode = "none"
 )
 
 type SearchSpellcheck string
@@ -135,8 +142,8 @@ const (
 type SearchTranslate string
 
 const (
-	SearchTranslateNo    SearchTranslate = "no"
 	SearchTranslateYes   SearchTranslate = "yes"
+	SearchTranslateNo    SearchTranslate = "no"
 	SearchTranslateEmpty SearchTranslate = ""
 )
 

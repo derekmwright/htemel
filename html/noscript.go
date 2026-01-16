@@ -48,6 +48,13 @@ func NoscriptTernary(condition bool, true htemel.Node, false htemel.Node) *Noscr
 	return Noscript(false)
 }
 
+// Children appends children to this element.
+func (e *NoscriptElement) Children(children ...htemel.Node) *NoscriptElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type NoscriptAutocapitalize string
 
 const (
@@ -79,9 +86,9 @@ const (
 type NoscriptDir string
 
 const (
+	NoscriptDirAuto NoscriptDir = "auto"
 	NoscriptDirLtr  NoscriptDir = "ltr"
 	NoscriptDirRtl  NoscriptDir = "rtl"
-	NoscriptDirAuto NoscriptDir = "auto"
 )
 
 type NoscriptDraggable string
@@ -94,34 +101,34 @@ const (
 type NoscriptEnterkeyhint string
 
 const (
+	NoscriptEnterkeyhintGo       NoscriptEnterkeyhint = "go"
+	NoscriptEnterkeyhintNext     NoscriptEnterkeyhint = "next"
 	NoscriptEnterkeyhintPrevious NoscriptEnterkeyhint = "previous"
 	NoscriptEnterkeyhintSearch   NoscriptEnterkeyhint = "search"
 	NoscriptEnterkeyhintSend     NoscriptEnterkeyhint = "send"
 	NoscriptEnterkeyhintDone     NoscriptEnterkeyhint = "done"
 	NoscriptEnterkeyhintEnter    NoscriptEnterkeyhint = "enter"
-	NoscriptEnterkeyhintGo       NoscriptEnterkeyhint = "go"
-	NoscriptEnterkeyhintNext     NoscriptEnterkeyhint = "next"
 )
 
 type NoscriptHidden string
 
 const (
-	NoscriptHiddenUntilFound NoscriptHidden = "until-found"
 	NoscriptHiddenHidden     NoscriptHidden = "hidden"
+	NoscriptHiddenUntilFound NoscriptHidden = "until-found"
 	NoscriptHiddenEmpty      NoscriptHidden = ""
 )
 
 type NoscriptInputmode string
 
 const (
-	NoscriptInputmodeUrl     NoscriptInputmode = "url"
-	NoscriptInputmodeDecimal NoscriptInputmode = "decimal"
-	NoscriptInputmodeEmail   NoscriptInputmode = "email"
 	NoscriptInputmodeNone    NoscriptInputmode = "none"
 	NoscriptInputmodeNumeric NoscriptInputmode = "numeric"
 	NoscriptInputmodeSearch  NoscriptInputmode = "search"
 	NoscriptInputmodeTel     NoscriptInputmode = "tel"
 	NoscriptInputmodeText    NoscriptInputmode = "text"
+	NoscriptInputmodeUrl     NoscriptInputmode = "url"
+	NoscriptInputmodeDecimal NoscriptInputmode = "decimal"
+	NoscriptInputmodeEmail   NoscriptInputmode = "email"
 )
 
 type NoscriptSpellcheck string
@@ -135,8 +142,8 @@ const (
 type NoscriptTranslate string
 
 const (
-	NoscriptTranslateNo    NoscriptTranslate = "no"
 	NoscriptTranslateYes   NoscriptTranslate = "yes"
+	NoscriptTranslateNo    NoscriptTranslate = "no"
 	NoscriptTranslateEmpty NoscriptTranslate = ""
 )
 

@@ -48,15 +48,22 @@ func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
 	return P(false)
 }
 
+// Children appends children to this element.
+func (e *PElement) Children(children ...htemel.Node) *PElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type PAutocapitalize string
 
 const (
-	PAutocapitalizeWords      PAutocapitalize = "words"
-	PAutocapitalizeCharacters PAutocapitalize = "characters"
 	PAutocapitalizeNone       PAutocapitalize = "none"
 	PAutocapitalizeOff        PAutocapitalize = "off"
 	PAutocapitalizeOn         PAutocapitalize = "on"
 	PAutocapitalizeSentences  PAutocapitalize = "sentences"
+	PAutocapitalizeWords      PAutocapitalize = "words"
+	PAutocapitalizeCharacters PAutocapitalize = "characters"
 )
 
 type PAutocorrect string
@@ -70,18 +77,18 @@ const (
 type PContenteditable string
 
 const (
+	PContenteditablePlaintextOnly PContenteditable = "plaintext-only"
 	PContenteditableTrue          PContenteditable = "true"
 	PContenteditableFalse         PContenteditable = "false"
-	PContenteditablePlaintextOnly PContenteditable = "plaintext-only"
 	PContenteditableEmpty         PContenteditable = ""
 )
 
 type PDir string
 
 const (
-	PDirRtl  PDir = "rtl"
 	PDirAuto PDir = "auto"
 	PDirLtr  PDir = "ltr"
+	PDirRtl  PDir = "rtl"
 )
 
 type PDraggable string
@@ -94,13 +101,13 @@ const (
 type PEnterkeyhint string
 
 const (
-	PEnterkeyhintDone     PEnterkeyhint = "done"
 	PEnterkeyhintEnter    PEnterkeyhint = "enter"
 	PEnterkeyhintGo       PEnterkeyhint = "go"
 	PEnterkeyhintNext     PEnterkeyhint = "next"
 	PEnterkeyhintPrevious PEnterkeyhint = "previous"
 	PEnterkeyhintSearch   PEnterkeyhint = "search"
 	PEnterkeyhintSend     PEnterkeyhint = "send"
+	PEnterkeyhintDone     PEnterkeyhint = "done"
 )
 
 type PHidden string
@@ -114,14 +121,14 @@ const (
 type PInputmode string
 
 const (
-	PInputmodeSearch  PInputmode = "search"
-	PInputmodeTel     PInputmode = "tel"
 	PInputmodeText    PInputmode = "text"
 	PInputmodeUrl     PInputmode = "url"
 	PInputmodeDecimal PInputmode = "decimal"
 	PInputmodeEmail   PInputmode = "email"
 	PInputmodeNone    PInputmode = "none"
 	PInputmodeNumeric PInputmode = "numeric"
+	PInputmodeSearch  PInputmode = "search"
+	PInputmodeTel     PInputmode = "tel"
 )
 
 type PSpellcheck string
@@ -143,8 +150,8 @@ const (
 type PWritingsuggestions string
 
 const (
-	PWritingsuggestionsFalse PWritingsuggestions = "false"
 	PWritingsuggestionsTrue  PWritingsuggestions = "true"
+	PWritingsuggestionsFalse PWritingsuggestions = "false"
 	PWritingsuggestionsEmpty PWritingsuggestions = ""
 )
 

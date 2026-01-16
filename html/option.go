@@ -48,15 +48,22 @@ func OptionTernary(condition bool, true htemel.Node, false htemel.Node) *OptionE
 	return Option(false)
 }
 
+// Children appends children to this element.
+func (e *OptionElement) Children(children ...htemel.Node) *OptionElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type OptionAutocapitalize string
 
 const (
-	OptionAutocapitalizeNone       OptionAutocapitalize = "none"
-	OptionAutocapitalizeOff        OptionAutocapitalize = "off"
-	OptionAutocapitalizeOn         OptionAutocapitalize = "on"
 	OptionAutocapitalizeSentences  OptionAutocapitalize = "sentences"
 	OptionAutocapitalizeWords      OptionAutocapitalize = "words"
 	OptionAutocapitalizeCharacters OptionAutocapitalize = "characters"
+	OptionAutocapitalizeNone       OptionAutocapitalize = "none"
+	OptionAutocapitalizeOff        OptionAutocapitalize = "off"
+	OptionAutocapitalizeOn         OptionAutocapitalize = "on"
 )
 
 type OptionAutocorrect string
@@ -70,9 +77,9 @@ const (
 type OptionContenteditable string
 
 const (
-	OptionContenteditableTrue          OptionContenteditable = "true"
 	OptionContenteditableFalse         OptionContenteditable = "false"
 	OptionContenteditablePlaintextOnly OptionContenteditable = "plaintext-only"
+	OptionContenteditableTrue          OptionContenteditable = "true"
 	OptionContenteditableEmpty         OptionContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type OptionEnterkeyhint string
 
 const (
+	OptionEnterkeyhintNext     OptionEnterkeyhint = "next"
+	OptionEnterkeyhintPrevious OptionEnterkeyhint = "previous"
 	OptionEnterkeyhintSearch   OptionEnterkeyhint = "search"
 	OptionEnterkeyhintSend     OptionEnterkeyhint = "send"
 	OptionEnterkeyhintDone     OptionEnterkeyhint = "done"
 	OptionEnterkeyhintEnter    OptionEnterkeyhint = "enter"
 	OptionEnterkeyhintGo       OptionEnterkeyhint = "go"
-	OptionEnterkeyhintNext     OptionEnterkeyhint = "next"
-	OptionEnterkeyhintPrevious OptionEnterkeyhint = "previous"
 )
 
 type OptionHidden string
@@ -114,14 +121,14 @@ const (
 type OptionInputmode string
 
 const (
-	OptionInputmodeNumeric OptionInputmode = "numeric"
-	OptionInputmodeSearch  OptionInputmode = "search"
-	OptionInputmodeTel     OptionInputmode = "tel"
 	OptionInputmodeText    OptionInputmode = "text"
 	OptionInputmodeUrl     OptionInputmode = "url"
 	OptionInputmodeDecimal OptionInputmode = "decimal"
 	OptionInputmodeEmail   OptionInputmode = "email"
 	OptionInputmodeNone    OptionInputmode = "none"
+	OptionInputmodeNumeric OptionInputmode = "numeric"
+	OptionInputmodeSearch  OptionInputmode = "search"
+	OptionInputmodeTel     OptionInputmode = "tel"
 )
 
 type OptionSpellcheck string

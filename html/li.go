@@ -48,15 +48,22 @@ func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
 	return Li(false)
 }
 
+// Children appends children to this element.
+func (e *LiElement) Children(children ...htemel.Node) *LiElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type LiAutocapitalize string
 
 const (
-	LiAutocapitalizeSentences  LiAutocapitalize = "sentences"
-	LiAutocapitalizeWords      LiAutocapitalize = "words"
 	LiAutocapitalizeCharacters LiAutocapitalize = "characters"
 	LiAutocapitalizeNone       LiAutocapitalize = "none"
 	LiAutocapitalizeOff        LiAutocapitalize = "off"
 	LiAutocapitalizeOn         LiAutocapitalize = "on"
+	LiAutocapitalizeSentences  LiAutocapitalize = "sentences"
+	LiAutocapitalizeWords      LiAutocapitalize = "words"
 )
 
 type LiAutocorrect string
@@ -70,18 +77,18 @@ const (
 type LiContenteditable string
 
 const (
+	LiContenteditableTrue          LiContenteditable = "true"
 	LiContenteditableFalse         LiContenteditable = "false"
 	LiContenteditablePlaintextOnly LiContenteditable = "plaintext-only"
-	LiContenteditableTrue          LiContenteditable = "true"
 	LiContenteditableEmpty         LiContenteditable = ""
 )
 
 type LiDir string
 
 const (
+	LiDirRtl  LiDir = "rtl"
 	LiDirAuto LiDir = "auto"
 	LiDirLtr  LiDir = "ltr"
-	LiDirRtl  LiDir = "rtl"
 )
 
 type LiDraggable string
@@ -94,13 +101,13 @@ const (
 type LiEnterkeyhint string
 
 const (
-	LiEnterkeyhintGo       LiEnterkeyhint = "go"
-	LiEnterkeyhintNext     LiEnterkeyhint = "next"
-	LiEnterkeyhintPrevious LiEnterkeyhint = "previous"
 	LiEnterkeyhintSearch   LiEnterkeyhint = "search"
 	LiEnterkeyhintSend     LiEnterkeyhint = "send"
 	LiEnterkeyhintDone     LiEnterkeyhint = "done"
 	LiEnterkeyhintEnter    LiEnterkeyhint = "enter"
+	LiEnterkeyhintGo       LiEnterkeyhint = "go"
+	LiEnterkeyhintNext     LiEnterkeyhint = "next"
+	LiEnterkeyhintPrevious LiEnterkeyhint = "previous"
 )
 
 type LiHidden string
@@ -114,21 +121,21 @@ const (
 type LiInputmode string
 
 const (
-	LiInputmodeNumeric LiInputmode = "numeric"
-	LiInputmodeSearch  LiInputmode = "search"
-	LiInputmodeTel     LiInputmode = "tel"
 	LiInputmodeText    LiInputmode = "text"
 	LiInputmodeUrl     LiInputmode = "url"
 	LiInputmodeDecimal LiInputmode = "decimal"
 	LiInputmodeEmail   LiInputmode = "email"
 	LiInputmodeNone    LiInputmode = "none"
+	LiInputmodeNumeric LiInputmode = "numeric"
+	LiInputmodeSearch  LiInputmode = "search"
+	LiInputmodeTel     LiInputmode = "tel"
 )
 
 type LiSpellcheck string
 
 const (
-	LiSpellcheckFalse LiSpellcheck = "false"
 	LiSpellcheckTrue  LiSpellcheck = "true"
+	LiSpellcheckFalse LiSpellcheck = "false"
 	LiSpellcheckEmpty LiSpellcheck = ""
 )
 
@@ -143,8 +150,8 @@ const (
 type LiWritingsuggestions string
 
 const (
-	LiWritingsuggestionsTrue  LiWritingsuggestions = "true"
 	LiWritingsuggestionsFalse LiWritingsuggestions = "false"
+	LiWritingsuggestionsTrue  LiWritingsuggestions = "true"
 	LiWritingsuggestionsEmpty LiWritingsuggestions = ""
 )
 

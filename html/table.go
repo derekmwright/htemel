@@ -48,22 +48,29 @@ func TableTernary(condition bool, true htemel.Node, false htemel.Node) *TableEle
 	return Table(false)
 }
 
+// Children appends children to this element.
+func (e *TableElement) Children(children ...htemel.Node) *TableElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type TableAutocapitalize string
 
 const (
-	TableAutocapitalizeNone       TableAutocapitalize = "none"
-	TableAutocapitalizeOff        TableAutocapitalize = "off"
-	TableAutocapitalizeOn         TableAutocapitalize = "on"
 	TableAutocapitalizeSentences  TableAutocapitalize = "sentences"
 	TableAutocapitalizeWords      TableAutocapitalize = "words"
 	TableAutocapitalizeCharacters TableAutocapitalize = "characters"
+	TableAutocapitalizeNone       TableAutocapitalize = "none"
+	TableAutocapitalizeOff        TableAutocapitalize = "off"
+	TableAutocapitalizeOn         TableAutocapitalize = "on"
 )
 
 type TableAutocorrect string
 
 const (
-	TableAutocorrectOn    TableAutocorrect = "on"
 	TableAutocorrectOff   TableAutocorrect = "off"
+	TableAutocorrectOn    TableAutocorrect = "on"
 	TableAutocorrectEmpty TableAutocorrect = ""
 )
 
@@ -79,9 +86,9 @@ const (
 type TableDir string
 
 const (
+	TableDirRtl  TableDir = "rtl"
 	TableDirAuto TableDir = "auto"
 	TableDirLtr  TableDir = "ltr"
-	TableDirRtl  TableDir = "rtl"
 )
 
 type TableDraggable string
@@ -94,13 +101,13 @@ const (
 type TableEnterkeyhint string
 
 const (
-	TableEnterkeyhintEnter    TableEnterkeyhint = "enter"
-	TableEnterkeyhintGo       TableEnterkeyhint = "go"
-	TableEnterkeyhintNext     TableEnterkeyhint = "next"
 	TableEnterkeyhintPrevious TableEnterkeyhint = "previous"
 	TableEnterkeyhintSearch   TableEnterkeyhint = "search"
 	TableEnterkeyhintSend     TableEnterkeyhint = "send"
 	TableEnterkeyhintDone     TableEnterkeyhint = "done"
+	TableEnterkeyhintEnter    TableEnterkeyhint = "enter"
+	TableEnterkeyhintGo       TableEnterkeyhint = "go"
+	TableEnterkeyhintNext     TableEnterkeyhint = "next"
 )
 
 type TableHidden string
@@ -114,7 +121,6 @@ const (
 type TableInputmode string
 
 const (
-	TableInputmodeUrl     TableInputmode = "url"
 	TableInputmodeDecimal TableInputmode = "decimal"
 	TableInputmodeEmail   TableInputmode = "email"
 	TableInputmodeNone    TableInputmode = "none"
@@ -122,6 +128,7 @@ const (
 	TableInputmodeSearch  TableInputmode = "search"
 	TableInputmodeTel     TableInputmode = "tel"
 	TableInputmodeText    TableInputmode = "text"
+	TableInputmodeUrl     TableInputmode = "url"
 )
 
 type TableSpellcheck string

@@ -48,15 +48,22 @@ func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrEleme
 	return Abbr(false)
 }
 
+// Children appends children to this element.
+func (e *AbbrElement) Children(children ...htemel.Node) *AbbrElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type AbbrAutocapitalize string
 
 const (
-	AbbrAutocapitalizeCharacters AbbrAutocapitalize = "characters"
-	AbbrAutocapitalizeNone       AbbrAutocapitalize = "none"
 	AbbrAutocapitalizeOff        AbbrAutocapitalize = "off"
 	AbbrAutocapitalizeOn         AbbrAutocapitalize = "on"
 	AbbrAutocapitalizeSentences  AbbrAutocapitalize = "sentences"
 	AbbrAutocapitalizeWords      AbbrAutocapitalize = "words"
+	AbbrAutocapitalizeCharacters AbbrAutocapitalize = "characters"
+	AbbrAutocapitalizeNone       AbbrAutocapitalize = "none"
 )
 
 type AbbrAutocorrect string
@@ -70,18 +77,18 @@ const (
 type AbbrContenteditable string
 
 const (
-	AbbrContenteditableFalse         AbbrContenteditable = "false"
 	AbbrContenteditablePlaintextOnly AbbrContenteditable = "plaintext-only"
 	AbbrContenteditableTrue          AbbrContenteditable = "true"
+	AbbrContenteditableFalse         AbbrContenteditable = "false"
 	AbbrContenteditableEmpty         AbbrContenteditable = ""
 )
 
 type AbbrDir string
 
 const (
+	AbbrDirAuto AbbrDir = "auto"
 	AbbrDirLtr  AbbrDir = "ltr"
 	AbbrDirRtl  AbbrDir = "rtl"
-	AbbrDirAuto AbbrDir = "auto"
 )
 
 type AbbrDraggable string
@@ -94,13 +101,13 @@ const (
 type AbbrEnterkeyhint string
 
 const (
-	AbbrEnterkeyhintDone     AbbrEnterkeyhint = "done"
 	AbbrEnterkeyhintEnter    AbbrEnterkeyhint = "enter"
 	AbbrEnterkeyhintGo       AbbrEnterkeyhint = "go"
 	AbbrEnterkeyhintNext     AbbrEnterkeyhint = "next"
 	AbbrEnterkeyhintPrevious AbbrEnterkeyhint = "previous"
 	AbbrEnterkeyhintSearch   AbbrEnterkeyhint = "search"
 	AbbrEnterkeyhintSend     AbbrEnterkeyhint = "send"
+	AbbrEnterkeyhintDone     AbbrEnterkeyhint = "done"
 )
 
 type AbbrHidden string
@@ -114,14 +121,14 @@ const (
 type AbbrInputmode string
 
 const (
-	AbbrInputmodeUrl     AbbrInputmode = "url"
-	AbbrInputmodeDecimal AbbrInputmode = "decimal"
-	AbbrInputmodeEmail   AbbrInputmode = "email"
-	AbbrInputmodeNone    AbbrInputmode = "none"
 	AbbrInputmodeNumeric AbbrInputmode = "numeric"
 	AbbrInputmodeSearch  AbbrInputmode = "search"
 	AbbrInputmodeTel     AbbrInputmode = "tel"
 	AbbrInputmodeText    AbbrInputmode = "text"
+	AbbrInputmodeUrl     AbbrInputmode = "url"
+	AbbrInputmodeDecimal AbbrInputmode = "decimal"
+	AbbrInputmodeEmail   AbbrInputmode = "email"
+	AbbrInputmodeNone    AbbrInputmode = "none"
 )
 
 type AbbrSpellcheck string

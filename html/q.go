@@ -48,15 +48,22 @@ func QTernary(condition bool, true htemel.Node, false htemel.Node) *QElement {
 	return Q(false)
 }
 
+// Children appends children to this element.
+func (e *QElement) Children(children ...htemel.Node) *QElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type QAutocapitalize string
 
 const (
-	QAutocapitalizeSentences  QAutocapitalize = "sentences"
 	QAutocapitalizeWords      QAutocapitalize = "words"
 	QAutocapitalizeCharacters QAutocapitalize = "characters"
 	QAutocapitalizeNone       QAutocapitalize = "none"
 	QAutocapitalizeOff        QAutocapitalize = "off"
 	QAutocapitalizeOn         QAutocapitalize = "on"
+	QAutocapitalizeSentences  QAutocapitalize = "sentences"
 )
 
 type QAutocorrect string
@@ -94,13 +101,13 @@ const (
 type QEnterkeyhint string
 
 const (
+	QEnterkeyhintSend     QEnterkeyhint = "send"
 	QEnterkeyhintDone     QEnterkeyhint = "done"
 	QEnterkeyhintEnter    QEnterkeyhint = "enter"
 	QEnterkeyhintGo       QEnterkeyhint = "go"
 	QEnterkeyhintNext     QEnterkeyhint = "next"
 	QEnterkeyhintPrevious QEnterkeyhint = "previous"
 	QEnterkeyhintSearch   QEnterkeyhint = "search"
-	QEnterkeyhintSend     QEnterkeyhint = "send"
 )
 
 type QHidden string
@@ -114,6 +121,7 @@ const (
 type QInputmode string
 
 const (
+	QInputmodeEmail   QInputmode = "email"
 	QInputmodeNone    QInputmode = "none"
 	QInputmodeNumeric QInputmode = "numeric"
 	QInputmodeSearch  QInputmode = "search"
@@ -121,7 +129,6 @@ const (
 	QInputmodeText    QInputmode = "text"
 	QInputmodeUrl     QInputmode = "url"
 	QInputmodeDecimal QInputmode = "decimal"
-	QInputmodeEmail   QInputmode = "email"
 )
 
 type QSpellcheck string
@@ -135,8 +142,8 @@ const (
 type QTranslate string
 
 const (
-	QTranslateYes   QTranslate = "yes"
 	QTranslateNo    QTranslate = "no"
+	QTranslateYes   QTranslate = "yes"
 	QTranslateEmpty QTranslate = ""
 )
 

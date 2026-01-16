@@ -42,12 +42,12 @@ func BrIf(condition bool) *BrElement {
 type BrAutocapitalize string
 
 const (
-	BrAutocapitalizeCharacters BrAutocapitalize = "characters"
-	BrAutocapitalizeNone       BrAutocapitalize = "none"
-	BrAutocapitalizeOff        BrAutocapitalize = "off"
 	BrAutocapitalizeOn         BrAutocapitalize = "on"
 	BrAutocapitalizeSentences  BrAutocapitalize = "sentences"
 	BrAutocapitalizeWords      BrAutocapitalize = "words"
+	BrAutocapitalizeCharacters BrAutocapitalize = "characters"
+	BrAutocapitalizeNone       BrAutocapitalize = "none"
+	BrAutocapitalizeOff        BrAutocapitalize = "off"
 )
 
 type BrAutocorrect string
@@ -70,9 +70,9 @@ const (
 type BrDir string
 
 const (
+	BrDirRtl  BrDir = "rtl"
 	BrDirAuto BrDir = "auto"
 	BrDirLtr  BrDir = "ltr"
-	BrDirRtl  BrDir = "rtl"
 )
 
 type BrDraggable string
@@ -105,14 +105,14 @@ const (
 type BrInputmode string
 
 const (
+	BrInputmodeDecimal BrInputmode = "decimal"
+	BrInputmodeEmail   BrInputmode = "email"
 	BrInputmodeNone    BrInputmode = "none"
 	BrInputmodeNumeric BrInputmode = "numeric"
 	BrInputmodeSearch  BrInputmode = "search"
 	BrInputmodeTel     BrInputmode = "tel"
 	BrInputmodeText    BrInputmode = "text"
 	BrInputmodeUrl     BrInputmode = "url"
-	BrInputmodeDecimal BrInputmode = "decimal"
-	BrInputmodeEmail   BrInputmode = "email"
 )
 
 type BrSpellcheck string

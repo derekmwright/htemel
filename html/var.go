@@ -48,15 +48,22 @@ func VarTernary(condition bool, true htemel.Node, false htemel.Node) *VarElement
 	return Var(false)
 }
 
+// Children appends children to this element.
+func (e *VarElement) Children(children ...htemel.Node) *VarElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type VarAutocapitalize string
 
 const (
-	VarAutocapitalizeOn         VarAutocapitalize = "on"
-	VarAutocapitalizeSentences  VarAutocapitalize = "sentences"
-	VarAutocapitalizeWords      VarAutocapitalize = "words"
 	VarAutocapitalizeCharacters VarAutocapitalize = "characters"
 	VarAutocapitalizeNone       VarAutocapitalize = "none"
 	VarAutocapitalizeOff        VarAutocapitalize = "off"
+	VarAutocapitalizeOn         VarAutocapitalize = "on"
+	VarAutocapitalizeSentences  VarAutocapitalize = "sentences"
+	VarAutocapitalizeWords      VarAutocapitalize = "words"
 )
 
 type VarAutocorrect string
@@ -94,13 +101,13 @@ const (
 type VarEnterkeyhint string
 
 const (
+	VarEnterkeyhintPrevious VarEnterkeyhint = "previous"
+	VarEnterkeyhintSearch   VarEnterkeyhint = "search"
+	VarEnterkeyhintSend     VarEnterkeyhint = "send"
 	VarEnterkeyhintDone     VarEnterkeyhint = "done"
 	VarEnterkeyhintEnter    VarEnterkeyhint = "enter"
 	VarEnterkeyhintGo       VarEnterkeyhint = "go"
 	VarEnterkeyhintNext     VarEnterkeyhint = "next"
-	VarEnterkeyhintPrevious VarEnterkeyhint = "previous"
-	VarEnterkeyhintSearch   VarEnterkeyhint = "search"
-	VarEnterkeyhintSend     VarEnterkeyhint = "send"
 )
 
 type VarHidden string
@@ -114,14 +121,14 @@ const (
 type VarInputmode string
 
 const (
+	VarInputmodeNumeric VarInputmode = "numeric"
+	VarInputmodeSearch  VarInputmode = "search"
 	VarInputmodeTel     VarInputmode = "tel"
 	VarInputmodeText    VarInputmode = "text"
 	VarInputmodeUrl     VarInputmode = "url"
 	VarInputmodeDecimal VarInputmode = "decimal"
 	VarInputmodeEmail   VarInputmode = "email"
 	VarInputmodeNone    VarInputmode = "none"
-	VarInputmodeNumeric VarInputmode = "numeric"
-	VarInputmodeSearch  VarInputmode = "search"
 )
 
 type VarSpellcheck string

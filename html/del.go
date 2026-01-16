@@ -48,15 +48,22 @@ func DelTernary(condition bool, true htemel.Node, false htemel.Node) *DelElement
 	return Del(false)
 }
 
+// Children appends children to this element.
+func (e *DelElement) Children(children ...htemel.Node) *DelElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type DelAutocapitalize string
 
 const (
-	DelAutocapitalizeCharacters DelAutocapitalize = "characters"
-	DelAutocapitalizeNone       DelAutocapitalize = "none"
-	DelAutocapitalizeOff        DelAutocapitalize = "off"
 	DelAutocapitalizeOn         DelAutocapitalize = "on"
 	DelAutocapitalizeSentences  DelAutocapitalize = "sentences"
 	DelAutocapitalizeWords      DelAutocapitalize = "words"
+	DelAutocapitalizeCharacters DelAutocapitalize = "characters"
+	DelAutocapitalizeNone       DelAutocapitalize = "none"
+	DelAutocapitalizeOff        DelAutocapitalize = "off"
 )
 
 type DelAutocorrect string
@@ -94,13 +101,13 @@ const (
 type DelEnterkeyhint string
 
 const (
-	DelEnterkeyhintSearch   DelEnterkeyhint = "search"
-	DelEnterkeyhintSend     DelEnterkeyhint = "send"
-	DelEnterkeyhintDone     DelEnterkeyhint = "done"
 	DelEnterkeyhintEnter    DelEnterkeyhint = "enter"
 	DelEnterkeyhintGo       DelEnterkeyhint = "go"
 	DelEnterkeyhintNext     DelEnterkeyhint = "next"
 	DelEnterkeyhintPrevious DelEnterkeyhint = "previous"
+	DelEnterkeyhintSearch   DelEnterkeyhint = "search"
+	DelEnterkeyhintSend     DelEnterkeyhint = "send"
+	DelEnterkeyhintDone     DelEnterkeyhint = "done"
 )
 
 type DelHidden string
@@ -143,8 +150,8 @@ const (
 type DelWritingsuggestions string
 
 const (
-	DelWritingsuggestionsTrue  DelWritingsuggestions = "true"
 	DelWritingsuggestionsFalse DelWritingsuggestions = "false"
+	DelWritingsuggestionsTrue  DelWritingsuggestions = "true"
 	DelWritingsuggestionsEmpty DelWritingsuggestions = ""
 )
 

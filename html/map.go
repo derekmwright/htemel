@@ -48,31 +48,38 @@ func MapTernary(condition bool, true htemel.Node, false htemel.Node) *MapElement
 	return Map(false)
 }
 
+// Children appends children to this element.
+func (e *MapElement) Children(children ...htemel.Node) *MapElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type MapAutocapitalize string
 
 const (
+	MapAutocapitalizeCharacters MapAutocapitalize = "characters"
+	MapAutocapitalizeNone       MapAutocapitalize = "none"
 	MapAutocapitalizeOff        MapAutocapitalize = "off"
 	MapAutocapitalizeOn         MapAutocapitalize = "on"
 	MapAutocapitalizeSentences  MapAutocapitalize = "sentences"
 	MapAutocapitalizeWords      MapAutocapitalize = "words"
-	MapAutocapitalizeCharacters MapAutocapitalize = "characters"
-	MapAutocapitalizeNone       MapAutocapitalize = "none"
 )
 
 type MapAutocorrect string
 
 const (
-	MapAutocorrectOn    MapAutocorrect = "on"
 	MapAutocorrectOff   MapAutocorrect = "off"
+	MapAutocorrectOn    MapAutocorrect = "on"
 	MapAutocorrectEmpty MapAutocorrect = ""
 )
 
 type MapContenteditable string
 
 const (
+	MapContenteditableFalse         MapContenteditable = "false"
 	MapContenteditablePlaintextOnly MapContenteditable = "plaintext-only"
 	MapContenteditableTrue          MapContenteditable = "true"
-	MapContenteditableFalse         MapContenteditable = "false"
 	MapContenteditableEmpty         MapContenteditable = ""
 )
 
@@ -87,20 +94,20 @@ const (
 type MapDraggable string
 
 const (
-	MapDraggableTrue  MapDraggable = "true"
 	MapDraggableFalse MapDraggable = "false"
+	MapDraggableTrue  MapDraggable = "true"
 )
 
 type MapEnterkeyhint string
 
 const (
-	MapEnterkeyhintSend     MapEnterkeyhint = "send"
-	MapEnterkeyhintDone     MapEnterkeyhint = "done"
 	MapEnterkeyhintEnter    MapEnterkeyhint = "enter"
 	MapEnterkeyhintGo       MapEnterkeyhint = "go"
 	MapEnterkeyhintNext     MapEnterkeyhint = "next"
 	MapEnterkeyhintPrevious MapEnterkeyhint = "previous"
 	MapEnterkeyhintSearch   MapEnterkeyhint = "search"
+	MapEnterkeyhintSend     MapEnterkeyhint = "send"
+	MapEnterkeyhintDone     MapEnterkeyhint = "done"
 )
 
 type MapHidden string
@@ -114,14 +121,14 @@ const (
 type MapInputmode string
 
 const (
-	MapInputmodeUrl     MapInputmode = "url"
-	MapInputmodeDecimal MapInputmode = "decimal"
 	MapInputmodeEmail   MapInputmode = "email"
 	MapInputmodeNone    MapInputmode = "none"
 	MapInputmodeNumeric MapInputmode = "numeric"
 	MapInputmodeSearch  MapInputmode = "search"
 	MapInputmodeTel     MapInputmode = "tel"
 	MapInputmodeText    MapInputmode = "text"
+	MapInputmodeUrl     MapInputmode = "url"
+	MapInputmodeDecimal MapInputmode = "decimal"
 )
 
 type MapSpellcheck string
@@ -135,8 +142,8 @@ const (
 type MapTranslate string
 
 const (
-	MapTranslateYes   MapTranslate = "yes"
 	MapTranslateNo    MapTranslate = "no"
+	MapTranslateYes   MapTranslate = "yes"
 	MapTranslateEmpty MapTranslate = ""
 )
 

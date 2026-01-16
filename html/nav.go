@@ -48,6 +48,13 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 	return Nav(false)
 }
 
+// Children appends children to this element.
+func (e *NavElement) Children(children ...htemel.Node) *NavElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type NavAutocapitalize string
 
 const (
@@ -70,9 +77,9 @@ const (
 type NavContenteditable string
 
 const (
-	NavContenteditableFalse         NavContenteditable = "false"
 	NavContenteditablePlaintextOnly NavContenteditable = "plaintext-only"
 	NavContenteditableTrue          NavContenteditable = "true"
+	NavContenteditableFalse         NavContenteditable = "false"
 	NavContenteditableEmpty         NavContenteditable = ""
 )
 
@@ -94,49 +101,49 @@ const (
 type NavEnterkeyhint string
 
 const (
+	NavEnterkeyhintPrevious NavEnterkeyhint = "previous"
 	NavEnterkeyhintSearch   NavEnterkeyhint = "search"
 	NavEnterkeyhintSend     NavEnterkeyhint = "send"
 	NavEnterkeyhintDone     NavEnterkeyhint = "done"
 	NavEnterkeyhintEnter    NavEnterkeyhint = "enter"
 	NavEnterkeyhintGo       NavEnterkeyhint = "go"
 	NavEnterkeyhintNext     NavEnterkeyhint = "next"
-	NavEnterkeyhintPrevious NavEnterkeyhint = "previous"
 )
 
 type NavHidden string
 
 const (
-	NavHiddenUntilFound NavHidden = "until-found"
 	NavHiddenHidden     NavHidden = "hidden"
+	NavHiddenUntilFound NavHidden = "until-found"
 	NavHiddenEmpty      NavHidden = ""
 )
 
 type NavInputmode string
 
 const (
-	NavInputmodeTel     NavInputmode = "tel"
-	NavInputmodeText    NavInputmode = "text"
 	NavInputmodeUrl     NavInputmode = "url"
 	NavInputmodeDecimal NavInputmode = "decimal"
 	NavInputmodeEmail   NavInputmode = "email"
 	NavInputmodeNone    NavInputmode = "none"
 	NavInputmodeNumeric NavInputmode = "numeric"
 	NavInputmodeSearch  NavInputmode = "search"
+	NavInputmodeTel     NavInputmode = "tel"
+	NavInputmodeText    NavInputmode = "text"
 )
 
 type NavSpellcheck string
 
 const (
-	NavSpellcheckFalse NavSpellcheck = "false"
 	NavSpellcheckTrue  NavSpellcheck = "true"
+	NavSpellcheckFalse NavSpellcheck = "false"
 	NavSpellcheckEmpty NavSpellcheck = ""
 )
 
 type NavTranslate string
 
 const (
-	NavTranslateYes   NavTranslate = "yes"
 	NavTranslateNo    NavTranslate = "no"
+	NavTranslateYes   NavTranslate = "yes"
 	NavTranslateEmpty NavTranslate = ""
 )
 

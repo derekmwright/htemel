@@ -48,15 +48,22 @@ func HtmlTernary(condition bool, true htemel.Node, false htemel.Node) *HtmlEleme
 	return Html(false)
 }
 
+// Children appends children to this element.
+func (e *HtmlElement) Children(children ...htemel.Node) *HtmlElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type HtmlAutocapitalize string
 
 const (
-	HtmlAutocapitalizeCharacters HtmlAutocapitalize = "characters"
-	HtmlAutocapitalizeNone       HtmlAutocapitalize = "none"
-	HtmlAutocapitalizeOff        HtmlAutocapitalize = "off"
 	HtmlAutocapitalizeOn         HtmlAutocapitalize = "on"
 	HtmlAutocapitalizeSentences  HtmlAutocapitalize = "sentences"
 	HtmlAutocapitalizeWords      HtmlAutocapitalize = "words"
+	HtmlAutocapitalizeCharacters HtmlAutocapitalize = "characters"
+	HtmlAutocapitalizeNone       HtmlAutocapitalize = "none"
+	HtmlAutocapitalizeOff        HtmlAutocapitalize = "off"
 )
 
 type HtmlAutocorrect string
@@ -94,13 +101,13 @@ const (
 type HtmlEnterkeyhint string
 
 const (
-	HtmlEnterkeyhintEnter    HtmlEnterkeyhint = "enter"
 	HtmlEnterkeyhintGo       HtmlEnterkeyhint = "go"
 	HtmlEnterkeyhintNext     HtmlEnterkeyhint = "next"
 	HtmlEnterkeyhintPrevious HtmlEnterkeyhint = "previous"
 	HtmlEnterkeyhintSearch   HtmlEnterkeyhint = "search"
 	HtmlEnterkeyhintSend     HtmlEnterkeyhint = "send"
 	HtmlEnterkeyhintDone     HtmlEnterkeyhint = "done"
+	HtmlEnterkeyhintEnter    HtmlEnterkeyhint = "enter"
 )
 
 type HtmlHidden string
@@ -114,14 +121,14 @@ const (
 type HtmlInputmode string
 
 const (
-	HtmlInputmodeEmail   HtmlInputmode = "email"
-	HtmlInputmodeNone    HtmlInputmode = "none"
-	HtmlInputmodeNumeric HtmlInputmode = "numeric"
-	HtmlInputmodeSearch  HtmlInputmode = "search"
 	HtmlInputmodeTel     HtmlInputmode = "tel"
 	HtmlInputmodeText    HtmlInputmode = "text"
 	HtmlInputmodeUrl     HtmlInputmode = "url"
 	HtmlInputmodeDecimal HtmlInputmode = "decimal"
+	HtmlInputmodeEmail   HtmlInputmode = "email"
+	HtmlInputmodeNone    HtmlInputmode = "none"
+	HtmlInputmodeNumeric HtmlInputmode = "numeric"
+	HtmlInputmodeSearch  HtmlInputmode = "search"
 )
 
 type HtmlSpellcheck string

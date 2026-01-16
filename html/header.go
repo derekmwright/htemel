@@ -48,15 +48,22 @@ func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderE
 	return Header(false)
 }
 
+// Children appends children to this element.
+func (e *HeaderElement) Children(children ...htemel.Node) *HeaderElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type HeaderAutocapitalize string
 
 const (
-	HeaderAutocapitalizeNone       HeaderAutocapitalize = "none"
-	HeaderAutocapitalizeOff        HeaderAutocapitalize = "off"
 	HeaderAutocapitalizeOn         HeaderAutocapitalize = "on"
 	HeaderAutocapitalizeSentences  HeaderAutocapitalize = "sentences"
 	HeaderAutocapitalizeWords      HeaderAutocapitalize = "words"
 	HeaderAutocapitalizeCharacters HeaderAutocapitalize = "characters"
+	HeaderAutocapitalizeNone       HeaderAutocapitalize = "none"
+	HeaderAutocapitalizeOff        HeaderAutocapitalize = "off"
 )
 
 type HeaderAutocorrect string
@@ -70,9 +77,9 @@ const (
 type HeaderContenteditable string
 
 const (
-	HeaderContenteditableTrue          HeaderContenteditable = "true"
 	HeaderContenteditableFalse         HeaderContenteditable = "false"
 	HeaderContenteditablePlaintextOnly HeaderContenteditable = "plaintext-only"
+	HeaderContenteditableTrue          HeaderContenteditable = "true"
 	HeaderContenteditableEmpty         HeaderContenteditable = ""
 )
 
@@ -87,8 +94,8 @@ const (
 type HeaderDraggable string
 
 const (
-	HeaderDraggableFalse HeaderDraggable = "false"
 	HeaderDraggableTrue  HeaderDraggable = "true"
+	HeaderDraggableFalse HeaderDraggable = "false"
 )
 
 type HeaderEnterkeyhint string
@@ -114,14 +121,14 @@ const (
 type HeaderInputmode string
 
 const (
+	HeaderInputmodeUrl     HeaderInputmode = "url"
+	HeaderInputmodeDecimal HeaderInputmode = "decimal"
+	HeaderInputmodeEmail   HeaderInputmode = "email"
 	HeaderInputmodeNone    HeaderInputmode = "none"
 	HeaderInputmodeNumeric HeaderInputmode = "numeric"
 	HeaderInputmodeSearch  HeaderInputmode = "search"
 	HeaderInputmodeTel     HeaderInputmode = "tel"
 	HeaderInputmodeText    HeaderInputmode = "text"
-	HeaderInputmodeUrl     HeaderInputmode = "url"
-	HeaderInputmodeDecimal HeaderInputmode = "decimal"
-	HeaderInputmodeEmail   HeaderInputmode = "email"
 )
 
 type HeaderSpellcheck string
@@ -135,8 +142,8 @@ const (
 type HeaderTranslate string
 
 const (
-	HeaderTranslateYes   HeaderTranslate = "yes"
 	HeaderTranslateNo    HeaderTranslate = "no"
+	HeaderTranslateYes   HeaderTranslate = "yes"
 	HeaderTranslateEmpty HeaderTranslate = ""
 )
 

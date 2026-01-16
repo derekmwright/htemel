@@ -48,6 +48,13 @@ func AudioTernary(condition bool, true htemel.Node, false htemel.Node) *AudioEle
 	return Audio(false)
 }
 
+// Children appends children to this element.
+func (e *AudioElement) Children(children ...htemel.Node) *AudioElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type AudioCrossorigin string
 
 const (
@@ -68,12 +75,12 @@ const (
 type AudioAutocapitalize string
 
 const (
-	AudioAutocapitalizeWords      AudioAutocapitalize = "words"
 	AudioAutocapitalizeCharacters AudioAutocapitalize = "characters"
 	AudioAutocapitalizeNone       AudioAutocapitalize = "none"
 	AudioAutocapitalizeOff        AudioAutocapitalize = "off"
 	AudioAutocapitalizeOn         AudioAutocapitalize = "on"
 	AudioAutocapitalizeSentences  AudioAutocapitalize = "sentences"
+	AudioAutocapitalizeWords      AudioAutocapitalize = "words"
 )
 
 type AudioAutocorrect string
@@ -96,9 +103,9 @@ const (
 type AudioDir string
 
 const (
-	AudioDirAuto AudioDir = "auto"
 	AudioDirLtr  AudioDir = "ltr"
 	AudioDirRtl  AudioDir = "rtl"
+	AudioDirAuto AudioDir = "auto"
 )
 
 type AudioDraggable string
@@ -111,34 +118,34 @@ const (
 type AudioEnterkeyhint string
 
 const (
+	AudioEnterkeyhintSearch   AudioEnterkeyhint = "search"
+	AudioEnterkeyhintSend     AudioEnterkeyhint = "send"
 	AudioEnterkeyhintDone     AudioEnterkeyhint = "done"
 	AudioEnterkeyhintEnter    AudioEnterkeyhint = "enter"
 	AudioEnterkeyhintGo       AudioEnterkeyhint = "go"
 	AudioEnterkeyhintNext     AudioEnterkeyhint = "next"
 	AudioEnterkeyhintPrevious AudioEnterkeyhint = "previous"
-	AudioEnterkeyhintSearch   AudioEnterkeyhint = "search"
-	AudioEnterkeyhintSend     AudioEnterkeyhint = "send"
 )
 
 type AudioHidden string
 
 const (
-	AudioHiddenHidden     AudioHidden = "hidden"
 	AudioHiddenUntilFound AudioHidden = "until-found"
+	AudioHiddenHidden     AudioHidden = "hidden"
 	AudioHiddenEmpty      AudioHidden = ""
 )
 
 type AudioInputmode string
 
 const (
+	AudioInputmodeNumeric AudioInputmode = "numeric"
+	AudioInputmodeSearch  AudioInputmode = "search"
+	AudioInputmodeTel     AudioInputmode = "tel"
 	AudioInputmodeText    AudioInputmode = "text"
 	AudioInputmodeUrl     AudioInputmode = "url"
 	AudioInputmodeDecimal AudioInputmode = "decimal"
 	AudioInputmodeEmail   AudioInputmode = "email"
 	AudioInputmodeNone    AudioInputmode = "none"
-	AudioInputmodeNumeric AudioInputmode = "numeric"
-	AudioInputmodeSearch  AudioInputmode = "search"
-	AudioInputmodeTel     AudioInputmode = "tel"
 )
 
 type AudioSpellcheck string

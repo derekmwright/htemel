@@ -48,15 +48,22 @@ func DataTernary(condition bool, true htemel.Node, false htemel.Node) *DataEleme
 	return Data(false)
 }
 
+// Children appends children to this element.
+func (e *DataElement) Children(children ...htemel.Node) *DataElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type DataAutocapitalize string
 
 const (
-	DataAutocapitalizeOn         DataAutocapitalize = "on"
-	DataAutocapitalizeSentences  DataAutocapitalize = "sentences"
 	DataAutocapitalizeWords      DataAutocapitalize = "words"
 	DataAutocapitalizeCharacters DataAutocapitalize = "characters"
 	DataAutocapitalizeNone       DataAutocapitalize = "none"
 	DataAutocapitalizeOff        DataAutocapitalize = "off"
+	DataAutocapitalizeOn         DataAutocapitalize = "on"
+	DataAutocapitalizeSentences  DataAutocapitalize = "sentences"
 )
 
 type DataAutocorrect string
@@ -94,13 +101,13 @@ const (
 type DataEnterkeyhint string
 
 const (
-	DataEnterkeyhintPrevious DataEnterkeyhint = "previous"
-	DataEnterkeyhintSearch   DataEnterkeyhint = "search"
-	DataEnterkeyhintSend     DataEnterkeyhint = "send"
 	DataEnterkeyhintDone     DataEnterkeyhint = "done"
 	DataEnterkeyhintEnter    DataEnterkeyhint = "enter"
 	DataEnterkeyhintGo       DataEnterkeyhint = "go"
 	DataEnterkeyhintNext     DataEnterkeyhint = "next"
+	DataEnterkeyhintPrevious DataEnterkeyhint = "previous"
+	DataEnterkeyhintSearch   DataEnterkeyhint = "search"
+	DataEnterkeyhintSend     DataEnterkeyhint = "send"
 )
 
 type DataHidden string

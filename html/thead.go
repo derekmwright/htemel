@@ -48,15 +48,22 @@ func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadEle
 	return Thead(false)
 }
 
+// Children appends children to this element.
+func (e *TheadElement) Children(children ...htemel.Node) *TheadElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type TheadAutocapitalize string
 
 const (
+	TheadAutocapitalizeSentences  TheadAutocapitalize = "sentences"
+	TheadAutocapitalizeWords      TheadAutocapitalize = "words"
 	TheadAutocapitalizeCharacters TheadAutocapitalize = "characters"
 	TheadAutocapitalizeNone       TheadAutocapitalize = "none"
 	TheadAutocapitalizeOff        TheadAutocapitalize = "off"
 	TheadAutocapitalizeOn         TheadAutocapitalize = "on"
-	TheadAutocapitalizeSentences  TheadAutocapitalize = "sentences"
-	TheadAutocapitalizeWords      TheadAutocapitalize = "words"
 )
 
 type TheadAutocorrect string
@@ -70,9 +77,9 @@ const (
 type TheadContenteditable string
 
 const (
-	TheadContenteditableTrue          TheadContenteditable = "true"
 	TheadContenteditableFalse         TheadContenteditable = "false"
 	TheadContenteditablePlaintextOnly TheadContenteditable = "plaintext-only"
+	TheadContenteditableTrue          TheadContenteditable = "true"
 	TheadContenteditableEmpty         TheadContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type TheadEnterkeyhint string
 
 const (
-	TheadEnterkeyhintDone     TheadEnterkeyhint = "done"
-	TheadEnterkeyhintEnter    TheadEnterkeyhint = "enter"
 	TheadEnterkeyhintGo       TheadEnterkeyhint = "go"
 	TheadEnterkeyhintNext     TheadEnterkeyhint = "next"
 	TheadEnterkeyhintPrevious TheadEnterkeyhint = "previous"
 	TheadEnterkeyhintSearch   TheadEnterkeyhint = "search"
 	TheadEnterkeyhintSend     TheadEnterkeyhint = "send"
+	TheadEnterkeyhintDone     TheadEnterkeyhint = "done"
+	TheadEnterkeyhintEnter    TheadEnterkeyhint = "enter"
 )
 
 type TheadHidden string
@@ -114,14 +121,14 @@ const (
 type TheadInputmode string
 
 const (
+	TheadInputmodeEmail   TheadInputmode = "email"
+	TheadInputmodeNone    TheadInputmode = "none"
+	TheadInputmodeNumeric TheadInputmode = "numeric"
 	TheadInputmodeSearch  TheadInputmode = "search"
 	TheadInputmodeTel     TheadInputmode = "tel"
 	TheadInputmodeText    TheadInputmode = "text"
 	TheadInputmodeUrl     TheadInputmode = "url"
 	TheadInputmodeDecimal TheadInputmode = "decimal"
-	TheadInputmodeEmail   TheadInputmode = "email"
-	TheadInputmodeNone    TheadInputmode = "none"
-	TheadInputmodeNumeric TheadInputmode = "numeric"
 )
 
 type TheadSpellcheck string
@@ -135,16 +142,16 @@ const (
 type TheadTranslate string
 
 const (
-	TheadTranslateYes   TheadTranslate = "yes"
 	TheadTranslateNo    TheadTranslate = "no"
+	TheadTranslateYes   TheadTranslate = "yes"
 	TheadTranslateEmpty TheadTranslate = ""
 )
 
 type TheadWritingsuggestions string
 
 const (
-	TheadWritingsuggestionsTrue  TheadWritingsuggestions = "true"
 	TheadWritingsuggestionsFalse TheadWritingsuggestions = "false"
+	TheadWritingsuggestionsTrue  TheadWritingsuggestions = "true"
 	TheadWritingsuggestionsEmpty TheadWritingsuggestions = ""
 )
 

@@ -48,15 +48,22 @@ func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement
 	return Bdi(false)
 }
 
+// Children appends children to this element.
+func (e *BdiElement) Children(children ...htemel.Node) *BdiElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type BdiAutocapitalize string
 
 const (
-	BdiAutocapitalizeWords      BdiAutocapitalize = "words"
 	BdiAutocapitalizeCharacters BdiAutocapitalize = "characters"
 	BdiAutocapitalizeNone       BdiAutocapitalize = "none"
 	BdiAutocapitalizeOff        BdiAutocapitalize = "off"
 	BdiAutocapitalizeOn         BdiAutocapitalize = "on"
 	BdiAutocapitalizeSentences  BdiAutocapitalize = "sentences"
+	BdiAutocapitalizeWords      BdiAutocapitalize = "words"
 )
 
 type BdiAutocorrect string
@@ -106,37 +113,37 @@ const (
 type BdiHidden string
 
 const (
-	BdiHiddenUntilFound BdiHidden = "until-found"
 	BdiHiddenHidden     BdiHidden = "hidden"
+	BdiHiddenUntilFound BdiHidden = "until-found"
 	BdiHiddenEmpty      BdiHidden = ""
 )
 
 type BdiInputmode string
 
 const (
-	BdiInputmodeText    BdiInputmode = "text"
-	BdiInputmodeUrl     BdiInputmode = "url"
-	BdiInputmodeDecimal BdiInputmode = "decimal"
 	BdiInputmodeEmail   BdiInputmode = "email"
 	BdiInputmodeNone    BdiInputmode = "none"
 	BdiInputmodeNumeric BdiInputmode = "numeric"
 	BdiInputmodeSearch  BdiInputmode = "search"
 	BdiInputmodeTel     BdiInputmode = "tel"
+	BdiInputmodeText    BdiInputmode = "text"
+	BdiInputmodeUrl     BdiInputmode = "url"
+	BdiInputmodeDecimal BdiInputmode = "decimal"
 )
 
 type BdiSpellcheck string
 
 const (
-	BdiSpellcheckTrue  BdiSpellcheck = "true"
 	BdiSpellcheckFalse BdiSpellcheck = "false"
+	BdiSpellcheckTrue  BdiSpellcheck = "true"
 	BdiSpellcheckEmpty BdiSpellcheck = ""
 )
 
 type BdiTranslate string
 
 const (
-	BdiTranslateYes   BdiTranslate = "yes"
 	BdiTranslateNo    BdiTranslate = "no"
+	BdiTranslateYes   BdiTranslate = "yes"
 	BdiTranslateEmpty BdiTranslate = ""
 )
 

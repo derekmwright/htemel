@@ -48,31 +48,38 @@ func RtTernary(condition bool, true htemel.Node, false htemel.Node) *RtElement {
 	return Rt(false)
 }
 
+// Children appends children to this element.
+func (e *RtElement) Children(children ...htemel.Node) *RtElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type RtAutocapitalize string
 
 const (
-	RtAutocapitalizeNone       RtAutocapitalize = "none"
 	RtAutocapitalizeOff        RtAutocapitalize = "off"
 	RtAutocapitalizeOn         RtAutocapitalize = "on"
 	RtAutocapitalizeSentences  RtAutocapitalize = "sentences"
 	RtAutocapitalizeWords      RtAutocapitalize = "words"
 	RtAutocapitalizeCharacters RtAutocapitalize = "characters"
+	RtAutocapitalizeNone       RtAutocapitalize = "none"
 )
 
 type RtAutocorrect string
 
 const (
-	RtAutocorrectOn    RtAutocorrect = "on"
 	RtAutocorrectOff   RtAutocorrect = "off"
+	RtAutocorrectOn    RtAutocorrect = "on"
 	RtAutocorrectEmpty RtAutocorrect = ""
 )
 
 type RtContenteditable string
 
 const (
+	RtContenteditableTrue          RtContenteditable = "true"
 	RtContenteditableFalse         RtContenteditable = "false"
 	RtContenteditablePlaintextOnly RtContenteditable = "plaintext-only"
-	RtContenteditableTrue          RtContenteditable = "true"
 	RtContenteditableEmpty         RtContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type RtEnterkeyhint string
 
 const (
+	RtEnterkeyhintGo       RtEnterkeyhint = "go"
+	RtEnterkeyhintNext     RtEnterkeyhint = "next"
+	RtEnterkeyhintPrevious RtEnterkeyhint = "previous"
 	RtEnterkeyhintSearch   RtEnterkeyhint = "search"
 	RtEnterkeyhintSend     RtEnterkeyhint = "send"
 	RtEnterkeyhintDone     RtEnterkeyhint = "done"
 	RtEnterkeyhintEnter    RtEnterkeyhint = "enter"
-	RtEnterkeyhintGo       RtEnterkeyhint = "go"
-	RtEnterkeyhintNext     RtEnterkeyhint = "next"
-	RtEnterkeyhintPrevious RtEnterkeyhint = "previous"
 )
 
 type RtHidden string
@@ -114,14 +121,14 @@ const (
 type RtInputmode string
 
 const (
+	RtInputmodeTel     RtInputmode = "tel"
+	RtInputmodeText    RtInputmode = "text"
 	RtInputmodeUrl     RtInputmode = "url"
 	RtInputmodeDecimal RtInputmode = "decimal"
 	RtInputmodeEmail   RtInputmode = "email"
 	RtInputmodeNone    RtInputmode = "none"
 	RtInputmodeNumeric RtInputmode = "numeric"
 	RtInputmodeSearch  RtInputmode = "search"
-	RtInputmodeTel     RtInputmode = "tel"
-	RtInputmodeText    RtInputmode = "text"
 )
 
 type RtSpellcheck string

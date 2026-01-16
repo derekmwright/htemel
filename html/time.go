@@ -48,15 +48,22 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 	return Time(false)
 }
 
+// Children appends children to this element.
+func (e *TimeElement) Children(children ...htemel.Node) *TimeElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type TimeAutocapitalize string
 
 const (
+	TimeAutocapitalizeCharacters TimeAutocapitalize = "characters"
+	TimeAutocapitalizeNone       TimeAutocapitalize = "none"
 	TimeAutocapitalizeOff        TimeAutocapitalize = "off"
 	TimeAutocapitalizeOn         TimeAutocapitalize = "on"
 	TimeAutocapitalizeSentences  TimeAutocapitalize = "sentences"
 	TimeAutocapitalizeWords      TimeAutocapitalize = "words"
-	TimeAutocapitalizeCharacters TimeAutocapitalize = "characters"
-	TimeAutocapitalizeNone       TimeAutocapitalize = "none"
 )
 
 type TimeAutocorrect string
@@ -79,9 +86,9 @@ const (
 type TimeDir string
 
 const (
-	TimeDirRtl  TimeDir = "rtl"
 	TimeDirAuto TimeDir = "auto"
 	TimeDirLtr  TimeDir = "ltr"
+	TimeDirRtl  TimeDir = "rtl"
 )
 
 type TimeDraggable string
@@ -94,13 +101,13 @@ const (
 type TimeEnterkeyhint string
 
 const (
+	TimeEnterkeyhintPrevious TimeEnterkeyhint = "previous"
+	TimeEnterkeyhintSearch   TimeEnterkeyhint = "search"
 	TimeEnterkeyhintSend     TimeEnterkeyhint = "send"
 	TimeEnterkeyhintDone     TimeEnterkeyhint = "done"
 	TimeEnterkeyhintEnter    TimeEnterkeyhint = "enter"
 	TimeEnterkeyhintGo       TimeEnterkeyhint = "go"
 	TimeEnterkeyhintNext     TimeEnterkeyhint = "next"
-	TimeEnterkeyhintPrevious TimeEnterkeyhint = "previous"
-	TimeEnterkeyhintSearch   TimeEnterkeyhint = "search"
 )
 
 type TimeHidden string
@@ -114,7 +121,6 @@ const (
 type TimeInputmode string
 
 const (
-	TimeInputmodeDecimal TimeInputmode = "decimal"
 	TimeInputmodeEmail   TimeInputmode = "email"
 	TimeInputmodeNone    TimeInputmode = "none"
 	TimeInputmodeNumeric TimeInputmode = "numeric"
@@ -122,6 +128,7 @@ const (
 	TimeInputmodeTel     TimeInputmode = "tel"
 	TimeInputmodeText    TimeInputmode = "text"
 	TimeInputmodeUrl     TimeInputmode = "url"
+	TimeInputmodeDecimal TimeInputmode = "decimal"
 )
 
 type TimeSpellcheck string
@@ -135,8 +142,8 @@ const (
 type TimeTranslate string
 
 const (
-	TimeTranslateYes   TimeTranslate = "yes"
 	TimeTranslateNo    TimeTranslate = "no"
+	TimeTranslateYes   TimeTranslate = "yes"
 	TimeTranslateEmpty TimeTranslate = ""
 )
 

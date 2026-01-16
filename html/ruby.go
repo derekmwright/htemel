@@ -48,22 +48,29 @@ func RubyTernary(condition bool, true htemel.Node, false htemel.Node) *RubyEleme
 	return Ruby(false)
 }
 
+// Children appends children to this element.
+func (e *RubyElement) Children(children ...htemel.Node) *RubyElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type RubyAutocapitalize string
 
 const (
+	RubyAutocapitalizeNone       RubyAutocapitalize = "none"
 	RubyAutocapitalizeOff        RubyAutocapitalize = "off"
 	RubyAutocapitalizeOn         RubyAutocapitalize = "on"
 	RubyAutocapitalizeSentences  RubyAutocapitalize = "sentences"
 	RubyAutocapitalizeWords      RubyAutocapitalize = "words"
 	RubyAutocapitalizeCharacters RubyAutocapitalize = "characters"
-	RubyAutocapitalizeNone       RubyAutocapitalize = "none"
 )
 
 type RubyAutocorrect string
 
 const (
-	RubyAutocorrectOn    RubyAutocorrect = "on"
 	RubyAutocorrectOff   RubyAutocorrect = "off"
+	RubyAutocorrectOn    RubyAutocorrect = "on"
 	RubyAutocorrectEmpty RubyAutocorrect = ""
 )
 
@@ -94,34 +101,34 @@ const (
 type RubyEnterkeyhint string
 
 const (
+	RubyEnterkeyhintPrevious RubyEnterkeyhint = "previous"
+	RubyEnterkeyhintSearch   RubyEnterkeyhint = "search"
+	RubyEnterkeyhintSend     RubyEnterkeyhint = "send"
 	RubyEnterkeyhintDone     RubyEnterkeyhint = "done"
 	RubyEnterkeyhintEnter    RubyEnterkeyhint = "enter"
 	RubyEnterkeyhintGo       RubyEnterkeyhint = "go"
 	RubyEnterkeyhintNext     RubyEnterkeyhint = "next"
-	RubyEnterkeyhintPrevious RubyEnterkeyhint = "previous"
-	RubyEnterkeyhintSearch   RubyEnterkeyhint = "search"
-	RubyEnterkeyhintSend     RubyEnterkeyhint = "send"
 )
 
 type RubyHidden string
 
 const (
-	RubyHiddenUntilFound RubyHidden = "until-found"
 	RubyHiddenHidden     RubyHidden = "hidden"
+	RubyHiddenUntilFound RubyHidden = "until-found"
 	RubyHiddenEmpty      RubyHidden = ""
 )
 
 type RubyInputmode string
 
 const (
-	RubyInputmodeDecimal RubyInputmode = "decimal"
-	RubyInputmodeEmail   RubyInputmode = "email"
-	RubyInputmodeNone    RubyInputmode = "none"
-	RubyInputmodeNumeric RubyInputmode = "numeric"
 	RubyInputmodeSearch  RubyInputmode = "search"
 	RubyInputmodeTel     RubyInputmode = "tel"
 	RubyInputmodeText    RubyInputmode = "text"
 	RubyInputmodeUrl     RubyInputmode = "url"
+	RubyInputmodeDecimal RubyInputmode = "decimal"
+	RubyInputmodeEmail   RubyInputmode = "email"
+	RubyInputmodeNone    RubyInputmode = "none"
+	RubyInputmodeNumeric RubyInputmode = "numeric"
 )
 
 type RubySpellcheck string
@@ -143,8 +150,8 @@ const (
 type RubyWritingsuggestions string
 
 const (
-	RubyWritingsuggestionsFalse RubyWritingsuggestions = "false"
 	RubyWritingsuggestionsTrue  RubyWritingsuggestions = "true"
+	RubyWritingsuggestionsFalse RubyWritingsuggestions = "false"
 	RubyWritingsuggestionsEmpty RubyWritingsuggestions = ""
 )
 

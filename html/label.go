@@ -48,31 +48,38 @@ func LabelTernary(condition bool, true htemel.Node, false htemel.Node) *LabelEle
 	return Label(false)
 }
 
+// Children appends children to this element.
+func (e *LabelElement) Children(children ...htemel.Node) *LabelElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type LabelAutocapitalize string
 
 const (
+	LabelAutocapitalizeSentences  LabelAutocapitalize = "sentences"
+	LabelAutocapitalizeWords      LabelAutocapitalize = "words"
 	LabelAutocapitalizeCharacters LabelAutocapitalize = "characters"
 	LabelAutocapitalizeNone       LabelAutocapitalize = "none"
 	LabelAutocapitalizeOff        LabelAutocapitalize = "off"
 	LabelAutocapitalizeOn         LabelAutocapitalize = "on"
-	LabelAutocapitalizeSentences  LabelAutocapitalize = "sentences"
-	LabelAutocapitalizeWords      LabelAutocapitalize = "words"
 )
 
 type LabelAutocorrect string
 
 const (
-	LabelAutocorrectOff   LabelAutocorrect = "off"
 	LabelAutocorrectOn    LabelAutocorrect = "on"
+	LabelAutocorrectOff   LabelAutocorrect = "off"
 	LabelAutocorrectEmpty LabelAutocorrect = ""
 )
 
 type LabelContenteditable string
 
 const (
+	LabelContenteditableFalse         LabelContenteditable = "false"
 	LabelContenteditablePlaintextOnly LabelContenteditable = "plaintext-only"
 	LabelContenteditableTrue          LabelContenteditable = "true"
-	LabelContenteditableFalse         LabelContenteditable = "false"
 	LabelContenteditableEmpty         LabelContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type LabelEnterkeyhint string
 
 const (
-	LabelEnterkeyhintPrevious LabelEnterkeyhint = "previous"
-	LabelEnterkeyhintSearch   LabelEnterkeyhint = "search"
-	LabelEnterkeyhintSend     LabelEnterkeyhint = "send"
 	LabelEnterkeyhintDone     LabelEnterkeyhint = "done"
 	LabelEnterkeyhintEnter    LabelEnterkeyhint = "enter"
 	LabelEnterkeyhintGo       LabelEnterkeyhint = "go"
 	LabelEnterkeyhintNext     LabelEnterkeyhint = "next"
+	LabelEnterkeyhintPrevious LabelEnterkeyhint = "previous"
+	LabelEnterkeyhintSearch   LabelEnterkeyhint = "search"
+	LabelEnterkeyhintSend     LabelEnterkeyhint = "send"
 )
 
 type LabelHidden string
@@ -114,14 +121,14 @@ const (
 type LabelInputmode string
 
 const (
-	LabelInputmodeDecimal LabelInputmode = "decimal"
-	LabelInputmodeEmail   LabelInputmode = "email"
-	LabelInputmodeNone    LabelInputmode = "none"
-	LabelInputmodeNumeric LabelInputmode = "numeric"
 	LabelInputmodeSearch  LabelInputmode = "search"
 	LabelInputmodeTel     LabelInputmode = "tel"
 	LabelInputmodeText    LabelInputmode = "text"
 	LabelInputmodeUrl     LabelInputmode = "url"
+	LabelInputmodeDecimal LabelInputmode = "decimal"
+	LabelInputmodeEmail   LabelInputmode = "email"
+	LabelInputmodeNone    LabelInputmode = "none"
+	LabelInputmodeNumeric LabelInputmode = "numeric"
 )
 
 type LabelSpellcheck string
@@ -135,8 +142,8 @@ const (
 type LabelTranslate string
 
 const (
-	LabelTranslateYes   LabelTranslate = "yes"
 	LabelTranslateNo    LabelTranslate = "no"
+	LabelTranslateYes   LabelTranslate = "yes"
 	LabelTranslateEmpty LabelTranslate = ""
 )
 

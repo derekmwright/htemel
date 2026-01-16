@@ -48,6 +48,13 @@ func SpanTernary(condition bool, true htemel.Node, false htemel.Node) *SpanEleme
 	return Span(false)
 }
 
+// Children appends children to this element.
+func (e *SpanElement) Children(children ...htemel.Node) *SpanElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SpanAutocapitalize string
 
 const (
@@ -70,18 +77,18 @@ const (
 type SpanContenteditable string
 
 const (
-	SpanContenteditableTrue          SpanContenteditable = "true"
 	SpanContenteditableFalse         SpanContenteditable = "false"
 	SpanContenteditablePlaintextOnly SpanContenteditable = "plaintext-only"
+	SpanContenteditableTrue          SpanContenteditable = "true"
 	SpanContenteditableEmpty         SpanContenteditable = ""
 )
 
 type SpanDir string
 
 const (
+	SpanDirRtl  SpanDir = "rtl"
 	SpanDirAuto SpanDir = "auto"
 	SpanDirLtr  SpanDir = "ltr"
-	SpanDirRtl  SpanDir = "rtl"
 )
 
 type SpanDraggable string
@@ -94,13 +101,13 @@ const (
 type SpanEnterkeyhint string
 
 const (
+	SpanEnterkeyhintDone     SpanEnterkeyhint = "done"
 	SpanEnterkeyhintEnter    SpanEnterkeyhint = "enter"
 	SpanEnterkeyhintGo       SpanEnterkeyhint = "go"
 	SpanEnterkeyhintNext     SpanEnterkeyhint = "next"
 	SpanEnterkeyhintPrevious SpanEnterkeyhint = "previous"
 	SpanEnterkeyhintSearch   SpanEnterkeyhint = "search"
 	SpanEnterkeyhintSend     SpanEnterkeyhint = "send"
-	SpanEnterkeyhintDone     SpanEnterkeyhint = "done"
 )
 
 type SpanHidden string

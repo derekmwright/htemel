@@ -48,15 +48,22 @@ func HeadTernary(condition bool, true htemel.Node, false htemel.Node) *HeadEleme
 	return Head(false)
 }
 
+// Children appends children to this element.
+func (e *HeadElement) Children(children ...htemel.Node) *HeadElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type HeadAutocapitalize string
 
 const (
-	HeadAutocapitalizeOff        HeadAutocapitalize = "off"
-	HeadAutocapitalizeOn         HeadAutocapitalize = "on"
 	HeadAutocapitalizeSentences  HeadAutocapitalize = "sentences"
 	HeadAutocapitalizeWords      HeadAutocapitalize = "words"
 	HeadAutocapitalizeCharacters HeadAutocapitalize = "characters"
 	HeadAutocapitalizeNone       HeadAutocapitalize = "none"
+	HeadAutocapitalizeOff        HeadAutocapitalize = "off"
+	HeadAutocapitalizeOn         HeadAutocapitalize = "on"
 )
 
 type HeadAutocorrect string
@@ -70,9 +77,9 @@ const (
 type HeadContenteditable string
 
 const (
-	HeadContenteditableFalse         HeadContenteditable = "false"
 	HeadContenteditablePlaintextOnly HeadContenteditable = "plaintext-only"
 	HeadContenteditableTrue          HeadContenteditable = "true"
+	HeadContenteditableFalse         HeadContenteditable = "false"
 	HeadContenteditableEmpty         HeadContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type HeadEnterkeyhint string
 
 const (
+	HeadEnterkeyhintGo       HeadEnterkeyhint = "go"
+	HeadEnterkeyhintNext     HeadEnterkeyhint = "next"
+	HeadEnterkeyhintPrevious HeadEnterkeyhint = "previous"
 	HeadEnterkeyhintSearch   HeadEnterkeyhint = "search"
 	HeadEnterkeyhintSend     HeadEnterkeyhint = "send"
 	HeadEnterkeyhintDone     HeadEnterkeyhint = "done"
 	HeadEnterkeyhintEnter    HeadEnterkeyhint = "enter"
-	HeadEnterkeyhintGo       HeadEnterkeyhint = "go"
-	HeadEnterkeyhintNext     HeadEnterkeyhint = "next"
-	HeadEnterkeyhintPrevious HeadEnterkeyhint = "previous"
 )
 
 type HeadHidden string
@@ -114,14 +121,14 @@ const (
 type HeadInputmode string
 
 const (
+	HeadInputmodeNone    HeadInputmode = "none"
+	HeadInputmodeNumeric HeadInputmode = "numeric"
+	HeadInputmodeSearch  HeadInputmode = "search"
 	HeadInputmodeTel     HeadInputmode = "tel"
 	HeadInputmodeText    HeadInputmode = "text"
 	HeadInputmodeUrl     HeadInputmode = "url"
 	HeadInputmodeDecimal HeadInputmode = "decimal"
 	HeadInputmodeEmail   HeadInputmode = "email"
-	HeadInputmodeNone    HeadInputmode = "none"
-	HeadInputmodeNumeric HeadInputmode = "numeric"
-	HeadInputmodeSearch  HeadInputmode = "search"
 )
 
 type HeadSpellcheck string

@@ -48,15 +48,22 @@ func FigureTernary(condition bool, true htemel.Node, false htemel.Node) *FigureE
 	return Figure(false)
 }
 
+// Children appends children to this element.
+func (e *FigureElement) Children(children ...htemel.Node) *FigureElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type FigureAutocapitalize string
 
 const (
-	FigureAutocapitalizeOff        FigureAutocapitalize = "off"
-	FigureAutocapitalizeOn         FigureAutocapitalize = "on"
 	FigureAutocapitalizeSentences  FigureAutocapitalize = "sentences"
 	FigureAutocapitalizeWords      FigureAutocapitalize = "words"
 	FigureAutocapitalizeCharacters FigureAutocapitalize = "characters"
 	FigureAutocapitalizeNone       FigureAutocapitalize = "none"
+	FigureAutocapitalizeOff        FigureAutocapitalize = "off"
+	FigureAutocapitalizeOn         FigureAutocapitalize = "on"
 )
 
 type FigureAutocorrect string
@@ -70,18 +77,18 @@ const (
 type FigureContenteditable string
 
 const (
+	FigureContenteditableTrue          FigureContenteditable = "true"
 	FigureContenteditableFalse         FigureContenteditable = "false"
 	FigureContenteditablePlaintextOnly FigureContenteditable = "plaintext-only"
-	FigureContenteditableTrue          FigureContenteditable = "true"
 	FigureContenteditableEmpty         FigureContenteditable = ""
 )
 
 type FigureDir string
 
 const (
-	FigureDirRtl  FigureDir = "rtl"
 	FigureDirAuto FigureDir = "auto"
 	FigureDirLtr  FigureDir = "ltr"
+	FigureDirRtl  FigureDir = "rtl"
 )
 
 type FigureDraggable string
@@ -94,34 +101,34 @@ const (
 type FigureEnterkeyhint string
 
 const (
+	FigureEnterkeyhintPrevious FigureEnterkeyhint = "previous"
+	FigureEnterkeyhintSearch   FigureEnterkeyhint = "search"
+	FigureEnterkeyhintSend     FigureEnterkeyhint = "send"
 	FigureEnterkeyhintDone     FigureEnterkeyhint = "done"
 	FigureEnterkeyhintEnter    FigureEnterkeyhint = "enter"
 	FigureEnterkeyhintGo       FigureEnterkeyhint = "go"
 	FigureEnterkeyhintNext     FigureEnterkeyhint = "next"
-	FigureEnterkeyhintPrevious FigureEnterkeyhint = "previous"
-	FigureEnterkeyhintSearch   FigureEnterkeyhint = "search"
-	FigureEnterkeyhintSend     FigureEnterkeyhint = "send"
 )
 
 type FigureHidden string
 
 const (
-	FigureHiddenUntilFound FigureHidden = "until-found"
 	FigureHiddenHidden     FigureHidden = "hidden"
+	FigureHiddenUntilFound FigureHidden = "until-found"
 	FigureHiddenEmpty      FigureHidden = ""
 )
 
 type FigureInputmode string
 
 const (
+	FigureInputmodeNone    FigureInputmode = "none"
+	FigureInputmodeNumeric FigureInputmode = "numeric"
 	FigureInputmodeSearch  FigureInputmode = "search"
 	FigureInputmodeTel     FigureInputmode = "tel"
 	FigureInputmodeText    FigureInputmode = "text"
 	FigureInputmodeUrl     FigureInputmode = "url"
 	FigureInputmodeDecimal FigureInputmode = "decimal"
 	FigureInputmodeEmail   FigureInputmode = "email"
-	FigureInputmodeNone    FigureInputmode = "none"
-	FigureInputmodeNumeric FigureInputmode = "numeric"
 )
 
 type FigureSpellcheck string
@@ -135,8 +142,8 @@ const (
 type FigureTranslate string
 
 const (
-	FigureTranslateNo    FigureTranslate = "no"
 	FigureTranslateYes   FigureTranslate = "yes"
+	FigureTranslateNo    FigureTranslate = "no"
 	FigureTranslateEmpty FigureTranslate = ""
 )
 

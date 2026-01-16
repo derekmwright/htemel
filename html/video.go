@@ -48,6 +48,13 @@ func VideoTernary(condition bool, true htemel.Node, false htemel.Node) *VideoEle
 	return Video(false)
 }
 
+// Children appends children to this element.
+func (e *VideoElement) Children(children ...htemel.Node) *VideoElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type VideoCrossorigin string
 
 const (
@@ -68,12 +75,12 @@ const (
 type VideoAutocapitalize string
 
 const (
-	VideoAutocapitalizeSentences  VideoAutocapitalize = "sentences"
-	VideoAutocapitalizeWords      VideoAutocapitalize = "words"
-	VideoAutocapitalizeCharacters VideoAutocapitalize = "characters"
 	VideoAutocapitalizeNone       VideoAutocapitalize = "none"
 	VideoAutocapitalizeOff        VideoAutocapitalize = "off"
 	VideoAutocapitalizeOn         VideoAutocapitalize = "on"
+	VideoAutocapitalizeSentences  VideoAutocapitalize = "sentences"
+	VideoAutocapitalizeWords      VideoAutocapitalize = "words"
+	VideoAutocapitalizeCharacters VideoAutocapitalize = "characters"
 )
 
 type VideoAutocorrect string
@@ -111,26 +118,27 @@ const (
 type VideoEnterkeyhint string
 
 const (
+	VideoEnterkeyhintSearch   VideoEnterkeyhint = "search"
+	VideoEnterkeyhintSend     VideoEnterkeyhint = "send"
 	VideoEnterkeyhintDone     VideoEnterkeyhint = "done"
 	VideoEnterkeyhintEnter    VideoEnterkeyhint = "enter"
 	VideoEnterkeyhintGo       VideoEnterkeyhint = "go"
 	VideoEnterkeyhintNext     VideoEnterkeyhint = "next"
 	VideoEnterkeyhintPrevious VideoEnterkeyhint = "previous"
-	VideoEnterkeyhintSearch   VideoEnterkeyhint = "search"
-	VideoEnterkeyhintSend     VideoEnterkeyhint = "send"
 )
 
 type VideoHidden string
 
 const (
-	VideoHiddenUntilFound VideoHidden = "until-found"
 	VideoHiddenHidden     VideoHidden = "hidden"
+	VideoHiddenUntilFound VideoHidden = "until-found"
 	VideoHiddenEmpty      VideoHidden = ""
 )
 
 type VideoInputmode string
 
 const (
+	VideoInputmodeDecimal VideoInputmode = "decimal"
 	VideoInputmodeEmail   VideoInputmode = "email"
 	VideoInputmodeNone    VideoInputmode = "none"
 	VideoInputmodeNumeric VideoInputmode = "numeric"
@@ -138,7 +146,6 @@ const (
 	VideoInputmodeTel     VideoInputmode = "tel"
 	VideoInputmodeText    VideoInputmode = "text"
 	VideoInputmodeUrl     VideoInputmode = "url"
-	VideoInputmodeDecimal VideoInputmode = "decimal"
 )
 
 type VideoSpellcheck string

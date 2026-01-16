@@ -48,31 +48,38 @@ func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
 	return A(false)
 }
 
+// Children appends children to this element.
+func (e *AElement) Children(children ...htemel.Node) *AElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type AAutocapitalize string
 
 const (
-	AAutocapitalizeSentences  AAutocapitalize = "sentences"
-	AAutocapitalizeWords      AAutocapitalize = "words"
 	AAutocapitalizeCharacters AAutocapitalize = "characters"
 	AAutocapitalizeNone       AAutocapitalize = "none"
 	AAutocapitalizeOff        AAutocapitalize = "off"
 	AAutocapitalizeOn         AAutocapitalize = "on"
+	AAutocapitalizeSentences  AAutocapitalize = "sentences"
+	AAutocapitalizeWords      AAutocapitalize = "words"
 )
 
 type AAutocorrect string
 
 const (
-	AAutocorrectOn    AAutocorrect = "on"
 	AAutocorrectOff   AAutocorrect = "off"
+	AAutocorrectOn    AAutocorrect = "on"
 	AAutocorrectEmpty AAutocorrect = ""
 )
 
 type AContenteditable string
 
 const (
+	AContenteditableTrue          AContenteditable = "true"
 	AContenteditableFalse         AContenteditable = "false"
 	AContenteditablePlaintextOnly AContenteditable = "plaintext-only"
-	AContenteditableTrue          AContenteditable = "true"
 	AContenteditableEmpty         AContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type AEnterkeyhint string
 
 const (
-	AEnterkeyhintSend     AEnterkeyhint = "send"
 	AEnterkeyhintDone     AEnterkeyhint = "done"
 	AEnterkeyhintEnter    AEnterkeyhint = "enter"
 	AEnterkeyhintGo       AEnterkeyhint = "go"
 	AEnterkeyhintNext     AEnterkeyhint = "next"
 	AEnterkeyhintPrevious AEnterkeyhint = "previous"
 	AEnterkeyhintSearch   AEnterkeyhint = "search"
+	AEnterkeyhintSend     AEnterkeyhint = "send"
 )
 
 type AHidden string
@@ -127,8 +134,8 @@ const (
 type ASpellcheck string
 
 const (
-	ASpellcheckFalse ASpellcheck = "false"
 	ASpellcheckTrue  ASpellcheck = "true"
+	ASpellcheckFalse ASpellcheck = "false"
 	ASpellcheckEmpty ASpellcheck = ""
 )
 
@@ -143,8 +150,8 @@ const (
 type AWritingsuggestions string
 
 const (
-	AWritingsuggestionsFalse AWritingsuggestions = "false"
 	AWritingsuggestionsTrue  AWritingsuggestions = "true"
+	AWritingsuggestionsFalse AWritingsuggestions = "false"
 	AWritingsuggestionsEmpty AWritingsuggestions = ""
 )
 

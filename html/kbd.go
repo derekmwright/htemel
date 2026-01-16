@@ -48,6 +48,13 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 	return Kbd(false)
 }
 
+// Children appends children to this element.
+func (e *KbdElement) Children(children ...htemel.Node) *KbdElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type KbdAutocapitalize string
 
 const (
@@ -87,20 +94,20 @@ const (
 type KbdDraggable string
 
 const (
-	KbdDraggableFalse KbdDraggable = "false"
 	KbdDraggableTrue  KbdDraggable = "true"
+	KbdDraggableFalse KbdDraggable = "false"
 )
 
 type KbdEnterkeyhint string
 
 const (
-	KbdEnterkeyhintEnter    KbdEnterkeyhint = "enter"
-	KbdEnterkeyhintGo       KbdEnterkeyhint = "go"
 	KbdEnterkeyhintNext     KbdEnterkeyhint = "next"
 	KbdEnterkeyhintPrevious KbdEnterkeyhint = "previous"
 	KbdEnterkeyhintSearch   KbdEnterkeyhint = "search"
 	KbdEnterkeyhintSend     KbdEnterkeyhint = "send"
 	KbdEnterkeyhintDone     KbdEnterkeyhint = "done"
+	KbdEnterkeyhintEnter    KbdEnterkeyhint = "enter"
+	KbdEnterkeyhintGo       KbdEnterkeyhint = "go"
 )
 
 type KbdHidden string
@@ -114,21 +121,21 @@ const (
 type KbdInputmode string
 
 const (
+	KbdInputmodeSearch  KbdInputmode = "search"
+	KbdInputmodeTel     KbdInputmode = "tel"
 	KbdInputmodeText    KbdInputmode = "text"
 	KbdInputmodeUrl     KbdInputmode = "url"
 	KbdInputmodeDecimal KbdInputmode = "decimal"
 	KbdInputmodeEmail   KbdInputmode = "email"
 	KbdInputmodeNone    KbdInputmode = "none"
 	KbdInputmodeNumeric KbdInputmode = "numeric"
-	KbdInputmodeSearch  KbdInputmode = "search"
-	KbdInputmodeTel     KbdInputmode = "tel"
 )
 
 type KbdSpellcheck string
 
 const (
-	KbdSpellcheckFalse KbdSpellcheck = "false"
 	KbdSpellcheckTrue  KbdSpellcheck = "true"
+	KbdSpellcheckFalse KbdSpellcheck = "false"
 	KbdSpellcheckEmpty KbdSpellcheck = ""
 )
 

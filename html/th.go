@@ -48,22 +48,29 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 	return Th(false)
 }
 
+// Children appends children to this element.
+func (e *ThElement) Children(children ...htemel.Node) *ThElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type ThAutocapitalize string
 
 const (
-	ThAutocapitalizeSentences  ThAutocapitalize = "sentences"
-	ThAutocapitalizeWords      ThAutocapitalize = "words"
 	ThAutocapitalizeCharacters ThAutocapitalize = "characters"
 	ThAutocapitalizeNone       ThAutocapitalize = "none"
 	ThAutocapitalizeOff        ThAutocapitalize = "off"
 	ThAutocapitalizeOn         ThAutocapitalize = "on"
+	ThAutocapitalizeSentences  ThAutocapitalize = "sentences"
+	ThAutocapitalizeWords      ThAutocapitalize = "words"
 )
 
 type ThAutocorrect string
 
 const (
-	ThAutocorrectOn    ThAutocorrect = "on"
 	ThAutocorrectOff   ThAutocorrect = "off"
+	ThAutocorrectOn    ThAutocorrect = "on"
 	ThAutocorrectEmpty ThAutocorrect = ""
 )
 
@@ -79,9 +86,9 @@ const (
 type ThDir string
 
 const (
-	ThDirAuto ThDir = "auto"
 	ThDirLtr  ThDir = "ltr"
 	ThDirRtl  ThDir = "rtl"
+	ThDirAuto ThDir = "auto"
 )
 
 type ThDraggable string
@@ -114,14 +121,14 @@ const (
 type ThInputmode string
 
 const (
-	ThInputmodeSearch  ThInputmode = "search"
-	ThInputmodeTel     ThInputmode = "tel"
 	ThInputmodeText    ThInputmode = "text"
 	ThInputmodeUrl     ThInputmode = "url"
 	ThInputmodeDecimal ThInputmode = "decimal"
 	ThInputmodeEmail   ThInputmode = "email"
 	ThInputmodeNone    ThInputmode = "none"
 	ThInputmodeNumeric ThInputmode = "numeric"
+	ThInputmodeSearch  ThInputmode = "search"
+	ThInputmodeTel     ThInputmode = "tel"
 )
 
 type ThSpellcheck string

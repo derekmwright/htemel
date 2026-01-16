@@ -48,6 +48,13 @@ func DlTernary(condition bool, true htemel.Node, false htemel.Node) *DlElement {
 	return Dl(false)
 }
 
+// Children appends children to this element.
+func (e *DlElement) Children(children ...htemel.Node) *DlElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type DlAutocapitalize string
 
 const (
@@ -79,9 +86,9 @@ const (
 type DlDir string
 
 const (
-	DlDirAuto DlDir = "auto"
 	DlDirLtr  DlDir = "ltr"
 	DlDirRtl  DlDir = "rtl"
+	DlDirAuto DlDir = "auto"
 )
 
 type DlDraggable string
@@ -94,27 +101,26 @@ const (
 type DlEnterkeyhint string
 
 const (
+	DlEnterkeyhintDone     DlEnterkeyhint = "done"
+	DlEnterkeyhintEnter    DlEnterkeyhint = "enter"
 	DlEnterkeyhintGo       DlEnterkeyhint = "go"
 	DlEnterkeyhintNext     DlEnterkeyhint = "next"
 	DlEnterkeyhintPrevious DlEnterkeyhint = "previous"
 	DlEnterkeyhintSearch   DlEnterkeyhint = "search"
 	DlEnterkeyhintSend     DlEnterkeyhint = "send"
-	DlEnterkeyhintDone     DlEnterkeyhint = "done"
-	DlEnterkeyhintEnter    DlEnterkeyhint = "enter"
 )
 
 type DlHidden string
 
 const (
-	DlHiddenUntilFound DlHidden = "until-found"
 	DlHiddenHidden     DlHidden = "hidden"
+	DlHiddenUntilFound DlHidden = "until-found"
 	DlHiddenEmpty      DlHidden = ""
 )
 
 type DlInputmode string
 
 const (
-	DlInputmodeNone    DlInputmode = "none"
 	DlInputmodeNumeric DlInputmode = "numeric"
 	DlInputmodeSearch  DlInputmode = "search"
 	DlInputmodeTel     DlInputmode = "tel"
@@ -122,6 +128,7 @@ const (
 	DlInputmodeUrl     DlInputmode = "url"
 	DlInputmodeDecimal DlInputmode = "decimal"
 	DlInputmodeEmail   DlInputmode = "email"
+	DlInputmodeNone    DlInputmode = "none"
 )
 
 type DlSpellcheck string

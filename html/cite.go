@@ -48,15 +48,22 @@ func CiteTernary(condition bool, true htemel.Node, false htemel.Node) *CiteEleme
 	return Cite(false)
 }
 
+// Children appends children to this element.
+func (e *CiteElement) Children(children ...htemel.Node) *CiteElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type CiteAutocapitalize string
 
 const (
+	CiteAutocapitalizeNone       CiteAutocapitalize = "none"
+	CiteAutocapitalizeOff        CiteAutocapitalize = "off"
 	CiteAutocapitalizeOn         CiteAutocapitalize = "on"
 	CiteAutocapitalizeSentences  CiteAutocapitalize = "sentences"
 	CiteAutocapitalizeWords      CiteAutocapitalize = "words"
 	CiteAutocapitalizeCharacters CiteAutocapitalize = "characters"
-	CiteAutocapitalizeNone       CiteAutocapitalize = "none"
-	CiteAutocapitalizeOff        CiteAutocapitalize = "off"
 )
 
 type CiteAutocorrect string
@@ -70,18 +77,18 @@ const (
 type CiteContenteditable string
 
 const (
+	CiteContenteditableTrue          CiteContenteditable = "true"
 	CiteContenteditableFalse         CiteContenteditable = "false"
 	CiteContenteditablePlaintextOnly CiteContenteditable = "plaintext-only"
-	CiteContenteditableTrue          CiteContenteditable = "true"
 	CiteContenteditableEmpty         CiteContenteditable = ""
 )
 
 type CiteDir string
 
 const (
+	CiteDirRtl  CiteDir = "rtl"
 	CiteDirAuto CiteDir = "auto"
 	CiteDirLtr  CiteDir = "ltr"
-	CiteDirRtl  CiteDir = "rtl"
 )
 
 type CiteDraggable string
@@ -94,13 +101,13 @@ const (
 type CiteEnterkeyhint string
 
 const (
-	CiteEnterkeyhintDone     CiteEnterkeyhint = "done"
-	CiteEnterkeyhintEnter    CiteEnterkeyhint = "enter"
 	CiteEnterkeyhintGo       CiteEnterkeyhint = "go"
 	CiteEnterkeyhintNext     CiteEnterkeyhint = "next"
 	CiteEnterkeyhintPrevious CiteEnterkeyhint = "previous"
 	CiteEnterkeyhintSearch   CiteEnterkeyhint = "search"
 	CiteEnterkeyhintSend     CiteEnterkeyhint = "send"
+	CiteEnterkeyhintDone     CiteEnterkeyhint = "done"
+	CiteEnterkeyhintEnter    CiteEnterkeyhint = "enter"
 )
 
 type CiteHidden string
@@ -114,14 +121,14 @@ const (
 type CiteInputmode string
 
 const (
-	CiteInputmodeText    CiteInputmode = "text"
-	CiteInputmodeUrl     CiteInputmode = "url"
 	CiteInputmodeDecimal CiteInputmode = "decimal"
 	CiteInputmodeEmail   CiteInputmode = "email"
 	CiteInputmodeNone    CiteInputmode = "none"
 	CiteInputmodeNumeric CiteInputmode = "numeric"
 	CiteInputmodeSearch  CiteInputmode = "search"
 	CiteInputmodeTel     CiteInputmode = "tel"
+	CiteInputmodeText    CiteInputmode = "text"
+	CiteInputmodeUrl     CiteInputmode = "url"
 )
 
 type CiteSpellcheck string

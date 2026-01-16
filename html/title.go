@@ -48,6 +48,13 @@ func TitleTernary(condition bool, true htemel.Node, false htemel.Node) *TitleEle
 	return Title(false)
 }
 
+// Children appends children to this element.
+func (e *TitleElement) Children(children ...htemel.Node) *TitleElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type TitleAutocapitalize string
 
 const (
@@ -62,8 +69,8 @@ const (
 type TitleAutocorrect string
 
 const (
-	TitleAutocorrectOn    TitleAutocorrect = "on"
 	TitleAutocorrectOff   TitleAutocorrect = "off"
+	TitleAutocorrectOn    TitleAutocorrect = "on"
 	TitleAutocorrectEmpty TitleAutocorrect = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type TitleEnterkeyhint string
 
 const (
-	TitleEnterkeyhintNext     TitleEnterkeyhint = "next"
-	TitleEnterkeyhintPrevious TitleEnterkeyhint = "previous"
-	TitleEnterkeyhintSearch   TitleEnterkeyhint = "search"
 	TitleEnterkeyhintSend     TitleEnterkeyhint = "send"
 	TitleEnterkeyhintDone     TitleEnterkeyhint = "done"
 	TitleEnterkeyhintEnter    TitleEnterkeyhint = "enter"
 	TitleEnterkeyhintGo       TitleEnterkeyhint = "go"
+	TitleEnterkeyhintNext     TitleEnterkeyhint = "next"
+	TitleEnterkeyhintPrevious TitleEnterkeyhint = "previous"
+	TitleEnterkeyhintSearch   TitleEnterkeyhint = "search"
 )
 
 type TitleHidden string
@@ -114,37 +121,37 @@ const (
 type TitleInputmode string
 
 const (
-	TitleInputmodeEmail   TitleInputmode = "email"
-	TitleInputmodeNone    TitleInputmode = "none"
-	TitleInputmodeNumeric TitleInputmode = "numeric"
 	TitleInputmodeSearch  TitleInputmode = "search"
 	TitleInputmodeTel     TitleInputmode = "tel"
 	TitleInputmodeText    TitleInputmode = "text"
 	TitleInputmodeUrl     TitleInputmode = "url"
 	TitleInputmodeDecimal TitleInputmode = "decimal"
+	TitleInputmodeEmail   TitleInputmode = "email"
+	TitleInputmodeNone    TitleInputmode = "none"
+	TitleInputmodeNumeric TitleInputmode = "numeric"
 )
 
 type TitleSpellcheck string
 
 const (
-	TitleSpellcheckTrue  TitleSpellcheck = "true"
 	TitleSpellcheckFalse TitleSpellcheck = "false"
+	TitleSpellcheckTrue  TitleSpellcheck = "true"
 	TitleSpellcheckEmpty TitleSpellcheck = ""
 )
 
 type TitleTranslate string
 
 const (
-	TitleTranslateNo    TitleTranslate = "no"
 	TitleTranslateYes   TitleTranslate = "yes"
+	TitleTranslateNo    TitleTranslate = "no"
 	TitleTranslateEmpty TitleTranslate = ""
 )
 
 type TitleWritingsuggestions string
 
 const (
-	TitleWritingsuggestionsTrue  TitleWritingsuggestions = "true"
 	TitleWritingsuggestionsFalse TitleWritingsuggestions = "false"
+	TitleWritingsuggestionsTrue  TitleWritingsuggestions = "true"
 	TitleWritingsuggestionsEmpty TitleWritingsuggestions = ""
 )
 

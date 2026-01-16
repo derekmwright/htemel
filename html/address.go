@@ -48,6 +48,13 @@ func AddressTernary(condition bool, true htemel.Node, false htemel.Node) *Addres
 	return Address(false)
 }
 
+// Children appends children to this element.
+func (e *AddressElement) Children(children ...htemel.Node) *AddressElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type AddressAutocapitalize string
 
 const (
@@ -70,9 +77,9 @@ const (
 type AddressContenteditable string
 
 const (
+	AddressContenteditableFalse         AddressContenteditable = "false"
 	AddressContenteditablePlaintextOnly AddressContenteditable = "plaintext-only"
 	AddressContenteditableTrue          AddressContenteditable = "true"
-	AddressContenteditableFalse         AddressContenteditable = "false"
 	AddressContenteditableEmpty         AddressContenteditable = ""
 )
 

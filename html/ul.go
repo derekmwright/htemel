@@ -48,15 +48,22 @@ func UlTernary(condition bool, true htemel.Node, false htemel.Node) *UlElement {
 	return Ul(false)
 }
 
+// Children appends children to this element.
+func (e *UlElement) Children(children ...htemel.Node) *UlElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type UlAutocapitalize string
 
 const (
-	UlAutocapitalizeOn         UlAutocapitalize = "on"
-	UlAutocapitalizeSentences  UlAutocapitalize = "sentences"
 	UlAutocapitalizeWords      UlAutocapitalize = "words"
 	UlAutocapitalizeCharacters UlAutocapitalize = "characters"
 	UlAutocapitalizeNone       UlAutocapitalize = "none"
 	UlAutocapitalizeOff        UlAutocapitalize = "off"
+	UlAutocapitalizeOn         UlAutocapitalize = "on"
+	UlAutocapitalizeSentences  UlAutocapitalize = "sentences"
 )
 
 type UlAutocorrect string
@@ -70,9 +77,9 @@ const (
 type UlContenteditable string
 
 const (
-	UlContenteditablePlaintextOnly UlContenteditable = "plaintext-only"
 	UlContenteditableTrue          UlContenteditable = "true"
 	UlContenteditableFalse         UlContenteditable = "false"
+	UlContenteditablePlaintextOnly UlContenteditable = "plaintext-only"
 	UlContenteditableEmpty         UlContenteditable = ""
 )
 
@@ -106,14 +113,15 @@ const (
 type UlHidden string
 
 const (
-	UlHiddenUntilFound UlHidden = "until-found"
 	UlHiddenHidden     UlHidden = "hidden"
+	UlHiddenUntilFound UlHidden = "until-found"
 	UlHiddenEmpty      UlHidden = ""
 )
 
 type UlInputmode string
 
 const (
+	UlInputmodeEmail   UlInputmode = "email"
 	UlInputmodeNone    UlInputmode = "none"
 	UlInputmodeNumeric UlInputmode = "numeric"
 	UlInputmodeSearch  UlInputmode = "search"
@@ -121,14 +129,13 @@ const (
 	UlInputmodeText    UlInputmode = "text"
 	UlInputmodeUrl     UlInputmode = "url"
 	UlInputmodeDecimal UlInputmode = "decimal"
-	UlInputmodeEmail   UlInputmode = "email"
 )
 
 type UlSpellcheck string
 
 const (
-	UlSpellcheckTrue  UlSpellcheck = "true"
 	UlSpellcheckFalse UlSpellcheck = "false"
+	UlSpellcheckTrue  UlSpellcheck = "true"
 	UlSpellcheckEmpty UlSpellcheck = ""
 )
 
@@ -143,8 +150,8 @@ const (
 type UlWritingsuggestions string
 
 const (
-	UlWritingsuggestionsTrue  UlWritingsuggestions = "true"
 	UlWritingsuggestionsFalse UlWritingsuggestions = "false"
+	UlWritingsuggestionsTrue  UlWritingsuggestions = "true"
 	UlWritingsuggestionsEmpty UlWritingsuggestions = ""
 )
 

@@ -48,22 +48,29 @@ func FieldsetTernary(condition bool, true htemel.Node, false htemel.Node) *Field
 	return Fieldset(false)
 }
 
+// Children appends children to this element.
+func (e *FieldsetElement) Children(children ...htemel.Node) *FieldsetElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type FieldsetAutocapitalize string
 
 const (
+	FieldsetAutocapitalizeOn         FieldsetAutocapitalize = "on"
+	FieldsetAutocapitalizeSentences  FieldsetAutocapitalize = "sentences"
 	FieldsetAutocapitalizeWords      FieldsetAutocapitalize = "words"
 	FieldsetAutocapitalizeCharacters FieldsetAutocapitalize = "characters"
 	FieldsetAutocapitalizeNone       FieldsetAutocapitalize = "none"
 	FieldsetAutocapitalizeOff        FieldsetAutocapitalize = "off"
-	FieldsetAutocapitalizeOn         FieldsetAutocapitalize = "on"
-	FieldsetAutocapitalizeSentences  FieldsetAutocapitalize = "sentences"
 )
 
 type FieldsetAutocorrect string
 
 const (
-	FieldsetAutocorrectOn    FieldsetAutocorrect = "on"
 	FieldsetAutocorrectOff   FieldsetAutocorrect = "off"
+	FieldsetAutocorrectOn    FieldsetAutocorrect = "on"
 	FieldsetAutocorrectEmpty FieldsetAutocorrect = ""
 )
 
@@ -143,8 +150,8 @@ const (
 type FieldsetWritingsuggestions string
 
 const (
-	FieldsetWritingsuggestionsFalse FieldsetWritingsuggestions = "false"
 	FieldsetWritingsuggestionsTrue  FieldsetWritingsuggestions = "true"
+	FieldsetWritingsuggestionsFalse FieldsetWritingsuggestions = "false"
 	FieldsetWritingsuggestionsEmpty FieldsetWritingsuggestions = ""
 )
 

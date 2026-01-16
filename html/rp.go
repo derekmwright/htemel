@@ -48,15 +48,22 @@ func RpTernary(condition bool, true htemel.Node, false htemel.Node) *RpElement {
 	return Rp(false)
 }
 
+// Children appends children to this element.
+func (e *RpElement) Children(children ...htemel.Node) *RpElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type RpAutocapitalize string
 
 const (
+	RpAutocapitalizeWords      RpAutocapitalize = "words"
 	RpAutocapitalizeCharacters RpAutocapitalize = "characters"
 	RpAutocapitalizeNone       RpAutocapitalize = "none"
 	RpAutocapitalizeOff        RpAutocapitalize = "off"
 	RpAutocapitalizeOn         RpAutocapitalize = "on"
 	RpAutocapitalizeSentences  RpAutocapitalize = "sentences"
-	RpAutocapitalizeWords      RpAutocapitalize = "words"
 )
 
 type RpAutocorrect string
@@ -70,9 +77,9 @@ const (
 type RpContenteditable string
 
 const (
+	RpContenteditableFalse         RpContenteditable = "false"
 	RpContenteditablePlaintextOnly RpContenteditable = "plaintext-only"
 	RpContenteditableTrue          RpContenteditable = "true"
-	RpContenteditableFalse         RpContenteditable = "false"
 	RpContenteditableEmpty         RpContenteditable = ""
 )
 
@@ -94,41 +101,41 @@ const (
 type RpEnterkeyhint string
 
 const (
-	RpEnterkeyhintDone     RpEnterkeyhint = "done"
-	RpEnterkeyhintEnter    RpEnterkeyhint = "enter"
 	RpEnterkeyhintGo       RpEnterkeyhint = "go"
 	RpEnterkeyhintNext     RpEnterkeyhint = "next"
 	RpEnterkeyhintPrevious RpEnterkeyhint = "previous"
 	RpEnterkeyhintSearch   RpEnterkeyhint = "search"
 	RpEnterkeyhintSend     RpEnterkeyhint = "send"
+	RpEnterkeyhintDone     RpEnterkeyhint = "done"
+	RpEnterkeyhintEnter    RpEnterkeyhint = "enter"
 )
 
 type RpHidden string
 
 const (
-	RpHiddenUntilFound RpHidden = "until-found"
 	RpHiddenHidden     RpHidden = "hidden"
+	RpHiddenUntilFound RpHidden = "until-found"
 	RpHiddenEmpty      RpHidden = ""
 )
 
 type RpInputmode string
 
 const (
+	RpInputmodeEmail   RpInputmode = "email"
+	RpInputmodeNone    RpInputmode = "none"
 	RpInputmodeNumeric RpInputmode = "numeric"
 	RpInputmodeSearch  RpInputmode = "search"
 	RpInputmodeTel     RpInputmode = "tel"
 	RpInputmodeText    RpInputmode = "text"
 	RpInputmodeUrl     RpInputmode = "url"
 	RpInputmodeDecimal RpInputmode = "decimal"
-	RpInputmodeEmail   RpInputmode = "email"
-	RpInputmodeNone    RpInputmode = "none"
 )
 
 type RpSpellcheck string
 
 const (
-	RpSpellcheckFalse RpSpellcheck = "false"
 	RpSpellcheckTrue  RpSpellcheck = "true"
+	RpSpellcheckFalse RpSpellcheck = "false"
 	RpSpellcheckEmpty RpSpellcheck = ""
 )
 
@@ -143,8 +150,8 @@ const (
 type RpWritingsuggestions string
 
 const (
-	RpWritingsuggestionsFalse RpWritingsuggestions = "false"
 	RpWritingsuggestionsTrue  RpWritingsuggestions = "true"
+	RpWritingsuggestionsFalse RpWritingsuggestions = "false"
 	RpWritingsuggestionsEmpty RpWritingsuggestions = ""
 )
 

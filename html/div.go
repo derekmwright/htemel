@@ -48,6 +48,13 @@ func DivTernary(condition bool, true htemel.Node, false htemel.Node) *DivElement
 	return Div(false)
 }
 
+// Children appends children to this element.
+func (e *DivElement) Children(children ...htemel.Node) *DivElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type DivAutocapitalize string
 
 const (
@@ -70,9 +77,9 @@ const (
 type DivContenteditable string
 
 const (
+	DivContenteditableFalse         DivContenteditable = "false"
 	DivContenteditablePlaintextOnly DivContenteditable = "plaintext-only"
 	DivContenteditableTrue          DivContenteditable = "true"
-	DivContenteditableFalse         DivContenteditable = "false"
 	DivContenteditableEmpty         DivContenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type DivEnterkeyhint string
 
 const (
-	DivEnterkeyhintGo       DivEnterkeyhint = "go"
-	DivEnterkeyhintNext     DivEnterkeyhint = "next"
 	DivEnterkeyhintPrevious DivEnterkeyhint = "previous"
 	DivEnterkeyhintSearch   DivEnterkeyhint = "search"
 	DivEnterkeyhintSend     DivEnterkeyhint = "send"
 	DivEnterkeyhintDone     DivEnterkeyhint = "done"
 	DivEnterkeyhintEnter    DivEnterkeyhint = "enter"
+	DivEnterkeyhintGo       DivEnterkeyhint = "go"
+	DivEnterkeyhintNext     DivEnterkeyhint = "next"
 )
 
 type DivHidden string
@@ -114,6 +121,7 @@ const (
 type DivInputmode string
 
 const (
+	DivInputmodeUrl     DivInputmode = "url"
 	DivInputmodeDecimal DivInputmode = "decimal"
 	DivInputmodeEmail   DivInputmode = "email"
 	DivInputmodeNone    DivInputmode = "none"
@@ -121,7 +129,6 @@ const (
 	DivInputmodeSearch  DivInputmode = "search"
 	DivInputmodeTel     DivInputmode = "tel"
 	DivInputmodeText    DivInputmode = "text"
-	DivInputmodeUrl     DivInputmode = "url"
 )
 
 type DivSpellcheck string

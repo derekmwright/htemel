@@ -48,23 +48,30 @@ func DialogTernary(condition bool, true htemel.Node, false htemel.Node) *DialogE
 	return Dialog(false)
 }
 
+// Children appends children to this element.
+func (e *DialogElement) Children(children ...htemel.Node) *DialogElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type DialogClosedby string
 
 const (
+	DialogClosedbyAny          DialogClosedby = "any"
 	DialogClosedbyCloserequest DialogClosedby = "closerequest"
 	DialogClosedbyNone         DialogClosedby = "none"
-	DialogClosedbyAny          DialogClosedby = "any"
 )
 
 type DialogAutocapitalize string
 
 const (
-	DialogAutocapitalizeNone       DialogAutocapitalize = "none"
 	DialogAutocapitalizeOff        DialogAutocapitalize = "off"
 	DialogAutocapitalizeOn         DialogAutocapitalize = "on"
 	DialogAutocapitalizeSentences  DialogAutocapitalize = "sentences"
 	DialogAutocapitalizeWords      DialogAutocapitalize = "words"
 	DialogAutocapitalizeCharacters DialogAutocapitalize = "characters"
+	DialogAutocapitalizeNone       DialogAutocapitalize = "none"
 )
 
 type DialogAutocorrect string
@@ -102,13 +109,13 @@ const (
 type DialogEnterkeyhint string
 
 const (
-	DialogEnterkeyhintSend     DialogEnterkeyhint = "send"
 	DialogEnterkeyhintDone     DialogEnterkeyhint = "done"
 	DialogEnterkeyhintEnter    DialogEnterkeyhint = "enter"
 	DialogEnterkeyhintGo       DialogEnterkeyhint = "go"
 	DialogEnterkeyhintNext     DialogEnterkeyhint = "next"
 	DialogEnterkeyhintPrevious DialogEnterkeyhint = "previous"
 	DialogEnterkeyhintSearch   DialogEnterkeyhint = "search"
+	DialogEnterkeyhintSend     DialogEnterkeyhint = "send"
 )
 
 type DialogHidden string
@@ -122,14 +129,14 @@ const (
 type DialogInputmode string
 
 const (
-	DialogInputmodeSearch  DialogInputmode = "search"
-	DialogInputmodeTel     DialogInputmode = "tel"
 	DialogInputmodeText    DialogInputmode = "text"
 	DialogInputmodeUrl     DialogInputmode = "url"
 	DialogInputmodeDecimal DialogInputmode = "decimal"
 	DialogInputmodeEmail   DialogInputmode = "email"
 	DialogInputmodeNone    DialogInputmode = "none"
 	DialogInputmodeNumeric DialogInputmode = "numeric"
+	DialogInputmodeSearch  DialogInputmode = "search"
+	DialogInputmodeTel     DialogInputmode = "tel"
 )
 
 type DialogSpellcheck string
@@ -151,8 +158,8 @@ const (
 type DialogWritingsuggestions string
 
 const (
-	DialogWritingsuggestionsFalse DialogWritingsuggestions = "false"
 	DialogWritingsuggestionsTrue  DialogWritingsuggestions = "true"
+	DialogWritingsuggestionsFalse DialogWritingsuggestions = "false"
 	DialogWritingsuggestionsEmpty DialogWritingsuggestions = ""
 )
 

@@ -48,15 +48,22 @@ func MeterTernary(condition bool, true htemel.Node, false htemel.Node) *MeterEle
 	return Meter(false)
 }
 
+// Children appends children to this element.
+func (e *MeterElement) Children(children ...htemel.Node) *MeterElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type MeterAutocapitalize string
 
 const (
-	MeterAutocapitalizeOff        MeterAutocapitalize = "off"
-	MeterAutocapitalizeOn         MeterAutocapitalize = "on"
-	MeterAutocapitalizeSentences  MeterAutocapitalize = "sentences"
 	MeterAutocapitalizeWords      MeterAutocapitalize = "words"
 	MeterAutocapitalizeCharacters MeterAutocapitalize = "characters"
 	MeterAutocapitalizeNone       MeterAutocapitalize = "none"
+	MeterAutocapitalizeOff        MeterAutocapitalize = "off"
+	MeterAutocapitalizeOn         MeterAutocapitalize = "on"
+	MeterAutocapitalizeSentences  MeterAutocapitalize = "sentences"
 )
 
 type MeterAutocorrect string
@@ -70,18 +77,18 @@ const (
 type MeterContenteditable string
 
 const (
+	MeterContenteditableTrue          MeterContenteditable = "true"
 	MeterContenteditableFalse         MeterContenteditable = "false"
 	MeterContenteditablePlaintextOnly MeterContenteditable = "plaintext-only"
-	MeterContenteditableTrue          MeterContenteditable = "true"
 	MeterContenteditableEmpty         MeterContenteditable = ""
 )
 
 type MeterDir string
 
 const (
-	MeterDirRtl  MeterDir = "rtl"
 	MeterDirAuto MeterDir = "auto"
 	MeterDirLtr  MeterDir = "ltr"
+	MeterDirRtl  MeterDir = "rtl"
 )
 
 type MeterDraggable string
@@ -94,13 +101,13 @@ const (
 type MeterEnterkeyhint string
 
 const (
-	MeterEnterkeyhintSend     MeterEnterkeyhint = "send"
-	MeterEnterkeyhintDone     MeterEnterkeyhint = "done"
 	MeterEnterkeyhintEnter    MeterEnterkeyhint = "enter"
 	MeterEnterkeyhintGo       MeterEnterkeyhint = "go"
 	MeterEnterkeyhintNext     MeterEnterkeyhint = "next"
 	MeterEnterkeyhintPrevious MeterEnterkeyhint = "previous"
 	MeterEnterkeyhintSearch   MeterEnterkeyhint = "search"
+	MeterEnterkeyhintSend     MeterEnterkeyhint = "send"
+	MeterEnterkeyhintDone     MeterEnterkeyhint = "done"
 )
 
 type MeterHidden string
@@ -114,14 +121,14 @@ const (
 type MeterInputmode string
 
 const (
-	MeterInputmodeTel     MeterInputmode = "tel"
-	MeterInputmodeText    MeterInputmode = "text"
-	MeterInputmodeUrl     MeterInputmode = "url"
 	MeterInputmodeDecimal MeterInputmode = "decimal"
 	MeterInputmodeEmail   MeterInputmode = "email"
 	MeterInputmodeNone    MeterInputmode = "none"
 	MeterInputmodeNumeric MeterInputmode = "numeric"
 	MeterInputmodeSearch  MeterInputmode = "search"
+	MeterInputmodeTel     MeterInputmode = "tel"
+	MeterInputmodeText    MeterInputmode = "text"
+	MeterInputmodeUrl     MeterInputmode = "url"
 )
 
 type MeterSpellcheck string

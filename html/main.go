@@ -48,15 +48,22 @@ func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainEleme
 	return Main(false)
 }
 
+// Children appends children to this element.
+func (e *MainElement) Children(children ...htemel.Node) *MainElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type MainAutocapitalize string
 
 const (
+	MainAutocapitalizeCharacters MainAutocapitalize = "characters"
 	MainAutocapitalizeNone       MainAutocapitalize = "none"
 	MainAutocapitalizeOff        MainAutocapitalize = "off"
 	MainAutocapitalizeOn         MainAutocapitalize = "on"
 	MainAutocapitalizeSentences  MainAutocapitalize = "sentences"
 	MainAutocapitalizeWords      MainAutocapitalize = "words"
-	MainAutocapitalizeCharacters MainAutocapitalize = "characters"
 )
 
 type MainAutocorrect string
@@ -79,28 +86,28 @@ const (
 type MainDir string
 
 const (
+	MainDirAuto MainDir = "auto"
 	MainDirLtr  MainDir = "ltr"
 	MainDirRtl  MainDir = "rtl"
-	MainDirAuto MainDir = "auto"
 )
 
 type MainDraggable string
 
 const (
-	MainDraggableFalse MainDraggable = "false"
 	MainDraggableTrue  MainDraggable = "true"
+	MainDraggableFalse MainDraggable = "false"
 )
 
 type MainEnterkeyhint string
 
 const (
-	MainEnterkeyhintSearch   MainEnterkeyhint = "search"
-	MainEnterkeyhintSend     MainEnterkeyhint = "send"
-	MainEnterkeyhintDone     MainEnterkeyhint = "done"
 	MainEnterkeyhintEnter    MainEnterkeyhint = "enter"
 	MainEnterkeyhintGo       MainEnterkeyhint = "go"
 	MainEnterkeyhintNext     MainEnterkeyhint = "next"
 	MainEnterkeyhintPrevious MainEnterkeyhint = "previous"
+	MainEnterkeyhintSearch   MainEnterkeyhint = "search"
+	MainEnterkeyhintSend     MainEnterkeyhint = "send"
+	MainEnterkeyhintDone     MainEnterkeyhint = "done"
 )
 
 type MainHidden string
@@ -143,8 +150,8 @@ const (
 type MainWritingsuggestions string
 
 const (
-	MainWritingsuggestionsTrue  MainWritingsuggestions = "true"
 	MainWritingsuggestionsFalse MainWritingsuggestions = "false"
+	MainWritingsuggestionsTrue  MainWritingsuggestions = "true"
 	MainWritingsuggestionsEmpty MainWritingsuggestions = ""
 )
 

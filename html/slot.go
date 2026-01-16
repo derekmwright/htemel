@@ -48,6 +48,13 @@ func SlotTernary(condition bool, true htemel.Node, false htemel.Node) *SlotEleme
 	return Slot(false)
 }
 
+// Children appends children to this element.
+func (e *SlotElement) Children(children ...htemel.Node) *SlotElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SlotAutocapitalize string
 
 const (
@@ -79,9 +86,9 @@ const (
 type SlotDir string
 
 const (
+	SlotDirRtl  SlotDir = "rtl"
 	SlotDirAuto SlotDir = "auto"
 	SlotDirLtr  SlotDir = "ltr"
-	SlotDirRtl  SlotDir = "rtl"
 )
 
 type SlotDraggable string
@@ -94,13 +101,13 @@ const (
 type SlotEnterkeyhint string
 
 const (
-	SlotEnterkeyhintSearch   SlotEnterkeyhint = "search"
-	SlotEnterkeyhintSend     SlotEnterkeyhint = "send"
 	SlotEnterkeyhintDone     SlotEnterkeyhint = "done"
 	SlotEnterkeyhintEnter    SlotEnterkeyhint = "enter"
 	SlotEnterkeyhintGo       SlotEnterkeyhint = "go"
 	SlotEnterkeyhintNext     SlotEnterkeyhint = "next"
 	SlotEnterkeyhintPrevious SlotEnterkeyhint = "previous"
+	SlotEnterkeyhintSearch   SlotEnterkeyhint = "search"
+	SlotEnterkeyhintSend     SlotEnterkeyhint = "send"
 )
 
 type SlotHidden string
@@ -114,14 +121,14 @@ const (
 type SlotInputmode string
 
 const (
+	SlotInputmodeUrl     SlotInputmode = "url"
+	SlotInputmodeDecimal SlotInputmode = "decimal"
 	SlotInputmodeEmail   SlotInputmode = "email"
 	SlotInputmodeNone    SlotInputmode = "none"
 	SlotInputmodeNumeric SlotInputmode = "numeric"
 	SlotInputmodeSearch  SlotInputmode = "search"
 	SlotInputmodeTel     SlotInputmode = "tel"
 	SlotInputmodeText    SlotInputmode = "text"
-	SlotInputmodeUrl     SlotInputmode = "url"
-	SlotInputmodeDecimal SlotInputmode = "decimal"
 )
 
 type SlotSpellcheck string
@@ -143,8 +150,8 @@ const (
 type SlotWritingsuggestions string
 
 const (
-	SlotWritingsuggestionsTrue  SlotWritingsuggestions = "true"
 	SlotWritingsuggestionsFalse SlotWritingsuggestions = "false"
+	SlotWritingsuggestionsTrue  SlotWritingsuggestions = "true"
 	SlotWritingsuggestionsEmpty SlotWritingsuggestions = ""
 )
 

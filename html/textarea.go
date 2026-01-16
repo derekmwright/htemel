@@ -48,6 +48,13 @@ func TextareaTernary(condition bool, true htemel.Node, false htemel.Node) *Texta
 	return Textarea(false)
 }
 
+// Children appends children to this element.
+func (e *TextareaElement) Children(children ...htemel.Node) *TextareaElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type TextareaWrap string
 
 const (
@@ -58,19 +65,19 @@ const (
 type TextareaAutocapitalize string
 
 const (
-	TextareaAutocapitalizeOff        TextareaAutocapitalize = "off"
-	TextareaAutocapitalizeOn         TextareaAutocapitalize = "on"
-	TextareaAutocapitalizeSentences  TextareaAutocapitalize = "sentences"
 	TextareaAutocapitalizeWords      TextareaAutocapitalize = "words"
 	TextareaAutocapitalizeCharacters TextareaAutocapitalize = "characters"
 	TextareaAutocapitalizeNone       TextareaAutocapitalize = "none"
+	TextareaAutocapitalizeOff        TextareaAutocapitalize = "off"
+	TextareaAutocapitalizeOn         TextareaAutocapitalize = "on"
+	TextareaAutocapitalizeSentences  TextareaAutocapitalize = "sentences"
 )
 
 type TextareaAutocorrect string
 
 const (
-	TextareaAutocorrectOn    TextareaAutocorrect = "on"
 	TextareaAutocorrectOff   TextareaAutocorrect = "off"
+	TextareaAutocorrectOn    TextareaAutocorrect = "on"
 	TextareaAutocorrectEmpty TextareaAutocorrect = ""
 )
 
@@ -94,20 +101,20 @@ const (
 type TextareaDraggable string
 
 const (
-	TextareaDraggableFalse TextareaDraggable = "false"
 	TextareaDraggableTrue  TextareaDraggable = "true"
+	TextareaDraggableFalse TextareaDraggable = "false"
 )
 
 type TextareaEnterkeyhint string
 
 const (
+	TextareaEnterkeyhintSearch   TextareaEnterkeyhint = "search"
+	TextareaEnterkeyhintSend     TextareaEnterkeyhint = "send"
 	TextareaEnterkeyhintDone     TextareaEnterkeyhint = "done"
 	TextareaEnterkeyhintEnter    TextareaEnterkeyhint = "enter"
 	TextareaEnterkeyhintGo       TextareaEnterkeyhint = "go"
 	TextareaEnterkeyhintNext     TextareaEnterkeyhint = "next"
 	TextareaEnterkeyhintPrevious TextareaEnterkeyhint = "previous"
-	TextareaEnterkeyhintSearch   TextareaEnterkeyhint = "search"
-	TextareaEnterkeyhintSend     TextareaEnterkeyhint = "send"
 )
 
 type TextareaHidden string
@@ -121,14 +128,14 @@ const (
 type TextareaInputmode string
 
 const (
-	TextareaInputmodeNumeric TextareaInputmode = "numeric"
-	TextareaInputmodeSearch  TextareaInputmode = "search"
 	TextareaInputmodeTel     TextareaInputmode = "tel"
 	TextareaInputmodeText    TextareaInputmode = "text"
 	TextareaInputmodeUrl     TextareaInputmode = "url"
 	TextareaInputmodeDecimal TextareaInputmode = "decimal"
 	TextareaInputmodeEmail   TextareaInputmode = "email"
 	TextareaInputmodeNone    TextareaInputmode = "none"
+	TextareaInputmodeNumeric TextareaInputmode = "numeric"
+	TextareaInputmodeSearch  TextareaInputmode = "search"
 )
 
 type TextareaSpellcheck string
@@ -142,16 +149,16 @@ const (
 type TextareaTranslate string
 
 const (
-	TextareaTranslateNo    TextareaTranslate = "no"
 	TextareaTranslateYes   TextareaTranslate = "yes"
+	TextareaTranslateNo    TextareaTranslate = "no"
 	TextareaTranslateEmpty TextareaTranslate = ""
 )
 
 type TextareaWritingsuggestions string
 
 const (
-	TextareaWritingsuggestionsFalse TextareaWritingsuggestions = "false"
 	TextareaWritingsuggestionsTrue  TextareaWritingsuggestions = "true"
+	TextareaWritingsuggestionsFalse TextareaWritingsuggestions = "false"
 	TextareaWritingsuggestionsEmpty TextareaWritingsuggestions = ""
 )
 

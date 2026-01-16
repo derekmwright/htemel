@@ -48,15 +48,22 @@ func DfnTernary(condition bool, true htemel.Node, false htemel.Node) *DfnElement
 	return Dfn(false)
 }
 
+// Children appends children to this element.
+func (e *DfnElement) Children(children ...htemel.Node) *DfnElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type DfnAutocapitalize string
 
 const (
-	DfnAutocapitalizeCharacters DfnAutocapitalize = "characters"
 	DfnAutocapitalizeNone       DfnAutocapitalize = "none"
 	DfnAutocapitalizeOff        DfnAutocapitalize = "off"
 	DfnAutocapitalizeOn         DfnAutocapitalize = "on"
 	DfnAutocapitalizeSentences  DfnAutocapitalize = "sentences"
 	DfnAutocapitalizeWords      DfnAutocapitalize = "words"
+	DfnAutocapitalizeCharacters DfnAutocapitalize = "characters"
 )
 
 type DfnAutocorrect string
@@ -70,18 +77,18 @@ const (
 type DfnContenteditable string
 
 const (
+	DfnContenteditableTrue          DfnContenteditable = "true"
 	DfnContenteditableFalse         DfnContenteditable = "false"
 	DfnContenteditablePlaintextOnly DfnContenteditable = "plaintext-only"
-	DfnContenteditableTrue          DfnContenteditable = "true"
 	DfnContenteditableEmpty         DfnContenteditable = ""
 )
 
 type DfnDir string
 
 const (
-	DfnDirAuto DfnDir = "auto"
 	DfnDirLtr  DfnDir = "ltr"
 	DfnDirRtl  DfnDir = "rtl"
+	DfnDirAuto DfnDir = "auto"
 )
 
 type DfnDraggable string
@@ -94,13 +101,13 @@ const (
 type DfnEnterkeyhint string
 
 const (
-	DfnEnterkeyhintDone     DfnEnterkeyhint = "done"
-	DfnEnterkeyhintEnter    DfnEnterkeyhint = "enter"
-	DfnEnterkeyhintGo       DfnEnterkeyhint = "go"
 	DfnEnterkeyhintNext     DfnEnterkeyhint = "next"
 	DfnEnterkeyhintPrevious DfnEnterkeyhint = "previous"
 	DfnEnterkeyhintSearch   DfnEnterkeyhint = "search"
 	DfnEnterkeyhintSend     DfnEnterkeyhint = "send"
+	DfnEnterkeyhintDone     DfnEnterkeyhint = "done"
+	DfnEnterkeyhintEnter    DfnEnterkeyhint = "enter"
+	DfnEnterkeyhintGo       DfnEnterkeyhint = "go"
 )
 
 type DfnHidden string
@@ -114,14 +121,14 @@ const (
 type DfnInputmode string
 
 const (
+	DfnInputmodeNumeric DfnInputmode = "numeric"
+	DfnInputmodeSearch  DfnInputmode = "search"
 	DfnInputmodeTel     DfnInputmode = "tel"
 	DfnInputmodeText    DfnInputmode = "text"
 	DfnInputmodeUrl     DfnInputmode = "url"
 	DfnInputmodeDecimal DfnInputmode = "decimal"
 	DfnInputmodeEmail   DfnInputmode = "email"
 	DfnInputmodeNone    DfnInputmode = "none"
-	DfnInputmodeNumeric DfnInputmode = "numeric"
-	DfnInputmodeSearch  DfnInputmode = "search"
 )
 
 type DfnSpellcheck string

@@ -48,15 +48,22 @@ func H5Ternary(condition bool, true htemel.Node, false htemel.Node) *H5Element {
 	return H5(false)
 }
 
+// Children appends children to this element.
+func (e *H5Element) Children(children ...htemel.Node) *H5Element {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type H5Autocapitalize string
 
 const (
-	H5AutocapitalizeNone       H5Autocapitalize = "none"
-	H5AutocapitalizeOff        H5Autocapitalize = "off"
 	H5AutocapitalizeOn         H5Autocapitalize = "on"
 	H5AutocapitalizeSentences  H5Autocapitalize = "sentences"
 	H5AutocapitalizeWords      H5Autocapitalize = "words"
 	H5AutocapitalizeCharacters H5Autocapitalize = "characters"
+	H5AutocapitalizeNone       H5Autocapitalize = "none"
+	H5AutocapitalizeOff        H5Autocapitalize = "off"
 )
 
 type H5Autocorrect string
@@ -70,9 +77,9 @@ const (
 type H5Contenteditable string
 
 const (
+	H5ContenteditableTrue          H5Contenteditable = "true"
 	H5ContenteditableFalse         H5Contenteditable = "false"
 	H5ContenteditablePlaintextOnly H5Contenteditable = "plaintext-only"
-	H5ContenteditableTrue          H5Contenteditable = "true"
 	H5ContenteditableEmpty         H5Contenteditable = ""
 )
 
@@ -94,13 +101,13 @@ const (
 type H5Enterkeyhint string
 
 const (
+	H5EnterkeyhintSearch   H5Enterkeyhint = "search"
 	H5EnterkeyhintSend     H5Enterkeyhint = "send"
 	H5EnterkeyhintDone     H5Enterkeyhint = "done"
 	H5EnterkeyhintEnter    H5Enterkeyhint = "enter"
 	H5EnterkeyhintGo       H5Enterkeyhint = "go"
 	H5EnterkeyhintNext     H5Enterkeyhint = "next"
 	H5EnterkeyhintPrevious H5Enterkeyhint = "previous"
-	H5EnterkeyhintSearch   H5Enterkeyhint = "search"
 )
 
 type H5Hidden string
@@ -114,6 +121,7 @@ const (
 type H5Inputmode string
 
 const (
+	H5InputmodeUrl     H5Inputmode = "url"
 	H5InputmodeDecimal H5Inputmode = "decimal"
 	H5InputmodeEmail   H5Inputmode = "email"
 	H5InputmodeNone    H5Inputmode = "none"
@@ -121,7 +129,6 @@ const (
 	H5InputmodeSearch  H5Inputmode = "search"
 	H5InputmodeTel     H5Inputmode = "tel"
 	H5InputmodeText    H5Inputmode = "text"
-	H5InputmodeUrl     H5Inputmode = "url"
 )
 
 type H5Spellcheck string

@@ -48,15 +48,22 @@ func BodyTernary(condition bool, true htemel.Node, false htemel.Node) *BodyEleme
 	return Body(false)
 }
 
+// Children appends children to this element.
+func (e *BodyElement) Children(children ...htemel.Node) *BodyElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type BodyAutocapitalize string
 
 const (
+	BodyAutocapitalizeNone       BodyAutocapitalize = "none"
+	BodyAutocapitalizeOff        BodyAutocapitalize = "off"
 	BodyAutocapitalizeOn         BodyAutocapitalize = "on"
 	BodyAutocapitalizeSentences  BodyAutocapitalize = "sentences"
 	BodyAutocapitalizeWords      BodyAutocapitalize = "words"
 	BodyAutocapitalizeCharacters BodyAutocapitalize = "characters"
-	BodyAutocapitalizeNone       BodyAutocapitalize = "none"
-	BodyAutocapitalizeOff        BodyAutocapitalize = "off"
 )
 
 type BodyAutocorrect string
@@ -79,9 +86,9 @@ const (
 type BodyDir string
 
 const (
+	BodyDirAuto BodyDir = "auto"
 	BodyDirLtr  BodyDir = "ltr"
 	BodyDirRtl  BodyDir = "rtl"
-	BodyDirAuto BodyDir = "auto"
 )
 
 type BodyDraggable string
@@ -94,13 +101,13 @@ const (
 type BodyEnterkeyhint string
 
 const (
-	BodyEnterkeyhintNext     BodyEnterkeyhint = "next"
 	BodyEnterkeyhintPrevious BodyEnterkeyhint = "previous"
 	BodyEnterkeyhintSearch   BodyEnterkeyhint = "search"
 	BodyEnterkeyhintSend     BodyEnterkeyhint = "send"
 	BodyEnterkeyhintDone     BodyEnterkeyhint = "done"
 	BodyEnterkeyhintEnter    BodyEnterkeyhint = "enter"
 	BodyEnterkeyhintGo       BodyEnterkeyhint = "go"
+	BodyEnterkeyhintNext     BodyEnterkeyhint = "next"
 )
 
 type BodyHidden string
@@ -114,7 +121,6 @@ const (
 type BodyInputmode string
 
 const (
-	BodyInputmodeText    BodyInputmode = "text"
 	BodyInputmodeUrl     BodyInputmode = "url"
 	BodyInputmodeDecimal BodyInputmode = "decimal"
 	BodyInputmodeEmail   BodyInputmode = "email"
@@ -122,13 +128,14 @@ const (
 	BodyInputmodeNumeric BodyInputmode = "numeric"
 	BodyInputmodeSearch  BodyInputmode = "search"
 	BodyInputmodeTel     BodyInputmode = "tel"
+	BodyInputmodeText    BodyInputmode = "text"
 )
 
 type BodySpellcheck string
 
 const (
-	BodySpellcheckFalse BodySpellcheck = "false"
 	BodySpellcheckTrue  BodySpellcheck = "true"
+	BodySpellcheckFalse BodySpellcheck = "false"
 	BodySpellcheckEmpty BodySpellcheck = ""
 )
 

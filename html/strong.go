@@ -48,15 +48,22 @@ func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongE
 	return Strong(false)
 }
 
+// Children appends children to this element.
+func (e *StrongElement) Children(children ...htemel.Node) *StrongElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type StrongAutocapitalize string
 
 const (
+	StrongAutocapitalizeNone       StrongAutocapitalize = "none"
+	StrongAutocapitalizeOff        StrongAutocapitalize = "off"
 	StrongAutocapitalizeOn         StrongAutocapitalize = "on"
 	StrongAutocapitalizeSentences  StrongAutocapitalize = "sentences"
 	StrongAutocapitalizeWords      StrongAutocapitalize = "words"
 	StrongAutocapitalizeCharacters StrongAutocapitalize = "characters"
-	StrongAutocapitalizeNone       StrongAutocapitalize = "none"
-	StrongAutocapitalizeOff        StrongAutocapitalize = "off"
 )
 
 type StrongAutocorrect string
@@ -70,9 +77,9 @@ const (
 type StrongContenteditable string
 
 const (
+	StrongContenteditableFalse         StrongContenteditable = "false"
 	StrongContenteditablePlaintextOnly StrongContenteditable = "plaintext-only"
 	StrongContenteditableTrue          StrongContenteditable = "true"
-	StrongContenteditableFalse         StrongContenteditable = "false"
 	StrongContenteditableEmpty         StrongContenteditable = ""
 )
 
@@ -94,27 +101,26 @@ const (
 type StrongEnterkeyhint string
 
 const (
-	StrongEnterkeyhintDone     StrongEnterkeyhint = "done"
-	StrongEnterkeyhintEnter    StrongEnterkeyhint = "enter"
 	StrongEnterkeyhintGo       StrongEnterkeyhint = "go"
 	StrongEnterkeyhintNext     StrongEnterkeyhint = "next"
 	StrongEnterkeyhintPrevious StrongEnterkeyhint = "previous"
 	StrongEnterkeyhintSearch   StrongEnterkeyhint = "search"
 	StrongEnterkeyhintSend     StrongEnterkeyhint = "send"
+	StrongEnterkeyhintDone     StrongEnterkeyhint = "done"
+	StrongEnterkeyhintEnter    StrongEnterkeyhint = "enter"
 )
 
 type StrongHidden string
 
 const (
-	StrongHiddenHidden     StrongHidden = "hidden"
 	StrongHiddenUntilFound StrongHidden = "until-found"
+	StrongHiddenHidden     StrongHidden = "hidden"
 	StrongHiddenEmpty      StrongHidden = ""
 )
 
 type StrongInputmode string
 
 const (
-	StrongInputmodeTel     StrongInputmode = "tel"
 	StrongInputmodeText    StrongInputmode = "text"
 	StrongInputmodeUrl     StrongInputmode = "url"
 	StrongInputmodeDecimal StrongInputmode = "decimal"
@@ -122,6 +128,7 @@ const (
 	StrongInputmodeNone    StrongInputmode = "none"
 	StrongInputmodeNumeric StrongInputmode = "numeric"
 	StrongInputmodeSearch  StrongInputmode = "search"
+	StrongInputmodeTel     StrongInputmode = "tel"
 )
 
 type StrongSpellcheck string
@@ -135,8 +142,8 @@ const (
 type StrongTranslate string
 
 const (
-	StrongTranslateNo    StrongTranslate = "no"
 	StrongTranslateYes   StrongTranslate = "yes"
+	StrongTranslateNo    StrongTranslate = "no"
 	StrongTranslateEmpty StrongTranslate = ""
 )
 

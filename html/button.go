@@ -48,6 +48,13 @@ func ButtonTernary(condition bool, true htemel.Node, false htemel.Node) *ButtonE
 	return Button(false)
 }
 
+// Children appends children to this element.
+func (e *ButtonElement) Children(children ...htemel.Node) *ButtonElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type ButtonCommand string
 
 const (
@@ -70,9 +77,9 @@ const (
 type ButtonPopovertargetaction string
 
 const (
-	ButtonPopovertargetactionToggle ButtonPopovertargetaction = "toggle"
 	ButtonPopovertargetactionHide   ButtonPopovertargetaction = "hide"
 	ButtonPopovertargetactionShow   ButtonPopovertargetaction = "show"
+	ButtonPopovertargetactionToggle ButtonPopovertargetaction = "toggle"
 )
 
 type ButtonType string
@@ -97,17 +104,17 @@ const (
 type ButtonAutocorrect string
 
 const (
-	ButtonAutocorrectOff   ButtonAutocorrect = "off"
 	ButtonAutocorrectOn    ButtonAutocorrect = "on"
+	ButtonAutocorrectOff   ButtonAutocorrect = "off"
 	ButtonAutocorrectEmpty ButtonAutocorrect = ""
 )
 
 type ButtonContenteditable string
 
 const (
-	ButtonContenteditableFalse         ButtonContenteditable = "false"
 	ButtonContenteditablePlaintextOnly ButtonContenteditable = "plaintext-only"
 	ButtonContenteditableTrue          ButtonContenteditable = "true"
+	ButtonContenteditableFalse         ButtonContenteditable = "false"
 	ButtonContenteditableEmpty         ButtonContenteditable = ""
 )
 
@@ -149,14 +156,14 @@ const (
 type ButtonInputmode string
 
 const (
-	ButtonInputmodeNumeric ButtonInputmode = "numeric"
-	ButtonInputmodeSearch  ButtonInputmode = "search"
-	ButtonInputmodeTel     ButtonInputmode = "tel"
 	ButtonInputmodeText    ButtonInputmode = "text"
 	ButtonInputmodeUrl     ButtonInputmode = "url"
 	ButtonInputmodeDecimal ButtonInputmode = "decimal"
 	ButtonInputmodeEmail   ButtonInputmode = "email"
 	ButtonInputmodeNone    ButtonInputmode = "none"
+	ButtonInputmodeNumeric ButtonInputmode = "numeric"
+	ButtonInputmodeSearch  ButtonInputmode = "search"
+	ButtonInputmodeTel     ButtonInputmode = "tel"
 )
 
 type ButtonSpellcheck string

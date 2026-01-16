@@ -168,6 +168,24 @@ func {{ .Tag | titleCase }}Ternary(condition bool, true htemel.Node, false hteme
 	return tmpl, nil
 }
 
+func ChildrenFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("ChildrenFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+{{ if not .Void }}
+// Children appends children to this element.
+func (e *{{ .Tag | titleCase }}Element) Children(children ...htemel.Node) *{{ .Tag | titleCase }}Element {
+	e.children = append(e.children, children...)
+	
+	return e
+}
+{{ end }}
+`))
+
+	return tmpl, nil
+}
+
 func RenderFunc() (*template.Template, ImportSet) {
 	tmpl := template.Must(template.New("RenderFunc").
 		Funcs(template.FuncMap{

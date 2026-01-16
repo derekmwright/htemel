@@ -48,15 +48,22 @@ func SectionTernary(condition bool, true htemel.Node, false htemel.Node) *Sectio
 	return Section(false)
 }
 
+// Children appends children to this element.
+func (e *SectionElement) Children(children ...htemel.Node) *SectionElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type SectionAutocapitalize string
 
 const (
+	SectionAutocapitalizeCharacters SectionAutocapitalize = "characters"
 	SectionAutocapitalizeNone       SectionAutocapitalize = "none"
 	SectionAutocapitalizeOff        SectionAutocapitalize = "off"
 	SectionAutocapitalizeOn         SectionAutocapitalize = "on"
 	SectionAutocapitalizeSentences  SectionAutocapitalize = "sentences"
 	SectionAutocapitalizeWords      SectionAutocapitalize = "words"
-	SectionAutocapitalizeCharacters SectionAutocapitalize = "characters"
 )
 
 type SectionAutocorrect string
@@ -70,9 +77,9 @@ const (
 type SectionContenteditable string
 
 const (
-	SectionContenteditableTrue          SectionContenteditable = "true"
 	SectionContenteditableFalse         SectionContenteditable = "false"
 	SectionContenteditablePlaintextOnly SectionContenteditable = "plaintext-only"
+	SectionContenteditableTrue          SectionContenteditable = "true"
 	SectionContenteditableEmpty         SectionContenteditable = ""
 )
 
@@ -87,20 +94,20 @@ const (
 type SectionDraggable string
 
 const (
-	SectionDraggableTrue  SectionDraggable = "true"
 	SectionDraggableFalse SectionDraggable = "false"
+	SectionDraggableTrue  SectionDraggable = "true"
 )
 
 type SectionEnterkeyhint string
 
 const (
-	SectionEnterkeyhintSend     SectionEnterkeyhint = "send"
-	SectionEnterkeyhintDone     SectionEnterkeyhint = "done"
 	SectionEnterkeyhintEnter    SectionEnterkeyhint = "enter"
 	SectionEnterkeyhintGo       SectionEnterkeyhint = "go"
 	SectionEnterkeyhintNext     SectionEnterkeyhint = "next"
 	SectionEnterkeyhintPrevious SectionEnterkeyhint = "previous"
 	SectionEnterkeyhintSearch   SectionEnterkeyhint = "search"
+	SectionEnterkeyhintSend     SectionEnterkeyhint = "send"
+	SectionEnterkeyhintDone     SectionEnterkeyhint = "done"
 )
 
 type SectionHidden string
@@ -114,14 +121,14 @@ const (
 type SectionInputmode string
 
 const (
-	SectionInputmodeDecimal SectionInputmode = "decimal"
-	SectionInputmodeEmail   SectionInputmode = "email"
-	SectionInputmodeNone    SectionInputmode = "none"
-	SectionInputmodeNumeric SectionInputmode = "numeric"
 	SectionInputmodeSearch  SectionInputmode = "search"
 	SectionInputmodeTel     SectionInputmode = "tel"
 	SectionInputmodeText    SectionInputmode = "text"
 	SectionInputmodeUrl     SectionInputmode = "url"
+	SectionInputmodeDecimal SectionInputmode = "decimal"
+	SectionInputmodeEmail   SectionInputmode = "email"
+	SectionInputmodeNone    SectionInputmode = "none"
+	SectionInputmodeNumeric SectionInputmode = "numeric"
 )
 
 type SectionSpellcheck string
@@ -135,8 +142,8 @@ const (
 type SectionTranslate string
 
 const (
-	SectionTranslateNo    SectionTranslate = "no"
 	SectionTranslateYes   SectionTranslate = "yes"
+	SectionTranslateNo    SectionTranslate = "no"
 	SectionTranslateEmpty SectionTranslate = ""
 )
 

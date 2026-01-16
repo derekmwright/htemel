@@ -48,15 +48,22 @@ func CodeTernary(condition bool, true htemel.Node, false htemel.Node) *CodeEleme
 	return Code(false)
 }
 
+// Children appends children to this element.
+func (e *CodeElement) Children(children ...htemel.Node) *CodeElement {
+	e.children = append(e.children, children...)
+
+	return e
+}
+
 type CodeAutocapitalize string
 
 const (
-	CodeAutocapitalizeNone       CodeAutocapitalize = "none"
-	CodeAutocapitalizeOff        CodeAutocapitalize = "off"
-	CodeAutocapitalizeOn         CodeAutocapitalize = "on"
 	CodeAutocapitalizeSentences  CodeAutocapitalize = "sentences"
 	CodeAutocapitalizeWords      CodeAutocapitalize = "words"
 	CodeAutocapitalizeCharacters CodeAutocapitalize = "characters"
+	CodeAutocapitalizeNone       CodeAutocapitalize = "none"
+	CodeAutocapitalizeOff        CodeAutocapitalize = "off"
+	CodeAutocapitalizeOn         CodeAutocapitalize = "on"
 )
 
 type CodeAutocorrect string
@@ -70,18 +77,18 @@ const (
 type CodeContenteditable string
 
 const (
+	CodeContenteditableTrue          CodeContenteditable = "true"
 	CodeContenteditableFalse         CodeContenteditable = "false"
 	CodeContenteditablePlaintextOnly CodeContenteditable = "plaintext-only"
-	CodeContenteditableTrue          CodeContenteditable = "true"
 	CodeContenteditableEmpty         CodeContenteditable = ""
 )
 
 type CodeDir string
 
 const (
+	CodeDirAuto CodeDir = "auto"
 	CodeDirLtr  CodeDir = "ltr"
 	CodeDirRtl  CodeDir = "rtl"
-	CodeDirAuto CodeDir = "auto"
 )
 
 type CodeDraggable string
@@ -94,13 +101,13 @@ const (
 type CodeEnterkeyhint string
 
 const (
+	CodeEnterkeyhintSearch   CodeEnterkeyhint = "search"
 	CodeEnterkeyhintSend     CodeEnterkeyhint = "send"
 	CodeEnterkeyhintDone     CodeEnterkeyhint = "done"
 	CodeEnterkeyhintEnter    CodeEnterkeyhint = "enter"
 	CodeEnterkeyhintGo       CodeEnterkeyhint = "go"
 	CodeEnterkeyhintNext     CodeEnterkeyhint = "next"
 	CodeEnterkeyhintPrevious CodeEnterkeyhint = "previous"
-	CodeEnterkeyhintSearch   CodeEnterkeyhint = "search"
 )
 
 type CodeHidden string
@@ -114,14 +121,14 @@ const (
 type CodeInputmode string
 
 const (
-	CodeInputmodeText    CodeInputmode = "text"
-	CodeInputmodeUrl     CodeInputmode = "url"
-	CodeInputmodeDecimal CodeInputmode = "decimal"
 	CodeInputmodeEmail   CodeInputmode = "email"
 	CodeInputmodeNone    CodeInputmode = "none"
 	CodeInputmodeNumeric CodeInputmode = "numeric"
 	CodeInputmodeSearch  CodeInputmode = "search"
 	CodeInputmodeTel     CodeInputmode = "tel"
+	CodeInputmodeText    CodeInputmode = "text"
+	CodeInputmodeUrl     CodeInputmode = "url"
+	CodeInputmodeDecimal CodeInputmode = "decimal"
 )
 
 type CodeSpellcheck string
