@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func StrongTernary(condition bool, true htemel.Node, false htemel.Node) *StrongE
 	if condition {
 		return Strong(true)
 	}
-
 	return Strong(false)
 }
 
 // Children appends children to this element.
 func (e *StrongElement) Children(children ...htemel.Node) *StrongElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *StrongElement) With(fn func(*StrongElement)) *StrongElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *StrongElement) Textf(format string, args ...any) *StrongElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *StrongElement) AddClass(classes ...string) *StrongElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *StrongElement) ToggleClass(class string, enable bool) *StrongElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type StrongAutocapitalize string
 
 const (
-	StrongAutocapitalizeNone       StrongAutocapitalize = "none"
 	StrongAutocapitalizeOff        StrongAutocapitalize = "off"
 	StrongAutocapitalizeOn         StrongAutocapitalize = "on"
 	StrongAutocapitalizeSentences  StrongAutocapitalize = "sentences"
 	StrongAutocapitalizeWords      StrongAutocapitalize = "words"
 	StrongAutocapitalizeCharacters StrongAutocapitalize = "characters"
+	StrongAutocapitalizeNone       StrongAutocapitalize = "none"
 )
 
 type StrongAutocorrect string
@@ -77,9 +108,9 @@ const (
 type StrongContenteditable string
 
 const (
-	StrongContenteditableFalse         StrongContenteditable = "false"
 	StrongContenteditablePlaintextOnly StrongContenteditable = "plaintext-only"
 	StrongContenteditableTrue          StrongContenteditable = "true"
+	StrongContenteditableFalse         StrongContenteditable = "false"
 	StrongContenteditableEmpty         StrongContenteditable = ""
 )
 
@@ -101,34 +132,34 @@ const (
 type StrongEnterkeyhint string
 
 const (
-	StrongEnterkeyhintGo       StrongEnterkeyhint = "go"
-	StrongEnterkeyhintNext     StrongEnterkeyhint = "next"
 	StrongEnterkeyhintPrevious StrongEnterkeyhint = "previous"
 	StrongEnterkeyhintSearch   StrongEnterkeyhint = "search"
 	StrongEnterkeyhintSend     StrongEnterkeyhint = "send"
 	StrongEnterkeyhintDone     StrongEnterkeyhint = "done"
 	StrongEnterkeyhintEnter    StrongEnterkeyhint = "enter"
+	StrongEnterkeyhintGo       StrongEnterkeyhint = "go"
+	StrongEnterkeyhintNext     StrongEnterkeyhint = "next"
 )
 
 type StrongHidden string
 
 const (
-	StrongHiddenUntilFound StrongHidden = "until-found"
 	StrongHiddenHidden     StrongHidden = "hidden"
+	StrongHiddenUntilFound StrongHidden = "until-found"
 	StrongHiddenEmpty      StrongHidden = ""
 )
 
 type StrongInputmode string
 
 const (
-	StrongInputmodeText    StrongInputmode = "text"
-	StrongInputmodeUrl     StrongInputmode = "url"
-	StrongInputmodeDecimal StrongInputmode = "decimal"
-	StrongInputmodeEmail   StrongInputmode = "email"
 	StrongInputmodeNone    StrongInputmode = "none"
 	StrongInputmodeNumeric StrongInputmode = "numeric"
 	StrongInputmodeSearch  StrongInputmode = "search"
 	StrongInputmodeTel     StrongInputmode = "tel"
+	StrongInputmodeText    StrongInputmode = "text"
+	StrongInputmodeUrl     StrongInputmode = "url"
+	StrongInputmodeDecimal StrongInputmode = "decimal"
+	StrongInputmodeEmail   StrongInputmode = "email"
 )
 
 type StrongSpellcheck string
@@ -142,8 +173,8 @@ const (
 type StrongTranslate string
 
 const (
-	StrongTranslateYes   StrongTranslate = "yes"
 	StrongTranslateNo    StrongTranslate = "no"
+	StrongTranslateYes   StrongTranslate = "yes"
 	StrongTranslateEmpty StrongTranslate = ""
 )
 

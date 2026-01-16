@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,15 +40,42 @@ func HrIf(condition bool) *HrElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *HrElement) With(fn func(*HrElement)) *HrElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *HrElement) AddClass(classes ...string) *HrElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *HrElement) ToggleClass(class string, enable bool) *HrElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type HrAutocapitalize string
 
 const (
+	HrAutocapitalizeNone       HrAutocapitalize = "none"
 	HrAutocapitalizeOff        HrAutocapitalize = "off"
 	HrAutocapitalizeOn         HrAutocapitalize = "on"
 	HrAutocapitalizeSentences  HrAutocapitalize = "sentences"
 	HrAutocapitalizeWords      HrAutocapitalize = "words"
 	HrAutocapitalizeCharacters HrAutocapitalize = "characters"
-	HrAutocapitalizeNone       HrAutocapitalize = "none"
 )
 
 type HrAutocorrect string
@@ -85,13 +113,13 @@ const (
 type HrEnterkeyhint string
 
 const (
+	HrEnterkeyhintSend     HrEnterkeyhint = "send"
+	HrEnterkeyhintDone     HrEnterkeyhint = "done"
 	HrEnterkeyhintEnter    HrEnterkeyhint = "enter"
 	HrEnterkeyhintGo       HrEnterkeyhint = "go"
 	HrEnterkeyhintNext     HrEnterkeyhint = "next"
 	HrEnterkeyhintPrevious HrEnterkeyhint = "previous"
 	HrEnterkeyhintSearch   HrEnterkeyhint = "search"
-	HrEnterkeyhintSend     HrEnterkeyhint = "send"
-	HrEnterkeyhintDone     HrEnterkeyhint = "done"
 )
 
 type HrHidden string
@@ -118,8 +146,8 @@ const (
 type HrSpellcheck string
 
 const (
-	HrSpellcheckTrue  HrSpellcheck = "true"
 	HrSpellcheckFalse HrSpellcheck = "false"
+	HrSpellcheckTrue  HrSpellcheck = "true"
 	HrSpellcheckEmpty HrSpellcheck = ""
 )
 

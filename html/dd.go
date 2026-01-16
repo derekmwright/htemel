@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func DdTernary(condition bool, true htemel.Node, false htemel.Node) *DdElement {
 	if condition {
 		return Dd(true)
 	}
-
 	return Dd(false)
 }
 
 // Children appends children to this element.
 func (e *DdElement) Children(children ...htemel.Node) *DdElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *DdElement) With(fn func(*DdElement)) *DdElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *DdElement) Textf(format string, args ...any) *DdElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *DdElement) AddClass(classes ...string) *DdElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *DdElement) ToggleClass(class string, enable bool) *DdElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type DdAutocapitalize string
 
 const (
-	DdAutocapitalizeWords      DdAutocapitalize = "words"
 	DdAutocapitalizeCharacters DdAutocapitalize = "characters"
 	DdAutocapitalizeNone       DdAutocapitalize = "none"
 	DdAutocapitalizeOff        DdAutocapitalize = "off"
 	DdAutocapitalizeOn         DdAutocapitalize = "on"
 	DdAutocapitalizeSentences  DdAutocapitalize = "sentences"
+	DdAutocapitalizeWords      DdAutocapitalize = "words"
 )
 
 type DdAutocorrect string
@@ -101,13 +132,13 @@ const (
 type DdEnterkeyhint string
 
 const (
-	DdEnterkeyhintDone     DdEnterkeyhint = "done"
-	DdEnterkeyhintEnter    DdEnterkeyhint = "enter"
-	DdEnterkeyhintGo       DdEnterkeyhint = "go"
 	DdEnterkeyhintNext     DdEnterkeyhint = "next"
 	DdEnterkeyhintPrevious DdEnterkeyhint = "previous"
 	DdEnterkeyhintSearch   DdEnterkeyhint = "search"
 	DdEnterkeyhintSend     DdEnterkeyhint = "send"
+	DdEnterkeyhintDone     DdEnterkeyhint = "done"
+	DdEnterkeyhintEnter    DdEnterkeyhint = "enter"
+	DdEnterkeyhintGo       DdEnterkeyhint = "go"
 )
 
 type DdHidden string

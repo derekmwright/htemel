@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,15 +40,42 @@ func ColIf(condition bool) *ColElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *ColElement) With(fn func(*ColElement)) *ColElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *ColElement) AddClass(classes ...string) *ColElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *ColElement) ToggleClass(class string, enable bool) *ColElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type ColAutocapitalize string
 
 const (
+	ColAutocapitalizeOn         ColAutocapitalize = "on"
 	ColAutocapitalizeSentences  ColAutocapitalize = "sentences"
 	ColAutocapitalizeWords      ColAutocapitalize = "words"
 	ColAutocapitalizeCharacters ColAutocapitalize = "characters"
 	ColAutocapitalizeNone       ColAutocapitalize = "none"
 	ColAutocapitalizeOff        ColAutocapitalize = "off"
-	ColAutocapitalizeOn         ColAutocapitalize = "on"
 )
 
 type ColAutocorrect string
@@ -61,9 +89,9 @@ const (
 type ColContenteditable string
 
 const (
+	ColContenteditableTrue          ColContenteditable = "true"
 	ColContenteditableFalse         ColContenteditable = "false"
 	ColContenteditablePlaintextOnly ColContenteditable = "plaintext-only"
-	ColContenteditableTrue          ColContenteditable = "true"
 	ColContenteditableEmpty         ColContenteditable = ""
 )
 
@@ -97,8 +125,8 @@ const (
 type ColHidden string
 
 const (
-	ColHiddenHidden     ColHidden = "hidden"
 	ColHiddenUntilFound ColHidden = "until-found"
+	ColHiddenHidden     ColHidden = "hidden"
 	ColHiddenEmpty      ColHidden = ""
 )
 
@@ -126,8 +154,8 @@ const (
 type ColTranslate string
 
 const (
-	ColTranslateNo    ColTranslate = "no"
 	ColTranslateYes   ColTranslate = "yes"
+	ColTranslateNo    ColTranslate = "no"
 	ColTranslateEmpty ColTranslate = ""
 )
 

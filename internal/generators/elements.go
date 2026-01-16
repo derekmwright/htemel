@@ -159,7 +159,6 @@ func {{ .Tag | titleCase }}Ternary(condition bool, true htemel.Node, false hteme
 	if condition {
 		return {{ .Tag | titleCase }}(true)
 	}
-
 	return {{ .Tag | titleCase }}(false)
 }
 {{ end }}
@@ -177,10 +176,79 @@ func ChildrenFunc() (*template.Template, ImportSet) {
 // Children appends children to this element.
 func (e *{{ .Tag | titleCase }}Element) Children(children ...htemel.Node) *{{ .Tag | titleCase }}Element {
 	e.children = append(e.children, children...)
-	
 	return e
 }
 {{ end }}
+`))
+
+	return tmpl, nil
+}
+
+func WithFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("WithFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+// With allows passing a function to modify the element via a closure.
+func (e *{{ .Tag | titleCase }}Element) With(fn func(*{{ .Tag | titleCase }}Element)) *{{ .Tag | titleCase }}Element {
+	fn(e)
+	return e
+}
+`))
+
+	return tmpl, nil
+}
+
+func TextfFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("TextfFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+{{ if not .Void }}
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *{{ .Tag | titleCase }}Element) Textf(format string, args ...any) *{{ .Tag | titleCase }}Element {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+{{ end }}
+`))
+
+	return tmpl, nil
+}
+
+func AddClassFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("AddClassFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+// AddClass appends a class to the element.
+func (e *{{ .Tag | titleCase }}Element) AddClass(classes ...string) *{{ .Tag | titleCase }}Element {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+`))
+
+	return tmpl, nil
+}
+
+func ToggleClassFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("ToggleClassFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+// ToggleClass toggles a class on or off.
+func (e *{{ .Tag | titleCase }}Element) ToggleClass(class string, enable bool) *{{ .Tag | titleCase }}Element {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
 `))
 
 	return tmpl, nil

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func UTernary(condition bool, true htemel.Node, false htemel.Node) *UElement {
 	if condition {
 		return U(true)
 	}
-
 	return U(false)
 }
 
 // Children appends children to this element.
 func (e *UElement) Children(children ...htemel.Node) *UElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *UElement) With(fn func(*UElement)) *UElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *UElement) Textf(format string, args ...any) *UElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *UElement) AddClass(classes ...string) *UElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *UElement) ToggleClass(class string, enable bool) *UElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type UAutocapitalize string
 
 const (
-	UAutocapitalizeOff        UAutocapitalize = "off"
 	UAutocapitalizeOn         UAutocapitalize = "on"
 	UAutocapitalizeSentences  UAutocapitalize = "sentences"
 	UAutocapitalizeWords      UAutocapitalize = "words"
 	UAutocapitalizeCharacters UAutocapitalize = "characters"
 	UAutocapitalizeNone       UAutocapitalize = "none"
+	UAutocapitalizeOff        UAutocapitalize = "off"
 )
 
 type UAutocorrect string
@@ -86,28 +117,28 @@ const (
 type UDir string
 
 const (
+	UDirRtl  UDir = "rtl"
 	UDirAuto UDir = "auto"
 	UDirLtr  UDir = "ltr"
-	UDirRtl  UDir = "rtl"
 )
 
 type UDraggable string
 
 const (
-	UDraggableFalse UDraggable = "false"
 	UDraggableTrue  UDraggable = "true"
+	UDraggableFalse UDraggable = "false"
 )
 
 type UEnterkeyhint string
 
 const (
-	UEnterkeyhintPrevious UEnterkeyhint = "previous"
 	UEnterkeyhintSearch   UEnterkeyhint = "search"
 	UEnterkeyhintSend     UEnterkeyhint = "send"
 	UEnterkeyhintDone     UEnterkeyhint = "done"
 	UEnterkeyhintEnter    UEnterkeyhint = "enter"
 	UEnterkeyhintGo       UEnterkeyhint = "go"
 	UEnterkeyhintNext     UEnterkeyhint = "next"
+	UEnterkeyhintPrevious UEnterkeyhint = "previous"
 )
 
 type UHidden string
@@ -121,7 +152,6 @@ const (
 type UInputmode string
 
 const (
-	UInputmodeNone    UInputmode = "none"
 	UInputmodeNumeric UInputmode = "numeric"
 	UInputmodeSearch  UInputmode = "search"
 	UInputmodeTel     UInputmode = "tel"
@@ -129,13 +159,14 @@ const (
 	UInputmodeUrl     UInputmode = "url"
 	UInputmodeDecimal UInputmode = "decimal"
 	UInputmodeEmail   UInputmode = "email"
+	UInputmodeNone    UInputmode = "none"
 )
 
 type USpellcheck string
 
 const (
-	USpellcheckFalse USpellcheck = "false"
 	USpellcheckTrue  USpellcheck = "true"
+	USpellcheckFalse USpellcheck = "false"
 	USpellcheckEmpty USpellcheck = ""
 )
 

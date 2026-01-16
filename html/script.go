@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func ScriptTernary(condition bool, true htemel.Node, false htemel.Node) *ScriptE
 	if condition {
 		return Script(true)
 	}
-
 	return Script(false)
 }
 
 // Children appends children to this element.
 func (e *ScriptElement) Children(children ...htemel.Node) *ScriptElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *ScriptElement) With(fn func(*ScriptElement)) *ScriptElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *ScriptElement) Textf(format string, args ...any) *ScriptElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *ScriptElement) AddClass(classes ...string) *ScriptElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *ScriptElement) ToggleClass(class string, enable bool) *ScriptElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -64,17 +95,17 @@ const (
 type ScriptCrossorigin string
 
 const (
-	ScriptCrossoriginAnonymous      ScriptCrossorigin = "anonymous"
 	ScriptCrossoriginUseCredentials ScriptCrossorigin = "use-credentials"
+	ScriptCrossoriginAnonymous      ScriptCrossorigin = "anonymous"
 	ScriptCrossoriginEmpty          ScriptCrossorigin = ""
 )
 
 type ScriptFetchpriority string
 
 const (
+	ScriptFetchpriorityAuto ScriptFetchpriority = "auto"
 	ScriptFetchpriorityHigh ScriptFetchpriority = "high"
 	ScriptFetchpriorityLow  ScriptFetchpriority = "low"
-	ScriptFetchpriorityAuto ScriptFetchpriority = "auto"
 )
 
 type ScriptAutocapitalize string
@@ -108,28 +139,28 @@ const (
 type ScriptDir string
 
 const (
-	ScriptDirRtl  ScriptDir = "rtl"
 	ScriptDirAuto ScriptDir = "auto"
 	ScriptDirLtr  ScriptDir = "ltr"
+	ScriptDirRtl  ScriptDir = "rtl"
 )
 
 type ScriptDraggable string
 
 const (
-	ScriptDraggableTrue  ScriptDraggable = "true"
 	ScriptDraggableFalse ScriptDraggable = "false"
+	ScriptDraggableTrue  ScriptDraggable = "true"
 )
 
 type ScriptEnterkeyhint string
 
 const (
-	ScriptEnterkeyhintSend     ScriptEnterkeyhint = "send"
-	ScriptEnterkeyhintDone     ScriptEnterkeyhint = "done"
 	ScriptEnterkeyhintEnter    ScriptEnterkeyhint = "enter"
 	ScriptEnterkeyhintGo       ScriptEnterkeyhint = "go"
 	ScriptEnterkeyhintNext     ScriptEnterkeyhint = "next"
 	ScriptEnterkeyhintPrevious ScriptEnterkeyhint = "previous"
 	ScriptEnterkeyhintSearch   ScriptEnterkeyhint = "search"
+	ScriptEnterkeyhintSend     ScriptEnterkeyhint = "send"
+	ScriptEnterkeyhintDone     ScriptEnterkeyhint = "done"
 )
 
 type ScriptHidden string
@@ -143,14 +174,14 @@ const (
 type ScriptInputmode string
 
 const (
+	ScriptInputmodeNumeric ScriptInputmode = "numeric"
+	ScriptInputmodeSearch  ScriptInputmode = "search"
 	ScriptInputmodeTel     ScriptInputmode = "tel"
 	ScriptInputmodeText    ScriptInputmode = "text"
 	ScriptInputmodeUrl     ScriptInputmode = "url"
 	ScriptInputmodeDecimal ScriptInputmode = "decimal"
 	ScriptInputmodeEmail   ScriptInputmode = "email"
 	ScriptInputmodeNone    ScriptInputmode = "none"
-	ScriptInputmodeNumeric ScriptInputmode = "numeric"
-	ScriptInputmodeSearch  ScriptInputmode = "search"
 )
 
 type ScriptSpellcheck string

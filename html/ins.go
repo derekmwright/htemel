@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func InsTernary(condition bool, true htemel.Node, false htemel.Node) *InsElement
 	if condition {
 		return Ins(true)
 	}
-
 	return Ins(false)
 }
 
 // Children appends children to this element.
 func (e *InsElement) Children(children ...htemel.Node) *InsElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *InsElement) With(fn func(*InsElement)) *InsElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *InsElement) Textf(format string, args ...any) *InsElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *InsElement) AddClass(classes ...string) *InsElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *InsElement) ToggleClass(class string, enable bool) *InsElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type InsAutocapitalize string
 
 const (
+	InsAutocapitalizeWords      InsAutocapitalize = "words"
 	InsAutocapitalizeCharacters InsAutocapitalize = "characters"
 	InsAutocapitalizeNone       InsAutocapitalize = "none"
 	InsAutocapitalizeOff        InsAutocapitalize = "off"
 	InsAutocapitalizeOn         InsAutocapitalize = "on"
 	InsAutocapitalizeSentences  InsAutocapitalize = "sentences"
-	InsAutocapitalizeWords      InsAutocapitalize = "words"
 )
 
 type InsAutocorrect string
@@ -77,18 +108,18 @@ const (
 type InsContenteditable string
 
 const (
+	InsContenteditableFalse         InsContenteditable = "false"
 	InsContenteditablePlaintextOnly InsContenteditable = "plaintext-only"
 	InsContenteditableTrue          InsContenteditable = "true"
-	InsContenteditableFalse         InsContenteditable = "false"
 	InsContenteditableEmpty         InsContenteditable = ""
 )
 
 type InsDir string
 
 const (
-	InsDirRtl  InsDir = "rtl"
 	InsDirAuto InsDir = "auto"
 	InsDirLtr  InsDir = "ltr"
+	InsDirRtl  InsDir = "rtl"
 )
 
 type InsDraggable string
@@ -101,13 +132,13 @@ const (
 type InsEnterkeyhint string
 
 const (
-	InsEnterkeyhintGo       InsEnterkeyhint = "go"
-	InsEnterkeyhintNext     InsEnterkeyhint = "next"
-	InsEnterkeyhintPrevious InsEnterkeyhint = "previous"
 	InsEnterkeyhintSearch   InsEnterkeyhint = "search"
 	InsEnterkeyhintSend     InsEnterkeyhint = "send"
 	InsEnterkeyhintDone     InsEnterkeyhint = "done"
 	InsEnterkeyhintEnter    InsEnterkeyhint = "enter"
+	InsEnterkeyhintGo       InsEnterkeyhint = "go"
+	InsEnterkeyhintNext     InsEnterkeyhint = "next"
+	InsEnterkeyhintPrevious InsEnterkeyhint = "previous"
 )
 
 type InsHidden string
@@ -121,7 +152,6 @@ const (
 type InsInputmode string
 
 const (
-	InsInputmodeDecimal InsInputmode = "decimal"
 	InsInputmodeEmail   InsInputmode = "email"
 	InsInputmodeNone    InsInputmode = "none"
 	InsInputmodeNumeric InsInputmode = "numeric"
@@ -129,13 +159,14 @@ const (
 	InsInputmodeTel     InsInputmode = "tel"
 	InsInputmodeText    InsInputmode = "text"
 	InsInputmodeUrl     InsInputmode = "url"
+	InsInputmodeDecimal InsInputmode = "decimal"
 )
 
 type InsSpellcheck string
 
 const (
-	InsSpellcheckTrue  InsSpellcheck = "true"
 	InsSpellcheckFalse InsSpellcheck = "false"
+	InsSpellcheckTrue  InsSpellcheck = "true"
 	InsSpellcheckEmpty InsSpellcheck = ""
 )
 
@@ -150,8 +181,8 @@ const (
 type InsWritingsuggestions string
 
 const (
-	InsWritingsuggestionsTrue  InsWritingsuggestions = "true"
 	InsWritingsuggestionsFalse InsWritingsuggestions = "false"
+	InsWritingsuggestionsTrue  InsWritingsuggestions = "true"
 	InsWritingsuggestionsEmpty InsWritingsuggestions = ""
 )
 

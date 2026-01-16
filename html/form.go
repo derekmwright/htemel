@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func FormTernary(condition bool, true htemel.Node, false htemel.Node) *FormEleme
 	if condition {
 		return Form(true)
 	}
-
 	return Form(false)
 }
 
 // Children appends children to this element.
 func (e *FormElement) Children(children ...htemel.Node) *FormElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *FormElement) With(fn func(*FormElement)) *FormElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *FormElement) Textf(format string, args ...any) *FormElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *FormElement) AddClass(classes ...string) *FormElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *FormElement) ToggleClass(class string, enable bool) *FormElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -73,12 +104,12 @@ const (
 type FormAutocapitalize string
 
 const (
-	FormAutocapitalizeCharacters FormAutocapitalize = "characters"
-	FormAutocapitalizeNone       FormAutocapitalize = "none"
-	FormAutocapitalizeOff        FormAutocapitalize = "off"
 	FormAutocapitalizeOn         FormAutocapitalize = "on"
 	FormAutocapitalizeSentences  FormAutocapitalize = "sentences"
 	FormAutocapitalizeWords      FormAutocapitalize = "words"
+	FormAutocapitalizeCharacters FormAutocapitalize = "characters"
+	FormAutocapitalizeNone       FormAutocapitalize = "none"
+	FormAutocapitalizeOff        FormAutocapitalize = "off"
 )
 
 type FormAutocorrect string
@@ -92,9 +123,9 @@ const (
 type FormContenteditable string
 
 const (
+	FormContenteditableTrue          FormContenteditable = "true"
 	FormContenteditableFalse         FormContenteditable = "false"
 	FormContenteditablePlaintextOnly FormContenteditable = "plaintext-only"
-	FormContenteditableTrue          FormContenteditable = "true"
 	FormContenteditableEmpty         FormContenteditable = ""
 )
 
@@ -116,13 +147,13 @@ const (
 type FormEnterkeyhint string
 
 const (
-	FormEnterkeyhintEnter    FormEnterkeyhint = "enter"
-	FormEnterkeyhintGo       FormEnterkeyhint = "go"
 	FormEnterkeyhintNext     FormEnterkeyhint = "next"
 	FormEnterkeyhintPrevious FormEnterkeyhint = "previous"
 	FormEnterkeyhintSearch   FormEnterkeyhint = "search"
 	FormEnterkeyhintSend     FormEnterkeyhint = "send"
 	FormEnterkeyhintDone     FormEnterkeyhint = "done"
+	FormEnterkeyhintEnter    FormEnterkeyhint = "enter"
+	FormEnterkeyhintGo       FormEnterkeyhint = "go"
 )
 
 type FormHidden string
@@ -136,14 +167,14 @@ const (
 type FormInputmode string
 
 const (
+	FormInputmodeTel     FormInputmode = "tel"
+	FormInputmodeText    FormInputmode = "text"
 	FormInputmodeUrl     FormInputmode = "url"
 	FormInputmodeDecimal FormInputmode = "decimal"
 	FormInputmodeEmail   FormInputmode = "email"
 	FormInputmodeNone    FormInputmode = "none"
 	FormInputmodeNumeric FormInputmode = "numeric"
 	FormInputmodeSearch  FormInputmode = "search"
-	FormInputmodeTel     FormInputmode = "tel"
-	FormInputmodeText    FormInputmode = "text"
 )
 
 type FormSpellcheck string

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func MainTernary(condition bool, true htemel.Node, false htemel.Node) *MainEleme
 	if condition {
 		return Main(true)
 	}
-
 	return Main(false)
 }
 
 // Children appends children to this element.
 func (e *MainElement) Children(children ...htemel.Node) *MainElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *MainElement) With(fn func(*MainElement)) *MainElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *MainElement) Textf(format string, args ...any) *MainElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *MainElement) AddClass(classes ...string) *MainElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *MainElement) ToggleClass(class string, enable bool) *MainElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -86,28 +117,28 @@ const (
 type MainDir string
 
 const (
-	MainDirAuto MainDir = "auto"
 	MainDirLtr  MainDir = "ltr"
 	MainDirRtl  MainDir = "rtl"
+	MainDirAuto MainDir = "auto"
 )
 
 type MainDraggable string
 
 const (
-	MainDraggableTrue  MainDraggable = "true"
 	MainDraggableFalse MainDraggable = "false"
+	MainDraggableTrue  MainDraggable = "true"
 )
 
 type MainEnterkeyhint string
 
 const (
-	MainEnterkeyhintEnter    MainEnterkeyhint = "enter"
 	MainEnterkeyhintGo       MainEnterkeyhint = "go"
 	MainEnterkeyhintNext     MainEnterkeyhint = "next"
 	MainEnterkeyhintPrevious MainEnterkeyhint = "previous"
 	MainEnterkeyhintSearch   MainEnterkeyhint = "search"
 	MainEnterkeyhintSend     MainEnterkeyhint = "send"
 	MainEnterkeyhintDone     MainEnterkeyhint = "done"
+	MainEnterkeyhintEnter    MainEnterkeyhint = "enter"
 )
 
 type MainHidden string
@@ -121,14 +152,14 @@ const (
 type MainInputmode string
 
 const (
-	MainInputmodeEmail   MainInputmode = "email"
-	MainInputmodeNone    MainInputmode = "none"
 	MainInputmodeNumeric MainInputmode = "numeric"
 	MainInputmodeSearch  MainInputmode = "search"
 	MainInputmodeTel     MainInputmode = "tel"
 	MainInputmodeText    MainInputmode = "text"
 	MainInputmodeUrl     MainInputmode = "url"
 	MainInputmodeDecimal MainInputmode = "decimal"
+	MainInputmodeEmail   MainInputmode = "email"
+	MainInputmodeNone    MainInputmode = "none"
 )
 
 type MainSpellcheck string

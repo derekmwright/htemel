@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func MenuTernary(condition bool, true htemel.Node, false htemel.Node) *MenuEleme
 	if condition {
 		return Menu(true)
 	}
-
 	return Menu(false)
 }
 
 // Children appends children to this element.
 func (e *MenuElement) Children(children ...htemel.Node) *MenuElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *MenuElement) With(fn func(*MenuElement)) *MenuElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *MenuElement) Textf(format string, args ...any) *MenuElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *MenuElement) AddClass(classes ...string) *MenuElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *MenuElement) ToggleClass(class string, enable bool) *MenuElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type MenuAutocapitalize string
 
 const (
+	MenuAutocapitalizeWords      MenuAutocapitalize = "words"
 	MenuAutocapitalizeCharacters MenuAutocapitalize = "characters"
 	MenuAutocapitalizeNone       MenuAutocapitalize = "none"
 	MenuAutocapitalizeOff        MenuAutocapitalize = "off"
 	MenuAutocapitalizeOn         MenuAutocapitalize = "on"
 	MenuAutocapitalizeSentences  MenuAutocapitalize = "sentences"
-	MenuAutocapitalizeWords      MenuAutocapitalize = "words"
 )
 
 type MenuAutocorrect string
@@ -86,9 +117,9 @@ const (
 type MenuDir string
 
 const (
+	MenuDirAuto MenuDir = "auto"
 	MenuDirLtr  MenuDir = "ltr"
 	MenuDirRtl  MenuDir = "rtl"
-	MenuDirAuto MenuDir = "auto"
 )
 
 type MenuDraggable string
@@ -121,14 +152,14 @@ const (
 type MenuInputmode string
 
 const (
-	MenuInputmodeText    MenuInputmode = "text"
-	MenuInputmodeUrl     MenuInputmode = "url"
-	MenuInputmodeDecimal MenuInputmode = "decimal"
 	MenuInputmodeEmail   MenuInputmode = "email"
 	MenuInputmodeNone    MenuInputmode = "none"
 	MenuInputmodeNumeric MenuInputmode = "numeric"
 	MenuInputmodeSearch  MenuInputmode = "search"
 	MenuInputmodeTel     MenuInputmode = "tel"
+	MenuInputmodeText    MenuInputmode = "text"
+	MenuInputmodeUrl     MenuInputmode = "url"
+	MenuInputmodeDecimal MenuInputmode = "decimal"
 )
 
 type MenuSpellcheck string

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func CiteTernary(condition bool, true htemel.Node, false htemel.Node) *CiteEleme
 	if condition {
 		return Cite(true)
 	}
-
 	return Cite(false)
 }
 
 // Children appends children to this element.
 func (e *CiteElement) Children(children ...htemel.Node) *CiteElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *CiteElement) With(fn func(*CiteElement)) *CiteElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *CiteElement) Textf(format string, args ...any) *CiteElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *CiteElement) AddClass(classes ...string) *CiteElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *CiteElement) ToggleClass(class string, enable bool) *CiteElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type CiteAutocapitalize string
 
 const (
+	CiteAutocapitalizeWords      CiteAutocapitalize = "words"
+	CiteAutocapitalizeCharacters CiteAutocapitalize = "characters"
 	CiteAutocapitalizeNone       CiteAutocapitalize = "none"
 	CiteAutocapitalizeOff        CiteAutocapitalize = "off"
 	CiteAutocapitalizeOn         CiteAutocapitalize = "on"
 	CiteAutocapitalizeSentences  CiteAutocapitalize = "sentences"
-	CiteAutocapitalizeWords      CiteAutocapitalize = "words"
-	CiteAutocapitalizeCharacters CiteAutocapitalize = "characters"
 )
 
 type CiteAutocorrect string
@@ -86,9 +117,9 @@ const (
 type CiteDir string
 
 const (
-	CiteDirRtl  CiteDir = "rtl"
 	CiteDirAuto CiteDir = "auto"
 	CiteDirLtr  CiteDir = "ltr"
+	CiteDirRtl  CiteDir = "rtl"
 )
 
 type CiteDraggable string
@@ -101,34 +132,34 @@ const (
 type CiteEnterkeyhint string
 
 const (
-	CiteEnterkeyhintGo       CiteEnterkeyhint = "go"
-	CiteEnterkeyhintNext     CiteEnterkeyhint = "next"
-	CiteEnterkeyhintPrevious CiteEnterkeyhint = "previous"
 	CiteEnterkeyhintSearch   CiteEnterkeyhint = "search"
 	CiteEnterkeyhintSend     CiteEnterkeyhint = "send"
 	CiteEnterkeyhintDone     CiteEnterkeyhint = "done"
 	CiteEnterkeyhintEnter    CiteEnterkeyhint = "enter"
+	CiteEnterkeyhintGo       CiteEnterkeyhint = "go"
+	CiteEnterkeyhintNext     CiteEnterkeyhint = "next"
+	CiteEnterkeyhintPrevious CiteEnterkeyhint = "previous"
 )
 
 type CiteHidden string
 
 const (
-	CiteHiddenHidden     CiteHidden = "hidden"
 	CiteHiddenUntilFound CiteHidden = "until-found"
+	CiteHiddenHidden     CiteHidden = "hidden"
 	CiteHiddenEmpty      CiteHidden = ""
 )
 
 type CiteInputmode string
 
 const (
-	CiteInputmodeDecimal CiteInputmode = "decimal"
-	CiteInputmodeEmail   CiteInputmode = "email"
-	CiteInputmodeNone    CiteInputmode = "none"
-	CiteInputmodeNumeric CiteInputmode = "numeric"
 	CiteInputmodeSearch  CiteInputmode = "search"
 	CiteInputmodeTel     CiteInputmode = "tel"
 	CiteInputmodeText    CiteInputmode = "text"
 	CiteInputmodeUrl     CiteInputmode = "url"
+	CiteInputmodeDecimal CiteInputmode = "decimal"
+	CiteInputmodeEmail   CiteInputmode = "email"
+	CiteInputmodeNone    CiteInputmode = "none"
+	CiteInputmodeNumeric CiteInputmode = "numeric"
 )
 
 type CiteSpellcheck string

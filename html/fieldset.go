@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func FieldsetTernary(condition bool, true htemel.Node, false htemel.Node) *Field
 	if condition {
 		return Fieldset(true)
 	}
-
 	return Fieldset(false)
 }
 
 // Children appends children to this element.
 func (e *FieldsetElement) Children(children ...htemel.Node) *FieldsetElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *FieldsetElement) With(fn func(*FieldsetElement)) *FieldsetElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *FieldsetElement) Textf(format string, args ...any) *FieldsetElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *FieldsetElement) AddClass(classes ...string) *FieldsetElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *FieldsetElement) ToggleClass(class string, enable bool) *FieldsetElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type FieldsetAutocapitalize string
 
 const (
-	FieldsetAutocapitalizeOn         FieldsetAutocapitalize = "on"
-	FieldsetAutocapitalizeSentences  FieldsetAutocapitalize = "sentences"
-	FieldsetAutocapitalizeWords      FieldsetAutocapitalize = "words"
 	FieldsetAutocapitalizeCharacters FieldsetAutocapitalize = "characters"
 	FieldsetAutocapitalizeNone       FieldsetAutocapitalize = "none"
 	FieldsetAutocapitalizeOff        FieldsetAutocapitalize = "off"
+	FieldsetAutocapitalizeOn         FieldsetAutocapitalize = "on"
+	FieldsetAutocapitalizeSentences  FieldsetAutocapitalize = "sentences"
+	FieldsetAutocapitalizeWords      FieldsetAutocapitalize = "words"
 )
 
 type FieldsetAutocorrect string
@@ -77,9 +108,9 @@ const (
 type FieldsetContenteditable string
 
 const (
+	FieldsetContenteditableTrue          FieldsetContenteditable = "true"
 	FieldsetContenteditableFalse         FieldsetContenteditable = "false"
 	FieldsetContenteditablePlaintextOnly FieldsetContenteditable = "plaintext-only"
-	FieldsetContenteditableTrue          FieldsetContenteditable = "true"
 	FieldsetContenteditableEmpty         FieldsetContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type FieldsetEnterkeyhint string
 
 const (
+	FieldsetEnterkeyhintPrevious FieldsetEnterkeyhint = "previous"
+	FieldsetEnterkeyhintSearch   FieldsetEnterkeyhint = "search"
 	FieldsetEnterkeyhintSend     FieldsetEnterkeyhint = "send"
 	FieldsetEnterkeyhintDone     FieldsetEnterkeyhint = "done"
 	FieldsetEnterkeyhintEnter    FieldsetEnterkeyhint = "enter"
 	FieldsetEnterkeyhintGo       FieldsetEnterkeyhint = "go"
 	FieldsetEnterkeyhintNext     FieldsetEnterkeyhint = "next"
-	FieldsetEnterkeyhintPrevious FieldsetEnterkeyhint = "previous"
-	FieldsetEnterkeyhintSearch   FieldsetEnterkeyhint = "search"
 )
 
 type FieldsetHidden string
@@ -150,8 +181,8 @@ const (
 type FieldsetWritingsuggestions string
 
 const (
-	FieldsetWritingsuggestionsTrue  FieldsetWritingsuggestions = "true"
 	FieldsetWritingsuggestionsFalse FieldsetWritingsuggestions = "false"
+	FieldsetWritingsuggestionsTrue  FieldsetWritingsuggestions = "true"
 	FieldsetWritingsuggestionsEmpty FieldsetWritingsuggestions = ""
 )
 

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func OlTernary(condition bool, true htemel.Node, false htemel.Node) *OlElement {
 	if condition {
 		return Ol(true)
 	}
-
 	return Ol(false)
 }
 
 // Children appends children to this element.
 func (e *OlElement) Children(children ...htemel.Node) *OlElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *OlElement) With(fn func(*OlElement)) *OlElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *OlElement) Textf(format string, args ...any) *OlElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *OlElement) AddClass(classes ...string) *OlElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *OlElement) ToggleClass(class string, enable bool) *OlElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type OlAutocapitalize string
 
 const (
-	OlAutocapitalizeOn         OlAutocapitalize = "on"
-	OlAutocapitalizeSentences  OlAutocapitalize = "sentences"
-	OlAutocapitalizeWords      OlAutocapitalize = "words"
 	OlAutocapitalizeCharacters OlAutocapitalize = "characters"
 	OlAutocapitalizeNone       OlAutocapitalize = "none"
 	OlAutocapitalizeOff        OlAutocapitalize = "off"
+	OlAutocapitalizeOn         OlAutocapitalize = "on"
+	OlAutocapitalizeSentences  OlAutocapitalize = "sentences"
+	OlAutocapitalizeWords      OlAutocapitalize = "words"
 )
 
 type OlAutocorrect string
@@ -77,9 +108,9 @@ const (
 type OlContenteditable string
 
 const (
-	OlContenteditableFalse         OlContenteditable = "false"
 	OlContenteditablePlaintextOnly OlContenteditable = "plaintext-only"
 	OlContenteditableTrue          OlContenteditable = "true"
+	OlContenteditableFalse         OlContenteditable = "false"
 	OlContenteditableEmpty         OlContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type OlEnterkeyhint string
 
 const (
+	OlEnterkeyhintEnter    OlEnterkeyhint = "enter"
+	OlEnterkeyhintGo       OlEnterkeyhint = "go"
 	OlEnterkeyhintNext     OlEnterkeyhint = "next"
 	OlEnterkeyhintPrevious OlEnterkeyhint = "previous"
 	OlEnterkeyhintSearch   OlEnterkeyhint = "search"
 	OlEnterkeyhintSend     OlEnterkeyhint = "send"
 	OlEnterkeyhintDone     OlEnterkeyhint = "done"
-	OlEnterkeyhintEnter    OlEnterkeyhint = "enter"
-	OlEnterkeyhintGo       OlEnterkeyhint = "go"
 )
 
 type OlHidden string

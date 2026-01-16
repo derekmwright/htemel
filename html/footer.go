@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func FooterTernary(condition bool, true htemel.Node, false htemel.Node) *FooterE
 	if condition {
 		return Footer(true)
 	}
-
 	return Footer(false)
 }
 
 // Children appends children to this element.
 func (e *FooterElement) Children(children ...htemel.Node) *FooterElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *FooterElement) With(fn func(*FooterElement)) *FooterElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *FooterElement) Textf(format string, args ...any) *FooterElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *FooterElement) AddClass(classes ...string) *FooterElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *FooterElement) ToggleClass(class string, enable bool) *FooterElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -69,17 +100,17 @@ const (
 type FooterAutocorrect string
 
 const (
-	FooterAutocorrectOff   FooterAutocorrect = "off"
 	FooterAutocorrectOn    FooterAutocorrect = "on"
+	FooterAutocorrectOff   FooterAutocorrect = "off"
 	FooterAutocorrectEmpty FooterAutocorrect = ""
 )
 
 type FooterContenteditable string
 
 const (
-	FooterContenteditablePlaintextOnly FooterContenteditable = "plaintext-only"
 	FooterContenteditableTrue          FooterContenteditable = "true"
 	FooterContenteditableFalse         FooterContenteditable = "false"
+	FooterContenteditablePlaintextOnly FooterContenteditable = "plaintext-only"
 	FooterContenteditableEmpty         FooterContenteditable = ""
 )
 
@@ -94,20 +125,20 @@ const (
 type FooterDraggable string
 
 const (
-	FooterDraggableFalse FooterDraggable = "false"
 	FooterDraggableTrue  FooterDraggable = "true"
+	FooterDraggableFalse FooterDraggable = "false"
 )
 
 type FooterEnterkeyhint string
 
 const (
-	FooterEnterkeyhintDone     FooterEnterkeyhint = "done"
-	FooterEnterkeyhintEnter    FooterEnterkeyhint = "enter"
 	FooterEnterkeyhintGo       FooterEnterkeyhint = "go"
 	FooterEnterkeyhintNext     FooterEnterkeyhint = "next"
 	FooterEnterkeyhintPrevious FooterEnterkeyhint = "previous"
 	FooterEnterkeyhintSearch   FooterEnterkeyhint = "search"
 	FooterEnterkeyhintSend     FooterEnterkeyhint = "send"
+	FooterEnterkeyhintDone     FooterEnterkeyhint = "done"
+	FooterEnterkeyhintEnter    FooterEnterkeyhint = "enter"
 )
 
 type FooterHidden string
@@ -121,7 +152,6 @@ const (
 type FooterInputmode string
 
 const (
-	FooterInputmodeNone    FooterInputmode = "none"
 	FooterInputmodeNumeric FooterInputmode = "numeric"
 	FooterInputmodeSearch  FooterInputmode = "search"
 	FooterInputmodeTel     FooterInputmode = "tel"
@@ -129,6 +159,7 @@ const (
 	FooterInputmodeUrl     FooterInputmode = "url"
 	FooterInputmodeDecimal FooterInputmode = "decimal"
 	FooterInputmodeEmail   FooterInputmode = "email"
+	FooterInputmodeNone    FooterInputmode = "none"
 )
 
 type FooterSpellcheck string

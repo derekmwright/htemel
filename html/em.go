@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func EmTernary(condition bool, true htemel.Node, false htemel.Node) *EmElement {
 	if condition {
 		return Em(true)
 	}
-
 	return Em(false)
 }
 
 // Children appends children to this element.
 func (e *EmElement) Children(children ...htemel.Node) *EmElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *EmElement) With(fn func(*EmElement)) *EmElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *EmElement) Textf(format string, args ...any) *EmElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *EmElement) AddClass(classes ...string) *EmElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *EmElement) ToggleClass(class string, enable bool) *EmElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type EmAutocapitalize string
 
 const (
+	EmAutocapitalizeCharacters EmAutocapitalize = "characters"
 	EmAutocapitalizeNone       EmAutocapitalize = "none"
 	EmAutocapitalizeOff        EmAutocapitalize = "off"
 	EmAutocapitalizeOn         EmAutocapitalize = "on"
 	EmAutocapitalizeSentences  EmAutocapitalize = "sentences"
 	EmAutocapitalizeWords      EmAutocapitalize = "words"
-	EmAutocapitalizeCharacters EmAutocapitalize = "characters"
 )
 
 type EmAutocorrect string
@@ -86,9 +117,9 @@ const (
 type EmDir string
 
 const (
-	EmDirAuto EmDir = "auto"
 	EmDirLtr  EmDir = "ltr"
 	EmDirRtl  EmDir = "rtl"
+	EmDirAuto EmDir = "auto"
 )
 
 type EmDraggable string
@@ -101,13 +132,13 @@ const (
 type EmEnterkeyhint string
 
 const (
-	EmEnterkeyhintGo       EmEnterkeyhint = "go"
-	EmEnterkeyhintNext     EmEnterkeyhint = "next"
 	EmEnterkeyhintPrevious EmEnterkeyhint = "previous"
 	EmEnterkeyhintSearch   EmEnterkeyhint = "search"
 	EmEnterkeyhintSend     EmEnterkeyhint = "send"
 	EmEnterkeyhintDone     EmEnterkeyhint = "done"
 	EmEnterkeyhintEnter    EmEnterkeyhint = "enter"
+	EmEnterkeyhintGo       EmEnterkeyhint = "go"
+	EmEnterkeyhintNext     EmEnterkeyhint = "next"
 )
 
 type EmHidden string
@@ -121,6 +152,7 @@ const (
 type EmInputmode string
 
 const (
+	EmInputmodeEmail   EmInputmode = "email"
 	EmInputmodeNone    EmInputmode = "none"
 	EmInputmodeNumeric EmInputmode = "numeric"
 	EmInputmodeSearch  EmInputmode = "search"
@@ -128,14 +160,13 @@ const (
 	EmInputmodeText    EmInputmode = "text"
 	EmInputmodeUrl     EmInputmode = "url"
 	EmInputmodeDecimal EmInputmode = "decimal"
-	EmInputmodeEmail   EmInputmode = "email"
 )
 
 type EmSpellcheck string
 
 const (
-	EmSpellcheckTrue  EmSpellcheck = "true"
 	EmSpellcheckFalse EmSpellcheck = "false"
+	EmSpellcheckTrue  EmSpellcheck = "true"
 	EmSpellcheckEmpty EmSpellcheck = ""
 )
 

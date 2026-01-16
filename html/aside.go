@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func AsideTernary(condition bool, true htemel.Node, false htemel.Node) *AsideEle
 	if condition {
 		return Aside(true)
 	}
-
 	return Aside(false)
 }
 
 // Children appends children to this element.
 func (e *AsideElement) Children(children ...htemel.Node) *AsideElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *AsideElement) With(fn func(*AsideElement)) *AsideElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *AsideElement) Textf(format string, args ...any) *AsideElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *AsideElement) AddClass(classes ...string) *AsideElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *AsideElement) ToggleClass(class string, enable bool) *AsideElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type AsideAutocapitalize string
 
 const (
+	AsideAutocapitalizeOn         AsideAutocapitalize = "on"
+	AsideAutocapitalizeSentences  AsideAutocapitalize = "sentences"
 	AsideAutocapitalizeWords      AsideAutocapitalize = "words"
 	AsideAutocapitalizeCharacters AsideAutocapitalize = "characters"
 	AsideAutocapitalizeNone       AsideAutocapitalize = "none"
 	AsideAutocapitalizeOff        AsideAutocapitalize = "off"
-	AsideAutocapitalizeOn         AsideAutocapitalize = "on"
-	AsideAutocapitalizeSentences  AsideAutocapitalize = "sentences"
 )
 
 type AsideAutocorrect string
@@ -77,9 +108,9 @@ const (
 type AsideContenteditable string
 
 const (
+	AsideContenteditableFalse         AsideContenteditable = "false"
 	AsideContenteditablePlaintextOnly AsideContenteditable = "plaintext-only"
 	AsideContenteditableTrue          AsideContenteditable = "true"
-	AsideContenteditableFalse         AsideContenteditable = "false"
 	AsideContenteditableEmpty         AsideContenteditable = ""
 )
 
@@ -101,34 +132,34 @@ const (
 type AsideEnterkeyhint string
 
 const (
+	AsideEnterkeyhintSend     AsideEnterkeyhint = "send"
+	AsideEnterkeyhintDone     AsideEnterkeyhint = "done"
+	AsideEnterkeyhintEnter    AsideEnterkeyhint = "enter"
 	AsideEnterkeyhintGo       AsideEnterkeyhint = "go"
 	AsideEnterkeyhintNext     AsideEnterkeyhint = "next"
 	AsideEnterkeyhintPrevious AsideEnterkeyhint = "previous"
 	AsideEnterkeyhintSearch   AsideEnterkeyhint = "search"
-	AsideEnterkeyhintSend     AsideEnterkeyhint = "send"
-	AsideEnterkeyhintDone     AsideEnterkeyhint = "done"
-	AsideEnterkeyhintEnter    AsideEnterkeyhint = "enter"
 )
 
 type AsideHidden string
 
 const (
-	AsideHiddenUntilFound AsideHidden = "until-found"
 	AsideHiddenHidden     AsideHidden = "hidden"
+	AsideHiddenUntilFound AsideHidden = "until-found"
 	AsideHiddenEmpty      AsideHidden = ""
 )
 
 type AsideInputmode string
 
 const (
-	AsideInputmodeDecimal AsideInputmode = "decimal"
-	AsideInputmodeEmail   AsideInputmode = "email"
 	AsideInputmodeNone    AsideInputmode = "none"
 	AsideInputmodeNumeric AsideInputmode = "numeric"
 	AsideInputmodeSearch  AsideInputmode = "search"
 	AsideInputmodeTel     AsideInputmode = "tel"
 	AsideInputmodeText    AsideInputmode = "text"
 	AsideInputmodeUrl     AsideInputmode = "url"
+	AsideInputmodeDecimal AsideInputmode = "decimal"
+	AsideInputmodeEmail   AsideInputmode = "email"
 )
 
 type AsideSpellcheck string

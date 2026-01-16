@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func SearchTernary(condition bool, true htemel.Node, false htemel.Node) *SearchE
 	if condition {
 		return Search(true)
 	}
-
 	return Search(false)
 }
 
 // Children appends children to this element.
 func (e *SearchElement) Children(children ...htemel.Node) *SearchElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *SearchElement) With(fn func(*SearchElement)) *SearchElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *SearchElement) Textf(format string, args ...any) *SearchElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *SearchElement) AddClass(classes ...string) *SearchElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *SearchElement) ToggleClass(class string, enable bool) *SearchElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type SearchAutocapitalize string
 
 const (
+	SearchAutocapitalizeOff        SearchAutocapitalize = "off"
 	SearchAutocapitalizeOn         SearchAutocapitalize = "on"
 	SearchAutocapitalizeSentences  SearchAutocapitalize = "sentences"
 	SearchAutocapitalizeWords      SearchAutocapitalize = "words"
 	SearchAutocapitalizeCharacters SearchAutocapitalize = "characters"
 	SearchAutocapitalizeNone       SearchAutocapitalize = "none"
-	SearchAutocapitalizeOff        SearchAutocapitalize = "off"
 )
 
 type SearchAutocorrect string
@@ -86,9 +117,9 @@ const (
 type SearchDir string
 
 const (
+	SearchDirRtl  SearchDir = "rtl"
 	SearchDirAuto SearchDir = "auto"
 	SearchDirLtr  SearchDir = "ltr"
-	SearchDirRtl  SearchDir = "rtl"
 )
 
 type SearchDraggable string
@@ -142,8 +173,8 @@ const (
 type SearchTranslate string
 
 const (
-	SearchTranslateYes   SearchTranslate = "yes"
 	SearchTranslateNo    SearchTranslate = "no"
+	SearchTranslateYes   SearchTranslate = "yes"
 	SearchTranslateEmpty SearchTranslate = ""
 )
 

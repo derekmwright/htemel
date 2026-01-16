@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func UlTernary(condition bool, true htemel.Node, false htemel.Node) *UlElement {
 	if condition {
 		return Ul(true)
 	}
-
 	return Ul(false)
 }
 
 // Children appends children to this element.
 func (e *UlElement) Children(children ...htemel.Node) *UlElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *UlElement) With(fn func(*UlElement)) *UlElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *UlElement) Textf(format string, args ...any) *UlElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *UlElement) AddClass(classes ...string) *UlElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *UlElement) ToggleClass(class string, enable bool) *UlElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type UlAutocapitalize string
 
 const (
+	UlAutocapitalizeSentences  UlAutocapitalize = "sentences"
 	UlAutocapitalizeWords      UlAutocapitalize = "words"
 	UlAutocapitalizeCharacters UlAutocapitalize = "characters"
 	UlAutocapitalizeNone       UlAutocapitalize = "none"
 	UlAutocapitalizeOff        UlAutocapitalize = "off"
 	UlAutocapitalizeOn         UlAutocapitalize = "on"
-	UlAutocapitalizeSentences  UlAutocapitalize = "sentences"
 )
 
 type UlAutocorrect string
@@ -101,13 +132,13 @@ const (
 type UlEnterkeyhint string
 
 const (
-	UlEnterkeyhintDone     UlEnterkeyhint = "done"
-	UlEnterkeyhintEnter    UlEnterkeyhint = "enter"
 	UlEnterkeyhintGo       UlEnterkeyhint = "go"
 	UlEnterkeyhintNext     UlEnterkeyhint = "next"
 	UlEnterkeyhintPrevious UlEnterkeyhint = "previous"
 	UlEnterkeyhintSearch   UlEnterkeyhint = "search"
 	UlEnterkeyhintSend     UlEnterkeyhint = "send"
+	UlEnterkeyhintDone     UlEnterkeyhint = "done"
+	UlEnterkeyhintEnter    UlEnterkeyhint = "enter"
 )
 
 type UlHidden string
@@ -121,7 +152,6 @@ const (
 type UlInputmode string
 
 const (
-	UlInputmodeEmail   UlInputmode = "email"
 	UlInputmodeNone    UlInputmode = "none"
 	UlInputmodeNumeric UlInputmode = "numeric"
 	UlInputmodeSearch  UlInputmode = "search"
@@ -129,6 +159,7 @@ const (
 	UlInputmodeText    UlInputmode = "text"
 	UlInputmodeUrl     UlInputmode = "url"
 	UlInputmodeDecimal UlInputmode = "decimal"
+	UlInputmodeEmail   UlInputmode = "email"
 )
 
 type UlSpellcheck string
@@ -150,8 +181,8 @@ const (
 type UlWritingsuggestions string
 
 const (
-	UlWritingsuggestionsFalse UlWritingsuggestions = "false"
 	UlWritingsuggestionsTrue  UlWritingsuggestions = "true"
+	UlWritingsuggestionsFalse UlWritingsuggestions = "false"
 	UlWritingsuggestionsEmpty UlWritingsuggestions = ""
 )
 

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func BodyTernary(condition bool, true htemel.Node, false htemel.Node) *BodyEleme
 	if condition {
 		return Body(true)
 	}
-
 	return Body(false)
 }
 
 // Children appends children to this element.
 func (e *BodyElement) Children(children ...htemel.Node) *BodyElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *BodyElement) With(fn func(*BodyElement)) *BodyElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *BodyElement) Textf(format string, args ...any) *BodyElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *BodyElement) AddClass(classes ...string) *BodyElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *BodyElement) ToggleClass(class string, enable bool) *BodyElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -86,9 +117,9 @@ const (
 type BodyDir string
 
 const (
-	BodyDirAuto BodyDir = "auto"
 	BodyDirLtr  BodyDir = "ltr"
 	BodyDirRtl  BodyDir = "rtl"
+	BodyDirAuto BodyDir = "auto"
 )
 
 type BodyDraggable string
@@ -101,13 +132,13 @@ const (
 type BodyEnterkeyhint string
 
 const (
-	BodyEnterkeyhintPrevious BodyEnterkeyhint = "previous"
-	BodyEnterkeyhintSearch   BodyEnterkeyhint = "search"
-	BodyEnterkeyhintSend     BodyEnterkeyhint = "send"
 	BodyEnterkeyhintDone     BodyEnterkeyhint = "done"
 	BodyEnterkeyhintEnter    BodyEnterkeyhint = "enter"
 	BodyEnterkeyhintGo       BodyEnterkeyhint = "go"
 	BodyEnterkeyhintNext     BodyEnterkeyhint = "next"
+	BodyEnterkeyhintPrevious BodyEnterkeyhint = "previous"
+	BodyEnterkeyhintSearch   BodyEnterkeyhint = "search"
+	BodyEnterkeyhintSend     BodyEnterkeyhint = "send"
 )
 
 type BodyHidden string
@@ -121,21 +152,21 @@ const (
 type BodyInputmode string
 
 const (
-	BodyInputmodeUrl     BodyInputmode = "url"
-	BodyInputmodeDecimal BodyInputmode = "decimal"
-	BodyInputmodeEmail   BodyInputmode = "email"
-	BodyInputmodeNone    BodyInputmode = "none"
 	BodyInputmodeNumeric BodyInputmode = "numeric"
 	BodyInputmodeSearch  BodyInputmode = "search"
 	BodyInputmodeTel     BodyInputmode = "tel"
 	BodyInputmodeText    BodyInputmode = "text"
+	BodyInputmodeUrl     BodyInputmode = "url"
+	BodyInputmodeDecimal BodyInputmode = "decimal"
+	BodyInputmodeEmail   BodyInputmode = "email"
+	BodyInputmodeNone    BodyInputmode = "none"
 )
 
 type BodySpellcheck string
 
 const (
-	BodySpellcheckTrue  BodySpellcheck = "true"
 	BodySpellcheckFalse BodySpellcheck = "false"
+	BodySpellcheckTrue  BodySpellcheck = "true"
 	BodySpellcheckEmpty BodySpellcheck = ""
 )
 

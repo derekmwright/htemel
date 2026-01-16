@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func SampTernary(condition bool, true htemel.Node, false htemel.Node) *SampEleme
 	if condition {
 		return Samp(true)
 	}
-
 	return Samp(false)
 }
 
 // Children appends children to this element.
 func (e *SampElement) Children(children ...htemel.Node) *SampElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *SampElement) With(fn func(*SampElement)) *SampElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *SampElement) Textf(format string, args ...any) *SampElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *SampElement) AddClass(classes ...string) *SampElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *SampElement) ToggleClass(class string, enable bool) *SampElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -77,18 +108,18 @@ const (
 type SampContenteditable string
 
 const (
+	SampContenteditableFalse         SampContenteditable = "false"
 	SampContenteditablePlaintextOnly SampContenteditable = "plaintext-only"
 	SampContenteditableTrue          SampContenteditable = "true"
-	SampContenteditableFalse         SampContenteditable = "false"
 	SampContenteditableEmpty         SampContenteditable = ""
 )
 
 type SampDir string
 
 const (
-	SampDirAuto SampDir = "auto"
 	SampDirLtr  SampDir = "ltr"
 	SampDirRtl  SampDir = "rtl"
+	SampDirAuto SampDir = "auto"
 )
 
 type SampDraggable string
@@ -101,20 +132,20 @@ const (
 type SampEnterkeyhint string
 
 const (
+	SampEnterkeyhintSend     SampEnterkeyhint = "send"
+	SampEnterkeyhintDone     SampEnterkeyhint = "done"
 	SampEnterkeyhintEnter    SampEnterkeyhint = "enter"
 	SampEnterkeyhintGo       SampEnterkeyhint = "go"
 	SampEnterkeyhintNext     SampEnterkeyhint = "next"
 	SampEnterkeyhintPrevious SampEnterkeyhint = "previous"
 	SampEnterkeyhintSearch   SampEnterkeyhint = "search"
-	SampEnterkeyhintSend     SampEnterkeyhint = "send"
-	SampEnterkeyhintDone     SampEnterkeyhint = "done"
 )
 
 type SampHidden string
 
 const (
-	SampHiddenUntilFound SampHidden = "until-found"
 	SampHiddenHidden     SampHidden = "hidden"
+	SampHiddenUntilFound SampHidden = "until-found"
 	SampHiddenEmpty      SampHidden = ""
 )
 
@@ -134,8 +165,8 @@ const (
 type SampSpellcheck string
 
 const (
-	SampSpellcheckFalse SampSpellcheck = "false"
 	SampSpellcheckTrue  SampSpellcheck = "true"
+	SampSpellcheckFalse SampSpellcheck = "false"
 	SampSpellcheckEmpty SampSpellcheck = ""
 )
 

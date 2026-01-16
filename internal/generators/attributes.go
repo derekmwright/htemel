@@ -134,39 +134,3 @@ func (e *` + titleCase(e.Tag) + `Element) ` + titleCase(a.Name) + `(name string,
 		return tmpl, imports.Add("strings")
 	}
 }
-
-func AttributeEnumDecl(attribute spec.AttributeTypeEnum) string {
-	buf := &bytes.Buffer{}
-	tmpl := template.Must(template.New("AttributeEnumDecl").
-		Funcs(template.FuncMap{}).
-		Parse(`
-type {{ .Tag | titleCase }}AttributeValue string
-
-const (
-	{{ range $key, $value := .Allowed }}{{ $key }} = "{{ $value }}"
-{{ end -}}
-)
-`))
-
-	if err := tmpl.Execute(buf, attribute); err != nil {
-		panic(err)
-	}
-
-	return buf.String()
-}
-
-func AttributeBaseFunc() (*template.Template, ImportSet) {
-	tmpl := template.New("AttributeBaseFunc").Funcs(
-		template.FuncMap{
-			"titleCase": titleCase,
-		},
-	)
-
-	tmpl = template.Must(tmpl.Parse(`
-func (e *{{ .Tag | titleCase }}Element) {{ .Attribute.Name | titleCase }}() *{{ .Tag | titleCase }}Element {
-	return e
-}
-`))
-
-	return tmpl, nil
-}

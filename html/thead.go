@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,42 +45,72 @@ func TheadTernary(condition bool, true htemel.Node, false htemel.Node) *TheadEle
 	if condition {
 		return Thead(true)
 	}
-
 	return Thead(false)
 }
 
 // Children appends children to this element.
 func (e *TheadElement) Children(children ...htemel.Node) *TheadElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *TheadElement) With(fn func(*TheadElement)) *TheadElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *TheadElement) Textf(format string, args ...any) *TheadElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *TheadElement) AddClass(classes ...string) *TheadElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *TheadElement) ToggleClass(class string, enable bool) *TheadElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type TheadAutocapitalize string
 
 const (
-	TheadAutocapitalizeSentences  TheadAutocapitalize = "sentences"
 	TheadAutocapitalizeWords      TheadAutocapitalize = "words"
 	TheadAutocapitalizeCharacters TheadAutocapitalize = "characters"
 	TheadAutocapitalizeNone       TheadAutocapitalize = "none"
 	TheadAutocapitalizeOff        TheadAutocapitalize = "off"
 	TheadAutocapitalizeOn         TheadAutocapitalize = "on"
+	TheadAutocapitalizeSentences  TheadAutocapitalize = "sentences"
 )
 
 type TheadAutocorrect string
 
 const (
-	TheadAutocorrectOn    TheadAutocorrect = "on"
 	TheadAutocorrectOff   TheadAutocorrect = "off"
+	TheadAutocorrectOn    TheadAutocorrect = "on"
 	TheadAutocorrectEmpty TheadAutocorrect = ""
 )
 
 type TheadContenteditable string
 
 const (
-	TheadContenteditableFalse         TheadContenteditable = "false"
 	TheadContenteditablePlaintextOnly TheadContenteditable = "plaintext-only"
 	TheadContenteditableTrue          TheadContenteditable = "true"
+	TheadContenteditableFalse         TheadContenteditable = "false"
 	TheadContenteditableEmpty         TheadContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type TheadEnterkeyhint string
 
 const (
-	TheadEnterkeyhintGo       TheadEnterkeyhint = "go"
-	TheadEnterkeyhintNext     TheadEnterkeyhint = "next"
 	TheadEnterkeyhintPrevious TheadEnterkeyhint = "previous"
 	TheadEnterkeyhintSearch   TheadEnterkeyhint = "search"
 	TheadEnterkeyhintSend     TheadEnterkeyhint = "send"
 	TheadEnterkeyhintDone     TheadEnterkeyhint = "done"
 	TheadEnterkeyhintEnter    TheadEnterkeyhint = "enter"
+	TheadEnterkeyhintGo       TheadEnterkeyhint = "go"
+	TheadEnterkeyhintNext     TheadEnterkeyhint = "next"
 )
 
 type TheadHidden string
@@ -121,7 +152,6 @@ const (
 type TheadInputmode string
 
 const (
-	TheadInputmodeEmail   TheadInputmode = "email"
 	TheadInputmodeNone    TheadInputmode = "none"
 	TheadInputmodeNumeric TheadInputmode = "numeric"
 	TheadInputmodeSearch  TheadInputmode = "search"
@@ -129,6 +159,7 @@ const (
 	TheadInputmodeText    TheadInputmode = "text"
 	TheadInputmodeUrl     TheadInputmode = "url"
 	TheadInputmodeDecimal TheadInputmode = "decimal"
+	TheadInputmodeEmail   TheadInputmode = "email"
 )
 
 type TheadSpellcheck string

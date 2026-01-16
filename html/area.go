@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,24 +40,51 @@ func AreaIf(condition bool) *AreaElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *AreaElement) With(fn func(*AreaElement)) *AreaElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *AreaElement) AddClass(classes ...string) *AreaElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *AreaElement) ToggleClass(class string, enable bool) *AreaElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type AreaShape string
 
 const (
-	AreaShapeRect    AreaShape = "rect"
-	AreaShapeCircle  AreaShape = "circle"
 	AreaShapeDefault AreaShape = "default"
 	AreaShapePoly    AreaShape = "poly"
+	AreaShapeRect    AreaShape = "rect"
+	AreaShapeCircle  AreaShape = "circle"
 )
 
 type AreaAutocapitalize string
 
 const (
+	AreaAutocapitalizeOn         AreaAutocapitalize = "on"
 	AreaAutocapitalizeSentences  AreaAutocapitalize = "sentences"
 	AreaAutocapitalizeWords      AreaAutocapitalize = "words"
 	AreaAutocapitalizeCharacters AreaAutocapitalize = "characters"
 	AreaAutocapitalizeNone       AreaAutocapitalize = "none"
 	AreaAutocapitalizeOff        AreaAutocapitalize = "off"
-	AreaAutocapitalizeOn         AreaAutocapitalize = "on"
 )
 
 type AreaAutocorrect string
@@ -70,9 +98,9 @@ const (
 type AreaContenteditable string
 
 const (
-	AreaContenteditableTrue          AreaContenteditable = "true"
 	AreaContenteditableFalse         AreaContenteditable = "false"
 	AreaContenteditablePlaintextOnly AreaContenteditable = "plaintext-only"
+	AreaContenteditableTrue          AreaContenteditable = "true"
 	AreaContenteditableEmpty         AreaContenteditable = ""
 )
 
@@ -94,13 +122,13 @@ const (
 type AreaEnterkeyhint string
 
 const (
-	AreaEnterkeyhintNext     AreaEnterkeyhint = "next"
 	AreaEnterkeyhintPrevious AreaEnterkeyhint = "previous"
 	AreaEnterkeyhintSearch   AreaEnterkeyhint = "search"
 	AreaEnterkeyhintSend     AreaEnterkeyhint = "send"
 	AreaEnterkeyhintDone     AreaEnterkeyhint = "done"
 	AreaEnterkeyhintEnter    AreaEnterkeyhint = "enter"
 	AreaEnterkeyhintGo       AreaEnterkeyhint = "go"
+	AreaEnterkeyhintNext     AreaEnterkeyhint = "next"
 )
 
 type AreaHidden string
@@ -114,6 +142,7 @@ const (
 type AreaInputmode string
 
 const (
+	AreaInputmodeNone    AreaInputmode = "none"
 	AreaInputmodeNumeric AreaInputmode = "numeric"
 	AreaInputmodeSearch  AreaInputmode = "search"
 	AreaInputmodeTel     AreaInputmode = "tel"
@@ -121,7 +150,6 @@ const (
 	AreaInputmodeUrl     AreaInputmode = "url"
 	AreaInputmodeDecimal AreaInputmode = "decimal"
 	AreaInputmodeEmail   AreaInputmode = "email"
-	AreaInputmodeNone    AreaInputmode = "none"
 )
 
 type AreaSpellcheck string

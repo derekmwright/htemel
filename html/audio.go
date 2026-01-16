@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,22 +45,52 @@ func AudioTernary(condition bool, true htemel.Node, false htemel.Node) *AudioEle
 	if condition {
 		return Audio(true)
 	}
-
 	return Audio(false)
 }
 
 // Children appends children to this element.
 func (e *AudioElement) Children(children ...htemel.Node) *AudioElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *AudioElement) With(fn func(*AudioElement)) *AudioElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *AudioElement) Textf(format string, args ...any) *AudioElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *AudioElement) AddClass(classes ...string) *AudioElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *AudioElement) ToggleClass(class string, enable bool) *AudioElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type AudioCrossorigin string
 
 const (
-	AudioCrossoriginAnonymous      AudioCrossorigin = "anonymous"
 	AudioCrossoriginUseCredentials AudioCrossorigin = "use-credentials"
+	AudioCrossoriginAnonymous      AudioCrossorigin = "anonymous"
 	AudioCrossoriginEmpty          AudioCrossorigin = ""
 )
 
@@ -94,18 +125,18 @@ const (
 type AudioContenteditable string
 
 const (
-	AudioContenteditableFalse         AudioContenteditable = "false"
 	AudioContenteditablePlaintextOnly AudioContenteditable = "plaintext-only"
 	AudioContenteditableTrue          AudioContenteditable = "true"
+	AudioContenteditableFalse         AudioContenteditable = "false"
 	AudioContenteditableEmpty         AudioContenteditable = ""
 )
 
 type AudioDir string
 
 const (
+	AudioDirAuto AudioDir = "auto"
 	AudioDirLtr  AudioDir = "ltr"
 	AudioDirRtl  AudioDir = "rtl"
-	AudioDirAuto AudioDir = "auto"
 )
 
 type AudioDraggable string
@@ -118,26 +149,27 @@ const (
 type AudioEnterkeyhint string
 
 const (
-	AudioEnterkeyhintSearch   AudioEnterkeyhint = "search"
 	AudioEnterkeyhintSend     AudioEnterkeyhint = "send"
 	AudioEnterkeyhintDone     AudioEnterkeyhint = "done"
 	AudioEnterkeyhintEnter    AudioEnterkeyhint = "enter"
 	AudioEnterkeyhintGo       AudioEnterkeyhint = "go"
 	AudioEnterkeyhintNext     AudioEnterkeyhint = "next"
 	AudioEnterkeyhintPrevious AudioEnterkeyhint = "previous"
+	AudioEnterkeyhintSearch   AudioEnterkeyhint = "search"
 )
 
 type AudioHidden string
 
 const (
-	AudioHiddenUntilFound AudioHidden = "until-found"
 	AudioHiddenHidden     AudioHidden = "hidden"
+	AudioHiddenUntilFound AudioHidden = "until-found"
 	AudioHiddenEmpty      AudioHidden = ""
 )
 
 type AudioInputmode string
 
 const (
+	AudioInputmodeNone    AudioInputmode = "none"
 	AudioInputmodeNumeric AudioInputmode = "numeric"
 	AudioInputmodeSearch  AudioInputmode = "search"
 	AudioInputmodeTel     AudioInputmode = "tel"
@@ -145,7 +177,6 @@ const (
 	AudioInputmodeUrl     AudioInputmode = "url"
 	AudioInputmodeDecimal AudioInputmode = "decimal"
 	AudioInputmodeEmail   AudioInputmode = "email"
-	AudioInputmodeNone    AudioInputmode = "none"
 )
 
 type AudioSpellcheck string
@@ -167,8 +198,8 @@ const (
 type AudioWritingsuggestions string
 
 const (
-	AudioWritingsuggestionsFalse AudioWritingsuggestions = "false"
 	AudioWritingsuggestionsTrue  AudioWritingsuggestions = "true"
+	AudioWritingsuggestionsFalse AudioWritingsuggestions = "false"
 	AudioWritingsuggestionsEmpty AudioWritingsuggestions = ""
 )
 

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,25 +40,52 @@ func TrackIf(condition bool) *TrackElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *TrackElement) With(fn func(*TrackElement)) *TrackElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *TrackElement) AddClass(classes ...string) *TrackElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *TrackElement) ToggleClass(class string, enable bool) *TrackElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type TrackKind string
 
 const (
+	TrackKindSubtitles    TrackKind = "subtitles"
 	TrackKindCaptions     TrackKind = "captions"
 	TrackKindChapters     TrackKind = "chapters"
 	TrackKindDescriptions TrackKind = "descriptions"
 	TrackKindMetadata     TrackKind = "metadata"
-	TrackKindSubtitles    TrackKind = "subtitles"
 )
 
 type TrackAutocapitalize string
 
 const (
-	TrackAutocapitalizeCharacters TrackAutocapitalize = "characters"
 	TrackAutocapitalizeNone       TrackAutocapitalize = "none"
 	TrackAutocapitalizeOff        TrackAutocapitalize = "off"
 	TrackAutocapitalizeOn         TrackAutocapitalize = "on"
 	TrackAutocapitalizeSentences  TrackAutocapitalize = "sentences"
 	TrackAutocapitalizeWords      TrackAutocapitalize = "words"
+	TrackAutocapitalizeCharacters TrackAutocapitalize = "characters"
 )
 
 type TrackAutocorrect string
@@ -80,16 +108,16 @@ const (
 type TrackDir string
 
 const (
-	TrackDirAuto TrackDir = "auto"
 	TrackDirLtr  TrackDir = "ltr"
 	TrackDirRtl  TrackDir = "rtl"
+	TrackDirAuto TrackDir = "auto"
 )
 
 type TrackDraggable string
 
 const (
-	TrackDraggableFalse TrackDraggable = "false"
 	TrackDraggableTrue  TrackDraggable = "true"
+	TrackDraggableFalse TrackDraggable = "false"
 )
 
 type TrackEnterkeyhint string
@@ -107,14 +135,15 @@ const (
 type TrackHidden string
 
 const (
-	TrackHiddenHidden     TrackHidden = "hidden"
 	TrackHiddenUntilFound TrackHidden = "until-found"
+	TrackHiddenHidden     TrackHidden = "hidden"
 	TrackHiddenEmpty      TrackHidden = ""
 )
 
 type TrackInputmode string
 
 const (
+	TrackInputmodeNumeric TrackInputmode = "numeric"
 	TrackInputmodeSearch  TrackInputmode = "search"
 	TrackInputmodeTel     TrackInputmode = "tel"
 	TrackInputmodeText    TrackInputmode = "text"
@@ -122,7 +151,6 @@ const (
 	TrackInputmodeDecimal TrackInputmode = "decimal"
 	TrackInputmodeEmail   TrackInputmode = "email"
 	TrackInputmodeNone    TrackInputmode = "none"
-	TrackInputmodeNumeric TrackInputmode = "numeric"
 )
 
 type TrackSpellcheck string

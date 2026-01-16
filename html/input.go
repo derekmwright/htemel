@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,6 +40,33 @@ func InputIf(condition bool) *InputElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *InputElement) With(fn func(*InputElement)) *InputElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *InputElement) AddClass(classes ...string) *InputElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *InputElement) ToggleClass(class string, enable bool) *InputElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type InputColorspace string
 
 const (
@@ -49,9 +77,9 @@ const (
 type InputFormmethod string
 
 const (
-	InputFormmethodPost   InputFormmethod = "post"
 	InputFormmethodDialog InputFormmethod = "dialog"
 	InputFormmethodGet    InputFormmethod = "get"
+	InputFormmethodPost   InputFormmethod = "post"
 )
 
 type InputPopovertargetaction string
@@ -65,28 +93,28 @@ const (
 type InputType string
 
 const (
-	InputTypeImage         InputType = "image"
-	InputTypeMonth         InputType = "month"
-	InputTypeTime          InputType = "time"
-	InputTypeEmail         InputType = "email"
-	InputTypePassword      InputType = "password"
-	InputTypeReset         InputType = "reset"
-	InputTypeSearch        InputType = "search"
 	InputTypeCheckbox      InputType = "checkbox"
-	InputTypeColor         InputType = "color"
 	InputTypeDate          InputType = "date"
-	InputTypeDatetimeLocal InputType = "datetime-local"
 	InputTypeFile          InputType = "file"
-	InputTypeHidden        InputType = "hidden"
-	InputTypeSubmit        InputType = "submit"
-	InputTypeText          InputType = "text"
-	InputTypeButton        InputType = "button"
-	InputTypeRange         InputType = "range"
-	InputTypeTel           InputType = "tel"
-	InputTypeUrl           InputType = "url"
-	InputTypeWeek          InputType = "week"
 	InputTypeNumber        InputType = "number"
 	InputTypeRadio         InputType = "radio"
+	InputTypeTel           InputType = "tel"
+	InputTypeText          InputType = "text"
+	InputTypeWeek          InputType = "week"
+	InputTypeButton        InputType = "button"
+	InputTypeColor         InputType = "color"
+	InputTypeEmail         InputType = "email"
+	InputTypePassword      InputType = "password"
+	InputTypeRange         InputType = "range"
+	InputTypeReset         InputType = "reset"
+	InputTypeSearch        InputType = "search"
+	InputTypeTime          InputType = "time"
+	InputTypeDatetimeLocal InputType = "datetime-local"
+	InputTypeHidden        InputType = "hidden"
+	InputTypeSubmit        InputType = "submit"
+	InputTypeUrl           InputType = "url"
+	InputTypeImage         InputType = "image"
+	InputTypeMonth         InputType = "month"
 )
 
 type InputAutocapitalize string
@@ -111,9 +139,9 @@ const (
 type InputContenteditable string
 
 const (
+	InputContenteditableFalse         InputContenteditable = "false"
 	InputContenteditablePlaintextOnly InputContenteditable = "plaintext-only"
 	InputContenteditableTrue          InputContenteditable = "true"
-	InputContenteditableFalse         InputContenteditable = "false"
 	InputContenteditableEmpty         InputContenteditable = ""
 )
 
@@ -155,21 +183,21 @@ const (
 type InputInputmode string
 
 const (
-	InputInputmodeEmail   InputInputmode = "email"
-	InputInputmodeNone    InputInputmode = "none"
-	InputInputmodeNumeric InputInputmode = "numeric"
 	InputInputmodeSearch  InputInputmode = "search"
 	InputInputmodeTel     InputInputmode = "tel"
 	InputInputmodeText    InputInputmode = "text"
 	InputInputmodeUrl     InputInputmode = "url"
 	InputInputmodeDecimal InputInputmode = "decimal"
+	InputInputmodeEmail   InputInputmode = "email"
+	InputInputmodeNone    InputInputmode = "none"
+	InputInputmodeNumeric InputInputmode = "numeric"
 )
 
 type InputSpellcheck string
 
 const (
-	InputSpellcheckFalse InputSpellcheck = "false"
 	InputSpellcheckTrue  InputSpellcheck = "true"
+	InputSpellcheckFalse InputSpellcheck = "false"
 	InputSpellcheckEmpty InputSpellcheck = ""
 )
 
@@ -184,8 +212,8 @@ const (
 type InputWritingsuggestions string
 
 const (
-	InputWritingsuggestionsTrue  InputWritingsuggestions = "true"
 	InputWritingsuggestionsFalse InputWritingsuggestions = "false"
+	InputWritingsuggestionsTrue  InputWritingsuggestions = "true"
 	InputWritingsuggestionsEmpty InputWritingsuggestions = ""
 )
 

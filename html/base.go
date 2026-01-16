@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,31 +40,58 @@ func BaseIf(condition bool) *BaseElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *BaseElement) With(fn func(*BaseElement)) *BaseElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *BaseElement) AddClass(classes ...string) *BaseElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *BaseElement) ToggleClass(class string, enable bool) *BaseElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type BaseAutocapitalize string
 
 const (
+	BaseAutocapitalizeNone       BaseAutocapitalize = "none"
+	BaseAutocapitalizeOff        BaseAutocapitalize = "off"
 	BaseAutocapitalizeOn         BaseAutocapitalize = "on"
 	BaseAutocapitalizeSentences  BaseAutocapitalize = "sentences"
 	BaseAutocapitalizeWords      BaseAutocapitalize = "words"
 	BaseAutocapitalizeCharacters BaseAutocapitalize = "characters"
-	BaseAutocapitalizeNone       BaseAutocapitalize = "none"
-	BaseAutocapitalizeOff        BaseAutocapitalize = "off"
 )
 
 type BaseAutocorrect string
 
 const (
-	BaseAutocorrectOn    BaseAutocorrect = "on"
 	BaseAutocorrectOff   BaseAutocorrect = "off"
+	BaseAutocorrectOn    BaseAutocorrect = "on"
 	BaseAutocorrectEmpty BaseAutocorrect = ""
 )
 
 type BaseContenteditable string
 
 const (
-	BaseContenteditableFalse         BaseContenteditable = "false"
 	BaseContenteditablePlaintextOnly BaseContenteditable = "plaintext-only"
 	BaseContenteditableTrue          BaseContenteditable = "true"
+	BaseContenteditableFalse         BaseContenteditable = "false"
 	BaseContenteditableEmpty         BaseContenteditable = ""
 )
 
@@ -85,13 +113,13 @@ const (
 type BaseEnterkeyhint string
 
 const (
+	BaseEnterkeyhintPrevious BaseEnterkeyhint = "previous"
 	BaseEnterkeyhintSearch   BaseEnterkeyhint = "search"
 	BaseEnterkeyhintSend     BaseEnterkeyhint = "send"
 	BaseEnterkeyhintDone     BaseEnterkeyhint = "done"
 	BaseEnterkeyhintEnter    BaseEnterkeyhint = "enter"
 	BaseEnterkeyhintGo       BaseEnterkeyhint = "go"
 	BaseEnterkeyhintNext     BaseEnterkeyhint = "next"
-	BaseEnterkeyhintPrevious BaseEnterkeyhint = "previous"
 )
 
 type BaseHidden string
@@ -105,14 +133,14 @@ const (
 type BaseInputmode string
 
 const (
-	BaseInputmodeText    BaseInputmode = "text"
-	BaseInputmodeUrl     BaseInputmode = "url"
-	BaseInputmodeDecimal BaseInputmode = "decimal"
 	BaseInputmodeEmail   BaseInputmode = "email"
 	BaseInputmodeNone    BaseInputmode = "none"
 	BaseInputmodeNumeric BaseInputmode = "numeric"
 	BaseInputmodeSearch  BaseInputmode = "search"
 	BaseInputmodeTel     BaseInputmode = "tel"
+	BaseInputmodeText    BaseInputmode = "text"
+	BaseInputmodeUrl     BaseInputmode = "url"
+	BaseInputmodeDecimal BaseInputmode = "decimal"
 )
 
 type BaseSpellcheck string
@@ -134,8 +162,8 @@ const (
 type BaseWritingsuggestions string
 
 const (
-	BaseWritingsuggestionsFalse BaseWritingsuggestions = "false"
 	BaseWritingsuggestionsTrue  BaseWritingsuggestions = "true"
+	BaseWritingsuggestionsFalse BaseWritingsuggestions = "false"
 	BaseWritingsuggestionsEmpty BaseWritingsuggestions = ""
 )
 

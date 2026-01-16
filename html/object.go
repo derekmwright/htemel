@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func ObjectTernary(condition bool, true htemel.Node, false htemel.Node) *ObjectE
 	if condition {
 		return Object(true)
 	}
-
 	return Object(false)
 }
 
 // Children appends children to this element.
 func (e *ObjectElement) Children(children ...htemel.Node) *ObjectElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *ObjectElement) With(fn func(*ObjectElement)) *ObjectElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *ObjectElement) Textf(format string, args ...any) *ObjectElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *ObjectElement) AddClass(classes ...string) *ObjectElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *ObjectElement) ToggleClass(class string, enable bool) *ObjectElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -77,9 +108,9 @@ const (
 type ObjectContenteditable string
 
 const (
+	ObjectContenteditablePlaintextOnly ObjectContenteditable = "plaintext-only"
 	ObjectContenteditableTrue          ObjectContenteditable = "true"
 	ObjectContenteditableFalse         ObjectContenteditable = "false"
-	ObjectContenteditablePlaintextOnly ObjectContenteditable = "plaintext-only"
 	ObjectContenteditableEmpty         ObjectContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type ObjectEnterkeyhint string
 
 const (
-	ObjectEnterkeyhintPrevious ObjectEnterkeyhint = "previous"
 	ObjectEnterkeyhintSearch   ObjectEnterkeyhint = "search"
 	ObjectEnterkeyhintSend     ObjectEnterkeyhint = "send"
 	ObjectEnterkeyhintDone     ObjectEnterkeyhint = "done"
 	ObjectEnterkeyhintEnter    ObjectEnterkeyhint = "enter"
 	ObjectEnterkeyhintGo       ObjectEnterkeyhint = "go"
 	ObjectEnterkeyhintNext     ObjectEnterkeyhint = "next"
+	ObjectEnterkeyhintPrevious ObjectEnterkeyhint = "previous"
 )
 
 type ObjectHidden string
@@ -121,14 +152,14 @@ const (
 type ObjectInputmode string
 
 const (
-	ObjectInputmodeSearch  ObjectInputmode = "search"
-	ObjectInputmodeTel     ObjectInputmode = "tel"
 	ObjectInputmodeText    ObjectInputmode = "text"
 	ObjectInputmodeUrl     ObjectInputmode = "url"
 	ObjectInputmodeDecimal ObjectInputmode = "decimal"
 	ObjectInputmodeEmail   ObjectInputmode = "email"
 	ObjectInputmodeNone    ObjectInputmode = "none"
 	ObjectInputmodeNumeric ObjectInputmode = "numeric"
+	ObjectInputmodeSearch  ObjectInputmode = "search"
+	ObjectInputmodeTel     ObjectInputmode = "tel"
 )
 
 type ObjectSpellcheck string
@@ -142,8 +173,8 @@ const (
 type ObjectTranslate string
 
 const (
-	ObjectTranslateNo    ObjectTranslate = "no"
 	ObjectTranslateYes   ObjectTranslate = "yes"
+	ObjectTranslateNo    ObjectTranslate = "no"
 	ObjectTranslateEmpty ObjectTranslate = ""
 )
 

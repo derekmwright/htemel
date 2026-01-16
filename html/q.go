@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func QTernary(condition bool, true htemel.Node, false htemel.Node) *QElement {
 	if condition {
 		return Q(true)
 	}
-
 	return Q(false)
 }
 
 // Children appends children to this element.
 func (e *QElement) Children(children ...htemel.Node) *QElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *QElement) With(fn func(*QElement)) *QElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *QElement) Textf(format string, args ...any) *QElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *QElement) AddClass(classes ...string) *QElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *QElement) ToggleClass(class string, enable bool) *QElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type QAutocapitalize string
 
 const (
+	QAutocapitalizeSentences  QAutocapitalize = "sentences"
 	QAutocapitalizeWords      QAutocapitalize = "words"
 	QAutocapitalizeCharacters QAutocapitalize = "characters"
 	QAutocapitalizeNone       QAutocapitalize = "none"
 	QAutocapitalizeOff        QAutocapitalize = "off"
 	QAutocapitalizeOn         QAutocapitalize = "on"
-	QAutocapitalizeSentences  QAutocapitalize = "sentences"
 )
 
 type QAutocorrect string
@@ -101,13 +132,13 @@ const (
 type QEnterkeyhint string
 
 const (
-	QEnterkeyhintSend     QEnterkeyhint = "send"
 	QEnterkeyhintDone     QEnterkeyhint = "done"
 	QEnterkeyhintEnter    QEnterkeyhint = "enter"
 	QEnterkeyhintGo       QEnterkeyhint = "go"
 	QEnterkeyhintNext     QEnterkeyhint = "next"
 	QEnterkeyhintPrevious QEnterkeyhint = "previous"
 	QEnterkeyhintSearch   QEnterkeyhint = "search"
+	QEnterkeyhintSend     QEnterkeyhint = "send"
 )
 
 type QHidden string
@@ -121,7 +152,6 @@ const (
 type QInputmode string
 
 const (
-	QInputmodeEmail   QInputmode = "email"
 	QInputmodeNone    QInputmode = "none"
 	QInputmodeNumeric QInputmode = "numeric"
 	QInputmodeSearch  QInputmode = "search"
@@ -129,6 +159,7 @@ const (
 	QInputmodeText    QInputmode = "text"
 	QInputmodeUrl     QInputmode = "url"
 	QInputmodeDecimal QInputmode = "decimal"
+	QInputmodeEmail   QInputmode = "email"
 )
 
 type QSpellcheck string

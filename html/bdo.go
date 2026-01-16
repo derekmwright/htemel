@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func BdoTernary(condition bool, true htemel.Node, false htemel.Node) *BdoElement
 	if condition {
 		return Bdo(true)
 	}
-
 	return Bdo(false)
 }
 
 // Children appends children to this element.
 func (e *BdoElement) Children(children ...htemel.Node) *BdoElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *BdoElement) With(fn func(*BdoElement)) *BdoElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *BdoElement) Textf(format string, args ...any) *BdoElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *BdoElement) AddClass(classes ...string) *BdoElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *BdoElement) ToggleClass(class string, enable bool) *BdoElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -77,9 +108,9 @@ const (
 type BdoContenteditable string
 
 const (
-	BdoContenteditablePlaintextOnly BdoContenteditable = "plaintext-only"
 	BdoContenteditableTrue          BdoContenteditable = "true"
 	BdoContenteditableFalse         BdoContenteditable = "false"
+	BdoContenteditablePlaintextOnly BdoContenteditable = "plaintext-only"
 	BdoContenteditableEmpty         BdoContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type BdoEnterkeyhint string
 
 const (
+	BdoEnterkeyhintNext     BdoEnterkeyhint = "next"
 	BdoEnterkeyhintPrevious BdoEnterkeyhint = "previous"
 	BdoEnterkeyhintSearch   BdoEnterkeyhint = "search"
 	BdoEnterkeyhintSend     BdoEnterkeyhint = "send"
 	BdoEnterkeyhintDone     BdoEnterkeyhint = "done"
 	BdoEnterkeyhintEnter    BdoEnterkeyhint = "enter"
 	BdoEnterkeyhintGo       BdoEnterkeyhint = "go"
-	BdoEnterkeyhintNext     BdoEnterkeyhint = "next"
 )
 
 type BdoHidden string
@@ -121,14 +152,14 @@ const (
 type BdoInputmode string
 
 const (
-	BdoInputmodeText    BdoInputmode = "text"
-	BdoInputmodeUrl     BdoInputmode = "url"
 	BdoInputmodeDecimal BdoInputmode = "decimal"
 	BdoInputmodeEmail   BdoInputmode = "email"
 	BdoInputmodeNone    BdoInputmode = "none"
 	BdoInputmodeNumeric BdoInputmode = "numeric"
 	BdoInputmodeSearch  BdoInputmode = "search"
 	BdoInputmodeTel     BdoInputmode = "tel"
+	BdoInputmodeText    BdoInputmode = "text"
+	BdoInputmodeUrl     BdoInputmode = "url"
 )
 
 type BdoSpellcheck string
@@ -150,8 +181,8 @@ const (
 type BdoWritingsuggestions string
 
 const (
-	BdoWritingsuggestionsFalse BdoWritingsuggestions = "false"
 	BdoWritingsuggestionsTrue  BdoWritingsuggestions = "true"
+	BdoWritingsuggestionsFalse BdoWritingsuggestions = "false"
 	BdoWritingsuggestionsEmpty BdoWritingsuggestions = ""
 )
 

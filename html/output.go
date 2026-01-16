@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func OutputTernary(condition bool, true htemel.Node, false htemel.Node) *OutputE
 	if condition {
 		return Output(true)
 	}
-
 	return Output(false)
 }
 
 // Children appends children to this element.
 func (e *OutputElement) Children(children ...htemel.Node) *OutputElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *OutputElement) With(fn func(*OutputElement)) *OutputElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *OutputElement) Textf(format string, args ...any) *OutputElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *OutputElement) AddClass(classes ...string) *OutputElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *OutputElement) ToggleClass(class string, enable bool) *OutputElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type OutputAutocapitalize string
 
 const (
-	OutputAutocapitalizeOn         OutputAutocapitalize = "on"
-	OutputAutocapitalizeSentences  OutputAutocapitalize = "sentences"
-	OutputAutocapitalizeWords      OutputAutocapitalize = "words"
 	OutputAutocapitalizeCharacters OutputAutocapitalize = "characters"
 	OutputAutocapitalizeNone       OutputAutocapitalize = "none"
 	OutputAutocapitalizeOff        OutputAutocapitalize = "off"
+	OutputAutocapitalizeOn         OutputAutocapitalize = "on"
+	OutputAutocapitalizeSentences  OutputAutocapitalize = "sentences"
+	OutputAutocapitalizeWords      OutputAutocapitalize = "words"
 )
 
 type OutputAutocorrect string
@@ -86,28 +117,28 @@ const (
 type OutputDir string
 
 const (
-	OutputDirAuto OutputDir = "auto"
 	OutputDirLtr  OutputDir = "ltr"
 	OutputDirRtl  OutputDir = "rtl"
+	OutputDirAuto OutputDir = "auto"
 )
 
 type OutputDraggable string
 
 const (
-	OutputDraggableFalse OutputDraggable = "false"
 	OutputDraggableTrue  OutputDraggable = "true"
+	OutputDraggableFalse OutputDraggable = "false"
 )
 
 type OutputEnterkeyhint string
 
 const (
-	OutputEnterkeyhintDone     OutputEnterkeyhint = "done"
 	OutputEnterkeyhintEnter    OutputEnterkeyhint = "enter"
 	OutputEnterkeyhintGo       OutputEnterkeyhint = "go"
 	OutputEnterkeyhintNext     OutputEnterkeyhint = "next"
 	OutputEnterkeyhintPrevious OutputEnterkeyhint = "previous"
 	OutputEnterkeyhintSearch   OutputEnterkeyhint = "search"
 	OutputEnterkeyhintSend     OutputEnterkeyhint = "send"
+	OutputEnterkeyhintDone     OutputEnterkeyhint = "done"
 )
 
 type OutputHidden string
@@ -121,21 +152,21 @@ const (
 type OutputInputmode string
 
 const (
+	OutputInputmodeUrl     OutputInputmode = "url"
+	OutputInputmodeDecimal OutputInputmode = "decimal"
 	OutputInputmodeEmail   OutputInputmode = "email"
 	OutputInputmodeNone    OutputInputmode = "none"
 	OutputInputmodeNumeric OutputInputmode = "numeric"
 	OutputInputmodeSearch  OutputInputmode = "search"
 	OutputInputmodeTel     OutputInputmode = "tel"
 	OutputInputmodeText    OutputInputmode = "text"
-	OutputInputmodeUrl     OutputInputmode = "url"
-	OutputInputmodeDecimal OutputInputmode = "decimal"
 )
 
 type OutputSpellcheck string
 
 const (
-	OutputSpellcheckFalse OutputSpellcheck = "false"
 	OutputSpellcheckTrue  OutputSpellcheck = "true"
+	OutputSpellcheckFalse OutputSpellcheck = "false"
 	OutputSpellcheckEmpty OutputSpellcheck = ""
 )
 

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func DivTernary(condition bool, true htemel.Node, false htemel.Node) *DivElement
 	if condition {
 		return Div(true)
 	}
-
 	return Div(false)
 }
 
 // Children appends children to this element.
 func (e *DivElement) Children(children ...htemel.Node) *DivElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *DivElement) With(fn func(*DivElement)) *DivElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *DivElement) Textf(format string, args ...any) *DivElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *DivElement) AddClass(classes ...string) *DivElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *DivElement) ToggleClass(class string, enable bool) *DivElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type DivAutocapitalize string
 
 const (
-	DivAutocapitalizeCharacters DivAutocapitalize = "characters"
-	DivAutocapitalizeNone       DivAutocapitalize = "none"
-	DivAutocapitalizeOff        DivAutocapitalize = "off"
 	DivAutocapitalizeOn         DivAutocapitalize = "on"
 	DivAutocapitalizeSentences  DivAutocapitalize = "sentences"
 	DivAutocapitalizeWords      DivAutocapitalize = "words"
+	DivAutocapitalizeCharacters DivAutocapitalize = "characters"
+	DivAutocapitalizeNone       DivAutocapitalize = "none"
+	DivAutocapitalizeOff        DivAutocapitalize = "off"
 )
 
 type DivAutocorrect string
@@ -101,13 +132,13 @@ const (
 type DivEnterkeyhint string
 
 const (
-	DivEnterkeyhintPrevious DivEnterkeyhint = "previous"
-	DivEnterkeyhintSearch   DivEnterkeyhint = "search"
 	DivEnterkeyhintSend     DivEnterkeyhint = "send"
 	DivEnterkeyhintDone     DivEnterkeyhint = "done"
 	DivEnterkeyhintEnter    DivEnterkeyhint = "enter"
 	DivEnterkeyhintGo       DivEnterkeyhint = "go"
 	DivEnterkeyhintNext     DivEnterkeyhint = "next"
+	DivEnterkeyhintPrevious DivEnterkeyhint = "previous"
+	DivEnterkeyhintSearch   DivEnterkeyhint = "search"
 )
 
 type DivHidden string
@@ -121,14 +152,14 @@ const (
 type DivInputmode string
 
 const (
+	DivInputmodeSearch  DivInputmode = "search"
+	DivInputmodeTel     DivInputmode = "tel"
+	DivInputmodeText    DivInputmode = "text"
 	DivInputmodeUrl     DivInputmode = "url"
 	DivInputmodeDecimal DivInputmode = "decimal"
 	DivInputmodeEmail   DivInputmode = "email"
 	DivInputmodeNone    DivInputmode = "none"
 	DivInputmodeNumeric DivInputmode = "numeric"
-	DivInputmodeSearch  DivInputmode = "search"
-	DivInputmodeTel     DivInputmode = "tel"
-	DivInputmodeText    DivInputmode = "text"
 )
 
 type DivSpellcheck string

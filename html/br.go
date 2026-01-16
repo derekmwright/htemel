@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,15 +40,42 @@ func BrIf(condition bool) *BrElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *BrElement) With(fn func(*BrElement)) *BrElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *BrElement) AddClass(classes ...string) *BrElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *BrElement) ToggleClass(class string, enable bool) *BrElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type BrAutocapitalize string
 
 const (
-	BrAutocapitalizeOn         BrAutocapitalize = "on"
-	BrAutocapitalizeSentences  BrAutocapitalize = "sentences"
-	BrAutocapitalizeWords      BrAutocapitalize = "words"
 	BrAutocapitalizeCharacters BrAutocapitalize = "characters"
 	BrAutocapitalizeNone       BrAutocapitalize = "none"
 	BrAutocapitalizeOff        BrAutocapitalize = "off"
+	BrAutocapitalizeOn         BrAutocapitalize = "on"
+	BrAutocapitalizeSentences  BrAutocapitalize = "sentences"
+	BrAutocapitalizeWords      BrAutocapitalize = "words"
 )
 
 type BrAutocorrect string
@@ -70,28 +98,28 @@ const (
 type BrDir string
 
 const (
-	BrDirRtl  BrDir = "rtl"
 	BrDirAuto BrDir = "auto"
 	BrDirLtr  BrDir = "ltr"
+	BrDirRtl  BrDir = "rtl"
 )
 
 type BrDraggable string
 
 const (
-	BrDraggableFalse BrDraggable = "false"
 	BrDraggableTrue  BrDraggable = "true"
+	BrDraggableFalse BrDraggable = "false"
 )
 
 type BrEnterkeyhint string
 
 const (
-	BrEnterkeyhintGo       BrEnterkeyhint = "go"
-	BrEnterkeyhintNext     BrEnterkeyhint = "next"
-	BrEnterkeyhintPrevious BrEnterkeyhint = "previous"
 	BrEnterkeyhintSearch   BrEnterkeyhint = "search"
 	BrEnterkeyhintSend     BrEnterkeyhint = "send"
 	BrEnterkeyhintDone     BrEnterkeyhint = "done"
 	BrEnterkeyhintEnter    BrEnterkeyhint = "enter"
+	BrEnterkeyhintGo       BrEnterkeyhint = "go"
+	BrEnterkeyhintNext     BrEnterkeyhint = "next"
+	BrEnterkeyhintPrevious BrEnterkeyhint = "previous"
 )
 
 type BrHidden string
@@ -105,14 +133,14 @@ const (
 type BrInputmode string
 
 const (
-	BrInputmodeDecimal BrInputmode = "decimal"
-	BrInputmodeEmail   BrInputmode = "email"
-	BrInputmodeNone    BrInputmode = "none"
-	BrInputmodeNumeric BrInputmode = "numeric"
 	BrInputmodeSearch  BrInputmode = "search"
 	BrInputmodeTel     BrInputmode = "tel"
 	BrInputmodeText    BrInputmode = "text"
 	BrInputmodeUrl     BrInputmode = "url"
+	BrInputmodeDecimal BrInputmode = "decimal"
+	BrInputmodeEmail   BrInputmode = "email"
+	BrInputmodeNone    BrInputmode = "none"
+	BrInputmodeNumeric BrInputmode = "numeric"
 )
 
 type BrSpellcheck string

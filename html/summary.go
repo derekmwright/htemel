@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func SummaryTernary(condition bool, true htemel.Node, false htemel.Node) *Summar
 	if condition {
 		return Summary(true)
 	}
-
 	return Summary(false)
 }
 
 // Children appends children to this element.
 func (e *SummaryElement) Children(children ...htemel.Node) *SummaryElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *SummaryElement) With(fn func(*SummaryElement)) *SummaryElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *SummaryElement) Textf(format string, args ...any) *SummaryElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *SummaryElement) AddClass(classes ...string) *SummaryElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *SummaryElement) ToggleClass(class string, enable bool) *SummaryElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type SummaryAutocapitalize string
 
 const (
-	SummaryAutocapitalizeWords      SummaryAutocapitalize = "words"
-	SummaryAutocapitalizeCharacters SummaryAutocapitalize = "characters"
 	SummaryAutocapitalizeNone       SummaryAutocapitalize = "none"
 	SummaryAutocapitalizeOff        SummaryAutocapitalize = "off"
 	SummaryAutocapitalizeOn         SummaryAutocapitalize = "on"
 	SummaryAutocapitalizeSentences  SummaryAutocapitalize = "sentences"
+	SummaryAutocapitalizeWords      SummaryAutocapitalize = "words"
+	SummaryAutocapitalizeCharacters SummaryAutocapitalize = "characters"
 )
 
 type SummaryAutocorrect string
@@ -77,9 +108,9 @@ const (
 type SummaryContenteditable string
 
 const (
-	SummaryContenteditableTrue          SummaryContenteditable = "true"
 	SummaryContenteditableFalse         SummaryContenteditable = "false"
 	SummaryContenteditablePlaintextOnly SummaryContenteditable = "plaintext-only"
+	SummaryContenteditableTrue          SummaryContenteditable = "true"
 	SummaryContenteditableEmpty         SummaryContenteditable = ""
 )
 
@@ -101,34 +132,34 @@ const (
 type SummaryEnterkeyhint string
 
 const (
-	SummaryEnterkeyhintSend     SummaryEnterkeyhint = "send"
-	SummaryEnterkeyhintDone     SummaryEnterkeyhint = "done"
 	SummaryEnterkeyhintEnter    SummaryEnterkeyhint = "enter"
 	SummaryEnterkeyhintGo       SummaryEnterkeyhint = "go"
 	SummaryEnterkeyhintNext     SummaryEnterkeyhint = "next"
 	SummaryEnterkeyhintPrevious SummaryEnterkeyhint = "previous"
 	SummaryEnterkeyhintSearch   SummaryEnterkeyhint = "search"
+	SummaryEnterkeyhintSend     SummaryEnterkeyhint = "send"
+	SummaryEnterkeyhintDone     SummaryEnterkeyhint = "done"
 )
 
 type SummaryHidden string
 
 const (
-	SummaryHiddenHidden     SummaryHidden = "hidden"
 	SummaryHiddenUntilFound SummaryHidden = "until-found"
+	SummaryHiddenHidden     SummaryHidden = "hidden"
 	SummaryHiddenEmpty      SummaryHidden = ""
 )
 
 type SummaryInputmode string
 
 const (
+	SummaryInputmodeDecimal SummaryInputmode = "decimal"
+	SummaryInputmodeEmail   SummaryInputmode = "email"
 	SummaryInputmodeNone    SummaryInputmode = "none"
 	SummaryInputmodeNumeric SummaryInputmode = "numeric"
 	SummaryInputmodeSearch  SummaryInputmode = "search"
 	SummaryInputmodeTel     SummaryInputmode = "tel"
 	SummaryInputmodeText    SummaryInputmode = "text"
 	SummaryInputmodeUrl     SummaryInputmode = "url"
-	SummaryInputmodeDecimal SummaryInputmode = "decimal"
-	SummaryInputmodeEmail   SummaryInputmode = "email"
 )
 
 type SummarySpellcheck string

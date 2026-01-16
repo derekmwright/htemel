@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func LiTernary(condition bool, true htemel.Node, false htemel.Node) *LiElement {
 	if condition {
 		return Li(true)
 	}
-
 	return Li(false)
 }
 
 // Children appends children to this element.
 func (e *LiElement) Children(children ...htemel.Node) *LiElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *LiElement) With(fn func(*LiElement)) *LiElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *LiElement) Textf(format string, args ...any) *LiElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *LiElement) AddClass(classes ...string) *LiElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *LiElement) ToggleClass(class string, enable bool) *LiElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type LiAutocapitalize string
 
 const (
-	LiAutocapitalizeCharacters LiAutocapitalize = "characters"
-	LiAutocapitalizeNone       LiAutocapitalize = "none"
-	LiAutocapitalizeOff        LiAutocapitalize = "off"
 	LiAutocapitalizeOn         LiAutocapitalize = "on"
 	LiAutocapitalizeSentences  LiAutocapitalize = "sentences"
 	LiAutocapitalizeWords      LiAutocapitalize = "words"
+	LiAutocapitalizeCharacters LiAutocapitalize = "characters"
+	LiAutocapitalizeNone       LiAutocapitalize = "none"
+	LiAutocapitalizeOff        LiAutocapitalize = "off"
 )
 
 type LiAutocorrect string
@@ -77,18 +108,18 @@ const (
 type LiContenteditable string
 
 const (
-	LiContenteditableTrue          LiContenteditable = "true"
 	LiContenteditableFalse         LiContenteditable = "false"
 	LiContenteditablePlaintextOnly LiContenteditable = "plaintext-only"
+	LiContenteditableTrue          LiContenteditable = "true"
 	LiContenteditableEmpty         LiContenteditable = ""
 )
 
 type LiDir string
 
 const (
-	LiDirRtl  LiDir = "rtl"
 	LiDirAuto LiDir = "auto"
 	LiDirLtr  LiDir = "ltr"
+	LiDirRtl  LiDir = "rtl"
 )
 
 type LiDraggable string
@@ -101,13 +132,13 @@ const (
 type LiEnterkeyhint string
 
 const (
+	LiEnterkeyhintGo       LiEnterkeyhint = "go"
+	LiEnterkeyhintNext     LiEnterkeyhint = "next"
+	LiEnterkeyhintPrevious LiEnterkeyhint = "previous"
 	LiEnterkeyhintSearch   LiEnterkeyhint = "search"
 	LiEnterkeyhintSend     LiEnterkeyhint = "send"
 	LiEnterkeyhintDone     LiEnterkeyhint = "done"
 	LiEnterkeyhintEnter    LiEnterkeyhint = "enter"
-	LiEnterkeyhintGo       LiEnterkeyhint = "go"
-	LiEnterkeyhintNext     LiEnterkeyhint = "next"
-	LiEnterkeyhintPrevious LiEnterkeyhint = "previous"
 )
 
 type LiHidden string
@@ -121,21 +152,21 @@ const (
 type LiInputmode string
 
 const (
-	LiInputmodeText    LiInputmode = "text"
-	LiInputmodeUrl     LiInputmode = "url"
 	LiInputmodeDecimal LiInputmode = "decimal"
 	LiInputmodeEmail   LiInputmode = "email"
 	LiInputmodeNone    LiInputmode = "none"
 	LiInputmodeNumeric LiInputmode = "numeric"
 	LiInputmodeSearch  LiInputmode = "search"
 	LiInputmodeTel     LiInputmode = "tel"
+	LiInputmodeText    LiInputmode = "text"
+	LiInputmodeUrl     LiInputmode = "url"
 )
 
 type LiSpellcheck string
 
 const (
-	LiSpellcheckTrue  LiSpellcheck = "true"
 	LiSpellcheckFalse LiSpellcheck = "false"
+	LiSpellcheckTrue  LiSpellcheck = "true"
 	LiSpellcheckEmpty LiSpellcheck = ""
 )
 

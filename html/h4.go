@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,33 +45,63 @@ func H4Ternary(condition bool, true htemel.Node, false htemel.Node) *H4Element {
 	if condition {
 		return H4(true)
 	}
-
 	return H4(false)
 }
 
 // Children appends children to this element.
 func (e *H4Element) Children(children ...htemel.Node) *H4Element {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *H4Element) With(fn func(*H4Element)) *H4Element {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *H4Element) Textf(format string, args ...any) *H4Element {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *H4Element) AddClass(classes ...string) *H4Element {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *H4Element) ToggleClass(class string, enable bool) *H4Element {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type H4Autocapitalize string
 
 const (
+	H4AutocapitalizeCharacters H4Autocapitalize = "characters"
 	H4AutocapitalizeNone       H4Autocapitalize = "none"
 	H4AutocapitalizeOff        H4Autocapitalize = "off"
 	H4AutocapitalizeOn         H4Autocapitalize = "on"
 	H4AutocapitalizeSentences  H4Autocapitalize = "sentences"
 	H4AutocapitalizeWords      H4Autocapitalize = "words"
-	H4AutocapitalizeCharacters H4Autocapitalize = "characters"
 )
 
 type H4Autocorrect string
 
 const (
-	H4AutocorrectOn    H4Autocorrect = "on"
 	H4AutocorrectOff   H4Autocorrect = "off"
+	H4AutocorrectOn    H4Autocorrect = "on"
 	H4AutocorrectEmpty H4Autocorrect = ""
 )
 
@@ -86,9 +117,9 @@ const (
 type H4Dir string
 
 const (
-	H4DirRtl  H4Dir = "rtl"
 	H4DirAuto H4Dir = "auto"
 	H4DirLtr  H4Dir = "ltr"
+	H4DirRtl  H4Dir = "rtl"
 )
 
 type H4Draggable string
@@ -101,13 +132,13 @@ const (
 type H4Enterkeyhint string
 
 const (
-	H4EnterkeyhintPrevious H4Enterkeyhint = "previous"
-	H4EnterkeyhintSearch   H4Enterkeyhint = "search"
 	H4EnterkeyhintSend     H4Enterkeyhint = "send"
 	H4EnterkeyhintDone     H4Enterkeyhint = "done"
 	H4EnterkeyhintEnter    H4Enterkeyhint = "enter"
 	H4EnterkeyhintGo       H4Enterkeyhint = "go"
 	H4EnterkeyhintNext     H4Enterkeyhint = "next"
+	H4EnterkeyhintPrevious H4Enterkeyhint = "previous"
+	H4EnterkeyhintSearch   H4Enterkeyhint = "search"
 )
 
 type H4Hidden string
@@ -121,7 +152,6 @@ const (
 type H4Inputmode string
 
 const (
-	H4InputmodeNumeric H4Inputmode = "numeric"
 	H4InputmodeSearch  H4Inputmode = "search"
 	H4InputmodeTel     H4Inputmode = "tel"
 	H4InputmodeText    H4Inputmode = "text"
@@ -129,21 +159,22 @@ const (
 	H4InputmodeDecimal H4Inputmode = "decimal"
 	H4InputmodeEmail   H4Inputmode = "email"
 	H4InputmodeNone    H4Inputmode = "none"
+	H4InputmodeNumeric H4Inputmode = "numeric"
 )
 
 type H4Spellcheck string
 
 const (
-	H4SpellcheckTrue  H4Spellcheck = "true"
 	H4SpellcheckFalse H4Spellcheck = "false"
+	H4SpellcheckTrue  H4Spellcheck = "true"
 	H4SpellcheckEmpty H4Spellcheck = ""
 )
 
 type H4Translate string
 
 const (
-	H4TranslateNo    H4Translate = "no"
 	H4TranslateYes   H4Translate = "yes"
+	H4TranslateNo    H4Translate = "no"
 	H4TranslateEmpty H4Translate = ""
 )
 

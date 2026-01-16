@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func H2Ternary(condition bool, true htemel.Node, false htemel.Node) *H2Element {
 	if condition {
 		return H2(true)
 	}
-
 	return H2(false)
 }
 
 // Children appends children to this element.
 func (e *H2Element) Children(children ...htemel.Node) *H2Element {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *H2Element) With(fn func(*H2Element)) *H2Element {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *H2Element) Textf(format string, args ...any) *H2Element {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *H2Element) AddClass(classes ...string) *H2Element {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *H2Element) ToggleClass(class string, enable bool) *H2Element {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -77,9 +108,9 @@ const (
 type H2Contenteditable string
 
 const (
+	H2ContenteditableFalse         H2Contenteditable = "false"
 	H2ContenteditablePlaintextOnly H2Contenteditable = "plaintext-only"
 	H2ContenteditableTrue          H2Contenteditable = "true"
-	H2ContenteditableFalse         H2Contenteditable = "false"
 	H2ContenteditableEmpty         H2Contenteditable = ""
 )
 

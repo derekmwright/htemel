@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,6 +40,33 @@ func LinkIf(condition bool) *LinkElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *LinkElement) With(fn func(*LinkElement)) *LinkElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *LinkElement) AddClass(classes ...string) *LinkElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *LinkElement) ToggleClass(class string, enable bool) *LinkElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type LinkCrossorigin string
 
 const (
@@ -56,20 +84,20 @@ const (
 type LinkFetchpriority string
 
 const (
-	LinkFetchpriorityLow  LinkFetchpriority = "low"
 	LinkFetchpriorityAuto LinkFetchpriority = "auto"
 	LinkFetchpriorityHigh LinkFetchpriority = "high"
+	LinkFetchpriorityLow  LinkFetchpriority = "low"
 )
 
 type LinkAutocapitalize string
 
 const (
-	LinkAutocapitalizeOn         LinkAutocapitalize = "on"
-	LinkAutocapitalizeSentences  LinkAutocapitalize = "sentences"
-	LinkAutocapitalizeWords      LinkAutocapitalize = "words"
 	LinkAutocapitalizeCharacters LinkAutocapitalize = "characters"
 	LinkAutocapitalizeNone       LinkAutocapitalize = "none"
 	LinkAutocapitalizeOff        LinkAutocapitalize = "off"
+	LinkAutocapitalizeOn         LinkAutocapitalize = "on"
+	LinkAutocapitalizeSentences  LinkAutocapitalize = "sentences"
+	LinkAutocapitalizeWords      LinkAutocapitalize = "words"
 )
 
 type LinkAutocorrect string
@@ -83,9 +111,9 @@ const (
 type LinkContenteditable string
 
 const (
-	LinkContenteditableFalse         LinkContenteditable = "false"
 	LinkContenteditablePlaintextOnly LinkContenteditable = "plaintext-only"
 	LinkContenteditableTrue          LinkContenteditable = "true"
+	LinkContenteditableFalse         LinkContenteditable = "false"
 	LinkContenteditableEmpty         LinkContenteditable = ""
 )
 
@@ -107,13 +135,13 @@ const (
 type LinkEnterkeyhint string
 
 const (
+	LinkEnterkeyhintDone     LinkEnterkeyhint = "done"
+	LinkEnterkeyhintEnter    LinkEnterkeyhint = "enter"
+	LinkEnterkeyhintGo       LinkEnterkeyhint = "go"
 	LinkEnterkeyhintNext     LinkEnterkeyhint = "next"
 	LinkEnterkeyhintPrevious LinkEnterkeyhint = "previous"
 	LinkEnterkeyhintSearch   LinkEnterkeyhint = "search"
 	LinkEnterkeyhintSend     LinkEnterkeyhint = "send"
-	LinkEnterkeyhintDone     LinkEnterkeyhint = "done"
-	LinkEnterkeyhintEnter    LinkEnterkeyhint = "enter"
-	LinkEnterkeyhintGo       LinkEnterkeyhint = "go"
 )
 
 type LinkHidden string
@@ -127,21 +155,21 @@ const (
 type LinkInputmode string
 
 const (
+	LinkInputmodeSearch  LinkInputmode = "search"
+	LinkInputmodeTel     LinkInputmode = "tel"
 	LinkInputmodeText    LinkInputmode = "text"
 	LinkInputmodeUrl     LinkInputmode = "url"
 	LinkInputmodeDecimal LinkInputmode = "decimal"
 	LinkInputmodeEmail   LinkInputmode = "email"
 	LinkInputmodeNone    LinkInputmode = "none"
 	LinkInputmodeNumeric LinkInputmode = "numeric"
-	LinkInputmodeSearch  LinkInputmode = "search"
-	LinkInputmodeTel     LinkInputmode = "tel"
 )
 
 type LinkSpellcheck string
 
 const (
-	LinkSpellcheckFalse LinkSpellcheck = "false"
 	LinkSpellcheckTrue  LinkSpellcheck = "true"
+	LinkSpellcheckFalse LinkSpellcheck = "false"
 	LinkSpellcheckEmpty LinkSpellcheck = ""
 )
 

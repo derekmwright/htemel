@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func AbbrTernary(condition bool, true htemel.Node, false htemel.Node) *AbbrEleme
 	if condition {
 		return Abbr(true)
 	}
-
 	return Abbr(false)
 }
 
 // Children appends children to this element.
 func (e *AbbrElement) Children(children ...htemel.Node) *AbbrElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *AbbrElement) With(fn func(*AbbrElement)) *AbbrElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *AbbrElement) Textf(format string, args ...any) *AbbrElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *AbbrElement) AddClass(classes ...string) *AbbrElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *AbbrElement) ToggleClass(class string, enable bool) *AbbrElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type AbbrAutocapitalize string
 
 const (
-	AbbrAutocapitalizeOff        AbbrAutocapitalize = "off"
-	AbbrAutocapitalizeOn         AbbrAutocapitalize = "on"
 	AbbrAutocapitalizeSentences  AbbrAutocapitalize = "sentences"
 	AbbrAutocapitalizeWords      AbbrAutocapitalize = "words"
 	AbbrAutocapitalizeCharacters AbbrAutocapitalize = "characters"
 	AbbrAutocapitalizeNone       AbbrAutocapitalize = "none"
+	AbbrAutocapitalizeOff        AbbrAutocapitalize = "off"
+	AbbrAutocapitalizeOn         AbbrAutocapitalize = "on"
 )
 
 type AbbrAutocorrect string
@@ -77,9 +108,9 @@ const (
 type AbbrContenteditable string
 
 const (
+	AbbrContenteditableFalse         AbbrContenteditable = "false"
 	AbbrContenteditablePlaintextOnly AbbrContenteditable = "plaintext-only"
 	AbbrContenteditableTrue          AbbrContenteditable = "true"
-	AbbrContenteditableFalse         AbbrContenteditable = "false"
 	AbbrContenteditableEmpty         AbbrContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type AbbrEnterkeyhint string
 
 const (
+	AbbrEnterkeyhintSearch   AbbrEnterkeyhint = "search"
+	AbbrEnterkeyhintSend     AbbrEnterkeyhint = "send"
+	AbbrEnterkeyhintDone     AbbrEnterkeyhint = "done"
 	AbbrEnterkeyhintEnter    AbbrEnterkeyhint = "enter"
 	AbbrEnterkeyhintGo       AbbrEnterkeyhint = "go"
 	AbbrEnterkeyhintNext     AbbrEnterkeyhint = "next"
 	AbbrEnterkeyhintPrevious AbbrEnterkeyhint = "previous"
-	AbbrEnterkeyhintSearch   AbbrEnterkeyhint = "search"
-	AbbrEnterkeyhintSend     AbbrEnterkeyhint = "send"
-	AbbrEnterkeyhintDone     AbbrEnterkeyhint = "done"
 )
 
 type AbbrHidden string
@@ -121,14 +152,14 @@ const (
 type AbbrInputmode string
 
 const (
+	AbbrInputmodeDecimal AbbrInputmode = "decimal"
+	AbbrInputmodeEmail   AbbrInputmode = "email"
+	AbbrInputmodeNone    AbbrInputmode = "none"
 	AbbrInputmodeNumeric AbbrInputmode = "numeric"
 	AbbrInputmodeSearch  AbbrInputmode = "search"
 	AbbrInputmodeTel     AbbrInputmode = "tel"
 	AbbrInputmodeText    AbbrInputmode = "text"
 	AbbrInputmodeUrl     AbbrInputmode = "url"
-	AbbrInputmodeDecimal AbbrInputmode = "decimal"
-	AbbrInputmodeEmail   AbbrInputmode = "email"
-	AbbrInputmodeNone    AbbrInputmode = "none"
 )
 
 type AbbrSpellcheck string
@@ -142,8 +173,8 @@ const (
 type AbbrTranslate string
 
 const (
-	AbbrTranslateNo    AbbrTranslate = "no"
 	AbbrTranslateYes   AbbrTranslate = "yes"
+	AbbrTranslateNo    AbbrTranslate = "no"
 	AbbrTranslateEmpty AbbrTranslate = ""
 )
 

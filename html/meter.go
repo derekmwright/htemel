@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func MeterTernary(condition bool, true htemel.Node, false htemel.Node) *MeterEle
 	if condition {
 		return Meter(true)
 	}
-
 	return Meter(false)
 }
 
 // Children appends children to this element.
 func (e *MeterElement) Children(children ...htemel.Node) *MeterElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *MeterElement) With(fn func(*MeterElement)) *MeterElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *MeterElement) Textf(format string, args ...any) *MeterElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *MeterElement) AddClass(classes ...string) *MeterElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *MeterElement) ToggleClass(class string, enable bool) *MeterElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type MeterAutocapitalize string
 
 const (
+	MeterAutocapitalizeSentences  MeterAutocapitalize = "sentences"
 	MeterAutocapitalizeWords      MeterAutocapitalize = "words"
 	MeterAutocapitalizeCharacters MeterAutocapitalize = "characters"
 	MeterAutocapitalizeNone       MeterAutocapitalize = "none"
 	MeterAutocapitalizeOff        MeterAutocapitalize = "off"
 	MeterAutocapitalizeOn         MeterAutocapitalize = "on"
-	MeterAutocapitalizeSentences  MeterAutocapitalize = "sentences"
 )
 
 type MeterAutocorrect string
@@ -77,9 +108,9 @@ const (
 type MeterContenteditable string
 
 const (
-	MeterContenteditableTrue          MeterContenteditable = "true"
 	MeterContenteditableFalse         MeterContenteditable = "false"
 	MeterContenteditablePlaintextOnly MeterContenteditable = "plaintext-only"
+	MeterContenteditableTrue          MeterContenteditable = "true"
 	MeterContenteditableEmpty         MeterContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type MeterEnterkeyhint string
 
 const (
-	MeterEnterkeyhintEnter    MeterEnterkeyhint = "enter"
 	MeterEnterkeyhintGo       MeterEnterkeyhint = "go"
 	MeterEnterkeyhintNext     MeterEnterkeyhint = "next"
 	MeterEnterkeyhintPrevious MeterEnterkeyhint = "previous"
 	MeterEnterkeyhintSearch   MeterEnterkeyhint = "search"
 	MeterEnterkeyhintSend     MeterEnterkeyhint = "send"
 	MeterEnterkeyhintDone     MeterEnterkeyhint = "done"
+	MeterEnterkeyhintEnter    MeterEnterkeyhint = "enter"
 )
 
 type MeterHidden string

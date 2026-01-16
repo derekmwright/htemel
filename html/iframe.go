@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,22 +45,52 @@ func IframeTernary(condition bool, true htemel.Node, false htemel.Node) *IframeE
 	if condition {
 		return Iframe(true)
 	}
-
 	return Iframe(false)
 }
 
 // Children appends children to this element.
 func (e *IframeElement) Children(children ...htemel.Node) *IframeElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *IframeElement) With(fn func(*IframeElement)) *IframeElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *IframeElement) Textf(format string, args ...any) *IframeElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *IframeElement) AddClass(classes ...string) *IframeElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *IframeElement) ToggleClass(class string, enable bool) *IframeElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type IframeLoading string
 
 const (
-	IframeLoadingLazy  IframeLoading = "lazy"
 	IframeLoadingEager IframeLoading = "eager"
+	IframeLoadingLazy  IframeLoading = "lazy"
 )
 
 type IframeAutocapitalize string
@@ -93,9 +124,9 @@ const (
 type IframeDir string
 
 const (
-	IframeDirRtl  IframeDir = "rtl"
 	IframeDirAuto IframeDir = "auto"
 	IframeDirLtr  IframeDir = "ltr"
+	IframeDirRtl  IframeDir = "rtl"
 )
 
 type IframeDraggable string
@@ -108,13 +139,13 @@ const (
 type IframeEnterkeyhint string
 
 const (
+	IframeEnterkeyhintNext     IframeEnterkeyhint = "next"
+	IframeEnterkeyhintPrevious IframeEnterkeyhint = "previous"
 	IframeEnterkeyhintSearch   IframeEnterkeyhint = "search"
 	IframeEnterkeyhintSend     IframeEnterkeyhint = "send"
 	IframeEnterkeyhintDone     IframeEnterkeyhint = "done"
 	IframeEnterkeyhintEnter    IframeEnterkeyhint = "enter"
 	IframeEnterkeyhintGo       IframeEnterkeyhint = "go"
-	IframeEnterkeyhintNext     IframeEnterkeyhint = "next"
-	IframeEnterkeyhintPrevious IframeEnterkeyhint = "previous"
 )
 
 type IframeHidden string
@@ -128,7 +159,6 @@ const (
 type IframeInputmode string
 
 const (
-	IframeInputmodeNumeric IframeInputmode = "numeric"
 	IframeInputmodeSearch  IframeInputmode = "search"
 	IframeInputmodeTel     IframeInputmode = "tel"
 	IframeInputmodeText    IframeInputmode = "text"
@@ -136,6 +166,7 @@ const (
 	IframeInputmodeDecimal IframeInputmode = "decimal"
 	IframeInputmodeEmail   IframeInputmode = "email"
 	IframeInputmodeNone    IframeInputmode = "none"
+	IframeInputmodeNumeric IframeInputmode = "numeric"
 )
 
 type IframeSpellcheck string
@@ -149,8 +180,8 @@ const (
 type IframeTranslate string
 
 const (
-	IframeTranslateYes   IframeTranslate = "yes"
 	IframeTranslateNo    IframeTranslate = "no"
+	IframeTranslateYes   IframeTranslate = "yes"
 	IframeTranslateEmpty IframeTranslate = ""
 )
 

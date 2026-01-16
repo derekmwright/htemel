@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func TimeTernary(condition bool, true htemel.Node, false htemel.Node) *TimeEleme
 	if condition {
 		return Time(true)
 	}
-
 	return Time(false)
 }
 
 // Children appends children to this element.
 func (e *TimeElement) Children(children ...htemel.Node) *TimeElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *TimeElement) With(fn func(*TimeElement)) *TimeElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *TimeElement) Textf(format string, args ...any) *TimeElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *TimeElement) AddClass(classes ...string) *TimeElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *TimeElement) ToggleClass(class string, enable bool) *TimeElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type TimeAutocapitalize string
 
 const (
+	TimeAutocapitalizeWords      TimeAutocapitalize = "words"
 	TimeAutocapitalizeCharacters TimeAutocapitalize = "characters"
 	TimeAutocapitalizeNone       TimeAutocapitalize = "none"
 	TimeAutocapitalizeOff        TimeAutocapitalize = "off"
 	TimeAutocapitalizeOn         TimeAutocapitalize = "on"
 	TimeAutocapitalizeSentences  TimeAutocapitalize = "sentences"
-	TimeAutocapitalizeWords      TimeAutocapitalize = "words"
 )
 
 type TimeAutocorrect string
@@ -77,9 +108,9 @@ const (
 type TimeContenteditable string
 
 const (
+	TimeContenteditableTrue          TimeContenteditable = "true"
 	TimeContenteditableFalse         TimeContenteditable = "false"
 	TimeContenteditablePlaintextOnly TimeContenteditable = "plaintext-only"
-	TimeContenteditableTrue          TimeContenteditable = "true"
 	TimeContenteditableEmpty         TimeContenteditable = ""
 )
 

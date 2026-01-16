@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,20 +40,47 @@ func ImgIf(condition bool) *ImgElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *ImgElement) With(fn func(*ImgElement)) *ImgElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *ImgElement) AddClass(classes ...string) *ImgElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *ImgElement) ToggleClass(class string, enable bool) *ImgElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type ImgCrossorigin string
 
 const (
-	ImgCrossoriginAnonymous      ImgCrossorigin = "anonymous"
 	ImgCrossoriginUseCredentials ImgCrossorigin = "use-credentials"
+	ImgCrossoriginAnonymous      ImgCrossorigin = "anonymous"
 	ImgCrossoriginEmpty          ImgCrossorigin = ""
 )
 
 type ImgDecoding string
 
 const (
-	ImgDecodingAsync ImgDecoding = "async"
 	ImgDecodingAuto  ImgDecoding = "auto"
 	ImgDecodingSync  ImgDecoding = "sync"
+	ImgDecodingAsync ImgDecoding = "async"
 )
 
 type ImgLoading string
@@ -65,20 +93,20 @@ const (
 type ImgFetchpriority string
 
 const (
+	ImgFetchpriorityAuto ImgFetchpriority = "auto"
 	ImgFetchpriorityHigh ImgFetchpriority = "high"
 	ImgFetchpriorityLow  ImgFetchpriority = "low"
-	ImgFetchpriorityAuto ImgFetchpriority = "auto"
 )
 
 type ImgAutocapitalize string
 
 const (
+	ImgAutocapitalizeWords      ImgAutocapitalize = "words"
+	ImgAutocapitalizeCharacters ImgAutocapitalize = "characters"
 	ImgAutocapitalizeNone       ImgAutocapitalize = "none"
 	ImgAutocapitalizeOff        ImgAutocapitalize = "off"
 	ImgAutocapitalizeOn         ImgAutocapitalize = "on"
 	ImgAutocapitalizeSentences  ImgAutocapitalize = "sentences"
-	ImgAutocapitalizeWords      ImgAutocapitalize = "words"
-	ImgAutocapitalizeCharacters ImgAutocapitalize = "characters"
 )
 
 type ImgAutocorrect string
@@ -92,9 +120,9 @@ const (
 type ImgContenteditable string
 
 const (
+	ImgContenteditableFalse         ImgContenteditable = "false"
 	ImgContenteditablePlaintextOnly ImgContenteditable = "plaintext-only"
 	ImgContenteditableTrue          ImgContenteditable = "true"
-	ImgContenteditableFalse         ImgContenteditable = "false"
 	ImgContenteditableEmpty         ImgContenteditable = ""
 )
 
@@ -116,13 +144,13 @@ const (
 type ImgEnterkeyhint string
 
 const (
+	ImgEnterkeyhintGo       ImgEnterkeyhint = "go"
+	ImgEnterkeyhintNext     ImgEnterkeyhint = "next"
+	ImgEnterkeyhintPrevious ImgEnterkeyhint = "previous"
 	ImgEnterkeyhintSearch   ImgEnterkeyhint = "search"
 	ImgEnterkeyhintSend     ImgEnterkeyhint = "send"
 	ImgEnterkeyhintDone     ImgEnterkeyhint = "done"
 	ImgEnterkeyhintEnter    ImgEnterkeyhint = "enter"
-	ImgEnterkeyhintGo       ImgEnterkeyhint = "go"
-	ImgEnterkeyhintNext     ImgEnterkeyhint = "next"
-	ImgEnterkeyhintPrevious ImgEnterkeyhint = "previous"
 )
 
 type ImgHidden string
@@ -136,7 +164,6 @@ const (
 type ImgInputmode string
 
 const (
-	ImgInputmodeSearch  ImgInputmode = "search"
 	ImgInputmodeTel     ImgInputmode = "tel"
 	ImgInputmodeText    ImgInputmode = "text"
 	ImgInputmodeUrl     ImgInputmode = "url"
@@ -144,6 +171,7 @@ const (
 	ImgInputmodeEmail   ImgInputmode = "email"
 	ImgInputmodeNone    ImgInputmode = "none"
 	ImgInputmodeNumeric ImgInputmode = "numeric"
+	ImgInputmodeSearch  ImgInputmode = "search"
 )
 
 type ImgSpellcheck string

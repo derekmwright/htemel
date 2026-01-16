@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,33 +45,63 @@ func BlockquoteTernary(condition bool, true htemel.Node, false htemel.Node) *Blo
 	if condition {
 		return Blockquote(true)
 	}
-
 	return Blockquote(false)
 }
 
 // Children appends children to this element.
 func (e *BlockquoteElement) Children(children ...htemel.Node) *BlockquoteElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *BlockquoteElement) With(fn func(*BlockquoteElement)) *BlockquoteElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *BlockquoteElement) Textf(format string, args ...any) *BlockquoteElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *BlockquoteElement) AddClass(classes ...string) *BlockquoteElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *BlockquoteElement) ToggleClass(class string, enable bool) *BlockquoteElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type BlockquoteAutocapitalize string
 
 const (
-	BlockquoteAutocapitalizeCharacters BlockquoteAutocapitalize = "characters"
 	BlockquoteAutocapitalizeNone       BlockquoteAutocapitalize = "none"
 	BlockquoteAutocapitalizeOff        BlockquoteAutocapitalize = "off"
 	BlockquoteAutocapitalizeOn         BlockquoteAutocapitalize = "on"
 	BlockquoteAutocapitalizeSentences  BlockquoteAutocapitalize = "sentences"
 	BlockquoteAutocapitalizeWords      BlockquoteAutocapitalize = "words"
+	BlockquoteAutocapitalizeCharacters BlockquoteAutocapitalize = "characters"
 )
 
 type BlockquoteAutocorrect string
 
 const (
-	BlockquoteAutocorrectOff   BlockquoteAutocorrect = "off"
 	BlockquoteAutocorrectOn    BlockquoteAutocorrect = "on"
+	BlockquoteAutocorrectOff   BlockquoteAutocorrect = "off"
 	BlockquoteAutocorrectEmpty BlockquoteAutocorrect = ""
 )
 
@@ -101,34 +132,34 @@ const (
 type BlockquoteEnterkeyhint string
 
 const (
-	BlockquoteEnterkeyhintSearch   BlockquoteEnterkeyhint = "search"
-	BlockquoteEnterkeyhintSend     BlockquoteEnterkeyhint = "send"
 	BlockquoteEnterkeyhintDone     BlockquoteEnterkeyhint = "done"
 	BlockquoteEnterkeyhintEnter    BlockquoteEnterkeyhint = "enter"
 	BlockquoteEnterkeyhintGo       BlockquoteEnterkeyhint = "go"
 	BlockquoteEnterkeyhintNext     BlockquoteEnterkeyhint = "next"
 	BlockquoteEnterkeyhintPrevious BlockquoteEnterkeyhint = "previous"
+	BlockquoteEnterkeyhintSearch   BlockquoteEnterkeyhint = "search"
+	BlockquoteEnterkeyhintSend     BlockquoteEnterkeyhint = "send"
 )
 
 type BlockquoteHidden string
 
 const (
-	BlockquoteHiddenHidden     BlockquoteHidden = "hidden"
 	BlockquoteHiddenUntilFound BlockquoteHidden = "until-found"
+	BlockquoteHiddenHidden     BlockquoteHidden = "hidden"
 	BlockquoteHiddenEmpty      BlockquoteHidden = ""
 )
 
 type BlockquoteInputmode string
 
 const (
-	BlockquoteInputmodeUrl     BlockquoteInputmode = "url"
-	BlockquoteInputmodeDecimal BlockquoteInputmode = "decimal"
-	BlockquoteInputmodeEmail   BlockquoteInputmode = "email"
-	BlockquoteInputmodeNone    BlockquoteInputmode = "none"
 	BlockquoteInputmodeNumeric BlockquoteInputmode = "numeric"
 	BlockquoteInputmodeSearch  BlockquoteInputmode = "search"
 	BlockquoteInputmodeTel     BlockquoteInputmode = "tel"
 	BlockquoteInputmodeText    BlockquoteInputmode = "text"
+	BlockquoteInputmodeUrl     BlockquoteInputmode = "url"
+	BlockquoteInputmodeDecimal BlockquoteInputmode = "decimal"
+	BlockquoteInputmodeEmail   BlockquoteInputmode = "email"
+	BlockquoteInputmodeNone    BlockquoteInputmode = "none"
 )
 
 type BlockquoteSpellcheck string

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func SpanTernary(condition bool, true htemel.Node, false htemel.Node) *SpanEleme
 	if condition {
 		return Span(true)
 	}
-
 	return Span(false)
 }
 
 // Children appends children to this element.
 func (e *SpanElement) Children(children ...htemel.Node) *SpanElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *SpanElement) With(fn func(*SpanElement)) *SpanElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *SpanElement) Textf(format string, args ...any) *SpanElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *SpanElement) AddClass(classes ...string) *SpanElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *SpanElement) ToggleClass(class string, enable bool) *SpanElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -86,28 +117,28 @@ const (
 type SpanDir string
 
 const (
-	SpanDirRtl  SpanDir = "rtl"
 	SpanDirAuto SpanDir = "auto"
 	SpanDirLtr  SpanDir = "ltr"
+	SpanDirRtl  SpanDir = "rtl"
 )
 
 type SpanDraggable string
 
 const (
-	SpanDraggableTrue  SpanDraggable = "true"
 	SpanDraggableFalse SpanDraggable = "false"
+	SpanDraggableTrue  SpanDraggable = "true"
 )
 
 type SpanEnterkeyhint string
 
 const (
+	SpanEnterkeyhintPrevious SpanEnterkeyhint = "previous"
+	SpanEnterkeyhintSearch   SpanEnterkeyhint = "search"
+	SpanEnterkeyhintSend     SpanEnterkeyhint = "send"
 	SpanEnterkeyhintDone     SpanEnterkeyhint = "done"
 	SpanEnterkeyhintEnter    SpanEnterkeyhint = "enter"
 	SpanEnterkeyhintGo       SpanEnterkeyhint = "go"
 	SpanEnterkeyhintNext     SpanEnterkeyhint = "next"
-	SpanEnterkeyhintPrevious SpanEnterkeyhint = "previous"
-	SpanEnterkeyhintSearch   SpanEnterkeyhint = "search"
-	SpanEnterkeyhintSend     SpanEnterkeyhint = "send"
 )
 
 type SpanHidden string
@@ -121,14 +152,14 @@ const (
 type SpanInputmode string
 
 const (
+	SpanInputmodeNone    SpanInputmode = "none"
+	SpanInputmodeNumeric SpanInputmode = "numeric"
+	SpanInputmodeSearch  SpanInputmode = "search"
 	SpanInputmodeTel     SpanInputmode = "tel"
 	SpanInputmodeText    SpanInputmode = "text"
 	SpanInputmodeUrl     SpanInputmode = "url"
 	SpanInputmodeDecimal SpanInputmode = "decimal"
 	SpanInputmodeEmail   SpanInputmode = "email"
-	SpanInputmodeNone    SpanInputmode = "none"
-	SpanInputmodeNumeric SpanInputmode = "numeric"
-	SpanInputmodeSearch  SpanInputmode = "search"
 )
 
 type SpanSpellcheck string

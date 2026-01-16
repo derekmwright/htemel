@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func OptionTernary(condition bool, true htemel.Node, false htemel.Node) *OptionE
 	if condition {
 		return Option(true)
 	}
-
 	return Option(false)
 }
 
 // Children appends children to this element.
 func (e *OptionElement) Children(children ...htemel.Node) *OptionElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *OptionElement) With(fn func(*OptionElement)) *OptionElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *OptionElement) Textf(format string, args ...any) *OptionElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *OptionElement) AddClass(classes ...string) *OptionElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *OptionElement) ToggleClass(class string, enable bool) *OptionElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -101,13 +132,13 @@ const (
 type OptionEnterkeyhint string
 
 const (
-	OptionEnterkeyhintNext     OptionEnterkeyhint = "next"
-	OptionEnterkeyhintPrevious OptionEnterkeyhint = "previous"
 	OptionEnterkeyhintSearch   OptionEnterkeyhint = "search"
 	OptionEnterkeyhintSend     OptionEnterkeyhint = "send"
 	OptionEnterkeyhintDone     OptionEnterkeyhint = "done"
 	OptionEnterkeyhintEnter    OptionEnterkeyhint = "enter"
 	OptionEnterkeyhintGo       OptionEnterkeyhint = "go"
+	OptionEnterkeyhintNext     OptionEnterkeyhint = "next"
+	OptionEnterkeyhintPrevious OptionEnterkeyhint = "previous"
 )
 
 type OptionHidden string
@@ -121,14 +152,14 @@ const (
 type OptionInputmode string
 
 const (
-	OptionInputmodeText    OptionInputmode = "text"
-	OptionInputmodeUrl     OptionInputmode = "url"
-	OptionInputmodeDecimal OptionInputmode = "decimal"
-	OptionInputmodeEmail   OptionInputmode = "email"
 	OptionInputmodeNone    OptionInputmode = "none"
 	OptionInputmodeNumeric OptionInputmode = "numeric"
 	OptionInputmodeSearch  OptionInputmode = "search"
 	OptionInputmodeTel     OptionInputmode = "tel"
+	OptionInputmodeText    OptionInputmode = "text"
+	OptionInputmodeUrl     OptionInputmode = "url"
+	OptionInputmodeDecimal OptionInputmode = "decimal"
+	OptionInputmodeEmail   OptionInputmode = "email"
 )
 
 type OptionSpellcheck string
@@ -142,8 +173,8 @@ const (
 type OptionTranslate string
 
 const (
-	OptionTranslateNo    OptionTranslate = "no"
 	OptionTranslateYes   OptionTranslate = "yes"
+	OptionTranslateNo    OptionTranslate = "no"
 	OptionTranslateEmpty OptionTranslate = ""
 )
 

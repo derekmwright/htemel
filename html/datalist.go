@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func DatalistTernary(condition bool, true htemel.Node, false htemel.Node) *Datal
 	if condition {
 		return Datalist(true)
 	}
-
 	return Datalist(false)
 }
 
 // Children appends children to this element.
 func (e *DatalistElement) Children(children ...htemel.Node) *DatalistElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *DatalistElement) With(fn func(*DatalistElement)) *DatalistElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *DatalistElement) Textf(format string, args ...any) *DatalistElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *DatalistElement) AddClass(classes ...string) *DatalistElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *DatalistElement) ToggleClass(class string, enable bool) *DatalistElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type DatalistAutocapitalize string
 
 const (
+	DatalistAutocapitalizeSentences  DatalistAutocapitalize = "sentences"
+	DatalistAutocapitalizeWords      DatalistAutocapitalize = "words"
 	DatalistAutocapitalizeCharacters DatalistAutocapitalize = "characters"
 	DatalistAutocapitalizeNone       DatalistAutocapitalize = "none"
 	DatalistAutocapitalizeOff        DatalistAutocapitalize = "off"
 	DatalistAutocapitalizeOn         DatalistAutocapitalize = "on"
-	DatalistAutocapitalizeSentences  DatalistAutocapitalize = "sentences"
-	DatalistAutocapitalizeWords      DatalistAutocapitalize = "words"
 )
 
 type DatalistAutocorrect string
@@ -86,16 +117,16 @@ const (
 type DatalistDir string
 
 const (
-	DatalistDirRtl  DatalistDir = "rtl"
 	DatalistDirAuto DatalistDir = "auto"
 	DatalistDirLtr  DatalistDir = "ltr"
+	DatalistDirRtl  DatalistDir = "rtl"
 )
 
 type DatalistDraggable string
 
 const (
-	DatalistDraggableFalse DatalistDraggable = "false"
 	DatalistDraggableTrue  DatalistDraggable = "true"
+	DatalistDraggableFalse DatalistDraggable = "false"
 )
 
 type DatalistEnterkeyhint string
@@ -121,14 +152,14 @@ const (
 type DatalistInputmode string
 
 const (
-	DatalistInputmodeDecimal DatalistInputmode = "decimal"
-	DatalistInputmodeEmail   DatalistInputmode = "email"
 	DatalistInputmodeNone    DatalistInputmode = "none"
 	DatalistInputmodeNumeric DatalistInputmode = "numeric"
 	DatalistInputmodeSearch  DatalistInputmode = "search"
 	DatalistInputmodeTel     DatalistInputmode = "tel"
 	DatalistInputmodeText    DatalistInputmode = "text"
 	DatalistInputmodeUrl     DatalistInputmode = "url"
+	DatalistInputmodeDecimal DatalistInputmode = "decimal"
+	DatalistInputmodeEmail   DatalistInputmode = "email"
 )
 
 type DatalistSpellcheck string
@@ -150,8 +181,8 @@ const (
 type DatalistWritingsuggestions string
 
 const (
-	DatalistWritingsuggestionsTrue  DatalistWritingsuggestions = "true"
 	DatalistWritingsuggestionsFalse DatalistWritingsuggestions = "false"
+	DatalistWritingsuggestionsTrue  DatalistWritingsuggestions = "true"
 	DatalistWritingsuggestionsEmpty DatalistWritingsuggestions = ""
 )
 

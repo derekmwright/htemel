@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func ITernary(condition bool, true htemel.Node, false htemel.Node) *IElement {
 	if condition {
 		return I(true)
 	}
-
 	return I(false)
 }
 
 // Children appends children to this element.
 func (e *IElement) Children(children ...htemel.Node) *IElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *IElement) With(fn func(*IElement)) *IElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *IElement) Textf(format string, args ...any) *IElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *IElement) AddClass(classes ...string) *IElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *IElement) ToggleClass(class string, enable bool) *IElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -69,8 +100,8 @@ const (
 type IAutocorrect string
 
 const (
-	IAutocorrectOff   IAutocorrect = "off"
 	IAutocorrectOn    IAutocorrect = "on"
+	IAutocorrectOff   IAutocorrect = "off"
 	IAutocorrectEmpty IAutocorrect = ""
 )
 
@@ -86,9 +117,9 @@ const (
 type IDir string
 
 const (
+	IDirRtl  IDir = "rtl"
 	IDirAuto IDir = "auto"
 	IDirLtr  IDir = "ltr"
-	IDirRtl  IDir = "rtl"
 )
 
 type IDraggable string
@@ -101,13 +132,13 @@ const (
 type IEnterkeyhint string
 
 const (
+	IEnterkeyhintDone     IEnterkeyhint = "done"
+	IEnterkeyhintEnter    IEnterkeyhint = "enter"
 	IEnterkeyhintGo       IEnterkeyhint = "go"
 	IEnterkeyhintNext     IEnterkeyhint = "next"
 	IEnterkeyhintPrevious IEnterkeyhint = "previous"
 	IEnterkeyhintSearch   IEnterkeyhint = "search"
 	IEnterkeyhintSend     IEnterkeyhint = "send"
-	IEnterkeyhintDone     IEnterkeyhint = "done"
-	IEnterkeyhintEnter    IEnterkeyhint = "enter"
 )
 
 type IHidden string
@@ -121,7 +152,6 @@ const (
 type IInputmode string
 
 const (
-	IInputmodeSearch  IInputmode = "search"
 	IInputmodeTel     IInputmode = "tel"
 	IInputmodeText    IInputmode = "text"
 	IInputmodeUrl     IInputmode = "url"
@@ -129,6 +159,7 @@ const (
 	IInputmodeEmail   IInputmode = "email"
 	IInputmodeNone    IInputmode = "none"
 	IInputmodeNumeric IInputmode = "numeric"
+	IInputmodeSearch  IInputmode = "search"
 )
 
 type ISpellcheck string

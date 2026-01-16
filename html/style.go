@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func StyleTernary(condition bool, true htemel.Node, false htemel.Node) *StyleEle
 	if condition {
 		return Style(true)
 	}
-
 	return Style(false)
 }
 
 // Children appends children to this element.
 func (e *StyleElement) Children(children ...htemel.Node) *StyleElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *StyleElement) With(fn func(*StyleElement)) *StyleElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *StyleElement) Textf(format string, args ...any) *StyleElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *StyleElement) AddClass(classes ...string) *StyleElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *StyleElement) ToggleClass(class string, enable bool) *StyleElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -69,8 +100,8 @@ const (
 type StyleAutocorrect string
 
 const (
-	StyleAutocorrectOn    StyleAutocorrect = "on"
 	StyleAutocorrectOff   StyleAutocorrect = "off"
+	StyleAutocorrectOn    StyleAutocorrect = "on"
 	StyleAutocorrectEmpty StyleAutocorrect = ""
 )
 
@@ -86,9 +117,9 @@ const (
 type StyleDir string
 
 const (
-	StyleDirAuto StyleDir = "auto"
 	StyleDirLtr  StyleDir = "ltr"
 	StyleDirRtl  StyleDir = "rtl"
+	StyleDirAuto StyleDir = "auto"
 )
 
 type StyleDraggable string
@@ -101,13 +132,13 @@ const (
 type StyleEnterkeyhint string
 
 const (
-	StyleEnterkeyhintNext     StyleEnterkeyhint = "next"
-	StyleEnterkeyhintPrevious StyleEnterkeyhint = "previous"
-	StyleEnterkeyhintSearch   StyleEnterkeyhint = "search"
 	StyleEnterkeyhintSend     StyleEnterkeyhint = "send"
 	StyleEnterkeyhintDone     StyleEnterkeyhint = "done"
 	StyleEnterkeyhintEnter    StyleEnterkeyhint = "enter"
 	StyleEnterkeyhintGo       StyleEnterkeyhint = "go"
+	StyleEnterkeyhintNext     StyleEnterkeyhint = "next"
+	StyleEnterkeyhintPrevious StyleEnterkeyhint = "previous"
+	StyleEnterkeyhintSearch   StyleEnterkeyhint = "search"
 )
 
 type StyleHidden string
@@ -121,21 +152,21 @@ const (
 type StyleInputmode string
 
 const (
-	StyleInputmodeDecimal StyleInputmode = "decimal"
-	StyleInputmodeEmail   StyleInputmode = "email"
-	StyleInputmodeNone    StyleInputmode = "none"
 	StyleInputmodeNumeric StyleInputmode = "numeric"
 	StyleInputmodeSearch  StyleInputmode = "search"
 	StyleInputmodeTel     StyleInputmode = "tel"
 	StyleInputmodeText    StyleInputmode = "text"
 	StyleInputmodeUrl     StyleInputmode = "url"
+	StyleInputmodeDecimal StyleInputmode = "decimal"
+	StyleInputmodeEmail   StyleInputmode = "email"
+	StyleInputmodeNone    StyleInputmode = "none"
 )
 
 type StyleSpellcheck string
 
 const (
-	StyleSpellcheckFalse StyleSpellcheck = "false"
 	StyleSpellcheckTrue  StyleSpellcheck = "true"
+	StyleSpellcheckFalse StyleSpellcheck = "false"
 	StyleSpellcheckEmpty StyleSpellcheck = ""
 )
 

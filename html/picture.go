@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func PictureTernary(condition bool, true htemel.Node, false htemel.Node) *Pictur
 	if condition {
 		return Picture(true)
 	}
-
 	return Picture(false)
 }
 
 // Children appends children to this element.
 func (e *PictureElement) Children(children ...htemel.Node) *PictureElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *PictureElement) With(fn func(*PictureElement)) *PictureElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *PictureElement) Textf(format string, args ...any) *PictureElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *PictureElement) AddClass(classes ...string) *PictureElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *PictureElement) ToggleClass(class string, enable bool) *PictureElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type PictureAutocapitalize string
 
 const (
-	PictureAutocapitalizeWords      PictureAutocapitalize = "words"
-	PictureAutocapitalizeCharacters PictureAutocapitalize = "characters"
 	PictureAutocapitalizeNone       PictureAutocapitalize = "none"
 	PictureAutocapitalizeOff        PictureAutocapitalize = "off"
 	PictureAutocapitalizeOn         PictureAutocapitalize = "on"
 	PictureAutocapitalizeSentences  PictureAutocapitalize = "sentences"
+	PictureAutocapitalizeWords      PictureAutocapitalize = "words"
+	PictureAutocapitalizeCharacters PictureAutocapitalize = "characters"
 )
 
 type PictureAutocorrect string
@@ -77,9 +108,9 @@ const (
 type PictureContenteditable string
 
 const (
+	PictureContenteditableFalse         PictureContenteditable = "false"
 	PictureContenteditablePlaintextOnly PictureContenteditable = "plaintext-only"
 	PictureContenteditableTrue          PictureContenteditable = "true"
-	PictureContenteditableFalse         PictureContenteditable = "false"
 	PictureContenteditableEmpty         PictureContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type PictureEnterkeyhint string
 
 const (
-	PictureEnterkeyhintEnter    PictureEnterkeyhint = "enter"
 	PictureEnterkeyhintGo       PictureEnterkeyhint = "go"
 	PictureEnterkeyhintNext     PictureEnterkeyhint = "next"
 	PictureEnterkeyhintPrevious PictureEnterkeyhint = "previous"
 	PictureEnterkeyhintSearch   PictureEnterkeyhint = "search"
 	PictureEnterkeyhintSend     PictureEnterkeyhint = "send"
 	PictureEnterkeyhintDone     PictureEnterkeyhint = "done"
+	PictureEnterkeyhintEnter    PictureEnterkeyhint = "enter"
 )
 
 type PictureHidden string
@@ -150,8 +181,8 @@ const (
 type PictureWritingsuggestions string
 
 const (
-	PictureWritingsuggestionsTrue  PictureWritingsuggestions = "true"
 	PictureWritingsuggestionsFalse PictureWritingsuggestions = "false"
+	PictureWritingsuggestionsTrue  PictureWritingsuggestions = "true"
 	PictureWritingsuggestionsEmpty PictureWritingsuggestions = ""
 )
 

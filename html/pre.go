@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func PreTernary(condition bool, true htemel.Node, false htemel.Node) *PreElement
 	if condition {
 		return Pre(true)
 	}
-
 	return Pre(false)
 }
 
 // Children appends children to this element.
 func (e *PreElement) Children(children ...htemel.Node) *PreElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *PreElement) With(fn func(*PreElement)) *PreElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *PreElement) Textf(format string, args ...any) *PreElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *PreElement) AddClass(classes ...string) *PreElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *PreElement) ToggleClass(class string, enable bool) *PreElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type PreAutocapitalize string
 
 const (
-	PreAutocapitalizeOn         PreAutocapitalize = "on"
-	PreAutocapitalizeSentences  PreAutocapitalize = "sentences"
-	PreAutocapitalizeWords      PreAutocapitalize = "words"
 	PreAutocapitalizeCharacters PreAutocapitalize = "characters"
 	PreAutocapitalizeNone       PreAutocapitalize = "none"
 	PreAutocapitalizeOff        PreAutocapitalize = "off"
+	PreAutocapitalizeOn         PreAutocapitalize = "on"
+	PreAutocapitalizeSentences  PreAutocapitalize = "sentences"
+	PreAutocapitalizeWords      PreAutocapitalize = "words"
 )
 
 type PreAutocorrect string
@@ -77,25 +108,25 @@ const (
 type PreContenteditable string
 
 const (
+	PreContenteditableTrue          PreContenteditable = "true"
 	PreContenteditableFalse         PreContenteditable = "false"
 	PreContenteditablePlaintextOnly PreContenteditable = "plaintext-only"
-	PreContenteditableTrue          PreContenteditable = "true"
 	PreContenteditableEmpty         PreContenteditable = ""
 )
 
 type PreDir string
 
 const (
+	PreDirAuto PreDir = "auto"
 	PreDirLtr  PreDir = "ltr"
 	PreDirRtl  PreDir = "rtl"
-	PreDirAuto PreDir = "auto"
 )
 
 type PreDraggable string
 
 const (
-	PreDraggableTrue  PreDraggable = "true"
 	PreDraggableFalse PreDraggable = "false"
+	PreDraggableTrue  PreDraggable = "true"
 )
 
 type PreEnterkeyhint string
@@ -121,14 +152,14 @@ const (
 type PreInputmode string
 
 const (
+	PreInputmodeEmail   PreInputmode = "email"
+	PreInputmodeNone    PreInputmode = "none"
 	PreInputmodeNumeric PreInputmode = "numeric"
 	PreInputmodeSearch  PreInputmode = "search"
 	PreInputmodeTel     PreInputmode = "tel"
 	PreInputmodeText    PreInputmode = "text"
 	PreInputmodeUrl     PreInputmode = "url"
 	PreInputmodeDecimal PreInputmode = "decimal"
-	PreInputmodeEmail   PreInputmode = "email"
-	PreInputmodeNone    PreInputmode = "none"
 )
 
 type PreSpellcheck string

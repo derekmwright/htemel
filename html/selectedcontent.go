@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func SelectedcontentTernary(condition bool, true htemel.Node, false htemel.Node)
 	if condition {
 		return Selectedcontent(true)
 	}
-
 	return Selectedcontent(false)
 }
 
 // Children appends children to this element.
 func (e *SelectedcontentElement) Children(children ...htemel.Node) *SelectedcontentElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *SelectedcontentElement) With(fn func(*SelectedcontentElement)) *SelectedcontentElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *SelectedcontentElement) Textf(format string, args ...any) *SelectedcontentElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *SelectedcontentElement) AddClass(classes ...string) *SelectedcontentElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *SelectedcontentElement) ToggleClass(class string, enable bool) *SelectedcontentElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type SelectedcontentAutocapitalize string
 
 const (
+	SelectedcontentAutocapitalizeCharacters SelectedcontentAutocapitalize = "characters"
 	SelectedcontentAutocapitalizeNone       SelectedcontentAutocapitalize = "none"
 	SelectedcontentAutocapitalizeOff        SelectedcontentAutocapitalize = "off"
 	SelectedcontentAutocapitalizeOn         SelectedcontentAutocapitalize = "on"
 	SelectedcontentAutocapitalizeSentences  SelectedcontentAutocapitalize = "sentences"
 	SelectedcontentAutocapitalizeWords      SelectedcontentAutocapitalize = "words"
-	SelectedcontentAutocapitalizeCharacters SelectedcontentAutocapitalize = "characters"
 )
 
 type SelectedcontentAutocorrect string
@@ -94,8 +125,8 @@ const (
 type SelectedcontentDraggable string
 
 const (
-	SelectedcontentDraggableTrue  SelectedcontentDraggable = "true"
 	SelectedcontentDraggableFalse SelectedcontentDraggable = "false"
+	SelectedcontentDraggableTrue  SelectedcontentDraggable = "true"
 )
 
 type SelectedcontentEnterkeyhint string
@@ -113,22 +144,22 @@ const (
 type SelectedcontentHidden string
 
 const (
-	SelectedcontentHiddenUntilFound SelectedcontentHidden = "until-found"
 	SelectedcontentHiddenHidden     SelectedcontentHidden = "hidden"
+	SelectedcontentHiddenUntilFound SelectedcontentHidden = "until-found"
 	SelectedcontentHiddenEmpty      SelectedcontentHidden = ""
 )
 
 type SelectedcontentInputmode string
 
 const (
-	SelectedcontentInputmodeNumeric SelectedcontentInputmode = "numeric"
-	SelectedcontentInputmodeSearch  SelectedcontentInputmode = "search"
-	SelectedcontentInputmodeTel     SelectedcontentInputmode = "tel"
-	SelectedcontentInputmodeText    SelectedcontentInputmode = "text"
 	SelectedcontentInputmodeUrl     SelectedcontentInputmode = "url"
 	SelectedcontentInputmodeDecimal SelectedcontentInputmode = "decimal"
 	SelectedcontentInputmodeEmail   SelectedcontentInputmode = "email"
 	SelectedcontentInputmodeNone    SelectedcontentInputmode = "none"
+	SelectedcontentInputmodeNumeric SelectedcontentInputmode = "numeric"
+	SelectedcontentInputmodeSearch  SelectedcontentInputmode = "search"
+	SelectedcontentInputmodeTel     SelectedcontentInputmode = "tel"
+	SelectedcontentInputmodeText    SelectedcontentInputmode = "text"
 )
 
 type SelectedcontentSpellcheck string

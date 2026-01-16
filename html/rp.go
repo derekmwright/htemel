@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func RpTernary(condition bool, true htemel.Node, false htemel.Node) *RpElement {
 	if condition {
 		return Rp(true)
 	}
-
 	return Rp(false)
 }
 
 // Children appends children to this element.
 func (e *RpElement) Children(children ...htemel.Node) *RpElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *RpElement) With(fn func(*RpElement)) *RpElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *RpElement) Textf(format string, args ...any) *RpElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *RpElement) AddClass(classes ...string) *RpElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *RpElement) ToggleClass(class string, enable bool) *RpElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type RpAutocapitalize string
 
 const (
-	RpAutocapitalizeWords      RpAutocapitalize = "words"
-	RpAutocapitalizeCharacters RpAutocapitalize = "characters"
 	RpAutocapitalizeNone       RpAutocapitalize = "none"
 	RpAutocapitalizeOff        RpAutocapitalize = "off"
 	RpAutocapitalizeOn         RpAutocapitalize = "on"
 	RpAutocapitalizeSentences  RpAutocapitalize = "sentences"
+	RpAutocapitalizeWords      RpAutocapitalize = "words"
+	RpAutocapitalizeCharacters RpAutocapitalize = "characters"
 )
 
 type RpAutocorrect string
@@ -101,13 +132,13 @@ const (
 type RpEnterkeyhint string
 
 const (
+	RpEnterkeyhintSend     RpEnterkeyhint = "send"
+	RpEnterkeyhintDone     RpEnterkeyhint = "done"
+	RpEnterkeyhintEnter    RpEnterkeyhint = "enter"
 	RpEnterkeyhintGo       RpEnterkeyhint = "go"
 	RpEnterkeyhintNext     RpEnterkeyhint = "next"
 	RpEnterkeyhintPrevious RpEnterkeyhint = "previous"
 	RpEnterkeyhintSearch   RpEnterkeyhint = "search"
-	RpEnterkeyhintSend     RpEnterkeyhint = "send"
-	RpEnterkeyhintDone     RpEnterkeyhint = "done"
-	RpEnterkeyhintEnter    RpEnterkeyhint = "enter"
 )
 
 type RpHidden string
@@ -121,14 +152,14 @@ const (
 type RpInputmode string
 
 const (
+	RpInputmodeText    RpInputmode = "text"
+	RpInputmodeUrl     RpInputmode = "url"
+	RpInputmodeDecimal RpInputmode = "decimal"
 	RpInputmodeEmail   RpInputmode = "email"
 	RpInputmodeNone    RpInputmode = "none"
 	RpInputmodeNumeric RpInputmode = "numeric"
 	RpInputmodeSearch  RpInputmode = "search"
 	RpInputmodeTel     RpInputmode = "tel"
-	RpInputmodeText    RpInputmode = "text"
-	RpInputmodeUrl     RpInputmode = "url"
-	RpInputmodeDecimal RpInputmode = "decimal"
 )
 
 type RpSpellcheck string
@@ -150,8 +181,8 @@ const (
 type RpWritingsuggestions string
 
 const (
-	RpWritingsuggestionsTrue  RpWritingsuggestions = "true"
 	RpWritingsuggestionsFalse RpWritingsuggestions = "false"
+	RpWritingsuggestionsTrue  RpWritingsuggestions = "true"
 	RpWritingsuggestionsEmpty RpWritingsuggestions = ""
 )
 

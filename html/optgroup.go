@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func OptgroupTernary(condition bool, true htemel.Node, false htemel.Node) *Optgr
 	if condition {
 		return Optgroup(true)
 	}
-
 	return Optgroup(false)
 }
 
 // Children appends children to this element.
 func (e *OptgroupElement) Children(children ...htemel.Node) *OptgroupElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *OptgroupElement) With(fn func(*OptgroupElement)) *OptgroupElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *OptgroupElement) Textf(format string, args ...any) *OptgroupElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *OptgroupElement) AddClass(classes ...string) *OptgroupElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *OptgroupElement) ToggleClass(class string, enable bool) *OptgroupElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type OptgroupAutocapitalize string
 
 const (
-	OptgroupAutocapitalizeOn         OptgroupAutocapitalize = "on"
-	OptgroupAutocapitalizeSentences  OptgroupAutocapitalize = "sentences"
 	OptgroupAutocapitalizeWords      OptgroupAutocapitalize = "words"
 	OptgroupAutocapitalizeCharacters OptgroupAutocapitalize = "characters"
 	OptgroupAutocapitalizeNone       OptgroupAutocapitalize = "none"
 	OptgroupAutocapitalizeOff        OptgroupAutocapitalize = "off"
+	OptgroupAutocapitalizeOn         OptgroupAutocapitalize = "on"
+	OptgroupAutocapitalizeSentences  OptgroupAutocapitalize = "sentences"
 )
 
 type OptgroupAutocorrect string
@@ -94,20 +125,20 @@ const (
 type OptgroupDraggable string
 
 const (
-	OptgroupDraggableTrue  OptgroupDraggable = "true"
 	OptgroupDraggableFalse OptgroupDraggable = "false"
+	OptgroupDraggableTrue  OptgroupDraggable = "true"
 )
 
 type OptgroupEnterkeyhint string
 
 const (
-	OptgroupEnterkeyhintPrevious OptgroupEnterkeyhint = "previous"
-	OptgroupEnterkeyhintSearch   OptgroupEnterkeyhint = "search"
-	OptgroupEnterkeyhintSend     OptgroupEnterkeyhint = "send"
 	OptgroupEnterkeyhintDone     OptgroupEnterkeyhint = "done"
 	OptgroupEnterkeyhintEnter    OptgroupEnterkeyhint = "enter"
 	OptgroupEnterkeyhintGo       OptgroupEnterkeyhint = "go"
 	OptgroupEnterkeyhintNext     OptgroupEnterkeyhint = "next"
+	OptgroupEnterkeyhintPrevious OptgroupEnterkeyhint = "previous"
+	OptgroupEnterkeyhintSearch   OptgroupEnterkeyhint = "search"
+	OptgroupEnterkeyhintSend     OptgroupEnterkeyhint = "send"
 )
 
 type OptgroupHidden string
@@ -121,14 +152,14 @@ const (
 type OptgroupInputmode string
 
 const (
-	OptgroupInputmodeText    OptgroupInputmode = "text"
-	OptgroupInputmodeUrl     OptgroupInputmode = "url"
-	OptgroupInputmodeDecimal OptgroupInputmode = "decimal"
 	OptgroupInputmodeEmail   OptgroupInputmode = "email"
 	OptgroupInputmodeNone    OptgroupInputmode = "none"
 	OptgroupInputmodeNumeric OptgroupInputmode = "numeric"
 	OptgroupInputmodeSearch  OptgroupInputmode = "search"
 	OptgroupInputmodeTel     OptgroupInputmode = "tel"
+	OptgroupInputmodeText    OptgroupInputmode = "text"
+	OptgroupInputmodeUrl     OptgroupInputmode = "url"
+	OptgroupInputmodeDecimal OptgroupInputmode = "decimal"
 )
 
 type OptgroupSpellcheck string
@@ -142,8 +173,8 @@ const (
 type OptgroupTranslate string
 
 const (
-	OptgroupTranslateNo    OptgroupTranslate = "no"
 	OptgroupTranslateYes   OptgroupTranslate = "yes"
+	OptgroupTranslateNo    OptgroupTranslate = "no"
 	OptgroupTranslateEmpty OptgroupTranslate = ""
 )
 

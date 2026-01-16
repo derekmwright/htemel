@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,15 +40,42 @@ func EmbedIf(condition bool) *EmbedElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *EmbedElement) With(fn func(*EmbedElement)) *EmbedElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *EmbedElement) AddClass(classes ...string) *EmbedElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *EmbedElement) ToggleClass(class string, enable bool) *EmbedElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type EmbedAutocapitalize string
 
 const (
+	EmbedAutocapitalizeCharacters EmbedAutocapitalize = "characters"
 	EmbedAutocapitalizeNone       EmbedAutocapitalize = "none"
 	EmbedAutocapitalizeOff        EmbedAutocapitalize = "off"
 	EmbedAutocapitalizeOn         EmbedAutocapitalize = "on"
 	EmbedAutocapitalizeSentences  EmbedAutocapitalize = "sentences"
 	EmbedAutocapitalizeWords      EmbedAutocapitalize = "words"
-	EmbedAutocapitalizeCharacters EmbedAutocapitalize = "characters"
 )
 
 type EmbedAutocorrect string
@@ -61,9 +89,9 @@ const (
 type EmbedContenteditable string
 
 const (
+	EmbedContenteditableTrue          EmbedContenteditable = "true"
 	EmbedContenteditableFalse         EmbedContenteditable = "false"
 	EmbedContenteditablePlaintextOnly EmbedContenteditable = "plaintext-only"
-	EmbedContenteditableTrue          EmbedContenteditable = "true"
 	EmbedContenteditableEmpty         EmbedContenteditable = ""
 )
 
@@ -85,13 +113,13 @@ const (
 type EmbedEnterkeyhint string
 
 const (
-	EmbedEnterkeyhintSearch   EmbedEnterkeyhint = "search"
-	EmbedEnterkeyhintSend     EmbedEnterkeyhint = "send"
 	EmbedEnterkeyhintDone     EmbedEnterkeyhint = "done"
 	EmbedEnterkeyhintEnter    EmbedEnterkeyhint = "enter"
 	EmbedEnterkeyhintGo       EmbedEnterkeyhint = "go"
 	EmbedEnterkeyhintNext     EmbedEnterkeyhint = "next"
 	EmbedEnterkeyhintPrevious EmbedEnterkeyhint = "previous"
+	EmbedEnterkeyhintSearch   EmbedEnterkeyhint = "search"
+	EmbedEnterkeyhintSend     EmbedEnterkeyhint = "send"
 )
 
 type EmbedHidden string
@@ -105,14 +133,14 @@ const (
 type EmbedInputmode string
 
 const (
+	EmbedInputmodeNumeric EmbedInputmode = "numeric"
+	EmbedInputmodeSearch  EmbedInputmode = "search"
+	EmbedInputmodeTel     EmbedInputmode = "tel"
 	EmbedInputmodeText    EmbedInputmode = "text"
 	EmbedInputmodeUrl     EmbedInputmode = "url"
 	EmbedInputmodeDecimal EmbedInputmode = "decimal"
 	EmbedInputmodeEmail   EmbedInputmode = "email"
 	EmbedInputmodeNone    EmbedInputmode = "none"
-	EmbedInputmodeNumeric EmbedInputmode = "numeric"
-	EmbedInputmodeSearch  EmbedInputmode = "search"
-	EmbedInputmodeTel     EmbedInputmode = "tel"
 )
 
 type EmbedSpellcheck string

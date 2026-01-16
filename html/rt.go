@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func RtTernary(condition bool, true htemel.Node, false htemel.Node) *RtElement {
 	if condition {
 		return Rt(true)
 	}
-
 	return Rt(false)
 }
 
 // Children appends children to this element.
 func (e *RtElement) Children(children ...htemel.Node) *RtElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *RtElement) With(fn func(*RtElement)) *RtElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *RtElement) Textf(format string, args ...any) *RtElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *RtElement) AddClass(classes ...string) *RtElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *RtElement) ToggleClass(class string, enable bool) *RtElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type RtAutocapitalize string
 
 const (
-	RtAutocapitalizeOff        RtAutocapitalize = "off"
-	RtAutocapitalizeOn         RtAutocapitalize = "on"
-	RtAutocapitalizeSentences  RtAutocapitalize = "sentences"
 	RtAutocapitalizeWords      RtAutocapitalize = "words"
 	RtAutocapitalizeCharacters RtAutocapitalize = "characters"
 	RtAutocapitalizeNone       RtAutocapitalize = "none"
+	RtAutocapitalizeOff        RtAutocapitalize = "off"
+	RtAutocapitalizeOn         RtAutocapitalize = "on"
+	RtAutocapitalizeSentences  RtAutocapitalize = "sentences"
 )
 
 type RtAutocorrect string
@@ -77,9 +108,9 @@ const (
 type RtContenteditable string
 
 const (
-	RtContenteditableTrue          RtContenteditable = "true"
 	RtContenteditableFalse         RtContenteditable = "false"
 	RtContenteditablePlaintextOnly RtContenteditable = "plaintext-only"
+	RtContenteditableTrue          RtContenteditable = "true"
 	RtContenteditableEmpty         RtContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type RtEnterkeyhint string
 
 const (
-	RtEnterkeyhintGo       RtEnterkeyhint = "go"
 	RtEnterkeyhintNext     RtEnterkeyhint = "next"
 	RtEnterkeyhintPrevious RtEnterkeyhint = "previous"
 	RtEnterkeyhintSearch   RtEnterkeyhint = "search"
 	RtEnterkeyhintSend     RtEnterkeyhint = "send"
 	RtEnterkeyhintDone     RtEnterkeyhint = "done"
 	RtEnterkeyhintEnter    RtEnterkeyhint = "enter"
+	RtEnterkeyhintGo       RtEnterkeyhint = "go"
 )
 
 type RtHidden string
@@ -121,7 +152,6 @@ const (
 type RtInputmode string
 
 const (
-	RtInputmodeTel     RtInputmode = "tel"
 	RtInputmodeText    RtInputmode = "text"
 	RtInputmodeUrl     RtInputmode = "url"
 	RtInputmodeDecimal RtInputmode = "decimal"
@@ -129,6 +159,7 @@ const (
 	RtInputmodeNone    RtInputmode = "none"
 	RtInputmodeNumeric RtInputmode = "numeric"
 	RtInputmodeSearch  RtInputmode = "search"
+	RtInputmodeTel     RtInputmode = "tel"
 )
 
 type RtSpellcheck string

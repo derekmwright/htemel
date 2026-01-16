@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func CaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Captio
 	if condition {
 		return Caption(true)
 	}
-
 	return Caption(false)
 }
 
 // Children appends children to this element.
 func (e *CaptionElement) Children(children ...htemel.Node) *CaptionElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *CaptionElement) With(fn func(*CaptionElement)) *CaptionElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *CaptionElement) Textf(format string, args ...any) *CaptionElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *CaptionElement) AddClass(classes ...string) *CaptionElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *CaptionElement) ToggleClass(class string, enable bool) *CaptionElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type CaptionAutocapitalize string
 
 const (
+	CaptionAutocapitalizeSentences  CaptionAutocapitalize = "sentences"
+	CaptionAutocapitalizeWords      CaptionAutocapitalize = "words"
 	CaptionAutocapitalizeCharacters CaptionAutocapitalize = "characters"
 	CaptionAutocapitalizeNone       CaptionAutocapitalize = "none"
 	CaptionAutocapitalizeOff        CaptionAutocapitalize = "off"
 	CaptionAutocapitalizeOn         CaptionAutocapitalize = "on"
-	CaptionAutocapitalizeSentences  CaptionAutocapitalize = "sentences"
-	CaptionAutocapitalizeWords      CaptionAutocapitalize = "words"
 )
 
 type CaptionAutocorrect string
@@ -86,9 +117,9 @@ const (
 type CaptionDir string
 
 const (
-	CaptionDirAuto CaptionDir = "auto"
 	CaptionDirLtr  CaptionDir = "ltr"
 	CaptionDirRtl  CaptionDir = "rtl"
+	CaptionDirAuto CaptionDir = "auto"
 )
 
 type CaptionDraggable string
@@ -101,13 +132,13 @@ const (
 type CaptionEnterkeyhint string
 
 const (
-	CaptionEnterkeyhintPrevious CaptionEnterkeyhint = "previous"
 	CaptionEnterkeyhintSearch   CaptionEnterkeyhint = "search"
 	CaptionEnterkeyhintSend     CaptionEnterkeyhint = "send"
 	CaptionEnterkeyhintDone     CaptionEnterkeyhint = "done"
 	CaptionEnterkeyhintEnter    CaptionEnterkeyhint = "enter"
 	CaptionEnterkeyhintGo       CaptionEnterkeyhint = "go"
 	CaptionEnterkeyhintNext     CaptionEnterkeyhint = "next"
+	CaptionEnterkeyhintPrevious CaptionEnterkeyhint = "previous"
 )
 
 type CaptionHidden string
@@ -121,21 +152,21 @@ const (
 type CaptionInputmode string
 
 const (
-	CaptionInputmodeNumeric CaptionInputmode = "numeric"
-	CaptionInputmodeSearch  CaptionInputmode = "search"
 	CaptionInputmodeTel     CaptionInputmode = "tel"
 	CaptionInputmodeText    CaptionInputmode = "text"
 	CaptionInputmodeUrl     CaptionInputmode = "url"
 	CaptionInputmodeDecimal CaptionInputmode = "decimal"
 	CaptionInputmodeEmail   CaptionInputmode = "email"
 	CaptionInputmodeNone    CaptionInputmode = "none"
+	CaptionInputmodeNumeric CaptionInputmode = "numeric"
+	CaptionInputmodeSearch  CaptionInputmode = "search"
 )
 
 type CaptionSpellcheck string
 
 const (
-	CaptionSpellcheckFalse CaptionSpellcheck = "false"
 	CaptionSpellcheckTrue  CaptionSpellcheck = "true"
+	CaptionSpellcheckFalse CaptionSpellcheck = "false"
 	CaptionSpellcheckEmpty CaptionSpellcheck = ""
 )
 

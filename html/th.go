@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func ThTernary(condition bool, true htemel.Node, false htemel.Node) *ThElement {
 	if condition {
 		return Th(true)
 	}
-
 	return Th(false)
 }
 
 // Children appends children to this element.
 func (e *ThElement) Children(children ...htemel.Node) *ThElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *ThElement) With(fn func(*ThElement)) *ThElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *ThElement) Textf(format string, args ...any) *ThElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *ThElement) AddClass(classes ...string) *ThElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *ThElement) ToggleClass(class string, enable bool) *ThElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type ThAutocapitalize string
 
 const (
+	ThAutocapitalizeWords      ThAutocapitalize = "words"
 	ThAutocapitalizeCharacters ThAutocapitalize = "characters"
 	ThAutocapitalizeNone       ThAutocapitalize = "none"
 	ThAutocapitalizeOff        ThAutocapitalize = "off"
 	ThAutocapitalizeOn         ThAutocapitalize = "on"
 	ThAutocapitalizeSentences  ThAutocapitalize = "sentences"
-	ThAutocapitalizeWords      ThAutocapitalize = "words"
 )
 
 type ThAutocorrect string
@@ -86,9 +117,9 @@ const (
 type ThDir string
 
 const (
-	ThDirLtr  ThDir = "ltr"
 	ThDirRtl  ThDir = "rtl"
 	ThDirAuto ThDir = "auto"
+	ThDirLtr  ThDir = "ltr"
 )
 
 type ThDraggable string
@@ -121,14 +152,14 @@ const (
 type ThInputmode string
 
 const (
-	ThInputmodeText    ThInputmode = "text"
-	ThInputmodeUrl     ThInputmode = "url"
-	ThInputmodeDecimal ThInputmode = "decimal"
 	ThInputmodeEmail   ThInputmode = "email"
 	ThInputmodeNone    ThInputmode = "none"
 	ThInputmodeNumeric ThInputmode = "numeric"
 	ThInputmodeSearch  ThInputmode = "search"
 	ThInputmodeTel     ThInputmode = "tel"
+	ThInputmodeText    ThInputmode = "text"
+	ThInputmodeUrl     ThInputmode = "url"
+	ThInputmodeDecimal ThInputmode = "decimal"
 )
 
 type ThSpellcheck string
@@ -142,8 +173,8 @@ const (
 type ThTranslate string
 
 const (
-	ThTranslateNo    ThTranslate = "no"
 	ThTranslateYes   ThTranslate = "yes"
+	ThTranslateNo    ThTranslate = "no"
 	ThTranslateEmpty ThTranslate = ""
 )
 

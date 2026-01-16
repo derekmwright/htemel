@@ -29,6 +29,10 @@ func generate(pkg string, e *spec.Element) error {
 		generators.BaseCondFunc,
 		generators.BaseTernaryFunc,
 		generators.ChildrenFunc,
+		generators.WithFunc,
+		generators.TextfFunc,
+		generators.AddClassFunc,
+		generators.ToggleClassFunc,
 		generators.BuildAttributes(e),
 		generators.RenderFunc,
 	}

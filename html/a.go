@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func ATernary(condition bool, true htemel.Node, false htemel.Node) *AElement {
 	if condition {
 		return A(true)
 	}
-
 	return A(false)
 }
 
 // Children appends children to this element.
 func (e *AElement) Children(children ...htemel.Node) *AElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *AElement) With(fn func(*AElement)) *AElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *AElement) Textf(format string, args ...any) *AElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *AElement) AddClass(classes ...string) *AElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *AElement) ToggleClass(class string, enable bool) *AElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type AAutocapitalize string
 
 const (
+	AAutocapitalizeWords      AAutocapitalize = "words"
 	AAutocapitalizeCharacters AAutocapitalize = "characters"
 	AAutocapitalizeNone       AAutocapitalize = "none"
 	AAutocapitalizeOff        AAutocapitalize = "off"
 	AAutocapitalizeOn         AAutocapitalize = "on"
 	AAutocapitalizeSentences  AAutocapitalize = "sentences"
-	AAutocapitalizeWords      AAutocapitalize = "words"
 )
 
 type AAutocorrect string
@@ -77,9 +108,9 @@ const (
 type AContenteditable string
 
 const (
+	AContenteditablePlaintextOnly AContenteditable = "plaintext-only"
 	AContenteditableTrue          AContenteditable = "true"
 	AContenteditableFalse         AContenteditable = "false"
-	AContenteditablePlaintextOnly AContenteditable = "plaintext-only"
 	AContenteditableEmpty         AContenteditable = ""
 )
 
@@ -121,6 +152,7 @@ const (
 type AInputmode string
 
 const (
+	AInputmodeNone    AInputmode = "none"
 	AInputmodeNumeric AInputmode = "numeric"
 	AInputmodeSearch  AInputmode = "search"
 	AInputmodeTel     AInputmode = "tel"
@@ -128,14 +160,13 @@ const (
 	AInputmodeUrl     AInputmode = "url"
 	AInputmodeDecimal AInputmode = "decimal"
 	AInputmodeEmail   AInputmode = "email"
-	AInputmodeNone    AInputmode = "none"
 )
 
 type ASpellcheck string
 
 const (
-	ASpellcheckTrue  ASpellcheck = "true"
 	ASpellcheckFalse ASpellcheck = "false"
+	ASpellcheckTrue  ASpellcheck = "true"
 	ASpellcheckEmpty ASpellcheck = ""
 )
 

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func TfootTernary(condition bool, true htemel.Node, false htemel.Node) *TfootEle
 	if condition {
 		return Tfoot(true)
 	}
-
 	return Tfoot(false)
 }
 
 // Children appends children to this element.
 func (e *TfootElement) Children(children ...htemel.Node) *TfootElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *TfootElement) With(fn func(*TfootElement)) *TfootElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *TfootElement) Textf(format string, args ...any) *TfootElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *TfootElement) AddClass(classes ...string) *TfootElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *TfootElement) ToggleClass(class string, enable bool) *TfootElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -77,9 +108,9 @@ const (
 type TfootContenteditable string
 
 const (
-	TfootContenteditableTrue          TfootContenteditable = "true"
 	TfootContenteditableFalse         TfootContenteditable = "false"
 	TfootContenteditablePlaintextOnly TfootContenteditable = "plaintext-only"
+	TfootContenteditableTrue          TfootContenteditable = "true"
 	TfootContenteditableEmpty         TfootContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type TfootEnterkeyhint string
 
 const (
-	TfootEnterkeyhintSearch   TfootEnterkeyhint = "search"
 	TfootEnterkeyhintSend     TfootEnterkeyhint = "send"
 	TfootEnterkeyhintDone     TfootEnterkeyhint = "done"
 	TfootEnterkeyhintEnter    TfootEnterkeyhint = "enter"
 	TfootEnterkeyhintGo       TfootEnterkeyhint = "go"
 	TfootEnterkeyhintNext     TfootEnterkeyhint = "next"
 	TfootEnterkeyhintPrevious TfootEnterkeyhint = "previous"
+	TfootEnterkeyhintSearch   TfootEnterkeyhint = "search"
 )
 
 type TfootHidden string
@@ -121,7 +152,6 @@ const (
 type TfootInputmode string
 
 const (
-	TfootInputmodeEmail   TfootInputmode = "email"
 	TfootInputmodeNone    TfootInputmode = "none"
 	TfootInputmodeNumeric TfootInputmode = "numeric"
 	TfootInputmodeSearch  TfootInputmode = "search"
@@ -129,6 +159,7 @@ const (
 	TfootInputmodeText    TfootInputmode = "text"
 	TfootInputmodeUrl     TfootInputmode = "url"
 	TfootInputmodeDecimal TfootInputmode = "decimal"
+	TfootInputmodeEmail   TfootInputmode = "email"
 )
 
 type TfootSpellcheck string

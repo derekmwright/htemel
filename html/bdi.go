@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func BdiTernary(condition bool, true htemel.Node, false htemel.Node) *BdiElement
 	if condition {
 		return Bdi(true)
 	}
-
 	return Bdi(false)
 }
 
 // Children appends children to this element.
 func (e *BdiElement) Children(children ...htemel.Node) *BdiElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *BdiElement) With(fn func(*BdiElement)) *BdiElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *BdiElement) Textf(format string, args ...any) *BdiElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *BdiElement) AddClass(classes ...string) *BdiElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *BdiElement) ToggleClass(class string, enable bool) *BdiElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type BdiAutocapitalize string
 
 const (
+	BdiAutocapitalizeSentences  BdiAutocapitalize = "sentences"
+	BdiAutocapitalizeWords      BdiAutocapitalize = "words"
 	BdiAutocapitalizeCharacters BdiAutocapitalize = "characters"
 	BdiAutocapitalizeNone       BdiAutocapitalize = "none"
 	BdiAutocapitalizeOff        BdiAutocapitalize = "off"
 	BdiAutocapitalizeOn         BdiAutocapitalize = "on"
-	BdiAutocapitalizeSentences  BdiAutocapitalize = "sentences"
-	BdiAutocapitalizeWords      BdiAutocapitalize = "words"
 )
 
 type BdiAutocorrect string
@@ -86,28 +117,28 @@ const (
 type BdiDir string
 
 const (
-	BdiDirRtl  BdiDir = "rtl"
 	BdiDirAuto BdiDir = "auto"
 	BdiDirLtr  BdiDir = "ltr"
+	BdiDirRtl  BdiDir = "rtl"
 )
 
 type BdiDraggable string
 
 const (
-	BdiDraggableFalse BdiDraggable = "false"
 	BdiDraggableTrue  BdiDraggable = "true"
+	BdiDraggableFalse BdiDraggable = "false"
 )
 
 type BdiEnterkeyhint string
 
 const (
-	BdiEnterkeyhintDone     BdiEnterkeyhint = "done"
 	BdiEnterkeyhintEnter    BdiEnterkeyhint = "enter"
 	BdiEnterkeyhintGo       BdiEnterkeyhint = "go"
 	BdiEnterkeyhintNext     BdiEnterkeyhint = "next"
 	BdiEnterkeyhintPrevious BdiEnterkeyhint = "previous"
 	BdiEnterkeyhintSearch   BdiEnterkeyhint = "search"
 	BdiEnterkeyhintSend     BdiEnterkeyhint = "send"
+	BdiEnterkeyhintDone     BdiEnterkeyhint = "done"
 )
 
 type BdiHidden string
@@ -121,14 +152,14 @@ const (
 type BdiInputmode string
 
 const (
-	BdiInputmodeEmail   BdiInputmode = "email"
-	BdiInputmodeNone    BdiInputmode = "none"
-	BdiInputmodeNumeric BdiInputmode = "numeric"
 	BdiInputmodeSearch  BdiInputmode = "search"
 	BdiInputmodeTel     BdiInputmode = "tel"
 	BdiInputmodeText    BdiInputmode = "text"
 	BdiInputmodeUrl     BdiInputmode = "url"
 	BdiInputmodeDecimal BdiInputmode = "decimal"
+	BdiInputmodeEmail   BdiInputmode = "email"
+	BdiInputmodeNone    BdiInputmode = "none"
+	BdiInputmodeNumeric BdiInputmode = "numeric"
 )
 
 type BdiSpellcheck string
@@ -142,8 +173,8 @@ const (
 type BdiTranslate string
 
 const (
-	BdiTranslateNo    BdiTranslate = "no"
 	BdiTranslateYes   BdiTranslate = "yes"
+	BdiTranslateNo    BdiTranslate = "no"
 	BdiTranslateEmpty BdiTranslate = ""
 )
 

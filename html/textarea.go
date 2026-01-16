@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func TextareaTernary(condition bool, true htemel.Node, false htemel.Node) *Texta
 	if condition {
 		return Textarea(true)
 	}
-
 	return Textarea(false)
 }
 
 // Children appends children to this element.
 func (e *TextareaElement) Children(children ...htemel.Node) *TextareaElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *TextareaElement) With(fn func(*TextareaElement)) *TextareaElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *TextareaElement) Textf(format string, args ...any) *TextareaElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *TextareaElement) AddClass(classes ...string) *TextareaElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *TextareaElement) ToggleClass(class string, enable bool) *TextareaElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -65,12 +96,12 @@ const (
 type TextareaAutocapitalize string
 
 const (
-	TextareaAutocapitalizeWords      TextareaAutocapitalize = "words"
-	TextareaAutocapitalizeCharacters TextareaAutocapitalize = "characters"
 	TextareaAutocapitalizeNone       TextareaAutocapitalize = "none"
 	TextareaAutocapitalizeOff        TextareaAutocapitalize = "off"
 	TextareaAutocapitalizeOn         TextareaAutocapitalize = "on"
 	TextareaAutocapitalizeSentences  TextareaAutocapitalize = "sentences"
+	TextareaAutocapitalizeWords      TextareaAutocapitalize = "words"
+	TextareaAutocapitalizeCharacters TextareaAutocapitalize = "characters"
 )
 
 type TextareaAutocorrect string
@@ -93,41 +124,42 @@ const (
 type TextareaDir string
 
 const (
-	TextareaDirAuto TextareaDir = "auto"
 	TextareaDirLtr  TextareaDir = "ltr"
 	TextareaDirRtl  TextareaDir = "rtl"
+	TextareaDirAuto TextareaDir = "auto"
 )
 
 type TextareaDraggable string
 
 const (
-	TextareaDraggableTrue  TextareaDraggable = "true"
 	TextareaDraggableFalse TextareaDraggable = "false"
+	TextareaDraggableTrue  TextareaDraggable = "true"
 )
 
 type TextareaEnterkeyhint string
 
 const (
-	TextareaEnterkeyhintSearch   TextareaEnterkeyhint = "search"
-	TextareaEnterkeyhintSend     TextareaEnterkeyhint = "send"
 	TextareaEnterkeyhintDone     TextareaEnterkeyhint = "done"
 	TextareaEnterkeyhintEnter    TextareaEnterkeyhint = "enter"
 	TextareaEnterkeyhintGo       TextareaEnterkeyhint = "go"
 	TextareaEnterkeyhintNext     TextareaEnterkeyhint = "next"
 	TextareaEnterkeyhintPrevious TextareaEnterkeyhint = "previous"
+	TextareaEnterkeyhintSearch   TextareaEnterkeyhint = "search"
+	TextareaEnterkeyhintSend     TextareaEnterkeyhint = "send"
 )
 
 type TextareaHidden string
 
 const (
-	TextareaHiddenHidden     TextareaHidden = "hidden"
 	TextareaHiddenUntilFound TextareaHidden = "until-found"
+	TextareaHiddenHidden     TextareaHidden = "hidden"
 	TextareaHiddenEmpty      TextareaHidden = ""
 )
 
 type TextareaInputmode string
 
 const (
+	TextareaInputmodeSearch  TextareaInputmode = "search"
 	TextareaInputmodeTel     TextareaInputmode = "tel"
 	TextareaInputmodeText    TextareaInputmode = "text"
 	TextareaInputmodeUrl     TextareaInputmode = "url"
@@ -135,22 +167,21 @@ const (
 	TextareaInputmodeEmail   TextareaInputmode = "email"
 	TextareaInputmodeNone    TextareaInputmode = "none"
 	TextareaInputmodeNumeric TextareaInputmode = "numeric"
-	TextareaInputmodeSearch  TextareaInputmode = "search"
 )
 
 type TextareaSpellcheck string
 
 const (
-	TextareaSpellcheckFalse TextareaSpellcheck = "false"
 	TextareaSpellcheckTrue  TextareaSpellcheck = "true"
+	TextareaSpellcheckFalse TextareaSpellcheck = "false"
 	TextareaSpellcheckEmpty TextareaSpellcheck = ""
 )
 
 type TextareaTranslate string
 
 const (
-	TextareaTranslateYes   TextareaTranslate = "yes"
 	TextareaTranslateNo    TextareaTranslate = "no"
+	TextareaTranslateYes   TextareaTranslate = "yes"
 	TextareaTranslateEmpty TextareaTranslate = ""
 )
 

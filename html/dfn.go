@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,51 +45,81 @@ func DfnTernary(condition bool, true htemel.Node, false htemel.Node) *DfnElement
 	if condition {
 		return Dfn(true)
 	}
-
 	return Dfn(false)
 }
 
 // Children appends children to this element.
 func (e *DfnElement) Children(children ...htemel.Node) *DfnElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *DfnElement) With(fn func(*DfnElement)) *DfnElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *DfnElement) Textf(format string, args ...any) *DfnElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *DfnElement) AddClass(classes ...string) *DfnElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *DfnElement) ToggleClass(class string, enable bool) *DfnElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type DfnAutocapitalize string
 
 const (
+	DfnAutocapitalizeCharacters DfnAutocapitalize = "characters"
 	DfnAutocapitalizeNone       DfnAutocapitalize = "none"
 	DfnAutocapitalizeOff        DfnAutocapitalize = "off"
 	DfnAutocapitalizeOn         DfnAutocapitalize = "on"
 	DfnAutocapitalizeSentences  DfnAutocapitalize = "sentences"
 	DfnAutocapitalizeWords      DfnAutocapitalize = "words"
-	DfnAutocapitalizeCharacters DfnAutocapitalize = "characters"
 )
 
 type DfnAutocorrect string
 
 const (
-	DfnAutocorrectOff   DfnAutocorrect = "off"
 	DfnAutocorrectOn    DfnAutocorrect = "on"
+	DfnAutocorrectOff   DfnAutocorrect = "off"
 	DfnAutocorrectEmpty DfnAutocorrect = ""
 )
 
 type DfnContenteditable string
 
 const (
-	DfnContenteditableTrue          DfnContenteditable = "true"
 	DfnContenteditableFalse         DfnContenteditable = "false"
 	DfnContenteditablePlaintextOnly DfnContenteditable = "plaintext-only"
+	DfnContenteditableTrue          DfnContenteditable = "true"
 	DfnContenteditableEmpty         DfnContenteditable = ""
 )
 
 type DfnDir string
 
 const (
+	DfnDirAuto DfnDir = "auto"
 	DfnDirLtr  DfnDir = "ltr"
 	DfnDirRtl  DfnDir = "rtl"
-	DfnDirAuto DfnDir = "auto"
 )
 
 type DfnDraggable string
@@ -101,13 +132,13 @@ const (
 type DfnEnterkeyhint string
 
 const (
-	DfnEnterkeyhintNext     DfnEnterkeyhint = "next"
-	DfnEnterkeyhintPrevious DfnEnterkeyhint = "previous"
 	DfnEnterkeyhintSearch   DfnEnterkeyhint = "search"
 	DfnEnterkeyhintSend     DfnEnterkeyhint = "send"
 	DfnEnterkeyhintDone     DfnEnterkeyhint = "done"
 	DfnEnterkeyhintEnter    DfnEnterkeyhint = "enter"
 	DfnEnterkeyhintGo       DfnEnterkeyhint = "go"
+	DfnEnterkeyhintNext     DfnEnterkeyhint = "next"
+	DfnEnterkeyhintPrevious DfnEnterkeyhint = "previous"
 )
 
 type DfnHidden string
@@ -121,14 +152,14 @@ const (
 type DfnInputmode string
 
 const (
-	DfnInputmodeNumeric DfnInputmode = "numeric"
-	DfnInputmodeSearch  DfnInputmode = "search"
 	DfnInputmodeTel     DfnInputmode = "tel"
 	DfnInputmodeText    DfnInputmode = "text"
 	DfnInputmodeUrl     DfnInputmode = "url"
 	DfnInputmodeDecimal DfnInputmode = "decimal"
 	DfnInputmodeEmail   DfnInputmode = "email"
 	DfnInputmodeNone    DfnInputmode = "none"
+	DfnInputmodeNumeric DfnInputmode = "numeric"
+	DfnInputmodeSearch  DfnInputmode = "search"
 )
 
 type DfnSpellcheck string

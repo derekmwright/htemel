@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,42 +45,72 @@ func BTernary(condition bool, true htemel.Node, false htemel.Node) *BElement {
 	if condition {
 		return B(true)
 	}
-
 	return B(false)
 }
 
 // Children appends children to this element.
 func (e *BElement) Children(children ...htemel.Node) *BElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *BElement) With(fn func(*BElement)) *BElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *BElement) Textf(format string, args ...any) *BElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *BElement) AddClass(classes ...string) *BElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *BElement) ToggleClass(class string, enable bool) *BElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type BAutocapitalize string
 
 const (
-	BAutocapitalizeOn         BAutocapitalize = "on"
-	BAutocapitalizeSentences  BAutocapitalize = "sentences"
 	BAutocapitalizeWords      BAutocapitalize = "words"
 	BAutocapitalizeCharacters BAutocapitalize = "characters"
 	BAutocapitalizeNone       BAutocapitalize = "none"
 	BAutocapitalizeOff        BAutocapitalize = "off"
+	BAutocapitalizeOn         BAutocapitalize = "on"
+	BAutocapitalizeSentences  BAutocapitalize = "sentences"
 )
 
 type BAutocorrect string
 
 const (
-	BAutocorrectOff   BAutocorrect = "off"
 	BAutocorrectOn    BAutocorrect = "on"
+	BAutocorrectOff   BAutocorrect = "off"
 	BAutocorrectEmpty BAutocorrect = ""
 )
 
 type BContenteditable string
 
 const (
-	BContenteditableTrue          BContenteditable = "true"
 	BContenteditableFalse         BContenteditable = "false"
 	BContenteditablePlaintextOnly BContenteditable = "plaintext-only"
+	BContenteditableTrue          BContenteditable = "true"
 	BContenteditableEmpty         BContenteditable = ""
 )
 
@@ -101,34 +132,34 @@ const (
 type BEnterkeyhint string
 
 const (
+	BEnterkeyhintPrevious BEnterkeyhint = "previous"
+	BEnterkeyhintSearch   BEnterkeyhint = "search"
 	BEnterkeyhintSend     BEnterkeyhint = "send"
 	BEnterkeyhintDone     BEnterkeyhint = "done"
 	BEnterkeyhintEnter    BEnterkeyhint = "enter"
 	BEnterkeyhintGo       BEnterkeyhint = "go"
 	BEnterkeyhintNext     BEnterkeyhint = "next"
-	BEnterkeyhintPrevious BEnterkeyhint = "previous"
-	BEnterkeyhintSearch   BEnterkeyhint = "search"
 )
 
 type BHidden string
 
 const (
-	BHiddenHidden     BHidden = "hidden"
 	BHiddenUntilFound BHidden = "until-found"
+	BHiddenHidden     BHidden = "hidden"
 	BHiddenEmpty      BHidden = ""
 )
 
 type BInputmode string
 
 const (
+	BInputmodeText    BInputmode = "text"
+	BInputmodeUrl     BInputmode = "url"
+	BInputmodeDecimal BInputmode = "decimal"
 	BInputmodeEmail   BInputmode = "email"
 	BInputmodeNone    BInputmode = "none"
 	BInputmodeNumeric BInputmode = "numeric"
 	BInputmodeSearch  BInputmode = "search"
 	BInputmodeTel     BInputmode = "tel"
-	BInputmodeText    BInputmode = "text"
-	BInputmodeUrl     BInputmode = "url"
-	BInputmodeDecimal BInputmode = "decimal"
 )
 
 type BSpellcheck string
@@ -142,8 +173,8 @@ const (
 type BTranslate string
 
 const (
-	BTranslateNo    BTranslate = "no"
 	BTranslateYes   BTranslate = "yes"
+	BTranslateNo    BTranslate = "no"
 	BTranslateEmpty BTranslate = ""
 )
 

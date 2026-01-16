@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func TdTernary(condition bool, true htemel.Node, false htemel.Node) *TdElement {
 	if condition {
 		return Td(true)
 	}
-
 	return Td(false)
 }
 
 // Children appends children to this element.
 func (e *TdElement) Children(children ...htemel.Node) *TdElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *TdElement) With(fn func(*TdElement)) *TdElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *TdElement) Textf(format string, args ...any) *TdElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *TdElement) AddClass(classes ...string) *TdElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *TdElement) ToggleClass(class string, enable bool) *TdElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type TdAutocapitalize string
 
 const (
-	TdAutocapitalizeWords      TdAutocapitalize = "words"
 	TdAutocapitalizeCharacters TdAutocapitalize = "characters"
 	TdAutocapitalizeNone       TdAutocapitalize = "none"
 	TdAutocapitalizeOff        TdAutocapitalize = "off"
 	TdAutocapitalizeOn         TdAutocapitalize = "on"
 	TdAutocapitalizeSentences  TdAutocapitalize = "sentences"
+	TdAutocapitalizeWords      TdAutocapitalize = "words"
 )
 
 type TdAutocorrect string
@@ -77,9 +108,9 @@ const (
 type TdContenteditable string
 
 const (
-	TdContenteditableTrue          TdContenteditable = "true"
 	TdContenteditableFalse         TdContenteditable = "false"
 	TdContenteditablePlaintextOnly TdContenteditable = "plaintext-only"
+	TdContenteditableTrue          TdContenteditable = "true"
 	TdContenteditableEmpty         TdContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type TdEnterkeyhint string
 
 const (
+	TdEnterkeyhintEnter    TdEnterkeyhint = "enter"
+	TdEnterkeyhintGo       TdEnterkeyhint = "go"
 	TdEnterkeyhintNext     TdEnterkeyhint = "next"
 	TdEnterkeyhintPrevious TdEnterkeyhint = "previous"
 	TdEnterkeyhintSearch   TdEnterkeyhint = "search"
 	TdEnterkeyhintSend     TdEnterkeyhint = "send"
 	TdEnterkeyhintDone     TdEnterkeyhint = "done"
-	TdEnterkeyhintEnter    TdEnterkeyhint = "enter"
-	TdEnterkeyhintGo       TdEnterkeyhint = "go"
 )
 
 type TdHidden string

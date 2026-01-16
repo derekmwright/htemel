@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func FigcaptionTernary(condition bool, true htemel.Node, false htemel.Node) *Fig
 	if condition {
 		return Figcaption(true)
 	}
-
 	return Figcaption(false)
 }
 
 // Children appends children to this element.
 func (e *FigcaptionElement) Children(children ...htemel.Node) *FigcaptionElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *FigcaptionElement) With(fn func(*FigcaptionElement)) *FigcaptionElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *FigcaptionElement) Textf(format string, args ...any) *FigcaptionElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *FigcaptionElement) AddClass(classes ...string) *FigcaptionElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *FigcaptionElement) ToggleClass(class string, enable bool) *FigcaptionElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type FigcaptionAutocapitalize string
 
 const (
+	FigcaptionAutocapitalizeOn         FigcaptionAutocapitalize = "on"
 	FigcaptionAutocapitalizeSentences  FigcaptionAutocapitalize = "sentences"
 	FigcaptionAutocapitalizeWords      FigcaptionAutocapitalize = "words"
 	FigcaptionAutocapitalizeCharacters FigcaptionAutocapitalize = "characters"
 	FigcaptionAutocapitalizeNone       FigcaptionAutocapitalize = "none"
 	FigcaptionAutocapitalizeOff        FigcaptionAutocapitalize = "off"
-	FigcaptionAutocapitalizeOn         FigcaptionAutocapitalize = "on"
 )
 
 type FigcaptionAutocorrect string
@@ -94,20 +125,20 @@ const (
 type FigcaptionDraggable string
 
 const (
-	FigcaptionDraggableTrue  FigcaptionDraggable = "true"
 	FigcaptionDraggableFalse FigcaptionDraggable = "false"
+	FigcaptionDraggableTrue  FigcaptionDraggable = "true"
 )
 
 type FigcaptionEnterkeyhint string
 
 const (
-	FigcaptionEnterkeyhintGo       FigcaptionEnterkeyhint = "go"
-	FigcaptionEnterkeyhintNext     FigcaptionEnterkeyhint = "next"
-	FigcaptionEnterkeyhintPrevious FigcaptionEnterkeyhint = "previous"
 	FigcaptionEnterkeyhintSearch   FigcaptionEnterkeyhint = "search"
 	FigcaptionEnterkeyhintSend     FigcaptionEnterkeyhint = "send"
 	FigcaptionEnterkeyhintDone     FigcaptionEnterkeyhint = "done"
 	FigcaptionEnterkeyhintEnter    FigcaptionEnterkeyhint = "enter"
+	FigcaptionEnterkeyhintGo       FigcaptionEnterkeyhint = "go"
+	FigcaptionEnterkeyhintNext     FigcaptionEnterkeyhint = "next"
+	FigcaptionEnterkeyhintPrevious FigcaptionEnterkeyhint = "previous"
 )
 
 type FigcaptionHidden string
@@ -121,14 +152,14 @@ const (
 type FigcaptionInputmode string
 
 const (
-	FigcaptionInputmodeText    FigcaptionInputmode = "text"
-	FigcaptionInputmodeUrl     FigcaptionInputmode = "url"
 	FigcaptionInputmodeDecimal FigcaptionInputmode = "decimal"
 	FigcaptionInputmodeEmail   FigcaptionInputmode = "email"
 	FigcaptionInputmodeNone    FigcaptionInputmode = "none"
 	FigcaptionInputmodeNumeric FigcaptionInputmode = "numeric"
 	FigcaptionInputmodeSearch  FigcaptionInputmode = "search"
 	FigcaptionInputmodeTel     FigcaptionInputmode = "tel"
+	FigcaptionInputmodeText    FigcaptionInputmode = "text"
+	FigcaptionInputmodeUrl     FigcaptionInputmode = "url"
 )
 
 type FigcaptionSpellcheck string

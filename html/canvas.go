@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func CanvasTernary(condition bool, true htemel.Node, false htemel.Node) *CanvasE
 	if condition {
 		return Canvas(true)
 	}
-
 	return Canvas(false)
 }
 
 // Children appends children to this element.
 func (e *CanvasElement) Children(children ...htemel.Node) *CanvasElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *CanvasElement) With(fn func(*CanvasElement)) *CanvasElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *CanvasElement) Textf(format string, args ...any) *CanvasElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *CanvasElement) AddClass(classes ...string) *CanvasElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *CanvasElement) ToggleClass(class string, enable bool) *CanvasElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type CanvasAutocapitalize string
 
 const (
+	CanvasAutocapitalizeOff        CanvasAutocapitalize = "off"
+	CanvasAutocapitalizeOn         CanvasAutocapitalize = "on"
 	CanvasAutocapitalizeSentences  CanvasAutocapitalize = "sentences"
 	CanvasAutocapitalizeWords      CanvasAutocapitalize = "words"
 	CanvasAutocapitalizeCharacters CanvasAutocapitalize = "characters"
 	CanvasAutocapitalizeNone       CanvasAutocapitalize = "none"
-	CanvasAutocapitalizeOff        CanvasAutocapitalize = "off"
-	CanvasAutocapitalizeOn         CanvasAutocapitalize = "on"
 )
 
 type CanvasAutocorrect string
@@ -101,13 +132,13 @@ const (
 type CanvasEnterkeyhint string
 
 const (
+	CanvasEnterkeyhintPrevious CanvasEnterkeyhint = "previous"
+	CanvasEnterkeyhintSearch   CanvasEnterkeyhint = "search"
 	CanvasEnterkeyhintSend     CanvasEnterkeyhint = "send"
 	CanvasEnterkeyhintDone     CanvasEnterkeyhint = "done"
 	CanvasEnterkeyhintEnter    CanvasEnterkeyhint = "enter"
 	CanvasEnterkeyhintGo       CanvasEnterkeyhint = "go"
 	CanvasEnterkeyhintNext     CanvasEnterkeyhint = "next"
-	CanvasEnterkeyhintPrevious CanvasEnterkeyhint = "previous"
-	CanvasEnterkeyhintSearch   CanvasEnterkeyhint = "search"
 )
 
 type CanvasHidden string

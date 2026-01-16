@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func ArticleTernary(condition bool, true htemel.Node, false htemel.Node) *Articl
 	if condition {
 		return Article(true)
 	}
-
 	return Article(false)
 }
 
 // Children appends children to this element.
 func (e *ArticleElement) Children(children ...htemel.Node) *ArticleElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *ArticleElement) With(fn func(*ArticleElement)) *ArticleElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *ArticleElement) Textf(format string, args ...any) *ArticleElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *ArticleElement) AddClass(classes ...string) *ArticleElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *ArticleElement) ToggleClass(class string, enable bool) *ArticleElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -77,9 +108,9 @@ const (
 type ArticleContenteditable string
 
 const (
-	ArticleContenteditableFalse         ArticleContenteditable = "false"
 	ArticleContenteditablePlaintextOnly ArticleContenteditable = "plaintext-only"
 	ArticleContenteditableTrue          ArticleContenteditable = "true"
+	ArticleContenteditableFalse         ArticleContenteditable = "false"
 	ArticleContenteditableEmpty         ArticleContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type ArticleEnterkeyhint string
 
 const (
-	ArticleEnterkeyhintSend     ArticleEnterkeyhint = "send"
 	ArticleEnterkeyhintDone     ArticleEnterkeyhint = "done"
 	ArticleEnterkeyhintEnter    ArticleEnterkeyhint = "enter"
 	ArticleEnterkeyhintGo       ArticleEnterkeyhint = "go"
 	ArticleEnterkeyhintNext     ArticleEnterkeyhint = "next"
 	ArticleEnterkeyhintPrevious ArticleEnterkeyhint = "previous"
 	ArticleEnterkeyhintSearch   ArticleEnterkeyhint = "search"
+	ArticleEnterkeyhintSend     ArticleEnterkeyhint = "send"
 )
 
 type ArticleHidden string
@@ -121,14 +152,14 @@ const (
 type ArticleInputmode string
 
 const (
-	ArticleInputmodeSearch  ArticleInputmode = "search"
-	ArticleInputmodeTel     ArticleInputmode = "tel"
-	ArticleInputmodeText    ArticleInputmode = "text"
-	ArticleInputmodeUrl     ArticleInputmode = "url"
 	ArticleInputmodeDecimal ArticleInputmode = "decimal"
 	ArticleInputmodeEmail   ArticleInputmode = "email"
 	ArticleInputmodeNone    ArticleInputmode = "none"
 	ArticleInputmodeNumeric ArticleInputmode = "numeric"
+	ArticleInputmodeSearch  ArticleInputmode = "search"
+	ArticleInputmodeTel     ArticleInputmode = "tel"
+	ArticleInputmodeText    ArticleInputmode = "text"
+	ArticleInputmodeUrl     ArticleInputmode = "url"
 )
 
 type ArticleSpellcheck string
@@ -142,16 +173,16 @@ const (
 type ArticleTranslate string
 
 const (
-	ArticleTranslateNo    ArticleTranslate = "no"
 	ArticleTranslateYes   ArticleTranslate = "yes"
+	ArticleTranslateNo    ArticleTranslate = "no"
 	ArticleTranslateEmpty ArticleTranslate = ""
 )
 
 type ArticleWritingsuggestions string
 
 const (
-	ArticleWritingsuggestionsTrue  ArticleWritingsuggestions = "true"
 	ArticleWritingsuggestionsFalse ArticleWritingsuggestions = "false"
+	ArticleWritingsuggestionsTrue  ArticleWritingsuggestions = "true"
 	ArticleWritingsuggestionsEmpty ArticleWritingsuggestions = ""
 )
 

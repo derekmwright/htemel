@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func SmallTernary(condition bool, true htemel.Node, false htemel.Node) *SmallEle
 	if condition {
 		return Small(true)
 	}
-
 	return Small(false)
 }
 
 // Children appends children to this element.
 func (e *SmallElement) Children(children ...htemel.Node) *SmallElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *SmallElement) With(fn func(*SmallElement)) *SmallElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *SmallElement) Textf(format string, args ...any) *SmallElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *SmallElement) AddClass(classes ...string) *SmallElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *SmallElement) ToggleClass(class string, enable bool) *SmallElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type SmallAutocapitalize string
 
 const (
-	SmallAutocapitalizeCharacters SmallAutocapitalize = "characters"
 	SmallAutocapitalizeNone       SmallAutocapitalize = "none"
 	SmallAutocapitalizeOff        SmallAutocapitalize = "off"
 	SmallAutocapitalizeOn         SmallAutocapitalize = "on"
 	SmallAutocapitalizeSentences  SmallAutocapitalize = "sentences"
 	SmallAutocapitalizeWords      SmallAutocapitalize = "words"
+	SmallAutocapitalizeCharacters SmallAutocapitalize = "characters"
 )
 
 type SmallAutocorrect string
@@ -77,18 +108,18 @@ const (
 type SmallContenteditable string
 
 const (
-	SmallContenteditableFalse         SmallContenteditable = "false"
 	SmallContenteditablePlaintextOnly SmallContenteditable = "plaintext-only"
 	SmallContenteditableTrue          SmallContenteditable = "true"
+	SmallContenteditableFalse         SmallContenteditable = "false"
 	SmallContenteditableEmpty         SmallContenteditable = ""
 )
 
 type SmallDir string
 
 const (
-	SmallDirAuto SmallDir = "auto"
 	SmallDirLtr  SmallDir = "ltr"
 	SmallDirRtl  SmallDir = "rtl"
+	SmallDirAuto SmallDir = "auto"
 )
 
 type SmallDraggable string
@@ -101,13 +132,13 @@ const (
 type SmallEnterkeyhint string
 
 const (
-	SmallEnterkeyhintPrevious SmallEnterkeyhint = "previous"
 	SmallEnterkeyhintSearch   SmallEnterkeyhint = "search"
 	SmallEnterkeyhintSend     SmallEnterkeyhint = "send"
 	SmallEnterkeyhintDone     SmallEnterkeyhint = "done"
 	SmallEnterkeyhintEnter    SmallEnterkeyhint = "enter"
 	SmallEnterkeyhintGo       SmallEnterkeyhint = "go"
 	SmallEnterkeyhintNext     SmallEnterkeyhint = "next"
+	SmallEnterkeyhintPrevious SmallEnterkeyhint = "previous"
 )
 
 type SmallHidden string

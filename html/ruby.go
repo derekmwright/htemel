@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func RubyTernary(condition bool, true htemel.Node, false htemel.Node) *RubyEleme
 	if condition {
 		return Ruby(true)
 	}
-
 	return Ruby(false)
 }
 
 // Children appends children to this element.
 func (e *RubyElement) Children(children ...htemel.Node) *RubyElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *RubyElement) With(fn func(*RubyElement)) *RubyElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *RubyElement) Textf(format string, args ...any) *RubyElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *RubyElement) AddClass(classes ...string) *RubyElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *RubyElement) ToggleClass(class string, enable bool) *RubyElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type RubyAutocapitalize string
 
 const (
+	RubyAutocapitalizeWords      RubyAutocapitalize = "words"
+	RubyAutocapitalizeCharacters RubyAutocapitalize = "characters"
 	RubyAutocapitalizeNone       RubyAutocapitalize = "none"
 	RubyAutocapitalizeOff        RubyAutocapitalize = "off"
 	RubyAutocapitalizeOn         RubyAutocapitalize = "on"
 	RubyAutocapitalizeSentences  RubyAutocapitalize = "sentences"
-	RubyAutocapitalizeWords      RubyAutocapitalize = "words"
-	RubyAutocapitalizeCharacters RubyAutocapitalize = "characters"
 )
 
 type RubyAutocorrect string
@@ -121,14 +152,14 @@ const (
 type RubyInputmode string
 
 const (
+	RubyInputmodeEmail   RubyInputmode = "email"
+	RubyInputmodeNone    RubyInputmode = "none"
+	RubyInputmodeNumeric RubyInputmode = "numeric"
 	RubyInputmodeSearch  RubyInputmode = "search"
 	RubyInputmodeTel     RubyInputmode = "tel"
 	RubyInputmodeText    RubyInputmode = "text"
 	RubyInputmodeUrl     RubyInputmode = "url"
 	RubyInputmodeDecimal RubyInputmode = "decimal"
-	RubyInputmodeEmail   RubyInputmode = "email"
-	RubyInputmodeNone    RubyInputmode = "none"
-	RubyInputmodeNumeric RubyInputmode = "numeric"
 )
 
 type RubySpellcheck string
@@ -150,8 +181,8 @@ const (
 type RubyWritingsuggestions string
 
 const (
-	RubyWritingsuggestionsTrue  RubyWritingsuggestions = "true"
 	RubyWritingsuggestionsFalse RubyWritingsuggestions = "false"
+	RubyWritingsuggestionsTrue  RubyWritingsuggestions = "true"
 	RubyWritingsuggestionsEmpty RubyWritingsuggestions = ""
 )
 

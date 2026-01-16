@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func STernary(condition bool, true htemel.Node, false htemel.Node) *SElement {
 	if condition {
 		return S(true)
 	}
-
 	return S(false)
 }
 
 // Children appends children to this element.
 func (e *SElement) Children(children ...htemel.Node) *SElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *SElement) With(fn func(*SElement)) *SElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *SElement) Textf(format string, args ...any) *SElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *SElement) AddClass(classes ...string) *SElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *SElement) ToggleClass(class string, enable bool) *SElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -101,13 +132,13 @@ const (
 type SEnterkeyhint string
 
 const (
-	SEnterkeyhintNext     SEnterkeyhint = "next"
-	SEnterkeyhintPrevious SEnterkeyhint = "previous"
 	SEnterkeyhintSearch   SEnterkeyhint = "search"
 	SEnterkeyhintSend     SEnterkeyhint = "send"
 	SEnterkeyhintDone     SEnterkeyhint = "done"
 	SEnterkeyhintEnter    SEnterkeyhint = "enter"
 	SEnterkeyhintGo       SEnterkeyhint = "go"
+	SEnterkeyhintNext     SEnterkeyhint = "next"
+	SEnterkeyhintPrevious SEnterkeyhint = "previous"
 )
 
 type SHidden string
@@ -121,14 +152,14 @@ const (
 type SInputmode string
 
 const (
+	SInputmodeNone    SInputmode = "none"
+	SInputmodeNumeric SInputmode = "numeric"
+	SInputmodeSearch  SInputmode = "search"
 	SInputmodeTel     SInputmode = "tel"
 	SInputmodeText    SInputmode = "text"
 	SInputmodeUrl     SInputmode = "url"
 	SInputmodeDecimal SInputmode = "decimal"
 	SInputmodeEmail   SInputmode = "email"
-	SInputmodeNone    SInputmode = "none"
-	SInputmodeNumeric SInputmode = "numeric"
-	SInputmodeSearch  SInputmode = "search"
 )
 
 type SSpellcheck string

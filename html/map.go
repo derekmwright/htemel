@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func MapTernary(condition bool, true htemel.Node, false htemel.Node) *MapElement
 	if condition {
 		return Map(true)
 	}
-
 	return Map(false)
 }
 
 // Children appends children to this element.
 func (e *MapElement) Children(children ...htemel.Node) *MapElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *MapElement) With(fn func(*MapElement)) *MapElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *MapElement) Textf(format string, args ...any) *MapElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *MapElement) AddClass(classes ...string) *MapElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *MapElement) ToggleClass(class string, enable bool) *MapElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type MapAutocapitalize string
 
 const (
-	MapAutocapitalizeCharacters MapAutocapitalize = "characters"
-	MapAutocapitalizeNone       MapAutocapitalize = "none"
 	MapAutocapitalizeOff        MapAutocapitalize = "off"
 	MapAutocapitalizeOn         MapAutocapitalize = "on"
 	MapAutocapitalizeSentences  MapAutocapitalize = "sentences"
 	MapAutocapitalizeWords      MapAutocapitalize = "words"
+	MapAutocapitalizeCharacters MapAutocapitalize = "characters"
+	MapAutocapitalizeNone       MapAutocapitalize = "none"
 )
 
 type MapAutocorrect string
@@ -101,13 +132,13 @@ const (
 type MapEnterkeyhint string
 
 const (
+	MapEnterkeyhintDone     MapEnterkeyhint = "done"
 	MapEnterkeyhintEnter    MapEnterkeyhint = "enter"
 	MapEnterkeyhintGo       MapEnterkeyhint = "go"
 	MapEnterkeyhintNext     MapEnterkeyhint = "next"
 	MapEnterkeyhintPrevious MapEnterkeyhint = "previous"
 	MapEnterkeyhintSearch   MapEnterkeyhint = "search"
 	MapEnterkeyhintSend     MapEnterkeyhint = "send"
-	MapEnterkeyhintDone     MapEnterkeyhint = "done"
 )
 
 type MapHidden string
@@ -121,7 +152,6 @@ const (
 type MapInputmode string
 
 const (
-	MapInputmodeEmail   MapInputmode = "email"
 	MapInputmodeNone    MapInputmode = "none"
 	MapInputmodeNumeric MapInputmode = "numeric"
 	MapInputmodeSearch  MapInputmode = "search"
@@ -129,6 +159,7 @@ const (
 	MapInputmodeText    MapInputmode = "text"
 	MapInputmodeUrl     MapInputmode = "url"
 	MapInputmodeDecimal MapInputmode = "decimal"
+	MapInputmodeEmail   MapInputmode = "email"
 )
 
 type MapSpellcheck string
@@ -142,16 +173,16 @@ const (
 type MapTranslate string
 
 const (
-	MapTranslateNo    MapTranslate = "no"
 	MapTranslateYes   MapTranslate = "yes"
+	MapTranslateNo    MapTranslate = "no"
 	MapTranslateEmpty MapTranslate = ""
 )
 
 type MapWritingsuggestions string
 
 const (
-	MapWritingsuggestionsFalse MapWritingsuggestions = "false"
 	MapWritingsuggestionsTrue  MapWritingsuggestions = "true"
+	MapWritingsuggestionsFalse MapWritingsuggestions = "false"
 	MapWritingsuggestionsEmpty MapWritingsuggestions = ""
 )
 

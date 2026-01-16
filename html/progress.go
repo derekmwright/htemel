@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,33 +45,63 @@ func ProgressTernary(condition bool, true htemel.Node, false htemel.Node) *Progr
 	if condition {
 		return Progress(true)
 	}
-
 	return Progress(false)
 }
 
 // Children appends children to this element.
 func (e *ProgressElement) Children(children ...htemel.Node) *ProgressElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *ProgressElement) With(fn func(*ProgressElement)) *ProgressElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *ProgressElement) Textf(format string, args ...any) *ProgressElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *ProgressElement) AddClass(classes ...string) *ProgressElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *ProgressElement) ToggleClass(class string, enable bool) *ProgressElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type ProgressAutocapitalize string
 
 const (
-	ProgressAutocapitalizeCharacters ProgressAutocapitalize = "characters"
-	ProgressAutocapitalizeNone       ProgressAutocapitalize = "none"
 	ProgressAutocapitalizeOff        ProgressAutocapitalize = "off"
 	ProgressAutocapitalizeOn         ProgressAutocapitalize = "on"
 	ProgressAutocapitalizeSentences  ProgressAutocapitalize = "sentences"
 	ProgressAutocapitalizeWords      ProgressAutocapitalize = "words"
+	ProgressAutocapitalizeCharacters ProgressAutocapitalize = "characters"
+	ProgressAutocapitalizeNone       ProgressAutocapitalize = "none"
 )
 
 type ProgressAutocorrect string
 
 const (
-	ProgressAutocorrectOn    ProgressAutocorrect = "on"
 	ProgressAutocorrectOff   ProgressAutocorrect = "off"
+	ProgressAutocorrectOn    ProgressAutocorrect = "on"
 	ProgressAutocorrectEmpty ProgressAutocorrect = ""
 )
 
@@ -94,20 +125,20 @@ const (
 type ProgressDraggable string
 
 const (
-	ProgressDraggableFalse ProgressDraggable = "false"
 	ProgressDraggableTrue  ProgressDraggable = "true"
+	ProgressDraggableFalse ProgressDraggable = "false"
 )
 
 type ProgressEnterkeyhint string
 
 const (
+	ProgressEnterkeyhintDone     ProgressEnterkeyhint = "done"
+	ProgressEnterkeyhintEnter    ProgressEnterkeyhint = "enter"
 	ProgressEnterkeyhintGo       ProgressEnterkeyhint = "go"
 	ProgressEnterkeyhintNext     ProgressEnterkeyhint = "next"
 	ProgressEnterkeyhintPrevious ProgressEnterkeyhint = "previous"
 	ProgressEnterkeyhintSearch   ProgressEnterkeyhint = "search"
 	ProgressEnterkeyhintSend     ProgressEnterkeyhint = "send"
-	ProgressEnterkeyhintDone     ProgressEnterkeyhint = "done"
-	ProgressEnterkeyhintEnter    ProgressEnterkeyhint = "enter"
 )
 
 type ProgressHidden string
@@ -121,14 +152,14 @@ const (
 type ProgressInputmode string
 
 const (
-	ProgressInputmodeUrl     ProgressInputmode = "url"
-	ProgressInputmodeDecimal ProgressInputmode = "decimal"
 	ProgressInputmodeEmail   ProgressInputmode = "email"
 	ProgressInputmodeNone    ProgressInputmode = "none"
 	ProgressInputmodeNumeric ProgressInputmode = "numeric"
 	ProgressInputmodeSearch  ProgressInputmode = "search"
 	ProgressInputmodeTel     ProgressInputmode = "tel"
 	ProgressInputmodeText    ProgressInputmode = "text"
+	ProgressInputmodeUrl     ProgressInputmode = "url"
+	ProgressInputmodeDecimal ProgressInputmode = "decimal"
 )
 
 type ProgressSpellcheck string

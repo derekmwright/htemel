@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func HeaderTernary(condition bool, true htemel.Node, false htemel.Node) *HeaderE
 	if condition {
 		return Header(true)
 	}
-
 	return Header(false)
 }
 
 // Children appends children to this element.
 func (e *HeaderElement) Children(children ...htemel.Node) *HeaderElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *HeaderElement) With(fn func(*HeaderElement)) *HeaderElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *HeaderElement) Textf(format string, args ...any) *HeaderElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *HeaderElement) AddClass(classes ...string) *HeaderElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *HeaderElement) ToggleClass(class string, enable bool) *HeaderElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type HeaderAutocapitalize string
 
 const (
-	HeaderAutocapitalizeOn         HeaderAutocapitalize = "on"
-	HeaderAutocapitalizeSentences  HeaderAutocapitalize = "sentences"
-	HeaderAutocapitalizeWords      HeaderAutocapitalize = "words"
 	HeaderAutocapitalizeCharacters HeaderAutocapitalize = "characters"
 	HeaderAutocapitalizeNone       HeaderAutocapitalize = "none"
 	HeaderAutocapitalizeOff        HeaderAutocapitalize = "off"
+	HeaderAutocapitalizeOn         HeaderAutocapitalize = "on"
+	HeaderAutocapitalizeSentences  HeaderAutocapitalize = "sentences"
+	HeaderAutocapitalizeWords      HeaderAutocapitalize = "words"
 )
 
 type HeaderAutocorrect string
@@ -94,20 +125,20 @@ const (
 type HeaderDraggable string
 
 const (
-	HeaderDraggableTrue  HeaderDraggable = "true"
 	HeaderDraggableFalse HeaderDraggable = "false"
+	HeaderDraggableTrue  HeaderDraggable = "true"
 )
 
 type HeaderEnterkeyhint string
 
 const (
-	HeaderEnterkeyhintNext     HeaderEnterkeyhint = "next"
 	HeaderEnterkeyhintPrevious HeaderEnterkeyhint = "previous"
 	HeaderEnterkeyhintSearch   HeaderEnterkeyhint = "search"
 	HeaderEnterkeyhintSend     HeaderEnterkeyhint = "send"
 	HeaderEnterkeyhintDone     HeaderEnterkeyhint = "done"
 	HeaderEnterkeyhintEnter    HeaderEnterkeyhint = "enter"
 	HeaderEnterkeyhintGo       HeaderEnterkeyhint = "go"
+	HeaderEnterkeyhintNext     HeaderEnterkeyhint = "next"
 )
 
 type HeaderHidden string
@@ -121,6 +152,7 @@ const (
 type HeaderInputmode string
 
 const (
+	HeaderInputmodeText    HeaderInputmode = "text"
 	HeaderInputmodeUrl     HeaderInputmode = "url"
 	HeaderInputmodeDecimal HeaderInputmode = "decimal"
 	HeaderInputmodeEmail   HeaderInputmode = "email"
@@ -128,7 +160,6 @@ const (
 	HeaderInputmodeNumeric HeaderInputmode = "numeric"
 	HeaderInputmodeSearch  HeaderInputmode = "search"
 	HeaderInputmodeTel     HeaderInputmode = "tel"
-	HeaderInputmodeText    HeaderInputmode = "text"
 )
 
 type HeaderSpellcheck string

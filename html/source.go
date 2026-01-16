@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,15 +40,42 @@ func SourceIf(condition bool) *SourceElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *SourceElement) With(fn func(*SourceElement)) *SourceElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *SourceElement) AddClass(classes ...string) *SourceElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *SourceElement) ToggleClass(class string, enable bool) *SourceElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type SourceAutocapitalize string
 
 const (
+	SourceAutocapitalizeCharacters SourceAutocapitalize = "characters"
 	SourceAutocapitalizeNone       SourceAutocapitalize = "none"
 	SourceAutocapitalizeOff        SourceAutocapitalize = "off"
 	SourceAutocapitalizeOn         SourceAutocapitalize = "on"
 	SourceAutocapitalizeSentences  SourceAutocapitalize = "sentences"
 	SourceAutocapitalizeWords      SourceAutocapitalize = "words"
-	SourceAutocapitalizeCharacters SourceAutocapitalize = "characters"
 )
 
 type SourceAutocorrect string
@@ -85,13 +113,13 @@ const (
 type SourceEnterkeyhint string
 
 const (
-	SourceEnterkeyhintSearch   SourceEnterkeyhint = "search"
 	SourceEnterkeyhintSend     SourceEnterkeyhint = "send"
 	SourceEnterkeyhintDone     SourceEnterkeyhint = "done"
 	SourceEnterkeyhintEnter    SourceEnterkeyhint = "enter"
 	SourceEnterkeyhintGo       SourceEnterkeyhint = "go"
 	SourceEnterkeyhintNext     SourceEnterkeyhint = "next"
 	SourceEnterkeyhintPrevious SourceEnterkeyhint = "previous"
+	SourceEnterkeyhintSearch   SourceEnterkeyhint = "search"
 )
 
 type SourceHidden string
@@ -105,14 +133,14 @@ const (
 type SourceInputmode string
 
 const (
+	SourceInputmodeEmail   SourceInputmode = "email"
+	SourceInputmodeNone    SourceInputmode = "none"
+	SourceInputmodeNumeric SourceInputmode = "numeric"
 	SourceInputmodeSearch  SourceInputmode = "search"
 	SourceInputmodeTel     SourceInputmode = "tel"
 	SourceInputmodeText    SourceInputmode = "text"
 	SourceInputmodeUrl     SourceInputmode = "url"
 	SourceInputmodeDecimal SourceInputmode = "decimal"
-	SourceInputmodeEmail   SourceInputmode = "email"
-	SourceInputmodeNone    SourceInputmode = "none"
-	SourceInputmodeNumeric SourceInputmode = "numeric"
 )
 
 type SourceSpellcheck string
@@ -134,8 +162,8 @@ const (
 type SourceWritingsuggestions string
 
 const (
-	SourceWritingsuggestionsFalse SourceWritingsuggestions = "false"
 	SourceWritingsuggestionsTrue  SourceWritingsuggestions = "true"
+	SourceWritingsuggestionsFalse SourceWritingsuggestions = "false"
 	SourceWritingsuggestionsEmpty SourceWritingsuggestions = ""
 )
 

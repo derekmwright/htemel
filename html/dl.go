@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func DlTernary(condition bool, true htemel.Node, false htemel.Node) *DlElement {
 	if condition {
 		return Dl(true)
 	}
-
 	return Dl(false)
 }
 
 // Children appends children to this element.
 func (e *DlElement) Children(children ...htemel.Node) *DlElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *DlElement) With(fn func(*DlElement)) *DlElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *DlElement) Textf(format string, args ...any) *DlElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *DlElement) AddClass(classes ...string) *DlElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *DlElement) ToggleClass(class string, enable bool) *DlElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type DlAutocapitalize string
 
 const (
-	DlAutocapitalizeCharacters DlAutocapitalize = "characters"
-	DlAutocapitalizeNone       DlAutocapitalize = "none"
-	DlAutocapitalizeOff        DlAutocapitalize = "off"
 	DlAutocapitalizeOn         DlAutocapitalize = "on"
 	DlAutocapitalizeSentences  DlAutocapitalize = "sentences"
 	DlAutocapitalizeWords      DlAutocapitalize = "words"
+	DlAutocapitalizeCharacters DlAutocapitalize = "characters"
+	DlAutocapitalizeNone       DlAutocapitalize = "none"
+	DlAutocapitalizeOff        DlAutocapitalize = "off"
 )
 
 type DlAutocorrect string
@@ -77,18 +108,18 @@ const (
 type DlContenteditable string
 
 const (
+	DlContenteditableTrue          DlContenteditable = "true"
 	DlContenteditableFalse         DlContenteditable = "false"
 	DlContenteditablePlaintextOnly DlContenteditable = "plaintext-only"
-	DlContenteditableTrue          DlContenteditable = "true"
 	DlContenteditableEmpty         DlContenteditable = ""
 )
 
 type DlDir string
 
 const (
-	DlDirLtr  DlDir = "ltr"
 	DlDirRtl  DlDir = "rtl"
 	DlDirAuto DlDir = "auto"
+	DlDirLtr  DlDir = "ltr"
 )
 
 type DlDraggable string
@@ -101,27 +132,26 @@ const (
 type DlEnterkeyhint string
 
 const (
+	DlEnterkeyhintSend     DlEnterkeyhint = "send"
 	DlEnterkeyhintDone     DlEnterkeyhint = "done"
 	DlEnterkeyhintEnter    DlEnterkeyhint = "enter"
 	DlEnterkeyhintGo       DlEnterkeyhint = "go"
 	DlEnterkeyhintNext     DlEnterkeyhint = "next"
 	DlEnterkeyhintPrevious DlEnterkeyhint = "previous"
 	DlEnterkeyhintSearch   DlEnterkeyhint = "search"
-	DlEnterkeyhintSend     DlEnterkeyhint = "send"
 )
 
 type DlHidden string
 
 const (
-	DlHiddenHidden     DlHidden = "hidden"
 	DlHiddenUntilFound DlHidden = "until-found"
+	DlHiddenHidden     DlHidden = "hidden"
 	DlHiddenEmpty      DlHidden = ""
 )
 
 type DlInputmode string
 
 const (
-	DlInputmodeNumeric DlInputmode = "numeric"
 	DlInputmodeSearch  DlInputmode = "search"
 	DlInputmodeTel     DlInputmode = "tel"
 	DlInputmodeText    DlInputmode = "text"
@@ -129,6 +159,7 @@ const (
 	DlInputmodeDecimal DlInputmode = "decimal"
 	DlInputmodeEmail   DlInputmode = "email"
 	DlInputmodeNone    DlInputmode = "none"
+	DlInputmodeNumeric DlInputmode = "numeric"
 )
 
 type DlSpellcheck string

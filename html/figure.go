@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func FigureTernary(condition bool, true htemel.Node, false htemel.Node) *FigureE
 	if condition {
 		return Figure(true)
 	}
-
 	return Figure(false)
 }
 
 // Children appends children to this element.
 func (e *FigureElement) Children(children ...htemel.Node) *FigureElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *FigureElement) With(fn func(*FigureElement)) *FigureElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *FigureElement) Textf(format string, args ...any) *FigureElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *FigureElement) AddClass(classes ...string) *FigureElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *FigureElement) ToggleClass(class string, enable bool) *FigureElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type FigureAutocapitalize string
 
 const (
-	FigureAutocapitalizeSentences  FigureAutocapitalize = "sentences"
-	FigureAutocapitalizeWords      FigureAutocapitalize = "words"
 	FigureAutocapitalizeCharacters FigureAutocapitalize = "characters"
 	FigureAutocapitalizeNone       FigureAutocapitalize = "none"
 	FigureAutocapitalizeOff        FigureAutocapitalize = "off"
 	FigureAutocapitalizeOn         FigureAutocapitalize = "on"
+	FigureAutocapitalizeSentences  FigureAutocapitalize = "sentences"
+	FigureAutocapitalizeWords      FigureAutocapitalize = "words"
 )
 
 type FigureAutocorrect string
@@ -77,9 +108,9 @@ const (
 type FigureContenteditable string
 
 const (
-	FigureContenteditableTrue          FigureContenteditable = "true"
 	FigureContenteditableFalse         FigureContenteditable = "false"
 	FigureContenteditablePlaintextOnly FigureContenteditable = "plaintext-only"
+	FigureContenteditableTrue          FigureContenteditable = "true"
 	FigureContenteditableEmpty         FigureContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type FigureEnterkeyhint string
 
 const (
-	FigureEnterkeyhintPrevious FigureEnterkeyhint = "previous"
-	FigureEnterkeyhintSearch   FigureEnterkeyhint = "search"
-	FigureEnterkeyhintSend     FigureEnterkeyhint = "send"
 	FigureEnterkeyhintDone     FigureEnterkeyhint = "done"
 	FigureEnterkeyhintEnter    FigureEnterkeyhint = "enter"
 	FigureEnterkeyhintGo       FigureEnterkeyhint = "go"
 	FigureEnterkeyhintNext     FigureEnterkeyhint = "next"
+	FigureEnterkeyhintPrevious FigureEnterkeyhint = "previous"
+	FigureEnterkeyhintSearch   FigureEnterkeyhint = "search"
+	FigureEnterkeyhintSend     FigureEnterkeyhint = "send"
 )
 
 type FigureHidden string
@@ -121,14 +152,14 @@ const (
 type FigureInputmode string
 
 const (
-	FigureInputmodeNone    FigureInputmode = "none"
-	FigureInputmodeNumeric FigureInputmode = "numeric"
-	FigureInputmodeSearch  FigureInputmode = "search"
 	FigureInputmodeTel     FigureInputmode = "tel"
 	FigureInputmodeText    FigureInputmode = "text"
 	FigureInputmodeUrl     FigureInputmode = "url"
 	FigureInputmodeDecimal FigureInputmode = "decimal"
 	FigureInputmodeEmail   FigureInputmode = "email"
+	FigureInputmodeNone    FigureInputmode = "none"
+	FigureInputmodeNumeric FigureInputmode = "numeric"
+	FigureInputmodeSearch  FigureInputmode = "search"
 )
 
 type FigureSpellcheck string
@@ -142,8 +173,8 @@ const (
 type FigureTranslate string
 
 const (
-	FigureTranslateYes   FigureTranslate = "yes"
 	FigureTranslateNo    FigureTranslate = "no"
+	FigureTranslateYes   FigureTranslate = "yes"
 	FigureTranslateEmpty FigureTranslate = ""
 )
 

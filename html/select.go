@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func SelectTernary(condition bool, true htemel.Node, false htemel.Node) *SelectE
 	if condition {
 		return Select(true)
 	}
-
 	return Select(false)
 }
 
 // Children appends children to this element.
 func (e *SelectElement) Children(children ...htemel.Node) *SelectElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *SelectElement) With(fn func(*SelectElement)) *SelectElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *SelectElement) Textf(format string, args ...any) *SelectElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *SelectElement) AddClass(classes ...string) *SelectElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *SelectElement) ToggleClass(class string, enable bool) *SelectElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type SelectAutocapitalize string
 
 const (
+	SelectAutocapitalizeNone       SelectAutocapitalize = "none"
 	SelectAutocapitalizeOff        SelectAutocapitalize = "off"
 	SelectAutocapitalizeOn         SelectAutocapitalize = "on"
 	SelectAutocapitalizeSentences  SelectAutocapitalize = "sentences"
 	SelectAutocapitalizeWords      SelectAutocapitalize = "words"
 	SelectAutocapitalizeCharacters SelectAutocapitalize = "characters"
-	SelectAutocapitalizeNone       SelectAutocapitalize = "none"
 )
 
 type SelectAutocorrect string
@@ -86,42 +117,41 @@ const (
 type SelectDir string
 
 const (
-	SelectDirAuto SelectDir = "auto"
 	SelectDirLtr  SelectDir = "ltr"
 	SelectDirRtl  SelectDir = "rtl"
+	SelectDirAuto SelectDir = "auto"
 )
 
 type SelectDraggable string
 
 const (
-	SelectDraggableTrue  SelectDraggable = "true"
 	SelectDraggableFalse SelectDraggable = "false"
+	SelectDraggableTrue  SelectDraggable = "true"
 )
 
 type SelectEnterkeyhint string
 
 const (
+	SelectEnterkeyhintDone     SelectEnterkeyhint = "done"
 	SelectEnterkeyhintEnter    SelectEnterkeyhint = "enter"
 	SelectEnterkeyhintGo       SelectEnterkeyhint = "go"
 	SelectEnterkeyhintNext     SelectEnterkeyhint = "next"
 	SelectEnterkeyhintPrevious SelectEnterkeyhint = "previous"
 	SelectEnterkeyhintSearch   SelectEnterkeyhint = "search"
 	SelectEnterkeyhintSend     SelectEnterkeyhint = "send"
-	SelectEnterkeyhintDone     SelectEnterkeyhint = "done"
 )
 
 type SelectHidden string
 
 const (
-	SelectHiddenUntilFound SelectHidden = "until-found"
 	SelectHiddenHidden     SelectHidden = "hidden"
+	SelectHiddenUntilFound SelectHidden = "until-found"
 	SelectHiddenEmpty      SelectHidden = ""
 )
 
 type SelectInputmode string
 
 const (
-	SelectInputmodeSearch  SelectInputmode = "search"
 	SelectInputmodeTel     SelectInputmode = "tel"
 	SelectInputmodeText    SelectInputmode = "text"
 	SelectInputmodeUrl     SelectInputmode = "url"
@@ -129,6 +159,7 @@ const (
 	SelectInputmodeEmail   SelectInputmode = "email"
 	SelectInputmodeNone    SelectInputmode = "none"
 	SelectInputmodeNumeric SelectInputmode = "numeric"
+	SelectInputmodeSearch  SelectInputmode = "search"
 )
 
 type SelectSpellcheck string

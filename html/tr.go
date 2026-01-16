@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,42 +45,72 @@ func TrTernary(condition bool, true htemel.Node, false htemel.Node) *TrElement {
 	if condition {
 		return Tr(true)
 	}
-
 	return Tr(false)
 }
 
 // Children appends children to this element.
 func (e *TrElement) Children(children ...htemel.Node) *TrElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *TrElement) With(fn func(*TrElement)) *TrElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *TrElement) Textf(format string, args ...any) *TrElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *TrElement) AddClass(classes ...string) *TrElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *TrElement) ToggleClass(class string, enable bool) *TrElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type TrAutocapitalize string
 
 const (
+	TrAutocapitalizeWords      TrAutocapitalize = "words"
+	TrAutocapitalizeCharacters TrAutocapitalize = "characters"
 	TrAutocapitalizeNone       TrAutocapitalize = "none"
 	TrAutocapitalizeOff        TrAutocapitalize = "off"
 	TrAutocapitalizeOn         TrAutocapitalize = "on"
 	TrAutocapitalizeSentences  TrAutocapitalize = "sentences"
-	TrAutocapitalizeWords      TrAutocapitalize = "words"
-	TrAutocapitalizeCharacters TrAutocapitalize = "characters"
 )
 
 type TrAutocorrect string
 
 const (
-	TrAutocorrectOn    TrAutocorrect = "on"
 	TrAutocorrectOff   TrAutocorrect = "off"
+	TrAutocorrectOn    TrAutocorrect = "on"
 	TrAutocorrectEmpty TrAutocorrect = ""
 )
 
 type TrContenteditable string
 
 const (
+	TrContenteditableFalse         TrContenteditable = "false"
 	TrContenteditablePlaintextOnly TrContenteditable = "plaintext-only"
 	TrContenteditableTrue          TrContenteditable = "true"
-	TrContenteditableFalse         TrContenteditable = "false"
 	TrContenteditableEmpty         TrContenteditable = ""
 )
 
@@ -101,34 +132,34 @@ const (
 type TrEnterkeyhint string
 
 const (
-	TrEnterkeyhintSend     TrEnterkeyhint = "send"
 	TrEnterkeyhintDone     TrEnterkeyhint = "done"
 	TrEnterkeyhintEnter    TrEnterkeyhint = "enter"
 	TrEnterkeyhintGo       TrEnterkeyhint = "go"
 	TrEnterkeyhintNext     TrEnterkeyhint = "next"
 	TrEnterkeyhintPrevious TrEnterkeyhint = "previous"
 	TrEnterkeyhintSearch   TrEnterkeyhint = "search"
+	TrEnterkeyhintSend     TrEnterkeyhint = "send"
 )
 
 type TrHidden string
 
 const (
-	TrHiddenHidden     TrHidden = "hidden"
 	TrHiddenUntilFound TrHidden = "until-found"
+	TrHiddenHidden     TrHidden = "hidden"
 	TrHiddenEmpty      TrHidden = ""
 )
 
 type TrInputmode string
 
 const (
-	TrInputmodeText    TrInputmode = "text"
-	TrInputmodeUrl     TrInputmode = "url"
-	TrInputmodeDecimal TrInputmode = "decimal"
-	TrInputmodeEmail   TrInputmode = "email"
 	TrInputmodeNone    TrInputmode = "none"
 	TrInputmodeNumeric TrInputmode = "numeric"
 	TrInputmodeSearch  TrInputmode = "search"
 	TrInputmodeTel     TrInputmode = "tel"
+	TrInputmodeText    TrInputmode = "text"
+	TrInputmodeUrl     TrInputmode = "url"
+	TrInputmodeDecimal TrInputmode = "decimal"
+	TrInputmodeEmail   TrInputmode = "email"
 )
 
 type TrSpellcheck string

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,33 +45,63 @@ func SubTernary(condition bool, true htemel.Node, false htemel.Node) *SubElement
 	if condition {
 		return Sub(true)
 	}
-
 	return Sub(false)
 }
 
 // Children appends children to this element.
 func (e *SubElement) Children(children ...htemel.Node) *SubElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *SubElement) With(fn func(*SubElement)) *SubElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *SubElement) Textf(format string, args ...any) *SubElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *SubElement) AddClass(classes ...string) *SubElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *SubElement) ToggleClass(class string, enable bool) *SubElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type SubAutocapitalize string
 
 const (
-	SubAutocapitalizeOff        SubAutocapitalize = "off"
-	SubAutocapitalizeOn         SubAutocapitalize = "on"
-	SubAutocapitalizeSentences  SubAutocapitalize = "sentences"
 	SubAutocapitalizeWords      SubAutocapitalize = "words"
 	SubAutocapitalizeCharacters SubAutocapitalize = "characters"
 	SubAutocapitalizeNone       SubAutocapitalize = "none"
+	SubAutocapitalizeOff        SubAutocapitalize = "off"
+	SubAutocapitalizeOn         SubAutocapitalize = "on"
+	SubAutocapitalizeSentences  SubAutocapitalize = "sentences"
 )
 
 type SubAutocorrect string
 
 const (
-	SubAutocorrectOn    SubAutocorrect = "on"
 	SubAutocorrectOff   SubAutocorrect = "off"
+	SubAutocorrectOn    SubAutocorrect = "on"
 	SubAutocorrectEmpty SubAutocorrect = ""
 )
 
@@ -86,9 +117,9 @@ const (
 type SubDir string
 
 const (
-	SubDirRtl  SubDir = "rtl"
 	SubDirAuto SubDir = "auto"
 	SubDirLtr  SubDir = "ltr"
+	SubDirRtl  SubDir = "rtl"
 )
 
 type SubDraggable string
@@ -101,13 +132,13 @@ const (
 type SubEnterkeyhint string
 
 const (
-	SubEnterkeyhintSearch   SubEnterkeyhint = "search"
 	SubEnterkeyhintSend     SubEnterkeyhint = "send"
 	SubEnterkeyhintDone     SubEnterkeyhint = "done"
 	SubEnterkeyhintEnter    SubEnterkeyhint = "enter"
 	SubEnterkeyhintGo       SubEnterkeyhint = "go"
 	SubEnterkeyhintNext     SubEnterkeyhint = "next"
 	SubEnterkeyhintPrevious SubEnterkeyhint = "previous"
+	SubEnterkeyhintSearch   SubEnterkeyhint = "search"
 )
 
 type SubHidden string
@@ -121,21 +152,21 @@ const (
 type SubInputmode string
 
 const (
+	SubInputmodeSearch  SubInputmode = "search"
+	SubInputmodeTel     SubInputmode = "tel"
+	SubInputmodeText    SubInputmode = "text"
 	SubInputmodeUrl     SubInputmode = "url"
 	SubInputmodeDecimal SubInputmode = "decimal"
 	SubInputmodeEmail   SubInputmode = "email"
 	SubInputmodeNone    SubInputmode = "none"
 	SubInputmodeNumeric SubInputmode = "numeric"
-	SubInputmodeSearch  SubInputmode = "search"
-	SubInputmodeTel     SubInputmode = "tel"
-	SubInputmodeText    SubInputmode = "text"
 )
 
 type SubSpellcheck string
 
 const (
-	SubSpellcheckTrue  SubSpellcheck = "true"
 	SubSpellcheckFalse SubSpellcheck = "false"
+	SubSpellcheckTrue  SubSpellcheck = "true"
 	SubSpellcheckEmpty SubSpellcheck = ""
 )
 

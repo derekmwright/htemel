@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,33 +45,63 @@ func DetailsTernary(condition bool, true htemel.Node, false htemel.Node) *Detail
 	if condition {
 		return Details(true)
 	}
-
 	return Details(false)
 }
 
 // Children appends children to this element.
 func (e *DetailsElement) Children(children ...htemel.Node) *DetailsElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *DetailsElement) With(fn func(*DetailsElement)) *DetailsElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *DetailsElement) Textf(format string, args ...any) *DetailsElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *DetailsElement) AddClass(classes ...string) *DetailsElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *DetailsElement) ToggleClass(class string, enable bool) *DetailsElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type DetailsAutocapitalize string
 
 const (
-	DetailsAutocapitalizeWords      DetailsAutocapitalize = "words"
 	DetailsAutocapitalizeCharacters DetailsAutocapitalize = "characters"
 	DetailsAutocapitalizeNone       DetailsAutocapitalize = "none"
 	DetailsAutocapitalizeOff        DetailsAutocapitalize = "off"
 	DetailsAutocapitalizeOn         DetailsAutocapitalize = "on"
 	DetailsAutocapitalizeSentences  DetailsAutocapitalize = "sentences"
+	DetailsAutocapitalizeWords      DetailsAutocapitalize = "words"
 )
 
 type DetailsAutocorrect string
 
 const (
-	DetailsAutocorrectOn    DetailsAutocorrect = "on"
 	DetailsAutocorrectOff   DetailsAutocorrect = "off"
+	DetailsAutocorrectOn    DetailsAutocorrect = "on"
 	DetailsAutocorrectEmpty DetailsAutocorrect = ""
 )
 
@@ -86,9 +117,9 @@ const (
 type DetailsDir string
 
 const (
-	DetailsDirRtl  DetailsDir = "rtl"
 	DetailsDirAuto DetailsDir = "auto"
 	DetailsDirLtr  DetailsDir = "ltr"
+	DetailsDirRtl  DetailsDir = "rtl"
 )
 
 type DetailsDraggable string
@@ -101,13 +132,13 @@ const (
 type DetailsEnterkeyhint string
 
 const (
+	DetailsEnterkeyhintPrevious DetailsEnterkeyhint = "previous"
 	DetailsEnterkeyhintSearch   DetailsEnterkeyhint = "search"
 	DetailsEnterkeyhintSend     DetailsEnterkeyhint = "send"
 	DetailsEnterkeyhintDone     DetailsEnterkeyhint = "done"
 	DetailsEnterkeyhintEnter    DetailsEnterkeyhint = "enter"
 	DetailsEnterkeyhintGo       DetailsEnterkeyhint = "go"
 	DetailsEnterkeyhintNext     DetailsEnterkeyhint = "next"
-	DetailsEnterkeyhintPrevious DetailsEnterkeyhint = "previous"
 )
 
 type DetailsHidden string
@@ -121,21 +152,21 @@ const (
 type DetailsInputmode string
 
 const (
-	DetailsInputmodeNumeric DetailsInputmode = "numeric"
-	DetailsInputmodeSearch  DetailsInputmode = "search"
-	DetailsInputmodeTel     DetailsInputmode = "tel"
-	DetailsInputmodeText    DetailsInputmode = "text"
 	DetailsInputmodeUrl     DetailsInputmode = "url"
 	DetailsInputmodeDecimal DetailsInputmode = "decimal"
 	DetailsInputmodeEmail   DetailsInputmode = "email"
 	DetailsInputmodeNone    DetailsInputmode = "none"
+	DetailsInputmodeNumeric DetailsInputmode = "numeric"
+	DetailsInputmodeSearch  DetailsInputmode = "search"
+	DetailsInputmodeTel     DetailsInputmode = "tel"
+	DetailsInputmodeText    DetailsInputmode = "text"
 )
 
 type DetailsSpellcheck string
 
 const (
-	DetailsSpellcheckTrue  DetailsSpellcheck = "true"
 	DetailsSpellcheckFalse DetailsSpellcheck = "false"
+	DetailsSpellcheckTrue  DetailsSpellcheck = "true"
 	DetailsSpellcheckEmpty DetailsSpellcheck = ""
 )
 

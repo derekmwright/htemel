@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func DelTernary(condition bool, true htemel.Node, false htemel.Node) *DelElement
 	if condition {
 		return Del(true)
 	}
-
 	return Del(false)
 }
 
 // Children appends children to this element.
 func (e *DelElement) Children(children ...htemel.Node) *DelElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *DelElement) With(fn func(*DelElement)) *DelElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *DelElement) Textf(format string, args ...any) *DelElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *DelElement) AddClass(classes ...string) *DelElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *DelElement) ToggleClass(class string, enable bool) *DelElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type DelAutocapitalize string
 
 const (
-	DelAutocapitalizeOn         DelAutocapitalize = "on"
 	DelAutocapitalizeSentences  DelAutocapitalize = "sentences"
 	DelAutocapitalizeWords      DelAutocapitalize = "words"
 	DelAutocapitalizeCharacters DelAutocapitalize = "characters"
 	DelAutocapitalizeNone       DelAutocapitalize = "none"
 	DelAutocapitalizeOff        DelAutocapitalize = "off"
+	DelAutocapitalizeOn         DelAutocapitalize = "on"
 )
 
 type DelAutocorrect string
@@ -101,13 +132,13 @@ const (
 type DelEnterkeyhint string
 
 const (
+	DelEnterkeyhintDone     DelEnterkeyhint = "done"
 	DelEnterkeyhintEnter    DelEnterkeyhint = "enter"
 	DelEnterkeyhintGo       DelEnterkeyhint = "go"
 	DelEnterkeyhintNext     DelEnterkeyhint = "next"
 	DelEnterkeyhintPrevious DelEnterkeyhint = "previous"
 	DelEnterkeyhintSearch   DelEnterkeyhint = "search"
 	DelEnterkeyhintSend     DelEnterkeyhint = "send"
-	DelEnterkeyhintDone     DelEnterkeyhint = "done"
 )
 
 type DelHidden string
@@ -121,21 +152,21 @@ const (
 type DelInputmode string
 
 const (
+	DelInputmodeEmail   DelInputmode = "email"
+	DelInputmodeNone    DelInputmode = "none"
+	DelInputmodeNumeric DelInputmode = "numeric"
 	DelInputmodeSearch  DelInputmode = "search"
 	DelInputmodeTel     DelInputmode = "tel"
 	DelInputmodeText    DelInputmode = "text"
 	DelInputmodeUrl     DelInputmode = "url"
 	DelInputmodeDecimal DelInputmode = "decimal"
-	DelInputmodeEmail   DelInputmode = "email"
-	DelInputmodeNone    DelInputmode = "none"
-	DelInputmodeNumeric DelInputmode = "numeric"
 )
 
 type DelSpellcheck string
 
 const (
-	DelSpellcheckFalse DelSpellcheck = "false"
 	DelSpellcheckTrue  DelSpellcheck = "true"
+	DelSpellcheckFalse DelSpellcheck = "false"
 	DelSpellcheckEmpty DelSpellcheck = ""
 )
 
@@ -150,8 +181,8 @@ const (
 type DelWritingsuggestions string
 
 const (
-	DelWritingsuggestionsFalse DelWritingsuggestions = "false"
 	DelWritingsuggestionsTrue  DelWritingsuggestions = "true"
+	DelWritingsuggestionsFalse DelWritingsuggestions = "false"
 	DelWritingsuggestionsEmpty DelWritingsuggestions = ""
 )
 

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func HeadTernary(condition bool, true htemel.Node, false htemel.Node) *HeadEleme
 	if condition {
 		return Head(true)
 	}
-
 	return Head(false)
 }
 
 // Children appends children to this element.
 func (e *HeadElement) Children(children ...htemel.Node) *HeadElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *HeadElement) With(fn func(*HeadElement)) *HeadElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *HeadElement) Textf(format string, args ...any) *HeadElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *HeadElement) AddClass(classes ...string) *HeadElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *HeadElement) ToggleClass(class string, enable bool) *HeadElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type HeadAutocapitalize string
 
 const (
-	HeadAutocapitalizeSentences  HeadAutocapitalize = "sentences"
-	HeadAutocapitalizeWords      HeadAutocapitalize = "words"
-	HeadAutocapitalizeCharacters HeadAutocapitalize = "characters"
 	HeadAutocapitalizeNone       HeadAutocapitalize = "none"
 	HeadAutocapitalizeOff        HeadAutocapitalize = "off"
 	HeadAutocapitalizeOn         HeadAutocapitalize = "on"
+	HeadAutocapitalizeSentences  HeadAutocapitalize = "sentences"
+	HeadAutocapitalizeWords      HeadAutocapitalize = "words"
+	HeadAutocapitalizeCharacters HeadAutocapitalize = "characters"
 )
 
 type HeadAutocorrect string
@@ -77,9 +108,9 @@ const (
 type HeadContenteditable string
 
 const (
+	HeadContenteditableFalse         HeadContenteditable = "false"
 	HeadContenteditablePlaintextOnly HeadContenteditable = "plaintext-only"
 	HeadContenteditableTrue          HeadContenteditable = "true"
-	HeadContenteditableFalse         HeadContenteditable = "false"
 	HeadContenteditableEmpty         HeadContenteditable = ""
 )
 
@@ -121,14 +152,14 @@ const (
 type HeadInputmode string
 
 const (
-	HeadInputmodeNone    HeadInputmode = "none"
-	HeadInputmodeNumeric HeadInputmode = "numeric"
-	HeadInputmodeSearch  HeadInputmode = "search"
-	HeadInputmodeTel     HeadInputmode = "tel"
 	HeadInputmodeText    HeadInputmode = "text"
 	HeadInputmodeUrl     HeadInputmode = "url"
 	HeadInputmodeDecimal HeadInputmode = "decimal"
 	HeadInputmodeEmail   HeadInputmode = "email"
+	HeadInputmodeNone    HeadInputmode = "none"
+	HeadInputmodeNumeric HeadInputmode = "numeric"
+	HeadInputmodeSearch  HeadInputmode = "search"
+	HeadInputmodeTel     HeadInputmode = "tel"
 )
 
 type HeadSpellcheck string
@@ -150,8 +181,8 @@ const (
 type HeadWritingsuggestions string
 
 const (
-	HeadWritingsuggestionsFalse HeadWritingsuggestions = "false"
 	HeadWritingsuggestionsTrue  HeadWritingsuggestions = "true"
+	HeadWritingsuggestionsFalse HeadWritingsuggestions = "false"
 	HeadWritingsuggestionsEmpty HeadWritingsuggestions = ""
 )
 

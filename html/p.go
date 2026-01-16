@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func PTernary(condition bool, true htemel.Node, false htemel.Node) *PElement {
 	if condition {
 		return P(true)
 	}
-
 	return P(false)
 }
 
 // Children appends children to this element.
 func (e *PElement) Children(children ...htemel.Node) *PElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *PElement) With(fn func(*PElement)) *PElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *PElement) Textf(format string, args ...any) *PElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *PElement) AddClass(classes ...string) *PElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *PElement) ToggleClass(class string, enable bool) *PElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -77,9 +108,9 @@ const (
 type PContenteditable string
 
 const (
+	PContenteditableFalse         PContenteditable = "false"
 	PContenteditablePlaintextOnly PContenteditable = "plaintext-only"
 	PContenteditableTrue          PContenteditable = "true"
-	PContenteditableFalse         PContenteditable = "false"
 	PContenteditableEmpty         PContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type PEnterkeyhint string
 
 const (
-	PEnterkeyhintEnter    PEnterkeyhint = "enter"
 	PEnterkeyhintGo       PEnterkeyhint = "go"
 	PEnterkeyhintNext     PEnterkeyhint = "next"
 	PEnterkeyhintPrevious PEnterkeyhint = "previous"
 	PEnterkeyhintSearch   PEnterkeyhint = "search"
 	PEnterkeyhintSend     PEnterkeyhint = "send"
 	PEnterkeyhintDone     PEnterkeyhint = "done"
+	PEnterkeyhintEnter    PEnterkeyhint = "enter"
 )
 
 type PHidden string
@@ -121,14 +152,14 @@ const (
 type PInputmode string
 
 const (
+	PInputmodeSearch  PInputmode = "search"
+	PInputmodeTel     PInputmode = "tel"
 	PInputmodeText    PInputmode = "text"
 	PInputmodeUrl     PInputmode = "url"
 	PInputmodeDecimal PInputmode = "decimal"
 	PInputmodeEmail   PInputmode = "email"
 	PInputmodeNone    PInputmode = "none"
 	PInputmodeNumeric PInputmode = "numeric"
-	PInputmodeSearch  PInputmode = "search"
-	PInputmodeTel     PInputmode = "tel"
 )
 
 type PSpellcheck string

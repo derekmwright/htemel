@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func AddressTernary(condition bool, true htemel.Node, false htemel.Node) *Addres
 	if condition {
 		return Address(true)
 	}
-
 	return Address(false)
 }
 
 // Children appends children to this element.
 func (e *AddressElement) Children(children ...htemel.Node) *AddressElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *AddressElement) With(fn func(*AddressElement)) *AddressElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *AddressElement) Textf(format string, args ...any) *AddressElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *AddressElement) AddClass(classes ...string) *AddressElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *AddressElement) ToggleClass(class string, enable bool) *AddressElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type AddressAutocapitalize string
 
 const (
-	AddressAutocapitalizeWords      AddressAutocapitalize = "words"
 	AddressAutocapitalizeCharacters AddressAutocapitalize = "characters"
 	AddressAutocapitalizeNone       AddressAutocapitalize = "none"
 	AddressAutocapitalizeOff        AddressAutocapitalize = "off"
 	AddressAutocapitalizeOn         AddressAutocapitalize = "on"
 	AddressAutocapitalizeSentences  AddressAutocapitalize = "sentences"
+	AddressAutocapitalizeWords      AddressAutocapitalize = "words"
 )
 
 type AddressAutocorrect string
@@ -101,13 +132,13 @@ const (
 type AddressEnterkeyhint string
 
 const (
-	AddressEnterkeyhintSend     AddressEnterkeyhint = "send"
-	AddressEnterkeyhintDone     AddressEnterkeyhint = "done"
 	AddressEnterkeyhintEnter    AddressEnterkeyhint = "enter"
 	AddressEnterkeyhintGo       AddressEnterkeyhint = "go"
 	AddressEnterkeyhintNext     AddressEnterkeyhint = "next"
 	AddressEnterkeyhintPrevious AddressEnterkeyhint = "previous"
 	AddressEnterkeyhintSearch   AddressEnterkeyhint = "search"
+	AddressEnterkeyhintSend     AddressEnterkeyhint = "send"
+	AddressEnterkeyhintDone     AddressEnterkeyhint = "done"
 )
 
 type AddressHidden string
@@ -121,21 +152,21 @@ const (
 type AddressInputmode string
 
 const (
+	AddressInputmodeNumeric AddressInputmode = "numeric"
+	AddressInputmodeSearch  AddressInputmode = "search"
 	AddressInputmodeTel     AddressInputmode = "tel"
 	AddressInputmodeText    AddressInputmode = "text"
 	AddressInputmodeUrl     AddressInputmode = "url"
 	AddressInputmodeDecimal AddressInputmode = "decimal"
 	AddressInputmodeEmail   AddressInputmode = "email"
 	AddressInputmodeNone    AddressInputmode = "none"
-	AddressInputmodeNumeric AddressInputmode = "numeric"
-	AddressInputmodeSearch  AddressInputmode = "search"
 )
 
 type AddressSpellcheck string
 
 const (
-	AddressSpellcheckFalse AddressSpellcheck = "false"
 	AddressSpellcheckTrue  AddressSpellcheck = "true"
+	AddressSpellcheckFalse AddressSpellcheck = "false"
 	AddressSpellcheckEmpty AddressSpellcheck = ""
 )
 
@@ -150,8 +181,8 @@ const (
 type AddressWritingsuggestions string
 
 const (
-	AddressWritingsuggestionsFalse AddressWritingsuggestions = "false"
 	AddressWritingsuggestionsTrue  AddressWritingsuggestions = "true"
+	AddressWritingsuggestionsFalse AddressWritingsuggestions = "false"
 	AddressWritingsuggestionsEmpty AddressWritingsuggestions = ""
 )
 

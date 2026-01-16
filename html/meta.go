@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -39,27 +40,54 @@ func MetaIf(condition bool) *MetaElement {
 	}
 }
 
+// With allows passing a function to modify the element via a closure.
+func (e *MetaElement) With(fn func(*MetaElement)) *MetaElement {
+	fn(e)
+	return e
+}
+
+// AddClass appends a class to the element.
+func (e *MetaElement) AddClass(classes ...string) *MetaElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *MetaElement) ToggleClass(class string, enable bool) *MetaElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
+	return e
+}
+
 type MetaHttpEquiv string
 
 const (
+	MetaHttpEquivSetCookie             MetaHttpEquiv = "set-cookie"
 	MetaHttpEquivXUaCompatible         MetaHttpEquiv = "x-ua-compatible"
 	MetaHttpEquivContentLanguage       MetaHttpEquiv = "content-language"
 	MetaHttpEquivContentSecurityPolicy MetaHttpEquiv = "content-security-policy"
 	MetaHttpEquivContentType           MetaHttpEquiv = "content-type"
 	MetaHttpEquivDefaultStyle          MetaHttpEquiv = "default-style"
 	MetaHttpEquivRefresh               MetaHttpEquiv = "refresh"
-	MetaHttpEquivSetCookie             MetaHttpEquiv = "set-cookie"
 )
 
 type MetaAutocapitalize string
 
 const (
-	MetaAutocapitalizeOff        MetaAutocapitalize = "off"
-	MetaAutocapitalizeOn         MetaAutocapitalize = "on"
-	MetaAutocapitalizeSentences  MetaAutocapitalize = "sentences"
 	MetaAutocapitalizeWords      MetaAutocapitalize = "words"
 	MetaAutocapitalizeCharacters MetaAutocapitalize = "characters"
 	MetaAutocapitalizeNone       MetaAutocapitalize = "none"
+	MetaAutocapitalizeOff        MetaAutocapitalize = "off"
+	MetaAutocapitalizeOn         MetaAutocapitalize = "on"
+	MetaAutocapitalizeSentences  MetaAutocapitalize = "sentences"
 )
 
 type MetaAutocorrect string
@@ -82,9 +110,9 @@ const (
 type MetaDir string
 
 const (
-	MetaDirAuto MetaDir = "auto"
 	MetaDirLtr  MetaDir = "ltr"
 	MetaDirRtl  MetaDir = "rtl"
+	MetaDirAuto MetaDir = "auto"
 )
 
 type MetaDraggable string
@@ -97,13 +125,13 @@ const (
 type MetaEnterkeyhint string
 
 const (
-	MetaEnterkeyhintPrevious MetaEnterkeyhint = "previous"
-	MetaEnterkeyhintSearch   MetaEnterkeyhint = "search"
 	MetaEnterkeyhintSend     MetaEnterkeyhint = "send"
 	MetaEnterkeyhintDone     MetaEnterkeyhint = "done"
 	MetaEnterkeyhintEnter    MetaEnterkeyhint = "enter"
 	MetaEnterkeyhintGo       MetaEnterkeyhint = "go"
 	MetaEnterkeyhintNext     MetaEnterkeyhint = "next"
+	MetaEnterkeyhintPrevious MetaEnterkeyhint = "previous"
+	MetaEnterkeyhintSearch   MetaEnterkeyhint = "search"
 )
 
 type MetaHidden string
@@ -117,21 +145,21 @@ const (
 type MetaInputmode string
 
 const (
-	MetaInputmodeNone    MetaInputmode = "none"
-	MetaInputmodeNumeric MetaInputmode = "numeric"
 	MetaInputmodeSearch  MetaInputmode = "search"
 	MetaInputmodeTel     MetaInputmode = "tel"
 	MetaInputmodeText    MetaInputmode = "text"
 	MetaInputmodeUrl     MetaInputmode = "url"
 	MetaInputmodeDecimal MetaInputmode = "decimal"
 	MetaInputmodeEmail   MetaInputmode = "email"
+	MetaInputmodeNone    MetaInputmode = "none"
+	MetaInputmodeNumeric MetaInputmode = "numeric"
 )
 
 type MetaSpellcheck string
 
 const (
-	MetaSpellcheckFalse MetaSpellcheck = "false"
 	MetaSpellcheckTrue  MetaSpellcheck = "true"
+	MetaSpellcheckFalse MetaSpellcheck = "false"
 	MetaSpellcheckEmpty MetaSpellcheck = ""
 )
 

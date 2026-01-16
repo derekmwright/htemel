@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func TitleTernary(condition bool, true htemel.Node, false htemel.Node) *TitleEle
 	if condition {
 		return Title(true)
 	}
-
 	return Title(false)
 }
 
 // Children appends children to this element.
 func (e *TitleElement) Children(children ...htemel.Node) *TitleElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *TitleElement) With(fn func(*TitleElement)) *TitleElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *TitleElement) Textf(format string, args ...any) *TitleElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *TitleElement) AddClass(classes ...string) *TitleElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *TitleElement) ToggleClass(class string, enable bool) *TitleElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type TitleAutocapitalize string
 
 const (
-	TitleAutocapitalizeNone       TitleAutocapitalize = "none"
-	TitleAutocapitalizeOff        TitleAutocapitalize = "off"
 	TitleAutocapitalizeOn         TitleAutocapitalize = "on"
 	TitleAutocapitalizeSentences  TitleAutocapitalize = "sentences"
 	TitleAutocapitalizeWords      TitleAutocapitalize = "words"
 	TitleAutocapitalizeCharacters TitleAutocapitalize = "characters"
+	TitleAutocapitalizeNone       TitleAutocapitalize = "none"
+	TitleAutocapitalizeOff        TitleAutocapitalize = "off"
 )
 
 type TitleAutocorrect string
@@ -77,18 +108,18 @@ const (
 type TitleContenteditable string
 
 const (
+	TitleContenteditableTrue          TitleContenteditable = "true"
 	TitleContenteditableFalse         TitleContenteditable = "false"
 	TitleContenteditablePlaintextOnly TitleContenteditable = "plaintext-only"
-	TitleContenteditableTrue          TitleContenteditable = "true"
 	TitleContenteditableEmpty         TitleContenteditable = ""
 )
 
 type TitleDir string
 
 const (
+	TitleDirLtr  TitleDir = "ltr"
 	TitleDirRtl  TitleDir = "rtl"
 	TitleDirAuto TitleDir = "auto"
-	TitleDirLtr  TitleDir = "ltr"
 )
 
 type TitleDraggable string
@@ -101,13 +132,13 @@ const (
 type TitleEnterkeyhint string
 
 const (
-	TitleEnterkeyhintSend     TitleEnterkeyhint = "send"
-	TitleEnterkeyhintDone     TitleEnterkeyhint = "done"
-	TitleEnterkeyhintEnter    TitleEnterkeyhint = "enter"
 	TitleEnterkeyhintGo       TitleEnterkeyhint = "go"
 	TitleEnterkeyhintNext     TitleEnterkeyhint = "next"
 	TitleEnterkeyhintPrevious TitleEnterkeyhint = "previous"
 	TitleEnterkeyhintSearch   TitleEnterkeyhint = "search"
+	TitleEnterkeyhintSend     TitleEnterkeyhint = "send"
+	TitleEnterkeyhintDone     TitleEnterkeyhint = "done"
+	TitleEnterkeyhintEnter    TitleEnterkeyhint = "enter"
 )
 
 type TitleHidden string
@@ -121,14 +152,14 @@ const (
 type TitleInputmode string
 
 const (
-	TitleInputmodeSearch  TitleInputmode = "search"
-	TitleInputmodeTel     TitleInputmode = "tel"
-	TitleInputmodeText    TitleInputmode = "text"
-	TitleInputmodeUrl     TitleInputmode = "url"
 	TitleInputmodeDecimal TitleInputmode = "decimal"
 	TitleInputmodeEmail   TitleInputmode = "email"
 	TitleInputmodeNone    TitleInputmode = "none"
 	TitleInputmodeNumeric TitleInputmode = "numeric"
+	TitleInputmodeSearch  TitleInputmode = "search"
+	TitleInputmodeTel     TitleInputmode = "tel"
+	TitleInputmodeText    TitleInputmode = "text"
+	TitleInputmodeUrl     TitleInputmode = "url"
 )
 
 type TitleSpellcheck string
@@ -142,8 +173,8 @@ const (
 type TitleTranslate string
 
 const (
-	TitleTranslateYes   TitleTranslate = "yes"
 	TitleTranslateNo    TitleTranslate = "no"
+	TitleTranslateYes   TitleTranslate = "yes"
 	TitleTranslateEmpty TitleTranslate = ""
 )
 

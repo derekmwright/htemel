@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func HtmlTernary(condition bool, true htemel.Node, false htemel.Node) *HtmlEleme
 	if condition {
 		return Html(true)
 	}
-
 	return Html(false)
 }
 
 // Children appends children to this element.
 func (e *HtmlElement) Children(children ...htemel.Node) *HtmlElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *HtmlElement) With(fn func(*HtmlElement)) *HtmlElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *HtmlElement) Textf(format string, args ...any) *HtmlElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *HtmlElement) AddClass(classes ...string) *HtmlElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *HtmlElement) ToggleClass(class string, enable bool) *HtmlElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -101,13 +132,13 @@ const (
 type HtmlEnterkeyhint string
 
 const (
-	HtmlEnterkeyhintGo       HtmlEnterkeyhint = "go"
-	HtmlEnterkeyhintNext     HtmlEnterkeyhint = "next"
-	HtmlEnterkeyhintPrevious HtmlEnterkeyhint = "previous"
 	HtmlEnterkeyhintSearch   HtmlEnterkeyhint = "search"
 	HtmlEnterkeyhintSend     HtmlEnterkeyhint = "send"
 	HtmlEnterkeyhintDone     HtmlEnterkeyhint = "done"
 	HtmlEnterkeyhintEnter    HtmlEnterkeyhint = "enter"
+	HtmlEnterkeyhintGo       HtmlEnterkeyhint = "go"
+	HtmlEnterkeyhintNext     HtmlEnterkeyhint = "next"
+	HtmlEnterkeyhintPrevious HtmlEnterkeyhint = "previous"
 )
 
 type HtmlHidden string
@@ -121,14 +152,14 @@ const (
 type HtmlInputmode string
 
 const (
-	HtmlInputmodeTel     HtmlInputmode = "tel"
-	HtmlInputmodeText    HtmlInputmode = "text"
-	HtmlInputmodeUrl     HtmlInputmode = "url"
-	HtmlInputmodeDecimal HtmlInputmode = "decimal"
 	HtmlInputmodeEmail   HtmlInputmode = "email"
 	HtmlInputmodeNone    HtmlInputmode = "none"
 	HtmlInputmodeNumeric HtmlInputmode = "numeric"
 	HtmlInputmodeSearch  HtmlInputmode = "search"
+	HtmlInputmodeTel     HtmlInputmode = "tel"
+	HtmlInputmodeText    HtmlInputmode = "text"
+	HtmlInputmodeUrl     HtmlInputmode = "url"
+	HtmlInputmodeDecimal HtmlInputmode = "decimal"
 )
 
 type HtmlSpellcheck string

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,33 +45,63 @@ func KbdTernary(condition bool, true htemel.Node, false htemel.Node) *KbdElement
 	if condition {
 		return Kbd(true)
 	}
-
 	return Kbd(false)
 }
 
 // Children appends children to this element.
 func (e *KbdElement) Children(children ...htemel.Node) *KbdElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *KbdElement) With(fn func(*KbdElement)) *KbdElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *KbdElement) Textf(format string, args ...any) *KbdElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *KbdElement) AddClass(classes ...string) *KbdElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *KbdElement) ToggleClass(class string, enable bool) *KbdElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type KbdAutocapitalize string
 
 const (
+	KbdAutocapitalizeCharacters KbdAutocapitalize = "characters"
+	KbdAutocapitalizeNone       KbdAutocapitalize = "none"
 	KbdAutocapitalizeOff        KbdAutocapitalize = "off"
 	KbdAutocapitalizeOn         KbdAutocapitalize = "on"
 	KbdAutocapitalizeSentences  KbdAutocapitalize = "sentences"
 	KbdAutocapitalizeWords      KbdAutocapitalize = "words"
-	KbdAutocapitalizeCharacters KbdAutocapitalize = "characters"
-	KbdAutocapitalizeNone       KbdAutocapitalize = "none"
 )
 
 type KbdAutocorrect string
 
 const (
-	KbdAutocorrectOff   KbdAutocorrect = "off"
 	KbdAutocorrectOn    KbdAutocorrect = "on"
+	KbdAutocorrectOff   KbdAutocorrect = "off"
 	KbdAutocorrectEmpty KbdAutocorrect = ""
 )
 
@@ -86,42 +117,41 @@ const (
 type KbdDir string
 
 const (
-	KbdDirRtl  KbdDir = "rtl"
 	KbdDirAuto KbdDir = "auto"
 	KbdDirLtr  KbdDir = "ltr"
+	KbdDirRtl  KbdDir = "rtl"
 )
 
 type KbdDraggable string
 
 const (
-	KbdDraggableTrue  KbdDraggable = "true"
 	KbdDraggableFalse KbdDraggable = "false"
+	KbdDraggableTrue  KbdDraggable = "true"
 )
 
 type KbdEnterkeyhint string
 
 const (
-	KbdEnterkeyhintNext     KbdEnterkeyhint = "next"
-	KbdEnterkeyhintPrevious KbdEnterkeyhint = "previous"
 	KbdEnterkeyhintSearch   KbdEnterkeyhint = "search"
 	KbdEnterkeyhintSend     KbdEnterkeyhint = "send"
 	KbdEnterkeyhintDone     KbdEnterkeyhint = "done"
 	KbdEnterkeyhintEnter    KbdEnterkeyhint = "enter"
 	KbdEnterkeyhintGo       KbdEnterkeyhint = "go"
+	KbdEnterkeyhintNext     KbdEnterkeyhint = "next"
+	KbdEnterkeyhintPrevious KbdEnterkeyhint = "previous"
 )
 
 type KbdHidden string
 
 const (
-	KbdHiddenHidden     KbdHidden = "hidden"
 	KbdHiddenUntilFound KbdHidden = "until-found"
+	KbdHiddenHidden     KbdHidden = "hidden"
 	KbdHiddenEmpty      KbdHidden = ""
 )
 
 type KbdInputmode string
 
 const (
-	KbdInputmodeSearch  KbdInputmode = "search"
 	KbdInputmodeTel     KbdInputmode = "tel"
 	KbdInputmodeText    KbdInputmode = "text"
 	KbdInputmodeUrl     KbdInputmode = "url"
@@ -129,6 +159,7 @@ const (
 	KbdInputmodeEmail   KbdInputmode = "email"
 	KbdInputmodeNone    KbdInputmode = "none"
 	KbdInputmodeNumeric KbdInputmode = "numeric"
+	KbdInputmodeSearch  KbdInputmode = "search"
 )
 
 type KbdSpellcheck string

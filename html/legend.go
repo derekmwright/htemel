@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func LegendTernary(condition bool, true htemel.Node, false htemel.Node) *LegendE
 	if condition {
 		return Legend(true)
 	}
-
 	return Legend(false)
 }
 
 // Children appends children to this element.
 func (e *LegendElement) Children(children ...htemel.Node) *LegendElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *LegendElement) With(fn func(*LegendElement)) *LegendElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *LegendElement) Textf(format string, args ...any) *LegendElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *LegendElement) AddClass(classes ...string) *LegendElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *LegendElement) ToggleClass(class string, enable bool) *LegendElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type LegendAutocapitalize string
 
 const (
+	LegendAutocapitalizeOn         LegendAutocapitalize = "on"
+	LegendAutocapitalizeSentences  LegendAutocapitalize = "sentences"
 	LegendAutocapitalizeWords      LegendAutocapitalize = "words"
 	LegendAutocapitalizeCharacters LegendAutocapitalize = "characters"
 	LegendAutocapitalizeNone       LegendAutocapitalize = "none"
 	LegendAutocapitalizeOff        LegendAutocapitalize = "off"
-	LegendAutocapitalizeOn         LegendAutocapitalize = "on"
-	LegendAutocapitalizeSentences  LegendAutocapitalize = "sentences"
 )
 
 type LegendAutocorrect string
@@ -94,41 +125,41 @@ const (
 type LegendDraggable string
 
 const (
-	LegendDraggableTrue  LegendDraggable = "true"
 	LegendDraggableFalse LegendDraggable = "false"
+	LegendDraggableTrue  LegendDraggable = "true"
 )
 
 type LegendEnterkeyhint string
 
 const (
-	LegendEnterkeyhintPrevious LegendEnterkeyhint = "previous"
-	LegendEnterkeyhintSearch   LegendEnterkeyhint = "search"
-	LegendEnterkeyhintSend     LegendEnterkeyhint = "send"
 	LegendEnterkeyhintDone     LegendEnterkeyhint = "done"
 	LegendEnterkeyhintEnter    LegendEnterkeyhint = "enter"
 	LegendEnterkeyhintGo       LegendEnterkeyhint = "go"
 	LegendEnterkeyhintNext     LegendEnterkeyhint = "next"
+	LegendEnterkeyhintPrevious LegendEnterkeyhint = "previous"
+	LegendEnterkeyhintSearch   LegendEnterkeyhint = "search"
+	LegendEnterkeyhintSend     LegendEnterkeyhint = "send"
 )
 
 type LegendHidden string
 
 const (
-	LegendHiddenUntilFound LegendHidden = "until-found"
 	LegendHiddenHidden     LegendHidden = "hidden"
+	LegendHiddenUntilFound LegendHidden = "until-found"
 	LegendHiddenEmpty      LegendHidden = ""
 )
 
 type LegendInputmode string
 
 const (
+	LegendInputmodeNone    LegendInputmode = "none"
+	LegendInputmodeNumeric LegendInputmode = "numeric"
+	LegendInputmodeSearch  LegendInputmode = "search"
 	LegendInputmodeTel     LegendInputmode = "tel"
 	LegendInputmodeText    LegendInputmode = "text"
 	LegendInputmodeUrl     LegendInputmode = "url"
 	LegendInputmodeDecimal LegendInputmode = "decimal"
 	LegendInputmodeEmail   LegendInputmode = "email"
-	LegendInputmodeNone    LegendInputmode = "none"
-	LegendInputmodeNumeric LegendInputmode = "numeric"
-	LegendInputmodeSearch  LegendInputmode = "search"
 )
 
 type LegendSpellcheck string
@@ -150,8 +181,8 @@ const (
 type LegendWritingsuggestions string
 
 const (
-	LegendWritingsuggestionsTrue  LegendWritingsuggestions = "true"
 	LegendWritingsuggestionsFalse LegendWritingsuggestions = "false"
+	LegendWritingsuggestionsTrue  LegendWritingsuggestions = "true"
 	LegendWritingsuggestionsEmpty LegendWritingsuggestions = ""
 )
 

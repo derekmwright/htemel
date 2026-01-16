@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func NavTernary(condition bool, true htemel.Node, false htemel.Node) *NavElement
 	if condition {
 		return Nav(true)
 	}
-
 	return Nav(false)
 }
 
 // Children appends children to this element.
 func (e *NavElement) Children(children ...htemel.Node) *NavElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *NavElement) With(fn func(*NavElement)) *NavElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *NavElement) Textf(format string, args ...any) *NavElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *NavElement) AddClass(classes ...string) *NavElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *NavElement) ToggleClass(class string, enable bool) *NavElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -77,9 +108,9 @@ const (
 type NavContenteditable string
 
 const (
+	NavContenteditableFalse         NavContenteditable = "false"
 	NavContenteditablePlaintextOnly NavContenteditable = "plaintext-only"
 	NavContenteditableTrue          NavContenteditable = "true"
-	NavContenteditableFalse         NavContenteditable = "false"
 	NavContenteditableEmpty         NavContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type NavEnterkeyhint string
 
 const (
+	NavEnterkeyhintEnter    NavEnterkeyhint = "enter"
+	NavEnterkeyhintGo       NavEnterkeyhint = "go"
+	NavEnterkeyhintNext     NavEnterkeyhint = "next"
 	NavEnterkeyhintPrevious NavEnterkeyhint = "previous"
 	NavEnterkeyhintSearch   NavEnterkeyhint = "search"
 	NavEnterkeyhintSend     NavEnterkeyhint = "send"
 	NavEnterkeyhintDone     NavEnterkeyhint = "done"
-	NavEnterkeyhintEnter    NavEnterkeyhint = "enter"
-	NavEnterkeyhintGo       NavEnterkeyhint = "go"
-	NavEnterkeyhintNext     NavEnterkeyhint = "next"
 )
 
 type NavHidden string
@@ -121,6 +152,7 @@ const (
 type NavInputmode string
 
 const (
+	NavInputmodeText    NavInputmode = "text"
 	NavInputmodeUrl     NavInputmode = "url"
 	NavInputmodeDecimal NavInputmode = "decimal"
 	NavInputmodeEmail   NavInputmode = "email"
@@ -128,22 +160,21 @@ const (
 	NavInputmodeNumeric NavInputmode = "numeric"
 	NavInputmodeSearch  NavInputmode = "search"
 	NavInputmodeTel     NavInputmode = "tel"
-	NavInputmodeText    NavInputmode = "text"
 )
 
 type NavSpellcheck string
 
 const (
-	NavSpellcheckTrue  NavSpellcheck = "true"
 	NavSpellcheckFalse NavSpellcheck = "false"
+	NavSpellcheckTrue  NavSpellcheck = "true"
 	NavSpellcheckEmpty NavSpellcheck = ""
 )
 
 type NavTranslate string
 
 const (
-	NavTranslateNo    NavTranslate = "no"
 	NavTranslateYes   NavTranslate = "yes"
+	NavTranslateNo    NavTranslate = "no"
 	NavTranslateEmpty NavTranslate = ""
 )
 

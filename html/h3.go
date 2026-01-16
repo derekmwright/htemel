@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func H3Ternary(condition bool, true htemel.Node, false htemel.Node) *H3Element {
 	if condition {
 		return H3(true)
 	}
-
 	return H3(false)
 }
 
 // Children appends children to this element.
 func (e *H3Element) Children(children ...htemel.Node) *H3Element {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *H3Element) With(fn func(*H3Element)) *H3Element {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *H3Element) Textf(format string, args ...any) *H3Element {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *H3Element) AddClass(classes ...string) *H3Element {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *H3Element) ToggleClass(class string, enable bool) *H3Element {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type H3Autocapitalize string
 
 const (
+	H3AutocapitalizeSentences  H3Autocapitalize = "sentences"
 	H3AutocapitalizeWords      H3Autocapitalize = "words"
 	H3AutocapitalizeCharacters H3Autocapitalize = "characters"
 	H3AutocapitalizeNone       H3Autocapitalize = "none"
 	H3AutocapitalizeOff        H3Autocapitalize = "off"
 	H3AutocapitalizeOn         H3Autocapitalize = "on"
-	H3AutocapitalizeSentences  H3Autocapitalize = "sentences"
 )
 
 type H3Autocorrect string
@@ -101,34 +132,34 @@ const (
 type H3Enterkeyhint string
 
 const (
+	H3EnterkeyhintGo       H3Enterkeyhint = "go"
+	H3EnterkeyhintNext     H3Enterkeyhint = "next"
 	H3EnterkeyhintPrevious H3Enterkeyhint = "previous"
 	H3EnterkeyhintSearch   H3Enterkeyhint = "search"
 	H3EnterkeyhintSend     H3Enterkeyhint = "send"
 	H3EnterkeyhintDone     H3Enterkeyhint = "done"
 	H3EnterkeyhintEnter    H3Enterkeyhint = "enter"
-	H3EnterkeyhintGo       H3Enterkeyhint = "go"
-	H3EnterkeyhintNext     H3Enterkeyhint = "next"
 )
 
 type H3Hidden string
 
 const (
-	H3HiddenHidden     H3Hidden = "hidden"
 	H3HiddenUntilFound H3Hidden = "until-found"
+	H3HiddenHidden     H3Hidden = "hidden"
 	H3HiddenEmpty      H3Hidden = ""
 )
 
 type H3Inputmode string
 
 const (
-	H3InputmodeEmail   H3Inputmode = "email"
-	H3InputmodeNone    H3Inputmode = "none"
-	H3InputmodeNumeric H3Inputmode = "numeric"
 	H3InputmodeSearch  H3Inputmode = "search"
 	H3InputmodeTel     H3Inputmode = "tel"
 	H3InputmodeText    H3Inputmode = "text"
 	H3InputmodeUrl     H3Inputmode = "url"
 	H3InputmodeDecimal H3Inputmode = "decimal"
+	H3InputmodeEmail   H3Inputmode = "email"
+	H3InputmodeNone    H3Inputmode = "none"
+	H3InputmodeNumeric H3Inputmode = "numeric"
 )
 
 type H3Spellcheck string
@@ -142,16 +173,16 @@ const (
 type H3Translate string
 
 const (
-	H3TranslateYes   H3Translate = "yes"
 	H3TranslateNo    H3Translate = "no"
+	H3TranslateYes   H3Translate = "yes"
 	H3TranslateEmpty H3Translate = ""
 )
 
 type H3Writingsuggestions string
 
 const (
-	H3WritingsuggestionsTrue  H3Writingsuggestions = "true"
 	H3WritingsuggestionsFalse H3Writingsuggestions = "false"
+	H3WritingsuggestionsTrue  H3Writingsuggestions = "true"
 	H3WritingsuggestionsEmpty H3Writingsuggestions = ""
 )
 

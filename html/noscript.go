@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func NoscriptTernary(condition bool, true htemel.Node, false htemel.Node) *Noscr
 	if condition {
 		return Noscript(true)
 	}
-
 	return Noscript(false)
 }
 
 // Children appends children to this element.
 func (e *NoscriptElement) Children(children ...htemel.Node) *NoscriptElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *NoscriptElement) With(fn func(*NoscriptElement)) *NoscriptElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *NoscriptElement) Textf(format string, args ...any) *NoscriptElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *NoscriptElement) AddClass(classes ...string) *NoscriptElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *NoscriptElement) ToggleClass(class string, enable bool) *NoscriptElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type NoscriptAutocapitalize string
 
 const (
+	NoscriptAutocapitalizeOn         NoscriptAutocapitalize = "on"
+	NoscriptAutocapitalizeSentences  NoscriptAutocapitalize = "sentences"
 	NoscriptAutocapitalizeWords      NoscriptAutocapitalize = "words"
 	NoscriptAutocapitalizeCharacters NoscriptAutocapitalize = "characters"
 	NoscriptAutocapitalizeNone       NoscriptAutocapitalize = "none"
 	NoscriptAutocapitalizeOff        NoscriptAutocapitalize = "off"
-	NoscriptAutocapitalizeOn         NoscriptAutocapitalize = "on"
-	NoscriptAutocapitalizeSentences  NoscriptAutocapitalize = "sentences"
 )
 
 type NoscriptAutocorrect string
@@ -77,9 +108,9 @@ const (
 type NoscriptContenteditable string
 
 const (
-	NoscriptContenteditableFalse         NoscriptContenteditable = "false"
 	NoscriptContenteditablePlaintextOnly NoscriptContenteditable = "plaintext-only"
 	NoscriptContenteditableTrue          NoscriptContenteditable = "true"
+	NoscriptContenteditableFalse         NoscriptContenteditable = "false"
 	NoscriptContenteditableEmpty         NoscriptContenteditable = ""
 )
 
@@ -101,13 +132,13 @@ const (
 type NoscriptEnterkeyhint string
 
 const (
-	NoscriptEnterkeyhintGo       NoscriptEnterkeyhint = "go"
-	NoscriptEnterkeyhintNext     NoscriptEnterkeyhint = "next"
 	NoscriptEnterkeyhintPrevious NoscriptEnterkeyhint = "previous"
 	NoscriptEnterkeyhintSearch   NoscriptEnterkeyhint = "search"
 	NoscriptEnterkeyhintSend     NoscriptEnterkeyhint = "send"
 	NoscriptEnterkeyhintDone     NoscriptEnterkeyhint = "done"
 	NoscriptEnterkeyhintEnter    NoscriptEnterkeyhint = "enter"
+	NoscriptEnterkeyhintGo       NoscriptEnterkeyhint = "go"
+	NoscriptEnterkeyhintNext     NoscriptEnterkeyhint = "next"
 )
 
 type NoscriptHidden string
@@ -121,14 +152,14 @@ const (
 type NoscriptInputmode string
 
 const (
-	NoscriptInputmodeNone    NoscriptInputmode = "none"
-	NoscriptInputmodeNumeric NoscriptInputmode = "numeric"
 	NoscriptInputmodeSearch  NoscriptInputmode = "search"
 	NoscriptInputmodeTel     NoscriptInputmode = "tel"
 	NoscriptInputmodeText    NoscriptInputmode = "text"
 	NoscriptInputmodeUrl     NoscriptInputmode = "url"
 	NoscriptInputmodeDecimal NoscriptInputmode = "decimal"
 	NoscriptInputmodeEmail   NoscriptInputmode = "email"
+	NoscriptInputmodeNone    NoscriptInputmode = "none"
+	NoscriptInputmodeNumeric NoscriptInputmode = "numeric"
 )
 
 type NoscriptSpellcheck string
@@ -142,8 +173,8 @@ const (
 type NoscriptTranslate string
 
 const (
-	NoscriptTranslateYes   NoscriptTranslate = "yes"
 	NoscriptTranslateNo    NoscriptTranslate = "no"
+	NoscriptTranslateYes   NoscriptTranslate = "yes"
 	NoscriptTranslateEmpty NoscriptTranslate = ""
 )
 

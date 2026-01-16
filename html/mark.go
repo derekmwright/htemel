@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,26 +45,56 @@ func MarkTernary(condition bool, true htemel.Node, false htemel.Node) *MarkEleme
 	if condition {
 		return Mark(true)
 	}
-
 	return Mark(false)
 }
 
 // Children appends children to this element.
 func (e *MarkElement) Children(children ...htemel.Node) *MarkElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *MarkElement) With(fn func(*MarkElement)) *MarkElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *MarkElement) Textf(format string, args ...any) *MarkElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *MarkElement) AddClass(classes ...string) *MarkElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *MarkElement) ToggleClass(class string, enable bool) *MarkElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
 type MarkAutocapitalize string
 
 const (
-	MarkAutocapitalizeCharacters MarkAutocapitalize = "characters"
-	MarkAutocapitalizeNone       MarkAutocapitalize = "none"
 	MarkAutocapitalizeOff        MarkAutocapitalize = "off"
 	MarkAutocapitalizeOn         MarkAutocapitalize = "on"
 	MarkAutocapitalizeSentences  MarkAutocapitalize = "sentences"
 	MarkAutocapitalizeWords      MarkAutocapitalize = "words"
+	MarkAutocapitalizeCharacters MarkAutocapitalize = "characters"
+	MarkAutocapitalizeNone       MarkAutocapitalize = "none"
 )
 
 type MarkAutocorrect string
@@ -86,9 +117,9 @@ const (
 type MarkDir string
 
 const (
+	MarkDirRtl  MarkDir = "rtl"
 	MarkDirAuto MarkDir = "auto"
 	MarkDirLtr  MarkDir = "ltr"
-	MarkDirRtl  MarkDir = "rtl"
 )
 
 type MarkDraggable string
@@ -101,27 +132,26 @@ const (
 type MarkEnterkeyhint string
 
 const (
-	MarkEnterkeyhintGo       MarkEnterkeyhint = "go"
 	MarkEnterkeyhintNext     MarkEnterkeyhint = "next"
 	MarkEnterkeyhintPrevious MarkEnterkeyhint = "previous"
 	MarkEnterkeyhintSearch   MarkEnterkeyhint = "search"
 	MarkEnterkeyhintSend     MarkEnterkeyhint = "send"
 	MarkEnterkeyhintDone     MarkEnterkeyhint = "done"
 	MarkEnterkeyhintEnter    MarkEnterkeyhint = "enter"
+	MarkEnterkeyhintGo       MarkEnterkeyhint = "go"
 )
 
 type MarkHidden string
 
 const (
-	MarkHiddenHidden     MarkHidden = "hidden"
 	MarkHiddenUntilFound MarkHidden = "until-found"
+	MarkHiddenHidden     MarkHidden = "hidden"
 	MarkHiddenEmpty      MarkHidden = ""
 )
 
 type MarkInputmode string
 
 const (
-	MarkInputmodeNumeric MarkInputmode = "numeric"
 	MarkInputmodeSearch  MarkInputmode = "search"
 	MarkInputmodeTel     MarkInputmode = "tel"
 	MarkInputmodeText    MarkInputmode = "text"
@@ -129,6 +159,7 @@ const (
 	MarkInputmodeDecimal MarkInputmode = "decimal"
 	MarkInputmodeEmail   MarkInputmode = "email"
 	MarkInputmodeNone    MarkInputmode = "none"
+	MarkInputmodeNumeric MarkInputmode = "numeric"
 )
 
 type MarkSpellcheck string
@@ -142,16 +173,16 @@ const (
 type MarkTranslate string
 
 const (
-	MarkTranslateNo    MarkTranslate = "no"
 	MarkTranslateYes   MarkTranslate = "yes"
+	MarkTranslateNo    MarkTranslate = "no"
 	MarkTranslateEmpty MarkTranslate = ""
 )
 
 type MarkWritingsuggestions string
 
 const (
-	MarkWritingsuggestionsTrue  MarkWritingsuggestions = "true"
 	MarkWritingsuggestionsFalse MarkWritingsuggestions = "false"
+	MarkWritingsuggestionsTrue  MarkWritingsuggestions = "true"
 	MarkWritingsuggestionsEmpty MarkWritingsuggestions = ""
 )
 

@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func TemplateTernary(condition bool, true htemel.Node, false htemel.Node) *Templ
 	if condition {
 		return Template(true)
 	}
-
 	return Template(false)
 }
 
 // Children appends children to this element.
 func (e *TemplateElement) Children(children ...htemel.Node) *TemplateElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *TemplateElement) With(fn func(*TemplateElement)) *TemplateElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *TemplateElement) Textf(format string, args ...any) *TemplateElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *TemplateElement) AddClass(classes ...string) *TemplateElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *TemplateElement) ToggleClass(class string, enable bool) *TemplateElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -65,12 +96,12 @@ const (
 type TemplateAutocapitalize string
 
 const (
-	TemplateAutocapitalizeCharacters TemplateAutocapitalize = "characters"
-	TemplateAutocapitalizeNone       TemplateAutocapitalize = "none"
-	TemplateAutocapitalizeOff        TemplateAutocapitalize = "off"
 	TemplateAutocapitalizeOn         TemplateAutocapitalize = "on"
 	TemplateAutocapitalizeSentences  TemplateAutocapitalize = "sentences"
 	TemplateAutocapitalizeWords      TemplateAutocapitalize = "words"
+	TemplateAutocapitalizeCharacters TemplateAutocapitalize = "characters"
+	TemplateAutocapitalizeNone       TemplateAutocapitalize = "none"
+	TemplateAutocapitalizeOff        TemplateAutocapitalize = "off"
 )
 
 type TemplateAutocorrect string
@@ -108,13 +139,13 @@ const (
 type TemplateEnterkeyhint string
 
 const (
-	TemplateEnterkeyhintSend     TemplateEnterkeyhint = "send"
 	TemplateEnterkeyhintDone     TemplateEnterkeyhint = "done"
 	TemplateEnterkeyhintEnter    TemplateEnterkeyhint = "enter"
 	TemplateEnterkeyhintGo       TemplateEnterkeyhint = "go"
 	TemplateEnterkeyhintNext     TemplateEnterkeyhint = "next"
 	TemplateEnterkeyhintPrevious TemplateEnterkeyhint = "previous"
 	TemplateEnterkeyhintSearch   TemplateEnterkeyhint = "search"
+	TemplateEnterkeyhintSend     TemplateEnterkeyhint = "send"
 )
 
 type TemplateHidden string
@@ -128,14 +159,14 @@ const (
 type TemplateInputmode string
 
 const (
-	TemplateInputmodeSearch  TemplateInputmode = "search"
-	TemplateInputmodeTel     TemplateInputmode = "tel"
 	TemplateInputmodeText    TemplateInputmode = "text"
 	TemplateInputmodeUrl     TemplateInputmode = "url"
 	TemplateInputmodeDecimal TemplateInputmode = "decimal"
 	TemplateInputmodeEmail   TemplateInputmode = "email"
 	TemplateInputmodeNone    TemplateInputmode = "none"
 	TemplateInputmodeNumeric TemplateInputmode = "numeric"
+	TemplateInputmodeSearch  TemplateInputmode = "search"
+	TemplateInputmodeTel     TemplateInputmode = "tel"
 )
 
 type TemplateSpellcheck string

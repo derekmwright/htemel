@@ -4,6 +4,7 @@ package html
 import (
 	"fmt"
 	"io"
+	"slices"
 	"strings"
 
 	"github.com/derekmwright/htemel"
@@ -44,14 +45,44 @@ func ButtonTernary(condition bool, true htemel.Node, false htemel.Node) *ButtonE
 	if condition {
 		return Button(true)
 	}
-
 	return Button(false)
 }
 
 // Children appends children to this element.
 func (e *ButtonElement) Children(children ...htemel.Node) *ButtonElement {
 	e.children = append(e.children, children...)
+	return e
+}
 
+// With allows passing a function to modify the element via a closure.
+func (e *ButtonElement) With(fn func(*ButtonElement)) *ButtonElement {
+	fn(e)
+	return e
+}
+
+// Textf adds a text node to the element with the given format string and arguments.
+func (e *ButtonElement) Textf(format string, args ...any) *ButtonElement {
+	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
+}
+
+// AddClass appends a class to the element.
+func (e *ButtonElement) AddClass(classes ...string) *ButtonElement {
+	current := e.attributes["class"].(string)
+	all := append(strings.Fields(current), classes...)
+	e.attributes["class"] = strings.Join(all, " ")
+	return e
+}
+
+// ToggleClass toggles a class on or off.
+func (e *ButtonElement) ToggleClass(class string, enable bool) *ButtonElement {
+	classes := strings.Fields(e.attributes["class"].(string))
+	idx := slices.Index(classes, class)
+	if enable && idx == -1 {
+		classes = append(classes, class)
+	} else if !enable && idx >= 0 {
+		classes = slices.Delete(classes, idx, idx+1)
+	}
+	e.attributes["class"] = strings.Join(classes, " ")
 	return e
 }
 
@@ -77,9 +108,9 @@ const (
 type ButtonPopovertargetaction string
 
 const (
-	ButtonPopovertargetactionHide   ButtonPopovertargetaction = "hide"
 	ButtonPopovertargetactionShow   ButtonPopovertargetaction = "show"
 	ButtonPopovertargetactionToggle ButtonPopovertargetaction = "toggle"
+	ButtonPopovertargetactionHide   ButtonPopovertargetaction = "hide"
 )
 
 type ButtonType string
@@ -93,28 +124,28 @@ const (
 type ButtonAutocapitalize string
 
 const (
+	ButtonAutocapitalizeOn         ButtonAutocapitalize = "on"
 	ButtonAutocapitalizeSentences  ButtonAutocapitalize = "sentences"
 	ButtonAutocapitalizeWords      ButtonAutocapitalize = "words"
 	ButtonAutocapitalizeCharacters ButtonAutocapitalize = "characters"
 	ButtonAutocapitalizeNone       ButtonAutocapitalize = "none"
 	ButtonAutocapitalizeOff        ButtonAutocapitalize = "off"
-	ButtonAutocapitalizeOn         ButtonAutocapitalize = "on"
 )
 
 type ButtonAutocorrect string
 
 const (
-	ButtonAutocorrectOn    ButtonAutocorrect = "on"
 	ButtonAutocorrectOff   ButtonAutocorrect = "off"
+	ButtonAutocorrectOn    ButtonAutocorrect = "on"
 	ButtonAutocorrectEmpty ButtonAutocorrect = ""
 )
 
 type ButtonContenteditable string
 
 const (
+	ButtonContenteditableFalse         ButtonContenteditable = "false"
 	ButtonContenteditablePlaintextOnly ButtonContenteditable = "plaintext-only"
 	ButtonContenteditableTrue          ButtonContenteditable = "true"
-	ButtonContenteditableFalse         ButtonContenteditable = "false"
 	ButtonContenteditableEmpty         ButtonContenteditable = ""
 )
 
@@ -136,13 +167,13 @@ const (
 type ButtonEnterkeyhint string
 
 const (
-	ButtonEnterkeyhintSend     ButtonEnterkeyhint = "send"
 	ButtonEnterkeyhintDone     ButtonEnterkeyhint = "done"
 	ButtonEnterkeyhintEnter    ButtonEnterkeyhint = "enter"
 	ButtonEnterkeyhintGo       ButtonEnterkeyhint = "go"
 	ButtonEnterkeyhintNext     ButtonEnterkeyhint = "next"
 	ButtonEnterkeyhintPrevious ButtonEnterkeyhint = "previous"
 	ButtonEnterkeyhintSearch   ButtonEnterkeyhint = "search"
+	ButtonEnterkeyhintSend     ButtonEnterkeyhint = "send"
 )
 
 type ButtonHidden string
@@ -156,14 +187,14 @@ const (
 type ButtonInputmode string
 
 const (
-	ButtonInputmodeText    ButtonInputmode = "text"
-	ButtonInputmodeUrl     ButtonInputmode = "url"
 	ButtonInputmodeDecimal ButtonInputmode = "decimal"
 	ButtonInputmodeEmail   ButtonInputmode = "email"
 	ButtonInputmodeNone    ButtonInputmode = "none"
 	ButtonInputmodeNumeric ButtonInputmode = "numeric"
 	ButtonInputmodeSearch  ButtonInputmode = "search"
 	ButtonInputmodeTel     ButtonInputmode = "tel"
+	ButtonInputmodeText    ButtonInputmode = "text"
+	ButtonInputmodeUrl     ButtonInputmode = "url"
 )
 
 type ButtonSpellcheck string
