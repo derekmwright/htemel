@@ -1,4 +1,4 @@
-[![Go Reference](https://pkg.go.dev/badge/github.com/go-htemel/htemel.svg)](https://pkg.go.dev/github.com/derekmwright/web)
+[![Go Reference](https://pkg.go.dev/badge/github.com/go-htemel/htemel.svg)](https://pkg.go.dev/github.com/go-htemel/htemel)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Version](https://img.shields.io/github/v/release/go-htemel/htemel?sort=semver)
 [![Go Report Card](https://goreportcard.com/badge/github.com/go-htemel/htemel)](https://goreportcard.com/report/github.com/go-htemel/htemel)

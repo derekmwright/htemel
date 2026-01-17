@@ -1,6 +1,6 @@
 module github.com/go-htemel/htemel
 
-go 1.24.5
+go 1.25
 
 require golang.org/x/net v0.43.0
 
