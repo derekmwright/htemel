@@ -70,24 +70,24 @@ func (e *MetaElement) ToggleClass(class string, enable bool) *MetaElement {
 type MetaHttpEquiv string
 
 const (
-	MetaHttpEquivSetCookie             MetaHttpEquiv = "set-cookie"
 	MetaHttpEquivXUaCompatible         MetaHttpEquiv = "x-ua-compatible"
 	MetaHttpEquivContentLanguage       MetaHttpEquiv = "content-language"
 	MetaHttpEquivContentSecurityPolicy MetaHttpEquiv = "content-security-policy"
 	MetaHttpEquivContentType           MetaHttpEquiv = "content-type"
 	MetaHttpEquivDefaultStyle          MetaHttpEquiv = "default-style"
 	MetaHttpEquivRefresh               MetaHttpEquiv = "refresh"
+	MetaHttpEquivSetCookie             MetaHttpEquiv = "set-cookie"
 )
 
 type MetaAutocapitalize string
 
 const (
-	MetaAutocapitalizeWords      MetaAutocapitalize = "words"
 	MetaAutocapitalizeCharacters MetaAutocapitalize = "characters"
 	MetaAutocapitalizeNone       MetaAutocapitalize = "none"
 	MetaAutocapitalizeOff        MetaAutocapitalize = "off"
 	MetaAutocapitalizeOn         MetaAutocapitalize = "on"
 	MetaAutocapitalizeSentences  MetaAutocapitalize = "sentences"
+	MetaAutocapitalizeWords      MetaAutocapitalize = "words"
 )
 
 type MetaAutocorrect string
@@ -110,9 +110,9 @@ const (
 type MetaDir string
 
 const (
+	MetaDirAuto MetaDir = "auto"
 	MetaDirLtr  MetaDir = "ltr"
 	MetaDirRtl  MetaDir = "rtl"
-	MetaDirAuto MetaDir = "auto"
 )
 
 type MetaDraggable string
@@ -145,21 +145,21 @@ const (
 type MetaInputmode string
 
 const (
+	MetaInputmodeNone    MetaInputmode = "none"
+	MetaInputmodeNumeric MetaInputmode = "numeric"
 	MetaInputmodeSearch  MetaInputmode = "search"
 	MetaInputmodeTel     MetaInputmode = "tel"
 	MetaInputmodeText    MetaInputmode = "text"
 	MetaInputmodeUrl     MetaInputmode = "url"
 	MetaInputmodeDecimal MetaInputmode = "decimal"
 	MetaInputmodeEmail   MetaInputmode = "email"
-	MetaInputmodeNone    MetaInputmode = "none"
-	MetaInputmodeNumeric MetaInputmode = "numeric"
 )
 
 type MetaSpellcheck string
 
 const (
-	MetaSpellcheckTrue  MetaSpellcheck = "true"
 	MetaSpellcheckFalse MetaSpellcheck = "false"
+	MetaSpellcheckTrue  MetaSpellcheck = "true"
 	MetaSpellcheckEmpty MetaSpellcheck = ""
 )
 
@@ -413,39 +413,24 @@ func (e *MetaElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<meta")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<meta")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

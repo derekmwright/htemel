@@ -60,6 +60,11 @@ func (e *DatalistElement) With(fn func(*DatalistElement)) *DatalistElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *DatalistElement) Text(text string) *DatalistElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *DatalistElement) Textf(format string, args ...any) *DatalistElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -100,17 +105,17 @@ const (
 type DatalistAutocorrect string
 
 const (
-	DatalistAutocorrectOff   DatalistAutocorrect = "off"
 	DatalistAutocorrectOn    DatalistAutocorrect = "on"
+	DatalistAutocorrectOff   DatalistAutocorrect = "off"
 	DatalistAutocorrectEmpty DatalistAutocorrect = ""
 )
 
 type DatalistContenteditable string
 
 const (
+	DatalistContenteditableTrue          DatalistContenteditable = "true"
 	DatalistContenteditableFalse         DatalistContenteditable = "false"
 	DatalistContenteditablePlaintextOnly DatalistContenteditable = "plaintext-only"
-	DatalistContenteditableTrue          DatalistContenteditable = "true"
 	DatalistContenteditableEmpty         DatalistContenteditable = ""
 )
 
@@ -125,20 +130,20 @@ const (
 type DatalistDraggable string
 
 const (
-	DatalistDraggableTrue  DatalistDraggable = "true"
 	DatalistDraggableFalse DatalistDraggable = "false"
+	DatalistDraggableTrue  DatalistDraggable = "true"
 )
 
 type DatalistEnterkeyhint string
 
 const (
+	DatalistEnterkeyhintDone     DatalistEnterkeyhint = "done"
+	DatalistEnterkeyhintEnter    DatalistEnterkeyhint = "enter"
 	DatalistEnterkeyhintGo       DatalistEnterkeyhint = "go"
 	DatalistEnterkeyhintNext     DatalistEnterkeyhint = "next"
 	DatalistEnterkeyhintPrevious DatalistEnterkeyhint = "previous"
 	DatalistEnterkeyhintSearch   DatalistEnterkeyhint = "search"
 	DatalistEnterkeyhintSend     DatalistEnterkeyhint = "send"
-	DatalistEnterkeyhintDone     DatalistEnterkeyhint = "done"
-	DatalistEnterkeyhintEnter    DatalistEnterkeyhint = "enter"
 )
 
 type DatalistHidden string
@@ -152,6 +157,7 @@ const (
 type DatalistInputmode string
 
 const (
+	DatalistInputmodeEmail   DatalistInputmode = "email"
 	DatalistInputmodeNone    DatalistInputmode = "none"
 	DatalistInputmodeNumeric DatalistInputmode = "numeric"
 	DatalistInputmodeSearch  DatalistInputmode = "search"
@@ -159,7 +165,6 @@ const (
 	DatalistInputmodeText    DatalistInputmode = "text"
 	DatalistInputmodeUrl     DatalistInputmode = "url"
 	DatalistInputmodeDecimal DatalistInputmode = "decimal"
-	DatalistInputmodeEmail   DatalistInputmode = "email"
 )
 
 type DatalistSpellcheck string
@@ -390,48 +395,31 @@ func (e *DatalistElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<datalist")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<datalist")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</datalist>")); err != nil {
-		return err
-	}
+	sb.WriteString("</datalist>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

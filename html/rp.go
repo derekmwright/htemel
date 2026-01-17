@@ -60,6 +60,11 @@ func (e *RpElement) With(fn func(*RpElement)) *RpElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *RpElement) Text(text string) *RpElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *RpElement) Textf(format string, args ...any) *RpElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *RpElement) ToggleClass(class string, enable bool) *RpElement {
 type RpAutocapitalize string
 
 const (
+	RpAutocapitalizeCharacters RpAutocapitalize = "characters"
 	RpAutocapitalizeNone       RpAutocapitalize = "none"
 	RpAutocapitalizeOff        RpAutocapitalize = "off"
 	RpAutocapitalizeOn         RpAutocapitalize = "on"
 	RpAutocapitalizeSentences  RpAutocapitalize = "sentences"
 	RpAutocapitalizeWords      RpAutocapitalize = "words"
-	RpAutocapitalizeCharacters RpAutocapitalize = "characters"
 )
 
 type RpAutocorrect string
@@ -108,18 +113,18 @@ const (
 type RpContenteditable string
 
 const (
+	RpContenteditableTrue          RpContenteditable = "true"
 	RpContenteditableFalse         RpContenteditable = "false"
 	RpContenteditablePlaintextOnly RpContenteditable = "plaintext-only"
-	RpContenteditableTrue          RpContenteditable = "true"
 	RpContenteditableEmpty         RpContenteditable = ""
 )
 
 type RpDir string
 
 const (
-	RpDirAuto RpDir = "auto"
 	RpDirLtr  RpDir = "ltr"
 	RpDirRtl  RpDir = "rtl"
+	RpDirAuto RpDir = "auto"
 )
 
 type RpDraggable string
@@ -132,13 +137,13 @@ const (
 type RpEnterkeyhint string
 
 const (
+	RpEnterkeyhintPrevious RpEnterkeyhint = "previous"
+	RpEnterkeyhintSearch   RpEnterkeyhint = "search"
 	RpEnterkeyhintSend     RpEnterkeyhint = "send"
 	RpEnterkeyhintDone     RpEnterkeyhint = "done"
 	RpEnterkeyhintEnter    RpEnterkeyhint = "enter"
 	RpEnterkeyhintGo       RpEnterkeyhint = "go"
 	RpEnterkeyhintNext     RpEnterkeyhint = "next"
-	RpEnterkeyhintPrevious RpEnterkeyhint = "previous"
-	RpEnterkeyhintSearch   RpEnterkeyhint = "search"
 )
 
 type RpHidden string
@@ -152,7 +157,6 @@ const (
 type RpInputmode string
 
 const (
-	RpInputmodeText    RpInputmode = "text"
 	RpInputmodeUrl     RpInputmode = "url"
 	RpInputmodeDecimal RpInputmode = "decimal"
 	RpInputmodeEmail   RpInputmode = "email"
@@ -160,13 +164,14 @@ const (
 	RpInputmodeNumeric RpInputmode = "numeric"
 	RpInputmodeSearch  RpInputmode = "search"
 	RpInputmodeTel     RpInputmode = "tel"
+	RpInputmodeText    RpInputmode = "text"
 )
 
 type RpSpellcheck string
 
 const (
-	RpSpellcheckTrue  RpSpellcheck = "true"
 	RpSpellcheckFalse RpSpellcheck = "false"
+	RpSpellcheckTrue  RpSpellcheck = "true"
 	RpSpellcheckEmpty RpSpellcheck = ""
 )
 
@@ -390,48 +395,31 @@ func (e *RpElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<rp")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<rp")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</rp>")); err != nil {
-		return err
-	}
+	sb.WriteString("</rp>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

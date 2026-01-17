@@ -70,12 +70,12 @@ func (e *SourceElement) ToggleClass(class string, enable bool) *SourceElement {
 type SourceAutocapitalize string
 
 const (
+	SourceAutocapitalizeWords      SourceAutocapitalize = "words"
 	SourceAutocapitalizeCharacters SourceAutocapitalize = "characters"
 	SourceAutocapitalizeNone       SourceAutocapitalize = "none"
 	SourceAutocapitalizeOff        SourceAutocapitalize = "off"
 	SourceAutocapitalizeOn         SourceAutocapitalize = "on"
 	SourceAutocapitalizeSentences  SourceAutocapitalize = "sentences"
-	SourceAutocapitalizeWords      SourceAutocapitalize = "words"
 )
 
 type SourceAutocorrect string
@@ -113,13 +113,13 @@ const (
 type SourceEnterkeyhint string
 
 const (
+	SourceEnterkeyhintPrevious SourceEnterkeyhint = "previous"
+	SourceEnterkeyhintSearch   SourceEnterkeyhint = "search"
 	SourceEnterkeyhintSend     SourceEnterkeyhint = "send"
 	SourceEnterkeyhintDone     SourceEnterkeyhint = "done"
 	SourceEnterkeyhintEnter    SourceEnterkeyhint = "enter"
 	SourceEnterkeyhintGo       SourceEnterkeyhint = "go"
 	SourceEnterkeyhintNext     SourceEnterkeyhint = "next"
-	SourceEnterkeyhintPrevious SourceEnterkeyhint = "previous"
-	SourceEnterkeyhintSearch   SourceEnterkeyhint = "search"
 )
 
 type SourceHidden string
@@ -133,21 +133,21 @@ const (
 type SourceInputmode string
 
 const (
+	SourceInputmodeText    SourceInputmode = "text"
+	SourceInputmodeUrl     SourceInputmode = "url"
+	SourceInputmodeDecimal SourceInputmode = "decimal"
 	SourceInputmodeEmail   SourceInputmode = "email"
 	SourceInputmodeNone    SourceInputmode = "none"
 	SourceInputmodeNumeric SourceInputmode = "numeric"
 	SourceInputmodeSearch  SourceInputmode = "search"
 	SourceInputmodeTel     SourceInputmode = "tel"
-	SourceInputmodeText    SourceInputmode = "text"
-	SourceInputmodeUrl     SourceInputmode = "url"
-	SourceInputmodeDecimal SourceInputmode = "decimal"
 )
 
 type SourceSpellcheck string
 
 const (
-	SourceSpellcheckFalse SourceSpellcheck = "false"
 	SourceSpellcheckTrue  SourceSpellcheck = "true"
+	SourceSpellcheckFalse SourceSpellcheck = "false"
 	SourceSpellcheckEmpty SourceSpellcheck = ""
 )
 
@@ -162,8 +162,8 @@ const (
 type SourceWritingsuggestions string
 
 const (
-	SourceWritingsuggestionsTrue  SourceWritingsuggestions = "true"
 	SourceWritingsuggestionsFalse SourceWritingsuggestions = "false"
+	SourceWritingsuggestionsTrue  SourceWritingsuggestions = "true"
 	SourceWritingsuggestionsEmpty SourceWritingsuggestions = ""
 )
 
@@ -413,39 +413,24 @@ func (e *SourceElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<source")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<source")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

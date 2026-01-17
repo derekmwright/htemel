@@ -60,6 +60,11 @@ func (e *UlElement) With(fn func(*UlElement)) *UlElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *UlElement) Text(text string) *UlElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *UlElement) Textf(format string, args ...any) *UlElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *UlElement) ToggleClass(class string, enable bool) *UlElement {
 type UlAutocapitalize string
 
 const (
+	UlAutocapitalizeOn         UlAutocapitalize = "on"
 	UlAutocapitalizeSentences  UlAutocapitalize = "sentences"
 	UlAutocapitalizeWords      UlAutocapitalize = "words"
 	UlAutocapitalizeCharacters UlAutocapitalize = "characters"
 	UlAutocapitalizeNone       UlAutocapitalize = "none"
 	UlAutocapitalizeOff        UlAutocapitalize = "off"
-	UlAutocapitalizeOn         UlAutocapitalize = "on"
 )
 
 type UlAutocorrect string
@@ -152,14 +157,14 @@ const (
 type UlInputmode string
 
 const (
-	UlInputmodeNone    UlInputmode = "none"
-	UlInputmodeNumeric UlInputmode = "numeric"
-	UlInputmodeSearch  UlInputmode = "search"
 	UlInputmodeTel     UlInputmode = "tel"
 	UlInputmodeText    UlInputmode = "text"
 	UlInputmodeUrl     UlInputmode = "url"
 	UlInputmodeDecimal UlInputmode = "decimal"
 	UlInputmodeEmail   UlInputmode = "email"
+	UlInputmodeNone    UlInputmode = "none"
+	UlInputmodeNumeric UlInputmode = "numeric"
+	UlInputmodeSearch  UlInputmode = "search"
 )
 
 type UlSpellcheck string
@@ -181,8 +186,8 @@ const (
 type UlWritingsuggestions string
 
 const (
-	UlWritingsuggestionsTrue  UlWritingsuggestions = "true"
 	UlWritingsuggestionsFalse UlWritingsuggestions = "false"
+	UlWritingsuggestionsTrue  UlWritingsuggestions = "true"
 	UlWritingsuggestionsEmpty UlWritingsuggestions = ""
 )
 
@@ -390,48 +395,31 @@ func (e *UlElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<ul")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<ul")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</ul>")); err != nil {
-		return err
-	}
+	sb.WriteString("</ul>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

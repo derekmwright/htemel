@@ -70,12 +70,12 @@ func (e *ColElement) ToggleClass(class string, enable bool) *ColElement {
 type ColAutocapitalize string
 
 const (
+	ColAutocapitalizeOff        ColAutocapitalize = "off"
 	ColAutocapitalizeOn         ColAutocapitalize = "on"
 	ColAutocapitalizeSentences  ColAutocapitalize = "sentences"
 	ColAutocapitalizeWords      ColAutocapitalize = "words"
 	ColAutocapitalizeCharacters ColAutocapitalize = "characters"
 	ColAutocapitalizeNone       ColAutocapitalize = "none"
-	ColAutocapitalizeOff        ColAutocapitalize = "off"
 )
 
 type ColAutocorrect string
@@ -89,18 +89,18 @@ const (
 type ColContenteditable string
 
 const (
-	ColContenteditableTrue          ColContenteditable = "true"
 	ColContenteditableFalse         ColContenteditable = "false"
 	ColContenteditablePlaintextOnly ColContenteditable = "plaintext-only"
+	ColContenteditableTrue          ColContenteditable = "true"
 	ColContenteditableEmpty         ColContenteditable = ""
 )
 
 type ColDir string
 
 const (
+	ColDirRtl  ColDir = "rtl"
 	ColDirAuto ColDir = "auto"
 	ColDirLtr  ColDir = "ltr"
-	ColDirRtl  ColDir = "rtl"
 )
 
 type ColDraggable string
@@ -113,34 +113,34 @@ const (
 type ColEnterkeyhint string
 
 const (
-	ColEnterkeyhintNext     ColEnterkeyhint = "next"
-	ColEnterkeyhintPrevious ColEnterkeyhint = "previous"
 	ColEnterkeyhintSearch   ColEnterkeyhint = "search"
 	ColEnterkeyhintSend     ColEnterkeyhint = "send"
 	ColEnterkeyhintDone     ColEnterkeyhint = "done"
 	ColEnterkeyhintEnter    ColEnterkeyhint = "enter"
 	ColEnterkeyhintGo       ColEnterkeyhint = "go"
+	ColEnterkeyhintNext     ColEnterkeyhint = "next"
+	ColEnterkeyhintPrevious ColEnterkeyhint = "previous"
 )
 
 type ColHidden string
 
 const (
-	ColHiddenUntilFound ColHidden = "until-found"
 	ColHiddenHidden     ColHidden = "hidden"
+	ColHiddenUntilFound ColHidden = "until-found"
 	ColHiddenEmpty      ColHidden = ""
 )
 
 type ColInputmode string
 
 const (
-	ColInputmodeText    ColInputmode = "text"
-	ColInputmodeUrl     ColInputmode = "url"
 	ColInputmodeDecimal ColInputmode = "decimal"
 	ColInputmodeEmail   ColInputmode = "email"
 	ColInputmodeNone    ColInputmode = "none"
 	ColInputmodeNumeric ColInputmode = "numeric"
 	ColInputmodeSearch  ColInputmode = "search"
 	ColInputmodeTel     ColInputmode = "tel"
+	ColInputmodeText    ColInputmode = "text"
+	ColInputmodeUrl     ColInputmode = "url"
 )
 
 type ColSpellcheck string
@@ -154,8 +154,8 @@ const (
 type ColTranslate string
 
 const (
-	ColTranslateYes   ColTranslate = "yes"
 	ColTranslateNo    ColTranslate = "no"
+	ColTranslateYes   ColTranslate = "yes"
 	ColTranslateEmpty ColTranslate = ""
 )
 
@@ -377,39 +377,24 @@ func (e *ColElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<col")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<col")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

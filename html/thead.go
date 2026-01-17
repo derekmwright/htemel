@@ -60,6 +60,11 @@ func (e *TheadElement) With(fn func(*TheadElement)) *TheadElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *TheadElement) Text(text string) *TheadElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *TheadElement) Textf(format string, args ...any) *TheadElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *TheadElement) ToggleClass(class string, enable bool) *TheadElement {
 type TheadAutocapitalize string
 
 const (
+	TheadAutocapitalizeSentences  TheadAutocapitalize = "sentences"
 	TheadAutocapitalizeWords      TheadAutocapitalize = "words"
 	TheadAutocapitalizeCharacters TheadAutocapitalize = "characters"
 	TheadAutocapitalizeNone       TheadAutocapitalize = "none"
 	TheadAutocapitalizeOff        TheadAutocapitalize = "off"
 	TheadAutocapitalizeOn         TheadAutocapitalize = "on"
-	TheadAutocapitalizeSentences  TheadAutocapitalize = "sentences"
 )
 
 type TheadAutocorrect string
@@ -108,18 +113,18 @@ const (
 type TheadContenteditable string
 
 const (
+	TheadContenteditableFalse         TheadContenteditable = "false"
 	TheadContenteditablePlaintextOnly TheadContenteditable = "plaintext-only"
 	TheadContenteditableTrue          TheadContenteditable = "true"
-	TheadContenteditableFalse         TheadContenteditable = "false"
 	TheadContenteditableEmpty         TheadContenteditable = ""
 )
 
 type TheadDir string
 
 const (
+	TheadDirRtl  TheadDir = "rtl"
 	TheadDirAuto TheadDir = "auto"
 	TheadDirLtr  TheadDir = "ltr"
-	TheadDirRtl  TheadDir = "rtl"
 )
 
 type TheadDraggable string
@@ -132,13 +137,13 @@ const (
 type TheadEnterkeyhint string
 
 const (
-	TheadEnterkeyhintPrevious TheadEnterkeyhint = "previous"
-	TheadEnterkeyhintSearch   TheadEnterkeyhint = "search"
-	TheadEnterkeyhintSend     TheadEnterkeyhint = "send"
 	TheadEnterkeyhintDone     TheadEnterkeyhint = "done"
 	TheadEnterkeyhintEnter    TheadEnterkeyhint = "enter"
 	TheadEnterkeyhintGo       TheadEnterkeyhint = "go"
 	TheadEnterkeyhintNext     TheadEnterkeyhint = "next"
+	TheadEnterkeyhintPrevious TheadEnterkeyhint = "previous"
+	TheadEnterkeyhintSearch   TheadEnterkeyhint = "search"
+	TheadEnterkeyhintSend     TheadEnterkeyhint = "send"
 )
 
 type TheadHidden string
@@ -152,29 +157,29 @@ const (
 type TheadInputmode string
 
 const (
+	TheadInputmodeDecimal TheadInputmode = "decimal"
+	TheadInputmodeEmail   TheadInputmode = "email"
 	TheadInputmodeNone    TheadInputmode = "none"
 	TheadInputmodeNumeric TheadInputmode = "numeric"
 	TheadInputmodeSearch  TheadInputmode = "search"
 	TheadInputmodeTel     TheadInputmode = "tel"
 	TheadInputmodeText    TheadInputmode = "text"
 	TheadInputmodeUrl     TheadInputmode = "url"
-	TheadInputmodeDecimal TheadInputmode = "decimal"
-	TheadInputmodeEmail   TheadInputmode = "email"
 )
 
 type TheadSpellcheck string
 
 const (
-	TheadSpellcheckFalse TheadSpellcheck = "false"
 	TheadSpellcheckTrue  TheadSpellcheck = "true"
+	TheadSpellcheckFalse TheadSpellcheck = "false"
 	TheadSpellcheckEmpty TheadSpellcheck = ""
 )
 
 type TheadTranslate string
 
 const (
-	TheadTranslateNo    TheadTranslate = "no"
 	TheadTranslateYes   TheadTranslate = "yes"
+	TheadTranslateNo    TheadTranslate = "no"
 	TheadTranslateEmpty TheadTranslate = ""
 )
 
@@ -390,48 +395,31 @@ func (e *TheadElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<thead")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<thead")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</thead>")); err != nil {
-		return err
-	}
+	sb.WriteString("</thead>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

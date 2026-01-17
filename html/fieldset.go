@@ -60,6 +60,11 @@ func (e *FieldsetElement) With(fn func(*FieldsetElement)) *FieldsetElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *FieldsetElement) Text(text string) *FieldsetElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *FieldsetElement) Textf(format string, args ...any) *FieldsetElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -108,9 +113,9 @@ const (
 type FieldsetContenteditable string
 
 const (
-	FieldsetContenteditableTrue          FieldsetContenteditable = "true"
 	FieldsetContenteditableFalse         FieldsetContenteditable = "false"
 	FieldsetContenteditablePlaintextOnly FieldsetContenteditable = "plaintext-only"
+	FieldsetContenteditableTrue          FieldsetContenteditable = "true"
 	FieldsetContenteditableEmpty         FieldsetContenteditable = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type FieldsetEnterkeyhint string
 
 const (
-	FieldsetEnterkeyhintPrevious FieldsetEnterkeyhint = "previous"
-	FieldsetEnterkeyhintSearch   FieldsetEnterkeyhint = "search"
 	FieldsetEnterkeyhintSend     FieldsetEnterkeyhint = "send"
 	FieldsetEnterkeyhintDone     FieldsetEnterkeyhint = "done"
 	FieldsetEnterkeyhintEnter    FieldsetEnterkeyhint = "enter"
 	FieldsetEnterkeyhintGo       FieldsetEnterkeyhint = "go"
 	FieldsetEnterkeyhintNext     FieldsetEnterkeyhint = "next"
+	FieldsetEnterkeyhintPrevious FieldsetEnterkeyhint = "previous"
+	FieldsetEnterkeyhintSearch   FieldsetEnterkeyhint = "search"
 )
 
 type FieldsetHidden string
@@ -152,6 +157,7 @@ const (
 type FieldsetInputmode string
 
 const (
+	FieldsetInputmodeUrl     FieldsetInputmode = "url"
 	FieldsetInputmodeDecimal FieldsetInputmode = "decimal"
 	FieldsetInputmodeEmail   FieldsetInputmode = "email"
 	FieldsetInputmodeNone    FieldsetInputmode = "none"
@@ -159,7 +165,6 @@ const (
 	FieldsetInputmodeSearch  FieldsetInputmode = "search"
 	FieldsetInputmodeTel     FieldsetInputmode = "tel"
 	FieldsetInputmodeText    FieldsetInputmode = "text"
-	FieldsetInputmodeUrl     FieldsetInputmode = "url"
 )
 
 type FieldsetSpellcheck string
@@ -408,48 +413,31 @@ func (e *FieldsetElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<fieldset")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<fieldset")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</fieldset>")); err != nil {
-		return err
-	}
+	sb.WriteString("</fieldset>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

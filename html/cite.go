@@ -60,6 +60,11 @@ func (e *CiteElement) With(fn func(*CiteElement)) *CiteElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *CiteElement) Text(text string) *CiteElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *CiteElement) Textf(format string, args ...any) *CiteElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *CiteElement) ToggleClass(class string, enable bool) *CiteElement {
 type CiteAutocapitalize string
 
 const (
-	CiteAutocapitalizeWords      CiteAutocapitalize = "words"
 	CiteAutocapitalizeCharacters CiteAutocapitalize = "characters"
 	CiteAutocapitalizeNone       CiteAutocapitalize = "none"
 	CiteAutocapitalizeOff        CiteAutocapitalize = "off"
 	CiteAutocapitalizeOn         CiteAutocapitalize = "on"
 	CiteAutocapitalizeSentences  CiteAutocapitalize = "sentences"
+	CiteAutocapitalizeWords      CiteAutocapitalize = "words"
 )
 
 type CiteAutocorrect string
@@ -108,18 +113,18 @@ const (
 type CiteContenteditable string
 
 const (
+	CiteContenteditablePlaintextOnly CiteContenteditable = "plaintext-only"
 	CiteContenteditableTrue          CiteContenteditable = "true"
 	CiteContenteditableFalse         CiteContenteditable = "false"
-	CiteContenteditablePlaintextOnly CiteContenteditable = "plaintext-only"
 	CiteContenteditableEmpty         CiteContenteditable = ""
 )
 
 type CiteDir string
 
 const (
+	CiteDirRtl  CiteDir = "rtl"
 	CiteDirAuto CiteDir = "auto"
 	CiteDirLtr  CiteDir = "ltr"
-	CiteDirRtl  CiteDir = "rtl"
 )
 
 type CiteDraggable string
@@ -132,26 +137,27 @@ const (
 type CiteEnterkeyhint string
 
 const (
-	CiteEnterkeyhintSearch   CiteEnterkeyhint = "search"
-	CiteEnterkeyhintSend     CiteEnterkeyhint = "send"
-	CiteEnterkeyhintDone     CiteEnterkeyhint = "done"
 	CiteEnterkeyhintEnter    CiteEnterkeyhint = "enter"
 	CiteEnterkeyhintGo       CiteEnterkeyhint = "go"
 	CiteEnterkeyhintNext     CiteEnterkeyhint = "next"
 	CiteEnterkeyhintPrevious CiteEnterkeyhint = "previous"
+	CiteEnterkeyhintSearch   CiteEnterkeyhint = "search"
+	CiteEnterkeyhintSend     CiteEnterkeyhint = "send"
+	CiteEnterkeyhintDone     CiteEnterkeyhint = "done"
 )
 
 type CiteHidden string
 
 const (
-	CiteHiddenUntilFound CiteHidden = "until-found"
 	CiteHiddenHidden     CiteHidden = "hidden"
+	CiteHiddenUntilFound CiteHidden = "until-found"
 	CiteHiddenEmpty      CiteHidden = ""
 )
 
 type CiteInputmode string
 
 const (
+	CiteInputmodeNumeric CiteInputmode = "numeric"
 	CiteInputmodeSearch  CiteInputmode = "search"
 	CiteInputmodeTel     CiteInputmode = "tel"
 	CiteInputmodeText    CiteInputmode = "text"
@@ -159,7 +165,6 @@ const (
 	CiteInputmodeDecimal CiteInputmode = "decimal"
 	CiteInputmodeEmail   CiteInputmode = "email"
 	CiteInputmodeNone    CiteInputmode = "none"
-	CiteInputmodeNumeric CiteInputmode = "numeric"
 )
 
 type CiteSpellcheck string
@@ -390,48 +395,31 @@ func (e *CiteElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<cite")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<cite")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</cite>")); err != nil {
-		return err
-	}
+	sb.WriteString("</cite>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

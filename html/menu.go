@@ -60,6 +60,11 @@ func (e *MenuElement) With(fn func(*MenuElement)) *MenuElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *MenuElement) Text(text string) *MenuElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *MenuElement) Textf(format string, args ...any) *MenuElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -108,18 +113,18 @@ const (
 type MenuContenteditable string
 
 const (
+	MenuContenteditableFalse         MenuContenteditable = "false"
 	MenuContenteditablePlaintextOnly MenuContenteditable = "plaintext-only"
 	MenuContenteditableTrue          MenuContenteditable = "true"
-	MenuContenteditableFalse         MenuContenteditable = "false"
 	MenuContenteditableEmpty         MenuContenteditable = ""
 )
 
 type MenuDir string
 
 const (
-	MenuDirAuto MenuDir = "auto"
 	MenuDirLtr  MenuDir = "ltr"
 	MenuDirRtl  MenuDir = "rtl"
+	MenuDirAuto MenuDir = "auto"
 )
 
 type MenuDraggable string
@@ -132,13 +137,13 @@ const (
 type MenuEnterkeyhint string
 
 const (
-	MenuEnterkeyhintDone     MenuEnterkeyhint = "done"
-	MenuEnterkeyhintEnter    MenuEnterkeyhint = "enter"
 	MenuEnterkeyhintGo       MenuEnterkeyhint = "go"
 	MenuEnterkeyhintNext     MenuEnterkeyhint = "next"
 	MenuEnterkeyhintPrevious MenuEnterkeyhint = "previous"
 	MenuEnterkeyhintSearch   MenuEnterkeyhint = "search"
 	MenuEnterkeyhintSend     MenuEnterkeyhint = "send"
+	MenuEnterkeyhintDone     MenuEnterkeyhint = "done"
+	MenuEnterkeyhintEnter    MenuEnterkeyhint = "enter"
 )
 
 type MenuHidden string
@@ -152,14 +157,14 @@ const (
 type MenuInputmode string
 
 const (
-	MenuInputmodeEmail   MenuInputmode = "email"
-	MenuInputmodeNone    MenuInputmode = "none"
-	MenuInputmodeNumeric MenuInputmode = "numeric"
-	MenuInputmodeSearch  MenuInputmode = "search"
 	MenuInputmodeTel     MenuInputmode = "tel"
 	MenuInputmodeText    MenuInputmode = "text"
 	MenuInputmodeUrl     MenuInputmode = "url"
 	MenuInputmodeDecimal MenuInputmode = "decimal"
+	MenuInputmodeEmail   MenuInputmode = "email"
+	MenuInputmodeNone    MenuInputmode = "none"
+	MenuInputmodeNumeric MenuInputmode = "numeric"
+	MenuInputmodeSearch  MenuInputmode = "search"
 )
 
 type MenuSpellcheck string
@@ -173,8 +178,8 @@ const (
 type MenuTranslate string
 
 const (
-	MenuTranslateNo    MenuTranslate = "no"
 	MenuTranslateYes   MenuTranslate = "yes"
+	MenuTranslateNo    MenuTranslate = "no"
 	MenuTranslateEmpty MenuTranslate = ""
 )
 
@@ -390,48 +395,31 @@ func (e *MenuElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<menu")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<menu")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</menu>")); err != nil {
-		return err
-	}
+	sb.WriteString("</menu>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

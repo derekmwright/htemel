@@ -60,6 +60,11 @@ func (e *FigureElement) With(fn func(*FigureElement)) *FigureElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *FigureElement) Text(text string) *FigureElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *FigureElement) Textf(format string, args ...any) *FigureElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -108,9 +113,9 @@ const (
 type FigureContenteditable string
 
 const (
+	FigureContenteditableTrue          FigureContenteditable = "true"
 	FigureContenteditableFalse         FigureContenteditable = "false"
 	FigureContenteditablePlaintextOnly FigureContenteditable = "plaintext-only"
-	FigureContenteditableTrue          FigureContenteditable = "true"
 	FigureContenteditableEmpty         FigureContenteditable = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type FigureEnterkeyhint string
 
 const (
+	FigureEnterkeyhintSend     FigureEnterkeyhint = "send"
 	FigureEnterkeyhintDone     FigureEnterkeyhint = "done"
 	FigureEnterkeyhintEnter    FigureEnterkeyhint = "enter"
 	FigureEnterkeyhintGo       FigureEnterkeyhint = "go"
 	FigureEnterkeyhintNext     FigureEnterkeyhint = "next"
 	FigureEnterkeyhintPrevious FigureEnterkeyhint = "previous"
 	FigureEnterkeyhintSearch   FigureEnterkeyhint = "search"
-	FigureEnterkeyhintSend     FigureEnterkeyhint = "send"
 )
 
 type FigureHidden string
@@ -152,21 +157,21 @@ const (
 type FigureInputmode string
 
 const (
-	FigureInputmodeTel     FigureInputmode = "tel"
-	FigureInputmodeText    FigureInputmode = "text"
-	FigureInputmodeUrl     FigureInputmode = "url"
-	FigureInputmodeDecimal FigureInputmode = "decimal"
 	FigureInputmodeEmail   FigureInputmode = "email"
 	FigureInputmodeNone    FigureInputmode = "none"
 	FigureInputmodeNumeric FigureInputmode = "numeric"
 	FigureInputmodeSearch  FigureInputmode = "search"
+	FigureInputmodeTel     FigureInputmode = "tel"
+	FigureInputmodeText    FigureInputmode = "text"
+	FigureInputmodeUrl     FigureInputmode = "url"
+	FigureInputmodeDecimal FigureInputmode = "decimal"
 )
 
 type FigureSpellcheck string
 
 const (
-	FigureSpellcheckFalse FigureSpellcheck = "false"
 	FigureSpellcheckTrue  FigureSpellcheck = "true"
+	FigureSpellcheckFalse FigureSpellcheck = "false"
 	FigureSpellcheckEmpty FigureSpellcheck = ""
 )
 
@@ -390,48 +395,31 @@ func (e *FigureElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<figure")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<figure")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</figure>")); err != nil {
-		return err
-	}
+	sb.WriteString("</figure>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

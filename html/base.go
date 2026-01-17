@@ -70,12 +70,12 @@ func (e *BaseElement) ToggleClass(class string, enable bool) *BaseElement {
 type BaseAutocapitalize string
 
 const (
+	BaseAutocapitalizeCharacters BaseAutocapitalize = "characters"
 	BaseAutocapitalizeNone       BaseAutocapitalize = "none"
 	BaseAutocapitalizeOff        BaseAutocapitalize = "off"
 	BaseAutocapitalizeOn         BaseAutocapitalize = "on"
 	BaseAutocapitalizeSentences  BaseAutocapitalize = "sentences"
 	BaseAutocapitalizeWords      BaseAutocapitalize = "words"
-	BaseAutocapitalizeCharacters BaseAutocapitalize = "characters"
 )
 
 type BaseAutocorrect string
@@ -89,9 +89,9 @@ const (
 type BaseContenteditable string
 
 const (
+	BaseContenteditableFalse         BaseContenteditable = "false"
 	BaseContenteditablePlaintextOnly BaseContenteditable = "plaintext-only"
 	BaseContenteditableTrue          BaseContenteditable = "true"
-	BaseContenteditableFalse         BaseContenteditable = "false"
 	BaseContenteditableEmpty         BaseContenteditable = ""
 )
 
@@ -106,8 +106,8 @@ const (
 type BaseDraggable string
 
 const (
-	BaseDraggableFalse BaseDraggable = "false"
 	BaseDraggableTrue  BaseDraggable = "true"
+	BaseDraggableFalse BaseDraggable = "false"
 )
 
 type BaseEnterkeyhint string
@@ -133,14 +133,14 @@ const (
 type BaseInputmode string
 
 const (
-	BaseInputmodeEmail   BaseInputmode = "email"
-	BaseInputmodeNone    BaseInputmode = "none"
-	BaseInputmodeNumeric BaseInputmode = "numeric"
 	BaseInputmodeSearch  BaseInputmode = "search"
 	BaseInputmodeTel     BaseInputmode = "tel"
 	BaseInputmodeText    BaseInputmode = "text"
 	BaseInputmodeUrl     BaseInputmode = "url"
 	BaseInputmodeDecimal BaseInputmode = "decimal"
+	BaseInputmodeEmail   BaseInputmode = "email"
+	BaseInputmodeNone    BaseInputmode = "none"
+	BaseInputmodeNumeric BaseInputmode = "numeric"
 )
 
 type BaseSpellcheck string
@@ -154,16 +154,16 @@ const (
 type BaseTranslate string
 
 const (
-	BaseTranslateNo    BaseTranslate = "no"
 	BaseTranslateYes   BaseTranslate = "yes"
+	BaseTranslateNo    BaseTranslate = "no"
 	BaseTranslateEmpty BaseTranslate = ""
 )
 
 type BaseWritingsuggestions string
 
 const (
-	BaseWritingsuggestionsTrue  BaseWritingsuggestions = "true"
 	BaseWritingsuggestionsFalse BaseWritingsuggestions = "false"
+	BaseWritingsuggestionsTrue  BaseWritingsuggestions = "true"
 	BaseWritingsuggestionsEmpty BaseWritingsuggestions = ""
 )
 
@@ -383,39 +383,24 @@ func (e *BaseElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<base")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<base")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

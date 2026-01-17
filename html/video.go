@@ -60,6 +60,11 @@ func (e *VideoElement) With(fn func(*VideoElement)) *VideoElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *VideoElement) Text(text string) *VideoElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *VideoElement) Textf(format string, args ...any) *VideoElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -149,26 +154,27 @@ const (
 type VideoEnterkeyhint string
 
 const (
+	VideoEnterkeyhintDone     VideoEnterkeyhint = "done"
+	VideoEnterkeyhintEnter    VideoEnterkeyhint = "enter"
+	VideoEnterkeyhintGo       VideoEnterkeyhint = "go"
 	VideoEnterkeyhintNext     VideoEnterkeyhint = "next"
 	VideoEnterkeyhintPrevious VideoEnterkeyhint = "previous"
 	VideoEnterkeyhintSearch   VideoEnterkeyhint = "search"
 	VideoEnterkeyhintSend     VideoEnterkeyhint = "send"
-	VideoEnterkeyhintDone     VideoEnterkeyhint = "done"
-	VideoEnterkeyhintEnter    VideoEnterkeyhint = "enter"
-	VideoEnterkeyhintGo       VideoEnterkeyhint = "go"
 )
 
 type VideoHidden string
 
 const (
-	VideoHiddenHidden     VideoHidden = "hidden"
 	VideoHiddenUntilFound VideoHidden = "until-found"
+	VideoHiddenHidden     VideoHidden = "hidden"
 	VideoHiddenEmpty      VideoHidden = ""
 )
 
 type VideoInputmode string
 
 const (
+	VideoInputmodeEmail   VideoInputmode = "email"
 	VideoInputmodeNone    VideoInputmode = "none"
 	VideoInputmodeNumeric VideoInputmode = "numeric"
 	VideoInputmodeSearch  VideoInputmode = "search"
@@ -176,7 +182,6 @@ const (
 	VideoInputmodeText    VideoInputmode = "text"
 	VideoInputmodeUrl     VideoInputmode = "url"
 	VideoInputmodeDecimal VideoInputmode = "decimal"
-	VideoInputmodeEmail   VideoInputmode = "email"
 )
 
 type VideoSpellcheck string
@@ -198,8 +203,8 @@ const (
 type VideoWritingsuggestions string
 
 const (
-	VideoWritingsuggestionsTrue  VideoWritingsuggestions = "true"
 	VideoWritingsuggestionsFalse VideoWritingsuggestions = "false"
+	VideoWritingsuggestionsTrue  VideoWritingsuggestions = "true"
 	VideoWritingsuggestionsEmpty VideoWritingsuggestions = ""
 )
 
@@ -473,48 +478,31 @@ func (e *VideoElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<video")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<video")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</video>")); err != nil {
-		return err
-	}
+	sb.WriteString("</video>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

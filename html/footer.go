@@ -60,6 +60,11 @@ func (e *FooterElement) With(fn func(*FooterElement)) *FooterElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *FooterElement) Text(text string) *FooterElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *FooterElement) Textf(format string, args ...any) *FooterElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -100,17 +105,17 @@ const (
 type FooterAutocorrect string
 
 const (
-	FooterAutocorrectOn    FooterAutocorrect = "on"
 	FooterAutocorrectOff   FooterAutocorrect = "off"
+	FooterAutocorrectOn    FooterAutocorrect = "on"
 	FooterAutocorrectEmpty FooterAutocorrect = ""
 )
 
 type FooterContenteditable string
 
 const (
-	FooterContenteditableTrue          FooterContenteditable = "true"
 	FooterContenteditableFalse         FooterContenteditable = "false"
 	FooterContenteditablePlaintextOnly FooterContenteditable = "plaintext-only"
+	FooterContenteditableTrue          FooterContenteditable = "true"
 	FooterContenteditableEmpty         FooterContenteditable = ""
 )
 
@@ -125,34 +130,33 @@ const (
 type FooterDraggable string
 
 const (
-	FooterDraggableTrue  FooterDraggable = "true"
 	FooterDraggableFalse FooterDraggable = "false"
+	FooterDraggableTrue  FooterDraggable = "true"
 )
 
 type FooterEnterkeyhint string
 
 const (
+	FooterEnterkeyhintSend     FooterEnterkeyhint = "send"
+	FooterEnterkeyhintDone     FooterEnterkeyhint = "done"
+	FooterEnterkeyhintEnter    FooterEnterkeyhint = "enter"
 	FooterEnterkeyhintGo       FooterEnterkeyhint = "go"
 	FooterEnterkeyhintNext     FooterEnterkeyhint = "next"
 	FooterEnterkeyhintPrevious FooterEnterkeyhint = "previous"
 	FooterEnterkeyhintSearch   FooterEnterkeyhint = "search"
-	FooterEnterkeyhintSend     FooterEnterkeyhint = "send"
-	FooterEnterkeyhintDone     FooterEnterkeyhint = "done"
-	FooterEnterkeyhintEnter    FooterEnterkeyhint = "enter"
 )
 
 type FooterHidden string
 
 const (
-	FooterHiddenHidden     FooterHidden = "hidden"
 	FooterHiddenUntilFound FooterHidden = "until-found"
+	FooterHiddenHidden     FooterHidden = "hidden"
 	FooterHiddenEmpty      FooterHidden = ""
 )
 
 type FooterInputmode string
 
 const (
-	FooterInputmodeNumeric FooterInputmode = "numeric"
 	FooterInputmodeSearch  FooterInputmode = "search"
 	FooterInputmodeTel     FooterInputmode = "tel"
 	FooterInputmodeText    FooterInputmode = "text"
@@ -160,6 +164,7 @@ const (
 	FooterInputmodeDecimal FooterInputmode = "decimal"
 	FooterInputmodeEmail   FooterInputmode = "email"
 	FooterInputmodeNone    FooterInputmode = "none"
+	FooterInputmodeNumeric FooterInputmode = "numeric"
 )
 
 type FooterSpellcheck string
@@ -390,48 +395,31 @@ func (e *FooterElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<footer")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<footer")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</footer>")); err != nil {
-		return err
-	}
+	sb.WriteString("</footer>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

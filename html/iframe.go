@@ -60,6 +60,11 @@ func (e *IframeElement) With(fn func(*IframeElement)) *IframeElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *IframeElement) Text(text string) *IframeElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *IframeElement) Textf(format string, args ...any) *IframeElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -107,8 +112,8 @@ const (
 type IframeAutocorrect string
 
 const (
-	IframeAutocorrectOn    IframeAutocorrect = "on"
 	IframeAutocorrectOff   IframeAutocorrect = "off"
+	IframeAutocorrectOn    IframeAutocorrect = "on"
 	IframeAutocorrectEmpty IframeAutocorrect = ""
 )
 
@@ -139,13 +144,13 @@ const (
 type IframeEnterkeyhint string
 
 const (
-	IframeEnterkeyhintNext     IframeEnterkeyhint = "next"
-	IframeEnterkeyhintPrevious IframeEnterkeyhint = "previous"
 	IframeEnterkeyhintSearch   IframeEnterkeyhint = "search"
 	IframeEnterkeyhintSend     IframeEnterkeyhint = "send"
 	IframeEnterkeyhintDone     IframeEnterkeyhint = "done"
 	IframeEnterkeyhintEnter    IframeEnterkeyhint = "enter"
 	IframeEnterkeyhintGo       IframeEnterkeyhint = "go"
+	IframeEnterkeyhintNext     IframeEnterkeyhint = "next"
+	IframeEnterkeyhintPrevious IframeEnterkeyhint = "previous"
 )
 
 type IframeHidden string
@@ -159,14 +164,14 @@ const (
 type IframeInputmode string
 
 const (
-	IframeInputmodeSearch  IframeInputmode = "search"
-	IframeInputmodeTel     IframeInputmode = "tel"
-	IframeInputmodeText    IframeInputmode = "text"
 	IframeInputmodeUrl     IframeInputmode = "url"
 	IframeInputmodeDecimal IframeInputmode = "decimal"
 	IframeInputmodeEmail   IframeInputmode = "email"
 	IframeInputmodeNone    IframeInputmode = "none"
 	IframeInputmodeNumeric IframeInputmode = "numeric"
+	IframeInputmodeSearch  IframeInputmode = "search"
+	IframeInputmodeTel     IframeInputmode = "tel"
+	IframeInputmodeText    IframeInputmode = "text"
 )
 
 type IframeSpellcheck string
@@ -188,8 +193,8 @@ const (
 type IframeWritingsuggestions string
 
 const (
-	IframeWritingsuggestionsFalse IframeWritingsuggestions = "false"
 	IframeWritingsuggestionsTrue  IframeWritingsuggestions = "true"
+	IframeWritingsuggestionsFalse IframeWritingsuggestions = "false"
 	IframeWritingsuggestionsEmpty IframeWritingsuggestions = ""
 )
 
@@ -457,48 +462,31 @@ func (e *IframeElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<iframe")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<iframe")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</iframe>")); err != nil {
-		return err
-	}
+	sb.WriteString("</iframe>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

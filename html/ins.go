@@ -60,6 +60,11 @@ func (e *InsElement) With(fn func(*InsElement)) *InsElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *InsElement) Text(text string) *InsElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *InsElement) Textf(format string, args ...any) *InsElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *InsElement) ToggleClass(class string, enable bool) *InsElement {
 type InsAutocapitalize string
 
 const (
-	InsAutocapitalizeWords      InsAutocapitalize = "words"
-	InsAutocapitalizeCharacters InsAutocapitalize = "characters"
-	InsAutocapitalizeNone       InsAutocapitalize = "none"
 	InsAutocapitalizeOff        InsAutocapitalize = "off"
 	InsAutocapitalizeOn         InsAutocapitalize = "on"
 	InsAutocapitalizeSentences  InsAutocapitalize = "sentences"
+	InsAutocapitalizeWords      InsAutocapitalize = "words"
+	InsAutocapitalizeCharacters InsAutocapitalize = "characters"
+	InsAutocapitalizeNone       InsAutocapitalize = "none"
 )
 
 type InsAutocorrect string
@@ -132,13 +137,13 @@ const (
 type InsEnterkeyhint string
 
 const (
-	InsEnterkeyhintSearch   InsEnterkeyhint = "search"
-	InsEnterkeyhintSend     InsEnterkeyhint = "send"
 	InsEnterkeyhintDone     InsEnterkeyhint = "done"
 	InsEnterkeyhintEnter    InsEnterkeyhint = "enter"
 	InsEnterkeyhintGo       InsEnterkeyhint = "go"
 	InsEnterkeyhintNext     InsEnterkeyhint = "next"
 	InsEnterkeyhintPrevious InsEnterkeyhint = "previous"
+	InsEnterkeyhintSearch   InsEnterkeyhint = "search"
+	InsEnterkeyhintSend     InsEnterkeyhint = "send"
 )
 
 type InsHidden string
@@ -152,6 +157,7 @@ const (
 type InsInputmode string
 
 const (
+	InsInputmodeDecimal InsInputmode = "decimal"
 	InsInputmodeEmail   InsInputmode = "email"
 	InsInputmodeNone    InsInputmode = "none"
 	InsInputmodeNumeric InsInputmode = "numeric"
@@ -159,7 +165,6 @@ const (
 	InsInputmodeTel     InsInputmode = "tel"
 	InsInputmodeText    InsInputmode = "text"
 	InsInputmodeUrl     InsInputmode = "url"
-	InsInputmodeDecimal InsInputmode = "decimal"
 )
 
 type InsSpellcheck string
@@ -402,48 +407,31 @@ func (e *InsElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<ins")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<ins")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</ins>")); err != nil {
-		return err
-	}
+	sb.WriteString("</ins>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

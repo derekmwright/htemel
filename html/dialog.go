@@ -60,6 +60,11 @@ func (e *DialogElement) With(fn func(*DialogElement)) *DialogElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *DialogElement) Text(text string) *DialogElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *DialogElement) Textf(format string, args ...any) *DialogElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -97,12 +102,12 @@ const (
 type DialogAutocapitalize string
 
 const (
-	DialogAutocapitalizeCharacters DialogAutocapitalize = "characters"
-	DialogAutocapitalizeNone       DialogAutocapitalize = "none"
-	DialogAutocapitalizeOff        DialogAutocapitalize = "off"
 	DialogAutocapitalizeOn         DialogAutocapitalize = "on"
 	DialogAutocapitalizeSentences  DialogAutocapitalize = "sentences"
 	DialogAutocapitalizeWords      DialogAutocapitalize = "words"
+	DialogAutocapitalizeCharacters DialogAutocapitalize = "characters"
+	DialogAutocapitalizeNone       DialogAutocapitalize = "none"
+	DialogAutocapitalizeOff        DialogAutocapitalize = "off"
 )
 
 type DialogAutocorrect string
@@ -116,37 +121,37 @@ const (
 type DialogContenteditable string
 
 const (
-	DialogContenteditableFalse         DialogContenteditable = "false"
 	DialogContenteditablePlaintextOnly DialogContenteditable = "plaintext-only"
 	DialogContenteditableTrue          DialogContenteditable = "true"
+	DialogContenteditableFalse         DialogContenteditable = "false"
 	DialogContenteditableEmpty         DialogContenteditable = ""
 )
 
 type DialogDir string
 
 const (
-	DialogDirRtl  DialogDir = "rtl"
 	DialogDirAuto DialogDir = "auto"
 	DialogDirLtr  DialogDir = "ltr"
+	DialogDirRtl  DialogDir = "rtl"
 )
 
 type DialogDraggable string
 
 const (
-	DialogDraggableTrue  DialogDraggable = "true"
 	DialogDraggableFalse DialogDraggable = "false"
+	DialogDraggableTrue  DialogDraggable = "true"
 )
 
 type DialogEnterkeyhint string
 
 const (
-	DialogEnterkeyhintNext     DialogEnterkeyhint = "next"
-	DialogEnterkeyhintPrevious DialogEnterkeyhint = "previous"
 	DialogEnterkeyhintSearch   DialogEnterkeyhint = "search"
 	DialogEnterkeyhintSend     DialogEnterkeyhint = "send"
 	DialogEnterkeyhintDone     DialogEnterkeyhint = "done"
 	DialogEnterkeyhintEnter    DialogEnterkeyhint = "enter"
 	DialogEnterkeyhintGo       DialogEnterkeyhint = "go"
+	DialogEnterkeyhintNext     DialogEnterkeyhint = "next"
+	DialogEnterkeyhintPrevious DialogEnterkeyhint = "previous"
 )
 
 type DialogHidden string
@@ -160,6 +165,7 @@ const (
 type DialogInputmode string
 
 const (
+	DialogInputmodeNone    DialogInputmode = "none"
 	DialogInputmodeNumeric DialogInputmode = "numeric"
 	DialogInputmodeSearch  DialogInputmode = "search"
 	DialogInputmodeTel     DialogInputmode = "tel"
@@ -167,7 +173,6 @@ const (
 	DialogInputmodeUrl     DialogInputmode = "url"
 	DialogInputmodeDecimal DialogInputmode = "decimal"
 	DialogInputmodeEmail   DialogInputmode = "email"
-	DialogInputmodeNone    DialogInputmode = "none"
 )
 
 type DialogSpellcheck string
@@ -189,8 +194,8 @@ const (
 type DialogWritingsuggestions string
 
 const (
-	DialogWritingsuggestionsTrue  DialogWritingsuggestions = "true"
 	DialogWritingsuggestionsFalse DialogWritingsuggestions = "false"
+	DialogWritingsuggestionsTrue  DialogWritingsuggestions = "true"
 	DialogWritingsuggestionsEmpty DialogWritingsuggestions = ""
 )
 
@@ -410,48 +415,31 @@ func (e *DialogElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<dialog")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<dialog")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</dialog>")); err != nil {
-		return err
-	}
+	sb.WriteString("</dialog>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

@@ -60,6 +60,11 @@ func (e *TitleElement) With(fn func(*TitleElement)) *TitleElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *TitleElement) Text(text string) *TitleElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *TitleElement) Textf(format string, args ...any) *TitleElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *TitleElement) ToggleClass(class string, enable bool) *TitleElement {
 type TitleAutocapitalize string
 
 const (
-	TitleAutocapitalizeOn         TitleAutocapitalize = "on"
-	TitleAutocapitalizeSentences  TitleAutocapitalize = "sentences"
-	TitleAutocapitalizeWords      TitleAutocapitalize = "words"
 	TitleAutocapitalizeCharacters TitleAutocapitalize = "characters"
 	TitleAutocapitalizeNone       TitleAutocapitalize = "none"
 	TitleAutocapitalizeOff        TitleAutocapitalize = "off"
+	TitleAutocapitalizeOn         TitleAutocapitalize = "on"
+	TitleAutocapitalizeSentences  TitleAutocapitalize = "sentences"
+	TitleAutocapitalizeWords      TitleAutocapitalize = "words"
 )
 
 type TitleAutocorrect string
@@ -108,9 +113,9 @@ const (
 type TitleContenteditable string
 
 const (
+	TitleContenteditablePlaintextOnly TitleContenteditable = "plaintext-only"
 	TitleContenteditableTrue          TitleContenteditable = "true"
 	TitleContenteditableFalse         TitleContenteditable = "false"
-	TitleContenteditablePlaintextOnly TitleContenteditable = "plaintext-only"
 	TitleContenteditableEmpty         TitleContenteditable = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type TitleEnterkeyhint string
 
 const (
-	TitleEnterkeyhintGo       TitleEnterkeyhint = "go"
-	TitleEnterkeyhintNext     TitleEnterkeyhint = "next"
-	TitleEnterkeyhintPrevious TitleEnterkeyhint = "previous"
 	TitleEnterkeyhintSearch   TitleEnterkeyhint = "search"
 	TitleEnterkeyhintSend     TitleEnterkeyhint = "send"
 	TitleEnterkeyhintDone     TitleEnterkeyhint = "done"
 	TitleEnterkeyhintEnter    TitleEnterkeyhint = "enter"
+	TitleEnterkeyhintGo       TitleEnterkeyhint = "go"
+	TitleEnterkeyhintNext     TitleEnterkeyhint = "next"
+	TitleEnterkeyhintPrevious TitleEnterkeyhint = "previous"
 )
 
 type TitleHidden string
@@ -181,8 +186,8 @@ const (
 type TitleWritingsuggestions string
 
 const (
-	TitleWritingsuggestionsFalse TitleWritingsuggestions = "false"
 	TitleWritingsuggestionsTrue  TitleWritingsuggestions = "true"
+	TitleWritingsuggestionsFalse TitleWritingsuggestions = "false"
 	TitleWritingsuggestionsEmpty TitleWritingsuggestions = ""
 )
 
@@ -390,48 +395,31 @@ func (e *TitleElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<title")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<title")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</title>")); err != nil {
-		return err
-	}
+	sb.WriteString("</title>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

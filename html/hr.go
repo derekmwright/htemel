@@ -70,37 +70,37 @@ func (e *HrElement) ToggleClass(class string, enable bool) *HrElement {
 type HrAutocapitalize string
 
 const (
+	HrAutocapitalizeCharacters HrAutocapitalize = "characters"
 	HrAutocapitalizeNone       HrAutocapitalize = "none"
 	HrAutocapitalizeOff        HrAutocapitalize = "off"
 	HrAutocapitalizeOn         HrAutocapitalize = "on"
 	HrAutocapitalizeSentences  HrAutocapitalize = "sentences"
 	HrAutocapitalizeWords      HrAutocapitalize = "words"
-	HrAutocapitalizeCharacters HrAutocapitalize = "characters"
 )
 
 type HrAutocorrect string
 
 const (
-	HrAutocorrectOff   HrAutocorrect = "off"
 	HrAutocorrectOn    HrAutocorrect = "on"
+	HrAutocorrectOff   HrAutocorrect = "off"
 	HrAutocorrectEmpty HrAutocorrect = ""
 )
 
 type HrContenteditable string
 
 const (
-	HrContenteditableTrue          HrContenteditable = "true"
 	HrContenteditableFalse         HrContenteditable = "false"
 	HrContenteditablePlaintextOnly HrContenteditable = "plaintext-only"
+	HrContenteditableTrue          HrContenteditable = "true"
 	HrContenteditableEmpty         HrContenteditable = ""
 )
 
 type HrDir string
 
 const (
-	HrDirAuto HrDir = "auto"
 	HrDirLtr  HrDir = "ltr"
 	HrDirRtl  HrDir = "rtl"
+	HrDirAuto HrDir = "auto"
 )
 
 type HrDraggable string
@@ -113,13 +113,13 @@ const (
 type HrEnterkeyhint string
 
 const (
+	HrEnterkeyhintPrevious HrEnterkeyhint = "previous"
+	HrEnterkeyhintSearch   HrEnterkeyhint = "search"
 	HrEnterkeyhintSend     HrEnterkeyhint = "send"
 	HrEnterkeyhintDone     HrEnterkeyhint = "done"
 	HrEnterkeyhintEnter    HrEnterkeyhint = "enter"
 	HrEnterkeyhintGo       HrEnterkeyhint = "go"
 	HrEnterkeyhintNext     HrEnterkeyhint = "next"
-	HrEnterkeyhintPrevious HrEnterkeyhint = "previous"
-	HrEnterkeyhintSearch   HrEnterkeyhint = "search"
 )
 
 type HrHidden string
@@ -133,14 +133,14 @@ const (
 type HrInputmode string
 
 const (
-	HrInputmodeNumeric HrInputmode = "numeric"
-	HrInputmodeSearch  HrInputmode = "search"
 	HrInputmodeTel     HrInputmode = "tel"
 	HrInputmodeText    HrInputmode = "text"
 	HrInputmodeUrl     HrInputmode = "url"
 	HrInputmodeDecimal HrInputmode = "decimal"
 	HrInputmodeEmail   HrInputmode = "email"
 	HrInputmodeNone    HrInputmode = "none"
+	HrInputmodeNumeric HrInputmode = "numeric"
+	HrInputmodeSearch  HrInputmode = "search"
 )
 
 type HrSpellcheck string
@@ -371,39 +371,24 @@ func (e *HrElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<hr")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<hr")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

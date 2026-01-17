@@ -60,6 +60,11 @@ func (e *DtElement) With(fn func(*DtElement)) *DtElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *DtElement) Text(text string) *DtElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *DtElement) Textf(format string, args ...any) *DtElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *DtElement) ToggleClass(class string, enable bool) *DtElement {
 type DtAutocapitalize string
 
 const (
+	DtAutocapitalizeOn         DtAutocapitalize = "on"
 	DtAutocapitalizeSentences  DtAutocapitalize = "sentences"
 	DtAutocapitalizeWords      DtAutocapitalize = "words"
 	DtAutocapitalizeCharacters DtAutocapitalize = "characters"
 	DtAutocapitalizeNone       DtAutocapitalize = "none"
 	DtAutocapitalizeOff        DtAutocapitalize = "off"
-	DtAutocapitalizeOn         DtAutocapitalize = "on"
 )
 
 type DtAutocorrect string
@@ -117,9 +122,9 @@ const (
 type DtDir string
 
 const (
-	DtDirRtl  DtDir = "rtl"
 	DtDirAuto DtDir = "auto"
 	DtDirLtr  DtDir = "ltr"
+	DtDirRtl  DtDir = "rtl"
 )
 
 type DtDraggable string
@@ -132,13 +137,13 @@ const (
 type DtEnterkeyhint string
 
 const (
-	DtEnterkeyhintNext     DtEnterkeyhint = "next"
-	DtEnterkeyhintPrevious DtEnterkeyhint = "previous"
 	DtEnterkeyhintSearch   DtEnterkeyhint = "search"
 	DtEnterkeyhintSend     DtEnterkeyhint = "send"
 	DtEnterkeyhintDone     DtEnterkeyhint = "done"
 	DtEnterkeyhintEnter    DtEnterkeyhint = "enter"
 	DtEnterkeyhintGo       DtEnterkeyhint = "go"
+	DtEnterkeyhintNext     DtEnterkeyhint = "next"
+	DtEnterkeyhintPrevious DtEnterkeyhint = "previous"
 )
 
 type DtHidden string
@@ -152,14 +157,14 @@ const (
 type DtInputmode string
 
 const (
+	DtInputmodeNone    DtInputmode = "none"
+	DtInputmodeNumeric DtInputmode = "numeric"
+	DtInputmodeSearch  DtInputmode = "search"
 	DtInputmodeTel     DtInputmode = "tel"
 	DtInputmodeText    DtInputmode = "text"
 	DtInputmodeUrl     DtInputmode = "url"
 	DtInputmodeDecimal DtInputmode = "decimal"
 	DtInputmodeEmail   DtInputmode = "email"
-	DtInputmodeNone    DtInputmode = "none"
-	DtInputmodeNumeric DtInputmode = "numeric"
-	DtInputmodeSearch  DtInputmode = "search"
 )
 
 type DtSpellcheck string
@@ -390,48 +395,31 @@ func (e *DtElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<dt")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<dt")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</dt>")); err != nil {
-		return err
-	}
+	sb.WriteString("</dt>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

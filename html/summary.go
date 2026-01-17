@@ -60,6 +60,11 @@ func (e *SummaryElement) With(fn func(*SummaryElement)) *SummaryElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *SummaryElement) Text(text string) *SummaryElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *SummaryElement) Textf(format string, args ...any) *SummaryElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *SummaryElement) ToggleClass(class string, enable bool) *SummaryElement 
 type SummaryAutocapitalize string
 
 const (
+	SummaryAutocapitalizeCharacters SummaryAutocapitalize = "characters"
 	SummaryAutocapitalizeNone       SummaryAutocapitalize = "none"
 	SummaryAutocapitalizeOff        SummaryAutocapitalize = "off"
 	SummaryAutocapitalizeOn         SummaryAutocapitalize = "on"
 	SummaryAutocapitalizeSentences  SummaryAutocapitalize = "sentences"
 	SummaryAutocapitalizeWords      SummaryAutocapitalize = "words"
-	SummaryAutocapitalizeCharacters SummaryAutocapitalize = "characters"
 )
 
 type SummaryAutocorrect string
@@ -132,41 +137,41 @@ const (
 type SummaryEnterkeyhint string
 
 const (
-	SummaryEnterkeyhintEnter    SummaryEnterkeyhint = "enter"
-	SummaryEnterkeyhintGo       SummaryEnterkeyhint = "go"
-	SummaryEnterkeyhintNext     SummaryEnterkeyhint = "next"
 	SummaryEnterkeyhintPrevious SummaryEnterkeyhint = "previous"
 	SummaryEnterkeyhintSearch   SummaryEnterkeyhint = "search"
 	SummaryEnterkeyhintSend     SummaryEnterkeyhint = "send"
 	SummaryEnterkeyhintDone     SummaryEnterkeyhint = "done"
+	SummaryEnterkeyhintEnter    SummaryEnterkeyhint = "enter"
+	SummaryEnterkeyhintGo       SummaryEnterkeyhint = "go"
+	SummaryEnterkeyhintNext     SummaryEnterkeyhint = "next"
 )
 
 type SummaryHidden string
 
 const (
-	SummaryHiddenUntilFound SummaryHidden = "until-found"
 	SummaryHiddenHidden     SummaryHidden = "hidden"
+	SummaryHiddenUntilFound SummaryHidden = "until-found"
 	SummaryHiddenEmpty      SummaryHidden = ""
 )
 
 type SummaryInputmode string
 
 const (
-	SummaryInputmodeDecimal SummaryInputmode = "decimal"
-	SummaryInputmodeEmail   SummaryInputmode = "email"
-	SummaryInputmodeNone    SummaryInputmode = "none"
 	SummaryInputmodeNumeric SummaryInputmode = "numeric"
 	SummaryInputmodeSearch  SummaryInputmode = "search"
 	SummaryInputmodeTel     SummaryInputmode = "tel"
 	SummaryInputmodeText    SummaryInputmode = "text"
 	SummaryInputmodeUrl     SummaryInputmode = "url"
+	SummaryInputmodeDecimal SummaryInputmode = "decimal"
+	SummaryInputmodeEmail   SummaryInputmode = "email"
+	SummaryInputmodeNone    SummaryInputmode = "none"
 )
 
 type SummarySpellcheck string
 
 const (
-	SummarySpellcheckFalse SummarySpellcheck = "false"
 	SummarySpellcheckTrue  SummarySpellcheck = "true"
+	SummarySpellcheckFalse SummarySpellcheck = "false"
 	SummarySpellcheckEmpty SummarySpellcheck = ""
 )
 
@@ -390,48 +395,31 @@ func (e *SummaryElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<summary")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<summary")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</summary>")); err != nil {
-		return err
-	}
+	sb.WriteString("</summary>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

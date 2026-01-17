@@ -60,6 +60,11 @@ func (e *VarElement) With(fn func(*VarElement)) *VarElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *VarElement) Text(text string) *VarElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *VarElement) Textf(format string, args ...any) *VarElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,19 +94,19 @@ func (e *VarElement) ToggleClass(class string, enable bool) *VarElement {
 type VarAutocapitalize string
 
 const (
-	VarAutocapitalizeNone       VarAutocapitalize = "none"
-	VarAutocapitalizeOff        VarAutocapitalize = "off"
-	VarAutocapitalizeOn         VarAutocapitalize = "on"
 	VarAutocapitalizeSentences  VarAutocapitalize = "sentences"
 	VarAutocapitalizeWords      VarAutocapitalize = "words"
 	VarAutocapitalizeCharacters VarAutocapitalize = "characters"
+	VarAutocapitalizeNone       VarAutocapitalize = "none"
+	VarAutocapitalizeOff        VarAutocapitalize = "off"
+	VarAutocapitalizeOn         VarAutocapitalize = "on"
 )
 
 type VarAutocorrect string
 
 const (
-	VarAutocorrectOff   VarAutocorrect = "off"
 	VarAutocorrectOn    VarAutocorrect = "on"
+	VarAutocorrectOff   VarAutocorrect = "off"
 	VarAutocorrectEmpty VarAutocorrect = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type VarEnterkeyhint string
 
 const (
+	VarEnterkeyhintSearch   VarEnterkeyhint = "search"
+	VarEnterkeyhintSend     VarEnterkeyhint = "send"
 	VarEnterkeyhintDone     VarEnterkeyhint = "done"
 	VarEnterkeyhintEnter    VarEnterkeyhint = "enter"
 	VarEnterkeyhintGo       VarEnterkeyhint = "go"
 	VarEnterkeyhintNext     VarEnterkeyhint = "next"
 	VarEnterkeyhintPrevious VarEnterkeyhint = "previous"
-	VarEnterkeyhintSearch   VarEnterkeyhint = "search"
-	VarEnterkeyhintSend     VarEnterkeyhint = "send"
 )
 
 type VarHidden string
@@ -390,48 +395,31 @@ func (e *VarElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<var")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<var")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</var>")); err != nil {
-		return err
-	}
+	sb.WriteString("</var>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

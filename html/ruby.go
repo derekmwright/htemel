@@ -60,6 +60,11 @@ func (e *RubyElement) With(fn func(*RubyElement)) *RubyElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *RubyElement) Text(text string) *RubyElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *RubyElement) Textf(format string, args ...any) *RubyElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *RubyElement) ToggleClass(class string, enable bool) *RubyElement {
 type RubyAutocapitalize string
 
 const (
-	RubyAutocapitalizeWords      RubyAutocapitalize = "words"
-	RubyAutocapitalizeCharacters RubyAutocapitalize = "characters"
-	RubyAutocapitalizeNone       RubyAutocapitalize = "none"
 	RubyAutocapitalizeOff        RubyAutocapitalize = "off"
 	RubyAutocapitalizeOn         RubyAutocapitalize = "on"
 	RubyAutocapitalizeSentences  RubyAutocapitalize = "sentences"
+	RubyAutocapitalizeWords      RubyAutocapitalize = "words"
+	RubyAutocapitalizeCharacters RubyAutocapitalize = "characters"
+	RubyAutocapitalizeNone       RubyAutocapitalize = "none"
 )
 
 type RubyAutocorrect string
@@ -132,13 +137,13 @@ const (
 type RubyEnterkeyhint string
 
 const (
-	RubyEnterkeyhintPrevious RubyEnterkeyhint = "previous"
 	RubyEnterkeyhintSearch   RubyEnterkeyhint = "search"
 	RubyEnterkeyhintSend     RubyEnterkeyhint = "send"
 	RubyEnterkeyhintDone     RubyEnterkeyhint = "done"
 	RubyEnterkeyhintEnter    RubyEnterkeyhint = "enter"
 	RubyEnterkeyhintGo       RubyEnterkeyhint = "go"
 	RubyEnterkeyhintNext     RubyEnterkeyhint = "next"
+	RubyEnterkeyhintPrevious RubyEnterkeyhint = "previous"
 )
 
 type RubyHidden string
@@ -152,14 +157,14 @@ const (
 type RubyInputmode string
 
 const (
+	RubyInputmodeUrl     RubyInputmode = "url"
+	RubyInputmodeDecimal RubyInputmode = "decimal"
 	RubyInputmodeEmail   RubyInputmode = "email"
 	RubyInputmodeNone    RubyInputmode = "none"
 	RubyInputmodeNumeric RubyInputmode = "numeric"
 	RubyInputmodeSearch  RubyInputmode = "search"
 	RubyInputmodeTel     RubyInputmode = "tel"
 	RubyInputmodeText    RubyInputmode = "text"
-	RubyInputmodeUrl     RubyInputmode = "url"
-	RubyInputmodeDecimal RubyInputmode = "decimal"
 )
 
 type RubySpellcheck string
@@ -390,48 +395,31 @@ func (e *RubyElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<ruby")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<ruby")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</ruby>")); err != nil {
-		return err
-	}
+	sb.WriteString("</ruby>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

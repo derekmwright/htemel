@@ -60,6 +60,11 @@ func (e *LegendElement) With(fn func(*LegendElement)) *LegendElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *LegendElement) Text(text string) *LegendElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *LegendElement) Textf(format string, args ...any) *LegendElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -117,9 +122,9 @@ const (
 type LegendDir string
 
 const (
-	LegendDirAuto LegendDir = "auto"
 	LegendDirLtr  LegendDir = "ltr"
 	LegendDirRtl  LegendDir = "rtl"
+	LegendDirAuto LegendDir = "auto"
 )
 
 type LegendDraggable string
@@ -132,13 +137,13 @@ const (
 type LegendEnterkeyhint string
 
 const (
+	LegendEnterkeyhintPrevious LegendEnterkeyhint = "previous"
+	LegendEnterkeyhintSearch   LegendEnterkeyhint = "search"
+	LegendEnterkeyhintSend     LegendEnterkeyhint = "send"
 	LegendEnterkeyhintDone     LegendEnterkeyhint = "done"
 	LegendEnterkeyhintEnter    LegendEnterkeyhint = "enter"
 	LegendEnterkeyhintGo       LegendEnterkeyhint = "go"
 	LegendEnterkeyhintNext     LegendEnterkeyhint = "next"
-	LegendEnterkeyhintPrevious LegendEnterkeyhint = "previous"
-	LegendEnterkeyhintSearch   LegendEnterkeyhint = "search"
-	LegendEnterkeyhintSend     LegendEnterkeyhint = "send"
 )
 
 type LegendHidden string
@@ -152,14 +157,14 @@ const (
 type LegendInputmode string
 
 const (
+	LegendInputmodeUrl     LegendInputmode = "url"
+	LegendInputmodeDecimal LegendInputmode = "decimal"
+	LegendInputmodeEmail   LegendInputmode = "email"
 	LegendInputmodeNone    LegendInputmode = "none"
 	LegendInputmodeNumeric LegendInputmode = "numeric"
 	LegendInputmodeSearch  LegendInputmode = "search"
 	LegendInputmodeTel     LegendInputmode = "tel"
 	LegendInputmodeText    LegendInputmode = "text"
-	LegendInputmodeUrl     LegendInputmode = "url"
-	LegendInputmodeDecimal LegendInputmode = "decimal"
-	LegendInputmodeEmail   LegendInputmode = "email"
 )
 
 type LegendSpellcheck string
@@ -390,48 +395,31 @@ func (e *LegendElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<legend")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<legend")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</legend>")); err != nil {
-		return err
-	}
+	sb.WriteString("</legend>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

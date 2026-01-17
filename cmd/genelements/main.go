@@ -30,6 +30,7 @@ func generate(pkg string, e *spec.Element) error {
 		generators.BaseTernaryFunc,
 		generators.ChildrenFunc,
 		generators.WithFunc,
+		generators.TextFunc,
 		generators.TextfFunc,
 		generators.AddClassFunc,
 		generators.ToggleClassFunc,

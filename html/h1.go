@@ -60,6 +60,11 @@ func (e *H1Element) With(fn func(*H1Element)) *H1Element {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *H1Element) Text(text string) *H1Element {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *H1Element) Textf(format string, args ...any) *H1Element {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *H1Element) ToggleClass(class string, enable bool) *H1Element {
 type H1Autocapitalize string
 
 const (
+	H1AutocapitalizeWords      H1Autocapitalize = "words"
 	H1AutocapitalizeCharacters H1Autocapitalize = "characters"
 	H1AutocapitalizeNone       H1Autocapitalize = "none"
 	H1AutocapitalizeOff        H1Autocapitalize = "off"
 	H1AutocapitalizeOn         H1Autocapitalize = "on"
 	H1AutocapitalizeSentences  H1Autocapitalize = "sentences"
-	H1AutocapitalizeWords      H1Autocapitalize = "words"
 )
 
 type H1Autocorrect string
@@ -108,9 +113,9 @@ const (
 type H1Contenteditable string
 
 const (
-	H1ContenteditableTrue          H1Contenteditable = "true"
 	H1ContenteditableFalse         H1Contenteditable = "false"
 	H1ContenteditablePlaintextOnly H1Contenteditable = "plaintext-only"
+	H1ContenteditableTrue          H1Contenteditable = "true"
 	H1ContenteditableEmpty         H1Contenteditable = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type H1Enterkeyhint string
 
 const (
+	H1EnterkeyhintEnter    H1Enterkeyhint = "enter"
 	H1EnterkeyhintGo       H1Enterkeyhint = "go"
 	H1EnterkeyhintNext     H1Enterkeyhint = "next"
 	H1EnterkeyhintPrevious H1Enterkeyhint = "previous"
 	H1EnterkeyhintSearch   H1Enterkeyhint = "search"
 	H1EnterkeyhintSend     H1Enterkeyhint = "send"
 	H1EnterkeyhintDone     H1Enterkeyhint = "done"
-	H1EnterkeyhintEnter    H1Enterkeyhint = "enter"
 )
 
 type H1Hidden string
@@ -152,7 +157,6 @@ const (
 type H1Inputmode string
 
 const (
-	H1InputmodeEmail   H1Inputmode = "email"
 	H1InputmodeNone    H1Inputmode = "none"
 	H1InputmodeNumeric H1Inputmode = "numeric"
 	H1InputmodeSearch  H1Inputmode = "search"
@@ -160,6 +164,7 @@ const (
 	H1InputmodeText    H1Inputmode = "text"
 	H1InputmodeUrl     H1Inputmode = "url"
 	H1InputmodeDecimal H1Inputmode = "decimal"
+	H1InputmodeEmail   H1Inputmode = "email"
 )
 
 type H1Spellcheck string
@@ -390,48 +395,31 @@ func (e *H1Element) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<h1")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<h1")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</h1>")); err != nil {
-		return err
-	}
+	sb.WriteString("</h1>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

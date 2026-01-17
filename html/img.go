@@ -70,17 +70,17 @@ func (e *ImgElement) ToggleClass(class string, enable bool) *ImgElement {
 type ImgCrossorigin string
 
 const (
-	ImgCrossoriginUseCredentials ImgCrossorigin = "use-credentials"
 	ImgCrossoriginAnonymous      ImgCrossorigin = "anonymous"
+	ImgCrossoriginUseCredentials ImgCrossorigin = "use-credentials"
 	ImgCrossoriginEmpty          ImgCrossorigin = ""
 )
 
 type ImgDecoding string
 
 const (
+	ImgDecodingAsync ImgDecoding = "async"
 	ImgDecodingAuto  ImgDecoding = "auto"
 	ImgDecodingSync  ImgDecoding = "sync"
-	ImgDecodingAsync ImgDecoding = "async"
 )
 
 type ImgLoading string
@@ -93,20 +93,20 @@ const (
 type ImgFetchpriority string
 
 const (
-	ImgFetchpriorityAuto ImgFetchpriority = "auto"
 	ImgFetchpriorityHigh ImgFetchpriority = "high"
 	ImgFetchpriorityLow  ImgFetchpriority = "low"
+	ImgFetchpriorityAuto ImgFetchpriority = "auto"
 )
 
 type ImgAutocapitalize string
 
 const (
+	ImgAutocapitalizeOn         ImgAutocapitalize = "on"
+	ImgAutocapitalizeSentences  ImgAutocapitalize = "sentences"
 	ImgAutocapitalizeWords      ImgAutocapitalize = "words"
 	ImgAutocapitalizeCharacters ImgAutocapitalize = "characters"
 	ImgAutocapitalizeNone       ImgAutocapitalize = "none"
 	ImgAutocapitalizeOff        ImgAutocapitalize = "off"
-	ImgAutocapitalizeOn         ImgAutocapitalize = "on"
-	ImgAutocapitalizeSentences  ImgAutocapitalize = "sentences"
 )
 
 type ImgAutocorrect string
@@ -120,9 +120,9 @@ const (
 type ImgContenteditable string
 
 const (
-	ImgContenteditableFalse         ImgContenteditable = "false"
 	ImgContenteditablePlaintextOnly ImgContenteditable = "plaintext-only"
 	ImgContenteditableTrue          ImgContenteditable = "true"
+	ImgContenteditableFalse         ImgContenteditable = "false"
 	ImgContenteditableEmpty         ImgContenteditable = ""
 )
 
@@ -144,13 +144,13 @@ const (
 type ImgEnterkeyhint string
 
 const (
-	ImgEnterkeyhintGo       ImgEnterkeyhint = "go"
-	ImgEnterkeyhintNext     ImgEnterkeyhint = "next"
-	ImgEnterkeyhintPrevious ImgEnterkeyhint = "previous"
 	ImgEnterkeyhintSearch   ImgEnterkeyhint = "search"
 	ImgEnterkeyhintSend     ImgEnterkeyhint = "send"
 	ImgEnterkeyhintDone     ImgEnterkeyhint = "done"
 	ImgEnterkeyhintEnter    ImgEnterkeyhint = "enter"
+	ImgEnterkeyhintGo       ImgEnterkeyhint = "go"
+	ImgEnterkeyhintNext     ImgEnterkeyhint = "next"
+	ImgEnterkeyhintPrevious ImgEnterkeyhint = "previous"
 )
 
 type ImgHidden string
@@ -164,14 +164,14 @@ const (
 type ImgInputmode string
 
 const (
-	ImgInputmodeTel     ImgInputmode = "tel"
-	ImgInputmodeText    ImgInputmode = "text"
-	ImgInputmodeUrl     ImgInputmode = "url"
-	ImgInputmodeDecimal ImgInputmode = "decimal"
 	ImgInputmodeEmail   ImgInputmode = "email"
 	ImgInputmodeNone    ImgInputmode = "none"
 	ImgInputmodeNumeric ImgInputmode = "numeric"
 	ImgInputmodeSearch  ImgInputmode = "search"
+	ImgInputmodeTel     ImgInputmode = "tel"
+	ImgInputmodeText    ImgInputmode = "text"
+	ImgInputmodeUrl     ImgInputmode = "url"
+	ImgInputmodeDecimal ImgInputmode = "decimal"
 )
 
 type ImgSpellcheck string
@@ -480,39 +480,24 @@ func (e *ImgElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<img")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<img")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

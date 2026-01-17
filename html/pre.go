@@ -60,6 +60,11 @@ func (e *PreElement) With(fn func(*PreElement)) *PreElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *PreElement) Text(text string) *PreElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *PreElement) Textf(format string, args ...any) *PreElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -108,9 +113,9 @@ const (
 type PreContenteditable string
 
 const (
-	PreContenteditableTrue          PreContenteditable = "true"
 	PreContenteditableFalse         PreContenteditable = "false"
 	PreContenteditablePlaintextOnly PreContenteditable = "plaintext-only"
+	PreContenteditableTrue          PreContenteditable = "true"
 	PreContenteditableEmpty         PreContenteditable = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type PreEnterkeyhint string
 
 const (
+	PreEnterkeyhintPrevious PreEnterkeyhint = "previous"
+	PreEnterkeyhintSearch   PreEnterkeyhint = "search"
+	PreEnterkeyhintSend     PreEnterkeyhint = "send"
 	PreEnterkeyhintDone     PreEnterkeyhint = "done"
 	PreEnterkeyhintEnter    PreEnterkeyhint = "enter"
 	PreEnterkeyhintGo       PreEnterkeyhint = "go"
 	PreEnterkeyhintNext     PreEnterkeyhint = "next"
-	PreEnterkeyhintPrevious PreEnterkeyhint = "previous"
-	PreEnterkeyhintSearch   PreEnterkeyhint = "search"
-	PreEnterkeyhintSend     PreEnterkeyhint = "send"
 )
 
 type PreHidden string
@@ -152,14 +157,14 @@ const (
 type PreInputmode string
 
 const (
-	PreInputmodeEmail   PreInputmode = "email"
-	PreInputmodeNone    PreInputmode = "none"
 	PreInputmodeNumeric PreInputmode = "numeric"
 	PreInputmodeSearch  PreInputmode = "search"
 	PreInputmodeTel     PreInputmode = "tel"
 	PreInputmodeText    PreInputmode = "text"
 	PreInputmodeUrl     PreInputmode = "url"
 	PreInputmodeDecimal PreInputmode = "decimal"
+	PreInputmodeEmail   PreInputmode = "email"
+	PreInputmodeNone    PreInputmode = "none"
 )
 
 type PreSpellcheck string
@@ -390,48 +395,31 @@ func (e *PreElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<pre")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<pre")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</pre>")); err != nil {
-		return err
-	}
+	sb.WriteString("</pre>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

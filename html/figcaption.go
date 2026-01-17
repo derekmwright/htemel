@@ -60,6 +60,11 @@ func (e *FigcaptionElement) With(fn func(*FigcaptionElement)) *FigcaptionElement
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *FigcaptionElement) Text(text string) *FigcaptionElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *FigcaptionElement) Textf(format string, args ...any) *FigcaptionElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *FigcaptionElement) ToggleClass(class string, enable bool) *FigcaptionEl
 type FigcaptionAutocapitalize string
 
 const (
-	FigcaptionAutocapitalizeOn         FigcaptionAutocapitalize = "on"
-	FigcaptionAutocapitalizeSentences  FigcaptionAutocapitalize = "sentences"
 	FigcaptionAutocapitalizeWords      FigcaptionAutocapitalize = "words"
 	FigcaptionAutocapitalizeCharacters FigcaptionAutocapitalize = "characters"
 	FigcaptionAutocapitalizeNone       FigcaptionAutocapitalize = "none"
 	FigcaptionAutocapitalizeOff        FigcaptionAutocapitalize = "off"
+	FigcaptionAutocapitalizeOn         FigcaptionAutocapitalize = "on"
+	FigcaptionAutocapitalizeSentences  FigcaptionAutocapitalize = "sentences"
 )
 
 type FigcaptionAutocorrect string
@@ -132,13 +137,13 @@ const (
 type FigcaptionEnterkeyhint string
 
 const (
-	FigcaptionEnterkeyhintSearch   FigcaptionEnterkeyhint = "search"
-	FigcaptionEnterkeyhintSend     FigcaptionEnterkeyhint = "send"
 	FigcaptionEnterkeyhintDone     FigcaptionEnterkeyhint = "done"
 	FigcaptionEnterkeyhintEnter    FigcaptionEnterkeyhint = "enter"
 	FigcaptionEnterkeyhintGo       FigcaptionEnterkeyhint = "go"
 	FigcaptionEnterkeyhintNext     FigcaptionEnterkeyhint = "next"
 	FigcaptionEnterkeyhintPrevious FigcaptionEnterkeyhint = "previous"
+	FigcaptionEnterkeyhintSearch   FigcaptionEnterkeyhint = "search"
+	FigcaptionEnterkeyhintSend     FigcaptionEnterkeyhint = "send"
 )
 
 type FigcaptionHidden string
@@ -152,14 +157,14 @@ const (
 type FigcaptionInputmode string
 
 const (
-	FigcaptionInputmodeDecimal FigcaptionInputmode = "decimal"
-	FigcaptionInputmodeEmail   FigcaptionInputmode = "email"
-	FigcaptionInputmodeNone    FigcaptionInputmode = "none"
-	FigcaptionInputmodeNumeric FigcaptionInputmode = "numeric"
 	FigcaptionInputmodeSearch  FigcaptionInputmode = "search"
 	FigcaptionInputmodeTel     FigcaptionInputmode = "tel"
 	FigcaptionInputmodeText    FigcaptionInputmode = "text"
 	FigcaptionInputmodeUrl     FigcaptionInputmode = "url"
+	FigcaptionInputmodeDecimal FigcaptionInputmode = "decimal"
+	FigcaptionInputmodeEmail   FigcaptionInputmode = "email"
+	FigcaptionInputmodeNone    FigcaptionInputmode = "none"
+	FigcaptionInputmodeNumeric FigcaptionInputmode = "numeric"
 )
 
 type FigcaptionSpellcheck string
@@ -390,48 +395,31 @@ func (e *FigcaptionElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<figcaption")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<figcaption")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</figcaption>")); err != nil {
-		return err
-	}
+	sb.WriteString("</figcaption>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

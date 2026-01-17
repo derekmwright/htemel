@@ -70,12 +70,12 @@ func (e *BrElement) ToggleClass(class string, enable bool) *BrElement {
 type BrAutocapitalize string
 
 const (
+	BrAutocapitalizeWords      BrAutocapitalize = "words"
 	BrAutocapitalizeCharacters BrAutocapitalize = "characters"
 	BrAutocapitalizeNone       BrAutocapitalize = "none"
 	BrAutocapitalizeOff        BrAutocapitalize = "off"
 	BrAutocapitalizeOn         BrAutocapitalize = "on"
 	BrAutocapitalizeSentences  BrAutocapitalize = "sentences"
-	BrAutocapitalizeWords      BrAutocapitalize = "words"
 )
 
 type BrAutocorrect string
@@ -106,20 +106,20 @@ const (
 type BrDraggable string
 
 const (
-	BrDraggableTrue  BrDraggable = "true"
 	BrDraggableFalse BrDraggable = "false"
+	BrDraggableTrue  BrDraggable = "true"
 )
 
 type BrEnterkeyhint string
 
 const (
+	BrEnterkeyhintNext     BrEnterkeyhint = "next"
+	BrEnterkeyhintPrevious BrEnterkeyhint = "previous"
 	BrEnterkeyhintSearch   BrEnterkeyhint = "search"
 	BrEnterkeyhintSend     BrEnterkeyhint = "send"
 	BrEnterkeyhintDone     BrEnterkeyhint = "done"
 	BrEnterkeyhintEnter    BrEnterkeyhint = "enter"
 	BrEnterkeyhintGo       BrEnterkeyhint = "go"
-	BrEnterkeyhintNext     BrEnterkeyhint = "next"
-	BrEnterkeyhintPrevious BrEnterkeyhint = "previous"
 )
 
 type BrHidden string
@@ -133,21 +133,21 @@ const (
 type BrInputmode string
 
 const (
-	BrInputmodeSearch  BrInputmode = "search"
-	BrInputmodeTel     BrInputmode = "tel"
-	BrInputmodeText    BrInputmode = "text"
 	BrInputmodeUrl     BrInputmode = "url"
 	BrInputmodeDecimal BrInputmode = "decimal"
 	BrInputmodeEmail   BrInputmode = "email"
 	BrInputmodeNone    BrInputmode = "none"
 	BrInputmodeNumeric BrInputmode = "numeric"
+	BrInputmodeSearch  BrInputmode = "search"
+	BrInputmodeTel     BrInputmode = "tel"
+	BrInputmodeText    BrInputmode = "text"
 )
 
 type BrSpellcheck string
 
 const (
-	BrSpellcheckFalse BrSpellcheck = "false"
 	BrSpellcheckTrue  BrSpellcheck = "true"
+	BrSpellcheckFalse BrSpellcheck = "false"
 	BrSpellcheckEmpty BrSpellcheck = ""
 )
 
@@ -371,39 +371,24 @@ func (e *BrElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<br")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<br")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

@@ -60,6 +60,11 @@ func (e *H6Element) With(fn func(*H6Element)) *H6Element {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *H6Element) Text(text string) *H6Element {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *H6Element) Textf(format string, args ...any) *H6Element {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,19 +94,19 @@ func (e *H6Element) ToggleClass(class string, enable bool) *H6Element {
 type H6Autocapitalize string
 
 const (
-	H6AutocapitalizeNone       H6Autocapitalize = "none"
-	H6AutocapitalizeOff        H6Autocapitalize = "off"
-	H6AutocapitalizeOn         H6Autocapitalize = "on"
 	H6AutocapitalizeSentences  H6Autocapitalize = "sentences"
 	H6AutocapitalizeWords      H6Autocapitalize = "words"
 	H6AutocapitalizeCharacters H6Autocapitalize = "characters"
+	H6AutocapitalizeNone       H6Autocapitalize = "none"
+	H6AutocapitalizeOff        H6Autocapitalize = "off"
+	H6AutocapitalizeOn         H6Autocapitalize = "on"
 )
 
 type H6Autocorrect string
 
 const (
-	H6AutocorrectOn    H6Autocorrect = "on"
 	H6AutocorrectOff   H6Autocorrect = "off"
+	H6AutocorrectOn    H6Autocorrect = "on"
 	H6AutocorrectEmpty H6Autocorrect = ""
 )
 
@@ -117,9 +122,9 @@ const (
 type H6Dir string
 
 const (
+	H6DirRtl  H6Dir = "rtl"
 	H6DirAuto H6Dir = "auto"
 	H6DirLtr  H6Dir = "ltr"
-	H6DirRtl  H6Dir = "rtl"
 )
 
 type H6Draggable string
@@ -132,13 +137,13 @@ const (
 type H6Enterkeyhint string
 
 const (
-	H6EnterkeyhintEnter    H6Enterkeyhint = "enter"
-	H6EnterkeyhintGo       H6Enterkeyhint = "go"
 	H6EnterkeyhintNext     H6Enterkeyhint = "next"
 	H6EnterkeyhintPrevious H6Enterkeyhint = "previous"
 	H6EnterkeyhintSearch   H6Enterkeyhint = "search"
 	H6EnterkeyhintSend     H6Enterkeyhint = "send"
 	H6EnterkeyhintDone     H6Enterkeyhint = "done"
+	H6EnterkeyhintEnter    H6Enterkeyhint = "enter"
+	H6EnterkeyhintGo       H6Enterkeyhint = "go"
 )
 
 type H6Hidden string
@@ -152,14 +157,14 @@ const (
 type H6Inputmode string
 
 const (
+	H6InputmodeEmail   H6Inputmode = "email"
+	H6InputmodeNone    H6Inputmode = "none"
+	H6InputmodeNumeric H6Inputmode = "numeric"
 	H6InputmodeSearch  H6Inputmode = "search"
 	H6InputmodeTel     H6Inputmode = "tel"
 	H6InputmodeText    H6Inputmode = "text"
 	H6InputmodeUrl     H6Inputmode = "url"
 	H6InputmodeDecimal H6Inputmode = "decimal"
-	H6InputmodeEmail   H6Inputmode = "email"
-	H6InputmodeNone    H6Inputmode = "none"
-	H6InputmodeNumeric H6Inputmode = "numeric"
 )
 
 type H6Spellcheck string
@@ -390,48 +395,31 @@ func (e *H6Element) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<h6")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<h6")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</h6>")); err != nil {
-		return err
-	}
+	sb.WriteString("</h6>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

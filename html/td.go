@@ -60,6 +60,11 @@ func (e *TdElement) With(fn func(*TdElement)) *TdElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *TdElement) Text(text string) *TdElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *TdElement) Textf(format string, args ...any) *TdElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,19 +94,19 @@ func (e *TdElement) ToggleClass(class string, enable bool) *TdElement {
 type TdAutocapitalize string
 
 const (
-	TdAutocapitalizeCharacters TdAutocapitalize = "characters"
-	TdAutocapitalizeNone       TdAutocapitalize = "none"
-	TdAutocapitalizeOff        TdAutocapitalize = "off"
 	TdAutocapitalizeOn         TdAutocapitalize = "on"
 	TdAutocapitalizeSentences  TdAutocapitalize = "sentences"
 	TdAutocapitalizeWords      TdAutocapitalize = "words"
+	TdAutocapitalizeCharacters TdAutocapitalize = "characters"
+	TdAutocapitalizeNone       TdAutocapitalize = "none"
+	TdAutocapitalizeOff        TdAutocapitalize = "off"
 )
 
 type TdAutocorrect string
 
 const (
-	TdAutocorrectOff   TdAutocorrect = "off"
 	TdAutocorrectOn    TdAutocorrect = "on"
+	TdAutocorrectOff   TdAutocorrect = "off"
 	TdAutocorrectEmpty TdAutocorrect = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type TdEnterkeyhint string
 
 const (
-	TdEnterkeyhintEnter    TdEnterkeyhint = "enter"
-	TdEnterkeyhintGo       TdEnterkeyhint = "go"
-	TdEnterkeyhintNext     TdEnterkeyhint = "next"
 	TdEnterkeyhintPrevious TdEnterkeyhint = "previous"
 	TdEnterkeyhintSearch   TdEnterkeyhint = "search"
 	TdEnterkeyhintSend     TdEnterkeyhint = "send"
 	TdEnterkeyhintDone     TdEnterkeyhint = "done"
+	TdEnterkeyhintEnter    TdEnterkeyhint = "enter"
+	TdEnterkeyhintGo       TdEnterkeyhint = "go"
+	TdEnterkeyhintNext     TdEnterkeyhint = "next"
 )
 
 type TdHidden string
@@ -152,21 +157,21 @@ const (
 type TdInputmode string
 
 const (
-	TdInputmodeNone    TdInputmode = "none"
-	TdInputmodeNumeric TdInputmode = "numeric"
-	TdInputmodeSearch  TdInputmode = "search"
-	TdInputmodeTel     TdInputmode = "tel"
 	TdInputmodeText    TdInputmode = "text"
 	TdInputmodeUrl     TdInputmode = "url"
 	TdInputmodeDecimal TdInputmode = "decimal"
 	TdInputmodeEmail   TdInputmode = "email"
+	TdInputmodeNone    TdInputmode = "none"
+	TdInputmodeNumeric TdInputmode = "numeric"
+	TdInputmodeSearch  TdInputmode = "search"
+	TdInputmodeTel     TdInputmode = "tel"
 )
 
 type TdSpellcheck string
 
 const (
-	TdSpellcheckTrue  TdSpellcheck = "true"
 	TdSpellcheckFalse TdSpellcheck = "false"
+	TdSpellcheckTrue  TdSpellcheck = "true"
 	TdSpellcheckEmpty TdSpellcheck = ""
 )
 
@@ -408,48 +413,31 @@ func (e *TdElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<td")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<td")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</td>")); err != nil {
-		return err
-	}
+	sb.WriteString("</td>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

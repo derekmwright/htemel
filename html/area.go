@@ -70,21 +70,21 @@ func (e *AreaElement) ToggleClass(class string, enable bool) *AreaElement {
 type AreaShape string
 
 const (
+	AreaShapeCircle  AreaShape = "circle"
 	AreaShapeDefault AreaShape = "default"
 	AreaShapePoly    AreaShape = "poly"
 	AreaShapeRect    AreaShape = "rect"
-	AreaShapeCircle  AreaShape = "circle"
 )
 
 type AreaAutocapitalize string
 
 const (
+	AreaAutocapitalizeNone       AreaAutocapitalize = "none"
+	AreaAutocapitalizeOff        AreaAutocapitalize = "off"
 	AreaAutocapitalizeOn         AreaAutocapitalize = "on"
 	AreaAutocapitalizeSentences  AreaAutocapitalize = "sentences"
 	AreaAutocapitalizeWords      AreaAutocapitalize = "words"
 	AreaAutocapitalizeCharacters AreaAutocapitalize = "characters"
-	AreaAutocapitalizeNone       AreaAutocapitalize = "none"
-	AreaAutocapitalizeOff        AreaAutocapitalize = "off"
 )
 
 type AreaAutocorrect string
@@ -107,9 +107,9 @@ const (
 type AreaDir string
 
 const (
+	AreaDirRtl  AreaDir = "rtl"
 	AreaDirAuto AreaDir = "auto"
 	AreaDirLtr  AreaDir = "ltr"
-	AreaDirRtl  AreaDir = "rtl"
 )
 
 type AreaDraggable string
@@ -122,34 +122,34 @@ const (
 type AreaEnterkeyhint string
 
 const (
+	AreaEnterkeyhintGo       AreaEnterkeyhint = "go"
+	AreaEnterkeyhintNext     AreaEnterkeyhint = "next"
 	AreaEnterkeyhintPrevious AreaEnterkeyhint = "previous"
 	AreaEnterkeyhintSearch   AreaEnterkeyhint = "search"
 	AreaEnterkeyhintSend     AreaEnterkeyhint = "send"
 	AreaEnterkeyhintDone     AreaEnterkeyhint = "done"
 	AreaEnterkeyhintEnter    AreaEnterkeyhint = "enter"
-	AreaEnterkeyhintGo       AreaEnterkeyhint = "go"
-	AreaEnterkeyhintNext     AreaEnterkeyhint = "next"
 )
 
 type AreaHidden string
 
 const (
-	AreaHiddenHidden     AreaHidden = "hidden"
 	AreaHiddenUntilFound AreaHidden = "until-found"
+	AreaHiddenHidden     AreaHidden = "hidden"
 	AreaHiddenEmpty      AreaHidden = ""
 )
 
 type AreaInputmode string
 
 const (
-	AreaInputmodeNone    AreaInputmode = "none"
-	AreaInputmodeNumeric AreaInputmode = "numeric"
-	AreaInputmodeSearch  AreaInputmode = "search"
-	AreaInputmodeTel     AreaInputmode = "tel"
 	AreaInputmodeText    AreaInputmode = "text"
 	AreaInputmodeUrl     AreaInputmode = "url"
 	AreaInputmodeDecimal AreaInputmode = "decimal"
 	AreaInputmodeEmail   AreaInputmode = "email"
+	AreaInputmodeNone    AreaInputmode = "none"
+	AreaInputmodeNumeric AreaInputmode = "numeric"
+	AreaInputmodeSearch  AreaInputmode = "search"
+	AreaInputmodeTel     AreaInputmode = "tel"
 )
 
 type AreaSpellcheck string
@@ -434,39 +434,24 @@ func (e *AreaElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<area")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<area")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

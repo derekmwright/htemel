@@ -60,6 +60,11 @@ func (e *OutputElement) With(fn func(*OutputElement)) *OutputElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *OutputElement) Text(text string) *OutputElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *OutputElement) Textf(format string, args ...any) *OutputElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -117,28 +122,28 @@ const (
 type OutputDir string
 
 const (
-	OutputDirLtr  OutputDir = "ltr"
 	OutputDirRtl  OutputDir = "rtl"
 	OutputDirAuto OutputDir = "auto"
+	OutputDirLtr  OutputDir = "ltr"
 )
 
 type OutputDraggable string
 
 const (
-	OutputDraggableTrue  OutputDraggable = "true"
 	OutputDraggableFalse OutputDraggable = "false"
+	OutputDraggableTrue  OutputDraggable = "true"
 )
 
 type OutputEnterkeyhint string
 
 const (
-	OutputEnterkeyhintEnter    OutputEnterkeyhint = "enter"
 	OutputEnterkeyhintGo       OutputEnterkeyhint = "go"
 	OutputEnterkeyhintNext     OutputEnterkeyhint = "next"
 	OutputEnterkeyhintPrevious OutputEnterkeyhint = "previous"
 	OutputEnterkeyhintSearch   OutputEnterkeyhint = "search"
 	OutputEnterkeyhintSend     OutputEnterkeyhint = "send"
 	OutputEnterkeyhintDone     OutputEnterkeyhint = "done"
+	OutputEnterkeyhintEnter    OutputEnterkeyhint = "enter"
 )
 
 type OutputHidden string
@@ -165,8 +170,8 @@ const (
 type OutputSpellcheck string
 
 const (
-	OutputSpellcheckTrue  OutputSpellcheck = "true"
 	OutputSpellcheckFalse OutputSpellcheck = "false"
+	OutputSpellcheckTrue  OutputSpellcheck = "true"
 	OutputSpellcheckEmpty OutputSpellcheck = ""
 )
 
@@ -408,48 +413,31 @@ func (e *OutputElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<output")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<output")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</output>")); err != nil {
-		return err
-	}
+	sb.WriteString("</output>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

@@ -60,6 +60,11 @@ func (e *HeadElement) With(fn func(*HeadElement)) *HeadElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *HeadElement) Text(text string) *HeadElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *HeadElement) Textf(format string, args ...any) *HeadElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *HeadElement) ToggleClass(class string, enable bool) *HeadElement {
 type HeadAutocapitalize string
 
 const (
-	HeadAutocapitalizeNone       HeadAutocapitalize = "none"
 	HeadAutocapitalizeOff        HeadAutocapitalize = "off"
 	HeadAutocapitalizeOn         HeadAutocapitalize = "on"
 	HeadAutocapitalizeSentences  HeadAutocapitalize = "sentences"
 	HeadAutocapitalizeWords      HeadAutocapitalize = "words"
 	HeadAutocapitalizeCharacters HeadAutocapitalize = "characters"
+	HeadAutocapitalizeNone       HeadAutocapitalize = "none"
 )
 
 type HeadAutocorrect string
@@ -108,9 +113,9 @@ const (
 type HeadContenteditable string
 
 const (
-	HeadContenteditableFalse         HeadContenteditable = "false"
 	HeadContenteditablePlaintextOnly HeadContenteditable = "plaintext-only"
 	HeadContenteditableTrue          HeadContenteditable = "true"
+	HeadContenteditableFalse         HeadContenteditable = "false"
 	HeadContenteditableEmpty         HeadContenteditable = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type HeadEnterkeyhint string
 
 const (
-	HeadEnterkeyhintGo       HeadEnterkeyhint = "go"
-	HeadEnterkeyhintNext     HeadEnterkeyhint = "next"
-	HeadEnterkeyhintPrevious HeadEnterkeyhint = "previous"
 	HeadEnterkeyhintSearch   HeadEnterkeyhint = "search"
 	HeadEnterkeyhintSend     HeadEnterkeyhint = "send"
 	HeadEnterkeyhintDone     HeadEnterkeyhint = "done"
 	HeadEnterkeyhintEnter    HeadEnterkeyhint = "enter"
+	HeadEnterkeyhintGo       HeadEnterkeyhint = "go"
+	HeadEnterkeyhintNext     HeadEnterkeyhint = "next"
+	HeadEnterkeyhintPrevious HeadEnterkeyhint = "previous"
 )
 
 type HeadHidden string
@@ -152,14 +157,14 @@ const (
 type HeadInputmode string
 
 const (
-	HeadInputmodeText    HeadInputmode = "text"
-	HeadInputmodeUrl     HeadInputmode = "url"
-	HeadInputmodeDecimal HeadInputmode = "decimal"
 	HeadInputmodeEmail   HeadInputmode = "email"
 	HeadInputmodeNone    HeadInputmode = "none"
 	HeadInputmodeNumeric HeadInputmode = "numeric"
 	HeadInputmodeSearch  HeadInputmode = "search"
 	HeadInputmodeTel     HeadInputmode = "tel"
+	HeadInputmodeText    HeadInputmode = "text"
+	HeadInputmodeUrl     HeadInputmode = "url"
+	HeadInputmodeDecimal HeadInputmode = "decimal"
 )
 
 type HeadSpellcheck string
@@ -181,8 +186,8 @@ const (
 type HeadWritingsuggestions string
 
 const (
-	HeadWritingsuggestionsTrue  HeadWritingsuggestions = "true"
 	HeadWritingsuggestionsFalse HeadWritingsuggestions = "false"
+	HeadWritingsuggestionsTrue  HeadWritingsuggestions = "true"
 	HeadWritingsuggestionsEmpty HeadWritingsuggestions = ""
 )
 
@@ -390,48 +395,31 @@ func (e *HeadElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<head")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<head")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</head>")); err != nil {
-		return err
-	}
+	sb.WriteString("</head>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

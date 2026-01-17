@@ -60,6 +60,11 @@ func (e *CanvasElement) With(fn func(*CanvasElement)) *CanvasElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *CanvasElement) Text(text string) *CanvasElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *CanvasElement) Textf(format string, args ...any) *CanvasElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *CanvasElement) ToggleClass(class string, enable bool) *CanvasElement {
 type CanvasAutocapitalize string
 
 const (
-	CanvasAutocapitalizeOff        CanvasAutocapitalize = "off"
-	CanvasAutocapitalizeOn         CanvasAutocapitalize = "on"
-	CanvasAutocapitalizeSentences  CanvasAutocapitalize = "sentences"
 	CanvasAutocapitalizeWords      CanvasAutocapitalize = "words"
 	CanvasAutocapitalizeCharacters CanvasAutocapitalize = "characters"
 	CanvasAutocapitalizeNone       CanvasAutocapitalize = "none"
+	CanvasAutocapitalizeOff        CanvasAutocapitalize = "off"
+	CanvasAutocapitalizeOn         CanvasAutocapitalize = "on"
+	CanvasAutocapitalizeSentences  CanvasAutocapitalize = "sentences"
 )
 
 type CanvasAutocorrect string
@@ -132,13 +137,13 @@ const (
 type CanvasEnterkeyhint string
 
 const (
+	CanvasEnterkeyhintEnter    CanvasEnterkeyhint = "enter"
+	CanvasEnterkeyhintGo       CanvasEnterkeyhint = "go"
+	CanvasEnterkeyhintNext     CanvasEnterkeyhint = "next"
 	CanvasEnterkeyhintPrevious CanvasEnterkeyhint = "previous"
 	CanvasEnterkeyhintSearch   CanvasEnterkeyhint = "search"
 	CanvasEnterkeyhintSend     CanvasEnterkeyhint = "send"
 	CanvasEnterkeyhintDone     CanvasEnterkeyhint = "done"
-	CanvasEnterkeyhintEnter    CanvasEnterkeyhint = "enter"
-	CanvasEnterkeyhintGo       CanvasEnterkeyhint = "go"
-	CanvasEnterkeyhintNext     CanvasEnterkeyhint = "next"
 )
 
 type CanvasHidden string
@@ -152,14 +157,14 @@ const (
 type CanvasInputmode string
 
 const (
-	CanvasInputmodeEmail   CanvasInputmode = "email"
-	CanvasInputmodeNone    CanvasInputmode = "none"
 	CanvasInputmodeNumeric CanvasInputmode = "numeric"
 	CanvasInputmodeSearch  CanvasInputmode = "search"
 	CanvasInputmodeTel     CanvasInputmode = "tel"
 	CanvasInputmodeText    CanvasInputmode = "text"
 	CanvasInputmodeUrl     CanvasInputmode = "url"
 	CanvasInputmodeDecimal CanvasInputmode = "decimal"
+	CanvasInputmodeEmail   CanvasInputmode = "email"
+	CanvasInputmodeNone    CanvasInputmode = "none"
 )
 
 type CanvasSpellcheck string
@@ -402,48 +407,31 @@ func (e *CanvasElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<canvas")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<canvas")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</canvas>")); err != nil {
-		return err
-	}
+	sb.WriteString("</canvas>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

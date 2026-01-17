@@ -60,6 +60,11 @@ func (e *SampElement) With(fn func(*SampElement)) *SampElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *SampElement) Text(text string) *SampElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *SampElement) Textf(format string, args ...any) *SampElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *SampElement) ToggleClass(class string, enable bool) *SampElement {
 type SampAutocapitalize string
 
 const (
+	SampAutocapitalizeOff        SampAutocapitalize = "off"
 	SampAutocapitalizeOn         SampAutocapitalize = "on"
 	SampAutocapitalizeSentences  SampAutocapitalize = "sentences"
 	SampAutocapitalizeWords      SampAutocapitalize = "words"
 	SampAutocapitalizeCharacters SampAutocapitalize = "characters"
 	SampAutocapitalizeNone       SampAutocapitalize = "none"
-	SampAutocapitalizeOff        SampAutocapitalize = "off"
 )
 
 type SampAutocorrect string
@@ -117,9 +122,9 @@ const (
 type SampDir string
 
 const (
+	SampDirAuto SampDir = "auto"
 	SampDirLtr  SampDir = "ltr"
 	SampDirRtl  SampDir = "rtl"
-	SampDirAuto SampDir = "auto"
 )
 
 type SampDraggable string
@@ -132,13 +137,13 @@ const (
 type SampEnterkeyhint string
 
 const (
-	SampEnterkeyhintSend     SampEnterkeyhint = "send"
-	SampEnterkeyhintDone     SampEnterkeyhint = "done"
-	SampEnterkeyhintEnter    SampEnterkeyhint = "enter"
 	SampEnterkeyhintGo       SampEnterkeyhint = "go"
 	SampEnterkeyhintNext     SampEnterkeyhint = "next"
 	SampEnterkeyhintPrevious SampEnterkeyhint = "previous"
 	SampEnterkeyhintSearch   SampEnterkeyhint = "search"
+	SampEnterkeyhintSend     SampEnterkeyhint = "send"
+	SampEnterkeyhintDone     SampEnterkeyhint = "done"
+	SampEnterkeyhintEnter    SampEnterkeyhint = "enter"
 )
 
 type SampHidden string
@@ -152,21 +157,21 @@ const (
 type SampInputmode string
 
 const (
-	SampInputmodeUrl     SampInputmode = "url"
-	SampInputmodeDecimal SampInputmode = "decimal"
-	SampInputmodeEmail   SampInputmode = "email"
-	SampInputmodeNone    SampInputmode = "none"
 	SampInputmodeNumeric SampInputmode = "numeric"
 	SampInputmodeSearch  SampInputmode = "search"
 	SampInputmodeTel     SampInputmode = "tel"
 	SampInputmodeText    SampInputmode = "text"
+	SampInputmodeUrl     SampInputmode = "url"
+	SampInputmodeDecimal SampInputmode = "decimal"
+	SampInputmodeEmail   SampInputmode = "email"
+	SampInputmodeNone    SampInputmode = "none"
 )
 
 type SampSpellcheck string
 
 const (
-	SampSpellcheckTrue  SampSpellcheck = "true"
 	SampSpellcheckFalse SampSpellcheck = "false"
+	SampSpellcheckTrue  SampSpellcheck = "true"
 	SampSpellcheckEmpty SampSpellcheck = ""
 )
 
@@ -390,48 +395,31 @@ func (e *SampElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<samp")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<samp")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</samp>")); err != nil {
-		return err
-	}
+	sb.WriteString("</samp>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

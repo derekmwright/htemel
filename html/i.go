@@ -60,6 +60,11 @@ func (e *IElement) With(fn func(*IElement)) *IElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *IElement) Text(text string) *IElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *IElement) Textf(format string, args ...any) *IElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,19 +94,19 @@ func (e *IElement) ToggleClass(class string, enable bool) *IElement {
 type IAutocapitalize string
 
 const (
-	IAutocapitalizeWords      IAutocapitalize = "words"
 	IAutocapitalizeCharacters IAutocapitalize = "characters"
 	IAutocapitalizeNone       IAutocapitalize = "none"
 	IAutocapitalizeOff        IAutocapitalize = "off"
 	IAutocapitalizeOn         IAutocapitalize = "on"
 	IAutocapitalizeSentences  IAutocapitalize = "sentences"
+	IAutocapitalizeWords      IAutocapitalize = "words"
 )
 
 type IAutocorrect string
 
 const (
-	IAutocorrectOn    IAutocorrect = "on"
 	IAutocorrectOff   IAutocorrect = "off"
+	IAutocorrectOn    IAutocorrect = "on"
 	IAutocorrectEmpty IAutocorrect = ""
 )
 
@@ -117,9 +122,9 @@ const (
 type IDir string
 
 const (
-	IDirRtl  IDir = "rtl"
 	IDirAuto IDir = "auto"
 	IDirLtr  IDir = "ltr"
+	IDirRtl  IDir = "rtl"
 )
 
 type IDraggable string
@@ -132,13 +137,13 @@ const (
 type IEnterkeyhint string
 
 const (
+	IEnterkeyhintSearch   IEnterkeyhint = "search"
+	IEnterkeyhintSend     IEnterkeyhint = "send"
 	IEnterkeyhintDone     IEnterkeyhint = "done"
 	IEnterkeyhintEnter    IEnterkeyhint = "enter"
 	IEnterkeyhintGo       IEnterkeyhint = "go"
 	IEnterkeyhintNext     IEnterkeyhint = "next"
 	IEnterkeyhintPrevious IEnterkeyhint = "previous"
-	IEnterkeyhintSearch   IEnterkeyhint = "search"
-	IEnterkeyhintSend     IEnterkeyhint = "send"
 )
 
 type IHidden string
@@ -152,7 +157,6 @@ const (
 type IInputmode string
 
 const (
-	IInputmodeTel     IInputmode = "tel"
 	IInputmodeText    IInputmode = "text"
 	IInputmodeUrl     IInputmode = "url"
 	IInputmodeDecimal IInputmode = "decimal"
@@ -160,6 +164,7 @@ const (
 	IInputmodeNone    IInputmode = "none"
 	IInputmodeNumeric IInputmode = "numeric"
 	IInputmodeSearch  IInputmode = "search"
+	IInputmodeTel     IInputmode = "tel"
 )
 
 type ISpellcheck string
@@ -390,48 +395,31 @@ func (e *IElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<i")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<i")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</i>")); err != nil {
-		return err
-	}
+	sb.WriteString("</i>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

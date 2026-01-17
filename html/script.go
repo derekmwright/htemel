@@ -60,6 +60,11 @@ func (e *ScriptElement) With(fn func(*ScriptElement)) *ScriptElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *ScriptElement) Text(text string) *ScriptElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *ScriptElement) Textf(format string, args ...any) *ScriptElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -95,28 +100,28 @@ const (
 type ScriptCrossorigin string
 
 const (
-	ScriptCrossoriginUseCredentials ScriptCrossorigin = "use-credentials"
 	ScriptCrossoriginAnonymous      ScriptCrossorigin = "anonymous"
+	ScriptCrossoriginUseCredentials ScriptCrossorigin = "use-credentials"
 	ScriptCrossoriginEmpty          ScriptCrossorigin = ""
 )
 
 type ScriptFetchpriority string
 
 const (
+	ScriptFetchpriorityLow  ScriptFetchpriority = "low"
 	ScriptFetchpriorityAuto ScriptFetchpriority = "auto"
 	ScriptFetchpriorityHigh ScriptFetchpriority = "high"
-	ScriptFetchpriorityLow  ScriptFetchpriority = "low"
 )
 
 type ScriptAutocapitalize string
 
 const (
+	ScriptAutocapitalizeCharacters ScriptAutocapitalize = "characters"
+	ScriptAutocapitalizeNone       ScriptAutocapitalize = "none"
 	ScriptAutocapitalizeOff        ScriptAutocapitalize = "off"
 	ScriptAutocapitalizeOn         ScriptAutocapitalize = "on"
 	ScriptAutocapitalizeSentences  ScriptAutocapitalize = "sentences"
 	ScriptAutocapitalizeWords      ScriptAutocapitalize = "words"
-	ScriptAutocapitalizeCharacters ScriptAutocapitalize = "characters"
-	ScriptAutocapitalizeNone       ScriptAutocapitalize = "none"
 )
 
 type ScriptAutocorrect string
@@ -154,13 +159,13 @@ const (
 type ScriptEnterkeyhint string
 
 const (
+	ScriptEnterkeyhintSend     ScriptEnterkeyhint = "send"
+	ScriptEnterkeyhintDone     ScriptEnterkeyhint = "done"
 	ScriptEnterkeyhintEnter    ScriptEnterkeyhint = "enter"
 	ScriptEnterkeyhintGo       ScriptEnterkeyhint = "go"
 	ScriptEnterkeyhintNext     ScriptEnterkeyhint = "next"
 	ScriptEnterkeyhintPrevious ScriptEnterkeyhint = "previous"
 	ScriptEnterkeyhintSearch   ScriptEnterkeyhint = "search"
-	ScriptEnterkeyhintSend     ScriptEnterkeyhint = "send"
-	ScriptEnterkeyhintDone     ScriptEnterkeyhint = "done"
 )
 
 type ScriptHidden string
@@ -472,48 +477,31 @@ func (e *ScriptElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<script")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<script")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</script>")); err != nil {
-		return err
-	}
+	sb.WriteString("</script>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

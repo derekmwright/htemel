@@ -60,6 +60,11 @@ func (e *SlotElement) With(fn func(*SlotElement)) *SlotElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *SlotElement) Text(text string) *SlotElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *SlotElement) Textf(format string, args ...any) *SlotElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *SlotElement) ToggleClass(class string, enable bool) *SlotElement {
 type SlotAutocapitalize string
 
 const (
-	SlotAutocapitalizeOn         SlotAutocapitalize = "on"
 	SlotAutocapitalizeSentences  SlotAutocapitalize = "sentences"
 	SlotAutocapitalizeWords      SlotAutocapitalize = "words"
 	SlotAutocapitalizeCharacters SlotAutocapitalize = "characters"
 	SlotAutocapitalizeNone       SlotAutocapitalize = "none"
 	SlotAutocapitalizeOff        SlotAutocapitalize = "off"
+	SlotAutocapitalizeOn         SlotAutocapitalize = "on"
 )
 
 type SlotAutocorrect string
@@ -108,18 +113,18 @@ const (
 type SlotContenteditable string
 
 const (
-	SlotContenteditableTrue          SlotContenteditable = "true"
 	SlotContenteditableFalse         SlotContenteditable = "false"
 	SlotContenteditablePlaintextOnly SlotContenteditable = "plaintext-only"
+	SlotContenteditableTrue          SlotContenteditable = "true"
 	SlotContenteditableEmpty         SlotContenteditable = ""
 )
 
 type SlotDir string
 
 const (
-	SlotDirAuto SlotDir = "auto"
 	SlotDirLtr  SlotDir = "ltr"
 	SlotDirRtl  SlotDir = "rtl"
+	SlotDirAuto SlotDir = "auto"
 )
 
 type SlotDraggable string
@@ -152,14 +157,14 @@ const (
 type SlotInputmode string
 
 const (
-	SlotInputmodeUrl     SlotInputmode = "url"
-	SlotInputmodeDecimal SlotInputmode = "decimal"
-	SlotInputmodeEmail   SlotInputmode = "email"
 	SlotInputmodeNone    SlotInputmode = "none"
 	SlotInputmodeNumeric SlotInputmode = "numeric"
 	SlotInputmodeSearch  SlotInputmode = "search"
 	SlotInputmodeTel     SlotInputmode = "tel"
 	SlotInputmodeText    SlotInputmode = "text"
+	SlotInputmodeUrl     SlotInputmode = "url"
+	SlotInputmodeDecimal SlotInputmode = "decimal"
+	SlotInputmodeEmail   SlotInputmode = "email"
 )
 
 type SlotSpellcheck string
@@ -396,48 +401,31 @@ func (e *SlotElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<slot")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<slot")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</slot>")); err != nil {
-		return err
-	}
+	sb.WriteString("</slot>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

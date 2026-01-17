@@ -60,6 +60,11 @@ func (e *TextareaElement) With(fn func(*TextareaElement)) *TextareaElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *TextareaElement) Text(text string) *TextareaElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *TextareaElement) Textf(format string, args ...any) *TextareaElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -96,12 +101,12 @@ const (
 type TextareaAutocapitalize string
 
 const (
+	TextareaAutocapitalizeCharacters TextareaAutocapitalize = "characters"
 	TextareaAutocapitalizeNone       TextareaAutocapitalize = "none"
 	TextareaAutocapitalizeOff        TextareaAutocapitalize = "off"
 	TextareaAutocapitalizeOn         TextareaAutocapitalize = "on"
 	TextareaAutocapitalizeSentences  TextareaAutocapitalize = "sentences"
 	TextareaAutocapitalizeWords      TextareaAutocapitalize = "words"
-	TextareaAutocapitalizeCharacters TextareaAutocapitalize = "characters"
 )
 
 type TextareaAutocorrect string
@@ -132,48 +137,48 @@ const (
 type TextareaDraggable string
 
 const (
-	TextareaDraggableFalse TextareaDraggable = "false"
 	TextareaDraggableTrue  TextareaDraggable = "true"
+	TextareaDraggableFalse TextareaDraggable = "false"
 )
 
 type TextareaEnterkeyhint string
 
 const (
-	TextareaEnterkeyhintDone     TextareaEnterkeyhint = "done"
 	TextareaEnterkeyhintEnter    TextareaEnterkeyhint = "enter"
 	TextareaEnterkeyhintGo       TextareaEnterkeyhint = "go"
 	TextareaEnterkeyhintNext     TextareaEnterkeyhint = "next"
 	TextareaEnterkeyhintPrevious TextareaEnterkeyhint = "previous"
 	TextareaEnterkeyhintSearch   TextareaEnterkeyhint = "search"
 	TextareaEnterkeyhintSend     TextareaEnterkeyhint = "send"
+	TextareaEnterkeyhintDone     TextareaEnterkeyhint = "done"
 )
 
 type TextareaHidden string
 
 const (
-	TextareaHiddenUntilFound TextareaHidden = "until-found"
 	TextareaHiddenHidden     TextareaHidden = "hidden"
+	TextareaHiddenUntilFound TextareaHidden = "until-found"
 	TextareaHiddenEmpty      TextareaHidden = ""
 )
 
 type TextareaInputmode string
 
 const (
+	TextareaInputmodeEmail   TextareaInputmode = "email"
+	TextareaInputmodeNone    TextareaInputmode = "none"
+	TextareaInputmodeNumeric TextareaInputmode = "numeric"
 	TextareaInputmodeSearch  TextareaInputmode = "search"
 	TextareaInputmodeTel     TextareaInputmode = "tel"
 	TextareaInputmodeText    TextareaInputmode = "text"
 	TextareaInputmodeUrl     TextareaInputmode = "url"
 	TextareaInputmodeDecimal TextareaInputmode = "decimal"
-	TextareaInputmodeEmail   TextareaInputmode = "email"
-	TextareaInputmodeNone    TextareaInputmode = "none"
-	TextareaInputmodeNumeric TextareaInputmode = "numeric"
 )
 
 type TextareaSpellcheck string
 
 const (
-	TextareaSpellcheckTrue  TextareaSpellcheck = "true"
 	TextareaSpellcheckFalse TextareaSpellcheck = "false"
+	TextareaSpellcheckTrue  TextareaSpellcheck = "true"
 	TextareaSpellcheckEmpty TextareaSpellcheck = ""
 )
 
@@ -188,8 +193,8 @@ const (
 type TextareaWritingsuggestions string
 
 const (
-	TextareaWritingsuggestionsTrue  TextareaWritingsuggestions = "true"
 	TextareaWritingsuggestionsFalse TextareaWritingsuggestions = "false"
+	TextareaWritingsuggestionsTrue  TextareaWritingsuggestions = "true"
 	TextareaWritingsuggestionsEmpty TextareaWritingsuggestions = ""
 )
 
@@ -475,48 +480,31 @@ func (e *TextareaElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<textarea")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<textarea")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</textarea>")); err != nil {
-		return err
-	}
+	sb.WriteString("</textarea>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

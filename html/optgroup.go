@@ -60,6 +60,11 @@ func (e *OptgroupElement) With(fn func(*OptgroupElement)) *OptgroupElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *OptgroupElement) Text(text string) *OptgroupElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *OptgroupElement) Textf(format string, args ...any) *OptgroupElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *OptgroupElement) ToggleClass(class string, enable bool) *OptgroupElemen
 type OptgroupAutocapitalize string
 
 const (
-	OptgroupAutocapitalizeWords      OptgroupAutocapitalize = "words"
 	OptgroupAutocapitalizeCharacters OptgroupAutocapitalize = "characters"
 	OptgroupAutocapitalizeNone       OptgroupAutocapitalize = "none"
 	OptgroupAutocapitalizeOff        OptgroupAutocapitalize = "off"
 	OptgroupAutocapitalizeOn         OptgroupAutocapitalize = "on"
 	OptgroupAutocapitalizeSentences  OptgroupAutocapitalize = "sentences"
+	OptgroupAutocapitalizeWords      OptgroupAutocapitalize = "words"
 )
 
 type OptgroupAutocorrect string
@@ -173,8 +178,8 @@ const (
 type OptgroupTranslate string
 
 const (
-	OptgroupTranslateYes   OptgroupTranslate = "yes"
 	OptgroupTranslateNo    OptgroupTranslate = "no"
+	OptgroupTranslateYes   OptgroupTranslate = "yes"
 	OptgroupTranslateEmpty OptgroupTranslate = ""
 )
 
@@ -402,48 +407,31 @@ func (e *OptgroupElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<optgroup")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<optgroup")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</optgroup>")); err != nil {
-		return err
-	}
+	sb.WriteString("</optgroup>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

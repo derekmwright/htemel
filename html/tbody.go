@@ -60,6 +60,11 @@ func (e *TbodyElement) With(fn func(*TbodyElement)) *TbodyElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *TbodyElement) Text(text string) *TbodyElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *TbodyElement) Textf(format string, args ...any) *TbodyElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,19 +94,19 @@ func (e *TbodyElement) ToggleClass(class string, enable bool) *TbodyElement {
 type TbodyAutocapitalize string
 
 const (
-	TbodyAutocapitalizeCharacters TbodyAutocapitalize = "characters"
-	TbodyAutocapitalizeNone       TbodyAutocapitalize = "none"
-	TbodyAutocapitalizeOff        TbodyAutocapitalize = "off"
 	TbodyAutocapitalizeOn         TbodyAutocapitalize = "on"
 	TbodyAutocapitalizeSentences  TbodyAutocapitalize = "sentences"
 	TbodyAutocapitalizeWords      TbodyAutocapitalize = "words"
+	TbodyAutocapitalizeCharacters TbodyAutocapitalize = "characters"
+	TbodyAutocapitalizeNone       TbodyAutocapitalize = "none"
+	TbodyAutocapitalizeOff        TbodyAutocapitalize = "off"
 )
 
 type TbodyAutocorrect string
 
 const (
-	TbodyAutocorrectOn    TbodyAutocorrect = "on"
 	TbodyAutocorrectOff   TbodyAutocorrect = "off"
+	TbodyAutocorrectOn    TbodyAutocorrect = "on"
 	TbodyAutocorrectEmpty TbodyAutocorrect = ""
 )
 
@@ -117,16 +122,16 @@ const (
 type TbodyDir string
 
 const (
-	TbodyDirRtl  TbodyDir = "rtl"
 	TbodyDirAuto TbodyDir = "auto"
 	TbodyDirLtr  TbodyDir = "ltr"
+	TbodyDirRtl  TbodyDir = "rtl"
 )
 
 type TbodyDraggable string
 
 const (
-	TbodyDraggableTrue  TbodyDraggable = "true"
 	TbodyDraggableFalse TbodyDraggable = "false"
+	TbodyDraggableTrue  TbodyDraggable = "true"
 )
 
 type TbodyEnterkeyhint string
@@ -152,14 +157,14 @@ const (
 type TbodyInputmode string
 
 const (
-	TbodyInputmodeNumeric TbodyInputmode = "numeric"
-	TbodyInputmodeSearch  TbodyInputmode = "search"
-	TbodyInputmodeTel     TbodyInputmode = "tel"
-	TbodyInputmodeText    TbodyInputmode = "text"
 	TbodyInputmodeUrl     TbodyInputmode = "url"
 	TbodyInputmodeDecimal TbodyInputmode = "decimal"
 	TbodyInputmodeEmail   TbodyInputmode = "email"
 	TbodyInputmodeNone    TbodyInputmode = "none"
+	TbodyInputmodeNumeric TbodyInputmode = "numeric"
+	TbodyInputmodeSearch  TbodyInputmode = "search"
+	TbodyInputmodeTel     TbodyInputmode = "tel"
+	TbodyInputmodeText    TbodyInputmode = "text"
 )
 
 type TbodySpellcheck string
@@ -390,48 +395,31 @@ func (e *TbodyElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<tbody")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<tbody")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</tbody>")); err != nil {
-		return err
-	}
+	sb.WriteString("</tbody>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

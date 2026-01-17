@@ -60,6 +60,11 @@ func (e *CodeElement) With(fn func(*CodeElement)) *CodeElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *CodeElement) Text(text string) *CodeElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *CodeElement) Textf(format string, args ...any) *CodeElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *CodeElement) ToggleClass(class string, enable bool) *CodeElement {
 type CodeAutocapitalize string
 
 const (
+	CodeAutocapitalizeWords      CodeAutocapitalize = "words"
+	CodeAutocapitalizeCharacters CodeAutocapitalize = "characters"
 	CodeAutocapitalizeNone       CodeAutocapitalize = "none"
 	CodeAutocapitalizeOff        CodeAutocapitalize = "off"
 	CodeAutocapitalizeOn         CodeAutocapitalize = "on"
 	CodeAutocapitalizeSentences  CodeAutocapitalize = "sentences"
-	CodeAutocapitalizeWords      CodeAutocapitalize = "words"
-	CodeAutocapitalizeCharacters CodeAutocapitalize = "characters"
 )
 
 type CodeAutocorrect string
@@ -108,9 +113,9 @@ const (
 type CodeContenteditable string
 
 const (
+	CodeContenteditableTrue          CodeContenteditable = "true"
 	CodeContenteditableFalse         CodeContenteditable = "false"
 	CodeContenteditablePlaintextOnly CodeContenteditable = "plaintext-only"
-	CodeContenteditableTrue          CodeContenteditable = "true"
 	CodeContenteditableEmpty         CodeContenteditable = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type CodeEnterkeyhint string
 
 const (
-	CodeEnterkeyhintPrevious CodeEnterkeyhint = "previous"
-	CodeEnterkeyhintSearch   CodeEnterkeyhint = "search"
-	CodeEnterkeyhintSend     CodeEnterkeyhint = "send"
 	CodeEnterkeyhintDone     CodeEnterkeyhint = "done"
 	CodeEnterkeyhintEnter    CodeEnterkeyhint = "enter"
 	CodeEnterkeyhintGo       CodeEnterkeyhint = "go"
 	CodeEnterkeyhintNext     CodeEnterkeyhint = "next"
+	CodeEnterkeyhintPrevious CodeEnterkeyhint = "previous"
+	CodeEnterkeyhintSearch   CodeEnterkeyhint = "search"
+	CodeEnterkeyhintSend     CodeEnterkeyhint = "send"
 )
 
 type CodeHidden string
@@ -152,7 +157,6 @@ const (
 type CodeInputmode string
 
 const (
-	CodeInputmodeNone    CodeInputmode = "none"
 	CodeInputmodeNumeric CodeInputmode = "numeric"
 	CodeInputmodeSearch  CodeInputmode = "search"
 	CodeInputmodeTel     CodeInputmode = "tel"
@@ -160,6 +164,7 @@ const (
 	CodeInputmodeUrl     CodeInputmode = "url"
 	CodeInputmodeDecimal CodeInputmode = "decimal"
 	CodeInputmodeEmail   CodeInputmode = "email"
+	CodeInputmodeNone    CodeInputmode = "none"
 )
 
 type CodeSpellcheck string
@@ -390,48 +395,31 @@ func (e *CodeElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<code")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<code")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</code>")); err != nil {
-		return err
-	}
+	sb.WriteString("</code>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

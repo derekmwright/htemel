@@ -60,6 +60,11 @@ func (e *SelectedcontentElement) With(fn func(*SelectedcontentElement)) *Selecte
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *SelectedcontentElement) Text(text string) *SelectedcontentElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *SelectedcontentElement) Textf(format string, args ...any) *SelectedcontentElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -132,26 +137,27 @@ const (
 type SelectedcontentEnterkeyhint string
 
 const (
-	SelectedcontentEnterkeyhintEnter    SelectedcontentEnterkeyhint = "enter"
-	SelectedcontentEnterkeyhintGo       SelectedcontentEnterkeyhint = "go"
-	SelectedcontentEnterkeyhintNext     SelectedcontentEnterkeyhint = "next"
 	SelectedcontentEnterkeyhintPrevious SelectedcontentEnterkeyhint = "previous"
 	SelectedcontentEnterkeyhintSearch   SelectedcontentEnterkeyhint = "search"
 	SelectedcontentEnterkeyhintSend     SelectedcontentEnterkeyhint = "send"
 	SelectedcontentEnterkeyhintDone     SelectedcontentEnterkeyhint = "done"
+	SelectedcontentEnterkeyhintEnter    SelectedcontentEnterkeyhint = "enter"
+	SelectedcontentEnterkeyhintGo       SelectedcontentEnterkeyhint = "go"
+	SelectedcontentEnterkeyhintNext     SelectedcontentEnterkeyhint = "next"
 )
 
 type SelectedcontentHidden string
 
 const (
-	SelectedcontentHiddenHidden     SelectedcontentHidden = "hidden"
 	SelectedcontentHiddenUntilFound SelectedcontentHidden = "until-found"
+	SelectedcontentHiddenHidden     SelectedcontentHidden = "hidden"
 	SelectedcontentHiddenEmpty      SelectedcontentHidden = ""
 )
 
 type SelectedcontentInputmode string
 
 const (
+	SelectedcontentInputmodeText    SelectedcontentInputmode = "text"
 	SelectedcontentInputmodeUrl     SelectedcontentInputmode = "url"
 	SelectedcontentInputmodeDecimal SelectedcontentInputmode = "decimal"
 	SelectedcontentInputmodeEmail   SelectedcontentInputmode = "email"
@@ -159,7 +165,6 @@ const (
 	SelectedcontentInputmodeNumeric SelectedcontentInputmode = "numeric"
 	SelectedcontentInputmodeSearch  SelectedcontentInputmode = "search"
 	SelectedcontentInputmodeTel     SelectedcontentInputmode = "tel"
-	SelectedcontentInputmodeText    SelectedcontentInputmode = "text"
 )
 
 type SelectedcontentSpellcheck string
@@ -390,48 +395,31 @@ func (e *SelectedcontentElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<selectedcontent")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<selectedcontent")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</selectedcontent>")); err != nil {
-		return err
-	}
+	sb.WriteString("</selectedcontent>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

@@ -60,6 +60,11 @@ func (e *ObjectElement) With(fn func(*ObjectElement)) *ObjectElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *ObjectElement) Text(text string) *ObjectElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *ObjectElement) Textf(format string, args ...any) *ObjectElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *ObjectElement) ToggleClass(class string, enable bool) *ObjectElement {
 type ObjectAutocapitalize string
 
 const (
-	ObjectAutocapitalizeNone       ObjectAutocapitalize = "none"
-	ObjectAutocapitalizeOff        ObjectAutocapitalize = "off"
 	ObjectAutocapitalizeOn         ObjectAutocapitalize = "on"
 	ObjectAutocapitalizeSentences  ObjectAutocapitalize = "sentences"
 	ObjectAutocapitalizeWords      ObjectAutocapitalize = "words"
 	ObjectAutocapitalizeCharacters ObjectAutocapitalize = "characters"
+	ObjectAutocapitalizeNone       ObjectAutocapitalize = "none"
+	ObjectAutocapitalizeOff        ObjectAutocapitalize = "off"
 )
 
 type ObjectAutocorrect string
@@ -108,9 +113,9 @@ const (
 type ObjectContenteditable string
 
 const (
+	ObjectContenteditableFalse         ObjectContenteditable = "false"
 	ObjectContenteditablePlaintextOnly ObjectContenteditable = "plaintext-only"
 	ObjectContenteditableTrue          ObjectContenteditable = "true"
-	ObjectContenteditableFalse         ObjectContenteditable = "false"
 	ObjectContenteditableEmpty         ObjectContenteditable = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type ObjectEnterkeyhint string
 
 const (
-	ObjectEnterkeyhintSearch   ObjectEnterkeyhint = "search"
-	ObjectEnterkeyhintSend     ObjectEnterkeyhint = "send"
-	ObjectEnterkeyhintDone     ObjectEnterkeyhint = "done"
 	ObjectEnterkeyhintEnter    ObjectEnterkeyhint = "enter"
 	ObjectEnterkeyhintGo       ObjectEnterkeyhint = "go"
 	ObjectEnterkeyhintNext     ObjectEnterkeyhint = "next"
 	ObjectEnterkeyhintPrevious ObjectEnterkeyhint = "previous"
+	ObjectEnterkeyhintSearch   ObjectEnterkeyhint = "search"
+	ObjectEnterkeyhintSend     ObjectEnterkeyhint = "send"
+	ObjectEnterkeyhintDone     ObjectEnterkeyhint = "done"
 )
 
 type ObjectHidden string
@@ -152,7 +157,6 @@ const (
 type ObjectInputmode string
 
 const (
-	ObjectInputmodeText    ObjectInputmode = "text"
 	ObjectInputmodeUrl     ObjectInputmode = "url"
 	ObjectInputmodeDecimal ObjectInputmode = "decimal"
 	ObjectInputmodeEmail   ObjectInputmode = "email"
@@ -160,13 +164,14 @@ const (
 	ObjectInputmodeNumeric ObjectInputmode = "numeric"
 	ObjectInputmodeSearch  ObjectInputmode = "search"
 	ObjectInputmodeTel     ObjectInputmode = "tel"
+	ObjectInputmodeText    ObjectInputmode = "text"
 )
 
 type ObjectSpellcheck string
 
 const (
-	ObjectSpellcheckFalse ObjectSpellcheck = "false"
 	ObjectSpellcheckTrue  ObjectSpellcheck = "true"
+	ObjectSpellcheckFalse ObjectSpellcheck = "false"
 	ObjectSpellcheckEmpty ObjectSpellcheck = ""
 )
 
@@ -414,48 +419,31 @@ func (e *ObjectElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<object")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<object")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</object>")); err != nil {
-		return err
-	}
+	sb.WriteString("</object>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

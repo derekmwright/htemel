@@ -60,6 +60,11 @@ func (e *TemplateElement) With(fn func(*TemplateElement)) *TemplateElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *TemplateElement) Text(text string) *TemplateElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *TemplateElement) Textf(format string, args ...any) *TemplateElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -96,12 +101,12 @@ const (
 type TemplateAutocapitalize string
 
 const (
-	TemplateAutocapitalizeOn         TemplateAutocapitalize = "on"
-	TemplateAutocapitalizeSentences  TemplateAutocapitalize = "sentences"
-	TemplateAutocapitalizeWords      TemplateAutocapitalize = "words"
 	TemplateAutocapitalizeCharacters TemplateAutocapitalize = "characters"
 	TemplateAutocapitalizeNone       TemplateAutocapitalize = "none"
 	TemplateAutocapitalizeOff        TemplateAutocapitalize = "off"
+	TemplateAutocapitalizeOn         TemplateAutocapitalize = "on"
+	TemplateAutocapitalizeSentences  TemplateAutocapitalize = "sentences"
+	TemplateAutocapitalizeWords      TemplateAutocapitalize = "words"
 )
 
 type TemplateAutocorrect string
@@ -159,6 +164,7 @@ const (
 type TemplateInputmode string
 
 const (
+	TemplateInputmodeTel     TemplateInputmode = "tel"
 	TemplateInputmodeText    TemplateInputmode = "text"
 	TemplateInputmodeUrl     TemplateInputmode = "url"
 	TemplateInputmodeDecimal TemplateInputmode = "decimal"
@@ -166,7 +172,6 @@ const (
 	TemplateInputmodeNone    TemplateInputmode = "none"
 	TemplateInputmodeNumeric TemplateInputmode = "numeric"
 	TemplateInputmodeSearch  TemplateInputmode = "search"
-	TemplateInputmodeTel     TemplateInputmode = "tel"
 )
 
 type TemplateSpellcheck string
@@ -188,8 +193,8 @@ const (
 type TemplateWritingsuggestions string
 
 const (
-	TemplateWritingsuggestionsFalse TemplateWritingsuggestions = "false"
 	TemplateWritingsuggestionsTrue  TemplateWritingsuggestions = "true"
+	TemplateWritingsuggestionsFalse TemplateWritingsuggestions = "false"
 	TemplateWritingsuggestionsEmpty TemplateWritingsuggestions = ""
 )
 
@@ -427,48 +432,31 @@ func (e *TemplateElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<template")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<template")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</template>")); err != nil {
-		return err
-	}
+	sb.WriteString("</template>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

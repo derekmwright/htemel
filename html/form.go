@@ -60,6 +60,11 @@ func (e *FormElement) With(fn func(*FormElement)) *FormElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *FormElement) Text(text string) *FormElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *FormElement) Textf(format string, args ...any) *FormElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -96,36 +101,36 @@ const (
 type FormMethod string
 
 const (
+	FormMethodDialog FormMethod = "dialog"
 	FormMethodGet    FormMethod = "get"
 	FormMethodPost   FormMethod = "post"
-	FormMethodDialog FormMethod = "dialog"
 )
 
 type FormAutocapitalize string
 
 const (
-	FormAutocapitalizeOn         FormAutocapitalize = "on"
-	FormAutocapitalizeSentences  FormAutocapitalize = "sentences"
-	FormAutocapitalizeWords      FormAutocapitalize = "words"
 	FormAutocapitalizeCharacters FormAutocapitalize = "characters"
 	FormAutocapitalizeNone       FormAutocapitalize = "none"
 	FormAutocapitalizeOff        FormAutocapitalize = "off"
+	FormAutocapitalizeOn         FormAutocapitalize = "on"
+	FormAutocapitalizeSentences  FormAutocapitalize = "sentences"
+	FormAutocapitalizeWords      FormAutocapitalize = "words"
 )
 
 type FormAutocorrect string
 
 const (
-	FormAutocorrectOff   FormAutocorrect = "off"
 	FormAutocorrectOn    FormAutocorrect = "on"
+	FormAutocorrectOff   FormAutocorrect = "off"
 	FormAutocorrectEmpty FormAutocorrect = ""
 )
 
 type FormContenteditable string
 
 const (
-	FormContenteditableTrue          FormContenteditable = "true"
 	FormContenteditableFalse         FormContenteditable = "false"
 	FormContenteditablePlaintextOnly FormContenteditable = "plaintext-only"
+	FormContenteditableTrue          FormContenteditable = "true"
 	FormContenteditableEmpty         FormContenteditable = ""
 )
 
@@ -140,20 +145,20 @@ const (
 type FormDraggable string
 
 const (
-	FormDraggableFalse FormDraggable = "false"
 	FormDraggableTrue  FormDraggable = "true"
+	FormDraggableFalse FormDraggable = "false"
 )
 
 type FormEnterkeyhint string
 
 const (
+	FormEnterkeyhintDone     FormEnterkeyhint = "done"
+	FormEnterkeyhintEnter    FormEnterkeyhint = "enter"
+	FormEnterkeyhintGo       FormEnterkeyhint = "go"
 	FormEnterkeyhintNext     FormEnterkeyhint = "next"
 	FormEnterkeyhintPrevious FormEnterkeyhint = "previous"
 	FormEnterkeyhintSearch   FormEnterkeyhint = "search"
 	FormEnterkeyhintSend     FormEnterkeyhint = "send"
-	FormEnterkeyhintDone     FormEnterkeyhint = "done"
-	FormEnterkeyhintEnter    FormEnterkeyhint = "enter"
-	FormEnterkeyhintGo       FormEnterkeyhint = "go"
 )
 
 type FormHidden string
@@ -167,14 +172,14 @@ const (
 type FormInputmode string
 
 const (
+	FormInputmodeNone    FormInputmode = "none"
+	FormInputmodeNumeric FormInputmode = "numeric"
+	FormInputmodeSearch  FormInputmode = "search"
 	FormInputmodeTel     FormInputmode = "tel"
 	FormInputmodeText    FormInputmode = "text"
 	FormInputmodeUrl     FormInputmode = "url"
 	FormInputmodeDecimal FormInputmode = "decimal"
 	FormInputmodeEmail   FormInputmode = "email"
-	FormInputmodeNone    FormInputmode = "none"
-	FormInputmodeNumeric FormInputmode = "numeric"
-	FormInputmodeSearch  FormInputmode = "search"
 )
 
 type FormSpellcheck string
@@ -459,48 +464,31 @@ func (e *FormElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<form")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<form")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</form>")); err != nil {
-		return err
-	}
+	sb.WriteString("</form>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

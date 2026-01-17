@@ -60,6 +60,11 @@ func (e *OlElement) With(fn func(*OlElement)) *OlElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *OlElement) Text(text string) *OlElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *OlElement) Textf(format string, args ...any) *OlElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *OlElement) ToggleClass(class string, enable bool) *OlElement {
 type OlAutocapitalize string
 
 const (
-	OlAutocapitalizeCharacters OlAutocapitalize = "characters"
 	OlAutocapitalizeNone       OlAutocapitalize = "none"
 	OlAutocapitalizeOff        OlAutocapitalize = "off"
 	OlAutocapitalizeOn         OlAutocapitalize = "on"
 	OlAutocapitalizeSentences  OlAutocapitalize = "sentences"
 	OlAutocapitalizeWords      OlAutocapitalize = "words"
+	OlAutocapitalizeCharacters OlAutocapitalize = "characters"
 )
 
 type OlAutocorrect string
@@ -108,18 +113,18 @@ const (
 type OlContenteditable string
 
 const (
+	OlContenteditableFalse         OlContenteditable = "false"
 	OlContenteditablePlaintextOnly OlContenteditable = "plaintext-only"
 	OlContenteditableTrue          OlContenteditable = "true"
-	OlContenteditableFalse         OlContenteditable = "false"
 	OlContenteditableEmpty         OlContenteditable = ""
 )
 
 type OlDir string
 
 const (
+	OlDirRtl  OlDir = "rtl"
 	OlDirAuto OlDir = "auto"
 	OlDirLtr  OlDir = "ltr"
-	OlDirRtl  OlDir = "rtl"
 )
 
 type OlDraggable string
@@ -132,13 +137,13 @@ const (
 type OlEnterkeyhint string
 
 const (
-	OlEnterkeyhintEnter    OlEnterkeyhint = "enter"
-	OlEnterkeyhintGo       OlEnterkeyhint = "go"
-	OlEnterkeyhintNext     OlEnterkeyhint = "next"
 	OlEnterkeyhintPrevious OlEnterkeyhint = "previous"
 	OlEnterkeyhintSearch   OlEnterkeyhint = "search"
 	OlEnterkeyhintSend     OlEnterkeyhint = "send"
 	OlEnterkeyhintDone     OlEnterkeyhint = "done"
+	OlEnterkeyhintEnter    OlEnterkeyhint = "enter"
+	OlEnterkeyhintGo       OlEnterkeyhint = "go"
+	OlEnterkeyhintNext     OlEnterkeyhint = "next"
 )
 
 type OlHidden string
@@ -152,14 +157,14 @@ const (
 type OlInputmode string
 
 const (
-	OlInputmodeDecimal OlInputmode = "decimal"
-	OlInputmodeEmail   OlInputmode = "email"
 	OlInputmodeNone    OlInputmode = "none"
 	OlInputmodeNumeric OlInputmode = "numeric"
 	OlInputmodeSearch  OlInputmode = "search"
 	OlInputmodeTel     OlInputmode = "tel"
 	OlInputmodeText    OlInputmode = "text"
 	OlInputmodeUrl     OlInputmode = "url"
+	OlInputmodeDecimal OlInputmode = "decimal"
+	OlInputmodeEmail   OlInputmode = "email"
 )
 
 type OlSpellcheck string
@@ -402,48 +407,31 @@ func (e *OlElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<ol")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<ol")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</ol>")); err != nil {
-		return err
-	}
+	sb.WriteString("</ol>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

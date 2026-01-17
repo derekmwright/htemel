@@ -85,47 +85,47 @@ const (
 type InputPopovertargetaction string
 
 const (
+	InputPopovertargetactionToggle InputPopovertargetaction = "toggle"
 	InputPopovertargetactionHide   InputPopovertargetaction = "hide"
 	InputPopovertargetactionShow   InputPopovertargetaction = "show"
-	InputPopovertargetactionToggle InputPopovertargetaction = "toggle"
 )
 
 type InputType string
 
 const (
-	InputTypeCheckbox      InputType = "checkbox"
-	InputTypeDate          InputType = "date"
-	InputTypeFile          InputType = "file"
-	InputTypeNumber        InputType = "number"
-	InputTypeRadio         InputType = "radio"
-	InputTypeTel           InputType = "tel"
 	InputTypeText          InputType = "text"
+	InputTypeNumber        InputType = "number"
+	InputTypeRange         InputType = "range"
+	InputTypeEmail         InputType = "email"
+	InputTypeFile          InputType = "file"
+	InputTypeSubmit        InputType = "submit"
+	InputTypeTel           InputType = "tel"
+	InputTypeUrl           InputType = "url"
+	InputTypeDate          InputType = "date"
+	InputTypeImage         InputType = "image"
+	InputTypePassword      InputType = "password"
+	InputTypeRadio         InputType = "radio"
 	InputTypeWeek          InputType = "week"
 	InputTypeButton        InputType = "button"
+	InputTypeCheckbox      InputType = "checkbox"
 	InputTypeColor         InputType = "color"
-	InputTypeEmail         InputType = "email"
-	InputTypePassword      InputType = "password"
-	InputTypeRange         InputType = "range"
-	InputTypeReset         InputType = "reset"
-	InputTypeSearch        InputType = "search"
-	InputTypeTime          InputType = "time"
 	InputTypeDatetimeLocal InputType = "datetime-local"
 	InputTypeHidden        InputType = "hidden"
-	InputTypeSubmit        InputType = "submit"
-	InputTypeUrl           InputType = "url"
-	InputTypeImage         InputType = "image"
 	InputTypeMonth         InputType = "month"
+	InputTypeTime          InputType = "time"
+	InputTypeReset         InputType = "reset"
+	InputTypeSearch        InputType = "search"
 )
 
 type InputAutocapitalize string
 
 const (
+	InputAutocapitalizeOff        InputAutocapitalize = "off"
 	InputAutocapitalizeOn         InputAutocapitalize = "on"
 	InputAutocapitalizeSentences  InputAutocapitalize = "sentences"
 	InputAutocapitalizeWords      InputAutocapitalize = "words"
 	InputAutocapitalizeCharacters InputAutocapitalize = "characters"
 	InputAutocapitalizeNone       InputAutocapitalize = "none"
-	InputAutocapitalizeOff        InputAutocapitalize = "off"
 )
 
 type InputAutocorrect string
@@ -139,9 +139,9 @@ const (
 type InputContenteditable string
 
 const (
+	InputContenteditableTrue          InputContenteditable = "true"
 	InputContenteditableFalse         InputContenteditable = "false"
 	InputContenteditablePlaintextOnly InputContenteditable = "plaintext-only"
-	InputContenteditableTrue          InputContenteditable = "true"
 	InputContenteditableEmpty         InputContenteditable = ""
 )
 
@@ -163,13 +163,13 @@ const (
 type InputEnterkeyhint string
 
 const (
+	InputEnterkeyhintPrevious InputEnterkeyhint = "previous"
 	InputEnterkeyhintSearch   InputEnterkeyhint = "search"
 	InputEnterkeyhintSend     InputEnterkeyhint = "send"
 	InputEnterkeyhintDone     InputEnterkeyhint = "done"
 	InputEnterkeyhintEnter    InputEnterkeyhint = "enter"
 	InputEnterkeyhintGo       InputEnterkeyhint = "go"
 	InputEnterkeyhintNext     InputEnterkeyhint = "next"
-	InputEnterkeyhintPrevious InputEnterkeyhint = "previous"
 )
 
 type InputHidden string
@@ -183,7 +183,6 @@ const (
 type InputInputmode string
 
 const (
-	InputInputmodeSearch  InputInputmode = "search"
 	InputInputmodeTel     InputInputmode = "tel"
 	InputInputmodeText    InputInputmode = "text"
 	InputInputmodeUrl     InputInputmode = "url"
@@ -191,13 +190,14 @@ const (
 	InputInputmodeEmail   InputInputmode = "email"
 	InputInputmodeNone    InputInputmode = "none"
 	InputInputmodeNumeric InputInputmode = "numeric"
+	InputInputmodeSearch  InputInputmode = "search"
 )
 
 type InputSpellcheck string
 
 const (
-	InputSpellcheckTrue  InputSpellcheck = "true"
 	InputSpellcheckFalse InputSpellcheck = "false"
+	InputSpellcheckTrue  InputSpellcheck = "true"
 	InputSpellcheckEmpty InputSpellcheck = ""
 )
 
@@ -625,39 +625,24 @@ func (e *InputElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<input")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<input")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

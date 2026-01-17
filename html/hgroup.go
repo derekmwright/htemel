@@ -60,6 +60,11 @@ func (e *HgroupElement) With(fn func(*HgroupElement)) *HgroupElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *HgroupElement) Text(text string) *HgroupElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *HgroupElement) Textf(format string, args ...any) *HgroupElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,19 +94,19 @@ func (e *HgroupElement) ToggleClass(class string, enable bool) *HgroupElement {
 type HgroupAutocapitalize string
 
 const (
-	HgroupAutocapitalizeOff        HgroupAutocapitalize = "off"
-	HgroupAutocapitalizeOn         HgroupAutocapitalize = "on"
-	HgroupAutocapitalizeSentences  HgroupAutocapitalize = "sentences"
 	HgroupAutocapitalizeWords      HgroupAutocapitalize = "words"
 	HgroupAutocapitalizeCharacters HgroupAutocapitalize = "characters"
 	HgroupAutocapitalizeNone       HgroupAutocapitalize = "none"
+	HgroupAutocapitalizeOff        HgroupAutocapitalize = "off"
+	HgroupAutocapitalizeOn         HgroupAutocapitalize = "on"
+	HgroupAutocapitalizeSentences  HgroupAutocapitalize = "sentences"
 )
 
 type HgroupAutocorrect string
 
 const (
-	HgroupAutocorrectOff   HgroupAutocorrect = "off"
 	HgroupAutocorrectOn    HgroupAutocorrect = "on"
+	HgroupAutocorrectOff   HgroupAutocorrect = "off"
 	HgroupAutocorrectEmpty HgroupAutocorrect = ""
 )
 
@@ -117,9 +122,9 @@ const (
 type HgroupDir string
 
 const (
+	HgroupDirRtl  HgroupDir = "rtl"
 	HgroupDirAuto HgroupDir = "auto"
 	HgroupDirLtr  HgroupDir = "ltr"
-	HgroupDirRtl  HgroupDir = "rtl"
 )
 
 type HgroupDraggable string
@@ -132,13 +137,13 @@ const (
 type HgroupEnterkeyhint string
 
 const (
+	HgroupEnterkeyhintEnter    HgroupEnterkeyhint = "enter"
 	HgroupEnterkeyhintGo       HgroupEnterkeyhint = "go"
 	HgroupEnterkeyhintNext     HgroupEnterkeyhint = "next"
 	HgroupEnterkeyhintPrevious HgroupEnterkeyhint = "previous"
 	HgroupEnterkeyhintSearch   HgroupEnterkeyhint = "search"
 	HgroupEnterkeyhintSend     HgroupEnterkeyhint = "send"
 	HgroupEnterkeyhintDone     HgroupEnterkeyhint = "done"
-	HgroupEnterkeyhintEnter    HgroupEnterkeyhint = "enter"
 )
 
 type HgroupHidden string
@@ -152,14 +157,14 @@ const (
 type HgroupInputmode string
 
 const (
-	HgroupInputmodeDecimal HgroupInputmode = "decimal"
-	HgroupInputmodeEmail   HgroupInputmode = "email"
-	HgroupInputmodeNone    HgroupInputmode = "none"
 	HgroupInputmodeNumeric HgroupInputmode = "numeric"
 	HgroupInputmodeSearch  HgroupInputmode = "search"
 	HgroupInputmodeTel     HgroupInputmode = "tel"
 	HgroupInputmodeText    HgroupInputmode = "text"
 	HgroupInputmodeUrl     HgroupInputmode = "url"
+	HgroupInputmodeDecimal HgroupInputmode = "decimal"
+	HgroupInputmodeEmail   HgroupInputmode = "email"
+	HgroupInputmodeNone    HgroupInputmode = "none"
 )
 
 type HgroupSpellcheck string
@@ -173,16 +178,16 @@ const (
 type HgroupTranslate string
 
 const (
-	HgroupTranslateNo    HgroupTranslate = "no"
 	HgroupTranslateYes   HgroupTranslate = "yes"
+	HgroupTranslateNo    HgroupTranslate = "no"
 	HgroupTranslateEmpty HgroupTranslate = ""
 )
 
 type HgroupWritingsuggestions string
 
 const (
-	HgroupWritingsuggestionsTrue  HgroupWritingsuggestions = "true"
 	HgroupWritingsuggestionsFalse HgroupWritingsuggestions = "false"
+	HgroupWritingsuggestionsTrue  HgroupWritingsuggestions = "true"
 	HgroupWritingsuggestionsEmpty HgroupWritingsuggestions = ""
 )
 
@@ -390,48 +395,31 @@ func (e *HgroupElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<hgroup")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<hgroup")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</hgroup>")); err != nil {
-		return err
-	}
+	sb.WriteString("</hgroup>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

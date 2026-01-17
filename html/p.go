@@ -60,6 +60,11 @@ func (e *PElement) With(fn func(*PElement)) *PElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *PElement) Text(text string) *PElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *PElement) Textf(format string, args ...any) *PElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,19 +94,19 @@ func (e *PElement) ToggleClass(class string, enable bool) *PElement {
 type PAutocapitalize string
 
 const (
-	PAutocapitalizeNone       PAutocapitalize = "none"
-	PAutocapitalizeOff        PAutocapitalize = "off"
-	PAutocapitalizeOn         PAutocapitalize = "on"
 	PAutocapitalizeSentences  PAutocapitalize = "sentences"
 	PAutocapitalizeWords      PAutocapitalize = "words"
 	PAutocapitalizeCharacters PAutocapitalize = "characters"
+	PAutocapitalizeNone       PAutocapitalize = "none"
+	PAutocapitalizeOff        PAutocapitalize = "off"
+	PAutocapitalizeOn         PAutocapitalize = "on"
 )
 
 type PAutocorrect string
 
 const (
-	PAutocorrectOff   PAutocorrect = "off"
 	PAutocorrectOn    PAutocorrect = "on"
+	PAutocorrectOff   PAutocorrect = "off"
 	PAutocorrectEmpty PAutocorrect = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type PEnterkeyhint string
 
 const (
+	PEnterkeyhintSend     PEnterkeyhint = "send"
+	PEnterkeyhintDone     PEnterkeyhint = "done"
+	PEnterkeyhintEnter    PEnterkeyhint = "enter"
 	PEnterkeyhintGo       PEnterkeyhint = "go"
 	PEnterkeyhintNext     PEnterkeyhint = "next"
 	PEnterkeyhintPrevious PEnterkeyhint = "previous"
 	PEnterkeyhintSearch   PEnterkeyhint = "search"
-	PEnterkeyhintSend     PEnterkeyhint = "send"
-	PEnterkeyhintDone     PEnterkeyhint = "done"
-	PEnterkeyhintEnter    PEnterkeyhint = "enter"
 )
 
 type PHidden string
@@ -152,14 +157,14 @@ const (
 type PInputmode string
 
 const (
-	PInputmodeSearch  PInputmode = "search"
-	PInputmodeTel     PInputmode = "tel"
-	PInputmodeText    PInputmode = "text"
 	PInputmodeUrl     PInputmode = "url"
 	PInputmodeDecimal PInputmode = "decimal"
 	PInputmodeEmail   PInputmode = "email"
 	PInputmodeNone    PInputmode = "none"
 	PInputmodeNumeric PInputmode = "numeric"
+	PInputmodeSearch  PInputmode = "search"
+	PInputmodeTel     PInputmode = "tel"
+	PInputmodeText    PInputmode = "text"
 )
 
 type PSpellcheck string
@@ -181,8 +186,8 @@ const (
 type PWritingsuggestions string
 
 const (
-	PWritingsuggestionsTrue  PWritingsuggestions = "true"
 	PWritingsuggestionsFalse PWritingsuggestions = "false"
+	PWritingsuggestionsTrue  PWritingsuggestions = "true"
 	PWritingsuggestionsEmpty PWritingsuggestions = ""
 )
 
@@ -390,48 +395,31 @@ func (e *PElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<p")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<p")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</p>")); err != nil {
-		return err
-	}
+	sb.WriteString("</p>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

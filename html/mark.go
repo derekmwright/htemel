@@ -60,6 +60,11 @@ func (e *MarkElement) With(fn func(*MarkElement)) *MarkElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *MarkElement) Text(text string) *MarkElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *MarkElement) Textf(format string, args ...any) *MarkElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *MarkElement) ToggleClass(class string, enable bool) *MarkElement {
 type MarkAutocapitalize string
 
 const (
+	MarkAutocapitalizeCharacters MarkAutocapitalize = "characters"
+	MarkAutocapitalizeNone       MarkAutocapitalize = "none"
 	MarkAutocapitalizeOff        MarkAutocapitalize = "off"
 	MarkAutocapitalizeOn         MarkAutocapitalize = "on"
 	MarkAutocapitalizeSentences  MarkAutocapitalize = "sentences"
 	MarkAutocapitalizeWords      MarkAutocapitalize = "words"
-	MarkAutocapitalizeCharacters MarkAutocapitalize = "characters"
-	MarkAutocapitalizeNone       MarkAutocapitalize = "none"
 )
 
 type MarkAutocorrect string
@@ -108,58 +113,58 @@ const (
 type MarkContenteditable string
 
 const (
+	MarkContenteditableTrue          MarkContenteditable = "true"
 	MarkContenteditableFalse         MarkContenteditable = "false"
 	MarkContenteditablePlaintextOnly MarkContenteditable = "plaintext-only"
-	MarkContenteditableTrue          MarkContenteditable = "true"
 	MarkContenteditableEmpty         MarkContenteditable = ""
 )
 
 type MarkDir string
 
 const (
-	MarkDirRtl  MarkDir = "rtl"
 	MarkDirAuto MarkDir = "auto"
 	MarkDirLtr  MarkDir = "ltr"
+	MarkDirRtl  MarkDir = "rtl"
 )
 
 type MarkDraggable string
 
 const (
-	MarkDraggableTrue  MarkDraggable = "true"
 	MarkDraggableFalse MarkDraggable = "false"
+	MarkDraggableTrue  MarkDraggable = "true"
 )
 
 type MarkEnterkeyhint string
 
 const (
+	MarkEnterkeyhintDone     MarkEnterkeyhint = "done"
+	MarkEnterkeyhintEnter    MarkEnterkeyhint = "enter"
+	MarkEnterkeyhintGo       MarkEnterkeyhint = "go"
 	MarkEnterkeyhintNext     MarkEnterkeyhint = "next"
 	MarkEnterkeyhintPrevious MarkEnterkeyhint = "previous"
 	MarkEnterkeyhintSearch   MarkEnterkeyhint = "search"
 	MarkEnterkeyhintSend     MarkEnterkeyhint = "send"
-	MarkEnterkeyhintDone     MarkEnterkeyhint = "done"
-	MarkEnterkeyhintEnter    MarkEnterkeyhint = "enter"
-	MarkEnterkeyhintGo       MarkEnterkeyhint = "go"
 )
 
 type MarkHidden string
 
 const (
-	MarkHiddenUntilFound MarkHidden = "until-found"
 	MarkHiddenHidden     MarkHidden = "hidden"
+	MarkHiddenUntilFound MarkHidden = "until-found"
 	MarkHiddenEmpty      MarkHidden = ""
 )
 
 type MarkInputmode string
 
 const (
-	MarkInputmodeSearch  MarkInputmode = "search"
-	MarkInputmodeTel     MarkInputmode = "tel"
-	MarkInputmodeText    MarkInputmode = "text"
-	MarkInputmodeUrl     MarkInputmode = "url"
 	MarkInputmodeDecimal MarkInputmode = "decimal"
 	MarkInputmodeEmail   MarkInputmode = "email"
 	MarkInputmodeNone    MarkInputmode = "none"
 	MarkInputmodeNumeric MarkInputmode = "numeric"
+	MarkInputmodeSearch  MarkInputmode = "search"
+	MarkInputmodeTel     MarkInputmode = "tel"
+	MarkInputmodeText    MarkInputmode = "text"
+	MarkInputmodeUrl     MarkInputmode = "url"
 )
 
 type MarkSpellcheck string
@@ -173,8 +178,8 @@ const (
 type MarkTranslate string
 
 const (
-	MarkTranslateYes   MarkTranslate = "yes"
 	MarkTranslateNo    MarkTranslate = "no"
+	MarkTranslateYes   MarkTranslate = "yes"
 	MarkTranslateEmpty MarkTranslate = ""
 )
 
@@ -390,48 +395,31 @@ func (e *MarkElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<mark")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<mark")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</mark>")); err != nil {
-		return err
-	}
+	sb.WriteString("</mark>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

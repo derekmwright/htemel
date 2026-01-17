@@ -60,6 +60,11 @@ func (e *KbdElement) With(fn func(*KbdElement)) *KbdElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *KbdElement) Text(text string) *KbdElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *KbdElement) Textf(format string, args ...any) *KbdElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -100,8 +105,8 @@ const (
 type KbdAutocorrect string
 
 const (
-	KbdAutocorrectOn    KbdAutocorrect = "on"
 	KbdAutocorrectOff   KbdAutocorrect = "off"
+	KbdAutocorrectOn    KbdAutocorrect = "on"
 	KbdAutocorrectEmpty KbdAutocorrect = ""
 )
 
@@ -132,41 +137,41 @@ const (
 type KbdEnterkeyhint string
 
 const (
-	KbdEnterkeyhintSearch   KbdEnterkeyhint = "search"
-	KbdEnterkeyhintSend     KbdEnterkeyhint = "send"
-	KbdEnterkeyhintDone     KbdEnterkeyhint = "done"
 	KbdEnterkeyhintEnter    KbdEnterkeyhint = "enter"
 	KbdEnterkeyhintGo       KbdEnterkeyhint = "go"
 	KbdEnterkeyhintNext     KbdEnterkeyhint = "next"
 	KbdEnterkeyhintPrevious KbdEnterkeyhint = "previous"
+	KbdEnterkeyhintSearch   KbdEnterkeyhint = "search"
+	KbdEnterkeyhintSend     KbdEnterkeyhint = "send"
+	KbdEnterkeyhintDone     KbdEnterkeyhint = "done"
 )
 
 type KbdHidden string
 
 const (
-	KbdHiddenUntilFound KbdHidden = "until-found"
 	KbdHiddenHidden     KbdHidden = "hidden"
+	KbdHiddenUntilFound KbdHidden = "until-found"
 	KbdHiddenEmpty      KbdHidden = ""
 )
 
 type KbdInputmode string
 
 const (
-	KbdInputmodeTel     KbdInputmode = "tel"
-	KbdInputmodeText    KbdInputmode = "text"
-	KbdInputmodeUrl     KbdInputmode = "url"
 	KbdInputmodeDecimal KbdInputmode = "decimal"
 	KbdInputmodeEmail   KbdInputmode = "email"
 	KbdInputmodeNone    KbdInputmode = "none"
 	KbdInputmodeNumeric KbdInputmode = "numeric"
 	KbdInputmodeSearch  KbdInputmode = "search"
+	KbdInputmodeTel     KbdInputmode = "tel"
+	KbdInputmodeText    KbdInputmode = "text"
+	KbdInputmodeUrl     KbdInputmode = "url"
 )
 
 type KbdSpellcheck string
 
 const (
-	KbdSpellcheckTrue  KbdSpellcheck = "true"
 	KbdSpellcheckFalse KbdSpellcheck = "false"
+	KbdSpellcheckTrue  KbdSpellcheck = "true"
 	KbdSpellcheckEmpty KbdSpellcheck = ""
 )
 
@@ -181,8 +186,8 @@ const (
 type KbdWritingsuggestions string
 
 const (
-	KbdWritingsuggestionsFalse KbdWritingsuggestions = "false"
 	KbdWritingsuggestionsTrue  KbdWritingsuggestions = "true"
+	KbdWritingsuggestionsFalse KbdWritingsuggestions = "false"
 	KbdWritingsuggestionsEmpty KbdWritingsuggestions = ""
 )
 
@@ -390,48 +395,31 @@ func (e *KbdElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<kbd")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<kbd")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</kbd>")); err != nil {
-		return err
-	}
+	sb.WriteString("</kbd>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

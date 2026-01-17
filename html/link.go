@@ -84,9 +84,9 @@ const (
 type LinkFetchpriority string
 
 const (
+	LinkFetchpriorityLow  LinkFetchpriority = "low"
 	LinkFetchpriorityAuto LinkFetchpriority = "auto"
 	LinkFetchpriorityHigh LinkFetchpriority = "high"
-	LinkFetchpriorityLow  LinkFetchpriority = "low"
 )
 
 type LinkAutocapitalize string
@@ -111,9 +111,9 @@ const (
 type LinkContenteditable string
 
 const (
+	LinkContenteditableFalse         LinkContenteditable = "false"
 	LinkContenteditablePlaintextOnly LinkContenteditable = "plaintext-only"
 	LinkContenteditableTrue          LinkContenteditable = "true"
-	LinkContenteditableFalse         LinkContenteditable = "false"
 	LinkContenteditableEmpty         LinkContenteditable = ""
 )
 
@@ -128,20 +128,20 @@ const (
 type LinkDraggable string
 
 const (
-	LinkDraggableFalse LinkDraggable = "false"
 	LinkDraggableTrue  LinkDraggable = "true"
+	LinkDraggableFalse LinkDraggable = "false"
 )
 
 type LinkEnterkeyhint string
 
 const (
+	LinkEnterkeyhintSearch   LinkEnterkeyhint = "search"
+	LinkEnterkeyhintSend     LinkEnterkeyhint = "send"
 	LinkEnterkeyhintDone     LinkEnterkeyhint = "done"
 	LinkEnterkeyhintEnter    LinkEnterkeyhint = "enter"
 	LinkEnterkeyhintGo       LinkEnterkeyhint = "go"
 	LinkEnterkeyhintNext     LinkEnterkeyhint = "next"
 	LinkEnterkeyhintPrevious LinkEnterkeyhint = "previous"
-	LinkEnterkeyhintSearch   LinkEnterkeyhint = "search"
-	LinkEnterkeyhintSend     LinkEnterkeyhint = "send"
 )
 
 type LinkHidden string
@@ -155,6 +155,7 @@ const (
 type LinkInputmode string
 
 const (
+	LinkInputmodeNumeric LinkInputmode = "numeric"
 	LinkInputmodeSearch  LinkInputmode = "search"
 	LinkInputmodeTel     LinkInputmode = "tel"
 	LinkInputmodeText    LinkInputmode = "text"
@@ -162,14 +163,13 @@ const (
 	LinkInputmodeDecimal LinkInputmode = "decimal"
 	LinkInputmodeEmail   LinkInputmode = "email"
 	LinkInputmodeNone    LinkInputmode = "none"
-	LinkInputmodeNumeric LinkInputmode = "numeric"
 )
 
 type LinkSpellcheck string
 
 const (
-	LinkSpellcheckTrue  LinkSpellcheck = "true"
 	LinkSpellcheckFalse LinkSpellcheck = "false"
+	LinkSpellcheckTrue  LinkSpellcheck = "true"
 	LinkSpellcheckEmpty LinkSpellcheck = ""
 )
 
@@ -489,39 +489,24 @@ func (e *LinkElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<link")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<link")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

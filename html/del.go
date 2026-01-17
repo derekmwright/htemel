@@ -60,6 +60,11 @@ func (e *DelElement) With(fn func(*DelElement)) *DelElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *DelElement) Text(text string) *DelElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *DelElement) Textf(format string, args ...any) *DelElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *DelElement) ToggleClass(class string, enable bool) *DelElement {
 type DelAutocapitalize string
 
 const (
-	DelAutocapitalizeSentences  DelAutocapitalize = "sentences"
-	DelAutocapitalizeWords      DelAutocapitalize = "words"
 	DelAutocapitalizeCharacters DelAutocapitalize = "characters"
 	DelAutocapitalizeNone       DelAutocapitalize = "none"
 	DelAutocapitalizeOff        DelAutocapitalize = "off"
 	DelAutocapitalizeOn         DelAutocapitalize = "on"
+	DelAutocapitalizeSentences  DelAutocapitalize = "sentences"
+	DelAutocapitalizeWords      DelAutocapitalize = "words"
 )
 
 type DelAutocorrect string
@@ -152,6 +157,7 @@ const (
 type DelInputmode string
 
 const (
+	DelInputmodeDecimal DelInputmode = "decimal"
 	DelInputmodeEmail   DelInputmode = "email"
 	DelInputmodeNone    DelInputmode = "none"
 	DelInputmodeNumeric DelInputmode = "numeric"
@@ -159,14 +165,13 @@ const (
 	DelInputmodeTel     DelInputmode = "tel"
 	DelInputmodeText    DelInputmode = "text"
 	DelInputmodeUrl     DelInputmode = "url"
-	DelInputmodeDecimal DelInputmode = "decimal"
 )
 
 type DelSpellcheck string
 
 const (
-	DelSpellcheckTrue  DelSpellcheck = "true"
 	DelSpellcheckFalse DelSpellcheck = "false"
+	DelSpellcheckTrue  DelSpellcheck = "true"
 	DelSpellcheckEmpty DelSpellcheck = ""
 )
 
@@ -402,48 +407,31 @@ func (e *DelElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<del")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<del")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</del>")); err != nil {
-		return err
-	}
+	sb.WriteString("</del>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

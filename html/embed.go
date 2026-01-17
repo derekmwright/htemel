@@ -70,12 +70,12 @@ func (e *EmbedElement) ToggleClass(class string, enable bool) *EmbedElement {
 type EmbedAutocapitalize string
 
 const (
+	EmbedAutocapitalizeSentences  EmbedAutocapitalize = "sentences"
+	EmbedAutocapitalizeWords      EmbedAutocapitalize = "words"
 	EmbedAutocapitalizeCharacters EmbedAutocapitalize = "characters"
 	EmbedAutocapitalizeNone       EmbedAutocapitalize = "none"
 	EmbedAutocapitalizeOff        EmbedAutocapitalize = "off"
 	EmbedAutocapitalizeOn         EmbedAutocapitalize = "on"
-	EmbedAutocapitalizeSentences  EmbedAutocapitalize = "sentences"
-	EmbedAutocapitalizeWords      EmbedAutocapitalize = "words"
 )
 
 type EmbedAutocorrect string
@@ -89,18 +89,18 @@ const (
 type EmbedContenteditable string
 
 const (
-	EmbedContenteditableTrue          EmbedContenteditable = "true"
 	EmbedContenteditableFalse         EmbedContenteditable = "false"
 	EmbedContenteditablePlaintextOnly EmbedContenteditable = "plaintext-only"
+	EmbedContenteditableTrue          EmbedContenteditable = "true"
 	EmbedContenteditableEmpty         EmbedContenteditable = ""
 )
 
 type EmbedDir string
 
 const (
-	EmbedDirAuto EmbedDir = "auto"
 	EmbedDirLtr  EmbedDir = "ltr"
 	EmbedDirRtl  EmbedDir = "rtl"
+	EmbedDirAuto EmbedDir = "auto"
 )
 
 type EmbedDraggable string
@@ -133,21 +133,21 @@ const (
 type EmbedInputmode string
 
 const (
-	EmbedInputmodeNumeric EmbedInputmode = "numeric"
-	EmbedInputmodeSearch  EmbedInputmode = "search"
 	EmbedInputmodeTel     EmbedInputmode = "tel"
 	EmbedInputmodeText    EmbedInputmode = "text"
 	EmbedInputmodeUrl     EmbedInputmode = "url"
 	EmbedInputmodeDecimal EmbedInputmode = "decimal"
 	EmbedInputmodeEmail   EmbedInputmode = "email"
 	EmbedInputmodeNone    EmbedInputmode = "none"
+	EmbedInputmodeNumeric EmbedInputmode = "numeric"
+	EmbedInputmodeSearch  EmbedInputmode = "search"
 )
 
 type EmbedSpellcheck string
 
 const (
-	EmbedSpellcheckFalse EmbedSpellcheck = "false"
 	EmbedSpellcheckTrue  EmbedSpellcheck = "true"
+	EmbedSpellcheckFalse EmbedSpellcheck = "false"
 	EmbedSpellcheckEmpty EmbedSpellcheck = ""
 )
 
@@ -395,39 +395,24 @@ func (e *EmbedElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<embed")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<embed")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

@@ -60,6 +60,11 @@ func (e *HtmlElement) With(fn func(*HtmlElement)) *HtmlElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *HtmlElement) Text(text string) *HtmlElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *HtmlElement) Textf(format string, args ...any) *HtmlElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *HtmlElement) ToggleClass(class string, enable bool) *HtmlElement {
 type HtmlAutocapitalize string
 
 const (
-	HtmlAutocapitalizeOn         HtmlAutocapitalize = "on"
 	HtmlAutocapitalizeSentences  HtmlAutocapitalize = "sentences"
 	HtmlAutocapitalizeWords      HtmlAutocapitalize = "words"
 	HtmlAutocapitalizeCharacters HtmlAutocapitalize = "characters"
 	HtmlAutocapitalizeNone       HtmlAutocapitalize = "none"
 	HtmlAutocapitalizeOff        HtmlAutocapitalize = "off"
+	HtmlAutocapitalizeOn         HtmlAutocapitalize = "on"
 )
 
 type HtmlAutocorrect string
@@ -117,9 +122,9 @@ const (
 type HtmlDir string
 
 const (
-	HtmlDirAuto HtmlDir = "auto"
 	HtmlDirLtr  HtmlDir = "ltr"
 	HtmlDirRtl  HtmlDir = "rtl"
+	HtmlDirAuto HtmlDir = "auto"
 )
 
 type HtmlDraggable string
@@ -132,13 +137,13 @@ const (
 type HtmlEnterkeyhint string
 
 const (
+	HtmlEnterkeyhintNext     HtmlEnterkeyhint = "next"
+	HtmlEnterkeyhintPrevious HtmlEnterkeyhint = "previous"
 	HtmlEnterkeyhintSearch   HtmlEnterkeyhint = "search"
 	HtmlEnterkeyhintSend     HtmlEnterkeyhint = "send"
 	HtmlEnterkeyhintDone     HtmlEnterkeyhint = "done"
 	HtmlEnterkeyhintEnter    HtmlEnterkeyhint = "enter"
 	HtmlEnterkeyhintGo       HtmlEnterkeyhint = "go"
-	HtmlEnterkeyhintNext     HtmlEnterkeyhint = "next"
-	HtmlEnterkeyhintPrevious HtmlEnterkeyhint = "previous"
 )
 
 type HtmlHidden string
@@ -152,14 +157,14 @@ const (
 type HtmlInputmode string
 
 const (
+	HtmlInputmodeUrl     HtmlInputmode = "url"
+	HtmlInputmodeDecimal HtmlInputmode = "decimal"
 	HtmlInputmodeEmail   HtmlInputmode = "email"
 	HtmlInputmodeNone    HtmlInputmode = "none"
 	HtmlInputmodeNumeric HtmlInputmode = "numeric"
 	HtmlInputmodeSearch  HtmlInputmode = "search"
 	HtmlInputmodeTel     HtmlInputmode = "tel"
 	HtmlInputmodeText    HtmlInputmode = "text"
-	HtmlInputmodeUrl     HtmlInputmode = "url"
-	HtmlInputmodeDecimal HtmlInputmode = "decimal"
 )
 
 type HtmlSpellcheck string
@@ -181,8 +186,8 @@ const (
 type HtmlWritingsuggestions string
 
 const (
-	HtmlWritingsuggestionsFalse HtmlWritingsuggestions = "false"
 	HtmlWritingsuggestionsTrue  HtmlWritingsuggestions = "true"
+	HtmlWritingsuggestionsFalse HtmlWritingsuggestions = "false"
 	HtmlWritingsuggestionsEmpty HtmlWritingsuggestions = ""
 )
 
@@ -390,48 +395,31 @@ func (e *HtmlElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<html")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<html")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</html>")); err != nil {
-		return err
-	}
+	sb.WriteString("</html>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

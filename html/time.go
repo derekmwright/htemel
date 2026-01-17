@@ -60,6 +60,11 @@ func (e *TimeElement) With(fn func(*TimeElement)) *TimeElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *TimeElement) Text(text string) *TimeElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *TimeElement) Textf(format string, args ...any) *TimeElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *TimeElement) ToggleClass(class string, enable bool) *TimeElement {
 type TimeAutocapitalize string
 
 const (
+	TimeAutocapitalizeOn         TimeAutocapitalize = "on"
+	TimeAutocapitalizeSentences  TimeAutocapitalize = "sentences"
 	TimeAutocapitalizeWords      TimeAutocapitalize = "words"
 	TimeAutocapitalizeCharacters TimeAutocapitalize = "characters"
 	TimeAutocapitalizeNone       TimeAutocapitalize = "none"
 	TimeAutocapitalizeOff        TimeAutocapitalize = "off"
-	TimeAutocapitalizeOn         TimeAutocapitalize = "on"
-	TimeAutocapitalizeSentences  TimeAutocapitalize = "sentences"
 )
 
 type TimeAutocorrect string
@@ -108,18 +113,18 @@ const (
 type TimeContenteditable string
 
 const (
+	TimeContenteditablePlaintextOnly TimeContenteditable = "plaintext-only"
 	TimeContenteditableTrue          TimeContenteditable = "true"
 	TimeContenteditableFalse         TimeContenteditable = "false"
-	TimeContenteditablePlaintextOnly TimeContenteditable = "plaintext-only"
 	TimeContenteditableEmpty         TimeContenteditable = ""
 )
 
 type TimeDir string
 
 const (
+	TimeDirRtl  TimeDir = "rtl"
 	TimeDirAuto TimeDir = "auto"
 	TimeDirLtr  TimeDir = "ltr"
-	TimeDirRtl  TimeDir = "rtl"
 )
 
 type TimeDraggable string
@@ -132,13 +137,13 @@ const (
 type TimeEnterkeyhint string
 
 const (
-	TimeEnterkeyhintPrevious TimeEnterkeyhint = "previous"
-	TimeEnterkeyhintSearch   TimeEnterkeyhint = "search"
-	TimeEnterkeyhintSend     TimeEnterkeyhint = "send"
 	TimeEnterkeyhintDone     TimeEnterkeyhint = "done"
 	TimeEnterkeyhintEnter    TimeEnterkeyhint = "enter"
 	TimeEnterkeyhintGo       TimeEnterkeyhint = "go"
 	TimeEnterkeyhintNext     TimeEnterkeyhint = "next"
+	TimeEnterkeyhintPrevious TimeEnterkeyhint = "previous"
+	TimeEnterkeyhintSearch   TimeEnterkeyhint = "search"
+	TimeEnterkeyhintSend     TimeEnterkeyhint = "send"
 )
 
 type TimeHidden string
@@ -152,14 +157,14 @@ const (
 type TimeInputmode string
 
 const (
-	TimeInputmodeEmail   TimeInputmode = "email"
-	TimeInputmodeNone    TimeInputmode = "none"
-	TimeInputmodeNumeric TimeInputmode = "numeric"
 	TimeInputmodeSearch  TimeInputmode = "search"
 	TimeInputmodeTel     TimeInputmode = "tel"
 	TimeInputmodeText    TimeInputmode = "text"
 	TimeInputmodeUrl     TimeInputmode = "url"
 	TimeInputmodeDecimal TimeInputmode = "decimal"
+	TimeInputmodeEmail   TimeInputmode = "email"
+	TimeInputmodeNone    TimeInputmode = "none"
+	TimeInputmodeNumeric TimeInputmode = "numeric"
 )
 
 type TimeSpellcheck string
@@ -396,48 +401,31 @@ func (e *TimeElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<time")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<time")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</time>")); err != nil {
-		return err
-	}
+	sb.WriteString("</time>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

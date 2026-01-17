@@ -60,6 +60,11 @@ func (e *BodyElement) With(fn func(*BodyElement)) *BodyElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *BodyElement) Text(text string) *BodyElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *BodyElement) Textf(format string, args ...any) *BodyElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *BodyElement) ToggleClass(class string, enable bool) *BodyElement {
 type BodyAutocapitalize string
 
 const (
+	BodyAutocapitalizeCharacters BodyAutocapitalize = "characters"
 	BodyAutocapitalizeNone       BodyAutocapitalize = "none"
 	BodyAutocapitalizeOff        BodyAutocapitalize = "off"
 	BodyAutocapitalizeOn         BodyAutocapitalize = "on"
 	BodyAutocapitalizeSentences  BodyAutocapitalize = "sentences"
 	BodyAutocapitalizeWords      BodyAutocapitalize = "words"
-	BodyAutocapitalizeCharacters BodyAutocapitalize = "characters"
 )
 
 type BodyAutocorrect string
@@ -117,28 +122,28 @@ const (
 type BodyDir string
 
 const (
+	BodyDirAuto BodyDir = "auto"
 	BodyDirLtr  BodyDir = "ltr"
 	BodyDirRtl  BodyDir = "rtl"
-	BodyDirAuto BodyDir = "auto"
 )
 
 type BodyDraggable string
 
 const (
-	BodyDraggableFalse BodyDraggable = "false"
 	BodyDraggableTrue  BodyDraggable = "true"
+	BodyDraggableFalse BodyDraggable = "false"
 )
 
 type BodyEnterkeyhint string
 
 const (
+	BodyEnterkeyhintSend     BodyEnterkeyhint = "send"
 	BodyEnterkeyhintDone     BodyEnterkeyhint = "done"
 	BodyEnterkeyhintEnter    BodyEnterkeyhint = "enter"
 	BodyEnterkeyhintGo       BodyEnterkeyhint = "go"
 	BodyEnterkeyhintNext     BodyEnterkeyhint = "next"
 	BodyEnterkeyhintPrevious BodyEnterkeyhint = "previous"
 	BodyEnterkeyhintSearch   BodyEnterkeyhint = "search"
-	BodyEnterkeyhintSend     BodyEnterkeyhint = "send"
 )
 
 type BodyHidden string
@@ -152,29 +157,29 @@ const (
 type BodyInputmode string
 
 const (
-	BodyInputmodeNumeric BodyInputmode = "numeric"
-	BodyInputmodeSearch  BodyInputmode = "search"
-	BodyInputmodeTel     BodyInputmode = "tel"
-	BodyInputmodeText    BodyInputmode = "text"
 	BodyInputmodeUrl     BodyInputmode = "url"
 	BodyInputmodeDecimal BodyInputmode = "decimal"
 	BodyInputmodeEmail   BodyInputmode = "email"
 	BodyInputmodeNone    BodyInputmode = "none"
+	BodyInputmodeNumeric BodyInputmode = "numeric"
+	BodyInputmodeSearch  BodyInputmode = "search"
+	BodyInputmodeTel     BodyInputmode = "tel"
+	BodyInputmodeText    BodyInputmode = "text"
 )
 
 type BodySpellcheck string
 
 const (
-	BodySpellcheckFalse BodySpellcheck = "false"
 	BodySpellcheckTrue  BodySpellcheck = "true"
+	BodySpellcheckFalse BodySpellcheck = "false"
 	BodySpellcheckEmpty BodySpellcheck = ""
 )
 
 type BodyTranslate string
 
 const (
-	BodyTranslateNo    BodyTranslate = "no"
 	BodyTranslateYes   BodyTranslate = "yes"
+	BodyTranslateNo    BodyTranslate = "no"
 	BodyTranslateEmpty BodyTranslate = ""
 )
 
@@ -498,48 +503,31 @@ func (e *BodyElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<body")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<body")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</body>")); err != nil {
-		return err
-	}
+	sb.WriteString("</body>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

@@ -70,19 +70,19 @@ func (e *WbrElement) ToggleClass(class string, enable bool) *WbrElement {
 type WbrAutocapitalize string
 
 const (
+	WbrAutocapitalizeSentences  WbrAutocapitalize = "sentences"
+	WbrAutocapitalizeWords      WbrAutocapitalize = "words"
 	WbrAutocapitalizeCharacters WbrAutocapitalize = "characters"
 	WbrAutocapitalizeNone       WbrAutocapitalize = "none"
 	WbrAutocapitalizeOff        WbrAutocapitalize = "off"
 	WbrAutocapitalizeOn         WbrAutocapitalize = "on"
-	WbrAutocapitalizeSentences  WbrAutocapitalize = "sentences"
-	WbrAutocapitalizeWords      WbrAutocapitalize = "words"
 )
 
 type WbrAutocorrect string
 
 const (
-	WbrAutocorrectOff   WbrAutocorrect = "off"
 	WbrAutocorrectOn    WbrAutocorrect = "on"
+	WbrAutocorrectOff   WbrAutocorrect = "off"
 	WbrAutocorrectEmpty WbrAutocorrect = ""
 )
 
@@ -113,13 +113,13 @@ const (
 type WbrEnterkeyhint string
 
 const (
+	WbrEnterkeyhintSearch   WbrEnterkeyhint = "search"
+	WbrEnterkeyhintSend     WbrEnterkeyhint = "send"
 	WbrEnterkeyhintDone     WbrEnterkeyhint = "done"
 	WbrEnterkeyhintEnter    WbrEnterkeyhint = "enter"
 	WbrEnterkeyhintGo       WbrEnterkeyhint = "go"
 	WbrEnterkeyhintNext     WbrEnterkeyhint = "next"
 	WbrEnterkeyhintPrevious WbrEnterkeyhint = "previous"
-	WbrEnterkeyhintSearch   WbrEnterkeyhint = "search"
-	WbrEnterkeyhintSend     WbrEnterkeyhint = "send"
 )
 
 type WbrHidden string
@@ -133,14 +133,14 @@ const (
 type WbrInputmode string
 
 const (
-	WbrInputmodeText    WbrInputmode = "text"
-	WbrInputmodeUrl     WbrInputmode = "url"
-	WbrInputmodeDecimal WbrInputmode = "decimal"
 	WbrInputmodeEmail   WbrInputmode = "email"
 	WbrInputmodeNone    WbrInputmode = "none"
 	WbrInputmodeNumeric WbrInputmode = "numeric"
 	WbrInputmodeSearch  WbrInputmode = "search"
 	WbrInputmodeTel     WbrInputmode = "tel"
+	WbrInputmodeText    WbrInputmode = "text"
+	WbrInputmodeUrl     WbrInputmode = "url"
+	WbrInputmodeDecimal WbrInputmode = "decimal"
 )
 
 type WbrSpellcheck string
@@ -371,39 +371,24 @@ func (e *WbrElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<wbr")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<wbr")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

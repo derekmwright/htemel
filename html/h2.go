@@ -60,6 +60,11 @@ func (e *H2Element) With(fn func(*H2Element)) *H2Element {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *H2Element) Text(text string) *H2Element {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *H2Element) Textf(format string, args ...any) *H2Element {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *H2Element) ToggleClass(class string, enable bool) *H2Element {
 type H2Autocapitalize string
 
 const (
-	H2AutocapitalizeCharacters H2Autocapitalize = "characters"
-	H2AutocapitalizeNone       H2Autocapitalize = "none"
-	H2AutocapitalizeOff        H2Autocapitalize = "off"
 	H2AutocapitalizeOn         H2Autocapitalize = "on"
 	H2AutocapitalizeSentences  H2Autocapitalize = "sentences"
 	H2AutocapitalizeWords      H2Autocapitalize = "words"
+	H2AutocapitalizeCharacters H2Autocapitalize = "characters"
+	H2AutocapitalizeNone       H2Autocapitalize = "none"
+	H2AutocapitalizeOff        H2Autocapitalize = "off"
 )
 
 type H2Autocorrect string
@@ -108,9 +113,9 @@ const (
 type H2Contenteditable string
 
 const (
-	H2ContenteditableFalse         H2Contenteditable = "false"
 	H2ContenteditablePlaintextOnly H2Contenteditable = "plaintext-only"
 	H2ContenteditableTrue          H2Contenteditable = "true"
+	H2ContenteditableFalse         H2Contenteditable = "false"
 	H2ContenteditableEmpty         H2Contenteditable = ""
 )
 
@@ -125,20 +130,20 @@ const (
 type H2Draggable string
 
 const (
-	H2DraggableFalse H2Draggable = "false"
 	H2DraggableTrue  H2Draggable = "true"
+	H2DraggableFalse H2Draggable = "false"
 )
 
 type H2Enterkeyhint string
 
 const (
+	H2EnterkeyhintSend     H2Enterkeyhint = "send"
 	H2EnterkeyhintDone     H2Enterkeyhint = "done"
 	H2EnterkeyhintEnter    H2Enterkeyhint = "enter"
 	H2EnterkeyhintGo       H2Enterkeyhint = "go"
 	H2EnterkeyhintNext     H2Enterkeyhint = "next"
 	H2EnterkeyhintPrevious H2Enterkeyhint = "previous"
 	H2EnterkeyhintSearch   H2Enterkeyhint = "search"
-	H2EnterkeyhintSend     H2Enterkeyhint = "send"
 )
 
 type H2Hidden string
@@ -152,14 +157,14 @@ const (
 type H2Inputmode string
 
 const (
-	H2InputmodeText    H2Inputmode = "text"
-	H2InputmodeUrl     H2Inputmode = "url"
 	H2InputmodeDecimal H2Inputmode = "decimal"
 	H2InputmodeEmail   H2Inputmode = "email"
 	H2InputmodeNone    H2Inputmode = "none"
 	H2InputmodeNumeric H2Inputmode = "numeric"
 	H2InputmodeSearch  H2Inputmode = "search"
 	H2InputmodeTel     H2Inputmode = "tel"
+	H2InputmodeText    H2Inputmode = "text"
+	H2InputmodeUrl     H2Inputmode = "url"
 )
 
 type H2Spellcheck string
@@ -390,48 +395,31 @@ func (e *H2Element) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<h2")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<h2")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</h2>")); err != nil {
-		return err
-	}
+	sb.WriteString("</h2>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

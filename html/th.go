@@ -60,6 +60,11 @@ func (e *ThElement) With(fn func(*ThElement)) *ThElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *ThElement) Text(text string) *ThElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *ThElement) Textf(format string, args ...any) *ThElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *ThElement) ToggleClass(class string, enable bool) *ThElement {
 type ThAutocapitalize string
 
 const (
-	ThAutocapitalizeWords      ThAutocapitalize = "words"
 	ThAutocapitalizeCharacters ThAutocapitalize = "characters"
 	ThAutocapitalizeNone       ThAutocapitalize = "none"
 	ThAutocapitalizeOff        ThAutocapitalize = "off"
 	ThAutocapitalizeOn         ThAutocapitalize = "on"
 	ThAutocapitalizeSentences  ThAutocapitalize = "sentences"
+	ThAutocapitalizeWords      ThAutocapitalize = "words"
 )
 
 type ThAutocorrect string
@@ -117,9 +122,9 @@ const (
 type ThDir string
 
 const (
-	ThDirRtl  ThDir = "rtl"
 	ThDirAuto ThDir = "auto"
 	ThDirLtr  ThDir = "ltr"
+	ThDirRtl  ThDir = "rtl"
 )
 
 type ThDraggable string
@@ -144,8 +149,8 @@ const (
 type ThHidden string
 
 const (
-	ThHiddenHidden     ThHidden = "hidden"
 	ThHiddenUntilFound ThHidden = "until-found"
+	ThHiddenHidden     ThHidden = "hidden"
 	ThHiddenEmpty      ThHidden = ""
 )
 
@@ -420,48 +425,31 @@ func (e *ThElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<th")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<th")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</th>")); err != nil {
-		return err
-	}
+	sb.WriteString("</th>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

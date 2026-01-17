@@ -60,6 +60,11 @@ func (e *H5Element) With(fn func(*H5Element)) *H5Element {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *H5Element) Text(text string) *H5Element {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *H5Element) Textf(format string, args ...any) *H5Element {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,56 +94,56 @@ func (e *H5Element) ToggleClass(class string, enable bool) *H5Element {
 type H5Autocapitalize string
 
 const (
-	H5AutocapitalizeCharacters H5Autocapitalize = "characters"
-	H5AutocapitalizeNone       H5Autocapitalize = "none"
-	H5AutocapitalizeOff        H5Autocapitalize = "off"
 	H5AutocapitalizeOn         H5Autocapitalize = "on"
 	H5AutocapitalizeSentences  H5Autocapitalize = "sentences"
 	H5AutocapitalizeWords      H5Autocapitalize = "words"
+	H5AutocapitalizeCharacters H5Autocapitalize = "characters"
+	H5AutocapitalizeNone       H5Autocapitalize = "none"
+	H5AutocapitalizeOff        H5Autocapitalize = "off"
 )
 
 type H5Autocorrect string
 
 const (
-	H5AutocorrectOn    H5Autocorrect = "on"
 	H5AutocorrectOff   H5Autocorrect = "off"
+	H5AutocorrectOn    H5Autocorrect = "on"
 	H5AutocorrectEmpty H5Autocorrect = ""
 )
 
 type H5Contenteditable string
 
 const (
+	H5ContenteditableFalse         H5Contenteditable = "false"
 	H5ContenteditablePlaintextOnly H5Contenteditable = "plaintext-only"
 	H5ContenteditableTrue          H5Contenteditable = "true"
-	H5ContenteditableFalse         H5Contenteditable = "false"
 	H5ContenteditableEmpty         H5Contenteditable = ""
 )
 
 type H5Dir string
 
 const (
-	H5DirLtr  H5Dir = "ltr"
 	H5DirRtl  H5Dir = "rtl"
 	H5DirAuto H5Dir = "auto"
+	H5DirLtr  H5Dir = "ltr"
 )
 
 type H5Draggable string
 
 const (
-	H5DraggableTrue  H5Draggable = "true"
 	H5DraggableFalse H5Draggable = "false"
+	H5DraggableTrue  H5Draggable = "true"
 )
 
 type H5Enterkeyhint string
 
 const (
+	H5EnterkeyhintSearch   H5Enterkeyhint = "search"
+	H5EnterkeyhintSend     H5Enterkeyhint = "send"
 	H5EnterkeyhintDone     H5Enterkeyhint = "done"
 	H5EnterkeyhintEnter    H5Enterkeyhint = "enter"
 	H5EnterkeyhintGo       H5Enterkeyhint = "go"
 	H5EnterkeyhintNext     H5Enterkeyhint = "next"
 	H5EnterkeyhintPrevious H5Enterkeyhint = "previous"
-	H5EnterkeyhintSearch   H5Enterkeyhint = "search"
-	H5EnterkeyhintSend     H5Enterkeyhint = "send"
 )
 
 type H5Hidden string
@@ -173,8 +178,8 @@ const (
 type H5Translate string
 
 const (
-	H5TranslateYes   H5Translate = "yes"
 	H5TranslateNo    H5Translate = "no"
+	H5TranslateYes   H5Translate = "yes"
 	H5TranslateEmpty H5Translate = ""
 )
 
@@ -390,48 +395,31 @@ func (e *H5Element) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<h5")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<h5")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</h5>")); err != nil {
-		return err
-	}
+	sb.WriteString("</h5>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

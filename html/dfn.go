@@ -60,6 +60,11 @@ func (e *DfnElement) With(fn func(*DfnElement)) *DfnElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *DfnElement) Text(text string) *DfnElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *DfnElement) Textf(format string, args ...any) *DfnElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -100,17 +105,17 @@ const (
 type DfnAutocorrect string
 
 const (
-	DfnAutocorrectOn    DfnAutocorrect = "on"
 	DfnAutocorrectOff   DfnAutocorrect = "off"
+	DfnAutocorrectOn    DfnAutocorrect = "on"
 	DfnAutocorrectEmpty DfnAutocorrect = ""
 )
 
 type DfnContenteditable string
 
 const (
-	DfnContenteditableFalse         DfnContenteditable = "false"
 	DfnContenteditablePlaintextOnly DfnContenteditable = "plaintext-only"
 	DfnContenteditableTrue          DfnContenteditable = "true"
+	DfnContenteditableFalse         DfnContenteditable = "false"
 	DfnContenteditableEmpty         DfnContenteditable = ""
 )
 
@@ -132,13 +137,13 @@ const (
 type DfnEnterkeyhint string
 
 const (
+	DfnEnterkeyhintPrevious DfnEnterkeyhint = "previous"
 	DfnEnterkeyhintSearch   DfnEnterkeyhint = "search"
 	DfnEnterkeyhintSend     DfnEnterkeyhint = "send"
 	DfnEnterkeyhintDone     DfnEnterkeyhint = "done"
 	DfnEnterkeyhintEnter    DfnEnterkeyhint = "enter"
 	DfnEnterkeyhintGo       DfnEnterkeyhint = "go"
 	DfnEnterkeyhintNext     DfnEnterkeyhint = "next"
-	DfnEnterkeyhintPrevious DfnEnterkeyhint = "previous"
 )
 
 type DfnHidden string
@@ -152,14 +157,14 @@ const (
 type DfnInputmode string
 
 const (
-	DfnInputmodeTel     DfnInputmode = "tel"
-	DfnInputmodeText    DfnInputmode = "text"
-	DfnInputmodeUrl     DfnInputmode = "url"
-	DfnInputmodeDecimal DfnInputmode = "decimal"
 	DfnInputmodeEmail   DfnInputmode = "email"
 	DfnInputmodeNone    DfnInputmode = "none"
 	DfnInputmodeNumeric DfnInputmode = "numeric"
 	DfnInputmodeSearch  DfnInputmode = "search"
+	DfnInputmodeTel     DfnInputmode = "tel"
+	DfnInputmodeText    DfnInputmode = "text"
+	DfnInputmodeUrl     DfnInputmode = "url"
+	DfnInputmodeDecimal DfnInputmode = "decimal"
 )
 
 type DfnSpellcheck string
@@ -181,8 +186,8 @@ const (
 type DfnWritingsuggestions string
 
 const (
-	DfnWritingsuggestionsFalse DfnWritingsuggestions = "false"
 	DfnWritingsuggestionsTrue  DfnWritingsuggestions = "true"
+	DfnWritingsuggestionsFalse DfnWritingsuggestions = "false"
 	DfnWritingsuggestionsEmpty DfnWritingsuggestions = ""
 )
 
@@ -390,48 +395,31 @@ func (e *DfnElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<dfn")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<dfn")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</dfn>")); err != nil {
-		return err
-	}
+	sb.WriteString("</dfn>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

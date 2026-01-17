@@ -60,6 +60,11 @@ func (e *UElement) With(fn func(*UElement)) *UElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *UElement) Text(text string) *UElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *UElement) Textf(format string, args ...any) *UElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *UElement) ToggleClass(class string, enable bool) *UElement {
 type UAutocapitalize string
 
 const (
-	UAutocapitalizeOn         UAutocapitalize = "on"
 	UAutocapitalizeSentences  UAutocapitalize = "sentences"
 	UAutocapitalizeWords      UAutocapitalize = "words"
 	UAutocapitalizeCharacters UAutocapitalize = "characters"
 	UAutocapitalizeNone       UAutocapitalize = "none"
 	UAutocapitalizeOff        UAutocapitalize = "off"
+	UAutocapitalizeOn         UAutocapitalize = "on"
 )
 
 type UAutocorrect string
@@ -108,37 +113,37 @@ const (
 type UContenteditable string
 
 const (
-	UContenteditableTrue          UContenteditable = "true"
 	UContenteditableFalse         UContenteditable = "false"
 	UContenteditablePlaintextOnly UContenteditable = "plaintext-only"
+	UContenteditableTrue          UContenteditable = "true"
 	UContenteditableEmpty         UContenteditable = ""
 )
 
 type UDir string
 
 const (
+	UDirLtr  UDir = "ltr"
 	UDirRtl  UDir = "rtl"
 	UDirAuto UDir = "auto"
-	UDirLtr  UDir = "ltr"
 )
 
 type UDraggable string
 
 const (
-	UDraggableTrue  UDraggable = "true"
 	UDraggableFalse UDraggable = "false"
+	UDraggableTrue  UDraggable = "true"
 )
 
 type UEnterkeyhint string
 
 const (
-	UEnterkeyhintSearch   UEnterkeyhint = "search"
-	UEnterkeyhintSend     UEnterkeyhint = "send"
 	UEnterkeyhintDone     UEnterkeyhint = "done"
 	UEnterkeyhintEnter    UEnterkeyhint = "enter"
 	UEnterkeyhintGo       UEnterkeyhint = "go"
 	UEnterkeyhintNext     UEnterkeyhint = "next"
 	UEnterkeyhintPrevious UEnterkeyhint = "previous"
+	UEnterkeyhintSearch   UEnterkeyhint = "search"
+	UEnterkeyhintSend     UEnterkeyhint = "send"
 )
 
 type UHidden string
@@ -152,21 +157,21 @@ const (
 type UInputmode string
 
 const (
-	UInputmodeNumeric UInputmode = "numeric"
-	UInputmodeSearch  UInputmode = "search"
-	UInputmodeTel     UInputmode = "tel"
-	UInputmodeText    UInputmode = "text"
 	UInputmodeUrl     UInputmode = "url"
 	UInputmodeDecimal UInputmode = "decimal"
 	UInputmodeEmail   UInputmode = "email"
 	UInputmodeNone    UInputmode = "none"
+	UInputmodeNumeric UInputmode = "numeric"
+	UInputmodeSearch  UInputmode = "search"
+	UInputmodeTel     UInputmode = "tel"
+	UInputmodeText    UInputmode = "text"
 )
 
 type USpellcheck string
 
 const (
-	USpellcheckTrue  USpellcheck = "true"
 	USpellcheckFalse USpellcheck = "false"
+	USpellcheckTrue  USpellcheck = "true"
 	USpellcheckEmpty USpellcheck = ""
 )
 
@@ -181,8 +186,8 @@ const (
 type UWritingsuggestions string
 
 const (
-	UWritingsuggestionsFalse UWritingsuggestions = "false"
 	UWritingsuggestionsTrue  UWritingsuggestions = "true"
+	UWritingsuggestionsFalse UWritingsuggestions = "false"
 	UWritingsuggestionsEmpty UWritingsuggestions = ""
 )
 
@@ -390,48 +395,31 @@ func (e *UElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<u")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<u")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</u>")); err != nil {
-		return err
-	}
+	sb.WriteString("</u>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

@@ -60,6 +60,11 @@ func (e *ButtonElement) With(fn func(*ButtonElement)) *ButtonElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *ButtonElement) Text(text string) *ButtonElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *ButtonElement) Textf(format string, args ...any) *ButtonElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *ButtonElement) ToggleClass(class string, enable bool) *ButtonElement {
 type ButtonCommand string
 
 const (
+	ButtonCommandHidePopover   ButtonCommand = "hide-popover"
+	ButtonCommandRequestClose  ButtonCommand = "request-close"
 	ButtonCommandShowModal     ButtonCommand = "show-modal"
 	ButtonCommandShowPopover   ButtonCommand = "show-popover"
 	ButtonCommandTogglePopover ButtonCommand = "toggle-popover"
 	ButtonCommandClose         ButtonCommand = "close"
-	ButtonCommandHidePopover   ButtonCommand = "hide-popover"
-	ButtonCommandRequestClose  ButtonCommand = "request-close"
 )
 
 type ButtonFormmethod string
@@ -108,9 +113,9 @@ const (
 type ButtonPopovertargetaction string
 
 const (
+	ButtonPopovertargetactionHide   ButtonPopovertargetaction = "hide"
 	ButtonPopovertargetactionShow   ButtonPopovertargetaction = "show"
 	ButtonPopovertargetactionToggle ButtonPopovertargetaction = "toggle"
-	ButtonPopovertargetactionHide   ButtonPopovertargetaction = "hide"
 )
 
 type ButtonType string
@@ -124,12 +129,12 @@ const (
 type ButtonAutocapitalize string
 
 const (
-	ButtonAutocapitalizeOn         ButtonAutocapitalize = "on"
-	ButtonAutocapitalizeSentences  ButtonAutocapitalize = "sentences"
-	ButtonAutocapitalizeWords      ButtonAutocapitalize = "words"
 	ButtonAutocapitalizeCharacters ButtonAutocapitalize = "characters"
 	ButtonAutocapitalizeNone       ButtonAutocapitalize = "none"
 	ButtonAutocapitalizeOff        ButtonAutocapitalize = "off"
+	ButtonAutocapitalizeOn         ButtonAutocapitalize = "on"
+	ButtonAutocapitalizeSentences  ButtonAutocapitalize = "sentences"
+	ButtonAutocapitalizeWords      ButtonAutocapitalize = "words"
 )
 
 type ButtonAutocorrect string
@@ -167,13 +172,13 @@ const (
 type ButtonEnterkeyhint string
 
 const (
+	ButtonEnterkeyhintSend     ButtonEnterkeyhint = "send"
 	ButtonEnterkeyhintDone     ButtonEnterkeyhint = "done"
 	ButtonEnterkeyhintEnter    ButtonEnterkeyhint = "enter"
 	ButtonEnterkeyhintGo       ButtonEnterkeyhint = "go"
 	ButtonEnterkeyhintNext     ButtonEnterkeyhint = "next"
 	ButtonEnterkeyhintPrevious ButtonEnterkeyhint = "previous"
 	ButtonEnterkeyhintSearch   ButtonEnterkeyhint = "search"
-	ButtonEnterkeyhintSend     ButtonEnterkeyhint = "send"
 )
 
 type ButtonHidden string
@@ -187,21 +192,21 @@ const (
 type ButtonInputmode string
 
 const (
-	ButtonInputmodeDecimal ButtonInputmode = "decimal"
-	ButtonInputmodeEmail   ButtonInputmode = "email"
-	ButtonInputmodeNone    ButtonInputmode = "none"
 	ButtonInputmodeNumeric ButtonInputmode = "numeric"
 	ButtonInputmodeSearch  ButtonInputmode = "search"
 	ButtonInputmodeTel     ButtonInputmode = "tel"
 	ButtonInputmodeText    ButtonInputmode = "text"
 	ButtonInputmodeUrl     ButtonInputmode = "url"
+	ButtonInputmodeDecimal ButtonInputmode = "decimal"
+	ButtonInputmodeEmail   ButtonInputmode = "email"
+	ButtonInputmodeNone    ButtonInputmode = "none"
 )
 
 type ButtonSpellcheck string
 
 const (
-	ButtonSpellcheckFalse ButtonSpellcheck = "false"
 	ButtonSpellcheckTrue  ButtonSpellcheck = "true"
+	ButtonSpellcheckFalse ButtonSpellcheck = "false"
 	ButtonSpellcheckEmpty ButtonSpellcheck = ""
 )
 
@@ -513,48 +518,31 @@ func (e *ButtonElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<button")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<button")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</button>")); err != nil {
-		return err
-	}
+	sb.WriteString("</button>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

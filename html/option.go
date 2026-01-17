@@ -60,6 +60,11 @@ func (e *OptionElement) With(fn func(*OptionElement)) *OptionElement {
 	return e
 }
 
+// Text adds a text node to the element.
+func (e *OptionElement) Text(text string) *OptionElement {
+	return e.Children(htemel.Text(text))
+}
+
 // Textf adds a text node to the element with the given format string and arguments.
 func (e *OptionElement) Textf(format string, args ...any) *OptionElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
@@ -89,12 +94,12 @@ func (e *OptionElement) ToggleClass(class string, enable bool) *OptionElement {
 type OptionAutocapitalize string
 
 const (
-	OptionAutocapitalizeSentences  OptionAutocapitalize = "sentences"
-	OptionAutocapitalizeWords      OptionAutocapitalize = "words"
 	OptionAutocapitalizeCharacters OptionAutocapitalize = "characters"
 	OptionAutocapitalizeNone       OptionAutocapitalize = "none"
 	OptionAutocapitalizeOff        OptionAutocapitalize = "off"
 	OptionAutocapitalizeOn         OptionAutocapitalize = "on"
+	OptionAutocapitalizeSentences  OptionAutocapitalize = "sentences"
+	OptionAutocapitalizeWords      OptionAutocapitalize = "words"
 )
 
 type OptionAutocorrect string
@@ -125,20 +130,20 @@ const (
 type OptionDraggable string
 
 const (
-	OptionDraggableFalse OptionDraggable = "false"
 	OptionDraggableTrue  OptionDraggable = "true"
+	OptionDraggableFalse OptionDraggable = "false"
 )
 
 type OptionEnterkeyhint string
 
 const (
-	OptionEnterkeyhintSearch   OptionEnterkeyhint = "search"
-	OptionEnterkeyhintSend     OptionEnterkeyhint = "send"
 	OptionEnterkeyhintDone     OptionEnterkeyhint = "done"
 	OptionEnterkeyhintEnter    OptionEnterkeyhint = "enter"
 	OptionEnterkeyhintGo       OptionEnterkeyhint = "go"
 	OptionEnterkeyhintNext     OptionEnterkeyhint = "next"
 	OptionEnterkeyhintPrevious OptionEnterkeyhint = "previous"
+	OptionEnterkeyhintSearch   OptionEnterkeyhint = "search"
+	OptionEnterkeyhintSend     OptionEnterkeyhint = "send"
 )
 
 type OptionHidden string
@@ -152,7 +157,6 @@ const (
 type OptionInputmode string
 
 const (
-	OptionInputmodeNone    OptionInputmode = "none"
 	OptionInputmodeNumeric OptionInputmode = "numeric"
 	OptionInputmodeSearch  OptionInputmode = "search"
 	OptionInputmodeTel     OptionInputmode = "tel"
@@ -160,21 +164,22 @@ const (
 	OptionInputmodeUrl     OptionInputmode = "url"
 	OptionInputmodeDecimal OptionInputmode = "decimal"
 	OptionInputmodeEmail   OptionInputmode = "email"
+	OptionInputmodeNone    OptionInputmode = "none"
 )
 
 type OptionSpellcheck string
 
 const (
-	OptionSpellcheckFalse OptionSpellcheck = "false"
 	OptionSpellcheckTrue  OptionSpellcheck = "true"
+	OptionSpellcheckFalse OptionSpellcheck = "false"
 	OptionSpellcheckEmpty OptionSpellcheck = ""
 )
 
 type OptionTranslate string
 
 const (
-	OptionTranslateYes   OptionTranslate = "yes"
 	OptionTranslateNo    OptionTranslate = "no"
+	OptionTranslateYes   OptionTranslate = "yes"
 	OptionTranslateEmpty OptionTranslate = ""
 )
 
@@ -414,48 +419,31 @@ func (e *OptionElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<option")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<option")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 	for _, child := range e.children {
-		if err := child.Render(w); err != nil {
+		if err := child.Render(&sb); err != nil {
 			return err
 		}
 	}
 
-	if _, err := w.Write([]byte("</option>")); err != nil {
-		return err
-	}
+	sb.WriteString("</option>")
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }

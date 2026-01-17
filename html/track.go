@@ -70,22 +70,22 @@ func (e *TrackElement) ToggleClass(class string, enable bool) *TrackElement {
 type TrackKind string
 
 const (
-	TrackKindSubtitles    TrackKind = "subtitles"
-	TrackKindCaptions     TrackKind = "captions"
 	TrackKindChapters     TrackKind = "chapters"
 	TrackKindDescriptions TrackKind = "descriptions"
 	TrackKindMetadata     TrackKind = "metadata"
+	TrackKindSubtitles    TrackKind = "subtitles"
+	TrackKindCaptions     TrackKind = "captions"
 )
 
 type TrackAutocapitalize string
 
 const (
-	TrackAutocapitalizeNone       TrackAutocapitalize = "none"
-	TrackAutocapitalizeOff        TrackAutocapitalize = "off"
 	TrackAutocapitalizeOn         TrackAutocapitalize = "on"
 	TrackAutocapitalizeSentences  TrackAutocapitalize = "sentences"
 	TrackAutocapitalizeWords      TrackAutocapitalize = "words"
 	TrackAutocapitalizeCharacters TrackAutocapitalize = "characters"
+	TrackAutocapitalizeNone       TrackAutocapitalize = "none"
+	TrackAutocapitalizeOff        TrackAutocapitalize = "off"
 )
 
 type TrackAutocorrect string
@@ -108,16 +108,16 @@ const (
 type TrackDir string
 
 const (
-	TrackDirLtr  TrackDir = "ltr"
 	TrackDirRtl  TrackDir = "rtl"
 	TrackDirAuto TrackDir = "auto"
+	TrackDirLtr  TrackDir = "ltr"
 )
 
 type TrackDraggable string
 
 const (
-	TrackDraggableTrue  TrackDraggable = "true"
 	TrackDraggableFalse TrackDraggable = "false"
+	TrackDraggableTrue  TrackDraggable = "true"
 )
 
 type TrackEnterkeyhint string
@@ -135,8 +135,8 @@ const (
 type TrackHidden string
 
 const (
-	TrackHiddenUntilFound TrackHidden = "until-found"
 	TrackHiddenHidden     TrackHidden = "hidden"
+	TrackHiddenUntilFound TrackHidden = "until-found"
 	TrackHiddenEmpty      TrackHidden = ""
 )
 
@@ -172,8 +172,8 @@ const (
 type TrackWritingsuggestions string
 
 const (
-	TrackWritingsuggestionsFalse TrackWritingsuggestions = "false"
 	TrackWritingsuggestionsTrue  TrackWritingsuggestions = "true"
+	TrackWritingsuggestionsFalse TrackWritingsuggestions = "false"
 	TrackWritingsuggestionsEmpty TrackWritingsuggestions = ""
 )
 
@@ -411,39 +411,24 @@ func (e *TrackElement) Render(w io.Writer) error {
 		return nil
 	}
 
-	if _, err := w.Write([]byte("<track")); err != nil {
-		return err
-	}
+	var sb strings.Builder
+	sb.WriteString("<track")
 
-	c := len(e.attributes)
-	i := 1
 	for key, v := range e.attributes {
-		if i == 1 {
-			w.Write([]byte(" "))
+		sb.WriteByte(' ')
+		sb.WriteString(key)
+
+		strVal := fmt.Sprintf("%v", v)
+		if strVal != "" {
+			sb.WriteByte('=')
+			sb.WriteByte('"')
+			sb.WriteString(strVal)
+			sb.WriteByte('"')
 		}
-
-		w.Write([]byte(key))
-
-		// Enum types support empty attributes and can be omitted.
-		if fmt.Sprintf("%s", v) == "" {
-			w.Write([]byte(" "))
-			continue
-		}
-
-		w.Write([]byte("="))
-
-		w.Write([]byte("\"" + fmt.Sprintf("%v", v) + "\""))
-
-		if i < c {
-			w.Write([]byte(" "))
-		}
-
-		i++
 	}
 
-	if _, err := w.Write([]byte(">")); err != nil {
-		return err
-	}
+	sb.WriteByte('>')
 
-	return nil
+	_, err := io.WriteString(w, sb.String())
+	return err
 }
