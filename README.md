@@ -146,7 +146,7 @@ The primary goal of **htemel** is to provide a **compile-time safe** method for 
 **Example**:
 
 ```go
-html.Link().HttpEquiv(html.MetaHttpEquivEnumContentType)
+html.Link().HttpEquiv(html.MetaHttpEquivContentType)
 ```
 
 Attributes are mutually exclusive per element, with the most recent chain call taking precedence:
