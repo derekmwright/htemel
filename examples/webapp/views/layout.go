@@ -3,8 +3,8 @@ package views
 import (
 	"net/http"
 
-	. "github.com/derekmwright/htemel"
-	. "github.com/derekmwright/htemel/html"
+	. "github.com/go-htemel/htemel"
+	. "github.com/go-htemel/htemel/html"
 )
 
 type PageData struct {

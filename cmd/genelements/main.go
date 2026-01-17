@@ -12,7 +12,7 @@ import (
 
 	"github.com/go-htemel/spec"
 
-	"github.com/derekmwright/htemel/internal/generators"
+	"github.com/go-htemel/htemel/internal/generators"
 )
 
 func generate(pkg string, e *spec.Element) error {

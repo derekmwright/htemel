@@ -7,7 +7,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/derekmwright/htemel"
+	"github.com/go-htemel/htemel"
 	"golang.org/x/net/html"
 )
 

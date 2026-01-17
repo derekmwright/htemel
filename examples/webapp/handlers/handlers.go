@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"net/http"
 
-	"github.com/derekmwright/htemel/examples/webapp/views"
+	"github.com/go-htemel/htemel/examples/webapp/views"
 )
 
 func GetRoot(w http.ResponseWriter, r *http.Request) {

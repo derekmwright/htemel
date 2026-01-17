@@ -1,4 +1,4 @@
-module github.com/derekmwright/htemel
+module github.com/go-htemel/htemel
 
 go 1.24.5
 

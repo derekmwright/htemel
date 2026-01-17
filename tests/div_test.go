@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/derekmwright/htemel/html"
+	"github.com/go-htemel/htemel/html"
 )
 
 func TestDiv(t *testing.T) {

@@ -47,7 +47,7 @@ func SourceHeader(w io.Writer, pkg string, e *spec.Element, children ...Template
 	)
 
 	if !e.Void {
-		colImports.Add("github.com/derekmwright/htemel")
+		colImports.Add("github.com/go-htemel/htemel")
 	}
 
 	for _, child := range children {

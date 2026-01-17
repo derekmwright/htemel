@@ -1,8 +1,8 @@
 package views
 
 import (
-	. "github.com/derekmwright/htemel"
-	. "github.com/derekmwright/htemel/html"
+	. "github.com/go-htemel/htemel"
+	. "github.com/go-htemel/htemel/html"
 )
 
 func About() Node {

@@ -3,7 +3,7 @@ package main
 import (
 	"net/http"
 
-	"github.com/derekmwright/htemel/examples/webapp/handlers"
+	"github.com/go-htemel/htemel/examples/webapp/handlers"
 )
 
 func main() {

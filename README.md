@@ -1,4 +1,4 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/derekmwright/htemel)](https://goreportcard.com/report/github.com/derekmwright/htemel)
+[![Go Report Card](https://goreportcard.com/badge/github.com/go-htemel/htemel)](https://goreportcard.com/report/github.com/go-htemel/htemel)
 
 ⚠️ This project is a **work in progress**. Check back often and give it a ⭐ if you're interested!
 
@@ -11,7 +11,7 @@ Pronounced like "H-temel", **htemel** is a Go library for generating web documen
 To install htemel, run the following commands:
 
 ```shell
-go get github.com/derekmwright/htemel
+go get github.com/go-htemel/htemel
 ```
 
 ## Example
@@ -26,8 +26,8 @@ package main
 import (
     "os"
 
-    . "github.com/derekmwright/htemel"
-    . "github.com/derekmwright/htemel/html"
+    . "github.com/go-htemel/htemel"
+    . "github.com/go-htemel/htemel/html"
 )
 
 func MainLayout(children ...Node) Node {
@@ -116,7 +116,7 @@ package main
 import (
     "os"
 	
-    . "github.com/derekmwright/htemel/html"
+    . "github.com/go-htemel/htemel/html"
 )
 
 func main() {
