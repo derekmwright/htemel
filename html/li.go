@@ -70,6 +70,31 @@ func (e *LiElement) Textf(format string, args ...any) *LiElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *LiElement) If(cond bool, child htemel.Node) *LiElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *LiElement) IfElse(cond bool, then, els htemel.Node) *LiElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *LiElement) IfThen(cond bool, fn func(*LiElement)) *LiElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *LiElement) AddClass(classes ...string) *LiElement {
 	current := e.attributes["class"].(string)
@@ -94,19 +119,19 @@ func (e *LiElement) ToggleClass(class string, enable bool) *LiElement {
 type LiAutocapitalize string
 
 const (
+	LiAutocapitalizeWords      LiAutocapitalize = "words"
 	LiAutocapitalizeCharacters LiAutocapitalize = "characters"
 	LiAutocapitalizeNone       LiAutocapitalize = "none"
 	LiAutocapitalizeOff        LiAutocapitalize = "off"
 	LiAutocapitalizeOn         LiAutocapitalize = "on"
 	LiAutocapitalizeSentences  LiAutocapitalize = "sentences"
-	LiAutocapitalizeWords      LiAutocapitalize = "words"
 )
 
 type LiAutocorrect string
 
 const (
-	LiAutocorrectOn    LiAutocorrect = "on"
 	LiAutocorrectOff   LiAutocorrect = "off"
+	LiAutocorrectOn    LiAutocorrect = "on"
 	LiAutocorrectEmpty LiAutocorrect = ""
 )
 
@@ -122,9 +147,9 @@ const (
 type LiDir string
 
 const (
+	LiDirAuto LiDir = "auto"
 	LiDirLtr  LiDir = "ltr"
 	LiDirRtl  LiDir = "rtl"
-	LiDirAuto LiDir = "auto"
 )
 
 type LiDraggable string
@@ -137,13 +162,13 @@ const (
 type LiEnterkeyhint string
 
 const (
-	LiEnterkeyhintNext     LiEnterkeyhint = "next"
 	LiEnterkeyhintPrevious LiEnterkeyhint = "previous"
 	LiEnterkeyhintSearch   LiEnterkeyhint = "search"
 	LiEnterkeyhintSend     LiEnterkeyhint = "send"
 	LiEnterkeyhintDone     LiEnterkeyhint = "done"
 	LiEnterkeyhintEnter    LiEnterkeyhint = "enter"
 	LiEnterkeyhintGo       LiEnterkeyhint = "go"
+	LiEnterkeyhintNext     LiEnterkeyhint = "next"
 )
 
 type LiHidden string
@@ -157,14 +182,14 @@ const (
 type LiInputmode string
 
 const (
-	LiInputmodeEmail   LiInputmode = "email"
-	LiInputmodeNone    LiInputmode = "none"
 	LiInputmodeNumeric LiInputmode = "numeric"
 	LiInputmodeSearch  LiInputmode = "search"
 	LiInputmodeTel     LiInputmode = "tel"
 	LiInputmodeText    LiInputmode = "text"
 	LiInputmodeUrl     LiInputmode = "url"
 	LiInputmodeDecimal LiInputmode = "decimal"
+	LiInputmodeEmail   LiInputmode = "email"
+	LiInputmodeNone    LiInputmode = "none"
 )
 
 type LiSpellcheck string

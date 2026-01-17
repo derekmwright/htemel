@@ -70,12 +70,12 @@ func (e *BrElement) ToggleClass(class string, enable bool) *BrElement {
 type BrAutocapitalize string
 
 const (
-	BrAutocapitalizeWords      BrAutocapitalize = "words"
-	BrAutocapitalizeCharacters BrAutocapitalize = "characters"
 	BrAutocapitalizeNone       BrAutocapitalize = "none"
 	BrAutocapitalizeOff        BrAutocapitalize = "off"
 	BrAutocapitalizeOn         BrAutocapitalize = "on"
 	BrAutocapitalizeSentences  BrAutocapitalize = "sentences"
+	BrAutocapitalizeWords      BrAutocapitalize = "words"
+	BrAutocapitalizeCharacters BrAutocapitalize = "characters"
 )
 
 type BrAutocorrect string
@@ -113,13 +113,13 @@ const (
 type BrEnterkeyhint string
 
 const (
+	BrEnterkeyhintDone     BrEnterkeyhint = "done"
+	BrEnterkeyhintEnter    BrEnterkeyhint = "enter"
+	BrEnterkeyhintGo       BrEnterkeyhint = "go"
 	BrEnterkeyhintNext     BrEnterkeyhint = "next"
 	BrEnterkeyhintPrevious BrEnterkeyhint = "previous"
 	BrEnterkeyhintSearch   BrEnterkeyhint = "search"
 	BrEnterkeyhintSend     BrEnterkeyhint = "send"
-	BrEnterkeyhintDone     BrEnterkeyhint = "done"
-	BrEnterkeyhintEnter    BrEnterkeyhint = "enter"
-	BrEnterkeyhintGo       BrEnterkeyhint = "go"
 )
 
 type BrHidden string
@@ -133,21 +133,21 @@ const (
 type BrInputmode string
 
 const (
+	BrInputmodeTel     BrInputmode = "tel"
+	BrInputmodeText    BrInputmode = "text"
 	BrInputmodeUrl     BrInputmode = "url"
 	BrInputmodeDecimal BrInputmode = "decimal"
 	BrInputmodeEmail   BrInputmode = "email"
 	BrInputmodeNone    BrInputmode = "none"
 	BrInputmodeNumeric BrInputmode = "numeric"
 	BrInputmodeSearch  BrInputmode = "search"
-	BrInputmodeTel     BrInputmode = "tel"
-	BrInputmodeText    BrInputmode = "text"
 )
 
 type BrSpellcheck string
 
 const (
-	BrSpellcheckTrue  BrSpellcheck = "true"
 	BrSpellcheckFalse BrSpellcheck = "false"
+	BrSpellcheckTrue  BrSpellcheck = "true"
 	BrSpellcheckEmpty BrSpellcheck = ""
 )
 

@@ -70,6 +70,31 @@ func (e *IframeElement) Textf(format string, args ...any) *IframeElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *IframeElement) If(cond bool, child htemel.Node) *IframeElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *IframeElement) IfElse(cond bool, then, els htemel.Node) *IframeElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *IframeElement) IfThen(cond bool, fn func(*IframeElement)) *IframeElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *IframeElement) AddClass(classes ...string) *IframeElement {
 	current := e.attributes["class"].(string)
@@ -129,9 +154,9 @@ const (
 type IframeDir string
 
 const (
+	IframeDirRtl  IframeDir = "rtl"
 	IframeDirAuto IframeDir = "auto"
 	IframeDirLtr  IframeDir = "ltr"
-	IframeDirRtl  IframeDir = "rtl"
 )
 
 type IframeDraggable string
@@ -144,13 +169,13 @@ const (
 type IframeEnterkeyhint string
 
 const (
+	IframeEnterkeyhintGo       IframeEnterkeyhint = "go"
+	IframeEnterkeyhintNext     IframeEnterkeyhint = "next"
+	IframeEnterkeyhintPrevious IframeEnterkeyhint = "previous"
 	IframeEnterkeyhintSearch   IframeEnterkeyhint = "search"
 	IframeEnterkeyhintSend     IframeEnterkeyhint = "send"
 	IframeEnterkeyhintDone     IframeEnterkeyhint = "done"
 	IframeEnterkeyhintEnter    IframeEnterkeyhint = "enter"
-	IframeEnterkeyhintGo       IframeEnterkeyhint = "go"
-	IframeEnterkeyhintNext     IframeEnterkeyhint = "next"
-	IframeEnterkeyhintPrevious IframeEnterkeyhint = "previous"
 )
 
 type IframeHidden string
@@ -164,14 +189,14 @@ const (
 type IframeInputmode string
 
 const (
-	IframeInputmodeUrl     IframeInputmode = "url"
-	IframeInputmodeDecimal IframeInputmode = "decimal"
-	IframeInputmodeEmail   IframeInputmode = "email"
 	IframeInputmodeNone    IframeInputmode = "none"
 	IframeInputmodeNumeric IframeInputmode = "numeric"
 	IframeInputmodeSearch  IframeInputmode = "search"
 	IframeInputmodeTel     IframeInputmode = "tel"
 	IframeInputmodeText    IframeInputmode = "text"
+	IframeInputmodeUrl     IframeInputmode = "url"
+	IframeInputmodeDecimal IframeInputmode = "decimal"
+	IframeInputmodeEmail   IframeInputmode = "email"
 )
 
 type IframeSpellcheck string
@@ -193,8 +218,8 @@ const (
 type IframeWritingsuggestions string
 
 const (
-	IframeWritingsuggestionsTrue  IframeWritingsuggestions = "true"
 	IframeWritingsuggestionsFalse IframeWritingsuggestions = "false"
+	IframeWritingsuggestionsTrue  IframeWritingsuggestions = "true"
 	IframeWritingsuggestionsEmpty IframeWritingsuggestions = ""
 )
 

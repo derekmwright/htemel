@@ -70,6 +70,31 @@ func (e *NavElement) Textf(format string, args ...any) *NavElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *NavElement) If(cond bool, child htemel.Node) *NavElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *NavElement) IfElse(cond bool, then, els htemel.Node) *NavElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *NavElement) IfThen(cond bool, fn func(*NavElement)) *NavElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *NavElement) AddClass(classes ...string) *NavElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *NavElement) ToggleClass(class string, enable bool) *NavElement {
 type NavAutocapitalize string
 
 const (
-	NavAutocapitalizeCharacters NavAutocapitalize = "characters"
-	NavAutocapitalizeNone       NavAutocapitalize = "none"
-	NavAutocapitalizeOff        NavAutocapitalize = "off"
 	NavAutocapitalizeOn         NavAutocapitalize = "on"
 	NavAutocapitalizeSentences  NavAutocapitalize = "sentences"
 	NavAutocapitalizeWords      NavAutocapitalize = "words"
+	NavAutocapitalizeCharacters NavAutocapitalize = "characters"
+	NavAutocapitalizeNone       NavAutocapitalize = "none"
+	NavAutocapitalizeOff        NavAutocapitalize = "off"
 )
 
 type NavAutocorrect string
@@ -122,9 +147,9 @@ const (
 type NavDir string
 
 const (
-	NavDirAuto NavDir = "auto"
 	NavDirLtr  NavDir = "ltr"
 	NavDirRtl  NavDir = "rtl"
+	NavDirAuto NavDir = "auto"
 )
 
 type NavDraggable string
@@ -137,13 +162,13 @@ const (
 type NavEnterkeyhint string
 
 const (
+	NavEnterkeyhintSearch   NavEnterkeyhint = "search"
 	NavEnterkeyhintSend     NavEnterkeyhint = "send"
 	NavEnterkeyhintDone     NavEnterkeyhint = "done"
 	NavEnterkeyhintEnter    NavEnterkeyhint = "enter"
 	NavEnterkeyhintGo       NavEnterkeyhint = "go"
 	NavEnterkeyhintNext     NavEnterkeyhint = "next"
 	NavEnterkeyhintPrevious NavEnterkeyhint = "previous"
-	NavEnterkeyhintSearch   NavEnterkeyhint = "search"
 )
 
 type NavHidden string
@@ -157,6 +182,7 @@ const (
 type NavInputmode string
 
 const (
+	NavInputmodeEmail   NavInputmode = "email"
 	NavInputmodeNone    NavInputmode = "none"
 	NavInputmodeNumeric NavInputmode = "numeric"
 	NavInputmodeSearch  NavInputmode = "search"
@@ -164,14 +190,13 @@ const (
 	NavInputmodeText    NavInputmode = "text"
 	NavInputmodeUrl     NavInputmode = "url"
 	NavInputmodeDecimal NavInputmode = "decimal"
-	NavInputmodeEmail   NavInputmode = "email"
 )
 
 type NavSpellcheck string
 
 const (
-	NavSpellcheckFalse NavSpellcheck = "false"
 	NavSpellcheckTrue  NavSpellcheck = "true"
+	NavSpellcheckFalse NavSpellcheck = "false"
 	NavSpellcheckEmpty NavSpellcheck = ""
 )
 
@@ -186,8 +211,8 @@ const (
 type NavWritingsuggestions string
 
 const (
-	NavWritingsuggestionsTrue  NavWritingsuggestions = "true"
 	NavWritingsuggestionsFalse NavWritingsuggestions = "false"
+	NavWritingsuggestionsTrue  NavWritingsuggestions = "true"
 	NavWritingsuggestionsEmpty NavWritingsuggestions = ""
 )
 

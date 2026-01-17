@@ -98,9 +98,9 @@ const (
 type ColDir string
 
 const (
-	ColDirRtl  ColDir = "rtl"
 	ColDirAuto ColDir = "auto"
 	ColDirLtr  ColDir = "ltr"
+	ColDirRtl  ColDir = "rtl"
 )
 
 type ColDraggable string
@@ -113,13 +113,13 @@ const (
 type ColEnterkeyhint string
 
 const (
+	ColEnterkeyhintGo       ColEnterkeyhint = "go"
+	ColEnterkeyhintNext     ColEnterkeyhint = "next"
+	ColEnterkeyhintPrevious ColEnterkeyhint = "previous"
 	ColEnterkeyhintSearch   ColEnterkeyhint = "search"
 	ColEnterkeyhintSend     ColEnterkeyhint = "send"
 	ColEnterkeyhintDone     ColEnterkeyhint = "done"
 	ColEnterkeyhintEnter    ColEnterkeyhint = "enter"
-	ColEnterkeyhintGo       ColEnterkeyhint = "go"
-	ColEnterkeyhintNext     ColEnterkeyhint = "next"
-	ColEnterkeyhintPrevious ColEnterkeyhint = "previous"
 )
 
 type ColHidden string
@@ -133,21 +133,21 @@ const (
 type ColInputmode string
 
 const (
-	ColInputmodeDecimal ColInputmode = "decimal"
-	ColInputmodeEmail   ColInputmode = "email"
 	ColInputmodeNone    ColInputmode = "none"
 	ColInputmodeNumeric ColInputmode = "numeric"
 	ColInputmodeSearch  ColInputmode = "search"
 	ColInputmodeTel     ColInputmode = "tel"
 	ColInputmodeText    ColInputmode = "text"
 	ColInputmodeUrl     ColInputmode = "url"
+	ColInputmodeDecimal ColInputmode = "decimal"
+	ColInputmodeEmail   ColInputmode = "email"
 )
 
 type ColSpellcheck string
 
 const (
-	ColSpellcheckFalse ColSpellcheck = "false"
 	ColSpellcheckTrue  ColSpellcheck = "true"
+	ColSpellcheckFalse ColSpellcheck = "false"
 	ColSpellcheckEmpty ColSpellcheck = ""
 )
 

@@ -70,6 +70,31 @@ func (e *OutputElement) Textf(format string, args ...any) *OutputElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *OutputElement) If(cond bool, child htemel.Node) *OutputElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *OutputElement) IfElse(cond bool, then, els htemel.Node) *OutputElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *OutputElement) IfThen(cond bool, fn func(*OutputElement)) *OutputElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *OutputElement) AddClass(classes ...string) *OutputElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *OutputElement) ToggleClass(class string, enable bool) *OutputElement {
 type OutputAutocapitalize string
 
 const (
-	OutputAutocapitalizeCharacters OutputAutocapitalize = "characters"
-	OutputAutocapitalizeNone       OutputAutocapitalize = "none"
 	OutputAutocapitalizeOff        OutputAutocapitalize = "off"
 	OutputAutocapitalizeOn         OutputAutocapitalize = "on"
 	OutputAutocapitalizeSentences  OutputAutocapitalize = "sentences"
 	OutputAutocapitalizeWords      OutputAutocapitalize = "words"
+	OutputAutocapitalizeCharacters OutputAutocapitalize = "characters"
+	OutputAutocapitalizeNone       OutputAutocapitalize = "none"
 )
 
 type OutputAutocorrect string
@@ -113,18 +138,18 @@ const (
 type OutputContenteditable string
 
 const (
-	OutputContenteditableFalse         OutputContenteditable = "false"
 	OutputContenteditablePlaintextOnly OutputContenteditable = "plaintext-only"
 	OutputContenteditableTrue          OutputContenteditable = "true"
+	OutputContenteditableFalse         OutputContenteditable = "false"
 	OutputContenteditableEmpty         OutputContenteditable = ""
 )
 
 type OutputDir string
 
 const (
-	OutputDirRtl  OutputDir = "rtl"
 	OutputDirAuto OutputDir = "auto"
 	OutputDirLtr  OutputDir = "ltr"
+	OutputDirRtl  OutputDir = "rtl"
 )
 
 type OutputDraggable string
@@ -137,13 +162,13 @@ const (
 type OutputEnterkeyhint string
 
 const (
+	OutputEnterkeyhintDone     OutputEnterkeyhint = "done"
+	OutputEnterkeyhintEnter    OutputEnterkeyhint = "enter"
 	OutputEnterkeyhintGo       OutputEnterkeyhint = "go"
 	OutputEnterkeyhintNext     OutputEnterkeyhint = "next"
 	OutputEnterkeyhintPrevious OutputEnterkeyhint = "previous"
 	OutputEnterkeyhintSearch   OutputEnterkeyhint = "search"
 	OutputEnterkeyhintSend     OutputEnterkeyhint = "send"
-	OutputEnterkeyhintDone     OutputEnterkeyhint = "done"
-	OutputEnterkeyhintEnter    OutputEnterkeyhint = "enter"
 )
 
 type OutputHidden string
@@ -157,6 +182,7 @@ const (
 type OutputInputmode string
 
 const (
+	OutputInputmodeText    OutputInputmode = "text"
 	OutputInputmodeUrl     OutputInputmode = "url"
 	OutputInputmodeDecimal OutputInputmode = "decimal"
 	OutputInputmodeEmail   OutputInputmode = "email"
@@ -164,7 +190,6 @@ const (
 	OutputInputmodeNumeric OutputInputmode = "numeric"
 	OutputInputmodeSearch  OutputInputmode = "search"
 	OutputInputmodeTel     OutputInputmode = "tel"
-	OutputInputmodeText    OutputInputmode = "text"
 )
 
 type OutputSpellcheck string

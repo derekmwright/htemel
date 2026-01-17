@@ -70,6 +70,31 @@ func (e *DelElement) Textf(format string, args ...any) *DelElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *DelElement) If(cond bool, child htemel.Node) *DelElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *DelElement) IfElse(cond bool, then, els htemel.Node) *DelElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *DelElement) IfThen(cond bool, fn func(*DelElement)) *DelElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *DelElement) AddClass(classes ...string) *DelElement {
 	current := e.attributes["class"].(string)
@@ -137,13 +162,13 @@ const (
 type DelEnterkeyhint string
 
 const (
-	DelEnterkeyhintDone     DelEnterkeyhint = "done"
 	DelEnterkeyhintEnter    DelEnterkeyhint = "enter"
 	DelEnterkeyhintGo       DelEnterkeyhint = "go"
 	DelEnterkeyhintNext     DelEnterkeyhint = "next"
 	DelEnterkeyhintPrevious DelEnterkeyhint = "previous"
 	DelEnterkeyhintSearch   DelEnterkeyhint = "search"
 	DelEnterkeyhintSend     DelEnterkeyhint = "send"
+	DelEnterkeyhintDone     DelEnterkeyhint = "done"
 )
 
 type DelHidden string
@@ -157,14 +182,14 @@ const (
 type DelInputmode string
 
 const (
-	DelInputmodeDecimal DelInputmode = "decimal"
-	DelInputmodeEmail   DelInputmode = "email"
 	DelInputmodeNone    DelInputmode = "none"
 	DelInputmodeNumeric DelInputmode = "numeric"
 	DelInputmodeSearch  DelInputmode = "search"
 	DelInputmodeTel     DelInputmode = "tel"
 	DelInputmodeText    DelInputmode = "text"
 	DelInputmodeUrl     DelInputmode = "url"
+	DelInputmodeDecimal DelInputmode = "decimal"
+	DelInputmodeEmail   DelInputmode = "email"
 )
 
 type DelSpellcheck string
@@ -186,8 +211,8 @@ const (
 type DelWritingsuggestions string
 
 const (
-	DelWritingsuggestionsTrue  DelWritingsuggestions = "true"
 	DelWritingsuggestionsFalse DelWritingsuggestions = "false"
+	DelWritingsuggestionsTrue  DelWritingsuggestions = "true"
 	DelWritingsuggestionsEmpty DelWritingsuggestions = ""
 )
 

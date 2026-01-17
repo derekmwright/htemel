@@ -80,19 +80,19 @@ const (
 type TrackAutocapitalize string
 
 const (
-	TrackAutocapitalizeOn         TrackAutocapitalize = "on"
-	TrackAutocapitalizeSentences  TrackAutocapitalize = "sentences"
-	TrackAutocapitalizeWords      TrackAutocapitalize = "words"
 	TrackAutocapitalizeCharacters TrackAutocapitalize = "characters"
 	TrackAutocapitalizeNone       TrackAutocapitalize = "none"
 	TrackAutocapitalizeOff        TrackAutocapitalize = "off"
+	TrackAutocapitalizeOn         TrackAutocapitalize = "on"
+	TrackAutocapitalizeSentences  TrackAutocapitalize = "sentences"
+	TrackAutocapitalizeWords      TrackAutocapitalize = "words"
 )
 
 type TrackAutocorrect string
 
 const (
-	TrackAutocorrectOff   TrackAutocorrect = "off"
 	TrackAutocorrectOn    TrackAutocorrect = "on"
+	TrackAutocorrectOff   TrackAutocorrect = "off"
 	TrackAutocorrectEmpty TrackAutocorrect = ""
 )
 
@@ -108,9 +108,9 @@ const (
 type TrackDir string
 
 const (
+	TrackDirLtr  TrackDir = "ltr"
 	TrackDirRtl  TrackDir = "rtl"
 	TrackDirAuto TrackDir = "auto"
-	TrackDirLtr  TrackDir = "ltr"
 )
 
 type TrackDraggable string
@@ -123,34 +123,34 @@ const (
 type TrackEnterkeyhint string
 
 const (
+	TrackEnterkeyhintSend     TrackEnterkeyhint = "send"
 	TrackEnterkeyhintDone     TrackEnterkeyhint = "done"
 	TrackEnterkeyhintEnter    TrackEnterkeyhint = "enter"
 	TrackEnterkeyhintGo       TrackEnterkeyhint = "go"
 	TrackEnterkeyhintNext     TrackEnterkeyhint = "next"
 	TrackEnterkeyhintPrevious TrackEnterkeyhint = "previous"
 	TrackEnterkeyhintSearch   TrackEnterkeyhint = "search"
-	TrackEnterkeyhintSend     TrackEnterkeyhint = "send"
 )
 
 type TrackHidden string
 
 const (
-	TrackHiddenHidden     TrackHidden = "hidden"
 	TrackHiddenUntilFound TrackHidden = "until-found"
+	TrackHiddenHidden     TrackHidden = "hidden"
 	TrackHiddenEmpty      TrackHidden = ""
 )
 
 type TrackInputmode string
 
 const (
+	TrackInputmodeDecimal TrackInputmode = "decimal"
+	TrackInputmodeEmail   TrackInputmode = "email"
+	TrackInputmodeNone    TrackInputmode = "none"
 	TrackInputmodeNumeric TrackInputmode = "numeric"
 	TrackInputmodeSearch  TrackInputmode = "search"
 	TrackInputmodeTel     TrackInputmode = "tel"
 	TrackInputmodeText    TrackInputmode = "text"
 	TrackInputmodeUrl     TrackInputmode = "url"
-	TrackInputmodeDecimal TrackInputmode = "decimal"
-	TrackInputmodeEmail   TrackInputmode = "email"
-	TrackInputmodeNone    TrackInputmode = "none"
 )
 
 type TrackSpellcheck string
@@ -172,8 +172,8 @@ const (
 type TrackWritingsuggestions string
 
 const (
-	TrackWritingsuggestionsTrue  TrackWritingsuggestions = "true"
 	TrackWritingsuggestionsFalse TrackWritingsuggestions = "false"
+	TrackWritingsuggestionsTrue  TrackWritingsuggestions = "true"
 	TrackWritingsuggestionsEmpty TrackWritingsuggestions = ""
 )
 

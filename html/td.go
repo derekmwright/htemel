@@ -70,6 +70,31 @@ func (e *TdElement) Textf(format string, args ...any) *TdElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *TdElement) If(cond bool, child htemel.Node) *TdElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *TdElement) IfElse(cond bool, then, els htemel.Node) *TdElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *TdElement) IfThen(cond bool, fn func(*TdElement)) *TdElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *TdElement) AddClass(classes ...string) *TdElement {
 	current := e.attributes["class"].(string)
@@ -94,19 +119,19 @@ func (e *TdElement) ToggleClass(class string, enable bool) *TdElement {
 type TdAutocapitalize string
 
 const (
-	TdAutocapitalizeOn         TdAutocapitalize = "on"
-	TdAutocapitalizeSentences  TdAutocapitalize = "sentences"
-	TdAutocapitalizeWords      TdAutocapitalize = "words"
 	TdAutocapitalizeCharacters TdAutocapitalize = "characters"
 	TdAutocapitalizeNone       TdAutocapitalize = "none"
 	TdAutocapitalizeOff        TdAutocapitalize = "off"
+	TdAutocapitalizeOn         TdAutocapitalize = "on"
+	TdAutocapitalizeSentences  TdAutocapitalize = "sentences"
+	TdAutocapitalizeWords      TdAutocapitalize = "words"
 )
 
 type TdAutocorrect string
 
 const (
-	TdAutocorrectOn    TdAutocorrect = "on"
 	TdAutocorrectOff   TdAutocorrect = "off"
+	TdAutocorrectOn    TdAutocorrect = "on"
 	TdAutocorrectEmpty TdAutocorrect = ""
 )
 
@@ -122,9 +147,9 @@ const (
 type TdDir string
 
 const (
-	TdDirAuto TdDir = "auto"
 	TdDirLtr  TdDir = "ltr"
 	TdDirRtl  TdDir = "rtl"
+	TdDirAuto TdDir = "auto"
 )
 
 type TdDraggable string
@@ -137,34 +162,34 @@ const (
 type TdEnterkeyhint string
 
 const (
-	TdEnterkeyhintPrevious TdEnterkeyhint = "previous"
 	TdEnterkeyhintSearch   TdEnterkeyhint = "search"
 	TdEnterkeyhintSend     TdEnterkeyhint = "send"
 	TdEnterkeyhintDone     TdEnterkeyhint = "done"
 	TdEnterkeyhintEnter    TdEnterkeyhint = "enter"
 	TdEnterkeyhintGo       TdEnterkeyhint = "go"
 	TdEnterkeyhintNext     TdEnterkeyhint = "next"
+	TdEnterkeyhintPrevious TdEnterkeyhint = "previous"
 )
 
 type TdHidden string
 
 const (
-	TdHiddenHidden     TdHidden = "hidden"
 	TdHiddenUntilFound TdHidden = "until-found"
+	TdHiddenHidden     TdHidden = "hidden"
 	TdHiddenEmpty      TdHidden = ""
 )
 
 type TdInputmode string
 
 const (
+	TdInputmodeNumeric TdInputmode = "numeric"
+	TdInputmodeSearch  TdInputmode = "search"
+	TdInputmodeTel     TdInputmode = "tel"
 	TdInputmodeText    TdInputmode = "text"
 	TdInputmodeUrl     TdInputmode = "url"
 	TdInputmodeDecimal TdInputmode = "decimal"
 	TdInputmodeEmail   TdInputmode = "email"
 	TdInputmodeNone    TdInputmode = "none"
-	TdInputmodeNumeric TdInputmode = "numeric"
-	TdInputmodeSearch  TdInputmode = "search"
-	TdInputmodeTel     TdInputmode = "tel"
 )
 
 type TdSpellcheck string
@@ -186,8 +211,8 @@ const (
 type TdWritingsuggestions string
 
 const (
-	TdWritingsuggestionsFalse TdWritingsuggestions = "false"
 	TdWritingsuggestionsTrue  TdWritingsuggestions = "true"
+	TdWritingsuggestionsFalse TdWritingsuggestions = "false"
 	TdWritingsuggestionsEmpty TdWritingsuggestions = ""
 )
 

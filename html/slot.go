@@ -70,6 +70,31 @@ func (e *SlotElement) Textf(format string, args ...any) *SlotElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *SlotElement) If(cond bool, child htemel.Node) *SlotElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *SlotElement) IfElse(cond bool, then, els htemel.Node) *SlotElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *SlotElement) IfThen(cond bool, fn func(*SlotElement)) *SlotElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *SlotElement) AddClass(classes ...string) *SlotElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *SlotElement) ToggleClass(class string, enable bool) *SlotElement {
 type SlotAutocapitalize string
 
 const (
-	SlotAutocapitalizeSentences  SlotAutocapitalize = "sentences"
-	SlotAutocapitalizeWords      SlotAutocapitalize = "words"
-	SlotAutocapitalizeCharacters SlotAutocapitalize = "characters"
 	SlotAutocapitalizeNone       SlotAutocapitalize = "none"
 	SlotAutocapitalizeOff        SlotAutocapitalize = "off"
 	SlotAutocapitalizeOn         SlotAutocapitalize = "on"
+	SlotAutocapitalizeSentences  SlotAutocapitalize = "sentences"
+	SlotAutocapitalizeWords      SlotAutocapitalize = "words"
+	SlotAutocapitalizeCharacters SlotAutocapitalize = "characters"
 )
 
 type SlotAutocorrect string
@@ -113,37 +138,37 @@ const (
 type SlotContenteditable string
 
 const (
-	SlotContenteditableFalse         SlotContenteditable = "false"
 	SlotContenteditablePlaintextOnly SlotContenteditable = "plaintext-only"
 	SlotContenteditableTrue          SlotContenteditable = "true"
+	SlotContenteditableFalse         SlotContenteditable = "false"
 	SlotContenteditableEmpty         SlotContenteditable = ""
 )
 
 type SlotDir string
 
 const (
+	SlotDirAuto SlotDir = "auto"
 	SlotDirLtr  SlotDir = "ltr"
 	SlotDirRtl  SlotDir = "rtl"
-	SlotDirAuto SlotDir = "auto"
 )
 
 type SlotDraggable string
 
 const (
-	SlotDraggableFalse SlotDraggable = "false"
 	SlotDraggableTrue  SlotDraggable = "true"
+	SlotDraggableFalse SlotDraggable = "false"
 )
 
 type SlotEnterkeyhint string
 
 const (
+	SlotEnterkeyhintPrevious SlotEnterkeyhint = "previous"
+	SlotEnterkeyhintSearch   SlotEnterkeyhint = "search"
+	SlotEnterkeyhintSend     SlotEnterkeyhint = "send"
 	SlotEnterkeyhintDone     SlotEnterkeyhint = "done"
 	SlotEnterkeyhintEnter    SlotEnterkeyhint = "enter"
 	SlotEnterkeyhintGo       SlotEnterkeyhint = "go"
 	SlotEnterkeyhintNext     SlotEnterkeyhint = "next"
-	SlotEnterkeyhintPrevious SlotEnterkeyhint = "previous"
-	SlotEnterkeyhintSearch   SlotEnterkeyhint = "search"
-	SlotEnterkeyhintSend     SlotEnterkeyhint = "send"
 )
 
 type SlotHidden string
@@ -157,6 +182,7 @@ const (
 type SlotInputmode string
 
 const (
+	SlotInputmodeEmail   SlotInputmode = "email"
 	SlotInputmodeNone    SlotInputmode = "none"
 	SlotInputmodeNumeric SlotInputmode = "numeric"
 	SlotInputmodeSearch  SlotInputmode = "search"
@@ -164,7 +190,6 @@ const (
 	SlotInputmodeText    SlotInputmode = "text"
 	SlotInputmodeUrl     SlotInputmode = "url"
 	SlotInputmodeDecimal SlotInputmode = "decimal"
-	SlotInputmodeEmail   SlotInputmode = "email"
 )
 
 type SlotSpellcheck string
@@ -186,8 +211,8 @@ const (
 type SlotWritingsuggestions string
 
 const (
-	SlotWritingsuggestionsFalse SlotWritingsuggestions = "false"
 	SlotWritingsuggestionsTrue  SlotWritingsuggestions = "true"
+	SlotWritingsuggestionsFalse SlotWritingsuggestions = "false"
 	SlotWritingsuggestionsEmpty SlotWritingsuggestions = ""
 )
 

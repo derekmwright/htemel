@@ -70,6 +70,31 @@ func (e *HeadElement) Textf(format string, args ...any) *HeadElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *HeadElement) If(cond bool, child htemel.Node) *HeadElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *HeadElement) IfElse(cond bool, then, els htemel.Node) *HeadElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *HeadElement) IfThen(cond bool, fn func(*HeadElement)) *HeadElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *HeadElement) AddClass(classes ...string) *HeadElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *HeadElement) ToggleClass(class string, enable bool) *HeadElement {
 type HeadAutocapitalize string
 
 const (
+	HeadAutocapitalizeCharacters HeadAutocapitalize = "characters"
+	HeadAutocapitalizeNone       HeadAutocapitalize = "none"
 	HeadAutocapitalizeOff        HeadAutocapitalize = "off"
 	HeadAutocapitalizeOn         HeadAutocapitalize = "on"
 	HeadAutocapitalizeSentences  HeadAutocapitalize = "sentences"
 	HeadAutocapitalizeWords      HeadAutocapitalize = "words"
-	HeadAutocapitalizeCharacters HeadAutocapitalize = "characters"
-	HeadAutocapitalizeNone       HeadAutocapitalize = "none"
 )
 
 type HeadAutocorrect string
@@ -113,9 +138,9 @@ const (
 type HeadContenteditable string
 
 const (
+	HeadContenteditableFalse         HeadContenteditable = "false"
 	HeadContenteditablePlaintextOnly HeadContenteditable = "plaintext-only"
 	HeadContenteditableTrue          HeadContenteditable = "true"
-	HeadContenteditableFalse         HeadContenteditable = "false"
 	HeadContenteditableEmpty         HeadContenteditable = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type HeadEnterkeyhint string
 
 const (
-	HeadEnterkeyhintSearch   HeadEnterkeyhint = "search"
-	HeadEnterkeyhintSend     HeadEnterkeyhint = "send"
 	HeadEnterkeyhintDone     HeadEnterkeyhint = "done"
 	HeadEnterkeyhintEnter    HeadEnterkeyhint = "enter"
 	HeadEnterkeyhintGo       HeadEnterkeyhint = "go"
 	HeadEnterkeyhintNext     HeadEnterkeyhint = "next"
 	HeadEnterkeyhintPrevious HeadEnterkeyhint = "previous"
+	HeadEnterkeyhintSearch   HeadEnterkeyhint = "search"
+	HeadEnterkeyhintSend     HeadEnterkeyhint = "send"
 )
 
 type HeadHidden string
@@ -157,14 +182,14 @@ const (
 type HeadInputmode string
 
 const (
-	HeadInputmodeEmail   HeadInputmode = "email"
-	HeadInputmodeNone    HeadInputmode = "none"
 	HeadInputmodeNumeric HeadInputmode = "numeric"
 	HeadInputmodeSearch  HeadInputmode = "search"
 	HeadInputmodeTel     HeadInputmode = "tel"
 	HeadInputmodeText    HeadInputmode = "text"
 	HeadInputmodeUrl     HeadInputmode = "url"
 	HeadInputmodeDecimal HeadInputmode = "decimal"
+	HeadInputmodeEmail   HeadInputmode = "email"
+	HeadInputmodeNone    HeadInputmode = "none"
 )
 
 type HeadSpellcheck string
@@ -186,8 +211,8 @@ const (
 type HeadWritingsuggestions string
 
 const (
-	HeadWritingsuggestionsFalse HeadWritingsuggestions = "false"
 	HeadWritingsuggestionsTrue  HeadWritingsuggestions = "true"
+	HeadWritingsuggestionsFalse HeadWritingsuggestions = "false"
 	HeadWritingsuggestionsEmpty HeadWritingsuggestions = ""
 )
 

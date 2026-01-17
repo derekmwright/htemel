@@ -70,6 +70,31 @@ func (e *RpElement) Textf(format string, args ...any) *RpElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *RpElement) If(cond bool, child htemel.Node) *RpElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *RpElement) IfElse(cond bool, then, els htemel.Node) *RpElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *RpElement) IfThen(cond bool, fn func(*RpElement)) *RpElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *RpElement) AddClass(classes ...string) *RpElement {
 	current := e.attributes["class"].(string)
@@ -113,18 +138,18 @@ const (
 type RpContenteditable string
 
 const (
-	RpContenteditableTrue          RpContenteditable = "true"
 	RpContenteditableFalse         RpContenteditable = "false"
 	RpContenteditablePlaintextOnly RpContenteditable = "plaintext-only"
+	RpContenteditableTrue          RpContenteditable = "true"
 	RpContenteditableEmpty         RpContenteditable = ""
 )
 
 type RpDir string
 
 const (
-	RpDirLtr  RpDir = "ltr"
 	RpDirRtl  RpDir = "rtl"
 	RpDirAuto RpDir = "auto"
+	RpDirLtr  RpDir = "ltr"
 )
 
 type RpDraggable string
@@ -137,13 +162,13 @@ const (
 type RpEnterkeyhint string
 
 const (
-	RpEnterkeyhintPrevious RpEnterkeyhint = "previous"
-	RpEnterkeyhintSearch   RpEnterkeyhint = "search"
 	RpEnterkeyhintSend     RpEnterkeyhint = "send"
 	RpEnterkeyhintDone     RpEnterkeyhint = "done"
 	RpEnterkeyhintEnter    RpEnterkeyhint = "enter"
 	RpEnterkeyhintGo       RpEnterkeyhint = "go"
 	RpEnterkeyhintNext     RpEnterkeyhint = "next"
+	RpEnterkeyhintPrevious RpEnterkeyhint = "previous"
+	RpEnterkeyhintSearch   RpEnterkeyhint = "search"
 )
 
 type RpHidden string
@@ -157,14 +182,14 @@ const (
 type RpInputmode string
 
 const (
+	RpInputmodeSearch  RpInputmode = "search"
+	RpInputmodeTel     RpInputmode = "tel"
+	RpInputmodeText    RpInputmode = "text"
 	RpInputmodeUrl     RpInputmode = "url"
 	RpInputmodeDecimal RpInputmode = "decimal"
 	RpInputmodeEmail   RpInputmode = "email"
 	RpInputmodeNone    RpInputmode = "none"
 	RpInputmodeNumeric RpInputmode = "numeric"
-	RpInputmodeSearch  RpInputmode = "search"
-	RpInputmodeTel     RpInputmode = "tel"
-	RpInputmodeText    RpInputmode = "text"
 )
 
 type RpSpellcheck string

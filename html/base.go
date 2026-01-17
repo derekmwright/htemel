@@ -106,8 +106,8 @@ const (
 type BaseDraggable string
 
 const (
-	BaseDraggableTrue  BaseDraggable = "true"
 	BaseDraggableFalse BaseDraggable = "false"
+	BaseDraggableTrue  BaseDraggable = "true"
 )
 
 type BaseEnterkeyhint string
@@ -133,14 +133,14 @@ const (
 type BaseInputmode string
 
 const (
-	BaseInputmodeSearch  BaseInputmode = "search"
-	BaseInputmodeTel     BaseInputmode = "tel"
-	BaseInputmodeText    BaseInputmode = "text"
-	BaseInputmodeUrl     BaseInputmode = "url"
 	BaseInputmodeDecimal BaseInputmode = "decimal"
 	BaseInputmodeEmail   BaseInputmode = "email"
 	BaseInputmodeNone    BaseInputmode = "none"
 	BaseInputmodeNumeric BaseInputmode = "numeric"
+	BaseInputmodeSearch  BaseInputmode = "search"
+	BaseInputmodeTel     BaseInputmode = "tel"
+	BaseInputmodeText    BaseInputmode = "text"
+	BaseInputmodeUrl     BaseInputmode = "url"
 )
 
 type BaseSpellcheck string
@@ -154,8 +154,8 @@ const (
 type BaseTranslate string
 
 const (
-	BaseTranslateYes   BaseTranslate = "yes"
 	BaseTranslateNo    BaseTranslate = "no"
+	BaseTranslateYes   BaseTranslate = "yes"
 	BaseTranslateEmpty BaseTranslate = ""
 )
 

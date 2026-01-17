@@ -70,6 +70,31 @@ func (e *SectionElement) Textf(format string, args ...any) *SectionElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *SectionElement) If(cond bool, child htemel.Node) *SectionElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *SectionElement) IfElse(cond bool, then, els htemel.Node) *SectionElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *SectionElement) IfThen(cond bool, fn func(*SectionElement)) *SectionElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *SectionElement) AddClass(classes ...string) *SectionElement {
 	current := e.attributes["class"].(string)
@@ -94,37 +119,37 @@ func (e *SectionElement) ToggleClass(class string, enable bool) *SectionElement 
 type SectionAutocapitalize string
 
 const (
-	SectionAutocapitalizeNone       SectionAutocapitalize = "none"
 	SectionAutocapitalizeOff        SectionAutocapitalize = "off"
 	SectionAutocapitalizeOn         SectionAutocapitalize = "on"
 	SectionAutocapitalizeSentences  SectionAutocapitalize = "sentences"
 	SectionAutocapitalizeWords      SectionAutocapitalize = "words"
 	SectionAutocapitalizeCharacters SectionAutocapitalize = "characters"
+	SectionAutocapitalizeNone       SectionAutocapitalize = "none"
 )
 
 type SectionAutocorrect string
 
 const (
-	SectionAutocorrectOn    SectionAutocorrect = "on"
 	SectionAutocorrectOff   SectionAutocorrect = "off"
+	SectionAutocorrectOn    SectionAutocorrect = "on"
 	SectionAutocorrectEmpty SectionAutocorrect = ""
 )
 
 type SectionContenteditable string
 
 const (
+	SectionContenteditableFalse         SectionContenteditable = "false"
 	SectionContenteditablePlaintextOnly SectionContenteditable = "plaintext-only"
 	SectionContenteditableTrue          SectionContenteditable = "true"
-	SectionContenteditableFalse         SectionContenteditable = "false"
 	SectionContenteditableEmpty         SectionContenteditable = ""
 )
 
 type SectionDir string
 
 const (
-	SectionDirAuto SectionDir = "auto"
 	SectionDirLtr  SectionDir = "ltr"
 	SectionDirRtl  SectionDir = "rtl"
+	SectionDirAuto SectionDir = "auto"
 )
 
 type SectionDraggable string
@@ -137,13 +162,13 @@ const (
 type SectionEnterkeyhint string
 
 const (
-	SectionEnterkeyhintEnter    SectionEnterkeyhint = "enter"
-	SectionEnterkeyhintGo       SectionEnterkeyhint = "go"
-	SectionEnterkeyhintNext     SectionEnterkeyhint = "next"
 	SectionEnterkeyhintPrevious SectionEnterkeyhint = "previous"
 	SectionEnterkeyhintSearch   SectionEnterkeyhint = "search"
 	SectionEnterkeyhintSend     SectionEnterkeyhint = "send"
 	SectionEnterkeyhintDone     SectionEnterkeyhint = "done"
+	SectionEnterkeyhintEnter    SectionEnterkeyhint = "enter"
+	SectionEnterkeyhintGo       SectionEnterkeyhint = "go"
+	SectionEnterkeyhintNext     SectionEnterkeyhint = "next"
 )
 
 type SectionHidden string
@@ -186,8 +211,8 @@ const (
 type SectionWritingsuggestions string
 
 const (
-	SectionWritingsuggestionsFalse SectionWritingsuggestions = "false"
 	SectionWritingsuggestionsTrue  SectionWritingsuggestions = "true"
+	SectionWritingsuggestionsFalse SectionWritingsuggestions = "false"
 	SectionWritingsuggestionsEmpty SectionWritingsuggestions = ""
 )
 

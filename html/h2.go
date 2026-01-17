@@ -70,6 +70,31 @@ func (e *H2Element) Textf(format string, args ...any) *H2Element {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *H2Element) If(cond bool, child htemel.Node) *H2Element {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *H2Element) IfElse(cond bool, then, els htemel.Node) *H2Element {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *H2Element) IfThen(cond bool, fn func(*H2Element)) *H2Element {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *H2Element) AddClass(classes ...string) *H2Element {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *H2Element) ToggleClass(class string, enable bool) *H2Element {
 type H2Autocapitalize string
 
 const (
-	H2AutocapitalizeOn         H2Autocapitalize = "on"
-	H2AutocapitalizeSentences  H2Autocapitalize = "sentences"
-	H2AutocapitalizeWords      H2Autocapitalize = "words"
 	H2AutocapitalizeCharacters H2Autocapitalize = "characters"
 	H2AutocapitalizeNone       H2Autocapitalize = "none"
 	H2AutocapitalizeOff        H2Autocapitalize = "off"
+	H2AutocapitalizeOn         H2Autocapitalize = "on"
+	H2AutocapitalizeSentences  H2Autocapitalize = "sentences"
+	H2AutocapitalizeWords      H2Autocapitalize = "words"
 )
 
 type H2Autocorrect string
@@ -113,37 +138,37 @@ const (
 type H2Contenteditable string
 
 const (
+	H2ContenteditableFalse         H2Contenteditable = "false"
 	H2ContenteditablePlaintextOnly H2Contenteditable = "plaintext-only"
 	H2ContenteditableTrue          H2Contenteditable = "true"
-	H2ContenteditableFalse         H2Contenteditable = "false"
 	H2ContenteditableEmpty         H2Contenteditable = ""
 )
 
 type H2Dir string
 
 const (
-	H2DirAuto H2Dir = "auto"
 	H2DirLtr  H2Dir = "ltr"
 	H2DirRtl  H2Dir = "rtl"
+	H2DirAuto H2Dir = "auto"
 )
 
 type H2Draggable string
 
 const (
-	H2DraggableTrue  H2Draggable = "true"
 	H2DraggableFalse H2Draggable = "false"
+	H2DraggableTrue  H2Draggable = "true"
 )
 
 type H2Enterkeyhint string
 
 const (
-	H2EnterkeyhintSend     H2Enterkeyhint = "send"
 	H2EnterkeyhintDone     H2Enterkeyhint = "done"
 	H2EnterkeyhintEnter    H2Enterkeyhint = "enter"
 	H2EnterkeyhintGo       H2Enterkeyhint = "go"
 	H2EnterkeyhintNext     H2Enterkeyhint = "next"
 	H2EnterkeyhintPrevious H2Enterkeyhint = "previous"
 	H2EnterkeyhintSearch   H2Enterkeyhint = "search"
+	H2EnterkeyhintSend     H2Enterkeyhint = "send"
 )
 
 type H2Hidden string
@@ -157,14 +182,14 @@ const (
 type H2Inputmode string
 
 const (
+	H2InputmodeText    H2Inputmode = "text"
+	H2InputmodeUrl     H2Inputmode = "url"
 	H2InputmodeDecimal H2Inputmode = "decimal"
 	H2InputmodeEmail   H2Inputmode = "email"
 	H2InputmodeNone    H2Inputmode = "none"
 	H2InputmodeNumeric H2Inputmode = "numeric"
 	H2InputmodeSearch  H2Inputmode = "search"
 	H2InputmodeTel     H2Inputmode = "tel"
-	H2InputmodeText    H2Inputmode = "text"
-	H2InputmodeUrl     H2Inputmode = "url"
 )
 
 type H2Spellcheck string

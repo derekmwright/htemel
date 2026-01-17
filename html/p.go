@@ -70,6 +70,31 @@ func (e *PElement) Textf(format string, args ...any) *PElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *PElement) If(cond bool, child htemel.Node) *PElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *PElement) IfElse(cond bool, then, els htemel.Node) *PElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *PElement) IfThen(cond bool, fn func(*PElement)) *PElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *PElement) AddClass(classes ...string) *PElement {
 	current := e.attributes["class"].(string)
@@ -94,19 +119,19 @@ func (e *PElement) ToggleClass(class string, enable bool) *PElement {
 type PAutocapitalize string
 
 const (
+	PAutocapitalizeOn         PAutocapitalize = "on"
 	PAutocapitalizeSentences  PAutocapitalize = "sentences"
 	PAutocapitalizeWords      PAutocapitalize = "words"
 	PAutocapitalizeCharacters PAutocapitalize = "characters"
 	PAutocapitalizeNone       PAutocapitalize = "none"
 	PAutocapitalizeOff        PAutocapitalize = "off"
-	PAutocapitalizeOn         PAutocapitalize = "on"
 )
 
 type PAutocorrect string
 
 const (
-	PAutocorrectOn    PAutocorrect = "on"
 	PAutocorrectOff   PAutocorrect = "off"
+	PAutocorrectOn    PAutocorrect = "on"
 	PAutocorrectEmpty PAutocorrect = ""
 )
 
@@ -130,8 +155,8 @@ const (
 type PDraggable string
 
 const (
-	PDraggableFalse PDraggable = "false"
 	PDraggableTrue  PDraggable = "true"
+	PDraggableFalse PDraggable = "false"
 )
 
 type PEnterkeyhint string
@@ -157,21 +182,21 @@ const (
 type PInputmode string
 
 const (
+	PInputmodeTel     PInputmode = "tel"
+	PInputmodeText    PInputmode = "text"
 	PInputmodeUrl     PInputmode = "url"
 	PInputmodeDecimal PInputmode = "decimal"
 	PInputmodeEmail   PInputmode = "email"
 	PInputmodeNone    PInputmode = "none"
 	PInputmodeNumeric PInputmode = "numeric"
 	PInputmodeSearch  PInputmode = "search"
-	PInputmodeTel     PInputmode = "tel"
-	PInputmodeText    PInputmode = "text"
 )
 
 type PSpellcheck string
 
 const (
-	PSpellcheckFalse PSpellcheck = "false"
 	PSpellcheckTrue  PSpellcheck = "true"
+	PSpellcheckFalse PSpellcheck = "false"
 	PSpellcheckEmpty PSpellcheck = ""
 )
 
@@ -186,8 +211,8 @@ const (
 type PWritingsuggestions string
 
 const (
-	PWritingsuggestionsFalse PWritingsuggestions = "false"
 	PWritingsuggestionsTrue  PWritingsuggestions = "true"
+	PWritingsuggestionsFalse PWritingsuggestions = "false"
 	PWritingsuggestionsEmpty PWritingsuggestions = ""
 )
 

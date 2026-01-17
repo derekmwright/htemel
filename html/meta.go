@@ -70,24 +70,24 @@ func (e *MetaElement) ToggleClass(class string, enable bool) *MetaElement {
 type MetaHttpEquiv string
 
 const (
+	MetaHttpEquivSetCookie             MetaHttpEquiv = "set-cookie"
 	MetaHttpEquivXUaCompatible         MetaHttpEquiv = "x-ua-compatible"
 	MetaHttpEquivContentLanguage       MetaHttpEquiv = "content-language"
 	MetaHttpEquivContentSecurityPolicy MetaHttpEquiv = "content-security-policy"
 	MetaHttpEquivContentType           MetaHttpEquiv = "content-type"
 	MetaHttpEquivDefaultStyle          MetaHttpEquiv = "default-style"
 	MetaHttpEquivRefresh               MetaHttpEquiv = "refresh"
-	MetaHttpEquivSetCookie             MetaHttpEquiv = "set-cookie"
 )
 
 type MetaAutocapitalize string
 
 const (
-	MetaAutocapitalizeCharacters MetaAutocapitalize = "characters"
 	MetaAutocapitalizeNone       MetaAutocapitalize = "none"
 	MetaAutocapitalizeOff        MetaAutocapitalize = "off"
 	MetaAutocapitalizeOn         MetaAutocapitalize = "on"
 	MetaAutocapitalizeSentences  MetaAutocapitalize = "sentences"
 	MetaAutocapitalizeWords      MetaAutocapitalize = "words"
+	MetaAutocapitalizeCharacters MetaAutocapitalize = "characters"
 )
 
 type MetaAutocorrect string
@@ -125,13 +125,13 @@ const (
 type MetaEnterkeyhint string
 
 const (
+	MetaEnterkeyhintNext     MetaEnterkeyhint = "next"
+	MetaEnterkeyhintPrevious MetaEnterkeyhint = "previous"
+	MetaEnterkeyhintSearch   MetaEnterkeyhint = "search"
 	MetaEnterkeyhintSend     MetaEnterkeyhint = "send"
 	MetaEnterkeyhintDone     MetaEnterkeyhint = "done"
 	MetaEnterkeyhintEnter    MetaEnterkeyhint = "enter"
 	MetaEnterkeyhintGo       MetaEnterkeyhint = "go"
-	MetaEnterkeyhintNext     MetaEnterkeyhint = "next"
-	MetaEnterkeyhintPrevious MetaEnterkeyhint = "previous"
-	MetaEnterkeyhintSearch   MetaEnterkeyhint = "search"
 )
 
 type MetaHidden string
@@ -145,7 +145,6 @@ const (
 type MetaInputmode string
 
 const (
-	MetaInputmodeNone    MetaInputmode = "none"
 	MetaInputmodeNumeric MetaInputmode = "numeric"
 	MetaInputmodeSearch  MetaInputmode = "search"
 	MetaInputmodeTel     MetaInputmode = "tel"
@@ -153,6 +152,7 @@ const (
 	MetaInputmodeUrl     MetaInputmode = "url"
 	MetaInputmodeDecimal MetaInputmode = "decimal"
 	MetaInputmodeEmail   MetaInputmode = "email"
+	MetaInputmodeNone    MetaInputmode = "none"
 )
 
 type MetaSpellcheck string

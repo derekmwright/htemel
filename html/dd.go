@@ -70,6 +70,31 @@ func (e *DdElement) Textf(format string, args ...any) *DdElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *DdElement) If(cond bool, child htemel.Node) *DdElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *DdElement) IfElse(cond bool, then, els htemel.Node) *DdElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *DdElement) IfThen(cond bool, fn func(*DdElement)) *DdElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *DdElement) AddClass(classes ...string) *DdElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *DdElement) ToggleClass(class string, enable bool) *DdElement {
 type DdAutocapitalize string
 
 const (
-	DdAutocapitalizeOn         DdAutocapitalize = "on"
-	DdAutocapitalizeSentences  DdAutocapitalize = "sentences"
-	DdAutocapitalizeWords      DdAutocapitalize = "words"
 	DdAutocapitalizeCharacters DdAutocapitalize = "characters"
 	DdAutocapitalizeNone       DdAutocapitalize = "none"
 	DdAutocapitalizeOff        DdAutocapitalize = "off"
+	DdAutocapitalizeOn         DdAutocapitalize = "on"
+	DdAutocapitalizeSentences  DdAutocapitalize = "sentences"
+	DdAutocapitalizeWords      DdAutocapitalize = "words"
 )
 
 type DdAutocorrect string
@@ -130,41 +155,41 @@ const (
 type DdDraggable string
 
 const (
-	DdDraggableTrue  DdDraggable = "true"
 	DdDraggableFalse DdDraggable = "false"
+	DdDraggableTrue  DdDraggable = "true"
 )
 
 type DdEnterkeyhint string
 
 const (
+	DdEnterkeyhintPrevious DdEnterkeyhint = "previous"
 	DdEnterkeyhintSearch   DdEnterkeyhint = "search"
 	DdEnterkeyhintSend     DdEnterkeyhint = "send"
 	DdEnterkeyhintDone     DdEnterkeyhint = "done"
 	DdEnterkeyhintEnter    DdEnterkeyhint = "enter"
 	DdEnterkeyhintGo       DdEnterkeyhint = "go"
 	DdEnterkeyhintNext     DdEnterkeyhint = "next"
-	DdEnterkeyhintPrevious DdEnterkeyhint = "previous"
 )
 
 type DdHidden string
 
 const (
-	DdHiddenHidden     DdHidden = "hidden"
 	DdHiddenUntilFound DdHidden = "until-found"
+	DdHiddenHidden     DdHidden = "hidden"
 	DdHiddenEmpty      DdHidden = ""
 )
 
 type DdInputmode string
 
 const (
-	DdInputmodeUrl     DdInputmode = "url"
-	DdInputmodeDecimal DdInputmode = "decimal"
-	DdInputmodeEmail   DdInputmode = "email"
-	DdInputmodeNone    DdInputmode = "none"
 	DdInputmodeNumeric DdInputmode = "numeric"
 	DdInputmodeSearch  DdInputmode = "search"
 	DdInputmodeTel     DdInputmode = "tel"
 	DdInputmodeText    DdInputmode = "text"
+	DdInputmodeUrl     DdInputmode = "url"
+	DdInputmodeDecimal DdInputmode = "decimal"
+	DdInputmodeEmail   DdInputmode = "email"
+	DdInputmodeNone    DdInputmode = "none"
 )
 
 type DdSpellcheck string
@@ -178,8 +203,8 @@ const (
 type DdTranslate string
 
 const (
-	DdTranslateNo    DdTranslate = "no"
 	DdTranslateYes   DdTranslate = "yes"
+	DdTranslateNo    DdTranslate = "no"
 	DdTranslateEmpty DdTranslate = ""
 )
 

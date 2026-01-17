@@ -70,6 +70,31 @@ func (e *NoscriptElement) Textf(format string, args ...any) *NoscriptElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *NoscriptElement) If(cond bool, child htemel.Node) *NoscriptElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *NoscriptElement) IfElse(cond bool, then, els htemel.Node) *NoscriptElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *NoscriptElement) IfThen(cond bool, fn func(*NoscriptElement)) *NoscriptElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *NoscriptElement) AddClass(classes ...string) *NoscriptElement {
 	current := e.attributes["class"].(string)
@@ -94,37 +119,37 @@ func (e *NoscriptElement) ToggleClass(class string, enable bool) *NoscriptElemen
 type NoscriptAutocapitalize string
 
 const (
+	NoscriptAutocapitalizeNone       NoscriptAutocapitalize = "none"
+	NoscriptAutocapitalizeOff        NoscriptAutocapitalize = "off"
 	NoscriptAutocapitalizeOn         NoscriptAutocapitalize = "on"
 	NoscriptAutocapitalizeSentences  NoscriptAutocapitalize = "sentences"
 	NoscriptAutocapitalizeWords      NoscriptAutocapitalize = "words"
 	NoscriptAutocapitalizeCharacters NoscriptAutocapitalize = "characters"
-	NoscriptAutocapitalizeNone       NoscriptAutocapitalize = "none"
-	NoscriptAutocapitalizeOff        NoscriptAutocapitalize = "off"
 )
 
 type NoscriptAutocorrect string
 
 const (
-	NoscriptAutocorrectOn    NoscriptAutocorrect = "on"
 	NoscriptAutocorrectOff   NoscriptAutocorrect = "off"
+	NoscriptAutocorrectOn    NoscriptAutocorrect = "on"
 	NoscriptAutocorrectEmpty NoscriptAutocorrect = ""
 )
 
 type NoscriptContenteditable string
 
 const (
-	NoscriptContenteditableTrue          NoscriptContenteditable = "true"
 	NoscriptContenteditableFalse         NoscriptContenteditable = "false"
 	NoscriptContenteditablePlaintextOnly NoscriptContenteditable = "plaintext-only"
+	NoscriptContenteditableTrue          NoscriptContenteditable = "true"
 	NoscriptContenteditableEmpty         NoscriptContenteditable = ""
 )
 
 type NoscriptDir string
 
 const (
+	NoscriptDirAuto NoscriptDir = "auto"
 	NoscriptDirLtr  NoscriptDir = "ltr"
 	NoscriptDirRtl  NoscriptDir = "rtl"
-	NoscriptDirAuto NoscriptDir = "auto"
 )
 
 type NoscriptDraggable string
@@ -137,13 +162,13 @@ const (
 type NoscriptEnterkeyhint string
 
 const (
-	NoscriptEnterkeyhintPrevious NoscriptEnterkeyhint = "previous"
-	NoscriptEnterkeyhintSearch   NoscriptEnterkeyhint = "search"
-	NoscriptEnterkeyhintSend     NoscriptEnterkeyhint = "send"
 	NoscriptEnterkeyhintDone     NoscriptEnterkeyhint = "done"
 	NoscriptEnterkeyhintEnter    NoscriptEnterkeyhint = "enter"
 	NoscriptEnterkeyhintGo       NoscriptEnterkeyhint = "go"
 	NoscriptEnterkeyhintNext     NoscriptEnterkeyhint = "next"
+	NoscriptEnterkeyhintPrevious NoscriptEnterkeyhint = "previous"
+	NoscriptEnterkeyhintSearch   NoscriptEnterkeyhint = "search"
+	NoscriptEnterkeyhintSend     NoscriptEnterkeyhint = "send"
 )
 
 type NoscriptHidden string
@@ -157,6 +182,7 @@ const (
 type NoscriptInputmode string
 
 const (
+	NoscriptInputmodeTel     NoscriptInputmode = "tel"
 	NoscriptInputmodeText    NoscriptInputmode = "text"
 	NoscriptInputmodeUrl     NoscriptInputmode = "url"
 	NoscriptInputmodeDecimal NoscriptInputmode = "decimal"
@@ -164,7 +190,6 @@ const (
 	NoscriptInputmodeNone    NoscriptInputmode = "none"
 	NoscriptInputmodeNumeric NoscriptInputmode = "numeric"
 	NoscriptInputmodeSearch  NoscriptInputmode = "search"
-	NoscriptInputmodeTel     NoscriptInputmode = "tel"
 )
 
 type NoscriptSpellcheck string
@@ -186,8 +211,8 @@ const (
 type NoscriptWritingsuggestions string
 
 const (
-	NoscriptWritingsuggestionsTrue  NoscriptWritingsuggestions = "true"
 	NoscriptWritingsuggestionsFalse NoscriptWritingsuggestions = "false"
+	NoscriptWritingsuggestionsTrue  NoscriptWritingsuggestions = "true"
 	NoscriptWritingsuggestionsEmpty NoscriptWritingsuggestions = ""
 )
 

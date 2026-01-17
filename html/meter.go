@@ -70,6 +70,31 @@ func (e *MeterElement) Textf(format string, args ...any) *MeterElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *MeterElement) If(cond bool, child htemel.Node) *MeterElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *MeterElement) IfElse(cond bool, then, els htemel.Node) *MeterElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *MeterElement) IfThen(cond bool, fn func(*MeterElement)) *MeterElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *MeterElement) AddClass(classes ...string) *MeterElement {
 	current := e.attributes["class"].(string)
@@ -94,28 +119,28 @@ func (e *MeterElement) ToggleClass(class string, enable bool) *MeterElement {
 type MeterAutocapitalize string
 
 const (
-	MeterAutocapitalizeSentences  MeterAutocapitalize = "sentences"
-	MeterAutocapitalizeWords      MeterAutocapitalize = "words"
-	MeterAutocapitalizeCharacters MeterAutocapitalize = "characters"
 	MeterAutocapitalizeNone       MeterAutocapitalize = "none"
 	MeterAutocapitalizeOff        MeterAutocapitalize = "off"
 	MeterAutocapitalizeOn         MeterAutocapitalize = "on"
+	MeterAutocapitalizeSentences  MeterAutocapitalize = "sentences"
+	MeterAutocapitalizeWords      MeterAutocapitalize = "words"
+	MeterAutocapitalizeCharacters MeterAutocapitalize = "characters"
 )
 
 type MeterAutocorrect string
 
 const (
-	MeterAutocorrectOn    MeterAutocorrect = "on"
 	MeterAutocorrectOff   MeterAutocorrect = "off"
+	MeterAutocorrectOn    MeterAutocorrect = "on"
 	MeterAutocorrectEmpty MeterAutocorrect = ""
 )
 
 type MeterContenteditable string
 
 const (
+	MeterContenteditableFalse         MeterContenteditable = "false"
 	MeterContenteditablePlaintextOnly MeterContenteditable = "plaintext-only"
 	MeterContenteditableTrue          MeterContenteditable = "true"
-	MeterContenteditableFalse         MeterContenteditable = "false"
 	MeterContenteditableEmpty         MeterContenteditable = ""
 )
 
@@ -130,20 +155,20 @@ const (
 type MeterDraggable string
 
 const (
-	MeterDraggableTrue  MeterDraggable = "true"
 	MeterDraggableFalse MeterDraggable = "false"
+	MeterDraggableTrue  MeterDraggable = "true"
 )
 
 type MeterEnterkeyhint string
 
 const (
-	MeterEnterkeyhintSearch   MeterEnterkeyhint = "search"
 	MeterEnterkeyhintSend     MeterEnterkeyhint = "send"
 	MeterEnterkeyhintDone     MeterEnterkeyhint = "done"
 	MeterEnterkeyhintEnter    MeterEnterkeyhint = "enter"
 	MeterEnterkeyhintGo       MeterEnterkeyhint = "go"
 	MeterEnterkeyhintNext     MeterEnterkeyhint = "next"
 	MeterEnterkeyhintPrevious MeterEnterkeyhint = "previous"
+	MeterEnterkeyhintSearch   MeterEnterkeyhint = "search"
 )
 
 type MeterHidden string
@@ -157,14 +182,14 @@ const (
 type MeterInputmode string
 
 const (
-	MeterInputmodeDecimal MeterInputmode = "decimal"
-	MeterInputmodeEmail   MeterInputmode = "email"
-	MeterInputmodeNone    MeterInputmode = "none"
 	MeterInputmodeNumeric MeterInputmode = "numeric"
 	MeterInputmodeSearch  MeterInputmode = "search"
 	MeterInputmodeTel     MeterInputmode = "tel"
 	MeterInputmodeText    MeterInputmode = "text"
 	MeterInputmodeUrl     MeterInputmode = "url"
+	MeterInputmodeDecimal MeterInputmode = "decimal"
+	MeterInputmodeEmail   MeterInputmode = "email"
+	MeterInputmodeNone    MeterInputmode = "none"
 )
 
 type MeterSpellcheck string

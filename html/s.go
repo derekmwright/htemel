@@ -70,6 +70,31 @@ func (e *SElement) Textf(format string, args ...any) *SElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *SElement) If(cond bool, child htemel.Node) *SElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *SElement) IfElse(cond bool, then, els htemel.Node) *SElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *SElement) IfThen(cond bool, fn func(*SElement)) *SElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *SElement) AddClass(classes ...string) *SElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *SElement) ToggleClass(class string, enable bool) *SElement {
 type SAutocapitalize string
 
 const (
-	SAutocapitalizeSentences  SAutocapitalize = "sentences"
-	SAutocapitalizeWords      SAutocapitalize = "words"
 	SAutocapitalizeCharacters SAutocapitalize = "characters"
 	SAutocapitalizeNone       SAutocapitalize = "none"
 	SAutocapitalizeOff        SAutocapitalize = "off"
 	SAutocapitalizeOn         SAutocapitalize = "on"
+	SAutocapitalizeSentences  SAutocapitalize = "sentences"
+	SAutocapitalizeWords      SAutocapitalize = "words"
 )
 
 type SAutocorrect string
@@ -137,13 +162,13 @@ const (
 type SEnterkeyhint string
 
 const (
+	SEnterkeyhintDone     SEnterkeyhint = "done"
+	SEnterkeyhintEnter    SEnterkeyhint = "enter"
+	SEnterkeyhintGo       SEnterkeyhint = "go"
 	SEnterkeyhintNext     SEnterkeyhint = "next"
 	SEnterkeyhintPrevious SEnterkeyhint = "previous"
 	SEnterkeyhintSearch   SEnterkeyhint = "search"
 	SEnterkeyhintSend     SEnterkeyhint = "send"
-	SEnterkeyhintDone     SEnterkeyhint = "done"
-	SEnterkeyhintEnter    SEnterkeyhint = "enter"
-	SEnterkeyhintGo       SEnterkeyhint = "go"
 )
 
 type SHidden string

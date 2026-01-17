@@ -70,6 +70,31 @@ func (e *BdoElement) Textf(format string, args ...any) *BdoElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *BdoElement) If(cond bool, child htemel.Node) *BdoElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *BdoElement) IfElse(cond bool, then, els htemel.Node) *BdoElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *BdoElement) IfThen(cond bool, fn func(*BdoElement)) *BdoElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *BdoElement) AddClass(classes ...string) *BdoElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *BdoElement) ToggleClass(class string, enable bool) *BdoElement {
 type BdoAutocapitalize string
 
 const (
-	BdoAutocapitalizeOn         BdoAutocapitalize = "on"
-	BdoAutocapitalizeSentences  BdoAutocapitalize = "sentences"
-	BdoAutocapitalizeWords      BdoAutocapitalize = "words"
 	BdoAutocapitalizeCharacters BdoAutocapitalize = "characters"
 	BdoAutocapitalizeNone       BdoAutocapitalize = "none"
 	BdoAutocapitalizeOff        BdoAutocapitalize = "off"
+	BdoAutocapitalizeOn         BdoAutocapitalize = "on"
+	BdoAutocapitalizeSentences  BdoAutocapitalize = "sentences"
+	BdoAutocapitalizeWords      BdoAutocapitalize = "words"
 )
 
 type BdoAutocorrect string
@@ -130,8 +155,8 @@ const (
 type BdoDraggable string
 
 const (
-	BdoDraggableTrue  BdoDraggable = "true"
 	BdoDraggableFalse BdoDraggable = "false"
+	BdoDraggableTrue  BdoDraggable = "true"
 )
 
 type BdoEnterkeyhint string
@@ -157,21 +182,21 @@ const (
 type BdoInputmode string
 
 const (
-	BdoInputmodeSearch  BdoInputmode = "search"
-	BdoInputmodeTel     BdoInputmode = "tel"
-	BdoInputmodeText    BdoInputmode = "text"
 	BdoInputmodeUrl     BdoInputmode = "url"
 	BdoInputmodeDecimal BdoInputmode = "decimal"
 	BdoInputmodeEmail   BdoInputmode = "email"
 	BdoInputmodeNone    BdoInputmode = "none"
 	BdoInputmodeNumeric BdoInputmode = "numeric"
+	BdoInputmodeSearch  BdoInputmode = "search"
+	BdoInputmodeTel     BdoInputmode = "tel"
+	BdoInputmodeText    BdoInputmode = "text"
 )
 
 type BdoSpellcheck string
 
 const (
-	BdoSpellcheckFalse BdoSpellcheck = "false"
 	BdoSpellcheckTrue  BdoSpellcheck = "true"
+	BdoSpellcheckFalse BdoSpellcheck = "false"
 	BdoSpellcheckEmpty BdoSpellcheck = ""
 )
 

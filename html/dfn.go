@@ -70,6 +70,31 @@ func (e *DfnElement) Textf(format string, args ...any) *DfnElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *DfnElement) If(cond bool, child htemel.Node) *DfnElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *DfnElement) IfElse(cond bool, then, els htemel.Node) *DfnElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *DfnElement) IfThen(cond bool, fn func(*DfnElement)) *DfnElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *DfnElement) AddClass(classes ...string) *DfnElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *DfnElement) ToggleClass(class string, enable bool) *DfnElement {
 type DfnAutocapitalize string
 
 const (
+	DfnAutocapitalizeSentences  DfnAutocapitalize = "sentences"
+	DfnAutocapitalizeWords      DfnAutocapitalize = "words"
 	DfnAutocapitalizeCharacters DfnAutocapitalize = "characters"
 	DfnAutocapitalizeNone       DfnAutocapitalize = "none"
 	DfnAutocapitalizeOff        DfnAutocapitalize = "off"
 	DfnAutocapitalizeOn         DfnAutocapitalize = "on"
-	DfnAutocapitalizeSentences  DfnAutocapitalize = "sentences"
-	DfnAutocapitalizeWords      DfnAutocapitalize = "words"
 )
 
 type DfnAutocorrect string
@@ -113,9 +138,9 @@ const (
 type DfnContenteditable string
 
 const (
+	DfnContenteditableFalse         DfnContenteditable = "false"
 	DfnContenteditablePlaintextOnly DfnContenteditable = "plaintext-only"
 	DfnContenteditableTrue          DfnContenteditable = "true"
-	DfnContenteditableFalse         DfnContenteditable = "false"
 	DfnContenteditableEmpty         DfnContenteditable = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type DfnEnterkeyhint string
 
 const (
-	DfnEnterkeyhintPrevious DfnEnterkeyhint = "previous"
 	DfnEnterkeyhintSearch   DfnEnterkeyhint = "search"
 	DfnEnterkeyhintSend     DfnEnterkeyhint = "send"
 	DfnEnterkeyhintDone     DfnEnterkeyhint = "done"
 	DfnEnterkeyhintEnter    DfnEnterkeyhint = "enter"
 	DfnEnterkeyhintGo       DfnEnterkeyhint = "go"
 	DfnEnterkeyhintNext     DfnEnterkeyhint = "next"
+	DfnEnterkeyhintPrevious DfnEnterkeyhint = "previous"
 )
 
 type DfnHidden string
@@ -157,6 +182,7 @@ const (
 type DfnInputmode string
 
 const (
+	DfnInputmodeDecimal DfnInputmode = "decimal"
 	DfnInputmodeEmail   DfnInputmode = "email"
 	DfnInputmodeNone    DfnInputmode = "none"
 	DfnInputmodeNumeric DfnInputmode = "numeric"
@@ -164,7 +190,6 @@ const (
 	DfnInputmodeTel     DfnInputmode = "tel"
 	DfnInputmodeText    DfnInputmode = "text"
 	DfnInputmodeUrl     DfnInputmode = "url"
-	DfnInputmodeDecimal DfnInputmode = "decimal"
 )
 
 type DfnSpellcheck string
@@ -178,16 +203,16 @@ const (
 type DfnTranslate string
 
 const (
-	DfnTranslateNo    DfnTranslate = "no"
 	DfnTranslateYes   DfnTranslate = "yes"
+	DfnTranslateNo    DfnTranslate = "no"
 	DfnTranslateEmpty DfnTranslate = ""
 )
 
 type DfnWritingsuggestions string
 
 const (
-	DfnWritingsuggestionsTrue  DfnWritingsuggestions = "true"
 	DfnWritingsuggestionsFalse DfnWritingsuggestions = "false"
+	DfnWritingsuggestionsTrue  DfnWritingsuggestions = "true"
 	DfnWritingsuggestionsEmpty DfnWritingsuggestions = ""
 )
 

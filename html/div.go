@@ -70,6 +70,31 @@ func (e *DivElement) Textf(format string, args ...any) *DivElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *DivElement) If(cond bool, child htemel.Node) *DivElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *DivElement) IfElse(cond bool, then, els htemel.Node) *DivElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *DivElement) IfThen(cond bool, fn func(*DivElement)) *DivElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *DivElement) AddClass(classes ...string) *DivElement {
 	current := e.attributes["class"].(string)
@@ -94,37 +119,37 @@ func (e *DivElement) ToggleClass(class string, enable bool) *DivElement {
 type DivAutocapitalize string
 
 const (
+	DivAutocapitalizeNone       DivAutocapitalize = "none"
+	DivAutocapitalizeOff        DivAutocapitalize = "off"
 	DivAutocapitalizeOn         DivAutocapitalize = "on"
 	DivAutocapitalizeSentences  DivAutocapitalize = "sentences"
 	DivAutocapitalizeWords      DivAutocapitalize = "words"
 	DivAutocapitalizeCharacters DivAutocapitalize = "characters"
-	DivAutocapitalizeNone       DivAutocapitalize = "none"
-	DivAutocapitalizeOff        DivAutocapitalize = "off"
 )
 
 type DivAutocorrect string
 
 const (
-	DivAutocorrectOff   DivAutocorrect = "off"
 	DivAutocorrectOn    DivAutocorrect = "on"
+	DivAutocorrectOff   DivAutocorrect = "off"
 	DivAutocorrectEmpty DivAutocorrect = ""
 )
 
 type DivContenteditable string
 
 const (
-	DivContenteditableTrue          DivContenteditable = "true"
 	DivContenteditableFalse         DivContenteditable = "false"
 	DivContenteditablePlaintextOnly DivContenteditable = "plaintext-only"
+	DivContenteditableTrue          DivContenteditable = "true"
 	DivContenteditableEmpty         DivContenteditable = ""
 )
 
 type DivDir string
 
 const (
-	DivDirRtl  DivDir = "rtl"
 	DivDirAuto DivDir = "auto"
 	DivDirLtr  DivDir = "ltr"
+	DivDirRtl  DivDir = "rtl"
 )
 
 type DivDraggable string
@@ -137,20 +162,20 @@ const (
 type DivEnterkeyhint string
 
 const (
+	DivEnterkeyhintDone     DivEnterkeyhint = "done"
+	DivEnterkeyhintEnter    DivEnterkeyhint = "enter"
 	DivEnterkeyhintGo       DivEnterkeyhint = "go"
 	DivEnterkeyhintNext     DivEnterkeyhint = "next"
 	DivEnterkeyhintPrevious DivEnterkeyhint = "previous"
 	DivEnterkeyhintSearch   DivEnterkeyhint = "search"
 	DivEnterkeyhintSend     DivEnterkeyhint = "send"
-	DivEnterkeyhintDone     DivEnterkeyhint = "done"
-	DivEnterkeyhintEnter    DivEnterkeyhint = "enter"
 )
 
 type DivHidden string
 
 const (
-	DivHiddenUntilFound DivHidden = "until-found"
 	DivHiddenHidden     DivHidden = "hidden"
+	DivHiddenUntilFound DivHidden = "until-found"
 	DivHiddenEmpty      DivHidden = ""
 )
 
@@ -186,8 +211,8 @@ const (
 type DivWritingsuggestions string
 
 const (
-	DivWritingsuggestionsTrue  DivWritingsuggestions = "true"
 	DivWritingsuggestionsFalse DivWritingsuggestions = "false"
+	DivWritingsuggestionsTrue  DivWritingsuggestions = "true"
 	DivWritingsuggestionsEmpty DivWritingsuggestions = ""
 )
 

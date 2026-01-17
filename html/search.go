@@ -70,6 +70,31 @@ func (e *SearchElement) Textf(format string, args ...any) *SearchElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *SearchElement) If(cond bool, child htemel.Node) *SearchElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *SearchElement) IfElse(cond bool, then, els htemel.Node) *SearchElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *SearchElement) IfThen(cond bool, fn func(*SearchElement)) *SearchElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *SearchElement) AddClass(classes ...string) *SearchElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *SearchElement) ToggleClass(class string, enable bool) *SearchElement {
 type SearchAutocapitalize string
 
 const (
+	SearchAutocapitalizeCharacters SearchAutocapitalize = "characters"
+	SearchAutocapitalizeNone       SearchAutocapitalize = "none"
 	SearchAutocapitalizeOff        SearchAutocapitalize = "off"
 	SearchAutocapitalizeOn         SearchAutocapitalize = "on"
 	SearchAutocapitalizeSentences  SearchAutocapitalize = "sentences"
 	SearchAutocapitalizeWords      SearchAutocapitalize = "words"
-	SearchAutocapitalizeCharacters SearchAutocapitalize = "characters"
-	SearchAutocapitalizeNone       SearchAutocapitalize = "none"
 )
 
 type SearchAutocorrect string
@@ -113,9 +138,9 @@ const (
 type SearchContenteditable string
 
 const (
-	SearchContenteditableFalse         SearchContenteditable = "false"
 	SearchContenteditablePlaintextOnly SearchContenteditable = "plaintext-only"
 	SearchContenteditableTrue          SearchContenteditable = "true"
+	SearchContenteditableFalse         SearchContenteditable = "false"
 	SearchContenteditableEmpty         SearchContenteditable = ""
 )
 
@@ -130,20 +155,20 @@ const (
 type SearchDraggable string
 
 const (
-	SearchDraggableFalse SearchDraggable = "false"
 	SearchDraggableTrue  SearchDraggable = "true"
+	SearchDraggableFalse SearchDraggable = "false"
 )
 
 type SearchEnterkeyhint string
 
 const (
+	SearchEnterkeyhintPrevious SearchEnterkeyhint = "previous"
+	SearchEnterkeyhintSearch   SearchEnterkeyhint = "search"
 	SearchEnterkeyhintSend     SearchEnterkeyhint = "send"
 	SearchEnterkeyhintDone     SearchEnterkeyhint = "done"
 	SearchEnterkeyhintEnter    SearchEnterkeyhint = "enter"
 	SearchEnterkeyhintGo       SearchEnterkeyhint = "go"
 	SearchEnterkeyhintNext     SearchEnterkeyhint = "next"
-	SearchEnterkeyhintPrevious SearchEnterkeyhint = "previous"
-	SearchEnterkeyhintSearch   SearchEnterkeyhint = "search"
 )
 
 type SearchHidden string

@@ -70,6 +70,31 @@ func (e *ThElement) Textf(format string, args ...any) *ThElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *ThElement) If(cond bool, child htemel.Node) *ThElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *ThElement) IfElse(cond bool, then, els htemel.Node) *ThElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *ThElement) IfThen(cond bool, fn func(*ThElement)) *ThElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *ThElement) AddClass(classes ...string) *ThElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *ThElement) ToggleClass(class string, enable bool) *ThElement {
 type ThAutocapitalize string
 
 const (
-	ThAutocapitalizeCharacters ThAutocapitalize = "characters"
-	ThAutocapitalizeNone       ThAutocapitalize = "none"
-	ThAutocapitalizeOff        ThAutocapitalize = "off"
 	ThAutocapitalizeOn         ThAutocapitalize = "on"
 	ThAutocapitalizeSentences  ThAutocapitalize = "sentences"
 	ThAutocapitalizeWords      ThAutocapitalize = "words"
+	ThAutocapitalizeCharacters ThAutocapitalize = "characters"
+	ThAutocapitalizeNone       ThAutocapitalize = "none"
+	ThAutocapitalizeOff        ThAutocapitalize = "off"
 )
 
 type ThAutocorrect string
@@ -113,9 +138,9 @@ const (
 type ThContenteditable string
 
 const (
-	ThContenteditableFalse         ThContenteditable = "false"
 	ThContenteditablePlaintextOnly ThContenteditable = "plaintext-only"
 	ThContenteditableTrue          ThContenteditable = "true"
+	ThContenteditableFalse         ThContenteditable = "false"
 	ThContenteditableEmpty         ThContenteditable = ""
 )
 
@@ -137,27 +162,26 @@ const (
 type ThEnterkeyhint string
 
 const (
+	ThEnterkeyhintSend     ThEnterkeyhint = "send"
 	ThEnterkeyhintDone     ThEnterkeyhint = "done"
 	ThEnterkeyhintEnter    ThEnterkeyhint = "enter"
 	ThEnterkeyhintGo       ThEnterkeyhint = "go"
 	ThEnterkeyhintNext     ThEnterkeyhint = "next"
 	ThEnterkeyhintPrevious ThEnterkeyhint = "previous"
 	ThEnterkeyhintSearch   ThEnterkeyhint = "search"
-	ThEnterkeyhintSend     ThEnterkeyhint = "send"
 )
 
 type ThHidden string
 
 const (
-	ThHiddenUntilFound ThHidden = "until-found"
 	ThHiddenHidden     ThHidden = "hidden"
+	ThHiddenUntilFound ThHidden = "until-found"
 	ThHiddenEmpty      ThHidden = ""
 )
 
 type ThInputmode string
 
 const (
-	ThInputmodeEmail   ThInputmode = "email"
 	ThInputmodeNone    ThInputmode = "none"
 	ThInputmodeNumeric ThInputmode = "numeric"
 	ThInputmodeSearch  ThInputmode = "search"
@@ -165,6 +189,7 @@ const (
 	ThInputmodeText    ThInputmode = "text"
 	ThInputmodeUrl     ThInputmode = "url"
 	ThInputmodeDecimal ThInputmode = "decimal"
+	ThInputmodeEmail   ThInputmode = "email"
 )
 
 type ThSpellcheck string
@@ -178,8 +203,8 @@ const (
 type ThTranslate string
 
 const (
-	ThTranslateYes   ThTranslate = "yes"
 	ThTranslateNo    ThTranslate = "no"
+	ThTranslateYes   ThTranslate = "yes"
 	ThTranslateEmpty ThTranslate = ""
 )
 

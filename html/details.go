@@ -70,6 +70,31 @@ func (e *DetailsElement) Textf(format string, args ...any) *DetailsElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *DetailsElement) If(cond bool, child htemel.Node) *DetailsElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *DetailsElement) IfElse(cond bool, then, els htemel.Node) *DetailsElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *DetailsElement) IfThen(cond bool, fn func(*DetailsElement)) *DetailsElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *DetailsElement) AddClass(classes ...string) *DetailsElement {
 	current := e.attributes["class"].(string)
@@ -157,14 +182,14 @@ const (
 type DetailsInputmode string
 
 const (
-	DetailsInputmodeNone    DetailsInputmode = "none"
-	DetailsInputmodeNumeric DetailsInputmode = "numeric"
 	DetailsInputmodeSearch  DetailsInputmode = "search"
 	DetailsInputmodeTel     DetailsInputmode = "tel"
 	DetailsInputmodeText    DetailsInputmode = "text"
 	DetailsInputmodeUrl     DetailsInputmode = "url"
 	DetailsInputmodeDecimal DetailsInputmode = "decimal"
 	DetailsInputmodeEmail   DetailsInputmode = "email"
+	DetailsInputmodeNone    DetailsInputmode = "none"
+	DetailsInputmodeNumeric DetailsInputmode = "numeric"
 )
 
 type DetailsSpellcheck string

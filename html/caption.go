@@ -70,6 +70,31 @@ func (e *CaptionElement) Textf(format string, args ...any) *CaptionElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *CaptionElement) If(cond bool, child htemel.Node) *CaptionElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *CaptionElement) IfElse(cond bool, then, els htemel.Node) *CaptionElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *CaptionElement) IfThen(cond bool, fn func(*CaptionElement)) *CaptionElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *CaptionElement) AddClass(classes ...string) *CaptionElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *CaptionElement) ToggleClass(class string, enable bool) *CaptionElement 
 type CaptionAutocapitalize string
 
 const (
+	CaptionAutocapitalizeOff        CaptionAutocapitalize = "off"
 	CaptionAutocapitalizeOn         CaptionAutocapitalize = "on"
 	CaptionAutocapitalizeSentences  CaptionAutocapitalize = "sentences"
 	CaptionAutocapitalizeWords      CaptionAutocapitalize = "words"
 	CaptionAutocapitalizeCharacters CaptionAutocapitalize = "characters"
 	CaptionAutocapitalizeNone       CaptionAutocapitalize = "none"
-	CaptionAutocapitalizeOff        CaptionAutocapitalize = "off"
 )
 
 type CaptionAutocorrect string
@@ -122,9 +147,9 @@ const (
 type CaptionDir string
 
 const (
-	CaptionDirAuto CaptionDir = "auto"
 	CaptionDirLtr  CaptionDir = "ltr"
 	CaptionDirRtl  CaptionDir = "rtl"
+	CaptionDirAuto CaptionDir = "auto"
 )
 
 type CaptionDraggable string
@@ -137,20 +162,20 @@ const (
 type CaptionEnterkeyhint string
 
 const (
+	CaptionEnterkeyhintPrevious CaptionEnterkeyhint = "previous"
+	CaptionEnterkeyhintSearch   CaptionEnterkeyhint = "search"
+	CaptionEnterkeyhintSend     CaptionEnterkeyhint = "send"
 	CaptionEnterkeyhintDone     CaptionEnterkeyhint = "done"
 	CaptionEnterkeyhintEnter    CaptionEnterkeyhint = "enter"
 	CaptionEnterkeyhintGo       CaptionEnterkeyhint = "go"
 	CaptionEnterkeyhintNext     CaptionEnterkeyhint = "next"
-	CaptionEnterkeyhintPrevious CaptionEnterkeyhint = "previous"
-	CaptionEnterkeyhintSearch   CaptionEnterkeyhint = "search"
-	CaptionEnterkeyhintSend     CaptionEnterkeyhint = "send"
 )
 
 type CaptionHidden string
 
 const (
-	CaptionHiddenUntilFound CaptionHidden = "until-found"
 	CaptionHiddenHidden     CaptionHidden = "hidden"
+	CaptionHiddenUntilFound CaptionHidden = "until-found"
 	CaptionHiddenEmpty      CaptionHidden = ""
 )
 
@@ -170,8 +195,8 @@ const (
 type CaptionSpellcheck string
 
 const (
-	CaptionSpellcheckTrue  CaptionSpellcheck = "true"
 	CaptionSpellcheckFalse CaptionSpellcheck = "false"
+	CaptionSpellcheckTrue  CaptionSpellcheck = "true"
 	CaptionSpellcheckEmpty CaptionSpellcheck = ""
 )
 

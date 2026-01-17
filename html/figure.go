@@ -70,6 +70,31 @@ func (e *FigureElement) Textf(format string, args ...any) *FigureElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *FigureElement) If(cond bool, child htemel.Node) *FigureElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *FigureElement) IfElse(cond bool, then, els htemel.Node) *FigureElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *FigureElement) IfThen(cond bool, fn func(*FigureElement)) *FigureElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *FigureElement) AddClass(classes ...string) *FigureElement {
 	current := e.attributes["class"].(string)
@@ -113,9 +138,9 @@ const (
 type FigureContenteditable string
 
 const (
-	FigureContenteditableTrue          FigureContenteditable = "true"
 	FigureContenteditableFalse         FigureContenteditable = "false"
 	FigureContenteditablePlaintextOnly FigureContenteditable = "plaintext-only"
+	FigureContenteditableTrue          FigureContenteditable = "true"
 	FigureContenteditableEmpty         FigureContenteditable = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type FigureEnterkeyhint string
 
 const (
-	FigureEnterkeyhintSend     FigureEnterkeyhint = "send"
 	FigureEnterkeyhintDone     FigureEnterkeyhint = "done"
 	FigureEnterkeyhintEnter    FigureEnterkeyhint = "enter"
 	FigureEnterkeyhintGo       FigureEnterkeyhint = "go"
 	FigureEnterkeyhintNext     FigureEnterkeyhint = "next"
 	FigureEnterkeyhintPrevious FigureEnterkeyhint = "previous"
 	FigureEnterkeyhintSearch   FigureEnterkeyhint = "search"
+	FigureEnterkeyhintSend     FigureEnterkeyhint = "send"
 )
 
 type FigureHidden string
@@ -157,7 +182,6 @@ const (
 type FigureInputmode string
 
 const (
-	FigureInputmodeEmail   FigureInputmode = "email"
 	FigureInputmodeNone    FigureInputmode = "none"
 	FigureInputmodeNumeric FigureInputmode = "numeric"
 	FigureInputmodeSearch  FigureInputmode = "search"
@@ -165,13 +189,14 @@ const (
 	FigureInputmodeText    FigureInputmode = "text"
 	FigureInputmodeUrl     FigureInputmode = "url"
 	FigureInputmodeDecimal FigureInputmode = "decimal"
+	FigureInputmodeEmail   FigureInputmode = "email"
 )
 
 type FigureSpellcheck string
 
 const (
-	FigureSpellcheckTrue  FigureSpellcheck = "true"
 	FigureSpellcheckFalse FigureSpellcheck = "false"
+	FigureSpellcheckTrue  FigureSpellcheck = "true"
 	FigureSpellcheckEmpty FigureSpellcheck = ""
 )
 
@@ -186,8 +211,8 @@ const (
 type FigureWritingsuggestions string
 
 const (
-	FigureWritingsuggestionsFalse FigureWritingsuggestions = "false"
 	FigureWritingsuggestionsTrue  FigureWritingsuggestions = "true"
+	FigureWritingsuggestionsFalse FigureWritingsuggestions = "false"
 	FigureWritingsuggestionsEmpty FigureWritingsuggestions = ""
 )
 

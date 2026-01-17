@@ -70,6 +70,31 @@ func (e *RubyElement) Textf(format string, args ...any) *RubyElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *RubyElement) If(cond bool, child htemel.Node) *RubyElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *RubyElement) IfElse(cond bool, then, els htemel.Node) *RubyElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *RubyElement) IfThen(cond bool, fn func(*RubyElement)) *RubyElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *RubyElement) AddClass(classes ...string) *RubyElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *RubyElement) ToggleClass(class string, enable bool) *RubyElement {
 type RubyAutocapitalize string
 
 const (
+	RubyAutocapitalizeCharacters RubyAutocapitalize = "characters"
+	RubyAutocapitalizeNone       RubyAutocapitalize = "none"
 	RubyAutocapitalizeOff        RubyAutocapitalize = "off"
 	RubyAutocapitalizeOn         RubyAutocapitalize = "on"
 	RubyAutocapitalizeSentences  RubyAutocapitalize = "sentences"
 	RubyAutocapitalizeWords      RubyAutocapitalize = "words"
-	RubyAutocapitalizeCharacters RubyAutocapitalize = "characters"
-	RubyAutocapitalizeNone       RubyAutocapitalize = "none"
 )
 
 type RubyAutocorrect string
@@ -113,9 +138,9 @@ const (
 type RubyContenteditable string
 
 const (
-	RubyContenteditableFalse         RubyContenteditable = "false"
 	RubyContenteditablePlaintextOnly RubyContenteditable = "plaintext-only"
 	RubyContenteditableTrue          RubyContenteditable = "true"
+	RubyContenteditableFalse         RubyContenteditable = "false"
 	RubyContenteditableEmpty         RubyContenteditable = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type RubyEnterkeyhint string
 
 const (
+	RubyEnterkeyhintPrevious RubyEnterkeyhint = "previous"
 	RubyEnterkeyhintSearch   RubyEnterkeyhint = "search"
 	RubyEnterkeyhintSend     RubyEnterkeyhint = "send"
 	RubyEnterkeyhintDone     RubyEnterkeyhint = "done"
 	RubyEnterkeyhintEnter    RubyEnterkeyhint = "enter"
 	RubyEnterkeyhintGo       RubyEnterkeyhint = "go"
 	RubyEnterkeyhintNext     RubyEnterkeyhint = "next"
-	RubyEnterkeyhintPrevious RubyEnterkeyhint = "previous"
 )
 
 type RubyHidden string
@@ -157,14 +182,14 @@ const (
 type RubyInputmode string
 
 const (
-	RubyInputmodeUrl     RubyInputmode = "url"
-	RubyInputmodeDecimal RubyInputmode = "decimal"
 	RubyInputmodeEmail   RubyInputmode = "email"
 	RubyInputmodeNone    RubyInputmode = "none"
 	RubyInputmodeNumeric RubyInputmode = "numeric"
 	RubyInputmodeSearch  RubyInputmode = "search"
 	RubyInputmodeTel     RubyInputmode = "tel"
 	RubyInputmodeText    RubyInputmode = "text"
+	RubyInputmodeUrl     RubyInputmode = "url"
+	RubyInputmodeDecimal RubyInputmode = "decimal"
 )
 
 type RubySpellcheck string

@@ -70,6 +70,31 @@ func (e *AsideElement) Textf(format string, args ...any) *AsideElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *AsideElement) If(cond bool, child htemel.Node) *AsideElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *AsideElement) IfElse(cond bool, then, els htemel.Node) *AsideElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *AsideElement) IfThen(cond bool, fn func(*AsideElement)) *AsideElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *AsideElement) AddClass(classes ...string) *AsideElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *AsideElement) ToggleClass(class string, enable bool) *AsideElement {
 type AsideAutocapitalize string
 
 const (
+	AsideAutocapitalizeNone       AsideAutocapitalize = "none"
+	AsideAutocapitalizeOff        AsideAutocapitalize = "off"
 	AsideAutocapitalizeOn         AsideAutocapitalize = "on"
 	AsideAutocapitalizeSentences  AsideAutocapitalize = "sentences"
 	AsideAutocapitalizeWords      AsideAutocapitalize = "words"
 	AsideAutocapitalizeCharacters AsideAutocapitalize = "characters"
-	AsideAutocapitalizeNone       AsideAutocapitalize = "none"
-	AsideAutocapitalizeOff        AsideAutocapitalize = "off"
 )
 
 type AsideAutocorrect string
@@ -113,18 +138,18 @@ const (
 type AsideContenteditable string
 
 const (
-	AsideContenteditableFalse         AsideContenteditable = "false"
 	AsideContenteditablePlaintextOnly AsideContenteditable = "plaintext-only"
 	AsideContenteditableTrue          AsideContenteditable = "true"
+	AsideContenteditableFalse         AsideContenteditable = "false"
 	AsideContenteditableEmpty         AsideContenteditable = ""
 )
 
 type AsideDir string
 
 const (
-	AsideDirAuto AsideDir = "auto"
 	AsideDirLtr  AsideDir = "ltr"
 	AsideDirRtl  AsideDir = "rtl"
+	AsideDirAuto AsideDir = "auto"
 )
 
 type AsideDraggable string
@@ -157,14 +182,14 @@ const (
 type AsideInputmode string
 
 const (
+	AsideInputmodeUrl     AsideInputmode = "url"
+	AsideInputmodeDecimal AsideInputmode = "decimal"
+	AsideInputmodeEmail   AsideInputmode = "email"
 	AsideInputmodeNone    AsideInputmode = "none"
 	AsideInputmodeNumeric AsideInputmode = "numeric"
 	AsideInputmodeSearch  AsideInputmode = "search"
 	AsideInputmodeTel     AsideInputmode = "tel"
 	AsideInputmodeText    AsideInputmode = "text"
-	AsideInputmodeUrl     AsideInputmode = "url"
-	AsideInputmodeDecimal AsideInputmode = "decimal"
-	AsideInputmodeEmail   AsideInputmode = "email"
 )
 
 type AsideSpellcheck string
@@ -186,8 +211,8 @@ const (
 type AsideWritingsuggestions string
 
 const (
-	AsideWritingsuggestionsFalse AsideWritingsuggestions = "false"
 	AsideWritingsuggestionsTrue  AsideWritingsuggestions = "true"
+	AsideWritingsuggestionsFalse AsideWritingsuggestions = "false"
 	AsideWritingsuggestionsEmpty AsideWritingsuggestions = ""
 )
 

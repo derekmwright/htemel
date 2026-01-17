@@ -70,6 +70,31 @@ func (e *ProgressElement) Textf(format string, args ...any) *ProgressElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *ProgressElement) If(cond bool, child htemel.Node) *ProgressElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *ProgressElement) IfElse(cond bool, then, els htemel.Node) *ProgressElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *ProgressElement) IfThen(cond bool, fn func(*ProgressElement)) *ProgressElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *ProgressElement) AddClass(classes ...string) *ProgressElement {
 	current := e.attributes["class"].(string)
@@ -122,9 +147,9 @@ const (
 type ProgressDir string
 
 const (
-	ProgressDirRtl  ProgressDir = "rtl"
 	ProgressDirAuto ProgressDir = "auto"
 	ProgressDirLtr  ProgressDir = "ltr"
+	ProgressDirRtl  ProgressDir = "rtl"
 )
 
 type ProgressDraggable string
@@ -137,13 +162,13 @@ const (
 type ProgressEnterkeyhint string
 
 const (
-	ProgressEnterkeyhintPrevious ProgressEnterkeyhint = "previous"
-	ProgressEnterkeyhintSearch   ProgressEnterkeyhint = "search"
-	ProgressEnterkeyhintSend     ProgressEnterkeyhint = "send"
 	ProgressEnterkeyhintDone     ProgressEnterkeyhint = "done"
 	ProgressEnterkeyhintEnter    ProgressEnterkeyhint = "enter"
 	ProgressEnterkeyhintGo       ProgressEnterkeyhint = "go"
 	ProgressEnterkeyhintNext     ProgressEnterkeyhint = "next"
+	ProgressEnterkeyhintPrevious ProgressEnterkeyhint = "previous"
+	ProgressEnterkeyhintSearch   ProgressEnterkeyhint = "search"
+	ProgressEnterkeyhintSend     ProgressEnterkeyhint = "send"
 )
 
 type ProgressHidden string

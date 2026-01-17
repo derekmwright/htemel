@@ -70,6 +70,31 @@ func (e *H4Element) Textf(format string, args ...any) *H4Element {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *H4Element) If(cond bool, child htemel.Node) *H4Element {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *H4Element) IfElse(cond bool, then, els htemel.Node) *H4Element {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *H4Element) IfThen(cond bool, fn func(*H4Element)) *H4Element {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *H4Element) AddClass(classes ...string) *H4Element {
 	current := e.attributes["class"].(string)
@@ -137,13 +162,13 @@ const (
 type H4Enterkeyhint string
 
 const (
+	H4EnterkeyhintNext     H4Enterkeyhint = "next"
+	H4EnterkeyhintPrevious H4Enterkeyhint = "previous"
 	H4EnterkeyhintSearch   H4Enterkeyhint = "search"
 	H4EnterkeyhintSend     H4Enterkeyhint = "send"
 	H4EnterkeyhintDone     H4Enterkeyhint = "done"
 	H4EnterkeyhintEnter    H4Enterkeyhint = "enter"
 	H4EnterkeyhintGo       H4Enterkeyhint = "go"
-	H4EnterkeyhintNext     H4Enterkeyhint = "next"
-	H4EnterkeyhintPrevious H4Enterkeyhint = "previous"
 )
 
 type H4Hidden string
@@ -170,8 +195,8 @@ const (
 type H4Spellcheck string
 
 const (
-	H4SpellcheckFalse H4Spellcheck = "false"
 	H4SpellcheckTrue  H4Spellcheck = "true"
+	H4SpellcheckFalse H4Spellcheck = "false"
 	H4SpellcheckEmpty H4Spellcheck = ""
 )
 

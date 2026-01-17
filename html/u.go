@@ -70,6 +70,31 @@ func (e *UElement) Textf(format string, args ...any) *UElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *UElement) If(cond bool, child htemel.Node) *UElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *UElement) IfElse(cond bool, then, els htemel.Node) *UElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *UElement) IfThen(cond bool, fn func(*UElement)) *UElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *UElement) AddClass(classes ...string) *UElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *UElement) ToggleClass(class string, enable bool) *UElement {
 type UAutocapitalize string
 
 const (
+	UAutocapitalizeOff        UAutocapitalize = "off"
+	UAutocapitalizeOn         UAutocapitalize = "on"
 	UAutocapitalizeSentences  UAutocapitalize = "sentences"
 	UAutocapitalizeWords      UAutocapitalize = "words"
 	UAutocapitalizeCharacters UAutocapitalize = "characters"
 	UAutocapitalizeNone       UAutocapitalize = "none"
-	UAutocapitalizeOff        UAutocapitalize = "off"
-	UAutocapitalizeOn         UAutocapitalize = "on"
 )
 
 type UAutocorrect string
@@ -122,9 +147,9 @@ const (
 type UDir string
 
 const (
+	UDirAuto UDir = "auto"
 	UDirLtr  UDir = "ltr"
 	UDirRtl  UDir = "rtl"
-	UDirAuto UDir = "auto"
 )
 
 type UDraggable string
@@ -137,13 +162,13 @@ const (
 type UEnterkeyhint string
 
 const (
-	UEnterkeyhintDone     UEnterkeyhint = "done"
-	UEnterkeyhintEnter    UEnterkeyhint = "enter"
-	UEnterkeyhintGo       UEnterkeyhint = "go"
 	UEnterkeyhintNext     UEnterkeyhint = "next"
 	UEnterkeyhintPrevious UEnterkeyhint = "previous"
 	UEnterkeyhintSearch   UEnterkeyhint = "search"
 	UEnterkeyhintSend     UEnterkeyhint = "send"
+	UEnterkeyhintDone     UEnterkeyhint = "done"
+	UEnterkeyhintEnter    UEnterkeyhint = "enter"
+	UEnterkeyhintGo       UEnterkeyhint = "go"
 )
 
 type UHidden string
@@ -157,14 +182,14 @@ const (
 type UInputmode string
 
 const (
-	UInputmodeUrl     UInputmode = "url"
-	UInputmodeDecimal UInputmode = "decimal"
 	UInputmodeEmail   UInputmode = "email"
 	UInputmodeNone    UInputmode = "none"
 	UInputmodeNumeric UInputmode = "numeric"
 	UInputmodeSearch  UInputmode = "search"
 	UInputmodeTel     UInputmode = "tel"
 	UInputmodeText    UInputmode = "text"
+	UInputmodeUrl     UInputmode = "url"
+	UInputmodeDecimal UInputmode = "decimal"
 )
 
 type USpellcheck string
@@ -186,8 +211,8 @@ const (
 type UWritingsuggestions string
 
 const (
-	UWritingsuggestionsTrue  UWritingsuggestions = "true"
 	UWritingsuggestionsFalse UWritingsuggestions = "false"
+	UWritingsuggestionsTrue  UWritingsuggestions = "true"
 	UWritingsuggestionsEmpty UWritingsuggestions = ""
 )
 

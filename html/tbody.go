@@ -70,6 +70,31 @@ func (e *TbodyElement) Textf(format string, args ...any) *TbodyElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *TbodyElement) If(cond bool, child htemel.Node) *TbodyElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *TbodyElement) IfElse(cond bool, then, els htemel.Node) *TbodyElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *TbodyElement) IfThen(cond bool, fn func(*TbodyElement)) *TbodyElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *TbodyElement) AddClass(classes ...string) *TbodyElement {
 	current := e.attributes["class"].(string)
@@ -105,8 +130,8 @@ const (
 type TbodyAutocorrect string
 
 const (
-	TbodyAutocorrectOff   TbodyAutocorrect = "off"
 	TbodyAutocorrectOn    TbodyAutocorrect = "on"
+	TbodyAutocorrectOff   TbodyAutocorrect = "off"
 	TbodyAutocorrectEmpty TbodyAutocorrect = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type TbodyEnterkeyhint string
 
 const (
-	TbodyEnterkeyhintEnter    TbodyEnterkeyhint = "enter"
-	TbodyEnterkeyhintGo       TbodyEnterkeyhint = "go"
 	TbodyEnterkeyhintNext     TbodyEnterkeyhint = "next"
 	TbodyEnterkeyhintPrevious TbodyEnterkeyhint = "previous"
 	TbodyEnterkeyhintSearch   TbodyEnterkeyhint = "search"
 	TbodyEnterkeyhintSend     TbodyEnterkeyhint = "send"
 	TbodyEnterkeyhintDone     TbodyEnterkeyhint = "done"
+	TbodyEnterkeyhintEnter    TbodyEnterkeyhint = "enter"
+	TbodyEnterkeyhintGo       TbodyEnterkeyhint = "go"
 )
 
 type TbodyHidden string
@@ -157,14 +182,14 @@ const (
 type TbodyInputmode string
 
 const (
-	TbodyInputmodeUrl     TbodyInputmode = "url"
-	TbodyInputmodeDecimal TbodyInputmode = "decimal"
-	TbodyInputmodeEmail   TbodyInputmode = "email"
-	TbodyInputmodeNone    TbodyInputmode = "none"
 	TbodyInputmodeNumeric TbodyInputmode = "numeric"
 	TbodyInputmodeSearch  TbodyInputmode = "search"
 	TbodyInputmodeTel     TbodyInputmode = "tel"
 	TbodyInputmodeText    TbodyInputmode = "text"
+	TbodyInputmodeUrl     TbodyInputmode = "url"
+	TbodyInputmodeDecimal TbodyInputmode = "decimal"
+	TbodyInputmodeEmail   TbodyInputmode = "email"
+	TbodyInputmodeNone    TbodyInputmode = "none"
 )
 
 type TbodySpellcheck string
@@ -186,8 +211,8 @@ const (
 type TbodyWritingsuggestions string
 
 const (
-	TbodyWritingsuggestionsFalse TbodyWritingsuggestions = "false"
 	TbodyWritingsuggestionsTrue  TbodyWritingsuggestions = "true"
+	TbodyWritingsuggestionsFalse TbodyWritingsuggestions = "false"
 	TbodyWritingsuggestionsEmpty TbodyWritingsuggestions = ""
 )
 

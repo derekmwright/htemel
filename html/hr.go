@@ -70,12 +70,12 @@ func (e *HrElement) ToggleClass(class string, enable bool) *HrElement {
 type HrAutocapitalize string
 
 const (
-	HrAutocapitalizeCharacters HrAutocapitalize = "characters"
-	HrAutocapitalizeNone       HrAutocapitalize = "none"
 	HrAutocapitalizeOff        HrAutocapitalize = "off"
 	HrAutocapitalizeOn         HrAutocapitalize = "on"
 	HrAutocapitalizeSentences  HrAutocapitalize = "sentences"
 	HrAutocapitalizeWords      HrAutocapitalize = "words"
+	HrAutocapitalizeCharacters HrAutocapitalize = "characters"
+	HrAutocapitalizeNone       HrAutocapitalize = "none"
 )
 
 type HrAutocorrect string
@@ -89,37 +89,37 @@ const (
 type HrContenteditable string
 
 const (
-	HrContenteditableFalse         HrContenteditable = "false"
 	HrContenteditablePlaintextOnly HrContenteditable = "plaintext-only"
 	HrContenteditableTrue          HrContenteditable = "true"
+	HrContenteditableFalse         HrContenteditable = "false"
 	HrContenteditableEmpty         HrContenteditable = ""
 )
 
 type HrDir string
 
 const (
+	HrDirAuto HrDir = "auto"
 	HrDirLtr  HrDir = "ltr"
 	HrDirRtl  HrDir = "rtl"
-	HrDirAuto HrDir = "auto"
 )
 
 type HrDraggable string
 
 const (
-	HrDraggableFalse HrDraggable = "false"
 	HrDraggableTrue  HrDraggable = "true"
+	HrDraggableFalse HrDraggable = "false"
 )
 
 type HrEnterkeyhint string
 
 const (
-	HrEnterkeyhintPrevious HrEnterkeyhint = "previous"
-	HrEnterkeyhintSearch   HrEnterkeyhint = "search"
-	HrEnterkeyhintSend     HrEnterkeyhint = "send"
 	HrEnterkeyhintDone     HrEnterkeyhint = "done"
 	HrEnterkeyhintEnter    HrEnterkeyhint = "enter"
 	HrEnterkeyhintGo       HrEnterkeyhint = "go"
 	HrEnterkeyhintNext     HrEnterkeyhint = "next"
+	HrEnterkeyhintPrevious HrEnterkeyhint = "previous"
+	HrEnterkeyhintSearch   HrEnterkeyhint = "search"
+	HrEnterkeyhintSend     HrEnterkeyhint = "send"
 )
 
 type HrHidden string
@@ -133,14 +133,14 @@ const (
 type HrInputmode string
 
 const (
-	HrInputmodeTel     HrInputmode = "tel"
-	HrInputmodeText    HrInputmode = "text"
 	HrInputmodeUrl     HrInputmode = "url"
 	HrInputmodeDecimal HrInputmode = "decimal"
 	HrInputmodeEmail   HrInputmode = "email"
 	HrInputmodeNone    HrInputmode = "none"
 	HrInputmodeNumeric HrInputmode = "numeric"
 	HrInputmodeSearch  HrInputmode = "search"
+	HrInputmodeTel     HrInputmode = "tel"
+	HrInputmodeText    HrInputmode = "text"
 )
 
 type HrSpellcheck string
@@ -162,8 +162,8 @@ const (
 type HrWritingsuggestions string
 
 const (
-	HrWritingsuggestionsFalse HrWritingsuggestions = "false"
 	HrWritingsuggestionsTrue  HrWritingsuggestions = "true"
+	HrWritingsuggestionsFalse HrWritingsuggestions = "false"
 	HrWritingsuggestionsEmpty HrWritingsuggestions = ""
 )
 

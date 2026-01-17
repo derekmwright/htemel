@@ -70,6 +70,31 @@ func (e *DialogElement) Textf(format string, args ...any) *DialogElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *DialogElement) If(cond bool, child htemel.Node) *DialogElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *DialogElement) IfElse(cond bool, then, els htemel.Node) *DialogElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *DialogElement) IfThen(cond bool, fn func(*DialogElement)) *DialogElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *DialogElement) AddClass(classes ...string) *DialogElement {
 	current := e.attributes["class"].(string)
@@ -102,12 +127,12 @@ const (
 type DialogAutocapitalize string
 
 const (
-	DialogAutocapitalizeOn         DialogAutocapitalize = "on"
-	DialogAutocapitalizeSentences  DialogAutocapitalize = "sentences"
-	DialogAutocapitalizeWords      DialogAutocapitalize = "words"
 	DialogAutocapitalizeCharacters DialogAutocapitalize = "characters"
 	DialogAutocapitalizeNone       DialogAutocapitalize = "none"
 	DialogAutocapitalizeOff        DialogAutocapitalize = "off"
+	DialogAutocapitalizeOn         DialogAutocapitalize = "on"
+	DialogAutocapitalizeSentences  DialogAutocapitalize = "sentences"
+	DialogAutocapitalizeWords      DialogAutocapitalize = "words"
 )
 
 type DialogAutocorrect string
@@ -121,9 +146,9 @@ const (
 type DialogContenteditable string
 
 const (
+	DialogContenteditableFalse         DialogContenteditable = "false"
 	DialogContenteditablePlaintextOnly DialogContenteditable = "plaintext-only"
 	DialogContenteditableTrue          DialogContenteditable = "true"
-	DialogContenteditableFalse         DialogContenteditable = "false"
 	DialogContenteditableEmpty         DialogContenteditable = ""
 )
 
@@ -145,34 +170,34 @@ const (
 type DialogEnterkeyhint string
 
 const (
+	DialogEnterkeyhintPrevious DialogEnterkeyhint = "previous"
 	DialogEnterkeyhintSearch   DialogEnterkeyhint = "search"
 	DialogEnterkeyhintSend     DialogEnterkeyhint = "send"
 	DialogEnterkeyhintDone     DialogEnterkeyhint = "done"
 	DialogEnterkeyhintEnter    DialogEnterkeyhint = "enter"
 	DialogEnterkeyhintGo       DialogEnterkeyhint = "go"
 	DialogEnterkeyhintNext     DialogEnterkeyhint = "next"
-	DialogEnterkeyhintPrevious DialogEnterkeyhint = "previous"
 )
 
 type DialogHidden string
 
 const (
-	DialogHiddenHidden     DialogHidden = "hidden"
 	DialogHiddenUntilFound DialogHidden = "until-found"
+	DialogHiddenHidden     DialogHidden = "hidden"
 	DialogHiddenEmpty      DialogHidden = ""
 )
 
 type DialogInputmode string
 
 const (
-	DialogInputmodeNone    DialogInputmode = "none"
-	DialogInputmodeNumeric DialogInputmode = "numeric"
-	DialogInputmodeSearch  DialogInputmode = "search"
-	DialogInputmodeTel     DialogInputmode = "tel"
 	DialogInputmodeText    DialogInputmode = "text"
 	DialogInputmodeUrl     DialogInputmode = "url"
 	DialogInputmodeDecimal DialogInputmode = "decimal"
 	DialogInputmodeEmail   DialogInputmode = "email"
+	DialogInputmodeNone    DialogInputmode = "none"
+	DialogInputmodeNumeric DialogInputmode = "numeric"
+	DialogInputmodeSearch  DialogInputmode = "search"
+	DialogInputmodeTel     DialogInputmode = "tel"
 )
 
 type DialogSpellcheck string

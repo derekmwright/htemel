@@ -70,6 +70,31 @@ func (e *OptionElement) Textf(format string, args ...any) *OptionElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *OptionElement) If(cond bool, child htemel.Node) *OptionElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *OptionElement) IfElse(cond bool, then, els htemel.Node) *OptionElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *OptionElement) IfThen(cond bool, fn func(*OptionElement)) *OptionElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *OptionElement) AddClass(classes ...string) *OptionElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *OptionElement) ToggleClass(class string, enable bool) *OptionElement {
 type OptionAutocapitalize string
 
 const (
+	OptionAutocapitalizeWords      OptionAutocapitalize = "words"
 	OptionAutocapitalizeCharacters OptionAutocapitalize = "characters"
 	OptionAutocapitalizeNone       OptionAutocapitalize = "none"
 	OptionAutocapitalizeOff        OptionAutocapitalize = "off"
 	OptionAutocapitalizeOn         OptionAutocapitalize = "on"
 	OptionAutocapitalizeSentences  OptionAutocapitalize = "sentences"
-	OptionAutocapitalizeWords      OptionAutocapitalize = "words"
 )
 
 type OptionAutocorrect string
@@ -137,49 +162,49 @@ const (
 type OptionEnterkeyhint string
 
 const (
-	OptionEnterkeyhintDone     OptionEnterkeyhint = "done"
-	OptionEnterkeyhintEnter    OptionEnterkeyhint = "enter"
 	OptionEnterkeyhintGo       OptionEnterkeyhint = "go"
 	OptionEnterkeyhintNext     OptionEnterkeyhint = "next"
 	OptionEnterkeyhintPrevious OptionEnterkeyhint = "previous"
 	OptionEnterkeyhintSearch   OptionEnterkeyhint = "search"
 	OptionEnterkeyhintSend     OptionEnterkeyhint = "send"
+	OptionEnterkeyhintDone     OptionEnterkeyhint = "done"
+	OptionEnterkeyhintEnter    OptionEnterkeyhint = "enter"
 )
 
 type OptionHidden string
 
 const (
-	OptionHiddenHidden     OptionHidden = "hidden"
 	OptionHiddenUntilFound OptionHidden = "until-found"
+	OptionHiddenHidden     OptionHidden = "hidden"
 	OptionHiddenEmpty      OptionHidden = ""
 )
 
 type OptionInputmode string
 
 const (
+	OptionInputmodeDecimal OptionInputmode = "decimal"
+	OptionInputmodeEmail   OptionInputmode = "email"
+	OptionInputmodeNone    OptionInputmode = "none"
 	OptionInputmodeNumeric OptionInputmode = "numeric"
 	OptionInputmodeSearch  OptionInputmode = "search"
 	OptionInputmodeTel     OptionInputmode = "tel"
 	OptionInputmodeText    OptionInputmode = "text"
 	OptionInputmodeUrl     OptionInputmode = "url"
-	OptionInputmodeDecimal OptionInputmode = "decimal"
-	OptionInputmodeEmail   OptionInputmode = "email"
-	OptionInputmodeNone    OptionInputmode = "none"
 )
 
 type OptionSpellcheck string
 
 const (
-	OptionSpellcheckTrue  OptionSpellcheck = "true"
 	OptionSpellcheckFalse OptionSpellcheck = "false"
+	OptionSpellcheckTrue  OptionSpellcheck = "true"
 	OptionSpellcheckEmpty OptionSpellcheck = ""
 )
 
 type OptionTranslate string
 
 const (
-	OptionTranslateNo    OptionTranslate = "no"
 	OptionTranslateYes   OptionTranslate = "yes"
+	OptionTranslateNo    OptionTranslate = "no"
 	OptionTranslateEmpty OptionTranslate = ""
 )
 

@@ -70,6 +70,31 @@ func (e *BElement) Textf(format string, args ...any) *BElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *BElement) If(cond bool, child htemel.Node) *BElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *BElement) IfElse(cond bool, then, els htemel.Node) *BElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *BElement) IfThen(cond bool, fn func(*BElement)) *BElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *BElement) AddClass(classes ...string) *BElement {
 	current := e.attributes["class"].(string)
@@ -122,9 +147,9 @@ const (
 type BDir string
 
 const (
-	BDirRtl  BDir = "rtl"
 	BDirAuto BDir = "auto"
 	BDirLtr  BDir = "ltr"
+	BDirRtl  BDir = "rtl"
 )
 
 type BDraggable string
@@ -137,27 +162,26 @@ const (
 type BEnterkeyhint string
 
 const (
+	BEnterkeyhintGo       BEnterkeyhint = "go"
+	BEnterkeyhintNext     BEnterkeyhint = "next"
 	BEnterkeyhintPrevious BEnterkeyhint = "previous"
 	BEnterkeyhintSearch   BEnterkeyhint = "search"
 	BEnterkeyhintSend     BEnterkeyhint = "send"
 	BEnterkeyhintDone     BEnterkeyhint = "done"
 	BEnterkeyhintEnter    BEnterkeyhint = "enter"
-	BEnterkeyhintGo       BEnterkeyhint = "go"
-	BEnterkeyhintNext     BEnterkeyhint = "next"
 )
 
 type BHidden string
 
 const (
-	BHiddenUntilFound BHidden = "until-found"
 	BHiddenHidden     BHidden = "hidden"
+	BHiddenUntilFound BHidden = "until-found"
 	BHiddenEmpty      BHidden = ""
 )
 
 type BInputmode string
 
 const (
-	BInputmodeDecimal BInputmode = "decimal"
 	BInputmodeEmail   BInputmode = "email"
 	BInputmodeNone    BInputmode = "none"
 	BInputmodeNumeric BInputmode = "numeric"
@@ -165,21 +189,22 @@ const (
 	BInputmodeTel     BInputmode = "tel"
 	BInputmodeText    BInputmode = "text"
 	BInputmodeUrl     BInputmode = "url"
+	BInputmodeDecimal BInputmode = "decimal"
 )
 
 type BSpellcheck string
 
 const (
-	BSpellcheckFalse BSpellcheck = "false"
 	BSpellcheckTrue  BSpellcheck = "true"
+	BSpellcheckFalse BSpellcheck = "false"
 	BSpellcheckEmpty BSpellcheck = ""
 )
 
 type BTranslate string
 
 const (
-	BTranslateNo    BTranslate = "no"
 	BTranslateYes   BTranslate = "yes"
+	BTranslateNo    BTranslate = "no"
 	BTranslateEmpty BTranslate = ""
 )
 

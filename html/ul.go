@@ -70,6 +70,31 @@ func (e *UlElement) Textf(format string, args ...any) *UlElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *UlElement) If(cond bool, child htemel.Node) *UlElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *UlElement) IfElse(cond bool, then, els htemel.Node) *UlElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *UlElement) IfThen(cond bool, fn func(*UlElement)) *UlElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *UlElement) AddClass(classes ...string) *UlElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *UlElement) ToggleClass(class string, enable bool) *UlElement {
 type UlAutocapitalize string
 
 const (
-	UlAutocapitalizeOn         UlAutocapitalize = "on"
-	UlAutocapitalizeSentences  UlAutocapitalize = "sentences"
-	UlAutocapitalizeWords      UlAutocapitalize = "words"
 	UlAutocapitalizeCharacters UlAutocapitalize = "characters"
 	UlAutocapitalizeNone       UlAutocapitalize = "none"
 	UlAutocapitalizeOff        UlAutocapitalize = "off"
+	UlAutocapitalizeOn         UlAutocapitalize = "on"
+	UlAutocapitalizeSentences  UlAutocapitalize = "sentences"
+	UlAutocapitalizeWords      UlAutocapitalize = "words"
 )
 
 type UlAutocorrect string
@@ -137,13 +162,13 @@ const (
 type UlEnterkeyhint string
 
 const (
+	UlEnterkeyhintEnter    UlEnterkeyhint = "enter"
 	UlEnterkeyhintGo       UlEnterkeyhint = "go"
 	UlEnterkeyhintNext     UlEnterkeyhint = "next"
 	UlEnterkeyhintPrevious UlEnterkeyhint = "previous"
 	UlEnterkeyhintSearch   UlEnterkeyhint = "search"
 	UlEnterkeyhintSend     UlEnterkeyhint = "send"
 	UlEnterkeyhintDone     UlEnterkeyhint = "done"
-	UlEnterkeyhintEnter    UlEnterkeyhint = "enter"
 )
 
 type UlHidden string
@@ -157,14 +182,14 @@ const (
 type UlInputmode string
 
 const (
-	UlInputmodeTel     UlInputmode = "tel"
-	UlInputmodeText    UlInputmode = "text"
-	UlInputmodeUrl     UlInputmode = "url"
-	UlInputmodeDecimal UlInputmode = "decimal"
 	UlInputmodeEmail   UlInputmode = "email"
 	UlInputmodeNone    UlInputmode = "none"
 	UlInputmodeNumeric UlInputmode = "numeric"
 	UlInputmodeSearch  UlInputmode = "search"
+	UlInputmodeTel     UlInputmode = "tel"
+	UlInputmodeText    UlInputmode = "text"
+	UlInputmodeUrl     UlInputmode = "url"
+	UlInputmodeDecimal UlInputmode = "decimal"
 )
 
 type UlSpellcheck string

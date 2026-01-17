@@ -85,47 +85,47 @@ const (
 type InputPopovertargetaction string
 
 const (
-	InputPopovertargetactionToggle InputPopovertargetaction = "toggle"
 	InputPopovertargetactionHide   InputPopovertargetaction = "hide"
 	InputPopovertargetactionShow   InputPopovertargetaction = "show"
+	InputPopovertargetactionToggle InputPopovertargetaction = "toggle"
 )
 
 type InputType string
 
 const (
-	InputTypeText          InputType = "text"
-	InputTypeNumber        InputType = "number"
-	InputTypeRange         InputType = "range"
-	InputTypeEmail         InputType = "email"
-	InputTypeFile          InputType = "file"
-	InputTypeSubmit        InputType = "submit"
-	InputTypeTel           InputType = "tel"
-	InputTypeUrl           InputType = "url"
-	InputTypeDate          InputType = "date"
-	InputTypeImage         InputType = "image"
-	InputTypePassword      InputType = "password"
-	InputTypeRadio         InputType = "radio"
-	InputTypeWeek          InputType = "week"
-	InputTypeButton        InputType = "button"
-	InputTypeCheckbox      InputType = "checkbox"
 	InputTypeColor         InputType = "color"
 	InputTypeDatetimeLocal InputType = "datetime-local"
-	InputTypeHidden        InputType = "hidden"
-	InputTypeMonth         InputType = "month"
-	InputTypeTime          InputType = "time"
-	InputTypeReset         InputType = "reset"
 	InputTypeSearch        InputType = "search"
+	InputTypeWeek          InputType = "week"
+	InputTypeButton        InputType = "button"
+	InputTypeEmail         InputType = "email"
+	InputTypeFile          InputType = "file"
+	InputTypeHidden        InputType = "hidden"
+	InputTypeImage         InputType = "image"
+	InputTypeReset         InputType = "reset"
+	InputTypeText          InputType = "text"
+	InputTypeCheckbox      InputType = "checkbox"
+	InputTypeDate          InputType = "date"
+	InputTypeMonth         InputType = "month"
+	InputTypeNumber        InputType = "number"
+	InputTypeRange         InputType = "range"
+	InputTypeSubmit        InputType = "submit"
+	InputTypeTel           InputType = "tel"
+	InputTypePassword      InputType = "password"
+	InputTypeRadio         InputType = "radio"
+	InputTypeTime          InputType = "time"
+	InputTypeUrl           InputType = "url"
 )
 
 type InputAutocapitalize string
 
 const (
-	InputAutocapitalizeOff        InputAutocapitalize = "off"
-	InputAutocapitalizeOn         InputAutocapitalize = "on"
-	InputAutocapitalizeSentences  InputAutocapitalize = "sentences"
 	InputAutocapitalizeWords      InputAutocapitalize = "words"
 	InputAutocapitalizeCharacters InputAutocapitalize = "characters"
 	InputAutocapitalizeNone       InputAutocapitalize = "none"
+	InputAutocapitalizeOff        InputAutocapitalize = "off"
+	InputAutocapitalizeOn         InputAutocapitalize = "on"
+	InputAutocapitalizeSentences  InputAutocapitalize = "sentences"
 )
 
 type InputAutocorrect string
@@ -139,9 +139,9 @@ const (
 type InputContenteditable string
 
 const (
-	InputContenteditableTrue          InputContenteditable = "true"
 	InputContenteditableFalse         InputContenteditable = "false"
 	InputContenteditablePlaintextOnly InputContenteditable = "plaintext-only"
+	InputContenteditableTrue          InputContenteditable = "true"
 	InputContenteditableEmpty         InputContenteditable = ""
 )
 
@@ -163,13 +163,13 @@ const (
 type InputEnterkeyhint string
 
 const (
-	InputEnterkeyhintPrevious InputEnterkeyhint = "previous"
-	InputEnterkeyhintSearch   InputEnterkeyhint = "search"
-	InputEnterkeyhintSend     InputEnterkeyhint = "send"
 	InputEnterkeyhintDone     InputEnterkeyhint = "done"
 	InputEnterkeyhintEnter    InputEnterkeyhint = "enter"
 	InputEnterkeyhintGo       InputEnterkeyhint = "go"
 	InputEnterkeyhintNext     InputEnterkeyhint = "next"
+	InputEnterkeyhintPrevious InputEnterkeyhint = "previous"
+	InputEnterkeyhintSearch   InputEnterkeyhint = "search"
+	InputEnterkeyhintSend     InputEnterkeyhint = "send"
 )
 
 type InputHidden string
@@ -183,14 +183,14 @@ const (
 type InputInputmode string
 
 const (
+	InputInputmodeNone    InputInputmode = "none"
+	InputInputmodeNumeric InputInputmode = "numeric"
+	InputInputmodeSearch  InputInputmode = "search"
 	InputInputmodeTel     InputInputmode = "tel"
 	InputInputmodeText    InputInputmode = "text"
 	InputInputmodeUrl     InputInputmode = "url"
 	InputInputmodeDecimal InputInputmode = "decimal"
 	InputInputmodeEmail   InputInputmode = "email"
-	InputInputmodeNone    InputInputmode = "none"
-	InputInputmodeNumeric InputInputmode = "numeric"
-	InputInputmodeSearch  InputInputmode = "search"
 )
 
 type InputSpellcheck string
@@ -212,8 +212,8 @@ const (
 type InputWritingsuggestions string
 
 const (
-	InputWritingsuggestionsFalse InputWritingsuggestions = "false"
 	InputWritingsuggestionsTrue  InputWritingsuggestions = "true"
+	InputWritingsuggestionsFalse InputWritingsuggestions = "false"
 	InputWritingsuggestionsEmpty InputWritingsuggestions = ""
 )
 

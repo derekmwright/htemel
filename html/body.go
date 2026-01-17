@@ -70,6 +70,31 @@ func (e *BodyElement) Textf(format string, args ...any) *BodyElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *BodyElement) If(cond bool, child htemel.Node) *BodyElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *BodyElement) IfElse(cond bool, then, els htemel.Node) *BodyElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *BodyElement) IfThen(cond bool, fn func(*BodyElement)) *BodyElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *BodyElement) AddClass(classes ...string) *BodyElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *BodyElement) ToggleClass(class string, enable bool) *BodyElement {
 type BodyAutocapitalize string
 
 const (
-	BodyAutocapitalizeCharacters BodyAutocapitalize = "characters"
-	BodyAutocapitalizeNone       BodyAutocapitalize = "none"
 	BodyAutocapitalizeOff        BodyAutocapitalize = "off"
 	BodyAutocapitalizeOn         BodyAutocapitalize = "on"
 	BodyAutocapitalizeSentences  BodyAutocapitalize = "sentences"
 	BodyAutocapitalizeWords      BodyAutocapitalize = "words"
+	BodyAutocapitalizeCharacters BodyAutocapitalize = "characters"
+	BodyAutocapitalizeNone       BodyAutocapitalize = "none"
 )
 
 type BodyAutocorrect string
@@ -113,9 +138,9 @@ const (
 type BodyContenteditable string
 
 const (
+	BodyContenteditableTrue          BodyContenteditable = "true"
 	BodyContenteditableFalse         BodyContenteditable = "false"
 	BodyContenteditablePlaintextOnly BodyContenteditable = "plaintext-only"
-	BodyContenteditableTrue          BodyContenteditable = "true"
 	BodyContenteditableEmpty         BodyContenteditable = ""
 )
 
@@ -130,20 +155,20 @@ const (
 type BodyDraggable string
 
 const (
-	BodyDraggableTrue  BodyDraggable = "true"
 	BodyDraggableFalse BodyDraggable = "false"
+	BodyDraggableTrue  BodyDraggable = "true"
 )
 
 type BodyEnterkeyhint string
 
 const (
+	BodyEnterkeyhintNext     BodyEnterkeyhint = "next"
+	BodyEnterkeyhintPrevious BodyEnterkeyhint = "previous"
+	BodyEnterkeyhintSearch   BodyEnterkeyhint = "search"
 	BodyEnterkeyhintSend     BodyEnterkeyhint = "send"
 	BodyEnterkeyhintDone     BodyEnterkeyhint = "done"
 	BodyEnterkeyhintEnter    BodyEnterkeyhint = "enter"
 	BodyEnterkeyhintGo       BodyEnterkeyhint = "go"
-	BodyEnterkeyhintNext     BodyEnterkeyhint = "next"
-	BodyEnterkeyhintPrevious BodyEnterkeyhint = "previous"
-	BodyEnterkeyhintSearch   BodyEnterkeyhint = "search"
 )
 
 type BodyHidden string
@@ -157,37 +182,37 @@ const (
 type BodyInputmode string
 
 const (
-	BodyInputmodeUrl     BodyInputmode = "url"
-	BodyInputmodeDecimal BodyInputmode = "decimal"
 	BodyInputmodeEmail   BodyInputmode = "email"
 	BodyInputmodeNone    BodyInputmode = "none"
 	BodyInputmodeNumeric BodyInputmode = "numeric"
 	BodyInputmodeSearch  BodyInputmode = "search"
 	BodyInputmodeTel     BodyInputmode = "tel"
 	BodyInputmodeText    BodyInputmode = "text"
+	BodyInputmodeUrl     BodyInputmode = "url"
+	BodyInputmodeDecimal BodyInputmode = "decimal"
 )
 
 type BodySpellcheck string
 
 const (
-	BodySpellcheckTrue  BodySpellcheck = "true"
 	BodySpellcheckFalse BodySpellcheck = "false"
+	BodySpellcheckTrue  BodySpellcheck = "true"
 	BodySpellcheckEmpty BodySpellcheck = ""
 )
 
 type BodyTranslate string
 
 const (
-	BodyTranslateYes   BodyTranslate = "yes"
 	BodyTranslateNo    BodyTranslate = "no"
+	BodyTranslateYes   BodyTranslate = "yes"
 	BodyTranslateEmpty BodyTranslate = ""
 )
 
 type BodyWritingsuggestions string
 
 const (
-	BodyWritingsuggestionsFalse BodyWritingsuggestions = "false"
 	BodyWritingsuggestionsTrue  BodyWritingsuggestions = "true"
+	BodyWritingsuggestionsFalse BodyWritingsuggestions = "false"
 	BodyWritingsuggestionsEmpty BodyWritingsuggestions = ""
 )
 

@@ -70,6 +70,31 @@ func (e *AbbrElement) Textf(format string, args ...any) *AbbrElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *AbbrElement) If(cond bool, child htemel.Node) *AbbrElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *AbbrElement) IfElse(cond bool, then, els htemel.Node) *AbbrElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *AbbrElement) IfThen(cond bool, fn func(*AbbrElement)) *AbbrElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *AbbrElement) AddClass(classes ...string) *AbbrElement {
 	current := e.attributes["class"].(string)
@@ -122,9 +147,9 @@ const (
 type AbbrDir string
 
 const (
-	AbbrDirRtl  AbbrDir = "rtl"
 	AbbrDirAuto AbbrDir = "auto"
 	AbbrDirLtr  AbbrDir = "ltr"
+	AbbrDirRtl  AbbrDir = "rtl"
 )
 
 type AbbrDraggable string
@@ -137,13 +162,13 @@ const (
 type AbbrEnterkeyhint string
 
 const (
+	AbbrEnterkeyhintSend     AbbrEnterkeyhint = "send"
+	AbbrEnterkeyhintDone     AbbrEnterkeyhint = "done"
 	AbbrEnterkeyhintEnter    AbbrEnterkeyhint = "enter"
 	AbbrEnterkeyhintGo       AbbrEnterkeyhint = "go"
 	AbbrEnterkeyhintNext     AbbrEnterkeyhint = "next"
 	AbbrEnterkeyhintPrevious AbbrEnterkeyhint = "previous"
 	AbbrEnterkeyhintSearch   AbbrEnterkeyhint = "search"
-	AbbrEnterkeyhintSend     AbbrEnterkeyhint = "send"
-	AbbrEnterkeyhintDone     AbbrEnterkeyhint = "done"
 )
 
 type AbbrHidden string
@@ -157,14 +182,14 @@ const (
 type AbbrInputmode string
 
 const (
-	AbbrInputmodeSearch  AbbrInputmode = "search"
-	AbbrInputmodeTel     AbbrInputmode = "tel"
-	AbbrInputmodeText    AbbrInputmode = "text"
 	AbbrInputmodeUrl     AbbrInputmode = "url"
 	AbbrInputmodeDecimal AbbrInputmode = "decimal"
 	AbbrInputmodeEmail   AbbrInputmode = "email"
 	AbbrInputmodeNone    AbbrInputmode = "none"
 	AbbrInputmodeNumeric AbbrInputmode = "numeric"
+	AbbrInputmodeSearch  AbbrInputmode = "search"
+	AbbrInputmodeTel     AbbrInputmode = "tel"
+	AbbrInputmodeText    AbbrInputmode = "text"
 )
 
 type AbbrSpellcheck string
@@ -178,8 +203,8 @@ const (
 type AbbrTranslate string
 
 const (
-	AbbrTranslateNo    AbbrTranslate = "no"
 	AbbrTranslateYes   AbbrTranslate = "yes"
+	AbbrTranslateNo    AbbrTranslate = "no"
 	AbbrTranslateEmpty AbbrTranslate = ""
 )
 

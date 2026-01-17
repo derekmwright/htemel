@@ -231,6 +231,65 @@ func (e *{{ .Tag | titleCase }}Element) Textf(format string, args ...any) *{{ .T
 	return tmpl, nil
 }
 
+func IfFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("IfFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+{{ if not .Void }}
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *{{ .Tag | titleCase }}Element) If(cond bool, child htemel.Node) *{{ .Tag | titleCase }}Element {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+{{ end }}
+`))
+
+	return tmpl, nil
+}
+
+func IfElseFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("IfElseFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+{{ if not .Void }}
+// 
+func (e *{{ .Tag | titleCase }}Element) IfElse(cond bool, then, els htemel.Node) *{{ .Tag | titleCase }}Element {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+{{ end }}
+`))
+
+	return tmpl, nil
+}
+
+func IfThenFunc() (*template.Template, ImportSet) {
+	tmpl := template.Must(template.New("IfThenFunc").
+		Funcs(template.FuncMap{
+			"titleCase": titleCase,
+		}).Parse(`
+{{ if not .Void }}
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *{{ .Tag | titleCase }}Element) IfThen(cond bool, fn func(*{{ .Tag | titleCase }}Element)) *{{ .Tag | titleCase }}Element {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+{{ end }}
+`))
+
+	return tmpl, nil
+}
+
 func AddClassFunc() (*template.Template, ImportSet) {
 	tmpl := template.Must(template.New("AddClassFunc").
 		Funcs(template.FuncMap{

@@ -70,6 +70,31 @@ func (e *ColgroupElement) Textf(format string, args ...any) *ColgroupElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *ColgroupElement) If(cond bool, child htemel.Node) *ColgroupElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *ColgroupElement) IfElse(cond bool, then, els htemel.Node) *ColgroupElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *ColgroupElement) IfThen(cond bool, fn func(*ColgroupElement)) *ColgroupElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *ColgroupElement) AddClass(classes ...string) *ColgroupElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *ColgroupElement) ToggleClass(class string, enable bool) *ColgroupElemen
 type ColgroupAutocapitalize string
 
 const (
-	ColgroupAutocapitalizeOff        ColgroupAutocapitalize = "off"
-	ColgroupAutocapitalizeOn         ColgroupAutocapitalize = "on"
-	ColgroupAutocapitalizeSentences  ColgroupAutocapitalize = "sentences"
 	ColgroupAutocapitalizeWords      ColgroupAutocapitalize = "words"
 	ColgroupAutocapitalizeCharacters ColgroupAutocapitalize = "characters"
 	ColgroupAutocapitalizeNone       ColgroupAutocapitalize = "none"
+	ColgroupAutocapitalizeOff        ColgroupAutocapitalize = "off"
+	ColgroupAutocapitalizeOn         ColgroupAutocapitalize = "on"
+	ColgroupAutocapitalizeSentences  ColgroupAutocapitalize = "sentences"
 )
 
 type ColgroupAutocorrect string
@@ -130,20 +155,20 @@ const (
 type ColgroupDraggable string
 
 const (
-	ColgroupDraggableFalse ColgroupDraggable = "false"
 	ColgroupDraggableTrue  ColgroupDraggable = "true"
+	ColgroupDraggableFalse ColgroupDraggable = "false"
 )
 
 type ColgroupEnterkeyhint string
 
 const (
+	ColgroupEnterkeyhintGo       ColgroupEnterkeyhint = "go"
+	ColgroupEnterkeyhintNext     ColgroupEnterkeyhint = "next"
 	ColgroupEnterkeyhintPrevious ColgroupEnterkeyhint = "previous"
 	ColgroupEnterkeyhintSearch   ColgroupEnterkeyhint = "search"
 	ColgroupEnterkeyhintSend     ColgroupEnterkeyhint = "send"
 	ColgroupEnterkeyhintDone     ColgroupEnterkeyhint = "done"
 	ColgroupEnterkeyhintEnter    ColgroupEnterkeyhint = "enter"
-	ColgroupEnterkeyhintGo       ColgroupEnterkeyhint = "go"
-	ColgroupEnterkeyhintNext     ColgroupEnterkeyhint = "next"
 )
 
 type ColgroupHidden string
@@ -157,6 +182,7 @@ const (
 type ColgroupInputmode string
 
 const (
+	ColgroupInputmodeSearch  ColgroupInputmode = "search"
 	ColgroupInputmodeTel     ColgroupInputmode = "tel"
 	ColgroupInputmodeText    ColgroupInputmode = "text"
 	ColgroupInputmodeUrl     ColgroupInputmode = "url"
@@ -164,7 +190,6 @@ const (
 	ColgroupInputmodeEmail   ColgroupInputmode = "email"
 	ColgroupInputmodeNone    ColgroupInputmode = "none"
 	ColgroupInputmodeNumeric ColgroupInputmode = "numeric"
-	ColgroupInputmodeSearch  ColgroupInputmode = "search"
 )
 
 type ColgroupSpellcheck string
@@ -186,8 +211,8 @@ const (
 type ColgroupWritingsuggestions string
 
 const (
-	ColgroupWritingsuggestionsFalse ColgroupWritingsuggestions = "false"
 	ColgroupWritingsuggestionsTrue  ColgroupWritingsuggestions = "true"
+	ColgroupWritingsuggestionsFalse ColgroupWritingsuggestions = "false"
 	ColgroupWritingsuggestionsEmpty ColgroupWritingsuggestions = ""
 )
 

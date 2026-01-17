@@ -70,6 +70,31 @@ func (e *StyleElement) Textf(format string, args ...any) *StyleElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *StyleElement) If(cond bool, child htemel.Node) *StyleElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *StyleElement) IfElse(cond bool, then, els htemel.Node) *StyleElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *StyleElement) IfThen(cond bool, fn func(*StyleElement)) *StyleElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *StyleElement) AddClass(classes ...string) *StyleElement {
 	current := e.attributes["class"].(string)
@@ -94,19 +119,19 @@ func (e *StyleElement) ToggleClass(class string, enable bool) *StyleElement {
 type StyleAutocapitalize string
 
 const (
-	StyleAutocapitalizeOn         StyleAutocapitalize = "on"
-	StyleAutocapitalizeSentences  StyleAutocapitalize = "sentences"
-	StyleAutocapitalizeWords      StyleAutocapitalize = "words"
 	StyleAutocapitalizeCharacters StyleAutocapitalize = "characters"
 	StyleAutocapitalizeNone       StyleAutocapitalize = "none"
 	StyleAutocapitalizeOff        StyleAutocapitalize = "off"
+	StyleAutocapitalizeOn         StyleAutocapitalize = "on"
+	StyleAutocapitalizeSentences  StyleAutocapitalize = "sentences"
+	StyleAutocapitalizeWords      StyleAutocapitalize = "words"
 )
 
 type StyleAutocorrect string
 
 const (
-	StyleAutocorrectOn    StyleAutocorrect = "on"
 	StyleAutocorrectOff   StyleAutocorrect = "off"
+	StyleAutocorrectOn    StyleAutocorrect = "on"
 	StyleAutocorrectEmpty StyleAutocorrect = ""
 )
 
@@ -130,20 +155,20 @@ const (
 type StyleDraggable string
 
 const (
-	StyleDraggableFalse StyleDraggable = "false"
 	StyleDraggableTrue  StyleDraggable = "true"
+	StyleDraggableFalse StyleDraggable = "false"
 )
 
 type StyleEnterkeyhint string
 
 const (
-	StyleEnterkeyhintDone     StyleEnterkeyhint = "done"
-	StyleEnterkeyhintEnter    StyleEnterkeyhint = "enter"
 	StyleEnterkeyhintGo       StyleEnterkeyhint = "go"
 	StyleEnterkeyhintNext     StyleEnterkeyhint = "next"
 	StyleEnterkeyhintPrevious StyleEnterkeyhint = "previous"
 	StyleEnterkeyhintSearch   StyleEnterkeyhint = "search"
 	StyleEnterkeyhintSend     StyleEnterkeyhint = "send"
+	StyleEnterkeyhintDone     StyleEnterkeyhint = "done"
+	StyleEnterkeyhintEnter    StyleEnterkeyhint = "enter"
 )
 
 type StyleHidden string

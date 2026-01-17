@@ -70,6 +70,31 @@ func (e *AddressElement) Textf(format string, args ...any) *AddressElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *AddressElement) If(cond bool, child htemel.Node) *AddressElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *AddressElement) IfElse(cond bool, then, els htemel.Node) *AddressElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *AddressElement) IfThen(cond bool, fn func(*AddressElement)) *AddressElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *AddressElement) AddClass(classes ...string) *AddressElement {
 	current := e.attributes["class"].(string)
@@ -130,20 +155,20 @@ const (
 type AddressDraggable string
 
 const (
-	AddressDraggableTrue  AddressDraggable = "true"
 	AddressDraggableFalse AddressDraggable = "false"
+	AddressDraggableTrue  AddressDraggable = "true"
 )
 
 type AddressEnterkeyhint string
 
 const (
+	AddressEnterkeyhintPrevious AddressEnterkeyhint = "previous"
+	AddressEnterkeyhintSearch   AddressEnterkeyhint = "search"
+	AddressEnterkeyhintSend     AddressEnterkeyhint = "send"
 	AddressEnterkeyhintDone     AddressEnterkeyhint = "done"
 	AddressEnterkeyhintEnter    AddressEnterkeyhint = "enter"
 	AddressEnterkeyhintGo       AddressEnterkeyhint = "go"
 	AddressEnterkeyhintNext     AddressEnterkeyhint = "next"
-	AddressEnterkeyhintPrevious AddressEnterkeyhint = "previous"
-	AddressEnterkeyhintSearch   AddressEnterkeyhint = "search"
-	AddressEnterkeyhintSend     AddressEnterkeyhint = "send"
 )
 
 type AddressHidden string
@@ -178,16 +203,16 @@ const (
 type AddressTranslate string
 
 const (
-	AddressTranslateNo    AddressTranslate = "no"
 	AddressTranslateYes   AddressTranslate = "yes"
+	AddressTranslateNo    AddressTranslate = "no"
 	AddressTranslateEmpty AddressTranslate = ""
 )
 
 type AddressWritingsuggestions string
 
 const (
-	AddressWritingsuggestionsFalse AddressWritingsuggestions = "false"
 	AddressWritingsuggestionsTrue  AddressWritingsuggestions = "true"
+	AddressWritingsuggestionsFalse AddressWritingsuggestions = "false"
 	AddressWritingsuggestionsEmpty AddressWritingsuggestions = ""
 )
 

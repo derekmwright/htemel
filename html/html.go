@@ -70,6 +70,31 @@ func (e *HtmlElement) Textf(format string, args ...any) *HtmlElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *HtmlElement) If(cond bool, child htemel.Node) *HtmlElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *HtmlElement) IfElse(cond bool, then, els htemel.Node) *HtmlElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *HtmlElement) IfThen(cond bool, fn func(*HtmlElement)) *HtmlElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *HtmlElement) AddClass(classes ...string) *HtmlElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *HtmlElement) ToggleClass(class string, enable bool) *HtmlElement {
 type HtmlAutocapitalize string
 
 const (
-	HtmlAutocapitalizeSentences  HtmlAutocapitalize = "sentences"
-	HtmlAutocapitalizeWords      HtmlAutocapitalize = "words"
 	HtmlAutocapitalizeCharacters HtmlAutocapitalize = "characters"
 	HtmlAutocapitalizeNone       HtmlAutocapitalize = "none"
 	HtmlAutocapitalizeOff        HtmlAutocapitalize = "off"
 	HtmlAutocapitalizeOn         HtmlAutocapitalize = "on"
+	HtmlAutocapitalizeSentences  HtmlAutocapitalize = "sentences"
+	HtmlAutocapitalizeWords      HtmlAutocapitalize = "words"
 )
 
 type HtmlAutocorrect string
@@ -122,9 +147,9 @@ const (
 type HtmlDir string
 
 const (
+	HtmlDirAuto HtmlDir = "auto"
 	HtmlDirLtr  HtmlDir = "ltr"
 	HtmlDirRtl  HtmlDir = "rtl"
-	HtmlDirAuto HtmlDir = "auto"
 )
 
 type HtmlDraggable string
@@ -137,41 +162,41 @@ const (
 type HtmlEnterkeyhint string
 
 const (
+	HtmlEnterkeyhintGo       HtmlEnterkeyhint = "go"
 	HtmlEnterkeyhintNext     HtmlEnterkeyhint = "next"
 	HtmlEnterkeyhintPrevious HtmlEnterkeyhint = "previous"
 	HtmlEnterkeyhintSearch   HtmlEnterkeyhint = "search"
 	HtmlEnterkeyhintSend     HtmlEnterkeyhint = "send"
 	HtmlEnterkeyhintDone     HtmlEnterkeyhint = "done"
 	HtmlEnterkeyhintEnter    HtmlEnterkeyhint = "enter"
-	HtmlEnterkeyhintGo       HtmlEnterkeyhint = "go"
 )
 
 type HtmlHidden string
 
 const (
-	HtmlHiddenHidden     HtmlHidden = "hidden"
 	HtmlHiddenUntilFound HtmlHidden = "until-found"
+	HtmlHiddenHidden     HtmlHidden = "hidden"
 	HtmlHiddenEmpty      HtmlHidden = ""
 )
 
 type HtmlInputmode string
 
 const (
-	HtmlInputmodeUrl     HtmlInputmode = "url"
-	HtmlInputmodeDecimal HtmlInputmode = "decimal"
-	HtmlInputmodeEmail   HtmlInputmode = "email"
 	HtmlInputmodeNone    HtmlInputmode = "none"
 	HtmlInputmodeNumeric HtmlInputmode = "numeric"
 	HtmlInputmodeSearch  HtmlInputmode = "search"
 	HtmlInputmodeTel     HtmlInputmode = "tel"
 	HtmlInputmodeText    HtmlInputmode = "text"
+	HtmlInputmodeUrl     HtmlInputmode = "url"
+	HtmlInputmodeDecimal HtmlInputmode = "decimal"
+	HtmlInputmodeEmail   HtmlInputmode = "email"
 )
 
 type HtmlSpellcheck string
 
 const (
-	HtmlSpellcheckFalse HtmlSpellcheck = "false"
 	HtmlSpellcheckTrue  HtmlSpellcheck = "true"
+	HtmlSpellcheckFalse HtmlSpellcheck = "false"
 	HtmlSpellcheckEmpty HtmlSpellcheck = ""
 )
 
@@ -186,8 +211,8 @@ const (
 type HtmlWritingsuggestions string
 
 const (
-	HtmlWritingsuggestionsTrue  HtmlWritingsuggestions = "true"
 	HtmlWritingsuggestionsFalse HtmlWritingsuggestions = "false"
+	HtmlWritingsuggestionsTrue  HtmlWritingsuggestions = "true"
 	HtmlWritingsuggestionsEmpty HtmlWritingsuggestions = ""
 )
 

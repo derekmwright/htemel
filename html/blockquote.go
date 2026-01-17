@@ -70,6 +70,31 @@ func (e *BlockquoteElement) Textf(format string, args ...any) *BlockquoteElement
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *BlockquoteElement) If(cond bool, child htemel.Node) *BlockquoteElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *BlockquoteElement) IfElse(cond bool, then, els htemel.Node) *BlockquoteElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *BlockquoteElement) IfThen(cond bool, fn func(*BlockquoteElement)) *BlockquoteElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *BlockquoteElement) AddClass(classes ...string) *BlockquoteElement {
 	current := e.attributes["class"].(string)
@@ -122,9 +147,9 @@ const (
 type BlockquoteDir string
 
 const (
-	BlockquoteDirAuto BlockquoteDir = "auto"
 	BlockquoteDirLtr  BlockquoteDir = "ltr"
 	BlockquoteDirRtl  BlockquoteDir = "rtl"
+	BlockquoteDirAuto BlockquoteDir = "auto"
 )
 
 type BlockquoteDraggable string
@@ -137,13 +162,13 @@ const (
 type BlockquoteEnterkeyhint string
 
 const (
-	BlockquoteEnterkeyhintNext     BlockquoteEnterkeyhint = "next"
-	BlockquoteEnterkeyhintPrevious BlockquoteEnterkeyhint = "previous"
 	BlockquoteEnterkeyhintSearch   BlockquoteEnterkeyhint = "search"
 	BlockquoteEnterkeyhintSend     BlockquoteEnterkeyhint = "send"
 	BlockquoteEnterkeyhintDone     BlockquoteEnterkeyhint = "done"
 	BlockquoteEnterkeyhintEnter    BlockquoteEnterkeyhint = "enter"
 	BlockquoteEnterkeyhintGo       BlockquoteEnterkeyhint = "go"
+	BlockquoteEnterkeyhintNext     BlockquoteEnterkeyhint = "next"
+	BlockquoteEnterkeyhintPrevious BlockquoteEnterkeyhint = "previous"
 )
 
 type BlockquoteHidden string
@@ -157,14 +182,14 @@ const (
 type BlockquoteInputmode string
 
 const (
+	BlockquoteInputmodeUrl     BlockquoteInputmode = "url"
+	BlockquoteInputmodeDecimal BlockquoteInputmode = "decimal"
+	BlockquoteInputmodeEmail   BlockquoteInputmode = "email"
 	BlockquoteInputmodeNone    BlockquoteInputmode = "none"
 	BlockquoteInputmodeNumeric BlockquoteInputmode = "numeric"
 	BlockquoteInputmodeSearch  BlockquoteInputmode = "search"
 	BlockquoteInputmodeTel     BlockquoteInputmode = "tel"
 	BlockquoteInputmodeText    BlockquoteInputmode = "text"
-	BlockquoteInputmodeUrl     BlockquoteInputmode = "url"
-	BlockquoteInputmodeDecimal BlockquoteInputmode = "decimal"
-	BlockquoteInputmodeEmail   BlockquoteInputmode = "email"
 )
 
 type BlockquoteSpellcheck string

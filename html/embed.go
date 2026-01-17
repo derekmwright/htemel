@@ -70,12 +70,12 @@ func (e *EmbedElement) ToggleClass(class string, enable bool) *EmbedElement {
 type EmbedAutocapitalize string
 
 const (
-	EmbedAutocapitalizeSentences  EmbedAutocapitalize = "sentences"
-	EmbedAutocapitalizeWords      EmbedAutocapitalize = "words"
 	EmbedAutocapitalizeCharacters EmbedAutocapitalize = "characters"
 	EmbedAutocapitalizeNone       EmbedAutocapitalize = "none"
 	EmbedAutocapitalizeOff        EmbedAutocapitalize = "off"
 	EmbedAutocapitalizeOn         EmbedAutocapitalize = "on"
+	EmbedAutocapitalizeSentences  EmbedAutocapitalize = "sentences"
+	EmbedAutocapitalizeWords      EmbedAutocapitalize = "words"
 )
 
 type EmbedAutocorrect string
@@ -89,18 +89,18 @@ const (
 type EmbedContenteditable string
 
 const (
-	EmbedContenteditableFalse         EmbedContenteditable = "false"
 	EmbedContenteditablePlaintextOnly EmbedContenteditable = "plaintext-only"
 	EmbedContenteditableTrue          EmbedContenteditable = "true"
+	EmbedContenteditableFalse         EmbedContenteditable = "false"
 	EmbedContenteditableEmpty         EmbedContenteditable = ""
 )
 
 type EmbedDir string
 
 const (
+	EmbedDirAuto EmbedDir = "auto"
 	EmbedDirLtr  EmbedDir = "ltr"
 	EmbedDirRtl  EmbedDir = "rtl"
-	EmbedDirAuto EmbedDir = "auto"
 )
 
 type EmbedDraggable string
@@ -113,13 +113,13 @@ const (
 type EmbedEnterkeyhint string
 
 const (
-	EmbedEnterkeyhintDone     EmbedEnterkeyhint = "done"
-	EmbedEnterkeyhintEnter    EmbedEnterkeyhint = "enter"
 	EmbedEnterkeyhintGo       EmbedEnterkeyhint = "go"
 	EmbedEnterkeyhintNext     EmbedEnterkeyhint = "next"
 	EmbedEnterkeyhintPrevious EmbedEnterkeyhint = "previous"
 	EmbedEnterkeyhintSearch   EmbedEnterkeyhint = "search"
 	EmbedEnterkeyhintSend     EmbedEnterkeyhint = "send"
+	EmbedEnterkeyhintDone     EmbedEnterkeyhint = "done"
+	EmbedEnterkeyhintEnter    EmbedEnterkeyhint = "enter"
 )
 
 type EmbedHidden string
@@ -133,7 +133,6 @@ const (
 type EmbedInputmode string
 
 const (
-	EmbedInputmodeTel     EmbedInputmode = "tel"
 	EmbedInputmodeText    EmbedInputmode = "text"
 	EmbedInputmodeUrl     EmbedInputmode = "url"
 	EmbedInputmodeDecimal EmbedInputmode = "decimal"
@@ -141,13 +140,14 @@ const (
 	EmbedInputmodeNone    EmbedInputmode = "none"
 	EmbedInputmodeNumeric EmbedInputmode = "numeric"
 	EmbedInputmodeSearch  EmbedInputmode = "search"
+	EmbedInputmodeTel     EmbedInputmode = "tel"
 )
 
 type EmbedSpellcheck string
 
 const (
-	EmbedSpellcheckTrue  EmbedSpellcheck = "true"
 	EmbedSpellcheckFalse EmbedSpellcheck = "false"
+	EmbedSpellcheckTrue  EmbedSpellcheck = "true"
 	EmbedSpellcheckEmpty EmbedSpellcheck = ""
 )
 

@@ -70,6 +70,31 @@ func (e *SummaryElement) Textf(format string, args ...any) *SummaryElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *SummaryElement) If(cond bool, child htemel.Node) *SummaryElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *SummaryElement) IfElse(cond bool, then, els htemel.Node) *SummaryElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *SummaryElement) IfThen(cond bool, fn func(*SummaryElement)) *SummaryElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *SummaryElement) AddClass(classes ...string) *SummaryElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *SummaryElement) ToggleClass(class string, enable bool) *SummaryElement 
 type SummaryAutocapitalize string
 
 const (
-	SummaryAutocapitalizeCharacters SummaryAutocapitalize = "characters"
 	SummaryAutocapitalizeNone       SummaryAutocapitalize = "none"
 	SummaryAutocapitalizeOff        SummaryAutocapitalize = "off"
 	SummaryAutocapitalizeOn         SummaryAutocapitalize = "on"
 	SummaryAutocapitalizeSentences  SummaryAutocapitalize = "sentences"
 	SummaryAutocapitalizeWords      SummaryAutocapitalize = "words"
+	SummaryAutocapitalizeCharacters SummaryAutocapitalize = "characters"
 )
 
 type SummaryAutocorrect string
@@ -137,13 +162,13 @@ const (
 type SummaryEnterkeyhint string
 
 const (
+	SummaryEnterkeyhintGo       SummaryEnterkeyhint = "go"
+	SummaryEnterkeyhintNext     SummaryEnterkeyhint = "next"
 	SummaryEnterkeyhintPrevious SummaryEnterkeyhint = "previous"
 	SummaryEnterkeyhintSearch   SummaryEnterkeyhint = "search"
 	SummaryEnterkeyhintSend     SummaryEnterkeyhint = "send"
 	SummaryEnterkeyhintDone     SummaryEnterkeyhint = "done"
 	SummaryEnterkeyhintEnter    SummaryEnterkeyhint = "enter"
-	SummaryEnterkeyhintGo       SummaryEnterkeyhint = "go"
-	SummaryEnterkeyhintNext     SummaryEnterkeyhint = "next"
 )
 
 type SummaryHidden string
@@ -157,21 +182,21 @@ const (
 type SummaryInputmode string
 
 const (
-	SummaryInputmodeNumeric SummaryInputmode = "numeric"
-	SummaryInputmodeSearch  SummaryInputmode = "search"
-	SummaryInputmodeTel     SummaryInputmode = "tel"
 	SummaryInputmodeText    SummaryInputmode = "text"
 	SummaryInputmodeUrl     SummaryInputmode = "url"
 	SummaryInputmodeDecimal SummaryInputmode = "decimal"
 	SummaryInputmodeEmail   SummaryInputmode = "email"
 	SummaryInputmodeNone    SummaryInputmode = "none"
+	SummaryInputmodeNumeric SummaryInputmode = "numeric"
+	SummaryInputmodeSearch  SummaryInputmode = "search"
+	SummaryInputmodeTel     SummaryInputmode = "tel"
 )
 
 type SummarySpellcheck string
 
 const (
-	SummarySpellcheckTrue  SummarySpellcheck = "true"
 	SummarySpellcheckFalse SummarySpellcheck = "false"
+	SummarySpellcheckTrue  SummarySpellcheck = "true"
 	SummarySpellcheckEmpty SummarySpellcheck = ""
 )
 

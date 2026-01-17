@@ -70,6 +70,31 @@ func (e *PictureElement) Textf(format string, args ...any) *PictureElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *PictureElement) If(cond bool, child htemel.Node) *PictureElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *PictureElement) IfElse(cond bool, then, els htemel.Node) *PictureElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *PictureElement) IfThen(cond bool, fn func(*PictureElement)) *PictureElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *PictureElement) AddClass(classes ...string) *PictureElement {
 	current := e.attributes["class"].(string)
@@ -94,19 +119,19 @@ func (e *PictureElement) ToggleClass(class string, enable bool) *PictureElement 
 type PictureAutocapitalize string
 
 const (
-	PictureAutocapitalizeWords      PictureAutocapitalize = "words"
 	PictureAutocapitalizeCharacters PictureAutocapitalize = "characters"
 	PictureAutocapitalizeNone       PictureAutocapitalize = "none"
 	PictureAutocapitalizeOff        PictureAutocapitalize = "off"
 	PictureAutocapitalizeOn         PictureAutocapitalize = "on"
 	PictureAutocapitalizeSentences  PictureAutocapitalize = "sentences"
+	PictureAutocapitalizeWords      PictureAutocapitalize = "words"
 )
 
 type PictureAutocorrect string
 
 const (
-	PictureAutocorrectOn    PictureAutocorrect = "on"
 	PictureAutocorrectOff   PictureAutocorrect = "off"
+	PictureAutocorrectOn    PictureAutocorrect = "on"
 	PictureAutocorrectEmpty PictureAutocorrect = ""
 )
 
@@ -137,34 +162,34 @@ const (
 type PictureEnterkeyhint string
 
 const (
+	PictureEnterkeyhintEnter    PictureEnterkeyhint = "enter"
 	PictureEnterkeyhintGo       PictureEnterkeyhint = "go"
 	PictureEnterkeyhintNext     PictureEnterkeyhint = "next"
 	PictureEnterkeyhintPrevious PictureEnterkeyhint = "previous"
 	PictureEnterkeyhintSearch   PictureEnterkeyhint = "search"
 	PictureEnterkeyhintSend     PictureEnterkeyhint = "send"
 	PictureEnterkeyhintDone     PictureEnterkeyhint = "done"
-	PictureEnterkeyhintEnter    PictureEnterkeyhint = "enter"
 )
 
 type PictureHidden string
 
 const (
-	PictureHiddenUntilFound PictureHidden = "until-found"
 	PictureHiddenHidden     PictureHidden = "hidden"
+	PictureHiddenUntilFound PictureHidden = "until-found"
 	PictureHiddenEmpty      PictureHidden = ""
 )
 
 type PictureInputmode string
 
 const (
-	PictureInputmodeNumeric PictureInputmode = "numeric"
-	PictureInputmodeSearch  PictureInputmode = "search"
 	PictureInputmodeTel     PictureInputmode = "tel"
 	PictureInputmodeText    PictureInputmode = "text"
 	PictureInputmodeUrl     PictureInputmode = "url"
 	PictureInputmodeDecimal PictureInputmode = "decimal"
 	PictureInputmodeEmail   PictureInputmode = "email"
 	PictureInputmodeNone    PictureInputmode = "none"
+	PictureInputmodeNumeric PictureInputmode = "numeric"
+	PictureInputmodeSearch  PictureInputmode = "search"
 )
 
 type PictureSpellcheck string

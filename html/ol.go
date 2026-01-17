@@ -70,6 +70,31 @@ func (e *OlElement) Textf(format string, args ...any) *OlElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *OlElement) If(cond bool, child htemel.Node) *OlElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *OlElement) IfElse(cond bool, then, els htemel.Node) *OlElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *OlElement) IfThen(cond bool, fn func(*OlElement)) *OlElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *OlElement) AddClass(classes ...string) *OlElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *OlElement) ToggleClass(class string, enable bool) *OlElement {
 type OlAutocapitalize string
 
 const (
+	OlAutocapitalizeCharacters OlAutocapitalize = "characters"
 	OlAutocapitalizeNone       OlAutocapitalize = "none"
 	OlAutocapitalizeOff        OlAutocapitalize = "off"
 	OlAutocapitalizeOn         OlAutocapitalize = "on"
 	OlAutocapitalizeSentences  OlAutocapitalize = "sentences"
 	OlAutocapitalizeWords      OlAutocapitalize = "words"
-	OlAutocapitalizeCharacters OlAutocapitalize = "characters"
 )
 
 type OlAutocorrect string
@@ -122,9 +147,9 @@ const (
 type OlDir string
 
 const (
-	OlDirRtl  OlDir = "rtl"
 	OlDirAuto OlDir = "auto"
 	OlDirLtr  OlDir = "ltr"
+	OlDirRtl  OlDir = "rtl"
 )
 
 type OlDraggable string
@@ -137,13 +162,13 @@ const (
 type OlEnterkeyhint string
 
 const (
+	OlEnterkeyhintGo       OlEnterkeyhint = "go"
+	OlEnterkeyhintNext     OlEnterkeyhint = "next"
 	OlEnterkeyhintPrevious OlEnterkeyhint = "previous"
 	OlEnterkeyhintSearch   OlEnterkeyhint = "search"
 	OlEnterkeyhintSend     OlEnterkeyhint = "send"
 	OlEnterkeyhintDone     OlEnterkeyhint = "done"
 	OlEnterkeyhintEnter    OlEnterkeyhint = "enter"
-	OlEnterkeyhintGo       OlEnterkeyhint = "go"
-	OlEnterkeyhintNext     OlEnterkeyhint = "next"
 )
 
 type OlHidden string
@@ -186,8 +211,8 @@ const (
 type OlWritingsuggestions string
 
 const (
-	OlWritingsuggestionsFalse OlWritingsuggestions = "false"
 	OlWritingsuggestionsTrue  OlWritingsuggestions = "true"
+	OlWritingsuggestionsFalse OlWritingsuggestions = "false"
 	OlWritingsuggestionsEmpty OlWritingsuggestions = ""
 )
 

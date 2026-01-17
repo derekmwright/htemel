@@ -70,6 +70,31 @@ func (e *SampElement) Textf(format string, args ...any) *SampElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *SampElement) If(cond bool, child htemel.Node) *SampElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *SampElement) IfElse(cond bool, then, els htemel.Node) *SampElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *SampElement) IfThen(cond bool, fn func(*SampElement)) *SampElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *SampElement) AddClass(classes ...string) *SampElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *SampElement) ToggleClass(class string, enable bool) *SampElement {
 type SampAutocapitalize string
 
 const (
+	SampAutocapitalizeCharacters SampAutocapitalize = "characters"
+	SampAutocapitalizeNone       SampAutocapitalize = "none"
 	SampAutocapitalizeOff        SampAutocapitalize = "off"
 	SampAutocapitalizeOn         SampAutocapitalize = "on"
 	SampAutocapitalizeSentences  SampAutocapitalize = "sentences"
 	SampAutocapitalizeWords      SampAutocapitalize = "words"
-	SampAutocapitalizeCharacters SampAutocapitalize = "characters"
-	SampAutocapitalizeNone       SampAutocapitalize = "none"
 )
 
 type SampAutocorrect string
@@ -122,9 +147,9 @@ const (
 type SampDir string
 
 const (
-	SampDirAuto SampDir = "auto"
 	SampDirLtr  SampDir = "ltr"
 	SampDirRtl  SampDir = "rtl"
+	SampDirAuto SampDir = "auto"
 )
 
 type SampDraggable string
@@ -137,34 +162,34 @@ const (
 type SampEnterkeyhint string
 
 const (
-	SampEnterkeyhintGo       SampEnterkeyhint = "go"
 	SampEnterkeyhintNext     SampEnterkeyhint = "next"
 	SampEnterkeyhintPrevious SampEnterkeyhint = "previous"
 	SampEnterkeyhintSearch   SampEnterkeyhint = "search"
 	SampEnterkeyhintSend     SampEnterkeyhint = "send"
 	SampEnterkeyhintDone     SampEnterkeyhint = "done"
 	SampEnterkeyhintEnter    SampEnterkeyhint = "enter"
+	SampEnterkeyhintGo       SampEnterkeyhint = "go"
 )
 
 type SampHidden string
 
 const (
-	SampHiddenHidden     SampHidden = "hidden"
 	SampHiddenUntilFound SampHidden = "until-found"
+	SampHiddenHidden     SampHidden = "hidden"
 	SampHiddenEmpty      SampHidden = ""
 )
 
 type SampInputmode string
 
 const (
+	SampInputmodeDecimal SampInputmode = "decimal"
+	SampInputmodeEmail   SampInputmode = "email"
+	SampInputmodeNone    SampInputmode = "none"
 	SampInputmodeNumeric SampInputmode = "numeric"
 	SampInputmodeSearch  SampInputmode = "search"
 	SampInputmodeTel     SampInputmode = "tel"
 	SampInputmodeText    SampInputmode = "text"
 	SampInputmodeUrl     SampInputmode = "url"
-	SampInputmodeDecimal SampInputmode = "decimal"
-	SampInputmodeEmail   SampInputmode = "email"
-	SampInputmodeNone    SampInputmode = "none"
 )
 
 type SampSpellcheck string

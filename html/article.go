@@ -70,6 +70,31 @@ func (e *ArticleElement) Textf(format string, args ...any) *ArticleElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *ArticleElement) If(cond bool, child htemel.Node) *ArticleElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *ArticleElement) IfElse(cond bool, then, els htemel.Node) *ArticleElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *ArticleElement) IfThen(cond bool, fn func(*ArticleElement)) *ArticleElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *ArticleElement) AddClass(classes ...string) *ArticleElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *ArticleElement) ToggleClass(class string, enable bool) *ArticleElement 
 type ArticleAutocapitalize string
 
 const (
-	ArticleAutocapitalizeCharacters ArticleAutocapitalize = "characters"
-	ArticleAutocapitalizeNone       ArticleAutocapitalize = "none"
 	ArticleAutocapitalizeOff        ArticleAutocapitalize = "off"
 	ArticleAutocapitalizeOn         ArticleAutocapitalize = "on"
 	ArticleAutocapitalizeSentences  ArticleAutocapitalize = "sentences"
 	ArticleAutocapitalizeWords      ArticleAutocapitalize = "words"
+	ArticleAutocapitalizeCharacters ArticleAutocapitalize = "characters"
+	ArticleAutocapitalizeNone       ArticleAutocapitalize = "none"
 )
 
 type ArticleAutocorrect string
@@ -137,26 +162,27 @@ const (
 type ArticleEnterkeyhint string
 
 const (
+	ArticleEnterkeyhintSearch   ArticleEnterkeyhint = "search"
 	ArticleEnterkeyhintSend     ArticleEnterkeyhint = "send"
 	ArticleEnterkeyhintDone     ArticleEnterkeyhint = "done"
 	ArticleEnterkeyhintEnter    ArticleEnterkeyhint = "enter"
 	ArticleEnterkeyhintGo       ArticleEnterkeyhint = "go"
 	ArticleEnterkeyhintNext     ArticleEnterkeyhint = "next"
 	ArticleEnterkeyhintPrevious ArticleEnterkeyhint = "previous"
-	ArticleEnterkeyhintSearch   ArticleEnterkeyhint = "search"
 )
 
 type ArticleHidden string
 
 const (
-	ArticleHiddenUntilFound ArticleHidden = "until-found"
 	ArticleHiddenHidden     ArticleHidden = "hidden"
+	ArticleHiddenUntilFound ArticleHidden = "until-found"
 	ArticleHiddenEmpty      ArticleHidden = ""
 )
 
 type ArticleInputmode string
 
 const (
+	ArticleInputmodeDecimal ArticleInputmode = "decimal"
 	ArticleInputmodeEmail   ArticleInputmode = "email"
 	ArticleInputmodeNone    ArticleInputmode = "none"
 	ArticleInputmodeNumeric ArticleInputmode = "numeric"
@@ -164,7 +190,6 @@ const (
 	ArticleInputmodeTel     ArticleInputmode = "tel"
 	ArticleInputmodeText    ArticleInputmode = "text"
 	ArticleInputmodeUrl     ArticleInputmode = "url"
-	ArticleInputmodeDecimal ArticleInputmode = "decimal"
 )
 
 type ArticleSpellcheck string
@@ -178,8 +203,8 @@ const (
 type ArticleTranslate string
 
 const (
-	ArticleTranslateYes   ArticleTranslate = "yes"
 	ArticleTranslateNo    ArticleTranslate = "no"
+	ArticleTranslateYes   ArticleTranslate = "yes"
 	ArticleTranslateEmpty ArticleTranslate = ""
 )
 

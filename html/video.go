@@ -70,6 +70,31 @@ func (e *VideoElement) Textf(format string, args ...any) *VideoElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *VideoElement) If(cond bool, child htemel.Node) *VideoElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *VideoElement) IfElse(cond bool, then, els htemel.Node) *VideoElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *VideoElement) IfThen(cond bool, fn func(*VideoElement)) *VideoElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *VideoElement) AddClass(classes ...string) *VideoElement {
 	current := e.attributes["class"].(string)
@@ -111,12 +136,12 @@ const (
 type VideoAutocapitalize string
 
 const (
-	VideoAutocapitalizeWords      VideoAutocapitalize = "words"
 	VideoAutocapitalizeCharacters VideoAutocapitalize = "characters"
 	VideoAutocapitalizeNone       VideoAutocapitalize = "none"
 	VideoAutocapitalizeOff        VideoAutocapitalize = "off"
 	VideoAutocapitalizeOn         VideoAutocapitalize = "on"
 	VideoAutocapitalizeSentences  VideoAutocapitalize = "sentences"
+	VideoAutocapitalizeWords      VideoAutocapitalize = "words"
 )
 
 type VideoAutocorrect string
@@ -154,13 +179,13 @@ const (
 type VideoEnterkeyhint string
 
 const (
-	VideoEnterkeyhintDone     VideoEnterkeyhint = "done"
 	VideoEnterkeyhintEnter    VideoEnterkeyhint = "enter"
 	VideoEnterkeyhintGo       VideoEnterkeyhint = "go"
 	VideoEnterkeyhintNext     VideoEnterkeyhint = "next"
 	VideoEnterkeyhintPrevious VideoEnterkeyhint = "previous"
 	VideoEnterkeyhintSearch   VideoEnterkeyhint = "search"
 	VideoEnterkeyhintSend     VideoEnterkeyhint = "send"
+	VideoEnterkeyhintDone     VideoEnterkeyhint = "done"
 )
 
 type VideoHidden string
@@ -174,6 +199,7 @@ const (
 type VideoInputmode string
 
 const (
+	VideoInputmodeDecimal VideoInputmode = "decimal"
 	VideoInputmodeEmail   VideoInputmode = "email"
 	VideoInputmodeNone    VideoInputmode = "none"
 	VideoInputmodeNumeric VideoInputmode = "numeric"
@@ -181,14 +207,13 @@ const (
 	VideoInputmodeTel     VideoInputmode = "tel"
 	VideoInputmodeText    VideoInputmode = "text"
 	VideoInputmodeUrl     VideoInputmode = "url"
-	VideoInputmodeDecimal VideoInputmode = "decimal"
 )
 
 type VideoSpellcheck string
 
 const (
-	VideoSpellcheckFalse VideoSpellcheck = "false"
 	VideoSpellcheckTrue  VideoSpellcheck = "true"
+	VideoSpellcheckFalse VideoSpellcheck = "false"
 	VideoSpellcheckEmpty VideoSpellcheck = ""
 )
 

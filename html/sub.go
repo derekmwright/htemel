@@ -70,6 +70,31 @@ func (e *SubElement) Textf(format string, args ...any) *SubElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *SubElement) If(cond bool, child htemel.Node) *SubElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *SubElement) IfElse(cond bool, then, els htemel.Node) *SubElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *SubElement) IfThen(cond bool, fn func(*SubElement)) *SubElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *SubElement) AddClass(classes ...string) *SubElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *SubElement) ToggleClass(class string, enable bool) *SubElement {
 type SubAutocapitalize string
 
 const (
-	SubAutocapitalizeWords      SubAutocapitalize = "words"
 	SubAutocapitalizeCharacters SubAutocapitalize = "characters"
 	SubAutocapitalizeNone       SubAutocapitalize = "none"
 	SubAutocapitalizeOff        SubAutocapitalize = "off"
 	SubAutocapitalizeOn         SubAutocapitalize = "on"
 	SubAutocapitalizeSentences  SubAutocapitalize = "sentences"
+	SubAutocapitalizeWords      SubAutocapitalize = "words"
 )
 
 type SubAutocorrect string
@@ -113,9 +138,9 @@ const (
 type SubContenteditable string
 
 const (
-	SubContenteditableFalse         SubContenteditable = "false"
 	SubContenteditablePlaintextOnly SubContenteditable = "plaintext-only"
 	SubContenteditableTrue          SubContenteditable = "true"
+	SubContenteditableFalse         SubContenteditable = "false"
 	SubContenteditableEmpty         SubContenteditable = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type SubEnterkeyhint string
 
 const (
-	SubEnterkeyhintDone     SubEnterkeyhint = "done"
-	SubEnterkeyhintEnter    SubEnterkeyhint = "enter"
-	SubEnterkeyhintGo       SubEnterkeyhint = "go"
 	SubEnterkeyhintNext     SubEnterkeyhint = "next"
 	SubEnterkeyhintPrevious SubEnterkeyhint = "previous"
 	SubEnterkeyhintSearch   SubEnterkeyhint = "search"
 	SubEnterkeyhintSend     SubEnterkeyhint = "send"
+	SubEnterkeyhintDone     SubEnterkeyhint = "done"
+	SubEnterkeyhintEnter    SubEnterkeyhint = "enter"
+	SubEnterkeyhintGo       SubEnterkeyhint = "go"
 )
 
 type SubHidden string
@@ -157,14 +182,14 @@ const (
 type SubInputmode string
 
 const (
-	SubInputmodeEmail   SubInputmode = "email"
-	SubInputmodeNone    SubInputmode = "none"
-	SubInputmodeNumeric SubInputmode = "numeric"
 	SubInputmodeSearch  SubInputmode = "search"
 	SubInputmodeTel     SubInputmode = "tel"
 	SubInputmodeText    SubInputmode = "text"
 	SubInputmodeUrl     SubInputmode = "url"
 	SubInputmodeDecimal SubInputmode = "decimal"
+	SubInputmodeEmail   SubInputmode = "email"
+	SubInputmodeNone    SubInputmode = "none"
+	SubInputmodeNumeric SubInputmode = "numeric"
 )
 
 type SubSpellcheck string

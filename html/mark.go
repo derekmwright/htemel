@@ -70,6 +70,31 @@ func (e *MarkElement) Textf(format string, args ...any) *MarkElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *MarkElement) If(cond bool, child htemel.Node) *MarkElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *MarkElement) IfElse(cond bool, then, els htemel.Node) *MarkElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *MarkElement) IfThen(cond bool, fn func(*MarkElement)) *MarkElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *MarkElement) AddClass(classes ...string) *MarkElement {
 	current := e.attributes["class"].(string)
@@ -105,17 +130,17 @@ const (
 type MarkAutocorrect string
 
 const (
-	MarkAutocorrectOff   MarkAutocorrect = "off"
 	MarkAutocorrectOn    MarkAutocorrect = "on"
+	MarkAutocorrectOff   MarkAutocorrect = "off"
 	MarkAutocorrectEmpty MarkAutocorrect = ""
 )
 
 type MarkContenteditable string
 
 const (
-	MarkContenteditableTrue          MarkContenteditable = "true"
 	MarkContenteditableFalse         MarkContenteditable = "false"
 	MarkContenteditablePlaintextOnly MarkContenteditable = "plaintext-only"
+	MarkContenteditableTrue          MarkContenteditable = "true"
 	MarkContenteditableEmpty         MarkContenteditable = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type MarkEnterkeyhint string
 
 const (
-	MarkEnterkeyhintDone     MarkEnterkeyhint = "done"
 	MarkEnterkeyhintEnter    MarkEnterkeyhint = "enter"
 	MarkEnterkeyhintGo       MarkEnterkeyhint = "go"
 	MarkEnterkeyhintNext     MarkEnterkeyhint = "next"
 	MarkEnterkeyhintPrevious MarkEnterkeyhint = "previous"
 	MarkEnterkeyhintSearch   MarkEnterkeyhint = "search"
 	MarkEnterkeyhintSend     MarkEnterkeyhint = "send"
+	MarkEnterkeyhintDone     MarkEnterkeyhint = "done"
 )
 
 type MarkHidden string

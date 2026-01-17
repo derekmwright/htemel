@@ -70,6 +70,31 @@ func (e *DatalistElement) Textf(format string, args ...any) *DatalistElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *DatalistElement) If(cond bool, child htemel.Node) *DatalistElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *DatalistElement) IfElse(cond bool, then, els htemel.Node) *DatalistElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *DatalistElement) IfThen(cond bool, fn func(*DatalistElement)) *DatalistElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *DatalistElement) AddClass(classes ...string) *DatalistElement {
 	current := e.attributes["class"].(string)
@@ -94,28 +119,28 @@ func (e *DatalistElement) ToggleClass(class string, enable bool) *DatalistElemen
 type DatalistAutocapitalize string
 
 const (
-	DatalistAutocapitalizeSentences  DatalistAutocapitalize = "sentences"
-	DatalistAutocapitalizeWords      DatalistAutocapitalize = "words"
 	DatalistAutocapitalizeCharacters DatalistAutocapitalize = "characters"
 	DatalistAutocapitalizeNone       DatalistAutocapitalize = "none"
 	DatalistAutocapitalizeOff        DatalistAutocapitalize = "off"
 	DatalistAutocapitalizeOn         DatalistAutocapitalize = "on"
+	DatalistAutocapitalizeSentences  DatalistAutocapitalize = "sentences"
+	DatalistAutocapitalizeWords      DatalistAutocapitalize = "words"
 )
 
 type DatalistAutocorrect string
 
 const (
-	DatalistAutocorrectOn    DatalistAutocorrect = "on"
 	DatalistAutocorrectOff   DatalistAutocorrect = "off"
+	DatalistAutocorrectOn    DatalistAutocorrect = "on"
 	DatalistAutocorrectEmpty DatalistAutocorrect = ""
 )
 
 type DatalistContenteditable string
 
 const (
-	DatalistContenteditableTrue          DatalistContenteditable = "true"
 	DatalistContenteditableFalse         DatalistContenteditable = "false"
 	DatalistContenteditablePlaintextOnly DatalistContenteditable = "plaintext-only"
+	DatalistContenteditableTrue          DatalistContenteditable = "true"
 	DatalistContenteditableEmpty         DatalistContenteditable = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type DatalistEnterkeyhint string
 
 const (
-	DatalistEnterkeyhintDone     DatalistEnterkeyhint = "done"
 	DatalistEnterkeyhintEnter    DatalistEnterkeyhint = "enter"
 	DatalistEnterkeyhintGo       DatalistEnterkeyhint = "go"
 	DatalistEnterkeyhintNext     DatalistEnterkeyhint = "next"
 	DatalistEnterkeyhintPrevious DatalistEnterkeyhint = "previous"
 	DatalistEnterkeyhintSearch   DatalistEnterkeyhint = "search"
 	DatalistEnterkeyhintSend     DatalistEnterkeyhint = "send"
+	DatalistEnterkeyhintDone     DatalistEnterkeyhint = "done"
 )
 
 type DatalistHidden string
@@ -157,7 +182,6 @@ const (
 type DatalistInputmode string
 
 const (
-	DatalistInputmodeEmail   DatalistInputmode = "email"
 	DatalistInputmodeNone    DatalistInputmode = "none"
 	DatalistInputmodeNumeric DatalistInputmode = "numeric"
 	DatalistInputmodeSearch  DatalistInputmode = "search"
@@ -165,6 +189,7 @@ const (
 	DatalistInputmodeText    DatalistInputmode = "text"
 	DatalistInputmodeUrl     DatalistInputmode = "url"
 	DatalistInputmodeDecimal DatalistInputmode = "decimal"
+	DatalistInputmodeEmail   DatalistInputmode = "email"
 )
 
 type DatalistSpellcheck string

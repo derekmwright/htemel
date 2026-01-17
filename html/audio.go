@@ -70,6 +70,31 @@ func (e *AudioElement) Textf(format string, args ...any) *AudioElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *AudioElement) If(cond bool, child htemel.Node) *AudioElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *AudioElement) IfElse(cond bool, then, els htemel.Node) *AudioElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *AudioElement) IfThen(cond bool, fn func(*AudioElement)) *AudioElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *AudioElement) AddClass(classes ...string) *AudioElement {
 	current := e.attributes["class"].(string)
@@ -102,46 +127,46 @@ const (
 type AudioPreload string
 
 const (
+	AudioPreloadAuto     AudioPreload = "auto"
 	AudioPreloadMetadata AudioPreload = "metadata"
 	AudioPreloadNone     AudioPreload = "none"
-	AudioPreloadAuto     AudioPreload = "auto"
 	AudioPreloadEmpty    AudioPreload = ""
 )
 
 type AudioAutocapitalize string
 
 const (
-	AudioAutocapitalizeWords      AudioAutocapitalize = "words"
 	AudioAutocapitalizeCharacters AudioAutocapitalize = "characters"
 	AudioAutocapitalizeNone       AudioAutocapitalize = "none"
 	AudioAutocapitalizeOff        AudioAutocapitalize = "off"
 	AudioAutocapitalizeOn         AudioAutocapitalize = "on"
 	AudioAutocapitalizeSentences  AudioAutocapitalize = "sentences"
+	AudioAutocapitalizeWords      AudioAutocapitalize = "words"
 )
 
 type AudioAutocorrect string
 
 const (
-	AudioAutocorrectOff   AudioAutocorrect = "off"
 	AudioAutocorrectOn    AudioAutocorrect = "on"
+	AudioAutocorrectOff   AudioAutocorrect = "off"
 	AudioAutocorrectEmpty AudioAutocorrect = ""
 )
 
 type AudioContenteditable string
 
 const (
-	AudioContenteditableTrue          AudioContenteditable = "true"
 	AudioContenteditableFalse         AudioContenteditable = "false"
 	AudioContenteditablePlaintextOnly AudioContenteditable = "plaintext-only"
+	AudioContenteditableTrue          AudioContenteditable = "true"
 	AudioContenteditableEmpty         AudioContenteditable = ""
 )
 
 type AudioDir string
 
 const (
-	AudioDirRtl  AudioDir = "rtl"
 	AudioDirAuto AudioDir = "auto"
 	AudioDirLtr  AudioDir = "ltr"
+	AudioDirRtl  AudioDir = "rtl"
 )
 
 type AudioDraggable string
@@ -174,6 +199,7 @@ const (
 type AudioInputmode string
 
 const (
+	AudioInputmodeText    AudioInputmode = "text"
 	AudioInputmodeUrl     AudioInputmode = "url"
 	AudioInputmodeDecimal AudioInputmode = "decimal"
 	AudioInputmodeEmail   AudioInputmode = "email"
@@ -181,7 +207,6 @@ const (
 	AudioInputmodeNumeric AudioInputmode = "numeric"
 	AudioInputmodeSearch  AudioInputmode = "search"
 	AudioInputmodeTel     AudioInputmode = "tel"
-	AudioInputmodeText    AudioInputmode = "text"
 )
 
 type AudioSpellcheck string

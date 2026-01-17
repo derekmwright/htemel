@@ -70,12 +70,12 @@ func (e *SourceElement) ToggleClass(class string, enable bool) *SourceElement {
 type SourceAutocapitalize string
 
 const (
+	SourceAutocapitalizeSentences  SourceAutocapitalize = "sentences"
 	SourceAutocapitalizeWords      SourceAutocapitalize = "words"
 	SourceAutocapitalizeCharacters SourceAutocapitalize = "characters"
 	SourceAutocapitalizeNone       SourceAutocapitalize = "none"
 	SourceAutocapitalizeOff        SourceAutocapitalize = "off"
 	SourceAutocapitalizeOn         SourceAutocapitalize = "on"
-	SourceAutocapitalizeSentences  SourceAutocapitalize = "sentences"
 )
 
 type SourceAutocorrect string
@@ -89,9 +89,9 @@ const (
 type SourceContenteditable string
 
 const (
-	SourceContenteditableFalse         SourceContenteditable = "false"
 	SourceContenteditablePlaintextOnly SourceContenteditable = "plaintext-only"
 	SourceContenteditableTrue          SourceContenteditable = "true"
+	SourceContenteditableFalse         SourceContenteditable = "false"
 	SourceContenteditableEmpty         SourceContenteditable = ""
 )
 
@@ -113,13 +113,13 @@ const (
 type SourceEnterkeyhint string
 
 const (
+	SourceEnterkeyhintGo       SourceEnterkeyhint = "go"
+	SourceEnterkeyhintNext     SourceEnterkeyhint = "next"
 	SourceEnterkeyhintPrevious SourceEnterkeyhint = "previous"
 	SourceEnterkeyhintSearch   SourceEnterkeyhint = "search"
 	SourceEnterkeyhintSend     SourceEnterkeyhint = "send"
 	SourceEnterkeyhintDone     SourceEnterkeyhint = "done"
 	SourceEnterkeyhintEnter    SourceEnterkeyhint = "enter"
-	SourceEnterkeyhintGo       SourceEnterkeyhint = "go"
-	SourceEnterkeyhintNext     SourceEnterkeyhint = "next"
 )
 
 type SourceHidden string
@@ -133,21 +133,21 @@ const (
 type SourceInputmode string
 
 const (
+	SourceInputmodeSearch  SourceInputmode = "search"
+	SourceInputmodeTel     SourceInputmode = "tel"
 	SourceInputmodeText    SourceInputmode = "text"
 	SourceInputmodeUrl     SourceInputmode = "url"
 	SourceInputmodeDecimal SourceInputmode = "decimal"
 	SourceInputmodeEmail   SourceInputmode = "email"
 	SourceInputmodeNone    SourceInputmode = "none"
 	SourceInputmodeNumeric SourceInputmode = "numeric"
-	SourceInputmodeSearch  SourceInputmode = "search"
-	SourceInputmodeTel     SourceInputmode = "tel"
 )
 
 type SourceSpellcheck string
 
 const (
-	SourceSpellcheckTrue  SourceSpellcheck = "true"
 	SourceSpellcheckFalse SourceSpellcheck = "false"
+	SourceSpellcheckTrue  SourceSpellcheck = "true"
 	SourceSpellcheckEmpty SourceSpellcheck = ""
 )
 

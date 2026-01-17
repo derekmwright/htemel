@@ -70,6 +70,31 @@ func (e *StrongElement) Textf(format string, args ...any) *StrongElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *StrongElement) If(cond bool, child htemel.Node) *StrongElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *StrongElement) IfElse(cond bool, then, els htemel.Node) *StrongElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *StrongElement) IfThen(cond bool, fn func(*StrongElement)) *StrongElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *StrongElement) AddClass(classes ...string) *StrongElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *StrongElement) ToggleClass(class string, enable bool) *StrongElement {
 type StrongAutocapitalize string
 
 const (
+	StrongAutocapitalizeSentences  StrongAutocapitalize = "sentences"
+	StrongAutocapitalizeWords      StrongAutocapitalize = "words"
 	StrongAutocapitalizeCharacters StrongAutocapitalize = "characters"
 	StrongAutocapitalizeNone       StrongAutocapitalize = "none"
 	StrongAutocapitalizeOff        StrongAutocapitalize = "off"
 	StrongAutocapitalizeOn         StrongAutocapitalize = "on"
-	StrongAutocapitalizeSentences  StrongAutocapitalize = "sentences"
-	StrongAutocapitalizeWords      StrongAutocapitalize = "words"
 )
 
 type StrongAutocorrect string
@@ -122,16 +147,16 @@ const (
 type StrongDir string
 
 const (
+	StrongDirAuto StrongDir = "auto"
 	StrongDirLtr  StrongDir = "ltr"
 	StrongDirRtl  StrongDir = "rtl"
-	StrongDirAuto StrongDir = "auto"
 )
 
 type StrongDraggable string
 
 const (
-	StrongDraggableTrue  StrongDraggable = "true"
 	StrongDraggableFalse StrongDraggable = "false"
+	StrongDraggableTrue  StrongDraggable = "true"
 )
 
 type StrongEnterkeyhint string
@@ -157,7 +182,6 @@ const (
 type StrongInputmode string
 
 const (
-	StrongInputmodeSearch  StrongInputmode = "search"
 	StrongInputmodeTel     StrongInputmode = "tel"
 	StrongInputmodeText    StrongInputmode = "text"
 	StrongInputmodeUrl     StrongInputmode = "url"
@@ -165,6 +189,7 @@ const (
 	StrongInputmodeEmail   StrongInputmode = "email"
 	StrongInputmodeNone    StrongInputmode = "none"
 	StrongInputmodeNumeric StrongInputmode = "numeric"
+	StrongInputmodeSearch  StrongInputmode = "search"
 )
 
 type StrongSpellcheck string

@@ -70,6 +70,31 @@ func (e *InsElement) Textf(format string, args ...any) *InsElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *InsElement) If(cond bool, child htemel.Node) *InsElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *InsElement) IfElse(cond bool, then, els htemel.Node) *InsElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *InsElement) IfThen(cond bool, fn func(*InsElement)) *InsElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *InsElement) AddClass(classes ...string) *InsElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *InsElement) ToggleClass(class string, enable bool) *InsElement {
 type InsAutocapitalize string
 
 const (
+	InsAutocapitalizeCharacters InsAutocapitalize = "characters"
+	InsAutocapitalizeNone       InsAutocapitalize = "none"
 	InsAutocapitalizeOff        InsAutocapitalize = "off"
 	InsAutocapitalizeOn         InsAutocapitalize = "on"
 	InsAutocapitalizeSentences  InsAutocapitalize = "sentences"
 	InsAutocapitalizeWords      InsAutocapitalize = "words"
-	InsAutocapitalizeCharacters InsAutocapitalize = "characters"
-	InsAutocapitalizeNone       InsAutocapitalize = "none"
 )
 
 type InsAutocorrect string
@@ -122,9 +147,9 @@ const (
 type InsDir string
 
 const (
-	InsDirAuto InsDir = "auto"
 	InsDirLtr  InsDir = "ltr"
 	InsDirRtl  InsDir = "rtl"
+	InsDirAuto InsDir = "auto"
 )
 
 type InsDraggable string
@@ -137,13 +162,13 @@ const (
 type InsEnterkeyhint string
 
 const (
+	InsEnterkeyhintPrevious InsEnterkeyhint = "previous"
+	InsEnterkeyhintSearch   InsEnterkeyhint = "search"
+	InsEnterkeyhintSend     InsEnterkeyhint = "send"
 	InsEnterkeyhintDone     InsEnterkeyhint = "done"
 	InsEnterkeyhintEnter    InsEnterkeyhint = "enter"
 	InsEnterkeyhintGo       InsEnterkeyhint = "go"
 	InsEnterkeyhintNext     InsEnterkeyhint = "next"
-	InsEnterkeyhintPrevious InsEnterkeyhint = "previous"
-	InsEnterkeyhintSearch   InsEnterkeyhint = "search"
-	InsEnterkeyhintSend     InsEnterkeyhint = "send"
 )
 
 type InsHidden string
@@ -157,14 +182,14 @@ const (
 type InsInputmode string
 
 const (
-	InsInputmodeDecimal InsInputmode = "decimal"
-	InsInputmodeEmail   InsInputmode = "email"
-	InsInputmodeNone    InsInputmode = "none"
 	InsInputmodeNumeric InsInputmode = "numeric"
 	InsInputmodeSearch  InsInputmode = "search"
 	InsInputmodeTel     InsInputmode = "tel"
 	InsInputmodeText    InsInputmode = "text"
 	InsInputmodeUrl     InsInputmode = "url"
+	InsInputmodeDecimal InsInputmode = "decimal"
+	InsInputmodeEmail   InsInputmode = "email"
+	InsInputmodeNone    InsInputmode = "none"
 )
 
 type InsSpellcheck string

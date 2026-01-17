@@ -70,6 +70,31 @@ func (e *MenuElement) Textf(format string, args ...any) *MenuElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *MenuElement) If(cond bool, child htemel.Node) *MenuElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *MenuElement) IfElse(cond bool, then, els htemel.Node) *MenuElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *MenuElement) IfThen(cond bool, fn func(*MenuElement)) *MenuElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *MenuElement) AddClass(classes ...string) *MenuElement {
 	current := e.attributes["class"].(string)
@@ -94,19 +119,19 @@ func (e *MenuElement) ToggleClass(class string, enable bool) *MenuElement {
 type MenuAutocapitalize string
 
 const (
-	MenuAutocapitalizeWords      MenuAutocapitalize = "words"
-	MenuAutocapitalizeCharacters MenuAutocapitalize = "characters"
 	MenuAutocapitalizeNone       MenuAutocapitalize = "none"
 	MenuAutocapitalizeOff        MenuAutocapitalize = "off"
 	MenuAutocapitalizeOn         MenuAutocapitalize = "on"
 	MenuAutocapitalizeSentences  MenuAutocapitalize = "sentences"
+	MenuAutocapitalizeWords      MenuAutocapitalize = "words"
+	MenuAutocapitalizeCharacters MenuAutocapitalize = "characters"
 )
 
 type MenuAutocorrect string
 
 const (
-	MenuAutocorrectOff   MenuAutocorrect = "off"
 	MenuAutocorrectOn    MenuAutocorrect = "on"
+	MenuAutocorrectOff   MenuAutocorrect = "off"
 	MenuAutocorrectEmpty MenuAutocorrect = ""
 )
 
@@ -122,9 +147,9 @@ const (
 type MenuDir string
 
 const (
+	MenuDirAuto MenuDir = "auto"
 	MenuDirLtr  MenuDir = "ltr"
 	MenuDirRtl  MenuDir = "rtl"
-	MenuDirAuto MenuDir = "auto"
 )
 
 type MenuDraggable string
@@ -137,13 +162,13 @@ const (
 type MenuEnterkeyhint string
 
 const (
+	MenuEnterkeyhintDone     MenuEnterkeyhint = "done"
+	MenuEnterkeyhintEnter    MenuEnterkeyhint = "enter"
 	MenuEnterkeyhintGo       MenuEnterkeyhint = "go"
 	MenuEnterkeyhintNext     MenuEnterkeyhint = "next"
 	MenuEnterkeyhintPrevious MenuEnterkeyhint = "previous"
 	MenuEnterkeyhintSearch   MenuEnterkeyhint = "search"
 	MenuEnterkeyhintSend     MenuEnterkeyhint = "send"
-	MenuEnterkeyhintDone     MenuEnterkeyhint = "done"
-	MenuEnterkeyhintEnter    MenuEnterkeyhint = "enter"
 )
 
 type MenuHidden string
@@ -157,14 +182,14 @@ const (
 type MenuInputmode string
 
 const (
-	MenuInputmodeTel     MenuInputmode = "tel"
-	MenuInputmodeText    MenuInputmode = "text"
-	MenuInputmodeUrl     MenuInputmode = "url"
-	MenuInputmodeDecimal MenuInputmode = "decimal"
 	MenuInputmodeEmail   MenuInputmode = "email"
 	MenuInputmodeNone    MenuInputmode = "none"
 	MenuInputmodeNumeric MenuInputmode = "numeric"
 	MenuInputmodeSearch  MenuInputmode = "search"
+	MenuInputmodeTel     MenuInputmode = "tel"
+	MenuInputmodeText    MenuInputmode = "text"
+	MenuInputmodeUrl     MenuInputmode = "url"
+	MenuInputmodeDecimal MenuInputmode = "decimal"
 )
 
 type MenuSpellcheck string
@@ -178,8 +203,8 @@ const (
 type MenuTranslate string
 
 const (
-	MenuTranslateYes   MenuTranslate = "yes"
 	MenuTranslateNo    MenuTranslate = "no"
+	MenuTranslateYes   MenuTranslate = "yes"
 	MenuTranslateEmpty MenuTranslate = ""
 )
 

@@ -70,6 +70,31 @@ func (e *KbdElement) Textf(format string, args ...any) *KbdElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *KbdElement) If(cond bool, child htemel.Node) *KbdElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *KbdElement) IfElse(cond bool, then, els htemel.Node) *KbdElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *KbdElement) IfThen(cond bool, fn func(*KbdElement)) *KbdElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *KbdElement) AddClass(classes ...string) *KbdElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *KbdElement) ToggleClass(class string, enable bool) *KbdElement {
 type KbdAutocapitalize string
 
 const (
+	KbdAutocapitalizeWords      KbdAutocapitalize = "words"
 	KbdAutocapitalizeCharacters KbdAutocapitalize = "characters"
 	KbdAutocapitalizeNone       KbdAutocapitalize = "none"
 	KbdAutocapitalizeOff        KbdAutocapitalize = "off"
 	KbdAutocapitalizeOn         KbdAutocapitalize = "on"
 	KbdAutocapitalizeSentences  KbdAutocapitalize = "sentences"
-	KbdAutocapitalizeWords      KbdAutocapitalize = "words"
 )
 
 type KbdAutocorrect string
@@ -137,13 +162,13 @@ const (
 type KbdEnterkeyhint string
 
 const (
+	KbdEnterkeyhintDone     KbdEnterkeyhint = "done"
 	KbdEnterkeyhintEnter    KbdEnterkeyhint = "enter"
 	KbdEnterkeyhintGo       KbdEnterkeyhint = "go"
 	KbdEnterkeyhintNext     KbdEnterkeyhint = "next"
 	KbdEnterkeyhintPrevious KbdEnterkeyhint = "previous"
 	KbdEnterkeyhintSearch   KbdEnterkeyhint = "search"
 	KbdEnterkeyhintSend     KbdEnterkeyhint = "send"
-	KbdEnterkeyhintDone     KbdEnterkeyhint = "done"
 )
 
 type KbdHidden string
@@ -157,14 +182,14 @@ const (
 type KbdInputmode string
 
 const (
-	KbdInputmodeDecimal KbdInputmode = "decimal"
-	KbdInputmodeEmail   KbdInputmode = "email"
-	KbdInputmodeNone    KbdInputmode = "none"
 	KbdInputmodeNumeric KbdInputmode = "numeric"
 	KbdInputmodeSearch  KbdInputmode = "search"
 	KbdInputmodeTel     KbdInputmode = "tel"
 	KbdInputmodeText    KbdInputmode = "text"
 	KbdInputmodeUrl     KbdInputmode = "url"
+	KbdInputmodeDecimal KbdInputmode = "decimal"
+	KbdInputmodeEmail   KbdInputmode = "email"
+	KbdInputmodeNone    KbdInputmode = "none"
 )
 
 type KbdSpellcheck string
@@ -186,8 +211,8 @@ const (
 type KbdWritingsuggestions string
 
 const (
-	KbdWritingsuggestionsTrue  KbdWritingsuggestions = "true"
 	KbdWritingsuggestionsFalse KbdWritingsuggestions = "false"
+	KbdWritingsuggestionsTrue  KbdWritingsuggestions = "true"
 	KbdWritingsuggestionsEmpty KbdWritingsuggestions = ""
 )
 

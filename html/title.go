@@ -70,6 +70,31 @@ func (e *TitleElement) Textf(format string, args ...any) *TitleElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *TitleElement) If(cond bool, child htemel.Node) *TitleElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *TitleElement) IfElse(cond bool, then, els htemel.Node) *TitleElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *TitleElement) IfThen(cond bool, fn func(*TitleElement)) *TitleElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *TitleElement) AddClass(classes ...string) *TitleElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *TitleElement) ToggleClass(class string, enable bool) *TitleElement {
 type TitleAutocapitalize string
 
 const (
+	TitleAutocapitalizeWords      TitleAutocapitalize = "words"
 	TitleAutocapitalizeCharacters TitleAutocapitalize = "characters"
 	TitleAutocapitalizeNone       TitleAutocapitalize = "none"
 	TitleAutocapitalizeOff        TitleAutocapitalize = "off"
 	TitleAutocapitalizeOn         TitleAutocapitalize = "on"
 	TitleAutocapitalizeSentences  TitleAutocapitalize = "sentences"
-	TitleAutocapitalizeWords      TitleAutocapitalize = "words"
 )
 
 type TitleAutocorrect string
@@ -122,9 +147,9 @@ const (
 type TitleDir string
 
 const (
+	TitleDirAuto TitleDir = "auto"
 	TitleDirLtr  TitleDir = "ltr"
 	TitleDirRtl  TitleDir = "rtl"
-	TitleDirAuto TitleDir = "auto"
 )
 
 type TitleDraggable string
@@ -137,13 +162,13 @@ const (
 type TitleEnterkeyhint string
 
 const (
-	TitleEnterkeyhintSearch   TitleEnterkeyhint = "search"
-	TitleEnterkeyhintSend     TitleEnterkeyhint = "send"
 	TitleEnterkeyhintDone     TitleEnterkeyhint = "done"
 	TitleEnterkeyhintEnter    TitleEnterkeyhint = "enter"
 	TitleEnterkeyhintGo       TitleEnterkeyhint = "go"
 	TitleEnterkeyhintNext     TitleEnterkeyhint = "next"
 	TitleEnterkeyhintPrevious TitleEnterkeyhint = "previous"
+	TitleEnterkeyhintSearch   TitleEnterkeyhint = "search"
+	TitleEnterkeyhintSend     TitleEnterkeyhint = "send"
 )
 
 type TitleHidden string
@@ -157,14 +182,14 @@ const (
 type TitleInputmode string
 
 const (
+	TitleInputmodeTel     TitleInputmode = "tel"
+	TitleInputmodeText    TitleInputmode = "text"
+	TitleInputmodeUrl     TitleInputmode = "url"
 	TitleInputmodeDecimal TitleInputmode = "decimal"
 	TitleInputmodeEmail   TitleInputmode = "email"
 	TitleInputmodeNone    TitleInputmode = "none"
 	TitleInputmodeNumeric TitleInputmode = "numeric"
 	TitleInputmodeSearch  TitleInputmode = "search"
-	TitleInputmodeTel     TitleInputmode = "tel"
-	TitleInputmodeText    TitleInputmode = "text"
-	TitleInputmodeUrl     TitleInputmode = "url"
 )
 
 type TitleSpellcheck string
@@ -186,8 +211,8 @@ const (
 type TitleWritingsuggestions string
 
 const (
-	TitleWritingsuggestionsTrue  TitleWritingsuggestions = "true"
 	TitleWritingsuggestionsFalse TitleWritingsuggestions = "false"
+	TitleWritingsuggestionsTrue  TitleWritingsuggestions = "true"
 	TitleWritingsuggestionsEmpty TitleWritingsuggestions = ""
 )
 

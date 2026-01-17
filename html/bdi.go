@@ -70,6 +70,31 @@ func (e *BdiElement) Textf(format string, args ...any) *BdiElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *BdiElement) If(cond bool, child htemel.Node) *BdiElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *BdiElement) IfElse(cond bool, then, els htemel.Node) *BdiElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *BdiElement) IfThen(cond bool, fn func(*BdiElement)) *BdiElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *BdiElement) AddClass(classes ...string) *BdiElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *BdiElement) ToggleClass(class string, enable bool) *BdiElement {
 type BdiAutocapitalize string
 
 const (
+	BdiAutocapitalizeNone       BdiAutocapitalize = "none"
 	BdiAutocapitalizeOff        BdiAutocapitalize = "off"
 	BdiAutocapitalizeOn         BdiAutocapitalize = "on"
 	BdiAutocapitalizeSentences  BdiAutocapitalize = "sentences"
 	BdiAutocapitalizeWords      BdiAutocapitalize = "words"
 	BdiAutocapitalizeCharacters BdiAutocapitalize = "characters"
-	BdiAutocapitalizeNone       BdiAutocapitalize = "none"
 )
 
 type BdiAutocorrect string
@@ -113,9 +138,9 @@ const (
 type BdiContenteditable string
 
 const (
+	BdiContenteditableTrue          BdiContenteditable = "true"
 	BdiContenteditableFalse         BdiContenteditable = "false"
 	BdiContenteditablePlaintextOnly BdiContenteditable = "plaintext-only"
-	BdiContenteditableTrue          BdiContenteditable = "true"
 	BdiContenteditableEmpty         BdiContenteditable = ""
 )
 
@@ -137,34 +162,34 @@ const (
 type BdiEnterkeyhint string
 
 const (
+	BdiEnterkeyhintEnter    BdiEnterkeyhint = "enter"
+	BdiEnterkeyhintGo       BdiEnterkeyhint = "go"
+	BdiEnterkeyhintNext     BdiEnterkeyhint = "next"
 	BdiEnterkeyhintPrevious BdiEnterkeyhint = "previous"
 	BdiEnterkeyhintSearch   BdiEnterkeyhint = "search"
 	BdiEnterkeyhintSend     BdiEnterkeyhint = "send"
 	BdiEnterkeyhintDone     BdiEnterkeyhint = "done"
-	BdiEnterkeyhintEnter    BdiEnterkeyhint = "enter"
-	BdiEnterkeyhintGo       BdiEnterkeyhint = "go"
-	BdiEnterkeyhintNext     BdiEnterkeyhint = "next"
 )
 
 type BdiHidden string
 
 const (
-	BdiHiddenHidden     BdiHidden = "hidden"
 	BdiHiddenUntilFound BdiHidden = "until-found"
+	BdiHiddenHidden     BdiHidden = "hidden"
 	BdiHiddenEmpty      BdiHidden = ""
 )
 
 type BdiInputmode string
 
 const (
-	BdiInputmodeNumeric BdiInputmode = "numeric"
-	BdiInputmodeSearch  BdiInputmode = "search"
-	BdiInputmodeTel     BdiInputmode = "tel"
 	BdiInputmodeText    BdiInputmode = "text"
 	BdiInputmodeUrl     BdiInputmode = "url"
 	BdiInputmodeDecimal BdiInputmode = "decimal"
 	BdiInputmodeEmail   BdiInputmode = "email"
 	BdiInputmodeNone    BdiInputmode = "none"
+	BdiInputmodeNumeric BdiInputmode = "numeric"
+	BdiInputmodeSearch  BdiInputmode = "search"
+	BdiInputmodeTel     BdiInputmode = "tel"
 )
 
 type BdiSpellcheck string

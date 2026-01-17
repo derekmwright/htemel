@@ -70,28 +70,28 @@ func (e *WbrElement) ToggleClass(class string, enable bool) *WbrElement {
 type WbrAutocapitalize string
 
 const (
-	WbrAutocapitalizeSentences  WbrAutocapitalize = "sentences"
-	WbrAutocapitalizeWords      WbrAutocapitalize = "words"
 	WbrAutocapitalizeCharacters WbrAutocapitalize = "characters"
 	WbrAutocapitalizeNone       WbrAutocapitalize = "none"
 	WbrAutocapitalizeOff        WbrAutocapitalize = "off"
 	WbrAutocapitalizeOn         WbrAutocapitalize = "on"
+	WbrAutocapitalizeSentences  WbrAutocapitalize = "sentences"
+	WbrAutocapitalizeWords      WbrAutocapitalize = "words"
 )
 
 type WbrAutocorrect string
 
 const (
-	WbrAutocorrectOn    WbrAutocorrect = "on"
 	WbrAutocorrectOff   WbrAutocorrect = "off"
+	WbrAutocorrectOn    WbrAutocorrect = "on"
 	WbrAutocorrectEmpty WbrAutocorrect = ""
 )
 
 type WbrContenteditable string
 
 const (
-	WbrContenteditableFalse         WbrContenteditable = "false"
 	WbrContenteditablePlaintextOnly WbrContenteditable = "plaintext-only"
 	WbrContenteditableTrue          WbrContenteditable = "true"
+	WbrContenteditableFalse         WbrContenteditable = "false"
 	WbrContenteditableEmpty         WbrContenteditable = ""
 )
 
@@ -113,13 +113,13 @@ const (
 type WbrEnterkeyhint string
 
 const (
-	WbrEnterkeyhintSearch   WbrEnterkeyhint = "search"
 	WbrEnterkeyhintSend     WbrEnterkeyhint = "send"
 	WbrEnterkeyhintDone     WbrEnterkeyhint = "done"
 	WbrEnterkeyhintEnter    WbrEnterkeyhint = "enter"
 	WbrEnterkeyhintGo       WbrEnterkeyhint = "go"
 	WbrEnterkeyhintNext     WbrEnterkeyhint = "next"
 	WbrEnterkeyhintPrevious WbrEnterkeyhint = "previous"
+	WbrEnterkeyhintSearch   WbrEnterkeyhint = "search"
 )
 
 type WbrHidden string
@@ -133,14 +133,14 @@ const (
 type WbrInputmode string
 
 const (
+	WbrInputmodeText    WbrInputmode = "text"
+	WbrInputmodeUrl     WbrInputmode = "url"
+	WbrInputmodeDecimal WbrInputmode = "decimal"
 	WbrInputmodeEmail   WbrInputmode = "email"
 	WbrInputmodeNone    WbrInputmode = "none"
 	WbrInputmodeNumeric WbrInputmode = "numeric"
 	WbrInputmodeSearch  WbrInputmode = "search"
 	WbrInputmodeTel     WbrInputmode = "tel"
-	WbrInputmodeText    WbrInputmode = "text"
-	WbrInputmodeUrl     WbrInputmode = "url"
-	WbrInputmodeDecimal WbrInputmode = "decimal"
 )
 
 type WbrSpellcheck string

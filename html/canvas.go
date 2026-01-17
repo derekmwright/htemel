@@ -70,6 +70,31 @@ func (e *CanvasElement) Textf(format string, args ...any) *CanvasElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *CanvasElement) If(cond bool, child htemel.Node) *CanvasElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *CanvasElement) IfElse(cond bool, then, els htemel.Node) *CanvasElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *CanvasElement) IfThen(cond bool, fn func(*CanvasElement)) *CanvasElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *CanvasElement) AddClass(classes ...string) *CanvasElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *CanvasElement) ToggleClass(class string, enable bool) *CanvasElement {
 type CanvasAutocapitalize string
 
 const (
+	CanvasAutocapitalizeSentences  CanvasAutocapitalize = "sentences"
 	CanvasAutocapitalizeWords      CanvasAutocapitalize = "words"
 	CanvasAutocapitalizeCharacters CanvasAutocapitalize = "characters"
 	CanvasAutocapitalizeNone       CanvasAutocapitalize = "none"
 	CanvasAutocapitalizeOff        CanvasAutocapitalize = "off"
 	CanvasAutocapitalizeOn         CanvasAutocapitalize = "on"
-	CanvasAutocapitalizeSentences  CanvasAutocapitalize = "sentences"
 )
 
 type CanvasAutocorrect string
@@ -130,20 +155,20 @@ const (
 type CanvasDraggable string
 
 const (
-	CanvasDraggableFalse CanvasDraggable = "false"
 	CanvasDraggableTrue  CanvasDraggable = "true"
+	CanvasDraggableFalse CanvasDraggable = "false"
 )
 
 type CanvasEnterkeyhint string
 
 const (
+	CanvasEnterkeyhintSearch   CanvasEnterkeyhint = "search"
+	CanvasEnterkeyhintSend     CanvasEnterkeyhint = "send"
+	CanvasEnterkeyhintDone     CanvasEnterkeyhint = "done"
 	CanvasEnterkeyhintEnter    CanvasEnterkeyhint = "enter"
 	CanvasEnterkeyhintGo       CanvasEnterkeyhint = "go"
 	CanvasEnterkeyhintNext     CanvasEnterkeyhint = "next"
 	CanvasEnterkeyhintPrevious CanvasEnterkeyhint = "previous"
-	CanvasEnterkeyhintSearch   CanvasEnterkeyhint = "search"
-	CanvasEnterkeyhintSend     CanvasEnterkeyhint = "send"
-	CanvasEnterkeyhintDone     CanvasEnterkeyhint = "done"
 )
 
 type CanvasHidden string
@@ -170,16 +195,16 @@ const (
 type CanvasSpellcheck string
 
 const (
-	CanvasSpellcheckFalse CanvasSpellcheck = "false"
 	CanvasSpellcheckTrue  CanvasSpellcheck = "true"
+	CanvasSpellcheckFalse CanvasSpellcheck = "false"
 	CanvasSpellcheckEmpty CanvasSpellcheck = ""
 )
 
 type CanvasTranslate string
 
 const (
-	CanvasTranslateNo    CanvasTranslate = "no"
 	CanvasTranslateYes   CanvasTranslate = "yes"
+	CanvasTranslateNo    CanvasTranslate = "no"
 	CanvasTranslateEmpty CanvasTranslate = ""
 )
 

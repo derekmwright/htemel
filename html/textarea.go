@@ -70,6 +70,31 @@ func (e *TextareaElement) Textf(format string, args ...any) *TextareaElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *TextareaElement) If(cond bool, child htemel.Node) *TextareaElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *TextareaElement) IfElse(cond bool, then, els htemel.Node) *TextareaElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *TextareaElement) IfThen(cond bool, fn func(*TextareaElement)) *TextareaElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *TextareaElement) AddClass(classes ...string) *TextareaElement {
 	current := e.attributes["class"].(string)
@@ -101,12 +126,12 @@ const (
 type TextareaAutocapitalize string
 
 const (
-	TextareaAutocapitalizeCharacters TextareaAutocapitalize = "characters"
-	TextareaAutocapitalizeNone       TextareaAutocapitalize = "none"
 	TextareaAutocapitalizeOff        TextareaAutocapitalize = "off"
 	TextareaAutocapitalizeOn         TextareaAutocapitalize = "on"
 	TextareaAutocapitalizeSentences  TextareaAutocapitalize = "sentences"
 	TextareaAutocapitalizeWords      TextareaAutocapitalize = "words"
+	TextareaAutocapitalizeCharacters TextareaAutocapitalize = "characters"
+	TextareaAutocapitalizeNone       TextareaAutocapitalize = "none"
 )
 
 type TextareaAutocorrect string
@@ -120,25 +145,25 @@ const (
 type TextareaContenteditable string
 
 const (
+	TextareaContenteditableTrue          TextareaContenteditable = "true"
 	TextareaContenteditableFalse         TextareaContenteditable = "false"
 	TextareaContenteditablePlaintextOnly TextareaContenteditable = "plaintext-only"
-	TextareaContenteditableTrue          TextareaContenteditable = "true"
 	TextareaContenteditableEmpty         TextareaContenteditable = ""
 )
 
 type TextareaDir string
 
 const (
+	TextareaDirAuto TextareaDir = "auto"
 	TextareaDirLtr  TextareaDir = "ltr"
 	TextareaDirRtl  TextareaDir = "rtl"
-	TextareaDirAuto TextareaDir = "auto"
 )
 
 type TextareaDraggable string
 
 const (
-	TextareaDraggableTrue  TextareaDraggable = "true"
 	TextareaDraggableFalse TextareaDraggable = "false"
+	TextareaDraggableTrue  TextareaDraggable = "true"
 )
 
 type TextareaEnterkeyhint string
@@ -156,22 +181,22 @@ const (
 type TextareaHidden string
 
 const (
-	TextareaHiddenHidden     TextareaHidden = "hidden"
 	TextareaHiddenUntilFound TextareaHidden = "until-found"
+	TextareaHiddenHidden     TextareaHidden = "hidden"
 	TextareaHiddenEmpty      TextareaHidden = ""
 )
 
 type TextareaInputmode string
 
 const (
+	TextareaInputmodeText    TextareaInputmode = "text"
+	TextareaInputmodeUrl     TextareaInputmode = "url"
+	TextareaInputmodeDecimal TextareaInputmode = "decimal"
 	TextareaInputmodeEmail   TextareaInputmode = "email"
 	TextareaInputmodeNone    TextareaInputmode = "none"
 	TextareaInputmodeNumeric TextareaInputmode = "numeric"
 	TextareaInputmodeSearch  TextareaInputmode = "search"
 	TextareaInputmodeTel     TextareaInputmode = "tel"
-	TextareaInputmodeText    TextareaInputmode = "text"
-	TextareaInputmodeUrl     TextareaInputmode = "url"
-	TextareaInputmodeDecimal TextareaInputmode = "decimal"
 )
 
 type TextareaSpellcheck string
@@ -185,8 +210,8 @@ const (
 type TextareaTranslate string
 
 const (
-	TextareaTranslateNo    TextareaTranslate = "no"
 	TextareaTranslateYes   TextareaTranslate = "yes"
+	TextareaTranslateNo    TextareaTranslate = "no"
 	TextareaTranslateEmpty TextareaTranslate = ""
 )
 

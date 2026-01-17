@@ -70,6 +70,31 @@ func (e *LegendElement) Textf(format string, args ...any) *LegendElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *LegendElement) If(cond bool, child htemel.Node) *LegendElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *LegendElement) IfElse(cond bool, then, els htemel.Node) *LegendElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *LegendElement) IfThen(cond bool, fn func(*LegendElement)) *LegendElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *LegendElement) AddClass(classes ...string) *LegendElement {
 	current := e.attributes["class"].(string)
@@ -122,9 +147,9 @@ const (
 type LegendDir string
 
 const (
+	LegendDirAuto LegendDir = "auto"
 	LegendDirLtr  LegendDir = "ltr"
 	LegendDirRtl  LegendDir = "rtl"
-	LegendDirAuto LegendDir = "auto"
 )
 
 type LegendDraggable string
@@ -137,13 +162,13 @@ const (
 type LegendEnterkeyhint string
 
 const (
+	LegendEnterkeyhintNext     LegendEnterkeyhint = "next"
 	LegendEnterkeyhintPrevious LegendEnterkeyhint = "previous"
 	LegendEnterkeyhintSearch   LegendEnterkeyhint = "search"
 	LegendEnterkeyhintSend     LegendEnterkeyhint = "send"
 	LegendEnterkeyhintDone     LegendEnterkeyhint = "done"
 	LegendEnterkeyhintEnter    LegendEnterkeyhint = "enter"
 	LegendEnterkeyhintGo       LegendEnterkeyhint = "go"
-	LegendEnterkeyhintNext     LegendEnterkeyhint = "next"
 )
 
 type LegendHidden string
@@ -157,14 +182,14 @@ const (
 type LegendInputmode string
 
 const (
-	LegendInputmodeUrl     LegendInputmode = "url"
-	LegendInputmodeDecimal LegendInputmode = "decimal"
-	LegendInputmodeEmail   LegendInputmode = "email"
-	LegendInputmodeNone    LegendInputmode = "none"
 	LegendInputmodeNumeric LegendInputmode = "numeric"
 	LegendInputmodeSearch  LegendInputmode = "search"
 	LegendInputmodeTel     LegendInputmode = "tel"
 	LegendInputmodeText    LegendInputmode = "text"
+	LegendInputmodeUrl     LegendInputmode = "url"
+	LegendInputmodeDecimal LegendInputmode = "decimal"
+	LegendInputmodeEmail   LegendInputmode = "email"
+	LegendInputmodeNone    LegendInputmode = "none"
 )
 
 type LegendSpellcheck string

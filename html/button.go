@@ -70,6 +70,31 @@ func (e *ButtonElement) Textf(format string, args ...any) *ButtonElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *ButtonElement) If(cond bool, child htemel.Node) *ButtonElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *ButtonElement) IfElse(cond bool, then, els htemel.Node) *ButtonElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *ButtonElement) IfThen(cond bool, fn func(*ButtonElement)) *ButtonElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *ButtonElement) AddClass(classes ...string) *ButtonElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *ButtonElement) ToggleClass(class string, enable bool) *ButtonElement {
 type ButtonCommand string
 
 const (
+	ButtonCommandClose         ButtonCommand = "close"
 	ButtonCommandHidePopover   ButtonCommand = "hide-popover"
 	ButtonCommandRequestClose  ButtonCommand = "request-close"
 	ButtonCommandShowModal     ButtonCommand = "show-modal"
 	ButtonCommandShowPopover   ButtonCommand = "show-popover"
 	ButtonCommandTogglePopover ButtonCommand = "toggle-popover"
-	ButtonCommandClose         ButtonCommand = "close"
 )
 
 type ButtonFormmethod string
@@ -140,17 +165,17 @@ const (
 type ButtonAutocorrect string
 
 const (
-	ButtonAutocorrectOff   ButtonAutocorrect = "off"
 	ButtonAutocorrectOn    ButtonAutocorrect = "on"
+	ButtonAutocorrectOff   ButtonAutocorrect = "off"
 	ButtonAutocorrectEmpty ButtonAutocorrect = ""
 )
 
 type ButtonContenteditable string
 
 const (
+	ButtonContenteditableTrue          ButtonContenteditable = "true"
 	ButtonContenteditableFalse         ButtonContenteditable = "false"
 	ButtonContenteditablePlaintextOnly ButtonContenteditable = "plaintext-only"
-	ButtonContenteditableTrue          ButtonContenteditable = "true"
 	ButtonContenteditableEmpty         ButtonContenteditable = ""
 )
 
@@ -165,20 +190,20 @@ const (
 type ButtonDraggable string
 
 const (
-	ButtonDraggableFalse ButtonDraggable = "false"
 	ButtonDraggableTrue  ButtonDraggable = "true"
+	ButtonDraggableFalse ButtonDraggable = "false"
 )
 
 type ButtonEnterkeyhint string
 
 const (
+	ButtonEnterkeyhintNext     ButtonEnterkeyhint = "next"
+	ButtonEnterkeyhintPrevious ButtonEnterkeyhint = "previous"
+	ButtonEnterkeyhintSearch   ButtonEnterkeyhint = "search"
 	ButtonEnterkeyhintSend     ButtonEnterkeyhint = "send"
 	ButtonEnterkeyhintDone     ButtonEnterkeyhint = "done"
 	ButtonEnterkeyhintEnter    ButtonEnterkeyhint = "enter"
 	ButtonEnterkeyhintGo       ButtonEnterkeyhint = "go"
-	ButtonEnterkeyhintNext     ButtonEnterkeyhint = "next"
-	ButtonEnterkeyhintPrevious ButtonEnterkeyhint = "previous"
-	ButtonEnterkeyhintSearch   ButtonEnterkeyhint = "search"
 )
 
 type ButtonHidden string
@@ -192,21 +217,21 @@ const (
 type ButtonInputmode string
 
 const (
-	ButtonInputmodeNumeric ButtonInputmode = "numeric"
-	ButtonInputmodeSearch  ButtonInputmode = "search"
-	ButtonInputmodeTel     ButtonInputmode = "tel"
-	ButtonInputmodeText    ButtonInputmode = "text"
 	ButtonInputmodeUrl     ButtonInputmode = "url"
 	ButtonInputmodeDecimal ButtonInputmode = "decimal"
 	ButtonInputmodeEmail   ButtonInputmode = "email"
 	ButtonInputmodeNone    ButtonInputmode = "none"
+	ButtonInputmodeNumeric ButtonInputmode = "numeric"
+	ButtonInputmodeSearch  ButtonInputmode = "search"
+	ButtonInputmodeTel     ButtonInputmode = "tel"
+	ButtonInputmodeText    ButtonInputmode = "text"
 )
 
 type ButtonSpellcheck string
 
 const (
-	ButtonSpellcheckTrue  ButtonSpellcheck = "true"
 	ButtonSpellcheckFalse ButtonSpellcheck = "false"
+	ButtonSpellcheckTrue  ButtonSpellcheck = "true"
 	ButtonSpellcheckEmpty ButtonSpellcheck = ""
 )
 

@@ -70,6 +70,31 @@ func (e *RtElement) Textf(format string, args ...any) *RtElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *RtElement) If(cond bool, child htemel.Node) *RtElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *RtElement) IfElse(cond bool, then, els htemel.Node) *RtElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *RtElement) IfThen(cond bool, fn func(*RtElement)) *RtElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *RtElement) AddClass(classes ...string) *RtElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *RtElement) ToggleClass(class string, enable bool) *RtElement {
 type RtAutocapitalize string
 
 const (
+	RtAutocapitalizeSentences  RtAutocapitalize = "sentences"
 	RtAutocapitalizeWords      RtAutocapitalize = "words"
 	RtAutocapitalizeCharacters RtAutocapitalize = "characters"
 	RtAutocapitalizeNone       RtAutocapitalize = "none"
 	RtAutocapitalizeOff        RtAutocapitalize = "off"
 	RtAutocapitalizeOn         RtAutocapitalize = "on"
-	RtAutocapitalizeSentences  RtAutocapitalize = "sentences"
 )
 
 type RtAutocorrect string
@@ -122,9 +147,9 @@ const (
 type RtDir string
 
 const (
+	RtDirLtr  RtDir = "ltr"
 	RtDirRtl  RtDir = "rtl"
 	RtDirAuto RtDir = "auto"
-	RtDirLtr  RtDir = "ltr"
 )
 
 type RtDraggable string
@@ -137,13 +162,13 @@ const (
 type RtEnterkeyhint string
 
 const (
-	RtEnterkeyhintSend     RtEnterkeyhint = "send"
 	RtEnterkeyhintDone     RtEnterkeyhint = "done"
 	RtEnterkeyhintEnter    RtEnterkeyhint = "enter"
 	RtEnterkeyhintGo       RtEnterkeyhint = "go"
 	RtEnterkeyhintNext     RtEnterkeyhint = "next"
 	RtEnterkeyhintPrevious RtEnterkeyhint = "previous"
 	RtEnterkeyhintSearch   RtEnterkeyhint = "search"
+	RtEnterkeyhintSend     RtEnterkeyhint = "send"
 )
 
 type RtHidden string
@@ -157,14 +182,14 @@ const (
 type RtInputmode string
 
 const (
-	RtInputmodeUrl     RtInputmode = "url"
-	RtInputmodeDecimal RtInputmode = "decimal"
-	RtInputmodeEmail   RtInputmode = "email"
 	RtInputmodeNone    RtInputmode = "none"
 	RtInputmodeNumeric RtInputmode = "numeric"
 	RtInputmodeSearch  RtInputmode = "search"
 	RtInputmodeTel     RtInputmode = "tel"
 	RtInputmodeText    RtInputmode = "text"
+	RtInputmodeUrl     RtInputmode = "url"
+	RtInputmodeDecimal RtInputmode = "decimal"
+	RtInputmodeEmail   RtInputmode = "email"
 )
 
 type RtSpellcheck string
@@ -178,16 +203,16 @@ const (
 type RtTranslate string
 
 const (
-	RtTranslateNo    RtTranslate = "no"
 	RtTranslateYes   RtTranslate = "yes"
+	RtTranslateNo    RtTranslate = "no"
 	RtTranslateEmpty RtTranslate = ""
 )
 
 type RtWritingsuggestions string
 
 const (
-	RtWritingsuggestionsTrue  RtWritingsuggestions = "true"
 	RtWritingsuggestionsFalse RtWritingsuggestions = "false"
+	RtWritingsuggestionsTrue  RtWritingsuggestions = "true"
 	RtWritingsuggestionsEmpty RtWritingsuggestions = ""
 )
 

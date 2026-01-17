@@ -70,6 +70,31 @@ func (e *AElement) Textf(format string, args ...any) *AElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *AElement) If(cond bool, child htemel.Node) *AElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *AElement) IfElse(cond bool, then, els htemel.Node) *AElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *AElement) IfThen(cond bool, fn func(*AElement)) *AElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *AElement) AddClass(classes ...string) *AElement {
 	current := e.attributes["class"].(string)
@@ -94,19 +119,19 @@ func (e *AElement) ToggleClass(class string, enable bool) *AElement {
 type AAutocapitalize string
 
 const (
-	AAutocapitalizeOn         AAutocapitalize = "on"
-	AAutocapitalizeSentences  AAutocapitalize = "sentences"
-	AAutocapitalizeWords      AAutocapitalize = "words"
 	AAutocapitalizeCharacters AAutocapitalize = "characters"
 	AAutocapitalizeNone       AAutocapitalize = "none"
 	AAutocapitalizeOff        AAutocapitalize = "off"
+	AAutocapitalizeOn         AAutocapitalize = "on"
+	AAutocapitalizeSentences  AAutocapitalize = "sentences"
+	AAutocapitalizeWords      AAutocapitalize = "words"
 )
 
 type AAutocorrect string
 
 const (
-	AAutocorrectOff   AAutocorrect = "off"
 	AAutocorrectOn    AAutocorrect = "on"
+	AAutocorrectOff   AAutocorrect = "off"
 	AAutocorrectEmpty AAutocorrect = ""
 )
 
@@ -122,9 +147,9 @@ const (
 type ADir string
 
 const (
-	ADirAuto ADir = "auto"
 	ADirLtr  ADir = "ltr"
 	ADirRtl  ADir = "rtl"
+	ADirAuto ADir = "auto"
 )
 
 type ADraggable string
@@ -137,26 +162,27 @@ const (
 type AEnterkeyhint string
 
 const (
-	AEnterkeyhintPrevious AEnterkeyhint = "previous"
-	AEnterkeyhintSearch   AEnterkeyhint = "search"
-	AEnterkeyhintSend     AEnterkeyhint = "send"
 	AEnterkeyhintDone     AEnterkeyhint = "done"
 	AEnterkeyhintEnter    AEnterkeyhint = "enter"
 	AEnterkeyhintGo       AEnterkeyhint = "go"
 	AEnterkeyhintNext     AEnterkeyhint = "next"
+	AEnterkeyhintPrevious AEnterkeyhint = "previous"
+	AEnterkeyhintSearch   AEnterkeyhint = "search"
+	AEnterkeyhintSend     AEnterkeyhint = "send"
 )
 
 type AHidden string
 
 const (
-	AHiddenHidden     AHidden = "hidden"
 	AHiddenUntilFound AHidden = "until-found"
+	AHiddenHidden     AHidden = "hidden"
 	AHiddenEmpty      AHidden = ""
 )
 
 type AInputmode string
 
 const (
+	AInputmodeText    AInputmode = "text"
 	AInputmodeUrl     AInputmode = "url"
 	AInputmodeDecimal AInputmode = "decimal"
 	AInputmodeEmail   AInputmode = "email"
@@ -164,14 +190,13 @@ const (
 	AInputmodeNumeric AInputmode = "numeric"
 	AInputmodeSearch  AInputmode = "search"
 	AInputmodeTel     AInputmode = "tel"
-	AInputmodeText    AInputmode = "text"
 )
 
 type ASpellcheck string
 
 const (
-	ASpellcheckFalse ASpellcheck = "false"
 	ASpellcheckTrue  ASpellcheck = "true"
+	ASpellcheckFalse ASpellcheck = "false"
 	ASpellcheckEmpty ASpellcheck = ""
 )
 

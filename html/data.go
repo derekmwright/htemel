@@ -70,6 +70,31 @@ func (e *DataElement) Textf(format string, args ...any) *DataElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *DataElement) If(cond bool, child htemel.Node) *DataElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *DataElement) IfElse(cond bool, then, els htemel.Node) *DataElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *DataElement) IfThen(cond bool, fn func(*DataElement)) *DataElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *DataElement) AddClass(classes ...string) *DataElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *DataElement) ToggleClass(class string, enable bool) *DataElement {
 type DataAutocapitalize string
 
 const (
+	DataAutocapitalizeSentences  DataAutocapitalize = "sentences"
+	DataAutocapitalizeWords      DataAutocapitalize = "words"
 	DataAutocapitalizeCharacters DataAutocapitalize = "characters"
 	DataAutocapitalizeNone       DataAutocapitalize = "none"
 	DataAutocapitalizeOff        DataAutocapitalize = "off"
 	DataAutocapitalizeOn         DataAutocapitalize = "on"
-	DataAutocapitalizeSentences  DataAutocapitalize = "sentences"
-	DataAutocapitalizeWords      DataAutocapitalize = "words"
 )
 
 type DataAutocorrect string
@@ -113,9 +138,9 @@ const (
 type DataContenteditable string
 
 const (
-	DataContenteditableTrue          DataContenteditable = "true"
 	DataContenteditableFalse         DataContenteditable = "false"
 	DataContenteditablePlaintextOnly DataContenteditable = "plaintext-only"
+	DataContenteditableTrue          DataContenteditable = "true"
 	DataContenteditableEmpty         DataContenteditable = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type DataEnterkeyhint string
 
 const (
+	DataEnterkeyhintDone     DataEnterkeyhint = "done"
+	DataEnterkeyhintEnter    DataEnterkeyhint = "enter"
 	DataEnterkeyhintGo       DataEnterkeyhint = "go"
 	DataEnterkeyhintNext     DataEnterkeyhint = "next"
 	DataEnterkeyhintPrevious DataEnterkeyhint = "previous"
 	DataEnterkeyhintSearch   DataEnterkeyhint = "search"
 	DataEnterkeyhintSend     DataEnterkeyhint = "send"
-	DataEnterkeyhintDone     DataEnterkeyhint = "done"
-	DataEnterkeyhintEnter    DataEnterkeyhint = "enter"
 )
 
 type DataHidden string
@@ -170,16 +195,16 @@ const (
 type DataSpellcheck string
 
 const (
-	DataSpellcheckFalse DataSpellcheck = "false"
 	DataSpellcheckTrue  DataSpellcheck = "true"
+	DataSpellcheckFalse DataSpellcheck = "false"
 	DataSpellcheckEmpty DataSpellcheck = ""
 )
 
 type DataTranslate string
 
 const (
-	DataTranslateNo    DataTranslate = "no"
 	DataTranslateYes   DataTranslate = "yes"
+	DataTranslateNo    DataTranslate = "no"
 	DataTranslateEmpty DataTranslate = ""
 )
 

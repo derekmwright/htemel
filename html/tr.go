@@ -70,6 +70,31 @@ func (e *TrElement) Textf(format string, args ...any) *TrElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *TrElement) If(cond bool, child htemel.Node) *TrElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *TrElement) IfElse(cond bool, then, els htemel.Node) *TrElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *TrElement) IfThen(cond bool, fn func(*TrElement)) *TrElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *TrElement) AddClass(classes ...string) *TrElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *TrElement) ToggleClass(class string, enable bool) *TrElement {
 type TrAutocapitalize string
 
 const (
+	TrAutocapitalizeCharacters TrAutocapitalize = "characters"
+	TrAutocapitalizeNone       TrAutocapitalize = "none"
 	TrAutocapitalizeOff        TrAutocapitalize = "off"
 	TrAutocapitalizeOn         TrAutocapitalize = "on"
 	TrAutocapitalizeSentences  TrAutocapitalize = "sentences"
 	TrAutocapitalizeWords      TrAutocapitalize = "words"
-	TrAutocapitalizeCharacters TrAutocapitalize = "characters"
-	TrAutocapitalizeNone       TrAutocapitalize = "none"
 )
 
 type TrAutocorrect string
@@ -113,9 +138,9 @@ const (
 type TrContenteditable string
 
 const (
-	TrContenteditableTrue          TrContenteditable = "true"
 	TrContenteditableFalse         TrContenteditable = "false"
 	TrContenteditablePlaintextOnly TrContenteditable = "plaintext-only"
+	TrContenteditableTrue          TrContenteditable = "true"
 	TrContenteditableEmpty         TrContenteditable = ""
 )
 
@@ -137,34 +162,34 @@ const (
 type TrEnterkeyhint string
 
 const (
-	TrEnterkeyhintDone     TrEnterkeyhint = "done"
-	TrEnterkeyhintEnter    TrEnterkeyhint = "enter"
-	TrEnterkeyhintGo       TrEnterkeyhint = "go"
 	TrEnterkeyhintNext     TrEnterkeyhint = "next"
 	TrEnterkeyhintPrevious TrEnterkeyhint = "previous"
 	TrEnterkeyhintSearch   TrEnterkeyhint = "search"
 	TrEnterkeyhintSend     TrEnterkeyhint = "send"
+	TrEnterkeyhintDone     TrEnterkeyhint = "done"
+	TrEnterkeyhintEnter    TrEnterkeyhint = "enter"
+	TrEnterkeyhintGo       TrEnterkeyhint = "go"
 )
 
 type TrHidden string
 
 const (
-	TrHiddenHidden     TrHidden = "hidden"
 	TrHiddenUntilFound TrHidden = "until-found"
+	TrHiddenHidden     TrHidden = "hidden"
 	TrHiddenEmpty      TrHidden = ""
 )
 
 type TrInputmode string
 
 const (
-	TrInputmodeDecimal TrInputmode = "decimal"
-	TrInputmodeEmail   TrInputmode = "email"
-	TrInputmodeNone    TrInputmode = "none"
-	TrInputmodeNumeric TrInputmode = "numeric"
 	TrInputmodeSearch  TrInputmode = "search"
 	TrInputmodeTel     TrInputmode = "tel"
 	TrInputmodeText    TrInputmode = "text"
 	TrInputmodeUrl     TrInputmode = "url"
+	TrInputmodeDecimal TrInputmode = "decimal"
+	TrInputmodeEmail   TrInputmode = "email"
+	TrInputmodeNone    TrInputmode = "none"
+	TrInputmodeNumeric TrInputmode = "numeric"
 )
 
 type TrSpellcheck string

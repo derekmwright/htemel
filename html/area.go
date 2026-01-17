@@ -70,21 +70,21 @@ func (e *AreaElement) ToggleClass(class string, enable bool) *AreaElement {
 type AreaShape string
 
 const (
-	AreaShapeCircle  AreaShape = "circle"
 	AreaShapeDefault AreaShape = "default"
 	AreaShapePoly    AreaShape = "poly"
 	AreaShapeRect    AreaShape = "rect"
+	AreaShapeCircle  AreaShape = "circle"
 )
 
 type AreaAutocapitalize string
 
 const (
+	AreaAutocapitalizeCharacters AreaAutocapitalize = "characters"
 	AreaAutocapitalizeNone       AreaAutocapitalize = "none"
 	AreaAutocapitalizeOff        AreaAutocapitalize = "off"
 	AreaAutocapitalizeOn         AreaAutocapitalize = "on"
 	AreaAutocapitalizeSentences  AreaAutocapitalize = "sentences"
 	AreaAutocapitalizeWords      AreaAutocapitalize = "words"
-	AreaAutocapitalizeCharacters AreaAutocapitalize = "characters"
 )
 
 type AreaAutocorrect string
@@ -107,9 +107,9 @@ const (
 type AreaDir string
 
 const (
+	AreaDirLtr  AreaDir = "ltr"
 	AreaDirRtl  AreaDir = "rtl"
 	AreaDirAuto AreaDir = "auto"
-	AreaDirLtr  AreaDir = "ltr"
 )
 
 type AreaDraggable string
@@ -122,41 +122,41 @@ const (
 type AreaEnterkeyhint string
 
 const (
+	AreaEnterkeyhintSend     AreaEnterkeyhint = "send"
+	AreaEnterkeyhintDone     AreaEnterkeyhint = "done"
+	AreaEnterkeyhintEnter    AreaEnterkeyhint = "enter"
 	AreaEnterkeyhintGo       AreaEnterkeyhint = "go"
 	AreaEnterkeyhintNext     AreaEnterkeyhint = "next"
 	AreaEnterkeyhintPrevious AreaEnterkeyhint = "previous"
 	AreaEnterkeyhintSearch   AreaEnterkeyhint = "search"
-	AreaEnterkeyhintSend     AreaEnterkeyhint = "send"
-	AreaEnterkeyhintDone     AreaEnterkeyhint = "done"
-	AreaEnterkeyhintEnter    AreaEnterkeyhint = "enter"
 )
 
 type AreaHidden string
 
 const (
-	AreaHiddenUntilFound AreaHidden = "until-found"
 	AreaHiddenHidden     AreaHidden = "hidden"
+	AreaHiddenUntilFound AreaHidden = "until-found"
 	AreaHiddenEmpty      AreaHidden = ""
 )
 
 type AreaInputmode string
 
 const (
-	AreaInputmodeText    AreaInputmode = "text"
-	AreaInputmodeUrl     AreaInputmode = "url"
-	AreaInputmodeDecimal AreaInputmode = "decimal"
-	AreaInputmodeEmail   AreaInputmode = "email"
 	AreaInputmodeNone    AreaInputmode = "none"
 	AreaInputmodeNumeric AreaInputmode = "numeric"
 	AreaInputmodeSearch  AreaInputmode = "search"
 	AreaInputmodeTel     AreaInputmode = "tel"
+	AreaInputmodeText    AreaInputmode = "text"
+	AreaInputmodeUrl     AreaInputmode = "url"
+	AreaInputmodeDecimal AreaInputmode = "decimal"
+	AreaInputmodeEmail   AreaInputmode = "email"
 )
 
 type AreaSpellcheck string
 
 const (
-	AreaSpellcheckFalse AreaSpellcheck = "false"
 	AreaSpellcheckTrue  AreaSpellcheck = "true"
+	AreaSpellcheckFalse AreaSpellcheck = "false"
 	AreaSpellcheckEmpty AreaSpellcheck = ""
 )
 

@@ -70,6 +70,31 @@ func (e *TimeElement) Textf(format string, args ...any) *TimeElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *TimeElement) If(cond bool, child htemel.Node) *TimeElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *TimeElement) IfElse(cond bool, then, els htemel.Node) *TimeElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *TimeElement) IfThen(cond bool, fn func(*TimeElement)) *TimeElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *TimeElement) AddClass(classes ...string) *TimeElement {
 	current := e.attributes["class"].(string)
@@ -94,37 +119,37 @@ func (e *TimeElement) ToggleClass(class string, enable bool) *TimeElement {
 type TimeAutocapitalize string
 
 const (
-	TimeAutocapitalizeOn         TimeAutocapitalize = "on"
-	TimeAutocapitalizeSentences  TimeAutocapitalize = "sentences"
-	TimeAutocapitalizeWords      TimeAutocapitalize = "words"
 	TimeAutocapitalizeCharacters TimeAutocapitalize = "characters"
 	TimeAutocapitalizeNone       TimeAutocapitalize = "none"
 	TimeAutocapitalizeOff        TimeAutocapitalize = "off"
+	TimeAutocapitalizeOn         TimeAutocapitalize = "on"
+	TimeAutocapitalizeSentences  TimeAutocapitalize = "sentences"
+	TimeAutocapitalizeWords      TimeAutocapitalize = "words"
 )
 
 type TimeAutocorrect string
 
 const (
-	TimeAutocorrectOff   TimeAutocorrect = "off"
 	TimeAutocorrectOn    TimeAutocorrect = "on"
+	TimeAutocorrectOff   TimeAutocorrect = "off"
 	TimeAutocorrectEmpty TimeAutocorrect = ""
 )
 
 type TimeContenteditable string
 
 const (
-	TimeContenteditablePlaintextOnly TimeContenteditable = "plaintext-only"
 	TimeContenteditableTrue          TimeContenteditable = "true"
 	TimeContenteditableFalse         TimeContenteditable = "false"
+	TimeContenteditablePlaintextOnly TimeContenteditable = "plaintext-only"
 	TimeContenteditableEmpty         TimeContenteditable = ""
 )
 
 type TimeDir string
 
 const (
-	TimeDirRtl  TimeDir = "rtl"
 	TimeDirAuto TimeDir = "auto"
 	TimeDirLtr  TimeDir = "ltr"
+	TimeDirRtl  TimeDir = "rtl"
 )
 
 type TimeDraggable string
@@ -137,13 +162,13 @@ const (
 type TimeEnterkeyhint string
 
 const (
-	TimeEnterkeyhintDone     TimeEnterkeyhint = "done"
-	TimeEnterkeyhintEnter    TimeEnterkeyhint = "enter"
 	TimeEnterkeyhintGo       TimeEnterkeyhint = "go"
 	TimeEnterkeyhintNext     TimeEnterkeyhint = "next"
 	TimeEnterkeyhintPrevious TimeEnterkeyhint = "previous"
 	TimeEnterkeyhintSearch   TimeEnterkeyhint = "search"
 	TimeEnterkeyhintSend     TimeEnterkeyhint = "send"
+	TimeEnterkeyhintDone     TimeEnterkeyhint = "done"
+	TimeEnterkeyhintEnter    TimeEnterkeyhint = "enter"
 )
 
 type TimeHidden string
@@ -157,14 +182,14 @@ const (
 type TimeInputmode string
 
 const (
-	TimeInputmodeSearch  TimeInputmode = "search"
-	TimeInputmodeTel     TimeInputmode = "tel"
-	TimeInputmodeText    TimeInputmode = "text"
-	TimeInputmodeUrl     TimeInputmode = "url"
 	TimeInputmodeDecimal TimeInputmode = "decimal"
 	TimeInputmodeEmail   TimeInputmode = "email"
 	TimeInputmodeNone    TimeInputmode = "none"
 	TimeInputmodeNumeric TimeInputmode = "numeric"
+	TimeInputmodeSearch  TimeInputmode = "search"
+	TimeInputmodeTel     TimeInputmode = "tel"
+	TimeInputmodeText    TimeInputmode = "text"
+	TimeInputmodeUrl     TimeInputmode = "url"
 )
 
 type TimeSpellcheck string
@@ -186,8 +211,8 @@ const (
 type TimeWritingsuggestions string
 
 const (
-	TimeWritingsuggestionsFalse TimeWritingsuggestions = "false"
 	TimeWritingsuggestionsTrue  TimeWritingsuggestions = "true"
+	TimeWritingsuggestionsFalse TimeWritingsuggestions = "false"
 	TimeWritingsuggestionsEmpty TimeWritingsuggestions = ""
 )
 

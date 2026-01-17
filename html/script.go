@@ -70,6 +70,31 @@ func (e *ScriptElement) Textf(format string, args ...any) *ScriptElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *ScriptElement) If(cond bool, child htemel.Node) *ScriptElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *ScriptElement) IfElse(cond bool, then, els htemel.Node) *ScriptElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *ScriptElement) IfThen(cond bool, fn func(*ScriptElement)) *ScriptElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *ScriptElement) AddClass(classes ...string) *ScriptElement {
 	current := e.attributes["class"].(string)
@@ -100,28 +125,28 @@ const (
 type ScriptCrossorigin string
 
 const (
-	ScriptCrossoriginAnonymous      ScriptCrossorigin = "anonymous"
 	ScriptCrossoriginUseCredentials ScriptCrossorigin = "use-credentials"
+	ScriptCrossoriginAnonymous      ScriptCrossorigin = "anonymous"
 	ScriptCrossoriginEmpty          ScriptCrossorigin = ""
 )
 
 type ScriptFetchpriority string
 
 const (
+	ScriptFetchpriorityHigh ScriptFetchpriority = "high"
 	ScriptFetchpriorityLow  ScriptFetchpriority = "low"
 	ScriptFetchpriorityAuto ScriptFetchpriority = "auto"
-	ScriptFetchpriorityHigh ScriptFetchpriority = "high"
 )
 
 type ScriptAutocapitalize string
 
 const (
-	ScriptAutocapitalizeCharacters ScriptAutocapitalize = "characters"
-	ScriptAutocapitalizeNone       ScriptAutocapitalize = "none"
-	ScriptAutocapitalizeOff        ScriptAutocapitalize = "off"
 	ScriptAutocapitalizeOn         ScriptAutocapitalize = "on"
 	ScriptAutocapitalizeSentences  ScriptAutocapitalize = "sentences"
 	ScriptAutocapitalizeWords      ScriptAutocapitalize = "words"
+	ScriptAutocapitalizeCharacters ScriptAutocapitalize = "characters"
+	ScriptAutocapitalizeNone       ScriptAutocapitalize = "none"
+	ScriptAutocapitalizeOff        ScriptAutocapitalize = "off"
 )
 
 type ScriptAutocorrect string
@@ -135,9 +160,9 @@ const (
 type ScriptContenteditable string
 
 const (
+	ScriptContenteditableTrue          ScriptContenteditable = "true"
 	ScriptContenteditableFalse         ScriptContenteditable = "false"
 	ScriptContenteditablePlaintextOnly ScriptContenteditable = "plaintext-only"
-	ScriptContenteditableTrue          ScriptContenteditable = "true"
 	ScriptContenteditableEmpty         ScriptContenteditable = ""
 )
 
@@ -159,13 +184,13 @@ const (
 type ScriptEnterkeyhint string
 
 const (
+	ScriptEnterkeyhintNext     ScriptEnterkeyhint = "next"
+	ScriptEnterkeyhintPrevious ScriptEnterkeyhint = "previous"
+	ScriptEnterkeyhintSearch   ScriptEnterkeyhint = "search"
 	ScriptEnterkeyhintSend     ScriptEnterkeyhint = "send"
 	ScriptEnterkeyhintDone     ScriptEnterkeyhint = "done"
 	ScriptEnterkeyhintEnter    ScriptEnterkeyhint = "enter"
 	ScriptEnterkeyhintGo       ScriptEnterkeyhint = "go"
-	ScriptEnterkeyhintNext     ScriptEnterkeyhint = "next"
-	ScriptEnterkeyhintPrevious ScriptEnterkeyhint = "previous"
-	ScriptEnterkeyhintSearch   ScriptEnterkeyhint = "search"
 )
 
 type ScriptHidden string

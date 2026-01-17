@@ -70,6 +70,31 @@ func (e *MainElement) Textf(format string, args ...any) *MainElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *MainElement) If(cond bool, child htemel.Node) *MainElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *MainElement) IfElse(cond bool, then, els htemel.Node) *MainElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *MainElement) IfThen(cond bool, fn func(*MainElement)) *MainElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *MainElement) AddClass(classes ...string) *MainElement {
 	current := e.attributes["class"].(string)
@@ -113,9 +138,9 @@ const (
 type MainContenteditable string
 
 const (
-	MainContenteditableFalse         MainContenteditable = "false"
 	MainContenteditablePlaintextOnly MainContenteditable = "plaintext-only"
 	MainContenteditableTrue          MainContenteditable = "true"
+	MainContenteditableFalse         MainContenteditable = "false"
 	MainContenteditableEmpty         MainContenteditable = ""
 )
 
@@ -130,20 +155,20 @@ const (
 type MainDraggable string
 
 const (
-	MainDraggableFalse MainDraggable = "false"
 	MainDraggableTrue  MainDraggable = "true"
+	MainDraggableFalse MainDraggable = "false"
 )
 
 type MainEnterkeyhint string
 
 const (
-	MainEnterkeyhintEnter    MainEnterkeyhint = "enter"
-	MainEnterkeyhintGo       MainEnterkeyhint = "go"
-	MainEnterkeyhintNext     MainEnterkeyhint = "next"
 	MainEnterkeyhintPrevious MainEnterkeyhint = "previous"
 	MainEnterkeyhintSearch   MainEnterkeyhint = "search"
 	MainEnterkeyhintSend     MainEnterkeyhint = "send"
 	MainEnterkeyhintDone     MainEnterkeyhint = "done"
+	MainEnterkeyhintEnter    MainEnterkeyhint = "enter"
+	MainEnterkeyhintGo       MainEnterkeyhint = "go"
+	MainEnterkeyhintNext     MainEnterkeyhint = "next"
 )
 
 type MainHidden string
@@ -157,14 +182,14 @@ const (
 type MainInputmode string
 
 const (
-	MainInputmodeUrl     MainInputmode = "url"
-	MainInputmodeDecimal MainInputmode = "decimal"
 	MainInputmodeEmail   MainInputmode = "email"
 	MainInputmodeNone    MainInputmode = "none"
 	MainInputmodeNumeric MainInputmode = "numeric"
 	MainInputmodeSearch  MainInputmode = "search"
 	MainInputmodeTel     MainInputmode = "tel"
 	MainInputmodeText    MainInputmode = "text"
+	MainInputmodeUrl     MainInputmode = "url"
+	MainInputmodeDecimal MainInputmode = "decimal"
 )
 
 type MainSpellcheck string

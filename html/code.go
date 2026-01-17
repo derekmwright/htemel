@@ -70,6 +70,31 @@ func (e *CodeElement) Textf(format string, args ...any) *CodeElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *CodeElement) If(cond bool, child htemel.Node) *CodeElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *CodeElement) IfElse(cond bool, then, els htemel.Node) *CodeElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *CodeElement) IfThen(cond bool, fn func(*CodeElement)) *CodeElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *CodeElement) AddClass(classes ...string) *CodeElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *CodeElement) ToggleClass(class string, enable bool) *CodeElement {
 type CodeAutocapitalize string
 
 const (
-	CodeAutocapitalizeWords      CodeAutocapitalize = "words"
 	CodeAutocapitalizeCharacters CodeAutocapitalize = "characters"
 	CodeAutocapitalizeNone       CodeAutocapitalize = "none"
 	CodeAutocapitalizeOff        CodeAutocapitalize = "off"
 	CodeAutocapitalizeOn         CodeAutocapitalize = "on"
 	CodeAutocapitalizeSentences  CodeAutocapitalize = "sentences"
+	CodeAutocapitalizeWords      CodeAutocapitalize = "words"
 )
 
 type CodeAutocorrect string
@@ -113,9 +138,9 @@ const (
 type CodeContenteditable string
 
 const (
-	CodeContenteditableTrue          CodeContenteditable = "true"
 	CodeContenteditableFalse         CodeContenteditable = "false"
 	CodeContenteditablePlaintextOnly CodeContenteditable = "plaintext-only"
+	CodeContenteditableTrue          CodeContenteditable = "true"
 	CodeContenteditableEmpty         CodeContenteditable = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type CodeEnterkeyhint string
 
 const (
+	CodeEnterkeyhintPrevious CodeEnterkeyhint = "previous"
+	CodeEnterkeyhintSearch   CodeEnterkeyhint = "search"
+	CodeEnterkeyhintSend     CodeEnterkeyhint = "send"
 	CodeEnterkeyhintDone     CodeEnterkeyhint = "done"
 	CodeEnterkeyhintEnter    CodeEnterkeyhint = "enter"
 	CodeEnterkeyhintGo       CodeEnterkeyhint = "go"
 	CodeEnterkeyhintNext     CodeEnterkeyhint = "next"
-	CodeEnterkeyhintPrevious CodeEnterkeyhint = "previous"
-	CodeEnterkeyhintSearch   CodeEnterkeyhint = "search"
-	CodeEnterkeyhintSend     CodeEnterkeyhint = "send"
 )
 
 type CodeHidden string
@@ -157,6 +182,7 @@ const (
 type CodeInputmode string
 
 const (
+	CodeInputmodeNone    CodeInputmode = "none"
 	CodeInputmodeNumeric CodeInputmode = "numeric"
 	CodeInputmodeSearch  CodeInputmode = "search"
 	CodeInputmodeTel     CodeInputmode = "tel"
@@ -164,14 +190,13 @@ const (
 	CodeInputmodeUrl     CodeInputmode = "url"
 	CodeInputmodeDecimal CodeInputmode = "decimal"
 	CodeInputmodeEmail   CodeInputmode = "email"
-	CodeInputmodeNone    CodeInputmode = "none"
 )
 
 type CodeSpellcheck string
 
 const (
-	CodeSpellcheckFalse CodeSpellcheck = "false"
 	CodeSpellcheckTrue  CodeSpellcheck = "true"
+	CodeSpellcheckFalse CodeSpellcheck = "false"
 	CodeSpellcheckEmpty CodeSpellcheck = ""
 )
 

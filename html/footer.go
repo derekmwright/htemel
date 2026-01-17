@@ -70,6 +70,31 @@ func (e *FooterElement) Textf(format string, args ...any) *FooterElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *FooterElement) If(cond bool, child htemel.Node) *FooterElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *FooterElement) IfElse(cond bool, then, els htemel.Node) *FooterElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *FooterElement) IfThen(cond bool, fn func(*FooterElement)) *FooterElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *FooterElement) AddClass(classes ...string) *FooterElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *FooterElement) ToggleClass(class string, enable bool) *FooterElement {
 type FooterAutocapitalize string
 
 const (
-	FooterAutocapitalizeCharacters FooterAutocapitalize = "characters"
-	FooterAutocapitalizeNone       FooterAutocapitalize = "none"
-	FooterAutocapitalizeOff        FooterAutocapitalize = "off"
 	FooterAutocapitalizeOn         FooterAutocapitalize = "on"
 	FooterAutocapitalizeSentences  FooterAutocapitalize = "sentences"
 	FooterAutocapitalizeWords      FooterAutocapitalize = "words"
+	FooterAutocapitalizeCharacters FooterAutocapitalize = "characters"
+	FooterAutocapitalizeNone       FooterAutocapitalize = "none"
+	FooterAutocapitalizeOff        FooterAutocapitalize = "off"
 )
 
 type FooterAutocorrect string
@@ -122,56 +147,56 @@ const (
 type FooterDir string
 
 const (
-	FooterDirAuto FooterDir = "auto"
 	FooterDirLtr  FooterDir = "ltr"
 	FooterDirRtl  FooterDir = "rtl"
+	FooterDirAuto FooterDir = "auto"
 )
 
 type FooterDraggable string
 
 const (
-	FooterDraggableFalse FooterDraggable = "false"
 	FooterDraggableTrue  FooterDraggable = "true"
+	FooterDraggableFalse FooterDraggable = "false"
 )
 
 type FooterEnterkeyhint string
 
 const (
+	FooterEnterkeyhintNext     FooterEnterkeyhint = "next"
+	FooterEnterkeyhintPrevious FooterEnterkeyhint = "previous"
+	FooterEnterkeyhintSearch   FooterEnterkeyhint = "search"
 	FooterEnterkeyhintSend     FooterEnterkeyhint = "send"
 	FooterEnterkeyhintDone     FooterEnterkeyhint = "done"
 	FooterEnterkeyhintEnter    FooterEnterkeyhint = "enter"
 	FooterEnterkeyhintGo       FooterEnterkeyhint = "go"
-	FooterEnterkeyhintNext     FooterEnterkeyhint = "next"
-	FooterEnterkeyhintPrevious FooterEnterkeyhint = "previous"
-	FooterEnterkeyhintSearch   FooterEnterkeyhint = "search"
 )
 
 type FooterHidden string
 
 const (
-	FooterHiddenUntilFound FooterHidden = "until-found"
 	FooterHiddenHidden     FooterHidden = "hidden"
+	FooterHiddenUntilFound FooterHidden = "until-found"
 	FooterHiddenEmpty      FooterHidden = ""
 )
 
 type FooterInputmode string
 
 const (
-	FooterInputmodeSearch  FooterInputmode = "search"
-	FooterInputmodeTel     FooterInputmode = "tel"
 	FooterInputmodeText    FooterInputmode = "text"
 	FooterInputmodeUrl     FooterInputmode = "url"
 	FooterInputmodeDecimal FooterInputmode = "decimal"
 	FooterInputmodeEmail   FooterInputmode = "email"
 	FooterInputmodeNone    FooterInputmode = "none"
 	FooterInputmodeNumeric FooterInputmode = "numeric"
+	FooterInputmodeSearch  FooterInputmode = "search"
+	FooterInputmodeTel     FooterInputmode = "tel"
 )
 
 type FooterSpellcheck string
 
 const (
-	FooterSpellcheckFalse FooterSpellcheck = "false"
 	FooterSpellcheckTrue  FooterSpellcheck = "true"
+	FooterSpellcheckFalse FooterSpellcheck = "false"
 	FooterSpellcheckEmpty FooterSpellcheck = ""
 )
 

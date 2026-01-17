@@ -70,6 +70,31 @@ func (e *QElement) Textf(format string, args ...any) *QElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *QElement) If(cond bool, child htemel.Node) *QElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *QElement) IfElse(cond bool, then, els htemel.Node) *QElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *QElement) IfThen(cond bool, fn func(*QElement)) *QElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *QElement) AddClass(classes ...string) *QElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *QElement) ToggleClass(class string, enable bool) *QElement {
 type QAutocapitalize string
 
 const (
+	QAutocapitalizeOn         QAutocapitalize = "on"
 	QAutocapitalizeSentences  QAutocapitalize = "sentences"
 	QAutocapitalizeWords      QAutocapitalize = "words"
 	QAutocapitalizeCharacters QAutocapitalize = "characters"
 	QAutocapitalizeNone       QAutocapitalize = "none"
 	QAutocapitalizeOff        QAutocapitalize = "off"
-	QAutocapitalizeOn         QAutocapitalize = "on"
 )
 
 type QAutocorrect string
@@ -122,9 +147,9 @@ const (
 type QDir string
 
 const (
+	QDirRtl  QDir = "rtl"
 	QDirAuto QDir = "auto"
 	QDirLtr  QDir = "ltr"
-	QDirRtl  QDir = "rtl"
 )
 
 type QDraggable string
@@ -137,13 +162,13 @@ const (
 type QEnterkeyhint string
 
 const (
-	QEnterkeyhintSearch   QEnterkeyhint = "search"
 	QEnterkeyhintSend     QEnterkeyhint = "send"
 	QEnterkeyhintDone     QEnterkeyhint = "done"
 	QEnterkeyhintEnter    QEnterkeyhint = "enter"
 	QEnterkeyhintGo       QEnterkeyhint = "go"
 	QEnterkeyhintNext     QEnterkeyhint = "next"
 	QEnterkeyhintPrevious QEnterkeyhint = "previous"
+	QEnterkeyhintSearch   QEnterkeyhint = "search"
 )
 
 type QHidden string
@@ -157,14 +182,14 @@ const (
 type QInputmode string
 
 const (
+	QInputmodeUrl     QInputmode = "url"
+	QInputmodeDecimal QInputmode = "decimal"
 	QInputmodeEmail   QInputmode = "email"
 	QInputmodeNone    QInputmode = "none"
 	QInputmodeNumeric QInputmode = "numeric"
 	QInputmodeSearch  QInputmode = "search"
 	QInputmodeTel     QInputmode = "tel"
 	QInputmodeText    QInputmode = "text"
-	QInputmodeUrl     QInputmode = "url"
-	QInputmodeDecimal QInputmode = "decimal"
 )
 
 type QSpellcheck string

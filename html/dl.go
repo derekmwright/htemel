@@ -70,6 +70,31 @@ func (e *DlElement) Textf(format string, args ...any) *DlElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *DlElement) If(cond bool, child htemel.Node) *DlElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *DlElement) IfElse(cond bool, then, els htemel.Node) *DlElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *DlElement) IfThen(cond bool, fn func(*DlElement)) *DlElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *DlElement) AddClass(classes ...string) *DlElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *DlElement) ToggleClass(class string, enable bool) *DlElement {
 type DlAutocapitalize string
 
 const (
-	DlAutocapitalizeOn         DlAutocapitalize = "on"
-	DlAutocapitalizeSentences  DlAutocapitalize = "sentences"
-	DlAutocapitalizeWords      DlAutocapitalize = "words"
 	DlAutocapitalizeCharacters DlAutocapitalize = "characters"
 	DlAutocapitalizeNone       DlAutocapitalize = "none"
 	DlAutocapitalizeOff        DlAutocapitalize = "off"
+	DlAutocapitalizeOn         DlAutocapitalize = "on"
+	DlAutocapitalizeSentences  DlAutocapitalize = "sentences"
+	DlAutocapitalizeWords      DlAutocapitalize = "words"
 )
 
 type DlAutocorrect string
@@ -113,18 +138,18 @@ const (
 type DlContenteditable string
 
 const (
+	DlContenteditableFalse         DlContenteditable = "false"
 	DlContenteditablePlaintextOnly DlContenteditable = "plaintext-only"
 	DlContenteditableTrue          DlContenteditable = "true"
-	DlContenteditableFalse         DlContenteditable = "false"
 	DlContenteditableEmpty         DlContenteditable = ""
 )
 
 type DlDir string
 
 const (
+	DlDirAuto DlDir = "auto"
 	DlDirLtr  DlDir = "ltr"
 	DlDirRtl  DlDir = "rtl"
-	DlDirAuto DlDir = "auto"
 )
 
 type DlDraggable string
@@ -137,13 +162,13 @@ const (
 type DlEnterkeyhint string
 
 const (
+	DlEnterkeyhintSearch   DlEnterkeyhint = "search"
+	DlEnterkeyhintSend     DlEnterkeyhint = "send"
 	DlEnterkeyhintDone     DlEnterkeyhint = "done"
 	DlEnterkeyhintEnter    DlEnterkeyhint = "enter"
 	DlEnterkeyhintGo       DlEnterkeyhint = "go"
 	DlEnterkeyhintNext     DlEnterkeyhint = "next"
 	DlEnterkeyhintPrevious DlEnterkeyhint = "previous"
-	DlEnterkeyhintSearch   DlEnterkeyhint = "search"
-	DlEnterkeyhintSend     DlEnterkeyhint = "send"
 )
 
 type DlHidden string
@@ -157,14 +182,14 @@ const (
 type DlInputmode string
 
 const (
+	DlInputmodeTel     DlInputmode = "tel"
+	DlInputmodeText    DlInputmode = "text"
+	DlInputmodeUrl     DlInputmode = "url"
 	DlInputmodeDecimal DlInputmode = "decimal"
 	DlInputmodeEmail   DlInputmode = "email"
 	DlInputmodeNone    DlInputmode = "none"
 	DlInputmodeNumeric DlInputmode = "numeric"
 	DlInputmodeSearch  DlInputmode = "search"
-	DlInputmodeTel     DlInputmode = "tel"
-	DlInputmodeText    DlInputmode = "text"
-	DlInputmodeUrl     DlInputmode = "url"
 )
 
 type DlSpellcheck string

@@ -70,6 +70,31 @@ func (e *HgroupElement) Textf(format string, args ...any) *HgroupElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *HgroupElement) If(cond bool, child htemel.Node) *HgroupElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *HgroupElement) IfElse(cond bool, then, els htemel.Node) *HgroupElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *HgroupElement) IfThen(cond bool, fn func(*HgroupElement)) *HgroupElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *HgroupElement) AddClass(classes ...string) *HgroupElement {
 	current := e.attributes["class"].(string)
@@ -94,19 +119,19 @@ func (e *HgroupElement) ToggleClass(class string, enable bool) *HgroupElement {
 type HgroupAutocapitalize string
 
 const (
-	HgroupAutocapitalizeWords      HgroupAutocapitalize = "words"
 	HgroupAutocapitalizeCharacters HgroupAutocapitalize = "characters"
 	HgroupAutocapitalizeNone       HgroupAutocapitalize = "none"
 	HgroupAutocapitalizeOff        HgroupAutocapitalize = "off"
 	HgroupAutocapitalizeOn         HgroupAutocapitalize = "on"
 	HgroupAutocapitalizeSentences  HgroupAutocapitalize = "sentences"
+	HgroupAutocapitalizeWords      HgroupAutocapitalize = "words"
 )
 
 type HgroupAutocorrect string
 
 const (
-	HgroupAutocorrectOn    HgroupAutocorrect = "on"
 	HgroupAutocorrectOff   HgroupAutocorrect = "off"
+	HgroupAutocorrectOn    HgroupAutocorrect = "on"
 	HgroupAutocorrectEmpty HgroupAutocorrect = ""
 )
 
@@ -122,9 +147,9 @@ const (
 type HgroupDir string
 
 const (
-	HgroupDirRtl  HgroupDir = "rtl"
 	HgroupDirAuto HgroupDir = "auto"
 	HgroupDirLtr  HgroupDir = "ltr"
+	HgroupDirRtl  HgroupDir = "rtl"
 )
 
 type HgroupDraggable string
@@ -137,13 +162,13 @@ const (
 type HgroupEnterkeyhint string
 
 const (
+	HgroupEnterkeyhintDone     HgroupEnterkeyhint = "done"
 	HgroupEnterkeyhintEnter    HgroupEnterkeyhint = "enter"
 	HgroupEnterkeyhintGo       HgroupEnterkeyhint = "go"
 	HgroupEnterkeyhintNext     HgroupEnterkeyhint = "next"
 	HgroupEnterkeyhintPrevious HgroupEnterkeyhint = "previous"
 	HgroupEnterkeyhintSearch   HgroupEnterkeyhint = "search"
 	HgroupEnterkeyhintSend     HgroupEnterkeyhint = "send"
-	HgroupEnterkeyhintDone     HgroupEnterkeyhint = "done"
 )
 
 type HgroupHidden string
@@ -157,6 +182,7 @@ const (
 type HgroupInputmode string
 
 const (
+	HgroupInputmodeNone    HgroupInputmode = "none"
 	HgroupInputmodeNumeric HgroupInputmode = "numeric"
 	HgroupInputmodeSearch  HgroupInputmode = "search"
 	HgroupInputmodeTel     HgroupInputmode = "tel"
@@ -164,30 +190,29 @@ const (
 	HgroupInputmodeUrl     HgroupInputmode = "url"
 	HgroupInputmodeDecimal HgroupInputmode = "decimal"
 	HgroupInputmodeEmail   HgroupInputmode = "email"
-	HgroupInputmodeNone    HgroupInputmode = "none"
 )
 
 type HgroupSpellcheck string
 
 const (
-	HgroupSpellcheckTrue  HgroupSpellcheck = "true"
 	HgroupSpellcheckFalse HgroupSpellcheck = "false"
+	HgroupSpellcheckTrue  HgroupSpellcheck = "true"
 	HgroupSpellcheckEmpty HgroupSpellcheck = ""
 )
 
 type HgroupTranslate string
 
 const (
-	HgroupTranslateYes   HgroupTranslate = "yes"
 	HgroupTranslateNo    HgroupTranslate = "no"
+	HgroupTranslateYes   HgroupTranslate = "yes"
 	HgroupTranslateEmpty HgroupTranslate = ""
 )
 
 type HgroupWritingsuggestions string
 
 const (
-	HgroupWritingsuggestionsFalse HgroupWritingsuggestions = "false"
 	HgroupWritingsuggestionsTrue  HgroupWritingsuggestions = "true"
+	HgroupWritingsuggestionsFalse HgroupWritingsuggestions = "false"
 	HgroupWritingsuggestionsEmpty HgroupWritingsuggestions = ""
 )
 

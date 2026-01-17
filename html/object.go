@@ -70,6 +70,31 @@ func (e *ObjectElement) Textf(format string, args ...any) *ObjectElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *ObjectElement) If(cond bool, child htemel.Node) *ObjectElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *ObjectElement) IfElse(cond bool, then, els htemel.Node) *ObjectElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *ObjectElement) IfThen(cond bool, fn func(*ObjectElement)) *ObjectElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *ObjectElement) AddClass(classes ...string) *ObjectElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *ObjectElement) ToggleClass(class string, enable bool) *ObjectElement {
 type ObjectAutocapitalize string
 
 const (
+	ObjectAutocapitalizeOff        ObjectAutocapitalize = "off"
 	ObjectAutocapitalizeOn         ObjectAutocapitalize = "on"
 	ObjectAutocapitalizeSentences  ObjectAutocapitalize = "sentences"
 	ObjectAutocapitalizeWords      ObjectAutocapitalize = "words"
 	ObjectAutocapitalizeCharacters ObjectAutocapitalize = "characters"
 	ObjectAutocapitalizeNone       ObjectAutocapitalize = "none"
-	ObjectAutocapitalizeOff        ObjectAutocapitalize = "off"
 )
 
 type ObjectAutocorrect string
@@ -113,9 +138,9 @@ const (
 type ObjectContenteditable string
 
 const (
-	ObjectContenteditableFalse         ObjectContenteditable = "false"
 	ObjectContenteditablePlaintextOnly ObjectContenteditable = "plaintext-only"
 	ObjectContenteditableTrue          ObjectContenteditable = "true"
+	ObjectContenteditableFalse         ObjectContenteditable = "false"
 	ObjectContenteditableEmpty         ObjectContenteditable = ""
 )
 
@@ -137,13 +162,13 @@ const (
 type ObjectEnterkeyhint string
 
 const (
-	ObjectEnterkeyhintEnter    ObjectEnterkeyhint = "enter"
-	ObjectEnterkeyhintGo       ObjectEnterkeyhint = "go"
 	ObjectEnterkeyhintNext     ObjectEnterkeyhint = "next"
 	ObjectEnterkeyhintPrevious ObjectEnterkeyhint = "previous"
 	ObjectEnterkeyhintSearch   ObjectEnterkeyhint = "search"
 	ObjectEnterkeyhintSend     ObjectEnterkeyhint = "send"
 	ObjectEnterkeyhintDone     ObjectEnterkeyhint = "done"
+	ObjectEnterkeyhintEnter    ObjectEnterkeyhint = "enter"
+	ObjectEnterkeyhintGo       ObjectEnterkeyhint = "go"
 )
 
 type ObjectHidden string
@@ -157,6 +182,7 @@ const (
 type ObjectInputmode string
 
 const (
+	ObjectInputmodeText    ObjectInputmode = "text"
 	ObjectInputmodeUrl     ObjectInputmode = "url"
 	ObjectInputmodeDecimal ObjectInputmode = "decimal"
 	ObjectInputmodeEmail   ObjectInputmode = "email"
@@ -164,7 +190,6 @@ const (
 	ObjectInputmodeNumeric ObjectInputmode = "numeric"
 	ObjectInputmodeSearch  ObjectInputmode = "search"
 	ObjectInputmodeTel     ObjectInputmode = "tel"
-	ObjectInputmodeText    ObjectInputmode = "text"
 )
 
 type ObjectSpellcheck string
@@ -178,8 +203,8 @@ const (
 type ObjectTranslate string
 
 const (
-	ObjectTranslateYes   ObjectTranslate = "yes"
 	ObjectTranslateNo    ObjectTranslate = "no"
+	ObjectTranslateYes   ObjectTranslate = "yes"
 	ObjectTranslateEmpty ObjectTranslate = ""
 )
 

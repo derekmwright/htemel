@@ -70,6 +70,31 @@ func (e *VarElement) Textf(format string, args ...any) *VarElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *VarElement) If(cond bool, child htemel.Node) *VarElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *VarElement) IfElse(cond bool, then, els htemel.Node) *VarElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *VarElement) IfThen(cond bool, fn func(*VarElement)) *VarElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *VarElement) AddClass(classes ...string) *VarElement {
 	current := e.attributes["class"].(string)
@@ -94,19 +119,19 @@ func (e *VarElement) ToggleClass(class string, enable bool) *VarElement {
 type VarAutocapitalize string
 
 const (
-	VarAutocapitalizeSentences  VarAutocapitalize = "sentences"
-	VarAutocapitalizeWords      VarAutocapitalize = "words"
 	VarAutocapitalizeCharacters VarAutocapitalize = "characters"
 	VarAutocapitalizeNone       VarAutocapitalize = "none"
 	VarAutocapitalizeOff        VarAutocapitalize = "off"
 	VarAutocapitalizeOn         VarAutocapitalize = "on"
+	VarAutocapitalizeSentences  VarAutocapitalize = "sentences"
+	VarAutocapitalizeWords      VarAutocapitalize = "words"
 )
 
 type VarAutocorrect string
 
 const (
-	VarAutocorrectOn    VarAutocorrect = "on"
 	VarAutocorrectOff   VarAutocorrect = "off"
+	VarAutocorrectOn    VarAutocorrect = "on"
 	VarAutocorrectEmpty VarAutocorrect = ""
 )
 
@@ -130,20 +155,20 @@ const (
 type VarDraggable string
 
 const (
-	VarDraggableFalse VarDraggable = "false"
 	VarDraggableTrue  VarDraggable = "true"
+	VarDraggableFalse VarDraggable = "false"
 )
 
 type VarEnterkeyhint string
 
 const (
-	VarEnterkeyhintSearch   VarEnterkeyhint = "search"
-	VarEnterkeyhintSend     VarEnterkeyhint = "send"
 	VarEnterkeyhintDone     VarEnterkeyhint = "done"
 	VarEnterkeyhintEnter    VarEnterkeyhint = "enter"
 	VarEnterkeyhintGo       VarEnterkeyhint = "go"
 	VarEnterkeyhintNext     VarEnterkeyhint = "next"
 	VarEnterkeyhintPrevious VarEnterkeyhint = "previous"
+	VarEnterkeyhintSearch   VarEnterkeyhint = "search"
+	VarEnterkeyhintSend     VarEnterkeyhint = "send"
 )
 
 type VarHidden string
@@ -157,14 +182,14 @@ const (
 type VarInputmode string
 
 const (
-	VarInputmodeNone    VarInputmode = "none"
-	VarInputmodeNumeric VarInputmode = "numeric"
 	VarInputmodeSearch  VarInputmode = "search"
 	VarInputmodeTel     VarInputmode = "tel"
 	VarInputmodeText    VarInputmode = "text"
 	VarInputmodeUrl     VarInputmode = "url"
 	VarInputmodeDecimal VarInputmode = "decimal"
 	VarInputmodeEmail   VarInputmode = "email"
+	VarInputmodeNone    VarInputmode = "none"
+	VarInputmodeNumeric VarInputmode = "numeric"
 )
 
 type VarSpellcheck string

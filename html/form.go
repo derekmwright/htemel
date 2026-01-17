@@ -70,6 +70,31 @@ func (e *FormElement) Textf(format string, args ...any) *FormElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *FormElement) If(cond bool, child htemel.Node) *FormElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *FormElement) IfElse(cond bool, then, els htemel.Node) *FormElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *FormElement) IfThen(cond bool, fn func(*FormElement)) *FormElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *FormElement) AddClass(classes ...string) *FormElement {
 	current := e.attributes["class"].(string)
@@ -101,9 +126,9 @@ const (
 type FormMethod string
 
 const (
-	FormMethodDialog FormMethod = "dialog"
 	FormMethodGet    FormMethod = "get"
 	FormMethodPost   FormMethod = "post"
+	FormMethodDialog FormMethod = "dialog"
 )
 
 type FormAutocapitalize string
@@ -120,8 +145,8 @@ const (
 type FormAutocorrect string
 
 const (
-	FormAutocorrectOn    FormAutocorrect = "on"
 	FormAutocorrectOff   FormAutocorrect = "off"
+	FormAutocorrectOn    FormAutocorrect = "on"
 	FormAutocorrectEmpty FormAutocorrect = ""
 )
 
@@ -152,13 +177,13 @@ const (
 type FormEnterkeyhint string
 
 const (
-	FormEnterkeyhintDone     FormEnterkeyhint = "done"
-	FormEnterkeyhintEnter    FormEnterkeyhint = "enter"
-	FormEnterkeyhintGo       FormEnterkeyhint = "go"
 	FormEnterkeyhintNext     FormEnterkeyhint = "next"
 	FormEnterkeyhintPrevious FormEnterkeyhint = "previous"
 	FormEnterkeyhintSearch   FormEnterkeyhint = "search"
 	FormEnterkeyhintSend     FormEnterkeyhint = "send"
+	FormEnterkeyhintDone     FormEnterkeyhint = "done"
+	FormEnterkeyhintEnter    FormEnterkeyhint = "enter"
+	FormEnterkeyhintGo       FormEnterkeyhint = "go"
 )
 
 type FormHidden string
@@ -172,14 +197,14 @@ const (
 type FormInputmode string
 
 const (
-	FormInputmodeNone    FormInputmode = "none"
-	FormInputmodeNumeric FormInputmode = "numeric"
-	FormInputmodeSearch  FormInputmode = "search"
 	FormInputmodeTel     FormInputmode = "tel"
 	FormInputmodeText    FormInputmode = "text"
 	FormInputmodeUrl     FormInputmode = "url"
 	FormInputmodeDecimal FormInputmode = "decimal"
 	FormInputmodeEmail   FormInputmode = "email"
+	FormInputmodeNone    FormInputmode = "none"
+	FormInputmodeNumeric FormInputmode = "numeric"
+	FormInputmodeSearch  FormInputmode = "search"
 )
 
 type FormSpellcheck string

@@ -70,6 +70,31 @@ func (e *FieldsetElement) Textf(format string, args ...any) *FieldsetElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *FieldsetElement) If(cond bool, child htemel.Node) *FieldsetElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *FieldsetElement) IfElse(cond bool, then, els htemel.Node) *FieldsetElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *FieldsetElement) IfThen(cond bool, fn func(*FieldsetElement)) *FieldsetElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *FieldsetElement) AddClass(classes ...string) *FieldsetElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *FieldsetElement) ToggleClass(class string, enable bool) *FieldsetElemen
 type FieldsetAutocapitalize string
 
 const (
-	FieldsetAutocapitalizeCharacters FieldsetAutocapitalize = "characters"
 	FieldsetAutocapitalizeNone       FieldsetAutocapitalize = "none"
 	FieldsetAutocapitalizeOff        FieldsetAutocapitalize = "off"
 	FieldsetAutocapitalizeOn         FieldsetAutocapitalize = "on"
 	FieldsetAutocapitalizeSentences  FieldsetAutocapitalize = "sentences"
 	FieldsetAutocapitalizeWords      FieldsetAutocapitalize = "words"
+	FieldsetAutocapitalizeCharacters FieldsetAutocapitalize = "characters"
 )
 
 type FieldsetAutocorrect string
@@ -137,41 +162,41 @@ const (
 type FieldsetEnterkeyhint string
 
 const (
+	FieldsetEnterkeyhintSearch   FieldsetEnterkeyhint = "search"
 	FieldsetEnterkeyhintSend     FieldsetEnterkeyhint = "send"
 	FieldsetEnterkeyhintDone     FieldsetEnterkeyhint = "done"
 	FieldsetEnterkeyhintEnter    FieldsetEnterkeyhint = "enter"
 	FieldsetEnterkeyhintGo       FieldsetEnterkeyhint = "go"
 	FieldsetEnterkeyhintNext     FieldsetEnterkeyhint = "next"
 	FieldsetEnterkeyhintPrevious FieldsetEnterkeyhint = "previous"
-	FieldsetEnterkeyhintSearch   FieldsetEnterkeyhint = "search"
 )
 
 type FieldsetHidden string
 
 const (
-	FieldsetHiddenHidden     FieldsetHidden = "hidden"
 	FieldsetHiddenUntilFound FieldsetHidden = "until-found"
+	FieldsetHiddenHidden     FieldsetHidden = "hidden"
 	FieldsetHiddenEmpty      FieldsetHidden = ""
 )
 
 type FieldsetInputmode string
 
 const (
+	FieldsetInputmodeSearch  FieldsetInputmode = "search"
+	FieldsetInputmodeTel     FieldsetInputmode = "tel"
+	FieldsetInputmodeText    FieldsetInputmode = "text"
 	FieldsetInputmodeUrl     FieldsetInputmode = "url"
 	FieldsetInputmodeDecimal FieldsetInputmode = "decimal"
 	FieldsetInputmodeEmail   FieldsetInputmode = "email"
 	FieldsetInputmodeNone    FieldsetInputmode = "none"
 	FieldsetInputmodeNumeric FieldsetInputmode = "numeric"
-	FieldsetInputmodeSearch  FieldsetInputmode = "search"
-	FieldsetInputmodeTel     FieldsetInputmode = "tel"
-	FieldsetInputmodeText    FieldsetInputmode = "text"
 )
 
 type FieldsetSpellcheck string
 
 const (
-	FieldsetSpellcheckFalse FieldsetSpellcheck = "false"
 	FieldsetSpellcheckTrue  FieldsetSpellcheck = "true"
+	FieldsetSpellcheckFalse FieldsetSpellcheck = "false"
 	FieldsetSpellcheckEmpty FieldsetSpellcheck = ""
 )
 

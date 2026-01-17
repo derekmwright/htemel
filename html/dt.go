@@ -70,6 +70,31 @@ func (e *DtElement) Textf(format string, args ...any) *DtElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *DtElement) If(cond bool, child htemel.Node) *DtElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *DtElement) IfElse(cond bool, then, els htemel.Node) *DtElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *DtElement) IfThen(cond bool, fn func(*DtElement)) *DtElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *DtElement) AddClass(classes ...string) *DtElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *DtElement) ToggleClass(class string, enable bool) *DtElement {
 type DtAutocapitalize string
 
 const (
-	DtAutocapitalizeOn         DtAutocapitalize = "on"
-	DtAutocapitalizeSentences  DtAutocapitalize = "sentences"
-	DtAutocapitalizeWords      DtAutocapitalize = "words"
 	DtAutocapitalizeCharacters DtAutocapitalize = "characters"
 	DtAutocapitalizeNone       DtAutocapitalize = "none"
 	DtAutocapitalizeOff        DtAutocapitalize = "off"
+	DtAutocapitalizeOn         DtAutocapitalize = "on"
+	DtAutocapitalizeSentences  DtAutocapitalize = "sentences"
+	DtAutocapitalizeWords      DtAutocapitalize = "words"
 )
 
 type DtAutocorrect string
@@ -137,34 +162,34 @@ const (
 type DtEnterkeyhint string
 
 const (
+	DtEnterkeyhintGo       DtEnterkeyhint = "go"
+	DtEnterkeyhintNext     DtEnterkeyhint = "next"
+	DtEnterkeyhintPrevious DtEnterkeyhint = "previous"
 	DtEnterkeyhintSearch   DtEnterkeyhint = "search"
 	DtEnterkeyhintSend     DtEnterkeyhint = "send"
 	DtEnterkeyhintDone     DtEnterkeyhint = "done"
 	DtEnterkeyhintEnter    DtEnterkeyhint = "enter"
-	DtEnterkeyhintGo       DtEnterkeyhint = "go"
-	DtEnterkeyhintNext     DtEnterkeyhint = "next"
-	DtEnterkeyhintPrevious DtEnterkeyhint = "previous"
 )
 
 type DtHidden string
 
 const (
-	DtHiddenHidden     DtHidden = "hidden"
 	DtHiddenUntilFound DtHidden = "until-found"
+	DtHiddenHidden     DtHidden = "hidden"
 	DtHiddenEmpty      DtHidden = ""
 )
 
 type DtInputmode string
 
 const (
-	DtInputmodeNone    DtInputmode = "none"
-	DtInputmodeNumeric DtInputmode = "numeric"
 	DtInputmodeSearch  DtInputmode = "search"
 	DtInputmodeTel     DtInputmode = "tel"
 	DtInputmodeText    DtInputmode = "text"
 	DtInputmodeUrl     DtInputmode = "url"
 	DtInputmodeDecimal DtInputmode = "decimal"
 	DtInputmodeEmail   DtInputmode = "email"
+	DtInputmodeNone    DtInputmode = "none"
+	DtInputmodeNumeric DtInputmode = "numeric"
 )
 
 type DtSpellcheck string

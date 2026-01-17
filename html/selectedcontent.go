@@ -70,6 +70,31 @@ func (e *SelectedcontentElement) Textf(format string, args ...any) *Selectedcont
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *SelectedcontentElement) If(cond bool, child htemel.Node) *SelectedcontentElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *SelectedcontentElement) IfElse(cond bool, then, els htemel.Node) *SelectedcontentElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *SelectedcontentElement) IfThen(cond bool, fn func(*SelectedcontentElement)) *SelectedcontentElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *SelectedcontentElement) AddClass(classes ...string) *SelectedcontentElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *SelectedcontentElement) ToggleClass(class string, enable bool) *Selecte
 type SelectedcontentAutocapitalize string
 
 const (
-	SelectedcontentAutocapitalizeCharacters SelectedcontentAutocapitalize = "characters"
 	SelectedcontentAutocapitalizeNone       SelectedcontentAutocapitalize = "none"
 	SelectedcontentAutocapitalizeOff        SelectedcontentAutocapitalize = "off"
 	SelectedcontentAutocapitalizeOn         SelectedcontentAutocapitalize = "on"
 	SelectedcontentAutocapitalizeSentences  SelectedcontentAutocapitalize = "sentences"
 	SelectedcontentAutocapitalizeWords      SelectedcontentAutocapitalize = "words"
+	SelectedcontentAutocapitalizeCharacters SelectedcontentAutocapitalize = "characters"
 )
 
 type SelectedcontentAutocorrect string
@@ -113,18 +138,18 @@ const (
 type SelectedcontentContenteditable string
 
 const (
+	SelectedcontentContenteditableTrue          SelectedcontentContenteditable = "true"
 	SelectedcontentContenteditableFalse         SelectedcontentContenteditable = "false"
 	SelectedcontentContenteditablePlaintextOnly SelectedcontentContenteditable = "plaintext-only"
-	SelectedcontentContenteditableTrue          SelectedcontentContenteditable = "true"
 	SelectedcontentContenteditableEmpty         SelectedcontentContenteditable = ""
 )
 
 type SelectedcontentDir string
 
 const (
-	SelectedcontentDirAuto SelectedcontentDir = "auto"
 	SelectedcontentDirLtr  SelectedcontentDir = "ltr"
 	SelectedcontentDirRtl  SelectedcontentDir = "rtl"
+	SelectedcontentDirAuto SelectedcontentDir = "auto"
 )
 
 type SelectedcontentDraggable string
@@ -137,34 +162,34 @@ const (
 type SelectedcontentEnterkeyhint string
 
 const (
-	SelectedcontentEnterkeyhintPrevious SelectedcontentEnterkeyhint = "previous"
-	SelectedcontentEnterkeyhintSearch   SelectedcontentEnterkeyhint = "search"
 	SelectedcontentEnterkeyhintSend     SelectedcontentEnterkeyhint = "send"
 	SelectedcontentEnterkeyhintDone     SelectedcontentEnterkeyhint = "done"
 	SelectedcontentEnterkeyhintEnter    SelectedcontentEnterkeyhint = "enter"
 	SelectedcontentEnterkeyhintGo       SelectedcontentEnterkeyhint = "go"
 	SelectedcontentEnterkeyhintNext     SelectedcontentEnterkeyhint = "next"
+	SelectedcontentEnterkeyhintPrevious SelectedcontentEnterkeyhint = "previous"
+	SelectedcontentEnterkeyhintSearch   SelectedcontentEnterkeyhint = "search"
 )
 
 type SelectedcontentHidden string
 
 const (
-	SelectedcontentHiddenUntilFound SelectedcontentHidden = "until-found"
 	SelectedcontentHiddenHidden     SelectedcontentHidden = "hidden"
+	SelectedcontentHiddenUntilFound SelectedcontentHidden = "until-found"
 	SelectedcontentHiddenEmpty      SelectedcontentHidden = ""
 )
 
 type SelectedcontentInputmode string
 
 const (
+	SelectedcontentInputmodeNumeric SelectedcontentInputmode = "numeric"
+	SelectedcontentInputmodeSearch  SelectedcontentInputmode = "search"
+	SelectedcontentInputmodeTel     SelectedcontentInputmode = "tel"
 	SelectedcontentInputmodeText    SelectedcontentInputmode = "text"
 	SelectedcontentInputmodeUrl     SelectedcontentInputmode = "url"
 	SelectedcontentInputmodeDecimal SelectedcontentInputmode = "decimal"
 	SelectedcontentInputmodeEmail   SelectedcontentInputmode = "email"
 	SelectedcontentInputmodeNone    SelectedcontentInputmode = "none"
-	SelectedcontentInputmodeNumeric SelectedcontentInputmode = "numeric"
-	SelectedcontentInputmodeSearch  SelectedcontentInputmode = "search"
-	SelectedcontentInputmodeTel     SelectedcontentInputmode = "tel"
 )
 
 type SelectedcontentSpellcheck string

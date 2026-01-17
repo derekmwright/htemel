@@ -70,6 +70,31 @@ func (e *SmallElement) Textf(format string, args ...any) *SmallElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *SmallElement) If(cond bool, child htemel.Node) *SmallElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *SmallElement) IfElse(cond bool, then, els htemel.Node) *SmallElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *SmallElement) IfThen(cond bool, fn func(*SmallElement)) *SmallElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *SmallElement) AddClass(classes ...string) *SmallElement {
 	current := e.attributes["class"].(string)
@@ -105,8 +130,8 @@ const (
 type SmallAutocorrect string
 
 const (
-	SmallAutocorrectOn    SmallAutocorrect = "on"
 	SmallAutocorrectOff   SmallAutocorrect = "off"
+	SmallAutocorrectOn    SmallAutocorrect = "on"
 	SmallAutocorrectEmpty SmallAutocorrect = ""
 )
 
@@ -122,9 +147,9 @@ const (
 type SmallDir string
 
 const (
+	SmallDirAuto SmallDir = "auto"
 	SmallDirLtr  SmallDir = "ltr"
 	SmallDirRtl  SmallDir = "rtl"
-	SmallDirAuto SmallDir = "auto"
 )
 
 type SmallDraggable string
@@ -137,13 +162,13 @@ const (
 type SmallEnterkeyhint string
 
 const (
-	SmallEnterkeyhintEnter    SmallEnterkeyhint = "enter"
 	SmallEnterkeyhintGo       SmallEnterkeyhint = "go"
 	SmallEnterkeyhintNext     SmallEnterkeyhint = "next"
 	SmallEnterkeyhintPrevious SmallEnterkeyhint = "previous"
 	SmallEnterkeyhintSearch   SmallEnterkeyhint = "search"
 	SmallEnterkeyhintSend     SmallEnterkeyhint = "send"
 	SmallEnterkeyhintDone     SmallEnterkeyhint = "done"
+	SmallEnterkeyhintEnter    SmallEnterkeyhint = "enter"
 )
 
 type SmallHidden string
@@ -157,6 +182,7 @@ const (
 type SmallInputmode string
 
 const (
+	SmallInputmodeNone    SmallInputmode = "none"
 	SmallInputmodeNumeric SmallInputmode = "numeric"
 	SmallInputmodeSearch  SmallInputmode = "search"
 	SmallInputmodeTel     SmallInputmode = "tel"
@@ -164,7 +190,6 @@ const (
 	SmallInputmodeUrl     SmallInputmode = "url"
 	SmallInputmodeDecimal SmallInputmode = "decimal"
 	SmallInputmodeEmail   SmallInputmode = "email"
-	SmallInputmodeNone    SmallInputmode = "none"
 )
 
 type SmallSpellcheck string

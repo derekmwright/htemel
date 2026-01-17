@@ -70,6 +70,31 @@ func (e *H5Element) Textf(format string, args ...any) *H5Element {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *H5Element) If(cond bool, child htemel.Node) *H5Element {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *H5Element) IfElse(cond bool, then, els htemel.Node) *H5Element {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *H5Element) IfThen(cond bool, fn func(*H5Element)) *H5Element {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *H5Element) AddClass(classes ...string) *H5Element {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *H5Element) ToggleClass(class string, enable bool) *H5Element {
 type H5Autocapitalize string
 
 const (
-	H5AutocapitalizeOn         H5Autocapitalize = "on"
-	H5AutocapitalizeSentences  H5Autocapitalize = "sentences"
-	H5AutocapitalizeWords      H5Autocapitalize = "words"
 	H5AutocapitalizeCharacters H5Autocapitalize = "characters"
 	H5AutocapitalizeNone       H5Autocapitalize = "none"
 	H5AutocapitalizeOff        H5Autocapitalize = "off"
+	H5AutocapitalizeOn         H5Autocapitalize = "on"
+	H5AutocapitalizeSentences  H5Autocapitalize = "sentences"
+	H5AutocapitalizeWords      H5Autocapitalize = "words"
 )
 
 type H5Autocorrect string
@@ -113,18 +138,18 @@ const (
 type H5Contenteditable string
 
 const (
-	H5ContenteditableFalse         H5Contenteditable = "false"
 	H5ContenteditablePlaintextOnly H5Contenteditable = "plaintext-only"
 	H5ContenteditableTrue          H5Contenteditable = "true"
+	H5ContenteditableFalse         H5Contenteditable = "false"
 	H5ContenteditableEmpty         H5Contenteditable = ""
 )
 
 type H5Dir string
 
 const (
-	H5DirRtl  H5Dir = "rtl"
 	H5DirAuto H5Dir = "auto"
 	H5DirLtr  H5Dir = "ltr"
+	H5DirRtl  H5Dir = "rtl"
 )
 
 type H5Draggable string
@@ -149,22 +174,22 @@ const (
 type H5Hidden string
 
 const (
-	H5HiddenHidden     H5Hidden = "hidden"
 	H5HiddenUntilFound H5Hidden = "until-found"
+	H5HiddenHidden     H5Hidden = "hidden"
 	H5HiddenEmpty      H5Hidden = ""
 )
 
 type H5Inputmode string
 
 const (
-	H5InputmodeNone    H5Inputmode = "none"
-	H5InputmodeNumeric H5Inputmode = "numeric"
-	H5InputmodeSearch  H5Inputmode = "search"
 	H5InputmodeTel     H5Inputmode = "tel"
 	H5InputmodeText    H5Inputmode = "text"
 	H5InputmodeUrl     H5Inputmode = "url"
 	H5InputmodeDecimal H5Inputmode = "decimal"
 	H5InputmodeEmail   H5Inputmode = "email"
+	H5InputmodeNone    H5Inputmode = "none"
+	H5InputmodeNumeric H5Inputmode = "numeric"
+	H5InputmodeSearch  H5Inputmode = "search"
 )
 
 type H5Spellcheck string
@@ -186,8 +211,8 @@ const (
 type H5Writingsuggestions string
 
 const (
-	H5WritingsuggestionsFalse H5Writingsuggestions = "false"
 	H5WritingsuggestionsTrue  H5Writingsuggestions = "true"
+	H5WritingsuggestionsFalse H5Writingsuggestions = "false"
 	H5WritingsuggestionsEmpty H5Writingsuggestions = ""
 )
 

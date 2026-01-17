@@ -70,6 +70,31 @@ func (e *TemplateElement) Textf(format string, args ...any) *TemplateElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *TemplateElement) If(cond bool, child htemel.Node) *TemplateElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *TemplateElement) IfElse(cond bool, then, els htemel.Node) *TemplateElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *TemplateElement) IfThen(cond bool, fn func(*TemplateElement)) *TemplateElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *TemplateElement) AddClass(classes ...string) *TemplateElement {
 	current := e.attributes["class"].(string)
@@ -129,9 +154,9 @@ const (
 type TemplateDir string
 
 const (
+	TemplateDirRtl  TemplateDir = "rtl"
 	TemplateDirAuto TemplateDir = "auto"
 	TemplateDirLtr  TemplateDir = "ltr"
-	TemplateDirRtl  TemplateDir = "rtl"
 )
 
 type TemplateDraggable string
@@ -193,8 +218,8 @@ const (
 type TemplateWritingsuggestions string
 
 const (
-	TemplateWritingsuggestionsTrue  TemplateWritingsuggestions = "true"
 	TemplateWritingsuggestionsFalse TemplateWritingsuggestions = "false"
+	TemplateWritingsuggestionsTrue  TemplateWritingsuggestions = "true"
 	TemplateWritingsuggestionsEmpty TemplateWritingsuggestions = ""
 )
 

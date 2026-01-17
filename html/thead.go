@@ -70,6 +70,31 @@ func (e *TheadElement) Textf(format string, args ...any) *TheadElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *TheadElement) If(cond bool, child htemel.Node) *TheadElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *TheadElement) IfElse(cond bool, then, els htemel.Node) *TheadElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *TheadElement) IfThen(cond bool, fn func(*TheadElement)) *TheadElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *TheadElement) AddClass(classes ...string) *TheadElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *TheadElement) ToggleClass(class string, enable bool) *TheadElement {
 type TheadAutocapitalize string
 
 const (
+	TheadAutocapitalizeOn         TheadAutocapitalize = "on"
 	TheadAutocapitalizeSentences  TheadAutocapitalize = "sentences"
 	TheadAutocapitalizeWords      TheadAutocapitalize = "words"
 	TheadAutocapitalizeCharacters TheadAutocapitalize = "characters"
 	TheadAutocapitalizeNone       TheadAutocapitalize = "none"
 	TheadAutocapitalizeOff        TheadAutocapitalize = "off"
-	TheadAutocapitalizeOn         TheadAutocapitalize = "on"
 )
 
 type TheadAutocorrect string
@@ -122,9 +147,9 @@ const (
 type TheadDir string
 
 const (
+	TheadDirLtr  TheadDir = "ltr"
 	TheadDirRtl  TheadDir = "rtl"
 	TheadDirAuto TheadDir = "auto"
-	TheadDirLtr  TheadDir = "ltr"
 )
 
 type TheadDraggable string
@@ -157,6 +182,7 @@ const (
 type TheadInputmode string
 
 const (
+	TheadInputmodeUrl     TheadInputmode = "url"
 	TheadInputmodeDecimal TheadInputmode = "decimal"
 	TheadInputmodeEmail   TheadInputmode = "email"
 	TheadInputmodeNone    TheadInputmode = "none"
@@ -164,14 +190,13 @@ const (
 	TheadInputmodeSearch  TheadInputmode = "search"
 	TheadInputmodeTel     TheadInputmode = "tel"
 	TheadInputmodeText    TheadInputmode = "text"
-	TheadInputmodeUrl     TheadInputmode = "url"
 )
 
 type TheadSpellcheck string
 
 const (
-	TheadSpellcheckTrue  TheadSpellcheck = "true"
 	TheadSpellcheckFalse TheadSpellcheck = "false"
+	TheadSpellcheckTrue  TheadSpellcheck = "true"
 	TheadSpellcheckEmpty TheadSpellcheck = ""
 )
 

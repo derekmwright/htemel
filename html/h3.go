@@ -70,6 +70,31 @@ func (e *H3Element) Textf(format string, args ...any) *H3Element {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *H3Element) If(cond bool, child htemel.Node) *H3Element {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *H3Element) IfElse(cond bool, then, els htemel.Node) *H3Element {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *H3Element) IfThen(cond bool, fn func(*H3Element)) *H3Element {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *H3Element) AddClass(classes ...string) *H3Element {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *H3Element) ToggleClass(class string, enable bool) *H3Element {
 type H3Autocapitalize string
 
 const (
+	H3AutocapitalizeSentences  H3Autocapitalize = "sentences"
 	H3AutocapitalizeWords      H3Autocapitalize = "words"
 	H3AutocapitalizeCharacters H3Autocapitalize = "characters"
 	H3AutocapitalizeNone       H3Autocapitalize = "none"
 	H3AutocapitalizeOff        H3Autocapitalize = "off"
 	H3AutocapitalizeOn         H3Autocapitalize = "on"
-	H3AutocapitalizeSentences  H3Autocapitalize = "sentences"
 )
 
 type H3Autocorrect string
@@ -122,9 +147,9 @@ const (
 type H3Dir string
 
 const (
+	H3DirRtl  H3Dir = "rtl"
 	H3DirAuto H3Dir = "auto"
 	H3DirLtr  H3Dir = "ltr"
-	H3DirRtl  H3Dir = "rtl"
 )
 
 type H3Draggable string
@@ -137,13 +162,13 @@ const (
 type H3Enterkeyhint string
 
 const (
+	H3EnterkeyhintSend     H3Enterkeyhint = "send"
 	H3EnterkeyhintDone     H3Enterkeyhint = "done"
 	H3EnterkeyhintEnter    H3Enterkeyhint = "enter"
 	H3EnterkeyhintGo       H3Enterkeyhint = "go"
 	H3EnterkeyhintNext     H3Enterkeyhint = "next"
 	H3EnterkeyhintPrevious H3Enterkeyhint = "previous"
 	H3EnterkeyhintSearch   H3Enterkeyhint = "search"
-	H3EnterkeyhintSend     H3Enterkeyhint = "send"
 )
 
 type H3Hidden string
@@ -157,14 +182,14 @@ const (
 type H3Inputmode string
 
 const (
+	H3InputmodeTel     H3Inputmode = "tel"
+	H3InputmodeText    H3Inputmode = "text"
+	H3InputmodeUrl     H3Inputmode = "url"
 	H3InputmodeDecimal H3Inputmode = "decimal"
 	H3InputmodeEmail   H3Inputmode = "email"
 	H3InputmodeNone    H3Inputmode = "none"
 	H3InputmodeNumeric H3Inputmode = "numeric"
 	H3InputmodeSearch  H3Inputmode = "search"
-	H3InputmodeTel     H3Inputmode = "tel"
-	H3InputmodeText    H3Inputmode = "text"
-	H3InputmodeUrl     H3Inputmode = "url"
 )
 
 type H3Spellcheck string

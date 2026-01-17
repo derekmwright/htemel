@@ -70,6 +70,31 @@ func (e *SelectElement) Textf(format string, args ...any) *SelectElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *SelectElement) If(cond bool, child htemel.Node) *SelectElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *SelectElement) IfElse(cond bool, then, els htemel.Node) *SelectElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *SelectElement) IfThen(cond bool, fn func(*SelectElement)) *SelectElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *SelectElement) AddClass(classes ...string) *SelectElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *SelectElement) ToggleClass(class string, enable bool) *SelectElement {
 type SelectAutocapitalize string
 
 const (
+	SelectAutocapitalizeWords      SelectAutocapitalize = "words"
 	SelectAutocapitalizeCharacters SelectAutocapitalize = "characters"
 	SelectAutocapitalizeNone       SelectAutocapitalize = "none"
 	SelectAutocapitalizeOff        SelectAutocapitalize = "off"
 	SelectAutocapitalizeOn         SelectAutocapitalize = "on"
 	SelectAutocapitalizeSentences  SelectAutocapitalize = "sentences"
-	SelectAutocapitalizeWords      SelectAutocapitalize = "words"
 )
 
 type SelectAutocorrect string
@@ -113,58 +138,58 @@ const (
 type SelectContenteditable string
 
 const (
+	SelectContenteditableFalse         SelectContenteditable = "false"
 	SelectContenteditablePlaintextOnly SelectContenteditable = "plaintext-only"
 	SelectContenteditableTrue          SelectContenteditable = "true"
-	SelectContenteditableFalse         SelectContenteditable = "false"
 	SelectContenteditableEmpty         SelectContenteditable = ""
 )
 
 type SelectDir string
 
 const (
-	SelectDirLtr  SelectDir = "ltr"
 	SelectDirRtl  SelectDir = "rtl"
 	SelectDirAuto SelectDir = "auto"
+	SelectDirLtr  SelectDir = "ltr"
 )
 
 type SelectDraggable string
 
 const (
-	SelectDraggableFalse SelectDraggable = "false"
 	SelectDraggableTrue  SelectDraggable = "true"
+	SelectDraggableFalse SelectDraggable = "false"
 )
 
 type SelectEnterkeyhint string
 
 const (
+	SelectEnterkeyhintDone     SelectEnterkeyhint = "done"
 	SelectEnterkeyhintEnter    SelectEnterkeyhint = "enter"
 	SelectEnterkeyhintGo       SelectEnterkeyhint = "go"
 	SelectEnterkeyhintNext     SelectEnterkeyhint = "next"
 	SelectEnterkeyhintPrevious SelectEnterkeyhint = "previous"
 	SelectEnterkeyhintSearch   SelectEnterkeyhint = "search"
 	SelectEnterkeyhintSend     SelectEnterkeyhint = "send"
-	SelectEnterkeyhintDone     SelectEnterkeyhint = "done"
 )
 
 type SelectHidden string
 
 const (
-	SelectHiddenHidden     SelectHidden = "hidden"
 	SelectHiddenUntilFound SelectHidden = "until-found"
+	SelectHiddenHidden     SelectHidden = "hidden"
 	SelectHiddenEmpty      SelectHidden = ""
 )
 
 type SelectInputmode string
 
 const (
-	SelectInputmodeEmail   SelectInputmode = "email"
-	SelectInputmodeNone    SelectInputmode = "none"
-	SelectInputmodeNumeric SelectInputmode = "numeric"
 	SelectInputmodeSearch  SelectInputmode = "search"
 	SelectInputmodeTel     SelectInputmode = "tel"
 	SelectInputmodeText    SelectInputmode = "text"
 	SelectInputmodeUrl     SelectInputmode = "url"
 	SelectInputmodeDecimal SelectInputmode = "decimal"
+	SelectInputmodeEmail   SelectInputmode = "email"
+	SelectInputmodeNone    SelectInputmode = "none"
+	SelectInputmodeNumeric SelectInputmode = "numeric"
 )
 
 type SelectSpellcheck string
@@ -178,8 +203,8 @@ const (
 type SelectTranslate string
 
 const (
-	SelectTranslateNo    SelectTranslate = "no"
 	SelectTranslateYes   SelectTranslate = "yes"
+	SelectTranslateNo    SelectTranslate = "no"
 	SelectTranslateEmpty SelectTranslate = ""
 )
 

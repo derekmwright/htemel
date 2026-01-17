@@ -128,20 +128,20 @@ const (
 type LinkDraggable string
 
 const (
-	LinkDraggableTrue  LinkDraggable = "true"
 	LinkDraggableFalse LinkDraggable = "false"
+	LinkDraggableTrue  LinkDraggable = "true"
 )
 
 type LinkEnterkeyhint string
 
 const (
-	LinkEnterkeyhintSearch   LinkEnterkeyhint = "search"
 	LinkEnterkeyhintSend     LinkEnterkeyhint = "send"
 	LinkEnterkeyhintDone     LinkEnterkeyhint = "done"
 	LinkEnterkeyhintEnter    LinkEnterkeyhint = "enter"
 	LinkEnterkeyhintGo       LinkEnterkeyhint = "go"
 	LinkEnterkeyhintNext     LinkEnterkeyhint = "next"
 	LinkEnterkeyhintPrevious LinkEnterkeyhint = "previous"
+	LinkEnterkeyhintSearch   LinkEnterkeyhint = "search"
 )
 
 type LinkHidden string
@@ -155,14 +155,14 @@ const (
 type LinkInputmode string
 
 const (
-	LinkInputmodeNumeric LinkInputmode = "numeric"
-	LinkInputmodeSearch  LinkInputmode = "search"
-	LinkInputmodeTel     LinkInputmode = "tel"
 	LinkInputmodeText    LinkInputmode = "text"
 	LinkInputmodeUrl     LinkInputmode = "url"
 	LinkInputmodeDecimal LinkInputmode = "decimal"
 	LinkInputmodeEmail   LinkInputmode = "email"
 	LinkInputmodeNone    LinkInputmode = "none"
+	LinkInputmodeNumeric LinkInputmode = "numeric"
+	LinkInputmodeSearch  LinkInputmode = "search"
+	LinkInputmodeTel     LinkInputmode = "tel"
 )
 
 type LinkSpellcheck string

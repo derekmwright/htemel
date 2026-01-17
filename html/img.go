@@ -78,9 +78,9 @@ const (
 type ImgDecoding string
 
 const (
-	ImgDecodingAsync ImgDecoding = "async"
 	ImgDecodingAuto  ImgDecoding = "auto"
 	ImgDecodingSync  ImgDecoding = "sync"
+	ImgDecodingAsync ImgDecoding = "async"
 )
 
 type ImgLoading string
@@ -93,20 +93,20 @@ const (
 type ImgFetchpriority string
 
 const (
+	ImgFetchpriorityAuto ImgFetchpriority = "auto"
 	ImgFetchpriorityHigh ImgFetchpriority = "high"
 	ImgFetchpriorityLow  ImgFetchpriority = "low"
-	ImgFetchpriorityAuto ImgFetchpriority = "auto"
 )
 
 type ImgAutocapitalize string
 
 const (
-	ImgAutocapitalizeOn         ImgAutocapitalize = "on"
-	ImgAutocapitalizeSentences  ImgAutocapitalize = "sentences"
-	ImgAutocapitalizeWords      ImgAutocapitalize = "words"
 	ImgAutocapitalizeCharacters ImgAutocapitalize = "characters"
 	ImgAutocapitalizeNone       ImgAutocapitalize = "none"
 	ImgAutocapitalizeOff        ImgAutocapitalize = "off"
+	ImgAutocapitalizeOn         ImgAutocapitalize = "on"
+	ImgAutocapitalizeSentences  ImgAutocapitalize = "sentences"
+	ImgAutocapitalizeWords      ImgAutocapitalize = "words"
 )
 
 type ImgAutocorrect string
@@ -120,18 +120,18 @@ const (
 type ImgContenteditable string
 
 const (
+	ImgContenteditableFalse         ImgContenteditable = "false"
 	ImgContenteditablePlaintextOnly ImgContenteditable = "plaintext-only"
 	ImgContenteditableTrue          ImgContenteditable = "true"
-	ImgContenteditableFalse         ImgContenteditable = "false"
 	ImgContenteditableEmpty         ImgContenteditable = ""
 )
 
 type ImgDir string
 
 const (
+	ImgDirRtl  ImgDir = "rtl"
 	ImgDirAuto ImgDir = "auto"
 	ImgDirLtr  ImgDir = "ltr"
-	ImgDirRtl  ImgDir = "rtl"
 )
 
 type ImgDraggable string
@@ -144,13 +144,13 @@ const (
 type ImgEnterkeyhint string
 
 const (
-	ImgEnterkeyhintSearch   ImgEnterkeyhint = "search"
 	ImgEnterkeyhintSend     ImgEnterkeyhint = "send"
 	ImgEnterkeyhintDone     ImgEnterkeyhint = "done"
 	ImgEnterkeyhintEnter    ImgEnterkeyhint = "enter"
 	ImgEnterkeyhintGo       ImgEnterkeyhint = "go"
 	ImgEnterkeyhintNext     ImgEnterkeyhint = "next"
 	ImgEnterkeyhintPrevious ImgEnterkeyhint = "previous"
+	ImgEnterkeyhintSearch   ImgEnterkeyhint = "search"
 )
 
 type ImgHidden string
@@ -164,14 +164,14 @@ const (
 type ImgInputmode string
 
 const (
-	ImgInputmodeEmail   ImgInputmode = "email"
-	ImgInputmodeNone    ImgInputmode = "none"
 	ImgInputmodeNumeric ImgInputmode = "numeric"
 	ImgInputmodeSearch  ImgInputmode = "search"
 	ImgInputmodeTel     ImgInputmode = "tel"
 	ImgInputmodeText    ImgInputmode = "text"
 	ImgInputmodeUrl     ImgInputmode = "url"
 	ImgInputmodeDecimal ImgInputmode = "decimal"
+	ImgInputmodeEmail   ImgInputmode = "email"
+	ImgInputmodeNone    ImgInputmode = "none"
 )
 
 type ImgSpellcheck string
@@ -193,8 +193,8 @@ const (
 type ImgWritingsuggestions string
 
 const (
-	ImgWritingsuggestionsFalse ImgWritingsuggestions = "false"
 	ImgWritingsuggestionsTrue  ImgWritingsuggestions = "true"
+	ImgWritingsuggestionsFalse ImgWritingsuggestions = "false"
 	ImgWritingsuggestionsEmpty ImgWritingsuggestions = ""
 )
 

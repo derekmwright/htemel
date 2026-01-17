@@ -70,6 +70,31 @@ func (e *LabelElement) Textf(format string, args ...any) *LabelElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *LabelElement) If(cond bool, child htemel.Node) *LabelElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *LabelElement) IfElse(cond bool, then, els htemel.Node) *LabelElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *LabelElement) IfThen(cond bool, fn func(*LabelElement)) *LabelElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *LabelElement) AddClass(classes ...string) *LabelElement {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *LabelElement) ToggleClass(class string, enable bool) *LabelElement {
 type LabelAutocapitalize string
 
 const (
+	LabelAutocapitalizeWords      LabelAutocapitalize = "words"
 	LabelAutocapitalizeCharacters LabelAutocapitalize = "characters"
 	LabelAutocapitalizeNone       LabelAutocapitalize = "none"
 	LabelAutocapitalizeOff        LabelAutocapitalize = "off"
 	LabelAutocapitalizeOn         LabelAutocapitalize = "on"
 	LabelAutocapitalizeSentences  LabelAutocapitalize = "sentences"
-	LabelAutocapitalizeWords      LabelAutocapitalize = "words"
 )
 
 type LabelAutocorrect string
@@ -157,14 +182,14 @@ const (
 type LabelInputmode string
 
 const (
-	LabelInputmodeText    LabelInputmode = "text"
-	LabelInputmodeUrl     LabelInputmode = "url"
 	LabelInputmodeDecimal LabelInputmode = "decimal"
 	LabelInputmodeEmail   LabelInputmode = "email"
 	LabelInputmodeNone    LabelInputmode = "none"
 	LabelInputmodeNumeric LabelInputmode = "numeric"
 	LabelInputmodeSearch  LabelInputmode = "search"
 	LabelInputmodeTel     LabelInputmode = "tel"
+	LabelInputmodeText    LabelInputmode = "text"
+	LabelInputmodeUrl     LabelInputmode = "url"
 )
 
 type LabelSpellcheck string

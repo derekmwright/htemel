@@ -70,6 +70,31 @@ func (e *H1Element) Textf(format string, args ...any) *H1Element {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *H1Element) If(cond bool, child htemel.Node) *H1Element {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *H1Element) IfElse(cond bool, then, els htemel.Node) *H1Element {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *H1Element) IfThen(cond bool, fn func(*H1Element)) *H1Element {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *H1Element) AddClass(classes ...string) *H1Element {
 	current := e.attributes["class"].(string)
@@ -94,12 +119,12 @@ func (e *H1Element) ToggleClass(class string, enable bool) *H1Element {
 type H1Autocapitalize string
 
 const (
-	H1AutocapitalizeWords      H1Autocapitalize = "words"
 	H1AutocapitalizeCharacters H1Autocapitalize = "characters"
 	H1AutocapitalizeNone       H1Autocapitalize = "none"
 	H1AutocapitalizeOff        H1Autocapitalize = "off"
 	H1AutocapitalizeOn         H1Autocapitalize = "on"
 	H1AutocapitalizeSentences  H1Autocapitalize = "sentences"
+	H1AutocapitalizeWords      H1Autocapitalize = "words"
 )
 
 type H1Autocorrect string
@@ -137,13 +162,13 @@ const (
 type H1Enterkeyhint string
 
 const (
+	H1EnterkeyhintDone     H1Enterkeyhint = "done"
 	H1EnterkeyhintEnter    H1Enterkeyhint = "enter"
 	H1EnterkeyhintGo       H1Enterkeyhint = "go"
 	H1EnterkeyhintNext     H1Enterkeyhint = "next"
 	H1EnterkeyhintPrevious H1Enterkeyhint = "previous"
 	H1EnterkeyhintSearch   H1Enterkeyhint = "search"
 	H1EnterkeyhintSend     H1Enterkeyhint = "send"
-	H1EnterkeyhintDone     H1Enterkeyhint = "done"
 )
 
 type H1Hidden string
@@ -157,21 +182,21 @@ const (
 type H1Inputmode string
 
 const (
-	H1InputmodeNone    H1Inputmode = "none"
-	H1InputmodeNumeric H1Inputmode = "numeric"
-	H1InputmodeSearch  H1Inputmode = "search"
 	H1InputmodeTel     H1Inputmode = "tel"
 	H1InputmodeText    H1Inputmode = "text"
 	H1InputmodeUrl     H1Inputmode = "url"
 	H1InputmodeDecimal H1Inputmode = "decimal"
 	H1InputmodeEmail   H1Inputmode = "email"
+	H1InputmodeNone    H1Inputmode = "none"
+	H1InputmodeNumeric H1Inputmode = "numeric"
+	H1InputmodeSearch  H1Inputmode = "search"
 )
 
 type H1Spellcheck string
 
 const (
-	H1SpellcheckFalse H1Spellcheck = "false"
 	H1SpellcheckTrue  H1Spellcheck = "true"
+	H1SpellcheckFalse H1Spellcheck = "false"
 	H1SpellcheckEmpty H1Spellcheck = ""
 )
 

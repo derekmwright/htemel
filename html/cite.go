@@ -70,6 +70,31 @@ func (e *CiteElement) Textf(format string, args ...any) *CiteElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *CiteElement) If(cond bool, child htemel.Node) *CiteElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *CiteElement) IfElse(cond bool, then, els htemel.Node) *CiteElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *CiteElement) IfThen(cond bool, fn func(*CiteElement)) *CiteElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *CiteElement) AddClass(classes ...string) *CiteElement {
 	current := e.attributes["class"].(string)
@@ -113,18 +138,18 @@ const (
 type CiteContenteditable string
 
 const (
+	CiteContenteditableFalse         CiteContenteditable = "false"
 	CiteContenteditablePlaintextOnly CiteContenteditable = "plaintext-only"
 	CiteContenteditableTrue          CiteContenteditable = "true"
-	CiteContenteditableFalse         CiteContenteditable = "false"
 	CiteContenteditableEmpty         CiteContenteditable = ""
 )
 
 type CiteDir string
 
 const (
-	CiteDirRtl  CiteDir = "rtl"
 	CiteDirAuto CiteDir = "auto"
 	CiteDirLtr  CiteDir = "ltr"
+	CiteDirRtl  CiteDir = "rtl"
 )
 
 type CiteDraggable string
@@ -137,13 +162,13 @@ const (
 type CiteEnterkeyhint string
 
 const (
-	CiteEnterkeyhintEnter    CiteEnterkeyhint = "enter"
 	CiteEnterkeyhintGo       CiteEnterkeyhint = "go"
 	CiteEnterkeyhintNext     CiteEnterkeyhint = "next"
 	CiteEnterkeyhintPrevious CiteEnterkeyhint = "previous"
 	CiteEnterkeyhintSearch   CiteEnterkeyhint = "search"
 	CiteEnterkeyhintSend     CiteEnterkeyhint = "send"
 	CiteEnterkeyhintDone     CiteEnterkeyhint = "done"
+	CiteEnterkeyhintEnter    CiteEnterkeyhint = "enter"
 )
 
 type CiteHidden string
@@ -157,21 +182,21 @@ const (
 type CiteInputmode string
 
 const (
+	CiteInputmodeEmail   CiteInputmode = "email"
+	CiteInputmodeNone    CiteInputmode = "none"
 	CiteInputmodeNumeric CiteInputmode = "numeric"
 	CiteInputmodeSearch  CiteInputmode = "search"
 	CiteInputmodeTel     CiteInputmode = "tel"
 	CiteInputmodeText    CiteInputmode = "text"
 	CiteInputmodeUrl     CiteInputmode = "url"
 	CiteInputmodeDecimal CiteInputmode = "decimal"
-	CiteInputmodeEmail   CiteInputmode = "email"
-	CiteInputmodeNone    CiteInputmode = "none"
 )
 
 type CiteSpellcheck string
 
 const (
-	CiteSpellcheckFalse CiteSpellcheck = "false"
 	CiteSpellcheckTrue  CiteSpellcheck = "true"
+	CiteSpellcheckFalse CiteSpellcheck = "false"
 	CiteSpellcheckEmpty CiteSpellcheck = ""
 )
 

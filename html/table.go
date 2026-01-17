@@ -70,6 +70,31 @@ func (e *TableElement) Textf(format string, args ...any) *TableElement {
 	return e.Children(htemel.Text(fmt.Sprintf(format, args...)))
 }
 
+// If conditionally adds a child node to the element if the condition is true, otherwise it is a no-op.
+func (e *TableElement) If(cond bool, child htemel.Node) *TableElement {
+	if cond {
+		return e.Children(child)
+	}
+	return e
+}
+
+func (e *TableElement) IfElse(cond bool, then, els htemel.Node) *TableElement {
+	if cond {
+		e.Children(then)
+	} else {
+		e.Children(els)
+	}
+	return e
+}
+
+// IfThen conditionally calls the given function with the element if the condition is true, otherwise it is a no-op.
+func (e *TableElement) IfThen(cond bool, fn func(*TableElement)) *TableElement {
+	if cond {
+		fn(e)
+	}
+	return e
+}
+
 // AddClass appends a class to the element.
 func (e *TableElement) AddClass(classes ...string) *TableElement {
 	current := e.attributes["class"].(string)
@@ -122,9 +147,9 @@ const (
 type TableDir string
 
 const (
+	TableDirRtl  TableDir = "rtl"
 	TableDirAuto TableDir = "auto"
 	TableDirLtr  TableDir = "ltr"
-	TableDirRtl  TableDir = "rtl"
 )
 
 type TableDraggable string
@@ -137,13 +162,13 @@ const (
 type TableEnterkeyhint string
 
 const (
+	TableEnterkeyhintPrevious TableEnterkeyhint = "previous"
+	TableEnterkeyhintSearch   TableEnterkeyhint = "search"
 	TableEnterkeyhintSend     TableEnterkeyhint = "send"
 	TableEnterkeyhintDone     TableEnterkeyhint = "done"
 	TableEnterkeyhintEnter    TableEnterkeyhint = "enter"
 	TableEnterkeyhintGo       TableEnterkeyhint = "go"
 	TableEnterkeyhintNext     TableEnterkeyhint = "next"
-	TableEnterkeyhintPrevious TableEnterkeyhint = "previous"
-	TableEnterkeyhintSearch   TableEnterkeyhint = "search"
 )
 
 type TableHidden string
@@ -157,6 +182,7 @@ const (
 type TableInputmode string
 
 const (
+	TableInputmodeTel     TableInputmode = "tel"
 	TableInputmodeText    TableInputmode = "text"
 	TableInputmodeUrl     TableInputmode = "url"
 	TableInputmodeDecimal TableInputmode = "decimal"
@@ -164,7 +190,6 @@ const (
 	TableInputmodeNone    TableInputmode = "none"
 	TableInputmodeNumeric TableInputmode = "numeric"
 	TableInputmodeSearch  TableInputmode = "search"
-	TableInputmodeTel     TableInputmode = "tel"
 )
 
 type TableSpellcheck string
@@ -178,8 +203,8 @@ const (
 type TableTranslate string
 
 const (
-	TableTranslateNo    TableTranslate = "no"
 	TableTranslateYes   TableTranslate = "yes"
+	TableTranslateNo    TableTranslate = "no"
 	TableTranslateEmpty TableTranslate = ""
 )
 
