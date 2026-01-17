@@ -37,7 +37,7 @@ func MainLayout(children ...Node) Node {
             Head(
                 Meta().Charset("UTF-8"),
                 Meta().Name("viewport").Content("width=device-width, initial-scale=1.0"),
-                Title(Text("Example htemel Page")),
+                Title().Text("Example htemel Page"),
                 Link().Href("site.css").Rel("stylesheet"),
             ),
             Body().Id("app-content").Children(children...),
@@ -63,11 +63,11 @@ func main() {
             Group(
                 Navigation(),
                 Div(
-                    P(Text("Welcome back!")),
+                    P().Text("Welcome back!"),
                 ),
             ),
             Div(
-                P(Text("Please log in.")),
+                P().Text("Please log in."),
             ),
         ),
     ).Render(os.Stdout)
@@ -104,6 +104,39 @@ func main() {
 </div>
 </body>
 </html>
+```
+
+### Controlling Element Placement
+
+Chained calls respect the order of elements in the document, for example:
+
+```go
+package main
+
+import (
+    "os"
+	
+    . "github.com/derekmwright/htemel/html"
+)
+
+func main() {
+    div := html.Div().
+        Children(
+            P().Text("Start Text").Children(
+                Span().Text("Spanned Text"),
+            ).Text("End Text"),
+        )
+
+    div.Render(os.Stdout)
+}
+```
+
+**Output**:
+
+```html
+<div>
+    Start Text<span>Spanned Text</span>End Text
+</div>
 ```
 
 ## Goals
